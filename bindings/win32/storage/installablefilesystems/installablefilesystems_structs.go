@@ -8,8 +8,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-// FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union struct {
 	Data [4]uint32
 }
@@ -20,8 +20,8 @@ type FILTER_AGGREGATE_BASIC_INFORMATION struct {
 	Type            FILTER_AGGREGATE_BASIC_INFORMATION_Type_e__Union
 }
 
-// FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FILTER_AGGREGATE_STANDARD_INFORMATION_Type_e__Union struct {
 	Data [5]uint32
 }
@@ -64,8 +64,8 @@ type FILTER_VOLUME_STANDARD_INFORMATION struct {
 	FilterVolumeName       [1]uint16
 }
 
-// INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INSTANCE_AGGREGATE_STANDARD_INFORMATION_Type_e__Union struct {
 	Data [8]uint32
 }

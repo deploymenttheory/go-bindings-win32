@@ -25,39 +25,39 @@ type IEnumSpObjectTokens struct {
 var IID_IEnumSpObjectTokens = win32.GUID{Data1: 0x06b64f9e, Data2: 0x7fda, Data3: 0x11d2, Data4: [8]byte{0xb4, 0xf2, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96}}
 
 // Next dispatches through IEnumSpObjectTokens's vtable slot 3.
-func (self *IEnumSpObjectTokens) Next(celt uint32, pelt **ISpObjectToken, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumSpObjectTokens) Next(celt uint32, pelt **ISpObjectToken, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumSpObjectTokens's vtable slot 4.
-func (self *IEnumSpObjectTokens) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumSpObjectTokens) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumSpObjectTokens's vtable slot 5.
-func (self *IEnumSpObjectTokens) Reset() foundation.HRESULT {
+func (self *IEnumSpObjectTokens) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumSpObjectTokens's vtable slot 6.
-func (self *IEnumSpObjectTokens) Clone(ppEnum **IEnumSpObjectTokens) foundation.HRESULT {
+func (self *IEnumSpObjectTokens) Clone(ppEnum **IEnumSpObjectTokens) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through IEnumSpObjectTokens's vtable slot 7.
-func (self *IEnumSpObjectTokens) Item(Index uint32, ppToken **ISpObjectToken) foundation.HRESULT {
+func (self *IEnumSpObjectTokens) Item(Index uint32, ppToken **ISpObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through IEnumSpObjectTokens's vtable slot 8.
-func (self *IEnumSpObjectTokens) GetCount(pCount *uint32) foundation.HRESULT {
+func (self *IEnumSpObjectTokens) GetCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c05c768f-fae8-4ec2-8e07-338321c12452
@@ -69,39 +69,39 @@ type ISpAudio struct {
 var IID_ISpAudio = win32.GUID{Data1: 0xc05c768f, Data2: 0xfae8, Data3: 0x4ec2, Data4: [8]byte{0x8e, 0x07, 0x33, 0x83, 0x21, 0xc1, 0x24, 0x52}}
 
 // SetState dispatches through ISpAudio's vtable slot 15.
-func (self *ISpAudio) SetState(NewState SPAUDIOSTATE, ullReserved uint64) foundation.HRESULT {
+func (self *ISpAudio) SetState(NewState SPAUDIOSTATE, ullReserved uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(NewState), uintptr(ullReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFormat dispatches through ISpAudio's vtable slot 16.
-func (self *ISpAudio) SetFormat(rguidFmtId *win32.GUID, pWaveFormatEx unsafe.Pointer) foundation.HRESULT {
+func (self *ISpAudio) SetFormat(rguidFmtId *win32.GUID, pWaveFormatEx unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidFmtId)), uintptr(unsafe.Pointer(pWaveFormatEx)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through ISpAudio's vtable slot 17.
-func (self *ISpAudio) GetStatus(pStatus *SPAUDIOSTATUS) foundation.HRESULT {
+func (self *ISpAudio) GetStatus(pStatus *SPAUDIOSTATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBufferInfo dispatches through ISpAudio's vtable slot 18.
-func (self *ISpAudio) SetBufferInfo(pBuffInfo *SPAUDIOBUFFERINFO) foundation.HRESULT {
+func (self *ISpAudio) SetBufferInfo(pBuffInfo *SPAUDIOBUFFERINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBufferInfo dispatches through ISpAudio's vtable slot 19.
-func (self *ISpAudio) GetBufferInfo(pBuffInfo *SPAUDIOBUFFERINFO) foundation.HRESULT {
+func (self *ISpAudio) GetBufferInfo(pBuffInfo *SPAUDIOBUFFERINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultFormat dispatches through ISpAudio's vtable slot 20.
-func (self *ISpAudio) GetDefaultFormat(pFormatId *win32.GUID, ppCoMemWaveFormatEx *unsafe.Pointer) foundation.HRESULT {
+func (self *ISpAudio) GetDefaultFormat(pFormatId *win32.GUID, ppCoMemWaveFormatEx *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormatId)), uintptr(unsafe.Pointer(ppCoMemWaveFormatEx)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EventHandle dispatches through ISpAudio's vtable slot 21.
@@ -111,27 +111,27 @@ func (self *ISpAudio) EventHandle() foundation.HANDLE {
 }
 
 // GetVolumeLevel dispatches through ISpAudio's vtable slot 22.
-func (self *ISpAudio) GetVolumeLevel(pLevel *uint32) foundation.HRESULT {
+func (self *ISpAudio) GetVolumeLevel(pLevel *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVolumeLevel dispatches through ISpAudio's vtable slot 23.
-func (self *ISpAudio) SetVolumeLevel(Level uint32) foundation.HRESULT {
+func (self *ISpAudio) SetVolumeLevel(Level uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(Level))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBufferNotifySize dispatches through ISpAudio's vtable slot 24.
-func (self *ISpAudio) GetBufferNotifySize(pcbSize *uint32) foundation.HRESULT {
+func (self *ISpAudio) GetBufferNotifySize(pcbSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBufferNotifySize dispatches through ISpAudio's vtable slot 25.
-func (self *ISpAudio) SetBufferNotifySize(cbSize uint32) foundation.HRESULT {
+func (self *ISpAudio) SetBufferNotifySize(cbSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(cbSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f3d3f926-11fc-11d3-bb97-00c04f8ee6c0
@@ -143,15 +143,16 @@ type ISpCFGInterpreter struct {
 var IID_ISpCFGInterpreter = win32.GUID{Data1: 0xf3d3f926, Data2: 0x11fc, Data3: 0x11d3, Data4: [8]byte{0xbb, 0x97, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0}}
 
 // InitGrammar dispatches through ISpCFGInterpreter's vtable slot 3.
-func (self *ISpCFGInterpreter) InitGrammar(pszGrammarName foundation.PWSTR, pvGrammarData *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszGrammarName)), uintptr(unsafe.Pointer(pvGrammarData)))
-	return foundation.HRESULT(r1)
+func (self *ISpCFGInterpreter) InitGrammar(pszGrammarName string, pvGrammarData *unsafe.Pointer) error {
+	_pszGrammarName := win32.UTF16Ptr(pszGrammarName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszGrammarName)), uintptr(unsafe.Pointer(pvGrammarData)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Interpret dispatches through ISpCFGInterpreter's vtable slot 4.
-func (self *ISpCFGInterpreter) Interpret(pPhrase *ISpPhraseBuilder, ulFirstElement uint32, ulCountOfElements uint32, pSite *ISpCFGInterpreterSite) foundation.HRESULT {
+func (self *ISpCFGInterpreter) Interpret(pPhrase *ISpPhraseBuilder, ulFirstElement uint32, ulCountOfElements uint32, pSite *ISpCFGInterpreterSite) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhrase)), uintptr(ulFirstElement), uintptr(ulCountOfElements), uintptr(unsafe.Pointer(pSite)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 6a6ffad8-78b6-473d-b844-98152e4fb16b
@@ -163,21 +164,22 @@ type ISpCFGInterpreterSite struct {
 var IID_ISpCFGInterpreterSite = win32.GUID{Data1: 0x6a6ffad8, Data2: 0x78b6, Data3: 0x473d, Data4: [8]byte{0xb8, 0x44, 0x98, 0x15, 0x2e, 0x4f, 0xb1, 0x6b}}
 
 // AddTextReplacement dispatches through ISpCFGInterpreterSite's vtable slot 3.
-func (self *ISpCFGInterpreterSite) AddTextReplacement(pReplace *SPPHRASEREPLACEMENT) foundation.HRESULT {
+func (self *ISpCFGInterpreterSite) AddTextReplacement(pReplace *SPPHRASEREPLACEMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReplace)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddProperty dispatches through ISpCFGInterpreterSite's vtable slot 4.
-func (self *ISpCFGInterpreterSite) AddProperty(pProperty *SPPHRASEPROPERTY) foundation.HRESULT {
+func (self *ISpCFGInterpreterSite) AddProperty(pProperty *SPPHRASEPROPERTY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProperty)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResourceValue dispatches through ISpCFGInterpreterSite's vtable slot 5.
-func (self *ISpCFGInterpreterSite) GetResourceValue(pszResourceName foundation.PWSTR, ppCoMemResource *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszResourceName)), uintptr(unsafe.Pointer(ppCoMemResource)))
-	return foundation.HRESULT(r1)
+func (self *ISpCFGInterpreterSite) GetResourceValue(pszResourceName string, ppCoMemResource *foundation.PWSTR) error {
+	_pszResourceName := win32.UTF16Ptr(pszResourceName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszResourceName)), uintptr(unsafe.Pointer(ppCoMemResource)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8565572f-c094-41cc-b56e-10bd9c3ff044
@@ -189,9 +191,9 @@ type ISpContainerLexicon struct {
 var IID_ISpContainerLexicon = win32.GUID{Data1: 0x8565572f, Data2: 0xc094, Data3: 0x41cc, Data4: [8]byte{0xb5, 0x6e, 0x10, 0xbd, 0x9c, 0x3f, 0xf0, 0x44}}
 
 // AddLexicon dispatches through ISpContainerLexicon's vtable slot 9.
-func (self *ISpContainerLexicon) AddLexicon(pAddLexicon *ISpLexicon, dwFlags uint32) foundation.HRESULT {
+func (self *ISpContainerLexicon) AddLexicon(pAddLexicon *ISpLexicon, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddLexicon)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 14056581-e16c-11d2-bb90-00c04f8ee6c0
@@ -203,75 +205,86 @@ type ISpDataKey struct {
 var IID_ISpDataKey = win32.GUID{Data1: 0x14056581, Data2: 0xe16c, Data3: 0x11d2, Data4: [8]byte{0xbb, 0x90, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0}}
 
 // SetData dispatches through ISpDataKey's vtable slot 3.
-func (self *ISpDataKey) SetData(pszValueName foundation.PWSTR, cbData uint32, pData *byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszValueName)), uintptr(cbData), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+func (self *ISpDataKey) SetData(pszValueName string, cbData uint32, pData *byte) error {
+	_pszValueName := win32.UTF16Ptr(pszValueName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszValueName)), uintptr(cbData), uintptr(unsafe.Pointer(pData)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetData dispatches through ISpDataKey's vtable slot 4.
-func (self *ISpDataKey) GetData(pszValueName foundation.PWSTR, pcbData *uint32, pData *byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszValueName)), uintptr(unsafe.Pointer(pcbData)), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+func (self *ISpDataKey) GetData(pszValueName string, pcbData *uint32, pData *byte) error {
+	_pszValueName := win32.UTF16Ptr(pszValueName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszValueName)), uintptr(unsafe.Pointer(pcbData)), uintptr(unsafe.Pointer(pData)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStringValue dispatches through ISpDataKey's vtable slot 5.
-func (self *ISpDataKey) SetStringValue(pszValueName foundation.PWSTR, pszValue foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszValueName)), uintptr(unsafe.Pointer(pszValue)))
-	return foundation.HRESULT(r1)
+func (self *ISpDataKey) SetStringValue(pszValueName string, pszValue string) error {
+	_pszValueName := win32.UTF16Ptr(pszValueName)
+	_pszValue := win32.UTF16Ptr(pszValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszValueName)), uintptr(unsafe.Pointer(_pszValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStringValue dispatches through ISpDataKey's vtable slot 6.
-func (self *ISpDataKey) GetStringValue(pszValueName foundation.PWSTR, ppszValue *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszValueName)), uintptr(unsafe.Pointer(ppszValue)))
-	return foundation.HRESULT(r1)
+func (self *ISpDataKey) GetStringValue(pszValueName string, ppszValue *foundation.PWSTR) error {
+	_pszValueName := win32.UTF16Ptr(pszValueName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszValueName)), uintptr(unsafe.Pointer(ppszValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDWORD dispatches through ISpDataKey's vtable slot 7.
-func (self *ISpDataKey) SetDWORD(pszValueName foundation.PWSTR, dwValue uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszValueName)), uintptr(dwValue))
-	return foundation.HRESULT(r1)
+func (self *ISpDataKey) SetDWORD(pszValueName string, dwValue uint32) error {
+	_pszValueName := win32.UTF16Ptr(pszValueName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszValueName)), uintptr(dwValue))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDWORD dispatches through ISpDataKey's vtable slot 8.
-func (self *ISpDataKey) GetDWORD(pszValueName foundation.PWSTR, pdwValue *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszValueName)), uintptr(unsafe.Pointer(pdwValue)))
-	return foundation.HRESULT(r1)
+func (self *ISpDataKey) GetDWORD(pszValueName string, pdwValue *uint32) error {
+	_pszValueName := win32.UTF16Ptr(pszValueName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszValueName)), uintptr(unsafe.Pointer(pdwValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenKey dispatches through ISpDataKey's vtable slot 9.
-func (self *ISpDataKey) OpenKey(pszSubKeyName foundation.PWSTR, ppSubKey **ISpDataKey) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSubKeyName)), uintptr(unsafe.Pointer(ppSubKey)))
-	return foundation.HRESULT(r1)
+func (self *ISpDataKey) OpenKey(pszSubKeyName string, ppSubKey **ISpDataKey) error {
+	_pszSubKeyName := win32.UTF16Ptr(pszSubKeyName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubKeyName)), uintptr(unsafe.Pointer(ppSubKey)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateKey dispatches through ISpDataKey's vtable slot 10.
-func (self *ISpDataKey) CreateKey(pszSubKey foundation.PWSTR, ppSubKey **ISpDataKey) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSubKey)), uintptr(unsafe.Pointer(ppSubKey)))
-	return foundation.HRESULT(r1)
+func (self *ISpDataKey) CreateKey(pszSubKey string, ppSubKey **ISpDataKey) error {
+	_pszSubKey := win32.UTF16Ptr(pszSubKey)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(unsafe.Pointer(ppSubKey)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteKey dispatches through ISpDataKey's vtable slot 11.
-func (self *ISpDataKey) DeleteKey(pszSubKey foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSubKey)))
-	return foundation.HRESULT(r1)
+func (self *ISpDataKey) DeleteKey(pszSubKey string) error {
+	_pszSubKey := win32.UTF16Ptr(pszSubKey)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubKey)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteValue dispatches through ISpDataKey's vtable slot 12.
-func (self *ISpDataKey) DeleteValue(pszValueName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszValueName)))
-	return foundation.HRESULT(r1)
+func (self *ISpDataKey) DeleteValue(pszValueName string) error {
+	_pszValueName := win32.UTF16Ptr(pszValueName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszValueName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumKeys dispatches through ISpDataKey's vtable slot 13.
-func (self *ISpDataKey) EnumKeys(Index uint32, ppszSubKeyName *foundation.PWSTR) foundation.HRESULT {
+func (self *ISpDataKey) EnumKeys(Index uint32, ppszSubKeyName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppszSubKeyName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumValues dispatches through ISpDataKey's vtable slot 14.
-func (self *ISpDataKey) EnumValues(Index uint32, ppszValueName *foundation.PWSTR) foundation.HRESULT {
+func (self *ISpDataKey) EnumValues(Index uint32, ppszValueName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ppszValueName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c8d7c7e2-0dde-44b7-afe3-b0c991fbeb5e
@@ -283,15 +296,15 @@ type ISpDisplayAlternates struct {
 var IID_ISpDisplayAlternates = win32.GUID{Data1: 0xc8d7c7e2, Data2: 0x0dde, Data3: 0x44b7, Data4: [8]byte{0xaf, 0xe3, 0xb0, 0xc9, 0x91, 0xfb, 0xeb, 0x5e}}
 
 // GetDisplayAlternates dispatches through ISpDisplayAlternates's vtable slot 3.
-func (self *ISpDisplayAlternates) GetDisplayAlternates(pPhrase *SPDISPLAYPHRASE, cRequestCount uint32, ppCoMemPhrases **SPDISPLAYPHRASE, pcPhrasesReturned *uint32) foundation.HRESULT {
+func (self *ISpDisplayAlternates) GetDisplayAlternates(pPhrase *SPDISPLAYPHRASE, cRequestCount uint32, ppCoMemPhrases **SPDISPLAYPHRASE, pcPhrasesReturned *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhrase)), uintptr(cRequestCount), uintptr(unsafe.Pointer(ppCoMemPhrases)), uintptr(unsafe.Pointer(pcPhrasesReturned)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFullStopTrailSpace dispatches through ISpDisplayAlternates's vtable slot 4.
-func (self *ISpDisplayAlternates) SetFullStopTrailSpace(ulTrailSpace uint32) foundation.HRESULT {
+func (self *ISpDisplayAlternates) SetFullStopTrailSpace(ulTrailSpace uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulTrailSpace))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c360ce4b-76d1-4214-ad68-52657d5083da
@@ -303,15 +316,21 @@ type ISpEnginePronunciation struct {
 var IID_ISpEnginePronunciation = win32.GUID{Data1: 0xc360ce4b, Data2: 0x76d1, Data3: 0x4214, Data4: [8]byte{0xad, 0x68, 0x52, 0x65, 0x7d, 0x50, 0x83, 0xda}}
 
 // Normalize dispatches through ISpEnginePronunciation's vtable slot 3.
-func (self *ISpEnginePronunciation) Normalize(pszWord foundation.PWSTR, pszLeftContext foundation.PWSTR, pszRightContext foundation.PWSTR, LangID uint16, pNormalizationList *SPNORMALIZATIONLIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszWord)), uintptr(unsafe.Pointer(pszLeftContext)), uintptr(unsafe.Pointer(pszRightContext)), uintptr(LangID), uintptr(unsafe.Pointer(pNormalizationList)))
-	return foundation.HRESULT(r1)
+func (self *ISpEnginePronunciation) Normalize(pszWord string, pszLeftContext string, pszRightContext string, LangID uint16, pNormalizationList *SPNORMALIZATIONLIST) error {
+	_pszWord := win32.UTF16Ptr(pszWord)
+	_pszLeftContext := win32.UTF16Ptr(pszLeftContext)
+	_pszRightContext := win32.UTF16Ptr(pszRightContext)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszWord)), uintptr(unsafe.Pointer(_pszLeftContext)), uintptr(unsafe.Pointer(_pszRightContext)), uintptr(LangID), uintptr(unsafe.Pointer(pNormalizationList)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPronunciations dispatches through ISpEnginePronunciation's vtable slot 4.
-func (self *ISpEnginePronunciation) GetPronunciations(pszWord foundation.PWSTR, pszLeftContext foundation.PWSTR, pszRightContext foundation.PWSTR, LangID uint16, pEnginePronunciationList *SPWORDPRONUNCIATIONLIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszWord)), uintptr(unsafe.Pointer(pszLeftContext)), uintptr(unsafe.Pointer(pszRightContext)), uintptr(LangID), uintptr(unsafe.Pointer(pEnginePronunciationList)))
-	return foundation.HRESULT(r1)
+func (self *ISpEnginePronunciation) GetPronunciations(pszWord string, pszLeftContext string, pszRightContext string, LangID uint16, pEnginePronunciationList *SPWORDPRONUNCIATIONLIST) error {
+	_pszWord := win32.UTF16Ptr(pszWord)
+	_pszLeftContext := win32.UTF16Ptr(pszLeftContext)
+	_pszRightContext := win32.UTF16Ptr(pszRightContext)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszWord)), uintptr(unsafe.Pointer(_pszLeftContext)), uintptr(unsafe.Pointer(_pszRightContext)), uintptr(LangID), uintptr(unsafe.Pointer(pEnginePronunciationList)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f4711347-e608-11d2-a086-00c04f8ef9b5
@@ -323,9 +342,11 @@ type ISpErrorLog struct {
 var IID_ISpErrorLog = win32.GUID{Data1: 0xf4711347, Data2: 0xe608, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x86, 0x00, 0xc0, 0x4f, 0x8e, 0xf9, 0xb5}}
 
 // AddError dispatches through ISpErrorLog's vtable slot 3.
-func (self *ISpErrorLog) AddError(lLineNumber int32, hr foundation.HRESULT, pszDescription foundation.PWSTR, pszHelpFile foundation.PWSTR, dwHelpContext uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lLineNumber), uintptr(hr), uintptr(unsafe.Pointer(pszDescription)), uintptr(unsafe.Pointer(pszHelpFile)), uintptr(dwHelpContext))
-	return foundation.HRESULT(r1)
+func (self *ISpErrorLog) AddError(lLineNumber int32, hr foundation.HRESULT, pszDescription string, pszHelpFile string, dwHelpContext uint32) error {
+	_pszDescription := win32.UTF16Ptr(pszDescription)
+	_pszHelpFile := win32.UTF16Ptr(pszHelpFile)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lLineNumber), uintptr(hr), uintptr(unsafe.Pointer(_pszDescription)), uintptr(unsafe.Pointer(_pszHelpFile)), uintptr(dwHelpContext))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: be7a9cc9-5f9e-11d2-960f-00c04f8ee628
@@ -337,15 +358,15 @@ type ISpEventSink struct {
 var IID_ISpEventSink = win32.GUID{Data1: 0xbe7a9cc9, Data2: 0x5f9e, Data3: 0x11d2, Data4: [8]byte{0x96, 0x0f, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0x28}}
 
 // AddEvents dispatches through ISpEventSink's vtable slot 3.
-func (self *ISpEventSink) AddEvents(pEventArray *SPEVENT, ulCount uint32) foundation.HRESULT {
+func (self *ISpEventSink) AddEvents(pEventArray *SPEVENT, ulCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEventArray)), uintptr(ulCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEventInterest dispatches through ISpEventSink's vtable slot 4.
-func (self *ISpEventSink) GetEventInterest(pullEventInterest *uint64) foundation.HRESULT {
+func (self *ISpEventSink) GetEventInterest(pullEventInterest *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pullEventInterest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: be7a9cce-5f9e-11d2-960f-00c04f8ee628
@@ -357,21 +378,21 @@ type ISpEventSource struct {
 var IID_ISpEventSource = win32.GUID{Data1: 0xbe7a9cce, Data2: 0x5f9e, Data3: 0x11d2, Data4: [8]byte{0x96, 0x0f, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0x28}}
 
 // SetInterest dispatches through ISpEventSource's vtable slot 10.
-func (self *ISpEventSource) SetInterest(ullEventInterest uint64, ullQueuedInterest uint64) foundation.HRESULT {
+func (self *ISpEventSource) SetInterest(ullEventInterest uint64, ullQueuedInterest uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ullEventInterest), uintptr(ullQueuedInterest))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEvents dispatches through ISpEventSource's vtable slot 11.
-func (self *ISpEventSource) GetEvents(ulCount uint32, pEventArray *SPEVENT, pulFetched *uint32) foundation.HRESULT {
+func (self *ISpEventSource) GetEvents(ulCount uint32, pEventArray *SPEVENT, pulFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(pEventArray)), uintptr(unsafe.Pointer(pulFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInfo dispatches through ISpEventSource's vtable slot 12.
-func (self *ISpEventSource) GetInfo(pInfo *SPEVENTSOURCEINFO) foundation.HRESULT {
+func (self *ISpEventSource) GetInfo(pInfo *SPEVENTSOURCEINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2373a435-6a4b-429e-a6ac-d4231a61975b
@@ -383,9 +404,9 @@ type ISpEventSource2 struct {
 var IID_ISpEventSource2 = win32.GUID{Data1: 0x2373a435, Data2: 0x6a4b, Data3: 0x429e, Data4: [8]byte{0xa6, 0xac, 0xd4, 0x23, 0x1a, 0x61, 0x97, 0x5b}}
 
 // GetEventsEx dispatches through ISpEventSource2's vtable slot 13.
-func (self *ISpEventSource2) GetEventsEx(ulCount uint32, pEventArray *SPEVENTEX, pulFetched *uint32) foundation.HRESULT {
+func (self *ISpEventSource2) GetEventsEx(ulCount uint32, pEventArray *SPEVENTEX, pulFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(pEventArray)), uintptr(unsafe.Pointer(pulFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3ddca27c-665c-4786-9f97-8c90c3488b61
@@ -397,15 +418,15 @@ type ISpGramCompBackend struct {
 var IID_ISpGramCompBackend = win32.GUID{Data1: 0x3ddca27c, Data2: 0x665c, Data3: 0x4786, Data4: [8]byte{0x9f, 0x97, 0x8c, 0x90, 0xc3, 0x48, 0x8b, 0x61}}
 
 // SetSaveObjects dispatches through ISpGramCompBackend's vtable slot 11.
-func (self *ISpGramCompBackend) SetSaveObjects(pStream *systemcom.IStream, pErrorLog *ISpErrorLog) foundation.HRESULT {
+func (self *ISpGramCompBackend) SetSaveObjects(pStream *systemcom.IStream, pErrorLog *ISpErrorLog) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(pErrorLog)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitFromBinaryGrammar dispatches through ISpGramCompBackend's vtable slot 12.
-func (self *ISpGramCompBackend) InitFromBinaryGrammar(pBinaryData *SPBINARYGRAMMAR) foundation.HRESULT {
+func (self *ISpGramCompBackend) InitFromBinaryGrammar(pBinaryData *SPBINARYGRAMMAR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBinaryData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8137828f-591a-4a42-be58-49ea7ebaac68
@@ -417,39 +438,43 @@ type ISpGrammarBuilder struct {
 var IID_ISpGrammarBuilder = win32.GUID{Data1: 0x8137828f, Data2: 0x591a, Data3: 0x4a42, Data4: [8]byte{0xbe, 0x58, 0x49, 0xea, 0x7e, 0xba, 0xac, 0x68}}
 
 // ResetGrammar dispatches through ISpGrammarBuilder's vtable slot 3.
-func (self *ISpGrammarBuilder) ResetGrammar(NewLanguage uint16) foundation.HRESULT {
+func (self *ISpGrammarBuilder) ResetGrammar(NewLanguage uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(NewLanguage))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRule dispatches through ISpGrammarBuilder's vtable slot 4.
-func (self *ISpGrammarBuilder) GetRule(pszRuleName foundation.PWSTR, dwRuleId uint32, dwAttributes uint32, fCreateIfNotExist foundation.BOOL, phInitialState *SPSTATEHANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszRuleName)), uintptr(dwRuleId), uintptr(dwAttributes), uintptr(fCreateIfNotExist), uintptr(unsafe.Pointer(phInitialState)))
-	return foundation.HRESULT(r1)
+func (self *ISpGrammarBuilder) GetRule(pszRuleName string, dwRuleId uint32, dwAttributes uint32, fCreateIfNotExist bool, phInitialState *SPSTATEHANDLE) error {
+	_pszRuleName := win32.UTF16Ptr(pszRuleName)
+	_fCreateIfNotExist := win32.Bool32(fCreateIfNotExist)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRuleName)), uintptr(dwRuleId), uintptr(dwAttributes), uintptr(_fCreateIfNotExist), uintptr(unsafe.Pointer(phInitialState)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearRule dispatches through ISpGrammarBuilder's vtable slot 5.
-func (self *ISpGrammarBuilder) ClearRule(hState SPSTATEHANDLE) foundation.HRESULT {
+func (self *ISpGrammarBuilder) ClearRule(hState SPSTATEHANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateNewState dispatches through ISpGrammarBuilder's vtable slot 6.
-func (self *ISpGrammarBuilder) CreateNewState(hState SPSTATEHANDLE, phState *SPSTATEHANDLE) foundation.HRESULT {
+func (self *ISpGrammarBuilder) CreateNewState(hState SPSTATEHANDLE, phState *SPSTATEHANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hState), uintptr(unsafe.Pointer(phState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddResource dispatches through ISpGrammarBuilder's vtable slot 9.
-func (self *ISpGrammarBuilder) AddResource(hRuleState SPSTATEHANDLE, pszResourceName foundation.PWSTR, pszResourceValue foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hRuleState), uintptr(unsafe.Pointer(pszResourceName)), uintptr(unsafe.Pointer(pszResourceValue)))
-	return foundation.HRESULT(r1)
+func (self *ISpGrammarBuilder) AddResource(hRuleState SPSTATEHANDLE, pszResourceName string, pszResourceValue string) error {
+	_pszResourceName := win32.UTF16Ptr(pszResourceName)
+	_pszResourceValue := win32.UTF16Ptr(pszResourceValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hRuleState), uintptr(unsafe.Pointer(_pszResourceName)), uintptr(unsafe.Pointer(_pszResourceValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Commit dispatches through ISpGrammarBuilder's vtable slot 10.
-func (self *ISpGrammarBuilder) Commit(dwReserved uint32) foundation.HRESULT {
+func (self *ISpGrammarBuilder) Commit(dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8ab10026-20cc-4b20-8c22-a49c9ba78f60
@@ -461,15 +486,16 @@ type ISpGrammarBuilder2 struct {
 var IID_ISpGrammarBuilder2 = win32.GUID{Data1: 0x8ab10026, Data2: 0x20cc, Data3: 0x4b20, Data4: [8]byte{0x8c, 0x22, 0xa4, 0x9c, 0x9b, 0xa7, 0x8f, 0x60}}
 
 // AddTextSubset dispatches through ISpGrammarBuilder2's vtable slot 3.
-func (self *ISpGrammarBuilder2) AddTextSubset(hFromState SPSTATEHANDLE, hToState SPSTATEHANDLE, psz foundation.PWSTR, eMatchMode SPMATCHINGMODE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hFromState), uintptr(hToState), uintptr(unsafe.Pointer(psz)), uintptr(eMatchMode))
-	return foundation.HRESULT(r1)
+func (self *ISpGrammarBuilder2) AddTextSubset(hFromState SPSTATEHANDLE, hToState SPSTATEHANDLE, psz string, eMatchMode SPMATCHINGMODE) error {
+	_psz := win32.UTF16Ptr(psz)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hFromState), uintptr(hToState), uintptr(unsafe.Pointer(_psz)), uintptr(eMatchMode))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPhoneticAlphabet dispatches through ISpGrammarBuilder2's vtable slot 4.
-func (self *ISpGrammarBuilder2) SetPhoneticAlphabet(phoneticALphabet PHONETICALPHABET) foundation.HRESULT {
+func (self *ISpGrammarBuilder2) SetPhoneticAlphabet(phoneticALphabet PHONETICALPHABET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(phoneticALphabet))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b1e29d58-a675-11d2-8302-00c04f8ee6c0
@@ -481,9 +507,9 @@ type ISpGrammarCompiler struct {
 var IID_ISpGrammarCompiler = win32.GUID{Data1: 0xb1e29d58, Data2: 0xa675, Data3: 0x11d2, Data4: [8]byte{0x83, 0x02, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0}}
 
 // CompileStream dispatches through ISpGrammarCompiler's vtable slot 3.
-func (self *ISpGrammarCompiler) CompileStream(pSource *systemcom.IStream, pDest *systemcom.IStream, pHeader *systemcom.IStream, pReserved *systemcom.IUnknown, pErrorLog *ISpErrorLog, dwFlags uint32) foundation.HRESULT {
+func (self *ISpGrammarCompiler) CompileStream(pSource *systemcom.IStream, pDest *systemcom.IStream, pHeader *systemcom.IStream, pReserved *systemcom.IUnknown, pErrorLog *ISpErrorLog, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(pDest)), uintptr(unsafe.Pointer(pHeader)), uintptr(unsafe.Pointer(pReserved)), uintptr(unsafe.Pointer(pErrorLog)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 12d7360f-a1c9-11d3-bc90-00c04f72df9f
@@ -495,15 +521,16 @@ type ISpITNProcessor struct {
 var IID_ISpITNProcessor = win32.GUID{Data1: 0x12d7360f, Data2: 0xa1c9, Data3: 0x11d3, Data4: [8]byte{0xbc, 0x90, 0x00, 0xc0, 0x4f, 0x72, 0xdf, 0x9f}}
 
 // LoadITNGrammar dispatches through ISpITNProcessor's vtable slot 3.
-func (self *ISpITNProcessor) LoadITNGrammar(pszCLSID foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCLSID)))
-	return foundation.HRESULT(r1)
+func (self *ISpITNProcessor) LoadITNGrammar(pszCLSID string) error {
+	_pszCLSID := win32.UTF16Ptr(pszCLSID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCLSID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITNPhrase dispatches through ISpITNProcessor's vtable slot 4.
-func (self *ISpITNProcessor) ITNPhrase(pPhrase *ISpPhraseBuilder) foundation.HRESULT {
+func (self *ISpITNProcessor) ITNPhrase(pPhrase *ISpPhraseBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhrase)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: da41a7c2-5383-4db2-916b-6c1719e3db58
@@ -515,39 +542,42 @@ type ISpLexicon struct {
 var IID_ISpLexicon = win32.GUID{Data1: 0xda41a7c2, Data2: 0x5383, Data3: 0x4db2, Data4: [8]byte{0x91, 0x6b, 0x6c, 0x17, 0x19, 0xe3, 0xdb, 0x58}}
 
 // GetPronunciations dispatches through ISpLexicon's vtable slot 3.
-func (self *ISpLexicon) GetPronunciations(pszWord foundation.PWSTR, LangID uint16, dwFlags uint32, pWordPronunciationList *SPWORDPRONUNCIATIONLIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszWord)), uintptr(LangID), uintptr(dwFlags), uintptr(unsafe.Pointer(pWordPronunciationList)))
-	return foundation.HRESULT(r1)
+func (self *ISpLexicon) GetPronunciations(pszWord string, LangID uint16, dwFlags uint32, pWordPronunciationList *SPWORDPRONUNCIATIONLIST) error {
+	_pszWord := win32.UTF16Ptr(pszWord)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszWord)), uintptr(LangID), uintptr(dwFlags), uintptr(unsafe.Pointer(pWordPronunciationList)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddPronunciation dispatches through ISpLexicon's vtable slot 4.
-func (self *ISpLexicon) AddPronunciation(pszWord foundation.PWSTR, LangID uint16, ePartOfSpeech SPPARTOFSPEECH, pszPronunciation *uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszWord)), uintptr(LangID), uintptr(ePartOfSpeech), uintptr(unsafe.Pointer(pszPronunciation)))
-	return foundation.HRESULT(r1)
+func (self *ISpLexicon) AddPronunciation(pszWord string, LangID uint16, ePartOfSpeech SPPARTOFSPEECH, pszPronunciation *uint16) error {
+	_pszWord := win32.UTF16Ptr(pszWord)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszWord)), uintptr(LangID), uintptr(ePartOfSpeech), uintptr(unsafe.Pointer(pszPronunciation)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemovePronunciation dispatches through ISpLexicon's vtable slot 5.
-func (self *ISpLexicon) RemovePronunciation(pszWord foundation.PWSTR, LangID uint16, ePartOfSpeech SPPARTOFSPEECH, pszPronunciation *uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszWord)), uintptr(LangID), uintptr(ePartOfSpeech), uintptr(unsafe.Pointer(pszPronunciation)))
-	return foundation.HRESULT(r1)
+func (self *ISpLexicon) RemovePronunciation(pszWord string, LangID uint16, ePartOfSpeech SPPARTOFSPEECH, pszPronunciation *uint16) error {
+	_pszWord := win32.UTF16Ptr(pszWord)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszWord)), uintptr(LangID), uintptr(ePartOfSpeech), uintptr(unsafe.Pointer(pszPronunciation)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGeneration dispatches through ISpLexicon's vtable slot 6.
-func (self *ISpLexicon) GetGeneration(pdwGeneration *uint32) foundation.HRESULT {
+func (self *ISpLexicon) GetGeneration(pdwGeneration *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwGeneration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGenerationChange dispatches through ISpLexicon's vtable slot 7.
-func (self *ISpLexicon) GetGenerationChange(dwFlags uint32, pdwGeneration *uint32, pWordList *SPWORDLIST) foundation.HRESULT {
+func (self *ISpLexicon) GetGenerationChange(dwFlags uint32, pdwGeneration *uint32, pWordList *SPWORDLIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdwGeneration)), uintptr(unsafe.Pointer(pWordList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWords dispatches through ISpLexicon's vtable slot 8.
-func (self *ISpLexicon) GetWords(dwFlags uint32, pdwGeneration *uint32, pdwCookie *uint32, pWordList *SPWORDLIST) foundation.HRESULT {
+func (self *ISpLexicon) GetWords(dwFlags uint32, pdwGeneration *uint32, pdwCookie *uint32, pWordList *SPWORDLIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdwGeneration)), uintptr(unsafe.Pointer(pdwCookie)), uintptr(unsafe.Pointer(pWordList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 15806f6e-1d70-4b48-98e6-3b1a007509ab
@@ -559,33 +589,33 @@ type ISpMMSysAudio struct {
 var IID_ISpMMSysAudio = win32.GUID{Data1: 0x15806f6e, Data2: 0x1d70, Data3: 0x4b48, Data4: [8]byte{0x98, 0xe6, 0x3b, 0x1a, 0x00, 0x75, 0x09, 0xab}}
 
 // GetDeviceId dispatches through ISpMMSysAudio's vtable slot 26.
-func (self *ISpMMSysAudio) GetDeviceId(puDeviceId *uint32) foundation.HRESULT {
+func (self *ISpMMSysAudio) GetDeviceId(puDeviceId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puDeviceId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDeviceId dispatches through ISpMMSysAudio's vtable slot 27.
-func (self *ISpMMSysAudio) SetDeviceId(uDeviceId uint32) foundation.HRESULT {
+func (self *ISpMMSysAudio) SetDeviceId(uDeviceId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(uDeviceId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMMHandle dispatches through ISpMMSysAudio's vtable slot 28.
-func (self *ISpMMSysAudio) GetMMHandle(pHandle *unsafe.Pointer) foundation.HRESULT {
+func (self *ISpMMSysAudio) GetMMHandle(pHandle *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLineId dispatches through ISpMMSysAudio's vtable slot 29.
-func (self *ISpMMSysAudio) GetLineId(puLineId *uint32) foundation.HRESULT {
+func (self *ISpMMSysAudio) GetLineId(puLineId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puLineId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLineId dispatches through ISpMMSysAudio's vtable slot 30.
-func (self *ISpMMSysAudio) SetLineId(uLineId uint32) foundation.HRESULT {
+func (self *ISpMMSysAudio) SetLineId(uLineId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(uLineId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 type ISpNotifyCallback struct {
@@ -593,9 +623,9 @@ type ISpNotifyCallback struct {
 }
 
 // NotifyCallback dispatches through ISpNotifyCallback's vtable slot 0.
-func (self *ISpNotifyCallback) NotifyCallback(wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.HRESULT {
+func (self *ISpNotifyCallback) NotifyCallback(wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(wParam), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 259684dc-37c3-11d2-9603-00c04f8ee628
@@ -607,9 +637,9 @@ type ISpNotifySink struct {
 var IID_ISpNotifySink = win32.GUID{Data1: 0x259684dc, Data2: 0x37c3, Data3: 0x11d2, Data4: [8]byte{0x96, 0x03, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0x28}}
 
 // Notify dispatches through ISpNotifySink's vtable slot 3.
-func (self *ISpNotifySink) Notify() foundation.HRESULT {
+func (self *ISpNotifySink) Notify() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 5eff4aef-8487-11d2-961c-00c04f8ee628
@@ -621,39 +651,39 @@ type ISpNotifySource struct {
 var IID_ISpNotifySource = win32.GUID{Data1: 0x5eff4aef, Data2: 0x8487, Data3: 0x11d2, Data4: [8]byte{0x96, 0x1c, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0x28}}
 
 // SetNotifySink dispatches through ISpNotifySource's vtable slot 3.
-func (self *ISpNotifySource) SetNotifySink(pNotifySink *ISpNotifySink) foundation.HRESULT {
+func (self *ISpNotifySource) SetNotifySink(pNotifySink *ISpNotifySink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNotifySink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNotifyWindowMessage dispatches through ISpNotifySource's vtable slot 4.
-func (self *ISpNotifySource) SetNotifyWindowMessage(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.HRESULT {
+func (self *ISpNotifySource) SetNotifyWindowMessage(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNotifyCallbackFunction dispatches through ISpNotifySource's vtable slot 5.
-func (self *ISpNotifySource) SetNotifyCallbackFunction(pfnCallback *SPNOTIFYCALLBACK, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.HRESULT {
+func (self *ISpNotifySource) SetNotifyCallbackFunction(pfnCallback *SPNOTIFYCALLBACK, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfnCallback)), uintptr(wParam), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNotifyCallbackInterface dispatches through ISpNotifySource's vtable slot 6.
-func (self *ISpNotifySource) SetNotifyCallbackInterface(pSpCallback *ISpNotifyCallback, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.HRESULT {
+func (self *ISpNotifySource) SetNotifyCallbackInterface(pSpCallback *ISpNotifyCallback, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSpCallback)), uintptr(wParam), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNotifyWin32Event dispatches through ISpNotifySource's vtable slot 7.
-func (self *ISpNotifySource) SetNotifyWin32Event() foundation.HRESULT {
+func (self *ISpNotifySource) SetNotifyWin32Event() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitForNotifyEvent dispatches through ISpNotifySource's vtable slot 8.
-func (self *ISpNotifySource) WaitForNotifyEvent(dwMilliseconds uint32) foundation.HRESULT {
+func (self *ISpNotifySource) WaitForNotifyEvent(dwMilliseconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwMilliseconds))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNotifyEventHandle dispatches through ISpNotifySource's vtable slot 9.
@@ -671,33 +701,34 @@ type ISpNotifyTranslator struct {
 var IID_ISpNotifyTranslator = win32.GUID{Data1: 0xaca16614, Data2: 0x5d3d, Data3: 0x11d2, Data4: [8]byte{0x96, 0x0e, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0x28}}
 
 // InitWindowMessage dispatches through ISpNotifyTranslator's vtable slot 4.
-func (self *ISpNotifyTranslator) InitWindowMessage(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.HRESULT {
+func (self *ISpNotifyTranslator) InitWindowMessage(hWnd foundation.HWND, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(Msg), uintptr(wParam), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitCallback dispatches through ISpNotifyTranslator's vtable slot 5.
-func (self *ISpNotifyTranslator) InitCallback(pfnCallback *SPNOTIFYCALLBACK, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.HRESULT {
+func (self *ISpNotifyTranslator) InitCallback(pfnCallback *SPNOTIFYCALLBACK, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfnCallback)), uintptr(wParam), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitSpNotifyCallback dispatches through ISpNotifyTranslator's vtable slot 6.
-func (self *ISpNotifyTranslator) InitSpNotifyCallback(pSpCallback *ISpNotifyCallback, wParam foundation.WPARAM, lParam foundation.LPARAM) foundation.HRESULT {
+func (self *ISpNotifyTranslator) InitSpNotifyCallback(pSpCallback *ISpNotifyCallback, wParam foundation.WPARAM, lParam foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSpCallback)), uintptr(wParam), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitWin32Event dispatches through ISpNotifyTranslator's vtable slot 7.
-func (self *ISpNotifyTranslator) InitWin32Event(hEvent foundation.HANDLE, fCloseHandleOnRelease foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hEvent), uintptr(fCloseHandleOnRelease))
-	return foundation.HRESULT(r1)
+func (self *ISpNotifyTranslator) InitWin32Event(hEvent foundation.HANDLE, fCloseHandleOnRelease bool) error {
+	_fCloseHandleOnRelease := win32.Bool32(fCloseHandleOnRelease)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hEvent), uintptr(_fCloseHandleOnRelease))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Wait dispatches through ISpNotifyTranslator's vtable slot 8.
-func (self *ISpNotifyTranslator) Wait(dwMilliseconds uint32) foundation.HRESULT {
+func (self *ISpNotifyTranslator) Wait(dwMilliseconds uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwMilliseconds))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEventHandle dispatches through ISpNotifyTranslator's vtable slot 9.
@@ -715,63 +746,74 @@ type ISpObjectToken struct {
 var IID_ISpObjectToken = win32.GUID{Data1: 0x14056589, Data2: 0xe16c, Data3: 0x11d2, Data4: [8]byte{0xbb, 0x90, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0}}
 
 // SetId dispatches through ISpObjectToken's vtable slot 15.
-func (self *ISpObjectToken) SetId(pszCategoryId foundation.PWSTR, pszTokenId foundation.PWSTR, fCreateIfNotExist foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCategoryId)), uintptr(unsafe.Pointer(pszTokenId)), uintptr(fCreateIfNotExist))
-	return foundation.HRESULT(r1)
+func (self *ISpObjectToken) SetId(pszCategoryId string, pszTokenId string, fCreateIfNotExist bool) error {
+	_pszCategoryId := win32.UTF16Ptr(pszCategoryId)
+	_pszTokenId := win32.UTF16Ptr(pszTokenId)
+	_fCreateIfNotExist := win32.Bool32(fCreateIfNotExist)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCategoryId)), uintptr(unsafe.Pointer(_pszTokenId)), uintptr(_fCreateIfNotExist))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetId dispatches through ISpObjectToken's vtable slot 16.
-func (self *ISpObjectToken) GetId(ppszCoMemTokenId *foundation.PWSTR) foundation.HRESULT {
+func (self *ISpObjectToken) GetId(ppszCoMemTokenId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszCoMemTokenId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCategory dispatches through ISpObjectToken's vtable slot 17.
-func (self *ISpObjectToken) GetCategory(ppTokenCategory **ISpObjectTokenCategory) foundation.HRESULT {
+func (self *ISpObjectToken) GetCategory(ppTokenCategory **ISpObjectTokenCategory) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTokenCategory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateInstance dispatches through ISpObjectToken's vtable slot 18.
-func (self *ISpObjectToken) CreateInstance(pUnkOuter *systemcom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func (self *ISpObjectToken) CreateInstance(pUnkOuter *systemcom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsContext), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStorageFileName dispatches through ISpObjectToken's vtable slot 19.
-func (self *ISpObjectToken) GetStorageFileName(clsidCaller *win32.GUID, pszValueName foundation.PWSTR, pszFileNameSpecifier foundation.PWSTR, nFolder uint32, ppszFilePath *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidCaller)), uintptr(unsafe.Pointer(pszValueName)), uintptr(unsafe.Pointer(pszFileNameSpecifier)), uintptr(nFolder), uintptr(unsafe.Pointer(ppszFilePath)))
-	return foundation.HRESULT(r1)
+func (self *ISpObjectToken) GetStorageFileName(clsidCaller *win32.GUID, pszValueName string, pszFileNameSpecifier string, nFolder uint32, ppszFilePath *foundation.PWSTR) error {
+	_pszValueName := win32.UTF16Ptr(pszValueName)
+	_pszFileNameSpecifier := win32.UTF16Ptr(pszFileNameSpecifier)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidCaller)), uintptr(unsafe.Pointer(_pszValueName)), uintptr(unsafe.Pointer(_pszFileNameSpecifier)), uintptr(nFolder), uintptr(unsafe.Pointer(ppszFilePath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveStorageFileName dispatches through ISpObjectToken's vtable slot 20.
-func (self *ISpObjectToken) RemoveStorageFileName(clsidCaller *win32.GUID, pszKeyName foundation.PWSTR, fDeleteFile foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidCaller)), uintptr(unsafe.Pointer(pszKeyName)), uintptr(fDeleteFile))
-	return foundation.HRESULT(r1)
+func (self *ISpObjectToken) RemoveStorageFileName(clsidCaller *win32.GUID, pszKeyName string, fDeleteFile bool) error {
+	_pszKeyName := win32.UTF16Ptr(pszKeyName)
+	_fDeleteFile := win32.Bool32(fDeleteFile)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidCaller)), uintptr(unsafe.Pointer(_pszKeyName)), uintptr(_fDeleteFile))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through ISpObjectToken's vtable slot 21.
-func (self *ISpObjectToken) Remove(pclsidCaller *win32.GUID) foundation.HRESULT {
+func (self *ISpObjectToken) Remove(pclsidCaller *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pclsidCaller)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsUISupported dispatches through ISpObjectToken's vtable slot 22.
-func (self *ISpObjectToken) IsUISupported(pszTypeOfUI foundation.PWSTR, pvExtraData unsafe.Pointer, cbExtraData uint32, punkObject *systemcom.IUnknown, pfSupported *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(punkObject)), uintptr(unsafe.Pointer(pfSupported)))
-	return foundation.HRESULT(r1)
+func (self *ISpObjectToken) IsUISupported(pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, punkObject *systemcom.IUnknown, pfSupported *foundation.BOOL) error {
+	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(punkObject)), uintptr(unsafe.Pointer(pfSupported)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisplayUI dispatches through ISpObjectToken's vtable slot 23.
-func (self *ISpObjectToken) DisplayUI(hwndParent foundation.HWND, pszTitle foundation.PWSTR, pszTypeOfUI foundation.PWSTR, pvExtraData unsafe.Pointer, cbExtraData uint32, punkObject *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(pszTitle)), uintptr(unsafe.Pointer(pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(punkObject)))
-	return foundation.HRESULT(r1)
+func (self *ISpObjectToken) DisplayUI(hwndParent foundation.HWND, pszTitle string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, punkObject *systemcom.IUnknown) error {
+	_pszTitle := win32.UTF16Ptr(pszTitle)
+	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(_pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(punkObject)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MatchesAttributes dispatches through ISpObjectToken's vtable slot 24.
-func (self *ISpObjectToken) MatchesAttributes(pszAttributes foundation.PWSTR, pfMatches *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszAttributes)), uintptr(unsafe.Pointer(pfMatches)))
-	return foundation.HRESULT(r1)
+func (self *ISpObjectToken) MatchesAttributes(pszAttributes string, pfMatches *foundation.BOOL) error {
+	_pszAttributes := win32.UTF16Ptr(pszAttributes)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszAttributes)), uintptr(unsafe.Pointer(pfMatches)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2d3d3845-39af-4850-bbf9-40b49780011d
@@ -783,39 +825,44 @@ type ISpObjectTokenCategory struct {
 var IID_ISpObjectTokenCategory = win32.GUID{Data1: 0x2d3d3845, Data2: 0x39af, Data3: 0x4850, Data4: [8]byte{0xbb, 0xf9, 0x40, 0xb4, 0x97, 0x80, 0x01, 0x1d}}
 
 // SetId dispatches through ISpObjectTokenCategory's vtable slot 15.
-func (self *ISpObjectTokenCategory) SetId(pszCategoryId foundation.PWSTR, fCreateIfNotExist foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCategoryId)), uintptr(fCreateIfNotExist))
-	return foundation.HRESULT(r1)
+func (self *ISpObjectTokenCategory) SetId(pszCategoryId string, fCreateIfNotExist bool) error {
+	_pszCategoryId := win32.UTF16Ptr(pszCategoryId)
+	_fCreateIfNotExist := win32.Bool32(fCreateIfNotExist)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCategoryId)), uintptr(_fCreateIfNotExist))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetId dispatches through ISpObjectTokenCategory's vtable slot 16.
-func (self *ISpObjectTokenCategory) GetId(ppszCoMemCategoryId *foundation.PWSTR) foundation.HRESULT {
+func (self *ISpObjectTokenCategory) GetId(ppszCoMemCategoryId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszCoMemCategoryId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDataKey dispatches through ISpObjectTokenCategory's vtable slot 17.
-func (self *ISpObjectTokenCategory) GetDataKey(spdkl SPDATAKEYLOCATION, ppDataKey **ISpDataKey) foundation.HRESULT {
+func (self *ISpObjectTokenCategory) GetDataKey(spdkl SPDATAKEYLOCATION, ppDataKey **ISpDataKey) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(spdkl), uintptr(unsafe.Pointer(ppDataKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumTokens dispatches through ISpObjectTokenCategory's vtable slot 18.
-func (self *ISpObjectTokenCategory) EnumTokens(pzsReqAttribs foundation.PWSTR, pszOptAttribs foundation.PWSTR, ppEnum **IEnumSpObjectTokens) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pzsReqAttribs)), uintptr(unsafe.Pointer(pszOptAttribs)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *ISpObjectTokenCategory) EnumTokens(pzsReqAttribs string, pszOptAttribs string, ppEnum **IEnumSpObjectTokens) error {
+	_pzsReqAttribs := win32.UTF16Ptr(pzsReqAttribs)
+	_pszOptAttribs := win32.UTF16Ptr(pszOptAttribs)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pzsReqAttribs)), uintptr(unsafe.Pointer(_pszOptAttribs)), uintptr(unsafe.Pointer(ppEnum)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDefaultTokenId dispatches through ISpObjectTokenCategory's vtable slot 19.
-func (self *ISpObjectTokenCategory) SetDefaultTokenId(pszTokenId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszTokenId)))
-	return foundation.HRESULT(r1)
+func (self *ISpObjectTokenCategory) SetDefaultTokenId(pszTokenId string) error {
+	_pszTokenId := win32.UTF16Ptr(pszTokenId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTokenId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultTokenId dispatches through ISpObjectTokenCategory's vtable slot 20.
-func (self *ISpObjectTokenCategory) GetDefaultTokenId(ppszCoMemTokenId *foundation.PWSTR) foundation.HRESULT {
+func (self *ISpObjectTokenCategory) GetDefaultTokenId(ppszCoMemTokenId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszCoMemTokenId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 06b64f9f-7fda-11d2-b4f2-00c04f797396
@@ -827,33 +874,38 @@ type ISpObjectTokenEnumBuilder struct {
 var IID_ISpObjectTokenEnumBuilder = win32.GUID{Data1: 0x06b64f9f, Data2: 0x7fda, Data3: 0x11d2, Data4: [8]byte{0xb4, 0xf2, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96}}
 
 // SetAttribs dispatches through ISpObjectTokenEnumBuilder's vtable slot 9.
-func (self *ISpObjectTokenEnumBuilder) SetAttribs(pszReqAttribs foundation.PWSTR, pszOptAttribs foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszReqAttribs)), uintptr(unsafe.Pointer(pszOptAttribs)))
-	return foundation.HRESULT(r1)
+func (self *ISpObjectTokenEnumBuilder) SetAttribs(pszReqAttribs string, pszOptAttribs string) error {
+	_pszReqAttribs := win32.UTF16Ptr(pszReqAttribs)
+	_pszOptAttribs := win32.UTF16Ptr(pszOptAttribs)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszReqAttribs)), uintptr(unsafe.Pointer(_pszOptAttribs)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddTokens dispatches through ISpObjectTokenEnumBuilder's vtable slot 10.
-func (self *ISpObjectTokenEnumBuilder) AddTokens(cTokens uint32, pToken **ISpObjectToken) foundation.HRESULT {
+func (self *ISpObjectTokenEnumBuilder) AddTokens(cTokens uint32, pToken **ISpObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(cTokens), uintptr(unsafe.Pointer(pToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddTokensFromDataKey dispatches through ISpObjectTokenEnumBuilder's vtable slot 11.
-func (self *ISpObjectTokenEnumBuilder) AddTokensFromDataKey(pDataKey *ISpDataKey, pszSubKey foundation.PWSTR, pszCategoryId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataKey)), uintptr(unsafe.Pointer(pszSubKey)), uintptr(unsafe.Pointer(pszCategoryId)))
-	return foundation.HRESULT(r1)
+func (self *ISpObjectTokenEnumBuilder) AddTokensFromDataKey(pDataKey *ISpDataKey, pszSubKey string, pszCategoryId string) error {
+	_pszSubKey := win32.UTF16Ptr(pszSubKey)
+	_pszCategoryId := win32.UTF16Ptr(pszCategoryId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataKey)), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(unsafe.Pointer(_pszCategoryId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddTokensFromTokenEnum dispatches through ISpObjectTokenEnumBuilder's vtable slot 12.
-func (self *ISpObjectTokenEnumBuilder) AddTokensFromTokenEnum(pTokenEnum *IEnumSpObjectTokens) foundation.HRESULT {
+func (self *ISpObjectTokenEnumBuilder) AddTokensFromTokenEnum(pTokenEnum *IEnumSpObjectTokens) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTokenEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Sort dispatches through ISpObjectTokenEnumBuilder's vtable slot 13.
-func (self *ISpObjectTokenEnumBuilder) Sort(pszTokenIdToListFirst foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszTokenIdToListFirst)))
-	return foundation.HRESULT(r1)
+func (self *ISpObjectTokenEnumBuilder) Sort(pszTokenIdToListFirst string) error {
+	_pszTokenIdToListFirst := win32.UTF16Ptr(pszTokenIdToListFirst)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTokenIdToListFirst)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b8aab0cf-346f-49d8-9499-c8b03f161d51
@@ -865,9 +917,11 @@ type ISpObjectTokenInit struct {
 var IID_ISpObjectTokenInit = win32.GUID{Data1: 0xb8aab0cf, Data2: 0x346f, Data3: 0x49d8, Data4: [8]byte{0x94, 0x99, 0xc8, 0xb0, 0x3f, 0x16, 0x1d, 0x51}}
 
 // InitFromDataKey dispatches through ISpObjectTokenInit's vtable slot 25.
-func (self *ISpObjectTokenInit) InitFromDataKey(pszCategoryId foundation.PWSTR, pszTokenId foundation.PWSTR, pDataKey *ISpDataKey) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCategoryId)), uintptr(unsafe.Pointer(pszTokenId)), uintptr(unsafe.Pointer(pDataKey)))
-	return foundation.HRESULT(r1)
+func (self *ISpObjectTokenInit) InitFromDataKey(pszCategoryId string, pszTokenId string, pDataKey *ISpDataKey) error {
+	_pszCategoryId := win32.UTF16Ptr(pszCategoryId)
+	_pszTokenId := win32.UTF16Ptr(pszTokenId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCategoryId)), uintptr(unsafe.Pointer(_pszTokenId)), uintptr(unsafe.Pointer(pDataKey)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 5b559f40-e952-11d2-bb91-00c04f8ee6c0
@@ -879,15 +933,15 @@ type ISpObjectWithToken struct {
 var IID_ISpObjectWithToken = win32.GUID{Data1: 0x5b559f40, Data2: 0xe952, Data3: 0x11d2, Data4: [8]byte{0xbb, 0x91, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0}}
 
 // SetObjectToken dispatches through ISpObjectWithToken's vtable slot 3.
-func (self *ISpObjectWithToken) SetObjectToken(pToken *ISpObjectToken) foundation.HRESULT {
+func (self *ISpObjectWithToken) SetObjectToken(pToken *ISpObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetObjectToken dispatches through ISpObjectWithToken's vtable slot 4.
-func (self *ISpObjectWithToken) GetObjectToken(ppToken **ISpObjectToken) foundation.HRESULT {
+func (self *ISpObjectWithToken) GetObjectToken(ppToken **ISpObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8445c581-0cac-4a38-abfe-9b2ce2826455
@@ -899,15 +953,16 @@ type ISpPhoneConverter struct {
 var IID_ISpPhoneConverter = win32.GUID{Data1: 0x8445c581, Data2: 0x0cac, Data3: 0x4a38, Data4: [8]byte{0xab, 0xfe, 0x9b, 0x2c, 0xe2, 0x82, 0x64, 0x55}}
 
 // PhoneToId dispatches through ISpPhoneConverter's vtable slot 5.
-func (self *ISpPhoneConverter) PhoneToId(pszPhone foundation.PWSTR, pId *uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPhone)), uintptr(unsafe.Pointer(pId)))
-	return foundation.HRESULT(r1)
+func (self *ISpPhoneConverter) PhoneToId(pszPhone string, pId *uint16) error {
+	_pszPhone := win32.UTF16Ptr(pszPhone)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPhone)), uintptr(unsafe.Pointer(pId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IdToPhone dispatches through ISpPhoneConverter's vtable slot 6.
-func (self *ISpPhoneConverter) IdToPhone(pId *uint16, pszPhone foundation.PWSTR) foundation.HRESULT {
+func (self *ISpPhoneConverter) IdToPhone(pId *uint16, pszPhone foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pId)), uintptr(unsafe.Pointer(pszPhone)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 133adcd4-19b4-4020-9fdc-842e78253b17
@@ -919,33 +974,34 @@ type ISpPhoneticAlphabetConverter struct {
 var IID_ISpPhoneticAlphabetConverter = win32.GUID{Data1: 0x133adcd4, Data2: 0x19b4, Data3: 0x4020, Data4: [8]byte{0x9f, 0xdc, 0x84, 0x2e, 0x78, 0x25, 0x3b, 0x17}}
 
 // GetLangId dispatches through ISpPhoneticAlphabetConverter's vtable slot 3.
-func (self *ISpPhoneticAlphabetConverter) GetLangId(pLangID *uint16) foundation.HRESULT {
+func (self *ISpPhoneticAlphabetConverter) GetLangId(pLangID *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLangID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLangId dispatches through ISpPhoneticAlphabetConverter's vtable slot 4.
-func (self *ISpPhoneticAlphabetConverter) SetLangId(LangID uint16) foundation.HRESULT {
+func (self *ISpPhoneticAlphabetConverter) SetLangId(LangID uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(LangID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SAPI2UPS dispatches through ISpPhoneticAlphabetConverter's vtable slot 5.
-func (self *ISpPhoneticAlphabetConverter) SAPI2UPS(pszSAPIId *uint16, pszUPSId *uint16, cMaxLength uint32) foundation.HRESULT {
+func (self *ISpPhoneticAlphabetConverter) SAPI2UPS(pszSAPIId *uint16, pszUPSId *uint16, cMaxLength uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSAPIId)), uintptr(unsafe.Pointer(pszUPSId)), uintptr(cMaxLength))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UPS2SAPI dispatches through ISpPhoneticAlphabetConverter's vtable slot 6.
-func (self *ISpPhoneticAlphabetConverter) UPS2SAPI(pszUPSId *uint16, pszSAPIId *uint16, cMaxLength uint32) foundation.HRESULT {
+func (self *ISpPhoneticAlphabetConverter) UPS2SAPI(pszUPSId *uint16, pszSAPIId *uint16, cMaxLength uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszUPSId)), uintptr(unsafe.Pointer(pszSAPIId)), uintptr(cMaxLength))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaxConvertLength dispatches through ISpPhoneticAlphabetConverter's vtable slot 7.
-func (self *ISpPhoneticAlphabetConverter) GetMaxConvertLength(cSrcLength uint32, bSAPI2UPS foundation.BOOL, pcMaxDestLength *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cSrcLength), uintptr(bSAPI2UPS), uintptr(unsafe.Pointer(pcMaxDestLength)))
-	return foundation.HRESULT(r1)
+func (self *ISpPhoneticAlphabetConverter) GetMaxConvertLength(cSrcLength uint32, bSAPI2UPS bool, pcMaxDestLength *uint32) error {
+	_bSAPI2UPS := win32.Bool32(bSAPI2UPS)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cSrcLength), uintptr(_bSAPI2UPS), uintptr(unsafe.Pointer(pcMaxDestLength)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b2745efd-42ce-48ca-81f1-a96e02538a90
@@ -957,15 +1013,16 @@ type ISpPhoneticAlphabetSelection struct {
 var IID_ISpPhoneticAlphabetSelection = win32.GUID{Data1: 0xb2745efd, Data2: 0x42ce, Data3: 0x48ca, Data4: [8]byte{0x81, 0xf1, 0xa9, 0x6e, 0x02, 0x53, 0x8a, 0x90}}
 
 // IsAlphabetUPS dispatches through ISpPhoneticAlphabetSelection's vtable slot 3.
-func (self *ISpPhoneticAlphabetSelection) IsAlphabetUPS(pfIsUPS *foundation.BOOL) foundation.HRESULT {
+func (self *ISpPhoneticAlphabetSelection) IsAlphabetUPS(pfIsUPS *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsUPS)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAlphabetToUPS dispatches through ISpPhoneticAlphabetSelection's vtable slot 4.
-func (self *ISpPhoneticAlphabetSelection) SetAlphabetToUPS(fForceUPS foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fForceUPS))
-	return foundation.HRESULT(r1)
+func (self *ISpPhoneticAlphabetSelection) SetAlphabetToUPS(fForceUPS bool) error {
+	_fForceUPS := win32.Bool32(fForceUPS)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fForceUPS))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 1a5c0354-b621-4b5a-8791-d306ed379e53
@@ -977,27 +1034,28 @@ type ISpPhrase struct {
 var IID_ISpPhrase = win32.GUID{Data1: 0x1a5c0354, Data2: 0xb621, Data3: 0x4b5a, Data4: [8]byte{0x87, 0x91, 0xd3, 0x06, 0xed, 0x37, 0x9e, 0x53}}
 
 // GetPhrase dispatches through ISpPhrase's vtable slot 3.
-func (self *ISpPhrase) GetPhrase(ppCoMemPhrase **SPPHRASE) foundation.HRESULT {
+func (self *ISpPhrase) GetPhrase(ppCoMemPhrase **SPPHRASE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCoMemPhrase)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSerializedPhrase dispatches through ISpPhrase's vtable slot 4.
-func (self *ISpPhrase) GetSerializedPhrase(ppCoMemPhrase **SPSERIALIZEDPHRASE) foundation.HRESULT {
+func (self *ISpPhrase) GetSerializedPhrase(ppCoMemPhrase **SPSERIALIZEDPHRASE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCoMemPhrase)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetText dispatches through ISpPhrase's vtable slot 5.
-func (self *ISpPhrase) GetText(ulStart uint32, ulCount uint32, fUseTextReplacements foundation.BOOL, ppszCoMemText *foundation.PWSTR, pbDisplayAttributes *byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulStart), uintptr(ulCount), uintptr(fUseTextReplacements), uintptr(unsafe.Pointer(ppszCoMemText)), uintptr(unsafe.Pointer(pbDisplayAttributes)))
-	return foundation.HRESULT(r1)
+func (self *ISpPhrase) GetText(ulStart uint32, ulCount uint32, fUseTextReplacements bool, ppszCoMemText *foundation.PWSTR, pbDisplayAttributes *byte) error {
+	_fUseTextReplacements := win32.Bool32(fUseTextReplacements)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulStart), uintptr(ulCount), uintptr(_fUseTextReplacements), uintptr(unsafe.Pointer(ppszCoMemText)), uintptr(unsafe.Pointer(pbDisplayAttributes)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Discard dispatches through ISpPhrase's vtable slot 6.
-func (self *ISpPhrase) Discard(dwValueTypes uint32) foundation.HRESULT {
+func (self *ISpPhrase) Discard(dwValueTypes uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwValueTypes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f264da52-e457-4696-b856-a737b717af79
@@ -1009,21 +1067,21 @@ type ISpPhrase2 struct {
 var IID_ISpPhrase2 = win32.GUID{Data1: 0xf264da52, Data2: 0xe457, Data3: 0x4696, Data4: [8]byte{0xb8, 0x56, 0xa7, 0x37, 0xb7, 0x17, 0xaf, 0x79}}
 
 // GetXMLResult dispatches through ISpPhrase2's vtable slot 7.
-func (self *ISpPhrase2) GetXMLResult(ppszCoMemXMLResult *foundation.PWSTR, Options SPXMLRESULTOPTIONS) foundation.HRESULT {
+func (self *ISpPhrase2) GetXMLResult(ppszCoMemXMLResult *foundation.PWSTR, Options SPXMLRESULTOPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszCoMemXMLResult)), uintptr(Options))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetXMLErrorInfo dispatches through ISpPhrase2's vtable slot 8.
-func (self *ISpPhrase2) GetXMLErrorInfo(pSemanticErrorInfo *SPSEMANTICERRORINFO) foundation.HRESULT {
+func (self *ISpPhrase2) GetXMLErrorInfo(pSemanticErrorInfo *SPSEMANTICERRORINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSemanticErrorInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAudio dispatches through ISpPhrase2's vtable slot 9.
-func (self *ISpPhrase2) GetAudio(ulStartElement uint32, cElements uint32, ppStream **ISpStreamFormat) foundation.HRESULT {
+func (self *ISpPhrase2) GetAudio(ulStartElement uint32, cElements uint32, ppStream **ISpStreamFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ulStartElement), uintptr(cElements), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8fcebc98-4e49-4067-9c6c-d86a0e092e3d
@@ -1035,15 +1093,15 @@ type ISpPhraseAlt struct {
 var IID_ISpPhraseAlt = win32.GUID{Data1: 0x8fcebc98, Data2: 0x4e49, Data3: 0x4067, Data4: [8]byte{0x9c, 0x6c, 0xd8, 0x6a, 0x0e, 0x09, 0x2e, 0x3d}}
 
 // GetAltInfo dispatches through ISpPhraseAlt's vtable slot 7.
-func (self *ISpPhraseAlt) GetAltInfo(ppParent **ISpPhrase, pulStartElementInParent *uint32, pcElementsInParent *uint32, pcElementsInAlt *uint32) foundation.HRESULT {
+func (self *ISpPhraseAlt) GetAltInfo(ppParent **ISpPhrase, pulStartElementInParent *uint32, pcElementsInParent *uint32, pcElementsInAlt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppParent)), uintptr(unsafe.Pointer(pulStartElementInParent)), uintptr(unsafe.Pointer(pcElementsInParent)), uintptr(unsafe.Pointer(pcElementsInAlt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Commit dispatches through ISpPhraseAlt's vtable slot 8.
-func (self *ISpPhraseAlt) Commit() foundation.HRESULT {
+func (self *ISpPhraseAlt) Commit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 88a3342a-0bed-4834-922b-88d43173162f
@@ -1055,39 +1113,39 @@ type ISpPhraseBuilder struct {
 var IID_ISpPhraseBuilder = win32.GUID{Data1: 0x88a3342a, Data2: 0x0bed, Data3: 0x4834, Data4: [8]byte{0x92, 0x2b, 0x88, 0xd4, 0x31, 0x73, 0x16, 0x2f}}
 
 // InitFromPhrase dispatches through ISpPhraseBuilder's vtable slot 7.
-func (self *ISpPhraseBuilder) InitFromPhrase(pPhrase *SPPHRASE) foundation.HRESULT {
+func (self *ISpPhraseBuilder) InitFromPhrase(pPhrase *SPPHRASE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhrase)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitFromSerializedPhrase dispatches through ISpPhraseBuilder's vtable slot 8.
-func (self *ISpPhraseBuilder) InitFromSerializedPhrase(pPhrase *SPSERIALIZEDPHRASE) foundation.HRESULT {
+func (self *ISpPhraseBuilder) InitFromSerializedPhrase(pPhrase *SPSERIALIZEDPHRASE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhrase)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddElements dispatches through ISpPhraseBuilder's vtable slot 9.
-func (self *ISpPhraseBuilder) AddElements(cElements uint32, pElement *SPPHRASEELEMENT) foundation.HRESULT {
+func (self *ISpPhraseBuilder) AddElements(cElements uint32, pElement *SPPHRASEELEMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(cElements), uintptr(unsafe.Pointer(pElement)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddRules dispatches through ISpPhraseBuilder's vtable slot 10.
-func (self *ISpPhraseBuilder) AddRules(hParent SPPHRASERULEHANDLE, pRule *SPPHRASERULE, phNewRule *SPPHRASERULEHANDLE) foundation.HRESULT {
+func (self *ISpPhraseBuilder) AddRules(hParent SPPHRASERULEHANDLE, pRule *SPPHRASERULE, phNewRule *SPPHRASERULEHANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hParent), uintptr(unsafe.Pointer(pRule)), uintptr(unsafe.Pointer(phNewRule)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddProperties dispatches through ISpPhraseBuilder's vtable slot 11.
-func (self *ISpPhraseBuilder) AddProperties(hParent SPPHRASEPROPERTYHANDLE, pProperty *SPPHRASEPROPERTY, phNewProperty *SPPHRASEPROPERTYHANDLE) foundation.HRESULT {
+func (self *ISpPhraseBuilder) AddProperties(hParent SPPHRASEPROPERTYHANDLE, pProperty *SPPHRASEPROPERTY, phNewProperty *SPPHRASEPROPERTYHANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hParent), uintptr(unsafe.Pointer(pProperty)), uintptr(unsafe.Pointer(phNewProperty)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddReplacements dispatches through ISpPhraseBuilder's vtable slot 12.
-func (self *ISpPhraseBuilder) AddReplacements(cReplacements uint32, pReplacements *SPPHRASEREPLACEMENT) foundation.HRESULT {
+func (self *ISpPhraseBuilder) AddReplacements(cReplacements uint32, pReplacements *SPPHRASEREPLACEMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(cReplacements), uintptr(unsafe.Pointer(pReplacements)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: defd682a-fe0a-42b9-bfa1-56d3d6cecfaf
@@ -1099,15 +1157,15 @@ type ISpPrivateEngineCallEx struct {
 var IID_ISpPrivateEngineCallEx = win32.GUID{Data1: 0xdefd682a, Data2: 0xfe0a, Data3: 0x42b9, Data4: [8]byte{0xbf, 0xa1, 0x56, 0xd3, 0xd6, 0xce, 0xcf, 0xaf}}
 
 // CallEngineSynchronize dispatches through ISpPrivateEngineCallEx's vtable slot 3.
-func (self *ISpPrivateEngineCallEx) CallEngineSynchronize(pInFrame unsafe.Pointer, ulInFrameSize uint32, ppCoMemOutFrame *unsafe.Pointer, pulOutFrameSize *uint32) foundation.HRESULT {
+func (self *ISpPrivateEngineCallEx) CallEngineSynchronize(pInFrame unsafe.Pointer, ulInFrameSize uint32, ppCoMemOutFrame *unsafe.Pointer, pulOutFrameSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInFrame)), uintptr(ulInFrameSize), uintptr(unsafe.Pointer(ppCoMemOutFrame)), uintptr(unsafe.Pointer(pulOutFrameSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CallEngineImmediate dispatches through ISpPrivateEngineCallEx's vtable slot 4.
-func (self *ISpPrivateEngineCallEx) CallEngineImmediate(pInFrame unsafe.Pointer, ulInFrameSize uint32, ppCoMemOutFrame *unsafe.Pointer, pulOutFrameSize *uint32) foundation.HRESULT {
+func (self *ISpPrivateEngineCallEx) CallEngineImmediate(pInFrame unsafe.Pointer, ulInFrameSize uint32, ppCoMemOutFrame *unsafe.Pointer, pulOutFrameSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInFrame)), uintptr(ulInFrameSize), uintptr(unsafe.Pointer(ppCoMemOutFrame)), uintptr(unsafe.Pointer(pulOutFrameSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 5b4fb971-b115-4de1-ad97-e482e3bf6ee4
@@ -1119,27 +1177,32 @@ type ISpProperties struct {
 var IID_ISpProperties = win32.GUID{Data1: 0x5b4fb971, Data2: 0xb115, Data3: 0x4de1, Data4: [8]byte{0xad, 0x97, 0xe4, 0x82, 0xe3, 0xbf, 0x6e, 0xe4}}
 
 // SetPropertyNum dispatches through ISpProperties's vtable slot 3.
-func (self *ISpProperties) SetPropertyNum(pName foundation.PWSTR, lValue int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)), uintptr(lValue))
-	return foundation.HRESULT(r1)
+func (self *ISpProperties) SetPropertyNum(pName string, lValue int32) error {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)), uintptr(lValue))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyNum dispatches through ISpProperties's vtable slot 4.
-func (self *ISpProperties) GetPropertyNum(pName foundation.PWSTR, plValue *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(plValue)))
-	return foundation.HRESULT(r1)
+func (self *ISpProperties) GetPropertyNum(pName string, plValue *int32) error {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(plValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPropertyString dispatches through ISpProperties's vtable slot 5.
-func (self *ISpProperties) SetPropertyString(pName foundation.PWSTR, pValue foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+func (self *ISpProperties) SetPropertyString(pName string, pValue string) error {
+	_pName := win32.UTF16Ptr(pName)
+	_pValue := win32.UTF16Ptr(pValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyString dispatches through ISpProperties's vtable slot 6.
-func (self *ISpProperties) GetPropertyString(pName foundation.PWSTR, ppCoMemValue *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(ppCoMemValue)))
-	return foundation.HRESULT(r1)
+func (self *ISpProperties) GetPropertyString(pName string, ppCoMemValue *foundation.PWSTR) error {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(ppCoMemValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f740a62f-7c15-489e-8234-940a33d9272d
@@ -1151,111 +1214,113 @@ type ISpRecoContext struct {
 var IID_ISpRecoContext = win32.GUID{Data1: 0xf740a62f, Data2: 0x7c15, Data3: 0x489e, Data4: [8]byte{0x82, 0x34, 0x94, 0x0a, 0x33, 0xd9, 0x27, 0x2d}}
 
 // GetRecognizer dispatches through ISpRecoContext's vtable slot 13.
-func (self *ISpRecoContext) GetRecognizer(ppRecognizer **ISpRecognizer) foundation.HRESULT {
+func (self *ISpRecoContext) GetRecognizer(ppRecognizer **ISpRecognizer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRecognizer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateGrammar dispatches through ISpRecoContext's vtable slot 14.
-func (self *ISpRecoContext) CreateGrammar(ullGrammarId uint64, ppGrammar **ISpRecoGrammar) foundation.HRESULT {
+func (self *ISpRecoContext) CreateGrammar(ullGrammarId uint64, ppGrammar **ISpRecoGrammar) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ullGrammarId), uintptr(unsafe.Pointer(ppGrammar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through ISpRecoContext's vtable slot 15.
-func (self *ISpRecoContext) GetStatus(pStatus *SPRECOCONTEXTSTATUS) foundation.HRESULT {
+func (self *ISpRecoContext) GetStatus(pStatus *SPRECOCONTEXTSTATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaxAlternates dispatches through ISpRecoContext's vtable slot 16.
-func (self *ISpRecoContext) GetMaxAlternates(pcAlternates *uint32) foundation.HRESULT {
+func (self *ISpRecoContext) GetMaxAlternates(pcAlternates *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcAlternates)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMaxAlternates dispatches through ISpRecoContext's vtable slot 17.
-func (self *ISpRecoContext) SetMaxAlternates(cAlternates uint32) foundation.HRESULT {
+func (self *ISpRecoContext) SetMaxAlternates(cAlternates uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(cAlternates))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAudioOptions dispatches through ISpRecoContext's vtable slot 18.
-func (self *ISpRecoContext) SetAudioOptions(Options SPAUDIOOPTIONS, pAudioFormatId *win32.GUID, pWaveFormatEx unsafe.Pointer) foundation.HRESULT {
+func (self *ISpRecoContext) SetAudioOptions(Options SPAUDIOOPTIONS, pAudioFormatId *win32.GUID, pWaveFormatEx unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Options), uintptr(unsafe.Pointer(pAudioFormatId)), uintptr(unsafe.Pointer(pWaveFormatEx)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAudioOptions dispatches through ISpRecoContext's vtable slot 19.
-func (self *ISpRecoContext) GetAudioOptions(pOptions *SPAUDIOOPTIONS, pAudioFormatId *win32.GUID, ppCoMemWFEX *unsafe.Pointer) foundation.HRESULT {
+func (self *ISpRecoContext) GetAudioOptions(pOptions *SPAUDIOOPTIONS, pAudioFormatId *win32.GUID, ppCoMemWFEX *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOptions)), uintptr(unsafe.Pointer(pAudioFormatId)), uintptr(unsafe.Pointer(ppCoMemWFEX)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeserializeResult dispatches through ISpRecoContext's vtable slot 20.
-func (self *ISpRecoContext) DeserializeResult(pSerializedResult *SPSERIALIZEDRESULT, ppResult **ISpRecoResult) foundation.HRESULT {
+func (self *ISpRecoContext) DeserializeResult(pSerializedResult *SPSERIALIZEDRESULT, ppResult **ISpRecoResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSerializedResult)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Bookmark dispatches through ISpRecoContext's vtable slot 21.
-func (self *ISpRecoContext) Bookmark(Options SPBOOKMARKOPTIONS, ullStreamPosition uint64, lparamEvent foundation.LPARAM) foundation.HRESULT {
+func (self *ISpRecoContext) Bookmark(Options SPBOOKMARKOPTIONS, ullStreamPosition uint64, lparamEvent foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Options), uintptr(ullStreamPosition), uintptr(lparamEvent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAdaptationData dispatches through ISpRecoContext's vtable slot 22.
-func (self *ISpRecoContext) SetAdaptationData(pAdaptationData foundation.PWSTR, cch uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAdaptationData)), uintptr(cch))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoContext) SetAdaptationData(pAdaptationData string, cch uint32) error {
+	_pAdaptationData := win32.UTF16Ptr(pAdaptationData)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAdaptationData)), uintptr(cch))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through ISpRecoContext's vtable slot 23.
-func (self *ISpRecoContext) Pause(dwReserved uint32) foundation.HRESULT {
+func (self *ISpRecoContext) Pause(dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through ISpRecoContext's vtable slot 24.
-func (self *ISpRecoContext) Resume(dwReserved uint32) foundation.HRESULT {
+func (self *ISpRecoContext) Resume(dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVoice dispatches through ISpRecoContext's vtable slot 25.
-func (self *ISpRecoContext) SetVoice(pVoice *ISpVoice, fAllowFormatChanges foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVoice)), uintptr(fAllowFormatChanges))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoContext) SetVoice(pVoice *ISpVoice, fAllowFormatChanges bool) error {
+	_fAllowFormatChanges := win32.Bool32(fAllowFormatChanges)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVoice)), uintptr(_fAllowFormatChanges))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVoice dispatches through ISpRecoContext's vtable slot 26.
-func (self *ISpRecoContext) GetVoice(ppVoice **ISpVoice) foundation.HRESULT {
+func (self *ISpRecoContext) GetVoice(ppVoice **ISpVoice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppVoice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVoicePurgeEvent dispatches through ISpRecoContext's vtable slot 27.
-func (self *ISpRecoContext) SetVoicePurgeEvent(ullEventInterest uint64) foundation.HRESULT {
+func (self *ISpRecoContext) SetVoicePurgeEvent(ullEventInterest uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(ullEventInterest))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVoicePurgeEvent dispatches through ISpRecoContext's vtable slot 28.
-func (self *ISpRecoContext) GetVoicePurgeEvent(pullEventInterest *uint64) foundation.HRESULT {
+func (self *ISpRecoContext) GetVoicePurgeEvent(pullEventInterest *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pullEventInterest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetContextState dispatches through ISpRecoContext's vtable slot 29.
-func (self *ISpRecoContext) SetContextState(eContextState SPCONTEXTSTATE) foundation.HRESULT {
+func (self *ISpRecoContext) SetContextState(eContextState SPCONTEXTSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(eContextState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContextState dispatches through ISpRecoContext's vtable slot 30.
-func (self *ISpRecoContext) GetContextState(peContextState *SPCONTEXTSTATE) foundation.HRESULT {
+func (self *ISpRecoContext) GetContextState(peContextState *SPCONTEXTSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peContextState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bead311c-52ff-437f-9464-6b21054ca73d
@@ -1267,21 +1332,23 @@ type ISpRecoContext2 struct {
 var IID_ISpRecoContext2 = win32.GUID{Data1: 0xbead311c, Data2: 0x52ff, Data3: 0x437f, Data4: [8]byte{0x94, 0x64, 0x6b, 0x21, 0x05, 0x4c, 0xa7, 0x3d}}
 
 // SetGrammarOptions dispatches through ISpRecoContext2's vtable slot 3.
-func (self *ISpRecoContext2) SetGrammarOptions(eGrammarOptions uint32) foundation.HRESULT {
+func (self *ISpRecoContext2) SetGrammarOptions(eGrammarOptions uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eGrammarOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGrammarOptions dispatches through ISpRecoContext2's vtable slot 4.
-func (self *ISpRecoContext2) GetGrammarOptions(peGrammarOptions *uint32) foundation.HRESULT {
+func (self *ISpRecoContext2) GetGrammarOptions(peGrammarOptions *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peGrammarOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAdaptationData2 dispatches through ISpRecoContext2's vtable slot 5.
-func (self *ISpRecoContext2) SetAdaptationData2(pAdaptationData foundation.PWSTR, cch uint32, pTopicName foundation.PWSTR, eAdaptationSettings uint32, eRelevance SPADAPTATIONRELEVANCE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAdaptationData)), uintptr(cch), uintptr(unsafe.Pointer(pTopicName)), uintptr(eAdaptationSettings), uintptr(eRelevance))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoContext2) SetAdaptationData2(pAdaptationData string, cch uint32, pTopicName string, eAdaptationSettings uint32, eRelevance SPADAPTATIONRELEVANCE) error {
+	_pAdaptationData := win32.UTF16Ptr(pAdaptationData)
+	_pTopicName := win32.UTF16Ptr(pTopicName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAdaptationData)), uintptr(cch), uintptr(unsafe.Pointer(_pTopicName)), uintptr(eAdaptationSettings), uintptr(eRelevance))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2177db29-7f45-47d0-8554-067e91c80502
@@ -1293,111 +1360,120 @@ type ISpRecoGrammar struct {
 var IID_ISpRecoGrammar = win32.GUID{Data1: 0x2177db29, Data2: 0x7f45, Data3: 0x47d0, Data4: [8]byte{0x85, 0x54, 0x06, 0x7e, 0x91, 0xc8, 0x05, 0x02}}
 
 // GetGrammarId dispatches through ISpRecoGrammar's vtable slot 11.
-func (self *ISpRecoGrammar) GetGrammarId(pullGrammarId *uint64) foundation.HRESULT {
+func (self *ISpRecoGrammar) GetGrammarId(pullGrammarId *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pullGrammarId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecoContext dispatches through ISpRecoGrammar's vtable slot 12.
-func (self *ISpRecoGrammar) GetRecoContext(ppRecoCtxt **ISpRecoContext) foundation.HRESULT {
+func (self *ISpRecoGrammar) GetRecoContext(ppRecoCtxt **ISpRecoContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRecoCtxt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadCmdFromFile dispatches through ISpRecoGrammar's vtable slot 13.
-func (self *ISpRecoGrammar) LoadCmdFromFile(pszFileName foundation.PWSTR, Options SPLOADOPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszFileName)), uintptr(Options))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoGrammar) LoadCmdFromFile(pszFileName string, Options SPLOADOPTIONS) error {
+	_pszFileName := win32.UTF16Ptr(pszFileName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(Options))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadCmdFromObject dispatches through ISpRecoGrammar's vtable slot 14.
-func (self *ISpRecoGrammar) LoadCmdFromObject(rcid *win32.GUID, pszGrammarName foundation.PWSTR, Options SPLOADOPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rcid)), uintptr(unsafe.Pointer(pszGrammarName)), uintptr(Options))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoGrammar) LoadCmdFromObject(rcid *win32.GUID, pszGrammarName string, Options SPLOADOPTIONS) error {
+	_pszGrammarName := win32.UTF16Ptr(pszGrammarName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rcid)), uintptr(unsafe.Pointer(_pszGrammarName)), uintptr(Options))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadCmdFromResource dispatches through ISpRecoGrammar's vtable slot 15.
-func (self *ISpRecoGrammar) LoadCmdFromResource(hModule foundation.HMODULE, pszResourceName foundation.PWSTR, pszResourceType foundation.PWSTR, wLanguage uint16, Options SPLOADOPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hModule), uintptr(unsafe.Pointer(pszResourceName)), uintptr(unsafe.Pointer(pszResourceType)), uintptr(wLanguage), uintptr(Options))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoGrammar) LoadCmdFromResource(hModule foundation.HMODULE, pszResourceName string, pszResourceType string, wLanguage uint16, Options SPLOADOPTIONS) error {
+	_pszResourceName := win32.UTF16Ptr(pszResourceName)
+	_pszResourceType := win32.UTF16Ptr(pszResourceType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hModule), uintptr(unsafe.Pointer(_pszResourceName)), uintptr(unsafe.Pointer(_pszResourceType)), uintptr(wLanguage), uintptr(Options))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadCmdFromMemory dispatches through ISpRecoGrammar's vtable slot 16.
-func (self *ISpRecoGrammar) LoadCmdFromMemory(pGrammar *SPBINARYGRAMMAR, Options SPLOADOPTIONS) foundation.HRESULT {
+func (self *ISpRecoGrammar) LoadCmdFromMemory(pGrammar *SPBINARYGRAMMAR, Options SPLOADOPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGrammar)), uintptr(Options))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadCmdFromProprietaryGrammar dispatches through ISpRecoGrammar's vtable slot 17.
-func (self *ISpRecoGrammar) LoadCmdFromProprietaryGrammar(rguidParam *win32.GUID, pszStringParam foundation.PWSTR, pvDataPrarm unsafe.Pointer, cbDataSize uint32, Options SPLOADOPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidParam)), uintptr(unsafe.Pointer(pszStringParam)), uintptr(unsafe.Pointer(pvDataPrarm)), uintptr(cbDataSize), uintptr(Options))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoGrammar) LoadCmdFromProprietaryGrammar(rguidParam *win32.GUID, pszStringParam string, pvDataPrarm unsafe.Pointer, cbDataSize uint32, Options SPLOADOPTIONS) error {
+	_pszStringParam := win32.UTF16Ptr(pszStringParam)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidParam)), uintptr(unsafe.Pointer(_pszStringParam)), uintptr(unsafe.Pointer(pvDataPrarm)), uintptr(cbDataSize), uintptr(Options))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRuleState dispatches through ISpRecoGrammar's vtable slot 18.
-func (self *ISpRecoGrammar) SetRuleState(pszName foundation.PWSTR, pReserved unsafe.Pointer, NewState SPRULESTATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pReserved)), uintptr(NewState))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoGrammar) SetRuleState(pszName string, pReserved unsafe.Pointer, NewState SPRULESTATE) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pReserved)), uintptr(NewState))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRuleIdState dispatches through ISpRecoGrammar's vtable slot 19.
-func (self *ISpRecoGrammar) SetRuleIdState(ulRuleId uint32, NewState SPRULESTATE) foundation.HRESULT {
+func (self *ISpRecoGrammar) SetRuleIdState(ulRuleId uint32, NewState SPRULESTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(ulRuleId), uintptr(NewState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadDictation dispatches through ISpRecoGrammar's vtable slot 20.
-func (self *ISpRecoGrammar) LoadDictation(pszTopicName foundation.PWSTR, Options SPLOADOPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszTopicName)), uintptr(Options))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoGrammar) LoadDictation(pszTopicName string, Options SPLOADOPTIONS) error {
+	_pszTopicName := win32.UTF16Ptr(pszTopicName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTopicName)), uintptr(Options))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnloadDictation dispatches through ISpRecoGrammar's vtable slot 21.
-func (self *ISpRecoGrammar) UnloadDictation() foundation.HRESULT {
+func (self *ISpRecoGrammar) UnloadDictation() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDictationState dispatches through ISpRecoGrammar's vtable slot 22.
-func (self *ISpRecoGrammar) SetDictationState(NewState SPRULESTATE) foundation.HRESULT {
+func (self *ISpRecoGrammar) SetDictationState(NewState SPRULESTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(NewState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWordSequenceData dispatches through ISpRecoGrammar's vtable slot 23.
-func (self *ISpRecoGrammar) SetWordSequenceData(pText foundation.PWSTR, cchText uint32, pInfo *SPTEXTSELECTIONINFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pText)), uintptr(cchText), uintptr(unsafe.Pointer(pInfo)))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoGrammar) SetWordSequenceData(pText string, cchText uint32, pInfo *SPTEXTSELECTIONINFO) error {
+	_pText := win32.UTF16Ptr(pText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pText)), uintptr(cchText), uintptr(unsafe.Pointer(pInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTextSelection dispatches through ISpRecoGrammar's vtable slot 24.
-func (self *ISpRecoGrammar) SetTextSelection(pInfo *SPTEXTSELECTIONINFO) foundation.HRESULT {
+func (self *ISpRecoGrammar) SetTextSelection(pInfo *SPTEXTSELECTIONINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsPronounceable dispatches through ISpRecoGrammar's vtable slot 25.
-func (self *ISpRecoGrammar) IsPronounceable(pszWord foundation.PWSTR, pWordPronounceable *SPWORDPRONOUNCEABLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszWord)), uintptr(unsafe.Pointer(pWordPronounceable)))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoGrammar) IsPronounceable(pszWord string, pWordPronounceable *SPWORDPRONOUNCEABLE) error {
+	_pszWord := win32.UTF16Ptr(pszWord)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszWord)), uintptr(unsafe.Pointer(pWordPronounceable)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGrammarState dispatches through ISpRecoGrammar's vtable slot 26.
-func (self *ISpRecoGrammar) SetGrammarState(eGrammarState SPGRAMMARSTATE) foundation.HRESULT {
+func (self *ISpRecoGrammar) SetGrammarState(eGrammarState SPGRAMMARSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(eGrammarState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveCmd dispatches through ISpRecoGrammar's vtable slot 27.
-func (self *ISpRecoGrammar) SaveCmd(pStream *systemcom.IStream, ppszCoMemErrorText *foundation.PWSTR) foundation.HRESULT {
+func (self *ISpRecoGrammar) SaveCmd(pStream *systemcom.IStream, ppszCoMemErrorText *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(ppszCoMemErrorText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGrammarState dispatches through ISpRecoGrammar's vtable slot 28.
-func (self *ISpRecoGrammar) GetGrammarState(peGrammarState *SPGRAMMARSTATE) foundation.HRESULT {
+func (self *ISpRecoGrammar) GetGrammarState(peGrammarState *SPGRAMMARSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peGrammarState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4b37bc9e-9ed6-44a3-93d3-18f022b79ec3
@@ -1409,39 +1485,45 @@ type ISpRecoGrammar2 struct {
 var IID_ISpRecoGrammar2 = win32.GUID{Data1: 0x4b37bc9e, Data2: 0x9ed6, Data3: 0x44a3, Data4: [8]byte{0x93, 0xd3, 0x18, 0xf0, 0x22, 0xb7, 0x9e, 0xc3}}
 
 // GetRules dispatches through ISpRecoGrammar2's vtable slot 3.
-func (self *ISpRecoGrammar2) GetRules(ppCoMemRules **SPRULE, puNumRules *uint32) foundation.HRESULT {
+func (self *ISpRecoGrammar2) GetRules(ppCoMemRules **SPRULE, puNumRules *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCoMemRules)), uintptr(unsafe.Pointer(puNumRules)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadCmdFromFile2 dispatches through ISpRecoGrammar2's vtable slot 4.
-func (self *ISpRecoGrammar2) LoadCmdFromFile2(pszFileName foundation.PWSTR, Options SPLOADOPTIONS, pszSharingUri foundation.PWSTR, pszBaseUri foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszFileName)), uintptr(Options), uintptr(unsafe.Pointer(pszSharingUri)), uintptr(unsafe.Pointer(pszBaseUri)))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoGrammar2) LoadCmdFromFile2(pszFileName string, Options SPLOADOPTIONS, pszSharingUri string, pszBaseUri string) error {
+	_pszFileName := win32.UTF16Ptr(pszFileName)
+	_pszSharingUri := win32.UTF16Ptr(pszSharingUri)
+	_pszBaseUri := win32.UTF16Ptr(pszBaseUri)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(Options), uintptr(unsafe.Pointer(_pszSharingUri)), uintptr(unsafe.Pointer(_pszBaseUri)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadCmdFromMemory2 dispatches through ISpRecoGrammar2's vtable slot 5.
-func (self *ISpRecoGrammar2) LoadCmdFromMemory2(pGrammar *SPBINARYGRAMMAR, Options SPLOADOPTIONS, pszSharingUri foundation.PWSTR, pszBaseUri foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGrammar)), uintptr(Options), uintptr(unsafe.Pointer(pszSharingUri)), uintptr(unsafe.Pointer(pszBaseUri)))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoGrammar2) LoadCmdFromMemory2(pGrammar *SPBINARYGRAMMAR, Options SPLOADOPTIONS, pszSharingUri string, pszBaseUri string) error {
+	_pszSharingUri := win32.UTF16Ptr(pszSharingUri)
+	_pszBaseUri := win32.UTF16Ptr(pszBaseUri)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGrammar)), uintptr(Options), uintptr(unsafe.Pointer(_pszSharingUri)), uintptr(unsafe.Pointer(_pszBaseUri)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRulePriority dispatches through ISpRecoGrammar2's vtable slot 6.
-func (self *ISpRecoGrammar2) SetRulePriority(pszRuleName foundation.PWSTR, ulRuleId uint32, nRulePriority int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszRuleName)), uintptr(ulRuleId), uintptr(nRulePriority))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoGrammar2) SetRulePriority(pszRuleName string, ulRuleId uint32, nRulePriority int32) error {
+	_pszRuleName := win32.UTF16Ptr(pszRuleName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRuleName)), uintptr(ulRuleId), uintptr(nRulePriority))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGrammarLoader dispatches through ISpRecoGrammar2's vtable slot 9.
-func (self *ISpRecoGrammar2) SetGrammarLoader(pLoader *ISpeechResourceLoader) foundation.HRESULT {
+func (self *ISpRecoGrammar2) SetGrammarLoader(pLoader *ISpeechResourceLoader) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLoader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSMLSecurityManager dispatches through ISpRecoGrammar2's vtable slot 10.
-func (self *ISpRecoGrammar2) SetSMLSecurityManager(pSMLSecurityManager *systemcomurlmon.IInternetSecurityManager) foundation.HRESULT {
+func (self *ISpRecoGrammar2) SetSMLSecurityManager(pSMLSecurityManager *systemcomurlmon.IInternetSecurityManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSMLSecurityManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 20b053be-e235-43cd-9a2a-8d17a48b7842
@@ -1453,45 +1535,45 @@ type ISpRecoResult struct {
 var IID_ISpRecoResult = win32.GUID{Data1: 0x20b053be, Data2: 0xe235, Data3: 0x43cd, Data4: [8]byte{0x9a, 0x2a, 0x8d, 0x17, 0xa4, 0x8b, 0x78, 0x42}}
 
 // GetResultTimes dispatches through ISpRecoResult's vtable slot 7.
-func (self *ISpRecoResult) GetResultTimes(pTimes *SPRECORESULTTIMES) foundation.HRESULT {
+func (self *ISpRecoResult) GetResultTimes(pTimes *SPRECORESULTTIMES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAlternates dispatches through ISpRecoResult's vtable slot 8.
-func (self *ISpRecoResult) GetAlternates(ulStartElement uint32, cElements uint32, ulRequestCount uint32, ppPhrases **ISpPhraseAlt, pcPhrasesReturned *uint32) foundation.HRESULT {
+func (self *ISpRecoResult) GetAlternates(ulStartElement uint32, cElements uint32, ulRequestCount uint32, ppPhrases **ISpPhraseAlt, pcPhrasesReturned *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulStartElement), uintptr(cElements), uintptr(ulRequestCount), uintptr(unsafe.Pointer(ppPhrases)), uintptr(unsafe.Pointer(pcPhrasesReturned)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAudio dispatches through ISpRecoResult's vtable slot 9.
-func (self *ISpRecoResult) GetAudio(ulStartElement uint32, cElements uint32, ppStream **ISpStreamFormat) foundation.HRESULT {
+func (self *ISpRecoResult) GetAudio(ulStartElement uint32, cElements uint32, ppStream **ISpStreamFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ulStartElement), uintptr(cElements), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SpeakAudio dispatches through ISpRecoResult's vtable slot 10.
-func (self *ISpRecoResult) SpeakAudio(ulStartElement uint32, cElements uint32, dwFlags uint32, pulStreamNumber *uint32) foundation.HRESULT {
+func (self *ISpRecoResult) SpeakAudio(ulStartElement uint32, cElements uint32, dwFlags uint32, pulStreamNumber *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ulStartElement), uintptr(cElements), uintptr(dwFlags), uintptr(unsafe.Pointer(pulStreamNumber)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Serialize dispatches through ISpRecoResult's vtable slot 11.
-func (self *ISpRecoResult) Serialize(ppCoMemSerializedResult **SPSERIALIZEDRESULT) foundation.HRESULT {
+func (self *ISpRecoResult) Serialize(ppCoMemSerializedResult **SPSERIALIZEDRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCoMemSerializedResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScaleAudio dispatches through ISpRecoResult's vtable slot 12.
-func (self *ISpRecoResult) ScaleAudio(pAudioFormatId *win32.GUID, pWaveFormatEx unsafe.Pointer) foundation.HRESULT {
+func (self *ISpRecoResult) ScaleAudio(pAudioFormatId *win32.GUID, pWaveFormatEx unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAudioFormatId)), uintptr(unsafe.Pointer(pWaveFormatEx)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecoContext dispatches through ISpRecoResult's vtable slot 13.
-func (self *ISpRecoResult) GetRecoContext(ppRecoContext **ISpRecoContext) foundation.HRESULT {
+func (self *ISpRecoResult) GetRecoContext(ppRecoContext **ISpRecoContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRecoContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 27cac6c4-88f2-41f2-8817-0c95e59f1e6e
@@ -1503,21 +1585,24 @@ type ISpRecoResult2 struct {
 var IID_ISpRecoResult2 = win32.GUID{Data1: 0x27cac6c4, Data2: 0x88f2, Data3: 0x41f2, Data4: [8]byte{0x88, 0x17, 0x0c, 0x95, 0xe5, 0x9f, 0x1e, 0x6e}}
 
 // CommitAlternate dispatches through ISpRecoResult2's vtable slot 14.
-func (self *ISpRecoResult2) CommitAlternate(pPhraseAlt *ISpPhraseAlt, ppNewResult **ISpRecoResult) foundation.HRESULT {
+func (self *ISpRecoResult2) CommitAlternate(pPhraseAlt *ISpPhraseAlt, ppNewResult **ISpRecoResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhraseAlt)), uintptr(unsafe.Pointer(ppNewResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CommitText dispatches through ISpRecoResult2's vtable slot 15.
-func (self *ISpRecoResult2) CommitText(ulStartElement uint32, cElements uint32, pszCorrectedData foundation.PWSTR, eCommitFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(ulStartElement), uintptr(cElements), uintptr(unsafe.Pointer(pszCorrectedData)), uintptr(eCommitFlags))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoResult2) CommitText(ulStartElement uint32, cElements uint32, pszCorrectedData string, eCommitFlags uint32) error {
+	_pszCorrectedData := win32.UTF16Ptr(pszCorrectedData)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(ulStartElement), uintptr(cElements), uintptr(unsafe.Pointer(_pszCorrectedData)), uintptr(eCommitFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTextFeedback dispatches through ISpRecoResult2's vtable slot 16.
-func (self *ISpRecoResult2) SetTextFeedback(pszFeedback foundation.PWSTR, fSuccessful foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszFeedback)), uintptr(fSuccessful))
-	return foundation.HRESULT(r1)
+func (self *ISpRecoResult2) SetTextFeedback(pszFeedback string, fSuccessful bool) error {
+	_pszFeedback := win32.UTF16Ptr(pszFeedback)
+	_fSuccessful := win32.Bool32(fSuccessful)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFeedback)), uintptr(_fSuccessful))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c2b5f241-daa0-4507-9e16-5a1eaa2b7a5c
@@ -1529,99 +1614,103 @@ type ISpRecognizer struct {
 var IID_ISpRecognizer = win32.GUID{Data1: 0xc2b5f241, Data2: 0xdaa0, Data3: 0x4507, Data4: [8]byte{0x9e, 0x16, 0x5a, 0x1e, 0xaa, 0x2b, 0x7a, 0x5c}}
 
 // SetRecognizer dispatches through ISpRecognizer's vtable slot 7.
-func (self *ISpRecognizer) SetRecognizer(pRecognizer *ISpObjectToken) foundation.HRESULT {
+func (self *ISpRecognizer) SetRecognizer(pRecognizer *ISpObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRecognizer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecognizer dispatches through ISpRecognizer's vtable slot 8.
-func (self *ISpRecognizer) GetRecognizer(ppRecognizer **ISpObjectToken) foundation.HRESULT {
+func (self *ISpRecognizer) GetRecognizer(ppRecognizer **ISpObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRecognizer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInput dispatches through ISpRecognizer's vtable slot 9.
-func (self *ISpRecognizer) SetInput(pUnkInput *systemcom.IUnknown, fAllowFormatChanges foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkInput)), uintptr(fAllowFormatChanges))
-	return foundation.HRESULT(r1)
+func (self *ISpRecognizer) SetInput(pUnkInput *systemcom.IUnknown, fAllowFormatChanges bool) error {
+	_fAllowFormatChanges := win32.Bool32(fAllowFormatChanges)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkInput)), uintptr(_fAllowFormatChanges))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputObjectToken dispatches through ISpRecognizer's vtable slot 10.
-func (self *ISpRecognizer) GetInputObjectToken(ppToken **ISpObjectToken) foundation.HRESULT {
+func (self *ISpRecognizer) GetInputObjectToken(ppToken **ISpObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputStream dispatches through ISpRecognizer's vtable slot 11.
-func (self *ISpRecognizer) GetInputStream(ppStream **ISpStreamFormat) foundation.HRESULT {
+func (self *ISpRecognizer) GetInputStream(ppStream **ISpStreamFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateRecoContext dispatches through ISpRecognizer's vtable slot 12.
-func (self *ISpRecognizer) CreateRecoContext(ppNewCtxt **ISpRecoContext) foundation.HRESULT {
+func (self *ISpRecognizer) CreateRecoContext(ppNewCtxt **ISpRecoContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNewCtxt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecoProfile dispatches through ISpRecognizer's vtable slot 13.
-func (self *ISpRecognizer) GetRecoProfile(ppToken **ISpObjectToken) foundation.HRESULT {
+func (self *ISpRecognizer) GetRecoProfile(ppToken **ISpObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRecoProfile dispatches through ISpRecognizer's vtable slot 14.
-func (self *ISpRecognizer) SetRecoProfile(pToken *ISpObjectToken) foundation.HRESULT {
+func (self *ISpRecognizer) SetRecoProfile(pToken *ISpObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsSharedInstance dispatches through ISpRecognizer's vtable slot 15.
-func (self *ISpRecognizer) IsSharedInstance() foundation.HRESULT {
+func (self *ISpRecognizer) IsSharedInstance() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecoState dispatches through ISpRecognizer's vtable slot 16.
-func (self *ISpRecognizer) GetRecoState(pState *SPRECOSTATE) foundation.HRESULT {
+func (self *ISpRecognizer) GetRecoState(pState *SPRECOSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRecoState dispatches through ISpRecognizer's vtable slot 17.
-func (self *ISpRecognizer) SetRecoState(NewState SPRECOSTATE) foundation.HRESULT {
+func (self *ISpRecognizer) SetRecoState(NewState SPRECOSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(NewState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through ISpRecognizer's vtable slot 18.
-func (self *ISpRecognizer) GetStatus(pStatus *SPRECOGNIZERSTATUS) foundation.HRESULT {
+func (self *ISpRecognizer) GetStatus(pStatus *SPRECOGNIZERSTATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFormat dispatches through ISpRecognizer's vtable slot 19.
-func (self *ISpRecognizer) GetFormat(WaveFormatType SPSTREAMFORMATTYPE, pFormatId *win32.GUID, ppCoMemWFEX *unsafe.Pointer) foundation.HRESULT {
+func (self *ISpRecognizer) GetFormat(WaveFormatType SPSTREAMFORMATTYPE, pFormatId *win32.GUID, ppCoMemWFEX *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(WaveFormatType), uintptr(unsafe.Pointer(pFormatId)), uintptr(unsafe.Pointer(ppCoMemWFEX)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsUISupported dispatches through ISpRecognizer's vtable slot 20.
-func (self *ISpRecognizer) IsUISupported(pszTypeOfUI foundation.PWSTR, pvExtraData unsafe.Pointer, cbExtraData uint32, pfSupported *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(pfSupported)))
-	return foundation.HRESULT(r1)
+func (self *ISpRecognizer) IsUISupported(pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, pfSupported *foundation.BOOL) error {
+	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(pfSupported)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisplayUI dispatches through ISpRecognizer's vtable slot 21.
-func (self *ISpRecognizer) DisplayUI(hwndParent foundation.HWND, pszTitle foundation.PWSTR, pszTypeOfUI foundation.PWSTR, pvExtraData unsafe.Pointer, cbExtraData uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(pszTitle)), uintptr(unsafe.Pointer(pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData))
-	return foundation.HRESULT(r1)
+func (self *ISpRecognizer) DisplayUI(hwndParent foundation.HWND, pszTitle string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32) error {
+	_pszTitle := win32.UTF16Ptr(pszTitle)
+	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(_pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EmulateRecognition dispatches through ISpRecognizer's vtable slot 22.
-func (self *ISpRecognizer) EmulateRecognition(pPhrase *ISpPhrase) foundation.HRESULT {
+func (self *ISpRecognizer) EmulateRecognition(pPhrase *ISpPhrase) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhrase)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8fc6d974-c81e-4098-93c5-0147f61ed4d3
@@ -1633,21 +1722,23 @@ type ISpRecognizer2 struct {
 var IID_ISpRecognizer2 = win32.GUID{Data1: 0x8fc6d974, Data2: 0xc81e, Data3: 0x4098, Data4: [8]byte{0x93, 0xc5, 0x01, 0x47, 0xf6, 0x1e, 0xd4, 0xd3}}
 
 // EmulateRecognitionEx dispatches through ISpRecognizer2's vtable slot 3.
-func (self *ISpRecognizer2) EmulateRecognitionEx(pPhrase *ISpPhrase, dwCompareFlags uint32) foundation.HRESULT {
+func (self *ISpRecognizer2) EmulateRecognitionEx(pPhrase *ISpPhrase, dwCompareFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhrase)), uintptr(dwCompareFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTrainingState dispatches through ISpRecognizer2's vtable slot 4.
-func (self *ISpRecognizer2) SetTrainingState(fDoingTraining foundation.BOOL, fAdaptFromTrainingData foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fDoingTraining), uintptr(fAdaptFromTrainingData))
-	return foundation.HRESULT(r1)
+func (self *ISpRecognizer2) SetTrainingState(fDoingTraining bool, fAdaptFromTrainingData bool) error {
+	_fDoingTraining := win32.Bool32(fDoingTraining)
+	_fAdaptFromTrainingData := win32.Bool32(fAdaptFromTrainingData)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fDoingTraining), uintptr(_fAdaptFromTrainingData))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResetAcousticModelAdaptation dispatches through ISpRecognizer2's vtable slot 5.
-func (self *ISpRecognizer2) ResetAcousticModelAdaptation() foundation.HRESULT {
+func (self *ISpRecognizer2) ResetAcousticModelAdaptation() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 92a66e2b-c830-4149-83df-6fc2ba1e7a5b
@@ -1659,9 +1750,10 @@ type ISpRegDataKey struct {
 var IID_ISpRegDataKey = win32.GUID{Data1: 0x92a66e2b, Data2: 0xc830, Data3: 0x4149, Data4: [8]byte{0x83, 0xdf, 0x6f, 0xc2, 0xba, 0x1e, 0x7a, 0x5b}}
 
 // SetKey dispatches through ISpRegDataKey's vtable slot 15.
-func (self *ISpRegDataKey) SetKey(hkey systemregistry.HKEY, fReadOnly foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hkey), uintptr(fReadOnly))
-	return foundation.HRESULT(r1)
+func (self *ISpRegDataKey) SetKey(hkey systemregistry.HKEY, fReadOnly bool) error {
+	_fReadOnly := win32.Bool32(fReadOnly)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hkey), uintptr(_fReadOnly))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 93384e18-5014-43d5-adbb-a78e055926bd
@@ -1673,15 +1765,16 @@ type ISpResourceManager struct {
 var IID_ISpResourceManager = win32.GUID{Data1: 0x93384e18, Data2: 0x5014, Data3: 0x43d5, Data4: [8]byte{0xad, 0xbb, 0xa7, 0x8e, 0x05, 0x59, 0x26, 0xbd}}
 
 // SetObject dispatches through ISpResourceManager's vtable slot 4.
-func (self *ISpResourceManager) SetObject(guidServiceId *win32.GUID, pUnkObject *systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpResourceManager) SetObject(guidServiceId *win32.GUID, pUnkObject *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidServiceId)), uintptr(unsafe.Pointer(pUnkObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetObject dispatches through ISpResourceManager's vtable slot 5.
-func (self *ISpResourceManager) GetObject(guidServiceId *win32.GUID, ObjectCLSID *win32.GUID, ObjectIID *win32.GUID, fReleaseWhenLastExternalRefReleased foundation.BOOL, ppObject *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidServiceId)), uintptr(unsafe.Pointer(ObjectCLSID)), uintptr(unsafe.Pointer(ObjectIID)), uintptr(fReleaseWhenLastExternalRefReleased), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+func (self *ISpResourceManager) GetObject(guidServiceId *win32.GUID, ObjectCLSID *win32.GUID, ObjectIID *win32.GUID, fReleaseWhenLastExternalRefReleased bool, ppObject *unsafe.Pointer) error {
+	_fReleaseWhenLastExternalRefReleased := win32.Bool32(fReleaseWhenLastExternalRefReleased)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidServiceId)), uintptr(unsafe.Pointer(ObjectCLSID)), uintptr(unsafe.Pointer(ObjectIID)), uintptr(_fReleaseWhenLastExternalRefReleased), uintptr(unsafe.Pointer(ppObject)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: fece8294-2be1-408f-8e68-2de377092f0e
@@ -1693,15 +1786,15 @@ type ISpSRAlternates struct {
 var IID_ISpSRAlternates = win32.GUID{Data1: 0xfece8294, Data2: 0x2be1, Data3: 0x408f, Data4: [8]byte{0x8e, 0x68, 0x2d, 0xe3, 0x77, 0x09, 0x2f, 0x0e}}
 
 // GetAlternates dispatches through ISpSRAlternates's vtable slot 3.
-func (self *ISpSRAlternates) GetAlternates(pAltRequest *SPPHRASEALTREQUEST, ppAlts **SPPHRASEALT, pcAlts *uint32) foundation.HRESULT {
+func (self *ISpSRAlternates) GetAlternates(pAltRequest *SPPHRASEALTREQUEST, ppAlts **SPPHRASEALT, pcAlts *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAltRequest)), uintptr(unsafe.Pointer(ppAlts)), uintptr(unsafe.Pointer(pcAlts)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Commit dispatches through ISpSRAlternates's vtable slot 4.
-func (self *ISpSRAlternates) Commit(pAltRequest *SPPHRASEALTREQUEST, pAlt *SPPHRASEALT, ppvResultExtra *unsafe.Pointer, pcbResultExtra *uint32) foundation.HRESULT {
+func (self *ISpSRAlternates) Commit(pAltRequest *SPPHRASEALTREQUEST, pAlt *SPPHRASEALT, ppvResultExtra *unsafe.Pointer, pcbResultExtra *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAltRequest)), uintptr(unsafe.Pointer(pAlt)), uintptr(unsafe.Pointer(ppvResultExtra)), uintptr(unsafe.Pointer(pcbResultExtra)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f338f437-cb33-4020-9cab-c71ff9ce12d3
@@ -1713,9 +1806,10 @@ type ISpSRAlternates2 struct {
 var IID_ISpSRAlternates2 = win32.GUID{Data1: 0xf338f437, Data2: 0xcb33, Data3: 0x4020, Data4: [8]byte{0x9c, 0xab, 0xc7, 0x1f, 0xf9, 0xce, 0x12, 0xd3}}
 
 // CommitText dispatches through ISpSRAlternates2's vtable slot 5.
-func (self *ISpSRAlternates2) CommitText(pAltRequest *SPPHRASEALTREQUEST, pcszNewText foundation.PWSTR, commitFlags SPCOMMITFLAGS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAltRequest)), uintptr(unsafe.Pointer(pcszNewText)), uintptr(commitFlags))
-	return foundation.HRESULT(r1)
+func (self *ISpSRAlternates2) CommitText(pAltRequest *SPPHRASEALTREQUEST, pcszNewText string, commitFlags SPCOMMITFLAGS) error {
+	_pcszNewText := win32.UTF16Ptr(pcszNewText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAltRequest)), uintptr(unsafe.Pointer(_pcszNewText)), uintptr(commitFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2f472991-854b-4465-b613-fbafb3ad8ed8
@@ -1727,177 +1821,190 @@ type ISpSREngine struct {
 var IID_ISpSREngine = win32.GUID{Data1: 0x2f472991, Data2: 0x854b, Data3: 0x4465, Data4: [8]byte{0xb6, 0x13, 0xfb, 0xaf, 0xb3, 0xad, 0x8e, 0xd8}}
 
 // SetSite dispatches through ISpSREngine's vtable slot 3.
-func (self *ISpSREngine) SetSite(pSite *ISpSREngineSite) foundation.HRESULT {
+func (self *ISpSREngine) SetSite(pSite *ISpSREngineSite) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSite)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputAudioFormat dispatches through ISpSREngine's vtable slot 4.
-func (self *ISpSREngine) GetInputAudioFormat(pguidSourceFormatId *win32.GUID, pSourceWaveFormatEx unsafe.Pointer, pguidDesiredFormatId *win32.GUID, ppCoMemDesiredWaveFormatEx *unsafe.Pointer) foundation.HRESULT {
+func (self *ISpSREngine) GetInputAudioFormat(pguidSourceFormatId *win32.GUID, pSourceWaveFormatEx unsafe.Pointer, pguidDesiredFormatId *win32.GUID, ppCoMemDesiredWaveFormatEx *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidSourceFormatId)), uintptr(unsafe.Pointer(pSourceWaveFormatEx)), uintptr(unsafe.Pointer(pguidDesiredFormatId)), uintptr(unsafe.Pointer(ppCoMemDesiredWaveFormatEx)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RecognizeStream dispatches through ISpSREngine's vtable slot 5.
-func (self *ISpSREngine) RecognizeStream(rguidFmtId *win32.GUID, pWaveFormatEx unsafe.Pointer, hRequestSync foundation.HANDLE, hDataAvailable foundation.HANDLE, hExit foundation.HANDLE, fNewAudioStream foundation.BOOL, fRealTimeAudio foundation.BOOL, pAudioObjectToken *ISpObjectToken) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidFmtId)), uintptr(unsafe.Pointer(pWaveFormatEx)), uintptr(hRequestSync), uintptr(hDataAvailable), uintptr(hExit), uintptr(fNewAudioStream), uintptr(fRealTimeAudio), uintptr(unsafe.Pointer(pAudioObjectToken)))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngine) RecognizeStream(rguidFmtId *win32.GUID, pWaveFormatEx unsafe.Pointer, hRequestSync foundation.HANDLE, hDataAvailable foundation.HANDLE, hExit foundation.HANDLE, fNewAudioStream bool, fRealTimeAudio bool, pAudioObjectToken *ISpObjectToken) error {
+	_fNewAudioStream := win32.Bool32(fNewAudioStream)
+	_fRealTimeAudio := win32.Bool32(fRealTimeAudio)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidFmtId)), uintptr(unsafe.Pointer(pWaveFormatEx)), uintptr(hRequestSync), uintptr(hDataAvailable), uintptr(hExit), uintptr(_fNewAudioStream), uintptr(_fRealTimeAudio), uintptr(unsafe.Pointer(pAudioObjectToken)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRecoProfile dispatches through ISpSREngine's vtable slot 6.
-func (self *ISpSREngine) SetRecoProfile(pProfile *ISpObjectToken) foundation.HRESULT {
+func (self *ISpSREngine) SetRecoProfile(pProfile *ISpObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnCreateGrammar dispatches through ISpSREngine's vtable slot 7.
-func (self *ISpSREngine) OnCreateGrammar(pvEngineRecoContext unsafe.Pointer, hSAPIGrammar SPGRAMMARHANDLE, ppvEngineGrammarContext *unsafe.Pointer) foundation.HRESULT {
+func (self *ISpSREngine) OnCreateGrammar(pvEngineRecoContext unsafe.Pointer, hSAPIGrammar SPGRAMMARHANDLE, ppvEngineGrammarContext *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineRecoContext)), uintptr(hSAPIGrammar), uintptr(unsafe.Pointer(ppvEngineGrammarContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDeleteGrammar dispatches through ISpSREngine's vtable slot 8.
-func (self *ISpSREngine) OnDeleteGrammar(pvEngineGrammar unsafe.Pointer) foundation.HRESULT {
+func (self *ISpSREngine) OnDeleteGrammar(pvEngineGrammar unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadProprietaryGrammar dispatches through ISpSREngine's vtable slot 9.
-func (self *ISpSREngine) LoadProprietaryGrammar(pvEngineGrammar unsafe.Pointer, rguidParam *win32.GUID, pszStringParam foundation.PWSTR, pvDataParam unsafe.Pointer, ulDataSize uint32, Options SPLOADOPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(rguidParam)), uintptr(unsafe.Pointer(pszStringParam)), uintptr(unsafe.Pointer(pvDataParam)), uintptr(ulDataSize), uintptr(Options))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngine) LoadProprietaryGrammar(pvEngineGrammar unsafe.Pointer, rguidParam *win32.GUID, pszStringParam string, pvDataParam unsafe.Pointer, ulDataSize uint32, Options SPLOADOPTIONS) error {
+	_pszStringParam := win32.UTF16Ptr(pszStringParam)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(rguidParam)), uintptr(unsafe.Pointer(_pszStringParam)), uintptr(unsafe.Pointer(pvDataParam)), uintptr(ulDataSize), uintptr(Options))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnloadProprietaryGrammar dispatches through ISpSREngine's vtable slot 10.
-func (self *ISpSREngine) UnloadProprietaryGrammar(pvEngineGrammar unsafe.Pointer) foundation.HRESULT {
+func (self *ISpSREngine) UnloadProprietaryGrammar(pvEngineGrammar unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProprietaryRuleState dispatches through ISpSREngine's vtable slot 11.
-func (self *ISpSREngine) SetProprietaryRuleState(pvEngineGrammar unsafe.Pointer, pszName foundation.PWSTR, pReserved unsafe.Pointer, NewState SPRULESTATE, pcRulesChanged *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pReserved)), uintptr(NewState), uintptr(unsafe.Pointer(pcRulesChanged)))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngine) SetProprietaryRuleState(pvEngineGrammar unsafe.Pointer, pszName string, pReserved unsafe.Pointer, NewState SPRULESTATE, pcRulesChanged *uint32) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pReserved)), uintptr(NewState), uintptr(unsafe.Pointer(pcRulesChanged)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProprietaryRuleIdState dispatches through ISpSREngine's vtable slot 12.
-func (self *ISpSREngine) SetProprietaryRuleIdState(pvEngineGrammar unsafe.Pointer, dwRuleId uint32, NewState SPRULESTATE) foundation.HRESULT {
+func (self *ISpSREngine) SetProprietaryRuleIdState(pvEngineGrammar unsafe.Pointer, dwRuleId uint32, NewState SPRULESTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(dwRuleId), uintptr(NewState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadSLM dispatches through ISpSREngine's vtable slot 13.
-func (self *ISpSREngine) LoadSLM(pvEngineGrammar unsafe.Pointer, pszTopicName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(pszTopicName)))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngine) LoadSLM(pvEngineGrammar unsafe.Pointer, pszTopicName string) error {
+	_pszTopicName := win32.UTF16Ptr(pszTopicName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(_pszTopicName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnloadSLM dispatches through ISpSREngine's vtable slot 14.
-func (self *ISpSREngine) UnloadSLM(pvEngineGrammar unsafe.Pointer) foundation.HRESULT {
+func (self *ISpSREngine) UnloadSLM(pvEngineGrammar unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSLMState dispatches through ISpSREngine's vtable slot 15.
-func (self *ISpSREngine) SetSLMState(pvEngineGrammar unsafe.Pointer, NewState SPRULESTATE) foundation.HRESULT {
+func (self *ISpSREngine) SetSLMState(pvEngineGrammar unsafe.Pointer, NewState SPRULESTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(NewState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWordSequenceData dispatches through ISpSREngine's vtable slot 16.
-func (self *ISpSREngine) SetWordSequenceData(pvEngineGrammar unsafe.Pointer, pText foundation.PWSTR, cchText uint32, pInfo *SPTEXTSELECTIONINFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(pText)), uintptr(cchText), uintptr(unsafe.Pointer(pInfo)))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngine) SetWordSequenceData(pvEngineGrammar unsafe.Pointer, pText string, cchText uint32, pInfo *SPTEXTSELECTIONINFO) error {
+	_pText := win32.UTF16Ptr(pText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(_pText)), uintptr(cchText), uintptr(unsafe.Pointer(pInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTextSelection dispatches through ISpSREngine's vtable slot 17.
-func (self *ISpSREngine) SetTextSelection(pvEngineGrammar unsafe.Pointer, pInfo *SPTEXTSELECTIONINFO) foundation.HRESULT {
+func (self *ISpSREngine) SetTextSelection(pvEngineGrammar unsafe.Pointer, pInfo *SPTEXTSELECTIONINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(pInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsPronounceable dispatches through ISpSREngine's vtable slot 18.
-func (self *ISpSREngine) IsPronounceable(pvEngineGrammar unsafe.Pointer, pszWord foundation.PWSTR, pWordPronounceable *SPWORDPRONOUNCEABLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(pszWord)), uintptr(unsafe.Pointer(pWordPronounceable)))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngine) IsPronounceable(pvEngineGrammar unsafe.Pointer, pszWord string, pWordPronounceable *SPWORDPRONOUNCEABLE) error {
+	_pszWord := win32.UTF16Ptr(pszWord)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(_pszWord)), uintptr(unsafe.Pointer(pWordPronounceable)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnCreateRecoContext dispatches through ISpSREngine's vtable slot 19.
-func (self *ISpSREngine) OnCreateRecoContext(hSAPIRecoContext SPRECOCONTEXTHANDLE, ppvEngineContext *unsafe.Pointer) foundation.HRESULT {
+func (self *ISpSREngine) OnCreateRecoContext(hSAPIRecoContext SPRECOCONTEXTHANDLE, ppvEngineContext *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(hSAPIRecoContext), uintptr(unsafe.Pointer(ppvEngineContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDeleteRecoContext dispatches through ISpSREngine's vtable slot 20.
-func (self *ISpSREngine) OnDeleteRecoContext(pvEngineContext unsafe.Pointer) foundation.HRESULT {
+func (self *ISpSREngine) OnDeleteRecoContext(pvEngineContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrivateCall dispatches through ISpSREngine's vtable slot 21.
-func (self *ISpSREngine) PrivateCall(pvEngineContext unsafe.Pointer, pCallFrame unsafe.Pointer, ulCallFrameSize uint32) foundation.HRESULT {
+func (self *ISpSREngine) PrivateCall(pvEngineContext unsafe.Pointer, pCallFrame unsafe.Pointer, ulCallFrameSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineContext)), uintptr(unsafe.Pointer(pCallFrame)), uintptr(ulCallFrameSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAdaptationData dispatches through ISpSREngine's vtable slot 22.
-func (self *ISpSREngine) SetAdaptationData(pvEngineContext unsafe.Pointer, pAdaptationData foundation.PWSTR, cch uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineContext)), uintptr(unsafe.Pointer(pAdaptationData)), uintptr(cch))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngine) SetAdaptationData(pvEngineContext unsafe.Pointer, pAdaptationData string, cch uint32) error {
+	_pAdaptationData := win32.UTF16Ptr(pAdaptationData)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineContext)), uintptr(unsafe.Pointer(_pAdaptationData)), uintptr(cch))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPropertyNum dispatches through ISpSREngine's vtable slot 23.
-func (self *ISpSREngine) SetPropertyNum(eSrc SPPROPSRC, pvSrcObj unsafe.Pointer, pName foundation.PWSTR, lValue int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(eSrc), uintptr(unsafe.Pointer(pvSrcObj)), uintptr(unsafe.Pointer(pName)), uintptr(lValue))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngine) SetPropertyNum(eSrc SPPROPSRC, pvSrcObj unsafe.Pointer, pName string, lValue int32) error {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(eSrc), uintptr(unsafe.Pointer(pvSrcObj)), uintptr(unsafe.Pointer(_pName)), uintptr(lValue))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyNum dispatches through ISpSREngine's vtable slot 24.
-func (self *ISpSREngine) GetPropertyNum(eSrc SPPROPSRC, pvSrcObj unsafe.Pointer, pName foundation.PWSTR, lValue *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(eSrc), uintptr(unsafe.Pointer(pvSrcObj)), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(lValue)))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngine) GetPropertyNum(eSrc SPPROPSRC, pvSrcObj unsafe.Pointer, pName string, lValue *int32) error {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(eSrc), uintptr(unsafe.Pointer(pvSrcObj)), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(lValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPropertyString dispatches through ISpSREngine's vtable slot 25.
-func (self *ISpSREngine) SetPropertyString(eSrc SPPROPSRC, pvSrcObj unsafe.Pointer, pName foundation.PWSTR, pValue foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(eSrc), uintptr(unsafe.Pointer(pvSrcObj)), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngine) SetPropertyString(eSrc SPPROPSRC, pvSrcObj unsafe.Pointer, pName string, pValue string) error {
+	_pName := win32.UTF16Ptr(pName)
+	_pValue := win32.UTF16Ptr(pValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(eSrc), uintptr(unsafe.Pointer(pvSrcObj)), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyString dispatches through ISpSREngine's vtable slot 26.
-func (self *ISpSREngine) GetPropertyString(eSrc SPPROPSRC, pvSrcObj unsafe.Pointer, pName foundation.PWSTR, ppCoMemValue *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(eSrc), uintptr(unsafe.Pointer(pvSrcObj)), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(ppCoMemValue)))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngine) GetPropertyString(eSrc SPPROPSRC, pvSrcObj unsafe.Pointer, pName string, ppCoMemValue *foundation.PWSTR) error {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(eSrc), uintptr(unsafe.Pointer(pvSrcObj)), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(ppCoMemValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGrammarState dispatches through ISpSREngine's vtable slot 27.
-func (self *ISpSREngine) SetGrammarState(pvEngineGrammar unsafe.Pointer, eGrammarState SPGRAMMARSTATE) foundation.HRESULT {
+func (self *ISpSREngine) SetGrammarState(pvEngineGrammar unsafe.Pointer, eGrammarState SPGRAMMARSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(eGrammarState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WordNotify dispatches through ISpSREngine's vtable slot 28.
-func (self *ISpSREngine) WordNotify(Action SPCFGNOTIFY, cWords uint32, pWords *SPWORDENTRY) foundation.HRESULT {
+func (self *ISpSREngine) WordNotify(Action SPCFGNOTIFY, cWords uint32, pWords *SPWORDENTRY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Action), uintptr(cWords), uintptr(unsafe.Pointer(pWords)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RuleNotify dispatches through ISpSREngine's vtable slot 29.
-func (self *ISpSREngine) RuleNotify(Action SPCFGNOTIFY, cRules uint32, pRules *SPRULEENTRY) foundation.HRESULT {
+func (self *ISpSREngine) RuleNotify(Action SPCFGNOTIFY, cRules uint32, pRules *SPRULEENTRY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Action), uintptr(cRules), uintptr(unsafe.Pointer(pRules)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrivateCallEx dispatches through ISpSREngine's vtable slot 30.
-func (self *ISpSREngine) PrivateCallEx(pvEngineContext unsafe.Pointer, pInCallFrame unsafe.Pointer, ulInCallFrameSize uint32, ppvCoMemResponse *unsafe.Pointer, pulResponseSize *uint32) foundation.HRESULT {
+func (self *ISpSREngine) PrivateCallEx(pvEngineContext unsafe.Pointer, pInCallFrame unsafe.Pointer, ulInCallFrameSize uint32, ppvCoMemResponse *unsafe.Pointer, pulResponseSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineContext)), uintptr(unsafe.Pointer(pInCallFrame)), uintptr(ulInCallFrameSize), uintptr(unsafe.Pointer(ppvCoMemResponse)), uintptr(unsafe.Pointer(pulResponseSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetContextState dispatches through ISpSREngine's vtable slot 31.
-func (self *ISpSREngine) SetContextState(pvEngineContext unsafe.Pointer, eContextState SPCONTEXTSTATE) foundation.HRESULT {
+func (self *ISpSREngine) SetContextState(pvEngineContext unsafe.Pointer, eContextState SPCONTEXTSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineContext)), uintptr(eContextState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7ba627d8-33f9-4375-90c5-9985aee5ede5
@@ -1909,57 +2016,63 @@ type ISpSREngine2 struct {
 var IID_ISpSREngine2 = win32.GUID{Data1: 0x7ba627d8, Data2: 0x33f9, Data3: 0x4375, Data4: [8]byte{0x90, 0xc5, 0x99, 0x85, 0xae, 0xe5, 0xed, 0xe5}}
 
 // PrivateCallImmediate dispatches through ISpSREngine2's vtable slot 32.
-func (self *ISpSREngine2) PrivateCallImmediate(pvEngineContext unsafe.Pointer, pInCallFrame unsafe.Pointer, ulInCallFrameSize uint32, ppvCoMemResponse *unsafe.Pointer, pulResponseSize *uint32) foundation.HRESULT {
+func (self *ISpSREngine2) PrivateCallImmediate(pvEngineContext unsafe.Pointer, pInCallFrame unsafe.Pointer, ulInCallFrameSize uint32, ppvCoMemResponse *unsafe.Pointer, pulResponseSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineContext)), uintptr(unsafe.Pointer(pInCallFrame)), uintptr(ulInCallFrameSize), uintptr(unsafe.Pointer(ppvCoMemResponse)), uintptr(unsafe.Pointer(pulResponseSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAdaptationData2 dispatches through ISpSREngine2's vtable slot 33.
-func (self *ISpSREngine2) SetAdaptationData2(pvEngineContext unsafe.Pointer, pAdaptationData foundation.PWSTR, cch uint32, pTopicName foundation.PWSTR, eSettings SPADAPTATIONSETTINGS, eRelevance SPADAPTATIONRELEVANCE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineContext)), uintptr(unsafe.Pointer(pAdaptationData)), uintptr(cch), uintptr(unsafe.Pointer(pTopicName)), uintptr(eSettings), uintptr(eRelevance))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngine2) SetAdaptationData2(pvEngineContext unsafe.Pointer, pAdaptationData string, cch uint32, pTopicName string, eSettings SPADAPTATIONSETTINGS, eRelevance SPADAPTATIONRELEVANCE) error {
+	_pAdaptationData := win32.UTF16Ptr(pAdaptationData)
+	_pTopicName := win32.UTF16Ptr(pTopicName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineContext)), uintptr(unsafe.Pointer(_pAdaptationData)), uintptr(cch), uintptr(unsafe.Pointer(_pTopicName)), uintptr(eSettings), uintptr(eRelevance))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGrammarPrefix dispatches through ISpSREngine2's vtable slot 34.
-func (self *ISpSREngine2) SetGrammarPrefix(pvEngineGrammar unsafe.Pointer, pszPrefix foundation.PWSTR, fIsPrefixRequired foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(pszPrefix)), uintptr(fIsPrefixRequired))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngine2) SetGrammarPrefix(pvEngineGrammar unsafe.Pointer, pszPrefix string, fIsPrefixRequired bool) error {
+	_pszPrefix := win32.UTF16Ptr(pszPrefix)
+	_fIsPrefixRequired := win32.Bool32(fIsPrefixRequired)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(_pszPrefix)), uintptr(_fIsPrefixRequired))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRulePriority dispatches through ISpSREngine2's vtable slot 35.
-func (self *ISpSREngine2) SetRulePriority(hRule SPRULEHANDLE, pvClientRuleContext unsafe.Pointer, nRulePriority int32) foundation.HRESULT {
+func (self *ISpSREngine2) SetRulePriority(hRule SPRULEHANDLE, pvClientRuleContext unsafe.Pointer, nRulePriority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(hRule), uintptr(unsafe.Pointer(pvClientRuleContext)), uintptr(nRulePriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EmulateRecognition dispatches through ISpSREngine2's vtable slot 36.
-func (self *ISpSREngine2) EmulateRecognition(pPhrase *ISpPhrase, dwCompareFlags uint32) foundation.HRESULT {
+func (self *ISpSREngine2) EmulateRecognition(pPhrase *ISpPhrase, dwCompareFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhrase)), uintptr(dwCompareFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTrainingState dispatches through ISpSREngine2's vtable slot 39.
-func (self *ISpSREngine2) SetTrainingState(fDoingTraining foundation.BOOL, fAdaptFromTrainingData foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(fDoingTraining), uintptr(fAdaptFromTrainingData))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngine2) SetTrainingState(fDoingTraining bool, fAdaptFromTrainingData bool) error {
+	_fDoingTraining := win32.Bool32(fDoingTraining)
+	_fAdaptFromTrainingData := win32.Bool32(fAdaptFromTrainingData)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(_fDoingTraining), uintptr(_fAdaptFromTrainingData))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResetAcousticModelAdaptation dispatches through ISpSREngine2's vtable slot 40.
-func (self *ISpSREngine2) ResetAcousticModelAdaptation() foundation.HRESULT {
+func (self *ISpSREngine2) ResetAcousticModelAdaptation() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnLoadCFG dispatches through ISpSREngine2's vtable slot 41.
-func (self *ISpSREngine2) OnLoadCFG(pvEngineGrammar unsafe.Pointer, pGrammarData *SPBINARYGRAMMAR, ulGrammarID uint32) foundation.HRESULT {
+func (self *ISpSREngine2) OnLoadCFG(pvEngineGrammar unsafe.Pointer, pGrammarData *SPBINARYGRAMMAR, ulGrammarID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(unsafe.Pointer(pGrammarData)), uintptr(ulGrammarID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnUnloadCFG dispatches through ISpSREngine2's vtable slot 42.
-func (self *ISpSREngine2) OnUnloadCFG(pvEngineGrammar unsafe.Pointer, ulGrammarID uint32) foundation.HRESULT {
+func (self *ISpSREngine2) OnUnloadCFG(pvEngineGrammar unsafe.Pointer, ulGrammarID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvEngineGrammar)), uintptr(ulGrammarID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3b414aec-720c-4883-b9ef-178cd394fb3a
@@ -1971,111 +2084,112 @@ type ISpSREngineSite struct {
 var IID_ISpSREngineSite = win32.GUID{Data1: 0x3b414aec, Data2: 0x720c, Data3: 0x4883, Data4: [8]byte{0xb9, 0xef, 0x17, 0x8c, 0xd3, 0x94, 0xfb, 0x3a}}
 
 // Read dispatches through ISpSREngineSite's vtable slot 3.
-func (self *ISpSREngineSite) Read(pv unsafe.Pointer, cb uint32, pcbRead *uint32) foundation.HRESULT {
+func (self *ISpSREngineSite) Read(pv unsafe.Pointer, cb uint32, pcbRead *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pv)), uintptr(cb), uintptr(unsafe.Pointer(pcbRead)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DataAvailable dispatches through ISpSREngineSite's vtable slot 4.
-func (self *ISpSREngineSite) DataAvailable(pcb *uint32) foundation.HRESULT {
+func (self *ISpSREngineSite) DataAvailable(pcb *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBufferNotifySize dispatches through ISpSREngineSite's vtable slot 5.
-func (self *ISpSREngineSite) SetBufferNotifySize(cbSize uint32) foundation.HRESULT {
+func (self *ISpSREngineSite) SetBufferNotifySize(cbSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cbSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ParseFromTransitions dispatches through ISpSREngineSite's vtable slot 6.
-func (self *ISpSREngineSite) ParseFromTransitions(pParseInfo *SPPARSEINFO, ppNewPhrase **ISpPhraseBuilder) foundation.HRESULT {
+func (self *ISpSREngineSite) ParseFromTransitions(pParseInfo *SPPARSEINFO, ppNewPhrase **ISpPhraseBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParseInfo)), uintptr(unsafe.Pointer(ppNewPhrase)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Recognition dispatches through ISpSREngineSite's vtable slot 7.
-func (self *ISpSREngineSite) Recognition(pResultInfo *SPRECORESULTINFO) foundation.HRESULT {
+func (self *ISpSREngineSite) Recognition(pResultInfo *SPRECORESULTINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResultInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddEvent dispatches through ISpSREngineSite's vtable slot 8.
-func (self *ISpSREngineSite) AddEvent(pEvent *SPEVENT, hSAPIRecoContext SPRECOCONTEXTHANDLE) foundation.HRESULT {
+func (self *ISpSREngineSite) AddEvent(pEvent *SPEVENT, hSAPIRecoContext SPRECOCONTEXTHANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)), uintptr(hSAPIRecoContext))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Synchronize dispatches through ISpSREngineSite's vtable slot 9.
-func (self *ISpSREngineSite) Synchronize(ullProcessedThruPos uint64) foundation.HRESULT {
+func (self *ISpSREngineSite) Synchronize(ullProcessedThruPos uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ullProcessedThruPos))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWordInfo dispatches through ISpSREngineSite's vtable slot 10.
-func (self *ISpSREngineSite) GetWordInfo(pWordEntry *SPWORDENTRY, Options SPWORDINFOOPT) foundation.HRESULT {
+func (self *ISpSREngineSite) GetWordInfo(pWordEntry *SPWORDENTRY, Options SPWORDINFOOPT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWordEntry)), uintptr(Options))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWordClientContext dispatches through ISpSREngineSite's vtable slot 11.
-func (self *ISpSREngineSite) SetWordClientContext(hWord SPWORDHANDLE, pvClientContext unsafe.Pointer) foundation.HRESULT {
+func (self *ISpSREngineSite) SetWordClientContext(hWord SPWORDHANDLE, pvClientContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hWord), uintptr(unsafe.Pointer(pvClientContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRuleInfo dispatches through ISpSREngineSite's vtable slot 12.
-func (self *ISpSREngineSite) GetRuleInfo(pRuleEntry *SPRULEENTRY, Options SPRULEINFOOPT) foundation.HRESULT {
+func (self *ISpSREngineSite) GetRuleInfo(pRuleEntry *SPRULEENTRY, Options SPRULEINFOOPT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRuleEntry)), uintptr(Options))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRuleClientContext dispatches through ISpSREngineSite's vtable slot 13.
-func (self *ISpSREngineSite) SetRuleClientContext(hRule SPRULEHANDLE, pvClientContext unsafe.Pointer) foundation.HRESULT {
+func (self *ISpSREngineSite) SetRuleClientContext(hRule SPRULEHANDLE, pvClientContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(hRule), uintptr(unsafe.Pointer(pvClientContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStateInfo dispatches through ISpSREngineSite's vtable slot 14.
-func (self *ISpSREngineSite) GetStateInfo(hState SPSTATEHANDLE, pStateInfo *SPSTATEINFO) foundation.HRESULT {
+func (self *ISpSREngineSite) GetStateInfo(hState SPSTATEHANDLE, pStateInfo *SPSTATEINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hState), uintptr(unsafe.Pointer(pStateInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResource dispatches through ISpSREngineSite's vtable slot 15.
-func (self *ISpSREngineSite) GetResource(hRule SPRULEHANDLE, pszResourceName foundation.PWSTR, ppCoMemResource *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hRule), uintptr(unsafe.Pointer(pszResourceName)), uintptr(unsafe.Pointer(ppCoMemResource)))
-	return foundation.HRESULT(r1)
+func (self *ISpSREngineSite) GetResource(hRule SPRULEHANDLE, pszResourceName string, ppCoMemResource *foundation.PWSTR) error {
+	_pszResourceName := win32.UTF16Ptr(pszResourceName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hRule), uintptr(unsafe.Pointer(_pszResourceName)), uintptr(unsafe.Pointer(ppCoMemResource)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTransitionProperty dispatches through ISpSREngineSite's vtable slot 16.
-func (self *ISpSREngineSite) GetTransitionProperty(ID SPTRANSITIONID, ppCoMemProperty **SPTRANSITIONPROPERTY) foundation.HRESULT {
+func (self *ISpSREngineSite) GetTransitionProperty(ID SPTRANSITIONID, ppCoMemProperty **SPTRANSITIONPROPERTY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(ID), uintptr(unsafe.Pointer(ppCoMemProperty)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsAlternate dispatches through ISpSREngineSite's vtable slot 17.
-func (self *ISpSREngineSite) IsAlternate(hRule SPRULEHANDLE, hAltRule SPRULEHANDLE) foundation.HRESULT {
+func (self *ISpSREngineSite) IsAlternate(hRule SPRULEHANDLE, hAltRule SPRULEHANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(hRule), uintptr(hAltRule))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaxAlternates dispatches through ISpSREngineSite's vtable slot 18.
-func (self *ISpSREngineSite) GetMaxAlternates(hRule SPRULEHANDLE, pulNumAlts *uint32) foundation.HRESULT {
+func (self *ISpSREngineSite) GetMaxAlternates(hRule SPRULEHANDLE, pulNumAlts *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(hRule), uintptr(unsafe.Pointer(pulNumAlts)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContextMaxAlternates dispatches through ISpSREngineSite's vtable slot 19.
-func (self *ISpSREngineSite) GetContextMaxAlternates(hContext SPRECOCONTEXTHANDLE, pulNumAlts *uint32) foundation.HRESULT {
+func (self *ISpSREngineSite) GetContextMaxAlternates(hContext SPRECOCONTEXTHANDLE, pulNumAlts *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(hContext), uintptr(unsafe.Pointer(pulNumAlts)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateRecoPos dispatches through ISpSREngineSite's vtable slot 20.
-func (self *ISpSREngineSite) UpdateRecoPos(ullCurrentRecoPos uint64) foundation.HRESULT {
+func (self *ISpSREngineSite) UpdateRecoPos(ullCurrentRecoPos uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(ullCurrentRecoPos))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7bc6e012-684a-493e-bdd4-2bf5fbf48cfe
@@ -2087,27 +2201,27 @@ type ISpSREngineSite2 struct {
 var IID_ISpSREngineSite2 = win32.GUID{Data1: 0x7bc6e012, Data2: 0x684a, Data3: 0x493e, Data4: [8]byte{0xbd, 0xd4, 0x2b, 0xf5, 0xfb, 0xf4, 0x8c, 0xfe}}
 
 // AddEventEx dispatches through ISpSREngineSite2's vtable slot 21.
-func (self *ISpSREngineSite2) AddEventEx(pEvent *SPEVENTEX, hSAPIRecoContext SPRECOCONTEXTHANDLE) foundation.HRESULT {
+func (self *ISpSREngineSite2) AddEventEx(pEvent *SPEVENTEX, hSAPIRecoContext SPRECOCONTEXTHANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)), uintptr(hSAPIRecoContext))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateRecoPosEx dispatches through ISpSREngineSite2's vtable slot 22.
-func (self *ISpSREngineSite2) UpdateRecoPosEx(ullCurrentRecoPos uint64, ullCurrentRecoTime uint64) foundation.HRESULT {
+func (self *ISpSREngineSite2) UpdateRecoPosEx(ullCurrentRecoPos uint64, ullCurrentRecoTime uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(ullCurrentRecoPos), uintptr(ullCurrentRecoTime))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRuleTransition dispatches through ISpSREngineSite2's vtable slot 23.
-func (self *ISpSREngineSite2) GetRuleTransition(ulGrammarID uint32, RuleIndex uint32, pTrans *SPTRANSITIONENTRY) foundation.HRESULT {
+func (self *ISpSREngineSite2) GetRuleTransition(ulGrammarID uint32, RuleIndex uint32, pTrans *SPTRANSITIONENTRY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(ulGrammarID), uintptr(RuleIndex), uintptr(unsafe.Pointer(pTrans)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RecognitionEx dispatches through ISpSREngineSite2's vtable slot 24.
-func (self *ISpSREngineSite2) RecognitionEx(pResultInfo *SPRECORESULTINFOEX) foundation.HRESULT {
+func (self *ISpSREngineSite2) RecognitionEx(pResultInfo *SPRECORESULTINFOEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResultInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 21b501a0-0ec7-46c9-92c3-a2bc784c54b9
@@ -2119,15 +2233,15 @@ type ISpSerializeState struct {
 var IID_ISpSerializeState = win32.GUID{Data1: 0x21b501a0, Data2: 0x0ec7, Data3: 0x46c9, Data4: [8]byte{0x92, 0xc3, 0xa2, 0xbc, 0x78, 0x4c, 0x54, 0xb9}}
 
 // GetSerializedState dispatches through ISpSerializeState's vtable slot 3.
-func (self *ISpSerializeState) GetSerializedState(ppbData **byte, pulSize *uint32, dwReserved uint32) foundation.HRESULT {
+func (self *ISpSerializeState) GetSerializedState(ppbData **byte, pulSize *uint32, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppbData)), uintptr(unsafe.Pointer(pulSize)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSerializedState dispatches through ISpSerializeState's vtable slot 4.
-func (self *ISpSerializeState) SetSerializedState(pbData *byte, ulSize uint32, dwReserved uint32) foundation.HRESULT {
+func (self *ISpSerializeState) SetSerializedState(pbData *byte, ulSize uint32, dwReserved uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbData)), uintptr(ulSize), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3df681e2-ea56-11d9-8bde-f66bad1e3f3a
@@ -2139,51 +2253,55 @@ type ISpShortcut struct {
 var IID_ISpShortcut = win32.GUID{Data1: 0x3df681e2, Data2: 0xea56, Data3: 0x11d9, Data4: [8]byte{0x8b, 0xde, 0xf6, 0x6b, 0xad, 0x1e, 0x3f, 0x3a}}
 
 // AddShortcut dispatches through ISpShortcut's vtable slot 3.
-func (self *ISpShortcut) AddShortcut(pszDisplay foundation.PWSTR, LangID uint16, pszSpoken foundation.PWSTR, shType SPSHORTCUTTYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDisplay)), uintptr(LangID), uintptr(unsafe.Pointer(pszSpoken)), uintptr(shType))
-	return foundation.HRESULT(r1)
+func (self *ISpShortcut) AddShortcut(pszDisplay string, LangID uint16, pszSpoken string, shType SPSHORTCUTTYPE) error {
+	_pszDisplay := win32.UTF16Ptr(pszDisplay)
+	_pszSpoken := win32.UTF16Ptr(pszSpoken)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszDisplay)), uintptr(LangID), uintptr(unsafe.Pointer(_pszSpoken)), uintptr(shType))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveShortcut dispatches through ISpShortcut's vtable slot 4.
-func (self *ISpShortcut) RemoveShortcut(pszDisplay foundation.PWSTR, LangID uint16, pszSpoken foundation.PWSTR, shType SPSHORTCUTTYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDisplay)), uintptr(LangID), uintptr(unsafe.Pointer(pszSpoken)), uintptr(shType))
-	return foundation.HRESULT(r1)
+func (self *ISpShortcut) RemoveShortcut(pszDisplay string, LangID uint16, pszSpoken string, shType SPSHORTCUTTYPE) error {
+	_pszDisplay := win32.UTF16Ptr(pszDisplay)
+	_pszSpoken := win32.UTF16Ptr(pszSpoken)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszDisplay)), uintptr(LangID), uintptr(unsafe.Pointer(_pszSpoken)), uintptr(shType))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetShortcuts dispatches through ISpShortcut's vtable slot 5.
-func (self *ISpShortcut) GetShortcuts(LangID uint16, pShortcutpairList *SPSHORTCUTPAIRLIST) foundation.HRESULT {
+func (self *ISpShortcut) GetShortcuts(LangID uint16, pShortcutpairList *SPSHORTCUTPAIRLIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(LangID), uintptr(unsafe.Pointer(pShortcutpairList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGeneration dispatches through ISpShortcut's vtable slot 6.
-func (self *ISpShortcut) GetGeneration(pdwGeneration *uint32) foundation.HRESULT {
+func (self *ISpShortcut) GetGeneration(pdwGeneration *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwGeneration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWordsFromGenerationChange dispatches through ISpShortcut's vtable slot 7.
-func (self *ISpShortcut) GetWordsFromGenerationChange(pdwGeneration *uint32, pWordList *SPWORDLIST) foundation.HRESULT {
+func (self *ISpShortcut) GetWordsFromGenerationChange(pdwGeneration *uint32, pWordList *SPWORDLIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwGeneration)), uintptr(unsafe.Pointer(pWordList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWords dispatches through ISpShortcut's vtable slot 8.
-func (self *ISpShortcut) GetWords(pdwGeneration *uint32, pdwCookie *uint32, pWordList *SPWORDLIST) foundation.HRESULT {
+func (self *ISpShortcut) GetWords(pdwGeneration *uint32, pdwCookie *uint32, pWordList *SPWORDLIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwGeneration)), uintptr(unsafe.Pointer(pdwCookie)), uintptr(unsafe.Pointer(pWordList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetShortcutsForGeneration dispatches through ISpShortcut's vtable slot 9.
-func (self *ISpShortcut) GetShortcutsForGeneration(pdwGeneration *uint32, pdwCookie *uint32, pShortcutpairList *SPSHORTCUTPAIRLIST) foundation.HRESULT {
+func (self *ISpShortcut) GetShortcutsForGeneration(pdwGeneration *uint32, pdwCookie *uint32, pShortcutpairList *SPSHORTCUTPAIRLIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwGeneration)), uintptr(unsafe.Pointer(pdwCookie)), uintptr(unsafe.Pointer(pShortcutpairList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGenerationChange dispatches through ISpShortcut's vtable slot 10.
-func (self *ISpShortcut) GetGenerationChange(pdwGeneration *uint32, pShortcutpairList *SPSHORTCUTPAIRLIST) foundation.HRESULT {
+func (self *ISpShortcut) GetGenerationChange(pdwGeneration *uint32, pShortcutpairList *SPSHORTCUTPAIRLIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwGeneration)), uintptr(unsafe.Pointer(pShortcutpairList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 12e3cca9-7518-44c5-a5e7-ba5a79cb929e
@@ -2195,27 +2313,28 @@ type ISpStream struct {
 var IID_ISpStream = win32.GUID{Data1: 0x12e3cca9, Data2: 0x7518, Data3: 0x44c5, Data4: [8]byte{0xa5, 0xe7, 0xba, 0x5a, 0x79, 0xcb, 0x92, 0x9e}}
 
 // SetBaseStream dispatches through ISpStream's vtable slot 15.
-func (self *ISpStream) SetBaseStream(pStream *systemcom.IStream, rguidFormat *win32.GUID, pWaveFormatEx unsafe.Pointer) foundation.HRESULT {
+func (self *ISpStream) SetBaseStream(pStream *systemcom.IStream, rguidFormat *win32.GUID, pWaveFormatEx unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(rguidFormat)), uintptr(unsafe.Pointer(pWaveFormatEx)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBaseStream dispatches through ISpStream's vtable slot 16.
-func (self *ISpStream) GetBaseStream(ppStream **systemcom.IStream) foundation.HRESULT {
+func (self *ISpStream) GetBaseStream(ppStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BindToFile dispatches through ISpStream's vtable slot 17.
-func (self *ISpStream) BindToFile(pszFileName foundation.PWSTR, eMode SPFILEMODE, pFormatId *win32.GUID, pWaveFormatEx unsafe.Pointer, ullEventInterest uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszFileName)), uintptr(eMode), uintptr(unsafe.Pointer(pFormatId)), uintptr(unsafe.Pointer(pWaveFormatEx)), uintptr(ullEventInterest))
-	return foundation.HRESULT(r1)
+func (self *ISpStream) BindToFile(pszFileName string, eMode SPFILEMODE, pFormatId *win32.GUID, pWaveFormatEx unsafe.Pointer, ullEventInterest uint64) error {
+	_pszFileName := win32.UTF16Ptr(pszFileName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(eMode), uintptr(unsafe.Pointer(pFormatId)), uintptr(unsafe.Pointer(pWaveFormatEx)), uintptr(ullEventInterest))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through ISpStream's vtable slot 18.
-func (self *ISpStream) Close() foundation.HRESULT {
+func (self *ISpStream) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bed530be-2606-4f4d-a1c0-54c5cda5566f
@@ -2227,9 +2346,9 @@ type ISpStreamFormat struct {
 var IID_ISpStreamFormat = win32.GUID{Data1: 0xbed530be, Data2: 0x2606, Data3: 0x4f4d, Data4: [8]byte{0xa1, 0xc0, 0x54, 0xc5, 0xcd, 0xa5, 0x56, 0x6f}}
 
 // GetFormat dispatches through ISpStreamFormat's vtable slot 14.
-func (self *ISpStreamFormat) GetFormat(pguidFormatId *win32.GUID, ppCoMemWaveFormatEx *unsafe.Pointer) foundation.HRESULT {
+func (self *ISpStreamFormat) GetFormat(pguidFormatId *win32.GUID, ppCoMemWaveFormatEx *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidFormatId)), uintptr(unsafe.Pointer(ppCoMemWaveFormatEx)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 678a932c-ea71-4446-9b41-78fda6280a29
@@ -2241,39 +2360,41 @@ type ISpStreamFormatConverter struct {
 var IID_ISpStreamFormatConverter = win32.GUID{Data1: 0x678a932c, Data2: 0xea71, Data3: 0x4446, Data4: [8]byte{0x9b, 0x41, 0x78, 0xfd, 0xa6, 0x28, 0x0a, 0x29}}
 
 // SetBaseStream dispatches through ISpStreamFormatConverter's vtable slot 15.
-func (self *ISpStreamFormatConverter) SetBaseStream(pStream *ISpStreamFormat, fSetFormatToBaseStreamFormat foundation.BOOL, fWriteToBaseStream foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)), uintptr(fSetFormatToBaseStreamFormat), uintptr(fWriteToBaseStream))
-	return foundation.HRESULT(r1)
+func (self *ISpStreamFormatConverter) SetBaseStream(pStream *ISpStreamFormat, fSetFormatToBaseStreamFormat bool, fWriteToBaseStream bool) error {
+	_fSetFormatToBaseStreamFormat := win32.Bool32(fSetFormatToBaseStreamFormat)
+	_fWriteToBaseStream := win32.Bool32(fWriteToBaseStream)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)), uintptr(_fSetFormatToBaseStreamFormat), uintptr(_fWriteToBaseStream))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBaseStream dispatches through ISpStreamFormatConverter's vtable slot 16.
-func (self *ISpStreamFormatConverter) GetBaseStream(ppStream **ISpStreamFormat) foundation.HRESULT {
+func (self *ISpStreamFormatConverter) GetBaseStream(ppStream **ISpStreamFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFormat dispatches through ISpStreamFormatConverter's vtable slot 17.
-func (self *ISpStreamFormatConverter) SetFormat(rguidFormatIdOfConvertedStream *win32.GUID, pWaveFormatExOfConvertedStream unsafe.Pointer) foundation.HRESULT {
+func (self *ISpStreamFormatConverter) SetFormat(rguidFormatIdOfConvertedStream *win32.GUID, pWaveFormatExOfConvertedStream unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidFormatIdOfConvertedStream)), uintptr(unsafe.Pointer(pWaveFormatExOfConvertedStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResetSeekPosition dispatches through ISpStreamFormatConverter's vtable slot 18.
-func (self *ISpStreamFormatConverter) ResetSeekPosition() foundation.HRESULT {
+func (self *ISpStreamFormatConverter) ResetSeekPosition() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScaleConvertedToBaseOffset dispatches through ISpStreamFormatConverter's vtable slot 19.
-func (self *ISpStreamFormatConverter) ScaleConvertedToBaseOffset(ullOffsetConvertedStream uint64, pullOffsetBaseStream *uint64) foundation.HRESULT {
+func (self *ISpStreamFormatConverter) ScaleConvertedToBaseOffset(ullOffsetConvertedStream uint64, pullOffsetBaseStream *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(ullOffsetConvertedStream), uintptr(unsafe.Pointer(pullOffsetBaseStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScaleBaseToConvertedOffset dispatches through ISpStreamFormatConverter's vtable slot 20.
-func (self *ISpStreamFormatConverter) ScaleBaseToConvertedOffset(ullOffsetBaseStream uint64, pullOffsetConvertedStream *uint64) foundation.HRESULT {
+func (self *ISpStreamFormatConverter) ScaleBaseToConvertedOffset(ullOffsetBaseStream uint64, pullOffsetConvertedStream *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(ullOffsetBaseStream), uintptr(unsafe.Pointer(pullOffsetConvertedStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a74d7c8e-4cc5-4f2f-a6eb-804dee18500e
@@ -2285,15 +2406,15 @@ type ISpTTSEngine struct {
 var IID_ISpTTSEngine = win32.GUID{Data1: 0xa74d7c8e, Data2: 0x4cc5, Data3: 0x4f2f, Data4: [8]byte{0xa6, 0xeb, 0x80, 0x4d, 0xee, 0x18, 0x50, 0x0e}}
 
 // Speak dispatches through ISpTTSEngine's vtable slot 3.
-func (self *ISpTTSEngine) Speak(dwSpeakFlags uint32, rguidFormatId *win32.GUID, pWaveFormatEx unsafe.Pointer, pTextFragList *SPVTEXTFRAG, pOutputSite *ISpTTSEngineSite) foundation.HRESULT {
+func (self *ISpTTSEngine) Speak(dwSpeakFlags uint32, rguidFormatId *win32.GUID, pWaveFormatEx unsafe.Pointer, pTextFragList *SPVTEXTFRAG, pOutputSite *ISpTTSEngineSite) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwSpeakFlags), uintptr(unsafe.Pointer(rguidFormatId)), uintptr(unsafe.Pointer(pWaveFormatEx)), uintptr(unsafe.Pointer(pTextFragList)), uintptr(unsafe.Pointer(pOutputSite)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputFormat dispatches through ISpTTSEngine's vtable slot 4.
-func (self *ISpTTSEngine) GetOutputFormat(pTargetFmtId *win32.GUID, pTargetWaveFormatEx unsafe.Pointer, pOutputFormatId *win32.GUID, ppCoMemOutputWaveFormatEx *unsafe.Pointer) foundation.HRESULT {
+func (self *ISpTTSEngine) GetOutputFormat(pTargetFmtId *win32.GUID, pTargetWaveFormatEx unsafe.Pointer, pOutputFormatId *win32.GUID, ppCoMemOutputWaveFormatEx *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTargetFmtId)), uintptr(unsafe.Pointer(pTargetWaveFormatEx)), uintptr(unsafe.Pointer(pOutputFormatId)), uintptr(unsafe.Pointer(ppCoMemOutputWaveFormatEx)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 9880499b-cce9-11d2-b503-00c04f797396
@@ -2311,33 +2432,33 @@ func (self *ISpTTSEngineSite) GetActions() uint32 {
 }
 
 // Write dispatches through ISpTTSEngineSite's vtable slot 6.
-func (self *ISpTTSEngineSite) Write(pBuff unsafe.Pointer, cb uint32, pcbWritten *uint32) foundation.HRESULT {
+func (self *ISpTTSEngineSite) Write(pBuff unsafe.Pointer, cb uint32, pcbWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuff)), uintptr(cb), uintptr(unsafe.Pointer(pcbWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRate dispatches through ISpTTSEngineSite's vtable slot 7.
-func (self *ISpTTSEngineSite) GetRate(pRateAdjust *int32) foundation.HRESULT {
+func (self *ISpTTSEngineSite) GetRate(pRateAdjust *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRateAdjust)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVolume dispatches through ISpTTSEngineSite's vtable slot 8.
-func (self *ISpTTSEngineSite) GetVolume(pusVolume *uint16) foundation.HRESULT {
+func (self *ISpTTSEngineSite) GetVolume(pusVolume *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pusVolume)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSkipInfo dispatches through ISpTTSEngineSite's vtable slot 9.
-func (self *ISpTTSEngineSite) GetSkipInfo(peType *SPVSKIPTYPE, plNumItems *int32) foundation.HRESULT {
+func (self *ISpTTSEngineSite) GetSkipInfo(peType *SPVSKIPTYPE, plNumItems *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peType)), uintptr(unsafe.Pointer(plNumItems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CompleteSkip dispatches through ISpTTSEngineSite's vtable slot 10.
-func (self *ISpTTSEngineSite) CompleteSkip(ulNumSkipped int32) foundation.HRESULT {
+func (self *ISpTTSEngineSite) CompleteSkip(ulNumSkipped int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ulNumSkipped))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 type ISpTask struct {
@@ -2345,9 +2466,9 @@ type ISpTask struct {
 }
 
 // Execute dispatches through ISpTask's vtable slot 0.
-func (self *ISpTask) Execute(pvTaskData unsafe.Pointer, pfContinueProcessing *int32) foundation.HRESULT {
+func (self *ISpTask) Execute(pvTaskData unsafe.Pointer, pfContinueProcessing *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvTaskData)), uintptr(unsafe.Pointer(pfContinueProcessing)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2baeef81-2ca3-4331-98f3-26ec5abefb03
@@ -2359,45 +2480,45 @@ type ISpTaskManager struct {
 var IID_ISpTaskManager = win32.GUID{Data1: 0x2baeef81, Data2: 0x2ca3, Data3: 0x4331, Data4: [8]byte{0x98, 0xf3, 0x26, 0xec, 0x5a, 0xbe, 0xfb, 0x03}}
 
 // SetThreadPoolInfo dispatches through ISpTaskManager's vtable slot 3.
-func (self *ISpTaskManager) SetThreadPoolInfo(pPoolInfo *SPTMTHREADINFO) foundation.HRESULT {
+func (self *ISpTaskManager) SetThreadPoolInfo(pPoolInfo *SPTMTHREADINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPoolInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThreadPoolInfo dispatches through ISpTaskManager's vtable slot 4.
-func (self *ISpTaskManager) GetThreadPoolInfo(pPoolInfo *SPTMTHREADINFO) foundation.HRESULT {
+func (self *ISpTaskManager) GetThreadPoolInfo(pPoolInfo *SPTMTHREADINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPoolInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueueTask dispatches through ISpTaskManager's vtable slot 5.
-func (self *ISpTaskManager) QueueTask(pTask *ISpTask, pvTaskData unsafe.Pointer, hCompEvent foundation.HANDLE, pdwGroupId *uint32, pTaskID *uint32) foundation.HRESULT {
+func (self *ISpTaskManager) QueueTask(pTask *ISpTask, pvTaskData unsafe.Pointer, hCompEvent foundation.HANDLE, pdwGroupId *uint32, pTaskID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTask)), uintptr(unsafe.Pointer(pvTaskData)), uintptr(hCompEvent), uintptr(unsafe.Pointer(pdwGroupId)), uintptr(unsafe.Pointer(pTaskID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateReoccurringTask dispatches through ISpTaskManager's vtable slot 6.
-func (self *ISpTaskManager) CreateReoccurringTask(pTask *ISpTask, pvTaskData unsafe.Pointer, hCompEvent foundation.HANDLE, ppTaskCtrl **ISpNotifySink) foundation.HRESULT {
+func (self *ISpTaskManager) CreateReoccurringTask(pTask *ISpTask, pvTaskData unsafe.Pointer, hCompEvent foundation.HANDLE, ppTaskCtrl **ISpNotifySink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTask)), uintptr(unsafe.Pointer(pvTaskData)), uintptr(hCompEvent), uintptr(unsafe.Pointer(ppTaskCtrl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateThreadControl dispatches through ISpTaskManager's vtable slot 7.
-func (self *ISpTaskManager) CreateThreadControl(pTask *ISpThreadTask, pvTaskData unsafe.Pointer, nPriority int32, ppTaskCtrl **ISpThreadControl) foundation.HRESULT {
+func (self *ISpTaskManager) CreateThreadControl(pTask *ISpThreadTask, pvTaskData unsafe.Pointer, nPriority int32, ppTaskCtrl **ISpThreadControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTask)), uintptr(unsafe.Pointer(pvTaskData)), uintptr(nPriority), uintptr(unsafe.Pointer(ppTaskCtrl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TerminateTask dispatches through ISpTaskManager's vtable slot 8.
-func (self *ISpTaskManager) TerminateTask(dwTaskId uint32, ulWaitPeriod uint32) foundation.HRESULT {
+func (self *ISpTaskManager) TerminateTask(dwTaskId uint32, ulWaitPeriod uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwTaskId), uintptr(ulWaitPeriod))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TerminateTaskGroup dispatches through ISpTaskManager's vtable slot 9.
-func (self *ISpTaskManager) TerminateTaskGroup(dwGroupId uint32, ulWaitPeriod uint32) foundation.HRESULT {
+func (self *ISpTaskManager) TerminateTaskGroup(dwGroupId uint32, ulWaitPeriod uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwGroupId), uintptr(ulWaitPeriod))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a6be4d73-4403-4358-b22d-0346e23b1764
@@ -2409,21 +2530,22 @@ type ISpThreadControl struct {
 var IID_ISpThreadControl = win32.GUID{Data1: 0xa6be4d73, Data2: 0x4403, Data3: 0x4358, Data4: [8]byte{0xb2, 0x2d, 0x03, 0x46, 0xe2, 0x3b, 0x17, 0x64}}
 
 // StartThread dispatches through ISpThreadControl's vtable slot 4.
-func (self *ISpThreadControl) StartThread(dwFlags uint32, phwnd *foundation.HWND) foundation.HRESULT {
+func (self *ISpThreadControl) StartThread(dwFlags uint32, phwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(phwnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitForThreadDone dispatches through ISpThreadControl's vtable slot 5.
-func (self *ISpThreadControl) WaitForThreadDone(fForceStop foundation.BOOL, phrThreadResult *foundation.HRESULT, msTimeOut uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(fForceStop), uintptr(unsafe.Pointer(phrThreadResult)), uintptr(msTimeOut))
-	return foundation.HRESULT(r1)
+func (self *ISpThreadControl) WaitForThreadDone(fForceStop bool, phrThreadResult *foundation.HRESULT, msTimeOut uint32) error {
+	_fForceStop := win32.Bool32(fForceStop)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_fForceStop), uintptr(unsafe.Pointer(phrThreadResult)), uintptr(msTimeOut))
+	return win32.HRESULTError(int32(r1))
 }
 
 // TerminateThread dispatches through ISpThreadControl's vtable slot 6.
-func (self *ISpThreadControl) TerminateThread() foundation.HRESULT {
+func (self *ISpThreadControl) TerminateThread() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ThreadHandle dispatches through ISpThreadControl's vtable slot 7.
@@ -2467,15 +2589,15 @@ type ISpThreadTask struct {
 }
 
 // InitThread dispatches through ISpThreadTask's vtable slot 0.
-func (self *ISpThreadTask) InitThread(pvTaskData unsafe.Pointer, hwnd foundation.HWND) foundation.HRESULT {
+func (self *ISpThreadTask) InitThread(pvTaskData unsafe.Pointer, hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvTaskData)), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ThreadProc dispatches through ISpThreadTask's vtable slot 1.
-func (self *ISpThreadTask) ThreadProc(pvTaskData unsafe.Pointer, hExitThreadEvent foundation.HANDLE, hNotifyEvent foundation.HANDLE, hwndWorker foundation.HWND, pfContinueProcessing *int32) foundation.HRESULT {
+func (self *ISpThreadTask) ThreadProc(pvTaskData unsafe.Pointer, hExitThreadEvent foundation.HANDLE, hNotifyEvent foundation.HANDLE, hwndWorker foundation.HWND, pfContinueProcessing *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[1], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvTaskData)), uintptr(hExitThreadEvent), uintptr(hNotifyEvent), uintptr(hwndWorker), uintptr(unsafe.Pointer(pfContinueProcessing)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WindowMessage dispatches through ISpThreadTask's vtable slot 2.
@@ -2493,15 +2615,18 @@ type ISpTokenUI struct {
 var IID_ISpTokenUI = win32.GUID{Data1: 0xf8e690f0, Data2: 0x39cb, Data3: 0x4843, Data4: [8]byte{0xb8, 0xd7, 0xc8, 0x46, 0x96, 0xe1, 0x11, 0x9d}}
 
 // IsUISupported dispatches through ISpTokenUI's vtable slot 3.
-func (self *ISpTokenUI) IsUISupported(pszTypeOfUI foundation.PWSTR, pvExtraData unsafe.Pointer, cbExtraData uint32, punkObject *systemcom.IUnknown, pfSupported *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(punkObject)), uintptr(unsafe.Pointer(pfSupported)))
-	return foundation.HRESULT(r1)
+func (self *ISpTokenUI) IsUISupported(pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, punkObject *systemcom.IUnknown, pfSupported *foundation.BOOL) error {
+	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(punkObject)), uintptr(unsafe.Pointer(pfSupported)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisplayUI dispatches through ISpTokenUI's vtable slot 4.
-func (self *ISpTokenUI) DisplayUI(hwndParent foundation.HWND, pszTitle foundation.PWSTR, pszTypeOfUI foundation.PWSTR, pvExtraData unsafe.Pointer, cbExtraData uint32, pToken *ISpObjectToken, punkObject *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(pszTitle)), uintptr(unsafe.Pointer(pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(pToken)), uintptr(unsafe.Pointer(punkObject)))
-	return foundation.HRESULT(r1)
+func (self *ISpTokenUI) DisplayUI(hwndParent foundation.HWND, pszTitle string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, pToken *ISpObjectToken, punkObject *systemcom.IUnknown) error {
+	_pszTitle := win32.UTF16Ptr(pszTitle)
+	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(_pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(pToken)), uintptr(unsafe.Pointer(punkObject)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 10f63bce-201a-11d3-ac70-00c04f8ee6c0
@@ -2513,15 +2638,16 @@ type ISpTranscript struct {
 var IID_ISpTranscript = win32.GUID{Data1: 0x10f63bce, Data2: 0x201a, Data3: 0x11d3, Data4: [8]byte{0xac, 0x70, 0x00, 0xc0, 0x4f, 0x8e, 0xe6, 0xc0}}
 
 // GetTranscript dispatches through ISpTranscript's vtable slot 3.
-func (self *ISpTranscript) GetTranscript(ppszTranscript *foundation.PWSTR) foundation.HRESULT {
+func (self *ISpTranscript) GetTranscript(ppszTranscript *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszTranscript)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AppendTranscript dispatches through ISpTranscript's vtable slot 4.
-func (self *ISpTranscript) AppendTranscript(pszTranscript foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszTranscript)))
-	return foundation.HRESULT(r1)
+func (self *ISpTranscript) AppendTranscript(pszTranscript string) error {
+	_pszTranscript := win32.UTF16Ptr(pszTranscript)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTranscript)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 6c44df74-72b9-4992-a1ec-ef996e0422d4
@@ -2533,135 +2659,138 @@ type ISpVoice struct {
 var IID_ISpVoice = win32.GUID{Data1: 0x6c44df74, Data2: 0x72b9, Data3: 0x4992, Data4: [8]byte{0xa1, 0xec, 0xef, 0x99, 0x6e, 0x04, 0x22, 0xd4}}
 
 // SetOutput dispatches through ISpVoice's vtable slot 13.
-func (self *ISpVoice) SetOutput(pUnkOutput *systemcom.IUnknown, fAllowFormatChanges foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOutput)), uintptr(fAllowFormatChanges))
-	return foundation.HRESULT(r1)
+func (self *ISpVoice) SetOutput(pUnkOutput *systemcom.IUnknown, fAllowFormatChanges bool) error {
+	_fAllowFormatChanges := win32.Bool32(fAllowFormatChanges)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOutput)), uintptr(_fAllowFormatChanges))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputObjectToken dispatches through ISpVoice's vtable slot 14.
-func (self *ISpVoice) GetOutputObjectToken(ppObjectToken **ISpObjectToken) foundation.HRESULT {
+func (self *ISpVoice) GetOutputObjectToken(ppObjectToken **ISpObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppObjectToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputStream dispatches through ISpVoice's vtable slot 15.
-func (self *ISpVoice) GetOutputStream(ppStream **ISpStreamFormat) foundation.HRESULT {
+func (self *ISpVoice) GetOutputStream(ppStream **ISpStreamFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through ISpVoice's vtable slot 16.
-func (self *ISpVoice) Pause() foundation.HRESULT {
+func (self *ISpVoice) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through ISpVoice's vtable slot 17.
-func (self *ISpVoice) Resume() foundation.HRESULT {
+func (self *ISpVoice) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVoice dispatches through ISpVoice's vtable slot 18.
-func (self *ISpVoice) SetVoice(pToken *ISpObjectToken) foundation.HRESULT {
+func (self *ISpVoice) SetVoice(pToken *ISpObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVoice dispatches through ISpVoice's vtable slot 19.
-func (self *ISpVoice) GetVoice(ppToken **ISpObjectToken) foundation.HRESULT {
+func (self *ISpVoice) GetVoice(ppToken **ISpObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Speak dispatches through ISpVoice's vtable slot 20.
-func (self *ISpVoice) Speak(pwcs foundation.PWSTR, dwFlags uint32, pulStreamNumber *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwcs)), uintptr(dwFlags), uintptr(unsafe.Pointer(pulStreamNumber)))
-	return foundation.HRESULT(r1)
+func (self *ISpVoice) Speak(pwcs string, dwFlags uint32, pulStreamNumber *uint32) error {
+	_pwcs := win32.UTF16Ptr(pwcs)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcs)), uintptr(dwFlags), uintptr(unsafe.Pointer(pulStreamNumber)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SpeakStream dispatches through ISpVoice's vtable slot 21.
-func (self *ISpVoice) SpeakStream(pStream *systemcom.IStream, dwFlags uint32, pulStreamNumber *uint32) foundation.HRESULT {
+func (self *ISpVoice) SpeakStream(pStream *systemcom.IStream, dwFlags uint32, pulStreamNumber *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)), uintptr(dwFlags), uintptr(unsafe.Pointer(pulStreamNumber)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through ISpVoice's vtable slot 22.
-func (self *ISpVoice) GetStatus(pStatus *SPVOICESTATUS, ppszLastBookmark *foundation.PWSTR) foundation.HRESULT {
+func (self *ISpVoice) GetStatus(pStatus *SPVOICESTATUS, ppszLastBookmark *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)), uintptr(unsafe.Pointer(ppszLastBookmark)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through ISpVoice's vtable slot 23.
-func (self *ISpVoice) Skip(pItemType foundation.PWSTR, lNumItems int32, pulNumSkipped *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItemType)), uintptr(lNumItems), uintptr(unsafe.Pointer(pulNumSkipped)))
-	return foundation.HRESULT(r1)
+func (self *ISpVoice) Skip(pItemType string, lNumItems int32, pulNumSkipped *uint32) error {
+	_pItemType := win32.UTF16Ptr(pItemType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pItemType)), uintptr(lNumItems), uintptr(unsafe.Pointer(pulNumSkipped)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPriority dispatches through ISpVoice's vtable slot 24.
-func (self *ISpVoice) SetPriority(ePriority SPVPRIORITY) foundation.HRESULT {
+func (self *ISpVoice) SetPriority(ePriority SPVPRIORITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(ePriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPriority dispatches through ISpVoice's vtable slot 25.
-func (self *ISpVoice) GetPriority(pePriority *SPVPRIORITY) foundation.HRESULT {
+func (self *ISpVoice) GetPriority(pePriority *SPVPRIORITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pePriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAlertBoundary dispatches through ISpVoice's vtable slot 26.
-func (self *ISpVoice) SetAlertBoundary(eBoundary SPEVENTENUM) foundation.HRESULT {
+func (self *ISpVoice) SetAlertBoundary(eBoundary SPEVENTENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(eBoundary))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAlertBoundary dispatches through ISpVoice's vtable slot 27.
-func (self *ISpVoice) GetAlertBoundary(peBoundary *SPEVENTENUM) foundation.HRESULT {
+func (self *ISpVoice) GetAlertBoundary(peBoundary *SPEVENTENUM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peBoundary)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRate dispatches through ISpVoice's vtable slot 28.
-func (self *ISpVoice) SetRate(RateAdjust int32) foundation.HRESULT {
+func (self *ISpVoice) SetRate(RateAdjust int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(RateAdjust))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRate dispatches through ISpVoice's vtable slot 29.
-func (self *ISpVoice) GetRate(pRateAdjust *int32) foundation.HRESULT {
+func (self *ISpVoice) GetRate(pRateAdjust *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRateAdjust)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVolume dispatches through ISpVoice's vtable slot 30.
-func (self *ISpVoice) SetVolume(usVolume uint16) foundation.HRESULT {
+func (self *ISpVoice) SetVolume(usVolume uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(usVolume))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVolume dispatches through ISpVoice's vtable slot 31.
-func (self *ISpVoice) GetVolume(pusVolume *uint16) foundation.HRESULT {
+func (self *ISpVoice) GetVolume(pusVolume *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pusVolume)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitUntilDone dispatches through ISpVoice's vtable slot 32.
-func (self *ISpVoice) WaitUntilDone(msTimeout uint32) foundation.HRESULT {
+func (self *ISpVoice) WaitUntilDone(msTimeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(msTimeout))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSyncSpeakTimeout dispatches through ISpVoice's vtable slot 33.
-func (self *ISpVoice) SetSyncSpeakTimeout(msTimeout uint32) foundation.HRESULT {
+func (self *ISpVoice) SetSyncSpeakTimeout(msTimeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(msTimeout))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSyncSpeakTimeout dispatches through ISpVoice's vtable slot 34.
-func (self *ISpVoice) GetSyncSpeakTimeout(pmsTimeout *uint32) foundation.HRESULT {
+func (self *ISpVoice) GetSyncSpeakTimeout(pmsTimeout *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmsTimeout)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SpeakCompleteEvent dispatches through ISpVoice's vtable slot 35.
@@ -2671,15 +2800,18 @@ func (self *ISpVoice) SpeakCompleteEvent() foundation.HANDLE {
 }
 
 // IsUISupported dispatches through ISpVoice's vtable slot 36.
-func (self *ISpVoice) IsUISupported(pszTypeOfUI foundation.PWSTR, pvExtraData unsafe.Pointer, cbExtraData uint32, pfSupported *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(pfSupported)))
-	return foundation.HRESULT(r1)
+func (self *ISpVoice) IsUISupported(pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32, pfSupported *foundation.BOOL) error {
+	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData), uintptr(unsafe.Pointer(pfSupported)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisplayUI dispatches through ISpVoice's vtable slot 37.
-func (self *ISpVoice) DisplayUI(hwndParent foundation.HWND, pszTitle foundation.PWSTR, pszTypeOfUI foundation.PWSTR, pvExtraData unsafe.Pointer, cbExtraData uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(pszTitle)), uintptr(unsafe.Pointer(pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData))
-	return foundation.HRESULT(r1)
+func (self *ISpVoice) DisplayUI(hwndParent foundation.HWND, pszTitle string, pszTypeOfUI string, pvExtraData unsafe.Pointer, cbExtraData uint32) error {
+	_pszTitle := win32.UTF16Ptr(pszTitle)
+	_pszTypeOfUI := win32.UTF16Ptr(pszTypeOfUI)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_pszTitle)), uintptr(unsafe.Pointer(_pszTypeOfUI)), uintptr(unsafe.Pointer(pvExtraData)), uintptr(cbExtraData))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ae39362b-45a8-4074-9b9e-ccf49aa2d0b6
@@ -2691,15 +2823,15 @@ type ISpXMLRecoResult struct {
 var IID_ISpXMLRecoResult = win32.GUID{Data1: 0xae39362b, Data2: 0x45a8, Data3: 0x4074, Data4: [8]byte{0x9b, 0x9e, 0xcc, 0xf4, 0x9a, 0xa2, 0xd0, 0xb6}}
 
 // GetXMLResult dispatches through ISpXMLRecoResult's vtable slot 14.
-func (self *ISpXMLRecoResult) GetXMLResult(ppszCoMemXMLResult *foundation.PWSTR, Options SPXMLRESULTOPTIONS) foundation.HRESULT {
+func (self *ISpXMLRecoResult) GetXMLResult(ppszCoMemXMLResult *foundation.PWSTR, Options SPXMLRESULTOPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszCoMemXMLResult)), uintptr(Options))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetXMLErrorInfo dispatches through ISpXMLRecoResult's vtable slot 15.
-func (self *ISpXMLRecoResult) GetXMLErrorInfo(pSemanticErrorInfo *SPSEMANTICERRORINFO) foundation.HRESULT {
+func (self *ISpXMLRecoResult) GetXMLErrorInfo(pSemanticErrorInfo *SPSEMANTICERRORINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSemanticErrorInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: cff8e175-019e-11d3-a08e-00c04f8ef9b5
@@ -2711,57 +2843,57 @@ type ISpeechAudio struct {
 var IID_ISpeechAudio = win32.GUID{Data1: 0xcff8e175, Data2: 0x019e, Data3: 0x11d3, Data4: [8]byte{0xa0, 0x8e, 0x00, 0xc0, 0x4f, 0x8e, 0xf9, 0xb5}}
 
 // Get_Status dispatches through ISpeechAudio's vtable slot 12.
-func (self *ISpeechAudio) Get_Status(Status **ISpeechAudioStatus) foundation.HRESULT {
+func (self *ISpeechAudio) Get_Status(Status **ISpeechAudioStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Status)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BufferInfo dispatches through ISpeechAudio's vtable slot 13.
-func (self *ISpeechAudio) Get_BufferInfo(BufferInfo **ISpeechAudioBufferInfo) foundation.HRESULT {
+func (self *ISpeechAudio) Get_BufferInfo(BufferInfo **ISpeechAudioBufferInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(BufferInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DefaultFormat dispatches through ISpeechAudio's vtable slot 14.
-func (self *ISpeechAudio) Get_DefaultFormat(StreamFormat **ISpeechAudioFormat) foundation.HRESULT {
+func (self *ISpeechAudio) Get_DefaultFormat(StreamFormat **ISpeechAudioFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StreamFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Volume dispatches through ISpeechAudio's vtable slot 15.
-func (self *ISpeechAudio) Get_Volume(Volume *int32) foundation.HRESULT {
+func (self *ISpeechAudio) Get_Volume(Volume *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Volume)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Volume dispatches through ISpeechAudio's vtable slot 16.
-func (self *ISpeechAudio) Put_Volume(Volume int32) foundation.HRESULT {
+func (self *ISpeechAudio) Put_Volume(Volume int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Volume))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BufferNotifySize dispatches through ISpeechAudio's vtable slot 17.
-func (self *ISpeechAudio) Get_BufferNotifySize(BufferNotifySize *int32) foundation.HRESULT {
+func (self *ISpeechAudio) Get_BufferNotifySize(BufferNotifySize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(BufferNotifySize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_BufferNotifySize dispatches through ISpeechAudio's vtable slot 18.
-func (self *ISpeechAudio) Put_BufferNotifySize(BufferNotifySize int32) foundation.HRESULT {
+func (self *ISpeechAudio) Put_BufferNotifySize(BufferNotifySize int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(BufferNotifySize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EventHandle dispatches through ISpeechAudio's vtable slot 19.
-func (self *ISpeechAudio) Get_EventHandle(EventHandle *int32) foundation.HRESULT {
+func (self *ISpeechAudio) Get_EventHandle(EventHandle *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EventHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetState dispatches through ISpeechAudio's vtable slot 20.
-func (self *ISpeechAudio) SetState(State SpeechAudioState) foundation.HRESULT {
+func (self *ISpeechAudio) SetState(State SpeechAudioState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(State))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 11b103d8-1142-4edf-a093-82fb3915f8cc
@@ -2773,39 +2905,39 @@ type ISpeechAudioBufferInfo struct {
 var IID_ISpeechAudioBufferInfo = win32.GUID{Data1: 0x11b103d8, Data2: 0x1142, Data3: 0x4edf, Data4: [8]byte{0xa0, 0x93, 0x82, 0xfb, 0x39, 0x15, 0xf8, 0xcc}}
 
 // Get_MinNotification dispatches through ISpeechAudioBufferInfo's vtable slot 7.
-func (self *ISpeechAudioBufferInfo) Get_MinNotification(MinNotification *int32) foundation.HRESULT {
+func (self *ISpeechAudioBufferInfo) Get_MinNotification(MinNotification *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MinNotification)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MinNotification dispatches through ISpeechAudioBufferInfo's vtable slot 8.
-func (self *ISpeechAudioBufferInfo) Put_MinNotification(MinNotification int32) foundation.HRESULT {
+func (self *ISpeechAudioBufferInfo) Put_MinNotification(MinNotification int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(MinNotification))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BufferSize dispatches through ISpeechAudioBufferInfo's vtable slot 9.
-func (self *ISpeechAudioBufferInfo) Get_BufferSize(BufferSize *int32) foundation.HRESULT {
+func (self *ISpeechAudioBufferInfo) Get_BufferSize(BufferSize *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(BufferSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_BufferSize dispatches through ISpeechAudioBufferInfo's vtable slot 10.
-func (self *ISpeechAudioBufferInfo) Put_BufferSize(BufferSize int32) foundation.HRESULT {
+func (self *ISpeechAudioBufferInfo) Put_BufferSize(BufferSize int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(BufferSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EventBias dispatches through ISpeechAudioBufferInfo's vtable slot 11.
-func (self *ISpeechAudioBufferInfo) Get_EventBias(EventBias *int32) foundation.HRESULT {
+func (self *ISpeechAudioBufferInfo) Get_EventBias(EventBias *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EventBias)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_EventBias dispatches through ISpeechAudioBufferInfo's vtable slot 12.
-func (self *ISpeechAudioBufferInfo) Put_EventBias(EventBias int32) foundation.HRESULT {
+func (self *ISpeechAudioBufferInfo) Put_EventBias(EventBias int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(EventBias))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: e6e9c590-3e18-40e3-8299-061f98bde7c7
@@ -2817,39 +2949,39 @@ type ISpeechAudioFormat struct {
 var IID_ISpeechAudioFormat = win32.GUID{Data1: 0xe6e9c590, Data2: 0x3e18, Data3: 0x40e3, Data4: [8]byte{0x82, 0x99, 0x06, 0x1f, 0x98, 0xbd, 0xe7, 0xc7}}
 
 // Get_Type dispatches through ISpeechAudioFormat's vtable slot 7.
-func (self *ISpeechAudioFormat) Get_Type(AudioFormat *SpeechAudioFormatType) foundation.HRESULT {
+func (self *ISpeechAudioFormat) Get_Type(AudioFormat *SpeechAudioFormatType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Type dispatches through ISpeechAudioFormat's vtable slot 8.
-func (self *ISpeechAudioFormat) Put_Type(AudioFormat SpeechAudioFormatType) foundation.HRESULT {
+func (self *ISpeechAudioFormat) Put_Type(AudioFormat SpeechAudioFormatType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(AudioFormat))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Guid dispatches through ISpeechAudioFormat's vtable slot 9.
-func (self *ISpeechAudioFormat) Get_Guid(Guid *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechAudioFormat) Get_Guid(Guid *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Guid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Guid dispatches through ISpeechAudioFormat's vtable slot 10.
-func (self *ISpeechAudioFormat) Put_Guid(Guid foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechAudioFormat) Put_Guid(Guid foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Guid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWaveFormatEx dispatches through ISpeechAudioFormat's vtable slot 11.
-func (self *ISpeechAudioFormat) GetWaveFormatEx(SpeechWaveFormatEx **ISpeechWaveFormatEx) foundation.HRESULT {
+func (self *ISpeechAudioFormat) GetWaveFormatEx(SpeechWaveFormatEx **ISpeechWaveFormatEx) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SpeechWaveFormatEx)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWaveFormatEx dispatches through ISpeechAudioFormat's vtable slot 12.
-func (self *ISpeechAudioFormat) SetWaveFormatEx(SpeechWaveFormatEx *ISpeechWaveFormatEx) foundation.HRESULT {
+func (self *ISpeechAudioFormat) SetWaveFormatEx(SpeechWaveFormatEx *ISpeechWaveFormatEx) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SpeechWaveFormatEx)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c62d9c91-7458-47f6-862d-1ef86fb0b278
@@ -2861,33 +2993,33 @@ type ISpeechAudioStatus struct {
 var IID_ISpeechAudioStatus = win32.GUID{Data1: 0xc62d9c91, Data2: 0x7458, Data3: 0x47f6, Data4: [8]byte{0x86, 0x2d, 0x1e, 0xf8, 0x6f, 0xb0, 0xb2, 0x78}}
 
 // Get_FreeBufferSpace dispatches through ISpeechAudioStatus's vtable slot 7.
-func (self *ISpeechAudioStatus) Get_FreeBufferSpace(FreeBufferSpace *int32) foundation.HRESULT {
+func (self *ISpeechAudioStatus) Get_FreeBufferSpace(FreeBufferSpace *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FreeBufferSpace)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NonBlockingIO dispatches through ISpeechAudioStatus's vtable slot 8.
-func (self *ISpeechAudioStatus) Get_NonBlockingIO(NonBlockingIO *int32) foundation.HRESULT {
+func (self *ISpeechAudioStatus) Get_NonBlockingIO(NonBlockingIO *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NonBlockingIO)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ISpeechAudioStatus's vtable slot 9.
-func (self *ISpeechAudioStatus) Get_State(State *SpeechAudioState) foundation.HRESULT {
+func (self *ISpeechAudioStatus) Get_State(State *SpeechAudioState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(State)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentSeekPosition dispatches through ISpeechAudioStatus's vtable slot 10.
-func (self *ISpeechAudioStatus) Get_CurrentSeekPosition(CurrentSeekPosition *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechAudioStatus) Get_CurrentSeekPosition(CurrentSeekPosition *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentSeekPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentDevicePosition dispatches through ISpeechAudioStatus's vtable slot 11.
-func (self *ISpeechAudioStatus) Get_CurrentDevicePosition(CurrentDevicePosition *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechAudioStatus) Get_CurrentDevicePosition(CurrentDevicePosition *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CurrentDevicePosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 6450336f-7d49-4ced-8097-49d6dee37294
@@ -2899,21 +3031,21 @@ type ISpeechBaseStream struct {
 var IID_ISpeechBaseStream = win32.GUID{Data1: 0x6450336f, Data2: 0x7d49, Data3: 0x4ced, Data4: [8]byte{0x80, 0x97, 0x49, 0xd6, 0xde, 0xe3, 0x72, 0x94}}
 
 // Get_Format dispatches through ISpeechBaseStream's vtable slot 7.
-func (self *ISpeechBaseStream) Get_Format(AudioFormat **ISpeechAudioFormat) foundation.HRESULT {
+func (self *ISpeechBaseStream) Get_Format(AudioFormat **ISpeechAudioFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_Format dispatches through ISpeechBaseStream's vtable slot 8.
-func (self *ISpeechBaseStream) Putref_Format(AudioFormat *ISpeechAudioFormat) foundation.HRESULT {
+func (self *ISpeechBaseStream) Putref_Format(AudioFormat *ISpeechAudioFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Read dispatches through ISpeechBaseStream's vtable slot 9.
-func (self *ISpeechBaseStream) Read(Buffer *systemvariant.VARIANT, NumberOfBytes int32, BytesRead *int32) foundation.HRESULT {
+func (self *ISpeechBaseStream) Read(Buffer *systemvariant.VARIANT, NumberOfBytes int32, BytesRead *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Buffer)), uintptr(NumberOfBytes), uintptr(unsafe.Pointer(BytesRead)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 1a9e9f4f-104f-4db8-a115-efd7fd0c97ae
@@ -2925,15 +3057,15 @@ type ISpeechCustomStream struct {
 var IID_ISpeechCustomStream = win32.GUID{Data1: 0x1a9e9f4f, Data2: 0x104f, Data3: 0x4db8, Data4: [8]byte{0xa1, 0x15, 0xef, 0xd7, 0xfd, 0x0c, 0x97, 0xae}}
 
 // Get_BaseStream dispatches through ISpeechCustomStream's vtable slot 12.
-func (self *ISpeechCustomStream) Get_BaseStream(ppUnkStream **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpeechCustomStream) Get_BaseStream(ppUnkStream **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUnkStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_BaseStream dispatches through ISpeechCustomStream's vtable slot 13.
-func (self *ISpeechCustomStream) Putref_BaseStream(pUnkStream *systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpeechCustomStream) Putref_BaseStream(pUnkStream *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ce17c09b-4efa-44d5-a4c9-59d9585ab0cd
@@ -2945,69 +3077,69 @@ type ISpeechDataKey struct {
 var IID_ISpeechDataKey = win32.GUID{Data1: 0xce17c09b, Data2: 0x4efa, Data3: 0x44d5, Data4: [8]byte{0xa4, 0xc9, 0x59, 0xd9, 0x58, 0x5a, 0xb0, 0xcd}}
 
 // GetBinaryValue dispatches through ISpeechDataKey's vtable slot 8.
-func (self *ISpeechDataKey) GetBinaryValue(ValueName foundation.BSTR, Value *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechDataKey) GetBinaryValue(ValueName foundation.BSTR, Value *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ValueName)), uintptr(unsafe.Pointer(Value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStringValue dispatches through ISpeechDataKey's vtable slot 9.
-func (self *ISpeechDataKey) SetStringValue(ValueName foundation.BSTR, Value foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechDataKey) SetStringValue(ValueName foundation.BSTR, Value foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ValueName)), uintptr(unsafe.Pointer(Value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStringValue dispatches through ISpeechDataKey's vtable slot 10.
-func (self *ISpeechDataKey) GetStringValue(ValueName foundation.BSTR, Value *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechDataKey) GetStringValue(ValueName foundation.BSTR, Value *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ValueName)), uintptr(unsafe.Pointer(Value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLongValue dispatches through ISpeechDataKey's vtable slot 11.
-func (self *ISpeechDataKey) SetLongValue(ValueName foundation.BSTR, Value int32) foundation.HRESULT {
+func (self *ISpeechDataKey) SetLongValue(ValueName foundation.BSTR, Value int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ValueName)), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLongValue dispatches through ISpeechDataKey's vtable slot 12.
-func (self *ISpeechDataKey) GetLongValue(ValueName foundation.BSTR, Value *int32) foundation.HRESULT {
+func (self *ISpeechDataKey) GetLongValue(ValueName foundation.BSTR, Value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ValueName)), uintptr(unsafe.Pointer(Value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenKey dispatches through ISpeechDataKey's vtable slot 13.
-func (self *ISpeechDataKey) OpenKey(SubKeyName foundation.BSTR, SubKey **ISpeechDataKey) foundation.HRESULT {
+func (self *ISpeechDataKey) OpenKey(SubKeyName foundation.BSTR, SubKey **ISpeechDataKey) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SubKeyName)), uintptr(unsafe.Pointer(SubKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateKey dispatches through ISpeechDataKey's vtable slot 14.
-func (self *ISpeechDataKey) CreateKey(SubKeyName foundation.BSTR, SubKey **ISpeechDataKey) foundation.HRESULT {
+func (self *ISpeechDataKey) CreateKey(SubKeyName foundation.BSTR, SubKey **ISpeechDataKey) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SubKeyName)), uintptr(unsafe.Pointer(SubKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteKey dispatches through ISpeechDataKey's vtable slot 15.
-func (self *ISpeechDataKey) DeleteKey(SubKeyName foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechDataKey) DeleteKey(SubKeyName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SubKeyName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteValue dispatches through ISpeechDataKey's vtable slot 16.
-func (self *ISpeechDataKey) DeleteValue(ValueName foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechDataKey) DeleteValue(ValueName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ValueName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumKeys dispatches through ISpeechDataKey's vtable slot 17.
-func (self *ISpeechDataKey) EnumKeys(Index int32, SubKeyName *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechDataKey) EnumKeys(Index int32, SubKeyName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(SubKeyName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumValues dispatches through ISpeechDataKey's vtable slot 18.
-func (self *ISpeechDataKey) EnumValues(Index int32, ValueName *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechDataKey) EnumValues(Index int32, ValueName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(ValueName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: af67f125-ab39-4e93-b4a2-cc2e66e182a7
@@ -3019,15 +3151,15 @@ type ISpeechFileStream struct {
 var IID_ISpeechFileStream = win32.GUID{Data1: 0xaf67f125, Data2: 0xab39, Data3: 0x4e93, Data4: [8]byte{0xb4, 0xa2, 0xcc, 0x2e, 0x66, 0xe1, 0x82, 0xa7}}
 
 // Open dispatches through ISpeechFileStream's vtable slot 12.
-func (self *ISpeechFileStream) Open(FileName foundation.BSTR, FileMode SpeechStreamFileMode, DoEvents foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechFileStream) Open(FileName foundation.BSTR, FileMode SpeechStreamFileMode, DoEvents foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FileName)), uintptr(FileMode), uintptr(DoEvents))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through ISpeechFileStream's vtable slot 13.
-func (self *ISpeechFileStream) Close() foundation.HRESULT {
+func (self *ISpeechFileStream) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: afe719cf-5dd1-44f2-999c-7a399f1cfccc
@@ -3039,45 +3171,45 @@ type ISpeechGrammarRule struct {
 var IID_ISpeechGrammarRule = win32.GUID{Data1: 0xafe719cf, Data2: 0x5dd1, Data3: 0x44f2, Data4: [8]byte{0x99, 0x9c, 0x7a, 0x39, 0x9f, 0x1c, 0xfc, 0xcc}}
 
 // Get_Attributes dispatches through ISpeechGrammarRule's vtable slot 7.
-func (self *ISpeechGrammarRule) Get_Attributes(Attributes *SpeechRuleAttributes) foundation.HRESULT {
+func (self *ISpeechGrammarRule) Get_Attributes(Attributes *SpeechRuleAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Attributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_InitialState dispatches through ISpeechGrammarRule's vtable slot 8.
-func (self *ISpeechGrammarRule) Get_InitialState(State **ISpeechGrammarRuleState) foundation.HRESULT {
+func (self *ISpeechGrammarRule) Get_InitialState(State **ISpeechGrammarRuleState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(State)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through ISpeechGrammarRule's vtable slot 9.
-func (self *ISpeechGrammarRule) Get_Name(Name *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechGrammarRule) Get_Name(Name *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through ISpeechGrammarRule's vtable slot 10.
-func (self *ISpeechGrammarRule) Get_Id(Id *int32) foundation.HRESULT {
+func (self *ISpeechGrammarRule) Get_Id(Id *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through ISpeechGrammarRule's vtable slot 11.
-func (self *ISpeechGrammarRule) Clear() foundation.HRESULT {
+func (self *ISpeechGrammarRule) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddResource dispatches through ISpeechGrammarRule's vtable slot 12.
-func (self *ISpeechGrammarRule) AddResource(ResourceName foundation.BSTR, ResourceValue foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechGrammarRule) AddResource(ResourceName foundation.BSTR, ResourceValue foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ResourceName)), uintptr(unsafe.Pointer(ResourceValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddState dispatches through ISpeechGrammarRule's vtable slot 13.
-func (self *ISpeechGrammarRule) AddState(State **ISpeechGrammarRuleState) foundation.HRESULT {
+func (self *ISpeechGrammarRule) AddState(State **ISpeechGrammarRuleState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(State)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d4286f2c-ee67-45ae-b928-28d695362eda
@@ -3089,15 +3221,15 @@ type ISpeechGrammarRuleState struct {
 var IID_ISpeechGrammarRuleState = win32.GUID{Data1: 0xd4286f2c, Data2: 0xee67, Data3: 0x45ae, Data4: [8]byte{0xb9, 0x28, 0x28, 0xd6, 0x95, 0x36, 0x2e, 0xda}}
 
 // Get_Rule dispatches through ISpeechGrammarRuleState's vtable slot 7.
-func (self *ISpeechGrammarRuleState) Get_Rule(Rule **ISpeechGrammarRule) foundation.HRESULT {
+func (self *ISpeechGrammarRuleState) Get_Rule(Rule **ISpeechGrammarRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rule)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Transitions dispatches through ISpeechGrammarRuleState's vtable slot 8.
-func (self *ISpeechGrammarRuleState) Get_Transitions(Transitions **ISpeechGrammarRuleStateTransitions) foundation.HRESULT {
+func (self *ISpeechGrammarRuleState) Get_Transitions(Transitions **ISpeechGrammarRuleStateTransitions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Transitions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: cafd1db1-41d1-4a06-9863-e2e81da17a9a
@@ -3109,51 +3241,51 @@ type ISpeechGrammarRuleStateTransition struct {
 var IID_ISpeechGrammarRuleStateTransition = win32.GUID{Data1: 0xcafd1db1, Data2: 0x41d1, Data3: 0x4a06, Data4: [8]byte{0x98, 0x63, 0xe2, 0xe8, 0x1d, 0xa1, 0x7a, 0x9a}}
 
 // Get_Type dispatches through ISpeechGrammarRuleStateTransition's vtable slot 7.
-func (self *ISpeechGrammarRuleStateTransition) Get_Type(Type *SpeechGrammarRuleStateTransitionType) foundation.HRESULT {
+func (self *ISpeechGrammarRuleStateTransition) Get_Type(Type *SpeechGrammarRuleStateTransitionType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Text dispatches through ISpeechGrammarRuleStateTransition's vtable slot 8.
-func (self *ISpeechGrammarRuleStateTransition) Get_Text(Text *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechGrammarRuleStateTransition) Get_Text(Text *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Text)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Rule dispatches through ISpeechGrammarRuleStateTransition's vtable slot 9.
-func (self *ISpeechGrammarRuleStateTransition) Get_Rule(Rule **ISpeechGrammarRule) foundation.HRESULT {
+func (self *ISpeechGrammarRuleStateTransition) Get_Rule(Rule **ISpeechGrammarRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rule)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Weight dispatches through ISpeechGrammarRuleStateTransition's vtable slot 10.
-func (self *ISpeechGrammarRuleStateTransition) Get_Weight(Weight *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechGrammarRuleStateTransition) Get_Weight(Weight *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Weight)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PropertyName dispatches through ISpeechGrammarRuleStateTransition's vtable slot 11.
-func (self *ISpeechGrammarRuleStateTransition) Get_PropertyName(PropertyName *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechGrammarRuleStateTransition) Get_PropertyName(PropertyName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropertyName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PropertyId dispatches through ISpeechGrammarRuleStateTransition's vtable slot 12.
-func (self *ISpeechGrammarRuleStateTransition) Get_PropertyId(PropertyId *int32) foundation.HRESULT {
+func (self *ISpeechGrammarRuleStateTransition) Get_PropertyId(PropertyId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropertyId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PropertyValue dispatches through ISpeechGrammarRuleStateTransition's vtable slot 13.
-func (self *ISpeechGrammarRuleStateTransition) Get_PropertyValue(PropertyValue *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechGrammarRuleStateTransition) Get_PropertyValue(PropertyValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PropertyValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NextState dispatches through ISpeechGrammarRuleStateTransition's vtable slot 14.
-func (self *ISpeechGrammarRuleStateTransition) Get_NextState(NextState **ISpeechGrammarRuleState) foundation.HRESULT {
+func (self *ISpeechGrammarRuleStateTransition) Get_NextState(NextState **ISpeechGrammarRuleState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NextState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eabce657-75bc-44a2-aa7f-c56476742963
@@ -3165,21 +3297,21 @@ type ISpeechGrammarRuleStateTransitions struct {
 var IID_ISpeechGrammarRuleStateTransitions = win32.GUID{Data1: 0xeabce657, Data2: 0x75bc, Data3: 0x44a2, Data4: [8]byte{0xaa, 0x7f, 0xc5, 0x64, 0x76, 0x74, 0x29, 0x63}}
 
 // Get_Count dispatches through ISpeechGrammarRuleStateTransitions's vtable slot 7.
-func (self *ISpeechGrammarRuleStateTransitions) Get_Count(Count *int32) foundation.HRESULT {
+func (self *ISpeechGrammarRuleStateTransitions) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through ISpeechGrammarRuleStateTransitions's vtable slot 8.
-func (self *ISpeechGrammarRuleStateTransitions) Item(Index int32, Transition **ISpeechGrammarRuleStateTransition) foundation.HRESULT {
+func (self *ISpeechGrammarRuleStateTransitions) Item(Index int32, Transition **ISpeechGrammarRuleStateTransition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Transition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISpeechGrammarRuleStateTransitions's vtable slot 9.
-func (self *ISpeechGrammarRuleStateTransitions) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpeechGrammarRuleStateTransitions) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EnumVARIANT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 6ffa3b44-fc2d-40d1-8afc-32911c7f1ad1
@@ -3191,45 +3323,45 @@ type ISpeechGrammarRules struct {
 var IID_ISpeechGrammarRules = win32.GUID{Data1: 0x6ffa3b44, Data2: 0xfc2d, Data3: 0x40d1, Data4: [8]byte{0x8a, 0xfc, 0x32, 0x91, 0x1c, 0x7f, 0x1a, 0xd1}}
 
 // Get_Count dispatches through ISpeechGrammarRules's vtable slot 7.
-func (self *ISpeechGrammarRules) Get_Count(Count *int32) foundation.HRESULT {
+func (self *ISpeechGrammarRules) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through ISpeechGrammarRules's vtable slot 9.
-func (self *ISpeechGrammarRules) Item(Index int32, Rule **ISpeechGrammarRule) foundation.HRESULT {
+func (self *ISpeechGrammarRules) Item(Index int32, Rule **ISpeechGrammarRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Rule)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISpeechGrammarRules's vtable slot 10.
-func (self *ISpeechGrammarRules) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpeechGrammarRules) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EnumVARIANT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Dynamic dispatches through ISpeechGrammarRules's vtable slot 11.
-func (self *ISpeechGrammarRules) Get_Dynamic(Dynamic *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechGrammarRules) Get_Dynamic(Dynamic *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Dynamic)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through ISpeechGrammarRules's vtable slot 12.
-func (self *ISpeechGrammarRules) Add(RuleName foundation.BSTR, Attributes SpeechRuleAttributes, RuleId int32, Rule **ISpeechGrammarRule) foundation.HRESULT {
+func (self *ISpeechGrammarRules) Add(RuleName foundation.BSTR, Attributes SpeechRuleAttributes, RuleId int32, Rule **ISpeechGrammarRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RuleName)), uintptr(Attributes), uintptr(RuleId), uintptr(unsafe.Pointer(Rule)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Commit dispatches through ISpeechGrammarRules's vtable slot 13.
-func (self *ISpeechGrammarRules) Commit() foundation.HRESULT {
+func (self *ISpeechGrammarRules) Commit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CommitAndSave dispatches through ISpeechGrammarRules's vtable slot 14.
-func (self *ISpeechGrammarRules) CommitAndSave(ErrorText *foundation.BSTR, SaveStream *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechGrammarRules) CommitAndSave(ErrorText *foundation.BSTR, SaveStream *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ErrorText)), uintptr(unsafe.Pointer(SaveStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3da7627a-c7ae-4b23-8708-638c50362c25
@@ -3241,51 +3373,51 @@ type ISpeechLexicon struct {
 var IID_ISpeechLexicon = win32.GUID{Data1: 0x3da7627a, Data2: 0xc7ae, Data3: 0x4b23, Data4: [8]byte{0x87, 0x08, 0x63, 0x8c, 0x50, 0x36, 0x2c, 0x25}}
 
 // Get_GenerationId dispatches through ISpeechLexicon's vtable slot 7.
-func (self *ISpeechLexicon) Get_GenerationId(GenerationId *int32) foundation.HRESULT {
+func (self *ISpeechLexicon) Get_GenerationId(GenerationId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(GenerationId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWords dispatches through ISpeechLexicon's vtable slot 8.
-func (self *ISpeechLexicon) GetWords(Flags SpeechLexiconType, GenerationID *int32, Words **ISpeechLexiconWords) foundation.HRESULT {
+func (self *ISpeechLexicon) GetWords(Flags SpeechLexiconType, GenerationID *int32, Words **ISpeechLexiconWords) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(GenerationID)), uintptr(unsafe.Pointer(Words)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddPronunciation dispatches through ISpeechLexicon's vtable slot 9.
-func (self *ISpeechLexicon) AddPronunciation(bstrWord foundation.BSTR, LangId int32, PartOfSpeech SpeechPartOfSpeech, bstrPronunciation foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechLexicon) AddPronunciation(bstrWord foundation.BSTR, LangId int32, PartOfSpeech SpeechPartOfSpeech, bstrPronunciation foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrWord)), uintptr(LangId), uintptr(PartOfSpeech), uintptr(unsafe.Pointer(bstrPronunciation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddPronunciationByPhoneIds dispatches through ISpeechLexicon's vtable slot 10.
-func (self *ISpeechLexicon) AddPronunciationByPhoneIds(bstrWord foundation.BSTR, LangId int32, PartOfSpeech SpeechPartOfSpeech, PhoneIds *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechLexicon) AddPronunciationByPhoneIds(bstrWord foundation.BSTR, LangId int32, PartOfSpeech SpeechPartOfSpeech, PhoneIds *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrWord)), uintptr(LangId), uintptr(PartOfSpeech), uintptr(unsafe.Pointer(PhoneIds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemovePronunciation dispatches through ISpeechLexicon's vtable slot 11.
-func (self *ISpeechLexicon) RemovePronunciation(bstrWord foundation.BSTR, LangId int32, PartOfSpeech SpeechPartOfSpeech, bstrPronunciation foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechLexicon) RemovePronunciation(bstrWord foundation.BSTR, LangId int32, PartOfSpeech SpeechPartOfSpeech, bstrPronunciation foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrWord)), uintptr(LangId), uintptr(PartOfSpeech), uintptr(unsafe.Pointer(bstrPronunciation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemovePronunciationByPhoneIds dispatches through ISpeechLexicon's vtable slot 12.
-func (self *ISpeechLexicon) RemovePronunciationByPhoneIds(bstrWord foundation.BSTR, LangId int32, PartOfSpeech SpeechPartOfSpeech, PhoneIds *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechLexicon) RemovePronunciationByPhoneIds(bstrWord foundation.BSTR, LangId int32, PartOfSpeech SpeechPartOfSpeech, PhoneIds *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrWord)), uintptr(LangId), uintptr(PartOfSpeech), uintptr(unsafe.Pointer(PhoneIds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPronunciations dispatches through ISpeechLexicon's vtable slot 13.
-func (self *ISpeechLexicon) GetPronunciations(bstrWord foundation.BSTR, LangId int32, TypeFlags SpeechLexiconType, ppPronunciations **ISpeechLexiconPronunciations) foundation.HRESULT {
+func (self *ISpeechLexicon) GetPronunciations(bstrWord foundation.BSTR, LangId int32, TypeFlags SpeechLexiconType, ppPronunciations **ISpeechLexiconPronunciations) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrWord)), uintptr(LangId), uintptr(TypeFlags), uintptr(unsafe.Pointer(ppPronunciations)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGenerationChange dispatches through ISpeechLexicon's vtable slot 14.
-func (self *ISpeechLexicon) GetGenerationChange(GenerationID *int32, ppWords **ISpeechLexiconWords) foundation.HRESULT {
+func (self *ISpeechLexicon) GetGenerationChange(GenerationID *int32, ppWords **ISpeechLexiconWords) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(GenerationID)), uintptr(unsafe.Pointer(ppWords)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 95252c5d-9e43-4f4a-9899-48ee73352f9f
@@ -3297,33 +3429,33 @@ type ISpeechLexiconPronunciation struct {
 var IID_ISpeechLexiconPronunciation = win32.GUID{Data1: 0x95252c5d, Data2: 0x9e43, Data3: 0x4f4a, Data4: [8]byte{0x98, 0x99, 0x48, 0xee, 0x73, 0x35, 0x2f, 0x9f}}
 
 // Get_Type dispatches through ISpeechLexiconPronunciation's vtable slot 7.
-func (self *ISpeechLexiconPronunciation) Get_Type(LexiconType *SpeechLexiconType) foundation.HRESULT {
+func (self *ISpeechLexiconPronunciation) Get_Type(LexiconType *SpeechLexiconType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LexiconType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LangId dispatches through ISpeechLexiconPronunciation's vtable slot 8.
-func (self *ISpeechLexiconPronunciation) Get_LangId(LangId *int32) foundation.HRESULT {
+func (self *ISpeechLexiconPronunciation) Get_LangId(LangId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LangId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PartOfSpeech dispatches through ISpeechLexiconPronunciation's vtable slot 9.
-func (self *ISpeechLexiconPronunciation) Get_PartOfSpeech(PartOfSpeech *SpeechPartOfSpeech) foundation.HRESULT {
+func (self *ISpeechLexiconPronunciation) Get_PartOfSpeech(PartOfSpeech *SpeechPartOfSpeech) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PartOfSpeech)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PhoneIds dispatches through ISpeechLexiconPronunciation's vtable slot 10.
-func (self *ISpeechLexiconPronunciation) Get_PhoneIds(PhoneIds *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechLexiconPronunciation) Get_PhoneIds(PhoneIds *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PhoneIds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Symbolic dispatches through ISpeechLexiconPronunciation's vtable slot 11.
-func (self *ISpeechLexiconPronunciation) Get_Symbolic(Symbolic *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechLexiconPronunciation) Get_Symbolic(Symbolic *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Symbolic)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 72829128-5682-4704-a0d4-3e2bb6f2ead3
@@ -3335,21 +3467,21 @@ type ISpeechLexiconPronunciations struct {
 var IID_ISpeechLexiconPronunciations = win32.GUID{Data1: 0x72829128, Data2: 0x5682, Data3: 0x4704, Data4: [8]byte{0xa0, 0xd4, 0x3e, 0x2b, 0xb6, 0xf2, 0xea, 0xd3}}
 
 // Get_Count dispatches through ISpeechLexiconPronunciations's vtable slot 7.
-func (self *ISpeechLexiconPronunciations) Get_Count(Count *int32) foundation.HRESULT {
+func (self *ISpeechLexiconPronunciations) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through ISpeechLexiconPronunciations's vtable slot 8.
-func (self *ISpeechLexiconPronunciations) Item(Index int32, Pronunciation **ISpeechLexiconPronunciation) foundation.HRESULT {
+func (self *ISpeechLexiconPronunciations) Item(Index int32, Pronunciation **ISpeechLexiconPronunciation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Pronunciation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISpeechLexiconPronunciations's vtable slot 9.
-func (self *ISpeechLexiconPronunciations) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpeechLexiconPronunciations) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EnumVARIANT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4e5b933c-c9be-48ed-8842-1ee51bb1d4ff
@@ -3361,27 +3493,27 @@ type ISpeechLexiconWord struct {
 var IID_ISpeechLexiconWord = win32.GUID{Data1: 0x4e5b933c, Data2: 0xc9be, Data3: 0x48ed, Data4: [8]byte{0x88, 0x42, 0x1e, 0xe5, 0x1b, 0xb1, 0xd4, 0xff}}
 
 // Get_LangId dispatches through ISpeechLexiconWord's vtable slot 7.
-func (self *ISpeechLexiconWord) Get_LangId(LangId *int32) foundation.HRESULT {
+func (self *ISpeechLexiconWord) Get_LangId(LangId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LangId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Type dispatches through ISpeechLexiconWord's vtable slot 8.
-func (self *ISpeechLexiconWord) Get_Type(WordType *SpeechWordType) foundation.HRESULT {
+func (self *ISpeechLexiconWord) Get_Type(WordType *SpeechWordType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(WordType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Word dispatches through ISpeechLexiconWord's vtable slot 9.
-func (self *ISpeechLexiconWord) Get_Word(Word *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechLexiconWord) Get_Word(Word *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Word)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Pronunciations dispatches through ISpeechLexiconWord's vtable slot 10.
-func (self *ISpeechLexiconWord) Get_Pronunciations(Pronunciations **ISpeechLexiconPronunciations) foundation.HRESULT {
+func (self *ISpeechLexiconWord) Get_Pronunciations(Pronunciations **ISpeechLexiconPronunciations) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Pronunciations)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8d199862-415e-47d5-ac4f-faa608b424e6
@@ -3393,21 +3525,21 @@ type ISpeechLexiconWords struct {
 var IID_ISpeechLexiconWords = win32.GUID{Data1: 0x8d199862, Data2: 0x415e, Data3: 0x47d5, Data4: [8]byte{0xac, 0x4f, 0xfa, 0xa6, 0x08, 0xb4, 0x24, 0xe6}}
 
 // Get_Count dispatches through ISpeechLexiconWords's vtable slot 7.
-func (self *ISpeechLexiconWords) Get_Count(Count *int32) foundation.HRESULT {
+func (self *ISpeechLexiconWords) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through ISpeechLexiconWords's vtable slot 8.
-func (self *ISpeechLexiconWords) Item(Index int32, Word **ISpeechLexiconWord) foundation.HRESULT {
+func (self *ISpeechLexiconWords) Item(Index int32, Word **ISpeechLexiconWord) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Word)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISpeechLexiconWords's vtable slot 9.
-func (self *ISpeechLexiconWords) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpeechLexiconWords) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EnumVARIANT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3c76af6d-1fd7-4831-81d1-3b71d5a13c44
@@ -3419,33 +3551,33 @@ type ISpeechMMSysAudio struct {
 var IID_ISpeechMMSysAudio = win32.GUID{Data1: 0x3c76af6d, Data2: 0x1fd7, Data3: 0x4831, Data4: [8]byte{0x81, 0xd1, 0x3b, 0x71, 0xd5, 0xa1, 0x3c, 0x44}}
 
 // Get_DeviceId dispatches through ISpeechMMSysAudio's vtable slot 21.
-func (self *ISpeechMMSysAudio) Get_DeviceId(DeviceId *int32) foundation.HRESULT {
+func (self *ISpeechMMSysAudio) Get_DeviceId(DeviceId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DeviceId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_DeviceId dispatches through ISpeechMMSysAudio's vtable slot 22.
-func (self *ISpeechMMSysAudio) Put_DeviceId(DeviceId int32) foundation.HRESULT {
+func (self *ISpeechMMSysAudio) Put_DeviceId(DeviceId int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(DeviceId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LineId dispatches through ISpeechMMSysAudio's vtable slot 23.
-func (self *ISpeechMMSysAudio) Get_LineId(LineId *int32) foundation.HRESULT {
+func (self *ISpeechMMSysAudio) Get_LineId(LineId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LineId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_LineId dispatches through ISpeechMMSysAudio's vtable slot 24.
-func (self *ISpeechMMSysAudio) Put_LineId(LineId int32) foundation.HRESULT {
+func (self *ISpeechMMSysAudio) Put_LineId(LineId int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(LineId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MMHandle dispatches through ISpeechMMSysAudio's vtable slot 25.
-func (self *ISpeechMMSysAudio) Get_MMHandle(Handle *int32) foundation.HRESULT {
+func (self *ISpeechMMSysAudio) Get_MMHandle(Handle *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Handle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eeb14b68-808b-4abe-a5ea-b51da7588008
@@ -3457,9 +3589,9 @@ type ISpeechMemoryStream struct {
 var IID_ISpeechMemoryStream = win32.GUID{Data1: 0xeeb14b68, Data2: 0x808b, Data3: 0x4abe, Data4: [8]byte{0xa5, 0xea, 0xb5, 0x1d, 0xa7, 0x58, 0x80, 0x08}}
 
 // GetData dispatches through ISpeechMemoryStream's vtable slot 13.
-func (self *ISpeechMemoryStream) GetData(pData *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechMemoryStream) GetData(pData *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c74a3adc-b727-4500-a84a-b526721c8b8c
@@ -3471,81 +3603,81 @@ type ISpeechObjectToken struct {
 var IID_ISpeechObjectToken = win32.GUID{Data1: 0xc74a3adc, Data2: 0xb727, Data3: 0x4500, Data4: [8]byte{0xa8, 0x4a, 0xb5, 0x26, 0x72, 0x1c, 0x8b, 0x8c}}
 
 // Get_Id dispatches through ISpeechObjectToken's vtable slot 7.
-func (self *ISpeechObjectToken) Get_Id(ObjectId *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechObjectToken) Get_Id(ObjectId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ObjectId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DataKey dispatches through ISpeechObjectToken's vtable slot 8.
-func (self *ISpeechObjectToken) Get_DataKey(DataKey **ISpeechDataKey) foundation.HRESULT {
+func (self *ISpeechObjectToken) Get_DataKey(DataKey **ISpeechDataKey) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DataKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Category dispatches through ISpeechObjectToken's vtable slot 9.
-func (self *ISpeechObjectToken) Get_Category(Category **ISpeechObjectTokenCategory) foundation.HRESULT {
+func (self *ISpeechObjectToken) Get_Category(Category **ISpeechObjectTokenCategory) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Category)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDescription dispatches through ISpeechObjectToken's vtable slot 10.
-func (self *ISpeechObjectToken) GetDescription(Locale int32, Description *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechObjectToken) GetDescription(Locale int32, Description *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Locale), uintptr(unsafe.Pointer(Description)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetId dispatches through ISpeechObjectToken's vtable slot 11.
-func (self *ISpeechObjectToken) SetId(Id foundation.BSTR, CategoryID foundation.BSTR, CreateIfNotExist foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechObjectToken) SetId(Id foundation.BSTR, CategoryID foundation.BSTR, CreateIfNotExist foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(CategoryID)), uintptr(CreateIfNotExist))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAttribute dispatches through ISpeechObjectToken's vtable slot 12.
-func (self *ISpeechObjectToken) GetAttribute(AttributeName foundation.BSTR, AttributeValue *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechObjectToken) GetAttribute(AttributeName foundation.BSTR, AttributeValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AttributeName)), uintptr(unsafe.Pointer(AttributeValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateInstance dispatches through ISpeechObjectToken's vtable slot 13.
-func (self *ISpeechObjectToken) CreateInstance(pUnkOuter *systemcom.IUnknown, ClsContext SpeechTokenContext, Object **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpeechObjectToken) CreateInstance(pUnkOuter *systemcom.IUnknown, ClsContext SpeechTokenContext, Object **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(ClsContext), uintptr(unsafe.Pointer(Object)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through ISpeechObjectToken's vtable slot 14.
-func (self *ISpeechObjectToken) Remove(ObjectStorageCLSID foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechObjectToken) Remove(ObjectStorageCLSID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ObjectStorageCLSID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStorageFileName dispatches through ISpeechObjectToken's vtable slot 15.
-func (self *ISpeechObjectToken) GetStorageFileName(ObjectStorageCLSID foundation.BSTR, KeyName foundation.BSTR, FileName foundation.BSTR, Folder SpeechTokenShellFolder, FilePath *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechObjectToken) GetStorageFileName(ObjectStorageCLSID foundation.BSTR, KeyName foundation.BSTR, FileName foundation.BSTR, Folder SpeechTokenShellFolder, FilePath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ObjectStorageCLSID)), uintptr(unsafe.Pointer(KeyName)), uintptr(unsafe.Pointer(FileName)), uintptr(Folder), uintptr(unsafe.Pointer(FilePath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveStorageFileName dispatches through ISpeechObjectToken's vtable slot 16.
-func (self *ISpeechObjectToken) RemoveStorageFileName(ObjectStorageCLSID foundation.BSTR, KeyName foundation.BSTR, DeleteFile foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechObjectToken) RemoveStorageFileName(ObjectStorageCLSID foundation.BSTR, KeyName foundation.BSTR, DeleteFile foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ObjectStorageCLSID)), uintptr(unsafe.Pointer(KeyName)), uintptr(DeleteFile))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsUISupported dispatches through ISpeechObjectToken's vtable slot 17.
-func (self *ISpeechObjectToken) IsUISupported(TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT, Object *systemcom.IUnknown, Supported *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechObjectToken) IsUISupported(TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT, Object *systemcom.IUnknown, Supported *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TypeOfUI)), uintptr(unsafe.Pointer(ExtraData)), uintptr(unsafe.Pointer(Object)), uintptr(unsafe.Pointer(Supported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisplayUI dispatches through ISpeechObjectToken's vtable slot 18.
-func (self *ISpeechObjectToken) DisplayUI(hWnd int32, Title foundation.BSTR, TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT, Object *systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpeechObjectToken) DisplayUI(hWnd int32, Title foundation.BSTR, TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT, Object *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(Title)), uintptr(unsafe.Pointer(TypeOfUI)), uintptr(unsafe.Pointer(ExtraData)), uintptr(unsafe.Pointer(Object)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MatchesAttributes dispatches through ISpeechObjectToken's vtable slot 19.
-func (self *ISpeechObjectToken) MatchesAttributes(Attributes foundation.BSTR, Matches *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechObjectToken) MatchesAttributes(Attributes foundation.BSTR, Matches *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Attributes)), uintptr(unsafe.Pointer(Matches)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ca7eac50-2d01-4145-86d4-5ae7d70f4469
@@ -3557,39 +3689,39 @@ type ISpeechObjectTokenCategory struct {
 var IID_ISpeechObjectTokenCategory = win32.GUID{Data1: 0xca7eac50, Data2: 0x2d01, Data3: 0x4145, Data4: [8]byte{0x86, 0xd4, 0x5a, 0xe7, 0xd7, 0x0f, 0x44, 0x69}}
 
 // Get_Id dispatches through ISpeechObjectTokenCategory's vtable slot 7.
-func (self *ISpeechObjectTokenCategory) Get_Id(Id *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechObjectTokenCategory) Get_Id(Id *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Default dispatches through ISpeechObjectTokenCategory's vtable slot 8.
-func (self *ISpeechObjectTokenCategory) Put_Default(TokenId foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechObjectTokenCategory) Put_Default(TokenId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TokenId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Default dispatches through ISpeechObjectTokenCategory's vtable slot 9.
-func (self *ISpeechObjectTokenCategory) Get_Default(TokenId *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechObjectTokenCategory) Get_Default(TokenId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TokenId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetId dispatches through ISpeechObjectTokenCategory's vtable slot 10.
-func (self *ISpeechObjectTokenCategory) SetId(Id foundation.BSTR, CreateIfNotExist foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechObjectTokenCategory) SetId(Id foundation.BSTR, CreateIfNotExist foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)), uintptr(CreateIfNotExist))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDataKey dispatches through ISpeechObjectTokenCategory's vtable slot 11.
-func (self *ISpeechObjectTokenCategory) GetDataKey(Location SpeechDataKeyLocation, DataKey **ISpeechDataKey) foundation.HRESULT {
+func (self *ISpeechObjectTokenCategory) GetDataKey(Location SpeechDataKeyLocation, DataKey **ISpeechDataKey) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Location), uintptr(unsafe.Pointer(DataKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateTokens dispatches through ISpeechObjectTokenCategory's vtable slot 12.
-func (self *ISpeechObjectTokenCategory) EnumerateTokens(RequiredAttributes foundation.BSTR, OptionalAttributes foundation.BSTR, Tokens **ISpeechObjectTokens) foundation.HRESULT {
+func (self *ISpeechObjectTokenCategory) EnumerateTokens(RequiredAttributes foundation.BSTR, OptionalAttributes foundation.BSTR, Tokens **ISpeechObjectTokens) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RequiredAttributes)), uintptr(unsafe.Pointer(OptionalAttributes)), uintptr(unsafe.Pointer(Tokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 9285b776-2e7b-4bc0-b53e-580eb6fa967f
@@ -3601,21 +3733,21 @@ type ISpeechObjectTokens struct {
 var IID_ISpeechObjectTokens = win32.GUID{Data1: 0x9285b776, Data2: 0x2e7b, Data3: 0x4bc0, Data4: [8]byte{0xb5, 0x3e, 0x58, 0x0e, 0xb6, 0xfa, 0x96, 0x7f}}
 
 // Get_Count dispatches through ISpeechObjectTokens's vtable slot 7.
-func (self *ISpeechObjectTokens) Get_Count(Count *int32) foundation.HRESULT {
+func (self *ISpeechObjectTokens) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through ISpeechObjectTokens's vtable slot 8.
-func (self *ISpeechObjectTokens) Item(Index int32, Token **ISpeechObjectToken) foundation.HRESULT {
+func (self *ISpeechObjectTokens) Item(Index int32, Token **ISpeechObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Token)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISpeechObjectTokens's vtable slot 9.
-func (self *ISpeechObjectTokens) Get__NewEnum(ppEnumVARIANT **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpeechObjectTokens) Get__NewEnum(ppEnumVARIANT **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumVARIANT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c3e4f353-433f-43d6-89a1-6a62a7054c3d
@@ -3627,21 +3759,21 @@ type ISpeechPhoneConverter struct {
 var IID_ISpeechPhoneConverter = win32.GUID{Data1: 0xc3e4f353, Data2: 0x433f, Data3: 0x43d6, Data4: [8]byte{0x89, 0xa1, 0x6a, 0x62, 0xa7, 0x05, 0x4c, 0x3d}}
 
 // Get_LanguageId dispatches through ISpeechPhoneConverter's vtable slot 7.
-func (self *ISpeechPhoneConverter) Get_LanguageId(LanguageId *int32) foundation.HRESULT {
+func (self *ISpeechPhoneConverter) Get_LanguageId(LanguageId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LanguageId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_LanguageId dispatches through ISpeechPhoneConverter's vtable slot 8.
-func (self *ISpeechPhoneConverter) Put_LanguageId(LanguageId int32) foundation.HRESULT {
+func (self *ISpeechPhoneConverter) Put_LanguageId(LanguageId int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(LanguageId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PhoneToId dispatches through ISpeechPhoneConverter's vtable slot 9.
-func (self *ISpeechPhoneConverter) PhoneToId(Phonemes foundation.BSTR, IdArray *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechPhoneConverter) PhoneToId(Phonemes foundation.BSTR, IdArray *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Phonemes)), uintptr(unsafe.Pointer(IdArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 27864a2a-2b9f-4cb8-92d3-0d2722fd1e73
@@ -3653,33 +3785,33 @@ type ISpeechPhraseAlternate struct {
 var IID_ISpeechPhraseAlternate = win32.GUID{Data1: 0x27864a2a, Data2: 0x2b9f, Data3: 0x4cb8, Data4: [8]byte{0x92, 0xd3, 0x0d, 0x27, 0x22, 0xfd, 0x1e, 0x73}}
 
 // Get_RecoResult dispatches through ISpeechPhraseAlternate's vtable slot 7.
-func (self *ISpeechPhraseAlternate) Get_RecoResult(RecoResult **ISpeechRecoResult) foundation.HRESULT {
+func (self *ISpeechPhraseAlternate) Get_RecoResult(RecoResult **ISpeechRecoResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RecoResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_StartElementInResult dispatches through ISpeechPhraseAlternate's vtable slot 8.
-func (self *ISpeechPhraseAlternate) Get_StartElementInResult(StartElement *int32) foundation.HRESULT {
+func (self *ISpeechPhraseAlternate) Get_StartElementInResult(StartElement *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartElement)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NumberOfElementsInResult dispatches through ISpeechPhraseAlternate's vtable slot 9.
-func (self *ISpeechPhraseAlternate) Get_NumberOfElementsInResult(NumberOfElements *int32) foundation.HRESULT {
+func (self *ISpeechPhraseAlternate) Get_NumberOfElementsInResult(NumberOfElements *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NumberOfElements)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PhraseInfo dispatches through ISpeechPhraseAlternate's vtable slot 10.
-func (self *ISpeechPhraseAlternate) Get_PhraseInfo(PhraseInfo **ISpeechPhraseInfo) foundation.HRESULT {
+func (self *ISpeechPhraseAlternate) Get_PhraseInfo(PhraseInfo **ISpeechPhraseInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PhraseInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Commit dispatches through ISpeechPhraseAlternate's vtable slot 11.
-func (self *ISpeechPhraseAlternate) Commit() foundation.HRESULT {
+func (self *ISpeechPhraseAlternate) Commit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b238b6d5-f276-4c3d-a6c1-2974801c3cc2
@@ -3691,21 +3823,21 @@ type ISpeechPhraseAlternates struct {
 var IID_ISpeechPhraseAlternates = win32.GUID{Data1: 0xb238b6d5, Data2: 0xf276, Data3: 0x4c3d, Data4: [8]byte{0xa6, 0xc1, 0x29, 0x74, 0x80, 0x1c, 0x3c, 0xc2}}
 
 // Get_Count dispatches through ISpeechPhraseAlternates's vtable slot 7.
-func (self *ISpeechPhraseAlternates) Get_Count(Count *int32) foundation.HRESULT {
+func (self *ISpeechPhraseAlternates) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through ISpeechPhraseAlternates's vtable slot 8.
-func (self *ISpeechPhraseAlternates) Item(Index int32, PhraseAlternate **ISpeechPhraseAlternate) foundation.HRESULT {
+func (self *ISpeechPhraseAlternates) Item(Index int32, PhraseAlternate **ISpeechPhraseAlternate) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(PhraseAlternate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISpeechPhraseAlternates's vtable slot 9.
-func (self *ISpeechPhraseAlternates) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpeechPhraseAlternates) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EnumVARIANT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: e6176f96-e373-4801-b223-3b62c068c0b4
@@ -3717,81 +3849,81 @@ type ISpeechPhraseElement struct {
 var IID_ISpeechPhraseElement = win32.GUID{Data1: 0xe6176f96, Data2: 0xe373, Data3: 0x4801, Data4: [8]byte{0xb2, 0x23, 0x3b, 0x62, 0xc0, 0x68, 0xc0, 0xb4}}
 
 // Get_AudioTimeOffset dispatches through ISpeechPhraseElement's vtable slot 7.
-func (self *ISpeechPhraseElement) Get_AudioTimeOffset(AudioTimeOffset *int32) foundation.HRESULT {
+func (self *ISpeechPhraseElement) Get_AudioTimeOffset(AudioTimeOffset *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioTimeOffset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioSizeTime dispatches through ISpeechPhraseElement's vtable slot 8.
-func (self *ISpeechPhraseElement) Get_AudioSizeTime(AudioSizeTime *int32) foundation.HRESULT {
+func (self *ISpeechPhraseElement) Get_AudioSizeTime(AudioSizeTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioSizeTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioStreamOffset dispatches through ISpeechPhraseElement's vtable slot 9.
-func (self *ISpeechPhraseElement) Get_AudioStreamOffset(AudioStreamOffset *int32) foundation.HRESULT {
+func (self *ISpeechPhraseElement) Get_AudioStreamOffset(AudioStreamOffset *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioStreamOffset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioSizeBytes dispatches through ISpeechPhraseElement's vtable slot 10.
-func (self *ISpeechPhraseElement) Get_AudioSizeBytes(AudioSizeBytes *int32) foundation.HRESULT {
+func (self *ISpeechPhraseElement) Get_AudioSizeBytes(AudioSizeBytes *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioSizeBytes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RetainedStreamOffset dispatches through ISpeechPhraseElement's vtable slot 11.
-func (self *ISpeechPhraseElement) Get_RetainedStreamOffset(RetainedStreamOffset *int32) foundation.HRESULT {
+func (self *ISpeechPhraseElement) Get_RetainedStreamOffset(RetainedStreamOffset *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RetainedStreamOffset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RetainedSizeBytes dispatches through ISpeechPhraseElement's vtable slot 12.
-func (self *ISpeechPhraseElement) Get_RetainedSizeBytes(RetainedSizeBytes *int32) foundation.HRESULT {
+func (self *ISpeechPhraseElement) Get_RetainedSizeBytes(RetainedSizeBytes *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RetainedSizeBytes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DisplayText dispatches through ISpeechPhraseElement's vtable slot 13.
-func (self *ISpeechPhraseElement) Get_DisplayText(DisplayText *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechPhraseElement) Get_DisplayText(DisplayText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DisplayText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LexicalForm dispatches through ISpeechPhraseElement's vtable slot 14.
-func (self *ISpeechPhraseElement) Get_LexicalForm(LexicalForm *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechPhraseElement) Get_LexicalForm(LexicalForm *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LexicalForm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Pronunciation dispatches through ISpeechPhraseElement's vtable slot 15.
-func (self *ISpeechPhraseElement) Get_Pronunciation(Pronunciation *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechPhraseElement) Get_Pronunciation(Pronunciation *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Pronunciation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DisplayAttributes dispatches through ISpeechPhraseElement's vtable slot 16.
-func (self *ISpeechPhraseElement) Get_DisplayAttributes(DisplayAttributes *SpeechDisplayAttributes) foundation.HRESULT {
+func (self *ISpeechPhraseElement) Get_DisplayAttributes(DisplayAttributes *SpeechDisplayAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DisplayAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RequiredConfidence dispatches through ISpeechPhraseElement's vtable slot 17.
-func (self *ISpeechPhraseElement) Get_RequiredConfidence(RequiredConfidence *SpeechEngineConfidence) foundation.HRESULT {
+func (self *ISpeechPhraseElement) Get_RequiredConfidence(RequiredConfidence *SpeechEngineConfidence) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RequiredConfidence)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ActualConfidence dispatches through ISpeechPhraseElement's vtable slot 18.
-func (self *ISpeechPhraseElement) Get_ActualConfidence(ActualConfidence *SpeechEngineConfidence) foundation.HRESULT {
+func (self *ISpeechPhraseElement) Get_ActualConfidence(ActualConfidence *SpeechEngineConfidence) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ActualConfidence)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EngineConfidence dispatches through ISpeechPhraseElement's vtable slot 19.
-func (self *ISpeechPhraseElement) Get_EngineConfidence(EngineConfidence *float32) foundation.HRESULT {
+func (self *ISpeechPhraseElement) Get_EngineConfidence(EngineConfidence *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EngineConfidence)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0626b328-3478-467d-a0b3-d0853b93dda3
@@ -3803,21 +3935,21 @@ type ISpeechPhraseElements struct {
 var IID_ISpeechPhraseElements = win32.GUID{Data1: 0x0626b328, Data2: 0x3478, Data3: 0x467d, Data4: [8]byte{0xa0, 0xb3, 0xd0, 0x85, 0x3b, 0x93, 0xdd, 0xa3}}
 
 // Get_Count dispatches through ISpeechPhraseElements's vtable slot 7.
-func (self *ISpeechPhraseElements) Get_Count(Count *int32) foundation.HRESULT {
+func (self *ISpeechPhraseElements) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through ISpeechPhraseElements's vtable slot 8.
-func (self *ISpeechPhraseElements) Item(Index int32, Element **ISpeechPhraseElement) foundation.HRESULT {
+func (self *ISpeechPhraseElements) Item(Index int32, Element **ISpeechPhraseElement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Element)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISpeechPhraseElements's vtable slot 9.
-func (self *ISpeechPhraseElements) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpeechPhraseElements) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EnumVARIANT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 961559cf-4e67-4662-8bf0-d93f1fcd61b3
@@ -3829,99 +3961,99 @@ type ISpeechPhraseInfo struct {
 var IID_ISpeechPhraseInfo = win32.GUID{Data1: 0x961559cf, Data2: 0x4e67, Data3: 0x4662, Data4: [8]byte{0x8b, 0xf0, 0xd9, 0x3f, 0x1f, 0xcd, 0x61, 0xb3}}
 
 // Get_LanguageId dispatches through ISpeechPhraseInfo's vtable slot 7.
-func (self *ISpeechPhraseInfo) Get_LanguageId(LanguageId *int32) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) Get_LanguageId(LanguageId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LanguageId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_GrammarId dispatches through ISpeechPhraseInfo's vtable slot 8.
-func (self *ISpeechPhraseInfo) Get_GrammarId(GrammarId *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) Get_GrammarId(GrammarId *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(GrammarId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_StartTime dispatches through ISpeechPhraseInfo's vtable slot 9.
-func (self *ISpeechPhraseInfo) Get_StartTime(StartTime *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) Get_StartTime(StartTime *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioStreamPosition dispatches through ISpeechPhraseInfo's vtable slot 10.
-func (self *ISpeechPhraseInfo) Get_AudioStreamPosition(AudioStreamPosition *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) Get_AudioStreamPosition(AudioStreamPosition *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioStreamPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioSizeBytes dispatches through ISpeechPhraseInfo's vtable slot 11.
-func (self *ISpeechPhraseInfo) Get_AudioSizeBytes(pAudioSizeBytes *int32) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) Get_AudioSizeBytes(pAudioSizeBytes *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAudioSizeBytes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RetainedSizeBytes dispatches through ISpeechPhraseInfo's vtable slot 12.
-func (self *ISpeechPhraseInfo) Get_RetainedSizeBytes(RetainedSizeBytes *int32) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) Get_RetainedSizeBytes(RetainedSizeBytes *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RetainedSizeBytes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioSizeTime dispatches through ISpeechPhraseInfo's vtable slot 13.
-func (self *ISpeechPhraseInfo) Get_AudioSizeTime(AudioSizeTime *int32) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) Get_AudioSizeTime(AudioSizeTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioSizeTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Rule dispatches through ISpeechPhraseInfo's vtable slot 14.
-func (self *ISpeechPhraseInfo) Get_Rule(Rule **ISpeechPhraseRule) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) Get_Rule(Rule **ISpeechPhraseRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rule)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through ISpeechPhraseInfo's vtable slot 15.
-func (self *ISpeechPhraseInfo) Get_Properties(Properties **ISpeechPhraseProperties) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) Get_Properties(Properties **ISpeechPhraseProperties) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Properties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Elements dispatches through ISpeechPhraseInfo's vtable slot 16.
-func (self *ISpeechPhraseInfo) Get_Elements(Elements **ISpeechPhraseElements) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) Get_Elements(Elements **ISpeechPhraseElements) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Elements)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Replacements dispatches through ISpeechPhraseInfo's vtable slot 17.
-func (self *ISpeechPhraseInfo) Get_Replacements(Replacements **ISpeechPhraseReplacements) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) Get_Replacements(Replacements **ISpeechPhraseReplacements) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Replacements)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EngineId dispatches through ISpeechPhraseInfo's vtable slot 18.
-func (self *ISpeechPhraseInfo) Get_EngineId(EngineIdGuid *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) Get_EngineId(EngineIdGuid *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EngineIdGuid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EnginePrivateData dispatches through ISpeechPhraseInfo's vtable slot 19.
-func (self *ISpeechPhraseInfo) Get_EnginePrivateData(PrivateData *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) Get_EnginePrivateData(PrivateData *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PrivateData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveToMemory dispatches through ISpeechPhraseInfo's vtable slot 20.
-func (self *ISpeechPhraseInfo) SaveToMemory(PhraseBlock *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) SaveToMemory(PhraseBlock *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PhraseBlock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetText dispatches through ISpeechPhraseInfo's vtable slot 21.
-func (self *ISpeechPhraseInfo) GetText(StartElement int32, Elements int32, UseReplacements foundation.VARIANT_BOOL, Text *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) GetText(StartElement int32, Elements int32, UseReplacements foundation.VARIANT_BOOL, Text *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(Elements), uintptr(UseReplacements), uintptr(unsafe.Pointer(Text)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplayAttributes dispatches through ISpeechPhraseInfo's vtable slot 22.
-func (self *ISpeechPhraseInfo) GetDisplayAttributes(StartElement int32, Elements int32, UseReplacements foundation.VARIANT_BOOL, DisplayAttributes *SpeechDisplayAttributes) foundation.HRESULT {
+func (self *ISpeechPhraseInfo) GetDisplayAttributes(StartElement int32, Elements int32, UseReplacements foundation.VARIANT_BOOL, DisplayAttributes *SpeechDisplayAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(Elements), uintptr(UseReplacements), uintptr(unsafe.Pointer(DisplayAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3b151836-df3a-4e0a-846c-d2adc9334333
@@ -3933,9 +4065,9 @@ type ISpeechPhraseInfoBuilder struct {
 var IID_ISpeechPhraseInfoBuilder = win32.GUID{Data1: 0x3b151836, Data2: 0xdf3a, Data3: 0x4e0a, Data4: [8]byte{0x84, 0x6c, 0xd2, 0xad, 0xc9, 0x33, 0x43, 0x33}}
 
 // RestorePhraseFromMemory dispatches through ISpeechPhraseInfoBuilder's vtable slot 7.
-func (self *ISpeechPhraseInfoBuilder) RestorePhraseFromMemory(PhraseInMemory *systemvariant.VARIANT, PhraseInfo **ISpeechPhraseInfo) foundation.HRESULT {
+func (self *ISpeechPhraseInfoBuilder) RestorePhraseFromMemory(PhraseInMemory *systemvariant.VARIANT, PhraseInfo **ISpeechPhraseInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PhraseInMemory)), uintptr(unsafe.Pointer(PhraseInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 08166b47-102e-4b23-a599-bdb98dbfd1f4
@@ -3947,21 +4079,21 @@ type ISpeechPhraseProperties struct {
 var IID_ISpeechPhraseProperties = win32.GUID{Data1: 0x08166b47, Data2: 0x102e, Data3: 0x4b23, Data4: [8]byte{0xa5, 0x99, 0xbd, 0xb9, 0x8d, 0xbf, 0xd1, 0xf4}}
 
 // Get_Count dispatches through ISpeechPhraseProperties's vtable slot 7.
-func (self *ISpeechPhraseProperties) Get_Count(Count *int32) foundation.HRESULT {
+func (self *ISpeechPhraseProperties) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through ISpeechPhraseProperties's vtable slot 8.
-func (self *ISpeechPhraseProperties) Item(Index int32, Property **ISpeechPhraseProperty) foundation.HRESULT {
+func (self *ISpeechPhraseProperties) Item(Index int32, Property **ISpeechPhraseProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Property)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISpeechPhraseProperties's vtable slot 9.
-func (self *ISpeechPhraseProperties) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpeechPhraseProperties) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EnumVARIANT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ce563d48-961e-4732-a2e1-378a42b430be
@@ -3973,57 +4105,57 @@ type ISpeechPhraseProperty struct {
 var IID_ISpeechPhraseProperty = win32.GUID{Data1: 0xce563d48, Data2: 0x961e, Data3: 0x4732, Data4: [8]byte{0xa2, 0xe1, 0x37, 0x8a, 0x42, 0xb4, 0x30, 0xbe}}
 
 // Get_Name dispatches through ISpeechPhraseProperty's vtable slot 7.
-func (self *ISpeechPhraseProperty) Get_Name(Name *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechPhraseProperty) Get_Name(Name *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through ISpeechPhraseProperty's vtable slot 8.
-func (self *ISpeechPhraseProperty) Get_Id(Id *int32) foundation.HRESULT {
+func (self *ISpeechPhraseProperty) Get_Id(Id *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Value dispatches through ISpeechPhraseProperty's vtable slot 9.
-func (self *ISpeechPhraseProperty) Get_Value(Value *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechPhraseProperty) Get_Value(Value *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FirstElement dispatches through ISpeechPhraseProperty's vtable slot 10.
-func (self *ISpeechPhraseProperty) Get_FirstElement(FirstElement *int32) foundation.HRESULT {
+func (self *ISpeechPhraseProperty) Get_FirstElement(FirstElement *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FirstElement)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NumberOfElements dispatches through ISpeechPhraseProperty's vtable slot 11.
-func (self *ISpeechPhraseProperty) Get_NumberOfElements(NumberOfElements *int32) foundation.HRESULT {
+func (self *ISpeechPhraseProperty) Get_NumberOfElements(NumberOfElements *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NumberOfElements)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EngineConfidence dispatches through ISpeechPhraseProperty's vtable slot 12.
-func (self *ISpeechPhraseProperty) Get_EngineConfidence(Confidence *float32) foundation.HRESULT {
+func (self *ISpeechPhraseProperty) Get_EngineConfidence(Confidence *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Confidence)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Confidence dispatches through ISpeechPhraseProperty's vtable slot 13.
-func (self *ISpeechPhraseProperty) Get_Confidence(Confidence *SpeechEngineConfidence) foundation.HRESULT {
+func (self *ISpeechPhraseProperty) Get_Confidence(Confidence *SpeechEngineConfidence) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Confidence)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Parent dispatches through ISpeechPhraseProperty's vtable slot 14.
-func (self *ISpeechPhraseProperty) Get_Parent(ParentProperty **ISpeechPhraseProperty) foundation.HRESULT {
+func (self *ISpeechPhraseProperty) Get_Parent(ParentProperty **ISpeechPhraseProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ParentProperty)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Children dispatches through ISpeechPhraseProperty's vtable slot 15.
-func (self *ISpeechPhraseProperty) Get_Children(Children **ISpeechPhraseProperties) foundation.HRESULT {
+func (self *ISpeechPhraseProperty) Get_Children(Children **ISpeechPhraseProperties) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Children)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2890a410-53a7-4fb5-94ec-06d4998e3d02
@@ -4035,27 +4167,27 @@ type ISpeechPhraseReplacement struct {
 var IID_ISpeechPhraseReplacement = win32.GUID{Data1: 0x2890a410, Data2: 0x53a7, Data3: 0x4fb5, Data4: [8]byte{0x94, 0xec, 0x06, 0xd4, 0x99, 0x8e, 0x3d, 0x02}}
 
 // Get_DisplayAttributes dispatches through ISpeechPhraseReplacement's vtable slot 7.
-func (self *ISpeechPhraseReplacement) Get_DisplayAttributes(DisplayAttributes *SpeechDisplayAttributes) foundation.HRESULT {
+func (self *ISpeechPhraseReplacement) Get_DisplayAttributes(DisplayAttributes *SpeechDisplayAttributes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DisplayAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Text dispatches through ISpeechPhraseReplacement's vtable slot 8.
-func (self *ISpeechPhraseReplacement) Get_Text(Text *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechPhraseReplacement) Get_Text(Text *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Text)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FirstElement dispatches through ISpeechPhraseReplacement's vtable slot 9.
-func (self *ISpeechPhraseReplacement) Get_FirstElement(FirstElement *int32) foundation.HRESULT {
+func (self *ISpeechPhraseReplacement) Get_FirstElement(FirstElement *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FirstElement)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NumberOfElements dispatches through ISpeechPhraseReplacement's vtable slot 10.
-func (self *ISpeechPhraseReplacement) Get_NumberOfElements(NumberOfElements *int32) foundation.HRESULT {
+func (self *ISpeechPhraseReplacement) Get_NumberOfElements(NumberOfElements *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NumberOfElements)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 38bc662f-2257-4525-959e-2069d2596c05
@@ -4067,21 +4199,21 @@ type ISpeechPhraseReplacements struct {
 var IID_ISpeechPhraseReplacements = win32.GUID{Data1: 0x38bc662f, Data2: 0x2257, Data3: 0x4525, Data4: [8]byte{0x95, 0x9e, 0x20, 0x69, 0xd2, 0x59, 0x6c, 0x05}}
 
 // Get_Count dispatches through ISpeechPhraseReplacements's vtable slot 7.
-func (self *ISpeechPhraseReplacements) Get_Count(Count *int32) foundation.HRESULT {
+func (self *ISpeechPhraseReplacements) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through ISpeechPhraseReplacements's vtable slot 8.
-func (self *ISpeechPhraseReplacements) Item(Index int32, Reps **ISpeechPhraseReplacement) foundation.HRESULT {
+func (self *ISpeechPhraseReplacements) Item(Index int32, Reps **ISpeechPhraseReplacement) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Reps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISpeechPhraseReplacements's vtable slot 9.
-func (self *ISpeechPhraseReplacements) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpeechPhraseReplacements) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EnumVARIANT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a7bfe112-a4a0-48d9-b602-c313843f6964
@@ -4093,51 +4225,51 @@ type ISpeechPhraseRule struct {
 var IID_ISpeechPhraseRule = win32.GUID{Data1: 0xa7bfe112, Data2: 0xa4a0, Data3: 0x48d9, Data4: [8]byte{0xb6, 0x02, 0xc3, 0x13, 0x84, 0x3f, 0x69, 0x64}}
 
 // Get_Name dispatches through ISpeechPhraseRule's vtable slot 7.
-func (self *ISpeechPhraseRule) Get_Name(Name *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechPhraseRule) Get_Name(Name *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through ISpeechPhraseRule's vtable slot 8.
-func (self *ISpeechPhraseRule) Get_Id(Id *int32) foundation.HRESULT {
+func (self *ISpeechPhraseRule) Get_Id(Id *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FirstElement dispatches through ISpeechPhraseRule's vtable slot 9.
-func (self *ISpeechPhraseRule) Get_FirstElement(FirstElement *int32) foundation.HRESULT {
+func (self *ISpeechPhraseRule) Get_FirstElement(FirstElement *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FirstElement)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NumberOfElements dispatches through ISpeechPhraseRule's vtable slot 10.
-func (self *ISpeechPhraseRule) Get_NumberOfElements(NumberOfElements *int32) foundation.HRESULT {
+func (self *ISpeechPhraseRule) Get_NumberOfElements(NumberOfElements *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NumberOfElements)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Parent dispatches through ISpeechPhraseRule's vtable slot 11.
-func (self *ISpeechPhraseRule) Get_Parent(Parent **ISpeechPhraseRule) foundation.HRESULT {
+func (self *ISpeechPhraseRule) Get_Parent(Parent **ISpeechPhraseRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Parent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Children dispatches through ISpeechPhraseRule's vtable slot 12.
-func (self *ISpeechPhraseRule) Get_Children(Children **ISpeechPhraseRules) foundation.HRESULT {
+func (self *ISpeechPhraseRule) Get_Children(Children **ISpeechPhraseRules) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Children)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Confidence dispatches through ISpeechPhraseRule's vtable slot 13.
-func (self *ISpeechPhraseRule) Get_Confidence(ActualConfidence *SpeechEngineConfidence) foundation.HRESULT {
+func (self *ISpeechPhraseRule) Get_Confidence(ActualConfidence *SpeechEngineConfidence) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ActualConfidence)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EngineConfidence dispatches through ISpeechPhraseRule's vtable slot 14.
-func (self *ISpeechPhraseRule) Get_EngineConfidence(EngineConfidence *float32) foundation.HRESULT {
+func (self *ISpeechPhraseRule) Get_EngineConfidence(EngineConfidence *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EngineConfidence)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 9047d593-01dd-4b72-81a3-e4a0ca69f407
@@ -4149,21 +4281,21 @@ type ISpeechPhraseRules struct {
 var IID_ISpeechPhraseRules = win32.GUID{Data1: 0x9047d593, Data2: 0x01dd, Data3: 0x4b72, Data4: [8]byte{0x81, 0xa3, 0xe4, 0xa0, 0xca, 0x69, 0xf4, 0x07}}
 
 // Get_Count dispatches through ISpeechPhraseRules's vtable slot 7.
-func (self *ISpeechPhraseRules) Get_Count(Count *int32) foundation.HRESULT {
+func (self *ISpeechPhraseRules) Get_Count(Count *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through ISpeechPhraseRules's vtable slot 8.
-func (self *ISpeechPhraseRules) Item(Index int32, Rule **ISpeechPhraseRule) foundation.HRESULT {
+func (self *ISpeechPhraseRules) Item(Index int32, Rule **ISpeechPhraseRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Rule)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISpeechPhraseRules's vtable slot 9.
-func (self *ISpeechPhraseRules) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISpeechPhraseRules) Get__NewEnum(EnumVARIANT **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EnumVARIANT)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 580aa49d-7e1e-4809-b8e2-57da806104b8
@@ -4175,141 +4307,141 @@ type ISpeechRecoContext struct {
 var IID_ISpeechRecoContext = win32.GUID{Data1: 0x580aa49d, Data2: 0x7e1e, Data3: 0x4809, Data4: [8]byte{0xb8, 0xe2, 0x57, 0xda, 0x80, 0x61, 0x04, 0xb8}}
 
 // Get_Recognizer dispatches through ISpeechRecoContext's vtable slot 7.
-func (self *ISpeechRecoContext) Get_Recognizer(Recognizer **ISpeechRecognizer) foundation.HRESULT {
+func (self *ISpeechRecoContext) Get_Recognizer(Recognizer **ISpeechRecognizer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Recognizer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioInputInterferenceStatus dispatches through ISpeechRecoContext's vtable slot 8.
-func (self *ISpeechRecoContext) Get_AudioInputInterferenceStatus(Interference *SpeechInterference) foundation.HRESULT {
+func (self *ISpeechRecoContext) Get_AudioInputInterferenceStatus(Interference *SpeechInterference) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Interference)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RequestedUIType dispatches through ISpeechRecoContext's vtable slot 9.
-func (self *ISpeechRecoContext) Get_RequestedUIType(UIType *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechRecoContext) Get_RequestedUIType(UIType *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(UIType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_Voice dispatches through ISpeechRecoContext's vtable slot 10.
-func (self *ISpeechRecoContext) Putref_Voice(Voice *ISpeechVoice) foundation.HRESULT {
+func (self *ISpeechRecoContext) Putref_Voice(Voice *ISpeechVoice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Voice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Voice dispatches through ISpeechRecoContext's vtable slot 11.
-func (self *ISpeechRecoContext) Get_Voice(Voice **ISpeechVoice) foundation.HRESULT {
+func (self *ISpeechRecoContext) Get_Voice(Voice **ISpeechVoice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Voice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowVoiceFormatMatchingOnNextSet dispatches through ISpeechRecoContext's vtable slot 12.
-func (self *ISpeechRecoContext) Put_AllowVoiceFormatMatchingOnNextSet(Allow foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechRecoContext) Put_AllowVoiceFormatMatchingOnNextSet(Allow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Allow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowVoiceFormatMatchingOnNextSet dispatches through ISpeechRecoContext's vtable slot 13.
-func (self *ISpeechRecoContext) Get_AllowVoiceFormatMatchingOnNextSet(pAllow *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechRecoContext) Get_AllowVoiceFormatMatchingOnNextSet(pAllow *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAllow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_VoicePurgeEvent dispatches through ISpeechRecoContext's vtable slot 14.
-func (self *ISpeechRecoContext) Put_VoicePurgeEvent(EventInterest SpeechRecoEvents) foundation.HRESULT {
+func (self *ISpeechRecoContext) Put_VoicePurgeEvent(EventInterest SpeechRecoEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(EventInterest))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_VoicePurgeEvent dispatches through ISpeechRecoContext's vtable slot 15.
-func (self *ISpeechRecoContext) Get_VoicePurgeEvent(EventInterest *SpeechRecoEvents) foundation.HRESULT {
+func (self *ISpeechRecoContext) Get_VoicePurgeEvent(EventInterest *SpeechRecoEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EventInterest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_EventInterests dispatches through ISpeechRecoContext's vtable slot 16.
-func (self *ISpeechRecoContext) Put_EventInterests(EventInterest SpeechRecoEvents) foundation.HRESULT {
+func (self *ISpeechRecoContext) Put_EventInterests(EventInterest SpeechRecoEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(EventInterest))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EventInterests dispatches through ISpeechRecoContext's vtable slot 17.
-func (self *ISpeechRecoContext) Get_EventInterests(EventInterest *SpeechRecoEvents) foundation.HRESULT {
+func (self *ISpeechRecoContext) Get_EventInterests(EventInterest *SpeechRecoEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EventInterest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_CmdMaxAlternates dispatches through ISpeechRecoContext's vtable slot 18.
-func (self *ISpeechRecoContext) Put_CmdMaxAlternates(MaxAlternates int32) foundation.HRESULT {
+func (self *ISpeechRecoContext) Put_CmdMaxAlternates(MaxAlternates int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(MaxAlternates))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CmdMaxAlternates dispatches through ISpeechRecoContext's vtable slot 19.
-func (self *ISpeechRecoContext) Get_CmdMaxAlternates(MaxAlternates *int32) foundation.HRESULT {
+func (self *ISpeechRecoContext) Get_CmdMaxAlternates(MaxAlternates *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(MaxAlternates)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_State dispatches through ISpeechRecoContext's vtable slot 20.
-func (self *ISpeechRecoContext) Put_State(State SpeechRecoContextState) foundation.HRESULT {
+func (self *ISpeechRecoContext) Put_State(State SpeechRecoContextState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(State))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ISpeechRecoContext's vtable slot 21.
-func (self *ISpeechRecoContext) Get_State(State *SpeechRecoContextState) foundation.HRESULT {
+func (self *ISpeechRecoContext) Get_State(State *SpeechRecoContextState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(State)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RetainedAudio dispatches through ISpeechRecoContext's vtable slot 22.
-func (self *ISpeechRecoContext) Put_RetainedAudio(Option SpeechRetainedAudioOptions) foundation.HRESULT {
+func (self *ISpeechRecoContext) Put_RetainedAudio(Option SpeechRetainedAudioOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Option))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RetainedAudio dispatches through ISpeechRecoContext's vtable slot 23.
-func (self *ISpeechRecoContext) Get_RetainedAudio(Option *SpeechRetainedAudioOptions) foundation.HRESULT {
+func (self *ISpeechRecoContext) Get_RetainedAudio(Option *SpeechRetainedAudioOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Option)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_RetainedAudioFormat dispatches through ISpeechRecoContext's vtable slot 24.
-func (self *ISpeechRecoContext) Putref_RetainedAudioFormat(Format *ISpeechAudioFormat) foundation.HRESULT {
+func (self *ISpeechRecoContext) Putref_RetainedAudioFormat(Format *ISpeechAudioFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RetainedAudioFormat dispatches through ISpeechRecoContext's vtable slot 25.
-func (self *ISpeechRecoContext) Get_RetainedAudioFormat(Format **ISpeechAudioFormat) foundation.HRESULT {
+func (self *ISpeechRecoContext) Get_RetainedAudioFormat(Format **ISpeechAudioFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through ISpeechRecoContext's vtable slot 26.
-func (self *ISpeechRecoContext) Pause() foundation.HRESULT {
+func (self *ISpeechRecoContext) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through ISpeechRecoContext's vtable slot 27.
-func (self *ISpeechRecoContext) Resume() foundation.HRESULT {
+func (self *ISpeechRecoContext) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateResultFromMemory dispatches through ISpeechRecoContext's vtable slot 29.
-func (self *ISpeechRecoContext) CreateResultFromMemory(ResultBlock *systemvariant.VARIANT, Result **ISpeechRecoResult) foundation.HRESULT {
+func (self *ISpeechRecoContext) CreateResultFromMemory(ResultBlock *systemvariant.VARIANT, Result **ISpeechRecoResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ResultBlock)), uintptr(unsafe.Pointer(Result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAdaptationData dispatches through ISpeechRecoContext's vtable slot 31.
-func (self *ISpeechRecoContext) SetAdaptationData(AdaptationString foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechRecoContext) SetAdaptationData(AdaptationString foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AdaptationString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b6d6f79f-2158-4e50-b5bc-9a9ccd852a09
@@ -4321,99 +4453,99 @@ type ISpeechRecoGrammar struct {
 var IID_ISpeechRecoGrammar = win32.GUID{Data1: 0xb6d6f79f, Data2: 0x2158, Data3: 0x4e50, Data4: [8]byte{0xb5, 0xbc, 0x9a, 0x9c, 0xcd, 0x85, 0x2a, 0x09}}
 
 // Get_Id dispatches through ISpeechRecoGrammar's vtable slot 7.
-func (self *ISpeechRecoGrammar) Get_Id(Id *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) Get_Id(Id *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RecoContext dispatches through ISpeechRecoGrammar's vtable slot 8.
-func (self *ISpeechRecoGrammar) Get_RecoContext(RecoContext **ISpeechRecoContext) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) Get_RecoContext(RecoContext **ISpeechRecoContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RecoContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_State dispatches through ISpeechRecoGrammar's vtable slot 9.
-func (self *ISpeechRecoGrammar) Put_State(State SpeechGrammarState) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) Put_State(State SpeechGrammarState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(State))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ISpeechRecoGrammar's vtable slot 10.
-func (self *ISpeechRecoGrammar) Get_State(State *SpeechGrammarState) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) Get_State(State *SpeechGrammarState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(State)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Rules dispatches through ISpeechRecoGrammar's vtable slot 11.
-func (self *ISpeechRecoGrammar) Get_Rules(Rules **ISpeechGrammarRules) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) Get_Rules(Rules **ISpeechGrammarRules) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rules)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through ISpeechRecoGrammar's vtable slot 12.
-func (self *ISpeechRecoGrammar) Reset(NewLanguage int32) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) Reset(NewLanguage int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(NewLanguage))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CmdLoadFromFile dispatches through ISpeechRecoGrammar's vtable slot 13.
-func (self *ISpeechRecoGrammar) CmdLoadFromFile(FileName foundation.BSTR, LoadOption SpeechLoadOption) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) CmdLoadFromFile(FileName foundation.BSTR, LoadOption SpeechLoadOption) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FileName)), uintptr(LoadOption))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CmdLoadFromObject dispatches through ISpeechRecoGrammar's vtable slot 14.
-func (self *ISpeechRecoGrammar) CmdLoadFromObject(ClassId foundation.BSTR, GrammarName foundation.BSTR, LoadOption SpeechLoadOption) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) CmdLoadFromObject(ClassId foundation.BSTR, GrammarName foundation.BSTR, LoadOption SpeechLoadOption) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ClassId)), uintptr(unsafe.Pointer(GrammarName)), uintptr(LoadOption))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CmdSetRuleState dispatches through ISpeechRecoGrammar's vtable slot 18.
-func (self *ISpeechRecoGrammar) CmdSetRuleState(Name foundation.BSTR, State SpeechRuleState) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) CmdSetRuleState(Name foundation.BSTR, State SpeechRuleState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(State))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CmdSetRuleIdState dispatches through ISpeechRecoGrammar's vtable slot 19.
-func (self *ISpeechRecoGrammar) CmdSetRuleIdState(RuleId int32, State SpeechRuleState) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) CmdSetRuleIdState(RuleId int32, State SpeechRuleState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(RuleId), uintptr(State))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DictationLoad dispatches through ISpeechRecoGrammar's vtable slot 20.
-func (self *ISpeechRecoGrammar) DictationLoad(TopicName foundation.BSTR, LoadOption SpeechLoadOption) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) DictationLoad(TopicName foundation.BSTR, LoadOption SpeechLoadOption) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TopicName)), uintptr(LoadOption))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DictationUnload dispatches through ISpeechRecoGrammar's vtable slot 21.
-func (self *ISpeechRecoGrammar) DictationUnload() foundation.HRESULT {
+func (self *ISpeechRecoGrammar) DictationUnload() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DictationSetState dispatches through ISpeechRecoGrammar's vtable slot 22.
-func (self *ISpeechRecoGrammar) DictationSetState(State SpeechRuleState) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) DictationSetState(State SpeechRuleState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(State))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWordSequenceData dispatches through ISpeechRecoGrammar's vtable slot 23.
-func (self *ISpeechRecoGrammar) SetWordSequenceData(Text foundation.BSTR, TextLength int32, Info *ISpeechTextSelectionInformation) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) SetWordSequenceData(Text foundation.BSTR, TextLength int32, Info *ISpeechTextSelectionInformation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Text)), uintptr(TextLength), uintptr(unsafe.Pointer(Info)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTextSelection dispatches through ISpeechRecoGrammar's vtable slot 24.
-func (self *ISpeechRecoGrammar) SetTextSelection(Info *ISpeechTextSelectionInformation) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) SetTextSelection(Info *ISpeechTextSelectionInformation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Info)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsPronounceable dispatches through ISpeechRecoGrammar's vtable slot 25.
-func (self *ISpeechRecoGrammar) IsPronounceable(Word foundation.BSTR, WordPronounceable *SpeechWordPronounceable) foundation.HRESULT {
+func (self *ISpeechRecoGrammar) IsPronounceable(Word foundation.BSTR, WordPronounceable *SpeechWordPronounceable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Word)), uintptr(unsafe.Pointer(WordPronounceable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ed2879cf-ced9-4ee6-a534-de0191d5468d
@@ -4425,63 +4557,63 @@ type ISpeechRecoResult struct {
 var IID_ISpeechRecoResult = win32.GUID{Data1: 0xed2879cf, Data2: 0xced9, Data3: 0x4ee6, Data4: [8]byte{0xa5, 0x34, 0xde, 0x01, 0x91, 0xd5, 0x46, 0x8d}}
 
 // Get_RecoContext dispatches through ISpeechRecoResult's vtable slot 7.
-func (self *ISpeechRecoResult) Get_RecoContext(RecoContext **ISpeechRecoContext) foundation.HRESULT {
+func (self *ISpeechRecoResult) Get_RecoContext(RecoContext **ISpeechRecoContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RecoContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Times dispatches through ISpeechRecoResult's vtable slot 8.
-func (self *ISpeechRecoResult) Get_Times(Times **ISpeechRecoResultTimes) foundation.HRESULT {
+func (self *ISpeechRecoResult) Get_Times(Times **ISpeechRecoResultTimes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Times)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AudioFormat dispatches through ISpeechRecoResult's vtable slot 9.
-func (self *ISpeechRecoResult) Putref_AudioFormat(Format *ISpeechAudioFormat) foundation.HRESULT {
+func (self *ISpeechRecoResult) Putref_AudioFormat(Format *ISpeechAudioFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioFormat dispatches through ISpeechRecoResult's vtable slot 10.
-func (self *ISpeechRecoResult) Get_AudioFormat(Format **ISpeechAudioFormat) foundation.HRESULT {
+func (self *ISpeechRecoResult) Get_AudioFormat(Format **ISpeechAudioFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PhraseInfo dispatches through ISpeechRecoResult's vtable slot 11.
-func (self *ISpeechRecoResult) Get_PhraseInfo(PhraseInfo **ISpeechPhraseInfo) foundation.HRESULT {
+func (self *ISpeechRecoResult) Get_PhraseInfo(PhraseInfo **ISpeechPhraseInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PhraseInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Alternates dispatches through ISpeechRecoResult's vtable slot 12.
-func (self *ISpeechRecoResult) Alternates(RequestCount int32, StartElement int32, Elements int32, Alternates **ISpeechPhraseAlternates) foundation.HRESULT {
+func (self *ISpeechRecoResult) Alternates(RequestCount int32, StartElement int32, Elements int32, Alternates **ISpeechPhraseAlternates) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(RequestCount), uintptr(StartElement), uintptr(Elements), uintptr(unsafe.Pointer(Alternates)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Audio dispatches through ISpeechRecoResult's vtable slot 13.
-func (self *ISpeechRecoResult) Audio(StartElement int32, Elements int32, Stream **ISpeechMemoryStream) foundation.HRESULT {
+func (self *ISpeechRecoResult) Audio(StartElement int32, Elements int32, Stream **ISpeechMemoryStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(Elements), uintptr(unsafe.Pointer(Stream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SpeakAudio dispatches through ISpeechRecoResult's vtable slot 14.
-func (self *ISpeechRecoResult) SpeakAudio(StartElement int32, Elements int32, Flags SpeechVoiceSpeakFlags, StreamNumber *int32) foundation.HRESULT {
+func (self *ISpeechRecoResult) SpeakAudio(StartElement int32, Elements int32, Flags SpeechVoiceSpeakFlags, StreamNumber *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(Elements), uintptr(Flags), uintptr(unsafe.Pointer(StreamNumber)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveToMemory dispatches through ISpeechRecoResult's vtable slot 15.
-func (self *ISpeechRecoResult) SaveToMemory(ResultBlock *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechRecoResult) SaveToMemory(ResultBlock *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ResultBlock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DiscardResultInfo dispatches through ISpeechRecoResult's vtable slot 16.
-func (self *ISpeechRecoResult) DiscardResultInfo(ValueTypes SpeechDiscardType) foundation.HRESULT {
+func (self *ISpeechRecoResult) DiscardResultInfo(ValueTypes SpeechDiscardType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(ValueTypes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8e0a246d-d3c8-45de-8657-04290c458c3c
@@ -4493,9 +4625,9 @@ type ISpeechRecoResult2 struct {
 var IID_ISpeechRecoResult2 = win32.GUID{Data1: 0x8e0a246d, Data2: 0xd3c8, Data3: 0x45de, Data4: [8]byte{0x86, 0x57, 0x04, 0x29, 0x0c, 0x45, 0x8c, 0x3c}}
 
 // SetTextFeedback dispatches through ISpeechRecoResult2's vtable slot 17.
-func (self *ISpeechRecoResult2) SetTextFeedback(Feedback foundation.BSTR, WasSuccessful foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechRecoResult2) SetTextFeedback(Feedback foundation.BSTR, WasSuccessful foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Feedback)), uintptr(WasSuccessful))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 6d60eb64-aced-40a6-bbf3-4e557f71dee2
@@ -4507,81 +4639,81 @@ type ISpeechRecoResultDispatch struct {
 var IID_ISpeechRecoResultDispatch = win32.GUID{Data1: 0x6d60eb64, Data2: 0xaced, Data3: 0x40a6, Data4: [8]byte{0xbb, 0xf3, 0x4e, 0x55, 0x7f, 0x71, 0xde, 0xe2}}
 
 // Get_RecoContext dispatches through ISpeechRecoResultDispatch's vtable slot 7.
-func (self *ISpeechRecoResultDispatch) Get_RecoContext(RecoContext **ISpeechRecoContext) foundation.HRESULT {
+func (self *ISpeechRecoResultDispatch) Get_RecoContext(RecoContext **ISpeechRecoContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RecoContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Times dispatches through ISpeechRecoResultDispatch's vtable slot 8.
-func (self *ISpeechRecoResultDispatch) Get_Times(Times **ISpeechRecoResultTimes) foundation.HRESULT {
+func (self *ISpeechRecoResultDispatch) Get_Times(Times **ISpeechRecoResultTimes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Times)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AudioFormat dispatches through ISpeechRecoResultDispatch's vtable slot 9.
-func (self *ISpeechRecoResultDispatch) Putref_AudioFormat(Format *ISpeechAudioFormat) foundation.HRESULT {
+func (self *ISpeechRecoResultDispatch) Putref_AudioFormat(Format *ISpeechAudioFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioFormat dispatches through ISpeechRecoResultDispatch's vtable slot 10.
-func (self *ISpeechRecoResultDispatch) Get_AudioFormat(Format **ISpeechAudioFormat) foundation.HRESULT {
+func (self *ISpeechRecoResultDispatch) Get_AudioFormat(Format **ISpeechAudioFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Format)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PhraseInfo dispatches through ISpeechRecoResultDispatch's vtable slot 11.
-func (self *ISpeechRecoResultDispatch) Get_PhraseInfo(PhraseInfo **ISpeechPhraseInfo) foundation.HRESULT {
+func (self *ISpeechRecoResultDispatch) Get_PhraseInfo(PhraseInfo **ISpeechPhraseInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PhraseInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Alternates dispatches through ISpeechRecoResultDispatch's vtable slot 12.
-func (self *ISpeechRecoResultDispatch) Alternates(RequestCount int32, StartElement int32, Elements int32, Alternates **ISpeechPhraseAlternates) foundation.HRESULT {
+func (self *ISpeechRecoResultDispatch) Alternates(RequestCount int32, StartElement int32, Elements int32, Alternates **ISpeechPhraseAlternates) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(RequestCount), uintptr(StartElement), uintptr(Elements), uintptr(unsafe.Pointer(Alternates)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Audio dispatches through ISpeechRecoResultDispatch's vtable slot 13.
-func (self *ISpeechRecoResultDispatch) Audio(StartElement int32, Elements int32, Stream **ISpeechMemoryStream) foundation.HRESULT {
+func (self *ISpeechRecoResultDispatch) Audio(StartElement int32, Elements int32, Stream **ISpeechMemoryStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(Elements), uintptr(unsafe.Pointer(Stream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SpeakAudio dispatches through ISpeechRecoResultDispatch's vtable slot 14.
-func (self *ISpeechRecoResultDispatch) SpeakAudio(StartElement int32, Elements int32, Flags SpeechVoiceSpeakFlags, StreamNumber *int32) foundation.HRESULT {
+func (self *ISpeechRecoResultDispatch) SpeakAudio(StartElement int32, Elements int32, Flags SpeechVoiceSpeakFlags, StreamNumber *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(Elements), uintptr(Flags), uintptr(unsafe.Pointer(StreamNumber)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveToMemory dispatches through ISpeechRecoResultDispatch's vtable slot 15.
-func (self *ISpeechRecoResultDispatch) SaveToMemory(ResultBlock *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechRecoResultDispatch) SaveToMemory(ResultBlock *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ResultBlock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DiscardResultInfo dispatches through ISpeechRecoResultDispatch's vtable slot 16.
-func (self *ISpeechRecoResultDispatch) DiscardResultInfo(ValueTypes SpeechDiscardType) foundation.HRESULT {
+func (self *ISpeechRecoResultDispatch) DiscardResultInfo(ValueTypes SpeechDiscardType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(ValueTypes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetXMLResult dispatches through ISpeechRecoResultDispatch's vtable slot 17.
-func (self *ISpeechRecoResultDispatch) GetXMLResult(Options SPXMLRESULTOPTIONS, pResult *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechRecoResultDispatch) GetXMLResult(Options SPXMLRESULTOPTIONS, pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Options), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetXMLErrorInfo dispatches through ISpeechRecoResultDispatch's vtable slot 18.
-func (self *ISpeechRecoResultDispatch) GetXMLErrorInfo(LineNumber *int32, ScriptLine *foundation.BSTR, Source *foundation.BSTR, Description *foundation.BSTR, ResultCode *foundation.HRESULT, IsError *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechRecoResultDispatch) GetXMLErrorInfo(LineNumber *int32, ScriptLine *foundation.BSTR, Source *foundation.BSTR, Description *foundation.BSTR, ResultCode *foundation.HRESULT, IsError *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LineNumber)), uintptr(unsafe.Pointer(ScriptLine)), uintptr(unsafe.Pointer(Source)), uintptr(unsafe.Pointer(Description)), uintptr(unsafe.Pointer(ResultCode)), uintptr(unsafe.Pointer(IsError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTextFeedback dispatches through ISpeechRecoResultDispatch's vtable slot 19.
-func (self *ISpeechRecoResultDispatch) SetTextFeedback(Feedback foundation.BSTR, WasSuccessful foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechRecoResultDispatch) SetTextFeedback(Feedback foundation.BSTR, WasSuccessful foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Feedback)), uintptr(WasSuccessful))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 62b3b8fb-f6e7-41be-bdcb-056b1c29efc0
@@ -4593,27 +4725,27 @@ type ISpeechRecoResultTimes struct {
 var IID_ISpeechRecoResultTimes = win32.GUID{Data1: 0x62b3b8fb, Data2: 0xf6e7, Data3: 0x41be, Data4: [8]byte{0xbd, 0xcb, 0x05, 0x6b, 0x1c, 0x29, 0xef, 0xc0}}
 
 // Get_StreamTime dispatches through ISpeechRecoResultTimes's vtable slot 7.
-func (self *ISpeechRecoResultTimes) Get_StreamTime(Time *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechRecoResultTimes) Get_StreamTime(Time *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Time)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Length dispatches through ISpeechRecoResultTimes's vtable slot 8.
-func (self *ISpeechRecoResultTimes) Get_Length(Length *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechRecoResultTimes) Get_Length(Length *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Length)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TickCount dispatches through ISpeechRecoResultTimes's vtable slot 9.
-func (self *ISpeechRecoResultTimes) Get_TickCount(TickCount *int32) foundation.HRESULT {
+func (self *ISpeechRecoResultTimes) Get_TickCount(TickCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TickCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_OffsetFromStart dispatches through ISpeechRecoResultTimes's vtable slot 10.
-func (self *ISpeechRecoResultTimes) Get_OffsetFromStart(OffsetFromStart *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechRecoResultTimes) Get_OffsetFromStart(OffsetFromStart *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(OffsetFromStart)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2d5f1c0c-bd75-4b08-9478-3b11fea2586c
@@ -4625,153 +4757,153 @@ type ISpeechRecognizer struct {
 var IID_ISpeechRecognizer = win32.GUID{Data1: 0x2d5f1c0c, Data2: 0xbd75, Data3: 0x4b08, Data4: [8]byte{0x94, 0x78, 0x3b, 0x11, 0xfe, 0xa2, 0x58, 0x6c}}
 
 // Putref_Recognizer dispatches through ISpeechRecognizer's vtable slot 7.
-func (self *ISpeechRecognizer) Putref_Recognizer(Recognizer *ISpeechObjectToken) foundation.HRESULT {
+func (self *ISpeechRecognizer) Putref_Recognizer(Recognizer *ISpeechObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Recognizer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Recognizer dispatches through ISpeechRecognizer's vtable slot 8.
-func (self *ISpeechRecognizer) Get_Recognizer(Recognizer **ISpeechObjectToken) foundation.HRESULT {
+func (self *ISpeechRecognizer) Get_Recognizer(Recognizer **ISpeechObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Recognizer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowAudioInputFormatChangesOnNextSet dispatches through ISpeechRecognizer's vtable slot 9.
-func (self *ISpeechRecognizer) Put_AllowAudioInputFormatChangesOnNextSet(Allow foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechRecognizer) Put_AllowAudioInputFormatChangesOnNextSet(Allow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Allow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowAudioInputFormatChangesOnNextSet dispatches through ISpeechRecognizer's vtable slot 10.
-func (self *ISpeechRecognizer) Get_AllowAudioInputFormatChangesOnNextSet(Allow *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechRecognizer) Get_AllowAudioInputFormatChangesOnNextSet(Allow *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Allow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AudioInput dispatches through ISpeechRecognizer's vtable slot 11.
-func (self *ISpeechRecognizer) Putref_AudioInput(AudioInput *ISpeechObjectToken) foundation.HRESULT {
+func (self *ISpeechRecognizer) Putref_AudioInput(AudioInput *ISpeechObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioInput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioInput dispatches through ISpeechRecognizer's vtable slot 12.
-func (self *ISpeechRecognizer) Get_AudioInput(AudioInput **ISpeechObjectToken) foundation.HRESULT {
+func (self *ISpeechRecognizer) Get_AudioInput(AudioInput **ISpeechObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioInput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AudioInputStream dispatches through ISpeechRecognizer's vtable slot 13.
-func (self *ISpeechRecognizer) Putref_AudioInputStream(AudioInputStream *ISpeechBaseStream) foundation.HRESULT {
+func (self *ISpeechRecognizer) Putref_AudioInputStream(AudioInputStream *ISpeechBaseStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioInputStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioInputStream dispatches through ISpeechRecognizer's vtable slot 14.
-func (self *ISpeechRecognizer) Get_AudioInputStream(AudioInputStream **ISpeechBaseStream) foundation.HRESULT {
+func (self *ISpeechRecognizer) Get_AudioInputStream(AudioInputStream **ISpeechBaseStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioInputStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsShared dispatches through ISpeechRecognizer's vtable slot 15.
-func (self *ISpeechRecognizer) Get_IsShared(Shared *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechRecognizer) Get_IsShared(Shared *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Shared)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_State dispatches through ISpeechRecognizer's vtable slot 16.
-func (self *ISpeechRecognizer) Put_State(State SpeechRecognizerState) foundation.HRESULT {
+func (self *ISpeechRecognizer) Put_State(State SpeechRecognizerState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(State))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ISpeechRecognizer's vtable slot 17.
-func (self *ISpeechRecognizer) Get_State(State *SpeechRecognizerState) foundation.HRESULT {
+func (self *ISpeechRecognizer) Get_State(State *SpeechRecognizerState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(State)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Status dispatches through ISpeechRecognizer's vtable slot 18.
-func (self *ISpeechRecognizer) Get_Status(Status **ISpeechRecognizerStatus) foundation.HRESULT {
+func (self *ISpeechRecognizer) Get_Status(Status **ISpeechRecognizerStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Status)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_Profile dispatches through ISpeechRecognizer's vtable slot 19.
-func (self *ISpeechRecognizer) Putref_Profile(Profile *ISpeechObjectToken) foundation.HRESULT {
+func (self *ISpeechRecognizer) Putref_Profile(Profile *ISpeechObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Profile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Profile dispatches through ISpeechRecognizer's vtable slot 20.
-func (self *ISpeechRecognizer) Get_Profile(Profile **ISpeechObjectToken) foundation.HRESULT {
+func (self *ISpeechRecognizer) Get_Profile(Profile **ISpeechObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Profile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateRecoContext dispatches through ISpeechRecognizer's vtable slot 22.
-func (self *ISpeechRecognizer) CreateRecoContext(NewContext **ISpeechRecoContext) foundation.HRESULT {
+func (self *ISpeechRecognizer) CreateRecoContext(NewContext **ISpeechRecoContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFormat dispatches through ISpeechRecognizer's vtable slot 23.
-func (self *ISpeechRecognizer) GetFormat(Type SpeechFormatType, Format **ISpeechAudioFormat) foundation.HRESULT {
+func (self *ISpeechRecognizer) GetFormat(Type SpeechFormatType, Format **ISpeechAudioFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(Format)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPropertyNumber dispatches through ISpeechRecognizer's vtable slot 24.
-func (self *ISpeechRecognizer) SetPropertyNumber(Name foundation.BSTR, Value int32, Supported *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechRecognizer) SetPropertyNumber(Name foundation.BSTR, Value int32, Supported *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(Value), uintptr(unsafe.Pointer(Supported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyNumber dispatches through ISpeechRecognizer's vtable slot 25.
-func (self *ISpeechRecognizer) GetPropertyNumber(Name foundation.BSTR, Value *int32, Supported *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechRecognizer) GetPropertyNumber(Name foundation.BSTR, Value *int32, Supported *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(Value)), uintptr(unsafe.Pointer(Supported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPropertyString dispatches through ISpeechRecognizer's vtable slot 26.
-func (self *ISpeechRecognizer) SetPropertyString(Name foundation.BSTR, Value foundation.BSTR, Supported *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechRecognizer) SetPropertyString(Name foundation.BSTR, Value foundation.BSTR, Supported *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(Value)), uintptr(unsafe.Pointer(Supported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyString dispatches through ISpeechRecognizer's vtable slot 27.
-func (self *ISpeechRecognizer) GetPropertyString(Name foundation.BSTR, Value *foundation.BSTR, Supported *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechRecognizer) GetPropertyString(Name foundation.BSTR, Value *foundation.BSTR, Supported *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(Value)), uintptr(unsafe.Pointer(Supported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsUISupported dispatches through ISpeechRecognizer's vtable slot 28.
-func (self *ISpeechRecognizer) IsUISupported(TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT, Supported *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechRecognizer) IsUISupported(TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT, Supported *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TypeOfUI)), uintptr(unsafe.Pointer(ExtraData)), uintptr(unsafe.Pointer(Supported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisplayUI dispatches through ISpeechRecognizer's vtable slot 29.
-func (self *ISpeechRecognizer) DisplayUI(hWndParent int32, Title foundation.BSTR, TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechRecognizer) DisplayUI(hWndParent int32, Title foundation.BSTR, TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(hWndParent), uintptr(unsafe.Pointer(Title)), uintptr(unsafe.Pointer(TypeOfUI)), uintptr(unsafe.Pointer(ExtraData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecognizers dispatches through ISpeechRecognizer's vtable slot 30.
-func (self *ISpeechRecognizer) GetRecognizers(RequiredAttributes foundation.BSTR, OptionalAttributes foundation.BSTR, ObjectTokens **ISpeechObjectTokens) foundation.HRESULT {
+func (self *ISpeechRecognizer) GetRecognizers(RequiredAttributes foundation.BSTR, OptionalAttributes foundation.BSTR, ObjectTokens **ISpeechObjectTokens) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RequiredAttributes)), uintptr(unsafe.Pointer(OptionalAttributes)), uintptr(unsafe.Pointer(ObjectTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAudioInputs dispatches through ISpeechRecognizer's vtable slot 31.
-func (self *ISpeechRecognizer) GetAudioInputs(RequiredAttributes foundation.BSTR, OptionalAttributes foundation.BSTR, ObjectTokens **ISpeechObjectTokens) foundation.HRESULT {
+func (self *ISpeechRecognizer) GetAudioInputs(RequiredAttributes foundation.BSTR, OptionalAttributes foundation.BSTR, ObjectTokens **ISpeechObjectTokens) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RequiredAttributes)), uintptr(unsafe.Pointer(OptionalAttributes)), uintptr(unsafe.Pointer(ObjectTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProfiles dispatches through ISpeechRecognizer's vtable slot 32.
-func (self *ISpeechRecognizer) GetProfiles(RequiredAttributes foundation.BSTR, OptionalAttributes foundation.BSTR, ObjectTokens **ISpeechObjectTokens) foundation.HRESULT {
+func (self *ISpeechRecognizer) GetProfiles(RequiredAttributes foundation.BSTR, OptionalAttributes foundation.BSTR, ObjectTokens **ISpeechObjectTokens) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RequiredAttributes)), uintptr(unsafe.Pointer(OptionalAttributes)), uintptr(unsafe.Pointer(ObjectTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bff9e781-53ec-484e-bb8a-0e1b5551e35c
@@ -4783,39 +4915,39 @@ type ISpeechRecognizerStatus struct {
 var IID_ISpeechRecognizerStatus = win32.GUID{Data1: 0xbff9e781, Data2: 0x53ec, Data3: 0x484e, Data4: [8]byte{0xbb, 0x8a, 0x0e, 0x1b, 0x55, 0x51, 0xe3, 0x5c}}
 
 // Get_AudioStatus dispatches through ISpeechRecognizerStatus's vtable slot 7.
-func (self *ISpeechRecognizerStatus) Get_AudioStatus(AudioStatus **ISpeechAudioStatus) foundation.HRESULT {
+func (self *ISpeechRecognizerStatus) Get_AudioStatus(AudioStatus **ISpeechAudioStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentStreamPosition dispatches through ISpeechRecognizerStatus's vtable slot 8.
-func (self *ISpeechRecognizerStatus) Get_CurrentStreamPosition(pCurrentStreamPos *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechRecognizerStatus) Get_CurrentStreamPosition(pCurrentStreamPos *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCurrentStreamPos)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentStreamNumber dispatches through ISpeechRecognizerStatus's vtable slot 9.
-func (self *ISpeechRecognizerStatus) Get_CurrentStreamNumber(StreamNumber *int32) foundation.HRESULT {
+func (self *ISpeechRecognizerStatus) Get_CurrentStreamNumber(StreamNumber *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StreamNumber)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NumberOfActiveRules dispatches through ISpeechRecognizerStatus's vtable slot 10.
-func (self *ISpeechRecognizerStatus) Get_NumberOfActiveRules(NumberOfActiveRules *int32) foundation.HRESULT {
+func (self *ISpeechRecognizerStatus) Get_NumberOfActiveRules(NumberOfActiveRules *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NumberOfActiveRules)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ClsidEngine dispatches through ISpeechRecognizerStatus's vtable slot 11.
-func (self *ISpeechRecognizerStatus) Get_ClsidEngine(ClsidEngine *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechRecognizerStatus) Get_ClsidEngine(ClsidEngine *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ClsidEngine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SupportedLanguages dispatches through ISpeechRecognizerStatus's vtable slot 12.
-func (self *ISpeechRecognizerStatus) Get_SupportedLanguages(SupportedLanguages *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechRecognizerStatus) Get_SupportedLanguages(SupportedLanguages *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SupportedLanguages)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b9ac5783-fcd0-4b21-b119-b4f8da8fd2c3
@@ -4827,21 +4959,21 @@ type ISpeechResourceLoader struct {
 var IID_ISpeechResourceLoader = win32.GUID{Data1: 0xb9ac5783, Data2: 0xfcd0, Data3: 0x4b21, Data4: [8]byte{0xb1, 0x19, 0xb4, 0xf8, 0xda, 0x8f, 0xd2, 0xc3}}
 
 // LoadResource dispatches through ISpeechResourceLoader's vtable slot 7.
-func (self *ISpeechResourceLoader) LoadResource(bstrResourceUri foundation.BSTR, fAlwaysReload foundation.VARIANT_BOOL, pStream **systemcom.IUnknown, pbstrMIMEType *foundation.BSTR, pfModified *foundation.VARIANT_BOOL, pbstrRedirectUrl *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechResourceLoader) LoadResource(bstrResourceUri foundation.BSTR, fAlwaysReload foundation.VARIANT_BOOL, pStream **systemcom.IUnknown, pbstrMIMEType *foundation.BSTR, pfModified *foundation.VARIANT_BOOL, pbstrRedirectUrl *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceUri)), uintptr(fAlwaysReload), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(pbstrMIMEType)), uintptr(unsafe.Pointer(pfModified)), uintptr(unsafe.Pointer(pbstrRedirectUrl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLocalCopy dispatches through ISpeechResourceLoader's vtable slot 8.
-func (self *ISpeechResourceLoader) GetLocalCopy(bstrResourceUri foundation.BSTR, pbstrLocalPath *foundation.BSTR, pbstrMIMEType *foundation.BSTR, pbstrRedirectUrl *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechResourceLoader) GetLocalCopy(bstrResourceUri foundation.BSTR, pbstrLocalPath *foundation.BSTR, pbstrMIMEType *foundation.BSTR, pbstrRedirectUrl *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrResourceUri)), uintptr(unsafe.Pointer(pbstrLocalPath)), uintptr(unsafe.Pointer(pbstrMIMEType)), uintptr(unsafe.Pointer(pbstrRedirectUrl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseLocalCopy dispatches through ISpeechResourceLoader's vtable slot 9.
-func (self *ISpeechResourceLoader) ReleaseLocalCopy(pbstrLocalPath foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechResourceLoader) ReleaseLocalCopy(pbstrLocalPath foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLocalPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3b9c7e7a-6eee-4ded-9092-11657279adbe
@@ -4853,51 +4985,51 @@ type ISpeechTextSelectionInformation struct {
 var IID_ISpeechTextSelectionInformation = win32.GUID{Data1: 0x3b9c7e7a, Data2: 0x6eee, Data3: 0x4ded, Data4: [8]byte{0x90, 0x92, 0x11, 0x65, 0x72, 0x79, 0xad, 0xbe}}
 
 // Put_ActiveOffset dispatches through ISpeechTextSelectionInformation's vtable slot 7.
-func (self *ISpeechTextSelectionInformation) Put_ActiveOffset(ActiveOffset int32) foundation.HRESULT {
+func (self *ISpeechTextSelectionInformation) Put_ActiveOffset(ActiveOffset int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ActiveOffset))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ActiveOffset dispatches through ISpeechTextSelectionInformation's vtable slot 8.
-func (self *ISpeechTextSelectionInformation) Get_ActiveOffset(ActiveOffset *int32) foundation.HRESULT {
+func (self *ISpeechTextSelectionInformation) Get_ActiveOffset(ActiveOffset *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ActiveOffset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ActiveLength dispatches through ISpeechTextSelectionInformation's vtable slot 9.
-func (self *ISpeechTextSelectionInformation) Put_ActiveLength(ActiveLength int32) foundation.HRESULT {
+func (self *ISpeechTextSelectionInformation) Put_ActiveLength(ActiveLength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ActiveLength))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ActiveLength dispatches through ISpeechTextSelectionInformation's vtable slot 10.
-func (self *ISpeechTextSelectionInformation) Get_ActiveLength(ActiveLength *int32) foundation.HRESULT {
+func (self *ISpeechTextSelectionInformation) Get_ActiveLength(ActiveLength *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ActiveLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_SelectionOffset dispatches through ISpeechTextSelectionInformation's vtable slot 11.
-func (self *ISpeechTextSelectionInformation) Put_SelectionOffset(SelectionOffset int32) foundation.HRESULT {
+func (self *ISpeechTextSelectionInformation) Put_SelectionOffset(SelectionOffset int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(SelectionOffset))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SelectionOffset dispatches through ISpeechTextSelectionInformation's vtable slot 12.
-func (self *ISpeechTextSelectionInformation) Get_SelectionOffset(SelectionOffset *int32) foundation.HRESULT {
+func (self *ISpeechTextSelectionInformation) Get_SelectionOffset(SelectionOffset *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SelectionOffset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_SelectionLength dispatches through ISpeechTextSelectionInformation's vtable slot 13.
-func (self *ISpeechTextSelectionInformation) Put_SelectionLength(SelectionLength int32) foundation.HRESULT {
+func (self *ISpeechTextSelectionInformation) Put_SelectionLength(SelectionLength int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(SelectionLength))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SelectionLength dispatches through ISpeechTextSelectionInformation's vtable slot 14.
-func (self *ISpeechTextSelectionInformation) Get_SelectionLength(SelectionLength *int32) foundation.HRESULT {
+func (self *ISpeechTextSelectionInformation) Get_SelectionLength(SelectionLength *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SelectionLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 269316d8-57bd-11d2-9eee-00c04f797396
@@ -4909,195 +5041,195 @@ type ISpeechVoice struct {
 var IID_ISpeechVoice = win32.GUID{Data1: 0x269316d8, Data2: 0x57bd, Data3: 0x11d2, Data4: [8]byte{0x9e, 0xee, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96}}
 
 // Get_Status dispatches through ISpeechVoice's vtable slot 7.
-func (self *ISpeechVoice) Get_Status(Status **ISpeechVoiceStatus) foundation.HRESULT {
+func (self *ISpeechVoice) Get_Status(Status **ISpeechVoiceStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Status)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Voice dispatches through ISpeechVoice's vtable slot 8.
-func (self *ISpeechVoice) Get_Voice(Voice **ISpeechObjectToken) foundation.HRESULT {
+func (self *ISpeechVoice) Get_Voice(Voice **ISpeechObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Voice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_Voice dispatches through ISpeechVoice's vtable slot 9.
-func (self *ISpeechVoice) Putref_Voice(Voice *ISpeechObjectToken) foundation.HRESULT {
+func (self *ISpeechVoice) Putref_Voice(Voice *ISpeechObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Voice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioOutput dispatches through ISpeechVoice's vtable slot 10.
-func (self *ISpeechVoice) Get_AudioOutput(AudioOutput **ISpeechObjectToken) foundation.HRESULT {
+func (self *ISpeechVoice) Get_AudioOutput(AudioOutput **ISpeechObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioOutput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AudioOutput dispatches through ISpeechVoice's vtable slot 11.
-func (self *ISpeechVoice) Putref_AudioOutput(AudioOutput *ISpeechObjectToken) foundation.HRESULT {
+func (self *ISpeechVoice) Putref_AudioOutput(AudioOutput *ISpeechObjectToken) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioOutput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioOutputStream dispatches through ISpeechVoice's vtable slot 12.
-func (self *ISpeechVoice) Get_AudioOutputStream(AudioOutputStream **ISpeechBaseStream) foundation.HRESULT {
+func (self *ISpeechVoice) Get_AudioOutputStream(AudioOutputStream **ISpeechBaseStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioOutputStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Putref_AudioOutputStream dispatches through ISpeechVoice's vtable slot 13.
-func (self *ISpeechVoice) Putref_AudioOutputStream(AudioOutputStream *ISpeechBaseStream) foundation.HRESULT {
+func (self *ISpeechVoice) Putref_AudioOutputStream(AudioOutputStream *ISpeechBaseStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AudioOutputStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Rate dispatches through ISpeechVoice's vtable slot 14.
-func (self *ISpeechVoice) Get_Rate(Rate *int32) foundation.HRESULT {
+func (self *ISpeechVoice) Get_Rate(Rate *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Rate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Rate dispatches through ISpeechVoice's vtable slot 15.
-func (self *ISpeechVoice) Put_Rate(Rate int32) foundation.HRESULT {
+func (self *ISpeechVoice) Put_Rate(Rate int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Rate))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Volume dispatches through ISpeechVoice's vtable slot 16.
-func (self *ISpeechVoice) Get_Volume(Volume *int32) foundation.HRESULT {
+func (self *ISpeechVoice) Get_Volume(Volume *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Volume)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Volume dispatches through ISpeechVoice's vtable slot 17.
-func (self *ISpeechVoice) Put_Volume(Volume int32) foundation.HRESULT {
+func (self *ISpeechVoice) Put_Volume(Volume int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Volume))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowAudioOutputFormatChangesOnNextSet dispatches through ISpeechVoice's vtable slot 18.
-func (self *ISpeechVoice) Put_AllowAudioOutputFormatChangesOnNextSet(Allow foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechVoice) Put_AllowAudioOutputFormatChangesOnNextSet(Allow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Allow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowAudioOutputFormatChangesOnNextSet dispatches through ISpeechVoice's vtable slot 19.
-func (self *ISpeechVoice) Get_AllowAudioOutputFormatChangesOnNextSet(Allow *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechVoice) Get_AllowAudioOutputFormatChangesOnNextSet(Allow *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Allow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EventInterests dispatches through ISpeechVoice's vtable slot 20.
-func (self *ISpeechVoice) Get_EventInterests(EventInterestFlags *SpeechVoiceEvents) foundation.HRESULT {
+func (self *ISpeechVoice) Get_EventInterests(EventInterestFlags *SpeechVoiceEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EventInterestFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_EventInterests dispatches through ISpeechVoice's vtable slot 21.
-func (self *ISpeechVoice) Put_EventInterests(EventInterestFlags SpeechVoiceEvents) foundation.HRESULT {
+func (self *ISpeechVoice) Put_EventInterests(EventInterestFlags SpeechVoiceEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(EventInterestFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Priority dispatches through ISpeechVoice's vtable slot 22.
-func (self *ISpeechVoice) Put_Priority(Priority SpeechVoicePriority) foundation.HRESULT {
+func (self *ISpeechVoice) Put_Priority(Priority SpeechVoicePriority) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Priority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Priority dispatches through ISpeechVoice's vtable slot 23.
-func (self *ISpeechVoice) Get_Priority(Priority *SpeechVoicePriority) foundation.HRESULT {
+func (self *ISpeechVoice) Get_Priority(Priority *SpeechVoicePriority) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Priority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AlertBoundary dispatches through ISpeechVoice's vtable slot 24.
-func (self *ISpeechVoice) Put_AlertBoundary(Boundary SpeechVoiceEvents) foundation.HRESULT {
+func (self *ISpeechVoice) Put_AlertBoundary(Boundary SpeechVoiceEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(Boundary))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AlertBoundary dispatches through ISpeechVoice's vtable slot 25.
-func (self *ISpeechVoice) Get_AlertBoundary(Boundary *SpeechVoiceEvents) foundation.HRESULT {
+func (self *ISpeechVoice) Get_AlertBoundary(Boundary *SpeechVoiceEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Boundary)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_SynchronousSpeakTimeout dispatches through ISpeechVoice's vtable slot 26.
-func (self *ISpeechVoice) Put_SynchronousSpeakTimeout(msTimeout int32) foundation.HRESULT {
+func (self *ISpeechVoice) Put_SynchronousSpeakTimeout(msTimeout int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(msTimeout))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SynchronousSpeakTimeout dispatches through ISpeechVoice's vtable slot 27.
-func (self *ISpeechVoice) Get_SynchronousSpeakTimeout(msTimeout *int32) foundation.HRESULT {
+func (self *ISpeechVoice) Get_SynchronousSpeakTimeout(msTimeout *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(msTimeout)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Speak dispatches through ISpeechVoice's vtable slot 28.
-func (self *ISpeechVoice) Speak(Text foundation.BSTR, Flags SpeechVoiceSpeakFlags, StreamNumber *int32) foundation.HRESULT {
+func (self *ISpeechVoice) Speak(Text foundation.BSTR, Flags SpeechVoiceSpeakFlags, StreamNumber *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Text)), uintptr(Flags), uintptr(unsafe.Pointer(StreamNumber)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SpeakStream dispatches through ISpeechVoice's vtable slot 29.
-func (self *ISpeechVoice) SpeakStream(Stream *ISpeechBaseStream, Flags SpeechVoiceSpeakFlags, StreamNumber *int32) foundation.HRESULT {
+func (self *ISpeechVoice) SpeakStream(Stream *ISpeechBaseStream, Flags SpeechVoiceSpeakFlags, StreamNumber *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Stream)), uintptr(Flags), uintptr(unsafe.Pointer(StreamNumber)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through ISpeechVoice's vtable slot 30.
-func (self *ISpeechVoice) Pause() foundation.HRESULT {
+func (self *ISpeechVoice) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through ISpeechVoice's vtable slot 31.
-func (self *ISpeechVoice) Resume() foundation.HRESULT {
+func (self *ISpeechVoice) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through ISpeechVoice's vtable slot 32.
-func (self *ISpeechVoice) Skip(Type foundation.BSTR, NumItems int32, NumSkipped *int32) foundation.HRESULT {
+func (self *ISpeechVoice) Skip(Type foundation.BSTR, NumItems int32, NumSkipped *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(NumItems), uintptr(unsafe.Pointer(NumSkipped)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVoices dispatches through ISpeechVoice's vtable slot 33.
-func (self *ISpeechVoice) GetVoices(RequiredAttributes foundation.BSTR, OptionalAttributes foundation.BSTR, ObjectTokens **ISpeechObjectTokens) foundation.HRESULT {
+func (self *ISpeechVoice) GetVoices(RequiredAttributes foundation.BSTR, OptionalAttributes foundation.BSTR, ObjectTokens **ISpeechObjectTokens) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RequiredAttributes)), uintptr(unsafe.Pointer(OptionalAttributes)), uintptr(unsafe.Pointer(ObjectTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAudioOutputs dispatches through ISpeechVoice's vtable slot 34.
-func (self *ISpeechVoice) GetAudioOutputs(RequiredAttributes foundation.BSTR, OptionalAttributes foundation.BSTR, ObjectTokens **ISpeechObjectTokens) foundation.HRESULT {
+func (self *ISpeechVoice) GetAudioOutputs(RequiredAttributes foundation.BSTR, OptionalAttributes foundation.BSTR, ObjectTokens **ISpeechObjectTokens) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(RequiredAttributes)), uintptr(unsafe.Pointer(OptionalAttributes)), uintptr(unsafe.Pointer(ObjectTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitUntilDone dispatches through ISpeechVoice's vtable slot 35.
-func (self *ISpeechVoice) WaitUntilDone(msTimeout int32, Done *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechVoice) WaitUntilDone(msTimeout int32, Done *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(msTimeout), uintptr(unsafe.Pointer(Done)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SpeakCompleteEvent dispatches through ISpeechVoice's vtable slot 36.
-func (self *ISpeechVoice) SpeakCompleteEvent(Handle *int32) foundation.HRESULT {
+func (self *ISpeechVoice) SpeakCompleteEvent(Handle *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Handle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsUISupported dispatches through ISpeechVoice's vtable slot 37.
-func (self *ISpeechVoice) IsUISupported(TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT, Supported *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechVoice) IsUISupported(TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT, Supported *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TypeOfUI)), uintptr(unsafe.Pointer(ExtraData)), uintptr(unsafe.Pointer(Supported)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisplayUI dispatches through ISpeechVoice's vtable slot 38.
-func (self *ISpeechVoice) DisplayUI(hWndParent int32, Title foundation.BSTR, TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechVoice) DisplayUI(hWndParent int32, Title foundation.BSTR, TypeOfUI foundation.BSTR, ExtraData *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(hWndParent), uintptr(unsafe.Pointer(Title)), uintptr(unsafe.Pointer(TypeOfUI)), uintptr(unsafe.Pointer(ExtraData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8be47b07-57f6-11d2-9eee-00c04f797396
@@ -5109,75 +5241,75 @@ type ISpeechVoiceStatus struct {
 var IID_ISpeechVoiceStatus = win32.GUID{Data1: 0x8be47b07, Data2: 0x57f6, Data3: 0x11d2, Data4: [8]byte{0x9e, 0xee, 0x00, 0xc0, 0x4f, 0x79, 0x73, 0x96}}
 
 // Get_CurrentStreamNumber dispatches through ISpeechVoiceStatus's vtable slot 7.
-func (self *ISpeechVoiceStatus) Get_CurrentStreamNumber(StreamNumber *int32) foundation.HRESULT {
+func (self *ISpeechVoiceStatus) Get_CurrentStreamNumber(StreamNumber *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StreamNumber)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LastStreamNumberQueued dispatches through ISpeechVoiceStatus's vtable slot 8.
-func (self *ISpeechVoiceStatus) Get_LastStreamNumberQueued(StreamNumber *int32) foundation.HRESULT {
+func (self *ISpeechVoiceStatus) Get_LastStreamNumberQueued(StreamNumber *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StreamNumber)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LastHResult dispatches through ISpeechVoiceStatus's vtable slot 9.
-func (self *ISpeechVoiceStatus) Get_LastHResult(HResult *int32) foundation.HRESULT {
+func (self *ISpeechVoiceStatus) Get_LastHResult(HResult *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(HResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RunningState dispatches through ISpeechVoiceStatus's vtable slot 10.
-func (self *ISpeechVoiceStatus) Get_RunningState(State *SpeechRunState) foundation.HRESULT {
+func (self *ISpeechVoiceStatus) Get_RunningState(State *SpeechRunState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(State)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_InputWordPosition dispatches through ISpeechVoiceStatus's vtable slot 11.
-func (self *ISpeechVoiceStatus) Get_InputWordPosition(Position *int32) foundation.HRESULT {
+func (self *ISpeechVoiceStatus) Get_InputWordPosition(Position *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Position)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_InputWordLength dispatches through ISpeechVoiceStatus's vtable slot 12.
-func (self *ISpeechVoiceStatus) Get_InputWordLength(Length *int32) foundation.HRESULT {
+func (self *ISpeechVoiceStatus) Get_InputWordLength(Length *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Length)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_InputSentencePosition dispatches through ISpeechVoiceStatus's vtable slot 13.
-func (self *ISpeechVoiceStatus) Get_InputSentencePosition(Position *int32) foundation.HRESULT {
+func (self *ISpeechVoiceStatus) Get_InputSentencePosition(Position *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Position)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_InputSentenceLength dispatches through ISpeechVoiceStatus's vtable slot 14.
-func (self *ISpeechVoiceStatus) Get_InputSentenceLength(Length *int32) foundation.HRESULT {
+func (self *ISpeechVoiceStatus) Get_InputSentenceLength(Length *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Length)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LastBookmark dispatches through ISpeechVoiceStatus's vtable slot 15.
-func (self *ISpeechVoiceStatus) Get_LastBookmark(Bookmark *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechVoiceStatus) Get_LastBookmark(Bookmark *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Bookmark)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LastBookmarkId dispatches through ISpeechVoiceStatus's vtable slot 16.
-func (self *ISpeechVoiceStatus) Get_LastBookmarkId(BookmarkId *int32) foundation.HRESULT {
+func (self *ISpeechVoiceStatus) Get_LastBookmarkId(BookmarkId *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(BookmarkId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PhonemeId dispatches through ISpeechVoiceStatus's vtable slot 17.
-func (self *ISpeechVoiceStatus) Get_PhonemeId(PhoneId *int16) foundation.HRESULT {
+func (self *ISpeechVoiceStatus) Get_PhonemeId(PhoneId *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PhoneId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_VisemeId dispatches through ISpeechVoiceStatus's vtable slot 18.
-func (self *ISpeechVoiceStatus) Get_VisemeId(VisemeId *int16) foundation.HRESULT {
+func (self *ISpeechVoiceStatus) Get_VisemeId(VisemeId *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(VisemeId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7a1ef0d5-1581-4741-88e4-209a49f11a10
@@ -5189,81 +5321,81 @@ type ISpeechWaveFormatEx struct {
 var IID_ISpeechWaveFormatEx = win32.GUID{Data1: 0x7a1ef0d5, Data2: 0x1581, Data3: 0x4741, Data4: [8]byte{0x88, 0xe4, 0x20, 0x9a, 0x49, 0xf1, 0x1a, 0x10}}
 
 // Get_FormatTag dispatches through ISpeechWaveFormatEx's vtable slot 7.
-func (self *ISpeechWaveFormatEx) Get_FormatTag(FormatTag *int16) foundation.HRESULT {
+func (self *ISpeechWaveFormatEx) Get_FormatTag(FormatTag *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(FormatTag)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_FormatTag dispatches through ISpeechWaveFormatEx's vtable slot 8.
-func (self *ISpeechWaveFormatEx) Put_FormatTag(FormatTag int16) foundation.HRESULT {
+func (self *ISpeechWaveFormatEx) Put_FormatTag(FormatTag int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(FormatTag))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Channels dispatches through ISpeechWaveFormatEx's vtable slot 9.
-func (self *ISpeechWaveFormatEx) Get_Channels(Channels *int16) foundation.HRESULT {
+func (self *ISpeechWaveFormatEx) Get_Channels(Channels *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Channels)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Channels dispatches through ISpeechWaveFormatEx's vtable slot 10.
-func (self *ISpeechWaveFormatEx) Put_Channels(Channels int16) foundation.HRESULT {
+func (self *ISpeechWaveFormatEx) Put_Channels(Channels int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Channels))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SamplesPerSec dispatches through ISpeechWaveFormatEx's vtable slot 11.
-func (self *ISpeechWaveFormatEx) Get_SamplesPerSec(SamplesPerSec *int32) foundation.HRESULT {
+func (self *ISpeechWaveFormatEx) Get_SamplesPerSec(SamplesPerSec *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SamplesPerSec)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_SamplesPerSec dispatches through ISpeechWaveFormatEx's vtable slot 12.
-func (self *ISpeechWaveFormatEx) Put_SamplesPerSec(SamplesPerSec int32) foundation.HRESULT {
+func (self *ISpeechWaveFormatEx) Put_SamplesPerSec(SamplesPerSec int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(SamplesPerSec))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AvgBytesPerSec dispatches through ISpeechWaveFormatEx's vtable slot 13.
-func (self *ISpeechWaveFormatEx) Get_AvgBytesPerSec(AvgBytesPerSec *int32) foundation.HRESULT {
+func (self *ISpeechWaveFormatEx) Get_AvgBytesPerSec(AvgBytesPerSec *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AvgBytesPerSec)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_AvgBytesPerSec dispatches through ISpeechWaveFormatEx's vtable slot 14.
-func (self *ISpeechWaveFormatEx) Put_AvgBytesPerSec(AvgBytesPerSec int32) foundation.HRESULT {
+func (self *ISpeechWaveFormatEx) Put_AvgBytesPerSec(AvgBytesPerSec int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(AvgBytesPerSec))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BlockAlign dispatches through ISpeechWaveFormatEx's vtable slot 15.
-func (self *ISpeechWaveFormatEx) Get_BlockAlign(BlockAlign *int16) foundation.HRESULT {
+func (self *ISpeechWaveFormatEx) Get_BlockAlign(BlockAlign *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(BlockAlign)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_BlockAlign dispatches through ISpeechWaveFormatEx's vtable slot 16.
-func (self *ISpeechWaveFormatEx) Put_BlockAlign(BlockAlign int16) foundation.HRESULT {
+func (self *ISpeechWaveFormatEx) Put_BlockAlign(BlockAlign int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(BlockAlign))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BitsPerSample dispatches through ISpeechWaveFormatEx's vtable slot 17.
-func (self *ISpeechWaveFormatEx) Get_BitsPerSample(BitsPerSample *int16) foundation.HRESULT {
+func (self *ISpeechWaveFormatEx) Get_BitsPerSample(BitsPerSample *int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(BitsPerSample)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_BitsPerSample dispatches through ISpeechWaveFormatEx's vtable slot 18.
-func (self *ISpeechWaveFormatEx) Put_BitsPerSample(BitsPerSample int16) foundation.HRESULT {
+func (self *ISpeechWaveFormatEx) Put_BitsPerSample(BitsPerSample int16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(BitsPerSample))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ExtraData dispatches through ISpeechWaveFormatEx's vtable slot 19.
-func (self *ISpeechWaveFormatEx) Get_ExtraData(ExtraData *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISpeechWaveFormatEx) Get_ExtraData(ExtraData *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ExtraData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: aaec54af-8f85-4924-944d-b79d39d72e19
@@ -5275,15 +5407,15 @@ type ISpeechXMLRecoResult struct {
 var IID_ISpeechXMLRecoResult = win32.GUID{Data1: 0xaaec54af, Data2: 0x8f85, Data3: 0x4924, Data4: [8]byte{0x94, 0x4d, 0xb7, 0x9d, 0x39, 0xd7, 0x2e, 0x19}}
 
 // GetXMLResult dispatches through ISpeechXMLRecoResult's vtable slot 17.
-func (self *ISpeechXMLRecoResult) GetXMLResult(Options SPXMLRESULTOPTIONS, pResult *foundation.BSTR) foundation.HRESULT {
+func (self *ISpeechXMLRecoResult) GetXMLResult(Options SPXMLRESULTOPTIONS, pResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Options), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetXMLErrorInfo dispatches through ISpeechXMLRecoResult's vtable slot 18.
-func (self *ISpeechXMLRecoResult) GetXMLErrorInfo(LineNumber *int32, ScriptLine *foundation.BSTR, Source *foundation.BSTR, Description *foundation.BSTR, ResultCode *int32, IsError *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISpeechXMLRecoResult) GetXMLErrorInfo(LineNumber *int32, ScriptLine *foundation.BSTR, Source *foundation.BSTR, Description *foundation.BSTR, ResultCode *int32, IsError *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LineNumber)), uintptr(unsafe.Pointer(ScriptLine)), uintptr(unsafe.Pointer(Source)), uintptr(unsafe.Pointer(Description)), uintptr(unsafe.Pointer(ResultCode)), uintptr(unsafe.Pointer(IsError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8e7c791e-4467-11d3-9723-00c04f72db08
@@ -5295,15 +5427,15 @@ type ISpPrivateEngineCall struct {
 var IID_ISpPrivateEngineCall = win32.GUID{Data1: 0x8e7c791e, Data2: 0x4467, Data3: 0x11d3, Data4: [8]byte{0x97, 0x23, 0x00, 0xc0, 0x4f, 0x72, 0xdb, 0x08}}
 
 // CallEngine dispatches through _ISpPrivateEngineCall's vtable slot 3.
-func (self *ISpPrivateEngineCall) CallEngine(pCallFrame unsafe.Pointer, ulCallFrameSize uint32) foundation.HRESULT {
+func (self *ISpPrivateEngineCall) CallEngine(pCallFrame unsafe.Pointer, ulCallFrameSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallFrame)), uintptr(ulCallFrameSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CallEngineEx dispatches through _ISpPrivateEngineCall's vtable slot 4.
-func (self *ISpPrivateEngineCall) CallEngineEx(pInFrame unsafe.Pointer, ulInFrameSize uint32, ppCoMemOutFrame *unsafe.Pointer, pulOutFrameSize *uint32) foundation.HRESULT {
+func (self *ISpPrivateEngineCall) CallEngineEx(pInFrame unsafe.Pointer, ulInFrameSize uint32, ppCoMemOutFrame *unsafe.Pointer, pulOutFrameSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInFrame)), uintptr(ulInFrameSize), uintptr(unsafe.Pointer(ppCoMemOutFrame)), uintptr(unsafe.Pointer(pulOutFrameSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7b8fcb42-0e9d-4f00-a048-7b04d6179d3d

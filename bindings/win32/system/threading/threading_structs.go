@@ -45,8 +45,8 @@ type CRITICAL_SECTION_DEBUG struct {
 	Identifier                uint16
 }
 
-// INIT_ONCE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INIT_ONCE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INIT_ONCE struct {
 	Data [1]uint64
 }
@@ -177,8 +177,8 @@ type PROCESS_PROTECTION_LEVEL_INFORMATION struct {
 	ProtectionLevel PROCESS_PROTECTION_LEVEL
 }
 
-// REASON_CONTEXT_Reason_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// REASON_CONTEXT_Reason_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type REASON_CONTEXT_Reason_e__Union struct {
 	Data [3]uint64
 }
@@ -287,8 +287,8 @@ type THREAD_POWER_THROTTLING_STATE struct {
 	StateMask   uint32
 }
 
-// TP_CALLBACK_ENVIRON_V3_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TP_CALLBACK_ENVIRON_V3_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TP_CALLBACK_ENVIRON_V3_u_e__Union struct {
 	Data [1]uint32
 }
@@ -319,8 +319,8 @@ type UMS_SCHEDULER_STARTUP_INFO struct {
 	SchedulerParam unsafe.Pointer
 }
 
-// UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type UMS_SYSTEM_THREAD_INFORMATION_Anonymous_e__Union struct {
 	Data [1]uint32
 }

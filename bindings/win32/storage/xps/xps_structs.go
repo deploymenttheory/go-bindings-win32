@@ -56,8 +56,8 @@ type PSINJECTDATA struct {
 	PageNumber     uint16
 }
 
-// XPS_COLOR_XPS_COLOR_VALUE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// XPS_COLOR_XPS_COLOR_VALUE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type XPS_COLOR_XPS_COLOR_VALUE struct {
 	Data [10]uint32
 }

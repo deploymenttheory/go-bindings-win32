@@ -41,33 +41,33 @@ var (
 // OpenPersonalTrustDBDialog calls WINTRUST!OpenPersonalTrustDBDialog.
 // https://learn.microsoft.com/windows/win32/api/wintrust/nf-wintrust-openpersonaltrustdbdialog
 // Minimum OS: windows5.1.2600.
-func OpenPersonalTrustDBDialog(hwndParent foundation.HWND) foundation.BOOL {
+func OpenPersonalTrustDBDialog(hwndParent foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procOpenPersonalTrustDBDialog.Addr(), uintptr(hwndParent))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // OpenPersonalTrustDBDialogEx calls WINTRUST!OpenPersonalTrustDBDialogEx.
 // https://learn.microsoft.com/windows/win32/api/wintrust/nf-wintrust-openpersonaltrustdbdialogex
 // Minimum OS: windows5.1.2600.
-func OpenPersonalTrustDBDialogEx(hwndParent foundation.HWND, dwFlags uint32, pvReserved *unsafe.Pointer) foundation.BOOL {
+func OpenPersonalTrustDBDialogEx(hwndParent foundation.HWND, dwFlags uint32, pvReserved *unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procOpenPersonalTrustDBDialogEx.Addr(), uintptr(hwndParent), uintptr(dwFlags), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WTHelperCertCheckValidSignature calls WINTRUST!WTHelperCertCheckValidSignature.
 // https://learn.microsoft.com/windows/win32/api/wintrust/nf-wintrust-wthelpercertcheckvalidsignature
 // Minimum OS: windows6.0.6000.
-func WTHelperCertCheckValidSignature(pProvData *CRYPT_PROVIDER_DATA) foundation.HRESULT {
+func WTHelperCertCheckValidSignature(pProvData *CRYPT_PROVIDER_DATA) error {
 	r1, _, _ := syscall.SyscallN(procWTHelperCertCheckValidSignature.Addr(), uintptr(unsafe.Pointer(pProvData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WTHelperCertIsSelfSigned calls WINTRUST!WTHelperCertIsSelfSigned.
 // https://learn.microsoft.com/windows/win32/api/wintrust/nf-wintrust-wthelpercertisselfsigned
 // Minimum OS: windows5.1.2600.
-func WTHelperCertIsSelfSigned(dwEncoding uint32, pCert *securitycryptography.CERT_INFO) foundation.BOOL {
+func WTHelperCertIsSelfSigned(dwEncoding uint32, pCert *securitycryptography.CERT_INFO) bool {
 	r1, _, _ := syscall.SyscallN(procWTHelperCertIsSelfSigned.Addr(), uintptr(dwEncoding), uintptr(unsafe.Pointer(pCert)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WTHelperGetProvCertFromChain calls WINTRUST!WTHelperGetProvCertFromChain.
@@ -89,8 +89,9 @@ func WTHelperGetProvPrivateDataFromChain(pProvData *CRYPT_PROVIDER_DATA, pgProvi
 // WTHelperGetProvSignerFromChain calls WINTRUST!WTHelperGetProvSignerFromChain.
 // https://learn.microsoft.com/windows/win32/api/wintrust/nf-wintrust-wthelpergetprovsignerfromchain
 // Minimum OS: windows5.1.2600.
-func WTHelperGetProvSignerFromChain(pProvData *CRYPT_PROVIDER_DATA, idxSigner uint32, fCounterSigner foundation.BOOL, idxCounterSigner uint32) *CRYPT_PROVIDER_SGNR {
-	r1, _, _ := syscall.SyscallN(procWTHelperGetProvSignerFromChain.Addr(), uintptr(unsafe.Pointer(pProvData)), uintptr(idxSigner), uintptr(fCounterSigner), uintptr(idxCounterSigner))
+func WTHelperGetProvSignerFromChain(pProvData *CRYPT_PROVIDER_DATA, idxSigner uint32, fCounterSigner bool, idxCounterSigner uint32) *CRYPT_PROVIDER_SGNR {
+	_fCounterSigner := win32.Bool32(fCounterSigner)
+	r1, _, _ := syscall.SyscallN(procWTHelperGetProvSignerFromChain.Addr(), uintptr(unsafe.Pointer(pProvData)), uintptr(idxSigner), uintptr(_fCounterSigner), uintptr(idxCounterSigner))
 	return (*CRYPT_PROVIDER_SGNR)(unsafe.Pointer(r1))
 }
 
@@ -161,30 +162,31 @@ func WintrustGetRegPolicyFlags(pdwPolicyFlags *WINTRUST_POLICY_FLAGS) {
 // WintrustLoadFunctionPointers calls WINTRUST!WintrustLoadFunctionPointers.
 // https://learn.microsoft.com/windows/win32/api/wintrust/nf-wintrust-wintrustloadfunctionpointers
 // Minimum OS: windows5.1.2600.
-func WintrustLoadFunctionPointers(pgActionID *win32.GUID, pPfns *CRYPT_PROVIDER_FUNCTIONS) foundation.BOOL {
+func WintrustLoadFunctionPointers(pgActionID *win32.GUID, pPfns *CRYPT_PROVIDER_FUNCTIONS) bool {
 	r1, _, _ := syscall.SyscallN(procWintrustLoadFunctionPointers.Addr(), uintptr(unsafe.Pointer(pgActionID)), uintptr(unsafe.Pointer(pPfns)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WintrustRemoveActionID calls WINTRUST!WintrustRemoveActionID.
 // https://learn.microsoft.com/windows/win32/api/wintrust/nf-wintrust-wintrustremoveactionid
 // Minimum OS: windows5.1.2600.
-func WintrustRemoveActionID(pgActionID *win32.GUID) foundation.BOOL {
+func WintrustRemoveActionID(pgActionID *win32.GUID) bool {
 	r1, _, _ := syscall.SyscallN(procWintrustRemoveActionID.Addr(), uintptr(unsafe.Pointer(pgActionID)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WintrustSetDefaultIncludePEPageHashes calls WINTRUST!WintrustSetDefaultIncludePEPageHashes.
 // https://learn.microsoft.com/windows/win32/api/wintrust/nf-wintrust-wintrustsetdefaultincludepepagehashes
 // Minimum OS: windows6.0.6000.
-func WintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes foundation.BOOL) {
-	syscall.SyscallN(procWintrustSetDefaultIncludePEPageHashes.Addr(), uintptr(fIncludePEPageHashes))
+func WintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes bool) {
+	_fIncludePEPageHashes := win32.Bool32(fIncludePEPageHashes)
+	syscall.SyscallN(procWintrustSetDefaultIncludePEPageHashes.Addr(), uintptr(_fIncludePEPageHashes))
 }
 
 // WintrustSetRegPolicyFlags calls WINTRUST!WintrustSetRegPolicyFlags.
 // https://learn.microsoft.com/windows/win32/api/wintrust/nf-wintrust-wintrustsetregpolicyflags
 // Minimum OS: windows5.1.2600.
-func WintrustSetRegPolicyFlags(dwPolicyFlags WINTRUST_POLICY_FLAGS) foundation.BOOL {
+func WintrustSetRegPolicyFlags(dwPolicyFlags WINTRUST_POLICY_FLAGS) bool {
 	r1, _, _ := syscall.SyscallN(procWintrustSetRegPolicyFlags.Addr(), uintptr(dwPolicyFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }

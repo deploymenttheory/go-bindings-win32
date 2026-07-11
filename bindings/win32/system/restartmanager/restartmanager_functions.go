@@ -33,8 +33,10 @@ var (
 // RmAddFilter calls RstrtMgr!RmAddFilter.
 // https://learn.microsoft.com/windows/win32/api/restartmanager/nf-restartmanager-rmaddfilter
 // Minimum OS: windows6.0.6000.
-func RmAddFilter(dwSessionHandle uint32, strModuleName foundation.PWSTR, pProcess *RM_UNIQUE_PROCESS, strServiceShortName foundation.PWSTR, FilterAction RM_FILTER_ACTION) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procRmAddFilter.Addr(), uintptr(dwSessionHandle), uintptr(unsafe.Pointer(strModuleName)), uintptr(unsafe.Pointer(pProcess)), uintptr(unsafe.Pointer(strServiceShortName)), uintptr(FilterAction))
+func RmAddFilter(dwSessionHandle uint32, strModuleName string, pProcess *RM_UNIQUE_PROCESS, strServiceShortName string, FilterAction RM_FILTER_ACTION) foundation.WIN32_ERROR {
+	_strModuleName := win32.UTF16Ptr(strModuleName)
+	_strServiceShortName := win32.UTF16Ptr(strServiceShortName)
+	r1, _, _ := syscall.SyscallN(procRmAddFilter.Addr(), uintptr(dwSessionHandle), uintptr(unsafe.Pointer(_strModuleName)), uintptr(unsafe.Pointer(pProcess)), uintptr(unsafe.Pointer(_strServiceShortName)), uintptr(FilterAction))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -73,32 +75,47 @@ func RmGetList(dwSessionHandle uint32, pnProcInfoNeeded *uint32, pnProcInfo *uin
 // RmJoinSession calls RstrtMgr!RmJoinSession.
 // https://learn.microsoft.com/windows/win32/api/restartmanager/nf-restartmanager-rmjoinsession
 // Minimum OS: windows6.0.6000.
-func RmJoinSession(pSessionHandle *uint32, strSessionKey foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procRmJoinSession.Addr(), uintptr(unsafe.Pointer(pSessionHandle)), uintptr(unsafe.Pointer(strSessionKey)))
+func RmJoinSession(pSessionHandle *uint32, strSessionKey string) foundation.WIN32_ERROR {
+	_strSessionKey := win32.UTF16Ptr(strSessionKey)
+	r1, _, _ := syscall.SyscallN(procRmJoinSession.Addr(), uintptr(unsafe.Pointer(pSessionHandle)), uintptr(unsafe.Pointer(_strSessionKey)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // RmRegisterResources calls rstrtmgr!RmRegisterResources.
 // https://learn.microsoft.com/windows/win32/api/restartmanager/nf-restartmanager-rmregisterresources
 // Minimum OS: windows6.0.6000.
-func RmRegisterResources(dwSessionHandle uint32, nFiles uint32, rgsFileNames *foundation.PWSTR, nApplications uint32, rgApplications *RM_UNIQUE_PROCESS, nServices uint32, rgsServiceNames *foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procRmRegisterResources.Addr(), uintptr(dwSessionHandle), uintptr(nFiles), uintptr(unsafe.Pointer(rgsFileNames)), uintptr(nApplications), uintptr(unsafe.Pointer(rgApplications)), uintptr(nServices), uintptr(unsafe.Pointer(rgsServiceNames)))
+func RmRegisterResources(dwSessionHandle uint32, rgsFileNames []foundation.PWSTR, rgApplications []RM_UNIQUE_PROCESS, rgsServiceNames []foundation.PWSTR) foundation.WIN32_ERROR {
+	var _rgsFileNames *foundation.PWSTR
+	if len(rgsFileNames) > 0 {
+		_rgsFileNames = &rgsFileNames[0]
+	}
+	var _rgApplications *RM_UNIQUE_PROCESS
+	if len(rgApplications) > 0 {
+		_rgApplications = &rgApplications[0]
+	}
+	var _rgsServiceNames *foundation.PWSTR
+	if len(rgsServiceNames) > 0 {
+		_rgsServiceNames = &rgsServiceNames[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRmRegisterResources.Addr(), uintptr(dwSessionHandle), uintptr(len(rgsFileNames)), uintptr(unsafe.Pointer(_rgsFileNames)), uintptr(len(rgApplications)), uintptr(unsafe.Pointer(_rgApplications)), uintptr(len(rgsServiceNames)), uintptr(unsafe.Pointer(_rgsServiceNames)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // RmRemoveFilter calls RstrtMgr!RmRemoveFilter.
 // https://learn.microsoft.com/windows/win32/api/restartmanager/nf-restartmanager-rmremovefilter
 // Minimum OS: windows6.0.6000.
-func RmRemoveFilter(dwSessionHandle uint32, strModuleName foundation.PWSTR, pProcess *RM_UNIQUE_PROCESS, strServiceShortName foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procRmRemoveFilter.Addr(), uintptr(dwSessionHandle), uintptr(unsafe.Pointer(strModuleName)), uintptr(unsafe.Pointer(pProcess)), uintptr(unsafe.Pointer(strServiceShortName)))
+func RmRemoveFilter(dwSessionHandle uint32, strModuleName string, pProcess *RM_UNIQUE_PROCESS, strServiceShortName string) foundation.WIN32_ERROR {
+	_strModuleName := win32.UTF16Ptr(strModuleName)
+	_strServiceShortName := win32.UTF16Ptr(strServiceShortName)
+	r1, _, _ := syscall.SyscallN(procRmRemoveFilter.Addr(), uintptr(dwSessionHandle), uintptr(unsafe.Pointer(_strModuleName)), uintptr(unsafe.Pointer(pProcess)), uintptr(unsafe.Pointer(_strServiceShortName)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // RmRestart calls rstrtmgr!RmRestart.
 // https://learn.microsoft.com/windows/win32/api/restartmanager/nf-restartmanager-rmrestart
 // Minimum OS: windows6.0.6000.
-func RmRestart(dwSessionHandle uint32, dwRestartFlags uint32, fnStatus RM_WRITE_STATUS_CALLBACK) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procRmRestart.Addr(), uintptr(dwSessionHandle), uintptr(dwRestartFlags), uintptr(fnStatus))
+func RmRestart(dwSessionHandle uint32, fnStatus RM_WRITE_STATUS_CALLBACK) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procRmRestart.Addr(), uintptr(dwSessionHandle), 0, uintptr(fnStatus))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -113,7 +130,7 @@ func RmShutdown(dwSessionHandle uint32, lActionFlags uint32, fnStatus RM_WRITE_S
 // RmStartSession calls rstrtmgr!RmStartSession.
 // https://learn.microsoft.com/windows/win32/api/restartmanager/nf-restartmanager-rmstartsession
 // Minimum OS: windows6.0.6000.
-func RmStartSession(pSessionHandle *uint32, dwSessionFlags uint32, strSessionKey foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procRmStartSession.Addr(), uintptr(unsafe.Pointer(pSessionHandle)), uintptr(dwSessionFlags), uintptr(unsafe.Pointer(strSessionKey)))
+func RmStartSession(pSessionHandle *uint32, strSessionKey foundation.PWSTR) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procRmStartSession.Addr(), uintptr(unsafe.Pointer(pSessionHandle)), 0, uintptr(unsafe.Pointer(strSessionKey)))
 	return foundation.WIN32_ERROR(r1)
 }

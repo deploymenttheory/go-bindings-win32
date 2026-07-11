@@ -286,8 +286,8 @@ type POWER_ADAPTER_CHARGE_REQUIREMENT struct {
 	MaximumPower  uint32
 }
 
-// POWER_ADAPTER_POWER_STATES is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// POWER_ADAPTER_POWER_STATES is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type POWER_ADAPTER_POWER_STATES struct {
 	Data [1]uint32
 }

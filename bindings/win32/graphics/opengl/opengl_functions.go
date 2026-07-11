@@ -342,8 +342,8 @@ var (
 	procWglSetLayerPaletteEntries = modOPENGL32.NewProc("wglSetLayerPaletteEntries")
 	procWglShareLists             = modOPENGL32.NewProc("wglShareLists")
 	procWglSwapLayerBuffers       = modOPENGL32.NewProc("wglSwapLayerBuffers")
+	procWglUseFontBitmaps         = modOPENGL32.NewProc("wglUseFontBitmapsW")
 	procWglUseFontBitmapsA        = modOPENGL32.NewProc("wglUseFontBitmapsA")
-	procWglUseFontBitmapsW        = modOPENGL32.NewProc("wglUseFontBitmapsW")
 )
 
 // ChoosePixelFormat calls GDI32!ChoosePixelFormat.
@@ -390,6 +390,1832 @@ func GetPixelFormat(hdc graphicsgdi.HDC) (int32, error) {
 	return int32(r1), nil
 }
 
+// GlAreTexturesResident calls OPENGL32!glAreTexturesResident.
+// https://learn.microsoft.com/windows/win32/OpenGL/glaretexturesresident
+func GlAreTexturesResident(n int32, textures *uint32, residences *byte) byte {
+	r1, _, _ := syscall.SyscallN(procGlAreTexturesResident.Addr(), uintptr(n), uintptr(unsafe.Pointer(textures)), uintptr(unsafe.Pointer(residences)))
+	return byte(r1)
+}
+
+// GlArrayElement calls OPENGL32!glArrayElement.
+// https://learn.microsoft.com/windows/win32/OpenGL/glarrayelement
+func GlArrayElement(i int32) {
+	syscall.SyscallN(procGlArrayElement.Addr(), uintptr(i))
+}
+
+// GlBegin calls OPENGL32!glBegin.
+// https://learn.microsoft.com/windows/win32/OpenGL/glbegin
+func GlBegin(mode uint32) {
+	syscall.SyscallN(procGlBegin.Addr(), uintptr(mode))
+}
+
+// GlBindTexture calls OPENGL32!glBindTexture.
+// https://learn.microsoft.com/windows/win32/OpenGL/glbindtexture
+func GlBindTexture(target uint32, texture uint32) {
+	syscall.SyscallN(procGlBindTexture.Addr(), uintptr(target), uintptr(texture))
+}
+
+// GlBlendFunc calls OPENGL32!glBlendFunc.
+// https://learn.microsoft.com/windows/win32/OpenGL/glblendfunc
+func GlBlendFunc(sfactor uint32, dfactor uint32) {
+	syscall.SyscallN(procGlBlendFunc.Addr(), uintptr(sfactor), uintptr(dfactor))
+}
+
+// GlCallList calls OPENGL32!glCallList.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcalllist
+func GlCallList(list uint32) {
+	syscall.SyscallN(procGlCallList.Addr(), uintptr(list))
+}
+
+// GlCallLists calls OPENGL32!glCallLists.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcalllists
+func GlCallLists(n int32, type_ uint32, lists unsafe.Pointer) {
+	syscall.SyscallN(procGlCallLists.Addr(), uintptr(n), uintptr(type_), uintptr(unsafe.Pointer(lists)))
+}
+
+// GlClear calls OPENGL32!glClear.
+// https://learn.microsoft.com/windows/win32/OpenGL/glclear
+func GlClear(mask uint32) {
+	syscall.SyscallN(procGlClear.Addr(), uintptr(mask))
+}
+
+// GlClearStencil calls OPENGL32!glClearStencil.
+// https://learn.microsoft.com/windows/win32/OpenGL/glclearstencil
+func GlClearStencil(s int32) {
+	syscall.SyscallN(procGlClearStencil.Addr(), uintptr(s))
+}
+
+// GlClipPlane calls OPENGL32!glClipPlane.
+// https://learn.microsoft.com/windows/win32/OpenGL/glclipplane
+func GlClipPlane(plane uint32, equation *float64) {
+	syscall.SyscallN(procGlClipPlane.Addr(), uintptr(plane), uintptr(unsafe.Pointer(equation)))
+}
+
+// GlColor3b calls OPENGL32!glColor3b.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3b
+func GlColor3b(red int8, green int8, blue int8) {
+	syscall.SyscallN(procGlColor3b.Addr(), uintptr(red), uintptr(green), uintptr(blue))
+}
+
+// GlColor3bv calls OPENGL32!glColor3bv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3bv
+func GlColor3bv(v *int8) {
+	syscall.SyscallN(procGlColor3bv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor3dv calls OPENGL32!glColor3dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3dv
+func GlColor3dv(v *float64) {
+	syscall.SyscallN(procGlColor3dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor3fv calls OPENGL32!glColor3fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3fv
+func GlColor3fv(v *float32) {
+	syscall.SyscallN(procGlColor3fv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor3i calls OPENGL32!glColor3i.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3i
+func GlColor3i(red int32, green int32, blue int32) {
+	syscall.SyscallN(procGlColor3i.Addr(), uintptr(red), uintptr(green), uintptr(blue))
+}
+
+// GlColor3iv calls OPENGL32!glColor3iv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3iv
+func GlColor3iv(v *int32) {
+	syscall.SyscallN(procGlColor3iv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor3s calls OPENGL32!glColor3s.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3s
+func GlColor3s(red int16, green int16, blue int16) {
+	syscall.SyscallN(procGlColor3s.Addr(), uintptr(red), uintptr(green), uintptr(blue))
+}
+
+// GlColor3sv calls OPENGL32!glColor3sv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3sv
+func GlColor3sv(v *int16) {
+	syscall.SyscallN(procGlColor3sv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor3ub calls OPENGL32!glColor3ub.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3ub
+func GlColor3ub(red byte, green byte, blue byte) {
+	syscall.SyscallN(procGlColor3ub.Addr(), uintptr(red), uintptr(green), uintptr(blue))
+}
+
+// GlColor3ubv calls OPENGL32!glColor3ubv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3ubv
+func GlColor3ubv(v *byte) {
+	syscall.SyscallN(procGlColor3ubv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor3ui calls OPENGL32!glColor3ui.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3ui
+func GlColor3ui(red uint32, green uint32, blue uint32) {
+	syscall.SyscallN(procGlColor3ui.Addr(), uintptr(red), uintptr(green), uintptr(blue))
+}
+
+// GlColor3uiv calls OPENGL32!glColor3uiv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3uiv
+func GlColor3uiv(v *uint32) {
+	syscall.SyscallN(procGlColor3uiv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor3us calls OPENGL32!glColor3us.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3us
+func GlColor3us(red uint16, green uint16, blue uint16) {
+	syscall.SyscallN(procGlColor3us.Addr(), uintptr(red), uintptr(green), uintptr(blue))
+}
+
+// GlColor3usv calls OPENGL32!glColor3usv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3usv
+func GlColor3usv(v *uint16) {
+	syscall.SyscallN(procGlColor3usv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor4b calls OPENGL32!glColor4b.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4b
+func GlColor4b(red int8, green int8, blue int8, alpha int8) {
+	syscall.SyscallN(procGlColor4b.Addr(), uintptr(red), uintptr(green), uintptr(blue), uintptr(alpha))
+}
+
+// GlColor4bv calls OPENGL32!glColor4bv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4bv
+func GlColor4bv(v *int8) {
+	syscall.SyscallN(procGlColor4bv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor4dv calls OPENGL32!glColor4dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4dv
+func GlColor4dv(v *float64) {
+	syscall.SyscallN(procGlColor4dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor4fv calls OPENGL32!glColor4fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4fv
+func GlColor4fv(v *float32) {
+	syscall.SyscallN(procGlColor4fv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor4i calls OPENGL32!glColor4i.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4i
+func GlColor4i(red int32, green int32, blue int32, alpha int32) {
+	syscall.SyscallN(procGlColor4i.Addr(), uintptr(red), uintptr(green), uintptr(blue), uintptr(alpha))
+}
+
+// GlColor4iv calls OPENGL32!glColor4iv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4iv
+func GlColor4iv(v *int32) {
+	syscall.SyscallN(procGlColor4iv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor4s calls OPENGL32!glColor4s.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4s
+func GlColor4s(red int16, green int16, blue int16, alpha int16) {
+	syscall.SyscallN(procGlColor4s.Addr(), uintptr(red), uintptr(green), uintptr(blue), uintptr(alpha))
+}
+
+// GlColor4sv calls OPENGL32!glColor4sv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4sv
+func GlColor4sv(v *int16) {
+	syscall.SyscallN(procGlColor4sv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor4ub calls OPENGL32!glColor4ub.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4ub
+func GlColor4ub(red byte, green byte, blue byte, alpha byte) {
+	syscall.SyscallN(procGlColor4ub.Addr(), uintptr(red), uintptr(green), uintptr(blue), uintptr(alpha))
+}
+
+// GlColor4ubv calls OPENGL32!glColor4ubv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4ubv
+func GlColor4ubv(v *byte) {
+	syscall.SyscallN(procGlColor4ubv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor4ui calls OPENGL32!glColor4ui.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4ui
+func GlColor4ui(red uint32, green uint32, blue uint32, alpha uint32) {
+	syscall.SyscallN(procGlColor4ui.Addr(), uintptr(red), uintptr(green), uintptr(blue), uintptr(alpha))
+}
+
+// GlColor4uiv calls OPENGL32!glColor4uiv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4uiv
+func GlColor4uiv(v *uint32) {
+	syscall.SyscallN(procGlColor4uiv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColor4us calls OPENGL32!glColor4us.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4us
+func GlColor4us(red uint16, green uint16, blue uint16, alpha uint16) {
+	syscall.SyscallN(procGlColor4us.Addr(), uintptr(red), uintptr(green), uintptr(blue), uintptr(alpha))
+}
+
+// GlColor4usv calls OPENGL32!glColor4usv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4usv
+func GlColor4usv(v *uint16) {
+	syscall.SyscallN(procGlColor4usv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlColorMask calls OPENGL32!glColorMask.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolormask
+func GlColorMask(red byte, green byte, blue byte, alpha byte) {
+	syscall.SyscallN(procGlColorMask.Addr(), uintptr(red), uintptr(green), uintptr(blue), uintptr(alpha))
+}
+
+// GlColorMaterial calls OPENGL32!glColorMaterial.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolormaterial
+func GlColorMaterial(face uint32, mode uint32) {
+	syscall.SyscallN(procGlColorMaterial.Addr(), uintptr(face), uintptr(mode))
+}
+
+// GlColorPointer calls OPENGL32!glColorPointer.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcolorpointer
+func GlColorPointer(size int32, type_ uint32, stride int32, pointer unsafe.Pointer) {
+	syscall.SyscallN(procGlColorPointer.Addr(), uintptr(size), uintptr(type_), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
+}
+
+// GlCopyPixels calls OPENGL32!glCopyPixels.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcopypixels
+func GlCopyPixels(x int32, y int32, width int32, height int32, type_ uint32) {
+	syscall.SyscallN(procGlCopyPixels.Addr(), uintptr(x), uintptr(y), uintptr(width), uintptr(height), uintptr(type_))
+}
+
+// GlCopyTexImage1D calls OPENGL32!glCopyTexImage1D.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcopyteximage1d
+func GlCopyTexImage1D(target uint32, level int32, internalFormat uint32, x int32, y int32, width int32, border int32) {
+	syscall.SyscallN(procGlCopyTexImage1D.Addr(), uintptr(target), uintptr(level), uintptr(internalFormat), uintptr(x), uintptr(y), uintptr(width), uintptr(border))
+}
+
+// GlCopyTexImage2D calls OPENGL32!glCopyTexImage2D.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcopyteximage2d
+func GlCopyTexImage2D(target uint32, level int32, internalFormat uint32, x int32, y int32, width int32, height int32, border int32) {
+	syscall.SyscallN(procGlCopyTexImage2D.Addr(), uintptr(target), uintptr(level), uintptr(internalFormat), uintptr(x), uintptr(y), uintptr(width), uintptr(height), uintptr(border))
+}
+
+// GlCopyTexSubImage1D calls OPENGL32!glCopyTexSubImage1D.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcopytexsubimage1d
+func GlCopyTexSubImage1D(target uint32, level int32, xoffset int32, x int32, y int32, width int32) {
+	syscall.SyscallN(procGlCopyTexSubImage1D.Addr(), uintptr(target), uintptr(level), uintptr(xoffset), uintptr(x), uintptr(y), uintptr(width))
+}
+
+// GlCopyTexSubImage2D calls OPENGL32!glCopyTexSubImage2D.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcopytexsubimage2d
+func GlCopyTexSubImage2D(target uint32, level int32, xoffset int32, yoffset int32, x int32, y int32, width int32, height int32) {
+	syscall.SyscallN(procGlCopyTexSubImage2D.Addr(), uintptr(target), uintptr(level), uintptr(xoffset), uintptr(yoffset), uintptr(x), uintptr(y), uintptr(width), uintptr(height))
+}
+
+// GlCullFace calls OPENGL32!glCullFace.
+// https://learn.microsoft.com/windows/win32/OpenGL/glcullface
+func GlCullFace(mode uint32) {
+	syscall.SyscallN(procGlCullFace.Addr(), uintptr(mode))
+}
+
+// GlDeleteLists calls OPENGL32!glDeleteLists.
+// https://learn.microsoft.com/windows/win32/OpenGL/gldeletelists
+func GlDeleteLists(list uint32, range_ int32) {
+	syscall.SyscallN(procGlDeleteLists.Addr(), uintptr(list), uintptr(range_))
+}
+
+// GlDeleteTextures calls OPENGL32!glDeleteTextures.
+// https://learn.microsoft.com/windows/win32/OpenGL/gldeletetextures
+func GlDeleteTextures(n int32, textures *uint32) {
+	syscall.SyscallN(procGlDeleteTextures.Addr(), uintptr(n), uintptr(unsafe.Pointer(textures)))
+}
+
+// GlDepthFunc calls OPENGL32!glDepthFunc.
+// https://learn.microsoft.com/windows/win32/OpenGL/gldepthfunc
+func GlDepthFunc(func_ uint32) {
+	syscall.SyscallN(procGlDepthFunc.Addr(), uintptr(func_))
+}
+
+// GlDepthMask calls OPENGL32!glDepthMask.
+// https://learn.microsoft.com/windows/win32/OpenGL/gldepthmask
+func GlDepthMask(flag byte) {
+	syscall.SyscallN(procGlDepthMask.Addr(), uintptr(flag))
+}
+
+// GlDisable calls OPENGL32!glDisable.
+// https://learn.microsoft.com/windows/win32/OpenGL/gldisable
+func GlDisable(cap_ uint32) {
+	syscall.SyscallN(procGlDisable.Addr(), uintptr(cap_))
+}
+
+// GlDisableClientState calls OPENGL32!glDisableClientState.
+// https://learn.microsoft.com/windows/win32/OpenGL/gldisableclientstate
+func GlDisableClientState(array uint32) {
+	syscall.SyscallN(procGlDisableClientState.Addr(), uintptr(array))
+}
+
+// GlDrawArrays calls OPENGL32!glDrawArrays.
+// https://learn.microsoft.com/windows/win32/OpenGL/gldrawarrays
+func GlDrawArrays(mode uint32, first int32, count int32) {
+	syscall.SyscallN(procGlDrawArrays.Addr(), uintptr(mode), uintptr(first), uintptr(count))
+}
+
+// GlDrawBuffer calls OPENGL32!glDrawBuffer.
+// https://learn.microsoft.com/windows/win32/OpenGL/gldrawbuffer
+func GlDrawBuffer(mode uint32) {
+	syscall.SyscallN(procGlDrawBuffer.Addr(), uintptr(mode))
+}
+
+// GlDrawElements calls OPENGL32!glDrawElements.
+// https://learn.microsoft.com/windows/win32/OpenGL/gldrawelements
+func GlDrawElements(mode uint32, count int32, type_ uint32, indices unsafe.Pointer) {
+	syscall.SyscallN(procGlDrawElements.Addr(), uintptr(mode), uintptr(count), uintptr(type_), uintptr(unsafe.Pointer(indices)))
+}
+
+// GlDrawPixels calls OPENGL32!glDrawPixels.
+// https://learn.microsoft.com/windows/win32/OpenGL/gldrawpixels
+func GlDrawPixels(width int32, height int32, format uint32, type_ uint32, pixels unsafe.Pointer) {
+	syscall.SyscallN(procGlDrawPixels.Addr(), uintptr(width), uintptr(height), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
+}
+
+// GlEdgeFlag calls OPENGL32!glEdgeFlag.
+// https://learn.microsoft.com/windows/win32/OpenGL/gledgeflag
+func GlEdgeFlag(flag byte) {
+	syscall.SyscallN(procGlEdgeFlag.Addr(), uintptr(flag))
+}
+
+// GlEdgeFlagPointer calls OPENGL32!glEdgeFlagPointer.
+// https://learn.microsoft.com/windows/win32/OpenGL/gledgeflagpointer
+func GlEdgeFlagPointer(stride int32, pointer unsafe.Pointer) {
+	syscall.SyscallN(procGlEdgeFlagPointer.Addr(), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
+}
+
+// GlEdgeFlagv calls OPENGL32!glEdgeFlagv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gledgeflagv
+func GlEdgeFlagv(flag *byte) {
+	syscall.SyscallN(procGlEdgeFlagv.Addr(), uintptr(unsafe.Pointer(flag)))
+}
+
+// GlEnable calls OPENGL32!glEnable.
+// https://learn.microsoft.com/windows/win32/OpenGL/glenable
+func GlEnable(cap_ uint32) {
+	syscall.SyscallN(procGlEnable.Addr(), uintptr(cap_))
+}
+
+// GlEnableClientState calls OPENGL32!glEnableClientState.
+// https://learn.microsoft.com/windows/win32/OpenGL/glenableclientstate
+func GlEnableClientState(array uint32) {
+	syscall.SyscallN(procGlEnableClientState.Addr(), uintptr(array))
+}
+
+// GlEnd calls OPENGL32!glEnd.
+// https://learn.microsoft.com/windows/win32/OpenGL/glend
+func GlEnd() {
+	syscall.SyscallN(procGlEnd.Addr())
+}
+
+// GlEndList calls OPENGL32!glEndList.
+// https://learn.microsoft.com/windows/win32/OpenGL/glendlist
+func GlEndList() {
+	syscall.SyscallN(procGlEndList.Addr())
+}
+
+// GlEvalCoord1dv calls OPENGL32!glEvalCoord1dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glevalcoord1dv
+func GlEvalCoord1dv(u *float64) {
+	syscall.SyscallN(procGlEvalCoord1dv.Addr(), uintptr(unsafe.Pointer(u)))
+}
+
+// GlEvalCoord1fv calls OPENGL32!glEvalCoord1fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glevalcoord1fv
+func GlEvalCoord1fv(u *float32) {
+	syscall.SyscallN(procGlEvalCoord1fv.Addr(), uintptr(unsafe.Pointer(u)))
+}
+
+// GlEvalCoord2dv calls OPENGL32!glEvalCoord2dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glevalcoord2dv
+func GlEvalCoord2dv(u *float64) {
+	syscall.SyscallN(procGlEvalCoord2dv.Addr(), uintptr(unsafe.Pointer(u)))
+}
+
+// GlEvalCoord2fv calls OPENGL32!glEvalCoord2fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glevalcoord2fv
+func GlEvalCoord2fv(u *float32) {
+	syscall.SyscallN(procGlEvalCoord2fv.Addr(), uintptr(unsafe.Pointer(u)))
+}
+
+// GlEvalMesh1 calls OPENGL32!glEvalMesh1.
+// https://learn.microsoft.com/windows/win32/OpenGL/glevalmesh1
+func GlEvalMesh1(mode uint32, i1 int32, i2 int32) {
+	syscall.SyscallN(procGlEvalMesh1.Addr(), uintptr(mode), uintptr(i1), uintptr(i2))
+}
+
+// GlEvalMesh2 calls OPENGL32!glEvalMesh2.
+// https://learn.microsoft.com/windows/win32/OpenGL/glevalmesh2
+func GlEvalMesh2(mode uint32, i1 int32, i2 int32, j1 int32, j2 int32) {
+	syscall.SyscallN(procGlEvalMesh2.Addr(), uintptr(mode), uintptr(i1), uintptr(i2), uintptr(j1), uintptr(j2))
+}
+
+// GlEvalPoint1 calls OPENGL32!glEvalPoint1.
+// https://learn.microsoft.com/windows/win32/OpenGL/glevalpoint1
+func GlEvalPoint1(i int32) {
+	syscall.SyscallN(procGlEvalPoint1.Addr(), uintptr(i))
+}
+
+// GlEvalPoint2 calls OPENGL32!glEvalPoint2.
+// https://learn.microsoft.com/windows/win32/OpenGL/glevalpoint2
+func GlEvalPoint2(i int32, j int32) {
+	syscall.SyscallN(procGlEvalPoint2.Addr(), uintptr(i), uintptr(j))
+}
+
+// GlFeedbackBuffer calls OPENGL32!glFeedbackBuffer.
+// https://learn.microsoft.com/windows/win32/OpenGL/glfeedbackbuffer
+func GlFeedbackBuffer(size int32, type_ uint32, buffer *float32) {
+	syscall.SyscallN(procGlFeedbackBuffer.Addr(), uintptr(size), uintptr(type_), uintptr(unsafe.Pointer(buffer)))
+}
+
+// GlFinish calls OPENGL32!glFinish.
+// https://learn.microsoft.com/windows/win32/OpenGL/glfinish
+func GlFinish() {
+	syscall.SyscallN(procGlFinish.Addr())
+}
+
+// GlFlush calls OPENGL32!glFlush.
+// https://learn.microsoft.com/windows/win32/OpenGL/glflush
+func GlFlush() {
+	syscall.SyscallN(procGlFlush.Addr())
+}
+
+// GlFogfv calls OPENGL32!glFogfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glfogfv
+func GlFogfv(pname uint32, params *float32) {
+	syscall.SyscallN(procGlFogfv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlFogi calls OPENGL32!glFogi.
+// https://learn.microsoft.com/windows/win32/OpenGL/glfogi
+func GlFogi(pname uint32, param1 int32) {
+	syscall.SyscallN(procGlFogi.Addr(), uintptr(pname), uintptr(param1))
+}
+
+// GlFogiv calls OPENGL32!glFogiv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glfogiv
+func GlFogiv(pname uint32, params *int32) {
+	syscall.SyscallN(procGlFogiv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlFrontFace calls OPENGL32!glFrontFace.
+// https://learn.microsoft.com/windows/win32/OpenGL/glfrontface
+func GlFrontFace(mode uint32) {
+	syscall.SyscallN(procGlFrontFace.Addr(), uintptr(mode))
+}
+
+// GlGenLists calls OPENGL32!glGenLists.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgenlists
+func GlGenLists(range_ int32) uint32 {
+	r1, _, _ := syscall.SyscallN(procGlGenLists.Addr(), uintptr(range_))
+	return uint32(r1)
+}
+
+// GlGenTextures calls OPENGL32!glGenTextures.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgentextures
+func GlGenTextures(n int32, textures *uint32) {
+	syscall.SyscallN(procGlGenTextures.Addr(), uintptr(n), uintptr(unsafe.Pointer(textures)))
+}
+
+// GlGetBooleanv calls OPENGL32!glGetBooleanv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetbooleanv
+func GlGetBooleanv(pname uint32, params *byte) {
+	syscall.SyscallN(procGlGetBooleanv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetClipPlane calls OPENGL32!glGetClipPlane.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetclipplane
+func GlGetClipPlane(plane uint32, equation *float64) {
+	syscall.SyscallN(procGlGetClipPlane.Addr(), uintptr(plane), uintptr(unsafe.Pointer(equation)))
+}
+
+// GlGetDoublev calls OPENGL32!glGetDoublev.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetdoublev
+func GlGetDoublev(pname uint32, params *float64) {
+	syscall.SyscallN(procGlGetDoublev.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetError calls OPENGL32!glGetError.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgeterror
+func GlGetError() uint32 {
+	r1, _, _ := syscall.SyscallN(procGlGetError.Addr())
+	return uint32(r1)
+}
+
+// GlGetFloatv calls OPENGL32!glGetFloatv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetfloatv
+func GlGetFloatv(pname uint32, params *float32) {
+	syscall.SyscallN(procGlGetFloatv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetIntegerv calls OPENGL32!glGetIntegerv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetintegerv
+func GlGetIntegerv(pname uint32, params *int32) {
+	syscall.SyscallN(procGlGetIntegerv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetLightfv calls OPENGL32!glGetLightfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetlightfv
+func GlGetLightfv(light uint32, pname uint32, params *float32) {
+	syscall.SyscallN(procGlGetLightfv.Addr(), uintptr(light), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetLightiv calls OPENGL32!glGetLightiv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetlightiv
+func GlGetLightiv(light uint32, pname uint32, params *int32) {
+	syscall.SyscallN(procGlGetLightiv.Addr(), uintptr(light), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetMapdv calls OPENGL32!glGetMapdv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetmapdv
+func GlGetMapdv(target uint32, query uint32, v *float64) {
+	syscall.SyscallN(procGlGetMapdv.Addr(), uintptr(target), uintptr(query), uintptr(unsafe.Pointer(v)))
+}
+
+// GlGetMapfv calls OPENGL32!glGetMapfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetmapfv
+func GlGetMapfv(target uint32, query uint32, v *float32) {
+	syscall.SyscallN(procGlGetMapfv.Addr(), uintptr(target), uintptr(query), uintptr(unsafe.Pointer(v)))
+}
+
+// GlGetMapiv calls OPENGL32!glGetMapiv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetmapiv
+func GlGetMapiv(target uint32, query uint32, v *int32) {
+	syscall.SyscallN(procGlGetMapiv.Addr(), uintptr(target), uintptr(query), uintptr(unsafe.Pointer(v)))
+}
+
+// GlGetMaterialfv calls OPENGL32!glGetMaterialfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetmaterialfv
+func GlGetMaterialfv(face uint32, pname uint32, params *float32) {
+	syscall.SyscallN(procGlGetMaterialfv.Addr(), uintptr(face), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetMaterialiv calls OPENGL32!glGetMaterialiv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetmaterialiv
+func GlGetMaterialiv(face uint32, pname uint32, params *int32) {
+	syscall.SyscallN(procGlGetMaterialiv.Addr(), uintptr(face), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetPixelMapfv calls OPENGL32!glGetPixelMapfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetpixelmapfv
+func GlGetPixelMapfv(map_ uint32, values *float32) {
+	syscall.SyscallN(procGlGetPixelMapfv.Addr(), uintptr(map_), uintptr(unsafe.Pointer(values)))
+}
+
+// GlGetPixelMapuiv calls OPENGL32!glGetPixelMapuiv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetpixelmapuiv
+func GlGetPixelMapuiv(map_ uint32, values *uint32) {
+	syscall.SyscallN(procGlGetPixelMapuiv.Addr(), uintptr(map_), uintptr(unsafe.Pointer(values)))
+}
+
+// GlGetPixelMapusv calls OPENGL32!glGetPixelMapusv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetpixelmapusv
+func GlGetPixelMapusv(map_ uint32, values *uint16) {
+	syscall.SyscallN(procGlGetPixelMapusv.Addr(), uintptr(map_), uintptr(unsafe.Pointer(values)))
+}
+
+// GlGetPointerv calls OPENGL32!glGetPointerv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetpointerv
+func GlGetPointerv(pname uint32, params *unsafe.Pointer) {
+	syscall.SyscallN(procGlGetPointerv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetPolygonStipple calls OPENGL32!glGetPolygonStipple.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetpolygonstipple
+func GlGetPolygonStipple(mask *byte) {
+	syscall.SyscallN(procGlGetPolygonStipple.Addr(), uintptr(unsafe.Pointer(mask)))
+}
+
+// GlGetString calls OPENGL32!glGetString.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetstring
+func GlGetString(name uint32) *byte {
+	r1, _, _ := syscall.SyscallN(procGlGetString.Addr(), uintptr(name))
+	return (*byte)(unsafe.Pointer(r1))
+}
+
+// GlGetTexEnvfv calls OPENGL32!glGetTexEnvfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgettexenvfv
+func GlGetTexEnvfv(target uint32, pname uint32, params *float32) {
+	syscall.SyscallN(procGlGetTexEnvfv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetTexEnviv calls OPENGL32!glGetTexEnviv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgettexenviv
+func GlGetTexEnviv(target uint32, pname uint32, params *int32) {
+	syscall.SyscallN(procGlGetTexEnviv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetTexGendv calls OPENGL32!glGetTexGendv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgettexgendv
+func GlGetTexGendv(coord uint32, pname uint32, params *float64) {
+	syscall.SyscallN(procGlGetTexGendv.Addr(), uintptr(coord), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetTexGenfv calls OPENGL32!glGetTexGenfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgettexgenfv
+func GlGetTexGenfv(coord uint32, pname uint32, params *float32) {
+	syscall.SyscallN(procGlGetTexGenfv.Addr(), uintptr(coord), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetTexGeniv calls OPENGL32!glGetTexGeniv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgettexgeniv
+func GlGetTexGeniv(coord uint32, pname uint32, params *int32) {
+	syscall.SyscallN(procGlGetTexGeniv.Addr(), uintptr(coord), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetTexImage calls OPENGL32!glGetTexImage.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgetteximage
+func GlGetTexImage(target uint32, level int32, format uint32, type_ uint32, pixels unsafe.Pointer) {
+	syscall.SyscallN(procGlGetTexImage.Addr(), uintptr(target), uintptr(level), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
+}
+
+// GlGetTexLevelParameterfv calls OPENGL32!glGetTexLevelParameterfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgettexlevelparameterfv
+func GlGetTexLevelParameterfv(target uint32, level int32, pname uint32, params *float32) {
+	syscall.SyscallN(procGlGetTexLevelParameterfv.Addr(), uintptr(target), uintptr(level), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetTexLevelParameteriv calls OPENGL32!glGetTexLevelParameteriv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgettexlevelparameteriv
+func GlGetTexLevelParameteriv(target uint32, level int32, pname uint32, params *int32) {
+	syscall.SyscallN(procGlGetTexLevelParameteriv.Addr(), uintptr(target), uintptr(level), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetTexParameterfv calls OPENGL32!glGetTexParameterfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgettexparameterfv
+func GlGetTexParameterfv(target uint32, pname uint32, params *float32) {
+	syscall.SyscallN(procGlGetTexParameterfv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlGetTexParameteriv calls OPENGL32!glGetTexParameteriv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glgettexparameteriv
+func GlGetTexParameteriv(target uint32, pname uint32, params *int32) {
+	syscall.SyscallN(procGlGetTexParameteriv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlHint calls OPENGL32!glHint.
+// https://learn.microsoft.com/windows/win32/OpenGL/glhint
+func GlHint(target uint32, mode uint32) {
+	syscall.SyscallN(procGlHint.Addr(), uintptr(target), uintptr(mode))
+}
+
+// GlIndexMask calls OPENGL32!glIndexMask.
+// https://learn.microsoft.com/windows/win32/OpenGL/glindexmask
+func GlIndexMask(mask uint32) {
+	syscall.SyscallN(procGlIndexMask.Addr(), uintptr(mask))
+}
+
+// GlIndexPointer calls OPENGL32!glIndexPointer.
+// https://learn.microsoft.com/windows/win32/OpenGL/glindexpointer
+func GlIndexPointer(type_ uint32, stride int32, pointer unsafe.Pointer) {
+	syscall.SyscallN(procGlIndexPointer.Addr(), uintptr(type_), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
+}
+
+// GlIndexdv calls OPENGL32!glIndexdv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glindexdv
+func GlIndexdv(c *float64) {
+	syscall.SyscallN(procGlIndexdv.Addr(), uintptr(unsafe.Pointer(c)))
+}
+
+// GlIndexfv calls OPENGL32!glIndexfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glindexfv
+func GlIndexfv(c *float32) {
+	syscall.SyscallN(procGlIndexfv.Addr(), uintptr(unsafe.Pointer(c)))
+}
+
+// GlIndexi calls OPENGL32!glIndexi.
+// https://learn.microsoft.com/windows/win32/OpenGL/glindexi
+func GlIndexi(c int32) {
+	syscall.SyscallN(procGlIndexi.Addr(), uintptr(c))
+}
+
+// GlIndexiv calls OPENGL32!glIndexiv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glindexiv
+func GlIndexiv(c *int32) {
+	syscall.SyscallN(procGlIndexiv.Addr(), uintptr(unsafe.Pointer(c)))
+}
+
+// GlIndexs calls OPENGL32!glIndexs.
+// https://learn.microsoft.com/windows/win32/OpenGL/glindexs
+func GlIndexs(c int16) {
+	syscall.SyscallN(procGlIndexs.Addr(), uintptr(c))
+}
+
+// GlIndexsv calls OPENGL32!glIndexsv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glindexsv
+func GlIndexsv(c *int16) {
+	syscall.SyscallN(procGlIndexsv.Addr(), uintptr(unsafe.Pointer(c)))
+}
+
+// GlIndexub calls OPENGL32!glIndexub.
+func GlIndexub(c byte) {
+	syscall.SyscallN(procGlIndexub.Addr(), uintptr(c))
+}
+
+// GlIndexubv calls OPENGL32!glIndexubv.
+func GlIndexubv(c *byte) {
+	syscall.SyscallN(procGlIndexubv.Addr(), uintptr(unsafe.Pointer(c)))
+}
+
+// GlInitNames calls OPENGL32!glInitNames.
+// https://learn.microsoft.com/windows/win32/OpenGL/glinitnames
+func GlInitNames() {
+	syscall.SyscallN(procGlInitNames.Addr())
+}
+
+// GlInterleavedArrays calls OPENGL32!glInterleavedArrays.
+// https://learn.microsoft.com/windows/win32/OpenGL/glinterleavedarrays
+func GlInterleavedArrays(format uint32, stride int32, pointer unsafe.Pointer) {
+	syscall.SyscallN(procGlInterleavedArrays.Addr(), uintptr(format), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
+}
+
+// GlIsEnabled calls OPENGL32!glIsEnabled.
+// https://learn.microsoft.com/windows/win32/OpenGL/glisenabled
+func GlIsEnabled(cap_ uint32) byte {
+	r1, _, _ := syscall.SyscallN(procGlIsEnabled.Addr(), uintptr(cap_))
+	return byte(r1)
+}
+
+// GlIsList calls OPENGL32!glIsList.
+// https://learn.microsoft.com/windows/win32/OpenGL/glislist
+func GlIsList(list uint32) byte {
+	r1, _, _ := syscall.SyscallN(procGlIsList.Addr(), uintptr(list))
+	return byte(r1)
+}
+
+// GlIsTexture calls OPENGL32!glIsTexture.
+// https://learn.microsoft.com/windows/win32/OpenGL/glistexture
+func GlIsTexture(texture uint32) byte {
+	r1, _, _ := syscall.SyscallN(procGlIsTexture.Addr(), uintptr(texture))
+	return byte(r1)
+}
+
+// GlLightModelfv calls OPENGL32!glLightModelfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gllightmodelfv
+func GlLightModelfv(pname uint32, params *float32) {
+	syscall.SyscallN(procGlLightModelfv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlLightModeli calls OPENGL32!glLightModeli.
+// https://learn.microsoft.com/windows/win32/OpenGL/gllightmodeli
+func GlLightModeli(pname uint32, param1 int32) {
+	syscall.SyscallN(procGlLightModeli.Addr(), uintptr(pname), uintptr(param1))
+}
+
+// GlLightModeliv calls OPENGL32!glLightModeliv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gllightmodeliv
+func GlLightModeliv(pname uint32, params *int32) {
+	syscall.SyscallN(procGlLightModeliv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlLightfv calls OPENGL32!glLightfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gllightfv
+func GlLightfv(light uint32, pname uint32, params *float32) {
+	syscall.SyscallN(procGlLightfv.Addr(), uintptr(light), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlLighti calls OPENGL32!glLighti.
+// https://learn.microsoft.com/windows/win32/OpenGL/gllighti
+func GlLighti(light uint32, pname uint32, param2 int32) {
+	syscall.SyscallN(procGlLighti.Addr(), uintptr(light), uintptr(pname), uintptr(param2))
+}
+
+// GlLightiv calls OPENGL32!glLightiv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gllightiv
+func GlLightiv(light uint32, pname uint32, params *int32) {
+	syscall.SyscallN(procGlLightiv.Addr(), uintptr(light), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlLineStipple calls OPENGL32!glLineStipple.
+// https://learn.microsoft.com/windows/win32/OpenGL/gllinestipple
+func GlLineStipple(factor int32, pattern uint16) {
+	syscall.SyscallN(procGlLineStipple.Addr(), uintptr(factor), uintptr(pattern))
+}
+
+// GlListBase calls OPENGL32!glListBase.
+// https://learn.microsoft.com/windows/win32/OpenGL/gllistbase
+func GlListBase(base uint32) {
+	syscall.SyscallN(procGlListBase.Addr(), uintptr(base))
+}
+
+// GlLoadIdentity calls OPENGL32!glLoadIdentity.
+// https://learn.microsoft.com/windows/win32/OpenGL/glloadidentity
+func GlLoadIdentity() {
+	syscall.SyscallN(procGlLoadIdentity.Addr())
+}
+
+// GlLoadMatrixd calls OPENGL32!glLoadMatrixd.
+// https://learn.microsoft.com/windows/win32/OpenGL/glloadmatrixd
+func GlLoadMatrixd(m *float64) {
+	syscall.SyscallN(procGlLoadMatrixd.Addr(), uintptr(unsafe.Pointer(m)))
+}
+
+// GlLoadMatrixf calls OPENGL32!glLoadMatrixf.
+// https://learn.microsoft.com/windows/win32/OpenGL/glloadmatrixf
+func GlLoadMatrixf(m *float32) {
+	syscall.SyscallN(procGlLoadMatrixf.Addr(), uintptr(unsafe.Pointer(m)))
+}
+
+// GlLoadName calls OPENGL32!glLoadName.
+// https://learn.microsoft.com/windows/win32/OpenGL/glloadname
+func GlLoadName(name uint32) {
+	syscall.SyscallN(procGlLoadName.Addr(), uintptr(name))
+}
+
+// GlLogicOp calls OPENGL32!glLogicOp.
+// https://learn.microsoft.com/windows/win32/OpenGL/gllogicop
+func GlLogicOp(opcode uint32) {
+	syscall.SyscallN(procGlLogicOp.Addr(), uintptr(opcode))
+}
+
+// GlMaterialfv calls OPENGL32!glMaterialfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmaterialfv
+func GlMaterialfv(face uint32, pname uint32, params *float32) {
+	syscall.SyscallN(procGlMaterialfv.Addr(), uintptr(face), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlMateriali calls OPENGL32!glMateriali.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmateriali
+func GlMateriali(face uint32, pname uint32, param2 int32) {
+	syscall.SyscallN(procGlMateriali.Addr(), uintptr(face), uintptr(pname), uintptr(param2))
+}
+
+// GlMaterialiv calls OPENGL32!glMaterialiv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmaterialiv
+func GlMaterialiv(face uint32, pname uint32, params *int32) {
+	syscall.SyscallN(procGlMaterialiv.Addr(), uintptr(face), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlMatrixMode calls OPENGL32!glMatrixMode.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmatrixmode
+func GlMatrixMode(mode uint32) {
+	syscall.SyscallN(procGlMatrixMode.Addr(), uintptr(mode))
+}
+
+// GlMultMatrixd calls OPENGL32!glMultMatrixd.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmultmatrixd
+func GlMultMatrixd(m *float64) {
+	syscall.SyscallN(procGlMultMatrixd.Addr(), uintptr(unsafe.Pointer(m)))
+}
+
+// GlMultMatrixf calls OPENGL32!glMultMatrixf.
+// https://learn.microsoft.com/windows/win32/OpenGL/glmultmatrixf
+func GlMultMatrixf(m *float32) {
+	syscall.SyscallN(procGlMultMatrixf.Addr(), uintptr(unsafe.Pointer(m)))
+}
+
+// GlNewList calls OPENGL32!glNewList.
+// https://learn.microsoft.com/windows/win32/OpenGL/glnewlist
+func GlNewList(list uint32, mode uint32) {
+	syscall.SyscallN(procGlNewList.Addr(), uintptr(list), uintptr(mode))
+}
+
+// GlNormal3b calls OPENGL32!glNormal3b.
+// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3b
+func GlNormal3b(nx int8, ny int8, nz int8) {
+	syscall.SyscallN(procGlNormal3b.Addr(), uintptr(nx), uintptr(ny), uintptr(nz))
+}
+
+// GlNormal3bv calls OPENGL32!glNormal3bv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3bv
+func GlNormal3bv(v *int8) {
+	syscall.SyscallN(procGlNormal3bv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlNormal3dv calls OPENGL32!glNormal3dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3dv
+func GlNormal3dv(v *float64) {
+	syscall.SyscallN(procGlNormal3dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlNormal3fv calls OPENGL32!glNormal3fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3fv
+func GlNormal3fv(v *float32) {
+	syscall.SyscallN(procGlNormal3fv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlNormal3i calls OPENGL32!glNormal3i.
+// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3i
+func GlNormal3i(nx int32, ny int32, nz int32) {
+	syscall.SyscallN(procGlNormal3i.Addr(), uintptr(nx), uintptr(ny), uintptr(nz))
+}
+
+// GlNormal3iv calls OPENGL32!glNormal3iv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3iv
+func GlNormal3iv(v *int32) {
+	syscall.SyscallN(procGlNormal3iv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlNormal3s calls OPENGL32!glNormal3s.
+// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3s
+func GlNormal3s(nx int16, ny int16, nz int16) {
+	syscall.SyscallN(procGlNormal3s.Addr(), uintptr(nx), uintptr(ny), uintptr(nz))
+}
+
+// GlNormal3sv calls OPENGL32!glNormal3sv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3sv
+func GlNormal3sv(v *int16) {
+	syscall.SyscallN(procGlNormal3sv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlNormalPointer calls OPENGL32!glNormalPointer.
+// https://learn.microsoft.com/windows/win32/OpenGL/glnormalpointer
+func GlNormalPointer(type_ uint32, stride int32, pointer unsafe.Pointer) {
+	syscall.SyscallN(procGlNormalPointer.Addr(), uintptr(type_), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
+}
+
+// GlPixelMapfv calls OPENGL32!glPixelMapfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpixelmapfv
+func GlPixelMapfv(map_ uint32, mapsize int32, values *float32) {
+	syscall.SyscallN(procGlPixelMapfv.Addr(), uintptr(map_), uintptr(mapsize), uintptr(unsafe.Pointer(values)))
+}
+
+// GlPixelMapuiv calls OPENGL32!glPixelMapuiv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpixelmapuiv
+func GlPixelMapuiv(map_ uint32, mapsize int32, values *uint32) {
+	syscall.SyscallN(procGlPixelMapuiv.Addr(), uintptr(map_), uintptr(mapsize), uintptr(unsafe.Pointer(values)))
+}
+
+// GlPixelMapusv calls OPENGL32!glPixelMapusv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpixelmapusv
+func GlPixelMapusv(map_ uint32, mapsize int32, values *uint16) {
+	syscall.SyscallN(procGlPixelMapusv.Addr(), uintptr(map_), uintptr(mapsize), uintptr(unsafe.Pointer(values)))
+}
+
+// GlPixelStorei calls OPENGL32!glPixelStorei.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpixelstorei
+func GlPixelStorei(pname uint32, param1 int32) {
+	syscall.SyscallN(procGlPixelStorei.Addr(), uintptr(pname), uintptr(param1))
+}
+
+// GlPixelTransferi calls OPENGL32!glPixelTransferi.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpixeltransferi
+func GlPixelTransferi(pname uint32, param1 int32) {
+	syscall.SyscallN(procGlPixelTransferi.Addr(), uintptr(pname), uintptr(param1))
+}
+
+// GlPolygonMode calls OPENGL32!glPolygonMode.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpolygonmode
+func GlPolygonMode(face uint32, mode uint32) {
+	syscall.SyscallN(procGlPolygonMode.Addr(), uintptr(face), uintptr(mode))
+}
+
+// GlPolygonStipple calls OPENGL32!glPolygonStipple.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpolygonstipple
+func GlPolygonStipple(mask *byte) {
+	syscall.SyscallN(procGlPolygonStipple.Addr(), uintptr(unsafe.Pointer(mask)))
+}
+
+// GlPopAttrib calls OPENGL32!glPopAttrib.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpopattrib
+func GlPopAttrib() {
+	syscall.SyscallN(procGlPopAttrib.Addr())
+}
+
+// GlPopClientAttrib calls OPENGL32!glPopClientAttrib.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpopclientattrib
+func GlPopClientAttrib() {
+	syscall.SyscallN(procGlPopClientAttrib.Addr())
+}
+
+// GlPopMatrix calls OPENGL32!glPopMatrix.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpopmatrix
+func GlPopMatrix() {
+	syscall.SyscallN(procGlPopMatrix.Addr())
+}
+
+// GlPopName calls OPENGL32!glPopName.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpopname
+func GlPopName() {
+	syscall.SyscallN(procGlPopName.Addr())
+}
+
+// GlPrioritizeTextures calls OPENGL32!glPrioritizeTextures.
+// https://learn.microsoft.com/windows/win32/OpenGL/glprioritizetextures
+func GlPrioritizeTextures(n int32, textures *uint32, priorities *float32) {
+	syscall.SyscallN(procGlPrioritizeTextures.Addr(), uintptr(n), uintptr(unsafe.Pointer(textures)), uintptr(unsafe.Pointer(priorities)))
+}
+
+// GlPushAttrib calls OPENGL32!glPushAttrib.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpushattrib
+func GlPushAttrib(mask uint32) {
+	syscall.SyscallN(procGlPushAttrib.Addr(), uintptr(mask))
+}
+
+// GlPushClientAttrib calls OPENGL32!glPushClientAttrib.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpushclientattrib
+func GlPushClientAttrib(mask uint32) {
+	syscall.SyscallN(procGlPushClientAttrib.Addr(), uintptr(mask))
+}
+
+// GlPushMatrix calls OPENGL32!glPushMatrix.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpushmatrix
+func GlPushMatrix() {
+	syscall.SyscallN(procGlPushMatrix.Addr())
+}
+
+// GlPushName calls OPENGL32!glPushName.
+// https://learn.microsoft.com/windows/win32/OpenGL/glpushname
+func GlPushName(name uint32) {
+	syscall.SyscallN(procGlPushName.Addr(), uintptr(name))
+}
+
+// GlRasterPos2dv calls OPENGL32!glRasterPos2dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2dv
+func GlRasterPos2dv(v *float64) {
+	syscall.SyscallN(procGlRasterPos2dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlRasterPos2fv calls OPENGL32!glRasterPos2fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2fv
+func GlRasterPos2fv(v *float32) {
+	syscall.SyscallN(procGlRasterPos2fv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlRasterPos2i calls OPENGL32!glRasterPos2i.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2i
+func GlRasterPos2i(x int32, y int32) {
+	syscall.SyscallN(procGlRasterPos2i.Addr(), uintptr(x), uintptr(y))
+}
+
+// GlRasterPos2iv calls OPENGL32!glRasterPos2iv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2iv
+func GlRasterPos2iv(v *int32) {
+	syscall.SyscallN(procGlRasterPos2iv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlRasterPos2s calls OPENGL32!glRasterPos2s.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2s
+func GlRasterPos2s(x int16, y int16) {
+	syscall.SyscallN(procGlRasterPos2s.Addr(), uintptr(x), uintptr(y))
+}
+
+// GlRasterPos2sv calls OPENGL32!glRasterPos2sv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2sv
+func GlRasterPos2sv(v *int16) {
+	syscall.SyscallN(procGlRasterPos2sv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlRasterPos3dv calls OPENGL32!glRasterPos3dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3dv
+func GlRasterPos3dv(v *float64) {
+	syscall.SyscallN(procGlRasterPos3dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlRasterPos3fv calls OPENGL32!glRasterPos3fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3fv
+func GlRasterPos3fv(v *float32) {
+	syscall.SyscallN(procGlRasterPos3fv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlRasterPos3i calls OPENGL32!glRasterPos3i.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3i
+func GlRasterPos3i(x int32, y int32, z int32) {
+	syscall.SyscallN(procGlRasterPos3i.Addr(), uintptr(x), uintptr(y), uintptr(z))
+}
+
+// GlRasterPos3iv calls OPENGL32!glRasterPos3iv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3iv
+func GlRasterPos3iv(v *int32) {
+	syscall.SyscallN(procGlRasterPos3iv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlRasterPos3s calls OPENGL32!glRasterPos3s.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3s
+func GlRasterPos3s(x int16, y int16, z int16) {
+	syscall.SyscallN(procGlRasterPos3s.Addr(), uintptr(x), uintptr(y), uintptr(z))
+}
+
+// GlRasterPos3sv calls OPENGL32!glRasterPos3sv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3sv
+func GlRasterPos3sv(v *int16) {
+	syscall.SyscallN(procGlRasterPos3sv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlRasterPos4dv calls OPENGL32!glRasterPos4dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4dv
+func GlRasterPos4dv(v *float64) {
+	syscall.SyscallN(procGlRasterPos4dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlRasterPos4fv calls OPENGL32!glRasterPos4fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4fv
+func GlRasterPos4fv(v *float32) {
+	syscall.SyscallN(procGlRasterPos4fv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlRasterPos4i calls OPENGL32!glRasterPos4i.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4i
+func GlRasterPos4i(x int32, y int32, z int32, w int32) {
+	syscall.SyscallN(procGlRasterPos4i.Addr(), uintptr(x), uintptr(y), uintptr(z), uintptr(w))
+}
+
+// GlRasterPos4iv calls OPENGL32!glRasterPos4iv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4iv
+func GlRasterPos4iv(v *int32) {
+	syscall.SyscallN(procGlRasterPos4iv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlRasterPos4s calls OPENGL32!glRasterPos4s.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4s
+func GlRasterPos4s(x int16, y int16, z int16, w int16) {
+	syscall.SyscallN(procGlRasterPos4s.Addr(), uintptr(x), uintptr(y), uintptr(z), uintptr(w))
+}
+
+// GlRasterPos4sv calls OPENGL32!glRasterPos4sv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4sv
+func GlRasterPos4sv(v *int16) {
+	syscall.SyscallN(procGlRasterPos4sv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlReadBuffer calls OPENGL32!glReadBuffer.
+// https://learn.microsoft.com/windows/win32/OpenGL/glreadbuffer
+func GlReadBuffer(mode uint32) {
+	syscall.SyscallN(procGlReadBuffer.Addr(), uintptr(mode))
+}
+
+// GlReadPixels calls OPENGL32!glReadPixels.
+// https://learn.microsoft.com/windows/win32/OpenGL/glreadpixels
+func GlReadPixels(x int32, y int32, width int32, height int32, format uint32, type_ uint32, pixels unsafe.Pointer) {
+	syscall.SyscallN(procGlReadPixels.Addr(), uintptr(x), uintptr(y), uintptr(width), uintptr(height), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
+}
+
+// GlRectdv calls OPENGL32!glRectdv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrectdv
+func GlRectdv(v1 *float64, v2 *float64) {
+	syscall.SyscallN(procGlRectdv.Addr(), uintptr(unsafe.Pointer(v1)), uintptr(unsafe.Pointer(v2)))
+}
+
+// GlRectfv calls OPENGL32!glRectfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrectfv
+func GlRectfv(v1 *float32, v2 *float32) {
+	syscall.SyscallN(procGlRectfv.Addr(), uintptr(unsafe.Pointer(v1)), uintptr(unsafe.Pointer(v2)))
+}
+
+// GlRecti calls OPENGL32!glRecti.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrecti
+func GlRecti(x1 int32, y1 int32, x2 int32, y2 int32) {
+	syscall.SyscallN(procGlRecti.Addr(), uintptr(x1), uintptr(y1), uintptr(x2), uintptr(y2))
+}
+
+// GlRectiv calls OPENGL32!glRectiv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrectiv
+func GlRectiv(v1 *int32, v2 *int32) {
+	syscall.SyscallN(procGlRectiv.Addr(), uintptr(unsafe.Pointer(v1)), uintptr(unsafe.Pointer(v2)))
+}
+
+// GlRects calls OPENGL32!glRects.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrects
+func GlRects(x1 int16, y1 int16, x2 int16, y2 int16) {
+	syscall.SyscallN(procGlRects.Addr(), uintptr(x1), uintptr(y1), uintptr(x2), uintptr(y2))
+}
+
+// GlRectsv calls OPENGL32!glRectsv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrectsv
+func GlRectsv(v1 *int16, v2 *int16) {
+	syscall.SyscallN(procGlRectsv.Addr(), uintptr(unsafe.Pointer(v1)), uintptr(unsafe.Pointer(v2)))
+}
+
+// GlRenderMode calls OPENGL32!glRenderMode.
+// https://learn.microsoft.com/windows/win32/OpenGL/glrendermode
+func GlRenderMode(mode uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procGlRenderMode.Addr(), uintptr(mode))
+	return int32(r1)
+}
+
+// GlScissor calls OPENGL32!glScissor.
+// https://learn.microsoft.com/windows/win32/OpenGL/glscissor
+func GlScissor(x int32, y int32, width int32, height int32) {
+	syscall.SyscallN(procGlScissor.Addr(), uintptr(x), uintptr(y), uintptr(width), uintptr(height))
+}
+
+// GlSelectBuffer calls OPENGL32!glSelectBuffer.
+// https://learn.microsoft.com/windows/win32/OpenGL/glselectbuffer
+func GlSelectBuffer(size int32, buffer *uint32) {
+	syscall.SyscallN(procGlSelectBuffer.Addr(), uintptr(size), uintptr(unsafe.Pointer(buffer)))
+}
+
+// GlShadeModel calls OPENGL32!glShadeModel.
+// https://learn.microsoft.com/windows/win32/OpenGL/glshademodel
+func GlShadeModel(mode uint32) {
+	syscall.SyscallN(procGlShadeModel.Addr(), uintptr(mode))
+}
+
+// GlStencilFunc calls OPENGL32!glStencilFunc.
+// https://learn.microsoft.com/windows/win32/OpenGL/glstencilfunc
+func GlStencilFunc(func_ uint32, ref int32, mask uint32) {
+	syscall.SyscallN(procGlStencilFunc.Addr(), uintptr(func_), uintptr(ref), uintptr(mask))
+}
+
+// GlStencilMask calls OPENGL32!glStencilMask.
+// https://learn.microsoft.com/windows/win32/OpenGL/glstencilmask
+func GlStencilMask(mask uint32) {
+	syscall.SyscallN(procGlStencilMask.Addr(), uintptr(mask))
+}
+
+// GlStencilOp calls OPENGL32!glStencilOp.
+// https://learn.microsoft.com/windows/win32/OpenGL/glstencilop
+func GlStencilOp(fail uint32, zfail uint32, zpass uint32) {
+	syscall.SyscallN(procGlStencilOp.Addr(), uintptr(fail), uintptr(zfail), uintptr(zpass))
+}
+
+// GlTexCoord1dv calls OPENGL32!glTexCoord1dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1dv
+func GlTexCoord1dv(v *float64) {
+	syscall.SyscallN(procGlTexCoord1dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord1fv calls OPENGL32!glTexCoord1fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1fv
+func GlTexCoord1fv(v *float32) {
+	syscall.SyscallN(procGlTexCoord1fv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord1i calls OPENGL32!glTexCoord1i.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1i
+func GlTexCoord1i(s int32) {
+	syscall.SyscallN(procGlTexCoord1i.Addr(), uintptr(s))
+}
+
+// GlTexCoord1iv calls OPENGL32!glTexCoord1iv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1iv
+func GlTexCoord1iv(v *int32) {
+	syscall.SyscallN(procGlTexCoord1iv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord1s calls OPENGL32!glTexCoord1s.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1s
+func GlTexCoord1s(s int16) {
+	syscall.SyscallN(procGlTexCoord1s.Addr(), uintptr(s))
+}
+
+// GlTexCoord1sv calls OPENGL32!glTexCoord1sv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1sv
+func GlTexCoord1sv(v *int16) {
+	syscall.SyscallN(procGlTexCoord1sv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord2dv calls OPENGL32!glTexCoord2dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord2dv
+func GlTexCoord2dv(v *float64) {
+	syscall.SyscallN(procGlTexCoord2dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord2fv calls OPENGL32!glTexCoord2fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord2fv
+func GlTexCoord2fv(v *float32) {
+	syscall.SyscallN(procGlTexCoord2fv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord2i calls OPENGL32!glTexCoord2i.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord2i
+func GlTexCoord2i(s int32, t int32) {
+	syscall.SyscallN(procGlTexCoord2i.Addr(), uintptr(s), uintptr(t))
+}
+
+// GlTexCoord2iv calls OPENGL32!glTexCoord2iv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord2iv
+func GlTexCoord2iv(v *int32) {
+	syscall.SyscallN(procGlTexCoord2iv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord2s calls OPENGL32!glTexCoord2s.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord2s
+func GlTexCoord2s(s int16, t int16) {
+	syscall.SyscallN(procGlTexCoord2s.Addr(), uintptr(s), uintptr(t))
+}
+
+// GlTexCoord2sv calls OPENGL32!glTexCoord2sv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord2sv
+func GlTexCoord2sv(v *int16) {
+	syscall.SyscallN(procGlTexCoord2sv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord3dv calls OPENGL32!glTexCoord3dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3dv
+func GlTexCoord3dv(v *float64) {
+	syscall.SyscallN(procGlTexCoord3dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord3fv calls OPENGL32!glTexCoord3fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3fv
+func GlTexCoord3fv(v *float32) {
+	syscall.SyscallN(procGlTexCoord3fv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord3i calls OPENGL32!glTexCoord3i.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3i
+func GlTexCoord3i(s int32, t int32, r int32) {
+	syscall.SyscallN(procGlTexCoord3i.Addr(), uintptr(s), uintptr(t), uintptr(r))
+}
+
+// GlTexCoord3iv calls OPENGL32!glTexCoord3iv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3iv
+func GlTexCoord3iv(v *int32) {
+	syscall.SyscallN(procGlTexCoord3iv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord3s calls OPENGL32!glTexCoord3s.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3s
+func GlTexCoord3s(s int16, t int16, r int16) {
+	syscall.SyscallN(procGlTexCoord3s.Addr(), uintptr(s), uintptr(t), uintptr(r))
+}
+
+// GlTexCoord3sv calls OPENGL32!glTexCoord3sv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3sv
+func GlTexCoord3sv(v *int16) {
+	syscall.SyscallN(procGlTexCoord3sv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord4dv calls OPENGL32!glTexCoord4dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4dv
+func GlTexCoord4dv(v *float64) {
+	syscall.SyscallN(procGlTexCoord4dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord4fv calls OPENGL32!glTexCoord4fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4fv
+func GlTexCoord4fv(v *float32) {
+	syscall.SyscallN(procGlTexCoord4fv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord4i calls OPENGL32!glTexCoord4i.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4i
+func GlTexCoord4i(s int32, t int32, r int32, q int32) {
+	syscall.SyscallN(procGlTexCoord4i.Addr(), uintptr(s), uintptr(t), uintptr(r), uintptr(q))
+}
+
+// GlTexCoord4iv calls OPENGL32!glTexCoord4iv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4iv
+func GlTexCoord4iv(v *int32) {
+	syscall.SyscallN(procGlTexCoord4iv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoord4s calls OPENGL32!glTexCoord4s.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4s
+func GlTexCoord4s(s int16, t int16, r int16, q int16) {
+	syscall.SyscallN(procGlTexCoord4s.Addr(), uintptr(s), uintptr(t), uintptr(r), uintptr(q))
+}
+
+// GlTexCoord4sv calls OPENGL32!glTexCoord4sv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4sv
+func GlTexCoord4sv(v *int16) {
+	syscall.SyscallN(procGlTexCoord4sv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlTexCoordPointer calls OPENGL32!glTexCoordPointer.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoordpointer
+func GlTexCoordPointer(size int32, type_ uint32, stride int32, pointer unsafe.Pointer) {
+	syscall.SyscallN(procGlTexCoordPointer.Addr(), uintptr(size), uintptr(type_), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
+}
+
+// GlTexEnvfv calls OPENGL32!glTexEnvfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexenvfv
+func GlTexEnvfv(target uint32, pname uint32, params *float32) {
+	syscall.SyscallN(procGlTexEnvfv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlTexEnvi calls OPENGL32!glTexEnvi.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexenvi
+func GlTexEnvi(target uint32, pname uint32, param2 int32) {
+	syscall.SyscallN(procGlTexEnvi.Addr(), uintptr(target), uintptr(pname), uintptr(param2))
+}
+
+// GlTexEnviv calls OPENGL32!glTexEnviv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexenviv
+func GlTexEnviv(target uint32, pname uint32, params *int32) {
+	syscall.SyscallN(procGlTexEnviv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlTexGendv calls OPENGL32!glTexGendv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexgendv
+func GlTexGendv(coord uint32, pname uint32, params *float64) {
+	syscall.SyscallN(procGlTexGendv.Addr(), uintptr(coord), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlTexGenfv calls OPENGL32!glTexGenfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexgenfv
+func GlTexGenfv(coord uint32, pname uint32, params *float32) {
+	syscall.SyscallN(procGlTexGenfv.Addr(), uintptr(coord), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlTexGeni calls OPENGL32!glTexGeni.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexgeni
+func GlTexGeni(coord uint32, pname uint32, param2 int32) {
+	syscall.SyscallN(procGlTexGeni.Addr(), uintptr(coord), uintptr(pname), uintptr(param2))
+}
+
+// GlTexGeniv calls OPENGL32!glTexGeniv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexgeniv
+func GlTexGeniv(coord uint32, pname uint32, params *int32) {
+	syscall.SyscallN(procGlTexGeniv.Addr(), uintptr(coord), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlTexImage1D calls OPENGL32!glTexImage1D.
+// https://learn.microsoft.com/windows/win32/OpenGL/glteximage1d
+func GlTexImage1D(target uint32, level int32, internalformat int32, width int32, border int32, format uint32, type_ uint32, pixels unsafe.Pointer) {
+	syscall.SyscallN(procGlTexImage1D.Addr(), uintptr(target), uintptr(level), uintptr(internalformat), uintptr(width), uintptr(border), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
+}
+
+// GlTexImage2D calls OPENGL32!glTexImage2D.
+// https://learn.microsoft.com/windows/win32/OpenGL/glteximage2d
+func GlTexImage2D(target uint32, level int32, internalformat int32, width int32, height int32, border int32, format uint32, type_ uint32, pixels unsafe.Pointer) {
+	syscall.SyscallN(procGlTexImage2D.Addr(), uintptr(target), uintptr(level), uintptr(internalformat), uintptr(width), uintptr(height), uintptr(border), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
+}
+
+// GlTexParameterfv calls OPENGL32!glTexParameterfv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexparameterfv
+func GlTexParameterfv(target uint32, pname uint32, params *float32) {
+	syscall.SyscallN(procGlTexParameterfv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlTexParameteri calls OPENGL32!glTexParameteri.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexparameteri
+func GlTexParameteri(target uint32, pname uint32, param2 int32) {
+	syscall.SyscallN(procGlTexParameteri.Addr(), uintptr(target), uintptr(pname), uintptr(param2))
+}
+
+// GlTexParameteriv calls OPENGL32!glTexParameteriv.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexparameteriv
+func GlTexParameteriv(target uint32, pname uint32, params *int32) {
+	syscall.SyscallN(procGlTexParameteriv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
+}
+
+// GlTexSubImage1D calls OPENGL32!glTexSubImage1D.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexsubimage1d
+func GlTexSubImage1D(target uint32, level int32, xoffset int32, width int32, format uint32, type_ uint32, pixels unsafe.Pointer) {
+	syscall.SyscallN(procGlTexSubImage1D.Addr(), uintptr(target), uintptr(level), uintptr(xoffset), uintptr(width), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
+}
+
+// GlTexSubImage2D calls OPENGL32!glTexSubImage2D.
+// https://learn.microsoft.com/windows/win32/OpenGL/gltexsubimage2d
+func GlTexSubImage2D(target uint32, level int32, xoffset int32, yoffset int32, width int32, height int32, format uint32, type_ uint32, pixels unsafe.Pointer) {
+	syscall.SyscallN(procGlTexSubImage2D.Addr(), uintptr(target), uintptr(level), uintptr(xoffset), uintptr(yoffset), uintptr(width), uintptr(height), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
+}
+
+// GlVertex2dv calls OPENGL32!glVertex2dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex2dv
+func GlVertex2dv(v *float64) {
+	syscall.SyscallN(procGlVertex2dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlVertex2fv calls OPENGL32!glVertex2fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex2fv
+func GlVertex2fv(v *float32) {
+	syscall.SyscallN(procGlVertex2fv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlVertex2i calls OPENGL32!glVertex2i.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex2i
+func GlVertex2i(x int32, y int32) {
+	syscall.SyscallN(procGlVertex2i.Addr(), uintptr(x), uintptr(y))
+}
+
+// GlVertex2iv calls OPENGL32!glVertex2iv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex2iv
+func GlVertex2iv(v *int32) {
+	syscall.SyscallN(procGlVertex2iv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlVertex2s calls OPENGL32!glVertex2s.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex2s
+func GlVertex2s(x int16, y int16) {
+	syscall.SyscallN(procGlVertex2s.Addr(), uintptr(x), uintptr(y))
+}
+
+// GlVertex2sv calls OPENGL32!glVertex2sv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex2sv
+func GlVertex2sv(v *int16) {
+	syscall.SyscallN(procGlVertex2sv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlVertex3dv calls OPENGL32!glVertex3dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex3dv
+func GlVertex3dv(v *float64) {
+	syscall.SyscallN(procGlVertex3dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlVertex3fv calls OPENGL32!glVertex3fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex3fv
+func GlVertex3fv(v *float32) {
+	syscall.SyscallN(procGlVertex3fv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlVertex3i calls OPENGL32!glVertex3i.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex3i
+func GlVertex3i(x int32, y int32, z int32) {
+	syscall.SyscallN(procGlVertex3i.Addr(), uintptr(x), uintptr(y), uintptr(z))
+}
+
+// GlVertex3iv calls OPENGL32!glVertex3iv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex3iv
+func GlVertex3iv(v *int32) {
+	syscall.SyscallN(procGlVertex3iv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlVertex3s calls OPENGL32!glVertex3s.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex3s
+func GlVertex3s(x int16, y int16, z int16) {
+	syscall.SyscallN(procGlVertex3s.Addr(), uintptr(x), uintptr(y), uintptr(z))
+}
+
+// GlVertex3sv calls OPENGL32!glVertex3sv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex3sv
+func GlVertex3sv(v *int16) {
+	syscall.SyscallN(procGlVertex3sv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlVertex4dv calls OPENGL32!glVertex4dv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex4dv
+func GlVertex4dv(v *float64) {
+	syscall.SyscallN(procGlVertex4dv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlVertex4fv calls OPENGL32!glVertex4fv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex4fv
+func GlVertex4fv(v *float32) {
+	syscall.SyscallN(procGlVertex4fv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlVertex4i calls OPENGL32!glVertex4i.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex4i
+func GlVertex4i(x int32, y int32, z int32, w int32) {
+	syscall.SyscallN(procGlVertex4i.Addr(), uintptr(x), uintptr(y), uintptr(z), uintptr(w))
+}
+
+// GlVertex4iv calls OPENGL32!glVertex4iv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex4iv
+func GlVertex4iv(v *int32) {
+	syscall.SyscallN(procGlVertex4iv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlVertex4s calls OPENGL32!glVertex4s.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex4s
+func GlVertex4s(x int16, y int16, z int16, w int16) {
+	syscall.SyscallN(procGlVertex4s.Addr(), uintptr(x), uintptr(y), uintptr(z), uintptr(w))
+}
+
+// GlVertex4sv calls OPENGL32!glVertex4sv.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertex4sv
+func GlVertex4sv(v *int16) {
+	syscall.SyscallN(procGlVertex4sv.Addr(), uintptr(unsafe.Pointer(v)))
+}
+
+// GlVertexPointer calls OPENGL32!glVertexPointer.
+// https://learn.microsoft.com/windows/win32/OpenGL/glvertexpointer
+func GlVertexPointer(size int32, type_ uint32, stride int32, pointer unsafe.Pointer) {
+	syscall.SyscallN(procGlVertexPointer.Addr(), uintptr(size), uintptr(type_), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
+}
+
+// GlViewport calls OPENGL32!glViewport.
+// https://learn.microsoft.com/windows/win32/OpenGL/glviewport
+func GlViewport(x int32, y int32, width int32, height int32) {
+	syscall.SyscallN(procGlViewport.Addr(), uintptr(x), uintptr(y), uintptr(width), uintptr(height))
+}
+
+// GluBeginCurve calls GLU32!gluBeginCurve.
+// https://learn.microsoft.com/windows/win32/OpenGL/glubegincurve
+func GluBeginCurve(nobj *GLUnurbs) {
+	syscall.SyscallN(procGluBeginCurve.Addr(), uintptr(unsafe.Pointer(nobj)))
+}
+
+// GluBeginPolygon calls GLU32!gluBeginPolygon.
+// https://learn.microsoft.com/windows/win32/OpenGL/glubeginpolygon
+func GluBeginPolygon(tess *GLUtesselator) {
+	syscall.SyscallN(procGluBeginPolygon.Addr(), uintptr(unsafe.Pointer(tess)))
+}
+
+// GluBeginSurface calls GLU32!gluBeginSurface.
+// https://learn.microsoft.com/windows/win32/OpenGL/glubeginsurface
+func GluBeginSurface(nobj *GLUnurbs) {
+	syscall.SyscallN(procGluBeginSurface.Addr(), uintptr(unsafe.Pointer(nobj)))
+}
+
+// GluBeginTrim calls GLU32!gluBeginTrim.
+// https://learn.microsoft.com/windows/win32/OpenGL/glubegintrim
+func GluBeginTrim(nobj *GLUnurbs) {
+	syscall.SyscallN(procGluBeginTrim.Addr(), uintptr(unsafe.Pointer(nobj)))
+}
+
+// GluBuild1DMipmaps calls GLU32!gluBuild1DMipmaps.
+// https://learn.microsoft.com/windows/win32/OpenGL/glubuild1dmipmaps
+func GluBuild1DMipmaps(target uint32, components int32, width int32, format uint32, type_ uint32, data unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procGluBuild1DMipmaps.Addr(), uintptr(target), uintptr(components), uintptr(width), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(data)))
+	return int32(r1)
+}
+
+// GluBuild2DMipmaps calls GLU32!gluBuild2DMipmaps.
+// https://learn.microsoft.com/windows/win32/OpenGL/glubuild2dmipmaps
+func GluBuild2DMipmaps(target uint32, components int32, width int32, height int32, format uint32, type_ uint32, data unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procGluBuild2DMipmaps.Addr(), uintptr(target), uintptr(components), uintptr(width), uintptr(height), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(data)))
+	return int32(r1)
+}
+
+// GluDeleteNurbsRenderer calls GLU32!gluDeleteNurbsRenderer.
+// https://learn.microsoft.com/windows/win32/OpenGL/gludeletenurbsrenderer
+func GluDeleteNurbsRenderer(nobj *GLUnurbs) {
+	syscall.SyscallN(procGluDeleteNurbsRenderer.Addr(), uintptr(unsafe.Pointer(nobj)))
+}
+
+// GluDeleteQuadric calls GLU32!gluDeleteQuadric.
+// https://learn.microsoft.com/windows/win32/OpenGL/gludeletequadric
+func GluDeleteQuadric(state *GLUquadric) {
+	syscall.SyscallN(procGluDeleteQuadric.Addr(), uintptr(unsafe.Pointer(state)))
+}
+
+// GluDeleteTess calls GLU32!gluDeleteTess.
+// https://learn.microsoft.com/windows/win32/OpenGL/gludeletetess
+func GluDeleteTess(tess *GLUtesselator) {
+	syscall.SyscallN(procGluDeleteTess.Addr(), uintptr(unsafe.Pointer(tess)))
+}
+
+// GluEndCurve calls GLU32!gluEndCurve.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluendcurve
+func GluEndCurve(nobj *GLUnurbs) {
+	syscall.SyscallN(procGluEndCurve.Addr(), uintptr(unsafe.Pointer(nobj)))
+}
+
+// GluEndPolygon calls GLU32!gluEndPolygon.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluendpolygon
+func GluEndPolygon(tess *GLUtesselator) {
+	syscall.SyscallN(procGluEndPolygon.Addr(), uintptr(unsafe.Pointer(tess)))
+}
+
+// GluEndSurface calls GLU32!gluEndSurface.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluendsurface
+func GluEndSurface(nobj *GLUnurbs) {
+	syscall.SyscallN(procGluEndSurface.Addr(), uintptr(unsafe.Pointer(nobj)))
+}
+
+// GluEndTrim calls GLU32!gluEndTrim.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluendtrim
+func GluEndTrim(nobj *GLUnurbs) {
+	syscall.SyscallN(procGluEndTrim.Addr(), uintptr(unsafe.Pointer(nobj)))
+}
+
+// GluErrorString calls GLU32!gluErrorString.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluerrorstring
+func GluErrorString(errCode uint32) *byte {
+	r1, _, _ := syscall.SyscallN(procGluErrorString.Addr(), uintptr(errCode))
+	return (*byte)(unsafe.Pointer(r1))
+}
+
+// GluErrorUnicodeStringEXT calls GLU32!gluErrorUnicodeStringEXT.
+func GluErrorUnicodeStringEXT(errCode uint32) foundation.PWSTR {
+	r1, _, _ := syscall.SyscallN(procGluErrorUnicodeStringEXT.Addr(), uintptr(errCode))
+	return foundation.PWSTR(unsafe.Pointer(r1))
+}
+
+// GluGetNurbsProperty calls GLU32!gluGetNurbsProperty.
+// https://learn.microsoft.com/windows/win32/OpenGL/glugetnurbsproperty
+func GluGetNurbsProperty(nobj *GLUnurbs, property uint32, value *float32) {
+	syscall.SyscallN(procGluGetNurbsProperty.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(property), uintptr(unsafe.Pointer(value)))
+}
+
+// GluGetString calls GLU32!gluGetString.
+// https://learn.microsoft.com/windows/win32/OpenGL/glugetstring
+func GluGetString(name uint32) *byte {
+	r1, _, _ := syscall.SyscallN(procGluGetString.Addr(), uintptr(name))
+	return (*byte)(unsafe.Pointer(r1))
+}
+
+// GluGetTessProperty calls GLU32!gluGetTessProperty.
+// https://learn.microsoft.com/windows/win32/OpenGL/glugettessproperty
+func GluGetTessProperty(tess *GLUtesselator, which uint32, value *float64) {
+	syscall.SyscallN(procGluGetTessProperty.Addr(), uintptr(unsafe.Pointer(tess)), uintptr(which), uintptr(unsafe.Pointer(value)))
+}
+
+// GluLoadSamplingMatrices calls GLU32!gluLoadSamplingMatrices.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluloadsamplingmatrices
+func GluLoadSamplingMatrices(nobj *GLUnurbs, modelMatrix *float32, projMatrix *float32, viewport *int32) {
+	syscall.SyscallN(procGluLoadSamplingMatrices.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(unsafe.Pointer(modelMatrix)), uintptr(unsafe.Pointer(projMatrix)), uintptr(unsafe.Pointer(viewport)))
+}
+
+// GluNewNurbsRenderer calls GLU32!gluNewNurbsRenderer.
+// https://learn.microsoft.com/windows/win32/OpenGL/glunewnurbsrenderer
+func GluNewNurbsRenderer() *GLUnurbs {
+	r1, _, _ := syscall.SyscallN(procGluNewNurbsRenderer.Addr())
+	return (*GLUnurbs)(unsafe.Pointer(r1))
+}
+
+// GluNewQuadric calls GLU32!gluNewQuadric.
+// https://learn.microsoft.com/windows/win32/OpenGL/glunewquadric
+func GluNewQuadric() *GLUquadric {
+	r1, _, _ := syscall.SyscallN(procGluNewQuadric.Addr())
+	return (*GLUquadric)(unsafe.Pointer(r1))
+}
+
+// GluNewTess calls GLU32!gluNewTess.
+// https://learn.microsoft.com/windows/win32/OpenGL/glunewtess
+func GluNewTess() *GLUtesselator {
+	r1, _, _ := syscall.SyscallN(procGluNewTess.Addr())
+	return (*GLUtesselator)(unsafe.Pointer(r1))
+}
+
+// GluNextContour calls GLU32!gluNextContour.
+// https://learn.microsoft.com/windows/win32/OpenGL/glunextcontour
+func GluNextContour(tess *GLUtesselator, type_ uint32) {
+	syscall.SyscallN(procGluNextContour.Addr(), uintptr(unsafe.Pointer(tess)), uintptr(type_))
+}
+
+// GluNurbsCallback calls GLU32!gluNurbsCallback.
+// https://learn.microsoft.com/windows/win32/OpenGL/glunurbs
+func GluNurbsCallback(nobj *GLUnurbs, which uint32, fn uintptr) {
+	syscall.SyscallN(procGluNurbsCallback.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(which), uintptr(fn))
+}
+
+// GluNurbsCurve calls GLU32!gluNurbsCurve.
+// https://learn.microsoft.com/windows/win32/OpenGL/glunurbscurve
+func GluNurbsCurve(nobj *GLUnurbs, nknots int32, knot *float32, stride int32, ctlarray *float32, order int32, type_ uint32) {
+	syscall.SyscallN(procGluNurbsCurve.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(nknots), uintptr(unsafe.Pointer(knot)), uintptr(stride), uintptr(unsafe.Pointer(ctlarray)), uintptr(order), uintptr(type_))
+}
+
+// GluNurbsSurface calls GLU32!gluNurbsSurface.
+// https://learn.microsoft.com/windows/win32/OpenGL/glunurbssurface
+func GluNurbsSurface(nobj *GLUnurbs, sknot_count int32, sknot *float32, tknot_count int32, tknot *float32, s_stride int32, t_stride int32, ctlarray *float32, sorder int32, torder int32, type_ uint32) {
+	syscall.SyscallN(procGluNurbsSurface.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(sknot_count), uintptr(unsafe.Pointer(sknot)), uintptr(tknot_count), uintptr(unsafe.Pointer(tknot)), uintptr(s_stride), uintptr(t_stride), uintptr(unsafe.Pointer(ctlarray)), uintptr(sorder), uintptr(torder), uintptr(type_))
+}
+
+// GluPwlCurve calls GLU32!gluPwlCurve.
+// https://learn.microsoft.com/windows/win32/OpenGL/glupwlcurve
+func GluPwlCurve(nobj *GLUnurbs, count int32, array *float32, stride int32, type_ uint32) {
+	syscall.SyscallN(procGluPwlCurve.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(count), uintptr(unsafe.Pointer(array)), uintptr(stride), uintptr(type_))
+}
+
+// GluQuadricCallback calls GLU32!gluQuadricCallback.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluquadric
+func GluQuadricCallback(qobj *GLUquadric, which uint32, fn uintptr) {
+	syscall.SyscallN(procGluQuadricCallback.Addr(), uintptr(unsafe.Pointer(qobj)), uintptr(which), uintptr(fn))
+}
+
+// GluQuadricDrawStyle calls GLU32!gluQuadricDrawStyle.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluquadricdrawstyle
+func GluQuadricDrawStyle(quadObject *GLUquadric, drawStyle uint32) {
+	syscall.SyscallN(procGluQuadricDrawStyle.Addr(), uintptr(unsafe.Pointer(quadObject)), uintptr(drawStyle))
+}
+
+// GluQuadricNormals calls GLU32!gluQuadricNormals.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluquadricnormals
+func GluQuadricNormals(quadObject *GLUquadric, normals uint32) {
+	syscall.SyscallN(procGluQuadricNormals.Addr(), uintptr(unsafe.Pointer(quadObject)), uintptr(normals))
+}
+
+// GluQuadricOrientation calls GLU32!gluQuadricOrientation.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluquadricorientation
+func GluQuadricOrientation(quadObject *GLUquadric, orientation uint32) {
+	syscall.SyscallN(procGluQuadricOrientation.Addr(), uintptr(unsafe.Pointer(quadObject)), uintptr(orientation))
+}
+
+// GluQuadricTexture calls GLU32!gluQuadricTexture.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluquadrictexture
+func GluQuadricTexture(quadObject *GLUquadric, textureCoords byte) {
+	syscall.SyscallN(procGluQuadricTexture.Addr(), uintptr(unsafe.Pointer(quadObject)), uintptr(textureCoords))
+}
+
+// GluScaleImage calls GLU32!gluScaleImage.
+// https://learn.microsoft.com/windows/win32/OpenGL/gluscaleimage
+func GluScaleImage(format uint32, widthin int32, heightin int32, typein uint32, datain unsafe.Pointer, widthout int32, heightout int32, typeout uint32, dataout unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procGluScaleImage.Addr(), uintptr(format), uintptr(widthin), uintptr(heightin), uintptr(typein), uintptr(unsafe.Pointer(datain)), uintptr(widthout), uintptr(heightout), uintptr(typeout), uintptr(unsafe.Pointer(dataout)))
+	return int32(r1)
+}
+
+// GluTessBeginContour calls GLU32!gluTessBeginContour.
+// https://learn.microsoft.com/windows/win32/OpenGL/glutessbegincontour
+func GluTessBeginContour(tess *GLUtesselator) {
+	syscall.SyscallN(procGluTessBeginContour.Addr(), uintptr(unsafe.Pointer(tess)))
+}
+
+// GluTessBeginPolygon calls GLU32!gluTessBeginPolygon.
+// https://learn.microsoft.com/windows/win32/OpenGL/glutessbeginpolygon
+func GluTessBeginPolygon(tess *GLUtesselator, polygon_data unsafe.Pointer) {
+	syscall.SyscallN(procGluTessBeginPolygon.Addr(), uintptr(unsafe.Pointer(tess)), uintptr(unsafe.Pointer(polygon_data)))
+}
+
+// GluTessCallback calls GLU32!gluTessCallback.
+// https://learn.microsoft.com/windows/win32/OpenGL/glutess
+func GluTessCallback(tess *GLUtesselator, which uint32, fn uintptr) {
+	syscall.SyscallN(procGluTessCallback.Addr(), uintptr(unsafe.Pointer(tess)), uintptr(which), uintptr(fn))
+}
+
+// GluTessEndContour calls GLU32!gluTessEndContour.
+// https://learn.microsoft.com/windows/win32/OpenGL/glutessendcontour
+func GluTessEndContour(tess *GLUtesselator) {
+	syscall.SyscallN(procGluTessEndContour.Addr(), uintptr(unsafe.Pointer(tess)))
+}
+
+// GluTessEndPolygon calls GLU32!gluTessEndPolygon.
+// https://learn.microsoft.com/windows/win32/OpenGL/glutessendpolygon
+func GluTessEndPolygon(tess *GLUtesselator) {
+	syscall.SyscallN(procGluTessEndPolygon.Addr(), uintptr(unsafe.Pointer(tess)))
+}
+
+// GluTessVertex calls GLU32!gluTessVertex.
+// https://learn.microsoft.com/windows/win32/OpenGL/glutessvertex
+func GluTessVertex(tess *GLUtesselator, coords *float64, data unsafe.Pointer) {
+	syscall.SyscallN(procGluTessVertex.Addr(), uintptr(unsafe.Pointer(tess)), uintptr(unsafe.Pointer(coords)), uintptr(unsafe.Pointer(data)))
+}
+
 // SetPixelFormat calls GDI32!SetPixelFormat.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setpixelformat
 // Minimum OS: windows5.0.
@@ -412,1833 +2238,7 @@ func SwapBuffers(param0 graphicsgdi.HDC) error {
 	return nil
 }
 
-// glAreTexturesResident calls OPENGL32!glAreTexturesResident.
-// https://learn.microsoft.com/windows/win32/OpenGL/glaretexturesresident
-func GlAreTexturesResident(n int32, textures *uint32, residences *byte) byte {
-	r1, _, _ := syscall.SyscallN(procGlAreTexturesResident.Addr(), uintptr(n), uintptr(unsafe.Pointer(textures)), uintptr(unsafe.Pointer(residences)))
-	return byte(r1)
-}
-
-// glArrayElement calls OPENGL32!glArrayElement.
-// https://learn.microsoft.com/windows/win32/OpenGL/glarrayelement
-func GlArrayElement(i int32) {
-	syscall.SyscallN(procGlArrayElement.Addr(), uintptr(i))
-}
-
-// glBegin calls OPENGL32!glBegin.
-// https://learn.microsoft.com/windows/win32/OpenGL/glbegin
-func GlBegin(mode uint32) {
-	syscall.SyscallN(procGlBegin.Addr(), uintptr(mode))
-}
-
-// glBindTexture calls OPENGL32!glBindTexture.
-// https://learn.microsoft.com/windows/win32/OpenGL/glbindtexture
-func GlBindTexture(target uint32, texture uint32) {
-	syscall.SyscallN(procGlBindTexture.Addr(), uintptr(target), uintptr(texture))
-}
-
-// glBlendFunc calls OPENGL32!glBlendFunc.
-// https://learn.microsoft.com/windows/win32/OpenGL/glblendfunc
-func GlBlendFunc(sfactor uint32, dfactor uint32) {
-	syscall.SyscallN(procGlBlendFunc.Addr(), uintptr(sfactor), uintptr(dfactor))
-}
-
-// glCallList calls OPENGL32!glCallList.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcalllist
-func GlCallList(list uint32) {
-	syscall.SyscallN(procGlCallList.Addr(), uintptr(list))
-}
-
-// glCallLists calls OPENGL32!glCallLists.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcalllists
-func GlCallLists(n int32, type_ uint32, lists unsafe.Pointer) {
-	syscall.SyscallN(procGlCallLists.Addr(), uintptr(n), uintptr(type_), uintptr(unsafe.Pointer(lists)))
-}
-
-// glClear calls OPENGL32!glClear.
-// https://learn.microsoft.com/windows/win32/OpenGL/glclear
-func GlClear(mask uint32) {
-	syscall.SyscallN(procGlClear.Addr(), uintptr(mask))
-}
-
-// glClearStencil calls OPENGL32!glClearStencil.
-// https://learn.microsoft.com/windows/win32/OpenGL/glclearstencil
-func GlClearStencil(s int32) {
-	syscall.SyscallN(procGlClearStencil.Addr(), uintptr(s))
-}
-
-// glClipPlane calls OPENGL32!glClipPlane.
-// https://learn.microsoft.com/windows/win32/OpenGL/glclipplane
-func GlClipPlane(plane uint32, equation *float64) {
-	syscall.SyscallN(procGlClipPlane.Addr(), uintptr(plane), uintptr(unsafe.Pointer(equation)))
-}
-
-// glColor3b calls OPENGL32!glColor3b.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3b
-func GlColor3b(red int8, green int8, blue int8) {
-	syscall.SyscallN(procGlColor3b.Addr(), uintptr(red), uintptr(green), uintptr(blue))
-}
-
-// glColor3bv calls OPENGL32!glColor3bv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3bv
-func GlColor3bv(v *int8) {
-	syscall.SyscallN(procGlColor3bv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor3dv calls OPENGL32!glColor3dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3dv
-func GlColor3dv(v *float64) {
-	syscall.SyscallN(procGlColor3dv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor3fv calls OPENGL32!glColor3fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3fv
-func GlColor3fv(v *float32) {
-	syscall.SyscallN(procGlColor3fv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor3i calls OPENGL32!glColor3i.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3i
-func GlColor3i(red int32, green int32, blue int32) {
-	syscall.SyscallN(procGlColor3i.Addr(), uintptr(red), uintptr(green), uintptr(blue))
-}
-
-// glColor3iv calls OPENGL32!glColor3iv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3iv
-func GlColor3iv(v *int32) {
-	syscall.SyscallN(procGlColor3iv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor3s calls OPENGL32!glColor3s.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3s
-func GlColor3s(red int16, green int16, blue int16) {
-	syscall.SyscallN(procGlColor3s.Addr(), uintptr(red), uintptr(green), uintptr(blue))
-}
-
-// glColor3sv calls OPENGL32!glColor3sv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3sv
-func GlColor3sv(v *int16) {
-	syscall.SyscallN(procGlColor3sv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor3ub calls OPENGL32!glColor3ub.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3ub
-func GlColor3ub(red byte, green byte, blue byte) {
-	syscall.SyscallN(procGlColor3ub.Addr(), uintptr(red), uintptr(green), uintptr(blue))
-}
-
-// glColor3ubv calls OPENGL32!glColor3ubv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3ubv
-func GlColor3ubv(v *byte) {
-	syscall.SyscallN(procGlColor3ubv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor3ui calls OPENGL32!glColor3ui.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3ui
-func GlColor3ui(red uint32, green uint32, blue uint32) {
-	syscall.SyscallN(procGlColor3ui.Addr(), uintptr(red), uintptr(green), uintptr(blue))
-}
-
-// glColor3uiv calls OPENGL32!glColor3uiv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3uiv
-func GlColor3uiv(v *uint32) {
-	syscall.SyscallN(procGlColor3uiv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor3us calls OPENGL32!glColor3us.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3us
-func GlColor3us(red uint16, green uint16, blue uint16) {
-	syscall.SyscallN(procGlColor3us.Addr(), uintptr(red), uintptr(green), uintptr(blue))
-}
-
-// glColor3usv calls OPENGL32!glColor3usv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor3usv
-func GlColor3usv(v *uint16) {
-	syscall.SyscallN(procGlColor3usv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor4b calls OPENGL32!glColor4b.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4b
-func GlColor4b(red int8, green int8, blue int8, alpha int8) {
-	syscall.SyscallN(procGlColor4b.Addr(), uintptr(red), uintptr(green), uintptr(blue), uintptr(alpha))
-}
-
-// glColor4bv calls OPENGL32!glColor4bv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4bv
-func GlColor4bv(v *int8) {
-	syscall.SyscallN(procGlColor4bv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor4dv calls OPENGL32!glColor4dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4dv
-func GlColor4dv(v *float64) {
-	syscall.SyscallN(procGlColor4dv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor4fv calls OPENGL32!glColor4fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4fv
-func GlColor4fv(v *float32) {
-	syscall.SyscallN(procGlColor4fv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor4i calls OPENGL32!glColor4i.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4i
-func GlColor4i(red int32, green int32, blue int32, alpha int32) {
-	syscall.SyscallN(procGlColor4i.Addr(), uintptr(red), uintptr(green), uintptr(blue), uintptr(alpha))
-}
-
-// glColor4iv calls OPENGL32!glColor4iv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4iv
-func GlColor4iv(v *int32) {
-	syscall.SyscallN(procGlColor4iv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor4s calls OPENGL32!glColor4s.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4s
-func GlColor4s(red int16, green int16, blue int16, alpha int16) {
-	syscall.SyscallN(procGlColor4s.Addr(), uintptr(red), uintptr(green), uintptr(blue), uintptr(alpha))
-}
-
-// glColor4sv calls OPENGL32!glColor4sv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4sv
-func GlColor4sv(v *int16) {
-	syscall.SyscallN(procGlColor4sv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor4ub calls OPENGL32!glColor4ub.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4ub
-func GlColor4ub(red byte, green byte, blue byte, alpha byte) {
-	syscall.SyscallN(procGlColor4ub.Addr(), uintptr(red), uintptr(green), uintptr(blue), uintptr(alpha))
-}
-
-// glColor4ubv calls OPENGL32!glColor4ubv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4ubv
-func GlColor4ubv(v *byte) {
-	syscall.SyscallN(procGlColor4ubv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor4ui calls OPENGL32!glColor4ui.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4ui
-func GlColor4ui(red uint32, green uint32, blue uint32, alpha uint32) {
-	syscall.SyscallN(procGlColor4ui.Addr(), uintptr(red), uintptr(green), uintptr(blue), uintptr(alpha))
-}
-
-// glColor4uiv calls OPENGL32!glColor4uiv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4uiv
-func GlColor4uiv(v *uint32) {
-	syscall.SyscallN(procGlColor4uiv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColor4us calls OPENGL32!glColor4us.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4us
-func GlColor4us(red uint16, green uint16, blue uint16, alpha uint16) {
-	syscall.SyscallN(procGlColor4us.Addr(), uintptr(red), uintptr(green), uintptr(blue), uintptr(alpha))
-}
-
-// glColor4usv calls OPENGL32!glColor4usv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolor4usv
-func GlColor4usv(v *uint16) {
-	syscall.SyscallN(procGlColor4usv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glColorMask calls OPENGL32!glColorMask.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolormask
-func GlColorMask(red byte, green byte, blue byte, alpha byte) {
-	syscall.SyscallN(procGlColorMask.Addr(), uintptr(red), uintptr(green), uintptr(blue), uintptr(alpha))
-}
-
-// glColorMaterial calls OPENGL32!glColorMaterial.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolormaterial
-func GlColorMaterial(face uint32, mode uint32) {
-	syscall.SyscallN(procGlColorMaterial.Addr(), uintptr(face), uintptr(mode))
-}
-
-// glColorPointer calls OPENGL32!glColorPointer.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcolorpointer
-func GlColorPointer(size int32, type_ uint32, stride int32, pointer unsafe.Pointer) {
-	syscall.SyscallN(procGlColorPointer.Addr(), uintptr(size), uintptr(type_), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
-}
-
-// glCopyPixels calls OPENGL32!glCopyPixels.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcopypixels
-func GlCopyPixels(x int32, y int32, width int32, height int32, type_ uint32) {
-	syscall.SyscallN(procGlCopyPixels.Addr(), uintptr(x), uintptr(y), uintptr(width), uintptr(height), uintptr(type_))
-}
-
-// glCopyTexImage1D calls OPENGL32!glCopyTexImage1D.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcopyteximage1d
-func GlCopyTexImage1D(target uint32, level int32, internalFormat uint32, x int32, y int32, width int32, border int32) {
-	syscall.SyscallN(procGlCopyTexImage1D.Addr(), uintptr(target), uintptr(level), uintptr(internalFormat), uintptr(x), uintptr(y), uintptr(width), uintptr(border))
-}
-
-// glCopyTexImage2D calls OPENGL32!glCopyTexImage2D.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcopyteximage2d
-func GlCopyTexImage2D(target uint32, level int32, internalFormat uint32, x int32, y int32, width int32, height int32, border int32) {
-	syscall.SyscallN(procGlCopyTexImage2D.Addr(), uintptr(target), uintptr(level), uintptr(internalFormat), uintptr(x), uintptr(y), uintptr(width), uintptr(height), uintptr(border))
-}
-
-// glCopyTexSubImage1D calls OPENGL32!glCopyTexSubImage1D.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcopytexsubimage1d
-func GlCopyTexSubImage1D(target uint32, level int32, xoffset int32, x int32, y int32, width int32) {
-	syscall.SyscallN(procGlCopyTexSubImage1D.Addr(), uintptr(target), uintptr(level), uintptr(xoffset), uintptr(x), uintptr(y), uintptr(width))
-}
-
-// glCopyTexSubImage2D calls OPENGL32!glCopyTexSubImage2D.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcopytexsubimage2d
-func GlCopyTexSubImage2D(target uint32, level int32, xoffset int32, yoffset int32, x int32, y int32, width int32, height int32) {
-	syscall.SyscallN(procGlCopyTexSubImage2D.Addr(), uintptr(target), uintptr(level), uintptr(xoffset), uintptr(yoffset), uintptr(x), uintptr(y), uintptr(width), uintptr(height))
-}
-
-// glCullFace calls OPENGL32!glCullFace.
-// https://learn.microsoft.com/windows/win32/OpenGL/glcullface
-func GlCullFace(mode uint32) {
-	syscall.SyscallN(procGlCullFace.Addr(), uintptr(mode))
-}
-
-// glDeleteLists calls OPENGL32!glDeleteLists.
-// https://learn.microsoft.com/windows/win32/OpenGL/gldeletelists
-func GlDeleteLists(list uint32, range_ int32) {
-	syscall.SyscallN(procGlDeleteLists.Addr(), uintptr(list), uintptr(range_))
-}
-
-// glDeleteTextures calls OPENGL32!glDeleteTextures.
-// https://learn.microsoft.com/windows/win32/OpenGL/gldeletetextures
-func GlDeleteTextures(n int32, textures *uint32) {
-	syscall.SyscallN(procGlDeleteTextures.Addr(), uintptr(n), uintptr(unsafe.Pointer(textures)))
-}
-
-// glDepthFunc calls OPENGL32!glDepthFunc.
-// https://learn.microsoft.com/windows/win32/OpenGL/gldepthfunc
-func GlDepthFunc(func_ uint32) {
-	syscall.SyscallN(procGlDepthFunc.Addr(), uintptr(func_))
-}
-
-// glDepthMask calls OPENGL32!glDepthMask.
-// https://learn.microsoft.com/windows/win32/OpenGL/gldepthmask
-func GlDepthMask(flag byte) {
-	syscall.SyscallN(procGlDepthMask.Addr(), uintptr(flag))
-}
-
-// glDisable calls OPENGL32!glDisable.
-// https://learn.microsoft.com/windows/win32/OpenGL/gldisable
-func GlDisable(cap_ uint32) {
-	syscall.SyscallN(procGlDisable.Addr(), uintptr(cap_))
-}
-
-// glDisableClientState calls OPENGL32!glDisableClientState.
-// https://learn.microsoft.com/windows/win32/OpenGL/gldisableclientstate
-func GlDisableClientState(array uint32) {
-	syscall.SyscallN(procGlDisableClientState.Addr(), uintptr(array))
-}
-
-// glDrawArrays calls OPENGL32!glDrawArrays.
-// https://learn.microsoft.com/windows/win32/OpenGL/gldrawarrays
-func GlDrawArrays(mode uint32, first int32, count int32) {
-	syscall.SyscallN(procGlDrawArrays.Addr(), uintptr(mode), uintptr(first), uintptr(count))
-}
-
-// glDrawBuffer calls OPENGL32!glDrawBuffer.
-// https://learn.microsoft.com/windows/win32/OpenGL/gldrawbuffer
-func GlDrawBuffer(mode uint32) {
-	syscall.SyscallN(procGlDrawBuffer.Addr(), uintptr(mode))
-}
-
-// glDrawElements calls OPENGL32!glDrawElements.
-// https://learn.microsoft.com/windows/win32/OpenGL/gldrawelements
-func GlDrawElements(mode uint32, count int32, type_ uint32, indices unsafe.Pointer) {
-	syscall.SyscallN(procGlDrawElements.Addr(), uintptr(mode), uintptr(count), uintptr(type_), uintptr(unsafe.Pointer(indices)))
-}
-
-// glDrawPixels calls OPENGL32!glDrawPixels.
-// https://learn.microsoft.com/windows/win32/OpenGL/gldrawpixels
-func GlDrawPixels(width int32, height int32, format uint32, type_ uint32, pixels unsafe.Pointer) {
-	syscall.SyscallN(procGlDrawPixels.Addr(), uintptr(width), uintptr(height), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
-}
-
-// glEdgeFlag calls OPENGL32!glEdgeFlag.
-// https://learn.microsoft.com/windows/win32/OpenGL/gledgeflag
-func GlEdgeFlag(flag byte) {
-	syscall.SyscallN(procGlEdgeFlag.Addr(), uintptr(flag))
-}
-
-// glEdgeFlagPointer calls OPENGL32!glEdgeFlagPointer.
-// https://learn.microsoft.com/windows/win32/OpenGL/gledgeflagpointer
-func GlEdgeFlagPointer(stride int32, pointer unsafe.Pointer) {
-	syscall.SyscallN(procGlEdgeFlagPointer.Addr(), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
-}
-
-// glEdgeFlagv calls OPENGL32!glEdgeFlagv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gledgeflagv
-func GlEdgeFlagv(flag *byte) {
-	syscall.SyscallN(procGlEdgeFlagv.Addr(), uintptr(unsafe.Pointer(flag)))
-}
-
-// glEnable calls OPENGL32!glEnable.
-// https://learn.microsoft.com/windows/win32/OpenGL/glenable
-func GlEnable(cap_ uint32) {
-	syscall.SyscallN(procGlEnable.Addr(), uintptr(cap_))
-}
-
-// glEnableClientState calls OPENGL32!glEnableClientState.
-// https://learn.microsoft.com/windows/win32/OpenGL/glenableclientstate
-func GlEnableClientState(array uint32) {
-	syscall.SyscallN(procGlEnableClientState.Addr(), uintptr(array))
-}
-
-// glEnd calls OPENGL32!glEnd.
-// https://learn.microsoft.com/windows/win32/OpenGL/glend
-func GlEnd() {
-	syscall.SyscallN(procGlEnd.Addr())
-}
-
-// glEndList calls OPENGL32!glEndList.
-// https://learn.microsoft.com/windows/win32/OpenGL/glendlist
-func GlEndList() {
-	syscall.SyscallN(procGlEndList.Addr())
-}
-
-// glEvalCoord1dv calls OPENGL32!glEvalCoord1dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glevalcoord1dv
-func GlEvalCoord1dv(u *float64) {
-	syscall.SyscallN(procGlEvalCoord1dv.Addr(), uintptr(unsafe.Pointer(u)))
-}
-
-// glEvalCoord1fv calls OPENGL32!glEvalCoord1fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glevalcoord1fv
-func GlEvalCoord1fv(u *float32) {
-	syscall.SyscallN(procGlEvalCoord1fv.Addr(), uintptr(unsafe.Pointer(u)))
-}
-
-// glEvalCoord2dv calls OPENGL32!glEvalCoord2dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glevalcoord2dv
-func GlEvalCoord2dv(u *float64) {
-	syscall.SyscallN(procGlEvalCoord2dv.Addr(), uintptr(unsafe.Pointer(u)))
-}
-
-// glEvalCoord2fv calls OPENGL32!glEvalCoord2fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glevalcoord2fv
-func GlEvalCoord2fv(u *float32) {
-	syscall.SyscallN(procGlEvalCoord2fv.Addr(), uintptr(unsafe.Pointer(u)))
-}
-
-// glEvalMesh1 calls OPENGL32!glEvalMesh1.
-// https://learn.microsoft.com/windows/win32/OpenGL/glevalmesh1
-func GlEvalMesh1(mode uint32, i1 int32, i2 int32) {
-	syscall.SyscallN(procGlEvalMesh1.Addr(), uintptr(mode), uintptr(i1), uintptr(i2))
-}
-
-// glEvalMesh2 calls OPENGL32!glEvalMesh2.
-// https://learn.microsoft.com/windows/win32/OpenGL/glevalmesh2
-func GlEvalMesh2(mode uint32, i1 int32, i2 int32, j1 int32, j2 int32) {
-	syscall.SyscallN(procGlEvalMesh2.Addr(), uintptr(mode), uintptr(i1), uintptr(i2), uintptr(j1), uintptr(j2))
-}
-
-// glEvalPoint1 calls OPENGL32!glEvalPoint1.
-// https://learn.microsoft.com/windows/win32/OpenGL/glevalpoint1
-func GlEvalPoint1(i int32) {
-	syscall.SyscallN(procGlEvalPoint1.Addr(), uintptr(i))
-}
-
-// glEvalPoint2 calls OPENGL32!glEvalPoint2.
-// https://learn.microsoft.com/windows/win32/OpenGL/glevalpoint2
-func GlEvalPoint2(i int32, j int32) {
-	syscall.SyscallN(procGlEvalPoint2.Addr(), uintptr(i), uintptr(j))
-}
-
-// glFeedbackBuffer calls OPENGL32!glFeedbackBuffer.
-// https://learn.microsoft.com/windows/win32/OpenGL/glfeedbackbuffer
-func GlFeedbackBuffer(size int32, type_ uint32, buffer *float32) {
-	syscall.SyscallN(procGlFeedbackBuffer.Addr(), uintptr(size), uintptr(type_), uintptr(unsafe.Pointer(buffer)))
-}
-
-// glFinish calls OPENGL32!glFinish.
-// https://learn.microsoft.com/windows/win32/OpenGL/glfinish
-func GlFinish() {
-	syscall.SyscallN(procGlFinish.Addr())
-}
-
-// glFlush calls OPENGL32!glFlush.
-// https://learn.microsoft.com/windows/win32/OpenGL/glflush
-func GlFlush() {
-	syscall.SyscallN(procGlFlush.Addr())
-}
-
-// glFogfv calls OPENGL32!glFogfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glfogfv
-func GlFogfv(pname uint32, params *float32) {
-	syscall.SyscallN(procGlFogfv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glFogi calls OPENGL32!glFogi.
-// https://learn.microsoft.com/windows/win32/OpenGL/glfogi
-func GlFogi(pname uint32, param1 int32) {
-	syscall.SyscallN(procGlFogi.Addr(), uintptr(pname), uintptr(param1))
-}
-
-// glFogiv calls OPENGL32!glFogiv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glfogiv
-func GlFogiv(pname uint32, params *int32) {
-	syscall.SyscallN(procGlFogiv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glFrontFace calls OPENGL32!glFrontFace.
-// https://learn.microsoft.com/windows/win32/OpenGL/glfrontface
-func GlFrontFace(mode uint32) {
-	syscall.SyscallN(procGlFrontFace.Addr(), uintptr(mode))
-}
-
-// glGenLists calls OPENGL32!glGenLists.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgenlists
-func GlGenLists(range_ int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGlGenLists.Addr(), uintptr(range_))
-	return uint32(r1)
-}
-
-// glGenTextures calls OPENGL32!glGenTextures.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgentextures
-func GlGenTextures(n int32, textures *uint32) {
-	syscall.SyscallN(procGlGenTextures.Addr(), uintptr(n), uintptr(unsafe.Pointer(textures)))
-}
-
-// glGetBooleanv calls OPENGL32!glGetBooleanv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetbooleanv
-func GlGetBooleanv(pname uint32, params *byte) {
-	syscall.SyscallN(procGlGetBooleanv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetClipPlane calls OPENGL32!glGetClipPlane.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetclipplane
-func GlGetClipPlane(plane uint32, equation *float64) {
-	syscall.SyscallN(procGlGetClipPlane.Addr(), uintptr(plane), uintptr(unsafe.Pointer(equation)))
-}
-
-// glGetDoublev calls OPENGL32!glGetDoublev.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetdoublev
-func GlGetDoublev(pname uint32, params *float64) {
-	syscall.SyscallN(procGlGetDoublev.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetError calls OPENGL32!glGetError.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgeterror
-func GlGetError() uint32 {
-	r1, _, _ := syscall.SyscallN(procGlGetError.Addr())
-	return uint32(r1)
-}
-
-// glGetFloatv calls OPENGL32!glGetFloatv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetfloatv
-func GlGetFloatv(pname uint32, params *float32) {
-	syscall.SyscallN(procGlGetFloatv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetIntegerv calls OPENGL32!glGetIntegerv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetintegerv
-func GlGetIntegerv(pname uint32, params *int32) {
-	syscall.SyscallN(procGlGetIntegerv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetLightfv calls OPENGL32!glGetLightfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetlightfv
-func GlGetLightfv(light uint32, pname uint32, params *float32) {
-	syscall.SyscallN(procGlGetLightfv.Addr(), uintptr(light), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetLightiv calls OPENGL32!glGetLightiv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetlightiv
-func GlGetLightiv(light uint32, pname uint32, params *int32) {
-	syscall.SyscallN(procGlGetLightiv.Addr(), uintptr(light), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetMapdv calls OPENGL32!glGetMapdv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetmapdv
-func GlGetMapdv(target uint32, query uint32, v *float64) {
-	syscall.SyscallN(procGlGetMapdv.Addr(), uintptr(target), uintptr(query), uintptr(unsafe.Pointer(v)))
-}
-
-// glGetMapfv calls OPENGL32!glGetMapfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetmapfv
-func GlGetMapfv(target uint32, query uint32, v *float32) {
-	syscall.SyscallN(procGlGetMapfv.Addr(), uintptr(target), uintptr(query), uintptr(unsafe.Pointer(v)))
-}
-
-// glGetMapiv calls OPENGL32!glGetMapiv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetmapiv
-func GlGetMapiv(target uint32, query uint32, v *int32) {
-	syscall.SyscallN(procGlGetMapiv.Addr(), uintptr(target), uintptr(query), uintptr(unsafe.Pointer(v)))
-}
-
-// glGetMaterialfv calls OPENGL32!glGetMaterialfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetmaterialfv
-func GlGetMaterialfv(face uint32, pname uint32, params *float32) {
-	syscall.SyscallN(procGlGetMaterialfv.Addr(), uintptr(face), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetMaterialiv calls OPENGL32!glGetMaterialiv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetmaterialiv
-func GlGetMaterialiv(face uint32, pname uint32, params *int32) {
-	syscall.SyscallN(procGlGetMaterialiv.Addr(), uintptr(face), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetPixelMapfv calls OPENGL32!glGetPixelMapfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetpixelmapfv
-func GlGetPixelMapfv(map_ uint32, values *float32) {
-	syscall.SyscallN(procGlGetPixelMapfv.Addr(), uintptr(map_), uintptr(unsafe.Pointer(values)))
-}
-
-// glGetPixelMapuiv calls OPENGL32!glGetPixelMapuiv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetpixelmapuiv
-func GlGetPixelMapuiv(map_ uint32, values *uint32) {
-	syscall.SyscallN(procGlGetPixelMapuiv.Addr(), uintptr(map_), uintptr(unsafe.Pointer(values)))
-}
-
-// glGetPixelMapusv calls OPENGL32!glGetPixelMapusv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetpixelmapusv
-func GlGetPixelMapusv(map_ uint32, values *uint16) {
-	syscall.SyscallN(procGlGetPixelMapusv.Addr(), uintptr(map_), uintptr(unsafe.Pointer(values)))
-}
-
-// glGetPointerv calls OPENGL32!glGetPointerv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetpointerv
-func GlGetPointerv(pname uint32, params *unsafe.Pointer) {
-	syscall.SyscallN(procGlGetPointerv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetPolygonStipple calls OPENGL32!glGetPolygonStipple.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetpolygonstipple
-func GlGetPolygonStipple(mask *byte) {
-	syscall.SyscallN(procGlGetPolygonStipple.Addr(), uintptr(unsafe.Pointer(mask)))
-}
-
-// glGetString calls OPENGL32!glGetString.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetstring
-func GlGetString(name uint32) *byte {
-	r1, _, _ := syscall.SyscallN(procGlGetString.Addr(), uintptr(name))
-	return (*byte)(unsafe.Pointer(r1))
-}
-
-// glGetTexEnvfv calls OPENGL32!glGetTexEnvfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgettexenvfv
-func GlGetTexEnvfv(target uint32, pname uint32, params *float32) {
-	syscall.SyscallN(procGlGetTexEnvfv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetTexEnviv calls OPENGL32!glGetTexEnviv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgettexenviv
-func GlGetTexEnviv(target uint32, pname uint32, params *int32) {
-	syscall.SyscallN(procGlGetTexEnviv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetTexGendv calls OPENGL32!glGetTexGendv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgettexgendv
-func GlGetTexGendv(coord uint32, pname uint32, params *float64) {
-	syscall.SyscallN(procGlGetTexGendv.Addr(), uintptr(coord), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetTexGenfv calls OPENGL32!glGetTexGenfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgettexgenfv
-func GlGetTexGenfv(coord uint32, pname uint32, params *float32) {
-	syscall.SyscallN(procGlGetTexGenfv.Addr(), uintptr(coord), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetTexGeniv calls OPENGL32!glGetTexGeniv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgettexgeniv
-func GlGetTexGeniv(coord uint32, pname uint32, params *int32) {
-	syscall.SyscallN(procGlGetTexGeniv.Addr(), uintptr(coord), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetTexImage calls OPENGL32!glGetTexImage.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgetteximage
-func GlGetTexImage(target uint32, level int32, format uint32, type_ uint32, pixels unsafe.Pointer) {
-	syscall.SyscallN(procGlGetTexImage.Addr(), uintptr(target), uintptr(level), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
-}
-
-// glGetTexLevelParameterfv calls OPENGL32!glGetTexLevelParameterfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgettexlevelparameterfv
-func GlGetTexLevelParameterfv(target uint32, level int32, pname uint32, params *float32) {
-	syscall.SyscallN(procGlGetTexLevelParameterfv.Addr(), uintptr(target), uintptr(level), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetTexLevelParameteriv calls OPENGL32!glGetTexLevelParameteriv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgettexlevelparameteriv
-func GlGetTexLevelParameteriv(target uint32, level int32, pname uint32, params *int32) {
-	syscall.SyscallN(procGlGetTexLevelParameteriv.Addr(), uintptr(target), uintptr(level), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetTexParameterfv calls OPENGL32!glGetTexParameterfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgettexparameterfv
-func GlGetTexParameterfv(target uint32, pname uint32, params *float32) {
-	syscall.SyscallN(procGlGetTexParameterfv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glGetTexParameteriv calls OPENGL32!glGetTexParameteriv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glgettexparameteriv
-func GlGetTexParameteriv(target uint32, pname uint32, params *int32) {
-	syscall.SyscallN(procGlGetTexParameteriv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glHint calls OPENGL32!glHint.
-// https://learn.microsoft.com/windows/win32/OpenGL/glhint
-func GlHint(target uint32, mode uint32) {
-	syscall.SyscallN(procGlHint.Addr(), uintptr(target), uintptr(mode))
-}
-
-// glIndexMask calls OPENGL32!glIndexMask.
-// https://learn.microsoft.com/windows/win32/OpenGL/glindexmask
-func GlIndexMask(mask uint32) {
-	syscall.SyscallN(procGlIndexMask.Addr(), uintptr(mask))
-}
-
-// glIndexPointer calls OPENGL32!glIndexPointer.
-// https://learn.microsoft.com/windows/win32/OpenGL/glindexpointer
-func GlIndexPointer(type_ uint32, stride int32, pointer unsafe.Pointer) {
-	syscall.SyscallN(procGlIndexPointer.Addr(), uintptr(type_), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
-}
-
-// glIndexdv calls OPENGL32!glIndexdv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glindexdv
-func GlIndexdv(c *float64) {
-	syscall.SyscallN(procGlIndexdv.Addr(), uintptr(unsafe.Pointer(c)))
-}
-
-// glIndexfv calls OPENGL32!glIndexfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glindexfv
-func GlIndexfv(c *float32) {
-	syscall.SyscallN(procGlIndexfv.Addr(), uintptr(unsafe.Pointer(c)))
-}
-
-// glIndexi calls OPENGL32!glIndexi.
-// https://learn.microsoft.com/windows/win32/OpenGL/glindexi
-func GlIndexi(c int32) {
-	syscall.SyscallN(procGlIndexi.Addr(), uintptr(c))
-}
-
-// glIndexiv calls OPENGL32!glIndexiv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glindexiv
-func GlIndexiv(c *int32) {
-	syscall.SyscallN(procGlIndexiv.Addr(), uintptr(unsafe.Pointer(c)))
-}
-
-// glIndexs calls OPENGL32!glIndexs.
-// https://learn.microsoft.com/windows/win32/OpenGL/glindexs
-func GlIndexs(c int16) {
-	syscall.SyscallN(procGlIndexs.Addr(), uintptr(c))
-}
-
-// glIndexsv calls OPENGL32!glIndexsv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glindexsv
-func GlIndexsv(c *int16) {
-	syscall.SyscallN(procGlIndexsv.Addr(), uintptr(unsafe.Pointer(c)))
-}
-
-// glIndexub calls OPENGL32!glIndexub.
-func GlIndexub(c byte) {
-	syscall.SyscallN(procGlIndexub.Addr(), uintptr(c))
-}
-
-// glIndexubv calls OPENGL32!glIndexubv.
-func GlIndexubv(c *byte) {
-	syscall.SyscallN(procGlIndexubv.Addr(), uintptr(unsafe.Pointer(c)))
-}
-
-// glInitNames calls OPENGL32!glInitNames.
-// https://learn.microsoft.com/windows/win32/OpenGL/glinitnames
-func GlInitNames() {
-	syscall.SyscallN(procGlInitNames.Addr())
-}
-
-// glInterleavedArrays calls OPENGL32!glInterleavedArrays.
-// https://learn.microsoft.com/windows/win32/OpenGL/glinterleavedarrays
-func GlInterleavedArrays(format uint32, stride int32, pointer unsafe.Pointer) {
-	syscall.SyscallN(procGlInterleavedArrays.Addr(), uintptr(format), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
-}
-
-// glIsEnabled calls OPENGL32!glIsEnabled.
-// https://learn.microsoft.com/windows/win32/OpenGL/glisenabled
-func GlIsEnabled(cap_ uint32) byte {
-	r1, _, _ := syscall.SyscallN(procGlIsEnabled.Addr(), uintptr(cap_))
-	return byte(r1)
-}
-
-// glIsList calls OPENGL32!glIsList.
-// https://learn.microsoft.com/windows/win32/OpenGL/glislist
-func GlIsList(list uint32) byte {
-	r1, _, _ := syscall.SyscallN(procGlIsList.Addr(), uintptr(list))
-	return byte(r1)
-}
-
-// glIsTexture calls OPENGL32!glIsTexture.
-// https://learn.microsoft.com/windows/win32/OpenGL/glistexture
-func GlIsTexture(texture uint32) byte {
-	r1, _, _ := syscall.SyscallN(procGlIsTexture.Addr(), uintptr(texture))
-	return byte(r1)
-}
-
-// glLightModelfv calls OPENGL32!glLightModelfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gllightmodelfv
-func GlLightModelfv(pname uint32, params *float32) {
-	syscall.SyscallN(procGlLightModelfv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glLightModeli calls OPENGL32!glLightModeli.
-// https://learn.microsoft.com/windows/win32/OpenGL/gllightmodeli
-func GlLightModeli(pname uint32, param1 int32) {
-	syscall.SyscallN(procGlLightModeli.Addr(), uintptr(pname), uintptr(param1))
-}
-
-// glLightModeliv calls OPENGL32!glLightModeliv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gllightmodeliv
-func GlLightModeliv(pname uint32, params *int32) {
-	syscall.SyscallN(procGlLightModeliv.Addr(), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glLightfv calls OPENGL32!glLightfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gllightfv
-func GlLightfv(light uint32, pname uint32, params *float32) {
-	syscall.SyscallN(procGlLightfv.Addr(), uintptr(light), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glLighti calls OPENGL32!glLighti.
-// https://learn.microsoft.com/windows/win32/OpenGL/gllighti
-func GlLighti(light uint32, pname uint32, param2 int32) {
-	syscall.SyscallN(procGlLighti.Addr(), uintptr(light), uintptr(pname), uintptr(param2))
-}
-
-// glLightiv calls OPENGL32!glLightiv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gllightiv
-func GlLightiv(light uint32, pname uint32, params *int32) {
-	syscall.SyscallN(procGlLightiv.Addr(), uintptr(light), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glLineStipple calls OPENGL32!glLineStipple.
-// https://learn.microsoft.com/windows/win32/OpenGL/gllinestipple
-func GlLineStipple(factor int32, pattern uint16) {
-	syscall.SyscallN(procGlLineStipple.Addr(), uintptr(factor), uintptr(pattern))
-}
-
-// glListBase calls OPENGL32!glListBase.
-// https://learn.microsoft.com/windows/win32/OpenGL/gllistbase
-func GlListBase(base uint32) {
-	syscall.SyscallN(procGlListBase.Addr(), uintptr(base))
-}
-
-// glLoadIdentity calls OPENGL32!glLoadIdentity.
-// https://learn.microsoft.com/windows/win32/OpenGL/glloadidentity
-func GlLoadIdentity() {
-	syscall.SyscallN(procGlLoadIdentity.Addr())
-}
-
-// glLoadMatrixd calls OPENGL32!glLoadMatrixd.
-// https://learn.microsoft.com/windows/win32/OpenGL/glloadmatrixd
-func GlLoadMatrixd(m *float64) {
-	syscall.SyscallN(procGlLoadMatrixd.Addr(), uintptr(unsafe.Pointer(m)))
-}
-
-// glLoadMatrixf calls OPENGL32!glLoadMatrixf.
-// https://learn.microsoft.com/windows/win32/OpenGL/glloadmatrixf
-func GlLoadMatrixf(m *float32) {
-	syscall.SyscallN(procGlLoadMatrixf.Addr(), uintptr(unsafe.Pointer(m)))
-}
-
-// glLoadName calls OPENGL32!glLoadName.
-// https://learn.microsoft.com/windows/win32/OpenGL/glloadname
-func GlLoadName(name uint32) {
-	syscall.SyscallN(procGlLoadName.Addr(), uintptr(name))
-}
-
-// glLogicOp calls OPENGL32!glLogicOp.
-// https://learn.microsoft.com/windows/win32/OpenGL/gllogicop
-func GlLogicOp(opcode uint32) {
-	syscall.SyscallN(procGlLogicOp.Addr(), uintptr(opcode))
-}
-
-// glMaterialfv calls OPENGL32!glMaterialfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glmaterialfv
-func GlMaterialfv(face uint32, pname uint32, params *float32) {
-	syscall.SyscallN(procGlMaterialfv.Addr(), uintptr(face), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glMateriali calls OPENGL32!glMateriali.
-// https://learn.microsoft.com/windows/win32/OpenGL/glmateriali
-func GlMateriali(face uint32, pname uint32, param2 int32) {
-	syscall.SyscallN(procGlMateriali.Addr(), uintptr(face), uintptr(pname), uintptr(param2))
-}
-
-// glMaterialiv calls OPENGL32!glMaterialiv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glmaterialiv
-func GlMaterialiv(face uint32, pname uint32, params *int32) {
-	syscall.SyscallN(procGlMaterialiv.Addr(), uintptr(face), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glMatrixMode calls OPENGL32!glMatrixMode.
-// https://learn.microsoft.com/windows/win32/OpenGL/glmatrixmode
-func GlMatrixMode(mode uint32) {
-	syscall.SyscallN(procGlMatrixMode.Addr(), uintptr(mode))
-}
-
-// glMultMatrixd calls OPENGL32!glMultMatrixd.
-// https://learn.microsoft.com/windows/win32/OpenGL/glmultmatrixd
-func GlMultMatrixd(m *float64) {
-	syscall.SyscallN(procGlMultMatrixd.Addr(), uintptr(unsafe.Pointer(m)))
-}
-
-// glMultMatrixf calls OPENGL32!glMultMatrixf.
-// https://learn.microsoft.com/windows/win32/OpenGL/glmultmatrixf
-func GlMultMatrixf(m *float32) {
-	syscall.SyscallN(procGlMultMatrixf.Addr(), uintptr(unsafe.Pointer(m)))
-}
-
-// glNewList calls OPENGL32!glNewList.
-// https://learn.microsoft.com/windows/win32/OpenGL/glnewlist
-func GlNewList(list uint32, mode uint32) {
-	syscall.SyscallN(procGlNewList.Addr(), uintptr(list), uintptr(mode))
-}
-
-// glNormal3b calls OPENGL32!glNormal3b.
-// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3b
-func GlNormal3b(nx int8, ny int8, nz int8) {
-	syscall.SyscallN(procGlNormal3b.Addr(), uintptr(nx), uintptr(ny), uintptr(nz))
-}
-
-// glNormal3bv calls OPENGL32!glNormal3bv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3bv
-func GlNormal3bv(v *int8) {
-	syscall.SyscallN(procGlNormal3bv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glNormal3dv calls OPENGL32!glNormal3dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3dv
-func GlNormal3dv(v *float64) {
-	syscall.SyscallN(procGlNormal3dv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glNormal3fv calls OPENGL32!glNormal3fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3fv
-func GlNormal3fv(v *float32) {
-	syscall.SyscallN(procGlNormal3fv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glNormal3i calls OPENGL32!glNormal3i.
-// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3i
-func GlNormal3i(nx int32, ny int32, nz int32) {
-	syscall.SyscallN(procGlNormal3i.Addr(), uintptr(nx), uintptr(ny), uintptr(nz))
-}
-
-// glNormal3iv calls OPENGL32!glNormal3iv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3iv
-func GlNormal3iv(v *int32) {
-	syscall.SyscallN(procGlNormal3iv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glNormal3s calls OPENGL32!glNormal3s.
-// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3s
-func GlNormal3s(nx int16, ny int16, nz int16) {
-	syscall.SyscallN(procGlNormal3s.Addr(), uintptr(nx), uintptr(ny), uintptr(nz))
-}
-
-// glNormal3sv calls OPENGL32!glNormal3sv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glnormal3sv
-func GlNormal3sv(v *int16) {
-	syscall.SyscallN(procGlNormal3sv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glNormalPointer calls OPENGL32!glNormalPointer.
-// https://learn.microsoft.com/windows/win32/OpenGL/glnormalpointer
-func GlNormalPointer(type_ uint32, stride int32, pointer unsafe.Pointer) {
-	syscall.SyscallN(procGlNormalPointer.Addr(), uintptr(type_), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
-}
-
-// glPixelMapfv calls OPENGL32!glPixelMapfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpixelmapfv
-func GlPixelMapfv(map_ uint32, mapsize int32, values *float32) {
-	syscall.SyscallN(procGlPixelMapfv.Addr(), uintptr(map_), uintptr(mapsize), uintptr(unsafe.Pointer(values)))
-}
-
-// glPixelMapuiv calls OPENGL32!glPixelMapuiv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpixelmapuiv
-func GlPixelMapuiv(map_ uint32, mapsize int32, values *uint32) {
-	syscall.SyscallN(procGlPixelMapuiv.Addr(), uintptr(map_), uintptr(mapsize), uintptr(unsafe.Pointer(values)))
-}
-
-// glPixelMapusv calls OPENGL32!glPixelMapusv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpixelmapusv
-func GlPixelMapusv(map_ uint32, mapsize int32, values *uint16) {
-	syscall.SyscallN(procGlPixelMapusv.Addr(), uintptr(map_), uintptr(mapsize), uintptr(unsafe.Pointer(values)))
-}
-
-// glPixelStorei calls OPENGL32!glPixelStorei.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpixelstorei
-func GlPixelStorei(pname uint32, param1 int32) {
-	syscall.SyscallN(procGlPixelStorei.Addr(), uintptr(pname), uintptr(param1))
-}
-
-// glPixelTransferi calls OPENGL32!glPixelTransferi.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpixeltransferi
-func GlPixelTransferi(pname uint32, param1 int32) {
-	syscall.SyscallN(procGlPixelTransferi.Addr(), uintptr(pname), uintptr(param1))
-}
-
-// glPolygonMode calls OPENGL32!glPolygonMode.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpolygonmode
-func GlPolygonMode(face uint32, mode uint32) {
-	syscall.SyscallN(procGlPolygonMode.Addr(), uintptr(face), uintptr(mode))
-}
-
-// glPolygonStipple calls OPENGL32!glPolygonStipple.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpolygonstipple
-func GlPolygonStipple(mask *byte) {
-	syscall.SyscallN(procGlPolygonStipple.Addr(), uintptr(unsafe.Pointer(mask)))
-}
-
-// glPopAttrib calls OPENGL32!glPopAttrib.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpopattrib
-func GlPopAttrib() {
-	syscall.SyscallN(procGlPopAttrib.Addr())
-}
-
-// glPopClientAttrib calls OPENGL32!glPopClientAttrib.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpopclientattrib
-func GlPopClientAttrib() {
-	syscall.SyscallN(procGlPopClientAttrib.Addr())
-}
-
-// glPopMatrix calls OPENGL32!glPopMatrix.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpopmatrix
-func GlPopMatrix() {
-	syscall.SyscallN(procGlPopMatrix.Addr())
-}
-
-// glPopName calls OPENGL32!glPopName.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpopname
-func GlPopName() {
-	syscall.SyscallN(procGlPopName.Addr())
-}
-
-// glPrioritizeTextures calls OPENGL32!glPrioritizeTextures.
-// https://learn.microsoft.com/windows/win32/OpenGL/glprioritizetextures
-func GlPrioritizeTextures(n int32, textures *uint32, priorities *float32) {
-	syscall.SyscallN(procGlPrioritizeTextures.Addr(), uintptr(n), uintptr(unsafe.Pointer(textures)), uintptr(unsafe.Pointer(priorities)))
-}
-
-// glPushAttrib calls OPENGL32!glPushAttrib.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpushattrib
-func GlPushAttrib(mask uint32) {
-	syscall.SyscallN(procGlPushAttrib.Addr(), uintptr(mask))
-}
-
-// glPushClientAttrib calls OPENGL32!glPushClientAttrib.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpushclientattrib
-func GlPushClientAttrib(mask uint32) {
-	syscall.SyscallN(procGlPushClientAttrib.Addr(), uintptr(mask))
-}
-
-// glPushMatrix calls OPENGL32!glPushMatrix.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpushmatrix
-func GlPushMatrix() {
-	syscall.SyscallN(procGlPushMatrix.Addr())
-}
-
-// glPushName calls OPENGL32!glPushName.
-// https://learn.microsoft.com/windows/win32/OpenGL/glpushname
-func GlPushName(name uint32) {
-	syscall.SyscallN(procGlPushName.Addr(), uintptr(name))
-}
-
-// glRasterPos2dv calls OPENGL32!glRasterPos2dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2dv
-func GlRasterPos2dv(v *float64) {
-	syscall.SyscallN(procGlRasterPos2dv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glRasterPos2fv calls OPENGL32!glRasterPos2fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2fv
-func GlRasterPos2fv(v *float32) {
-	syscall.SyscallN(procGlRasterPos2fv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glRasterPos2i calls OPENGL32!glRasterPos2i.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2i
-func GlRasterPos2i(x int32, y int32) {
-	syscall.SyscallN(procGlRasterPos2i.Addr(), uintptr(x), uintptr(y))
-}
-
-// glRasterPos2iv calls OPENGL32!glRasterPos2iv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2iv
-func GlRasterPos2iv(v *int32) {
-	syscall.SyscallN(procGlRasterPos2iv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glRasterPos2s calls OPENGL32!glRasterPos2s.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2s
-func GlRasterPos2s(x int16, y int16) {
-	syscall.SyscallN(procGlRasterPos2s.Addr(), uintptr(x), uintptr(y))
-}
-
-// glRasterPos2sv calls OPENGL32!glRasterPos2sv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos2sv
-func GlRasterPos2sv(v *int16) {
-	syscall.SyscallN(procGlRasterPos2sv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glRasterPos3dv calls OPENGL32!glRasterPos3dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3dv
-func GlRasterPos3dv(v *float64) {
-	syscall.SyscallN(procGlRasterPos3dv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glRasterPos3fv calls OPENGL32!glRasterPos3fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3fv
-func GlRasterPos3fv(v *float32) {
-	syscall.SyscallN(procGlRasterPos3fv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glRasterPos3i calls OPENGL32!glRasterPos3i.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3i
-func GlRasterPos3i(x int32, y int32, z int32) {
-	syscall.SyscallN(procGlRasterPos3i.Addr(), uintptr(x), uintptr(y), uintptr(z))
-}
-
-// glRasterPos3iv calls OPENGL32!glRasterPos3iv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3iv
-func GlRasterPos3iv(v *int32) {
-	syscall.SyscallN(procGlRasterPos3iv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glRasterPos3s calls OPENGL32!glRasterPos3s.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3s
-func GlRasterPos3s(x int16, y int16, z int16) {
-	syscall.SyscallN(procGlRasterPos3s.Addr(), uintptr(x), uintptr(y), uintptr(z))
-}
-
-// glRasterPos3sv calls OPENGL32!glRasterPos3sv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos3sv
-func GlRasterPos3sv(v *int16) {
-	syscall.SyscallN(procGlRasterPos3sv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glRasterPos4dv calls OPENGL32!glRasterPos4dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4dv
-func GlRasterPos4dv(v *float64) {
-	syscall.SyscallN(procGlRasterPos4dv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glRasterPos4fv calls OPENGL32!glRasterPos4fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4fv
-func GlRasterPos4fv(v *float32) {
-	syscall.SyscallN(procGlRasterPos4fv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glRasterPos4i calls OPENGL32!glRasterPos4i.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4i
-func GlRasterPos4i(x int32, y int32, z int32, w int32) {
-	syscall.SyscallN(procGlRasterPos4i.Addr(), uintptr(x), uintptr(y), uintptr(z), uintptr(w))
-}
-
-// glRasterPos4iv calls OPENGL32!glRasterPos4iv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4iv
-func GlRasterPos4iv(v *int32) {
-	syscall.SyscallN(procGlRasterPos4iv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glRasterPos4s calls OPENGL32!glRasterPos4s.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4s
-func GlRasterPos4s(x int16, y int16, z int16, w int16) {
-	syscall.SyscallN(procGlRasterPos4s.Addr(), uintptr(x), uintptr(y), uintptr(z), uintptr(w))
-}
-
-// glRasterPos4sv calls OPENGL32!glRasterPos4sv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrasterpos4sv
-func GlRasterPos4sv(v *int16) {
-	syscall.SyscallN(procGlRasterPos4sv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glReadBuffer calls OPENGL32!glReadBuffer.
-// https://learn.microsoft.com/windows/win32/OpenGL/glreadbuffer
-func GlReadBuffer(mode uint32) {
-	syscall.SyscallN(procGlReadBuffer.Addr(), uintptr(mode))
-}
-
-// glReadPixels calls OPENGL32!glReadPixels.
-// https://learn.microsoft.com/windows/win32/OpenGL/glreadpixels
-func GlReadPixels(x int32, y int32, width int32, height int32, format uint32, type_ uint32, pixels unsafe.Pointer) {
-	syscall.SyscallN(procGlReadPixels.Addr(), uintptr(x), uintptr(y), uintptr(width), uintptr(height), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
-}
-
-// glRectdv calls OPENGL32!glRectdv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrectdv
-func GlRectdv(v1 *float64, v2 *float64) {
-	syscall.SyscallN(procGlRectdv.Addr(), uintptr(unsafe.Pointer(v1)), uintptr(unsafe.Pointer(v2)))
-}
-
-// glRectfv calls OPENGL32!glRectfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrectfv
-func GlRectfv(v1 *float32, v2 *float32) {
-	syscall.SyscallN(procGlRectfv.Addr(), uintptr(unsafe.Pointer(v1)), uintptr(unsafe.Pointer(v2)))
-}
-
-// glRecti calls OPENGL32!glRecti.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrecti
-func GlRecti(x1 int32, y1 int32, x2 int32, y2 int32) {
-	syscall.SyscallN(procGlRecti.Addr(), uintptr(x1), uintptr(y1), uintptr(x2), uintptr(y2))
-}
-
-// glRectiv calls OPENGL32!glRectiv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrectiv
-func GlRectiv(v1 *int32, v2 *int32) {
-	syscall.SyscallN(procGlRectiv.Addr(), uintptr(unsafe.Pointer(v1)), uintptr(unsafe.Pointer(v2)))
-}
-
-// glRects calls OPENGL32!glRects.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrects
-func GlRects(x1 int16, y1 int16, x2 int16, y2 int16) {
-	syscall.SyscallN(procGlRects.Addr(), uintptr(x1), uintptr(y1), uintptr(x2), uintptr(y2))
-}
-
-// glRectsv calls OPENGL32!glRectsv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrectsv
-func GlRectsv(v1 *int16, v2 *int16) {
-	syscall.SyscallN(procGlRectsv.Addr(), uintptr(unsafe.Pointer(v1)), uintptr(unsafe.Pointer(v2)))
-}
-
-// glRenderMode calls OPENGL32!glRenderMode.
-// https://learn.microsoft.com/windows/win32/OpenGL/glrendermode
-func GlRenderMode(mode uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procGlRenderMode.Addr(), uintptr(mode))
-	return int32(r1)
-}
-
-// glScissor calls OPENGL32!glScissor.
-// https://learn.microsoft.com/windows/win32/OpenGL/glscissor
-func GlScissor(x int32, y int32, width int32, height int32) {
-	syscall.SyscallN(procGlScissor.Addr(), uintptr(x), uintptr(y), uintptr(width), uintptr(height))
-}
-
-// glSelectBuffer calls OPENGL32!glSelectBuffer.
-// https://learn.microsoft.com/windows/win32/OpenGL/glselectbuffer
-func GlSelectBuffer(size int32, buffer *uint32) {
-	syscall.SyscallN(procGlSelectBuffer.Addr(), uintptr(size), uintptr(unsafe.Pointer(buffer)))
-}
-
-// glShadeModel calls OPENGL32!glShadeModel.
-// https://learn.microsoft.com/windows/win32/OpenGL/glshademodel
-func GlShadeModel(mode uint32) {
-	syscall.SyscallN(procGlShadeModel.Addr(), uintptr(mode))
-}
-
-// glStencilFunc calls OPENGL32!glStencilFunc.
-// https://learn.microsoft.com/windows/win32/OpenGL/glstencilfunc
-func GlStencilFunc(func_ uint32, ref int32, mask uint32) {
-	syscall.SyscallN(procGlStencilFunc.Addr(), uintptr(func_), uintptr(ref), uintptr(mask))
-}
-
-// glStencilMask calls OPENGL32!glStencilMask.
-// https://learn.microsoft.com/windows/win32/OpenGL/glstencilmask
-func GlStencilMask(mask uint32) {
-	syscall.SyscallN(procGlStencilMask.Addr(), uintptr(mask))
-}
-
-// glStencilOp calls OPENGL32!glStencilOp.
-// https://learn.microsoft.com/windows/win32/OpenGL/glstencilop
-func GlStencilOp(fail uint32, zfail uint32, zpass uint32) {
-	syscall.SyscallN(procGlStencilOp.Addr(), uintptr(fail), uintptr(zfail), uintptr(zpass))
-}
-
-// glTexCoord1dv calls OPENGL32!glTexCoord1dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1dv
-func GlTexCoord1dv(v *float64) {
-	syscall.SyscallN(procGlTexCoord1dv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord1fv calls OPENGL32!glTexCoord1fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1fv
-func GlTexCoord1fv(v *float32) {
-	syscall.SyscallN(procGlTexCoord1fv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord1i calls OPENGL32!glTexCoord1i.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1i
-func GlTexCoord1i(s int32) {
-	syscall.SyscallN(procGlTexCoord1i.Addr(), uintptr(s))
-}
-
-// glTexCoord1iv calls OPENGL32!glTexCoord1iv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1iv
-func GlTexCoord1iv(v *int32) {
-	syscall.SyscallN(procGlTexCoord1iv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord1s calls OPENGL32!glTexCoord1s.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1s
-func GlTexCoord1s(s int16) {
-	syscall.SyscallN(procGlTexCoord1s.Addr(), uintptr(s))
-}
-
-// glTexCoord1sv calls OPENGL32!glTexCoord1sv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord1sv
-func GlTexCoord1sv(v *int16) {
-	syscall.SyscallN(procGlTexCoord1sv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord2dv calls OPENGL32!glTexCoord2dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord2dv
-func GlTexCoord2dv(v *float64) {
-	syscall.SyscallN(procGlTexCoord2dv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord2fv calls OPENGL32!glTexCoord2fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord2fv
-func GlTexCoord2fv(v *float32) {
-	syscall.SyscallN(procGlTexCoord2fv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord2i calls OPENGL32!glTexCoord2i.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord2i
-func GlTexCoord2i(s int32, t int32) {
-	syscall.SyscallN(procGlTexCoord2i.Addr(), uintptr(s), uintptr(t))
-}
-
-// glTexCoord2iv calls OPENGL32!glTexCoord2iv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord2iv
-func GlTexCoord2iv(v *int32) {
-	syscall.SyscallN(procGlTexCoord2iv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord2s calls OPENGL32!glTexCoord2s.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord2s
-func GlTexCoord2s(s int16, t int16) {
-	syscall.SyscallN(procGlTexCoord2s.Addr(), uintptr(s), uintptr(t))
-}
-
-// glTexCoord2sv calls OPENGL32!glTexCoord2sv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord2sv
-func GlTexCoord2sv(v *int16) {
-	syscall.SyscallN(procGlTexCoord2sv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord3dv calls OPENGL32!glTexCoord3dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3dv
-func GlTexCoord3dv(v *float64) {
-	syscall.SyscallN(procGlTexCoord3dv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord3fv calls OPENGL32!glTexCoord3fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3fv
-func GlTexCoord3fv(v *float32) {
-	syscall.SyscallN(procGlTexCoord3fv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord3i calls OPENGL32!glTexCoord3i.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3i
-func GlTexCoord3i(s int32, t int32, r int32) {
-	syscall.SyscallN(procGlTexCoord3i.Addr(), uintptr(s), uintptr(t), uintptr(r))
-}
-
-// glTexCoord3iv calls OPENGL32!glTexCoord3iv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3iv
-func GlTexCoord3iv(v *int32) {
-	syscall.SyscallN(procGlTexCoord3iv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord3s calls OPENGL32!glTexCoord3s.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3s
-func GlTexCoord3s(s int16, t int16, r int16) {
-	syscall.SyscallN(procGlTexCoord3s.Addr(), uintptr(s), uintptr(t), uintptr(r))
-}
-
-// glTexCoord3sv calls OPENGL32!glTexCoord3sv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord3sv
-func GlTexCoord3sv(v *int16) {
-	syscall.SyscallN(procGlTexCoord3sv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord4dv calls OPENGL32!glTexCoord4dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4dv
-func GlTexCoord4dv(v *float64) {
-	syscall.SyscallN(procGlTexCoord4dv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord4fv calls OPENGL32!glTexCoord4fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4fv
-func GlTexCoord4fv(v *float32) {
-	syscall.SyscallN(procGlTexCoord4fv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord4i calls OPENGL32!glTexCoord4i.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4i
-func GlTexCoord4i(s int32, t int32, r int32, q int32) {
-	syscall.SyscallN(procGlTexCoord4i.Addr(), uintptr(s), uintptr(t), uintptr(r), uintptr(q))
-}
-
-// glTexCoord4iv calls OPENGL32!glTexCoord4iv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4iv
-func GlTexCoord4iv(v *int32) {
-	syscall.SyscallN(procGlTexCoord4iv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoord4s calls OPENGL32!glTexCoord4s.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4s
-func GlTexCoord4s(s int16, t int16, r int16, q int16) {
-	syscall.SyscallN(procGlTexCoord4s.Addr(), uintptr(s), uintptr(t), uintptr(r), uintptr(q))
-}
-
-// glTexCoord4sv calls OPENGL32!glTexCoord4sv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoord4sv
-func GlTexCoord4sv(v *int16) {
-	syscall.SyscallN(procGlTexCoord4sv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glTexCoordPointer calls OPENGL32!glTexCoordPointer.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexcoordpointer
-func GlTexCoordPointer(size int32, type_ uint32, stride int32, pointer unsafe.Pointer) {
-	syscall.SyscallN(procGlTexCoordPointer.Addr(), uintptr(size), uintptr(type_), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
-}
-
-// glTexEnvfv calls OPENGL32!glTexEnvfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexenvfv
-func GlTexEnvfv(target uint32, pname uint32, params *float32) {
-	syscall.SyscallN(procGlTexEnvfv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glTexEnvi calls OPENGL32!glTexEnvi.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexenvi
-func GlTexEnvi(target uint32, pname uint32, param2 int32) {
-	syscall.SyscallN(procGlTexEnvi.Addr(), uintptr(target), uintptr(pname), uintptr(param2))
-}
-
-// glTexEnviv calls OPENGL32!glTexEnviv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexenviv
-func GlTexEnviv(target uint32, pname uint32, params *int32) {
-	syscall.SyscallN(procGlTexEnviv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glTexGendv calls OPENGL32!glTexGendv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexgendv
-func GlTexGendv(coord uint32, pname uint32, params *float64) {
-	syscall.SyscallN(procGlTexGendv.Addr(), uintptr(coord), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glTexGenfv calls OPENGL32!glTexGenfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexgenfv
-func GlTexGenfv(coord uint32, pname uint32, params *float32) {
-	syscall.SyscallN(procGlTexGenfv.Addr(), uintptr(coord), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glTexGeni calls OPENGL32!glTexGeni.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexgeni
-func GlTexGeni(coord uint32, pname uint32, param2 int32) {
-	syscall.SyscallN(procGlTexGeni.Addr(), uintptr(coord), uintptr(pname), uintptr(param2))
-}
-
-// glTexGeniv calls OPENGL32!glTexGeniv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexgeniv
-func GlTexGeniv(coord uint32, pname uint32, params *int32) {
-	syscall.SyscallN(procGlTexGeniv.Addr(), uintptr(coord), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glTexImage1D calls OPENGL32!glTexImage1D.
-// https://learn.microsoft.com/windows/win32/OpenGL/glteximage1d
-func GlTexImage1D(target uint32, level int32, internalformat int32, width int32, border int32, format uint32, type_ uint32, pixels unsafe.Pointer) {
-	syscall.SyscallN(procGlTexImage1D.Addr(), uintptr(target), uintptr(level), uintptr(internalformat), uintptr(width), uintptr(border), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
-}
-
-// glTexImage2D calls OPENGL32!glTexImage2D.
-// https://learn.microsoft.com/windows/win32/OpenGL/glteximage2d
-func GlTexImage2D(target uint32, level int32, internalformat int32, width int32, height int32, border int32, format uint32, type_ uint32, pixels unsafe.Pointer) {
-	syscall.SyscallN(procGlTexImage2D.Addr(), uintptr(target), uintptr(level), uintptr(internalformat), uintptr(width), uintptr(height), uintptr(border), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
-}
-
-// glTexParameterfv calls OPENGL32!glTexParameterfv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexparameterfv
-func GlTexParameterfv(target uint32, pname uint32, params *float32) {
-	syscall.SyscallN(procGlTexParameterfv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glTexParameteri calls OPENGL32!glTexParameteri.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexparameteri
-func GlTexParameteri(target uint32, pname uint32, param2 int32) {
-	syscall.SyscallN(procGlTexParameteri.Addr(), uintptr(target), uintptr(pname), uintptr(param2))
-}
-
-// glTexParameteriv calls OPENGL32!glTexParameteriv.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexparameteriv
-func GlTexParameteriv(target uint32, pname uint32, params *int32) {
-	syscall.SyscallN(procGlTexParameteriv.Addr(), uintptr(target), uintptr(pname), uintptr(unsafe.Pointer(params)))
-}
-
-// glTexSubImage1D calls OPENGL32!glTexSubImage1D.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexsubimage1d
-func GlTexSubImage1D(target uint32, level int32, xoffset int32, width int32, format uint32, type_ uint32, pixels unsafe.Pointer) {
-	syscall.SyscallN(procGlTexSubImage1D.Addr(), uintptr(target), uintptr(level), uintptr(xoffset), uintptr(width), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
-}
-
-// glTexSubImage2D calls OPENGL32!glTexSubImage2D.
-// https://learn.microsoft.com/windows/win32/OpenGL/gltexsubimage2d
-func GlTexSubImage2D(target uint32, level int32, xoffset int32, yoffset int32, width int32, height int32, format uint32, type_ uint32, pixels unsafe.Pointer) {
-	syscall.SyscallN(procGlTexSubImage2D.Addr(), uintptr(target), uintptr(level), uintptr(xoffset), uintptr(yoffset), uintptr(width), uintptr(height), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(pixels)))
-}
-
-// glVertex2dv calls OPENGL32!glVertex2dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex2dv
-func GlVertex2dv(v *float64) {
-	syscall.SyscallN(procGlVertex2dv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glVertex2fv calls OPENGL32!glVertex2fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex2fv
-func GlVertex2fv(v *float32) {
-	syscall.SyscallN(procGlVertex2fv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glVertex2i calls OPENGL32!glVertex2i.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex2i
-func GlVertex2i(x int32, y int32) {
-	syscall.SyscallN(procGlVertex2i.Addr(), uintptr(x), uintptr(y))
-}
-
-// glVertex2iv calls OPENGL32!glVertex2iv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex2iv
-func GlVertex2iv(v *int32) {
-	syscall.SyscallN(procGlVertex2iv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glVertex2s calls OPENGL32!glVertex2s.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex2s
-func GlVertex2s(x int16, y int16) {
-	syscall.SyscallN(procGlVertex2s.Addr(), uintptr(x), uintptr(y))
-}
-
-// glVertex2sv calls OPENGL32!glVertex2sv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex2sv
-func GlVertex2sv(v *int16) {
-	syscall.SyscallN(procGlVertex2sv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glVertex3dv calls OPENGL32!glVertex3dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex3dv
-func GlVertex3dv(v *float64) {
-	syscall.SyscallN(procGlVertex3dv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glVertex3fv calls OPENGL32!glVertex3fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex3fv
-func GlVertex3fv(v *float32) {
-	syscall.SyscallN(procGlVertex3fv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glVertex3i calls OPENGL32!glVertex3i.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex3i
-func GlVertex3i(x int32, y int32, z int32) {
-	syscall.SyscallN(procGlVertex3i.Addr(), uintptr(x), uintptr(y), uintptr(z))
-}
-
-// glVertex3iv calls OPENGL32!glVertex3iv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex3iv
-func GlVertex3iv(v *int32) {
-	syscall.SyscallN(procGlVertex3iv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glVertex3s calls OPENGL32!glVertex3s.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex3s
-func GlVertex3s(x int16, y int16, z int16) {
-	syscall.SyscallN(procGlVertex3s.Addr(), uintptr(x), uintptr(y), uintptr(z))
-}
-
-// glVertex3sv calls OPENGL32!glVertex3sv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex3sv
-func GlVertex3sv(v *int16) {
-	syscall.SyscallN(procGlVertex3sv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glVertex4dv calls OPENGL32!glVertex4dv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex4dv
-func GlVertex4dv(v *float64) {
-	syscall.SyscallN(procGlVertex4dv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glVertex4fv calls OPENGL32!glVertex4fv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex4fv
-func GlVertex4fv(v *float32) {
-	syscall.SyscallN(procGlVertex4fv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glVertex4i calls OPENGL32!glVertex4i.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex4i
-func GlVertex4i(x int32, y int32, z int32, w int32) {
-	syscall.SyscallN(procGlVertex4i.Addr(), uintptr(x), uintptr(y), uintptr(z), uintptr(w))
-}
-
-// glVertex4iv calls OPENGL32!glVertex4iv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex4iv
-func GlVertex4iv(v *int32) {
-	syscall.SyscallN(procGlVertex4iv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glVertex4s calls OPENGL32!glVertex4s.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex4s
-func GlVertex4s(x int16, y int16, z int16, w int16) {
-	syscall.SyscallN(procGlVertex4s.Addr(), uintptr(x), uintptr(y), uintptr(z), uintptr(w))
-}
-
-// glVertex4sv calls OPENGL32!glVertex4sv.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertex4sv
-func GlVertex4sv(v *int16) {
-	syscall.SyscallN(procGlVertex4sv.Addr(), uintptr(unsafe.Pointer(v)))
-}
-
-// glVertexPointer calls OPENGL32!glVertexPointer.
-// https://learn.microsoft.com/windows/win32/OpenGL/glvertexpointer
-func GlVertexPointer(size int32, type_ uint32, stride int32, pointer unsafe.Pointer) {
-	syscall.SyscallN(procGlVertexPointer.Addr(), uintptr(size), uintptr(type_), uintptr(stride), uintptr(unsafe.Pointer(pointer)))
-}
-
-// glViewport calls OPENGL32!glViewport.
-// https://learn.microsoft.com/windows/win32/OpenGL/glviewport
-func GlViewport(x int32, y int32, width int32, height int32) {
-	syscall.SyscallN(procGlViewport.Addr(), uintptr(x), uintptr(y), uintptr(width), uintptr(height))
-}
-
-// gluBeginCurve calls GLU32!gluBeginCurve.
-// https://learn.microsoft.com/windows/win32/OpenGL/glubegincurve
-func GluBeginCurve(nobj *GLUnurbs) {
-	syscall.SyscallN(procGluBeginCurve.Addr(), uintptr(unsafe.Pointer(nobj)))
-}
-
-// gluBeginPolygon calls GLU32!gluBeginPolygon.
-// https://learn.microsoft.com/windows/win32/OpenGL/glubeginpolygon
-func GluBeginPolygon(tess *GLUtesselator) {
-	syscall.SyscallN(procGluBeginPolygon.Addr(), uintptr(unsafe.Pointer(tess)))
-}
-
-// gluBeginSurface calls GLU32!gluBeginSurface.
-// https://learn.microsoft.com/windows/win32/OpenGL/glubeginsurface
-func GluBeginSurface(nobj *GLUnurbs) {
-	syscall.SyscallN(procGluBeginSurface.Addr(), uintptr(unsafe.Pointer(nobj)))
-}
-
-// gluBeginTrim calls GLU32!gluBeginTrim.
-// https://learn.microsoft.com/windows/win32/OpenGL/glubegintrim
-func GluBeginTrim(nobj *GLUnurbs) {
-	syscall.SyscallN(procGluBeginTrim.Addr(), uintptr(unsafe.Pointer(nobj)))
-}
-
-// gluBuild1DMipmaps calls GLU32!gluBuild1DMipmaps.
-// https://learn.microsoft.com/windows/win32/OpenGL/glubuild1dmipmaps
-func GluBuild1DMipmaps(target uint32, components int32, width int32, format uint32, type_ uint32, data unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procGluBuild1DMipmaps.Addr(), uintptr(target), uintptr(components), uintptr(width), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(data)))
-	return int32(r1)
-}
-
-// gluBuild2DMipmaps calls GLU32!gluBuild2DMipmaps.
-// https://learn.microsoft.com/windows/win32/OpenGL/glubuild2dmipmaps
-func GluBuild2DMipmaps(target uint32, components int32, width int32, height int32, format uint32, type_ uint32, data unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procGluBuild2DMipmaps.Addr(), uintptr(target), uintptr(components), uintptr(width), uintptr(height), uintptr(format), uintptr(type_), uintptr(unsafe.Pointer(data)))
-	return int32(r1)
-}
-
-// gluDeleteNurbsRenderer calls GLU32!gluDeleteNurbsRenderer.
-// https://learn.microsoft.com/windows/win32/OpenGL/gludeletenurbsrenderer
-func GluDeleteNurbsRenderer(nobj *GLUnurbs) {
-	syscall.SyscallN(procGluDeleteNurbsRenderer.Addr(), uintptr(unsafe.Pointer(nobj)))
-}
-
-// gluDeleteQuadric calls GLU32!gluDeleteQuadric.
-// https://learn.microsoft.com/windows/win32/OpenGL/gludeletequadric
-func GluDeleteQuadric(state *GLUquadric) {
-	syscall.SyscallN(procGluDeleteQuadric.Addr(), uintptr(unsafe.Pointer(state)))
-}
-
-// gluDeleteTess calls GLU32!gluDeleteTess.
-// https://learn.microsoft.com/windows/win32/OpenGL/gludeletetess
-func GluDeleteTess(tess *GLUtesselator) {
-	syscall.SyscallN(procGluDeleteTess.Addr(), uintptr(unsafe.Pointer(tess)))
-}
-
-// gluEndCurve calls GLU32!gluEndCurve.
-// https://learn.microsoft.com/windows/win32/OpenGL/gluendcurve
-func GluEndCurve(nobj *GLUnurbs) {
-	syscall.SyscallN(procGluEndCurve.Addr(), uintptr(unsafe.Pointer(nobj)))
-}
-
-// gluEndPolygon calls GLU32!gluEndPolygon.
-// https://learn.microsoft.com/windows/win32/OpenGL/gluendpolygon
-func GluEndPolygon(tess *GLUtesselator) {
-	syscall.SyscallN(procGluEndPolygon.Addr(), uintptr(unsafe.Pointer(tess)))
-}
-
-// gluEndSurface calls GLU32!gluEndSurface.
-// https://learn.microsoft.com/windows/win32/OpenGL/gluendsurface
-func GluEndSurface(nobj *GLUnurbs) {
-	syscall.SyscallN(procGluEndSurface.Addr(), uintptr(unsafe.Pointer(nobj)))
-}
-
-// gluEndTrim calls GLU32!gluEndTrim.
-// https://learn.microsoft.com/windows/win32/OpenGL/gluendtrim
-func GluEndTrim(nobj *GLUnurbs) {
-	syscall.SyscallN(procGluEndTrim.Addr(), uintptr(unsafe.Pointer(nobj)))
-}
-
-// gluErrorString calls GLU32!gluErrorString.
-// https://learn.microsoft.com/windows/win32/OpenGL/gluerrorstring
-func GluErrorString(errCode uint32) *byte {
-	r1, _, _ := syscall.SyscallN(procGluErrorString.Addr(), uintptr(errCode))
-	return (*byte)(unsafe.Pointer(r1))
-}
-
-// gluErrorUnicodeStringEXT calls GLU32!gluErrorUnicodeStringEXT.
-func GluErrorUnicodeStringEXT(errCode uint32) foundation.PWSTR {
-	r1, _, _ := syscall.SyscallN(procGluErrorUnicodeStringEXT.Addr(), uintptr(errCode))
-	return foundation.PWSTR(unsafe.Pointer(r1))
-}
-
-// gluGetNurbsProperty calls GLU32!gluGetNurbsProperty.
-// https://learn.microsoft.com/windows/win32/OpenGL/glugetnurbsproperty
-func GluGetNurbsProperty(nobj *GLUnurbs, property uint32, value *float32) {
-	syscall.SyscallN(procGluGetNurbsProperty.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(property), uintptr(unsafe.Pointer(value)))
-}
-
-// gluGetString calls GLU32!gluGetString.
-// https://learn.microsoft.com/windows/win32/OpenGL/glugetstring
-func GluGetString(name uint32) *byte {
-	r1, _, _ := syscall.SyscallN(procGluGetString.Addr(), uintptr(name))
-	return (*byte)(unsafe.Pointer(r1))
-}
-
-// gluGetTessProperty calls GLU32!gluGetTessProperty.
-// https://learn.microsoft.com/windows/win32/OpenGL/glugettessproperty
-func GluGetTessProperty(tess *GLUtesselator, which uint32, value *float64) {
-	syscall.SyscallN(procGluGetTessProperty.Addr(), uintptr(unsafe.Pointer(tess)), uintptr(which), uintptr(unsafe.Pointer(value)))
-}
-
-// gluLoadSamplingMatrices calls GLU32!gluLoadSamplingMatrices.
-// https://learn.microsoft.com/windows/win32/OpenGL/gluloadsamplingmatrices
-func GluLoadSamplingMatrices(nobj *GLUnurbs, modelMatrix *float32, projMatrix *float32, viewport *int32) {
-	syscall.SyscallN(procGluLoadSamplingMatrices.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(unsafe.Pointer(modelMatrix)), uintptr(unsafe.Pointer(projMatrix)), uintptr(unsafe.Pointer(viewport)))
-}
-
-// gluNewNurbsRenderer calls GLU32!gluNewNurbsRenderer.
-// https://learn.microsoft.com/windows/win32/OpenGL/glunewnurbsrenderer
-func GluNewNurbsRenderer() *GLUnurbs {
-	r1, _, _ := syscall.SyscallN(procGluNewNurbsRenderer.Addr())
-	return (*GLUnurbs)(unsafe.Pointer(r1))
-}
-
-// gluNewQuadric calls GLU32!gluNewQuadric.
-// https://learn.microsoft.com/windows/win32/OpenGL/glunewquadric
-func GluNewQuadric() *GLUquadric {
-	r1, _, _ := syscall.SyscallN(procGluNewQuadric.Addr())
-	return (*GLUquadric)(unsafe.Pointer(r1))
-}
-
-// gluNewTess calls GLU32!gluNewTess.
-// https://learn.microsoft.com/windows/win32/OpenGL/glunewtess
-func GluNewTess() *GLUtesselator {
-	r1, _, _ := syscall.SyscallN(procGluNewTess.Addr())
-	return (*GLUtesselator)(unsafe.Pointer(r1))
-}
-
-// gluNextContour calls GLU32!gluNextContour.
-// https://learn.microsoft.com/windows/win32/OpenGL/glunextcontour
-func GluNextContour(tess *GLUtesselator, type_ uint32) {
-	syscall.SyscallN(procGluNextContour.Addr(), uintptr(unsafe.Pointer(tess)), uintptr(type_))
-}
-
-// gluNurbsCallback calls GLU32!gluNurbsCallback.
-// https://learn.microsoft.com/windows/win32/OpenGL/glunurbs
-func GluNurbsCallback(nobj *GLUnurbs, which uint32, fn uintptr) {
-	syscall.SyscallN(procGluNurbsCallback.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(which), uintptr(fn))
-}
-
-// gluNurbsCurve calls GLU32!gluNurbsCurve.
-// https://learn.microsoft.com/windows/win32/OpenGL/glunurbscurve
-func GluNurbsCurve(nobj *GLUnurbs, nknots int32, knot *float32, stride int32, ctlarray *float32, order int32, type_ uint32) {
-	syscall.SyscallN(procGluNurbsCurve.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(nknots), uintptr(unsafe.Pointer(knot)), uintptr(stride), uintptr(unsafe.Pointer(ctlarray)), uintptr(order), uintptr(type_))
-}
-
-// gluNurbsSurface calls GLU32!gluNurbsSurface.
-// https://learn.microsoft.com/windows/win32/OpenGL/glunurbssurface
-func GluNurbsSurface(nobj *GLUnurbs, sknot_count int32, sknot *float32, tknot_count int32, tknot *float32, s_stride int32, t_stride int32, ctlarray *float32, sorder int32, torder int32, type_ uint32) {
-	syscall.SyscallN(procGluNurbsSurface.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(sknot_count), uintptr(unsafe.Pointer(sknot)), uintptr(tknot_count), uintptr(unsafe.Pointer(tknot)), uintptr(s_stride), uintptr(t_stride), uintptr(unsafe.Pointer(ctlarray)), uintptr(sorder), uintptr(torder), uintptr(type_))
-}
-
-// gluPwlCurve calls GLU32!gluPwlCurve.
-// https://learn.microsoft.com/windows/win32/OpenGL/glupwlcurve
-func GluPwlCurve(nobj *GLUnurbs, count int32, array *float32, stride int32, type_ uint32) {
-	syscall.SyscallN(procGluPwlCurve.Addr(), uintptr(unsafe.Pointer(nobj)), uintptr(count), uintptr(unsafe.Pointer(array)), uintptr(stride), uintptr(type_))
-}
-
-// gluQuadricCallback calls GLU32!gluQuadricCallback.
-// https://learn.microsoft.com/windows/win32/OpenGL/gluquadric
-func GluQuadricCallback(qobj *GLUquadric, which uint32, fn uintptr) {
-	syscall.SyscallN(procGluQuadricCallback.Addr(), uintptr(unsafe.Pointer(qobj)), uintptr(which), uintptr(fn))
-}
-
-// gluQuadricDrawStyle calls GLU32!gluQuadricDrawStyle.
-// https://learn.microsoft.com/windows/win32/OpenGL/gluquadricdrawstyle
-func GluQuadricDrawStyle(quadObject *GLUquadric, drawStyle uint32) {
-	syscall.SyscallN(procGluQuadricDrawStyle.Addr(), uintptr(unsafe.Pointer(quadObject)), uintptr(drawStyle))
-}
-
-// gluQuadricNormals calls GLU32!gluQuadricNormals.
-// https://learn.microsoft.com/windows/win32/OpenGL/gluquadricnormals
-func GluQuadricNormals(quadObject *GLUquadric, normals uint32) {
-	syscall.SyscallN(procGluQuadricNormals.Addr(), uintptr(unsafe.Pointer(quadObject)), uintptr(normals))
-}
-
-// gluQuadricOrientation calls GLU32!gluQuadricOrientation.
-// https://learn.microsoft.com/windows/win32/OpenGL/gluquadricorientation
-func GluQuadricOrientation(quadObject *GLUquadric, orientation uint32) {
-	syscall.SyscallN(procGluQuadricOrientation.Addr(), uintptr(unsafe.Pointer(quadObject)), uintptr(orientation))
-}
-
-// gluQuadricTexture calls GLU32!gluQuadricTexture.
-// https://learn.microsoft.com/windows/win32/OpenGL/gluquadrictexture
-func GluQuadricTexture(quadObject *GLUquadric, textureCoords byte) {
-	syscall.SyscallN(procGluQuadricTexture.Addr(), uintptr(unsafe.Pointer(quadObject)), uintptr(textureCoords))
-}
-
-// gluScaleImage calls GLU32!gluScaleImage.
-// https://learn.microsoft.com/windows/win32/OpenGL/gluscaleimage
-func GluScaleImage(format uint32, widthin int32, heightin int32, typein uint32, datain unsafe.Pointer, widthout int32, heightout int32, typeout uint32, dataout unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procGluScaleImage.Addr(), uintptr(format), uintptr(widthin), uintptr(heightin), uintptr(typein), uintptr(unsafe.Pointer(datain)), uintptr(widthout), uintptr(heightout), uintptr(typeout), uintptr(unsafe.Pointer(dataout)))
-	return int32(r1)
-}
-
-// gluTessBeginContour calls GLU32!gluTessBeginContour.
-// https://learn.microsoft.com/windows/win32/OpenGL/glutessbegincontour
-func GluTessBeginContour(tess *GLUtesselator) {
-	syscall.SyscallN(procGluTessBeginContour.Addr(), uintptr(unsafe.Pointer(tess)))
-}
-
-// gluTessBeginPolygon calls GLU32!gluTessBeginPolygon.
-// https://learn.microsoft.com/windows/win32/OpenGL/glutessbeginpolygon
-func GluTessBeginPolygon(tess *GLUtesselator, polygon_data unsafe.Pointer) {
-	syscall.SyscallN(procGluTessBeginPolygon.Addr(), uintptr(unsafe.Pointer(tess)), uintptr(unsafe.Pointer(polygon_data)))
-}
-
-// gluTessCallback calls GLU32!gluTessCallback.
-// https://learn.microsoft.com/windows/win32/OpenGL/glutess
-func GluTessCallback(tess *GLUtesselator, which uint32, fn uintptr) {
-	syscall.SyscallN(procGluTessCallback.Addr(), uintptr(unsafe.Pointer(tess)), uintptr(which), uintptr(fn))
-}
-
-// gluTessEndContour calls GLU32!gluTessEndContour.
-// https://learn.microsoft.com/windows/win32/OpenGL/glutessendcontour
-func GluTessEndContour(tess *GLUtesselator) {
-	syscall.SyscallN(procGluTessEndContour.Addr(), uintptr(unsafe.Pointer(tess)))
-}
-
-// gluTessEndPolygon calls GLU32!gluTessEndPolygon.
-// https://learn.microsoft.com/windows/win32/OpenGL/glutessendpolygon
-func GluTessEndPolygon(tess *GLUtesselator) {
-	syscall.SyscallN(procGluTessEndPolygon.Addr(), uintptr(unsafe.Pointer(tess)))
-}
-
-// gluTessVertex calls GLU32!gluTessVertex.
-// https://learn.microsoft.com/windows/win32/OpenGL/glutessvertex
-func GluTessVertex(tess *GLUtesselator, coords *float64, data unsafe.Pointer) {
-	syscall.SyscallN(procGluTessVertex.Addr(), uintptr(unsafe.Pointer(tess)), uintptr(unsafe.Pointer(coords)), uintptr(unsafe.Pointer(data)))
-}
-
-// wglCopyContext calls OPENGL32!wglCopyContext.
+// WglCopyContext calls OPENGL32!wglCopyContext.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglcopycontext
 // Minimum OS: windows5.0.
 func WglCopyContext(param0 HGLRC, param1 HGLRC, param2 uint32) error {
@@ -2249,7 +2249,7 @@ func WglCopyContext(param0 HGLRC, param1 HGLRC, param2 uint32) error {
 	return nil
 }
 
-// wglCreateContext calls OPENGL32!wglCreateContext.
+// WglCreateContext calls OPENGL32!wglCreateContext.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglcreatecontext
 // Minimum OS: windows5.0.
 func WglCreateContext(param0 graphicsgdi.HDC) (HGLRC, error) {
@@ -2261,7 +2261,7 @@ func WglCreateContext(param0 graphicsgdi.HDC) (HGLRC, error) {
 	return ret, nil
 }
 
-// wglCreateLayerContext calls OPENGL32!wglCreateLayerContext.
+// WglCreateLayerContext calls OPENGL32!wglCreateLayerContext.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglcreatelayercontext
 // Minimum OS: windows5.0.
 func WglCreateLayerContext(param0 graphicsgdi.HDC, param1 int32) (HGLRC, error) {
@@ -2273,7 +2273,7 @@ func WglCreateLayerContext(param0 graphicsgdi.HDC, param1 int32) (HGLRC, error) 
 	return ret, nil
 }
 
-// wglDeleteContext calls OPENGL32!wglDeleteContext.
+// WglDeleteContext calls OPENGL32!wglDeleteContext.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wgldeletecontext
 // Minimum OS: windows5.0.
 func WglDeleteContext(param0 HGLRC) error {
@@ -2284,15 +2284,15 @@ func WglDeleteContext(param0 HGLRC) error {
 	return nil
 }
 
-// wglDescribeLayerPlane calls OPENGL32!wglDescribeLayerPlane.
+// WglDescribeLayerPlane calls OPENGL32!wglDescribeLayerPlane.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wgldescribelayerplane
 // Minimum OS: windows5.0.
-func WglDescribeLayerPlane(param0 graphicsgdi.HDC, param1 int32, param2 int32, param3 uint32, param4 *LAYERPLANEDESCRIPTOR) foundation.BOOL {
+func WglDescribeLayerPlane(param0 graphicsgdi.HDC, param1 int32, param2 int32, param3 uint32, param4 *LAYERPLANEDESCRIPTOR) bool {
 	r1, _, _ := syscall.SyscallN(procWglDescribeLayerPlane.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3), uintptr(unsafe.Pointer(param4)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// wglGetCurrentContext calls OPENGL32!wglGetCurrentContext.
+// WglGetCurrentContext calls OPENGL32!wglGetCurrentContext.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglgetcurrentcontext
 // Minimum OS: windows5.0.
 func WglGetCurrentContext() HGLRC {
@@ -2300,7 +2300,7 @@ func WglGetCurrentContext() HGLRC {
 	return HGLRC(r1)
 }
 
-// wglGetCurrentDC calls OPENGL32!wglGetCurrentDC.
+// WglGetCurrentDC calls OPENGL32!wglGetCurrentDC.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglgetcurrentdc
 // Minimum OS: windows5.0.
 func WglGetCurrentDC() graphicsgdi.HDC {
@@ -2308,7 +2308,7 @@ func WglGetCurrentDC() graphicsgdi.HDC {
 	return graphicsgdi.HDC(r1)
 }
 
-// wglGetLayerPaletteEntries calls OPENGL32!wglGetLayerPaletteEntries.
+// WglGetLayerPaletteEntries calls OPENGL32!wglGetLayerPaletteEntries.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglgetlayerpaletteentries
 // Minimum OS: windows5.0.
 func WglGetLayerPaletteEntries(param0 graphicsgdi.HDC, param1 int32, param2 int32, param3 int32, param4 *foundation.COLORREF) (int32, error) {
@@ -2319,7 +2319,7 @@ func WglGetLayerPaletteEntries(param0 graphicsgdi.HDC, param1 int32, param2 int3
 	return int32(r1), nil
 }
 
-// wglGetProcAddress calls OPENGL32!wglGetProcAddress.
+// WglGetProcAddress calls OPENGL32!wglGetProcAddress.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglgetprocaddress
 // Minimum OS: windows5.0.
 func WglGetProcAddress(param0 foundation.PSTR) (foundation.PROC, error) {
@@ -2330,7 +2330,7 @@ func WglGetProcAddress(param0 foundation.PSTR) (foundation.PROC, error) {
 	return foundation.PROC(r1), nil
 }
 
-// wglMakeCurrent calls OPENGL32!wglMakeCurrent.
+// WglMakeCurrent calls OPENGL32!wglMakeCurrent.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglmakecurrent
 // Minimum OS: windows5.0.
 func WglMakeCurrent(param0 graphicsgdi.HDC, param1 HGLRC) error {
@@ -2341,18 +2341,19 @@ func WglMakeCurrent(param0 graphicsgdi.HDC, param1 HGLRC) error {
 	return nil
 }
 
-// wglRealizeLayerPalette calls OPENGL32!wglRealizeLayerPalette.
+// WglRealizeLayerPalette calls OPENGL32!wglRealizeLayerPalette.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglrealizelayerpalette
 // Minimum OS: windows5.0.
-func WglRealizeLayerPalette(param0 graphicsgdi.HDC, param1 int32, param2 foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procWglRealizeLayerPalette.Addr(), uintptr(param0), uintptr(param1), uintptr(param2))
+func WglRealizeLayerPalette(param0 graphicsgdi.HDC, param1 int32, param2 bool) error {
+	_param2 := win32.Bool32(param2)
+	r1, _, e1 := syscall.SyscallN(procWglRealizeLayerPalette.Addr(), uintptr(param0), uintptr(param1), uintptr(_param2))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// wglSetLayerPaletteEntries calls OPENGL32!wglSetLayerPaletteEntries.
+// WglSetLayerPaletteEntries calls OPENGL32!wglSetLayerPaletteEntries.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglsetlayerpaletteentries
 // Minimum OS: windows5.0.
 func WglSetLayerPaletteEntries(param0 graphicsgdi.HDC, param1 int32, param2 int32, param3 int32, param4 *foundation.COLORREF) (int32, error) {
@@ -2363,7 +2364,7 @@ func WglSetLayerPaletteEntries(param0 graphicsgdi.HDC, param1 int32, param2 int3
 	return int32(r1), nil
 }
 
-// wglShareLists calls OPENGL32!wglShareLists.
+// WglShareLists calls OPENGL32!wglShareLists.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglsharelists
 // Minimum OS: windows5.0.
 func WglShareLists(param0 HGLRC, param1 HGLRC) error {
@@ -2374,7 +2375,7 @@ func WglShareLists(param0 HGLRC, param1 HGLRC) error {
 	return nil
 }
 
-// wglSwapLayerBuffers calls OPENGL32!wglSwapLayerBuffers.
+// WglSwapLayerBuffers calls OPENGL32!wglSwapLayerBuffers.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglswaplayerbuffers
 // Minimum OS: windows5.0.
 func WglSwapLayerBuffers(param0 graphicsgdi.HDC, param1 uint32) error {
@@ -2385,22 +2386,22 @@ func WglSwapLayerBuffers(param0 graphicsgdi.HDC, param1 uint32) error {
 	return nil
 }
 
-// wglUseFontBitmapsA calls OPENGL32!wglUseFontBitmapsA.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglusefontbitmapsa
+// WglUseFontBitmaps calls OPENGL32!wglUseFontBitmapsW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglusefontbitmapsw
 // Minimum OS: windows5.0.
-func WglUseFontBitmapsA(param0 graphicsgdi.HDC, param1 uint32, param2 uint32, param3 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWglUseFontBitmapsA.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3))
+func WglUseFontBitmaps(param0 graphicsgdi.HDC, param1 uint32, param2 uint32, param3 uint32) error {
+	r1, _, e1 := syscall.SyscallN(procWglUseFontBitmaps.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// wglUseFontBitmapsW calls OPENGL32!wglUseFontBitmapsW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglusefontbitmapsw
+// WglUseFontBitmapsA calls OPENGL32!wglUseFontBitmapsA.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-wglusefontbitmapsa
 // Minimum OS: windows5.0.
-func WglUseFontBitmapsW(param0 graphicsgdi.HDC, param1 uint32, param2 uint32, param3 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWglUseFontBitmapsW.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3))
+func WglUseFontBitmapsA(param0 graphicsgdi.HDC, param1 uint32, param2 uint32, param3 uint32) error {
+	r1, _, e1 := syscall.SyscallN(procWglUseFontBitmapsA.Addr(), uintptr(param0), uintptr(param1), uintptr(param2), uintptr(param3))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

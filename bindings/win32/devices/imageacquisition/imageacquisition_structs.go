@@ -141,14 +141,14 @@ type VAL struct {
 	SzVal         [255]foundation.CHAR
 }
 
-// WIAS_CHANGED_VALUE_INFO_Current_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WIAS_CHANGED_VALUE_INFO_Current_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WIAS_CHANGED_VALUE_INFO_Current_e__Union struct {
 	Data [2]uint64
 }
 
-// WIAS_CHANGED_VALUE_INFO_Old_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WIAS_CHANGED_VALUE_INFO_Old_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WIAS_CHANGED_VALUE_INFO_Old_e__Union struct {
 	Data [2]uint64
 }
@@ -303,8 +303,8 @@ type WIA_PROPERTY_CONTEXT struct {
 	PChanged *foundation.BOOL
 }
 
-// WIA_PROPERTY_INFO_ValidVal_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WIA_PROPERTY_INFO_ValidVal_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WIA_PROPERTY_INFO_ValidVal_e__Union struct {
 	Data [4]uint64
 }

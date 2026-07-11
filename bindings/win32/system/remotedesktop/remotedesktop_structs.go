@@ -122,8 +122,8 @@ type VM_PATCH_INFO struct {
 }
 
 // WRDS_CONNECTION_SETTING: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wrds_connection_setting
-// WRDS_CONNECTION_SETTING is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WRDS_CONNECTION_SETTING is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WRDS_CONNECTION_SETTING struct {
 	Data [470]uint64
 }
@@ -217,8 +217,8 @@ type WRDS_DYNAMIC_TIME_ZONE_INFORMATION struct {
 }
 
 // WRDS_LISTENER_SETTING: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wrds_listener_setting
-// WRDS_LISTENER_SETTING is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WRDS_LISTENER_SETTING is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WRDS_LISTENER_SETTING struct {
 	Data [2]uint64
 }
@@ -237,8 +237,8 @@ type WRDS_LISTENER_SETTINGS_1 struct {
 }
 
 // WRDS_SETTING: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wrds_setting
-// WRDS_SETTING is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WRDS_SETTING is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WRDS_SETTING struct {
 	Data [31]uint32
 }
@@ -436,15 +436,15 @@ type WTSINFOEX_LEVEL1_W struct {
 }
 
 // WTSINFOEX_LEVEL_A: https://learn.microsoft.com/windows/win32/api/wtsapi32/ns-wtsapi32-wtsinfoex_level_a
-// WTSINFOEX_LEVEL_A is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WTSINFOEX_LEVEL_A is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WTSINFOEX_LEVEL_A struct {
 	Data [19]uint64
 }
 
 // WTSINFOEX_LEVEL_W: https://learn.microsoft.com/windows/win32/api/wtsapi32/ns-wtsapi32-wtsinfoex_level_w
-// WTSINFOEX_LEVEL_W is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WTSINFOEX_LEVEL_W is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WTSINFOEX_LEVEL_W struct {
 	Data [28]uint64
 }
@@ -637,8 +637,8 @@ type WTS_CACHE_STATS struct {
 }
 
 // WTS_CACHE_STATS_UN: https://learn.microsoft.com/windows/win32/api/wtsdefs/ns-wtsdefs-wts_cache_stats_un
-// WTS_CACHE_STATS_UN is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WTS_CACHE_STATS_UN is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WTS_CACHE_STATS_UN struct {
 	Data [20]uint32
 }
@@ -793,8 +793,8 @@ type WTS_PROCESS_INFO_EXW struct {
 	KernelTime         int64
 }
 
-// WTS_PROPERTY_VALUE_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WTS_PROPERTY_VALUE_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WTS_PROPERTY_VALUE_u_e__Union struct {
 	Data [2]uint64
 }
@@ -922,8 +922,8 @@ type WTS_SMALL_RECT struct {
 	Bottom int16
 }
 
-// WTS_SOCKADDR_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WTS_SOCKADDR_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WTS_SOCKADDR_u_e__Union struct {
 	Data [7]uint32
 }

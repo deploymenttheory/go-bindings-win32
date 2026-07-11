@@ -10,8 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-// WSMAN_AUTHENTICATION_CREDENTIALS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WSMAN_AUTHENTICATION_CREDENTIALS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WSMAN_AUTHENTICATION_CREDENTIALS_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -52,8 +52,8 @@ type WSMAN_CREATE_SHELL_DATA struct {
 	Data WSMAN_DATA
 }
 
-// WSMAN_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WSMAN_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WSMAN_DATA_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -182,8 +182,8 @@ type WSMAN_RECEIVE_DATA_RESULT struct {
 }
 
 // WSMAN_RESPONSE_DATA: https://learn.microsoft.com/windows/win32/api/wsman/ns-wsman-wsman_response_data
-// WSMAN_RESPONSE_DATA is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WSMAN_RESPONSE_DATA is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WSMAN_RESPONSE_DATA struct {
 	Data [6]uint64
 }

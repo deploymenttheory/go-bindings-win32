@@ -28,49 +28,61 @@ var (
 
 // WslConfigureDistribution calls Api-ms-win-wsl-api-l1-1-0!WslConfigureDistribution.
 // https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wslconfiguredistribution
-func WslConfigureDistribution(distributionName foundation.PWSTR, defaultUID uint32, wslDistributionFlags WSL_DISTRIBUTION_FLAGS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWslConfigureDistribution.Addr(), uintptr(unsafe.Pointer(distributionName)), uintptr(defaultUID), uintptr(wslDistributionFlags))
-	return foundation.HRESULT(r1)
+func WslConfigureDistribution(distributionName string, defaultUID uint32, wslDistributionFlags WSL_DISTRIBUTION_FLAGS) error {
+	_distributionName := win32.UTF16Ptr(distributionName)
+	r1, _, _ := syscall.SyscallN(procWslConfigureDistribution.Addr(), uintptr(unsafe.Pointer(_distributionName)), uintptr(defaultUID), uintptr(wslDistributionFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WslGetDistributionConfiguration calls Api-ms-win-wsl-api-l1-1-0!WslGetDistributionConfiguration.
 // https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wslgetdistributionconfiguration
-func WslGetDistributionConfiguration(distributionName foundation.PWSTR, distributionVersion *uint32, defaultUID *uint32, wslDistributionFlags *WSL_DISTRIBUTION_FLAGS, defaultEnvironmentVariables **foundation.PSTR, defaultEnvironmentVariableCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWslGetDistributionConfiguration.Addr(), uintptr(unsafe.Pointer(distributionName)), uintptr(unsafe.Pointer(distributionVersion)), uintptr(unsafe.Pointer(defaultUID)), uintptr(unsafe.Pointer(wslDistributionFlags)), uintptr(unsafe.Pointer(defaultEnvironmentVariables)), uintptr(unsafe.Pointer(defaultEnvironmentVariableCount)))
-	return foundation.HRESULT(r1)
+func WslGetDistributionConfiguration(distributionName string, distributionVersion *uint32, defaultUID *uint32, wslDistributionFlags *WSL_DISTRIBUTION_FLAGS, defaultEnvironmentVariables **foundation.PSTR, defaultEnvironmentVariableCount *uint32) error {
+	_distributionName := win32.UTF16Ptr(distributionName)
+	r1, _, _ := syscall.SyscallN(procWslGetDistributionConfiguration.Addr(), uintptr(unsafe.Pointer(_distributionName)), uintptr(unsafe.Pointer(distributionVersion)), uintptr(unsafe.Pointer(defaultUID)), uintptr(unsafe.Pointer(wslDistributionFlags)), uintptr(unsafe.Pointer(defaultEnvironmentVariables)), uintptr(unsafe.Pointer(defaultEnvironmentVariableCount)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WslIsDistributionRegistered calls Api-ms-win-wsl-api-l1-1-0!WslIsDistributionRegistered.
 // https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wslisdistributionregistered
-func WslIsDistributionRegistered(distributionName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWslIsDistributionRegistered.Addr(), uintptr(unsafe.Pointer(distributionName)))
-	return foundation.BOOL(r1)
+func WslIsDistributionRegistered(distributionName string) bool {
+	_distributionName := win32.UTF16Ptr(distributionName)
+	r1, _, _ := syscall.SyscallN(procWslIsDistributionRegistered.Addr(), uintptr(unsafe.Pointer(_distributionName)))
+	return r1 != 0
 }
 
 // WslLaunch calls Api-ms-win-wsl-api-l1-1-0!WslLaunch.
 // https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wsllaunch
-func WslLaunch(distributionName foundation.PWSTR, command foundation.PWSTR, useCurrentWorkingDirectory foundation.BOOL, stdIn foundation.HANDLE, stdOut foundation.HANDLE, stdErr foundation.HANDLE, process *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWslLaunch.Addr(), uintptr(unsafe.Pointer(distributionName)), uintptr(unsafe.Pointer(command)), uintptr(useCurrentWorkingDirectory), uintptr(stdIn), uintptr(stdOut), uintptr(stdErr), uintptr(unsafe.Pointer(process)))
-	return foundation.HRESULT(r1)
+func WslLaunch(distributionName string, command string, useCurrentWorkingDirectory bool, stdIn foundation.HANDLE, stdOut foundation.HANDLE, stdErr foundation.HANDLE, process *foundation.HANDLE) error {
+	_distributionName := win32.UTF16Ptr(distributionName)
+	_command := win32.UTF16Ptr(command)
+	_useCurrentWorkingDirectory := win32.Bool32(useCurrentWorkingDirectory)
+	r1, _, _ := syscall.SyscallN(procWslLaunch.Addr(), uintptr(unsafe.Pointer(_distributionName)), uintptr(unsafe.Pointer(_command)), uintptr(_useCurrentWorkingDirectory), uintptr(stdIn), uintptr(stdOut), uintptr(stdErr), uintptr(unsafe.Pointer(process)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WslLaunchInteractive calls Api-ms-win-wsl-api-l1-1-0!WslLaunchInteractive.
 // https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wsllaunchinteractive
-func WslLaunchInteractive(distributionName foundation.PWSTR, command foundation.PWSTR, useCurrentWorkingDirectory foundation.BOOL, exitCode *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWslLaunchInteractive.Addr(), uintptr(unsafe.Pointer(distributionName)), uintptr(unsafe.Pointer(command)), uintptr(useCurrentWorkingDirectory), uintptr(unsafe.Pointer(exitCode)))
-	return foundation.HRESULT(r1)
+func WslLaunchInteractive(distributionName string, command string, useCurrentWorkingDirectory bool, exitCode *uint32) error {
+	_distributionName := win32.UTF16Ptr(distributionName)
+	_command := win32.UTF16Ptr(command)
+	_useCurrentWorkingDirectory := win32.Bool32(useCurrentWorkingDirectory)
+	r1, _, _ := syscall.SyscallN(procWslLaunchInteractive.Addr(), uintptr(unsafe.Pointer(_distributionName)), uintptr(unsafe.Pointer(_command)), uintptr(_useCurrentWorkingDirectory), uintptr(unsafe.Pointer(exitCode)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WslRegisterDistribution calls Api-ms-win-wsl-api-l1-1-0!WslRegisterDistribution.
 // https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wslregisterdistribution
-func WslRegisterDistribution(distributionName foundation.PWSTR, tarGzFilename foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWslRegisterDistribution.Addr(), uintptr(unsafe.Pointer(distributionName)), uintptr(unsafe.Pointer(tarGzFilename)))
-	return foundation.HRESULT(r1)
+func WslRegisterDistribution(distributionName string, tarGzFilename string) error {
+	_distributionName := win32.UTF16Ptr(distributionName)
+	_tarGzFilename := win32.UTF16Ptr(tarGzFilename)
+	r1, _, _ := syscall.SyscallN(procWslRegisterDistribution.Addr(), uintptr(unsafe.Pointer(_distributionName)), uintptr(unsafe.Pointer(_tarGzFilename)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WslUnregisterDistribution calls Api-ms-win-wsl-api-l1-1-0!WslUnregisterDistribution.
 // https://learn.microsoft.com/windows/win32/api/wslapi/nf-wslapi-wslunregisterdistribution
-func WslUnregisterDistribution(distributionName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWslUnregisterDistribution.Addr(), uintptr(unsafe.Pointer(distributionName)))
-	return foundation.HRESULT(r1)
+func WslUnregisterDistribution(distributionName string) error {
+	_distributionName := win32.UTF16Ptr(distributionName)
+	r1, _, _ := syscall.SyscallN(procWslUnregisterDistribution.Addr(), uintptr(unsafe.Pointer(_distributionName)))
+	return win32.HRESULTError(int32(r1))
 }

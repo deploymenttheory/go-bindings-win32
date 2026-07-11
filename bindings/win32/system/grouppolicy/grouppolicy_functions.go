@@ -36,13 +36,13 @@ var (
 	procExportRSoPData                  = modGPEDIT.NewProc("ExportRSoPData")
 	procImportRSoPData                  = modGPEDIT.NewProc("ImportRSoPData")
 	procEnterCriticalPolicySection      = modUSERENV.NewProc("EnterCriticalPolicySection")
+	procFreeGPOList                     = modUSERENV.NewProc("FreeGPOListW")
 	procFreeGPOListA                    = modUSERENV.NewProc("FreeGPOListA")
-	procFreeGPOListW                    = modUSERENV.NewProc("FreeGPOListW")
 	procGenerateGPNotification          = modUSERENV.NewProc("GenerateGPNotification")
+	procGetAppliedGPOList               = modUSERENV.NewProc("GetAppliedGPOListW")
 	procGetAppliedGPOListA              = modUSERENV.NewProc("GetAppliedGPOListA")
-	procGetAppliedGPOListW              = modUSERENV.NewProc("GetAppliedGPOListW")
+	procGetGPOList                      = modUSERENV.NewProc("GetGPOListW")
 	procGetGPOListA                     = modUSERENV.NewProc("GetGPOListA")
-	procGetGPOListW                     = modUSERENV.NewProc("GetGPOListW")
 	procLeaveCriticalPolicySection      = modUSERENV.NewProc("LeaveCriticalPolicySection")
 	procProcessGroupPolicyCompleted     = modUSERENV.NewProc("ProcessGroupPolicyCompleted")
 	procProcessGroupPolicyCompletedEx   = modUSERENV.NewProc("ProcessGroupPolicyCompletedEx")
@@ -59,46 +59,54 @@ var (
 // BrowseForGPO calls GPEDIT!BrowseForGPO.
 // https://learn.microsoft.com/windows/win32/api/gpedit/nf-gpedit-browseforgpo
 // Minimum OS: windows6.0.6000.
-func BrowseForGPO(lpBrowseInfo *GPOBROWSEINFO) foundation.HRESULT {
+func BrowseForGPO(lpBrowseInfo *GPOBROWSEINFO) error {
 	r1, _, _ := syscall.SyscallN(procBrowseForGPO.Addr(), uintptr(unsafe.Pointer(lpBrowseInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CommandLineFromMsiDescriptor calls ADVAPI32!CommandLineFromMsiDescriptor.
-func CommandLineFromMsiDescriptor(Descriptor foundation.PWSTR, CommandLine foundation.PWSTR, CommandLineLength *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procCommandLineFromMsiDescriptor.Addr(), uintptr(unsafe.Pointer(Descriptor)), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(CommandLineLength)))
+func CommandLineFromMsiDescriptor(Descriptor string, CommandLine foundation.PWSTR, CommandLineLength *uint32) uint32 {
+	_Descriptor := win32.UTF16Ptr(Descriptor)
+	r1, _, _ := syscall.SyscallN(procCommandLineFromMsiDescriptor.Addr(), uintptr(unsafe.Pointer(_Descriptor)), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(CommandLineLength)))
 	return uint32(r1)
 }
 
 // CreateGPOLink calls GPEDIT!CreateGPOLink.
 // https://learn.microsoft.com/windows/win32/api/gpedit/nf-gpedit-creategpolink
 // Minimum OS: windows6.0.6000.
-func CreateGPOLink(lpGPO foundation.PWSTR, lpContainer foundation.PWSTR, fHighPriority foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateGPOLink.Addr(), uintptr(unsafe.Pointer(lpGPO)), uintptr(unsafe.Pointer(lpContainer)), uintptr(fHighPriority))
-	return foundation.HRESULT(r1)
+func CreateGPOLink(lpGPO string, lpContainer string, fHighPriority bool) error {
+	_lpGPO := win32.UTF16Ptr(lpGPO)
+	_lpContainer := win32.UTF16Ptr(lpContainer)
+	_fHighPriority := win32.Bool32(fHighPriority)
+	r1, _, _ := syscall.SyscallN(procCreateGPOLink.Addr(), uintptr(unsafe.Pointer(_lpGPO)), uintptr(unsafe.Pointer(_lpContainer)), uintptr(_fHighPriority))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteAllGPOLinks calls GPEDIT!DeleteAllGPOLinks.
 // https://learn.microsoft.com/windows/win32/api/gpedit/nf-gpedit-deleteallgpolinks
 // Minimum OS: windows6.0.6000.
-func DeleteAllGPOLinks(lpContainer foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDeleteAllGPOLinks.Addr(), uintptr(unsafe.Pointer(lpContainer)))
-	return foundation.HRESULT(r1)
+func DeleteAllGPOLinks(lpContainer string) error {
+	_lpContainer := win32.UTF16Ptr(lpContainer)
+	r1, _, _ := syscall.SyscallN(procDeleteAllGPOLinks.Addr(), uintptr(unsafe.Pointer(_lpContainer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteGPOLink calls GPEDIT!DeleteGPOLink.
 // https://learn.microsoft.com/windows/win32/api/gpedit/nf-gpedit-deletegpolink
 // Minimum OS: windows6.0.6000.
-func DeleteGPOLink(lpGPO foundation.PWSTR, lpContainer foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDeleteGPOLink.Addr(), uintptr(unsafe.Pointer(lpGPO)), uintptr(unsafe.Pointer(lpContainer)))
-	return foundation.HRESULT(r1)
+func DeleteGPOLink(lpGPO string, lpContainer string) error {
+	_lpGPO := win32.UTF16Ptr(lpGPO)
+	_lpContainer := win32.UTF16Ptr(lpContainer)
+	r1, _, _ := syscall.SyscallN(procDeleteGPOLink.Addr(), uintptr(unsafe.Pointer(_lpGPO)), uintptr(unsafe.Pointer(_lpContainer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnterCriticalPolicySection calls USERENV!EnterCriticalPolicySection.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-entercriticalpolicysection
 // Minimum OS: windows6.0.6000.
-func EnterCriticalPolicySection(bMachine foundation.BOOL) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procEnterCriticalPolicySection.Addr(), uintptr(bMachine))
+func EnterCriticalPolicySection(bMachine bool) (foundation.HANDLE, error) {
+	_bMachine := win32.Bool32(bMachine)
+	r1, _, e1 := syscall.SyscallN(procEnterCriticalPolicySection.Addr(), uintptr(_bMachine))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -109,9 +117,22 @@ func EnterCriticalPolicySection(bMachine foundation.BOOL) (foundation.HANDLE, er
 // ExportRSoPData calls GPEDIT!ExportRSoPData.
 // https://learn.microsoft.com/windows/win32/api/gpedit/nf-gpedit-exportrsopdata
 // Minimum OS: windows6.0.6000.
-func ExportRSoPData(lpNameSpace foundation.PWSTR, lpFileName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procExportRSoPData.Addr(), uintptr(unsafe.Pointer(lpNameSpace)), uintptr(unsafe.Pointer(lpFileName)))
-	return foundation.HRESULT(r1)
+func ExportRSoPData(lpNameSpace string, lpFileName string) error {
+	_lpNameSpace := win32.UTF16Ptr(lpNameSpace)
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procExportRSoPData.Addr(), uintptr(unsafe.Pointer(_lpNameSpace)), uintptr(unsafe.Pointer(_lpFileName)))
+	return win32.HRESULTError(int32(r1))
+}
+
+// FreeGPOList calls USERENV!FreeGPOListW.
+// https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-freegpolistw
+// Minimum OS: windows6.0.6000.
+func FreeGPOList(pGPOList *GROUP_POLICY_OBJECTW) error {
+	r1, _, e1 := syscall.SyscallN(procFreeGPOList.Addr(), uintptr(unsafe.Pointer(pGPOList)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // FreeGPOListA calls USERENV!FreeGPOListA.
@@ -125,20 +146,20 @@ func FreeGPOListA(pGPOList *GROUP_POLICY_OBJECTA) error {
 	return nil
 }
 
-// FreeGPOListW calls USERENV!FreeGPOListW.
-// https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-freegpolistw
-// Minimum OS: windows6.0.6000.
-func FreeGPOListW(pGPOList *GROUP_POLICY_OBJECTW) error {
-	r1, _, e1 := syscall.SyscallN(procFreeGPOListW.Addr(), uintptr(unsafe.Pointer(pGPOList)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+// GenerateGPNotification calls USERENV!GenerateGPNotification.
+func GenerateGPNotification(bMachine bool, lpwszMgmtProduct string, dwMgmtProductOptions uint32) uint32 {
+	_bMachine := win32.Bool32(bMachine)
+	_lpwszMgmtProduct := win32.UTF16Ptr(lpwszMgmtProduct)
+	r1, _, _ := syscall.SyscallN(procGenerateGPNotification.Addr(), uintptr(_bMachine), uintptr(unsafe.Pointer(_lpwszMgmtProduct)), uintptr(dwMgmtProductOptions))
+	return uint32(r1)
 }
 
-// GenerateGPNotification calls USERENV!GenerateGPNotification.
-func GenerateGPNotification(bMachine foundation.BOOL, lpwszMgmtProduct foundation.PWSTR, dwMgmtProductOptions uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGenerateGPNotification.Addr(), uintptr(bMachine), uintptr(unsafe.Pointer(lpwszMgmtProduct)), uintptr(dwMgmtProductOptions))
+// GetAppliedGPOList calls USERENV!GetAppliedGPOListW.
+// https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-getappliedgpolistw
+// Minimum OS: windows6.0.6000.
+func GetAppliedGPOList(dwFlags uint32, pMachineName string, pSidUser security.PSID, pGuidExtension *win32.GUID, ppGPOList **GROUP_POLICY_OBJECTW) uint32 {
+	_pMachineName := win32.UTF16Ptr(pMachineName)
+	r1, _, _ := syscall.SyscallN(procGetAppliedGPOList.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pMachineName)), uintptr(pSidUser), uintptr(unsafe.Pointer(pGuidExtension)), uintptr(unsafe.Pointer(ppGPOList)))
 	return uint32(r1)
 }
 
@@ -150,12 +171,18 @@ func GetAppliedGPOListA(dwFlags uint32, pMachineName foundation.PSTR, pSidUser s
 	return uint32(r1)
 }
 
-// GetAppliedGPOListW calls USERENV!GetAppliedGPOListW.
-// https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-getappliedgpolistw
+// GetGPOList calls USERENV!GetGPOListW.
+// https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-getgpolistw
 // Minimum OS: windows6.0.6000.
-func GetAppliedGPOListW(dwFlags uint32, pMachineName foundation.PWSTR, pSidUser security.PSID, pGuidExtension *win32.GUID, ppGPOList **GROUP_POLICY_OBJECTW) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetAppliedGPOListW.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pMachineName)), uintptr(pSidUser), uintptr(unsafe.Pointer(pGuidExtension)), uintptr(unsafe.Pointer(ppGPOList)))
-	return uint32(r1)
+func GetGPOList(hToken foundation.HANDLE, lpName string, lpHostName string, lpComputerName string, dwFlags uint32, pGPOList **GROUP_POLICY_OBJECTW) error {
+	_lpName := win32.UTF16Ptr(lpName)
+	_lpHostName := win32.UTF16Ptr(lpHostName)
+	_lpComputerName := win32.UTF16Ptr(lpComputerName)
+	r1, _, e1 := syscall.SyscallN(procGetGPOList.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpHostName)), uintptr(unsafe.Pointer(_lpComputerName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pGPOList)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // GetGPOListA calls USERENV!GetGPOListA.
@@ -169,35 +196,26 @@ func GetGPOListA(hToken foundation.HANDLE, lpName foundation.PSTR, lpHostName fo
 	return nil
 }
 
-// GetGPOListW calls USERENV!GetGPOListW.
-// https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-getgpolistw
-// Minimum OS: windows6.0.6000.
-func GetGPOListW(hToken foundation.HANDLE, lpName foundation.PWSTR, lpHostName foundation.PWSTR, lpComputerName foundation.PWSTR, dwFlags uint32, pGPOList **GROUP_POLICY_OBJECTW) error {
-	r1, _, e1 := syscall.SyscallN(procGetGPOListW.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpHostName)), uintptr(unsafe.Pointer(lpComputerName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pGPOList)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // GetLocalManagedApplicationData calls ADVAPI32!GetLocalManagedApplicationData.
-func GetLocalManagedApplicationData(ProductCode foundation.PWSTR, DisplayName *foundation.PWSTR, SupportUrl *foundation.PWSTR) {
-	syscall.SyscallN(procGetLocalManagedApplicationData.Addr(), uintptr(unsafe.Pointer(ProductCode)), uintptr(unsafe.Pointer(DisplayName)), uintptr(unsafe.Pointer(SupportUrl)))
+func GetLocalManagedApplicationData(ProductCode string, DisplayName *foundation.PWSTR, SupportUrl *foundation.PWSTR) {
+	_ProductCode := win32.UTF16Ptr(ProductCode)
+	syscall.SyscallN(procGetLocalManagedApplicationData.Addr(), uintptr(unsafe.Pointer(_ProductCode)), uintptr(unsafe.Pointer(DisplayName)), uintptr(unsafe.Pointer(SupportUrl)))
 }
 
 // GetLocalManagedApplications calls ADVAPI32!GetLocalManagedApplications.
 // https://learn.microsoft.com/windows/win32/api/appmgmt/nf-appmgmt-getlocalmanagedapplications
 // Minimum OS: windows6.0.6000.
-func GetLocalManagedApplications(bUserApps foundation.BOOL, pdwApps *uint32, prgLocalApps **LOCALMANAGEDAPPLICATION) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetLocalManagedApplications.Addr(), uintptr(bUserApps), uintptr(unsafe.Pointer(pdwApps)), uintptr(unsafe.Pointer(prgLocalApps)))
+func GetLocalManagedApplications(bUserApps bool, pdwApps *uint32, prgLocalApps **LOCALMANAGEDAPPLICATION) uint32 {
+	_bUserApps := win32.Bool32(bUserApps)
+	r1, _, _ := syscall.SyscallN(procGetLocalManagedApplications.Addr(), uintptr(_bUserApps), uintptr(unsafe.Pointer(pdwApps)), uintptr(unsafe.Pointer(prgLocalApps)))
 	return uint32(r1)
 }
 
 // GetManagedApplicationCategories calls ADVAPI32!GetManagedApplicationCategories.
 // https://learn.microsoft.com/windows/win32/api/appmgmt/nf-appmgmt-getmanagedapplicationcategories
 // Minimum OS: windows6.0.6000.
-func GetManagedApplicationCategories(dwReserved uint32, pAppCategory *uishell.APPCATEGORYINFOLIST) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetManagedApplicationCategories.Addr(), uintptr(dwReserved), uintptr(unsafe.Pointer(pAppCategory)))
+func GetManagedApplicationCategories(pAppCategory *uishell.APPCATEGORYINFOLIST) uint32 {
+	r1, _, _ := syscall.SyscallN(procGetManagedApplicationCategories.Addr(), 0, uintptr(unsafe.Pointer(pAppCategory)))
 	return uint32(r1)
 }
 
@@ -212,9 +230,11 @@ func GetManagedApplications(pCategory *win32.GUID, dwQueryFlags uint32, dwInfoLe
 // ImportRSoPData calls GPEDIT!ImportRSoPData.
 // https://learn.microsoft.com/windows/win32/api/gpedit/nf-gpedit-importrsopdata
 // Minimum OS: windows6.0.6000.
-func ImportRSoPData(lpNameSpace foundation.PWSTR, lpFileName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procImportRSoPData.Addr(), uintptr(unsafe.Pointer(lpNameSpace)), uintptr(unsafe.Pointer(lpFileName)))
-	return foundation.HRESULT(r1)
+func ImportRSoPData(lpNameSpace string, lpFileName string) error {
+	_lpNameSpace := win32.UTF16Ptr(lpNameSpace)
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procImportRSoPData.Addr(), uintptr(unsafe.Pointer(_lpNameSpace)), uintptr(unsafe.Pointer(_lpFileName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InstallApplication calls ADVAPI32!InstallApplication.
@@ -255,8 +275,9 @@ func ProcessGroupPolicyCompletedEx(extensionId *win32.GUID, pAsyncHandle uintptr
 // RefreshPolicy calls USERENV!RefreshPolicy.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-refreshpolicy
 // Minimum OS: windows6.0.6000.
-func RefreshPolicy(bMachine foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procRefreshPolicy.Addr(), uintptr(bMachine))
+func RefreshPolicy(bMachine bool) error {
+	_bMachine := win32.Bool32(bMachine)
+	r1, _, e1 := syscall.SyscallN(procRefreshPolicy.Addr(), uintptr(_bMachine))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -266,8 +287,9 @@ func RefreshPolicy(bMachine foundation.BOOL) error {
 // RefreshPolicyEx calls USERENV!RefreshPolicyEx.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-refreshpolicyex
 // Minimum OS: windows6.0.6000.
-func RefreshPolicyEx(bMachine foundation.BOOL, dwOptions uint32) error {
-	r1, _, e1 := syscall.SyscallN(procRefreshPolicyEx.Addr(), uintptr(bMachine), uintptr(dwOptions))
+func RefreshPolicyEx(bMachine bool, dwOptions uint32) error {
+	_bMachine := win32.Bool32(bMachine)
+	r1, _, e1 := syscall.SyscallN(procRefreshPolicyEx.Addr(), uintptr(_bMachine), uintptr(dwOptions))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -277,8 +299,9 @@ func RefreshPolicyEx(bMachine foundation.BOOL, dwOptions uint32) error {
 // RegisterGPNotification calls USERENV!RegisterGPNotification.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-registergpnotification
 // Minimum OS: windows6.0.6000.
-func RegisterGPNotification(hEvent foundation.HANDLE, bMachine foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procRegisterGPNotification.Addr(), uintptr(hEvent), uintptr(bMachine))
+func RegisterGPNotification(hEvent foundation.HANDLE, bMachine bool) error {
+	_bMachine := win32.Bool32(bMachine)
+	r1, _, e1 := syscall.SyscallN(procRegisterGPNotification.Addr(), uintptr(hEvent), uintptr(_bMachine))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -288,43 +311,50 @@ func RegisterGPNotification(hEvent foundation.HANDLE, bMachine foundation.BOOL) 
 // RsopAccessCheckByType calls USERENV!RsopAccessCheckByType.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-rsopaccesscheckbytype
 // Minimum OS: windows6.0.6000.
-func RsopAccessCheckByType(pSecurityDescriptor security.PSECURITY_DESCRIPTOR, pPrincipalSelfSid security.PSID, pRsopToken unsafe.Pointer, dwDesiredAccessMask uint32, pObjectTypeList *security.OBJECT_TYPE_LIST, ObjectTypeListLength uint32, pGenericMapping *security.GENERIC_MAPPING, pPrivilegeSet *security.PRIVILEGE_SET, pdwPrivilegeSetLength *uint32, pdwGrantedAccessMask *uint32, pbAccessStatus *foundation.BOOL) (foundation.HRESULT, error) {
-	r1, _, e1 := syscall.SyscallN(procRsopAccessCheckByType.Addr(), uintptr(pSecurityDescriptor), uintptr(pPrincipalSelfSid), uintptr(unsafe.Pointer(pRsopToken)), uintptr(dwDesiredAccessMask), uintptr(unsafe.Pointer(pObjectTypeList)), uintptr(ObjectTypeListLength), uintptr(unsafe.Pointer(pGenericMapping)), uintptr(unsafe.Pointer(pPrivilegeSet)), uintptr(unsafe.Pointer(pdwPrivilegeSetLength)), uintptr(unsafe.Pointer(pdwGrantedAccessMask)), uintptr(unsafe.Pointer(pbAccessStatus)))
-	if e1 != 0 {
-		return foundation.HRESULT(r1), e1
+func RsopAccessCheckByType(pSecurityDescriptor security.PSECURITY_DESCRIPTOR, pPrincipalSelfSid security.PSID, pRsopToken unsafe.Pointer, dwDesiredAccessMask uint32, pObjectTypeList []security.OBJECT_TYPE_LIST, pGenericMapping *security.GENERIC_MAPPING, pPrivilegeSet *security.PRIVILEGE_SET, pdwPrivilegeSetLength *uint32, pdwGrantedAccessMask *uint32, pbAccessStatus *foundation.BOOL) error {
+	var _pObjectTypeList *security.OBJECT_TYPE_LIST
+	if len(pObjectTypeList) > 0 {
+		_pObjectTypeList = &pObjectTypeList[0]
 	}
-	return foundation.HRESULT(r1), nil
+	r1, _, _ := syscall.SyscallN(procRsopAccessCheckByType.Addr(), uintptr(pSecurityDescriptor), uintptr(pPrincipalSelfSid), uintptr(unsafe.Pointer(pRsopToken)), uintptr(dwDesiredAccessMask), uintptr(unsafe.Pointer(_pObjectTypeList)), uintptr(len(pObjectTypeList)), uintptr(unsafe.Pointer(pGenericMapping)), uintptr(unsafe.Pointer(pPrivilegeSet)), uintptr(unsafe.Pointer(pdwPrivilegeSetLength)), uintptr(unsafe.Pointer(pdwGrantedAccessMask)), uintptr(unsafe.Pointer(pbAccessStatus)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RsopFileAccessCheck calls USERENV!RsopFileAccessCheck.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-rsopfileaccesscheck
 // Minimum OS: windows6.0.6000.
-func RsopFileAccessCheck(pszFileName foundation.PWSTR, pRsopToken unsafe.Pointer, dwDesiredAccessMask uint32, pdwGrantedAccessMask *uint32, pbAccessStatus *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRsopFileAccessCheck.Addr(), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pRsopToken)), uintptr(dwDesiredAccessMask), uintptr(unsafe.Pointer(pdwGrantedAccessMask)), uintptr(unsafe.Pointer(pbAccessStatus)))
-	return foundation.HRESULT(r1)
+func RsopFileAccessCheck(pszFileName string, pRsopToken unsafe.Pointer, dwDesiredAccessMask uint32, pdwGrantedAccessMask *uint32, pbAccessStatus *foundation.BOOL) error {
+	_pszFileName := win32.UTF16Ptr(pszFileName)
+	r1, _, _ := syscall.SyscallN(procRsopFileAccessCheck.Addr(), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(pRsopToken)), uintptr(dwDesiredAccessMask), uintptr(unsafe.Pointer(pdwGrantedAccessMask)), uintptr(unsafe.Pointer(pbAccessStatus)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RsopResetPolicySettingStatus calls USERENV!RsopResetPolicySettingStatus.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-rsopresetpolicysettingstatus
 // Minimum OS: windows6.0.6000.
-func RsopResetPolicySettingStatus(dwFlags uint32, pServices *systemwmi.IWbemServices, pSettingInstance *systemwmi.IWbemClassObject) foundation.HRESULT {
+func RsopResetPolicySettingStatus(dwFlags uint32, pServices *systemwmi.IWbemServices, pSettingInstance *systemwmi.IWbemClassObject) error {
 	r1, _, _ := syscall.SyscallN(procRsopResetPolicySettingStatus.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pServices)), uintptr(unsafe.Pointer(pSettingInstance)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RsopSetPolicySettingStatus calls USERENV!RsopSetPolicySettingStatus.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-rsopsetpolicysettingstatus
 // Minimum OS: windows6.0.6000.
-func RsopSetPolicySettingStatus(dwFlags uint32, pServices *systemwmi.IWbemServices, pSettingInstance *systemwmi.IWbemClassObject, nInfo uint32, pStatus *POLICYSETTINGSTATUSINFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRsopSetPolicySettingStatus.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pServices)), uintptr(unsafe.Pointer(pSettingInstance)), uintptr(nInfo), uintptr(unsafe.Pointer(pStatus)))
-	return foundation.HRESULT(r1)
+func RsopSetPolicySettingStatus(dwFlags uint32, pServices *systemwmi.IWbemServices, pSettingInstance *systemwmi.IWbemClassObject, pStatus []POLICYSETTINGSTATUSINFO) error {
+	var _pStatus *POLICYSETTINGSTATUSINFO
+	if len(pStatus) > 0 {
+		_pStatus = &pStatus[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRsopSetPolicySettingStatus.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pServices)), uintptr(unsafe.Pointer(pSettingInstance)), uintptr(len(pStatus)), uintptr(unsafe.Pointer(_pStatus)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UninstallApplication calls ADVAPI32!UninstallApplication.
 // https://learn.microsoft.com/windows/win32/api/appmgmt/nf-appmgmt-uninstallapplication
 // Minimum OS: windows6.0.6000.
-func UninstallApplication(ProductCode foundation.PWSTR, dwStatus uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procUninstallApplication.Addr(), uintptr(unsafe.Pointer(ProductCode)), uintptr(dwStatus))
+func UninstallApplication(ProductCode string, dwStatus uint32) uint32 {
+	_ProductCode := win32.UTF16Ptr(ProductCode)
+	r1, _, _ := syscall.SyscallN(procUninstallApplication.Addr(), uintptr(unsafe.Pointer(_ProductCode)), uintptr(dwStatus))
 	return uint32(r1)
 }
 

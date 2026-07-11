@@ -634,8 +634,8 @@ type PPTP_CONFIG_PARAMS struct {
 	DwPortFlags uint32
 }
 
-// PROJECTION_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROJECTION_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROJECTION_INFO_Anonymous_e__Union struct {
 	Data [24]uint64
 }
@@ -646,8 +646,8 @@ type PROJECTION_INFO struct {
 	Anonymous          PROJECTION_INFO_Anonymous_e__Union
 }
 
-// PROJECTION_INFO2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROJECTION_INFO2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROJECTION_INFO2_Anonymous_e__Union struct {
 	Data [25]uint64
 }
@@ -1080,8 +1080,8 @@ type RASSUBENTRYW struct {
 	DwAlternateOffset  uint32
 }
 
-// RASTUNNELENDPOINT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RASTUNNELENDPOINT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RASTUNNELENDPOINT_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -1284,8 +1284,8 @@ type RAS_PORT_2 struct {
 	UllBytesRcvCompressed   uint64
 }
 
-// RAS_PROJECTION_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RAS_PROJECTION_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RAS_PROJECTION_INFO_Anonymous_e__Union struct {
 	Data [25]uint32
 }
@@ -1419,8 +1419,8 @@ type RTM_ENTITY_EXPORT_METHODS struct {
 	Methods    [1]RTM_ENTITY_EXPORT_METHOD
 }
 
-// RTM_ENTITY_ID_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RTM_ENTITY_ID_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RTM_ENTITY_ID_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1536,8 +1536,8 @@ type SSTP_CONFIG_PARAMS struct {
 	SstpCertDetails SSTP_CERT_INFO
 }
 
-// VPN_TS_IP_ADDRESS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VPN_TS_IP_ADDRESS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VPN_TS_IP_ADDRESS_Anonymous_e__Union struct {
 	Data [4]uint32
 }

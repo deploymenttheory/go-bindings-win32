@@ -26,9 +26,10 @@ type IEffectivePermission struct {
 var IID_IEffectivePermission = win32.GUID{Data1: 0x3853dc76, Data2: 0x9f35, Data3: 0x407c, Data4: [8]byte{0x88, 0xa1, 0xd1, 0x93, 0x44, 0x36, 0x5f, 0xbc}}
 
 // GetEffectivePermission dispatches through IEffectivePermission's vtable slot 3.
-func (self *IEffectivePermission) GetEffectivePermission(pguidObjectType *win32.GUID, pUserSid security.PSID, pszServerName foundation.PWSTR, pSD security.PSECURITY_DESCRIPTOR, ppObjectTypeList **security.OBJECT_TYPE_LIST, pcObjectTypeListLength *uint32, ppGrantedAccessList **uint32, pcGrantedAccessListLength *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidObjectType)), uintptr(pUserSid), uintptr(unsafe.Pointer(pszServerName)), uintptr(pSD), uintptr(unsafe.Pointer(ppObjectTypeList)), uintptr(unsafe.Pointer(pcObjectTypeListLength)), uintptr(unsafe.Pointer(ppGrantedAccessList)), uintptr(unsafe.Pointer(pcGrantedAccessListLength)))
-	return foundation.HRESULT(r1)
+func (self *IEffectivePermission) GetEffectivePermission(pguidObjectType *win32.GUID, pUserSid security.PSID, pszServerName string, pSD security.PSECURITY_DESCRIPTOR, ppObjectTypeList **security.OBJECT_TYPE_LIST, pcObjectTypeListLength *uint32, ppGrantedAccessList **uint32, pcGrantedAccessListLength *uint32) error {
+	_pszServerName := win32.UTF16Ptr(pszServerName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidObjectType)), uintptr(pUserSid), uintptr(unsafe.Pointer(_pszServerName)), uintptr(pSD), uintptr(unsafe.Pointer(ppObjectTypeList)), uintptr(unsafe.Pointer(pcObjectTypeListLength)), uintptr(unsafe.Pointer(ppGrantedAccessList)), uintptr(unsafe.Pointer(pcGrantedAccessListLength)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEffectivePermission2: https://learn.microsoft.com/windows/win32/api/aclui/nn-aclui-ieffectivepermission2
@@ -41,9 +42,10 @@ type IEffectivePermission2 struct {
 var IID_IEffectivePermission2 = win32.GUID{Data1: 0x941fabca, Data2: 0xdd47, Data3: 0x4fca, Data4: [8]byte{0x90, 0xbb, 0xb0, 0xe1, 0x02, 0x55, 0xf2, 0x0d}}
 
 // ComputeEffectivePermissionWithSecondarySecurity dispatches through IEffectivePermission2's vtable slot 3.
-func (self *IEffectivePermission2) ComputeEffectivePermissionWithSecondarySecurity(pSid security.PSID, pDeviceSid security.PSID, pszServerName foundation.PWSTR, pSecurityObjects *SECURITY_OBJECT, dwSecurityObjectCount uint32, pUserGroups *security.TOKEN_GROUPS, pAuthzUserGroupsOperations *securityauthorization.AUTHZ_SID_OPERATION, pDeviceGroups *security.TOKEN_GROUPS, pAuthzDeviceGroupsOperations *securityauthorization.AUTHZ_SID_OPERATION, pAuthzUserClaims *securityauthorization.AUTHZ_SECURITY_ATTRIBUTES_INFORMATION, pAuthzUserClaimsOperations *securityauthorization.AUTHZ_SECURITY_ATTRIBUTE_OPERATION, pAuthzDeviceClaims *securityauthorization.AUTHZ_SECURITY_ATTRIBUTES_INFORMATION, pAuthzDeviceClaimsOperations *securityauthorization.AUTHZ_SECURITY_ATTRIBUTE_OPERATION, pEffpermResultLists *EFFPERM_RESULT_LIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(pSid), uintptr(pDeviceSid), uintptr(unsafe.Pointer(pszServerName)), uintptr(unsafe.Pointer(pSecurityObjects)), uintptr(dwSecurityObjectCount), uintptr(unsafe.Pointer(pUserGroups)), uintptr(unsafe.Pointer(pAuthzUserGroupsOperations)), uintptr(unsafe.Pointer(pDeviceGroups)), uintptr(unsafe.Pointer(pAuthzDeviceGroupsOperations)), uintptr(unsafe.Pointer(pAuthzUserClaims)), uintptr(unsafe.Pointer(pAuthzUserClaimsOperations)), uintptr(unsafe.Pointer(pAuthzDeviceClaims)), uintptr(unsafe.Pointer(pAuthzDeviceClaimsOperations)), uintptr(unsafe.Pointer(pEffpermResultLists)))
-	return foundation.HRESULT(r1)
+func (self *IEffectivePermission2) ComputeEffectivePermissionWithSecondarySecurity(pSid security.PSID, pDeviceSid security.PSID, pszServerName string, pSecurityObjects *SECURITY_OBJECT, dwSecurityObjectCount uint32, pUserGroups *security.TOKEN_GROUPS, pAuthzUserGroupsOperations *securityauthorization.AUTHZ_SID_OPERATION, pDeviceGroups *security.TOKEN_GROUPS, pAuthzDeviceGroupsOperations *securityauthorization.AUTHZ_SID_OPERATION, pAuthzUserClaims *securityauthorization.AUTHZ_SECURITY_ATTRIBUTES_INFORMATION, pAuthzUserClaimsOperations *securityauthorization.AUTHZ_SECURITY_ATTRIBUTE_OPERATION, pAuthzDeviceClaims *securityauthorization.AUTHZ_SECURITY_ATTRIBUTES_INFORMATION, pAuthzDeviceClaimsOperations *securityauthorization.AUTHZ_SECURITY_ATTRIBUTE_OPERATION, pEffpermResultLists *EFFPERM_RESULT_LIST) error {
+	_pszServerName := win32.UTF16Ptr(pszServerName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(pSid), uintptr(pDeviceSid), uintptr(unsafe.Pointer(_pszServerName)), uintptr(unsafe.Pointer(pSecurityObjects)), uintptr(dwSecurityObjectCount), uintptr(unsafe.Pointer(pUserGroups)), uintptr(unsafe.Pointer(pAuthzUserGroupsOperations)), uintptr(unsafe.Pointer(pDeviceGroups)), uintptr(unsafe.Pointer(pAuthzDeviceGroupsOperations)), uintptr(unsafe.Pointer(pAuthzUserClaims)), uintptr(unsafe.Pointer(pAuthzUserClaimsOperations)), uintptr(unsafe.Pointer(pAuthzDeviceClaims)), uintptr(unsafe.Pointer(pAuthzDeviceClaimsOperations)), uintptr(unsafe.Pointer(pEffpermResultLists)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISecurityInformation: https://learn.microsoft.com/windows/win32/api/aclui/nn-aclui-isecurityinformation
@@ -56,45 +58,46 @@ type ISecurityInformation struct {
 var IID_ISecurityInformation = win32.GUID{Data1: 0x965fc360, Data2: 0x16ff, Data3: 0x11d0, Data4: [8]byte{0x91, 0xcb, 0x00, 0xaa, 0x00, 0xbb, 0xb7, 0x23}}
 
 // GetObjectInformation dispatches through ISecurityInformation's vtable slot 3.
-func (self *ISecurityInformation) GetObjectInformation(pObjectInfo *SI_OBJECT_INFO) foundation.HRESULT {
+func (self *ISecurityInformation) GetObjectInformation(pObjectInfo *SI_OBJECT_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSecurity dispatches through ISecurityInformation's vtable slot 4.
-func (self *ISecurityInformation) GetSecurity(RequestedInformation security.OBJECT_SECURITY_INFORMATION, ppSecurityDescriptor *security.PSECURITY_DESCRIPTOR, fDefault foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(RequestedInformation), uintptr(unsafe.Pointer(ppSecurityDescriptor)), uintptr(fDefault))
-	return foundation.HRESULT(r1)
+func (self *ISecurityInformation) GetSecurity(RequestedInformation security.OBJECT_SECURITY_INFORMATION, ppSecurityDescriptor *security.PSECURITY_DESCRIPTOR, fDefault bool) error {
+	_fDefault := win32.Bool32(fDefault)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(RequestedInformation), uintptr(unsafe.Pointer(ppSecurityDescriptor)), uintptr(_fDefault))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSecurity dispatches through ISecurityInformation's vtable slot 5.
-func (self *ISecurityInformation) SetSecurity(SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR) foundation.HRESULT {
+func (self *ISecurityInformation) SetSecurity(SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAccessRights dispatches through ISecurityInformation's vtable slot 6.
-func (self *ISecurityInformation) GetAccessRights(pguidObjectType *win32.GUID, dwFlags SECURITY_INFO_PAGE_FLAGS, ppAccess **SI_ACCESS, pcAccesses *uint32, piDefaultAccess *uint32) foundation.HRESULT {
+func (self *ISecurityInformation) GetAccessRights(pguidObjectType *win32.GUID, dwFlags SECURITY_INFO_PAGE_FLAGS, ppAccess **SI_ACCESS, pcAccesses *uint32, piDefaultAccess *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidObjectType)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppAccess)), uintptr(unsafe.Pointer(pcAccesses)), uintptr(unsafe.Pointer(piDefaultAccess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MapGeneric dispatches through ISecurityInformation's vtable slot 7.
-func (self *ISecurityInformation) MapGeneric(pguidObjectType *win32.GUID, pAceFlags *byte, pMask *uint32) foundation.HRESULT {
+func (self *ISecurityInformation) MapGeneric(pguidObjectType *win32.GUID, pAceFlags *byte, pMask *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidObjectType)), uintptr(unsafe.Pointer(pAceFlags)), uintptr(unsafe.Pointer(pMask)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInheritTypes dispatches through ISecurityInformation's vtable slot 8.
-func (self *ISecurityInformation) GetInheritTypes(ppInheritTypes **SI_INHERIT_TYPE, pcInheritTypes *uint32) foundation.HRESULT {
+func (self *ISecurityInformation) GetInheritTypes(ppInheritTypes **SI_INHERIT_TYPE, pcInheritTypes *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppInheritTypes)), uintptr(unsafe.Pointer(pcInheritTypes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PropertySheetPageCallback dispatches through ISecurityInformation's vtable slot 9.
-func (self *ISecurityInformation) PropertySheetPageCallback(hwnd foundation.HWND, uMsg uicontrols.PSPCB_MESSAGE, uPage SI_PAGE_TYPE) foundation.HRESULT {
+func (self *ISecurityInformation) PropertySheetPageCallback(hwnd foundation.HWND, uMsg uicontrols.PSPCB_MESSAGE, uPage SI_PAGE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(uMsg), uintptr(uPage))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISecurityInformation2: https://learn.microsoft.com/windows/win32/api/aclui/nn-aclui-isecurityinformation2
@@ -113,9 +116,9 @@ func (self *ISecurityInformation2) IsDaclCanonical(pDacl *security.ACL) foundati
 }
 
 // LookupSids dispatches through ISecurityInformation2's vtable slot 4.
-func (self *ISecurityInformation2) LookupSids(cSids uint32, rgpSids *security.PSID, ppdo **systemcom.IDataObject) foundation.HRESULT {
+func (self *ISecurityInformation2) LookupSids(cSids uint32, rgpSids *security.PSID, ppdo **systemcom.IDataObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cSids), uintptr(unsafe.Pointer(rgpSids)), uintptr(unsafe.Pointer(ppdo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISecurityInformation3: https://learn.microsoft.com/windows/win32/api/aclui/nn-aclui-isecurityinformation3
@@ -128,15 +131,15 @@ type ISecurityInformation3 struct {
 var IID_ISecurityInformation3 = win32.GUID{Data1: 0xe2cdc9cc, Data2: 0x31bd, Data3: 0x4f8f, Data4: [8]byte{0x8c, 0x8b, 0xb6, 0x41, 0xaf, 0x51, 0x6a, 0x1a}}
 
 // GetFullResourceName dispatches through ISecurityInformation3's vtable slot 3.
-func (self *ISecurityInformation3) GetFullResourceName(ppszResourceName *foundation.PWSTR) foundation.HRESULT {
+func (self *ISecurityInformation3) GetFullResourceName(ppszResourceName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszResourceName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenElevatedEditor dispatches through ISecurityInformation3's vtable slot 4.
-func (self *ISecurityInformation3) OpenElevatedEditor(hWnd foundation.HWND, uPage SI_PAGE_TYPE) foundation.HRESULT {
+func (self *ISecurityInformation3) OpenElevatedEditor(hWnd foundation.HWND, uPage SI_PAGE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(uPage))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISecurityInformation4: https://learn.microsoft.com/windows/win32/api/aclui/nn-aclui-isecurityinformation4
@@ -149,9 +152,9 @@ type ISecurityInformation4 struct {
 var IID_ISecurityInformation4 = win32.GUID{Data1: 0xea961070, Data2: 0xcd14, Data3: 0x4621, Data4: [8]byte{0xac, 0xe4, 0xf6, 0x3c, 0x03, 0xe5, 0x83, 0xe4}}
 
 // GetSecondarySecurity dispatches through ISecurityInformation4's vtable slot 3.
-func (self *ISecurityInformation4) GetSecondarySecurity(pSecurityObjects **SECURITY_OBJECT, pSecurityObjectCount *uint32) foundation.HRESULT {
+func (self *ISecurityInformation4) GetSecondarySecurity(pSecurityObjects **SECURITY_OBJECT, pSecurityObjectCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSecurityObjects)), uintptr(unsafe.Pointer(pSecurityObjectCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISecurityObjectTypeInfo: https://learn.microsoft.com/windows/win32/api/aclui/nn-aclui-isecurityobjecttypeinfo
@@ -164,7 +167,7 @@ type ISecurityObjectTypeInfo struct {
 var IID_ISecurityObjectTypeInfo = win32.GUID{Data1: 0xfc3066eb, Data2: 0x79ef, Data3: 0x444b, Data4: [8]byte{0x91, 0x11, 0xd1, 0x8a, 0x75, 0xeb, 0xf2, 0xfa}}
 
 // GetInheritSource dispatches through ISecurityObjectTypeInfo's vtable slot 3.
-func (self *ISecurityObjectTypeInfo) GetInheritSource(si uint32, pACL *security.ACL, ppInheritArray **securityauthorization.INHERITED_FROMA) foundation.HRESULT {
+func (self *ISecurityObjectTypeInfo) GetInheritSource(si uint32, pACL *security.ACL, ppInheritArray **securityauthorization.INHERITED_FROMA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(si), uintptr(unsafe.Pointer(pACL)), uintptr(unsafe.Pointer(ppInheritArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

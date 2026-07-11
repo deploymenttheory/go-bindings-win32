@@ -25,39 +25,58 @@ type IFunctionDiscovery struct {
 var IID_IFunctionDiscovery = win32.GUID{Data1: 0x4df99b70, Data2: 0xe148, Data3: 0x4432, Data4: [8]byte{0xb0, 0x04, 0x4c, 0x9e, 0xeb, 0x53, 0x5a, 0x5e}}
 
 // GetInstanceCollection dispatches through IFunctionDiscovery's vtable slot 3.
-func (self *IFunctionDiscovery) GetInstanceCollection(pszCategory foundation.PWSTR, pszSubCategory foundation.PWSTR, fIncludeAllSubCategories foundation.BOOL, ppIFunctionInstanceCollection **IFunctionInstanceCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCategory)), uintptr(unsafe.Pointer(pszSubCategory)), uintptr(fIncludeAllSubCategories), uintptr(unsafe.Pointer(ppIFunctionInstanceCollection)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionDiscovery) GetInstanceCollection(pszCategory string, pszSubCategory string, fIncludeAllSubCategories bool) (*IFunctionInstanceCollection, error) {
+	_pszCategory := win32.UTF16Ptr(pszCategory)
+	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
+	_fIncludeAllSubCategories := win32.Bool32(fIncludeAllSubCategories)
+	var _ppIFunctionInstanceCollection *IFunctionInstanceCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCategory)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(_fIncludeAllSubCategories), uintptr(unsafe.Pointer(&_ppIFunctionInstanceCollection)))
+	return _ppIFunctionInstanceCollection, win32.HRESULTError(int32(r1))
 }
 
 // GetInstance dispatches through IFunctionDiscovery's vtable slot 4.
-func (self *IFunctionDiscovery) GetInstance(pszFunctionInstanceIdentity foundation.PWSTR, ppIFunctionInstance **IFunctionInstance) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszFunctionInstanceIdentity)), uintptr(unsafe.Pointer(ppIFunctionInstance)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionDiscovery) GetInstance(pszFunctionInstanceIdentity string) (*IFunctionInstance, error) {
+	_pszFunctionInstanceIdentity := win32.UTF16Ptr(pszFunctionInstanceIdentity)
+	var _ppIFunctionInstance *IFunctionInstance
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFunctionInstanceIdentity)), uintptr(unsafe.Pointer(&_ppIFunctionInstance)))
+	return _ppIFunctionInstance, win32.HRESULTError(int32(r1))
 }
 
 // CreateInstanceCollectionQuery dispatches through IFunctionDiscovery's vtable slot 5.
-func (self *IFunctionDiscovery) CreateInstanceCollectionQuery(pszCategory foundation.PWSTR, pszSubCategory foundation.PWSTR, fIncludeAllSubCategories foundation.BOOL, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification, pfdqcQueryContext *uint64, ppIFunctionInstanceCollectionQuery **IFunctionInstanceCollectionQuery) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCategory)), uintptr(unsafe.Pointer(pszSubCategory)), uintptr(fIncludeAllSubCategories), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)), uintptr(unsafe.Pointer(pfdqcQueryContext)), uintptr(unsafe.Pointer(ppIFunctionInstanceCollectionQuery)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionDiscovery) CreateInstanceCollectionQuery(pszCategory string, pszSubCategory string, fIncludeAllSubCategories bool, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification, pfdqcQueryContext *uint64) (*IFunctionInstanceCollectionQuery, error) {
+	_pszCategory := win32.UTF16Ptr(pszCategory)
+	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
+	_fIncludeAllSubCategories := win32.Bool32(fIncludeAllSubCategories)
+	var _ppIFunctionInstanceCollectionQuery *IFunctionInstanceCollectionQuery
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCategory)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(_fIncludeAllSubCategories), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)), uintptr(unsafe.Pointer(pfdqcQueryContext)), uintptr(unsafe.Pointer(&_ppIFunctionInstanceCollectionQuery)))
+	return _ppIFunctionInstanceCollectionQuery, win32.HRESULTError(int32(r1))
 }
 
 // CreateInstanceQuery dispatches through IFunctionDiscovery's vtable slot 6.
-func (self *IFunctionDiscovery) CreateInstanceQuery(pszFunctionInstanceIdentity foundation.PWSTR, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification, pfdqcQueryContext *uint64, ppIFunctionInstanceQuery **IFunctionInstanceQuery) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszFunctionInstanceIdentity)), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)), uintptr(unsafe.Pointer(pfdqcQueryContext)), uintptr(unsafe.Pointer(ppIFunctionInstanceQuery)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionDiscovery) CreateInstanceQuery(pszFunctionInstanceIdentity string, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification, pfdqcQueryContext *uint64) (*IFunctionInstanceQuery, error) {
+	_pszFunctionInstanceIdentity := win32.UTF16Ptr(pszFunctionInstanceIdentity)
+	var _ppIFunctionInstanceQuery *IFunctionInstanceQuery
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFunctionInstanceIdentity)), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)), uintptr(unsafe.Pointer(pfdqcQueryContext)), uintptr(unsafe.Pointer(&_ppIFunctionInstanceQuery)))
+	return _ppIFunctionInstanceQuery, win32.HRESULTError(int32(r1))
 }
 
 // AddInstance dispatches through IFunctionDiscovery's vtable slot 7.
-func (self *IFunctionDiscovery) AddInstance(enumSystemVisibility SystemVisibilityFlags, pszCategory foundation.PWSTR, pszSubCategory foundation.PWSTR, pszCategoryIdentity foundation.PWSTR, ppIFunctionInstance **IFunctionInstance) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(enumSystemVisibility), uintptr(unsafe.Pointer(pszCategory)), uintptr(unsafe.Pointer(pszSubCategory)), uintptr(unsafe.Pointer(pszCategoryIdentity)), uintptr(unsafe.Pointer(ppIFunctionInstance)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionDiscovery) AddInstance(enumSystemVisibility SystemVisibilityFlags, pszCategory string, pszSubCategory string, pszCategoryIdentity string) (*IFunctionInstance, error) {
+	_pszCategory := win32.UTF16Ptr(pszCategory)
+	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
+	_pszCategoryIdentity := win32.UTF16Ptr(pszCategoryIdentity)
+	var _ppIFunctionInstance *IFunctionInstance
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(enumSystemVisibility), uintptr(unsafe.Pointer(_pszCategory)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(unsafe.Pointer(_pszCategoryIdentity)), uintptr(unsafe.Pointer(&_ppIFunctionInstance)))
+	return _ppIFunctionInstance, win32.HRESULTError(int32(r1))
 }
 
 // RemoveInstance dispatches through IFunctionDiscovery's vtable slot 8.
-func (self *IFunctionDiscovery) RemoveInstance(enumSystemVisibility SystemVisibilityFlags, pszCategory foundation.PWSTR, pszSubCategory foundation.PWSTR, pszCategoryIdentity foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(enumSystemVisibility), uintptr(unsafe.Pointer(pszCategory)), uintptr(unsafe.Pointer(pszSubCategory)), uintptr(unsafe.Pointer(pszCategoryIdentity)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionDiscovery) RemoveInstance(enumSystemVisibility SystemVisibilityFlags, pszCategory string, pszSubCategory string, pszCategoryIdentity string) error {
+	_pszCategory := win32.UTF16Ptr(pszCategory)
+	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
+	_pszCategoryIdentity := win32.UTF16Ptr(pszCategoryIdentity)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(enumSystemVisibility), uintptr(unsafe.Pointer(_pszCategory)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(unsafe.Pointer(_pszCategoryIdentity)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFunctionDiscoveryNotification: https://learn.microsoft.com/windows/win32/api/functiondiscoveryapi/nn-functiondiscoveryapi-ifunctiondiscoverynotification
@@ -70,21 +89,23 @@ type IFunctionDiscoveryNotification struct {
 var IID_IFunctionDiscoveryNotification = win32.GUID{Data1: 0x5f6c1ba8, Data2: 0x5330, Data3: 0x422e, Data4: [8]byte{0xa3, 0x68, 0x57, 0x2b, 0x24, 0x4d, 0x3f, 0x87}}
 
 // OnUpdate dispatches through IFunctionDiscoveryNotification's vtable slot 3.
-func (self *IFunctionDiscoveryNotification) OnUpdate(enumQueryUpdateAction QueryUpdateAction, fdqcQueryContext uint64, pIFunctionInstance *IFunctionInstance) foundation.HRESULT {
+func (self *IFunctionDiscoveryNotification) OnUpdate(enumQueryUpdateAction QueryUpdateAction, fdqcQueryContext uint64, pIFunctionInstance *IFunctionInstance) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(enumQueryUpdateAction), uintptr(fdqcQueryContext), uintptr(unsafe.Pointer(pIFunctionInstance)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnError dispatches through IFunctionDiscoveryNotification's vtable slot 4.
-func (self *IFunctionDiscoveryNotification) OnError(hr foundation.HRESULT, fdqcQueryContext uint64, pszProvider foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(fdqcQueryContext), uintptr(unsafe.Pointer(pszProvider)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionDiscoveryNotification) OnError(hr foundation.HRESULT, fdqcQueryContext uint64, pszProvider string) error {
+	_pszProvider := win32.UTF16Ptr(pszProvider)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(fdqcQueryContext), uintptr(unsafe.Pointer(_pszProvider)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnEvent dispatches through IFunctionDiscoveryNotification's vtable slot 5.
-func (self *IFunctionDiscoveryNotification) OnEvent(dwEventID uint32, fdqcQueryContext uint64, pszProvider foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwEventID), uintptr(fdqcQueryContext), uintptr(unsafe.Pointer(pszProvider)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionDiscoveryNotification) OnEvent(dwEventID uint32, fdqcQueryContext uint64, pszProvider string) error {
+	_pszProvider := win32.UTF16Ptr(pszProvider)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwEventID), uintptr(fdqcQueryContext), uintptr(unsafe.Pointer(_pszProvider)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFunctionDiscoveryProvider: https://learn.microsoft.com/windows/win32/api/functiondiscoveryprovider/nn-functiondiscoveryprovider-ifunctiondiscoveryprovider
@@ -97,51 +118,51 @@ type IFunctionDiscoveryProvider struct {
 var IID_IFunctionDiscoveryProvider = win32.GUID{Data1: 0xdcde394f, Data2: 0x1478, Data3: 0x4813, Data4: [8]byte{0xa4, 0x02, 0xf6, 0xfb, 0x10, 0x65, 0x72, 0x22}}
 
 // Initialize dispatches through IFunctionDiscoveryProvider's vtable slot 3.
-func (self *IFunctionDiscoveryProvider) Initialize(pIFunctionDiscoveryProviderFactory *IFunctionDiscoveryProviderFactory, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification, lcidUserDefault uint32, pdwStgAccessCapabilities *uint32) foundation.HRESULT {
+func (self *IFunctionDiscoveryProvider) Initialize(pIFunctionDiscoveryProviderFactory *IFunctionDiscoveryProviderFactory, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification, lcidUserDefault uint32, pdwStgAccessCapabilities *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionDiscoveryProviderFactory)), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)), uintptr(lcidUserDefault), uintptr(unsafe.Pointer(pdwStgAccessCapabilities)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Query dispatches through IFunctionDiscoveryProvider's vtable slot 4.
-func (self *IFunctionDiscoveryProvider) Query(pIFunctionDiscoveryProviderQuery *IFunctionDiscoveryProviderQuery, ppIFunctionInstanceCollection **IFunctionInstanceCollection) foundation.HRESULT {
+func (self *IFunctionDiscoveryProvider) Query(pIFunctionDiscoveryProviderQuery *IFunctionDiscoveryProviderQuery, ppIFunctionInstanceCollection **IFunctionInstanceCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionDiscoveryProviderQuery)), uintptr(unsafe.Pointer(ppIFunctionInstanceCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndQuery dispatches through IFunctionDiscoveryProvider's vtable slot 5.
-func (self *IFunctionDiscoveryProvider) EndQuery() foundation.HRESULT {
+func (self *IFunctionDiscoveryProvider) EndQuery() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InstancePropertyStoreValidateAccess dispatches through IFunctionDiscoveryProvider's vtable slot 6.
-func (self *IFunctionDiscoveryProvider) InstancePropertyStoreValidateAccess(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr, dwStgAccess uint32) foundation.HRESULT {
+func (self *IFunctionDiscoveryProvider) InstancePropertyStoreValidateAccess(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr, dwStgAccess uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)), uintptr(iProviderInstanceContext), uintptr(dwStgAccess))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InstancePropertyStoreOpen dispatches through IFunctionDiscoveryProvider's vtable slot 7.
-func (self *IFunctionDiscoveryProvider) InstancePropertyStoreOpen(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr, dwStgAccess uint32, ppIPropertyStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *IFunctionDiscoveryProvider) InstancePropertyStoreOpen(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr, dwStgAccess uint32, ppIPropertyStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)), uintptr(iProviderInstanceContext), uintptr(dwStgAccess), uintptr(unsafe.Pointer(ppIPropertyStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InstancePropertyStoreFlush dispatches through IFunctionDiscoveryProvider's vtable slot 8.
-func (self *IFunctionDiscoveryProvider) InstancePropertyStoreFlush(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr) foundation.HRESULT {
+func (self *IFunctionDiscoveryProvider) InstancePropertyStoreFlush(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)), uintptr(iProviderInstanceContext))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InstanceQueryService dispatches through IFunctionDiscoveryProvider's vtable slot 9.
-func (self *IFunctionDiscoveryProvider) InstanceQueryService(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr, guidService *win32.GUID, riid *win32.GUID, ppIUnknown **systemcom.IUnknown) foundation.HRESULT {
+func (self *IFunctionDiscoveryProvider) InstanceQueryService(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr, guidService *win32.GUID, riid *win32.GUID, ppIUnknown **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)), uintptr(iProviderInstanceContext), uintptr(unsafe.Pointer(guidService)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppIUnknown)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InstanceReleased dispatches through IFunctionDiscoveryProvider's vtable slot 10.
-func (self *IFunctionDiscoveryProvider) InstanceReleased(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr) foundation.HRESULT {
+func (self *IFunctionDiscoveryProvider) InstanceReleased(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)), uintptr(iProviderInstanceContext))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFunctionDiscoveryProviderFactory: https://learn.microsoft.com/windows/win32/api/functiondiscoveryprovider/nn-functiondiscoveryprovider-ifunctiondiscoveryproviderfactory
@@ -154,21 +175,23 @@ type IFunctionDiscoveryProviderFactory struct {
 var IID_IFunctionDiscoveryProviderFactory = win32.GUID{Data1: 0x86443ff0, Data2: 0x1ad5, Data3: 0x4e68, Data4: [8]byte{0xa4, 0x5a, 0x40, 0xc2, 0xc3, 0x29, 0xde, 0x3b}}
 
 // CreatePropertyStore dispatches through IFunctionDiscoveryProviderFactory's vtable slot 3.
-func (self *IFunctionDiscoveryProviderFactory) CreatePropertyStore(ppIPropertyStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *IFunctionDiscoveryProviderFactory) CreatePropertyStore(ppIPropertyStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIPropertyStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateInstance dispatches through IFunctionDiscoveryProviderFactory's vtable slot 4.
-func (self *IFunctionDiscoveryProviderFactory) CreateInstance(pszSubCategory foundation.PWSTR, pszProviderInstanceIdentity foundation.PWSTR, iProviderInstanceContext uintptr, pIPropertyStore *uishellpropertiessystem.IPropertyStore, pIFunctionDiscoveryProvider *IFunctionDiscoveryProvider, ppIFunctionInstance **IFunctionInstance) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSubCategory)), uintptr(unsafe.Pointer(pszProviderInstanceIdentity)), uintptr(iProviderInstanceContext), uintptr(unsafe.Pointer(pIPropertyStore)), uintptr(unsafe.Pointer(pIFunctionDiscoveryProvider)), uintptr(unsafe.Pointer(ppIFunctionInstance)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionDiscoveryProviderFactory) CreateInstance(pszSubCategory string, pszProviderInstanceIdentity string, iProviderInstanceContext uintptr, pIPropertyStore *uishellpropertiessystem.IPropertyStore, pIFunctionDiscoveryProvider *IFunctionDiscoveryProvider, ppIFunctionInstance **IFunctionInstance) error {
+	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
+	_pszProviderInstanceIdentity := win32.UTF16Ptr(pszProviderInstanceIdentity)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(unsafe.Pointer(_pszProviderInstanceIdentity)), uintptr(iProviderInstanceContext), uintptr(unsafe.Pointer(pIPropertyStore)), uintptr(unsafe.Pointer(pIFunctionDiscoveryProvider)), uintptr(unsafe.Pointer(ppIFunctionInstance)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateFunctionInstanceCollection dispatches through IFunctionDiscoveryProviderFactory's vtable slot 5.
-func (self *IFunctionDiscoveryProviderFactory) CreateFunctionInstanceCollection(ppIFunctionInstanceCollection **IFunctionInstanceCollection) foundation.HRESULT {
+func (self *IFunctionDiscoveryProviderFactory) CreateFunctionInstanceCollection(ppIFunctionInstanceCollection **IFunctionInstanceCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIFunctionInstanceCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFunctionDiscoveryProviderQuery: https://learn.microsoft.com/windows/win32/api/functiondiscoveryprovider/nn-functiondiscoveryprovider-ifunctiondiscoveryproviderquery
@@ -181,27 +204,27 @@ type IFunctionDiscoveryProviderQuery struct {
 var IID_IFunctionDiscoveryProviderQuery = win32.GUID{Data1: 0x6876ea98, Data2: 0xbaec, Data3: 0x46db, Data4: [8]byte{0xbc, 0x20, 0x75, 0xa7, 0x6e, 0x26, 0x7a, 0x3a}}
 
 // IsInstanceQuery dispatches through IFunctionDiscoveryProviderQuery's vtable slot 3.
-func (self *IFunctionDiscoveryProviderQuery) IsInstanceQuery(pisInstanceQuery *foundation.BOOL, ppszConstraintValue **uint16) foundation.HRESULT {
+func (self *IFunctionDiscoveryProviderQuery) IsInstanceQuery(pisInstanceQuery *foundation.BOOL, ppszConstraintValue **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisInstanceQuery)), uintptr(unsafe.Pointer(ppszConstraintValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsSubcategoryQuery dispatches through IFunctionDiscoveryProviderQuery's vtable slot 4.
-func (self *IFunctionDiscoveryProviderQuery) IsSubcategoryQuery(pisSubcategoryQuery *foundation.BOOL, ppszConstraintValue **uint16) foundation.HRESULT {
+func (self *IFunctionDiscoveryProviderQuery) IsSubcategoryQuery(pisSubcategoryQuery *foundation.BOOL, ppszConstraintValue **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisSubcategoryQuery)), uintptr(unsafe.Pointer(ppszConstraintValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetQueryConstraints dispatches through IFunctionDiscoveryProviderQuery's vtable slot 5.
-func (self *IFunctionDiscoveryProviderQuery) GetQueryConstraints(ppIProviderQueryConstraints **IProviderQueryConstraintCollection) foundation.HRESULT {
+func (self *IFunctionDiscoveryProviderQuery) GetQueryConstraints(ppIProviderQueryConstraints **IProviderQueryConstraintCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIProviderQueryConstraints)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyConstraints dispatches through IFunctionDiscoveryProviderQuery's vtable slot 6.
-func (self *IFunctionDiscoveryProviderQuery) GetPropertyConstraints(ppIProviderPropertyConstraints **IProviderPropertyConstraintCollection) foundation.HRESULT {
+func (self *IFunctionDiscoveryProviderQuery) GetPropertyConstraints(ppIProviderPropertyConstraints **IProviderPropertyConstraintCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIProviderPropertyConstraints)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFunctionDiscoveryServiceProvider: https://learn.microsoft.com/windows/win32/api/functiondiscoveryprovider/nn-functiondiscoveryprovider-ifunctiondiscoveryserviceprovider
@@ -214,9 +237,9 @@ type IFunctionDiscoveryServiceProvider struct {
 var IID_IFunctionDiscoveryServiceProvider = win32.GUID{Data1: 0x4c81ed02, Data2: 0x1b04, Data3: 0x43f2, Data4: [8]byte{0xa4, 0x51, 0x69, 0x96, 0x6c, 0xbc, 0xd1, 0xc2}}
 
 // Initialize dispatches through IFunctionDiscoveryServiceProvider's vtable slot 3.
-func (self *IFunctionDiscoveryServiceProvider) Initialize(pIFunctionInstance *IFunctionInstance, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IFunctionDiscoveryServiceProvider) Initialize(pIFunctionInstance *IFunctionInstance, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFunctionInstance: https://learn.microsoft.com/windows/win32/api/functiondiscoveryapi/nn-functiondiscoveryapi-ifunctioninstance
@@ -229,27 +252,30 @@ type IFunctionInstance struct {
 var IID_IFunctionInstance = win32.GUID{Data1: 0x33591c10, Data2: 0x0bed, Data3: 0x4f02, Data4: [8]byte{0xb0, 0xab, 0x15, 0x30, 0xd5, 0x53, 0x3e, 0xe9}}
 
 // GetID dispatches through IFunctionInstance's vtable slot 4.
-func (self *IFunctionInstance) GetID(ppszCoMemIdentity **uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszCoMemIdentity)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionInstance) GetID() (*uint16, error) {
+	var _ppszCoMemIdentity *uint16
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszCoMemIdentity)))
+	return _ppszCoMemIdentity, win32.HRESULTError(int32(r1))
 }
 
 // GetProviderInstanceID dispatches through IFunctionInstance's vtable slot 5.
-func (self *IFunctionInstance) GetProviderInstanceID(ppszCoMemProviderInstanceIdentity **uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszCoMemProviderInstanceIdentity)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionInstance) GetProviderInstanceID() (*uint16, error) {
+	var _ppszCoMemProviderInstanceIdentity *uint16
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszCoMemProviderInstanceIdentity)))
+	return _ppszCoMemProviderInstanceIdentity, win32.HRESULTError(int32(r1))
 }
 
 // OpenPropertyStore dispatches through IFunctionInstance's vtable slot 6.
-func (self *IFunctionInstance) OpenPropertyStore(dwStgAccess systemcom.STGM, ppIPropertyStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwStgAccess), uintptr(unsafe.Pointer(ppIPropertyStore)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionInstance) OpenPropertyStore(dwStgAccess systemcom.STGM) (*uishellpropertiessystem.IPropertyStore, error) {
+	var _ppIPropertyStore *uishellpropertiessystem.IPropertyStore
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwStgAccess), uintptr(unsafe.Pointer(&_ppIPropertyStore)))
+	return _ppIPropertyStore, win32.HRESULTError(int32(r1))
 }
 
 // GetCategory dispatches through IFunctionInstance's vtable slot 7.
-func (self *IFunctionInstance) GetCategory(ppszCoMemCategory **uint16, ppszCoMemSubCategory **uint16) foundation.HRESULT {
+func (self *IFunctionInstance) GetCategory(ppszCoMemCategory **uint16, ppszCoMemSubCategory **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszCoMemCategory)), uintptr(unsafe.Pointer(ppszCoMemSubCategory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFunctionInstanceCollection: https://learn.microsoft.com/windows/win32/api/functiondiscoveryapi/nn-functiondiscoveryapi-ifunctioninstancecollection
@@ -262,45 +288,50 @@ type IFunctionInstanceCollection struct {
 var IID_IFunctionInstanceCollection = win32.GUID{Data1: 0xf0a3d895, Data2: 0x855c, Data3: 0x42a2, Data4: [8]byte{0x94, 0x8d, 0x2f, 0x97, 0xd4, 0x50, 0xec, 0xb1}}
 
 // GetCount dispatches through IFunctionInstanceCollection's vtable slot 3.
-func (self *IFunctionInstanceCollection) GetCount(pdwCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionInstanceCollection) GetCount() (uint32, error) {
+	var _pdwCount uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwCount)))
+	return _pdwCount, win32.HRESULTError(int32(r1))
 }
 
 // Get dispatches through IFunctionInstanceCollection's vtable slot 4.
-func (self *IFunctionInstanceCollection) Get(pszInstanceIdentity foundation.PWSTR, pdwIndex *uint32, ppIFunctionInstance **IFunctionInstance) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszInstanceIdentity)), uintptr(unsafe.Pointer(pdwIndex)), uintptr(unsafe.Pointer(ppIFunctionInstance)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionInstanceCollection) Get(pszInstanceIdentity string, pdwIndex *uint32) (*IFunctionInstance, error) {
+	_pszInstanceIdentity := win32.UTF16Ptr(pszInstanceIdentity)
+	var _ppIFunctionInstance *IFunctionInstance
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszInstanceIdentity)), uintptr(unsafe.Pointer(pdwIndex)), uintptr(unsafe.Pointer(&_ppIFunctionInstance)))
+	return _ppIFunctionInstance, win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through IFunctionInstanceCollection's vtable slot 5.
-func (self *IFunctionInstanceCollection) Item(dwIndex uint32, ppIFunctionInstance **IFunctionInstance) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppIFunctionInstance)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionInstanceCollection) Item(dwIndex uint32) (*IFunctionInstance, error) {
+	var _ppIFunctionInstance *IFunctionInstance
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(&_ppIFunctionInstance)))
+	return _ppIFunctionInstance, win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through IFunctionInstanceCollection's vtable slot 6.
-func (self *IFunctionInstanceCollection) Add(pIFunctionInstance *IFunctionInstance) foundation.HRESULT {
+func (self *IFunctionInstanceCollection) Add(pIFunctionInstance *IFunctionInstance) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through IFunctionInstanceCollection's vtable slot 7.
-func (self *IFunctionInstanceCollection) Remove(dwIndex uint32, ppIFunctionInstance **IFunctionInstance) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppIFunctionInstance)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionInstanceCollection) Remove(dwIndex uint32) (*IFunctionInstance, error) {
+	var _ppIFunctionInstance *IFunctionInstance
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(&_ppIFunctionInstance)))
+	return _ppIFunctionInstance, win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IFunctionInstanceCollection's vtable slot 8.
-func (self *IFunctionInstanceCollection) Delete(dwIndex uint32) foundation.HRESULT {
+func (self *IFunctionInstanceCollection) Delete(dwIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteAll dispatches through IFunctionInstanceCollection's vtable slot 9.
-func (self *IFunctionInstanceCollection) DeleteAll() foundation.HRESULT {
+func (self *IFunctionInstanceCollection) DeleteAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFunctionInstanceCollectionQuery: https://learn.microsoft.com/windows/win32/api/functiondiscoveryapi/nn-functiondiscoveryapi-ifunctioninstancecollectionquery
@@ -313,21 +344,23 @@ type IFunctionInstanceCollectionQuery struct {
 var IID_IFunctionInstanceCollectionQuery = win32.GUID{Data1: 0x57cc6fd2, Data2: 0xc09a, Data3: 0x4289, Data4: [8]byte{0xbb, 0x72, 0x25, 0xf0, 0x41, 0x42, 0x05, 0x8e}}
 
 // AddQueryConstraint dispatches through IFunctionInstanceCollectionQuery's vtable slot 3.
-func (self *IFunctionInstanceCollectionQuery) AddQueryConstraint(pszConstraintName foundation.PWSTR, pszConstraintValue foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszConstraintName)), uintptr(unsafe.Pointer(pszConstraintValue)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionInstanceCollectionQuery) AddQueryConstraint(pszConstraintName string, pszConstraintValue string) error {
+	_pszConstraintName := win32.UTF16Ptr(pszConstraintName)
+	_pszConstraintValue := win32.UTF16Ptr(pszConstraintValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszConstraintName)), uintptr(unsafe.Pointer(_pszConstraintValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddPropertyConstraint dispatches through IFunctionInstanceCollectionQuery's vtable slot 4.
-func (self *IFunctionInstanceCollectionQuery) AddPropertyConstraint(Key *foundation.PROPERTYKEY, pv *systemcomstructuredstorage.PROPVARIANT, enumPropertyConstraint PropertyConstraint) foundation.HRESULT {
+func (self *IFunctionInstanceCollectionQuery) AddPropertyConstraint(Key *foundation.PROPERTYKEY, pv *systemcomstructuredstorage.PROPVARIANT, enumPropertyConstraint PropertyConstraint) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(pv)), uintptr(enumPropertyConstraint))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Execute dispatches through IFunctionInstanceCollectionQuery's vtable slot 5.
-func (self *IFunctionInstanceCollectionQuery) Execute(ppIFunctionInstanceCollection **IFunctionInstanceCollection) foundation.HRESULT {
+func (self *IFunctionInstanceCollectionQuery) Execute(ppIFunctionInstanceCollection **IFunctionInstanceCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIFunctionInstanceCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFunctionInstanceQuery: https://learn.microsoft.com/windows/win32/api/functiondiscoveryapi/nn-functiondiscoveryapi-ifunctioninstancequery
@@ -340,9 +373,10 @@ type IFunctionInstanceQuery struct {
 var IID_IFunctionInstanceQuery = win32.GUID{Data1: 0x6242bc6b, Data2: 0x90ec, Data3: 0x4b37, Data4: [8]byte{0xbb, 0x46, 0xe2, 0x29, 0xfd, 0x84, 0xed, 0x95}}
 
 // Execute dispatches through IFunctionInstanceQuery's vtable slot 3.
-func (self *IFunctionInstanceQuery) Execute(ppIFunctionInstance **IFunctionInstance) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIFunctionInstance)))
-	return foundation.HRESULT(r1)
+func (self *IFunctionInstanceQuery) Execute() (*IFunctionInstance, error) {
+	var _ppIFunctionInstance *IFunctionInstance
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppIFunctionInstance)))
+	return _ppIFunctionInstance, win32.HRESULTError(int32(r1))
 }
 
 // IPNPXAssociation: https://learn.microsoft.com/windows/win32/api/pnpxassoc/nn-pnpxassoc-ipnpxassociation
@@ -355,21 +389,24 @@ type IPNPXAssociation struct {
 var IID_IPNPXAssociation = win32.GUID{Data1: 0x0bd7e521, Data2: 0x4da6, Data3: 0x42d5, Data4: [8]byte{0x81, 0xba, 0x19, 0x81, 0xb6, 0xb9, 0x40, 0x75}}
 
 // Associate dispatches through IPNPXAssociation's vtable slot 3.
-func (self *IPNPXAssociation) Associate(pszSubcategory foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSubcategory)))
-	return foundation.HRESULT(r1)
+func (self *IPNPXAssociation) Associate(pszSubcategory string) error {
+	_pszSubcategory := win32.UTF16Ptr(pszSubcategory)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubcategory)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unassociate dispatches through IPNPXAssociation's vtable slot 4.
-func (self *IPNPXAssociation) Unassociate(pszSubcategory foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSubcategory)))
-	return foundation.HRESULT(r1)
+func (self *IPNPXAssociation) Unassociate(pszSubcategory string) error {
+	_pszSubcategory := win32.UTF16Ptr(pszSubcategory)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubcategory)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IPNPXAssociation's vtable slot 5.
-func (self *IPNPXAssociation) Delete(pszSubcategory foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSubcategory)))
-	return foundation.HRESULT(r1)
+func (self *IPNPXAssociation) Delete(pszSubcategory string) error {
+	_pszSubcategory := win32.UTF16Ptr(pszSubcategory)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubcategory)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPNPXDeviceAssociation: https://learn.microsoft.com/windows/win32/api/pnpxassoc/nn-pnpxassoc-ipnpxdeviceassociation
@@ -382,21 +419,24 @@ type IPNPXDeviceAssociation struct {
 var IID_IPNPXDeviceAssociation = win32.GUID{Data1: 0xeed366d0, Data2: 0x35b8, Data3: 0x4fc5, Data4: [8]byte{0x8d, 0x20, 0x7e, 0x5b, 0xd3, 0x1f, 0x6d, 0xed}}
 
 // Associate dispatches through IPNPXDeviceAssociation's vtable slot 3.
-func (self *IPNPXDeviceAssociation) Associate(pszSubCategory foundation.PWSTR, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSubCategory)), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)))
-	return foundation.HRESULT(r1)
+func (self *IPNPXDeviceAssociation) Associate(pszSubCategory string, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification) error {
+	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unassociate dispatches through IPNPXDeviceAssociation's vtable slot 4.
-func (self *IPNPXDeviceAssociation) Unassociate(pszSubCategory foundation.PWSTR, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSubCategory)), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)))
-	return foundation.HRESULT(r1)
+func (self *IPNPXDeviceAssociation) Unassociate(pszSubCategory string, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification) error {
+	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IPNPXDeviceAssociation's vtable slot 5.
-func (self *IPNPXDeviceAssociation) Delete(pszSubcategory foundation.PWSTR, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSubcategory)), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)))
-	return foundation.HRESULT(r1)
+func (self *IPNPXDeviceAssociation) Delete(pszSubcategory string, pIFunctionDiscoveryNotification *IFunctionDiscoveryNotification) error {
+	_pszSubcategory := win32.UTF16Ptr(pszSubcategory)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubcategory)), uintptr(unsafe.Pointer(pIFunctionDiscoveryNotification)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d14d9c30-12d2-42d8-bce4-c60c2bb226fa
@@ -408,45 +448,50 @@ type IPropertyStoreCollection struct {
 var IID_IPropertyStoreCollection = win32.GUID{Data1: 0xd14d9c30, Data2: 0x12d2, Data3: 0x42d8, Data4: [8]byte{0xbc, 0xe4, 0xc6, 0x0c, 0x2b, 0xb2, 0x26, 0xfa}}
 
 // GetCount dispatches through IPropertyStoreCollection's vtable slot 3.
-func (self *IPropertyStoreCollection) GetCount(pdwCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+func (self *IPropertyStoreCollection) GetCount() (uint32, error) {
+	var _pdwCount uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwCount)))
+	return _pdwCount, win32.HRESULTError(int32(r1))
 }
 
 // Get dispatches through IPropertyStoreCollection's vtable slot 4.
-func (self *IPropertyStoreCollection) Get(pszInstanceIdentity foundation.PWSTR, pdwIndex *uint32, ppIPropertyStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszInstanceIdentity)), uintptr(unsafe.Pointer(pdwIndex)), uintptr(unsafe.Pointer(ppIPropertyStore)))
-	return foundation.HRESULT(r1)
+func (self *IPropertyStoreCollection) Get(pszInstanceIdentity string, pdwIndex *uint32) (*uishellpropertiessystem.IPropertyStore, error) {
+	_pszInstanceIdentity := win32.UTF16Ptr(pszInstanceIdentity)
+	var _ppIPropertyStore *uishellpropertiessystem.IPropertyStore
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszInstanceIdentity)), uintptr(unsafe.Pointer(pdwIndex)), uintptr(unsafe.Pointer(&_ppIPropertyStore)))
+	return _ppIPropertyStore, win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through IPropertyStoreCollection's vtable slot 5.
-func (self *IPropertyStoreCollection) Item(dwIndex uint32, ppIPropertyStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppIPropertyStore)))
-	return foundation.HRESULT(r1)
+func (self *IPropertyStoreCollection) Item(dwIndex uint32) (*uishellpropertiessystem.IPropertyStore, error) {
+	var _ppIPropertyStore *uishellpropertiessystem.IPropertyStore
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(&_ppIPropertyStore)))
+	return _ppIPropertyStore, win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through IPropertyStoreCollection's vtable slot 6.
-func (self *IPropertyStoreCollection) Add(pIPropertyStore *uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *IPropertyStoreCollection) Add(pIPropertyStore *uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIPropertyStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through IPropertyStoreCollection's vtable slot 7.
-func (self *IPropertyStoreCollection) Remove(dwIndex uint32, pIPropertyStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pIPropertyStore)))
-	return foundation.HRESULT(r1)
+func (self *IPropertyStoreCollection) Remove(dwIndex uint32) (*uishellpropertiessystem.IPropertyStore, error) {
+	var _pIPropertyStore *uishellpropertiessystem.IPropertyStore
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(&_pIPropertyStore)))
+	return _pIPropertyStore, win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IPropertyStoreCollection's vtable slot 8.
-func (self *IPropertyStoreCollection) Delete(dwIndex uint32) foundation.HRESULT {
+func (self *IPropertyStoreCollection) Delete(dwIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteAll dispatches through IPropertyStoreCollection's vtable slot 9.
-func (self *IPropertyStoreCollection) DeleteAll() foundation.HRESULT {
+func (self *IPropertyStoreCollection) DeleteAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IProviderProperties: https://learn.microsoft.com/windows/win32/api/functiondiscoveryprovider/nn-functiondiscoveryprovider-iproviderproperties
@@ -459,27 +504,27 @@ type IProviderProperties struct {
 var IID_IProviderProperties = win32.GUID{Data1: 0xcf986ea6, Data2: 0x3b5f, Data3: 0x4c5f, Data4: [8]byte{0xb8, 0x8a, 0x2f, 0x8b, 0x20, 0xce, 0xef, 0x17}}
 
 // GetCount dispatches through IProviderProperties's vtable slot 3.
-func (self *IProviderProperties) GetCount(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr, pdwCount *uint32) foundation.HRESULT {
+func (self *IProviderProperties) GetCount(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr, pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)), uintptr(iProviderInstanceContext), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAt dispatches through IProviderProperties's vtable slot 4.
-func (self *IProviderProperties) GetAt(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr, dwIndex uint32, pKey *foundation.PROPERTYKEY) foundation.HRESULT {
+func (self *IProviderProperties) GetAt(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr, dwIndex uint32, pKey *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)), uintptr(iProviderInstanceContext), uintptr(dwIndex), uintptr(unsafe.Pointer(pKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetValue dispatches through IProviderProperties's vtable slot 5.
-func (self *IProviderProperties) GetValue(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr, Key *foundation.PROPERTYKEY, ppropVar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IProviderProperties) GetValue(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr, Key *foundation.PROPERTYKEY, ppropVar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)), uintptr(iProviderInstanceContext), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ppropVar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetValue dispatches through IProviderProperties's vtable slot 6.
-func (self *IProviderProperties) SetValue(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr, Key *foundation.PROPERTYKEY, ppropVar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IProviderProperties) SetValue(pIFunctionInstance *IFunctionInstance, iProviderInstanceContext uintptr, Key *foundation.PROPERTYKEY, ppropVar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFunctionInstance)), uintptr(iProviderInstanceContext), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ppropVar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IProviderPropertyConstraintCollection: https://learn.microsoft.com/windows/win32/api/functiondiscoveryprovider/nn-functiondiscoveryprovider-iproviderpropertyconstraintcollection
@@ -492,39 +537,39 @@ type IProviderPropertyConstraintCollection struct {
 var IID_IProviderPropertyConstraintCollection = win32.GUID{Data1: 0xf4fae42f, Data2: 0x5778, Data3: 0x4a13, Data4: [8]byte{0x85, 0x40, 0xb5, 0xfd, 0x8c, 0x13, 0x98, 0xdd}}
 
 // GetCount dispatches through IProviderPropertyConstraintCollection's vtable slot 3.
-func (self *IProviderPropertyConstraintCollection) GetCount(pdwCount *uint32) foundation.HRESULT {
+func (self *IProviderPropertyConstraintCollection) GetCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get dispatches through IProviderPropertyConstraintCollection's vtable slot 4.
-func (self *IProviderPropertyConstraintCollection) Get(Key *foundation.PROPERTYKEY, pPropVar *systemcomstructuredstorage.PROPVARIANT, pdwPropertyConstraint *uint32) foundation.HRESULT {
+func (self *IProviderPropertyConstraintCollection) Get(Key *foundation.PROPERTYKEY, pPropVar *systemcomstructuredstorage.PROPVARIANT, pdwPropertyConstraint *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(pPropVar)), uintptr(unsafe.Pointer(pdwPropertyConstraint)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through IProviderPropertyConstraintCollection's vtable slot 5.
-func (self *IProviderPropertyConstraintCollection) Item(dwIndex uint32, pKey *foundation.PROPERTYKEY, pPropVar *systemcomstructuredstorage.PROPVARIANT, pdwPropertyConstraint *uint32) foundation.HRESULT {
+func (self *IProviderPropertyConstraintCollection) Item(dwIndex uint32, pKey *foundation.PROPERTYKEY, pPropVar *systemcomstructuredstorage.PROPVARIANT, pdwPropertyConstraint *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pKey)), uintptr(unsafe.Pointer(pPropVar)), uintptr(unsafe.Pointer(pdwPropertyConstraint)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Next dispatches through IProviderPropertyConstraintCollection's vtable slot 6.
-func (self *IProviderPropertyConstraintCollection) Next(pKey *foundation.PROPERTYKEY, pPropVar *systemcomstructuredstorage.PROPVARIANT, pdwPropertyConstraint *uint32) foundation.HRESULT {
+func (self *IProviderPropertyConstraintCollection) Next(pKey *foundation.PROPERTYKEY, pPropVar *systemcomstructuredstorage.PROPVARIANT, pdwPropertyConstraint *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKey)), uintptr(unsafe.Pointer(pPropVar)), uintptr(unsafe.Pointer(pdwPropertyConstraint)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IProviderPropertyConstraintCollection's vtable slot 7.
-func (self *IProviderPropertyConstraintCollection) Skip() foundation.HRESULT {
+func (self *IProviderPropertyConstraintCollection) Skip() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IProviderPropertyConstraintCollection's vtable slot 8.
-func (self *IProviderPropertyConstraintCollection) Reset() foundation.HRESULT {
+func (self *IProviderPropertyConstraintCollection) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IProviderPublishing: https://learn.microsoft.com/windows/win32/api/functiondiscoveryprovider/nn-functiondiscoveryprovider-iproviderpublishing
@@ -537,15 +582,19 @@ type IProviderPublishing struct {
 var IID_IProviderPublishing = win32.GUID{Data1: 0xcd1b9a04, Data2: 0x206c, Data3: 0x4a05, Data4: [8]byte{0xa0, 0xc8, 0x16, 0x35, 0xa2, 0x1a, 0x2b, 0x7c}}
 
 // CreateInstance dispatches through IProviderPublishing's vtable slot 3.
-func (self *IProviderPublishing) CreateInstance(enumVisibilityFlags SystemVisibilityFlags, pszSubCategory foundation.PWSTR, pszProviderInstanceIdentity foundation.PWSTR, ppIFunctionInstance **IFunctionInstance) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(enumVisibilityFlags), uintptr(unsafe.Pointer(pszSubCategory)), uintptr(unsafe.Pointer(pszProviderInstanceIdentity)), uintptr(unsafe.Pointer(ppIFunctionInstance)))
-	return foundation.HRESULT(r1)
+func (self *IProviderPublishing) CreateInstance(enumVisibilityFlags SystemVisibilityFlags, pszSubCategory string, pszProviderInstanceIdentity string, ppIFunctionInstance **IFunctionInstance) error {
+	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
+	_pszProviderInstanceIdentity := win32.UTF16Ptr(pszProviderInstanceIdentity)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(enumVisibilityFlags), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(unsafe.Pointer(_pszProviderInstanceIdentity)), uintptr(unsafe.Pointer(ppIFunctionInstance)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveInstance dispatches through IProviderPublishing's vtable slot 4.
-func (self *IProviderPublishing) RemoveInstance(enumVisibilityFlags SystemVisibilityFlags, pszSubCategory foundation.PWSTR, pszProviderInstanceIdentity foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(enumVisibilityFlags), uintptr(unsafe.Pointer(pszSubCategory)), uintptr(unsafe.Pointer(pszProviderInstanceIdentity)))
-	return foundation.HRESULT(r1)
+func (self *IProviderPublishing) RemoveInstance(enumVisibilityFlags SystemVisibilityFlags, pszSubCategory string, pszProviderInstanceIdentity string) error {
+	_pszSubCategory := win32.UTF16Ptr(pszSubCategory)
+	_pszProviderInstanceIdentity := win32.UTF16Ptr(pszProviderInstanceIdentity)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(enumVisibilityFlags), uintptr(unsafe.Pointer(_pszSubCategory)), uintptr(unsafe.Pointer(_pszProviderInstanceIdentity)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IProviderQueryConstraintCollection: https://learn.microsoft.com/windows/win32/api/functiondiscoveryprovider/nn-functiondiscoveryprovider-iproviderqueryconstraintcollection
@@ -558,37 +607,38 @@ type IProviderQueryConstraintCollection struct {
 var IID_IProviderQueryConstraintCollection = win32.GUID{Data1: 0x9c243e11, Data2: 0x3261, Data3: 0x4bcd, Data4: [8]byte{0xb9, 0x22, 0x84, 0xa8, 0x73, 0xd4, 0x60, 0xae}}
 
 // GetCount dispatches through IProviderQueryConstraintCollection's vtable slot 3.
-func (self *IProviderQueryConstraintCollection) GetCount(pdwCount *uint32) foundation.HRESULT {
+func (self *IProviderQueryConstraintCollection) GetCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get dispatches through IProviderQueryConstraintCollection's vtable slot 4.
-func (self *IProviderQueryConstraintCollection) Get(pszConstraintName foundation.PWSTR, ppszConstraintValue **uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszConstraintName)), uintptr(unsafe.Pointer(ppszConstraintValue)))
-	return foundation.HRESULT(r1)
+func (self *IProviderQueryConstraintCollection) Get(pszConstraintName string, ppszConstraintValue **uint16) error {
+	_pszConstraintName := win32.UTF16Ptr(pszConstraintName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszConstraintName)), uintptr(unsafe.Pointer(ppszConstraintValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through IProviderQueryConstraintCollection's vtable slot 5.
-func (self *IProviderQueryConstraintCollection) Item(dwIndex uint32, ppszConstraintName **uint16, ppszConstraintValue **uint16) foundation.HRESULT {
+func (self *IProviderQueryConstraintCollection) Item(dwIndex uint32, ppszConstraintName **uint16, ppszConstraintValue **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(ppszConstraintName)), uintptr(unsafe.Pointer(ppszConstraintValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Next dispatches through IProviderQueryConstraintCollection's vtable slot 6.
-func (self *IProviderQueryConstraintCollection) Next(ppszConstraintName **uint16, ppszConstraintValue **uint16) foundation.HRESULT {
+func (self *IProviderQueryConstraintCollection) Next(ppszConstraintName **uint16, ppszConstraintValue **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszConstraintName)), uintptr(unsafe.Pointer(ppszConstraintValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IProviderQueryConstraintCollection's vtable slot 7.
-func (self *IProviderQueryConstraintCollection) Skip() foundation.HRESULT {
+func (self *IProviderQueryConstraintCollection) Skip() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IProviderQueryConstraintCollection's vtable slot 8.
-func (self *IProviderQueryConstraintCollection) Reset() foundation.HRESULT {
+func (self *IProviderQueryConstraintCollection) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

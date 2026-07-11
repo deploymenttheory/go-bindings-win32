@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemvariant "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/variant"
 )
@@ -24,45 +23,45 @@ type IDODownload struct {
 var IID_IDODownload = win32.GUID{Data1: 0xfbbd7fc0, Data2: 0xc147, Data3: 0x4727, Data4: [8]byte{0xa3, 0x8d, 0x82, 0x7e, 0xf0, 0x71, 0xee, 0x77}}
 
 // Start dispatches through IDODownload's vtable slot 3.
-func (self *IDODownload) Start(ranges *DO_DOWNLOAD_RANGES_INFO) foundation.HRESULT {
+func (self *IDODownload) Start(ranges *DO_DOWNLOAD_RANGES_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ranges)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through IDODownload's vtable slot 4.
-func (self *IDODownload) Pause() foundation.HRESULT {
+func (self *IDODownload) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Abort dispatches through IDODownload's vtable slot 5.
-func (self *IDODownload) Abort() foundation.HRESULT {
+func (self *IDODownload) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finalize dispatches through IDODownload's vtable slot 6.
-func (self *IDODownload) Finalize() foundation.HRESULT {
+func (self *IDODownload) Finalize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IDODownload's vtable slot 7.
-func (self *IDODownload) GetStatus(status *DO_DOWNLOAD_STATUS) foundation.HRESULT {
+func (self *IDODownload) GetStatus(status *DO_DOWNLOAD_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(status)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through IDODownload's vtable slot 8.
-func (self *IDODownload) GetProperty(propId DODownloadProperty, propVal *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IDODownload) GetProperty(propId DODownloadProperty, propVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(propId), uintptr(unsafe.Pointer(propVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperty dispatches through IDODownload's vtable slot 9.
-func (self *IDODownload) SetProperty(propId DODownloadProperty, propVal *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IDODownload) SetProperty(propId DODownloadProperty, propVal *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(propId), uintptr(unsafe.Pointer(propVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDODownloadStatusCallback: https://learn.microsoft.com/windows/win32/api/deliveryoptimization/nn-deliveryoptimization-idodownloadstatuscallback
@@ -75,9 +74,9 @@ type IDODownloadStatusCallback struct {
 var IID_IDODownloadStatusCallback = win32.GUID{Data1: 0xd166e8e3, Data2: 0xa90e, Data3: 0x4392, Data4: [8]byte{0x8e, 0x87, 0x05, 0xe9, 0x96, 0xd3, 0x74, 0x7d}}
 
 // OnStatusChange dispatches through IDODownloadStatusCallback's vtable slot 3.
-func (self *IDODownloadStatusCallback) OnStatusChange(download *IDODownload, status *DO_DOWNLOAD_STATUS) foundation.HRESULT {
+func (self *IDODownloadStatusCallback) OnStatusChange(download *IDODownload, status *DO_DOWNLOAD_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(download)), uintptr(unsafe.Pointer(status)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDOManager: https://learn.microsoft.com/windows/win32/api/deliveryoptimization/nn-deliveryoptimization-idomanager
@@ -90,13 +89,13 @@ type IDOManager struct {
 var IID_IDOManager = win32.GUID{Data1: 0x400e2d4a, Data2: 0x1431, Data3: 0x4c1a, Data4: [8]byte{0xa7, 0x48, 0x39, 0xca, 0x47, 0x2c, 0xfd, 0xb1}}
 
 // CreateDownload dispatches through IDOManager's vtable slot 3.
-func (self *IDOManager) CreateDownload(download **IDODownload) foundation.HRESULT {
+func (self *IDOManager) CreateDownload(download **IDODownload) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(download)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumDownloads dispatches through IDOManager's vtable slot 4.
-func (self *IDOManager) EnumDownloads(category *DO_DOWNLOAD_ENUM_CATEGORY, ppEnum **systemcom.IEnumUnknown) foundation.HRESULT {
+func (self *IDOManager) EnumDownloads(category *DO_DOWNLOAD_ENUM_CATEGORY, ppEnum **systemcom.IEnumUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(category)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

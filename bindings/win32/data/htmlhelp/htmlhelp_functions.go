@@ -17,20 +17,21 @@ var (
 )
 
 var (
+	procHtmlHelp  = modhhctrl_ocx.NewProc("HtmlHelpW")
 	procHtmlHelpA = modhhctrl_ocx.NewProc("HtmlHelpA")
-	procHtmlHelpW = modhhctrl_ocx.NewProc("HtmlHelpW")
 )
+
+// HtmlHelp calls hhctrl.ocx!HtmlHelpW.
+// https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpw
+func HtmlHelp(hwndCaller foundation.HWND, pszFile string, uCommand uint32, dwData uintptr) foundation.HWND {
+	_pszFile := win32.UTF16Ptr(pszFile)
+	r1, _, _ := syscall.SyscallN(procHtmlHelp.Addr(), uintptr(hwndCaller), uintptr(unsafe.Pointer(_pszFile)), uintptr(uCommand), uintptr(dwData))
+	return foundation.HWND(r1)
+}
 
 // HtmlHelpA calls hhctrl.ocx!HtmlHelpA.
 // https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpa
 func HtmlHelpA(hwndCaller foundation.HWND, pszFile foundation.PSTR, uCommand uint32, dwData uintptr) foundation.HWND {
 	r1, _, _ := syscall.SyscallN(procHtmlHelpA.Addr(), uintptr(hwndCaller), uintptr(unsafe.Pointer(pszFile)), uintptr(uCommand), uintptr(dwData))
-	return foundation.HWND(r1)
-}
-
-// HtmlHelpW calls hhctrl.ocx!HtmlHelpW.
-// https://learn.microsoft.com/windows/win32/api/htmlhelp/nf-htmlhelp-htmlhelpw
-func HtmlHelpW(hwndCaller foundation.HWND, pszFile foundation.PWSTR, uCommand uint32, dwData uintptr) foundation.HWND {
-	r1, _, _ := syscall.SyscallN(procHtmlHelpW.Addr(), uintptr(hwndCaller), uintptr(unsafe.Pointer(pszFile)), uintptr(uCommand), uintptr(dwData))
 	return foundation.HWND(r1)
 }

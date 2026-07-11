@@ -23,9 +23,11 @@ type IIsolatedAppLauncher struct {
 var IID_IIsolatedAppLauncher = win32.GUID{Data1: 0xf686878f, Data2: 0x7b42, Data3: 0x4cc4, Data4: [8]byte{0x96, 0xfb, 0xf4, 0xf3, 0xb6, 0xe3, 0xd2, 0x4d}}
 
 // Launch dispatches through IIsolatedAppLauncher's vtable slot 3.
-func (self *IIsolatedAppLauncher) Launch(appUserModelId foundation.PWSTR, arguments foundation.PWSTR, telemetryParameters *IsolatedAppLauncherTelemetryParameters) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(appUserModelId)), uintptr(unsafe.Pointer(arguments)), uintptr(unsafe.Pointer(telemetryParameters)))
-	return foundation.HRESULT(r1)
+func (self *IIsolatedAppLauncher) Launch(appUserModelId string, arguments string, telemetryParameters *IsolatedAppLauncherTelemetryParameters) error {
+	_appUserModelId := win32.UTF16Ptr(appUserModelId)
+	_arguments := win32.UTF16Ptr(arguments)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_appUserModelId)), uintptr(unsafe.Pointer(_arguments)), uintptr(unsafe.Pointer(telemetryParameters)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 1aa24232-9a91-4201-88cb-122f9d6522e0
@@ -37,33 +39,39 @@ type IIsolatedProcessLauncher struct {
 var IID_IIsolatedProcessLauncher = win32.GUID{Data1: 0x1aa24232, Data2: 0x9a91, Data3: 0x4201, Data4: [8]byte{0x88, 0xcb, 0x12, 0x2f, 0x9d, 0x65, 0x22, 0xe0}}
 
 // LaunchProcess dispatches through IIsolatedProcessLauncher's vtable slot 3.
-func (self *IIsolatedProcessLauncher) LaunchProcess(process foundation.PWSTR, arguments foundation.PWSTR, workingDirectory foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(process)), uintptr(unsafe.Pointer(arguments)), uintptr(unsafe.Pointer(workingDirectory)))
-	return foundation.HRESULT(r1)
+func (self *IIsolatedProcessLauncher) LaunchProcess(process string, arguments string, workingDirectory string) error {
+	_process := win32.UTF16Ptr(process)
+	_arguments := win32.UTF16Ptr(arguments)
+	_workingDirectory := win32.UTF16Ptr(workingDirectory)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_process)), uintptr(unsafe.Pointer(_arguments)), uintptr(unsafe.Pointer(_workingDirectory)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShareDirectory dispatches through IIsolatedProcessLauncher's vtable slot 4.
-func (self *IIsolatedProcessLauncher) ShareDirectory(hostPath foundation.PWSTR, containerPath foundation.PWSTR, readOnly foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hostPath)), uintptr(unsafe.Pointer(containerPath)), uintptr(readOnly))
-	return foundation.HRESULT(r1)
+func (self *IIsolatedProcessLauncher) ShareDirectory(hostPath string, containerPath string, readOnly bool) error {
+	_hostPath := win32.UTF16Ptr(hostPath)
+	_containerPath := win32.UTF16Ptr(containerPath)
+	_readOnly := win32.Bool32(readOnly)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_hostPath)), uintptr(unsafe.Pointer(_containerPath)), uintptr(_readOnly))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContainerGuid dispatches through IIsolatedProcessLauncher's vtable slot 5.
-func (self *IIsolatedProcessLauncher) GetContainerGuid(guid *win32.GUID) foundation.HRESULT {
+func (self *IIsolatedProcessLauncher) GetContainerGuid(guid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AllowSetForegroundAccess dispatches through IIsolatedProcessLauncher's vtable slot 6.
-func (self *IIsolatedProcessLauncher) AllowSetForegroundAccess(pid uint32) foundation.HRESULT {
+func (self *IIsolatedProcessLauncher) AllowSetForegroundAccess(pid uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(pid))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsContainerRunning dispatches through IIsolatedProcessLauncher's vtable slot 7.
-func (self *IIsolatedProcessLauncher) IsContainerRunning(running *foundation.BOOL) foundation.HRESULT {
+func (self *IIsolatedProcessLauncher) IsContainerRunning(running *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(running)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 780e4416-5e72-4123-808e-66dc6479feef
@@ -75,7 +83,10 @@ type IIsolatedProcessLauncher2 struct {
 var IID_IIsolatedProcessLauncher2 = win32.GUID{Data1: 0x780e4416, Data2: 0x5e72, Data3: 0x4123, Data4: [8]byte{0x80, 0x8e, 0x66, 0xdc, 0x64, 0x79, 0xfe, 0xef}}
 
 // LaunchProcess2 dispatches through IIsolatedProcessLauncher2's vtable slot 8.
-func (self *IIsolatedProcessLauncher2) LaunchProcess2(process foundation.PWSTR, arguments foundation.PWSTR, workingDirectory foundation.PWSTR, correlationGuid *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(process)), uintptr(unsafe.Pointer(arguments)), uintptr(unsafe.Pointer(workingDirectory)), uintptr(unsafe.Pointer(correlationGuid)))
-	return foundation.HRESULT(r1)
+func (self *IIsolatedProcessLauncher2) LaunchProcess2(process string, arguments string, workingDirectory string, correlationGuid *win32.GUID) error {
+	_process := win32.UTF16Ptr(process)
+	_arguments := win32.UTF16Ptr(arguments)
+	_workingDirectory := win32.UTF16Ptr(workingDirectory)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_process)), uintptr(unsafe.Pointer(_arguments)), uintptr(unsafe.Pointer(_workingDirectory)), uintptr(unsafe.Pointer(correlationGuid)))
+	return win32.HRESULTError(int32(r1))
 }

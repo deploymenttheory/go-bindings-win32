@@ -46,16 +46,18 @@ func NcFreeNetconProperties(pProps *NETCON_PROPERTIES) {
 // NcIsValidConnectionName calls Netshell!NcIsValidConnectionName.
 // https://learn.microsoft.com/windows/win32/api/netcon/nf-netcon-ncisvalidconnectionname
 // Minimum OS: windows5.1.2600.
-func NcIsValidConnectionName(pszwName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procNcIsValidConnectionName.Addr(), uintptr(unsafe.Pointer(pszwName)))
-	return foundation.BOOL(r1)
+func NcIsValidConnectionName(pszwName string) bool {
+	_pszwName := win32.UTF16Ptr(pszwName)
+	r1, _, _ := syscall.SyscallN(procNcIsValidConnectionName.Addr(), uintptr(unsafe.Pointer(_pszwName)))
+	return r1 != 0
 }
 
 // NetworkIsolationDiagnoseConnectFailureAndGetInfo calls api-ms-win-net-isolation-l1-1-0!NetworkIsolationDiagnoseConnectFailureAndGetInfo.
 // https://learn.microsoft.com/windows/win32/api/netfw/nf-netfw-networkisolationdiagnoseconnectfailureandgetinfo
 // Minimum OS: windows8.0.
-func NetworkIsolationDiagnoseConnectFailureAndGetInfo(wszServerName foundation.PWSTR, netIsoError *NETISO_ERROR_TYPE) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetworkIsolationDiagnoseConnectFailureAndGetInfo.Addr(), uintptr(unsafe.Pointer(wszServerName)), uintptr(unsafe.Pointer(netIsoError)))
+func NetworkIsolationDiagnoseConnectFailureAndGetInfo(wszServerName string, netIsoError *NETISO_ERROR_TYPE) uint32 {
+	_wszServerName := win32.UTF16Ptr(wszServerName)
+	r1, _, _ := syscall.SyscallN(procNetworkIsolationDiagnoseConnectFailureAndGetInfo.Addr(), uintptr(unsafe.Pointer(_wszServerName)), uintptr(unsafe.Pointer(netIsoError)))
 	return uint32(r1)
 }
 
@@ -70,9 +72,9 @@ func NetworkIsolationEnumAppContainers(Flags uint32, pdwNumPublicAppCs *uint32, 
 // NetworkIsolationEnumerateAppContainerRules calls Firewallapi!NetworkIsolationEnumerateAppContainerRules.
 // https://learn.microsoft.com/windows/win32/api/netfw/nf-netfw-networkisolationenumerateappcontainerrules
 // Minimum OS: windows8.0.
-func NetworkIsolationEnumerateAppContainerRules(newEnum **systemole.IEnumVARIANT) foundation.HRESULT {
+func NetworkIsolationEnumerateAppContainerRules(newEnum **systemole.IEnumVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procNetworkIsolationEnumerateAppContainerRules.Addr(), uintptr(unsafe.Pointer(newEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NetworkIsolationFreeAppContainers calls api-ms-win-net-isolation-l1-1-0!NetworkIsolationFreeAppContainers.
@@ -94,16 +96,18 @@ func NetworkIsolationGetAppContainerConfig(pdwNumPublicAppCs *uint32, appContain
 // NetworkIsolationGetEnterpriseIdAsync calls Firewallapi!NetworkIsolationGetEnterpriseIdAsync.
 // https://learn.microsoft.com/windows/win32/api/netfw/nf-netfw-networkisolationgetenterpriseidasync
 // Minimum OS: windows10.0.10240.
-func NetworkIsolationGetEnterpriseIdAsync(wszServerName foundation.PWSTR, dwFlags uint32, context unsafe.Pointer, callback PNETISO_EDP_ID_CALLBACK_FN, hOperation *foundation.HANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetworkIsolationGetEnterpriseIdAsync.Addr(), uintptr(unsafe.Pointer(wszServerName)), uintptr(dwFlags), uintptr(unsafe.Pointer(context)), uintptr(callback), uintptr(unsafe.Pointer(hOperation)))
+func NetworkIsolationGetEnterpriseIdAsync(wszServerName string, dwFlags uint32, context unsafe.Pointer, callback PNETISO_EDP_ID_CALLBACK_FN, hOperation *foundation.HANDLE) uint32 {
+	_wszServerName := win32.UTF16Ptr(wszServerName)
+	r1, _, _ := syscall.SyscallN(procNetworkIsolationGetEnterpriseIdAsync.Addr(), uintptr(unsafe.Pointer(_wszServerName)), uintptr(dwFlags), uintptr(unsafe.Pointer(context)), uintptr(callback), uintptr(unsafe.Pointer(hOperation)))
 	return uint32(r1)
 }
 
 // NetworkIsolationGetEnterpriseIdClose calls Firewallapi!NetworkIsolationGetEnterpriseIdClose.
 // https://learn.microsoft.com/windows/win32/api/netfw/nf-netfw-networkisolationgetenterpriseidclose
 // Minimum OS: windows10.0.10240.
-func NetworkIsolationGetEnterpriseIdClose(hOperation foundation.HANDLE, bWaitForOperation foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetworkIsolationGetEnterpriseIdClose.Addr(), uintptr(hOperation), uintptr(bWaitForOperation))
+func NetworkIsolationGetEnterpriseIdClose(hOperation foundation.HANDLE, bWaitForOperation bool) uint32 {
+	_bWaitForOperation := win32.Bool32(bWaitForOperation)
+	r1, _, _ := syscall.SyscallN(procNetworkIsolationGetEnterpriseIdClose.Addr(), uintptr(hOperation), uintptr(_bWaitForOperation))
 	return uint32(r1)
 }
 
@@ -118,17 +122,29 @@ func NetworkIsolationRegisterForAppContainerChanges(flags uint32, callback PAC_C
 // NetworkIsolationSetAppContainerConfig calls api-ms-win-net-isolation-l1-1-0!NetworkIsolationSetAppContainerConfig.
 // https://learn.microsoft.com/windows/win32/api/netfw/nf-netfw-networkisolationsetappcontainerconfig
 // Minimum OS: windows8.0.
-func NetworkIsolationSetAppContainerConfig(dwNumPublicAppCs uint32, appContainerSids *security.SID_AND_ATTRIBUTES) uint32 {
-	r1, _, _ := syscall.SyscallN(procNetworkIsolationSetAppContainerConfig.Addr(), uintptr(dwNumPublicAppCs), uintptr(unsafe.Pointer(appContainerSids)))
+func NetworkIsolationSetAppContainerConfig(appContainerSids []security.SID_AND_ATTRIBUTES) uint32 {
+	var _appContainerSids *security.SID_AND_ATTRIBUTES
+	if len(appContainerSids) > 0 {
+		_appContainerSids = &appContainerSids[0]
+	}
+	r1, _, _ := syscall.SyscallN(procNetworkIsolationSetAppContainerConfig.Addr(), uintptr(len(appContainerSids)), uintptr(unsafe.Pointer(_appContainerSids)))
 	return uint32(r1)
 }
 
 // NetworkIsolationSetupAppContainerBinaries calls api-ms-win-net-isolation-l1-1-0!NetworkIsolationSetupAppContainerBinaries.
 // https://learn.microsoft.com/windows/win32/api/netfw/nf-netfw-networkisolationsetupappcontainerbinaries
 // Minimum OS: windows8.0.
-func NetworkIsolationSetupAppContainerBinaries(applicationContainerSid security.PSID, packageFullName foundation.PWSTR, packageFolder foundation.PWSTR, displayName foundation.PWSTR, bBinariesFullyComputed foundation.BOOL, binaries *foundation.PWSTR, binariesCount uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procNetworkIsolationSetupAppContainerBinaries.Addr(), uintptr(applicationContainerSid), uintptr(unsafe.Pointer(packageFullName)), uintptr(unsafe.Pointer(packageFolder)), uintptr(unsafe.Pointer(displayName)), uintptr(bBinariesFullyComputed), uintptr(unsafe.Pointer(binaries)), uintptr(binariesCount))
-	return foundation.HRESULT(r1)
+func NetworkIsolationSetupAppContainerBinaries(applicationContainerSid security.PSID, packageFullName string, packageFolder string, displayName string, bBinariesFullyComputed bool, binaries []foundation.PWSTR) error {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	_packageFolder := win32.UTF16Ptr(packageFolder)
+	_displayName := win32.UTF16Ptr(displayName)
+	_bBinariesFullyComputed := win32.Bool32(bBinariesFullyComputed)
+	var _binaries *foundation.PWSTR
+	if len(binaries) > 0 {
+		_binaries = &binaries[0]
+	}
+	r1, _, _ := syscall.SyscallN(procNetworkIsolationSetupAppContainerBinaries.Addr(), uintptr(applicationContainerSid), uintptr(unsafe.Pointer(_packageFullName)), uintptr(unsafe.Pointer(_packageFolder)), uintptr(unsafe.Pointer(_displayName)), uintptr(_bBinariesFullyComputed), uintptr(unsafe.Pointer(_binaries)), uintptr(len(binaries)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // NetworkIsolationUnregisterForAppContainerChanges calls api-ms-win-net-isolation-l1-1-0!NetworkIsolationUnregisterForAppContainerChanges.

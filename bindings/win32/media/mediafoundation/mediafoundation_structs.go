@@ -2208,8 +2208,8 @@ type D3D12_VIDEO_ENCODER_CODEC_AV1_QUANTIZATION_DELTA_CONFIG struct {
 	DeltaQRes     uint64
 }
 
-// D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2238,8 +2238,8 @@ type D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_HEVC struct {
 	Max_transform_hierarchy_depth_intra byte
 }
 
-// D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2285,8 +2285,8 @@ type D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC1 struct {
 	SupportFlags1                                            D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT_HEVC_FLAGS1
 }
 
-// D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2321,8 +2321,8 @@ type D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM struct {
 	FrameStartOffset uint64
 }
 
-// D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_COMPRESSED_BITSTREAM1_Anonymous_e__Union struct {
 	Data [7]uint64
 }
@@ -2351,8 +2351,8 @@ type D3D12_VIDEO_ENCODER_DIRTY_RECT_INFO struct {
 	SourceDPBFrameReference uint32
 }
 
-// D3D12_VIDEO_ENCODER_DIRTY_REGIONS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_DIRTY_REGIONS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_DIRTY_REGIONS_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2422,8 +2422,8 @@ type D3D12_VIDEO_ENCODER_FRAME_MOTION_SEARCH_MODE_CONFIG struct {
 	SearchDeviationLimit uint32
 }
 
-// D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2433,8 +2433,8 @@ type D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS struct {
 	Anonymous D3D12_VIDEO_ENCODER_FRAME_MOTION_VECTORS_Anonymous_e__Union
 }
 
-// D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_CONFIG_SUPPORT_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2473,8 +2473,8 @@ type D3D12_VIDEO_ENCODER_HEAP_DESC1 struct {
 	Pow2DownscaleFactor  uint32
 }
 
-// D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_INPUT_MAP_DATA_Anonymous_e__Union struct {
 	Data [9]uint64
 }
@@ -2523,8 +2523,8 @@ type D3D12_VIDEO_ENCODER_INTRA_REFRESH struct {
 	IntraRefreshDuration uint32
 }
 
-// D3D12_VIDEO_ENCODER_LEVEL_SETTING_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_LEVEL_SETTING_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_LEVEL_SETTING_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2580,8 +2580,8 @@ type D3D12_VIDEO_ENCODER_OUTPUT_METADATA_STATISTICS struct {
 	AverageMotionEstimationYDirection uint64
 }
 
-// D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2592,8 +2592,8 @@ type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA struct {
 	Anonymous D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA_Anonymous_e__Union
 }
 
-// D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_CODEC_DATA1_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2741,8 +2741,8 @@ type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_DESC1 struct {
 	FrameAnalysis           D3D12_VIDEO_ENCODER_FRAME_ANALYSIS
 }
 
-// D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2753,8 +2753,8 @@ type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA struct {
 	Anonymous D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_Anonymous_e__Union
 }
 
-// D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_PICTURE_CONTROL_SUBREGIONS_LAYOUT_DATA_SLICES_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -2776,8 +2776,8 @@ type D3D12_VIDEO_ENCODER_PICTURE_RESOLUTION_RATIO_DESC struct {
 	HeightRatio uint32
 }
 
-// D3D12_VIDEO_ENCODER_PROFILE_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_PROFILE_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_PROFILE_DESC_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2831,8 +2831,8 @@ type D3D12_VIDEO_ENCODER_RATE_CONTROL_CBR1 struct {
 	QualityVsSpeed     uint32
 }
 
-// D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_RATE_CONTROL_CONFIGURATION_PARAMS_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2989,8 +2989,8 @@ type D3D12_VIDEO_ENCODER_SEQUENCE_CONTROL_DESC struct {
 	CodecGopSequence          D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE
 }
 
-// D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D12_VIDEO_ENCODER_SEQUENCE_GOP_STRUCTURE_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -3335,8 +3335,8 @@ type DXVA2_DecodeExtensionData struct {
 	PrivateOutputDataSize uint32
 }
 
-// DXVA2_ExtendedFormat_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DXVA2_ExtendedFormat_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DXVA2_ExtendedFormat_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -3353,8 +3353,8 @@ type DXVA2_FilterValues struct {
 	Radius    DXVA2_Fixed32
 }
 
-// DXVA2_Fixed32_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DXVA2_Fixed32_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DXVA2_Fixed32_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -3549,8 +3549,8 @@ type DXVAHD_BLT_STATE_CONSTRICTION_DATA struct {
 	Size   foundation.SIZE
 }
 
-// DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DXVAHD_BLT_STATE_OUTPUT_COLOR_SPACE_DATA_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -3574,8 +3574,8 @@ type DXVAHD_BLT_STATE_TARGET_RECT_DATA struct {
 }
 
 // DXVAHD_COLOR: https://learn.microsoft.com/windows/win32/api/dxvahd/ns-dxvahd-dxvahd_color
-// DXVAHD_COLOR is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DXVAHD_COLOR is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DXVAHD_COLOR struct {
 	Data [4]uint32
 }
@@ -3676,8 +3676,8 @@ type DXVAHD_STREAM_STATE_FRAME_FORMAT_DATA struct {
 	FrameFormat DXVAHD_FRAME_FORMAT
 }
 
-// DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DXVAHD_STREAM_STATE_INPUT_COLOR_SPACE_DATA_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -4284,8 +4284,8 @@ type MFP_STOP_EVENT struct {
 }
 
 // MFPaletteEntry: https://learn.microsoft.com/windows/win32/api/mfobjects/ns-mfobjects-mfpaletteentry
-// MFPaletteEntry is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MFPaletteEntry is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MFPaletteEntry struct {
 	Data [4]byte
 }
@@ -4331,8 +4331,8 @@ type MFSampleExtensionPsnrYuv struct {
 	PsnrV float32
 }
 
-// MFTOPONODE_ATTRIBUTE_UPDATE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MFTOPONODE_ATTRIBUTE_UPDATE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MFTOPONODE_ATTRIBUTE_UPDATE_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -4401,8 +4401,8 @@ type MFVIDEOFORMAT struct {
 	SurfaceInfo    MFVideoSurfaceInfo
 }
 
-// MFVideoAlphaBitmap_bitmap_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MFVideoAlphaBitmap_bitmap_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MFVideoAlphaBitmap_bitmap_e__Union struct {
 	Data [1]uint64
 }
@@ -4677,8 +4677,8 @@ type VIDEOINFOHEADER struct {
 	BmiHeader       graphicsgdi.BITMAPINFOHEADER
 }
 
-// VIDEOINFOHEADER2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VIDEOINFOHEADER2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VIDEOINFOHEADER2_Anonymous_e__Union struct {
 	Data [1]uint32
 }

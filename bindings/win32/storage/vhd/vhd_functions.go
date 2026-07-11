@@ -53,8 +53,9 @@ var (
 // AddVirtualDiskParent calls VirtDisk!AddVirtualDiskParent.
 // https://learn.microsoft.com/windows/win32/api/virtdisk/nf-virtdisk-addvirtualdiskparent
 // Minimum OS: windows8.0.
-func AddVirtualDiskParent(VirtualDiskHandle foundation.HANDLE, ParentPath foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procAddVirtualDiskParent.Addr(), uintptr(VirtualDiskHandle), uintptr(unsafe.Pointer(ParentPath)))
+func AddVirtualDiskParent(VirtualDiskHandle foundation.HANDLE, ParentPath string) foundation.WIN32_ERROR {
+	_ParentPath := win32.UTF16Ptr(ParentPath)
+	r1, _, _ := syscall.SyscallN(procAddVirtualDiskParent.Addr(), uintptr(VirtualDiskHandle), uintptr(unsafe.Pointer(_ParentPath)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -99,8 +100,9 @@ func CompleteForkVirtualDisk(VirtualDiskHandle foundation.HANDLE) foundation.WIN
 // CreateVirtualDisk calls VirtDisk!CreateVirtualDisk.
 // https://learn.microsoft.com/windows/win32/api/virtdisk/nf-virtdisk-createvirtualdisk
 // Minimum OS: windows6.1.
-func CreateVirtualDisk(VirtualStorageType *VIRTUAL_STORAGE_TYPE, Path foundation.PWSTR, VirtualDiskAccessMask VIRTUAL_DISK_ACCESS_MASK, SecurityDescriptor security.PSECURITY_DESCRIPTOR, Flags CREATE_VIRTUAL_DISK_FLAG, ProviderSpecificFlags uint32, Parameters *CREATE_VIRTUAL_DISK_PARAMETERS, Overlapped *systemio.OVERLAPPED, Handle *foundation.HANDLE) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procCreateVirtualDisk.Addr(), uintptr(unsafe.Pointer(VirtualStorageType)), uintptr(unsafe.Pointer(Path)), uintptr(VirtualDiskAccessMask), uintptr(SecurityDescriptor), uintptr(Flags), uintptr(ProviderSpecificFlags), uintptr(unsafe.Pointer(Parameters)), uintptr(unsafe.Pointer(Overlapped)), uintptr(unsafe.Pointer(Handle)))
+func CreateVirtualDisk(VirtualStorageType *VIRTUAL_STORAGE_TYPE, Path string, VirtualDiskAccessMask VIRTUAL_DISK_ACCESS_MASK, SecurityDescriptor security.PSECURITY_DESCRIPTOR, Flags CREATE_VIRTUAL_DISK_FLAG, ProviderSpecificFlags uint32, Parameters *CREATE_VIRTUAL_DISK_PARAMETERS, Overlapped *systemio.OVERLAPPED, Handle *foundation.HANDLE) foundation.WIN32_ERROR {
+	_Path := win32.UTF16Ptr(Path)
+	r1, _, _ := syscall.SyscallN(procCreateVirtualDisk.Addr(), uintptr(unsafe.Pointer(VirtualStorageType)), uintptr(unsafe.Pointer(_Path)), uintptr(VirtualDiskAccessMask), uintptr(SecurityDescriptor), uintptr(Flags), uintptr(ProviderSpecificFlags), uintptr(unsafe.Pointer(Parameters)), uintptr(unsafe.Pointer(Overlapped)), uintptr(unsafe.Pointer(Handle)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -223,16 +225,18 @@ func ModifyVhdSet(VirtualDiskHandle foundation.HANDLE, Parameters *MODIFY_VHDSET
 // OpenVirtualDisk calls VirtDisk!OpenVirtualDisk.
 // https://learn.microsoft.com/windows/win32/api/virtdisk/nf-virtdisk-openvirtualdisk
 // Minimum OS: windows6.1.
-func OpenVirtualDisk(VirtualStorageType *VIRTUAL_STORAGE_TYPE, Path foundation.PWSTR, VirtualDiskAccessMask VIRTUAL_DISK_ACCESS_MASK, Flags OPEN_VIRTUAL_DISK_FLAG, Parameters *OPEN_VIRTUAL_DISK_PARAMETERS, Handle *foundation.HANDLE) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procOpenVirtualDisk.Addr(), uintptr(unsafe.Pointer(VirtualStorageType)), uintptr(unsafe.Pointer(Path)), uintptr(VirtualDiskAccessMask), uintptr(Flags), uintptr(unsafe.Pointer(Parameters)), uintptr(unsafe.Pointer(Handle)))
+func OpenVirtualDisk(VirtualStorageType *VIRTUAL_STORAGE_TYPE, Path string, VirtualDiskAccessMask VIRTUAL_DISK_ACCESS_MASK, Flags OPEN_VIRTUAL_DISK_FLAG, Parameters *OPEN_VIRTUAL_DISK_PARAMETERS, Handle *foundation.HANDLE) foundation.WIN32_ERROR {
+	_Path := win32.UTF16Ptr(Path)
+	r1, _, _ := syscall.SyscallN(procOpenVirtualDisk.Addr(), uintptr(unsafe.Pointer(VirtualStorageType)), uintptr(unsafe.Pointer(_Path)), uintptr(VirtualDiskAccessMask), uintptr(Flags), uintptr(unsafe.Pointer(Parameters)), uintptr(unsafe.Pointer(Handle)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // QueryChangesVirtualDisk calls VirtDisk!QueryChangesVirtualDisk.
 // https://learn.microsoft.com/windows/win32/api/virtdisk/nf-virtdisk-querychangesvirtualdisk
 // Minimum OS: windows10.0.10240.
-func QueryChangesVirtualDisk(VirtualDiskHandle foundation.HANDLE, ChangeTrackingId foundation.PWSTR, ByteOffset uint64, ByteLength uint64, Flags QUERY_CHANGES_VIRTUAL_DISK_FLAG, Ranges *QUERY_CHANGES_VIRTUAL_DISK_RANGE, RangeCount *uint32, ProcessedLength *uint64) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procQueryChangesVirtualDisk.Addr(), uintptr(VirtualDiskHandle), uintptr(unsafe.Pointer(ChangeTrackingId)), uintptr(ByteOffset), uintptr(ByteLength), uintptr(Flags), uintptr(unsafe.Pointer(Ranges)), uintptr(unsafe.Pointer(RangeCount)), uintptr(unsafe.Pointer(ProcessedLength)))
+func QueryChangesVirtualDisk(VirtualDiskHandle foundation.HANDLE, ChangeTrackingId string, ByteOffset uint64, ByteLength uint64, Flags QUERY_CHANGES_VIRTUAL_DISK_FLAG, Ranges *QUERY_CHANGES_VIRTUAL_DISK_RANGE, RangeCount *uint32, ProcessedLength *uint64) foundation.WIN32_ERROR {
+	_ChangeTrackingId := win32.UTF16Ptr(ChangeTrackingId)
+	r1, _, _ := syscall.SyscallN(procQueryChangesVirtualDisk.Addr(), uintptr(VirtualDiskHandle), uintptr(unsafe.Pointer(_ChangeTrackingId)), uintptr(ByteOffset), uintptr(ByteLength), uintptr(Flags), uintptr(unsafe.Pointer(Ranges)), uintptr(unsafe.Pointer(RangeCount)), uintptr(unsafe.Pointer(ProcessedLength)))
 	return foundation.WIN32_ERROR(r1)
 }
 

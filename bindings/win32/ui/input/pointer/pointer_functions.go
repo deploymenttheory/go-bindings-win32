@@ -59,8 +59,9 @@ func DestroySyntheticPointerDevice(device HSYNTHETICPOINTERDEVICE) {
 // EnableMouseInPointer calls USER32!EnableMouseInPointer.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enablemouseinpointer
 // Minimum OS: windows8.0.
-func EnableMouseInPointer(fEnable foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procEnableMouseInPointer.Addr(), uintptr(fEnable))
+func EnableMouseInPointer(fEnable bool) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, e1 := syscall.SyscallN(procEnableMouseInPointer.Addr(), uintptr(_fEnable))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -224,8 +225,12 @@ func GetPointerInfoHistory(pointerId uint32, entriesCount *uint32, pointerInfo *
 // GetPointerInputTransform calls USER32!GetPointerInputTransform.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getpointerinputtransform
 // Minimum OS: windows8.1.
-func GetPointerInputTransform(pointerId uint32, historyCount uint32, inputTransform *INPUT_TRANSFORM) error {
-	r1, _, e1 := syscall.SyscallN(procGetPointerInputTransform.Addr(), uintptr(pointerId), uintptr(historyCount), uintptr(unsafe.Pointer(inputTransform)))
+func GetPointerInputTransform(pointerId uint32, inputTransform []INPUT_TRANSFORM) error {
+	var _inputTransform *INPUT_TRANSFORM
+	if len(inputTransform) > 0 {
+		_inputTransform = &inputTransform[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetPointerInputTransform.Addr(), uintptr(pointerId), uintptr(len(inputTransform)), uintptr(unsafe.Pointer(_inputTransform)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -290,8 +295,12 @@ func GetPointerType(pointerId uint32, pointerType *uiwindowsandmessaging.POINTER
 // GetRawPointerDeviceData calls USER32!GetRawPointerDeviceData.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getrawpointerdevicedata
 // Minimum OS: windows8.0.
-func GetRawPointerDeviceData(pointerId uint32, historyCount uint32, propertiesCount uint32, pProperties *POINTER_DEVICE_PROPERTY, pValues *int32) error {
-	r1, _, e1 := syscall.SyscallN(procGetRawPointerDeviceData.Addr(), uintptr(pointerId), uintptr(historyCount), uintptr(propertiesCount), uintptr(unsafe.Pointer(pProperties)), uintptr(unsafe.Pointer(pValues)))
+func GetRawPointerDeviceData(pointerId uint32, historyCount uint32, pProperties []POINTER_DEVICE_PROPERTY, pValues *int32) error {
+	var _pProperties *POINTER_DEVICE_PROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetRawPointerDeviceData.Addr(), uintptr(pointerId), uintptr(historyCount), uintptr(len(pProperties)), uintptr(unsafe.Pointer(_pProperties)), uintptr(unsafe.Pointer(pValues)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -320,8 +329,12 @@ func InitializeTouchInjection(maxCount uint32, dwMode TOUCH_FEEDBACK_MODE) error
 // InjectSyntheticPointerInput calls USER32!InjectSyntheticPointerInput.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-injectsyntheticpointerinput
 // Minimum OS: windows10.0.17763.
-func InjectSyntheticPointerInput(device HSYNTHETICPOINTERDEVICE, pointerInfo *POINTER_TYPE_INFO, count uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInjectSyntheticPointerInput.Addr(), uintptr(device), uintptr(unsafe.Pointer(pointerInfo)), uintptr(count))
+func InjectSyntheticPointerInput(device HSYNTHETICPOINTERDEVICE, pointerInfo []POINTER_TYPE_INFO) error {
+	var _pointerInfo *POINTER_TYPE_INFO
+	if len(pointerInfo) > 0 {
+		_pointerInfo = &pointerInfo[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procInjectSyntheticPointerInput.Addr(), uintptr(device), uintptr(unsafe.Pointer(_pointerInfo)), uintptr(len(pointerInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -331,8 +344,12 @@ func InjectSyntheticPointerInput(device HSYNTHETICPOINTERDEVICE, pointerInfo *PO
 // InjectTouchInput calls USER32!InjectTouchInput.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-injecttouchinput
 // Minimum OS: windows8.0.
-func InjectTouchInput(count uint32, contacts *POINTER_TOUCH_INFO) error {
-	r1, _, e1 := syscall.SyscallN(procInjectTouchInput.Addr(), uintptr(count), uintptr(unsafe.Pointer(contacts)))
+func InjectTouchInput(contacts []POINTER_TOUCH_INFO) error {
+	var _contacts *POINTER_TOUCH_INFO
+	if len(contacts) > 0 {
+		_contacts = &contacts[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procInjectTouchInput.Addr(), uintptr(len(contacts)), uintptr(unsafe.Pointer(_contacts)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -342,9 +359,9 @@ func InjectTouchInput(count uint32, contacts *POINTER_TOUCH_INFO) error {
 // IsMouseInPointerEnabled calls USER32!IsMouseInPointerEnabled.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-ismouseinpointerenabled
 // Minimum OS: windows8.0.
-func IsMouseInPointerEnabled() foundation.BOOL {
+func IsMouseInPointerEnabled() bool {
 	r1, _, _ := syscall.SyscallN(procIsMouseInPointerEnabled.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SkipPointerFrameMessages calls USER32!SkipPointerFrameMessages.

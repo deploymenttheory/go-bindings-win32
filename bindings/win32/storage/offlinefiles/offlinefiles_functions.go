@@ -26,8 +26,9 @@ var (
 // OfflineFilesEnable calls CSCAPI!OfflineFilesEnable.
 // https://learn.microsoft.com/windows/win32/api/cscapi/nf-cscapi-offlinefilesenable
 // Minimum OS: windows6.0.6000.
-func OfflineFilesEnable(bEnable foundation.BOOL, pbRebootRequired *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procOfflineFilesEnable.Addr(), uintptr(bEnable), uintptr(unsafe.Pointer(pbRebootRequired)))
+func OfflineFilesEnable(bEnable bool, pbRebootRequired *foundation.BOOL) uint32 {
+	_bEnable := win32.Bool32(bEnable)
+	r1, _, _ := syscall.SyscallN(procOfflineFilesEnable.Addr(), uintptr(_bEnable), uintptr(unsafe.Pointer(pbRebootRequired)))
 	return uint32(r1)
 }
 

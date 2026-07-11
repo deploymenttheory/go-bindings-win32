@@ -46,27 +46,27 @@ var (
 	procQueryPerformanceCounter             = modKERNEL32.NewProc("QueryPerformanceCounter")
 	procQueryPerformanceFrequency           = modKERNEL32.NewProc("QueryPerformanceFrequency")
 	procBackupPerfRegistryToFileW           = modloadperf.NewProc("BackupPerfRegistryToFileW")
+	procInstallPerfDll                      = modloadperf.NewProc("InstallPerfDllW")
 	procInstallPerfDllA                     = modloadperf.NewProc("InstallPerfDllA")
-	procInstallPerfDllW                     = modloadperf.NewProc("InstallPerfDllW")
+	procLoadPerfCounterTextStrings          = modloadperf.NewProc("LoadPerfCounterTextStringsW")
 	procLoadPerfCounterTextStringsA         = modloadperf.NewProc("LoadPerfCounterTextStringsA")
-	procLoadPerfCounterTextStringsW         = modloadperf.NewProc("LoadPerfCounterTextStringsW")
 	procRestorePerfRegistryFromFileW        = modloadperf.NewProc("RestorePerfRegistryFromFileW")
+	procSetServiceAsTrusted                 = modloadperf.NewProc("SetServiceAsTrustedW")
 	procSetServiceAsTrustedA                = modloadperf.NewProc("SetServiceAsTrustedA")
-	procSetServiceAsTrustedW                = modloadperf.NewProc("SetServiceAsTrustedW")
+	procUnloadPerfCounterTextStrings        = modloadperf.NewProc("UnloadPerfCounterTextStringsW")
 	procUnloadPerfCounterTextStringsA       = modloadperf.NewProc("UnloadPerfCounterTextStringsA")
-	procUnloadPerfCounterTextStringsW       = modloadperf.NewProc("UnloadPerfCounterTextStringsW")
+	procUpdatePerfNameFiles                 = modloadperf.NewProc("UpdatePerfNameFilesW")
 	procUpdatePerfNameFilesA                = modloadperf.NewProc("UpdatePerfNameFilesA")
-	procUpdatePerfNameFilesW                = modloadperf.NewProc("UpdatePerfNameFilesW")
+	procPdhAddCounter                       = modpdh.NewProc("PdhAddCounterW")
 	procPdhAddCounterA                      = modpdh.NewProc("PdhAddCounterA")
-	procPdhAddCounterW                      = modpdh.NewProc("PdhAddCounterW")
+	procPdhAddEnglishCounter                = modpdh.NewProc("PdhAddEnglishCounterW")
 	procPdhAddEnglishCounterA               = modpdh.NewProc("PdhAddEnglishCounterA")
-	procPdhAddEnglishCounterW               = modpdh.NewProc("PdhAddEnglishCounterW")
+	procPdhBindInputDataSource              = modpdh.NewProc("PdhBindInputDataSourceW")
 	procPdhBindInputDataSourceA             = modpdh.NewProc("PdhBindInputDataSourceA")
-	procPdhBindInputDataSourceW             = modpdh.NewProc("PdhBindInputDataSourceW")
+	procPdhBrowseCounters                   = modpdh.NewProc("PdhBrowseCountersW")
 	procPdhBrowseCountersA                  = modpdh.NewProc("PdhBrowseCountersA")
+	procPdhBrowseCountersH                  = modpdh.NewProc("PdhBrowseCountersHW")
 	procPdhBrowseCountersHA                 = modpdh.NewProc("PdhBrowseCountersHA")
-	procPdhBrowseCountersHW                 = modpdh.NewProc("PdhBrowseCountersHW")
-	procPdhBrowseCountersW                  = modpdh.NewProc("PdhBrowseCountersW")
 	procPdhCalculateCounterFromRawValue     = modpdh.NewProc("PdhCalculateCounterFromRawValue")
 	procPdhCloseLog                         = modpdh.NewProc("PdhCloseLog")
 	procPdhCloseQuery                       = modpdh.NewProc("PdhCloseQuery")
@@ -74,91 +74,102 @@ var (
 	procPdhCollectQueryDataEx               = modpdh.NewProc("PdhCollectQueryDataEx")
 	procPdhCollectQueryDataWithTime         = modpdh.NewProc("PdhCollectQueryDataWithTime")
 	procPdhComputeCounterStatistics         = modpdh.NewProc("PdhComputeCounterStatistics")
+	procPdhConnectMachine                   = modpdh.NewProc("PdhConnectMachineW")
 	procPdhConnectMachineA                  = modpdh.NewProc("PdhConnectMachineA")
-	procPdhConnectMachineW                  = modpdh.NewProc("PdhConnectMachineW")
+	procPdhCreateSQLTables                  = modpdh.NewProc("PdhCreateSQLTablesW")
 	procPdhCreateSQLTablesA                 = modpdh.NewProc("PdhCreateSQLTablesA")
-	procPdhCreateSQLTablesW                 = modpdh.NewProc("PdhCreateSQLTablesW")
+	procPdhEnumLogSetNames                  = modpdh.NewProc("PdhEnumLogSetNamesW")
 	procPdhEnumLogSetNamesA                 = modpdh.NewProc("PdhEnumLogSetNamesA")
-	procPdhEnumLogSetNamesW                 = modpdh.NewProc("PdhEnumLogSetNamesW")
+	procPdhEnumMachines                     = modpdh.NewProc("PdhEnumMachinesW")
 	procPdhEnumMachinesA                    = modpdh.NewProc("PdhEnumMachinesA")
+	procPdhEnumMachinesH                    = modpdh.NewProc("PdhEnumMachinesHW")
 	procPdhEnumMachinesHA                   = modpdh.NewProc("PdhEnumMachinesHA")
-	procPdhEnumMachinesHW                   = modpdh.NewProc("PdhEnumMachinesHW")
-	procPdhEnumMachinesW                    = modpdh.NewProc("PdhEnumMachinesW")
+	procPdhEnumObjectItems                  = modpdh.NewProc("PdhEnumObjectItemsW")
 	procPdhEnumObjectItemsA                 = modpdh.NewProc("PdhEnumObjectItemsA")
+	procPdhEnumObjectItemsH                 = modpdh.NewProc("PdhEnumObjectItemsHW")
 	procPdhEnumObjectItemsHA                = modpdh.NewProc("PdhEnumObjectItemsHA")
-	procPdhEnumObjectItemsHW                = modpdh.NewProc("PdhEnumObjectItemsHW")
-	procPdhEnumObjectItemsW                 = modpdh.NewProc("PdhEnumObjectItemsW")
+	procPdhEnumObjects                      = modpdh.NewProc("PdhEnumObjectsW")
 	procPdhEnumObjectsA                     = modpdh.NewProc("PdhEnumObjectsA")
+	procPdhEnumObjectsH                     = modpdh.NewProc("PdhEnumObjectsHW")
 	procPdhEnumObjectsHA                    = modpdh.NewProc("PdhEnumObjectsHA")
-	procPdhEnumObjectsHW                    = modpdh.NewProc("PdhEnumObjectsHW")
-	procPdhEnumObjectsW                     = modpdh.NewProc("PdhEnumObjectsW")
+	procPdhExpandCounterPath                = modpdh.NewProc("PdhExpandCounterPathW")
 	procPdhExpandCounterPathA               = modpdh.NewProc("PdhExpandCounterPathA")
-	procPdhExpandCounterPathW               = modpdh.NewProc("PdhExpandCounterPathW")
+	procPdhExpandWildCardPath               = modpdh.NewProc("PdhExpandWildCardPathW")
 	procPdhExpandWildCardPathA              = modpdh.NewProc("PdhExpandWildCardPathA")
+	procPdhExpandWildCardPathH              = modpdh.NewProc("PdhExpandWildCardPathHW")
 	procPdhExpandWildCardPathHA             = modpdh.NewProc("PdhExpandWildCardPathHA")
-	procPdhExpandWildCardPathHW             = modpdh.NewProc("PdhExpandWildCardPathHW")
-	procPdhExpandWildCardPathW              = modpdh.NewProc("PdhExpandWildCardPathW")
 	procPdhFormatFromRawValue               = modpdh.NewProc("PdhFormatFromRawValue")
+	procPdhGetCounterInfo                   = modpdh.NewProc("PdhGetCounterInfoW")
 	procPdhGetCounterInfoA                  = modpdh.NewProc("PdhGetCounterInfoA")
-	procPdhGetCounterInfoW                  = modpdh.NewProc("PdhGetCounterInfoW")
 	procPdhGetCounterTimeBase               = modpdh.NewProc("PdhGetCounterTimeBase")
+	procPdhGetDataSourceTimeRange           = modpdh.NewProc("PdhGetDataSourceTimeRangeW")
 	procPdhGetDataSourceTimeRangeA          = modpdh.NewProc("PdhGetDataSourceTimeRangeA")
 	procPdhGetDataSourceTimeRangeH          = modpdh.NewProc("PdhGetDataSourceTimeRangeH")
-	procPdhGetDataSourceTimeRangeW          = modpdh.NewProc("PdhGetDataSourceTimeRangeW")
+	procPdhGetDefaultPerfCounter            = modpdh.NewProc("PdhGetDefaultPerfCounterW")
 	procPdhGetDefaultPerfCounterA           = modpdh.NewProc("PdhGetDefaultPerfCounterA")
+	procPdhGetDefaultPerfCounterH           = modpdh.NewProc("PdhGetDefaultPerfCounterHW")
 	procPdhGetDefaultPerfCounterHA          = modpdh.NewProc("PdhGetDefaultPerfCounterHA")
-	procPdhGetDefaultPerfCounterHW          = modpdh.NewProc("PdhGetDefaultPerfCounterHW")
-	procPdhGetDefaultPerfCounterW           = modpdh.NewProc("PdhGetDefaultPerfCounterW")
+	procPdhGetDefaultPerfObject             = modpdh.NewProc("PdhGetDefaultPerfObjectW")
 	procPdhGetDefaultPerfObjectA            = modpdh.NewProc("PdhGetDefaultPerfObjectA")
+	procPdhGetDefaultPerfObjectH            = modpdh.NewProc("PdhGetDefaultPerfObjectHW")
 	procPdhGetDefaultPerfObjectHA           = modpdh.NewProc("PdhGetDefaultPerfObjectHA")
-	procPdhGetDefaultPerfObjectHW           = modpdh.NewProc("PdhGetDefaultPerfObjectHW")
-	procPdhGetDefaultPerfObjectW            = modpdh.NewProc("PdhGetDefaultPerfObjectW")
 	procPdhGetDllVersion                    = modpdh.NewProc("PdhGetDllVersion")
+	procPdhGetFormattedCounterArray         = modpdh.NewProc("PdhGetFormattedCounterArrayW")
 	procPdhGetFormattedCounterArrayA        = modpdh.NewProc("PdhGetFormattedCounterArrayA")
-	procPdhGetFormattedCounterArrayW        = modpdh.NewProc("PdhGetFormattedCounterArrayW")
 	procPdhGetFormattedCounterValue         = modpdh.NewProc("PdhGetFormattedCounterValue")
 	procPdhGetLogFileSize                   = modpdh.NewProc("PdhGetLogFileSize")
 	procPdhGetLogSetGUID                    = modpdh.NewProc("PdhGetLogSetGUID")
+	procPdhGetRawCounterArray               = modpdh.NewProc("PdhGetRawCounterArrayW")
 	procPdhGetRawCounterArrayA              = modpdh.NewProc("PdhGetRawCounterArrayA")
-	procPdhGetRawCounterArrayW              = modpdh.NewProc("PdhGetRawCounterArrayW")
 	procPdhGetRawCounterValue               = modpdh.NewProc("PdhGetRawCounterValue")
 	procPdhIsRealTimeQuery                  = modpdh.NewProc("PdhIsRealTimeQuery")
+	procPdhLookupPerfIndexByName            = modpdh.NewProc("PdhLookupPerfIndexByNameW")
 	procPdhLookupPerfIndexByNameA           = modpdh.NewProc("PdhLookupPerfIndexByNameA")
-	procPdhLookupPerfIndexByNameW           = modpdh.NewProc("PdhLookupPerfIndexByNameW")
+	procPdhLookupPerfNameByIndex            = modpdh.NewProc("PdhLookupPerfNameByIndexW")
 	procPdhLookupPerfNameByIndexA           = modpdh.NewProc("PdhLookupPerfNameByIndexA")
-	procPdhLookupPerfNameByIndexW           = modpdh.NewProc("PdhLookupPerfNameByIndexW")
+	procPdhMakeCounterPath                  = modpdh.NewProc("PdhMakeCounterPathW")
 	procPdhMakeCounterPathA                 = modpdh.NewProc("PdhMakeCounterPathA")
-	procPdhMakeCounterPathW                 = modpdh.NewProc("PdhMakeCounterPathW")
+	procPdhOpenLog                          = modpdh.NewProc("PdhOpenLogW")
 	procPdhOpenLogA                         = modpdh.NewProc("PdhOpenLogA")
-	procPdhOpenLogW                         = modpdh.NewProc("PdhOpenLogW")
+	procPdhOpenQuery                        = modpdh.NewProc("PdhOpenQueryW")
 	procPdhOpenQueryA                       = modpdh.NewProc("PdhOpenQueryA")
 	procPdhOpenQueryH                       = modpdh.NewProc("PdhOpenQueryH")
-	procPdhOpenQueryW                       = modpdh.NewProc("PdhOpenQueryW")
+	procPdhParseCounterPath                 = modpdh.NewProc("PdhParseCounterPathW")
 	procPdhParseCounterPathA                = modpdh.NewProc("PdhParseCounterPathA")
-	procPdhParseCounterPathW                = modpdh.NewProc("PdhParseCounterPathW")
+	procPdhParseInstanceName                = modpdh.NewProc("PdhParseInstanceNameW")
 	procPdhParseInstanceNameA               = modpdh.NewProc("PdhParseInstanceNameA")
-	procPdhParseInstanceNameW               = modpdh.NewProc("PdhParseInstanceNameW")
 	procPdhRemoveCounter                    = modpdh.NewProc("PdhRemoveCounter")
+	procPdhSelectDataSource                 = modpdh.NewProc("PdhSelectDataSourceW")
 	procPdhSelectDataSourceA                = modpdh.NewProc("PdhSelectDataSourceA")
-	procPdhSelectDataSourceW                = modpdh.NewProc("PdhSelectDataSourceW")
 	procPdhSetCounterScaleFactor            = modpdh.NewProc("PdhSetCounterScaleFactor")
 	procPdhSetDefaultRealTimeDataSource     = modpdh.NewProc("PdhSetDefaultRealTimeDataSource")
 	procPdhSetLogSetRunID                   = modpdh.NewProc("PdhSetLogSetRunID")
 	procPdhSetQueryTimeRange                = modpdh.NewProc("PdhSetQueryTimeRange")
+	procPdhUpdateLog                        = modpdh.NewProc("PdhUpdateLogW")
 	procPdhUpdateLogA                       = modpdh.NewProc("PdhUpdateLogA")
 	procPdhUpdateLogFileCatalog             = modpdh.NewProc("PdhUpdateLogFileCatalog")
-	procPdhUpdateLogW                       = modpdh.NewProc("PdhUpdateLogW")
+	procPdhValidatePath                     = modpdh.NewProc("PdhValidatePathW")
 	procPdhValidatePathA                    = modpdh.NewProc("PdhValidatePathA")
+	procPdhValidatePathEx                   = modpdh.NewProc("PdhValidatePathExW")
 	procPdhValidatePathExA                  = modpdh.NewProc("PdhValidatePathExA")
-	procPdhValidatePathExW                  = modpdh.NewProc("PdhValidatePathExW")
-	procPdhValidatePathW                    = modpdh.NewProc("PdhValidatePathW")
+	procPdhVerifySQLDB                      = modpdh.NewProc("PdhVerifySQLDBW")
 	procPdhVerifySQLDBA                     = modpdh.NewProc("PdhVerifySQLDBA")
-	procPdhVerifySQLDBW                     = modpdh.NewProc("PdhVerifySQLDBW")
 )
 
 // BackupPerfRegistryToFileW calls loadperf!BackupPerfRegistryToFileW.
-func BackupPerfRegistryToFileW(szFileName foundation.PWSTR, szCommentString foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procBackupPerfRegistryToFileW.Addr(), uintptr(unsafe.Pointer(szFileName)), uintptr(unsafe.Pointer(szCommentString)))
+func BackupPerfRegistryToFileW(szFileName string, szCommentString string) uint32 {
+	_szFileName := win32.UTF16Ptr(szFileName)
+	_szCommentString := win32.UTF16Ptr(szCommentString)
+	r1, _, _ := syscall.SyscallN(procBackupPerfRegistryToFileW.Addr(), uintptr(unsafe.Pointer(_szFileName)), uintptr(unsafe.Pointer(_szCommentString)))
+	return uint32(r1)
+}
+
+// InstallPerfDll calls loadperf!InstallPerfDllW.
+// https://learn.microsoft.com/windows/win32/api/loadperf/nf-loadperf-installperfdllw
+func InstallPerfDll(szComputerName string, lpIniFile string, dwFlags uintptr) uint32 {
+	_szComputerName := win32.UTF16Ptr(szComputerName)
+	_lpIniFile := win32.UTF16Ptr(lpIniFile)
+	r1, _, _ := syscall.SyscallN(procInstallPerfDll.Addr(), uintptr(unsafe.Pointer(_szComputerName)), uintptr(unsafe.Pointer(_lpIniFile)), uintptr(dwFlags))
 	return uint32(r1)
 }
 
@@ -169,26 +180,31 @@ func InstallPerfDllA(szComputerName foundation.PSTR, lpIniFile foundation.PSTR, 
 	return uint32(r1)
 }
 
-// InstallPerfDllW calls loadperf!InstallPerfDllW.
-// https://learn.microsoft.com/windows/win32/api/loadperf/nf-loadperf-installperfdllw
-func InstallPerfDllW(szComputerName foundation.PWSTR, lpIniFile foundation.PWSTR, dwFlags uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procInstallPerfDllW.Addr(), uintptr(unsafe.Pointer(szComputerName)), uintptr(unsafe.Pointer(lpIniFile)), uintptr(dwFlags))
+// LoadPerfCounterTextStrings calls loadperf!LoadPerfCounterTextStringsW.
+// https://learn.microsoft.com/windows/win32/api/loadperf/nf-loadperf-loadperfcountertextstringsw
+// Minimum OS: windows5.1.2600.
+func LoadPerfCounterTextStrings(lpCommandLine string, bQuietModeArg bool) uint32 {
+	_lpCommandLine := win32.UTF16Ptr(lpCommandLine)
+	_bQuietModeArg := win32.Bool32(bQuietModeArg)
+	r1, _, _ := syscall.SyscallN(procLoadPerfCounterTextStrings.Addr(), uintptr(unsafe.Pointer(_lpCommandLine)), uintptr(_bQuietModeArg))
 	return uint32(r1)
 }
 
 // LoadPerfCounterTextStringsA calls loadperf!LoadPerfCounterTextStringsA.
 // https://learn.microsoft.com/windows/win32/api/loadperf/nf-loadperf-loadperfcountertextstringsa
 // Minimum OS: windows5.1.2600.
-func LoadPerfCounterTextStringsA(lpCommandLine foundation.PSTR, bQuietModeArg foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procLoadPerfCounterTextStringsA.Addr(), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(bQuietModeArg))
+func LoadPerfCounterTextStringsA(lpCommandLine foundation.PSTR, bQuietModeArg bool) uint32 {
+	_bQuietModeArg := win32.Bool32(bQuietModeArg)
+	r1, _, _ := syscall.SyscallN(procLoadPerfCounterTextStringsA.Addr(), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(_bQuietModeArg))
 	return uint32(r1)
 }
 
-// LoadPerfCounterTextStringsW calls loadperf!LoadPerfCounterTextStringsW.
-// https://learn.microsoft.com/windows/win32/api/loadperf/nf-loadperf-loadperfcountertextstringsw
+// PdhAddCounter calls pdh!PdhAddCounterW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhaddcounterw
 // Minimum OS: windows5.1.2600.
-func LoadPerfCounterTextStringsW(lpCommandLine foundation.PWSTR, bQuietModeArg foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procLoadPerfCounterTextStringsW.Addr(), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(bQuietModeArg))
+func PdhAddCounter(hQuery PDH_HQUERY, szFullCounterPath string, dwUserData uintptr, phCounter *PDH_HCOUNTER) uint32 {
+	_szFullCounterPath := win32.UTF16Ptr(szFullCounterPath)
+	r1, _, _ := syscall.SyscallN(procPdhAddCounter.Addr(), uintptr(hQuery), uintptr(unsafe.Pointer(_szFullCounterPath)), uintptr(dwUserData), uintptr(unsafe.Pointer(phCounter)))
 	return uint32(r1)
 }
 
@@ -200,11 +216,12 @@ func PdhAddCounterA(hQuery PDH_HQUERY, szFullCounterPath foundation.PSTR, dwUser
 	return uint32(r1)
 }
 
-// PdhAddCounterW calls pdh!PdhAddCounterW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhaddcounterw
-// Minimum OS: windows5.1.2600.
-func PdhAddCounterW(hQuery PDH_HQUERY, szFullCounterPath foundation.PWSTR, dwUserData uintptr, phCounter *PDH_HCOUNTER) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhAddCounterW.Addr(), uintptr(hQuery), uintptr(unsafe.Pointer(szFullCounterPath)), uintptr(dwUserData), uintptr(unsafe.Pointer(phCounter)))
+// PdhAddEnglishCounter calls pdh!PdhAddEnglishCounterW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhaddenglishcounterw
+// Minimum OS: windows6.0.6000.
+func PdhAddEnglishCounter(hQuery PDH_HQUERY, szFullCounterPath string, dwUserData uintptr, phCounter *PDH_HCOUNTER) uint32 {
+	_szFullCounterPath := win32.UTF16Ptr(szFullCounterPath)
+	r1, _, _ := syscall.SyscallN(procPdhAddEnglishCounter.Addr(), uintptr(hQuery), uintptr(unsafe.Pointer(_szFullCounterPath)), uintptr(dwUserData), uintptr(unsafe.Pointer(phCounter)))
 	return uint32(r1)
 }
 
@@ -216,11 +233,12 @@ func PdhAddEnglishCounterA(hQuery PDH_HQUERY, szFullCounterPath foundation.PSTR,
 	return uint32(r1)
 }
 
-// PdhAddEnglishCounterW calls pdh!PdhAddEnglishCounterW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhaddenglishcounterw
-// Minimum OS: windows6.0.6000.
-func PdhAddEnglishCounterW(hQuery PDH_HQUERY, szFullCounterPath foundation.PWSTR, dwUserData uintptr, phCounter *PDH_HCOUNTER) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhAddEnglishCounterW.Addr(), uintptr(hQuery), uintptr(unsafe.Pointer(szFullCounterPath)), uintptr(dwUserData), uintptr(unsafe.Pointer(phCounter)))
+// PdhBindInputDataSource calls pdh!PdhBindInputDataSourceW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhbindinputdatasourcew
+// Minimum OS: windows5.1.2600.
+func PdhBindInputDataSource(phDataSource *PDH_HLOG, LogFileNameList string) uint32 {
+	_LogFileNameList := win32.UTF16Ptr(LogFileNameList)
+	r1, _, _ := syscall.SyscallN(procPdhBindInputDataSource.Addr(), uintptr(unsafe.Pointer(phDataSource)), uintptr(unsafe.Pointer(_LogFileNameList)))
 	return uint32(r1)
 }
 
@@ -232,11 +250,11 @@ func PdhBindInputDataSourceA(phDataSource *PDH_HLOG, LogFileNameList foundation.
 	return uint32(r1)
 }
 
-// PdhBindInputDataSourceW calls pdh!PdhBindInputDataSourceW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhbindinputdatasourcew
+// PdhBrowseCounters calls pdh!PdhBrowseCountersW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhbrowsecountersw
 // Minimum OS: windows5.1.2600.
-func PdhBindInputDataSourceW(phDataSource *PDH_HLOG, LogFileNameList foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhBindInputDataSourceW.Addr(), uintptr(unsafe.Pointer(phDataSource)), uintptr(unsafe.Pointer(LogFileNameList)))
+func PdhBrowseCounters(pBrowseDlgData *PDH_BROWSE_DLG_CONFIG_W) uint32 {
+	r1, _, _ := syscall.SyscallN(procPdhBrowseCounters.Addr(), uintptr(unsafe.Pointer(pBrowseDlgData)))
 	return uint32(r1)
 }
 
@@ -248,27 +266,19 @@ func PdhBrowseCountersA(pBrowseDlgData *PDH_BROWSE_DLG_CONFIG_A) uint32 {
 	return uint32(r1)
 }
 
+// PdhBrowseCountersH calls pdh!PdhBrowseCountersHW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhbrowsecountershw
+// Minimum OS: windows5.1.2600.
+func PdhBrowseCountersH(pBrowseDlgData *PDH_BROWSE_DLG_CONFIG_HW) uint32 {
+	r1, _, _ := syscall.SyscallN(procPdhBrowseCountersH.Addr(), uintptr(unsafe.Pointer(pBrowseDlgData)))
+	return uint32(r1)
+}
+
 // PdhBrowseCountersHA calls pdh!PdhBrowseCountersHA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhbrowsecountersha
 // Minimum OS: windows5.1.2600.
 func PdhBrowseCountersHA(pBrowseDlgData *PDH_BROWSE_DLG_CONFIG_HA) uint32 {
 	r1, _, _ := syscall.SyscallN(procPdhBrowseCountersHA.Addr(), uintptr(unsafe.Pointer(pBrowseDlgData)))
-	return uint32(r1)
-}
-
-// PdhBrowseCountersHW calls pdh!PdhBrowseCountersHW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhbrowsecountershw
-// Minimum OS: windows5.1.2600.
-func PdhBrowseCountersHW(pBrowseDlgData *PDH_BROWSE_DLG_CONFIG_HW) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhBrowseCountersHW.Addr(), uintptr(unsafe.Pointer(pBrowseDlgData)))
-	return uint32(r1)
-}
-
-// PdhBrowseCountersW calls pdh!PdhBrowseCountersW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhbrowsecountersw
-// Minimum OS: windows5.1.2600.
-func PdhBrowseCountersW(pBrowseDlgData *PDH_BROWSE_DLG_CONFIG_W) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhBrowseCountersW.Addr(), uintptr(unsafe.Pointer(pBrowseDlgData)))
 	return uint32(r1)
 }
 
@@ -328,6 +338,15 @@ func PdhComputeCounterStatistics(hCounter PDH_HCOUNTER, dwFormat PDH_FMT, dwFirs
 	return uint32(r1)
 }
 
+// PdhConnectMachine calls pdh!PdhConnectMachineW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhconnectmachinew
+// Minimum OS: windows5.1.2600.
+func PdhConnectMachine(szMachineName string) uint32 {
+	_szMachineName := win32.UTF16Ptr(szMachineName)
+	r1, _, _ := syscall.SyscallN(procPdhConnectMachine.Addr(), uintptr(unsafe.Pointer(_szMachineName)))
+	return uint32(r1)
+}
+
 // PdhConnectMachineA calls pdh!PdhConnectMachineA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhconnectmachinea
 // Minimum OS: windows5.1.2600.
@@ -336,11 +355,10 @@ func PdhConnectMachineA(szMachineName foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// PdhConnectMachineW calls pdh!PdhConnectMachineW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhconnectmachinew
-// Minimum OS: windows5.1.2600.
-func PdhConnectMachineW(szMachineName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhConnectMachineW.Addr(), uintptr(unsafe.Pointer(szMachineName)))
+// PdhCreateSQLTables calls pdh!PdhCreateSQLTablesW.
+func PdhCreateSQLTables(szDataSource string) uint32 {
+	_szDataSource := win32.UTF16Ptr(szDataSource)
+	r1, _, _ := syscall.SyscallN(procPdhCreateSQLTables.Addr(), uintptr(unsafe.Pointer(_szDataSource)))
 	return uint32(r1)
 }
 
@@ -350,9 +368,12 @@ func PdhCreateSQLTablesA(szDataSource foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
-// PdhCreateSQLTablesW calls pdh!PdhCreateSQLTablesW.
-func PdhCreateSQLTablesW(szDataSource foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhCreateSQLTablesW.Addr(), uintptr(unsafe.Pointer(szDataSource)))
+// PdhEnumLogSetNames calls pdh!PdhEnumLogSetNamesW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenumlogsetnamesw
+// Minimum OS: windows5.1.2600.
+func PdhEnumLogSetNames(szDataSource string, mszDataSetNameList foundation.PWSTR, pcchBufferLength *uint32) uint32 {
+	_szDataSource := win32.UTF16Ptr(szDataSource)
+	r1, _, _ := syscall.SyscallN(procPdhEnumLogSetNames.Addr(), uintptr(unsafe.Pointer(_szDataSource)), uintptr(unsafe.Pointer(mszDataSetNameList)), uintptr(unsafe.Pointer(pcchBufferLength)))
 	return uint32(r1)
 }
 
@@ -364,11 +385,12 @@ func PdhEnumLogSetNamesA(szDataSource foundation.PSTR, mszDataSetNameList founda
 	return uint32(r1)
 }
 
-// PdhEnumLogSetNamesW calls pdh!PdhEnumLogSetNamesW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenumlogsetnamesw
+// PdhEnumMachines calls pdh!PdhEnumMachinesW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenummachinesw
 // Minimum OS: windows5.1.2600.
-func PdhEnumLogSetNamesW(szDataSource foundation.PWSTR, mszDataSetNameList foundation.PWSTR, pcchBufferLength *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhEnumLogSetNamesW.Addr(), uintptr(unsafe.Pointer(szDataSource)), uintptr(unsafe.Pointer(mszDataSetNameList)), uintptr(unsafe.Pointer(pcchBufferLength)))
+func PdhEnumMachines(szDataSource string, mszMachineList foundation.PWSTR, pcchBufferSize *uint32) uint32 {
+	_szDataSource := win32.UTF16Ptr(szDataSource)
+	r1, _, _ := syscall.SyscallN(procPdhEnumMachines.Addr(), uintptr(unsafe.Pointer(_szDataSource)), uintptr(unsafe.Pointer(mszMachineList)), uintptr(unsafe.Pointer(pcchBufferSize)))
 	return uint32(r1)
 }
 
@@ -380,6 +402,14 @@ func PdhEnumMachinesA(szDataSource foundation.PSTR, mszMachineList foundation.PS
 	return uint32(r1)
 }
 
+// PdhEnumMachinesH calls pdh!PdhEnumMachinesHW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenummachineshw
+// Minimum OS: windows5.1.2600.
+func PdhEnumMachinesH(hDataSource PDH_HLOG, mszMachineList foundation.PWSTR, pcchBufferSize *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procPdhEnumMachinesH.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(mszMachineList)), uintptr(unsafe.Pointer(pcchBufferSize)))
+	return uint32(r1)
+}
+
 // PdhEnumMachinesHA calls pdh!PdhEnumMachinesHA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenummachinesha
 // Minimum OS: windows5.1.2600.
@@ -388,19 +418,14 @@ func PdhEnumMachinesHA(hDataSource PDH_HLOG, mszMachineList foundation.PSTR, pcc
 	return uint32(r1)
 }
 
-// PdhEnumMachinesHW calls pdh!PdhEnumMachinesHW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenummachineshw
+// PdhEnumObjectItems calls pdh!PdhEnumObjectItemsW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenumobjectitemsw
 // Minimum OS: windows5.1.2600.
-func PdhEnumMachinesHW(hDataSource PDH_HLOG, mszMachineList foundation.PWSTR, pcchBufferSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhEnumMachinesHW.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(mszMachineList)), uintptr(unsafe.Pointer(pcchBufferSize)))
-	return uint32(r1)
-}
-
-// PdhEnumMachinesW calls pdh!PdhEnumMachinesW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenummachinesw
-// Minimum OS: windows5.1.2600.
-func PdhEnumMachinesW(szDataSource foundation.PWSTR, mszMachineList foundation.PWSTR, pcchBufferSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhEnumMachinesW.Addr(), uintptr(unsafe.Pointer(szDataSource)), uintptr(unsafe.Pointer(mszMachineList)), uintptr(unsafe.Pointer(pcchBufferSize)))
+func PdhEnumObjectItems(szDataSource string, szMachineName string, szObjectName string, mszCounterList foundation.PWSTR, pcchCounterListLength *uint32, mszInstanceList foundation.PWSTR, pcchInstanceListLength *uint32, dwDetailLevel PERF_DETAIL, dwFlags uint32) uint32 {
+	_szDataSource := win32.UTF16Ptr(szDataSource)
+	_szMachineName := win32.UTF16Ptr(szMachineName)
+	_szObjectName := win32.UTF16Ptr(szObjectName)
+	r1, _, _ := syscall.SyscallN(procPdhEnumObjectItems.Addr(), uintptr(unsafe.Pointer(_szDataSource)), uintptr(unsafe.Pointer(_szMachineName)), uintptr(unsafe.Pointer(_szObjectName)), uintptr(unsafe.Pointer(mszCounterList)), uintptr(unsafe.Pointer(pcchCounterListLength)), uintptr(unsafe.Pointer(mszInstanceList)), uintptr(unsafe.Pointer(pcchInstanceListLength)), uintptr(dwDetailLevel), uintptr(dwFlags))
 	return uint32(r1)
 }
 
@@ -412,6 +437,16 @@ func PdhEnumObjectItemsA(szDataSource foundation.PSTR, szMachineName foundation.
 	return uint32(r1)
 }
 
+// PdhEnumObjectItemsH calls pdh!PdhEnumObjectItemsHW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenumobjectitemshw
+// Minimum OS: windows5.1.2600.
+func PdhEnumObjectItemsH(hDataSource PDH_HLOG, szMachineName string, szObjectName string, mszCounterList foundation.PWSTR, pcchCounterListLength *uint32, mszInstanceList foundation.PWSTR, pcchInstanceListLength *uint32, dwDetailLevel PERF_DETAIL, dwFlags uint32) uint32 {
+	_szMachineName := win32.UTF16Ptr(szMachineName)
+	_szObjectName := win32.UTF16Ptr(szObjectName)
+	r1, _, _ := syscall.SyscallN(procPdhEnumObjectItemsH.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(_szMachineName)), uintptr(unsafe.Pointer(_szObjectName)), uintptr(unsafe.Pointer(mszCounterList)), uintptr(unsafe.Pointer(pcchCounterListLength)), uintptr(unsafe.Pointer(mszInstanceList)), uintptr(unsafe.Pointer(pcchInstanceListLength)), uintptr(dwDetailLevel), uintptr(dwFlags))
+	return uint32(r1)
+}
+
 // PdhEnumObjectItemsHA calls pdh!PdhEnumObjectItemsHA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenumobjectitemsha
 // Minimum OS: windows5.1.2600.
@@ -420,51 +455,51 @@ func PdhEnumObjectItemsHA(hDataSource PDH_HLOG, szMachineName foundation.PSTR, s
 	return uint32(r1)
 }
 
-// PdhEnumObjectItemsHW calls pdh!PdhEnumObjectItemsHW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenumobjectitemshw
+// PdhEnumObjects calls pdh!PdhEnumObjectsW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenumobjectsw
 // Minimum OS: windows5.1.2600.
-func PdhEnumObjectItemsHW(hDataSource PDH_HLOG, szMachineName foundation.PWSTR, szObjectName foundation.PWSTR, mszCounterList foundation.PWSTR, pcchCounterListLength *uint32, mszInstanceList foundation.PWSTR, pcchInstanceListLength *uint32, dwDetailLevel PERF_DETAIL, dwFlags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhEnumObjectItemsHW.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(szMachineName)), uintptr(unsafe.Pointer(szObjectName)), uintptr(unsafe.Pointer(mszCounterList)), uintptr(unsafe.Pointer(pcchCounterListLength)), uintptr(unsafe.Pointer(mszInstanceList)), uintptr(unsafe.Pointer(pcchInstanceListLength)), uintptr(dwDetailLevel), uintptr(dwFlags))
-	return uint32(r1)
-}
-
-// PdhEnumObjectItemsW calls pdh!PdhEnumObjectItemsW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenumobjectitemsw
-// Minimum OS: windows5.1.2600.
-func PdhEnumObjectItemsW(szDataSource foundation.PWSTR, szMachineName foundation.PWSTR, szObjectName foundation.PWSTR, mszCounterList foundation.PWSTR, pcchCounterListLength *uint32, mszInstanceList foundation.PWSTR, pcchInstanceListLength *uint32, dwDetailLevel PERF_DETAIL, dwFlags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhEnumObjectItemsW.Addr(), uintptr(unsafe.Pointer(szDataSource)), uintptr(unsafe.Pointer(szMachineName)), uintptr(unsafe.Pointer(szObjectName)), uintptr(unsafe.Pointer(mszCounterList)), uintptr(unsafe.Pointer(pcchCounterListLength)), uintptr(unsafe.Pointer(mszInstanceList)), uintptr(unsafe.Pointer(pcchInstanceListLength)), uintptr(dwDetailLevel), uintptr(dwFlags))
+func PdhEnumObjects(szDataSource string, szMachineName string, mszObjectList foundation.PWSTR, pcchBufferSize *uint32, dwDetailLevel PERF_DETAIL, bRefresh bool) uint32 {
+	_szDataSource := win32.UTF16Ptr(szDataSource)
+	_szMachineName := win32.UTF16Ptr(szMachineName)
+	_bRefresh := win32.Bool32(bRefresh)
+	r1, _, _ := syscall.SyscallN(procPdhEnumObjects.Addr(), uintptr(unsafe.Pointer(_szDataSource)), uintptr(unsafe.Pointer(_szMachineName)), uintptr(unsafe.Pointer(mszObjectList)), uintptr(unsafe.Pointer(pcchBufferSize)), uintptr(dwDetailLevel), uintptr(_bRefresh))
 	return uint32(r1)
 }
 
 // PdhEnumObjectsA calls pdh!PdhEnumObjectsA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenumobjectsa
 // Minimum OS: windows5.1.2600.
-func PdhEnumObjectsA(szDataSource foundation.PSTR, szMachineName foundation.PSTR, mszObjectList foundation.PSTR, pcchBufferSize *uint32, dwDetailLevel PERF_DETAIL, bRefresh foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhEnumObjectsA.Addr(), uintptr(unsafe.Pointer(szDataSource)), uintptr(unsafe.Pointer(szMachineName)), uintptr(unsafe.Pointer(mszObjectList)), uintptr(unsafe.Pointer(pcchBufferSize)), uintptr(dwDetailLevel), uintptr(bRefresh))
+func PdhEnumObjectsA(szDataSource foundation.PSTR, szMachineName foundation.PSTR, mszObjectList foundation.PSTR, pcchBufferSize *uint32, dwDetailLevel PERF_DETAIL, bRefresh bool) uint32 {
+	_bRefresh := win32.Bool32(bRefresh)
+	r1, _, _ := syscall.SyscallN(procPdhEnumObjectsA.Addr(), uintptr(unsafe.Pointer(szDataSource)), uintptr(unsafe.Pointer(szMachineName)), uintptr(unsafe.Pointer(mszObjectList)), uintptr(unsafe.Pointer(pcchBufferSize)), uintptr(dwDetailLevel), uintptr(_bRefresh))
+	return uint32(r1)
+}
+
+// PdhEnumObjectsH calls pdh!PdhEnumObjectsHW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenumobjectshw
+// Minimum OS: windows5.1.2600.
+func PdhEnumObjectsH(hDataSource PDH_HLOG, szMachineName string, mszObjectList foundation.PWSTR, pcchBufferSize *uint32, dwDetailLevel PERF_DETAIL, bRefresh bool) uint32 {
+	_szMachineName := win32.UTF16Ptr(szMachineName)
+	_bRefresh := win32.Bool32(bRefresh)
+	r1, _, _ := syscall.SyscallN(procPdhEnumObjectsH.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(_szMachineName)), uintptr(unsafe.Pointer(mszObjectList)), uintptr(unsafe.Pointer(pcchBufferSize)), uintptr(dwDetailLevel), uintptr(_bRefresh))
 	return uint32(r1)
 }
 
 // PdhEnumObjectsHA calls pdh!PdhEnumObjectsHA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenumobjectsha
 // Minimum OS: windows5.1.2600.
-func PdhEnumObjectsHA(hDataSource PDH_HLOG, szMachineName foundation.PSTR, mszObjectList foundation.PSTR, pcchBufferSize *uint32, dwDetailLevel PERF_DETAIL, bRefresh foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhEnumObjectsHA.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(szMachineName)), uintptr(unsafe.Pointer(mszObjectList)), uintptr(unsafe.Pointer(pcchBufferSize)), uintptr(dwDetailLevel), uintptr(bRefresh))
+func PdhEnumObjectsHA(hDataSource PDH_HLOG, szMachineName foundation.PSTR, mszObjectList foundation.PSTR, pcchBufferSize *uint32, dwDetailLevel PERF_DETAIL, bRefresh bool) uint32 {
+	_bRefresh := win32.Bool32(bRefresh)
+	r1, _, _ := syscall.SyscallN(procPdhEnumObjectsHA.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(szMachineName)), uintptr(unsafe.Pointer(mszObjectList)), uintptr(unsafe.Pointer(pcchBufferSize)), uintptr(dwDetailLevel), uintptr(_bRefresh))
 	return uint32(r1)
 }
 
-// PdhEnumObjectsHW calls pdh!PdhEnumObjectsHW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenumobjectshw
+// PdhExpandCounterPath calls pdh!PdhExpandCounterPathW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhexpandcounterpathw
 // Minimum OS: windows5.1.2600.
-func PdhEnumObjectsHW(hDataSource PDH_HLOG, szMachineName foundation.PWSTR, mszObjectList foundation.PWSTR, pcchBufferSize *uint32, dwDetailLevel PERF_DETAIL, bRefresh foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhEnumObjectsHW.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(szMachineName)), uintptr(unsafe.Pointer(mszObjectList)), uintptr(unsafe.Pointer(pcchBufferSize)), uintptr(dwDetailLevel), uintptr(bRefresh))
-	return uint32(r1)
-}
-
-// PdhEnumObjectsW calls pdh!PdhEnumObjectsW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhenumobjectsw
-// Minimum OS: windows5.1.2600.
-func PdhEnumObjectsW(szDataSource foundation.PWSTR, szMachineName foundation.PWSTR, mszObjectList foundation.PWSTR, pcchBufferSize *uint32, dwDetailLevel PERF_DETAIL, bRefresh foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhEnumObjectsW.Addr(), uintptr(unsafe.Pointer(szDataSource)), uintptr(unsafe.Pointer(szMachineName)), uintptr(unsafe.Pointer(mszObjectList)), uintptr(unsafe.Pointer(pcchBufferSize)), uintptr(dwDetailLevel), uintptr(bRefresh))
+func PdhExpandCounterPath(szWildCardPath string, mszExpandedPathList foundation.PWSTR, pcchPathListLength *uint32) uint32 {
+	_szWildCardPath := win32.UTF16Ptr(szWildCardPath)
+	r1, _, _ := syscall.SyscallN(procPdhExpandCounterPath.Addr(), uintptr(unsafe.Pointer(_szWildCardPath)), uintptr(unsafe.Pointer(mszExpandedPathList)), uintptr(unsafe.Pointer(pcchPathListLength)))
 	return uint32(r1)
 }
 
@@ -476,11 +511,13 @@ func PdhExpandCounterPathA(szWildCardPath foundation.PSTR, mszExpandedPathList f
 	return uint32(r1)
 }
 
-// PdhExpandCounterPathW calls pdh!PdhExpandCounterPathW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhexpandcounterpathw
+// PdhExpandWildCardPath calls pdh!PdhExpandWildCardPathW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhexpandwildcardpathw
 // Minimum OS: windows5.1.2600.
-func PdhExpandCounterPathW(szWildCardPath foundation.PWSTR, mszExpandedPathList foundation.PWSTR, pcchPathListLength *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhExpandCounterPathW.Addr(), uintptr(unsafe.Pointer(szWildCardPath)), uintptr(unsafe.Pointer(mszExpandedPathList)), uintptr(unsafe.Pointer(pcchPathListLength)))
+func PdhExpandWildCardPath(szDataSource string, szWildCardPath string, mszExpandedPathList foundation.PWSTR, pcchPathListLength *uint32, dwFlags uint32) uint32 {
+	_szDataSource := win32.UTF16Ptr(szDataSource)
+	_szWildCardPath := win32.UTF16Ptr(szWildCardPath)
+	r1, _, _ := syscall.SyscallN(procPdhExpandWildCardPath.Addr(), uintptr(unsafe.Pointer(_szDataSource)), uintptr(unsafe.Pointer(_szWildCardPath)), uintptr(unsafe.Pointer(mszExpandedPathList)), uintptr(unsafe.Pointer(pcchPathListLength)), uintptr(dwFlags))
 	return uint32(r1)
 }
 
@@ -492,27 +529,20 @@ func PdhExpandWildCardPathA(szDataSource foundation.PSTR, szWildCardPath foundat
 	return uint32(r1)
 }
 
+// PdhExpandWildCardPathH calls pdh!PdhExpandWildCardPathHW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhexpandwildcardpathhw
+// Minimum OS: windows5.1.2600.
+func PdhExpandWildCardPathH(hDataSource PDH_HLOG, szWildCardPath string, mszExpandedPathList foundation.PWSTR, pcchPathListLength *uint32, dwFlags uint32) uint32 {
+	_szWildCardPath := win32.UTF16Ptr(szWildCardPath)
+	r1, _, _ := syscall.SyscallN(procPdhExpandWildCardPathH.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(_szWildCardPath)), uintptr(unsafe.Pointer(mszExpandedPathList)), uintptr(unsafe.Pointer(pcchPathListLength)), uintptr(dwFlags))
+	return uint32(r1)
+}
+
 // PdhExpandWildCardPathHA calls pdh!PdhExpandWildCardPathHA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhexpandwildcardpathha
 // Minimum OS: windows5.1.2600.
 func PdhExpandWildCardPathHA(hDataSource PDH_HLOG, szWildCardPath foundation.PSTR, mszExpandedPathList foundation.PSTR, pcchPathListLength *uint32, dwFlags uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procPdhExpandWildCardPathHA.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(szWildCardPath)), uintptr(unsafe.Pointer(mszExpandedPathList)), uintptr(unsafe.Pointer(pcchPathListLength)), uintptr(dwFlags))
-	return uint32(r1)
-}
-
-// PdhExpandWildCardPathHW calls pdh!PdhExpandWildCardPathHW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhexpandwildcardpathhw
-// Minimum OS: windows5.1.2600.
-func PdhExpandWildCardPathHW(hDataSource PDH_HLOG, szWildCardPath foundation.PWSTR, mszExpandedPathList foundation.PWSTR, pcchPathListLength *uint32, dwFlags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhExpandWildCardPathHW.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(szWildCardPath)), uintptr(unsafe.Pointer(mszExpandedPathList)), uintptr(unsafe.Pointer(pcchPathListLength)), uintptr(dwFlags))
-	return uint32(r1)
-}
-
-// PdhExpandWildCardPathW calls pdh!PdhExpandWildCardPathW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhexpandwildcardpathw
-// Minimum OS: windows5.1.2600.
-func PdhExpandWildCardPathW(szDataSource foundation.PWSTR, szWildCardPath foundation.PWSTR, mszExpandedPathList foundation.PWSTR, pcchPathListLength *uint32, dwFlags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhExpandWildCardPathW.Addr(), uintptr(unsafe.Pointer(szDataSource)), uintptr(unsafe.Pointer(szWildCardPath)), uintptr(unsafe.Pointer(mszExpandedPathList)), uintptr(unsafe.Pointer(pcchPathListLength)), uintptr(dwFlags))
 	return uint32(r1)
 }
 
@@ -524,6 +554,14 @@ func PdhFormatFromRawValue(dwCounterType uint32, dwFormat PDH_FMT, pTimeBase *in
 	return uint32(r1)
 }
 
+// PdhGetCounterInfo calls pdh!PdhGetCounterInfoW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetcounterinfow
+// Minimum OS: windows5.1.2600.
+func PdhGetCounterInfo(hCounter PDH_HCOUNTER, bRetrieveExplainText foundation.BOOLEAN, pdwBufferSize *uint32, lpBuffer *PDH_COUNTER_INFO_W) uint32 {
+	r1, _, _ := syscall.SyscallN(procPdhGetCounterInfo.Addr(), uintptr(hCounter), uintptr(bRetrieveExplainText), uintptr(unsafe.Pointer(pdwBufferSize)), uintptr(unsafe.Pointer(lpBuffer)))
+	return uint32(r1)
+}
+
 // PdhGetCounterInfoA calls pdh!PdhGetCounterInfoA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetcounterinfoa
 // Minimum OS: windows5.1.2600.
@@ -532,19 +570,20 @@ func PdhGetCounterInfoA(hCounter PDH_HCOUNTER, bRetrieveExplainText foundation.B
 	return uint32(r1)
 }
 
-// PdhGetCounterInfoW calls pdh!PdhGetCounterInfoW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetcounterinfow
-// Minimum OS: windows5.1.2600.
-func PdhGetCounterInfoW(hCounter PDH_HCOUNTER, bRetrieveExplainText foundation.BOOLEAN, pdwBufferSize *uint32, lpBuffer *PDH_COUNTER_INFO_W) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhGetCounterInfoW.Addr(), uintptr(hCounter), uintptr(bRetrieveExplainText), uintptr(unsafe.Pointer(pdwBufferSize)), uintptr(unsafe.Pointer(lpBuffer)))
-	return uint32(r1)
-}
-
 // PdhGetCounterTimeBase calls pdh!PdhGetCounterTimeBase.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetcountertimebase
 // Minimum OS: windows5.1.2600.
 func PdhGetCounterTimeBase(hCounter PDH_HCOUNTER, pTimeBase *int64) uint32 {
 	r1, _, _ := syscall.SyscallN(procPdhGetCounterTimeBase.Addr(), uintptr(hCounter), uintptr(unsafe.Pointer(pTimeBase)))
+	return uint32(r1)
+}
+
+// PdhGetDataSourceTimeRange calls pdh!PdhGetDataSourceTimeRangeW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetdatasourcetimerangew
+// Minimum OS: windows5.1.2600.
+func PdhGetDataSourceTimeRange(szDataSource string, pdwNumEntries *uint32, pInfo *PDH_TIME_INFO, pdwBufferSize *uint32) uint32 {
+	_szDataSource := win32.UTF16Ptr(szDataSource)
+	r1, _, _ := syscall.SyscallN(procPdhGetDataSourceTimeRange.Addr(), uintptr(unsafe.Pointer(_szDataSource)), uintptr(unsafe.Pointer(pdwNumEntries)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pdwBufferSize)))
 	return uint32(r1)
 }
 
@@ -564,11 +603,14 @@ func PdhGetDataSourceTimeRangeH(hDataSource PDH_HLOG, pdwNumEntries *uint32, pIn
 	return uint32(r1)
 }
 
-// PdhGetDataSourceTimeRangeW calls pdh!PdhGetDataSourceTimeRangeW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetdatasourcetimerangew
+// PdhGetDefaultPerfCounter calls pdh!PdhGetDefaultPerfCounterW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetdefaultperfcounterw
 // Minimum OS: windows5.1.2600.
-func PdhGetDataSourceTimeRangeW(szDataSource foundation.PWSTR, pdwNumEntries *uint32, pInfo *PDH_TIME_INFO, pdwBufferSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhGetDataSourceTimeRangeW.Addr(), uintptr(unsafe.Pointer(szDataSource)), uintptr(unsafe.Pointer(pdwNumEntries)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(pdwBufferSize)))
+func PdhGetDefaultPerfCounter(szDataSource string, szMachineName string, szObjectName string, szDefaultCounterName foundation.PWSTR, pcchBufferSize *uint32) uint32 {
+	_szDataSource := win32.UTF16Ptr(szDataSource)
+	_szMachineName := win32.UTF16Ptr(szMachineName)
+	_szObjectName := win32.UTF16Ptr(szObjectName)
+	r1, _, _ := syscall.SyscallN(procPdhGetDefaultPerfCounter.Addr(), uintptr(unsafe.Pointer(_szDataSource)), uintptr(unsafe.Pointer(_szMachineName)), uintptr(unsafe.Pointer(_szObjectName)), uintptr(unsafe.Pointer(szDefaultCounterName)), uintptr(unsafe.Pointer(pcchBufferSize)))
 	return uint32(r1)
 }
 
@@ -580,6 +622,16 @@ func PdhGetDefaultPerfCounterA(szDataSource foundation.PSTR, szMachineName found
 	return uint32(r1)
 }
 
+// PdhGetDefaultPerfCounterH calls pdh!PdhGetDefaultPerfCounterHW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetdefaultperfcounterhw
+// Minimum OS: windows5.1.2600.
+func PdhGetDefaultPerfCounterH(hDataSource PDH_HLOG, szMachineName string, szObjectName string, szDefaultCounterName foundation.PWSTR, pcchBufferSize *uint32) uint32 {
+	_szMachineName := win32.UTF16Ptr(szMachineName)
+	_szObjectName := win32.UTF16Ptr(szObjectName)
+	r1, _, _ := syscall.SyscallN(procPdhGetDefaultPerfCounterH.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(_szMachineName)), uintptr(unsafe.Pointer(_szObjectName)), uintptr(unsafe.Pointer(szDefaultCounterName)), uintptr(unsafe.Pointer(pcchBufferSize)))
+	return uint32(r1)
+}
+
 // PdhGetDefaultPerfCounterHA calls pdh!PdhGetDefaultPerfCounterHA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetdefaultperfcounterha
 // Minimum OS: windows5.1.2600.
@@ -588,19 +640,13 @@ func PdhGetDefaultPerfCounterHA(hDataSource PDH_HLOG, szMachineName foundation.P
 	return uint32(r1)
 }
 
-// PdhGetDefaultPerfCounterHW calls pdh!PdhGetDefaultPerfCounterHW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetdefaultperfcounterhw
+// PdhGetDefaultPerfObject calls pdh!PdhGetDefaultPerfObjectW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetdefaultperfobjectw
 // Minimum OS: windows5.1.2600.
-func PdhGetDefaultPerfCounterHW(hDataSource PDH_HLOG, szMachineName foundation.PWSTR, szObjectName foundation.PWSTR, szDefaultCounterName foundation.PWSTR, pcchBufferSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhGetDefaultPerfCounterHW.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(szMachineName)), uintptr(unsafe.Pointer(szObjectName)), uintptr(unsafe.Pointer(szDefaultCounterName)), uintptr(unsafe.Pointer(pcchBufferSize)))
-	return uint32(r1)
-}
-
-// PdhGetDefaultPerfCounterW calls pdh!PdhGetDefaultPerfCounterW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetdefaultperfcounterw
-// Minimum OS: windows5.1.2600.
-func PdhGetDefaultPerfCounterW(szDataSource foundation.PWSTR, szMachineName foundation.PWSTR, szObjectName foundation.PWSTR, szDefaultCounterName foundation.PWSTR, pcchBufferSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhGetDefaultPerfCounterW.Addr(), uintptr(unsafe.Pointer(szDataSource)), uintptr(unsafe.Pointer(szMachineName)), uintptr(unsafe.Pointer(szObjectName)), uintptr(unsafe.Pointer(szDefaultCounterName)), uintptr(unsafe.Pointer(pcchBufferSize)))
+func PdhGetDefaultPerfObject(szDataSource string, szMachineName string, szDefaultObjectName foundation.PWSTR, pcchBufferSize *uint32) uint32 {
+	_szDataSource := win32.UTF16Ptr(szDataSource)
+	_szMachineName := win32.UTF16Ptr(szMachineName)
+	r1, _, _ := syscall.SyscallN(procPdhGetDefaultPerfObject.Addr(), uintptr(unsafe.Pointer(_szDataSource)), uintptr(unsafe.Pointer(_szMachineName)), uintptr(unsafe.Pointer(szDefaultObjectName)), uintptr(unsafe.Pointer(pcchBufferSize)))
 	return uint32(r1)
 }
 
@@ -612,27 +658,20 @@ func PdhGetDefaultPerfObjectA(szDataSource foundation.PSTR, szMachineName founda
 	return uint32(r1)
 }
 
+// PdhGetDefaultPerfObjectH calls pdh!PdhGetDefaultPerfObjectHW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetdefaultperfobjecthw
+// Minimum OS: windows5.1.2600.
+func PdhGetDefaultPerfObjectH(hDataSource PDH_HLOG, szMachineName string, szDefaultObjectName foundation.PWSTR, pcchBufferSize *uint32) uint32 {
+	_szMachineName := win32.UTF16Ptr(szMachineName)
+	r1, _, _ := syscall.SyscallN(procPdhGetDefaultPerfObjectH.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(_szMachineName)), uintptr(unsafe.Pointer(szDefaultObjectName)), uintptr(unsafe.Pointer(pcchBufferSize)))
+	return uint32(r1)
+}
+
 // PdhGetDefaultPerfObjectHA calls pdh!PdhGetDefaultPerfObjectHA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetdefaultperfobjectha
 // Minimum OS: windows5.1.2600.
 func PdhGetDefaultPerfObjectHA(hDataSource PDH_HLOG, szMachineName foundation.PSTR, szDefaultObjectName foundation.PSTR, pcchBufferSize *uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procPdhGetDefaultPerfObjectHA.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(szMachineName)), uintptr(unsafe.Pointer(szDefaultObjectName)), uintptr(unsafe.Pointer(pcchBufferSize)))
-	return uint32(r1)
-}
-
-// PdhGetDefaultPerfObjectHW calls pdh!PdhGetDefaultPerfObjectHW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetdefaultperfobjecthw
-// Minimum OS: windows5.1.2600.
-func PdhGetDefaultPerfObjectHW(hDataSource PDH_HLOG, szMachineName foundation.PWSTR, szDefaultObjectName foundation.PWSTR, pcchBufferSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhGetDefaultPerfObjectHW.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(szMachineName)), uintptr(unsafe.Pointer(szDefaultObjectName)), uintptr(unsafe.Pointer(pcchBufferSize)))
-	return uint32(r1)
-}
-
-// PdhGetDefaultPerfObjectW calls pdh!PdhGetDefaultPerfObjectW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetdefaultperfobjectw
-// Minimum OS: windows5.1.2600.
-func PdhGetDefaultPerfObjectW(szDataSource foundation.PWSTR, szMachineName foundation.PWSTR, szDefaultObjectName foundation.PWSTR, pcchBufferSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhGetDefaultPerfObjectW.Addr(), uintptr(unsafe.Pointer(szDataSource)), uintptr(unsafe.Pointer(szMachineName)), uintptr(unsafe.Pointer(szDefaultObjectName)), uintptr(unsafe.Pointer(pcchBufferSize)))
 	return uint32(r1)
 }
 
@@ -644,19 +683,19 @@ func PdhGetDllVersion(lpdwVersion *PDH_DLL_VERSION) uint32 {
 	return uint32(r1)
 }
 
+// PdhGetFormattedCounterArray calls pdh!PdhGetFormattedCounterArrayW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetformattedcounterarrayw
+// Minimum OS: windows5.1.2600.
+func PdhGetFormattedCounterArray(hCounter PDH_HCOUNTER, dwFormat PDH_FMT, lpdwBufferSize *uint32, lpdwItemCount *uint32, ItemBuffer *PDH_FMT_COUNTERVALUE_ITEM_W) uint32 {
+	r1, _, _ := syscall.SyscallN(procPdhGetFormattedCounterArray.Addr(), uintptr(hCounter), uintptr(dwFormat), uintptr(unsafe.Pointer(lpdwBufferSize)), uintptr(unsafe.Pointer(lpdwItemCount)), uintptr(unsafe.Pointer(ItemBuffer)))
+	return uint32(r1)
+}
+
 // PdhGetFormattedCounterArrayA calls pdh!PdhGetFormattedCounterArrayA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetformattedcounterarraya
 // Minimum OS: windows5.1.2600.
 func PdhGetFormattedCounterArrayA(hCounter PDH_HCOUNTER, dwFormat PDH_FMT, lpdwBufferSize *uint32, lpdwItemCount *uint32, ItemBuffer *PDH_FMT_COUNTERVALUE_ITEM_A) uint32 {
 	r1, _, _ := syscall.SyscallN(procPdhGetFormattedCounterArrayA.Addr(), uintptr(hCounter), uintptr(dwFormat), uintptr(unsafe.Pointer(lpdwBufferSize)), uintptr(unsafe.Pointer(lpdwItemCount)), uintptr(unsafe.Pointer(ItemBuffer)))
-	return uint32(r1)
-}
-
-// PdhGetFormattedCounterArrayW calls pdh!PdhGetFormattedCounterArrayW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetformattedcounterarrayw
-// Minimum OS: windows5.1.2600.
-func PdhGetFormattedCounterArrayW(hCounter PDH_HCOUNTER, dwFormat PDH_FMT, lpdwBufferSize *uint32, lpdwItemCount *uint32, ItemBuffer *PDH_FMT_COUNTERVALUE_ITEM_W) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhGetFormattedCounterArrayW.Addr(), uintptr(hCounter), uintptr(dwFormat), uintptr(unsafe.Pointer(lpdwBufferSize)), uintptr(unsafe.Pointer(lpdwItemCount)), uintptr(unsafe.Pointer(ItemBuffer)))
 	return uint32(r1)
 }
 
@@ -682,19 +721,19 @@ func PdhGetLogSetGUID(hLog PDH_HLOG, pGuid *win32.GUID, pRunId *int32) uint32 {
 	return uint32(r1)
 }
 
+// PdhGetRawCounterArray calls pdh!PdhGetRawCounterArrayW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetrawcounterarrayw
+// Minimum OS: windows5.1.2600.
+func PdhGetRawCounterArray(hCounter PDH_HCOUNTER, lpdwBufferSize *uint32, lpdwItemCount *uint32, ItemBuffer *PDH_RAW_COUNTER_ITEM_W) uint32 {
+	r1, _, _ := syscall.SyscallN(procPdhGetRawCounterArray.Addr(), uintptr(hCounter), uintptr(unsafe.Pointer(lpdwBufferSize)), uintptr(unsafe.Pointer(lpdwItemCount)), uintptr(unsafe.Pointer(ItemBuffer)))
+	return uint32(r1)
+}
+
 // PdhGetRawCounterArrayA calls pdh!PdhGetRawCounterArrayA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetrawcounterarraya
 // Minimum OS: windows5.1.2600.
 func PdhGetRawCounterArrayA(hCounter PDH_HCOUNTER, lpdwBufferSize *uint32, lpdwItemCount *uint32, ItemBuffer *PDH_RAW_COUNTER_ITEM_A) uint32 {
 	r1, _, _ := syscall.SyscallN(procPdhGetRawCounterArrayA.Addr(), uintptr(hCounter), uintptr(unsafe.Pointer(lpdwBufferSize)), uintptr(unsafe.Pointer(lpdwItemCount)), uintptr(unsafe.Pointer(ItemBuffer)))
-	return uint32(r1)
-}
-
-// PdhGetRawCounterArrayW calls pdh!PdhGetRawCounterArrayW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhgetrawcounterarrayw
-// Minimum OS: windows5.1.2600.
-func PdhGetRawCounterArrayW(hCounter PDH_HCOUNTER, lpdwBufferSize *uint32, lpdwItemCount *uint32, ItemBuffer *PDH_RAW_COUNTER_ITEM_W) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhGetRawCounterArrayW.Addr(), uintptr(hCounter), uintptr(unsafe.Pointer(lpdwBufferSize)), uintptr(unsafe.Pointer(lpdwItemCount)), uintptr(unsafe.Pointer(ItemBuffer)))
 	return uint32(r1)
 }
 
@@ -709,9 +748,19 @@ func PdhGetRawCounterValue(hCounter PDH_HCOUNTER, lpdwType *uint32, pValue *PDH_
 // PdhIsRealTimeQuery calls pdh!PdhIsRealTimeQuery.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhisrealtimequery
 // Minimum OS: windows5.1.2600.
-func PdhIsRealTimeQuery(hQuery PDH_HQUERY) foundation.BOOL {
+func PdhIsRealTimeQuery(hQuery PDH_HQUERY) bool {
 	r1, _, _ := syscall.SyscallN(procPdhIsRealTimeQuery.Addr(), uintptr(hQuery))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// PdhLookupPerfIndexByName calls pdh!PdhLookupPerfIndexByNameW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhlookupperfindexbynamew
+// Minimum OS: windows5.1.2600.
+func PdhLookupPerfIndexByName(szMachineName string, szNameBuffer string, pdwIndex *uint32) uint32 {
+	_szMachineName := win32.UTF16Ptr(szMachineName)
+	_szNameBuffer := win32.UTF16Ptr(szNameBuffer)
+	r1, _, _ := syscall.SyscallN(procPdhLookupPerfIndexByName.Addr(), uintptr(unsafe.Pointer(_szMachineName)), uintptr(unsafe.Pointer(_szNameBuffer)), uintptr(unsafe.Pointer(pdwIndex)))
+	return uint32(r1)
 }
 
 // PdhLookupPerfIndexByNameA calls pdh!PdhLookupPerfIndexByNameA.
@@ -722,11 +771,12 @@ func PdhLookupPerfIndexByNameA(szMachineName foundation.PSTR, szNameBuffer found
 	return uint32(r1)
 }
 
-// PdhLookupPerfIndexByNameW calls pdh!PdhLookupPerfIndexByNameW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhlookupperfindexbynamew
+// PdhLookupPerfNameByIndex calls pdh!PdhLookupPerfNameByIndexW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhlookupperfnamebyindexw
 // Minimum OS: windows5.1.2600.
-func PdhLookupPerfIndexByNameW(szMachineName foundation.PWSTR, szNameBuffer foundation.PWSTR, pdwIndex *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhLookupPerfIndexByNameW.Addr(), uintptr(unsafe.Pointer(szMachineName)), uintptr(unsafe.Pointer(szNameBuffer)), uintptr(unsafe.Pointer(pdwIndex)))
+func PdhLookupPerfNameByIndex(szMachineName string, dwNameIndex uint32, szNameBuffer foundation.PWSTR, pcchNameBufferSize *uint32) uint32 {
+	_szMachineName := win32.UTF16Ptr(szMachineName)
+	r1, _, _ := syscall.SyscallN(procPdhLookupPerfNameByIndex.Addr(), uintptr(unsafe.Pointer(_szMachineName)), uintptr(dwNameIndex), uintptr(unsafe.Pointer(szNameBuffer)), uintptr(unsafe.Pointer(pcchNameBufferSize)))
 	return uint32(r1)
 }
 
@@ -738,11 +788,11 @@ func PdhLookupPerfNameByIndexA(szMachineName foundation.PSTR, dwNameIndex uint32
 	return uint32(r1)
 }
 
-// PdhLookupPerfNameByIndexW calls pdh!PdhLookupPerfNameByIndexW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhlookupperfnamebyindexw
+// PdhMakeCounterPath calls pdh!PdhMakeCounterPathW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhmakecounterpathw
 // Minimum OS: windows5.1.2600.
-func PdhLookupPerfNameByIndexW(szMachineName foundation.PWSTR, dwNameIndex uint32, szNameBuffer foundation.PWSTR, pcchNameBufferSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhLookupPerfNameByIndexW.Addr(), uintptr(unsafe.Pointer(szMachineName)), uintptr(dwNameIndex), uintptr(unsafe.Pointer(szNameBuffer)), uintptr(unsafe.Pointer(pcchNameBufferSize)))
+func PdhMakeCounterPath(pCounterPathElements *PDH_COUNTER_PATH_ELEMENTS_W, szFullPathBuffer foundation.PWSTR, pcchBufferSize *uint32, dwFlags PDH_PATH_FLAGS) uint32 {
+	r1, _, _ := syscall.SyscallN(procPdhMakeCounterPath.Addr(), uintptr(unsafe.Pointer(pCounterPathElements)), uintptr(unsafe.Pointer(szFullPathBuffer)), uintptr(unsafe.Pointer(pcchBufferSize)), uintptr(dwFlags))
 	return uint32(r1)
 }
 
@@ -754,11 +804,13 @@ func PdhMakeCounterPathA(pCounterPathElements *PDH_COUNTER_PATH_ELEMENTS_A, szFu
 	return uint32(r1)
 }
 
-// PdhMakeCounterPathW calls pdh!PdhMakeCounterPathW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhmakecounterpathw
+// PdhOpenLog calls pdh!PdhOpenLogW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhopenlogw
 // Minimum OS: windows5.1.2600.
-func PdhMakeCounterPathW(pCounterPathElements *PDH_COUNTER_PATH_ELEMENTS_W, szFullPathBuffer foundation.PWSTR, pcchBufferSize *uint32, dwFlags PDH_PATH_FLAGS) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhMakeCounterPathW.Addr(), uintptr(unsafe.Pointer(pCounterPathElements)), uintptr(unsafe.Pointer(szFullPathBuffer)), uintptr(unsafe.Pointer(pcchBufferSize)), uintptr(dwFlags))
+func PdhOpenLog(szLogFileName string, dwAccessFlags PDH_LOG, lpdwLogType *PDH_LOG_TYPE, hQuery PDH_HQUERY, dwMaxSize uint32, szUserCaption string, phLog *PDH_HLOG) uint32 {
+	_szLogFileName := win32.UTF16Ptr(szLogFileName)
+	_szUserCaption := win32.UTF16Ptr(szUserCaption)
+	r1, _, _ := syscall.SyscallN(procPdhOpenLog.Addr(), uintptr(unsafe.Pointer(_szLogFileName)), uintptr(dwAccessFlags), uintptr(unsafe.Pointer(lpdwLogType)), uintptr(hQuery), uintptr(dwMaxSize), uintptr(unsafe.Pointer(_szUserCaption)), uintptr(unsafe.Pointer(phLog)))
 	return uint32(r1)
 }
 
@@ -770,11 +822,12 @@ func PdhOpenLogA(szLogFileName foundation.PSTR, dwAccessFlags PDH_LOG, lpdwLogTy
 	return uint32(r1)
 }
 
-// PdhOpenLogW calls pdh!PdhOpenLogW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhopenlogw
+// PdhOpenQuery calls pdh!PdhOpenQueryW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhopenqueryw
 // Minimum OS: windows5.1.2600.
-func PdhOpenLogW(szLogFileName foundation.PWSTR, dwAccessFlags PDH_LOG, lpdwLogType *PDH_LOG_TYPE, hQuery PDH_HQUERY, dwMaxSize uint32, szUserCaption foundation.PWSTR, phLog *PDH_HLOG) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhOpenLogW.Addr(), uintptr(unsafe.Pointer(szLogFileName)), uintptr(dwAccessFlags), uintptr(unsafe.Pointer(lpdwLogType)), uintptr(hQuery), uintptr(dwMaxSize), uintptr(unsafe.Pointer(szUserCaption)), uintptr(unsafe.Pointer(phLog)))
+func PdhOpenQuery(szDataSource string, dwUserData uintptr, phQuery *PDH_HQUERY) uint32 {
+	_szDataSource := win32.UTF16Ptr(szDataSource)
+	r1, _, _ := syscall.SyscallN(procPdhOpenQuery.Addr(), uintptr(unsafe.Pointer(_szDataSource)), uintptr(dwUserData), uintptr(unsafe.Pointer(phQuery)))
 	return uint32(r1)
 }
 
@@ -794,11 +847,12 @@ func PdhOpenQueryH(hDataSource PDH_HLOG, dwUserData uintptr, phQuery *PDH_HQUERY
 	return uint32(r1)
 }
 
-// PdhOpenQueryW calls pdh!PdhOpenQueryW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhopenqueryw
+// PdhParseCounterPath calls pdh!PdhParseCounterPathW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhparsecounterpathw
 // Minimum OS: windows5.1.2600.
-func PdhOpenQueryW(szDataSource foundation.PWSTR, dwUserData uintptr, phQuery *PDH_HQUERY) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhOpenQueryW.Addr(), uintptr(unsafe.Pointer(szDataSource)), uintptr(dwUserData), uintptr(unsafe.Pointer(phQuery)))
+func PdhParseCounterPath(szFullPathBuffer string, pCounterPathElements *PDH_COUNTER_PATH_ELEMENTS_W, pdwBufferSize *uint32, dwFlags uint32) uint32 {
+	_szFullPathBuffer := win32.UTF16Ptr(szFullPathBuffer)
+	r1, _, _ := syscall.SyscallN(procPdhParseCounterPath.Addr(), uintptr(unsafe.Pointer(_szFullPathBuffer)), uintptr(unsafe.Pointer(pCounterPathElements)), uintptr(unsafe.Pointer(pdwBufferSize)), uintptr(dwFlags))
 	return uint32(r1)
 }
 
@@ -810,11 +864,12 @@ func PdhParseCounterPathA(szFullPathBuffer foundation.PSTR, pCounterPathElements
 	return uint32(r1)
 }
 
-// PdhParseCounterPathW calls pdh!PdhParseCounterPathW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhparsecounterpathw
+// PdhParseInstanceName calls pdh!PdhParseInstanceNameW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhparseinstancenamew
 // Minimum OS: windows5.1.2600.
-func PdhParseCounterPathW(szFullPathBuffer foundation.PWSTR, pCounterPathElements *PDH_COUNTER_PATH_ELEMENTS_W, pdwBufferSize *uint32, dwFlags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhParseCounterPathW.Addr(), uintptr(unsafe.Pointer(szFullPathBuffer)), uintptr(unsafe.Pointer(pCounterPathElements)), uintptr(unsafe.Pointer(pdwBufferSize)), uintptr(dwFlags))
+func PdhParseInstanceName(szInstanceString string, szInstanceName foundation.PWSTR, pcchInstanceNameLength *uint32, szParentName foundation.PWSTR, pcchParentNameLength *uint32, lpIndex *uint32) uint32 {
+	_szInstanceString := win32.UTF16Ptr(szInstanceString)
+	r1, _, _ := syscall.SyscallN(procPdhParseInstanceName.Addr(), uintptr(unsafe.Pointer(_szInstanceString)), uintptr(unsafe.Pointer(szInstanceName)), uintptr(unsafe.Pointer(pcchInstanceNameLength)), uintptr(unsafe.Pointer(szParentName)), uintptr(unsafe.Pointer(pcchParentNameLength)), uintptr(unsafe.Pointer(lpIndex)))
 	return uint32(r1)
 }
 
@@ -826,14 +881,6 @@ func PdhParseInstanceNameA(szInstanceString foundation.PSTR, szInstanceName foun
 	return uint32(r1)
 }
 
-// PdhParseInstanceNameW calls pdh!PdhParseInstanceNameW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhparseinstancenamew
-// Minimum OS: windows5.1.2600.
-func PdhParseInstanceNameW(szInstanceString foundation.PWSTR, szInstanceName foundation.PWSTR, pcchInstanceNameLength *uint32, szParentName foundation.PWSTR, pcchParentNameLength *uint32, lpIndex *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhParseInstanceNameW.Addr(), uintptr(unsafe.Pointer(szInstanceString)), uintptr(unsafe.Pointer(szInstanceName)), uintptr(unsafe.Pointer(pcchInstanceNameLength)), uintptr(unsafe.Pointer(szParentName)), uintptr(unsafe.Pointer(pcchParentNameLength)), uintptr(unsafe.Pointer(lpIndex)))
-	return uint32(r1)
-}
-
 // PdhRemoveCounter calls pdh!PdhRemoveCounter.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhremovecounter
 // Minimum OS: windows5.1.2600.
@@ -842,19 +889,19 @@ func PdhRemoveCounter(hCounter PDH_HCOUNTER) uint32 {
 	return uint32(r1)
 }
 
+// PdhSelectDataSource calls pdh!PdhSelectDataSourceW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhselectdatasourcew
+// Minimum OS: windows5.1.2600.
+func PdhSelectDataSource(hWndOwner foundation.HWND, dwFlags PDH_SELECT_DATA_SOURCE_FLAGS, szDataSource foundation.PWSTR, pcchBufferLength *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procPdhSelectDataSource.Addr(), uintptr(hWndOwner), uintptr(dwFlags), uintptr(unsafe.Pointer(szDataSource)), uintptr(unsafe.Pointer(pcchBufferLength)))
+	return uint32(r1)
+}
+
 // PdhSelectDataSourceA calls pdh!PdhSelectDataSourceA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhselectdatasourcea
 // Minimum OS: windows5.1.2600.
 func PdhSelectDataSourceA(hWndOwner foundation.HWND, dwFlags PDH_SELECT_DATA_SOURCE_FLAGS, szDataSource foundation.PSTR, pcchBufferLength *uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procPdhSelectDataSourceA.Addr(), uintptr(hWndOwner), uintptr(dwFlags), uintptr(unsafe.Pointer(szDataSource)), uintptr(unsafe.Pointer(pcchBufferLength)))
-	return uint32(r1)
-}
-
-// PdhSelectDataSourceW calls pdh!PdhSelectDataSourceW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhselectdatasourcew
-// Minimum OS: windows5.1.2600.
-func PdhSelectDataSourceW(hWndOwner foundation.HWND, dwFlags PDH_SELECT_DATA_SOURCE_FLAGS, szDataSource foundation.PWSTR, pcchBufferLength *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhSelectDataSourceW.Addr(), uintptr(hWndOwner), uintptr(dwFlags), uintptr(unsafe.Pointer(szDataSource)), uintptr(unsafe.Pointer(pcchBufferLength)))
 	return uint32(r1)
 }
 
@@ -888,6 +935,15 @@ func PdhSetQueryTimeRange(hQuery PDH_HQUERY, pInfo *PDH_TIME_INFO) uint32 {
 	return uint32(r1)
 }
 
+// PdhUpdateLog calls pdh!PdhUpdateLogW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhupdatelogw
+// Minimum OS: windows5.1.2600.
+func PdhUpdateLog(hLog PDH_HLOG, szUserString string) uint32 {
+	_szUserString := win32.UTF16Ptr(szUserString)
+	r1, _, _ := syscall.SyscallN(procPdhUpdateLog.Addr(), uintptr(hLog), uintptr(unsafe.Pointer(_szUserString)))
+	return uint32(r1)
+}
+
 // PdhUpdateLogA calls pdh!PdhUpdateLogA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhupdateloga
 // Minimum OS: windows5.1.2600.
@@ -904,11 +960,12 @@ func PdhUpdateLogFileCatalog(hLog PDH_HLOG) uint32 {
 	return uint32(r1)
 }
 
-// PdhUpdateLogW calls pdh!PdhUpdateLogW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhupdatelogw
+// PdhValidatePath calls pdh!PdhValidatePathW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhvalidatepathw
 // Minimum OS: windows5.1.2600.
-func PdhUpdateLogW(hLog PDH_HLOG, szUserString foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhUpdateLogW.Addr(), uintptr(hLog), uintptr(unsafe.Pointer(szUserString)))
+func PdhValidatePath(szFullPathBuffer string) uint32 {
+	_szFullPathBuffer := win32.UTF16Ptr(szFullPathBuffer)
+	r1, _, _ := syscall.SyscallN(procPdhValidatePath.Addr(), uintptr(unsafe.Pointer(_szFullPathBuffer)))
 	return uint32(r1)
 }
 
@@ -920,6 +977,15 @@ func PdhValidatePathA(szFullPathBuffer foundation.PSTR) uint32 {
 	return uint32(r1)
 }
 
+// PdhValidatePathEx calls pdh!PdhValidatePathExW.
+// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhvalidatepathexw
+// Minimum OS: windows6.0.6000.
+func PdhValidatePathEx(hDataSource PDH_HLOG, szFullPathBuffer string) uint32 {
+	_szFullPathBuffer := win32.UTF16Ptr(szFullPathBuffer)
+	r1, _, _ := syscall.SyscallN(procPdhValidatePathEx.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(_szFullPathBuffer)))
+	return uint32(r1)
+}
+
 // PdhValidatePathExA calls pdh!PdhValidatePathExA.
 // https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhvalidatepathexa
 // Minimum OS: windows6.0.6000.
@@ -928,31 +994,16 @@ func PdhValidatePathExA(hDataSource PDH_HLOG, szFullPathBuffer foundation.PSTR) 
 	return uint32(r1)
 }
 
-// PdhValidatePathExW calls pdh!PdhValidatePathExW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhvalidatepathexw
-// Minimum OS: windows6.0.6000.
-func PdhValidatePathExW(hDataSource PDH_HLOG, szFullPathBuffer foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhValidatePathExW.Addr(), uintptr(hDataSource), uintptr(unsafe.Pointer(szFullPathBuffer)))
-	return uint32(r1)
-}
-
-// PdhValidatePathW calls pdh!PdhValidatePathW.
-// https://learn.microsoft.com/windows/win32/api/pdh/nf-pdh-pdhvalidatepathw
-// Minimum OS: windows5.1.2600.
-func PdhValidatePathW(szFullPathBuffer foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhValidatePathW.Addr(), uintptr(unsafe.Pointer(szFullPathBuffer)))
+// PdhVerifySQLDB calls pdh!PdhVerifySQLDBW.
+func PdhVerifySQLDB(szDataSource string) uint32 {
+	_szDataSource := win32.UTF16Ptr(szDataSource)
+	r1, _, _ := syscall.SyscallN(procPdhVerifySQLDB.Addr(), uintptr(unsafe.Pointer(_szDataSource)))
 	return uint32(r1)
 }
 
 // PdhVerifySQLDBA calls pdh!PdhVerifySQLDBA.
 func PdhVerifySQLDBA(szDataSource foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procPdhVerifySQLDBA.Addr(), uintptr(unsafe.Pointer(szDataSource)))
-	return uint32(r1)
-}
-
-// PdhVerifySQLDBW calls pdh!PdhVerifySQLDBW.
-func PdhVerifySQLDBW(szDataSource foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procPdhVerifySQLDBW.Addr(), uintptr(unsafe.Pointer(szDataSource)))
 	return uint32(r1)
 }
 
@@ -975,8 +1026,9 @@ func PerfCloseQueryHandle(hQuery foundation.HANDLE) uint32 {
 // PerfCreateInstance calls ADVAPI32!PerfCreateInstance.
 // https://learn.microsoft.com/windows/win32/api/perflib/nf-perflib-perfcreateinstance
 // Minimum OS: windows6.0.6000.
-func PerfCreateInstance(ProviderHandle foundation.HANDLE, CounterSetGuid *win32.GUID, Name foundation.PWSTR, Id uint32) (*PERF_COUNTERSET_INSTANCE, error) {
-	r1, _, e1 := syscall.SyscallN(procPerfCreateInstance.Addr(), uintptr(ProviderHandle), uintptr(unsafe.Pointer(CounterSetGuid)), uintptr(unsafe.Pointer(Name)), uintptr(Id))
+func PerfCreateInstance(ProviderHandle foundation.HANDLE, CounterSetGuid *win32.GUID, Name string, Id uint32) (*PERF_COUNTERSET_INSTANCE, error) {
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, e1 := syscall.SyscallN(procPerfCreateInstance.Addr(), uintptr(ProviderHandle), uintptr(unsafe.Pointer(CounterSetGuid)), uintptr(unsafe.Pointer(_Name)), uintptr(Id))
 	ret := (*PERF_COUNTERSET_INSTANCE)(unsafe.Pointer(r1))
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -1019,16 +1071,22 @@ func PerfDeleteInstance(Provider foundation.HANDLE, InstanceBlock *PERF_COUNTERS
 // PerfEnumerateCounterSet calls ADVAPI32!PerfEnumerateCounterSet.
 // https://learn.microsoft.com/windows/win32/api/perflib/nf-perflib-perfenumeratecounterset
 // Minimum OS: windows10.0.14393.
-func PerfEnumerateCounterSet(szMachine foundation.PWSTR, pCounterSetIds *win32.GUID, cCounterSetIds uint32, pcCounterSetIdsActual *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPerfEnumerateCounterSet.Addr(), uintptr(unsafe.Pointer(szMachine)), uintptr(unsafe.Pointer(pCounterSetIds)), uintptr(cCounterSetIds), uintptr(unsafe.Pointer(pcCounterSetIdsActual)))
+func PerfEnumerateCounterSet(szMachine string, pCounterSetIds []win32.GUID, pcCounterSetIdsActual *uint32) uint32 {
+	_szMachine := win32.UTF16Ptr(szMachine)
+	var _pCounterSetIds *win32.GUID
+	if len(pCounterSetIds) > 0 {
+		_pCounterSetIds = &pCounterSetIds[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPerfEnumerateCounterSet.Addr(), uintptr(unsafe.Pointer(_szMachine)), uintptr(unsafe.Pointer(_pCounterSetIds)), uintptr(len(pCounterSetIds)), uintptr(unsafe.Pointer(pcCounterSetIdsActual)))
 	return uint32(r1)
 }
 
 // PerfEnumerateCounterSetInstances calls ADVAPI32!PerfEnumerateCounterSetInstances.
 // https://learn.microsoft.com/windows/win32/api/perflib/nf-perflib-perfenumeratecountersetinstances
 // Minimum OS: windows10.0.14393.
-func PerfEnumerateCounterSetInstances(szMachine foundation.PWSTR, pCounterSetId *win32.GUID, pInstances *PERF_INSTANCE_HEADER, cbInstances uint32, pcbInstancesActual *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPerfEnumerateCounterSetInstances.Addr(), uintptr(unsafe.Pointer(szMachine)), uintptr(unsafe.Pointer(pCounterSetId)), uintptr(unsafe.Pointer(pInstances)), uintptr(cbInstances), uintptr(unsafe.Pointer(pcbInstancesActual)))
+func PerfEnumerateCounterSetInstances(szMachine string, pCounterSetId *win32.GUID, pInstances *PERF_INSTANCE_HEADER, cbInstances uint32, pcbInstancesActual *uint32) uint32 {
+	_szMachine := win32.UTF16Ptr(szMachine)
+	r1, _, _ := syscall.SyscallN(procPerfEnumerateCounterSetInstances.Addr(), uintptr(unsafe.Pointer(_szMachine)), uintptr(unsafe.Pointer(pCounterSetId)), uintptr(unsafe.Pointer(pInstances)), uintptr(cbInstances), uintptr(unsafe.Pointer(pcbInstancesActual)))
 	return uint32(r1)
 }
 
@@ -1051,8 +1109,9 @@ func PerfIncrementULongLongCounterValue(Provider foundation.HANDLE, Instance *PE
 // PerfOpenQueryHandle calls ADVAPI32!PerfOpenQueryHandle.
 // https://learn.microsoft.com/windows/win32/api/perflib/nf-perflib-perfopenqueryhandle
 // Minimum OS: windows10.0.14393.
-func PerfOpenQueryHandle(szMachine foundation.PWSTR, phQuery *foundation.HANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procPerfOpenQueryHandle.Addr(), uintptr(unsafe.Pointer(szMachine)), uintptr(unsafe.Pointer(phQuery)))
+func PerfOpenQueryHandle(szMachine string, phQuery *foundation.HANDLE) uint32 {
+	_szMachine := win32.UTF16Ptr(szMachine)
+	r1, _, _ := syscall.SyscallN(procPerfOpenQueryHandle.Addr(), uintptr(unsafe.Pointer(_szMachine)), uintptr(unsafe.Pointer(phQuery)))
 	return uint32(r1)
 }
 
@@ -1075,16 +1134,18 @@ func PerfQueryCounterInfo(hQuery foundation.HANDLE, pCounters *PERF_COUNTER_IDEN
 // PerfQueryCounterSetRegistrationInfo calls ADVAPI32!PerfQueryCounterSetRegistrationInfo.
 // https://learn.microsoft.com/windows/win32/api/perflib/nf-perflib-perfquerycountersetregistrationinfo
 // Minimum OS: windows10.0.14393.
-func PerfQueryCounterSetRegistrationInfo(szMachine foundation.PWSTR, pCounterSetId *win32.GUID, requestCode PerfRegInfoType, requestLangId uint32, pbRegInfo *byte, cbRegInfo uint32, pcbRegInfoActual *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPerfQueryCounterSetRegistrationInfo.Addr(), uintptr(unsafe.Pointer(szMachine)), uintptr(unsafe.Pointer(pCounterSetId)), uintptr(requestCode), uintptr(requestLangId), uintptr(unsafe.Pointer(pbRegInfo)), uintptr(cbRegInfo), uintptr(unsafe.Pointer(pcbRegInfoActual)))
+func PerfQueryCounterSetRegistrationInfo(szMachine string, pCounterSetId *win32.GUID, requestCode PerfRegInfoType, requestLangId uint32, pbRegInfo *byte, cbRegInfo uint32, pcbRegInfoActual *uint32) uint32 {
+	_szMachine := win32.UTF16Ptr(szMachine)
+	r1, _, _ := syscall.SyscallN(procPerfQueryCounterSetRegistrationInfo.Addr(), uintptr(unsafe.Pointer(_szMachine)), uintptr(unsafe.Pointer(pCounterSetId)), uintptr(requestCode), uintptr(requestLangId), uintptr(unsafe.Pointer(pbRegInfo)), uintptr(cbRegInfo), uintptr(unsafe.Pointer(pcbRegInfoActual)))
 	return uint32(r1)
 }
 
 // PerfQueryInstance calls ADVAPI32!PerfQueryInstance.
 // https://learn.microsoft.com/windows/win32/api/perflib/nf-perflib-perfqueryinstance
 // Minimum OS: windows6.0.6000.
-func PerfQueryInstance(ProviderHandle foundation.HANDLE, CounterSetGuid *win32.GUID, Name foundation.PWSTR, Id uint32) (*PERF_COUNTERSET_INSTANCE, error) {
-	r1, _, e1 := syscall.SyscallN(procPerfQueryInstance.Addr(), uintptr(ProviderHandle), uintptr(unsafe.Pointer(CounterSetGuid)), uintptr(unsafe.Pointer(Name)), uintptr(Id))
+func PerfQueryInstance(ProviderHandle foundation.HANDLE, CounterSetGuid *win32.GUID, Name string, Id uint32) (*PERF_COUNTERSET_INSTANCE, error) {
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, e1 := syscall.SyscallN(procPerfQueryInstance.Addr(), uintptr(ProviderHandle), uintptr(unsafe.Pointer(CounterSetGuid)), uintptr(unsafe.Pointer(_Name)), uintptr(Id))
 	ret := (*PERF_COUNTERSET_INSTANCE)(unsafe.Pointer(r1))
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -1171,8 +1232,18 @@ func QueryPerformanceFrequency(lpFrequency *int64) error {
 }
 
 // RestorePerfRegistryFromFileW calls loadperf!RestorePerfRegistryFromFileW.
-func RestorePerfRegistryFromFileW(szFileName foundation.PWSTR, szLangId foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procRestorePerfRegistryFromFileW.Addr(), uintptr(unsafe.Pointer(szFileName)), uintptr(unsafe.Pointer(szLangId)))
+func RestorePerfRegistryFromFileW(szFileName string, szLangId string) uint32 {
+	_szFileName := win32.UTF16Ptr(szFileName)
+	_szLangId := win32.UTF16Ptr(szLangId)
+	r1, _, _ := syscall.SyscallN(procRestorePerfRegistryFromFileW.Addr(), uintptr(unsafe.Pointer(_szFileName)), uintptr(unsafe.Pointer(_szLangId)))
+	return uint32(r1)
+}
+
+// SetServiceAsTrusted calls loadperf!SetServiceAsTrustedW.
+func SetServiceAsTrusted(szReserved string, szServiceName string) uint32 {
+	_szReserved := win32.UTF16Ptr(szReserved)
+	_szServiceName := win32.UTF16Ptr(szServiceName)
+	r1, _, _ := syscall.SyscallN(procSetServiceAsTrusted.Addr(), uintptr(unsafe.Pointer(_szReserved)), uintptr(unsafe.Pointer(_szServiceName)))
 	return uint32(r1)
 }
 
@@ -1182,36 +1253,36 @@ func SetServiceAsTrustedA(szReserved foundation.PSTR, szServiceName foundation.P
 	return uint32(r1)
 }
 
-// SetServiceAsTrustedW calls loadperf!SetServiceAsTrustedW.
-func SetServiceAsTrustedW(szReserved foundation.PWSTR, szServiceName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetServiceAsTrustedW.Addr(), uintptr(unsafe.Pointer(szReserved)), uintptr(unsafe.Pointer(szServiceName)))
+// UnloadPerfCounterTextStrings calls loadperf!UnloadPerfCounterTextStringsW.
+// https://learn.microsoft.com/windows/win32/api/loadperf/nf-loadperf-unloadperfcountertextstringsw
+// Minimum OS: windows5.1.2600.
+func UnloadPerfCounterTextStrings(lpCommandLine string, bQuietModeArg bool) uint32 {
+	_lpCommandLine := win32.UTF16Ptr(lpCommandLine)
+	_bQuietModeArg := win32.Bool32(bQuietModeArg)
+	r1, _, _ := syscall.SyscallN(procUnloadPerfCounterTextStrings.Addr(), uintptr(unsafe.Pointer(_lpCommandLine)), uintptr(_bQuietModeArg))
 	return uint32(r1)
 }
 
 // UnloadPerfCounterTextStringsA calls loadperf!UnloadPerfCounterTextStringsA.
 // https://learn.microsoft.com/windows/win32/api/loadperf/nf-loadperf-unloadperfcountertextstringsa
 // Minimum OS: windows5.1.2600.
-func UnloadPerfCounterTextStringsA(lpCommandLine foundation.PSTR, bQuietModeArg foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procUnloadPerfCounterTextStringsA.Addr(), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(bQuietModeArg))
+func UnloadPerfCounterTextStringsA(lpCommandLine foundation.PSTR, bQuietModeArg bool) uint32 {
+	_bQuietModeArg := win32.Bool32(bQuietModeArg)
+	r1, _, _ := syscall.SyscallN(procUnloadPerfCounterTextStringsA.Addr(), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(_bQuietModeArg))
 	return uint32(r1)
 }
 
-// UnloadPerfCounterTextStringsW calls loadperf!UnloadPerfCounterTextStringsW.
-// https://learn.microsoft.com/windows/win32/api/loadperf/nf-loadperf-unloadperfcountertextstringsw
-// Minimum OS: windows5.1.2600.
-func UnloadPerfCounterTextStringsW(lpCommandLine foundation.PWSTR, bQuietModeArg foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procUnloadPerfCounterTextStringsW.Addr(), uintptr(unsafe.Pointer(lpCommandLine)), uintptr(bQuietModeArg))
+// UpdatePerfNameFiles calls loadperf!UpdatePerfNameFilesW.
+func UpdatePerfNameFiles(szNewCtrFilePath string, szNewHlpFilePath string, szLanguageID string, dwModes uintptr) uint32 {
+	_szNewCtrFilePath := win32.UTF16Ptr(szNewCtrFilePath)
+	_szNewHlpFilePath := win32.UTF16Ptr(szNewHlpFilePath)
+	_szLanguageID := win32.UTF16Ptr(szLanguageID)
+	r1, _, _ := syscall.SyscallN(procUpdatePerfNameFiles.Addr(), uintptr(unsafe.Pointer(_szNewCtrFilePath)), uintptr(unsafe.Pointer(_szNewHlpFilePath)), uintptr(unsafe.Pointer(_szLanguageID)), uintptr(dwModes))
 	return uint32(r1)
 }
 
 // UpdatePerfNameFilesA calls loadperf!UpdatePerfNameFilesA.
 func UpdatePerfNameFilesA(szNewCtrFilePath foundation.PSTR, szNewHlpFilePath foundation.PSTR, szLanguageID foundation.PSTR, dwModes uintptr) uint32 {
 	r1, _, _ := syscall.SyscallN(procUpdatePerfNameFilesA.Addr(), uintptr(unsafe.Pointer(szNewCtrFilePath)), uintptr(unsafe.Pointer(szNewHlpFilePath)), uintptr(unsafe.Pointer(szLanguageID)), uintptr(dwModes))
-	return uint32(r1)
-}
-
-// UpdatePerfNameFilesW calls loadperf!UpdatePerfNameFilesW.
-func UpdatePerfNameFilesW(szNewCtrFilePath foundation.PWSTR, szNewHlpFilePath foundation.PWSTR, szLanguageID foundation.PWSTR, dwModes uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procUpdatePerfNameFilesW.Addr(), uintptr(unsafe.Pointer(szNewCtrFilePath)), uintptr(unsafe.Pointer(szNewHlpFilePath)), uintptr(unsafe.Pointer(szLanguageID)), uintptr(dwModes))
 	return uint32(r1)
 }

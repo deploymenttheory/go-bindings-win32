@@ -615,8 +615,8 @@ type PARAMDESCEX struct {
 	VarDefaultValue systemvariant.VARIANT
 }
 
-// PICTDESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PICTDESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PICTDESC_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -674,8 +674,8 @@ type QACONTROL struct {
 	DwPointerActivationPolicy uint32
 }
 
-// SAFEARRAYUNION_u_e__Struct is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SAFEARRAYUNION_u_e__Struct is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SAFEARRAYUNION_u_e__Struct struct {
 	Data [4]uint64
 }
@@ -737,8 +737,8 @@ type WireSAFEARRAY struct {
 	Rgsabound     [1]systemcom.SAFEARRAYBOUND
 }
 
-// WireVARIANT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WireVARIANT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WireVARIANT_Anonymous_e__Union struct {
 	Data [2]uint64
 }

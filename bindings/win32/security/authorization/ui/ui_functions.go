@@ -49,7 +49,7 @@ func EditSecurity(hwndOwner foundation.HWND, psi *ISecurityInformation) error {
 // EditSecurityAdvanced calls ACLUI!EditSecurityAdvanced.
 // https://learn.microsoft.com/windows/win32/api/aclui/nf-aclui-editsecurityadvanced
 // Minimum OS: windows6.0.6000.
-func EditSecurityAdvanced(hwndOwner foundation.HWND, psi *ISecurityInformation, uSIPage SI_PAGE_TYPE) foundation.HRESULT {
+func EditSecurityAdvanced(hwndOwner foundation.HWND, psi *ISecurityInformation, uSIPage SI_PAGE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(procEditSecurityAdvanced.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(psi)), uintptr(uSIPage))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

@@ -31,9 +31,10 @@ var (
 
 // FCIAddFile calls Cabinet!FCIAddFile.
 // https://learn.microsoft.com/windows/win32/api/fci/nf-fci-fciaddfile
-func FCIAddFile(hfci unsafe.Pointer, pszSourceFile foundation.PSTR, pszFileName foundation.PSTR, fExecute foundation.BOOL, pfnfcignc PFNFCIGETNEXTCABINET, pfnfcis PFNFCISTATUS, pfnfcigoi PFNFCIGETOPENINFO, typeCompress uint16) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procFCIAddFile.Addr(), uintptr(unsafe.Pointer(hfci)), uintptr(unsafe.Pointer(pszSourceFile)), uintptr(unsafe.Pointer(pszFileName)), uintptr(fExecute), uintptr(pfnfcignc), uintptr(pfnfcis), uintptr(pfnfcigoi), uintptr(typeCompress))
-	return foundation.BOOL(r1)
+func FCIAddFile(hfci unsafe.Pointer, pszSourceFile foundation.PSTR, pszFileName foundation.PSTR, fExecute bool, pfnfcignc PFNFCIGETNEXTCABINET, pfnfcis PFNFCISTATUS, pfnfcigoi PFNFCIGETOPENINFO, typeCompress uint16) bool {
+	_fExecute := win32.Bool32(fExecute)
+	r1, _, _ := syscall.SyscallN(procFCIAddFile.Addr(), uintptr(unsafe.Pointer(hfci)), uintptr(unsafe.Pointer(pszSourceFile)), uintptr(unsafe.Pointer(pszFileName)), uintptr(_fExecute), uintptr(pfnfcignc), uintptr(pfnfcis), uintptr(pfnfcigoi), uintptr(typeCompress))
+	return r1 != 0
 }
 
 // FCICreate calls Cabinet!FCICreate.
@@ -45,31 +46,32 @@ func FCICreate(perf *ERF, pfnfcifp PFNFCIFILEPLACED, pfna PFNFCIALLOC, pfnf PFNF
 
 // FCIDestroy calls Cabinet!FCIDestroy.
 // https://learn.microsoft.com/windows/win32/api/fci/nf-fci-fcidestroy
-func FCIDestroy(hfci unsafe.Pointer) foundation.BOOL {
+func FCIDestroy(hfci unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procFCIDestroy.Addr(), uintptr(unsafe.Pointer(hfci)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FCIFlushCabinet calls Cabinet!FCIFlushCabinet.
 // https://learn.microsoft.com/windows/win32/api/fci/nf-fci-fciflushcabinet
-func FCIFlushCabinet(hfci unsafe.Pointer, fGetNextCab foundation.BOOL, pfnfcignc PFNFCIGETNEXTCABINET, pfnfcis PFNFCISTATUS) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procFCIFlushCabinet.Addr(), uintptr(unsafe.Pointer(hfci)), uintptr(fGetNextCab), uintptr(pfnfcignc), uintptr(pfnfcis))
-	return foundation.BOOL(r1)
+func FCIFlushCabinet(hfci unsafe.Pointer, fGetNextCab bool, pfnfcignc PFNFCIGETNEXTCABINET, pfnfcis PFNFCISTATUS) bool {
+	_fGetNextCab := win32.Bool32(fGetNextCab)
+	r1, _, _ := syscall.SyscallN(procFCIFlushCabinet.Addr(), uintptr(unsafe.Pointer(hfci)), uintptr(_fGetNextCab), uintptr(pfnfcignc), uintptr(pfnfcis))
+	return r1 != 0
 }
 
 // FCIFlushFolder calls Cabinet!FCIFlushFolder.
 // https://learn.microsoft.com/windows/win32/api/fci/nf-fci-fciflushfolder
-func FCIFlushFolder(hfci unsafe.Pointer, pfnfcignc PFNFCIGETNEXTCABINET, pfnfcis PFNFCISTATUS) foundation.BOOL {
+func FCIFlushFolder(hfci unsafe.Pointer, pfnfcignc PFNFCIGETNEXTCABINET, pfnfcis PFNFCISTATUS) bool {
 	r1, _, _ := syscall.SyscallN(procFCIFlushFolder.Addr(), uintptr(unsafe.Pointer(hfci)), uintptr(pfnfcignc), uintptr(pfnfcis))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FDICopy calls Cabinet!FDICopy.
 // https://learn.microsoft.com/windows/win32/api/fdi/nf-fdi-fdicopy
 // Minimum OS: windows5.0.
-func FDICopy(hfdi unsafe.Pointer, pszCabinet foundation.PSTR, pszCabPath foundation.PSTR, flags int32, pfnfdin PFNFDINOTIFY, pfnfdid PFNFDIDECRYPT, pvUser unsafe.Pointer) foundation.BOOL {
+func FDICopy(hfdi unsafe.Pointer, pszCabinet foundation.PSTR, pszCabPath foundation.PSTR, flags int32, pfnfdin PFNFDINOTIFY, pfnfdid PFNFDIDECRYPT, pvUser unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procFDICopy.Addr(), uintptr(unsafe.Pointer(hfdi)), uintptr(unsafe.Pointer(pszCabinet)), uintptr(unsafe.Pointer(pszCabPath)), uintptr(flags), uintptr(pfnfdin), uintptr(pfnfdid), uintptr(unsafe.Pointer(pvUser)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FDICreate calls Cabinet!FDICreate.
@@ -83,22 +85,22 @@ func FDICreate(pfnalloc PFNALLOC, pfnfree PFNFREE, pfnopen PFNOPEN, pfnread PFNR
 // FDIDestroy calls Cabinet!FDIDestroy.
 // https://learn.microsoft.com/windows/win32/api/fdi/nf-fdi-fdidestroy
 // Minimum OS: windows5.0.
-func FDIDestroy(hfdi unsafe.Pointer) foundation.BOOL {
+func FDIDestroy(hfdi unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procFDIDestroy.Addr(), uintptr(unsafe.Pointer(hfdi)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FDIIsCabinet calls Cabinet!FDIIsCabinet.
 // https://learn.microsoft.com/windows/win32/api/fdi/nf-fdi-fdiiscabinet
 // Minimum OS: windows5.0.
-func FDIIsCabinet(hfdi unsafe.Pointer, hf uintptr, pfdici *FDICABINETINFO) foundation.BOOL {
+func FDIIsCabinet(hfdi unsafe.Pointer, hf uintptr, pfdici *FDICABINETINFO) bool {
 	r1, _, _ := syscall.SyscallN(procFDIIsCabinet.Addr(), uintptr(unsafe.Pointer(hfdi)), uintptr(hf), uintptr(unsafe.Pointer(pfdici)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FDITruncateCabinet calls Cabinet!FDITruncateCabinet.
 // https://learn.microsoft.com/windows/win32/api/fdi/nf-fdi-fditruncatecabinet
-func FDITruncateCabinet(hfdi unsafe.Pointer, pszCabinetName foundation.PSTR, iFolderToDelete uint16) foundation.BOOL {
+func FDITruncateCabinet(hfdi unsafe.Pointer, pszCabinetName foundation.PSTR, iFolderToDelete uint16) bool {
 	r1, _, _ := syscall.SyscallN(procFDITruncateCabinet.Addr(), uintptr(unsafe.Pointer(hfdi)), uintptr(unsafe.Pointer(pszCabinetName)), uintptr(iFolderToDelete))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }

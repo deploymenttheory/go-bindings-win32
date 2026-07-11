@@ -23,75 +23,77 @@ type ITraceEvent struct {
 var IID_ITraceEvent = win32.GUID{Data1: 0x8cc97f40, Data2: 0x9028, Data3: 0x4ff3, Data4: [8]byte{0x9b, 0x62, 0x7d, 0x1f, 0x79, 0xca, 0x7b, 0xcb}}
 
 // Clone dispatches through ITraceEvent's vtable slot 3.
-func (self *ITraceEvent) Clone(NewEvent **ITraceEvent) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NewEvent)))
-	return foundation.HRESULT(r1)
+func (self *ITraceEvent) Clone() (*ITraceEvent, error) {
+	var _NewEvent *ITraceEvent
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_NewEvent)))
+	return _NewEvent, win32.HRESULTError(int32(r1))
 }
 
 // GetUserContext dispatches through ITraceEvent's vtable slot 4.
-func (self *ITraceEvent) GetUserContext(UserContext *unsafe.Pointer) foundation.HRESULT {
+func (self *ITraceEvent) GetUserContext(UserContext *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(UserContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEventRecord dispatches through ITraceEvent's vtable slot 5.
-func (self *ITraceEvent) GetEventRecord(EventRecord **EVENT_RECORD) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EventRecord)))
-	return foundation.HRESULT(r1)
+func (self *ITraceEvent) GetEventRecord() (*EVENT_RECORD, error) {
+	var _EventRecord *EVENT_RECORD
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_EventRecord)))
+	return _EventRecord, win32.HRESULTError(int32(r1))
 }
 
 // SetPayload dispatches through ITraceEvent's vtable slot 6.
-func (self *ITraceEvent) SetPayload(Payload *byte, PayloadSize uint32) foundation.HRESULT {
+func (self *ITraceEvent) SetPayload(Payload *byte, PayloadSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Payload)), uintptr(PayloadSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEventDescriptor dispatches through ITraceEvent's vtable slot 7.
-func (self *ITraceEvent) SetEventDescriptor(EventDescriptor *EVENT_DESCRIPTOR) foundation.HRESULT {
+func (self *ITraceEvent) SetEventDescriptor(EventDescriptor *EVENT_DESCRIPTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EventDescriptor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProcessId dispatches through ITraceEvent's vtable slot 8.
-func (self *ITraceEvent) SetProcessId(ProcessId uint32) foundation.HRESULT {
+func (self *ITraceEvent) SetProcessId(ProcessId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ProcessId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProcessorIndex dispatches through ITraceEvent's vtable slot 9.
-func (self *ITraceEvent) SetProcessorIndex(ProcessorIndex uint32) foundation.HRESULT {
+func (self *ITraceEvent) SetProcessorIndex(ProcessorIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ProcessorIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetThreadId dispatches through ITraceEvent's vtable slot 10.
-func (self *ITraceEvent) SetThreadId(ThreadId uint32) foundation.HRESULT {
+func (self *ITraceEvent) SetThreadId(ThreadId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ThreadId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetThreadTimes dispatches through ITraceEvent's vtable slot 11.
-func (self *ITraceEvent) SetThreadTimes(KernelTime uint32, UserTime uint32) foundation.HRESULT {
+func (self *ITraceEvent) SetThreadTimes(KernelTime uint32, UserTime uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(KernelTime), uintptr(UserTime))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetActivityId dispatches through ITraceEvent's vtable slot 12.
-func (self *ITraceEvent) SetActivityId(ActivityId *win32.GUID) foundation.HRESULT {
+func (self *ITraceEvent) SetActivityId(ActivityId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ActivityId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTimeStamp dispatches through ITraceEvent's vtable slot 13.
-func (self *ITraceEvent) SetTimeStamp(TimeStamp *int64) foundation.HRESULT {
+func (self *ITraceEvent) SetTimeStamp(TimeStamp *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TimeStamp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProviderId dispatches through ITraceEvent's vtable slot 14.
-func (self *ITraceEvent) SetProviderId(ProviderId *win32.GUID) foundation.HRESULT {
+func (self *ITraceEvent) SetProviderId(ProviderId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ProviderId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITraceEventCallback: https://learn.microsoft.com/windows/win32/api/relogger/nn-relogger-itraceeventcallback
@@ -104,21 +106,21 @@ type ITraceEventCallback struct {
 var IID_ITraceEventCallback = win32.GUID{Data1: 0x3ed25501, Data2: 0x593f, Data3: 0x43e9, Data4: [8]byte{0x8f, 0x38, 0x3a, 0xb4, 0x6f, 0x5a, 0x4a, 0x52}}
 
 // OnBeginProcessTrace dispatches through ITraceEventCallback's vtable slot 3.
-func (self *ITraceEventCallback) OnBeginProcessTrace(HeaderEvent *ITraceEvent, Relogger *ITraceRelogger) foundation.HRESULT {
+func (self *ITraceEventCallback) OnBeginProcessTrace(HeaderEvent *ITraceEvent, Relogger *ITraceRelogger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(HeaderEvent)), uintptr(unsafe.Pointer(Relogger)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnFinalizeProcessTrace dispatches through ITraceEventCallback's vtable slot 4.
-func (self *ITraceEventCallback) OnFinalizeProcessTrace(Relogger *ITraceRelogger) foundation.HRESULT {
+func (self *ITraceEventCallback) OnFinalizeProcessTrace(Relogger *ITraceRelogger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Relogger)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnEvent dispatches through ITraceEventCallback's vtable slot 5.
-func (self *ITraceEventCallback) OnEvent(Event *ITraceEvent, Relogger *ITraceRelogger) foundation.HRESULT {
+func (self *ITraceEventCallback) OnEvent(Event *ITraceEvent, Relogger *ITraceRelogger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Event)), uintptr(unsafe.Pointer(Relogger)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITraceRelogger: https://learn.microsoft.com/windows/win32/api/relogger/nn-relogger-itracerelogger
@@ -131,55 +133,58 @@ type ITraceRelogger struct {
 var IID_ITraceRelogger = win32.GUID{Data1: 0xf754ad43, Data2: 0x3bcc, Data3: 0x4286, Data4: [8]byte{0x80, 0x09, 0x9c, 0x5d, 0xa2, 0x14, 0xe8, 0x4e}}
 
 // AddLogfileTraceStream dispatches through ITraceRelogger's vtable slot 3.
-func (self *ITraceRelogger) AddLogfileTraceStream(LogfileName foundation.BSTR, UserContext unsafe.Pointer, TraceStreamId *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LogfileName)), uintptr(unsafe.Pointer(UserContext)), uintptr(unsafe.Pointer(TraceStreamId)))
-	return foundation.HRESULT(r1)
+func (self *ITraceRelogger) AddLogfileTraceStream(LogfileName foundation.BSTR, UserContext unsafe.Pointer) (uint64, error) {
+	var _TraceStreamId uint64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LogfileName)), uintptr(unsafe.Pointer(UserContext)), uintptr(unsafe.Pointer(&_TraceStreamId)))
+	return _TraceStreamId, win32.HRESULTError(int32(r1))
 }
 
 // AddRealtimeTraceStream dispatches through ITraceRelogger's vtable slot 4.
-func (self *ITraceRelogger) AddRealtimeTraceStream(LoggerName foundation.BSTR, UserContext unsafe.Pointer, TraceStreamId *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LoggerName)), uintptr(unsafe.Pointer(UserContext)), uintptr(unsafe.Pointer(TraceStreamId)))
-	return foundation.HRESULT(r1)
+func (self *ITraceRelogger) AddRealtimeTraceStream(LoggerName foundation.BSTR, UserContext unsafe.Pointer) (uint64, error) {
+	var _TraceStreamId uint64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LoggerName)), uintptr(unsafe.Pointer(UserContext)), uintptr(unsafe.Pointer(&_TraceStreamId)))
+	return _TraceStreamId, win32.HRESULTError(int32(r1))
 }
 
 // RegisterCallback dispatches through ITraceRelogger's vtable slot 5.
-func (self *ITraceRelogger) RegisterCallback(Callback *ITraceEventCallback) foundation.HRESULT {
+func (self *ITraceRelogger) RegisterCallback(Callback *ITraceEventCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Callback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Inject dispatches through ITraceRelogger's vtable slot 6.
-func (self *ITraceRelogger) Inject(Event *ITraceEvent) foundation.HRESULT {
+func (self *ITraceRelogger) Inject(Event *ITraceEvent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Event)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateEventInstance dispatches through ITraceRelogger's vtable slot 7.
-func (self *ITraceRelogger) CreateEventInstance(TraceStreamId uint64, Flags uint32, Event **ITraceEvent) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(TraceStreamId), uintptr(Flags), uintptr(unsafe.Pointer(Event)))
-	return foundation.HRESULT(r1)
+func (self *ITraceRelogger) CreateEventInstance(TraceStreamId uint64, Flags uint32) (*ITraceEvent, error) {
+	var _Event *ITraceEvent
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(TraceStreamId), uintptr(Flags), uintptr(unsafe.Pointer(&_Event)))
+	return _Event, win32.HRESULTError(int32(r1))
 }
 
 // ProcessTrace dispatches through ITraceRelogger's vtable slot 8.
-func (self *ITraceRelogger) ProcessTrace() foundation.HRESULT {
+func (self *ITraceRelogger) ProcessTrace() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutputFilename dispatches through ITraceRelogger's vtable slot 9.
-func (self *ITraceRelogger) SetOutputFilename(LogfileName foundation.BSTR) foundation.HRESULT {
+func (self *ITraceRelogger) SetOutputFilename(LogfileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LogfileName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompressionMode dispatches through ITraceRelogger's vtable slot 10.
-func (self *ITraceRelogger) SetCompressionMode(CompressionMode foundation.BOOLEAN) foundation.HRESULT {
+func (self *ITraceRelogger) SetCompressionMode(CompressionMode foundation.BOOLEAN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(CompressionMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through ITraceRelogger's vtable slot 11.
-func (self *ITraceRelogger) Cancel() foundation.HRESULT {
+func (self *ITraceRelogger) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

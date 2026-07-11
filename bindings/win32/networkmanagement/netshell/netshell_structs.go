@@ -31,8 +31,8 @@ type CMD_GROUP_ENTRY struct {
 	POsVersionCheck     PNS_OSVERSIONCHECK
 }
 
-// NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NS_CONTEXT_ATTRIBUTES_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -55,8 +55,8 @@ type NS_CONTEXT_ATTRIBUTES struct {
 	PfnOsVersionCheck PNS_OSVERSIONCHECK
 }
 
-// NS_HELPER_ATTRIBUTES_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NS_HELPER_ATTRIBUTES_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NS_HELPER_ATTRIBUTES_Anonymous_e__Union struct {
 	Data [1]uint64
 }

@@ -74,8 +74,8 @@ type CRYPT_PROVIDER_CERT struct {
 	PChainElement        *securitycryptography.CERT_CHAIN_ELEMENT
 }
 
-// CRYPT_PROVIDER_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CRYPT_PROVIDER_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CRYPT_PROVIDER_DATA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -303,8 +303,8 @@ type SPC_INDIRECT_DATA_CONTENT struct {
 	Digest          securitycryptography.CRYPT_INTEGER_BLOB
 }
 
-// SPC_LINK_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SPC_LINK_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SPC_LINK_Anonymous_e__Union struct {
 	Data [4]uint64
 }
@@ -388,8 +388,8 @@ type WINTRUST_CERT_INFO struct {
 	PsftVerifyAsOf   *foundation.FILETIME
 }
 
-// WINTRUST_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINTRUST_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINTRUST_DATA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -423,8 +423,8 @@ type WINTRUST_DETACHED_SIG_FILE_HANDLES struct {
 	HSignatureFile foundation.HANDLE
 }
 
-// WINTRUST_DETACHED_SIG_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINTRUST_DETACHED_SIG_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINTRUST_DETACHED_SIG_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -497,8 +497,8 @@ type WIN_TRUST_SUBJECT_FILE_AND_DISPLAY struct {
 	LpDisplayName foundation.PWSTR
 }
 
-// WTD_GENERIC_CHAIN_POLICY_CREATE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WTD_GENERIC_CHAIN_POLICY_CREATE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WTD_GENERIC_CHAIN_POLICY_CREATE_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -511,8 +511,8 @@ type WTD_GENERIC_CHAIN_POLICY_CREATE_INFO struct {
 	PvReserved   unsafe.Pointer
 }
 
-// WTD_GENERIC_CHAIN_POLICY_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WTD_GENERIC_CHAIN_POLICY_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WTD_GENERIC_CHAIN_POLICY_DATA_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -525,8 +525,8 @@ type WTD_GENERIC_CHAIN_POLICY_DATA struct {
 	PvPolicyArg             unsafe.Pointer
 }
 
-// WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WTD_GENERIC_CHAIN_POLICY_SIGNER_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
 }

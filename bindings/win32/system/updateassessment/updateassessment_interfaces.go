@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
@@ -23,7 +22,8 @@ type IWaaSAssessor struct {
 var IID_IWaaSAssessor = win32.GUID{Data1: 0x2347bbef, Data2: 0x1a3b, Data3: 0x45a4, Data4: [8]byte{0x90, 0x2d, 0x3e, 0x09, 0xc2, 0x69, 0xb4, 0x5e}}
 
 // GetOSUpdateAssessment dispatches through IWaaSAssessor's vtable slot 3.
-func (self *IWaaSAssessor) GetOSUpdateAssessment(result *OSUpdateAssessment) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+func (self *IWaaSAssessor) GetOSUpdateAssessment() (OSUpdateAssessment, error) {
+	var _result OSUpdateAssessment
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_result)))
+	return _result, win32.HRESULTError(int32(r1))
 }

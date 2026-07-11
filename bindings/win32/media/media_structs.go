@@ -11,8 +11,8 @@ type TIMECAPS struct {
 }
 
 // TIMECODE: https://learn.microsoft.com/windows/win32/api/strmif/ns-strmif-timecode
-// TIMECODE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TIMECODE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TIMECODE struct {
 	Data [1]uint64
 }

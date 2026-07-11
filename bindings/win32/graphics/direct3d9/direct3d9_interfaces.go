@@ -25,9 +25,9 @@ type IDirect3D9 struct {
 var IID_IDirect3D9 = win32.GUID{Data1: 0x81bdcbca, Data2: 0x64d4, Data3: 0x426d, Data4: [8]byte{0xae, 0x8d, 0xad, 0x01, 0x47, 0xf4, 0x27, 0x5c}}
 
 // RegisterSoftwareDevice dispatches through IDirect3D9's vtable slot 3.
-func (self *IDirect3D9) RegisterSoftwareDevice(pInitializeFunction unsafe.Pointer) foundation.HRESULT {
+func (self *IDirect3D9) RegisterSoftwareDevice(pInitializeFunction unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInitializeFunction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAdapterCount dispatches through IDirect3D9's vtable slot 4.
@@ -37,9 +37,9 @@ func (self *IDirect3D9) GetAdapterCount() uint32 {
 }
 
 // GetAdapterIdentifier dispatches through IDirect3D9's vtable slot 5.
-func (self *IDirect3D9) GetAdapterIdentifier(Adapter uint32, Flags uint32, pIdentifier *D3DADAPTER_IDENTIFIER9) foundation.HRESULT {
+func (self *IDirect3D9) GetAdapterIdentifier(Adapter uint32, Flags uint32, pIdentifier *D3DADAPTER_IDENTIFIER9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(Flags), uintptr(unsafe.Pointer(pIdentifier)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAdapterModeCount dispatches through IDirect3D9's vtable slot 6.
@@ -49,51 +49,53 @@ func (self *IDirect3D9) GetAdapterModeCount(Adapter uint32, Format D3DFORMAT) ui
 }
 
 // EnumAdapterModes dispatches through IDirect3D9's vtable slot 7.
-func (self *IDirect3D9) EnumAdapterModes(Adapter uint32, Format D3DFORMAT, Mode uint32, pMode *D3DDISPLAYMODE) foundation.HRESULT {
+func (self *IDirect3D9) EnumAdapterModes(Adapter uint32, Format D3DFORMAT, Mode uint32, pMode *D3DDISPLAYMODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(Format), uintptr(Mode), uintptr(unsafe.Pointer(pMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAdapterDisplayMode dispatches through IDirect3D9's vtable slot 8.
-func (self *IDirect3D9) GetAdapterDisplayMode(Adapter uint32, pMode *D3DDISPLAYMODE) foundation.HRESULT {
+func (self *IDirect3D9) GetAdapterDisplayMode(Adapter uint32, pMode *D3DDISPLAYMODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(unsafe.Pointer(pMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckDeviceType dispatches through IDirect3D9's vtable slot 9.
-func (self *IDirect3D9) CheckDeviceType(Adapter uint32, DevType D3DDEVTYPE, AdapterFormat D3DFORMAT, BackBufferFormat D3DFORMAT, bWindowed foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(DevType), uintptr(AdapterFormat), uintptr(BackBufferFormat), uintptr(bWindowed))
-	return foundation.HRESULT(r1)
+func (self *IDirect3D9) CheckDeviceType(Adapter uint32, DevType D3DDEVTYPE, AdapterFormat D3DFORMAT, BackBufferFormat D3DFORMAT, bWindowed bool) error {
+	_bWindowed := win32.Bool32(bWindowed)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(DevType), uintptr(AdapterFormat), uintptr(BackBufferFormat), uintptr(_bWindowed))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckDeviceFormat dispatches through IDirect3D9's vtable slot 10.
-func (self *IDirect3D9) CheckDeviceFormat(Adapter uint32, DeviceType D3DDEVTYPE, AdapterFormat D3DFORMAT, Usage uint32, RType D3DRESOURCETYPE, CheckFormat D3DFORMAT) foundation.HRESULT {
+func (self *IDirect3D9) CheckDeviceFormat(Adapter uint32, DeviceType D3DDEVTYPE, AdapterFormat D3DFORMAT, Usage uint32, RType D3DRESOURCETYPE, CheckFormat D3DFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(DeviceType), uintptr(AdapterFormat), uintptr(Usage), uintptr(RType), uintptr(CheckFormat))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckDeviceMultiSampleType dispatches through IDirect3D9's vtable slot 11.
-func (self *IDirect3D9) CheckDeviceMultiSampleType(Adapter uint32, DeviceType D3DDEVTYPE, SurfaceFormat D3DFORMAT, Windowed foundation.BOOL, MultiSampleType D3DMULTISAMPLE_TYPE, pQualityLevels *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(DeviceType), uintptr(SurfaceFormat), uintptr(Windowed), uintptr(MultiSampleType), uintptr(unsafe.Pointer(pQualityLevels)))
-	return foundation.HRESULT(r1)
+func (self *IDirect3D9) CheckDeviceMultiSampleType(Adapter uint32, DeviceType D3DDEVTYPE, SurfaceFormat D3DFORMAT, Windowed bool, MultiSampleType D3DMULTISAMPLE_TYPE, pQualityLevels *uint32) error {
+	_Windowed := win32.Bool32(Windowed)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(DeviceType), uintptr(SurfaceFormat), uintptr(_Windowed), uintptr(MultiSampleType), uintptr(unsafe.Pointer(pQualityLevels)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckDepthStencilMatch dispatches through IDirect3D9's vtable slot 12.
-func (self *IDirect3D9) CheckDepthStencilMatch(Adapter uint32, DeviceType D3DDEVTYPE, AdapterFormat D3DFORMAT, RenderTargetFormat D3DFORMAT, DepthStencilFormat D3DFORMAT) foundation.HRESULT {
+func (self *IDirect3D9) CheckDepthStencilMatch(Adapter uint32, DeviceType D3DDEVTYPE, AdapterFormat D3DFORMAT, RenderTargetFormat D3DFORMAT, DepthStencilFormat D3DFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(DeviceType), uintptr(AdapterFormat), uintptr(RenderTargetFormat), uintptr(DepthStencilFormat))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckDeviceFormatConversion dispatches through IDirect3D9's vtable slot 13.
-func (self *IDirect3D9) CheckDeviceFormatConversion(Adapter uint32, DeviceType D3DDEVTYPE, SourceFormat D3DFORMAT, TargetFormat D3DFORMAT) foundation.HRESULT {
+func (self *IDirect3D9) CheckDeviceFormatConversion(Adapter uint32, DeviceType D3DDEVTYPE, SourceFormat D3DFORMAT, TargetFormat D3DFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(DeviceType), uintptr(SourceFormat), uintptr(TargetFormat))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceCaps dispatches through IDirect3D9's vtable slot 14.
-func (self *IDirect3D9) GetDeviceCaps(Adapter uint32, DeviceType D3DDEVTYPE, pCaps *D3DCAPS9) foundation.HRESULT {
+func (self *IDirect3D9) GetDeviceCaps(Adapter uint32, DeviceType D3DDEVTYPE, pCaps *D3DCAPS9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(DeviceType), uintptr(unsafe.Pointer(pCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAdapterMonitor dispatches through IDirect3D9's vtable slot 15.
@@ -103,9 +105,9 @@ func (self *IDirect3D9) GetAdapterMonitor(Adapter uint32) graphicsgdi.HMONITOR {
 }
 
 // CreateDevice dispatches through IDirect3D9's vtable slot 16.
-func (self *IDirect3D9) CreateDevice(Adapter uint32, DeviceType D3DDEVTYPE, hFocusWindow foundation.HWND, BehaviorFlags uint32, pPresentationParameters *D3DPRESENT_PARAMETERS, ppReturnedDeviceInterface **IDirect3DDevice9) foundation.HRESULT {
+func (self *IDirect3D9) CreateDevice(Adapter uint32, DeviceType D3DDEVTYPE, hFocusWindow foundation.HWND, BehaviorFlags uint32, pPresentationParameters *D3DPRESENT_PARAMETERS, ppReturnedDeviceInterface **IDirect3DDevice9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(DeviceType), uintptr(hFocusWindow), uintptr(BehaviorFlags), uintptr(unsafe.Pointer(pPresentationParameters)), uintptr(unsafe.Pointer(ppReturnedDeviceInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3D9Ex: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3d9ex
@@ -124,27 +126,27 @@ func (self *IDirect3D9Ex) GetAdapterModeCountEx(Adapter uint32, pFilter *D3DDISP
 }
 
 // EnumAdapterModesEx dispatches through IDirect3D9Ex's vtable slot 18.
-func (self *IDirect3D9Ex) EnumAdapterModesEx(Adapter uint32, pFilter *D3DDISPLAYMODEFILTER, Mode uint32, pMode *D3DDISPLAYMODEEX) foundation.HRESULT {
+func (self *IDirect3D9Ex) EnumAdapterModesEx(Adapter uint32, pFilter *D3DDISPLAYMODEFILTER, Mode uint32, pMode *D3DDISPLAYMODEEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(unsafe.Pointer(pFilter)), uintptr(Mode), uintptr(unsafe.Pointer(pMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAdapterDisplayModeEx dispatches through IDirect3D9Ex's vtable slot 19.
-func (self *IDirect3D9Ex) GetAdapterDisplayModeEx(Adapter uint32, pMode *D3DDISPLAYMODEEX, pRotation *D3DDISPLAYROTATION) foundation.HRESULT {
+func (self *IDirect3D9Ex) GetAdapterDisplayModeEx(Adapter uint32, pMode *D3DDISPLAYMODEEX, pRotation *D3DDISPLAYROTATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(unsafe.Pointer(pMode)), uintptr(unsafe.Pointer(pRotation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDeviceEx dispatches through IDirect3D9Ex's vtable slot 20.
-func (self *IDirect3D9Ex) CreateDeviceEx(Adapter uint32, DeviceType D3DDEVTYPE, hFocusWindow foundation.HWND, BehaviorFlags uint32, pPresentationParameters *D3DPRESENT_PARAMETERS, pFullscreenDisplayMode *D3DDISPLAYMODEEX, ppReturnedDeviceInterface **IDirect3DDevice9Ex) foundation.HRESULT {
+func (self *IDirect3D9Ex) CreateDeviceEx(Adapter uint32, DeviceType D3DDEVTYPE, hFocusWindow foundation.HWND, BehaviorFlags uint32, pPresentationParameters *D3DPRESENT_PARAMETERS, pFullscreenDisplayMode *D3DDISPLAYMODEEX, ppReturnedDeviceInterface **IDirect3DDevice9Ex) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(DeviceType), uintptr(hFocusWindow), uintptr(BehaviorFlags), uintptr(unsafe.Pointer(pPresentationParameters)), uintptr(unsafe.Pointer(pFullscreenDisplayMode)), uintptr(unsafe.Pointer(ppReturnedDeviceInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAdapterLUID dispatches through IDirect3D9Ex's vtable slot 21.
-func (self *IDirect3D9Ex) GetAdapterLUID(Adapter uint32, pLUID *foundation.LUID) foundation.HRESULT {
+func (self *IDirect3D9Ex) GetAdapterLUID(Adapter uint32, pLUID *foundation.LUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Adapter), uintptr(unsafe.Pointer(pLUID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DBaseTexture9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dbasetexture9
@@ -175,9 +177,9 @@ func (self *IDirect3DBaseTexture9) GetLevelCount() uint32 {
 }
 
 // SetAutoGenFilterType dispatches through IDirect3DBaseTexture9's vtable slot 14.
-func (self *IDirect3DBaseTexture9) SetAutoGenFilterType(FilterType D3DTEXTUREFILTERTYPE) foundation.HRESULT {
+func (self *IDirect3DBaseTexture9) SetAutoGenFilterType(FilterType D3DTEXTUREFILTERTYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(FilterType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAutoGenFilterType dispatches through IDirect3DBaseTexture9's vtable slot 15.
@@ -201,33 +203,33 @@ type IDirect3DCubeTexture9 struct {
 var IID_IDirect3DCubeTexture9 = win32.GUID{Data1: 0xfff32f81, Data2: 0xd953, Data3: 0x473a, Data4: [8]byte{0x92, 0x23, 0x93, 0xd6, 0x52, 0xab, 0xa9, 0x3f}}
 
 // GetLevelDesc dispatches through IDirect3DCubeTexture9's vtable slot 17.
-func (self *IDirect3DCubeTexture9) GetLevelDesc(Level uint32, pDesc *D3DSURFACE_DESC) foundation.HRESULT {
+func (self *IDirect3DCubeTexture9) GetLevelDesc(Level uint32, pDesc *D3DSURFACE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Level), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCubeMapSurface dispatches through IDirect3DCubeTexture9's vtable slot 18.
-func (self *IDirect3DCubeTexture9) GetCubeMapSurface(FaceType D3DCUBEMAP_FACES, Level uint32, ppCubeMapSurface **IDirect3DSurface9) foundation.HRESULT {
+func (self *IDirect3DCubeTexture9) GetCubeMapSurface(FaceType D3DCUBEMAP_FACES, Level uint32, ppCubeMapSurface **IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(FaceType), uintptr(Level), uintptr(unsafe.Pointer(ppCubeMapSurface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LockRect dispatches through IDirect3DCubeTexture9's vtable slot 19.
-func (self *IDirect3DCubeTexture9) LockRect(FaceType D3DCUBEMAP_FACES, Level uint32, pLockedRect *D3DLOCKED_RECT, pRect *foundation.RECT, Flags uint32) foundation.HRESULT {
+func (self *IDirect3DCubeTexture9) LockRect(FaceType D3DCUBEMAP_FACES, Level uint32, pLockedRect *D3DLOCKED_RECT, pRect *foundation.RECT, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(FaceType), uintptr(Level), uintptr(unsafe.Pointer(pLockedRect)), uintptr(unsafe.Pointer(pRect)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockRect dispatches through IDirect3DCubeTexture9's vtable slot 20.
-func (self *IDirect3DCubeTexture9) UnlockRect(FaceType D3DCUBEMAP_FACES, Level uint32) foundation.HRESULT {
+func (self *IDirect3DCubeTexture9) UnlockRect(FaceType D3DCUBEMAP_FACES, Level uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(FaceType), uintptr(Level))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDirtyRect dispatches through IDirect3DCubeTexture9's vtable slot 21.
-func (self *IDirect3DCubeTexture9) AddDirtyRect(FaceType D3DCUBEMAP_FACES, pDirtyRect *foundation.RECT) foundation.HRESULT {
+func (self *IDirect3DCubeTexture9) AddDirtyRect(FaceType D3DCUBEMAP_FACES, pDirtyRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(FaceType), uintptr(unsafe.Pointer(pDirtyRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DDevice9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9
@@ -240,9 +242,9 @@ type IDirect3DDevice9 struct {
 var IID_IDirect3DDevice9 = win32.GUID{Data1: 0xd0223b96, Data2: 0xbf7a, Data3: 0x43fd, Data4: [8]byte{0x92, 0xbd, 0xa4, 0x3b, 0x0d, 0x82, 0xb9, 0xeb}}
 
 // TestCooperativeLevel dispatches through IDirect3DDevice9's vtable slot 3.
-func (self *IDirect3DDevice9) TestCooperativeLevel() foundation.HRESULT {
+func (self *IDirect3DDevice9) TestCooperativeLevel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAvailableTextureMem dispatches through IDirect3DDevice9's vtable slot 4.
@@ -252,39 +254,39 @@ func (self *IDirect3DDevice9) GetAvailableTextureMem() uint32 {
 }
 
 // EvictManagedResources dispatches through IDirect3DDevice9's vtable slot 5.
-func (self *IDirect3DDevice9) EvictManagedResources() foundation.HRESULT {
+func (self *IDirect3DDevice9) EvictManagedResources() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDirect3D dispatches through IDirect3DDevice9's vtable slot 6.
-func (self *IDirect3DDevice9) GetDirect3D(ppD3D9 **IDirect3D9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetDirect3D(ppD3D9 **IDirect3D9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppD3D9)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceCaps dispatches through IDirect3DDevice9's vtable slot 7.
-func (self *IDirect3DDevice9) GetDeviceCaps(pCaps *D3DCAPS9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetDeviceCaps(pCaps *D3DCAPS9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplayMode dispatches through IDirect3DDevice9's vtable slot 8.
-func (self *IDirect3DDevice9) GetDisplayMode(iSwapChain uint32, pMode *D3DDISPLAYMODE) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetDisplayMode(iSwapChain uint32, pMode *D3DDISPLAYMODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iSwapChain), uintptr(unsafe.Pointer(pMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCreationParameters dispatches through IDirect3DDevice9's vtable slot 9.
-func (self *IDirect3DDevice9) GetCreationParameters(pParameters *D3DDEVICE_CREATION_PARAMETERS) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetCreationParameters(pParameters *D3DDEVICE_CREATION_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCursorProperties dispatches through IDirect3DDevice9's vtable slot 10.
-func (self *IDirect3DDevice9) SetCursorProperties(XHotSpot uint32, YHotSpot uint32, pCursorBitmap *IDirect3DSurface9) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetCursorProperties(XHotSpot uint32, YHotSpot uint32, pCursorBitmap *IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(XHotSpot), uintptr(YHotSpot), uintptr(unsafe.Pointer(pCursorBitmap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCursorPosition dispatches through IDirect3DDevice9's vtable slot 11.
@@ -293,21 +295,22 @@ func (self *IDirect3DDevice9) SetCursorPosition(X int32, Y int32, Flags uint32) 
 }
 
 // ShowCursor dispatches through IDirect3DDevice9's vtable slot 12.
-func (self *IDirect3DDevice9) ShowCursor(bShow foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(bShow))
+func (self *IDirect3DDevice9) ShowCursor(bShow bool) foundation.BOOL {
+	_bShow := win32.Bool32(bShow)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(_bShow))
 	return foundation.BOOL(r1)
 }
 
 // CreateAdditionalSwapChain dispatches through IDirect3DDevice9's vtable slot 13.
-func (self *IDirect3DDevice9) CreateAdditionalSwapChain(pPresentationParameters *D3DPRESENT_PARAMETERS, pSwapChain **IDirect3DSwapChain9) foundation.HRESULT {
+func (self *IDirect3DDevice9) CreateAdditionalSwapChain(pPresentationParameters *D3DPRESENT_PARAMETERS, pSwapChain **IDirect3DSwapChain9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPresentationParameters)), uintptr(unsafe.Pointer(pSwapChain)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSwapChain dispatches through IDirect3DDevice9's vtable slot 14.
-func (self *IDirect3DDevice9) GetSwapChain(iSwapChain uint32, pSwapChain **IDirect3DSwapChain9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetSwapChain(iSwapChain uint32, pSwapChain **IDirect3DSwapChain9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(iSwapChain), uintptr(unsafe.Pointer(pSwapChain)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNumberOfSwapChains dispatches through IDirect3DDevice9's vtable slot 15.
@@ -317,33 +320,34 @@ func (self *IDirect3DDevice9) GetNumberOfSwapChains() uint32 {
 }
 
 // Reset dispatches through IDirect3DDevice9's vtable slot 16.
-func (self *IDirect3DDevice9) Reset(pPresentationParameters *D3DPRESENT_PARAMETERS) foundation.HRESULT {
+func (self *IDirect3DDevice9) Reset(pPresentationParameters *D3DPRESENT_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPresentationParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Present dispatches through IDirect3DDevice9's vtable slot 17.
-func (self *IDirect3DDevice9) Present(pSourceRect *foundation.RECT, pDestRect *foundation.RECT, hDestWindowOverride foundation.HWND, pDirtyRegion *graphicsgdi.RGNDATA) foundation.HRESULT {
+func (self *IDirect3DDevice9) Present(pSourceRect *foundation.RECT, pDestRect *foundation.RECT, hDestWindowOverride foundation.HWND, pDirtyRegion *graphicsgdi.RGNDATA) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceRect)), uintptr(unsafe.Pointer(pDestRect)), uintptr(hDestWindowOverride), uintptr(unsafe.Pointer(pDirtyRegion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBackBuffer dispatches through IDirect3DDevice9's vtable slot 18.
-func (self *IDirect3DDevice9) GetBackBuffer(iSwapChain uint32, iBackBuffer uint32, Type D3DBACKBUFFER_TYPE, ppBackBuffer **IDirect3DSurface9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetBackBuffer(iSwapChain uint32, iBackBuffer uint32, Type D3DBACKBUFFER_TYPE, ppBackBuffer **IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(iSwapChain), uintptr(iBackBuffer), uintptr(Type), uintptr(unsafe.Pointer(ppBackBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRasterStatus dispatches through IDirect3DDevice9's vtable slot 19.
-func (self *IDirect3DDevice9) GetRasterStatus(iSwapChain uint32, pRasterStatus *D3DRASTER_STATUS) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetRasterStatus(iSwapChain uint32, pRasterStatus *D3DRASTER_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(iSwapChain), uintptr(unsafe.Pointer(pRasterStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDialogBoxMode dispatches through IDirect3DDevice9's vtable slot 20.
-func (self *IDirect3DDevice9) SetDialogBoxMode(bEnableDialogs foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(bEnableDialogs))
-	return foundation.HRESULT(r1)
+func (self *IDirect3DDevice9) SetDialogBoxMode(bEnableDialogs bool) error {
+	_bEnableDialogs := win32.Bool32(bEnableDialogs)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(_bEnableDialogs))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGammaRamp dispatches through IDirect3DDevice9's vtable slot 21.
@@ -357,327 +361,331 @@ func (self *IDirect3DDevice9) GetGammaRamp(iSwapChain uint32, pRamp *D3DGAMMARAM
 }
 
 // CreateTexture dispatches through IDirect3DDevice9's vtable slot 23.
-func (self *IDirect3DDevice9) CreateTexture(Width uint32, Height uint32, Levels uint32, Usage uint32, Format D3DFORMAT, Pool D3DPOOL, ppTexture **IDirect3DTexture9, pSharedHandle *foundation.HANDLE) foundation.HRESULT {
+func (self *IDirect3DDevice9) CreateTexture(Width uint32, Height uint32, Levels uint32, Usage uint32, Format D3DFORMAT, Pool D3DPOOL, ppTexture **IDirect3DTexture9, pSharedHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(Levels), uintptr(Usage), uintptr(Format), uintptr(Pool), uintptr(unsafe.Pointer(ppTexture)), uintptr(unsafe.Pointer(pSharedHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVolumeTexture dispatches through IDirect3DDevice9's vtable slot 24.
-func (self *IDirect3DDevice9) CreateVolumeTexture(Width uint32, Height uint32, Depth uint32, Levels uint32, Usage uint32, Format D3DFORMAT, Pool D3DPOOL, ppVolumeTexture **IDirect3DVolumeTexture9, pSharedHandle *foundation.HANDLE) foundation.HRESULT {
+func (self *IDirect3DDevice9) CreateVolumeTexture(Width uint32, Height uint32, Depth uint32, Levels uint32, Usage uint32, Format D3DFORMAT, Pool D3DPOOL, ppVolumeTexture **IDirect3DVolumeTexture9, pSharedHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(Depth), uintptr(Levels), uintptr(Usage), uintptr(Format), uintptr(Pool), uintptr(unsafe.Pointer(ppVolumeTexture)), uintptr(unsafe.Pointer(pSharedHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateCubeTexture dispatches through IDirect3DDevice9's vtable slot 25.
-func (self *IDirect3DDevice9) CreateCubeTexture(EdgeLength uint32, Levels uint32, Usage uint32, Format D3DFORMAT, Pool D3DPOOL, ppCubeTexture **IDirect3DCubeTexture9, pSharedHandle *foundation.HANDLE) foundation.HRESULT {
+func (self *IDirect3DDevice9) CreateCubeTexture(EdgeLength uint32, Levels uint32, Usage uint32, Format D3DFORMAT, Pool D3DPOOL, ppCubeTexture **IDirect3DCubeTexture9, pSharedHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(EdgeLength), uintptr(Levels), uintptr(Usage), uintptr(Format), uintptr(Pool), uintptr(unsafe.Pointer(ppCubeTexture)), uintptr(unsafe.Pointer(pSharedHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVertexBuffer dispatches through IDirect3DDevice9's vtable slot 26.
-func (self *IDirect3DDevice9) CreateVertexBuffer(Length uint32, Usage uint32, FVF uint32, Pool D3DPOOL, ppVertexBuffer **IDirect3DVertexBuffer9, pSharedHandle *foundation.HANDLE) foundation.HRESULT {
+func (self *IDirect3DDevice9) CreateVertexBuffer(Length uint32, Usage uint32, FVF uint32, Pool D3DPOOL, ppVertexBuffer **IDirect3DVertexBuffer9, pSharedHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Length), uintptr(Usage), uintptr(FVF), uintptr(Pool), uintptr(unsafe.Pointer(ppVertexBuffer)), uintptr(unsafe.Pointer(pSharedHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateIndexBuffer dispatches through IDirect3DDevice9's vtable slot 27.
-func (self *IDirect3DDevice9) CreateIndexBuffer(Length uint32, Usage uint32, Format D3DFORMAT, Pool D3DPOOL, ppIndexBuffer **IDirect3DIndexBuffer9, pSharedHandle *foundation.HANDLE) foundation.HRESULT {
+func (self *IDirect3DDevice9) CreateIndexBuffer(Length uint32, Usage uint32, Format D3DFORMAT, Pool D3DPOOL, ppIndexBuffer **IDirect3DIndexBuffer9, pSharedHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Length), uintptr(Usage), uintptr(Format), uintptr(Pool), uintptr(unsafe.Pointer(ppIndexBuffer)), uintptr(unsafe.Pointer(pSharedHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateRenderTarget dispatches through IDirect3DDevice9's vtable slot 28.
-func (self *IDirect3DDevice9) CreateRenderTarget(Width uint32, Height uint32, Format D3DFORMAT, MultiSample D3DMULTISAMPLE_TYPE, MultisampleQuality uint32, Lockable foundation.BOOL, ppSurface **IDirect3DSurface9, pSharedHandle *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(MultiSample), uintptr(MultisampleQuality), uintptr(Lockable), uintptr(unsafe.Pointer(ppSurface)), uintptr(unsafe.Pointer(pSharedHandle)))
-	return foundation.HRESULT(r1)
+func (self *IDirect3DDevice9) CreateRenderTarget(Width uint32, Height uint32, Format D3DFORMAT, MultiSample D3DMULTISAMPLE_TYPE, MultisampleQuality uint32, Lockable bool, ppSurface **IDirect3DSurface9, pSharedHandle *foundation.HANDLE) error {
+	_Lockable := win32.Bool32(Lockable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(MultiSample), uintptr(MultisampleQuality), uintptr(_Lockable), uintptr(unsafe.Pointer(ppSurface)), uintptr(unsafe.Pointer(pSharedHandle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDepthStencilSurface dispatches through IDirect3DDevice9's vtable slot 29.
-func (self *IDirect3DDevice9) CreateDepthStencilSurface(Width uint32, Height uint32, Format D3DFORMAT, MultiSample D3DMULTISAMPLE_TYPE, MultisampleQuality uint32, Discard foundation.BOOL, ppSurface **IDirect3DSurface9, pSharedHandle *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(MultiSample), uintptr(MultisampleQuality), uintptr(Discard), uintptr(unsafe.Pointer(ppSurface)), uintptr(unsafe.Pointer(pSharedHandle)))
-	return foundation.HRESULT(r1)
+func (self *IDirect3DDevice9) CreateDepthStencilSurface(Width uint32, Height uint32, Format D3DFORMAT, MultiSample D3DMULTISAMPLE_TYPE, MultisampleQuality uint32, Discard bool, ppSurface **IDirect3DSurface9, pSharedHandle *foundation.HANDLE) error {
+	_Discard := win32.Bool32(Discard)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(MultiSample), uintptr(MultisampleQuality), uintptr(_Discard), uintptr(unsafe.Pointer(ppSurface)), uintptr(unsafe.Pointer(pSharedHandle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateSurface dispatches through IDirect3DDevice9's vtable slot 30.
-func (self *IDirect3DDevice9) UpdateSurface(pSourceSurface *IDirect3DSurface9, pSourceRect *foundation.RECT, pDestinationSurface *IDirect3DSurface9, pDestPoint *foundation.POINT) foundation.HRESULT {
+func (self *IDirect3DDevice9) UpdateSurface(pSourceSurface *IDirect3DSurface9, pSourceRect *foundation.RECT, pDestinationSurface *IDirect3DSurface9, pDestPoint *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceSurface)), uintptr(unsafe.Pointer(pSourceRect)), uintptr(unsafe.Pointer(pDestinationSurface)), uintptr(unsafe.Pointer(pDestPoint)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateTexture dispatches through IDirect3DDevice9's vtable slot 31.
-func (self *IDirect3DDevice9) UpdateTexture(pSourceTexture *IDirect3DBaseTexture9, pDestinationTexture *IDirect3DBaseTexture9) foundation.HRESULT {
+func (self *IDirect3DDevice9) UpdateTexture(pSourceTexture *IDirect3DBaseTexture9, pDestinationTexture *IDirect3DBaseTexture9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceTexture)), uintptr(unsafe.Pointer(pDestinationTexture)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRenderTargetData dispatches through IDirect3DDevice9's vtable slot 32.
-func (self *IDirect3DDevice9) GetRenderTargetData(pRenderTarget *IDirect3DSurface9, pDestSurface *IDirect3DSurface9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetRenderTargetData(pRenderTarget *IDirect3DSurface9, pDestSurface *IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRenderTarget)), uintptr(unsafe.Pointer(pDestSurface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFrontBufferData dispatches through IDirect3DDevice9's vtable slot 33.
-func (self *IDirect3DDevice9) GetFrontBufferData(iSwapChain uint32, pDestSurface *IDirect3DSurface9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetFrontBufferData(iSwapChain uint32, pDestSurface *IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(iSwapChain), uintptr(unsafe.Pointer(pDestSurface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StretchRect dispatches through IDirect3DDevice9's vtable slot 34.
-func (self *IDirect3DDevice9) StretchRect(pSourceSurface *IDirect3DSurface9, pSourceRect *foundation.RECT, pDestSurface *IDirect3DSurface9, pDestRect *foundation.RECT, Filter D3DTEXTUREFILTERTYPE) foundation.HRESULT {
+func (self *IDirect3DDevice9) StretchRect(pSourceSurface *IDirect3DSurface9, pSourceRect *foundation.RECT, pDestSurface *IDirect3DSurface9, pDestRect *foundation.RECT, Filter D3DTEXTUREFILTERTYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceSurface)), uintptr(unsafe.Pointer(pSourceRect)), uintptr(unsafe.Pointer(pDestSurface)), uintptr(unsafe.Pointer(pDestRect)), uintptr(Filter))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ColorFill dispatches through IDirect3DDevice9's vtable slot 35.
-func (self *IDirect3DDevice9) ColorFill(pSurface *IDirect3DSurface9, pRect *foundation.RECT, color uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) ColorFill(pSurface *IDirect3DSurface9, pRect *foundation.RECT, color uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSurface)), uintptr(unsafe.Pointer(pRect)), uintptr(color))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateOffscreenPlainSurface dispatches through IDirect3DDevice9's vtable slot 36.
-func (self *IDirect3DDevice9) CreateOffscreenPlainSurface(Width uint32, Height uint32, Format D3DFORMAT, Pool D3DPOOL, ppSurface **IDirect3DSurface9, pSharedHandle *foundation.HANDLE) foundation.HRESULT {
+func (self *IDirect3DDevice9) CreateOffscreenPlainSurface(Width uint32, Height uint32, Format D3DFORMAT, Pool D3DPOOL, ppSurface **IDirect3DSurface9, pSharedHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(Pool), uintptr(unsafe.Pointer(ppSurface)), uintptr(unsafe.Pointer(pSharedHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRenderTarget dispatches through IDirect3DDevice9's vtable slot 37.
-func (self *IDirect3DDevice9) SetRenderTarget(RenderTargetIndex uint32, pRenderTarget *IDirect3DSurface9) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetRenderTarget(RenderTargetIndex uint32, pRenderTarget *IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(RenderTargetIndex), uintptr(unsafe.Pointer(pRenderTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRenderTarget dispatches through IDirect3DDevice9's vtable slot 38.
-func (self *IDirect3DDevice9) GetRenderTarget(RenderTargetIndex uint32, ppRenderTarget **IDirect3DSurface9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetRenderTarget(RenderTargetIndex uint32, ppRenderTarget **IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(RenderTargetIndex), uintptr(unsafe.Pointer(ppRenderTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDepthStencilSurface dispatches through IDirect3DDevice9's vtable slot 39.
-func (self *IDirect3DDevice9) SetDepthStencilSurface(pNewZStencil *IDirect3DSurface9) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetDepthStencilSurface(pNewZStencil *IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNewZStencil)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDepthStencilSurface dispatches through IDirect3DDevice9's vtable slot 40.
-func (self *IDirect3DDevice9) GetDepthStencilSurface(ppZStencilSurface **IDirect3DSurface9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetDepthStencilSurface(ppZStencilSurface **IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppZStencilSurface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginScene dispatches through IDirect3DDevice9's vtable slot 41.
-func (self *IDirect3DDevice9) BeginScene() foundation.HRESULT {
+func (self *IDirect3DDevice9) BeginScene() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndScene dispatches through IDirect3DDevice9's vtable slot 42.
-func (self *IDirect3DDevice9) EndScene() foundation.HRESULT {
+func (self *IDirect3DDevice9) EndScene() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTransform dispatches through IDirect3DDevice9's vtable slot 44.
-func (self *IDirect3DDevice9) SetTransform(State D3DTRANSFORMSTATETYPE, pMatrix *graphicsdirect3d.D3DMATRIX) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetTransform(State D3DTRANSFORMSTATETYPE, pMatrix *graphicsdirect3d.D3DMATRIX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(State), uintptr(unsafe.Pointer(pMatrix)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTransform dispatches through IDirect3DDevice9's vtable slot 45.
-func (self *IDirect3DDevice9) GetTransform(State D3DTRANSFORMSTATETYPE, pMatrix *graphicsdirect3d.D3DMATRIX) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetTransform(State D3DTRANSFORMSTATETYPE, pMatrix *graphicsdirect3d.D3DMATRIX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(State), uintptr(unsafe.Pointer(pMatrix)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MultiplyTransform dispatches through IDirect3DDevice9's vtable slot 46.
-func (self *IDirect3DDevice9) MultiplyTransform(param0 D3DTRANSFORMSTATETYPE, param1 *graphicsdirect3d.D3DMATRIX) foundation.HRESULT {
+func (self *IDirect3DDevice9) MultiplyTransform(param0 D3DTRANSFORMSTATETYPE, param1 *graphicsdirect3d.D3DMATRIX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetViewport dispatches through IDirect3DDevice9's vtable slot 47.
-func (self *IDirect3DDevice9) SetViewport(pViewport *D3DVIEWPORT9) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetViewport(pViewport *D3DVIEWPORT9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pViewport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetViewport dispatches through IDirect3DDevice9's vtable slot 48.
-func (self *IDirect3DDevice9) GetViewport(pViewport *D3DVIEWPORT9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetViewport(pViewport *D3DVIEWPORT9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pViewport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMaterial dispatches through IDirect3DDevice9's vtable slot 49.
-func (self *IDirect3DDevice9) SetMaterial(pMaterial *D3DMATERIAL9) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetMaterial(pMaterial *D3DMATERIAL9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMaterial)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaterial dispatches through IDirect3DDevice9's vtable slot 50.
-func (self *IDirect3DDevice9) GetMaterial(pMaterial *D3DMATERIAL9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetMaterial(pMaterial *D3DMATERIAL9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMaterial)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLight dispatches through IDirect3DDevice9's vtable slot 51.
-func (self *IDirect3DDevice9) SetLight(Index uint32, param1 *D3DLIGHT9) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetLight(Index uint32, param1 *D3DLIGHT9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLight dispatches through IDirect3DDevice9's vtable slot 52.
-func (self *IDirect3DDevice9) GetLight(Index uint32, param1 *D3DLIGHT9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetLight(Index uint32, param1 *D3DLIGHT9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(param1)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LightEnable dispatches through IDirect3DDevice9's vtable slot 53.
-func (self *IDirect3DDevice9) LightEnable(Index uint32, Enable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Enable))
-	return foundation.HRESULT(r1)
+func (self *IDirect3DDevice9) LightEnable(Index uint32, Enable bool) error {
+	_Enable := win32.Bool32(Enable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(_Enable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLightEnable dispatches through IDirect3DDevice9's vtable slot 54.
-func (self *IDirect3DDevice9) GetLightEnable(Index uint32, pEnable *foundation.BOOL) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetLightEnable(Index uint32, pEnable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pEnable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetClipPlane dispatches through IDirect3DDevice9's vtable slot 55.
-func (self *IDirect3DDevice9) SetClipPlane(Index uint32, pPlane *float32) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetClipPlane(Index uint32, pPlane *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pPlane)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClipPlane dispatches through IDirect3DDevice9's vtable slot 56.
-func (self *IDirect3DDevice9) GetClipPlane(Index uint32, pPlane *float32) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetClipPlane(Index uint32, pPlane *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pPlane)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRenderState dispatches through IDirect3DDevice9's vtable slot 57.
-func (self *IDirect3DDevice9) SetRenderState(State D3DRENDERSTATETYPE, Value uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetRenderState(State D3DRENDERSTATETYPE, Value uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(State), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRenderState dispatches through IDirect3DDevice9's vtable slot 58.
-func (self *IDirect3DDevice9) GetRenderState(State D3DRENDERSTATETYPE, pValue *uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetRenderState(State D3DRENDERSTATETYPE, pValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(State), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStateBlock dispatches through IDirect3DDevice9's vtable slot 59.
-func (self *IDirect3DDevice9) CreateStateBlock(Type D3DSTATEBLOCKTYPE, ppSB **IDirect3DStateBlock9) foundation.HRESULT {
+func (self *IDirect3DDevice9) CreateStateBlock(Type D3DSTATEBLOCKTYPE, ppSB **IDirect3DStateBlock9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(ppSB)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginStateBlock dispatches through IDirect3DDevice9's vtable slot 60.
-func (self *IDirect3DDevice9) BeginStateBlock() foundation.HRESULT {
+func (self *IDirect3DDevice9) BeginStateBlock() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndStateBlock dispatches through IDirect3DDevice9's vtable slot 61.
-func (self *IDirect3DDevice9) EndStateBlock(ppSB **IDirect3DStateBlock9) foundation.HRESULT {
+func (self *IDirect3DDevice9) EndStateBlock(ppSB **IDirect3DStateBlock9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSB)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetClipStatus dispatches through IDirect3DDevice9's vtable slot 62.
-func (self *IDirect3DDevice9) SetClipStatus(pClipStatus *D3DCLIPSTATUS9) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetClipStatus(pClipStatus *D3DCLIPSTATUS9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClipStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClipStatus dispatches through IDirect3DDevice9's vtable slot 63.
-func (self *IDirect3DDevice9) GetClipStatus(pClipStatus *D3DCLIPSTATUS9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetClipStatus(pClipStatus *D3DCLIPSTATUS9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClipStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTexture dispatches through IDirect3DDevice9's vtable slot 64.
-func (self *IDirect3DDevice9) GetTexture(Stage uint32, ppTexture **IDirect3DBaseTexture9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetTexture(Stage uint32, ppTexture **IDirect3DBaseTexture9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(Stage), uintptr(unsafe.Pointer(ppTexture)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTexture dispatches through IDirect3DDevice9's vtable slot 65.
-func (self *IDirect3DDevice9) SetTexture(Stage uint32, pTexture *IDirect3DBaseTexture9) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetTexture(Stage uint32, pTexture *IDirect3DBaseTexture9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(Stage), uintptr(unsafe.Pointer(pTexture)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTextureStageState dispatches through IDirect3DDevice9's vtable slot 66.
-func (self *IDirect3DDevice9) GetTextureStageState(Stage uint32, Type D3DTEXTURESTAGESTATETYPE, pValue *uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetTextureStageState(Stage uint32, Type D3DTEXTURESTAGESTATETYPE, pValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(Stage), uintptr(Type), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTextureStageState dispatches through IDirect3DDevice9's vtable slot 67.
-func (self *IDirect3DDevice9) SetTextureStageState(Stage uint32, Type D3DTEXTURESTAGESTATETYPE, Value uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetTextureStageState(Stage uint32, Type D3DTEXTURESTAGESTATETYPE, Value uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(Stage), uintptr(Type), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSamplerState dispatches through IDirect3DDevice9's vtable slot 68.
-func (self *IDirect3DDevice9) GetSamplerState(Sampler uint32, Type D3DSAMPLERSTATETYPE, pValue *uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetSamplerState(Sampler uint32, Type D3DSAMPLERSTATETYPE, pValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(Sampler), uintptr(Type), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSamplerState dispatches through IDirect3DDevice9's vtable slot 69.
-func (self *IDirect3DDevice9) SetSamplerState(Sampler uint32, Type D3DSAMPLERSTATETYPE, Value uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetSamplerState(Sampler uint32, Type D3DSAMPLERSTATETYPE, Value uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(Sampler), uintptr(Type), uintptr(Value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ValidateDevice dispatches through IDirect3DDevice9's vtable slot 70.
-func (self *IDirect3DDevice9) ValidateDevice(pNumPasses *uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) ValidateDevice(pNumPasses *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNumPasses)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPaletteEntries dispatches through IDirect3DDevice9's vtable slot 71.
-func (self *IDirect3DDevice9) SetPaletteEntries(PaletteNumber uint32, pEntries *graphicsgdi.PALETTEENTRY) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetPaletteEntries(PaletteNumber uint32, pEntries *graphicsgdi.PALETTEENTRY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(PaletteNumber), uintptr(unsafe.Pointer(pEntries)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPaletteEntries dispatches through IDirect3DDevice9's vtable slot 72.
-func (self *IDirect3DDevice9) GetPaletteEntries(PaletteNumber uint32, pEntries *graphicsgdi.PALETTEENTRY) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetPaletteEntries(PaletteNumber uint32, pEntries *graphicsgdi.PALETTEENTRY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(PaletteNumber), uintptr(unsafe.Pointer(pEntries)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCurrentTexturePalette dispatches through IDirect3DDevice9's vtable slot 73.
-func (self *IDirect3DDevice9) SetCurrentTexturePalette(PaletteNumber uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetCurrentTexturePalette(PaletteNumber uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(PaletteNumber))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentTexturePalette dispatches through IDirect3DDevice9's vtable slot 74.
-func (self *IDirect3DDevice9) GetCurrentTexturePalette(PaletteNumber *uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetCurrentTexturePalette(PaletteNumber *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[74], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PaletteNumber)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetScissorRect dispatches through IDirect3DDevice9's vtable slot 75.
-func (self *IDirect3DDevice9) SetScissorRect(pRect *foundation.RECT) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetScissorRect(pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScissorRect dispatches through IDirect3DDevice9's vtable slot 76.
-func (self *IDirect3DDevice9) GetScissorRect(pRect *foundation.RECT) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetScissorRect(pRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSoftwareVertexProcessing dispatches through IDirect3DDevice9's vtable slot 77.
-func (self *IDirect3DDevice9) SetSoftwareVertexProcessing(bSoftware foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(bSoftware))
-	return foundation.HRESULT(r1)
+func (self *IDirect3DDevice9) SetSoftwareVertexProcessing(bSoftware bool) error {
+	_bSoftware := win32.Bool32(bSoftware)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(_bSoftware))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSoftwareVertexProcessing dispatches through IDirect3DDevice9's vtable slot 78.
@@ -687,231 +695,231 @@ func (self *IDirect3DDevice9) GetSoftwareVertexProcessing() foundation.BOOL {
 }
 
 // DrawPrimitive dispatches through IDirect3DDevice9's vtable slot 81.
-func (self *IDirect3DDevice9) DrawPrimitive(PrimitiveType D3DPRIMITIVETYPE, StartVertex uint32, PrimitiveCount uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) DrawPrimitive(PrimitiveType D3DPRIMITIVETYPE, StartVertex uint32, PrimitiveCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(PrimitiveType), uintptr(StartVertex), uintptr(PrimitiveCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawIndexedPrimitive dispatches through IDirect3DDevice9's vtable slot 82.
-func (self *IDirect3DDevice9) DrawIndexedPrimitive(param0 D3DPRIMITIVETYPE, BaseVertexIndex int32, MinVertexIndex uint32, NumVertices uint32, startIndex uint32, primCount uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) DrawIndexedPrimitive(param0 D3DPRIMITIVETYPE, BaseVertexIndex int32, MinVertexIndex uint32, NumVertices uint32, startIndex uint32, primCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(param0), uintptr(BaseVertexIndex), uintptr(MinVertexIndex), uintptr(NumVertices), uintptr(startIndex), uintptr(primCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawPrimitiveUP dispatches through IDirect3DDevice9's vtable slot 83.
-func (self *IDirect3DDevice9) DrawPrimitiveUP(PrimitiveType D3DPRIMITIVETYPE, PrimitiveCount uint32, pVertexStreamZeroData unsafe.Pointer, VertexStreamZeroStride uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) DrawPrimitiveUP(PrimitiveType D3DPRIMITIVETYPE, PrimitiveCount uint32, pVertexStreamZeroData unsafe.Pointer, VertexStreamZeroStride uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(PrimitiveType), uintptr(PrimitiveCount), uintptr(unsafe.Pointer(pVertexStreamZeroData)), uintptr(VertexStreamZeroStride))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawIndexedPrimitiveUP dispatches through IDirect3DDevice9's vtable slot 84.
-func (self *IDirect3DDevice9) DrawIndexedPrimitiveUP(PrimitiveType D3DPRIMITIVETYPE, MinVertexIndex uint32, NumVertices uint32, PrimitiveCount uint32, pIndexData unsafe.Pointer, IndexDataFormat D3DFORMAT, pVertexStreamZeroData unsafe.Pointer, VertexStreamZeroStride uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) DrawIndexedPrimitiveUP(PrimitiveType D3DPRIMITIVETYPE, MinVertexIndex uint32, NumVertices uint32, PrimitiveCount uint32, pIndexData unsafe.Pointer, IndexDataFormat D3DFORMAT, pVertexStreamZeroData unsafe.Pointer, VertexStreamZeroStride uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(PrimitiveType), uintptr(MinVertexIndex), uintptr(NumVertices), uintptr(PrimitiveCount), uintptr(unsafe.Pointer(pIndexData)), uintptr(IndexDataFormat), uintptr(unsafe.Pointer(pVertexStreamZeroData)), uintptr(VertexStreamZeroStride))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessVertices dispatches through IDirect3DDevice9's vtable slot 85.
-func (self *IDirect3DDevice9) ProcessVertices(SrcStartIndex uint32, DestIndex uint32, VertexCount uint32, pDestBuffer *IDirect3DVertexBuffer9, pVertexDecl *IDirect3DVertexDeclaration9, Flags uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) ProcessVertices(SrcStartIndex uint32, DestIndex uint32, VertexCount uint32, pDestBuffer *IDirect3DVertexBuffer9, pVertexDecl *IDirect3DVertexDeclaration9, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(SrcStartIndex), uintptr(DestIndex), uintptr(VertexCount), uintptr(unsafe.Pointer(pDestBuffer)), uintptr(unsafe.Pointer(pVertexDecl)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVertexDeclaration dispatches through IDirect3DDevice9's vtable slot 86.
-func (self *IDirect3DDevice9) CreateVertexDeclaration(pVertexElements *D3DVERTEXELEMENT9, ppDecl **IDirect3DVertexDeclaration9) foundation.HRESULT {
+func (self *IDirect3DDevice9) CreateVertexDeclaration(pVertexElements *D3DVERTEXELEMENT9, ppDecl **IDirect3DVertexDeclaration9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVertexElements)), uintptr(unsafe.Pointer(ppDecl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVertexDeclaration dispatches through IDirect3DDevice9's vtable slot 87.
-func (self *IDirect3DDevice9) SetVertexDeclaration(pDecl *IDirect3DVertexDeclaration9) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetVertexDeclaration(pDecl *IDirect3DVertexDeclaration9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDecl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVertexDeclaration dispatches through IDirect3DDevice9's vtable slot 88.
-func (self *IDirect3DDevice9) GetVertexDeclaration(ppDecl **IDirect3DVertexDeclaration9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetVertexDeclaration(ppDecl **IDirect3DVertexDeclaration9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDecl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFVF dispatches through IDirect3DDevice9's vtable slot 89.
-func (self *IDirect3DDevice9) SetFVF(FVF uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetFVF(FVF uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(FVF))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFVF dispatches through IDirect3DDevice9's vtable slot 90.
-func (self *IDirect3DDevice9) GetFVF(pFVF *uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetFVF(pFVF *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFVF)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateVertexShader dispatches through IDirect3DDevice9's vtable slot 91.
-func (self *IDirect3DDevice9) CreateVertexShader(pFunction *uint32, ppShader **IDirect3DVertexShader9) foundation.HRESULT {
+func (self *IDirect3DDevice9) CreateVertexShader(pFunction *uint32, ppShader **IDirect3DVertexShader9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[91], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFunction)), uintptr(unsafe.Pointer(ppShader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVertexShader dispatches through IDirect3DDevice9's vtable slot 92.
-func (self *IDirect3DDevice9) SetVertexShader(pShader *IDirect3DVertexShader9) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetVertexShader(pShader *IDirect3DVertexShader9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[92], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVertexShader dispatches through IDirect3DDevice9's vtable slot 93.
-func (self *IDirect3DDevice9) GetVertexShader(ppShader **IDirect3DVertexShader9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetVertexShader(ppShader **IDirect3DVertexShader9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppShader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVertexShaderConstantF dispatches through IDirect3DDevice9's vtable slot 94.
-func (self *IDirect3DDevice9) SetVertexShaderConstantF(StartRegister uint32, pConstantData *float32, Vector4fCount uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetVertexShaderConstantF(StartRegister uint32, pConstantData *float32, Vector4fCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(StartRegister), uintptr(unsafe.Pointer(pConstantData)), uintptr(Vector4fCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVertexShaderConstantF dispatches through IDirect3DDevice9's vtable slot 95.
-func (self *IDirect3DDevice9) GetVertexShaderConstantF(StartRegister uint32, pConstantData *float32, Vector4fCount uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetVertexShaderConstantF(StartRegister uint32, pConstantData *float32, Vector4fCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(StartRegister), uintptr(unsafe.Pointer(pConstantData)), uintptr(Vector4fCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVertexShaderConstantI dispatches through IDirect3DDevice9's vtable slot 96.
-func (self *IDirect3DDevice9) SetVertexShaderConstantI(StartRegister uint32, pConstantData *int32, Vector4iCount uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetVertexShaderConstantI(StartRegister uint32, pConstantData *int32, Vector4iCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(StartRegister), uintptr(unsafe.Pointer(pConstantData)), uintptr(Vector4iCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVertexShaderConstantI dispatches through IDirect3DDevice9's vtable slot 97.
-func (self *IDirect3DDevice9) GetVertexShaderConstantI(StartRegister uint32, pConstantData *int32, Vector4iCount uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetVertexShaderConstantI(StartRegister uint32, pConstantData *int32, Vector4iCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(StartRegister), uintptr(unsafe.Pointer(pConstantData)), uintptr(Vector4iCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVertexShaderConstantB dispatches through IDirect3DDevice9's vtable slot 98.
-func (self *IDirect3DDevice9) SetVertexShaderConstantB(StartRegister uint32, pConstantData *foundation.BOOL, BoolCount uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetVertexShaderConstantB(StartRegister uint32, pConstantData *foundation.BOOL, BoolCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[98], uintptr(unsafe.Pointer(self)), uintptr(StartRegister), uintptr(unsafe.Pointer(pConstantData)), uintptr(BoolCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVertexShaderConstantB dispatches through IDirect3DDevice9's vtable slot 99.
-func (self *IDirect3DDevice9) GetVertexShaderConstantB(StartRegister uint32, pConstantData *foundation.BOOL, BoolCount uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetVertexShaderConstantB(StartRegister uint32, pConstantData *foundation.BOOL, BoolCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[99], uintptr(unsafe.Pointer(self)), uintptr(StartRegister), uintptr(unsafe.Pointer(pConstantData)), uintptr(BoolCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStreamSource dispatches through IDirect3DDevice9's vtable slot 100.
-func (self *IDirect3DDevice9) SetStreamSource(StreamNumber uint32, pStreamData *IDirect3DVertexBuffer9, OffsetInBytes uint32, Stride uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetStreamSource(StreamNumber uint32, pStreamData *IDirect3DVertexBuffer9, OffsetInBytes uint32, Stride uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(StreamNumber), uintptr(unsafe.Pointer(pStreamData)), uintptr(OffsetInBytes), uintptr(Stride))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamSource dispatches through IDirect3DDevice9's vtable slot 101.
-func (self *IDirect3DDevice9) GetStreamSource(StreamNumber uint32, ppStreamData **IDirect3DVertexBuffer9, pOffsetInBytes *uint32, pStride *uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetStreamSource(StreamNumber uint32, ppStreamData **IDirect3DVertexBuffer9, pOffsetInBytes *uint32, pStride *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(StreamNumber), uintptr(unsafe.Pointer(ppStreamData)), uintptr(unsafe.Pointer(pOffsetInBytes)), uintptr(unsafe.Pointer(pStride)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStreamSourceFreq dispatches through IDirect3DDevice9's vtable slot 102.
-func (self *IDirect3DDevice9) SetStreamSourceFreq(StreamNumber uint32, Setting uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetStreamSourceFreq(StreamNumber uint32, Setting uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[102], uintptr(unsafe.Pointer(self)), uintptr(StreamNumber), uintptr(Setting))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStreamSourceFreq dispatches through IDirect3DDevice9's vtable slot 103.
-func (self *IDirect3DDevice9) GetStreamSourceFreq(StreamNumber uint32, pSetting *uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetStreamSourceFreq(StreamNumber uint32, pSetting *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(StreamNumber), uintptr(unsafe.Pointer(pSetting)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIndices dispatches through IDirect3DDevice9's vtable slot 104.
-func (self *IDirect3DDevice9) SetIndices(pIndexData *IDirect3DIndexBuffer9) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetIndices(pIndexData *IDirect3DIndexBuffer9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndexData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIndices dispatches through IDirect3DDevice9's vtable slot 105.
-func (self *IDirect3DDevice9) GetIndices(ppIndexData **IDirect3DIndexBuffer9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetIndices(ppIndexData **IDirect3DIndexBuffer9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[105], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIndexData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePixelShader dispatches through IDirect3DDevice9's vtable slot 106.
-func (self *IDirect3DDevice9) CreatePixelShader(pFunction *uint32, ppShader **IDirect3DPixelShader9) foundation.HRESULT {
+func (self *IDirect3DDevice9) CreatePixelShader(pFunction *uint32, ppShader **IDirect3DPixelShader9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFunction)), uintptr(unsafe.Pointer(ppShader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPixelShader dispatches through IDirect3DDevice9's vtable slot 107.
-func (self *IDirect3DDevice9) SetPixelShader(pShader *IDirect3DPixelShader9) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetPixelShader(pShader *IDirect3DPixelShader9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[107], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPixelShader dispatches through IDirect3DDevice9's vtable slot 108.
-func (self *IDirect3DDevice9) GetPixelShader(ppShader **IDirect3DPixelShader9) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetPixelShader(ppShader **IDirect3DPixelShader9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[108], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppShader)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPixelShaderConstantF dispatches through IDirect3DDevice9's vtable slot 109.
-func (self *IDirect3DDevice9) SetPixelShaderConstantF(StartRegister uint32, pConstantData *float32, Vector4fCount uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetPixelShaderConstantF(StartRegister uint32, pConstantData *float32, Vector4fCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(StartRegister), uintptr(unsafe.Pointer(pConstantData)), uintptr(Vector4fCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPixelShaderConstantF dispatches through IDirect3DDevice9's vtable slot 110.
-func (self *IDirect3DDevice9) GetPixelShaderConstantF(StartRegister uint32, pConstantData *float32, Vector4fCount uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetPixelShaderConstantF(StartRegister uint32, pConstantData *float32, Vector4fCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[110], uintptr(unsafe.Pointer(self)), uintptr(StartRegister), uintptr(unsafe.Pointer(pConstantData)), uintptr(Vector4fCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPixelShaderConstantI dispatches through IDirect3DDevice9's vtable slot 111.
-func (self *IDirect3DDevice9) SetPixelShaderConstantI(StartRegister uint32, pConstantData *int32, Vector4iCount uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetPixelShaderConstantI(StartRegister uint32, pConstantData *int32, Vector4iCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(StartRegister), uintptr(unsafe.Pointer(pConstantData)), uintptr(Vector4iCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPixelShaderConstantI dispatches through IDirect3DDevice9's vtable slot 112.
-func (self *IDirect3DDevice9) GetPixelShaderConstantI(StartRegister uint32, pConstantData *int32, Vector4iCount uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetPixelShaderConstantI(StartRegister uint32, pConstantData *int32, Vector4iCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(StartRegister), uintptr(unsafe.Pointer(pConstantData)), uintptr(Vector4iCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPixelShaderConstantB dispatches through IDirect3DDevice9's vtable slot 113.
-func (self *IDirect3DDevice9) SetPixelShaderConstantB(StartRegister uint32, pConstantData *foundation.BOOL, BoolCount uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) SetPixelShaderConstantB(StartRegister uint32, pConstantData *foundation.BOOL, BoolCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[113], uintptr(unsafe.Pointer(self)), uintptr(StartRegister), uintptr(unsafe.Pointer(pConstantData)), uintptr(BoolCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPixelShaderConstantB dispatches through IDirect3DDevice9's vtable slot 114.
-func (self *IDirect3DDevice9) GetPixelShaderConstantB(StartRegister uint32, pConstantData *foundation.BOOL, BoolCount uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) GetPixelShaderConstantB(StartRegister uint32, pConstantData *foundation.BOOL, BoolCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[114], uintptr(unsafe.Pointer(self)), uintptr(StartRegister), uintptr(unsafe.Pointer(pConstantData)), uintptr(BoolCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawRectPatch dispatches through IDirect3DDevice9's vtable slot 115.
-func (self *IDirect3DDevice9) DrawRectPatch(Handle uint32, pNumSegs *float32, pRectPatchInfo *D3DRECTPATCH_INFO) foundation.HRESULT {
+func (self *IDirect3DDevice9) DrawRectPatch(Handle uint32, pNumSegs *float32, pRectPatchInfo *D3DRECTPATCH_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[115], uintptr(unsafe.Pointer(self)), uintptr(Handle), uintptr(unsafe.Pointer(pNumSegs)), uintptr(unsafe.Pointer(pRectPatchInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DrawTriPatch dispatches through IDirect3DDevice9's vtable slot 116.
-func (self *IDirect3DDevice9) DrawTriPatch(Handle uint32, pNumSegs *float32, pTriPatchInfo *D3DTRIPATCH_INFO) foundation.HRESULT {
+func (self *IDirect3DDevice9) DrawTriPatch(Handle uint32, pNumSegs *float32, pTriPatchInfo *D3DTRIPATCH_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[116], uintptr(unsafe.Pointer(self)), uintptr(Handle), uintptr(unsafe.Pointer(pNumSegs)), uintptr(unsafe.Pointer(pTriPatchInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeletePatch dispatches through IDirect3DDevice9's vtable slot 117.
-func (self *IDirect3DDevice9) DeletePatch(Handle uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9) DeletePatch(Handle uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[117], uintptr(unsafe.Pointer(self)), uintptr(Handle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateQuery dispatches through IDirect3DDevice9's vtable slot 118.
-func (self *IDirect3DDevice9) CreateQuery(Type D3DQUERYTYPE, ppQuery **IDirect3DQuery9) foundation.HRESULT {
+func (self *IDirect3DDevice9) CreateQuery(Type D3DQUERYTYPE, ppQuery **IDirect3DQuery9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[118], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(ppQuery)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DDevice9Ex: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex
@@ -924,93 +932,95 @@ type IDirect3DDevice9Ex struct {
 var IID_IDirect3DDevice9Ex = win32.GUID{Data1: 0xb18b10ce, Data2: 0x2649, Data3: 0x405a, Data4: [8]byte{0x87, 0x0f, 0x95, 0xf7, 0x77, 0xd4, 0x31, 0x3a}}
 
 // SetConvolutionMonoKernel dispatches through IDirect3DDevice9Ex's vtable slot 119.
-func (self *IDirect3DDevice9Ex) SetConvolutionMonoKernel(width uint32, height uint32, rows *float32, columns *float32) foundation.HRESULT {
+func (self *IDirect3DDevice9Ex) SetConvolutionMonoKernel(width uint32, height uint32, rows *float32, columns *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[119], uintptr(unsafe.Pointer(self)), uintptr(width), uintptr(height), uintptr(unsafe.Pointer(rows)), uintptr(unsafe.Pointer(columns)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ComposeRects dispatches through IDirect3DDevice9Ex's vtable slot 120.
-func (self *IDirect3DDevice9Ex) ComposeRects(pSrc *IDirect3DSurface9, pDst *IDirect3DSurface9, pSrcRectDescs *IDirect3DVertexBuffer9, NumRects uint32, pDstRectDescs *IDirect3DVertexBuffer9, Operation D3DCOMPOSERECTSOP, Xoffset int32, Yoffset int32) foundation.HRESULT {
+func (self *IDirect3DDevice9Ex) ComposeRects(pSrc *IDirect3DSurface9, pDst *IDirect3DSurface9, pSrcRectDescs *IDirect3DVertexBuffer9, NumRects uint32, pDstRectDescs *IDirect3DVertexBuffer9, Operation D3DCOMPOSERECTSOP, Xoffset int32, Yoffset int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[120], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pDst)), uintptr(unsafe.Pointer(pSrcRectDescs)), uintptr(NumRects), uintptr(unsafe.Pointer(pDstRectDescs)), uintptr(Operation), uintptr(Xoffset), uintptr(Yoffset))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PresentEx dispatches through IDirect3DDevice9Ex's vtable slot 121.
-func (self *IDirect3DDevice9Ex) PresentEx(pSourceRect *foundation.RECT, pDestRect *foundation.RECT, hDestWindowOverride foundation.HWND, pDirtyRegion *graphicsgdi.RGNDATA, dwFlags uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9Ex) PresentEx(pSourceRect *foundation.RECT, pDestRect *foundation.RECT, hDestWindowOverride foundation.HWND, pDirtyRegion *graphicsgdi.RGNDATA, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[121], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceRect)), uintptr(unsafe.Pointer(pDestRect)), uintptr(hDestWindowOverride), uintptr(unsafe.Pointer(pDirtyRegion)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGPUThreadPriority dispatches through IDirect3DDevice9Ex's vtable slot 122.
-func (self *IDirect3DDevice9Ex) GetGPUThreadPriority(pPriority *int32) foundation.HRESULT {
+func (self *IDirect3DDevice9Ex) GetGPUThreadPriority(pPriority *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[122], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPriority)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGPUThreadPriority dispatches through IDirect3DDevice9Ex's vtable slot 123.
-func (self *IDirect3DDevice9Ex) SetGPUThreadPriority(Priority int32) foundation.HRESULT {
+func (self *IDirect3DDevice9Ex) SetGPUThreadPriority(Priority int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[123], uintptr(unsafe.Pointer(self)), uintptr(Priority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitForVBlank dispatches through IDirect3DDevice9Ex's vtable slot 124.
-func (self *IDirect3DDevice9Ex) WaitForVBlank(iSwapChain uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9Ex) WaitForVBlank(iSwapChain uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[124], uintptr(unsafe.Pointer(self)), uintptr(iSwapChain))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckResourceResidency dispatches through IDirect3DDevice9Ex's vtable slot 125.
-func (self *IDirect3DDevice9Ex) CheckResourceResidency(pResourceArray **IDirect3DResource9, NumResources uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9Ex) CheckResourceResidency(pResourceArray **IDirect3DResource9, NumResources uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[125], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResourceArray)), uintptr(NumResources))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMaximumFrameLatency dispatches through IDirect3DDevice9Ex's vtable slot 126.
-func (self *IDirect3DDevice9Ex) SetMaximumFrameLatency(MaxLatency uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9Ex) SetMaximumFrameLatency(MaxLatency uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[126], uintptr(unsafe.Pointer(self)), uintptr(MaxLatency))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaximumFrameLatency dispatches through IDirect3DDevice9Ex's vtable slot 127.
-func (self *IDirect3DDevice9Ex) GetMaximumFrameLatency(pMaxLatency *uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9Ex) GetMaximumFrameLatency(pMaxLatency *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[127], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMaxLatency)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckDeviceState dispatches through IDirect3DDevice9Ex's vtable slot 128.
-func (self *IDirect3DDevice9Ex) CheckDeviceState(hDestinationWindow foundation.HWND) foundation.HRESULT {
+func (self *IDirect3DDevice9Ex) CheckDeviceState(hDestinationWindow foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[128], uintptr(unsafe.Pointer(self)), uintptr(hDestinationWindow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateRenderTargetEx dispatches through IDirect3DDevice9Ex's vtable slot 129.
-func (self *IDirect3DDevice9Ex) CreateRenderTargetEx(Width uint32, Height uint32, Format D3DFORMAT, MultiSample D3DMULTISAMPLE_TYPE, MultisampleQuality uint32, Lockable foundation.BOOL, ppSurface **IDirect3DSurface9, pSharedHandle *foundation.HANDLE, Usage uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[129], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(MultiSample), uintptr(MultisampleQuality), uintptr(Lockable), uintptr(unsafe.Pointer(ppSurface)), uintptr(unsafe.Pointer(pSharedHandle)), uintptr(Usage))
-	return foundation.HRESULT(r1)
+func (self *IDirect3DDevice9Ex) CreateRenderTargetEx(Width uint32, Height uint32, Format D3DFORMAT, MultiSample D3DMULTISAMPLE_TYPE, MultisampleQuality uint32, Lockable bool, ppSurface **IDirect3DSurface9, pSharedHandle *foundation.HANDLE, Usage uint32) error {
+	_Lockable := win32.Bool32(Lockable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[129], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(MultiSample), uintptr(MultisampleQuality), uintptr(_Lockable), uintptr(unsafe.Pointer(ppSurface)), uintptr(unsafe.Pointer(pSharedHandle)), uintptr(Usage))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateOffscreenPlainSurfaceEx dispatches through IDirect3DDevice9Ex's vtable slot 130.
-func (self *IDirect3DDevice9Ex) CreateOffscreenPlainSurfaceEx(Width uint32, Height uint32, Format D3DFORMAT, Pool D3DPOOL, ppSurface **IDirect3DSurface9, pSharedHandle *foundation.HANDLE, Usage uint32) foundation.HRESULT {
+func (self *IDirect3DDevice9Ex) CreateOffscreenPlainSurfaceEx(Width uint32, Height uint32, Format D3DFORMAT, Pool D3DPOOL, ppSurface **IDirect3DSurface9, pSharedHandle *foundation.HANDLE, Usage uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[130], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(Pool), uintptr(unsafe.Pointer(ppSurface)), uintptr(unsafe.Pointer(pSharedHandle)), uintptr(Usage))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDepthStencilSurfaceEx dispatches through IDirect3DDevice9Ex's vtable slot 131.
-func (self *IDirect3DDevice9Ex) CreateDepthStencilSurfaceEx(Width uint32, Height uint32, Format D3DFORMAT, MultiSample D3DMULTISAMPLE_TYPE, MultisampleQuality uint32, Discard foundation.BOOL, ppSurface **IDirect3DSurface9, pSharedHandle *foundation.HANDLE, Usage uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[131], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(MultiSample), uintptr(MultisampleQuality), uintptr(Discard), uintptr(unsafe.Pointer(ppSurface)), uintptr(unsafe.Pointer(pSharedHandle)), uintptr(Usage))
-	return foundation.HRESULT(r1)
+func (self *IDirect3DDevice9Ex) CreateDepthStencilSurfaceEx(Width uint32, Height uint32, Format D3DFORMAT, MultiSample D3DMULTISAMPLE_TYPE, MultisampleQuality uint32, Discard bool, ppSurface **IDirect3DSurface9, pSharedHandle *foundation.HANDLE, Usage uint32) error {
+	_Discard := win32.Bool32(Discard)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[131], uintptr(unsafe.Pointer(self)), uintptr(Width), uintptr(Height), uintptr(Format), uintptr(MultiSample), uintptr(MultisampleQuality), uintptr(_Discard), uintptr(unsafe.Pointer(ppSurface)), uintptr(unsafe.Pointer(pSharedHandle)), uintptr(Usage))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResetEx dispatches through IDirect3DDevice9Ex's vtable slot 132.
-func (self *IDirect3DDevice9Ex) ResetEx(pPresentationParameters *D3DPRESENT_PARAMETERS, pFullscreenDisplayMode *D3DDISPLAYMODEEX) foundation.HRESULT {
+func (self *IDirect3DDevice9Ex) ResetEx(pPresentationParameters *D3DPRESENT_PARAMETERS, pFullscreenDisplayMode *D3DDISPLAYMODEEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[132], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPresentationParameters)), uintptr(unsafe.Pointer(pFullscreenDisplayMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplayModeEx dispatches through IDirect3DDevice9Ex's vtable slot 133.
-func (self *IDirect3DDevice9Ex) GetDisplayModeEx(iSwapChain uint32, pMode *D3DDISPLAYMODEEX, pRotation *D3DDISPLAYROTATION) foundation.HRESULT {
+func (self *IDirect3DDevice9Ex) GetDisplayModeEx(iSwapChain uint32, pMode *D3DDISPLAYMODEEX, pRotation *D3DDISPLAYROTATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[133], uintptr(unsafe.Pointer(self)), uintptr(iSwapChain), uintptr(unsafe.Pointer(pMode)), uintptr(unsafe.Pointer(pRotation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DIndexBuffer9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dindexbuffer9
@@ -1023,21 +1033,21 @@ type IDirect3DIndexBuffer9 struct {
 var IID_IDirect3DIndexBuffer9 = win32.GUID{Data1: 0x7c9dd65e, Data2: 0xd3f7, Data3: 0x4529, Data4: [8]byte{0xac, 0xee, 0x78, 0x58, 0x30, 0xac, 0xde, 0x35}}
 
 // Lock dispatches through IDirect3DIndexBuffer9's vtable slot 11.
-func (self *IDirect3DIndexBuffer9) Lock(OffsetToLock uint32, SizeToLock uint32, ppbData *unsafe.Pointer, Flags uint32) foundation.HRESULT {
+func (self *IDirect3DIndexBuffer9) Lock(OffsetToLock uint32, SizeToLock uint32, ppbData *unsafe.Pointer, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(OffsetToLock), uintptr(SizeToLock), uintptr(unsafe.Pointer(ppbData)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unlock dispatches through IDirect3DIndexBuffer9's vtable slot 12.
-func (self *IDirect3DIndexBuffer9) Unlock() foundation.HRESULT {
+func (self *IDirect3DIndexBuffer9) Unlock() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDesc dispatches through IDirect3DIndexBuffer9's vtable slot 13.
-func (self *IDirect3DIndexBuffer9) GetDesc(pDesc *D3DINDEXBUFFER_DESC) foundation.HRESULT {
+func (self *IDirect3DIndexBuffer9) GetDesc(pDesc *D3DINDEXBUFFER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DPixelShader9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dpixelshader9
@@ -1050,15 +1060,15 @@ type IDirect3DPixelShader9 struct {
 var IID_IDirect3DPixelShader9 = win32.GUID{Data1: 0x6d3bdbdc, Data2: 0x5b02, Data3: 0x4415, Data4: [8]byte{0xb8, 0x52, 0xce, 0x5e, 0x8b, 0xcc, 0xb2, 0x89}}
 
 // GetDevice dispatches through IDirect3DPixelShader9's vtable slot 3.
-func (self *IDirect3DPixelShader9) GetDevice(ppDevice **IDirect3DDevice9) foundation.HRESULT {
+func (self *IDirect3DPixelShader9) GetDevice(ppDevice **IDirect3DDevice9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFunction dispatches through IDirect3DPixelShader9's vtable slot 4.
-func (self *IDirect3DPixelShader9) GetFunction(param0 unsafe.Pointer, pSizeOfData *uint32) foundation.HRESULT {
+func (self *IDirect3DPixelShader9) GetFunction(param0 unsafe.Pointer, pSizeOfData *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(pSizeOfData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DQuery9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dquery9
@@ -1071,9 +1081,9 @@ type IDirect3DQuery9 struct {
 var IID_IDirect3DQuery9 = win32.GUID{Data1: 0xd9771460, Data2: 0xa695, Data3: 0x4f26, Data4: [8]byte{0xbb, 0xd3, 0x27, 0xb8, 0x40, 0xb5, 0x41, 0xcc}}
 
 // GetDevice dispatches through IDirect3DQuery9's vtable slot 3.
-func (self *IDirect3DQuery9) GetDevice(ppDevice **IDirect3DDevice9) foundation.HRESULT {
+func (self *IDirect3DQuery9) GetDevice(ppDevice **IDirect3DDevice9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetType dispatches through IDirect3DQuery9's vtable slot 4.
@@ -1089,15 +1099,15 @@ func (self *IDirect3DQuery9) GetDataSize() uint32 {
 }
 
 // Issue dispatches through IDirect3DQuery9's vtable slot 6.
-func (self *IDirect3DQuery9) Issue(dwIssueFlags uint32) foundation.HRESULT {
+func (self *IDirect3DQuery9) Issue(dwIssueFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwIssueFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetData dispatches through IDirect3DQuery9's vtable slot 7.
-func (self *IDirect3DQuery9) GetData(pData unsafe.Pointer, dwSize uint32, dwGetDataFlags uint32) foundation.HRESULT {
+func (self *IDirect3DQuery9) GetData(pData unsafe.Pointer, dwSize uint32, dwGetDataFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(dwSize), uintptr(dwGetDataFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DResource9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dresource9
@@ -1110,27 +1120,27 @@ type IDirect3DResource9 struct {
 var IID_IDirect3DResource9 = win32.GUID{Data1: 0x05eec05d, Data2: 0x8f7d, Data3: 0x4362, Data4: [8]byte{0xb9, 0x99, 0xd1, 0xba, 0xf3, 0x57, 0xc7, 0x04}}
 
 // GetDevice dispatches through IDirect3DResource9's vtable slot 3.
-func (self *IDirect3DResource9) GetDevice(ppDevice **IDirect3DDevice9) foundation.HRESULT {
+func (self *IDirect3DResource9) GetDevice(ppDevice **IDirect3DDevice9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPrivateData dispatches through IDirect3DResource9's vtable slot 4.
-func (self *IDirect3DResource9) SetPrivateData(refguid *win32.GUID, pData unsafe.Pointer, SizeOfData uint32, Flags uint32) foundation.HRESULT {
+func (self *IDirect3DResource9) SetPrivateData(refguid *win32.GUID, pData unsafe.Pointer, SizeOfData uint32, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(refguid)), uintptr(unsafe.Pointer(pData)), uintptr(SizeOfData), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrivateData dispatches through IDirect3DResource9's vtable slot 5.
-func (self *IDirect3DResource9) GetPrivateData(refguid *win32.GUID, pData unsafe.Pointer, pSizeOfData *uint32) foundation.HRESULT {
+func (self *IDirect3DResource9) GetPrivateData(refguid *win32.GUID, pData unsafe.Pointer, pSizeOfData *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(refguid)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pSizeOfData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreePrivateData dispatches through IDirect3DResource9's vtable slot 6.
-func (self *IDirect3DResource9) FreePrivateData(refguid *win32.GUID) foundation.HRESULT {
+func (self *IDirect3DResource9) FreePrivateData(refguid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(refguid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPriority dispatches through IDirect3DResource9's vtable slot 7.
@@ -1166,21 +1176,21 @@ type IDirect3DStateBlock9 struct {
 var IID_IDirect3DStateBlock9 = win32.GUID{Data1: 0xb07c4fe5, Data2: 0x310d, Data3: 0x4ba8, Data4: [8]byte{0xa2, 0x3c, 0x4f, 0x0f, 0x20, 0x6f, 0x21, 0x8b}}
 
 // GetDevice dispatches through IDirect3DStateBlock9's vtable slot 3.
-func (self *IDirect3DStateBlock9) GetDevice(ppDevice **IDirect3DDevice9) foundation.HRESULT {
+func (self *IDirect3DStateBlock9) GetDevice(ppDevice **IDirect3DDevice9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Capture dispatches through IDirect3DStateBlock9's vtable slot 4.
-func (self *IDirect3DStateBlock9) Capture() foundation.HRESULT {
+func (self *IDirect3DStateBlock9) Capture() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Apply dispatches through IDirect3DStateBlock9's vtable slot 5.
-func (self *IDirect3DStateBlock9) Apply() foundation.HRESULT {
+func (self *IDirect3DStateBlock9) Apply() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DSurface9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9
@@ -1193,39 +1203,39 @@ type IDirect3DSurface9 struct {
 var IID_IDirect3DSurface9 = win32.GUID{Data1: 0x0cfbaf3a, Data2: 0x9ff6, Data3: 0x429a, Data4: [8]byte{0x99, 0xb3, 0xa2, 0x79, 0x6a, 0xf8, 0xb8, 0x9b}}
 
 // GetContainer dispatches through IDirect3DSurface9's vtable slot 11.
-func (self *IDirect3DSurface9) GetContainer(riid *win32.GUID, ppContainer *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirect3DSurface9) GetContainer(riid *win32.GUID, ppContainer *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppContainer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDesc dispatches through IDirect3DSurface9's vtable slot 12.
-func (self *IDirect3DSurface9) GetDesc(pDesc *D3DSURFACE_DESC) foundation.HRESULT {
+func (self *IDirect3DSurface9) GetDesc(pDesc *D3DSURFACE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LockRect dispatches through IDirect3DSurface9's vtable slot 13.
-func (self *IDirect3DSurface9) LockRect(pLockedRect *D3DLOCKED_RECT, pRect *foundation.RECT, Flags uint32) foundation.HRESULT {
+func (self *IDirect3DSurface9) LockRect(pLockedRect *D3DLOCKED_RECT, pRect *foundation.RECT, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLockedRect)), uintptr(unsafe.Pointer(pRect)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockRect dispatches through IDirect3DSurface9's vtable slot 14.
-func (self *IDirect3DSurface9) UnlockRect() foundation.HRESULT {
+func (self *IDirect3DSurface9) UnlockRect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDC dispatches through IDirect3DSurface9's vtable slot 15.
-func (self *IDirect3DSurface9) GetDC(phdc *graphicsgdi.HDC) foundation.HRESULT {
+func (self *IDirect3DSurface9) GetDC(phdc *graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phdc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseDC dispatches through IDirect3DSurface9's vtable slot 16.
-func (self *IDirect3DSurface9) ReleaseDC(hdc graphicsgdi.HDC) foundation.HRESULT {
+func (self *IDirect3DSurface9) ReleaseDC(hdc graphicsgdi.HDC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(hdc))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DSwapChain9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9
@@ -1238,45 +1248,45 @@ type IDirect3DSwapChain9 struct {
 var IID_IDirect3DSwapChain9 = win32.GUID{Data1: 0x794950f2, Data2: 0xadfc, Data3: 0x458a, Data4: [8]byte{0x90, 0x5e, 0x10, 0xa1, 0x0b, 0x0b, 0x50, 0x3b}}
 
 // Present dispatches through IDirect3DSwapChain9's vtable slot 3.
-func (self *IDirect3DSwapChain9) Present(pSourceRect *foundation.RECT, pDestRect *foundation.RECT, hDestWindowOverride foundation.HWND, pDirtyRegion *graphicsgdi.RGNDATA, dwFlags uint32) foundation.HRESULT {
+func (self *IDirect3DSwapChain9) Present(pSourceRect *foundation.RECT, pDestRect *foundation.RECT, hDestWindowOverride foundation.HWND, pDirtyRegion *graphicsgdi.RGNDATA, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceRect)), uintptr(unsafe.Pointer(pDestRect)), uintptr(hDestWindowOverride), uintptr(unsafe.Pointer(pDirtyRegion)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFrontBufferData dispatches through IDirect3DSwapChain9's vtable slot 4.
-func (self *IDirect3DSwapChain9) GetFrontBufferData(pDestSurface *IDirect3DSurface9) foundation.HRESULT {
+func (self *IDirect3DSwapChain9) GetFrontBufferData(pDestSurface *IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestSurface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBackBuffer dispatches through IDirect3DSwapChain9's vtable slot 5.
-func (self *IDirect3DSwapChain9) GetBackBuffer(iBackBuffer uint32, Type D3DBACKBUFFER_TYPE, ppBackBuffer **IDirect3DSurface9) foundation.HRESULT {
+func (self *IDirect3DSwapChain9) GetBackBuffer(iBackBuffer uint32, Type D3DBACKBUFFER_TYPE, ppBackBuffer **IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(iBackBuffer), uintptr(Type), uintptr(unsafe.Pointer(ppBackBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRasterStatus dispatches through IDirect3DSwapChain9's vtable slot 6.
-func (self *IDirect3DSwapChain9) GetRasterStatus(pRasterStatus *D3DRASTER_STATUS) foundation.HRESULT {
+func (self *IDirect3DSwapChain9) GetRasterStatus(pRasterStatus *D3DRASTER_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRasterStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplayMode dispatches through IDirect3DSwapChain9's vtable slot 7.
-func (self *IDirect3DSwapChain9) GetDisplayMode(pMode *D3DDISPLAYMODE) foundation.HRESULT {
+func (self *IDirect3DSwapChain9) GetDisplayMode(pMode *D3DDISPLAYMODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDevice dispatches through IDirect3DSwapChain9's vtable slot 8.
-func (self *IDirect3DSwapChain9) GetDevice(ppDevice **IDirect3DDevice9) foundation.HRESULT {
+func (self *IDirect3DSwapChain9) GetDevice(ppDevice **IDirect3DDevice9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPresentParameters dispatches through IDirect3DSwapChain9's vtable slot 9.
-func (self *IDirect3DSwapChain9) GetPresentParameters(pPresentationParameters *D3DPRESENT_PARAMETERS) foundation.HRESULT {
+func (self *IDirect3DSwapChain9) GetPresentParameters(pPresentationParameters *D3DPRESENT_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPresentationParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DSwapChain9Ex: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9ex
@@ -1289,21 +1299,21 @@ type IDirect3DSwapChain9Ex struct {
 var IID_IDirect3DSwapChain9Ex = win32.GUID{Data1: 0x91886caf, Data2: 0x1c3d, Data3: 0x4d2e, Data4: [8]byte{0xa0, 0xab, 0x3e, 0x4c, 0x7d, 0x8d, 0x33, 0x03}}
 
 // GetLastPresentCount dispatches through IDirect3DSwapChain9Ex's vtable slot 10.
-func (self *IDirect3DSwapChain9Ex) GetLastPresentCount(pLastPresentCount *uint32) foundation.HRESULT {
+func (self *IDirect3DSwapChain9Ex) GetLastPresentCount(pLastPresentCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLastPresentCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPresentStats dispatches through IDirect3DSwapChain9Ex's vtable slot 11.
-func (self *IDirect3DSwapChain9Ex) GetPresentStats(pPresentationStatistics *D3DPRESENTSTATS) foundation.HRESULT {
+func (self *IDirect3DSwapChain9Ex) GetPresentStats(pPresentationStatistics *D3DPRESENTSTATS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPresentationStatistics)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDisplayModeEx dispatches through IDirect3DSwapChain9Ex's vtable slot 12.
-func (self *IDirect3DSwapChain9Ex) GetDisplayModeEx(pMode *D3DDISPLAYMODEEX, pRotation *D3DDISPLAYROTATION) foundation.HRESULT {
+func (self *IDirect3DSwapChain9Ex) GetDisplayModeEx(pMode *D3DDISPLAYMODEEX, pRotation *D3DDISPLAYROTATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMode)), uintptr(unsafe.Pointer(pRotation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DTexture9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dtexture9
@@ -1316,33 +1326,33 @@ type IDirect3DTexture9 struct {
 var IID_IDirect3DTexture9 = win32.GUID{Data1: 0x85c31227, Data2: 0x3de5, Data3: 0x4f00, Data4: [8]byte{0x9b, 0x3a, 0xf1, 0x1a, 0xc3, 0x8c, 0x18, 0xb5}}
 
 // GetLevelDesc dispatches through IDirect3DTexture9's vtable slot 17.
-func (self *IDirect3DTexture9) GetLevelDesc(Level uint32, pDesc *D3DSURFACE_DESC) foundation.HRESULT {
+func (self *IDirect3DTexture9) GetLevelDesc(Level uint32, pDesc *D3DSURFACE_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Level), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSurfaceLevel dispatches through IDirect3DTexture9's vtable slot 18.
-func (self *IDirect3DTexture9) GetSurfaceLevel(Level uint32, ppSurfaceLevel **IDirect3DSurface9) foundation.HRESULT {
+func (self *IDirect3DTexture9) GetSurfaceLevel(Level uint32, ppSurfaceLevel **IDirect3DSurface9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Level), uintptr(unsafe.Pointer(ppSurfaceLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LockRect dispatches through IDirect3DTexture9's vtable slot 19.
-func (self *IDirect3DTexture9) LockRect(Level uint32, pLockedRect *D3DLOCKED_RECT, pRect *foundation.RECT, Flags uint32) foundation.HRESULT {
+func (self *IDirect3DTexture9) LockRect(Level uint32, pLockedRect *D3DLOCKED_RECT, pRect *foundation.RECT, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(Level), uintptr(unsafe.Pointer(pLockedRect)), uintptr(unsafe.Pointer(pRect)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockRect dispatches through IDirect3DTexture9's vtable slot 20.
-func (self *IDirect3DTexture9) UnlockRect(Level uint32) foundation.HRESULT {
+func (self *IDirect3DTexture9) UnlockRect(Level uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(Level))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDirtyRect dispatches through IDirect3DTexture9's vtable slot 21.
-func (self *IDirect3DTexture9) AddDirtyRect(pDirtyRect *foundation.RECT) foundation.HRESULT {
+func (self *IDirect3DTexture9) AddDirtyRect(pDirtyRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirtyRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DVertexBuffer9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexbuffer9
@@ -1355,21 +1365,21 @@ type IDirect3DVertexBuffer9 struct {
 var IID_IDirect3DVertexBuffer9 = win32.GUID{Data1: 0xb64bb1b5, Data2: 0xfd70, Data3: 0x4df6, Data4: [8]byte{0xbf, 0x91, 0x19, 0xd0, 0xa1, 0x24, 0x55, 0xe3}}
 
 // Lock dispatches through IDirect3DVertexBuffer9's vtable slot 11.
-func (self *IDirect3DVertexBuffer9) Lock(OffsetToLock uint32, SizeToLock uint32, ppbData *unsafe.Pointer, Flags uint32) foundation.HRESULT {
+func (self *IDirect3DVertexBuffer9) Lock(OffsetToLock uint32, SizeToLock uint32, ppbData *unsafe.Pointer, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(OffsetToLock), uintptr(SizeToLock), uintptr(unsafe.Pointer(ppbData)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unlock dispatches through IDirect3DVertexBuffer9's vtable slot 12.
-func (self *IDirect3DVertexBuffer9) Unlock() foundation.HRESULT {
+func (self *IDirect3DVertexBuffer9) Unlock() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDesc dispatches through IDirect3DVertexBuffer9's vtable slot 13.
-func (self *IDirect3DVertexBuffer9) GetDesc(pDesc *D3DVERTEXBUFFER_DESC) foundation.HRESULT {
+func (self *IDirect3DVertexBuffer9) GetDesc(pDesc *D3DVERTEXBUFFER_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DVertexDeclaration9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9
@@ -1382,15 +1392,15 @@ type IDirect3DVertexDeclaration9 struct {
 var IID_IDirect3DVertexDeclaration9 = win32.GUID{Data1: 0xdd13c59c, Data2: 0x36fa, Data3: 0x4098, Data4: [8]byte{0xa8, 0xfb, 0xc7, 0xed, 0x39, 0xdc, 0x85, 0x46}}
 
 // GetDevice dispatches through IDirect3DVertexDeclaration9's vtable slot 3.
-func (self *IDirect3DVertexDeclaration9) GetDevice(ppDevice **IDirect3DDevice9) foundation.HRESULT {
+func (self *IDirect3DVertexDeclaration9) GetDevice(ppDevice **IDirect3DDevice9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeclaration dispatches through IDirect3DVertexDeclaration9's vtable slot 4.
-func (self *IDirect3DVertexDeclaration9) GetDeclaration(pElement *D3DVERTEXELEMENT9, pNumElements *uint32) foundation.HRESULT {
+func (self *IDirect3DVertexDeclaration9) GetDeclaration(pElement *D3DVERTEXELEMENT9, pNumElements *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pElement)), uintptr(unsafe.Pointer(pNumElements)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DVertexShader9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexshader9
@@ -1403,15 +1413,15 @@ type IDirect3DVertexShader9 struct {
 var IID_IDirect3DVertexShader9 = win32.GUID{Data1: 0xefc5557e, Data2: 0x6265, Data3: 0x4613, Data4: [8]byte{0x8a, 0x94, 0x43, 0x85, 0x78, 0x89, 0xeb, 0x36}}
 
 // GetDevice dispatches through IDirect3DVertexShader9's vtable slot 3.
-func (self *IDirect3DVertexShader9) GetDevice(ppDevice **IDirect3DDevice9) foundation.HRESULT {
+func (self *IDirect3DVertexShader9) GetDevice(ppDevice **IDirect3DDevice9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFunction dispatches through IDirect3DVertexShader9's vtable slot 4.
-func (self *IDirect3DVertexShader9) GetFunction(param0 unsafe.Pointer, pSizeOfData *uint32) foundation.HRESULT {
+func (self *IDirect3DVertexShader9) GetFunction(param0 unsafe.Pointer, pSizeOfData *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(pSizeOfData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DVolume9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9
@@ -1424,51 +1434,51 @@ type IDirect3DVolume9 struct {
 var IID_IDirect3DVolume9 = win32.GUID{Data1: 0x24f416e6, Data2: 0x1f67, Data3: 0x4aa7, Data4: [8]byte{0xb8, 0x8e, 0xd3, 0x3f, 0x6f, 0x31, 0x28, 0xa1}}
 
 // GetDevice dispatches through IDirect3DVolume9's vtable slot 3.
-func (self *IDirect3DVolume9) GetDevice(ppDevice **IDirect3DDevice9) foundation.HRESULT {
+func (self *IDirect3DVolume9) GetDevice(ppDevice **IDirect3DDevice9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPrivateData dispatches through IDirect3DVolume9's vtable slot 4.
-func (self *IDirect3DVolume9) SetPrivateData(refguid *win32.GUID, pData unsafe.Pointer, SizeOfData uint32, Flags uint32) foundation.HRESULT {
+func (self *IDirect3DVolume9) SetPrivateData(refguid *win32.GUID, pData unsafe.Pointer, SizeOfData uint32, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(refguid)), uintptr(unsafe.Pointer(pData)), uintptr(SizeOfData), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrivateData dispatches through IDirect3DVolume9's vtable slot 5.
-func (self *IDirect3DVolume9) GetPrivateData(refguid *win32.GUID, pData unsafe.Pointer, pSizeOfData *uint32) foundation.HRESULT {
+func (self *IDirect3DVolume9) GetPrivateData(refguid *win32.GUID, pData unsafe.Pointer, pSizeOfData *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(refguid)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pSizeOfData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreePrivateData dispatches through IDirect3DVolume9's vtable slot 6.
-func (self *IDirect3DVolume9) FreePrivateData(refguid *win32.GUID) foundation.HRESULT {
+func (self *IDirect3DVolume9) FreePrivateData(refguid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(refguid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContainer dispatches through IDirect3DVolume9's vtable slot 7.
-func (self *IDirect3DVolume9) GetContainer(riid *win32.GUID, ppContainer *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirect3DVolume9) GetContainer(riid *win32.GUID, ppContainer *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppContainer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDesc dispatches through IDirect3DVolume9's vtable slot 8.
-func (self *IDirect3DVolume9) GetDesc(pDesc *D3DVOLUME_DESC) foundation.HRESULT {
+func (self *IDirect3DVolume9) GetDesc(pDesc *D3DVOLUME_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LockBox dispatches through IDirect3DVolume9's vtable slot 9.
-func (self *IDirect3DVolume9) LockBox(pLockedVolume *D3DLOCKED_BOX, pBox *D3DBOX, Flags uint32) foundation.HRESULT {
+func (self *IDirect3DVolume9) LockBox(pLockedVolume *D3DLOCKED_BOX, pBox *D3DBOX, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLockedVolume)), uintptr(unsafe.Pointer(pBox)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockBox dispatches through IDirect3DVolume9's vtable slot 10.
-func (self *IDirect3DVolume9) UnlockBox() foundation.HRESULT {
+func (self *IDirect3DVolume9) UnlockBox() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirect3DVolumeTexture9: https://learn.microsoft.com/windows/win32/api/d3d9/nn-d3d9-idirect3dvolumetexture9
@@ -1481,31 +1491,31 @@ type IDirect3DVolumeTexture9 struct {
 var IID_IDirect3DVolumeTexture9 = win32.GUID{Data1: 0x2518526c, Data2: 0xe789, Data3: 0x4111, Data4: [8]byte{0xa7, 0xb9, 0x47, 0xef, 0x32, 0x8d, 0x13, 0xe6}}
 
 // GetLevelDesc dispatches through IDirect3DVolumeTexture9's vtable slot 17.
-func (self *IDirect3DVolumeTexture9) GetLevelDesc(Level uint32, pDesc *D3DVOLUME_DESC) foundation.HRESULT {
+func (self *IDirect3DVolumeTexture9) GetLevelDesc(Level uint32, pDesc *D3DVOLUME_DESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Level), uintptr(unsafe.Pointer(pDesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVolumeLevel dispatches through IDirect3DVolumeTexture9's vtable slot 18.
-func (self *IDirect3DVolumeTexture9) GetVolumeLevel(Level uint32, ppVolumeLevel **IDirect3DVolume9) foundation.HRESULT {
+func (self *IDirect3DVolumeTexture9) GetVolumeLevel(Level uint32, ppVolumeLevel **IDirect3DVolume9) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Level), uintptr(unsafe.Pointer(ppVolumeLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LockBox dispatches through IDirect3DVolumeTexture9's vtable slot 19.
-func (self *IDirect3DVolumeTexture9) LockBox(Level uint32, pLockedVolume *D3DLOCKED_BOX, pBox *D3DBOX, Flags uint32) foundation.HRESULT {
+func (self *IDirect3DVolumeTexture9) LockBox(Level uint32, pLockedVolume *D3DLOCKED_BOX, pBox *D3DBOX, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(Level), uintptr(unsafe.Pointer(pLockedVolume)), uintptr(unsafe.Pointer(pBox)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockBox dispatches through IDirect3DVolumeTexture9's vtable slot 20.
-func (self *IDirect3DVolumeTexture9) UnlockBox(Level uint32) foundation.HRESULT {
+func (self *IDirect3DVolumeTexture9) UnlockBox(Level uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(Level))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDirtyBox dispatches through IDirect3DVolumeTexture9's vtable slot 21.
-func (self *IDirect3DVolumeTexture9) AddDirtyBox(pDirtyBox *D3DBOX) foundation.HRESULT {
+func (self *IDirect3DVolumeTexture9) AddDirtyBox(pDirtyBox *D3DBOX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirtyBox)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

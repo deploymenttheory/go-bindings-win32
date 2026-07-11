@@ -26,8 +26,8 @@ type BinaryParam struct {
 	Size   int16
 }
 
-// CLIENT_CALL_RETURN is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CLIENT_CALL_RETURN is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CLIENT_CALL_RETURN struct {
 	Data [1]uint64
 }
@@ -121,8 +121,8 @@ type MIDL_STUBLESS_PROXY_INFO struct {
 	PSyntaxInfo        *MIDL_SYNTAX_INFO
 }
 
-// MIDL_STUB_DESC_IMPLICIT_HANDLE_INFO_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIDL_STUB_DESC_IMPLICIT_HANDLE_INFO_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIDL_STUB_DESC_IMPLICIT_HANDLE_INFO_e__Union struct {
 	Data [1]uint64
 }
@@ -248,8 +248,8 @@ type NDR64_ARRAY_FLAGS struct {
 	Bitfield byte
 }
 
-// NDR64_BINDINGS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NDR64_BINDINGS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NDR64_BINDINGS struct {
 	Data [3]uint16
 }
@@ -710,8 +710,8 @@ type NDR_SCONTEXT struct {
 	UserContext unsafe.Pointer
 }
 
-// NDR_USER_MARSHAL_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NDR_USER_MARSHAL_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NDR_USER_MARSHAL_INFO_Anonymous_e__Union struct {
 	Data [10]uint64
 }
@@ -750,8 +750,8 @@ type RDR_CALLOUT_STATE struct {
 }
 
 // RPC_ASYNC_NOTIFICATION_INFO: https://learn.microsoft.com/windows/win32/api/rpcasync/ns-rpcasync-rpc_async_notification_info
-// RPC_ASYNC_NOTIFICATION_INFO is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RPC_ASYNC_NOTIFICATION_INFO is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RPC_ASYNC_NOTIFICATION_INFO struct {
 	Data [4]uint64
 }
@@ -799,8 +799,8 @@ type RPC_BINDING_HANDLE_SECURITY_V1_W struct {
 	SecurityQos     *RPC_SECURITY_QOS
 }
 
-// RPC_BINDING_HANDLE_TEMPLATE_V1_A_u1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RPC_BINDING_HANDLE_TEMPLATE_V1_A_u1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RPC_BINDING_HANDLE_TEMPLATE_V1_A_u1_e__Union struct {
 	Data [1]uint64
 }
@@ -816,8 +816,8 @@ type RPC_BINDING_HANDLE_TEMPLATE_V1_A struct {
 	ObjectUuid       win32.GUID
 }
 
-// RPC_BINDING_HANDLE_TEMPLATE_V1_W_u1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RPC_BINDING_HANDLE_TEMPLATE_V1_W_u1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RPC_BINDING_HANDLE_TEMPLATE_V1_W_u1_e__Union struct {
 	Data [1]uint64
 }
@@ -996,8 +996,8 @@ type RPC_DISPATCH_TABLE struct {
 	Reserved           uintptr
 }
 
-// RPC_EE_INFO_PARAM_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RPC_EE_INFO_PARAM_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RPC_EE_INFO_PARAM_u_e__Union struct {
 	Data [2]uint64
 }
@@ -1033,8 +1033,8 @@ type RPC_ERROR_ENUM_HANDLE struct {
 	Head       unsafe.Pointer
 }
 
-// RPC_EXTENDED_ERROR_INFO_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RPC_EXTENDED_ERROR_INFO_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RPC_EXTENDED_ERROR_INFO_u_e__Union struct {
 	Data [4]uint32
 }
@@ -1219,8 +1219,8 @@ type RPC_SECURITY_QOS struct {
 	ImpersonationType systemcom.RPC_C_IMP_LEVEL
 }
 
-// RPC_SECURITY_QOS_V2_A_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RPC_SECURITY_QOS_V2_A_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RPC_SECURITY_QOS_V2_A_u_e__Union struct {
 	Data [1]uint64
 }
@@ -1235,8 +1235,8 @@ type RPC_SECURITY_QOS_V2_A struct {
 	U                          RPC_SECURITY_QOS_V2_A_u_e__Union
 }
 
-// RPC_SECURITY_QOS_V2_W_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RPC_SECURITY_QOS_V2_W_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RPC_SECURITY_QOS_V2_W_u_e__Union struct {
 	Data [1]uint64
 }
@@ -1251,8 +1251,8 @@ type RPC_SECURITY_QOS_V2_W struct {
 	U                          RPC_SECURITY_QOS_V2_W_u_e__Union
 }
 
-// RPC_SECURITY_QOS_V3_A_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RPC_SECURITY_QOS_V3_A_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RPC_SECURITY_QOS_V3_A_u_e__Union struct {
 	Data [1]uint64
 }
@@ -1268,8 +1268,8 @@ type RPC_SECURITY_QOS_V3_A struct {
 	Sid                        unsafe.Pointer
 }
 
-// RPC_SECURITY_QOS_V3_W_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RPC_SECURITY_QOS_V3_W_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RPC_SECURITY_QOS_V3_W_u_e__Union struct {
 	Data [1]uint64
 }
@@ -1285,8 +1285,8 @@ type RPC_SECURITY_QOS_V3_W struct {
 	Sid                        unsafe.Pointer
 }
 
-// RPC_SECURITY_QOS_V4_A_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RPC_SECURITY_QOS_V4_A_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RPC_SECURITY_QOS_V4_A_u_e__Union struct {
 	Data [1]uint64
 }
@@ -1303,8 +1303,8 @@ type RPC_SECURITY_QOS_V4_A struct {
 	EffectiveOnly              uint32
 }
 
-// RPC_SECURITY_QOS_V4_W_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RPC_SECURITY_QOS_V4_W_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RPC_SECURITY_QOS_V4_W_u_e__Union struct {
 	Data [1]uint64
 }
@@ -1321,8 +1321,8 @@ type RPC_SECURITY_QOS_V4_W struct {
 	EffectiveOnly              uint32
 }
 
-// RPC_SECURITY_QOS_V5_A_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RPC_SECURITY_QOS_V5_A_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RPC_SECURITY_QOS_V5_A_u_e__Union struct {
 	Data [1]uint64
 }
@@ -1340,8 +1340,8 @@ type RPC_SECURITY_QOS_V5_A struct {
 	ServerSecurityDescriptor   unsafe.Pointer
 }
 
-// RPC_SECURITY_QOS_V5_W_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RPC_SECURITY_QOS_V5_W_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RPC_SECURITY_QOS_V5_W_u_e__Union struct {
 	Data [1]uint64
 }

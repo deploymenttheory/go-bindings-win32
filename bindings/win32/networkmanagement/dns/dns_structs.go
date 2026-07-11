@@ -15,8 +15,8 @@ type DNS_AAAA_DATA struct {
 	Ip6Address IP6_ADDRESS
 }
 
-// DNS_ADDR_Data_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_ADDR_Data_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_ADDR_Data_e__Union struct {
 	Data [32]byte
 }
@@ -83,8 +83,8 @@ type DNS_CONNECTION_PROXY_ELEMENT struct {
 	Info DNS_CONNECTION_PROXY_INFO
 }
 
-// DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_CONNECTION_PROXY_INFO_Anonymous_e__Union struct {
 	Data [6]uint64
 }
@@ -110,14 +110,14 @@ type DNS_CONNECTION_PROXY_LIST struct {
 	PProxies *DNS_CONNECTION_PROXY_ELEMENT
 }
 
-// DNS_CUSTOM_SERVER_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_CUSTOM_SERVER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_CUSTOM_SERVER_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// DNS_CUSTOM_SERVER_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_CUSTOM_SERVER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_CUSTOM_SERVER_Anonymous2_e__Union struct {
 	Data [32]byte
 }
@@ -313,8 +313,8 @@ type DNS_QUERY_RAW_CANCEL struct {
 	Reserved [32]foundation.CHAR
 }
 
-// DNS_QUERY_RAW_REQUEST_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_QUERY_RAW_REQUEST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_QUERY_RAW_REQUEST_Anonymous_e__Union struct {
 	Data [32]byte
 }
@@ -337,8 +337,8 @@ type DNS_QUERY_RAW_REQUEST struct {
 	Anonymous               DNS_QUERY_RAW_REQUEST_Anonymous_e__Union
 }
 
-// DNS_QUERY_RAW_RESULT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_QUERY_RAW_RESULT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_QUERY_RAW_RESULT_Anonymous_e__Union struct {
 	Data [32]byte
 }
@@ -393,14 +393,14 @@ type DNS_QUERY_RESULT struct {
 	Reserved      unsafe.Pointer
 }
 
-// DNS_RECORDA_Data_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_RECORDA_Data_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_RECORDA_Data_e__Union struct {
 	Data [7]uint64
 }
 
-// DNS_RECORDA_Flags_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_RECORDA_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_RECORDA_Flags_e__Union struct {
 	Data [1]uint32
 }
@@ -417,14 +417,14 @@ type DNS_RECORDA struct {
 	Data        DNS_RECORDA_Data_e__Union
 }
 
-// DNS_RECORDW_Data_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_RECORDW_Data_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_RECORDW_Data_e__Union struct {
 	Data [7]uint64
 }
 
-// DNS_RECORDW_Flags_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_RECORDW_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_RECORDW_Flags_e__Union struct {
 	Data [1]uint32
 }
@@ -446,14 +446,14 @@ type DNS_RECORD_FLAGS struct {
 	Bitfield uint32
 }
 
-// DNS_RECORD_OPTW_Data_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_RECORD_OPTW_Data_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_RECORD_OPTW_Data_e__Union struct {
 	Data [3]uint16
 }
 
-// DNS_RECORD_OPTW_Flags_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_RECORD_OPTW_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_RECORD_OPTW_Flags_e__Union struct {
 	Data [1]uint32
 }
@@ -476,8 +476,8 @@ type DNS_RRSET struct {
 	PLastRR  *DNS_RECORDA
 }
 
-// DNS_SERVICE_BROWSE_REQUEST_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_SERVICE_BROWSE_REQUEST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_SERVICE_BROWSE_REQUEST_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -606,8 +606,8 @@ type DNS_SVCB_DATA struct {
 	PSvcParams    *DNS_SVCB_PARAM
 }
 
-// DNS_SVCB_PARAM_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DNS_SVCB_PARAM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DNS_SVCB_PARAM_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -776,8 +776,8 @@ type IP4_ARRAY struct {
 }
 
 // IP6_ADDRESS: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-ip6_address
-// IP6_ADDRESS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IP6_ADDRESS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IP6_ADDRESS struct {
 	Data [2]uint64
 }
@@ -805,14 +805,14 @@ type MDNS_QUERY_REQUEST struct {
 	UlResendCount   uint32
 }
 
-// DnsRecordOptA_Data_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DnsRecordOptA_Data_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DnsRecordOptA_Data_e__Union struct {
 	Data [3]uint16
 }
 
-// DnsRecordOptA_Flags_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DnsRecordOptA_Flags_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DnsRecordOptA_Flags_e__Union struct {
 	Data [1]uint32
 }

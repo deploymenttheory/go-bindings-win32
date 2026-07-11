@@ -111,8 +111,8 @@ type ACL_SIZE_INFORMATION struct {
 	AclBytesFree  uint32
 }
 
-// CLAIM_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CLAIM_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CLAIM_SECURITY_ATTRIBUTES_INFORMATION_Attribute_e__Union struct {
 	Data [1]uint64
 }
@@ -137,8 +137,8 @@ type CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE struct {
 	ValueLength uint32
 }
 
-// CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values_e__Union struct {
 	Data [1]uint32
 }
@@ -153,8 +153,8 @@ type CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1 struct {
 	Values     CLAIM_SECURITY_ATTRIBUTE_RELATIVE_V1_Values_e__Union
 }
 
-// CLAIM_SECURITY_ATTRIBUTE_V1_Values_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CLAIM_SECURITY_ATTRIBUTE_V1_Values_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CLAIM_SECURITY_ATTRIBUTE_V1_Values_e__Union struct {
 	Data [1]uint64
 }
@@ -177,8 +177,8 @@ type GENERIC_MAPPING struct {
 	GenericAll     uint32
 }
 
-// LLFILETIME_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// LLFILETIME_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type LLFILETIME_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -294,8 +294,8 @@ type SE_SECURITY_DESCRIPTOR struct {
 	SecurityDescriptor PSECURITY_DESCRIPTOR
 }
 
-// SE_SID is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SE_SID is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SE_SID struct {
 	Data [17]uint32
 }

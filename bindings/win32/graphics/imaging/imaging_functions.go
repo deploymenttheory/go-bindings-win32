@@ -32,71 +32,73 @@ var (
 // WICConvertBitmapSource calls WindowsCodecs!WICConvertBitmapSource.
 // https://learn.microsoft.com/windows/win32/api/wincodec/nf-wincodec-wicconvertbitmapsource
 // Minimum OS: windows5.1.2600.
-func WICConvertBitmapSource(dstFormat *win32.GUID, pISrc *IWICBitmapSource, ppIDst **IWICBitmapSource) foundation.HRESULT {
+func WICConvertBitmapSource(dstFormat *win32.GUID, pISrc *IWICBitmapSource, ppIDst **IWICBitmapSource) error {
 	r1, _, _ := syscall.SyscallN(procWICConvertBitmapSource.Addr(), uintptr(unsafe.Pointer(dstFormat)), uintptr(unsafe.Pointer(pISrc)), uintptr(unsafe.Pointer(ppIDst)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WICCreateBitmapFromSection calls WindowsCodecs!WICCreateBitmapFromSection.
 // https://learn.microsoft.com/windows/win32/api/wincodec/nf-wincodec-wiccreatebitmapfromsection
 // Minimum OS: windows5.1.2600.
-func WICCreateBitmapFromSection(width uint32, height uint32, pixelFormat *win32.GUID, hSection foundation.HANDLE, stride uint32, offset uint32, ppIBitmap **IWICBitmap) foundation.HRESULT {
+func WICCreateBitmapFromSection(width uint32, height uint32, pixelFormat *win32.GUID, hSection foundation.HANDLE, stride uint32, offset uint32, ppIBitmap **IWICBitmap) error {
 	r1, _, _ := syscall.SyscallN(procWICCreateBitmapFromSection.Addr(), uintptr(width), uintptr(height), uintptr(unsafe.Pointer(pixelFormat)), uintptr(hSection), uintptr(stride), uintptr(offset), uintptr(unsafe.Pointer(ppIBitmap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WICCreateBitmapFromSectionEx calls WindowsCodecs!WICCreateBitmapFromSectionEx.
 // https://learn.microsoft.com/windows/win32/api/wincodec/nf-wincodec-wiccreatebitmapfromsectionex
 // Minimum OS: windows6.1.
-func WICCreateBitmapFromSectionEx(width uint32, height uint32, pixelFormat *win32.GUID, hSection foundation.HANDLE, stride uint32, offset uint32, desiredAccessLevel WICSectionAccessLevel, ppIBitmap **IWICBitmap) foundation.HRESULT {
+func WICCreateBitmapFromSectionEx(width uint32, height uint32, pixelFormat *win32.GUID, hSection foundation.HANDLE, stride uint32, offset uint32, desiredAccessLevel WICSectionAccessLevel, ppIBitmap **IWICBitmap) error {
 	r1, _, _ := syscall.SyscallN(procWICCreateBitmapFromSectionEx.Addr(), uintptr(width), uintptr(height), uintptr(unsafe.Pointer(pixelFormat)), uintptr(hSection), uintptr(stride), uintptr(offset), uintptr(desiredAccessLevel), uintptr(unsafe.Pointer(ppIBitmap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WICGetMetadataContentSize calls WindowsCodecs!WICGetMetadataContentSize.
 // https://learn.microsoft.com/windows/win32/api/wincodecsdk/nf-wincodecsdk-wicgetmetadatacontentsize
 // Minimum OS: windows5.1.2600.
-func WICGetMetadataContentSize(guidContainerFormat *win32.GUID, pIWriter *IWICMetadataWriter, pcbSize *uint64) foundation.HRESULT {
+func WICGetMetadataContentSize(guidContainerFormat *win32.GUID, pIWriter *IWICMetadataWriter, pcbSize *uint64) error {
 	r1, _, _ := syscall.SyscallN(procWICGetMetadataContentSize.Addr(), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pIWriter)), uintptr(unsafe.Pointer(pcbSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WICMapGuidToShortName calls WindowsCodecs!WICMapGuidToShortName.
 // https://learn.microsoft.com/windows/win32/api/wincodec/nf-wincodec-wicmapguidtoshortname
 // Minimum OS: windows5.1.2600.
-func WICMapGuidToShortName(guid *win32.GUID, cchName uint32, wzName foundation.PWSTR, pcchActual *uint32) foundation.HRESULT {
+func WICMapGuidToShortName(guid *win32.GUID, cchName uint32, wzName foundation.PWSTR, pcchActual *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWICMapGuidToShortName.Addr(), uintptr(unsafe.Pointer(guid)), uintptr(cchName), uintptr(unsafe.Pointer(wzName)), uintptr(unsafe.Pointer(pcchActual)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WICMapSchemaToName calls WindowsCodecs!WICMapSchemaToName.
 // https://learn.microsoft.com/windows/win32/api/wincodec/nf-wincodec-wicmapschematoname
 // Minimum OS: windows5.1.2600.
-func WICMapSchemaToName(guidMetadataFormat *win32.GUID, pwzSchema foundation.PWSTR, cchName uint32, wzName foundation.PWSTR, pcchActual *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWICMapSchemaToName.Addr(), uintptr(unsafe.Pointer(guidMetadataFormat)), uintptr(unsafe.Pointer(pwzSchema)), uintptr(cchName), uintptr(unsafe.Pointer(wzName)), uintptr(unsafe.Pointer(pcchActual)))
-	return foundation.HRESULT(r1)
+func WICMapSchemaToName(guidMetadataFormat *win32.GUID, pwzSchema string, cchName uint32, wzName foundation.PWSTR, pcchActual *uint32) error {
+	_pwzSchema := win32.UTF16Ptr(pwzSchema)
+	r1, _, _ := syscall.SyscallN(procWICMapSchemaToName.Addr(), uintptr(unsafe.Pointer(guidMetadataFormat)), uintptr(unsafe.Pointer(_pwzSchema)), uintptr(cchName), uintptr(unsafe.Pointer(wzName)), uintptr(unsafe.Pointer(pcchActual)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WICMapShortNameToGuid calls WindowsCodecs!WICMapShortNameToGuid.
 // https://learn.microsoft.com/windows/win32/api/wincodec/nf-wincodec-wicmapshortnametoguid
 // Minimum OS: windows5.1.2600.
-func WICMapShortNameToGuid(wzName foundation.PWSTR, pguid *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWICMapShortNameToGuid.Addr(), uintptr(unsafe.Pointer(wzName)), uintptr(unsafe.Pointer(pguid)))
-	return foundation.HRESULT(r1)
+func WICMapShortNameToGuid(wzName string, pguid *win32.GUID) error {
+	_wzName := win32.UTF16Ptr(wzName)
+	r1, _, _ := syscall.SyscallN(procWICMapShortNameToGuid.Addr(), uintptr(unsafe.Pointer(_wzName)), uintptr(unsafe.Pointer(pguid)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WICMatchMetadataContent calls WindowsCodecs!WICMatchMetadataContent.
 // https://learn.microsoft.com/windows/win32/api/wincodecsdk/nf-wincodecsdk-wicmatchmetadatacontent
 // Minimum OS: windows5.1.2600.
-func WICMatchMetadataContent(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID, pIStream *systemcom.IStream, pguidMetadataFormat *win32.GUID) foundation.HRESULT {
+func WICMatchMetadataContent(guidContainerFormat *win32.GUID, pguidVendor *win32.GUID, pIStream *systemcom.IStream, pguidMetadataFormat *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procWICMatchMetadataContent.Addr(), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pguidVendor)), uintptr(unsafe.Pointer(pIStream)), uintptr(unsafe.Pointer(pguidMetadataFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WICSerializeMetadataContent calls WindowsCodecs!WICSerializeMetadataContent.
 // https://learn.microsoft.com/windows/win32/api/wincodecsdk/nf-wincodecsdk-wicserializemetadatacontent
 // Minimum OS: windows5.1.2600.
-func WICSerializeMetadataContent(guidContainerFormat *win32.GUID, pIWriter *IWICMetadataWriter, dwPersistOptions uint32, pIStream *systemcom.IStream) foundation.HRESULT {
+func WICSerializeMetadataContent(guidContainerFormat *win32.GUID, pIWriter *IWICMetadataWriter, dwPersistOptions uint32, pIStream *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procWICSerializeMetadataContent.Addr(), uintptr(unsafe.Pointer(guidContainerFormat)), uintptr(unsafe.Pointer(pIWriter)), uintptr(dwPersistOptions), uintptr(unsafe.Pointer(pIStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

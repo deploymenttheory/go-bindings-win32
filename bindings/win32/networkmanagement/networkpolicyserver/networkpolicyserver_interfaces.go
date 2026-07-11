@@ -24,45 +24,48 @@ type ISdo struct {
 var IID_ISdo = win32.GUID{Data1: 0x56bc53de, Data2: 0x96db, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x3f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}}
 
 // GetPropertyInfo dispatches through ISdo's vtable slot 7.
-func (self *ISdo) GetPropertyInfo(Id int32, ppPropertyInfo **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Id), uintptr(unsafe.Pointer(ppPropertyInfo)))
-	return foundation.HRESULT(r1)
+func (self *ISdo) GetPropertyInfo(Id int32) (*systemcom.IUnknown, error) {
+	var _ppPropertyInfo *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Id), uintptr(unsafe.Pointer(&_ppPropertyInfo)))
+	return _ppPropertyInfo, win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through ISdo's vtable slot 8.
-func (self *ISdo) GetProperty(Id int32, pValue *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Id), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+func (self *ISdo) GetProperty(Id int32) (systemvariant.VARIANT, error) {
+	var _pValue systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Id), uintptr(unsafe.Pointer(&_pValue)))
+	return _pValue, win32.HRESULTError(int32(r1))
 }
 
 // PutProperty dispatches through ISdo's vtable slot 9.
-func (self *ISdo) PutProperty(Id int32, pValue *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISdo) PutProperty(Id int32, pValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Id), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResetProperty dispatches through ISdo's vtable slot 10.
-func (self *ISdo) ResetProperty(Id int32) foundation.HRESULT {
+func (self *ISdo) ResetProperty(Id int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Id))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Apply dispatches through ISdo's vtable slot 11.
-func (self *ISdo) Apply() foundation.HRESULT {
+func (self *ISdo) Apply() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Restore dispatches through ISdo's vtable slot 12.
-func (self *ISdo) Restore() foundation.HRESULT {
+func (self *ISdo) Restore() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISdo's vtable slot 13.
-func (self *ISdo) Get__NewEnum(ppEnumVARIANT **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumVARIANT)))
-	return foundation.HRESULT(r1)
+func (self *ISdo) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _ppEnumVARIANT *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumVARIANT)))
+	return _ppEnumVARIANT, win32.HRESULTError(int32(r1))
 }
 
 // ISdoCollection: https://learn.microsoft.com/windows/win32/api/sdoias/nn-sdoias-isdocollection
@@ -75,51 +78,55 @@ type ISdoCollection struct {
 var IID_ISdoCollection = win32.GUID{Data1: 0x56bc53e2, Data2: 0x96db, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x3f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}}
 
 // Get_Count dispatches through ISdoCollection's vtable slot 7.
-func (self *ISdoCollection) Get_Count(pCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+func (self *ISdoCollection) Get_Count() (int32, error) {
+	var _pCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
+	return _pCount, win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through ISdoCollection's vtable slot 8.
-func (self *ISdoCollection) Add(bstrName foundation.BSTR, ppItem **systemcom.IDispatch) foundation.HRESULT {
+func (self *ISdoCollection) Add(bstrName foundation.BSTR, ppItem **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(ppItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through ISdoCollection's vtable slot 9.
-func (self *ISdoCollection) Remove(pItem *systemcom.IDispatch) foundation.HRESULT {
+func (self *ISdoCollection) Remove(pItem *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAll dispatches through ISdoCollection's vtable slot 10.
-func (self *ISdoCollection) RemoveAll() foundation.HRESULT {
+func (self *ISdoCollection) RemoveAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reload dispatches through ISdoCollection's vtable slot 11.
-func (self *ISdoCollection) Reload() foundation.HRESULT {
+func (self *ISdoCollection) Reload() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsNameUnique dispatches through ISdoCollection's vtable slot 12.
-func (self *ISdoCollection) IsNameUnique(bstrName foundation.BSTR, pBool *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(pBool)))
-	return foundation.HRESULT(r1)
+func (self *ISdoCollection) IsNameUnique(bstrName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _pBool foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(&_pBool)))
+	return _pBool, win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through ISdoCollection's vtable slot 13.
-func (self *ISdoCollection) Item(Name *systemvariant.VARIANT, pItem **systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(pItem)))
-	return foundation.HRESULT(r1)
+func (self *ISdoCollection) Item(Name *systemvariant.VARIANT) (*systemcom.IDispatch, error) {
+	var _pItem *systemcom.IDispatch
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(&_pItem)))
+	return _pItem, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ISdoCollection's vtable slot 14.
-func (self *ISdoCollection) Get__NewEnum(ppEnumVARIANT **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumVARIANT)))
-	return foundation.HRESULT(r1)
+func (self *ISdoCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _ppEnumVARIANT *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumVARIANT)))
+	return _ppEnumVARIANT, win32.HRESULTError(int32(r1))
 }
 
 // ISdoDictionaryOld: https://learn.microsoft.com/windows/win32/api/sdoias/nn-sdoias-isdodictionaryold
@@ -132,33 +139,38 @@ type ISdoDictionaryOld struct {
 var IID_ISdoDictionaryOld = win32.GUID{Data1: 0xd432e5f4, Data2: 0x53d8, Data3: 0x11d2, Data4: [8]byte{0x9a, 0x3a, 0x00, 0xc0, 0x4f, 0xb9, 0x98, 0xac}}
 
 // EnumAttributes dispatches through ISdoDictionaryOld's vtable slot 7.
-func (self *ISdoDictionaryOld) EnumAttributes(Id *systemvariant.VARIANT, pValues *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(pValues)))
-	return foundation.HRESULT(r1)
+func (self *ISdoDictionaryOld) EnumAttributes(Id *systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	var _pValues systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)), uintptr(unsafe.Pointer(&_pValues)))
+	return _pValues, win32.HRESULTError(int32(r1))
 }
 
 // GetAttributeInfo dispatches through ISdoDictionaryOld's vtable slot 8.
-func (self *ISdoDictionaryOld) GetAttributeInfo(Id ATTRIBUTEID, pInfoIDs *systemvariant.VARIANT, pInfoValues *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Id), uintptr(unsafe.Pointer(pInfoIDs)), uintptr(unsafe.Pointer(pInfoValues)))
-	return foundation.HRESULT(r1)
+func (self *ISdoDictionaryOld) GetAttributeInfo(Id ATTRIBUTEID, pInfoIDs *systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	var _pInfoValues systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Id), uintptr(unsafe.Pointer(pInfoIDs)), uintptr(unsafe.Pointer(&_pInfoValues)))
+	return _pInfoValues, win32.HRESULTError(int32(r1))
 }
 
 // EnumAttributeValues dispatches through ISdoDictionaryOld's vtable slot 9.
-func (self *ISdoDictionaryOld) EnumAttributeValues(Id ATTRIBUTEID, pValueIds *systemvariant.VARIANT, pValuesDesc *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Id), uintptr(unsafe.Pointer(pValueIds)), uintptr(unsafe.Pointer(pValuesDesc)))
-	return foundation.HRESULT(r1)
+func (self *ISdoDictionaryOld) EnumAttributeValues(Id ATTRIBUTEID, pValueIds *systemvariant.VARIANT) (systemvariant.VARIANT, error) {
+	var _pValuesDesc systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Id), uintptr(unsafe.Pointer(pValueIds)), uintptr(unsafe.Pointer(&_pValuesDesc)))
+	return _pValuesDesc, win32.HRESULTError(int32(r1))
 }
 
 // CreateAttribute dispatches through ISdoDictionaryOld's vtable slot 10.
-func (self *ISdoDictionaryOld) CreateAttribute(Id ATTRIBUTEID, ppAttributeObject **systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Id), uintptr(unsafe.Pointer(ppAttributeObject)))
-	return foundation.HRESULT(r1)
+func (self *ISdoDictionaryOld) CreateAttribute(Id ATTRIBUTEID) (*systemcom.IDispatch, error) {
+	var _ppAttributeObject *systemcom.IDispatch
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Id), uintptr(unsafe.Pointer(&_ppAttributeObject)))
+	return _ppAttributeObject, win32.HRESULTError(int32(r1))
 }
 
 // GetAttributeID dispatches through ISdoDictionaryOld's vtable slot 11.
-func (self *ISdoDictionaryOld) GetAttributeID(bstrAttributeName foundation.BSTR, pId *ATTRIBUTEID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAttributeName)), uintptr(unsafe.Pointer(pId)))
-	return foundation.HRESULT(r1)
+func (self *ISdoDictionaryOld) GetAttributeID(bstrAttributeName foundation.BSTR) (ATTRIBUTEID, error) {
+	var _pId ATTRIBUTEID
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrAttributeName)), uintptr(unsafe.Pointer(&_pId)))
+	return _pId, win32.HRESULTError(int32(r1))
 }
 
 // ISdoMachine: https://learn.microsoft.com/windows/win32/api/sdoias/nn-sdoias-isdomachine
@@ -171,57 +183,65 @@ type ISdoMachine struct {
 var IID_ISdoMachine = win32.GUID{Data1: 0x479f6e75, Data2: 0x49a2, Data3: 0x11d2, Data4: [8]byte{0x8e, 0xca, 0x00, 0xc0, 0x4f, 0xc2, 0xf5, 0x19}}
 
 // Attach dispatches through ISdoMachine's vtable slot 7.
-func (self *ISdoMachine) Attach(bstrComputerName foundation.BSTR) foundation.HRESULT {
+func (self *ISdoMachine) Attach(bstrComputerName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrComputerName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDictionarySDO dispatches through ISdoMachine's vtable slot 8.
-func (self *ISdoMachine) GetDictionarySDO(ppDictionarySDO **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDictionarySDO)))
-	return foundation.HRESULT(r1)
+func (self *ISdoMachine) GetDictionarySDO() (*systemcom.IUnknown, error) {
+	var _ppDictionarySDO *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDictionarySDO)))
+	return _ppDictionarySDO, win32.HRESULTError(int32(r1))
 }
 
 // GetServiceSDO dispatches through ISdoMachine's vtable slot 9.
-func (self *ISdoMachine) GetServiceSDO(eDataStore IASDATASTORE, bstrServiceName foundation.BSTR, ppServiceSDO **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(eDataStore), uintptr(unsafe.Pointer(bstrServiceName)), uintptr(unsafe.Pointer(ppServiceSDO)))
-	return foundation.HRESULT(r1)
+func (self *ISdoMachine) GetServiceSDO(eDataStore IASDATASTORE, bstrServiceName foundation.BSTR) (*systemcom.IUnknown, error) {
+	var _ppServiceSDO *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(eDataStore), uintptr(unsafe.Pointer(bstrServiceName)), uintptr(unsafe.Pointer(&_ppServiceSDO)))
+	return _ppServiceSDO, win32.HRESULTError(int32(r1))
 }
 
 // GetUserSDO dispatches through ISdoMachine's vtable slot 10.
-func (self *ISdoMachine) GetUserSDO(eDataStore IASDATASTORE, bstrUserName foundation.BSTR, ppUserSDO **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(eDataStore), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(ppUserSDO)))
-	return foundation.HRESULT(r1)
+func (self *ISdoMachine) GetUserSDO(eDataStore IASDATASTORE, bstrUserName foundation.BSTR) (*systemcom.IUnknown, error) {
+	var _ppUserSDO *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(eDataStore), uintptr(unsafe.Pointer(bstrUserName)), uintptr(unsafe.Pointer(&_ppUserSDO)))
+	return _ppUserSDO, win32.HRESULTError(int32(r1))
 }
 
 // GetOSType dispatches through ISdoMachine's vtable slot 11.
-func (self *ISdoMachine) GetOSType(eOSType *IASOSTYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(eOSType)))
-	return foundation.HRESULT(r1)
+func (self *ISdoMachine) GetOSType() (IASOSTYPE, error) {
+	var _eOSType IASOSTYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_eOSType)))
+	return _eOSType, win32.HRESULTError(int32(r1))
 }
 
 // GetDomainType dispatches through ISdoMachine's vtable slot 12.
-func (self *ISdoMachine) GetDomainType(eDomainType *IASDOMAINTYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(eDomainType)))
-	return foundation.HRESULT(r1)
+func (self *ISdoMachine) GetDomainType() (IASDOMAINTYPE, error) {
+	var _eDomainType IASDOMAINTYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_eDomainType)))
+	return _eDomainType, win32.HRESULTError(int32(r1))
 }
 
 // IsDirectoryAvailable dispatches through ISdoMachine's vtable slot 13.
-func (self *ISdoMachine) IsDirectoryAvailable(boolDirectoryAvailable *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(boolDirectoryAvailable)))
-	return foundation.HRESULT(r1)
+func (self *ISdoMachine) IsDirectoryAvailable() (foundation.VARIANT_BOOL, error) {
+	var _boolDirectoryAvailable foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_boolDirectoryAvailable)))
+	return _boolDirectoryAvailable, win32.HRESULTError(int32(r1))
 }
 
 // GetAttachedComputer dispatches through ISdoMachine's vtable slot 14.
-func (self *ISdoMachine) GetAttachedComputer(bstrComputerName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrComputerName)))
-	return foundation.HRESULT(r1)
+func (self *ISdoMachine) GetAttachedComputer() (foundation.BSTR, error) {
+	var _bstrComputerName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_bstrComputerName)))
+	return _bstrComputerName, win32.HRESULTError(int32(r1))
 }
 
 // GetSDOSchema dispatches through ISdoMachine's vtable slot 15.
-func (self *ISdoMachine) GetSDOSchema(ppSDOSchema **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSDOSchema)))
-	return foundation.HRESULT(r1)
+func (self *ISdoMachine) GetSDOSchema() (*systemcom.IUnknown, error) {
+	var _ppSDOSchema *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSDOSchema)))
+	return _ppSDOSchema, win32.HRESULTError(int32(r1))
 }
 
 // IID: 518e5ffe-d8ce-4f7e-a5db-b40a35419d3b
@@ -233,33 +253,34 @@ type ISdoMachine2 struct {
 var IID_ISdoMachine2 = win32.GUID{Data1: 0x518e5ffe, Data2: 0xd8ce, Data3: 0x4f7e, Data4: [8]byte{0xa5, 0xdb, 0xb4, 0x0a, 0x35, 0x41, 0x9d, 0x3b}}
 
 // GetTemplatesSDO dispatches through ISdoMachine2's vtable slot 16.
-func (self *ISdoMachine2) GetTemplatesSDO(bstrServiceName foundation.BSTR, ppTemplatesSDO **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServiceName)), uintptr(unsafe.Pointer(ppTemplatesSDO)))
-	return foundation.HRESULT(r1)
+func (self *ISdoMachine2) GetTemplatesSDO(bstrServiceName foundation.BSTR) (*systemcom.IUnknown, error) {
+	var _ppTemplatesSDO *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServiceName)), uintptr(unsafe.Pointer(&_ppTemplatesSDO)))
+	return _ppTemplatesSDO, win32.HRESULTError(int32(r1))
 }
 
 // EnableTemplates dispatches through ISdoMachine2's vtable slot 17.
-func (self *ISdoMachine2) EnableTemplates() foundation.HRESULT {
+func (self *ISdoMachine2) EnableTemplates() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SyncConfigAgainstTemplates dispatches through ISdoMachine2's vtable slot 18.
-func (self *ISdoMachine2) SyncConfigAgainstTemplates(bstrServiceName foundation.BSTR, ppConfigRoot **systemcom.IUnknown, ppTemplatesRoot **systemcom.IUnknown, bForcedSync foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ISdoMachine2) SyncConfigAgainstTemplates(bstrServiceName foundation.BSTR, ppConfigRoot **systemcom.IUnknown, ppTemplatesRoot **systemcom.IUnknown, bForcedSync foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrServiceName)), uintptr(unsafe.Pointer(ppConfigRoot)), uintptr(unsafe.Pointer(ppTemplatesRoot)), uintptr(bForcedSync))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ImportRemoteTemplates dispatches through ISdoMachine2's vtable slot 19.
-func (self *ISdoMachine2) ImportRemoteTemplates(pLocalTemplatesRoot *systemcom.IUnknown, bstrRemoteMachineName foundation.BSTR) foundation.HRESULT {
+func (self *ISdoMachine2) ImportRemoteTemplates(pLocalTemplatesRoot *systemcom.IUnknown, bstrRemoteMachineName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLocalTemplatesRoot)), uintptr(unsafe.Pointer(bstrRemoteMachineName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reload dispatches through ISdoMachine2's vtable slot 20.
-func (self *ISdoMachine2) Reload() foundation.HRESULT {
+func (self *ISdoMachine2) Reload() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISdoServiceControl: https://learn.microsoft.com/windows/win32/api/sdoias/nn-sdoias-isdoservicecontrol
@@ -272,27 +293,28 @@ type ISdoServiceControl struct {
 var IID_ISdoServiceControl = win32.GUID{Data1: 0x479f6e74, Data2: 0x49a2, Data3: 0x11d2, Data4: [8]byte{0x8e, 0xca, 0x00, 0xc0, 0x4f, 0xc2, 0xf5, 0x19}}
 
 // StartService dispatches through ISdoServiceControl's vtable slot 7.
-func (self *ISdoServiceControl) StartService() foundation.HRESULT {
+func (self *ISdoServiceControl) StartService() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopService dispatches through ISdoServiceControl's vtable slot 8.
-func (self *ISdoServiceControl) StopService() foundation.HRESULT {
+func (self *ISdoServiceControl) StopService() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetServiceStatus dispatches through ISdoServiceControl's vtable slot 9.
-func (self *ISdoServiceControl) GetServiceStatus(status *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(status)))
-	return foundation.HRESULT(r1)
+func (self *ISdoServiceControl) GetServiceStatus() (int32, error) {
+	var _status int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_status)))
+	return _status, win32.HRESULTError(int32(r1))
 }
 
 // ResetService dispatches through ISdoServiceControl's vtable slot 10.
-func (self *ISdoServiceControl) ResetService() foundation.HRESULT {
+func (self *ISdoServiceControl) ResetService() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8aa85302-d2e2-4e20-8b1f-a571e437d6c9
@@ -304,19 +326,19 @@ type ITemplateSdo struct {
 var IID_ITemplateSdo = win32.GUID{Data1: 0x8aa85302, Data2: 0xd2e2, Data3: 0x4e20, Data4: [8]byte{0x8b, 0x1f, 0xa5, 0x71, 0xe4, 0x37, 0xd6, 0xc9}}
 
 // AddToCollection dispatches through ITemplateSdo's vtable slot 14.
-func (self *ITemplateSdo) AddToCollection(bstrName foundation.BSTR, pCollection *systemcom.IDispatch, ppItem **systemcom.IDispatch) foundation.HRESULT {
+func (self *ITemplateSdo) AddToCollection(bstrName foundation.BSTR, pCollection *systemcom.IDispatch, ppItem **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(pCollection)), uintptr(unsafe.Pointer(ppItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddToSdo dispatches through ITemplateSdo's vtable slot 15.
-func (self *ITemplateSdo) AddToSdo(bstrName foundation.BSTR, pSdoTarget *systemcom.IDispatch, ppItem **systemcom.IDispatch) foundation.HRESULT {
+func (self *ITemplateSdo) AddToSdo(bstrName foundation.BSTR, pSdoTarget *systemcom.IDispatch, ppItem **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(pSdoTarget)), uintptr(unsafe.Pointer(ppItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddToSdoAsProperty dispatches through ITemplateSdo's vtable slot 16.
-func (self *ITemplateSdo) AddToSdoAsProperty(pSdoTarget *systemcom.IDispatch, id int32) foundation.HRESULT {
+func (self *ITemplateSdo) AddToSdoAsProperty(pSdoTarget *systemcom.IDispatch, id int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSdoTarget)), uintptr(id))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

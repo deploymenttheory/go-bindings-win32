@@ -41,14 +41,14 @@ type CVStruct struct {
 	Build int16
 }
 
-// CeeSectionRelocExtra is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CeeSectionRelocExtra is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CeeSectionRelocExtra struct {
 	Data [1]uint16
 }
 
-// IMAGE_COR_ILMETHOD is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IMAGE_COR_ILMETHOD is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IMAGE_COR_ILMETHOD struct {
 	Data [3]uint32
 }
@@ -59,14 +59,14 @@ type IMAGE_COR_ILMETHOD_FAT struct {
 	LocalVarSigTok uint32
 }
 
-// IMAGE_COR_ILMETHOD_SECT_EH is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IMAGE_COR_ILMETHOD_SECT_EH is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IMAGE_COR_ILMETHOD_SECT_EH struct {
 	Data [7]uint32
 }
 
-// IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -80,8 +80,8 @@ type IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT struct {
 	Anonymous     IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_FAT_Anonymous_e__Union
 }
 
-// IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IMAGE_COR_ILMETHOD_SECT_EH_CLAUSE_SMALL_Anonymous_e__Union struct {
 	Data [1]uint32
 }

@@ -21,8 +21,8 @@ type HARDWAREINPUT struct {
 	WParamH uint16
 }
 
-// INPUT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INPUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INPUT_Anonymous_e__Union struct {
 	Data [4]uint64
 }

@@ -371,8 +371,8 @@ type DEBUG_POOLTAG_DESCRIPTION struct {
 	Owner        [32]foundation.CHAR
 }
 
-// DEBUG_POOL_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DEBUG_POOL_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DEBUG_POOL_DATA_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -390,8 +390,8 @@ type DEBUG_POOL_DATA struct {
 	PoolTagDescription [64]foundation.CHAR
 }
 
-// DEBUG_PROCESSOR_IDENTIFICATION_ALL is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DEBUG_PROCESSOR_IDENTIFICATION_ALL is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DEBUG_PROCESSOR_IDENTIFICATION_ALL struct {
 	Data [8]uint32
 }
@@ -591,8 +591,8 @@ type DEBUG_TYPED_DATA struct {
 	Internal     [9]uint64
 }
 
-// DEBUG_VALUE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DEBUG_VALUE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DEBUG_VALUE_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -701,8 +701,8 @@ type FA_ENTRY struct {
 	DataSize uint16
 }
 
-// FIELD_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FIELD_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FIELD_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -771,8 +771,8 @@ type GET_TEB_ADDRESS struct {
 	Address uint64
 }
 
-// INLINE_FRAME_CONTEXT is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INLINE_FRAME_CONTEXT is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INLINE_FRAME_CONTEXT struct {
 	Data [1]uint32
 }
@@ -1145,8 +1145,8 @@ type OS_INFO struct {
 	ServicePackString [64]foundation.CHAR
 }
 
-// OS_INFO_v1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// OS_INFO_v1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type OS_INFO_v1_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1197,8 +1197,8 @@ type POINTER_SEARCH_PHYSICAL struct {
 	MatchOffsetsCount uint32
 }
 
-// POOL_HEADER_SIZE_64 is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// POOL_HEADER_SIZE_64 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type POOL_HEADER_SIZE_64 struct {
 	Data [1]uint32
 }
@@ -1282,8 +1282,8 @@ type SYMBOL_INFO_EX struct {
 	Reserved     [4]uint32
 }
 
-// SYM_DUMP_PARAM_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SYM_DUMP_PARAM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SYM_DUMP_PARAM_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1305,8 +1305,8 @@ type SYM_DUMP_PARAM struct {
 	Bitfield        uint32
 }
 
-// ScriptDebugEventInformation_u_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// ScriptDebugEventInformation_u_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type ScriptDebugEventInformation_u_e__Union struct {
 	Data [1]uint64
 }

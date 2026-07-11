@@ -57,279 +57,297 @@ var (
 // DdqCancelDiagnosticRecordOperation calls DiagnosticDataQuery!DdqCancelDiagnosticRecordOperation.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqcanceldiagnosticrecordoperation
 // Minimum OS: windows10.0.19041.
-func DdqCancelDiagnosticRecordOperation(hSession HDIAGNOSTIC_DATA_QUERY_SESSION) foundation.HRESULT {
+func DdqCancelDiagnosticRecordOperation(hSession HDIAGNOSTIC_DATA_QUERY_SESSION) error {
 	r1, _, _ := syscall.SyscallN(procDdqCancelDiagnosticRecordOperation.Addr(), uintptr(hSession))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqCloseSession calls DiagnosticDataQuery!DdqCloseSession.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqclosesession
 // Minimum OS: windows10.0.19041.
-func DdqCloseSession(hSession HDIAGNOSTIC_DATA_QUERY_SESSION) foundation.HRESULT {
+func DdqCloseSession(hSession HDIAGNOSTIC_DATA_QUERY_SESSION) error {
 	r1, _, _ := syscall.SyscallN(procDdqCloseSession.Addr(), uintptr(hSession))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqCreateSession calls DiagnosticDataQuery!DdqCreateSession.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqcreatesession
 // Minimum OS: windows10.0.19041.
-func DdqCreateSession(accessLevel DdqAccessLevel, hSession *HDIAGNOSTIC_DATA_QUERY_SESSION) foundation.HRESULT {
+func DdqCreateSession(accessLevel DdqAccessLevel, hSession *HDIAGNOSTIC_DATA_QUERY_SESSION) error {
 	r1, _, _ := syscall.SyscallN(procDdqCreateSession.Addr(), uintptr(accessLevel), uintptr(unsafe.Pointer(hSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqExtractDiagnosticReport calls DiagnosticDataQuery!DdqExtractDiagnosticReport.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqextractdiagnosticreport
 // Minimum OS: windows10.0.19041.
-func DdqExtractDiagnosticReport(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType uint32, reportKey foundation.PWSTR, destinationPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDdqExtractDiagnosticReport.Addr(), uintptr(hSession), uintptr(reportStoreType), uintptr(unsafe.Pointer(reportKey)), uintptr(unsafe.Pointer(destinationPath)))
-	return foundation.HRESULT(r1)
+func DdqExtractDiagnosticReport(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType uint32, reportKey string, destinationPath string) error {
+	_reportKey := win32.UTF16Ptr(reportKey)
+	_destinationPath := win32.UTF16Ptr(destinationPath)
+	r1, _, _ := syscall.SyscallN(procDdqExtractDiagnosticReport.Addr(), uintptr(hSession), uintptr(reportStoreType), uintptr(unsafe.Pointer(_reportKey)), uintptr(unsafe.Pointer(_destinationPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqFreeDiagnosticRecordLocaleTags calls DiagnosticDataQuery!DdqFreeDiagnosticRecordLocaleTags.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqfreediagnosticrecordlocaletags
 // Minimum OS: windows10.0.19041.
-func DdqFreeDiagnosticRecordLocaleTags(hTagDescription HDIAGNOSTIC_EVENT_TAG_DESCRIPTION) foundation.HRESULT {
+func DdqFreeDiagnosticRecordLocaleTags(hTagDescription HDIAGNOSTIC_EVENT_TAG_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procDdqFreeDiagnosticRecordLocaleTags.Addr(), uintptr(hTagDescription))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqFreeDiagnosticRecordPage calls DiagnosticDataQuery!DdqFreeDiagnosticRecordPage.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqfreediagnosticrecordpage
 // Minimum OS: windows10.0.19041.
-func DdqFreeDiagnosticRecordPage(hRecord HDIAGNOSTIC_RECORD) foundation.HRESULT {
+func DdqFreeDiagnosticRecordPage(hRecord HDIAGNOSTIC_RECORD) error {
 	r1, _, _ := syscall.SyscallN(procDdqFreeDiagnosticRecordPage.Addr(), uintptr(hRecord))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqFreeDiagnosticRecordProducerCategories calls DiagnosticDataQuery!DdqFreeDiagnosticRecordProducerCategories.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqfreediagnosticrecordproducercategories
 // Minimum OS: windows10.0.19041.
-func DdqFreeDiagnosticRecordProducerCategories(hCategoryDescription HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION) foundation.HRESULT {
+func DdqFreeDiagnosticRecordProducerCategories(hCategoryDescription HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procDdqFreeDiagnosticRecordProducerCategories.Addr(), uintptr(hCategoryDescription))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqFreeDiagnosticRecordProducers calls DiagnosticDataQuery!DdqFreeDiagnosticRecordProducers.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqfreediagnosticrecordproducers
 // Minimum OS: windows10.0.19041.
-func DdqFreeDiagnosticRecordProducers(hProducerDescription HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION) foundation.HRESULT {
+func DdqFreeDiagnosticRecordProducers(hProducerDescription HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procDdqFreeDiagnosticRecordProducers.Addr(), uintptr(hProducerDescription))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqFreeDiagnosticReport calls DiagnosticDataQuery!DdqFreeDiagnosticReport.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqfreediagnosticreport
 // Minimum OS: windows10.0.19041.
-func DdqFreeDiagnosticReport(hReport HDIAGNOSTIC_REPORT) foundation.HRESULT {
+func DdqFreeDiagnosticReport(hReport HDIAGNOSTIC_REPORT) error {
 	r1, _, _ := syscall.SyscallN(procDdqFreeDiagnosticReport.Addr(), uintptr(hReport))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticDataAccessLevelAllowed calls DiagnosticDataQuery!DdqGetDiagnosticDataAccessLevelAllowed.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticdataaccesslevelallowed
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticDataAccessLevelAllowed(accessLevel *DdqAccessLevel) foundation.HRESULT {
+func DdqGetDiagnosticDataAccessLevelAllowed(accessLevel *DdqAccessLevel) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticDataAccessLevelAllowed.Addr(), uintptr(unsafe.Pointer(accessLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordAtIndex calls DiagnosticDataQuery!DdqGetDiagnosticRecordAtIndex.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordatindex
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordAtIndex(hRecord HDIAGNOSTIC_RECORD, index uint32, record *DIAGNOSTIC_DATA_RECORD) foundation.HRESULT {
+func DdqGetDiagnosticRecordAtIndex(hRecord HDIAGNOSTIC_RECORD, index uint32, record *DIAGNOSTIC_DATA_RECORD) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordAtIndex.Addr(), uintptr(hRecord), uintptr(index), uintptr(unsafe.Pointer(record)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordBinaryDistribution calls DiagnosticDataQuery!DdqGetDiagnosticRecordBinaryDistribution.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordbinarydistribution
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordBinaryDistribution(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames *foundation.PWSTR, producerNameCount uint32, topNBinaries uint32, binaryStats **DIAGNOSTIC_DATA_EVENT_BINARY_STATS, statCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordBinaryDistribution.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(producerNames)), uintptr(producerNameCount), uintptr(topNBinaries), uintptr(unsafe.Pointer(binaryStats)), uintptr(unsafe.Pointer(statCount)))
-	return foundation.HRESULT(r1)
+func DdqGetDiagnosticRecordBinaryDistribution(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames []foundation.PWSTR, topNBinaries uint32, binaryStats **DIAGNOSTIC_DATA_EVENT_BINARY_STATS, statCount *uint32) error {
+	var _producerNames *foundation.PWSTR
+	if len(producerNames) > 0 {
+		_producerNames = &producerNames[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordBinaryDistribution.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(_producerNames)), uintptr(len(producerNames)), uintptr(topNBinaries), uintptr(unsafe.Pointer(binaryStats)), uintptr(unsafe.Pointer(statCount)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordCategoryAtIndex calls DiagnosticDataQuery!DdqGetDiagnosticRecordCategoryAtIndex.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordcategoryatindex
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordCategoryAtIndex(hCategoryDescription HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION, index uint32, categoryDescription *DIAGNOSTIC_DATA_EVENT_CATEGORY_DESCRIPTION) foundation.HRESULT {
+func DdqGetDiagnosticRecordCategoryAtIndex(hCategoryDescription HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION, index uint32, categoryDescription *DIAGNOSTIC_DATA_EVENT_CATEGORY_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordCategoryAtIndex.Addr(), uintptr(hCategoryDescription), uintptr(index), uintptr(unsafe.Pointer(categoryDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordCategoryCount calls DiagnosticDataQuery!DdqGetDiagnosticRecordCategoryCount.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordcategorycount
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordCategoryCount(hCategoryDescription HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION, categoryDescriptionCount *uint32) foundation.HRESULT {
+func DdqGetDiagnosticRecordCategoryCount(hCategoryDescription HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION, categoryDescriptionCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordCategoryCount.Addr(), uintptr(hCategoryDescription), uintptr(unsafe.Pointer(categoryDescriptionCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordCount calls DiagnosticDataQuery!DdqGetDiagnosticRecordCount.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordcount
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordCount(hRecord HDIAGNOSTIC_RECORD, recordCount *uint32) foundation.HRESULT {
+func DdqGetDiagnosticRecordCount(hRecord HDIAGNOSTIC_RECORD, recordCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordCount.Addr(), uintptr(hRecord), uintptr(unsafe.Pointer(recordCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordLocaleTagAtIndex calls DiagnosticDataQuery!DdqGetDiagnosticRecordLocaleTagAtIndex.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordlocaletagatindex
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordLocaleTagAtIndex(hTagDescription HDIAGNOSTIC_EVENT_TAG_DESCRIPTION, index uint32, tagDescription *DIAGNOSTIC_DATA_EVENT_TAG_DESCRIPTION) foundation.HRESULT {
+func DdqGetDiagnosticRecordLocaleTagAtIndex(hTagDescription HDIAGNOSTIC_EVENT_TAG_DESCRIPTION, index uint32, tagDescription *DIAGNOSTIC_DATA_EVENT_TAG_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordLocaleTagAtIndex.Addr(), uintptr(hTagDescription), uintptr(index), uintptr(unsafe.Pointer(tagDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordLocaleTagCount calls DiagnosticDataQuery!DdqGetDiagnosticRecordLocaleTagCount.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordlocaletagcount
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordLocaleTagCount(hTagDescription HDIAGNOSTIC_EVENT_TAG_DESCRIPTION, tagDescriptionCount *uint32) foundation.HRESULT {
+func DdqGetDiagnosticRecordLocaleTagCount(hTagDescription HDIAGNOSTIC_EVENT_TAG_DESCRIPTION, tagDescriptionCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordLocaleTagCount.Addr(), uintptr(hTagDescription), uintptr(unsafe.Pointer(tagDescriptionCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordLocaleTags calls DiagnosticDataQuery!DdqGetDiagnosticRecordLocaleTags.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordlocaletags
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordLocaleTags(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, locale foundation.PWSTR, hTagDescription *HDIAGNOSTIC_EVENT_TAG_DESCRIPTION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordLocaleTags.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(locale)), uintptr(unsafe.Pointer(hTagDescription)))
-	return foundation.HRESULT(r1)
+func DdqGetDiagnosticRecordLocaleTags(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, locale string, hTagDescription *HDIAGNOSTIC_EVENT_TAG_DESCRIPTION) error {
+	_locale := win32.UTF16Ptr(locale)
+	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordLocaleTags.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(_locale)), uintptr(unsafe.Pointer(hTagDescription)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordPage calls DiagnosticDataQuery!DdqGetDiagnosticRecordPage.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordpage
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordPage(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, searchCriteria *DIAGNOSTIC_DATA_SEARCH_CRITERIA, offset uint32, pageRecordCount uint32, baseRowId int64, hRecord *HDIAGNOSTIC_RECORD) foundation.HRESULT {
+func DdqGetDiagnosticRecordPage(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, searchCriteria *DIAGNOSTIC_DATA_SEARCH_CRITERIA, offset uint32, pageRecordCount uint32, baseRowId int64, hRecord *HDIAGNOSTIC_RECORD) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordPage.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(searchCriteria)), uintptr(offset), uintptr(pageRecordCount), uintptr(baseRowId), uintptr(unsafe.Pointer(hRecord)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordPayload calls DiagnosticDataQuery!DdqGetDiagnosticRecordPayload.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordpayload
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordPayload(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, rowId int64, payload *foundation.PWSTR) foundation.HRESULT {
+func DdqGetDiagnosticRecordPayload(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, rowId int64, payload *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordPayload.Addr(), uintptr(hSession), uintptr(rowId), uintptr(unsafe.Pointer(payload)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordProducerAtIndex calls DiagnosticDataQuery!DdqGetDiagnosticRecordProducerAtIndex.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordproduceratindex
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordProducerAtIndex(hProducerDescription HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION, index uint32, producerDescription *DIAGNOSTIC_DATA_EVENT_PRODUCER_DESCRIPTION) foundation.HRESULT {
+func DdqGetDiagnosticRecordProducerAtIndex(hProducerDescription HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION, index uint32, producerDescription *DIAGNOSTIC_DATA_EVENT_PRODUCER_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordProducerAtIndex.Addr(), uintptr(hProducerDescription), uintptr(index), uintptr(unsafe.Pointer(producerDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordProducerCategories calls DiagnosticDataQuery!DdqGetDiagnosticRecordProducerCategories.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordproducercategories
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordProducerCategories(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, producerName foundation.PWSTR, hCategoryDescription *HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordProducerCategories.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(producerName)), uintptr(unsafe.Pointer(hCategoryDescription)))
-	return foundation.HRESULT(r1)
+func DdqGetDiagnosticRecordProducerCategories(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, producerName string, hCategoryDescription *HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION) error {
+	_producerName := win32.UTF16Ptr(producerName)
+	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordProducerCategories.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(_producerName)), uintptr(unsafe.Pointer(hCategoryDescription)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordProducerCount calls DiagnosticDataQuery!DdqGetDiagnosticRecordProducerCount.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordproducercount
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordProducerCount(hProducerDescription HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION, producerDescriptionCount *uint32) foundation.HRESULT {
+func DdqGetDiagnosticRecordProducerCount(hProducerDescription HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION, producerDescriptionCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordProducerCount.Addr(), uintptr(hProducerDescription), uintptr(unsafe.Pointer(producerDescriptionCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordProducers calls DiagnosticDataQuery!DdqGetDiagnosticRecordProducers.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordproducers
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordProducers(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, hProducerDescription *HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION) foundation.HRESULT {
+func DdqGetDiagnosticRecordProducers(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, hProducerDescription *HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordProducers.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(hProducerDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordStats calls DiagnosticDataQuery!DdqGetDiagnosticRecordStats.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordstats
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordStats(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, searchCriteria *DIAGNOSTIC_DATA_SEARCH_CRITERIA, recordCount *uint32, minRowId *int64, maxRowId *int64) foundation.HRESULT {
+func DdqGetDiagnosticRecordStats(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, searchCriteria *DIAGNOSTIC_DATA_SEARCH_CRITERIA, recordCount *uint32, minRowId *int64, maxRowId *int64) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordStats.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(searchCriteria)), uintptr(unsafe.Pointer(recordCount)), uintptr(unsafe.Pointer(minRowId)), uintptr(unsafe.Pointer(maxRowId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordSummary calls DiagnosticDataQuery!DdqGetDiagnosticRecordSummary.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordsummary
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordSummary(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames *foundation.PWSTR, producerNameCount uint32, generalStats *DIAGNOSTIC_DATA_GENERAL_STATS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordSummary.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(producerNames)), uintptr(producerNameCount), uintptr(unsafe.Pointer(generalStats)))
-	return foundation.HRESULT(r1)
+func DdqGetDiagnosticRecordSummary(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames []foundation.PWSTR, generalStats *DIAGNOSTIC_DATA_GENERAL_STATS) error {
+	var _producerNames *foundation.PWSTR
+	if len(producerNames) > 0 {
+		_producerNames = &producerNames[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordSummary.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(_producerNames)), uintptr(len(producerNames)), uintptr(unsafe.Pointer(generalStats)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticRecordTagDistribution calls DiagnosticDataQuery!DdqGetDiagnosticRecordTagDistribution.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticrecordtagdistribution
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticRecordTagDistribution(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames *foundation.PWSTR, producerNameCount uint32, tagStats **DIAGNOSTIC_DATA_EVENT_TAG_STATS, statCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordTagDistribution.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(producerNames)), uintptr(producerNameCount), uintptr(unsafe.Pointer(tagStats)), uintptr(unsafe.Pointer(statCount)))
-	return foundation.HRESULT(r1)
+func DdqGetDiagnosticRecordTagDistribution(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames []foundation.PWSTR, tagStats **DIAGNOSTIC_DATA_EVENT_TAG_STATS, statCount *uint32) error {
+	var _producerNames *foundation.PWSTR
+	if len(producerNames) > 0 {
+		_producerNames = &producerNames[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticRecordTagDistribution.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(_producerNames)), uintptr(len(producerNames)), uintptr(unsafe.Pointer(tagStats)), uintptr(unsafe.Pointer(statCount)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticReport calls DiagnosticDataQuery!DdqGetDiagnosticReport.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticreport
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticReport(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType uint32, hReport *HDIAGNOSTIC_REPORT) foundation.HRESULT {
+func DdqGetDiagnosticReport(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType uint32, hReport *HDIAGNOSTIC_REPORT) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticReport.Addr(), uintptr(hSession), uintptr(reportStoreType), uintptr(unsafe.Pointer(hReport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticReportAtIndex calls DiagnosticDataQuery!DdqGetDiagnosticReportAtIndex.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticreportatindex
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticReportAtIndex(hReport HDIAGNOSTIC_REPORT, index uint32, report *DIAGNOSTIC_REPORT_DATA) foundation.HRESULT {
+func DdqGetDiagnosticReportAtIndex(hReport HDIAGNOSTIC_REPORT, index uint32, report *DIAGNOSTIC_REPORT_DATA) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticReportAtIndex.Addr(), uintptr(hReport), uintptr(index), uintptr(unsafe.Pointer(report)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticReportCount calls DiagnosticDataQuery!DdqGetDiagnosticReportCount.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticreportcount
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticReportCount(hReport HDIAGNOSTIC_REPORT, reportCount *uint32) foundation.HRESULT {
+func DdqGetDiagnosticReportCount(hReport HDIAGNOSTIC_REPORT, reportCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticReportCount.Addr(), uintptr(hReport), uintptr(unsafe.Pointer(reportCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetDiagnosticReportStoreReportCount calls DiagnosticDataQuery!DdqGetDiagnosticReportStoreReportCount.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetdiagnosticreportstorereportcount
 // Minimum OS: windows10.0.19041.
-func DdqGetDiagnosticReportStoreReportCount(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType uint32, reportCount *uint32) foundation.HRESULT {
+func DdqGetDiagnosticReportStoreReportCount(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType uint32, reportCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetDiagnosticReportStoreReportCount.Addr(), uintptr(hSession), uintptr(reportStoreType), uintptr(unsafe.Pointer(reportCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetSessionAccessLevel calls DiagnosticDataQuery!DdqGetSessionAccessLevel.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgetsessionaccesslevel
 // Minimum OS: windows10.0.19041.
-func DdqGetSessionAccessLevel(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, accessLevel *DdqAccessLevel) foundation.HRESULT {
+func DdqGetSessionAccessLevel(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, accessLevel *DdqAccessLevel) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetSessionAccessLevel.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(accessLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqGetTranscriptConfiguration calls DiagnosticDataQuery!DdqGetTranscriptConfiguration.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqgettranscriptconfiguration
 // Minimum OS: windows10.0.19041.
-func DdqGetTranscriptConfiguration(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, currentConfig *DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION) foundation.HRESULT {
+func DdqGetTranscriptConfiguration(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, currentConfig *DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(procDdqGetTranscriptConfiguration.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(currentConfig)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqIsDiagnosticRecordSampledIn calls DiagnosticDataQuery!DdqIsDiagnosticRecordSampledIn.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqisdiagnosticrecordsampledin
 // Minimum OS: windows10.0.19041.
-func DdqIsDiagnosticRecordSampledIn(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, providerGroup *win32.GUID, providerId *win32.GUID, providerName foundation.PWSTR, eventId *uint32, eventName foundation.PWSTR, eventVersion *uint32, eventKeywords *uint64, isSampledIn *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDdqIsDiagnosticRecordSampledIn.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(providerGroup)), uintptr(unsafe.Pointer(providerId)), uintptr(unsafe.Pointer(providerName)), uintptr(unsafe.Pointer(eventId)), uintptr(unsafe.Pointer(eventName)), uintptr(unsafe.Pointer(eventVersion)), uintptr(unsafe.Pointer(eventKeywords)), uintptr(unsafe.Pointer(isSampledIn)))
-	return foundation.HRESULT(r1)
+func DdqIsDiagnosticRecordSampledIn(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, providerGroup *win32.GUID, providerId *win32.GUID, providerName string, eventId *uint32, eventName string, eventVersion *uint32, eventKeywords *uint64, isSampledIn *foundation.BOOL) error {
+	_providerName := win32.UTF16Ptr(providerName)
+	_eventName := win32.UTF16Ptr(eventName)
+	r1, _, _ := syscall.SyscallN(procDdqIsDiagnosticRecordSampledIn.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(providerGroup)), uintptr(unsafe.Pointer(providerId)), uintptr(unsafe.Pointer(_providerName)), uintptr(unsafe.Pointer(eventId)), uintptr(unsafe.Pointer(_eventName)), uintptr(unsafe.Pointer(eventVersion)), uintptr(unsafe.Pointer(eventKeywords)), uintptr(unsafe.Pointer(isSampledIn)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DdqSetTranscriptConfiguration calls DiagnosticDataQuery!DdqSetTranscriptConfiguration.
 // https://learn.microsoft.com/windows/win32/api/diagnosticdataquery/nf-diagnosticdataquery-ddqsettranscriptconfiguration
 // Minimum OS: windows10.0.19041.
-func DdqSetTranscriptConfiguration(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, desiredConfig *DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION) foundation.HRESULT {
+func DdqSetTranscriptConfiguration(hSession HDIAGNOSTIC_DATA_QUERY_SESSION, desiredConfig *DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(procDdqSetTranscriptConfiguration.Addr(), uintptr(hSession), uintptr(unsafe.Pointer(desiredConfig)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

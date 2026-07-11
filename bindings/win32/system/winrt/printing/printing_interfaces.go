@@ -26,15 +26,15 @@ type IPrintDocumentPageSource struct {
 var IID_IPrintDocumentPageSource = win32.GUID{Data1: 0xa96bb1db, Data2: 0x172e, Data3: 0x4667, Data4: [8]byte{0x82, 0xb5, 0xad, 0x97, 0xa2, 0x52, 0x31, 0x8f}}
 
 // GetPreviewPageCollection dispatches through IPrintDocumentPageSource's vtable slot 3.
-func (self *IPrintDocumentPageSource) GetPreviewPageCollection(docPackageTarget *storagexpsprinting.IPrintDocumentPackageTarget, docPageCollection **IPrintPreviewPageCollection) foundation.HRESULT {
+func (self *IPrintDocumentPageSource) GetPreviewPageCollection(docPackageTarget *storagexpsprinting.IPrintDocumentPackageTarget, docPageCollection **IPrintPreviewPageCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(docPackageTarget)), uintptr(unsafe.Pointer(docPageCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MakeDocument dispatches through IPrintDocumentPageSource's vtable slot 4.
-func (self *IPrintDocumentPageSource) MakeDocument(printTaskOptions *systemwinrt.IInspectable, docPackageTarget *storagexpsprinting.IPrintDocumentPackageTarget) foundation.HRESULT {
+func (self *IPrintDocumentPageSource) MakeDocument(printTaskOptions *systemwinrt.IInspectable, docPackageTarget *storagexpsprinting.IPrintDocumentPackageTarget) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(printTaskOptions)), uintptr(unsafe.Pointer(docPackageTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPrintManagerInterop: https://learn.microsoft.com/windows/win32/api/printmanagerinterop/nn-printmanagerinterop-iprintmanagerinterop
@@ -47,15 +47,15 @@ type IPrintManagerInterop struct {
 var IID_IPrintManagerInterop = win32.GUID{Data1: 0xc5435a42, Data2: 0x8d43, Data3: 0x4e7b, Data4: [8]byte{0xa6, 0x8a, 0xef, 0x31, 0x1e, 0x39, 0x20, 0x87}}
 
 // GetForWindow dispatches through IPrintManagerInterop's vtable slot 6.
-func (self *IPrintManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, printManager *unsafe.Pointer) foundation.HRESULT {
+func (self *IPrintManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, printManager *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(printManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowPrintUIForWindowAsync dispatches through IPrintManagerInterop's vtable slot 7.
-func (self *IPrintManagerInterop) ShowPrintUIForWindowAsync(appWindow foundation.HWND, riid *win32.GUID, asyncOperation *unsafe.Pointer) foundation.HRESULT {
+func (self *IPrintManagerInterop) ShowPrintUIForWindowAsync(appWindow foundation.HWND, riid *win32.GUID, asyncOperation *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(asyncOperation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0b31cc62-d7ec-4747-9d6e-f2537d870f2b
@@ -67,9 +67,9 @@ type IPrintPreviewPageCollection struct {
 var IID_IPrintPreviewPageCollection = win32.GUID{Data1: 0x0b31cc62, Data2: 0xd7ec, Data3: 0x4747, Data4: [8]byte{0x9d, 0x6e, 0xf2, 0x53, 0x7d, 0x87, 0x0f, 0x2b}}
 
 // Paginate dispatches through IPrintPreviewPageCollection's vtable slot 3.
-func (self *IPrintPreviewPageCollection) Paginate(currentJobPage uint32, printTaskOptions *systemwinrt.IInspectable) foundation.HRESULT {
+func (self *IPrintPreviewPageCollection) Paginate(currentJobPage uint32, printTaskOptions *systemwinrt.IInspectable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(currentJobPage), uintptr(unsafe.Pointer(printTaskOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c056be0a-9ee2-450a-9823-964f0006f2bb
@@ -81,21 +81,24 @@ type IPrintWorkflowConfigurationNative struct {
 var IID_IPrintWorkflowConfigurationNative = win32.GUID{Data1: 0xc056be0a, Data2: 0x9ee2, Data3: 0x450a, Data4: [8]byte{0x98, 0x23, 0x96, 0x4f, 0x00, 0x06, 0xf2, 0xbb}}
 
 // Get_PrinterQueue dispatches through IPrintWorkflowConfigurationNative's vtable slot 3.
-func (self *IPrintWorkflowConfigurationNative) Get_PrinterQueue(value **graphicsprinting.IPrinterQueue) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *IPrintWorkflowConfigurationNative) Get_PrinterQueue() (*graphicsprinting.IPrinterQueue, error) {
+	var _value *graphicsprinting.IPrinterQueue
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
+	return _value, win32.HRESULTError(int32(r1))
 }
 
 // Get_DriverProperties dispatches through IPrintWorkflowConfigurationNative's vtable slot 4.
-func (self *IPrintWorkflowConfigurationNative) Get_DriverProperties(value **graphicsprinting.IPrinterPropertyBag) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *IPrintWorkflowConfigurationNative) Get_DriverProperties() (*graphicsprinting.IPrinterPropertyBag, error) {
+	var _value *graphicsprinting.IPrinterPropertyBag
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
+	return _value, win32.HRESULTError(int32(r1))
 }
 
 // Get_UserProperties dispatches through IPrintWorkflowConfigurationNative's vtable slot 5.
-func (self *IPrintWorkflowConfigurationNative) Get_UserProperties(value **graphicsprinting.IPrinterPropertyBag) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *IPrintWorkflowConfigurationNative) Get_UserProperties() (*graphicsprinting.IPrinterPropertyBag, error) {
+	var _value *graphicsprinting.IPrinterPropertyBag
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
+	return _value, win32.HRESULTError(int32(r1))
 }
 
 // IID: 68c9e477-993e-4052-8ac6-454eff58db9d
@@ -107,15 +110,16 @@ type IPrintWorkflowObjectModelSourceFileContentNative struct {
 var IID_IPrintWorkflowObjectModelSourceFileContentNative = win32.GUID{Data1: 0x68c9e477, Data2: 0x993e, Data3: 0x4052, Data4: [8]byte{0x8a, 0xc6, 0x45, 0x4e, 0xff, 0x58, 0xdb, 0x9d}}
 
 // StartXpsOMGeneration dispatches through IPrintWorkflowObjectModelSourceFileContentNative's vtable slot 3.
-func (self *IPrintWorkflowObjectModelSourceFileContentNative) StartXpsOMGeneration(receiver *IPrintWorkflowXpsReceiver) foundation.HRESULT {
+func (self *IPrintWorkflowObjectModelSourceFileContentNative) StartXpsOMGeneration(receiver *IPrintWorkflowXpsReceiver) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(receiver)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ObjectFactory dispatches through IPrintWorkflowObjectModelSourceFileContentNative's vtable slot 4.
-func (self *IPrintWorkflowObjectModelSourceFileContentNative) Get_ObjectFactory(value **storagexps.IXpsOMObjectFactory1) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *IPrintWorkflowObjectModelSourceFileContentNative) Get_ObjectFactory() (*storagexps.IXpsOMObjectFactory1, error) {
+	var _value *storagexps.IXpsOMObjectFactory1
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
+	return _value, win32.HRESULTError(int32(r1))
 }
 
 // IID: 7d96bc74-9b54-4ca1-ad3a-979c3d44ddac
@@ -127,9 +131,10 @@ type IPrintWorkflowXpsObjectModelTargetPackageNative struct {
 var IID_IPrintWorkflowXpsObjectModelTargetPackageNative = win32.GUID{Data1: 0x7d96bc74, Data2: 0x9b54, Data3: 0x4ca1, Data4: [8]byte{0xad, 0x3a, 0x97, 0x9c, 0x3d, 0x44, 0xdd, 0xac}}
 
 // Get_DocumentPackageTarget dispatches through IPrintWorkflowXpsObjectModelTargetPackageNative's vtable slot 3.
-func (self *IPrintWorkflowXpsObjectModelTargetPackageNative) Get_DocumentPackageTarget(value **storagexps.IXpsDocumentPackageTarget) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *IPrintWorkflowXpsObjectModelTargetPackageNative) Get_DocumentPackageTarget() (*storagexps.IXpsDocumentPackageTarget, error) {
+	var _value *storagexps.IXpsDocumentPackageTarget
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
+	return _value, win32.HRESULTError(int32(r1))
 }
 
 // IID: 04097374-77b8-47f6-8167-aae29d4cf84b
@@ -141,33 +146,36 @@ type IPrintWorkflowXpsReceiver struct {
 var IID_IPrintWorkflowXpsReceiver = win32.GUID{Data1: 0x04097374, Data2: 0x77b8, Data3: 0x47f6, Data4: [8]byte{0x81, 0x67, 0xaa, 0xe2, 0x9d, 0x4c, 0xf8, 0x4b}}
 
 // SetDocumentSequencePrintTicket dispatches through IPrintWorkflowXpsReceiver's vtable slot 3.
-func (self *IPrintWorkflowXpsReceiver) SetDocumentSequencePrintTicket(documentSequencePrintTicket *systemcom.IStream) foundation.HRESULT {
+func (self *IPrintWorkflowXpsReceiver) SetDocumentSequencePrintTicket(documentSequencePrintTicket *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(documentSequencePrintTicket)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDocumentSequenceUri dispatches through IPrintWorkflowXpsReceiver's vtable slot 4.
-func (self *IPrintWorkflowXpsReceiver) SetDocumentSequenceUri(documentSequenceUri foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(documentSequenceUri)))
-	return foundation.HRESULT(r1)
+func (self *IPrintWorkflowXpsReceiver) SetDocumentSequenceUri(documentSequenceUri string) error {
+	_documentSequenceUri := win32.UTF16Ptr(documentSequenceUri)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_documentSequenceUri)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDocumentData dispatches through IPrintWorkflowXpsReceiver's vtable slot 5.
-func (self *IPrintWorkflowXpsReceiver) AddDocumentData(documentId uint32, documentPrintTicket *systemcom.IStream, documentUri foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(documentId), uintptr(unsafe.Pointer(documentPrintTicket)), uintptr(unsafe.Pointer(documentUri)))
-	return foundation.HRESULT(r1)
+func (self *IPrintWorkflowXpsReceiver) AddDocumentData(documentId uint32, documentPrintTicket *systemcom.IStream, documentUri string) error {
+	_documentUri := win32.UTF16Ptr(documentUri)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(documentId), uintptr(unsafe.Pointer(documentPrintTicket)), uintptr(unsafe.Pointer(_documentUri)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddPage dispatches through IPrintWorkflowXpsReceiver's vtable slot 6.
-func (self *IPrintWorkflowXpsReceiver) AddPage(documentId uint32, pageId uint32, pageReference *storagexps.IXpsOMPageReference, pageUri foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(documentId), uintptr(pageId), uintptr(unsafe.Pointer(pageReference)), uintptr(unsafe.Pointer(pageUri)))
-	return foundation.HRESULT(r1)
+func (self *IPrintWorkflowXpsReceiver) AddPage(documentId uint32, pageId uint32, pageReference *storagexps.IXpsOMPageReference, pageUri string) error {
+	_pageUri := win32.UTF16Ptr(pageUri)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(documentId), uintptr(pageId), uintptr(unsafe.Pointer(pageReference)), uintptr(unsafe.Pointer(_pageUri)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IPrintWorkflowXpsReceiver's vtable slot 7.
-func (self *IPrintWorkflowXpsReceiver) Close() foundation.HRESULT {
+func (self *IPrintWorkflowXpsReceiver) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 023bcc0c-dfab-4a61-b074-490c6995580d
@@ -179,9 +187,9 @@ type IPrintWorkflowXpsReceiver2 struct {
 var IID_IPrintWorkflowXpsReceiver2 = win32.GUID{Data1: 0x023bcc0c, Data2: 0xdfab, Data3: 0x4a61, Data4: [8]byte{0xb0, 0x74, 0x49, 0x0c, 0x69, 0x95, 0x58, 0x0d}}
 
 // Failed dispatches through IPrintWorkflowXpsReceiver2's vtable slot 8.
-func (self *IPrintWorkflowXpsReceiver2) Failed(XpsError foundation.HRESULT) foundation.HRESULT {
+func (self *IPrintWorkflowXpsReceiver2) Failed(XpsError foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(XpsError))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPrinting3DManagerInterop: https://learn.microsoft.com/windows/win32/api/print3dmanagerinterop/nn-print3dmanagerinterop-iprinting3dmanagerinterop
@@ -194,13 +202,13 @@ type IPrinting3DManagerInterop struct {
 var IID_IPrinting3DManagerInterop = win32.GUID{Data1: 0x9ca31010, Data2: 0x1484, Data3: 0x4587, Data4: [8]byte{0xb2, 0x6b, 0xdd, 0xdf, 0x9f, 0x9c, 0xae, 0xcd}}
 
 // GetForWindow dispatches through IPrinting3DManagerInterop's vtable slot 6.
-func (self *IPrinting3DManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, printManager *unsafe.Pointer) foundation.HRESULT {
+func (self *IPrinting3DManagerInterop) GetForWindow(appWindow foundation.HWND, riid *win32.GUID, printManager *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(printManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowPrintUIForWindowAsync dispatches through IPrinting3DManagerInterop's vtable slot 7.
-func (self *IPrinting3DManagerInterop) ShowPrintUIForWindowAsync(appWindow foundation.HWND, riid *win32.GUID, asyncOperation *unsafe.Pointer) foundation.HRESULT {
+func (self *IPrinting3DManagerInterop) ShowPrintUIForWindowAsync(appWindow foundation.HWND, riid *win32.GUID, asyncOperation *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(appWindow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(asyncOperation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

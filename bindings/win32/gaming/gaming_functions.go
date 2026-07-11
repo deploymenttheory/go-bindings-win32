@@ -57,193 +57,210 @@ var (
 )
 
 // CheckGamingPrivilegeSilently calls api-ms-win-gaming-tcui-l1-1-1!CheckGamingPrivilegeSilently.
-func CheckGamingPrivilegeSilently(privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, hasPrivilege *foundation.BOOL) foundation.HRESULT {
+func CheckGamingPrivilegeSilently(privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, hasPrivilege *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procCheckGamingPrivilegeSilently.Addr(), uintptr(privilegeId), uintptr(scope), uintptr(policy), uintptr(unsafe.Pointer(hasPrivilege)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckGamingPrivilegeSilentlyForUser calls api-ms-win-gaming-tcui-l1-1-2!CheckGamingPrivilegeSilentlyForUser.
-func CheckGamingPrivilegeSilentlyForUser(user *systemwinrt.IInspectable, privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, hasPrivilege *foundation.BOOL) foundation.HRESULT {
+func CheckGamingPrivilegeSilentlyForUser(user *systemwinrt.IInspectable, privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, hasPrivilege *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procCheckGamingPrivilegeSilentlyForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(privilegeId), uintptr(scope), uintptr(policy), uintptr(unsafe.Pointer(hasPrivilege)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckGamingPrivilegeWithUI calls api-ms-win-gaming-tcui-l1-1-1!CheckGamingPrivilegeWithUI.
 // https://learn.microsoft.com/windows/win32/api/gamingtcui/nf-gamingtcui-checkgamingprivilegewithui
-func CheckGamingPrivilegeWithUI(privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, friendlyMessage systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func CheckGamingPrivilegeWithUI(privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, friendlyMessage systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCheckGamingPrivilegeWithUI.Addr(), uintptr(privilegeId), uintptr(scope), uintptr(policy), uintptr(friendlyMessage), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckGamingPrivilegeWithUIForUser calls api-ms-win-gaming-tcui-l1-1-2!CheckGamingPrivilegeWithUIForUser.
-func CheckGamingPrivilegeWithUIForUser(user *systemwinrt.IInspectable, privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, friendlyMessage systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func CheckGamingPrivilegeWithUIForUser(user *systemwinrt.IInspectable, privilegeId uint32, scope systemwinrt.HSTRING, policy systemwinrt.HSTRING, friendlyMessage systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCheckGamingPrivilegeWithUIForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(privilegeId), uintptr(scope), uintptr(policy), uintptr(friendlyMessage), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetExpandedResourceExclusiveCpuCount calls api-ms-win-gaming-expandedresources-l1-1-0!GetExpandedResourceExclusiveCpuCount.
 // https://learn.microsoft.com/windows/win32/api/expandedresources/nf-expandedresources-getexpandedresourceexclusivecpucount
-func GetExpandedResourceExclusiveCpuCount(exclusiveCpuCount *uint32) foundation.HRESULT {
+func GetExpandedResourceExclusiveCpuCount(exclusiveCpuCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetExpandedResourceExclusiveCpuCount.Addr(), uintptr(unsafe.Pointer(exclusiveCpuCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGamingDeviceModelInformation calls api-ms-win-gaming-deviceinformation-l1-1-0!GetGamingDeviceModelInformation.
 // https://learn.microsoft.com/windows/win32/api/gamingdeviceinformation/nf-gamingdeviceinformation-getgamingdevicemodelinformation
-func GetGamingDeviceModelInformation(information *GAMING_DEVICE_MODEL_INFORMATION) foundation.HRESULT {
+func GetGamingDeviceModelInformation(information *GAMING_DEVICE_MODEL_INFORMATION) error {
 	r1, _, _ := syscall.SyscallN(procGetGamingDeviceModelInformation.Addr(), uintptr(unsafe.Pointer(information)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HasExpandedResources calls api-ms-win-gaming-expandedresources-l1-1-0!HasExpandedResources.
 // https://learn.microsoft.com/windows/win32/api/expandedresources/nf-expandedresources-hasexpandedresources
-func HasExpandedResources(hasExpandedResources *foundation.BOOL) foundation.HRESULT {
+func HasExpandedResources(hasExpandedResources *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procHasExpandedResources.Addr(), uintptr(unsafe.Pointer(hasExpandedResources)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessPendingGameUI calls api-ms-win-gaming-tcui-l1-1-0!ProcessPendingGameUI.
 // https://learn.microsoft.com/windows/win32/api/gamingtcui/nf-gamingtcui-processpendinggameui
-func ProcessPendingGameUI(waitForCompletion foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procProcessPendingGameUI.Addr(), uintptr(waitForCompletion))
-	return foundation.HRESULT(r1)
+func ProcessPendingGameUI(waitForCompletion bool) error {
+	_waitForCompletion := win32.Bool32(waitForCompletion)
+	r1, _, _ := syscall.SyscallN(procProcessPendingGameUI.Addr(), uintptr(_waitForCompletion))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseExclusiveCpuSets calls api-ms-win-gaming-expandedresources-l1-1-0!ReleaseExclusiveCpuSets.
 // https://learn.microsoft.com/windows/win32/api/expandedresources/nf-expandedresources-releaseexclusivecpusets
-func ReleaseExclusiveCpuSets() foundation.HRESULT {
+func ReleaseExclusiveCpuSets() error {
 	r1, _, _ := syscall.SyscallN(procReleaseExclusiveCpuSets.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowChangeFriendRelationshipUI calls api-ms-win-gaming-tcui-l1-1-0!ShowChangeFriendRelationshipUI.
 // https://learn.microsoft.com/windows/win32/api/gamingtcui/nf-gamingtcui-showchangefriendrelationshipui
-func ShowChangeFriendRelationshipUI(targetUserXuid systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowChangeFriendRelationshipUI(targetUserXuid systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowChangeFriendRelationshipUI.Addr(), uintptr(targetUserXuid), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowChangeFriendRelationshipUIForUser calls api-ms-win-gaming-tcui-l1-1-2!ShowChangeFriendRelationshipUIForUser.
-func ShowChangeFriendRelationshipUIForUser(user *systemwinrt.IInspectable, targetUserXuid systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowChangeFriendRelationshipUIForUser(user *systemwinrt.IInspectable, targetUserXuid systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowChangeFriendRelationshipUIForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(targetUserXuid), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowCustomizeUserProfileUI calls api-ms-win-gaming-tcui-l1-1-4!ShowCustomizeUserProfileUI.
-func ShowCustomizeUserProfileUI(completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowCustomizeUserProfileUI(completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowCustomizeUserProfileUI.Addr(), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowCustomizeUserProfileUIForUser calls api-ms-win-gaming-tcui-l1-1-4!ShowCustomizeUserProfileUIForUser.
-func ShowCustomizeUserProfileUIForUser(user *systemwinrt.IInspectable, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowCustomizeUserProfileUIForUser(user *systemwinrt.IInspectable, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowCustomizeUserProfileUIForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowFindFriendsUI calls api-ms-win-gaming-tcui-l1-1-4!ShowFindFriendsUI.
-func ShowFindFriendsUI(completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowFindFriendsUI(completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowFindFriendsUI.Addr(), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowFindFriendsUIForUser calls api-ms-win-gaming-tcui-l1-1-4!ShowFindFriendsUIForUser.
-func ShowFindFriendsUIForUser(user *systemwinrt.IInspectable, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowFindFriendsUIForUser(user *systemwinrt.IInspectable, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowFindFriendsUIForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowGameInfoUI calls api-ms-win-gaming-tcui-l1-1-4!ShowGameInfoUI.
-func ShowGameInfoUI(titleId uint32, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowGameInfoUI(titleId uint32, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowGameInfoUI.Addr(), uintptr(titleId), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowGameInfoUIForUser calls api-ms-win-gaming-tcui-l1-1-4!ShowGameInfoUIForUser.
-func ShowGameInfoUIForUser(user *systemwinrt.IInspectable, titleId uint32, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowGameInfoUIForUser(user *systemwinrt.IInspectable, titleId uint32, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowGameInfoUIForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(titleId), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowGameInviteUI calls api-ms-win-gaming-tcui-l1-1-0!ShowGameInviteUI.
 // https://learn.microsoft.com/windows/win32/api/gamingtcui/nf-gamingtcui-showgameinviteui
-func ShowGameInviteUI(serviceConfigurationId systemwinrt.HSTRING, sessionTemplateName systemwinrt.HSTRING, sessionId systemwinrt.HSTRING, invitationDisplayText systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowGameInviteUI(serviceConfigurationId systemwinrt.HSTRING, sessionTemplateName systemwinrt.HSTRING, sessionId systemwinrt.HSTRING, invitationDisplayText systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowGameInviteUI.Addr(), uintptr(serviceConfigurationId), uintptr(sessionTemplateName), uintptr(sessionId), uintptr(invitationDisplayText), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowGameInviteUIForUser calls api-ms-win-gaming-tcui-l1-1-2!ShowGameInviteUIForUser.
-func ShowGameInviteUIForUser(user *systemwinrt.IInspectable, serviceConfigurationId systemwinrt.HSTRING, sessionTemplateName systemwinrt.HSTRING, sessionId systemwinrt.HSTRING, invitationDisplayText systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowGameInviteUIForUser(user *systemwinrt.IInspectable, serviceConfigurationId systemwinrt.HSTRING, sessionTemplateName systemwinrt.HSTRING, sessionId systemwinrt.HSTRING, invitationDisplayText systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowGameInviteUIForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(serviceConfigurationId), uintptr(sessionTemplateName), uintptr(sessionId), uintptr(invitationDisplayText), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowGameInviteUIWithContext calls api-ms-win-gaming-tcui-l1-1-3!ShowGameInviteUIWithContext.
-func ShowGameInviteUIWithContext(serviceConfigurationId systemwinrt.HSTRING, sessionTemplateName systemwinrt.HSTRING, sessionId systemwinrt.HSTRING, invitationDisplayText systemwinrt.HSTRING, customActivationContext systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowGameInviteUIWithContext(serviceConfigurationId systemwinrt.HSTRING, sessionTemplateName systemwinrt.HSTRING, sessionId systemwinrt.HSTRING, invitationDisplayText systemwinrt.HSTRING, customActivationContext systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowGameInviteUIWithContext.Addr(), uintptr(serviceConfigurationId), uintptr(sessionTemplateName), uintptr(sessionId), uintptr(invitationDisplayText), uintptr(customActivationContext), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowGameInviteUIWithContextForUser calls api-ms-win-gaming-tcui-l1-1-3!ShowGameInviteUIWithContextForUser.
-func ShowGameInviteUIWithContextForUser(user *systemwinrt.IInspectable, serviceConfigurationId systemwinrt.HSTRING, sessionTemplateName systemwinrt.HSTRING, sessionId systemwinrt.HSTRING, invitationDisplayText systemwinrt.HSTRING, customActivationContext systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowGameInviteUIWithContextForUser(user *systemwinrt.IInspectable, serviceConfigurationId systemwinrt.HSTRING, sessionTemplateName systemwinrt.HSTRING, sessionId systemwinrt.HSTRING, invitationDisplayText systemwinrt.HSTRING, customActivationContext systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowGameInviteUIWithContextForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(serviceConfigurationId), uintptr(sessionTemplateName), uintptr(sessionId), uintptr(invitationDisplayText), uintptr(customActivationContext), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowPlayerPickerUI calls api-ms-win-gaming-tcui-l1-1-0!ShowPlayerPickerUI.
 // https://learn.microsoft.com/windows/win32/api/gamingtcui/nf-gamingtcui-showplayerpickerui
-func ShowPlayerPickerUI(promptDisplayText systemwinrt.HSTRING, xuids *systemwinrt.HSTRING, xuidsCount uintptr, preSelectedXuids *systemwinrt.HSTRING, preSelectedXuidsCount uintptr, minSelectionCount uintptr, maxSelectionCount uintptr, completionRoutine PlayerPickerUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procShowPlayerPickerUI.Addr(), uintptr(promptDisplayText), uintptr(unsafe.Pointer(xuids)), uintptr(xuidsCount), uintptr(unsafe.Pointer(preSelectedXuids)), uintptr(preSelectedXuidsCount), uintptr(minSelectionCount), uintptr(maxSelectionCount), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+func ShowPlayerPickerUI(promptDisplayText systemwinrt.HSTRING, xuids []systemwinrt.HSTRING, preSelectedXuids []systemwinrt.HSTRING, minSelectionCount uintptr, maxSelectionCount uintptr, completionRoutine PlayerPickerUICompletionRoutine, context unsafe.Pointer) error {
+	var _xuids *systemwinrt.HSTRING
+	if len(xuids) > 0 {
+		_xuids = &xuids[0]
+	}
+	var _preSelectedXuids *systemwinrt.HSTRING
+	if len(preSelectedXuids) > 0 {
+		_preSelectedXuids = &preSelectedXuids[0]
+	}
+	r1, _, _ := syscall.SyscallN(procShowPlayerPickerUI.Addr(), uintptr(promptDisplayText), uintptr(unsafe.Pointer(_xuids)), uintptr(len(xuids)), uintptr(unsafe.Pointer(_preSelectedXuids)), uintptr(len(preSelectedXuids)), uintptr(minSelectionCount), uintptr(maxSelectionCount), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowPlayerPickerUIForUser calls api-ms-win-gaming-tcui-l1-1-2!ShowPlayerPickerUIForUser.
-func ShowPlayerPickerUIForUser(user *systemwinrt.IInspectable, promptDisplayText systemwinrt.HSTRING, xuids *systemwinrt.HSTRING, xuidsCount uintptr, preSelectedXuids *systemwinrt.HSTRING, preSelectedXuidsCount uintptr, minSelectionCount uintptr, maxSelectionCount uintptr, completionRoutine PlayerPickerUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procShowPlayerPickerUIForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(promptDisplayText), uintptr(unsafe.Pointer(xuids)), uintptr(xuidsCount), uintptr(unsafe.Pointer(preSelectedXuids)), uintptr(preSelectedXuidsCount), uintptr(minSelectionCount), uintptr(maxSelectionCount), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+func ShowPlayerPickerUIForUser(user *systemwinrt.IInspectable, promptDisplayText systemwinrt.HSTRING, xuids []systemwinrt.HSTRING, preSelectedXuids []systemwinrt.HSTRING, minSelectionCount uintptr, maxSelectionCount uintptr, completionRoutine PlayerPickerUICompletionRoutine, context unsafe.Pointer) error {
+	var _xuids *systemwinrt.HSTRING
+	if len(xuids) > 0 {
+		_xuids = &xuids[0]
+	}
+	var _preSelectedXuids *systemwinrt.HSTRING
+	if len(preSelectedXuids) > 0 {
+		_preSelectedXuids = &preSelectedXuids[0]
+	}
+	r1, _, _ := syscall.SyscallN(procShowPlayerPickerUIForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(promptDisplayText), uintptr(unsafe.Pointer(_xuids)), uintptr(len(xuids)), uintptr(unsafe.Pointer(_preSelectedXuids)), uintptr(len(preSelectedXuids)), uintptr(minSelectionCount), uintptr(maxSelectionCount), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowProfileCardUI calls api-ms-win-gaming-tcui-l1-1-0!ShowProfileCardUI.
 // https://learn.microsoft.com/windows/win32/api/gamingtcui/nf-gamingtcui-showprofilecardui
-func ShowProfileCardUI(targetUserXuid systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowProfileCardUI(targetUserXuid systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowProfileCardUI.Addr(), uintptr(targetUserXuid), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowProfileCardUIForUser calls api-ms-win-gaming-tcui-l1-1-2!ShowProfileCardUIForUser.
-func ShowProfileCardUIForUser(user *systemwinrt.IInspectable, targetUserXuid systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowProfileCardUIForUser(user *systemwinrt.IInspectable, targetUserXuid systemwinrt.HSTRING, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowProfileCardUIForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(targetUserXuid), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowTitleAchievementsUI calls api-ms-win-gaming-tcui-l1-1-0!ShowTitleAchievementsUI.
 // https://learn.microsoft.com/windows/win32/api/gamingtcui/nf-gamingtcui-showtitleachievementsui
-func ShowTitleAchievementsUI(titleId uint32, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowTitleAchievementsUI(titleId uint32, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowTitleAchievementsUI.Addr(), uintptr(titleId), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowTitleAchievementsUIForUser calls api-ms-win-gaming-tcui-l1-1-2!ShowTitleAchievementsUIForUser.
-func ShowTitleAchievementsUIForUser(user *systemwinrt.IInspectable, titleId uint32, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowTitleAchievementsUIForUser(user *systemwinrt.IInspectable, titleId uint32, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowTitleAchievementsUIForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(titleId), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowUserSettingsUI calls api-ms-win-gaming-tcui-l1-1-4!ShowUserSettingsUI.
-func ShowUserSettingsUI(completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowUserSettingsUI(completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowUserSettingsUI.Addr(), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowUserSettingsUIForUser calls api-ms-win-gaming-tcui-l1-1-4!ShowUserSettingsUIForUser.
-func ShowUserSettingsUIForUser(user *systemwinrt.IInspectable, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) foundation.HRESULT {
+func ShowUserSettingsUIForUser(user *systemwinrt.IInspectable, completionRoutine GameUICompletionRoutine, context unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procShowUserSettingsUIForUser.Addr(), uintptr(unsafe.Pointer(user)), uintptr(completionRoutine), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TryCancelPendingGameUI calls api-ms-win-gaming-tcui-l1-1-0!TryCancelPendingGameUI.
 // https://learn.microsoft.com/windows/win32/api/gamingtcui/nf-gamingtcui-trycancelpendinggameui
-func TryCancelPendingGameUI() foundation.BOOL {
+func TryCancelPendingGameUI() bool {
 	r1, _, _ := syscall.SyscallN(procTryCancelPendingGameUI.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }

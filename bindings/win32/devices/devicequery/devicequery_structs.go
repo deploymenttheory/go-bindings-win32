@@ -30,8 +30,8 @@ type DEV_QUERY_PARAMETER struct {
 	Buffer     unsafe.Pointer
 }
 
-// DEV_QUERY_RESULT_ACTION_DATA_DEV_QUERY_RESULT_UPDATE_PAYLOAD is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DEV_QUERY_RESULT_ACTION_DATA_DEV_QUERY_RESULT_UPDATE_PAYLOAD is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DEV_QUERY_RESULT_ACTION_DATA_DEV_QUERY_RESULT_UPDATE_PAYLOAD struct {
 	Data [4]uint64
 }

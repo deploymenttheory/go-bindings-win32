@@ -32,21 +32,21 @@ type IWPCProviderConfig struct {
 var IID_IWPCProviderConfig = win32.GUID{Data1: 0xbef54196, Data2: 0x2d02, Data3: 0x4a26, Data4: [8]byte{0xb6, 0xe5, 0xd6, 0x5a, 0xf2, 0x95, 0xd0, 0xf1}}
 
 // GetUserSummary dispatches through IWPCProviderConfig's vtable slot 3.
-func (self *IWPCProviderConfig) GetUserSummary(bstrSID foundation.BSTR, pbstrUserSummary *foundation.BSTR) foundation.HRESULT {
+func (self *IWPCProviderConfig) GetUserSummary(bstrSID foundation.BSTR, pbstrUserSummary *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrSID)), uintptr(unsafe.Pointer(pbstrUserSummary)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Configure dispatches through IWPCProviderConfig's vtable slot 4.
-func (self *IWPCProviderConfig) Configure(hWnd foundation.HWND, bstrSID foundation.BSTR) foundation.HRESULT {
+func (self *IWPCProviderConfig) Configure(hWnd foundation.HWND, bstrSID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(bstrSID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RequestOverride dispatches through IWPCProviderConfig's vtable slot 5.
-func (self *IWPCProviderConfig) RequestOverride(hWnd foundation.HWND, bstrPath foundation.BSTR, dwFlags uint32) foundation.HRESULT {
+func (self *IWPCProviderConfig) RequestOverride(hWnd foundation.HWND, bstrPath foundation.BSTR, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(bstrPath)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWPCProviderState: https://learn.microsoft.com/windows/win32/api/wpcapi/nn-wpcapi-iwpcproviderstate
@@ -59,15 +59,15 @@ type IWPCProviderState struct {
 var IID_IWPCProviderState = win32.GUID{Data1: 0x50b6a267, Data2: 0xc4bd, Data3: 0x450b, Data4: [8]byte{0xad, 0xb5, 0x75, 0x90, 0x73, 0x83, 0x7c, 0x9e}}
 
 // Enable dispatches through IWPCProviderState's vtable slot 3.
-func (self *IWPCProviderState) Enable() foundation.HRESULT {
+func (self *IWPCProviderState) Enable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disable dispatches through IWPCProviderState's vtable slot 4.
-func (self *IWPCProviderState) Disable() foundation.HRESULT {
+func (self *IWPCProviderState) Disable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWPCProviderSupport: https://learn.microsoft.com/windows/win32/api/wpcapi/nn-wpcapi-iwpcprovidersupport
@@ -80,9 +80,9 @@ type IWPCProviderSupport struct {
 var IID_IWPCProviderSupport = win32.GUID{Data1: 0x41eba572, Data2: 0x23ed, Data3: 0x4779, Data4: [8]byte{0xbe, 0xc1, 0x8d, 0xf9, 0x62, 0x06, 0xc4, 0x4c}}
 
 // GetCurrent dispatches through IWPCProviderSupport's vtable slot 3.
-func (self *IWPCProviderSupport) GetCurrent(pguidProvider *win32.GUID) foundation.HRESULT {
+func (self *IWPCProviderSupport) GetCurrent(pguidProvider *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWPCSettings: https://learn.microsoft.com/windows/win32/api/wpcapi/nn-wpcapi-iwpcsettings
@@ -95,21 +95,21 @@ type IWPCSettings struct {
 var IID_IWPCSettings = win32.GUID{Data1: 0x8fdf6ca1, Data2: 0x0189, Data3: 0x47e4, Data4: [8]byte{0xb6, 0x70, 0x1a, 0x8a, 0x46, 0x36, 0xe3, 0x40}}
 
 // IsLoggingRequired dispatches through IWPCSettings's vtable slot 3.
-func (self *IWPCSettings) IsLoggingRequired(pfRequired *foundation.BOOL) foundation.HRESULT {
+func (self *IWPCSettings) IsLoggingRequired(pfRequired *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfRequired)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLastSettingsChangeTime dispatches through IWPCSettings's vtable slot 4.
-func (self *IWPCSettings) GetLastSettingsChangeTime(pTime *foundation.SYSTEMTIME) foundation.HRESULT {
+func (self *IWPCSettings) GetLastSettingsChangeTime(pTime *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRestrictions dispatches through IWPCSettings's vtable slot 5.
-func (self *IWPCSettings) GetRestrictions(pdwRestrictions *WPCFLAG_RESTRICTION) foundation.HRESULT {
+func (self *IWPCSettings) GetRestrictions(pdwRestrictions *WPCFLAG_RESTRICTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwRestrictions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWPCWebSettings: https://learn.microsoft.com/windows/win32/api/wpcapi/nn-wpcapi-iwpcwebsettings
@@ -122,15 +122,16 @@ type IWPCWebSettings struct {
 var IID_IWPCWebSettings = win32.GUID{Data1: 0xffccbdb8, Data2: 0x0992, Data3: 0x4c30, Data4: [8]byte{0xb0, 0xf1, 0x1c, 0xbb, 0x09, 0xc2, 0x40, 0xaa}}
 
 // GetSettings dispatches through IWPCWebSettings's vtable slot 6.
-func (self *IWPCWebSettings) GetSettings(pdwSettings *WPCFLAG_WEB_SETTING) foundation.HRESULT {
+func (self *IWPCWebSettings) GetSettings(pdwSettings *WPCFLAG_WEB_SETTING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSettings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RequestURLOverride dispatches through IWPCWebSettings's vtable slot 7.
-func (self *IWPCWebSettings) RequestURLOverride(hWnd foundation.HWND, pcszURL foundation.PWSTR, cURLs uint32, ppcszSubURLs *foundation.PWSTR, pfChanged *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(pcszURL)), uintptr(cURLs), uintptr(unsafe.Pointer(ppcszSubURLs)), uintptr(unsafe.Pointer(pfChanged)))
-	return foundation.HRESULT(r1)
+func (self *IWPCWebSettings) RequestURLOverride(hWnd foundation.HWND, pcszURL string, cURLs uint32, ppcszSubURLs *foundation.PWSTR, pfChanged *foundation.BOOL) error {
+	_pcszURL := win32.UTF16Ptr(pcszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(_pcszURL)), uintptr(cURLs), uintptr(unsafe.Pointer(ppcszSubURLs)), uintptr(unsafe.Pointer(pfChanged)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWindowsParentalControls: https://learn.microsoft.com/windows/win32/api/wpcapi/nn-wpcapi-iwindowsparentalcontrols
@@ -143,9 +144,10 @@ type IWindowsParentalControls struct {
 var IID_IWindowsParentalControls = win32.GUID{Data1: 0x28b4d88b, Data2: 0xe072, Data3: 0x49e6, Data4: [8]byte{0x80, 0x4d, 0x26, 0xed, 0xbe, 0x21, 0xa7, 0xb9}}
 
 // GetGamesSettings dispatches through IWindowsParentalControls's vtable slot 7.
-func (self *IWindowsParentalControls) GetGamesSettings(pcszSID foundation.PWSTR, ppSettings **IWPCGamesSettings) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcszSID)), uintptr(unsafe.Pointer(ppSettings)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsParentalControls) GetGamesSettings(pcszSID string, ppSettings **IWPCGamesSettings) error {
+	_pcszSID := win32.UTF16Ptr(pcszSID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pcszSID)), uintptr(unsafe.Pointer(ppSettings)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWindowsParentalControlsCore: https://learn.microsoft.com/windows/win32/api/wpcapi/nn-wpcapi-iwindowsparentalcontrolscore
@@ -158,25 +160,27 @@ type IWindowsParentalControlsCore struct {
 var IID_IWindowsParentalControlsCore = win32.GUID{Data1: 0x4ff40a0f, Data2: 0x3f3b, Data3: 0x4d7c, Data4: [8]byte{0xa4, 0x1b, 0x4f, 0x39, 0xd7, 0xb4, 0x4d, 0x05}}
 
 // GetVisibility dispatches through IWindowsParentalControlsCore's vtable slot 3.
-func (self *IWindowsParentalControlsCore) GetVisibility(peVisibility *WPCFLAG_VISIBILITY) foundation.HRESULT {
+func (self *IWindowsParentalControlsCore) GetVisibility(peVisibility *WPCFLAG_VISIBILITY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(peVisibility)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUserSettings dispatches through IWindowsParentalControlsCore's vtable slot 4.
-func (self *IWindowsParentalControlsCore) GetUserSettings(pcszSID foundation.PWSTR, ppSettings **IWPCSettings) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcszSID)), uintptr(unsafe.Pointer(ppSettings)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsParentalControlsCore) GetUserSettings(pcszSID string, ppSettings **IWPCSettings) error {
+	_pcszSID := win32.UTF16Ptr(pcszSID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pcszSID)), uintptr(unsafe.Pointer(ppSettings)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWebSettings dispatches through IWindowsParentalControlsCore's vtable slot 5.
-func (self *IWindowsParentalControlsCore) GetWebSettings(pcszSID foundation.PWSTR, ppSettings **IWPCWebSettings) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcszSID)), uintptr(unsafe.Pointer(ppSettings)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsParentalControlsCore) GetWebSettings(pcszSID string, ppSettings **IWPCWebSettings) error {
+	_pcszSID := win32.UTF16Ptr(pcszSID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pcszSID)), uintptr(unsafe.Pointer(ppSettings)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWebFilterInfo dispatches through IWindowsParentalControlsCore's vtable slot 6.
-func (self *IWindowsParentalControlsCore) GetWebFilterInfo(pguidID *win32.GUID, ppszName *foundation.PWSTR) foundation.HRESULT {
+func (self *IWindowsParentalControlsCore) GetWebFilterInfo(pguidID *win32.GUID, ppszName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidID)), uintptr(unsafe.Pointer(ppszName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

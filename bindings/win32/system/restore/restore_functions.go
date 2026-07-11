@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 var (
@@ -18,8 +17,8 @@ var (
 )
 
 var (
+	procSRSetRestorePoint    = modsfc.NewProc("SRSetRestorePointW")
 	procSRSetRestorePointA   = modsfc.NewProc("SRSetRestorePointA")
-	procSRSetRestorePointW   = modsfc.NewProc("SRSetRestorePointW")
 	procSRRemoveRestorePoint = modSrClient.NewProc("SRRemoveRestorePoint")
 )
 
@@ -31,18 +30,18 @@ func SRRemoveRestorePoint(dwRPNum uint32) uint32 {
 	return uint32(r1)
 }
 
+// SRSetRestorePoint calls sfc!SRSetRestorePointW.
+// https://learn.microsoft.com/windows/win32/api/srrestoreptapi/nf-srrestoreptapi-srsetrestorepointw
+// Minimum OS: windows5.1.2600.
+func SRSetRestorePoint(pRestorePtSpec unsafe.Pointer, pSMgrStatus unsafe.Pointer) bool {
+	r1, _, _ := syscall.SyscallN(procSRSetRestorePoint.Addr(), uintptr(unsafe.Pointer(pRestorePtSpec)), uintptr(unsafe.Pointer(pSMgrStatus)))
+	return r1 != 0
+}
+
 // SRSetRestorePointA calls sfc!SRSetRestorePointA.
 // https://learn.microsoft.com/windows/win32/api/srrestoreptapi/nf-srrestoreptapi-srsetrestorepointa
 // Minimum OS: windows5.1.2600.
-func SRSetRestorePointA(pRestorePtSpec unsafe.Pointer, pSMgrStatus unsafe.Pointer) foundation.BOOL {
+func SRSetRestorePointA(pRestorePtSpec unsafe.Pointer, pSMgrStatus unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procSRSetRestorePointA.Addr(), uintptr(unsafe.Pointer(pRestorePtSpec)), uintptr(unsafe.Pointer(pSMgrStatus)))
-	return foundation.BOOL(r1)
-}
-
-// SRSetRestorePointW calls sfc!SRSetRestorePointW.
-// https://learn.microsoft.com/windows/win32/api/srrestoreptapi/nf-srrestoreptapi-srsetrestorepointw
-// Minimum OS: windows5.1.2600.
-func SRSetRestorePointW(pRestorePtSpec unsafe.Pointer, pSMgrStatus unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSRSetRestorePointW.Addr(), uintptr(unsafe.Pointer(pRestorePtSpec)), uintptr(unsafe.Pointer(pSMgrStatus)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }

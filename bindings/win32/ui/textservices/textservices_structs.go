@@ -29,8 +29,8 @@ type DocWrap struct {
 type MSAAControl struct {
 }
 
-// TF_DA_COLOR_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TF_DA_COLOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TF_DA_COLOR_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -95,8 +95,8 @@ type TF_LBBALLOONINFO struct {
 	BstrText foundation.BSTR
 }
 
-// TF_LMLATTELEMENT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TF_LMLATTELEMENT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TF_LMLATTELEMENT_Anonymous_e__Union struct {
 	Data [1]uint32
 }

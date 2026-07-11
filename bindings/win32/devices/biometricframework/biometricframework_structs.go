@@ -29,8 +29,8 @@ type WINBIO_ANTI_SPOOF_POLICY struct {
 	Source WINBIO_POLICY_SOURCE
 }
 
-// WINBIO_ASYNC_RESULT_Parameters_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINBIO_ASYNC_RESULT_Parameters_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINBIO_ASYNC_RESULT_Parameters_e__Union struct {
 	Data [40]uint64
 }
@@ -225,8 +225,8 @@ type WINBIO_ENGINE_INTERFACE struct {
 	IdentifyFeatureSetAuthenticated PIBIO_ENGINE_IDENTIFY_FEATURE_SET_AUTHENTICATED_FN
 }
 
-// WINBIO_EVENT_Parameters_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINBIO_EVENT_Parameters_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINBIO_EVENT_Parameters_e__Union struct {
 	Data [22]uint32
 }
@@ -237,8 +237,8 @@ type WINBIO_EVENT struct {
 	Parameters WINBIO_EVENT_Parameters_e__Union
 }
 
-// WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINBIO_EXTENDED_ENGINE_INFO_Specific_e__Union struct {
 	Data [7]uint32
 }
@@ -256,8 +256,8 @@ type WINBIO_EXTENDED_ENROLLMENT_PARAMETERS struct {
 	SubFactor byte
 }
 
-// WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union struct {
 	Data [44]uint64
 }
@@ -272,8 +272,8 @@ type WINBIO_EXTENDED_ENROLLMENT_STATUS struct {
 	Specific        WINBIO_EXTENDED_ENROLLMENT_STATUS_Specific_e__Union
 }
 
-// WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union struct {
 	Data [268]uint32
 }
@@ -285,8 +285,8 @@ type WINBIO_EXTENDED_SENSOR_INFO struct {
 	Specific                  WINBIO_EXTENDED_SENSOR_INFO_Specific_e__Union
 }
 
-// WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINBIO_EXTENDED_STORAGE_INFO_Specific_e__Union struct {
 	Data [1]uint32
 }
@@ -372,8 +372,8 @@ type WINBIO_GET_INDICATOR struct {
 	IndicatorStatus uint32
 }
 
-// WINBIO_IDENTITY_Value_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINBIO_IDENTITY_Value_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINBIO_IDENTITY_Value_e__Union struct {
 	Data [18]uint32
 }
@@ -423,8 +423,8 @@ type WINBIO_PRESENCE struct {
 }
 
 // WINBIO_PRESENCE_PROPERTIES: https://learn.microsoft.com/windows/win32/SecBioMet/winbio-presence-properties
-// WINBIO_PRESENCE_PROPERTIES is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINBIO_PRESENCE_PROPERTIES is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINBIO_PRESENCE_PROPERTIES struct {
 	Data [87]uint32
 }

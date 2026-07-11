@@ -21,35 +21,35 @@ var (
 
 var (
 	procDeleteEnclave                          = modapi_ms_win_core_enclave_l1_1_1.NewProc("DeleteEnclave")
+	procLoadEnclaveImage                       = modapi_ms_win_core_enclave_l1_1_1.NewProc("LoadEnclaveImageW")
 	procLoadEnclaveImageA                      = modapi_ms_win_core_enclave_l1_1_1.NewProc("LoadEnclaveImageA")
-	procLoadEnclaveImageW                      = modapi_ms_win_core_enclave_l1_1_1.NewProc("LoadEnclaveImageW")
 	procCreateEnclave                          = modKERNEL32.NewProc("CreateEnclave")
+	procExpandEnvironmentStrings               = modKERNEL32.NewProc("ExpandEnvironmentStringsW")
 	procExpandEnvironmentStringsA              = modKERNEL32.NewProc("ExpandEnvironmentStringsA")
-	procExpandEnvironmentStringsW              = modKERNEL32.NewProc("ExpandEnvironmentStringsW")
+	procFreeEnvironmentStrings                 = modKERNEL32.NewProc("FreeEnvironmentStringsW")
 	procFreeEnvironmentStringsA                = modKERNEL32.NewProc("FreeEnvironmentStringsA")
-	procFreeEnvironmentStringsW                = modKERNEL32.NewProc("FreeEnvironmentStringsW")
+	procGetCommandLine                         = modKERNEL32.NewProc("GetCommandLineW")
 	procGetCommandLineA                        = modKERNEL32.NewProc("GetCommandLineA")
-	procGetCommandLineW                        = modKERNEL32.NewProc("GetCommandLineW")
+	procGetCurrentDirectory                    = modKERNEL32.NewProc("GetCurrentDirectoryW")
 	procGetCurrentDirectoryA                   = modKERNEL32.NewProc("GetCurrentDirectoryA")
-	procGetCurrentDirectoryW                   = modKERNEL32.NewProc("GetCurrentDirectoryW")
 	procGetEnvironmentStrings                  = modKERNEL32.NewProc("GetEnvironmentStrings")
 	procGetEnvironmentStringsW                 = modKERNEL32.NewProc("GetEnvironmentStringsW")
+	procGetEnvironmentVariable                 = modKERNEL32.NewProc("GetEnvironmentVariableW")
 	procGetEnvironmentVariableA                = modKERNEL32.NewProc("GetEnvironmentVariableA")
-	procGetEnvironmentVariableW                = modKERNEL32.NewProc("GetEnvironmentVariableW")
 	procInitializeEnclave                      = modKERNEL32.NewProc("InitializeEnclave")
 	procIsEnclaveTypeSupported                 = modKERNEL32.NewProc("IsEnclaveTypeSupported")
 	procLoadEnclaveData                        = modKERNEL32.NewProc("LoadEnclaveData")
+	procNeedCurrentDirectoryForExePath         = modKERNEL32.NewProc("NeedCurrentDirectoryForExePathW")
 	procNeedCurrentDirectoryForExePathA        = modKERNEL32.NewProc("NeedCurrentDirectoryForExePathA")
-	procNeedCurrentDirectoryForExePathW        = modKERNEL32.NewProc("NeedCurrentDirectoryForExePathW")
+	procSetCurrentDirectory                    = modKERNEL32.NewProc("SetCurrentDirectoryW")
 	procSetCurrentDirectoryA                   = modKERNEL32.NewProc("SetCurrentDirectoryA")
-	procSetCurrentDirectoryW                   = modKERNEL32.NewProc("SetCurrentDirectoryW")
-	procSetEnvironmentStringsW                 = modKERNEL32.NewProc("SetEnvironmentStringsW")
+	procSetEnvironmentStrings                  = modKERNEL32.NewProc("SetEnvironmentStringsW")
+	procSetEnvironmentVariable                 = modKERNEL32.NewProc("SetEnvironmentVariableW")
 	procSetEnvironmentVariableA                = modKERNEL32.NewProc("SetEnvironmentVariableA")
-	procSetEnvironmentVariableW                = modKERNEL32.NewProc("SetEnvironmentVariableW")
 	procCreateEnvironmentBlock                 = modUSERENV.NewProc("CreateEnvironmentBlock")
 	procDestroyEnvironmentBlock                = modUSERENV.NewProc("DestroyEnvironmentBlock")
+	procExpandEnvironmentStringsForUser        = modUSERENV.NewProc("ExpandEnvironmentStringsForUserW")
 	procExpandEnvironmentStringsForUserA       = modUSERENV.NewProc("ExpandEnvironmentStringsForUserA")
-	procExpandEnvironmentStringsForUserW       = modUSERENV.NewProc("ExpandEnvironmentStringsForUserW")
 	procCallEnclave                            = modvertdll.NewProc("CallEnclave")
 	procEnclaveCopyIntoEnclave                 = modvertdll.NewProc("EnclaveCopyIntoEnclave")
 	procEnclaveCopyOutOfEnclave                = modvertdll.NewProc("EnclaveCopyOutOfEnclave")
@@ -67,8 +67,9 @@ var (
 // CallEnclave calls vertdll!CallEnclave.
 // https://learn.microsoft.com/windows/win32/api/enclaveapi/nf-enclaveapi-callenclave
 // Minimum OS: windows10.0.16299.
-func CallEnclave(lpRoutine uintptr, lpParameter unsafe.Pointer, fWaitForThread foundation.BOOL, lpReturnValue *unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procCallEnclave.Addr(), uintptr(lpRoutine), uintptr(unsafe.Pointer(lpParameter)), uintptr(fWaitForThread), uintptr(unsafe.Pointer(lpReturnValue)))
+func CallEnclave(lpRoutine uintptr, lpParameter unsafe.Pointer, fWaitForThread bool, lpReturnValue *unsafe.Pointer) error {
+	_fWaitForThread := win32.Bool32(fWaitForThread)
+	r1, _, e1 := syscall.SyscallN(procCallEnclave.Addr(), uintptr(lpRoutine), uintptr(unsafe.Pointer(lpParameter)), uintptr(_fWaitForThread), uintptr(unsafe.Pointer(lpReturnValue)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -90,8 +91,9 @@ func CreateEnclave(hProcess foundation.HANDLE, lpAddress unsafe.Pointer, dwSize 
 // CreateEnvironmentBlock calls USERENV!CreateEnvironmentBlock.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-createenvironmentblock
 // Minimum OS: windows5.0.
-func CreateEnvironmentBlock(lpEnvironment *unsafe.Pointer, hToken foundation.HANDLE, bInherit foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procCreateEnvironmentBlock.Addr(), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(hToken), uintptr(bInherit))
+func CreateEnvironmentBlock(lpEnvironment *unsafe.Pointer, hToken foundation.HANDLE, bInherit bool) error {
+	_bInherit := win32.Bool32(bInherit)
+	r1, _, e1 := syscall.SyscallN(procCreateEnvironmentBlock.Addr(), uintptr(unsafe.Pointer(lpEnvironment)), uintptr(hToken), uintptr(_bInherit))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -121,59 +123,60 @@ func DestroyEnvironmentBlock(lpEnvironment unsafe.Pointer) error {
 }
 
 // EnclaveCopyIntoEnclave calls vertdll!EnclaveCopyIntoEnclave.
-func EnclaveCopyIntoEnclave(EnclaveAddress unsafe.Pointer, UnsecureAddress unsafe.Pointer, NumberOfBytes uintptr) foundation.HRESULT {
+func EnclaveCopyIntoEnclave(EnclaveAddress unsafe.Pointer, UnsecureAddress unsafe.Pointer, NumberOfBytes uintptr) error {
 	r1, _, _ := syscall.SyscallN(procEnclaveCopyIntoEnclave.Addr(), uintptr(unsafe.Pointer(EnclaveAddress)), uintptr(unsafe.Pointer(UnsecureAddress)), uintptr(NumberOfBytes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnclaveCopyOutOfEnclave calls vertdll!EnclaveCopyOutOfEnclave.
-func EnclaveCopyOutOfEnclave(UnsecureAddress unsafe.Pointer, EnclaveAddress unsafe.Pointer, NumberOfBytes uintptr) foundation.HRESULT {
+func EnclaveCopyOutOfEnclave(UnsecureAddress unsafe.Pointer, EnclaveAddress unsafe.Pointer, NumberOfBytes uintptr) error {
 	r1, _, _ := syscall.SyscallN(procEnclaveCopyOutOfEnclave.Addr(), uintptr(unsafe.Pointer(UnsecureAddress)), uintptr(unsafe.Pointer(EnclaveAddress)), uintptr(NumberOfBytes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnclaveEncryptDataForTrustlet calls vertdll!EnclaveEncryptDataForTrustlet.
-func EnclaveEncryptDataForTrustlet(DataToEncrypt unsafe.Pointer, DataToEncryptSize uint32, TrustletBindingData unsafe.Pointer, EncryptedData unsafe.Pointer, BufferSize uint32, EncryptedDataSize *uint32) foundation.HRESULT {
+func EnclaveEncryptDataForTrustlet(DataToEncrypt unsafe.Pointer, DataToEncryptSize uint32, TrustletBindingData unsafe.Pointer, EncryptedData unsafe.Pointer, BufferSize uint32, EncryptedDataSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procEnclaveEncryptDataForTrustlet.Addr(), uintptr(unsafe.Pointer(DataToEncrypt)), uintptr(DataToEncryptSize), uintptr(unsafe.Pointer(TrustletBindingData)), uintptr(unsafe.Pointer(EncryptedData)), uintptr(BufferSize), uintptr(unsafe.Pointer(EncryptedDataSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnclaveGetAttestationReport calls vertdll!EnclaveGetAttestationReport.
 // https://learn.microsoft.com/windows/win32/api/winenclaveapi/nf-winenclaveapi-enclavegetattestationreport
 // Minimum OS: windows10.0.16299.
-func EnclaveGetAttestationReport(EnclaveData *byte, Report unsafe.Pointer, BufferSize uint32, OutputSize *uint32) foundation.HRESULT {
+func EnclaveGetAttestationReport(EnclaveData *byte, Report unsafe.Pointer, BufferSize uint32, OutputSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procEnclaveGetAttestationReport.Addr(), uintptr(unsafe.Pointer(EnclaveData)), uintptr(unsafe.Pointer(Report)), uintptr(BufferSize), uintptr(unsafe.Pointer(OutputSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnclaveGetEnclaveInformation calls vertdll!EnclaveGetEnclaveInformation.
 // https://learn.microsoft.com/windows/win32/api/winenclaveapi/nf-winenclaveapi-enclavegetenclaveinformation
 // Minimum OS: windows10.0.16299.
-func EnclaveGetEnclaveInformation(InformationSize uint32, EnclaveInformation *ENCLAVE_INFORMATION) foundation.HRESULT {
+func EnclaveGetEnclaveInformation(InformationSize uint32, EnclaveInformation *ENCLAVE_INFORMATION) error {
 	r1, _, _ := syscall.SyscallN(procEnclaveGetEnclaveInformation.Addr(), uintptr(InformationSize), uintptr(unsafe.Pointer(EnclaveInformation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnclaveRestrictContainingProcessAccess calls vertdll!EnclaveRestrictContainingProcessAccess.
-func EnclaveRestrictContainingProcessAccess(RestrictAccess foundation.BOOL, PreviouslyRestricted *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procEnclaveRestrictContainingProcessAccess.Addr(), uintptr(RestrictAccess), uintptr(unsafe.Pointer(PreviouslyRestricted)))
-	return foundation.HRESULT(r1)
+func EnclaveRestrictContainingProcessAccess(RestrictAccess bool, PreviouslyRestricted *foundation.BOOL) error {
+	_RestrictAccess := win32.Bool32(RestrictAccess)
+	r1, _, _ := syscall.SyscallN(procEnclaveRestrictContainingProcessAccess.Addr(), uintptr(_RestrictAccess), uintptr(unsafe.Pointer(PreviouslyRestricted)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnclaveSealData calls vertdll!EnclaveSealData.
 // https://learn.microsoft.com/windows/win32/api/winenclaveapi/nf-winenclaveapi-enclavesealdata
 // Minimum OS: windows10.0.16299.
-func EnclaveSealData(DataToEncrypt unsafe.Pointer, DataToEncryptSize uint32, IdentityPolicy ENCLAVE_SEALING_IDENTITY_POLICY, RuntimePolicy uint32, ProtectedBlob unsafe.Pointer, BufferSize uint32, ProtectedBlobSize *uint32) foundation.HRESULT {
+func EnclaveSealData(DataToEncrypt unsafe.Pointer, DataToEncryptSize uint32, IdentityPolicy ENCLAVE_SEALING_IDENTITY_POLICY, RuntimePolicy uint32, ProtectedBlob unsafe.Pointer, BufferSize uint32, ProtectedBlobSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procEnclaveSealData.Addr(), uintptr(unsafe.Pointer(DataToEncrypt)), uintptr(DataToEncryptSize), uintptr(IdentityPolicy), uintptr(RuntimePolicy), uintptr(unsafe.Pointer(ProtectedBlob)), uintptr(BufferSize), uintptr(unsafe.Pointer(ProtectedBlobSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnclaveUnsealData calls vertdll!EnclaveUnsealData.
 // https://learn.microsoft.com/windows/win32/api/winenclaveapi/nf-winenclaveapi-enclaveunsealdata
 // Minimum OS: windows10.0.16299.
-func EnclaveUnsealData(ProtectedBlob unsafe.Pointer, ProtectedBlobSize uint32, DecryptedData unsafe.Pointer, BufferSize uint32, DecryptedDataSize *uint32, SealingIdentity unsafe.Pointer, UnsealingFlags *uint32) foundation.HRESULT {
+func EnclaveUnsealData(ProtectedBlob unsafe.Pointer, ProtectedBlobSize uint32, DecryptedData unsafe.Pointer, BufferSize uint32, DecryptedDataSize *uint32, SealingIdentity unsafe.Pointer, UnsealingFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(procEnclaveUnsealData.Addr(), uintptr(unsafe.Pointer(ProtectedBlob)), uintptr(ProtectedBlobSize), uintptr(unsafe.Pointer(DecryptedData)), uintptr(BufferSize), uintptr(unsafe.Pointer(DecryptedDataSize)), uintptr(unsafe.Pointer(SealingIdentity)), uintptr(unsafe.Pointer(UnsealingFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnclaveUsesAttestedKeys calls vertdll!EnclaveUsesAttestedKeys.
@@ -185,9 +188,21 @@ func EnclaveUsesAttestedKeys() foundation.BOOLEAN {
 // EnclaveVerifyAttestationReport calls vertdll!EnclaveVerifyAttestationReport.
 // https://learn.microsoft.com/windows/win32/api/winenclaveapi/nf-winenclaveapi-enclaveverifyattestationreport
 // Minimum OS: windows10.0.16299.
-func EnclaveVerifyAttestationReport(EnclaveType uint32, Report unsafe.Pointer, ReportSize uint32) foundation.HRESULT {
+func EnclaveVerifyAttestationReport(EnclaveType uint32, Report unsafe.Pointer, ReportSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procEnclaveVerifyAttestationReport.Addr(), uintptr(EnclaveType), uintptr(unsafe.Pointer(Report)), uintptr(ReportSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// ExpandEnvironmentStrings calls KERNEL32!ExpandEnvironmentStringsW.
+// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-expandenvironmentstringsw
+// Minimum OS: windows5.0.
+func ExpandEnvironmentStrings(lpSrc string, lpDst foundation.PWSTR, nSize uint32) (uint32, error) {
+	_lpSrc := win32.UTF16Ptr(lpSrc)
+	r1, _, e1 := syscall.SyscallN(procExpandEnvironmentStrings.Addr(), uintptr(unsafe.Pointer(_lpSrc)), uintptr(unsafe.Pointer(lpDst)), uintptr(nSize))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
 }
 
 // ExpandEnvironmentStringsA calls KERNEL32!ExpandEnvironmentStringsA.
@@ -201,6 +216,18 @@ func ExpandEnvironmentStringsA(lpSrc foundation.PSTR, lpDst foundation.PSTR, nSi
 	return uint32(r1), nil
 }
 
+// ExpandEnvironmentStringsForUser calls USERENV!ExpandEnvironmentStringsForUserW.
+// https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-expandenvironmentstringsforuserw
+// Minimum OS: windows5.0.
+func ExpandEnvironmentStringsForUser(hToken foundation.HANDLE, lpSrc string, lpDest foundation.PWSTR, dwSize uint32) error {
+	_lpSrc := win32.UTF16Ptr(lpSrc)
+	r1, _, e1 := syscall.SyscallN(procExpandEnvironmentStringsForUser.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(_lpSrc)), uintptr(unsafe.Pointer(lpDest)), uintptr(dwSize))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // ExpandEnvironmentStringsForUserA calls USERENV!ExpandEnvironmentStringsForUserA.
 // https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-expandenvironmentstringsforusera
 // Minimum OS: windows5.0.
@@ -212,26 +239,16 @@ func ExpandEnvironmentStringsForUserA(hToken foundation.HANDLE, lpSrc foundation
 	return nil
 }
 
-// ExpandEnvironmentStringsForUserW calls USERENV!ExpandEnvironmentStringsForUserW.
-// https://learn.microsoft.com/windows/win32/api/userenv/nf-userenv-expandenvironmentstringsforuserw
-// Minimum OS: windows5.0.
-func ExpandEnvironmentStringsForUserW(hToken foundation.HANDLE, lpSrc foundation.PWSTR, lpDest foundation.PWSTR, dwSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procExpandEnvironmentStringsForUserW.Addr(), uintptr(hToken), uintptr(unsafe.Pointer(lpSrc)), uintptr(unsafe.Pointer(lpDest)), uintptr(dwSize))
+// FreeEnvironmentStrings calls KERNEL32!FreeEnvironmentStringsW.
+// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-freeenvironmentstringsw
+// Minimum OS: windows5.1.2600.
+func FreeEnvironmentStrings(penv string) error {
+	_penv := win32.UTF16Ptr(penv)
+	r1, _, e1 := syscall.SyscallN(procFreeEnvironmentStrings.Addr(), uintptr(unsafe.Pointer(_penv)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// ExpandEnvironmentStringsW calls KERNEL32!ExpandEnvironmentStringsW.
-// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-expandenvironmentstringsw
-// Minimum OS: windows5.0.
-func ExpandEnvironmentStringsW(lpSrc foundation.PWSTR, lpDst foundation.PWSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procExpandEnvironmentStringsW.Addr(), uintptr(unsafe.Pointer(lpSrc)), uintptr(unsafe.Pointer(lpDst)), uintptr(nSize))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
 }
 
 // FreeEnvironmentStringsA calls KERNEL32!FreeEnvironmentStringsA.
@@ -245,15 +262,12 @@ func FreeEnvironmentStringsA(penv foundation.PSTR) error {
 	return nil
 }
 
-// FreeEnvironmentStringsW calls KERNEL32!FreeEnvironmentStringsW.
-// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-freeenvironmentstringsw
+// GetCommandLine calls KERNEL32!GetCommandLineW.
+// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-getcommandlinew
 // Minimum OS: windows5.1.2600.
-func FreeEnvironmentStringsW(penv foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procFreeEnvironmentStringsW.Addr(), uintptr(unsafe.Pointer(penv)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+func GetCommandLine() foundation.PWSTR {
+	r1, _, _ := syscall.SyscallN(procGetCommandLine.Addr())
+	return foundation.PWSTR(unsafe.Pointer(r1))
 }
 
 // GetCommandLineA calls KERNEL32!GetCommandLineA.
@@ -264,25 +278,17 @@ func GetCommandLineA() foundation.PSTR {
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
 
-// GetCommandLineW calls KERNEL32!GetCommandLineW.
-// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-getcommandlinew
-// Minimum OS: windows5.1.2600.
-func GetCommandLineW() foundation.PWSTR {
-	r1, _, _ := syscall.SyscallN(procGetCommandLineW.Addr())
-	return foundation.PWSTR(unsafe.Pointer(r1))
+// GetCurrentDirectory calls KERNEL32!GetCurrentDirectoryW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcurrentdirectory
+func GetCurrentDirectory(nBufferLength uint32, lpBuffer foundation.PWSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procGetCurrentDirectory.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
+	return uint32(r1)
 }
 
 // GetCurrentDirectoryA calls KERNEL32!GetCurrentDirectoryA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcurrentdirectory
 func GetCurrentDirectoryA(nBufferLength uint32, lpBuffer foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procGetCurrentDirectoryA.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
-	return uint32(r1)
-}
-
-// GetCurrentDirectoryW calls KERNEL32!GetCurrentDirectoryW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcurrentdirectory
-func GetCurrentDirectoryW(nBufferLength uint32, lpBuffer foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetCurrentDirectoryW.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
 	return uint32(r1)
 }
 
@@ -302,22 +308,23 @@ func GetEnvironmentStringsW() foundation.PWSTR {
 	return foundation.PWSTR(unsafe.Pointer(r1))
 }
 
-// GetEnvironmentVariableA calls KERNEL32!GetEnvironmentVariableA.
-// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-getenvironmentvariablea
+// GetEnvironmentVariable calls KERNEL32!GetEnvironmentVariableW.
+// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-getenvironmentvariablew
 // Minimum OS: windows5.1.2600.
-func GetEnvironmentVariableA(lpName foundation.PSTR, lpBuffer foundation.PSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetEnvironmentVariableA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
+func GetEnvironmentVariable(lpName string, lpBuffer foundation.PWSTR, nSize uint32) (uint32, error) {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procGetEnvironmentVariable.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
 }
 
-// GetEnvironmentVariableW calls KERNEL32!GetEnvironmentVariableW.
-// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-getenvironmentvariablew
+// GetEnvironmentVariableA calls KERNEL32!GetEnvironmentVariableA.
+// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-getenvironmentvariablea
 // Minimum OS: windows5.1.2600.
-func GetEnvironmentVariableW(lpName foundation.PWSTR, lpBuffer foundation.PWSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetEnvironmentVariableW.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
+func GetEnvironmentVariableA(lpName foundation.PSTR, lpBuffer foundation.PSTR, nSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetEnvironmentVariableA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -357,59 +364,76 @@ func LoadEnclaveData(hProcess foundation.HANDLE, lpAddress unsafe.Pointer, lpBuf
 	return nil
 }
 
-// LoadEnclaveImageA calls api-ms-win-core-enclave-l1-1-1!LoadEnclaveImageA.
-// https://learn.microsoft.com/windows/win32/api/enclaveapi/nf-enclaveapi-loadenclaveimagea
-func LoadEnclaveImageA(lpEnclaveAddress unsafe.Pointer, lpImageName foundation.PSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procLoadEnclaveImageA.Addr(), uintptr(unsafe.Pointer(lpEnclaveAddress)), uintptr(unsafe.Pointer(lpImageName)))
-	return foundation.BOOL(r1)
-}
-
-// LoadEnclaveImageW calls api-ms-win-core-enclave-l1-1-1!LoadEnclaveImageW.
+// LoadEnclaveImage calls api-ms-win-core-enclave-l1-1-1!LoadEnclaveImageW.
 // https://learn.microsoft.com/windows/win32/api/enclaveapi/nf-enclaveapi-loadenclaveimagew
 // Minimum OS: windows10.0.16299.
-func LoadEnclaveImageW(lpEnclaveAddress unsafe.Pointer, lpImageName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procLoadEnclaveImageW.Addr(), uintptr(unsafe.Pointer(lpEnclaveAddress)), uintptr(unsafe.Pointer(lpImageName)))
+func LoadEnclaveImage(lpEnclaveAddress unsafe.Pointer, lpImageName string) error {
+	_lpImageName := win32.UTF16Ptr(lpImageName)
+	r1, _, e1 := syscall.SyscallN(procLoadEnclaveImage.Addr(), uintptr(unsafe.Pointer(lpEnclaveAddress)), uintptr(unsafe.Pointer(_lpImageName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
+// LoadEnclaveImageA calls api-ms-win-core-enclave-l1-1-1!LoadEnclaveImageA.
+// https://learn.microsoft.com/windows/win32/api/enclaveapi/nf-enclaveapi-loadenclaveimagea
+func LoadEnclaveImageA(lpEnclaveAddress unsafe.Pointer, lpImageName foundation.PSTR) bool {
+	r1, _, _ := syscall.SyscallN(procLoadEnclaveImageA.Addr(), uintptr(unsafe.Pointer(lpEnclaveAddress)), uintptr(unsafe.Pointer(lpImageName)))
+	return r1 != 0
+}
+
+// NeedCurrentDirectoryForExePath calls KERNEL32!NeedCurrentDirectoryForExePathW.
+// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-needcurrentdirectoryforexepathw
+// Minimum OS: windows6.0.6000.
+func NeedCurrentDirectoryForExePath(ExeName string) bool {
+	_ExeName := win32.UTF16Ptr(ExeName)
+	r1, _, _ := syscall.SyscallN(procNeedCurrentDirectoryForExePath.Addr(), uintptr(unsafe.Pointer(_ExeName)))
+	return r1 != 0
+}
+
 // NeedCurrentDirectoryForExePathA calls KERNEL32!NeedCurrentDirectoryForExePathA.
 // https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-needcurrentdirectoryforexepatha
 // Minimum OS: windows6.0.6000.
-func NeedCurrentDirectoryForExePathA(ExeName foundation.PSTR) foundation.BOOL {
+func NeedCurrentDirectoryForExePathA(ExeName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procNeedCurrentDirectoryForExePathA.Addr(), uintptr(unsafe.Pointer(ExeName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// NeedCurrentDirectoryForExePathW calls KERNEL32!NeedCurrentDirectoryForExePathW.
-// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-needcurrentdirectoryforexepathw
-// Minimum OS: windows6.0.6000.
-func NeedCurrentDirectoryForExePathW(ExeName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procNeedCurrentDirectoryForExePathW.Addr(), uintptr(unsafe.Pointer(ExeName)))
-	return foundation.BOOL(r1)
+// SetCurrentDirectory calls KERNEL32!SetCurrentDirectoryW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setcurrentdirectory
+func SetCurrentDirectory(lpPathName string) bool {
+	_lpPathName := win32.UTF16Ptr(lpPathName)
+	r1, _, _ := syscall.SyscallN(procSetCurrentDirectory.Addr(), uintptr(unsafe.Pointer(_lpPathName)))
+	return r1 != 0
 }
 
 // SetCurrentDirectoryA calls KERNEL32!SetCurrentDirectoryA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setcurrentdirectory
-func SetCurrentDirectoryA(lpPathName foundation.PSTR) foundation.BOOL {
+func SetCurrentDirectoryA(lpPathName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procSetCurrentDirectoryA.Addr(), uintptr(unsafe.Pointer(lpPathName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// SetCurrentDirectoryW calls KERNEL32!SetCurrentDirectoryW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setcurrentdirectory
-func SetCurrentDirectoryW(lpPathName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetCurrentDirectoryW.Addr(), uintptr(unsafe.Pointer(lpPathName)))
-	return foundation.BOOL(r1)
-}
-
-// SetEnvironmentStringsW calls KERNEL32!SetEnvironmentStringsW.
+// SetEnvironmentStrings calls KERNEL32!SetEnvironmentStringsW.
 // https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-setenvironmentstringsw
-func SetEnvironmentStringsW(NewEnvironment foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetEnvironmentStringsW.Addr(), uintptr(unsafe.Pointer(NewEnvironment)))
-	return foundation.BOOL(r1)
+func SetEnvironmentStrings(NewEnvironment string) bool {
+	_NewEnvironment := win32.UTF16Ptr(NewEnvironment)
+	r1, _, _ := syscall.SyscallN(procSetEnvironmentStrings.Addr(), uintptr(unsafe.Pointer(_NewEnvironment)))
+	return r1 != 0
+}
+
+// SetEnvironmentVariable calls KERNEL32!SetEnvironmentVariableW.
+// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-setenvironmentvariablew
+// Minimum OS: windows5.1.2600.
+func SetEnvironmentVariable(lpName string, lpValue string) error {
+	_lpName := win32.UTF16Ptr(lpName)
+	_lpValue := win32.UTF16Ptr(lpValue)
+	r1, _, e1 := syscall.SyscallN(procSetEnvironmentVariable.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpValue)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // SetEnvironmentVariableA calls KERNEL32!SetEnvironmentVariableA.
@@ -423,22 +447,12 @@ func SetEnvironmentVariableA(lpName foundation.PSTR, lpValue foundation.PSTR) er
 	return nil
 }
 
-// SetEnvironmentVariableW calls KERNEL32!SetEnvironmentVariableW.
-// https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-setenvironmentvariablew
-// Minimum OS: windows5.1.2600.
-func SetEnvironmentVariableW(lpName foundation.PWSTR, lpValue foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetEnvironmentVariableW.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpValue)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // TerminateEnclave calls vertdll!TerminateEnclave.
 // https://learn.microsoft.com/windows/win32/api/enclaveapi/nf-enclaveapi-terminateenclave
 // Minimum OS: windows10.0.16299.
-func TerminateEnclave(lpAddress unsafe.Pointer, fWait foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procTerminateEnclave.Addr(), uintptr(unsafe.Pointer(lpAddress)), uintptr(fWait))
+func TerminateEnclave(lpAddress unsafe.Pointer, fWait bool) error {
+	_fWait := win32.Bool32(fWait)
+	r1, _, e1 := syscall.SyscallN(procTerminateEnclave.Addr(), uintptr(unsafe.Pointer(lpAddress)), uintptr(_fWait))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

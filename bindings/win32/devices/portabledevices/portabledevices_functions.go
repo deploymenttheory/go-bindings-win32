@@ -21,7 +21,12 @@ var (
 )
 
 // DMProcessConfigXMLFiltered calls DMProcessXMLFiltered!DMProcessConfigXMLFiltered.
-func DMProcessConfigXMLFiltered(pszXmlIn foundation.PWSTR, rgszAllowedCspNodes *foundation.PWSTR, dwNumAllowedCspNodes uint32, pbstrXmlOut *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDMProcessConfigXMLFiltered.Addr(), uintptr(unsafe.Pointer(pszXmlIn)), uintptr(unsafe.Pointer(rgszAllowedCspNodes)), uintptr(dwNumAllowedCspNodes), uintptr(unsafe.Pointer(pbstrXmlOut)))
-	return foundation.HRESULT(r1)
+func DMProcessConfigXMLFiltered(pszXmlIn string, rgszAllowedCspNodes []foundation.PWSTR, pbstrXmlOut *foundation.BSTR) error {
+	_pszXmlIn := win32.UTF16Ptr(pszXmlIn)
+	var _rgszAllowedCspNodes *foundation.PWSTR
+	if len(rgszAllowedCspNodes) > 0 {
+		_rgszAllowedCspNodes = &rgszAllowedCspNodes[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDMProcessConfigXMLFiltered.Addr(), uintptr(unsafe.Pointer(_pszXmlIn)), uintptr(unsafe.Pointer(_rgszAllowedCspNodes)), uintptr(len(rgszAllowedCspNodes)), uintptr(unsafe.Pointer(pbstrXmlOut)))
+	return win32.HRESULTError(int32(r1))
 }

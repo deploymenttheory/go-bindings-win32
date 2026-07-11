@@ -10,8 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-// BLUETOOTH_ADDRESS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// BLUETOOTH_ADDRESS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type BLUETOOTH_ADDRESS_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -20,8 +20,8 @@ type BLUETOOTH_ADDRESS struct {
 	Anonymous BLUETOOTH_ADDRESS_Anonymous_e__Union
 }
 
-// BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type BLUETOOTH_AUTHENTICATE_RESPONSE_Anonymous_e__Union struct {
 	Data [8]uint32
 }
@@ -34,8 +34,8 @@ type BLUETOOTH_AUTHENTICATE_RESPONSE struct {
 	NegativeResponse byte
 }
 
-// BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -209,8 +209,8 @@ type BTH_LE_GATT_DESCRIPTOR struct {
 	AttributeHandle      uint16
 }
 
-// BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type BTH_LE_GATT_DESCRIPTOR_VALUE_Anonymous_e__Union struct {
 	Data [12]uint32
 }
@@ -230,8 +230,8 @@ type BTH_LE_GATT_SERVICE struct {
 	AttributeHandle uint16
 }
 
-// BTH_LE_UUID_Value_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// BTH_LE_UUID_Value_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type BTH_LE_UUID_Value_e__Union struct {
 	Data [4]uint32
 }
@@ -272,8 +272,8 @@ type RFCOMM_RPN_DATA struct {
 	ParameterMask2 byte
 }
 
-// SDP_ELEMENT_DATA_data_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SDP_ELEMENT_DATA_data_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SDP_ELEMENT_DATA_data_e__Union struct {
 	Data [2]uint64
 }
@@ -315,8 +315,8 @@ type SdpQueryUuid struct {
 }
 
 // SdpQueryUuidUnion: https://learn.microsoft.com/windows/win32/api/bthsdpdef/ns-bthsdpdef-sdpqueryuuidunion
-// SdpQueryUuidUnion is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SdpQueryUuidUnion is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SdpQueryUuidUnion struct {
 	Data [4]uint32
 }

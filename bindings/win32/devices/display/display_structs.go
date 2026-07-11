@@ -137,8 +137,8 @@ type COLORSPACE_SCALAR_MULTIPLIER_CAPS struct {
 	NumericRangeMax float32
 }
 
-// COLORSPACE_TRANSFORM_Data_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// COLORSPACE_TRANSFORM_Data_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type COLORSPACE_TRANSFORM_Data_e__Union struct {
 	Data [24588]uint32
 }
@@ -159,8 +159,8 @@ type COLORSPACE_TRANSFORM_3x4 struct {
 	LookupTable1D    [4096]GAMMA_RAMP_RGB
 }
 
-// COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type COLORSPACE_TRANSFORM_DATA_CAP_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -172,8 +172,8 @@ type COLORSPACE_TRANSFORM_DATA_CAP struct {
 	NumericRangeMax float32
 }
 
-// COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type COLORSPACE_TRANSFORM_MATRIX_CAP_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -263,8 +263,8 @@ type DISPLAYCONFIG_DEVICE_INFO_HEADER struct {
 	Id        uint32
 }
 
-// DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -276,8 +276,8 @@ type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO struct {
 	BitsPerColorChannel uint32
 }
 
-// DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -290,8 +290,8 @@ type DISPLAYCONFIG_GET_ADVANCED_COLOR_INFO_2 struct {
 	ActiveColorMode     graphicsgdi.DISPLAYCONFIG_ADVANCED_COLOR_MODE
 }
 
-// DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -301,8 +301,8 @@ type DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION struct {
 	Anonymous DISPLAYCONFIG_GET_MONITOR_SPECIALIZATION_Anonymous_e__Union
 }
 
-// DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISPLAYCONFIG_MODE_INFO_Anonymous_e__Union struct {
 	Data [6]uint64
 }
@@ -322,8 +322,8 @@ type DISPLAYCONFIG_PATH_INFO struct {
 	Flags      uint32
 }
 
-// DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISPLAYCONFIG_PATH_SOURCE_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -336,8 +336,8 @@ type DISPLAYCONFIG_PATH_SOURCE_INFO struct {
 	StatusFlags uint32
 }
 
-// DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISPLAYCONFIG_PATH_TARGET_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -368,8 +368,8 @@ type DISPLAYCONFIG_SDR_WHITE_LEVEL struct {
 	SDRWhiteLevel uint32
 }
 
-// DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -379,8 +379,8 @@ type DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE struct {
 	Anonymous DISPLAYCONFIG_SET_ADVANCED_COLOR_STATE_Anonymous_e__Union
 }
 
-// DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -390,8 +390,8 @@ type DISPLAYCONFIG_SET_HDR_STATE struct {
 	Anonymous DISPLAYCONFIG_SET_HDR_STATE_Anonymous_e__Union
 }
 
-// DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -404,8 +404,8 @@ type DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION struct {
 	SpecializationApplicationName [128]uint16
 }
 
-// DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -416,8 +416,8 @@ type DISPLAYCONFIG_SET_TARGET_PERSISTENCE struct {
 	Anonymous DISPLAYCONFIG_SET_TARGET_PERSISTENCE_Anonymous_e__Union
 }
 
-// DISPLAYCONFIG_SET_WCG_STATE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISPLAYCONFIG_SET_WCG_STATE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISPLAYCONFIG_SET_WCG_STATE_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -441,8 +441,8 @@ type DISPLAYCONFIG_SOURCE_MODE struct {
 	Position    foundation.POINTL
 }
 
-// DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISPLAYCONFIG_SUPPORT_VIRTUAL_RESOLUTION_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -471,8 +471,8 @@ type DISPLAYCONFIG_TARGET_DEVICE_NAME struct {
 	MonitorDevicePath         [128]uint16
 }
 
-// DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISPLAYCONFIG_TARGET_DEVICE_NAME_FLAGS_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -495,8 +495,8 @@ type DISPLAYCONFIG_TARGET_PREFERRED_MODE struct {
 	TargetMode DISPLAYCONFIG_TARGET_MODE
 }
 
-// DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DISPLAYCONFIG_VIDEO_SIGNAL_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -675,8 +675,8 @@ type FLOATOBJ_XFORM struct {
 	EDy  float32
 }
 
-// FLOAT_LONG is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FLOAT_LONG is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FLOAT_LONG struct {
 	Data [1]uint32
 }
@@ -862,8 +862,8 @@ type GLYPHDATA struct {
 }
 
 // GLYPHDEF: https://learn.microsoft.com/windows/win32/api/winddi/ns-winddi-glyphdef
-// GLYPHDEF is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// GLYPHDEF is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type GLYPHDEF struct {
 	Data [1]uint64
 }
@@ -998,14 +998,14 @@ type MIPI_DSI_CAPS struct {
 	LengthLo                      byte
 }
 
-// MIPI_DSI_PACKET_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIPI_DSI_PACKET_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIPI_DSI_PACKET_Anonymous1_e__Union struct {
 	Data [1]byte
 }
 
-// MIPI_DSI_PACKET_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIPI_DSI_PACKET_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIPI_DSI_PACKET_Anonymous2_e__Union struct {
 	Data [1]uint16
 }
@@ -1017,8 +1017,8 @@ type MIPI_DSI_PACKET struct {
 	Payload    [8]byte
 }
 
-// MIPI_DSI_RESET_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MIPI_DSI_RESET_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MIPI_DSI_RESET_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1054,8 +1054,8 @@ type PALOBJ struct {
 	UlReserved uint32
 }
 
-// PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PANEL_BRIGHTNESS_SENSOR_DATA_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1073,8 +1073,8 @@ type PANEL_GET_BACKLIGHT_REDUCTION struct {
 	GammaRamp            BACKLIGHT_REDUCTION_GAMMA_RAMP
 }
 
-// PANEL_GET_BRIGHTNESS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PANEL_GET_BRIGHTNESS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PANEL_GET_BRIGHTNESS_Anonymous_e__Union struct {
 	Data [2]uint32
 }
@@ -1084,8 +1084,8 @@ type PANEL_GET_BRIGHTNESS struct {
 	Anonymous PANEL_GET_BRIGHTNESS_Anonymous_e__Union
 }
 
-// PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1095,8 +1095,8 @@ type PANEL_QUERY_BRIGHTNESS_CAPS struct {
 	Anonymous PANEL_QUERY_BRIGHTNESS_CAPS_Anonymous_e__Union
 }
 
-// PANEL_QUERY_BRIGHTNESS_RANGES_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PANEL_QUERY_BRIGHTNESS_RANGES_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PANEL_QUERY_BRIGHTNESS_RANGES_Anonymous_e__Union struct {
 	Data [51]uint32
 }
@@ -1110,8 +1110,8 @@ type PANEL_SET_BACKLIGHT_OPTIMIZATION struct {
 	Level BACKLIGHT_OPTIMIZATION_LEVEL
 }
 
-// PANEL_SET_BRIGHTNESS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PANEL_SET_BRIGHTNESS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PANEL_SET_BRIGHTNESS_Anonymous_e__Union struct {
 	Data [7]uint32
 }
@@ -1121,8 +1121,8 @@ type PANEL_SET_BRIGHTNESS struct {
 	Anonymous PANEL_SET_BRIGHTNESS_Anonymous_e__Union
 }
 
-// PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PANEL_SET_BRIGHTNESS_STATE_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -1284,8 +1284,8 @@ type VIDEO_BRIGHTNESS_POLICY struct {
 	Level               [1]VIDEO_BRIGHTNESS_POLICY_Anonymous_e__Struct
 }
 
-// VIDEO_CLUT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VIDEO_CLUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VIDEO_CLUT_Anonymous_e__Union struct {
 	Data [1]uint32
 }

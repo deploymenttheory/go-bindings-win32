@@ -32,9 +32,9 @@ type IRendezvousApplication struct {
 var IID_IRendezvousApplication = win32.GUID{Data1: 0x4f4d070b, Data2: 0xa275, Data3: 0x49fb, Data4: [8]byte{0xb1, 0x0d, 0x8e, 0xc2, 0x63, 0x87, 0xb5, 0x0d}}
 
 // SetRendezvousSession dispatches through IRendezvousApplication's vtable slot 3.
-func (self *IRendezvousApplication) SetRendezvousSession(pRendezvousSession *systemcom.IUnknown) foundation.HRESULT {
+func (self *IRendezvousApplication) SetRendezvousSession(pRendezvousSession *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRendezvousSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRendezvousSession: https://learn.microsoft.com/windows/win32/api/rendezvoussession/nn-rendezvoussession-irendezvoussession
@@ -47,31 +47,31 @@ type IRendezvousSession struct {
 var IID_IRendezvousSession = win32.GUID{Data1: 0x9ba4b1dd, Data2: 0x8b0c, Data3: 0x48b7, Data4: [8]byte{0x9e, 0x7c, 0x2f, 0x25, 0x85, 0x7c, 0x8d, 0xf5}}
 
 // Get_State dispatches through IRendezvousSession's vtable slot 3.
-func (self *IRendezvousSession) Get_State(pSessionState *RENDEZVOUS_SESSION_STATE) foundation.HRESULT {
+func (self *IRendezvousSession) Get_State(pSessionState *RENDEZVOUS_SESSION_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSessionState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RemoteUser dispatches through IRendezvousSession's vtable slot 4.
-func (self *IRendezvousSession) Get_RemoteUser(bstrUserName *foundation.BSTR) foundation.HRESULT {
+func (self *IRendezvousSession) Get_RemoteUser(bstrUserName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrUserName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Flags dispatches through IRendezvousSession's vtable slot 5.
-func (self *IRendezvousSession) Get_Flags(pFlags *int32) foundation.HRESULT {
+func (self *IRendezvousSession) Get_Flags(pFlags *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SendContextData dispatches through IRendezvousSession's vtable slot 6.
-func (self *IRendezvousSession) SendContextData(bstrData foundation.BSTR) foundation.HRESULT {
+func (self *IRendezvousSession) SendContextData(bstrData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Terminate dispatches through IRendezvousSession's vtable slot 7.
-func (self *IRendezvousSession) Terminate(hr foundation.HRESULT, bstrAppData foundation.BSTR) foundation.HRESULT {
+func (self *IRendezvousSession) Terminate(hr foundation.HRESULT, bstrAppData foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(unsafe.Pointer(bstrAppData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

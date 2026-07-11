@@ -58,45 +58,47 @@ var (
 )
 
 // MQADsPathToFormatName calls mqrt!MQADsPathToFormatName.
-func MQADsPathToFormatName(lpwcsADsPath foundation.PWSTR, lpwcsFormatName foundation.PWSTR, lpdwFormatNameLength *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQADsPathToFormatName.Addr(), uintptr(unsafe.Pointer(lpwcsADsPath)), uintptr(unsafe.Pointer(lpwcsFormatName)), uintptr(unsafe.Pointer(lpdwFormatNameLength)))
-	return foundation.HRESULT(r1)
+func MQADsPathToFormatName(lpwcsADsPath string, lpwcsFormatName foundation.PWSTR, lpdwFormatNameLength *uint32) error {
+	_lpwcsADsPath := win32.UTF16Ptr(lpwcsADsPath)
+	r1, _, _ := syscall.SyscallN(procMQADsPathToFormatName.Addr(), uintptr(unsafe.Pointer(_lpwcsADsPath)), uintptr(unsafe.Pointer(lpwcsFormatName)), uintptr(unsafe.Pointer(lpdwFormatNameLength)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQBeginTransaction calls mqrt!MQBeginTransaction.
-func MQBeginTransaction(ppTransaction **systemdistributedtransactioncoordinator.ITransaction) foundation.HRESULT {
+func MQBeginTransaction(ppTransaction **systemdistributedtransactioncoordinator.ITransaction) error {
 	r1, _, _ := syscall.SyscallN(procMQBeginTransaction.Addr(), uintptr(unsafe.Pointer(ppTransaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQCloseCursor calls mqrt!MQCloseCursor.
-func MQCloseCursor(hCursor foundation.HANDLE) foundation.HRESULT {
+func MQCloseCursor(hCursor foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procMQCloseCursor.Addr(), uintptr(hCursor))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQCloseQueue calls mqrt!MQCloseQueue.
-func MQCloseQueue(hQueue uintptr) foundation.HRESULT {
+func MQCloseQueue(hQueue uintptr) error {
 	r1, _, _ := syscall.SyscallN(procMQCloseQueue.Addr(), uintptr(hQueue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQCreateCursor calls mqrt!MQCreateCursor.
-func MQCreateCursor(hQueue uintptr, phCursor *foundation.HANDLE) foundation.HRESULT {
+func MQCreateCursor(hQueue uintptr, phCursor *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procMQCreateCursor.Addr(), uintptr(hQueue), uintptr(unsafe.Pointer(phCursor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQCreateQueue calls mqrt!MQCreateQueue.
-func MQCreateQueue(pSecurityDescriptor security.PSECURITY_DESCRIPTOR, pQueueProps *MQQUEUEPROPS, lpwcsFormatName foundation.PWSTR, lpdwFormatNameLength *uint32) foundation.HRESULT {
+func MQCreateQueue(pSecurityDescriptor security.PSECURITY_DESCRIPTOR, pQueueProps *MQQUEUEPROPS, lpwcsFormatName foundation.PWSTR, lpdwFormatNameLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMQCreateQueue.Addr(), uintptr(pSecurityDescriptor), uintptr(unsafe.Pointer(pQueueProps)), uintptr(unsafe.Pointer(lpwcsFormatName)), uintptr(unsafe.Pointer(lpdwFormatNameLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQDeleteQueue calls mqrt!MQDeleteQueue.
-func MQDeleteQueue(lpwcsFormatName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQDeleteQueue.Addr(), uintptr(unsafe.Pointer(lpwcsFormatName)))
-	return foundation.HRESULT(r1)
+func MQDeleteQueue(lpwcsFormatName string) error {
+	_lpwcsFormatName := win32.UTF16Ptr(lpwcsFormatName)
+	r1, _, _ := syscall.SyscallN(procMQDeleteQueue.Addr(), uintptr(unsafe.Pointer(_lpwcsFormatName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQFreeMemory calls mqrt!MQFreeMemory.
@@ -110,151 +112,165 @@ func MQFreeSecurityContext(hSecurityContext foundation.HANDLE) {
 }
 
 // MQGetMachineProperties calls mqrt!MQGetMachineProperties.
-func MQGetMachineProperties(lpwcsMachineName foundation.PWSTR, pguidMachineId *win32.GUID, pQMProps *MQQMPROPS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQGetMachineProperties.Addr(), uintptr(unsafe.Pointer(lpwcsMachineName)), uintptr(unsafe.Pointer(pguidMachineId)), uintptr(unsafe.Pointer(pQMProps)))
-	return foundation.HRESULT(r1)
+func MQGetMachineProperties(lpwcsMachineName string, pguidMachineId *win32.GUID, pQMProps *MQQMPROPS) error {
+	_lpwcsMachineName := win32.UTF16Ptr(lpwcsMachineName)
+	r1, _, _ := syscall.SyscallN(procMQGetMachineProperties.Addr(), uintptr(unsafe.Pointer(_lpwcsMachineName)), uintptr(unsafe.Pointer(pguidMachineId)), uintptr(unsafe.Pointer(pQMProps)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQGetOverlappedResult calls mqrt!MQGetOverlappedResult.
-func MQGetOverlappedResult(lpOverlapped *systemio.OVERLAPPED) foundation.HRESULT {
+func MQGetOverlappedResult(lpOverlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(procMQGetOverlappedResult.Addr(), uintptr(unsafe.Pointer(lpOverlapped)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQGetPrivateComputerInformation calls mqrt!MQGetPrivateComputerInformation.
-func MQGetPrivateComputerInformation(lpwcsComputerName foundation.PWSTR, pPrivateProps *MQPRIVATEPROPS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQGetPrivateComputerInformation.Addr(), uintptr(unsafe.Pointer(lpwcsComputerName)), uintptr(unsafe.Pointer(pPrivateProps)))
-	return foundation.HRESULT(r1)
+func MQGetPrivateComputerInformation(lpwcsComputerName string, pPrivateProps *MQPRIVATEPROPS) error {
+	_lpwcsComputerName := win32.UTF16Ptr(lpwcsComputerName)
+	r1, _, _ := syscall.SyscallN(procMQGetPrivateComputerInformation.Addr(), uintptr(unsafe.Pointer(_lpwcsComputerName)), uintptr(unsafe.Pointer(pPrivateProps)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQGetQueueProperties calls mqrt!MQGetQueueProperties.
-func MQGetQueueProperties(lpwcsFormatName foundation.PWSTR, pQueueProps *MQQUEUEPROPS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQGetQueueProperties.Addr(), uintptr(unsafe.Pointer(lpwcsFormatName)), uintptr(unsafe.Pointer(pQueueProps)))
-	return foundation.HRESULT(r1)
+func MQGetQueueProperties(lpwcsFormatName string, pQueueProps *MQQUEUEPROPS) error {
+	_lpwcsFormatName := win32.UTF16Ptr(lpwcsFormatName)
+	r1, _, _ := syscall.SyscallN(procMQGetQueueProperties.Addr(), uintptr(unsafe.Pointer(_lpwcsFormatName)), uintptr(unsafe.Pointer(pQueueProps)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQGetQueueSecurity calls mqrt!MQGetQueueSecurity.
-func MQGetQueueSecurity(lpwcsFormatName foundation.PWSTR, RequestedInformation uint32, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, nLength uint32, lpnLengthNeeded *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQGetQueueSecurity.Addr(), uintptr(unsafe.Pointer(lpwcsFormatName)), uintptr(RequestedInformation), uintptr(pSecurityDescriptor), uintptr(nLength), uintptr(unsafe.Pointer(lpnLengthNeeded)))
-	return foundation.HRESULT(r1)
+func MQGetQueueSecurity(lpwcsFormatName string, RequestedInformation uint32, pSecurityDescriptor security.PSECURITY_DESCRIPTOR, nLength uint32, lpnLengthNeeded *uint32) error {
+	_lpwcsFormatName := win32.UTF16Ptr(lpwcsFormatName)
+	r1, _, _ := syscall.SyscallN(procMQGetQueueSecurity.Addr(), uintptr(unsafe.Pointer(_lpwcsFormatName)), uintptr(RequestedInformation), uintptr(pSecurityDescriptor), uintptr(nLength), uintptr(unsafe.Pointer(lpnLengthNeeded)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQGetSecurityContext calls mqrt!MQGetSecurityContext.
-func MQGetSecurityContext(lpCertBuffer unsafe.Pointer, dwCertBufferLength uint32, phSecurityContext *foundation.HANDLE) foundation.HRESULT {
+func MQGetSecurityContext(lpCertBuffer unsafe.Pointer, dwCertBufferLength uint32, phSecurityContext *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procMQGetSecurityContext.Addr(), uintptr(unsafe.Pointer(lpCertBuffer)), uintptr(dwCertBufferLength), uintptr(unsafe.Pointer(phSecurityContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQGetSecurityContextEx calls mqrt!MQGetSecurityContextEx.
-func MQGetSecurityContextEx(lpCertBuffer unsafe.Pointer, dwCertBufferLength uint32, phSecurityContext *foundation.HANDLE) foundation.HRESULT {
+func MQGetSecurityContextEx(lpCertBuffer unsafe.Pointer, dwCertBufferLength uint32, phSecurityContext *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procMQGetSecurityContextEx.Addr(), uintptr(unsafe.Pointer(lpCertBuffer)), uintptr(dwCertBufferLength), uintptr(unsafe.Pointer(phSecurityContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQHandleToFormatName calls mqrt!MQHandleToFormatName.
-func MQHandleToFormatName(hQueue uintptr, lpwcsFormatName foundation.PWSTR, lpdwFormatNameLength *uint32) foundation.HRESULT {
+func MQHandleToFormatName(hQueue uintptr, lpwcsFormatName foundation.PWSTR, lpdwFormatNameLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMQHandleToFormatName.Addr(), uintptr(hQueue), uintptr(unsafe.Pointer(lpwcsFormatName)), uintptr(unsafe.Pointer(lpdwFormatNameLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQInstanceToFormatName calls mqrt!MQInstanceToFormatName.
-func MQInstanceToFormatName(pGuid *win32.GUID, lpwcsFormatName foundation.PWSTR, lpdwFormatNameLength *uint32) foundation.HRESULT {
+func MQInstanceToFormatName(pGuid *win32.GUID, lpwcsFormatName foundation.PWSTR, lpdwFormatNameLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(procMQInstanceToFormatName.Addr(), uintptr(unsafe.Pointer(pGuid)), uintptr(unsafe.Pointer(lpwcsFormatName)), uintptr(unsafe.Pointer(lpdwFormatNameLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQLocateBegin calls mqrt!MQLocateBegin.
-func MQLocateBegin(lpwcsContext foundation.PWSTR, pRestriction *MQRESTRICTION, pColumns *MQCOLUMNSET, pSort *MQSORTSET, phEnum *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQLocateBegin.Addr(), uintptr(unsafe.Pointer(lpwcsContext)), uintptr(unsafe.Pointer(pRestriction)), uintptr(unsafe.Pointer(pColumns)), uintptr(unsafe.Pointer(pSort)), uintptr(unsafe.Pointer(phEnum)))
-	return foundation.HRESULT(r1)
+func MQLocateBegin(lpwcsContext string, pRestriction *MQRESTRICTION, pColumns *MQCOLUMNSET, pSort *MQSORTSET, phEnum *foundation.HANDLE) error {
+	_lpwcsContext := win32.UTF16Ptr(lpwcsContext)
+	r1, _, _ := syscall.SyscallN(procMQLocateBegin.Addr(), uintptr(unsafe.Pointer(_lpwcsContext)), uintptr(unsafe.Pointer(pRestriction)), uintptr(unsafe.Pointer(pColumns)), uintptr(unsafe.Pointer(pSort)), uintptr(unsafe.Pointer(phEnum)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQLocateEnd calls mqrt!MQLocateEnd.
-func MQLocateEnd(hEnum foundation.HANDLE) foundation.HRESULT {
+func MQLocateEnd(hEnum foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procMQLocateEnd.Addr(), uintptr(hEnum))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQLocateNext calls mqrt!MQLocateNext.
-func MQLocateNext(hEnum foundation.HANDLE, pcProps *uint32, aPropVar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func MQLocateNext(hEnum foundation.HANDLE, pcProps *uint32, aPropVar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(procMQLocateNext.Addr(), uintptr(hEnum), uintptr(unsafe.Pointer(pcProps)), uintptr(unsafe.Pointer(aPropVar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQMarkMessageRejected calls mqrt!MQMarkMessageRejected.
-func MQMarkMessageRejected(hQueue foundation.HANDLE, ullLookupId uint64) foundation.HRESULT {
+func MQMarkMessageRejected(hQueue foundation.HANDLE, ullLookupId uint64) error {
 	r1, _, _ := syscall.SyscallN(procMQMarkMessageRejected.Addr(), uintptr(hQueue), uintptr(ullLookupId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQMgmtAction calls mqrt!MQMgmtAction.
-func MQMgmtAction(pComputerName foundation.PWSTR, pObjectName foundation.PWSTR, pAction foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQMgmtAction.Addr(), uintptr(unsafe.Pointer(pComputerName)), uintptr(unsafe.Pointer(pObjectName)), uintptr(unsafe.Pointer(pAction)))
-	return foundation.HRESULT(r1)
+func MQMgmtAction(pComputerName string, pObjectName string, pAction string) error {
+	_pComputerName := win32.UTF16Ptr(pComputerName)
+	_pObjectName := win32.UTF16Ptr(pObjectName)
+	_pAction := win32.UTF16Ptr(pAction)
+	r1, _, _ := syscall.SyscallN(procMQMgmtAction.Addr(), uintptr(unsafe.Pointer(_pComputerName)), uintptr(unsafe.Pointer(_pObjectName)), uintptr(unsafe.Pointer(_pAction)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQMgmtGetInfo calls mqrt!MQMgmtGetInfo.
-func MQMgmtGetInfo(pComputerName foundation.PWSTR, pObjectName foundation.PWSTR, pMgmtProps *MQMGMTPROPS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQMgmtGetInfo.Addr(), uintptr(unsafe.Pointer(pComputerName)), uintptr(unsafe.Pointer(pObjectName)), uintptr(unsafe.Pointer(pMgmtProps)))
-	return foundation.HRESULT(r1)
+func MQMgmtGetInfo(pComputerName string, pObjectName string, pMgmtProps *MQMGMTPROPS) error {
+	_pComputerName := win32.UTF16Ptr(pComputerName)
+	_pObjectName := win32.UTF16Ptr(pObjectName)
+	r1, _, _ := syscall.SyscallN(procMQMgmtGetInfo.Addr(), uintptr(unsafe.Pointer(_pComputerName)), uintptr(unsafe.Pointer(_pObjectName)), uintptr(unsafe.Pointer(pMgmtProps)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQMoveMessage calls mqrt!MQMoveMessage.
-func MQMoveMessage(hSourceQueue uintptr, hDestinationQueue uintptr, ullLookupId uint64, pTransaction *systemdistributedtransactioncoordinator.ITransaction) foundation.HRESULT {
+func MQMoveMessage(hSourceQueue uintptr, hDestinationQueue uintptr, ullLookupId uint64, pTransaction *systemdistributedtransactioncoordinator.ITransaction) error {
 	r1, _, _ := syscall.SyscallN(procMQMoveMessage.Addr(), uintptr(hSourceQueue), uintptr(hDestinationQueue), uintptr(ullLookupId), uintptr(unsafe.Pointer(pTransaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQOpenQueue calls mqrt!MQOpenQueue.
-func MQOpenQueue(lpwcsFormatName foundation.PWSTR, dwAccess uint32, dwShareMode uint32, phQueue *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQOpenQueue.Addr(), uintptr(unsafe.Pointer(lpwcsFormatName)), uintptr(dwAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(phQueue)))
-	return foundation.HRESULT(r1)
+func MQOpenQueue(lpwcsFormatName string, dwAccess uint32, dwShareMode uint32, phQueue *uintptr) error {
+	_lpwcsFormatName := win32.UTF16Ptr(lpwcsFormatName)
+	r1, _, _ := syscall.SyscallN(procMQOpenQueue.Addr(), uintptr(unsafe.Pointer(_lpwcsFormatName)), uintptr(dwAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(phQueue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQPathNameToFormatName calls mqrt!MQPathNameToFormatName.
-func MQPathNameToFormatName(lpwcsPathName foundation.PWSTR, lpwcsFormatName foundation.PWSTR, lpdwFormatNameLength *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQPathNameToFormatName.Addr(), uintptr(unsafe.Pointer(lpwcsPathName)), uintptr(unsafe.Pointer(lpwcsFormatName)), uintptr(unsafe.Pointer(lpdwFormatNameLength)))
-	return foundation.HRESULT(r1)
+func MQPathNameToFormatName(lpwcsPathName string, lpwcsFormatName foundation.PWSTR, lpdwFormatNameLength *uint32) error {
+	_lpwcsPathName := win32.UTF16Ptr(lpwcsPathName)
+	r1, _, _ := syscall.SyscallN(procMQPathNameToFormatName.Addr(), uintptr(unsafe.Pointer(_lpwcsPathName)), uintptr(unsafe.Pointer(lpwcsFormatName)), uintptr(unsafe.Pointer(lpdwFormatNameLength)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQPurgeQueue calls mqrt!MQPurgeQueue.
-func MQPurgeQueue(hQueue uintptr) foundation.HRESULT {
+func MQPurgeQueue(hQueue uintptr) error {
 	r1, _, _ := syscall.SyscallN(procMQPurgeQueue.Addr(), uintptr(hQueue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQReceiveMessage calls mqrt!MQReceiveMessage.
-func MQReceiveMessage(hSource uintptr, dwTimeout uint32, dwAction uint32, pMessageProps *MQMSGPROPS, lpOverlapped *systemio.OVERLAPPED, fnReceiveCallback PMQRECEIVECALLBACK, hCursor foundation.HANDLE, pTransaction *systemdistributedtransactioncoordinator.ITransaction) foundation.HRESULT {
+func MQReceiveMessage(hSource uintptr, dwTimeout uint32, dwAction uint32, pMessageProps *MQMSGPROPS, lpOverlapped *systemio.OVERLAPPED, fnReceiveCallback PMQRECEIVECALLBACK, hCursor foundation.HANDLE, pTransaction *systemdistributedtransactioncoordinator.ITransaction) error {
 	r1, _, _ := syscall.SyscallN(procMQReceiveMessage.Addr(), uintptr(hSource), uintptr(dwTimeout), uintptr(dwAction), uintptr(unsafe.Pointer(pMessageProps)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(fnReceiveCallback), uintptr(hCursor), uintptr(unsafe.Pointer(pTransaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQReceiveMessageByLookupId calls mqrt!MQReceiveMessageByLookupId.
-func MQReceiveMessageByLookupId(hSource uintptr, ullLookupId uint64, dwLookupAction uint32, pMessageProps *MQMSGPROPS, lpOverlapped *systemio.OVERLAPPED, fnReceiveCallback PMQRECEIVECALLBACK, pTransaction *systemdistributedtransactioncoordinator.ITransaction) foundation.HRESULT {
+func MQReceiveMessageByLookupId(hSource uintptr, ullLookupId uint64, dwLookupAction uint32, pMessageProps *MQMSGPROPS, lpOverlapped *systemio.OVERLAPPED, fnReceiveCallback PMQRECEIVECALLBACK, pTransaction *systemdistributedtransactioncoordinator.ITransaction) error {
 	r1, _, _ := syscall.SyscallN(procMQReceiveMessageByLookupId.Addr(), uintptr(hSource), uintptr(ullLookupId), uintptr(dwLookupAction), uintptr(unsafe.Pointer(pMessageProps)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(fnReceiveCallback), uintptr(unsafe.Pointer(pTransaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQRegisterCertificate calls mqrt!MQRegisterCertificate.
-func MQRegisterCertificate(dwFlags uint32, lpCertBuffer unsafe.Pointer, dwCertBufferLength uint32) foundation.HRESULT {
+func MQRegisterCertificate(dwFlags uint32, lpCertBuffer unsafe.Pointer, dwCertBufferLength uint32) error {
 	r1, _, _ := syscall.SyscallN(procMQRegisterCertificate.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpCertBuffer)), uintptr(dwCertBufferLength))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQSendMessage calls mqrt!MQSendMessage.
-func MQSendMessage(hDestinationQueue uintptr, pMessageProps *MQMSGPROPS, pTransaction *systemdistributedtransactioncoordinator.ITransaction) foundation.HRESULT {
+func MQSendMessage(hDestinationQueue uintptr, pMessageProps *MQMSGPROPS, pTransaction *systemdistributedtransactioncoordinator.ITransaction) error {
 	r1, _, _ := syscall.SyscallN(procMQSendMessage.Addr(), uintptr(hDestinationQueue), uintptr(unsafe.Pointer(pMessageProps)), uintptr(unsafe.Pointer(pTransaction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQSetQueueProperties calls mqrt!MQSetQueueProperties.
-func MQSetQueueProperties(lpwcsFormatName foundation.PWSTR, pQueueProps *MQQUEUEPROPS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQSetQueueProperties.Addr(), uintptr(unsafe.Pointer(lpwcsFormatName)), uintptr(unsafe.Pointer(pQueueProps)))
-	return foundation.HRESULT(r1)
+func MQSetQueueProperties(lpwcsFormatName string, pQueueProps *MQQUEUEPROPS) error {
+	_lpwcsFormatName := win32.UTF16Ptr(lpwcsFormatName)
+	r1, _, _ := syscall.SyscallN(procMQSetQueueProperties.Addr(), uintptr(unsafe.Pointer(_lpwcsFormatName)), uintptr(unsafe.Pointer(pQueueProps)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MQSetQueueSecurity calls mqrt!MQSetQueueSecurity.
-func MQSetQueueSecurity(lpwcsFormatName foundation.PWSTR, SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMQSetQueueSecurity.Addr(), uintptr(unsafe.Pointer(lpwcsFormatName)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor))
-	return foundation.HRESULT(r1)
+func MQSetQueueSecurity(lpwcsFormatName string, SecurityInformation security.OBJECT_SECURITY_INFORMATION, pSecurityDescriptor security.PSECURITY_DESCRIPTOR) error {
+	_lpwcsFormatName := win32.UTF16Ptr(lpwcsFormatName)
+	r1, _, _ := syscall.SyscallN(procMQSetQueueSecurity.Addr(), uintptr(unsafe.Pointer(_lpwcsFormatName)), uintptr(SecurityInformation), uintptr(pSecurityDescriptor))
+	return win32.HRESULTError(int32(r1))
 }

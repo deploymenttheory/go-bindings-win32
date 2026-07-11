@@ -58,16 +58,17 @@ func CloseHandle(hObject HANDLE) error {
 // CompareObjectHandles calls api-ms-win-core-handle-l1-1-0!CompareObjectHandles.
 // https://learn.microsoft.com/windows/win32/api/handleapi/nf-handleapi-compareobjecthandles
 // Minimum OS: windows10.0.10240.
-func CompareObjectHandles(hFirstObjectHandle HANDLE, hSecondObjectHandle HANDLE) BOOL {
+func CompareObjectHandles(hFirstObjectHandle HANDLE, hSecondObjectHandle HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procCompareObjectHandles.Addr(), uintptr(hFirstObjectHandle), uintptr(hSecondObjectHandle))
-	return BOOL(r1)
+	return r1 != 0
 }
 
 // DuplicateHandle calls KERNEL32!DuplicateHandle.
 // https://learn.microsoft.com/windows/win32/api/handleapi/nf-handleapi-duplicatehandle
 // Minimum OS: windows5.0.
-func DuplicateHandle(hSourceProcessHandle HANDLE, hSourceHandle HANDLE, hTargetProcessHandle HANDLE, lpTargetHandle *HANDLE, dwDesiredAccess uint32, bInheritHandle BOOL, dwOptions DUPLICATE_HANDLE_OPTIONS) error {
-	r1, _, e1 := syscall.SyscallN(procDuplicateHandle.Addr(), uintptr(hSourceProcessHandle), uintptr(hSourceHandle), uintptr(hTargetProcessHandle), uintptr(unsafe.Pointer(lpTargetHandle)), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(dwOptions))
+func DuplicateHandle(hSourceProcessHandle HANDLE, hSourceHandle HANDLE, hTargetProcessHandle HANDLE, lpTargetHandle *HANDLE, dwDesiredAccess uint32, bInheritHandle bool, dwOptions DUPLICATE_HANDLE_OPTIONS) error {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	r1, _, e1 := syscall.SyscallN(procDuplicateHandle.Addr(), uintptr(hSourceProcessHandle), uintptr(hSourceHandle), uintptr(hTargetProcessHandle), uintptr(unsafe.Pointer(lpTargetHandle)), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(dwOptions))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -164,15 +165,16 @@ func SetLastErrorEx(dwErrCode WIN32_ERROR, dwType uint32) {
 // SysAddRefString calls OLEAUT32!SysAddRefString.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysaddrefstring
 // Minimum OS: windows5.1.2600.
-func SysAddRefString(bstrString BSTR) HRESULT {
+func SysAddRefString(bstrString BSTR) error {
 	r1, _, _ := syscall.SyscallN(procSysAddRefString.Addr(), uintptr(unsafe.Pointer(bstrString)))
-	return HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SysAllocString calls OLEAUT32!SysAllocString.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysallocstring
-func SysAllocString(psz PWSTR) BSTR {
-	r1, _, _ := syscall.SyscallN(procSysAllocString.Addr(), uintptr(unsafe.Pointer(psz)))
+func SysAllocString(psz string) BSTR {
+	_psz := win32.UTF16Ptr(psz)
+	r1, _, _ := syscall.SyscallN(procSysAllocString.Addr(), uintptr(unsafe.Pointer(_psz)))
 	return BSTR(unsafe.Pointer(r1))
 }
 
@@ -185,8 +187,9 @@ func SysAllocStringByteLen(psz PSTR, len_ uint32) BSTR {
 
 // SysAllocStringLen calls OLEAUT32!SysAllocStringLen.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysallocstringlen
-func SysAllocStringLen(strIn PWSTR, ui uint32) BSTR {
-	r1, _, _ := syscall.SyscallN(procSysAllocStringLen.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(ui))
+func SysAllocStringLen(strIn string, ui uint32) BSTR {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procSysAllocStringLen.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(ui))
 	return BSTR(unsafe.Pointer(r1))
 }
 
@@ -198,15 +201,17 @@ func SysFreeString(bstrString BSTR) {
 
 // SysReAllocString calls OLEAUT32!SysReAllocString.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysreallocstring
-func SysReAllocString(pbstr *BSTR, psz PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procSysReAllocString.Addr(), uintptr(unsafe.Pointer(pbstr)), uintptr(unsafe.Pointer(psz)))
+func SysReAllocString(pbstr *BSTR, psz string) int32 {
+	_psz := win32.UTF16Ptr(psz)
+	r1, _, _ := syscall.SyscallN(procSysReAllocString.Addr(), uintptr(unsafe.Pointer(pbstr)), uintptr(unsafe.Pointer(_psz)))
 	return int32(r1)
 }
 
 // SysReAllocStringLen calls OLEAUT32!SysReAllocStringLen.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-sysreallocstringlen
-func SysReAllocStringLen(pbstr *BSTR, psz PWSTR, len_ uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSysReAllocStringLen.Addr(), uintptr(unsafe.Pointer(pbstr)), uintptr(unsafe.Pointer(psz)), uintptr(len_))
+func SysReAllocStringLen(pbstr *BSTR, psz string, len_ uint32) int32 {
+	_psz := win32.UTF16Ptr(psz)
+	r1, _, _ := syscall.SyscallN(procSysReAllocStringLen.Addr(), uintptr(unsafe.Pointer(pbstr)), uintptr(unsafe.Pointer(_psz)), uintptr(len_))
 	return int32(r1)
 }
 

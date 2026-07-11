@@ -19,26 +19,26 @@ var (
 )
 
 var (
+	procBackupEventLog                  = modADVAPI32.NewProc("BackupEventLogW")
 	procBackupEventLogA                 = modADVAPI32.NewProc("BackupEventLogA")
-	procBackupEventLogW                 = modADVAPI32.NewProc("BackupEventLogW")
+	procClearEventLog                   = modADVAPI32.NewProc("ClearEventLogW")
 	procClearEventLogA                  = modADVAPI32.NewProc("ClearEventLogA")
-	procClearEventLogW                  = modADVAPI32.NewProc("ClearEventLogW")
 	procCloseEventLog                   = modADVAPI32.NewProc("CloseEventLog")
 	procDeregisterEventSource           = modADVAPI32.NewProc("DeregisterEventSource")
 	procGetEventLogInformation          = modADVAPI32.NewProc("GetEventLogInformation")
 	procGetNumberOfEventLogRecords      = modADVAPI32.NewProc("GetNumberOfEventLogRecords")
 	procGetOldestEventLogRecord         = modADVAPI32.NewProc("GetOldestEventLogRecord")
 	procNotifyChangeEventLog            = modADVAPI32.NewProc("NotifyChangeEventLog")
+	procOpenBackupEventLog              = modADVAPI32.NewProc("OpenBackupEventLogW")
 	procOpenBackupEventLogA             = modADVAPI32.NewProc("OpenBackupEventLogA")
-	procOpenBackupEventLogW             = modADVAPI32.NewProc("OpenBackupEventLogW")
+	procOpenEventLog                    = modADVAPI32.NewProc("OpenEventLogW")
 	procOpenEventLogA                   = modADVAPI32.NewProc("OpenEventLogA")
-	procOpenEventLogW                   = modADVAPI32.NewProc("OpenEventLogW")
+	procReadEventLog                    = modADVAPI32.NewProc("ReadEventLogW")
 	procReadEventLogA                   = modADVAPI32.NewProc("ReadEventLogA")
-	procReadEventLogW                   = modADVAPI32.NewProc("ReadEventLogW")
+	procRegisterEventSource             = modADVAPI32.NewProc("RegisterEventSourceW")
 	procRegisterEventSourceA            = modADVAPI32.NewProc("RegisterEventSourceA")
-	procRegisterEventSourceW            = modADVAPI32.NewProc("RegisterEventSourceW")
+	procReportEvent                     = modADVAPI32.NewProc("ReportEventW")
 	procReportEventA                    = modADVAPI32.NewProc("ReportEventA")
-	procReportEventW                    = modADVAPI32.NewProc("ReportEventW")
 	procEvtArchiveExportedLog           = modwevtapi.NewProc("EvtArchiveExportedLog")
 	procEvtCancel                       = modwevtapi.NewProc("EvtCancel")
 	procEvtClearLog                     = modwevtapi.NewProc("EvtClearLog")
@@ -76,6 +76,18 @@ var (
 	procEvtUpdateBookmark               = modwevtapi.NewProc("EvtUpdateBookmark")
 )
 
+// BackupEventLog calls ADVAPI32!BackupEventLogW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-backupeventlogw
+// Minimum OS: windows5.0.
+func BackupEventLog(hEventLog foundation.HANDLE, lpBackupFileName string) error {
+	_lpBackupFileName := win32.UTF16Ptr(lpBackupFileName)
+	r1, _, e1 := syscall.SyscallN(procBackupEventLog.Addr(), uintptr(hEventLog), uintptr(unsafe.Pointer(_lpBackupFileName)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // BackupEventLogA calls ADVAPI32!BackupEventLogA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-backupeventloga
 // Minimum OS: windows5.0.
@@ -87,11 +99,12 @@ func BackupEventLogA(hEventLog foundation.HANDLE, lpBackupFileName foundation.PS
 	return nil
 }
 
-// BackupEventLogW calls ADVAPI32!BackupEventLogW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-backupeventlogw
+// ClearEventLog calls ADVAPI32!ClearEventLogW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-cleareventlogw
 // Minimum OS: windows5.0.
-func BackupEventLogW(hEventLog foundation.HANDLE, lpBackupFileName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procBackupEventLogW.Addr(), uintptr(hEventLog), uintptr(unsafe.Pointer(lpBackupFileName)))
+func ClearEventLog(hEventLog foundation.HANDLE, lpBackupFileName string) error {
+	_lpBackupFileName := win32.UTF16Ptr(lpBackupFileName)
+	r1, _, e1 := syscall.SyscallN(procClearEventLog.Addr(), uintptr(hEventLog), uintptr(unsafe.Pointer(_lpBackupFileName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -103,17 +116,6 @@ func BackupEventLogW(hEventLog foundation.HANDLE, lpBackupFileName foundation.PW
 // Minimum OS: windows5.0.
 func ClearEventLogA(hEventLog foundation.HANDLE, lpBackupFileName foundation.PSTR) error {
 	r1, _, e1 := syscall.SyscallN(procClearEventLogA.Addr(), uintptr(hEventLog), uintptr(unsafe.Pointer(lpBackupFileName)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// ClearEventLogW calls ADVAPI32!ClearEventLogW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-cleareventlogw
-// Minimum OS: windows5.0.
-func ClearEventLogW(hEventLog foundation.HANDLE, lpBackupFileName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procClearEventLogW.Addr(), uintptr(hEventLog), uintptr(unsafe.Pointer(lpBackupFileName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -145,8 +147,9 @@ func DeregisterEventSource(hEventLog foundation.HANDLE) error {
 // EvtArchiveExportedLog calls wevtapi!EvtArchiveExportedLog.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtarchiveexportedlog
 // Minimum OS: windows6.0.6000.
-func EvtArchiveExportedLog(Session EVT_HANDLE, LogFilePath foundation.PWSTR, Locale uint32, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEvtArchiveExportedLog.Addr(), uintptr(Session), uintptr(unsafe.Pointer(LogFilePath)), uintptr(Locale), uintptr(Flags))
+func EvtArchiveExportedLog(Session EVT_HANDLE, LogFilePath string, Locale uint32, Flags uint32) error {
+	_LogFilePath := win32.UTF16Ptr(LogFilePath)
+	r1, _, e1 := syscall.SyscallN(procEvtArchiveExportedLog.Addr(), uintptr(Session), uintptr(unsafe.Pointer(_LogFilePath)), uintptr(Locale), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -167,8 +170,10 @@ func EvtCancel(Object EVT_HANDLE) error {
 // EvtClearLog calls wevtapi!EvtClearLog.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtclearlog
 // Minimum OS: windows6.0.6000.
-func EvtClearLog(Session EVT_HANDLE, ChannelPath foundation.PWSTR, TargetFilePath foundation.PWSTR, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEvtClearLog.Addr(), uintptr(Session), uintptr(unsafe.Pointer(ChannelPath)), uintptr(unsafe.Pointer(TargetFilePath)), uintptr(Flags))
+func EvtClearLog(Session EVT_HANDLE, ChannelPath string, TargetFilePath string, Flags uint32) error {
+	_ChannelPath := win32.UTF16Ptr(ChannelPath)
+	_TargetFilePath := win32.UTF16Ptr(TargetFilePath)
+	r1, _, e1 := syscall.SyscallN(procEvtClearLog.Addr(), uintptr(Session), uintptr(unsafe.Pointer(_ChannelPath)), uintptr(unsafe.Pointer(_TargetFilePath)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -189,8 +194,9 @@ func EvtClose(Object EVT_HANDLE) error {
 // EvtCreateBookmark calls wevtapi!EvtCreateBookmark.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtcreatebookmark
 // Minimum OS: windows6.0.6000.
-func EvtCreateBookmark(BookmarkXml foundation.PWSTR) (EVT_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procEvtCreateBookmark.Addr(), uintptr(unsafe.Pointer(BookmarkXml)))
+func EvtCreateBookmark(BookmarkXml string) (EVT_HANDLE, error) {
+	_BookmarkXml := win32.UTF16Ptr(BookmarkXml)
+	r1, _, e1 := syscall.SyscallN(procEvtCreateBookmark.Addr(), uintptr(unsafe.Pointer(_BookmarkXml)))
 	if e1 != 0 {
 		return EVT_HANDLE(r1), e1
 	}
@@ -200,8 +206,12 @@ func EvtCreateBookmark(BookmarkXml foundation.PWSTR) (EVT_HANDLE, error) {
 // EvtCreateRenderContext calls wevtapi!EvtCreateRenderContext.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtcreaterendercontext
 // Minimum OS: windows6.0.6000.
-func EvtCreateRenderContext(ValuePathsCount uint32, ValuePaths *foundation.PWSTR, Flags uint32) (EVT_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procEvtCreateRenderContext.Addr(), uintptr(ValuePathsCount), uintptr(unsafe.Pointer(ValuePaths)), uintptr(Flags))
+func EvtCreateRenderContext(ValuePaths []foundation.PWSTR, Flags uint32) (EVT_HANDLE, error) {
+	var _ValuePaths *foundation.PWSTR
+	if len(ValuePaths) > 0 {
+		_ValuePaths = &ValuePaths[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procEvtCreateRenderContext.Addr(), uintptr(len(ValuePaths)), uintptr(unsafe.Pointer(_ValuePaths)), uintptr(Flags))
 	if e1 != 0 {
 		return EVT_HANDLE(r1), e1
 	}
@@ -211,8 +221,11 @@ func EvtCreateRenderContext(ValuePathsCount uint32, ValuePaths *foundation.PWSTR
 // EvtExportLog calls wevtapi!EvtExportLog.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtexportlog
 // Minimum OS: windows6.0.6000.
-func EvtExportLog(Session EVT_HANDLE, Path foundation.PWSTR, Query foundation.PWSTR, TargetFilePath foundation.PWSTR, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEvtExportLog.Addr(), uintptr(Session), uintptr(unsafe.Pointer(Path)), uintptr(unsafe.Pointer(Query)), uintptr(unsafe.Pointer(TargetFilePath)), uintptr(Flags))
+func EvtExportLog(Session EVT_HANDLE, Path string, Query string, TargetFilePath string, Flags uint32) error {
+	_Path := win32.UTF16Ptr(Path)
+	_Query := win32.UTF16Ptr(Query)
+	_TargetFilePath := win32.UTF16Ptr(TargetFilePath)
+	r1, _, e1 := syscall.SyscallN(procEvtExportLog.Addr(), uintptr(Session), uintptr(unsafe.Pointer(_Path)), uintptr(unsafe.Pointer(_Query)), uintptr(unsafe.Pointer(_TargetFilePath)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -222,8 +235,12 @@ func EvtExportLog(Session EVT_HANDLE, Path foundation.PWSTR, Query foundation.PW
 // EvtFormatMessage calls wevtapi!EvtFormatMessage.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtformatmessage
 // Minimum OS: windows6.0.6000.
-func EvtFormatMessage(PublisherMetadata EVT_HANDLE, Event EVT_HANDLE, MessageId uint32, ValueCount uint32, Values *EVT_VARIANT, Flags uint32, BufferSize uint32, Buffer foundation.PWSTR, BufferUsed *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEvtFormatMessage.Addr(), uintptr(PublisherMetadata), uintptr(Event), uintptr(MessageId), uintptr(ValueCount), uintptr(unsafe.Pointer(Values)), uintptr(Flags), uintptr(BufferSize), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(BufferUsed)))
+func EvtFormatMessage(PublisherMetadata EVT_HANDLE, Event EVT_HANDLE, MessageId uint32, Values []EVT_VARIANT, Flags uint32, BufferSize uint32, Buffer foundation.PWSTR, BufferUsed *uint32) error {
+	var _Values *EVT_VARIANT
+	if len(Values) > 0 {
+		_Values = &Values[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procEvtFormatMessage.Addr(), uintptr(PublisherMetadata), uintptr(Event), uintptr(MessageId), uintptr(len(Values)), uintptr(unsafe.Pointer(_Values)), uintptr(Flags), uintptr(BufferSize), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(BufferUsed)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -329,8 +346,12 @@ func EvtGetQueryInfo(QueryOrSubscription EVT_HANDLE, PropertyId EVT_QUERY_PROPER
 // EvtNext calls wevtapi!EvtNext.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtnext
 // Minimum OS: windows6.0.6000.
-func EvtNext(ResultSet EVT_HANDLE, EventsSize uint32, Events *uintptr, Timeout uint32, Flags uint32, Returned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEvtNext.Addr(), uintptr(ResultSet), uintptr(EventsSize), uintptr(unsafe.Pointer(Events)), uintptr(Timeout), uintptr(Flags), uintptr(unsafe.Pointer(Returned)))
+func EvtNext(ResultSet EVT_HANDLE, Events []uintptr, Timeout uint32, Flags uint32, Returned *uint32) error {
+	var _Events *uintptr
+	if len(Events) > 0 {
+		_Events = &Events[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procEvtNext.Addr(), uintptr(ResultSet), uintptr(len(Events)), uintptr(unsafe.Pointer(_Events)), uintptr(Timeout), uintptr(Flags), uintptr(unsafe.Pointer(Returned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -373,8 +394,9 @@ func EvtNextPublisherId(PublisherEnum EVT_HANDLE, PublisherIdBufferSize uint32, 
 // EvtOpenChannelConfig calls wevtapi!EvtOpenChannelConfig.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtopenchannelconfig
 // Minimum OS: windows6.0.6000.
-func EvtOpenChannelConfig(Session EVT_HANDLE, ChannelPath foundation.PWSTR, Flags uint32) (EVT_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procEvtOpenChannelConfig.Addr(), uintptr(Session), uintptr(unsafe.Pointer(ChannelPath)), uintptr(Flags))
+func EvtOpenChannelConfig(Session EVT_HANDLE, ChannelPath string, Flags uint32) (EVT_HANDLE, error) {
+	_ChannelPath := win32.UTF16Ptr(ChannelPath)
+	r1, _, e1 := syscall.SyscallN(procEvtOpenChannelConfig.Addr(), uintptr(Session), uintptr(unsafe.Pointer(_ChannelPath)), uintptr(Flags))
 	if e1 != 0 {
 		return EVT_HANDLE(r1), e1
 	}
@@ -406,8 +428,9 @@ func EvtOpenEventMetadataEnum(PublisherMetadata EVT_HANDLE, Flags uint32) (EVT_H
 // EvtOpenLog calls wevtapi!EvtOpenLog.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtopenlog
 // Minimum OS: windows6.0.6000.
-func EvtOpenLog(Session EVT_HANDLE, Path foundation.PWSTR, Flags uint32) (EVT_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procEvtOpenLog.Addr(), uintptr(Session), uintptr(unsafe.Pointer(Path)), uintptr(Flags))
+func EvtOpenLog(Session EVT_HANDLE, Path string, Flags uint32) (EVT_HANDLE, error) {
+	_Path := win32.UTF16Ptr(Path)
+	r1, _, e1 := syscall.SyscallN(procEvtOpenLog.Addr(), uintptr(Session), uintptr(unsafe.Pointer(_Path)), uintptr(Flags))
 	if e1 != 0 {
 		return EVT_HANDLE(r1), e1
 	}
@@ -428,8 +451,10 @@ func EvtOpenPublisherEnum(Session EVT_HANDLE, Flags uint32) (EVT_HANDLE, error) 
 // EvtOpenPublisherMetadata calls wevtapi!EvtOpenPublisherMetadata.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtopenpublishermetadata
 // Minimum OS: windows6.0.6000.
-func EvtOpenPublisherMetadata(Session EVT_HANDLE, PublisherId foundation.PWSTR, LogFilePath foundation.PWSTR, Locale uint32, Flags uint32) (EVT_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procEvtOpenPublisherMetadata.Addr(), uintptr(Session), uintptr(unsafe.Pointer(PublisherId)), uintptr(unsafe.Pointer(LogFilePath)), uintptr(Locale), uintptr(Flags))
+func EvtOpenPublisherMetadata(Session EVT_HANDLE, PublisherId string, LogFilePath string, Locale uint32, Flags uint32) (EVT_HANDLE, error) {
+	_PublisherId := win32.UTF16Ptr(PublisherId)
+	_LogFilePath := win32.UTF16Ptr(LogFilePath)
+	r1, _, e1 := syscall.SyscallN(procEvtOpenPublisherMetadata.Addr(), uintptr(Session), uintptr(unsafe.Pointer(_PublisherId)), uintptr(unsafe.Pointer(_LogFilePath)), uintptr(Locale), uintptr(Flags))
 	if e1 != 0 {
 		return EVT_HANDLE(r1), e1
 	}
@@ -439,8 +464,8 @@ func EvtOpenPublisherMetadata(Session EVT_HANDLE, PublisherId foundation.PWSTR, 
 // EvtOpenSession calls wevtapi!EvtOpenSession.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtopensession
 // Minimum OS: windows6.0.6000.
-func EvtOpenSession(LoginClass EVT_LOGIN_CLASS, Login unsafe.Pointer, Timeout uint32, Flags uint32) (EVT_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procEvtOpenSession.Addr(), uintptr(LoginClass), uintptr(unsafe.Pointer(Login)), uintptr(Timeout), uintptr(Flags))
+func EvtOpenSession(LoginClass EVT_LOGIN_CLASS, Login unsafe.Pointer) (EVT_HANDLE, error) {
+	r1, _, e1 := syscall.SyscallN(procEvtOpenSession.Addr(), uintptr(LoginClass), uintptr(unsafe.Pointer(Login)), 0, 0)
 	if e1 != 0 {
 		return EVT_HANDLE(r1), e1
 	}
@@ -450,8 +475,10 @@ func EvtOpenSession(LoginClass EVT_LOGIN_CLASS, Login unsafe.Pointer, Timeout ui
 // EvtQuery calls wevtapi!EvtQuery.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtquery
 // Minimum OS: windows6.0.6000.
-func EvtQuery(Session EVT_HANDLE, Path foundation.PWSTR, Query foundation.PWSTR, Flags uint32) (EVT_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procEvtQuery.Addr(), uintptr(Session), uintptr(unsafe.Pointer(Path)), uintptr(unsafe.Pointer(Query)), uintptr(Flags))
+func EvtQuery(Session EVT_HANDLE, Path string, Query string, Flags uint32) (EVT_HANDLE, error) {
+	_Path := win32.UTF16Ptr(Path)
+	_Query := win32.UTF16Ptr(Query)
+	r1, _, e1 := syscall.SyscallN(procEvtQuery.Addr(), uintptr(Session), uintptr(unsafe.Pointer(_Path)), uintptr(unsafe.Pointer(_Query)), uintptr(Flags))
 	if e1 != 0 {
 		return EVT_HANDLE(r1), e1
 	}
@@ -483,8 +510,8 @@ func EvtSaveChannelConfig(ChannelConfig EVT_HANDLE, Flags uint32) error {
 // EvtSeek calls wevtapi!EvtSeek.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtseek
 // Minimum OS: windows6.0.6000.
-func EvtSeek(ResultSet EVT_HANDLE, Position int64, Bookmark EVT_HANDLE, Timeout uint32, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEvtSeek.Addr(), uintptr(ResultSet), uintptr(Position), uintptr(Bookmark), uintptr(Timeout), uintptr(Flags))
+func EvtSeek(ResultSet EVT_HANDLE, Position int64, Bookmark EVT_HANDLE, Flags uint32) error {
+	r1, _, e1 := syscall.SyscallN(procEvtSeek.Addr(), uintptr(ResultSet), uintptr(Position), uintptr(Bookmark), 0, uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -505,8 +532,10 @@ func EvtSetChannelConfigProperty(ChannelConfig EVT_HANDLE, PropertyId EVT_CHANNE
 // EvtSubscribe calls wevtapi!EvtSubscribe.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtsubscribe
 // Minimum OS: windows6.0.6000.
-func EvtSubscribe(Session EVT_HANDLE, SignalEvent foundation.HANDLE, ChannelPath foundation.PWSTR, Query foundation.PWSTR, Bookmark EVT_HANDLE, Context unsafe.Pointer, Callback EVT_SUBSCRIBE_CALLBACK, Flags uint32) (EVT_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procEvtSubscribe.Addr(), uintptr(Session), uintptr(SignalEvent), uintptr(unsafe.Pointer(ChannelPath)), uintptr(unsafe.Pointer(Query)), uintptr(Bookmark), uintptr(unsafe.Pointer(Context)), uintptr(Callback), uintptr(Flags))
+func EvtSubscribe(Session EVT_HANDLE, SignalEvent foundation.HANDLE, ChannelPath string, Query string, Bookmark EVT_HANDLE, Context unsafe.Pointer, Callback EVT_SUBSCRIBE_CALLBACK, Flags uint32) (EVT_HANDLE, error) {
+	_ChannelPath := win32.UTF16Ptr(ChannelPath)
+	_Query := win32.UTF16Ptr(Query)
+	r1, _, e1 := syscall.SyscallN(procEvtSubscribe.Addr(), uintptr(Session), uintptr(SignalEvent), uintptr(unsafe.Pointer(_ChannelPath)), uintptr(unsafe.Pointer(_Query)), uintptr(Bookmark), uintptr(unsafe.Pointer(Context)), uintptr(Callback), uintptr(Flags))
 	if e1 != 0 {
 		return EVT_HANDLE(r1), e1
 	}
@@ -568,6 +597,20 @@ func NotifyChangeEventLog(hEventLog foundation.HANDLE, hEvent foundation.HANDLE)
 	return nil
 }
 
+// OpenBackupEventLog calls ADVAPI32!OpenBackupEventLogW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-openbackupeventlogw
+// Minimum OS: windows5.0.
+func OpenBackupEventLog(lpUNCServerName string, lpFileName string) (foundation.HANDLE, error) {
+	_lpUNCServerName := win32.UTF16Ptr(lpUNCServerName)
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, e1 := syscall.SyscallN(procOpenBackupEventLog.Addr(), uintptr(unsafe.Pointer(_lpUNCServerName)), uintptr(unsafe.Pointer(_lpFileName)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // OpenBackupEventLogA calls ADVAPI32!OpenBackupEventLogA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-openbackupeventloga
 // Minimum OS: windows5.0.
@@ -580,11 +623,13 @@ func OpenBackupEventLogA(lpUNCServerName foundation.PSTR, lpFileName foundation.
 	return ret, nil
 }
 
-// OpenBackupEventLogW calls ADVAPI32!OpenBackupEventLogW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-openbackupeventlogw
+// OpenEventLog calls ADVAPI32!OpenEventLogW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-openeventlogw
 // Minimum OS: windows5.0.
-func OpenBackupEventLogW(lpUNCServerName foundation.PWSTR, lpFileName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenBackupEventLogW.Addr(), uintptr(unsafe.Pointer(lpUNCServerName)), uintptr(unsafe.Pointer(lpFileName)))
+func OpenEventLog(lpUNCServerName string, lpSourceName string) (foundation.HANDLE, error) {
+	_lpUNCServerName := win32.UTF16Ptr(lpUNCServerName)
+	_lpSourceName := win32.UTF16Ptr(lpSourceName)
+	r1, _, e1 := syscall.SyscallN(procOpenEventLog.Addr(), uintptr(unsafe.Pointer(_lpUNCServerName)), uintptr(unsafe.Pointer(_lpSourceName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -604,16 +649,15 @@ func OpenEventLogA(lpUNCServerName foundation.PSTR, lpSourceName foundation.PSTR
 	return ret, nil
 }
 
-// OpenEventLogW calls ADVAPI32!OpenEventLogW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-openeventlogw
+// ReadEventLog calls ADVAPI32!ReadEventLogW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-readeventlogw
 // Minimum OS: windows5.0.
-func OpenEventLogW(lpUNCServerName foundation.PWSTR, lpSourceName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenEventLogW.Addr(), uintptr(unsafe.Pointer(lpUNCServerName)), uintptr(unsafe.Pointer(lpSourceName)))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
+func ReadEventLog(hEventLog foundation.HANDLE, dwReadFlags READ_EVENT_LOG_READ_FLAGS, dwRecordOffset uint32, lpBuffer unsafe.Pointer, nNumberOfBytesToRead uint32, pnBytesRead *uint32, pnMinNumberOfBytesNeeded *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procReadEventLog.Addr(), uintptr(hEventLog), uintptr(dwReadFlags), uintptr(dwRecordOffset), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytesToRead), uintptr(unsafe.Pointer(pnBytesRead)), uintptr(unsafe.Pointer(pnMinNumberOfBytesNeeded)))
+	if r1 == 0 {
+		return win32.LastError(e1)
 	}
-	return ret, nil
+	return nil
 }
 
 // ReadEventLogA calls ADVAPI32!ReadEventLogA.
@@ -627,15 +671,18 @@ func ReadEventLogA(hEventLog foundation.HANDLE, dwReadFlags READ_EVENT_LOG_READ_
 	return nil
 }
 
-// ReadEventLogW calls ADVAPI32!ReadEventLogW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-readeventlogw
+// RegisterEventSource calls ADVAPI32!RegisterEventSourceW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-registereventsourcew
 // Minimum OS: windows5.0.
-func ReadEventLogW(hEventLog foundation.HANDLE, dwReadFlags READ_EVENT_LOG_READ_FLAGS, dwRecordOffset uint32, lpBuffer unsafe.Pointer, nNumberOfBytesToRead uint32, pnBytesRead *uint32, pnMinNumberOfBytesNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procReadEventLogW.Addr(), uintptr(hEventLog), uintptr(dwReadFlags), uintptr(dwRecordOffset), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytesToRead), uintptr(unsafe.Pointer(pnBytesRead)), uintptr(unsafe.Pointer(pnMinNumberOfBytesNeeded)))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func RegisterEventSource(lpUNCServerName string, lpSourceName string) (foundation.HANDLE, error) {
+	_lpUNCServerName := win32.UTF16Ptr(lpUNCServerName)
+	_lpSourceName := win32.UTF16Ptr(lpSourceName)
+	r1, _, e1 := syscall.SyscallN(procRegisterEventSource.Addr(), uintptr(unsafe.Pointer(_lpUNCServerName)), uintptr(unsafe.Pointer(_lpSourceName)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
 	}
-	return nil
+	return ret, nil
 }
 
 // RegisterEventSourceA calls ADVAPI32!RegisterEventSourceA.
@@ -650,34 +697,30 @@ func RegisterEventSourceA(lpUNCServerName foundation.PSTR, lpSourceName foundati
 	return ret, nil
 }
 
-// RegisterEventSourceW calls ADVAPI32!RegisterEventSourceW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-registereventsourcew
+// ReportEvent calls ADVAPI32!ReportEventW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-reporteventw
 // Minimum OS: windows5.0.
-func RegisterEventSourceW(lpUNCServerName foundation.PWSTR, lpSourceName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procRegisterEventSourceW.Addr(), uintptr(unsafe.Pointer(lpUNCServerName)), uintptr(unsafe.Pointer(lpSourceName)))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
+func ReportEvent(hEventLog foundation.HANDLE, wType REPORT_EVENT_TYPE, wCategory uint16, dwEventID uint32, lpUserSid security.PSID, dwDataSize uint32, lpStrings []foundation.PWSTR, lpRawData unsafe.Pointer) error {
+	var _lpStrings *foundation.PWSTR
+	if len(lpStrings) > 0 {
+		_lpStrings = &lpStrings[0]
 	}
-	return ret, nil
-}
-
-// ReportEventA calls ADVAPI32!ReportEventA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-reporteventa
-// Minimum OS: windows5.0.
-func ReportEventA(hEventLog foundation.HANDLE, wType REPORT_EVENT_TYPE, wCategory uint16, dwEventID uint32, lpUserSid security.PSID, wNumStrings uint16, dwDataSize uint32, lpStrings *foundation.PSTR, lpRawData unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procReportEventA.Addr(), uintptr(hEventLog), uintptr(wType), uintptr(wCategory), uintptr(dwEventID), uintptr(lpUserSid), uintptr(wNumStrings), uintptr(dwDataSize), uintptr(unsafe.Pointer(lpStrings)), uintptr(unsafe.Pointer(lpRawData)))
+	r1, _, e1 := syscall.SyscallN(procReportEvent.Addr(), uintptr(hEventLog), uintptr(wType), uintptr(wCategory), uintptr(dwEventID), uintptr(lpUserSid), uintptr(len(lpStrings)), uintptr(dwDataSize), uintptr(unsafe.Pointer(_lpStrings)), uintptr(unsafe.Pointer(lpRawData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// ReportEventW calls ADVAPI32!ReportEventW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-reporteventw
+// ReportEventA calls ADVAPI32!ReportEventA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-reporteventa
 // Minimum OS: windows5.0.
-func ReportEventW(hEventLog foundation.HANDLE, wType REPORT_EVENT_TYPE, wCategory uint16, dwEventID uint32, lpUserSid security.PSID, wNumStrings uint16, dwDataSize uint32, lpStrings *foundation.PWSTR, lpRawData unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procReportEventW.Addr(), uintptr(hEventLog), uintptr(wType), uintptr(wCategory), uintptr(dwEventID), uintptr(lpUserSid), uintptr(wNumStrings), uintptr(dwDataSize), uintptr(unsafe.Pointer(lpStrings)), uintptr(unsafe.Pointer(lpRawData)))
+func ReportEventA(hEventLog foundation.HANDLE, wType REPORT_EVENT_TYPE, wCategory uint16, dwEventID uint32, lpUserSid security.PSID, dwDataSize uint32, lpStrings []foundation.PSTR, lpRawData unsafe.Pointer) error {
+	var _lpStrings *foundation.PSTR
+	if len(lpStrings) > 0 {
+		_lpStrings = &lpStrings[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procReportEventA.Addr(), uintptr(hEventLog), uintptr(wType), uintptr(wCategory), uintptr(dwEventID), uintptr(lpUserSid), uintptr(len(lpStrings)), uintptr(dwDataSize), uintptr(unsafe.Pointer(_lpStrings)), uintptr(unsafe.Pointer(lpRawData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

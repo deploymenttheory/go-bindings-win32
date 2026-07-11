@@ -68,78 +68,84 @@ func CfCloseHandle(FileHandle foundation.HANDLE) {
 // CfConnectSyncRoot calls cldapi!CfConnectSyncRoot.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfconnectsyncroot
 // Minimum OS: windows10.0.16299.
-func CfConnectSyncRoot(SyncRootPath foundation.PWSTR, CallbackTable *CF_CALLBACK_REGISTRATION, CallbackContext unsafe.Pointer, ConnectFlags CF_CONNECT_FLAGS, ConnectionKey *CF_CONNECTION_KEY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCfConnectSyncRoot.Addr(), uintptr(unsafe.Pointer(SyncRootPath)), uintptr(unsafe.Pointer(CallbackTable)), uintptr(unsafe.Pointer(CallbackContext)), uintptr(ConnectFlags), uintptr(unsafe.Pointer(ConnectionKey)))
-	return foundation.HRESULT(r1)
+func CfConnectSyncRoot(SyncRootPath string, CallbackTable *CF_CALLBACK_REGISTRATION, CallbackContext unsafe.Pointer, ConnectFlags CF_CONNECT_FLAGS, ConnectionKey *CF_CONNECTION_KEY) error {
+	_SyncRootPath := win32.UTF16Ptr(SyncRootPath)
+	r1, _, _ := syscall.SyscallN(procCfConnectSyncRoot.Addr(), uintptr(unsafe.Pointer(_SyncRootPath)), uintptr(unsafe.Pointer(CallbackTable)), uintptr(unsafe.Pointer(CallbackContext)), uintptr(ConnectFlags), uintptr(unsafe.Pointer(ConnectionKey)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfConvertToPlaceholder calls cldapi!CfConvertToPlaceholder.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfconverttoplaceholder
 // Minimum OS: windows10.0.16299.
-func CfConvertToPlaceholder(FileHandle foundation.HANDLE, FileIdentity unsafe.Pointer, FileIdentityLength uint32, ConvertFlags CF_CONVERT_FLAGS, ConvertUsn *int64, Overlapped *systemio.OVERLAPPED) foundation.HRESULT {
+func CfConvertToPlaceholder(FileHandle foundation.HANDLE, FileIdentity unsafe.Pointer, FileIdentityLength uint32, ConvertFlags CF_CONVERT_FLAGS, ConvertUsn *int64, Overlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(procCfConvertToPlaceholder.Addr(), uintptr(FileHandle), uintptr(unsafe.Pointer(FileIdentity)), uintptr(FileIdentityLength), uintptr(ConvertFlags), uintptr(unsafe.Pointer(ConvertUsn)), uintptr(unsafe.Pointer(Overlapped)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfCreatePlaceholders calls cldapi!CfCreatePlaceholders.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfcreateplaceholders
 // Minimum OS: windows10.0.16299.
-func CfCreatePlaceholders(BaseDirectoryPath foundation.PWSTR, PlaceholderArray *CF_PLACEHOLDER_CREATE_INFO, PlaceholderCount uint32, CreateFlags CF_CREATE_FLAGS, EntriesProcessed *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCfCreatePlaceholders.Addr(), uintptr(unsafe.Pointer(BaseDirectoryPath)), uintptr(unsafe.Pointer(PlaceholderArray)), uintptr(PlaceholderCount), uintptr(CreateFlags), uintptr(unsafe.Pointer(EntriesProcessed)))
-	return foundation.HRESULT(r1)
+func CfCreatePlaceholders(BaseDirectoryPath string, PlaceholderArray []CF_PLACEHOLDER_CREATE_INFO, CreateFlags CF_CREATE_FLAGS, EntriesProcessed *uint32) error {
+	_BaseDirectoryPath := win32.UTF16Ptr(BaseDirectoryPath)
+	var _PlaceholderArray *CF_PLACEHOLDER_CREATE_INFO
+	if len(PlaceholderArray) > 0 {
+		_PlaceholderArray = &PlaceholderArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCfCreatePlaceholders.Addr(), uintptr(unsafe.Pointer(_BaseDirectoryPath)), uintptr(unsafe.Pointer(_PlaceholderArray)), uintptr(len(PlaceholderArray)), uintptr(CreateFlags), uintptr(unsafe.Pointer(EntriesProcessed)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfDehydratePlaceholder calls cldapi!CfDehydratePlaceholder.
-func CfDehydratePlaceholder(FileHandle foundation.HANDLE, StartingOffset int64, Length int64, DehydrateFlags CF_DEHYDRATE_FLAGS, Overlapped *systemio.OVERLAPPED) foundation.HRESULT {
+func CfDehydratePlaceholder(FileHandle foundation.HANDLE, StartingOffset int64, Length int64, DehydrateFlags CF_DEHYDRATE_FLAGS, Overlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(procCfDehydratePlaceholder.Addr(), uintptr(FileHandle), uintptr(StartingOffset), uintptr(Length), uintptr(DehydrateFlags), uintptr(unsafe.Pointer(Overlapped)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfDisconnectSyncRoot calls cldapi!CfDisconnectSyncRoot.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfdisconnectsyncroot
 // Minimum OS: windows10.0.16299.
-func CfDisconnectSyncRoot(ConnectionKey CF_CONNECTION_KEY) foundation.HRESULT {
+func CfDisconnectSyncRoot(ConnectionKey CF_CONNECTION_KEY) error {
 	r1, _, _ := syscall.SyscallN(procCfDisconnectSyncRoot.Addr(), uintptr(ConnectionKey))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfExecute calls cldapi!CfExecute.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfexecute
 // Minimum OS: windows10.0.16299.
-func CfExecute(OpInfo *CF_OPERATION_INFO, OpParams *CF_OPERATION_PARAMETERS) foundation.HRESULT {
+func CfExecute(OpInfo *CF_OPERATION_INFO, OpParams *CF_OPERATION_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(procCfExecute.Addr(), uintptr(unsafe.Pointer(OpInfo)), uintptr(unsafe.Pointer(OpParams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfGetCorrelationVector calls cldapi!CfGetCorrelationVector.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfgetcorrelationvector
 // Minimum OS: windows10.0.16299.
-func CfGetCorrelationVector(FileHandle foundation.HANDLE, CorrelationVector *systemcorrelationvector.CORRELATION_VECTOR) foundation.HRESULT {
+func CfGetCorrelationVector(FileHandle foundation.HANDLE, CorrelationVector *systemcorrelationvector.CORRELATION_VECTOR) error {
 	r1, _, _ := syscall.SyscallN(procCfGetCorrelationVector.Addr(), uintptr(FileHandle), uintptr(unsafe.Pointer(CorrelationVector)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfGetPlaceholderInfo calls cldapi!CfGetPlaceholderInfo.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfgetplaceholderinfo
 // Minimum OS: windows10.0.16299.
-func CfGetPlaceholderInfo(FileHandle foundation.HANDLE, InfoClass CF_PLACEHOLDER_INFO_CLASS, InfoBuffer unsafe.Pointer, InfoBufferLength uint32, ReturnedLength *uint32) foundation.HRESULT {
+func CfGetPlaceholderInfo(FileHandle foundation.HANDLE, InfoClass CF_PLACEHOLDER_INFO_CLASS, InfoBuffer unsafe.Pointer, InfoBufferLength uint32, ReturnedLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCfGetPlaceholderInfo.Addr(), uintptr(FileHandle), uintptr(InfoClass), uintptr(unsafe.Pointer(InfoBuffer)), uintptr(InfoBufferLength), uintptr(unsafe.Pointer(ReturnedLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfGetPlaceholderRangeInfo calls cldapi!CfGetPlaceholderRangeInfo.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfgetplaceholderrangeinfo
 // Minimum OS: windows10.0.16299.
-func CfGetPlaceholderRangeInfo(FileHandle foundation.HANDLE, InfoClass CF_PLACEHOLDER_RANGE_INFO_CLASS, StartingOffset int64, Length int64, InfoBuffer unsafe.Pointer, InfoBufferLength uint32, ReturnedLength *uint32) foundation.HRESULT {
+func CfGetPlaceholderRangeInfo(FileHandle foundation.HANDLE, InfoClass CF_PLACEHOLDER_RANGE_INFO_CLASS, StartingOffset int64, Length int64, InfoBuffer unsafe.Pointer, InfoBufferLength uint32, ReturnedLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCfGetPlaceholderRangeInfo.Addr(), uintptr(FileHandle), uintptr(InfoClass), uintptr(StartingOffset), uintptr(Length), uintptr(unsafe.Pointer(InfoBuffer)), uintptr(InfoBufferLength), uintptr(unsafe.Pointer(ReturnedLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfGetPlaceholderRangeInfoForHydration calls cldapi!CfGetPlaceholderRangeInfoForHydration.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfgetplaceholderrangeinfoforhydration
-func CfGetPlaceholderRangeInfoForHydration(ConnectionKey CF_CONNECTION_KEY, TransferKey int64, FileId int64, InfoClass CF_PLACEHOLDER_RANGE_INFO_CLASS, StartingOffset int64, RangeLength int64, InfoBuffer unsafe.Pointer, InfoBufferSize uint32, InfoBufferWritten *uint32) foundation.HRESULT {
+func CfGetPlaceholderRangeInfoForHydration(ConnectionKey CF_CONNECTION_KEY, TransferKey int64, FileId int64, InfoClass CF_PLACEHOLDER_RANGE_INFO_CLASS, StartingOffset int64, RangeLength int64, InfoBuffer unsafe.Pointer, InfoBufferSize uint32, InfoBufferWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCfGetPlaceholderRangeInfoForHydration.Addr(), uintptr(ConnectionKey), uintptr(TransferKey), uintptr(FileId), uintptr(InfoClass), uintptr(StartingOffset), uintptr(RangeLength), uintptr(unsafe.Pointer(InfoBuffer)), uintptr(InfoBufferSize), uintptr(unsafe.Pointer(InfoBufferWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfGetPlaceholderStateFromAttributeTag calls cldapi!CfGetPlaceholderStateFromAttributeTag.
@@ -169,33 +175,34 @@ func CfGetPlaceholderStateFromFindData(FindData *storagefilesystem.WIN32_FIND_DA
 // CfGetPlatformInfo calls cldapi!CfGetPlatformInfo.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfgetplatforminfo
 // Minimum OS: windows10.0.16299.
-func CfGetPlatformInfo(PlatformVersion *CF_PLATFORM_INFO) foundation.HRESULT {
+func CfGetPlatformInfo(PlatformVersion *CF_PLATFORM_INFO) error {
 	r1, _, _ := syscall.SyscallN(procCfGetPlatformInfo.Addr(), uintptr(unsafe.Pointer(PlatformVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfGetSyncRootInfoByHandle calls cldapi!CfGetSyncRootInfoByHandle.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfgetsyncrootinfobyhandle
 // Minimum OS: windows10.0.16299.
-func CfGetSyncRootInfoByHandle(FileHandle foundation.HANDLE, InfoClass CF_SYNC_ROOT_INFO_CLASS, InfoBuffer unsafe.Pointer, InfoBufferLength uint32, ReturnedLength *uint32) foundation.HRESULT {
+func CfGetSyncRootInfoByHandle(FileHandle foundation.HANDLE, InfoClass CF_SYNC_ROOT_INFO_CLASS, InfoBuffer unsafe.Pointer, InfoBufferLength uint32, ReturnedLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(procCfGetSyncRootInfoByHandle.Addr(), uintptr(FileHandle), uintptr(InfoClass), uintptr(unsafe.Pointer(InfoBuffer)), uintptr(InfoBufferLength), uintptr(unsafe.Pointer(ReturnedLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfGetSyncRootInfoByPath calls cldapi!CfGetSyncRootInfoByPath.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfgetsyncrootinfobypath
 // Minimum OS: windows10.0.16299.
-func CfGetSyncRootInfoByPath(FilePath foundation.PWSTR, InfoClass CF_SYNC_ROOT_INFO_CLASS, InfoBuffer unsafe.Pointer, InfoBufferLength uint32, ReturnedLength *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCfGetSyncRootInfoByPath.Addr(), uintptr(unsafe.Pointer(FilePath)), uintptr(InfoClass), uintptr(unsafe.Pointer(InfoBuffer)), uintptr(InfoBufferLength), uintptr(unsafe.Pointer(ReturnedLength)))
-	return foundation.HRESULT(r1)
+func CfGetSyncRootInfoByPath(FilePath string, InfoClass CF_SYNC_ROOT_INFO_CLASS, InfoBuffer unsafe.Pointer, InfoBufferLength uint32, ReturnedLength *uint32) error {
+	_FilePath := win32.UTF16Ptr(FilePath)
+	r1, _, _ := syscall.SyscallN(procCfGetSyncRootInfoByPath.Addr(), uintptr(unsafe.Pointer(_FilePath)), uintptr(InfoClass), uintptr(unsafe.Pointer(InfoBuffer)), uintptr(InfoBufferLength), uintptr(unsafe.Pointer(ReturnedLength)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfGetTransferKey calls cldapi!CfGetTransferKey.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfgettransferkey
 // Minimum OS: windows10.0.16299.
-func CfGetTransferKey(FileHandle foundation.HANDLE, TransferKey *int64) foundation.HRESULT {
+func CfGetTransferKey(FileHandle foundation.HANDLE, TransferKey *int64) error {
 	r1, _, _ := syscall.SyscallN(procCfGetTransferKey.Addr(), uintptr(FileHandle), uintptr(unsafe.Pointer(TransferKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfGetWin32HandleFromProtectedHandle calls cldapi!CfGetWin32HandleFromProtectedHandle.
@@ -209,25 +216,26 @@ func CfGetWin32HandleFromProtectedHandle(ProtectedHandle foundation.HANDLE) foun
 // CfHydratePlaceholder calls cldapi!CfHydratePlaceholder.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfhydrateplaceholder
 // Minimum OS: windows10.0.16299.
-func CfHydratePlaceholder(FileHandle foundation.HANDLE, StartingOffset int64, Length int64, HydrateFlags CF_HYDRATE_FLAGS, Overlapped *systemio.OVERLAPPED) foundation.HRESULT {
+func CfHydratePlaceholder(FileHandle foundation.HANDLE, StartingOffset int64, Length int64, HydrateFlags CF_HYDRATE_FLAGS, Overlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(procCfHydratePlaceholder.Addr(), uintptr(FileHandle), uintptr(StartingOffset), uintptr(Length), uintptr(HydrateFlags), uintptr(unsafe.Pointer(Overlapped)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfOpenFileWithOplock calls cldapi!CfOpenFileWithOplock.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfopenfilewithoplock
 // Minimum OS: windows10.0.16299.
-func CfOpenFileWithOplock(FilePath foundation.PWSTR, Flags CF_OPEN_FILE_FLAGS, ProtectedHandle *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCfOpenFileWithOplock.Addr(), uintptr(unsafe.Pointer(FilePath)), uintptr(Flags), uintptr(unsafe.Pointer(ProtectedHandle)))
-	return foundation.HRESULT(r1)
+func CfOpenFileWithOplock(FilePath string, Flags CF_OPEN_FILE_FLAGS, ProtectedHandle *foundation.HANDLE) error {
+	_FilePath := win32.UTF16Ptr(FilePath)
+	r1, _, _ := syscall.SyscallN(procCfOpenFileWithOplock.Addr(), uintptr(unsafe.Pointer(_FilePath)), uintptr(Flags), uintptr(unsafe.Pointer(ProtectedHandle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfQuerySyncProviderStatus calls cldapi!CfQuerySyncProviderStatus.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfquerysyncproviderstatus
 // Minimum OS: windows10.0.16299.
-func CfQuerySyncProviderStatus(ConnectionKey CF_CONNECTION_KEY, ProviderStatus *CF_SYNC_PROVIDER_STATUS) foundation.HRESULT {
+func CfQuerySyncProviderStatus(ConnectionKey CF_CONNECTION_KEY, ProviderStatus *CF_SYNC_PROVIDER_STATUS) error {
 	r1, _, _ := syscall.SyscallN(procCfQuerySyncProviderStatus.Addr(), uintptr(ConnectionKey), uintptr(unsafe.Pointer(ProviderStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfReferenceProtectedHandle calls cldapi!CfReferenceProtectedHandle.
@@ -241,9 +249,10 @@ func CfReferenceProtectedHandle(ProtectedHandle foundation.HANDLE) foundation.BO
 // CfRegisterSyncRoot calls cldapi!CfRegisterSyncRoot.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfregistersyncroot
 // Minimum OS: windows10.0.16299.
-func CfRegisterSyncRoot(SyncRootPath foundation.PWSTR, Registration *CF_SYNC_REGISTRATION, Policies *CF_SYNC_POLICIES, RegisterFlags CF_REGISTER_FLAGS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCfRegisterSyncRoot.Addr(), uintptr(unsafe.Pointer(SyncRootPath)), uintptr(unsafe.Pointer(Registration)), uintptr(unsafe.Pointer(Policies)), uintptr(RegisterFlags))
-	return foundation.HRESULT(r1)
+func CfRegisterSyncRoot(SyncRootPath string, Registration *CF_SYNC_REGISTRATION, Policies *CF_SYNC_POLICIES, RegisterFlags CF_REGISTER_FLAGS) error {
+	_SyncRootPath := win32.UTF16Ptr(SyncRootPath)
+	r1, _, _ := syscall.SyscallN(procCfRegisterSyncRoot.Addr(), uintptr(unsafe.Pointer(_SyncRootPath)), uintptr(unsafe.Pointer(Registration)), uintptr(unsafe.Pointer(Policies)), uintptr(RegisterFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfReleaseProtectedHandle calls cldapi!CfReleaseProtectedHandle.
@@ -263,78 +272,84 @@ func CfReleaseTransferKey(FileHandle foundation.HANDLE, TransferKey *int64) {
 // CfReportProviderProgress calls cldapi!CfReportProviderProgress.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfreportproviderprogress
 // Minimum OS: windows10.0.16299.
-func CfReportProviderProgress(ConnectionKey CF_CONNECTION_KEY, TransferKey int64, ProviderProgressTotal int64, ProviderProgressCompleted int64) foundation.HRESULT {
+func CfReportProviderProgress(ConnectionKey CF_CONNECTION_KEY, TransferKey int64, ProviderProgressTotal int64, ProviderProgressCompleted int64) error {
 	r1, _, _ := syscall.SyscallN(procCfReportProviderProgress.Addr(), uintptr(ConnectionKey), uintptr(TransferKey), uintptr(ProviderProgressTotal), uintptr(ProviderProgressCompleted))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfReportProviderProgress2 calls cldapi!CfReportProviderProgress2.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfreportproviderprogress2
-func CfReportProviderProgress2(ConnectionKey CF_CONNECTION_KEY, TransferKey int64, RequestKey int64, ProviderProgressTotal int64, ProviderProgressCompleted int64, TargetSessionId uint32) foundation.HRESULT {
+func CfReportProviderProgress2(ConnectionKey CF_CONNECTION_KEY, TransferKey int64, RequestKey int64, ProviderProgressTotal int64, ProviderProgressCompleted int64, TargetSessionId uint32) error {
 	r1, _, _ := syscall.SyscallN(procCfReportProviderProgress2.Addr(), uintptr(ConnectionKey), uintptr(TransferKey), uintptr(RequestKey), uintptr(ProviderProgressTotal), uintptr(ProviderProgressCompleted), uintptr(TargetSessionId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfReportSyncStatus calls cldapi!CfReportSyncStatus.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfreportsyncstatus
 // Minimum OS: windows10.0.17134.
-func CfReportSyncStatus(SyncRootPath foundation.PWSTR, SyncStatus *CF_SYNC_STATUS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCfReportSyncStatus.Addr(), uintptr(unsafe.Pointer(SyncRootPath)), uintptr(unsafe.Pointer(SyncStatus)))
-	return foundation.HRESULT(r1)
+func CfReportSyncStatus(SyncRootPath string, SyncStatus *CF_SYNC_STATUS) error {
+	_SyncRootPath := win32.UTF16Ptr(SyncRootPath)
+	r1, _, _ := syscall.SyscallN(procCfReportSyncStatus.Addr(), uintptr(unsafe.Pointer(_SyncRootPath)), uintptr(unsafe.Pointer(SyncStatus)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfRevertPlaceholder calls cldapi!CfRevertPlaceholder.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfrevertplaceholder
 // Minimum OS: windows10.0.16299.
-func CfRevertPlaceholder(FileHandle foundation.HANDLE, RevertFlags CF_REVERT_FLAGS, Overlapped *systemio.OVERLAPPED) foundation.HRESULT {
+func CfRevertPlaceholder(FileHandle foundation.HANDLE, RevertFlags CF_REVERT_FLAGS, Overlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(procCfRevertPlaceholder.Addr(), uintptr(FileHandle), uintptr(RevertFlags), uintptr(unsafe.Pointer(Overlapped)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfSetCorrelationVector calls cldapi!CfSetCorrelationVector.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfsetcorrelationvector
 // Minimum OS: windows10.0.16299.
-func CfSetCorrelationVector(FileHandle foundation.HANDLE, CorrelationVector *systemcorrelationvector.CORRELATION_VECTOR) foundation.HRESULT {
+func CfSetCorrelationVector(FileHandle foundation.HANDLE, CorrelationVector *systemcorrelationvector.CORRELATION_VECTOR) error {
 	r1, _, _ := syscall.SyscallN(procCfSetCorrelationVector.Addr(), uintptr(FileHandle), uintptr(unsafe.Pointer(CorrelationVector)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfSetInSyncState calls cldapi!CfSetInSyncState.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfsetinsyncstate
 // Minimum OS: windows10.0.16299.
-func CfSetInSyncState(FileHandle foundation.HANDLE, InSyncState CF_IN_SYNC_STATE, InSyncFlags CF_SET_IN_SYNC_FLAGS, InSyncUsn *int64) foundation.HRESULT {
+func CfSetInSyncState(FileHandle foundation.HANDLE, InSyncState CF_IN_SYNC_STATE, InSyncFlags CF_SET_IN_SYNC_FLAGS, InSyncUsn *int64) error {
 	r1, _, _ := syscall.SyscallN(procCfSetInSyncState.Addr(), uintptr(FileHandle), uintptr(InSyncState), uintptr(InSyncFlags), uintptr(unsafe.Pointer(InSyncUsn)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfSetPinState calls cldapi!CfSetPinState.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfsetpinstate
 // Minimum OS: windows10.0.16299.
-func CfSetPinState(FileHandle foundation.HANDLE, PinState CF_PIN_STATE, PinFlags CF_SET_PIN_FLAGS, Overlapped *systemio.OVERLAPPED) foundation.HRESULT {
+func CfSetPinState(FileHandle foundation.HANDLE, PinState CF_PIN_STATE, PinFlags CF_SET_PIN_FLAGS, Overlapped *systemio.OVERLAPPED) error {
 	r1, _, _ := syscall.SyscallN(procCfSetPinState.Addr(), uintptr(FileHandle), uintptr(PinState), uintptr(PinFlags), uintptr(unsafe.Pointer(Overlapped)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfUnregisterSyncRoot calls cldapi!CfUnregisterSyncRoot.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfunregistersyncroot
 // Minimum OS: windows10.0.16299.
-func CfUnregisterSyncRoot(SyncRootPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCfUnregisterSyncRoot.Addr(), uintptr(unsafe.Pointer(SyncRootPath)))
-	return foundation.HRESULT(r1)
+func CfUnregisterSyncRoot(SyncRootPath string) error {
+	_SyncRootPath := win32.UTF16Ptr(SyncRootPath)
+	r1, _, _ := syscall.SyscallN(procCfUnregisterSyncRoot.Addr(), uintptr(unsafe.Pointer(_SyncRootPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfUpdatePlaceholder calls cldapi!CfUpdatePlaceholder.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfupdateplaceholder
 // Minimum OS: windows10.0.16299.
-func CfUpdatePlaceholder(FileHandle foundation.HANDLE, FsMetadata *CF_FS_METADATA, FileIdentity unsafe.Pointer, FileIdentityLength uint32, DehydrateRangeArray *CF_FILE_RANGE, DehydrateRangeCount uint32, UpdateFlags CF_UPDATE_FLAGS, UpdateUsn *int64, Overlapped *systemio.OVERLAPPED) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCfUpdatePlaceholder.Addr(), uintptr(FileHandle), uintptr(unsafe.Pointer(FsMetadata)), uintptr(unsafe.Pointer(FileIdentity)), uintptr(FileIdentityLength), uintptr(unsafe.Pointer(DehydrateRangeArray)), uintptr(DehydrateRangeCount), uintptr(UpdateFlags), uintptr(unsafe.Pointer(UpdateUsn)), uintptr(unsafe.Pointer(Overlapped)))
-	return foundation.HRESULT(r1)
+func CfUpdatePlaceholder(FileHandle foundation.HANDLE, FsMetadata *CF_FS_METADATA, FileIdentity unsafe.Pointer, FileIdentityLength uint32, DehydrateRangeArray []CF_FILE_RANGE, UpdateFlags CF_UPDATE_FLAGS, UpdateUsn *int64, Overlapped *systemio.OVERLAPPED) error {
+	var _DehydrateRangeArray *CF_FILE_RANGE
+	if len(DehydrateRangeArray) > 0 {
+		_DehydrateRangeArray = &DehydrateRangeArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCfUpdatePlaceholder.Addr(), uintptr(FileHandle), uintptr(unsafe.Pointer(FsMetadata)), uintptr(unsafe.Pointer(FileIdentity)), uintptr(FileIdentityLength), uintptr(unsafe.Pointer(_DehydrateRangeArray)), uintptr(len(DehydrateRangeArray)), uintptr(UpdateFlags), uintptr(unsafe.Pointer(UpdateUsn)), uintptr(unsafe.Pointer(Overlapped)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CfUpdateSyncProviderStatus calls cldapi!CfUpdateSyncProviderStatus.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfupdatesyncproviderstatus
 // Minimum OS: windows10.0.16299.
-func CfUpdateSyncProviderStatus(ConnectionKey CF_CONNECTION_KEY, ProviderStatus CF_SYNC_PROVIDER_STATUS) foundation.HRESULT {
+func CfUpdateSyncProviderStatus(ConnectionKey CF_CONNECTION_KEY, ProviderStatus CF_SYNC_PROVIDER_STATUS) error {
 	r1, _, _ := syscall.SyscallN(procCfUpdateSyncProviderStatus.Addr(), uintptr(ConnectionKey), uintptr(ProviderStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

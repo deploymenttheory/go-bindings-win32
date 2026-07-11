@@ -1400,8 +1400,8 @@ type DML_ROI_POOLING_OPERATOR_DESC struct {
 }
 
 // DML_SCALAR_UNION: https://learn.microsoft.com/windows/win32/api/directml/ns-directml-dml_scalar_union
-// DML_SCALAR_UNION is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DML_SCALAR_UNION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DML_SCALAR_UNION struct {
 	Data [1]uint64
 }

@@ -24,9 +24,9 @@ type ICompositionCapabilitiesInteropFactory struct {
 var IID_ICompositionCapabilitiesInteropFactory = win32.GUID{Data1: 0x2c9db356, Data2: 0xe70d, Data3: 0x4642, Data4: [8]byte{0x82, 0x98, 0xbc, 0x4a, 0xa5, 0xb4, 0x86, 0x5c}}
 
 // GetForWindow dispatches through ICompositionCapabilitiesInteropFactory's vtable slot 6.
-func (self *ICompositionCapabilitiesInteropFactory) GetForWindow(hwnd foundation.HWND, result *uintptr) foundation.HRESULT {
+func (self *ICompositionCapabilitiesInteropFactory) GetForWindow(hwnd foundation.HWND, result *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ICompositionDrawingSurfaceInterop: https://learn.microsoft.com/windows/win32/api/windows.ui.composition.interop/nn-windows-ui-composition-interop-icompositiondrawingsurfaceinterop
@@ -39,33 +39,33 @@ type ICompositionDrawingSurfaceInterop struct {
 var IID_ICompositionDrawingSurfaceInterop = win32.GUID{Data1: 0xfd04e6e3, Data2: 0xfe0c, Data3: 0x4c3c, Data4: [8]byte{0xab, 0x19, 0xa0, 0x76, 0x01, 0xa5, 0x76, 0xee}}
 
 // BeginDraw dispatches through ICompositionDrawingSurfaceInterop's vtable slot 3.
-func (self *ICompositionDrawingSurfaceInterop) BeginDraw(updateRect *foundation.RECT, iid *win32.GUID, updateObject *unsafe.Pointer, updateOffset *foundation.POINT) foundation.HRESULT {
+func (self *ICompositionDrawingSurfaceInterop) BeginDraw(updateRect *foundation.RECT, iid *win32.GUID, updateObject *unsafe.Pointer, updateOffset *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(updateRect)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(updateObject)), uintptr(unsafe.Pointer(updateOffset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndDraw dispatches through ICompositionDrawingSurfaceInterop's vtable slot 4.
-func (self *ICompositionDrawingSurfaceInterop) EndDraw() foundation.HRESULT {
+func (self *ICompositionDrawingSurfaceInterop) EndDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Scroll dispatches through ICompositionDrawingSurfaceInterop's vtable slot 6.
-func (self *ICompositionDrawingSurfaceInterop) Scroll(scrollRect *foundation.RECT, clipRect *foundation.RECT, offsetX int32, offsetY int32) foundation.HRESULT {
+func (self *ICompositionDrawingSurfaceInterop) Scroll(scrollRect *foundation.RECT, clipRect *foundation.RECT, offsetX int32, offsetY int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scrollRect)), uintptr(unsafe.Pointer(clipRect)), uintptr(offsetX), uintptr(offsetY))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResumeDraw dispatches through ICompositionDrawingSurfaceInterop's vtable slot 7.
-func (self *ICompositionDrawingSurfaceInterop) ResumeDraw() foundation.HRESULT {
+func (self *ICompositionDrawingSurfaceInterop) ResumeDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SuspendDraw dispatches through ICompositionDrawingSurfaceInterop's vtable slot 8.
-func (self *ICompositionDrawingSurfaceInterop) SuspendDraw() foundation.HRESULT {
+func (self *ICompositionDrawingSurfaceInterop) SuspendDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 41e64aae-98c0-4239-8e95-a330dd6aa18b
@@ -77,9 +77,9 @@ type ICompositionDrawingSurfaceInterop2 struct {
 var IID_ICompositionDrawingSurfaceInterop2 = win32.GUID{Data1: 0x41e64aae, Data2: 0x98c0, Data3: 0x4239, Data4: [8]byte{0x8e, 0x95, 0xa3, 0x30, 0xdd, 0x6a, 0xa1, 0x8b}}
 
 // CopySurface dispatches through ICompositionDrawingSurfaceInterop2's vtable slot 9.
-func (self *ICompositionDrawingSurfaceInterop2) CopySurface(destinationResource *systemcom.IUnknown, destinationOffsetX int32, destinationOffsetY int32, sourceRectangle *foundation.RECT) foundation.HRESULT {
+func (self *ICompositionDrawingSurfaceInterop2) CopySurface(destinationResource *systemcom.IUnknown, destinationOffsetX int32, destinationOffsetY int32, sourceRectangle *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(destinationResource)), uintptr(destinationOffsetX), uintptr(destinationOffsetY), uintptr(unsafe.Pointer(sourceRectangle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ICompositionGraphicsDeviceInterop: https://learn.microsoft.com/windows/win32/api/windows.ui.composition.interop/nn-windows-ui-composition-interop-icompositiongraphicsdeviceinterop
@@ -92,15 +92,15 @@ type ICompositionGraphicsDeviceInterop struct {
 var IID_ICompositionGraphicsDeviceInterop = win32.GUID{Data1: 0xa116ff71, Data2: 0xf8bf, Data3: 0x4c8a, Data4: [8]byte{0x9c, 0x98, 0x70, 0x77, 0x9a, 0x32, 0xa9, 0xc8}}
 
 // GetRenderingDevice dispatches through ICompositionGraphicsDeviceInterop's vtable slot 3.
-func (self *ICompositionGraphicsDeviceInterop) GetRenderingDevice(value **systemcom.IUnknown) foundation.HRESULT {
+func (self *ICompositionGraphicsDeviceInterop) GetRenderingDevice(value **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRenderingDevice dispatches through ICompositionGraphicsDeviceInterop's vtable slot 4.
-func (self *ICompositionGraphicsDeviceInterop) SetRenderingDevice(value *systemcom.IUnknown) foundation.HRESULT {
+func (self *ICompositionGraphicsDeviceInterop) SetRenderingDevice(value *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d528a265-f0a5-422f-a39d-ef62d7cd1cc4
@@ -112,9 +112,9 @@ type ICompositionTextureInterop struct {
 var IID_ICompositionTextureInterop = win32.GUID{Data1: 0xd528a265, Data2: 0xf0a5, Data3: 0x422f, Data4: [8]byte{0xa3, 0x9d, 0xef, 0x62, 0xd7, 0xcd, 0x1c, 0xc4}}
 
 // GetAvailableFence dispatches through ICompositionTextureInterop's vtable slot 3.
-func (self *ICompositionTextureInterop) GetAvailableFence(fenceValue *uint64, iid *win32.GUID, availableFence *unsafe.Pointer) foundation.HRESULT {
+func (self *ICompositionTextureInterop) GetAvailableFence(fenceValue *uint64, iid *win32.GUID, availableFence *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fenceValue)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(availableFence)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 29e691fa-4567-4dca-b319-d0f207eb6807
@@ -126,15 +126,16 @@ type ICompositorDesktopInterop struct {
 var IID_ICompositorDesktopInterop = win32.GUID{Data1: 0x29e691fa, Data2: 0x4567, Data3: 0x4dca, Data4: [8]byte{0xb3, 0x19, 0xd0, 0xf2, 0x07, 0xeb, 0x68, 0x07}}
 
 // CreateDesktopWindowTarget dispatches through ICompositorDesktopInterop's vtable slot 3.
-func (self *ICompositorDesktopInterop) CreateDesktopWindowTarget(hwndTarget foundation.HWND, isTopmost foundation.BOOL, result *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwndTarget), uintptr(isTopmost), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+func (self *ICompositorDesktopInterop) CreateDesktopWindowTarget(hwndTarget foundation.HWND, isTopmost bool, result *uintptr) error {
+	_isTopmost := win32.Bool32(isTopmost)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwndTarget), uintptr(_isTopmost), uintptr(unsafe.Pointer(result)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnsureOnThread dispatches through ICompositorDesktopInterop's vtable slot 4.
-func (self *ICompositorDesktopInterop) EnsureOnThread(threadId uint32) foundation.HRESULT {
+func (self *ICompositorDesktopInterop) EnsureOnThread(threadId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(threadId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ICompositorInterop: https://learn.microsoft.com/windows/win32/api/windows.ui.composition.interop/nn-windows-ui-composition-interop-icompositorinterop
@@ -147,21 +148,21 @@ type ICompositorInterop struct {
 var IID_ICompositorInterop = win32.GUID{Data1: 0x25297d5c, Data2: 0x3ad4, Data3: 0x4c9c, Data4: [8]byte{0xb5, 0xcf, 0xe3, 0x6a, 0x38, 0x51, 0x23, 0x30}}
 
 // CreateCompositionSurfaceForHandle dispatches through ICompositorInterop's vtable slot 3.
-func (self *ICompositorInterop) CreateCompositionSurfaceForHandle(swapChain foundation.HANDLE, result *uintptr) foundation.HRESULT {
+func (self *ICompositorInterop) CreateCompositionSurfaceForHandle(swapChain foundation.HANDLE, result *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(swapChain), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateCompositionSurfaceForSwapChain dispatches through ICompositorInterop's vtable slot 4.
-func (self *ICompositorInterop) CreateCompositionSurfaceForSwapChain(swapChain *systemcom.IUnknown, result *uintptr) foundation.HRESULT {
+func (self *ICompositorInterop) CreateCompositionSurfaceForSwapChain(swapChain *systemcom.IUnknown, result *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(swapChain)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateGraphicsDevice dispatches through ICompositorInterop's vtable slot 5.
-func (self *ICompositorInterop) CreateGraphicsDevice(renderingDevice *systemcom.IUnknown, result *uintptr) foundation.HRESULT {
+func (self *ICompositorInterop) CreateGraphicsDevice(renderingDevice *systemcom.IUnknown, result *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(renderingDevice)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d3eef34c-0667-4afc-8d13-867607b0fe91
@@ -173,15 +174,15 @@ type ICompositorInterop2 struct {
 var IID_ICompositorInterop2 = win32.GUID{Data1: 0xd3eef34c, Data2: 0x0667, Data3: 0x4afc, Data4: [8]byte{0x8d, 0x13, 0x86, 0x76, 0x07, 0xb0, 0xfe, 0x91}}
 
 // CheckCompositionTextureSupport dispatches through ICompositorInterop2's vtable slot 3.
-func (self *ICompositorInterop2) CheckCompositionTextureSupport(renderingDevice *systemcom.IUnknown, supportsCompositionTextures *foundation.BOOL) foundation.HRESULT {
+func (self *ICompositorInterop2) CheckCompositionTextureSupport(renderingDevice *systemcom.IUnknown, supportsCompositionTextures *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(renderingDevice)), uintptr(unsafe.Pointer(supportsCompositionTextures)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateCompositionTexture dispatches through ICompositorInterop2's vtable slot 4.
-func (self *ICompositorInterop2) CreateCompositionTexture(d3dTexture *systemcom.IUnknown, compositionTexture *uintptr) foundation.HRESULT {
+func (self *ICompositorInterop2) CreateCompositionTexture(d3dTexture *systemcom.IUnknown, compositionTexture *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(d3dTexture)), uintptr(unsafe.Pointer(compositionTexture)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 35dbf59e-e3f9-45b0-81e7-fe75f4145dc9
@@ -193,9 +194,9 @@ type IDesktopWindowTargetInterop struct {
 var IID_IDesktopWindowTargetInterop = win32.GUID{Data1: 0x35dbf59e, Data2: 0xe3f9, Data3: 0x45b0, Data4: [8]byte{0x81, 0xe7, 0xfe, 0x75, 0xf4, 0x14, 0x5d, 0xc9}}
 
 // Get_Hwnd dispatches through IDesktopWindowTargetInterop's vtable slot 3.
-func (self *IDesktopWindowTargetInterop) Get_Hwnd(value *foundation.HWND) foundation.HRESULT {
+func (self *IDesktopWindowTargetInterop) Get_Hwnd(value *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 11f62cd1-2f9d-42d3-b05f-d6790d9e9f8e
@@ -207,7 +208,7 @@ type IVisualInteractionSourceInterop struct {
 var IID_IVisualInteractionSourceInterop = win32.GUID{Data1: 0x11f62cd1, Data2: 0x2f9d, Data3: 0x42d3, Data4: [8]byte{0xb0, 0x5f, 0xd6, 0x79, 0x0d, 0x9e, 0x9f, 0x8e}}
 
 // TryRedirectForManipulation dispatches through IVisualInteractionSourceInterop's vtable slot 3.
-func (self *IVisualInteractionSourceInterop) TryRedirectForManipulation(pointerInfo *uiinputpointer.POINTER_INFO) foundation.HRESULT {
+func (self *IVisualInteractionSourceInterop) TryRedirectForManipulation(pointerInfo *uiinputpointer.POINTER_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pointerInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

@@ -37,71 +37,75 @@ var (
 // ProtectFileToEnterpriseIdentity calls efswrt!ProtectFileToEnterpriseIdentity.
 // https://learn.microsoft.com/windows/win32/api/edpwin32/nf-edpwin32-protectfiletoenterpriseidentity
 // Minimum OS: windows10.0.10240.
-func ProtectFileToEnterpriseIdentity(fileOrFolderPath foundation.PWSTR, identity foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procProtectFileToEnterpriseIdentity.Addr(), uintptr(unsafe.Pointer(fileOrFolderPath)), uintptr(unsafe.Pointer(identity)))
-	return foundation.HRESULT(r1)
+func ProtectFileToEnterpriseIdentity(fileOrFolderPath string, identity string) error {
+	_fileOrFolderPath := win32.UTF16Ptr(fileOrFolderPath)
+	_identity := win32.UTF16Ptr(identity)
+	r1, _, _ := syscall.SyscallN(procProtectFileToEnterpriseIdentity.Addr(), uintptr(unsafe.Pointer(_fileOrFolderPath)), uintptr(unsafe.Pointer(_identity)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SrpCloseThreadNetworkContext calls srpapi!SrpCloseThreadNetworkContext.
 // https://learn.microsoft.com/windows/win32/api/srpapi/nf-srpapi-srpclosethreadnetworkcontext
 // Minimum OS: windows10.0.10240.
-func SrpCloseThreadNetworkContext(threadNetworkContext *HTHREAD_NETWORK_CONTEXT) foundation.HRESULT {
+func SrpCloseThreadNetworkContext(threadNetworkContext *HTHREAD_NETWORK_CONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procSrpCloseThreadNetworkContext.Addr(), uintptr(unsafe.Pointer(threadNetworkContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SrpCreateThreadNetworkContext calls srpapi!SrpCreateThreadNetworkContext.
 // https://learn.microsoft.com/windows/win32/api/srpapi/nf-srpapi-srpcreatethreadnetworkcontext
 // Minimum OS: windows10.0.10240.
-func SrpCreateThreadNetworkContext(enterpriseId foundation.PWSTR, threadNetworkContext *HTHREAD_NETWORK_CONTEXT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSrpCreateThreadNetworkContext.Addr(), uintptr(unsafe.Pointer(enterpriseId)), uintptr(unsafe.Pointer(threadNetworkContext)))
-	return foundation.HRESULT(r1)
+func SrpCreateThreadNetworkContext(enterpriseId string, threadNetworkContext *HTHREAD_NETWORK_CONTEXT) error {
+	_enterpriseId := win32.UTF16Ptr(enterpriseId)
+	r1, _, _ := syscall.SyscallN(procSrpCreateThreadNetworkContext.Addr(), uintptr(unsafe.Pointer(_enterpriseId)), uintptr(unsafe.Pointer(threadNetworkContext)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SrpDisablePermissiveModeFileEncryption calls srpapi!SrpDisablePermissiveModeFileEncryption.
 // https://learn.microsoft.com/windows/win32/api/srpapi/nf-srpapi-srpdisablepermissivemodefileencryption
 // Minimum OS: windows10.0.10240.
-func SrpDisablePermissiveModeFileEncryption() foundation.HRESULT {
+func SrpDisablePermissiveModeFileEncryption() error {
 	r1, _, _ := syscall.SyscallN(procSrpDisablePermissiveModeFileEncryption.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SrpDoesPolicyAllowAppExecution calls srpapi!SrpDoesPolicyAllowAppExecution.
 // https://learn.microsoft.com/windows/win32/api/srpapi/nf-srpapi-srpdoespolicyallowappexecution
 // Minimum OS: windows10.0.10240.
-func SrpDoesPolicyAllowAppExecution(packageId unsafe.Pointer, isAllowed *foundation.BOOL) foundation.HRESULT {
+func SrpDoesPolicyAllowAppExecution(packageId unsafe.Pointer, isAllowed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procSrpDoesPolicyAllowAppExecution.Addr(), uintptr(unsafe.Pointer(packageId)), uintptr(unsafe.Pointer(isAllowed)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SrpEnablePermissiveModeFileEncryption calls srpapi!SrpEnablePermissiveModeFileEncryption.
 // https://learn.microsoft.com/windows/win32/api/srpapi/nf-srpapi-srpenablepermissivemodefileencryption
 // Minimum OS: windows10.0.10240.
-func SrpEnablePermissiveModeFileEncryption(enterpriseId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSrpEnablePermissiveModeFileEncryption.Addr(), uintptr(unsafe.Pointer(enterpriseId)))
-	return foundation.HRESULT(r1)
+func SrpEnablePermissiveModeFileEncryption(enterpriseId string) error {
+	_enterpriseId := win32.UTF16Ptr(enterpriseId)
+	r1, _, _ := syscall.SyscallN(procSrpEnablePermissiveModeFileEncryption.Addr(), uintptr(unsafe.Pointer(_enterpriseId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SrpGetEnterpriseIds calls srpapi!SrpGetEnterpriseIds.
 // https://learn.microsoft.com/windows/win32/api/srpapi/nf-srpapi-srpgetenterpriseids
 // Minimum OS: windows10.0.10240.
-func SrpGetEnterpriseIds(tokenHandle foundation.HANDLE, numberOfBytes *uint32, enterpriseIds *foundation.PWSTR, enterpriseIdCount *uint32) foundation.HRESULT {
+func SrpGetEnterpriseIds(tokenHandle foundation.HANDLE, numberOfBytes *uint32, enterpriseIds *foundation.PWSTR, enterpriseIdCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procSrpGetEnterpriseIds.Addr(), uintptr(tokenHandle), uintptr(unsafe.Pointer(numberOfBytes)), uintptr(unsafe.Pointer(enterpriseIds)), uintptr(unsafe.Pointer(enterpriseIdCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SrpGetEnterprisePolicy calls srpapi!SrpGetEnterprisePolicy.
 // https://learn.microsoft.com/windows/win32/api/srpapi/nf-srpapi-srpgetenterprisepolicy
 // Minimum OS: windows10.0.10240.
-func SrpGetEnterprisePolicy(tokenHandle foundation.HANDLE, policyFlags *ENTERPRISE_DATA_POLICIES) foundation.HRESULT {
+func SrpGetEnterprisePolicy(tokenHandle foundation.HANDLE, policyFlags *ENTERPRISE_DATA_POLICIES) error {
 	r1, _, _ := syscall.SyscallN(procSrpGetEnterprisePolicy.Addr(), uintptr(tokenHandle), uintptr(unsafe.Pointer(policyFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SrpHostingInitialize calls srpapi!SrpHostingInitialize.
-func SrpHostingInitialize(Version SRPHOSTING_VERSION, Type SRPHOSTING_TYPE, pvData unsafe.Pointer, cbData uint32) foundation.HRESULT {
+func SrpHostingInitialize(Version SRPHOSTING_VERSION, Type SRPHOSTING_TYPE, pvData unsafe.Pointer, cbData uint32) error {
 	r1, _, _ := syscall.SyscallN(procSrpHostingInitialize.Addr(), uintptr(Version), uintptr(Type), uintptr(unsafe.Pointer(pvData)), uintptr(cbData))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SrpHostingTerminate calls srpapi!SrpHostingTerminate.
@@ -126,13 +130,15 @@ func SrpIsTokenService(TokenHandle foundation.HANDLE, IsTokenService *byte) foun
 // SrpSetTokenEnterpriseId calls srpapi!SrpSetTokenEnterpriseId.
 // https://learn.microsoft.com/windows/win32/api/srpapi/nf-srpapi-srpsettokenenterpriseid
 // Minimum OS: windows10.0.10240.
-func SrpSetTokenEnterpriseId(tokenHandle foundation.HANDLE, enterpriseId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSrpSetTokenEnterpriseId.Addr(), uintptr(tokenHandle), uintptr(unsafe.Pointer(enterpriseId)))
-	return foundation.HRESULT(r1)
+func SrpSetTokenEnterpriseId(tokenHandle foundation.HANDLE, enterpriseId string) error {
+	_enterpriseId := win32.UTF16Ptr(enterpriseId)
+	r1, _, _ := syscall.SyscallN(procSrpSetTokenEnterpriseId.Addr(), uintptr(tokenHandle), uintptr(unsafe.Pointer(_enterpriseId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnprotectFile calls efswrt!UnprotectFile.
-func UnprotectFile(fileOrFolderPath foundation.PWSTR, options *FILE_UNPROTECT_OPTIONS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUnprotectFile.Addr(), uintptr(unsafe.Pointer(fileOrFolderPath)), uintptr(unsafe.Pointer(options)))
-	return foundation.HRESULT(r1)
+func UnprotectFile(fileOrFolderPath string, options *FILE_UNPROTECT_OPTIONS) error {
+	_fileOrFolderPath := win32.UTF16Ptr(fileOrFolderPath)
+	r1, _, _ := syscall.SyscallN(procUnprotectFile.Addr(), uintptr(unsafe.Pointer(_fileOrFolderPath)), uintptr(unsafe.Pointer(options)))
+	return win32.HRESULTError(int32(r1))
 }

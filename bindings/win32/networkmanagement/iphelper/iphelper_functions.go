@@ -33,10 +33,10 @@ var (
 	procConvertInterfaceLuidToAlias                = modIPHLPAPI.NewProc("ConvertInterfaceLuidToAlias")
 	procConvertInterfaceLuidToGuid                 = modIPHLPAPI.NewProc("ConvertInterfaceLuidToGuid")
 	procConvertInterfaceLuidToIndex                = modIPHLPAPI.NewProc("ConvertInterfaceLuidToIndex")
+	procConvertInterfaceLuidToName                 = modIPHLPAPI.NewProc("ConvertInterfaceLuidToNameW")
 	procConvertInterfaceLuidToNameA                = modIPHLPAPI.NewProc("ConvertInterfaceLuidToNameA")
-	procConvertInterfaceLuidToNameW                = modIPHLPAPI.NewProc("ConvertInterfaceLuidToNameW")
+	procConvertInterfaceNameToLuid                 = modIPHLPAPI.NewProc("ConvertInterfaceNameToLuidW")
 	procConvertInterfaceNameToLuidA                = modIPHLPAPI.NewProc("ConvertInterfaceNameToLuidA")
-	procConvertInterfaceNameToLuidW                = modIPHLPAPI.NewProc("ConvertInterfaceNameToLuidW")
 	procConvertIpv4MaskToLength                    = modIPHLPAPI.NewProc("ConvertIpv4MaskToLength")
 	procConvertLengthToIpv4Mask                    = modIPHLPAPI.NewProc("ConvertLengthToIpv4Mask")
 	procCreateAnycastIpAddressEntry                = modIPHLPAPI.NewProc("CreateAnycastIpAddressEntry")
@@ -238,9 +238,9 @@ func AddIPAddress(Address uint32, IpMask uint32, IfIndex uint32, NTEContext *uin
 // CancelIPChangeNotify calls IPHLPAPI!CancelIPChangeNotify.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-cancelipchangenotify
 // Minimum OS: windows5.1.2600.
-func CancelIPChangeNotify(notifyOverlapped *systemio.OVERLAPPED) foundation.BOOL {
+func CancelIPChangeNotify(notifyOverlapped *systemio.OVERLAPPED) bool {
 	r1, _, _ := syscall.SyscallN(procCancelIPChangeNotify.Addr(), uintptr(unsafe.Pointer(notifyOverlapped)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CancelIfTimestampConfigChange calls IPHLPAPI.DLL!CancelIfTimestampConfigChange.
@@ -279,8 +279,9 @@ func ConvertCompartmentIdToGuid(CompartmentId networkmanagementndis.NET_IF_COMPA
 // ConvertInterfaceAliasToLuid calls IPHLPAPI!ConvertInterfaceAliasToLuid.
 // https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-convertinterfacealiastoluid
 // Minimum OS: windows6.0.6000.
-func ConvertInterfaceAliasToLuid(InterfaceAlias foundation.PWSTR, InterfaceLuid *networkmanagementndis.NET_LUID_LH) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procConvertInterfaceAliasToLuid.Addr(), uintptr(unsafe.Pointer(InterfaceAlias)), uintptr(unsafe.Pointer(InterfaceLuid)))
+func ConvertInterfaceAliasToLuid(InterfaceAlias string, InterfaceLuid *networkmanagementndis.NET_LUID_LH) foundation.WIN32_ERROR {
+	_InterfaceAlias := win32.UTF16Ptr(InterfaceAlias)
+	r1, _, _ := syscall.SyscallN(procConvertInterfaceAliasToLuid.Addr(), uintptr(unsafe.Pointer(_InterfaceAlias)), uintptr(unsafe.Pointer(InterfaceLuid)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -324,6 +325,14 @@ func ConvertInterfaceLuidToIndex(InterfaceLuid *networkmanagementndis.NET_LUID_L
 	return foundation.WIN32_ERROR(r1)
 }
 
+// ConvertInterfaceLuidToName calls IPHLPAPI!ConvertInterfaceLuidToNameW.
+// https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-convertinterfaceluidtonamew
+// Minimum OS: windows6.0.6000.
+func ConvertInterfaceLuidToName(InterfaceLuid *networkmanagementndis.NET_LUID_LH, InterfaceName foundation.PWSTR, Length uintptr) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procConvertInterfaceLuidToName.Addr(), uintptr(unsafe.Pointer(InterfaceLuid)), uintptr(unsafe.Pointer(InterfaceName)), uintptr(Length))
+	return foundation.WIN32_ERROR(r1)
+}
+
 // ConvertInterfaceLuidToNameA calls IPHLPAPI!ConvertInterfaceLuidToNameA.
 // https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-convertinterfaceluidtonamea
 // Minimum OS: windows6.0.6000.
@@ -332,11 +341,12 @@ func ConvertInterfaceLuidToNameA(InterfaceLuid *networkmanagementndis.NET_LUID_L
 	return foundation.WIN32_ERROR(r1)
 }
 
-// ConvertInterfaceLuidToNameW calls IPHLPAPI!ConvertInterfaceLuidToNameW.
-// https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-convertinterfaceluidtonamew
+// ConvertInterfaceNameToLuid calls IPHLPAPI!ConvertInterfaceNameToLuidW.
+// https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-convertinterfacenametoluidw
 // Minimum OS: windows6.0.6000.
-func ConvertInterfaceLuidToNameW(InterfaceLuid *networkmanagementndis.NET_LUID_LH, InterfaceName foundation.PWSTR, Length uintptr) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procConvertInterfaceLuidToNameW.Addr(), uintptr(unsafe.Pointer(InterfaceLuid)), uintptr(unsafe.Pointer(InterfaceName)), uintptr(Length))
+func ConvertInterfaceNameToLuid(InterfaceName string, InterfaceLuid *networkmanagementndis.NET_LUID_LH) foundation.WIN32_ERROR {
+	_InterfaceName := win32.UTF16Ptr(InterfaceName)
+	r1, _, _ := syscall.SyscallN(procConvertInterfaceNameToLuid.Addr(), uintptr(unsafe.Pointer(_InterfaceName)), uintptr(unsafe.Pointer(InterfaceLuid)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -345,14 +355,6 @@ func ConvertInterfaceLuidToNameW(InterfaceLuid *networkmanagementndis.NET_LUID_L
 // Minimum OS: windows6.0.6000.
 func ConvertInterfaceNameToLuidA(InterfaceName foundation.PSTR, InterfaceLuid *networkmanagementndis.NET_LUID_LH) foundation.WIN32_ERROR {
 	r1, _, _ := syscall.SyscallN(procConvertInterfaceNameToLuidA.Addr(), uintptr(unsafe.Pointer(InterfaceName)), uintptr(unsafe.Pointer(InterfaceLuid)))
-	return foundation.WIN32_ERROR(r1)
-}
-
-// ConvertInterfaceNameToLuidW calls IPHLPAPI!ConvertInterfaceNameToLuidW.
-// https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-convertinterfacenametoluidw
-// Minimum OS: windows6.0.6000.
-func ConvertInterfaceNameToLuidW(InterfaceName foundation.PWSTR, InterfaceLuid *networkmanagementndis.NET_LUID_LH) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procConvertInterfaceNameToLuidW.Addr(), uintptr(unsafe.Pointer(InterfaceName)), uintptr(unsafe.Pointer(InterfaceLuid)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -605,8 +607,9 @@ func FreeMibTable(Memory unsafe.Pointer) {
 // GetAdapterIndex calls IPHLPAPI!GetAdapterIndex.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getadapterindex
 // Minimum OS: windows5.0.
-func GetAdapterIndex(AdapterName foundation.PWSTR, IfIndex *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetAdapterIndex.Addr(), uintptr(unsafe.Pointer(AdapterName)), uintptr(unsafe.Pointer(IfIndex)))
+func GetAdapterIndex(AdapterName string, IfIndex *uint32) uint32 {
+	_AdapterName := win32.UTF16Ptr(AdapterName)
+	r1, _, _ := syscall.SyscallN(procGetAdapterIndex.Addr(), uintptr(unsafe.Pointer(_AdapterName)), uintptr(unsafe.Pointer(IfIndex)))
 	return uint32(r1)
 }
 
@@ -621,8 +624,8 @@ func GetAdapterOrderMap() *IP_ADAPTER_ORDER_MAP {
 // GetAdaptersAddresses calls IPHLPAPI!GetAdaptersAddresses.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getadaptersaddresses
 // Minimum OS: windows5.1.2600.
-func GetAdaptersAddresses(Family uint32, Flags GET_ADAPTERS_ADDRESSES_FLAGS, Reserved unsafe.Pointer, AdapterAddresses *IP_ADAPTER_ADDRESSES_LH, SizePointer *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetAdaptersAddresses.Addr(), uintptr(Family), uintptr(Flags), uintptr(unsafe.Pointer(Reserved)), uintptr(unsafe.Pointer(AdapterAddresses)), uintptr(unsafe.Pointer(SizePointer)))
+func GetAdaptersAddresses(Family uint32, Flags GET_ADAPTERS_ADDRESSES_FLAGS, AdapterAddresses *IP_ADAPTER_ADDRESSES_LH, SizePointer *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procGetAdaptersAddresses.Addr(), uintptr(Family), uintptr(Flags), 0, uintptr(unsafe.Pointer(AdapterAddresses)), uintptr(unsafe.Pointer(SizePointer)))
 	return uint32(r1)
 }
 
@@ -711,16 +714,18 @@ func GetDnsSettings(Settings *DNS_SETTINGS) foundation.WIN32_ERROR {
 // GetExtendedTcpTable calls IPHLPAPI!GetExtendedTcpTable.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getextendedtcptable
 // Minimum OS: windows6.0.6000.
-func GetExtendedTcpTable(pTcpTable unsafe.Pointer, pdwSize *uint32, bOrder foundation.BOOL, ulAf uint32, TableClass TCP_TABLE_CLASS, Reserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetExtendedTcpTable.Addr(), uintptr(unsafe.Pointer(pTcpTable)), uintptr(unsafe.Pointer(pdwSize)), uintptr(bOrder), uintptr(ulAf), uintptr(TableClass), uintptr(Reserved))
+func GetExtendedTcpTable(pTcpTable unsafe.Pointer, pdwSize *uint32, bOrder bool, ulAf uint32, TableClass TCP_TABLE_CLASS, Reserved uint32) uint32 {
+	_bOrder := win32.Bool32(bOrder)
+	r1, _, _ := syscall.SyscallN(procGetExtendedTcpTable.Addr(), uintptr(unsafe.Pointer(pTcpTable)), uintptr(unsafe.Pointer(pdwSize)), uintptr(_bOrder), uintptr(ulAf), uintptr(TableClass), uintptr(Reserved))
 	return uint32(r1)
 }
 
 // GetExtendedUdpTable calls IPHLPAPI!GetExtendedUdpTable.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getextendedudptable
 // Minimum OS: windows6.0.6000.
-func GetExtendedUdpTable(pUdpTable unsafe.Pointer, pdwSize *uint32, bOrder foundation.BOOL, ulAf uint32, TableClass UDP_TABLE_CLASS, Reserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetExtendedUdpTable.Addr(), uintptr(unsafe.Pointer(pUdpTable)), uintptr(unsafe.Pointer(pdwSize)), uintptr(bOrder), uintptr(ulAf), uintptr(TableClass), uintptr(Reserved))
+func GetExtendedUdpTable(pUdpTable unsafe.Pointer, pdwSize *uint32, bOrder bool, ulAf uint32, TableClass UDP_TABLE_CLASS, Reserved uint32) uint32 {
+	_bOrder := win32.Bool32(bOrder)
+	r1, _, _ := syscall.SyscallN(procGetExtendedUdpTable.Addr(), uintptr(unsafe.Pointer(pUdpTable)), uintptr(unsafe.Pointer(pdwSize)), uintptr(_bOrder), uintptr(ulAf), uintptr(TableClass), uintptr(Reserved))
 	return uint32(r1)
 }
 
@@ -795,8 +800,9 @@ func GetIfStackTable(Table **MIB_IFSTACK_TABLE) foundation.WIN32_ERROR {
 // GetIfTable calls IPHLPAPI!GetIfTable.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getiftable
 // Minimum OS: windows5.0.
-func GetIfTable(pIfTable *MIB_IFTABLE, pdwSize *uint32, bOrder foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetIfTable.Addr(), uintptr(unsafe.Pointer(pIfTable)), uintptr(unsafe.Pointer(pdwSize)), uintptr(bOrder))
+func GetIfTable(pIfTable *MIB_IFTABLE, pdwSize *uint32, bOrder bool) uint32 {
+	_bOrder := win32.Bool32(bOrder)
+	r1, _, _ := syscall.SyscallN(procGetIfTable.Addr(), uintptr(unsafe.Pointer(pIfTable)), uintptr(unsafe.Pointer(pdwSize)), uintptr(_bOrder))
 	return uint32(r1)
 }
 
@@ -863,8 +869,9 @@ func GetInvertedIfStackTable(Table **MIB_INVERTEDIFSTACK_TABLE) foundation.WIN32
 // GetIpAddrTable calls IPHLPAPI!GetIpAddrTable.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getipaddrtable
 // Minimum OS: windows5.0.
-func GetIpAddrTable(pIpAddrTable *MIB_IPADDRTABLE, pdwSize *uint32, bOrder foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetIpAddrTable.Addr(), uintptr(unsafe.Pointer(pIpAddrTable)), uintptr(unsafe.Pointer(pdwSize)), uintptr(bOrder))
+func GetIpAddrTable(pIpAddrTable *MIB_IPADDRTABLE, pdwSize *uint32, bOrder bool) uint32 {
+	_bOrder := win32.Bool32(bOrder)
+	r1, _, _ := syscall.SyscallN(procGetIpAddrTable.Addr(), uintptr(unsafe.Pointer(pIpAddrTable)), uintptr(unsafe.Pointer(pdwSize)), uintptr(_bOrder))
 	return uint32(r1)
 }
 
@@ -887,8 +894,9 @@ func GetIpForwardEntry2(Row *MIB_IPFORWARD_ROW2) foundation.WIN32_ERROR {
 // GetIpForwardTable calls IPHLPAPI!GetIpForwardTable.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getipforwardtable
 // Minimum OS: windows5.0.
-func GetIpForwardTable(pIpForwardTable *MIB_IPFORWARDTABLE, pdwSize *uint32, bOrder foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetIpForwardTable.Addr(), uintptr(unsafe.Pointer(pIpForwardTable)), uintptr(unsafe.Pointer(pdwSize)), uintptr(bOrder))
+func GetIpForwardTable(pIpForwardTable *MIB_IPFORWARDTABLE, pdwSize *uint32, bOrder bool) uint32 {
+	_bOrder := win32.Bool32(bOrder)
+	r1, _, _ := syscall.SyscallN(procGetIpForwardTable.Addr(), uintptr(unsafe.Pointer(pIpForwardTable)), uintptr(unsafe.Pointer(pdwSize)), uintptr(_bOrder))
 	return uint32(r1)
 }
 
@@ -927,8 +935,9 @@ func GetIpNetEntry2(Row *MIB_IPNET_ROW2) foundation.WIN32_ERROR {
 // GetIpNetTable calls IPHLPAPI!GetIpNetTable.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getipnettable
 // Minimum OS: windows5.0.
-func GetIpNetTable(IpNetTable *MIB_IPNETTABLE, SizePointer *uint32, Order foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetIpNetTable.Addr(), uintptr(unsafe.Pointer(IpNetTable)), uintptr(unsafe.Pointer(SizePointer)), uintptr(Order))
+func GetIpNetTable(IpNetTable *MIB_IPNETTABLE, SizePointer *uint32, Order bool) uint32 {
+	_Order := win32.Bool32(Order)
+	r1, _, _ := syscall.SyscallN(procGetIpNetTable.Addr(), uintptr(unsafe.Pointer(IpNetTable)), uintptr(unsafe.Pointer(SizePointer)), uintptr(_Order))
 	return uint32(r1)
 }
 
@@ -1124,16 +1133,18 @@ func GetSessionCompartmentId(SessionId uint32) networkmanagementndis.NET_IF_COMP
 // GetTcp6Table calls IPHLPAPI!GetTcp6Table.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-gettcp6table
 // Minimum OS: windows6.0.6000.
-func GetTcp6Table(TcpTable *MIB_TCP6TABLE, SizePointer *uint32, Order foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetTcp6Table.Addr(), uintptr(unsafe.Pointer(TcpTable)), uintptr(unsafe.Pointer(SizePointer)), uintptr(Order))
+func GetTcp6Table(TcpTable *MIB_TCP6TABLE, SizePointer *uint32, Order bool) uint32 {
+	_Order := win32.Bool32(Order)
+	r1, _, _ := syscall.SyscallN(procGetTcp6Table.Addr(), uintptr(unsafe.Pointer(TcpTable)), uintptr(unsafe.Pointer(SizePointer)), uintptr(_Order))
 	return uint32(r1)
 }
 
 // GetTcp6Table2 calls IPHLPAPI!GetTcp6Table2.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-gettcp6table2
 // Minimum OS: windows6.0.6000.
-func GetTcp6Table2(TcpTable *MIB_TCP6TABLE2, SizePointer *uint32, Order foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetTcp6Table2.Addr(), uintptr(unsafe.Pointer(TcpTable)), uintptr(unsafe.Pointer(SizePointer)), uintptr(Order))
+func GetTcp6Table2(TcpTable *MIB_TCP6TABLE2, SizePointer *uint32, Order bool) uint32 {
+	_Order := win32.Bool32(Order)
+	r1, _, _ := syscall.SyscallN(procGetTcp6Table2.Addr(), uintptr(unsafe.Pointer(TcpTable)), uintptr(unsafe.Pointer(SizePointer)), uintptr(_Order))
 	return uint32(r1)
 }
 
@@ -1164,16 +1175,18 @@ func GetTcpStatisticsEx2(Statistics *MIB_TCPSTATS2, Family uint32) uint32 {
 // GetTcpTable calls IPHLPAPI!GetTcpTable.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-gettcptable
 // Minimum OS: windows5.0.
-func GetTcpTable(TcpTable *MIB_TCPTABLE, SizePointer *uint32, Order foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetTcpTable.Addr(), uintptr(unsafe.Pointer(TcpTable)), uintptr(unsafe.Pointer(SizePointer)), uintptr(Order))
+func GetTcpTable(TcpTable *MIB_TCPTABLE, SizePointer *uint32, Order bool) uint32 {
+	_Order := win32.Bool32(Order)
+	r1, _, _ := syscall.SyscallN(procGetTcpTable.Addr(), uintptr(unsafe.Pointer(TcpTable)), uintptr(unsafe.Pointer(SizePointer)), uintptr(_Order))
 	return uint32(r1)
 }
 
 // GetTcpTable2 calls IPHLPAPI!GetTcpTable2.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-gettcptable2
 // Minimum OS: windows6.0.6000.
-func GetTcpTable2(TcpTable *MIB_TCPTABLE2, SizePointer *uint32, Order foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetTcpTable2.Addr(), uintptr(unsafe.Pointer(TcpTable)), uintptr(unsafe.Pointer(SizePointer)), uintptr(Order))
+func GetTcpTable2(TcpTable *MIB_TCPTABLE2, SizePointer *uint32, Order bool) uint32 {
+	_Order := win32.Bool32(Order)
+	r1, _, _ := syscall.SyscallN(procGetTcpTable2.Addr(), uintptr(unsafe.Pointer(TcpTable)), uintptr(unsafe.Pointer(SizePointer)), uintptr(_Order))
 	return uint32(r1)
 }
 
@@ -1188,8 +1201,9 @@ func GetTeredoPort(Port *uint16) foundation.WIN32_ERROR {
 // GetUdp6Table calls IPHLPAPI!GetUdp6Table.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getudp6table
 // Minimum OS: windows6.0.6000.
-func GetUdp6Table(Udp6Table *MIB_UDP6TABLE, SizePointer *uint32, Order foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetUdp6Table.Addr(), uintptr(unsafe.Pointer(Udp6Table)), uintptr(unsafe.Pointer(SizePointer)), uintptr(Order))
+func GetUdp6Table(Udp6Table *MIB_UDP6TABLE, SizePointer *uint32, Order bool) uint32 {
+	_Order := win32.Bool32(Order)
+	r1, _, _ := syscall.SyscallN(procGetUdp6Table.Addr(), uintptr(unsafe.Pointer(Udp6Table)), uintptr(unsafe.Pointer(SizePointer)), uintptr(_Order))
 	return uint32(r1)
 }
 
@@ -1220,8 +1234,9 @@ func GetUdpStatisticsEx2(Statistics *MIB_UDPSTATS2, Family uint32) uint32 {
 // GetUdpTable calls IPHLPAPI!GetUdpTable.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getudptable
 // Minimum OS: windows5.0.
-func GetUdpTable(UdpTable *MIB_UDPTABLE, SizePointer *uint32, Order foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetUdpTable.Addr(), uintptr(unsafe.Pointer(UdpTable)), uintptr(unsafe.Pointer(SizePointer)), uintptr(Order))
+func GetUdpTable(UdpTable *MIB_UDPTABLE, SizePointer *uint32, Order bool) uint32 {
+	_Order := win32.Bool32(Order)
+	r1, _, _ := syscall.SyscallN(procGetUdpTable.Addr(), uintptr(unsafe.Pointer(UdpTable)), uintptr(unsafe.Pointer(SizePointer)), uintptr(_Order))
 	return uint32(r1)
 }
 
@@ -1349,6 +1364,22 @@ func IcmpSendEcho2Ex(IcmpHandle foundation.HANDLE, Event foundation.HANDLE, ApcR
 	return uint32(r1), nil
 }
 
+// If_indextoname calls IPHLPAPI!if_indextoname.
+// https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-if_indextoname
+// Minimum OS: windows6.0.6000.
+func If_indextoname(InterfaceIndex uint32, InterfaceName foundation.PSTR) foundation.PSTR {
+	r1, _, _ := syscall.SyscallN(procIf_indextoname.Addr(), uintptr(InterfaceIndex), uintptr(unsafe.Pointer(InterfaceName)))
+	return foundation.PSTR(unsafe.Pointer(r1))
+}
+
+// If_nametoindex calls IPHLPAPI!if_nametoindex.
+// https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-if_nametoindex
+// Minimum OS: windows6.0.6000.
+func If_nametoindex(InterfaceName foundation.PSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procIf_nametoindex.Addr(), uintptr(unsafe.Pointer(InterfaceName)))
+	return uint32(r1)
+}
+
 // InitializeFlVirtualInterfaceEntry calls IPHLPAPI.DLL!InitializeFlVirtualInterfaceEntry.
 func InitializeFlVirtualInterfaceEntry(Row *MIB_FL_VIRTUAL_INTERFACE_ROW) {
 	syscall.SyscallN(procInitializeFlVirtualInterfaceEntry.Addr(), uintptr(unsafe.Pointer(Row)))
@@ -1410,8 +1441,9 @@ func LookupPersistentUdpPortReservation(StartPort uint16, NumberOfPorts uint16, 
 // NhpAllocateAndGetInterfaceInfoFromStack calls IPHLPAPI!NhpAllocateAndGetInterfaceInfoFromStack.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-nhpallocateandgetinterfaceinfofromstack
 // Minimum OS: windows5.1.2600.
-func NhpAllocateAndGetInterfaceInfoFromStack(ppTable **IP_INTERFACE_NAME_INFO_W2KSP1, pdwCount *uint32, bOrder foundation.BOOL, hHeap foundation.HANDLE, dwFlags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNhpAllocateAndGetInterfaceInfoFromStack.Addr(), uintptr(unsafe.Pointer(ppTable)), uintptr(unsafe.Pointer(pdwCount)), uintptr(bOrder), uintptr(hHeap), uintptr(dwFlags))
+func NhpAllocateAndGetInterfaceInfoFromStack(ppTable **IP_INTERFACE_NAME_INFO_W2KSP1, pdwCount *uint32, bOrder bool, hHeap foundation.HANDLE, dwFlags uint32) uint32 {
+	_bOrder := win32.Bool32(bOrder)
+	r1, _, _ := syscall.SyscallN(procNhpAllocateAndGetInterfaceInfoFromStack.Addr(), uintptr(unsafe.Pointer(ppTable)), uintptr(unsafe.Pointer(pdwCount)), uintptr(_bOrder), uintptr(hHeap), uintptr(dwFlags))
 	return uint32(r1)
 }
 
@@ -1489,8 +1521,9 @@ func NotifyUnicastIpAddressChange(Family networkingwinsock.ADDRESS_FAMILY, Callb
 // ParseNetworkString calls IPHLPAPI!ParseNetworkString.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-parsenetworkstring
 // Minimum OS: windows6.0.6000.
-func ParseNetworkString(NetworkString foundation.PWSTR, Types uint32, AddressInfo *NET_ADDRESS_INFO, PortNumber *uint16, PrefixLength *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procParseNetworkString.Addr(), uintptr(unsafe.Pointer(NetworkString)), uintptr(Types), uintptr(unsafe.Pointer(AddressInfo)), uintptr(unsafe.Pointer(PortNumber)), uintptr(unsafe.Pointer(PrefixLength)))
+func ParseNetworkString(NetworkString string, Types uint32, AddressInfo *NET_ADDRESS_INFO, PortNumber *uint16, PrefixLength *byte) uint32 {
+	_NetworkString := win32.UTF16Ptr(NetworkString)
+	r1, _, _ := syscall.SyscallN(procParseNetworkString.Addr(), uintptr(unsafe.Pointer(_NetworkString)), uintptr(Types), uintptr(unsafe.Pointer(AddressInfo)), uintptr(unsafe.Pointer(PortNumber)), uintptr(unsafe.Pointer(PrefixLength)))
 	return uint32(r1)
 }
 
@@ -1519,8 +1552,10 @@ func PfBindInterfaceToIndex(pInterface unsafe.Pointer, dwIndex uint32, pfatLinkT
 }
 
 // PfCreateInterface calls IPHLPAPI!PfCreateInterface.
-func PfCreateInterface(dwName uint32, inAction PFFORWARD_ACTION, outAction PFFORWARD_ACTION, bUseLog foundation.BOOL, bMustBeUnique foundation.BOOL, ppInterface *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procPfCreateInterface.Addr(), uintptr(dwName), uintptr(inAction), uintptr(outAction), uintptr(bUseLog), uintptr(bMustBeUnique), uintptr(unsafe.Pointer(ppInterface)))
+func PfCreateInterface(dwName uint32, inAction PFFORWARD_ACTION, outAction PFFORWARD_ACTION, bUseLog bool, bMustBeUnique bool, ppInterface *unsafe.Pointer) uint32 {
+	_bUseLog := win32.Bool32(bUseLog)
+	_bMustBeUnique := win32.Bool32(bMustBeUnique)
+	r1, _, _ := syscall.SyscallN(procPfCreateInterface.Addr(), uintptr(dwName), uintptr(inAction), uintptr(outAction), uintptr(_bUseLog), uintptr(_bMustBeUnique), uintptr(unsafe.Pointer(ppInterface)))
 	return uint32(r1)
 }
 
@@ -1537,8 +1572,9 @@ func PfDeleteLog() uint32 {
 }
 
 // PfGetInterfaceStatistics calls IPHLPAPI!PfGetInterfaceStatistics.
-func PfGetInterfaceStatistics(pInterface unsafe.Pointer, ppfStats *PF_INTERFACE_STATS, pdwBufferSize *uint32, fResetCounters foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procPfGetInterfaceStatistics.Addr(), uintptr(unsafe.Pointer(pInterface)), uintptr(unsafe.Pointer(ppfStats)), uintptr(unsafe.Pointer(pdwBufferSize)), uintptr(fResetCounters))
+func PfGetInterfaceStatistics(pInterface unsafe.Pointer, ppfStats *PF_INTERFACE_STATS, pdwBufferSize *uint32, fResetCounters bool) uint32 {
+	_fResetCounters := win32.Bool32(fResetCounters)
+	r1, _, _ := syscall.SyscallN(procPfGetInterfaceStatistics.Addr(), uintptr(unsafe.Pointer(pInterface)), uintptr(unsafe.Pointer(ppfStats)), uintptr(unsafe.Pointer(pdwBufferSize)), uintptr(_fResetCounters))
 	return uint32(r1)
 }
 
@@ -1734,8 +1770,9 @@ func SetJobCompartmentId(JobHandle foundation.HANDLE, CompartmentId networkmanag
 
 // SetNetworkInformation calls IPHLPAPI!SetNetworkInformation.
 // https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-setnetworkinformation
-func SetNetworkInformation(NetworkGuid *win32.GUID, CompartmentId networkmanagementndis.NET_IF_COMPARTMENT_ID, NetworkName foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procSetNetworkInformation.Addr(), uintptr(unsafe.Pointer(NetworkGuid)), uintptr(CompartmentId), uintptr(unsafe.Pointer(NetworkName)))
+func SetNetworkInformation(NetworkGuid *win32.GUID, CompartmentId networkmanagementndis.NET_IF_COMPARTMENT_ID, NetworkName string) foundation.WIN32_ERROR {
+	_NetworkName := win32.UTF16Ptr(NetworkName)
+	r1, _, _ := syscall.SyscallN(procSetNetworkInformation.Addr(), uintptr(unsafe.Pointer(NetworkGuid)), uintptr(CompartmentId), uintptr(unsafe.Pointer(_NetworkName)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -1790,20 +1827,4 @@ func UnenableRouter(pOverlapped *systemio.OVERLAPPED, lpdwEnableCount *uint32) u
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-unregisterinterfacetimestampconfigchange
 func UnregisterInterfaceTimestampConfigChange(NotificationHandle HIFTIMESTAMPCHANGE) {
 	syscall.SyscallN(procUnregisterInterfaceTimestampConfigChange.Addr(), uintptr(NotificationHandle))
-}
-
-// if_indextoname calls IPHLPAPI!if_indextoname.
-// https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-if_indextoname
-// Minimum OS: windows6.0.6000.
-func If_indextoname(InterfaceIndex uint32, InterfaceName foundation.PSTR) foundation.PSTR {
-	r1, _, _ := syscall.SyscallN(procIf_indextoname.Addr(), uintptr(InterfaceIndex), uintptr(unsafe.Pointer(InterfaceName)))
-	return foundation.PSTR(unsafe.Pointer(r1))
-}
-
-// if_nametoindex calls IPHLPAPI!if_nametoindex.
-// https://learn.microsoft.com/windows/win32/api/netioapi/nf-netioapi-if_nametoindex
-// Minimum OS: windows6.0.6000.
-func If_nametoindex(InterfaceName foundation.PSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procIf_nametoindex.Addr(), uintptr(unsafe.Pointer(InterfaceName)))
-	return uint32(r1)
 }

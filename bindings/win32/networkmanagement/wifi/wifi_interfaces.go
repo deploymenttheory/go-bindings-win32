@@ -23,57 +23,57 @@ type IDot11AdHocInterface struct {
 var IID_IDot11AdHocInterface = win32.GUID{Data1: 0x8f10cc2b, Data2: 0xcf0d, Data3: 0x42a0, Data4: [8]byte{0xac, 0xbe, 0xe2, 0xde, 0x70, 0x07, 0x38, 0x4d}}
 
 // GetDeviceSignature dispatches through IDot11AdHocInterface's vtable slot 3.
-func (self *IDot11AdHocInterface) GetDeviceSignature(pSignature *win32.GUID) foundation.HRESULT {
+func (self *IDot11AdHocInterface) GetDeviceSignature(pSignature *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSignature)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFriendlyName dispatches through IDot11AdHocInterface's vtable slot 4.
-func (self *IDot11AdHocInterface) GetFriendlyName(ppszName *foundation.PWSTR) foundation.HRESULT {
+func (self *IDot11AdHocInterface) GetFriendlyName(ppszName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsDot11d dispatches through IDot11AdHocInterface's vtable slot 5.
-func (self *IDot11AdHocInterface) IsDot11d(pf11d *byte) foundation.HRESULT {
+func (self *IDot11AdHocInterface) IsDot11d(pf11d *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pf11d)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsAdHocCapable dispatches through IDot11AdHocInterface's vtable slot 6.
-func (self *IDot11AdHocInterface) IsAdHocCapable(pfAdHocCapable *byte) foundation.HRESULT {
+func (self *IDot11AdHocInterface) IsAdHocCapable(pfAdHocCapable *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfAdHocCapable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsRadioOn dispatches through IDot11AdHocInterface's vtable slot 7.
-func (self *IDot11AdHocInterface) IsRadioOn(pfIsRadioOn *byte) foundation.HRESULT {
+func (self *IDot11AdHocInterface) IsRadioOn(pfIsRadioOn *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsRadioOn)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetActiveNetwork dispatches through IDot11AdHocInterface's vtable slot 8.
-func (self *IDot11AdHocInterface) GetActiveNetwork(ppNetwork **IDot11AdHocNetwork) foundation.HRESULT {
+func (self *IDot11AdHocInterface) GetActiveNetwork(ppNetwork **IDot11AdHocNetwork) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNetwork)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIEnumSecuritySettings dispatches through IDot11AdHocInterface's vtable slot 9.
-func (self *IDot11AdHocInterface) GetIEnumSecuritySettings(ppEnum **IEnumDot11AdHocSecuritySettings) foundation.HRESULT {
+func (self *IDot11AdHocInterface) GetIEnumSecuritySettings(ppEnum **IEnumDot11AdHocSecuritySettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIEnumDot11AdHocNetworks dispatches through IDot11AdHocInterface's vtable slot 10.
-func (self *IDot11AdHocInterface) GetIEnumDot11AdHocNetworks(pFilterGuid *win32.GUID, ppEnum **IEnumDot11AdHocNetworks) foundation.HRESULT {
+func (self *IDot11AdHocInterface) GetIEnumDot11AdHocNetworks(pFilterGuid *win32.GUID, ppEnum **IEnumDot11AdHocNetworks) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilterGuid)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IDot11AdHocInterface's vtable slot 11.
-func (self *IDot11AdHocInterface) GetStatus(pState *DOT11_ADHOC_NETWORK_CONNECTION_STATUS) foundation.HRESULT {
+func (self *IDot11AdHocInterface) GetStatus(pState *DOT11_ADHOC_NETWORK_CONNECTION_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDot11AdHocInterfaceNotificationSink: https://learn.microsoft.com/windows/win32/api/adhoc/nn-adhoc-idot11adhocinterfacenotificationsink
@@ -86,9 +86,9 @@ type IDot11AdHocInterfaceNotificationSink struct {
 var IID_IDot11AdHocInterfaceNotificationSink = win32.GUID{Data1: 0x8f10cc2f, Data2: 0xcf0d, Data3: 0x42a0, Data4: [8]byte{0xac, 0xbe, 0xe2, 0xde, 0x70, 0x07, 0x38, 0x4d}}
 
 // OnConnectionStatusChange dispatches through IDot11AdHocInterfaceNotificationSink's vtable slot 3.
-func (self *IDot11AdHocInterfaceNotificationSink) OnConnectionStatusChange(eStatus DOT11_ADHOC_NETWORK_CONNECTION_STATUS) foundation.HRESULT {
+func (self *IDot11AdHocInterfaceNotificationSink) OnConnectionStatusChange(eStatus DOT11_ADHOC_NETWORK_CONNECTION_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDot11AdHocManager: https://learn.microsoft.com/windows/win32/api/adhoc/nn-adhoc-idot11adhocmanager
@@ -101,33 +101,35 @@ type IDot11AdHocManager struct {
 var IID_IDot11AdHocManager = win32.GUID{Data1: 0x8f10cc26, Data2: 0xcf0d, Data3: 0x42a0, Data4: [8]byte{0xac, 0xbe, 0xe2, 0xde, 0x70, 0x07, 0x38, 0x4d}}
 
 // CreateNetwork dispatches through IDot11AdHocManager's vtable slot 3.
-func (self *IDot11AdHocManager) CreateNetwork(Name foundation.PWSTR, Password foundation.PWSTR, GeographicalId int32, pInterface *IDot11AdHocInterface, pSecurity *IDot11AdHocSecuritySettings, pContextGuid *win32.GUID, pIAdHoc **IDot11AdHocNetwork) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(Password)), uintptr(GeographicalId), uintptr(unsafe.Pointer(pInterface)), uintptr(unsafe.Pointer(pSecurity)), uintptr(unsafe.Pointer(pContextGuid)), uintptr(unsafe.Pointer(pIAdHoc)))
-	return foundation.HRESULT(r1)
+func (self *IDot11AdHocManager) CreateNetwork(Name string, Password string, GeographicalId int32, pInterface *IDot11AdHocInterface, pSecurity *IDot11AdHocSecuritySettings, pContextGuid *win32.GUID, pIAdHoc **IDot11AdHocNetwork) error {
+	_Name := win32.UTF16Ptr(Name)
+	_Password := win32.UTF16Ptr(Password)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(_Password)), uintptr(GeographicalId), uintptr(unsafe.Pointer(pInterface)), uintptr(unsafe.Pointer(pSecurity)), uintptr(unsafe.Pointer(pContextGuid)), uintptr(unsafe.Pointer(pIAdHoc)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CommitCreatedNetwork dispatches through IDot11AdHocManager's vtable slot 4.
-func (self *IDot11AdHocManager) CommitCreatedNetwork(pIAdHoc *IDot11AdHocNetwork, fSaveProfile foundation.BOOLEAN, fMakeSavedProfileUserSpecific foundation.BOOLEAN) foundation.HRESULT {
+func (self *IDot11AdHocManager) CommitCreatedNetwork(pIAdHoc *IDot11AdHocNetwork, fSaveProfile foundation.BOOLEAN, fMakeSavedProfileUserSpecific foundation.BOOLEAN) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIAdHoc)), uintptr(fSaveProfile), uintptr(fMakeSavedProfileUserSpecific))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIEnumDot11AdHocNetworks dispatches through IDot11AdHocManager's vtable slot 5.
-func (self *IDot11AdHocManager) GetIEnumDot11AdHocNetworks(pContextGuid *win32.GUID, ppEnum **IEnumDot11AdHocNetworks) foundation.HRESULT {
+func (self *IDot11AdHocManager) GetIEnumDot11AdHocNetworks(pContextGuid *win32.GUID, ppEnum **IEnumDot11AdHocNetworks) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContextGuid)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIEnumDot11AdHocInterfaces dispatches through IDot11AdHocManager's vtable slot 6.
-func (self *IDot11AdHocManager) GetIEnumDot11AdHocInterfaces(ppEnum **IEnumDot11AdHocInterfaces) foundation.HRESULT {
+func (self *IDot11AdHocManager) GetIEnumDot11AdHocInterfaces(ppEnum **IEnumDot11AdHocInterfaces) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNetwork dispatches through IDot11AdHocManager's vtable slot 7.
-func (self *IDot11AdHocManager) GetNetwork(NetworkSignature *win32.GUID, pNetwork **IDot11AdHocNetwork) foundation.HRESULT {
+func (self *IDot11AdHocManager) GetNetwork(NetworkSignature *win32.GUID, pNetwork **IDot11AdHocNetwork) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(NetworkSignature)), uintptr(unsafe.Pointer(pNetwork)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDot11AdHocManagerNotificationSink: https://learn.microsoft.com/windows/win32/api/adhoc/nn-adhoc-idot11adhocmanagernotificationsink
@@ -140,27 +142,27 @@ type IDot11AdHocManagerNotificationSink struct {
 var IID_IDot11AdHocManagerNotificationSink = win32.GUID{Data1: 0x8f10cc27, Data2: 0xcf0d, Data3: 0x42a0, Data4: [8]byte{0xac, 0xbe, 0xe2, 0xde, 0x70, 0x07, 0x38, 0x4d}}
 
 // OnNetworkAdd dispatches through IDot11AdHocManagerNotificationSink's vtable slot 3.
-func (self *IDot11AdHocManagerNotificationSink) OnNetworkAdd(pIAdHocNetwork *IDot11AdHocNetwork) foundation.HRESULT {
+func (self *IDot11AdHocManagerNotificationSink) OnNetworkAdd(pIAdHocNetwork *IDot11AdHocNetwork) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIAdHocNetwork)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnNetworkRemove dispatches through IDot11AdHocManagerNotificationSink's vtable slot 4.
-func (self *IDot11AdHocManagerNotificationSink) OnNetworkRemove(Signature *win32.GUID) foundation.HRESULT {
+func (self *IDot11AdHocManagerNotificationSink) OnNetworkRemove(Signature *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Signature)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnInterfaceAdd dispatches through IDot11AdHocManagerNotificationSink's vtable slot 5.
-func (self *IDot11AdHocManagerNotificationSink) OnInterfaceAdd(pIAdHocInterface *IDot11AdHocInterface) foundation.HRESULT {
+func (self *IDot11AdHocManagerNotificationSink) OnInterfaceAdd(pIAdHocInterface *IDot11AdHocInterface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIAdHocInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnInterfaceRemove dispatches through IDot11AdHocManagerNotificationSink's vtable slot 6.
-func (self *IDot11AdHocManagerNotificationSink) OnInterfaceRemove(Signature *win32.GUID) foundation.HRESULT {
+func (self *IDot11AdHocManagerNotificationSink) OnInterfaceRemove(Signature *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Signature)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDot11AdHocNetwork: https://learn.microsoft.com/windows/win32/api/adhoc/nn-adhoc-idot11adhocnetwork
@@ -173,75 +175,76 @@ type IDot11AdHocNetwork struct {
 var IID_IDot11AdHocNetwork = win32.GUID{Data1: 0x8f10cc29, Data2: 0xcf0d, Data3: 0x42a0, Data4: [8]byte{0xac, 0xbe, 0xe2, 0xde, 0x70, 0x07, 0x38, 0x4d}}
 
 // GetStatus dispatches through IDot11AdHocNetwork's vtable slot 3.
-func (self *IDot11AdHocNetwork) GetStatus(eStatus *DOT11_ADHOC_NETWORK_CONNECTION_STATUS) foundation.HRESULT {
+func (self *IDot11AdHocNetwork) GetStatus(eStatus *DOT11_ADHOC_NETWORK_CONNECTION_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(eStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSSID dispatches through IDot11AdHocNetwork's vtable slot 4.
-func (self *IDot11AdHocNetwork) GetSSID(ppszwSSID *foundation.PWSTR) foundation.HRESULT {
+func (self *IDot11AdHocNetwork) GetSSID(ppszwSSID *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszwSSID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HasProfile dispatches through IDot11AdHocNetwork's vtable slot 5.
-func (self *IDot11AdHocNetwork) HasProfile(pf11d *byte) foundation.HRESULT {
+func (self *IDot11AdHocNetwork) HasProfile(pf11d *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pf11d)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProfileName dispatches through IDot11AdHocNetwork's vtable slot 6.
-func (self *IDot11AdHocNetwork) GetProfileName(ppszwProfileName *foundation.PWSTR) foundation.HRESULT {
+func (self *IDot11AdHocNetwork) GetProfileName(ppszwProfileName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszwProfileName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteProfile dispatches through IDot11AdHocNetwork's vtable slot 7.
-func (self *IDot11AdHocNetwork) DeleteProfile() foundation.HRESULT {
+func (self *IDot11AdHocNetwork) DeleteProfile() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSignalQuality dispatches through IDot11AdHocNetwork's vtable slot 8.
-func (self *IDot11AdHocNetwork) GetSignalQuality(puStrengthValue *uint32, puStrengthMax *uint32) foundation.HRESULT {
+func (self *IDot11AdHocNetwork) GetSignalQuality(puStrengthValue *uint32, puStrengthMax *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puStrengthValue)), uintptr(unsafe.Pointer(puStrengthMax)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSecuritySetting dispatches through IDot11AdHocNetwork's vtable slot 9.
-func (self *IDot11AdHocNetwork) GetSecuritySetting(pAdHocSecuritySetting **IDot11AdHocSecuritySettings) foundation.HRESULT {
+func (self *IDot11AdHocNetwork) GetSecuritySetting(pAdHocSecuritySetting **IDot11AdHocSecuritySettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAdHocSecuritySetting)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContextGuid dispatches through IDot11AdHocNetwork's vtable slot 10.
-func (self *IDot11AdHocNetwork) GetContextGuid(pContextGuid *win32.GUID) foundation.HRESULT {
+func (self *IDot11AdHocNetwork) GetContextGuid(pContextGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContextGuid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSignature dispatches through IDot11AdHocNetwork's vtable slot 11.
-func (self *IDot11AdHocNetwork) GetSignature(pSignature *win32.GUID) foundation.HRESULT {
+func (self *IDot11AdHocNetwork) GetSignature(pSignature *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSignature)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInterface dispatches through IDot11AdHocNetwork's vtable slot 12.
-func (self *IDot11AdHocNetwork) GetInterface(pAdHocInterface **IDot11AdHocInterface) foundation.HRESULT {
+func (self *IDot11AdHocNetwork) GetInterface(pAdHocInterface **IDot11AdHocInterface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAdHocInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Connect dispatches through IDot11AdHocNetwork's vtable slot 13.
-func (self *IDot11AdHocNetwork) Connect(Passphrase foundation.PWSTR, GeographicalId int32, fSaveProfile foundation.BOOLEAN, fMakeSavedProfileUserSpecific foundation.BOOLEAN) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Passphrase)), uintptr(GeographicalId), uintptr(fSaveProfile), uintptr(fMakeSavedProfileUserSpecific))
-	return foundation.HRESULT(r1)
+func (self *IDot11AdHocNetwork) Connect(Passphrase string, GeographicalId int32, fSaveProfile foundation.BOOLEAN, fMakeSavedProfileUserSpecific foundation.BOOLEAN) error {
+	_Passphrase := win32.UTF16Ptr(Passphrase)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Passphrase)), uintptr(GeographicalId), uintptr(fSaveProfile), uintptr(fMakeSavedProfileUserSpecific))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disconnect dispatches through IDot11AdHocNetwork's vtable slot 14.
-func (self *IDot11AdHocNetwork) Disconnect() foundation.HRESULT {
+func (self *IDot11AdHocNetwork) Disconnect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDot11AdHocNetworkNotificationSink: https://learn.microsoft.com/windows/win32/api/adhoc/nn-adhoc-idot11adhocnetworknotificationsink
@@ -254,15 +257,15 @@ type IDot11AdHocNetworkNotificationSink struct {
 var IID_IDot11AdHocNetworkNotificationSink = win32.GUID{Data1: 0x8f10cc2a, Data2: 0xcf0d, Data3: 0x42a0, Data4: [8]byte{0xac, 0xbe, 0xe2, 0xde, 0x70, 0x07, 0x38, 0x4d}}
 
 // OnStatusChange dispatches through IDot11AdHocNetworkNotificationSink's vtable slot 3.
-func (self *IDot11AdHocNetworkNotificationSink) OnStatusChange(eStatus DOT11_ADHOC_NETWORK_CONNECTION_STATUS) foundation.HRESULT {
+func (self *IDot11AdHocNetworkNotificationSink) OnStatusChange(eStatus DOT11_ADHOC_NETWORK_CONNECTION_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnConnectFail dispatches through IDot11AdHocNetworkNotificationSink's vtable slot 4.
-func (self *IDot11AdHocNetworkNotificationSink) OnConnectFail(eFailReason DOT11_ADHOC_CONNECT_FAIL_REASON) foundation.HRESULT {
+func (self *IDot11AdHocNetworkNotificationSink) OnConnectFail(eFailReason DOT11_ADHOC_CONNECT_FAIL_REASON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(eFailReason))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDot11AdHocSecuritySettings: https://learn.microsoft.com/windows/win32/api/adhoc/nn-adhoc-idot11adhocsecuritysettings
@@ -275,15 +278,15 @@ type IDot11AdHocSecuritySettings struct {
 var IID_IDot11AdHocSecuritySettings = win32.GUID{Data1: 0x8f10cc2e, Data2: 0xcf0d, Data3: 0x42a0, Data4: [8]byte{0xac, 0xbe, 0xe2, 0xde, 0x70, 0x07, 0x38, 0x4d}}
 
 // GetDot11AuthAlgorithm dispatches through IDot11AdHocSecuritySettings's vtable slot 3.
-func (self *IDot11AdHocSecuritySettings) GetDot11AuthAlgorithm(pAuth *DOT11_ADHOC_AUTH_ALGORITHM) foundation.HRESULT {
+func (self *IDot11AdHocSecuritySettings) GetDot11AuthAlgorithm(pAuth *DOT11_ADHOC_AUTH_ALGORITHM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAuth)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDot11CipherAlgorithm dispatches through IDot11AdHocSecuritySettings's vtable slot 4.
-func (self *IDot11AdHocSecuritySettings) GetDot11CipherAlgorithm(pCipher *DOT11_ADHOC_CIPHER_ALGORITHM) foundation.HRESULT {
+func (self *IDot11AdHocSecuritySettings) GetDot11CipherAlgorithm(pCipher *DOT11_ADHOC_CIPHER_ALGORITHM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCipher)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumDot11AdHocInterfaces: https://learn.microsoft.com/windows/win32/api/adhoc/nn-adhoc-ienumdot11adhocinterfaces
@@ -296,27 +299,27 @@ type IEnumDot11AdHocInterfaces struct {
 var IID_IEnumDot11AdHocInterfaces = win32.GUID{Data1: 0x8f10cc2c, Data2: 0xcf0d, Data3: 0x42a0, Data4: [8]byte{0xac, 0xbe, 0xe2, 0xde, 0x70, 0x07, 0x38, 0x4d}}
 
 // Next dispatches through IEnumDot11AdHocInterfaces's vtable slot 3.
-func (self *IEnumDot11AdHocInterfaces) Next(cElt uint32, rgElt **IDot11AdHocInterface, pcEltFetched *uint32) foundation.HRESULT {
+func (self *IEnumDot11AdHocInterfaces) Next(cElt uint32, rgElt **IDot11AdHocInterface, pcEltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cElt), uintptr(unsafe.Pointer(rgElt)), uintptr(unsafe.Pointer(pcEltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumDot11AdHocInterfaces's vtable slot 4.
-func (self *IEnumDot11AdHocInterfaces) Skip(cElt uint32) foundation.HRESULT {
+func (self *IEnumDot11AdHocInterfaces) Skip(cElt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cElt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumDot11AdHocInterfaces's vtable slot 5.
-func (self *IEnumDot11AdHocInterfaces) Reset() foundation.HRESULT {
+func (self *IEnumDot11AdHocInterfaces) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumDot11AdHocInterfaces's vtable slot 6.
-func (self *IEnumDot11AdHocInterfaces) Clone(ppEnum **IEnumDot11AdHocInterfaces) foundation.HRESULT {
+func (self *IEnumDot11AdHocInterfaces) Clone(ppEnum **IEnumDot11AdHocInterfaces) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumDot11AdHocNetworks: https://learn.microsoft.com/windows/win32/api/adhoc/nn-adhoc-ienumdot11adhocnetworks
@@ -329,27 +332,27 @@ type IEnumDot11AdHocNetworks struct {
 var IID_IEnumDot11AdHocNetworks = win32.GUID{Data1: 0x8f10cc28, Data2: 0xcf0d, Data3: 0x42a0, Data4: [8]byte{0xac, 0xbe, 0xe2, 0xde, 0x70, 0x07, 0x38, 0x4d}}
 
 // Next dispatches through IEnumDot11AdHocNetworks's vtable slot 3.
-func (self *IEnumDot11AdHocNetworks) Next(cElt uint32, rgElt **IDot11AdHocNetwork, pcEltFetched *uint32) foundation.HRESULT {
+func (self *IEnumDot11AdHocNetworks) Next(cElt uint32, rgElt **IDot11AdHocNetwork, pcEltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cElt), uintptr(unsafe.Pointer(rgElt)), uintptr(unsafe.Pointer(pcEltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumDot11AdHocNetworks's vtable slot 4.
-func (self *IEnumDot11AdHocNetworks) Skip(cElt uint32) foundation.HRESULT {
+func (self *IEnumDot11AdHocNetworks) Skip(cElt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cElt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumDot11AdHocNetworks's vtable slot 5.
-func (self *IEnumDot11AdHocNetworks) Reset() foundation.HRESULT {
+func (self *IEnumDot11AdHocNetworks) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumDot11AdHocNetworks's vtable slot 6.
-func (self *IEnumDot11AdHocNetworks) Clone(ppEnum **IEnumDot11AdHocNetworks) foundation.HRESULT {
+func (self *IEnumDot11AdHocNetworks) Clone(ppEnum **IEnumDot11AdHocNetworks) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumDot11AdHocSecuritySettings: https://learn.microsoft.com/windows/win32/api/adhoc/nn-adhoc-ienumdot11adhocsecuritysettings
@@ -362,25 +365,25 @@ type IEnumDot11AdHocSecuritySettings struct {
 var IID_IEnumDot11AdHocSecuritySettings = win32.GUID{Data1: 0x8f10cc2d, Data2: 0xcf0d, Data3: 0x42a0, Data4: [8]byte{0xac, 0xbe, 0xe2, 0xde, 0x70, 0x07, 0x38, 0x4d}}
 
 // Next dispatches through IEnumDot11AdHocSecuritySettings's vtable slot 3.
-func (self *IEnumDot11AdHocSecuritySettings) Next(cElt uint32, rgElt **IDot11AdHocSecuritySettings, pcEltFetched *uint32) foundation.HRESULT {
+func (self *IEnumDot11AdHocSecuritySettings) Next(cElt uint32, rgElt **IDot11AdHocSecuritySettings, pcEltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cElt), uintptr(unsafe.Pointer(rgElt)), uintptr(unsafe.Pointer(pcEltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumDot11AdHocSecuritySettings's vtable slot 4.
-func (self *IEnumDot11AdHocSecuritySettings) Skip(cElt uint32) foundation.HRESULT {
+func (self *IEnumDot11AdHocSecuritySettings) Skip(cElt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cElt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumDot11AdHocSecuritySettings's vtable slot 5.
-func (self *IEnumDot11AdHocSecuritySettings) Reset() foundation.HRESULT {
+func (self *IEnumDot11AdHocSecuritySettings) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumDot11AdHocSecuritySettings's vtable slot 6.
-func (self *IEnumDot11AdHocSecuritySettings) Clone(ppEnum **IEnumDot11AdHocSecuritySettings) foundation.HRESULT {
+func (self *IEnumDot11AdHocSecuritySettings) Clone(ppEnum **IEnumDot11AdHocSecuritySettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

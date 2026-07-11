@@ -37,15 +37,15 @@ var (
 	procAppCacheGetManifestUrl                     = modWININET.NewProc("AppCacheGetManifestUrl")
 	procAppCacheLookup                             = modWININET.NewProc("AppCacheLookup")
 	procCreateMD5SSOHash                           = modWININET.NewProc("CreateMD5SSOHash")
+	procCreateUrlCacheContainer                    = modWININET.NewProc("CreateUrlCacheContainerW")
 	procCreateUrlCacheContainerA                   = modWININET.NewProc("CreateUrlCacheContainerA")
-	procCreateUrlCacheContainerW                   = modWININET.NewProc("CreateUrlCacheContainerW")
+	procCreateUrlCacheEntry                        = modWININET.NewProc("CreateUrlCacheEntryW")
 	procCreateUrlCacheEntryA                       = modWININET.NewProc("CreateUrlCacheEntryA")
 	procCreateUrlCacheEntryExW                     = modWININET.NewProc("CreateUrlCacheEntryExW")
-	procCreateUrlCacheEntryW                       = modWININET.NewProc("CreateUrlCacheEntryW")
 	procCreateUrlCacheGroup                        = modWININET.NewProc("CreateUrlCacheGroup")
 	procDeleteIE3Cache                             = modWININET.NewProc("DeleteIE3Cache")
+	procDeleteUrlCacheContainer                    = modWININET.NewProc("DeleteUrlCacheContainerW")
 	procDeleteUrlCacheContainerA                   = modWININET.NewProc("DeleteUrlCacheContainerA")
-	procDeleteUrlCacheContainerW                   = modWININET.NewProc("DeleteUrlCacheContainerW")
 	procDeleteUrlCacheEntry                        = modWININET.NewProc("DeleteUrlCacheEntry")
 	procDeleteUrlCacheEntryA                       = modWININET.NewProc("DeleteUrlCacheEntryA")
 	procDeleteUrlCacheEntryW                       = modWININET.NewProc("DeleteUrlCacheEntryW")
@@ -53,136 +53,136 @@ var (
 	procDeleteWpadCacheForNetworks                 = modWININET.NewProc("DeleteWpadCacheForNetworks")
 	procDetectAutoProxyUrl                         = modWININET.NewProc("DetectAutoProxyUrl")
 	procDoConnectoidsExist                         = modWININET.NewProc("DoConnectoidsExist")
+	procExportCookieFile                           = modWININET.NewProc("ExportCookieFileW")
 	procExportCookieFileA                          = modWININET.NewProc("ExportCookieFileA")
-	procExportCookieFileW                          = modWININET.NewProc("ExportCookieFileW")
 	procFindCloseUrlCache                          = modWININET.NewProc("FindCloseUrlCache")
+	procFindFirstUrlCacheContainer                 = modWININET.NewProc("FindFirstUrlCacheContainerW")
 	procFindFirstUrlCacheContainerA                = modWININET.NewProc("FindFirstUrlCacheContainerA")
-	procFindFirstUrlCacheContainerW                = modWININET.NewProc("FindFirstUrlCacheContainerW")
+	procFindFirstUrlCacheEntry                     = modWININET.NewProc("FindFirstUrlCacheEntryW")
 	procFindFirstUrlCacheEntryA                    = modWININET.NewProc("FindFirstUrlCacheEntryA")
+	procFindFirstUrlCacheEntryEx                   = modWININET.NewProc("FindFirstUrlCacheEntryExW")
 	procFindFirstUrlCacheEntryExA                  = modWININET.NewProc("FindFirstUrlCacheEntryExA")
-	procFindFirstUrlCacheEntryExW                  = modWININET.NewProc("FindFirstUrlCacheEntryExW")
-	procFindFirstUrlCacheEntryW                    = modWININET.NewProc("FindFirstUrlCacheEntryW")
 	procFindFirstUrlCacheGroup                     = modWININET.NewProc("FindFirstUrlCacheGroup")
+	procFindNextUrlCacheContainer                  = modWININET.NewProc("FindNextUrlCacheContainerW")
 	procFindNextUrlCacheContainerA                 = modWININET.NewProc("FindNextUrlCacheContainerA")
-	procFindNextUrlCacheContainerW                 = modWININET.NewProc("FindNextUrlCacheContainerW")
+	procFindNextUrlCacheEntry                      = modWININET.NewProc("FindNextUrlCacheEntryW")
 	procFindNextUrlCacheEntryA                     = modWININET.NewProc("FindNextUrlCacheEntryA")
+	procFindNextUrlCacheEntryEx                    = modWININET.NewProc("FindNextUrlCacheEntryExW")
 	procFindNextUrlCacheEntryExA                   = modWININET.NewProc("FindNextUrlCacheEntryExA")
-	procFindNextUrlCacheEntryExW                   = modWININET.NewProc("FindNextUrlCacheEntryExW")
-	procFindNextUrlCacheEntryW                     = modWININET.NewProc("FindNextUrlCacheEntryW")
 	procFindNextUrlCacheGroup                      = modWININET.NewProc("FindNextUrlCacheGroup")
 	procFindP3PPolicySymbol                        = modWININET.NewProc("FindP3PPolicySymbol")
+	procFreeUrlCacheSpace                          = modWININET.NewProc("FreeUrlCacheSpaceW")
 	procFreeUrlCacheSpaceA                         = modWININET.NewProc("FreeUrlCacheSpaceA")
-	procFreeUrlCacheSpaceW                         = modWININET.NewProc("FreeUrlCacheSpaceW")
+	procFtpCommand                                 = modWININET.NewProc("FtpCommandW")
 	procFtpCommandA                                = modWININET.NewProc("FtpCommandA")
-	procFtpCommandW                                = modWININET.NewProc("FtpCommandW")
+	procFtpCreateDirectory                         = modWININET.NewProc("FtpCreateDirectoryW")
 	procFtpCreateDirectoryA                        = modWININET.NewProc("FtpCreateDirectoryA")
-	procFtpCreateDirectoryW                        = modWININET.NewProc("FtpCreateDirectoryW")
+	procFtpDeleteFile                              = modWININET.NewProc("FtpDeleteFileW")
 	procFtpDeleteFileA                             = modWININET.NewProc("FtpDeleteFileA")
-	procFtpDeleteFileW                             = modWININET.NewProc("FtpDeleteFileW")
+	procFtpFindFirstFile                           = modWININET.NewProc("FtpFindFirstFileW")
 	procFtpFindFirstFileA                          = modWININET.NewProc("FtpFindFirstFileA")
-	procFtpFindFirstFileW                          = modWININET.NewProc("FtpFindFirstFileW")
+	procFtpGetCurrentDirectory                     = modWININET.NewProc("FtpGetCurrentDirectoryW")
 	procFtpGetCurrentDirectoryA                    = modWININET.NewProc("FtpGetCurrentDirectoryA")
-	procFtpGetCurrentDirectoryW                    = modWININET.NewProc("FtpGetCurrentDirectoryW")
+	procFtpGetFile                                 = modWININET.NewProc("FtpGetFileW")
 	procFtpGetFileA                                = modWININET.NewProc("FtpGetFileA")
 	procFtpGetFileEx                               = modWININET.NewProc("FtpGetFileEx")
 	procFtpGetFileSize                             = modWININET.NewProc("FtpGetFileSize")
-	procFtpGetFileW                                = modWININET.NewProc("FtpGetFileW")
+	procFtpOpenFile                                = modWININET.NewProc("FtpOpenFileW")
 	procFtpOpenFileA                               = modWININET.NewProc("FtpOpenFileA")
-	procFtpOpenFileW                               = modWININET.NewProc("FtpOpenFileW")
+	procFtpPutFile                                 = modWININET.NewProc("FtpPutFileW")
 	procFtpPutFileA                                = modWININET.NewProc("FtpPutFileA")
 	procFtpPutFileEx                               = modWININET.NewProc("FtpPutFileEx")
-	procFtpPutFileW                                = modWININET.NewProc("FtpPutFileW")
+	procFtpRemoveDirectory                         = modWININET.NewProc("FtpRemoveDirectoryW")
 	procFtpRemoveDirectoryA                        = modWININET.NewProc("FtpRemoveDirectoryA")
-	procFtpRemoveDirectoryW                        = modWININET.NewProc("FtpRemoveDirectoryW")
+	procFtpRenameFile                              = modWININET.NewProc("FtpRenameFileW")
 	procFtpRenameFileA                             = modWININET.NewProc("FtpRenameFileA")
-	procFtpRenameFileW                             = modWININET.NewProc("FtpRenameFileW")
+	procFtpSetCurrentDirectory                     = modWININET.NewProc("FtpSetCurrentDirectoryW")
 	procFtpSetCurrentDirectoryA                    = modWININET.NewProc("FtpSetCurrentDirectoryA")
-	procFtpSetCurrentDirectoryW                    = modWININET.NewProc("FtpSetCurrentDirectoryW")
 	procGetDiskInfoA                               = modWININET.NewProc("GetDiskInfoA")
+	procGetUrlCacheConfigInfo                      = modWININET.NewProc("GetUrlCacheConfigInfoW")
 	procGetUrlCacheConfigInfoA                     = modWININET.NewProc("GetUrlCacheConfigInfoA")
-	procGetUrlCacheConfigInfoW                     = modWININET.NewProc("GetUrlCacheConfigInfoW")
 	procGetUrlCacheEntryBinaryBlob                 = modWININET.NewProc("GetUrlCacheEntryBinaryBlob")
+	procGetUrlCacheEntryInfo                       = modWININET.NewProc("GetUrlCacheEntryInfoW")
 	procGetUrlCacheEntryInfoA                      = modWININET.NewProc("GetUrlCacheEntryInfoA")
+	procGetUrlCacheEntryInfoEx                     = modWININET.NewProc("GetUrlCacheEntryInfoExW")
 	procGetUrlCacheEntryInfoExA                    = modWININET.NewProc("GetUrlCacheEntryInfoExA")
-	procGetUrlCacheEntryInfoExW                    = modWININET.NewProc("GetUrlCacheEntryInfoExW")
-	procGetUrlCacheEntryInfoW                      = modWININET.NewProc("GetUrlCacheEntryInfoW")
+	procGetUrlCacheGroupAttribute                  = modWININET.NewProc("GetUrlCacheGroupAttributeW")
 	procGetUrlCacheGroupAttributeA                 = modWININET.NewProc("GetUrlCacheGroupAttributeA")
-	procGetUrlCacheGroupAttributeW                 = modWININET.NewProc("GetUrlCacheGroupAttributeW")
 	procGetUrlCacheHeaderData                      = modWININET.NewProc("GetUrlCacheHeaderData")
+	procGopherCreateLocator                        = modWININET.NewProc("GopherCreateLocatorW")
 	procGopherCreateLocatorA                       = modWININET.NewProc("GopherCreateLocatorA")
-	procGopherCreateLocatorW                       = modWININET.NewProc("GopherCreateLocatorW")
+	procGopherFindFirstFile                        = modWININET.NewProc("GopherFindFirstFileW")
 	procGopherFindFirstFileA                       = modWININET.NewProc("GopherFindFirstFileA")
-	procGopherFindFirstFileW                       = modWININET.NewProc("GopherFindFirstFileW")
+	procGopherGetAttribute                         = modWININET.NewProc("GopherGetAttributeW")
 	procGopherGetAttributeA                        = modWININET.NewProc("GopherGetAttributeA")
-	procGopherGetAttributeW                        = modWININET.NewProc("GopherGetAttributeW")
+	procGopherGetLocatorType                       = modWININET.NewProc("GopherGetLocatorTypeW")
 	procGopherGetLocatorTypeA                      = modWININET.NewProc("GopherGetLocatorTypeA")
-	procGopherGetLocatorTypeW                      = modWININET.NewProc("GopherGetLocatorTypeW")
+	procGopherOpenFile                             = modWININET.NewProc("GopherOpenFileW")
 	procGopherOpenFileA                            = modWININET.NewProc("GopherOpenFileA")
-	procGopherOpenFileW                            = modWININET.NewProc("GopherOpenFileW")
+	procHttpAddRequestHeaders                      = modWININET.NewProc("HttpAddRequestHeadersW")
 	procHttpAddRequestHeadersA                     = modWININET.NewProc("HttpAddRequestHeadersA")
-	procHttpAddRequestHeadersW                     = modWININET.NewProc("HttpAddRequestHeadersW")
+	procHttpCheckDavCompliance                     = modWININET.NewProc("HttpCheckDavComplianceW")
 	procHttpCheckDavComplianceA                    = modWININET.NewProc("HttpCheckDavComplianceA")
-	procHttpCheckDavComplianceW                    = modWININET.NewProc("HttpCheckDavComplianceW")
 	procHttpCloseDependencyHandle                  = modWININET.NewProc("HttpCloseDependencyHandle")
 	procHttpDuplicateDependencyHandle              = modWININET.NewProc("HttpDuplicateDependencyHandle")
+	procHttpEndRequest                             = modWININET.NewProc("HttpEndRequestW")
 	procHttpEndRequestA                            = modWININET.NewProc("HttpEndRequestA")
-	procHttpEndRequestW                            = modWININET.NewProc("HttpEndRequestW")
 	procHttpGetServerCredentials                   = modWININET.NewProc("HttpGetServerCredentials")
 	procHttpIndicatePageLoadComplete               = modWININET.NewProc("HttpIndicatePageLoadComplete")
 	procHttpIsHostHstsEnabled                      = modWININET.NewProc("HttpIsHostHstsEnabled")
 	procHttpOpenDependencyHandle                   = modWININET.NewProc("HttpOpenDependencyHandle")
+	procHttpOpenRequest                            = modWININET.NewProc("HttpOpenRequestW")
 	procHttpOpenRequestA                           = modWININET.NewProc("HttpOpenRequestA")
-	procHttpOpenRequestW                           = modWININET.NewProc("HttpOpenRequestW")
 	procHttpPushClose                              = modWININET.NewProc("HttpPushClose")
 	procHttpPushEnable                             = modWININET.NewProc("HttpPushEnable")
 	procHttpPushWait                               = modWININET.NewProc("HttpPushWait")
+	procHttpQueryInfo                              = modWININET.NewProc("HttpQueryInfoW")
 	procHttpQueryInfoA                             = modWININET.NewProc("HttpQueryInfoA")
-	procHttpQueryInfoW                             = modWININET.NewProc("HttpQueryInfoW")
+	procHttpSendRequest                            = modWININET.NewProc("HttpSendRequestW")
 	procHttpSendRequestA                           = modWININET.NewProc("HttpSendRequestA")
+	procHttpSendRequestEx                          = modWININET.NewProc("HttpSendRequestExW")
 	procHttpSendRequestExA                         = modWININET.NewProc("HttpSendRequestExA")
-	procHttpSendRequestExW                         = modWININET.NewProc("HttpSendRequestExW")
-	procHttpSendRequestW                           = modWININET.NewProc("HttpSendRequestW")
 	procHttpWebSocketClose                         = modWININET.NewProc("HttpWebSocketClose")
 	procHttpWebSocketCompleteUpgrade               = modWININET.NewProc("HttpWebSocketCompleteUpgrade")
 	procHttpWebSocketQueryCloseStatus              = modWININET.NewProc("HttpWebSocketQueryCloseStatus")
 	procHttpWebSocketReceive                       = modWININET.NewProc("HttpWebSocketReceive")
 	procHttpWebSocketSend                          = modWININET.NewProc("HttpWebSocketSend")
 	procHttpWebSocketShutdown                      = modWININET.NewProc("HttpWebSocketShutdown")
+	procImportCookieFile                           = modWININET.NewProc("ImportCookieFileW")
 	procImportCookieFileA                          = modWININET.NewProc("ImportCookieFileA")
-	procImportCookieFileW                          = modWININET.NewProc("ImportCookieFileW")
 	procIncrementUrlCacheHeaderData                = modWININET.NewProc("IncrementUrlCacheHeaderData")
 	procInternalInternetGetCookie                  = modWININET.NewProc("InternalInternetGetCookie")
+	procInternetAlgIdToString                      = modWININET.NewProc("InternetAlgIdToStringW")
 	procInternetAlgIdToStringA                     = modWININET.NewProc("InternetAlgIdToStringA")
-	procInternetAlgIdToStringW                     = modWININET.NewProc("InternetAlgIdToStringW")
 	procInternetAttemptConnect                     = modWININET.NewProc("InternetAttemptConnect")
 	procInternetAutodial                           = modWININET.NewProc("InternetAutodial")
 	procInternetAutodialHangup                     = modWININET.NewProc("InternetAutodialHangup")
+	procInternetCanonicalizeUrl                    = modWININET.NewProc("InternetCanonicalizeUrlW")
 	procInternetCanonicalizeUrlA                   = modWININET.NewProc("InternetCanonicalizeUrlA")
-	procInternetCanonicalizeUrlW                   = modWININET.NewProc("InternetCanonicalizeUrlW")
+	procInternetCheckConnection                    = modWININET.NewProc("InternetCheckConnectionW")
 	procInternetCheckConnectionA                   = modWININET.NewProc("InternetCheckConnectionA")
-	procInternetCheckConnectionW                   = modWININET.NewProc("InternetCheckConnectionW")
 	procInternetClearAllPerSiteCookieDecisions     = modWININET.NewProc("InternetClearAllPerSiteCookieDecisions")
 	procInternetCloseHandle                        = modWININET.NewProc("InternetCloseHandle")
+	procInternetCombineUrl                         = modWININET.NewProc("InternetCombineUrlW")
 	procInternetCombineUrlA                        = modWININET.NewProc("InternetCombineUrlA")
-	procInternetCombineUrlW                        = modWININET.NewProc("InternetCombineUrlW")
 	procInternetConfirmZoneCrossing                = modWININET.NewProc("InternetConfirmZoneCrossing")
 	procInternetConfirmZoneCrossingA               = modWININET.NewProc("InternetConfirmZoneCrossingA")
 	procInternetConfirmZoneCrossingW               = modWININET.NewProc("InternetConfirmZoneCrossingW")
+	procInternetConnect                            = modWININET.NewProc("InternetConnectW")
 	procInternetConnectA                           = modWININET.NewProc("InternetConnectA")
-	procInternetConnectW                           = modWININET.NewProc("InternetConnectW")
 	procInternetConvertUrlFromWireToWideChar       = modWININET.NewProc("InternetConvertUrlFromWireToWideChar")
+	procInternetCrackUrl                           = modWININET.NewProc("InternetCrackUrlW")
 	procInternetCrackUrlA                          = modWININET.NewProc("InternetCrackUrlA")
-	procInternetCrackUrlW                          = modWININET.NewProc("InternetCrackUrlW")
+	procInternetCreateUrl                          = modWININET.NewProc("InternetCreateUrlW")
 	procInternetCreateUrlA                         = modWININET.NewProc("InternetCreateUrlA")
-	procInternetCreateUrlW                         = modWININET.NewProc("InternetCreateUrlW")
 	procInternetDial                               = modWININET.NewProc("InternetDial")
 	procInternetDialA                              = modWININET.NewProc("InternetDialA")
 	procInternetDialW                              = modWININET.NewProc("InternetDialW")
+	procInternetEnumPerSiteCookieDecision          = modWININET.NewProc("InternetEnumPerSiteCookieDecisionW")
 	procInternetEnumPerSiteCookieDecisionA         = modWININET.NewProc("InternetEnumPerSiteCookieDecisionA")
-	procInternetEnumPerSiteCookieDecisionW         = modWININET.NewProc("InternetEnumPerSiteCookieDecisionW")
 	procInternetErrorDlg                           = modWININET.NewProc("InternetErrorDlg")
+	procInternetFindNextFile                       = modWININET.NewProc("InternetFindNextFileW")
 	procInternetFindNextFileA                      = modWININET.NewProc("InternetFindNextFileA")
-	procInternetFindNextFileW                      = modWININET.NewProc("InternetFindNextFileW")
 	procInternetFortezzaCommand                    = modWININET.NewProc("InternetFortezzaCommand")
 	procInternetFreeCookies                        = modWININET.NewProc("InternetFreeCookies")
 	procInternetFreeProxyInfoList                  = modWININET.NewProc("InternetFreeProxyInfoList")
@@ -190,15 +190,15 @@ var (
 	procInternetGetConnectedStateEx                = modWININET.NewProc("InternetGetConnectedStateEx")
 	procInternetGetConnectedStateExA               = modWININET.NewProc("InternetGetConnectedStateExA")
 	procInternetGetConnectedStateExW               = modWININET.NewProc("InternetGetConnectedStateExW")
+	procInternetGetCookie                          = modWININET.NewProc("InternetGetCookieW")
 	procInternetGetCookieA                         = modWININET.NewProc("InternetGetCookieA")
+	procInternetGetCookieEx                        = modWININET.NewProc("InternetGetCookieExW")
 	procInternetGetCookieEx2                       = modWININET.NewProc("InternetGetCookieEx2")
 	procInternetGetCookieExA                       = modWININET.NewProc("InternetGetCookieExA")
-	procInternetGetCookieExW                       = modWININET.NewProc("InternetGetCookieExW")
-	procInternetGetCookieW                         = modWININET.NewProc("InternetGetCookieW")
+	procInternetGetLastResponseInfo                = modWININET.NewProc("InternetGetLastResponseInfoW")
 	procInternetGetLastResponseInfoA               = modWININET.NewProc("InternetGetLastResponseInfoA")
-	procInternetGetLastResponseInfoW               = modWININET.NewProc("InternetGetLastResponseInfoW")
+	procInternetGetPerSiteCookieDecision           = modWININET.NewProc("InternetGetPerSiteCookieDecisionW")
 	procInternetGetPerSiteCookieDecisionA          = modWININET.NewProc("InternetGetPerSiteCookieDecisionA")
-	procInternetGetPerSiteCookieDecisionW          = modWININET.NewProc("InternetGetPerSiteCookieDecisionW")
 	procInternetGetProxyForUrl                     = modWININET.NewProc("InternetGetProxyForUrl")
 	procInternetGetSecurityInfoByURL               = modWININET.NewProc("InternetGetSecurityInfoByURL")
 	procInternetGetSecurityInfoByURLA              = modWININET.NewProc("InternetGetSecurityInfoByURLA")
@@ -209,34 +209,34 @@ var (
 	procInternetHangUp                             = modWININET.NewProc("InternetHangUp")
 	procInternetInitializeAutoProxyDll             = modWININET.NewProc("InternetInitializeAutoProxyDll")
 	procInternetLockRequestFile                    = modWININET.NewProc("InternetLockRequestFile")
+	procInternetOpen                               = modWININET.NewProc("InternetOpenW")
 	procInternetOpenA                              = modWININET.NewProc("InternetOpenA")
+	procInternetOpenUrl                            = modWININET.NewProc("InternetOpenUrlW")
 	procInternetOpenUrlA                           = modWININET.NewProc("InternetOpenUrlA")
-	procInternetOpenUrlW                           = modWININET.NewProc("InternetOpenUrlW")
-	procInternetOpenW                              = modWININET.NewProc("InternetOpenW")
 	procInternetQueryDataAvailable                 = modWININET.NewProc("InternetQueryDataAvailable")
 	procInternetQueryFortezzaStatus                = modWININET.NewProc("InternetQueryFortezzaStatus")
+	procInternetQueryOption                        = modWININET.NewProc("InternetQueryOptionW")
 	procInternetQueryOptionA                       = modWININET.NewProc("InternetQueryOptionA")
-	procInternetQueryOptionW                       = modWININET.NewProc("InternetQueryOptionW")
 	procInternetReadFile                           = modWININET.NewProc("InternetReadFile")
+	procInternetReadFileEx                         = modWININET.NewProc("InternetReadFileExW")
 	procInternetReadFileExA                        = modWININET.NewProc("InternetReadFileExA")
-	procInternetReadFileExW                        = modWININET.NewProc("InternetReadFileExW")
+	procInternetSecurityProtocolToString           = modWININET.NewProc("InternetSecurityProtocolToStringW")
 	procInternetSecurityProtocolToStringA          = modWININET.NewProc("InternetSecurityProtocolToStringA")
-	procInternetSecurityProtocolToStringW          = modWININET.NewProc("InternetSecurityProtocolToStringW")
+	procInternetSetCookie                          = modWININET.NewProc("InternetSetCookieW")
 	procInternetSetCookieA                         = modWININET.NewProc("InternetSetCookieA")
+	procInternetSetCookieEx                        = modWININET.NewProc("InternetSetCookieExW")
 	procInternetSetCookieEx2                       = modWININET.NewProc("InternetSetCookieEx2")
 	procInternetSetCookieExA                       = modWININET.NewProc("InternetSetCookieExA")
-	procInternetSetCookieExW                       = modWININET.NewProc("InternetSetCookieExW")
-	procInternetSetCookieW                         = modWININET.NewProc("InternetSetCookieW")
 	procInternetSetDialState                       = modWININET.NewProc("InternetSetDialState")
 	procInternetSetDialStateA                      = modWININET.NewProc("InternetSetDialStateA")
 	procInternetSetDialStateW                      = modWININET.NewProc("InternetSetDialStateW")
 	procInternetSetFilePointer                     = modWININET.NewProc("InternetSetFilePointer")
+	procInternetSetOption                          = modWININET.NewProc("InternetSetOptionW")
 	procInternetSetOptionA                         = modWININET.NewProc("InternetSetOptionA")
+	procInternetSetOptionEx                        = modWININET.NewProc("InternetSetOptionExW")
 	procInternetSetOptionExA                       = modWININET.NewProc("InternetSetOptionExA")
-	procInternetSetOptionExW                       = modWININET.NewProc("InternetSetOptionExW")
-	procInternetSetOptionW                         = modWININET.NewProc("InternetSetOptionW")
+	procInternetSetPerSiteCookieDecision           = modWININET.NewProc("InternetSetPerSiteCookieDecisionW")
 	procInternetSetPerSiteCookieDecisionA          = modWININET.NewProc("InternetSetPerSiteCookieDecisionA")
-	procInternetSetPerSiteCookieDecisionW          = modWININET.NewProc("InternetSetPerSiteCookieDecisionW")
 	procInternetSetStatusCallback                  = modWININET.NewProc("InternetSetStatusCallback")
 	procInternetSetStatusCallbackA                 = modWININET.NewProc("InternetSetStatusCallbackA")
 	procInternetSetStatusCallbackW                 = modWININET.NewProc("InternetSetStatusCallbackW")
@@ -251,14 +251,14 @@ var (
 	procInternetTimeToSystemTimeW                  = modWININET.NewProc("InternetTimeToSystemTimeW")
 	procInternetUnlockRequestFile                  = modWININET.NewProc("InternetUnlockRequestFile")
 	procInternetWriteFile                          = modWININET.NewProc("InternetWriteFile")
+	procInternetWriteFileEx                        = modWININET.NewProc("InternetWriteFileExW")
 	procInternetWriteFileExA                       = modWININET.NewProc("InternetWriteFileExA")
-	procInternetWriteFileExW                       = modWININET.NewProc("InternetWriteFileExW")
+	procIsDomainLegalCookieDomain                  = modWININET.NewProc("IsDomainLegalCookieDomainW")
 	procIsDomainLegalCookieDomainA                 = modWININET.NewProc("IsDomainLegalCookieDomainA")
-	procIsDomainLegalCookieDomainW                 = modWININET.NewProc("IsDomainLegalCookieDomainW")
 	procIsHostInProxyBypassList                    = modWININET.NewProc("IsHostInProxyBypassList")
 	procIsProfilesEnabled                          = modWININET.NewProc("IsProfilesEnabled")
+	procIsUrlCacheEntryExpired                     = modWININET.NewProc("IsUrlCacheEntryExpiredW")
 	procIsUrlCacheEntryExpiredA                    = modWININET.NewProc("IsUrlCacheEntryExpiredA")
-	procIsUrlCacheEntryExpiredW                    = modWININET.NewProc("IsUrlCacheEntryExpiredW")
 	procLoadUrlCacheContent                        = modWININET.NewProc("LoadUrlCacheContent")
 	procParseX509EncodedCertificateForListBoxEntry = modWININET.NewProc("ParseX509EncodedCertificateForListBoxEntry")
 	procPerformOperationOverUrlCacheA              = modWININET.NewProc("PerformOperationOverUrlCacheA")
@@ -269,20 +269,20 @@ var (
 	procReadUrlCacheEntryStreamEx                  = modWININET.NewProc("ReadUrlCacheEntryStreamEx")
 	procRegisterUrlCacheNotification               = modWININET.NewProc("RegisterUrlCacheNotification")
 	procResumeSuspendedDownload                    = modWININET.NewProc("ResumeSuspendedDownload")
+	procRetrieveUrlCacheEntryFile                  = modWININET.NewProc("RetrieveUrlCacheEntryFileW")
 	procRetrieveUrlCacheEntryFileA                 = modWININET.NewProc("RetrieveUrlCacheEntryFileA")
-	procRetrieveUrlCacheEntryFileW                 = modWININET.NewProc("RetrieveUrlCacheEntryFileW")
+	procRetrieveUrlCacheEntryStream                = modWININET.NewProc("RetrieveUrlCacheEntryStreamW")
 	procRetrieveUrlCacheEntryStreamA               = modWININET.NewProc("RetrieveUrlCacheEntryStreamA")
-	procRetrieveUrlCacheEntryStreamW               = modWININET.NewProc("RetrieveUrlCacheEntryStreamW")
 	procRunOnceUrlCache                            = modWININET.NewProc("RunOnceUrlCache")
+	procSetUrlCacheConfigInfo                      = modWININET.NewProc("SetUrlCacheConfigInfoW")
 	procSetUrlCacheConfigInfoA                     = modWININET.NewProc("SetUrlCacheConfigInfoA")
-	procSetUrlCacheConfigInfoW                     = modWININET.NewProc("SetUrlCacheConfigInfoW")
 	procSetUrlCacheEntryGroup                      = modWININET.NewProc("SetUrlCacheEntryGroup")
 	procSetUrlCacheEntryGroupA                     = modWININET.NewProc("SetUrlCacheEntryGroupA")
 	procSetUrlCacheEntryGroupW                     = modWININET.NewProc("SetUrlCacheEntryGroupW")
+	procSetUrlCacheEntryInfo                       = modWININET.NewProc("SetUrlCacheEntryInfoW")
 	procSetUrlCacheEntryInfoA                      = modWININET.NewProc("SetUrlCacheEntryInfoA")
-	procSetUrlCacheEntryInfoW                      = modWININET.NewProc("SetUrlCacheEntryInfoW")
+	procSetUrlCacheGroupAttribute                  = modWININET.NewProc("SetUrlCacheGroupAttributeW")
 	procSetUrlCacheGroupAttributeA                 = modWININET.NewProc("SetUrlCacheGroupAttributeA")
-	procSetUrlCacheGroupAttributeW                 = modWININET.NewProc("SetUrlCacheGroupAttributeW")
 	procSetUrlCacheHeaderData                      = modWININET.NewProc("SetUrlCacheHeaderData")
 	procShowClientAuthCerts                        = modWININET.NewProc("ShowClientAuthCerts")
 	procShowSecurityInfo                           = modWININET.NewProc("ShowSecurityInfo")
@@ -314,8 +314,10 @@ var (
 )
 
 // AppCacheCheckManifest calls WININET!AppCacheCheckManifest.
-func AppCacheCheckManifest(pwszMasterUrl foundation.PWSTR, pwszManifestUrl foundation.PWSTR, pbManifestData *byte, dwManifestDataSize uint32, pbManifestResponseHeaders *byte, dwManifestResponseHeadersSize uint32, peState *APP_CACHE_STATE, phNewAppCache *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procAppCacheCheckManifest.Addr(), uintptr(unsafe.Pointer(pwszMasterUrl)), uintptr(unsafe.Pointer(pwszManifestUrl)), uintptr(unsafe.Pointer(pbManifestData)), uintptr(dwManifestDataSize), uintptr(unsafe.Pointer(pbManifestResponseHeaders)), uintptr(dwManifestResponseHeadersSize), uintptr(unsafe.Pointer(peState)), uintptr(unsafe.Pointer(phNewAppCache)))
+func AppCacheCheckManifest(pwszMasterUrl string, pwszManifestUrl string, pbManifestData *byte, dwManifestDataSize uint32, pbManifestResponseHeaders *byte, dwManifestResponseHeadersSize uint32, peState *APP_CACHE_STATE, phNewAppCache *unsafe.Pointer) uint32 {
+	_pwszMasterUrl := win32.UTF16Ptr(pwszMasterUrl)
+	_pwszManifestUrl := win32.UTF16Ptr(pwszManifestUrl)
+	r1, _, _ := syscall.SyscallN(procAppCacheCheckManifest.Addr(), uintptr(unsafe.Pointer(_pwszMasterUrl)), uintptr(unsafe.Pointer(_pwszManifestUrl)), uintptr(unsafe.Pointer(pbManifestData)), uintptr(dwManifestDataSize), uintptr(unsafe.Pointer(pbManifestResponseHeaders)), uintptr(dwManifestResponseHeadersSize), uintptr(unsafe.Pointer(peState)), uintptr(unsafe.Pointer(phNewAppCache)))
 	return uint32(r1)
 }
 
@@ -325,20 +327,24 @@ func AppCacheCloseHandle(hAppCache unsafe.Pointer) {
 }
 
 // AppCacheCreateAndCommitFile calls WININET!AppCacheCreateAndCommitFile.
-func AppCacheCreateAndCommitFile(hAppCache unsafe.Pointer, pwszSourceFilePath foundation.PWSTR, pwszUrl foundation.PWSTR, pbResponseHeaders *byte, dwResponseHeadersSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procAppCacheCreateAndCommitFile.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(pwszSourceFilePath)), uintptr(unsafe.Pointer(pwszUrl)), uintptr(unsafe.Pointer(pbResponseHeaders)), uintptr(dwResponseHeadersSize))
+func AppCacheCreateAndCommitFile(hAppCache unsafe.Pointer, pwszSourceFilePath string, pwszUrl string, pbResponseHeaders *byte, dwResponseHeadersSize uint32) uint32 {
+	_pwszSourceFilePath := win32.UTF16Ptr(pwszSourceFilePath)
+	_pwszUrl := win32.UTF16Ptr(pwszUrl)
+	r1, _, _ := syscall.SyscallN(procAppCacheCreateAndCommitFile.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(_pwszSourceFilePath)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(unsafe.Pointer(pbResponseHeaders)), uintptr(dwResponseHeadersSize))
 	return uint32(r1)
 }
 
 // AppCacheDeleteGroup calls WININET!AppCacheDeleteGroup.
-func AppCacheDeleteGroup(pwszManifestUrl foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procAppCacheDeleteGroup.Addr(), uintptr(unsafe.Pointer(pwszManifestUrl)))
+func AppCacheDeleteGroup(pwszManifestUrl string) uint32 {
+	_pwszManifestUrl := win32.UTF16Ptr(pwszManifestUrl)
+	r1, _, _ := syscall.SyscallN(procAppCacheDeleteGroup.Addr(), uintptr(unsafe.Pointer(_pwszManifestUrl)))
 	return uint32(r1)
 }
 
 // AppCacheDeleteIEGroup calls WININET!AppCacheDeleteIEGroup.
-func AppCacheDeleteIEGroup(pwszManifestUrl foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procAppCacheDeleteIEGroup.Addr(), uintptr(unsafe.Pointer(pwszManifestUrl)))
+func AppCacheDeleteIEGroup(pwszManifestUrl string) uint32 {
+	_pwszManifestUrl := win32.UTF16Ptr(pwszManifestUrl)
+	r1, _, _ := syscall.SyscallN(procAppCacheDeleteIEGroup.Addr(), uintptr(unsafe.Pointer(_pwszManifestUrl)))
 	return uint32(r1)
 }
 
@@ -371,8 +377,9 @@ func AppCacheGetDownloadList(hAppCache unsafe.Pointer, pDownloadList *APP_CACHE_
 }
 
 // AppCacheGetFallbackUrl calls WININET!AppCacheGetFallbackUrl.
-func AppCacheGetFallbackUrl(hAppCache unsafe.Pointer, pwszUrl foundation.PWSTR, ppwszFallbackUrl *foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procAppCacheGetFallbackUrl.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(pwszUrl)), uintptr(unsafe.Pointer(ppwszFallbackUrl)))
+func AppCacheGetFallbackUrl(hAppCache unsafe.Pointer, pwszUrl string, ppwszFallbackUrl *foundation.PWSTR) uint32 {
+	_pwszUrl := win32.UTF16Ptr(pwszUrl)
+	r1, _, _ := syscall.SyscallN(procAppCacheGetFallbackUrl.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(unsafe.Pointer(ppwszFallbackUrl)))
 	return uint32(r1)
 }
 
@@ -401,35 +408,55 @@ func AppCacheGetManifestUrl(hAppCache unsafe.Pointer, ppwszManifestUrl *foundati
 }
 
 // AppCacheLookup calls WININET!AppCacheLookup.
-func AppCacheLookup(pwszUrl foundation.PWSTR, dwFlags uint32, phAppCache *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procAppCacheLookup.Addr(), uintptr(unsafe.Pointer(pwszUrl)), uintptr(dwFlags), uintptr(unsafe.Pointer(phAppCache)))
+func AppCacheLookup(pwszUrl string, dwFlags uint32, phAppCache *unsafe.Pointer) uint32 {
+	_pwszUrl := win32.UTF16Ptr(pwszUrl)
+	r1, _, _ := syscall.SyscallN(procAppCacheLookup.Addr(), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(dwFlags), uintptr(unsafe.Pointer(phAppCache)))
 	return uint32(r1)
 }
 
 // CreateMD5SSOHash calls WININET!CreateMD5SSOHash.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-createmd5ssohash
 // Minimum OS: windows5.0.
-func CreateMD5SSOHash(pszChallengeInfo foundation.PWSTR, pwszRealm foundation.PWSTR, pwszTarget foundation.PWSTR, pbHexHash *byte) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCreateMD5SSOHash.Addr(), uintptr(unsafe.Pointer(pszChallengeInfo)), uintptr(unsafe.Pointer(pwszRealm)), uintptr(unsafe.Pointer(pwszTarget)), uintptr(unsafe.Pointer(pbHexHash)))
-	return foundation.BOOL(r1)
+func CreateMD5SSOHash(pszChallengeInfo string, pwszRealm string, pwszTarget string, pbHexHash *byte) bool {
+	_pszChallengeInfo := win32.UTF16Ptr(pszChallengeInfo)
+	_pwszRealm := win32.UTF16Ptr(pwszRealm)
+	_pwszTarget := win32.UTF16Ptr(pwszTarget)
+	r1, _, _ := syscall.SyscallN(procCreateMD5SSOHash.Addr(), uintptr(unsafe.Pointer(_pszChallengeInfo)), uintptr(unsafe.Pointer(_pwszRealm)), uintptr(unsafe.Pointer(_pwszTarget)), uintptr(unsafe.Pointer(pbHexHash)))
+	return r1 != 0
 }
 
-// CreateUrlCacheContainerA calls WININET!CreateUrlCacheContainerA.
-// https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-createurlcachecontainera
+// CreateUrlCacheContainer calls WININET!CreateUrlCacheContainerW.
+// https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-createurlcachecontainerw
 // Minimum OS: windows5.0.
-func CreateUrlCacheContainerA(Name foundation.PSTR, lpCachePrefix foundation.PSTR, lpszCachePath foundation.PSTR, KBCacheLimit uint32, dwContainerType uint32, dwOptions uint32, pvBuffer unsafe.Pointer, cbBuffer *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCreateUrlCacheContainerA.Addr(), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(lpCachePrefix)), uintptr(unsafe.Pointer(lpszCachePath)), uintptr(KBCacheLimit), uintptr(dwContainerType), uintptr(dwOptions), uintptr(unsafe.Pointer(pvBuffer)), uintptr(unsafe.Pointer(cbBuffer)))
+func CreateUrlCacheContainer(Name string, lpCachePrefix string, lpszCachePath string, KBCacheLimit uint32, dwContainerType uint32, dwOptions uint32) error {
+	_Name := win32.UTF16Ptr(Name)
+	_lpCachePrefix := win32.UTF16Ptr(lpCachePrefix)
+	_lpszCachePath := win32.UTF16Ptr(lpszCachePath)
+	r1, _, e1 := syscall.SyscallN(procCreateUrlCacheContainer.Addr(), uintptr(unsafe.Pointer(_Name)), uintptr(unsafe.Pointer(_lpCachePrefix)), uintptr(unsafe.Pointer(_lpszCachePath)), uintptr(KBCacheLimit), uintptr(dwContainerType), uintptr(dwOptions), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// CreateUrlCacheContainerW calls WININET!CreateUrlCacheContainerW.
-// https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-createurlcachecontainerw
+// CreateUrlCacheContainerA calls WININET!CreateUrlCacheContainerA.
+// https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-createurlcachecontainera
 // Minimum OS: windows5.0.
-func CreateUrlCacheContainerW(Name foundation.PWSTR, lpCachePrefix foundation.PWSTR, lpszCachePath foundation.PWSTR, KBCacheLimit uint32, dwContainerType uint32, dwOptions uint32, pvBuffer unsafe.Pointer, cbBuffer *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCreateUrlCacheContainerW.Addr(), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(lpCachePrefix)), uintptr(unsafe.Pointer(lpszCachePath)), uintptr(KBCacheLimit), uintptr(dwContainerType), uintptr(dwOptions), uintptr(unsafe.Pointer(pvBuffer)), uintptr(unsafe.Pointer(cbBuffer)))
+func CreateUrlCacheContainerA(Name foundation.PSTR, lpCachePrefix foundation.PSTR, lpszCachePath foundation.PSTR, KBCacheLimit uint32, dwContainerType uint32, dwOptions uint32) error {
+	r1, _, e1 := syscall.SyscallN(procCreateUrlCacheContainerA.Addr(), uintptr(unsafe.Pointer(Name)), uintptr(unsafe.Pointer(lpCachePrefix)), uintptr(unsafe.Pointer(lpszCachePath)), uintptr(KBCacheLimit), uintptr(dwContainerType), uintptr(dwOptions), 0, 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// CreateUrlCacheEntry calls WININET!CreateUrlCacheEntryW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-createurlcacheentryw
+// Minimum OS: windows5.0.
+func CreateUrlCacheEntry(lpszUrlName string, dwExpectedFileSize uint32, lpszFileExtension string, lpszFileName foundation.PWSTR, dwReserved uint32) error {
+	_lpszUrlName := win32.UTF16Ptr(lpszUrlName)
+	_lpszFileExtension := win32.UTF16Ptr(lpszFileExtension)
+	r1, _, e1 := syscall.SyscallN(procCreateUrlCacheEntry.Addr(), uintptr(unsafe.Pointer(_lpszUrlName)), uintptr(dwExpectedFileSize), uintptr(unsafe.Pointer(_lpszFileExtension)), uintptr(unsafe.Pointer(lpszFileName)), uintptr(dwReserved))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -448,27 +475,19 @@ func CreateUrlCacheEntryA(lpszUrlName foundation.PSTR, dwExpectedFileSize uint32
 }
 
 // CreateUrlCacheEntryExW calls WININET!CreateUrlCacheEntryExW.
-func CreateUrlCacheEntryExW(lpszUrlName foundation.PWSTR, dwExpectedFileSize uint32, lpszFileExtension foundation.PWSTR, lpszFileName foundation.PWSTR, dwReserved uint32, fPreserveIncomingFileName foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCreateUrlCacheEntryExW.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(dwExpectedFileSize), uintptr(unsafe.Pointer(lpszFileExtension)), uintptr(unsafe.Pointer(lpszFileName)), uintptr(dwReserved), uintptr(fPreserveIncomingFileName))
-	return foundation.BOOL(r1)
-}
-
-// CreateUrlCacheEntryW calls WININET!CreateUrlCacheEntryW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-createurlcacheentryw
-// Minimum OS: windows5.0.
-func CreateUrlCacheEntryW(lpszUrlName foundation.PWSTR, dwExpectedFileSize uint32, lpszFileExtension foundation.PWSTR, lpszFileName foundation.PWSTR, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCreateUrlCacheEntryW.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(dwExpectedFileSize), uintptr(unsafe.Pointer(lpszFileExtension)), uintptr(unsafe.Pointer(lpszFileName)), uintptr(dwReserved))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+func CreateUrlCacheEntryExW(lpszUrlName string, dwExpectedFileSize uint32, lpszFileExtension string, lpszFileName foundation.PWSTR, dwReserved uint32, fPreserveIncomingFileName bool) bool {
+	_lpszUrlName := win32.UTF16Ptr(lpszUrlName)
+	_lpszFileExtension := win32.UTF16Ptr(lpszFileExtension)
+	_fPreserveIncomingFileName := win32.Bool32(fPreserveIncomingFileName)
+	r1, _, _ := syscall.SyscallN(procCreateUrlCacheEntryExW.Addr(), uintptr(unsafe.Pointer(_lpszUrlName)), uintptr(dwExpectedFileSize), uintptr(unsafe.Pointer(_lpszFileExtension)), uintptr(unsafe.Pointer(lpszFileName)), uintptr(dwReserved), uintptr(_fPreserveIncomingFileName))
+	return r1 != 0
 }
 
 // CreateUrlCacheGroup calls WININET!CreateUrlCacheGroup.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-createurlcachegroup
 // Minimum OS: windows5.0.
-func CreateUrlCacheGroup(dwFlags uint32, lpReserved unsafe.Pointer) (int64, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateUrlCacheGroup.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpReserved)))
+func CreateUrlCacheGroup(dwFlags uint32) (int64, error) {
+	r1, _, e1 := syscall.SyscallN(procCreateUrlCacheGroup.Addr(), uintptr(dwFlags), 0)
 	if e1 != 0 {
 		return int64(r1), e1
 	}
@@ -481,22 +500,23 @@ func DeleteIE3Cache(hwnd foundation.HWND, hinst foundation.HINSTANCE, lpszCmd fo
 	return uint32(r1)
 }
 
-// DeleteUrlCacheContainerA calls WININET!DeleteUrlCacheContainerA.
-// https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-deleteurlcachecontainera
+// DeleteUrlCacheContainer calls WININET!DeleteUrlCacheContainerW.
+// https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-deleteurlcachecontainerw
 // Minimum OS: windows5.0.
-func DeleteUrlCacheContainerA(Name foundation.PSTR, dwOptions uint32) error {
-	r1, _, e1 := syscall.SyscallN(procDeleteUrlCacheContainerA.Addr(), uintptr(unsafe.Pointer(Name)), uintptr(dwOptions))
+func DeleteUrlCacheContainer(Name string, dwOptions uint32) error {
+	_Name := win32.UTF16Ptr(Name)
+	r1, _, e1 := syscall.SyscallN(procDeleteUrlCacheContainer.Addr(), uintptr(unsafe.Pointer(_Name)), uintptr(dwOptions))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// DeleteUrlCacheContainerW calls WININET!DeleteUrlCacheContainerW.
-// https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-deleteurlcachecontainerw
+// DeleteUrlCacheContainerA calls WININET!DeleteUrlCacheContainerA.
+// https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-deleteurlcachecontainera
 // Minimum OS: windows5.0.
-func DeleteUrlCacheContainerW(Name foundation.PWSTR, dwOptions uint32) error {
-	r1, _, e1 := syscall.SyscallN(procDeleteUrlCacheContainerW.Addr(), uintptr(unsafe.Pointer(Name)), uintptr(dwOptions))
+func DeleteUrlCacheContainerA(Name foundation.PSTR, dwOptions uint32) error {
+	r1, _, e1 := syscall.SyscallN(procDeleteUrlCacheContainerA.Addr(), uintptr(unsafe.Pointer(Name)), uintptr(dwOptions))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -528,8 +548,9 @@ func DeleteUrlCacheEntryA(lpszUrlName foundation.PSTR) error {
 // DeleteUrlCacheEntryW calls WININET!DeleteUrlCacheEntryW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-deleteurlcacheentryw
 // Minimum OS: windows5.0.
-func DeleteUrlCacheEntryW(lpszUrlName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procDeleteUrlCacheEntryW.Addr(), uintptr(unsafe.Pointer(lpszUrlName)))
+func DeleteUrlCacheEntryW(lpszUrlName string) error {
+	_lpszUrlName := win32.UTF16Ptr(lpszUrlName)
+	r1, _, e1 := syscall.SyscallN(procDeleteUrlCacheEntryW.Addr(), uintptr(unsafe.Pointer(_lpszUrlName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -539,8 +560,8 @@ func DeleteUrlCacheEntryW(lpszUrlName foundation.PWSTR) error {
 // DeleteUrlCacheGroup calls WININET!DeleteUrlCacheGroup.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-deleteurlcachegroup
 // Minimum OS: windows5.0.
-func DeleteUrlCacheGroup(GroupId int64, dwFlags uint32, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procDeleteUrlCacheGroup.Addr(), uintptr(GroupId), uintptr(dwFlags), uintptr(unsafe.Pointer(lpReserved)))
+func DeleteUrlCacheGroup(GroupId int64, dwFlags uint32) error {
+	r1, _, e1 := syscall.SyscallN(procDeleteUrlCacheGroup.Addr(), uintptr(GroupId), uintptr(dwFlags), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -548,9 +569,9 @@ func DeleteUrlCacheGroup(GroupId int64, dwFlags uint32, lpReserved unsafe.Pointe
 }
 
 // DeleteWpadCacheForNetworks calls WININET!DeleteWpadCacheForNetworks.
-func DeleteWpadCacheForNetworks(param0 WPAD_CACHE_DELETE) foundation.BOOL {
+func DeleteWpadCacheForNetworks(param0 WPAD_CACHE_DELETE) bool {
 	r1, _, _ := syscall.SyscallN(procDeleteWpadCacheForNetworks.Addr(), uintptr(param0))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DetectAutoProxyUrl calls WININET!DetectAutoProxyUrl.
@@ -565,21 +586,24 @@ func DetectAutoProxyUrl(pszAutoProxyUrl foundation.PSTR, cchAutoProxyUrl uint32,
 }
 
 // DoConnectoidsExist calls WININET!DoConnectoidsExist.
-func DoConnectoidsExist() foundation.BOOL {
+func DoConnectoidsExist() bool {
 	r1, _, _ := syscall.SyscallN(procDoConnectoidsExist.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// ExportCookieFile calls WININET!ExportCookieFileW.
+func ExportCookieFile(szFilename string, fAppend bool) bool {
+	_szFilename := win32.UTF16Ptr(szFilename)
+	_fAppend := win32.Bool32(fAppend)
+	r1, _, _ := syscall.SyscallN(procExportCookieFile.Addr(), uintptr(unsafe.Pointer(_szFilename)), uintptr(_fAppend))
+	return r1 != 0
 }
 
 // ExportCookieFileA calls WININET!ExportCookieFileA.
-func ExportCookieFileA(szFilename foundation.PSTR, fAppend foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procExportCookieFileA.Addr(), uintptr(unsafe.Pointer(szFilename)), uintptr(fAppend))
-	return foundation.BOOL(r1)
-}
-
-// ExportCookieFileW calls WININET!ExportCookieFileW.
-func ExportCookieFileW(szFilename foundation.PWSTR, fAppend foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procExportCookieFileW.Addr(), uintptr(unsafe.Pointer(szFilename)), uintptr(fAppend))
-	return foundation.BOOL(r1)
+func ExportCookieFileA(szFilename foundation.PSTR, fAppend bool) bool {
+	_fAppend := win32.Bool32(fAppend)
+	r1, _, _ := syscall.SyscallN(procExportCookieFileA.Addr(), uintptr(unsafe.Pointer(szFilename)), uintptr(_fAppend))
+	return r1 != 0
 }
 
 // FindCloseUrlCache calls WININET!FindCloseUrlCache.
@@ -593,16 +617,29 @@ func FindCloseUrlCache(hEnumHandle foundation.HANDLE) error {
 	return nil
 }
 
+// FindFirstUrlCacheContainer calls WININET!FindFirstUrlCacheContainerW.
+func FindFirstUrlCacheContainer(pdwModified *uint32, lpContainerInfo *INTERNET_CACHE_CONTAINER_INFOW, lpcbContainerInfo *uint32, dwOptions uint32) foundation.HANDLE {
+	r1, _, _ := syscall.SyscallN(procFindFirstUrlCacheContainer.Addr(), uintptr(unsafe.Pointer(pdwModified)), uintptr(unsafe.Pointer(lpContainerInfo)), uintptr(unsafe.Pointer(lpcbContainerInfo)), uintptr(dwOptions))
+	return foundation.HANDLE(r1)
+}
+
 // FindFirstUrlCacheContainerA calls WININET!FindFirstUrlCacheContainerA.
 func FindFirstUrlCacheContainerA(pdwModified *uint32, lpContainerInfo *INTERNET_CACHE_CONTAINER_INFOA, lpcbContainerInfo *uint32, dwOptions uint32) foundation.HANDLE {
 	r1, _, _ := syscall.SyscallN(procFindFirstUrlCacheContainerA.Addr(), uintptr(unsafe.Pointer(pdwModified)), uintptr(unsafe.Pointer(lpContainerInfo)), uintptr(unsafe.Pointer(lpcbContainerInfo)), uintptr(dwOptions))
 	return foundation.HANDLE(r1)
 }
 
-// FindFirstUrlCacheContainerW calls WININET!FindFirstUrlCacheContainerW.
-func FindFirstUrlCacheContainerW(pdwModified *uint32, lpContainerInfo *INTERNET_CACHE_CONTAINER_INFOW, lpcbContainerInfo *uint32, dwOptions uint32) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procFindFirstUrlCacheContainerW.Addr(), uintptr(unsafe.Pointer(pdwModified)), uintptr(unsafe.Pointer(lpContainerInfo)), uintptr(unsafe.Pointer(lpcbContainerInfo)), uintptr(dwOptions))
-	return foundation.HANDLE(r1)
+// FindFirstUrlCacheEntry calls WININET!FindFirstUrlCacheEntryW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findfirsturlcacheentryw
+// Minimum OS: windows5.0.
+func FindFirstUrlCacheEntry(lpszUrlSearchPattern string, lpFirstCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32) (foundation.HANDLE, error) {
+	_lpszUrlSearchPattern := win32.UTF16Ptr(lpszUrlSearchPattern)
+	r1, _, e1 := syscall.SyscallN(procFindFirstUrlCacheEntry.Addr(), uintptr(unsafe.Pointer(_lpszUrlSearchPattern)), uintptr(unsafe.Pointer(lpFirstCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // FindFirstUrlCacheEntryA calls WININET!FindFirstUrlCacheEntryA.
@@ -617,35 +654,24 @@ func FindFirstUrlCacheEntryA(lpszUrlSearchPattern foundation.PSTR, lpFirstCacheE
 	return ret, nil
 }
 
+// FindFirstUrlCacheEntryEx calls WININET!FindFirstUrlCacheEntryExW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findfirsturlcacheentryexw
+// Minimum OS: windows5.0.
+func FindFirstUrlCacheEntryEx(lpszUrlSearchPattern string, dwFlags uint32, dwFilter uint32, GroupId int64, lpFirstCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32) (foundation.HANDLE, error) {
+	_lpszUrlSearchPattern := win32.UTF16Ptr(lpszUrlSearchPattern)
+	r1, _, e1 := syscall.SyscallN(procFindFirstUrlCacheEntryEx.Addr(), uintptr(unsafe.Pointer(_lpszUrlSearchPattern)), uintptr(dwFlags), uintptr(dwFilter), uintptr(GroupId), uintptr(unsafe.Pointer(lpFirstCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), 0, 0, 0)
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // FindFirstUrlCacheEntryExA calls WININET!FindFirstUrlCacheEntryExA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findfirsturlcacheentryexa
 // Minimum OS: windows5.0.
-func FindFirstUrlCacheEntryExA(lpszUrlSearchPattern foundation.PSTR, dwFlags uint32, dwFilter uint32, GroupId int64, lpFirstCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOA, lpcbCacheEntryInfo *uint32, lpGroupAttributes unsafe.Pointer, lpcbGroupAttributes *uint32, lpReserved unsafe.Pointer) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstUrlCacheEntryExA.Addr(), uintptr(unsafe.Pointer(lpszUrlSearchPattern)), uintptr(dwFlags), uintptr(dwFilter), uintptr(GroupId), uintptr(unsafe.Pointer(lpFirstCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), uintptr(unsafe.Pointer(lpGroupAttributes)), uintptr(unsafe.Pointer(lpcbGroupAttributes)), uintptr(unsafe.Pointer(lpReserved)))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// FindFirstUrlCacheEntryExW calls WININET!FindFirstUrlCacheEntryExW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findfirsturlcacheentryexw
-// Minimum OS: windows5.0.
-func FindFirstUrlCacheEntryExW(lpszUrlSearchPattern foundation.PWSTR, dwFlags uint32, dwFilter uint32, GroupId int64, lpFirstCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32, lpGroupAttributes unsafe.Pointer, lpcbGroupAttributes *uint32, lpReserved unsafe.Pointer) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstUrlCacheEntryExW.Addr(), uintptr(unsafe.Pointer(lpszUrlSearchPattern)), uintptr(dwFlags), uintptr(dwFilter), uintptr(GroupId), uintptr(unsafe.Pointer(lpFirstCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), uintptr(unsafe.Pointer(lpGroupAttributes)), uintptr(unsafe.Pointer(lpcbGroupAttributes)), uintptr(unsafe.Pointer(lpReserved)))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// FindFirstUrlCacheEntryW calls WININET!FindFirstUrlCacheEntryW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findfirsturlcacheentryw
-// Minimum OS: windows5.0.
-func FindFirstUrlCacheEntryW(lpszUrlSearchPattern foundation.PWSTR, lpFirstCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstUrlCacheEntryW.Addr(), uintptr(unsafe.Pointer(lpszUrlSearchPattern)), uintptr(unsafe.Pointer(lpFirstCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)))
+func FindFirstUrlCacheEntryExA(lpszUrlSearchPattern foundation.PSTR, dwFlags uint32, dwFilter uint32, GroupId int64, lpFirstCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOA, lpcbCacheEntryInfo *uint32) (foundation.HANDLE, error) {
+	r1, _, e1 := syscall.SyscallN(procFindFirstUrlCacheEntryExA.Addr(), uintptr(unsafe.Pointer(lpszUrlSearchPattern)), uintptr(dwFlags), uintptr(dwFilter), uintptr(GroupId), uintptr(unsafe.Pointer(lpFirstCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), 0, 0, 0)
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -656,8 +682,8 @@ func FindFirstUrlCacheEntryW(lpszUrlSearchPattern foundation.PWSTR, lpFirstCache
 // FindFirstUrlCacheGroup calls WININET!FindFirstUrlCacheGroup.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findfirsturlcachegroup
 // Minimum OS: windows5.0.
-func FindFirstUrlCacheGroup(dwFlags uint32, dwFilter uint32, lpSearchCondition unsafe.Pointer, dwSearchCondition uint32, lpGroupId *int64, lpReserved unsafe.Pointer) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procFindFirstUrlCacheGroup.Addr(), uintptr(dwFlags), uintptr(dwFilter), uintptr(unsafe.Pointer(lpSearchCondition)), uintptr(dwSearchCondition), uintptr(unsafe.Pointer(lpGroupId)), uintptr(unsafe.Pointer(lpReserved)))
+func FindFirstUrlCacheGroup(dwFlags uint32, dwFilter uint32, lpGroupId *int64) (foundation.HANDLE, error) {
+	r1, _, e1 := syscall.SyscallN(procFindFirstUrlCacheGroup.Addr(), uintptr(dwFlags), uintptr(dwFilter), 0, 0, uintptr(unsafe.Pointer(lpGroupId)), 0)
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -665,16 +691,27 @@ func FindFirstUrlCacheGroup(dwFlags uint32, dwFilter uint32, lpSearchCondition u
 	return ret, nil
 }
 
-// FindNextUrlCacheContainerA calls WININET!FindNextUrlCacheContainerA.
-func FindNextUrlCacheContainerA(hEnumHandle foundation.HANDLE, lpContainerInfo *INTERNET_CACHE_CONTAINER_INFOA, lpcbContainerInfo *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procFindNextUrlCacheContainerA.Addr(), uintptr(hEnumHandle), uintptr(unsafe.Pointer(lpContainerInfo)), uintptr(unsafe.Pointer(lpcbContainerInfo)))
-	return foundation.BOOL(r1)
+// FindNextUrlCacheContainer calls WININET!FindNextUrlCacheContainerW.
+func FindNextUrlCacheContainer(hEnumHandle foundation.HANDLE, lpContainerInfo *INTERNET_CACHE_CONTAINER_INFOW, lpcbContainerInfo *uint32) bool {
+	r1, _, _ := syscall.SyscallN(procFindNextUrlCacheContainer.Addr(), uintptr(hEnumHandle), uintptr(unsafe.Pointer(lpContainerInfo)), uintptr(unsafe.Pointer(lpcbContainerInfo)))
+	return r1 != 0
 }
 
-// FindNextUrlCacheContainerW calls WININET!FindNextUrlCacheContainerW.
-func FindNextUrlCacheContainerW(hEnumHandle foundation.HANDLE, lpContainerInfo *INTERNET_CACHE_CONTAINER_INFOW, lpcbContainerInfo *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procFindNextUrlCacheContainerW.Addr(), uintptr(hEnumHandle), uintptr(unsafe.Pointer(lpContainerInfo)), uintptr(unsafe.Pointer(lpcbContainerInfo)))
-	return foundation.BOOL(r1)
+// FindNextUrlCacheContainerA calls WININET!FindNextUrlCacheContainerA.
+func FindNextUrlCacheContainerA(hEnumHandle foundation.HANDLE, lpContainerInfo *INTERNET_CACHE_CONTAINER_INFOA, lpcbContainerInfo *uint32) bool {
+	r1, _, _ := syscall.SyscallN(procFindNextUrlCacheContainerA.Addr(), uintptr(hEnumHandle), uintptr(unsafe.Pointer(lpContainerInfo)), uintptr(unsafe.Pointer(lpcbContainerInfo)))
+	return r1 != 0
+}
+
+// FindNextUrlCacheEntry calls WININET!FindNextUrlCacheEntryW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findnexturlcacheentryw
+// Minimum OS: windows5.0.
+func FindNextUrlCacheEntry(hEnumHandle foundation.HANDLE, lpNextCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procFindNextUrlCacheEntry.Addr(), uintptr(hEnumHandle), uintptr(unsafe.Pointer(lpNextCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // FindNextUrlCacheEntryA calls WININET!FindNextUrlCacheEntryA.
@@ -688,33 +725,22 @@ func FindNextUrlCacheEntryA(hEnumHandle foundation.HANDLE, lpNextCacheEntryInfo 
 	return nil
 }
 
+// FindNextUrlCacheEntryEx calls WININET!FindNextUrlCacheEntryExW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findnexturlcacheentryexw
+// Minimum OS: windows5.0.
+func FindNextUrlCacheEntryEx(hEnumHandle foundation.HANDLE, lpNextCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procFindNextUrlCacheEntryEx.Addr(), uintptr(hEnumHandle), uintptr(unsafe.Pointer(lpNextCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), 0, 0, 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // FindNextUrlCacheEntryExA calls WININET!FindNextUrlCacheEntryExA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findnexturlcacheentryexa
 // Minimum OS: windows5.0.
-func FindNextUrlCacheEntryExA(hEnumHandle foundation.HANDLE, lpNextCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOA, lpcbCacheEntryInfo *uint32, lpGroupAttributes unsafe.Pointer, lpcbGroupAttributes *uint32, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procFindNextUrlCacheEntryExA.Addr(), uintptr(hEnumHandle), uintptr(unsafe.Pointer(lpNextCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), uintptr(unsafe.Pointer(lpGroupAttributes)), uintptr(unsafe.Pointer(lpcbGroupAttributes)), uintptr(unsafe.Pointer(lpReserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// FindNextUrlCacheEntryExW calls WININET!FindNextUrlCacheEntryExW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findnexturlcacheentryexw
-// Minimum OS: windows5.0.
-func FindNextUrlCacheEntryExW(hEnumHandle foundation.HANDLE, lpNextCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32, lpGroupAttributes unsafe.Pointer, lpcbGroupAttributes *uint32, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procFindNextUrlCacheEntryExW.Addr(), uintptr(hEnumHandle), uintptr(unsafe.Pointer(lpNextCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), uintptr(unsafe.Pointer(lpGroupAttributes)), uintptr(unsafe.Pointer(lpcbGroupAttributes)), uintptr(unsafe.Pointer(lpReserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// FindNextUrlCacheEntryW calls WININET!FindNextUrlCacheEntryW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findnexturlcacheentryw
-// Minimum OS: windows5.0.
-func FindNextUrlCacheEntryW(hEnumHandle foundation.HANDLE, lpNextCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFindNextUrlCacheEntryW.Addr(), uintptr(hEnumHandle), uintptr(unsafe.Pointer(lpNextCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)))
+func FindNextUrlCacheEntryExA(hEnumHandle foundation.HANDLE, lpNextCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOA, lpcbCacheEntryInfo *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procFindNextUrlCacheEntryExA.Addr(), uintptr(hEnumHandle), uintptr(unsafe.Pointer(lpNextCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), 0, 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -724,8 +750,8 @@ func FindNextUrlCacheEntryW(hEnumHandle foundation.HANDLE, lpNextCacheEntryInfo 
 // FindNextUrlCacheGroup calls WININET!FindNextUrlCacheGroup.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findnexturlcachegroup
 // Minimum OS: windows5.0.
-func FindNextUrlCacheGroup(hFind foundation.HANDLE, lpGroupId *int64, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procFindNextUrlCacheGroup.Addr(), uintptr(hFind), uintptr(unsafe.Pointer(lpGroupId)), uintptr(unsafe.Pointer(lpReserved)))
+func FindNextUrlCacheGroup(hFind foundation.HANDLE, lpGroupId *int64) error {
+	r1, _, e1 := syscall.SyscallN(procFindNextUrlCacheGroup.Addr(), uintptr(hFind), uintptr(unsafe.Pointer(lpGroupId)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -736,6 +762,18 @@ func FindNextUrlCacheGroup(hFind foundation.HANDLE, lpGroupId *int64, lpReserved
 func FindP3PPolicySymbol(pszSymbol foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procFindP3PPolicySymbol.Addr(), uintptr(unsafe.Pointer(pszSymbol)))
 	return int32(r1)
+}
+
+// FreeUrlCacheSpace calls WININET!FreeUrlCacheSpaceW.
+// https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-freeurlcachespacew
+// Minimum OS: windows5.0.
+func FreeUrlCacheSpace(lpszCachePath string, dwSize uint32, dwFilter uint32) error {
+	_lpszCachePath := win32.UTF16Ptr(lpszCachePath)
+	r1, _, e1 := syscall.SyscallN(procFreeUrlCacheSpace.Addr(), uintptr(unsafe.Pointer(_lpszCachePath)), uintptr(dwSize), uintptr(dwFilter))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // FreeUrlCacheSpaceA calls WININET!FreeUrlCacheSpaceA.
@@ -749,11 +787,13 @@ func FreeUrlCacheSpaceA(lpszCachePath foundation.PSTR, dwSize uint32, dwFilter u
 	return nil
 }
 
-// FreeUrlCacheSpaceW calls WININET!FreeUrlCacheSpaceW.
-// https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-freeurlcachespacew
+// FtpCommand calls WININET!FtpCommandW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpcommandw
 // Minimum OS: windows5.0.
-func FreeUrlCacheSpaceW(lpszCachePath foundation.PWSTR, dwSize uint32, dwFilter uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFreeUrlCacheSpaceW.Addr(), uintptr(unsafe.Pointer(lpszCachePath)), uintptr(dwSize), uintptr(dwFilter))
+func FtpCommand(hConnect unsafe.Pointer, fExpectResponse bool, dwFlags FTP_FLAGS, lpszCommand string, dwContext uintptr, phFtpCommand *unsafe.Pointer) error {
+	_fExpectResponse := win32.Bool32(fExpectResponse)
+	_lpszCommand := win32.UTF16Ptr(lpszCommand)
+	r1, _, e1 := syscall.SyscallN(procFtpCommand.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(_fExpectResponse), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpszCommand)), uintptr(dwContext), uintptr(unsafe.Pointer(phFtpCommand)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -763,19 +803,21 @@ func FreeUrlCacheSpaceW(lpszCachePath foundation.PWSTR, dwSize uint32, dwFilter 
 // FtpCommandA calls WININET!FtpCommandA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpcommanda
 // Minimum OS: windows5.0.
-func FtpCommandA(hConnect unsafe.Pointer, fExpectResponse foundation.BOOL, dwFlags FTP_FLAGS, lpszCommand foundation.PSTR, dwContext uintptr, phFtpCommand *unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procFtpCommandA.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(fExpectResponse), uintptr(dwFlags), uintptr(unsafe.Pointer(lpszCommand)), uintptr(dwContext), uintptr(unsafe.Pointer(phFtpCommand)))
+func FtpCommandA(hConnect unsafe.Pointer, fExpectResponse bool, dwFlags FTP_FLAGS, lpszCommand foundation.PSTR, dwContext uintptr, phFtpCommand *unsafe.Pointer) error {
+	_fExpectResponse := win32.Bool32(fExpectResponse)
+	r1, _, e1 := syscall.SyscallN(procFtpCommandA.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(_fExpectResponse), uintptr(dwFlags), uintptr(unsafe.Pointer(lpszCommand)), uintptr(dwContext), uintptr(unsafe.Pointer(phFtpCommand)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// FtpCommandW calls WININET!FtpCommandW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpcommandw
+// FtpCreateDirectory calls WININET!FtpCreateDirectoryW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpcreatedirectoryw
 // Minimum OS: windows5.0.
-func FtpCommandW(hConnect unsafe.Pointer, fExpectResponse foundation.BOOL, dwFlags FTP_FLAGS, lpszCommand foundation.PWSTR, dwContext uintptr, phFtpCommand *unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procFtpCommandW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(fExpectResponse), uintptr(dwFlags), uintptr(unsafe.Pointer(lpszCommand)), uintptr(dwContext), uintptr(unsafe.Pointer(phFtpCommand)))
+func FtpCreateDirectory(hConnect unsafe.Pointer, lpszDirectory string) error {
+	_lpszDirectory := win32.UTF16Ptr(lpszDirectory)
+	r1, _, e1 := syscall.SyscallN(procFtpCreateDirectory.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszDirectory)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -793,11 +835,12 @@ func FtpCreateDirectoryA(hConnect unsafe.Pointer, lpszDirectory foundation.PSTR)
 	return nil
 }
 
-// FtpCreateDirectoryW calls WININET!FtpCreateDirectoryW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpcreatedirectoryw
+// FtpDeleteFile calls WININET!FtpDeleteFileW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpdeletefilew
 // Minimum OS: windows5.0.
-func FtpCreateDirectoryW(hConnect unsafe.Pointer, lpszDirectory foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procFtpCreateDirectoryW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszDirectory)))
+func FtpDeleteFile(hConnect unsafe.Pointer, lpszFileName string) error {
+	_lpszFileName := win32.UTF16Ptr(lpszFileName)
+	r1, _, e1 := syscall.SyscallN(procFtpDeleteFile.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszFileName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -815,15 +858,17 @@ func FtpDeleteFileA(hConnect unsafe.Pointer, lpszFileName foundation.PSTR) error
 	return nil
 }
 
-// FtpDeleteFileW calls WININET!FtpDeleteFileW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpdeletefilew
+// FtpFindFirstFile calls WININET!FtpFindFirstFileW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpfindfirstfilew
 // Minimum OS: windows5.0.
-func FtpDeleteFileW(hConnect unsafe.Pointer, lpszFileName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procFtpDeleteFileW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszFileName)))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func FtpFindFirstFile(hConnect unsafe.Pointer, lpszSearchFile string, lpFindFileData *storagefilesystem.WIN32_FIND_DATAW, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
+	_lpszSearchFile := win32.UTF16Ptr(lpszSearchFile)
+	r1, _, e1 := syscall.SyscallN(procFtpFindFirstFile.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszSearchFile)), uintptr(unsafe.Pointer(lpFindFileData)), uintptr(dwFlags), uintptr(dwContext))
+	ret := unsafe.Pointer(r1)
+	if ret == nil {
+		return ret, win32.LastError(e1)
 	}
-	return nil
+	return ret, nil
 }
 
 // FtpFindFirstFileA calls WININET!FtpFindFirstFileA.
@@ -838,16 +883,15 @@ func FtpFindFirstFileA(hConnect unsafe.Pointer, lpszSearchFile foundation.PSTR, 
 	return ret, nil
 }
 
-// FtpFindFirstFileW calls WININET!FtpFindFirstFileW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpfindfirstfilew
+// FtpGetCurrentDirectory calls WININET!FtpGetCurrentDirectoryW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpgetcurrentdirectoryw
 // Minimum OS: windows5.0.
-func FtpFindFirstFileW(hConnect unsafe.Pointer, lpszSearchFile foundation.PWSTR, lpFindFileData *storagefilesystem.WIN32_FIND_DATAW, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procFtpFindFirstFileW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszSearchFile)), uintptr(unsafe.Pointer(lpFindFileData)), uintptr(dwFlags), uintptr(dwContext))
-	ret := unsafe.Pointer(r1)
-	if ret == nil {
-		return ret, win32.LastError(e1)
+func FtpGetCurrentDirectory(hConnect unsafe.Pointer, lpszCurrentDirectory foundation.PWSTR, lpdwCurrentDirectory *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procFtpGetCurrentDirectory.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszCurrentDirectory)), uintptr(unsafe.Pointer(lpdwCurrentDirectory)))
+	if r1 == 0 {
+		return win32.LastError(e1)
 	}
-	return ret, nil
+	return nil
 }
 
 // FtpGetCurrentDirectoryA calls WININET!FtpGetCurrentDirectoryA.
@@ -861,11 +905,14 @@ func FtpGetCurrentDirectoryA(hConnect unsafe.Pointer, lpszCurrentDirectory found
 	return nil
 }
 
-// FtpGetCurrentDirectoryW calls WININET!FtpGetCurrentDirectoryW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpgetcurrentdirectoryw
+// FtpGetFile calls WININET!FtpGetFileW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpgetfilew
 // Minimum OS: windows5.0.
-func FtpGetCurrentDirectoryW(hConnect unsafe.Pointer, lpszCurrentDirectory foundation.PWSTR, lpdwCurrentDirectory *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procFtpGetCurrentDirectoryW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszCurrentDirectory)), uintptr(unsafe.Pointer(lpdwCurrentDirectory)))
+func FtpGetFile(hConnect unsafe.Pointer, lpszRemoteFile string, lpszNewFile string, fFailIfExists bool, dwFlagsAndAttributes uint32, dwFlags uint32, dwContext uintptr) error {
+	_lpszRemoteFile := win32.UTF16Ptr(lpszRemoteFile)
+	_lpszNewFile := win32.UTF16Ptr(lpszNewFile)
+	_fFailIfExists := win32.Bool32(fFailIfExists)
+	r1, _, e1 := syscall.SyscallN(procFtpGetFile.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszRemoteFile)), uintptr(unsafe.Pointer(_lpszNewFile)), uintptr(_fFailIfExists), uintptr(dwFlagsAndAttributes), uintptr(dwFlags), uintptr(dwContext))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -875,8 +922,9 @@ func FtpGetCurrentDirectoryW(hConnect unsafe.Pointer, lpszCurrentDirectory found
 // FtpGetFileA calls WININET!FtpGetFileA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpgetfilea
 // Minimum OS: windows5.0.
-func FtpGetFileA(hConnect unsafe.Pointer, lpszRemoteFile foundation.PSTR, lpszNewFile foundation.PSTR, fFailIfExists foundation.BOOL, dwFlagsAndAttributes uint32, dwFlags uint32, dwContext uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procFtpGetFileA.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszRemoteFile)), uintptr(unsafe.Pointer(lpszNewFile)), uintptr(fFailIfExists), uintptr(dwFlagsAndAttributes), uintptr(dwFlags), uintptr(dwContext))
+func FtpGetFileA(hConnect unsafe.Pointer, lpszRemoteFile foundation.PSTR, lpszNewFile foundation.PSTR, fFailIfExists bool, dwFlagsAndAttributes uint32, dwFlags uint32, dwContext uintptr) error {
+	_fFailIfExists := win32.Bool32(fFailIfExists)
+	r1, _, e1 := syscall.SyscallN(procFtpGetFileA.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszRemoteFile)), uintptr(unsafe.Pointer(lpszNewFile)), uintptr(_fFailIfExists), uintptr(dwFlagsAndAttributes), uintptr(dwFlags), uintptr(dwContext))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -884,9 +932,11 @@ func FtpGetFileA(hConnect unsafe.Pointer, lpszRemoteFile foundation.PSTR, lpszNe
 }
 
 // FtpGetFileEx calls WININET!FtpGetFileEx.
-func FtpGetFileEx(hFtpSession unsafe.Pointer, lpszRemoteFile foundation.PSTR, lpszNewFile foundation.PWSTR, fFailIfExists foundation.BOOL, dwFlagsAndAttributes uint32, dwFlags uint32, dwContext uintptr) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procFtpGetFileEx.Addr(), uintptr(unsafe.Pointer(hFtpSession)), uintptr(unsafe.Pointer(lpszRemoteFile)), uintptr(unsafe.Pointer(lpszNewFile)), uintptr(fFailIfExists), uintptr(dwFlagsAndAttributes), uintptr(dwFlags), uintptr(dwContext))
-	return foundation.BOOL(r1)
+func FtpGetFileEx(hFtpSession unsafe.Pointer, lpszRemoteFile foundation.PSTR, lpszNewFile string, fFailIfExists bool, dwFlagsAndAttributes uint32, dwFlags uint32, dwContext uintptr) bool {
+	_lpszNewFile := win32.UTF16Ptr(lpszNewFile)
+	_fFailIfExists := win32.Bool32(fFailIfExists)
+	r1, _, _ := syscall.SyscallN(procFtpGetFileEx.Addr(), uintptr(unsafe.Pointer(hFtpSession)), uintptr(unsafe.Pointer(lpszRemoteFile)), uintptr(unsafe.Pointer(_lpszNewFile)), uintptr(_fFailIfExists), uintptr(dwFlagsAndAttributes), uintptr(dwFlags), uintptr(dwContext))
+	return r1 != 0
 }
 
 // FtpGetFileSize calls WININET!FtpGetFileSize.
@@ -897,15 +947,17 @@ func FtpGetFileSize(hFile unsafe.Pointer, lpdwFileSizeHigh *uint32) uint32 {
 	return uint32(r1)
 }
 
-// FtpGetFileW calls WININET!FtpGetFileW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpgetfilew
+// FtpOpenFile calls WININET!FtpOpenFileW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpopenfilew
 // Minimum OS: windows5.0.
-func FtpGetFileW(hConnect unsafe.Pointer, lpszRemoteFile foundation.PWSTR, lpszNewFile foundation.PWSTR, fFailIfExists foundation.BOOL, dwFlagsAndAttributes uint32, dwFlags uint32, dwContext uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procFtpGetFileW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszRemoteFile)), uintptr(unsafe.Pointer(lpszNewFile)), uintptr(fFailIfExists), uintptr(dwFlagsAndAttributes), uintptr(dwFlags), uintptr(dwContext))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func FtpOpenFile(hConnect unsafe.Pointer, lpszFileName string, dwAccess uint32, dwFlags FTP_FLAGS, dwContext uintptr) (unsafe.Pointer, error) {
+	_lpszFileName := win32.UTF16Ptr(lpszFileName)
+	r1, _, e1 := syscall.SyscallN(procFtpOpenFile.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszFileName)), uintptr(dwAccess), uintptr(dwFlags), uintptr(dwContext))
+	ret := unsafe.Pointer(r1)
+	if ret == nil {
+		return ret, win32.LastError(e1)
 	}
-	return nil
+	return ret, nil
 }
 
 // FtpOpenFileA calls WININET!FtpOpenFileA.
@@ -920,16 +972,17 @@ func FtpOpenFileA(hConnect unsafe.Pointer, lpszFileName foundation.PSTR, dwAcces
 	return ret, nil
 }
 
-// FtpOpenFileW calls WININET!FtpOpenFileW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpopenfilew
+// FtpPutFile calls WININET!FtpPutFileW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpputfilew
 // Minimum OS: windows5.0.
-func FtpOpenFileW(hConnect unsafe.Pointer, lpszFileName foundation.PWSTR, dwAccess uint32, dwFlags FTP_FLAGS, dwContext uintptr) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procFtpOpenFileW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszFileName)), uintptr(dwAccess), uintptr(dwFlags), uintptr(dwContext))
-	ret := unsafe.Pointer(r1)
-	if ret == nil {
-		return ret, win32.LastError(e1)
+func FtpPutFile(hConnect unsafe.Pointer, lpszLocalFile string, lpszNewRemoteFile string, dwFlags FTP_FLAGS, dwContext uintptr) error {
+	_lpszLocalFile := win32.UTF16Ptr(lpszLocalFile)
+	_lpszNewRemoteFile := win32.UTF16Ptr(lpszNewRemoteFile)
+	r1, _, e1 := syscall.SyscallN(procFtpPutFile.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszLocalFile)), uintptr(unsafe.Pointer(_lpszNewRemoteFile)), uintptr(dwFlags), uintptr(dwContext))
+	if r1 == 0 {
+		return win32.LastError(e1)
 	}
-	return ret, nil
+	return nil
 }
 
 // FtpPutFileA calls WININET!FtpPutFileA.
@@ -944,16 +997,18 @@ func FtpPutFileA(hConnect unsafe.Pointer, lpszLocalFile foundation.PSTR, lpszNew
 }
 
 // FtpPutFileEx calls WININET!FtpPutFileEx.
-func FtpPutFileEx(hFtpSession unsafe.Pointer, lpszLocalFile foundation.PWSTR, lpszNewRemoteFile foundation.PSTR, dwFlags uint32, dwContext uintptr) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procFtpPutFileEx.Addr(), uintptr(unsafe.Pointer(hFtpSession)), uintptr(unsafe.Pointer(lpszLocalFile)), uintptr(unsafe.Pointer(lpszNewRemoteFile)), uintptr(dwFlags), uintptr(dwContext))
-	return foundation.BOOL(r1)
+func FtpPutFileEx(hFtpSession unsafe.Pointer, lpszLocalFile string, lpszNewRemoteFile foundation.PSTR, dwFlags uint32, dwContext uintptr) bool {
+	_lpszLocalFile := win32.UTF16Ptr(lpszLocalFile)
+	r1, _, _ := syscall.SyscallN(procFtpPutFileEx.Addr(), uintptr(unsafe.Pointer(hFtpSession)), uintptr(unsafe.Pointer(_lpszLocalFile)), uintptr(unsafe.Pointer(lpszNewRemoteFile)), uintptr(dwFlags), uintptr(dwContext))
+	return r1 != 0
 }
 
-// FtpPutFileW calls WININET!FtpPutFileW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpputfilew
+// FtpRemoveDirectory calls WININET!FtpRemoveDirectoryW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpremovedirectoryw
 // Minimum OS: windows5.0.
-func FtpPutFileW(hConnect unsafe.Pointer, lpszLocalFile foundation.PWSTR, lpszNewRemoteFile foundation.PWSTR, dwFlags FTP_FLAGS, dwContext uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procFtpPutFileW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszLocalFile)), uintptr(unsafe.Pointer(lpszNewRemoteFile)), uintptr(dwFlags), uintptr(dwContext))
+func FtpRemoveDirectory(hConnect unsafe.Pointer, lpszDirectory string) error {
+	_lpszDirectory := win32.UTF16Ptr(lpszDirectory)
+	r1, _, e1 := syscall.SyscallN(procFtpRemoveDirectory.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszDirectory)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -971,11 +1026,13 @@ func FtpRemoveDirectoryA(hConnect unsafe.Pointer, lpszDirectory foundation.PSTR)
 	return nil
 }
 
-// FtpRemoveDirectoryW calls WININET!FtpRemoveDirectoryW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpremovedirectoryw
+// FtpRenameFile calls WININET!FtpRenameFileW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftprenamefilew
 // Minimum OS: windows5.0.
-func FtpRemoveDirectoryW(hConnect unsafe.Pointer, lpszDirectory foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procFtpRemoveDirectoryW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszDirectory)))
+func FtpRenameFile(hConnect unsafe.Pointer, lpszExisting string, lpszNew string) error {
+	_lpszExisting := win32.UTF16Ptr(lpszExisting)
+	_lpszNew := win32.UTF16Ptr(lpszNew)
+	r1, _, e1 := syscall.SyscallN(procFtpRenameFile.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszExisting)), uintptr(unsafe.Pointer(_lpszNew)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -993,11 +1050,12 @@ func FtpRenameFileA(hConnect unsafe.Pointer, lpszExisting foundation.PSTR, lpszN
 	return nil
 }
 
-// FtpRenameFileW calls WININET!FtpRenameFileW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftprenamefilew
+// FtpSetCurrentDirectory calls WININET!FtpSetCurrentDirectoryW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpsetcurrentdirectoryw
 // Minimum OS: windows5.0.
-func FtpRenameFileW(hConnect unsafe.Pointer, lpszExisting foundation.PWSTR, lpszNew foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procFtpRenameFileW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszExisting)), uintptr(unsafe.Pointer(lpszNew)))
+func FtpSetCurrentDirectory(hConnect unsafe.Pointer, lpszDirectory string) error {
+	_lpszDirectory := win32.UTF16Ptr(lpszDirectory)
+	r1, _, e1 := syscall.SyscallN(procFtpSetCurrentDirectory.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszDirectory)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1015,39 +1073,28 @@ func FtpSetCurrentDirectoryA(hConnect unsafe.Pointer, lpszDirectory foundation.P
 	return nil
 }
 
-// FtpSetCurrentDirectoryW calls WININET!FtpSetCurrentDirectoryW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-ftpsetcurrentdirectoryw
-// Minimum OS: windows5.0.
-func FtpSetCurrentDirectoryW(hConnect unsafe.Pointer, lpszDirectory foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procFtpSetCurrentDirectoryW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszDirectory)))
+// GetDiskInfoA calls WININET!GetDiskInfoA.
+func GetDiskInfoA(pszPath foundation.PSTR, pdwClusterSize *uint32, pdlAvail *uint64, pdlTotal *uint64) bool {
+	r1, _, _ := syscall.SyscallN(procGetDiskInfoA.Addr(), uintptr(unsafe.Pointer(pszPath)), uintptr(unsafe.Pointer(pdwClusterSize)), uintptr(unsafe.Pointer(pdlAvail)), uintptr(unsafe.Pointer(pdlTotal)))
+	return r1 != 0
+}
+
+// GetUrlCacheConfigInfo calls WININET!GetUrlCacheConfigInfoW.
+// https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-geturlcacheconfiginfow
+// Minimum OS: windows5.1.2600.
+func GetUrlCacheConfigInfo(lpCacheConfigInfo *INTERNET_CACHE_CONFIG_INFOW, dwFieldControl CACHE_CONFIG) error {
+	r1, _, e1 := syscall.SyscallN(procGetUrlCacheConfigInfo.Addr(), uintptr(unsafe.Pointer(lpCacheConfigInfo)), 0, uintptr(dwFieldControl))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// GetDiskInfoA calls WININET!GetDiskInfoA.
-func GetDiskInfoA(pszPath foundation.PSTR, pdwClusterSize *uint32, pdlAvail *uint64, pdlTotal *uint64) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetDiskInfoA.Addr(), uintptr(unsafe.Pointer(pszPath)), uintptr(unsafe.Pointer(pdwClusterSize)), uintptr(unsafe.Pointer(pdlAvail)), uintptr(unsafe.Pointer(pdlTotal)))
-	return foundation.BOOL(r1)
 }
 
 // GetUrlCacheConfigInfoA calls WININET!GetUrlCacheConfigInfoA.
 // https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-geturlcacheconfiginfoa
 // Minimum OS: windows5.1.2600.
-func GetUrlCacheConfigInfoA(lpCacheConfigInfo *INTERNET_CACHE_CONFIG_INFOA, lpcbCacheConfigInfo *uint32, dwFieldControl CACHE_CONFIG) error {
-	r1, _, e1 := syscall.SyscallN(procGetUrlCacheConfigInfoA.Addr(), uintptr(unsafe.Pointer(lpCacheConfigInfo)), uintptr(unsafe.Pointer(lpcbCacheConfigInfo)), uintptr(dwFieldControl))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// GetUrlCacheConfigInfoW calls WININET!GetUrlCacheConfigInfoW.
-// https://learn.microsoft.com/windows/win32/api/winineti/nf-winineti-geturlcacheconfiginfow
-// Minimum OS: windows5.1.2600.
-func GetUrlCacheConfigInfoW(lpCacheConfigInfo *INTERNET_CACHE_CONFIG_INFOW, lpcbCacheConfigInfo *uint32, dwFieldControl CACHE_CONFIG) error {
-	r1, _, e1 := syscall.SyscallN(procGetUrlCacheConfigInfoW.Addr(), uintptr(unsafe.Pointer(lpCacheConfigInfo)), uintptr(unsafe.Pointer(lpcbCacheConfigInfo)), uintptr(dwFieldControl))
+func GetUrlCacheConfigInfoA(lpCacheConfigInfo *INTERNET_CACHE_CONFIG_INFOA, dwFieldControl CACHE_CONFIG) error {
+	r1, _, e1 := syscall.SyscallN(procGetUrlCacheConfigInfoA.Addr(), uintptr(unsafe.Pointer(lpCacheConfigInfo)), 0, uintptr(dwFieldControl))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1055,9 +1102,22 @@ func GetUrlCacheConfigInfoW(lpCacheConfigInfo *INTERNET_CACHE_CONFIG_INFOW, lpcb
 }
 
 // GetUrlCacheEntryBinaryBlob calls WININET!GetUrlCacheEntryBinaryBlob.
-func GetUrlCacheEntryBinaryBlob(pwszUrlName foundation.PWSTR, dwType *uint32, pftExpireTime *foundation.FILETIME, pftAccessTime *foundation.FILETIME, pftModifiedTime *foundation.FILETIME, ppbBlob **byte, pcbBlob *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetUrlCacheEntryBinaryBlob.Addr(), uintptr(unsafe.Pointer(pwszUrlName)), uintptr(unsafe.Pointer(dwType)), uintptr(unsafe.Pointer(pftExpireTime)), uintptr(unsafe.Pointer(pftAccessTime)), uintptr(unsafe.Pointer(pftModifiedTime)), uintptr(unsafe.Pointer(ppbBlob)), uintptr(unsafe.Pointer(pcbBlob)))
+func GetUrlCacheEntryBinaryBlob(pwszUrlName string, dwType *uint32, pftExpireTime *foundation.FILETIME, pftAccessTime *foundation.FILETIME, pftModifiedTime *foundation.FILETIME, ppbBlob **byte, pcbBlob *uint32) uint32 {
+	_pwszUrlName := win32.UTF16Ptr(pwszUrlName)
+	r1, _, _ := syscall.SyscallN(procGetUrlCacheEntryBinaryBlob.Addr(), uintptr(unsafe.Pointer(_pwszUrlName)), uintptr(unsafe.Pointer(dwType)), uintptr(unsafe.Pointer(pftExpireTime)), uintptr(unsafe.Pointer(pftAccessTime)), uintptr(unsafe.Pointer(pftModifiedTime)), uintptr(unsafe.Pointer(ppbBlob)), uintptr(unsafe.Pointer(pcbBlob)))
 	return uint32(r1)
+}
+
+// GetUrlCacheEntryInfo calls WININET!GetUrlCacheEntryInfoW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-geturlcacheentryinfow
+// Minimum OS: windows5.0.
+func GetUrlCacheEntryInfo(lpszUrlName string, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32) error {
+	_lpszUrlName := win32.UTF16Ptr(lpszUrlName)
+	r1, _, e1 := syscall.SyscallN(procGetUrlCacheEntryInfo.Addr(), uintptr(unsafe.Pointer(_lpszUrlName)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // GetUrlCacheEntryInfoA calls WININET!GetUrlCacheEntryInfoA.
@@ -1071,33 +1131,34 @@ func GetUrlCacheEntryInfoA(lpszUrlName foundation.PSTR, lpCacheEntryInfo *INTERN
 	return nil
 }
 
+// GetUrlCacheEntryInfoEx calls WININET!GetUrlCacheEntryInfoExW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-geturlcacheentryinfoexw
+// Minimum OS: windows5.0.
+func GetUrlCacheEntryInfoEx(lpszUrl string, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32, dwFlags uint32) error {
+	_lpszUrl := win32.UTF16Ptr(lpszUrl)
+	r1, _, e1 := syscall.SyscallN(procGetUrlCacheEntryInfoEx.Addr(), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), 0, 0, 0, uintptr(dwFlags))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // GetUrlCacheEntryInfoExA calls WININET!GetUrlCacheEntryInfoExA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-geturlcacheentryinfoexa
 // Minimum OS: windows5.0.
-func GetUrlCacheEntryInfoExA(lpszUrl foundation.PSTR, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOA, lpcbCacheEntryInfo *uint32, lpszRedirectUrl foundation.PSTR, lpcbRedirectUrl *uint32, lpReserved unsafe.Pointer, dwFlags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetUrlCacheEntryInfoExA.Addr(), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), uintptr(unsafe.Pointer(lpszRedirectUrl)), uintptr(unsafe.Pointer(lpcbRedirectUrl)), uintptr(unsafe.Pointer(lpReserved)), uintptr(dwFlags))
+func GetUrlCacheEntryInfoExA(lpszUrl foundation.PSTR, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOA, lpcbCacheEntryInfo *uint32, dwFlags uint32) error {
+	r1, _, e1 := syscall.SyscallN(procGetUrlCacheEntryInfoExA.Addr(), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), 0, 0, 0, uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// GetUrlCacheEntryInfoExW calls WININET!GetUrlCacheEntryInfoExW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-geturlcacheentryinfoexw
+// GetUrlCacheGroupAttribute calls WININET!GetUrlCacheGroupAttributeW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-geturlcachegroupattributew
 // Minimum OS: windows5.0.
-func GetUrlCacheEntryInfoExW(lpszUrl foundation.PWSTR, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32, lpszRedirectUrl foundation.PWSTR, lpcbRedirectUrl *uint32, lpReserved unsafe.Pointer, dwFlags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetUrlCacheEntryInfoExW.Addr(), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), uintptr(unsafe.Pointer(lpszRedirectUrl)), uintptr(unsafe.Pointer(lpcbRedirectUrl)), uintptr(unsafe.Pointer(lpReserved)), uintptr(dwFlags))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// GetUrlCacheEntryInfoW calls WININET!GetUrlCacheEntryInfoW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-geturlcacheentryinfow
-// Minimum OS: windows5.0.
-func GetUrlCacheEntryInfoW(lpszUrlName foundation.PWSTR, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetUrlCacheEntryInfoW.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)))
+func GetUrlCacheGroupAttribute(gid int64, dwAttributes uint32, lpGroupInfo *INTERNET_CACHE_GROUP_INFOW, lpcbGroupInfo *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procGetUrlCacheGroupAttribute.Addr(), uintptr(gid), 0, uintptr(dwAttributes), uintptr(unsafe.Pointer(lpGroupInfo)), uintptr(unsafe.Pointer(lpcbGroupInfo)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1107,19 +1168,8 @@ func GetUrlCacheEntryInfoW(lpszUrlName foundation.PWSTR, lpCacheEntryInfo *INTER
 // GetUrlCacheGroupAttributeA calls WININET!GetUrlCacheGroupAttributeA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-geturlcachegroupattributea
 // Minimum OS: windows5.0.
-func GetUrlCacheGroupAttributeA(gid int64, dwFlags uint32, dwAttributes uint32, lpGroupInfo *INTERNET_CACHE_GROUP_INFOA, lpcbGroupInfo *uint32, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procGetUrlCacheGroupAttributeA.Addr(), uintptr(gid), uintptr(dwFlags), uintptr(dwAttributes), uintptr(unsafe.Pointer(lpGroupInfo)), uintptr(unsafe.Pointer(lpcbGroupInfo)), uintptr(unsafe.Pointer(lpReserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// GetUrlCacheGroupAttributeW calls WININET!GetUrlCacheGroupAttributeW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-geturlcachegroupattributew
-// Minimum OS: windows5.0.
-func GetUrlCacheGroupAttributeW(gid int64, dwFlags uint32, dwAttributes uint32, lpGroupInfo *INTERNET_CACHE_GROUP_INFOW, lpcbGroupInfo *uint32, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procGetUrlCacheGroupAttributeW.Addr(), uintptr(gid), uintptr(dwFlags), uintptr(dwAttributes), uintptr(unsafe.Pointer(lpGroupInfo)), uintptr(unsafe.Pointer(lpcbGroupInfo)), uintptr(unsafe.Pointer(lpReserved)))
+func GetUrlCacheGroupAttributeA(gid int64, dwAttributes uint32, lpGroupInfo *INTERNET_CACHE_GROUP_INFOA, lpcbGroupInfo *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procGetUrlCacheGroupAttributeA.Addr(), uintptr(gid), 0, uintptr(dwAttributes), uintptr(unsafe.Pointer(lpGroupInfo)), uintptr(unsafe.Pointer(lpcbGroupInfo)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1127,9 +1177,23 @@ func GetUrlCacheGroupAttributeW(gid int64, dwFlags uint32, dwAttributes uint32, 
 }
 
 // GetUrlCacheHeaderData calls WININET!GetUrlCacheHeaderData.
-func GetUrlCacheHeaderData(nIdx uint32, lpdwData *uint32) foundation.BOOL {
+func GetUrlCacheHeaderData(nIdx uint32, lpdwData *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetUrlCacheHeaderData.Addr(), uintptr(nIdx), uintptr(unsafe.Pointer(lpdwData)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// GopherCreateLocator calls WININET!GopherCreateLocatorW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gophercreatelocatorw
+// Minimum OS: windows5.0.
+func GopherCreateLocator(lpszHost string, nServerPort uint16, lpszDisplayString string, lpszSelectorString string, dwGopherType uint32, lpszLocator foundation.PWSTR, lpdwBufferLength *uint32) error {
+	_lpszHost := win32.UTF16Ptr(lpszHost)
+	_lpszDisplayString := win32.UTF16Ptr(lpszDisplayString)
+	_lpszSelectorString := win32.UTF16Ptr(lpszSelectorString)
+	r1, _, e1 := syscall.SyscallN(procGopherCreateLocator.Addr(), uintptr(unsafe.Pointer(_lpszHost)), uintptr(nServerPort), uintptr(unsafe.Pointer(_lpszDisplayString)), uintptr(unsafe.Pointer(_lpszSelectorString)), uintptr(dwGopherType), uintptr(unsafe.Pointer(lpszLocator)), uintptr(unsafe.Pointer(lpdwBufferLength)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // GopherCreateLocatorA calls WININET!GopherCreateLocatorA.
@@ -1143,15 +1207,18 @@ func GopherCreateLocatorA(lpszHost foundation.PSTR, nServerPort uint16, lpszDisp
 	return nil
 }
 
-// GopherCreateLocatorW calls WININET!GopherCreateLocatorW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gophercreatelocatorw
+// GopherFindFirstFile calls WININET!GopherFindFirstFileW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gopherfindfirstfilew
 // Minimum OS: windows5.0.
-func GopherCreateLocatorW(lpszHost foundation.PWSTR, nServerPort uint16, lpszDisplayString foundation.PWSTR, lpszSelectorString foundation.PWSTR, dwGopherType uint32, lpszLocator foundation.PWSTR, lpdwBufferLength *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGopherCreateLocatorW.Addr(), uintptr(unsafe.Pointer(lpszHost)), uintptr(nServerPort), uintptr(unsafe.Pointer(lpszDisplayString)), uintptr(unsafe.Pointer(lpszSelectorString)), uintptr(dwGopherType), uintptr(unsafe.Pointer(lpszLocator)), uintptr(unsafe.Pointer(lpdwBufferLength)))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func GopherFindFirstFile(hConnect unsafe.Pointer, lpszLocator string, lpszSearchString string, lpFindData *GOPHER_FIND_DATAW, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
+	_lpszLocator := win32.UTF16Ptr(lpszLocator)
+	_lpszSearchString := win32.UTF16Ptr(lpszSearchString)
+	r1, _, e1 := syscall.SyscallN(procGopherFindFirstFile.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszLocator)), uintptr(unsafe.Pointer(_lpszSearchString)), uintptr(unsafe.Pointer(lpFindData)), uintptr(dwFlags), uintptr(dwContext))
+	ret := unsafe.Pointer(r1)
+	if ret == nil {
+		return ret, win32.LastError(e1)
 	}
-	return nil
+	return ret, nil
 }
 
 // GopherFindFirstFileA calls WININET!GopherFindFirstFileA.
@@ -1166,34 +1233,44 @@ func GopherFindFirstFileA(hConnect unsafe.Pointer, lpszLocator foundation.PSTR, 
 	return ret, nil
 }
 
-// GopherFindFirstFileW calls WININET!GopherFindFirstFileW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gopherfindfirstfilew
+// GopherGetAttribute calls WININET!GopherGetAttributeW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gophergetattributew
 // Minimum OS: windows5.0.
-func GopherFindFirstFileW(hConnect unsafe.Pointer, lpszLocator foundation.PWSTR, lpszSearchString foundation.PWSTR, lpFindData *GOPHER_FIND_DATAW, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procGopherFindFirstFileW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszLocator)), uintptr(unsafe.Pointer(lpszSearchString)), uintptr(unsafe.Pointer(lpFindData)), uintptr(dwFlags), uintptr(dwContext))
-	ret := unsafe.Pointer(r1)
-	if ret == nil {
-		return ret, win32.LastError(e1)
+func GopherGetAttribute(hConnect unsafe.Pointer, lpszLocator string, lpszAttributeName string, lpBuffer []byte, lpdwCharactersReturned *uint32, lpfnEnumerator GOPHER_ATTRIBUTE_ENUMERATOR, dwContext uintptr) error {
+	_lpszLocator := win32.UTF16Ptr(lpszLocator)
+	_lpszAttributeName := win32.UTF16Ptr(lpszAttributeName)
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
 	}
-	return ret, nil
-}
-
-// GopherGetAttributeA calls WININET!GopherGetAttributeA.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gophergetattributea
-// Minimum OS: windows5.0.
-func GopherGetAttributeA(hConnect unsafe.Pointer, lpszLocator foundation.PSTR, lpszAttributeName foundation.PSTR, lpBuffer *byte, dwBufferLength uint32, lpdwCharactersReturned *uint32, lpfnEnumerator GOPHER_ATTRIBUTE_ENUMERATOR, dwContext uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procGopherGetAttributeA.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszLocator)), uintptr(unsafe.Pointer(lpszAttributeName)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(dwBufferLength), uintptr(unsafe.Pointer(lpdwCharactersReturned)), uintptr(lpfnEnumerator), uintptr(dwContext))
+	r1, _, e1 := syscall.SyscallN(procGopherGetAttribute.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszLocator)), uintptr(unsafe.Pointer(_lpszAttributeName)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpdwCharactersReturned)), uintptr(lpfnEnumerator), uintptr(dwContext))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// GopherGetAttributeW calls WININET!GopherGetAttributeW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gophergetattributew
+// GopherGetAttributeA calls WININET!GopherGetAttributeA.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gophergetattributea
 // Minimum OS: windows5.0.
-func GopherGetAttributeW(hConnect unsafe.Pointer, lpszLocator foundation.PWSTR, lpszAttributeName foundation.PWSTR, lpBuffer *byte, dwBufferLength uint32, lpdwCharactersReturned *uint32, lpfnEnumerator GOPHER_ATTRIBUTE_ENUMERATOR, dwContext uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procGopherGetAttributeW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszLocator)), uintptr(unsafe.Pointer(lpszAttributeName)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(dwBufferLength), uintptr(unsafe.Pointer(lpdwCharactersReturned)), uintptr(lpfnEnumerator), uintptr(dwContext))
+func GopherGetAttributeA(hConnect unsafe.Pointer, lpszLocator foundation.PSTR, lpszAttributeName foundation.PSTR, lpBuffer []byte, lpdwCharactersReturned *uint32, lpfnEnumerator GOPHER_ATTRIBUTE_ENUMERATOR, dwContext uintptr) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGopherGetAttributeA.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszLocator)), uintptr(unsafe.Pointer(lpszAttributeName)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpdwCharactersReturned)), uintptr(lpfnEnumerator), uintptr(dwContext))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// GopherGetLocatorType calls WININET!GopherGetLocatorTypeW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gophergetlocatortypew
+// Minimum OS: windows5.0.
+func GopherGetLocatorType(lpszLocator string, lpdwGopherType *uint32) error {
+	_lpszLocator := win32.UTF16Ptr(lpszLocator)
+	r1, _, e1 := syscall.SyscallN(procGopherGetLocatorType.Addr(), uintptr(unsafe.Pointer(_lpszLocator)), uintptr(unsafe.Pointer(lpdwGopherType)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1211,15 +1288,18 @@ func GopherGetLocatorTypeA(lpszLocator foundation.PSTR, lpdwGopherType *uint32) 
 	return nil
 }
 
-// GopherGetLocatorTypeW calls WININET!GopherGetLocatorTypeW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gophergetlocatortypew
+// GopherOpenFile calls WININET!GopherOpenFileW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gopheropenfilew
 // Minimum OS: windows5.0.
-func GopherGetLocatorTypeW(lpszLocator foundation.PWSTR, lpdwGopherType *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGopherGetLocatorTypeW.Addr(), uintptr(unsafe.Pointer(lpszLocator)), uintptr(unsafe.Pointer(lpdwGopherType)))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func GopherOpenFile(hConnect unsafe.Pointer, lpszLocator string, lpszView string, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
+	_lpszLocator := win32.UTF16Ptr(lpszLocator)
+	_lpszView := win32.UTF16Ptr(lpszView)
+	r1, _, e1 := syscall.SyscallN(procGopherOpenFile.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszLocator)), uintptr(unsafe.Pointer(_lpszView)), uintptr(dwFlags), uintptr(dwContext))
+	ret := unsafe.Pointer(r1)
+	if ret == nil {
+		return ret, win32.LastError(e1)
 	}
-	return nil
+	return ret, nil
 }
 
 // GopherOpenFileA calls WININET!GopherOpenFileA.
@@ -1234,16 +1314,16 @@ func GopherOpenFileA(hConnect unsafe.Pointer, lpszLocator foundation.PSTR, lpszV
 	return ret, nil
 }
 
-// GopherOpenFileW calls WININET!GopherOpenFileW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-gopheropenfilew
+// HttpAddRequestHeaders calls WININET!HttpAddRequestHeadersW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpaddrequestheadersw
 // Minimum OS: windows5.0.
-func GopherOpenFileW(hConnect unsafe.Pointer, lpszLocator foundation.PWSTR, lpszView foundation.PWSTR, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procGopherOpenFileW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszLocator)), uintptr(unsafe.Pointer(lpszView)), uintptr(dwFlags), uintptr(dwContext))
-	ret := unsafe.Pointer(r1)
-	if ret == nil {
-		return ret, win32.LastError(e1)
+func HttpAddRequestHeaders(hRequest unsafe.Pointer, lpszHeaders string, dwHeadersLength uint32, dwModifiers HTTP_ADDREQ_FLAG) error {
+	_lpszHeaders := win32.UTF16Ptr(lpszHeaders)
+	r1, _, e1 := syscall.SyscallN(procHttpAddRequestHeaders.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(_lpszHeaders)), uintptr(dwHeadersLength), uintptr(dwModifiers))
+	if r1 == 0 {
+		return win32.LastError(e1)
 	}
-	return ret, nil
+	return nil
 }
 
 // HttpAddRequestHeadersA calls WININET!HttpAddRequestHeadersA.
@@ -1257,27 +1337,18 @@ func HttpAddRequestHeadersA(hRequest unsafe.Pointer, lpszHeaders foundation.PSTR
 	return nil
 }
 
-// HttpAddRequestHeadersW calls WININET!HttpAddRequestHeadersW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpaddrequestheadersw
-// Minimum OS: windows5.0.
-func HttpAddRequestHeadersW(hRequest unsafe.Pointer, lpszHeaders foundation.PWSTR, dwHeadersLength uint32, dwModifiers HTTP_ADDREQ_FLAG) error {
-	r1, _, e1 := syscall.SyscallN(procHttpAddRequestHeadersW.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(lpszHeaders)), uintptr(dwHeadersLength), uintptr(dwModifiers))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+// HttpCheckDavCompliance calls WININET!HttpCheckDavComplianceW.
+func HttpCheckDavCompliance(lpszUrl string, lpszComplianceToken string, lpfFound *foundation.BOOL, hWnd foundation.HWND, lpvReserved unsafe.Pointer) bool {
+	_lpszUrl := win32.UTF16Ptr(lpszUrl)
+	_lpszComplianceToken := win32.UTF16Ptr(lpszComplianceToken)
+	r1, _, _ := syscall.SyscallN(procHttpCheckDavCompliance.Addr(), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(unsafe.Pointer(_lpszComplianceToken)), uintptr(unsafe.Pointer(lpfFound)), uintptr(hWnd), uintptr(unsafe.Pointer(lpvReserved)))
+	return r1 != 0
 }
 
 // HttpCheckDavComplianceA calls WININET!HttpCheckDavComplianceA.
-func HttpCheckDavComplianceA(lpszUrl foundation.PSTR, lpszComplianceToken foundation.PSTR, lpfFound *foundation.BOOL, hWnd foundation.HWND, lpvReserved unsafe.Pointer) foundation.BOOL {
+func HttpCheckDavComplianceA(lpszUrl foundation.PSTR, lpszComplianceToken foundation.PSTR, lpfFound *foundation.BOOL, hWnd foundation.HWND, lpvReserved unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procHttpCheckDavComplianceA.Addr(), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpszComplianceToken)), uintptr(unsafe.Pointer(lpfFound)), uintptr(hWnd), uintptr(unsafe.Pointer(lpvReserved)))
-	return foundation.BOOL(r1)
-}
-
-// HttpCheckDavComplianceW calls WININET!HttpCheckDavComplianceW.
-func HttpCheckDavComplianceW(lpszUrl foundation.PWSTR, lpszComplianceToken foundation.PWSTR, lpfFound *foundation.BOOL, hWnd foundation.HWND, lpvReserved unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procHttpCheckDavComplianceW.Addr(), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpszComplianceToken)), uintptr(unsafe.Pointer(lpfFound)), uintptr(hWnd), uintptr(unsafe.Pointer(lpvReserved)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // HttpCloseDependencyHandle calls WININET!HttpCloseDependencyHandle.
@@ -1291,6 +1362,17 @@ func HttpDuplicateDependencyHandle(hDependencyHandle unsafe.Pointer, phDuplicate
 	return uint32(r1)
 }
 
+// HttpEndRequest calls WININET!HttpEndRequestW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpendrequestw
+// Minimum OS: windows5.0.
+func HttpEndRequest(hRequest unsafe.Pointer, lpBuffersOut *INTERNET_BUFFERSW, dwFlags uint32, dwContext uintptr) error {
+	r1, _, e1 := syscall.SyscallN(procHttpEndRequest.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(lpBuffersOut)), uintptr(dwFlags), uintptr(dwContext))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // HttpEndRequestA calls WININET!HttpEndRequestA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpendrequesta
 // Minimum OS: windows5.0.
@@ -1302,20 +1384,10 @@ func HttpEndRequestA(hRequest unsafe.Pointer, lpBuffersOut *INTERNET_BUFFERSA, d
 	return nil
 }
 
-// HttpEndRequestW calls WININET!HttpEndRequestW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpendrequestw
-// Minimum OS: windows5.0.
-func HttpEndRequestW(hRequest unsafe.Pointer, lpBuffersOut *INTERNET_BUFFERSW, dwFlags uint32, dwContext uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procHttpEndRequestW.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(lpBuffersOut)), uintptr(dwFlags), uintptr(dwContext))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // HttpGetServerCredentials calls WININET!HttpGetServerCredentials.
-func HttpGetServerCredentials(pwszUrl foundation.PWSTR, ppwszUserName *foundation.PWSTR, ppwszPassword *foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpGetServerCredentials.Addr(), uintptr(unsafe.Pointer(pwszUrl)), uintptr(unsafe.Pointer(ppwszUserName)), uintptr(unsafe.Pointer(ppwszPassword)))
+func HttpGetServerCredentials(pwszUrl string, ppwszUserName *foundation.PWSTR, ppwszPassword *foundation.PWSTR) uint32 {
+	_pwszUrl := win32.UTF16Ptr(pwszUrl)
+	r1, _, _ := syscall.SyscallN(procHttpGetServerCredentials.Addr(), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(unsafe.Pointer(ppwszUserName)), uintptr(unsafe.Pointer(ppwszPassword)))
 	return uint32(r1)
 }
 
@@ -1326,22 +1398,28 @@ func HttpIndicatePageLoadComplete(hDependencyHandle unsafe.Pointer) uint32 {
 }
 
 // HttpIsHostHstsEnabled calls WININET!HttpIsHostHstsEnabled.
-func HttpIsHostHstsEnabled(pcwszUrl foundation.PWSTR, pfIsHsts *foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpIsHostHstsEnabled.Addr(), uintptr(unsafe.Pointer(pcwszUrl)), uintptr(unsafe.Pointer(pfIsHsts)))
+func HttpIsHostHstsEnabled(pcwszUrl string, pfIsHsts *foundation.BOOL) uint32 {
+	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
+	r1, _, _ := syscall.SyscallN(procHttpIsHostHstsEnabled.Addr(), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(pfIsHsts)))
 	return uint32(r1)
 }
 
 // HttpOpenDependencyHandle calls WININET!HttpOpenDependencyHandle.
-func HttpOpenDependencyHandle(hRequestHandle unsafe.Pointer, fBackground foundation.BOOL, phDependencyHandle *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpOpenDependencyHandle.Addr(), uintptr(unsafe.Pointer(hRequestHandle)), uintptr(fBackground), uintptr(unsafe.Pointer(phDependencyHandle)))
+func HttpOpenDependencyHandle(hRequestHandle unsafe.Pointer, fBackground bool, phDependencyHandle *unsafe.Pointer) uint32 {
+	_fBackground := win32.Bool32(fBackground)
+	r1, _, _ := syscall.SyscallN(procHttpOpenDependencyHandle.Addr(), uintptr(unsafe.Pointer(hRequestHandle)), uintptr(_fBackground), uintptr(unsafe.Pointer(phDependencyHandle)))
 	return uint32(r1)
 }
 
-// HttpOpenRequestA calls WININET!HttpOpenRequestA.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpopenrequesta
+// HttpOpenRequest calls WININET!HttpOpenRequestW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpopenrequestw
 // Minimum OS: windows5.0.
-func HttpOpenRequestA(hConnect unsafe.Pointer, lpszVerb foundation.PSTR, lpszObjectName foundation.PSTR, lpszVersion foundation.PSTR, lpszReferrer foundation.PSTR, lplpszAcceptTypes *foundation.PSTR, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procHttpOpenRequestA.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszVerb)), uintptr(unsafe.Pointer(lpszObjectName)), uintptr(unsafe.Pointer(lpszVersion)), uintptr(unsafe.Pointer(lpszReferrer)), uintptr(unsafe.Pointer(lplpszAcceptTypes)), uintptr(dwFlags), uintptr(dwContext))
+func HttpOpenRequest(hConnect unsafe.Pointer, lpszVerb string, lpszObjectName string, lpszVersion string, lpszReferrer string, lplpszAcceptTypes *foundation.PWSTR, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
+	_lpszVerb := win32.UTF16Ptr(lpszVerb)
+	_lpszObjectName := win32.UTF16Ptr(lpszObjectName)
+	_lpszVersion := win32.UTF16Ptr(lpszVersion)
+	_lpszReferrer := win32.UTF16Ptr(lpszReferrer)
+	r1, _, e1 := syscall.SyscallN(procHttpOpenRequest.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(_lpszVerb)), uintptr(unsafe.Pointer(_lpszObjectName)), uintptr(unsafe.Pointer(_lpszVersion)), uintptr(unsafe.Pointer(_lpszReferrer)), uintptr(unsafe.Pointer(lplpszAcceptTypes)), uintptr(dwFlags), uintptr(dwContext))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -1349,11 +1427,11 @@ func HttpOpenRequestA(hConnect unsafe.Pointer, lpszVerb foundation.PSTR, lpszObj
 	return ret, nil
 }
 
-// HttpOpenRequestW calls WININET!HttpOpenRequestW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpopenrequestw
+// HttpOpenRequestA calls WININET!HttpOpenRequestA.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpopenrequesta
 // Minimum OS: windows5.0.
-func HttpOpenRequestW(hConnect unsafe.Pointer, lpszVerb foundation.PWSTR, lpszObjectName foundation.PWSTR, lpszVersion foundation.PWSTR, lpszReferrer foundation.PWSTR, lplpszAcceptTypes *foundation.PWSTR, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procHttpOpenRequestW.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszVerb)), uintptr(unsafe.Pointer(lpszObjectName)), uintptr(unsafe.Pointer(lpszVersion)), uintptr(unsafe.Pointer(lpszReferrer)), uintptr(unsafe.Pointer(lplpszAcceptTypes)), uintptr(dwFlags), uintptr(dwContext))
+func HttpOpenRequestA(hConnect unsafe.Pointer, lpszVerb foundation.PSTR, lpszObjectName foundation.PSTR, lpszVersion foundation.PSTR, lpszReferrer foundation.PSTR, lplpszAcceptTypes *foundation.PSTR, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
+	r1, _, e1 := syscall.SyscallN(procHttpOpenRequestA.Addr(), uintptr(unsafe.Pointer(hConnect)), uintptr(unsafe.Pointer(lpszVerb)), uintptr(unsafe.Pointer(lpszObjectName)), uintptr(unsafe.Pointer(lpszVersion)), uintptr(unsafe.Pointer(lpszReferrer)), uintptr(unsafe.Pointer(lplpszAcceptTypes)), uintptr(dwFlags), uintptr(dwContext))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -1378,6 +1456,17 @@ func HttpPushWait(hWait HTTP_PUSH_WAIT_HANDLE, eType HTTP_PUSH_WAIT_TYPE, pNotif
 	return uint32(r1)
 }
 
+// HttpQueryInfo calls WININET!HttpQueryInfoW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpqueryinfow
+// Minimum OS: windows5.0.
+func HttpQueryInfo(hRequest unsafe.Pointer, dwInfoLevel uint32, lpBuffer unsafe.Pointer, lpdwBufferLength *uint32, lpdwIndex *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procHttpQueryInfo.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpdwIndex)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // HttpQueryInfoA calls WININET!HttpQueryInfoA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpqueryinfoa
 // Minimum OS: windows5.0.
@@ -1389,11 +1478,12 @@ func HttpQueryInfoA(hRequest unsafe.Pointer, dwInfoLevel uint32, lpBuffer unsafe
 	return nil
 }
 
-// HttpQueryInfoW calls WININET!HttpQueryInfoW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpqueryinfow
+// HttpSendRequest calls WININET!HttpSendRequestW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpsendrequestw
 // Minimum OS: windows5.0.
-func HttpQueryInfoW(hRequest unsafe.Pointer, dwInfoLevel uint32, lpBuffer unsafe.Pointer, lpdwBufferLength *uint32, lpdwIndex *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procHttpQueryInfoW.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(unsafe.Pointer(lpdwIndex)))
+func HttpSendRequest(hRequest unsafe.Pointer, lpszHeaders string, dwHeadersLength uint32, lpOptional unsafe.Pointer, dwOptionalLength uint32) error {
+	_lpszHeaders := win32.UTF16Ptr(lpszHeaders)
+	r1, _, e1 := syscall.SyscallN(procHttpSendRequest.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(_lpszHeaders)), uintptr(dwHeadersLength), uintptr(unsafe.Pointer(lpOptional)), uintptr(dwOptionalLength))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1411,6 +1501,17 @@ func HttpSendRequestA(hRequest unsafe.Pointer, lpszHeaders foundation.PSTR, dwHe
 	return nil
 }
 
+// HttpSendRequestEx calls WININET!HttpSendRequestExW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpsendrequestexw
+// Minimum OS: windows5.0.
+func HttpSendRequestEx(hRequest unsafe.Pointer, lpBuffersIn *INTERNET_BUFFERSW, lpBuffersOut *INTERNET_BUFFERSW, dwFlags uint32, dwContext uintptr) error {
+	r1, _, e1 := syscall.SyscallN(procHttpSendRequestEx.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(lpBuffersIn)), uintptr(unsafe.Pointer(lpBuffersOut)), uintptr(dwFlags), uintptr(dwContext))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // HttpSendRequestExA calls WININET!HttpSendRequestExA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpsendrequestexa
 // Minimum OS: windows5.0.
@@ -1422,32 +1523,10 @@ func HttpSendRequestExA(hRequest unsafe.Pointer, lpBuffersIn *INTERNET_BUFFERSA,
 	return nil
 }
 
-// HttpSendRequestExW calls WININET!HttpSendRequestExW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpsendrequestexw
-// Minimum OS: windows5.0.
-func HttpSendRequestExW(hRequest unsafe.Pointer, lpBuffersIn *INTERNET_BUFFERSW, lpBuffersOut *INTERNET_BUFFERSW, dwFlags uint32, dwContext uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procHttpSendRequestExW.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(lpBuffersIn)), uintptr(unsafe.Pointer(lpBuffersOut)), uintptr(dwFlags), uintptr(dwContext))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// HttpSendRequestW calls WININET!HttpSendRequestW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpsendrequestw
-// Minimum OS: windows5.0.
-func HttpSendRequestW(hRequest unsafe.Pointer, lpszHeaders foundation.PWSTR, dwHeadersLength uint32, lpOptional unsafe.Pointer, dwOptionalLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procHttpSendRequestW.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(lpszHeaders)), uintptr(dwHeadersLength), uintptr(unsafe.Pointer(lpOptional)), uintptr(dwOptionalLength))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // HttpWebSocketClose calls WININET!HttpWebSocketClose.
-func HttpWebSocketClose(hWebSocket unsafe.Pointer, usStatus uint16, pvReason unsafe.Pointer, dwReasonLength uint32) foundation.BOOL {
+func HttpWebSocketClose(hWebSocket unsafe.Pointer, usStatus uint16, pvReason unsafe.Pointer, dwReasonLength uint32) bool {
 	r1, _, _ := syscall.SyscallN(procHttpWebSocketClose.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(usStatus), uintptr(unsafe.Pointer(pvReason)), uintptr(dwReasonLength))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // HttpWebSocketCompleteUpgrade calls WININET!HttpWebSocketCompleteUpgrade.
@@ -1457,45 +1536,46 @@ func HttpWebSocketCompleteUpgrade(hRequest unsafe.Pointer, dwContext uintptr) un
 }
 
 // HttpWebSocketQueryCloseStatus calls WININET!HttpWebSocketQueryCloseStatus.
-func HttpWebSocketQueryCloseStatus(hWebSocket unsafe.Pointer, pusStatus *uint16, pvReason unsafe.Pointer, dwReasonLength uint32, pdwReasonLengthConsumed *uint32) foundation.BOOL {
+func HttpWebSocketQueryCloseStatus(hWebSocket unsafe.Pointer, pusStatus *uint16, pvReason unsafe.Pointer, dwReasonLength uint32, pdwReasonLengthConsumed *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procHttpWebSocketQueryCloseStatus.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(unsafe.Pointer(pusStatus)), uintptr(unsafe.Pointer(pvReason)), uintptr(dwReasonLength), uintptr(unsafe.Pointer(pdwReasonLengthConsumed)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // HttpWebSocketReceive calls WININET!HttpWebSocketReceive.
-func HttpWebSocketReceive(hWebSocket unsafe.Pointer, pvBuffer unsafe.Pointer, dwBufferLength uint32, pdwBytesRead *uint32, pBufferType *HTTP_WEB_SOCKET_BUFFER_TYPE) foundation.BOOL {
+func HttpWebSocketReceive(hWebSocket unsafe.Pointer, pvBuffer unsafe.Pointer, dwBufferLength uint32, pdwBytesRead *uint32, pBufferType *HTTP_WEB_SOCKET_BUFFER_TYPE) bool {
 	r1, _, _ := syscall.SyscallN(procHttpWebSocketReceive.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(unsafe.Pointer(pvBuffer)), uintptr(dwBufferLength), uintptr(unsafe.Pointer(pdwBytesRead)), uintptr(unsafe.Pointer(pBufferType)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // HttpWebSocketSend calls WININET!HttpWebSocketSend.
-func HttpWebSocketSend(hWebSocket unsafe.Pointer, BufferType HTTP_WEB_SOCKET_BUFFER_TYPE, pvBuffer unsafe.Pointer, dwBufferLength uint32) foundation.BOOL {
+func HttpWebSocketSend(hWebSocket unsafe.Pointer, BufferType HTTP_WEB_SOCKET_BUFFER_TYPE, pvBuffer unsafe.Pointer, dwBufferLength uint32) bool {
 	r1, _, _ := syscall.SyscallN(procHttpWebSocketSend.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(BufferType), uintptr(unsafe.Pointer(pvBuffer)), uintptr(dwBufferLength))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // HttpWebSocketShutdown calls WININET!HttpWebSocketShutdown.
-func HttpWebSocketShutdown(hWebSocket unsafe.Pointer, usStatus uint16, pvReason unsafe.Pointer, dwReasonLength uint32) foundation.BOOL {
+func HttpWebSocketShutdown(hWebSocket unsafe.Pointer, usStatus uint16, pvReason unsafe.Pointer, dwReasonLength uint32) bool {
 	r1, _, _ := syscall.SyscallN(procHttpWebSocketShutdown.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(usStatus), uintptr(unsafe.Pointer(pvReason)), uintptr(dwReasonLength))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// ImportCookieFile calls WININET!ImportCookieFileW.
+func ImportCookieFile(szFilename string) bool {
+	_szFilename := win32.UTF16Ptr(szFilename)
+	r1, _, _ := syscall.SyscallN(procImportCookieFile.Addr(), uintptr(unsafe.Pointer(_szFilename)))
+	return r1 != 0
 }
 
 // ImportCookieFileA calls WININET!ImportCookieFileA.
-func ImportCookieFileA(szFilename foundation.PSTR) foundation.BOOL {
+func ImportCookieFileA(szFilename foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procImportCookieFileA.Addr(), uintptr(unsafe.Pointer(szFilename)))
-	return foundation.BOOL(r1)
-}
-
-// ImportCookieFileW calls WININET!ImportCookieFileW.
-func ImportCookieFileW(szFilename foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procImportCookieFileW.Addr(), uintptr(unsafe.Pointer(szFilename)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IncrementUrlCacheHeaderData calls WININET!IncrementUrlCacheHeaderData.
-func IncrementUrlCacheHeaderData(nIdx uint32, lpdwData *uint32) foundation.BOOL {
+func IncrementUrlCacheHeaderData(nIdx uint32, lpdwData *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procIncrementUrlCacheHeaderData.Addr(), uintptr(nIdx), uintptr(unsafe.Pointer(lpdwData)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InternalInternetGetCookie calls WININET!InternalInternetGetCookie.
@@ -1504,16 +1584,16 @@ func InternalInternetGetCookie(lpszUrl foundation.PSTR, lpszCookieData foundatio
 	return uint32(r1)
 }
 
-// InternetAlgIdToStringA calls WININET!InternetAlgIdToStringA.
-func InternetAlgIdToStringA(ai securitycryptography.ALG_ID, lpstr foundation.PSTR, lpdwstrLength *uint32, dwReserved uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetAlgIdToStringA.Addr(), uintptr(ai), uintptr(unsafe.Pointer(lpstr)), uintptr(unsafe.Pointer(lpdwstrLength)), uintptr(dwReserved))
-	return foundation.BOOL(r1)
+// InternetAlgIdToString calls WININET!InternetAlgIdToStringW.
+func InternetAlgIdToString(ai securitycryptography.ALG_ID, lpstr foundation.PWSTR, lpdwstrLength *uint32) bool {
+	r1, _, _ := syscall.SyscallN(procInternetAlgIdToString.Addr(), uintptr(ai), uintptr(unsafe.Pointer(lpstr)), uintptr(unsafe.Pointer(lpdwstrLength)), 0)
+	return r1 != 0
 }
 
-// InternetAlgIdToStringW calls WININET!InternetAlgIdToStringW.
-func InternetAlgIdToStringW(ai securitycryptography.ALG_ID, lpstr foundation.PWSTR, lpdwstrLength *uint32, dwReserved uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetAlgIdToStringW.Addr(), uintptr(ai), uintptr(unsafe.Pointer(lpstr)), uintptr(unsafe.Pointer(lpdwstrLength)), uintptr(dwReserved))
-	return foundation.BOOL(r1)
+// InternetAlgIdToStringA calls WININET!InternetAlgIdToStringA.
+func InternetAlgIdToStringA(ai securitycryptography.ALG_ID, lpstr foundation.PSTR, lpdwstrLength *uint32) bool {
+	r1, _, _ := syscall.SyscallN(procInternetAlgIdToStringA.Addr(), uintptr(ai), uintptr(unsafe.Pointer(lpstr)), uintptr(unsafe.Pointer(lpdwstrLength)), 0)
+	return r1 != 0
 }
 
 // InternetAttemptConnect calls WININET!InternetAttemptConnect.
@@ -1538,8 +1618,20 @@ func InternetAutodial(dwFlags INTERNET_AUTODIAL, hwndParent foundation.HWND) err
 // InternetAutodialHangup calls WININET!InternetAutodialHangup.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetautodialhangup
 // Minimum OS: windows5.0.
-func InternetAutodialHangup(dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetAutodialHangup.Addr(), uintptr(dwReserved))
+func InternetAutodialHangup() error {
+	r1, _, e1 := syscall.SyscallN(procInternetAutodialHangup.Addr(), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// InternetCanonicalizeUrl calls WININET!InternetCanonicalizeUrlW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetcanonicalizeurlw
+// Minimum OS: windows5.0.
+func InternetCanonicalizeUrl(lpszUrl string, lpszBuffer foundation.PWSTR, lpdwBufferLength *uint32, dwFlags uint32) error {
+	_lpszUrl := win32.UTF16Ptr(lpszUrl)
+	r1, _, e1 := syscall.SyscallN(procInternetCanonicalizeUrl.Addr(), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(unsafe.Pointer(lpszBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1557,11 +1649,12 @@ func InternetCanonicalizeUrlA(lpszUrl foundation.PSTR, lpszBuffer foundation.PST
 	return nil
 }
 
-// InternetCanonicalizeUrlW calls WININET!InternetCanonicalizeUrlW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetcanonicalizeurlw
+// InternetCheckConnection calls WININET!InternetCheckConnectionW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetcheckconnectionw
 // Minimum OS: windows5.0.
-func InternetCanonicalizeUrlW(lpszUrl foundation.PWSTR, lpszBuffer foundation.PWSTR, lpdwBufferLength *uint32, dwFlags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetCanonicalizeUrlW.Addr(), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpszBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(dwFlags))
+func InternetCheckConnection(lpszUrl string, dwFlags uint32, dwReserved uint32) error {
+	_lpszUrl := win32.UTF16Ptr(lpszUrl)
+	r1, _, e1 := syscall.SyscallN(procInternetCheckConnection.Addr(), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(dwFlags), uintptr(dwReserved))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1579,23 +1672,12 @@ func InternetCheckConnectionA(lpszUrl foundation.PSTR, dwFlags uint32, dwReserve
 	return nil
 }
 
-// InternetCheckConnectionW calls WININET!InternetCheckConnectionW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetcheckconnectionw
-// Minimum OS: windows5.0.
-func InternetCheckConnectionW(lpszUrl foundation.PWSTR, dwFlags uint32, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetCheckConnectionW.Addr(), uintptr(unsafe.Pointer(lpszUrl)), uintptr(dwFlags), uintptr(dwReserved))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // InternetClearAllPerSiteCookieDecisions calls WININET!InternetClearAllPerSiteCookieDecisions.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetclearallpersitecookiedecisions
 // Minimum OS: windows5.0.
-func InternetClearAllPerSiteCookieDecisions() foundation.BOOL {
+func InternetClearAllPerSiteCookieDecisions() bool {
 	r1, _, _ := syscall.SyscallN(procInternetClearAllPerSiteCookieDecisions.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InternetCloseHandle calls WININET!InternetCloseHandle.
@@ -1603,6 +1685,19 @@ func InternetClearAllPerSiteCookieDecisions() foundation.BOOL {
 // Minimum OS: windows5.0.
 func InternetCloseHandle(hInternet unsafe.Pointer) error {
 	r1, _, e1 := syscall.SyscallN(procInternetCloseHandle.Addr(), uintptr(unsafe.Pointer(hInternet)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// InternetCombineUrl calls WININET!InternetCombineUrlW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetcombineurlw
+// Minimum OS: windows5.0.
+func InternetCombineUrl(lpszBaseUrl string, lpszRelativeUrl string, lpszBuffer foundation.PWSTR, lpdwBufferLength *uint32, dwFlags uint32) error {
+	_lpszBaseUrl := win32.UTF16Ptr(lpszBaseUrl)
+	_lpszRelativeUrl := win32.UTF16Ptr(lpszRelativeUrl)
+	r1, _, e1 := syscall.SyscallN(procInternetCombineUrl.Addr(), uintptr(unsafe.Pointer(_lpszBaseUrl)), uintptr(unsafe.Pointer(_lpszRelativeUrl)), uintptr(unsafe.Pointer(lpszBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1620,39 +1715,48 @@ func InternetCombineUrlA(lpszBaseUrl foundation.PSTR, lpszRelativeUrl foundation
 	return nil
 }
 
-// InternetCombineUrlW calls WININET!InternetCombineUrlW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetcombineurlw
-// Minimum OS: windows5.0.
-func InternetCombineUrlW(lpszBaseUrl foundation.PWSTR, lpszRelativeUrl foundation.PWSTR, lpszBuffer foundation.PWSTR, lpdwBufferLength *uint32, dwFlags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetCombineUrlW.Addr(), uintptr(unsafe.Pointer(lpszBaseUrl)), uintptr(unsafe.Pointer(lpszRelativeUrl)), uintptr(unsafe.Pointer(lpszBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)), uintptr(dwFlags))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // InternetConfirmZoneCrossing calls WININET!InternetConfirmZoneCrossing.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetconfirmzonecrossing
 // Minimum OS: windows5.0.
-func InternetConfirmZoneCrossing(hWnd foundation.HWND, szUrlPrev foundation.PSTR, szUrlNew foundation.PSTR, bPost foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procInternetConfirmZoneCrossing.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(szUrlPrev)), uintptr(unsafe.Pointer(szUrlNew)), uintptr(bPost))
+func InternetConfirmZoneCrossing(hWnd foundation.HWND, szUrlPrev foundation.PSTR, szUrlNew foundation.PSTR, bPost bool) uint32 {
+	_bPost := win32.Bool32(bPost)
+	r1, _, _ := syscall.SyscallN(procInternetConfirmZoneCrossing.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(szUrlPrev)), uintptr(unsafe.Pointer(szUrlNew)), uintptr(_bPost))
 	return uint32(r1)
 }
 
 // InternetConfirmZoneCrossingA calls WININET!InternetConfirmZoneCrossingA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetconfirmzonecrossinga
 // Minimum OS: windows5.0.
-func InternetConfirmZoneCrossingA(hWnd foundation.HWND, szUrlPrev foundation.PSTR, szUrlNew foundation.PSTR, bPost foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procInternetConfirmZoneCrossingA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(szUrlPrev)), uintptr(unsafe.Pointer(szUrlNew)), uintptr(bPost))
+func InternetConfirmZoneCrossingA(hWnd foundation.HWND, szUrlPrev foundation.PSTR, szUrlNew foundation.PSTR, bPost bool) uint32 {
+	_bPost := win32.Bool32(bPost)
+	r1, _, _ := syscall.SyscallN(procInternetConfirmZoneCrossingA.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(szUrlPrev)), uintptr(unsafe.Pointer(szUrlNew)), uintptr(_bPost))
 	return uint32(r1)
 }
 
 // InternetConfirmZoneCrossingW calls WININET!InternetConfirmZoneCrossingW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetconfirmzonecrossingw
 // Minimum OS: windows5.0.
-func InternetConfirmZoneCrossingW(hWnd foundation.HWND, szUrlPrev foundation.PWSTR, szUrlNew foundation.PWSTR, bPost foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procInternetConfirmZoneCrossingW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(szUrlPrev)), uintptr(unsafe.Pointer(szUrlNew)), uintptr(bPost))
+func InternetConfirmZoneCrossingW(hWnd foundation.HWND, szUrlPrev string, szUrlNew string, bPost bool) uint32 {
+	_szUrlPrev := win32.UTF16Ptr(szUrlPrev)
+	_szUrlNew := win32.UTF16Ptr(szUrlNew)
+	_bPost := win32.Bool32(bPost)
+	r1, _, _ := syscall.SyscallN(procInternetConfirmZoneCrossingW.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(_szUrlPrev)), uintptr(unsafe.Pointer(_szUrlNew)), uintptr(_bPost))
 	return uint32(r1)
+}
+
+// InternetConnect calls WININET!InternetConnectW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetconnectw
+// Minimum OS: windows5.0.
+func InternetConnect(hInternet unsafe.Pointer, lpszServerName string, nServerPort uint16, lpszUserName string, lpszPassword string, dwService uint32, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
+	_lpszServerName := win32.UTF16Ptr(lpszServerName)
+	_lpszUserName := win32.UTF16Ptr(lpszUserName)
+	_lpszPassword := win32.UTF16Ptr(lpszPassword)
+	r1, _, e1 := syscall.SyscallN(procInternetConnect.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(unsafe.Pointer(_lpszServerName)), uintptr(nServerPort), uintptr(unsafe.Pointer(_lpszUserName)), uintptr(unsafe.Pointer(_lpszPassword)), uintptr(dwService), uintptr(dwFlags), uintptr(dwContext))
+	ret := unsafe.Pointer(r1)
+	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // InternetConnectA calls WININET!InternetConnectA.
@@ -1667,22 +1771,24 @@ func InternetConnectA(hInternet unsafe.Pointer, lpszServerName foundation.PSTR, 
 	return ret, nil
 }
 
-// InternetConnectW calls WININET!InternetConnectW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetconnectw
-// Minimum OS: windows5.0.
-func InternetConnectW(hInternet unsafe.Pointer, lpszServerName foundation.PWSTR, nServerPort uint16, lpszUserName foundation.PWSTR, lpszPassword foundation.PWSTR, dwService uint32, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procInternetConnectW.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(unsafe.Pointer(lpszServerName)), uintptr(nServerPort), uintptr(unsafe.Pointer(lpszUserName)), uintptr(unsafe.Pointer(lpszPassword)), uintptr(dwService), uintptr(dwFlags), uintptr(dwContext))
-	ret := unsafe.Pointer(r1)
-	if ret == nil {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
+// InternetConvertUrlFromWireToWideChar calls WININET!InternetConvertUrlFromWireToWideChar.
+func InternetConvertUrlFromWireToWideChar(pcszUrl foundation.PSTR, cchUrl uint32, pcwszBaseUrl string, dwCodePageHost uint32, dwCodePagePath uint32, fEncodePathExtra bool, dwCodePageExtra uint32, ppwszConvertedUrl *foundation.PWSTR) uint32 {
+	_pcwszBaseUrl := win32.UTF16Ptr(pcwszBaseUrl)
+	_fEncodePathExtra := win32.Bool32(fEncodePathExtra)
+	r1, _, _ := syscall.SyscallN(procInternetConvertUrlFromWireToWideChar.Addr(), uintptr(unsafe.Pointer(pcszUrl)), uintptr(cchUrl), uintptr(unsafe.Pointer(_pcwszBaseUrl)), uintptr(dwCodePageHost), uintptr(dwCodePagePath), uintptr(_fEncodePathExtra), uintptr(dwCodePageExtra), uintptr(unsafe.Pointer(ppwszConvertedUrl)))
+	return uint32(r1)
 }
 
-// InternetConvertUrlFromWireToWideChar calls WININET!InternetConvertUrlFromWireToWideChar.
-func InternetConvertUrlFromWireToWideChar(pcszUrl foundation.PSTR, cchUrl uint32, pcwszBaseUrl foundation.PWSTR, dwCodePageHost uint32, dwCodePagePath uint32, fEncodePathExtra foundation.BOOL, dwCodePageExtra uint32, ppwszConvertedUrl *foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procInternetConvertUrlFromWireToWideChar.Addr(), uintptr(unsafe.Pointer(pcszUrl)), uintptr(cchUrl), uintptr(unsafe.Pointer(pcwszBaseUrl)), uintptr(dwCodePageHost), uintptr(dwCodePagePath), uintptr(fEncodePathExtra), uintptr(dwCodePageExtra), uintptr(unsafe.Pointer(ppwszConvertedUrl)))
-	return uint32(r1)
+// InternetCrackUrl calls WININET!InternetCrackUrlW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetcrackurlw
+// Minimum OS: windows5.0.
+func InternetCrackUrl(lpszUrl string, dwUrlLength uint32, dwFlags networkingwinhttp.WIN_HTTP_CREATE_URL_FLAGS, lpUrlComponents *URL_COMPONENTSW) error {
+	_lpszUrl := win32.UTF16Ptr(lpszUrl)
+	r1, _, e1 := syscall.SyscallN(procInternetCrackUrl.Addr(), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(dwUrlLength), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUrlComponents)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // InternetCrackUrlA calls WININET!InternetCrackUrlA.
@@ -1696,11 +1802,11 @@ func InternetCrackUrlA(lpszUrl foundation.PSTR, dwUrlLength uint32, dwFlags netw
 	return nil
 }
 
-// InternetCrackUrlW calls WININET!InternetCrackUrlW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetcrackurlw
+// InternetCreateUrl calls WININET!InternetCreateUrlW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetcreateurlw
 // Minimum OS: windows5.0.
-func InternetCrackUrlW(lpszUrl foundation.PWSTR, dwUrlLength uint32, dwFlags networkingwinhttp.WIN_HTTP_CREATE_URL_FLAGS, lpUrlComponents *URL_COMPONENTSW) error {
-	r1, _, e1 := syscall.SyscallN(procInternetCrackUrlW.Addr(), uintptr(unsafe.Pointer(lpszUrl)), uintptr(dwUrlLength), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUrlComponents)))
+func InternetCreateUrl(lpUrlComponents *URL_COMPONENTSW, dwFlags uint32, lpszUrl foundation.PWSTR, lpdwUrlLength *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procInternetCreateUrl.Addr(), uintptr(unsafe.Pointer(lpUrlComponents)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpdwUrlLength)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1718,17 +1824,6 @@ func InternetCreateUrlA(lpUrlComponents *URL_COMPONENTSA, dwFlags uint32, lpszUr
 	return nil
 }
 
-// InternetCreateUrlW calls WININET!InternetCreateUrlW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetcreateurlw
-// Minimum OS: windows5.0.
-func InternetCreateUrlW(lpUrlComponents *URL_COMPONENTSW, dwFlags uint32, lpszUrl foundation.PWSTR, lpdwUrlLength *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetCreateUrlW.Addr(), uintptr(unsafe.Pointer(lpUrlComponents)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpdwUrlLength)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // InternetDial calls WININET!InternetDial.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetdial
 // Minimum OS: windows5.0.
@@ -1740,33 +1835,34 @@ func InternetDial(hwndParent foundation.HWND, lpszConnectoid foundation.PSTR, dw
 // InternetDialA calls WININET!InternetDialA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetdiala
 // Minimum OS: windows5.0.
-func InternetDialA(hwndParent foundation.HWND, lpszConnectoid foundation.PSTR, dwFlags uint32, lpdwConnection *uintptr, dwReserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procInternetDialA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(lpszConnectoid)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpdwConnection)), uintptr(dwReserved))
+func InternetDialA(hwndParent foundation.HWND, lpszConnectoid foundation.PSTR, dwFlags uint32, lpdwConnection *uintptr) uint32 {
+	r1, _, _ := syscall.SyscallN(procInternetDialA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(lpszConnectoid)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpdwConnection)), 0)
 	return uint32(r1)
 }
 
 // InternetDialW calls WININET!InternetDialW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetdialw
 // Minimum OS: windows5.0.
-func InternetDialW(hwndParent foundation.HWND, lpszConnectoid foundation.PWSTR, dwFlags uint32, lpdwConnection *uintptr, dwReserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procInternetDialW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(lpszConnectoid)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpdwConnection)), uintptr(dwReserved))
+func InternetDialW(hwndParent foundation.HWND, lpszConnectoid string, dwFlags uint32, lpdwConnection *uintptr) uint32 {
+	_lpszConnectoid := win32.UTF16Ptr(lpszConnectoid)
+	r1, _, _ := syscall.SyscallN(procInternetDialW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_lpszConnectoid)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpdwConnection)), 0)
 	return uint32(r1)
+}
+
+// InternetEnumPerSiteCookieDecision calls WININET!InternetEnumPerSiteCookieDecisionW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetenumpersitecookiedecisionw
+// Minimum OS: windows5.0.
+func InternetEnumPerSiteCookieDecision(pszSiteName foundation.PWSTR, pcSiteNameSize *uint32, pdwDecision *uint32, dwIndex uint32) bool {
+	r1, _, _ := syscall.SyscallN(procInternetEnumPerSiteCookieDecision.Addr(), uintptr(unsafe.Pointer(pszSiteName)), uintptr(unsafe.Pointer(pcSiteNameSize)), uintptr(unsafe.Pointer(pdwDecision)), uintptr(dwIndex))
+	return r1 != 0
 }
 
 // InternetEnumPerSiteCookieDecisionA calls WININET!InternetEnumPerSiteCookieDecisionA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetenumpersitecookiedecisiona
 // Minimum OS: windows5.0.
-func InternetEnumPerSiteCookieDecisionA(pszSiteName foundation.PSTR, pcSiteNameSize *uint32, pdwDecision *uint32, dwIndex uint32) foundation.BOOL {
+func InternetEnumPerSiteCookieDecisionA(pszSiteName foundation.PSTR, pcSiteNameSize *uint32, pdwDecision *uint32, dwIndex uint32) bool {
 	r1, _, _ := syscall.SyscallN(procInternetEnumPerSiteCookieDecisionA.Addr(), uintptr(unsafe.Pointer(pszSiteName)), uintptr(unsafe.Pointer(pcSiteNameSize)), uintptr(unsafe.Pointer(pdwDecision)), uintptr(dwIndex))
-	return foundation.BOOL(r1)
-}
-
-// InternetEnumPerSiteCookieDecisionW calls WININET!InternetEnumPerSiteCookieDecisionW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetenumpersitecookiedecisionw
-// Minimum OS: windows5.0.
-func InternetEnumPerSiteCookieDecisionW(pszSiteName foundation.PWSTR, pcSiteNameSize *uint32, pdwDecision *uint32, dwIndex uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetEnumPerSiteCookieDecisionW.Addr(), uintptr(unsafe.Pointer(pszSiteName)), uintptr(unsafe.Pointer(pcSiteNameSize)), uintptr(unsafe.Pointer(pdwDecision)), uintptr(dwIndex))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InternetErrorDlg calls WININET!InternetErrorDlg.
@@ -1775,6 +1871,17 @@ func InternetEnumPerSiteCookieDecisionW(pszSiteName foundation.PWSTR, pcSiteName
 func InternetErrorDlg(hWnd foundation.HWND, hRequest unsafe.Pointer, dwError uint32, dwFlags uint32, lppvData *unsafe.Pointer) uint32 {
 	r1, _, _ := syscall.SyscallN(procInternetErrorDlg.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(hRequest)), uintptr(dwError), uintptr(dwFlags), uintptr(unsafe.Pointer(lppvData)))
 	return uint32(r1)
+}
+
+// InternetFindNextFile calls WININET!InternetFindNextFileW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetfindnextfilew
+// Minimum OS: windows5.0.
+func InternetFindNextFile(hFind unsafe.Pointer, lpvFindData unsafe.Pointer) error {
+	r1, _, e1 := syscall.SyscallN(procInternetFindNextFile.Addr(), uintptr(unsafe.Pointer(hFind)), uintptr(unsafe.Pointer(lpvFindData)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // InternetFindNextFileA calls WININET!InternetFindNextFileA.
@@ -1788,21 +1895,10 @@ func InternetFindNextFileA(hFind unsafe.Pointer, lpvFindData unsafe.Pointer) err
 	return nil
 }
 
-// InternetFindNextFileW calls WININET!InternetFindNextFileW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetfindnextfilew
-// Minimum OS: windows5.0.
-func InternetFindNextFileW(hFind unsafe.Pointer, lpvFindData unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procInternetFindNextFileW.Addr(), uintptr(unsafe.Pointer(hFind)), uintptr(unsafe.Pointer(lpvFindData)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // InternetFortezzaCommand calls WININET!InternetFortezzaCommand.
-func InternetFortezzaCommand(dwCommand uint32, hwnd foundation.HWND, dwReserved uintptr) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetFortezzaCommand.Addr(), uintptr(dwCommand), uintptr(hwnd), uintptr(dwReserved))
-	return foundation.BOOL(r1)
+func InternetFortezzaCommand(dwCommand uint32, hwnd foundation.HWND) bool {
+	r1, _, _ := syscall.SyscallN(procInternetFortezzaCommand.Addr(), uintptr(dwCommand), uintptr(hwnd), 0)
+	return r1 != 0
 }
 
 // InternetFreeCookies calls WININET!InternetFreeCookies.
@@ -1819,8 +1915,8 @@ func InternetFreeProxyInfoList(pProxyInfoList *WININET_PROXY_INFO_LIST) {
 // InternetGetConnectedState calls WININET!InternetGetConnectedState.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetconnectedstate
 // Minimum OS: windows5.0.
-func InternetGetConnectedState(lpdwFlags *INTERNET_CONNECTION, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetGetConnectedState.Addr(), uintptr(unsafe.Pointer(lpdwFlags)), uintptr(dwReserved))
+func InternetGetConnectedState(lpdwFlags *INTERNET_CONNECTION) error {
+	r1, _, e1 := syscall.SyscallN(procInternetGetConnectedState.Addr(), uintptr(unsafe.Pointer(lpdwFlags)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1841,8 +1937,8 @@ func InternetGetConnectedStateEx(lpdwFlags *INTERNET_CONNECTION, lpszConnectionN
 // InternetGetConnectedStateExA calls WININET!InternetGetConnectedStateExA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetconnectedstateexa
 // Minimum OS: windows5.0.
-func InternetGetConnectedStateExA(lpdwFlags *INTERNET_CONNECTION, lpszConnectionName foundation.PSTR, cchNameLen uint32, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetGetConnectedStateExA.Addr(), uintptr(unsafe.Pointer(lpdwFlags)), uintptr(unsafe.Pointer(lpszConnectionName)), uintptr(cchNameLen), uintptr(dwReserved))
+func InternetGetConnectedStateExA(lpdwFlags *INTERNET_CONNECTION, lpszConnectionName foundation.PSTR, cchNameLen uint32) error {
+	r1, _, e1 := syscall.SyscallN(procInternetGetConnectedStateExA.Addr(), uintptr(unsafe.Pointer(lpdwFlags)), uintptr(unsafe.Pointer(lpszConnectionName)), uintptr(cchNameLen), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1852,8 +1948,21 @@ func InternetGetConnectedStateExA(lpdwFlags *INTERNET_CONNECTION, lpszConnection
 // InternetGetConnectedStateExW calls WININET!InternetGetConnectedStateExW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetconnectedstateexw
 // Minimum OS: windows5.0.
-func InternetGetConnectedStateExW(lpdwFlags *INTERNET_CONNECTION, lpszConnectionName foundation.PWSTR, cchNameLen uint32, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetGetConnectedStateExW.Addr(), uintptr(unsafe.Pointer(lpdwFlags)), uintptr(unsafe.Pointer(lpszConnectionName)), uintptr(cchNameLen), uintptr(dwReserved))
+func InternetGetConnectedStateExW(lpdwFlags *INTERNET_CONNECTION, lpszConnectionName foundation.PWSTR, cchNameLen uint32) error {
+	r1, _, e1 := syscall.SyscallN(procInternetGetConnectedStateExW.Addr(), uintptr(unsafe.Pointer(lpdwFlags)), uintptr(unsafe.Pointer(lpszConnectionName)), uintptr(cchNameLen), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// InternetGetCookie calls WININET!InternetGetCookieW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetcookiew
+// Minimum OS: windows5.0.
+func InternetGetCookie(lpszUrl string, lpszCookieName string, lpszCookieData foundation.PWSTR, lpdwSize *uint32) error {
+	_lpszUrl := win32.UTF16Ptr(lpszUrl)
+	_lpszCookieName := win32.UTF16Ptr(lpszCookieName)
+	r1, _, e1 := syscall.SyscallN(procInternetGetCookie.Addr(), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(unsafe.Pointer(_lpszCookieName)), uintptr(unsafe.Pointer(lpszCookieData)), uintptr(unsafe.Pointer(lpdwSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1871,40 +1980,45 @@ func InternetGetCookieA(lpszUrl foundation.PSTR, lpszCookieName foundation.PSTR,
 	return nil
 }
 
+// InternetGetCookieEx calls WININET!InternetGetCookieExW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetcookieexw
+// Minimum OS: windows5.1.2600.
+func InternetGetCookieEx(lpszUrl string, lpszCookieName string, lpszCookieData string, lpdwSize *uint32, dwFlags INTERNET_COOKIE_FLAGS) error {
+	_lpszUrl := win32.UTF16Ptr(lpszUrl)
+	_lpszCookieName := win32.UTF16Ptr(lpszCookieName)
+	_lpszCookieData := win32.UTF16Ptr(lpszCookieData)
+	r1, _, e1 := syscall.SyscallN(procInternetGetCookieEx.Addr(), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(unsafe.Pointer(_lpszCookieName)), uintptr(unsafe.Pointer(_lpszCookieData)), uintptr(unsafe.Pointer(lpdwSize)), uintptr(dwFlags), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // InternetGetCookieEx2 calls WININET!InternetGetCookieEx2.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetcookieex2
-func InternetGetCookieEx2(pcwszUrl foundation.PWSTR, pcwszCookieName foundation.PWSTR, dwFlags uint32, ppCookies **INTERNET_COOKIE2, pdwCookieCount *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procInternetGetCookieEx2.Addr(), uintptr(unsafe.Pointer(pcwszUrl)), uintptr(unsafe.Pointer(pcwszCookieName)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCookies)), uintptr(unsafe.Pointer(pdwCookieCount)))
+func InternetGetCookieEx2(pcwszUrl string, pcwszCookieName string, dwFlags uint32, ppCookies **INTERNET_COOKIE2, pdwCookieCount *uint32) uint32 {
+	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
+	_pcwszCookieName := win32.UTF16Ptr(pcwszCookieName)
+	r1, _, _ := syscall.SyscallN(procInternetGetCookieEx2.Addr(), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(_pcwszCookieName)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppCookies)), uintptr(unsafe.Pointer(pdwCookieCount)))
 	return uint32(r1)
 }
 
 // InternetGetCookieExA calls WININET!InternetGetCookieExA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetcookieexa
 // Minimum OS: windows5.1.2600.
-func InternetGetCookieExA(lpszUrl foundation.PSTR, lpszCookieName foundation.PSTR, lpszCookieData foundation.PSTR, lpdwSize *uint32, dwFlags INTERNET_COOKIE_FLAGS, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procInternetGetCookieExA.Addr(), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpszCookieName)), uintptr(unsafe.Pointer(lpszCookieData)), uintptr(unsafe.Pointer(lpdwSize)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpReserved)))
+func InternetGetCookieExA(lpszUrl foundation.PSTR, lpszCookieName foundation.PSTR, lpszCookieData foundation.PSTR, lpdwSize *uint32, dwFlags INTERNET_COOKIE_FLAGS) error {
+	r1, _, e1 := syscall.SyscallN(procInternetGetCookieExA.Addr(), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpszCookieName)), uintptr(unsafe.Pointer(lpszCookieData)), uintptr(unsafe.Pointer(lpdwSize)), uintptr(dwFlags), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// InternetGetCookieExW calls WININET!InternetGetCookieExW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetcookieexw
-// Minimum OS: windows5.1.2600.
-func InternetGetCookieExW(lpszUrl foundation.PWSTR, lpszCookieName foundation.PWSTR, lpszCookieData foundation.PWSTR, lpdwSize *uint32, dwFlags INTERNET_COOKIE_FLAGS, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procInternetGetCookieExW.Addr(), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpszCookieName)), uintptr(unsafe.Pointer(lpszCookieData)), uintptr(unsafe.Pointer(lpdwSize)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpReserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// InternetGetCookieW calls WININET!InternetGetCookieW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetcookiew
+// InternetGetLastResponseInfo calls WININET!InternetGetLastResponseInfoW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetlastresponseinfow
 // Minimum OS: windows5.0.
-func InternetGetCookieW(lpszUrl foundation.PWSTR, lpszCookieName foundation.PWSTR, lpszCookieData foundation.PWSTR, lpdwSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetGetCookieW.Addr(), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpszCookieName)), uintptr(unsafe.Pointer(lpszCookieData)), uintptr(unsafe.Pointer(lpdwSize)))
+func InternetGetLastResponseInfo(lpdwError *uint32, lpszBuffer foundation.PWSTR, lpdwBufferLength *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procInternetGetLastResponseInfo.Addr(), uintptr(unsafe.Pointer(lpdwError)), uintptr(unsafe.Pointer(lpszBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1922,55 +2036,47 @@ func InternetGetLastResponseInfoA(lpdwError *uint32, lpszBuffer foundation.PSTR,
 	return nil
 }
 
-// InternetGetLastResponseInfoW calls WININET!InternetGetLastResponseInfoW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetlastresponseinfow
+// InternetGetPerSiteCookieDecision calls WININET!InternetGetPerSiteCookieDecisionW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetpersitecookiedecisionw
 // Minimum OS: windows5.0.
-func InternetGetLastResponseInfoW(lpdwError *uint32, lpszBuffer foundation.PWSTR, lpdwBufferLength *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetGetLastResponseInfoW.Addr(), uintptr(unsafe.Pointer(lpdwError)), uintptr(unsafe.Pointer(lpszBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+func InternetGetPerSiteCookieDecision(pchHostName string, pResult *uint32) bool {
+	_pchHostName := win32.UTF16Ptr(pchHostName)
+	r1, _, _ := syscall.SyscallN(procInternetGetPerSiteCookieDecision.Addr(), uintptr(unsafe.Pointer(_pchHostName)), uintptr(unsafe.Pointer(pResult)))
+	return r1 != 0
 }
 
 // InternetGetPerSiteCookieDecisionA calls WININET!InternetGetPerSiteCookieDecisionA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetpersitecookiedecisiona
 // Minimum OS: windows5.0.
-func InternetGetPerSiteCookieDecisionA(pchHostName foundation.PSTR, pResult *uint32) foundation.BOOL {
+func InternetGetPerSiteCookieDecisionA(pchHostName foundation.PSTR, pResult *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procInternetGetPerSiteCookieDecisionA.Addr(), uintptr(unsafe.Pointer(pchHostName)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.BOOL(r1)
-}
-
-// InternetGetPerSiteCookieDecisionW calls WININET!InternetGetPerSiteCookieDecisionW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgetpersitecookiedecisionw
-// Minimum OS: windows5.0.
-func InternetGetPerSiteCookieDecisionW(pchHostName foundation.PWSTR, pResult *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetGetPerSiteCookieDecisionW.Addr(), uintptr(unsafe.Pointer(pchHostName)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InternetGetProxyForUrl calls WININET!InternetGetProxyForUrl.
-func InternetGetProxyForUrl(hInternet unsafe.Pointer, pcwszUrl foundation.PWSTR, pProxyInfoList *WININET_PROXY_INFO_LIST) uint32 {
-	r1, _, _ := syscall.SyscallN(procInternetGetProxyForUrl.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(unsafe.Pointer(pcwszUrl)), uintptr(unsafe.Pointer(pProxyInfoList)))
+func InternetGetProxyForUrl(hInternet unsafe.Pointer, pcwszUrl string, pProxyInfoList *WININET_PROXY_INFO_LIST) uint32 {
+	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
+	r1, _, _ := syscall.SyscallN(procInternetGetProxyForUrl.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(pProxyInfoList)))
 	return uint32(r1)
 }
 
 // InternetGetSecurityInfoByURL calls WININET!InternetGetSecurityInfoByURL.
-func InternetGetSecurityInfoByURL(lpszURL foundation.PSTR, ppCertChain **securitycryptography.CERT_CHAIN_CONTEXT, pdwSecureFlags *uint32) foundation.BOOL {
+func InternetGetSecurityInfoByURL(lpszURL foundation.PSTR, ppCertChain **securitycryptography.CERT_CHAIN_CONTEXT, pdwSecureFlags *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procInternetGetSecurityInfoByURL.Addr(), uintptr(unsafe.Pointer(lpszURL)), uintptr(unsafe.Pointer(ppCertChain)), uintptr(unsafe.Pointer(pdwSecureFlags)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InternetGetSecurityInfoByURLA calls WININET!InternetGetSecurityInfoByURLA.
-func InternetGetSecurityInfoByURLA(lpszURL foundation.PSTR, ppCertChain **securitycryptography.CERT_CHAIN_CONTEXT, pdwSecureFlags *uint32) foundation.BOOL {
+func InternetGetSecurityInfoByURLA(lpszURL foundation.PSTR, ppCertChain **securitycryptography.CERT_CHAIN_CONTEXT, pdwSecureFlags *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procInternetGetSecurityInfoByURLA.Addr(), uintptr(unsafe.Pointer(lpszURL)), uintptr(unsafe.Pointer(ppCertChain)), uintptr(unsafe.Pointer(pdwSecureFlags)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InternetGetSecurityInfoByURLW calls WININET!InternetGetSecurityInfoByURLW.
-func InternetGetSecurityInfoByURLW(lpszURL foundation.PWSTR, ppCertChain **securitycryptography.CERT_CHAIN_CONTEXT, pdwSecureFlags *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetGetSecurityInfoByURLW.Addr(), uintptr(unsafe.Pointer(lpszURL)), uintptr(unsafe.Pointer(ppCertChain)), uintptr(unsafe.Pointer(pdwSecureFlags)))
-	return foundation.BOOL(r1)
+func InternetGetSecurityInfoByURLW(lpszURL string, ppCertChain **securitycryptography.CERT_CHAIN_CONTEXT, pdwSecureFlags *uint32) bool {
+	_lpszURL := win32.UTF16Ptr(lpszURL)
+	r1, _, _ := syscall.SyscallN(procInternetGetSecurityInfoByURLW.Addr(), uintptr(unsafe.Pointer(_lpszURL)), uintptr(unsafe.Pointer(ppCertChain)), uintptr(unsafe.Pointer(pdwSecureFlags)))
+	return r1 != 0
 }
 
 // InternetGoOnline calls WININET!InternetGoOnline.
@@ -1998,8 +2104,9 @@ func InternetGoOnlineA(lpszURL foundation.PSTR, hwndParent foundation.HWND, dwFl
 // InternetGoOnlineW calls WININET!InternetGoOnlineW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetgoonlinew
 // Minimum OS: windows5.0.
-func InternetGoOnlineW(lpszURL foundation.PWSTR, hwndParent foundation.HWND, dwFlags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetGoOnlineW.Addr(), uintptr(unsafe.Pointer(lpszURL)), uintptr(hwndParent), uintptr(dwFlags))
+func InternetGoOnlineW(lpszURL string, hwndParent foundation.HWND, dwFlags uint32) error {
+	_lpszURL := win32.UTF16Ptr(lpszURL)
+	r1, _, e1 := syscall.SyscallN(procInternetGoOnlineW.Addr(), uintptr(unsafe.Pointer(_lpszURL)), uintptr(hwndParent), uintptr(dwFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2009,8 +2116,8 @@ func InternetGoOnlineW(lpszURL foundation.PWSTR, hwndParent foundation.HWND, dwF
 // InternetHangUp calls WININET!InternetHangUp.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internethangup
 // Minimum OS: windows5.0.
-func InternetHangUp(dwConnection uintptr, dwReserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procInternetHangUp.Addr(), uintptr(dwConnection), uintptr(dwReserved))
+func InternetHangUp(dwConnection uintptr) uint32 {
+	r1, _, _ := syscall.SyscallN(procInternetHangUp.Addr(), uintptr(dwConnection), 0)
 	return uint32(r1)
 }
 
@@ -2036,11 +2143,40 @@ func InternetLockRequestFile(hInternet unsafe.Pointer, lphLockRequestInfo *found
 	return nil
 }
 
+// InternetOpen calls WININET!InternetOpenW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetopenw
+// Minimum OS: windows5.0.
+func InternetOpen(lpszAgent string, dwAccessType uint32, lpszProxy string, lpszProxyBypass string, dwFlags uint32) (unsafe.Pointer, error) {
+	_lpszAgent := win32.UTF16Ptr(lpszAgent)
+	_lpszProxy := win32.UTF16Ptr(lpszProxy)
+	_lpszProxyBypass := win32.UTF16Ptr(lpszProxyBypass)
+	r1, _, e1 := syscall.SyscallN(procInternetOpen.Addr(), uintptr(unsafe.Pointer(_lpszAgent)), uintptr(dwAccessType), uintptr(unsafe.Pointer(_lpszProxy)), uintptr(unsafe.Pointer(_lpszProxyBypass)), uintptr(dwFlags))
+	ret := unsafe.Pointer(r1)
+	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // InternetOpenA calls WININET!InternetOpenA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetopena
 // Minimum OS: windows5.0.
 func InternetOpenA(lpszAgent foundation.PSTR, dwAccessType uint32, lpszProxy foundation.PSTR, lpszProxyBypass foundation.PSTR, dwFlags uint32) (unsafe.Pointer, error) {
 	r1, _, e1 := syscall.SyscallN(procInternetOpenA.Addr(), uintptr(unsafe.Pointer(lpszAgent)), uintptr(dwAccessType), uintptr(unsafe.Pointer(lpszProxy)), uintptr(unsafe.Pointer(lpszProxyBypass)), uintptr(dwFlags))
+	ret := unsafe.Pointer(r1)
+	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// InternetOpenUrl calls WININET!InternetOpenUrlW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetopenurlw
+// Minimum OS: windows5.0.
+func InternetOpenUrl(hInternet unsafe.Pointer, lpszUrl string, lpszHeaders string, dwHeadersLength uint32, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
+	_lpszUrl := win32.UTF16Ptr(lpszUrl)
+	_lpszHeaders := win32.UTF16Ptr(lpszHeaders)
+	r1, _, e1 := syscall.SyscallN(procInternetOpenUrl.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(unsafe.Pointer(_lpszHeaders)), uintptr(dwHeadersLength), uintptr(dwFlags), uintptr(dwContext))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -2060,30 +2196,6 @@ func InternetOpenUrlA(hInternet unsafe.Pointer, lpszUrl foundation.PSTR, lpszHea
 	return ret, nil
 }
 
-// InternetOpenUrlW calls WININET!InternetOpenUrlW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetopenurlw
-// Minimum OS: windows5.0.
-func InternetOpenUrlW(hInternet unsafe.Pointer, lpszUrl foundation.PWSTR, lpszHeaders foundation.PWSTR, dwHeadersLength uint32, dwFlags uint32, dwContext uintptr) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procInternetOpenUrlW.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpszHeaders)), uintptr(dwHeadersLength), uintptr(dwFlags), uintptr(dwContext))
-	ret := unsafe.Pointer(r1)
-	if ret == nil {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// InternetOpenW calls WININET!InternetOpenW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetopenw
-// Minimum OS: windows5.0.
-func InternetOpenW(lpszAgent foundation.PWSTR, dwAccessType uint32, lpszProxy foundation.PWSTR, lpszProxyBypass foundation.PWSTR, dwFlags uint32) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procInternetOpenW.Addr(), uintptr(unsafe.Pointer(lpszAgent)), uintptr(dwAccessType), uintptr(unsafe.Pointer(lpszProxy)), uintptr(unsafe.Pointer(lpszProxyBypass)), uintptr(dwFlags))
-	ret := unsafe.Pointer(r1)
-	if ret == nil {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
 // InternetQueryDataAvailable calls WININET!InternetQueryDataAvailable.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetquerydataavailable
 // Minimum OS: windows5.0.
@@ -2096,9 +2208,20 @@ func InternetQueryDataAvailable(hFile unsafe.Pointer, lpdwNumberOfBytesAvailable
 }
 
 // InternetQueryFortezzaStatus calls WININET!InternetQueryFortezzaStatus.
-func InternetQueryFortezzaStatus(pdwStatus *uint32, dwReserved uintptr) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetQueryFortezzaStatus.Addr(), uintptr(unsafe.Pointer(pdwStatus)), uintptr(dwReserved))
-	return foundation.BOOL(r1)
+func InternetQueryFortezzaStatus(pdwStatus *uint32) bool {
+	r1, _, _ := syscall.SyscallN(procInternetQueryFortezzaStatus.Addr(), uintptr(unsafe.Pointer(pdwStatus)), 0)
+	return r1 != 0
+}
+
+// InternetQueryOption calls WININET!InternetQueryOptionW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetqueryoptionw
+// Minimum OS: windows5.0.
+func InternetQueryOption(hInternet unsafe.Pointer, dwOption uint32, lpBuffer unsafe.Pointer, lpdwBufferLength *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procInternetQueryOption.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(dwOption), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // InternetQueryOptionA calls WININET!InternetQueryOptionA.
@@ -2106,17 +2229,6 @@ func InternetQueryFortezzaStatus(pdwStatus *uint32, dwReserved uintptr) foundati
 // Minimum OS: windows5.0.
 func InternetQueryOptionA(hInternet unsafe.Pointer, dwOption uint32, lpBuffer unsafe.Pointer, lpdwBufferLength *uint32) error {
 	r1, _, e1 := syscall.SyscallN(procInternetQueryOptionA.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(dwOption), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// InternetQueryOptionW calls WININET!InternetQueryOptionW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetqueryoptionw
-// Minimum OS: windows5.0.
-func InternetQueryOptionW(hInternet unsafe.Pointer, dwOption uint32, lpBuffer unsafe.Pointer, lpdwBufferLength *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetQueryOptionW.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(dwOption), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwBufferLength)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2134,6 +2246,17 @@ func InternetReadFile(hFile unsafe.Pointer, lpBuffer unsafe.Pointer, dwNumberOfB
 	return nil
 }
 
+// InternetReadFileEx calls WININET!InternetReadFileExW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetreadfileexw
+// Minimum OS: windows5.0.
+func InternetReadFileEx(hFile unsafe.Pointer, lpBuffersOut *INTERNET_BUFFERSW, dwFlags uint32, dwContext uintptr) error {
+	r1, _, e1 := syscall.SyscallN(procInternetReadFileEx.Addr(), uintptr(unsafe.Pointer(hFile)), uintptr(unsafe.Pointer(lpBuffersOut)), uintptr(dwFlags), uintptr(dwContext))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // InternetReadFileExA calls WININET!InternetReadFileExA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetreadfileexa
 // Minimum OS: windows5.0.
@@ -2145,27 +2268,30 @@ func InternetReadFileExA(hFile unsafe.Pointer, lpBuffersOut *INTERNET_BUFFERSA, 
 	return nil
 }
 
-// InternetReadFileExW calls WININET!InternetReadFileExW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetreadfileexw
+// InternetSecurityProtocolToString calls WININET!InternetSecurityProtocolToStringW.
+func InternetSecurityProtocolToString(dwProtocol uint32, lpstr foundation.PWSTR, lpdwstrLength *uint32) bool {
+	r1, _, _ := syscall.SyscallN(procInternetSecurityProtocolToString.Addr(), uintptr(dwProtocol), uintptr(unsafe.Pointer(lpstr)), uintptr(unsafe.Pointer(lpdwstrLength)), 0)
+	return r1 != 0
+}
+
+// InternetSecurityProtocolToStringA calls WININET!InternetSecurityProtocolToStringA.
+func InternetSecurityProtocolToStringA(dwProtocol uint32, lpstr foundation.PSTR, lpdwstrLength *uint32) bool {
+	r1, _, _ := syscall.SyscallN(procInternetSecurityProtocolToStringA.Addr(), uintptr(dwProtocol), uintptr(unsafe.Pointer(lpstr)), uintptr(unsafe.Pointer(lpdwstrLength)), 0)
+	return r1 != 0
+}
+
+// InternetSetCookie calls WININET!InternetSetCookieW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetcookiew
 // Minimum OS: windows5.0.
-func InternetReadFileExW(hFile unsafe.Pointer, lpBuffersOut *INTERNET_BUFFERSW, dwFlags uint32, dwContext uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procInternetReadFileExW.Addr(), uintptr(unsafe.Pointer(hFile)), uintptr(unsafe.Pointer(lpBuffersOut)), uintptr(dwFlags), uintptr(dwContext))
+func InternetSetCookie(lpszUrl string, lpszCookieName string, lpszCookieData string) error {
+	_lpszUrl := win32.UTF16Ptr(lpszUrl)
+	_lpszCookieName := win32.UTF16Ptr(lpszCookieName)
+	_lpszCookieData := win32.UTF16Ptr(lpszCookieData)
+	r1, _, e1 := syscall.SyscallN(procInternetSetCookie.Addr(), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(unsafe.Pointer(_lpszCookieName)), uintptr(unsafe.Pointer(_lpszCookieData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// InternetSecurityProtocolToStringA calls WININET!InternetSecurityProtocolToStringA.
-func InternetSecurityProtocolToStringA(dwProtocol uint32, lpstr foundation.PSTR, lpdwstrLength *uint32, dwReserved uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetSecurityProtocolToStringA.Addr(), uintptr(dwProtocol), uintptr(unsafe.Pointer(lpstr)), uintptr(unsafe.Pointer(lpdwstrLength)), uintptr(dwReserved))
-	return foundation.BOOL(r1)
-}
-
-// InternetSecurityProtocolToStringW calls WININET!InternetSecurityProtocolToStringW.
-func InternetSecurityProtocolToStringW(dwProtocol uint32, lpstr foundation.PWSTR, lpdwstrLength *uint32, dwReserved uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetSecurityProtocolToStringW.Addr(), uintptr(dwProtocol), uintptr(unsafe.Pointer(lpstr)), uintptr(unsafe.Pointer(lpdwstrLength)), uintptr(dwReserved))
-	return foundation.BOOL(r1)
 }
 
 // InternetSetCookieA calls WININET!InternetSetCookieA.
@@ -2179,10 +2305,26 @@ func InternetSetCookieA(lpszUrl foundation.PSTR, lpszCookieName foundation.PSTR,
 	return nil
 }
 
+// InternetSetCookieEx calls WININET!InternetSetCookieExW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetcookieexw
+// Minimum OS: windows5.1.2600.
+func InternetSetCookieEx(lpszUrl string, lpszCookieName string, lpszCookieData string, dwFlags uint32, dwReserved uintptr) (uint32, error) {
+	_lpszUrl := win32.UTF16Ptr(lpszUrl)
+	_lpszCookieName := win32.UTF16Ptr(lpszCookieName)
+	_lpszCookieData := win32.UTF16Ptr(lpszCookieData)
+	r1, _, e1 := syscall.SyscallN(procInternetSetCookieEx.Addr(), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(unsafe.Pointer(_lpszCookieName)), uintptr(unsafe.Pointer(_lpszCookieData)), uintptr(dwFlags), uintptr(dwReserved))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
 // InternetSetCookieEx2 calls WININET!InternetSetCookieEx2.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetcookieex2
-func InternetSetCookieEx2(pcwszUrl foundation.PWSTR, pCookie *INTERNET_COOKIE2, pcwszP3PPolicy foundation.PWSTR, dwFlags uint32, pdwCookieState *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procInternetSetCookieEx2.Addr(), uintptr(unsafe.Pointer(pcwszUrl)), uintptr(unsafe.Pointer(pCookie)), uintptr(unsafe.Pointer(pcwszP3PPolicy)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdwCookieState)))
+func InternetSetCookieEx2(pcwszUrl string, pCookie *INTERNET_COOKIE2, pcwszP3PPolicy string, dwFlags uint32, pdwCookieState *uint32) uint32 {
+	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
+	_pcwszP3PPolicy := win32.UTF16Ptr(pcwszP3PPolicy)
+	r1, _, _ := syscall.SyscallN(procInternetSetCookieEx2.Addr(), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(pCookie)), uintptr(unsafe.Pointer(_pcwszP3PPolicy)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdwCookieState)))
 	return uint32(r1)
 }
 
@@ -2197,58 +2339,48 @@ func InternetSetCookieExA(lpszUrl foundation.PSTR, lpszCookieName foundation.PST
 	return uint32(r1), nil
 }
 
-// InternetSetCookieExW calls WININET!InternetSetCookieExW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetcookieexw
-// Minimum OS: windows5.1.2600.
-func InternetSetCookieExW(lpszUrl foundation.PWSTR, lpszCookieName foundation.PWSTR, lpszCookieData foundation.PWSTR, dwFlags uint32, dwReserved uintptr) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procInternetSetCookieExW.Addr(), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpszCookieName)), uintptr(unsafe.Pointer(lpszCookieData)), uintptr(dwFlags), uintptr(dwReserved))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// InternetSetCookieW calls WININET!InternetSetCookieW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetcookiew
-// Minimum OS: windows5.0.
-func InternetSetCookieW(lpszUrl foundation.PWSTR, lpszCookieName foundation.PWSTR, lpszCookieData foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procInternetSetCookieW.Addr(), uintptr(unsafe.Pointer(lpszUrl)), uintptr(unsafe.Pointer(lpszCookieName)), uintptr(unsafe.Pointer(lpszCookieData)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // InternetSetDialState calls WININET!InternetSetDialState.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetdialstate
-func InternetSetDialState(lpszConnectoid foundation.PSTR, dwState uint32, dwReserved uint32) foundation.BOOL {
+func InternetSetDialState(lpszConnectoid foundation.PSTR, dwState uint32, dwReserved uint32) bool {
 	r1, _, _ := syscall.SyscallN(procInternetSetDialState.Addr(), uintptr(unsafe.Pointer(lpszConnectoid)), uintptr(dwState), uintptr(dwReserved))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InternetSetDialStateA calls WININET!InternetSetDialStateA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetdialstatea
-func InternetSetDialStateA(lpszConnectoid foundation.PSTR, dwState uint32, dwReserved uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetSetDialStateA.Addr(), uintptr(unsafe.Pointer(lpszConnectoid)), uintptr(dwState), uintptr(dwReserved))
-	return foundation.BOOL(r1)
+func InternetSetDialStateA(lpszConnectoid foundation.PSTR, dwState uint32) bool {
+	r1, _, _ := syscall.SyscallN(procInternetSetDialStateA.Addr(), uintptr(unsafe.Pointer(lpszConnectoid)), uintptr(dwState), 0)
+	return r1 != 0
 }
 
 // InternetSetDialStateW calls WININET!InternetSetDialStateW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetdialstatew
-func InternetSetDialStateW(lpszConnectoid foundation.PWSTR, dwState uint32, dwReserved uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetSetDialStateW.Addr(), uintptr(unsafe.Pointer(lpszConnectoid)), uintptr(dwState), uintptr(dwReserved))
-	return foundation.BOOL(r1)
+func InternetSetDialStateW(lpszConnectoid string, dwState uint32) bool {
+	_lpszConnectoid := win32.UTF16Ptr(lpszConnectoid)
+	r1, _, _ := syscall.SyscallN(procInternetSetDialStateW.Addr(), uintptr(unsafe.Pointer(_lpszConnectoid)), uintptr(dwState), 0)
+	return r1 != 0
 }
 
 // InternetSetFilePointer calls WININET!InternetSetFilePointer.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetfilepointer
 // Minimum OS: windows5.0.
-func InternetSetFilePointer(hFile unsafe.Pointer, lDistanceToMove int32, lpDistanceToMoveHigh *int32, dwMoveMethod uint32, dwContext uintptr) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procInternetSetFilePointer.Addr(), uintptr(unsafe.Pointer(hFile)), uintptr(lDistanceToMove), uintptr(unsafe.Pointer(lpDistanceToMoveHigh)), uintptr(dwMoveMethod), uintptr(dwContext))
+func InternetSetFilePointer(hFile unsafe.Pointer, lDistanceToMove int32, lpDistanceToMoveHigh *int32, dwMoveMethod uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procInternetSetFilePointer.Addr(), uintptr(unsafe.Pointer(hFile)), uintptr(lDistanceToMove), uintptr(unsafe.Pointer(lpDistanceToMoveHigh)), uintptr(dwMoveMethod), 0)
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
+}
+
+// InternetSetOption calls WININET!InternetSetOptionW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetoptionw
+// Minimum OS: windows5.0.
+func InternetSetOption(hInternet unsafe.Pointer, dwOption uint32, lpBuffer unsafe.Pointer, dwBufferLength uint32) error {
+	r1, _, e1 := syscall.SyscallN(procInternetSetOption.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(dwOption), uintptr(unsafe.Pointer(lpBuffer)), uintptr(dwBufferLength))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // InternetSetOptionA calls WININET!InternetSetOptionA.
@@ -2262,47 +2394,37 @@ func InternetSetOptionA(hInternet unsafe.Pointer, dwOption uint32, lpBuffer unsa
 	return nil
 }
 
+// InternetSetOptionEx calls WININET!InternetSetOptionExW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetoptionexw
+// Minimum OS: windows5.0.
+func InternetSetOptionEx(hInternet unsafe.Pointer, dwOption uint32, lpBuffer unsafe.Pointer, dwBufferLength uint32, dwFlags uint32) bool {
+	r1, _, _ := syscall.SyscallN(procInternetSetOptionEx.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(dwOption), uintptr(unsafe.Pointer(lpBuffer)), uintptr(dwBufferLength), uintptr(dwFlags))
+	return r1 != 0
+}
+
 // InternetSetOptionExA calls WININET!InternetSetOptionExA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetoptionexa
 // Minimum OS: windows5.0.
-func InternetSetOptionExA(hInternet unsafe.Pointer, dwOption uint32, lpBuffer unsafe.Pointer, dwBufferLength uint32, dwFlags uint32) foundation.BOOL {
+func InternetSetOptionExA(hInternet unsafe.Pointer, dwOption uint32, lpBuffer unsafe.Pointer, dwBufferLength uint32, dwFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procInternetSetOptionExA.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(dwOption), uintptr(unsafe.Pointer(lpBuffer)), uintptr(dwBufferLength), uintptr(dwFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// InternetSetOptionExW calls WININET!InternetSetOptionExW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetoptionexw
+// InternetSetPerSiteCookieDecision calls WININET!InternetSetPerSiteCookieDecisionW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetpersitecookiedecisionw
 // Minimum OS: windows5.0.
-func InternetSetOptionExW(hInternet unsafe.Pointer, dwOption uint32, lpBuffer unsafe.Pointer, dwBufferLength uint32, dwFlags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetSetOptionExW.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(dwOption), uintptr(unsafe.Pointer(lpBuffer)), uintptr(dwBufferLength), uintptr(dwFlags))
-	return foundation.BOOL(r1)
-}
-
-// InternetSetOptionW calls WININET!InternetSetOptionW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetoptionw
-// Minimum OS: windows5.0.
-func InternetSetOptionW(hInternet unsafe.Pointer, dwOption uint32, lpBuffer unsafe.Pointer, dwBufferLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetSetOptionW.Addr(), uintptr(unsafe.Pointer(hInternet)), uintptr(dwOption), uintptr(unsafe.Pointer(lpBuffer)), uintptr(dwBufferLength))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+func InternetSetPerSiteCookieDecision(pchHostName string, dwDecision uint32) bool {
+	_pchHostName := win32.UTF16Ptr(pchHostName)
+	r1, _, _ := syscall.SyscallN(procInternetSetPerSiteCookieDecision.Addr(), uintptr(unsafe.Pointer(_pchHostName)), uintptr(dwDecision))
+	return r1 != 0
 }
 
 // InternetSetPerSiteCookieDecisionA calls WININET!InternetSetPerSiteCookieDecisionA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetpersitecookiedecisiona
 // Minimum OS: windows5.0.
-func InternetSetPerSiteCookieDecisionA(pchHostName foundation.PSTR, dwDecision uint32) foundation.BOOL {
+func InternetSetPerSiteCookieDecisionA(pchHostName foundation.PSTR, dwDecision uint32) bool {
 	r1, _, _ := syscall.SyscallN(procInternetSetPerSiteCookieDecisionA.Addr(), uintptr(unsafe.Pointer(pchHostName)), uintptr(dwDecision))
-	return foundation.BOOL(r1)
-}
-
-// InternetSetPerSiteCookieDecisionW calls WININET!InternetSetPerSiteCookieDecisionW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetsetpersitecookiedecisionw
-// Minimum OS: windows5.0.
-func InternetSetPerSiteCookieDecisionW(pchHostName foundation.PWSTR, dwDecision uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetSetPerSiteCookieDecisionW.Addr(), uintptr(unsafe.Pointer(pchHostName)), uintptr(dwDecision))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InternetSetStatusCallback calls WININET!InternetSetStatusCallback.
@@ -2328,21 +2450,22 @@ func InternetSetStatusCallbackW(hInternet unsafe.Pointer, lpfnInternetCallback L
 }
 
 // InternetShowSecurityInfoByURL calls WININET!InternetShowSecurityInfoByURL.
-func InternetShowSecurityInfoByURL(lpszURL foundation.PSTR, hwndParent foundation.HWND) foundation.BOOL {
+func InternetShowSecurityInfoByURL(lpszURL foundation.PSTR, hwndParent foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procInternetShowSecurityInfoByURL.Addr(), uintptr(unsafe.Pointer(lpszURL)), uintptr(hwndParent))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InternetShowSecurityInfoByURLA calls WININET!InternetShowSecurityInfoByURLA.
-func InternetShowSecurityInfoByURLA(lpszURL foundation.PSTR, hwndParent foundation.HWND) foundation.BOOL {
+func InternetShowSecurityInfoByURLA(lpszURL foundation.PSTR, hwndParent foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procInternetShowSecurityInfoByURLA.Addr(), uintptr(unsafe.Pointer(lpszURL)), uintptr(hwndParent))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InternetShowSecurityInfoByURLW calls WININET!InternetShowSecurityInfoByURLW.
-func InternetShowSecurityInfoByURLW(lpszURL foundation.PWSTR, hwndParent foundation.HWND) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetShowSecurityInfoByURLW.Addr(), uintptr(unsafe.Pointer(lpszURL)), uintptr(hwndParent))
-	return foundation.BOOL(r1)
+func InternetShowSecurityInfoByURLW(lpszURL string, hwndParent foundation.HWND) bool {
+	_lpszURL := win32.UTF16Ptr(lpszURL)
+	r1, _, _ := syscall.SyscallN(procInternetShowSecurityInfoByURLW.Addr(), uintptr(unsafe.Pointer(_lpszURL)), uintptr(hwndParent))
+	return r1 != 0
 }
 
 // InternetTimeFromSystemTime calls WININET!InternetTimeFromSystemTime.
@@ -2381,8 +2504,8 @@ func InternetTimeFromSystemTimeW(pst *foundation.SYSTEMTIME, dwRFC uint32, lpszT
 // InternetTimeToSystemTime calls WININET!InternetTimeToSystemTime.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internettimetosystemtime
 // Minimum OS: windows5.0.
-func InternetTimeToSystemTime(lpszTime foundation.PSTR, pst *foundation.SYSTEMTIME, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetTimeToSystemTime.Addr(), uintptr(unsafe.Pointer(lpszTime)), uintptr(unsafe.Pointer(pst)), uintptr(dwReserved))
+func InternetTimeToSystemTime(lpszTime foundation.PSTR, pst *foundation.SYSTEMTIME) error {
+	r1, _, e1 := syscall.SyscallN(procInternetTimeToSystemTime.Addr(), uintptr(unsafe.Pointer(lpszTime)), uintptr(unsafe.Pointer(pst)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2392,8 +2515,8 @@ func InternetTimeToSystemTime(lpszTime foundation.PSTR, pst *foundation.SYSTEMTI
 // InternetTimeToSystemTimeA calls WININET!InternetTimeToSystemTimeA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internettimetosystemtimea
 // Minimum OS: windows5.0.
-func InternetTimeToSystemTimeA(lpszTime foundation.PSTR, pst *foundation.SYSTEMTIME, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetTimeToSystemTimeA.Addr(), uintptr(unsafe.Pointer(lpszTime)), uintptr(unsafe.Pointer(pst)), uintptr(dwReserved))
+func InternetTimeToSystemTimeA(lpszTime foundation.PSTR, pst *foundation.SYSTEMTIME) error {
+	r1, _, e1 := syscall.SyscallN(procInternetTimeToSystemTimeA.Addr(), uintptr(unsafe.Pointer(lpszTime)), uintptr(unsafe.Pointer(pst)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2403,8 +2526,9 @@ func InternetTimeToSystemTimeA(lpszTime foundation.PSTR, pst *foundation.SYSTEMT
 // InternetTimeToSystemTimeW calls WININET!InternetTimeToSystemTimeW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internettimetosystemtimew
 // Minimum OS: windows5.0.
-func InternetTimeToSystemTimeW(lpszTime foundation.PWSTR, pst *foundation.SYSTEMTIME, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetTimeToSystemTimeW.Addr(), uintptr(unsafe.Pointer(lpszTime)), uintptr(unsafe.Pointer(pst)), uintptr(dwReserved))
+func InternetTimeToSystemTimeW(lpszTime string, pst *foundation.SYSTEMTIME) error {
+	_lpszTime := win32.UTF16Ptr(lpszTime)
+	r1, _, e1 := syscall.SyscallN(procInternetTimeToSystemTimeW.Addr(), uintptr(unsafe.Pointer(_lpszTime)), uintptr(unsafe.Pointer(pst)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2433,58 +2557,61 @@ func InternetWriteFile(hFile unsafe.Pointer, lpBuffer unsafe.Pointer, dwNumberOf
 	return nil
 }
 
-// InternetWriteFileExA calls WININET!InternetWriteFileExA.
-func InternetWriteFileExA(hFile unsafe.Pointer, lpBuffersIn *INTERNET_BUFFERSA, dwFlags uint32, dwContext uintptr) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetWriteFileExA.Addr(), uintptr(unsafe.Pointer(hFile)), uintptr(unsafe.Pointer(lpBuffersIn)), uintptr(dwFlags), uintptr(dwContext))
-	return foundation.BOOL(r1)
+// InternetWriteFileEx calls WININET!InternetWriteFileExW.
+func InternetWriteFileEx(hFile unsafe.Pointer, lpBuffersIn *INTERNET_BUFFERSW, dwFlags uint32, dwContext uintptr) bool {
+	r1, _, _ := syscall.SyscallN(procInternetWriteFileEx.Addr(), uintptr(unsafe.Pointer(hFile)), uintptr(unsafe.Pointer(lpBuffersIn)), uintptr(dwFlags), uintptr(dwContext))
+	return r1 != 0
 }
 
-// InternetWriteFileExW calls WININET!InternetWriteFileExW.
-func InternetWriteFileExW(hFile unsafe.Pointer, lpBuffersIn *INTERNET_BUFFERSW, dwFlags uint32, dwContext uintptr) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInternetWriteFileExW.Addr(), uintptr(unsafe.Pointer(hFile)), uintptr(unsafe.Pointer(lpBuffersIn)), uintptr(dwFlags), uintptr(dwContext))
-	return foundation.BOOL(r1)
+// InternetWriteFileExA calls WININET!InternetWriteFileExA.
+func InternetWriteFileExA(hFile unsafe.Pointer, lpBuffersIn *INTERNET_BUFFERSA, dwFlags uint32, dwContext uintptr) bool {
+	r1, _, _ := syscall.SyscallN(procInternetWriteFileExA.Addr(), uintptr(unsafe.Pointer(hFile)), uintptr(unsafe.Pointer(lpBuffersIn)), uintptr(dwFlags), uintptr(dwContext))
+	return r1 != 0
+}
+
+// IsDomainLegalCookieDomain calls WININET!IsDomainLegalCookieDomainW.
+func IsDomainLegalCookieDomain(pchDomain string, pchFullDomain string) bool {
+	_pchDomain := win32.UTF16Ptr(pchDomain)
+	_pchFullDomain := win32.UTF16Ptr(pchFullDomain)
+	r1, _, _ := syscall.SyscallN(procIsDomainLegalCookieDomain.Addr(), uintptr(unsafe.Pointer(_pchDomain)), uintptr(unsafe.Pointer(_pchFullDomain)))
+	return r1 != 0
 }
 
 // IsDomainLegalCookieDomainA calls WININET!IsDomainLegalCookieDomainA.
-func IsDomainLegalCookieDomainA(pchDomain foundation.PSTR, pchFullDomain foundation.PSTR) foundation.BOOL {
+func IsDomainLegalCookieDomainA(pchDomain foundation.PSTR, pchFullDomain foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procIsDomainLegalCookieDomainA.Addr(), uintptr(unsafe.Pointer(pchDomain)), uintptr(unsafe.Pointer(pchFullDomain)))
-	return foundation.BOOL(r1)
-}
-
-// IsDomainLegalCookieDomainW calls WININET!IsDomainLegalCookieDomainW.
-func IsDomainLegalCookieDomainW(pchDomain foundation.PWSTR, pchFullDomain foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIsDomainLegalCookieDomainW.Addr(), uintptr(unsafe.Pointer(pchDomain)), uintptr(unsafe.Pointer(pchFullDomain)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsHostInProxyBypassList calls WININET!IsHostInProxyBypassList.
-func IsHostInProxyBypassList(tScheme INTERNET_SCHEME, lpszHost foundation.PSTR, cchHost uint32) foundation.BOOL {
+func IsHostInProxyBypassList(tScheme INTERNET_SCHEME, lpszHost foundation.PSTR, cchHost uint32) bool {
 	r1, _, _ := syscall.SyscallN(procIsHostInProxyBypassList.Addr(), uintptr(tScheme), uintptr(unsafe.Pointer(lpszHost)), uintptr(cchHost))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsProfilesEnabled calls WININET!IsProfilesEnabled.
-func IsProfilesEnabled() foundation.BOOL {
+func IsProfilesEnabled() bool {
 	r1, _, _ := syscall.SyscallN(procIsProfilesEnabled.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// IsUrlCacheEntryExpired calls WININET!IsUrlCacheEntryExpiredW.
+func IsUrlCacheEntryExpired(lpszUrlName string, dwFlags uint32, pftLastModified *foundation.FILETIME) bool {
+	_lpszUrlName := win32.UTF16Ptr(lpszUrlName)
+	r1, _, _ := syscall.SyscallN(procIsUrlCacheEntryExpired.Addr(), uintptr(unsafe.Pointer(_lpszUrlName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pftLastModified)))
+	return r1 != 0
 }
 
 // IsUrlCacheEntryExpiredA calls WININET!IsUrlCacheEntryExpiredA.
-func IsUrlCacheEntryExpiredA(lpszUrlName foundation.PSTR, dwFlags uint32, pftLastModified *foundation.FILETIME) foundation.BOOL {
+func IsUrlCacheEntryExpiredA(lpszUrlName foundation.PSTR, dwFlags uint32, pftLastModified *foundation.FILETIME) bool {
 	r1, _, _ := syscall.SyscallN(procIsUrlCacheEntryExpiredA.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pftLastModified)))
-	return foundation.BOOL(r1)
-}
-
-// IsUrlCacheEntryExpiredW calls WININET!IsUrlCacheEntryExpiredW.
-func IsUrlCacheEntryExpiredW(lpszUrlName foundation.PWSTR, dwFlags uint32, pftLastModified *foundation.FILETIME) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procIsUrlCacheEntryExpiredW.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pftLastModified)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // LoadUrlCacheContent calls WININET!LoadUrlCacheContent.
-func LoadUrlCacheContent() foundation.BOOL {
+func LoadUrlCacheContent() bool {
 	r1, _, _ := syscall.SyscallN(procLoadUrlCacheContent.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ParseX509EncodedCertificateForListBoxEntry calls WININET!ParseX509EncodedCertificateForListBoxEntry.
@@ -2494,9 +2621,9 @@ func ParseX509EncodedCertificateForListBoxEntry(lpCert *byte, cbCert uint32, lps
 }
 
 // PerformOperationOverUrlCacheA calls WININET!PerformOperationOverUrlCacheA.
-func PerformOperationOverUrlCacheA(pszUrlSearchPattern foundation.PSTR, dwFlags uint32, dwFilter uint32, GroupId int64, pReserved1 unsafe.Pointer, pdwReserved2 *uint32, pReserved3 unsafe.Pointer, op CACHE_OPERATOR, pOperatorData unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPerformOperationOverUrlCacheA.Addr(), uintptr(unsafe.Pointer(pszUrlSearchPattern)), uintptr(dwFlags), uintptr(dwFilter), uintptr(GroupId), uintptr(unsafe.Pointer(pReserved1)), uintptr(unsafe.Pointer(pdwReserved2)), uintptr(unsafe.Pointer(pReserved3)), uintptr(op), uintptr(unsafe.Pointer(pOperatorData)))
-	return foundation.BOOL(r1)
+func PerformOperationOverUrlCacheA(pszUrlSearchPattern foundation.PSTR, dwFlags uint32, dwFilter uint32, GroupId int64, op CACHE_OPERATOR, pOperatorData unsafe.Pointer) bool {
+	r1, _, _ := syscall.SyscallN(procPerformOperationOverUrlCacheA.Addr(), uintptr(unsafe.Pointer(pszUrlSearchPattern)), uintptr(dwFlags), uintptr(dwFilter), uintptr(GroupId), 0, 0, 0, uintptr(op), uintptr(unsafe.Pointer(pOperatorData)))
+	return r1 != 0
 }
 
 // PrivacyGetZonePreferenceW calls WININET!PrivacyGetZonePreferenceW.
@@ -2510,22 +2637,23 @@ func PrivacyGetZonePreferenceW(dwZone uint32, dwType uint32, pdwTemplate *uint32
 // PrivacySetZonePreferenceW calls WININET!PrivacySetZonePreferenceW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-privacysetzonepreferencew
 // Minimum OS: windows5.0.
-func PrivacySetZonePreferenceW(dwZone uint32, dwType uint32, dwTemplate uint32, pszPreference foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procPrivacySetZonePreferenceW.Addr(), uintptr(dwZone), uintptr(dwType), uintptr(dwTemplate), uintptr(unsafe.Pointer(pszPreference)))
+func PrivacySetZonePreferenceW(dwZone uint32, dwType uint32, dwTemplate uint32, pszPreference string) uint32 {
+	_pszPreference := win32.UTF16Ptr(pszPreference)
+	r1, _, _ := syscall.SyscallN(procPrivacySetZonePreferenceW.Addr(), uintptr(dwZone), uintptr(dwType), uintptr(dwTemplate), uintptr(unsafe.Pointer(_pszPreference)))
 	return uint32(r1)
 }
 
 // ReadGuidsForConnectedNetworks calls WININET!ReadGuidsForConnectedNetworks.
-func ReadGuidsForConnectedNetworks(pcNetworks *uint32, pppwszNetworkGuids **foundation.PWSTR, pppbstrNetworkNames **foundation.BSTR, pppwszGWMacs **foundation.PWSTR, pcGatewayMacs *uint32, pdwFlags *uint32) foundation.BOOL {
+func ReadGuidsForConnectedNetworks(pcNetworks *uint32, pppwszNetworkGuids **foundation.PWSTR, pppbstrNetworkNames **foundation.BSTR, pppwszGWMacs **foundation.PWSTR, pcGatewayMacs *uint32, pdwFlags *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procReadGuidsForConnectedNetworks.Addr(), uintptr(unsafe.Pointer(pcNetworks)), uintptr(unsafe.Pointer(pppwszNetworkGuids)), uintptr(unsafe.Pointer(pppbstrNetworkNames)), uintptr(unsafe.Pointer(pppwszGWMacs)), uintptr(unsafe.Pointer(pcGatewayMacs)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ReadUrlCacheEntryStream calls WININET!ReadUrlCacheEntryStream.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-readurlcacheentrystream
 // Minimum OS: windows5.0.
-func ReadUrlCacheEntryStream(hUrlCacheStream foundation.HANDLE, dwLocation uint32, lpBuffer unsafe.Pointer, lpdwLen *uint32, Reserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procReadUrlCacheEntryStream.Addr(), uintptr(hUrlCacheStream), uintptr(dwLocation), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwLen)), uintptr(Reserved))
+func ReadUrlCacheEntryStream(hUrlCacheStream foundation.HANDLE, dwLocation uint32, lpBuffer unsafe.Pointer, lpdwLen *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procReadUrlCacheEntryStream.Addr(), uintptr(hUrlCacheStream), uintptr(dwLocation), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwLen)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2533,15 +2661,15 @@ func ReadUrlCacheEntryStream(hUrlCacheStream foundation.HANDLE, dwLocation uint3
 }
 
 // ReadUrlCacheEntryStreamEx calls WININET!ReadUrlCacheEntryStreamEx.
-func ReadUrlCacheEntryStreamEx(hUrlCacheStream foundation.HANDLE, qwLocation uint64, lpBuffer unsafe.Pointer, lpdwLen *uint32) foundation.BOOL {
+func ReadUrlCacheEntryStreamEx(hUrlCacheStream foundation.HANDLE, qwLocation uint64, lpBuffer unsafe.Pointer, lpdwLen *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procReadUrlCacheEntryStreamEx.Addr(), uintptr(hUrlCacheStream), uintptr(qwLocation), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpdwLen)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RegisterUrlCacheNotification calls WININET!RegisterUrlCacheNotification.
-func RegisterUrlCacheNotification(hWnd foundation.HWND, uMsg uint32, gid int64, dwOpsFilter uint32, dwReserved uint32) foundation.BOOL {
+func RegisterUrlCacheNotification(hWnd foundation.HWND, uMsg uint32, gid int64, dwOpsFilter uint32, dwReserved uint32) bool {
 	r1, _, _ := syscall.SyscallN(procRegisterUrlCacheNotification.Addr(), uintptr(hWnd), uintptr(uMsg), uintptr(gid), uintptr(dwOpsFilter), uintptr(dwReserved))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ResumeSuspendedDownload calls WININET!ResumeSuspendedDownload.
@@ -2555,33 +2683,36 @@ func ResumeSuspendedDownload(hRequest unsafe.Pointer, dwResultCode uint32) error
 	return nil
 }
 
+// RetrieveUrlCacheEntryFile calls WININET!RetrieveUrlCacheEntryFileW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-retrieveurlcacheentryfilew
+// Minimum OS: windows5.0.
+func RetrieveUrlCacheEntryFile(lpszUrlName string, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32) error {
+	_lpszUrlName := win32.UTF16Ptr(lpszUrlName)
+	r1, _, e1 := syscall.SyscallN(procRetrieveUrlCacheEntryFile.Addr(), uintptr(unsafe.Pointer(_lpszUrlName)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // RetrieveUrlCacheEntryFileA calls WININET!RetrieveUrlCacheEntryFileA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-retrieveurlcacheentryfilea
 // Minimum OS: windows5.0.
-func RetrieveUrlCacheEntryFileA(lpszUrlName foundation.PSTR, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOA, lpcbCacheEntryInfo *uint32, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procRetrieveUrlCacheEntryFileA.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), uintptr(dwReserved))
+func RetrieveUrlCacheEntryFileA(lpszUrlName foundation.PSTR, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOA, lpcbCacheEntryInfo *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procRetrieveUrlCacheEntryFileA.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// RetrieveUrlCacheEntryFileW calls WININET!RetrieveUrlCacheEntryFileW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-retrieveurlcacheentryfilew
+// RetrieveUrlCacheEntryStream calls WININET!RetrieveUrlCacheEntryStreamW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-retrieveurlcacheentrystreamw
 // Minimum OS: windows5.0.
-func RetrieveUrlCacheEntryFileW(lpszUrlName foundation.PWSTR, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procRetrieveUrlCacheEntryFileW.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), uintptr(dwReserved))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// RetrieveUrlCacheEntryStreamA calls WININET!RetrieveUrlCacheEntryStreamA.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-retrieveurlcacheentrystreama
-// Minimum OS: windows5.0.
-func RetrieveUrlCacheEntryStreamA(lpszUrlName foundation.PSTR, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOA, lpcbCacheEntryInfo *uint32, fRandomRead foundation.BOOL, dwReserved uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procRetrieveUrlCacheEntryStreamA.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), uintptr(fRandomRead), uintptr(dwReserved))
+func RetrieveUrlCacheEntryStream(lpszUrlName string, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32, fRandomRead bool) (foundation.HANDLE, error) {
+	_lpszUrlName := win32.UTF16Ptr(lpszUrlName)
+	_fRandomRead := win32.Bool32(fRandomRead)
+	r1, _, e1 := syscall.SyscallN(procRetrieveUrlCacheEntryStream.Addr(), uintptr(unsafe.Pointer(_lpszUrlName)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), uintptr(_fRandomRead), 0)
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -2589,11 +2720,12 @@ func RetrieveUrlCacheEntryStreamA(lpszUrlName foundation.PSTR, lpCacheEntryInfo 
 	return ret, nil
 }
 
-// RetrieveUrlCacheEntryStreamW calls WININET!RetrieveUrlCacheEntryStreamW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-retrieveurlcacheentrystreamw
+// RetrieveUrlCacheEntryStreamA calls WININET!RetrieveUrlCacheEntryStreamA.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-retrieveurlcacheentrystreama
 // Minimum OS: windows5.0.
-func RetrieveUrlCacheEntryStreamW(lpszUrlName foundation.PWSTR, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, lpcbCacheEntryInfo *uint32, fRandomRead foundation.BOOL, dwReserved uint32) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procRetrieveUrlCacheEntryStreamW.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), uintptr(fRandomRead), uintptr(dwReserved))
+func RetrieveUrlCacheEntryStreamA(lpszUrlName foundation.PSTR, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOA, lpcbCacheEntryInfo *uint32, fRandomRead bool) (foundation.HANDLE, error) {
+	_fRandomRead := win32.Bool32(fRandomRead)
+	r1, _, e1 := syscall.SyscallN(procRetrieveUrlCacheEntryStreamA.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(unsafe.Pointer(lpcbCacheEntryInfo)), uintptr(_fRandomRead), 0)
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -2607,40 +2739,53 @@ func RunOnceUrlCache(hwnd foundation.HWND, hinst foundation.HINSTANCE, lpszCmd f
 	return uint32(r1)
 }
 
-// SetUrlCacheConfigInfoA calls WININET!SetUrlCacheConfigInfoA.
-func SetUrlCacheConfigInfoA(lpCacheConfigInfo *INTERNET_CACHE_CONFIG_INFOA, dwFieldControl uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetUrlCacheConfigInfoA.Addr(), uintptr(unsafe.Pointer(lpCacheConfigInfo)), uintptr(dwFieldControl))
-	return foundation.BOOL(r1)
+// SetUrlCacheConfigInfo calls WININET!SetUrlCacheConfigInfoW.
+func SetUrlCacheConfigInfo(lpCacheConfigInfo *INTERNET_CACHE_CONFIG_INFOW, dwFieldControl uint32) bool {
+	r1, _, _ := syscall.SyscallN(procSetUrlCacheConfigInfo.Addr(), uintptr(unsafe.Pointer(lpCacheConfigInfo)), uintptr(dwFieldControl))
+	return r1 != 0
 }
 
-// SetUrlCacheConfigInfoW calls WININET!SetUrlCacheConfigInfoW.
-func SetUrlCacheConfigInfoW(lpCacheConfigInfo *INTERNET_CACHE_CONFIG_INFOW, dwFieldControl uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetUrlCacheConfigInfoW.Addr(), uintptr(unsafe.Pointer(lpCacheConfigInfo)), uintptr(dwFieldControl))
-	return foundation.BOOL(r1)
+// SetUrlCacheConfigInfoA calls WININET!SetUrlCacheConfigInfoA.
+func SetUrlCacheConfigInfoA(lpCacheConfigInfo *INTERNET_CACHE_CONFIG_INFOA, dwFieldControl uint32) bool {
+	r1, _, _ := syscall.SyscallN(procSetUrlCacheConfigInfoA.Addr(), uintptr(unsafe.Pointer(lpCacheConfigInfo)), uintptr(dwFieldControl))
+	return r1 != 0
 }
 
 // SetUrlCacheEntryGroup calls WININET!SetUrlCacheEntryGroup.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-seturlcacheentrygroup
 // Minimum OS: windows5.0.
-func SetUrlCacheEntryGroup(lpszUrlName foundation.PSTR, dwFlags uint32, GroupId int64, pbGroupAttributes *byte, cbGroupAttributes uint32, lpReserved unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetUrlCacheEntryGroup.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(dwFlags), uintptr(GroupId), uintptr(unsafe.Pointer(pbGroupAttributes)), uintptr(cbGroupAttributes), uintptr(unsafe.Pointer(lpReserved)))
-	return foundation.BOOL(r1)
+func SetUrlCacheEntryGroup(lpszUrlName foundation.PSTR, dwFlags uint32, GroupId int64) bool {
+	r1, _, _ := syscall.SyscallN(procSetUrlCacheEntryGroup.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(dwFlags), uintptr(GroupId), 0, 0, 0)
+	return r1 != 0
 }
 
 // SetUrlCacheEntryGroupA calls WININET!SetUrlCacheEntryGroupA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-seturlcacheentrygroupa
 // Minimum OS: windows5.0.
-func SetUrlCacheEntryGroupA(lpszUrlName foundation.PSTR, dwFlags uint32, GroupId int64, pbGroupAttributes *byte, cbGroupAttributes uint32, lpReserved unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetUrlCacheEntryGroupA.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(dwFlags), uintptr(GroupId), uintptr(unsafe.Pointer(pbGroupAttributes)), uintptr(cbGroupAttributes), uintptr(unsafe.Pointer(lpReserved)))
-	return foundation.BOOL(r1)
+func SetUrlCacheEntryGroupA(lpszUrlName foundation.PSTR, dwFlags uint32, GroupId int64) bool {
+	r1, _, _ := syscall.SyscallN(procSetUrlCacheEntryGroupA.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(dwFlags), uintptr(GroupId), 0, 0, 0)
+	return r1 != 0
 }
 
 // SetUrlCacheEntryGroupW calls WININET!SetUrlCacheEntryGroupW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-seturlcacheentrygroupw
 // Minimum OS: windows5.0.
-func SetUrlCacheEntryGroupW(lpszUrlName foundation.PWSTR, dwFlags uint32, GroupId int64, pbGroupAttributes *byte, cbGroupAttributes uint32, lpReserved unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetUrlCacheEntryGroupW.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(dwFlags), uintptr(GroupId), uintptr(unsafe.Pointer(pbGroupAttributes)), uintptr(cbGroupAttributes), uintptr(unsafe.Pointer(lpReserved)))
-	return foundation.BOOL(r1)
+func SetUrlCacheEntryGroupW(lpszUrlName string, dwFlags uint32, GroupId int64) bool {
+	_lpszUrlName := win32.UTF16Ptr(lpszUrlName)
+	r1, _, _ := syscall.SyscallN(procSetUrlCacheEntryGroupW.Addr(), uintptr(unsafe.Pointer(_lpszUrlName)), uintptr(dwFlags), uintptr(GroupId), 0, 0, 0)
+	return r1 != 0
+}
+
+// SetUrlCacheEntryInfo calls WININET!SetUrlCacheEntryInfoW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-seturlcacheentryinfow
+// Minimum OS: windows5.0.
+func SetUrlCacheEntryInfo(lpszUrlName string, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, dwFieldControl uint32) error {
+	_lpszUrlName := win32.UTF16Ptr(lpszUrlName)
+	r1, _, e1 := syscall.SyscallN(procSetUrlCacheEntryInfo.Addr(), uintptr(unsafe.Pointer(_lpszUrlName)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(dwFieldControl))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // SetUrlCacheEntryInfoA calls WININET!SetUrlCacheEntryInfoA.
@@ -2654,11 +2799,11 @@ func SetUrlCacheEntryInfoA(lpszUrlName foundation.PSTR, lpCacheEntryInfo *INTERN
 	return nil
 }
 
-// SetUrlCacheEntryInfoW calls WININET!SetUrlCacheEntryInfoW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-seturlcacheentryinfow
+// SetUrlCacheGroupAttribute calls WININET!SetUrlCacheGroupAttributeW.
+// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-seturlcachegroupattributew
 // Minimum OS: windows5.0.
-func SetUrlCacheEntryInfoW(lpszUrlName foundation.PWSTR, lpCacheEntryInfo *INTERNET_CACHE_ENTRY_INFOW, dwFieldControl uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetUrlCacheEntryInfoW.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(unsafe.Pointer(lpCacheEntryInfo)), uintptr(dwFieldControl))
+func SetUrlCacheGroupAttribute(gid int64, dwAttributes uint32, lpGroupInfo *INTERNET_CACHE_GROUP_INFOW) error {
+	r1, _, e1 := syscall.SyscallN(procSetUrlCacheGroupAttribute.Addr(), uintptr(gid), 0, uintptr(dwAttributes), uintptr(unsafe.Pointer(lpGroupInfo)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2668,19 +2813,8 @@ func SetUrlCacheEntryInfoW(lpszUrlName foundation.PWSTR, lpCacheEntryInfo *INTER
 // SetUrlCacheGroupAttributeA calls WININET!SetUrlCacheGroupAttributeA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-seturlcachegroupattributea
 // Minimum OS: windows5.0.
-func SetUrlCacheGroupAttributeA(gid int64, dwFlags uint32, dwAttributes uint32, lpGroupInfo *INTERNET_CACHE_GROUP_INFOA, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetUrlCacheGroupAttributeA.Addr(), uintptr(gid), uintptr(dwFlags), uintptr(dwAttributes), uintptr(unsafe.Pointer(lpGroupInfo)), uintptr(unsafe.Pointer(lpReserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetUrlCacheGroupAttributeW calls WININET!SetUrlCacheGroupAttributeW.
-// https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-seturlcachegroupattributew
-// Minimum OS: windows5.0.
-func SetUrlCacheGroupAttributeW(gid int64, dwFlags uint32, dwAttributes uint32, lpGroupInfo *INTERNET_CACHE_GROUP_INFOW, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetUrlCacheGroupAttributeW.Addr(), uintptr(gid), uintptr(dwFlags), uintptr(dwAttributes), uintptr(unsafe.Pointer(lpGroupInfo)), uintptr(unsafe.Pointer(lpReserved)))
+func SetUrlCacheGroupAttributeA(gid int64, dwAttributes uint32, lpGroupInfo *INTERNET_CACHE_GROUP_INFOA) error {
+	r1, _, e1 := syscall.SyscallN(procSetUrlCacheGroupAttributeA.Addr(), uintptr(gid), 0, uintptr(dwAttributes), uintptr(unsafe.Pointer(lpGroupInfo)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2688,9 +2822,9 @@ func SetUrlCacheGroupAttributeW(gid int64, dwFlags uint32, dwAttributes uint32, 
 }
 
 // SetUrlCacheHeaderData calls WININET!SetUrlCacheHeaderData.
-func SetUrlCacheHeaderData(nIdx uint32, dwData uint32) foundation.BOOL {
+func SetUrlCacheHeaderData(nIdx uint32, dwData uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSetUrlCacheHeaderData.Addr(), uintptr(nIdx), uintptr(dwData))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ShowClientAuthCerts calls WININET!ShowClientAuthCerts.
@@ -2714,8 +2848,8 @@ func ShowX509EncodedCertificate(hWndParent foundation.HWND, lpCert *byte, cbCert
 // UnlockUrlCacheEntryFile calls WININET!UnlockUrlCacheEntryFile.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-unlockurlcacheentryfile
 // Minimum OS: windows5.0.
-func UnlockUrlCacheEntryFile(lpszUrlName foundation.PSTR, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procUnlockUrlCacheEntryFile.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(dwReserved))
+func UnlockUrlCacheEntryFile(lpszUrlName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procUnlockUrlCacheEntryFile.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2725,8 +2859,8 @@ func UnlockUrlCacheEntryFile(lpszUrlName foundation.PSTR, dwReserved uint32) err
 // UnlockUrlCacheEntryFileA calls WININET!UnlockUrlCacheEntryFileA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-unlockurlcacheentryfilea
 // Minimum OS: windows5.0.
-func UnlockUrlCacheEntryFileA(lpszUrlName foundation.PSTR, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procUnlockUrlCacheEntryFileA.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(dwReserved))
+func UnlockUrlCacheEntryFileA(lpszUrlName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procUnlockUrlCacheEntryFileA.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2736,8 +2870,9 @@ func UnlockUrlCacheEntryFileA(lpszUrlName foundation.PSTR, dwReserved uint32) er
 // UnlockUrlCacheEntryFileW calls WININET!UnlockUrlCacheEntryFileW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-unlockurlcacheentryfilew
 // Minimum OS: windows5.0.
-func UnlockUrlCacheEntryFileW(lpszUrlName foundation.PWSTR, dwReserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procUnlockUrlCacheEntryFileW.Addr(), uintptr(unsafe.Pointer(lpszUrlName)), uintptr(dwReserved))
+func UnlockUrlCacheEntryFileW(lpszUrlName string) error {
+	_lpszUrlName := win32.UTF16Ptr(lpszUrlName)
+	r1, _, e1 := syscall.SyscallN(procUnlockUrlCacheEntryFileW.Addr(), uintptr(unsafe.Pointer(_lpszUrlName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2747,8 +2882,8 @@ func UnlockUrlCacheEntryFileW(lpszUrlName foundation.PWSTR, dwReserved uint32) e
 // UnlockUrlCacheEntryStream calls WININET!UnlockUrlCacheEntryStream.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-unlockurlcacheentrystream
 // Minimum OS: windows5.0.
-func UnlockUrlCacheEntryStream(hUrlCacheStream foundation.HANDLE, Reserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procUnlockUrlCacheEntryStream.Addr(), uintptr(hUrlCacheStream), uintptr(Reserved))
+func UnlockUrlCacheEntryStream(hUrlCacheStream foundation.HANDLE) error {
+	r1, _, e1 := syscall.SyscallN(procUnlockUrlCacheEntryStream.Addr(), uintptr(hUrlCacheStream), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2756,9 +2891,9 @@ func UnlockUrlCacheEntryStream(hUrlCacheStream foundation.HANDLE, Reserved uint3
 }
 
 // UpdateUrlCacheContentPath calls WININET!UpdateUrlCacheContentPath.
-func UpdateUrlCacheContentPath(szNewPath foundation.PSTR) foundation.BOOL {
+func UpdateUrlCacheContentPath(szNewPath foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procUpdateUrlCacheContentPath.Addr(), uintptr(unsafe.Pointer(szNewPath)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // UrlCacheCheckEntriesExist calls WININET!UrlCacheCheckEntriesExist.
@@ -2773,20 +2908,25 @@ func UrlCacheCloseEntryHandle(hEntryFile unsafe.Pointer) {
 }
 
 // UrlCacheContainerSetEntryMaximumAge calls WININET!UrlCacheContainerSetEntryMaximumAge.
-func UrlCacheContainerSetEntryMaximumAge(pwszPrefix foundation.PWSTR, dwEntryMaxAge uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procUrlCacheContainerSetEntryMaximumAge.Addr(), uintptr(unsafe.Pointer(pwszPrefix)), uintptr(dwEntryMaxAge))
+func UrlCacheContainerSetEntryMaximumAge(pwszPrefix string, dwEntryMaxAge uint32) uint32 {
+	_pwszPrefix := win32.UTF16Ptr(pwszPrefix)
+	r1, _, _ := syscall.SyscallN(procUrlCacheContainerSetEntryMaximumAge.Addr(), uintptr(unsafe.Pointer(_pwszPrefix)), uintptr(dwEntryMaxAge))
 	return uint32(r1)
 }
 
 // UrlCacheCreateContainer calls WININET!UrlCacheCreateContainer.
-func UrlCacheCreateContainer(pwszName foundation.PWSTR, pwszPrefix foundation.PWSTR, pwszDirectory foundation.PWSTR, ullLimit uint64, dwOptions uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procUrlCacheCreateContainer.Addr(), uintptr(unsafe.Pointer(pwszName)), uintptr(unsafe.Pointer(pwszPrefix)), uintptr(unsafe.Pointer(pwszDirectory)), uintptr(ullLimit), uintptr(dwOptions))
+func UrlCacheCreateContainer(pwszName string, pwszPrefix string, pwszDirectory string, ullLimit uint64, dwOptions uint32) uint32 {
+	_pwszName := win32.UTF16Ptr(pwszName)
+	_pwszPrefix := win32.UTF16Ptr(pwszPrefix)
+	_pwszDirectory := win32.UTF16Ptr(pwszDirectory)
+	r1, _, _ := syscall.SyscallN(procUrlCacheCreateContainer.Addr(), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszPrefix)), uintptr(unsafe.Pointer(_pwszDirectory)), uintptr(ullLimit), uintptr(dwOptions))
 	return uint32(r1)
 }
 
 // UrlCacheFindFirstEntry calls WININET!UrlCacheFindFirstEntry.
-func UrlCacheFindFirstEntry(pwszPrefix foundation.PWSTR, dwFlags uint32, dwFilter uint32, GroupId int64, pCacheEntryInfo *URLCACHE_ENTRY_INFO, phFind *foundation.HANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procUrlCacheFindFirstEntry.Addr(), uintptr(unsafe.Pointer(pwszPrefix)), uintptr(dwFlags), uintptr(dwFilter), uintptr(GroupId), uintptr(unsafe.Pointer(pCacheEntryInfo)), uintptr(unsafe.Pointer(phFind)))
+func UrlCacheFindFirstEntry(pwszPrefix string, dwFlags uint32, dwFilter uint32, GroupId int64, pCacheEntryInfo *URLCACHE_ENTRY_INFO, phFind *foundation.HANDLE) uint32 {
+	_pwszPrefix := win32.UTF16Ptr(pwszPrefix)
+	r1, _, _ := syscall.SyscallN(procUrlCacheFindFirstEntry.Addr(), uintptr(unsafe.Pointer(_pwszPrefix)), uintptr(dwFlags), uintptr(dwFilter), uintptr(GroupId), uintptr(unsafe.Pointer(pCacheEntryInfo)), uintptr(unsafe.Pointer(phFind)))
 	return uint32(r1)
 }
 
@@ -2814,8 +2954,9 @@ func UrlCacheGetContentPaths(pppwszDirectories **foundation.PWSTR, pcDirectories
 }
 
 // UrlCacheGetEntryInfo calls WININET!UrlCacheGetEntryInfo.
-func UrlCacheGetEntryInfo(hAppCache unsafe.Pointer, pcwszUrl foundation.PWSTR, pCacheEntryInfo *URLCACHE_ENTRY_INFO) uint32 {
-	r1, _, _ := syscall.SyscallN(procUrlCacheGetEntryInfo.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(pcwszUrl)), uintptr(unsafe.Pointer(pCacheEntryInfo)))
+func UrlCacheGetEntryInfo(hAppCache unsafe.Pointer, pcwszUrl string, pCacheEntryInfo *URLCACHE_ENTRY_INFO) uint32 {
+	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
+	r1, _, _ := syscall.SyscallN(procUrlCacheGetEntryInfo.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(pCacheEntryInfo)))
 	return uint32(r1)
 }
 
@@ -2844,14 +2985,17 @@ func UrlCacheReloadSettings() uint32 {
 }
 
 // UrlCacheRetrieveEntryFile calls WININET!UrlCacheRetrieveEntryFile.
-func UrlCacheRetrieveEntryFile(hAppCache unsafe.Pointer, pcwszUrl foundation.PWSTR, pCacheEntryInfo *URLCACHE_ENTRY_INFO, phEntryFile *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procUrlCacheRetrieveEntryFile.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(pcwszUrl)), uintptr(unsafe.Pointer(pCacheEntryInfo)), uintptr(unsafe.Pointer(phEntryFile)))
+func UrlCacheRetrieveEntryFile(hAppCache unsafe.Pointer, pcwszUrl string, pCacheEntryInfo *URLCACHE_ENTRY_INFO, phEntryFile *unsafe.Pointer) uint32 {
+	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
+	r1, _, _ := syscall.SyscallN(procUrlCacheRetrieveEntryFile.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(pCacheEntryInfo)), uintptr(unsafe.Pointer(phEntryFile)))
 	return uint32(r1)
 }
 
 // UrlCacheRetrieveEntryStream calls WININET!UrlCacheRetrieveEntryStream.
-func UrlCacheRetrieveEntryStream(hAppCache unsafe.Pointer, pcwszUrl foundation.PWSTR, fRandomRead foundation.BOOL, pCacheEntryInfo *URLCACHE_ENTRY_INFO, phEntryStream *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procUrlCacheRetrieveEntryStream.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(pcwszUrl)), uintptr(fRandomRead), uintptr(unsafe.Pointer(pCacheEntryInfo)), uintptr(unsafe.Pointer(phEntryStream)))
+func UrlCacheRetrieveEntryStream(hAppCache unsafe.Pointer, pcwszUrl string, fRandomRead bool, pCacheEntryInfo *URLCACHE_ENTRY_INFO, phEntryStream *unsafe.Pointer) uint32 {
+	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
+	_fRandomRead := win32.Bool32(fRandomRead)
+	r1, _, _ := syscall.SyscallN(procUrlCacheRetrieveEntryStream.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(_fRandomRead), uintptr(unsafe.Pointer(pCacheEntryInfo)), uintptr(unsafe.Pointer(phEntryStream)))
 	return uint32(r1)
 }
 
@@ -2868,7 +3012,8 @@ func UrlCacheSetGlobalLimit(limitType URL_CACHE_LIMIT_TYPE, ullLimit uint64) uin
 }
 
 // UrlCacheUpdateEntryExtraData calls WININET!UrlCacheUpdateEntryExtraData.
-func UrlCacheUpdateEntryExtraData(hAppCache unsafe.Pointer, pcwszUrl foundation.PWSTR, pbExtraData *byte, cbExtraData uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procUrlCacheUpdateEntryExtraData.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(pcwszUrl)), uintptr(unsafe.Pointer(pbExtraData)), uintptr(cbExtraData))
+func UrlCacheUpdateEntryExtraData(hAppCache unsafe.Pointer, pcwszUrl string, pbExtraData *byte, cbExtraData uint32) uint32 {
+	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
+	r1, _, _ := syscall.SyscallN(procUrlCacheUpdateEntryExtraData.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(pbExtraData)), uintptr(cbExtraData))
 	return uint32(r1)
 }

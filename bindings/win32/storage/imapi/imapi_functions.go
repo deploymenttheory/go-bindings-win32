@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemaddressbook "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/addressbook"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
@@ -36,9 +35,9 @@ func CloseIMsgSession(lpMsgSess LPMSGSESS) {
 
 // GetAttribIMsgOnIStg calls MAPI32!GetAttribIMsgOnIStg.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/getattribimsgonistg
-func GetAttribIMsgOnIStg(lpObject unsafe.Pointer, lpPropTagArray *systemaddressbook.SPropTagArray, lppPropAttrArray **SPropAttrArray) foundation.HRESULT {
+func GetAttribIMsgOnIStg(lpObject unsafe.Pointer, lpPropTagArray *systemaddressbook.SPropTagArray, lppPropAttrArray **SPropAttrArray) error {
 	r1, _, _ := syscall.SyscallN(procGetAttribIMsgOnIStg.Addr(), uintptr(unsafe.Pointer(lpObject)), uintptr(unsafe.Pointer(lpPropTagArray)), uintptr(unsafe.Pointer(lppPropAttrArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MapStorageSCode calls MAPI32!MapStorageSCode.
@@ -64,7 +63,7 @@ func OpenIMsgSession(lpMalloc *systemcom.IMalloc, ulFlags uint32, lppMsgSess *LP
 
 // SetAttribIMsgOnIStg calls MAPI32!SetAttribIMsgOnIStg.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/setattribimsgonistg
-func SetAttribIMsgOnIStg(lpObject unsafe.Pointer, lpPropTags *systemaddressbook.SPropTagArray, lpPropAttrs *SPropAttrArray, lppPropProblems **systemaddressbook.SPropProblemArray) foundation.HRESULT {
+func SetAttribIMsgOnIStg(lpObject unsafe.Pointer, lpPropTags *systemaddressbook.SPropTagArray, lpPropAttrs *SPropAttrArray, lppPropProblems **systemaddressbook.SPropProblemArray) error {
 	r1, _, _ := syscall.SyscallN(procSetAttribIMsgOnIStg.Addr(), uintptr(unsafe.Pointer(lpObject)), uintptr(unsafe.Pointer(lpPropTags)), uintptr(unsafe.Pointer(lpPropAttrs)), uintptr(unsafe.Pointer(lppPropProblems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

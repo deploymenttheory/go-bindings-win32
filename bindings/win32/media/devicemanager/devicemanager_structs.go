@@ -39,8 +39,8 @@ type WMDMDATETIME struct {
 	WSecond uint16
 }
 
-// WMDMDetermineMaxPropStringLen is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WMDMDetermineMaxPropStringLen is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WMDMDetermineMaxPropStringLen struct {
 	Data [36]uint16
 }
@@ -102,8 +102,8 @@ type WMDM_PROP_CONFIG struct {
 	PPropDesc   *WMDM_PROP_DESC
 }
 
-// WMDM_PROP_DESC_ValidValues_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WMDM_PROP_DESC_ValidValues_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WMDM_PROP_DESC_ValidValues_e__Union struct {
 	Data [9]uint64
 }

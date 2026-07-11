@@ -76,9 +76,9 @@ var (
 
 // BuildDisplayTable calls MAPI32!BuildDisplayTable.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/builddisplaytable
-func BuildDisplayTable(lpAllocateBuffer LPALLOCATEBUFFER, lpAllocateMore LPALLOCATEMORE, lpFreeBuffer LPFREEBUFFER, lpMalloc *systemcom.IMalloc, hInstance foundation.HINSTANCE, cPages uint32, lpPage *DTPAGE, ulFlags uint32, lppTable **IMAPITable, lppTblData **ITableData) foundation.HRESULT {
+func BuildDisplayTable(lpAllocateBuffer LPALLOCATEBUFFER, lpAllocateMore LPALLOCATEMORE, lpFreeBuffer LPFREEBUFFER, lpMalloc *systemcom.IMalloc, hInstance foundation.HINSTANCE, cPages uint32, lpPage *DTPAGE, ulFlags uint32, lppTable **IMAPITable, lppTblData **ITableData) error {
 	r1, _, _ := syscall.SyscallN(procBuildDisplayTable.Addr(), uintptr(lpAllocateBuffer), uintptr(lpAllocateMore), uintptr(lpFreeBuffer), uintptr(unsafe.Pointer(lpMalloc)), uintptr(hInstance), uintptr(cPages), uintptr(unsafe.Pointer(lpPage)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppTable)), uintptr(unsafe.Pointer(lppTblData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ChangeIdleRoutine calls MAPI32!ChangeIdleRoutine.
@@ -115,36 +115,37 @@ func DeregisterIdleRoutine(ftg unsafe.Pointer) {
 
 // EnableIdleRoutine calls MAPI32!EnableIdleRoutine.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/enableidleroutine
-func EnableIdleRoutine(ftg unsafe.Pointer, fEnable foundation.BOOL) {
-	syscall.SyscallN(procEnableIdleRoutine.Addr(), uintptr(unsafe.Pointer(ftg)), uintptr(fEnable))
+func EnableIdleRoutine(ftg unsafe.Pointer, fEnable bool) {
+	_fEnable := win32.Bool32(fEnable)
+	syscall.SyscallN(procEnableIdleRoutine.Addr(), uintptr(unsafe.Pointer(ftg)), uintptr(_fEnable))
 }
 
 // FEqualNames calls MAPI32!FEqualNames.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/fequalnames
-func FEqualNames(lpName1 *MAPINAMEID, lpName2 *MAPINAMEID) foundation.BOOL {
+func FEqualNames(lpName1 *MAPINAMEID, lpName2 *MAPINAMEID) bool {
 	r1, _, _ := syscall.SyscallN(procFEqualNames.Addr(), uintptr(unsafe.Pointer(lpName1)), uintptr(unsafe.Pointer(lpName2)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FPropCompareProp calls MAPI32!FPropCompareProp.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/fpropcompareprop
-func FPropCompareProp(lpSPropValue1 *SPropValue, ulRelOp uint32, lpSPropValue2 *SPropValue) foundation.BOOL {
+func FPropCompareProp(lpSPropValue1 *SPropValue, ulRelOp uint32, lpSPropValue2 *SPropValue) bool {
 	r1, _, _ := syscall.SyscallN(procFPropCompareProp.Addr(), uintptr(unsafe.Pointer(lpSPropValue1)), uintptr(ulRelOp), uintptr(unsafe.Pointer(lpSPropValue2)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FPropContainsProp calls MAPI32!FPropContainsProp.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/fpropcontainsprop
-func FPropContainsProp(lpSPropValueDst *SPropValue, lpSPropValueSrc *SPropValue, ulFuzzyLevel uint32) foundation.BOOL {
+func FPropContainsProp(lpSPropValueDst *SPropValue, lpSPropValueSrc *SPropValue, ulFuzzyLevel uint32) bool {
 	r1, _, _ := syscall.SyscallN(procFPropContainsProp.Addr(), uintptr(unsafe.Pointer(lpSPropValueDst)), uintptr(unsafe.Pointer(lpSPropValueSrc)), uintptr(ulFuzzyLevel))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FPropExists calls MAPI32!FPropExists.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/fpropexists
-func FPropExists(lpMapiProp *IMAPIProp, ulPropTag uint32) foundation.BOOL {
+func FPropExists(lpMapiProp *IMAPIProp, ulPropTag uint32) bool {
 	r1, _, _ := syscall.SyscallN(procFPropExists.Addr(), uintptr(unsafe.Pointer(lpMapiProp)), uintptr(ulPropTag))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // FreePadrlist calls MAPI32!FreePadrlist.
@@ -168,65 +169,65 @@ func FtgRegisterIdleRoutine(lpfnIdle PFNIDLE, lpvIdleParam unsafe.Pointer, priId
 
 // HrAddColumns calls MAPI32!HrAddColumns.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hraddcolumns
-func HrAddColumns(lptbl *IMAPITable, lpproptagColumnsNew *SPropTagArray, lpAllocateBuffer LPALLOCATEBUFFER, lpFreeBuffer LPFREEBUFFER) foundation.HRESULT {
+func HrAddColumns(lptbl *IMAPITable, lpproptagColumnsNew *SPropTagArray, lpAllocateBuffer LPALLOCATEBUFFER, lpFreeBuffer LPFREEBUFFER) error {
 	r1, _, _ := syscall.SyscallN(procHrAddColumns.Addr(), uintptr(unsafe.Pointer(lptbl)), uintptr(unsafe.Pointer(lpproptagColumnsNew)), uintptr(lpAllocateBuffer), uintptr(lpFreeBuffer))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrAddColumnsEx calls MAPI32!HrAddColumnsEx.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hraddcolumnsex
-func HrAddColumnsEx(lptbl *IMAPITable, lpproptagColumnsNew *SPropTagArray, lpAllocateBuffer LPALLOCATEBUFFER, lpFreeBuffer LPFREEBUFFER, lpfnFilterColumns uintptr) foundation.HRESULT {
+func HrAddColumnsEx(lptbl *IMAPITable, lpproptagColumnsNew *SPropTagArray, lpAllocateBuffer LPALLOCATEBUFFER, lpFreeBuffer LPFREEBUFFER, lpfnFilterColumns uintptr) error {
 	r1, _, _ := syscall.SyscallN(procHrAddColumnsEx.Addr(), uintptr(unsafe.Pointer(lptbl)), uintptr(unsafe.Pointer(lpproptagColumnsNew)), uintptr(lpAllocateBuffer), uintptr(lpFreeBuffer), uintptr(lpfnFilterColumns))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrAllocAdviseSink calls MAPI32!HrAllocAdviseSink.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrallocadvisesink
-func HrAllocAdviseSink(lpfnCallback LPNOTIFCALLBACK, lpvContext unsafe.Pointer, lppAdviseSink **IMAPIAdviseSink) foundation.HRESULT {
+func HrAllocAdviseSink(lpfnCallback LPNOTIFCALLBACK, lpvContext unsafe.Pointer, lppAdviseSink **IMAPIAdviseSink) error {
 	r1, _, _ := syscall.SyscallN(procHrAllocAdviseSink.Addr(), uintptr(lpfnCallback), uintptr(unsafe.Pointer(lpvContext)), uintptr(unsafe.Pointer(lppAdviseSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrDispatchNotifications calls MAPI32!HrDispatchNotifications.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrdispatchnotifications
-func HrDispatchNotifications(ulFlags uint32) foundation.HRESULT {
+func HrDispatchNotifications(ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procHrDispatchNotifications.Addr(), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrGetOneProp calls MAPI32!HrGetOneProp.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrgetoneprop
-func HrGetOneProp(lpMapiProp *IMAPIProp, ulPropTag uint32, lppProp **SPropValue) foundation.HRESULT {
+func HrGetOneProp(lpMapiProp *IMAPIProp, ulPropTag uint32, lppProp **SPropValue) error {
 	r1, _, _ := syscall.SyscallN(procHrGetOneProp.Addr(), uintptr(unsafe.Pointer(lpMapiProp)), uintptr(ulPropTag), uintptr(unsafe.Pointer(lppProp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrIStorageFromStream calls MAPI32!HrIStorageFromStream.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hristoragefromstream
-func HrIStorageFromStream(lpUnkIn *systemcom.IUnknown, lpInterface *win32.GUID, ulFlags uint32, lppStorageOut **systemcomstructuredstorage.IStorage) foundation.HRESULT {
+func HrIStorageFromStream(lpUnkIn *systemcom.IUnknown, lpInterface *win32.GUID, ulFlags uint32, lppStorageOut **systemcomstructuredstorage.IStorage) error {
 	r1, _, _ := syscall.SyscallN(procHrIStorageFromStream.Addr(), uintptr(unsafe.Pointer(lpUnkIn)), uintptr(unsafe.Pointer(lpInterface)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppStorageOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrQueryAllRows calls MAPI32!HrQueryAllRows.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrqueryallrows
-func HrQueryAllRows(lpTable *IMAPITable, lpPropTags *SPropTagArray, lpRestriction *SRestriction, lpSortOrderSet *SSortOrderSet, crowsMax int32, lppRows **SRowSet) foundation.HRESULT {
+func HrQueryAllRows(lpTable *IMAPITable, lpPropTags *SPropTagArray, lpRestriction *SRestriction, lpSortOrderSet *SSortOrderSet, crowsMax int32, lppRows **SRowSet) error {
 	r1, _, _ := syscall.SyscallN(procHrQueryAllRows.Addr(), uintptr(unsafe.Pointer(lpTable)), uintptr(unsafe.Pointer(lpPropTags)), uintptr(unsafe.Pointer(lpRestriction)), uintptr(unsafe.Pointer(lpSortOrderSet)), uintptr(crowsMax), uintptr(unsafe.Pointer(lppRows)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrSetOneProp calls MAPI32!HrSetOneProp.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrsetoneprop
-func HrSetOneProp(lpMapiProp *IMAPIProp, lpProp *SPropValue) foundation.HRESULT {
+func HrSetOneProp(lpMapiProp *IMAPIProp, lpProp *SPropValue) error {
 	r1, _, _ := syscall.SyscallN(procHrSetOneProp.Addr(), uintptr(unsafe.Pointer(lpMapiProp)), uintptr(unsafe.Pointer(lpProp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrThisThreadAdviseSink calls MAPI32!HrThisThreadAdviseSink.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/hrthisthreadadvisesink
-func HrThisThreadAdviseSink(lpAdviseSink *IMAPIAdviseSink, lppAdviseSink **IMAPIAdviseSink) foundation.HRESULT {
+func HrThisThreadAdviseSink(lpAdviseSink *IMAPIAdviseSink, lppAdviseSink **IMAPIAdviseSink) error {
 	r1, _, _ := syscall.SyscallN(procHrThisThreadAdviseSink.Addr(), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(lppAdviseSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LPropCompareProp calls MAPI32!LPropCompareProp.
@@ -264,9 +265,9 @@ func MAPIInitIdle(lpvReserved unsafe.Pointer) int32 {
 
 // OpenStreamOnFile calls MAPI32!OpenStreamOnFile.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/openstreamonfile
-func OpenStreamOnFile(lpAllocateBuffer LPALLOCATEBUFFER, lpFreeBuffer LPFREEBUFFER, ulFlags uint32, lpszFileName *int8, lpszPrefix *int8, lppStream **systemcom.IStream) foundation.HRESULT {
+func OpenStreamOnFile(lpAllocateBuffer LPALLOCATEBUFFER, lpFreeBuffer LPFREEBUFFER, ulFlags uint32, lpszFileName *int8, lpszPrefix *int8, lppStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procOpenStreamOnFile.Addr(), uintptr(lpAllocateBuffer), uintptr(lpFreeBuffer), uintptr(ulFlags), uintptr(unsafe.Pointer(lpszFileName)), uintptr(unsafe.Pointer(lpszPrefix)), uintptr(unsafe.Pointer(lppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PpropFindProp calls MAPI32!PpropFindProp.
@@ -285,9 +286,9 @@ func PropCopyMore(lpSPropValueDest *SPropValue, lpSPropValueSrc *SPropValue, lpf
 
 // RTFSync calls MAPI32!RTFSync.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/rtfsync
-func RTFSync(lpMessage *IMessage, ulFlags uint32, lpfMessageUpdated *foundation.BOOL) foundation.HRESULT {
+func RTFSync(lpMessage *IMessage, ulFlags uint32, lpfMessageUpdated *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procRTFSync.Addr(), uintptr(unsafe.Pointer(lpMessage)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpfMessageUpdated)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScCopyNotifications calls MAPI32!ScCopyNotifications.
@@ -418,14 +419,14 @@ func UlRelease(lpunk unsafe.Pointer) uint32 {
 
 // WrapCompressedRTFStream calls MAPI32!WrapCompressedRTFStream.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/wrapcompressedrtfstream
-func WrapCompressedRTFStream(lpCompressedRTFStream *systemcom.IStream, ulFlags uint32, lpUncompressedRTFStream **systemcom.IStream) foundation.HRESULT {
+func WrapCompressedRTFStream(lpCompressedRTFStream *systemcom.IStream, ulFlags uint32, lpUncompressedRTFStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procWrapCompressedRTFStream.Addr(), uintptr(unsafe.Pointer(lpCompressedRTFStream)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpUncompressedRTFStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WrapStoreEntryID calls MAPI32!WrapStoreEntryID.
 // https://learn.microsoft.com/office/client-developer/outlook/mapi/wrapstoreentryid
-func WrapStoreEntryID(ulFlags uint32, lpszDLLName *int8, cbOrigEntry uint32, lpOrigEntry *ENTRYID, lpcbWrappedEntry *uint32, lppWrappedEntry **ENTRYID) foundation.HRESULT {
+func WrapStoreEntryID(ulFlags uint32, lpszDLLName *int8, cbOrigEntry uint32, lpOrigEntry *ENTRYID, lpcbWrappedEntry *uint32, lppWrappedEntry **ENTRYID) error {
 	r1, _, _ := syscall.SyscallN(procWrapStoreEntryID.Addr(), uintptr(ulFlags), uintptr(unsafe.Pointer(lpszDLLName)), uintptr(cbOrigEntry), uintptr(unsafe.Pointer(lpOrigEntry)), uintptr(unsafe.Pointer(lpcbWrappedEntry)), uintptr(unsafe.Pointer(lppWrappedEntry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

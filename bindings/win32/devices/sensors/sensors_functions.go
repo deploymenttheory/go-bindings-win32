@@ -138,9 +138,13 @@ func GetPerformanceTime(TimeMs *uint32) foundation.NTSTATUS {
 }
 
 // InitPropVariantFromCLSIDArray calls SensorsUtilsV2!InitPropVariantFromCLSIDArray.
-func InitPropVariantFromCLSIDArray(members *win32.GUID, size uint32, ppropvar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procInitPropVariantFromCLSIDArray.Addr(), uintptr(unsafe.Pointer(members)), uintptr(size), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+func InitPropVariantFromCLSIDArray(members []win32.GUID, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
+	var _members *win32.GUID
+	if len(members) > 0 {
+		_members = &members[0]
+	}
+	r1, _, _ := syscall.SyscallN(procInitPropVariantFromCLSIDArray.Addr(), uintptr(unsafe.Pointer(_members)), uintptr(len(members)), uintptr(unsafe.Pointer(ppropvar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsCollectionListSame calls SensorsUtilsV2!IsCollectionListSame.
@@ -150,8 +154,12 @@ func IsCollectionListSame(ListA *SENSOR_COLLECTION_LIST, ListB *SENSOR_COLLECTIO
 }
 
 // IsGUIDPresentInList calls SensorsUtilsV2!IsGUIDPresentInList.
-func IsGUIDPresentInList(guidArray *win32.GUID, arrayLength uint32, guidElem *win32.GUID) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procIsGUIDPresentInList.Addr(), uintptr(unsafe.Pointer(guidArray)), uintptr(arrayLength), uintptr(unsafe.Pointer(guidElem)))
+func IsGUIDPresentInList(guidArray []win32.GUID, guidElem *win32.GUID) foundation.BOOLEAN {
+	var _guidArray *win32.GUID
+	if len(guidArray) > 0 {
+		_guidArray = &guidArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procIsGUIDPresentInList.Addr(), uintptr(unsafe.Pointer(_guidArray)), uintptr(len(guidArray)), uintptr(unsafe.Pointer(guidElem)))
 	return foundation.BOOLEAN(r1)
 }
 

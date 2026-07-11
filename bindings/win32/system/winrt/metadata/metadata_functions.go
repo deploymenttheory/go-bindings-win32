@@ -37,21 +37,21 @@ var (
 // MetaDataGetDispenser calls RoMetadata!MetaDataGetDispenser.
 // https://learn.microsoft.com/windows/win32/api/rometadata/nf-rometadata-metadatagetdispenser
 // Minimum OS: windows8.0.
-func MetaDataGetDispenser(rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func MetaDataGetDispenser(rclsid *win32.GUID, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procMetaDataGetDispenser.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoCreateNonAgilePropertySet calls api-ms-win-ro-typeresolution-l1-1-1!RoCreateNonAgilePropertySet.
-func RoCreateNonAgilePropertySet(ppPropertySet *uintptr) foundation.HRESULT {
+func RoCreateNonAgilePropertySet(ppPropertySet *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procRoCreateNonAgilePropertySet.Addr(), uintptr(unsafe.Pointer(ppPropertySet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoCreatePropertySetSerializer calls api-ms-win-ro-typeresolution-l1-1-1!RoCreatePropertySetSerializer.
-func RoCreatePropertySetSerializer(ppPropertySetSerializer *uintptr) foundation.HRESULT {
+func RoCreatePropertySetSerializer(ppPropertySetSerializer *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procRoCreatePropertySetSerializer.Addr(), uintptr(unsafe.Pointer(ppPropertySetSerializer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoFreeParameterizedTypeExtra calls api-ms-win-core-winrt-roparameterizediid-l1-1-0!RoFreeParameterizedTypeExtra.
@@ -64,33 +64,39 @@ func RoFreeParameterizedTypeExtra(extra ROPARAMIIDHANDLE) {
 // RoGetMetaDataFile calls api-ms-win-ro-typeresolution-l1-1-0!RoGetMetaDataFile.
 // https://learn.microsoft.com/windows/win32/api/rometadataresolution/nf-rometadataresolution-rogetmetadatafile
 // Minimum OS: windows8.0.
-func RoGetMetaDataFile(name systemwinrt.HSTRING, metaDataDispenser *IMetaDataDispenserEx, metaDataFilePath *systemwinrt.HSTRING, metaDataImport **IMetaDataImport2, typeDefToken *uint32) foundation.HRESULT {
+func RoGetMetaDataFile(name systemwinrt.HSTRING, metaDataDispenser *IMetaDataDispenserEx, metaDataFilePath *systemwinrt.HSTRING, metaDataImport **IMetaDataImport2, typeDefToken *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRoGetMetaDataFile.Addr(), uintptr(name), uintptr(unsafe.Pointer(metaDataDispenser)), uintptr(unsafe.Pointer(metaDataFilePath)), uintptr(unsafe.Pointer(metaDataImport)), uintptr(unsafe.Pointer(typeDefToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoGetParameterizedTypeInstanceIID calls api-ms-win-core-winrt-roparameterizediid-l1-1-0!RoGetParameterizedTypeInstanceIID.
 // https://learn.microsoft.com/windows/win32/api/roparameterizediid/nf-roparameterizediid-rogetparameterizedtypeinstanceiid
 // Minimum OS: windows8.0.
-func RoGetParameterizedTypeInstanceIID(nameElementCount uint32, nameElements *foundation.PWSTR, metaDataLocator *IRoMetaDataLocator, iid *win32.GUID, pExtra *ROPARAMIIDHANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoGetParameterizedTypeInstanceIID.Addr(), uintptr(nameElementCount), uintptr(unsafe.Pointer(nameElements)), uintptr(unsafe.Pointer(metaDataLocator)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(pExtra)))
-	return foundation.HRESULT(r1)
+func RoGetParameterizedTypeInstanceIID(nameElements []foundation.PWSTR, metaDataLocator *IRoMetaDataLocator, iid *win32.GUID, pExtra *ROPARAMIIDHANDLE) error {
+	var _nameElements *foundation.PWSTR
+	if len(nameElements) > 0 {
+		_nameElements = &nameElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRoGetParameterizedTypeInstanceIID.Addr(), uintptr(len(nameElements)), uintptr(unsafe.Pointer(_nameElements)), uintptr(unsafe.Pointer(metaDataLocator)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(pExtra)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoIsApiContractMajorVersionPresent calls api-ms-win-ro-typeresolution-l1-1-1!RoIsApiContractMajorVersionPresent.
 // https://learn.microsoft.com/windows/win32/api/rometadataresolution/nf-rometadataresolution-roisapicontractmajorversionpresent
 // Minimum OS: windows10.0.10240.
-func RoIsApiContractMajorVersionPresent(name foundation.PWSTR, majorVersion uint16, present *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoIsApiContractMajorVersionPresent.Addr(), uintptr(unsafe.Pointer(name)), uintptr(majorVersion), uintptr(unsafe.Pointer(present)))
-	return foundation.HRESULT(r1)
+func RoIsApiContractMajorVersionPresent(name string, majorVersion uint16, present *foundation.BOOL) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(procRoIsApiContractMajorVersionPresent.Addr(), uintptr(unsafe.Pointer(_name)), uintptr(majorVersion), uintptr(unsafe.Pointer(present)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoIsApiContractPresent calls api-ms-win-ro-typeresolution-l1-1-1!RoIsApiContractPresent.
 // https://learn.microsoft.com/windows/win32/api/rometadataresolution/nf-rometadataresolution-roisapicontractpresent
 // Minimum OS: windows10.0.10240.
-func RoIsApiContractPresent(name foundation.PWSTR, majorVersion uint16, minorVersion uint16, present *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoIsApiContractPresent.Addr(), uintptr(unsafe.Pointer(name)), uintptr(majorVersion), uintptr(minorVersion), uintptr(unsafe.Pointer(present)))
-	return foundation.HRESULT(r1)
+func RoIsApiContractPresent(name string, majorVersion uint16, minorVersion uint16, present *foundation.BOOL) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(procRoIsApiContractPresent.Addr(), uintptr(unsafe.Pointer(_name)), uintptr(majorVersion), uintptr(minorVersion), uintptr(unsafe.Pointer(present)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoParameterizedTypeExtraGetTypeSignature calls api-ms-win-core-winrt-roparameterizediid-l1-1-0!RoParameterizedTypeExtraGetTypeSignature.
@@ -104,15 +110,19 @@ func RoParameterizedTypeExtraGetTypeSignature(extra ROPARAMIIDHANDLE) foundation
 // RoParseTypeName calls api-ms-win-ro-typeresolution-l1-1-0!RoParseTypeName.
 // https://learn.microsoft.com/windows/win32/api/rometadataresolution/nf-rometadataresolution-roparsetypename
 // Minimum OS: windows8.0.
-func RoParseTypeName(typeName systemwinrt.HSTRING, partsCount *uint32, typeNameParts **systemwinrt.HSTRING) foundation.HRESULT {
+func RoParseTypeName(typeName systemwinrt.HSTRING, partsCount *uint32, typeNameParts **systemwinrt.HSTRING) error {
 	r1, _, _ := syscall.SyscallN(procRoParseTypeName.Addr(), uintptr(typeName), uintptr(unsafe.Pointer(partsCount)), uintptr(unsafe.Pointer(typeNameParts)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RoResolveNamespace calls api-ms-win-ro-typeresolution-l1-1-0!RoResolveNamespace.
 // https://learn.microsoft.com/windows/win32/api/rometadataresolution/nf-rometadataresolution-roresolvenamespace
 // Minimum OS: windows8.0.
-func RoResolveNamespace(name systemwinrt.HSTRING, windowsMetaDataDir systemwinrt.HSTRING, packageGraphDirsCount uint32, packageGraphDirs *systemwinrt.HSTRING, metaDataFilePathsCount *uint32, metaDataFilePaths **systemwinrt.HSTRING, subNamespacesCount *uint32, subNamespaces **systemwinrt.HSTRING) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRoResolveNamespace.Addr(), uintptr(name), uintptr(windowsMetaDataDir), uintptr(packageGraphDirsCount), uintptr(unsafe.Pointer(packageGraphDirs)), uintptr(unsafe.Pointer(metaDataFilePathsCount)), uintptr(unsafe.Pointer(metaDataFilePaths)), uintptr(unsafe.Pointer(subNamespacesCount)), uintptr(unsafe.Pointer(subNamespaces)))
-	return foundation.HRESULT(r1)
+func RoResolveNamespace(name systemwinrt.HSTRING, windowsMetaDataDir systemwinrt.HSTRING, packageGraphDirs []systemwinrt.HSTRING, metaDataFilePathsCount *uint32, metaDataFilePaths **systemwinrt.HSTRING, subNamespacesCount *uint32, subNamespaces **systemwinrt.HSTRING) error {
+	var _packageGraphDirs *systemwinrt.HSTRING
+	if len(packageGraphDirs) > 0 {
+		_packageGraphDirs = &packageGraphDirs[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRoResolveNamespace.Addr(), uintptr(name), uintptr(windowsMetaDataDir), uintptr(len(packageGraphDirs)), uintptr(unsafe.Pointer(_packageGraphDirs)), uintptr(unsafe.Pointer(metaDataFilePathsCount)), uintptr(unsafe.Pointer(metaDataFilePaths)), uintptr(unsafe.Pointer(subNamespacesCount)), uintptr(unsafe.Pointer(subNamespaces)))
+	return win32.HRESULTError(int32(r1))
 }

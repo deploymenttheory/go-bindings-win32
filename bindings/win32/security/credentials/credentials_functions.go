@@ -21,151 +21,164 @@ var (
 )
 
 var (
+	procCredDelete                                  = modADVAPI32.NewProc("CredDeleteW")
 	procCredDeleteA                                 = modADVAPI32.NewProc("CredDeleteA")
-	procCredDeleteW                                 = modADVAPI32.NewProc("CredDeleteW")
+	procCredEnumerate                               = modADVAPI32.NewProc("CredEnumerateW")
 	procCredEnumerateA                              = modADVAPI32.NewProc("CredEnumerateA")
-	procCredEnumerateW                              = modADVAPI32.NewProc("CredEnumerateW")
+	procCredFindBestCredential                      = modADVAPI32.NewProc("CredFindBestCredentialW")
 	procCredFindBestCredentialA                     = modADVAPI32.NewProc("CredFindBestCredentialA")
-	procCredFindBestCredentialW                     = modADVAPI32.NewProc("CredFindBestCredentialW")
 	procCredFree                                    = modADVAPI32.NewProc("CredFree")
 	procCredGetSessionTypes                         = modADVAPI32.NewProc("CredGetSessionTypes")
+	procCredGetTargetInfo                           = modADVAPI32.NewProc("CredGetTargetInfoW")
 	procCredGetTargetInfoA                          = modADVAPI32.NewProc("CredGetTargetInfoA")
-	procCredGetTargetInfoW                          = modADVAPI32.NewProc("CredGetTargetInfoW")
+	procCredIsMarshaledCredential                   = modADVAPI32.NewProc("CredIsMarshaledCredentialW")
 	procCredIsMarshaledCredentialA                  = modADVAPI32.NewProc("CredIsMarshaledCredentialA")
-	procCredIsMarshaledCredentialW                  = modADVAPI32.NewProc("CredIsMarshaledCredentialW")
+	procCredIsProtected                             = modADVAPI32.NewProc("CredIsProtectedW")
 	procCredIsProtectedA                            = modADVAPI32.NewProc("CredIsProtectedA")
-	procCredIsProtectedW                            = modADVAPI32.NewProc("CredIsProtectedW")
+	procCredMarshalCredential                       = modADVAPI32.NewProc("CredMarshalCredentialW")
 	procCredMarshalCredentialA                      = modADVAPI32.NewProc("CredMarshalCredentialA")
-	procCredMarshalCredentialW                      = modADVAPI32.NewProc("CredMarshalCredentialW")
+	procCredProtect                                 = modADVAPI32.NewProc("CredProtectW")
 	procCredProtectA                                = modADVAPI32.NewProc("CredProtectA")
-	procCredProtectW                                = modADVAPI32.NewProc("CredProtectW")
+	procCredRead                                    = modADVAPI32.NewProc("CredReadW")
 	procCredReadA                                   = modADVAPI32.NewProc("CredReadA")
+	procCredReadDomainCredentials                   = modADVAPI32.NewProc("CredReadDomainCredentialsW")
 	procCredReadDomainCredentialsA                  = modADVAPI32.NewProc("CredReadDomainCredentialsA")
-	procCredReadDomainCredentialsW                  = modADVAPI32.NewProc("CredReadDomainCredentialsW")
-	procCredReadW                                   = modADVAPI32.NewProc("CredReadW")
+	procCredRename                                  = modADVAPI32.NewProc("CredRenameW")
 	procCredRenameA                                 = modADVAPI32.NewProc("CredRenameA")
-	procCredRenameW                                 = modADVAPI32.NewProc("CredRenameW")
+	procCredUnmarshalCredential                     = modADVAPI32.NewProc("CredUnmarshalCredentialW")
 	procCredUnmarshalCredentialA                    = modADVAPI32.NewProc("CredUnmarshalCredentialA")
-	procCredUnmarshalCredentialW                    = modADVAPI32.NewProc("CredUnmarshalCredentialW")
+	procCredUnprotect                               = modADVAPI32.NewProc("CredUnprotectW")
 	procCredUnprotectA                              = modADVAPI32.NewProc("CredUnprotectA")
-	procCredUnprotectW                              = modADVAPI32.NewProc("CredUnprotectW")
+	procCredWrite                                   = modADVAPI32.NewProc("CredWriteW")
 	procCredWriteA                                  = modADVAPI32.NewProc("CredWriteA")
+	procCredWriteDomainCredentials                  = modADVAPI32.NewProc("CredWriteDomainCredentialsW")
 	procCredWriteDomainCredentialsA                 = modADVAPI32.NewProc("CredWriteDomainCredentialsA")
-	procCredWriteDomainCredentialsW                 = modADVAPI32.NewProc("CredWriteDomainCredentialsW")
-	procCredWriteW                                  = modADVAPI32.NewProc("CredWriteW")
+	procCredPackAuthenticationBuffer                = modcredui.NewProc("CredPackAuthenticationBufferW")
 	procCredPackAuthenticationBufferA               = modcredui.NewProc("CredPackAuthenticationBufferA")
-	procCredPackAuthenticationBufferW               = modcredui.NewProc("CredPackAuthenticationBufferW")
+	procCredUICmdLinePromptForCredentials           = modcredui.NewProc("CredUICmdLinePromptForCredentialsW")
 	procCredUICmdLinePromptForCredentialsA          = modcredui.NewProc("CredUICmdLinePromptForCredentialsA")
-	procCredUICmdLinePromptForCredentialsW          = modcredui.NewProc("CredUICmdLinePromptForCredentialsW")
+	procCredUIConfirmCredentials                    = modcredui.NewProc("CredUIConfirmCredentialsW")
 	procCredUIConfirmCredentialsA                   = modcredui.NewProc("CredUIConfirmCredentialsA")
-	procCredUIConfirmCredentialsW                   = modcredui.NewProc("CredUIConfirmCredentialsW")
+	procCredUIParseUserName                         = modcredui.NewProc("CredUIParseUserNameW")
 	procCredUIParseUserNameA                        = modcredui.NewProc("CredUIParseUserNameA")
-	procCredUIParseUserNameW                        = modcredui.NewProc("CredUIParseUserNameW")
+	procCredUIPromptForCredentials                  = modcredui.NewProc("CredUIPromptForCredentialsW")
 	procCredUIPromptForCredentialsA                 = modcredui.NewProc("CredUIPromptForCredentialsA")
-	procCredUIPromptForCredentialsW                 = modcredui.NewProc("CredUIPromptForCredentialsW")
+	procCredUIPromptForWindowsCredentials           = modcredui.NewProc("CredUIPromptForWindowsCredentialsW")
 	procCredUIPromptForWindowsCredentialsA          = modcredui.NewProc("CredUIPromptForWindowsCredentialsA")
-	procCredUIPromptForWindowsCredentialsW          = modcredui.NewProc("CredUIPromptForWindowsCredentialsW")
 	procCredUIReadSSOCredW                          = modcredui.NewProc("CredUIReadSSOCredW")
 	procCredUIStoreSSOCredW                         = modcredui.NewProc("CredUIStoreSSOCredW")
+	procCredUnPackAuthenticationBuffer              = modcredui.NewProc("CredUnPackAuthenticationBufferW")
 	procCredUnPackAuthenticationBufferA             = modcredui.NewProc("CredUnPackAuthenticationBufferA")
-	procCredUnPackAuthenticationBufferW             = modcredui.NewProc("CredUnPackAuthenticationBufferW")
 	procKeyCredentialManagerFreeInformation         = modKeyCredMgr.NewProc("KeyCredentialManagerFreeInformation")
 	procKeyCredentialManagerGetInformation          = modKeyCredMgr.NewProc("KeyCredentialManagerGetInformation")
 	procKeyCredentialManagerGetOperationErrorStates = modKeyCredMgr.NewProc("KeyCredentialManagerGetOperationErrorStates")
 	procKeyCredentialManagerShowUIOperation         = modKeyCredMgr.NewProc("KeyCredentialManagerShowUIOperation")
+	procGetOpenCardName                             = modSCARDDLG.NewProc("GetOpenCardNameW")
 	procGetOpenCardNameA                            = modSCARDDLG.NewProc("GetOpenCardNameA")
-	procGetOpenCardNameW                            = modSCARDDLG.NewProc("GetOpenCardNameW")
 	procSCardDlgExtendedError                       = modSCARDDLG.NewProc("SCardDlgExtendedError")
+	procSCardUIDlgSelectCard                        = modSCARDDLG.NewProc("SCardUIDlgSelectCardW")
 	procSCardUIDlgSelectCardA                       = modSCARDDLG.NewProc("SCardUIDlgSelectCardA")
-	procSCardUIDlgSelectCardW                       = modSCARDDLG.NewProc("SCardUIDlgSelectCardW")
 	procSCardAccessStartedEvent                     = modWinSCard.NewProc("SCardAccessStartedEvent")
+	procSCardAddReaderToGroup                       = modWinSCard.NewProc("SCardAddReaderToGroupW")
 	procSCardAddReaderToGroupA                      = modWinSCard.NewProc("SCardAddReaderToGroupA")
-	procSCardAddReaderToGroupW                      = modWinSCard.NewProc("SCardAddReaderToGroupW")
 	procSCardAudit                                  = modWinSCard.NewProc("SCardAudit")
 	procSCardBeginTransaction                       = modWinSCard.NewProc("SCardBeginTransaction")
 	procSCardCancel                                 = modWinSCard.NewProc("SCardCancel")
+	procSCardConnect                                = modWinSCard.NewProc("SCardConnectW")
 	procSCardConnectA                               = modWinSCard.NewProc("SCardConnectA")
-	procSCardConnectW                               = modWinSCard.NewProc("SCardConnectW")
 	procSCardControl                                = modWinSCard.NewProc("SCardControl")
 	procSCardDisconnect                             = modWinSCard.NewProc("SCardDisconnect")
 	procSCardEndTransaction                         = modWinSCard.NewProc("SCardEndTransaction")
 	procSCardEstablishContext                       = modWinSCard.NewProc("SCardEstablishContext")
+	procSCardForgetCardType                         = modWinSCard.NewProc("SCardForgetCardTypeW")
 	procSCardForgetCardTypeA                        = modWinSCard.NewProc("SCardForgetCardTypeA")
-	procSCardForgetCardTypeW                        = modWinSCard.NewProc("SCardForgetCardTypeW")
+	procSCardForgetReader                           = modWinSCard.NewProc("SCardForgetReaderW")
 	procSCardForgetReaderA                          = modWinSCard.NewProc("SCardForgetReaderA")
+	procSCardForgetReaderGroup                      = modWinSCard.NewProc("SCardForgetReaderGroupW")
 	procSCardForgetReaderGroupA                     = modWinSCard.NewProc("SCardForgetReaderGroupA")
-	procSCardForgetReaderGroupW                     = modWinSCard.NewProc("SCardForgetReaderGroupW")
-	procSCardForgetReaderW                          = modWinSCard.NewProc("SCardForgetReaderW")
 	procSCardFreeMemory                             = modWinSCard.NewProc("SCardFreeMemory")
 	procSCardGetAttrib                              = modWinSCard.NewProc("SCardGetAttrib")
+	procSCardGetCardTypeProviderName                = modWinSCard.NewProc("SCardGetCardTypeProviderNameW")
 	procSCardGetCardTypeProviderNameA               = modWinSCard.NewProc("SCardGetCardTypeProviderNameA")
-	procSCardGetCardTypeProviderNameW               = modWinSCard.NewProc("SCardGetCardTypeProviderNameW")
+	procSCardGetDeviceTypeId                        = modWinSCard.NewProc("SCardGetDeviceTypeIdW")
 	procSCardGetDeviceTypeIdA                       = modWinSCard.NewProc("SCardGetDeviceTypeIdA")
-	procSCardGetDeviceTypeIdW                       = modWinSCard.NewProc("SCardGetDeviceTypeIdW")
+	procSCardGetProviderId                          = modWinSCard.NewProc("SCardGetProviderIdW")
 	procSCardGetProviderIdA                         = modWinSCard.NewProc("SCardGetProviderIdA")
-	procSCardGetProviderIdW                         = modWinSCard.NewProc("SCardGetProviderIdW")
+	procSCardGetReaderDeviceInstanceId              = modWinSCard.NewProc("SCardGetReaderDeviceInstanceIdW")
 	procSCardGetReaderDeviceInstanceIdA             = modWinSCard.NewProc("SCardGetReaderDeviceInstanceIdA")
-	procSCardGetReaderDeviceInstanceIdW             = modWinSCard.NewProc("SCardGetReaderDeviceInstanceIdW")
+	procSCardGetReaderIcon                          = modWinSCard.NewProc("SCardGetReaderIconW")
 	procSCardGetReaderIconA                         = modWinSCard.NewProc("SCardGetReaderIconA")
-	procSCardGetReaderIconW                         = modWinSCard.NewProc("SCardGetReaderIconW")
+	procSCardGetStatusChange                        = modWinSCard.NewProc("SCardGetStatusChangeW")
 	procSCardGetStatusChangeA                       = modWinSCard.NewProc("SCardGetStatusChangeA")
-	procSCardGetStatusChangeW                       = modWinSCard.NewProc("SCardGetStatusChangeW")
 	procSCardGetTransmitCount                       = modWinSCard.NewProc("SCardGetTransmitCount")
+	procSCardIntroduceCardType                      = modWinSCard.NewProc("SCardIntroduceCardTypeW")
 	procSCardIntroduceCardTypeA                     = modWinSCard.NewProc("SCardIntroduceCardTypeA")
-	procSCardIntroduceCardTypeW                     = modWinSCard.NewProc("SCardIntroduceCardTypeW")
+	procSCardIntroduceReader                        = modWinSCard.NewProc("SCardIntroduceReaderW")
 	procSCardIntroduceReaderA                       = modWinSCard.NewProc("SCardIntroduceReaderA")
+	procSCardIntroduceReaderGroup                   = modWinSCard.NewProc("SCardIntroduceReaderGroupW")
 	procSCardIntroduceReaderGroupA                  = modWinSCard.NewProc("SCardIntroduceReaderGroupA")
-	procSCardIntroduceReaderGroupW                  = modWinSCard.NewProc("SCardIntroduceReaderGroupW")
-	procSCardIntroduceReaderW                       = modWinSCard.NewProc("SCardIntroduceReaderW")
 	procSCardIsValidContext                         = modWinSCard.NewProc("SCardIsValidContext")
+	procSCardListCards                              = modWinSCard.NewProc("SCardListCardsW")
 	procSCardListCardsA                             = modWinSCard.NewProc("SCardListCardsA")
-	procSCardListCardsW                             = modWinSCard.NewProc("SCardListCardsW")
+	procSCardListInterfaces                         = modWinSCard.NewProc("SCardListInterfacesW")
 	procSCardListInterfacesA                        = modWinSCard.NewProc("SCardListInterfacesA")
-	procSCardListInterfacesW                        = modWinSCard.NewProc("SCardListInterfacesW")
+	procSCardListReaderGroups                       = modWinSCard.NewProc("SCardListReaderGroupsW")
 	procSCardListReaderGroupsA                      = modWinSCard.NewProc("SCardListReaderGroupsA")
-	procSCardListReaderGroupsW                      = modWinSCard.NewProc("SCardListReaderGroupsW")
+	procSCardListReaders                            = modWinSCard.NewProc("SCardListReadersW")
 	procSCardListReadersA                           = modWinSCard.NewProc("SCardListReadersA")
-	procSCardListReadersW                           = modWinSCard.NewProc("SCardListReadersW")
+	procSCardListReadersWithDeviceInstanceId        = modWinSCard.NewProc("SCardListReadersWithDeviceInstanceIdW")
 	procSCardListReadersWithDeviceInstanceIdA       = modWinSCard.NewProc("SCardListReadersWithDeviceInstanceIdA")
-	procSCardListReadersWithDeviceInstanceIdW       = modWinSCard.NewProc("SCardListReadersWithDeviceInstanceIdW")
+	procSCardLocateCards                            = modWinSCard.NewProc("SCardLocateCardsW")
 	procSCardLocateCardsA                           = modWinSCard.NewProc("SCardLocateCardsA")
+	procSCardLocateCardsByATR                       = modWinSCard.NewProc("SCardLocateCardsByATRW")
 	procSCardLocateCardsByATRA                      = modWinSCard.NewProc("SCardLocateCardsByATRA")
-	procSCardLocateCardsByATRW                      = modWinSCard.NewProc("SCardLocateCardsByATRW")
-	procSCardLocateCardsW                           = modWinSCard.NewProc("SCardLocateCardsW")
+	procSCardReadCache                              = modWinSCard.NewProc("SCardReadCacheW")
 	procSCardReadCacheA                             = modWinSCard.NewProc("SCardReadCacheA")
-	procSCardReadCacheW                             = modWinSCard.NewProc("SCardReadCacheW")
 	procSCardReconnect                              = modWinSCard.NewProc("SCardReconnect")
 	procSCardReleaseContext                         = modWinSCard.NewProc("SCardReleaseContext")
 	procSCardReleaseStartedEvent                    = modWinSCard.NewProc("SCardReleaseStartedEvent")
+	procSCardRemoveReaderFromGroup                  = modWinSCard.NewProc("SCardRemoveReaderFromGroupW")
 	procSCardRemoveReaderFromGroupA                 = modWinSCard.NewProc("SCardRemoveReaderFromGroupA")
-	procSCardRemoveReaderFromGroupW                 = modWinSCard.NewProc("SCardRemoveReaderFromGroupW")
 	procSCardSetAttrib                              = modWinSCard.NewProc("SCardSetAttrib")
+	procSCardSetCardTypeProviderName                = modWinSCard.NewProc("SCardSetCardTypeProviderNameW")
 	procSCardSetCardTypeProviderNameA               = modWinSCard.NewProc("SCardSetCardTypeProviderNameA")
-	procSCardSetCardTypeProviderNameW               = modWinSCard.NewProc("SCardSetCardTypeProviderNameW")
 	procSCardState                                  = modWinSCard.NewProc("SCardState")
+	procSCardStatus                                 = modWinSCard.NewProc("SCardStatusW")
 	procSCardStatusA                                = modWinSCard.NewProc("SCardStatusA")
-	procSCardStatusW                                = modWinSCard.NewProc("SCardStatusW")
 	procSCardTransmit                               = modWinSCard.NewProc("SCardTransmit")
+	procSCardWriteCache                             = modWinSCard.NewProc("SCardWriteCacheW")
 	procSCardWriteCacheA                            = modWinSCard.NewProc("SCardWriteCacheA")
-	procSCardWriteCacheW                            = modWinSCard.NewProc("SCardWriteCacheW")
 )
 
-// CredDeleteA calls ADVAPI32!CredDeleteA.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creddeletea
+// CredDelete calls ADVAPI32!CredDeleteW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creddeletew
 // Minimum OS: windows5.1.2600.
-func CredDeleteA(TargetName foundation.PSTR, Type CRED_TYPE, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCredDeleteA.Addr(), uintptr(unsafe.Pointer(TargetName)), uintptr(Type), uintptr(Flags))
+func CredDelete(TargetName string, Type CRED_TYPE) error {
+	_TargetName := win32.UTF16Ptr(TargetName)
+	r1, _, e1 := syscall.SyscallN(procCredDelete.Addr(), uintptr(unsafe.Pointer(_TargetName)), uintptr(Type), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// CredDeleteW calls ADVAPI32!CredDeleteW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creddeletew
+// CredDeleteA calls ADVAPI32!CredDeleteA.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creddeletea
 // Minimum OS: windows5.1.2600.
-func CredDeleteW(TargetName foundation.PWSTR, Type CRED_TYPE, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCredDeleteW.Addr(), uintptr(unsafe.Pointer(TargetName)), uintptr(Type), uintptr(Flags))
+func CredDeleteA(TargetName foundation.PSTR, Type CRED_TYPE) error {
+	r1, _, e1 := syscall.SyscallN(procCredDeleteA.Addr(), uintptr(unsafe.Pointer(TargetName)), uintptr(Type), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// CredEnumerate calls ADVAPI32!CredEnumerateW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credenumeratew
+// Minimum OS: windows5.1.2600.
+func CredEnumerate(Filter string, Count *uint32, Credential ***CREDENTIALW) error {
+	_Filter := win32.UTF16Ptr(Filter)
+	r1, _, e1 := syscall.SyscallN(procCredEnumerate.Addr(), uintptr(unsafe.Pointer(_Filter)), 0, uintptr(unsafe.Pointer(Count)), uintptr(unsafe.Pointer(Credential)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -175,19 +188,20 @@ func CredDeleteW(TargetName foundation.PWSTR, Type CRED_TYPE, Flags uint32) erro
 // CredEnumerateA calls ADVAPI32!CredEnumerateA.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credenumeratea
 // Minimum OS: windows5.1.2600.
-func CredEnumerateA(Filter foundation.PSTR, Flags CRED_ENUMERATE_FLAGS, Count *uint32, Credential ***CREDENTIALA) error {
-	r1, _, e1 := syscall.SyscallN(procCredEnumerateA.Addr(), uintptr(unsafe.Pointer(Filter)), uintptr(Flags), uintptr(unsafe.Pointer(Count)), uintptr(unsafe.Pointer(Credential)))
+func CredEnumerateA(Filter foundation.PSTR, Count *uint32, Credential ***CREDENTIALA) error {
+	r1, _, e1 := syscall.SyscallN(procCredEnumerateA.Addr(), uintptr(unsafe.Pointer(Filter)), 0, uintptr(unsafe.Pointer(Count)), uintptr(unsafe.Pointer(Credential)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// CredEnumerateW calls ADVAPI32!CredEnumerateW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credenumeratew
-// Minimum OS: windows5.1.2600.
-func CredEnumerateW(Filter foundation.PWSTR, Flags CRED_ENUMERATE_FLAGS, Count *uint32, Credential ***CREDENTIALW) error {
-	r1, _, e1 := syscall.SyscallN(procCredEnumerateW.Addr(), uintptr(unsafe.Pointer(Filter)), uintptr(Flags), uintptr(unsafe.Pointer(Count)), uintptr(unsafe.Pointer(Credential)))
+// CredFindBestCredential calls ADVAPI32!CredFindBestCredentialW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credfindbestcredentialw
+// Minimum OS: windows6.0.6000.
+func CredFindBestCredential(TargetName string, Type uint32, Flags uint32, Credential **CREDENTIALW) error {
+	_TargetName := win32.UTF16Ptr(TargetName)
+	r1, _, e1 := syscall.SyscallN(procCredFindBestCredential.Addr(), uintptr(unsafe.Pointer(_TargetName)), uintptr(Type), uintptr(Flags), uintptr(unsafe.Pointer(Credential)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -205,17 +219,6 @@ func CredFindBestCredentialA(TargetName foundation.PSTR, Type uint32, Flags uint
 	return nil
 }
 
-// CredFindBestCredentialW calls ADVAPI32!CredFindBestCredentialW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credfindbestcredentialw
-// Minimum OS: windows6.0.6000.
-func CredFindBestCredentialW(TargetName foundation.PWSTR, Type uint32, Flags uint32, Credential **CREDENTIALW) error {
-	r1, _, e1 := syscall.SyscallN(procCredFindBestCredentialW.Addr(), uintptr(unsafe.Pointer(TargetName)), uintptr(Type), uintptr(Flags), uintptr(unsafe.Pointer(Credential)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // CredFree calls ADVAPI32!CredFree.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credfree
 // Minimum OS: windows5.1.2600.
@@ -226,8 +229,24 @@ func CredFree(Buffer unsafe.Pointer) {
 // CredGetSessionTypes calls ADVAPI32!CredGetSessionTypes.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credgetsessiontypes
 // Minimum OS: windows5.1.2600.
-func CredGetSessionTypes(MaximumPersistCount uint32, MaximumPersist *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCredGetSessionTypes.Addr(), uintptr(MaximumPersistCount), uintptr(unsafe.Pointer(MaximumPersist)))
+func CredGetSessionTypes(MaximumPersist []uint32) error {
+	var _MaximumPersist *uint32
+	if len(MaximumPersist) > 0 {
+		_MaximumPersist = &MaximumPersist[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procCredGetSessionTypes.Addr(), uintptr(len(MaximumPersist)), uintptr(unsafe.Pointer(_MaximumPersist)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// CredGetTargetInfo calls ADVAPI32!CredGetTargetInfoW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credgettargetinfow
+// Minimum OS: windows5.1.2600.
+func CredGetTargetInfo(TargetName string, Flags uint32, TargetInfo **CREDENTIAL_TARGET_INFORMATIONW) error {
+	_TargetName := win32.UTF16Ptr(TargetName)
+	r1, _, e1 := syscall.SyscallN(procCredGetTargetInfo.Addr(), uintptr(unsafe.Pointer(_TargetName)), uintptr(Flags), uintptr(unsafe.Pointer(TargetInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -245,31 +264,33 @@ func CredGetTargetInfoA(TargetName foundation.PSTR, Flags uint32, TargetInfo **C
 	return nil
 }
 
-// CredGetTargetInfoW calls ADVAPI32!CredGetTargetInfoW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credgettargetinfow
+// CredIsMarshaledCredential calls ADVAPI32!CredIsMarshaledCredentialW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credismarshaledcredentialw
 // Minimum OS: windows5.1.2600.
-func CredGetTargetInfoW(TargetName foundation.PWSTR, Flags uint32, TargetInfo **CREDENTIAL_TARGET_INFORMATIONW) error {
-	r1, _, e1 := syscall.SyscallN(procCredGetTargetInfoW.Addr(), uintptr(unsafe.Pointer(TargetName)), uintptr(Flags), uintptr(unsafe.Pointer(TargetInfo)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+func CredIsMarshaledCredential(MarshaledCredential string) bool {
+	_MarshaledCredential := win32.UTF16Ptr(MarshaledCredential)
+	r1, _, _ := syscall.SyscallN(procCredIsMarshaledCredential.Addr(), uintptr(unsafe.Pointer(_MarshaledCredential)))
+	return r1 != 0
 }
 
 // CredIsMarshaledCredentialA calls ADVAPI32!CredIsMarshaledCredentialA.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credismarshaledcredentiala
 // Minimum OS: windows5.1.2600.
-func CredIsMarshaledCredentialA(MarshaledCredential foundation.PSTR) foundation.BOOL {
+func CredIsMarshaledCredentialA(MarshaledCredential foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procCredIsMarshaledCredentialA.Addr(), uintptr(unsafe.Pointer(MarshaledCredential)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// CredIsMarshaledCredentialW calls ADVAPI32!CredIsMarshaledCredentialW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credismarshaledcredentialw
-// Minimum OS: windows5.1.2600.
-func CredIsMarshaledCredentialW(MarshaledCredential foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCredIsMarshaledCredentialW.Addr(), uintptr(unsafe.Pointer(MarshaledCredential)))
-	return foundation.BOOL(r1)
+// CredIsProtected calls ADVAPI32!CredIsProtectedW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credisprotectedw
+// Minimum OS: windows6.0.6000.
+func CredIsProtected(pszProtectedCredentials string, pProtectionType *CRED_PROTECTION_TYPE) error {
+	_pszProtectedCredentials := win32.UTF16Ptr(pszProtectedCredentials)
+	r1, _, e1 := syscall.SyscallN(procCredIsProtected.Addr(), uintptr(unsafe.Pointer(_pszProtectedCredentials)), uintptr(unsafe.Pointer(pProtectionType)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // CredIsProtectedA calls ADVAPI32!CredIsProtectedA.
@@ -283,11 +304,11 @@ func CredIsProtectedA(pszProtectedCredentials foundation.PSTR, pProtectionType *
 	return nil
 }
 
-// CredIsProtectedW calls ADVAPI32!CredIsProtectedW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credisprotectedw
-// Minimum OS: windows6.0.6000.
-func CredIsProtectedW(pszProtectedCredentials foundation.PWSTR, pProtectionType *CRED_PROTECTION_TYPE) error {
-	r1, _, e1 := syscall.SyscallN(procCredIsProtectedW.Addr(), uintptr(unsafe.Pointer(pszProtectedCredentials)), uintptr(unsafe.Pointer(pProtectionType)))
+// CredMarshalCredential calls ADVAPI32!CredMarshalCredentialW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credmarshalcredentialw
+// Minimum OS: windows5.1.2600.
+func CredMarshalCredential(CredType CRED_MARSHAL_TYPE, Credential unsafe.Pointer, MarshaledCredential *foundation.PWSTR) error {
+	r1, _, e1 := syscall.SyscallN(procCredMarshalCredential.Addr(), uintptr(CredType), uintptr(unsafe.Pointer(Credential)), uintptr(unsafe.Pointer(MarshaledCredential)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -305,11 +326,13 @@ func CredMarshalCredentialA(CredType CRED_MARSHAL_TYPE, Credential unsafe.Pointe
 	return nil
 }
 
-// CredMarshalCredentialW calls ADVAPI32!CredMarshalCredentialW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credmarshalcredentialw
-// Minimum OS: windows5.1.2600.
-func CredMarshalCredentialW(CredType CRED_MARSHAL_TYPE, Credential unsafe.Pointer, MarshaledCredential *foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procCredMarshalCredentialW.Addr(), uintptr(CredType), uintptr(unsafe.Pointer(Credential)), uintptr(unsafe.Pointer(MarshaledCredential)))
+// CredPackAuthenticationBuffer calls credui!CredPackAuthenticationBufferW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credpackauthenticationbufferw
+// Minimum OS: windows6.0.6000.
+func CredPackAuthenticationBuffer(dwFlags CRED_PACK_FLAGS, pszUserName string, pszPassword string, pPackedCredentials *byte, pcbPackedCredentials *uint32) error {
+	_pszUserName := win32.UTF16Ptr(pszUserName)
+	_pszPassword := win32.UTF16Ptr(pszPassword)
+	r1, _, e1 := syscall.SyscallN(procCredPackAuthenticationBuffer.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszPassword)), uintptr(unsafe.Pointer(pPackedCredentials)), uintptr(unsafe.Pointer(pcbPackedCredentials)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -327,11 +350,13 @@ func CredPackAuthenticationBufferA(dwFlags CRED_PACK_FLAGS, pszUserName foundati
 	return nil
 }
 
-// CredPackAuthenticationBufferW calls credui!CredPackAuthenticationBufferW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credpackauthenticationbufferw
+// CredProtect calls ADVAPI32!CredProtectW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credprotectw
 // Minimum OS: windows6.0.6000.
-func CredPackAuthenticationBufferW(dwFlags CRED_PACK_FLAGS, pszUserName foundation.PWSTR, pszPassword foundation.PWSTR, pPackedCredentials *byte, pcbPackedCredentials *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCredPackAuthenticationBufferW.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pszUserName)), uintptr(unsafe.Pointer(pszPassword)), uintptr(unsafe.Pointer(pPackedCredentials)), uintptr(unsafe.Pointer(pcbPackedCredentials)))
+func CredProtect(fAsSelf bool, pszCredentials string, cchCredentials uint32, pszProtectedCredentials foundation.PWSTR, pcchMaxChars *uint32, ProtectionType *CRED_PROTECTION_TYPE) error {
+	_fAsSelf := win32.Bool32(fAsSelf)
+	_pszCredentials := win32.UTF16Ptr(pszCredentials)
+	r1, _, e1 := syscall.SyscallN(procCredProtect.Addr(), uintptr(_fAsSelf), uintptr(unsafe.Pointer(_pszCredentials)), uintptr(cchCredentials), uintptr(unsafe.Pointer(pszProtectedCredentials)), uintptr(unsafe.Pointer(pcchMaxChars)), uintptr(unsafe.Pointer(ProtectionType)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -341,19 +366,21 @@ func CredPackAuthenticationBufferW(dwFlags CRED_PACK_FLAGS, pszUserName foundati
 // CredProtectA calls ADVAPI32!CredProtectA.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credprotecta
 // Minimum OS: windows6.0.6000.
-func CredProtectA(fAsSelf foundation.BOOL, pszCredentials foundation.PSTR, cchCredentials uint32, pszProtectedCredentials foundation.PSTR, pcchMaxChars *uint32, ProtectionType *CRED_PROTECTION_TYPE) error {
-	r1, _, e1 := syscall.SyscallN(procCredProtectA.Addr(), uintptr(fAsSelf), uintptr(unsafe.Pointer(pszCredentials)), uintptr(cchCredentials), uintptr(unsafe.Pointer(pszProtectedCredentials)), uintptr(unsafe.Pointer(pcchMaxChars)), uintptr(unsafe.Pointer(ProtectionType)))
+func CredProtectA(fAsSelf bool, pszCredentials foundation.PSTR, cchCredentials uint32, pszProtectedCredentials foundation.PSTR, pcchMaxChars *uint32, ProtectionType *CRED_PROTECTION_TYPE) error {
+	_fAsSelf := win32.Bool32(fAsSelf)
+	r1, _, e1 := syscall.SyscallN(procCredProtectA.Addr(), uintptr(_fAsSelf), uintptr(unsafe.Pointer(pszCredentials)), uintptr(cchCredentials), uintptr(unsafe.Pointer(pszProtectedCredentials)), uintptr(unsafe.Pointer(pcchMaxChars)), uintptr(unsafe.Pointer(ProtectionType)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// CredProtectW calls ADVAPI32!CredProtectW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credprotectw
-// Minimum OS: windows6.0.6000.
-func CredProtectW(fAsSelf foundation.BOOL, pszCredentials foundation.PWSTR, cchCredentials uint32, pszProtectedCredentials foundation.PWSTR, pcchMaxChars *uint32, ProtectionType *CRED_PROTECTION_TYPE) error {
-	r1, _, e1 := syscall.SyscallN(procCredProtectW.Addr(), uintptr(fAsSelf), uintptr(unsafe.Pointer(pszCredentials)), uintptr(cchCredentials), uintptr(unsafe.Pointer(pszProtectedCredentials)), uintptr(unsafe.Pointer(pcchMaxChars)), uintptr(unsafe.Pointer(ProtectionType)))
+// CredRead calls ADVAPI32!CredReadW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credreadw
+// Minimum OS: windows5.1.2600.
+func CredRead(TargetName string, Type CRED_TYPE, Credential **CREDENTIALW) error {
+	_TargetName := win32.UTF16Ptr(TargetName)
+	r1, _, e1 := syscall.SyscallN(procCredRead.Addr(), uintptr(unsafe.Pointer(_TargetName)), uintptr(Type), 0, uintptr(unsafe.Pointer(Credential)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -363,8 +390,19 @@ func CredProtectW(fAsSelf foundation.BOOL, pszCredentials foundation.PWSTR, cchC
 // CredReadA calls ADVAPI32!CredReadA.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credreada
 // Minimum OS: windows5.1.2600.
-func CredReadA(TargetName foundation.PSTR, Type CRED_TYPE, Flags uint32, Credential **CREDENTIALA) error {
-	r1, _, e1 := syscall.SyscallN(procCredReadA.Addr(), uintptr(unsafe.Pointer(TargetName)), uintptr(Type), uintptr(Flags), uintptr(unsafe.Pointer(Credential)))
+func CredReadA(TargetName foundation.PSTR, Type CRED_TYPE, Credential **CREDENTIALA) error {
+	r1, _, e1 := syscall.SyscallN(procCredReadA.Addr(), uintptr(unsafe.Pointer(TargetName)), uintptr(Type), 0, uintptr(unsafe.Pointer(Credential)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// CredReadDomainCredentials calls ADVAPI32!CredReadDomainCredentialsW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credreaddomaincredentialsw
+// Minimum OS: windows5.1.2600.
+func CredReadDomainCredentials(TargetInfo *CREDENTIAL_TARGET_INFORMATIONW, Flags uint32, Count *uint32, Credential ***CREDENTIALW) error {
+	r1, _, e1 := syscall.SyscallN(procCredReadDomainCredentials.Addr(), uintptr(unsafe.Pointer(TargetInfo)), uintptr(Flags), uintptr(unsafe.Pointer(Count)), uintptr(unsafe.Pointer(Credential)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -382,22 +420,13 @@ func CredReadDomainCredentialsA(TargetInfo *CREDENTIAL_TARGET_INFORMATIONA, Flag
 	return nil
 }
 
-// CredReadDomainCredentialsW calls ADVAPI32!CredReadDomainCredentialsW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credreaddomaincredentialsw
+// CredRename calls ADVAPI32!CredRenameW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credrenamew
 // Minimum OS: windows5.1.2600.
-func CredReadDomainCredentialsW(TargetInfo *CREDENTIAL_TARGET_INFORMATIONW, Flags uint32, Count *uint32, Credential ***CREDENTIALW) error {
-	r1, _, e1 := syscall.SyscallN(procCredReadDomainCredentialsW.Addr(), uintptr(unsafe.Pointer(TargetInfo)), uintptr(Flags), uintptr(unsafe.Pointer(Count)), uintptr(unsafe.Pointer(Credential)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// CredReadW calls ADVAPI32!CredReadW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credreadw
-// Minimum OS: windows5.1.2600.
-func CredReadW(TargetName foundation.PWSTR, Type CRED_TYPE, Flags uint32, Credential **CREDENTIALW) error {
-	r1, _, e1 := syscall.SyscallN(procCredReadW.Addr(), uintptr(unsafe.Pointer(TargetName)), uintptr(Type), uintptr(Flags), uintptr(unsafe.Pointer(Credential)))
+func CredRename(OldTargetName string, NewTargetName string, Type CRED_TYPE) error {
+	_OldTargetName := win32.UTF16Ptr(OldTargetName)
+	_NewTargetName := win32.UTF16Ptr(NewTargetName)
+	r1, _, e1 := syscall.SyscallN(procCredRename.Addr(), uintptr(unsafe.Pointer(_OldTargetName)), uintptr(unsafe.Pointer(_NewTargetName)), uintptr(Type), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -407,55 +436,57 @@ func CredReadW(TargetName foundation.PWSTR, Type CRED_TYPE, Flags uint32, Creden
 // CredRenameA calls ADVAPI32!CredRenameA.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credrenamea
 // Minimum OS: windows5.1.2600.
-func CredRenameA(OldTargetName foundation.PSTR, NewTargetName foundation.PSTR, Type CRED_TYPE, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCredRenameA.Addr(), uintptr(unsafe.Pointer(OldTargetName)), uintptr(unsafe.Pointer(NewTargetName)), uintptr(Type), uintptr(Flags))
+func CredRenameA(OldTargetName foundation.PSTR, NewTargetName foundation.PSTR, Type CRED_TYPE) error {
+	r1, _, e1 := syscall.SyscallN(procCredRenameA.Addr(), uintptr(unsafe.Pointer(OldTargetName)), uintptr(unsafe.Pointer(NewTargetName)), uintptr(Type), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// CredRenameW calls ADVAPI32!CredRenameW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credrenamew
+// CredUICmdLinePromptForCredentials calls credui!CredUICmdLinePromptForCredentialsW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduicmdlinepromptforcredentialsw
 // Minimum OS: windows5.1.2600.
-func CredRenameW(OldTargetName foundation.PWSTR, NewTargetName foundation.PWSTR, Type CRED_TYPE, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCredRenameW.Addr(), uintptr(unsafe.Pointer(OldTargetName)), uintptr(unsafe.Pointer(NewTargetName)), uintptr(Type), uintptr(Flags))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+func CredUICmdLinePromptForCredentials(pszTargetName string, dwAuthError uint32, UserName foundation.PWSTR, ulUserBufferSize uint32, pszPassword foundation.PWSTR, ulPasswordBufferSize uint32, pfSave *foundation.BOOL, dwFlags CREDUI_FLAGS) uint32 {
+	_pszTargetName := win32.UTF16Ptr(pszTargetName)
+	r1, _, _ := syscall.SyscallN(procCredUICmdLinePromptForCredentials.Addr(), uintptr(unsafe.Pointer(_pszTargetName)), 0, uintptr(dwAuthError), uintptr(unsafe.Pointer(UserName)), uintptr(ulUserBufferSize), uintptr(unsafe.Pointer(pszPassword)), uintptr(ulPasswordBufferSize), uintptr(unsafe.Pointer(pfSave)), uintptr(dwFlags))
+	return uint32(r1)
 }
 
 // CredUICmdLinePromptForCredentialsA calls credui!CredUICmdLinePromptForCredentialsA.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduicmdlinepromptforcredentialsa
 // Minimum OS: windows5.1.2600.
-func CredUICmdLinePromptForCredentialsA(pszTargetName foundation.PSTR, pContext *SecHandle, dwAuthError uint32, UserName foundation.PSTR, ulUserBufferSize uint32, pszPassword foundation.PSTR, ulPasswordBufferSize uint32, pfSave *foundation.BOOL, dwFlags CREDUI_FLAGS) uint32 {
-	r1, _, _ := syscall.SyscallN(procCredUICmdLinePromptForCredentialsA.Addr(), uintptr(unsafe.Pointer(pszTargetName)), uintptr(unsafe.Pointer(pContext)), uintptr(dwAuthError), uintptr(unsafe.Pointer(UserName)), uintptr(ulUserBufferSize), uintptr(unsafe.Pointer(pszPassword)), uintptr(ulPasswordBufferSize), uintptr(unsafe.Pointer(pfSave)), uintptr(dwFlags))
+func CredUICmdLinePromptForCredentialsA(pszTargetName foundation.PSTR, dwAuthError uint32, UserName foundation.PSTR, ulUserBufferSize uint32, pszPassword foundation.PSTR, ulPasswordBufferSize uint32, pfSave *foundation.BOOL, dwFlags CREDUI_FLAGS) uint32 {
+	r1, _, _ := syscall.SyscallN(procCredUICmdLinePromptForCredentialsA.Addr(), uintptr(unsafe.Pointer(pszTargetName)), 0, uintptr(dwAuthError), uintptr(unsafe.Pointer(UserName)), uintptr(ulUserBufferSize), uintptr(unsafe.Pointer(pszPassword)), uintptr(ulPasswordBufferSize), uintptr(unsafe.Pointer(pfSave)), uintptr(dwFlags))
 	return uint32(r1)
 }
 
-// CredUICmdLinePromptForCredentialsW calls credui!CredUICmdLinePromptForCredentialsW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduicmdlinepromptforcredentialsw
+// CredUIConfirmCredentials calls credui!CredUIConfirmCredentialsW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduiconfirmcredentialsw
 // Minimum OS: windows5.1.2600.
-func CredUICmdLinePromptForCredentialsW(pszTargetName foundation.PWSTR, pContext *SecHandle, dwAuthError uint32, UserName foundation.PWSTR, ulUserBufferSize uint32, pszPassword foundation.PWSTR, ulPasswordBufferSize uint32, pfSave *foundation.BOOL, dwFlags CREDUI_FLAGS) uint32 {
-	r1, _, _ := syscall.SyscallN(procCredUICmdLinePromptForCredentialsW.Addr(), uintptr(unsafe.Pointer(pszTargetName)), uintptr(unsafe.Pointer(pContext)), uintptr(dwAuthError), uintptr(unsafe.Pointer(UserName)), uintptr(ulUserBufferSize), uintptr(unsafe.Pointer(pszPassword)), uintptr(ulPasswordBufferSize), uintptr(unsafe.Pointer(pfSave)), uintptr(dwFlags))
+func CredUIConfirmCredentials(pszTargetName string, bConfirm bool) uint32 {
+	_pszTargetName := win32.UTF16Ptr(pszTargetName)
+	_bConfirm := win32.Bool32(bConfirm)
+	r1, _, _ := syscall.SyscallN(procCredUIConfirmCredentials.Addr(), uintptr(unsafe.Pointer(_pszTargetName)), uintptr(_bConfirm))
 	return uint32(r1)
 }
 
 // CredUIConfirmCredentialsA calls credui!CredUIConfirmCredentialsA.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduiconfirmcredentialsa
 // Minimum OS: windows5.1.2600.
-func CredUIConfirmCredentialsA(pszTargetName foundation.PSTR, bConfirm foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procCredUIConfirmCredentialsA.Addr(), uintptr(unsafe.Pointer(pszTargetName)), uintptr(bConfirm))
+func CredUIConfirmCredentialsA(pszTargetName foundation.PSTR, bConfirm bool) uint32 {
+	_bConfirm := win32.Bool32(bConfirm)
+	r1, _, _ := syscall.SyscallN(procCredUIConfirmCredentialsA.Addr(), uintptr(unsafe.Pointer(pszTargetName)), uintptr(_bConfirm))
 	return uint32(r1)
 }
 
-// CredUIConfirmCredentialsW calls credui!CredUIConfirmCredentialsW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduiconfirmcredentialsw
+// CredUIParseUserName calls credui!CredUIParseUserNameW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduiparseusernamew
 // Minimum OS: windows5.1.2600.
-func CredUIConfirmCredentialsW(pszTargetName foundation.PWSTR, bConfirm foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procCredUIConfirmCredentialsW.Addr(), uintptr(unsafe.Pointer(pszTargetName)), uintptr(bConfirm))
-	return uint32(r1)
+func CredUIParseUserName(UserName string, user foundation.PWSTR, userBufferSize uint32, domain foundation.PWSTR, domainBufferSize uint32) foundation.WIN32_ERROR {
+	_UserName := win32.UTF16Ptr(UserName)
+	r1, _, _ := syscall.SyscallN(procCredUIParseUserName.Addr(), uintptr(unsafe.Pointer(_UserName)), uintptr(unsafe.Pointer(user)), uintptr(userBufferSize), uintptr(unsafe.Pointer(domain)), uintptr(domainBufferSize))
+	return foundation.WIN32_ERROR(r1)
 }
 
 // CredUIParseUserNameA calls credui!CredUIParseUserNameA.
@@ -466,28 +497,29 @@ func CredUIParseUserNameA(userName foundation.PSTR, user foundation.PSTR, userBu
 	return foundation.WIN32_ERROR(r1)
 }
 
-// CredUIParseUserNameW calls credui!CredUIParseUserNameW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduiparseusernamew
+// CredUIPromptForCredentials calls credui!CredUIPromptForCredentialsW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduipromptforcredentialsw
 // Minimum OS: windows5.1.2600.
-func CredUIParseUserNameW(UserName foundation.PWSTR, user foundation.PWSTR, userBufferSize uint32, domain foundation.PWSTR, domainBufferSize uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procCredUIParseUserNameW.Addr(), uintptr(unsafe.Pointer(UserName)), uintptr(unsafe.Pointer(user)), uintptr(userBufferSize), uintptr(unsafe.Pointer(domain)), uintptr(domainBufferSize))
+func CredUIPromptForCredentials(pUiInfo *CREDUI_INFOW, pszTargetName string, dwAuthError uint32, pszUserName foundation.PWSTR, ulUserNameBufferSize uint32, pszPassword foundation.PWSTR, ulPasswordBufferSize uint32, save *foundation.BOOL, dwFlags CREDUI_FLAGS) foundation.WIN32_ERROR {
+	_pszTargetName := win32.UTF16Ptr(pszTargetName)
+	r1, _, _ := syscall.SyscallN(procCredUIPromptForCredentials.Addr(), uintptr(unsafe.Pointer(pUiInfo)), uintptr(unsafe.Pointer(_pszTargetName)), 0, uintptr(dwAuthError), uintptr(unsafe.Pointer(pszUserName)), uintptr(ulUserNameBufferSize), uintptr(unsafe.Pointer(pszPassword)), uintptr(ulPasswordBufferSize), uintptr(unsafe.Pointer(save)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // CredUIPromptForCredentialsA calls credui!CredUIPromptForCredentialsA.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduipromptforcredentialsa
 // Minimum OS: windows5.1.2600.
-func CredUIPromptForCredentialsA(pUiInfo *CREDUI_INFOA, pszTargetName foundation.PSTR, pContext *SecHandle, dwAuthError uint32, pszUserName foundation.PSTR, ulUserNameBufferSize uint32, pszPassword foundation.PSTR, ulPasswordBufferSize uint32, save *foundation.BOOL, dwFlags CREDUI_FLAGS) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procCredUIPromptForCredentialsA.Addr(), uintptr(unsafe.Pointer(pUiInfo)), uintptr(unsafe.Pointer(pszTargetName)), uintptr(unsafe.Pointer(pContext)), uintptr(dwAuthError), uintptr(unsafe.Pointer(pszUserName)), uintptr(ulUserNameBufferSize), uintptr(unsafe.Pointer(pszPassword)), uintptr(ulPasswordBufferSize), uintptr(unsafe.Pointer(save)), uintptr(dwFlags))
+func CredUIPromptForCredentialsA(pUiInfo *CREDUI_INFOA, pszTargetName foundation.PSTR, dwAuthError uint32, pszUserName foundation.PSTR, ulUserNameBufferSize uint32, pszPassword foundation.PSTR, ulPasswordBufferSize uint32, save *foundation.BOOL, dwFlags CREDUI_FLAGS) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procCredUIPromptForCredentialsA.Addr(), uintptr(unsafe.Pointer(pUiInfo)), uintptr(unsafe.Pointer(pszTargetName)), 0, uintptr(dwAuthError), uintptr(unsafe.Pointer(pszUserName)), uintptr(ulUserNameBufferSize), uintptr(unsafe.Pointer(pszPassword)), uintptr(ulPasswordBufferSize), uintptr(unsafe.Pointer(save)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
 }
 
-// CredUIPromptForCredentialsW calls credui!CredUIPromptForCredentialsW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduipromptforcredentialsw
-// Minimum OS: windows5.1.2600.
-func CredUIPromptForCredentialsW(pUiInfo *CREDUI_INFOW, pszTargetName foundation.PWSTR, pContext *SecHandle, dwAuthError uint32, pszUserName foundation.PWSTR, ulUserNameBufferSize uint32, pszPassword foundation.PWSTR, ulPasswordBufferSize uint32, save *foundation.BOOL, dwFlags CREDUI_FLAGS) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procCredUIPromptForCredentialsW.Addr(), uintptr(unsafe.Pointer(pUiInfo)), uintptr(unsafe.Pointer(pszTargetName)), uintptr(unsafe.Pointer(pContext)), uintptr(dwAuthError), uintptr(unsafe.Pointer(pszUserName)), uintptr(ulUserNameBufferSize), uintptr(unsafe.Pointer(pszPassword)), uintptr(ulPasswordBufferSize), uintptr(unsafe.Pointer(save)), uintptr(dwFlags))
-	return foundation.WIN32_ERROR(r1)
+// CredUIPromptForWindowsCredentials calls credui!CredUIPromptForWindowsCredentialsW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduipromptforwindowscredentialsw
+// Minimum OS: windows6.0.6000.
+func CredUIPromptForWindowsCredentials(pUiInfo *CREDUI_INFOW, dwAuthError uint32, pulAuthPackage *uint32, pvInAuthBuffer unsafe.Pointer, ulInAuthBufferSize uint32, ppvOutAuthBuffer *unsafe.Pointer, pulOutAuthBufferSize *uint32, pfSave *foundation.BOOL, dwFlags CREDUIWIN_FLAGS) uint32 {
+	r1, _, _ := syscall.SyscallN(procCredUIPromptForWindowsCredentials.Addr(), uintptr(unsafe.Pointer(pUiInfo)), uintptr(dwAuthError), uintptr(unsafe.Pointer(pulAuthPackage)), uintptr(unsafe.Pointer(pvInAuthBuffer)), uintptr(ulInAuthBufferSize), uintptr(unsafe.Pointer(ppvOutAuthBuffer)), uintptr(unsafe.Pointer(pulOutAuthBufferSize)), uintptr(unsafe.Pointer(pfSave)), uintptr(dwFlags))
+	return uint32(r1)
 }
 
 // CredUIPromptForWindowsCredentialsA calls credui!CredUIPromptForWindowsCredentialsA.
@@ -498,28 +530,36 @@ func CredUIPromptForWindowsCredentialsA(pUiInfo *CREDUI_INFOA, dwAuthError uint3
 	return uint32(r1)
 }
 
-// CredUIPromptForWindowsCredentialsW calls credui!CredUIPromptForWindowsCredentialsW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduipromptforwindowscredentialsw
-// Minimum OS: windows6.0.6000.
-func CredUIPromptForWindowsCredentialsW(pUiInfo *CREDUI_INFOW, dwAuthError uint32, pulAuthPackage *uint32, pvInAuthBuffer unsafe.Pointer, ulInAuthBufferSize uint32, ppvOutAuthBuffer *unsafe.Pointer, pulOutAuthBufferSize *uint32, pfSave *foundation.BOOL, dwFlags CREDUIWIN_FLAGS) uint32 {
-	r1, _, _ := syscall.SyscallN(procCredUIPromptForWindowsCredentialsW.Addr(), uintptr(unsafe.Pointer(pUiInfo)), uintptr(dwAuthError), uintptr(unsafe.Pointer(pulAuthPackage)), uintptr(unsafe.Pointer(pvInAuthBuffer)), uintptr(ulInAuthBufferSize), uintptr(unsafe.Pointer(ppvOutAuthBuffer)), uintptr(unsafe.Pointer(pulOutAuthBufferSize)), uintptr(unsafe.Pointer(pfSave)), uintptr(dwFlags))
-	return uint32(r1)
-}
-
 // CredUIReadSSOCredW calls credui!CredUIReadSSOCredW.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduireadssocredw
 // Minimum OS: windows5.1.2600.
-func CredUIReadSSOCredW(pszRealm foundation.PWSTR, ppszUsername *foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procCredUIReadSSOCredW.Addr(), uintptr(unsafe.Pointer(pszRealm)), uintptr(unsafe.Pointer(ppszUsername)))
+func CredUIReadSSOCredW(pszRealm string, ppszUsername *foundation.PWSTR) uint32 {
+	_pszRealm := win32.UTF16Ptr(pszRealm)
+	r1, _, _ := syscall.SyscallN(procCredUIReadSSOCredW.Addr(), uintptr(unsafe.Pointer(_pszRealm)), uintptr(unsafe.Pointer(ppszUsername)))
 	return uint32(r1)
 }
 
 // CredUIStoreSSOCredW calls credui!CredUIStoreSSOCredW.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-creduistoressocredw
 // Minimum OS: windows5.1.2600.
-func CredUIStoreSSOCredW(pszRealm foundation.PWSTR, pszUsername foundation.PWSTR, pszPassword foundation.PWSTR, bPersist foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procCredUIStoreSSOCredW.Addr(), uintptr(unsafe.Pointer(pszRealm)), uintptr(unsafe.Pointer(pszUsername)), uintptr(unsafe.Pointer(pszPassword)), uintptr(bPersist))
+func CredUIStoreSSOCredW(pszRealm string, pszUsername string, pszPassword string, bPersist bool) uint32 {
+	_pszRealm := win32.UTF16Ptr(pszRealm)
+	_pszUsername := win32.UTF16Ptr(pszUsername)
+	_pszPassword := win32.UTF16Ptr(pszPassword)
+	_bPersist := win32.Bool32(bPersist)
+	r1, _, _ := syscall.SyscallN(procCredUIStoreSSOCredW.Addr(), uintptr(unsafe.Pointer(_pszRealm)), uintptr(unsafe.Pointer(_pszUsername)), uintptr(unsafe.Pointer(_pszPassword)), uintptr(_bPersist))
 	return uint32(r1)
+}
+
+// CredUnPackAuthenticationBuffer calls credui!CredUnPackAuthenticationBufferW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credunpackauthenticationbufferw
+// Minimum OS: windows6.0.6000.
+func CredUnPackAuthenticationBuffer(dwFlags CRED_PACK_FLAGS, pAuthBuffer unsafe.Pointer, cbAuthBuffer uint32, pszUserName foundation.PWSTR, pcchMaxUserName *uint32, pszDomainName foundation.PWSTR, pcchMaxDomainName *uint32, pszPassword foundation.PWSTR, pcchMaxPassword *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procCredUnPackAuthenticationBuffer.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pAuthBuffer)), uintptr(cbAuthBuffer), uintptr(unsafe.Pointer(pszUserName)), uintptr(unsafe.Pointer(pcchMaxUserName)), uintptr(unsafe.Pointer(pszDomainName)), uintptr(unsafe.Pointer(pcchMaxDomainName)), uintptr(unsafe.Pointer(pszPassword)), uintptr(unsafe.Pointer(pcchMaxPassword)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // CredUnPackAuthenticationBufferA calls credui!CredUnPackAuthenticationBufferA.
@@ -533,11 +573,12 @@ func CredUnPackAuthenticationBufferA(dwFlags CRED_PACK_FLAGS, pAuthBuffer unsafe
 	return nil
 }
 
-// CredUnPackAuthenticationBufferW calls credui!CredUnPackAuthenticationBufferW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credunpackauthenticationbufferw
-// Minimum OS: windows6.0.6000.
-func CredUnPackAuthenticationBufferW(dwFlags CRED_PACK_FLAGS, pAuthBuffer unsafe.Pointer, cbAuthBuffer uint32, pszUserName foundation.PWSTR, pcchMaxUserName *uint32, pszDomainName foundation.PWSTR, pcchMaxDomainName *uint32, pszPassword foundation.PWSTR, pcchMaxPassword *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCredUnPackAuthenticationBufferW.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(pAuthBuffer)), uintptr(cbAuthBuffer), uintptr(unsafe.Pointer(pszUserName)), uintptr(unsafe.Pointer(pcchMaxUserName)), uintptr(unsafe.Pointer(pszDomainName)), uintptr(unsafe.Pointer(pcchMaxDomainName)), uintptr(unsafe.Pointer(pszPassword)), uintptr(unsafe.Pointer(pcchMaxPassword)))
+// CredUnmarshalCredential calls ADVAPI32!CredUnmarshalCredentialW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credunmarshalcredentialw
+// Minimum OS: windows5.1.2600.
+func CredUnmarshalCredential(MarshaledCredential string, CredType *CRED_MARSHAL_TYPE, Credential *unsafe.Pointer) error {
+	_MarshaledCredential := win32.UTF16Ptr(MarshaledCredential)
+	r1, _, e1 := syscall.SyscallN(procCredUnmarshalCredential.Addr(), uintptr(unsafe.Pointer(_MarshaledCredential)), uintptr(unsafe.Pointer(CredType)), uintptr(unsafe.Pointer(Credential)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -555,11 +596,13 @@ func CredUnmarshalCredentialA(MarshaledCredential foundation.PSTR, CredType *CRE
 	return nil
 }
 
-// CredUnmarshalCredentialW calls ADVAPI32!CredUnmarshalCredentialW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credunmarshalcredentialw
-// Minimum OS: windows5.1.2600.
-func CredUnmarshalCredentialW(MarshaledCredential foundation.PWSTR, CredType *CRED_MARSHAL_TYPE, Credential *unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procCredUnmarshalCredentialW.Addr(), uintptr(unsafe.Pointer(MarshaledCredential)), uintptr(unsafe.Pointer(CredType)), uintptr(unsafe.Pointer(Credential)))
+// CredUnprotect calls ADVAPI32!CredUnprotectW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credunprotectw
+// Minimum OS: windows6.0.6000.
+func CredUnprotect(fAsSelf bool, pszProtectedCredentials string, cchProtectedCredentials uint32, pszCredentials foundation.PWSTR, pcchMaxChars *uint32) error {
+	_fAsSelf := win32.Bool32(fAsSelf)
+	_pszProtectedCredentials := win32.UTF16Ptr(pszProtectedCredentials)
+	r1, _, e1 := syscall.SyscallN(procCredUnprotect.Addr(), uintptr(_fAsSelf), uintptr(unsafe.Pointer(_pszProtectedCredentials)), uintptr(cchProtectedCredentials), uintptr(unsafe.Pointer(pszCredentials)), uintptr(unsafe.Pointer(pcchMaxChars)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -569,19 +612,20 @@ func CredUnmarshalCredentialW(MarshaledCredential foundation.PWSTR, CredType *CR
 // CredUnprotectA calls ADVAPI32!CredUnprotectA.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credunprotecta
 // Minimum OS: windows6.0.6000.
-func CredUnprotectA(fAsSelf foundation.BOOL, pszProtectedCredentials foundation.PSTR, cchProtectedCredentials uint32, pszCredentials foundation.PSTR, pcchMaxChars *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCredUnprotectA.Addr(), uintptr(fAsSelf), uintptr(unsafe.Pointer(pszProtectedCredentials)), uintptr(cchProtectedCredentials), uintptr(unsafe.Pointer(pszCredentials)), uintptr(unsafe.Pointer(pcchMaxChars)))
+func CredUnprotectA(fAsSelf bool, pszProtectedCredentials foundation.PSTR, cchProtectedCredentials uint32, pszCredentials foundation.PSTR, pcchMaxChars *uint32) error {
+	_fAsSelf := win32.Bool32(fAsSelf)
+	r1, _, e1 := syscall.SyscallN(procCredUnprotectA.Addr(), uintptr(_fAsSelf), uintptr(unsafe.Pointer(pszProtectedCredentials)), uintptr(cchProtectedCredentials), uintptr(unsafe.Pointer(pszCredentials)), uintptr(unsafe.Pointer(pcchMaxChars)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// CredUnprotectW calls ADVAPI32!CredUnprotectW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credunprotectw
-// Minimum OS: windows6.0.6000.
-func CredUnprotectW(fAsSelf foundation.BOOL, pszProtectedCredentials foundation.PWSTR, cchProtectedCredentials uint32, pszCredentials foundation.PWSTR, pcchMaxChars *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCredUnprotectW.Addr(), uintptr(fAsSelf), uintptr(unsafe.Pointer(pszProtectedCredentials)), uintptr(cchProtectedCredentials), uintptr(unsafe.Pointer(pszCredentials)), uintptr(unsafe.Pointer(pcchMaxChars)))
+// CredWrite calls ADVAPI32!CredWriteW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credwritew
+// Minimum OS: windows5.1.2600.
+func CredWrite(Credential *CREDENTIALW, Flags uint32) error {
+	r1, _, e1 := syscall.SyscallN(procCredWrite.Addr(), uintptr(unsafe.Pointer(Credential)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -599,6 +643,17 @@ func CredWriteA(Credential *CREDENTIALA, Flags uint32) error {
 	return nil
 }
 
+// CredWriteDomainCredentials calls ADVAPI32!CredWriteDomainCredentialsW.
+// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credwritedomaincredentialsw
+// Minimum OS: windows5.1.2600.
+func CredWriteDomainCredentials(TargetInfo *CREDENTIAL_TARGET_INFORMATIONW, Credential *CREDENTIALW, Flags uint32) error {
+	r1, _, e1 := syscall.SyscallN(procCredWriteDomainCredentials.Addr(), uintptr(unsafe.Pointer(TargetInfo)), uintptr(unsafe.Pointer(Credential)), uintptr(Flags))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // CredWriteDomainCredentialsA calls ADVAPI32!CredWriteDomainCredentialsA.
 // https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credwritedomaincredentialsa
 // Minimum OS: windows5.1.2600.
@@ -610,26 +665,12 @@ func CredWriteDomainCredentialsA(TargetInfo *CREDENTIAL_TARGET_INFORMATIONA, Cre
 	return nil
 }
 
-// CredWriteDomainCredentialsW calls ADVAPI32!CredWriteDomainCredentialsW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credwritedomaincredentialsw
+// GetOpenCardName calls SCARDDLG!GetOpenCardNameW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-getopencardnamew
 // Minimum OS: windows5.1.2600.
-func CredWriteDomainCredentialsW(TargetInfo *CREDENTIAL_TARGET_INFORMATIONW, Credential *CREDENTIALW, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCredWriteDomainCredentialsW.Addr(), uintptr(unsafe.Pointer(TargetInfo)), uintptr(unsafe.Pointer(Credential)), uintptr(Flags))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// CredWriteW calls ADVAPI32!CredWriteW.
-// https://learn.microsoft.com/windows/win32/api/wincred/nf-wincred-credwritew
-// Minimum OS: windows5.1.2600.
-func CredWriteW(Credential *CREDENTIALW, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCredWriteW.Addr(), uintptr(unsafe.Pointer(Credential)), uintptr(Flags))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+func GetOpenCardName(param0 *OPENCARDNAMEW) int32 {
+	r1, _, _ := syscall.SyscallN(procGetOpenCardName.Addr(), uintptr(unsafe.Pointer(param0)))
+	return int32(r1)
 }
 
 // GetOpenCardNameA calls SCARDDLG!GetOpenCardNameA.
@@ -637,14 +678,6 @@ func CredWriteW(Credential *CREDENTIALW, Flags uint32) error {
 // Minimum OS: windows5.1.2600.
 func GetOpenCardNameA(param0 *OPENCARDNAMEA) int32 {
 	r1, _, _ := syscall.SyscallN(procGetOpenCardNameA.Addr(), uintptr(unsafe.Pointer(param0)))
-	return int32(r1)
-}
-
-// GetOpenCardNameW calls SCARDDLG!GetOpenCardNameW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-getopencardnamew
-// Minimum OS: windows5.1.2600.
-func GetOpenCardNameW(param0 *OPENCARDNAMEW) int32 {
-	r1, _, _ := syscall.SyscallN(procGetOpenCardNameW.Addr(), uintptr(unsafe.Pointer(param0)))
 	return int32(r1)
 }
 
@@ -656,23 +689,23 @@ func KeyCredentialManagerFreeInformation(keyCredentialManagerInfo *KeyCredential
 
 // KeyCredentialManagerGetInformation calls KeyCredMgr!KeyCredentialManagerGetInformation.
 // https://learn.microsoft.com/windows/win32/api/keycredmgr/nf-keycredmgr-keycredentialmanagergetinformation
-func KeyCredentialManagerGetInformation(keyCredentialManagerInfo **KeyCredentialManagerInfo) foundation.HRESULT {
+func KeyCredentialManagerGetInformation(keyCredentialManagerInfo **KeyCredentialManagerInfo) error {
 	r1, _, _ := syscall.SyscallN(procKeyCredentialManagerGetInformation.Addr(), uintptr(unsafe.Pointer(keyCredentialManagerInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // KeyCredentialManagerGetOperationErrorStates calls KeyCredMgr!KeyCredentialManagerGetOperationErrorStates.
 // https://learn.microsoft.com/windows/win32/api/keycredmgr/nf-keycredmgr-keycredentialmanagergetoperationerrorstates
-func KeyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType KeyCredentialManagerOperationType, isReady *foundation.BOOL, keyCredentialManagerOperationErrorStates *KeyCredentialManagerOperationErrorStates) foundation.HRESULT {
+func KeyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType KeyCredentialManagerOperationType, isReady *foundation.BOOL, keyCredentialManagerOperationErrorStates *KeyCredentialManagerOperationErrorStates) error {
 	r1, _, _ := syscall.SyscallN(procKeyCredentialManagerGetOperationErrorStates.Addr(), uintptr(keyCredentialManagerOperationType), uintptr(unsafe.Pointer(isReady)), uintptr(unsafe.Pointer(keyCredentialManagerOperationErrorStates)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // KeyCredentialManagerShowUIOperation calls KeyCredMgr!KeyCredentialManagerShowUIOperation.
 // https://learn.microsoft.com/windows/win32/api/keycredmgr/nf-keycredmgr-keycredentialmanagershowuioperation
-func KeyCredentialManagerShowUIOperation(hWndOwner foundation.HWND, keyCredentialManagerOperationType KeyCredentialManagerOperationType) foundation.HRESULT {
+func KeyCredentialManagerShowUIOperation(hWndOwner foundation.HWND, keyCredentialManagerOperationType KeyCredentialManagerOperationType) error {
 	r1, _, _ := syscall.SyscallN(procKeyCredentialManagerShowUIOperation.Addr(), uintptr(hWndOwner), uintptr(keyCredentialManagerOperationType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SCardAccessStartedEvent calls WinSCard!SCardAccessStartedEvent.
@@ -687,19 +720,21 @@ func SCardAccessStartedEvent() (foundation.HANDLE, error) {
 	return ret, nil
 }
 
+// SCardAddReaderToGroup calls WinSCard!SCardAddReaderToGroupW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardaddreadertogroupw
+// Minimum OS: windows5.1.2600.
+func SCardAddReaderToGroup(hContext uintptr, szReaderName string, szGroupName string) int32 {
+	_szReaderName := win32.UTF16Ptr(szReaderName)
+	_szGroupName := win32.UTF16Ptr(szGroupName)
+	r1, _, _ := syscall.SyscallN(procSCardAddReaderToGroup.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szReaderName)), uintptr(unsafe.Pointer(_szGroupName)))
+	return int32(r1)
+}
+
 // SCardAddReaderToGroupA calls WinSCard!SCardAddReaderToGroupA.
 // https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardaddreadertogroupa
 // Minimum OS: windows5.1.2600.
 func SCardAddReaderToGroupA(hContext uintptr, szReaderName foundation.PSTR, szGroupName foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procSCardAddReaderToGroupA.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szReaderName)), uintptr(unsafe.Pointer(szGroupName)))
-	return int32(r1)
-}
-
-// SCardAddReaderToGroupW calls WinSCard!SCardAddReaderToGroupW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardaddreadertogroupw
-// Minimum OS: windows5.1.2600.
-func SCardAddReaderToGroupW(hContext uintptr, szReaderName foundation.PWSTR, szGroupName foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardAddReaderToGroupW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szReaderName)), uintptr(unsafe.Pointer(szGroupName)))
 	return int32(r1)
 }
 
@@ -727,19 +762,20 @@ func SCardCancel(hContext uintptr) int32 {
 	return int32(r1)
 }
 
+// SCardConnect calls WinSCard!SCardConnectW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardconnectw
+// Minimum OS: windows5.1.2600.
+func SCardConnect(hContext uintptr, szReader string, dwShareMode uint32, dwPreferredProtocols uint32, phCard *uintptr, pdwActiveProtocol *uint32) int32 {
+	_szReader := win32.UTF16Ptr(szReader)
+	r1, _, _ := syscall.SyscallN(procSCardConnect.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szReader)), uintptr(dwShareMode), uintptr(dwPreferredProtocols), uintptr(unsafe.Pointer(phCard)), uintptr(unsafe.Pointer(pdwActiveProtocol)))
+	return int32(r1)
+}
+
 // SCardConnectA calls WinSCard!SCardConnectA.
 // https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardconnecta
 // Minimum OS: windows5.1.2600.
 func SCardConnectA(hContext uintptr, szReader foundation.PSTR, dwShareMode uint32, dwPreferredProtocols uint32, phCard *uintptr, pdwActiveProtocol *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procSCardConnectA.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szReader)), uintptr(dwShareMode), uintptr(dwPreferredProtocols), uintptr(unsafe.Pointer(phCard)), uintptr(unsafe.Pointer(pdwActiveProtocol)))
-	return int32(r1)
-}
-
-// SCardConnectW calls WinSCard!SCardConnectW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardconnectw
-// Minimum OS: windows5.1.2600.
-func SCardConnectW(hContext uintptr, szReader foundation.PWSTR, dwShareMode uint32, dwPreferredProtocols uint32, phCard *uintptr, pdwActiveProtocol *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardConnectW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szReader)), uintptr(dwShareMode), uintptr(dwPreferredProtocols), uintptr(unsafe.Pointer(phCard)), uintptr(unsafe.Pointer(pdwActiveProtocol)))
 	return int32(r1)
 }
 
@@ -776,8 +812,17 @@ func SCardEndTransaction(hCard uintptr, dwDisposition uint32) int32 {
 // SCardEstablishContext calls WinSCard!SCardEstablishContext.
 // https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardestablishcontext
 // Minimum OS: windows5.1.2600.
-func SCardEstablishContext(dwScope SCARD_SCOPE, pvReserved1 unsafe.Pointer, pvReserved2 unsafe.Pointer, phContext *uintptr) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardEstablishContext.Addr(), uintptr(dwScope), uintptr(unsafe.Pointer(pvReserved1)), uintptr(unsafe.Pointer(pvReserved2)), uintptr(unsafe.Pointer(phContext)))
+func SCardEstablishContext(dwScope SCARD_SCOPE, phContext *uintptr) int32 {
+	r1, _, _ := syscall.SyscallN(procSCardEstablishContext.Addr(), uintptr(dwScope), 0, 0, uintptr(unsafe.Pointer(phContext)))
+	return int32(r1)
+}
+
+// SCardForgetCardType calls WinSCard!SCardForgetCardTypeW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardforgetcardtypew
+// Minimum OS: windows5.1.2600.
+func SCardForgetCardType(hContext uintptr, szCardName string) int32 {
+	_szCardName := win32.UTF16Ptr(szCardName)
+	r1, _, _ := syscall.SyscallN(procSCardForgetCardType.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szCardName)))
 	return int32(r1)
 }
 
@@ -789,11 +834,12 @@ func SCardForgetCardTypeA(hContext uintptr, szCardName foundation.PSTR) int32 {
 	return int32(r1)
 }
 
-// SCardForgetCardTypeW calls WinSCard!SCardForgetCardTypeW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardforgetcardtypew
+// SCardForgetReader calls WinSCard!SCardForgetReaderW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardforgetreaderw
 // Minimum OS: windows5.1.2600.
-func SCardForgetCardTypeW(hContext uintptr, szCardName foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardForgetCardTypeW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szCardName)))
+func SCardForgetReader(hContext uintptr, szReaderName string) int32 {
+	_szReaderName := win32.UTF16Ptr(szReaderName)
+	r1, _, _ := syscall.SyscallN(procSCardForgetReader.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szReaderName)))
 	return int32(r1)
 }
 
@@ -805,27 +851,20 @@ func SCardForgetReaderA(hContext uintptr, szReaderName foundation.PSTR) int32 {
 	return int32(r1)
 }
 
+// SCardForgetReaderGroup calls WinSCard!SCardForgetReaderGroupW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardforgetreadergroupw
+// Minimum OS: windows5.1.2600.
+func SCardForgetReaderGroup(hContext uintptr, szGroupName string) int32 {
+	_szGroupName := win32.UTF16Ptr(szGroupName)
+	r1, _, _ := syscall.SyscallN(procSCardForgetReaderGroup.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szGroupName)))
+	return int32(r1)
+}
+
 // SCardForgetReaderGroupA calls WinSCard!SCardForgetReaderGroupA.
 // https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardforgetreadergroupa
 // Minimum OS: windows5.1.2600.
 func SCardForgetReaderGroupA(hContext uintptr, szGroupName foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procSCardForgetReaderGroupA.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szGroupName)))
-	return int32(r1)
-}
-
-// SCardForgetReaderGroupW calls WinSCard!SCardForgetReaderGroupW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardforgetreadergroupw
-// Minimum OS: windows5.1.2600.
-func SCardForgetReaderGroupW(hContext uintptr, szGroupName foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardForgetReaderGroupW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szGroupName)))
-	return int32(r1)
-}
-
-// SCardForgetReaderW calls WinSCard!SCardForgetReaderW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardforgetreaderw
-// Minimum OS: windows5.1.2600.
-func SCardForgetReaderW(hContext uintptr, szReaderName foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardForgetReaderW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szReaderName)))
 	return int32(r1)
 }
 
@@ -845,6 +884,15 @@ func SCardGetAttrib(hCard uintptr, dwAttrId uint32, pbAttr *byte, pcbAttrLen *ui
 	return int32(r1)
 }
 
+// SCardGetCardTypeProviderName calls WinSCard!SCardGetCardTypeProviderNameW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetcardtypeprovidernamew
+// Minimum OS: windows5.1.2600.
+func SCardGetCardTypeProviderName(hContext uintptr, szCardName string, dwProviderId uint32, szProvider foundation.PWSTR, pcchProvider *uint32) int32 {
+	_szCardName := win32.UTF16Ptr(szCardName)
+	r1, _, _ := syscall.SyscallN(procSCardGetCardTypeProviderName.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szCardName)), uintptr(dwProviderId), uintptr(unsafe.Pointer(szProvider)), uintptr(unsafe.Pointer(pcchProvider)))
+	return int32(r1)
+}
+
 // SCardGetCardTypeProviderNameA calls WinSCard!SCardGetCardTypeProviderNameA.
 // https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetcardtypeprovidernamea
 // Minimum OS: windows5.1.2600.
@@ -853,11 +901,12 @@ func SCardGetCardTypeProviderNameA(hContext uintptr, szCardName foundation.PSTR,
 	return int32(r1)
 }
 
-// SCardGetCardTypeProviderNameW calls WinSCard!SCardGetCardTypeProviderNameW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetcardtypeprovidernamew
-// Minimum OS: windows5.1.2600.
-func SCardGetCardTypeProviderNameW(hContext uintptr, szCardName foundation.PWSTR, dwProviderId uint32, szProvider foundation.PWSTR, pcchProvider *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardGetCardTypeProviderNameW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szCardName)), uintptr(dwProviderId), uintptr(unsafe.Pointer(szProvider)), uintptr(unsafe.Pointer(pcchProvider)))
+// SCardGetDeviceTypeId calls WinSCard!SCardGetDeviceTypeIdW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetdevicetypeidw
+// Minimum OS: windows8.0.
+func SCardGetDeviceTypeId(hContext uintptr, szReaderName string, pdwDeviceTypeId *uint32) int32 {
+	_szReaderName := win32.UTF16Ptr(szReaderName)
+	r1, _, _ := syscall.SyscallN(procSCardGetDeviceTypeId.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szReaderName)), uintptr(unsafe.Pointer(pdwDeviceTypeId)))
 	return int32(r1)
 }
 
@@ -869,11 +918,12 @@ func SCardGetDeviceTypeIdA(hContext uintptr, szReaderName foundation.PSTR, pdwDe
 	return int32(r1)
 }
 
-// SCardGetDeviceTypeIdW calls WinSCard!SCardGetDeviceTypeIdW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetdevicetypeidw
-// Minimum OS: windows8.0.
-func SCardGetDeviceTypeIdW(hContext uintptr, szReaderName foundation.PWSTR, pdwDeviceTypeId *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardGetDeviceTypeIdW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szReaderName)), uintptr(unsafe.Pointer(pdwDeviceTypeId)))
+// SCardGetProviderId calls WinSCard!SCardGetProviderIdW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetprovideridw
+// Minimum OS: windows5.1.2600.
+func SCardGetProviderId(hContext uintptr, szCard string, pguidProviderId *win32.GUID) int32 {
+	_szCard := win32.UTF16Ptr(szCard)
+	r1, _, _ := syscall.SyscallN(procSCardGetProviderId.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szCard)), uintptr(unsafe.Pointer(pguidProviderId)))
 	return int32(r1)
 }
 
@@ -885,11 +935,12 @@ func SCardGetProviderIdA(hContext uintptr, szCard foundation.PSTR, pguidProvider
 	return int32(r1)
 }
 
-// SCardGetProviderIdW calls WinSCard!SCardGetProviderIdW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetprovideridw
-// Minimum OS: windows5.1.2600.
-func SCardGetProviderIdW(hContext uintptr, szCard foundation.PWSTR, pguidProviderId *win32.GUID) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardGetProviderIdW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szCard)), uintptr(unsafe.Pointer(pguidProviderId)))
+// SCardGetReaderDeviceInstanceId calls WinSCard!SCardGetReaderDeviceInstanceIdW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetreaderdeviceinstanceidw
+// Minimum OS: windows8.0.
+func SCardGetReaderDeviceInstanceId(hContext uintptr, szReaderName string, szDeviceInstanceId foundation.PWSTR, pcchDeviceInstanceId *uint32) int32 {
+	_szReaderName := win32.UTF16Ptr(szReaderName)
+	r1, _, _ := syscall.SyscallN(procSCardGetReaderDeviceInstanceId.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szReaderName)), uintptr(unsafe.Pointer(szDeviceInstanceId)), uintptr(unsafe.Pointer(pcchDeviceInstanceId)))
 	return int32(r1)
 }
 
@@ -901,11 +952,12 @@ func SCardGetReaderDeviceInstanceIdA(hContext uintptr, szReaderName foundation.P
 	return int32(r1)
 }
 
-// SCardGetReaderDeviceInstanceIdW calls WinSCard!SCardGetReaderDeviceInstanceIdW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetreaderdeviceinstanceidw
+// SCardGetReaderIcon calls WinSCard!SCardGetReaderIconW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetreadericonw
 // Minimum OS: windows8.0.
-func SCardGetReaderDeviceInstanceIdW(hContext uintptr, szReaderName foundation.PWSTR, szDeviceInstanceId foundation.PWSTR, pcchDeviceInstanceId *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardGetReaderDeviceInstanceIdW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szReaderName)), uintptr(unsafe.Pointer(szDeviceInstanceId)), uintptr(unsafe.Pointer(pcchDeviceInstanceId)))
+func SCardGetReaderIcon(hContext uintptr, szReaderName string, pbIcon *byte, pcbIcon *uint32) int32 {
+	_szReaderName := win32.UTF16Ptr(szReaderName)
+	r1, _, _ := syscall.SyscallN(procSCardGetReaderIcon.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szReaderName)), uintptr(unsafe.Pointer(pbIcon)), uintptr(unsafe.Pointer(pcbIcon)))
 	return int32(r1)
 }
 
@@ -917,11 +969,11 @@ func SCardGetReaderIconA(hContext uintptr, szReaderName foundation.PSTR, pbIcon 
 	return int32(r1)
 }
 
-// SCardGetReaderIconW calls WinSCard!SCardGetReaderIconW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetreadericonw
-// Minimum OS: windows8.0.
-func SCardGetReaderIconW(hContext uintptr, szReaderName foundation.PWSTR, pbIcon *byte, pcbIcon *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardGetReaderIconW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szReaderName)), uintptr(unsafe.Pointer(pbIcon)), uintptr(unsafe.Pointer(pcbIcon)))
+// SCardGetStatusChange calls WinSCard!SCardGetStatusChangeW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetstatuschangew
+// Minimum OS: windows5.1.2600.
+func SCardGetStatusChange(hContext uintptr, dwTimeout uint32, rgReaderStates *SCARD_READERSTATEW, cReaders uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procSCardGetStatusChange.Addr(), uintptr(hContext), uintptr(dwTimeout), uintptr(unsafe.Pointer(rgReaderStates)), uintptr(cReaders))
 	return int32(r1)
 }
 
@@ -933,19 +985,20 @@ func SCardGetStatusChangeA(hContext uintptr, dwTimeout uint32, rgReaderStates *S
 	return int32(r1)
 }
 
-// SCardGetStatusChangeW calls WinSCard!SCardGetStatusChangeW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgetstatuschangew
-// Minimum OS: windows5.1.2600.
-func SCardGetStatusChangeW(hContext uintptr, dwTimeout uint32, rgReaderStates *SCARD_READERSTATEW, cReaders uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardGetStatusChangeW.Addr(), uintptr(hContext), uintptr(dwTimeout), uintptr(unsafe.Pointer(rgReaderStates)), uintptr(cReaders))
-	return int32(r1)
-}
-
 // SCardGetTransmitCount calls WinSCard!SCardGetTransmitCount.
 // https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardgettransmitcount
 // Minimum OS: windows6.0.6000.
 func SCardGetTransmitCount(hCard uintptr, pcTransmitCount *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procSCardGetTransmitCount.Addr(), uintptr(hCard), uintptr(unsafe.Pointer(pcTransmitCount)))
+	return int32(r1)
+}
+
+// SCardIntroduceCardType calls WinSCard!SCardIntroduceCardTypeW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardintroducecardtypew
+// Minimum OS: windows5.1.2600.
+func SCardIntroduceCardType(hContext uintptr, szCardName string, pguidPrimaryProvider *win32.GUID, rgguidInterfaces *win32.GUID, dwInterfaceCount uint32, pbAtr *byte, pbAtrMask *byte, cbAtrLen uint32) int32 {
+	_szCardName := win32.UTF16Ptr(szCardName)
+	r1, _, _ := syscall.SyscallN(procSCardIntroduceCardType.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szCardName)), uintptr(unsafe.Pointer(pguidPrimaryProvider)), uintptr(unsafe.Pointer(rgguidInterfaces)), uintptr(dwInterfaceCount), uintptr(unsafe.Pointer(pbAtr)), uintptr(unsafe.Pointer(pbAtrMask)), uintptr(cbAtrLen))
 	return int32(r1)
 }
 
@@ -957,11 +1010,13 @@ func SCardIntroduceCardTypeA(hContext uintptr, szCardName foundation.PSTR, pguid
 	return int32(r1)
 }
 
-// SCardIntroduceCardTypeW calls WinSCard!SCardIntroduceCardTypeW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardintroducecardtypew
+// SCardIntroduceReader calls WinSCard!SCardIntroduceReaderW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardintroducereaderw
 // Minimum OS: windows5.1.2600.
-func SCardIntroduceCardTypeW(hContext uintptr, szCardName foundation.PWSTR, pguidPrimaryProvider *win32.GUID, rgguidInterfaces *win32.GUID, dwInterfaceCount uint32, pbAtr *byte, pbAtrMask *byte, cbAtrLen uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardIntroduceCardTypeW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szCardName)), uintptr(unsafe.Pointer(pguidPrimaryProvider)), uintptr(unsafe.Pointer(rgguidInterfaces)), uintptr(dwInterfaceCount), uintptr(unsafe.Pointer(pbAtr)), uintptr(unsafe.Pointer(pbAtrMask)), uintptr(cbAtrLen))
+func SCardIntroduceReader(hContext uintptr, szReaderName string, szDeviceName string) int32 {
+	_szReaderName := win32.UTF16Ptr(szReaderName)
+	_szDeviceName := win32.UTF16Ptr(szDeviceName)
+	r1, _, _ := syscall.SyscallN(procSCardIntroduceReader.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szReaderName)), uintptr(unsafe.Pointer(_szDeviceName)))
 	return int32(r1)
 }
 
@@ -973,27 +1028,20 @@ func SCardIntroduceReaderA(hContext uintptr, szReaderName foundation.PSTR, szDev
 	return int32(r1)
 }
 
+// SCardIntroduceReaderGroup calls WinSCard!SCardIntroduceReaderGroupW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardintroducereadergroupw
+// Minimum OS: windows5.1.2600.
+func SCardIntroduceReaderGroup(hContext uintptr, szGroupName string) int32 {
+	_szGroupName := win32.UTF16Ptr(szGroupName)
+	r1, _, _ := syscall.SyscallN(procSCardIntroduceReaderGroup.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szGroupName)))
+	return int32(r1)
+}
+
 // SCardIntroduceReaderGroupA calls WinSCard!SCardIntroduceReaderGroupA.
 // https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardintroducereadergroupa
 // Minimum OS: windows5.1.2600.
 func SCardIntroduceReaderGroupA(hContext uintptr, szGroupName foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procSCardIntroduceReaderGroupA.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szGroupName)))
-	return int32(r1)
-}
-
-// SCardIntroduceReaderGroupW calls WinSCard!SCardIntroduceReaderGroupW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardintroducereadergroupw
-// Minimum OS: windows5.1.2600.
-func SCardIntroduceReaderGroupW(hContext uintptr, szGroupName foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardIntroduceReaderGroupW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szGroupName)))
-	return int32(r1)
-}
-
-// SCardIntroduceReaderW calls WinSCard!SCardIntroduceReaderW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardintroducereaderw
-// Minimum OS: windows5.1.2600.
-func SCardIntroduceReaderW(hContext uintptr, szReaderName foundation.PWSTR, szDeviceName foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardIntroduceReaderW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szReaderName)), uintptr(unsafe.Pointer(szDeviceName)))
 	return int32(r1)
 }
 
@@ -1005,19 +1053,36 @@ func SCardIsValidContext(hContext uintptr) int32 {
 	return int32(r1)
 }
 
-// SCardListCardsA calls WinSCard!SCardListCardsA.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistcardsa
+// SCardListCards calls WinSCard!SCardListCardsW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistcardsw
 // Minimum OS: windows5.1.2600.
-func SCardListCardsA(hContext uintptr, pbAtr *byte, rgquidInterfaces *win32.GUID, cguidInterfaceCount uint32, mszCards foundation.PSTR, pcchCards *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardListCardsA.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(pbAtr)), uintptr(unsafe.Pointer(rgquidInterfaces)), uintptr(cguidInterfaceCount), uintptr(unsafe.Pointer(mszCards)), uintptr(unsafe.Pointer(pcchCards)))
+func SCardListCards(hContext uintptr, pbAtr *byte, rgquidInterfaces []win32.GUID, mszCards foundation.PWSTR, pcchCards *uint32) int32 {
+	var _rgquidInterfaces *win32.GUID
+	if len(rgquidInterfaces) > 0 {
+		_rgquidInterfaces = &rgquidInterfaces[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSCardListCards.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(pbAtr)), uintptr(unsafe.Pointer(_rgquidInterfaces)), uintptr(len(rgquidInterfaces)), uintptr(unsafe.Pointer(mszCards)), uintptr(unsafe.Pointer(pcchCards)))
 	return int32(r1)
 }
 
-// SCardListCardsW calls WinSCard!SCardListCardsW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistcardsw
+// SCardListCardsA calls WinSCard!SCardListCardsA.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistcardsa
 // Minimum OS: windows5.1.2600.
-func SCardListCardsW(hContext uintptr, pbAtr *byte, rgquidInterfaces *win32.GUID, cguidInterfaceCount uint32, mszCards foundation.PWSTR, pcchCards *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardListCardsW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(pbAtr)), uintptr(unsafe.Pointer(rgquidInterfaces)), uintptr(cguidInterfaceCount), uintptr(unsafe.Pointer(mszCards)), uintptr(unsafe.Pointer(pcchCards)))
+func SCardListCardsA(hContext uintptr, pbAtr *byte, rgquidInterfaces []win32.GUID, mszCards foundation.PSTR, pcchCards *uint32) int32 {
+	var _rgquidInterfaces *win32.GUID
+	if len(rgquidInterfaces) > 0 {
+		_rgquidInterfaces = &rgquidInterfaces[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSCardListCardsA.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(pbAtr)), uintptr(unsafe.Pointer(_rgquidInterfaces)), uintptr(len(rgquidInterfaces)), uintptr(unsafe.Pointer(mszCards)), uintptr(unsafe.Pointer(pcchCards)))
+	return int32(r1)
+}
+
+// SCardListInterfaces calls WinSCard!SCardListInterfacesW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistinterfacesw
+// Minimum OS: windows5.1.2600.
+func SCardListInterfaces(hContext uintptr, szCard string, pguidInterfaces *win32.GUID, pcguidInterfaces *uint32) int32 {
+	_szCard := win32.UTF16Ptr(szCard)
+	r1, _, _ := syscall.SyscallN(procSCardListInterfaces.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szCard)), uintptr(unsafe.Pointer(pguidInterfaces)), uintptr(unsafe.Pointer(pcguidInterfaces)))
 	return int32(r1)
 }
 
@@ -1029,11 +1094,11 @@ func SCardListInterfacesA(hContext uintptr, szCard foundation.PSTR, pguidInterfa
 	return int32(r1)
 }
 
-// SCardListInterfacesW calls WinSCard!SCardListInterfacesW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistinterfacesw
+// SCardListReaderGroups calls WinSCard!SCardListReaderGroupsW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistreadergroupsw
 // Minimum OS: windows5.1.2600.
-func SCardListInterfacesW(hContext uintptr, szCard foundation.PWSTR, pguidInterfaces *win32.GUID, pcguidInterfaces *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardListInterfacesW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szCard)), uintptr(unsafe.Pointer(pguidInterfaces)), uintptr(unsafe.Pointer(pcguidInterfaces)))
+func SCardListReaderGroups(hContext uintptr, mszGroups foundation.PWSTR, pcchGroups *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procSCardListReaderGroups.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(mszGroups)), uintptr(unsafe.Pointer(pcchGroups)))
 	return int32(r1)
 }
 
@@ -1045,11 +1110,12 @@ func SCardListReaderGroupsA(hContext uintptr, mszGroups foundation.PSTR, pcchGro
 	return int32(r1)
 }
 
-// SCardListReaderGroupsW calls WinSCard!SCardListReaderGroupsW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistreadergroupsw
+// SCardListReaders calls WinSCard!SCardListReadersW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistreadersw
 // Minimum OS: windows5.1.2600.
-func SCardListReaderGroupsW(hContext uintptr, mszGroups foundation.PWSTR, pcchGroups *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardListReaderGroupsW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(mszGroups)), uintptr(unsafe.Pointer(pcchGroups)))
+func SCardListReaders(hContext uintptr, mszGroups string, mszReaders foundation.PWSTR, pcchReaders *uint32) int32 {
+	_mszGroups := win32.UTF16Ptr(mszGroups)
+	r1, _, _ := syscall.SyscallN(procSCardListReaders.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_mszGroups)), uintptr(unsafe.Pointer(mszReaders)), uintptr(unsafe.Pointer(pcchReaders)))
 	return int32(r1)
 }
 
@@ -1061,11 +1127,12 @@ func SCardListReadersA(hContext uintptr, mszGroups foundation.PSTR, mszReaders f
 	return int32(r1)
 }
 
-// SCardListReadersW calls WinSCard!SCardListReadersW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistreadersw
-// Minimum OS: windows5.1.2600.
-func SCardListReadersW(hContext uintptr, mszGroups foundation.PWSTR, mszReaders foundation.PWSTR, pcchReaders *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardListReadersW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(mszGroups)), uintptr(unsafe.Pointer(mszReaders)), uintptr(unsafe.Pointer(pcchReaders)))
+// SCardListReadersWithDeviceInstanceId calls WinSCard!SCardListReadersWithDeviceInstanceIdW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistreaderswithdeviceinstanceidw
+// Minimum OS: windows8.0.
+func SCardListReadersWithDeviceInstanceId(hContext uintptr, szDeviceInstanceId string, mszReaders foundation.PWSTR, pcchReaders *uint32) int32 {
+	_szDeviceInstanceId := win32.UTF16Ptr(szDeviceInstanceId)
+	r1, _, _ := syscall.SyscallN(procSCardListReadersWithDeviceInstanceId.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szDeviceInstanceId)), uintptr(unsafe.Pointer(mszReaders)), uintptr(unsafe.Pointer(pcchReaders)))
 	return int32(r1)
 }
 
@@ -1077,11 +1144,12 @@ func SCardListReadersWithDeviceInstanceIdA(hContext uintptr, szDeviceInstanceId 
 	return int32(r1)
 }
 
-// SCardListReadersWithDeviceInstanceIdW calls WinSCard!SCardListReadersWithDeviceInstanceIdW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlistreaderswithdeviceinstanceidw
-// Minimum OS: windows8.0.
-func SCardListReadersWithDeviceInstanceIdW(hContext uintptr, szDeviceInstanceId foundation.PWSTR, mszReaders foundation.PWSTR, pcchReaders *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardListReadersWithDeviceInstanceIdW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szDeviceInstanceId)), uintptr(unsafe.Pointer(mszReaders)), uintptr(unsafe.Pointer(pcchReaders)))
+// SCardLocateCards calls WinSCard!SCardLocateCardsW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlocatecardsw
+// Minimum OS: windows5.1.2600.
+func SCardLocateCards(hContext uintptr, mszCards string, rgReaderStates *SCARD_READERSTATEW, cReaders uint32) int32 {
+	_mszCards := win32.UTF16Ptr(mszCards)
+	r1, _, _ := syscall.SyscallN(procSCardLocateCards.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_mszCards)), uintptr(unsafe.Pointer(rgReaderStates)), uintptr(cReaders))
 	return int32(r1)
 }
 
@@ -1093,6 +1161,14 @@ func SCardLocateCardsA(hContext uintptr, mszCards foundation.PSTR, rgReaderState
 	return int32(r1)
 }
 
+// SCardLocateCardsByATR calls WinSCard!SCardLocateCardsByATRW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlocatecardsbyatrw
+// Minimum OS: windows5.1.2600.
+func SCardLocateCardsByATR(hContext uintptr, rgAtrMasks *SCARD_ATRMASK, cAtrs uint32, rgReaderStates *SCARD_READERSTATEW, cReaders uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procSCardLocateCardsByATR.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(rgAtrMasks)), uintptr(cAtrs), uintptr(unsafe.Pointer(rgReaderStates)), uintptr(cReaders))
+	return int32(r1)
+}
+
 // SCardLocateCardsByATRA calls WinSCard!SCardLocateCardsByATRA.
 // https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlocatecardsbyatra
 // Minimum OS: windows5.1.2600.
@@ -1101,19 +1177,12 @@ func SCardLocateCardsByATRA(hContext uintptr, rgAtrMasks *SCARD_ATRMASK, cAtrs u
 	return int32(r1)
 }
 
-// SCardLocateCardsByATRW calls WinSCard!SCardLocateCardsByATRW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlocatecardsbyatrw
-// Minimum OS: windows5.1.2600.
-func SCardLocateCardsByATRW(hContext uintptr, rgAtrMasks *SCARD_ATRMASK, cAtrs uint32, rgReaderStates *SCARD_READERSTATEW, cReaders uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardLocateCardsByATRW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(rgAtrMasks)), uintptr(cAtrs), uintptr(unsafe.Pointer(rgReaderStates)), uintptr(cReaders))
-	return int32(r1)
-}
-
-// SCardLocateCardsW calls WinSCard!SCardLocateCardsW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardlocatecardsw
-// Minimum OS: windows5.1.2600.
-func SCardLocateCardsW(hContext uintptr, mszCards foundation.PWSTR, rgReaderStates *SCARD_READERSTATEW, cReaders uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardLocateCardsW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(mszCards)), uintptr(unsafe.Pointer(rgReaderStates)), uintptr(cReaders))
+// SCardReadCache calls WinSCard!SCardReadCacheW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardreadcachew
+// Minimum OS: windows6.0.6000.
+func SCardReadCache(hContext uintptr, CardIdentifier *win32.GUID, FreshnessCounter uint32, LookupName string, Data *byte, DataLen *uint32) int32 {
+	_LookupName := win32.UTF16Ptr(LookupName)
+	r1, _, _ := syscall.SyscallN(procSCardReadCache.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(CardIdentifier)), uintptr(FreshnessCounter), uintptr(unsafe.Pointer(_LookupName)), uintptr(unsafe.Pointer(Data)), uintptr(unsafe.Pointer(DataLen)))
 	return int32(r1)
 }
 
@@ -1122,14 +1191,6 @@ func SCardLocateCardsW(hContext uintptr, mszCards foundation.PWSTR, rgReaderStat
 // Minimum OS: windows6.0.6000.
 func SCardReadCacheA(hContext uintptr, CardIdentifier *win32.GUID, FreshnessCounter uint32, LookupName foundation.PSTR, Data *byte, DataLen *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procSCardReadCacheA.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(CardIdentifier)), uintptr(FreshnessCounter), uintptr(unsafe.Pointer(LookupName)), uintptr(unsafe.Pointer(Data)), uintptr(unsafe.Pointer(DataLen)))
-	return int32(r1)
-}
-
-// SCardReadCacheW calls WinSCard!SCardReadCacheW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardreadcachew
-// Minimum OS: windows6.0.6000.
-func SCardReadCacheW(hContext uintptr, CardIdentifier *win32.GUID, FreshnessCounter uint32, LookupName foundation.PWSTR, Data *byte, DataLen *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardReadCacheW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(CardIdentifier)), uintptr(FreshnessCounter), uintptr(unsafe.Pointer(LookupName)), uintptr(unsafe.Pointer(Data)), uintptr(unsafe.Pointer(DataLen)))
 	return int32(r1)
 }
 
@@ -1156,19 +1217,21 @@ func SCardReleaseStartedEvent() {
 	syscall.SyscallN(procSCardReleaseStartedEvent.Addr())
 }
 
+// SCardRemoveReaderFromGroup calls WinSCard!SCardRemoveReaderFromGroupW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardremovereaderfromgroupw
+// Minimum OS: windows5.1.2600.
+func SCardRemoveReaderFromGroup(hContext uintptr, szReaderName string, szGroupName string) int32 {
+	_szReaderName := win32.UTF16Ptr(szReaderName)
+	_szGroupName := win32.UTF16Ptr(szGroupName)
+	r1, _, _ := syscall.SyscallN(procSCardRemoveReaderFromGroup.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szReaderName)), uintptr(unsafe.Pointer(_szGroupName)))
+	return int32(r1)
+}
+
 // SCardRemoveReaderFromGroupA calls WinSCard!SCardRemoveReaderFromGroupA.
 // https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardremovereaderfromgroupa
 // Minimum OS: windows5.1.2600.
 func SCardRemoveReaderFromGroupA(hContext uintptr, szReaderName foundation.PSTR, szGroupName foundation.PSTR) int32 {
 	r1, _, _ := syscall.SyscallN(procSCardRemoveReaderFromGroupA.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szReaderName)), uintptr(unsafe.Pointer(szGroupName)))
-	return int32(r1)
-}
-
-// SCardRemoveReaderFromGroupW calls WinSCard!SCardRemoveReaderFromGroupW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardremovereaderfromgroupw
-// Minimum OS: windows5.1.2600.
-func SCardRemoveReaderFromGroupW(hContext uintptr, szReaderName foundation.PWSTR, szGroupName foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardRemoveReaderFromGroupW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szReaderName)), uintptr(unsafe.Pointer(szGroupName)))
 	return int32(r1)
 }
 
@@ -1180,6 +1243,16 @@ func SCardSetAttrib(hCard uintptr, dwAttrId uint32, pbAttr *byte, cbAttrLen uint
 	return int32(r1)
 }
 
+// SCardSetCardTypeProviderName calls WinSCard!SCardSetCardTypeProviderNameW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardsetcardtypeprovidernamew
+// Minimum OS: windows5.1.2600.
+func SCardSetCardTypeProviderName(hContext uintptr, szCardName string, dwProviderId uint32, szProvider string) int32 {
+	_szCardName := win32.UTF16Ptr(szCardName)
+	_szProvider := win32.UTF16Ptr(szProvider)
+	r1, _, _ := syscall.SyscallN(procSCardSetCardTypeProviderName.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(_szCardName)), uintptr(dwProviderId), uintptr(unsafe.Pointer(_szProvider)))
+	return int32(r1)
+}
+
 // SCardSetCardTypeProviderNameA calls WinSCard!SCardSetCardTypeProviderNameA.
 // https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardsetcardtypeprovidernamea
 // Minimum OS: windows5.1.2600.
@@ -1188,17 +1261,17 @@ func SCardSetCardTypeProviderNameA(hContext uintptr, szCardName foundation.PSTR,
 	return int32(r1)
 }
 
-// SCardSetCardTypeProviderNameW calls WinSCard!SCardSetCardTypeProviderNameW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardsetcardtypeprovidernamew
-// Minimum OS: windows5.1.2600.
-func SCardSetCardTypeProviderNameW(hContext uintptr, szCardName foundation.PWSTR, dwProviderId uint32, szProvider foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardSetCardTypeProviderNameW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(szCardName)), uintptr(dwProviderId), uintptr(unsafe.Pointer(szProvider)))
-	return int32(r1)
-}
-
 // SCardState calls WinSCard!SCardState.
 func SCardState(hCard uintptr, pdwState *uint32, pdwProtocol *uint32, pbAtr *byte, pcbAtrLen *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procSCardState.Addr(), uintptr(hCard), uintptr(unsafe.Pointer(pdwState)), uintptr(unsafe.Pointer(pdwProtocol)), uintptr(unsafe.Pointer(pbAtr)), uintptr(unsafe.Pointer(pcbAtrLen)))
+	return int32(r1)
+}
+
+// SCardStatus calls WinSCard!SCardStatusW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardstatusw
+// Minimum OS: windows5.1.2600.
+func SCardStatus(hCard uintptr, mszReaderNames foundation.PWSTR, pcchReaderLen *uint32, pdwState *uint32, pdwProtocol *uint32, pbAtr *byte, pcbAtrLen *uint32) int32 {
+	r1, _, _ := syscall.SyscallN(procSCardStatus.Addr(), uintptr(hCard), uintptr(unsafe.Pointer(mszReaderNames)), uintptr(unsafe.Pointer(pcchReaderLen)), uintptr(unsafe.Pointer(pdwState)), uintptr(unsafe.Pointer(pdwProtocol)), uintptr(unsafe.Pointer(pbAtr)), uintptr(unsafe.Pointer(pcbAtrLen)))
 	return int32(r1)
 }
 
@@ -1210,19 +1283,19 @@ func SCardStatusA(hCard uintptr, mszReaderNames foundation.PSTR, pcchReaderLen *
 	return int32(r1)
 }
 
-// SCardStatusW calls WinSCard!SCardStatusW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardstatusw
-// Minimum OS: windows5.1.2600.
-func SCardStatusW(hCard uintptr, mszReaderNames foundation.PWSTR, pcchReaderLen *uint32, pdwState *uint32, pdwProtocol *uint32, pbAtr *byte, pcbAtrLen *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardStatusW.Addr(), uintptr(hCard), uintptr(unsafe.Pointer(mszReaderNames)), uintptr(unsafe.Pointer(pcchReaderLen)), uintptr(unsafe.Pointer(pdwState)), uintptr(unsafe.Pointer(pdwProtocol)), uintptr(unsafe.Pointer(pbAtr)), uintptr(unsafe.Pointer(pcbAtrLen)))
-	return int32(r1)
-}
-
 // SCardTransmit calls WinSCard!SCardTransmit.
 // https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardtransmit
 // Minimum OS: windows5.1.2600.
 func SCardTransmit(hCard uintptr, pioSendPci *SCARD_IO_REQUEST, pbSendBuffer *byte, cbSendLength uint32, pioRecvPci *SCARD_IO_REQUEST, pbRecvBuffer *byte, pcbRecvLength *uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procSCardTransmit.Addr(), uintptr(hCard), uintptr(unsafe.Pointer(pioSendPci)), uintptr(unsafe.Pointer(pbSendBuffer)), uintptr(cbSendLength), uintptr(unsafe.Pointer(pioRecvPci)), uintptr(unsafe.Pointer(pbRecvBuffer)), uintptr(unsafe.Pointer(pcbRecvLength)))
+	return int32(r1)
+}
+
+// SCardUIDlgSelectCard calls SCARDDLG!SCardUIDlgSelectCardW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scarduidlgselectcardw
+// Minimum OS: windows5.1.2600.
+func SCardUIDlgSelectCard(param0 *OPENCARDNAME_EXW) int32 {
+	r1, _, _ := syscall.SyscallN(procSCardUIDlgSelectCard.Addr(), uintptr(unsafe.Pointer(param0)))
 	return int32(r1)
 }
 
@@ -1234,11 +1307,12 @@ func SCardUIDlgSelectCardA(param0 *OPENCARDNAME_EXA) int32 {
 	return int32(r1)
 }
 
-// SCardUIDlgSelectCardW calls SCARDDLG!SCardUIDlgSelectCardW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scarduidlgselectcardw
-// Minimum OS: windows5.1.2600.
-func SCardUIDlgSelectCardW(param0 *OPENCARDNAME_EXW) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardUIDlgSelectCardW.Addr(), uintptr(unsafe.Pointer(param0)))
+// SCardWriteCache calls WinSCard!SCardWriteCacheW.
+// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardwritecachew
+// Minimum OS: windows6.0.6000.
+func SCardWriteCache(hContext uintptr, CardIdentifier *win32.GUID, FreshnessCounter uint32, LookupName string, Data *byte, DataLen uint32) int32 {
+	_LookupName := win32.UTF16Ptr(LookupName)
+	r1, _, _ := syscall.SyscallN(procSCardWriteCache.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(CardIdentifier)), uintptr(FreshnessCounter), uintptr(unsafe.Pointer(_LookupName)), uintptr(unsafe.Pointer(Data)), uintptr(DataLen))
 	return int32(r1)
 }
 
@@ -1247,13 +1321,5 @@ func SCardUIDlgSelectCardW(param0 *OPENCARDNAME_EXW) int32 {
 // Minimum OS: windows6.0.6000.
 func SCardWriteCacheA(hContext uintptr, CardIdentifier *win32.GUID, FreshnessCounter uint32, LookupName foundation.PSTR, Data *byte, DataLen uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procSCardWriteCacheA.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(CardIdentifier)), uintptr(FreshnessCounter), uintptr(unsafe.Pointer(LookupName)), uintptr(unsafe.Pointer(Data)), uintptr(DataLen))
-	return int32(r1)
-}
-
-// SCardWriteCacheW calls WinSCard!SCardWriteCacheW.
-// https://learn.microsoft.com/windows/win32/api/winscard/nf-winscard-scardwritecachew
-// Minimum OS: windows6.0.6000.
-func SCardWriteCacheW(hContext uintptr, CardIdentifier *win32.GUID, FreshnessCounter uint32, LookupName foundation.PWSTR, Data *byte, DataLen uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSCardWriteCacheW.Addr(), uintptr(hContext), uintptr(unsafe.Pointer(CardIdentifier)), uintptr(FreshnessCounter), uintptr(unsafe.Pointer(LookupName)), uintptr(unsafe.Pointer(Data)), uintptr(DataLen))
 	return int32(r1)
 }

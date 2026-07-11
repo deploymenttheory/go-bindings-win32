@@ -23,27 +23,27 @@ type IReferenceClock struct {
 var IID_IReferenceClock = win32.GUID{Data1: 0x56a86897, Data2: 0x0ad4, Data3: 0x11ce, Data4: [8]byte{0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70}}
 
 // GetTime dispatches through IReferenceClock's vtable slot 3.
-func (self *IReferenceClock) GetTime(pTime *int64) foundation.HRESULT {
+func (self *IReferenceClock) GetTime(pTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AdviseTime dispatches through IReferenceClock's vtable slot 4.
-func (self *IReferenceClock) AdviseTime(baseTime int64, streamTime int64, hEvent foundation.HANDLE, pdwAdviseCookie *uintptr) foundation.HRESULT {
+func (self *IReferenceClock) AdviseTime(baseTime int64, streamTime int64, hEvent foundation.HANDLE, pdwAdviseCookie *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(baseTime), uintptr(streamTime), uintptr(hEvent), uintptr(unsafe.Pointer(pdwAdviseCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AdvisePeriodic dispatches through IReferenceClock's vtable slot 5.
-func (self *IReferenceClock) AdvisePeriodic(startTime int64, periodTime int64, hSemaphore foundation.HANDLE, pdwAdviseCookie *uintptr) foundation.HRESULT {
+func (self *IReferenceClock) AdvisePeriodic(startTime int64, periodTime int64, hSemaphore foundation.HANDLE, pdwAdviseCookie *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(startTime), uintptr(periodTime), uintptr(hSemaphore), uintptr(unsafe.Pointer(pdwAdviseCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unadvise dispatches through IReferenceClock's vtable slot 6.
-func (self *IReferenceClock) Unadvise(dwAdviseCookie uintptr) foundation.HRESULT {
+func (self *IReferenceClock) Unadvise(dwAdviseCookie uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwAdviseCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 36b73885-c2c8-11cf-8b46-00805f6cef60
@@ -64,13 +64,13 @@ type IReferenceClockTimerControl struct {
 var IID_IReferenceClockTimerControl = win32.GUID{Data1: 0xebec459c, Data2: 0x2eca, Data3: 0x4d42, Data4: [8]byte{0xa8, 0xaf, 0x30, 0xdf, 0x55, 0x76, 0x14, 0xb8}}
 
 // SetDefaultTimerResolution dispatches through IReferenceClockTimerControl's vtable slot 3.
-func (self *IReferenceClockTimerControl) SetDefaultTimerResolution(timerResolution int64) foundation.HRESULT {
+func (self *IReferenceClockTimerControl) SetDefaultTimerResolution(timerResolution int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(timerResolution))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultTimerResolution dispatches through IReferenceClockTimerControl's vtable slot 4.
-func (self *IReferenceClockTimerControl) GetDefaultTimerResolution(pTimerResolution *int64) foundation.HRESULT {
+func (self *IReferenceClockTimerControl) GetDefaultTimerResolution(pTimerResolution *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimerResolution)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

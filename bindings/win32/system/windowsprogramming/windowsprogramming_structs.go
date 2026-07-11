@@ -147,8 +147,8 @@ type DELAYLOAD_INFO struct {
 	LastError           uint32
 }
 
-// DELAYLOAD_PROC_DESCRIPTOR_Description_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DELAYLOAD_PROC_DESCRIPTOR_Description_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DELAYLOAD_PROC_DESCRIPTOR_Description_e__Union struct {
 	Data [1]uint64
 }
@@ -199,8 +199,8 @@ type HW_PROFILE_INFOW struct {
 	SzHwProfileName [80]uint16
 }
 
-// IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IMAGE_DELAYLOAD_DESCRIPTOR_Attributes_e__Union struct {
 	Data [1]uint32
 }
@@ -216,8 +216,8 @@ type IMAGE_DELAYLOAD_DESCRIPTOR struct {
 	TimeDateStamp              uint32
 }
 
-// IMAGE_THUNK_DATA32_u1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IMAGE_THUNK_DATA32_u1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IMAGE_THUNK_DATA32_u1_e__Union struct {
 	Data [1]uint32
 }
@@ -226,8 +226,8 @@ type IMAGE_THUNK_DATA32 struct {
 	U1 IMAGE_THUNK_DATA32_u1_e__Union
 }
 
-// IMAGE_THUNK_DATA64_u1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IMAGE_THUNK_DATA64_u1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IMAGE_THUNK_DATA64_u1_e__Union struct {
 	Data [1]uint64
 }
@@ -292,8 +292,8 @@ type JIT_DEBUG_INFO struct {
 	LpContextRecord         uint64
 }
 
-// LDR_DATA_TABLE_ENTRY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// LDR_DATA_TABLE_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type LDR_DATA_TABLE_ENTRY_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -333,8 +333,8 @@ type PERUSERSECTIONW struct {
 	BRollback     foundation.BOOL
 }
 
-// PROCESS_CREATION_SVE_VECTOR_LENGTH is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROCESS_CREATION_SVE_VECTOR_LENGTH is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROCESS_CREATION_SVE_VECTOR_LENGTH struct {
 	Data [1]uint32
 }
@@ -523,8 +523,8 @@ type TDIObjectID struct {
 	Toi_id     uint32
 }
 
-// TDI_TL_IO_CONTROL_ENDPOINT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TDI_TL_IO_CONTROL_ENDPOINT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TDI_TL_IO_CONTROL_ENDPOINT_Anonymous_e__Union struct {
 	Data [1]uint32
 }

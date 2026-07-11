@@ -27,27 +27,27 @@ type IEnumACDGroup struct {
 var IID_IEnumACDGroup = win32.GUID{Data1: 0x5afc3157, Data2: 0x4bcc, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x80, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Next dispatches through IEnumACDGroup's vtable slot 3.
-func (self *IEnumACDGroup) Next(celt uint32, ppElements **ITACDGroup, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumACDGroup) Next(celt uint32, ppElements **ITACDGroup, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumACDGroup's vtable slot 4.
-func (self *IEnumACDGroup) Reset() foundation.HRESULT {
+func (self *IEnumACDGroup) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumACDGroup's vtable slot 5.
-func (self *IEnumACDGroup) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumACDGroup) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumACDGroup's vtable slot 6.
-func (self *IEnumACDGroup) Clone(ppEnum **IEnumACDGroup) foundation.HRESULT {
+func (self *IEnumACDGroup) Clone(ppEnum **IEnumACDGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumAddress: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ienumaddress
@@ -60,27 +60,28 @@ type IEnumAddress struct {
 var IID_IEnumAddress = win32.GUID{Data1: 0x1666fca1, Data2: 0x9363, Data3: 0x11d0, Data4: [8]byte{0x83, 0x5c, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Next dispatches through IEnumAddress's vtable slot 3.
-func (self *IEnumAddress) Next(celt uint32, ppElements **ITAddress, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumAddress) Next(celt uint32, ppElements **ITAddress, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumAddress's vtable slot 4.
-func (self *IEnumAddress) Reset() foundation.HRESULT {
+func (self *IEnumAddress) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumAddress's vtable slot 5.
-func (self *IEnumAddress) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumAddress) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumAddress's vtable slot 6.
-func (self *IEnumAddress) Clone(ppEnum **IEnumAddress) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumAddress) Clone() (*IEnumAddress, error) {
+	var _ppEnum *IEnumAddress
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumAgent: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-ienumagent
@@ -93,27 +94,27 @@ type IEnumAgent struct {
 var IID_IEnumAgent = win32.GUID{Data1: 0x5afc314d, Data2: 0x4bcc, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x80, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Next dispatches through IEnumAgent's vtable slot 3.
-func (self *IEnumAgent) Next(celt uint32, ppElements **ITAgent, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumAgent) Next(celt uint32, ppElements **ITAgent, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumAgent's vtable slot 4.
-func (self *IEnumAgent) Reset() foundation.HRESULT {
+func (self *IEnumAgent) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumAgent's vtable slot 5.
-func (self *IEnumAgent) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumAgent) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumAgent's vtable slot 6.
-func (self *IEnumAgent) Clone(ppEnum **IEnumAgent) foundation.HRESULT {
+func (self *IEnumAgent) Clone(ppEnum **IEnumAgent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumAgentHandler: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-ienumagenthandler
@@ -126,27 +127,27 @@ type IEnumAgentHandler struct {
 var IID_IEnumAgentHandler = win32.GUID{Data1: 0x587e8c28, Data2: 0x9802, Data3: 0x11d1, Data4: [8]byte{0xa0, 0xa4, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Next dispatches through IEnumAgentHandler's vtable slot 3.
-func (self *IEnumAgentHandler) Next(celt uint32, ppElements **ITAgentHandler, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumAgentHandler) Next(celt uint32, ppElements **ITAgentHandler, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumAgentHandler's vtable slot 4.
-func (self *IEnumAgentHandler) Reset() foundation.HRESULT {
+func (self *IEnumAgentHandler) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumAgentHandler's vtable slot 5.
-func (self *IEnumAgentHandler) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumAgentHandler) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumAgentHandler's vtable slot 6.
-func (self *IEnumAgentHandler) Clone(ppEnum **IEnumAgentHandler) foundation.HRESULT {
+func (self *IEnumAgentHandler) Clone(ppEnum **IEnumAgentHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumAgentSession: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-ienumagentsession
@@ -159,27 +160,27 @@ type IEnumAgentSession struct {
 var IID_IEnumAgentSession = win32.GUID{Data1: 0x5afc314e, Data2: 0x4bcc, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x80, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Next dispatches through IEnumAgentSession's vtable slot 3.
-func (self *IEnumAgentSession) Next(celt uint32, ppElements **ITAgentSession, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumAgentSession) Next(celt uint32, ppElements **ITAgentSession, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumAgentSession's vtable slot 4.
-func (self *IEnumAgentSession) Reset() foundation.HRESULT {
+func (self *IEnumAgentSession) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumAgentSession's vtable slot 5.
-func (self *IEnumAgentSession) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumAgentSession) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumAgentSession's vtable slot 6.
-func (self *IEnumAgentSession) Clone(ppEnum **IEnumAgentSession) foundation.HRESULT {
+func (self *IEnumAgentSession) Clone(ppEnum **IEnumAgentSession) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumBstr: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ienumbstr
@@ -192,27 +193,28 @@ type IEnumBstr struct {
 var IID_IEnumBstr = win32.GUID{Data1: 0x35372049, Data2: 0x0bc6, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x33, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Next dispatches through IEnumBstr's vtable slot 3.
-func (self *IEnumBstr) Next(celt uint32, ppStrings *foundation.BSTR, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumBstr) Next(celt uint32, ppStrings *foundation.BSTR, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppStrings)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumBstr's vtable slot 4.
-func (self *IEnumBstr) Reset() foundation.HRESULT {
+func (self *IEnumBstr) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumBstr's vtable slot 5.
-func (self *IEnumBstr) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumBstr) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumBstr's vtable slot 6.
-func (self *IEnumBstr) Clone(ppEnum **IEnumBstr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumBstr) Clone() (*IEnumBstr, error) {
+	var _ppEnum *IEnumBstr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumCall: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ienumcall
@@ -225,27 +227,28 @@ type IEnumCall struct {
 var IID_IEnumCall = win32.GUID{Data1: 0xae269cf6, Data2: 0x935e, Data3: 0x11d0, Data4: [8]byte{0x83, 0x5c, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Next dispatches through IEnumCall's vtable slot 3.
-func (self *IEnumCall) Next(celt uint32, ppElements **ITCallInfo, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumCall) Next(celt uint32, ppElements **ITCallInfo, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumCall's vtable slot 4.
-func (self *IEnumCall) Reset() foundation.HRESULT {
+func (self *IEnumCall) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumCall's vtable slot 5.
-func (self *IEnumCall) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumCall) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumCall's vtable slot 6.
-func (self *IEnumCall) Clone(ppEnum **IEnumCall) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumCall) Clone() (*IEnumCall, error) {
+	var _ppEnum *IEnumCall
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumCallHub: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ienumcallhub
@@ -258,27 +261,28 @@ type IEnumCallHub struct {
 var IID_IEnumCallHub = win32.GUID{Data1: 0xa3c15450, Data2: 0x5b92, Data3: 0x11d1, Data4: [8]byte{0x8f, 0x4e, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Next dispatches through IEnumCallHub's vtable slot 3.
-func (self *IEnumCallHub) Next(celt uint32, ppElements **ITCallHub, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumCallHub) Next(celt uint32, ppElements **ITCallHub, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumCallHub's vtable slot 4.
-func (self *IEnumCallHub) Reset() foundation.HRESULT {
+func (self *IEnumCallHub) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumCallHub's vtable slot 5.
-func (self *IEnumCallHub) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumCallHub) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumCallHub's vtable slot 6.
-func (self *IEnumCallHub) Clone(ppEnum **IEnumCallHub) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumCallHub) Clone() (*IEnumCallHub, error) {
+	var _ppEnum *IEnumCallHub
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumCallingCard: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ienumcallingcard
@@ -291,27 +295,28 @@ type IEnumCallingCard struct {
 var IID_IEnumCallingCard = win32.GUID{Data1: 0x0c4d8f02, Data2: 0x8ddb, Data3: 0x11d1, Data4: [8]byte{0xa0, 0x9e, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Next dispatches through IEnumCallingCard's vtable slot 3.
-func (self *IEnumCallingCard) Next(celt uint32, ppElements **ITCallingCard, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumCallingCard) Next(celt uint32, ppElements **ITCallingCard, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumCallingCard's vtable slot 4.
-func (self *IEnumCallingCard) Reset() foundation.HRESULT {
+func (self *IEnumCallingCard) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumCallingCard's vtable slot 5.
-func (self *IEnumCallingCard) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumCallingCard) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumCallingCard's vtable slot 6.
-func (self *IEnumCallingCard) Clone(ppEnum **IEnumCallingCard) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumCallingCard) Clone() (*IEnumCallingCard, error) {
+	var _ppEnum *IEnumCallingCard
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumDialableAddrs: https://learn.microsoft.com/windows/win32/api/rend/nn-rend-ienumdialableaddrs
@@ -324,27 +329,28 @@ type IEnumDialableAddrs struct {
 var IID_IEnumDialableAddrs = win32.GUID{Data1: 0x34621d70, Data2: 0x6cff, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xf7, 0x00, 0xc0, 0x4f, 0xc3, 0x1f, 0xee}}
 
 // Next dispatches through IEnumDialableAddrs's vtable slot 3.
-func (self *IEnumDialableAddrs) Next(celt uint32, ppElements *foundation.BSTR, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumDialableAddrs) Next(celt uint32, ppElements *foundation.BSTR, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumDialableAddrs's vtable slot 4.
-func (self *IEnumDialableAddrs) Reset() foundation.HRESULT {
+func (self *IEnumDialableAddrs) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumDialableAddrs's vtable slot 5.
-func (self *IEnumDialableAddrs) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumDialableAddrs) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumDialableAddrs's vtable slot 6.
-func (self *IEnumDialableAddrs) Clone(ppEnum **IEnumDialableAddrs) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumDialableAddrs) Clone() (*IEnumDialableAddrs, error) {
+	var _ppEnum *IEnumDialableAddrs
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumDirectory: https://learn.microsoft.com/windows/win32/api/rend/nn-rend-ienumdirectory
@@ -357,27 +363,28 @@ type IEnumDirectory struct {
 var IID_IEnumDirectory = win32.GUID{Data1: 0x34621d6d, Data2: 0x6cff, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xf7, 0x00, 0xc0, 0x4f, 0xc3, 0x1f, 0xee}}
 
 // Next dispatches through IEnumDirectory's vtable slot 3.
-func (self *IEnumDirectory) Next(celt uint32, ppElements **ITDirectory, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumDirectory) Next(celt uint32, ppElements **ITDirectory, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumDirectory's vtable slot 4.
-func (self *IEnumDirectory) Reset() foundation.HRESULT {
+func (self *IEnumDirectory) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumDirectory's vtable slot 5.
-func (self *IEnumDirectory) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumDirectory) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumDirectory's vtable slot 6.
-func (self *IEnumDirectory) Clone(ppEnum **IEnumDirectory) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumDirectory) Clone() (*IEnumDirectory, error) {
+	var _ppEnum *IEnumDirectory
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumDirectoryObject: https://learn.microsoft.com/windows/win32/api/rend/nn-rend-ienumdirectoryobject
@@ -390,27 +397,28 @@ type IEnumDirectoryObject struct {
 var IID_IEnumDirectoryObject = win32.GUID{Data1: 0x06c9b64a, Data2: 0x306d, Data3: 0x11d1, Data4: [8]byte{0x97, 0x74, 0x00, 0xc0, 0x4f, 0xd9, 0x1a, 0xc0}}
 
 // Next dispatches through IEnumDirectoryObject's vtable slot 3.
-func (self *IEnumDirectoryObject) Next(celt uint32, pVal **ITDirectoryObject, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumDirectoryObject) Next(celt uint32, pVal **ITDirectoryObject, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pVal)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumDirectoryObject's vtable slot 4.
-func (self *IEnumDirectoryObject) Reset() foundation.HRESULT {
+func (self *IEnumDirectoryObject) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumDirectoryObject's vtable slot 5.
-func (self *IEnumDirectoryObject) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumDirectoryObject) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumDirectoryObject's vtable slot 6.
-func (self *IEnumDirectoryObject) Clone(ppEnum **IEnumDirectoryObject) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumDirectoryObject) Clone() (*IEnumDirectoryObject, error) {
+	var _ppEnum *IEnumDirectoryObject
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumLocation: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ienumlocation
@@ -423,27 +431,28 @@ type IEnumLocation struct {
 var IID_IEnumLocation = win32.GUID{Data1: 0x0c4d8f01, Data2: 0x8ddb, Data3: 0x11d1, Data4: [8]byte{0xa0, 0x9e, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Next dispatches through IEnumLocation's vtable slot 3.
-func (self *IEnumLocation) Next(celt uint32, ppElements **ITLocationInfo, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumLocation) Next(celt uint32, ppElements **ITLocationInfo, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumLocation's vtable slot 4.
-func (self *IEnumLocation) Reset() foundation.HRESULT {
+func (self *IEnumLocation) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumLocation's vtable slot 5.
-func (self *IEnumLocation) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumLocation) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumLocation's vtable slot 6.
-func (self *IEnumLocation) Clone(ppEnum **IEnumLocation) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumLocation) Clone() (*IEnumLocation, error) {
+	var _ppEnum *IEnumLocation
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumMcastScope: https://learn.microsoft.com/windows/win32/api/mdhcp/nn-mdhcp-ienummcastscope
@@ -456,27 +465,27 @@ type IEnumMcastScope struct {
 var IID_IEnumMcastScope = win32.GUID{Data1: 0xdf0daf09, Data2: 0xa289, Data3: 0x11d1, Data4: [8]byte{0x86, 0x97, 0x00, 0x60, 0x08, 0xb0, 0xe5, 0xd2}}
 
 // Next dispatches through IEnumMcastScope's vtable slot 3.
-func (self *IEnumMcastScope) Next(celt uint32, ppScopes **IMcastScope, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumMcastScope) Next(celt uint32, ppScopes **IMcastScope, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppScopes)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumMcastScope's vtable slot 4.
-func (self *IEnumMcastScope) Reset() foundation.HRESULT {
+func (self *IEnumMcastScope) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumMcastScope's vtable slot 5.
-func (self *IEnumMcastScope) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumMcastScope) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumMcastScope's vtable slot 6.
-func (self *IEnumMcastScope) Clone(ppEnum **IEnumMcastScope) foundation.HRESULT {
+func (self *IEnumMcastScope) Clone(ppEnum **IEnumMcastScope) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumPhone: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ienumphone
@@ -489,27 +498,28 @@ type IEnumPhone struct {
 var IID_IEnumPhone = win32.GUID{Data1: 0xf15b7669, Data2: 0x4780, Data3: 0x4595, Data4: [8]byte{0x8c, 0x89, 0xfb, 0x36, 0x9c, 0x8c, 0xf7, 0xaa}}
 
 // Next dispatches through IEnumPhone's vtable slot 3.
-func (self *IEnumPhone) Next(celt uint32, ppElements **ITPhone, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumPhone) Next(celt uint32, ppElements **ITPhone, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumPhone's vtable slot 4.
-func (self *IEnumPhone) Reset() foundation.HRESULT {
+func (self *IEnumPhone) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumPhone's vtable slot 5.
-func (self *IEnumPhone) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumPhone) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumPhone's vtable slot 6.
-func (self *IEnumPhone) Clone(ppEnum **IEnumPhone) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumPhone) Clone() (*IEnumPhone, error) {
+	var _ppEnum *IEnumPhone
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumPluggableSuperclassInfo: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ienumpluggablesuperclassinfo
@@ -522,27 +532,28 @@ type IEnumPluggableSuperclassInfo struct {
 var IID_IEnumPluggableSuperclassInfo = win32.GUID{Data1: 0xe9586a80, Data2: 0x89e6, Data3: 0x4cff, Data4: [8]byte{0x93, 0x1d, 0x47, 0x8d, 0x57, 0x51, 0xf4, 0xc0}}
 
 // Next dispatches through IEnumPluggableSuperclassInfo's vtable slot 3.
-func (self *IEnumPluggableSuperclassInfo) Next(celt uint32, ppElements **ITPluggableTerminalSuperclassInfo, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumPluggableSuperclassInfo) Next(celt uint32, ppElements **ITPluggableTerminalSuperclassInfo, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumPluggableSuperclassInfo's vtable slot 4.
-func (self *IEnumPluggableSuperclassInfo) Reset() foundation.HRESULT {
+func (self *IEnumPluggableSuperclassInfo) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumPluggableSuperclassInfo's vtable slot 5.
-func (self *IEnumPluggableSuperclassInfo) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumPluggableSuperclassInfo) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumPluggableSuperclassInfo's vtable slot 6.
-func (self *IEnumPluggableSuperclassInfo) Clone(ppEnum **IEnumPluggableSuperclassInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumPluggableSuperclassInfo) Clone() (*IEnumPluggableSuperclassInfo, error) {
+	var _ppEnum *IEnumPluggableSuperclassInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumPluggableTerminalClassInfo: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ienumpluggableterminalclassinfo
@@ -555,27 +566,28 @@ type IEnumPluggableTerminalClassInfo struct {
 var IID_IEnumPluggableTerminalClassInfo = win32.GUID{Data1: 0x4567450c, Data2: 0xdbee, Data3: 0x4e3f, Data4: [8]byte{0xaa, 0xf5, 0x37, 0xbf, 0x9e, 0xbf, 0x5e, 0x29}}
 
 // Next dispatches through IEnumPluggableTerminalClassInfo's vtable slot 3.
-func (self *IEnumPluggableTerminalClassInfo) Next(celt uint32, ppElements **ITPluggableTerminalClassInfo, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumPluggableTerminalClassInfo) Next(celt uint32, ppElements **ITPluggableTerminalClassInfo, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumPluggableTerminalClassInfo's vtable slot 4.
-func (self *IEnumPluggableTerminalClassInfo) Reset() foundation.HRESULT {
+func (self *IEnumPluggableTerminalClassInfo) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumPluggableTerminalClassInfo's vtable slot 5.
-func (self *IEnumPluggableTerminalClassInfo) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumPluggableTerminalClassInfo) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumPluggableTerminalClassInfo's vtable slot 6.
-func (self *IEnumPluggableTerminalClassInfo) Clone(ppEnum **IEnumPluggableTerminalClassInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumPluggableTerminalClassInfo) Clone() (*IEnumPluggableTerminalClassInfo, error) {
+	var _ppEnum *IEnumPluggableTerminalClassInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumQueue: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-ienumqueue
@@ -588,27 +600,27 @@ type IEnumQueue struct {
 var IID_IEnumQueue = win32.GUID{Data1: 0x5afc3158, Data2: 0x4bcc, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x80, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Next dispatches through IEnumQueue's vtable slot 3.
-func (self *IEnumQueue) Next(celt uint32, ppElements **ITQueue, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumQueue) Next(celt uint32, ppElements **ITQueue, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumQueue's vtable slot 4.
-func (self *IEnumQueue) Reset() foundation.HRESULT {
+func (self *IEnumQueue) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumQueue's vtable slot 5.
-func (self *IEnumQueue) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumQueue) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumQueue's vtable slot 6.
-func (self *IEnumQueue) Clone(ppEnum **IEnumQueue) foundation.HRESULT {
+func (self *IEnumQueue) Clone(ppEnum **IEnumQueue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumStream: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ienumstream
@@ -621,27 +633,28 @@ type IEnumStream struct {
 var IID_IEnumStream = win32.GUID{Data1: 0xee3bd606, Data2: 0x3868, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x45, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Next dispatches through IEnumStream's vtable slot 3.
-func (self *IEnumStream) Next(celt uint32, ppElements **ITStream, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumStream) Next(celt uint32, ppElements **ITStream, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumStream's vtable slot 4.
-func (self *IEnumStream) Reset() foundation.HRESULT {
+func (self *IEnumStream) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumStream's vtable slot 5.
-func (self *IEnumStream) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumStream) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumStream's vtable slot 6.
-func (self *IEnumStream) Clone(ppEnum **IEnumStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumStream) Clone() (*IEnumStream, error) {
+	var _ppEnum *IEnumStream
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumSubStream: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ienumsubstream
@@ -654,27 +667,28 @@ type IEnumSubStream struct {
 var IID_IEnumSubStream = win32.GUID{Data1: 0xee3bd609, Data2: 0x3868, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x45, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Next dispatches through IEnumSubStream's vtable slot 3.
-func (self *IEnumSubStream) Next(celt uint32, ppElements **ITSubStream, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumSubStream) Next(celt uint32, ppElements **ITSubStream, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumSubStream's vtable slot 4.
-func (self *IEnumSubStream) Reset() foundation.HRESULT {
+func (self *IEnumSubStream) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumSubStream's vtable slot 5.
-func (self *IEnumSubStream) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumSubStream) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumSubStream's vtable slot 6.
-func (self *IEnumSubStream) Clone(ppEnum **IEnumSubStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumSubStream) Clone() (*IEnumSubStream, error) {
+	var _ppEnum *IEnumSubStream
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumTerminal: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ienumterminal
@@ -687,27 +701,28 @@ type IEnumTerminal struct {
 var IID_IEnumTerminal = win32.GUID{Data1: 0xae269cf4, Data2: 0x935e, Data3: 0x11d0, Data4: [8]byte{0x83, 0x5c, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Next dispatches through IEnumTerminal's vtable slot 3.
-func (self *IEnumTerminal) Next(celt uint32, ppElements **ITTerminal, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumTerminal) Next(celt uint32, ppElements **ITTerminal, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumTerminal's vtable slot 4.
-func (self *IEnumTerminal) Reset() foundation.HRESULT {
+func (self *IEnumTerminal) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumTerminal's vtable slot 5.
-func (self *IEnumTerminal) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumTerminal) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumTerminal's vtable slot 6.
-func (self *IEnumTerminal) Clone(ppEnum **IEnumTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumTerminal) Clone() (*IEnumTerminal, error) {
+	var _ppEnum *IEnumTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumTerminalClass: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ienumterminalclass
@@ -720,27 +735,28 @@ type IEnumTerminalClass struct {
 var IID_IEnumTerminalClass = win32.GUID{Data1: 0xae269cf5, Data2: 0x935e, Data3: 0x11d0, Data4: [8]byte{0x83, 0x5c, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Next dispatches through IEnumTerminalClass's vtable slot 3.
-func (self *IEnumTerminalClass) Next(celt uint32, pElements *win32.GUID, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumTerminalClass) Next(celt uint32, pElements *win32.GUID, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pElements)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumTerminalClass's vtable slot 4.
-func (self *IEnumTerminalClass) Reset() foundation.HRESULT {
+func (self *IEnumTerminalClass) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumTerminalClass's vtable slot 5.
-func (self *IEnumTerminalClass) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumTerminalClass) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumTerminalClass's vtable slot 6.
-func (self *IEnumTerminalClass) Clone(ppEnum **IEnumTerminalClass) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumTerminalClass) Clone() (*IEnumTerminalClass, error) {
+	var _ppEnum *IEnumTerminalClass
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnum)))
+	return _ppEnum, win32.HRESULTError(int32(r1))
 }
 
 // IMcastAddressAllocation: https://learn.microsoft.com/windows/win32/api/mdhcp/nn-mdhcp-imcastaddressallocation
@@ -753,27 +769,27 @@ type IMcastAddressAllocation struct {
 var IID_IMcastAddressAllocation = win32.GUID{Data1: 0xdf0daef1, Data2: 0xa289, Data3: 0x11d1, Data4: [8]byte{0x86, 0x97, 0x00, 0x60, 0x08, 0xb0, 0xe5, 0xd2}}
 
 // Get_Scopes dispatches through IMcastAddressAllocation's vtable slot 7.
-func (self *IMcastAddressAllocation) Get_Scopes(pVariant *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMcastAddressAllocation) Get_Scopes(pVariant *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateScopes dispatches through IMcastAddressAllocation's vtable slot 8.
-func (self *IMcastAddressAllocation) EnumerateScopes(ppEnumMcastScope **IEnumMcastScope) foundation.HRESULT {
+func (self *IMcastAddressAllocation) EnumerateScopes(ppEnumMcastScope **IEnumMcastScope) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumMcastScope)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RenewAddress dispatches through IMcastAddressAllocation's vtable slot 10.
-func (self *IMcastAddressAllocation) RenewAddress(lReserved int32, pRenewRequest *IMcastLeaseInfo, ppRenewResponse **IMcastLeaseInfo) foundation.HRESULT {
+func (self *IMcastAddressAllocation) RenewAddress(lReserved int32, pRenewRequest *IMcastLeaseInfo, ppRenewResponse **IMcastLeaseInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lReserved), uintptr(unsafe.Pointer(pRenewRequest)), uintptr(unsafe.Pointer(ppRenewResponse)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseAddress dispatches through IMcastAddressAllocation's vtable slot 11.
-func (self *IMcastAddressAllocation) ReleaseAddress(pReleaseRequest *IMcastLeaseInfo) foundation.HRESULT {
+func (self *IMcastAddressAllocation) ReleaseAddress(pReleaseRequest *IMcastLeaseInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReleaseRequest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMcastLeaseInfo: https://learn.microsoft.com/windows/win32/api/mdhcp/nn-mdhcp-imcastleaseinfo
@@ -786,51 +802,51 @@ type IMcastLeaseInfo struct {
 var IID_IMcastLeaseInfo = win32.GUID{Data1: 0xdf0daefd, Data2: 0xa289, Data3: 0x11d1, Data4: [8]byte{0x86, 0x97, 0x00, 0x60, 0x08, 0xb0, 0xe5, 0xd2}}
 
 // Get_RequestID dispatches through IMcastLeaseInfo's vtable slot 7.
-func (self *IMcastLeaseInfo) Get_RequestID(ppRequestID *foundation.BSTR) foundation.HRESULT {
+func (self *IMcastLeaseInfo) Get_RequestID(ppRequestID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRequestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LeaseStartTime dispatches through IMcastLeaseInfo's vtable slot 8.
-func (self *IMcastLeaseInfo) Get_LeaseStartTime(pTime *float64) foundation.HRESULT {
+func (self *IMcastLeaseInfo) Get_LeaseStartTime(pTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LeaseStopTime dispatches through IMcastLeaseInfo's vtable slot 10.
-func (self *IMcastLeaseInfo) Get_LeaseStopTime(pTime *float64) foundation.HRESULT {
+func (self *IMcastLeaseInfo) Get_LeaseStopTime(pTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AddressCount dispatches through IMcastLeaseInfo's vtable slot 12.
-func (self *IMcastLeaseInfo) Get_AddressCount(pCount *int32) foundation.HRESULT {
+func (self *IMcastLeaseInfo) Get_AddressCount(pCount *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ServerAddress dispatches through IMcastLeaseInfo's vtable slot 13.
-func (self *IMcastLeaseInfo) Get_ServerAddress(ppAddress *foundation.BSTR) foundation.HRESULT {
+func (self *IMcastLeaseInfo) Get_ServerAddress(ppAddress *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TTL dispatches through IMcastLeaseInfo's vtable slot 14.
-func (self *IMcastLeaseInfo) Get_TTL(pTTL *int32) foundation.HRESULT {
+func (self *IMcastLeaseInfo) Get_TTL(pTTL *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTTL)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Addresses dispatches through IMcastLeaseInfo's vtable slot 15.
-func (self *IMcastLeaseInfo) Get_Addresses(pVariant *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMcastLeaseInfo) Get_Addresses(pVariant *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateAddresses dispatches through IMcastLeaseInfo's vtable slot 16.
-func (self *IMcastLeaseInfo) EnumerateAddresses(ppEnumAddresses **IEnumBstr) foundation.HRESULT {
+func (self *IMcastLeaseInfo) EnumerateAddresses(ppEnumAddresses **IEnumBstr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumAddresses)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMcastScope: https://learn.microsoft.com/windows/win32/api/mdhcp/nn-mdhcp-imcastscope
@@ -843,33 +859,33 @@ type IMcastScope struct {
 var IID_IMcastScope = win32.GUID{Data1: 0xdf0daef4, Data2: 0xa289, Data3: 0x11d1, Data4: [8]byte{0x86, 0x97, 0x00, 0x60, 0x08, 0xb0, 0xe5, 0xd2}}
 
 // Get_ScopeID dispatches through IMcastScope's vtable slot 7.
-func (self *IMcastScope) Get_ScopeID(pID *int32) foundation.HRESULT {
+func (self *IMcastScope) Get_ScopeID(pID *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ServerID dispatches through IMcastScope's vtable slot 8.
-func (self *IMcastScope) Get_ServerID(pID *int32) foundation.HRESULT {
+func (self *IMcastScope) Get_ServerID(pID *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_InterfaceID dispatches through IMcastScope's vtable slot 9.
-func (self *IMcastScope) Get_InterfaceID(pID *int32) foundation.HRESULT {
+func (self *IMcastScope) Get_InterfaceID(pID *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ScopeDescription dispatches through IMcastScope's vtable slot 10.
-func (self *IMcastScope) Get_ScopeDescription(ppDescription *foundation.BSTR) foundation.HRESULT {
+func (self *IMcastScope) Get_ScopeDescription(ppDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TTL dispatches through IMcastScope's vtable slot 11.
-func (self *IMcastScope) Get_TTL(pTTL *int32) foundation.HRESULT {
+func (self *IMcastScope) Get_TTL(pTTL *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTTL)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITACDGroup: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-itacdgroup
@@ -882,21 +898,21 @@ type ITACDGroup struct {
 var IID_ITACDGroup = win32.GUID{Data1: 0x5afc3148, Data2: 0x4bcc, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x80, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Get_Name dispatches through ITACDGroup's vtable slot 7.
-func (self *ITACDGroup) Get_Name(ppName *foundation.BSTR) foundation.HRESULT {
+func (self *ITACDGroup) Get_Name(ppName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateQueues dispatches through ITACDGroup's vtable slot 8.
-func (self *ITACDGroup) EnumerateQueues(ppEnumQueue **IEnumQueue) foundation.HRESULT {
+func (self *ITACDGroup) EnumerateQueues(ppEnumQueue **IEnumQueue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Queues dispatches through ITACDGroup's vtable slot 9.
-func (self *ITACDGroup) Get_Queues(pVariant *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ITACDGroup) Get_Queues(pVariant *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITACDGroupEvent: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-itacdgroupevent
@@ -909,15 +925,15 @@ type ITACDGroupEvent struct {
 var IID_ITACDGroupEvent = win32.GUID{Data1: 0x297f3032, Data2: 0xbd11, Data3: 0x11d1, Data4: [8]byte{0xa0, 0xa7, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Get_Group dispatches through ITACDGroupEvent's vtable slot 7.
-func (self *ITACDGroupEvent) Get_Group(ppGroup **ITACDGroup) foundation.HRESULT {
+func (self *ITACDGroupEvent) Get_Group(ppGroup **ITACDGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppGroup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Event dispatches through ITACDGroupEvent's vtable slot 8.
-func (self *ITACDGroupEvent) Get_Event(pEvent *ACDGROUP_EVENT) foundation.HRESULT {
+func (self *ITACDGroupEvent) Get_Event(pEvent *ACDGROUP_EVENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITAMMediaFormat: https://learn.microsoft.com/windows/win32/api/tapi3ds/nn-tapi3ds-itammediaformat
@@ -930,15 +946,15 @@ type ITAMMediaFormat struct {
 var IID_ITAMMediaFormat = win32.GUID{Data1: 0x0364eb00, Data2: 0x4a77, Data3: 0x11d1, Data4: [8]byte{0xa6, 0x71, 0x00, 0x60, 0x97, 0xc9, 0xa2, 0xe8}}
 
 // Get_MediaFormat dispatches through ITAMMediaFormat's vtable slot 3.
-func (self *ITAMMediaFormat) Get_MediaFormat(ppmt **mediamediafoundation.AM_MEDIA_TYPE) foundation.HRESULT {
+func (self *ITAMMediaFormat) Get_MediaFormat(ppmt **mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppmt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MediaFormat dispatches through ITAMMediaFormat's vtable slot 4.
-func (self *ITAMMediaFormat) Put_MediaFormat(pmt *mediamediafoundation.AM_MEDIA_TYPE) foundation.HRESULT {
+func (self *ITAMMediaFormat) Put_MediaFormat(pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITASRTerminalEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itasrterminalevent
@@ -951,21 +967,24 @@ type ITASRTerminalEvent struct {
 var IID_ITASRTerminalEvent = win32.GUID{Data1: 0xee016a02, Data2: 0x4fa9, Data3: 0x467c, Data4: [8]byte{0x93, 0x3f, 0x5a, 0x15, 0xb1, 0x23, 0x77, 0xd7}}
 
 // Get_Terminal dispatches through ITASRTerminalEvent's vtable slot 7.
-func (self *ITASRTerminalEvent) Get_Terminal(ppTerminal **ITTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTerminal)))
-	return foundation.HRESULT(r1)
+func (self *ITASRTerminalEvent) Get_Terminal() (*ITTerminal, error) {
+	var _ppTerminal *ITTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTerminal)))
+	return _ppTerminal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Call dispatches through ITASRTerminalEvent's vtable slot 8.
-func (self *ITASRTerminalEvent) Get_Call(ppCall **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCall)))
-	return foundation.HRESULT(r1)
+func (self *ITASRTerminalEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCall *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCall)))
+	return _ppCall, win32.HRESULTError(int32(r1))
 }
 
 // Get_Error dispatches through ITASRTerminalEvent's vtable slot 9.
-func (self *ITASRTerminalEvent) Get_Error(phrErrorCode *foundation.HRESULT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrErrorCode)))
-	return foundation.HRESULT(r1)
+func (self *ITASRTerminalEvent) Get_Error() (foundation.HRESULT, error) {
+	var _phrErrorCode foundation.HRESULT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phrErrorCode)))
+	return _phrErrorCode, win32.HRESULTError(int32(r1))
 }
 
 // ITAddress: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itaddress
@@ -978,93 +997,105 @@ type ITAddress struct {
 var IID_ITAddress = win32.GUID{Data1: 0xb1efc386, Data2: 0x9355, Data3: 0x11d0, Data4: [8]byte{0x83, 0x5c, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Get_State dispatches through ITAddress's vtable slot 7.
-func (self *ITAddress) Get_State(pAddressState *ADDRESS_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddressState)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress) Get_State() (ADDRESS_STATE, error) {
+	var _pAddressState ADDRESS_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pAddressState)))
+	return _pAddressState, win32.HRESULTError(int32(r1))
 }
 
 // Get_AddressName dispatches through ITAddress's vtable slot 8.
-func (self *ITAddress) Get_AddressName(ppName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress) Get_AddressName() (foundation.BSTR, error) {
+	var _ppName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppName)))
+	return _ppName, win32.HRESULTError(int32(r1))
 }
 
 // Get_ServiceProviderName dispatches through ITAddress's vtable slot 9.
-func (self *ITAddress) Get_ServiceProviderName(ppName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress) Get_ServiceProviderName() (foundation.BSTR, error) {
+	var _ppName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppName)))
+	return _ppName, win32.HRESULTError(int32(r1))
 }
 
 // Get_TAPIObject dispatches through ITAddress's vtable slot 10.
-func (self *ITAddress) Get_TAPIObject(ppTapiObject **ITTAPI) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTapiObject)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress) Get_TAPIObject() (*ITTAPI, error) {
+	var _ppTapiObject *ITTAPI
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTapiObject)))
+	return _ppTapiObject, win32.HRESULTError(int32(r1))
 }
 
 // CreateCall dispatches through ITAddress's vtable slot 11.
-func (self *ITAddress) CreateCall(pDestAddress foundation.BSTR, lAddressType int32, lMediaTypes int32, ppCall **ITBasicCallControl) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestAddress)), uintptr(lAddressType), uintptr(lMediaTypes), uintptr(unsafe.Pointer(ppCall)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress) CreateCall(pDestAddress foundation.BSTR, lAddressType int32, lMediaTypes int32) (*ITBasicCallControl, error) {
+	var _ppCall *ITBasicCallControl
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestAddress)), uintptr(lAddressType), uintptr(lMediaTypes), uintptr(unsafe.Pointer(&_ppCall)))
+	return _ppCall, win32.HRESULTError(int32(r1))
 }
 
 // Get_Calls dispatches through ITAddress's vtable slot 12.
-func (self *ITAddress) Get_Calls(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress) Get_Calls() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateCalls dispatches through ITAddress's vtable slot 13.
-func (self *ITAddress) EnumerateCalls(ppCallEnum **IEnumCall) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCallEnum)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress) EnumerateCalls() (*IEnumCall, error) {
+	var _ppCallEnum *IEnumCall
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCallEnum)))
+	return _ppCallEnum, win32.HRESULTError(int32(r1))
 }
 
 // Get_DialableAddress dispatches through ITAddress's vtable slot 14.
-func (self *ITAddress) Get_DialableAddress(pDialableAddress *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDialableAddress)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress) Get_DialableAddress() (foundation.BSTR, error) {
+	var _pDialableAddress foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDialableAddress)))
+	return _pDialableAddress, win32.HRESULTError(int32(r1))
 }
 
 // CreateForwardInfoObject dispatches through ITAddress's vtable slot 15.
-func (self *ITAddress) CreateForwardInfoObject(ppForwardInfo **ITForwardInformation) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppForwardInfo)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress) CreateForwardInfoObject() (*ITForwardInformation, error) {
+	var _ppForwardInfo *ITForwardInformation
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppForwardInfo)))
+	return _ppForwardInfo, win32.HRESULTError(int32(r1))
 }
 
 // Forward dispatches through ITAddress's vtable slot 16.
-func (self *ITAddress) Forward(pForwardInfo *ITForwardInformation, pCall *ITBasicCallControl) foundation.HRESULT {
+func (self *ITAddress) Forward(pForwardInfo *ITForwardInformation, pCall *ITBasicCallControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pForwardInfo)), uintptr(unsafe.Pointer(pCall)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentForwardInfo dispatches through ITAddress's vtable slot 17.
-func (self *ITAddress) Get_CurrentForwardInfo(ppForwardInfo **ITForwardInformation) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppForwardInfo)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress) Get_CurrentForwardInfo() (*ITForwardInformation, error) {
+	var _ppForwardInfo *ITForwardInformation
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppForwardInfo)))
+	return _ppForwardInfo, win32.HRESULTError(int32(r1))
 }
 
 // Put_MessageWaiting dispatches through ITAddress's vtable slot 18.
-func (self *ITAddress) Put_MessageWaiting(fMessageWaiting foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITAddress) Put_MessageWaiting(fMessageWaiting foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(fMessageWaiting))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MessageWaiting dispatches through ITAddress's vtable slot 19.
-func (self *ITAddress) Get_MessageWaiting(pfMessageWaiting *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfMessageWaiting)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress) Get_MessageWaiting() (foundation.VARIANT_BOOL, error) {
+	var _pfMessageWaiting foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfMessageWaiting)))
+	return _pfMessageWaiting, win32.HRESULTError(int32(r1))
 }
 
 // Put_DoNotDisturb dispatches through ITAddress's vtable slot 20.
-func (self *ITAddress) Put_DoNotDisturb(fDoNotDisturb foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITAddress) Put_DoNotDisturb(fDoNotDisturb foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(fDoNotDisturb))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DoNotDisturb dispatches through ITAddress's vtable slot 21.
-func (self *ITAddress) Get_DoNotDisturb(pfDoNotDisturb *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfDoNotDisturb)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress) Get_DoNotDisturb() (foundation.VARIANT_BOOL, error) {
+	var _pfDoNotDisturb foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfDoNotDisturb)))
+	return _pfDoNotDisturb, win32.HRESULTError(int32(r1))
 }
 
 // ITAddress2: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itaddress2
@@ -1077,57 +1108,64 @@ type ITAddress2 struct {
 var IID_ITAddress2 = win32.GUID{Data1: 0xb0ae5d9b, Data2: 0xbe51, Data3: 0x46c9, Data4: [8]byte{0xb0, 0xf7, 0xdf, 0xa8, 0xa2, 0x2a, 0x8b, 0xc4}}
 
 // Get_Phones dispatches through ITAddress2's vtable slot 22.
-func (self *ITAddress2) Get_Phones(pPhones *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhones)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress2) Get_Phones() (systemvariant.VARIANT, error) {
+	var _pPhones systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pPhones)))
+	return _pPhones, win32.HRESULTError(int32(r1))
 }
 
 // EnumeratePhones dispatches through ITAddress2's vtable slot 23.
-func (self *ITAddress2) EnumeratePhones(ppEnumPhone **IEnumPhone) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumPhone)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress2) EnumeratePhones() (*IEnumPhone, error) {
+	var _ppEnumPhone *IEnumPhone
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumPhone)))
+	return _ppEnumPhone, win32.HRESULTError(int32(r1))
 }
 
 // GetPhoneFromTerminal dispatches through ITAddress2's vtable slot 24.
-func (self *ITAddress2) GetPhoneFromTerminal(pTerminal *ITTerminal, ppPhone **ITPhone) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminal)), uintptr(unsafe.Pointer(ppPhone)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress2) GetPhoneFromTerminal(pTerminal *ITTerminal) (*ITPhone, error) {
+	var _ppPhone *ITPhone
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminal)), uintptr(unsafe.Pointer(&_ppPhone)))
+	return _ppPhone, win32.HRESULTError(int32(r1))
 }
 
 // Get_PreferredPhones dispatches through ITAddress2's vtable slot 25.
-func (self *ITAddress2) Get_PreferredPhones(pPhones *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhones)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress2) Get_PreferredPhones() (systemvariant.VARIANT, error) {
+	var _pPhones systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pPhones)))
+	return _pPhones, win32.HRESULTError(int32(r1))
 }
 
 // EnumeratePreferredPhones dispatches through ITAddress2's vtable slot 26.
-func (self *ITAddress2) EnumeratePreferredPhones(ppEnumPhone **IEnumPhone) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumPhone)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress2) EnumeratePreferredPhones() (*IEnumPhone, error) {
+	var _ppEnumPhone *IEnumPhone
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumPhone)))
+	return _ppEnumPhone, win32.HRESULTError(int32(r1))
 }
 
 // Get_EventFilter dispatches through ITAddress2's vtable slot 27.
-func (self *ITAddress2) Get_EventFilter(TapiEvent TAPI_EVENT, lSubEvent int32, pEnable *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(TapiEvent), uintptr(lSubEvent), uintptr(unsafe.Pointer(pEnable)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress2) Get_EventFilter(TapiEvent TAPI_EVENT, lSubEvent int32) (foundation.VARIANT_BOOL, error) {
+	var _pEnable foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(TapiEvent), uintptr(lSubEvent), uintptr(unsafe.Pointer(&_pEnable)))
+	return _pEnable, win32.HRESULTError(int32(r1))
 }
 
 // Put_EventFilter dispatches through ITAddress2's vtable slot 28.
-func (self *ITAddress2) Put_EventFilter(TapiEvent TAPI_EVENT, lSubEvent int32, bEnable foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITAddress2) Put_EventFilter(TapiEvent TAPI_EVENT, lSubEvent int32, bEnable foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(TapiEvent), uintptr(lSubEvent), uintptr(bEnable))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeviceSpecific dispatches through ITAddress2's vtable slot 29.
-func (self *ITAddress2) DeviceSpecific(pCall *ITCallInfo, pParams *byte, dwSize uint32) foundation.HRESULT {
+func (self *ITAddress2) DeviceSpecific(pCall *ITCallInfo, pParams *byte, dwSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCall)), uintptr(unsafe.Pointer(pParams)), uintptr(dwSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NegotiateExtVersion dispatches through ITAddress2's vtable slot 31.
-func (self *ITAddress2) NegotiateExtVersion(lLowVersion int32, lHighVersion int32, plExtVersion *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(lLowVersion), uintptr(lHighVersion), uintptr(unsafe.Pointer(plExtVersion)))
-	return foundation.HRESULT(r1)
+func (self *ITAddress2) NegotiateExtVersion(lLowVersion int32, lHighVersion int32) (int32, error) {
+	var _plExtVersion int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(lLowVersion), uintptr(lHighVersion), uintptr(unsafe.Pointer(&_plExtVersion)))
+	return _plExtVersion, win32.HRESULTError(int32(r1))
 }
 
 // ITAddressCapabilities: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itaddresscapabilities
@@ -1140,51 +1178,59 @@ type ITAddressCapabilities struct {
 var IID_ITAddressCapabilities = win32.GUID{Data1: 0x8df232f5, Data2: 0x821b, Data3: 0x11d1, Data4: [8]byte{0xbb, 0x5c, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Get_AddressCapability dispatches through ITAddressCapabilities's vtable slot 7.
-func (self *ITAddressCapabilities) Get_AddressCapability(AddressCap ADDRESS_CAPABILITY, plCapability *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(AddressCap), uintptr(unsafe.Pointer(plCapability)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressCapabilities) Get_AddressCapability(AddressCap ADDRESS_CAPABILITY) (int32, error) {
+	var _plCapability int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(AddressCap), uintptr(unsafe.Pointer(&_plCapability)))
+	return _plCapability, win32.HRESULTError(int32(r1))
 }
 
 // Get_AddressCapabilityString dispatches through ITAddressCapabilities's vtable slot 8.
-func (self *ITAddressCapabilities) Get_AddressCapabilityString(AddressCapString ADDRESS_CAPABILITY_STRING, ppCapabilityString *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(AddressCapString), uintptr(unsafe.Pointer(ppCapabilityString)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressCapabilities) Get_AddressCapabilityString(AddressCapString ADDRESS_CAPABILITY_STRING) (foundation.BSTR, error) {
+	var _ppCapabilityString foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(AddressCapString), uintptr(unsafe.Pointer(&_ppCapabilityString)))
+	return _ppCapabilityString, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallTreatments dispatches through ITAddressCapabilities's vtable slot 9.
-func (self *ITAddressCapabilities) Get_CallTreatments(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressCapabilities) Get_CallTreatments() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateCallTreatments dispatches through ITAddressCapabilities's vtable slot 10.
-func (self *ITAddressCapabilities) EnumerateCallTreatments(ppEnumCallTreatment **IEnumBstr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumCallTreatment)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressCapabilities) EnumerateCallTreatments() (*IEnumBstr, error) {
+	var _ppEnumCallTreatment *IEnumBstr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumCallTreatment)))
+	return _ppEnumCallTreatment, win32.HRESULTError(int32(r1))
 }
 
 // Get_CompletionMessages dispatches through ITAddressCapabilities's vtable slot 11.
-func (self *ITAddressCapabilities) Get_CompletionMessages(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressCapabilities) Get_CompletionMessages() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateCompletionMessages dispatches through ITAddressCapabilities's vtable slot 12.
-func (self *ITAddressCapabilities) EnumerateCompletionMessages(ppEnumCompletionMessage **IEnumBstr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumCompletionMessage)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressCapabilities) EnumerateCompletionMessages() (*IEnumBstr, error) {
+	var _ppEnumCompletionMessage *IEnumBstr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumCompletionMessage)))
+	return _ppEnumCompletionMessage, win32.HRESULTError(int32(r1))
 }
 
 // Get_DeviceClasses dispatches through ITAddressCapabilities's vtable slot 13.
-func (self *ITAddressCapabilities) Get_DeviceClasses(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressCapabilities) Get_DeviceClasses() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateDeviceClasses dispatches through ITAddressCapabilities's vtable slot 14.
-func (self *ITAddressCapabilities) EnumerateDeviceClasses(ppEnumDeviceClass **IEnumBstr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumDeviceClass)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressCapabilities) EnumerateDeviceClasses() (*IEnumBstr, error) {
+	var _ppEnumDeviceClass *IEnumBstr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumDeviceClass)))
+	return _ppEnumDeviceClass, win32.HRESULTError(int32(r1))
 }
 
 // ITAddressDeviceSpecificEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itaddressdevicespecificevent
@@ -1197,33 +1243,38 @@ type ITAddressDeviceSpecificEvent struct {
 var IID_ITAddressDeviceSpecificEvent = win32.GUID{Data1: 0x3acb216b, Data2: 0x40bd, Data3: 0x487a, Data4: [8]byte{0x86, 0x72, 0x5c, 0xe7, 0x7b, 0xd7, 0xe3, 0xa3}}
 
 // Get_Address dispatches through ITAddressDeviceSpecificEvent's vtable slot 7.
-func (self *ITAddressDeviceSpecificEvent) Get_Address(ppAddress **ITAddress) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAddress)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressDeviceSpecificEvent) Get_Address() (*ITAddress, error) {
+	var _ppAddress *ITAddress
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAddress)))
+	return _ppAddress, win32.HRESULTError(int32(r1))
 }
 
 // Get_Call dispatches through ITAddressDeviceSpecificEvent's vtable slot 8.
-func (self *ITAddressDeviceSpecificEvent) Get_Call(ppCall **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCall)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressDeviceSpecificEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCall *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCall)))
+	return _ppCall, win32.HRESULTError(int32(r1))
 }
 
 // Get_lParam1 dispatches through ITAddressDeviceSpecificEvent's vtable slot 9.
-func (self *ITAddressDeviceSpecificEvent) Get_lParam1(pParam1 *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParam1)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressDeviceSpecificEvent) Get_lParam1() (int32, error) {
+	var _pParam1 int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pParam1)))
+	return _pParam1, win32.HRESULTError(int32(r1))
 }
 
 // Get_lParam2 dispatches through ITAddressDeviceSpecificEvent's vtable slot 10.
-func (self *ITAddressDeviceSpecificEvent) Get_lParam2(pParam2 *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParam2)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressDeviceSpecificEvent) Get_lParam2() (int32, error) {
+	var _pParam2 int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pParam2)))
+	return _pParam2, win32.HRESULTError(int32(r1))
 }
 
 // Get_lParam3 dispatches through ITAddressDeviceSpecificEvent's vtable slot 11.
-func (self *ITAddressDeviceSpecificEvent) Get_lParam3(pParam3 *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParam3)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressDeviceSpecificEvent) Get_lParam3() (int32, error) {
+	var _pParam3 int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pParam3)))
+	return _pParam3, win32.HRESULTError(int32(r1))
 }
 
 // ITAddressEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itaddressevent
@@ -1236,21 +1287,24 @@ type ITAddressEvent struct {
 var IID_ITAddressEvent = win32.GUID{Data1: 0x831ce2d1, Data2: 0x83b5, Data3: 0x11d1, Data4: [8]byte{0xbb, 0x5c, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Get_Address dispatches through ITAddressEvent's vtable slot 7.
-func (self *ITAddressEvent) Get_Address(ppAddress **ITAddress) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAddress)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressEvent) Get_Address() (*ITAddress, error) {
+	var _ppAddress *ITAddress
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAddress)))
+	return _ppAddress, win32.HRESULTError(int32(r1))
 }
 
 // Get_Event dispatches through ITAddressEvent's vtable slot 8.
-func (self *ITAddressEvent) Get_Event(pEvent *ADDRESS_EVENT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressEvent) Get_Event() (ADDRESS_EVENT, error) {
+	var _pEvent ADDRESS_EVENT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEvent)))
+	return _pEvent, win32.HRESULTError(int32(r1))
 }
 
 // Get_Terminal dispatches through ITAddressEvent's vtable slot 9.
-func (self *ITAddressEvent) Get_Terminal(ppTerminal **ITTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTerminal)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressEvent) Get_Terminal() (*ITTerminal, error) {
+	var _ppTerminal *ITTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTerminal)))
+	return _ppTerminal, win32.HRESULTError(int32(r1))
 }
 
 // ITAddressTranslation: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itaddresstranslation
@@ -1263,39 +1317,44 @@ type ITAddressTranslation struct {
 var IID_ITAddressTranslation = win32.GUID{Data1: 0x0c4d8f03, Data2: 0x8ddb, Data3: 0x11d1, Data4: [8]byte{0xa0, 0x9e, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // TranslateAddress dispatches through ITAddressTranslation's vtable slot 7.
-func (self *ITAddressTranslation) TranslateAddress(pAddressToTranslate foundation.BSTR, lCard int32, lTranslateOptions int32, ppTranslated **ITAddressTranslationInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddressToTranslate)), uintptr(lCard), uintptr(lTranslateOptions), uintptr(unsafe.Pointer(ppTranslated)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressTranslation) TranslateAddress(pAddressToTranslate foundation.BSTR, lCard int32, lTranslateOptions int32) (*ITAddressTranslationInfo, error) {
+	var _ppTranslated *ITAddressTranslationInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddressToTranslate)), uintptr(lCard), uintptr(lTranslateOptions), uintptr(unsafe.Pointer(&_ppTranslated)))
+	return _ppTranslated, win32.HRESULTError(int32(r1))
 }
 
 // TranslateDialog dispatches through ITAddressTranslation's vtable slot 8.
-func (self *ITAddressTranslation) TranslateDialog(hwndOwner uintptr, pAddressIn foundation.BSTR) foundation.HRESULT {
+func (self *ITAddressTranslation) TranslateDialog(hwndOwner uintptr, pAddressIn foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hwndOwner), uintptr(unsafe.Pointer(pAddressIn)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateLocations dispatches through ITAddressTranslation's vtable slot 9.
-func (self *ITAddressTranslation) EnumerateLocations(ppEnumLocation **IEnumLocation) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumLocation)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressTranslation) EnumerateLocations() (*IEnumLocation, error) {
+	var _ppEnumLocation *IEnumLocation
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumLocation)))
+	return _ppEnumLocation, win32.HRESULTError(int32(r1))
 }
 
 // Get_Locations dispatches through ITAddressTranslation's vtable slot 10.
-func (self *ITAddressTranslation) Get_Locations(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressTranslation) Get_Locations() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateCallingCards dispatches through ITAddressTranslation's vtable slot 11.
-func (self *ITAddressTranslation) EnumerateCallingCards(ppEnumCallingCard **IEnumCallingCard) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumCallingCard)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressTranslation) EnumerateCallingCards() (*IEnumCallingCard, error) {
+	var _ppEnumCallingCard *IEnumCallingCard
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumCallingCard)))
+	return _ppEnumCallingCard, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallingCards dispatches through ITAddressTranslation's vtable slot 12.
-func (self *ITAddressTranslation) Get_CallingCards(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressTranslation) Get_CallingCards() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // ITAddressTranslationInfo: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itaddresstranslationinfo
@@ -1308,33 +1367,38 @@ type ITAddressTranslationInfo struct {
 var IID_ITAddressTranslationInfo = win32.GUID{Data1: 0xafc15945, Data2: 0x8d40, Data3: 0x11d1, Data4: [8]byte{0xa0, 0x9e, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Get_DialableString dispatches through ITAddressTranslationInfo's vtable slot 7.
-func (self *ITAddressTranslationInfo) Get_DialableString(ppDialableString *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDialableString)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressTranslationInfo) Get_DialableString() (foundation.BSTR, error) {
+	var _ppDialableString foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDialableString)))
+	return _ppDialableString, win32.HRESULTError(int32(r1))
 }
 
 // Get_DisplayableString dispatches through ITAddressTranslationInfo's vtable slot 8.
-func (self *ITAddressTranslationInfo) Get_DisplayableString(ppDisplayableString *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDisplayableString)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressTranslationInfo) Get_DisplayableString() (foundation.BSTR, error) {
+	var _ppDisplayableString foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDisplayableString)))
+	return _ppDisplayableString, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentCountryCode dispatches through ITAddressTranslationInfo's vtable slot 9.
-func (self *ITAddressTranslationInfo) Get_CurrentCountryCode(CountryCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CountryCode)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressTranslationInfo) Get_CurrentCountryCode() (int32, error) {
+	var _CountryCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_CountryCode)))
+	return _CountryCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_DestinationCountryCode dispatches through ITAddressTranslationInfo's vtable slot 10.
-func (self *ITAddressTranslationInfo) Get_DestinationCountryCode(CountryCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CountryCode)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressTranslationInfo) Get_DestinationCountryCode() (int32, error) {
+	var _CountryCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_CountryCode)))
+	return _CountryCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_TranslationResults dispatches through ITAddressTranslationInfo's vtable slot 11.
-func (self *ITAddressTranslationInfo) Get_TranslationResults(plResults *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plResults)))
-	return foundation.HRESULT(r1)
+func (self *ITAddressTranslationInfo) Get_TranslationResults() (int32, error) {
+	var _plResults int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plResults)))
+	return _plResults, win32.HRESULTError(int32(r1))
 }
 
 // ITAgent: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-itagent
@@ -1347,105 +1411,105 @@ type ITAgent struct {
 var IID_ITAgent = win32.GUID{Data1: 0x5770ece5, Data2: 0x4b27, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x80, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // EnumerateAgentSessions dispatches through ITAgent's vtable slot 7.
-func (self *ITAgent) EnumerateAgentSessions(ppEnumAgentSession **IEnumAgentSession) foundation.HRESULT {
+func (self *ITAgent) EnumerateAgentSessions(ppEnumAgentSession **IEnumAgentSession) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumAgentSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSession dispatches through ITAgent's vtable slot 8.
-func (self *ITAgent) CreateSession(pACDGroup *ITACDGroup, pAddress *ITAddress, ppAgentSession **ITAgentSession) foundation.HRESULT {
+func (self *ITAgent) CreateSession(pACDGroup *ITACDGroup, pAddress *ITAddress, ppAgentSession **ITAgentSession) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pACDGroup)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(ppAgentSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSessionWithPIN dispatches through ITAgent's vtable slot 9.
-func (self *ITAgent) CreateSessionWithPIN(pACDGroup *ITACDGroup, pAddress *ITAddress, pPIN foundation.BSTR, ppAgentSession **ITAgentSession) foundation.HRESULT {
+func (self *ITAgent) CreateSessionWithPIN(pACDGroup *ITACDGroup, pAddress *ITAddress, pPIN foundation.BSTR, ppAgentSession **ITAgentSession) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pACDGroup)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(pPIN)), uintptr(unsafe.Pointer(ppAgentSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ID dispatches through ITAgent's vtable slot 10.
-func (self *ITAgent) Get_ID(ppID *foundation.BSTR) foundation.HRESULT {
+func (self *ITAgent) Get_ID(ppID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_User dispatches through ITAgent's vtable slot 11.
-func (self *ITAgent) Get_User(ppUser *foundation.BSTR) foundation.HRESULT {
+func (self *ITAgent) Get_User(ppUser *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUser)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_State dispatches through ITAgent's vtable slot 12.
-func (self *ITAgent) Put_State(AgentState AGENT_STATE) foundation.HRESULT {
+func (self *ITAgent) Put_State(AgentState AGENT_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(AgentState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ITAgent's vtable slot 13.
-func (self *ITAgent) Get_State(pAgentState *AGENT_STATE) foundation.HRESULT {
+func (self *ITAgent) Get_State(pAgentState *AGENT_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAgentState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_MeasurementPeriod dispatches through ITAgent's vtable slot 14.
-func (self *ITAgent) Put_MeasurementPeriod(lPeriod int32) foundation.HRESULT {
+func (self *ITAgent) Put_MeasurementPeriod(lPeriod int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lPeriod))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MeasurementPeriod dispatches through ITAgent's vtable slot 15.
-func (self *ITAgent) Get_MeasurementPeriod(plPeriod *int32) foundation.HRESULT {
+func (self *ITAgent) Get_MeasurementPeriod(plPeriod *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPeriod)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_OverallCallRate dispatches through ITAgent's vtable slot 16.
-func (self *ITAgent) Get_OverallCallRate(pcyCallrate *systemcom.CY) foundation.HRESULT {
+func (self *ITAgent) Get_OverallCallRate(pcyCallrate *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcyCallrate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NumberOfACDCalls dispatches through ITAgent's vtable slot 17.
-func (self *ITAgent) Get_NumberOfACDCalls(plCalls *int32) foundation.HRESULT {
+func (self *ITAgent) Get_NumberOfACDCalls(plCalls *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCalls)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NumberOfIncomingCalls dispatches through ITAgent's vtable slot 18.
-func (self *ITAgent) Get_NumberOfIncomingCalls(plCalls *int32) foundation.HRESULT {
+func (self *ITAgent) Get_NumberOfIncomingCalls(plCalls *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCalls)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NumberOfOutgoingCalls dispatches through ITAgent's vtable slot 19.
-func (self *ITAgent) Get_NumberOfOutgoingCalls(plCalls *int32) foundation.HRESULT {
+func (self *ITAgent) Get_NumberOfOutgoingCalls(plCalls *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCalls)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TotalACDTalkTime dispatches through ITAgent's vtable slot 20.
-func (self *ITAgent) Get_TotalACDTalkTime(plTalkTime *int32) foundation.HRESULT {
+func (self *ITAgent) Get_TotalACDTalkTime(plTalkTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTalkTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TotalACDCallTime dispatches through ITAgent's vtable slot 21.
-func (self *ITAgent) Get_TotalACDCallTime(plCallTime *int32) foundation.HRESULT {
+func (self *ITAgent) Get_TotalACDCallTime(plCallTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCallTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TotalWrapUpTime dispatches through ITAgent's vtable slot 22.
-func (self *ITAgent) Get_TotalWrapUpTime(plWrapUpTime *int32) foundation.HRESULT {
+func (self *ITAgent) Get_TotalWrapUpTime(plWrapUpTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plWrapUpTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AgentSessions dispatches through ITAgent's vtable slot 23.
-func (self *ITAgent) Get_AgentSessions(pVariant *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ITAgent) Get_AgentSessions(pVariant *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITAgentEvent: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-itagentevent
@@ -1458,15 +1522,15 @@ type ITAgentEvent struct {
 var IID_ITAgentEvent = win32.GUID{Data1: 0x5afc314a, Data2: 0x4bcc, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x80, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Get_Agent dispatches through ITAgentEvent's vtable slot 7.
-func (self *ITAgentEvent) Get_Agent(ppAgent **ITAgent) foundation.HRESULT {
+func (self *ITAgentEvent) Get_Agent(ppAgent **ITAgent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAgent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Event dispatches through ITAgentEvent's vtable slot 8.
-func (self *ITAgentEvent) Get_Event(pEvent *AGENT_EVENT) foundation.HRESULT {
+func (self *ITAgentEvent) Get_Event(pEvent *AGENT_EVENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITAgentHandler: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-itagenthandler
@@ -1479,45 +1543,45 @@ type ITAgentHandler struct {
 var IID_ITAgentHandler = win32.GUID{Data1: 0x587e8c22, Data2: 0x9802, Data3: 0x11d1, Data4: [8]byte{0xa0, 0xa4, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Get_Name dispatches through ITAgentHandler's vtable slot 7.
-func (self *ITAgentHandler) Get_Name(ppName *foundation.BSTR) foundation.HRESULT {
+func (self *ITAgentHandler) Get_Name(ppName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateAgent dispatches through ITAgentHandler's vtable slot 8.
-func (self *ITAgentHandler) CreateAgent(ppAgent **ITAgent) foundation.HRESULT {
+func (self *ITAgentHandler) CreateAgent(ppAgent **ITAgent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAgent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateAgentWithID dispatches through ITAgentHandler's vtable slot 9.
-func (self *ITAgentHandler) CreateAgentWithID(pID foundation.BSTR, pPIN foundation.BSTR, ppAgent **ITAgent) foundation.HRESULT {
+func (self *ITAgentHandler) CreateAgentWithID(pID foundation.BSTR, pPIN foundation.BSTR, ppAgent **ITAgent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pID)), uintptr(unsafe.Pointer(pPIN)), uintptr(unsafe.Pointer(ppAgent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateACDGroups dispatches through ITAgentHandler's vtable slot 10.
-func (self *ITAgentHandler) EnumerateACDGroups(ppEnumACDGroup **IEnumACDGroup) foundation.HRESULT {
+func (self *ITAgentHandler) EnumerateACDGroups(ppEnumACDGroup **IEnumACDGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumACDGroup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateUsableAddresses dispatches through ITAgentHandler's vtable slot 11.
-func (self *ITAgentHandler) EnumerateUsableAddresses(ppEnumAddress **IEnumAddress) foundation.HRESULT {
+func (self *ITAgentHandler) EnumerateUsableAddresses(ppEnumAddress **IEnumAddress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ACDGroups dispatches through ITAgentHandler's vtable slot 12.
-func (self *ITAgentHandler) Get_ACDGroups(pVariant *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ITAgentHandler) Get_ACDGroups(pVariant *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_UsableAddresses dispatches through ITAgentHandler's vtable slot 13.
-func (self *ITAgentHandler) Get_UsableAddresses(pVariant *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ITAgentHandler) Get_UsableAddresses(pVariant *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITAgentHandlerEvent: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-itagenthandlerevent
@@ -1530,15 +1594,15 @@ type ITAgentHandlerEvent struct {
 var IID_ITAgentHandlerEvent = win32.GUID{Data1: 0x297f3034, Data2: 0xbd11, Data3: 0x11d1, Data4: [8]byte{0xa0, 0xa7, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Get_AgentHandler dispatches through ITAgentHandlerEvent's vtable slot 7.
-func (self *ITAgentHandlerEvent) Get_AgentHandler(ppAgentHandler **ITAgentHandler) foundation.HRESULT {
+func (self *ITAgentHandlerEvent) Get_AgentHandler(ppAgentHandler **ITAgentHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAgentHandler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Event dispatches through ITAgentHandlerEvent's vtable slot 8.
-func (self *ITAgentHandlerEvent) Get_Event(pEvent *AGENTHANDLER_EVENT) foundation.HRESULT {
+func (self *ITAgentHandlerEvent) Get_Event(pEvent *AGENTHANDLER_EVENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITAgentSession: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-itagentsession
@@ -1551,105 +1615,105 @@ type ITAgentSession struct {
 var IID_ITAgentSession = win32.GUID{Data1: 0x5afc3147, Data2: 0x4bcc, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x80, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Get_Agent dispatches through ITAgentSession's vtable slot 7.
-func (self *ITAgentSession) Get_Agent(ppAgent **ITAgent) foundation.HRESULT {
+func (self *ITAgentSession) Get_Agent(ppAgent **ITAgent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAgent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Address dispatches through ITAgentSession's vtable slot 8.
-func (self *ITAgentSession) Get_Address(ppAddress **ITAddress) foundation.HRESULT {
+func (self *ITAgentSession) Get_Address(ppAddress **ITAddress) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ACDGroup dispatches through ITAgentSession's vtable slot 9.
-func (self *ITAgentSession) Get_ACDGroup(ppACDGroup **ITACDGroup) foundation.HRESULT {
+func (self *ITAgentSession) Get_ACDGroup(ppACDGroup **ITACDGroup) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppACDGroup)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_State dispatches through ITAgentSession's vtable slot 10.
-func (self *ITAgentSession) Put_State(SessionState AGENT_SESSION_STATE) foundation.HRESULT {
+func (self *ITAgentSession) Put_State(SessionState AGENT_SESSION_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(SessionState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ITAgentSession's vtable slot 11.
-func (self *ITAgentSession) Get_State(pSessionState *AGENT_SESSION_STATE) foundation.HRESULT {
+func (self *ITAgentSession) Get_State(pSessionState *AGENT_SESSION_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSessionState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SessionStartTime dispatches through ITAgentSession's vtable slot 12.
-func (self *ITAgentSession) Get_SessionStartTime(pdateSessionStart *float64) foundation.HRESULT {
+func (self *ITAgentSession) Get_SessionStartTime(pdateSessionStart *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdateSessionStart)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SessionDuration dispatches through ITAgentSession's vtable slot 13.
-func (self *ITAgentSession) Get_SessionDuration(plDuration *int32) foundation.HRESULT {
+func (self *ITAgentSession) Get_SessionDuration(plDuration *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDuration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NumberOfCalls dispatches through ITAgentSession's vtable slot 14.
-func (self *ITAgentSession) Get_NumberOfCalls(plCalls *int32) foundation.HRESULT {
+func (self *ITAgentSession) Get_NumberOfCalls(plCalls *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCalls)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TotalTalkTime dispatches through ITAgentSession's vtable slot 15.
-func (self *ITAgentSession) Get_TotalTalkTime(plTalkTime *int32) foundation.HRESULT {
+func (self *ITAgentSession) Get_TotalTalkTime(plTalkTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTalkTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AverageTalkTime dispatches through ITAgentSession's vtable slot 16.
-func (self *ITAgentSession) Get_AverageTalkTime(plTalkTime *int32) foundation.HRESULT {
+func (self *ITAgentSession) Get_AverageTalkTime(plTalkTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTalkTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TotalCallTime dispatches through ITAgentSession's vtable slot 17.
-func (self *ITAgentSession) Get_TotalCallTime(plCallTime *int32) foundation.HRESULT {
+func (self *ITAgentSession) Get_TotalCallTime(plCallTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCallTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AverageCallTime dispatches through ITAgentSession's vtable slot 18.
-func (self *ITAgentSession) Get_AverageCallTime(plCallTime *int32) foundation.HRESULT {
+func (self *ITAgentSession) Get_AverageCallTime(plCallTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCallTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TotalWrapUpTime dispatches through ITAgentSession's vtable slot 19.
-func (self *ITAgentSession) Get_TotalWrapUpTime(plWrapUpTime *int32) foundation.HRESULT {
+func (self *ITAgentSession) Get_TotalWrapUpTime(plWrapUpTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plWrapUpTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AverageWrapUpTime dispatches through ITAgentSession's vtable slot 20.
-func (self *ITAgentSession) Get_AverageWrapUpTime(plWrapUpTime *int32) foundation.HRESULT {
+func (self *ITAgentSession) Get_AverageWrapUpTime(plWrapUpTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plWrapUpTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ACDCallRate dispatches through ITAgentSession's vtable slot 21.
-func (self *ITAgentSession) Get_ACDCallRate(pcyCallrate *systemcom.CY) foundation.HRESULT {
+func (self *ITAgentSession) Get_ACDCallRate(pcyCallrate *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcyCallrate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LongestTimeToAnswer dispatches through ITAgentSession's vtable slot 22.
-func (self *ITAgentSession) Get_LongestTimeToAnswer(plAnswerTime *int32) foundation.HRESULT {
+func (self *ITAgentSession) Get_LongestTimeToAnswer(plAnswerTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAnswerTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AverageTimeToAnswer dispatches through ITAgentSession's vtable slot 23.
-func (self *ITAgentSession) Get_AverageTimeToAnswer(plAnswerTime *int32) foundation.HRESULT {
+func (self *ITAgentSession) Get_AverageTimeToAnswer(plAnswerTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAnswerTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITAgentSessionEvent: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-itagentsessionevent
@@ -1662,15 +1726,15 @@ type ITAgentSessionEvent struct {
 var IID_ITAgentSessionEvent = win32.GUID{Data1: 0x5afc314b, Data2: 0x4bcc, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x80, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Get_Session dispatches through ITAgentSessionEvent's vtable slot 7.
-func (self *ITAgentSessionEvent) Get_Session(ppSession **ITAgentSession) foundation.HRESULT {
+func (self *ITAgentSessionEvent) Get_Session(ppSession **ITAgentSession) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Event dispatches through ITAgentSessionEvent's vtable slot 8.
-func (self *ITAgentSessionEvent) Get_Event(pEvent *AGENT_SESSION_EVENT) foundation.HRESULT {
+func (self *ITAgentSessionEvent) Get_Event(pEvent *AGENT_SESSION_EVENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITAllocatorProperties: https://learn.microsoft.com/windows/win32/api/tapi3ds/nn-tapi3ds-itallocatorproperties
@@ -1683,39 +1747,40 @@ type ITAllocatorProperties struct {
 var IID_ITAllocatorProperties = win32.GUID{Data1: 0xc1bc3c90, Data2: 0xbcfe, Data3: 0x11d1, Data4: [8]byte{0x97, 0x45, 0x00, 0xc0, 0x4f, 0xd9, 0x1a, 0xc0}}
 
 // SetAllocatorProperties dispatches through ITAllocatorProperties's vtable slot 3.
-func (self *ITAllocatorProperties) SetAllocatorProperties(pAllocProperties *mediadirectshow.ALLOCATOR_PROPERTIES) foundation.HRESULT {
+func (self *ITAllocatorProperties) SetAllocatorProperties(pAllocProperties *mediadirectshow.ALLOCATOR_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAllocProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllocatorProperties dispatches through ITAllocatorProperties's vtable slot 4.
-func (self *ITAllocatorProperties) GetAllocatorProperties(pAllocProperties *mediadirectshow.ALLOCATOR_PROPERTIES) foundation.HRESULT {
+func (self *ITAllocatorProperties) GetAllocatorProperties(pAllocProperties *mediadirectshow.ALLOCATOR_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAllocProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAllocateBuffers dispatches through ITAllocatorProperties's vtable slot 5.
-func (self *ITAllocatorProperties) SetAllocateBuffers(bAllocBuffers foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(bAllocBuffers))
-	return foundation.HRESULT(r1)
+func (self *ITAllocatorProperties) SetAllocateBuffers(bAllocBuffers bool) error {
+	_bAllocBuffers := win32.Bool32(bAllocBuffers)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_bAllocBuffers))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllocateBuffers dispatches through ITAllocatorProperties's vtable slot 6.
-func (self *ITAllocatorProperties) GetAllocateBuffers(pbAllocBuffers *foundation.BOOL) foundation.HRESULT {
+func (self *ITAllocatorProperties) GetAllocateBuffers(pbAllocBuffers *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAllocBuffers)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBufferSize dispatches through ITAllocatorProperties's vtable slot 7.
-func (self *ITAllocatorProperties) SetBufferSize(BufferSize uint32) foundation.HRESULT {
+func (self *ITAllocatorProperties) SetBufferSize(BufferSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(BufferSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBufferSize dispatches through ITAllocatorProperties's vtable slot 8.
-func (self *ITAllocatorProperties) GetBufferSize(pBufferSize *uint32) foundation.HRESULT {
+func (self *ITAllocatorProperties) GetBufferSize(pBufferSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBufferSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITAutomatedPhoneControl: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itautomatedphonecontrol
@@ -1728,195 +1793,210 @@ type ITAutomatedPhoneControl struct {
 var IID_ITAutomatedPhoneControl = win32.GUID{Data1: 0x1ee1af0e, Data2: 0x6159, Data3: 0x4a61, Data4: [8]byte{0xb7, 0x9b, 0x6a, 0x4b, 0xa3, 0xfc, 0x9d, 0xfc}}
 
 // StartTone dispatches through ITAutomatedPhoneControl's vtable slot 7.
-func (self *ITAutomatedPhoneControl) StartTone(Tone PHONE_TONE, lDuration int32) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) StartTone(Tone PHONE_TONE, lDuration int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Tone), uintptr(lDuration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopTone dispatches through ITAutomatedPhoneControl's vtable slot 8.
-func (self *ITAutomatedPhoneControl) StopTone() foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) StopTone() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Tone dispatches through ITAutomatedPhoneControl's vtable slot 9.
-func (self *ITAutomatedPhoneControl) Get_Tone(pTone *PHONE_TONE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTone)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) Get_Tone() (PHONE_TONE, error) {
+	var _pTone PHONE_TONE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTone)))
+	return _pTone, win32.HRESULTError(int32(r1))
 }
 
 // StartRinger dispatches through ITAutomatedPhoneControl's vtable slot 10.
-func (self *ITAutomatedPhoneControl) StartRinger(lRingMode int32, lDuration int32) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) StartRinger(lRingMode int32, lDuration int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lRingMode), uintptr(lDuration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopRinger dispatches through ITAutomatedPhoneControl's vtable slot 11.
-func (self *ITAutomatedPhoneControl) StopRinger() foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) StopRinger() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Ringer dispatches through ITAutomatedPhoneControl's vtable slot 12.
-func (self *ITAutomatedPhoneControl) Get_Ringer(pfRinging *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfRinging)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) Get_Ringer() (foundation.VARIANT_BOOL, error) {
+	var _pfRinging foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfRinging)))
+	return _pfRinging, win32.HRESULTError(int32(r1))
 }
 
 // Put_PhoneHandlingEnabled dispatches through ITAutomatedPhoneControl's vtable slot 13.
-func (self *ITAutomatedPhoneControl) Put_PhoneHandlingEnabled(fEnabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) Put_PhoneHandlingEnabled(fEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(fEnabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PhoneHandlingEnabled dispatches through ITAutomatedPhoneControl's vtable slot 14.
-func (self *ITAutomatedPhoneControl) Get_PhoneHandlingEnabled(pfEnabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) Get_PhoneHandlingEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pfEnabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfEnabled)))
+	return _pfEnabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_AutoEndOfNumberTimeout dispatches through ITAutomatedPhoneControl's vtable slot 15.
-func (self *ITAutomatedPhoneControl) Put_AutoEndOfNumberTimeout(lTimeout int32) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) Put_AutoEndOfNumberTimeout(lTimeout int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(lTimeout))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AutoEndOfNumberTimeout dispatches through ITAutomatedPhoneControl's vtable slot 16.
-func (self *ITAutomatedPhoneControl) Get_AutoEndOfNumberTimeout(plTimeout *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTimeout)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) Get_AutoEndOfNumberTimeout() (int32, error) {
+	var _plTimeout int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plTimeout)))
+	return _plTimeout, win32.HRESULTError(int32(r1))
 }
 
 // Put_AutoDialtone dispatches through ITAutomatedPhoneControl's vtable slot 17.
-func (self *ITAutomatedPhoneControl) Put_AutoDialtone(fEnabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) Put_AutoDialtone(fEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(fEnabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AutoDialtone dispatches through ITAutomatedPhoneControl's vtable slot 18.
-func (self *ITAutomatedPhoneControl) Get_AutoDialtone(pfEnabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) Get_AutoDialtone() (foundation.VARIANT_BOOL, error) {
+	var _pfEnabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfEnabled)))
+	return _pfEnabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_AutoStopTonesOnOnHook dispatches through ITAutomatedPhoneControl's vtable slot 19.
-func (self *ITAutomatedPhoneControl) Put_AutoStopTonesOnOnHook(fEnabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) Put_AutoStopTonesOnOnHook(fEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(fEnabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AutoStopTonesOnOnHook dispatches through ITAutomatedPhoneControl's vtable slot 20.
-func (self *ITAutomatedPhoneControl) Get_AutoStopTonesOnOnHook(pfEnabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) Get_AutoStopTonesOnOnHook() (foundation.VARIANT_BOOL, error) {
+	var _pfEnabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfEnabled)))
+	return _pfEnabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_AutoStopRingOnOffHook dispatches through ITAutomatedPhoneControl's vtable slot 21.
-func (self *ITAutomatedPhoneControl) Put_AutoStopRingOnOffHook(fEnabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) Put_AutoStopRingOnOffHook(fEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(fEnabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AutoStopRingOnOffHook dispatches through ITAutomatedPhoneControl's vtable slot 22.
-func (self *ITAutomatedPhoneControl) Get_AutoStopRingOnOffHook(pfEnabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) Get_AutoStopRingOnOffHook() (foundation.VARIANT_BOOL, error) {
+	var _pfEnabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfEnabled)))
+	return _pfEnabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_AutoKeypadTones dispatches through ITAutomatedPhoneControl's vtable slot 23.
-func (self *ITAutomatedPhoneControl) Put_AutoKeypadTones(fEnabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) Put_AutoKeypadTones(fEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(fEnabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AutoKeypadTones dispatches through ITAutomatedPhoneControl's vtable slot 24.
-func (self *ITAutomatedPhoneControl) Get_AutoKeypadTones(pfEnabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEnabled)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) Get_AutoKeypadTones() (foundation.VARIANT_BOOL, error) {
+	var _pfEnabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfEnabled)))
+	return _pfEnabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_AutoKeypadTonesMinimumDuration dispatches through ITAutomatedPhoneControl's vtable slot 25.
-func (self *ITAutomatedPhoneControl) Put_AutoKeypadTonesMinimumDuration(lDuration int32) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) Put_AutoKeypadTonesMinimumDuration(lDuration int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(lDuration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AutoKeypadTonesMinimumDuration dispatches through ITAutomatedPhoneControl's vtable slot 26.
-func (self *ITAutomatedPhoneControl) Get_AutoKeypadTonesMinimumDuration(plDuration *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDuration)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) Get_AutoKeypadTonesMinimumDuration() (int32, error) {
+	var _plDuration int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plDuration)))
+	return _plDuration, win32.HRESULTError(int32(r1))
 }
 
 // Put_AutoVolumeControl dispatches through ITAutomatedPhoneControl's vtable slot 27.
-func (self *ITAutomatedPhoneControl) Put_AutoVolumeControl(fEnabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) Put_AutoVolumeControl(fEnabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(fEnabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AutoVolumeControl dispatches through ITAutomatedPhoneControl's vtable slot 28.
-func (self *ITAutomatedPhoneControl) Get_AutoVolumeControl(fEnabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fEnabled)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) Get_AutoVolumeControl() (foundation.VARIANT_BOOL, error) {
+	var _fEnabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_fEnabled)))
+	return _fEnabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_AutoVolumeControlStep dispatches through ITAutomatedPhoneControl's vtable slot 29.
-func (self *ITAutomatedPhoneControl) Put_AutoVolumeControlStep(lStepSize int32) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) Put_AutoVolumeControlStep(lStepSize int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(lStepSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AutoVolumeControlStep dispatches through ITAutomatedPhoneControl's vtable slot 30.
-func (self *ITAutomatedPhoneControl) Get_AutoVolumeControlStep(plStepSize *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStepSize)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) Get_AutoVolumeControlStep() (int32, error) {
+	var _plStepSize int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plStepSize)))
+	return _plStepSize, win32.HRESULTError(int32(r1))
 }
 
 // Put_AutoVolumeControlRepeatDelay dispatches through ITAutomatedPhoneControl's vtable slot 31.
-func (self *ITAutomatedPhoneControl) Put_AutoVolumeControlRepeatDelay(lDelay int32) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) Put_AutoVolumeControlRepeatDelay(lDelay int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(lDelay))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AutoVolumeControlRepeatDelay dispatches through ITAutomatedPhoneControl's vtable slot 32.
-func (self *ITAutomatedPhoneControl) Get_AutoVolumeControlRepeatDelay(plDelay *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDelay)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) Get_AutoVolumeControlRepeatDelay() (int32, error) {
+	var _plDelay int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plDelay)))
+	return _plDelay, win32.HRESULTError(int32(r1))
 }
 
 // Put_AutoVolumeControlRepeatPeriod dispatches through ITAutomatedPhoneControl's vtable slot 33.
-func (self *ITAutomatedPhoneControl) Put_AutoVolumeControlRepeatPeriod(lPeriod int32) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) Put_AutoVolumeControlRepeatPeriod(lPeriod int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(lPeriod))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AutoVolumeControlRepeatPeriod dispatches through ITAutomatedPhoneControl's vtable slot 34.
-func (self *ITAutomatedPhoneControl) Get_AutoVolumeControlRepeatPeriod(plPeriod *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPeriod)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) Get_AutoVolumeControlRepeatPeriod() (int32, error) {
+	var _plPeriod int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plPeriod)))
+	return _plPeriod, win32.HRESULTError(int32(r1))
 }
 
 // SelectCall dispatches through ITAutomatedPhoneControl's vtable slot 35.
-func (self *ITAutomatedPhoneControl) SelectCall(pCall *ITCallInfo, fSelectDefaultTerminals foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) SelectCall(pCall *ITCallInfo, fSelectDefaultTerminals foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCall)), uintptr(fSelectDefaultTerminals))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnselectCall dispatches through ITAutomatedPhoneControl's vtable slot 36.
-func (self *ITAutomatedPhoneControl) UnselectCall(pCall *ITCallInfo) foundation.HRESULT {
+func (self *ITAutomatedPhoneControl) UnselectCall(pCall *ITCallInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCall)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateSelectedCalls dispatches through ITAutomatedPhoneControl's vtable slot 37.
-func (self *ITAutomatedPhoneControl) EnumerateSelectedCalls(ppCallEnum **IEnumCall) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCallEnum)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) EnumerateSelectedCalls() (*IEnumCall, error) {
+	var _ppCallEnum *IEnumCall
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCallEnum)))
+	return _ppCallEnum, win32.HRESULTError(int32(r1))
 }
 
 // Get_SelectedCalls dispatches through ITAutomatedPhoneControl's vtable slot 38.
-func (self *ITAutomatedPhoneControl) Get_SelectedCalls(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITAutomatedPhoneControl) Get_SelectedCalls() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // ITBasicAudioTerminal: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itbasicaudioterminal
@@ -1929,27 +2009,29 @@ type ITBasicAudioTerminal struct {
 var IID_ITBasicAudioTerminal = win32.GUID{Data1: 0xb1efc38d, Data2: 0x9355, Data3: 0x11d0, Data4: [8]byte{0x83, 0x5c, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Put_Volume dispatches through ITBasicAudioTerminal's vtable slot 7.
-func (self *ITBasicAudioTerminal) Put_Volume(lVolume int32) foundation.HRESULT {
+func (self *ITBasicAudioTerminal) Put_Volume(lVolume int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lVolume))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Volume dispatches through ITBasicAudioTerminal's vtable slot 8.
-func (self *ITBasicAudioTerminal) Get_Volume(plVolume *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plVolume)))
-	return foundation.HRESULT(r1)
+func (self *ITBasicAudioTerminal) Get_Volume() (int32, error) {
+	var _plVolume int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plVolume)))
+	return _plVolume, win32.HRESULTError(int32(r1))
 }
 
 // Put_Balance dispatches through ITBasicAudioTerminal's vtable slot 9.
-func (self *ITBasicAudioTerminal) Put_Balance(lBalance int32) foundation.HRESULT {
+func (self *ITBasicAudioTerminal) Put_Balance(lBalance int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lBalance))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Balance dispatches through ITBasicAudioTerminal's vtable slot 10.
-func (self *ITBasicAudioTerminal) Get_Balance(plBalance *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plBalance)))
-	return foundation.HRESULT(r1)
+func (self *ITBasicAudioTerminal) Get_Balance() (int32, error) {
+	var _plBalance int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plBalance)))
+	return _plBalance, win32.HRESULTError(int32(r1))
 }
 
 // ITBasicCallControl: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itbasiccallcontrol
@@ -1962,111 +2044,112 @@ type ITBasicCallControl struct {
 var IID_ITBasicCallControl = win32.GUID{Data1: 0xb1efc389, Data2: 0x9355, Data3: 0x11d0, Data4: [8]byte{0x83, 0x5c, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Connect dispatches through ITBasicCallControl's vtable slot 7.
-func (self *ITBasicCallControl) Connect(fSync foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITBasicCallControl) Connect(fSync foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fSync))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Answer dispatches through ITBasicCallControl's vtable slot 8.
-func (self *ITBasicCallControl) Answer() foundation.HRESULT {
+func (self *ITBasicCallControl) Answer() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disconnect dispatches through ITBasicCallControl's vtable slot 9.
-func (self *ITBasicCallControl) Disconnect(code DISCONNECT_CODE) foundation.HRESULT {
+func (self *ITBasicCallControl) Disconnect(code DISCONNECT_CODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(code))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Hold dispatches through ITBasicCallControl's vtable slot 10.
-func (self *ITBasicCallControl) Hold(fHold foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITBasicCallControl) Hold(fHold foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(fHold))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HandoffDirect dispatches through ITBasicCallControl's vtable slot 11.
-func (self *ITBasicCallControl) HandoffDirect(pApplicationName foundation.BSTR) foundation.HRESULT {
+func (self *ITBasicCallControl) HandoffDirect(pApplicationName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pApplicationName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HandoffIndirect dispatches through ITBasicCallControl's vtable slot 12.
-func (self *ITBasicCallControl) HandoffIndirect(lMediaType int32) foundation.HRESULT {
+func (self *ITBasicCallControl) HandoffIndirect(lMediaType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lMediaType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Conference dispatches through ITBasicCallControl's vtable slot 13.
-func (self *ITBasicCallControl) Conference(pCall *ITBasicCallControl, fSync foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITBasicCallControl) Conference(pCall *ITBasicCallControl, fSync foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCall)), uintptr(fSync))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Transfer dispatches through ITBasicCallControl's vtable slot 14.
-func (self *ITBasicCallControl) Transfer(pCall *ITBasicCallControl, fSync foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITBasicCallControl) Transfer(pCall *ITBasicCallControl, fSync foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCall)), uintptr(fSync))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BlindTransfer dispatches through ITBasicCallControl's vtable slot 15.
-func (self *ITBasicCallControl) BlindTransfer(pDestAddress foundation.BSTR) foundation.HRESULT {
+func (self *ITBasicCallControl) BlindTransfer(pDestAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SwapHold dispatches through ITBasicCallControl's vtable slot 16.
-func (self *ITBasicCallControl) SwapHold(pCall *ITBasicCallControl) foundation.HRESULT {
+func (self *ITBasicCallControl) SwapHold(pCall *ITBasicCallControl) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCall)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ParkDirect dispatches through ITBasicCallControl's vtable slot 17.
-func (self *ITBasicCallControl) ParkDirect(pParkAddress foundation.BSTR) foundation.HRESULT {
+func (self *ITBasicCallControl) ParkDirect(pParkAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParkAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ParkIndirect dispatches through ITBasicCallControl's vtable slot 18.
-func (self *ITBasicCallControl) ParkIndirect(ppNonDirAddress *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNonDirAddress)))
-	return foundation.HRESULT(r1)
+func (self *ITBasicCallControl) ParkIndirect() (foundation.BSTR, error) {
+	var _ppNonDirAddress foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNonDirAddress)))
+	return _ppNonDirAddress, win32.HRESULTError(int32(r1))
 }
 
 // Unpark dispatches through ITBasicCallControl's vtable slot 19.
-func (self *ITBasicCallControl) Unpark() foundation.HRESULT {
+func (self *ITBasicCallControl) Unpark() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetQOS dispatches through ITBasicCallControl's vtable slot 20.
-func (self *ITBasicCallControl) SetQOS(lMediaType int32, ServiceLevel QOS_SERVICE_LEVEL) foundation.HRESULT {
+func (self *ITBasicCallControl) SetQOS(lMediaType int32, ServiceLevel QOS_SERVICE_LEVEL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lMediaType), uintptr(ServiceLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pickup dispatches through ITBasicCallControl's vtable slot 21.
-func (self *ITBasicCallControl) Pickup(pGroupID foundation.BSTR) foundation.HRESULT {
+func (self *ITBasicCallControl) Pickup(pGroupID foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGroupID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Dial dispatches through ITBasicCallControl's vtable slot 22.
-func (self *ITBasicCallControl) Dial(pDestAddress foundation.BSTR) foundation.HRESULT {
+func (self *ITBasicCallControl) Dial(pDestAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish dispatches through ITBasicCallControl's vtable slot 23.
-func (self *ITBasicCallControl) Finish(finishMode FINISH_MODE) foundation.HRESULT {
+func (self *ITBasicCallControl) Finish(finishMode FINISH_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(finishMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveFromConference dispatches through ITBasicCallControl's vtable slot 24.
-func (self *ITBasicCallControl) RemoveFromConference() foundation.HRESULT {
+func (self *ITBasicCallControl) RemoveFromConference() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITBasicCallControl2: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itbasiccallcontrol2
@@ -2079,21 +2162,22 @@ type ITBasicCallControl2 struct {
 var IID_ITBasicCallControl2 = win32.GUID{Data1: 0x161a4a56, Data2: 0x1e99, Data3: 0x4b3f, Data4: [8]byte{0xa4, 0x6a, 0x16, 0x8f, 0x38, 0xa5, 0xee, 0x4c}}
 
 // RequestTerminal dispatches through ITBasicCallControl2's vtable slot 25.
-func (self *ITBasicCallControl2) RequestTerminal(bstrTerminalClassGUID foundation.BSTR, lMediaType int32, Direction TERMINAL_DIRECTION, ppTerminal **ITTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTerminalClassGUID)), uintptr(lMediaType), uintptr(Direction), uintptr(unsafe.Pointer(ppTerminal)))
-	return foundation.HRESULT(r1)
+func (self *ITBasicCallControl2) RequestTerminal(bstrTerminalClassGUID foundation.BSTR, lMediaType int32, Direction TERMINAL_DIRECTION) (*ITTerminal, error) {
+	var _ppTerminal *ITTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTerminalClassGUID)), uintptr(lMediaType), uintptr(Direction), uintptr(unsafe.Pointer(&_ppTerminal)))
+	return _ppTerminal, win32.HRESULTError(int32(r1))
 }
 
 // SelectTerminalOnCall dispatches through ITBasicCallControl2's vtable slot 26.
-func (self *ITBasicCallControl2) SelectTerminalOnCall(pTerminal *ITTerminal) foundation.HRESULT {
+func (self *ITBasicCallControl2) SelectTerminalOnCall(pTerminal *ITTerminal) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnselectTerminalOnCall dispatches through ITBasicCallControl2's vtable slot 27.
-func (self *ITBasicCallControl2) UnselectTerminalOnCall(pTerminal *ITTerminal) foundation.HRESULT {
+func (self *ITBasicCallControl2) UnselectTerminalOnCall(pTerminal *ITTerminal) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITCallHub: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itcallhub
@@ -2106,33 +2190,37 @@ type ITCallHub struct {
 var IID_ITCallHub = win32.GUID{Data1: 0xa3c1544e, Data2: 0x5b92, Data3: 0x11d1, Data4: [8]byte{0x8f, 0x4e, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Clear dispatches through ITCallHub's vtable slot 7.
-func (self *ITCallHub) Clear() foundation.HRESULT {
+func (self *ITCallHub) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateCalls dispatches through ITCallHub's vtable slot 8.
-func (self *ITCallHub) EnumerateCalls(ppEnumCall **IEnumCall) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumCall)))
-	return foundation.HRESULT(r1)
+func (self *ITCallHub) EnumerateCalls() (*IEnumCall, error) {
+	var _ppEnumCall *IEnumCall
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumCall)))
+	return _ppEnumCall, win32.HRESULTError(int32(r1))
 }
 
 // Get_Calls dispatches through ITCallHub's vtable slot 9.
-func (self *ITCallHub) Get_Calls(pCalls *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCalls)))
-	return foundation.HRESULT(r1)
+func (self *ITCallHub) Get_Calls() (systemvariant.VARIANT, error) {
+	var _pCalls systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCalls)))
+	return _pCalls, win32.HRESULTError(int32(r1))
 }
 
 // Get_NumCalls dispatches through ITCallHub's vtable slot 10.
-func (self *ITCallHub) Get_NumCalls(plCalls *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCalls)))
-	return foundation.HRESULT(r1)
+func (self *ITCallHub) Get_NumCalls() (int32, error) {
+	var _plCalls int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCalls)))
+	return _plCalls, win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ITCallHub's vtable slot 11.
-func (self *ITCallHub) Get_State(pState *CALLHUB_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+func (self *ITCallHub) Get_State() (CALLHUB_STATE, error) {
+	var _pState CALLHUB_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pState)))
+	return _pState, win32.HRESULTError(int32(r1))
 }
 
 // ITCallHubEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itcallhubevent
@@ -2145,21 +2233,24 @@ type ITCallHubEvent struct {
 var IID_ITCallHubEvent = win32.GUID{Data1: 0xa3c15451, Data2: 0x5b92, Data3: 0x11d1, Data4: [8]byte{0x8f, 0x4e, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Get_Event dispatches through ITCallHubEvent's vtable slot 7.
-func (self *ITCallHubEvent) Get_Event(pEvent *CALLHUB_EVENT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+func (self *ITCallHubEvent) Get_Event() (CALLHUB_EVENT, error) {
+	var _pEvent CALLHUB_EVENT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEvent)))
+	return _pEvent, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallHub dispatches through ITCallHubEvent's vtable slot 8.
-func (self *ITCallHubEvent) Get_CallHub(ppCallHub **ITCallHub) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCallHub)))
-	return foundation.HRESULT(r1)
+func (self *ITCallHubEvent) Get_CallHub() (*ITCallHub, error) {
+	var _ppCallHub *ITCallHub
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCallHub)))
+	return _ppCallHub, win32.HRESULTError(int32(r1))
 }
 
 // Get_Call dispatches through ITCallHubEvent's vtable slot 9.
-func (self *ITCallHubEvent) Get_Call(ppCall **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCall)))
-	return foundation.HRESULT(r1)
+func (self *ITCallHubEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCall *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCall)))
+	return _ppCall, win32.HRESULTError(int32(r1))
 }
 
 // ITCallInfo: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itcallinfo
@@ -2172,75 +2263,82 @@ type ITCallInfo struct {
 var IID_ITCallInfo = win32.GUID{Data1: 0x350f85d1, Data2: 0x1227, Data3: 0x11d3, Data4: [8]byte{0x83, 0xd4, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Get_Address dispatches through ITCallInfo's vtable slot 7.
-func (self *ITCallInfo) Get_Address(ppAddress **ITAddress) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAddress)))
-	return foundation.HRESULT(r1)
+func (self *ITCallInfo) Get_Address() (*ITAddress, error) {
+	var _ppAddress *ITAddress
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAddress)))
+	return _ppAddress, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallState dispatches through ITCallInfo's vtable slot 8.
-func (self *ITCallInfo) Get_CallState(pCallState *CALL_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallState)))
-	return foundation.HRESULT(r1)
+func (self *ITCallInfo) Get_CallState() (CALL_STATE, error) {
+	var _pCallState CALL_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCallState)))
+	return _pCallState, win32.HRESULTError(int32(r1))
 }
 
 // Get_Privilege dispatches through ITCallInfo's vtable slot 9.
-func (self *ITCallInfo) Get_Privilege(pPrivilege *CALL_PRIVILEGE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPrivilege)))
-	return foundation.HRESULT(r1)
+func (self *ITCallInfo) Get_Privilege() (CALL_PRIVILEGE, error) {
+	var _pPrivilege CALL_PRIVILEGE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pPrivilege)))
+	return _pPrivilege, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallHub dispatches through ITCallInfo's vtable slot 10.
-func (self *ITCallInfo) Get_CallHub(ppCallHub **ITCallHub) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCallHub)))
-	return foundation.HRESULT(r1)
+func (self *ITCallInfo) Get_CallHub() (*ITCallHub, error) {
+	var _ppCallHub *ITCallHub
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCallHub)))
+	return _ppCallHub, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallInfoLong dispatches through ITCallInfo's vtable slot 11.
-func (self *ITCallInfo) Get_CallInfoLong(CallInfoLong CALLINFO_LONG, plCallInfoLongVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(CallInfoLong), uintptr(unsafe.Pointer(plCallInfoLongVal)))
-	return foundation.HRESULT(r1)
+func (self *ITCallInfo) Get_CallInfoLong(CallInfoLong CALLINFO_LONG) (int32, error) {
+	var _plCallInfoLongVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(CallInfoLong), uintptr(unsafe.Pointer(&_plCallInfoLongVal)))
+	return _plCallInfoLongVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_CallInfoLong dispatches through ITCallInfo's vtable slot 12.
-func (self *ITCallInfo) Put_CallInfoLong(CallInfoLong CALLINFO_LONG, lCallInfoLongVal int32) foundation.HRESULT {
+func (self *ITCallInfo) Put_CallInfoLong(CallInfoLong CALLINFO_LONG, lCallInfoLongVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(CallInfoLong), uintptr(lCallInfoLongVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CallInfoString dispatches through ITCallInfo's vtable slot 13.
-func (self *ITCallInfo) Get_CallInfoString(CallInfoString CALLINFO_STRING, ppCallInfoString *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(CallInfoString), uintptr(unsafe.Pointer(ppCallInfoString)))
-	return foundation.HRESULT(r1)
+func (self *ITCallInfo) Get_CallInfoString(CallInfoString CALLINFO_STRING) (foundation.BSTR, error) {
+	var _ppCallInfoString foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(CallInfoString), uintptr(unsafe.Pointer(&_ppCallInfoString)))
+	return _ppCallInfoString, win32.HRESULTError(int32(r1))
 }
 
 // Put_CallInfoString dispatches through ITCallInfo's vtable slot 14.
-func (self *ITCallInfo) Put_CallInfoString(CallInfoString CALLINFO_STRING, pCallInfoString foundation.BSTR) foundation.HRESULT {
+func (self *ITCallInfo) Put_CallInfoString(CallInfoString CALLINFO_STRING, pCallInfoString foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(CallInfoString), uintptr(unsafe.Pointer(pCallInfoString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CallInfoBuffer dispatches through ITCallInfo's vtable slot 15.
-func (self *ITCallInfo) Get_CallInfoBuffer(CallInfoBuffer CALLINFO_BUFFER, ppCallInfoBuffer *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(CallInfoBuffer), uintptr(unsafe.Pointer(ppCallInfoBuffer)))
-	return foundation.HRESULT(r1)
+func (self *ITCallInfo) Get_CallInfoBuffer(CallInfoBuffer CALLINFO_BUFFER) (systemvariant.VARIANT, error) {
+	var _ppCallInfoBuffer systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(CallInfoBuffer), uintptr(unsafe.Pointer(&_ppCallInfoBuffer)))
+	return _ppCallInfoBuffer, win32.HRESULTError(int32(r1))
 }
 
 // GetCallInfoBuffer dispatches through ITCallInfo's vtable slot 17.
-func (self *ITCallInfo) GetCallInfoBuffer(CallInfoBuffer CALLINFO_BUFFER, pdwSize *uint32, ppCallInfoBuffer **byte) foundation.HRESULT {
+func (self *ITCallInfo) GetCallInfoBuffer(CallInfoBuffer CALLINFO_BUFFER, pdwSize *uint32, ppCallInfoBuffer **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(CallInfoBuffer), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(ppCallInfoBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCallInfoBuffer dispatches through ITCallInfo's vtable slot 18.
-func (self *ITCallInfo) SetCallInfoBuffer(CallInfoBuffer CALLINFO_BUFFER, dwSize uint32, pCallInfoBuffer *byte) foundation.HRESULT {
+func (self *ITCallInfo) SetCallInfoBuffer(CallInfoBuffer CALLINFO_BUFFER, dwSize uint32, pCallInfoBuffer *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(CallInfoBuffer), uintptr(dwSize), uintptr(unsafe.Pointer(pCallInfoBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseUserUserInfo dispatches through ITCallInfo's vtable slot 19.
-func (self *ITCallInfo) ReleaseUserUserInfo() foundation.HRESULT {
+func (self *ITCallInfo) ReleaseUserUserInfo() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITCallInfo2: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itcallinfo2
@@ -2253,15 +2351,16 @@ type ITCallInfo2 struct {
 var IID_ITCallInfo2 = win32.GUID{Data1: 0x94d70ca6, Data2: 0x7ab0, Data3: 0x4daa, Data4: [8]byte{0x81, 0xca, 0xb8, 0xf8, 0x64, 0x3f, 0xae, 0xc1}}
 
 // Get_EventFilter dispatches through ITCallInfo2's vtable slot 20.
-func (self *ITCallInfo2) Get_EventFilter(TapiEvent TAPI_EVENT, lSubEvent int32, pEnable *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(TapiEvent), uintptr(lSubEvent), uintptr(unsafe.Pointer(pEnable)))
-	return foundation.HRESULT(r1)
+func (self *ITCallInfo2) Get_EventFilter(TapiEvent TAPI_EVENT, lSubEvent int32) (foundation.VARIANT_BOOL, error) {
+	var _pEnable foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(TapiEvent), uintptr(lSubEvent), uintptr(unsafe.Pointer(&_pEnable)))
+	return _pEnable, win32.HRESULTError(int32(r1))
 }
 
 // Put_EventFilter dispatches through ITCallInfo2's vtable slot 21.
-func (self *ITCallInfo2) Put_EventFilter(TapiEvent TAPI_EVENT, lSubEvent int32, bEnable foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITCallInfo2) Put_EventFilter(TapiEvent TAPI_EVENT, lSubEvent int32, bEnable foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(TapiEvent), uintptr(lSubEvent), uintptr(bEnable))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITCallInfoChangeEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itcallinfochangeevent
@@ -2274,21 +2373,24 @@ type ITCallInfoChangeEvent struct {
 var IID_ITCallInfoChangeEvent = win32.GUID{Data1: 0x5d4b65f9, Data2: 0xe51c, Data3: 0x11d1, Data4: [8]byte{0xa0, 0x2f, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Get_Call dispatches through ITCallInfoChangeEvent's vtable slot 7.
-func (self *ITCallInfoChangeEvent) Get_Call(ppCall **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCall)))
-	return foundation.HRESULT(r1)
+func (self *ITCallInfoChangeEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCall *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCall)))
+	return _ppCall, win32.HRESULTError(int32(r1))
 }
 
 // Get_Cause dispatches through ITCallInfoChangeEvent's vtable slot 8.
-func (self *ITCallInfoChangeEvent) Get_Cause(pCIC *CALLINFOCHANGE_CAUSE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCIC)))
-	return foundation.HRESULT(r1)
+func (self *ITCallInfoChangeEvent) Get_Cause() (CALLINFOCHANGE_CAUSE, error) {
+	var _pCIC CALLINFOCHANGE_CAUSE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCIC)))
+	return _pCIC, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallbackInstance dispatches through ITCallInfoChangeEvent's vtable slot 9.
-func (self *ITCallInfoChangeEvent) Get_CallbackInstance(plCallbackInstance *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCallbackInstance)))
-	return foundation.HRESULT(r1)
+func (self *ITCallInfoChangeEvent) Get_CallbackInstance() (int32, error) {
+	var _plCallbackInstance int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCallbackInstance)))
+	return _plCallbackInstance, win32.HRESULTError(int32(r1))
 }
 
 // ITCallMediaEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itcallmediaevent
@@ -2301,39 +2403,45 @@ type ITCallMediaEvent struct {
 var IID_ITCallMediaEvent = win32.GUID{Data1: 0xff36b87f, Data2: 0xec3a, Data3: 0x11d0, Data4: [8]byte{0x8e, 0xe4, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Get_Call dispatches through ITCallMediaEvent's vtable slot 7.
-func (self *ITCallMediaEvent) Get_Call(ppCallInfo **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCallInfo)))
-	return foundation.HRESULT(r1)
+func (self *ITCallMediaEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCallInfo *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCallInfo)))
+	return _ppCallInfo, win32.HRESULTError(int32(r1))
 }
 
 // Get_Event dispatches through ITCallMediaEvent's vtable slot 8.
-func (self *ITCallMediaEvent) Get_Event(pCallMediaEvent *CALL_MEDIA_EVENT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallMediaEvent)))
-	return foundation.HRESULT(r1)
+func (self *ITCallMediaEvent) Get_Event() (CALL_MEDIA_EVENT, error) {
+	var _pCallMediaEvent CALL_MEDIA_EVENT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCallMediaEvent)))
+	return _pCallMediaEvent, win32.HRESULTError(int32(r1))
 }
 
 // Get_Error dispatches through ITCallMediaEvent's vtable slot 9.
-func (self *ITCallMediaEvent) Get_Error(phrError *foundation.HRESULT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrError)))
-	return foundation.HRESULT(r1)
+func (self *ITCallMediaEvent) Get_Error() (foundation.HRESULT, error) {
+	var _phrError foundation.HRESULT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phrError)))
+	return _phrError, win32.HRESULTError(int32(r1))
 }
 
 // Get_Terminal dispatches through ITCallMediaEvent's vtable slot 10.
-func (self *ITCallMediaEvent) Get_Terminal(ppTerminal **ITTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTerminal)))
-	return foundation.HRESULT(r1)
+func (self *ITCallMediaEvent) Get_Terminal() (*ITTerminal, error) {
+	var _ppTerminal *ITTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTerminal)))
+	return _ppTerminal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Stream dispatches through ITCallMediaEvent's vtable slot 11.
-func (self *ITCallMediaEvent) Get_Stream(ppStream **ITStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+func (self *ITCallMediaEvent) Get_Stream() (*ITStream, error) {
+	var _ppStream *ITStream
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppStream)))
+	return _ppStream, win32.HRESULTError(int32(r1))
 }
 
 // Get_Cause dispatches through ITCallMediaEvent's vtable slot 12.
-func (self *ITCallMediaEvent) Get_Cause(pCause *CALL_MEDIA_EVENT_CAUSE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCause)))
-	return foundation.HRESULT(r1)
+func (self *ITCallMediaEvent) Get_Cause() (CALL_MEDIA_EVENT_CAUSE, error) {
+	var _pCause CALL_MEDIA_EVENT_CAUSE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCause)))
+	return _pCause, win32.HRESULTError(int32(r1))
 }
 
 // ITCallNotificationEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itcallnotificationevent
@@ -2346,21 +2454,24 @@ type ITCallNotificationEvent struct {
 var IID_ITCallNotificationEvent = win32.GUID{Data1: 0x895801df, Data2: 0x3dd6, Data3: 0x11d1, Data4: [8]byte{0x8f, 0x30, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Get_Call dispatches through ITCallNotificationEvent's vtable slot 7.
-func (self *ITCallNotificationEvent) Get_Call(ppCall **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCall)))
-	return foundation.HRESULT(r1)
+func (self *ITCallNotificationEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCall *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCall)))
+	return _ppCall, win32.HRESULTError(int32(r1))
 }
 
 // Get_Event dispatches through ITCallNotificationEvent's vtable slot 8.
-func (self *ITCallNotificationEvent) Get_Event(pCallNotificationEvent *CALL_NOTIFICATION_EVENT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallNotificationEvent)))
-	return foundation.HRESULT(r1)
+func (self *ITCallNotificationEvent) Get_Event() (CALL_NOTIFICATION_EVENT, error) {
+	var _pCallNotificationEvent CALL_NOTIFICATION_EVENT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCallNotificationEvent)))
+	return _pCallNotificationEvent, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallbackInstance dispatches through ITCallNotificationEvent's vtable slot 9.
-func (self *ITCallNotificationEvent) Get_CallbackInstance(plCallbackInstance *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCallbackInstance)))
-	return foundation.HRESULT(r1)
+func (self *ITCallNotificationEvent) Get_CallbackInstance() (int32, error) {
+	var _plCallbackInstance int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCallbackInstance)))
+	return _plCallbackInstance, win32.HRESULTError(int32(r1))
 }
 
 // ITCallStateEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itcallstateevent
@@ -2373,27 +2484,31 @@ type ITCallStateEvent struct {
 var IID_ITCallStateEvent = win32.GUID{Data1: 0x62f47097, Data2: 0x95c9, Data3: 0x11d0, Data4: [8]byte{0x83, 0x5d, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Get_Call dispatches through ITCallStateEvent's vtable slot 7.
-func (self *ITCallStateEvent) Get_Call(ppCallInfo **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCallInfo)))
-	return foundation.HRESULT(r1)
+func (self *ITCallStateEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCallInfo *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCallInfo)))
+	return _ppCallInfo, win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ITCallStateEvent's vtable slot 8.
-func (self *ITCallStateEvent) Get_State(pCallState *CALL_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallState)))
-	return foundation.HRESULT(r1)
+func (self *ITCallStateEvent) Get_State() (CALL_STATE, error) {
+	var _pCallState CALL_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCallState)))
+	return _pCallState, win32.HRESULTError(int32(r1))
 }
 
 // Get_Cause dispatches through ITCallStateEvent's vtable slot 9.
-func (self *ITCallStateEvent) Get_Cause(pCEC *CALL_STATE_EVENT_CAUSE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCEC)))
-	return foundation.HRESULT(r1)
+func (self *ITCallStateEvent) Get_Cause() (CALL_STATE_EVENT_CAUSE, error) {
+	var _pCEC CALL_STATE_EVENT_CAUSE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCEC)))
+	return _pCEC, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallbackInstance dispatches through ITCallStateEvent's vtable slot 10.
-func (self *ITCallStateEvent) Get_CallbackInstance(plCallbackInstance *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCallbackInstance)))
-	return foundation.HRESULT(r1)
+func (self *ITCallStateEvent) Get_CallbackInstance() (int32, error) {
+	var _plCallbackInstance int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCallbackInstance)))
+	return _plCallbackInstance, win32.HRESULTError(int32(r1))
 }
 
 // ITCallingCard: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itcallingcard
@@ -2406,45 +2521,52 @@ type ITCallingCard struct {
 var IID_ITCallingCard = win32.GUID{Data1: 0x0c4d8f00, Data2: 0x8ddb, Data3: 0x11d1, Data4: [8]byte{0xa0, 0x9e, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Get_PermanentCardID dispatches through ITCallingCard's vtable slot 7.
-func (self *ITCallingCard) Get_PermanentCardID(plCardID *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCardID)))
-	return foundation.HRESULT(r1)
+func (self *ITCallingCard) Get_PermanentCardID() (int32, error) {
+	var _plCardID int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCardID)))
+	return _plCardID, win32.HRESULTError(int32(r1))
 }
 
 // Get_NumberOfDigits dispatches through ITCallingCard's vtable slot 8.
-func (self *ITCallingCard) Get_NumberOfDigits(plDigits *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDigits)))
-	return foundation.HRESULT(r1)
+func (self *ITCallingCard) Get_NumberOfDigits() (int32, error) {
+	var _plDigits int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plDigits)))
+	return _plDigits, win32.HRESULTError(int32(r1))
 }
 
 // Get_Options dispatches through ITCallingCard's vtable slot 9.
-func (self *ITCallingCard) Get_Options(plOptions *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plOptions)))
-	return foundation.HRESULT(r1)
+func (self *ITCallingCard) Get_Options() (int32, error) {
+	var _plOptions int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plOptions)))
+	return _plOptions, win32.HRESULTError(int32(r1))
 }
 
 // Get_CardName dispatches through ITCallingCard's vtable slot 10.
-func (self *ITCallingCard) Get_CardName(ppCardName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCardName)))
-	return foundation.HRESULT(r1)
+func (self *ITCallingCard) Get_CardName() (foundation.BSTR, error) {
+	var _ppCardName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCardName)))
+	return _ppCardName, win32.HRESULTError(int32(r1))
 }
 
 // Get_SameAreaDialingRule dispatches through ITCallingCard's vtable slot 11.
-func (self *ITCallingCard) Get_SameAreaDialingRule(ppRule *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRule)))
-	return foundation.HRESULT(r1)
+func (self *ITCallingCard) Get_SameAreaDialingRule() (foundation.BSTR, error) {
+	var _ppRule foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppRule)))
+	return _ppRule, win32.HRESULTError(int32(r1))
 }
 
 // Get_LongDistanceDialingRule dispatches through ITCallingCard's vtable slot 12.
-func (self *ITCallingCard) Get_LongDistanceDialingRule(ppRule *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRule)))
-	return foundation.HRESULT(r1)
+func (self *ITCallingCard) Get_LongDistanceDialingRule() (foundation.BSTR, error) {
+	var _ppRule foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppRule)))
+	return _ppRule, win32.HRESULTError(int32(r1))
 }
 
 // Get_InternationalDialingRule dispatches through ITCallingCard's vtable slot 13.
-func (self *ITCallingCard) Get_InternationalDialingRule(ppRule *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRule)))
-	return foundation.HRESULT(r1)
+func (self *ITCallingCard) Get_InternationalDialingRule() (foundation.BSTR, error) {
+	var _ppRule foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppRule)))
+	return _ppRule, win32.HRESULTError(int32(r1))
 }
 
 // ITCollection: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itcollection
@@ -2457,21 +2579,24 @@ type ITCollection struct {
 var IID_ITCollection = win32.GUID{Data1: 0x5ec5acf2, Data2: 0x9c02, Data3: 0x11d0, Data4: [8]byte{0x83, 0x62, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Get_Count dispatches through ITCollection's vtable slot 7.
-func (self *ITCollection) Get_Count(lCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lCount)))
-	return foundation.HRESULT(r1)
+func (self *ITCollection) Get_Count() (int32, error) {
+	var _lCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lCount)))
+	return _lCount, win32.HRESULTError(int32(r1))
 }
 
 // Get_Item dispatches through ITCollection's vtable slot 8.
-func (self *ITCollection) Get_Item(Index int32, pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITCollection) Get_Item(Index int32) (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through ITCollection's vtable slot 9.
-func (self *ITCollection) Get__NewEnum(ppNewEnum **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNewEnum)))
-	return foundation.HRESULT(r1)
+func (self *ITCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _ppNewEnum *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNewEnum)))
+	return _ppNewEnum, win32.HRESULTError(int32(r1))
 }
 
 // ITCollection2: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itcollection2
@@ -2484,15 +2609,15 @@ type ITCollection2 struct {
 var IID_ITCollection2 = win32.GUID{Data1: 0xe6dddda5, Data2: 0xa6d3, Data3: 0x48ff, Data4: [8]byte{0x87, 0x37, 0xd3, 0x2f, 0xc4, 0xd9, 0x54, 0x77}}
 
 // Add dispatches through ITCollection2's vtable slot 10.
-func (self *ITCollection2) Add(Index int32, pVariant *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ITCollection2) Add(Index int32, pVariant *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through ITCollection2's vtable slot 11.
-func (self *ITCollection2) Remove(Index int32) foundation.HRESULT {
+func (self *ITCollection2) Remove(Index int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITCustomTone: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itcustomtone
@@ -2505,51 +2630,55 @@ type ITCustomTone struct {
 var IID_ITCustomTone = win32.GUID{Data1: 0x357ad764, Data2: 0xb3c6, Data3: 0x4b2a, Data4: [8]byte{0x8f, 0xa5, 0x07, 0x22, 0x82, 0x7a, 0x92, 0x54}}
 
 // Get_Frequency dispatches through ITCustomTone's vtable slot 7.
-func (self *ITCustomTone) Get_Frequency(plFrequency *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plFrequency)))
-	return foundation.HRESULT(r1)
+func (self *ITCustomTone) Get_Frequency() (int32, error) {
+	var _plFrequency int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plFrequency)))
+	return _plFrequency, win32.HRESULTError(int32(r1))
 }
 
 // Put_Frequency dispatches through ITCustomTone's vtable slot 8.
-func (self *ITCustomTone) Put_Frequency(lFrequency int32) foundation.HRESULT {
+func (self *ITCustomTone) Put_Frequency(lFrequency int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lFrequency))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CadenceOn dispatches through ITCustomTone's vtable slot 9.
-func (self *ITCustomTone) Get_CadenceOn(plCadenceOn *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCadenceOn)))
-	return foundation.HRESULT(r1)
+func (self *ITCustomTone) Get_CadenceOn() (int32, error) {
+	var _plCadenceOn int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCadenceOn)))
+	return _plCadenceOn, win32.HRESULTError(int32(r1))
 }
 
 // Put_CadenceOn dispatches through ITCustomTone's vtable slot 10.
-func (self *ITCustomTone) Put_CadenceOn(CadenceOn int32) foundation.HRESULT {
+func (self *ITCustomTone) Put_CadenceOn(CadenceOn int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(CadenceOn))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CadenceOff dispatches through ITCustomTone's vtable slot 11.
-func (self *ITCustomTone) Get_CadenceOff(plCadenceOff *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCadenceOff)))
-	return foundation.HRESULT(r1)
+func (self *ITCustomTone) Get_CadenceOff() (int32, error) {
+	var _plCadenceOff int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCadenceOff)))
+	return _plCadenceOff, win32.HRESULTError(int32(r1))
 }
 
 // Put_CadenceOff dispatches through ITCustomTone's vtable slot 12.
-func (self *ITCustomTone) Put_CadenceOff(lCadenceOff int32) foundation.HRESULT {
+func (self *ITCustomTone) Put_CadenceOff(lCadenceOff int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lCadenceOff))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Volume dispatches through ITCustomTone's vtable slot 13.
-func (self *ITCustomTone) Get_Volume(plVolume *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plVolume)))
-	return foundation.HRESULT(r1)
+func (self *ITCustomTone) Get_Volume() (int32, error) {
+	var _plVolume int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plVolume)))
+	return _plVolume, win32.HRESULTError(int32(r1))
 }
 
 // Put_Volume dispatches through ITCustomTone's vtable slot 14.
-func (self *ITCustomTone) Put_Volume(lVolume int32) foundation.HRESULT {
+func (self *ITCustomTone) Put_Volume(lVolume int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(lVolume))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITDetectTone: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itdetecttone
@@ -2562,39 +2691,42 @@ type ITDetectTone struct {
 var IID_ITDetectTone = win32.GUID{Data1: 0x961f79bd, Data2: 0x3097, Data3: 0x49df, Data4: [8]byte{0xa1, 0xd6, 0x90, 0x9b, 0x77, 0xe8, 0x9c, 0xa0}}
 
 // Get_AppSpecific dispatches through ITDetectTone's vtable slot 7.
-func (self *ITDetectTone) Get_AppSpecific(plAppSpecific *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAppSpecific)))
-	return foundation.HRESULT(r1)
+func (self *ITDetectTone) Get_AppSpecific() (int32, error) {
+	var _plAppSpecific int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plAppSpecific)))
+	return _plAppSpecific, win32.HRESULTError(int32(r1))
 }
 
 // Put_AppSpecific dispatches through ITDetectTone's vtable slot 8.
-func (self *ITDetectTone) Put_AppSpecific(lAppSpecific int32) foundation.HRESULT {
+func (self *ITDetectTone) Put_AppSpecific(lAppSpecific int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lAppSpecific))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Duration dispatches through ITDetectTone's vtable slot 9.
-func (self *ITDetectTone) Get_Duration(plDuration *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDuration)))
-	return foundation.HRESULT(r1)
+func (self *ITDetectTone) Get_Duration() (int32, error) {
+	var _plDuration int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plDuration)))
+	return _plDuration, win32.HRESULTError(int32(r1))
 }
 
 // Put_Duration dispatches through ITDetectTone's vtable slot 10.
-func (self *ITDetectTone) Put_Duration(lDuration int32) foundation.HRESULT {
+func (self *ITDetectTone) Put_Duration(lDuration int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lDuration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Frequency dispatches through ITDetectTone's vtable slot 11.
-func (self *ITDetectTone) Get_Frequency(Index int32, plFrequency *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(plFrequency)))
-	return foundation.HRESULT(r1)
+func (self *ITDetectTone) Get_Frequency(Index int32) (int32, error) {
+	var _plFrequency int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(&_plFrequency)))
+	return _plFrequency, win32.HRESULTError(int32(r1))
 }
 
 // Put_Frequency dispatches through ITDetectTone's vtable slot 12.
-func (self *ITDetectTone) Put_Frequency(Index int32, lFrequency int32) foundation.HRESULT {
+func (self *ITDetectTone) Put_Frequency(Index int32, lFrequency int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(lFrequency))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITDigitDetectionEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itdigitdetectionevent
@@ -2607,33 +2739,38 @@ type ITDigitDetectionEvent struct {
 var IID_ITDigitDetectionEvent = win32.GUID{Data1: 0x80d3bfac, Data2: 0x57d9, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x4a, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Get_Call dispatches through ITDigitDetectionEvent's vtable slot 7.
-func (self *ITDigitDetectionEvent) Get_Call(ppCallInfo **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCallInfo)))
-	return foundation.HRESULT(r1)
+func (self *ITDigitDetectionEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCallInfo *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCallInfo)))
+	return _ppCallInfo, win32.HRESULTError(int32(r1))
 }
 
 // Get_Digit dispatches through ITDigitDetectionEvent's vtable slot 8.
-func (self *ITDigitDetectionEvent) Get_Digit(pucDigit *byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pucDigit)))
-	return foundation.HRESULT(r1)
+func (self *ITDigitDetectionEvent) Get_Digit() (byte, error) {
+	var _pucDigit byte
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pucDigit)))
+	return _pucDigit, win32.HRESULTError(int32(r1))
 }
 
 // Get_DigitMode dispatches through ITDigitDetectionEvent's vtable slot 9.
-func (self *ITDigitDetectionEvent) Get_DigitMode(pDigitMode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDigitMode)))
-	return foundation.HRESULT(r1)
+func (self *ITDigitDetectionEvent) Get_DigitMode() (int32, error) {
+	var _pDigitMode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDigitMode)))
+	return _pDigitMode, win32.HRESULTError(int32(r1))
 }
 
 // Get_TickCount dispatches through ITDigitDetectionEvent's vtable slot 10.
-func (self *ITDigitDetectionEvent) Get_TickCount(plTickCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTickCount)))
-	return foundation.HRESULT(r1)
+func (self *ITDigitDetectionEvent) Get_TickCount() (int32, error) {
+	var _plTickCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plTickCount)))
+	return _plTickCount, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallbackInstance dispatches through ITDigitDetectionEvent's vtable slot 11.
-func (self *ITDigitDetectionEvent) Get_CallbackInstance(plCallbackInstance *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCallbackInstance)))
-	return foundation.HRESULT(r1)
+func (self *ITDigitDetectionEvent) Get_CallbackInstance() (int32, error) {
+	var _plCallbackInstance int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCallbackInstance)))
+	return _plCallbackInstance, win32.HRESULTError(int32(r1))
 }
 
 // ITDigitGenerationEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itdigitgenerationevent
@@ -2646,27 +2783,31 @@ type ITDigitGenerationEvent struct {
 var IID_ITDigitGenerationEvent = win32.GUID{Data1: 0x80d3bfad, Data2: 0x57d9, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x4a, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Get_Call dispatches through ITDigitGenerationEvent's vtable slot 7.
-func (self *ITDigitGenerationEvent) Get_Call(ppCallInfo **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCallInfo)))
-	return foundation.HRESULT(r1)
+func (self *ITDigitGenerationEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCallInfo *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCallInfo)))
+	return _ppCallInfo, win32.HRESULTError(int32(r1))
 }
 
 // Get_GenerationTermination dispatches through ITDigitGenerationEvent's vtable slot 8.
-func (self *ITDigitGenerationEvent) Get_GenerationTermination(plGenerationTermination *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plGenerationTermination)))
-	return foundation.HRESULT(r1)
+func (self *ITDigitGenerationEvent) Get_GenerationTermination() (int32, error) {
+	var _plGenerationTermination int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plGenerationTermination)))
+	return _plGenerationTermination, win32.HRESULTError(int32(r1))
 }
 
 // Get_TickCount dispatches through ITDigitGenerationEvent's vtable slot 9.
-func (self *ITDigitGenerationEvent) Get_TickCount(plTickCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTickCount)))
-	return foundation.HRESULT(r1)
+func (self *ITDigitGenerationEvent) Get_TickCount() (int32, error) {
+	var _plTickCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plTickCount)))
+	return _plTickCount, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallbackInstance dispatches through ITDigitGenerationEvent's vtable slot 10.
-func (self *ITDigitGenerationEvent) Get_CallbackInstance(plCallbackInstance *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCallbackInstance)))
-	return foundation.HRESULT(r1)
+func (self *ITDigitGenerationEvent) Get_CallbackInstance() (int32, error) {
+	var _plCallbackInstance int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCallbackInstance)))
+	return _plCallbackInstance, win32.HRESULTError(int32(r1))
 }
 
 // ITDigitsGatheredEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itdigitsgatheredevent
@@ -2679,33 +2820,38 @@ type ITDigitsGatheredEvent struct {
 var IID_ITDigitsGatheredEvent = win32.GUID{Data1: 0xe52ec4c1, Data2: 0xcba3, Data3: 0x441a, Data4: [8]byte{0x9e, 0x6a, 0x93, 0xcb, 0x90, 0x9e, 0x97, 0x24}}
 
 // Get_Call dispatches through ITDigitsGatheredEvent's vtable slot 7.
-func (self *ITDigitsGatheredEvent) Get_Call(ppCallInfo **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCallInfo)))
-	return foundation.HRESULT(r1)
+func (self *ITDigitsGatheredEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCallInfo *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCallInfo)))
+	return _ppCallInfo, win32.HRESULTError(int32(r1))
 }
 
 // Get_Digits dispatches through ITDigitsGatheredEvent's vtable slot 8.
-func (self *ITDigitsGatheredEvent) Get_Digits(ppDigits *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDigits)))
-	return foundation.HRESULT(r1)
+func (self *ITDigitsGatheredEvent) Get_Digits() (foundation.BSTR, error) {
+	var _ppDigits foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDigits)))
+	return _ppDigits, win32.HRESULTError(int32(r1))
 }
 
 // Get_GatherTermination dispatches through ITDigitsGatheredEvent's vtable slot 9.
-func (self *ITDigitsGatheredEvent) Get_GatherTermination(pGatherTermination *TAPI_GATHERTERM) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGatherTermination)))
-	return foundation.HRESULT(r1)
+func (self *ITDigitsGatheredEvent) Get_GatherTermination() (TAPI_GATHERTERM, error) {
+	var _pGatherTermination TAPI_GATHERTERM
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pGatherTermination)))
+	return _pGatherTermination, win32.HRESULTError(int32(r1))
 }
 
 // Get_TickCount dispatches through ITDigitsGatheredEvent's vtable slot 10.
-func (self *ITDigitsGatheredEvent) Get_TickCount(plTickCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTickCount)))
-	return foundation.HRESULT(r1)
+func (self *ITDigitsGatheredEvent) Get_TickCount() (int32, error) {
+	var _plTickCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plTickCount)))
+	return _plTickCount, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallbackInstance dispatches through ITDigitsGatheredEvent's vtable slot 11.
-func (self *ITDigitsGatheredEvent) Get_CallbackInstance(plCallbackInstance *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCallbackInstance)))
-	return foundation.HRESULT(r1)
+func (self *ITDigitsGatheredEvent) Get_CallbackInstance() (int32, error) {
+	var _plCallbackInstance int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCallbackInstance)))
+	return _plCallbackInstance, win32.HRESULTError(int32(r1))
 }
 
 // ITDirectory: https://learn.microsoft.com/windows/win32/api/rend/nn-rend-itdirectory
@@ -2718,87 +2864,92 @@ type ITDirectory struct {
 var IID_ITDirectory = win32.GUID{Data1: 0x34621d6c, Data2: 0x6cff, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xf7, 0x00, 0xc0, 0x4f, 0xc3, 0x1f, 0xee}}
 
 // Get_DirectoryType dispatches through ITDirectory's vtable slot 7.
-func (self *ITDirectory) Get_DirectoryType(pDirectoryType *DIRECTORY_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirectoryType)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectory) Get_DirectoryType() (DIRECTORY_TYPE, error) {
+	var _pDirectoryType DIRECTORY_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDirectoryType)))
+	return _pDirectoryType, win32.HRESULTError(int32(r1))
 }
 
 // Get_DisplayName dispatches through ITDirectory's vtable slot 8.
-func (self *ITDirectory) Get_DisplayName(pName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectory) Get_DisplayName() (foundation.BSTR, error) {
+	var _pName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pName)))
+	return _pName, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsDynamic dispatches through ITDirectory's vtable slot 9.
-func (self *ITDirectory) Get_IsDynamic(pfDynamic *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfDynamic)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectory) Get_IsDynamic() (foundation.VARIANT_BOOL, error) {
+	var _pfDynamic foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfDynamic)))
+	return _pfDynamic, win32.HRESULTError(int32(r1))
 }
 
 // Get_DefaultObjectTTL dispatches through ITDirectory's vtable slot 10.
-func (self *ITDirectory) Get_DefaultObjectTTL(pTTL *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTTL)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectory) Get_DefaultObjectTTL() (int32, error) {
+	var _pTTL int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTTL)))
+	return _pTTL, win32.HRESULTError(int32(r1))
 }
 
 // Put_DefaultObjectTTL dispatches through ITDirectory's vtable slot 11.
-func (self *ITDirectory) Put_DefaultObjectTTL(TTL int32) foundation.HRESULT {
+func (self *ITDirectory) Put_DefaultObjectTTL(TTL int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(TTL))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableAutoRefresh dispatches through ITDirectory's vtable slot 12.
-func (self *ITDirectory) EnableAutoRefresh(fEnable foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITDirectory) EnableAutoRefresh(fEnable foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Connect dispatches through ITDirectory's vtable slot 13.
-func (self *ITDirectory) Connect(fSecure foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITDirectory) Connect(fSecure foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(fSecure))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Bind dispatches through ITDirectory's vtable slot 14.
-func (self *ITDirectory) Bind(pDomainName foundation.BSTR, pUserName foundation.BSTR, pPassword foundation.BSTR, lFlags int32) foundation.HRESULT {
+func (self *ITDirectory) Bind(pDomainName foundation.BSTR, pUserName foundation.BSTR, pPassword foundation.BSTR, lFlags int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDomainName)), uintptr(unsafe.Pointer(pUserName)), uintptr(unsafe.Pointer(pPassword)), uintptr(lFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDirectoryObject dispatches through ITDirectory's vtable slot 15.
-func (self *ITDirectory) AddDirectoryObject(pDirectoryObject *ITDirectoryObject) foundation.HRESULT {
+func (self *ITDirectory) AddDirectoryObject(pDirectoryObject *ITDirectoryObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirectoryObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ModifyDirectoryObject dispatches through ITDirectory's vtable slot 16.
-func (self *ITDirectory) ModifyDirectoryObject(pDirectoryObject *ITDirectoryObject) foundation.HRESULT {
+func (self *ITDirectory) ModifyDirectoryObject(pDirectoryObject *ITDirectoryObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirectoryObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RefreshDirectoryObject dispatches through ITDirectory's vtable slot 17.
-func (self *ITDirectory) RefreshDirectoryObject(pDirectoryObject *ITDirectoryObject) foundation.HRESULT {
+func (self *ITDirectory) RefreshDirectoryObject(pDirectoryObject *ITDirectoryObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirectoryObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteDirectoryObject dispatches through ITDirectory's vtable slot 18.
-func (self *ITDirectory) DeleteDirectoryObject(pDirectoryObject *ITDirectoryObject) foundation.HRESULT {
+func (self *ITDirectory) DeleteDirectoryObject(pDirectoryObject *ITDirectoryObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirectoryObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DirectoryObjects dispatches through ITDirectory's vtable slot 19.
-func (self *ITDirectory) Get_DirectoryObjects(DirectoryObjectType DIRECTORY_OBJECT_TYPE, pName foundation.BSTR, pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(DirectoryObjectType), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectory) Get_DirectoryObjects(DirectoryObjectType DIRECTORY_OBJECT_TYPE, pName foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(DirectoryObjectType), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateDirectoryObjects dispatches through ITDirectory's vtable slot 20.
-func (self *ITDirectory) EnumerateDirectoryObjects(DirectoryObjectType DIRECTORY_OBJECT_TYPE, pName foundation.BSTR, ppEnumObject **IEnumDirectoryObject) foundation.HRESULT {
+func (self *ITDirectory) EnumerateDirectoryObjects(DirectoryObjectType DIRECTORY_OBJECT_TYPE, pName foundation.BSTR, ppEnumObject **IEnumDirectoryObject) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(DirectoryObjectType), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(ppEnumObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITDirectoryObject: https://learn.microsoft.com/windows/win32/api/rend/nn-rend-itdirectoryobject
@@ -2811,45 +2962,49 @@ type ITDirectoryObject struct {
 var IID_ITDirectoryObject = win32.GUID{Data1: 0x34621d6e, Data2: 0x6cff, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xf7, 0x00, 0xc0, 0x4f, 0xc3, 0x1f, 0xee}}
 
 // Get_ObjectType dispatches through ITDirectoryObject's vtable slot 7.
-func (self *ITDirectoryObject) Get_ObjectType(pObjectType *DIRECTORY_OBJECT_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectType)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectoryObject) Get_ObjectType() (DIRECTORY_OBJECT_TYPE, error) {
+	var _pObjectType DIRECTORY_OBJECT_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pObjectType)))
+	return _pObjectType, win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through ITDirectoryObject's vtable slot 8.
-func (self *ITDirectoryObject) Get_Name(ppName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectoryObject) Get_Name() (foundation.BSTR, error) {
+	var _ppName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppName)))
+	return _ppName, win32.HRESULTError(int32(r1))
 }
 
 // Put_Name dispatches through ITDirectoryObject's vtable slot 9.
-func (self *ITDirectoryObject) Put_Name(pName foundation.BSTR) foundation.HRESULT {
+func (self *ITDirectoryObject) Put_Name(pName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DialableAddrs dispatches through ITDirectoryObject's vtable slot 10.
-func (self *ITDirectoryObject) Get_DialableAddrs(dwAddressType int32, pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwAddressType), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectoryObject) Get_DialableAddrs(dwAddressType int32) (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwAddressType), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateDialableAddrs dispatches through ITDirectoryObject's vtable slot 11.
-func (self *ITDirectoryObject) EnumerateDialableAddrs(dwAddressType uint32, ppEnumDialableAddrs **IEnumDialableAddrs) foundation.HRESULT {
+func (self *ITDirectoryObject) EnumerateDialableAddrs(dwAddressType uint32, ppEnumDialableAddrs **IEnumDialableAddrs) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwAddressType), uintptr(unsafe.Pointer(ppEnumDialableAddrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SecurityDescriptor dispatches through ITDirectoryObject's vtable slot 12.
-func (self *ITDirectoryObject) Get_SecurityDescriptor(ppSecDes **systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSecDes)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectoryObject) Get_SecurityDescriptor() (*systemcom.IDispatch, error) {
+	var _ppSecDes *systemcom.IDispatch
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSecDes)))
+	return _ppSecDes, win32.HRESULTError(int32(r1))
 }
 
 // Put_SecurityDescriptor dispatches through ITDirectoryObject's vtable slot 13.
-func (self *ITDirectoryObject) Put_SecurityDescriptor(pSecDes *systemcom.IDispatch) foundation.HRESULT {
+func (self *ITDirectoryObject) Put_SecurityDescriptor(pSecDes *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSecDes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITDirectoryObjectConference: https://learn.microsoft.com/windows/win32/api/rend/nn-rend-itdirectoryobjectconference
@@ -2862,81 +3017,89 @@ type ITDirectoryObjectConference struct {
 var IID_ITDirectoryObjectConference = win32.GUID{Data1: 0xf1029e5d, Data2: 0xcb5b, Data3: 0x11d0, Data4: [8]byte{0x8d, 0x59, 0x00, 0xc0, 0x4f, 0xd9, 0x1a, 0xc0}}
 
 // Get_Protocol dispatches through ITDirectoryObjectConference's vtable slot 7.
-func (self *ITDirectoryObjectConference) Get_Protocol(ppProtocol *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProtocol)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectoryObjectConference) Get_Protocol() (foundation.BSTR, error) {
+	var _ppProtocol foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppProtocol)))
+	return _ppProtocol, win32.HRESULTError(int32(r1))
 }
 
 // Get_Originator dispatches through ITDirectoryObjectConference's vtable slot 8.
-func (self *ITDirectoryObjectConference) Get_Originator(ppOriginator *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppOriginator)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectoryObjectConference) Get_Originator() (foundation.BSTR, error) {
+	var _ppOriginator foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppOriginator)))
+	return _ppOriginator, win32.HRESULTError(int32(r1))
 }
 
 // Put_Originator dispatches through ITDirectoryObjectConference's vtable slot 9.
-func (self *ITDirectoryObjectConference) Put_Originator(pOriginator foundation.BSTR) foundation.HRESULT {
+func (self *ITDirectoryObjectConference) Put_Originator(pOriginator foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOriginator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AdvertisingScope dispatches through ITDirectoryObjectConference's vtable slot 10.
-func (self *ITDirectoryObjectConference) Get_AdvertisingScope(pAdvertisingScope *RND_ADVERTISING_SCOPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAdvertisingScope)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectoryObjectConference) Get_AdvertisingScope() (RND_ADVERTISING_SCOPE, error) {
+	var _pAdvertisingScope RND_ADVERTISING_SCOPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pAdvertisingScope)))
+	return _pAdvertisingScope, win32.HRESULTError(int32(r1))
 }
 
 // Put_AdvertisingScope dispatches through ITDirectoryObjectConference's vtable slot 11.
-func (self *ITDirectoryObjectConference) Put_AdvertisingScope(AdvertisingScope RND_ADVERTISING_SCOPE) foundation.HRESULT {
+func (self *ITDirectoryObjectConference) Put_AdvertisingScope(AdvertisingScope RND_ADVERTISING_SCOPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(AdvertisingScope))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Url dispatches through ITDirectoryObjectConference's vtable slot 12.
-func (self *ITDirectoryObjectConference) Get_Url(ppUrl *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppUrl)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectoryObjectConference) Get_Url() (foundation.BSTR, error) {
+	var _ppUrl foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppUrl)))
+	return _ppUrl, win32.HRESULTError(int32(r1))
 }
 
 // Put_Url dispatches through ITDirectoryObjectConference's vtable slot 13.
-func (self *ITDirectoryObjectConference) Put_Url(pUrl foundation.BSTR) foundation.HRESULT {
+func (self *ITDirectoryObjectConference) Put_Url(pUrl foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUrl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Description dispatches through ITDirectoryObjectConference's vtable slot 14.
-func (self *ITDirectoryObjectConference) Get_Description(ppDescription *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDescription)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectoryObjectConference) Get_Description() (foundation.BSTR, error) {
+	var _ppDescription foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDescription)))
+	return _ppDescription, win32.HRESULTError(int32(r1))
 }
 
 // Put_Description dispatches through ITDirectoryObjectConference's vtable slot 15.
-func (self *ITDirectoryObjectConference) Put_Description(pDescription foundation.BSTR) foundation.HRESULT {
+func (self *ITDirectoryObjectConference) Put_Description(pDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsEncrypted dispatches through ITDirectoryObjectConference's vtable slot 16.
-func (self *ITDirectoryObjectConference) Get_IsEncrypted(pfEncrypted *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfEncrypted)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectoryObjectConference) Get_IsEncrypted() (foundation.VARIANT_BOOL, error) {
+	var _pfEncrypted foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfEncrypted)))
+	return _pfEncrypted, win32.HRESULTError(int32(r1))
 }
 
 // Put_IsEncrypted dispatches through ITDirectoryObjectConference's vtable slot 17.
-func (self *ITDirectoryObjectConference) Put_IsEncrypted(fEncrypted foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITDirectoryObjectConference) Put_IsEncrypted(fEncrypted foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(fEncrypted))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_StartTime dispatches through ITDirectoryObjectConference's vtable slot 18.
-func (self *ITDirectoryObjectConference) Get_StartTime(pDate *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDate)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectoryObjectConference) Get_StartTime() (float64, error) {
+	var _pDate float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDate)))
+	return _pDate, win32.HRESULTError(int32(r1))
 }
 
 // Get_StopTime dispatches through ITDirectoryObjectConference's vtable slot 20.
-func (self *ITDirectoryObjectConference) Get_StopTime(pDate *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDate)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectoryObjectConference) Get_StopTime() (float64, error) {
+	var _pDate float64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDate)))
+	return _pDate, win32.HRESULTError(int32(r1))
 }
 
 // ITDirectoryObjectUser: https://learn.microsoft.com/windows/win32/api/rend/nn-rend-itdirectoryobjectuser
@@ -2949,15 +3112,16 @@ type ITDirectoryObjectUser struct {
 var IID_ITDirectoryObjectUser = win32.GUID{Data1: 0x34621d6f, Data2: 0x6cff, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xf7, 0x00, 0xc0, 0x4f, 0xc3, 0x1f, 0xee}}
 
 // Get_IPPhonePrimary dispatches through ITDirectoryObjectUser's vtable slot 7.
-func (self *ITDirectoryObjectUser) Get_IPPhonePrimary(ppName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+func (self *ITDirectoryObjectUser) Get_IPPhonePrimary() (foundation.BSTR, error) {
+	var _ppName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppName)))
+	return _ppName, win32.HRESULTError(int32(r1))
 }
 
 // Put_IPPhonePrimary dispatches through ITDirectoryObjectUser's vtable slot 8.
-func (self *ITDirectoryObjectUser) Put_IPPhonePrimary(pName foundation.BSTR) foundation.HRESULT {
+func (self *ITDirectoryObjectUser) Put_IPPhonePrimary(pName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITDispatchMapper: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itdispatchmapper
@@ -2970,9 +3134,10 @@ type ITDispatchMapper struct {
 var IID_ITDispatchMapper = win32.GUID{Data1: 0xe9225295, Data2: 0xc759, Data3: 0x11d1, Data4: [8]byte{0xa0, 0x2b, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // QueryDispatchInterface dispatches through ITDispatchMapper's vtable slot 7.
-func (self *ITDispatchMapper) QueryDispatchInterface(pIID foundation.BSTR, pInterfaceToMap *systemcom.IDispatch, ppReturnedInterface **systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIID)), uintptr(unsafe.Pointer(pInterfaceToMap)), uintptr(unsafe.Pointer(ppReturnedInterface)))
-	return foundation.HRESULT(r1)
+func (self *ITDispatchMapper) QueryDispatchInterface(pIID foundation.BSTR, pInterfaceToMap *systemcom.IDispatch) (*systemcom.IDispatch, error) {
+	var _ppReturnedInterface *systemcom.IDispatch
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIID)), uintptr(unsafe.Pointer(pInterfaceToMap)), uintptr(unsafe.Pointer(&_ppReturnedInterface)))
+	return _ppReturnedInterface, win32.HRESULTError(int32(r1))
 }
 
 // ITFileTerminalEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itfileterminalevent
@@ -2985,39 +3150,45 @@ type ITFileTerminalEvent struct {
 var IID_ITFileTerminalEvent = win32.GUID{Data1: 0xe4a7fbac, Data2: 0x8c17, Data3: 0x4427, Data4: [8]byte{0x9f, 0x55, 0x9f, 0x58, 0x9a, 0xc8, 0xaf, 0x00}}
 
 // Get_Terminal dispatches through ITFileTerminalEvent's vtable slot 7.
-func (self *ITFileTerminalEvent) Get_Terminal(ppTerminal **ITTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTerminal)))
-	return foundation.HRESULT(r1)
+func (self *ITFileTerminalEvent) Get_Terminal() (*ITTerminal, error) {
+	var _ppTerminal *ITTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTerminal)))
+	return _ppTerminal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Track dispatches through ITFileTerminalEvent's vtable slot 8.
-func (self *ITFileTerminalEvent) Get_Track(ppTrackTerminal **ITFileTrack) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTrackTerminal)))
-	return foundation.HRESULT(r1)
+func (self *ITFileTerminalEvent) Get_Track() (*ITFileTrack, error) {
+	var _ppTrackTerminal *ITFileTrack
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTrackTerminal)))
+	return _ppTrackTerminal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Call dispatches through ITFileTerminalEvent's vtable slot 9.
-func (self *ITFileTerminalEvent) Get_Call(ppCall **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCall)))
-	return foundation.HRESULT(r1)
+func (self *ITFileTerminalEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCall *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCall)))
+	return _ppCall, win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ITFileTerminalEvent's vtable slot 10.
-func (self *ITFileTerminalEvent) Get_State(pState *TERMINAL_MEDIA_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+func (self *ITFileTerminalEvent) Get_State() (TERMINAL_MEDIA_STATE, error) {
+	var _pState TERMINAL_MEDIA_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pState)))
+	return _pState, win32.HRESULTError(int32(r1))
 }
 
 // Get_Cause dispatches through ITFileTerminalEvent's vtable slot 11.
-func (self *ITFileTerminalEvent) Get_Cause(pCause *FT_STATE_EVENT_CAUSE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCause)))
-	return foundation.HRESULT(r1)
+func (self *ITFileTerminalEvent) Get_Cause() (FT_STATE_EVENT_CAUSE, error) {
+	var _pCause FT_STATE_EVENT_CAUSE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCause)))
+	return _pCause, win32.HRESULTError(int32(r1))
 }
 
 // Get_Error dispatches through ITFileTerminalEvent's vtable slot 12.
-func (self *ITFileTerminalEvent) Get_Error(phrErrorCode *foundation.HRESULT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrErrorCode)))
-	return foundation.HRESULT(r1)
+func (self *ITFileTerminalEvent) Get_Error() (foundation.HRESULT, error) {
+	var _phrErrorCode foundation.HRESULT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phrErrorCode)))
+	return _phrErrorCode, win32.HRESULTError(int32(r1))
 }
 
 // ITFileTrack: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itfiletrack
@@ -3030,39 +3201,43 @@ type ITFileTrack struct {
 var IID_ITFileTrack = win32.GUID{Data1: 0x31ca6ea9, Data2: 0xc08a, Data3: 0x4bea, Data4: [8]byte{0x88, 0x11, 0x8e, 0x9c, 0x1b, 0xa3, 0xea, 0x3a}}
 
 // Get_Format dispatches through ITFileTrack's vtable slot 7.
-func (self *ITFileTrack) Get_Format(ppmt **mediamediafoundation.AM_MEDIA_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppmt)))
-	return foundation.HRESULT(r1)
+func (self *ITFileTrack) Get_Format() (*mediamediafoundation.AM_MEDIA_TYPE, error) {
+	var _ppmt *mediamediafoundation.AM_MEDIA_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppmt)))
+	return _ppmt, win32.HRESULTError(int32(r1))
 }
 
 // Put_Format dispatches through ITFileTrack's vtable slot 8.
-func (self *ITFileTrack) Put_Format(pmt *mediamediafoundation.AM_MEDIA_TYPE) foundation.HRESULT {
+func (self *ITFileTrack) Put_Format(pmt *mediamediafoundation.AM_MEDIA_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ControllingTerminal dispatches through ITFileTrack's vtable slot 9.
-func (self *ITFileTrack) Get_ControllingTerminal(ppControllingTerminal **ITTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppControllingTerminal)))
-	return foundation.HRESULT(r1)
+func (self *ITFileTrack) Get_ControllingTerminal() (*ITTerminal, error) {
+	var _ppControllingTerminal *ITTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppControllingTerminal)))
+	return _ppControllingTerminal, win32.HRESULTError(int32(r1))
 }
 
 // Get_AudioFormatForScripting dispatches through ITFileTrack's vtable slot 10.
-func (self *ITFileTrack) Get_AudioFormatForScripting(ppAudioFormat **ITScriptableAudioFormat) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAudioFormat)))
-	return foundation.HRESULT(r1)
+func (self *ITFileTrack) Get_AudioFormatForScripting() (*ITScriptableAudioFormat, error) {
+	var _ppAudioFormat *ITScriptableAudioFormat
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAudioFormat)))
+	return _ppAudioFormat, win32.HRESULTError(int32(r1))
 }
 
 // Put_AudioFormatForScripting dispatches through ITFileTrack's vtable slot 11.
-func (self *ITFileTrack) Put_AudioFormatForScripting(pAudioFormat *ITScriptableAudioFormat) foundation.HRESULT {
+func (self *ITFileTrack) Put_AudioFormatForScripting(pAudioFormat *ITScriptableAudioFormat) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAudioFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EmptyAudioFormatForScripting dispatches through ITFileTrack's vtable slot 12.
-func (self *ITFileTrack) Get_EmptyAudioFormatForScripting(ppAudioFormat **ITScriptableAudioFormat) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAudioFormat)))
-	return foundation.HRESULT(r1)
+func (self *ITFileTrack) Get_EmptyAudioFormatForScripting() (*ITScriptableAudioFormat, error) {
+	var _ppAudioFormat *ITScriptableAudioFormat
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAudioFormat)))
+	return _ppAudioFormat, win32.HRESULTError(int32(r1))
 }
 
 // ITForwardInformation: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itforwardinformation
@@ -3075,45 +3250,48 @@ type ITForwardInformation struct {
 var IID_ITForwardInformation = win32.GUID{Data1: 0x449f659e, Data2: 0x88a3, Data3: 0x11d1, Data4: [8]byte{0xbb, 0x5d, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Put_NumRingsNoAnswer dispatches through ITForwardInformation's vtable slot 7.
-func (self *ITForwardInformation) Put_NumRingsNoAnswer(lNumRings int32) foundation.HRESULT {
+func (self *ITForwardInformation) Put_NumRingsNoAnswer(lNumRings int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lNumRings))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NumRingsNoAnswer dispatches through ITForwardInformation's vtable slot 8.
-func (self *ITForwardInformation) Get_NumRingsNoAnswer(plNumRings *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plNumRings)))
-	return foundation.HRESULT(r1)
+func (self *ITForwardInformation) Get_NumRingsNoAnswer() (int32, error) {
+	var _plNumRings int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plNumRings)))
+	return _plNumRings, win32.HRESULTError(int32(r1))
 }
 
 // SetForwardType dispatches through ITForwardInformation's vtable slot 9.
-func (self *ITForwardInformation) SetForwardType(ForwardType int32, pDestAddress foundation.BSTR, pCallerAddress foundation.BSTR) foundation.HRESULT {
+func (self *ITForwardInformation) SetForwardType(ForwardType int32, pDestAddress foundation.BSTR, pCallerAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ForwardType), uintptr(unsafe.Pointer(pDestAddress)), uintptr(unsafe.Pointer(pCallerAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ForwardTypeDestination dispatches through ITForwardInformation's vtable slot 10.
-func (self *ITForwardInformation) Get_ForwardTypeDestination(ForwardType int32, ppDestAddress *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ForwardType), uintptr(unsafe.Pointer(ppDestAddress)))
-	return foundation.HRESULT(r1)
+func (self *ITForwardInformation) Get_ForwardTypeDestination(ForwardType int32) (foundation.BSTR, error) {
+	var _ppDestAddress foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ForwardType), uintptr(unsafe.Pointer(&_ppDestAddress)))
+	return _ppDestAddress, win32.HRESULTError(int32(r1))
 }
 
 // Get_ForwardTypeCaller dispatches through ITForwardInformation's vtable slot 11.
-func (self *ITForwardInformation) Get_ForwardTypeCaller(Forwardtype int32, ppCallerAddress *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Forwardtype), uintptr(unsafe.Pointer(ppCallerAddress)))
-	return foundation.HRESULT(r1)
+func (self *ITForwardInformation) Get_ForwardTypeCaller(Forwardtype int32) (foundation.BSTR, error) {
+	var _ppCallerAddress foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Forwardtype), uintptr(unsafe.Pointer(&_ppCallerAddress)))
+	return _ppCallerAddress, win32.HRESULTError(int32(r1))
 }
 
 // GetForwardType dispatches through ITForwardInformation's vtable slot 12.
-func (self *ITForwardInformation) GetForwardType(ForwardType int32, ppDestinationAddress *foundation.BSTR, ppCallerAddress *foundation.BSTR) foundation.HRESULT {
+func (self *ITForwardInformation) GetForwardType(ForwardType int32, ppDestinationAddress *foundation.BSTR, ppCallerAddress *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ForwardType), uintptr(unsafe.Pointer(ppDestinationAddress)), uintptr(unsafe.Pointer(ppCallerAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through ITForwardInformation's vtable slot 13.
-func (self *ITForwardInformation) Clear() foundation.HRESULT {
+func (self *ITForwardInformation) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITForwardInformation2: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itforwardinformation2
@@ -3126,27 +3304,29 @@ type ITForwardInformation2 struct {
 var IID_ITForwardInformation2 = win32.GUID{Data1: 0x5229b4ed, Data2: 0xb260, Data3: 0x4382, Data4: [8]byte{0x8e, 0x1a, 0x5d, 0xf3, 0xa8, 0xa4, 0xcc, 0xc0}}
 
 // SetForwardType2 dispatches through ITForwardInformation2's vtable slot 14.
-func (self *ITForwardInformation2) SetForwardType2(ForwardType int32, pDestAddress foundation.BSTR, DestAddressType int32, pCallerAddress foundation.BSTR, CallerAddressType int32) foundation.HRESULT {
+func (self *ITForwardInformation2) SetForwardType2(ForwardType int32, pDestAddress foundation.BSTR, DestAddressType int32, pCallerAddress foundation.BSTR, CallerAddressType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ForwardType), uintptr(unsafe.Pointer(pDestAddress)), uintptr(DestAddressType), uintptr(unsafe.Pointer(pCallerAddress)), uintptr(CallerAddressType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetForwardType2 dispatches through ITForwardInformation2's vtable slot 15.
-func (self *ITForwardInformation2) GetForwardType2(ForwardType int32, ppDestinationAddress *foundation.BSTR, pDestAddressType *int32, ppCallerAddress *foundation.BSTR, pCallerAddressType *int32) foundation.HRESULT {
+func (self *ITForwardInformation2) GetForwardType2(ForwardType int32, ppDestinationAddress *foundation.BSTR, pDestAddressType *int32, ppCallerAddress *foundation.BSTR, pCallerAddressType *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(ForwardType), uintptr(unsafe.Pointer(ppDestinationAddress)), uintptr(unsafe.Pointer(pDestAddressType)), uintptr(unsafe.Pointer(ppCallerAddress)), uintptr(unsafe.Pointer(pCallerAddressType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ForwardTypeDestinationAddressType dispatches through ITForwardInformation2's vtable slot 16.
-func (self *ITForwardInformation2) Get_ForwardTypeDestinationAddressType(ForwardType int32, pDestAddressType *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(ForwardType), uintptr(unsafe.Pointer(pDestAddressType)))
-	return foundation.HRESULT(r1)
+func (self *ITForwardInformation2) Get_ForwardTypeDestinationAddressType(ForwardType int32) (int32, error) {
+	var _pDestAddressType int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(ForwardType), uintptr(unsafe.Pointer(&_pDestAddressType)))
+	return _pDestAddressType, win32.HRESULTError(int32(r1))
 }
 
 // Get_ForwardTypeCallerAddressType dispatches through ITForwardInformation2's vtable slot 17.
-func (self *ITForwardInformation2) Get_ForwardTypeCallerAddressType(Forwardtype int32, pCallerAddressType *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Forwardtype), uintptr(unsafe.Pointer(pCallerAddressType)))
-	return foundation.HRESULT(r1)
+func (self *ITForwardInformation2) Get_ForwardTypeCallerAddressType(Forwardtype int32) (int32, error) {
+	var _pCallerAddressType int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Forwardtype), uintptr(unsafe.Pointer(&_pCallerAddressType)))
+	return _pCallerAddressType, win32.HRESULTError(int32(r1))
 }
 
 // ITILSConfig: https://learn.microsoft.com/windows/win32/api/rend/nn-rend-itilsconfig
@@ -3159,15 +3339,16 @@ type ITILSConfig struct {
 var IID_ITILSConfig = win32.GUID{Data1: 0x34621d72, Data2: 0x6cff, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xf7, 0x00, 0xc0, 0x4f, 0xc3, 0x1f, 0xee}}
 
 // Get_Port dispatches through ITILSConfig's vtable slot 7.
-func (self *ITILSConfig) Get_Port(pPort *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPort)))
-	return foundation.HRESULT(r1)
+func (self *ITILSConfig) Get_Port() (int32, error) {
+	var _pPort int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pPort)))
+	return _pPort, win32.HRESULTError(int32(r1))
 }
 
 // Put_Port dispatches through ITILSConfig's vtable slot 8.
-func (self *ITILSConfig) Put_Port(Port int32) foundation.HRESULT {
+func (self *ITILSConfig) Put_Port(Port int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Port))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITLegacyAddressMediaControl: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itlegacyaddressmediacontrol
@@ -3180,21 +3361,21 @@ type ITLegacyAddressMediaControl struct {
 var IID_ITLegacyAddressMediaControl = win32.GUID{Data1: 0xab493640, Data2: 0x4c0b, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x46, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // GetID dispatches through ITLegacyAddressMediaControl's vtable slot 3.
-func (self *ITLegacyAddressMediaControl) GetID(pDeviceClass foundation.BSTR, pdwSize *uint32, ppDeviceID **byte) foundation.HRESULT {
+func (self *ITLegacyAddressMediaControl) GetID(pDeviceClass foundation.BSTR, pdwSize *uint32, ppDeviceID **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDeviceClass)), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(ppDeviceID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDevConfig dispatches through ITLegacyAddressMediaControl's vtable slot 4.
-func (self *ITLegacyAddressMediaControl) GetDevConfig(pDeviceClass foundation.BSTR, pdwSize *uint32, ppDeviceConfig **byte) foundation.HRESULT {
+func (self *ITLegacyAddressMediaControl) GetDevConfig(pDeviceClass foundation.BSTR, pdwSize *uint32, ppDeviceConfig **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDeviceClass)), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(ppDeviceConfig)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDevConfig dispatches through ITLegacyAddressMediaControl's vtable slot 5.
-func (self *ITLegacyAddressMediaControl) SetDevConfig(pDeviceClass foundation.BSTR, dwSize uint32, pDeviceConfig *byte) foundation.HRESULT {
+func (self *ITLegacyAddressMediaControl) SetDevConfig(pDeviceClass foundation.BSTR, dwSize uint32, pDeviceConfig *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDeviceClass)), uintptr(dwSize), uintptr(unsafe.Pointer(pDeviceConfig)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITLegacyAddressMediaControl2: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itlegacyaddressmediacontrol2
@@ -3207,15 +3388,15 @@ type ITLegacyAddressMediaControl2 struct {
 var IID_ITLegacyAddressMediaControl2 = win32.GUID{Data1: 0xb0ee512b, Data2: 0xa531, Data3: 0x409e, Data4: [8]byte{0x9d, 0xd9, 0x40, 0x99, 0xfe, 0x86, 0xc7, 0x38}}
 
 // ConfigDialog dispatches through ITLegacyAddressMediaControl2's vtable slot 6.
-func (self *ITLegacyAddressMediaControl2) ConfigDialog(hwndOwner foundation.HWND, pDeviceClass foundation.BSTR) foundation.HRESULT {
+func (self *ITLegacyAddressMediaControl2) ConfigDialog(hwndOwner foundation.HWND, pDeviceClass foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwndOwner), uintptr(unsafe.Pointer(pDeviceClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConfigDialogEdit dispatches through ITLegacyAddressMediaControl2's vtable slot 7.
-func (self *ITLegacyAddressMediaControl2) ConfigDialogEdit(hwndOwner foundation.HWND, pDeviceClass foundation.BSTR, dwSizeIn uint32, pDeviceConfigIn *byte, pdwSizeOut *uint32, ppDeviceConfigOut **byte) foundation.HRESULT {
+func (self *ITLegacyAddressMediaControl2) ConfigDialogEdit(hwndOwner foundation.HWND, pDeviceClass foundation.BSTR, dwSizeIn uint32, pDeviceConfigIn *byte, pdwSizeOut *uint32, ppDeviceConfigOut **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hwndOwner), uintptr(unsafe.Pointer(pDeviceClass)), uintptr(dwSizeIn), uintptr(unsafe.Pointer(pDeviceConfigIn)), uintptr(unsafe.Pointer(pdwSizeOut)), uintptr(unsafe.Pointer(ppDeviceConfigOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITLegacyCallMediaControl: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itlegacycallmediacontrol
@@ -3228,33 +3409,33 @@ type ITLegacyCallMediaControl struct {
 var IID_ITLegacyCallMediaControl = win32.GUID{Data1: 0xd624582f, Data2: 0xcc23, Data3: 0x4436, Data4: [8]byte{0xb8, 0xa5, 0x47, 0xc6, 0x25, 0xc8, 0x04, 0x5d}}
 
 // DetectDigits dispatches through ITLegacyCallMediaControl's vtable slot 7.
-func (self *ITLegacyCallMediaControl) DetectDigits(DigitMode int32) foundation.HRESULT {
+func (self *ITLegacyCallMediaControl) DetectDigits(DigitMode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(DigitMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GenerateDigits dispatches through ITLegacyCallMediaControl's vtable slot 8.
-func (self *ITLegacyCallMediaControl) GenerateDigits(pDigits foundation.BSTR, DigitMode int32) foundation.HRESULT {
+func (self *ITLegacyCallMediaControl) GenerateDigits(pDigits foundation.BSTR, DigitMode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDigits)), uintptr(DigitMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetID dispatches through ITLegacyCallMediaControl's vtable slot 9.
-func (self *ITLegacyCallMediaControl) GetID(pDeviceClass foundation.BSTR, pdwSize *uint32, ppDeviceID **byte) foundation.HRESULT {
+func (self *ITLegacyCallMediaControl) GetID(pDeviceClass foundation.BSTR, pdwSize *uint32, ppDeviceID **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDeviceClass)), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(ppDeviceID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMediaType dispatches through ITLegacyCallMediaControl's vtable slot 10.
-func (self *ITLegacyCallMediaControl) SetMediaType(lMediaType int32) foundation.HRESULT {
+func (self *ITLegacyCallMediaControl) SetMediaType(lMediaType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lMediaType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MonitorMedia dispatches through ITLegacyCallMediaControl's vtable slot 11.
-func (self *ITLegacyCallMediaControl) MonitorMedia(lMediaType int32) foundation.HRESULT {
+func (self *ITLegacyCallMediaControl) MonitorMedia(lMediaType int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lMediaType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITLegacyCallMediaControl2: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itlegacycallmediacontrol2
@@ -3267,63 +3448,66 @@ type ITLegacyCallMediaControl2 struct {
 var IID_ITLegacyCallMediaControl2 = win32.GUID{Data1: 0x57ca332d, Data2: 0x7bc2, Data3: 0x44f1, Data4: [8]byte{0xa6, 0x0c, 0x93, 0x6f, 0xe8, 0xd7, 0xce, 0x73}}
 
 // GenerateDigits2 dispatches through ITLegacyCallMediaControl2's vtable slot 12.
-func (self *ITLegacyCallMediaControl2) GenerateDigits2(pDigits foundation.BSTR, DigitMode int32, lDuration int32) foundation.HRESULT {
+func (self *ITLegacyCallMediaControl2) GenerateDigits2(pDigits foundation.BSTR, DigitMode int32, lDuration int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDigits)), uintptr(DigitMode), uintptr(lDuration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GatherDigits dispatches through ITLegacyCallMediaControl2's vtable slot 13.
-func (self *ITLegacyCallMediaControl2) GatherDigits(DigitMode int32, lNumDigits int32, pTerminationDigits foundation.BSTR, lFirstDigitTimeout int32, lInterDigitTimeout int32) foundation.HRESULT {
+func (self *ITLegacyCallMediaControl2) GatherDigits(DigitMode int32, lNumDigits int32, pTerminationDigits foundation.BSTR, lFirstDigitTimeout int32, lInterDigitTimeout int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(DigitMode), uintptr(lNumDigits), uintptr(unsafe.Pointer(pTerminationDigits)), uintptr(lFirstDigitTimeout), uintptr(lInterDigitTimeout))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DetectTones dispatches through ITLegacyCallMediaControl2's vtable slot 14.
-func (self *ITLegacyCallMediaControl2) DetectTones(pToneList *TAPI_DETECTTONE, lNumTones int32) foundation.HRESULT {
+func (self *ITLegacyCallMediaControl2) DetectTones(pToneList *TAPI_DETECTTONE, lNumTones int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pToneList)), uintptr(lNumTones))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DetectTonesByCollection dispatches through ITLegacyCallMediaControl2's vtable slot 15.
-func (self *ITLegacyCallMediaControl2) DetectTonesByCollection(pDetectToneCollection *ITCollection2) foundation.HRESULT {
+func (self *ITLegacyCallMediaControl2) DetectTonesByCollection(pDetectToneCollection *ITCollection2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDetectToneCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GenerateTone dispatches through ITLegacyCallMediaControl2's vtable slot 16.
-func (self *ITLegacyCallMediaControl2) GenerateTone(ToneMode TAPI_TONEMODE, lDuration int32) foundation.HRESULT {
+func (self *ITLegacyCallMediaControl2) GenerateTone(ToneMode TAPI_TONEMODE, lDuration int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(ToneMode), uintptr(lDuration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GenerateCustomTones dispatches through ITLegacyCallMediaControl2's vtable slot 17.
-func (self *ITLegacyCallMediaControl2) GenerateCustomTones(pToneList *TAPI_CUSTOMTONE, lNumTones int32, lDuration int32) foundation.HRESULT {
+func (self *ITLegacyCallMediaControl2) GenerateCustomTones(pToneList *TAPI_CUSTOMTONE, lNumTones int32, lDuration int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pToneList)), uintptr(lNumTones), uintptr(lDuration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GenerateCustomTonesByCollection dispatches through ITLegacyCallMediaControl2's vtable slot 18.
-func (self *ITLegacyCallMediaControl2) GenerateCustomTonesByCollection(pCustomToneCollection *ITCollection2, lDuration int32) foundation.HRESULT {
+func (self *ITLegacyCallMediaControl2) GenerateCustomTonesByCollection(pCustomToneCollection *ITCollection2, lDuration int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCustomToneCollection)), uintptr(lDuration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDetectToneObject dispatches through ITLegacyCallMediaControl2's vtable slot 19.
-func (self *ITLegacyCallMediaControl2) CreateDetectToneObject(ppDetectTone **ITDetectTone) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDetectTone)))
-	return foundation.HRESULT(r1)
+func (self *ITLegacyCallMediaControl2) CreateDetectToneObject() (*ITDetectTone, error) {
+	var _ppDetectTone *ITDetectTone
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDetectTone)))
+	return _ppDetectTone, win32.HRESULTError(int32(r1))
 }
 
 // CreateCustomToneObject dispatches through ITLegacyCallMediaControl2's vtable slot 20.
-func (self *ITLegacyCallMediaControl2) CreateCustomToneObject(ppCustomTone **ITCustomTone) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCustomTone)))
-	return foundation.HRESULT(r1)
+func (self *ITLegacyCallMediaControl2) CreateCustomToneObject() (*ITCustomTone, error) {
+	var _ppCustomTone *ITCustomTone
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCustomTone)))
+	return _ppCustomTone, win32.HRESULTError(int32(r1))
 }
 
 // GetIDAsVariant dispatches through ITLegacyCallMediaControl2's vtable slot 21.
-func (self *ITLegacyCallMediaControl2) GetIDAsVariant(bstrDeviceClass foundation.BSTR, pVarDeviceID *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDeviceClass)), uintptr(unsafe.Pointer(pVarDeviceID)))
-	return foundation.HRESULT(r1)
+func (self *ITLegacyCallMediaControl2) GetIDAsVariant(bstrDeviceClass foundation.BSTR) (systemvariant.VARIANT, error) {
+	var _pVarDeviceID systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDeviceClass)), uintptr(unsafe.Pointer(&_pVarDeviceID)))
+	return _pVarDeviceID, win32.HRESULTError(int32(r1))
 }
 
 // ITLegacyWaveSupport: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itlegacywavesupport
@@ -3336,9 +3520,9 @@ type ITLegacyWaveSupport struct {
 var IID_ITLegacyWaveSupport = win32.GUID{Data1: 0x207823ea, Data2: 0xe252, Data3: 0x11d2, Data4: [8]byte{0xb7, 0x7e, 0x00, 0x80, 0xc7, 0x13, 0x53, 0x81}}
 
 // IsFullDuplex dispatches through ITLegacyWaveSupport's vtable slot 7.
-func (self *ITLegacyWaveSupport) IsFullDuplex(pSupport *FULLDUPLEX_SUPPORT) foundation.HRESULT {
+func (self *ITLegacyWaveSupport) IsFullDuplex(pSupport *FULLDUPLEX_SUPPORT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSupport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITLocationInfo: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itlocationinfo
@@ -3351,69 +3535,80 @@ type ITLocationInfo struct {
 var IID_ITLocationInfo = win32.GUID{Data1: 0x0c4d8eff, Data2: 0x8ddb, Data3: 0x11d1, Data4: [8]byte{0xa0, 0x9e, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Get_PermanentLocationID dispatches through ITLocationInfo's vtable slot 7.
-func (self *ITLocationInfo) Get_PermanentLocationID(plLocationID *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plLocationID)))
-	return foundation.HRESULT(r1)
+func (self *ITLocationInfo) Get_PermanentLocationID() (int32, error) {
+	var _plLocationID int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plLocationID)))
+	return _plLocationID, win32.HRESULTError(int32(r1))
 }
 
 // Get_CountryCode dispatches through ITLocationInfo's vtable slot 8.
-func (self *ITLocationInfo) Get_CountryCode(plCountryCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCountryCode)))
-	return foundation.HRESULT(r1)
+func (self *ITLocationInfo) Get_CountryCode() (int32, error) {
+	var _plCountryCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCountryCode)))
+	return _plCountryCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_CountryID dispatches through ITLocationInfo's vtable slot 9.
-func (self *ITLocationInfo) Get_CountryID(plCountryID *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCountryID)))
-	return foundation.HRESULT(r1)
+func (self *ITLocationInfo) Get_CountryID() (int32, error) {
+	var _plCountryID int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCountryID)))
+	return _plCountryID, win32.HRESULTError(int32(r1))
 }
 
 // Get_Options dispatches through ITLocationInfo's vtable slot 10.
-func (self *ITLocationInfo) Get_Options(plOptions *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plOptions)))
-	return foundation.HRESULT(r1)
+func (self *ITLocationInfo) Get_Options() (int32, error) {
+	var _plOptions int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plOptions)))
+	return _plOptions, win32.HRESULTError(int32(r1))
 }
 
 // Get_PreferredCardID dispatches through ITLocationInfo's vtable slot 11.
-func (self *ITLocationInfo) Get_PreferredCardID(plCardID *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCardID)))
-	return foundation.HRESULT(r1)
+func (self *ITLocationInfo) Get_PreferredCardID() (int32, error) {
+	var _plCardID int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCardID)))
+	return _plCardID, win32.HRESULTError(int32(r1))
 }
 
 // Get_LocationName dispatches through ITLocationInfo's vtable slot 12.
-func (self *ITLocationInfo) Get_LocationName(ppLocationName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppLocationName)))
-	return foundation.HRESULT(r1)
+func (self *ITLocationInfo) Get_LocationName() (foundation.BSTR, error) {
+	var _ppLocationName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppLocationName)))
+	return _ppLocationName, win32.HRESULTError(int32(r1))
 }
 
 // Get_CityCode dispatches through ITLocationInfo's vtable slot 13.
-func (self *ITLocationInfo) Get_CityCode(ppCode *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCode)))
-	return foundation.HRESULT(r1)
+func (self *ITLocationInfo) Get_CityCode() (foundation.BSTR, error) {
+	var _ppCode foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCode)))
+	return _ppCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_LocalAccessCode dispatches through ITLocationInfo's vtable slot 14.
-func (self *ITLocationInfo) Get_LocalAccessCode(ppCode *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCode)))
-	return foundation.HRESULT(r1)
+func (self *ITLocationInfo) Get_LocalAccessCode() (foundation.BSTR, error) {
+	var _ppCode foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCode)))
+	return _ppCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_LongDistanceAccessCode dispatches through ITLocationInfo's vtable slot 15.
-func (self *ITLocationInfo) Get_LongDistanceAccessCode(ppCode *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCode)))
-	return foundation.HRESULT(r1)
+func (self *ITLocationInfo) Get_LongDistanceAccessCode() (foundation.BSTR, error) {
+	var _ppCode foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCode)))
+	return _ppCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_TollPrefixList dispatches through ITLocationInfo's vtable slot 16.
-func (self *ITLocationInfo) Get_TollPrefixList(ppTollList *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTollList)))
-	return foundation.HRESULT(r1)
+func (self *ITLocationInfo) Get_TollPrefixList() (foundation.BSTR, error) {
+	var _ppTollList foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTollList)))
+	return _ppTollList, win32.HRESULTError(int32(r1))
 }
 
 // Get_CancelCallWaitingCode dispatches through ITLocationInfo's vtable slot 17.
-func (self *ITLocationInfo) Get_CancelCallWaitingCode(ppCode *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCode)))
-	return foundation.HRESULT(r1)
+func (self *ITLocationInfo) Get_CancelCallWaitingCode() (foundation.BSTR, error) {
+	var _ppCode foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCode)))
+	return _ppCode, win32.HRESULTError(int32(r1))
 }
 
 // ITMSPAddress: https://learn.microsoft.com/windows/win32/api/msp/nn-msp-itmspaddress
@@ -3426,39 +3621,39 @@ type ITMSPAddress struct {
 var IID_ITMSPAddress = win32.GUID{Data1: 0xee3bd600, Data2: 0x3868, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x45, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Initialize dispatches through ITMSPAddress's vtable slot 3.
-func (self *ITMSPAddress) Initialize(hEvent *int32) foundation.HRESULT {
+func (self *ITMSPAddress) Initialize(hEvent *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through ITMSPAddress's vtable slot 4.
-func (self *ITMSPAddress) Shutdown() foundation.HRESULT {
+func (self *ITMSPAddress) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateMSPCall dispatches through ITMSPAddress's vtable slot 5.
-func (self *ITMSPAddress) CreateMSPCall(hCall *int32, dwReserved uint32, dwMediaType uint32, pOuterUnknown *systemcom.IUnknown, ppStreamControl **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITMSPAddress) CreateMSPCall(hCall *int32, dwReserved uint32, dwMediaType uint32, pOuterUnknown *systemcom.IUnknown, ppStreamControl **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hCall)), uintptr(dwReserved), uintptr(dwMediaType), uintptr(unsafe.Pointer(pOuterUnknown)), uintptr(unsafe.Pointer(ppStreamControl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShutdownMSPCall dispatches through ITMSPAddress's vtable slot 6.
-func (self *ITMSPAddress) ShutdownMSPCall(pStreamControl *systemcom.IUnknown) foundation.HRESULT {
+func (self *ITMSPAddress) ShutdownMSPCall(pStreamControl *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStreamControl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReceiveTSPData dispatches through ITMSPAddress's vtable slot 7.
-func (self *ITMSPAddress) ReceiveTSPData(pMSPCall *systemcom.IUnknown, pBuffer *byte, dwSize uint32) foundation.HRESULT {
+func (self *ITMSPAddress) ReceiveTSPData(pMSPCall *systemcom.IUnknown, pBuffer *byte, dwSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMSPCall)), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEvent dispatches through ITMSPAddress's vtable slot 8.
-func (self *ITMSPAddress) GetEvent(pdwSize *uint32, pEventBuffer *byte) foundation.HRESULT {
+func (self *ITMSPAddress) GetEvent(pdwSize *uint32, pEventBuffer *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(pEventBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITMediaControl: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itmediacontrol
@@ -3471,27 +3666,28 @@ type ITMediaControl struct {
 var IID_ITMediaControl = win32.GUID{Data1: 0xc445dde8, Data2: 0x5199, Data3: 0x4bc7, Data4: [8]byte{0x98, 0x07, 0x5f, 0xfb, 0x92, 0xe4, 0x2e, 0x09}}
 
 // Start dispatches through ITMediaControl's vtable slot 7.
-func (self *ITMediaControl) Start() foundation.HRESULT {
+func (self *ITMediaControl) Start() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through ITMediaControl's vtable slot 8.
-func (self *ITMediaControl) Stop() foundation.HRESULT {
+func (self *ITMediaControl) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through ITMediaControl's vtable slot 9.
-func (self *ITMediaControl) Pause() foundation.HRESULT {
+func (self *ITMediaControl) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MediaState dispatches through ITMediaControl's vtable slot 10.
-func (self *ITMediaControl) Get_MediaState(pTerminalMediaState *TERMINAL_MEDIA_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminalMediaState)))
-	return foundation.HRESULT(r1)
+func (self *ITMediaControl) Get_MediaState() (TERMINAL_MEDIA_STATE, error) {
+	var _pTerminalMediaState TERMINAL_MEDIA_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTerminalMediaState)))
+	return _pTerminalMediaState, win32.HRESULTError(int32(r1))
 }
 
 // ITMediaPlayback: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itmediaplayback
@@ -3504,9 +3700,10 @@ type ITMediaPlayback struct {
 var IID_ITMediaPlayback = win32.GUID{Data1: 0x627e8ae6, Data2: 0xae4c, Data3: 0x4a69, Data4: [8]byte{0xbb, 0x63, 0x2a, 0xd6, 0x25, 0x40, 0x4b, 0x77}}
 
 // Get_PlayList dispatches through ITMediaPlayback's vtable slot 8.
-func (self *ITMediaPlayback) Get_PlayList(pPlayListVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPlayListVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITMediaPlayback) Get_PlayList() (systemvariant.VARIANT, error) {
+	var _pPlayListVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pPlayListVariant)))
+	return _pPlayListVariant, win32.HRESULTError(int32(r1))
 }
 
 // ITMediaRecord: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itmediarecord
@@ -3519,15 +3716,16 @@ type ITMediaRecord struct {
 var IID_ITMediaRecord = win32.GUID{Data1: 0xf5dd4592, Data2: 0x5476, Data3: 0x4cc1, Data4: [8]byte{0x9d, 0x4d, 0xfa, 0xd3, 0xee, 0xfe, 0x7d, 0xb2}}
 
 // Put_FileName dispatches through ITMediaRecord's vtable slot 7.
-func (self *ITMediaRecord) Put_FileName(bstrFileName foundation.BSTR) foundation.HRESULT {
+func (self *ITMediaRecord) Put_FileName(bstrFileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrFileName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FileName dispatches through ITMediaRecord's vtable slot 8.
-func (self *ITMediaRecord) Get_FileName(pbstrFileName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFileName)))
-	return foundation.HRESULT(r1)
+func (self *ITMediaRecord) Get_FileName() (foundation.BSTR, error) {
+	var _pbstrFileName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrFileName)))
+	return _pbstrFileName, win32.HRESULTError(int32(r1))
 }
 
 // ITMediaSupport: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itmediasupport
@@ -3540,15 +3738,17 @@ type ITMediaSupport struct {
 var IID_ITMediaSupport = win32.GUID{Data1: 0xb1efc384, Data2: 0x9355, Data3: 0x11d0, Data4: [8]byte{0x83, 0x5c, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Get_MediaTypes dispatches through ITMediaSupport's vtable slot 7.
-func (self *ITMediaSupport) Get_MediaTypes(plMediaTypes *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMediaTypes)))
-	return foundation.HRESULT(r1)
+func (self *ITMediaSupport) Get_MediaTypes() (int32, error) {
+	var _plMediaTypes int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaTypes)))
+	return _plMediaTypes, win32.HRESULTError(int32(r1))
 }
 
 // QueryMediaType dispatches through ITMediaSupport's vtable slot 8.
-func (self *ITMediaSupport) QueryMediaType(lMediaType int32, pfSupport *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lMediaType), uintptr(unsafe.Pointer(pfSupport)))
-	return foundation.HRESULT(r1)
+func (self *ITMediaSupport) QueryMediaType(lMediaType int32) (foundation.VARIANT_BOOL, error) {
+	var _pfSupport foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lMediaType), uintptr(unsafe.Pointer(&_pfSupport)))
+	return _pfSupport, win32.HRESULTError(int32(r1))
 }
 
 // ITMultiTrackTerminal: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itmultitrackterminal
@@ -3561,39 +3761,44 @@ type ITMultiTrackTerminal struct {
 var IID_ITMultiTrackTerminal = win32.GUID{Data1: 0xfe040091, Data2: 0xade8, Data3: 0x4072, Data4: [8]byte{0x95, 0xc9, 0xbf, 0x7d, 0xe8, 0xc5, 0x4b, 0x44}}
 
 // Get_TrackTerminals dispatches through ITMultiTrackTerminal's vtable slot 7.
-func (self *ITMultiTrackTerminal) Get_TrackTerminals(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITMultiTrackTerminal) Get_TrackTerminals() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateTrackTerminals dispatches through ITMultiTrackTerminal's vtable slot 8.
-func (self *ITMultiTrackTerminal) EnumerateTrackTerminals(ppEnumTerminal **IEnumTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumTerminal)))
-	return foundation.HRESULT(r1)
+func (self *ITMultiTrackTerminal) EnumerateTrackTerminals() (*IEnumTerminal, error) {
+	var _ppEnumTerminal *IEnumTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumTerminal)))
+	return _ppEnumTerminal, win32.HRESULTError(int32(r1))
 }
 
 // CreateTrackTerminal dispatches through ITMultiTrackTerminal's vtable slot 9.
-func (self *ITMultiTrackTerminal) CreateTrackTerminal(MediaType int32, TerminalDirection TERMINAL_DIRECTION, ppTerminal **ITTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(MediaType), uintptr(TerminalDirection), uintptr(unsafe.Pointer(ppTerminal)))
-	return foundation.HRESULT(r1)
+func (self *ITMultiTrackTerminal) CreateTrackTerminal(MediaType int32, TerminalDirection TERMINAL_DIRECTION) (*ITTerminal, error) {
+	var _ppTerminal *ITTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(MediaType), uintptr(TerminalDirection), uintptr(unsafe.Pointer(&_ppTerminal)))
+	return _ppTerminal, win32.HRESULTError(int32(r1))
 }
 
 // Get_MediaTypesInUse dispatches through ITMultiTrackTerminal's vtable slot 10.
-func (self *ITMultiTrackTerminal) Get_MediaTypesInUse(plMediaTypesInUse *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMediaTypesInUse)))
-	return foundation.HRESULT(r1)
+func (self *ITMultiTrackTerminal) Get_MediaTypesInUse() (int32, error) {
+	var _plMediaTypesInUse int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaTypesInUse)))
+	return _plMediaTypesInUse, win32.HRESULTError(int32(r1))
 }
 
 // Get_DirectionsInUse dispatches through ITMultiTrackTerminal's vtable slot 11.
-func (self *ITMultiTrackTerminal) Get_DirectionsInUse(plDirectionsInUsed *TERMINAL_DIRECTION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plDirectionsInUsed)))
-	return foundation.HRESULT(r1)
+func (self *ITMultiTrackTerminal) Get_DirectionsInUse() (TERMINAL_DIRECTION, error) {
+	var _plDirectionsInUsed TERMINAL_DIRECTION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plDirectionsInUsed)))
+	return _plDirectionsInUsed, win32.HRESULTError(int32(r1))
 }
 
 // RemoveTrackTerminal dispatches through ITMultiTrackTerminal's vtable slot 12.
-func (self *ITMultiTrackTerminal) RemoveTrackTerminal(pTrackTerminalToRemove *ITTerminal) foundation.HRESULT {
+func (self *ITMultiTrackTerminal) RemoveTrackTerminal(pTrackTerminalToRemove *ITTerminal) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrackTerminalToRemove)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITPhone: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itphone
@@ -3606,195 +3811,215 @@ type ITPhone struct {
 var IID_ITPhone = win32.GUID{Data1: 0x09d48db4, Data2: 0x10cc, Data3: 0x4388, Data4: [8]byte{0x9d, 0xe7, 0xa8, 0x46, 0x56, 0x18, 0x97, 0x5a}}
 
 // Open dispatches through ITPhone's vtable slot 7.
-func (self *ITPhone) Open(Privilege PHONE_PRIVILEGE) foundation.HRESULT {
+func (self *ITPhone) Open(Privilege PHONE_PRIVILEGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Privilege))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through ITPhone's vtable slot 8.
-func (self *ITPhone) Close() foundation.HRESULT {
+func (self *ITPhone) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Addresses dispatches through ITPhone's vtable slot 9.
-func (self *ITPhone) Get_Addresses(pAddresses *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddresses)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_Addresses() (systemvariant.VARIANT, error) {
+	var _pAddresses systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pAddresses)))
+	return _pAddresses, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateAddresses dispatches through ITPhone's vtable slot 10.
-func (self *ITPhone) EnumerateAddresses(ppEnumAddress **IEnumAddress) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumAddress)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) EnumerateAddresses() (*IEnumAddress, error) {
+	var _ppEnumAddress *IEnumAddress
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumAddress)))
+	return _ppEnumAddress, win32.HRESULTError(int32(r1))
 }
 
 // Get_PhoneCapsLong dispatches through ITPhone's vtable slot 11.
-func (self *ITPhone) Get_PhoneCapsLong(pclCap PHONECAPS_LONG, plCapability *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(pclCap), uintptr(unsafe.Pointer(plCapability)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_PhoneCapsLong(pclCap PHONECAPS_LONG) (int32, error) {
+	var _plCapability int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(pclCap), uintptr(unsafe.Pointer(&_plCapability)))
+	return _plCapability, win32.HRESULTError(int32(r1))
 }
 
 // Get_PhoneCapsString dispatches through ITPhone's vtable slot 12.
-func (self *ITPhone) Get_PhoneCapsString(pcsCap PHONECAPS_STRING, ppCapability *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(pcsCap), uintptr(unsafe.Pointer(ppCapability)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_PhoneCapsString(pcsCap PHONECAPS_STRING) (foundation.BSTR, error) {
+	var _ppCapability foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(pcsCap), uintptr(unsafe.Pointer(&_ppCapability)))
+	return _ppCapability, win32.HRESULTError(int32(r1))
 }
 
 // Get_Terminals dispatches through ITPhone's vtable slot 13.
-func (self *ITPhone) Get_Terminals(pAddress *ITAddress, pTerminals *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(pTerminals)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_Terminals(pAddress *ITAddress) (systemvariant.VARIANT, error) {
+	var _pTerminals systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(&_pTerminals)))
+	return _pTerminals, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateTerminals dispatches through ITPhone's vtable slot 14.
-func (self *ITPhone) EnumerateTerminals(pAddress *ITAddress, ppEnumTerminal **IEnumTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(ppEnumTerminal)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) EnumerateTerminals(pAddress *ITAddress) (*IEnumTerminal, error) {
+	var _ppEnumTerminal *IEnumTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddress)), uintptr(unsafe.Pointer(&_ppEnumTerminal)))
+	return _ppEnumTerminal, win32.HRESULTError(int32(r1))
 }
 
 // Get_ButtonMode dispatches through ITPhone's vtable slot 15.
-func (self *ITPhone) Get_ButtonMode(lButtonID int32, pButtonMode *PHONE_BUTTON_MODE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(lButtonID), uintptr(unsafe.Pointer(pButtonMode)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_ButtonMode(lButtonID int32) (PHONE_BUTTON_MODE, error) {
+	var _pButtonMode PHONE_BUTTON_MODE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(lButtonID), uintptr(unsafe.Pointer(&_pButtonMode)))
+	return _pButtonMode, win32.HRESULTError(int32(r1))
 }
 
 // Put_ButtonMode dispatches through ITPhone's vtable slot 16.
-func (self *ITPhone) Put_ButtonMode(lButtonID int32, ButtonMode PHONE_BUTTON_MODE) foundation.HRESULT {
+func (self *ITPhone) Put_ButtonMode(lButtonID int32, ButtonMode PHONE_BUTTON_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lButtonID), uintptr(ButtonMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ButtonFunction dispatches through ITPhone's vtable slot 17.
-func (self *ITPhone) Get_ButtonFunction(lButtonID int32, pButtonFunction *PHONE_BUTTON_FUNCTION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(lButtonID), uintptr(unsafe.Pointer(pButtonFunction)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_ButtonFunction(lButtonID int32) (PHONE_BUTTON_FUNCTION, error) {
+	var _pButtonFunction PHONE_BUTTON_FUNCTION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(lButtonID), uintptr(unsafe.Pointer(&_pButtonFunction)))
+	return _pButtonFunction, win32.HRESULTError(int32(r1))
 }
 
 // Put_ButtonFunction dispatches through ITPhone's vtable slot 18.
-func (self *ITPhone) Put_ButtonFunction(lButtonID int32, ButtonFunction PHONE_BUTTON_FUNCTION) foundation.HRESULT {
+func (self *ITPhone) Put_ButtonFunction(lButtonID int32, ButtonFunction PHONE_BUTTON_FUNCTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lButtonID), uintptr(ButtonFunction))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ButtonText dispatches through ITPhone's vtable slot 19.
-func (self *ITPhone) Get_ButtonText(lButtonID int32, ppButtonText *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(lButtonID), uintptr(unsafe.Pointer(ppButtonText)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_ButtonText(lButtonID int32) (foundation.BSTR, error) {
+	var _ppButtonText foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(lButtonID), uintptr(unsafe.Pointer(&_ppButtonText)))
+	return _ppButtonText, win32.HRESULTError(int32(r1))
 }
 
 // Put_ButtonText dispatches through ITPhone's vtable slot 20.
-func (self *ITPhone) Put_ButtonText(lButtonID int32, bstrButtonText foundation.BSTR) foundation.HRESULT {
+func (self *ITPhone) Put_ButtonText(lButtonID int32, bstrButtonText foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lButtonID), uintptr(unsafe.Pointer(bstrButtonText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ButtonState dispatches through ITPhone's vtable slot 21.
-func (self *ITPhone) Get_ButtonState(lButtonID int32, pButtonState *PHONE_BUTTON_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(lButtonID), uintptr(unsafe.Pointer(pButtonState)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_ButtonState(lButtonID int32) (PHONE_BUTTON_STATE, error) {
+	var _pButtonState PHONE_BUTTON_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(lButtonID), uintptr(unsafe.Pointer(&_pButtonState)))
+	return _pButtonState, win32.HRESULTError(int32(r1))
 }
 
 // Get_HookSwitchState dispatches through ITPhone's vtable slot 22.
-func (self *ITPhone) Get_HookSwitchState(HookSwitchDevice PHONE_HOOK_SWITCH_DEVICE, pHookSwitchState *PHONE_HOOK_SWITCH_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(HookSwitchDevice), uintptr(unsafe.Pointer(pHookSwitchState)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_HookSwitchState(HookSwitchDevice PHONE_HOOK_SWITCH_DEVICE) (PHONE_HOOK_SWITCH_STATE, error) {
+	var _pHookSwitchState PHONE_HOOK_SWITCH_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(HookSwitchDevice), uintptr(unsafe.Pointer(&_pHookSwitchState)))
+	return _pHookSwitchState, win32.HRESULTError(int32(r1))
 }
 
 // Put_HookSwitchState dispatches through ITPhone's vtable slot 23.
-func (self *ITPhone) Put_HookSwitchState(HookSwitchDevice PHONE_HOOK_SWITCH_DEVICE, HookSwitchState PHONE_HOOK_SWITCH_STATE) foundation.HRESULT {
+func (self *ITPhone) Put_HookSwitchState(HookSwitchDevice PHONE_HOOK_SWITCH_DEVICE, HookSwitchState PHONE_HOOK_SWITCH_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(HookSwitchDevice), uintptr(HookSwitchState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_RingMode dispatches through ITPhone's vtable slot 24.
-func (self *ITPhone) Put_RingMode(lRingMode int32) foundation.HRESULT {
+func (self *ITPhone) Put_RingMode(lRingMode int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(lRingMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RingMode dispatches through ITPhone's vtable slot 25.
-func (self *ITPhone) Get_RingMode(plRingMode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRingMode)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_RingMode() (int32, error) {
+	var _plRingMode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plRingMode)))
+	return _plRingMode, win32.HRESULTError(int32(r1))
 }
 
 // Put_RingVolume dispatches through ITPhone's vtable slot 26.
-func (self *ITPhone) Put_RingVolume(lRingVolume int32) foundation.HRESULT {
+func (self *ITPhone) Put_RingVolume(lRingVolume int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(lRingVolume))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RingVolume dispatches through ITPhone's vtable slot 27.
-func (self *ITPhone) Get_RingVolume(plRingVolume *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRingVolume)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_RingVolume() (int32, error) {
+	var _plRingVolume int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plRingVolume)))
+	return _plRingVolume, win32.HRESULTError(int32(r1))
 }
 
 // Get_Privilege dispatches through ITPhone's vtable slot 28.
-func (self *ITPhone) Get_Privilege(pPrivilege *PHONE_PRIVILEGE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPrivilege)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_Privilege() (PHONE_PRIVILEGE, error) {
+	var _pPrivilege PHONE_PRIVILEGE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pPrivilege)))
+	return _pPrivilege, win32.HRESULTError(int32(r1))
 }
 
 // GetPhoneCapsBuffer dispatches through ITPhone's vtable slot 29.
-func (self *ITPhone) GetPhoneCapsBuffer(pcbCaps PHONECAPS_BUFFER, pdwSize *uint32, ppPhoneCapsBuffer **byte) foundation.HRESULT {
+func (self *ITPhone) GetPhoneCapsBuffer(pcbCaps PHONECAPS_BUFFER, pdwSize *uint32, ppPhoneCapsBuffer **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(pcbCaps), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(ppPhoneCapsBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PhoneCapsBuffer dispatches through ITPhone's vtable slot 30.
-func (self *ITPhone) Get_PhoneCapsBuffer(pcbCaps PHONECAPS_BUFFER, pVarBuffer *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(pcbCaps), uintptr(unsafe.Pointer(pVarBuffer)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_PhoneCapsBuffer(pcbCaps PHONECAPS_BUFFER) (systemvariant.VARIANT, error) {
+	var _pVarBuffer systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(pcbCaps), uintptr(unsafe.Pointer(&_pVarBuffer)))
+	return _pVarBuffer, win32.HRESULTError(int32(r1))
 }
 
 // Get_LampMode dispatches through ITPhone's vtable slot 31.
-func (self *ITPhone) Get_LampMode(lLampID int32, pLampMode *PHONE_LAMP_MODE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(lLampID), uintptr(unsafe.Pointer(pLampMode)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_LampMode(lLampID int32) (PHONE_LAMP_MODE, error) {
+	var _pLampMode PHONE_LAMP_MODE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(lLampID), uintptr(unsafe.Pointer(&_pLampMode)))
+	return _pLampMode, win32.HRESULTError(int32(r1))
 }
 
 // Put_LampMode dispatches through ITPhone's vtable slot 32.
-func (self *ITPhone) Put_LampMode(lLampID int32, LampMode PHONE_LAMP_MODE) foundation.HRESULT {
+func (self *ITPhone) Put_LampMode(lLampID int32, LampMode PHONE_LAMP_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(lLampID), uintptr(LampMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Display dispatches through ITPhone's vtable slot 33.
-func (self *ITPhone) Get_Display(pbstrDisplay *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDisplay)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_Display() (foundation.BSTR, error) {
+	var _pbstrDisplay foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDisplay)))
+	return _pbstrDisplay, win32.HRESULTError(int32(r1))
 }
 
 // SetDisplay dispatches through ITPhone's vtable slot 34.
-func (self *ITPhone) SetDisplay(lRow int32, lColumn int32, bstrDisplay foundation.BSTR) foundation.HRESULT {
+func (self *ITPhone) SetDisplay(lRow int32, lColumn int32, bstrDisplay foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(lRow), uintptr(lColumn), uintptr(unsafe.Pointer(bstrDisplay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PreferredAddresses dispatches through ITPhone's vtable slot 35.
-func (self *ITPhone) Get_PreferredAddresses(pAddresses *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddresses)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) Get_PreferredAddresses() (systemvariant.VARIANT, error) {
+	var _pAddresses systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pAddresses)))
+	return _pAddresses, win32.HRESULTError(int32(r1))
 }
 
 // EnumeratePreferredAddresses dispatches through ITPhone's vtable slot 36.
-func (self *ITPhone) EnumeratePreferredAddresses(ppEnumAddress **IEnumAddress) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumAddress)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) EnumeratePreferredAddresses() (*IEnumAddress, error) {
+	var _ppEnumAddress *IEnumAddress
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumAddress)))
+	return _ppEnumAddress, win32.HRESULTError(int32(r1))
 }
 
 // DeviceSpecific dispatches through ITPhone's vtable slot 37.
-func (self *ITPhone) DeviceSpecific(pParams *byte, dwSize uint32) foundation.HRESULT {
+func (self *ITPhone) DeviceSpecific(pParams *byte, dwSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParams)), uintptr(dwSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NegotiateExtVersion dispatches through ITPhone's vtable slot 39.
-func (self *ITPhone) NegotiateExtVersion(lLowVersion int32, lHighVersion int32, plExtVersion *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(lLowVersion), uintptr(lHighVersion), uintptr(unsafe.Pointer(plExtVersion)))
-	return foundation.HRESULT(r1)
+func (self *ITPhone) NegotiateExtVersion(lLowVersion int32, lHighVersion int32) (int32, error) {
+	var _plExtVersion int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(lLowVersion), uintptr(lHighVersion), uintptr(unsafe.Pointer(&_plExtVersion)))
+	return _plExtVersion, win32.HRESULTError(int32(r1))
 }
 
 // ITPhoneDeviceSpecificEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itphonedevicespecificevent
@@ -3807,27 +4032,31 @@ type ITPhoneDeviceSpecificEvent struct {
 var IID_ITPhoneDeviceSpecificEvent = win32.GUID{Data1: 0x63ffb2a6, Data2: 0x872b, Data3: 0x4cd3, Data4: [8]byte{0xa5, 0x01, 0x32, 0x6e, 0x8f, 0xb4, 0x0a, 0xf7}}
 
 // Get_Phone dispatches through ITPhoneDeviceSpecificEvent's vtable slot 7.
-func (self *ITPhoneDeviceSpecificEvent) Get_Phone(ppPhone **ITPhone) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPhone)))
-	return foundation.HRESULT(r1)
+func (self *ITPhoneDeviceSpecificEvent) Get_Phone() (*ITPhone, error) {
+	var _ppPhone *ITPhone
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPhone)))
+	return _ppPhone, win32.HRESULTError(int32(r1))
 }
 
 // Get_lParam1 dispatches through ITPhoneDeviceSpecificEvent's vtable slot 8.
-func (self *ITPhoneDeviceSpecificEvent) Get_lParam1(pParam1 *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParam1)))
-	return foundation.HRESULT(r1)
+func (self *ITPhoneDeviceSpecificEvent) Get_lParam1() (int32, error) {
+	var _pParam1 int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pParam1)))
+	return _pParam1, win32.HRESULTError(int32(r1))
 }
 
 // Get_lParam2 dispatches through ITPhoneDeviceSpecificEvent's vtable slot 9.
-func (self *ITPhoneDeviceSpecificEvent) Get_lParam2(pParam2 *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParam2)))
-	return foundation.HRESULT(r1)
+func (self *ITPhoneDeviceSpecificEvent) Get_lParam2() (int32, error) {
+	var _pParam2 int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pParam2)))
+	return _pParam2, win32.HRESULTError(int32(r1))
 }
 
 // Get_lParam3 dispatches through ITPhoneDeviceSpecificEvent's vtable slot 10.
-func (self *ITPhoneDeviceSpecificEvent) Get_lParam3(pParam3 *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParam3)))
-	return foundation.HRESULT(r1)
+func (self *ITPhoneDeviceSpecificEvent) Get_lParam3() (int32, error) {
+	var _pParam3 int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pParam3)))
+	return _pParam3, win32.HRESULTError(int32(r1))
 }
 
 // ITPhoneEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itphoneevent
@@ -3840,57 +4069,66 @@ type ITPhoneEvent struct {
 var IID_ITPhoneEvent = win32.GUID{Data1: 0x8f942dd8, Data2: 0x64ed, Data3: 0x4aaf, Data4: [8]byte{0xa7, 0x7d, 0xb2, 0x3d, 0xb0, 0x83, 0x7e, 0xad}}
 
 // Get_Phone dispatches through ITPhoneEvent's vtable slot 7.
-func (self *ITPhoneEvent) Get_Phone(ppPhone **ITPhone) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPhone)))
-	return foundation.HRESULT(r1)
+func (self *ITPhoneEvent) Get_Phone() (*ITPhone, error) {
+	var _ppPhone *ITPhone
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPhone)))
+	return _ppPhone, win32.HRESULTError(int32(r1))
 }
 
 // Get_Event dispatches through ITPhoneEvent's vtable slot 8.
-func (self *ITPhoneEvent) Get_Event(pEvent *PHONE_EVENT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+func (self *ITPhoneEvent) Get_Event() (PHONE_EVENT, error) {
+	var _pEvent PHONE_EVENT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEvent)))
+	return _pEvent, win32.HRESULTError(int32(r1))
 }
 
 // Get_ButtonState dispatches through ITPhoneEvent's vtable slot 9.
-func (self *ITPhoneEvent) Get_ButtonState(pState *PHONE_BUTTON_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+func (self *ITPhoneEvent) Get_ButtonState() (PHONE_BUTTON_STATE, error) {
+	var _pState PHONE_BUTTON_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pState)))
+	return _pState, win32.HRESULTError(int32(r1))
 }
 
 // Get_HookSwitchState dispatches through ITPhoneEvent's vtable slot 10.
-func (self *ITPhoneEvent) Get_HookSwitchState(pState *PHONE_HOOK_SWITCH_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+func (self *ITPhoneEvent) Get_HookSwitchState() (PHONE_HOOK_SWITCH_STATE, error) {
+	var _pState PHONE_HOOK_SWITCH_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pState)))
+	return _pState, win32.HRESULTError(int32(r1))
 }
 
 // Get_HookSwitchDevice dispatches through ITPhoneEvent's vtable slot 11.
-func (self *ITPhoneEvent) Get_HookSwitchDevice(pDevice *PHONE_HOOK_SWITCH_DEVICE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)))
-	return foundation.HRESULT(r1)
+func (self *ITPhoneEvent) Get_HookSwitchDevice() (PHONE_HOOK_SWITCH_DEVICE, error) {
+	var _pDevice PHONE_HOOK_SWITCH_DEVICE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDevice)))
+	return _pDevice, win32.HRESULTError(int32(r1))
 }
 
 // Get_RingMode dispatches through ITPhoneEvent's vtable slot 12.
-func (self *ITPhoneEvent) Get_RingMode(plRingMode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRingMode)))
-	return foundation.HRESULT(r1)
+func (self *ITPhoneEvent) Get_RingMode() (int32, error) {
+	var _plRingMode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plRingMode)))
+	return _plRingMode, win32.HRESULTError(int32(r1))
 }
 
 // Get_ButtonLampId dispatches through ITPhoneEvent's vtable slot 13.
-func (self *ITPhoneEvent) Get_ButtonLampId(plButtonLampId *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plButtonLampId)))
-	return foundation.HRESULT(r1)
+func (self *ITPhoneEvent) Get_ButtonLampId() (int32, error) {
+	var _plButtonLampId int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plButtonLampId)))
+	return _plButtonLampId, win32.HRESULTError(int32(r1))
 }
 
 // Get_NumberGathered dispatches through ITPhoneEvent's vtable slot 14.
-func (self *ITPhoneEvent) Get_NumberGathered(ppNumber *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNumber)))
-	return foundation.HRESULT(r1)
+func (self *ITPhoneEvent) Get_NumberGathered() (foundation.BSTR, error) {
+	var _ppNumber foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNumber)))
+	return _ppNumber, win32.HRESULTError(int32(r1))
 }
 
 // Get_Call dispatches through ITPhoneEvent's vtable slot 15.
-func (self *ITPhoneEvent) Get_Call(ppCallInfo **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCallInfo)))
-	return foundation.HRESULT(r1)
+func (self *ITPhoneEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCallInfo *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCallInfo)))
+	return _ppCallInfo, win32.HRESULTError(int32(r1))
 }
 
 // ITPluggableTerminalClassInfo: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itpluggableterminalclassinfo
@@ -3903,45 +4141,52 @@ type ITPluggableTerminalClassInfo struct {
 var IID_ITPluggableTerminalClassInfo = win32.GUID{Data1: 0x41757f4a, Data2: 0xcf09, Data3: 0x4b34, Data4: [8]byte{0xbc, 0x96, 0x0a, 0x79, 0xd2, 0x39, 0x00, 0x76}}
 
 // Get_Name dispatches through ITPluggableTerminalClassInfo's vtable slot 7.
-func (self *ITPluggableTerminalClassInfo) Get_Name(pName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+func (self *ITPluggableTerminalClassInfo) Get_Name() (foundation.BSTR, error) {
+	var _pName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pName)))
+	return _pName, win32.HRESULTError(int32(r1))
 }
 
 // Get_Company dispatches through ITPluggableTerminalClassInfo's vtable slot 8.
-func (self *ITPluggableTerminalClassInfo) Get_Company(pCompany *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCompany)))
-	return foundation.HRESULT(r1)
+func (self *ITPluggableTerminalClassInfo) Get_Company() (foundation.BSTR, error) {
+	var _pCompany foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCompany)))
+	return _pCompany, win32.HRESULTError(int32(r1))
 }
 
 // Get_Version dispatches through ITPluggableTerminalClassInfo's vtable slot 9.
-func (self *ITPluggableTerminalClassInfo) Get_Version(pVersion *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVersion)))
-	return foundation.HRESULT(r1)
+func (self *ITPluggableTerminalClassInfo) Get_Version() (foundation.BSTR, error) {
+	var _pVersion foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVersion)))
+	return _pVersion, win32.HRESULTError(int32(r1))
 }
 
 // Get_TerminalClass dispatches through ITPluggableTerminalClassInfo's vtable slot 10.
-func (self *ITPluggableTerminalClassInfo) Get_TerminalClass(pTerminalClass *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminalClass)))
-	return foundation.HRESULT(r1)
+func (self *ITPluggableTerminalClassInfo) Get_TerminalClass() (foundation.BSTR, error) {
+	var _pTerminalClass foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTerminalClass)))
+	return _pTerminalClass, win32.HRESULTError(int32(r1))
 }
 
 // Get_CLSID dispatches through ITPluggableTerminalClassInfo's vtable slot 11.
-func (self *ITPluggableTerminalClassInfo) Get_CLSID(pCLSID *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCLSID)))
-	return foundation.HRESULT(r1)
+func (self *ITPluggableTerminalClassInfo) Get_CLSID() (foundation.BSTR, error) {
+	var _pCLSID foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCLSID)))
+	return _pCLSID, win32.HRESULTError(int32(r1))
 }
 
 // Get_Direction dispatches through ITPluggableTerminalClassInfo's vtable slot 12.
-func (self *ITPluggableTerminalClassInfo) Get_Direction(pDirection *TERMINAL_DIRECTION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirection)))
-	return foundation.HRESULT(r1)
+func (self *ITPluggableTerminalClassInfo) Get_Direction() (TERMINAL_DIRECTION, error) {
+	var _pDirection TERMINAL_DIRECTION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDirection)))
+	return _pDirection, win32.HRESULTError(int32(r1))
 }
 
 // Get_MediaTypes dispatches through ITPluggableTerminalClassInfo's vtable slot 13.
-func (self *ITPluggableTerminalClassInfo) Get_MediaTypes(pMediaTypes *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaTypes)))
-	return foundation.HRESULT(r1)
+func (self *ITPluggableTerminalClassInfo) Get_MediaTypes() (int32, error) {
+	var _pMediaTypes int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pMediaTypes)))
+	return _pMediaTypes, win32.HRESULTError(int32(r1))
 }
 
 // ITPluggableTerminalEventSink: https://learn.microsoft.com/windows/win32/api/msp/nn-msp-itpluggableterminaleventsink
@@ -3954,9 +4199,9 @@ type ITPluggableTerminalEventSink struct {
 var IID_ITPluggableTerminalEventSink = win32.GUID{Data1: 0x6e0887be, Data2: 0xba1a, Data3: 0x492e, Data4: [8]byte{0xbd, 0x10, 0x40, 0x20, 0xec, 0x5e, 0x33, 0xe0}}
 
 // FireEvent dispatches through ITPluggableTerminalEventSink's vtable slot 3.
-func (self *ITPluggableTerminalEventSink) FireEvent(pMspEventInfo *MSP_EVENT_INFO) foundation.HRESULT {
+func (self *ITPluggableTerminalEventSink) FireEvent(pMspEventInfo *MSP_EVENT_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMspEventInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITPluggableTerminalEventSinkRegistration: https://learn.microsoft.com/windows/win32/api/msp/nn-msp-itpluggableterminaleventsinkregistration
@@ -3969,15 +4214,15 @@ type ITPluggableTerminalEventSinkRegistration struct {
 var IID_ITPluggableTerminalEventSinkRegistration = win32.GUID{Data1: 0xf7115709, Data2: 0xa216, Data3: 0x4957, Data4: [8]byte{0xa7, 0x59, 0x06, 0x0a, 0xb3, 0x2a, 0x90, 0xd1}}
 
 // RegisterSink dispatches through ITPluggableTerminalEventSinkRegistration's vtable slot 3.
-func (self *ITPluggableTerminalEventSinkRegistration) RegisterSink(pEventSink *ITPluggableTerminalEventSink) foundation.HRESULT {
+func (self *ITPluggableTerminalEventSinkRegistration) RegisterSink(pEventSink *ITPluggableTerminalEventSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEventSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterSink dispatches through ITPluggableTerminalEventSinkRegistration's vtable slot 4.
-func (self *ITPluggableTerminalEventSinkRegistration) UnregisterSink() foundation.HRESULT {
+func (self *ITPluggableTerminalEventSinkRegistration) UnregisterSink() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITPluggableTerminalSuperclassInfo: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itpluggableterminalsuperclassinfo
@@ -3990,15 +4235,17 @@ type ITPluggableTerminalSuperclassInfo struct {
 var IID_ITPluggableTerminalSuperclassInfo = win32.GUID{Data1: 0x6d54e42c, Data2: 0x4625, Data3: 0x4359, Data4: [8]byte{0xa6, 0xf7, 0x63, 0x19, 0x99, 0x10, 0x7e, 0x05}}
 
 // Get_Name dispatches through ITPluggableTerminalSuperclassInfo's vtable slot 7.
-func (self *ITPluggableTerminalSuperclassInfo) Get_Name(pName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+func (self *ITPluggableTerminalSuperclassInfo) Get_Name() (foundation.BSTR, error) {
+	var _pName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pName)))
+	return _pName, win32.HRESULTError(int32(r1))
 }
 
 // Get_CLSID dispatches through ITPluggableTerminalSuperclassInfo's vtable slot 8.
-func (self *ITPluggableTerminalSuperclassInfo) Get_CLSID(pCLSID *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCLSID)))
-	return foundation.HRESULT(r1)
+func (self *ITPluggableTerminalSuperclassInfo) Get_CLSID() (foundation.BSTR, error) {
+	var _pCLSID foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCLSID)))
+	return _pCLSID, win32.HRESULTError(int32(r1))
 }
 
 // ITPrivateEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itprivateevent
@@ -4011,33 +4258,38 @@ type ITPrivateEvent struct {
 var IID_ITPrivateEvent = win32.GUID{Data1: 0x0e269cd0, Data2: 0x10d4, Data3: 0x4121, Data4: [8]byte{0x9c, 0x22, 0x9c, 0x85, 0xd6, 0x25, 0x65, 0x0d}}
 
 // Get_Address dispatches through ITPrivateEvent's vtable slot 7.
-func (self *ITPrivateEvent) Get_Address(ppAddress **ITAddress) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAddress)))
-	return foundation.HRESULT(r1)
+func (self *ITPrivateEvent) Get_Address() (*ITAddress, error) {
+	var _ppAddress *ITAddress
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAddress)))
+	return _ppAddress, win32.HRESULTError(int32(r1))
 }
 
 // Get_Call dispatches through ITPrivateEvent's vtable slot 8.
-func (self *ITPrivateEvent) Get_Call(ppCallInfo **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCallInfo)))
-	return foundation.HRESULT(r1)
+func (self *ITPrivateEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCallInfo *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCallInfo)))
+	return _ppCallInfo, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallHub dispatches through ITPrivateEvent's vtable slot 9.
-func (self *ITPrivateEvent) Get_CallHub(ppCallHub **ITCallHub) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCallHub)))
-	return foundation.HRESULT(r1)
+func (self *ITPrivateEvent) Get_CallHub() (*ITCallHub, error) {
+	var _ppCallHub *ITCallHub
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCallHub)))
+	return _ppCallHub, win32.HRESULTError(int32(r1))
 }
 
 // Get_EventCode dispatches through ITPrivateEvent's vtable slot 10.
-func (self *ITPrivateEvent) Get_EventCode(plEventCode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plEventCode)))
-	return foundation.HRESULT(r1)
+func (self *ITPrivateEvent) Get_EventCode() (int32, error) {
+	var _plEventCode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plEventCode)))
+	return _plEventCode, win32.HRESULTError(int32(r1))
 }
 
 // Get_EventInterface dispatches through ITPrivateEvent's vtable slot 11.
-func (self *ITPrivateEvent) Get_EventInterface(pEventInterface **systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEventInterface)))
-	return foundation.HRESULT(r1)
+func (self *ITPrivateEvent) Get_EventInterface() (*systemcom.IDispatch, error) {
+	var _pEventInterface *systemcom.IDispatch
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEventInterface)))
+	return _pEventInterface, win32.HRESULTError(int32(r1))
 }
 
 // ITQOSEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itqosevent
@@ -4050,21 +4302,24 @@ type ITQOSEvent struct {
 var IID_ITQOSEvent = win32.GUID{Data1: 0xcfa3357c, Data2: 0xad77, Data3: 0x11d1, Data4: [8]byte{0xbb, 0x68, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Get_Call dispatches through ITQOSEvent's vtable slot 7.
-func (self *ITQOSEvent) Get_Call(ppCall **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCall)))
-	return foundation.HRESULT(r1)
+func (self *ITQOSEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCall *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCall)))
+	return _ppCall, win32.HRESULTError(int32(r1))
 }
 
 // Get_Event dispatches through ITQOSEvent's vtable slot 8.
-func (self *ITQOSEvent) Get_Event(pQosEvent *QOS_EVENT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pQosEvent)))
-	return foundation.HRESULT(r1)
+func (self *ITQOSEvent) Get_Event() (QOS_EVENT, error) {
+	var _pQosEvent QOS_EVENT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pQosEvent)))
+	return _pQosEvent, win32.HRESULTError(int32(r1))
 }
 
 // Get_MediaType dispatches through ITQOSEvent's vtable slot 9.
-func (self *ITQOSEvent) Get_MediaType(plMediaType *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMediaType)))
-	return foundation.HRESULT(r1)
+func (self *ITQOSEvent) Get_MediaType() (int32, error) {
+	var _plMediaType int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaType)))
+	return _plMediaType, win32.HRESULTError(int32(r1))
 }
 
 // ITQueue: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-itqueue
@@ -4077,75 +4332,75 @@ type ITQueue struct {
 var IID_ITQueue = win32.GUID{Data1: 0x5afc3149, Data2: 0x4bcc, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x80, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Put_MeasurementPeriod dispatches through ITQueue's vtable slot 7.
-func (self *ITQueue) Put_MeasurementPeriod(lPeriod int32) foundation.HRESULT {
+func (self *ITQueue) Put_MeasurementPeriod(lPeriod int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lPeriod))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MeasurementPeriod dispatches through ITQueue's vtable slot 8.
-func (self *ITQueue) Get_MeasurementPeriod(plPeriod *int32) foundation.HRESULT {
+func (self *ITQueue) Get_MeasurementPeriod(plPeriod *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPeriod)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TotalCallsQueued dispatches through ITQueue's vtable slot 9.
-func (self *ITQueue) Get_TotalCallsQueued(plCalls *int32) foundation.HRESULT {
+func (self *ITQueue) Get_TotalCallsQueued(plCalls *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCalls)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentCallsQueued dispatches through ITQueue's vtable slot 10.
-func (self *ITQueue) Get_CurrentCallsQueued(plCalls *int32) foundation.HRESULT {
+func (self *ITQueue) Get_CurrentCallsQueued(plCalls *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCalls)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TotalCallsAbandoned dispatches through ITQueue's vtable slot 11.
-func (self *ITQueue) Get_TotalCallsAbandoned(plCalls *int32) foundation.HRESULT {
+func (self *ITQueue) Get_TotalCallsAbandoned(plCalls *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCalls)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TotalCallsFlowedIn dispatches through ITQueue's vtable slot 12.
-func (self *ITQueue) Get_TotalCallsFlowedIn(plCalls *int32) foundation.HRESULT {
+func (self *ITQueue) Get_TotalCallsFlowedIn(plCalls *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCalls)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TotalCallsFlowedOut dispatches through ITQueue's vtable slot 13.
-func (self *ITQueue) Get_TotalCallsFlowedOut(plCalls *int32) foundation.HRESULT {
+func (self *ITQueue) Get_TotalCallsFlowedOut(plCalls *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCalls)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LongestEverWaitTime dispatches through ITQueue's vtable slot 14.
-func (self *ITQueue) Get_LongestEverWaitTime(plWaitTime *int32) foundation.HRESULT {
+func (self *ITQueue) Get_LongestEverWaitTime(plWaitTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plWaitTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentLongestWaitTime dispatches through ITQueue's vtable slot 15.
-func (self *ITQueue) Get_CurrentLongestWaitTime(plWaitTime *int32) foundation.HRESULT {
+func (self *ITQueue) Get_CurrentLongestWaitTime(plWaitTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plWaitTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AverageWaitTime dispatches through ITQueue's vtable slot 16.
-func (self *ITQueue) Get_AverageWaitTime(plWaitTime *int32) foundation.HRESULT {
+func (self *ITQueue) Get_AverageWaitTime(plWaitTime *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plWaitTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FinalDisposition dispatches through ITQueue's vtable slot 17.
-func (self *ITQueue) Get_FinalDisposition(plCalls *int32) foundation.HRESULT {
+func (self *ITQueue) Get_FinalDisposition(plCalls *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCalls)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through ITQueue's vtable slot 18.
-func (self *ITQueue) Get_Name(ppName *foundation.BSTR) foundation.HRESULT {
+func (self *ITQueue) Get_Name(ppName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITQueueEvent: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-itqueueevent
@@ -4158,15 +4413,15 @@ type ITQueueEvent struct {
 var IID_ITQueueEvent = win32.GUID{Data1: 0x297f3033, Data2: 0xbd11, Data3: 0x11d1, Data4: [8]byte{0xa0, 0xa7, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // Get_Queue dispatches through ITQueueEvent's vtable slot 7.
-func (self *ITQueueEvent) Get_Queue(ppQueue **ITQueue) foundation.HRESULT {
+func (self *ITQueueEvent) Get_Queue(ppQueue **ITQueue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Event dispatches through ITQueueEvent's vtable slot 8.
-func (self *ITQueueEvent) Get_Event(pEvent *ACDQUEUE_EVENT) foundation.HRESULT {
+func (self *ITQueueEvent) Get_Event(pEvent *ACDQUEUE_EVENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITRendezvous: https://learn.microsoft.com/windows/win32/api/rend/nn-rend-itrendezvous
@@ -4179,27 +4434,30 @@ type ITRendezvous struct {
 var IID_ITRendezvous = win32.GUID{Data1: 0x34621d6b, Data2: 0x6cff, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xf7, 0x00, 0xc0, 0x4f, 0xc3, 0x1f, 0xee}}
 
 // Get_DefaultDirectories dispatches through ITRendezvous's vtable slot 7.
-func (self *ITRendezvous) Get_DefaultDirectories(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITRendezvous) Get_DefaultDirectories() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateDefaultDirectories dispatches through ITRendezvous's vtable slot 8.
-func (self *ITRendezvous) EnumerateDefaultDirectories(ppEnumDirectory **IEnumDirectory) foundation.HRESULT {
+func (self *ITRendezvous) EnumerateDefaultDirectories(ppEnumDirectory **IEnumDirectory) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumDirectory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDirectory dispatches through ITRendezvous's vtable slot 9.
-func (self *ITRendezvous) CreateDirectory(DirectoryType DIRECTORY_TYPE, pName foundation.BSTR, ppDir **ITDirectory) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(DirectoryType), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(ppDir)))
-	return foundation.HRESULT(r1)
+func (self *ITRendezvous) CreateDirectory(DirectoryType DIRECTORY_TYPE, pName foundation.BSTR) (*ITDirectory, error) {
+	var _ppDir *ITDirectory
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(DirectoryType), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(&_ppDir)))
+	return _ppDir, win32.HRESULTError(int32(r1))
 }
 
 // CreateDirectoryObject dispatches through ITRendezvous's vtable slot 10.
-func (self *ITRendezvous) CreateDirectoryObject(DirectoryObjectType DIRECTORY_OBJECT_TYPE, pName foundation.BSTR, ppDirectoryObject **ITDirectoryObject) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(DirectoryObjectType), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(ppDirectoryObject)))
-	return foundation.HRESULT(r1)
+func (self *ITRendezvous) CreateDirectoryObject(DirectoryObjectType DIRECTORY_OBJECT_TYPE, pName foundation.BSTR) (*ITDirectoryObject, error) {
+	var _ppDirectoryObject *ITDirectoryObject
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(DirectoryObjectType), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(&_ppDirectoryObject)))
+	return _ppDirectoryObject, win32.HRESULTError(int32(r1))
 }
 
 // ITRequest: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itrequest
@@ -4212,9 +4470,9 @@ type ITRequest struct {
 var IID_ITRequest = win32.GUID{Data1: 0xac48ffdf, Data2: 0xf8c4, Data3: 0x11d1, Data4: [8]byte{0xa0, 0x30, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // MakeCall dispatches through ITRequest's vtable slot 7.
-func (self *ITRequest) MakeCall(pDestAddress foundation.BSTR, pAppName foundation.BSTR, pCalledParty foundation.BSTR, pComment foundation.BSTR) foundation.HRESULT {
+func (self *ITRequest) MakeCall(pDestAddress foundation.BSTR, pAppName foundation.BSTR, pCalledParty foundation.BSTR, pComment foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestAddress)), uintptr(unsafe.Pointer(pAppName)), uintptr(unsafe.Pointer(pCalledParty)), uintptr(unsafe.Pointer(pComment)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITRequestEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itrequestevent
@@ -4227,39 +4485,45 @@ type ITRequestEvent struct {
 var IID_ITRequestEvent = win32.GUID{Data1: 0xac48ffde, Data2: 0xf8c4, Data3: 0x11d1, Data4: [8]byte{0xa0, 0x30, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Get_RegistrationInstance dispatches through ITRequestEvent's vtable slot 7.
-func (self *ITRequestEvent) Get_RegistrationInstance(plRegistrationInstance *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRegistrationInstance)))
-	return foundation.HRESULT(r1)
+func (self *ITRequestEvent) Get_RegistrationInstance() (int32, error) {
+	var _plRegistrationInstance int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plRegistrationInstance)))
+	return _plRegistrationInstance, win32.HRESULTError(int32(r1))
 }
 
 // Get_RequestMode dispatches through ITRequestEvent's vtable slot 8.
-func (self *ITRequestEvent) Get_RequestMode(plRequestMode *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plRequestMode)))
-	return foundation.HRESULT(r1)
+func (self *ITRequestEvent) Get_RequestMode() (int32, error) {
+	var _plRequestMode int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plRequestMode)))
+	return _plRequestMode, win32.HRESULTError(int32(r1))
 }
 
 // Get_DestAddress dispatches through ITRequestEvent's vtable slot 9.
-func (self *ITRequestEvent) Get_DestAddress(ppDestAddress *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDestAddress)))
-	return foundation.HRESULT(r1)
+func (self *ITRequestEvent) Get_DestAddress() (foundation.BSTR, error) {
+	var _ppDestAddress foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDestAddress)))
+	return _ppDestAddress, win32.HRESULTError(int32(r1))
 }
 
 // Get_AppName dispatches through ITRequestEvent's vtable slot 10.
-func (self *ITRequestEvent) Get_AppName(ppAppName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAppName)))
-	return foundation.HRESULT(r1)
+func (self *ITRequestEvent) Get_AppName() (foundation.BSTR, error) {
+	var _ppAppName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAppName)))
+	return _ppAppName, win32.HRESULTError(int32(r1))
 }
 
 // Get_CalledParty dispatches through ITRequestEvent's vtable slot 11.
-func (self *ITRequestEvent) Get_CalledParty(ppCalledParty *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCalledParty)))
-	return foundation.HRESULT(r1)
+func (self *ITRequestEvent) Get_CalledParty() (foundation.BSTR, error) {
+	var _ppCalledParty foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCalledParty)))
+	return _ppCalledParty, win32.HRESULTError(int32(r1))
 }
 
 // Get_Comment dispatches through ITRequestEvent's vtable slot 12.
-func (self *ITRequestEvent) Get_Comment(ppComment *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppComment)))
-	return foundation.HRESULT(r1)
+func (self *ITRequestEvent) Get_Comment() (foundation.BSTR, error) {
+	var _ppComment foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppComment)))
+	return _ppComment, win32.HRESULTError(int32(r1))
 }
 
 // ITScriptableAudioFormat: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itscriptableaudioformat
@@ -4272,75 +4536,81 @@ type ITScriptableAudioFormat struct {
 var IID_ITScriptableAudioFormat = win32.GUID{Data1: 0xb87658bd, Data2: 0x3c59, Data3: 0x4f64, Data4: [8]byte{0xbe, 0x74, 0xae, 0xde, 0x3e, 0x86, 0xa8, 0x1e}}
 
 // Get_Channels dispatches through ITScriptableAudioFormat's vtable slot 7.
-func (self *ITScriptableAudioFormat) Get_Channels(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *ITScriptableAudioFormat) Get_Channels() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_Channels dispatches through ITScriptableAudioFormat's vtable slot 8.
-func (self *ITScriptableAudioFormat) Put_Channels(nNewVal int32) foundation.HRESULT {
+func (self *ITScriptableAudioFormat) Put_Channels(nNewVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(nNewVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SamplesPerSec dispatches through ITScriptableAudioFormat's vtable slot 9.
-func (self *ITScriptableAudioFormat) Get_SamplesPerSec(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *ITScriptableAudioFormat) Get_SamplesPerSec() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_SamplesPerSec dispatches through ITScriptableAudioFormat's vtable slot 10.
-func (self *ITScriptableAudioFormat) Put_SamplesPerSec(nNewVal int32) foundation.HRESULT {
+func (self *ITScriptableAudioFormat) Put_SamplesPerSec(nNewVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(nNewVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AvgBytesPerSec dispatches through ITScriptableAudioFormat's vtable slot 11.
-func (self *ITScriptableAudioFormat) Get_AvgBytesPerSec(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *ITScriptableAudioFormat) Get_AvgBytesPerSec() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_AvgBytesPerSec dispatches through ITScriptableAudioFormat's vtable slot 12.
-func (self *ITScriptableAudioFormat) Put_AvgBytesPerSec(nNewVal int32) foundation.HRESULT {
+func (self *ITScriptableAudioFormat) Put_AvgBytesPerSec(nNewVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(nNewVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BlockAlign dispatches through ITScriptableAudioFormat's vtable slot 13.
-func (self *ITScriptableAudioFormat) Get_BlockAlign(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *ITScriptableAudioFormat) Get_BlockAlign() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_BlockAlign dispatches through ITScriptableAudioFormat's vtable slot 14.
-func (self *ITScriptableAudioFormat) Put_BlockAlign(nNewVal int32) foundation.HRESULT {
+func (self *ITScriptableAudioFormat) Put_BlockAlign(nNewVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(nNewVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BitsPerSample dispatches through ITScriptableAudioFormat's vtable slot 15.
-func (self *ITScriptableAudioFormat) Get_BitsPerSample(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *ITScriptableAudioFormat) Get_BitsPerSample() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_BitsPerSample dispatches through ITScriptableAudioFormat's vtable slot 16.
-func (self *ITScriptableAudioFormat) Put_BitsPerSample(nNewVal int32) foundation.HRESULT {
+func (self *ITScriptableAudioFormat) Put_BitsPerSample(nNewVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(nNewVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FormatTag dispatches through ITScriptableAudioFormat's vtable slot 17.
-func (self *ITScriptableAudioFormat) Get_FormatTag(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *ITScriptableAudioFormat) Get_FormatTag() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Put_FormatTag dispatches through ITScriptableAudioFormat's vtable slot 18.
-func (self *ITScriptableAudioFormat) Put_FormatTag(nNewVal int32) foundation.HRESULT {
+func (self *ITScriptableAudioFormat) Put_FormatTag(nNewVal int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(nNewVal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITStaticAudioTerminal: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itstaticaudioterminal
@@ -4353,9 +4623,10 @@ type ITStaticAudioTerminal struct {
 var IID_ITStaticAudioTerminal = win32.GUID{Data1: 0xa86b7871, Data2: 0xd14c, Data3: 0x48e6, Data4: [8]byte{0x92, 0x2e, 0xa8, 0xd1, 0x5f, 0x98, 0x48, 0x00}}
 
 // Get_WaveId dispatches through ITStaticAudioTerminal's vtable slot 7.
-func (self *ITStaticAudioTerminal) Get_WaveId(plWaveId *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plWaveId)))
-	return foundation.HRESULT(r1)
+func (self *ITStaticAudioTerminal) Get_WaveId() (int32, error) {
+	var _plWaveId int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plWaveId)))
+	return _plWaveId, win32.HRESULTError(int32(r1))
 }
 
 // ITStream: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itstream
@@ -4368,63 +4639,67 @@ type ITStream struct {
 var IID_ITStream = win32.GUID{Data1: 0xee3bd605, Data2: 0x3868, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x45, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Get_MediaType dispatches through ITStream's vtable slot 7.
-func (self *ITStream) Get_MediaType(plMediaType *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMediaType)))
-	return foundation.HRESULT(r1)
+func (self *ITStream) Get_MediaType() (int32, error) {
+	var _plMediaType int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaType)))
+	return _plMediaType, win32.HRESULTError(int32(r1))
 }
 
 // Get_Direction dispatches through ITStream's vtable slot 8.
-func (self *ITStream) Get_Direction(pTD *TERMINAL_DIRECTION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTD)))
-	return foundation.HRESULT(r1)
+func (self *ITStream) Get_Direction() (TERMINAL_DIRECTION, error) {
+	var _pTD TERMINAL_DIRECTION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTD)))
+	return _pTD, win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through ITStream's vtable slot 9.
-func (self *ITStream) Get_Name(ppName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+func (self *ITStream) Get_Name() (foundation.BSTR, error) {
+	var _ppName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppName)))
+	return _ppName, win32.HRESULTError(int32(r1))
 }
 
 // StartStream dispatches through ITStream's vtable slot 10.
-func (self *ITStream) StartStream() foundation.HRESULT {
+func (self *ITStream) StartStream() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PauseStream dispatches through ITStream's vtable slot 11.
-func (self *ITStream) PauseStream() foundation.HRESULT {
+func (self *ITStream) PauseStream() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopStream dispatches through ITStream's vtable slot 12.
-func (self *ITStream) StopStream() foundation.HRESULT {
+func (self *ITStream) StopStream() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SelectTerminal dispatches through ITStream's vtable slot 13.
-func (self *ITStream) SelectTerminal(pTerminal *ITTerminal) foundation.HRESULT {
+func (self *ITStream) SelectTerminal(pTerminal *ITTerminal) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnselectTerminal dispatches through ITStream's vtable slot 14.
-func (self *ITStream) UnselectTerminal(pTerminal *ITTerminal) foundation.HRESULT {
+func (self *ITStream) UnselectTerminal(pTerminal *ITTerminal) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateTerminals dispatches through ITStream's vtable slot 15.
-func (self *ITStream) EnumerateTerminals(ppEnumTerminal **IEnumTerminal) foundation.HRESULT {
+func (self *ITStream) EnumerateTerminals(ppEnumTerminal **IEnumTerminal) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumTerminal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Terminals dispatches through ITStream's vtable slot 16.
-func (self *ITStream) Get_Terminals(pTerminals *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminals)))
-	return foundation.HRESULT(r1)
+func (self *ITStream) Get_Terminals() (systemvariant.VARIANT, error) {
+	var _pTerminals systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTerminals)))
+	return _pTerminals, win32.HRESULTError(int32(r1))
 }
 
 // ITStreamControl: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itstreamcontrol
@@ -4437,27 +4712,29 @@ type ITStreamControl struct {
 var IID_ITStreamControl = win32.GUID{Data1: 0xee3bd604, Data2: 0x3868, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x45, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // CreateStream dispatches through ITStreamControl's vtable slot 7.
-func (self *ITStreamControl) CreateStream(lMediaType int32, td TERMINAL_DIRECTION, ppStream **ITStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lMediaType), uintptr(td), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+func (self *ITStreamControl) CreateStream(lMediaType int32, td TERMINAL_DIRECTION) (*ITStream, error) {
+	var _ppStream *ITStream
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lMediaType), uintptr(td), uintptr(unsafe.Pointer(&_ppStream)))
+	return _ppStream, win32.HRESULTError(int32(r1))
 }
 
 // RemoveStream dispatches through ITStreamControl's vtable slot 8.
-func (self *ITStreamControl) RemoveStream(pStream *ITStream) foundation.HRESULT {
+func (self *ITStreamControl) RemoveStream(pStream *ITStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateStreams dispatches through ITStreamControl's vtable slot 9.
-func (self *ITStreamControl) EnumerateStreams(ppEnumStream **IEnumStream) foundation.HRESULT {
+func (self *ITStreamControl) EnumerateStreams(ppEnumStream **IEnumStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Streams dispatches through ITStreamControl's vtable slot 10.
-func (self *ITStreamControl) Get_Streams(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITStreamControl) Get_Streams() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // ITSubStream: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itsubstream
@@ -4470,51 +4747,53 @@ type ITSubStream struct {
 var IID_ITSubStream = win32.GUID{Data1: 0xee3bd608, Data2: 0x3868, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x45, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // StartSubStream dispatches through ITSubStream's vtable slot 7.
-func (self *ITSubStream) StartSubStream() foundation.HRESULT {
+func (self *ITSubStream) StartSubStream() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PauseSubStream dispatches through ITSubStream's vtable slot 8.
-func (self *ITSubStream) PauseSubStream() foundation.HRESULT {
+func (self *ITSubStream) PauseSubStream() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopSubStream dispatches through ITSubStream's vtable slot 9.
-func (self *ITSubStream) StopSubStream() foundation.HRESULT {
+func (self *ITSubStream) StopSubStream() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SelectTerminal dispatches through ITSubStream's vtable slot 10.
-func (self *ITSubStream) SelectTerminal(pTerminal *ITTerminal) foundation.HRESULT {
+func (self *ITSubStream) SelectTerminal(pTerminal *ITTerminal) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnselectTerminal dispatches through ITSubStream's vtable slot 11.
-func (self *ITSubStream) UnselectTerminal(pTerminal *ITTerminal) foundation.HRESULT {
+func (self *ITSubStream) UnselectTerminal(pTerminal *ITTerminal) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateTerminals dispatches through ITSubStream's vtable slot 12.
-func (self *ITSubStream) EnumerateTerminals(ppEnumTerminal **IEnumTerminal) foundation.HRESULT {
+func (self *ITSubStream) EnumerateTerminals(ppEnumTerminal **IEnumTerminal) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumTerminal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Terminals dispatches through ITSubStream's vtable slot 13.
-func (self *ITSubStream) Get_Terminals(pTerminals *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminals)))
-	return foundation.HRESULT(r1)
+func (self *ITSubStream) Get_Terminals() (systemvariant.VARIANT, error) {
+	var _pTerminals systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTerminals)))
+	return _pTerminals, win32.HRESULTError(int32(r1))
 }
 
 // Get_Stream dispatches through ITSubStream's vtable slot 14.
-func (self *ITSubStream) Get_Stream(ppITStream **ITStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppITStream)))
-	return foundation.HRESULT(r1)
+func (self *ITSubStream) Get_Stream() (*ITStream, error) {
+	var _ppITStream *ITStream
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppITStream)))
+	return _ppITStream, win32.HRESULTError(int32(r1))
 }
 
 // ITSubStreamControl: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itsubstreamcontrol
@@ -4527,27 +4806,29 @@ type ITSubStreamControl struct {
 var IID_ITSubStreamControl = win32.GUID{Data1: 0xee3bd607, Data2: 0x3868, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x45, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // CreateSubStream dispatches through ITSubStreamControl's vtable slot 7.
-func (self *ITSubStreamControl) CreateSubStream(ppSubStream **ITSubStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSubStream)))
-	return foundation.HRESULT(r1)
+func (self *ITSubStreamControl) CreateSubStream() (*ITSubStream, error) {
+	var _ppSubStream *ITSubStream
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSubStream)))
+	return _ppSubStream, win32.HRESULTError(int32(r1))
 }
 
 // RemoveSubStream dispatches through ITSubStreamControl's vtable slot 8.
-func (self *ITSubStreamControl) RemoveSubStream(pSubStream *ITSubStream) foundation.HRESULT {
+func (self *ITSubStreamControl) RemoveSubStream(pSubStream *ITSubStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSubStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateSubStreams dispatches through ITSubStreamControl's vtable slot 9.
-func (self *ITSubStreamControl) EnumerateSubStreams(ppEnumSubStream **IEnumSubStream) foundation.HRESULT {
+func (self *ITSubStreamControl) EnumerateSubStreams(ppEnumSubStream **IEnumSubStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumSubStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SubStreams dispatches through ITSubStreamControl's vtable slot 10.
-func (self *ITSubStreamControl) Get_SubStreams(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITSubStreamControl) Get_SubStreams() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // ITTAPI: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ittapi
@@ -4560,93 +4841,100 @@ type ITTAPI struct {
 var IID_ITTAPI = win32.GUID{Data1: 0xb1efc382, Data2: 0x9355, Data3: 0x11d0, Data4: [8]byte{0x83, 0x5c, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Initialize dispatches through ITTAPI's vtable slot 7.
-func (self *ITTAPI) Initialize() foundation.HRESULT {
+func (self *ITTAPI) Initialize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through ITTAPI's vtable slot 8.
-func (self *ITTAPI) Shutdown() foundation.HRESULT {
+func (self *ITTAPI) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Addresses dispatches through ITTAPI's vtable slot 9.
-func (self *ITTAPI) Get_Addresses(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPI) Get_Addresses() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateAddresses dispatches through ITTAPI's vtable slot 10.
-func (self *ITTAPI) EnumerateAddresses(ppEnumAddress **IEnumAddress) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumAddress)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPI) EnumerateAddresses() (*IEnumAddress, error) {
+	var _ppEnumAddress *IEnumAddress
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumAddress)))
+	return _ppEnumAddress, win32.HRESULTError(int32(r1))
 }
 
 // RegisterCallNotifications dispatches through ITTAPI's vtable slot 11.
-func (self *ITTAPI) RegisterCallNotifications(pAddress *ITAddress, fMonitor foundation.VARIANT_BOOL, fOwner foundation.VARIANT_BOOL, lMediaTypes int32, lCallbackInstance int32, plRegister *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddress)), uintptr(fMonitor), uintptr(fOwner), uintptr(lMediaTypes), uintptr(lCallbackInstance), uintptr(unsafe.Pointer(plRegister)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPI) RegisterCallNotifications(pAddress *ITAddress, fMonitor foundation.VARIANT_BOOL, fOwner foundation.VARIANT_BOOL, lMediaTypes int32, lCallbackInstance int32) (int32, error) {
+	var _plRegister int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAddress)), uintptr(fMonitor), uintptr(fOwner), uintptr(lMediaTypes), uintptr(lCallbackInstance), uintptr(unsafe.Pointer(&_plRegister)))
+	return _plRegister, win32.HRESULTError(int32(r1))
 }
 
 // UnregisterNotifications dispatches through ITTAPI's vtable slot 12.
-func (self *ITTAPI) UnregisterNotifications(lRegister int32) foundation.HRESULT {
+func (self *ITTAPI) UnregisterNotifications(lRegister int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lRegister))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CallHubs dispatches through ITTAPI's vtable slot 13.
-func (self *ITTAPI) Get_CallHubs(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPI) Get_CallHubs() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateCallHubs dispatches through ITTAPI's vtable slot 14.
-func (self *ITTAPI) EnumerateCallHubs(ppEnumCallHub **IEnumCallHub) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumCallHub)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPI) EnumerateCallHubs() (*IEnumCallHub, error) {
+	var _ppEnumCallHub *IEnumCallHub
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumCallHub)))
+	return _ppEnumCallHub, win32.HRESULTError(int32(r1))
 }
 
 // EnumeratePrivateTAPIObjects dispatches through ITTAPI's vtable slot 16.
-func (self *ITTAPI) EnumeratePrivateTAPIObjects(ppEnumUnknown **systemcom.IEnumUnknown) foundation.HRESULT {
+func (self *ITTAPI) EnumeratePrivateTAPIObjects(ppEnumUnknown **systemcom.IEnumUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumUnknown)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PrivateTAPIObjects dispatches through ITTAPI's vtable slot 17.
-func (self *ITTAPI) Get_PrivateTAPIObjects(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPI) Get_PrivateTAPIObjects() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // RegisterRequestRecipient dispatches through ITTAPI's vtable slot 18.
-func (self *ITTAPI) RegisterRequestRecipient(lRegistrationInstance int32, lRequestMode int32, fEnable foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITTAPI) RegisterRequestRecipient(lRegistrationInstance int32, lRequestMode int32, fEnable foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(lRegistrationInstance), uintptr(lRequestMode), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAssistedTelephonyPriority dispatches through ITTAPI's vtable slot 19.
-func (self *ITTAPI) SetAssistedTelephonyPriority(pAppFilename foundation.BSTR, fPriority foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITTAPI) SetAssistedTelephonyPriority(pAppFilename foundation.BSTR, fPriority foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAppFilename)), uintptr(fPriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetApplicationPriority dispatches through ITTAPI's vtable slot 20.
-func (self *ITTAPI) SetApplicationPriority(pAppFilename foundation.BSTR, lMediaType int32, fPriority foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *ITTAPI) SetApplicationPriority(pAppFilename foundation.BSTR, lMediaType int32, fPriority foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAppFilename)), uintptr(lMediaType), uintptr(fPriority))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_EventFilter dispatches through ITTAPI's vtable slot 21.
-func (self *ITTAPI) Put_EventFilter(lFilterMask int32) foundation.HRESULT {
+func (self *ITTAPI) Put_EventFilter(lFilterMask int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(lFilterMask))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EventFilter dispatches through ITTAPI's vtable slot 22.
-func (self *ITTAPI) Get_EventFilter(plFilterMask *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plFilterMask)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPI) Get_EventFilter() (int32, error) {
+	var _plFilterMask int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plFilterMask)))
+	return _plFilterMask, win32.HRESULTError(int32(r1))
 }
 
 // ITTAPI2: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ittapi2
@@ -4659,21 +4947,24 @@ type ITTAPI2 struct {
 var IID_ITTAPI2 = win32.GUID{Data1: 0x54fbdc8c, Data2: 0xd90f, Data3: 0x4dad, Data4: [8]byte{0x96, 0x95, 0xb3, 0x73, 0x09, 0x7f, 0x09, 0x4b}}
 
 // Get_Phones dispatches through ITTAPI2's vtable slot 23.
-func (self *ITTAPI2) Get_Phones(pPhones *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhones)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPI2) Get_Phones() (systemvariant.VARIANT, error) {
+	var _pPhones systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pPhones)))
+	return _pPhones, win32.HRESULTError(int32(r1))
 }
 
 // EnumeratePhones dispatches through ITTAPI2's vtable slot 24.
-func (self *ITTAPI2) EnumeratePhones(ppEnumPhone **IEnumPhone) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumPhone)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPI2) EnumeratePhones() (*IEnumPhone, error) {
+	var _ppEnumPhone *IEnumPhone
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppEnumPhone)))
+	return _ppEnumPhone, win32.HRESULTError(int32(r1))
 }
 
 // CreateEmptyCollectionObject dispatches through ITTAPI2's vtable slot 25.
-func (self *ITTAPI2) CreateEmptyCollectionObject(ppCollection **ITCollection2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCollection)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPI2) CreateEmptyCollectionObject() (*ITCollection2, error) {
+	var _ppCollection *ITCollection2
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCollection)))
+	return _ppCollection, win32.HRESULTError(int32(r1))
 }
 
 // ITTAPICallCenter: https://learn.microsoft.com/windows/win32/api/tapi3cc/nn-tapi3cc-ittapicallcenter
@@ -4686,15 +4977,15 @@ type ITTAPICallCenter struct {
 var IID_ITTAPICallCenter = win32.GUID{Data1: 0x5afc3154, Data2: 0x4bcc, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x80, 0x00, 0x80, 0x5f, 0xc1, 0x47, 0xd3}}
 
 // EnumerateAgentHandlers dispatches through ITTAPICallCenter's vtable slot 7.
-func (self *ITTAPICallCenter) EnumerateAgentHandlers(ppEnumHandler **IEnumAgentHandler) foundation.HRESULT {
+func (self *ITTAPICallCenter) EnumerateAgentHandlers(ppEnumHandler **IEnumAgentHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumHandler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AgentHandlers dispatches through ITTAPICallCenter's vtable slot 8.
-func (self *ITTAPICallCenter) Get_AgentHandlers(pVariant *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ITTAPICallCenter) Get_AgentHandlers(pVariant *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 9f34325b-7e62-11d2-9457-00c04f8ec888
@@ -4715,9 +5006,9 @@ type ITTAPIEventNotification struct {
 var IID_ITTAPIEventNotification = win32.GUID{Data1: 0xeddb9426, Data2: 0x3b91, Data3: 0x11d1, Data4: [8]byte{0x8f, 0x30, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Event dispatches through ITTAPIEventNotification's vtable slot 3.
-func (self *ITTAPIEventNotification) Event(TapiEvent TAPI_EVENT, pEvent *systemcom.IDispatch) foundation.HRESULT {
+func (self *ITTAPIEventNotification) Event(TapiEvent TAPI_EVENT, pEvent *systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(TapiEvent), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITTAPIObjectEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ittapiobjectevent
@@ -4730,27 +5021,31 @@ type ITTAPIObjectEvent struct {
 var IID_ITTAPIObjectEvent = win32.GUID{Data1: 0xf4854d48, Data2: 0x937a, Data3: 0x11d1, Data4: [8]byte{0xbb, 0x58, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Get_TAPIObject dispatches through ITTAPIObjectEvent's vtable slot 7.
-func (self *ITTAPIObjectEvent) Get_TAPIObject(ppTAPIObject **ITTAPI) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTAPIObject)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPIObjectEvent) Get_TAPIObject() (*ITTAPI, error) {
+	var _ppTAPIObject *ITTAPI
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTAPIObject)))
+	return _ppTAPIObject, win32.HRESULTError(int32(r1))
 }
 
 // Get_Event dispatches through ITTAPIObjectEvent's vtable slot 8.
-func (self *ITTAPIObjectEvent) Get_Event(pEvent *TAPIOBJECT_EVENT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEvent)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPIObjectEvent) Get_Event() (TAPIOBJECT_EVENT, error) {
+	var _pEvent TAPIOBJECT_EVENT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pEvent)))
+	return _pEvent, win32.HRESULTError(int32(r1))
 }
 
 // Get_Address dispatches through ITTAPIObjectEvent's vtable slot 9.
-func (self *ITTAPIObjectEvent) Get_Address(ppAddress **ITAddress) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAddress)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPIObjectEvent) Get_Address() (*ITAddress, error) {
+	var _ppAddress *ITAddress
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAddress)))
+	return _ppAddress, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallbackInstance dispatches through ITTAPIObjectEvent's vtable slot 10.
-func (self *ITTAPIObjectEvent) Get_CallbackInstance(plCallbackInstance *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCallbackInstance)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPIObjectEvent) Get_CallbackInstance() (int32, error) {
+	var _plCallbackInstance int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCallbackInstance)))
+	return _plCallbackInstance, win32.HRESULTError(int32(r1))
 }
 
 // ITTAPIObjectEvent2: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ittapiobjectevent2
@@ -4763,9 +5058,10 @@ type ITTAPIObjectEvent2 struct {
 var IID_ITTAPIObjectEvent2 = win32.GUID{Data1: 0x359dda6e, Data2: 0x68ce, Data3: 0x4383, Data4: [8]byte{0xbf, 0x0b, 0x16, 0x91, 0x33, 0xc4, 0x1b, 0x46}}
 
 // Get_Phone dispatches through ITTAPIObjectEvent2's vtable slot 11.
-func (self *ITTAPIObjectEvent2) Get_Phone(ppPhone **ITPhone) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPhone)))
-	return foundation.HRESULT(r1)
+func (self *ITTAPIObjectEvent2) Get_Phone() (*ITPhone, error) {
+	var _ppPhone *ITPhone
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPhone)))
+	return _ppPhone, win32.HRESULTError(int32(r1))
 }
 
 // ITTTSTerminalEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itttsterminalevent
@@ -4778,21 +5074,24 @@ type ITTTSTerminalEvent struct {
 var IID_ITTTSTerminalEvent = win32.GUID{Data1: 0xd964788f, Data2: 0x95a5, Data3: 0x461d, Data4: [8]byte{0xab, 0x0c, 0xb9, 0x90, 0x0a, 0x6c, 0x27, 0x13}}
 
 // Get_Terminal dispatches through ITTTSTerminalEvent's vtable slot 7.
-func (self *ITTTSTerminalEvent) Get_Terminal(ppTerminal **ITTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTerminal)))
-	return foundation.HRESULT(r1)
+func (self *ITTTSTerminalEvent) Get_Terminal() (*ITTerminal, error) {
+	var _ppTerminal *ITTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTerminal)))
+	return _ppTerminal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Call dispatches through ITTTSTerminalEvent's vtable slot 8.
-func (self *ITTTSTerminalEvent) Get_Call(ppCall **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCall)))
-	return foundation.HRESULT(r1)
+func (self *ITTTSTerminalEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCall *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCall)))
+	return _ppCall, win32.HRESULTError(int32(r1))
 }
 
 // Get_Error dispatches through ITTTSTerminalEvent's vtable slot 9.
-func (self *ITTTSTerminalEvent) Get_Error(phrErrorCode *foundation.HRESULT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrErrorCode)))
-	return foundation.HRESULT(r1)
+func (self *ITTTSTerminalEvent) Get_Error() (foundation.HRESULT, error) {
+	var _phrErrorCode foundation.HRESULT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phrErrorCode)))
+	return _phrErrorCode, win32.HRESULTError(int32(r1))
 }
 
 // ITTerminal: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itterminal
@@ -4805,39 +5104,45 @@ type ITTerminal struct {
 var IID_ITTerminal = win32.GUID{Data1: 0xb1efc38a, Data2: 0x9355, Data3: 0x11d0, Data4: [8]byte{0x83, 0x5c, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Get_Name dispatches through ITTerminal's vtable slot 7.
-func (self *ITTerminal) Get_Name(ppName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminal) Get_Name() (foundation.BSTR, error) {
+	var _ppName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppName)))
+	return _ppName, win32.HRESULTError(int32(r1))
 }
 
 // Get_State dispatches through ITTerminal's vtable slot 8.
-func (self *ITTerminal) Get_State(pTerminalState *TERMINAL_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminalState)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminal) Get_State() (TERMINAL_STATE, error) {
+	var _pTerminalState TERMINAL_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pTerminalState)))
+	return _pTerminalState, win32.HRESULTError(int32(r1))
 }
 
 // Get_TerminalType dispatches through ITTerminal's vtable slot 9.
-func (self *ITTerminal) Get_TerminalType(pType *TERMINAL_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminal) Get_TerminalType() (TERMINAL_TYPE, error) {
+	var _pType TERMINAL_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pType)))
+	return _pType, win32.HRESULTError(int32(r1))
 }
 
 // Get_TerminalClass dispatches through ITTerminal's vtable slot 10.
-func (self *ITTerminal) Get_TerminalClass(ppTerminalClass *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTerminalClass)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminal) Get_TerminalClass() (foundation.BSTR, error) {
+	var _ppTerminalClass foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTerminalClass)))
+	return _ppTerminalClass, win32.HRESULTError(int32(r1))
 }
 
 // Get_MediaType dispatches through ITTerminal's vtable slot 11.
-func (self *ITTerminal) Get_MediaType(plMediaType *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMediaType)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminal) Get_MediaType() (int32, error) {
+	var _plMediaType int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plMediaType)))
+	return _plMediaType, win32.HRESULTError(int32(r1))
 }
 
 // Get_Direction dispatches through ITTerminal's vtable slot 12.
-func (self *ITTerminal) Get_Direction(pDirection *TERMINAL_DIRECTION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDirection)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminal) Get_Direction() (TERMINAL_DIRECTION, error) {
+	var _pDirection TERMINAL_DIRECTION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDirection)))
+	return _pDirection, win32.HRESULTError(int32(r1))
 }
 
 // ITTerminalSupport: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itterminalsupport
@@ -4850,39 +5155,45 @@ type ITTerminalSupport struct {
 var IID_ITTerminalSupport = win32.GUID{Data1: 0xb1efc385, Data2: 0x9355, Data3: 0x11d0, Data4: [8]byte{0x83, 0x5c, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Get_StaticTerminals dispatches through ITTerminalSupport's vtable slot 7.
-func (self *ITTerminalSupport) Get_StaticTerminals(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminalSupport) Get_StaticTerminals() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateStaticTerminals dispatches through ITTerminalSupport's vtable slot 8.
-func (self *ITTerminalSupport) EnumerateStaticTerminals(ppTerminalEnumerator **IEnumTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTerminalEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminalSupport) EnumerateStaticTerminals() (*IEnumTerminal, error) {
+	var _ppTerminalEnumerator *IEnumTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTerminalEnumerator)))
+	return _ppTerminalEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // Get_DynamicTerminalClasses dispatches through ITTerminalSupport's vtable slot 9.
-func (self *ITTerminalSupport) Get_DynamicTerminalClasses(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminalSupport) Get_DynamicTerminalClasses() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // EnumerateDynamicTerminalClasses dispatches through ITTerminalSupport's vtable slot 10.
-func (self *ITTerminalSupport) EnumerateDynamicTerminalClasses(ppTerminalClassEnumerator **IEnumTerminalClass) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTerminalClassEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminalSupport) EnumerateDynamicTerminalClasses() (*IEnumTerminalClass, error) {
+	var _ppTerminalClassEnumerator *IEnumTerminalClass
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTerminalClassEnumerator)))
+	return _ppTerminalClassEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // CreateTerminal dispatches through ITTerminalSupport's vtable slot 11.
-func (self *ITTerminalSupport) CreateTerminal(pTerminalClass foundation.BSTR, lMediaType int32, Direction TERMINAL_DIRECTION, ppTerminal **ITTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminalClass)), uintptr(lMediaType), uintptr(Direction), uintptr(unsafe.Pointer(ppTerminal)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminalSupport) CreateTerminal(pTerminalClass foundation.BSTR, lMediaType int32, Direction TERMINAL_DIRECTION) (*ITTerminal, error) {
+	var _ppTerminal *ITTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTerminalClass)), uintptr(lMediaType), uintptr(Direction), uintptr(unsafe.Pointer(&_ppTerminal)))
+	return _ppTerminal, win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultStaticTerminal dispatches through ITTerminalSupport's vtable slot 12.
-func (self *ITTerminalSupport) GetDefaultStaticTerminal(lMediaType int32, Direction TERMINAL_DIRECTION, ppTerminal **ITTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lMediaType), uintptr(Direction), uintptr(unsafe.Pointer(ppTerminal)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminalSupport) GetDefaultStaticTerminal(lMediaType int32, Direction TERMINAL_DIRECTION) (*ITTerminal, error) {
+	var _ppTerminal *ITTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(lMediaType), uintptr(Direction), uintptr(unsafe.Pointer(&_ppTerminal)))
+	return _ppTerminal, win32.HRESULTError(int32(r1))
 }
 
 // ITTerminalSupport2: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-itterminalsupport2
@@ -4895,21 +5206,24 @@ type ITTerminalSupport2 struct {
 var IID_ITTerminalSupport2 = win32.GUID{Data1: 0xf3eb39bc, Data2: 0x1b1f, Data3: 0x4e99, Data4: [8]byte{0xa0, 0xc0, 0x56, 0x30, 0x5c, 0x4d, 0xd5, 0x91}}
 
 // Get_PluggableSuperclasses dispatches through ITTerminalSupport2's vtable slot 13.
-func (self *ITTerminalSupport2) Get_PluggableSuperclasses(pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminalSupport2) Get_PluggableSuperclasses() (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // EnumeratePluggableSuperclasses dispatches through ITTerminalSupport2's vtable slot 14.
-func (self *ITTerminalSupport2) EnumeratePluggableSuperclasses(ppSuperclassEnumerator **IEnumPluggableSuperclassInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSuperclassEnumerator)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminalSupport2) EnumeratePluggableSuperclasses() (*IEnumPluggableSuperclassInfo, error) {
+	var _ppSuperclassEnumerator *IEnumPluggableSuperclassInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSuperclassEnumerator)))
+	return _ppSuperclassEnumerator, win32.HRESULTError(int32(r1))
 }
 
 // Get_PluggableTerminalClasses dispatches through ITTerminalSupport2's vtable slot 15.
-func (self *ITTerminalSupport2) Get_PluggableTerminalClasses(bstrTerminalSuperclass foundation.BSTR, lMediaType int32, pVariant *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTerminalSuperclass)), uintptr(lMediaType), uintptr(unsafe.Pointer(pVariant)))
-	return foundation.HRESULT(r1)
+func (self *ITTerminalSupport2) Get_PluggableTerminalClasses(bstrTerminalSuperclass foundation.BSTR, lMediaType int32) (systemvariant.VARIANT, error) {
+	var _pVariant systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrTerminalSuperclass)), uintptr(lMediaType), uintptr(unsafe.Pointer(&_pVariant)))
+	return _pVariant, win32.HRESULTError(int32(r1))
 }
 
 // ITToneDetectionEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ittonedetectionevent
@@ -4922,27 +5236,31 @@ type ITToneDetectionEvent struct {
 var IID_ITToneDetectionEvent = win32.GUID{Data1: 0x407e0faf, Data2: 0xd047, Data3: 0x4753, Data4: [8]byte{0xb0, 0xc6, 0x8e, 0x06, 0x03, 0x73, 0xfe, 0xcd}}
 
 // Get_Call dispatches through ITToneDetectionEvent's vtable slot 7.
-func (self *ITToneDetectionEvent) Get_Call(ppCallInfo **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCallInfo)))
-	return foundation.HRESULT(r1)
+func (self *ITToneDetectionEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCallInfo *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCallInfo)))
+	return _ppCallInfo, win32.HRESULTError(int32(r1))
 }
 
 // Get_AppSpecific dispatches through ITToneDetectionEvent's vtable slot 8.
-func (self *ITToneDetectionEvent) Get_AppSpecific(plAppSpecific *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plAppSpecific)))
-	return foundation.HRESULT(r1)
+func (self *ITToneDetectionEvent) Get_AppSpecific() (int32, error) {
+	var _plAppSpecific int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plAppSpecific)))
+	return _plAppSpecific, win32.HRESULTError(int32(r1))
 }
 
 // Get_TickCount dispatches through ITToneDetectionEvent's vtable slot 9.
-func (self *ITToneDetectionEvent) Get_TickCount(plTickCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plTickCount)))
-	return foundation.HRESULT(r1)
+func (self *ITToneDetectionEvent) Get_TickCount() (int32, error) {
+	var _plTickCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plTickCount)))
+	return _plTickCount, win32.HRESULTError(int32(r1))
 }
 
 // Get_CallbackInstance dispatches through ITToneDetectionEvent's vtable slot 10.
-func (self *ITToneDetectionEvent) Get_CallbackInstance(plCallbackInstance *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCallbackInstance)))
-	return foundation.HRESULT(r1)
+func (self *ITToneDetectionEvent) Get_CallbackInstance() (int32, error) {
+	var _plCallbackInstance int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCallbackInstance)))
+	return _plCallbackInstance, win32.HRESULTError(int32(r1))
 }
 
 // ITToneTerminalEvent: https://learn.microsoft.com/windows/win32/api/tapi3if/nn-tapi3if-ittoneterminalevent
@@ -4955,21 +5273,24 @@ type ITToneTerminalEvent struct {
 var IID_ITToneTerminalEvent = win32.GUID{Data1: 0xe6f56009, Data2: 0x611f, Data3: 0x4945, Data4: [8]byte{0xbb, 0xd2, 0x2d, 0x0c, 0xe5, 0x61, 0x20, 0x56}}
 
 // Get_Terminal dispatches through ITToneTerminalEvent's vtable slot 7.
-func (self *ITToneTerminalEvent) Get_Terminal(ppTerminal **ITTerminal) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTerminal)))
-	return foundation.HRESULT(r1)
+func (self *ITToneTerminalEvent) Get_Terminal() (*ITTerminal, error) {
+	var _ppTerminal *ITTerminal
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppTerminal)))
+	return _ppTerminal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Call dispatches through ITToneTerminalEvent's vtable slot 8.
-func (self *ITToneTerminalEvent) Get_Call(ppCall **ITCallInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCall)))
-	return foundation.HRESULT(r1)
+func (self *ITToneTerminalEvent) Get_Call() (*ITCallInfo, error) {
+	var _ppCall *ITCallInfo
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCall)))
+	return _ppCall, win32.HRESULTError(int32(r1))
 }
 
 // Get_Error dispatches through ITToneTerminalEvent's vtable slot 9.
-func (self *ITToneTerminalEvent) Get_Error(phrErrorCode *foundation.HRESULT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrErrorCode)))
-	return foundation.HRESULT(r1)
+func (self *ITToneTerminalEvent) Get_Error() (foundation.HRESULT, error) {
+	var _phrErrorCode foundation.HRESULT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_phrErrorCode)))
+	return _phrErrorCode, win32.HRESULTError(int32(r1))
 }
 
 // ITnef: https://learn.microsoft.com/office/client-developer/outlook/mapi/itnefiunknown
@@ -4978,43 +5299,43 @@ type ITnef struct {
 }
 
 // AddProps dispatches through ITnef's vtable slot 3.
-func (self *ITnef) AddProps(ulFlags uint32, ulElemID uint32, lpvData unsafe.Pointer, lpPropList *systemaddressbook.SPropTagArray) foundation.HRESULT {
+func (self *ITnef) AddProps(ulFlags uint32, ulElemID uint32, lpvData unsafe.Pointer, lpPropList *systemaddressbook.SPropTagArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(ulElemID), uintptr(unsafe.Pointer(lpvData)), uintptr(unsafe.Pointer(lpPropList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ExtractProps dispatches through ITnef's vtable slot 4.
-func (self *ITnef) ExtractProps(ulFlags uint32, lpPropList *systemaddressbook.SPropTagArray, lpProblems **STnefProblemArray) foundation.HRESULT {
+func (self *ITnef) ExtractProps(ulFlags uint32, lpPropList *systemaddressbook.SPropTagArray, lpProblems **STnefProblemArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpPropList)), uintptr(unsafe.Pointer(lpProblems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish dispatches through ITnef's vtable slot 5.
-func (self *ITnef) Finish(ulFlags uint32, lpKey *uint16, lpProblems **STnefProblemArray) foundation.HRESULT {
+func (self *ITnef) Finish(ulFlags uint32, lpKey *uint16, lpProblems **STnefProblemArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpKey)), uintptr(unsafe.Pointer(lpProblems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenTaggedBody dispatches through ITnef's vtable slot 6.
-func (self *ITnef) OpenTaggedBody(lpMessage *systemaddressbook.IMessage, ulFlags uint32, lppStream **systemcom.IStream) foundation.HRESULT {
+func (self *ITnef) OpenTaggedBody(lpMessage *systemaddressbook.IMessage, ulFlags uint32, lppStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpMessage)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProps dispatches through ITnef's vtable slot 7.
-func (self *ITnef) SetProps(ulFlags uint32, ulElemID uint32, cValues uint32, lpProps *systemaddressbook.SPropValue) foundation.HRESULT {
+func (self *ITnef) SetProps(ulFlags uint32, ulElemID uint32, cValues uint32, lpProps *systemaddressbook.SPropValue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(ulElemID), uintptr(cValues), uintptr(unsafe.Pointer(lpProps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EncodeRecips dispatches through ITnef's vtable slot 8.
-func (self *ITnef) EncodeRecips(ulFlags uint32, lpRecipientTable *systemaddressbook.IMAPITable) foundation.HRESULT {
+func (self *ITnef) EncodeRecips(ulFlags uint32, lpRecipientTable *systemaddressbook.IMAPITable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpRecipientTable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FinishComponent dispatches through ITnef's vtable slot 9.
-func (self *ITnef) FinishComponent(ulFlags uint32, ulComponentID uint32, lpCustomPropList *systemaddressbook.SPropTagArray, lpCustomProps *systemaddressbook.SPropValue, lpPropList *systemaddressbook.SPropTagArray, lpProblems **STnefProblemArray) foundation.HRESULT {
+func (self *ITnef) FinishComponent(ulFlags uint32, ulComponentID uint32, lpCustomPropList *systemaddressbook.SPropTagArray, lpCustomProps *systemaddressbook.SPropValue, lpPropList *systemaddressbook.SPropTagArray, lpProblems **STnefProblemArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(ulComponentID), uintptr(unsafe.Pointer(lpCustomPropList)), uintptr(unsafe.Pointer(lpCustomProps)), uintptr(unsafe.Pointer(lpPropList)), uintptr(unsafe.Pointer(lpProblems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

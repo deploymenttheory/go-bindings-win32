@@ -19,8 +19,8 @@ type CACHE_DESCRIPTOR struct {
 	Type          PROCESSOR_CACHE_TYPE
 }
 
-// CACHE_RELATIONSHIP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CACHE_RELATIONSHIP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CACHE_RELATIONSHIP_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -89,8 +89,8 @@ type MEMORYSTATUSEX struct {
 	UllAvailExtendedVirtual uint64
 }
 
-// NUMA_NODE_RELATIONSHIP_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NUMA_NODE_RELATIONSHIP_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NUMA_NODE_RELATIONSHIP_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -170,8 +170,8 @@ type PROCESSOR_RELATIONSHIP struct {
 	GroupMask       [1]GROUP_AFFINITY
 }
 
-// SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -183,8 +183,8 @@ type SYSTEM_CPU_SET_INFORMATION struct {
 	Anonymous SYSTEM_CPU_SET_INFORMATION_Anonymous_e__Union
 }
 
-// SYSTEM_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SYSTEM_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SYSTEM_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -203,8 +203,8 @@ type SYSTEM_INFO struct {
 	WProcessorRevision          uint16
 }
 
-// SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -216,8 +216,8 @@ type SYSTEM_LOGICAL_PROCESSOR_INFORMATION struct {
 	Anonymous     SYSTEM_LOGICAL_PROCESSOR_INFORMATION_Anonymous_e__Union
 }
 
-// SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX_Anonymous_e__Union struct {
 	Data [9]uint64
 }

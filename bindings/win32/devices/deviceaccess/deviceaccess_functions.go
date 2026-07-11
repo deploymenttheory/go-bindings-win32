@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 var (
@@ -22,7 +21,8 @@ var (
 
 // CreateDeviceAccessInstance calls deviceaccess!CreateDeviceAccessInstance.
 // https://learn.microsoft.com/windows/win32/api/deviceaccess/nf-deviceaccess-createdeviceaccessinstance
-func CreateDeviceAccessInstance(deviceInterfacePath foundation.PWSTR, desiredAccess uint32, createAsync **ICreateDeviceAccessAsync) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateDeviceAccessInstance.Addr(), uintptr(unsafe.Pointer(deviceInterfacePath)), uintptr(desiredAccess), uintptr(unsafe.Pointer(createAsync)))
-	return foundation.HRESULT(r1)
+func CreateDeviceAccessInstance(deviceInterfacePath string, desiredAccess uint32, createAsync **ICreateDeviceAccessAsync) error {
+	_deviceInterfacePath := win32.UTF16Ptr(deviceInterfacePath)
+	r1, _, _ := syscall.SyscallN(procCreateDeviceAccessInstance.Addr(), uintptr(unsafe.Pointer(_deviceInterfacePath)), uintptr(desiredAccess), uintptr(unsafe.Pointer(createAsync)))
+	return win32.HRESULTError(int32(r1))
 }

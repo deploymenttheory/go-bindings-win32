@@ -70,8 +70,9 @@ var (
 // BluetoothAuthenticateDevice calls bthprops.cpl!BluetoothAuthenticateDevice.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothauthenticatedevice
 // Minimum OS: windows6.0.6000.
-func BluetoothAuthenticateDevice(hwndParent foundation.HWND, hRadio foundation.HANDLE, pbtbi *BLUETOOTH_DEVICE_INFO, pszPasskey foundation.PWSTR, ulPasskeyLength uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procBluetoothAuthenticateDevice.Addr(), uintptr(hwndParent), uintptr(hRadio), uintptr(unsafe.Pointer(pbtbi)), uintptr(unsafe.Pointer(pszPasskey)), uintptr(ulPasskeyLength))
+func BluetoothAuthenticateDevice(hwndParent foundation.HWND, hRadio foundation.HANDLE, pbtbi *BLUETOOTH_DEVICE_INFO, pszPasskey string, ulPasskeyLength uint32) uint32 {
+	_pszPasskey := win32.UTF16Ptr(pszPasskey)
+	r1, _, _ := syscall.SyscallN(procBluetoothAuthenticateDevice.Addr(), uintptr(hwndParent), uintptr(hRadio), uintptr(unsafe.Pointer(pbtbi)), uintptr(unsafe.Pointer(_pszPasskey)), uintptr(ulPasskeyLength))
 	return uint32(r1)
 }
 
@@ -86,8 +87,12 @@ func BluetoothAuthenticateDeviceEx(hwndParentIn foundation.HWND, hRadioIn founda
 // BluetoothAuthenticateMultipleDevices calls bthprops.cpl!BluetoothAuthenticateMultipleDevices.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothauthenticatemultipledevices
 // Minimum OS: windows6.0.6000.
-func BluetoothAuthenticateMultipleDevices(hwndParent foundation.HWND, hRadio foundation.HANDLE, cDevices uint32, rgbtdi *BLUETOOTH_DEVICE_INFO) uint32 {
-	r1, _, _ := syscall.SyscallN(procBluetoothAuthenticateMultipleDevices.Addr(), uintptr(hwndParent), uintptr(hRadio), uintptr(cDevices), uintptr(unsafe.Pointer(rgbtdi)))
+func BluetoothAuthenticateMultipleDevices(hwndParent foundation.HWND, hRadio foundation.HANDLE, rgbtdi []BLUETOOTH_DEVICE_INFO) uint32 {
+	var _rgbtdi *BLUETOOTH_DEVICE_INFO
+	if len(rgbtdi) > 0 {
+		_rgbtdi = &rgbtdi[0]
+	}
+	r1, _, _ := syscall.SyscallN(procBluetoothAuthenticateMultipleDevices.Addr(), uintptr(hwndParent), uintptr(hRadio), uintptr(len(rgbtdi)), uintptr(unsafe.Pointer(_rgbtdi)))
 	return uint32(r1)
 }
 
@@ -105,17 +110,19 @@ func BluetoothDisplayDeviceProperties(hwndParent foundation.HWND, pbtdi *BLUETOO
 // BluetoothEnableDiscovery calls BluetoothApis!BluetoothEnableDiscovery.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothenablediscovery
 // Minimum OS: windows6.0.6000.
-func BluetoothEnableDiscovery(hRadio foundation.HANDLE, fEnabled foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procBluetoothEnableDiscovery.Addr(), uintptr(hRadio), uintptr(fEnabled))
-	return foundation.BOOL(r1)
+func BluetoothEnableDiscovery(hRadio foundation.HANDLE, fEnabled bool) bool {
+	_fEnabled := win32.Bool32(fEnabled)
+	r1, _, _ := syscall.SyscallN(procBluetoothEnableDiscovery.Addr(), uintptr(hRadio), uintptr(_fEnabled))
+	return r1 != 0
 }
 
 // BluetoothEnableIncomingConnections calls BluetoothApis!BluetoothEnableIncomingConnections.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothenableincomingconnections
 // Minimum OS: windows6.0.6000.
-func BluetoothEnableIncomingConnections(hRadio foundation.HANDLE, fEnabled foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procBluetoothEnableIncomingConnections.Addr(), uintptr(hRadio), uintptr(fEnabled))
-	return foundation.BOOL(r1)
+func BluetoothEnableIncomingConnections(hRadio foundation.HANDLE, fEnabled bool) bool {
+	_fEnabled := win32.Bool32(fEnabled)
+	r1, _, _ := syscall.SyscallN(procBluetoothEnableIncomingConnections.Addr(), uintptr(hRadio), uintptr(_fEnabled))
+	return r1 != 0
 }
 
 // BluetoothEnumerateInstalledServices calls BluetoothApis!BluetoothEnumerateInstalledServices.
@@ -197,105 +204,121 @@ func BluetoothFindRadioClose(hFind HBLUETOOTH_RADIO_FIND) error {
 // BluetoothGATTAbortReliableWrite calls BluetoothApis!BluetoothGATTAbortReliableWrite.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattabortreliablewrite
 // Minimum OS: windows8.0.
-func BluetoothGATTAbortReliableWrite(hDevice foundation.HANDLE, ReliableWriteContext uint64, Flags uint32) foundation.HRESULT {
+func BluetoothGATTAbortReliableWrite(hDevice foundation.HANDLE, ReliableWriteContext uint64, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTAbortReliableWrite.Addr(), uintptr(hDevice), uintptr(ReliableWriteContext), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BluetoothGATTBeginReliableWrite calls BluetoothApis!BluetoothGATTBeginReliableWrite.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattbeginreliablewrite
 // Minimum OS: windows8.0.
-func BluetoothGATTBeginReliableWrite(hDevice foundation.HANDLE, ReliableWriteContext *uint64, Flags uint32) foundation.HRESULT {
+func BluetoothGATTBeginReliableWrite(hDevice foundation.HANDLE, ReliableWriteContext *uint64, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTBeginReliableWrite.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(ReliableWriteContext)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BluetoothGATTEndReliableWrite calls BluetoothApis!BluetoothGATTEndReliableWrite.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattendreliablewrite
 // Minimum OS: windows8.0.
-func BluetoothGATTEndReliableWrite(hDevice foundation.HANDLE, ReliableWriteContext uint64, Flags uint32) foundation.HRESULT {
+func BluetoothGATTEndReliableWrite(hDevice foundation.HANDLE, ReliableWriteContext uint64, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTEndReliableWrite.Addr(), uintptr(hDevice), uintptr(ReliableWriteContext), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BluetoothGATTGetCharacteristicValue calls BluetoothApis!BluetoothGATTGetCharacteristicValue.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetcharacteristicvalue
 // Minimum OS: windows8.0.
-func BluetoothGATTGetCharacteristicValue(hDevice foundation.HANDLE, Characteristic *BTH_LE_GATT_CHARACTERISTIC, CharacteristicValueDataSize uint32, CharacteristicValue *BTH_LE_GATT_CHARACTERISTIC_VALUE, CharacteristicValueSizeRequired *uint16, Flags uint32) foundation.HRESULT {
+func BluetoothGATTGetCharacteristicValue(hDevice foundation.HANDLE, Characteristic *BTH_LE_GATT_CHARACTERISTIC, CharacteristicValueDataSize uint32, CharacteristicValue *BTH_LE_GATT_CHARACTERISTIC_VALUE, CharacteristicValueSizeRequired *uint16, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetCharacteristicValue.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(Characteristic)), uintptr(CharacteristicValueDataSize), uintptr(unsafe.Pointer(CharacteristicValue)), uintptr(unsafe.Pointer(CharacteristicValueSizeRequired)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BluetoothGATTGetCharacteristics calls BluetoothApis!BluetoothGATTGetCharacteristics.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetcharacteristics
 // Minimum OS: windows8.0.
-func BluetoothGATTGetCharacteristics(hDevice foundation.HANDLE, Service *BTH_LE_GATT_SERVICE, CharacteristicsBufferCount uint16, CharacteristicsBuffer *BTH_LE_GATT_CHARACTERISTIC, CharacteristicsBufferActual *uint16, Flags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetCharacteristics.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(Service)), uintptr(CharacteristicsBufferCount), uintptr(unsafe.Pointer(CharacteristicsBuffer)), uintptr(unsafe.Pointer(CharacteristicsBufferActual)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+func BluetoothGATTGetCharacteristics(hDevice foundation.HANDLE, Service *BTH_LE_GATT_SERVICE, CharacteristicsBuffer []BTH_LE_GATT_CHARACTERISTIC, CharacteristicsBufferActual *uint16, Flags uint32) error {
+	var _CharacteristicsBuffer *BTH_LE_GATT_CHARACTERISTIC
+	if len(CharacteristicsBuffer) > 0 {
+		_CharacteristicsBuffer = &CharacteristicsBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetCharacteristics.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(Service)), uintptr(len(CharacteristicsBuffer)), uintptr(unsafe.Pointer(_CharacteristicsBuffer)), uintptr(unsafe.Pointer(CharacteristicsBufferActual)), uintptr(Flags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // BluetoothGATTGetDescriptorValue calls BluetoothApis!BluetoothGATTGetDescriptorValue.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetdescriptorvalue
 // Minimum OS: windows8.0.
-func BluetoothGATTGetDescriptorValue(hDevice foundation.HANDLE, Descriptor *BTH_LE_GATT_DESCRIPTOR, DescriptorValueDataSize uint32, DescriptorValue *BTH_LE_GATT_DESCRIPTOR_VALUE, DescriptorValueSizeRequired *uint16, Flags uint32) foundation.HRESULT {
+func BluetoothGATTGetDescriptorValue(hDevice foundation.HANDLE, Descriptor *BTH_LE_GATT_DESCRIPTOR, DescriptorValueDataSize uint32, DescriptorValue *BTH_LE_GATT_DESCRIPTOR_VALUE, DescriptorValueSizeRequired *uint16, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetDescriptorValue.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(Descriptor)), uintptr(DescriptorValueDataSize), uintptr(unsafe.Pointer(DescriptorValue)), uintptr(unsafe.Pointer(DescriptorValueSizeRequired)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BluetoothGATTGetDescriptors calls BluetoothApis!BluetoothGATTGetDescriptors.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetdescriptors
 // Minimum OS: windows8.0.
-func BluetoothGATTGetDescriptors(hDevice foundation.HANDLE, Characteristic *BTH_LE_GATT_CHARACTERISTIC, DescriptorsBufferCount uint16, DescriptorsBuffer *BTH_LE_GATT_DESCRIPTOR, DescriptorsBufferActual *uint16, Flags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetDescriptors.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(Characteristic)), uintptr(DescriptorsBufferCount), uintptr(unsafe.Pointer(DescriptorsBuffer)), uintptr(unsafe.Pointer(DescriptorsBufferActual)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+func BluetoothGATTGetDescriptors(hDevice foundation.HANDLE, Characteristic *BTH_LE_GATT_CHARACTERISTIC, DescriptorsBuffer []BTH_LE_GATT_DESCRIPTOR, DescriptorsBufferActual *uint16, Flags uint32) error {
+	var _DescriptorsBuffer *BTH_LE_GATT_DESCRIPTOR
+	if len(DescriptorsBuffer) > 0 {
+		_DescriptorsBuffer = &DescriptorsBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetDescriptors.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(Characteristic)), uintptr(len(DescriptorsBuffer)), uintptr(unsafe.Pointer(_DescriptorsBuffer)), uintptr(unsafe.Pointer(DescriptorsBufferActual)), uintptr(Flags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // BluetoothGATTGetIncludedServices calls BluetoothApis!BluetoothGATTGetIncludedServices.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetincludedservices
 // Minimum OS: windows8.0.
-func BluetoothGATTGetIncludedServices(hDevice foundation.HANDLE, ParentService *BTH_LE_GATT_SERVICE, IncludedServicesBufferCount uint16, IncludedServicesBuffer *BTH_LE_GATT_SERVICE, IncludedServicesBufferActual *uint16, Flags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetIncludedServices.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(ParentService)), uintptr(IncludedServicesBufferCount), uintptr(unsafe.Pointer(IncludedServicesBuffer)), uintptr(unsafe.Pointer(IncludedServicesBufferActual)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+func BluetoothGATTGetIncludedServices(hDevice foundation.HANDLE, ParentService *BTH_LE_GATT_SERVICE, IncludedServicesBuffer []BTH_LE_GATT_SERVICE, IncludedServicesBufferActual *uint16, Flags uint32) error {
+	var _IncludedServicesBuffer *BTH_LE_GATT_SERVICE
+	if len(IncludedServicesBuffer) > 0 {
+		_IncludedServicesBuffer = &IncludedServicesBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetIncludedServices.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(ParentService)), uintptr(len(IncludedServicesBuffer)), uintptr(unsafe.Pointer(_IncludedServicesBuffer)), uintptr(unsafe.Pointer(IncludedServicesBufferActual)), uintptr(Flags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // BluetoothGATTGetServices calls BluetoothApis!BluetoothGATTGetServices.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattgetservices
 // Minimum OS: windows8.0.
-func BluetoothGATTGetServices(hDevice foundation.HANDLE, ServicesBufferCount uint16, ServicesBuffer *BTH_LE_GATT_SERVICE, ServicesBufferActual *uint16, Flags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetServices.Addr(), uintptr(hDevice), uintptr(ServicesBufferCount), uintptr(unsafe.Pointer(ServicesBuffer)), uintptr(unsafe.Pointer(ServicesBufferActual)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+func BluetoothGATTGetServices(hDevice foundation.HANDLE, ServicesBuffer []BTH_LE_GATT_SERVICE, ServicesBufferActual *uint16, Flags uint32) error {
+	var _ServicesBuffer *BTH_LE_GATT_SERVICE
+	if len(ServicesBuffer) > 0 {
+		_ServicesBuffer = &ServicesBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procBluetoothGATTGetServices.Addr(), uintptr(hDevice), uintptr(len(ServicesBuffer)), uintptr(unsafe.Pointer(_ServicesBuffer)), uintptr(unsafe.Pointer(ServicesBufferActual)), uintptr(Flags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // BluetoothGATTRegisterEvent calls BluetoothApis!BluetoothGATTRegisterEvent.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattregisterevent
 // Minimum OS: windows8.0.
-func BluetoothGATTRegisterEvent(hService foundation.HANDLE, EventType BTH_LE_GATT_EVENT_TYPE, EventParameterIn unsafe.Pointer, Callback PFNBLUETOOTH_GATT_EVENT_CALLBACK, CallbackContext unsafe.Pointer, pEventHandle *uintptr, Flags uint32) foundation.HRESULT {
+func BluetoothGATTRegisterEvent(hService foundation.HANDLE, EventType BTH_LE_GATT_EVENT_TYPE, EventParameterIn unsafe.Pointer, Callback PFNBLUETOOTH_GATT_EVENT_CALLBACK, CallbackContext unsafe.Pointer, pEventHandle *uintptr, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTRegisterEvent.Addr(), uintptr(hService), uintptr(EventType), uintptr(unsafe.Pointer(EventParameterIn)), uintptr(Callback), uintptr(unsafe.Pointer(CallbackContext)), uintptr(unsafe.Pointer(pEventHandle)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BluetoothGATTSetCharacteristicValue calls BluetoothApis!BluetoothGATTSetCharacteristicValue.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattsetcharacteristicvalue
 // Minimum OS: windows8.0.
-func BluetoothGATTSetCharacteristicValue(hDevice foundation.HANDLE, Characteristic *BTH_LE_GATT_CHARACTERISTIC, CharacteristicValue *BTH_LE_GATT_CHARACTERISTIC_VALUE, ReliableWriteContext uint64, Flags uint32) foundation.HRESULT {
+func BluetoothGATTSetCharacteristicValue(hDevice foundation.HANDLE, Characteristic *BTH_LE_GATT_CHARACTERISTIC, CharacteristicValue *BTH_LE_GATT_CHARACTERISTIC_VALUE, ReliableWriteContext uint64, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTSetCharacteristicValue.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(Characteristic)), uintptr(unsafe.Pointer(CharacteristicValue)), uintptr(ReliableWriteContext), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BluetoothGATTSetDescriptorValue calls BluetoothApis!BluetoothGATTSetDescriptorValue.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattsetdescriptorvalue
 // Minimum OS: windows8.0.
-func BluetoothGATTSetDescriptorValue(hDevice foundation.HANDLE, Descriptor *BTH_LE_GATT_DESCRIPTOR, DescriptorValue *BTH_LE_GATT_DESCRIPTOR_VALUE, Flags uint32) foundation.HRESULT {
+func BluetoothGATTSetDescriptorValue(hDevice foundation.HANDLE, Descriptor *BTH_LE_GATT_DESCRIPTOR, DescriptorValue *BTH_LE_GATT_DESCRIPTOR_VALUE, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTSetDescriptorValue.Addr(), uintptr(hDevice), uintptr(unsafe.Pointer(Descriptor)), uintptr(unsafe.Pointer(DescriptorValue)), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BluetoothGATTUnregisterEvent calls BluetoothApis!BluetoothGATTUnregisterEvent.
 // https://learn.microsoft.com/windows/win32/api/bluetoothleapis/nf-bluetoothleapis-bluetoothgattunregisterevent
 // Minimum OS: windows8.0.
-func BluetoothGATTUnregisterEvent(EventHandle uintptr, Flags uint32) foundation.HRESULT {
+func BluetoothGATTUnregisterEvent(EventHandle uintptr, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procBluetoothGATTUnregisterEvent.Addr(), uintptr(EventHandle), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BluetoothGetDeviceInfo calls BluetoothApis!BluetoothGetDeviceInfo.
@@ -320,25 +343,25 @@ func BluetoothGetRadioInfo(hRadio foundation.HANDLE, pRadioInfo *BLUETOOTH_RADIO
 // BluetoothIsConnectable calls BluetoothApis!BluetoothIsConnectable.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothisconnectable
 // Minimum OS: windows6.0.6000.
-func BluetoothIsConnectable(hRadio foundation.HANDLE) foundation.BOOL {
+func BluetoothIsConnectable(hRadio foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procBluetoothIsConnectable.Addr(), uintptr(hRadio))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // BluetoothIsDiscoverable calls BluetoothApis!BluetoothIsDiscoverable.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothisdiscoverable
 // Minimum OS: windows6.0.6000.
-func BluetoothIsDiscoverable(hRadio foundation.HANDLE) foundation.BOOL {
+func BluetoothIsDiscoverable(hRadio foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procBluetoothIsDiscoverable.Addr(), uintptr(hRadio))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // BluetoothIsVersionAvailable calls BluetoothApis!BluetoothIsVersionAvailable.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothisversionavailable
 // Minimum OS: windows6.0.6000.
-func BluetoothIsVersionAvailable(MajorVersion byte, MinorVersion byte) foundation.BOOL {
+func BluetoothIsVersionAvailable(MajorVersion byte, MinorVersion byte) bool {
 	r1, _, _ := syscall.SyscallN(procBluetoothIsVersionAvailable.Addr(), uintptr(MajorVersion), uintptr(MinorVersion))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // BluetoothRegisterForAuthentication calls BluetoothApis!BluetoothRegisterForAuthentication.
@@ -425,16 +448,17 @@ func BluetoothSelectDevices(pbtsdp *BLUETOOTH_SELECT_DEVICE_PARAMS) error {
 // BluetoothSelectDevicesFree calls bthprops.cpl!BluetoothSelectDevicesFree.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothselectdevicesfree
 // Minimum OS: windows6.0.6000.
-func BluetoothSelectDevicesFree(pbtsdp *BLUETOOTH_SELECT_DEVICE_PARAMS) foundation.BOOL {
+func BluetoothSelectDevicesFree(pbtsdp *BLUETOOTH_SELECT_DEVICE_PARAMS) bool {
 	r1, _, _ := syscall.SyscallN(procBluetoothSelectDevicesFree.Addr(), uintptr(unsafe.Pointer(pbtsdp)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // BluetoothSendAuthenticationResponse calls BluetoothApis!BluetoothSendAuthenticationResponse.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothsendauthenticationresponse
 // Minimum OS: windows6.0.6000.
-func BluetoothSendAuthenticationResponse(hRadio foundation.HANDLE, pbtdi *BLUETOOTH_DEVICE_INFO, pszPasskey foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procBluetoothSendAuthenticationResponse.Addr(), uintptr(hRadio), uintptr(unsafe.Pointer(pbtdi)), uintptr(unsafe.Pointer(pszPasskey)))
+func BluetoothSendAuthenticationResponse(hRadio foundation.HANDLE, pbtdi *BLUETOOTH_DEVICE_INFO, pszPasskey string) uint32 {
+	_pszPasskey := win32.UTF16Ptr(pszPasskey)
+	r1, _, _ := syscall.SyscallN(procBluetoothSendAuthenticationResponse.Addr(), uintptr(hRadio), uintptr(unsafe.Pointer(pbtdi)), uintptr(unsafe.Pointer(_pszPasskey)))
 	return uint32(r1)
 }
 

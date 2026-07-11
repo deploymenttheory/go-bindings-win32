@@ -24,51 +24,53 @@ type ICameraUIControl struct {
 var IID_ICameraUIControl = win32.GUID{Data1: 0xb8733adf, Data2: 0x3d68, Data3: 0x4b8f, Data4: [8]byte{0xbb, 0x08, 0xe2, 0x8a, 0x0b, 0xed, 0x03, 0x76}}
 
 // Show dispatches through ICameraUIControl's vtable slot 3.
-func (self *ICameraUIControl) Show(pWindow *systemcom.IUnknown, mode CameraUIControlMode, selectionMode CameraUIControlLinearSelectionMode, captureMode CameraUIControlCaptureMode, photoFormat CameraUIControlPhotoFormat, videoFormat CameraUIControlVideoFormat, bHasCloseButton foundation.BOOL, pEventCallback *ICameraUIControlEventCallback) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWindow)), uintptr(mode), uintptr(selectionMode), uintptr(captureMode), uintptr(photoFormat), uintptr(videoFormat), uintptr(bHasCloseButton), uintptr(unsafe.Pointer(pEventCallback)))
-	return foundation.HRESULT(r1)
+func (self *ICameraUIControl) Show(pWindow *systemcom.IUnknown, mode CameraUIControlMode, selectionMode CameraUIControlLinearSelectionMode, captureMode CameraUIControlCaptureMode, photoFormat CameraUIControlPhotoFormat, videoFormat CameraUIControlVideoFormat, bHasCloseButton bool, pEventCallback *ICameraUIControlEventCallback) error {
+	_bHasCloseButton := win32.Bool32(bHasCloseButton)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWindow)), uintptr(mode), uintptr(selectionMode), uintptr(captureMode), uintptr(photoFormat), uintptr(videoFormat), uintptr(_bHasCloseButton), uintptr(unsafe.Pointer(pEventCallback)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through ICameraUIControl's vtable slot 4.
-func (self *ICameraUIControl) Close() foundation.HRESULT {
+func (self *ICameraUIControl) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Suspend dispatches through ICameraUIControl's vtable slot 5.
-func (self *ICameraUIControl) Suspend(pbDeferralRequired *foundation.BOOL) foundation.HRESULT {
+func (self *ICameraUIControl) Suspend(pbDeferralRequired *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbDeferralRequired)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through ICameraUIControl's vtable slot 6.
-func (self *ICameraUIControl) Resume() foundation.HRESULT {
+func (self *ICameraUIControl) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentViewType dispatches through ICameraUIControl's vtable slot 7.
-func (self *ICameraUIControl) GetCurrentViewType(pViewType *CameraUIControlViewType) foundation.HRESULT {
+func (self *ICameraUIControl) GetCurrentViewType(pViewType *CameraUIControlViewType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pViewType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetActiveItem dispatches through ICameraUIControl's vtable slot 8.
-func (self *ICameraUIControl) GetActiveItem(pbstrActiveItemPath *foundation.BSTR) foundation.HRESULT {
+func (self *ICameraUIControl) GetActiveItem(pbstrActiveItemPath *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrActiveItemPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSelectedItems dispatches through ICameraUIControl's vtable slot 9.
-func (self *ICameraUIControl) GetSelectedItems(ppSelectedItemPaths **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *ICameraUIControl) GetSelectedItems(ppSelectedItemPaths **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSelectedItemPaths)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveCapturedItem dispatches through ICameraUIControl's vtable slot 10.
-func (self *ICameraUIControl) RemoveCapturedItem(pszPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPath)))
-	return foundation.HRESULT(r1)
+func (self *ICameraUIControl) RemoveCapturedItem(pszPath string) error {
+	_pszPath := win32.UTF16Ptr(pszPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ICameraUIControlEventCallback: https://learn.microsoft.com/windows/win32/api/camerauicontrol/nn-camerauicontrol-icamerauicontroleventcallback
@@ -91,13 +93,15 @@ func (self *ICameraUIControlEventCallback) OnSuspendComplete() {
 }
 
 // OnItemCaptured dispatches through ICameraUIControlEventCallback's vtable slot 5.
-func (self *ICameraUIControlEventCallback) OnItemCaptured(pszPath foundation.PWSTR) {
-	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPath)))
+func (self *ICameraUIControlEventCallback) OnItemCaptured(pszPath string) {
+	_pszPath := win32.UTF16Ptr(pszPath)
+	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
 }
 
 // OnItemDeleted dispatches through ICameraUIControlEventCallback's vtable slot 6.
-func (self *ICameraUIControlEventCallback) OnItemDeleted(pszPath foundation.PWSTR) {
-	syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPath)))
+func (self *ICameraUIControlEventCallback) OnItemDeleted(pszPath string) {
+	_pszPath := win32.UTF16Ptr(pszPath)
+	syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPath)))
 }
 
 // OnClosed dispatches through ICameraUIControlEventCallback's vtable slot 7.
@@ -114,9 +118,9 @@ type IClipServiceNotificationHelper struct {
 var IID_IClipServiceNotificationHelper = win32.GUID{Data1: 0xc39948f0, Data2: 0x6142, Data3: 0x44fd, Data4: [8]byte{0x98, 0xca, 0xe1, 0x68, 0x1a, 0x8d, 0x68, 0xb5}}
 
 // ShowToast dispatches through IClipServiceNotificationHelper's vtable slot 3.
-func (self *IClipServiceNotificationHelper) ShowToast(titleText foundation.BSTR, bodyText foundation.BSTR, packageName foundation.BSTR, appId foundation.BSTR, launchCommand foundation.BSTR) foundation.HRESULT {
+func (self *IClipServiceNotificationHelper) ShowToast(titleText foundation.BSTR, bodyText foundation.BSTR, packageName foundation.BSTR, appId foundation.BSTR, launchCommand foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(titleText)), uintptr(unsafe.Pointer(bodyText)), uintptr(unsafe.Pointer(packageName)), uintptr(unsafe.Pointer(appId)), uintptr(unsafe.Pointer(launchCommand)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b524f93f-80d5-4ec7-ae9e-d66e93ade1fa
@@ -128,9 +132,10 @@ type IContainerActivationHelper struct {
 var IID_IContainerActivationHelper = win32.GUID{Data1: 0xb524f93f, Data2: 0x80d5, Data3: 0x4ec7, Data4: [8]byte{0xae, 0x9e, 0xd6, 0x6e, 0x93, 0xad, 0xe1, 0xfa}}
 
 // CanActivateClientVM dispatches through IContainerActivationHelper's vtable slot 3.
-func (self *IContainerActivationHelper) CanActivateClientVM(isAllowed *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isAllowed)))
-	return foundation.HRESULT(r1)
+func (self *IContainerActivationHelper) CanActivateClientVM() (foundation.VARIANT_BOOL, error) {
+	var _isAllowed foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isAllowed)))
+	return _isAllowed, win32.HRESULTError(int32(r1))
 }
 
 // IID: 7a27faad-5ae6-4255-9030-c530936292e3
@@ -156,9 +161,9 @@ type IDeleteBrowsingHistory struct {
 var IID_IDeleteBrowsingHistory = win32.GUID{Data1: 0xcf38ed4b, Data2: 0x2be7, Data3: 0x4461, Data4: [8]byte{0x8b, 0x5e, 0x9a, 0x46, 0x6d, 0xc8, 0x2a, 0xe3}}
 
 // DeleteBrowsingHistory dispatches through IDeleteBrowsingHistory's vtable slot 3.
-func (self *IDeleteBrowsingHistory) DeleteBrowsingHistory(dwFlags uint32) foundation.HRESULT {
+func (self *IDeleteBrowsingHistory) DeleteBrowsingHistory(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ff19cbcf-9455-4937-b872-6b7929a460af
@@ -170,27 +175,27 @@ type IEditionUpgradeBroker struct {
 var IID_IEditionUpgradeBroker = win32.GUID{Data1: 0xff19cbcf, Data2: 0x9455, Data3: 0x4937, Data4: [8]byte{0xb8, 0x72, 0x6b, 0x79, 0x29, 0xa4, 0x60, 0xaf}}
 
 // InitializeParentWindow dispatches through IEditionUpgradeBroker's vtable slot 3.
-func (self *IEditionUpgradeBroker) InitializeParentWindow(parentHandle systemole.OLE_HANDLE) foundation.HRESULT {
+func (self *IEditionUpgradeBroker) InitializeParentWindow(parentHandle systemole.OLE_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(parentHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOperatingSystem dispatches through IEditionUpgradeBroker's vtable slot 4.
-func (self *IEditionUpgradeBroker) UpdateOperatingSystem(parameter foundation.BSTR) foundation.HRESULT {
+func (self *IEditionUpgradeBroker) UpdateOperatingSystem(parameter foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(parameter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowProductKeyUI dispatches through IEditionUpgradeBroker's vtable slot 5.
-func (self *IEditionUpgradeBroker) ShowProductKeyUI() foundation.HRESULT {
+func (self *IEditionUpgradeBroker) ShowProductKeyUI() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CanUpgrade dispatches through IEditionUpgradeBroker's vtable slot 6.
-func (self *IEditionUpgradeBroker) CanUpgrade() foundation.HRESULT {
+func (self *IEditionUpgradeBroker) CanUpgrade() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEditionUpgradeHelper: https://learn.microsoft.com/windows/win32/api/editionupgradehelper/nn-editionupgradehelper-ieditionupgradehelper
@@ -203,33 +208,34 @@ type IEditionUpgradeHelper struct {
 var IID_IEditionUpgradeHelper = win32.GUID{Data1: 0xd3e9e342, Data2: 0x5deb, Data3: 0x43b6, Data4: [8]byte{0x84, 0x9e, 0x69, 0x13, 0xb8, 0x5d, 0x50, 0x3a}}
 
 // CanUpgrade dispatches through IEditionUpgradeHelper's vtable slot 3.
-func (self *IEditionUpgradeHelper) CanUpgrade(isAllowed *foundation.BOOL) foundation.HRESULT {
+func (self *IEditionUpgradeHelper) CanUpgrade(isAllowed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isAllowed)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateOperatingSystem dispatches through IEditionUpgradeHelper's vtable slot 4.
-func (self *IEditionUpgradeHelper) UpdateOperatingSystem(contentId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contentId)))
-	return foundation.HRESULT(r1)
+func (self *IEditionUpgradeHelper) UpdateOperatingSystem(contentId string) error {
+	_contentId := win32.UTF16Ptr(contentId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_contentId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowProductKeyUI dispatches through IEditionUpgradeHelper's vtable slot 5.
-func (self *IEditionUpgradeHelper) ShowProductKeyUI() foundation.HRESULT {
+func (self *IEditionUpgradeHelper) ShowProductKeyUI() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOsProductContentId dispatches through IEditionUpgradeHelper's vtable slot 6.
-func (self *IEditionUpgradeHelper) GetOsProductContentId(contentId *foundation.PWSTR) foundation.HRESULT {
+func (self *IEditionUpgradeHelper) GetOsProductContentId(contentId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contentId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGenuineLocalStatus dispatches through IEditionUpgradeHelper's vtable slot 7.
-func (self *IEditionUpgradeHelper) GetGenuineLocalStatus(isGenuine *foundation.BOOL) foundation.HRESULT {
+func (self *IEditionUpgradeHelper) GetGenuineLocalStatus(isGenuine *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isGenuine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3d5e3d21-bd41-4c2a-a669-b17ce87fb50b
@@ -241,9 +247,9 @@ type IFClipNotificationHelper struct {
 var IID_IFClipNotificationHelper = win32.GUID{Data1: 0x3d5e3d21, Data2: 0xbd41, Data3: 0x4c2a, Data4: [8]byte{0xa6, 0x69, 0xb1, 0x7c, 0xe8, 0x7f, 0xb5, 0x0b}}
 
 // ShowSystemDialog dispatches through IFClipNotificationHelper's vtable slot 3.
-func (self *IFClipNotificationHelper) ShowSystemDialog(titleText foundation.BSTR, bodyText foundation.BSTR) foundation.HRESULT {
+func (self *IFClipNotificationHelper) ShowSystemDialog(titleText foundation.BSTR, bodyText foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(titleText)), uintptr(unsafe.Pointer(bodyText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f342d19e-cc22-4648-bb5d-03ccf75b47c5
@@ -255,7 +261,7 @@ type IWindowsLockModeHelper struct {
 var IID_IWindowsLockModeHelper = win32.GUID{Data1: 0xf342d19e, Data2: 0xcc22, Data3: 0x4648, Data4: [8]byte{0xbb, 0x5d, 0x03, 0xcc, 0xf7, 0x5b, 0x47, 0xc5}}
 
 // GetSMode dispatches through IWindowsLockModeHelper's vtable slot 3.
-func (self *IWindowsLockModeHelper) GetSMode(isSmode *foundation.BOOL) foundation.HRESULT {
+func (self *IWindowsLockModeHelper) GetSMode(isSmode *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isSmode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

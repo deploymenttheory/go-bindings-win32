@@ -24,9 +24,9 @@ type ISideShowBulkCapabilities struct {
 var IID_ISideShowBulkCapabilities = win32.GUID{Data1: 0x3a2b7fbc, Data2: 0x3ad5, Data3: 0x48bd, Data4: [8]byte{0xbb, 0xf1, 0x0e, 0x6c, 0xfb, 0xd1, 0x08, 0x07}}
 
 // GetCapabilities dispatches through ISideShowBulkCapabilities's vtable slot 4.
-func (self *ISideShowBulkCapabilities) GetCapabilities(in_keyCollection *ISideShowKeyCollection, inout_pValues **ISideShowPropVariantCollection) foundation.HRESULT {
+func (self *ISideShowBulkCapabilities) GetCapabilities(in_keyCollection *ISideShowKeyCollection, inout_pValues **ISideShowPropVariantCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_keyCollection)), uintptr(unsafe.Pointer(inout_pValues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 535e1379-c09e-4a54-a511-597bab3a72b8
@@ -38,9 +38,9 @@ type ISideShowCapabilities struct {
 var IID_ISideShowCapabilities = win32.GUID{Data1: 0x535e1379, Data2: 0xc09e, Data3: 0x4a54, Data4: [8]byte{0xa5, 0x11, 0x59, 0x7b, 0xab, 0x3a, 0x72, 0xb8}}
 
 // GetCapability dispatches through ISideShowCapabilities's vtable slot 3.
-func (self *ISideShowCapabilities) GetCapability(in_keyCapability *foundation.PROPERTYKEY, inout_pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *ISideShowCapabilities) GetCapability(in_keyCapability *foundation.PROPERTYKEY, inout_pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_keyCapability)), uintptr(unsafe.Pointer(inout_pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 50305597-5e0d-4ff7-b3af-33d0d9bd52dd
@@ -52,15 +52,15 @@ type ISideShowCapabilitiesCollection struct {
 var IID_ISideShowCapabilitiesCollection = win32.GUID{Data1: 0x50305597, Data2: 0x5e0d, Data3: 0x4ff7, Data4: [8]byte{0xb3, 0xaf, 0x33, 0xd0, 0xd9, 0xbd, 0x52, 0xdd}}
 
 // GetCount dispatches through ISideShowCapabilitiesCollection's vtable slot 3.
-func (self *ISideShowCapabilitiesCollection) GetCount(out_pdwCount *uint32) foundation.HRESULT {
+func (self *ISideShowCapabilitiesCollection) GetCount(out_pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAt dispatches through ISideShowCapabilitiesCollection's vtable slot 4.
-func (self *ISideShowCapabilitiesCollection) GetAt(in_dwIndex uint32, out_ppCapabilities **ISideShowCapabilities) foundation.HRESULT {
+func (self *ISideShowCapabilitiesCollection) GetAt(in_dwIndex uint32, out_ppCapabilities **ISideShowCapabilities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(in_dwIndex), uintptr(unsafe.Pointer(out_ppCapabilities)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c18552ed-74ff-4fec-be07-4cfed29d4887
@@ -72,21 +72,21 @@ type ISideShowContent struct {
 var IID_ISideShowContent = win32.GUID{Data1: 0xc18552ed, Data2: 0x74ff, Data3: 0x4fec, Data4: [8]byte{0xbe, 0x07, 0x4c, 0xfe, 0xd2, 0x9d, 0x48, 0x87}}
 
 // GetContent dispatches through ISideShowContent's vtable slot 3.
-func (self *ISideShowContent) GetContent(in_pICapabilities *ISideShowCapabilities, out_pdwSize *uint32, out_ppbData **byte) foundation.HRESULT {
+func (self *ISideShowContent) GetContent(in_pICapabilities *ISideShowCapabilities, out_pdwSize *uint32, out_ppbData **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pICapabilities)), uintptr(unsafe.Pointer(out_pdwSize)), uintptr(unsafe.Pointer(out_ppbData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ContentId dispatches through ISideShowContent's vtable slot 4.
-func (self *ISideShowContent) Get_ContentId(out_pcontentId *uint32) foundation.HRESULT {
+func (self *ISideShowContent) Get_ContentId(out_pcontentId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_pcontentId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DifferentiateContent dispatches through ISideShowContent's vtable slot 5.
-func (self *ISideShowContent) Get_DifferentiateContent(out_pfDifferentiateContent *foundation.BOOL) foundation.HRESULT {
+func (self *ISideShowContent) Get_DifferentiateContent(out_pfDifferentiateContent *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_pfDifferentiateContent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a5d5b66b-eef9-41db-8d7e-e17c33ab10b0
@@ -98,33 +98,33 @@ type ISideShowContentManager struct {
 var IID_ISideShowContentManager = win32.GUID{Data1: 0xa5d5b66b, Data2: 0xeef9, Data3: 0x41db, Data4: [8]byte{0x8d, 0x7e, 0xe1, 0x7c, 0x33, 0xab, 0x10, 0xb0}}
 
 // Add dispatches through ISideShowContentManager's vtable slot 3.
-func (self *ISideShowContentManager) Add(in_pIContent *ISideShowContent) foundation.HRESULT {
+func (self *ISideShowContentManager) Add(in_pIContent *ISideShowContent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pIContent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through ISideShowContentManager's vtable slot 4.
-func (self *ISideShowContentManager) Remove(in_contentId uint32) foundation.HRESULT {
+func (self *ISideShowContentManager) Remove(in_contentId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(in_contentId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAll dispatches through ISideShowContentManager's vtable slot 5.
-func (self *ISideShowContentManager) RemoveAll() foundation.HRESULT {
+func (self *ISideShowContentManager) RemoveAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEventSink dispatches through ISideShowContentManager's vtable slot 6.
-func (self *ISideShowContentManager) SetEventSink(in_pIEvents *ISideShowEvents) foundation.HRESULT {
+func (self *ISideShowContentManager) SetEventSink(in_pIEvents *ISideShowEvents) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pIEvents)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceCapabilities dispatches through ISideShowContentManager's vtable slot 7.
-func (self *ISideShowContentManager) GetDeviceCapabilities(out_ppCollection **ISideShowCapabilitiesCollection) foundation.HRESULT {
+func (self *ISideShowContentManager) GetDeviceCapabilities(out_ppCollection **ISideShowCapabilitiesCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_ppCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 61feca4c-deb4-4a7e-8d75-51f1132d615b
@@ -136,27 +136,27 @@ type ISideShowEvents struct {
 var IID_ISideShowEvents = win32.GUID{Data1: 0x61feca4c, Data2: 0xdeb4, Data3: 0x4a7e, Data4: [8]byte{0x8d, 0x75, 0x51, 0xf1, 0x13, 0x2d, 0x61, 0x5b}}
 
 // ContentMissing dispatches through ISideShowEvents's vtable slot 3.
-func (self *ISideShowEvents) ContentMissing(in_contentId uint32, out_ppIContent **ISideShowContent) foundation.HRESULT {
+func (self *ISideShowEvents) ContentMissing(in_contentId uint32, out_ppIContent **ISideShowContent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(in_contentId), uintptr(unsafe.Pointer(out_ppIContent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ApplicationEvent dispatches through ISideShowEvents's vtable slot 4.
-func (self *ISideShowEvents) ApplicationEvent(in_pICapabilities *ISideShowCapabilities, in_dwEventId uint32, in_dwEventSize uint32, in_pbEventData *byte) foundation.HRESULT {
+func (self *ISideShowEvents) ApplicationEvent(in_pICapabilities *ISideShowCapabilities, in_dwEventId uint32, in_dwEventSize uint32, in_pbEventData *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pICapabilities)), uintptr(in_dwEventId), uintptr(in_dwEventSize), uintptr(unsafe.Pointer(in_pbEventData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeviceAdded dispatches through ISideShowEvents's vtable slot 5.
-func (self *ISideShowEvents) DeviceAdded(in_pIDevice *ISideShowCapabilities) foundation.HRESULT {
+func (self *ISideShowEvents) DeviceAdded(in_pIDevice *ISideShowCapabilities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pIDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeviceRemoved dispatches through ISideShowEvents's vtable slot 6.
-func (self *ISideShowEvents) DeviceRemoved(in_pIDevice *ISideShowCapabilities) foundation.HRESULT {
+func (self *ISideShowEvents) DeviceRemoved(in_pIDevice *ISideShowCapabilities) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pIDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 045473bc-a37b-4957-b144-68105411ed8e
@@ -168,33 +168,33 @@ type ISideShowKeyCollection struct {
 var IID_ISideShowKeyCollection = win32.GUID{Data1: 0x045473bc, Data2: 0xa37b, Data3: 0x4957, Data4: [8]byte{0xb1, 0x44, 0x68, 0x10, 0x54, 0x11, 0xed, 0x8e}}
 
 // Add dispatches through ISideShowKeyCollection's vtable slot 3.
-func (self *ISideShowKeyCollection) Add(Key *foundation.PROPERTYKEY) foundation.HRESULT {
+func (self *ISideShowKeyCollection) Add(Key *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Key)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through ISideShowKeyCollection's vtable slot 4.
-func (self *ISideShowKeyCollection) Clear() foundation.HRESULT {
+func (self *ISideShowKeyCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAt dispatches through ISideShowKeyCollection's vtable slot 5.
-func (self *ISideShowKeyCollection) GetAt(dwIndex uint32, pKey *foundation.PROPERTYKEY) foundation.HRESULT {
+func (self *ISideShowKeyCollection) GetAt(dwIndex uint32, pKey *foundation.PROPERTYKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through ISideShowKeyCollection's vtable slot 6.
-func (self *ISideShowKeyCollection) GetCount(pcElems *uint32) foundation.HRESULT {
+func (self *ISideShowKeyCollection) GetCount(pcElems *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcElems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAt dispatches through ISideShowKeyCollection's vtable slot 7.
-func (self *ISideShowKeyCollection) RemoveAt(dwIndex uint32) foundation.HRESULT {
+func (self *ISideShowKeyCollection) RemoveAt(dwIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 03c93300-8ab2-41c5-9b79-46127a30e148
@@ -206,63 +206,65 @@ type ISideShowNotification struct {
 var IID_ISideShowNotification = win32.GUID{Data1: 0x03c93300, Data2: 0x8ab2, Data3: 0x41c5, Data4: [8]byte{0x9b, 0x79, 0x46, 0x12, 0x7a, 0x30, 0xe1, 0x48}}
 
 // Get_NotificationId dispatches through ISideShowNotification's vtable slot 3.
-func (self *ISideShowNotification) Get_NotificationId(out_pNotificationId *uint32) foundation.HRESULT {
+func (self *ISideShowNotification) Get_NotificationId(out_pNotificationId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_pNotificationId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_NotificationId dispatches through ISideShowNotification's vtable slot 4.
-func (self *ISideShowNotification) Put_NotificationId(in_notificationId uint32) foundation.HRESULT {
+func (self *ISideShowNotification) Put_NotificationId(in_notificationId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(in_notificationId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Title dispatches through ISideShowNotification's vtable slot 5.
-func (self *ISideShowNotification) Get_Title(out_ppwszTitle *foundation.PWSTR) foundation.HRESULT {
+func (self *ISideShowNotification) Get_Title(out_ppwszTitle *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_ppwszTitle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Title dispatches through ISideShowNotification's vtable slot 6.
-func (self *ISideShowNotification) Put_Title(in_pwszTitle foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pwszTitle)))
-	return foundation.HRESULT(r1)
+func (self *ISideShowNotification) Put_Title(in_pwszTitle string) error {
+	_in_pwszTitle := win32.UTF16Ptr(in_pwszTitle)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_in_pwszTitle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Message dispatches through ISideShowNotification's vtable slot 7.
-func (self *ISideShowNotification) Get_Message(out_ppwszMessage *foundation.PWSTR) foundation.HRESULT {
+func (self *ISideShowNotification) Get_Message(out_ppwszMessage *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_ppwszMessage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Message dispatches through ISideShowNotification's vtable slot 8.
-func (self *ISideShowNotification) Put_Message(in_pwszMessage foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pwszMessage)))
-	return foundation.HRESULT(r1)
+func (self *ISideShowNotification) Put_Message(in_pwszMessage string) error {
+	_in_pwszMessage := win32.UTF16Ptr(in_pwszMessage)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_in_pwszMessage)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Image dispatches through ISideShowNotification's vtable slot 9.
-func (self *ISideShowNotification) Get_Image(out_phIcon *uiwindowsandmessaging.HICON) foundation.HRESULT {
+func (self *ISideShowNotification) Get_Image(out_phIcon *uiwindowsandmessaging.HICON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_phIcon)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_Image dispatches through ISideShowNotification's vtable slot 10.
-func (self *ISideShowNotification) Put_Image(in_hIcon uiwindowsandmessaging.HICON) foundation.HRESULT {
+func (self *ISideShowNotification) Put_Image(in_hIcon uiwindowsandmessaging.HICON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(in_hIcon))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ExpirationTime dispatches through ISideShowNotification's vtable slot 11.
-func (self *ISideShowNotification) Get_ExpirationTime(out_pTime *foundation.SYSTEMTIME) foundation.HRESULT {
+func (self *ISideShowNotification) Get_ExpirationTime(out_pTime *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(out_pTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ExpirationTime dispatches through ISideShowNotification's vtable slot 12.
-func (self *ISideShowNotification) Put_ExpirationTime(in_pTime *foundation.SYSTEMTIME) foundation.HRESULT {
+func (self *ISideShowNotification) Put_ExpirationTime(in_pTime *foundation.SYSTEMTIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 63cea909-f2b9-4302-b5e1-c68e6d9ab833
@@ -274,21 +276,21 @@ type ISideShowNotificationManager struct {
 var IID_ISideShowNotificationManager = win32.GUID{Data1: 0x63cea909, Data2: 0xf2b9, Data3: 0x4302, Data4: [8]byte{0xb5, 0xe1, 0xc6, 0x8e, 0x6d, 0x9a, 0xb8, 0x33}}
 
 // Show dispatches through ISideShowNotificationManager's vtable slot 3.
-func (self *ISideShowNotificationManager) Show(in_pINotification *ISideShowNotification) foundation.HRESULT {
+func (self *ISideShowNotificationManager) Show(in_pINotification *ISideShowNotification) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pINotification)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Revoke dispatches through ISideShowNotificationManager's vtable slot 4.
-func (self *ISideShowNotificationManager) Revoke(in_notificationId uint32) foundation.HRESULT {
+func (self *ISideShowNotificationManager) Revoke(in_notificationId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(in_notificationId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RevokeAll dispatches through ISideShowNotificationManager's vtable slot 5.
-func (self *ISideShowNotificationManager) RevokeAll() foundation.HRESULT {
+func (self *ISideShowNotificationManager) RevokeAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2ea7a549-7bff-4aae-bab0-22d43111de49
@@ -300,33 +302,33 @@ type ISideShowPropVariantCollection struct {
 var IID_ISideShowPropVariantCollection = win32.GUID{Data1: 0x2ea7a549, Data2: 0x7bff, Data3: 0x4aae, Data4: [8]byte{0xba, 0xb0, 0x22, 0xd4, 0x31, 0x11, 0xde, 0x49}}
 
 // Add dispatches through ISideShowPropVariantCollection's vtable slot 3.
-func (self *ISideShowPropVariantCollection) Add(pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *ISideShowPropVariantCollection) Add(pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through ISideShowPropVariantCollection's vtable slot 4.
-func (self *ISideShowPropVariantCollection) Clear() foundation.HRESULT {
+func (self *ISideShowPropVariantCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAt dispatches through ISideShowPropVariantCollection's vtable slot 5.
-func (self *ISideShowPropVariantCollection) GetAt(dwIndex uint32, pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *ISideShowPropVariantCollection) GetAt(dwIndex uint32, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwIndex), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through ISideShowPropVariantCollection's vtable slot 6.
-func (self *ISideShowPropVariantCollection) GetCount(pcElems *uint32) foundation.HRESULT {
+func (self *ISideShowPropVariantCollection) GetCount(pcElems *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcElems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAt dispatches through ISideShowPropVariantCollection's vtable slot 7.
-func (self *ISideShowPropVariantCollection) RemoveAt(dwIndex uint32) foundation.HRESULT {
+func (self *ISideShowPropVariantCollection) RemoveAt(dwIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: e22331ee-9e7d-4922-9fc2-ab7aa41ce491
@@ -338,13 +340,13 @@ type ISideShowSession struct {
 var IID_ISideShowSession = win32.GUID{Data1: 0xe22331ee, Data2: 0x9e7d, Data3: 0x4922, Data4: [8]byte{0x9f, 0xc2, 0xab, 0x7a, 0xa4, 0x1c, 0xe4, 0x91}}
 
 // RegisterContent dispatches through ISideShowSession's vtable slot 3.
-func (self *ISideShowSession) RegisterContent(in_applicationId *win32.GUID, in_endpointId *win32.GUID, out_ppIContent **ISideShowContentManager) foundation.HRESULT {
+func (self *ISideShowSession) RegisterContent(in_applicationId *win32.GUID, in_endpointId *win32.GUID, out_ppIContent **ISideShowContentManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_applicationId)), uintptr(unsafe.Pointer(in_endpointId)), uintptr(unsafe.Pointer(out_ppIContent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterNotifications dispatches through ISideShowSession's vtable slot 4.
-func (self *ISideShowSession) RegisterNotifications(in_applicationId *win32.GUID, out_ppINotification **ISideShowNotificationManager) foundation.HRESULT {
+func (self *ISideShowSession) RegisterNotifications(in_applicationId *win32.GUID, out_ppINotification **ISideShowNotificationManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_applicationId)), uintptr(unsafe.Pointer(out_ppINotification)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

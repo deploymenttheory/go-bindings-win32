@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemwinrt "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt"
 )
 
@@ -23,9 +22,9 @@ type IWindowsDevicesAllJoynBusAttachmentFactoryInterop struct {
 var IID_IWindowsDevicesAllJoynBusAttachmentFactoryInterop = win32.GUID{Data1: 0x4b8f7505, Data2: 0xb239, Data3: 0x4e7b, Data4: [8]byte{0x88, 0xaf, 0xf6, 0x68, 0x25, 0x75, 0xd8, 0x61}}
 
 // CreateFromWin32Handle dispatches through IWindowsDevicesAllJoynBusAttachmentFactoryInterop's vtable slot 6.
-func (self *IWindowsDevicesAllJoynBusAttachmentFactoryInterop) CreateFromWin32Handle(win32handle uint64, enableAboutData byte, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IWindowsDevicesAllJoynBusAttachmentFactoryInterop) CreateFromWin32Handle(win32handle uint64, enableAboutData byte, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32handle), uintptr(enableAboutData), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWindowsDevicesAllJoynBusAttachmentInterop: https://learn.microsoft.com/windows/win32/api/windows.devices.alljoyn.interop/nn-windows-devices-alljoyn-interop-iwindowsdevicesalljoynbusattachmentinterop
@@ -38,9 +37,10 @@ type IWindowsDevicesAllJoynBusAttachmentInterop struct {
 var IID_IWindowsDevicesAllJoynBusAttachmentInterop = win32.GUID{Data1: 0xfd89c65b, Data2: 0xb50e, Data3: 0x4a19, Data4: [8]byte{0x9d, 0x0c, 0xb4, 0x2b, 0x78, 0x32, 0x81, 0xcd}}
 
 // Get_Win32Handle dispatches through IWindowsDevicesAllJoynBusAttachmentInterop's vtable slot 6.
-func (self *IWindowsDevicesAllJoynBusAttachmentInterop) Get_Win32Handle(value *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDevicesAllJoynBusAttachmentInterop) Get_Win32Handle() (uint64, error) {
+	var _value uint64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
+	return _value, win32.HRESULTError(int32(r1))
 }
 
 // IID: 6174e506-8b95-4e36-95c0-b88fed34938c
@@ -52,9 +52,9 @@ type IWindowsDevicesAllJoynBusObjectFactoryInterop struct {
 var IID_IWindowsDevicesAllJoynBusObjectFactoryInterop = win32.GUID{Data1: 0x6174e506, Data2: 0x8b95, Data3: 0x4e36, Data4: [8]byte{0x95, 0xc0, 0xb8, 0x8f, 0xed, 0x34, 0x93, 0x8c}}
 
 // CreateFromWin32Handle dispatches through IWindowsDevicesAllJoynBusObjectFactoryInterop's vtable slot 6.
-func (self *IWindowsDevicesAllJoynBusObjectFactoryInterop) CreateFromWin32Handle(win32handle uint64, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IWindowsDevicesAllJoynBusObjectFactoryInterop) CreateFromWin32Handle(win32handle uint64, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(win32handle), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d78aa3d5-5054-428f-99f2-ec3a5de3c3bc
@@ -66,19 +66,20 @@ type IWindowsDevicesAllJoynBusObjectInterop struct {
 var IID_IWindowsDevicesAllJoynBusObjectInterop = win32.GUID{Data1: 0xd78aa3d5, Data2: 0x5054, Data3: 0x428f, Data4: [8]byte{0x99, 0xf2, 0xec, 0x3a, 0x5d, 0xe3, 0xc3, 0xbc}}
 
 // AddPropertyGetHandler dispatches through IWindowsDevicesAllJoynBusObjectInterop's vtable slot 6.
-func (self *IWindowsDevicesAllJoynBusObjectInterop) AddPropertyGetHandler(context unsafe.Pointer, interfaceName systemwinrt.HSTRING, callback uintptr) foundation.HRESULT {
+func (self *IWindowsDevicesAllJoynBusObjectInterop) AddPropertyGetHandler(context unsafe.Pointer, interfaceName systemwinrt.HSTRING, callback uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(interfaceName), uintptr(callback))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddPropertySetHandler dispatches through IWindowsDevicesAllJoynBusObjectInterop's vtable slot 7.
-func (self *IWindowsDevicesAllJoynBusObjectInterop) AddPropertySetHandler(context unsafe.Pointer, interfaceName systemwinrt.HSTRING, callback uintptr) foundation.HRESULT {
+func (self *IWindowsDevicesAllJoynBusObjectInterop) AddPropertySetHandler(context unsafe.Pointer, interfaceName systemwinrt.HSTRING, callback uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)), uintptr(interfaceName), uintptr(callback))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Win32Handle dispatches through IWindowsDevicesAllJoynBusObjectInterop's vtable slot 8.
-func (self *IWindowsDevicesAllJoynBusObjectInterop) Get_Win32Handle(value *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *IWindowsDevicesAllJoynBusObjectInterop) Get_Win32Handle() (uint64, error) {
+	var _value uint64
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
+	return _value, win32.HRESULTError(int32(r1))
 }

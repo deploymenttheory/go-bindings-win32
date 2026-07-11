@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 var (
@@ -44,8 +43,9 @@ func McastApiStartup(Version *uint32) uint32 {
 // McastEnumerateScopes calls dhcpcsvc!McastEnumerateScopes.
 // https://learn.microsoft.com/windows/win32/api/madcapcl/nf-madcapcl-mcastenumeratescopes
 // Minimum OS: windows5.0.
-func McastEnumerateScopes(AddrFamily uint16, ReQuery foundation.BOOL, pScopeList *MCAST_SCOPE_ENTRY, pScopeLen *uint32, pScopeCount *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMcastEnumerateScopes.Addr(), uintptr(AddrFamily), uintptr(ReQuery), uintptr(unsafe.Pointer(pScopeList)), uintptr(unsafe.Pointer(pScopeLen)), uintptr(unsafe.Pointer(pScopeCount)))
+func McastEnumerateScopes(AddrFamily uint16, ReQuery bool, pScopeList *MCAST_SCOPE_ENTRY, pScopeLen *uint32, pScopeCount *uint32) uint32 {
+	_ReQuery := win32.Bool32(ReQuery)
+	r1, _, _ := syscall.SyscallN(procMcastEnumerateScopes.Addr(), uintptr(AddrFamily), uintptr(_ReQuery), uintptr(unsafe.Pointer(pScopeList)), uintptr(unsafe.Pointer(pScopeLen)), uintptr(unsafe.Pointer(pScopeCount)))
 	return uint32(r1)
 }
 

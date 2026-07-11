@@ -24,24 +24,24 @@ var (
 	procCheckColorsInGamut                    = modGDI32.NewProc("CheckColorsInGamut")
 	procColorCorrectPalette                   = modGDI32.NewProc("ColorCorrectPalette")
 	procColorMatchToTarget                    = modGDI32.NewProc("ColorMatchToTarget")
+	procCreateColorSpace                      = modGDI32.NewProc("CreateColorSpaceW")
 	procCreateColorSpaceA                     = modGDI32.NewProc("CreateColorSpaceA")
-	procCreateColorSpaceW                     = modGDI32.NewProc("CreateColorSpaceW")
 	procDeleteColorSpace                      = modGDI32.NewProc("DeleteColorSpace")
+	procEnumICMProfiles                       = modGDI32.NewProc("EnumICMProfilesW")
 	procEnumICMProfilesA                      = modGDI32.NewProc("EnumICMProfilesA")
-	procEnumICMProfilesW                      = modGDI32.NewProc("EnumICMProfilesW")
 	procGetColorSpace                         = modGDI32.NewProc("GetColorSpace")
 	procGetDeviceGammaRamp                    = modGDI32.NewProc("GetDeviceGammaRamp")
+	procGetICMProfile                         = modGDI32.NewProc("GetICMProfileW")
 	procGetICMProfileA                        = modGDI32.NewProc("GetICMProfileA")
-	procGetICMProfileW                        = modGDI32.NewProc("GetICMProfileW")
+	procGetLogColorSpace                      = modGDI32.NewProc("GetLogColorSpaceW")
 	procGetLogColorSpaceA                     = modGDI32.NewProc("GetLogColorSpaceA")
-	procGetLogColorSpaceW                     = modGDI32.NewProc("GetLogColorSpaceW")
 	procSetColorSpace                         = modGDI32.NewProc("SetColorSpace")
 	procSetDeviceGammaRamp                    = modGDI32.NewProc("SetDeviceGammaRamp")
 	procSetICMMode                            = modGDI32.NewProc("SetICMMode")
+	procSetICMProfile                         = modGDI32.NewProc("SetICMProfileW")
 	procSetICMProfileA                        = modGDI32.NewProc("SetICMProfileA")
-	procSetICMProfileW                        = modGDI32.NewProc("SetICMProfileW")
+	procUpdateICMRegKey                       = modGDI32.NewProc("UpdateICMRegKeyW")
 	procUpdateICMRegKeyA                      = modGDI32.NewProc("UpdateICMRegKeyA")
-	procUpdateICMRegKeyW                      = modGDI32.NewProc("UpdateICMRegKeyW")
 	procCMCheckColors                         = modICM32.NewProc("CMCheckColors")
 	procCMCheckColorsInGamut                  = modICM32.NewProc("CMCheckColorsInGamut")
 	procCMCheckRGBs                           = modICM32.NewProc("CMCheckRGBs")
@@ -63,29 +63,29 @@ var (
 	procCMTranslateRGB                        = modICM32.NewProc("CMTranslateRGB")
 	procCMTranslateRGBs                       = modICM32.NewProc("CMTranslateRGBs")
 	procCMTranslateRGBsExt                    = modICM32.NewProc("CMTranslateRGBsExt")
+	procSetupColorMatching                    = modICMUI.NewProc("SetupColorMatchingW")
 	procSetupColorMatchingA                   = modICMUI.NewProc("SetupColorMatchingA")
-	procSetupColorMatchingW                   = modICMUI.NewProc("SetupColorMatchingW")
+	procAssociateColorProfileWithDevice       = modmscms.NewProc("AssociateColorProfileWithDeviceW")
 	procAssociateColorProfileWithDeviceA      = modmscms.NewProc("AssociateColorProfileWithDeviceA")
-	procAssociateColorProfileWithDeviceW      = modmscms.NewProc("AssociateColorProfileWithDeviceW")
 	procCheckBitmapBits                       = modmscms.NewProc("CheckBitmapBits")
 	procCheckColors                           = modmscms.NewProc("CheckColors")
 	procCloseColorProfile                     = modmscms.NewProc("CloseColorProfile")
 	procConvertColorNameToIndex               = modmscms.NewProc("ConvertColorNameToIndex")
 	procConvertIndexToColorName               = modmscms.NewProc("ConvertIndexToColorName")
+	procCreateColorTransform                  = modmscms.NewProc("CreateColorTransformW")
 	procCreateColorTransformA                 = modmscms.NewProc("CreateColorTransformA")
-	procCreateColorTransformW                 = modmscms.NewProc("CreateColorTransformW")
 	procCreateDeviceLinkProfile               = modmscms.NewProc("CreateDeviceLinkProfile")
 	procCreateMultiProfileTransform           = modmscms.NewProc("CreateMultiProfileTransform")
+	procCreateProfileFromLogColorSpace        = modmscms.NewProc("CreateProfileFromLogColorSpaceW")
 	procCreateProfileFromLogColorSpaceA       = modmscms.NewProc("CreateProfileFromLogColorSpaceA")
-	procCreateProfileFromLogColorSpaceW       = modmscms.NewProc("CreateProfileFromLogColorSpaceW")
 	procDeleteColorTransform                  = modmscms.NewProc("DeleteColorTransform")
+	procDisassociateColorProfileFromDevice    = modmscms.NewProc("DisassociateColorProfileFromDeviceW")
 	procDisassociateColorProfileFromDeviceA   = modmscms.NewProc("DisassociateColorProfileFromDeviceA")
-	procDisassociateColorProfileFromDeviceW   = modmscms.NewProc("DisassociateColorProfileFromDeviceW")
+	procEnumColorProfiles                     = modmscms.NewProc("EnumColorProfilesW")
 	procEnumColorProfilesA                    = modmscms.NewProc("EnumColorProfilesA")
-	procEnumColorProfilesW                    = modmscms.NewProc("EnumColorProfilesW")
 	procGetCMMInfo                            = modmscms.NewProc("GetCMMInfo")
+	procGetColorDirectory                     = modmscms.NewProc("GetColorDirectoryW")
 	procGetColorDirectoryA                    = modmscms.NewProc("GetColorDirectoryA")
-	procGetColorDirectoryW                    = modmscms.NewProc("GetColorDirectoryW")
 	procGetColorProfileElement                = modmscms.NewProc("GetColorProfileElement")
 	procGetColorProfileElementTag             = modmscms.NewProc("GetColorProfileElementTag")
 	procGetColorProfileFromHandle             = modmscms.NewProc("GetColorProfileFromHandle")
@@ -95,29 +95,29 @@ var (
 	procGetPS2ColorRenderingDictionary        = modmscms.NewProc("GetPS2ColorRenderingDictionary")
 	procGetPS2ColorRenderingIntent            = modmscms.NewProc("GetPS2ColorRenderingIntent")
 	procGetPS2ColorSpaceArray                 = modmscms.NewProc("GetPS2ColorSpaceArray")
+	procGetStandardColorSpaceProfile          = modmscms.NewProc("GetStandardColorSpaceProfileW")
 	procGetStandardColorSpaceProfileA         = modmscms.NewProc("GetStandardColorSpaceProfileA")
-	procGetStandardColorSpaceProfileW         = modmscms.NewProc("GetStandardColorSpaceProfileW")
+	procInstallColorProfile                   = modmscms.NewProc("InstallColorProfileW")
 	procInstallColorProfileA                  = modmscms.NewProc("InstallColorProfileA")
-	procInstallColorProfileW                  = modmscms.NewProc("InstallColorProfileW")
 	procIsColorProfileTagPresent              = modmscms.NewProc("IsColorProfileTagPresent")
 	procIsColorProfileValid                   = modmscms.NewProc("IsColorProfileValid")
+	procOpenColorProfile                      = modmscms.NewProc("OpenColorProfileW")
 	procOpenColorProfileA                     = modmscms.NewProc("OpenColorProfileA")
-	procOpenColorProfileW                     = modmscms.NewProc("OpenColorProfileW")
+	procRegisterCMM                           = modmscms.NewProc("RegisterCMMW")
 	procRegisterCMMA                          = modmscms.NewProc("RegisterCMMA")
-	procRegisterCMMW                          = modmscms.NewProc("RegisterCMMW")
 	procSelectCMM                             = modmscms.NewProc("SelectCMM")
 	procSetColorProfileElement                = modmscms.NewProc("SetColorProfileElement")
 	procSetColorProfileElementReference       = modmscms.NewProc("SetColorProfileElementReference")
 	procSetColorProfileElementSize            = modmscms.NewProc("SetColorProfileElementSize")
 	procSetColorProfileHeader                 = modmscms.NewProc("SetColorProfileHeader")
+	procSetStandardColorSpaceProfile          = modmscms.NewProc("SetStandardColorSpaceProfileW")
 	procSetStandardColorSpaceProfileA         = modmscms.NewProc("SetStandardColorSpaceProfileA")
-	procSetStandardColorSpaceProfileW         = modmscms.NewProc("SetStandardColorSpaceProfileW")
 	procTranslateBitmapBits                   = modmscms.NewProc("TranslateBitmapBits")
 	procTranslateColors                       = modmscms.NewProc("TranslateColors")
+	procUninstallColorProfile                 = modmscms.NewProc("UninstallColorProfileW")
 	procUninstallColorProfileA                = modmscms.NewProc("UninstallColorProfileA")
-	procUninstallColorProfileW                = modmscms.NewProc("UninstallColorProfileW")
+	procUnregisterCMM                         = modmscms.NewProc("UnregisterCMMW")
 	procUnregisterCMMA                        = modmscms.NewProc("UnregisterCMMA")
-	procUnregisterCMMW                        = modmscms.NewProc("UnregisterCMMW")
 	procWcsAssociateColorProfileWithDevice    = modmscms.NewProc("WcsAssociateColorProfileWithDevice")
 	procWcsCheckColors                        = modmscms.NewProc("WcsCheckColors")
 	procWcsCreateIccProfile                   = modmscms.NewProc("WcsCreateIccProfile")
@@ -129,8 +129,8 @@ var (
 	procWcsGetDefaultColorProfileSize         = modmscms.NewProc("WcsGetDefaultColorProfileSize")
 	procWcsGetDefaultRenderingIntent          = modmscms.NewProc("WcsGetDefaultRenderingIntent")
 	procWcsGetUsePerUserProfiles              = modmscms.NewProc("WcsGetUsePerUserProfiles")
+	procWcsOpenColorProfile                   = modmscms.NewProc("WcsOpenColorProfileW")
 	procWcsOpenColorProfileA                  = modmscms.NewProc("WcsOpenColorProfileA")
-	procWcsOpenColorProfileW                  = modmscms.NewProc("WcsOpenColorProfileW")
 	procWcsSetCalibrationManagementState      = modmscms.NewProc("WcsSetCalibrationManagementState")
 	procWcsSetDefaultColorProfile             = modmscms.NewProc("WcsSetDefaultColorProfile")
 	procWcsSetDefaultRenderingIntent          = modmscms.NewProc("WcsSetDefaultRenderingIntent")
@@ -138,81 +138,104 @@ var (
 	procWcsTranslateColors                    = modmscms.NewProc("WcsTranslateColors")
 )
 
-// AssociateColorProfileWithDeviceA calls mscms!AssociateColorProfileWithDeviceA.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-associatecolorprofilewithdevicea
-func AssociateColorProfileWithDeviceA(pMachineName foundation.PSTR, pProfileName foundation.PSTR, pDeviceName foundation.PSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procAssociateColorProfileWithDeviceA.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pProfileName)), uintptr(unsafe.Pointer(pDeviceName)))
-	return foundation.BOOL(r1)
+// AssociateColorProfileWithDevice calls mscms!AssociateColorProfileWithDeviceW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-associatecolorprofilewithdevicew
+func AssociateColorProfileWithDevice(pMachineName string, pProfileName string, pDeviceName string) bool {
+	_pMachineName := win32.UTF16Ptr(pMachineName)
+	_pProfileName := win32.UTF16Ptr(pProfileName)
+	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+	r1, _, _ := syscall.SyscallN(procAssociateColorProfileWithDevice.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(_pProfileName)), uintptr(unsafe.Pointer(_pDeviceName)))
+	return r1 != 0
 }
 
-// AssociateColorProfileWithDeviceW calls mscms!AssociateColorProfileWithDeviceW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-associatecolorprofilewithdevicew
-func AssociateColorProfileWithDeviceW(pMachineName foundation.PWSTR, pProfileName foundation.PWSTR, pDeviceName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procAssociateColorProfileWithDeviceW.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pProfileName)), uintptr(unsafe.Pointer(pDeviceName)))
-	return foundation.BOOL(r1)
+// AssociateColorProfileWithDeviceA calls mscms!AssociateColorProfileWithDeviceA.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-associatecolorprofilewithdevicea
+func AssociateColorProfileWithDeviceA(pMachineName foundation.PSTR, pProfileName foundation.PSTR, pDeviceName foundation.PSTR) bool {
+	r1, _, _ := syscall.SyscallN(procAssociateColorProfileWithDeviceA.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pProfileName)), uintptr(unsafe.Pointer(pDeviceName)))
+	return r1 != 0
 }
 
 // CMCheckColors calls ICM32!CMCheckColors.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmcheckcolors
-func CMCheckColors(hcmTransform uintptr, lpaInputColors *COLOR, nColors uint32, ctInput COLORTYPE, lpaResult *byte) foundation.BOOL {
+func CMCheckColors(hcmTransform uintptr, lpaInputColors *COLOR, nColors uint32, ctInput COLORTYPE, lpaResult *byte) bool {
 	r1, _, _ := syscall.SyscallN(procCMCheckColors.Addr(), uintptr(hcmTransform), uintptr(unsafe.Pointer(lpaInputColors)), uintptr(nColors), uintptr(ctInput), uintptr(unsafe.Pointer(lpaResult)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CMCheckColorsInGamut calls ICM32!CMCheckColorsInGamut.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmcheckcolorsingamut
-func CMCheckColorsInGamut(hcmTransform uintptr, lpaRGBTriple *graphicsgdi.RGBTRIPLE, lpaResult *byte, nCount uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCMCheckColorsInGamut.Addr(), uintptr(hcmTransform), uintptr(unsafe.Pointer(lpaRGBTriple)), uintptr(unsafe.Pointer(lpaResult)), uintptr(nCount))
-	return foundation.BOOL(r1)
+func CMCheckColorsInGamut(hcmTransform uintptr, lpaRGBTriple []graphicsgdi.RGBTRIPLE, lpaResult *byte) bool {
+	var _lpaRGBTriple *graphicsgdi.RGBTRIPLE
+	if len(lpaRGBTriple) > 0 {
+		_lpaRGBTriple = &lpaRGBTriple[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCMCheckColorsInGamut.Addr(), uintptr(hcmTransform), uintptr(unsafe.Pointer(_lpaRGBTriple)), uintptr(unsafe.Pointer(lpaResult)), uintptr(len(lpaRGBTriple)))
+	return r1 != 0
 }
 
 // CMCheckRGBs calls ICM32!CMCheckRGBs.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmcheckrgbs
-func CMCheckRGBs(hcmTransform uintptr, lpSrcBits unsafe.Pointer, bmInput BMFORMAT, dwWidth uint32, dwHeight uint32, dwStride uint32, lpaResult *byte, pfnCallback LPBMCALLBACKFN, ulCallbackData foundation.LPARAM) foundation.BOOL {
+func CMCheckRGBs(hcmTransform uintptr, lpSrcBits unsafe.Pointer, bmInput BMFORMAT, dwWidth uint32, dwHeight uint32, dwStride uint32, lpaResult *byte, pfnCallback LPBMCALLBACKFN, ulCallbackData foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procCMCheckRGBs.Addr(), uintptr(hcmTransform), uintptr(unsafe.Pointer(lpSrcBits)), uintptr(bmInput), uintptr(dwWidth), uintptr(dwHeight), uintptr(dwStride), uintptr(unsafe.Pointer(lpaResult)), uintptr(pfnCallback), uintptr(ulCallbackData))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CMConvertColorNameToIndex calls ICM32!CMConvertColorNameToIndex.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmconvertcolornametoindex
-func CMConvertColorNameToIndex(hProfile uintptr, paColorName **int8, paIndex *uint32, dwCount uint32) foundation.BOOL {
+func CMConvertColorNameToIndex(hProfile uintptr, paColorName **int8, paIndex *uint32, dwCount uint32) bool {
 	r1, _, _ := syscall.SyscallN(procCMConvertColorNameToIndex.Addr(), uintptr(hProfile), uintptr(unsafe.Pointer(paColorName)), uintptr(unsafe.Pointer(paIndex)), uintptr(dwCount))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CMConvertIndexToColorName calls ICM32!CMConvertIndexToColorName.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmconvertindextocolorname
-func CMConvertIndexToColorName(hProfile uintptr, paIndex *uint32, paColorName **int8, dwCount uint32) foundation.BOOL {
+func CMConvertIndexToColorName(hProfile uintptr, paIndex *uint32, paColorName **int8, dwCount uint32) bool {
 	r1, _, _ := syscall.SyscallN(procCMConvertIndexToColorName.Addr(), uintptr(hProfile), uintptr(unsafe.Pointer(paIndex)), uintptr(unsafe.Pointer(paColorName)), uintptr(dwCount))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CMCreateDeviceLinkProfile calls ICM32!CMCreateDeviceLinkProfile.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmcreatedevicelinkprofile
-func CMCreateDeviceLinkProfile(pahProfiles *uintptr, nProfiles uint32, padwIntents *uint32, nIntents uint32, dwFlags uint32, lpProfileData **byte) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCMCreateDeviceLinkProfile.Addr(), uintptr(unsafe.Pointer(pahProfiles)), uintptr(nProfiles), uintptr(unsafe.Pointer(padwIntents)), uintptr(nIntents), uintptr(dwFlags), uintptr(unsafe.Pointer(lpProfileData)))
-	return foundation.BOOL(r1)
+func CMCreateDeviceLinkProfile(pahProfiles []uintptr, padwIntents []uint32, dwFlags uint32, lpProfileData **byte) bool {
+	var _pahProfiles *uintptr
+	if len(pahProfiles) > 0 {
+		_pahProfiles = &pahProfiles[0]
+	}
+	var _padwIntents *uint32
+	if len(padwIntents) > 0 {
+		_padwIntents = &padwIntents[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCMCreateDeviceLinkProfile.Addr(), uintptr(unsafe.Pointer(_pahProfiles)), uintptr(len(pahProfiles)), uintptr(unsafe.Pointer(_padwIntents)), uintptr(len(padwIntents)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpProfileData)))
+	return r1 != 0
 }
 
 // CMCreateMultiProfileTransform calls ICM32!CMCreateMultiProfileTransform.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmcreatemultiprofiletransform
-func CMCreateMultiProfileTransform(pahProfiles *uintptr, nProfiles uint32, padwIntents *uint32, nIntents uint32, dwFlags uint32) uintptr {
-	r1, _, _ := syscall.SyscallN(procCMCreateMultiProfileTransform.Addr(), uintptr(unsafe.Pointer(pahProfiles)), uintptr(nProfiles), uintptr(unsafe.Pointer(padwIntents)), uintptr(nIntents), uintptr(dwFlags))
+func CMCreateMultiProfileTransform(pahProfiles []uintptr, padwIntents []uint32, dwFlags uint32) uintptr {
+	var _pahProfiles *uintptr
+	if len(pahProfiles) > 0 {
+		_pahProfiles = &pahProfiles[0]
+	}
+	var _padwIntents *uint32
+	if len(padwIntents) > 0 {
+		_padwIntents = &padwIntents[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCMCreateMultiProfileTransform.Addr(), uintptr(unsafe.Pointer(_pahProfiles)), uintptr(len(pahProfiles)), uintptr(unsafe.Pointer(_padwIntents)), uintptr(len(padwIntents)), uintptr(dwFlags))
 	return uintptr(r1)
 }
 
 // CMCreateProfile calls ICM32!CMCreateProfile.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmcreateprofile
-func CMCreateProfile(lpColorSpace *LOGCOLORSPACEA, lpProfileData *unsafe.Pointer) foundation.BOOL {
+func CMCreateProfile(lpColorSpace *LOGCOLORSPACEA, lpProfileData *unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procCMCreateProfile.Addr(), uintptr(unsafe.Pointer(lpColorSpace)), uintptr(unsafe.Pointer(lpProfileData)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CMCreateProfileW calls ICM32!CMCreateProfileW.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmcreateprofilew
-func CMCreateProfileW(lpColorSpace *LOGCOLORSPACEW, lpProfileData *unsafe.Pointer) foundation.BOOL {
+func CMCreateProfileW(lpColorSpace *LOGCOLORSPACEW, lpProfileData *unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procCMCreateProfileW.Addr(), uintptr(unsafe.Pointer(lpColorSpace)), uintptr(unsafe.Pointer(lpProfileData)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CMCreateTransform calls ICM32!CMCreateTransform.
@@ -245,9 +268,9 @@ func CMCreateTransformW(lpColorSpace *LOGCOLORSPACEW, lpDevCharacter unsafe.Poin
 
 // CMDeleteTransform calls ICM32!CMDeleteTransform.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmdeletetransform
-func CMDeleteTransform(hcmTransform uintptr) foundation.BOOL {
+func CMDeleteTransform(hcmTransform uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procCMDeleteTransform.Addr(), uintptr(hcmTransform))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CMGetInfo calls ICM32!CMGetInfo.
@@ -259,103 +282,115 @@ func CMGetInfo(dwInfo uint32) uint32 {
 
 // CMGetNamedProfileInfo calls ICM32!CMGetNamedProfileInfo.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmgetnamedprofileinfo
-func CMGetNamedProfileInfo(hProfile uintptr, pNamedProfileInfo *NAMED_PROFILE_INFO) foundation.BOOL {
+func CMGetNamedProfileInfo(hProfile uintptr, pNamedProfileInfo *NAMED_PROFILE_INFO) bool {
 	r1, _, _ := syscall.SyscallN(procCMGetNamedProfileInfo.Addr(), uintptr(hProfile), uintptr(unsafe.Pointer(pNamedProfileInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CMIsProfileValid calls ICM32!CMIsProfileValid.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmisprofilevalid
-func CMIsProfileValid(hProfile uintptr, lpbValid *foundation.BOOL) foundation.BOOL {
+func CMIsProfileValid(hProfile uintptr, lpbValid *foundation.BOOL) bool {
 	r1, _, _ := syscall.SyscallN(procCMIsProfileValid.Addr(), uintptr(hProfile), uintptr(unsafe.Pointer(lpbValid)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CMTranslateColors calls ICM32!CMTranslateColors.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmtranslatecolors
-func CMTranslateColors(hcmTransform uintptr, lpaInputColors *COLOR, nColors uint32, ctInput COLORTYPE, lpaOutputColors *COLOR, ctOutput COLORTYPE) foundation.BOOL {
+func CMTranslateColors(hcmTransform uintptr, lpaInputColors *COLOR, nColors uint32, ctInput COLORTYPE, lpaOutputColors *COLOR, ctOutput COLORTYPE) bool {
 	r1, _, _ := syscall.SyscallN(procCMTranslateColors.Addr(), uintptr(hcmTransform), uintptr(unsafe.Pointer(lpaInputColors)), uintptr(nColors), uintptr(ctInput), uintptr(unsafe.Pointer(lpaOutputColors)), uintptr(ctOutput))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CMTranslateRGB calls ICM32!CMTranslateRGB.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmtranslatergb
-func CMTranslateRGB(hcmTransform uintptr, ColorRef foundation.COLORREF, lpColorRef *uint32, dwFlags uint32) foundation.BOOL {
+func CMTranslateRGB(hcmTransform uintptr, ColorRef foundation.COLORREF, lpColorRef *uint32, dwFlags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procCMTranslateRGB.Addr(), uintptr(hcmTransform), uintptr(ColorRef), uintptr(unsafe.Pointer(lpColorRef)), uintptr(dwFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CMTranslateRGBs calls ICM32!CMTranslateRGBs.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmtranslatergbs
-func CMTranslateRGBs(hcmTransform uintptr, lpSrcBits unsafe.Pointer, bmInput BMFORMAT, dwWidth uint32, dwHeight uint32, dwStride uint32, lpDestBits unsafe.Pointer, bmOutput BMFORMAT, dwTranslateDirection uint32) foundation.BOOL {
+func CMTranslateRGBs(hcmTransform uintptr, lpSrcBits unsafe.Pointer, bmInput BMFORMAT, dwWidth uint32, dwHeight uint32, dwStride uint32, lpDestBits unsafe.Pointer, bmOutput BMFORMAT, dwTranslateDirection uint32) bool {
 	r1, _, _ := syscall.SyscallN(procCMTranslateRGBs.Addr(), uintptr(hcmTransform), uintptr(unsafe.Pointer(lpSrcBits)), uintptr(bmInput), uintptr(dwWidth), uintptr(dwHeight), uintptr(dwStride), uintptr(unsafe.Pointer(lpDestBits)), uintptr(bmOutput), uintptr(dwTranslateDirection))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CMTranslateRGBsExt calls ICM32!CMTranslateRGBsExt.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-cmtranslatergbsext
-func CMTranslateRGBsExt(hcmTransform uintptr, lpSrcBits unsafe.Pointer, bmInput BMFORMAT, dwWidth uint32, dwHeight uint32, dwInputStride uint32, lpDestBits unsafe.Pointer, bmOutput BMFORMAT, dwOutputStride uint32, lpfnCallback LPBMCALLBACKFN, ulCallbackData foundation.LPARAM) foundation.BOOL {
+func CMTranslateRGBsExt(hcmTransform uintptr, lpSrcBits unsafe.Pointer, bmInput BMFORMAT, dwWidth uint32, dwHeight uint32, dwInputStride uint32, lpDestBits unsafe.Pointer, bmOutput BMFORMAT, dwOutputStride uint32, lpfnCallback LPBMCALLBACKFN, ulCallbackData foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procCMTranslateRGBsExt.Addr(), uintptr(hcmTransform), uintptr(unsafe.Pointer(lpSrcBits)), uintptr(bmInput), uintptr(dwWidth), uintptr(dwHeight), uintptr(dwInputStride), uintptr(unsafe.Pointer(lpDestBits)), uintptr(bmOutput), uintptr(dwOutputStride), uintptr(lpfnCallback), uintptr(ulCallbackData))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CheckBitmapBits calls mscms!CheckBitmapBits.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-checkbitmapbits
-func CheckBitmapBits(hColorTransform uintptr, pSrcBits unsafe.Pointer, bmInput BMFORMAT, dwWidth uint32, dwHeight uint32, dwStride uint32, paResult *byte, pfnCallback LPBMCALLBACKFN, lpCallbackData foundation.LPARAM) foundation.BOOL {
+func CheckBitmapBits(hColorTransform uintptr, pSrcBits unsafe.Pointer, bmInput BMFORMAT, dwWidth uint32, dwHeight uint32, dwStride uint32, paResult *byte, pfnCallback LPBMCALLBACKFN, lpCallbackData foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procCheckBitmapBits.Addr(), uintptr(hColorTransform), uintptr(unsafe.Pointer(pSrcBits)), uintptr(bmInput), uintptr(dwWidth), uintptr(dwHeight), uintptr(dwStride), uintptr(unsafe.Pointer(paResult)), uintptr(pfnCallback), uintptr(lpCallbackData))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CheckColors calls mscms!CheckColors.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-checkcolors
-func CheckColors(hColorTransform uintptr, paInputColors *COLOR, nColors uint32, ctInput COLORTYPE, paResult *byte) foundation.BOOL {
+func CheckColors(hColorTransform uintptr, paInputColors *COLOR, nColors uint32, ctInput COLORTYPE, paResult *byte) bool {
 	r1, _, _ := syscall.SyscallN(procCheckColors.Addr(), uintptr(hColorTransform), uintptr(unsafe.Pointer(paInputColors)), uintptr(nColors), uintptr(ctInput), uintptr(unsafe.Pointer(paResult)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CheckColorsInGamut calls GDI32!CheckColorsInGamut.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-checkcolorsingamut
 // Minimum OS: windows5.0.
-func CheckColorsInGamut(hdc graphicsgdi.HDC, lpRGBTriple *graphicsgdi.RGBTRIPLE, dlpBuffer unsafe.Pointer, nCount uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCheckColorsInGamut.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpRGBTriple)), uintptr(unsafe.Pointer(dlpBuffer)), uintptr(nCount))
-	return foundation.BOOL(r1)
+func CheckColorsInGamut(hdc graphicsgdi.HDC, lpRGBTriple []graphicsgdi.RGBTRIPLE, dlpBuffer unsafe.Pointer) bool {
+	var _lpRGBTriple *graphicsgdi.RGBTRIPLE
+	if len(lpRGBTriple) > 0 {
+		_lpRGBTriple = &lpRGBTriple[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCheckColorsInGamut.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpRGBTriple)), uintptr(unsafe.Pointer(dlpBuffer)), uintptr(len(lpRGBTriple)))
+	return r1 != 0
 }
 
 // CloseColorProfile calls mscms!CloseColorProfile.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-closecolorprofile
-func CloseColorProfile(hProfile uintptr) foundation.BOOL {
+func CloseColorProfile(hProfile uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procCloseColorProfile.Addr(), uintptr(hProfile))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ColorCorrectPalette calls GDI32!ColorCorrectPalette.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-colorcorrectpalette
 // Minimum OS: windows5.0.
-func ColorCorrectPalette(hdc graphicsgdi.HDC, hPal graphicsgdi.HPALETTE, deFirst uint32, num uint32) foundation.BOOL {
+func ColorCorrectPalette(hdc graphicsgdi.HDC, hPal graphicsgdi.HPALETTE, deFirst uint32, num uint32) bool {
 	r1, _, _ := syscall.SyscallN(procColorCorrectPalette.Addr(), uintptr(hdc), uintptr(hPal), uintptr(deFirst), uintptr(num))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ColorMatchToTarget calls GDI32!ColorMatchToTarget.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-colormatchtotarget
 // Minimum OS: windows5.0.
-func ColorMatchToTarget(hdc graphicsgdi.HDC, hdcTarget graphicsgdi.HDC, action COLOR_MATCH_TO_TARGET_ACTION) foundation.BOOL {
+func ColorMatchToTarget(hdc graphicsgdi.HDC, hdcTarget graphicsgdi.HDC, action COLOR_MATCH_TO_TARGET_ACTION) bool {
 	r1, _, _ := syscall.SyscallN(procColorMatchToTarget.Addr(), uintptr(hdc), uintptr(hdcTarget), uintptr(action))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ConvertColorNameToIndex calls mscms!ConvertColorNameToIndex.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-convertcolornametoindex
-func ConvertColorNameToIndex(hProfile uintptr, paColorName **int8, paIndex *uint32, dwCount uint32) foundation.BOOL {
+func ConvertColorNameToIndex(hProfile uintptr, paColorName **int8, paIndex *uint32, dwCount uint32) bool {
 	r1, _, _ := syscall.SyscallN(procConvertColorNameToIndex.Addr(), uintptr(hProfile), uintptr(unsafe.Pointer(paColorName)), uintptr(unsafe.Pointer(paIndex)), uintptr(dwCount))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ConvertIndexToColorName calls mscms!ConvertIndexToColorName.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-convertindextocolorname
-func ConvertIndexToColorName(hProfile uintptr, paIndex *uint32, paColorName **int8, dwCount uint32) foundation.BOOL {
+func ConvertIndexToColorName(hProfile uintptr, paIndex *uint32, paColorName **int8, dwCount uint32) bool {
 	r1, _, _ := syscall.SyscallN(procConvertIndexToColorName.Addr(), uintptr(hProfile), uintptr(unsafe.Pointer(paIndex)), uintptr(unsafe.Pointer(paColorName)), uintptr(dwCount))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// CreateColorSpace calls GDI32!CreateColorSpaceW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createcolorspacew
+// Minimum OS: windows5.0.
+func CreateColorSpace(lplcs *LOGCOLORSPACEW) HCOLORSPACE {
+	r1, _, _ := syscall.SyscallN(procCreateColorSpace.Addr(), uintptr(unsafe.Pointer(lplcs)))
+	return HCOLORSPACE(r1)
 }
 
 // CreateColorSpaceA calls GDI32!CreateColorSpaceA.
@@ -366,12 +401,11 @@ func CreateColorSpaceA(lplcs *LOGCOLORSPACEA) HCOLORSPACE {
 	return HCOLORSPACE(r1)
 }
 
-// CreateColorSpaceW calls GDI32!CreateColorSpaceW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-createcolorspacew
-// Minimum OS: windows5.0.
-func CreateColorSpaceW(lplcs *LOGCOLORSPACEW) HCOLORSPACE {
-	r1, _, _ := syscall.SyscallN(procCreateColorSpaceW.Addr(), uintptr(unsafe.Pointer(lplcs)))
-	return HCOLORSPACE(r1)
+// CreateColorTransform calls mscms!CreateColorTransformW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-createcolortransformw
+func CreateColorTransform(pLogColorSpace *LOGCOLORSPACEW, hDestProfile uintptr, hTargetProfile uintptr, dwFlags uint32) uintptr {
+	r1, _, _ := syscall.SyscallN(procCreateColorTransform.Addr(), uintptr(unsafe.Pointer(pLogColorSpace)), uintptr(hDestProfile), uintptr(hTargetProfile), uintptr(dwFlags))
+	return uintptr(r1)
 }
 
 // CreateColorTransformA calls mscms!CreateColorTransformA.
@@ -381,82 +415,103 @@ func CreateColorTransformA(pLogColorSpace *LOGCOLORSPACEA, hDestProfile uintptr,
 	return uintptr(r1)
 }
 
-// CreateColorTransformW calls mscms!CreateColorTransformW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-createcolortransformw
-func CreateColorTransformW(pLogColorSpace *LOGCOLORSPACEW, hDestProfile uintptr, hTargetProfile uintptr, dwFlags uint32) uintptr {
-	r1, _, _ := syscall.SyscallN(procCreateColorTransformW.Addr(), uintptr(unsafe.Pointer(pLogColorSpace)), uintptr(hDestProfile), uintptr(hTargetProfile), uintptr(dwFlags))
-	return uintptr(r1)
-}
-
 // CreateDeviceLinkProfile calls mscms!CreateDeviceLinkProfile.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-createdevicelinkprofile
-func CreateDeviceLinkProfile(hProfile *uintptr, nProfiles uint32, padwIntent *uint32, nIntents uint32, dwFlags uint32, pProfileData **byte, indexPreferredCMM uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCreateDeviceLinkProfile.Addr(), uintptr(unsafe.Pointer(hProfile)), uintptr(nProfiles), uintptr(unsafe.Pointer(padwIntent)), uintptr(nIntents), uintptr(dwFlags), uintptr(unsafe.Pointer(pProfileData)), uintptr(indexPreferredCMM))
-	return foundation.BOOL(r1)
+func CreateDeviceLinkProfile(hProfile []uintptr, padwIntent []uint32, dwFlags uint32, pProfileData **byte, indexPreferredCMM uint32) bool {
+	var _hProfile *uintptr
+	if len(hProfile) > 0 {
+		_hProfile = &hProfile[0]
+	}
+	var _padwIntent *uint32
+	if len(padwIntent) > 0 {
+		_padwIntent = &padwIntent[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCreateDeviceLinkProfile.Addr(), uintptr(unsafe.Pointer(_hProfile)), uintptr(len(hProfile)), uintptr(unsafe.Pointer(_padwIntent)), uintptr(len(padwIntent)), uintptr(dwFlags), uintptr(unsafe.Pointer(pProfileData)), uintptr(indexPreferredCMM))
+	return r1 != 0
 }
 
 // CreateMultiProfileTransform calls mscms!CreateMultiProfileTransform.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-createmultiprofiletransform
-func CreateMultiProfileTransform(pahProfiles *uintptr, nProfiles uint32, padwIntent *uint32, nIntents uint32, dwFlags uint32, indexPreferredCMM uint32) uintptr {
-	r1, _, _ := syscall.SyscallN(procCreateMultiProfileTransform.Addr(), uintptr(unsafe.Pointer(pahProfiles)), uintptr(nProfiles), uintptr(unsafe.Pointer(padwIntent)), uintptr(nIntents), uintptr(dwFlags), uintptr(indexPreferredCMM))
+func CreateMultiProfileTransform(pahProfiles []uintptr, padwIntent []uint32, dwFlags uint32, indexPreferredCMM uint32) uintptr {
+	var _pahProfiles *uintptr
+	if len(pahProfiles) > 0 {
+		_pahProfiles = &pahProfiles[0]
+	}
+	var _padwIntent *uint32
+	if len(padwIntent) > 0 {
+		_padwIntent = &padwIntent[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCreateMultiProfileTransform.Addr(), uintptr(unsafe.Pointer(_pahProfiles)), uintptr(len(pahProfiles)), uintptr(unsafe.Pointer(_padwIntent)), uintptr(len(padwIntent)), uintptr(dwFlags), uintptr(indexPreferredCMM))
 	return uintptr(r1)
+}
+
+// CreateProfileFromLogColorSpace calls mscms!CreateProfileFromLogColorSpaceW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-createprofilefromlogcolorspacew
+func CreateProfileFromLogColorSpace(pLogColorSpace *LOGCOLORSPACEW, pProfile **byte) bool {
+	r1, _, _ := syscall.SyscallN(procCreateProfileFromLogColorSpace.Addr(), uintptr(unsafe.Pointer(pLogColorSpace)), uintptr(unsafe.Pointer(pProfile)))
+	return r1 != 0
 }
 
 // CreateProfileFromLogColorSpaceA calls mscms!CreateProfileFromLogColorSpaceA.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-createprofilefromlogcolorspacea
-func CreateProfileFromLogColorSpaceA(pLogColorSpace *LOGCOLORSPACEA, pProfile **byte) foundation.BOOL {
+func CreateProfileFromLogColorSpaceA(pLogColorSpace *LOGCOLORSPACEA, pProfile **byte) bool {
 	r1, _, _ := syscall.SyscallN(procCreateProfileFromLogColorSpaceA.Addr(), uintptr(unsafe.Pointer(pLogColorSpace)), uintptr(unsafe.Pointer(pProfile)))
-	return foundation.BOOL(r1)
-}
-
-// CreateProfileFromLogColorSpaceW calls mscms!CreateProfileFromLogColorSpaceW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-createprofilefromlogcolorspacew
-func CreateProfileFromLogColorSpaceW(pLogColorSpace *LOGCOLORSPACEW, pProfile **byte) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCreateProfileFromLogColorSpaceW.Addr(), uintptr(unsafe.Pointer(pLogColorSpace)), uintptr(unsafe.Pointer(pProfile)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DeleteColorSpace calls GDI32!DeleteColorSpace.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-deletecolorspace
 // Minimum OS: windows5.0.
-func DeleteColorSpace(hcs HCOLORSPACE) foundation.BOOL {
+func DeleteColorSpace(hcs HCOLORSPACE) bool {
 	r1, _, _ := syscall.SyscallN(procDeleteColorSpace.Addr(), uintptr(hcs))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DeleteColorTransform calls mscms!DeleteColorTransform.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-deletecolortransform
-func DeleteColorTransform(hxform uintptr) foundation.BOOL {
+func DeleteColorTransform(hxform uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procDeleteColorTransform.Addr(), uintptr(hxform))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// DisassociateColorProfileFromDevice calls mscms!DisassociateColorProfileFromDeviceW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-disassociatecolorprofilefromdevicew
+func DisassociateColorProfileFromDevice(pMachineName string, pProfileName string, pDeviceName string) bool {
+	_pMachineName := win32.UTF16Ptr(pMachineName)
+	_pProfileName := win32.UTF16Ptr(pProfileName)
+	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+	r1, _, _ := syscall.SyscallN(procDisassociateColorProfileFromDevice.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(_pProfileName)), uintptr(unsafe.Pointer(_pDeviceName)))
+	return r1 != 0
 }
 
 // DisassociateColorProfileFromDeviceA calls mscms!DisassociateColorProfileFromDeviceA.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-disassociatecolorprofilefromdevicea
-func DisassociateColorProfileFromDeviceA(pMachineName foundation.PSTR, pProfileName foundation.PSTR, pDeviceName foundation.PSTR) foundation.BOOL {
+func DisassociateColorProfileFromDeviceA(pMachineName foundation.PSTR, pProfileName foundation.PSTR, pDeviceName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procDisassociateColorProfileFromDeviceA.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pProfileName)), uintptr(unsafe.Pointer(pDeviceName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// DisassociateColorProfileFromDeviceW calls mscms!DisassociateColorProfileFromDeviceW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-disassociatecolorprofilefromdevicew
-func DisassociateColorProfileFromDeviceW(pMachineName foundation.PWSTR, pProfileName foundation.PWSTR, pDeviceName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDisassociateColorProfileFromDeviceW.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pProfileName)), uintptr(unsafe.Pointer(pDeviceName)))
-	return foundation.BOOL(r1)
+// EnumColorProfiles calls mscms!EnumColorProfilesW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-enumcolorprofilesw
+func EnumColorProfiles(pMachineName string, pEnumRecord *ENUMTYPEW, pEnumerationBuffer *byte, pdwSizeOfEnumerationBuffer *uint32, pnProfiles *uint32) bool {
+	_pMachineName := win32.UTF16Ptr(pMachineName)
+	r1, _, _ := syscall.SyscallN(procEnumColorProfiles.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(pEnumRecord)), uintptr(unsafe.Pointer(pEnumerationBuffer)), uintptr(unsafe.Pointer(pdwSizeOfEnumerationBuffer)), uintptr(unsafe.Pointer(pnProfiles)))
+	return r1 != 0
 }
 
 // EnumColorProfilesA calls mscms!EnumColorProfilesA.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-enumcolorprofilesa
-func EnumColorProfilesA(pMachineName foundation.PSTR, pEnumRecord *ENUMTYPEA, pEnumerationBuffer *byte, pdwSizeOfEnumerationBuffer *uint32, pnProfiles *uint32) foundation.BOOL {
+func EnumColorProfilesA(pMachineName foundation.PSTR, pEnumRecord *ENUMTYPEA, pEnumerationBuffer *byte, pdwSizeOfEnumerationBuffer *uint32, pnProfiles *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEnumColorProfilesA.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pEnumRecord)), uintptr(unsafe.Pointer(pEnumerationBuffer)), uintptr(unsafe.Pointer(pdwSizeOfEnumerationBuffer)), uintptr(unsafe.Pointer(pnProfiles)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// EnumColorProfilesW calls mscms!EnumColorProfilesW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-enumcolorprofilesw
-func EnumColorProfilesW(pMachineName foundation.PWSTR, pEnumRecord *ENUMTYPEW, pEnumerationBuffer *byte, pdwSizeOfEnumerationBuffer *uint32, pnProfiles *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procEnumColorProfilesW.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pEnumRecord)), uintptr(unsafe.Pointer(pEnumerationBuffer)), uintptr(unsafe.Pointer(pdwSizeOfEnumerationBuffer)), uintptr(unsafe.Pointer(pnProfiles)))
-	return foundation.BOOL(r1)
+// EnumICMProfiles calls GDI32!EnumICMProfilesW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumicmprofilesw
+// Minimum OS: windows5.0.
+func EnumICMProfiles(hdc graphicsgdi.HDC, proc ICMENUMPROCW, param2 foundation.LPARAM) int32 {
+	r1, _, _ := syscall.SyscallN(procEnumICMProfiles.Addr(), uintptr(hdc), uintptr(proc), uintptr(param2))
+	return int32(r1)
 }
 
 // EnumICMProfilesA calls GDI32!EnumICMProfilesA.
@@ -467,14 +522,6 @@ func EnumICMProfilesA(hdc graphicsgdi.HDC, proc ICMENUMPROCA, param2 foundation.
 	return int32(r1)
 }
 
-// EnumICMProfilesW calls GDI32!EnumICMProfilesW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-enumicmprofilesw
-// Minimum OS: windows5.0.
-func EnumICMProfilesW(hdc graphicsgdi.HDC, proc ICMENUMPROCW, param2 foundation.LPARAM) int32 {
-	r1, _, _ := syscall.SyscallN(procEnumICMProfilesW.Addr(), uintptr(hdc), uintptr(proc), uintptr(param2))
-	return int32(r1)
-}
-
 // GetCMMInfo calls mscms!GetCMMInfo.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getcmminfo
 func GetCMMInfo(hColorTransform uintptr, param1 uint32) uint32 {
@@ -482,46 +529,47 @@ func GetCMMInfo(hColorTransform uintptr, param1 uint32) uint32 {
 	return uint32(r1)
 }
 
-// GetColorDirectoryA calls mscms!GetColorDirectoryA.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getcolordirectorya
-func GetColorDirectoryA(pMachineName foundation.PSTR, pBuffer foundation.PSTR, pdwSize *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetColorDirectoryA.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pdwSize)))
-	return foundation.BOOL(r1)
+// GetColorDirectory calls mscms!GetColorDirectoryW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getcolordirectoryw
+func GetColorDirectory(pMachineName string, pBuffer foundation.PWSTR, pdwSize *uint32) bool {
+	_pMachineName := win32.UTF16Ptr(pMachineName)
+	r1, _, _ := syscall.SyscallN(procGetColorDirectory.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pdwSize)))
+	return r1 != 0
 }
 
-// GetColorDirectoryW calls mscms!GetColorDirectoryW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getcolordirectoryw
-func GetColorDirectoryW(pMachineName foundation.PWSTR, pBuffer foundation.PWSTR, pdwSize *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetColorDirectoryW.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pdwSize)))
-	return foundation.BOOL(r1)
+// GetColorDirectoryA calls mscms!GetColorDirectoryA.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getcolordirectorya
+func GetColorDirectoryA(pMachineName foundation.PSTR, pBuffer foundation.PSTR, pdwSize *uint32) bool {
+	r1, _, _ := syscall.SyscallN(procGetColorDirectoryA.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pdwSize)))
+	return r1 != 0
 }
 
 // GetColorProfileElement calls mscms!GetColorProfileElement.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getcolorprofileelement
-func GetColorProfileElement(hProfile uintptr, tag uint32, dwOffset uint32, pcbElement *uint32, pElement unsafe.Pointer, pbReference *foundation.BOOL) foundation.BOOL {
+func GetColorProfileElement(hProfile uintptr, tag uint32, dwOffset uint32, pcbElement *uint32, pElement unsafe.Pointer, pbReference *foundation.BOOL) bool {
 	r1, _, _ := syscall.SyscallN(procGetColorProfileElement.Addr(), uintptr(hProfile), uintptr(tag), uintptr(dwOffset), uintptr(unsafe.Pointer(pcbElement)), uintptr(unsafe.Pointer(pElement)), uintptr(unsafe.Pointer(pbReference)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetColorProfileElementTag calls mscms!GetColorProfileElementTag.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getcolorprofileelementtag
-func GetColorProfileElementTag(hProfile uintptr, dwIndex uint32, pTag *uint32) foundation.BOOL {
+func GetColorProfileElementTag(hProfile uintptr, dwIndex uint32, pTag *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetColorProfileElementTag.Addr(), uintptr(hProfile), uintptr(dwIndex), uintptr(unsafe.Pointer(pTag)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetColorProfileFromHandle calls mscms!GetColorProfileFromHandle.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getcolorprofilefromhandle
-func GetColorProfileFromHandle(hProfile uintptr, pProfile *byte, pcbProfile *uint32) foundation.BOOL {
+func GetColorProfileFromHandle(hProfile uintptr, pProfile *byte, pcbProfile *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetColorProfileFromHandle.Addr(), uintptr(hProfile), uintptr(unsafe.Pointer(pProfile)), uintptr(unsafe.Pointer(pcbProfile)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetColorProfileHeader calls mscms!GetColorProfileHeader.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getcolorprofileheader
-func GetColorProfileHeader(hProfile uintptr, pHeader *PROFILEHEADER) foundation.BOOL {
+func GetColorProfileHeader(hProfile uintptr, pHeader *PROFILEHEADER) bool {
 	r1, _, _ := syscall.SyscallN(procGetColorProfileHeader.Addr(), uintptr(hProfile), uintptr(unsafe.Pointer(pHeader)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetColorSpace calls GDI32!GetColorSpace.
@@ -534,119 +582,129 @@ func GetColorSpace(hdc graphicsgdi.HDC) HCOLORSPACE {
 
 // GetCountColorProfileElements calls mscms!GetCountColorProfileElements.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getcountcolorprofileelements
-func GetCountColorProfileElements(hProfile uintptr, pnElementCount *uint32) foundation.BOOL {
+func GetCountColorProfileElements(hProfile uintptr, pnElementCount *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetCountColorProfileElements.Addr(), uintptr(hProfile), uintptr(unsafe.Pointer(pnElementCount)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetDeviceGammaRamp calls GDI32!GetDeviceGammaRamp.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getdevicegammaramp
 // Minimum OS: windows5.0.
-func GetDeviceGammaRamp(hdc graphicsgdi.HDC, lpRamp unsafe.Pointer) foundation.BOOL {
+func GetDeviceGammaRamp(hdc graphicsgdi.HDC, lpRamp unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procGetDeviceGammaRamp.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpRamp)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// GetICMProfile calls GDI32!GetICMProfileW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-geticmprofilew
+// Minimum OS: windows5.0.
+func GetICMProfile(hdc graphicsgdi.HDC, pBufSize *uint32, pszFilename foundation.PWSTR) bool {
+	r1, _, _ := syscall.SyscallN(procGetICMProfile.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(pBufSize)), uintptr(unsafe.Pointer(pszFilename)))
+	return r1 != 0
 }
 
 // GetICMProfileA calls GDI32!GetICMProfileA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-geticmprofilea
 // Minimum OS: windows5.0.
-func GetICMProfileA(hdc graphicsgdi.HDC, pBufSize *uint32, pszFilename foundation.PSTR) foundation.BOOL {
+func GetICMProfileA(hdc graphicsgdi.HDC, pBufSize *uint32, pszFilename foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procGetICMProfileA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(pBufSize)), uintptr(unsafe.Pointer(pszFilename)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetICMProfileW calls GDI32!GetICMProfileW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-geticmprofilew
+// GetLogColorSpace calls GDI32!GetLogColorSpaceW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getlogcolorspacew
 // Minimum OS: windows5.0.
-func GetICMProfileW(hdc graphicsgdi.HDC, pBufSize *uint32, pszFilename foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetICMProfileW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(pBufSize)), uintptr(unsafe.Pointer(pszFilename)))
-	return foundation.BOOL(r1)
+func GetLogColorSpace(hColorSpace HCOLORSPACE, lpBuffer *LOGCOLORSPACEW, nSize uint32) bool {
+	r1, _, _ := syscall.SyscallN(procGetLogColorSpace.Addr(), uintptr(hColorSpace), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
+	return r1 != 0
 }
 
 // GetLogColorSpaceA calls GDI32!GetLogColorSpaceA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getlogcolorspacea
 // Minimum OS: windows5.0.
-func GetLogColorSpaceA(hColorSpace HCOLORSPACE, lpBuffer *LOGCOLORSPACEA, nSize uint32) foundation.BOOL {
+func GetLogColorSpaceA(hColorSpace HCOLORSPACE, lpBuffer *LOGCOLORSPACEA, nSize uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetLogColorSpaceA.Addr(), uintptr(hColorSpace), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
-	return foundation.BOOL(r1)
-}
-
-// GetLogColorSpaceW calls GDI32!GetLogColorSpaceW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getlogcolorspacew
-// Minimum OS: windows5.0.
-func GetLogColorSpaceW(hColorSpace HCOLORSPACE, lpBuffer *LOGCOLORSPACEW, nSize uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetLogColorSpaceW.Addr(), uintptr(hColorSpace), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetNamedProfileInfo calls mscms!GetNamedProfileInfo.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getnamedprofileinfo
-func GetNamedProfileInfo(hProfile uintptr, pNamedProfileInfo *NAMED_PROFILE_INFO) foundation.BOOL {
+func GetNamedProfileInfo(hProfile uintptr, pNamedProfileInfo *NAMED_PROFILE_INFO) bool {
 	r1, _, _ := syscall.SyscallN(procGetNamedProfileInfo.Addr(), uintptr(hProfile), uintptr(unsafe.Pointer(pNamedProfileInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetPS2ColorRenderingDictionary calls mscms!GetPS2ColorRenderingDictionary.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getps2colorrenderingdictionary
-func GetPS2ColorRenderingDictionary(hProfile uintptr, dwIntent uint32, pPS2ColorRenderingDictionary *byte, pcbPS2ColorRenderingDictionary *uint32, pbBinary *foundation.BOOL) foundation.BOOL {
+func GetPS2ColorRenderingDictionary(hProfile uintptr, dwIntent uint32, pPS2ColorRenderingDictionary *byte, pcbPS2ColorRenderingDictionary *uint32, pbBinary *foundation.BOOL) bool {
 	r1, _, _ := syscall.SyscallN(procGetPS2ColorRenderingDictionary.Addr(), uintptr(hProfile), uintptr(dwIntent), uintptr(unsafe.Pointer(pPS2ColorRenderingDictionary)), uintptr(unsafe.Pointer(pcbPS2ColorRenderingDictionary)), uintptr(unsafe.Pointer(pbBinary)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetPS2ColorRenderingIntent calls mscms!GetPS2ColorRenderingIntent.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getps2colorrenderingintent
-func GetPS2ColorRenderingIntent(hProfile uintptr, dwIntent uint32, pBuffer *byte, pcbPS2ColorRenderingIntent *uint32) foundation.BOOL {
+func GetPS2ColorRenderingIntent(hProfile uintptr, dwIntent uint32, pBuffer *byte, pcbPS2ColorRenderingIntent *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetPS2ColorRenderingIntent.Addr(), uintptr(hProfile), uintptr(dwIntent), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pcbPS2ColorRenderingIntent)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetPS2ColorSpaceArray calls mscms!GetPS2ColorSpaceArray.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getps2colorspacearray
-func GetPS2ColorSpaceArray(hProfile uintptr, dwIntent uint32, dwCSAType uint32, pPS2ColorSpaceArray *byte, pcbPS2ColorSpaceArray *uint32, pbBinary *foundation.BOOL) foundation.BOOL {
+func GetPS2ColorSpaceArray(hProfile uintptr, dwIntent uint32, dwCSAType uint32, pPS2ColorSpaceArray *byte, pcbPS2ColorSpaceArray *uint32, pbBinary *foundation.BOOL) bool {
 	r1, _, _ := syscall.SyscallN(procGetPS2ColorSpaceArray.Addr(), uintptr(hProfile), uintptr(dwIntent), uintptr(dwCSAType), uintptr(unsafe.Pointer(pPS2ColorSpaceArray)), uintptr(unsafe.Pointer(pcbPS2ColorSpaceArray)), uintptr(unsafe.Pointer(pbBinary)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// GetStandardColorSpaceProfile calls mscms!GetStandardColorSpaceProfileW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getstandardcolorspaceprofilew
+func GetStandardColorSpaceProfile(pMachineName string, dwSCS uint32, pBuffer foundation.PWSTR, pcbSize *uint32) bool {
+	_pMachineName := win32.UTF16Ptr(pMachineName)
+	r1, _, _ := syscall.SyscallN(procGetStandardColorSpaceProfile.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(dwSCS), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pcbSize)))
+	return r1 != 0
 }
 
 // GetStandardColorSpaceProfileA calls mscms!GetStandardColorSpaceProfileA.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getstandardcolorspaceprofilea
-func GetStandardColorSpaceProfileA(pMachineName foundation.PSTR, dwSCS uint32, pBuffer foundation.PSTR, pcbSize *uint32) foundation.BOOL {
+func GetStandardColorSpaceProfileA(pMachineName foundation.PSTR, dwSCS uint32, pBuffer foundation.PSTR, pcbSize *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetStandardColorSpaceProfileA.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(dwSCS), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pcbSize)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetStandardColorSpaceProfileW calls mscms!GetStandardColorSpaceProfileW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-getstandardcolorspaceprofilew
-func GetStandardColorSpaceProfileW(pMachineName foundation.PWSTR, dwSCS uint32, pBuffer foundation.PWSTR, pcbSize *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetStandardColorSpaceProfileW.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(dwSCS), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pcbSize)))
-	return foundation.BOOL(r1)
+// InstallColorProfile calls mscms!InstallColorProfileW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-installcolorprofilew
+func InstallColorProfile(pMachineName string, pProfileName string) bool {
+	_pMachineName := win32.UTF16Ptr(pMachineName)
+	_pProfileName := win32.UTF16Ptr(pProfileName)
+	r1, _, _ := syscall.SyscallN(procInstallColorProfile.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(_pProfileName)))
+	return r1 != 0
 }
 
 // InstallColorProfileA calls mscms!InstallColorProfileA.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-installcolorprofilea
-func InstallColorProfileA(pMachineName foundation.PSTR, pProfileName foundation.PSTR) foundation.BOOL {
+func InstallColorProfileA(pMachineName foundation.PSTR, pProfileName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procInstallColorProfileA.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pProfileName)))
-	return foundation.BOOL(r1)
-}
-
-// InstallColorProfileW calls mscms!InstallColorProfileW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-installcolorprofilew
-func InstallColorProfileW(pMachineName foundation.PWSTR, pProfileName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procInstallColorProfileW.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pProfileName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsColorProfileTagPresent calls mscms!IsColorProfileTagPresent.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-iscolorprofiletagpresent
-func IsColorProfileTagPresent(hProfile uintptr, tag uint32, pbPresent *foundation.BOOL) foundation.BOOL {
+func IsColorProfileTagPresent(hProfile uintptr, tag uint32, pbPresent *foundation.BOOL) bool {
 	r1, _, _ := syscall.SyscallN(procIsColorProfileTagPresent.Addr(), uintptr(hProfile), uintptr(tag), uintptr(unsafe.Pointer(pbPresent)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // IsColorProfileValid calls mscms!IsColorProfileValid.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-iscolorprofilevalid
-func IsColorProfileValid(hProfile uintptr, pbValid *foundation.BOOL) foundation.BOOL {
+func IsColorProfileValid(hProfile uintptr, pbValid *foundation.BOOL) bool {
 	r1, _, _ := syscall.SyscallN(procIsColorProfileValid.Addr(), uintptr(hProfile), uintptr(unsafe.Pointer(pbValid)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// OpenColorProfile calls mscms!OpenColorProfileW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-opencolorprofilew
+func OpenColorProfile(pProfile *PROFILE, dwDesiredAccess uint32, dwShareMode uint32, dwCreationMode uint32) uintptr {
+	r1, _, _ := syscall.SyscallN(procOpenColorProfile.Addr(), uintptr(unsafe.Pointer(pProfile)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(dwCreationMode))
+	return uintptr(r1)
 }
 
 // OpenColorProfileA calls mscms!OpenColorProfileA.
@@ -656,60 +714,55 @@ func OpenColorProfileA(pProfile *PROFILE, dwDesiredAccess uint32, dwShareMode ui
 	return uintptr(r1)
 }
 
-// OpenColorProfileW calls mscms!OpenColorProfileW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-opencolorprofilew
-func OpenColorProfileW(pProfile *PROFILE, dwDesiredAccess uint32, dwShareMode uint32, dwCreationMode uint32) uintptr {
-	r1, _, _ := syscall.SyscallN(procOpenColorProfileW.Addr(), uintptr(unsafe.Pointer(pProfile)), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(dwCreationMode))
-	return uintptr(r1)
+// RegisterCMM calls mscms!RegisterCMMW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-registercmmw
+func RegisterCMM(pMachineName string, cmmID uint32, pCMMdll string) bool {
+	_pMachineName := win32.UTF16Ptr(pMachineName)
+	_pCMMdll := win32.UTF16Ptr(pCMMdll)
+	r1, _, _ := syscall.SyscallN(procRegisterCMM.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(cmmID), uintptr(unsafe.Pointer(_pCMMdll)))
+	return r1 != 0
 }
 
 // RegisterCMMA calls mscms!RegisterCMMA.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-registercmma
-func RegisterCMMA(pMachineName foundation.PSTR, cmmID uint32, pCMMdll foundation.PSTR) foundation.BOOL {
+func RegisterCMMA(pMachineName foundation.PSTR, cmmID uint32, pCMMdll foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procRegisterCMMA.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(cmmID), uintptr(unsafe.Pointer(pCMMdll)))
-	return foundation.BOOL(r1)
-}
-
-// RegisterCMMW calls mscms!RegisterCMMW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-registercmmw
-func RegisterCMMW(pMachineName foundation.PWSTR, cmmID uint32, pCMMdll foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procRegisterCMMW.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(cmmID), uintptr(unsafe.Pointer(pCMMdll)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SelectCMM calls mscms!SelectCMM.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-selectcmm
-func SelectCMM(dwCMMType uint32) foundation.BOOL {
+func SelectCMM(dwCMMType uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSelectCMM.Addr(), uintptr(dwCMMType))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetColorProfileElement calls mscms!SetColorProfileElement.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-setcolorprofileelement
-func SetColorProfileElement(hProfile uintptr, tag uint32, dwOffset uint32, pcbElement *uint32, pElement unsafe.Pointer) foundation.BOOL {
+func SetColorProfileElement(hProfile uintptr, tag uint32, dwOffset uint32, pcbElement *uint32, pElement unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procSetColorProfileElement.Addr(), uintptr(hProfile), uintptr(tag), uintptr(dwOffset), uintptr(unsafe.Pointer(pcbElement)), uintptr(unsafe.Pointer(pElement)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetColorProfileElementReference calls mscms!SetColorProfileElementReference.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-setcolorprofileelementreference
-func SetColorProfileElementReference(hProfile uintptr, newTag uint32, refTag uint32) foundation.BOOL {
+func SetColorProfileElementReference(hProfile uintptr, newTag uint32, refTag uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSetColorProfileElementReference.Addr(), uintptr(hProfile), uintptr(newTag), uintptr(refTag))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetColorProfileElementSize calls mscms!SetColorProfileElementSize.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-setcolorprofileelementsize
-func SetColorProfileElementSize(hProfile uintptr, tagType uint32, pcbElement uint32) foundation.BOOL {
+func SetColorProfileElementSize(hProfile uintptr, tagType uint32, pcbElement uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSetColorProfileElementSize.Addr(), uintptr(hProfile), uintptr(tagType), uintptr(pcbElement))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetColorProfileHeader calls mscms!SetColorProfileHeader.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-setcolorprofileheader
-func SetColorProfileHeader(hProfile uintptr, pHeader *PROFILEHEADER) foundation.BOOL {
+func SetColorProfileHeader(hProfile uintptr, pHeader *PROFILEHEADER) bool {
 	r1, _, _ := syscall.SyscallN(procSetColorProfileHeader.Addr(), uintptr(hProfile), uintptr(unsafe.Pointer(pHeader)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetColorSpace calls GDI32!SetColorSpace.
@@ -723,9 +776,9 @@ func SetColorSpace(hdc graphicsgdi.HDC, hcs HCOLORSPACE) HCOLORSPACE {
 // SetDeviceGammaRamp calls GDI32!SetDeviceGammaRamp.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setdevicegammaramp
 // Minimum OS: windows5.0.
-func SetDeviceGammaRamp(hdc graphicsgdi.HDC, lpRamp unsafe.Pointer) foundation.BOOL {
+func SetDeviceGammaRamp(hdc graphicsgdi.HDC, lpRamp unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procSetDeviceGammaRamp.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpRamp)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetICMMode calls GDI32!SetICMMode.
@@ -736,120 +789,136 @@ func SetICMMode(hdc graphicsgdi.HDC, mode ICM_MODE) int32 {
 	return int32(r1)
 }
 
+// SetICMProfile calls GDI32!SetICMProfileW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-seticmprofilew
+// Minimum OS: windows5.0.
+func SetICMProfile(hdc graphicsgdi.HDC, lpFileName string) bool {
+	_lpFileName := win32.UTF16Ptr(lpFileName)
+	r1, _, _ := syscall.SyscallN(procSetICMProfile.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(_lpFileName)))
+	return r1 != 0
+}
+
 // SetICMProfileA calls GDI32!SetICMProfileA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-seticmprofilea
 // Minimum OS: windows5.0.
-func SetICMProfileA(hdc graphicsgdi.HDC, lpFileName foundation.PSTR) foundation.BOOL {
+func SetICMProfileA(hdc graphicsgdi.HDC, lpFileName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procSetICMProfileA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpFileName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// SetICMProfileW calls GDI32!SetICMProfileW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-seticmprofilew
-// Minimum OS: windows5.0.
-func SetICMProfileW(hdc graphicsgdi.HDC, lpFileName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetICMProfileW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpFileName)))
-	return foundation.BOOL(r1)
+// SetStandardColorSpaceProfile calls mscms!SetStandardColorSpaceProfileW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-setstandardcolorspaceprofilew
+func SetStandardColorSpaceProfile(pMachineName string, dwProfileID uint32, pProfileName string) bool {
+	_pMachineName := win32.UTF16Ptr(pMachineName)
+	_pProfileName := win32.UTF16Ptr(pProfileName)
+	r1, _, _ := syscall.SyscallN(procSetStandardColorSpaceProfile.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(dwProfileID), uintptr(unsafe.Pointer(_pProfileName)))
+	return r1 != 0
 }
 
 // SetStandardColorSpaceProfileA calls mscms!SetStandardColorSpaceProfileA.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-setstandardcolorspaceprofilea
-func SetStandardColorSpaceProfileA(pMachineName foundation.PSTR, dwProfileID uint32, pProfilename foundation.PSTR) foundation.BOOL {
+func SetStandardColorSpaceProfileA(pMachineName foundation.PSTR, dwProfileID uint32, pProfilename foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procSetStandardColorSpaceProfileA.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(dwProfileID), uintptr(unsafe.Pointer(pProfilename)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// SetStandardColorSpaceProfileW calls mscms!SetStandardColorSpaceProfileW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-setstandardcolorspaceprofilew
-func SetStandardColorSpaceProfileW(pMachineName foundation.PWSTR, dwProfileID uint32, pProfileName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetStandardColorSpaceProfileW.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(dwProfileID), uintptr(unsafe.Pointer(pProfileName)))
-	return foundation.BOOL(r1)
+// SetupColorMatching calls ICMUI!SetupColorMatchingW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-setupcolormatchingw
+func SetupColorMatching(pcms *COLORMATCHSETUPW) bool {
+	r1, _, _ := syscall.SyscallN(procSetupColorMatching.Addr(), uintptr(unsafe.Pointer(pcms)))
+	return r1 != 0
 }
 
 // SetupColorMatchingA calls ICMUI!SetupColorMatchingA.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-setupcolormatchinga
-func SetupColorMatchingA(pcms *COLORMATCHSETUPA) foundation.BOOL {
+func SetupColorMatchingA(pcms *COLORMATCHSETUPA) bool {
 	r1, _, _ := syscall.SyscallN(procSetupColorMatchingA.Addr(), uintptr(unsafe.Pointer(pcms)))
-	return foundation.BOOL(r1)
-}
-
-// SetupColorMatchingW calls ICMUI!SetupColorMatchingW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-setupcolormatchingw
-func SetupColorMatchingW(pcms *COLORMATCHSETUPW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetupColorMatchingW.Addr(), uintptr(unsafe.Pointer(pcms)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // TranslateBitmapBits calls mscms!TranslateBitmapBits.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-translatebitmapbits
-func TranslateBitmapBits(hColorTransform uintptr, pSrcBits unsafe.Pointer, bmInput BMFORMAT, dwWidth uint32, dwHeight uint32, dwInputStride uint32, pDestBits unsafe.Pointer, bmOutput BMFORMAT, dwOutputStride uint32, pfnCallBack LPBMCALLBACKFN, ulCallbackData foundation.LPARAM) foundation.BOOL {
+func TranslateBitmapBits(hColorTransform uintptr, pSrcBits unsafe.Pointer, bmInput BMFORMAT, dwWidth uint32, dwHeight uint32, dwInputStride uint32, pDestBits unsafe.Pointer, bmOutput BMFORMAT, dwOutputStride uint32, pfnCallBack LPBMCALLBACKFN, ulCallbackData foundation.LPARAM) bool {
 	r1, _, _ := syscall.SyscallN(procTranslateBitmapBits.Addr(), uintptr(hColorTransform), uintptr(unsafe.Pointer(pSrcBits)), uintptr(bmInput), uintptr(dwWidth), uintptr(dwHeight), uintptr(dwInputStride), uintptr(unsafe.Pointer(pDestBits)), uintptr(bmOutput), uintptr(dwOutputStride), uintptr(pfnCallBack), uintptr(ulCallbackData))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // TranslateColors calls mscms!TranslateColors.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-translatecolors
-func TranslateColors(hColorTransform uintptr, paInputColors *COLOR, nColors uint32, ctInput COLORTYPE, paOutputColors *COLOR, ctOutput COLORTYPE) foundation.BOOL {
+func TranslateColors(hColorTransform uintptr, paInputColors *COLOR, nColors uint32, ctInput COLORTYPE, paOutputColors *COLOR, ctOutput COLORTYPE) bool {
 	r1, _, _ := syscall.SyscallN(procTranslateColors.Addr(), uintptr(hColorTransform), uintptr(unsafe.Pointer(paInputColors)), uintptr(nColors), uintptr(ctInput), uintptr(unsafe.Pointer(paOutputColors)), uintptr(ctOutput))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// UninstallColorProfile calls mscms!UninstallColorProfileW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-uninstallcolorprofilew
+func UninstallColorProfile(pMachineName string, pProfileName string, bDelete bool) bool {
+	_pMachineName := win32.UTF16Ptr(pMachineName)
+	_pProfileName := win32.UTF16Ptr(pProfileName)
+	_bDelete := win32.Bool32(bDelete)
+	r1, _, _ := syscall.SyscallN(procUninstallColorProfile.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(unsafe.Pointer(_pProfileName)), uintptr(_bDelete))
+	return r1 != 0
 }
 
 // UninstallColorProfileA calls mscms!UninstallColorProfileA.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-uninstallcolorprofilea
-func UninstallColorProfileA(pMachineName foundation.PSTR, pProfileName foundation.PSTR, bDelete foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procUninstallColorProfileA.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pProfileName)), uintptr(bDelete))
-	return foundation.BOOL(r1)
+func UninstallColorProfileA(pMachineName foundation.PSTR, pProfileName foundation.PSTR, bDelete bool) bool {
+	_bDelete := win32.Bool32(bDelete)
+	r1, _, _ := syscall.SyscallN(procUninstallColorProfileA.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pProfileName)), uintptr(_bDelete))
+	return r1 != 0
 }
 
-// UninstallColorProfileW calls mscms!UninstallColorProfileW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-uninstallcolorprofilew
-func UninstallColorProfileW(pMachineName foundation.PWSTR, pProfileName foundation.PWSTR, bDelete foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procUninstallColorProfileW.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(unsafe.Pointer(pProfileName)), uintptr(bDelete))
-	return foundation.BOOL(r1)
+// UnregisterCMM calls mscms!UnregisterCMMW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-unregistercmmw
+func UnregisterCMM(pMachineName string, cmmID uint32) bool {
+	_pMachineName := win32.UTF16Ptr(pMachineName)
+	r1, _, _ := syscall.SyscallN(procUnregisterCMM.Addr(), uintptr(unsafe.Pointer(_pMachineName)), uintptr(cmmID))
+	return r1 != 0
 }
 
 // UnregisterCMMA calls mscms!UnregisterCMMA.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-unregistercmma
-func UnregisterCMMA(pMachineName foundation.PSTR, cmmID uint32) foundation.BOOL {
+func UnregisterCMMA(pMachineName foundation.PSTR, cmmID uint32) bool {
 	r1, _, _ := syscall.SyscallN(procUnregisterCMMA.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(cmmID))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// UnregisterCMMW calls mscms!UnregisterCMMW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-unregistercmmw
-func UnregisterCMMW(pMachineName foundation.PWSTR, cmmID uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procUnregisterCMMW.Addr(), uintptr(unsafe.Pointer(pMachineName)), uintptr(cmmID))
-	return foundation.BOOL(r1)
+// UpdateICMRegKey calls GDI32!UpdateICMRegKeyW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-updateicmregkeyw
+// Minimum OS: windows5.0.
+func UpdateICMRegKey(lpszCMID string, lpszFileName string, command ICM_COMMAND) bool {
+	_lpszCMID := win32.UTF16Ptr(lpszCMID)
+	_lpszFileName := win32.UTF16Ptr(lpszFileName)
+	r1, _, _ := syscall.SyscallN(procUpdateICMRegKey.Addr(), 0, uintptr(unsafe.Pointer(_lpszCMID)), uintptr(unsafe.Pointer(_lpszFileName)), uintptr(command))
+	return r1 != 0
 }
 
 // UpdateICMRegKeyA calls GDI32!UpdateICMRegKeyA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-updateicmregkeya
 // Minimum OS: windows5.0.
-func UpdateICMRegKeyA(reserved uint32, lpszCMID foundation.PSTR, lpszFileName foundation.PSTR, command ICM_COMMAND) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procUpdateICMRegKeyA.Addr(), uintptr(reserved), uintptr(unsafe.Pointer(lpszCMID)), uintptr(unsafe.Pointer(lpszFileName)), uintptr(command))
-	return foundation.BOOL(r1)
-}
-
-// UpdateICMRegKeyW calls GDI32!UpdateICMRegKeyW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-updateicmregkeyw
-// Minimum OS: windows5.0.
-func UpdateICMRegKeyW(reserved uint32, lpszCMID foundation.PWSTR, lpszFileName foundation.PWSTR, command ICM_COMMAND) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procUpdateICMRegKeyW.Addr(), uintptr(reserved), uintptr(unsafe.Pointer(lpszCMID)), uintptr(unsafe.Pointer(lpszFileName)), uintptr(command))
-	return foundation.BOOL(r1)
+func UpdateICMRegKeyA(lpszCMID foundation.PSTR, lpszFileName foundation.PSTR, command ICM_COMMAND) bool {
+	r1, _, _ := syscall.SyscallN(procUpdateICMRegKeyA.Addr(), 0, uintptr(unsafe.Pointer(lpszCMID)), uintptr(unsafe.Pointer(lpszFileName)), uintptr(command))
+	return r1 != 0
 }
 
 // WcsAssociateColorProfileWithDevice calls mscms!WcsAssociateColorProfileWithDevice.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsassociatecolorprofilewithdevice
-func WcsAssociateColorProfileWithDevice(scope WCS_PROFILE_MANAGEMENT_SCOPE, pProfileName foundation.PWSTR, pDeviceName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWcsAssociateColorProfileWithDevice.Addr(), uintptr(scope), uintptr(unsafe.Pointer(pProfileName)), uintptr(unsafe.Pointer(pDeviceName)))
-	return foundation.BOOL(r1)
+func WcsAssociateColorProfileWithDevice(scope WCS_PROFILE_MANAGEMENT_SCOPE, pProfileName string, pDeviceName string) bool {
+	_pProfileName := win32.UTF16Ptr(pProfileName)
+	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+	r1, _, _ := syscall.SyscallN(procWcsAssociateColorProfileWithDevice.Addr(), uintptr(scope), uintptr(unsafe.Pointer(_pProfileName)), uintptr(unsafe.Pointer(_pDeviceName)))
+	return r1 != 0
 }
 
 // WcsCheckColors calls mscms!WcsCheckColors.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcscheckcolors
-func WcsCheckColors(hColorTransform uintptr, nColors uint32, nInputChannels uint32, cdtInput COLORDATATYPE, cbInput uint32, pInputData unsafe.Pointer, paResult *byte) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWcsCheckColors.Addr(), uintptr(hColorTransform), uintptr(nColors), uintptr(nInputChannels), uintptr(cdtInput), uintptr(cbInput), uintptr(unsafe.Pointer(pInputData)), uintptr(unsafe.Pointer(paResult)))
-	return foundation.BOOL(r1)
+func WcsCheckColors(hColorTransform uintptr, nInputChannels uint32, cdtInput COLORDATATYPE, cbInput uint32, pInputData unsafe.Pointer, paResult []byte) bool {
+	var _paResult *byte
+	if len(paResult) > 0 {
+		_paResult = &paResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWcsCheckColors.Addr(), uintptr(hColorTransform), uintptr(len(paResult)), uintptr(nInputChannels), uintptr(cdtInput), uintptr(cbInput), uintptr(unsafe.Pointer(pInputData)), uintptr(unsafe.Pointer(_paResult)))
+	return r1 != 0
 }
 
 // WcsCreateIccProfile calls mscms!WcsCreateIccProfile.
@@ -861,58 +930,70 @@ func WcsCreateIccProfile(hWcsProfile uintptr, dwOptions uint32) uintptr {
 
 // WcsDisassociateColorProfileFromDevice calls mscms!WcsDisassociateColorProfileFromDevice.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsdisassociatecolorprofilefromdevice
-func WcsDisassociateColorProfileFromDevice(scope WCS_PROFILE_MANAGEMENT_SCOPE, pProfileName foundation.PWSTR, pDeviceName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWcsDisassociateColorProfileFromDevice.Addr(), uintptr(scope), uintptr(unsafe.Pointer(pProfileName)), uintptr(unsafe.Pointer(pDeviceName)))
-	return foundation.BOOL(r1)
+func WcsDisassociateColorProfileFromDevice(scope WCS_PROFILE_MANAGEMENT_SCOPE, pProfileName string, pDeviceName string) bool {
+	_pProfileName := win32.UTF16Ptr(pProfileName)
+	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+	r1, _, _ := syscall.SyscallN(procWcsDisassociateColorProfileFromDevice.Addr(), uintptr(scope), uintptr(unsafe.Pointer(_pProfileName)), uintptr(unsafe.Pointer(_pDeviceName)))
+	return r1 != 0
 }
 
 // WcsEnumColorProfiles calls mscms!WcsEnumColorProfiles.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsenumcolorprofiles
-func WcsEnumColorProfiles(scope WCS_PROFILE_MANAGEMENT_SCOPE, pEnumRecord *ENUMTYPEW, pBuffer *byte, dwSize uint32, pnProfiles *uint32) foundation.BOOL {
+func WcsEnumColorProfiles(scope WCS_PROFILE_MANAGEMENT_SCOPE, pEnumRecord *ENUMTYPEW, pBuffer *byte, dwSize uint32, pnProfiles *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procWcsEnumColorProfiles.Addr(), uintptr(scope), uintptr(unsafe.Pointer(pEnumRecord)), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwSize), uintptr(unsafe.Pointer(pnProfiles)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WcsEnumColorProfilesSize calls mscms!WcsEnumColorProfilesSize.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsenumcolorprofilessize
-func WcsEnumColorProfilesSize(scope WCS_PROFILE_MANAGEMENT_SCOPE, pEnumRecord *ENUMTYPEW, pdwSize *uint32) foundation.BOOL {
+func WcsEnumColorProfilesSize(scope WCS_PROFILE_MANAGEMENT_SCOPE, pEnumRecord *ENUMTYPEW, pdwSize *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procWcsEnumColorProfilesSize.Addr(), uintptr(scope), uintptr(unsafe.Pointer(pEnumRecord)), uintptr(unsafe.Pointer(pdwSize)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WcsGetCalibrationManagementState calls mscms!WcsGetCalibrationManagementState.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsgetcalibrationmanagementstate
-func WcsGetCalibrationManagementState(pbIsEnabled *foundation.BOOL) foundation.BOOL {
+func WcsGetCalibrationManagementState(pbIsEnabled *foundation.BOOL) bool {
 	r1, _, _ := syscall.SyscallN(procWcsGetCalibrationManagementState.Addr(), uintptr(unsafe.Pointer(pbIsEnabled)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WcsGetDefaultColorProfile calls mscms!WcsGetDefaultColorProfile.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsgetdefaultcolorprofile
-func WcsGetDefaultColorProfile(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName foundation.PWSTR, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, cbProfileName uint32, pProfileName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWcsGetDefaultColorProfile.Addr(), uintptr(scope), uintptr(unsafe.Pointer(pDeviceName)), uintptr(cptColorProfileType), uintptr(cpstColorProfileSubType), uintptr(dwProfileID), uintptr(cbProfileName), uintptr(unsafe.Pointer(pProfileName)))
-	return foundation.BOOL(r1)
+func WcsGetDefaultColorProfile(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, cbProfileName uint32, pProfileName foundation.PWSTR) bool {
+	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+	r1, _, _ := syscall.SyscallN(procWcsGetDefaultColorProfile.Addr(), uintptr(scope), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(cptColorProfileType), uintptr(cpstColorProfileSubType), uintptr(dwProfileID), uintptr(cbProfileName), uintptr(unsafe.Pointer(pProfileName)))
+	return r1 != 0
 }
 
 // WcsGetDefaultColorProfileSize calls mscms!WcsGetDefaultColorProfileSize.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsgetdefaultcolorprofilesize
-func WcsGetDefaultColorProfileSize(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName foundation.PWSTR, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, pcbProfileName *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWcsGetDefaultColorProfileSize.Addr(), uintptr(scope), uintptr(unsafe.Pointer(pDeviceName)), uintptr(cptColorProfileType), uintptr(cpstColorProfileSubType), uintptr(dwProfileID), uintptr(unsafe.Pointer(pcbProfileName)))
-	return foundation.BOOL(r1)
+func WcsGetDefaultColorProfileSize(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, pcbProfileName *uint32) bool {
+	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+	r1, _, _ := syscall.SyscallN(procWcsGetDefaultColorProfileSize.Addr(), uintptr(scope), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(cptColorProfileType), uintptr(cpstColorProfileSubType), uintptr(dwProfileID), uintptr(unsafe.Pointer(pcbProfileName)))
+	return r1 != 0
 }
 
 // WcsGetDefaultRenderingIntent calls mscms!WcsGetDefaultRenderingIntent.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsgetdefaultrenderingintent
-func WcsGetDefaultRenderingIntent(scope WCS_PROFILE_MANAGEMENT_SCOPE, pdwRenderingIntent *uint32) foundation.BOOL {
+func WcsGetDefaultRenderingIntent(scope WCS_PROFILE_MANAGEMENT_SCOPE, pdwRenderingIntent *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procWcsGetDefaultRenderingIntent.Addr(), uintptr(scope), uintptr(unsafe.Pointer(pdwRenderingIntent)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WcsGetUsePerUserProfiles calls mscms!WcsGetUsePerUserProfiles.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsgetuseperuserprofiles
-func WcsGetUsePerUserProfiles(pDeviceName foundation.PWSTR, dwDeviceClass uint32, pUsePerUserProfiles *foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWcsGetUsePerUserProfiles.Addr(), uintptr(unsafe.Pointer(pDeviceName)), uintptr(dwDeviceClass), uintptr(unsafe.Pointer(pUsePerUserProfiles)))
-	return foundation.BOOL(r1)
+func WcsGetUsePerUserProfiles(pDeviceName string, dwDeviceClass uint32, pUsePerUserProfiles *foundation.BOOL) bool {
+	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+	r1, _, _ := syscall.SyscallN(procWcsGetUsePerUserProfiles.Addr(), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(dwDeviceClass), uintptr(unsafe.Pointer(pUsePerUserProfiles)))
+	return r1 != 0
+}
+
+// WcsOpenColorProfile calls mscms!WcsOpenColorProfileW.
+// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsopencolorprofilew
+func WcsOpenColorProfile(pCDMPProfile *PROFILE, pCAMPProfile *PROFILE, pGMMPProfile *PROFILE, dwDesireAccess uint32, dwShareMode uint32, dwCreationMode uint32, dwFlags uint32) uintptr {
+	r1, _, _ := syscall.SyscallN(procWcsOpenColorProfile.Addr(), uintptr(unsafe.Pointer(pCDMPProfile)), uintptr(unsafe.Pointer(pCAMPProfile)), uintptr(unsafe.Pointer(pGMMPProfile)), uintptr(dwDesireAccess), uintptr(dwShareMode), uintptr(dwCreationMode), uintptr(dwFlags))
+	return uintptr(r1)
 }
 
 // WcsOpenColorProfileA calls mscms!WcsOpenColorProfileA.
@@ -922,44 +1003,42 @@ func WcsOpenColorProfileA(pCDMPProfile *PROFILE, pCAMPProfile *PROFILE, pGMMPPro
 	return uintptr(r1)
 }
 
-// WcsOpenColorProfileW calls mscms!WcsOpenColorProfileW.
-// https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsopencolorprofilew
-func WcsOpenColorProfileW(pCDMPProfile *PROFILE, pCAMPProfile *PROFILE, pGMMPProfile *PROFILE, dwDesireAccess uint32, dwShareMode uint32, dwCreationMode uint32, dwFlags uint32) uintptr {
-	r1, _, _ := syscall.SyscallN(procWcsOpenColorProfileW.Addr(), uintptr(unsafe.Pointer(pCDMPProfile)), uintptr(unsafe.Pointer(pCAMPProfile)), uintptr(unsafe.Pointer(pGMMPProfile)), uintptr(dwDesireAccess), uintptr(dwShareMode), uintptr(dwCreationMode), uintptr(dwFlags))
-	return uintptr(r1)
-}
-
 // WcsSetCalibrationManagementState calls mscms!WcsSetCalibrationManagementState.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcssetcalibrationmanagementstate
-func WcsSetCalibrationManagementState(bIsEnabled foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWcsSetCalibrationManagementState.Addr(), uintptr(bIsEnabled))
-	return foundation.BOOL(r1)
+func WcsSetCalibrationManagementState(bIsEnabled bool) bool {
+	_bIsEnabled := win32.Bool32(bIsEnabled)
+	r1, _, _ := syscall.SyscallN(procWcsSetCalibrationManagementState.Addr(), uintptr(_bIsEnabled))
+	return r1 != 0
 }
 
 // WcsSetDefaultColorProfile calls mscms!WcsSetDefaultColorProfile.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcssetdefaultcolorprofile
-func WcsSetDefaultColorProfile(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName foundation.PWSTR, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, pProfileName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWcsSetDefaultColorProfile.Addr(), uintptr(scope), uintptr(unsafe.Pointer(pDeviceName)), uintptr(cptColorProfileType), uintptr(cpstColorProfileSubType), uintptr(dwProfileID), uintptr(unsafe.Pointer(pProfileName)))
-	return foundation.BOOL(r1)
+func WcsSetDefaultColorProfile(scope WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName string, cptColorProfileType COLORPROFILETYPE, cpstColorProfileSubType COLORPROFILESUBTYPE, dwProfileID uint32, pProfileName string) bool {
+	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+	_pProfileName := win32.UTF16Ptr(pProfileName)
+	r1, _, _ := syscall.SyscallN(procWcsSetDefaultColorProfile.Addr(), uintptr(scope), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(cptColorProfileType), uintptr(cpstColorProfileSubType), uintptr(dwProfileID), uintptr(unsafe.Pointer(_pProfileName)))
+	return r1 != 0
 }
 
 // WcsSetDefaultRenderingIntent calls mscms!WcsSetDefaultRenderingIntent.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcssetdefaultrenderingintent
-func WcsSetDefaultRenderingIntent(scope WCS_PROFILE_MANAGEMENT_SCOPE, dwRenderingIntent uint32) foundation.BOOL {
+func WcsSetDefaultRenderingIntent(scope WCS_PROFILE_MANAGEMENT_SCOPE, dwRenderingIntent uint32) bool {
 	r1, _, _ := syscall.SyscallN(procWcsSetDefaultRenderingIntent.Addr(), uintptr(scope), uintptr(dwRenderingIntent))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // WcsSetUsePerUserProfiles calls mscms!WcsSetUsePerUserProfiles.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcssetuseperuserprofiles
-func WcsSetUsePerUserProfiles(pDeviceName foundation.PWSTR, dwDeviceClass uint32, usePerUserProfiles foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWcsSetUsePerUserProfiles.Addr(), uintptr(unsafe.Pointer(pDeviceName)), uintptr(dwDeviceClass), uintptr(usePerUserProfiles))
-	return foundation.BOOL(r1)
+func WcsSetUsePerUserProfiles(pDeviceName string, dwDeviceClass uint32, usePerUserProfiles bool) bool {
+	_pDeviceName := win32.UTF16Ptr(pDeviceName)
+	_usePerUserProfiles := win32.Bool32(usePerUserProfiles)
+	r1, _, _ := syscall.SyscallN(procWcsSetUsePerUserProfiles.Addr(), uintptr(unsafe.Pointer(_pDeviceName)), uintptr(dwDeviceClass), uintptr(_usePerUserProfiles))
+	return r1 != 0
 }
 
 // WcsTranslateColors calls mscms!WcsTranslateColors.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcstranslatecolors
-func WcsTranslateColors(hColorTransform uintptr, nColors uint32, nInputChannels uint32, cdtInput COLORDATATYPE, cbInput uint32, pInputData unsafe.Pointer, nOutputChannels uint32, cdtOutput COLORDATATYPE, cbOutput uint32, pOutputData unsafe.Pointer) foundation.BOOL {
+func WcsTranslateColors(hColorTransform uintptr, nColors uint32, nInputChannels uint32, cdtInput COLORDATATYPE, cbInput uint32, pInputData unsafe.Pointer, nOutputChannels uint32, cdtOutput COLORDATATYPE, cbOutput uint32, pOutputData unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procWcsTranslateColors.Addr(), uintptr(hColorTransform), uintptr(nColors), uintptr(nInputChannels), uintptr(cdtInput), uintptr(cbInput), uintptr(unsafe.Pointer(pInputData)), uintptr(nOutputChannels), uintptr(cdtOutput), uintptr(cbOutput), uintptr(unsafe.Pointer(pOutputData)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }

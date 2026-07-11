@@ -20,8 +20,8 @@ var (
 
 var (
 	procCloseTrace                                       = modADVAPI32.NewProc("CloseTrace")
+	procControlTrace                                     = modADVAPI32.NewProc("ControlTraceW")
 	procControlTraceA                                    = modADVAPI32.NewProc("ControlTraceA")
-	procControlTraceW                                    = modADVAPI32.NewProc("ControlTraceW")
 	procCreateTraceInstanceId                            = modADVAPI32.NewProc("CreateTraceInstanceId")
 	procCveEventWrite                                    = modADVAPI32.NewProc("CveEventWrite")
 	procEnableTrace                                      = modADVAPI32.NewProc("EnableTrace")
@@ -42,34 +42,34 @@ var (
 	procEventWriteEx                                     = modADVAPI32.NewProc("EventWriteEx")
 	procEventWriteString                                 = modADVAPI32.NewProc("EventWriteString")
 	procEventWriteTransfer                               = modADVAPI32.NewProc("EventWriteTransfer")
+	procFlushTrace                                       = modADVAPI32.NewProc("FlushTraceW")
 	procFlushTraceA                                      = modADVAPI32.NewProc("FlushTraceA")
-	procFlushTraceW                                      = modADVAPI32.NewProc("FlushTraceW")
 	procGetTraceEnableFlags                              = modADVAPI32.NewProc("GetTraceEnableFlags")
 	procGetTraceEnableLevel                              = modADVAPI32.NewProc("GetTraceEnableLevel")
 	procGetTraceLoggerHandle                             = modADVAPI32.NewProc("GetTraceLoggerHandle")
+	procOpenTrace                                        = modADVAPI32.NewProc("OpenTraceW")
 	procOpenTraceA                                       = modADVAPI32.NewProc("OpenTraceA")
 	procOpenTraceFromBufferStream                        = modADVAPI32.NewProc("OpenTraceFromBufferStream")
 	procOpenTraceFromFile                                = modADVAPI32.NewProc("OpenTraceFromFile")
 	procOpenTraceFromRealTimeLogger                      = modADVAPI32.NewProc("OpenTraceFromRealTimeLogger")
 	procOpenTraceFromRealTimeLoggerWithAllocationOptions = modADVAPI32.NewProc("OpenTraceFromRealTimeLoggerWithAllocationOptions")
-	procOpenTraceW                                       = modADVAPI32.NewProc("OpenTraceW")
 	procProcessTrace                                     = modADVAPI32.NewProc("ProcessTrace")
 	procProcessTraceAddBufferToBufferStream              = modADVAPI32.NewProc("ProcessTraceAddBufferToBufferStream")
 	procProcessTraceBufferDecrementReference             = modADVAPI32.NewProc("ProcessTraceBufferDecrementReference")
 	procProcessTraceBufferIncrementReference             = modADVAPI32.NewProc("ProcessTraceBufferIncrementReference")
+	procQueryAllTraces                                   = modADVAPI32.NewProc("QueryAllTracesW")
 	procQueryAllTracesA                                  = modADVAPI32.NewProc("QueryAllTracesA")
-	procQueryAllTracesW                                  = modADVAPI32.NewProc("QueryAllTracesW")
+	procQueryTrace                                       = modADVAPI32.NewProc("QueryTraceW")
 	procQueryTraceA                                      = modADVAPI32.NewProc("QueryTraceA")
 	procQueryTraceProcessingHandle                       = modADVAPI32.NewProc("QueryTraceProcessingHandle")
-	procQueryTraceW                                      = modADVAPI32.NewProc("QueryTraceW")
+	procRegisterTraceGuids                               = modADVAPI32.NewProc("RegisterTraceGuidsW")
 	procRegisterTraceGuidsA                              = modADVAPI32.NewProc("RegisterTraceGuidsA")
-	procRegisterTraceGuidsW                              = modADVAPI32.NewProc("RegisterTraceGuidsW")
 	procRemoveTraceCallback                              = modADVAPI32.NewProc("RemoveTraceCallback")
 	procSetTraceCallback                                 = modADVAPI32.NewProc("SetTraceCallback")
+	procStartTrace                                       = modADVAPI32.NewProc("StartTraceW")
 	procStartTraceA                                      = modADVAPI32.NewProc("StartTraceA")
-	procStartTraceW                                      = modADVAPI32.NewProc("StartTraceW")
+	procStopTrace                                        = modADVAPI32.NewProc("StopTraceW")
 	procStopTraceA                                       = modADVAPI32.NewProc("StopTraceA")
-	procStopTraceW                                       = modADVAPI32.NewProc("StopTraceW")
 	procTraceConfigureLastBranchRecord                   = modADVAPI32.NewProc("TraceConfigureLastBranchRecord")
 	procTraceEvent                                       = modADVAPI32.NewProc("TraceEvent")
 	procTraceEventInstance                               = modADVAPI32.NewProc("TraceEventInstance")
@@ -78,8 +78,8 @@ var (
 	procTraceQueryInformation                            = modADVAPI32.NewProc("TraceQueryInformation")
 	procTraceSetInformation                              = modADVAPI32.NewProc("TraceSetInformation")
 	procUnregisterTraceGuids                             = modADVAPI32.NewProc("UnregisterTraceGuids")
+	procUpdateTrace                                      = modADVAPI32.NewProc("UpdateTraceW")
 	procUpdateTraceA                                     = modADVAPI32.NewProc("UpdateTraceA")
-	procUpdateTraceW                                     = modADVAPI32.NewProc("UpdateTraceW")
 	procTdhAggregatePayloadFilters                       = modtdh.NewProc("TdhAggregatePayloadFilters")
 	procTdhCleanupPayloadEventFilterDescriptor           = modtdh.NewProc("TdhCleanupPayloadEventFilterDescriptor")
 	procTdhCloseDecodingHandle                           = modtdh.NewProc("TdhCloseDecodingHandle")
@@ -117,19 +117,20 @@ func CloseTrace(TraceHandle PROCESSTRACE_HANDLE) foundation.WIN32_ERROR {
 	return foundation.WIN32_ERROR(r1)
 }
 
+// ControlTrace calls ADVAPI32!ControlTraceW.
+// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-controltracew
+// Minimum OS: windows5.0.
+func ControlTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES, ControlCode EVENT_TRACE_CONTROL) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16Ptr(InstanceName)
+	r1, _, _ := syscall.SyscallN(procControlTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)), uintptr(ControlCode))
+	return foundation.WIN32_ERROR(r1)
+}
+
 // ControlTraceA calls ADVAPI32!ControlTraceA.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-controltracea
 // Minimum OS: windows5.0.
 func ControlTraceA(TraceId uint64, InstanceName foundation.PSTR, Properties *EVENT_TRACE_PROPERTIES, ControlCode EVENT_TRACE_CONTROL) foundation.WIN32_ERROR {
 	r1, _, _ := syscall.SyscallN(procControlTraceA.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(InstanceName)), uintptr(unsafe.Pointer(Properties)), uintptr(ControlCode))
-	return foundation.WIN32_ERROR(r1)
-}
-
-// ControlTraceW calls ADVAPI32!ControlTraceW.
-// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-controltracew
-// Minimum OS: windows5.0.
-func ControlTraceW(TraceId uint64, InstanceName foundation.PWSTR, Properties *EVENT_TRACE_PROPERTIES, ControlCode EVENT_TRACE_CONTROL) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procControlTraceW.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(InstanceName)), uintptr(unsafe.Pointer(Properties)), uintptr(ControlCode))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -144,8 +145,10 @@ func CreateTraceInstanceId(RegHandle foundation.HANDLE, InstInfo *EVENT_INSTANCE
 // CveEventWrite calls ADVAPI32!CveEventWrite.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-cveeventwrite
 // Minimum OS: windows10.0.10240.
-func CveEventWrite(CveId foundation.PWSTR, AdditionalDetails foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procCveEventWrite.Addr(), uintptr(unsafe.Pointer(CveId)), uintptr(unsafe.Pointer(AdditionalDetails)))
+func CveEventWrite(CveId string, AdditionalDetails string) int32 {
+	_CveId := win32.UTF16Ptr(CveId)
+	_AdditionalDetails := win32.UTF16Ptr(AdditionalDetails)
+	r1, _, _ := syscall.SyscallN(procCveEventWrite.Addr(), uintptr(unsafe.Pointer(_CveId)), uintptr(unsafe.Pointer(_AdditionalDetails)))
 	return int32(r1)
 }
 
@@ -176,8 +179,12 @@ func EnableTraceEx2(TraceId uint64, ProviderId *win32.GUID, ControlCode uint32, 
 // EnumerateTraceGuids calls ADVAPI32!EnumerateTraceGuids.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-enumeratetraceguids
 // Minimum OS: windows5.1.2600.
-func EnumerateTraceGuids(GuidPropertiesArray **TRACE_GUID_PROPERTIES, PropertyArrayCount uint32, GuidCount *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procEnumerateTraceGuids.Addr(), uintptr(unsafe.Pointer(GuidPropertiesArray)), uintptr(PropertyArrayCount), uintptr(unsafe.Pointer(GuidCount)))
+func EnumerateTraceGuids(GuidPropertiesArray []*TRACE_GUID_PROPERTIES, GuidCount *uint32) foundation.WIN32_ERROR {
+	var _GuidPropertiesArray **TRACE_GUID_PROPERTIES
+	if len(GuidPropertiesArray) > 0 {
+		_GuidPropertiesArray = &GuidPropertiesArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumerateTraceGuids.Addr(), uintptr(unsafe.Pointer(_GuidPropertiesArray)), uintptr(len(GuidPropertiesArray)), uintptr(unsafe.Pointer(GuidCount)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -264,33 +271,55 @@ func EventUnregister(RegHandle REGHANDLE) uint32 {
 // EventWrite calls ADVAPI32!EventWrite.
 // https://learn.microsoft.com/windows/win32/api/evntprov/nf-evntprov-eventwrite
 // Minimum OS: windows6.0.6000.
-func EventWrite(RegHandle REGHANDLE, EventDescriptor *EVENT_DESCRIPTOR, UserDataCount uint32, UserData *EVENT_DATA_DESCRIPTOR) uint32 {
-	r1, _, _ := syscall.SyscallN(procEventWrite.Addr(), uintptr(RegHandle), uintptr(unsafe.Pointer(EventDescriptor)), uintptr(UserDataCount), uintptr(unsafe.Pointer(UserData)))
+func EventWrite(RegHandle REGHANDLE, EventDescriptor *EVENT_DESCRIPTOR, UserData []EVENT_DATA_DESCRIPTOR) uint32 {
+	var _UserData *EVENT_DATA_DESCRIPTOR
+	if len(UserData) > 0 {
+		_UserData = &UserData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEventWrite.Addr(), uintptr(RegHandle), uintptr(unsafe.Pointer(EventDescriptor)), uintptr(len(UserData)), uintptr(unsafe.Pointer(_UserData)))
 	return uint32(r1)
 }
 
 // EventWriteEx calls ADVAPI32!EventWriteEx.
 // https://learn.microsoft.com/windows/win32/api/evntprov/nf-evntprov-eventwriteex
 // Minimum OS: windows6.1.
-func EventWriteEx(RegHandle REGHANDLE, EventDescriptor *EVENT_DESCRIPTOR, Filter uint64, Flags uint32, ActivityId *win32.GUID, RelatedActivityId *win32.GUID, UserDataCount uint32, UserData *EVENT_DATA_DESCRIPTOR) uint32 {
-	r1, _, _ := syscall.SyscallN(procEventWriteEx.Addr(), uintptr(RegHandle), uintptr(unsafe.Pointer(EventDescriptor)), uintptr(Filter), uintptr(Flags), uintptr(unsafe.Pointer(ActivityId)), uintptr(unsafe.Pointer(RelatedActivityId)), uintptr(UserDataCount), uintptr(unsafe.Pointer(UserData)))
+func EventWriteEx(RegHandle REGHANDLE, EventDescriptor *EVENT_DESCRIPTOR, Filter uint64, Flags uint32, ActivityId *win32.GUID, RelatedActivityId *win32.GUID, UserData []EVENT_DATA_DESCRIPTOR) uint32 {
+	var _UserData *EVENT_DATA_DESCRIPTOR
+	if len(UserData) > 0 {
+		_UserData = &UserData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEventWriteEx.Addr(), uintptr(RegHandle), uintptr(unsafe.Pointer(EventDescriptor)), uintptr(Filter), uintptr(Flags), uintptr(unsafe.Pointer(ActivityId)), uintptr(unsafe.Pointer(RelatedActivityId)), uintptr(len(UserData)), uintptr(unsafe.Pointer(_UserData)))
 	return uint32(r1)
 }
 
 // EventWriteString calls ADVAPI32!EventWriteString.
 // https://learn.microsoft.com/windows/win32/api/evntprov/nf-evntprov-eventwritestring
 // Minimum OS: windows6.0.6000.
-func EventWriteString(RegHandle REGHANDLE, Level byte, Keyword uint64, String foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procEventWriteString.Addr(), uintptr(RegHandle), uintptr(Level), uintptr(Keyword), uintptr(unsafe.Pointer(String)))
+func EventWriteString(RegHandle REGHANDLE, Level byte, Keyword uint64, String string) uint32 {
+	_String := win32.UTF16Ptr(String)
+	r1, _, _ := syscall.SyscallN(procEventWriteString.Addr(), uintptr(RegHandle), uintptr(Level), uintptr(Keyword), uintptr(unsafe.Pointer(_String)))
 	return uint32(r1)
 }
 
 // EventWriteTransfer calls ADVAPI32!EventWriteTransfer.
 // https://learn.microsoft.com/windows/win32/api/evntprov/nf-evntprov-eventwritetransfer
 // Minimum OS: windows6.0.6000.
-func EventWriteTransfer(RegHandle REGHANDLE, EventDescriptor *EVENT_DESCRIPTOR, ActivityId *win32.GUID, RelatedActivityId *win32.GUID, UserDataCount uint32, UserData *EVENT_DATA_DESCRIPTOR) uint32 {
-	r1, _, _ := syscall.SyscallN(procEventWriteTransfer.Addr(), uintptr(RegHandle), uintptr(unsafe.Pointer(EventDescriptor)), uintptr(unsafe.Pointer(ActivityId)), uintptr(unsafe.Pointer(RelatedActivityId)), uintptr(UserDataCount), uintptr(unsafe.Pointer(UserData)))
+func EventWriteTransfer(RegHandle REGHANDLE, EventDescriptor *EVENT_DESCRIPTOR, ActivityId *win32.GUID, RelatedActivityId *win32.GUID, UserData []EVENT_DATA_DESCRIPTOR) uint32 {
+	var _UserData *EVENT_DATA_DESCRIPTOR
+	if len(UserData) > 0 {
+		_UserData = &UserData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEventWriteTransfer.Addr(), uintptr(RegHandle), uintptr(unsafe.Pointer(EventDescriptor)), uintptr(unsafe.Pointer(ActivityId)), uintptr(unsafe.Pointer(RelatedActivityId)), uintptr(len(UserData)), uintptr(unsafe.Pointer(_UserData)))
 	return uint32(r1)
+}
+
+// FlushTrace calls ADVAPI32!FlushTraceW.
+// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-flushtracew
+// Minimum OS: windows5.1.2600.
+func FlushTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16Ptr(InstanceName)
+	r1, _, _ := syscall.SyscallN(procFlushTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)))
+	return foundation.WIN32_ERROR(r1)
 }
 
 // FlushTraceA calls ADVAPI32!FlushTraceA.
@@ -298,14 +327,6 @@ func EventWriteTransfer(RegHandle REGHANDLE, EventDescriptor *EVENT_DESCRIPTOR, 
 // Minimum OS: windows5.1.2600.
 func FlushTraceA(TraceId uint64, InstanceName foundation.PSTR, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
 	r1, _, _ := syscall.SyscallN(procFlushTraceA.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(InstanceName)), uintptr(unsafe.Pointer(Properties)))
-	return foundation.WIN32_ERROR(r1)
-}
-
-// FlushTraceW calls ADVAPI32!FlushTraceW.
-// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-flushtracew
-// Minimum OS: windows5.1.2600.
-func FlushTraceW(TraceId uint64, InstanceName foundation.PWSTR, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procFlushTraceW.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(InstanceName)), uintptr(unsafe.Pointer(Properties)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -342,6 +363,17 @@ func GetTraceLoggerHandle(Buffer unsafe.Pointer) (uint64, error) {
 	return uint64(r1), nil
 }
 
+// OpenTrace calls ADVAPI32!OpenTraceW.
+// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-opentracew
+// Minimum OS: windows5.0.
+func OpenTrace(Logfile *EVENT_TRACE_LOGFILEW) (PROCESSTRACE_HANDLE, error) {
+	r1, _, e1 := syscall.SyscallN(procOpenTrace.Addr(), uintptr(unsafe.Pointer(Logfile)))
+	if e1 != 0 {
+		return PROCESSTRACE_HANDLE(r1), e1
+	}
+	return PROCESSTRACE_HANDLE(r1), nil
+}
+
 // OpenTraceA calls ADVAPI32!OpenTraceA.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-opentracea
 // Minimum OS: windows5.0.
@@ -362,41 +394,37 @@ func OpenTraceFromBufferStream(Options *ETW_OPEN_TRACE_OPTIONS, BufferCompletion
 
 // OpenTraceFromFile calls ADVAPI32!OpenTraceFromFile.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-opentracefromfile
-func OpenTraceFromFile(LogFileName foundation.PWSTR, Options *ETW_OPEN_TRACE_OPTIONS, LogFileHeader *TRACE_LOGFILE_HEADER) PROCESSTRACE_HANDLE {
-	r1, _, _ := syscall.SyscallN(procOpenTraceFromFile.Addr(), uintptr(unsafe.Pointer(LogFileName)), uintptr(unsafe.Pointer(Options)), uintptr(unsafe.Pointer(LogFileHeader)))
+func OpenTraceFromFile(LogFileName string, Options *ETW_OPEN_TRACE_OPTIONS, LogFileHeader *TRACE_LOGFILE_HEADER) PROCESSTRACE_HANDLE {
+	_LogFileName := win32.UTF16Ptr(LogFileName)
+	r1, _, _ := syscall.SyscallN(procOpenTraceFromFile.Addr(), uintptr(unsafe.Pointer(_LogFileName)), uintptr(unsafe.Pointer(Options)), uintptr(unsafe.Pointer(LogFileHeader)))
 	return PROCESSTRACE_HANDLE(r1)
 }
 
 // OpenTraceFromRealTimeLogger calls ADVAPI32!OpenTraceFromRealTimeLogger.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-opentracefromrealtimelogger
-func OpenTraceFromRealTimeLogger(LoggerName foundation.PWSTR, Options *ETW_OPEN_TRACE_OPTIONS, LogFileHeader *TRACE_LOGFILE_HEADER) PROCESSTRACE_HANDLE {
-	r1, _, _ := syscall.SyscallN(procOpenTraceFromRealTimeLogger.Addr(), uintptr(unsafe.Pointer(LoggerName)), uintptr(unsafe.Pointer(Options)), uintptr(unsafe.Pointer(LogFileHeader)))
+func OpenTraceFromRealTimeLogger(LoggerName string, Options *ETW_OPEN_TRACE_OPTIONS, LogFileHeader *TRACE_LOGFILE_HEADER) PROCESSTRACE_HANDLE {
+	_LoggerName := win32.UTF16Ptr(LoggerName)
+	r1, _, _ := syscall.SyscallN(procOpenTraceFromRealTimeLogger.Addr(), uintptr(unsafe.Pointer(_LoggerName)), uintptr(unsafe.Pointer(Options)), uintptr(unsafe.Pointer(LogFileHeader)))
 	return PROCESSTRACE_HANDLE(r1)
 }
 
 // OpenTraceFromRealTimeLoggerWithAllocationOptions calls ADVAPI32!OpenTraceFromRealTimeLoggerWithAllocationOptions.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-opentracefromrealtimeloggerwithallocationoptions
-func OpenTraceFromRealTimeLoggerWithAllocationOptions(LoggerName foundation.PWSTR, Options *ETW_OPEN_TRACE_OPTIONS, AllocationSize uintptr, MemoryPartitionHandle foundation.HANDLE, LogFileHeader *TRACE_LOGFILE_HEADER) PROCESSTRACE_HANDLE {
-	r1, _, _ := syscall.SyscallN(procOpenTraceFromRealTimeLoggerWithAllocationOptions.Addr(), uintptr(unsafe.Pointer(LoggerName)), uintptr(unsafe.Pointer(Options)), uintptr(AllocationSize), uintptr(MemoryPartitionHandle), uintptr(unsafe.Pointer(LogFileHeader)))
+func OpenTraceFromRealTimeLoggerWithAllocationOptions(LoggerName string, Options *ETW_OPEN_TRACE_OPTIONS, AllocationSize uintptr, MemoryPartitionHandle foundation.HANDLE, LogFileHeader *TRACE_LOGFILE_HEADER) PROCESSTRACE_HANDLE {
+	_LoggerName := win32.UTF16Ptr(LoggerName)
+	r1, _, _ := syscall.SyscallN(procOpenTraceFromRealTimeLoggerWithAllocationOptions.Addr(), uintptr(unsafe.Pointer(_LoggerName)), uintptr(unsafe.Pointer(Options)), uintptr(AllocationSize), uintptr(MemoryPartitionHandle), uintptr(unsafe.Pointer(LogFileHeader)))
 	return PROCESSTRACE_HANDLE(r1)
-}
-
-// OpenTraceW calls ADVAPI32!OpenTraceW.
-// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-opentracew
-// Minimum OS: windows5.0.
-func OpenTraceW(Logfile *EVENT_TRACE_LOGFILEW) (PROCESSTRACE_HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenTraceW.Addr(), uintptr(unsafe.Pointer(Logfile)))
-	if e1 != 0 {
-		return PROCESSTRACE_HANDLE(r1), e1
-	}
-	return PROCESSTRACE_HANDLE(r1), nil
 }
 
 // ProcessTrace calls ADVAPI32!ProcessTrace.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-processtrace
 // Minimum OS: windows5.0.
-func ProcessTrace(HandleArray *PROCESSTRACE_HANDLE, HandleCount uint32, StartTime *foundation.FILETIME, EndTime *foundation.FILETIME) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procProcessTrace.Addr(), uintptr(unsafe.Pointer(HandleArray)), uintptr(HandleCount), uintptr(unsafe.Pointer(StartTime)), uintptr(unsafe.Pointer(EndTime)))
+func ProcessTrace(HandleArray []PROCESSTRACE_HANDLE, StartTime *foundation.FILETIME, EndTime *foundation.FILETIME) foundation.WIN32_ERROR {
+	var _HandleArray *PROCESSTRACE_HANDLE
+	if len(HandleArray) > 0 {
+		_HandleArray = &HandleArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procProcessTrace.Addr(), uintptr(unsafe.Pointer(_HandleArray)), uintptr(len(HandleArray)), uintptr(unsafe.Pointer(StartTime)), uintptr(unsafe.Pointer(EndTime)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -421,19 +449,36 @@ func ProcessTraceBufferIncrementReference(TraceHandle PROCESSTRACE_HANDLE, Buffe
 	return uint32(r1)
 }
 
-// QueryAllTracesA calls ADVAPI32!QueryAllTracesA.
-// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-queryalltracesa
+// QueryAllTraces calls ADVAPI32!QueryAllTracesW.
+// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-queryalltracesw
 // Minimum OS: windows5.0.
-func QueryAllTracesA(PropertyArray **EVENT_TRACE_PROPERTIES, PropertyArrayCount uint32, LoggerCount *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procQueryAllTracesA.Addr(), uintptr(unsafe.Pointer(PropertyArray)), uintptr(PropertyArrayCount), uintptr(unsafe.Pointer(LoggerCount)))
+func QueryAllTraces(PropertyArray []*EVENT_TRACE_PROPERTIES, LoggerCount *uint32) foundation.WIN32_ERROR {
+	var _PropertyArray **EVENT_TRACE_PROPERTIES
+	if len(PropertyArray) > 0 {
+		_PropertyArray = &PropertyArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procQueryAllTraces.Addr(), uintptr(unsafe.Pointer(_PropertyArray)), uintptr(len(PropertyArray)), uintptr(unsafe.Pointer(LoggerCount)))
 	return foundation.WIN32_ERROR(r1)
 }
 
-// QueryAllTracesW calls ADVAPI32!QueryAllTracesW.
-// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-queryalltracesw
+// QueryAllTracesA calls ADVAPI32!QueryAllTracesA.
+// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-queryalltracesa
 // Minimum OS: windows5.0.
-func QueryAllTracesW(PropertyArray **EVENT_TRACE_PROPERTIES, PropertyArrayCount uint32, LoggerCount *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procQueryAllTracesW.Addr(), uintptr(unsafe.Pointer(PropertyArray)), uintptr(PropertyArrayCount), uintptr(unsafe.Pointer(LoggerCount)))
+func QueryAllTracesA(PropertyArray []*EVENT_TRACE_PROPERTIES, LoggerCount *uint32) foundation.WIN32_ERROR {
+	var _PropertyArray **EVENT_TRACE_PROPERTIES
+	if len(PropertyArray) > 0 {
+		_PropertyArray = &PropertyArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procQueryAllTracesA.Addr(), uintptr(unsafe.Pointer(_PropertyArray)), uintptr(len(PropertyArray)), uintptr(unsafe.Pointer(LoggerCount)))
+	return foundation.WIN32_ERROR(r1)
+}
+
+// QueryTrace calls ADVAPI32!QueryTraceW.
+// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-querytracew
+// Minimum OS: windows5.0.
+func QueryTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16Ptr(InstanceName)
+	r1, _, _ := syscall.SyscallN(procQueryTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -453,27 +498,29 @@ func QueryTraceProcessingHandle(ProcessingHandle PROCESSTRACE_HANDLE, Informatio
 	return foundation.WIN32_ERROR(r1)
 }
 
-// QueryTraceW calls ADVAPI32!QueryTraceW.
-// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-querytracew
+// RegisterTraceGuids calls ADVAPI32!RegisterTraceGuidsW.
+// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-registertraceguidsw
 // Minimum OS: windows5.0.
-func QueryTraceW(TraceId uint64, InstanceName foundation.PWSTR, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procQueryTraceW.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(InstanceName)), uintptr(unsafe.Pointer(Properties)))
-	return foundation.WIN32_ERROR(r1)
+func RegisterTraceGuids(RequestAddress WMIDPREQUEST, RequestContext unsafe.Pointer, ControlGuid *win32.GUID, TraceGuidReg []TRACE_GUID_REGISTRATION, MofImagePath string, MofResourceName string, RegistrationHandle *uint64) uint32 {
+	var _TraceGuidReg *TRACE_GUID_REGISTRATION
+	if len(TraceGuidReg) > 0 {
+		_TraceGuidReg = &TraceGuidReg[0]
+	}
+	_MofImagePath := win32.UTF16Ptr(MofImagePath)
+	_MofResourceName := win32.UTF16Ptr(MofResourceName)
+	r1, _, _ := syscall.SyscallN(procRegisterTraceGuids.Addr(), uintptr(RequestAddress), uintptr(unsafe.Pointer(RequestContext)), uintptr(unsafe.Pointer(ControlGuid)), uintptr(len(TraceGuidReg)), uintptr(unsafe.Pointer(_TraceGuidReg)), uintptr(unsafe.Pointer(_MofImagePath)), uintptr(unsafe.Pointer(_MofResourceName)), uintptr(unsafe.Pointer(RegistrationHandle)))
+	return uint32(r1)
 }
 
 // RegisterTraceGuidsA calls ADVAPI32!RegisterTraceGuidsA.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-registertraceguidsa
 // Minimum OS: windows5.0.
-func RegisterTraceGuidsA(RequestAddress WMIDPREQUEST, RequestContext unsafe.Pointer, ControlGuid *win32.GUID, GuidCount uint32, TraceGuidReg *TRACE_GUID_REGISTRATION, MofImagePath foundation.PSTR, MofResourceName foundation.PSTR, RegistrationHandle *uint64) uint32 {
-	r1, _, _ := syscall.SyscallN(procRegisterTraceGuidsA.Addr(), uintptr(RequestAddress), uintptr(unsafe.Pointer(RequestContext)), uintptr(unsafe.Pointer(ControlGuid)), uintptr(GuidCount), uintptr(unsafe.Pointer(TraceGuidReg)), uintptr(unsafe.Pointer(MofImagePath)), uintptr(unsafe.Pointer(MofResourceName)), uintptr(unsafe.Pointer(RegistrationHandle)))
-	return uint32(r1)
-}
-
-// RegisterTraceGuidsW calls ADVAPI32!RegisterTraceGuidsW.
-// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-registertraceguidsw
-// Minimum OS: windows5.0.
-func RegisterTraceGuidsW(RequestAddress WMIDPREQUEST, RequestContext unsafe.Pointer, ControlGuid *win32.GUID, GuidCount uint32, TraceGuidReg *TRACE_GUID_REGISTRATION, MofImagePath foundation.PWSTR, MofResourceName foundation.PWSTR, RegistrationHandle *uint64) uint32 {
-	r1, _, _ := syscall.SyscallN(procRegisterTraceGuidsW.Addr(), uintptr(RequestAddress), uintptr(unsafe.Pointer(RequestContext)), uintptr(unsafe.Pointer(ControlGuid)), uintptr(GuidCount), uintptr(unsafe.Pointer(TraceGuidReg)), uintptr(unsafe.Pointer(MofImagePath)), uintptr(unsafe.Pointer(MofResourceName)), uintptr(unsafe.Pointer(RegistrationHandle)))
+func RegisterTraceGuidsA(RequestAddress WMIDPREQUEST, RequestContext unsafe.Pointer, ControlGuid *win32.GUID, TraceGuidReg []TRACE_GUID_REGISTRATION, MofImagePath foundation.PSTR, MofResourceName foundation.PSTR, RegistrationHandle *uint64) uint32 {
+	var _TraceGuidReg *TRACE_GUID_REGISTRATION
+	if len(TraceGuidReg) > 0 {
+		_TraceGuidReg = &TraceGuidReg[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRegisterTraceGuidsA.Addr(), uintptr(RequestAddress), uintptr(unsafe.Pointer(RequestContext)), uintptr(unsafe.Pointer(ControlGuid)), uintptr(len(TraceGuidReg)), uintptr(unsafe.Pointer(_TraceGuidReg)), uintptr(unsafe.Pointer(MofImagePath)), uintptr(unsafe.Pointer(MofResourceName)), uintptr(unsafe.Pointer(RegistrationHandle)))
 	return uint32(r1)
 }
 
@@ -493,6 +540,15 @@ func SetTraceCallback(pGuid *win32.GUID, EventCallback PEVENT_CALLBACK) foundati
 	return foundation.WIN32_ERROR(r1)
 }
 
+// StartTrace calls ADVAPI32!StartTraceW.
+// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-starttracew
+// Minimum OS: windows5.0.
+func StartTrace(TraceId *uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16Ptr(InstanceName)
+	r1, _, _ := syscall.SyscallN(procStartTrace.Addr(), uintptr(unsafe.Pointer(TraceId)), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)))
+	return foundation.WIN32_ERROR(r1)
+}
+
 // StartTraceA calls ADVAPI32!StartTraceA.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-starttracea
 // Minimum OS: windows5.0.
@@ -501,11 +557,12 @@ func StartTraceA(TraceId *uint64, InstanceName foundation.PSTR, Properties *EVEN
 	return foundation.WIN32_ERROR(r1)
 }
 
-// StartTraceW calls ADVAPI32!StartTraceW.
-// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-starttracew
+// StopTrace calls ADVAPI32!StopTraceW.
+// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-stoptracew
 // Minimum OS: windows5.0.
-func StartTraceW(TraceId *uint64, InstanceName foundation.PWSTR, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procStartTraceW.Addr(), uintptr(unsafe.Pointer(TraceId)), uintptr(unsafe.Pointer(InstanceName)), uintptr(unsafe.Pointer(Properties)))
+func StopTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16Ptr(InstanceName)
+	r1, _, _ := syscall.SyscallN(procStopTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -514,14 +571,6 @@ func StartTraceW(TraceId *uint64, InstanceName foundation.PWSTR, Properties *EVE
 // Minimum OS: windows5.0.
 func StopTraceA(TraceId uint64, InstanceName foundation.PSTR, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
 	r1, _, _ := syscall.SyscallN(procStopTraceA.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(InstanceName)), uintptr(unsafe.Pointer(Properties)))
-	return foundation.WIN32_ERROR(r1)
-}
-
-// StopTraceW calls ADVAPI32!StopTraceW.
-// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-stoptracew
-// Minimum OS: windows5.0.
-func StopTraceW(TraceId uint64, InstanceName foundation.PWSTR, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procStopTraceW.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(InstanceName)), uintptr(unsafe.Pointer(Properties)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -552,8 +601,12 @@ func TdhCloseDecodingHandle(Handle TDH_HANDLE) uint32 {
 // TdhCreatePayloadFilter calls tdh!TdhCreatePayloadFilter.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhcreatepayloadfilter
 // Minimum OS: windows8.1.
-func TdhCreatePayloadFilter(ProviderGuid *win32.GUID, EventDescriptor *EVENT_DESCRIPTOR, EventMatchANY foundation.BOOLEAN, PayloadPredicateCount uint32, PayloadPredicates *PAYLOAD_FILTER_PREDICATE, PayloadFilter *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procTdhCreatePayloadFilter.Addr(), uintptr(unsafe.Pointer(ProviderGuid)), uintptr(unsafe.Pointer(EventDescriptor)), uintptr(EventMatchANY), uintptr(PayloadPredicateCount), uintptr(unsafe.Pointer(PayloadPredicates)), uintptr(unsafe.Pointer(PayloadFilter)))
+func TdhCreatePayloadFilter(ProviderGuid *win32.GUID, EventDescriptor *EVENT_DESCRIPTOR, EventMatchANY foundation.BOOLEAN, PayloadPredicates []PAYLOAD_FILTER_PREDICATE, PayloadFilter *unsafe.Pointer) uint32 {
+	var _PayloadPredicates *PAYLOAD_FILTER_PREDICATE
+	if len(PayloadPredicates) > 0 {
+		_PayloadPredicates = &PayloadPredicates[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTdhCreatePayloadFilter.Addr(), uintptr(unsafe.Pointer(ProviderGuid)), uintptr(unsafe.Pointer(EventDescriptor)), uintptr(EventMatchANY), uintptr(len(PayloadPredicates)), uintptr(unsafe.Pointer(_PayloadPredicates)), uintptr(unsafe.Pointer(PayloadFilter)))
 	return uint32(r1)
 }
 
@@ -584,8 +637,12 @@ func TdhEnumerateProviderFieldInformation(pGuid *win32.GUID, EventFieldType EVEN
 // TdhEnumerateProviderFilters calls tdh!TdhEnumerateProviderFilters.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhenumerateproviderfilters
 // Minimum OS: windows6.1.
-func TdhEnumerateProviderFilters(Guid *win32.GUID, TdhContextCount uint32, TdhContext *TDH_CONTEXT, FilterCount *uint32, Buffer **PROVIDER_FILTER_INFO, BufferSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procTdhEnumerateProviderFilters.Addr(), uintptr(unsafe.Pointer(Guid)), uintptr(TdhContextCount), uintptr(unsafe.Pointer(TdhContext)), uintptr(unsafe.Pointer(FilterCount)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(BufferSize)))
+func TdhEnumerateProviderFilters(Guid *win32.GUID, TdhContext []TDH_CONTEXT, FilterCount *uint32, Buffer **PROVIDER_FILTER_INFO, BufferSize *uint32) uint32 {
+	var _TdhContext *TDH_CONTEXT
+	if len(TdhContext) > 0 {
+		_TdhContext = &TdhContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTdhEnumerateProviderFilters.Addr(), uintptr(unsafe.Pointer(Guid)), uintptr(len(TdhContext)), uintptr(unsafe.Pointer(_TdhContext)), uintptr(unsafe.Pointer(FilterCount)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(BufferSize)))
 	return uint32(r1)
 }
 
@@ -623,16 +680,21 @@ func TdhGetDecodingParameter(Handle TDH_HANDLE, TdhContext *TDH_CONTEXT) uint32 
 // TdhGetEventInformation calls TDH!TdhGetEventInformation.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhgeteventinformation
 // Minimum OS: windows6.0.6000.
-func TdhGetEventInformation(Event *EVENT_RECORD, TdhContextCount uint32, TdhContext *TDH_CONTEXT, Buffer *TRACE_EVENT_INFO, BufferSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procTdhGetEventInformation.Addr(), uintptr(unsafe.Pointer(Event)), uintptr(TdhContextCount), uintptr(unsafe.Pointer(TdhContext)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(BufferSize)))
+func TdhGetEventInformation(Event *EVENT_RECORD, TdhContext []TDH_CONTEXT, Buffer *TRACE_EVENT_INFO, BufferSize *uint32) uint32 {
+	var _TdhContext *TDH_CONTEXT
+	if len(TdhContext) > 0 {
+		_TdhContext = &TdhContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTdhGetEventInformation.Addr(), uintptr(unsafe.Pointer(Event)), uintptr(len(TdhContext)), uintptr(unsafe.Pointer(_TdhContext)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(BufferSize)))
 	return uint32(r1)
 }
 
 // TdhGetEventMapInformation calls TDH!TdhGetEventMapInformation.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhgeteventmapinformation
 // Minimum OS: windows6.0.6000.
-func TdhGetEventMapInformation(pEvent *EVENT_RECORD, pMapName foundation.PWSTR, pBuffer *EVENT_MAP_INFO, pBufferSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procTdhGetEventMapInformation.Addr(), uintptr(unsafe.Pointer(pEvent)), uintptr(unsafe.Pointer(pMapName)), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pBufferSize)))
+func TdhGetEventMapInformation(pEvent *EVENT_RECORD, pMapName string, pBuffer *EVENT_MAP_INFO, pBufferSize *uint32) uint32 {
+	_pMapName := win32.UTF16Ptr(pMapName)
+	r1, _, _ := syscall.SyscallN(procTdhGetEventMapInformation.Addr(), uintptr(unsafe.Pointer(pEvent)), uintptr(unsafe.Pointer(_pMapName)), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pBufferSize)))
 	return uint32(r1)
 }
 
@@ -647,16 +709,32 @@ func TdhGetManifestEventInformation(ProviderGuid *win32.GUID, EventDescriptor *E
 // TdhGetProperty calls TDH!TdhGetProperty.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhgetproperty
 // Minimum OS: windows6.0.6000.
-func TdhGetProperty(pEvent *EVENT_RECORD, TdhContextCount uint32, pTdhContext *TDH_CONTEXT, PropertyDataCount uint32, pPropertyData *PROPERTY_DATA_DESCRIPTOR, BufferSize uint32, pBuffer *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procTdhGetProperty.Addr(), uintptr(unsafe.Pointer(pEvent)), uintptr(TdhContextCount), uintptr(unsafe.Pointer(pTdhContext)), uintptr(PropertyDataCount), uintptr(unsafe.Pointer(pPropertyData)), uintptr(BufferSize), uintptr(unsafe.Pointer(pBuffer)))
+func TdhGetProperty(pEvent *EVENT_RECORD, pTdhContext []TDH_CONTEXT, pPropertyData []PROPERTY_DATA_DESCRIPTOR, BufferSize uint32, pBuffer *byte) uint32 {
+	var _pTdhContext *TDH_CONTEXT
+	if len(pTdhContext) > 0 {
+		_pTdhContext = &pTdhContext[0]
+	}
+	var _pPropertyData *PROPERTY_DATA_DESCRIPTOR
+	if len(pPropertyData) > 0 {
+		_pPropertyData = &pPropertyData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTdhGetProperty.Addr(), uintptr(unsafe.Pointer(pEvent)), uintptr(len(pTdhContext)), uintptr(unsafe.Pointer(_pTdhContext)), uintptr(len(pPropertyData)), uintptr(unsafe.Pointer(_pPropertyData)), uintptr(BufferSize), uintptr(unsafe.Pointer(pBuffer)))
 	return uint32(r1)
 }
 
 // TdhGetPropertySize calls TDH!TdhGetPropertySize.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhgetpropertysize
 // Minimum OS: windows6.0.6000.
-func TdhGetPropertySize(pEvent *EVENT_RECORD, TdhContextCount uint32, pTdhContext *TDH_CONTEXT, PropertyDataCount uint32, pPropertyData *PROPERTY_DATA_DESCRIPTOR, pPropertySize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procTdhGetPropertySize.Addr(), uintptr(unsafe.Pointer(pEvent)), uintptr(TdhContextCount), uintptr(unsafe.Pointer(pTdhContext)), uintptr(PropertyDataCount), uintptr(unsafe.Pointer(pPropertyData)), uintptr(unsafe.Pointer(pPropertySize)))
+func TdhGetPropertySize(pEvent *EVENT_RECORD, pTdhContext []TDH_CONTEXT, pPropertyData []PROPERTY_DATA_DESCRIPTOR, pPropertySize *uint32) uint32 {
+	var _pTdhContext *TDH_CONTEXT
+	if len(pTdhContext) > 0 {
+		_pTdhContext = &pTdhContext[0]
+	}
+	var _pPropertyData *PROPERTY_DATA_DESCRIPTOR
+	if len(pPropertyData) > 0 {
+		_pPropertyData = &pPropertyData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTdhGetPropertySize.Addr(), uintptr(unsafe.Pointer(pEvent)), uintptr(len(pTdhContext)), uintptr(unsafe.Pointer(_pTdhContext)), uintptr(len(pPropertyData)), uintptr(unsafe.Pointer(_pPropertyData)), uintptr(unsafe.Pointer(pPropertySize)))
 	return uint32(r1)
 }
 
@@ -671,24 +749,27 @@ func TdhGetWppMessage(Handle TDH_HANDLE, EventRecord *EVENT_RECORD, BufferSize *
 // TdhGetWppProperty calls tdh!TdhGetWppProperty.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhgetwppproperty
 // Minimum OS: windows8.0.
-func TdhGetWppProperty(Handle TDH_HANDLE, EventRecord *EVENT_RECORD, PropertyName foundation.PWSTR, BufferSize *uint32, Buffer *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procTdhGetWppProperty.Addr(), uintptr(Handle), uintptr(unsafe.Pointer(EventRecord)), uintptr(unsafe.Pointer(PropertyName)), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(Buffer)))
+func TdhGetWppProperty(Handle TDH_HANDLE, EventRecord *EVENT_RECORD, PropertyName string, BufferSize *uint32, Buffer *byte) uint32 {
+	_PropertyName := win32.UTF16Ptr(PropertyName)
+	r1, _, _ := syscall.SyscallN(procTdhGetWppProperty.Addr(), uintptr(Handle), uintptr(unsafe.Pointer(EventRecord)), uintptr(unsafe.Pointer(_PropertyName)), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(Buffer)))
 	return uint32(r1)
 }
 
 // TdhLoadManifest calls TDH!TdhLoadManifest.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhloadmanifest
 // Minimum OS: windows6.1.
-func TdhLoadManifest(Manifest foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procTdhLoadManifest.Addr(), uintptr(unsafe.Pointer(Manifest)))
+func TdhLoadManifest(Manifest string) uint32 {
+	_Manifest := win32.UTF16Ptr(Manifest)
+	r1, _, _ := syscall.SyscallN(procTdhLoadManifest.Addr(), uintptr(unsafe.Pointer(_Manifest)))
 	return uint32(r1)
 }
 
 // TdhLoadManifestFromBinary calls tdh!TdhLoadManifestFromBinary.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhloadmanifestfrombinary
 // Minimum OS: windows8.0.
-func TdhLoadManifestFromBinary(BinaryPath foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procTdhLoadManifestFromBinary.Addr(), uintptr(unsafe.Pointer(BinaryPath)))
+func TdhLoadManifestFromBinary(BinaryPath string) uint32 {
+	_BinaryPath := win32.UTF16Ptr(BinaryPath)
+	r1, _, _ := syscall.SyscallN(procTdhLoadManifestFromBinary.Addr(), uintptr(unsafe.Pointer(_BinaryPath)))
 	return uint32(r1)
 }
 
@@ -726,8 +807,9 @@ func TdhSetDecodingParameter(Handle TDH_HANDLE, TdhContext *TDH_CONTEXT) uint32 
 // TdhUnloadManifest calls TDH!TdhUnloadManifest.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhunloadmanifest
 // Minimum OS: windows6.1.
-func TdhUnloadManifest(Manifest foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procTdhUnloadManifest.Addr(), uintptr(unsafe.Pointer(Manifest)))
+func TdhUnloadManifest(Manifest string) uint32 {
+	_Manifest := win32.UTF16Ptr(Manifest)
+	r1, _, _ := syscall.SyscallN(procTdhUnloadManifest.Addr(), uintptr(unsafe.Pointer(_Manifest)))
 	return uint32(r1)
 }
 
@@ -739,8 +821,12 @@ func TdhUnloadManifestFromMemory(pData unsafe.Pointer, cbData uint32) uint32 {
 }
 
 // TraceConfigureLastBranchRecord calls ADVAPI32!TraceConfigureLastBranchRecord.
-func TraceConfigureLastBranchRecord(TraceId uint64, LbrConfiguration TRACE_LBR_CONFIGURATION, Events *CLASSIC_EVENT_ID, EventCount uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procTraceConfigureLastBranchRecord.Addr(), uintptr(TraceId), uintptr(LbrConfiguration), uintptr(unsafe.Pointer(Events)), uintptr(EventCount))
+func TraceConfigureLastBranchRecord(TraceId uint64, LbrConfiguration TRACE_LBR_CONFIGURATION, Events []CLASSIC_EVENT_ID) uint32 {
+	var _Events *CLASSIC_EVENT_ID
+	if len(Events) > 0 {
+		_Events = &Events[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTraceConfigureLastBranchRecord.Addr(), uintptr(TraceId), uintptr(LbrConfiguration), uintptr(unsafe.Pointer(_Events)), uintptr(len(Events)))
 	return uint32(r1)
 }
 
@@ -800,18 +886,19 @@ func UnregisterTraceGuids(RegistrationHandle uint64) uint32 {
 	return uint32(r1)
 }
 
+// UpdateTrace calls ADVAPI32!UpdateTraceW.
+// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-updatetracew
+// Minimum OS: windows5.0.
+func UpdateTrace(TraceId uint64, InstanceName string, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
+	_InstanceName := win32.UTF16Ptr(InstanceName)
+	r1, _, _ := syscall.SyscallN(procUpdateTrace.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(_InstanceName)), uintptr(unsafe.Pointer(Properties)))
+	return foundation.WIN32_ERROR(r1)
+}
+
 // UpdateTraceA calls ADVAPI32!UpdateTraceA.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-updatetracea
 // Minimum OS: windows5.0.
 func UpdateTraceA(TraceId uint64, InstanceName foundation.PSTR, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
 	r1, _, _ := syscall.SyscallN(procUpdateTraceA.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(InstanceName)), uintptr(unsafe.Pointer(Properties)))
-	return foundation.WIN32_ERROR(r1)
-}
-
-// UpdateTraceW calls ADVAPI32!UpdateTraceW.
-// https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-updatetracew
-// Minimum OS: windows5.0.
-func UpdateTraceW(TraceId uint64, InstanceName foundation.PWSTR, Properties *EVENT_TRACE_PROPERTIES) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procUpdateTraceW.Addr(), uintptr(TraceId), uintptr(unsafe.Pointer(InstanceName)), uintptr(unsafe.Pointer(Properties)))
 	return foundation.WIN32_ERROR(r1)
 }

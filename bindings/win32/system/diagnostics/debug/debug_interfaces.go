@@ -24,15 +24,15 @@ type IDebugExtendedProperty struct {
 var IID_IDebugExtendedProperty = win32.GUID{Data1: 0x51973c52, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetExtendedPropertyInfo dispatches through IDebugExtendedProperty's vtable slot 8.
-func (self *IDebugExtendedProperty) GetExtendedPropertyInfo(dwFieldSpec uint32, nRadix uint32, pExtendedPropertyInfo *ExtendedDebugPropertyInfo) foundation.HRESULT {
+func (self *IDebugExtendedProperty) GetExtendedPropertyInfo(dwFieldSpec uint32, nRadix uint32, pExtendedPropertyInfo *ExtendedDebugPropertyInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwFieldSpec), uintptr(nRadix), uintptr(unsafe.Pointer(pExtendedPropertyInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumExtendedMembers dispatches through IDebugExtendedProperty's vtable slot 9.
-func (self *IDebugExtendedProperty) EnumExtendedMembers(dwFieldSpec uint32, nRadix uint32, ppeepi **IEnumDebugExtendedPropertyInfo) foundation.HRESULT {
+func (self *IDebugExtendedProperty) EnumExtendedMembers(dwFieldSpec uint32, nRadix uint32, ppeepi **IEnumDebugExtendedPropertyInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwFieldSpec), uintptr(nRadix), uintptr(unsafe.Pointer(ppeepi)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c50-cb0c-11d0-b5c9-00a0244a0e7a
@@ -44,33 +44,34 @@ type IDebugProperty struct {
 var IID_IDebugProperty = win32.GUID{Data1: 0x51973c50, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetPropertyInfo dispatches through IDebugProperty's vtable slot 3.
-func (self *IDebugProperty) GetPropertyInfo(dwFieldSpec uint32, nRadix uint32, pPropertyInfo *DebugPropertyInfo) foundation.HRESULT {
+func (self *IDebugProperty) GetPropertyInfo(dwFieldSpec uint32, nRadix uint32, pPropertyInfo *DebugPropertyInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFieldSpec), uintptr(nRadix), uintptr(unsafe.Pointer(pPropertyInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetExtendedInfo dispatches through IDebugProperty's vtable slot 4.
-func (self *IDebugProperty) GetExtendedInfo(cInfos uint32, rgguidExtendedInfo *win32.GUID, rgvar *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IDebugProperty) GetExtendedInfo(cInfos uint32, rgguidExtendedInfo *win32.GUID, rgvar *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cInfos), uintptr(unsafe.Pointer(rgguidExtendedInfo)), uintptr(unsafe.Pointer(rgvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetValueAsString dispatches through IDebugProperty's vtable slot 5.
-func (self *IDebugProperty) SetValueAsString(pszValue foundation.PWSTR, nRadix uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszValue)), uintptr(nRadix))
-	return foundation.HRESULT(r1)
+func (self *IDebugProperty) SetValueAsString(pszValue string, nRadix uint32) error {
+	_pszValue := win32.UTF16Ptr(pszValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszValue)), uintptr(nRadix))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumMembers dispatches through IDebugProperty's vtable slot 6.
-func (self *IDebugProperty) EnumMembers(dwFieldSpec uint32, nRadix uint32, refiid *win32.GUID, ppepi **IEnumDebugPropertyInfo) foundation.HRESULT {
+func (self *IDebugProperty) EnumMembers(dwFieldSpec uint32, nRadix uint32, refiid *win32.GUID, ppepi **IEnumDebugPropertyInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwFieldSpec), uintptr(nRadix), uintptr(unsafe.Pointer(refiid)), uintptr(unsafe.Pointer(ppepi)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetParent dispatches through IDebugProperty's vtable slot 7.
-func (self *IDebugProperty) GetParent(ppDebugProp **IDebugProperty) foundation.HRESULT {
+func (self *IDebugProperty) GetParent(ppDebugProp **IDebugProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDebugProp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c55-cb0c-11d0-b5c9-00a0244a0e7a
@@ -82,9 +83,9 @@ type IDebugPropertyEnumType_All struct {
 var IID_IDebugPropertyEnumType_All = win32.GUID{Data1: 0x51973c55, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetName dispatches through IDebugPropertyEnumType_All's vtable slot 3.
-func (self *IDebugPropertyEnumType_All) GetName(__MIDL__IDebugPropertyEnumType_All0000 *foundation.BSTR) foundation.HRESULT {
+func (self *IDebugPropertyEnumType_All) GetName(__MIDL__IDebugPropertyEnumType_All0000 *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(__MIDL__IDebugPropertyEnumType_All0000)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c57-cb0c-11d0-b5c9-00a0244a0e7a
@@ -128,33 +129,33 @@ type IEnumDebugExtendedPropertyInfo struct {
 var IID_IEnumDebugExtendedPropertyInfo = win32.GUID{Data1: 0x51973c53, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumDebugExtendedPropertyInfo's vtable slot 3.
-func (self *IEnumDebugExtendedPropertyInfo) Next(celt uint32, rgExtendedPropertyInfo *ExtendedDebugPropertyInfo, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumDebugExtendedPropertyInfo) Next(celt uint32, rgExtendedPropertyInfo *ExtendedDebugPropertyInfo, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgExtendedPropertyInfo)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumDebugExtendedPropertyInfo's vtable slot 4.
-func (self *IEnumDebugExtendedPropertyInfo) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumDebugExtendedPropertyInfo) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumDebugExtendedPropertyInfo's vtable slot 5.
-func (self *IEnumDebugExtendedPropertyInfo) Reset() foundation.HRESULT {
+func (self *IEnumDebugExtendedPropertyInfo) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumDebugExtendedPropertyInfo's vtable slot 6.
-func (self *IEnumDebugExtendedPropertyInfo) Clone(pedpe **IEnumDebugExtendedPropertyInfo) foundation.HRESULT {
+func (self *IEnumDebugExtendedPropertyInfo) Clone(pedpe **IEnumDebugExtendedPropertyInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pedpe)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through IEnumDebugExtendedPropertyInfo's vtable slot 7.
-func (self *IEnumDebugExtendedPropertyInfo) GetCount(pcelt *uint32) foundation.HRESULT {
+func (self *IEnumDebugExtendedPropertyInfo) GetCount(pcelt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c51-cb0c-11d0-b5c9-00a0244a0e7a
@@ -166,33 +167,33 @@ type IEnumDebugPropertyInfo struct {
 var IID_IEnumDebugPropertyInfo = win32.GUID{Data1: 0x51973c51, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumDebugPropertyInfo's vtable slot 3.
-func (self *IEnumDebugPropertyInfo) Next(celt uint32, pi *DebugPropertyInfo, pcEltsfetched *uint32) foundation.HRESULT {
+func (self *IEnumDebugPropertyInfo) Next(celt uint32, pi *DebugPropertyInfo, pcEltsfetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pi)), uintptr(unsafe.Pointer(pcEltsfetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumDebugPropertyInfo's vtable slot 4.
-func (self *IEnumDebugPropertyInfo) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumDebugPropertyInfo) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumDebugPropertyInfo's vtable slot 5.
-func (self *IEnumDebugPropertyInfo) Reset() foundation.HRESULT {
+func (self *IEnumDebugPropertyInfo) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumDebugPropertyInfo's vtable slot 6.
-func (self *IEnumDebugPropertyInfo) Clone(ppepi **IEnumDebugPropertyInfo) foundation.HRESULT {
+func (self *IEnumDebugPropertyInfo) Clone(ppepi **IEnumDebugPropertyInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppepi)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through IEnumDebugPropertyInfo's vtable slot 7.
-func (self *IEnumDebugPropertyInfo) GetCount(pcelt *uint32) foundation.HRESULT {
+func (self *IEnumDebugPropertyInfo) GetCount(pcelt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcelt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: cb5bdc81-93c1-11cf-8f20-00805f2cd064
@@ -204,15 +205,15 @@ type IObjectSafety struct {
 var IID_IObjectSafety = win32.GUID{Data1: 0xcb5bdc81, Data2: 0x93c1, Data3: 0x11cf, Data4: [8]byte{0x8f, 0x20, 0x00, 0x80, 0x5f, 0x2c, 0xd0, 0x64}}
 
 // GetInterfaceSafetyOptions dispatches through IObjectSafety's vtable slot 3.
-func (self *IObjectSafety) GetInterfaceSafetyOptions(riid *win32.GUID, pdwSupportedOptions *uint32, pdwEnabledOptions *uint32) foundation.HRESULT {
+func (self *IObjectSafety) GetInterfaceSafetyOptions(riid *win32.GUID, pdwSupportedOptions *uint32, pdwEnabledOptions *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pdwSupportedOptions)), uintptr(unsafe.Pointer(pdwEnabledOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInterfaceSafetyOptions dispatches through IObjectSafety's vtable slot 4.
-func (self *IObjectSafety) SetInterfaceSafetyOptions(riid *win32.GUID, dwOptionSetMask uint32, dwEnabledOptions uint32) foundation.HRESULT {
+func (self *IObjectSafety) SetInterfaceSafetyOptions(riid *win32.GUID, dwOptionSetMask uint32, dwEnabledOptions uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(dwOptionSetMask), uintptr(dwEnabledOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c54-cb0c-11d0-b5c9-00a0244a0e7a
@@ -224,25 +225,25 @@ type IPerPropertyBrowsing2 struct {
 var IID_IPerPropertyBrowsing2 = win32.GUID{Data1: 0x51973c54, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetDisplayString dispatches through IPerPropertyBrowsing2's vtable slot 3.
-func (self *IPerPropertyBrowsing2) GetDisplayString(dispid int32, pBstr *foundation.BSTR) foundation.HRESULT {
+func (self *IPerPropertyBrowsing2) GetDisplayString(dispid int32, pBstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dispid), uintptr(unsafe.Pointer(pBstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MapPropertyToPage dispatches through IPerPropertyBrowsing2's vtable slot 4.
-func (self *IPerPropertyBrowsing2) MapPropertyToPage(dispid int32, pClsidPropPage *win32.GUID) foundation.HRESULT {
+func (self *IPerPropertyBrowsing2) MapPropertyToPage(dispid int32, pClsidPropPage *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dispid), uintptr(unsafe.Pointer(pClsidPropPage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPredefinedStrings dispatches through IPerPropertyBrowsing2's vtable slot 5.
-func (self *IPerPropertyBrowsing2) GetPredefinedStrings(dispid int32, pCaStrings *systemole.CALPOLESTR, pCaCookies *systemole.CADWORD) foundation.HRESULT {
+func (self *IPerPropertyBrowsing2) GetPredefinedStrings(dispid int32, pCaStrings *systemole.CALPOLESTR, pCaCookies *systemole.CADWORD) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dispid), uintptr(unsafe.Pointer(pCaStrings)), uintptr(unsafe.Pointer(pCaCookies)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPredefinedValue dispatches through IPerPropertyBrowsing2's vtable slot 6.
-func (self *IPerPropertyBrowsing2) SetPredefinedValue(dispid int32, dwCookie uint32) foundation.HRESULT {
+func (self *IPerPropertyBrowsing2) SetPredefinedValue(dispid int32, dwCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dispid), uintptr(dwCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

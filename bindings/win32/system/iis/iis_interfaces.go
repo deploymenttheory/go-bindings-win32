@@ -22,15 +22,19 @@ type AsyncIFtpAuthenticationProvider struct {
 var IID_AsyncIFtpAuthenticationProvider = win32.GUID{Data1: 0xc24efb65, Data2: 0x9f3e, Data3: 0x4996, Data4: [8]byte{0x8f, 0xb1, 0xce, 0x16, 0x69, 0x16, 0xba, 0xb5}}
 
 // Begin_AuthenticateUser dispatches through AsyncIFtpAuthenticationProvider's vtable slot 3.
-func (self *AsyncIFtpAuthenticationProvider) Begin_AuthenticateUser(pszSessionId foundation.PWSTR, pszSiteName foundation.PWSTR, pszUserName foundation.PWSTR, pszPassword foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pszSiteName)), uintptr(unsafe.Pointer(pszUserName)), uintptr(unsafe.Pointer(pszPassword)))
-	return foundation.HRESULT(r1)
+func (self *AsyncIFtpAuthenticationProvider) Begin_AuthenticateUser(pszSessionId string, pszSiteName string, pszUserName string, pszPassword string) error {
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSiteName := win32.UTF16Ptr(pszSiteName)
+	_pszUserName := win32.UTF16Ptr(pszUserName)
+	_pszPassword := win32.UTF16Ptr(pszPassword)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszPassword)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_AuthenticateUser dispatches through AsyncIFtpAuthenticationProvider's vtable slot 4.
-func (self *AsyncIFtpAuthenticationProvider) Finish_AuthenticateUser(ppszCanonicalUserName *foundation.PWSTR, pfAuthenticated *foundation.BOOL) foundation.HRESULT {
+func (self *AsyncIFtpAuthenticationProvider) Finish_AuthenticateUser(ppszCanonicalUserName *foundation.PWSTR, pfAuthenticated *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszCanonicalUserName)), uintptr(unsafe.Pointer(pfAuthenticated)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 860dc339-07e5-4a5c-9c61-8820cea012bc
@@ -42,15 +46,19 @@ type AsyncIFtpAuthorizationProvider struct {
 var IID_AsyncIFtpAuthorizationProvider = win32.GUID{Data1: 0x860dc339, Data2: 0x07e5, Data3: 0x4a5c, Data4: [8]byte{0x9c, 0x61, 0x88, 0x20, 0xce, 0xa0, 0x12, 0xbc}}
 
 // Begin_GetUserAccessPermission dispatches through AsyncIFtpAuthorizationProvider's vtable slot 3.
-func (self *AsyncIFtpAuthorizationProvider) Begin_GetUserAccessPermission(pszSessionId foundation.PWSTR, pszSiteName foundation.PWSTR, pszVirtualPath foundation.PWSTR, pszUserName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pszSiteName)), uintptr(unsafe.Pointer(pszVirtualPath)), uintptr(unsafe.Pointer(pszUserName)))
-	return foundation.HRESULT(r1)
+func (self *AsyncIFtpAuthorizationProvider) Begin_GetUserAccessPermission(pszSessionId string, pszSiteName string, pszVirtualPath string, pszUserName string) error {
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSiteName := win32.UTF16Ptr(pszSiteName)
+	_pszVirtualPath := win32.UTF16Ptr(pszVirtualPath)
+	_pszUserName := win32.UTF16Ptr(pszUserName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszVirtualPath)), uintptr(unsafe.Pointer(_pszUserName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_GetUserAccessPermission dispatches through AsyncIFtpAuthorizationProvider's vtable slot 4.
-func (self *AsyncIFtpAuthorizationProvider) Finish_GetUserAccessPermission(pFtpAccess *FTP_ACCESS) foundation.HRESULT {
+func (self *AsyncIFtpAuthorizationProvider) Finish_GetUserAccessPermission(pFtpAccess *FTP_ACCESS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFtpAccess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 73f81638-6295-42bd-a2be-4a657f7c479c
@@ -62,15 +70,18 @@ type AsyncIFtpHomeDirectoryProvider struct {
 var IID_AsyncIFtpHomeDirectoryProvider = win32.GUID{Data1: 0x73f81638, Data2: 0x6295, Data3: 0x42bd, Data4: [8]byte{0xa2, 0xbe, 0x4a, 0x65, 0x7f, 0x7c, 0x47, 0x9c}}
 
 // Begin_GetUserHomeDirectoryData dispatches through AsyncIFtpHomeDirectoryProvider's vtable slot 3.
-func (self *AsyncIFtpHomeDirectoryProvider) Begin_GetUserHomeDirectoryData(pszSessionId foundation.PWSTR, pszSiteName foundation.PWSTR, pszUserName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pszSiteName)), uintptr(unsafe.Pointer(pszUserName)))
-	return foundation.HRESULT(r1)
+func (self *AsyncIFtpHomeDirectoryProvider) Begin_GetUserHomeDirectoryData(pszSessionId string, pszSiteName string, pszUserName string) error {
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSiteName := win32.UTF16Ptr(pszSiteName)
+	_pszUserName := win32.UTF16Ptr(pszUserName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_GetUserHomeDirectoryData dispatches through AsyncIFtpHomeDirectoryProvider's vtable slot 4.
-func (self *AsyncIFtpHomeDirectoryProvider) Finish_GetUserHomeDirectoryData(ppszHomeDirectoryData *foundation.PWSTR) foundation.HRESULT {
+func (self *AsyncIFtpHomeDirectoryProvider) Finish_GetUserHomeDirectoryData(ppszHomeDirectoryData *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszHomeDirectoryData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 00a0ae46-2498-48b2-95e6-df678ed7d49f
@@ -82,15 +93,15 @@ type AsyncIFtpLogProvider struct {
 var IID_AsyncIFtpLogProvider = win32.GUID{Data1: 0x00a0ae46, Data2: 0x2498, Data3: 0x48b2, Data4: [8]byte{0x95, 0xe6, 0xdf, 0x67, 0x8e, 0xd7, 0xd4, 0x9f}}
 
 // Begin_Log dispatches through AsyncIFtpLogProvider's vtable slot 3.
-func (self *AsyncIFtpLogProvider) Begin_Log(pLoggingParameters *LOGGING_PARAMETERS) foundation.HRESULT {
+func (self *AsyncIFtpLogProvider) Begin_Log(pLoggingParameters *LOGGING_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLoggingParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_Log dispatches through AsyncIFtpLogProvider's vtable slot 4.
-func (self *AsyncIFtpLogProvider) Finish_Log() foundation.HRESULT {
+func (self *AsyncIFtpLogProvider) Finish_Log() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a16b2542-9694-4eb1-a564-6c2e91fdc133
@@ -102,15 +113,15 @@ type AsyncIFtpPostprocessProvider struct {
 var IID_AsyncIFtpPostprocessProvider = win32.GUID{Data1: 0xa16b2542, Data2: 0x9694, Data3: 0x4eb1, Data4: [8]byte{0xa5, 0x64, 0x6c, 0x2e, 0x91, 0xfd, 0xc1, 0x33}}
 
 // Begin_HandlePostprocess dispatches through AsyncIFtpPostprocessProvider's vtable slot 3.
-func (self *AsyncIFtpPostprocessProvider) Begin_HandlePostprocess(pPostProcessParameters *POST_PROCESS_PARAMETERS) foundation.HRESULT {
+func (self *AsyncIFtpPostprocessProvider) Begin_HandlePostprocess(pPostProcessParameters *POST_PROCESS_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPostProcessParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_HandlePostprocess dispatches through AsyncIFtpPostprocessProvider's vtable slot 4.
-func (self *AsyncIFtpPostprocessProvider) Finish_HandlePostprocess(pFtpProcessStatus *FTP_PROCESS_STATUS) foundation.HRESULT {
+func (self *AsyncIFtpPostprocessProvider) Finish_HandlePostprocess(pFtpProcessStatus *FTP_PROCESS_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFtpProcessStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 6ff5fd8f-fd8e-48b1-a3e0-bf7073db4db5
@@ -122,15 +133,15 @@ type AsyncIFtpPreprocessProvider struct {
 var IID_AsyncIFtpPreprocessProvider = win32.GUID{Data1: 0x6ff5fd8f, Data2: 0xfd8e, Data3: 0x48b1, Data4: [8]byte{0xa3, 0xe0, 0xbf, 0x70, 0x73, 0xdb, 0x4d, 0xb5}}
 
 // Begin_HandlePreprocess dispatches through AsyncIFtpPreprocessProvider's vtable slot 3.
-func (self *AsyncIFtpPreprocessProvider) Begin_HandlePreprocess(pPreProcessParameters *PRE_PROCESS_PARAMETERS) foundation.HRESULT {
+func (self *AsyncIFtpPreprocessProvider) Begin_HandlePreprocess(pPreProcessParameters *PRE_PROCESS_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPreProcessParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_HandlePreprocess dispatches through AsyncIFtpPreprocessProvider's vtable slot 4.
-func (self *AsyncIFtpPreprocessProvider) Finish_HandlePreprocess(pFtpProcessStatus *FTP_PROCESS_STATUS) foundation.HRESULT {
+func (self *AsyncIFtpPreprocessProvider) Finish_HandlePreprocess(pFtpProcessStatus *FTP_PROCESS_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFtpProcessStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3e83bf99-70ec-41ca-84b6-aca7c7a62caf
@@ -142,15 +153,19 @@ type AsyncIFtpRoleProvider struct {
 var IID_AsyncIFtpRoleProvider = win32.GUID{Data1: 0x3e83bf99, Data2: 0x70ec, Data3: 0x41ca, Data4: [8]byte{0x84, 0xb6, 0xac, 0xa7, 0xc7, 0xa6, 0x2c, 0xaf}}
 
 // Begin_IsUserInRole dispatches through AsyncIFtpRoleProvider's vtable slot 3.
-func (self *AsyncIFtpRoleProvider) Begin_IsUserInRole(pszSessionId foundation.PWSTR, pszSiteName foundation.PWSTR, pszUserName foundation.PWSTR, pszRole foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pszSiteName)), uintptr(unsafe.Pointer(pszUserName)), uintptr(unsafe.Pointer(pszRole)))
-	return foundation.HRESULT(r1)
+func (self *AsyncIFtpRoleProvider) Begin_IsUserInRole(pszSessionId string, pszSiteName string, pszUserName string, pszRole string) error {
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSiteName := win32.UTF16Ptr(pszSiteName)
+	_pszUserName := win32.UTF16Ptr(pszUserName)
+	_pszRole := win32.UTF16Ptr(pszRole)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszRole)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_IsUserInRole dispatches through AsyncIFtpRoleProvider's vtable slot 4.
-func (self *AsyncIFtpRoleProvider) Finish_IsUserInRole(pfIsInRole *foundation.BOOL) foundation.HRESULT {
+func (self *AsyncIFtpRoleProvider) Finish_IsUserInRole(pfIsInRole *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsInRole)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a9e69613-b80d-11d0-b9b9-00a0c922e750
@@ -162,27 +177,27 @@ type AsyncIMSAdminBaseSinkW struct {
 var IID_AsyncIMSAdminBaseSinkW = win32.GUID{Data1: 0xa9e69613, Data2: 0xb80d, Data3: 0x11d0, Data4: [8]byte{0xb9, 0xb9, 0x00, 0xa0, 0xc9, 0x22, 0xe7, 0x50}}
 
 // Begin_SinkNotify dispatches through AsyncIMSAdminBaseSinkW's vtable slot 3.
-func (self *AsyncIMSAdminBaseSinkW) Begin_SinkNotify(dwMDNumElements uint32, pcoChangeList *MD_CHANGE_OBJECT_W) foundation.HRESULT {
+func (self *AsyncIMSAdminBaseSinkW) Begin_SinkNotify(dwMDNumElements uint32, pcoChangeList *MD_CHANGE_OBJECT_W) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwMDNumElements), uintptr(unsafe.Pointer(pcoChangeList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_SinkNotify dispatches through AsyncIMSAdminBaseSinkW's vtable slot 4.
-func (self *AsyncIMSAdminBaseSinkW) Finish_SinkNotify() foundation.HRESULT {
+func (self *AsyncIMSAdminBaseSinkW) Finish_SinkNotify() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_ShutdownNotify dispatches through AsyncIMSAdminBaseSinkW's vtable slot 5.
-func (self *AsyncIMSAdminBaseSinkW) Begin_ShutdownNotify() foundation.HRESULT {
+func (self *AsyncIMSAdminBaseSinkW) Begin_ShutdownNotify() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_ShutdownNotify dispatches through AsyncIMSAdminBaseSinkW's vtable slot 6.
-func (self *AsyncIMSAdminBaseSinkW) Finish_ShutdownNotify() foundation.HRESULT {
+func (self *AsyncIMSAdminBaseSinkW) Finish_ShutdownNotify() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51dfe970-f6f2-11d0-b9bd-00a0c922e750
@@ -194,21 +209,21 @@ type IADMEXT struct {
 var IID_IADMEXT = win32.GUID{Data1: 0x51dfe970, Data2: 0xf6f2, Data3: 0x11d0, Data4: [8]byte{0xb9, 0xbd, 0x00, 0xa0, 0xc9, 0x22, 0xe7, 0x50}}
 
 // Initialize dispatches through IADMEXT's vtable slot 3.
-func (self *IADMEXT) Initialize() foundation.HRESULT {
+func (self *IADMEXT) Initialize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumDcomCLSIDs dispatches through IADMEXT's vtable slot 4.
-func (self *IADMEXT) EnumDcomCLSIDs(pclsidDcom *win32.GUID, dwEnumIndex uint32) foundation.HRESULT {
+func (self *IADMEXT) EnumDcomCLSIDs(pclsidDcom *win32.GUID, dwEnumIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pclsidDcom)), uintptr(dwEnumIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Terminate dispatches through IADMEXT's vtable slot 5.
-func (self *IADMEXT) Terminate() foundation.HRESULT {
+func (self *IADMEXT) Terminate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4659f95c-d5a8-4707-b2fc-6fd5794246cf
@@ -220,9 +235,13 @@ type IFtpAuthenticationProvider struct {
 var IID_IFtpAuthenticationProvider = win32.GUID{Data1: 0x4659f95c, Data2: 0xd5a8, Data3: 0x4707, Data4: [8]byte{0xb2, 0xfc, 0x6f, 0xd5, 0x79, 0x42, 0x46, 0xcf}}
 
 // AuthenticateUser dispatches through IFtpAuthenticationProvider's vtable slot 3.
-func (self *IFtpAuthenticationProvider) AuthenticateUser(pszSessionId foundation.PWSTR, pszSiteName foundation.PWSTR, pszUserName foundation.PWSTR, pszPassword foundation.PWSTR, ppszCanonicalUserName *foundation.PWSTR, pfAuthenticated *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pszSiteName)), uintptr(unsafe.Pointer(pszUserName)), uintptr(unsafe.Pointer(pszPassword)), uintptr(unsafe.Pointer(ppszCanonicalUserName)), uintptr(unsafe.Pointer(pfAuthenticated)))
-	return foundation.HRESULT(r1)
+func (self *IFtpAuthenticationProvider) AuthenticateUser(pszSessionId string, pszSiteName string, pszUserName string, pszPassword string, ppszCanonicalUserName *foundation.PWSTR, pfAuthenticated *foundation.BOOL) error {
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSiteName := win32.UTF16Ptr(pszSiteName)
+	_pszUserName := win32.UTF16Ptr(pszUserName)
+	_pszPassword := win32.UTF16Ptr(pszPassword)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszPassword)), uintptr(unsafe.Pointer(ppszCanonicalUserName)), uintptr(unsafe.Pointer(pfAuthenticated)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a50ae7a1-a35a-42b4-a4f3-f4f7057a05d1
@@ -234,9 +253,13 @@ type IFtpAuthorizationProvider struct {
 var IID_IFtpAuthorizationProvider = win32.GUID{Data1: 0xa50ae7a1, Data2: 0xa35a, Data3: 0x42b4, Data4: [8]byte{0xa4, 0xf3, 0xf4, 0xf7, 0x05, 0x7a, 0x05, 0xd1}}
 
 // GetUserAccessPermission dispatches through IFtpAuthorizationProvider's vtable slot 3.
-func (self *IFtpAuthorizationProvider) GetUserAccessPermission(pszSessionId foundation.PWSTR, pszSiteName foundation.PWSTR, pszVirtualPath foundation.PWSTR, pszUserName foundation.PWSTR, pFtpAccess *FTP_ACCESS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pszSiteName)), uintptr(unsafe.Pointer(pszVirtualPath)), uintptr(unsafe.Pointer(pszUserName)), uintptr(unsafe.Pointer(pFtpAccess)))
-	return foundation.HRESULT(r1)
+func (self *IFtpAuthorizationProvider) GetUserAccessPermission(pszSessionId string, pszSiteName string, pszVirtualPath string, pszUserName string, pFtpAccess *FTP_ACCESS) error {
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSiteName := win32.UTF16Ptr(pszSiteName)
+	_pszVirtualPath := win32.UTF16Ptr(pszVirtualPath)
+	_pszUserName := win32.UTF16Ptr(pszUserName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszVirtualPath)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(pFtpAccess)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0933b392-18dd-4097-8b9c-83325c35d9a6
@@ -248,9 +271,12 @@ type IFtpHomeDirectoryProvider struct {
 var IID_IFtpHomeDirectoryProvider = win32.GUID{Data1: 0x0933b392, Data2: 0x18dd, Data3: 0x4097, Data4: [8]byte{0x8b, 0x9c, 0x83, 0x32, 0x5c, 0x35, 0xd9, 0xa6}}
 
 // GetUserHomeDirectoryData dispatches through IFtpHomeDirectoryProvider's vtable slot 3.
-func (self *IFtpHomeDirectoryProvider) GetUserHomeDirectoryData(pszSessionId foundation.PWSTR, pszSiteName foundation.PWSTR, pszUserName foundation.PWSTR, ppszHomeDirectoryData *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pszSiteName)), uintptr(unsafe.Pointer(pszUserName)), uintptr(unsafe.Pointer(ppszHomeDirectoryData)))
-	return foundation.HRESULT(r1)
+func (self *IFtpHomeDirectoryProvider) GetUserHomeDirectoryData(pszSessionId string, pszSiteName string, pszUserName string, ppszHomeDirectoryData *foundation.PWSTR) error {
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSiteName := win32.UTF16Ptr(pszSiteName)
+	_pszUserName := win32.UTF16Ptr(pszUserName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(ppszHomeDirectoryData)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a18a94cc-8299-4408-816c-7c3baca1a40e
@@ -262,9 +288,9 @@ type IFtpLogProvider struct {
 var IID_IFtpLogProvider = win32.GUID{Data1: 0xa18a94cc, Data2: 0x8299, Data3: 0x4408, Data4: [8]byte{0x81, 0x6c, 0x7c, 0x3b, 0xac, 0xa1, 0xa4, 0x0e}}
 
 // Log dispatches through IFtpLogProvider's vtable slot 3.
-func (self *IFtpLogProvider) Log(pLoggingParameters *LOGGING_PARAMETERS) foundation.HRESULT {
+func (self *IFtpLogProvider) Log(pLoggingParameters *LOGGING_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLoggingParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4522cbc6-16cd-49ad-8653-9a2c579e4280
@@ -276,9 +302,9 @@ type IFtpPostprocessProvider struct {
 var IID_IFtpPostprocessProvider = win32.GUID{Data1: 0x4522cbc6, Data2: 0x16cd, Data3: 0x49ad, Data4: [8]byte{0x86, 0x53, 0x9a, 0x2c, 0x57, 0x9e, 0x42, 0x80}}
 
 // HandlePostprocess dispatches through IFtpPostprocessProvider's vtable slot 3.
-func (self *IFtpPostprocessProvider) HandlePostprocess(pPostProcessParameters *POST_PROCESS_PARAMETERS, pFtpProcessStatus *FTP_PROCESS_STATUS) foundation.HRESULT {
+func (self *IFtpPostprocessProvider) HandlePostprocess(pPostProcessParameters *POST_PROCESS_PARAMETERS, pFtpProcessStatus *FTP_PROCESS_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPostProcessParameters)), uintptr(unsafe.Pointer(pFtpProcessStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a3c19b60-5a28-471a-8f93-ab30411cee82
@@ -290,9 +316,9 @@ type IFtpPreprocessProvider struct {
 var IID_IFtpPreprocessProvider = win32.GUID{Data1: 0xa3c19b60, Data2: 0x5a28, Data3: 0x471a, Data4: [8]byte{0x8f, 0x93, 0xab, 0x30, 0x41, 0x1c, 0xee, 0x82}}
 
 // HandlePreprocess dispatches through IFtpPreprocessProvider's vtable slot 3.
-func (self *IFtpPreprocessProvider) HandlePreprocess(pPreProcessParameters *PRE_PROCESS_PARAMETERS, pFtpProcessStatus *FTP_PROCESS_STATUS) foundation.HRESULT {
+func (self *IFtpPreprocessProvider) HandlePreprocess(pPreProcessParameters *PRE_PROCESS_PARAMETERS, pFtpProcessStatus *FTP_PROCESS_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPreProcessParameters)), uintptr(unsafe.Pointer(pFtpProcessStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4d1a3f7b-412d-447c-b199-64f967e9a2da
@@ -304,9 +330,9 @@ type IFtpProviderConstruct struct {
 var IID_IFtpProviderConstruct = win32.GUID{Data1: 0x4d1a3f7b, Data2: 0x412d, Data3: 0x447c, Data4: [8]byte{0xb1, 0x99, 0x64, 0xf9, 0x67, 0xe9, 0xa2, 0xda}}
 
 // Construct dispatches through IFtpProviderConstruct's vtable slot 3.
-func (self *IFtpProviderConstruct) Construct(configurationEntries *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IFtpProviderConstruct) Construct(configurationEntries *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(configurationEntries)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 909c850d-8ca0-4674-96b8-cc2941535725
@@ -318,9 +344,13 @@ type IFtpRoleProvider struct {
 var IID_IFtpRoleProvider = win32.GUID{Data1: 0x909c850d, Data2: 0x8ca0, Data3: 0x4674, Data4: [8]byte{0x96, 0xb8, 0xcc, 0x29, 0x41, 0x53, 0x57, 0x25}}
 
 // IsUserInRole dispatches through IFtpRoleProvider's vtable slot 3.
-func (self *IFtpRoleProvider) IsUserInRole(pszSessionId foundation.PWSTR, pszSiteName foundation.PWSTR, pszUserName foundation.PWSTR, pszRole foundation.PWSTR, pfIsInRole *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSessionId)), uintptr(unsafe.Pointer(pszSiteName)), uintptr(unsafe.Pointer(pszUserName)), uintptr(unsafe.Pointer(pszRole)), uintptr(unsafe.Pointer(pfIsInRole)))
-	return foundation.HRESULT(r1)
+func (self *IFtpRoleProvider) IsUserInRole(pszSessionId string, pszSiteName string, pszUserName string, pszRole string, pfIsInRole *foundation.BOOL) error {
+	_pszSessionId := win32.UTF16Ptr(pszSessionId)
+	_pszSiteName := win32.UTF16Ptr(pszSiteName)
+	_pszUserName := win32.UTF16Ptr(pszUserName)
+	_pszRole := win32.UTF16Ptr(pszRole)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSessionId)), uintptr(unsafe.Pointer(_pszSiteName)), uintptr(unsafe.Pointer(_pszUserName)), uintptr(unsafe.Pointer(_pszRole)), uintptr(unsafe.Pointer(pfIsInRole)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8298d101-f992-43b7-8eca-5052d885b995
@@ -332,39 +362,51 @@ type IMSAdminBase2W struct {
 var IID_IMSAdminBase2W = win32.GUID{Data1: 0x8298d101, Data2: 0xf992, Data3: 0x43b7, Data4: [8]byte{0x8e, 0xca, 0x50, 0x52, 0xd8, 0x85, 0xb9, 0x95}}
 
 // BackupWithPasswd dispatches through IMSAdminBase2W's vtable slot 34.
-func (self *IMSAdminBase2W) BackupWithPasswd(pszMDBackupLocation foundation.PWSTR, dwMDVersion uint32, dwMDFlags uint32, pszPasswd foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags), uintptr(unsafe.Pointer(pszPasswd)))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBase2W) BackupWithPasswd(pszMDBackupLocation string, dwMDVersion uint32, dwMDFlags uint32, pszPasswd string) error {
+	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
+	_pszPasswd := win32.UTF16Ptr(pszPasswd)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags), uintptr(unsafe.Pointer(_pszPasswd)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RestoreWithPasswd dispatches through IMSAdminBase2W's vtable slot 35.
-func (self *IMSAdminBase2W) RestoreWithPasswd(pszMDBackupLocation foundation.PWSTR, dwMDVersion uint32, dwMDFlags uint32, pszPasswd foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags), uintptr(unsafe.Pointer(pszPasswd)))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBase2W) RestoreWithPasswd(pszMDBackupLocation string, dwMDVersion uint32, dwMDFlags uint32, pszPasswd string) error {
+	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
+	_pszPasswd := win32.UTF16Ptr(pszPasswd)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags), uintptr(unsafe.Pointer(_pszPasswd)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Export dispatches through IMSAdminBase2W's vtable slot 36.
-func (self *IMSAdminBase2W) Export(pszPasswd foundation.PWSTR, pszFileName foundation.PWSTR, pszSourcePath foundation.PWSTR, dwMDFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPasswd)), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pszSourcePath)), uintptr(dwMDFlags))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBase2W) Export(pszPasswd string, pszFileName string, pszSourcePath string, dwMDFlags uint32) error {
+	_pszPasswd := win32.UTF16Ptr(pszPasswd)
+	_pszFileName := win32.UTF16Ptr(pszFileName)
+	_pszSourcePath := win32.UTF16Ptr(pszSourcePath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPasswd)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(_pszSourcePath)), uintptr(dwMDFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Import dispatches through IMSAdminBase2W's vtable slot 37.
-func (self *IMSAdminBase2W) Import(pszPasswd foundation.PWSTR, pszFileName foundation.PWSTR, pszSourcePath foundation.PWSTR, pszDestPath foundation.PWSTR, dwMDFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPasswd)), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pszSourcePath)), uintptr(unsafe.Pointer(pszDestPath)), uintptr(dwMDFlags))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBase2W) Import(pszPasswd string, pszFileName string, pszSourcePath string, pszDestPath string, dwMDFlags uint32) error {
+	_pszPasswd := win32.UTF16Ptr(pszPasswd)
+	_pszFileName := win32.UTF16Ptr(pszFileName)
+	_pszSourcePath := win32.UTF16Ptr(pszSourcePath)
+	_pszDestPath := win32.UTF16Ptr(pszDestPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPasswd)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(_pszSourcePath)), uintptr(unsafe.Pointer(_pszDestPath)), uintptr(dwMDFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RestoreHistory dispatches through IMSAdminBase2W's vtable slot 38.
-func (self *IMSAdminBase2W) RestoreHistory(pszMDHistoryLocation foundation.PWSTR, dwMDMajorVersion uint32, dwMDMinorVersion uint32, dwMDFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszMDHistoryLocation)), uintptr(dwMDMajorVersion), uintptr(dwMDMinorVersion), uintptr(dwMDFlags))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBase2W) RestoreHistory(pszMDHistoryLocation string, dwMDMajorVersion uint32, dwMDMinorVersion uint32, dwMDFlags uint32) error {
+	_pszMDHistoryLocation := win32.UTF16Ptr(pszMDHistoryLocation)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDHistoryLocation)), uintptr(dwMDMajorVersion), uintptr(dwMDMinorVersion), uintptr(dwMDFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumHistory dispatches through IMSAdminBase2W's vtable slot 39.
-func (self *IMSAdminBase2W) EnumHistory(pszMDHistoryLocation foundation.PWSTR, pdwMDMajorVersion *uint32, pdwMDMinorVersion *uint32, pftMDHistoryTime *foundation.FILETIME, dwMDEnumIndex uint32) foundation.HRESULT {
+func (self *IMSAdminBase2W) EnumHistory(pszMDHistoryLocation foundation.PWSTR, pdwMDMajorVersion *uint32, pdwMDMinorVersion *uint32, pftMDHistoryTime *foundation.FILETIME, dwMDEnumIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszMDHistoryLocation)), uintptr(unsafe.Pointer(pdwMDMajorVersion)), uintptr(unsafe.Pointer(pdwMDMinorVersion)), uintptr(unsafe.Pointer(pftMDHistoryTime)), uintptr(dwMDEnumIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f612954d-3b0b-4c56-9563-227b7be624b4
@@ -376,9 +418,10 @@ type IMSAdminBase3W struct {
 var IID_IMSAdminBase3W = win32.GUID{Data1: 0xf612954d, Data2: 0x3b0b, Data3: 0x4c56, Data4: [8]byte{0x95, 0x63, 0x22, 0x7b, 0x7b, 0xe6, 0x24, 0xb4}}
 
 // GetChildPaths dispatches through IMSAdminBase3W's vtable slot 40.
-func (self *IMSAdminBase3W) GetChildPaths(hMDHandle uint32, pszMDPath foundation.PWSTR, cchMDBufferSize uint32, pszBuffer foundation.PWSTR, pcchMDRequiredBufferSize *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)), uintptr(cchMDBufferSize), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pcchMDRequiredBufferSize)))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBase3W) GetChildPaths(hMDHandle uint32, pszMDPath string, cchMDBufferSize uint32, pszBuffer foundation.PWSTR, pcchMDRequiredBufferSize *uint32) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(cchMDBufferSize), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pcchMDRequiredBufferSize)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a9e69612-b80d-11d0-b9b9-00a0c922e750
@@ -390,15 +433,15 @@ type IMSAdminBaseSinkW struct {
 var IID_IMSAdminBaseSinkW = win32.GUID{Data1: 0xa9e69612, Data2: 0xb80d, Data3: 0x11d0, Data4: [8]byte{0xb9, 0xb9, 0x00, 0xa0, 0xc9, 0x22, 0xe7, 0x50}}
 
 // SinkNotify dispatches through IMSAdminBaseSinkW's vtable slot 3.
-func (self *IMSAdminBaseSinkW) SinkNotify(dwMDNumElements uint32, pcoChangeList *MD_CHANGE_OBJECT_W) foundation.HRESULT {
+func (self *IMSAdminBaseSinkW) SinkNotify(dwMDNumElements uint32, pcoChangeList *MD_CHANGE_OBJECT_W) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwMDNumElements), uintptr(unsafe.Pointer(pcoChangeList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShutdownNotify dispatches through IMSAdminBaseSinkW's vtable slot 4.
-func (self *IMSAdminBaseSinkW) ShutdownNotify() foundation.HRESULT {
+func (self *IMSAdminBaseSinkW) ShutdownNotify() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 70b51430-b6ca-11d0-b9b9-00a0c922e750
@@ -410,189 +453,218 @@ type IMSAdminBaseW struct {
 var IID_IMSAdminBaseW = win32.GUID{Data1: 0x70b51430, Data2: 0xb6ca, Data3: 0x11d0, Data4: [8]byte{0xb9, 0xb9, 0x00, 0xa0, 0xc9, 0x22, 0xe7, 0x50}}
 
 // AddKey dispatches through IMSAdminBaseW's vtable slot 3.
-func (self *IMSAdminBaseW) AddKey(hMDHandle uint32, pszMDPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) AddKey(hMDHandle uint32, pszMDPath string) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteKey dispatches through IMSAdminBaseW's vtable slot 4.
-func (self *IMSAdminBaseW) DeleteKey(hMDHandle uint32, pszMDPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) DeleteKey(hMDHandle uint32, pszMDPath string) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteChildKeys dispatches through IMSAdminBaseW's vtable slot 5.
-func (self *IMSAdminBaseW) DeleteChildKeys(hMDHandle uint32, pszMDPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) DeleteChildKeys(hMDHandle uint32, pszMDPath string) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumKeys dispatches through IMSAdminBaseW's vtable slot 6.
-func (self *IMSAdminBaseW) EnumKeys(hMDHandle uint32, pszMDPath foundation.PWSTR, pszMDName foundation.PWSTR, dwMDEnumObjectIndex uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)), uintptr(unsafe.Pointer(pszMDName)), uintptr(dwMDEnumObjectIndex))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) EnumKeys(hMDHandle uint32, pszMDPath string, pszMDName foundation.PWSTR, dwMDEnumObjectIndex uint32) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pszMDName)), uintptr(dwMDEnumObjectIndex))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyKey dispatches through IMSAdminBaseW's vtable slot 7.
-func (self *IMSAdminBaseW) CopyKey(hMDSourceHandle uint32, pszMDSourcePath foundation.PWSTR, hMDDestHandle uint32, pszMDDestPath foundation.PWSTR, bMDOverwriteFlag foundation.BOOL, bMDCopyFlag foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hMDSourceHandle), uintptr(unsafe.Pointer(pszMDSourcePath)), uintptr(hMDDestHandle), uintptr(unsafe.Pointer(pszMDDestPath)), uintptr(bMDOverwriteFlag), uintptr(bMDCopyFlag))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) CopyKey(hMDSourceHandle uint32, pszMDSourcePath string, hMDDestHandle uint32, pszMDDestPath string, bMDOverwriteFlag bool, bMDCopyFlag bool) error {
+	_pszMDSourcePath := win32.UTF16Ptr(pszMDSourcePath)
+	_pszMDDestPath := win32.UTF16Ptr(pszMDDestPath)
+	_bMDOverwriteFlag := win32.Bool32(bMDOverwriteFlag)
+	_bMDCopyFlag := win32.Bool32(bMDCopyFlag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hMDSourceHandle), uintptr(unsafe.Pointer(_pszMDSourcePath)), uintptr(hMDDestHandle), uintptr(unsafe.Pointer(_pszMDDestPath)), uintptr(_bMDOverwriteFlag), uintptr(_bMDCopyFlag))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RenameKey dispatches through IMSAdminBaseW's vtable slot 8.
-func (self *IMSAdminBaseW) RenameKey(hMDHandle uint32, pszMDPath foundation.PWSTR, pszMDNewName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)), uintptr(unsafe.Pointer(pszMDNewName)))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) RenameKey(hMDHandle uint32, pszMDPath string, pszMDNewName string) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	_pszMDNewName := win32.UTF16Ptr(pszMDNewName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(_pszMDNewName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetData dispatches through IMSAdminBaseW's vtable slot 9.
-func (self *IMSAdminBaseW) SetData(hMDHandle uint32, pszMDPath foundation.PWSTR, pmdrMDData *METADATA_RECORD) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)), uintptr(unsafe.Pointer(pmdrMDData)))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) SetData(hMDHandle uint32, pszMDPath string, pmdrMDData *METADATA_RECORD) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pmdrMDData)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetData dispatches through IMSAdminBaseW's vtable slot 10.
-func (self *IMSAdminBaseW) GetData(hMDHandle uint32, pszMDPath foundation.PWSTR, pmdrMDData *METADATA_RECORD, pdwMDRequiredDataLen *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)), uintptr(unsafe.Pointer(pmdrMDData)), uintptr(unsafe.Pointer(pdwMDRequiredDataLen)))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) GetData(hMDHandle uint32, pszMDPath string, pmdrMDData *METADATA_RECORD, pdwMDRequiredDataLen *uint32) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pmdrMDData)), uintptr(unsafe.Pointer(pdwMDRequiredDataLen)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteData dispatches through IMSAdminBaseW's vtable slot 11.
-func (self *IMSAdminBaseW) DeleteData(hMDHandle uint32, pszMDPath foundation.PWSTR, dwMDIdentifier uint32, dwMDDataType uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)), uintptr(dwMDIdentifier), uintptr(dwMDDataType))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) DeleteData(hMDHandle uint32, pszMDPath string, dwMDIdentifier uint32, dwMDDataType uint32) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(dwMDIdentifier), uintptr(dwMDDataType))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumData dispatches through IMSAdminBaseW's vtable slot 12.
-func (self *IMSAdminBaseW) EnumData(hMDHandle uint32, pszMDPath foundation.PWSTR, pmdrMDData *METADATA_RECORD, dwMDEnumDataIndex uint32, pdwMDRequiredDataLen *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)), uintptr(unsafe.Pointer(pmdrMDData)), uintptr(dwMDEnumDataIndex), uintptr(unsafe.Pointer(pdwMDRequiredDataLen)))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) EnumData(hMDHandle uint32, pszMDPath string, pmdrMDData *METADATA_RECORD, dwMDEnumDataIndex uint32, pdwMDRequiredDataLen *uint32) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pmdrMDData)), uintptr(dwMDEnumDataIndex), uintptr(unsafe.Pointer(pdwMDRequiredDataLen)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllData dispatches through IMSAdminBaseW's vtable slot 13.
-func (self *IMSAdminBaseW) GetAllData(hMDHandle uint32, pszMDPath foundation.PWSTR, dwMDAttributes uint32, dwMDUserType uint32, dwMDDataType uint32, pdwMDNumDataEntries *uint32, pdwMDDataSetNumber *uint32, dwMDBufferSize uint32, pbMDBuffer *byte, pdwMDRequiredBufferSize *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)), uintptr(dwMDAttributes), uintptr(dwMDUserType), uintptr(dwMDDataType), uintptr(unsafe.Pointer(pdwMDNumDataEntries)), uintptr(unsafe.Pointer(pdwMDDataSetNumber)), uintptr(dwMDBufferSize), uintptr(unsafe.Pointer(pbMDBuffer)), uintptr(unsafe.Pointer(pdwMDRequiredBufferSize)))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) GetAllData(hMDHandle uint32, pszMDPath string, dwMDAttributes uint32, dwMDUserType uint32, dwMDDataType uint32, pdwMDNumDataEntries *uint32, pdwMDDataSetNumber *uint32, dwMDBufferSize uint32, pbMDBuffer *byte, pdwMDRequiredBufferSize *uint32) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(dwMDAttributes), uintptr(dwMDUserType), uintptr(dwMDDataType), uintptr(unsafe.Pointer(pdwMDNumDataEntries)), uintptr(unsafe.Pointer(pdwMDDataSetNumber)), uintptr(dwMDBufferSize), uintptr(unsafe.Pointer(pbMDBuffer)), uintptr(unsafe.Pointer(pdwMDRequiredBufferSize)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteAllData dispatches through IMSAdminBaseW's vtable slot 14.
-func (self *IMSAdminBaseW) DeleteAllData(hMDHandle uint32, pszMDPath foundation.PWSTR, dwMDUserType uint32, dwMDDataType uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)), uintptr(dwMDUserType), uintptr(dwMDDataType))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) DeleteAllData(hMDHandle uint32, pszMDPath string, dwMDUserType uint32, dwMDDataType uint32) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(dwMDUserType), uintptr(dwMDDataType))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyData dispatches through IMSAdminBaseW's vtable slot 15.
-func (self *IMSAdminBaseW) CopyData(hMDSourceHandle uint32, pszMDSourcePath foundation.PWSTR, hMDDestHandle uint32, pszMDDestPath foundation.PWSTR, dwMDAttributes uint32, dwMDUserType uint32, dwMDDataType uint32, bMDCopyFlag foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hMDSourceHandle), uintptr(unsafe.Pointer(pszMDSourcePath)), uintptr(hMDDestHandle), uintptr(unsafe.Pointer(pszMDDestPath)), uintptr(dwMDAttributes), uintptr(dwMDUserType), uintptr(dwMDDataType), uintptr(bMDCopyFlag))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) CopyData(hMDSourceHandle uint32, pszMDSourcePath string, hMDDestHandle uint32, pszMDDestPath string, dwMDAttributes uint32, dwMDUserType uint32, dwMDDataType uint32, bMDCopyFlag bool) error {
+	_pszMDSourcePath := win32.UTF16Ptr(pszMDSourcePath)
+	_pszMDDestPath := win32.UTF16Ptr(pszMDDestPath)
+	_bMDCopyFlag := win32.Bool32(bMDCopyFlag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hMDSourceHandle), uintptr(unsafe.Pointer(_pszMDSourcePath)), uintptr(hMDDestHandle), uintptr(unsafe.Pointer(_pszMDDestPath)), uintptr(dwMDAttributes), uintptr(dwMDUserType), uintptr(dwMDDataType), uintptr(_bMDCopyFlag))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDataPaths dispatches through IMSAdminBaseW's vtable slot 16.
-func (self *IMSAdminBaseW) GetDataPaths(hMDHandle uint32, pszMDPath foundation.PWSTR, dwMDIdentifier uint32, dwMDDataType uint32, dwMDBufferSize uint32, pszBuffer foundation.PWSTR, pdwMDRequiredBufferSize *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)), uintptr(dwMDIdentifier), uintptr(dwMDDataType), uintptr(dwMDBufferSize), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pdwMDRequiredBufferSize)))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) GetDataPaths(hMDHandle uint32, pszMDPath string, dwMDIdentifier uint32, dwMDDataType uint32, dwMDBufferSize uint32, pszBuffer foundation.PWSTR, pdwMDRequiredBufferSize *uint32) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(dwMDIdentifier), uintptr(dwMDDataType), uintptr(dwMDBufferSize), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pdwMDRequiredBufferSize)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenKey dispatches through IMSAdminBaseW's vtable slot 17.
-func (self *IMSAdminBaseW) OpenKey(hMDHandle uint32, pszMDPath foundation.PWSTR, dwMDAccessRequested uint32, dwMDTimeOut uint32, phMDNewHandle *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)), uintptr(dwMDAccessRequested), uintptr(dwMDTimeOut), uintptr(unsafe.Pointer(phMDNewHandle)))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) OpenKey(hMDHandle uint32, pszMDPath string, dwMDAccessRequested uint32, dwMDTimeOut uint32, phMDNewHandle *uint32) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(dwMDAccessRequested), uintptr(dwMDTimeOut), uintptr(unsafe.Pointer(phMDNewHandle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CloseKey dispatches through IMSAdminBaseW's vtable slot 18.
-func (self *IMSAdminBaseW) CloseKey(hMDHandle uint32) foundation.HRESULT {
+func (self *IMSAdminBaseW) CloseKey(hMDHandle uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ChangePermissions dispatches through IMSAdminBaseW's vtable slot 19.
-func (self *IMSAdminBaseW) ChangePermissions(hMDHandle uint32, dwMDTimeOut uint32, dwMDAccessRequested uint32) foundation.HRESULT {
+func (self *IMSAdminBaseW) ChangePermissions(hMDHandle uint32, dwMDTimeOut uint32, dwMDAccessRequested uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(dwMDTimeOut), uintptr(dwMDAccessRequested))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveData dispatches through IMSAdminBaseW's vtable slot 20.
-func (self *IMSAdminBaseW) SaveData() foundation.HRESULT {
+func (self *IMSAdminBaseW) SaveData() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHandleInfo dispatches through IMSAdminBaseW's vtable slot 21.
-func (self *IMSAdminBaseW) GetHandleInfo(hMDHandle uint32, pmdhiInfo *METADATA_HANDLE_INFO) foundation.HRESULT {
+func (self *IMSAdminBaseW) GetHandleInfo(hMDHandle uint32, pmdhiInfo *METADATA_HANDLE_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pmdhiInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSystemChangeNumber dispatches through IMSAdminBaseW's vtable slot 22.
-func (self *IMSAdminBaseW) GetSystemChangeNumber(pdwSystemChangeNumber *uint32) foundation.HRESULT {
+func (self *IMSAdminBaseW) GetSystemChangeNumber(pdwSystemChangeNumber *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSystemChangeNumber)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDataSetNumber dispatches through IMSAdminBaseW's vtable slot 23.
-func (self *IMSAdminBaseW) GetDataSetNumber(hMDHandle uint32, pszMDPath foundation.PWSTR, pdwMDDataSetNumber *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)), uintptr(unsafe.Pointer(pdwMDDataSetNumber)))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) GetDataSetNumber(hMDHandle uint32, pszMDPath string, pdwMDDataSetNumber *uint32) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pdwMDDataSetNumber)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLastChangeTime dispatches through IMSAdminBaseW's vtable slot 24.
-func (self *IMSAdminBaseW) SetLastChangeTime(hMDHandle uint32, pszMDPath foundation.PWSTR, pftMDLastChangeTime *foundation.FILETIME, bLocalTime foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)), uintptr(unsafe.Pointer(pftMDLastChangeTime)), uintptr(bLocalTime))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) SetLastChangeTime(hMDHandle uint32, pszMDPath string, pftMDLastChangeTime *foundation.FILETIME, bLocalTime bool) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	_bLocalTime := win32.Bool32(bLocalTime)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pftMDLastChangeTime)), uintptr(_bLocalTime))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLastChangeTime dispatches through IMSAdminBaseW's vtable slot 25.
-func (self *IMSAdminBaseW) GetLastChangeTime(hMDHandle uint32, pszMDPath foundation.PWSTR, pftMDLastChangeTime *foundation.FILETIME, bLocalTime foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(pszMDPath)), uintptr(unsafe.Pointer(pftMDLastChangeTime)), uintptr(bLocalTime))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) GetLastChangeTime(hMDHandle uint32, pszMDPath string, pftMDLastChangeTime *foundation.FILETIME, bLocalTime bool) error {
+	_pszMDPath := win32.UTF16Ptr(pszMDPath)
+	_bLocalTime := win32.Bool32(bLocalTime)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(hMDHandle), uintptr(unsafe.Pointer(_pszMDPath)), uintptr(unsafe.Pointer(pftMDLastChangeTime)), uintptr(_bLocalTime))
+	return win32.HRESULTError(int32(r1))
 }
 
 // KeyExchangePhase1 dispatches through IMSAdminBaseW's vtable slot 26.
-func (self *IMSAdminBaseW) KeyExchangePhase1() foundation.HRESULT {
+func (self *IMSAdminBaseW) KeyExchangePhase1() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // KeyExchangePhase2 dispatches through IMSAdminBaseW's vtable slot 27.
-func (self *IMSAdminBaseW) KeyExchangePhase2() foundation.HRESULT {
+func (self *IMSAdminBaseW) KeyExchangePhase2() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Backup dispatches through IMSAdminBaseW's vtable slot 28.
-func (self *IMSAdminBaseW) Backup(pszMDBackupLocation foundation.PWSTR, dwMDVersion uint32, dwMDFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) Backup(pszMDBackupLocation string, dwMDVersion uint32, dwMDFlags uint32) error {
+	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Restore dispatches through IMSAdminBaseW's vtable slot 29.
-func (self *IMSAdminBaseW) Restore(pszMDBackupLocation foundation.PWSTR, dwMDVersion uint32, dwMDFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) Restore(pszMDBackupLocation string, dwMDVersion uint32, dwMDFlags uint32) error {
+	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion), uintptr(dwMDFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumBackups dispatches through IMSAdminBaseW's vtable slot 30.
-func (self *IMSAdminBaseW) EnumBackups(pszMDBackupLocation foundation.PWSTR, pdwMDVersion *uint32, pftMDBackupTime *foundation.FILETIME, dwMDEnumIndex uint32) foundation.HRESULT {
+func (self *IMSAdminBaseW) EnumBackups(pszMDBackupLocation foundation.PWSTR, pdwMDVersion *uint32, pftMDBackupTime *foundation.FILETIME, dwMDEnumIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszMDBackupLocation)), uintptr(unsafe.Pointer(pdwMDVersion)), uintptr(unsafe.Pointer(pftMDBackupTime)), uintptr(dwMDEnumIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteBackup dispatches through IMSAdminBaseW's vtable slot 31.
-func (self *IMSAdminBaseW) DeleteBackup(pszMDBackupLocation foundation.PWSTR, dwMDVersion uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszMDBackupLocation)), uintptr(dwMDVersion))
-	return foundation.HRESULT(r1)
+func (self *IMSAdminBaseW) DeleteBackup(pszMDBackupLocation string, dwMDVersion uint32) error {
+	_pszMDBackupLocation := win32.UTF16Ptr(pszMDBackupLocation)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszMDBackupLocation)), uintptr(dwMDVersion))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnmarshalInterface dispatches through IMSAdminBaseW's vtable slot 32.
-func (self *IMSAdminBaseW) UnmarshalInterface(piadmbwInterface **IMSAdminBaseW) foundation.HRESULT {
+func (self *IMSAdminBaseW) UnmarshalInterface(piadmbwInterface **IMSAdminBaseW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piadmbwInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetServerGuid dispatches through IMSAdminBaseW's vtable slot 33.
-func (self *IMSAdminBaseW) GetServerGuid() foundation.HRESULT {
+func (self *IMSAdminBaseW) GetServerGuid() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 29ff67ff-8050-480f-9f30-cc41635f2f9d
@@ -604,7 +676,9 @@ type IMSImpExpHelpW struct {
 var IID_IMSImpExpHelpW = win32.GUID{Data1: 0x29ff67ff, Data2: 0x8050, Data3: 0x480f, Data4: [8]byte{0x9f, 0x30, 0xcc, 0x41, 0x63, 0x5f, 0x2f, 0x9d}}
 
 // EnumeratePathsInFile dispatches through IMSImpExpHelpW's vtable slot 3.
-func (self *IMSImpExpHelpW) EnumeratePathsInFile(pszFileName foundation.PWSTR, pszKeyType foundation.PWSTR, dwMDBufferSize uint32, pszBuffer foundation.PWSTR, pdwMDRequiredBufferSize *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pszKeyType)), uintptr(dwMDBufferSize), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pdwMDRequiredBufferSize)))
-	return foundation.HRESULT(r1)
+func (self *IMSImpExpHelpW) EnumeratePathsInFile(pszFileName string, pszKeyType string, dwMDBufferSize uint32, pszBuffer foundation.PWSTR, pdwMDRequiredBufferSize *uint32) error {
+	_pszFileName := win32.UTF16Ptr(pszFileName)
+	_pszKeyType := win32.UTF16Ptr(pszKeyType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(_pszKeyType)), uintptr(dwMDBufferSize), uintptr(unsafe.Pointer(pszBuffer)), uintptr(unsafe.Pointer(pdwMDRequiredBufferSize)))
+	return win32.HRESULTError(int32(r1))
 }

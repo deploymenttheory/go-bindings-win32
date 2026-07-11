@@ -63,24 +63,27 @@ var (
 // HttpAddFragmentToCache calls HTTPAPI!HttpAddFragmentToCache.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpaddfragmenttocache
 // Minimum OS: windows6.0.6000.
-func HttpAddFragmentToCache(RequestQueueHandle foundation.HANDLE, UrlPrefix foundation.PWSTR, DataChunk *HTTP_DATA_CHUNK, CachePolicy *HTTP_CACHE_POLICY, Overlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpAddFragmentToCache.Addr(), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(UrlPrefix)), uintptr(unsafe.Pointer(DataChunk)), uintptr(unsafe.Pointer(CachePolicy)), uintptr(unsafe.Pointer(Overlapped)))
+func HttpAddFragmentToCache(RequestQueueHandle foundation.HANDLE, UrlPrefix string, DataChunk *HTTP_DATA_CHUNK, CachePolicy *HTTP_CACHE_POLICY, Overlapped *systemio.OVERLAPPED) uint32 {
+	_UrlPrefix := win32.UTF16Ptr(UrlPrefix)
+	r1, _, _ := syscall.SyscallN(procHttpAddFragmentToCache.Addr(), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(_UrlPrefix)), uintptr(unsafe.Pointer(DataChunk)), uintptr(unsafe.Pointer(CachePolicy)), uintptr(unsafe.Pointer(Overlapped)))
 	return uint32(r1)
 }
 
 // HttpAddUrl calls HTTPAPI!HttpAddUrl.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpaddurl
 // Minimum OS: windows6.0.6000.
-func HttpAddUrl(RequestQueueHandle foundation.HANDLE, FullyQualifiedUrl foundation.PWSTR, Reserved unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpAddUrl.Addr(), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(FullyQualifiedUrl)), uintptr(unsafe.Pointer(Reserved)))
+func HttpAddUrl(RequestQueueHandle foundation.HANDLE, FullyQualifiedUrl string) uint32 {
+	_FullyQualifiedUrl := win32.UTF16Ptr(FullyQualifiedUrl)
+	r1, _, _ := syscall.SyscallN(procHttpAddUrl.Addr(), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(_FullyQualifiedUrl)), 0)
 	return uint32(r1)
 }
 
 // HttpAddUrlToUrlGroup calls HTTPAPI!HttpAddUrlToUrlGroup.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpaddurltourlgroup
 // Minimum OS: windows6.0.6000.
-func HttpAddUrlToUrlGroup(UrlGroupId uint64, pFullyQualifiedUrl foundation.PWSTR, UrlContext uint64, Reserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpAddUrlToUrlGroup.Addr(), uintptr(UrlGroupId), uintptr(unsafe.Pointer(pFullyQualifiedUrl)), uintptr(UrlContext), uintptr(Reserved))
+func HttpAddUrlToUrlGroup(UrlGroupId uint64, pFullyQualifiedUrl string, UrlContext uint64) uint32 {
+	_pFullyQualifiedUrl := win32.UTF16Ptr(pFullyQualifiedUrl)
+	r1, _, _ := syscall.SyscallN(procHttpAddUrlToUrlGroup.Addr(), uintptr(UrlGroupId), uintptr(unsafe.Pointer(_pFullyQualifiedUrl)), uintptr(UrlContext), 0)
 	return uint32(r1)
 }
 
@@ -119,24 +122,25 @@ func HttpCloseUrlGroup(UrlGroupId uint64) uint32 {
 // HttpCreateHttpHandle calls HTTPAPI!HttpCreateHttpHandle.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpcreatehttphandle
 // Minimum OS: windows6.0.6000.
-func HttpCreateHttpHandle(RequestQueueHandle *foundation.HANDLE, Reserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpCreateHttpHandle.Addr(), uintptr(unsafe.Pointer(RequestQueueHandle)), uintptr(Reserved))
+func HttpCreateHttpHandle(RequestQueueHandle *foundation.HANDLE) uint32 {
+	r1, _, _ := syscall.SyscallN(procHttpCreateHttpHandle.Addr(), uintptr(unsafe.Pointer(RequestQueueHandle)), 0)
 	return uint32(r1)
 }
 
 // HttpCreateUrlGroup calls HTTPAPI!HttpCreateUrlGroup.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpcreateurlgroup
 // Minimum OS: windows6.0.6000.
-func HttpCreateUrlGroup(ServerSessionId uint64, pUrlGroupId *uint64, Reserved uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpCreateUrlGroup.Addr(), uintptr(ServerSessionId), uintptr(unsafe.Pointer(pUrlGroupId)), uintptr(Reserved))
+func HttpCreateUrlGroup(ServerSessionId uint64, pUrlGroupId *uint64) uint32 {
+	r1, _, _ := syscall.SyscallN(procHttpCreateUrlGroup.Addr(), uintptr(ServerSessionId), uintptr(unsafe.Pointer(pUrlGroupId)), 0)
 	return uint32(r1)
 }
 
 // HttpDeclarePush calls HTTPAPI!HttpDeclarePush.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpdeclarepush
 // Minimum OS: windows10.0.10240.
-func HttpDeclarePush(RequestQueueHandle foundation.HANDLE, RequestId uint64, Verb HTTP_VERB, Path foundation.PWSTR, Query foundation.PSTR, Headers *HTTP_REQUEST_HEADERS) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpDeclarePush.Addr(), uintptr(RequestQueueHandle), uintptr(RequestId), uintptr(Verb), uintptr(unsafe.Pointer(Path)), uintptr(unsafe.Pointer(Query)), uintptr(unsafe.Pointer(Headers)))
+func HttpDeclarePush(RequestQueueHandle foundation.HANDLE, RequestId uint64, Verb HTTP_VERB, Path string, Query foundation.PSTR, Headers *HTTP_REQUEST_HEADERS) uint32 {
+	_Path := win32.UTF16Ptr(Path)
+	r1, _, _ := syscall.SyscallN(procHttpDeclarePush.Addr(), uintptr(RequestQueueHandle), uintptr(RequestId), uintptr(Verb), uintptr(unsafe.Pointer(_Path)), uintptr(unsafe.Pointer(Query)), uintptr(unsafe.Pointer(Headers)))
 	return uint32(r1)
 }
 
@@ -150,38 +154,41 @@ func HttpDelegateRequestEx(RequestQueueHandle foundation.HANDLE, DelegateQueueHa
 // HttpDeleteServiceConfiguration calls HTTPAPI!HttpDeleteServiceConfiguration.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpdeleteserviceconfiguration
 // Minimum OS: windows6.0.6000.
-func HttpDeleteServiceConfiguration(ServiceHandle foundation.HANDLE, ConfigId HTTP_SERVICE_CONFIG_ID, pConfigInformation unsafe.Pointer, ConfigInformationLength uint32, pOverlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpDeleteServiceConfiguration.Addr(), uintptr(ServiceHandle), uintptr(ConfigId), uintptr(unsafe.Pointer(pConfigInformation)), uintptr(ConfigInformationLength), uintptr(unsafe.Pointer(pOverlapped)))
+func HttpDeleteServiceConfiguration(ConfigId HTTP_SERVICE_CONFIG_ID, pConfigInformation unsafe.Pointer, ConfigInformationLength uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procHttpDeleteServiceConfiguration.Addr(), 0, uintptr(ConfigId), uintptr(unsafe.Pointer(pConfigInformation)), uintptr(ConfigInformationLength), 0)
 	return uint32(r1)
 }
 
 // HttpFindUrlGroupId calls HTTPAPI!HttpFindUrlGroupId.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpfindurlgroupid
-func HttpFindUrlGroupId(FullyQualifiedUrl foundation.PWSTR, RequestQueueHandle foundation.HANDLE, UrlGroupId *uint64) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpFindUrlGroupId.Addr(), uintptr(unsafe.Pointer(FullyQualifiedUrl)), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(UrlGroupId)))
+func HttpFindUrlGroupId(FullyQualifiedUrl string, RequestQueueHandle foundation.HANDLE, UrlGroupId *uint64) uint32 {
+	_FullyQualifiedUrl := win32.UTF16Ptr(FullyQualifiedUrl)
+	r1, _, _ := syscall.SyscallN(procHttpFindUrlGroupId.Addr(), uintptr(unsafe.Pointer(_FullyQualifiedUrl)), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(UrlGroupId)))
 	return uint32(r1)
 }
 
 // HttpFlushResponseCache calls HTTPAPI!HttpFlushResponseCache.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpflushresponsecache
 // Minimum OS: windows6.0.6000.
-func HttpFlushResponseCache(RequestQueueHandle foundation.HANDLE, UrlPrefix foundation.PWSTR, Flags uint32, Overlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpFlushResponseCache.Addr(), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(UrlPrefix)), uintptr(Flags), uintptr(unsafe.Pointer(Overlapped)))
+func HttpFlushResponseCache(RequestQueueHandle foundation.HANDLE, UrlPrefix string, Flags uint32, Overlapped *systemio.OVERLAPPED) uint32 {
+	_UrlPrefix := win32.UTF16Ptr(UrlPrefix)
+	r1, _, _ := syscall.SyscallN(procHttpFlushResponseCache.Addr(), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(_UrlPrefix)), uintptr(Flags), uintptr(unsafe.Pointer(Overlapped)))
 	return uint32(r1)
 }
 
 // HttpIsFeatureSupported calls HTTPAPI!HttpIsFeatureSupported.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpisfeaturesupported
-func HttpIsFeatureSupported(FeatureId HTTP_FEATURE_ID) foundation.BOOL {
+func HttpIsFeatureSupported(FeatureId HTTP_FEATURE_ID) bool {
 	r1, _, _ := syscall.SyscallN(procHttpIsFeatureSupported.Addr(), uintptr(FeatureId))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // HttpPrepareUrl calls HTTPAPI!HttpPrepareUrl.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpprepareurl
 // Minimum OS: windows8.0.
-func HttpPrepareUrl(Reserved unsafe.Pointer, Flags uint32, Url foundation.PWSTR, PreparedUrl *foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpPrepareUrl.Addr(), uintptr(unsafe.Pointer(Reserved)), uintptr(Flags), uintptr(unsafe.Pointer(Url)), uintptr(unsafe.Pointer(PreparedUrl)))
+func HttpPrepareUrl(Url string, PreparedUrl *foundation.PWSTR) uint32 {
+	_Url := win32.UTF16Ptr(Url)
+	r1, _, _ := syscall.SyscallN(procHttpPrepareUrl.Addr(), 0, 0, uintptr(unsafe.Pointer(_Url)), uintptr(unsafe.Pointer(PreparedUrl)))
 	return uint32(r1)
 }
 
@@ -194,8 +201,8 @@ func HttpQueryRequestProperty(RequestQueueHandle foundation.HANDLE, Id uint64, P
 // HttpQueryRequestQueueProperty calls HTTPAPI!HttpQueryRequestQueueProperty.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpqueryrequestqueueproperty
 // Minimum OS: windows6.0.6000.
-func HttpQueryRequestQueueProperty(RequestQueueHandle foundation.HANDLE, Property HTTP_SERVER_PROPERTY, PropertyInformation unsafe.Pointer, PropertyInformationLength uint32, Reserved1 uint32, ReturnLength *uint32, Reserved2 unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpQueryRequestQueueProperty.Addr(), uintptr(RequestQueueHandle), uintptr(Property), uintptr(unsafe.Pointer(PropertyInformation)), uintptr(PropertyInformationLength), uintptr(Reserved1), uintptr(unsafe.Pointer(ReturnLength)), uintptr(unsafe.Pointer(Reserved2)))
+func HttpQueryRequestQueueProperty(RequestQueueHandle foundation.HANDLE, Property HTTP_SERVER_PROPERTY, PropertyInformation unsafe.Pointer, PropertyInformationLength uint32, ReturnLength *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procHttpQueryRequestQueueProperty.Addr(), uintptr(RequestQueueHandle), uintptr(Property), uintptr(unsafe.Pointer(PropertyInformation)), uintptr(PropertyInformationLength), 0, uintptr(unsafe.Pointer(ReturnLength)), 0)
 	return uint32(r1)
 }
 
@@ -210,8 +217,8 @@ func HttpQueryServerSessionProperty(ServerSessionId uint64, Property HTTP_SERVER
 // HttpQueryServiceConfiguration calls HTTPAPI!HttpQueryServiceConfiguration.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpqueryserviceconfiguration
 // Minimum OS: windows6.0.6000.
-func HttpQueryServiceConfiguration(ServiceHandle foundation.HANDLE, ConfigId HTTP_SERVICE_CONFIG_ID, pInput unsafe.Pointer, InputLength uint32, pOutput unsafe.Pointer, OutputLength uint32, pReturnLength *uint32, pOverlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpQueryServiceConfiguration.Addr(), uintptr(ServiceHandle), uintptr(ConfigId), uintptr(unsafe.Pointer(pInput)), uintptr(InputLength), uintptr(unsafe.Pointer(pOutput)), uintptr(OutputLength), uintptr(unsafe.Pointer(pReturnLength)), uintptr(unsafe.Pointer(pOverlapped)))
+func HttpQueryServiceConfiguration(ConfigId HTTP_SERVICE_CONFIG_ID, pInput unsafe.Pointer, InputLength uint32, pOutput unsafe.Pointer, OutputLength uint32, pReturnLength *uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procHttpQueryServiceConfiguration.Addr(), 0, uintptr(ConfigId), uintptr(unsafe.Pointer(pInput)), uintptr(InputLength), uintptr(unsafe.Pointer(pOutput)), uintptr(OutputLength), uintptr(unsafe.Pointer(pReturnLength)), 0)
 	return uint32(r1)
 }
 
@@ -226,8 +233,9 @@ func HttpQueryUrlGroupProperty(UrlGroupId uint64, Property HTTP_SERVER_PROPERTY,
 // HttpReadFragmentFromCache calls HTTPAPI!HttpReadFragmentFromCache.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpreadfragmentfromcache
 // Minimum OS: windows6.0.6000.
-func HttpReadFragmentFromCache(RequestQueueHandle foundation.HANDLE, UrlPrefix foundation.PWSTR, ByteRange *HTTP_BYTE_RANGE, Buffer unsafe.Pointer, BufferLength uint32, BytesRead *uint32, Overlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpReadFragmentFromCache.Addr(), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(UrlPrefix)), uintptr(unsafe.Pointer(ByteRange)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength), uintptr(unsafe.Pointer(BytesRead)), uintptr(unsafe.Pointer(Overlapped)))
+func HttpReadFragmentFromCache(RequestQueueHandle foundation.HANDLE, UrlPrefix string, ByteRange *HTTP_BYTE_RANGE, Buffer unsafe.Pointer, BufferLength uint32, BytesRead *uint32, Overlapped *systemio.OVERLAPPED) uint32 {
+	_UrlPrefix := win32.UTF16Ptr(UrlPrefix)
+	r1, _, _ := syscall.SyscallN(procHttpReadFragmentFromCache.Addr(), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(_UrlPrefix)), uintptr(unsafe.Pointer(ByteRange)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength), uintptr(unsafe.Pointer(BytesRead)), uintptr(unsafe.Pointer(Overlapped)))
 	return uint32(r1)
 }
 
@@ -258,32 +266,38 @@ func HttpReceiveRequestEntityBody(RequestQueueHandle foundation.HANDLE, RequestI
 // HttpRemoveUrl calls HTTPAPI!HttpRemoveUrl.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpremoveurl
 // Minimum OS: windows6.0.6000.
-func HttpRemoveUrl(RequestQueueHandle foundation.HANDLE, FullyQualifiedUrl foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpRemoveUrl.Addr(), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(FullyQualifiedUrl)))
+func HttpRemoveUrl(RequestQueueHandle foundation.HANDLE, FullyQualifiedUrl string) uint32 {
+	_FullyQualifiedUrl := win32.UTF16Ptr(FullyQualifiedUrl)
+	r1, _, _ := syscall.SyscallN(procHttpRemoveUrl.Addr(), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(_FullyQualifiedUrl)))
 	return uint32(r1)
 }
 
 // HttpRemoveUrlFromUrlGroup calls HTTPAPI!HttpRemoveUrlFromUrlGroup.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpremoveurlfromurlgroup
 // Minimum OS: windows6.0.6000.
-func HttpRemoveUrlFromUrlGroup(UrlGroupId uint64, pFullyQualifiedUrl foundation.PWSTR, Flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpRemoveUrlFromUrlGroup.Addr(), uintptr(UrlGroupId), uintptr(unsafe.Pointer(pFullyQualifiedUrl)), uintptr(Flags))
+func HttpRemoveUrlFromUrlGroup(UrlGroupId uint64, pFullyQualifiedUrl string, Flags uint32) uint32 {
+	_pFullyQualifiedUrl := win32.UTF16Ptr(pFullyQualifiedUrl)
+	r1, _, _ := syscall.SyscallN(procHttpRemoveUrlFromUrlGroup.Addr(), uintptr(UrlGroupId), uintptr(unsafe.Pointer(_pFullyQualifiedUrl)), uintptr(Flags))
 	return uint32(r1)
 }
 
 // HttpSendHttpResponse calls HTTPAPI!HttpSendHttpResponse.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpsendhttpresponse
 // Minimum OS: windows6.0.6000.
-func HttpSendHttpResponse(RequestQueueHandle foundation.HANDLE, RequestId uint64, Flags uint32, HttpResponse *HTTP_RESPONSE_V2, CachePolicy *HTTP_CACHE_POLICY, BytesSent *uint32, Reserved1 unsafe.Pointer, Reserved2 uint32, Overlapped *systemio.OVERLAPPED, LogData *HTTP_LOG_DATA) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpSendHttpResponse.Addr(), uintptr(RequestQueueHandle), uintptr(RequestId), uintptr(Flags), uintptr(unsafe.Pointer(HttpResponse)), uintptr(unsafe.Pointer(CachePolicy)), uintptr(unsafe.Pointer(BytesSent)), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2), uintptr(unsafe.Pointer(Overlapped)), uintptr(unsafe.Pointer(LogData)))
+func HttpSendHttpResponse(RequestQueueHandle foundation.HANDLE, RequestId uint64, Flags uint32, HttpResponse *HTTP_RESPONSE_V2, CachePolicy *HTTP_CACHE_POLICY, BytesSent *uint32, Overlapped *systemio.OVERLAPPED, LogData *HTTP_LOG_DATA) uint32 {
+	r1, _, _ := syscall.SyscallN(procHttpSendHttpResponse.Addr(), uintptr(RequestQueueHandle), uintptr(RequestId), uintptr(Flags), uintptr(unsafe.Pointer(HttpResponse)), uintptr(unsafe.Pointer(CachePolicy)), uintptr(unsafe.Pointer(BytesSent)), 0, 0, uintptr(unsafe.Pointer(Overlapped)), uintptr(unsafe.Pointer(LogData)))
 	return uint32(r1)
 }
 
 // HttpSendResponseEntityBody calls HTTPAPI!HttpSendResponseEntityBody.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpsendresponseentitybody
 // Minimum OS: windows6.0.6000.
-func HttpSendResponseEntityBody(RequestQueueHandle foundation.HANDLE, RequestId uint64, Flags uint32, EntityChunkCount uint16, EntityChunks *HTTP_DATA_CHUNK, BytesSent *uint32, Reserved1 unsafe.Pointer, Reserved2 uint32, Overlapped *systemio.OVERLAPPED, LogData *HTTP_LOG_DATA) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpSendResponseEntityBody.Addr(), uintptr(RequestQueueHandle), uintptr(RequestId), uintptr(Flags), uintptr(EntityChunkCount), uintptr(unsafe.Pointer(EntityChunks)), uintptr(unsafe.Pointer(BytesSent)), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2), uintptr(unsafe.Pointer(Overlapped)), uintptr(unsafe.Pointer(LogData)))
+func HttpSendResponseEntityBody(RequestQueueHandle foundation.HANDLE, RequestId uint64, Flags uint32, EntityChunks []HTTP_DATA_CHUNK, BytesSent *uint32, Overlapped *systemio.OVERLAPPED, LogData *HTTP_LOG_DATA) uint32 {
+	var _EntityChunks *HTTP_DATA_CHUNK
+	if len(EntityChunks) > 0 {
+		_EntityChunks = &EntityChunks[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpSendResponseEntityBody.Addr(), uintptr(RequestQueueHandle), uintptr(RequestId), uintptr(Flags), uintptr(len(EntityChunks)), uintptr(unsafe.Pointer(_EntityChunks)), uintptr(unsafe.Pointer(BytesSent)), 0, 0, uintptr(unsafe.Pointer(Overlapped)), uintptr(unsafe.Pointer(LogData)))
 	return uint32(r1)
 }
 
@@ -297,8 +311,8 @@ func HttpSetRequestProperty(RequestQueueHandle foundation.HANDLE, Id uint64, Pro
 // HttpSetRequestQueueProperty calls HTTPAPI!HttpSetRequestQueueProperty.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpsetrequestqueueproperty
 // Minimum OS: windows6.0.6000.
-func HttpSetRequestQueueProperty(RequestQueueHandle foundation.HANDLE, Property HTTP_SERVER_PROPERTY, PropertyInformation unsafe.Pointer, PropertyInformationLength uint32, Reserved1 uint32, Reserved2 unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpSetRequestQueueProperty.Addr(), uintptr(RequestQueueHandle), uintptr(Property), uintptr(unsafe.Pointer(PropertyInformation)), uintptr(PropertyInformationLength), uintptr(Reserved1), uintptr(unsafe.Pointer(Reserved2)))
+func HttpSetRequestQueueProperty(RequestQueueHandle foundation.HANDLE, Property HTTP_SERVER_PROPERTY, PropertyInformation unsafe.Pointer, PropertyInformationLength uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procHttpSetRequestQueueProperty.Addr(), uintptr(RequestQueueHandle), uintptr(Property), uintptr(unsafe.Pointer(PropertyInformation)), uintptr(PropertyInformationLength), 0, 0)
 	return uint32(r1)
 }
 
@@ -313,8 +327,8 @@ func HttpSetServerSessionProperty(ServerSessionId uint64, Property HTTP_SERVER_P
 // HttpSetServiceConfiguration calls HTTPAPI!HttpSetServiceConfiguration.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpsetserviceconfiguration
 // Minimum OS: windows5.1.2600.
-func HttpSetServiceConfiguration(ServiceHandle foundation.HANDLE, ConfigId HTTP_SERVICE_CONFIG_ID, pConfigInformation unsafe.Pointer, ConfigInformationLength uint32, pOverlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpSetServiceConfiguration.Addr(), uintptr(ServiceHandle), uintptr(ConfigId), uintptr(unsafe.Pointer(pConfigInformation)), uintptr(ConfigInformationLength), uintptr(unsafe.Pointer(pOverlapped)))
+func HttpSetServiceConfiguration(ConfigId HTTP_SERVICE_CONFIG_ID, pConfigInformation unsafe.Pointer, ConfigInformationLength uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procHttpSetServiceConfiguration.Addr(), 0, uintptr(ConfigId), uintptr(unsafe.Pointer(pConfigInformation)), uintptr(ConfigInformationLength), 0)
 	return uint32(r1)
 }
 
@@ -337,16 +351,16 @@ func HttpShutdownRequestQueue(RequestQueueHandle foundation.HANDLE) uint32 {
 // HttpTerminate calls HTTPAPI!HttpTerminate.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpterminate
 // Minimum OS: windows6.0.6000.
-func HttpTerminate(Flags HTTP_INITIALIZE, pReserved unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpTerminate.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(pReserved)))
+func HttpTerminate(Flags HTTP_INITIALIZE) uint32 {
+	r1, _, _ := syscall.SyscallN(procHttpTerminate.Addr(), uintptr(Flags), 0)
 	return uint32(r1)
 }
 
 // HttpUpdateServiceConfiguration calls HTTPAPI!HttpUpdateServiceConfiguration.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpupdateserviceconfiguration
 // Minimum OS: windows10.0.15063.
-func HttpUpdateServiceConfiguration(Handle foundation.HANDLE, ConfigId HTTP_SERVICE_CONFIG_ID, ConfigInfo unsafe.Pointer, ConfigInfoLength uint32, Overlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpUpdateServiceConfiguration.Addr(), uintptr(Handle), uintptr(ConfigId), uintptr(unsafe.Pointer(ConfigInfo)), uintptr(ConfigInfoLength), uintptr(unsafe.Pointer(Overlapped)))
+func HttpUpdateServiceConfiguration(ConfigId HTTP_SERVICE_CONFIG_ID, ConfigInfo unsafe.Pointer, ConfigInfoLength uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procHttpUpdateServiceConfiguration.Addr(), 0, uintptr(ConfigId), uintptr(unsafe.Pointer(ConfigInfo)), uintptr(ConfigInfoLength), 0)
 	return uint32(r1)
 }
 
@@ -368,7 +382,7 @@ func HttpWaitForDisconnect(RequestQueueHandle foundation.HANDLE, ConnectionId ui
 
 // HttpWaitForDisconnectEx calls HTTPAPI!HttpWaitForDisconnectEx.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpwaitfordisconnectex
-func HttpWaitForDisconnectEx(RequestQueueHandle foundation.HANDLE, ConnectionId uint64, Reserved uint32, Overlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpWaitForDisconnectEx.Addr(), uintptr(RequestQueueHandle), uintptr(ConnectionId), uintptr(Reserved), uintptr(unsafe.Pointer(Overlapped)))
+func HttpWaitForDisconnectEx(RequestQueueHandle foundation.HANDLE, ConnectionId uint64, Overlapped *systemio.OVERLAPPED) uint32 {
+	r1, _, _ := syscall.SyscallN(procHttpWaitForDisconnectEx.Addr(), uintptr(RequestQueueHandle), uintptr(ConnectionId), 0, uintptr(unsafe.Pointer(Overlapped)))
 	return uint32(r1)
 }

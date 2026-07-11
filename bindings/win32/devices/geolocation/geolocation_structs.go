@@ -23,8 +23,8 @@ type DispCivicAddressReport struct {
 type DispLatLongReport struct {
 }
 
-// GNSS_AGNSS_INJECT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// GNSS_AGNSS_INJECT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type GNSS_AGNSS_INJECT_Anonymous_e__Union struct {
 	Data [16]uint64
 }
@@ -86,8 +86,8 @@ type GNSS_BREADCRUMBING_PARAM struct {
 	Unused                       [512]byte
 }
 
-// GNSS_BREADCRUMB_LIST_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// GNSS_BREADCRUMB_LIST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type GNSS_BREADCRUMB_LIST_Anonymous_e__Union struct {
 	Data [250]uint64
 }
@@ -206,8 +206,8 @@ type GNSS_ERRORINFO struct {
 	Unused           [512]byte
 }
 
-// GNSS_EVENT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// GNSS_EVENT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type GNSS_EVENT_Anonymous_e__Union struct {
 	Data [276]uint64
 }
@@ -221,8 +221,8 @@ type GNSS_EVENT struct {
 	Anonymous     GNSS_EVENT_Anonymous_e__Union
 }
 
-// GNSS_EVENT_2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// GNSS_EVENT_2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type GNSS_EVENT_2_Anonymous_e__Union struct {
 	Data [284]uint64
 }
@@ -330,8 +330,8 @@ type GNSS_FIXDATA_SATELLITE struct {
 	SatelliteArray [64]GNSS_SATELLITEINFO
 }
 
-// GNSS_FIXSESSION_PARAM_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// GNSS_FIXSESSION_PARAM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type GNSS_FIXSESSION_PARAM_Anonymous_e__Union struct {
 	Data [67]uint32
 }
@@ -391,8 +391,8 @@ type GNSS_GEOFENCE_DELETE_PARAM struct {
 	Unused     [512]byte
 }
 
-// GNSS_GEOREGION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// GNSS_GEOREGION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type GNSS_GEOREGION_Anonymous_e__Union struct {
 	Data [64]uint64
 }
@@ -415,8 +415,8 @@ type GNSS_LKGFIX_PARAM struct {
 	Version uint32
 }
 
-// GNSS_NI_REQUEST_PARAM_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// GNSS_NI_REQUEST_PARAM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type GNSS_NI_REQUEST_PARAM_Anonymous_e__Union struct {
 	Data [327]uint32
 }

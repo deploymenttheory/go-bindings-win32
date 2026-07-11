@@ -23,87 +23,97 @@ type IDynamicPortMapping struct {
 var IID_IDynamicPortMapping = win32.GUID{Data1: 0x4fc80282, Data2: 0x23b6, Data3: 0x4378, Data4: [8]byte{0x9a, 0x27, 0xcd, 0x8f, 0x17, 0xc9, 0x40, 0x0c}}
 
 // Get_ExternalIPAddress dispatches through IDynamicPortMapping's vtable slot 7.
-func (self *IDynamicPortMapping) Get_ExternalIPAddress(pVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IDynamicPortMapping) Get_ExternalIPAddress() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_RemoteHost dispatches through IDynamicPortMapping's vtable slot 8.
-func (self *IDynamicPortMapping) Get_RemoteHost(pVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IDynamicPortMapping) Get_RemoteHost() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_ExternalPort dispatches through IDynamicPortMapping's vtable slot 9.
-func (self *IDynamicPortMapping) Get_ExternalPort(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IDynamicPortMapping) Get_ExternalPort() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Protocol dispatches through IDynamicPortMapping's vtable slot 10.
-func (self *IDynamicPortMapping) Get_Protocol(pVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IDynamicPortMapping) Get_Protocol() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_InternalPort dispatches through IDynamicPortMapping's vtable slot 11.
-func (self *IDynamicPortMapping) Get_InternalPort(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IDynamicPortMapping) Get_InternalPort() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_InternalClient dispatches through IDynamicPortMapping's vtable slot 12.
-func (self *IDynamicPortMapping) Get_InternalClient(pVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IDynamicPortMapping) Get_InternalClient() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Enabled dispatches through IDynamicPortMapping's vtable slot 13.
-func (self *IDynamicPortMapping) Get_Enabled(pVal *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IDynamicPortMapping) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _pVal foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Description dispatches through IDynamicPortMapping's vtable slot 14.
-func (self *IDynamicPortMapping) Get_Description(pVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IDynamicPortMapping) Get_Description() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_LeaseDuration dispatches through IDynamicPortMapping's vtable slot 15.
-func (self *IDynamicPortMapping) Get_LeaseDuration(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IDynamicPortMapping) Get_LeaseDuration() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // RenewLease dispatches through IDynamicPortMapping's vtable slot 16.
-func (self *IDynamicPortMapping) RenewLease(lLeaseDurationDesired int32, pLeaseDurationReturned *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lLeaseDurationDesired), uintptr(unsafe.Pointer(pLeaseDurationReturned)))
-	return foundation.HRESULT(r1)
+func (self *IDynamicPortMapping) RenewLease(lLeaseDurationDesired int32) (int32, error) {
+	var _pLeaseDurationReturned int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(lLeaseDurationDesired), uintptr(unsafe.Pointer(&_pLeaseDurationReturned)))
+	return _pLeaseDurationReturned, win32.HRESULTError(int32(r1))
 }
 
 // EditInternalClient dispatches through IDynamicPortMapping's vtable slot 17.
-func (self *IDynamicPortMapping) EditInternalClient(bstrInternalClient foundation.BSTR) foundation.HRESULT {
+func (self *IDynamicPortMapping) EditInternalClient(bstrInternalClient foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInternalClient)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Enable dispatches through IDynamicPortMapping's vtable slot 18.
-func (self *IDynamicPortMapping) Enable(vb foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IDynamicPortMapping) Enable(vb foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(vb))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EditDescription dispatches through IDynamicPortMapping's vtable slot 19.
-func (self *IDynamicPortMapping) EditDescription(bstrDescription foundation.BSTR) foundation.HRESULT {
+func (self *IDynamicPortMapping) EditDescription(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EditInternalPort dispatches through IDynamicPortMapping's vtable slot 20.
-func (self *IDynamicPortMapping) EditInternalPort(lInternalPort int32) foundation.HRESULT {
+func (self *IDynamicPortMapping) EditInternalPort(lInternalPort int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(lInternalPort))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b60de00f-156e-4e8d-9ec1-3a2342c10899
@@ -115,33 +125,37 @@ type IDynamicPortMappingCollection struct {
 var IID_IDynamicPortMappingCollection = win32.GUID{Data1: 0xb60de00f, Data2: 0x156e, Data3: 0x4e8d, Data4: [8]byte{0x9e, 0xc1, 0x3a, 0x23, 0x42, 0xc1, 0x08, 0x99}}
 
 // Get__NewEnum dispatches through IDynamicPortMappingCollection's vtable slot 7.
-func (self *IDynamicPortMappingCollection) Get__NewEnum(pVal **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IDynamicPortMappingCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pVal *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Item dispatches through IDynamicPortMappingCollection's vtable slot 8.
-func (self *IDynamicPortMappingCollection) Get_Item(bstrRemoteHost foundation.BSTR, lExternalPort int32, bstrProtocol foundation.BSTR, ppDPM **IDynamicPortMapping) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRemoteHost)), uintptr(lExternalPort), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(ppDPM)))
-	return foundation.HRESULT(r1)
+func (self *IDynamicPortMappingCollection) Get_Item(bstrRemoteHost foundation.BSTR, lExternalPort int32, bstrProtocol foundation.BSTR) (*IDynamicPortMapping, error) {
+	var _ppDPM *IDynamicPortMapping
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRemoteHost)), uintptr(lExternalPort), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(&_ppDPM)))
+	return _ppDPM, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IDynamicPortMappingCollection's vtable slot 9.
-func (self *IDynamicPortMappingCollection) Get_Count(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IDynamicPortMappingCollection) Get_Count() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through IDynamicPortMappingCollection's vtable slot 10.
-func (self *IDynamicPortMappingCollection) Remove(bstrRemoteHost foundation.BSTR, lExternalPort int32, bstrProtocol foundation.BSTR) foundation.HRESULT {
+func (self *IDynamicPortMappingCollection) Remove(bstrRemoteHost foundation.BSTR, lExternalPort int32, bstrProtocol foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRemoteHost)), uintptr(lExternalPort), uintptr(unsafe.Pointer(bstrProtocol)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through IDynamicPortMappingCollection's vtable slot 11.
-func (self *IDynamicPortMappingCollection) Add(bstrRemoteHost foundation.BSTR, lExternalPort int32, bstrProtocol foundation.BSTR, lInternalPort int32, bstrInternalClient foundation.BSTR, bEnabled foundation.VARIANT_BOOL, bstrDescription foundation.BSTR, lLeaseDuration int32, ppDPM **IDynamicPortMapping) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRemoteHost)), uintptr(lExternalPort), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(lInternalPort), uintptr(unsafe.Pointer(bstrInternalClient)), uintptr(bEnabled), uintptr(unsafe.Pointer(bstrDescription)), uintptr(lLeaseDuration), uintptr(unsafe.Pointer(ppDPM)))
-	return foundation.HRESULT(r1)
+func (self *IDynamicPortMappingCollection) Add(bstrRemoteHost foundation.BSTR, lExternalPort int32, bstrProtocol foundation.BSTR, lInternalPort int32, bstrInternalClient foundation.BSTR, bEnabled foundation.VARIANT_BOOL, bstrDescription foundation.BSTR, lLeaseDuration int32) (*IDynamicPortMapping, error) {
+	var _ppDPM *IDynamicPortMapping
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrRemoteHost)), uintptr(lExternalPort), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(lInternalPort), uintptr(unsafe.Pointer(bstrInternalClient)), uintptr(bEnabled), uintptr(unsafe.Pointer(bstrDescription)), uintptr(lLeaseDuration), uintptr(unsafe.Pointer(&_ppDPM)))
+	return _ppDPM, win32.HRESULTError(int32(r1))
 }
 
 // IID: c08956a0-1cd3-11d1-b1c5-00805fc1270e
@@ -153,27 +167,27 @@ type IEnumNetConnection struct {
 var IID_IEnumNetConnection = win32.GUID{Data1: 0xc08956a0, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetConnection's vtable slot 3.
-func (self *IEnumNetConnection) Next(celt uint32, rgelt **INetConnection, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumNetConnection) Next(celt uint32, rgelt **INetConnection, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumNetConnection's vtable slot 4.
-func (self *IEnumNetConnection) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumNetConnection) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumNetConnection's vtable slot 5.
-func (self *IEnumNetConnection) Reset() foundation.HRESULT {
+func (self *IEnumNetConnection) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumNetConnection's vtable slot 6.
-func (self *IEnumNetConnection) Clone(ppenum **IEnumNetConnection) foundation.HRESULT {
+func (self *IEnumNetConnection) Clone(ppenum **IEnumNetConnection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumNetSharingEveryConnection: https://learn.microsoft.com/windows/win32/api/netcon/nn-netcon-ienumnetsharingeveryconnection
@@ -186,27 +200,27 @@ type IEnumNetSharingEveryConnection struct {
 var IID_IEnumNetSharingEveryConnection = win32.GUID{Data1: 0xc08956b8, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetSharingEveryConnection's vtable slot 3.
-func (self *IEnumNetSharingEveryConnection) Next(celt uint32, rgVar *systemvariant.VARIANT, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumNetSharingEveryConnection) Next(celt uint32, rgVar *systemvariant.VARIANT, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgVar)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumNetSharingEveryConnection's vtable slot 4.
-func (self *IEnumNetSharingEveryConnection) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumNetSharingEveryConnection) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumNetSharingEveryConnection's vtable slot 5.
-func (self *IEnumNetSharingEveryConnection) Reset() foundation.HRESULT {
+func (self *IEnumNetSharingEveryConnection) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumNetSharingEveryConnection's vtable slot 6.
-func (self *IEnumNetSharingEveryConnection) Clone(ppenum **IEnumNetSharingEveryConnection) foundation.HRESULT {
+func (self *IEnumNetSharingEveryConnection) Clone(ppenum **IEnumNetSharingEveryConnection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumNetSharingPortMapping: https://learn.microsoft.com/windows/win32/api/netcon/nn-netcon-ienumnetsharingportmapping
@@ -219,27 +233,27 @@ type IEnumNetSharingPortMapping struct {
 var IID_IEnumNetSharingPortMapping = win32.GUID{Data1: 0xc08956b0, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetSharingPortMapping's vtable slot 3.
-func (self *IEnumNetSharingPortMapping) Next(celt uint32, rgVar *systemvariant.VARIANT, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumNetSharingPortMapping) Next(celt uint32, rgVar *systemvariant.VARIANT, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgVar)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumNetSharingPortMapping's vtable slot 4.
-func (self *IEnumNetSharingPortMapping) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumNetSharingPortMapping) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumNetSharingPortMapping's vtable slot 5.
-func (self *IEnumNetSharingPortMapping) Reset() foundation.HRESULT {
+func (self *IEnumNetSharingPortMapping) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumNetSharingPortMapping's vtable slot 6.
-func (self *IEnumNetSharingPortMapping) Clone(ppenum **IEnumNetSharingPortMapping) foundation.HRESULT {
+func (self *IEnumNetSharingPortMapping) Clone(ppenum **IEnumNetSharingPortMapping) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumNetSharingPrivateConnection: https://learn.microsoft.com/windows/win32/api/netcon/nn-netcon-ienumnetsharingprivateconnection
@@ -252,27 +266,27 @@ type IEnumNetSharingPrivateConnection struct {
 var IID_IEnumNetSharingPrivateConnection = win32.GUID{Data1: 0xc08956b5, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetSharingPrivateConnection's vtable slot 3.
-func (self *IEnumNetSharingPrivateConnection) Next(celt uint32, rgVar *systemvariant.VARIANT, pCeltFetched *uint32) foundation.HRESULT {
+func (self *IEnumNetSharingPrivateConnection) Next(celt uint32, rgVar *systemvariant.VARIANT, pCeltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgVar)), uintptr(unsafe.Pointer(pCeltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumNetSharingPrivateConnection's vtable slot 4.
-func (self *IEnumNetSharingPrivateConnection) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumNetSharingPrivateConnection) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumNetSharingPrivateConnection's vtable slot 5.
-func (self *IEnumNetSharingPrivateConnection) Reset() foundation.HRESULT {
+func (self *IEnumNetSharingPrivateConnection) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumNetSharingPrivateConnection's vtable slot 6.
-func (self *IEnumNetSharingPrivateConnection) Clone(ppenum **IEnumNetSharingPrivateConnection) foundation.HRESULT {
+func (self *IEnumNetSharingPrivateConnection) Clone(ppenum **IEnumNetSharingPrivateConnection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumNetSharingPublicConnection: https://learn.microsoft.com/windows/win32/api/netcon/nn-netcon-ienumnetsharingpublicconnection
@@ -285,27 +299,27 @@ type IEnumNetSharingPublicConnection struct {
 var IID_IEnumNetSharingPublicConnection = win32.GUID{Data1: 0xc08956b4, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetSharingPublicConnection's vtable slot 3.
-func (self *IEnumNetSharingPublicConnection) Next(celt uint32, rgVar *systemvariant.VARIANT, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumNetSharingPublicConnection) Next(celt uint32, rgVar *systemvariant.VARIANT, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgVar)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumNetSharingPublicConnection's vtable slot 4.
-func (self *IEnumNetSharingPublicConnection) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumNetSharingPublicConnection) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumNetSharingPublicConnection's vtable slot 5.
-func (self *IEnumNetSharingPublicConnection) Reset() foundation.HRESULT {
+func (self *IEnumNetSharingPublicConnection) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumNetSharingPublicConnection's vtable slot 6.
-func (self *IEnumNetSharingPublicConnection) Clone(ppenum **IEnumNetSharingPublicConnection) foundation.HRESULT {
+func (self *IEnumNetSharingPublicConnection) Clone(ppenum **IEnumNetSharingPublicConnection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INATEventManager: https://learn.microsoft.com/windows/win32/api/natupnp/nn-natupnp-inateventmanager
@@ -318,15 +332,15 @@ type INATEventManager struct {
 var IID_INATEventManager = win32.GUID{Data1: 0x624bd588, Data2: 0x9060, Data3: 0x4109, Data4: [8]byte{0xb0, 0xb0, 0x1a, 0xdb, 0xbc, 0xac, 0x32, 0xdf}}
 
 // Put_ExternalIPAddressCallback dispatches through INATEventManager's vtable slot 7.
-func (self *INATEventManager) Put_ExternalIPAddressCallback(pUnk *systemcom.IUnknown) foundation.HRESULT {
+func (self *INATEventManager) Put_ExternalIPAddressCallback(pUnk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_NumberOfEntriesCallback dispatches through INATEventManager's vtable slot 8.
-func (self *INATEventManager) Put_NumberOfEntriesCallback(pUnk *systemcom.IUnknown) foundation.HRESULT {
+func (self *INATEventManager) Put_NumberOfEntriesCallback(pUnk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INATExternalIPAddressCallback: https://learn.microsoft.com/windows/win32/api/natupnp/nn-natupnp-inatexternalipaddresscallback
@@ -339,9 +353,9 @@ type INATExternalIPAddressCallback struct {
 var IID_INATExternalIPAddressCallback = win32.GUID{Data1: 0x9c416740, Data2: 0xa34e, Data3: 0x446f, Data4: [8]byte{0xba, 0x06, 0xab, 0xd0, 0x4c, 0x31, 0x49, 0xae}}
 
 // NewExternalIPAddress dispatches through INATExternalIPAddressCallback's vtable slot 3.
-func (self *INATExternalIPAddressCallback) NewExternalIPAddress(bstrNewExternalIPAddress foundation.BSTR) foundation.HRESULT {
+func (self *INATExternalIPAddressCallback) NewExternalIPAddress(bstrNewExternalIPAddress foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrNewExternalIPAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INATNumberOfEntriesCallback: https://learn.microsoft.com/windows/win32/api/natupnp/nn-natupnp-inatnumberofentriescallback
@@ -354,9 +368,9 @@ type INATNumberOfEntriesCallback struct {
 var IID_INATNumberOfEntriesCallback = win32.GUID{Data1: 0xc83a0a74, Data2: 0x91ee, Data3: 0x41b6, Data4: [8]byte{0xb6, 0x7a, 0x67, 0xe0, 0xf0, 0x0b, 0xbd, 0x78}}
 
 // NewNumberOfEntries dispatches through INATNumberOfEntriesCallback's vtable slot 3.
-func (self *INATNumberOfEntriesCallback) NewNumberOfEntries(lNewNumberOfEntries int32) foundation.HRESULT {
+func (self *INATNumberOfEntriesCallback) NewNumberOfEntries(lNewNumberOfEntries int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lNewNumberOfEntries))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INetConnection: https://learn.microsoft.com/windows/win32/api/netcon/nn-netcon-inetconnection
@@ -369,45 +383,47 @@ type INetConnection struct {
 var IID_INetConnection = win32.GUID{Data1: 0xc08956a1, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Connect dispatches through INetConnection's vtable slot 3.
-func (self *INetConnection) Connect() foundation.HRESULT {
+func (self *INetConnection) Connect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disconnect dispatches through INetConnection's vtable slot 4.
-func (self *INetConnection) Disconnect() foundation.HRESULT {
+func (self *INetConnection) Disconnect() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through INetConnection's vtable slot 5.
-func (self *INetConnection) Delete() foundation.HRESULT {
+func (self *INetConnection) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Duplicate dispatches through INetConnection's vtable slot 6.
-func (self *INetConnection) Duplicate(pszwDuplicateName foundation.PWSTR, ppCon **INetConnection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszwDuplicateName)), uintptr(unsafe.Pointer(ppCon)))
-	return foundation.HRESULT(r1)
+func (self *INetConnection) Duplicate(pszwDuplicateName string, ppCon **INetConnection) error {
+	_pszwDuplicateName := win32.UTF16Ptr(pszwDuplicateName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszwDuplicateName)), uintptr(unsafe.Pointer(ppCon)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperties dispatches through INetConnection's vtable slot 7.
-func (self *INetConnection) GetProperties(ppProps **NETCON_PROPERTIES) foundation.HRESULT {
+func (self *INetConnection) GetProperties(ppProps **NETCON_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUiObjectClassId dispatches through INetConnection's vtable slot 8.
-func (self *INetConnection) GetUiObjectClassId(pclsid *win32.GUID) foundation.HRESULT {
+func (self *INetConnection) GetUiObjectClassId(pclsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pclsid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Rename dispatches through INetConnection's vtable slot 9.
-func (self *INetConnection) Rename(pszwNewName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszwNewName)))
-	return foundation.HRESULT(r1)
+func (self *INetConnection) Rename(pszwNewName string) error {
+	_pszwNewName := win32.UTF16Ptr(pszwNewName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszwNewName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c08956a3-1cd3-11d1-b1c5-00805fc1270e
@@ -419,21 +435,21 @@ type INetConnectionConnectUi struct {
 var IID_INetConnectionConnectUi = win32.GUID{Data1: 0xc08956a3, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // SetConnection dispatches through INetConnectionConnectUi's vtable slot 3.
-func (self *INetConnectionConnectUi) SetConnection(pCon *INetConnection) foundation.HRESULT {
+func (self *INetConnectionConnectUi) SetConnection(pCon *INetConnection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCon)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Connect dispatches through INetConnectionConnectUi's vtable slot 4.
-func (self *INetConnectionConnectUi) Connect(hwndParent foundation.HWND, dwFlags uint32) foundation.HRESULT {
+func (self *INetConnectionConnectUi) Connect(hwndParent foundation.HWND, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disconnect dispatches through INetConnectionConnectUi's vtable slot 5.
-func (self *INetConnectionConnectUi) Disconnect(hwndParent foundation.HWND, dwFlags uint32) foundation.HRESULT {
+func (self *INetConnectionConnectUi) Disconnect(hwndParent foundation.HWND, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c08956a2-1cd3-11d1-b1c5-00805fc1270e
@@ -445,9 +461,9 @@ type INetConnectionManager struct {
 var IID_INetConnectionManager = win32.GUID{Data1: 0xc08956a2, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // EnumConnections dispatches through INetConnectionManager's vtable slot 3.
-func (self *INetConnectionManager) EnumConnections(Flags NETCONMGR_ENUM_FLAGS, ppEnum **IEnumNetConnection) foundation.HRESULT {
+func (self *INetConnectionManager) EnumConnections(Flags NETCONMGR_ENUM_FLAGS, ppEnum **IEnumNetConnection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INetConnectionProps: https://learn.microsoft.com/windows/win32/api/netcon/nn-netcon-inetconnectionprops
@@ -460,39 +476,45 @@ type INetConnectionProps struct {
 var IID_INetConnectionProps = win32.GUID{Data1: 0xf4277c95, Data2: 0xce5b, Data3: 0x463d, Data4: [8]byte{0x81, 0x67, 0x56, 0x62, 0xd9, 0xbc, 0xaa, 0x72}}
 
 // Get_Guid dispatches through INetConnectionProps's vtable slot 7.
-func (self *INetConnectionProps) Get_Guid(pbstrGuid *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGuid)))
-	return foundation.HRESULT(r1)
+func (self *INetConnectionProps) Get_Guid() (foundation.BSTR, error) {
+	var _pbstrGuid foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrGuid)))
+	return _pbstrGuid, win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through INetConnectionProps's vtable slot 8.
-func (self *INetConnectionProps) Get_Name(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *INetConnectionProps) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Get_DeviceName dispatches through INetConnectionProps's vtable slot 9.
-func (self *INetConnectionProps) Get_DeviceName(pbstrDeviceName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDeviceName)))
-	return foundation.HRESULT(r1)
+func (self *INetConnectionProps) Get_DeviceName() (foundation.BSTR, error) {
+	var _pbstrDeviceName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrDeviceName)))
+	return _pbstrDeviceName, win32.HRESULTError(int32(r1))
 }
 
 // Get_Status dispatches through INetConnectionProps's vtable slot 10.
-func (self *INetConnectionProps) Get_Status(pStatus *NETCON_STATUS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)))
-	return foundation.HRESULT(r1)
+func (self *INetConnectionProps) Get_Status() (NETCON_STATUS, error) {
+	var _pStatus NETCON_STATUS
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pStatus)))
+	return _pStatus, win32.HRESULTError(int32(r1))
 }
 
 // Get_MediaType dispatches through INetConnectionProps's vtable slot 11.
-func (self *INetConnectionProps) Get_MediaType(pMediaType *NETCON_MEDIATYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMediaType)))
-	return foundation.HRESULT(r1)
+func (self *INetConnectionProps) Get_MediaType() (NETCON_MEDIATYPE, error) {
+	var _pMediaType NETCON_MEDIATYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pMediaType)))
+	return _pMediaType, win32.HRESULTError(int32(r1))
 }
 
 // Get_Characteristics dispatches through INetConnectionProps's vtable slot 12.
-func (self *INetConnectionProps) Get_Characteristics(pdwFlags *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+func (self *INetConnectionProps) Get_Characteristics() (uint32, error) {
+	var _pdwFlags uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwFlags)))
+	return _pdwFlags, win32.HRESULTError(int32(r1))
 }
 
 // INetFwAuthorizedApplication: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwauthorizedapplication
@@ -505,75 +527,81 @@ type INetFwAuthorizedApplication struct {
 var IID_INetFwAuthorizedApplication = win32.GUID{Data1: 0xb5e64ffa, Data2: 0xc2c5, Data3: 0x444e, Data4: [8]byte{0xa3, 0x01, 0xfb, 0x5e, 0x00, 0x01, 0x80, 0x50}}
 
 // Get_Name dispatches through INetFwAuthorizedApplication's vtable slot 7.
-func (self *INetFwAuthorizedApplication) Get_Name(name *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+func (self *INetFwAuthorizedApplication) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
+	return _name, win32.HRESULTError(int32(r1))
 }
 
 // Put_Name dispatches through INetFwAuthorizedApplication's vtable slot 8.
-func (self *INetFwAuthorizedApplication) Put_Name(name foundation.BSTR) foundation.HRESULT {
+func (self *INetFwAuthorizedApplication) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ProcessImageFileName dispatches through INetFwAuthorizedApplication's vtable slot 9.
-func (self *INetFwAuthorizedApplication) Get_ProcessImageFileName(imageFileName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageFileName)))
-	return foundation.HRESULT(r1)
+func (self *INetFwAuthorizedApplication) Get_ProcessImageFileName() (foundation.BSTR, error) {
+	var _imageFileName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_imageFileName)))
+	return _imageFileName, win32.HRESULTError(int32(r1))
 }
 
 // Put_ProcessImageFileName dispatches through INetFwAuthorizedApplication's vtable slot 10.
-func (self *INetFwAuthorizedApplication) Put_ProcessImageFileName(imageFileName foundation.BSTR) foundation.HRESULT {
+func (self *INetFwAuthorizedApplication) Put_ProcessImageFileName(imageFileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageFileName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IpVersion dispatches through INetFwAuthorizedApplication's vtable slot 11.
-func (self *INetFwAuthorizedApplication) Get_IpVersion(ipVersion *NET_FW_IP_VERSION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ipVersion)))
-	return foundation.HRESULT(r1)
+func (self *INetFwAuthorizedApplication) Get_IpVersion() (NET_FW_IP_VERSION, error) {
+	var _ipVersion NET_FW_IP_VERSION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ipVersion)))
+	return _ipVersion, win32.HRESULTError(int32(r1))
 }
 
 // Put_IpVersion dispatches through INetFwAuthorizedApplication's vtable slot 12.
-func (self *INetFwAuthorizedApplication) Put_IpVersion(ipVersion NET_FW_IP_VERSION) foundation.HRESULT {
+func (self *INetFwAuthorizedApplication) Put_IpVersion(ipVersion NET_FW_IP_VERSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ipVersion))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Scope dispatches through INetFwAuthorizedApplication's vtable slot 13.
-func (self *INetFwAuthorizedApplication) Get_Scope(scope *NET_FW_SCOPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scope)))
-	return foundation.HRESULT(r1)
+func (self *INetFwAuthorizedApplication) Get_Scope() (NET_FW_SCOPE, error) {
+	var _scope NET_FW_SCOPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_scope)))
+	return _scope, win32.HRESULTError(int32(r1))
 }
 
 // Put_Scope dispatches through INetFwAuthorizedApplication's vtable slot 14.
-func (self *INetFwAuthorizedApplication) Put_Scope(scope NET_FW_SCOPE) foundation.HRESULT {
+func (self *INetFwAuthorizedApplication) Put_Scope(scope NET_FW_SCOPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(scope))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RemoteAddresses dispatches through INetFwAuthorizedApplication's vtable slot 15.
-func (self *INetFwAuthorizedApplication) Get_RemoteAddresses(remoteAddrs *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(remoteAddrs)))
-	return foundation.HRESULT(r1)
+func (self *INetFwAuthorizedApplication) Get_RemoteAddresses() (foundation.BSTR, error) {
+	var _remoteAddrs foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_remoteAddrs)))
+	return _remoteAddrs, win32.HRESULTError(int32(r1))
 }
 
 // Put_RemoteAddresses dispatches through INetFwAuthorizedApplication's vtable slot 16.
-func (self *INetFwAuthorizedApplication) Put_RemoteAddresses(remoteAddrs foundation.BSTR) foundation.HRESULT {
+func (self *INetFwAuthorizedApplication) Put_RemoteAddresses(remoteAddrs foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(remoteAddrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Enabled dispatches through INetFwAuthorizedApplication's vtable slot 17.
-func (self *INetFwAuthorizedApplication) Get_Enabled(enabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(enabled)))
-	return foundation.HRESULT(r1)
+func (self *INetFwAuthorizedApplication) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enabled)))
+	return _enabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_Enabled dispatches through INetFwAuthorizedApplication's vtable slot 18.
-func (self *INetFwAuthorizedApplication) Put_Enabled(enabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwAuthorizedApplication) Put_Enabled(enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INetFwAuthorizedApplications: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwauthorizedapplications
@@ -586,33 +614,36 @@ type INetFwAuthorizedApplications struct {
 var IID_INetFwAuthorizedApplications = win32.GUID{Data1: 0x644efd52, Data2: 0xccf9, Data3: 0x486c, Data4: [8]byte{0x97, 0xa2, 0x39, 0xf3, 0x52, 0x57, 0x0b, 0x30}}
 
 // Get_Count dispatches through INetFwAuthorizedApplications's vtable slot 7.
-func (self *INetFwAuthorizedApplications) Get_Count(count *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+func (self *INetFwAuthorizedApplications) Get_Count() (int32, error) {
+	var _count int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
+	return _count, win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through INetFwAuthorizedApplications's vtable slot 8.
-func (self *INetFwAuthorizedApplications) Add(app *INetFwAuthorizedApplication) foundation.HRESULT {
+func (self *INetFwAuthorizedApplications) Add(app *INetFwAuthorizedApplication) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(app)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through INetFwAuthorizedApplications's vtable slot 9.
-func (self *INetFwAuthorizedApplications) Remove(imageFileName foundation.BSTR) foundation.HRESULT {
+func (self *INetFwAuthorizedApplications) Remove(imageFileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageFileName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through INetFwAuthorizedApplications's vtable slot 10.
-func (self *INetFwAuthorizedApplications) Item(imageFileName foundation.BSTR, app **INetFwAuthorizedApplication) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageFileName)), uintptr(unsafe.Pointer(app)))
-	return foundation.HRESULT(r1)
+func (self *INetFwAuthorizedApplications) Item(imageFileName foundation.BSTR) (*INetFwAuthorizedApplication, error) {
+	var _app *INetFwAuthorizedApplication
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageFileName)), uintptr(unsafe.Pointer(&_app)))
+	return _app, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through INetFwAuthorizedApplications's vtable slot 11.
-func (self *INetFwAuthorizedApplications) Get__NewEnum(newEnum **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newEnum)))
-	return foundation.HRESULT(r1)
+func (self *INetFwAuthorizedApplications) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _newEnum *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_newEnum)))
+	return _newEnum, win32.HRESULTError(int32(r1))
 }
 
 // INetFwIcmpSettings: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwicmpsettings
@@ -625,123 +656,133 @@ type INetFwIcmpSettings struct {
 var IID_INetFwIcmpSettings = win32.GUID{Data1: 0xa6207b2e, Data2: 0x7cdd, Data3: 0x426a, Data4: [8]byte{0x95, 0x1e, 0x5e, 0x1c, 0xbc, 0x5a, 0xfe, 0xad}}
 
 // Get_AllowOutboundDestinationUnreachable dispatches through INetFwIcmpSettings's vtable slot 7.
-func (self *INetFwIcmpSettings) Get_AllowOutboundDestinationUnreachable(allow *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(allow)))
-	return foundation.HRESULT(r1)
+func (self *INetFwIcmpSettings) Get_AllowOutboundDestinationUnreachable() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_allow)))
+	return _allow, win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowOutboundDestinationUnreachable dispatches through INetFwIcmpSettings's vtable slot 8.
-func (self *INetFwIcmpSettings) Put_AllowOutboundDestinationUnreachable(allow foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwIcmpSettings) Put_AllowOutboundDestinationUnreachable(allow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(allow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowRedirect dispatches through INetFwIcmpSettings's vtable slot 9.
-func (self *INetFwIcmpSettings) Get_AllowRedirect(allow *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(allow)))
-	return foundation.HRESULT(r1)
+func (self *INetFwIcmpSettings) Get_AllowRedirect() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_allow)))
+	return _allow, win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowRedirect dispatches through INetFwIcmpSettings's vtable slot 10.
-func (self *INetFwIcmpSettings) Put_AllowRedirect(allow foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwIcmpSettings) Put_AllowRedirect(allow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(allow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowInboundEchoRequest dispatches through INetFwIcmpSettings's vtable slot 11.
-func (self *INetFwIcmpSettings) Get_AllowInboundEchoRequest(allow *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(allow)))
-	return foundation.HRESULT(r1)
+func (self *INetFwIcmpSettings) Get_AllowInboundEchoRequest() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_allow)))
+	return _allow, win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowInboundEchoRequest dispatches through INetFwIcmpSettings's vtable slot 12.
-func (self *INetFwIcmpSettings) Put_AllowInboundEchoRequest(allow foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwIcmpSettings) Put_AllowInboundEchoRequest(allow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(allow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowOutboundTimeExceeded dispatches through INetFwIcmpSettings's vtable slot 13.
-func (self *INetFwIcmpSettings) Get_AllowOutboundTimeExceeded(allow *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(allow)))
-	return foundation.HRESULT(r1)
+func (self *INetFwIcmpSettings) Get_AllowOutboundTimeExceeded() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_allow)))
+	return _allow, win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowOutboundTimeExceeded dispatches through INetFwIcmpSettings's vtable slot 14.
-func (self *INetFwIcmpSettings) Put_AllowOutboundTimeExceeded(allow foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwIcmpSettings) Put_AllowOutboundTimeExceeded(allow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(allow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowOutboundParameterProblem dispatches through INetFwIcmpSettings's vtable slot 15.
-func (self *INetFwIcmpSettings) Get_AllowOutboundParameterProblem(allow *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(allow)))
-	return foundation.HRESULT(r1)
+func (self *INetFwIcmpSettings) Get_AllowOutboundParameterProblem() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_allow)))
+	return _allow, win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowOutboundParameterProblem dispatches through INetFwIcmpSettings's vtable slot 16.
-func (self *INetFwIcmpSettings) Put_AllowOutboundParameterProblem(allow foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwIcmpSettings) Put_AllowOutboundParameterProblem(allow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(allow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowOutboundSourceQuench dispatches through INetFwIcmpSettings's vtable slot 17.
-func (self *INetFwIcmpSettings) Get_AllowOutboundSourceQuench(allow *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(allow)))
-	return foundation.HRESULT(r1)
+func (self *INetFwIcmpSettings) Get_AllowOutboundSourceQuench() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_allow)))
+	return _allow, win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowOutboundSourceQuench dispatches through INetFwIcmpSettings's vtable slot 18.
-func (self *INetFwIcmpSettings) Put_AllowOutboundSourceQuench(allow foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwIcmpSettings) Put_AllowOutboundSourceQuench(allow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(allow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowInboundRouterRequest dispatches through INetFwIcmpSettings's vtable slot 19.
-func (self *INetFwIcmpSettings) Get_AllowInboundRouterRequest(allow *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(allow)))
-	return foundation.HRESULT(r1)
+func (self *INetFwIcmpSettings) Get_AllowInboundRouterRequest() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_allow)))
+	return _allow, win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowInboundRouterRequest dispatches through INetFwIcmpSettings's vtable slot 20.
-func (self *INetFwIcmpSettings) Put_AllowInboundRouterRequest(allow foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwIcmpSettings) Put_AllowInboundRouterRequest(allow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(allow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowInboundTimestampRequest dispatches through INetFwIcmpSettings's vtable slot 21.
-func (self *INetFwIcmpSettings) Get_AllowInboundTimestampRequest(allow *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(allow)))
-	return foundation.HRESULT(r1)
+func (self *INetFwIcmpSettings) Get_AllowInboundTimestampRequest() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_allow)))
+	return _allow, win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowInboundTimestampRequest dispatches through INetFwIcmpSettings's vtable slot 22.
-func (self *INetFwIcmpSettings) Put_AllowInboundTimestampRequest(allow foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwIcmpSettings) Put_AllowInboundTimestampRequest(allow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(allow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowInboundMaskRequest dispatches through INetFwIcmpSettings's vtable slot 23.
-func (self *INetFwIcmpSettings) Get_AllowInboundMaskRequest(allow *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(allow)))
-	return foundation.HRESULT(r1)
+func (self *INetFwIcmpSettings) Get_AllowInboundMaskRequest() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_allow)))
+	return _allow, win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowInboundMaskRequest dispatches through INetFwIcmpSettings's vtable slot 24.
-func (self *INetFwIcmpSettings) Put_AllowInboundMaskRequest(allow foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwIcmpSettings) Put_AllowInboundMaskRequest(allow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(allow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AllowOutboundPacketTooBig dispatches through INetFwIcmpSettings's vtable slot 25.
-func (self *INetFwIcmpSettings) Get_AllowOutboundPacketTooBig(allow *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(allow)))
-	return foundation.HRESULT(r1)
+func (self *INetFwIcmpSettings) Get_AllowOutboundPacketTooBig() (foundation.VARIANT_BOOL, error) {
+	var _allow foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_allow)))
+	return _allow, win32.HRESULTError(int32(r1))
 }
 
 // Put_AllowOutboundPacketTooBig dispatches through INetFwIcmpSettings's vtable slot 26.
-func (self *INetFwIcmpSettings) Put_AllowOutboundPacketTooBig(allow foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwIcmpSettings) Put_AllowOutboundPacketTooBig(allow foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(allow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INetFwMgr: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwmgr
@@ -754,33 +795,35 @@ type INetFwMgr struct {
 var IID_INetFwMgr = win32.GUID{Data1: 0xf7898af5, Data2: 0xcac4, Data3: 0x4632, Data4: [8]byte{0xa2, 0xec, 0xda, 0x06, 0xe5, 0x11, 0x1a, 0xf2}}
 
 // Get_LocalPolicy dispatches through INetFwMgr's vtable slot 7.
-func (self *INetFwMgr) Get_LocalPolicy(localPolicy **INetFwPolicy) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(localPolicy)))
-	return foundation.HRESULT(r1)
+func (self *INetFwMgr) Get_LocalPolicy() (*INetFwPolicy, error) {
+	var _localPolicy *INetFwPolicy
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_localPolicy)))
+	return _localPolicy, win32.HRESULTError(int32(r1))
 }
 
 // Get_CurrentProfileType dispatches through INetFwMgr's vtable slot 8.
-func (self *INetFwMgr) Get_CurrentProfileType(profileType *NET_FW_PROFILE_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(profileType)))
-	return foundation.HRESULT(r1)
+func (self *INetFwMgr) Get_CurrentProfileType() (NET_FW_PROFILE_TYPE, error) {
+	var _profileType NET_FW_PROFILE_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_profileType)))
+	return _profileType, win32.HRESULTError(int32(r1))
 }
 
 // RestoreDefaults dispatches through INetFwMgr's vtable slot 9.
-func (self *INetFwMgr) RestoreDefaults() foundation.HRESULT {
+func (self *INetFwMgr) RestoreDefaults() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsPortAllowed dispatches through INetFwMgr's vtable slot 10.
-func (self *INetFwMgr) IsPortAllowed(imageFileName foundation.BSTR, ipVersion NET_FW_IP_VERSION, portNumber int32, localAddress foundation.BSTR, ipProtocol NET_FW_IP_PROTOCOL, allowed *systemvariant.VARIANT, restricted *systemvariant.VARIANT) foundation.HRESULT {
+func (self *INetFwMgr) IsPortAllowed(imageFileName foundation.BSTR, ipVersion NET_FW_IP_VERSION, portNumber int32, localAddress foundation.BSTR, ipProtocol NET_FW_IP_PROTOCOL, allowed *systemvariant.VARIANT, restricted *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageFileName)), uintptr(ipVersion), uintptr(portNumber), uintptr(unsafe.Pointer(localAddress)), uintptr(ipProtocol), uintptr(unsafe.Pointer(allowed)), uintptr(unsafe.Pointer(restricted)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsIcmpTypeAllowed dispatches through INetFwMgr's vtable slot 11.
-func (self *INetFwMgr) IsIcmpTypeAllowed(ipVersion NET_FW_IP_VERSION, localAddress foundation.BSTR, type_ byte, allowed *systemvariant.VARIANT, restricted *systemvariant.VARIANT) foundation.HRESULT {
+func (self *INetFwMgr) IsIcmpTypeAllowed(ipVersion NET_FW_IP_VERSION, localAddress foundation.BSTR, type_ byte, allowed *systemvariant.VARIANT, restricted *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(ipVersion), uintptr(unsafe.Pointer(localAddress)), uintptr(type_), uintptr(unsafe.Pointer(allowed)), uintptr(unsafe.Pointer(restricted)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INetFwOpenPort: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwopenport
@@ -793,93 +836,101 @@ type INetFwOpenPort struct {
 var IID_INetFwOpenPort = win32.GUID{Data1: 0xe0483ba0, Data2: 0x47ff, Data3: 0x4d9c, Data4: [8]byte{0xa6, 0xd6, 0x77, 0x41, 0xd0, 0xb1, 0x95, 0xf7}}
 
 // Get_Name dispatches through INetFwOpenPort's vtable slot 7.
-func (self *INetFwOpenPort) Get_Name(name *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+func (self *INetFwOpenPort) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
+	return _name, win32.HRESULTError(int32(r1))
 }
 
 // Put_Name dispatches through INetFwOpenPort's vtable slot 8.
-func (self *INetFwOpenPort) Put_Name(name foundation.BSTR) foundation.HRESULT {
+func (self *INetFwOpenPort) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IpVersion dispatches through INetFwOpenPort's vtable slot 9.
-func (self *INetFwOpenPort) Get_IpVersion(ipVersion *NET_FW_IP_VERSION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ipVersion)))
-	return foundation.HRESULT(r1)
+func (self *INetFwOpenPort) Get_IpVersion() (NET_FW_IP_VERSION, error) {
+	var _ipVersion NET_FW_IP_VERSION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ipVersion)))
+	return _ipVersion, win32.HRESULTError(int32(r1))
 }
 
 // Put_IpVersion dispatches through INetFwOpenPort's vtable slot 10.
-func (self *INetFwOpenPort) Put_IpVersion(ipVersion NET_FW_IP_VERSION) foundation.HRESULT {
+func (self *INetFwOpenPort) Put_IpVersion(ipVersion NET_FW_IP_VERSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ipVersion))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Protocol dispatches through INetFwOpenPort's vtable slot 11.
-func (self *INetFwOpenPort) Get_Protocol(ipProtocol *NET_FW_IP_PROTOCOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ipProtocol)))
-	return foundation.HRESULT(r1)
+func (self *INetFwOpenPort) Get_Protocol() (NET_FW_IP_PROTOCOL, error) {
+	var _ipProtocol NET_FW_IP_PROTOCOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ipProtocol)))
+	return _ipProtocol, win32.HRESULTError(int32(r1))
 }
 
 // Put_Protocol dispatches through INetFwOpenPort's vtable slot 12.
-func (self *INetFwOpenPort) Put_Protocol(ipProtocol NET_FW_IP_PROTOCOL) foundation.HRESULT {
+func (self *INetFwOpenPort) Put_Protocol(ipProtocol NET_FW_IP_PROTOCOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ipProtocol))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Port dispatches through INetFwOpenPort's vtable slot 13.
-func (self *INetFwOpenPort) Get_Port(portNumber *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(portNumber)))
-	return foundation.HRESULT(r1)
+func (self *INetFwOpenPort) Get_Port() (int32, error) {
+	var _portNumber int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_portNumber)))
+	return _portNumber, win32.HRESULTError(int32(r1))
 }
 
 // Put_Port dispatches through INetFwOpenPort's vtable slot 14.
-func (self *INetFwOpenPort) Put_Port(portNumber int32) foundation.HRESULT {
+func (self *INetFwOpenPort) Put_Port(portNumber int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(portNumber))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Scope dispatches through INetFwOpenPort's vtable slot 15.
-func (self *INetFwOpenPort) Get_Scope(scope *NET_FW_SCOPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scope)))
-	return foundation.HRESULT(r1)
+func (self *INetFwOpenPort) Get_Scope() (NET_FW_SCOPE, error) {
+	var _scope NET_FW_SCOPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_scope)))
+	return _scope, win32.HRESULTError(int32(r1))
 }
 
 // Put_Scope dispatches through INetFwOpenPort's vtable slot 16.
-func (self *INetFwOpenPort) Put_Scope(scope NET_FW_SCOPE) foundation.HRESULT {
+func (self *INetFwOpenPort) Put_Scope(scope NET_FW_SCOPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(scope))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RemoteAddresses dispatches through INetFwOpenPort's vtable slot 17.
-func (self *INetFwOpenPort) Get_RemoteAddresses(remoteAddrs *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(remoteAddrs)))
-	return foundation.HRESULT(r1)
+func (self *INetFwOpenPort) Get_RemoteAddresses() (foundation.BSTR, error) {
+	var _remoteAddrs foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_remoteAddrs)))
+	return _remoteAddrs, win32.HRESULTError(int32(r1))
 }
 
 // Put_RemoteAddresses dispatches through INetFwOpenPort's vtable slot 18.
-func (self *INetFwOpenPort) Put_RemoteAddresses(remoteAddrs foundation.BSTR) foundation.HRESULT {
+func (self *INetFwOpenPort) Put_RemoteAddresses(remoteAddrs foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(remoteAddrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Enabled dispatches through INetFwOpenPort's vtable slot 19.
-func (self *INetFwOpenPort) Get_Enabled(enabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(enabled)))
-	return foundation.HRESULT(r1)
+func (self *INetFwOpenPort) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enabled)))
+	return _enabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_Enabled dispatches through INetFwOpenPort's vtable slot 20.
-func (self *INetFwOpenPort) Put_Enabled(enabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwOpenPort) Put_Enabled(enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_BuiltIn dispatches through INetFwOpenPort's vtable slot 21.
-func (self *INetFwOpenPort) Get_BuiltIn(builtIn *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(builtIn)))
-	return foundation.HRESULT(r1)
+func (self *INetFwOpenPort) Get_BuiltIn() (foundation.VARIANT_BOOL, error) {
+	var _builtIn foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_builtIn)))
+	return _builtIn, win32.HRESULTError(int32(r1))
 }
 
 // INetFwOpenPorts: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwopenports
@@ -892,33 +943,36 @@ type INetFwOpenPorts struct {
 var IID_INetFwOpenPorts = win32.GUID{Data1: 0xc0e9d7fa, Data2: 0xe07e, Data3: 0x430a, Data4: [8]byte{0xb1, 0x9a, 0x09, 0x0c, 0xe8, 0x2d, 0x92, 0xe2}}
 
 // Get_Count dispatches through INetFwOpenPorts's vtable slot 7.
-func (self *INetFwOpenPorts) Get_Count(count *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+func (self *INetFwOpenPorts) Get_Count() (int32, error) {
+	var _count int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
+	return _count, win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through INetFwOpenPorts's vtable slot 8.
-func (self *INetFwOpenPorts) Add(port *INetFwOpenPort) foundation.HRESULT {
+func (self *INetFwOpenPorts) Add(port *INetFwOpenPort) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(port)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through INetFwOpenPorts's vtable slot 9.
-func (self *INetFwOpenPorts) Remove(portNumber int32, ipProtocol NET_FW_IP_PROTOCOL) foundation.HRESULT {
+func (self *INetFwOpenPorts) Remove(portNumber int32, ipProtocol NET_FW_IP_PROTOCOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(portNumber), uintptr(ipProtocol))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through INetFwOpenPorts's vtable slot 10.
-func (self *INetFwOpenPorts) Item(portNumber int32, ipProtocol NET_FW_IP_PROTOCOL, openPort **INetFwOpenPort) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(portNumber), uintptr(ipProtocol), uintptr(unsafe.Pointer(openPort)))
-	return foundation.HRESULT(r1)
+func (self *INetFwOpenPorts) Item(portNumber int32, ipProtocol NET_FW_IP_PROTOCOL) (*INetFwOpenPort, error) {
+	var _openPort *INetFwOpenPort
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(portNumber), uintptr(ipProtocol), uintptr(unsafe.Pointer(&_openPort)))
+	return _openPort, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through INetFwOpenPorts's vtable slot 11.
-func (self *INetFwOpenPorts) Get__NewEnum(newEnum **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newEnum)))
-	return foundation.HRESULT(r1)
+func (self *INetFwOpenPorts) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _newEnum *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_newEnum)))
+	return _newEnum, win32.HRESULTError(int32(r1))
 }
 
 // INetFwPolicy: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwpolicy
@@ -931,15 +985,17 @@ type INetFwPolicy struct {
 var IID_INetFwPolicy = win32.GUID{Data1: 0xd46d2478, Data2: 0x9ac9, Data3: 0x4008, Data4: [8]byte{0x9d, 0xc7, 0x55, 0x63, 0xce, 0x55, 0x36, 0xcc}}
 
 // Get_CurrentProfile dispatches through INetFwPolicy's vtable slot 7.
-func (self *INetFwPolicy) Get_CurrentProfile(profile **INetFwProfile) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(profile)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy) Get_CurrentProfile() (*INetFwProfile, error) {
+	var _profile *INetFwProfile
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_profile)))
+	return _profile, win32.HRESULTError(int32(r1))
 }
 
 // GetProfileByType dispatches through INetFwPolicy's vtable slot 8.
-func (self *INetFwPolicy) GetProfileByType(profileType NET_FW_PROFILE_TYPE, profile **INetFwProfile) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(profile)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy) GetProfileByType(profileType NET_FW_PROFILE_TYPE) (*INetFwProfile, error) {
+	var _profile *INetFwProfile
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(&_profile)))
+	return _profile, win32.HRESULTError(int32(r1))
 }
 
 // INetFwPolicy2: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwpolicy2
@@ -952,129 +1008,142 @@ type INetFwPolicy2 struct {
 var IID_INetFwPolicy2 = win32.GUID{Data1: 0x98325047, Data2: 0xc671, Data3: 0x4174, Data4: [8]byte{0x8d, 0x81, 0xde, 0xfc, 0xd3, 0xf0, 0x31, 0x86}}
 
 // Get_CurrentProfileTypes dispatches through INetFwPolicy2's vtable slot 7.
-func (self *INetFwPolicy2) Get_CurrentProfileTypes(profileTypesBitmask *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(profileTypesBitmask)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy2) Get_CurrentProfileTypes() (int32, error) {
+	var _profileTypesBitmask int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_profileTypesBitmask)))
+	return _profileTypesBitmask, win32.HRESULTError(int32(r1))
 }
 
 // Get_FirewallEnabled dispatches through INetFwPolicy2's vtable slot 8.
-func (self *INetFwPolicy2) Get_FirewallEnabled(profileType NET_FW_PROFILE_TYPE2, enabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(enabled)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy2) Get_FirewallEnabled(profileType NET_FW_PROFILE_TYPE2) (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(&_enabled)))
+	return _enabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_FirewallEnabled dispatches through INetFwPolicy2's vtable slot 9.
-func (self *INetFwPolicy2) Put_FirewallEnabled(profileType NET_FW_PROFILE_TYPE2, enabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwPolicy2) Put_FirewallEnabled(profileType NET_FW_PROFILE_TYPE2, enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(enabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ExcludedInterfaces dispatches through INetFwPolicy2's vtable slot 10.
-func (self *INetFwPolicy2) Get_ExcludedInterfaces(profileType NET_FW_PROFILE_TYPE2, interfaces *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(interfaces)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy2) Get_ExcludedInterfaces(profileType NET_FW_PROFILE_TYPE2) (systemvariant.VARIANT, error) {
+	var _interfaces systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(&_interfaces)))
+	return _interfaces, win32.HRESULTError(int32(r1))
 }
 
 // Get_BlockAllInboundTraffic dispatches through INetFwPolicy2's vtable slot 12.
-func (self *INetFwPolicy2) Get_BlockAllInboundTraffic(profileType NET_FW_PROFILE_TYPE2, Block *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(Block)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy2) Get_BlockAllInboundTraffic(profileType NET_FW_PROFILE_TYPE2) (foundation.VARIANT_BOOL, error) {
+	var _Block foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(&_Block)))
+	return _Block, win32.HRESULTError(int32(r1))
 }
 
 // Put_BlockAllInboundTraffic dispatches through INetFwPolicy2's vtable slot 13.
-func (self *INetFwPolicy2) Put_BlockAllInboundTraffic(profileType NET_FW_PROFILE_TYPE2, Block foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwPolicy2) Put_BlockAllInboundTraffic(profileType NET_FW_PROFILE_TYPE2, Block foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(Block))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NotificationsDisabled dispatches through INetFwPolicy2's vtable slot 14.
-func (self *INetFwPolicy2) Get_NotificationsDisabled(profileType NET_FW_PROFILE_TYPE2, disabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(disabled)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy2) Get_NotificationsDisabled(profileType NET_FW_PROFILE_TYPE2) (foundation.VARIANT_BOOL, error) {
+	var _disabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(&_disabled)))
+	return _disabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_NotificationsDisabled dispatches through INetFwPolicy2's vtable slot 15.
-func (self *INetFwPolicy2) Put_NotificationsDisabled(profileType NET_FW_PROFILE_TYPE2, disabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwPolicy2) Put_NotificationsDisabled(profileType NET_FW_PROFILE_TYPE2, disabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(disabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_UnicastResponsesToMulticastBroadcastDisabled dispatches through INetFwPolicy2's vtable slot 16.
-func (self *INetFwPolicy2) Get_UnicastResponsesToMulticastBroadcastDisabled(profileType NET_FW_PROFILE_TYPE2, disabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(disabled)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy2) Get_UnicastResponsesToMulticastBroadcastDisabled(profileType NET_FW_PROFILE_TYPE2) (foundation.VARIANT_BOOL, error) {
+	var _disabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(&_disabled)))
+	return _disabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_UnicastResponsesToMulticastBroadcastDisabled dispatches through INetFwPolicy2's vtable slot 17.
-func (self *INetFwPolicy2) Put_UnicastResponsesToMulticastBroadcastDisabled(profileType NET_FW_PROFILE_TYPE2, disabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwPolicy2) Put_UnicastResponsesToMulticastBroadcastDisabled(profileType NET_FW_PROFILE_TYPE2, disabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(disabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Rules dispatches through INetFwPolicy2's vtable slot 18.
-func (self *INetFwPolicy2) Get_Rules(rules **INetFwRules) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rules)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy2) Get_Rules() (*INetFwRules, error) {
+	var _rules *INetFwRules
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_rules)))
+	return _rules, win32.HRESULTError(int32(r1))
 }
 
 // Get_ServiceRestriction dispatches through INetFwPolicy2's vtable slot 19.
-func (self *INetFwPolicy2) Get_ServiceRestriction(ServiceRestriction **INetFwServiceRestriction) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ServiceRestriction)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy2) Get_ServiceRestriction() (*INetFwServiceRestriction, error) {
+	var _ServiceRestriction *INetFwServiceRestriction
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ServiceRestriction)))
+	return _ServiceRestriction, win32.HRESULTError(int32(r1))
 }
 
 // EnableRuleGroup dispatches through INetFwPolicy2's vtable slot 20.
-func (self *INetFwPolicy2) EnableRuleGroup(profileTypesBitmask int32, group foundation.BSTR, enable foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwPolicy2) EnableRuleGroup(profileTypesBitmask int32, group foundation.BSTR, enable foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(profileTypesBitmask), uintptr(unsafe.Pointer(group)), uintptr(enable))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsRuleGroupEnabled dispatches through INetFwPolicy2's vtable slot 21.
-func (self *INetFwPolicy2) IsRuleGroupEnabled(profileTypesBitmask int32, group foundation.BSTR, enabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(profileTypesBitmask), uintptr(unsafe.Pointer(group)), uintptr(unsafe.Pointer(enabled)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy2) IsRuleGroupEnabled(profileTypesBitmask int32, group foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(profileTypesBitmask), uintptr(unsafe.Pointer(group)), uintptr(unsafe.Pointer(&_enabled)))
+	return _enabled, win32.HRESULTError(int32(r1))
 }
 
 // RestoreLocalFirewallDefaults dispatches through INetFwPolicy2's vtable slot 22.
-func (self *INetFwPolicy2) RestoreLocalFirewallDefaults() foundation.HRESULT {
+func (self *INetFwPolicy2) RestoreLocalFirewallDefaults() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DefaultInboundAction dispatches through INetFwPolicy2's vtable slot 23.
-func (self *INetFwPolicy2) Get_DefaultInboundAction(profileType NET_FW_PROFILE_TYPE2, action *NET_FW_ACTION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(action)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy2) Get_DefaultInboundAction(profileType NET_FW_PROFILE_TYPE2) (NET_FW_ACTION, error) {
+	var _action NET_FW_ACTION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(&_action)))
+	return _action, win32.HRESULTError(int32(r1))
 }
 
 // Put_DefaultInboundAction dispatches through INetFwPolicy2's vtable slot 24.
-func (self *INetFwPolicy2) Put_DefaultInboundAction(profileType NET_FW_PROFILE_TYPE2, action NET_FW_ACTION) foundation.HRESULT {
+func (self *INetFwPolicy2) Put_DefaultInboundAction(profileType NET_FW_PROFILE_TYPE2, action NET_FW_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(action))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DefaultOutboundAction dispatches through INetFwPolicy2's vtable slot 25.
-func (self *INetFwPolicy2) Get_DefaultOutboundAction(profileType NET_FW_PROFILE_TYPE2, action *NET_FW_ACTION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(action)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy2) Get_DefaultOutboundAction(profileType NET_FW_PROFILE_TYPE2) (NET_FW_ACTION, error) {
+	var _action NET_FW_ACTION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(unsafe.Pointer(&_action)))
+	return _action, win32.HRESULTError(int32(r1))
 }
 
 // Put_DefaultOutboundAction dispatches through INetFwPolicy2's vtable slot 26.
-func (self *INetFwPolicy2) Put_DefaultOutboundAction(profileType NET_FW_PROFILE_TYPE2, action NET_FW_ACTION) foundation.HRESULT {
+func (self *INetFwPolicy2) Put_DefaultOutboundAction(profileType NET_FW_PROFILE_TYPE2, action NET_FW_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(profileType), uintptr(action))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsRuleGroupCurrentlyEnabled dispatches through INetFwPolicy2's vtable slot 27.
-func (self *INetFwPolicy2) Get_IsRuleGroupCurrentlyEnabled(group foundation.BSTR, enabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(group)), uintptr(unsafe.Pointer(enabled)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy2) Get_IsRuleGroupCurrentlyEnabled(group foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(group)), uintptr(unsafe.Pointer(&_enabled)))
+	return _enabled, win32.HRESULTError(int32(r1))
 }
 
 // Get_LocalPolicyModifyState dispatches through INetFwPolicy2's vtable slot 28.
-func (self *INetFwPolicy2) Get_LocalPolicyModifyState(modifyState *NET_FW_MODIFY_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(modifyState)))
-	return foundation.HRESULT(r1)
+func (self *INetFwPolicy2) Get_LocalPolicyModifyState() (NET_FW_MODIFY_STATE, error) {
+	var _modifyState NET_FW_MODIFY_STATE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_modifyState)))
+	return _modifyState, win32.HRESULTError(int32(r1))
 }
 
 // INetFwProduct: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwproduct
@@ -1087,27 +1156,30 @@ type INetFwProduct struct {
 var IID_INetFwProduct = win32.GUID{Data1: 0x71881699, Data2: 0x18f4, Data3: 0x458b, Data4: [8]byte{0xb8, 0x92, 0x3f, 0xfc, 0xe5, 0xe0, 0x7f, 0x75}}
 
 // Get_RuleCategories dispatches through INetFwProduct's vtable slot 7.
-func (self *INetFwProduct) Get_RuleCategories(ruleCategories *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ruleCategories)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProduct) Get_RuleCategories() (systemvariant.VARIANT, error) {
+	var _ruleCategories systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ruleCategories)))
+	return _ruleCategories, win32.HRESULTError(int32(r1))
 }
 
 // Get_DisplayName dispatches through INetFwProduct's vtable slot 9.
-func (self *INetFwProduct) Get_DisplayName(displayName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(displayName)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProduct) Get_DisplayName() (foundation.BSTR, error) {
+	var _displayName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_displayName)))
+	return _displayName, win32.HRESULTError(int32(r1))
 }
 
 // Put_DisplayName dispatches through INetFwProduct's vtable slot 10.
-func (self *INetFwProduct) Put_DisplayName(displayName foundation.BSTR) foundation.HRESULT {
+func (self *INetFwProduct) Put_DisplayName(displayName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(displayName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PathToSignedProductExe dispatches through INetFwProduct's vtable slot 11.
-func (self *INetFwProduct) Get_PathToSignedProductExe(path *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(path)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProduct) Get_PathToSignedProductExe() (foundation.BSTR, error) {
+	var _path foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_path)))
+	return _path, win32.HRESULTError(int32(r1))
 }
 
 // INetFwProducts: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwproducts
@@ -1120,27 +1192,31 @@ type INetFwProducts struct {
 var IID_INetFwProducts = win32.GUID{Data1: 0x39eb36e0, Data2: 0x2097, Data3: 0x40bd, Data4: [8]byte{0x8a, 0xf2, 0x63, 0xa1, 0x3b, 0x52, 0x53, 0x62}}
 
 // Get_Count dispatches through INetFwProducts's vtable slot 7.
-func (self *INetFwProducts) Get_Count(count *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProducts) Get_Count() (int32, error) {
+	var _count int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
+	return _count, win32.HRESULTError(int32(r1))
 }
 
 // Register dispatches through INetFwProducts's vtable slot 8.
-func (self *INetFwProducts) Register(product *INetFwProduct, registration **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(product)), uintptr(unsafe.Pointer(registration)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProducts) Register(product *INetFwProduct) (*systemcom.IUnknown, error) {
+	var _registration *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(product)), uintptr(unsafe.Pointer(&_registration)))
+	return _registration, win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through INetFwProducts's vtable slot 9.
-func (self *INetFwProducts) Item(index int32, product **INetFwProduct) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(product)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProducts) Item(index int32) (*INetFwProduct, error) {
+	var _product *INetFwProduct
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(&_product)))
+	return _product, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through INetFwProducts's vtable slot 10.
-func (self *INetFwProducts) Get__NewEnum(newEnum **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newEnum)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProducts) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _newEnum *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_newEnum)))
+	return _newEnum, win32.HRESULTError(int32(r1))
 }
 
 // INetFwProfile: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwprofile
@@ -1153,87 +1229,97 @@ type INetFwProfile struct {
 var IID_INetFwProfile = win32.GUID{Data1: 0x174a0dda, Data2: 0xe9f9, Data3: 0x449d, Data4: [8]byte{0x99, 0x3b, 0x21, 0xab, 0x66, 0x7c, 0xa4, 0x56}}
 
 // Get_Type dispatches through INetFwProfile's vtable slot 7.
-func (self *INetFwProfile) Get_Type(type_ *NET_FW_PROFILE_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProfile) Get_Type() (NET_FW_PROFILE_TYPE, error) {
+	var _type_ NET_FW_PROFILE_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_type_)))
+	return _type_, win32.HRESULTError(int32(r1))
 }
 
 // Get_FirewallEnabled dispatches through INetFwProfile's vtable slot 8.
-func (self *INetFwProfile) Get_FirewallEnabled(enabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(enabled)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProfile) Get_FirewallEnabled() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enabled)))
+	return _enabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_FirewallEnabled dispatches through INetFwProfile's vtable slot 9.
-func (self *INetFwProfile) Put_FirewallEnabled(enabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwProfile) Put_FirewallEnabled(enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ExceptionsNotAllowed dispatches through INetFwProfile's vtable slot 10.
-func (self *INetFwProfile) Get_ExceptionsNotAllowed(notAllowed *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(notAllowed)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProfile) Get_ExceptionsNotAllowed() (foundation.VARIANT_BOOL, error) {
+	var _notAllowed foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_notAllowed)))
+	return _notAllowed, win32.HRESULTError(int32(r1))
 }
 
 // Put_ExceptionsNotAllowed dispatches through INetFwProfile's vtable slot 11.
-func (self *INetFwProfile) Put_ExceptionsNotAllowed(notAllowed foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwProfile) Put_ExceptionsNotAllowed(notAllowed foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(notAllowed))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NotificationsDisabled dispatches through INetFwProfile's vtable slot 12.
-func (self *INetFwProfile) Get_NotificationsDisabled(disabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(disabled)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProfile) Get_NotificationsDisabled() (foundation.VARIANT_BOOL, error) {
+	var _disabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disabled)))
+	return _disabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_NotificationsDisabled dispatches through INetFwProfile's vtable slot 13.
-func (self *INetFwProfile) Put_NotificationsDisabled(disabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwProfile) Put_NotificationsDisabled(disabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(disabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_UnicastResponsesToMulticastBroadcastDisabled dispatches through INetFwProfile's vtable slot 14.
-func (self *INetFwProfile) Get_UnicastResponsesToMulticastBroadcastDisabled(disabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(disabled)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProfile) Get_UnicastResponsesToMulticastBroadcastDisabled() (foundation.VARIANT_BOOL, error) {
+	var _disabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_disabled)))
+	return _disabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_UnicastResponsesToMulticastBroadcastDisabled dispatches through INetFwProfile's vtable slot 15.
-func (self *INetFwProfile) Put_UnicastResponsesToMulticastBroadcastDisabled(disabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwProfile) Put_UnicastResponsesToMulticastBroadcastDisabled(disabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(disabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RemoteAdminSettings dispatches through INetFwProfile's vtable slot 16.
-func (self *INetFwProfile) Get_RemoteAdminSettings(remoteAdminSettings **INetFwRemoteAdminSettings) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(remoteAdminSettings)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProfile) Get_RemoteAdminSettings() (*INetFwRemoteAdminSettings, error) {
+	var _remoteAdminSettings *INetFwRemoteAdminSettings
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_remoteAdminSettings)))
+	return _remoteAdminSettings, win32.HRESULTError(int32(r1))
 }
 
 // Get_IcmpSettings dispatches through INetFwProfile's vtable slot 17.
-func (self *INetFwProfile) Get_IcmpSettings(icmpSettings **INetFwIcmpSettings) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(icmpSettings)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProfile) Get_IcmpSettings() (*INetFwIcmpSettings, error) {
+	var _icmpSettings *INetFwIcmpSettings
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_icmpSettings)))
+	return _icmpSettings, win32.HRESULTError(int32(r1))
 }
 
 // Get_GloballyOpenPorts dispatches through INetFwProfile's vtable slot 18.
-func (self *INetFwProfile) Get_GloballyOpenPorts(openPorts **INetFwOpenPorts) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(openPorts)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProfile) Get_GloballyOpenPorts() (*INetFwOpenPorts, error) {
+	var _openPorts *INetFwOpenPorts
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_openPorts)))
+	return _openPorts, win32.HRESULTError(int32(r1))
 }
 
 // Get_Services dispatches through INetFwProfile's vtable slot 19.
-func (self *INetFwProfile) Get_Services(services **INetFwServices) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(services)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProfile) Get_Services() (*INetFwServices, error) {
+	var _services *INetFwServices
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_services)))
+	return _services, win32.HRESULTError(int32(r1))
 }
 
 // Get_AuthorizedApplications dispatches through INetFwProfile's vtable slot 20.
-func (self *INetFwProfile) Get_AuthorizedApplications(apps **INetFwAuthorizedApplications) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(apps)))
-	return foundation.HRESULT(r1)
+func (self *INetFwProfile) Get_AuthorizedApplications() (*INetFwAuthorizedApplications, error) {
+	var _apps *INetFwAuthorizedApplications
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_apps)))
+	return _apps, win32.HRESULTError(int32(r1))
 }
 
 // INetFwRemoteAdminSettings: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwremoteadminsettings
@@ -1246,51 +1332,55 @@ type INetFwRemoteAdminSettings struct {
 var IID_INetFwRemoteAdminSettings = win32.GUID{Data1: 0xd4becddf, Data2: 0x6f73, Data3: 0x4a83, Data4: [8]byte{0xb8, 0x32, 0x9c, 0x66, 0x87, 0x4c, 0xd2, 0x0e}}
 
 // Get_IpVersion dispatches through INetFwRemoteAdminSettings's vtable slot 7.
-func (self *INetFwRemoteAdminSettings) Get_IpVersion(ipVersion *NET_FW_IP_VERSION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ipVersion)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRemoteAdminSettings) Get_IpVersion() (NET_FW_IP_VERSION, error) {
+	var _ipVersion NET_FW_IP_VERSION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ipVersion)))
+	return _ipVersion, win32.HRESULTError(int32(r1))
 }
 
 // Put_IpVersion dispatches through INetFwRemoteAdminSettings's vtable slot 8.
-func (self *INetFwRemoteAdminSettings) Put_IpVersion(ipVersion NET_FW_IP_VERSION) foundation.HRESULT {
+func (self *INetFwRemoteAdminSettings) Put_IpVersion(ipVersion NET_FW_IP_VERSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ipVersion))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Scope dispatches through INetFwRemoteAdminSettings's vtable slot 9.
-func (self *INetFwRemoteAdminSettings) Get_Scope(scope *NET_FW_SCOPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scope)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRemoteAdminSettings) Get_Scope() (NET_FW_SCOPE, error) {
+	var _scope NET_FW_SCOPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_scope)))
+	return _scope, win32.HRESULTError(int32(r1))
 }
 
 // Put_Scope dispatches through INetFwRemoteAdminSettings's vtable slot 10.
-func (self *INetFwRemoteAdminSettings) Put_Scope(scope NET_FW_SCOPE) foundation.HRESULT {
+func (self *INetFwRemoteAdminSettings) Put_Scope(scope NET_FW_SCOPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(scope))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RemoteAddresses dispatches through INetFwRemoteAdminSettings's vtable slot 11.
-func (self *INetFwRemoteAdminSettings) Get_RemoteAddresses(remoteAddrs *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(remoteAddrs)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRemoteAdminSettings) Get_RemoteAddresses() (foundation.BSTR, error) {
+	var _remoteAddrs foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_remoteAddrs)))
+	return _remoteAddrs, win32.HRESULTError(int32(r1))
 }
 
 // Put_RemoteAddresses dispatches through INetFwRemoteAdminSettings's vtable slot 12.
-func (self *INetFwRemoteAdminSettings) Put_RemoteAddresses(remoteAddrs foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRemoteAdminSettings) Put_RemoteAddresses(remoteAddrs foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(remoteAddrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Enabled dispatches through INetFwRemoteAdminSettings's vtable slot 13.
-func (self *INetFwRemoteAdminSettings) Get_Enabled(enabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(enabled)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRemoteAdminSettings) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enabled)))
+	return _enabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_Enabled dispatches through INetFwRemoteAdminSettings's vtable slot 14.
-func (self *INetFwRemoteAdminSettings) Put_Enabled(enabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwRemoteAdminSettings) Put_Enabled(enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INetFwRule: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwrule
@@ -1303,213 +1393,231 @@ type INetFwRule struct {
 var IID_INetFwRule = win32.GUID{Data1: 0xaf230d27, Data2: 0xbaba, Data3: 0x4e42, Data4: [8]byte{0xac, 0xed, 0xf5, 0x24, 0xf2, 0x2c, 0xfc, 0xe2}}
 
 // Get_Name dispatches through INetFwRule's vtable slot 7.
-func (self *INetFwRule) Get_Name(name *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
+	return _name, win32.HRESULTError(int32(r1))
 }
 
 // Put_Name dispatches through INetFwRule's vtable slot 8.
-func (self *INetFwRule) Put_Name(name foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule) Put_Name(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Description dispatches through INetFwRule's vtable slot 9.
-func (self *INetFwRule) Get_Description(desc *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(desc)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_Description() (foundation.BSTR, error) {
+	var _desc foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_desc)))
+	return _desc, win32.HRESULTError(int32(r1))
 }
 
 // Put_Description dispatches through INetFwRule's vtable slot 10.
-func (self *INetFwRule) Put_Description(desc foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule) Put_Description(desc foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(desc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ApplicationName dispatches through INetFwRule's vtable slot 11.
-func (self *INetFwRule) Get_ApplicationName(imageFileName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageFileName)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_ApplicationName() (foundation.BSTR, error) {
+	var _imageFileName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_imageFileName)))
+	return _imageFileName, win32.HRESULTError(int32(r1))
 }
 
 // Put_ApplicationName dispatches through INetFwRule's vtable slot 12.
-func (self *INetFwRule) Put_ApplicationName(imageFileName foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule) Put_ApplicationName(imageFileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(imageFileName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ServiceName dispatches through INetFwRule's vtable slot 13.
-func (self *INetFwRule) Get_ServiceName(serviceName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceName)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_ServiceName() (foundation.BSTR, error) {
+	var _serviceName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_serviceName)))
+	return _serviceName, win32.HRESULTError(int32(r1))
 }
 
 // Put_ServiceName dispatches through INetFwRule's vtable slot 14.
-func (self *INetFwRule) Put_ServiceName(serviceName foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule) Put_ServiceName(serviceName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Protocol dispatches through INetFwRule's vtable slot 15.
-func (self *INetFwRule) Get_Protocol(protocol *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(protocol)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_Protocol() (int32, error) {
+	var _protocol int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_protocol)))
+	return _protocol, win32.HRESULTError(int32(r1))
 }
 
 // Put_Protocol dispatches through INetFwRule's vtable slot 16.
-func (self *INetFwRule) Put_Protocol(protocol int32) foundation.HRESULT {
+func (self *INetFwRule) Put_Protocol(protocol int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(protocol))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LocalPorts dispatches through INetFwRule's vtable slot 17.
-func (self *INetFwRule) Get_LocalPorts(portNumbers *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(portNumbers)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_LocalPorts() (foundation.BSTR, error) {
+	var _portNumbers foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_portNumbers)))
+	return _portNumbers, win32.HRESULTError(int32(r1))
 }
 
 // Put_LocalPorts dispatches through INetFwRule's vtable slot 18.
-func (self *INetFwRule) Put_LocalPorts(portNumbers foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule) Put_LocalPorts(portNumbers foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(portNumbers)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RemotePorts dispatches through INetFwRule's vtable slot 19.
-func (self *INetFwRule) Get_RemotePorts(portNumbers *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(portNumbers)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_RemotePorts() (foundation.BSTR, error) {
+	var _portNumbers foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_portNumbers)))
+	return _portNumbers, win32.HRESULTError(int32(r1))
 }
 
 // Put_RemotePorts dispatches through INetFwRule's vtable slot 20.
-func (self *INetFwRule) Put_RemotePorts(portNumbers foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule) Put_RemotePorts(portNumbers foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(portNumbers)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LocalAddresses dispatches through INetFwRule's vtable slot 21.
-func (self *INetFwRule) Get_LocalAddresses(localAddrs *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(localAddrs)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_LocalAddresses() (foundation.BSTR, error) {
+	var _localAddrs foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_localAddrs)))
+	return _localAddrs, win32.HRESULTError(int32(r1))
 }
 
 // Put_LocalAddresses dispatches through INetFwRule's vtable slot 22.
-func (self *INetFwRule) Put_LocalAddresses(localAddrs foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule) Put_LocalAddresses(localAddrs foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(localAddrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RemoteAddresses dispatches through INetFwRule's vtable slot 23.
-func (self *INetFwRule) Get_RemoteAddresses(remoteAddrs *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(remoteAddrs)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_RemoteAddresses() (foundation.BSTR, error) {
+	var _remoteAddrs foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_remoteAddrs)))
+	return _remoteAddrs, win32.HRESULTError(int32(r1))
 }
 
 // Put_RemoteAddresses dispatches through INetFwRule's vtable slot 24.
-func (self *INetFwRule) Put_RemoteAddresses(remoteAddrs foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule) Put_RemoteAddresses(remoteAddrs foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(remoteAddrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IcmpTypesAndCodes dispatches through INetFwRule's vtable slot 25.
-func (self *INetFwRule) Get_IcmpTypesAndCodes(icmpTypesAndCodes *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(icmpTypesAndCodes)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_IcmpTypesAndCodes() (foundation.BSTR, error) {
+	var _icmpTypesAndCodes foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_icmpTypesAndCodes)))
+	return _icmpTypesAndCodes, win32.HRESULTError(int32(r1))
 }
 
 // Put_IcmpTypesAndCodes dispatches through INetFwRule's vtable slot 26.
-func (self *INetFwRule) Put_IcmpTypesAndCodes(icmpTypesAndCodes foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule) Put_IcmpTypesAndCodes(icmpTypesAndCodes foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(icmpTypesAndCodes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Direction dispatches through INetFwRule's vtable slot 27.
-func (self *INetFwRule) Get_Direction(dir *NET_FW_RULE_DIRECTION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dir)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_Direction() (NET_FW_RULE_DIRECTION, error) {
+	var _dir NET_FW_RULE_DIRECTION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_dir)))
+	return _dir, win32.HRESULTError(int32(r1))
 }
 
 // Put_Direction dispatches through INetFwRule's vtable slot 28.
-func (self *INetFwRule) Put_Direction(dir NET_FW_RULE_DIRECTION) foundation.HRESULT {
+func (self *INetFwRule) Put_Direction(dir NET_FW_RULE_DIRECTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(dir))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Interfaces dispatches through INetFwRule's vtable slot 29.
-func (self *INetFwRule) Get_Interfaces(interfaces *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interfaces)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_Interfaces() (systemvariant.VARIANT, error) {
+	var _interfaces systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_interfaces)))
+	return _interfaces, win32.HRESULTError(int32(r1))
 }
 
 // Get_InterfaceTypes dispatches through INetFwRule's vtable slot 31.
-func (self *INetFwRule) Get_InterfaceTypes(interfaceTypes *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interfaceTypes)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_InterfaceTypes() (foundation.BSTR, error) {
+	var _interfaceTypes foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_interfaceTypes)))
+	return _interfaceTypes, win32.HRESULTError(int32(r1))
 }
 
 // Put_InterfaceTypes dispatches through INetFwRule's vtable slot 32.
-func (self *INetFwRule) Put_InterfaceTypes(interfaceTypes foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule) Put_InterfaceTypes(interfaceTypes foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interfaceTypes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Enabled dispatches through INetFwRule's vtable slot 33.
-func (self *INetFwRule) Get_Enabled(enabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(enabled)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enabled)))
+	return _enabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_Enabled dispatches through INetFwRule's vtable slot 34.
-func (self *INetFwRule) Put_Enabled(enabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwRule) Put_Enabled(enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Grouping dispatches through INetFwRule's vtable slot 35.
-func (self *INetFwRule) Get_Grouping(context *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_Grouping() (foundation.BSTR, error) {
+	var _context foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_context)))
+	return _context, win32.HRESULTError(int32(r1))
 }
 
 // Put_Grouping dispatches through INetFwRule's vtable slot 36.
-func (self *INetFwRule) Put_Grouping(context foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule) Put_Grouping(context foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Profiles dispatches through INetFwRule's vtable slot 37.
-func (self *INetFwRule) Get_Profiles(profileTypesBitmask *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(profileTypesBitmask)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_Profiles() (int32, error) {
+	var _profileTypesBitmask int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_profileTypesBitmask)))
+	return _profileTypesBitmask, win32.HRESULTError(int32(r1))
 }
 
 // Put_Profiles dispatches through INetFwRule's vtable slot 38.
-func (self *INetFwRule) Put_Profiles(profileTypesBitmask int32) foundation.HRESULT {
+func (self *INetFwRule) Put_Profiles(profileTypesBitmask int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(profileTypesBitmask))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EdgeTraversal dispatches through INetFwRule's vtable slot 39.
-func (self *INetFwRule) Get_EdgeTraversal(enabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(enabled)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_EdgeTraversal() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enabled)))
+	return _enabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_EdgeTraversal dispatches through INetFwRule's vtable slot 40.
-func (self *INetFwRule) Put_EdgeTraversal(enabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwRule) Put_EdgeTraversal(enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Action dispatches through INetFwRule's vtable slot 41.
-func (self *INetFwRule) Get_Action(action *NET_FW_ACTION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(action)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule) Get_Action() (NET_FW_ACTION, error) {
+	var _action NET_FW_ACTION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_action)))
+	return _action, win32.HRESULTError(int32(r1))
 }
 
 // Put_Action dispatches through INetFwRule's vtable slot 42.
-func (self *INetFwRule) Put_Action(action NET_FW_ACTION) foundation.HRESULT {
+func (self *INetFwRule) Put_Action(action NET_FW_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(action))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INetFwRule2: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwrule2
@@ -1522,15 +1630,16 @@ type INetFwRule2 struct {
 var IID_INetFwRule2 = win32.GUID{Data1: 0x9c27c8da, Data2: 0x189b, Data3: 0x4dde, Data4: [8]byte{0x89, 0xf7, 0x8b, 0x39, 0xa3, 0x16, 0x78, 0x2c}}
 
 // Get_EdgeTraversalOptions dispatches through INetFwRule2's vtable slot 43.
-func (self *INetFwRule2) Get_EdgeTraversalOptions(lOptions *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lOptions)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule2) Get_EdgeTraversalOptions() (int32, error) {
+	var _lOptions int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lOptions)))
+	return _lOptions, win32.HRESULTError(int32(r1))
 }
 
 // Put_EdgeTraversalOptions dispatches through INetFwRule2's vtable slot 44.
-func (self *INetFwRule2) Put_EdgeTraversalOptions(lOptions int32) foundation.HRESULT {
+func (self *INetFwRule2) Put_EdgeTraversalOptions(lOptions int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(lOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INetFwRule3: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwrule3
@@ -1543,75 +1652,81 @@ type INetFwRule3 struct {
 var IID_INetFwRule3 = win32.GUID{Data1: 0xb21563ff, Data2: 0xd696, Data3: 0x4222, Data4: [8]byte{0xab, 0x46, 0x4e, 0x89, 0xb7, 0x3a, 0xb3, 0x4a}}
 
 // Get_LocalAppPackageId dispatches through INetFwRule3's vtable slot 45.
-func (self *INetFwRule3) Get_LocalAppPackageId(wszPackageId *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszPackageId)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule3) Get_LocalAppPackageId() (foundation.BSTR, error) {
+	var _wszPackageId foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_wszPackageId)))
+	return _wszPackageId, win32.HRESULTError(int32(r1))
 }
 
 // Put_LocalAppPackageId dispatches through INetFwRule3's vtable slot 46.
-func (self *INetFwRule3) Put_LocalAppPackageId(wszPackageId foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule3) Put_LocalAppPackageId(wszPackageId foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszPackageId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LocalUserOwner dispatches through INetFwRule3's vtable slot 47.
-func (self *INetFwRule3) Get_LocalUserOwner(wszUserOwner *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszUserOwner)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule3) Get_LocalUserOwner() (foundation.BSTR, error) {
+	var _wszUserOwner foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_wszUserOwner)))
+	return _wszUserOwner, win32.HRESULTError(int32(r1))
 }
 
 // Put_LocalUserOwner dispatches through INetFwRule3's vtable slot 48.
-func (self *INetFwRule3) Put_LocalUserOwner(wszUserOwner foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule3) Put_LocalUserOwner(wszUserOwner foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszUserOwner)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LocalUserAuthorizedList dispatches through INetFwRule3's vtable slot 49.
-func (self *INetFwRule3) Get_LocalUserAuthorizedList(wszUserAuthList *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszUserAuthList)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule3) Get_LocalUserAuthorizedList() (foundation.BSTR, error) {
+	var _wszUserAuthList foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_wszUserAuthList)))
+	return _wszUserAuthList, win32.HRESULTError(int32(r1))
 }
 
 // Put_LocalUserAuthorizedList dispatches through INetFwRule3's vtable slot 50.
-func (self *INetFwRule3) Put_LocalUserAuthorizedList(wszUserAuthList foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule3) Put_LocalUserAuthorizedList(wszUserAuthList foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszUserAuthList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RemoteUserAuthorizedList dispatches through INetFwRule3's vtable slot 51.
-func (self *INetFwRule3) Get_RemoteUserAuthorizedList(wszUserAuthList *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszUserAuthList)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule3) Get_RemoteUserAuthorizedList() (foundation.BSTR, error) {
+	var _wszUserAuthList foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_wszUserAuthList)))
+	return _wszUserAuthList, win32.HRESULTError(int32(r1))
 }
 
 // Put_RemoteUserAuthorizedList dispatches through INetFwRule3's vtable slot 52.
-func (self *INetFwRule3) Put_RemoteUserAuthorizedList(wszUserAuthList foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule3) Put_RemoteUserAuthorizedList(wszUserAuthList foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszUserAuthList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RemoteMachineAuthorizedList dispatches through INetFwRule3's vtable slot 53.
-func (self *INetFwRule3) Get_RemoteMachineAuthorizedList(wszUserAuthList *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszUserAuthList)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule3) Get_RemoteMachineAuthorizedList() (foundation.BSTR, error) {
+	var _wszUserAuthList foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_wszUserAuthList)))
+	return _wszUserAuthList, win32.HRESULTError(int32(r1))
 }
 
 // Put_RemoteMachineAuthorizedList dispatches through INetFwRule3's vtable slot 54.
-func (self *INetFwRule3) Put_RemoteMachineAuthorizedList(wszUserAuthList foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRule3) Put_RemoteMachineAuthorizedList(wszUserAuthList foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszUserAuthList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SecureFlags dispatches through INetFwRule3's vtable slot 55.
-func (self *INetFwRule3) Get_SecureFlags(lOptions *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lOptions)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRule3) Get_SecureFlags() (int32, error) {
+	var _lOptions int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lOptions)))
+	return _lOptions, win32.HRESULTError(int32(r1))
 }
 
 // Put_SecureFlags dispatches through INetFwRule3's vtable slot 56.
-func (self *INetFwRule3) Put_SecureFlags(lOptions int32) foundation.HRESULT {
+func (self *INetFwRule3) Put_SecureFlags(lOptions int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(lOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INetFwRules: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwrules
@@ -1624,33 +1739,36 @@ type INetFwRules struct {
 var IID_INetFwRules = win32.GUID{Data1: 0x9c4c6277, Data2: 0x5027, Data3: 0x441e, Data4: [8]byte{0xaf, 0xae, 0xca, 0x1f, 0x54, 0x2d, 0xa0, 0x09}}
 
 // Get_Count dispatches through INetFwRules's vtable slot 7.
-func (self *INetFwRules) Get_Count(count *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRules) Get_Count() (int32, error) {
+	var _count int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
+	return _count, win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through INetFwRules's vtable slot 8.
-func (self *INetFwRules) Add(rule *INetFwRule) foundation.HRESULT {
+func (self *INetFwRules) Add(rule *INetFwRule) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rule)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through INetFwRules's vtable slot 9.
-func (self *INetFwRules) Remove(name foundation.BSTR) foundation.HRESULT {
+func (self *INetFwRules) Remove(name foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through INetFwRules's vtable slot 10.
-func (self *INetFwRules) Item(name foundation.BSTR, rule **INetFwRule) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(rule)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRules) Item(name foundation.BSTR) (*INetFwRule, error) {
+	var _rule *INetFwRule
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(&_rule)))
+	return _rule, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through INetFwRules's vtable slot 11.
-func (self *INetFwRules) Get__NewEnum(newEnum **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newEnum)))
-	return foundation.HRESULT(r1)
+func (self *INetFwRules) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _newEnum *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_newEnum)))
+	return _newEnum, win32.HRESULTError(int32(r1))
 }
 
 // INetFwService: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwservice
@@ -1663,75 +1781,83 @@ type INetFwService struct {
 var IID_INetFwService = win32.GUID{Data1: 0x79fd57c8, Data2: 0x908e, Data3: 0x4a36, Data4: [8]byte{0x98, 0x88, 0xd5, 0xb3, 0xf0, 0xa4, 0x44, 0xcf}}
 
 // Get_Name dispatches through INetFwService's vtable slot 7.
-func (self *INetFwService) Get_Name(name *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)))
-	return foundation.HRESULT(r1)
+func (self *INetFwService) Get_Name() (foundation.BSTR, error) {
+	var _name foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_name)))
+	return _name, win32.HRESULTError(int32(r1))
 }
 
 // Get_Type dispatches through INetFwService's vtable slot 8.
-func (self *INetFwService) Get_Type(type_ *NET_FW_SERVICE_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(type_)))
-	return foundation.HRESULT(r1)
+func (self *INetFwService) Get_Type() (NET_FW_SERVICE_TYPE, error) {
+	var _type_ NET_FW_SERVICE_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_type_)))
+	return _type_, win32.HRESULTError(int32(r1))
 }
 
 // Get_Customized dispatches through INetFwService's vtable slot 9.
-func (self *INetFwService) Get_Customized(customized *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(customized)))
-	return foundation.HRESULT(r1)
+func (self *INetFwService) Get_Customized() (foundation.VARIANT_BOOL, error) {
+	var _customized foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_customized)))
+	return _customized, win32.HRESULTError(int32(r1))
 }
 
 // Get_IpVersion dispatches through INetFwService's vtable slot 10.
-func (self *INetFwService) Get_IpVersion(ipVersion *NET_FW_IP_VERSION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ipVersion)))
-	return foundation.HRESULT(r1)
+func (self *INetFwService) Get_IpVersion() (NET_FW_IP_VERSION, error) {
+	var _ipVersion NET_FW_IP_VERSION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ipVersion)))
+	return _ipVersion, win32.HRESULTError(int32(r1))
 }
 
 // Put_IpVersion dispatches through INetFwService's vtable slot 11.
-func (self *INetFwService) Put_IpVersion(ipVersion NET_FW_IP_VERSION) foundation.HRESULT {
+func (self *INetFwService) Put_IpVersion(ipVersion NET_FW_IP_VERSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(ipVersion))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Scope dispatches through INetFwService's vtable slot 12.
-func (self *INetFwService) Get_Scope(scope *NET_FW_SCOPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scope)))
-	return foundation.HRESULT(r1)
+func (self *INetFwService) Get_Scope() (NET_FW_SCOPE, error) {
+	var _scope NET_FW_SCOPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_scope)))
+	return _scope, win32.HRESULTError(int32(r1))
 }
 
 // Put_Scope dispatches through INetFwService's vtable slot 13.
-func (self *INetFwService) Put_Scope(scope NET_FW_SCOPE) foundation.HRESULT {
+func (self *INetFwService) Put_Scope(scope NET_FW_SCOPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(scope))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RemoteAddresses dispatches through INetFwService's vtable slot 14.
-func (self *INetFwService) Get_RemoteAddresses(remoteAddrs *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(remoteAddrs)))
-	return foundation.HRESULT(r1)
+func (self *INetFwService) Get_RemoteAddresses() (foundation.BSTR, error) {
+	var _remoteAddrs foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_remoteAddrs)))
+	return _remoteAddrs, win32.HRESULTError(int32(r1))
 }
 
 // Put_RemoteAddresses dispatches through INetFwService's vtable slot 15.
-func (self *INetFwService) Put_RemoteAddresses(remoteAddrs foundation.BSTR) foundation.HRESULT {
+func (self *INetFwService) Put_RemoteAddresses(remoteAddrs foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(remoteAddrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Enabled dispatches through INetFwService's vtable slot 16.
-func (self *INetFwService) Get_Enabled(enabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(enabled)))
-	return foundation.HRESULT(r1)
+func (self *INetFwService) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _enabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enabled)))
+	return _enabled, win32.HRESULTError(int32(r1))
 }
 
 // Put_Enabled dispatches through INetFwService's vtable slot 17.
-func (self *INetFwService) Put_Enabled(enabled foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwService) Put_Enabled(enabled foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(enabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_GloballyOpenPorts dispatches through INetFwService's vtable slot 18.
-func (self *INetFwService) Get_GloballyOpenPorts(openPorts **INetFwOpenPorts) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(openPorts)))
-	return foundation.HRESULT(r1)
+func (self *INetFwService) Get_GloballyOpenPorts() (*INetFwOpenPorts, error) {
+	var _openPorts *INetFwOpenPorts
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_openPorts)))
+	return _openPorts, win32.HRESULTError(int32(r1))
 }
 
 // INetFwServiceRestriction: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwservicerestriction
@@ -1744,21 +1870,23 @@ type INetFwServiceRestriction struct {
 var IID_INetFwServiceRestriction = win32.GUID{Data1: 0x8267bbe3, Data2: 0xf890, Data3: 0x491c, Data4: [8]byte{0xb7, 0xb6, 0x2d, 0xb1, 0xef, 0x0e, 0x5d, 0x2b}}
 
 // RestrictService dispatches through INetFwServiceRestriction's vtable slot 7.
-func (self *INetFwServiceRestriction) RestrictService(serviceName foundation.BSTR, appName foundation.BSTR, restrictService foundation.VARIANT_BOOL, serviceSidRestricted foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *INetFwServiceRestriction) RestrictService(serviceName foundation.BSTR, appName foundation.BSTR, restrictService foundation.VARIANT_BOOL, serviceSidRestricted foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceName)), uintptr(unsafe.Pointer(appName)), uintptr(restrictService), uintptr(serviceSidRestricted))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ServiceRestricted dispatches through INetFwServiceRestriction's vtable slot 8.
-func (self *INetFwServiceRestriction) ServiceRestricted(serviceName foundation.BSTR, appName foundation.BSTR, serviceRestricted *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceName)), uintptr(unsafe.Pointer(appName)), uintptr(unsafe.Pointer(serviceRestricted)))
-	return foundation.HRESULT(r1)
+func (self *INetFwServiceRestriction) ServiceRestricted(serviceName foundation.BSTR, appName foundation.BSTR) (foundation.VARIANT_BOOL, error) {
+	var _serviceRestricted foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceName)), uintptr(unsafe.Pointer(appName)), uintptr(unsafe.Pointer(&_serviceRestricted)))
+	return _serviceRestricted, win32.HRESULTError(int32(r1))
 }
 
 // Get_Rules dispatches through INetFwServiceRestriction's vtable slot 9.
-func (self *INetFwServiceRestriction) Get_Rules(rules **INetFwRules) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rules)))
-	return foundation.HRESULT(r1)
+func (self *INetFwServiceRestriction) Get_Rules() (*INetFwRules, error) {
+	var _rules *INetFwRules
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_rules)))
+	return _rules, win32.HRESULTError(int32(r1))
 }
 
 // INetFwServices: https://learn.microsoft.com/windows/win32/api/netfw/nn-netfw-inetfwservices
@@ -1771,21 +1899,24 @@ type INetFwServices struct {
 var IID_INetFwServices = win32.GUID{Data1: 0x79649bb4, Data2: 0x903e, Data3: 0x421b, Data4: [8]byte{0x94, 0xc9, 0x79, 0x84, 0x8e, 0x79, 0xf6, 0xee}}
 
 // Get_Count dispatches through INetFwServices's vtable slot 7.
-func (self *INetFwServices) Get_Count(count *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+func (self *INetFwServices) Get_Count() (int32, error) {
+	var _count int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_count)))
+	return _count, win32.HRESULTError(int32(r1))
 }
 
 // Item dispatches through INetFwServices's vtable slot 8.
-func (self *INetFwServices) Item(svcType NET_FW_SERVICE_TYPE, service **INetFwService) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(svcType), uintptr(unsafe.Pointer(service)))
-	return foundation.HRESULT(r1)
+func (self *INetFwServices) Item(svcType NET_FW_SERVICE_TYPE) (*INetFwService, error) {
+	var _service *INetFwService
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(svcType), uintptr(unsafe.Pointer(&_service)))
+	return _service, win32.HRESULTError(int32(r1))
 }
 
 // Get__NewEnum dispatches through INetFwServices's vtable slot 9.
-func (self *INetFwServices) Get__NewEnum(newEnum **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newEnum)))
-	return foundation.HRESULT(r1)
+func (self *INetFwServices) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _newEnum *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_newEnum)))
+	return _newEnum, win32.HRESULTError(int32(r1))
 }
 
 // INetSharingConfiguration: https://learn.microsoft.com/windows/win32/api/netcon/nn-netcon-inetsharingconfiguration
@@ -1798,63 +1929,68 @@ type INetSharingConfiguration struct {
 var IID_INetSharingConfiguration = win32.GUID{Data1: 0xc08956b6, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Get_SharingEnabled dispatches through INetSharingConfiguration's vtable slot 7.
-func (self *INetSharingConfiguration) Get_SharingEnabled(pbEnabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingConfiguration) Get_SharingEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pbEnabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbEnabled)))
+	return _pbEnabled, win32.HRESULTError(int32(r1))
 }
 
 // Get_SharingConnectionType dispatches through INetSharingConfiguration's vtable slot 8.
-func (self *INetSharingConfiguration) Get_SharingConnectionType(pType *SHARINGCONNECTIONTYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pType)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingConfiguration) Get_SharingConnectionType() (SHARINGCONNECTIONTYPE, error) {
+	var _pType SHARINGCONNECTIONTYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pType)))
+	return _pType, win32.HRESULTError(int32(r1))
 }
 
 // DisableSharing dispatches through INetSharingConfiguration's vtable slot 9.
-func (self *INetSharingConfiguration) DisableSharing() foundation.HRESULT {
+func (self *INetSharingConfiguration) DisableSharing() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableSharing dispatches through INetSharingConfiguration's vtable slot 10.
-func (self *INetSharingConfiguration) EnableSharing(Type SHARINGCONNECTIONTYPE) foundation.HRESULT {
+func (self *INetSharingConfiguration) EnableSharing(Type SHARINGCONNECTIONTYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Type))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_InternetFirewallEnabled dispatches through INetSharingConfiguration's vtable slot 11.
-func (self *INetSharingConfiguration) Get_InternetFirewallEnabled(pbEnabled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbEnabled)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingConfiguration) Get_InternetFirewallEnabled() (foundation.VARIANT_BOOL, error) {
+	var _pbEnabled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbEnabled)))
+	return _pbEnabled, win32.HRESULTError(int32(r1))
 }
 
 // DisableInternetFirewall dispatches through INetSharingConfiguration's vtable slot 12.
-func (self *INetSharingConfiguration) DisableInternetFirewall() foundation.HRESULT {
+func (self *INetSharingConfiguration) DisableInternetFirewall() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableInternetFirewall dispatches through INetSharingConfiguration's vtable slot 13.
-func (self *INetSharingConfiguration) EnableInternetFirewall() foundation.HRESULT {
+func (self *INetSharingConfiguration) EnableInternetFirewall() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EnumPortMappings dispatches through INetSharingConfiguration's vtable slot 14.
-func (self *INetSharingConfiguration) Get_EnumPortMappings(Flags SHARINGCONNECTION_ENUM_FLAGS, ppColl **INetSharingPortMappingCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(ppColl)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingConfiguration) Get_EnumPortMappings(Flags SHARINGCONNECTION_ENUM_FLAGS) (*INetSharingPortMappingCollection, error) {
+	var _ppColl *INetSharingPortMappingCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(&_ppColl)))
+	return _ppColl, win32.HRESULTError(int32(r1))
 }
 
 // AddPortMapping dispatches through INetSharingConfiguration's vtable slot 15.
-func (self *INetSharingConfiguration) AddPortMapping(bstrName foundation.BSTR, ucIPProtocol byte, usExternalPort uint16, usInternalPort uint16, dwOptions uint32, bstrTargetNameOrIPAddress foundation.BSTR, eTargetType ICS_TARGETTYPE, ppMapping **INetSharingPortMapping) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(ucIPProtocol), uintptr(usExternalPort), uintptr(usInternalPort), uintptr(dwOptions), uintptr(unsafe.Pointer(bstrTargetNameOrIPAddress)), uintptr(eTargetType), uintptr(unsafe.Pointer(ppMapping)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingConfiguration) AddPortMapping(bstrName foundation.BSTR, ucIPProtocol byte, usExternalPort uint16, usInternalPort uint16, dwOptions uint32, bstrTargetNameOrIPAddress foundation.BSTR, eTargetType ICS_TARGETTYPE) (*INetSharingPortMapping, error) {
+	var _ppMapping *INetSharingPortMapping
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(ucIPProtocol), uintptr(usExternalPort), uintptr(usInternalPort), uintptr(dwOptions), uintptr(unsafe.Pointer(bstrTargetNameOrIPAddress)), uintptr(eTargetType), uintptr(unsafe.Pointer(&_ppMapping)))
+	return _ppMapping, win32.HRESULTError(int32(r1))
 }
 
 // RemovePortMapping dispatches through INetSharingConfiguration's vtable slot 16.
-func (self *INetSharingConfiguration) RemovePortMapping(pMapping *INetSharingPortMapping) foundation.HRESULT {
+func (self *INetSharingConfiguration) RemovePortMapping(pMapping *INetSharingPortMapping) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMapping)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INetSharingEveryConnectionCollection: https://learn.microsoft.com/windows/win32/api/netcon/nn-netcon-inetsharingeveryconnectioncollection
@@ -1867,15 +2003,17 @@ type INetSharingEveryConnectionCollection struct {
 var IID_INetSharingEveryConnectionCollection = win32.GUID{Data1: 0x33c4643c, Data2: 0x7811, Data3: 0x46fa, Data4: [8]byte{0xa8, 0x9a, 0x76, 0x85, 0x97, 0xbd, 0x72, 0x23}}
 
 // Get__NewEnum dispatches through INetSharingEveryConnectionCollection's vtable slot 7.
-func (self *INetSharingEveryConnectionCollection) Get__NewEnum(pVal **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingEveryConnectionCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pVal *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through INetSharingEveryConnectionCollection's vtable slot 8.
-func (self *INetSharingEveryConnectionCollection) Get_Count(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingEveryConnectionCollection) Get_Count() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // INetSharingManager: https://learn.microsoft.com/windows/win32/api/netcon/nn-netcon-inetsharingmanager
@@ -1888,39 +2026,45 @@ type INetSharingManager struct {
 var IID_INetSharingManager = win32.GUID{Data1: 0xc08956b7, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Get_SharingInstalled dispatches through INetSharingManager's vtable slot 7.
-func (self *INetSharingManager) Get_SharingInstalled(pbInstalled *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbInstalled)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingManager) Get_SharingInstalled() (foundation.VARIANT_BOOL, error) {
+	var _pbInstalled foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbInstalled)))
+	return _pbInstalled, win32.HRESULTError(int32(r1))
 }
 
 // Get_EnumPublicConnections dispatches through INetSharingManager's vtable slot 8.
-func (self *INetSharingManager) Get_EnumPublicConnections(Flags SHARINGCONNECTION_ENUM_FLAGS, ppColl **INetSharingPublicConnectionCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(ppColl)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingManager) Get_EnumPublicConnections(Flags SHARINGCONNECTION_ENUM_FLAGS) (*INetSharingPublicConnectionCollection, error) {
+	var _ppColl *INetSharingPublicConnectionCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(&_ppColl)))
+	return _ppColl, win32.HRESULTError(int32(r1))
 }
 
 // Get_EnumPrivateConnections dispatches through INetSharingManager's vtable slot 9.
-func (self *INetSharingManager) Get_EnumPrivateConnections(Flags SHARINGCONNECTION_ENUM_FLAGS, ppColl **INetSharingPrivateConnectionCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(ppColl)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingManager) Get_EnumPrivateConnections(Flags SHARINGCONNECTION_ENUM_FLAGS) (*INetSharingPrivateConnectionCollection, error) {
+	var _ppColl *INetSharingPrivateConnectionCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(&_ppColl)))
+	return _ppColl, win32.HRESULTError(int32(r1))
 }
 
 // Get_INetSharingConfigurationForINetConnection dispatches through INetSharingManager's vtable slot 10.
-func (self *INetSharingManager) Get_INetSharingConfigurationForINetConnection(pNetConnection *INetConnection, ppNetSharingConfiguration **INetSharingConfiguration) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNetConnection)), uintptr(unsafe.Pointer(ppNetSharingConfiguration)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingManager) Get_INetSharingConfigurationForINetConnection(pNetConnection *INetConnection) (*INetSharingConfiguration, error) {
+	var _ppNetSharingConfiguration *INetSharingConfiguration
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNetConnection)), uintptr(unsafe.Pointer(&_ppNetSharingConfiguration)))
+	return _ppNetSharingConfiguration, win32.HRESULTError(int32(r1))
 }
 
 // Get_EnumEveryConnection dispatches through INetSharingManager's vtable slot 11.
-func (self *INetSharingManager) Get_EnumEveryConnection(ppColl **INetSharingEveryConnectionCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppColl)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingManager) Get_EnumEveryConnection() (*INetSharingEveryConnectionCollection, error) {
+	var _ppColl *INetSharingEveryConnectionCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppColl)))
+	return _ppColl, win32.HRESULTError(int32(r1))
 }
 
 // Get_NetConnectionProps dispatches through INetSharingManager's vtable slot 12.
-func (self *INetSharingManager) Get_NetConnectionProps(pNetConnection *INetConnection, ppProps **INetConnectionProps) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNetConnection)), uintptr(unsafe.Pointer(ppProps)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingManager) Get_NetConnectionProps(pNetConnection *INetConnection) (*INetConnectionProps, error) {
+	var _ppProps *INetConnectionProps
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNetConnection)), uintptr(unsafe.Pointer(&_ppProps)))
+	return _ppProps, win32.HRESULTError(int32(r1))
 }
 
 // INetSharingPortMapping: https://learn.microsoft.com/windows/win32/api/netcon/nn-netcon-inetsharingportmapping
@@ -1933,27 +2077,28 @@ type INetSharingPortMapping struct {
 var IID_INetSharingPortMapping = win32.GUID{Data1: 0xc08956b1, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Disable dispatches through INetSharingPortMapping's vtable slot 7.
-func (self *INetSharingPortMapping) Disable() foundation.HRESULT {
+func (self *INetSharingPortMapping) Disable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Enable dispatches through INetSharingPortMapping's vtable slot 8.
-func (self *INetSharingPortMapping) Enable() foundation.HRESULT {
+func (self *INetSharingPortMapping) Enable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Properties dispatches through INetSharingPortMapping's vtable slot 9.
-func (self *INetSharingPortMapping) Get_Properties(ppNSPMP **INetSharingPortMappingProps) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNSPMP)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPortMapping) Get_Properties() (*INetSharingPortMappingProps, error) {
+	var _ppNSPMP *INetSharingPortMappingProps
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNSPMP)))
+	return _ppNSPMP, win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through INetSharingPortMapping's vtable slot 10.
-func (self *INetSharingPortMapping) Delete() foundation.HRESULT {
+func (self *INetSharingPortMapping) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INetSharingPortMappingCollection: https://learn.microsoft.com/windows/win32/api/netcon/nn-netcon-inetsharingportmappingcollection
@@ -1966,15 +2111,17 @@ type INetSharingPortMappingCollection struct {
 var IID_INetSharingPortMappingCollection = win32.GUID{Data1: 0x02e4a2de, Data2: 0xda20, Data3: 0x4e34, Data4: [8]byte{0x89, 0xc8, 0xac, 0x22, 0x27, 0x5a, 0x01, 0x0b}}
 
 // Get__NewEnum dispatches through INetSharingPortMappingCollection's vtable slot 7.
-func (self *INetSharingPortMappingCollection) Get__NewEnum(pVal **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPortMappingCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pVal *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through INetSharingPortMappingCollection's vtable slot 8.
-func (self *INetSharingPortMappingCollection) Get_Count(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPortMappingCollection) Get_Count() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // INetSharingPortMappingProps: https://learn.microsoft.com/windows/win32/api/netcon/nn-netcon-inetsharingportmappingprops
@@ -1987,51 +2134,59 @@ type INetSharingPortMappingProps struct {
 var IID_INetSharingPortMappingProps = win32.GUID{Data1: 0x24b7e9b5, Data2: 0xe38f, Data3: 0x4685, Data4: [8]byte{0x85, 0x1b, 0x00, 0x89, 0x2c, 0xf5, 0xf9, 0x40}}
 
 // Get_Name dispatches through INetSharingPortMappingProps's vtable slot 7.
-func (self *INetSharingPortMappingProps) Get_Name(pbstrName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPortMappingProps) Get_Name() (foundation.BSTR, error) {
+	var _pbstrName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrName)))
+	return _pbstrName, win32.HRESULTError(int32(r1))
 }
 
 // Get_IPProtocol dispatches through INetSharingPortMappingProps's vtable slot 8.
-func (self *INetSharingPortMappingProps) Get_IPProtocol(pucIPProt *byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pucIPProt)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPortMappingProps) Get_IPProtocol() (byte, error) {
+	var _pucIPProt byte
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pucIPProt)))
+	return _pucIPProt, win32.HRESULTError(int32(r1))
 }
 
 // Get_ExternalPort dispatches through INetSharingPortMappingProps's vtable slot 9.
-func (self *INetSharingPortMappingProps) Get_ExternalPort(pusPort *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pusPort)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPortMappingProps) Get_ExternalPort() (int32, error) {
+	var _pusPort int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pusPort)))
+	return _pusPort, win32.HRESULTError(int32(r1))
 }
 
 // Get_InternalPort dispatches through INetSharingPortMappingProps's vtable slot 10.
-func (self *INetSharingPortMappingProps) Get_InternalPort(pusPort *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pusPort)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPortMappingProps) Get_InternalPort() (int32, error) {
+	var _pusPort int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pusPort)))
+	return _pusPort, win32.HRESULTError(int32(r1))
 }
 
 // Get_Options dispatches through INetSharingPortMappingProps's vtable slot 11.
-func (self *INetSharingPortMappingProps) Get_Options(pdwOptions *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwOptions)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPortMappingProps) Get_Options() (int32, error) {
+	var _pdwOptions int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwOptions)))
+	return _pdwOptions, win32.HRESULTError(int32(r1))
 }
 
 // Get_TargetName dispatches through INetSharingPortMappingProps's vtable slot 12.
-func (self *INetSharingPortMappingProps) Get_TargetName(pbstrTargetName *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTargetName)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPortMappingProps) Get_TargetName() (foundation.BSTR, error) {
+	var _pbstrTargetName foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrTargetName)))
+	return _pbstrTargetName, win32.HRESULTError(int32(r1))
 }
 
 // Get_TargetIPAddress dispatches through INetSharingPortMappingProps's vtable slot 13.
-func (self *INetSharingPortMappingProps) Get_TargetIPAddress(pbstrTargetIPAddress *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTargetIPAddress)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPortMappingProps) Get_TargetIPAddress() (foundation.BSTR, error) {
+	var _pbstrTargetIPAddress foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrTargetIPAddress)))
+	return _pbstrTargetIPAddress, win32.HRESULTError(int32(r1))
 }
 
 // Get_Enabled dispatches through INetSharingPortMappingProps's vtable slot 14.
-func (self *INetSharingPortMappingProps) Get_Enabled(pbool *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbool)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPortMappingProps) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _pbool foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbool)))
+	return _pbool, win32.HRESULTError(int32(r1))
 }
 
 // INetSharingPrivateConnectionCollection: https://learn.microsoft.com/windows/win32/api/netcon/nn-netcon-inetsharingprivateconnectioncollection
@@ -2044,15 +2199,17 @@ type INetSharingPrivateConnectionCollection struct {
 var IID_INetSharingPrivateConnectionCollection = win32.GUID{Data1: 0x38ae69e0, Data2: 0x4409, Data3: 0x402a, Data4: [8]byte{0xa2, 0xcb, 0xe9, 0x65, 0xc7, 0x27, 0xf8, 0x40}}
 
 // Get__NewEnum dispatches through INetSharingPrivateConnectionCollection's vtable slot 7.
-func (self *INetSharingPrivateConnectionCollection) Get__NewEnum(pVal **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPrivateConnectionCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pVal *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through INetSharingPrivateConnectionCollection's vtable slot 8.
-func (self *INetSharingPrivateConnectionCollection) Get_Count(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPrivateConnectionCollection) Get_Count() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // INetSharingPublicConnectionCollection: https://learn.microsoft.com/windows/win32/api/netcon/nn-netcon-inetsharingpublicconnectioncollection
@@ -2065,15 +2222,17 @@ type INetSharingPublicConnectionCollection struct {
 var IID_INetSharingPublicConnectionCollection = win32.GUID{Data1: 0x7d7a6355, Data2: 0xf372, Data3: 0x4971, Data4: [8]byte{0xa1, 0x49, 0xbf, 0xc9, 0x27, 0xbe, 0x76, 0x2a}}
 
 // Get__NewEnum dispatches through INetSharingPublicConnectionCollection's vtable slot 7.
-func (self *INetSharingPublicConnectionCollection) Get__NewEnum(pVal **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPublicConnectionCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pVal *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through INetSharingPublicConnectionCollection's vtable slot 8.
-func (self *INetSharingPublicConnectionCollection) Get_Count(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *INetSharingPublicConnectionCollection) Get_Count() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // IStaticPortMapping: https://learn.microsoft.com/windows/win32/api/natupnp/nn-natupnp-istaticportmapping
@@ -2086,69 +2245,76 @@ type IStaticPortMapping struct {
 var IID_IStaticPortMapping = win32.GUID{Data1: 0x6f10711f, Data2: 0x729b, Data3: 0x41e5, Data4: [8]byte{0x93, 0xb8, 0xf2, 0x1d, 0x0f, 0x81, 0x8d, 0xf1}}
 
 // Get_ExternalIPAddress dispatches through IStaticPortMapping's vtable slot 7.
-func (self *IStaticPortMapping) Get_ExternalIPAddress(pVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IStaticPortMapping) Get_ExternalIPAddress() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_ExternalPort dispatches through IStaticPortMapping's vtable slot 8.
-func (self *IStaticPortMapping) Get_ExternalPort(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IStaticPortMapping) Get_ExternalPort() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_InternalPort dispatches through IStaticPortMapping's vtable slot 9.
-func (self *IStaticPortMapping) Get_InternalPort(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IStaticPortMapping) Get_InternalPort() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Protocol dispatches through IStaticPortMapping's vtable slot 10.
-func (self *IStaticPortMapping) Get_Protocol(pVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IStaticPortMapping) Get_Protocol() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_InternalClient dispatches through IStaticPortMapping's vtable slot 11.
-func (self *IStaticPortMapping) Get_InternalClient(pVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IStaticPortMapping) Get_InternalClient() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Enabled dispatches through IStaticPortMapping's vtable slot 12.
-func (self *IStaticPortMapping) Get_Enabled(pVal *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IStaticPortMapping) Get_Enabled() (foundation.VARIANT_BOOL, error) {
+	var _pVal foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Description dispatches through IStaticPortMapping's vtable slot 13.
-func (self *IStaticPortMapping) Get_Description(pVal *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IStaticPortMapping) Get_Description() (foundation.BSTR, error) {
+	var _pVal foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // EditInternalClient dispatches through IStaticPortMapping's vtable slot 14.
-func (self *IStaticPortMapping) EditInternalClient(bstrInternalClient foundation.BSTR) foundation.HRESULT {
+func (self *IStaticPortMapping) EditInternalClient(bstrInternalClient foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInternalClient)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Enable dispatches through IStaticPortMapping's vtable slot 15.
-func (self *IStaticPortMapping) Enable(vb foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IStaticPortMapping) Enable(vb foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(vb))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EditDescription dispatches through IStaticPortMapping's vtable slot 16.
-func (self *IStaticPortMapping) EditDescription(bstrDescription foundation.BSTR) foundation.HRESULT {
+func (self *IStaticPortMapping) EditDescription(bstrDescription foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EditInternalPort dispatches through IStaticPortMapping's vtable slot 17.
-func (self *IStaticPortMapping) EditInternalPort(lInternalPort int32) foundation.HRESULT {
+func (self *IStaticPortMapping) EditInternalPort(lInternalPort int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(lInternalPort))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IStaticPortMappingCollection: https://learn.microsoft.com/windows/win32/api/natupnp/nn-natupnp-istaticportmappingcollection
@@ -2161,33 +2327,37 @@ type IStaticPortMappingCollection struct {
 var IID_IStaticPortMappingCollection = win32.GUID{Data1: 0xcd1f3e77, Data2: 0x66d6, Data3: 0x4664, Data4: [8]byte{0x82, 0xc7, 0x36, 0xdb, 0xb6, 0x41, 0xd0, 0xf1}}
 
 // Get__NewEnum dispatches through IStaticPortMappingCollection's vtable slot 7.
-func (self *IStaticPortMappingCollection) Get__NewEnum(pVal **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IStaticPortMappingCollection) Get__NewEnum() (*systemcom.IUnknown, error) {
+	var _pVal *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Get_Item dispatches through IStaticPortMappingCollection's vtable slot 8.
-func (self *IStaticPortMappingCollection) Get_Item(lExternalPort int32, bstrProtocol foundation.BSTR, ppSPM **IStaticPortMapping) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lExternalPort), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(ppSPM)))
-	return foundation.HRESULT(r1)
+func (self *IStaticPortMappingCollection) Get_Item(lExternalPort int32, bstrProtocol foundation.BSTR) (*IStaticPortMapping, error) {
+	var _ppSPM *IStaticPortMapping
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lExternalPort), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(unsafe.Pointer(&_ppSPM)))
+	return _ppSPM, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IStaticPortMappingCollection's vtable slot 9.
-func (self *IStaticPortMappingCollection) Get_Count(pVal *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+func (self *IStaticPortMappingCollection) Get_Count() (int32, error) {
+	var _pVal int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pVal)))
+	return _pVal, win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through IStaticPortMappingCollection's vtable slot 10.
-func (self *IStaticPortMappingCollection) Remove(lExternalPort int32, bstrProtocol foundation.BSTR) foundation.HRESULT {
+func (self *IStaticPortMappingCollection) Remove(lExternalPort int32, bstrProtocol foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lExternalPort), uintptr(unsafe.Pointer(bstrProtocol)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through IStaticPortMappingCollection's vtable slot 11.
-func (self *IStaticPortMappingCollection) Add(lExternalPort int32, bstrProtocol foundation.BSTR, lInternalPort int32, bstrInternalClient foundation.BSTR, bEnabled foundation.VARIANT_BOOL, bstrDescription foundation.BSTR, ppSPM **IStaticPortMapping) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lExternalPort), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(lInternalPort), uintptr(unsafe.Pointer(bstrInternalClient)), uintptr(bEnabled), uintptr(unsafe.Pointer(bstrDescription)), uintptr(unsafe.Pointer(ppSPM)))
-	return foundation.HRESULT(r1)
+func (self *IStaticPortMappingCollection) Add(lExternalPort int32, bstrProtocol foundation.BSTR, lInternalPort int32, bstrInternalClient foundation.BSTR, bEnabled foundation.VARIANT_BOOL, bstrDescription foundation.BSTR) (*IStaticPortMapping, error) {
+	var _ppSPM *IStaticPortMapping
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(lExternalPort), uintptr(unsafe.Pointer(bstrProtocol)), uintptr(lInternalPort), uintptr(unsafe.Pointer(bstrInternalClient)), uintptr(bEnabled), uintptr(unsafe.Pointer(bstrDescription)), uintptr(unsafe.Pointer(&_ppSPM)))
+	return _ppSPM, win32.HRESULTError(int32(r1))
 }
 
 // IUPnPNAT: https://learn.microsoft.com/windows/win32/api/natupnp/nn-natupnp-iupnpnat
@@ -2200,19 +2370,22 @@ type IUPnPNAT struct {
 var IID_IUPnPNAT = win32.GUID{Data1: 0xb171c812, Data2: 0xcc76, Data3: 0x485a, Data4: [8]byte{0x94, 0xd8, 0xb6, 0xb3, 0xa2, 0x79, 0x4e, 0x99}}
 
 // Get_StaticPortMappingCollection dispatches through IUPnPNAT's vtable slot 7.
-func (self *IUPnPNAT) Get_StaticPortMappingCollection(ppSPMs **IStaticPortMappingCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSPMs)))
-	return foundation.HRESULT(r1)
+func (self *IUPnPNAT) Get_StaticPortMappingCollection() (*IStaticPortMappingCollection, error) {
+	var _ppSPMs *IStaticPortMappingCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSPMs)))
+	return _ppSPMs, win32.HRESULTError(int32(r1))
 }
 
 // Get_DynamicPortMappingCollection dispatches through IUPnPNAT's vtable slot 8.
-func (self *IUPnPNAT) Get_DynamicPortMappingCollection(ppDPMs **IDynamicPortMappingCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDPMs)))
-	return foundation.HRESULT(r1)
+func (self *IUPnPNAT) Get_DynamicPortMappingCollection() (*IDynamicPortMappingCollection, error) {
+	var _ppDPMs *IDynamicPortMappingCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppDPMs)))
+	return _ppDPMs, win32.HRESULTError(int32(r1))
 }
 
 // Get_NATEventManager dispatches through IUPnPNAT's vtable slot 9.
-func (self *IUPnPNAT) Get_NATEventManager(ppNEM **INATEventManager) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNEM)))
-	return foundation.HRESULT(r1)
+func (self *IUPnPNAT) Get_NATEventManager() (*INATEventManager, error) {
+	var _ppNEM *INATEventManager
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNEM)))
+	return _ppNEM, win32.HRESULTError(int32(r1))
 }

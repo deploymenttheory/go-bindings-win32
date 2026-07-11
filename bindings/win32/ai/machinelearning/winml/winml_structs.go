@@ -17,8 +17,8 @@ type MLOperatorAttribute struct {
 	Required byte
 }
 
-// MLOperatorAttributeNameValue_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MLOperatorAttributeNameValue_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MLOperatorAttributeNameValue_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -30,8 +30,8 @@ type MLOperatorAttributeNameValue struct {
 	Anonymous  MLOperatorAttributeNameValue_Anonymous_e__Union
 }
 
-// MLOperatorEdgeDescription_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MLOperatorEdgeDescription_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MLOperatorEdgeDescription_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -75,8 +75,8 @@ type MLOperatorSchemaDescription struct {
 	DefaultAttributeCount          uint32
 }
 
-// MLOperatorSchemaEdgeDescription_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// MLOperatorSchemaEdgeDescription_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type MLOperatorSchemaEdgeDescription_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -92,8 +92,8 @@ type MLOperatorSetId struct {
 	Version int32
 }
 
-// WINML_BINDING_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINML_BINDING_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINML_BINDING_DESC_Anonymous_e__Union struct {
 	Data [4]uint64
 }
@@ -121,14 +121,14 @@ type WINML_IMAGE_VARIABLE_DESC struct {
 	PShape        *int64
 }
 
-// WINML_MAP_BINDING_DESC_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINML_MAP_BINDING_DESC_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINML_MAP_BINDING_DESC_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// WINML_MAP_BINDING_DESC_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINML_MAP_BINDING_DESC_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINML_MAP_BINDING_DESC_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -165,8 +165,8 @@ type WINML_RESOURCE_BINDING_DESC struct {
 	PResource     *graphicsdirect3d12.ID3D12Resource
 }
 
-// WINML_SEQUENCE_BINDING_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINML_SEQUENCE_BINDING_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINML_SEQUENCE_BINDING_DESC_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -199,8 +199,8 @@ type WINML_TENSOR_VARIABLE_DESC struct {
 	PShape        *int64
 }
 
-// WINML_VARIABLE_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINML_VARIABLE_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINML_VARIABLE_DESC_Anonymous_e__Union struct {
 	Data [2]uint64
 }

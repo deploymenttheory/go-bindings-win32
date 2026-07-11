@@ -60,294 +60,301 @@ var (
 // AddStroke calls inkobjcore!AddStroke.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-addstroke
 // Minimum OS: windows5.1.2600.
-func AddStroke(hrc HRECOCONTEXT, pPacketDesc *PACKET_DESCRIPTION, cbPacket uint32, pPacket *byte, pXForm *graphicsgdi.XFORM) foundation.HRESULT {
+func AddStroke(hrc HRECOCONTEXT, pPacketDesc *PACKET_DESCRIPTION, cbPacket uint32, pPacket *byte, pXForm *graphicsgdi.XFORM) error {
 	r1, _, _ := syscall.SyscallN(procAddStroke.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pPacketDesc)), uintptr(cbPacket), uintptr(unsafe.Pointer(pPacket)), uintptr(unsafe.Pointer(pXForm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddWordsToWordList calls inkobjcore!AddWordsToWordList.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-addwordstowordlist
 // Minimum OS: windows5.1.2600.
-func AddWordsToWordList(hwl HRECOWORDLIST, pwcWords foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAddWordsToWordList.Addr(), uintptr(hwl), uintptr(unsafe.Pointer(pwcWords)))
-	return foundation.HRESULT(r1)
+func AddWordsToWordList(hwl HRECOWORDLIST, pwcWords string) error {
+	_pwcWords := win32.UTF16Ptr(pwcWords)
+	r1, _, _ := syscall.SyscallN(procAddWordsToWordList.Addr(), uintptr(hwl), uintptr(unsafe.Pointer(_pwcWords)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AdviseInkChange calls inkobjcore!AdviseInkChange.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-adviseinkchange
 // Minimum OS: windows5.1.2600.
-func AdviseInkChange(hrc HRECOCONTEXT, bNewStroke foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procAdviseInkChange.Addr(), uintptr(hrc), uintptr(bNewStroke))
-	return foundation.HRESULT(r1)
+func AdviseInkChange(hrc HRECOCONTEXT, bNewStroke bool) error {
+	_bNewStroke := win32.Bool32(bNewStroke)
+	r1, _, _ := syscall.SyscallN(procAdviseInkChange.Addr(), uintptr(hrc), uintptr(_bNewStroke))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CloneContext calls inkobjcore!CloneContext.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-clonecontext
 // Minimum OS: windows5.1.2600.
-func CloneContext(hrc HRECOCONTEXT, pCloneHrc *HRECOCONTEXT) foundation.HRESULT {
+func CloneContext(hrc HRECOCONTEXT, pCloneHrc *HRECOCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procCloneContext.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pCloneHrc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateContext calls inkobjcore!CreateContext.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-createcontext
 // Minimum OS: windows5.1.2600.
-func CreateContext(hrec HRECOGNIZER, phrc *HRECOCONTEXT) foundation.HRESULT {
+func CreateContext(hrec HRECOGNIZER, phrc *HRECOCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procCreateContext.Addr(), uintptr(hrec), uintptr(unsafe.Pointer(phrc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateRecognizer calls inkobjcore!CreateRecognizer.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-createrecognizer
 // Minimum OS: windows5.1.2600.
-func CreateRecognizer(pCLSID *win32.GUID, phrec *HRECOGNIZER) foundation.HRESULT {
+func CreateRecognizer(pCLSID *win32.GUID, phrec *HRECOGNIZER) error {
 	r1, _, _ := syscall.SyscallN(procCreateRecognizer.Addr(), uintptr(unsafe.Pointer(pCLSID)), uintptr(unsafe.Pointer(phrec)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DestroyAlternate calls inkobjcore!DestroyAlternate.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-destroyalternate
 // Minimum OS: windows5.1.2600.
-func DestroyAlternate(hrcalt HRECOALT) foundation.HRESULT {
+func DestroyAlternate(hrcalt HRECOALT) error {
 	r1, _, _ := syscall.SyscallN(procDestroyAlternate.Addr(), uintptr(hrcalt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DestroyContext calls inkobjcore!DestroyContext.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-destroycontext
 // Minimum OS: windows5.1.2600.
-func DestroyContext(hrc HRECOCONTEXT) foundation.HRESULT {
+func DestroyContext(hrc HRECOCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procDestroyContext.Addr(), uintptr(hrc))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DestroyRecognizer calls inkobjcore!DestroyRecognizer.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-destroyrecognizer
 // Minimum OS: windows5.1.2600.
-func DestroyRecognizer(hrec HRECOGNIZER) foundation.HRESULT {
+func DestroyRecognizer(hrec HRECOGNIZER) error {
 	r1, _, _ := syscall.SyscallN(procDestroyRecognizer.Addr(), uintptr(hrec))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DestroyWordList calls inkobjcore!DestroyWordList.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-destroywordlist
 // Minimum OS: windows5.1.2600.
-func DestroyWordList(hwl HRECOWORDLIST) foundation.HRESULT {
+func DestroyWordList(hwl HRECOWORDLIST) error {
 	r1, _, _ := syscall.SyscallN(procDestroyWordList.Addr(), uintptr(hwl))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndInkInput calls inkobjcore!EndInkInput.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-endinkinput
 // Minimum OS: windows5.1.2600.
-func EndInkInput(hrc HRECOCONTEXT) foundation.HRESULT {
+func EndInkInput(hrc HRECOCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procEndInkInput.Addr(), uintptr(hrc))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllRecognizers calls inkobjcore!GetAllRecognizers.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-getallrecognizers
 // Minimum OS: windows5.1.2600.
-func GetAllRecognizers(recognizerClsids **win32.GUID, count *uint32) foundation.HRESULT {
+func GetAllRecognizers(recognizerClsids **win32.GUID, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetAllRecognizers.Addr(), uintptr(unsafe.Pointer(recognizerClsids)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBestResultString calls inkobjcore!GetBestResultString.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-getbestresultstring
 // Minimum OS: windows5.1.2600.
-func GetBestResultString(hrc HRECOCONTEXT, pcSize *uint32, pwcBestResult foundation.PWSTR) foundation.HRESULT {
+func GetBestResultString(hrc HRECOCONTEXT, pcSize *uint32, pwcBestResult foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procGetBestResultString.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pcSize)), uintptr(unsafe.Pointer(pwcBestResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContextPreferenceFlags calls inkobjcore!GetContextPreferenceFlags.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-getcontextpreferenceflags
 // Minimum OS: windows5.1.2600.
-func GetContextPreferenceFlags(hrc HRECOCONTEXT, pdwContextPreferenceFlags *uint32) foundation.HRESULT {
+func GetContextPreferenceFlags(hrc HRECOCONTEXT, pdwContextPreferenceFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetContextPreferenceFlags.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pdwContextPreferenceFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContextPropertyList calls inkobjcore!GetContextPropertyList.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-getcontextpropertylist
 // Minimum OS: windows5.1.2600.
-func GetContextPropertyList(hrc HRECOCONTEXT, pcProperties *uint32, pPropertyGUIDS *win32.GUID) foundation.HRESULT {
+func GetContextPropertyList(hrc HRECOCONTEXT, pcProperties *uint32, pPropertyGUIDS *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procGetContextPropertyList.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pcProperties)), uintptr(unsafe.Pointer(pPropertyGUIDS)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContextPropertyValue calls inkobjcore!GetContextPropertyValue.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-getcontextpropertyvalue
 // Minimum OS: windows5.1.2600.
-func GetContextPropertyValue(hrc HRECOCONTEXT, pGuid *win32.GUID, pcbSize *uint32, pProperty *byte) foundation.HRESULT {
+func GetContextPropertyValue(hrc HRECOCONTEXT, pGuid *win32.GUID, pcbSize *uint32, pProperty *byte) error {
 	r1, _, _ := syscall.SyscallN(procGetContextPropertyValue.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pGuid)), uintptr(unsafe.Pointer(pcbSize)), uintptr(unsafe.Pointer(pProperty)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEnabledUnicodeRanges calls inkobjcore!GetEnabledUnicodeRanges.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-getenabledunicoderanges
 // Minimum OS: windows5.1.2600.
-func GetEnabledUnicodeRanges(hrc HRECOCONTEXT, pcRanges *uint32, pcr *CHARACTER_RANGE) foundation.HRESULT {
+func GetEnabledUnicodeRanges(hrc HRECOCONTEXT, pcRanges *uint32, pcr *CHARACTER_RANGE) error {
 	r1, _, _ := syscall.SyscallN(procGetEnabledUnicodeRanges.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pcRanges)), uintptr(unsafe.Pointer(pcr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGuide calls inkobjcore!GetGuide.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-getguide
 // Minimum OS: windows5.1.2600.
-func GetGuide(hrc HRECOCONTEXT, pGuide *RECO_GUIDE, piIndex *uint32) foundation.HRESULT {
+func GetGuide(hrc HRECOCONTEXT, pGuide *RECO_GUIDE, piIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetGuide.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pGuide)), uintptr(unsafe.Pointer(piIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLatticePtr calls inkobjcore!GetLatticePtr.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-getlatticeptr
 // Minimum OS: windows5.1.2600.
-func GetLatticePtr(hrc HRECOCONTEXT, ppLattice **RECO_LATTICE) foundation.HRESULT {
+func GetLatticePtr(hrc HRECOCONTEXT, ppLattice **RECO_LATTICE) error {
 	r1, _, _ := syscall.SyscallN(procGetLatticePtr.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(ppLattice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLeftSeparator calls inkobjcore!GetLeftSeparator.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-getleftseparator
 // Minimum OS: windows5.1.2600.
-func GetLeftSeparator(hrc HRECOCONTEXT, pcSize *uint32, pwcLeftSeparator foundation.PWSTR) foundation.HRESULT {
+func GetLeftSeparator(hrc HRECOCONTEXT, pcSize *uint32, pwcLeftSeparator foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procGetLeftSeparator.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pcSize)), uintptr(unsafe.Pointer(pwcLeftSeparator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreferredPacketDescription calls inkobjcore!GetPreferredPacketDescription.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-getpreferredpacketdescription
 // Minimum OS: windows5.1.2600.
-func GetPreferredPacketDescription(hrec HRECOGNIZER, pPacketDescription *PACKET_DESCRIPTION) foundation.HRESULT {
+func GetPreferredPacketDescription(hrec HRECOGNIZER, pPacketDescription *PACKET_DESCRIPTION) error {
 	r1, _, _ := syscall.SyscallN(procGetPreferredPacketDescription.Addr(), uintptr(hrec), uintptr(unsafe.Pointer(pPacketDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecoAttributes calls inkobjcore!GetRecoAttributes.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-getrecoattributes
 // Minimum OS: windows5.1.2600.
-func GetRecoAttributes(hrec HRECOGNIZER, pRecoAttrs *RECO_ATTRS) foundation.HRESULT {
+func GetRecoAttributes(hrec HRECOGNIZER, pRecoAttrs *RECO_ATTRS) error {
 	r1, _, _ := syscall.SyscallN(procGetRecoAttributes.Addr(), uintptr(hrec), uintptr(unsafe.Pointer(pRecoAttrs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResultPropertyList calls inkobjcore!GetResultPropertyList.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-getresultpropertylist
 // Minimum OS: windows5.1.2600.
-func GetResultPropertyList(hrec HRECOGNIZER, pPropertyCount *uint32, pPropertyGuid *win32.GUID) foundation.HRESULT {
+func GetResultPropertyList(hrec HRECOGNIZER, pPropertyCount *uint32, pPropertyGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procGetResultPropertyList.Addr(), uintptr(hrec), uintptr(unsafe.Pointer(pPropertyCount)), uintptr(unsafe.Pointer(pPropertyGuid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRightSeparator calls inkobjcore!GetRightSeparator.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-getrightseparator
 // Minimum OS: windows5.1.2600.
-func GetRightSeparator(hrc HRECOCONTEXT, pcSize *uint32, pwcRightSeparator foundation.PWSTR) foundation.HRESULT {
+func GetRightSeparator(hrc HRECOCONTEXT, pcSize *uint32, pwcRightSeparator foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procGetRightSeparator.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pcSize)), uintptr(unsafe.Pointer(pwcRightSeparator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUnicodeRanges calls inkobjcore!GetUnicodeRanges.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-getunicoderanges
 // Minimum OS: windows5.1.2600.
-func GetUnicodeRanges(hrec HRECOGNIZER, pcRanges *uint32, pcr *CHARACTER_RANGE) foundation.HRESULT {
+func GetUnicodeRanges(hrec HRECOGNIZER, pcRanges *uint32, pcr *CHARACTER_RANGE) error {
 	r1, _, _ := syscall.SyscallN(procGetUnicodeRanges.Addr(), uintptr(hrec), uintptr(unsafe.Pointer(pcRanges)), uintptr(unsafe.Pointer(pcr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsStringSupported calls inkobjcore!IsStringSupported.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-isstringsupported
 // Minimum OS: windows5.1.2600.
-func IsStringSupported(hrc HRECOCONTEXT, wcString uint32, pwcString foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procIsStringSupported.Addr(), uintptr(hrc), uintptr(wcString), uintptr(unsafe.Pointer(pwcString)))
-	return foundation.HRESULT(r1)
+func IsStringSupported(hrc HRECOCONTEXT, wcString uint32, pwcString string) error {
+	_pwcString := win32.UTF16Ptr(pwcString)
+	r1, _, _ := syscall.SyscallN(procIsStringSupported.Addr(), uintptr(hrc), uintptr(wcString), uintptr(unsafe.Pointer(_pwcString)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MakeWordList calls inkobjcore!MakeWordList.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-makewordlist
 // Minimum OS: windows5.1.2600.
-func MakeWordList(hrec HRECOGNIZER, pBuffer foundation.PWSTR, phwl *HRECOWORDLIST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procMakeWordList.Addr(), uintptr(hrec), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(phwl)))
-	return foundation.HRESULT(r1)
+func MakeWordList(hrec HRECOGNIZER, pBuffer string, phwl *HRECOWORDLIST) error {
+	_pBuffer := win32.UTF16Ptr(pBuffer)
+	r1, _, _ := syscall.SyscallN(procMakeWordList.Addr(), uintptr(hrec), uintptr(unsafe.Pointer(_pBuffer)), uintptr(unsafe.Pointer(phwl)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Process calls inkobjcore!Process.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-process
-func Process(hrc HRECOCONTEXT, pbPartialProcessing *foundation.BOOL) foundation.HRESULT {
+func Process(hrc HRECOCONTEXT, pbPartialProcessing *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procProcess.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pbPartialProcessing)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResetContext calls inkobjcore!ResetContext.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-resetcontext
 // Minimum OS: windows5.1.2600.
-func ResetContext(hrc HRECOCONTEXT) foundation.HRESULT {
+func ResetContext(hrc HRECOCONTEXT) error {
 	r1, _, _ := syscall.SyscallN(procResetContext.Addr(), uintptr(hrc))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCACMode calls inkobjcore!SetCACMode.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-setcacmode
 // Minimum OS: windows5.1.2600.
-func SetCACMode(hrc HRECOCONTEXT, iMode int32) foundation.HRESULT {
+func SetCACMode(hrc HRECOCONTEXT, iMode int32) error {
 	r1, _, _ := syscall.SyscallN(procSetCACMode.Addr(), uintptr(hrc), uintptr(iMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetContextPropertyValue calls inkobjcore!SetContextPropertyValue.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-setcontextpropertyvalue
 // Minimum OS: windows5.1.2600.
-func SetContextPropertyValue(hrc HRECOCONTEXT, pGuid *win32.GUID, cbSize uint32, pProperty *byte) foundation.HRESULT {
+func SetContextPropertyValue(hrc HRECOCONTEXT, pGuid *win32.GUID, cbSize uint32, pProperty *byte) error {
 	r1, _, _ := syscall.SyscallN(procSetContextPropertyValue.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pGuid)), uintptr(cbSize), uintptr(unsafe.Pointer(pProperty)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEnabledUnicodeRanges calls inkobjcore!SetEnabledUnicodeRanges.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-setenabledunicoderanges
 // Minimum OS: windows5.1.2600.
-func SetEnabledUnicodeRanges(hrc HRECOCONTEXT, cRanges uint32, pcr *CHARACTER_RANGE) foundation.HRESULT {
+func SetEnabledUnicodeRanges(hrc HRECOCONTEXT, cRanges uint32, pcr *CHARACTER_RANGE) error {
 	r1, _, _ := syscall.SyscallN(procSetEnabledUnicodeRanges.Addr(), uintptr(hrc), uintptr(cRanges), uintptr(unsafe.Pointer(pcr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFactoid calls inkobjcore!SetFactoid.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-setfactoid
 // Minimum OS: windows5.1.2600.
-func SetFactoid(hrc HRECOCONTEXT, cwcFactoid uint32, pwcFactoid foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSetFactoid.Addr(), uintptr(hrc), uintptr(cwcFactoid), uintptr(unsafe.Pointer(pwcFactoid)))
-	return foundation.HRESULT(r1)
+func SetFactoid(hrc HRECOCONTEXT, cwcFactoid uint32, pwcFactoid string) error {
+	_pwcFactoid := win32.UTF16Ptr(pwcFactoid)
+	r1, _, _ := syscall.SyscallN(procSetFactoid.Addr(), uintptr(hrc), uintptr(cwcFactoid), uintptr(unsafe.Pointer(_pwcFactoid)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFlags calls inkobjcore!SetFlags.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-setflags
 // Minimum OS: windows5.1.2600.
-func SetFlags(hrc HRECOCONTEXT, dwFlags uint32) foundation.HRESULT {
+func SetFlags(hrc HRECOCONTEXT, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procSetFlags.Addr(), uintptr(hrc), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGuide calls inkobjcore!SetGuide.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-setguide
 // Minimum OS: windows5.1.2600.
-func SetGuide(hrc HRECOCONTEXT, pGuide *RECO_GUIDE, iIndex uint32) foundation.HRESULT {
+func SetGuide(hrc HRECOCONTEXT, pGuide *RECO_GUIDE, iIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(procSetGuide.Addr(), uintptr(hrc), uintptr(unsafe.Pointer(pGuide)), uintptr(iIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTextContext calls inkobjcore!SetTextContext.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-settextcontext
 // Minimum OS: windows5.1.2600.
-func SetTextContext(hrc HRECOCONTEXT, cwcBefore uint32, pwcBefore foundation.PWSTR, cwcAfter uint32, pwcAfter foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSetTextContext.Addr(), uintptr(hrc), uintptr(cwcBefore), uintptr(unsafe.Pointer(pwcBefore)), uintptr(cwcAfter), uintptr(unsafe.Pointer(pwcAfter)))
-	return foundation.HRESULT(r1)
+func SetTextContext(hrc HRECOCONTEXT, cwcBefore uint32, pwcBefore string, cwcAfter uint32, pwcAfter string) error {
+	_pwcBefore := win32.UTF16Ptr(pwcBefore)
+	_pwcAfter := win32.UTF16Ptr(pwcAfter)
+	r1, _, _ := syscall.SyscallN(procSetTextContext.Addr(), uintptr(hrc), uintptr(cwcBefore), uintptr(unsafe.Pointer(_pwcBefore)), uintptr(cwcAfter), uintptr(unsafe.Pointer(_pwcAfter)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWordList calls inkobjcore!SetWordList.
 // https://learn.microsoft.com/windows/win32/api/recapis/nf-recapis-setwordlist
 // Minimum OS: windows5.1.2600.
-func SetWordList(hrc HRECOCONTEXT, hwl HRECOWORDLIST) foundation.HRESULT {
+func SetWordList(hrc HRECOCONTEXT, hwl HRECOWORDLIST) error {
 	r1, _, _ := syscall.SyscallN(procSetWordList.Addr(), uintptr(hrc), uintptr(hwl))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

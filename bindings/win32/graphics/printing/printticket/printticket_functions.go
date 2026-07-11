@@ -35,87 +35,91 @@ var (
 // PTCloseProvider calls prntvpt!PTCloseProvider.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptcloseprovider
 // Minimum OS: windows5.1.2600.
-func PTCloseProvider(hProvider HPTPROVIDER) foundation.HRESULT {
+func PTCloseProvider(hProvider HPTPROVIDER) error {
 	r1, _, _ := syscall.SyscallN(procPTCloseProvider.Addr(), uintptr(hProvider))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PTConvertDevModeToPrintTicket calls prntvpt!PTConvertDevModeToPrintTicket.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptconvertdevmodetoprintticket
 // Minimum OS: windows5.1.2600.
-func PTConvertDevModeToPrintTicket(hProvider HPTPROVIDER, cbDevmode uint32, pDevmode *graphicsgdi.DEVMODEA, scope EPrintTicketScope, pPrintTicket *systemcom.IStream) foundation.HRESULT {
+func PTConvertDevModeToPrintTicket(hProvider HPTPROVIDER, cbDevmode uint32, pDevmode *graphicsgdi.DEVMODEA, scope EPrintTicketScope, pPrintTicket *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procPTConvertDevModeToPrintTicket.Addr(), uintptr(hProvider), uintptr(cbDevmode), uintptr(unsafe.Pointer(pDevmode)), uintptr(scope), uintptr(unsafe.Pointer(pPrintTicket)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PTConvertPrintTicketToDevMode calls prntvpt!PTConvertPrintTicketToDevMode.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptconvertprinttickettodevmode
 // Minimum OS: windows5.1.2600.
-func PTConvertPrintTicketToDevMode(hProvider HPTPROVIDER, pPrintTicket *systemcom.IStream, baseDevmodeType EDefaultDevmodeType, scope EPrintTicketScope, pcbDevmode *uint32, ppDevmode **graphicsgdi.DEVMODEA, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
+func PTConvertPrintTicketToDevMode(hProvider HPTPROVIDER, pPrintTicket *systemcom.IStream, baseDevmodeType EDefaultDevmodeType, scope EPrintTicketScope, pcbDevmode *uint32, ppDevmode **graphicsgdi.DEVMODEA, pbstrErrorMessage *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procPTConvertPrintTicketToDevMode.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(pPrintTicket)), uintptr(baseDevmodeType), uintptr(scope), uintptr(unsafe.Pointer(pcbDevmode)), uintptr(unsafe.Pointer(ppDevmode)), uintptr(unsafe.Pointer(pbstrErrorMessage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PTGetPrintCapabilities calls prntvpt!PTGetPrintCapabilities.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptgetprintcapabilities
 // Minimum OS: windows5.1.2600.
-func PTGetPrintCapabilities(hProvider HPTPROVIDER, pPrintTicket *systemcom.IStream, pCapabilities *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
+func PTGetPrintCapabilities(hProvider HPTPROVIDER, pPrintTicket *systemcom.IStream, pCapabilities *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procPTGetPrintCapabilities.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(pPrintTicket)), uintptr(unsafe.Pointer(pCapabilities)), uintptr(unsafe.Pointer(pbstrErrorMessage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PTGetPrintDeviceCapabilities calls prntvpt!PTGetPrintDeviceCapabilities.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptgetprintdevicecapabilities
 // Minimum OS: windows10.0.15063.
-func PTGetPrintDeviceCapabilities(hProvider HPTPROVIDER, pPrintTicket *systemcom.IStream, pDeviceCapabilities *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
+func PTGetPrintDeviceCapabilities(hProvider HPTPROVIDER, pPrintTicket *systemcom.IStream, pDeviceCapabilities *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procPTGetPrintDeviceCapabilities.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(pPrintTicket)), uintptr(unsafe.Pointer(pDeviceCapabilities)), uintptr(unsafe.Pointer(pbstrErrorMessage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PTGetPrintDeviceResources calls prntvpt!PTGetPrintDeviceResources.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptgetprintdeviceresources
 // Minimum OS: windows10.0.15063.
-func PTGetPrintDeviceResources(hProvider HPTPROVIDER, pszLocaleName foundation.PWSTR, pPrintTicket *systemcom.IStream, pDeviceResources *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPTGetPrintDeviceResources.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(pszLocaleName)), uintptr(unsafe.Pointer(pPrintTicket)), uintptr(unsafe.Pointer(pDeviceResources)), uintptr(unsafe.Pointer(pbstrErrorMessage)))
-	return foundation.HRESULT(r1)
+func PTGetPrintDeviceResources(hProvider HPTPROVIDER, pszLocaleName string, pPrintTicket *systemcom.IStream, pDeviceResources *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) error {
+	_pszLocaleName := win32.UTF16Ptr(pszLocaleName)
+	r1, _, _ := syscall.SyscallN(procPTGetPrintDeviceResources.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(_pszLocaleName)), uintptr(unsafe.Pointer(pPrintTicket)), uintptr(unsafe.Pointer(pDeviceResources)), uintptr(unsafe.Pointer(pbstrErrorMessage)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PTMergeAndValidatePrintTicket calls prntvpt!PTMergeAndValidatePrintTicket.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptmergeandvalidateprintticket
 // Minimum OS: windows5.1.2600.
-func PTMergeAndValidatePrintTicket(hProvider HPTPROVIDER, pBaseTicket *systemcom.IStream, pDeltaTicket *systemcom.IStream, scope EPrintTicketScope, pResultTicket *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) foundation.HRESULT {
+func PTMergeAndValidatePrintTicket(hProvider HPTPROVIDER, pBaseTicket *systemcom.IStream, pDeltaTicket *systemcom.IStream, scope EPrintTicketScope, pResultTicket *systemcom.IStream, pbstrErrorMessage *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procPTMergeAndValidatePrintTicket.Addr(), uintptr(hProvider), uintptr(unsafe.Pointer(pBaseTicket)), uintptr(unsafe.Pointer(pDeltaTicket)), uintptr(scope), uintptr(unsafe.Pointer(pResultTicket)), uintptr(unsafe.Pointer(pbstrErrorMessage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PTOpenProvider calls prntvpt!PTOpenProvider.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptopenprovider
 // Minimum OS: windows5.1.2600.
-func PTOpenProvider(pszPrinterName foundation.PWSTR, dwVersion uint32, phProvider *HPTPROVIDER) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPTOpenProvider.Addr(), uintptr(unsafe.Pointer(pszPrinterName)), uintptr(dwVersion), uintptr(unsafe.Pointer(phProvider)))
-	return foundation.HRESULT(r1)
+func PTOpenProvider(pszPrinterName string, dwVersion uint32, phProvider *HPTPROVIDER) error {
+	_pszPrinterName := win32.UTF16Ptr(pszPrinterName)
+	r1, _, _ := syscall.SyscallN(procPTOpenProvider.Addr(), uintptr(unsafe.Pointer(_pszPrinterName)), uintptr(dwVersion), uintptr(unsafe.Pointer(phProvider)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PTOpenProviderEx calls prntvpt!PTOpenProviderEx.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptopenproviderex
 // Minimum OS: windows5.1.2600.
-func PTOpenProviderEx(pszPrinterName foundation.PWSTR, dwMaxVersion uint32, dwPrefVersion uint32, phProvider *HPTPROVIDER, pUsedVersion *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPTOpenProviderEx.Addr(), uintptr(unsafe.Pointer(pszPrinterName)), uintptr(dwMaxVersion), uintptr(dwPrefVersion), uintptr(unsafe.Pointer(phProvider)), uintptr(unsafe.Pointer(pUsedVersion)))
-	return foundation.HRESULT(r1)
+func PTOpenProviderEx(pszPrinterName string, dwMaxVersion uint32, dwPrefVersion uint32, phProvider *HPTPROVIDER, pUsedVersion *uint32) error {
+	_pszPrinterName := win32.UTF16Ptr(pszPrinterName)
+	r1, _, _ := syscall.SyscallN(procPTOpenProviderEx.Addr(), uintptr(unsafe.Pointer(_pszPrinterName)), uintptr(dwMaxVersion), uintptr(dwPrefVersion), uintptr(unsafe.Pointer(phProvider)), uintptr(unsafe.Pointer(pUsedVersion)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PTQuerySchemaVersionSupport calls prntvpt!PTQuerySchemaVersionSupport.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptqueryschemaversionsupport
 // Minimum OS: windows5.1.2600.
-func PTQuerySchemaVersionSupport(pszPrinterName foundation.PWSTR, pMaxVersion *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPTQuerySchemaVersionSupport.Addr(), uintptr(unsafe.Pointer(pszPrinterName)), uintptr(unsafe.Pointer(pMaxVersion)))
-	return foundation.HRESULT(r1)
+func PTQuerySchemaVersionSupport(pszPrinterName string, pMaxVersion *uint32) error {
+	_pszPrinterName := win32.UTF16Ptr(pszPrinterName)
+	r1, _, _ := syscall.SyscallN(procPTQuerySchemaVersionSupport.Addr(), uintptr(unsafe.Pointer(_pszPrinterName)), uintptr(unsafe.Pointer(pMaxVersion)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PTReleaseMemory calls prntvpt!PTReleaseMemory.
 // https://learn.microsoft.com/windows/win32/api/prntvpt/nf-prntvpt-ptreleasememory
 // Minimum OS: windows5.1.2600.
-func PTReleaseMemory(pBuffer unsafe.Pointer) foundation.HRESULT {
+func PTReleaseMemory(pBuffer unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procPTReleaseMemory.Addr(), uintptr(unsafe.Pointer(pBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

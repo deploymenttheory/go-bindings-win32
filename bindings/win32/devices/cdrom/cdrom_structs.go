@@ -151,8 +151,8 @@ type CDROM_TOC_CD_TEXT_DATA struct {
 	Descriptors [1]CDROM_TOC_CD_TEXT_DATA_BLOCK
 }
 
-// CDROM_TOC_CD_TEXT_DATA_BLOCK_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CDROM_TOC_CD_TEXT_DATA_BLOCK_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CDROM_TOC_CD_TEXT_DATA_BLOCK_Anonymous_e__Union struct {
 	Data [6]uint16
 }
@@ -215,8 +215,8 @@ type RAW_READ_INFO struct {
 	TrackMode   TRACK_MODE_TYPE
 }
 
-// SUB_Q_CHANNEL_DATA is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SUB_Q_CHANNEL_DATA is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SUB_Q_CHANNEL_DATA struct {
 	Data [24]byte
 }

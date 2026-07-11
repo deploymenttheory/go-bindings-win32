@@ -153,8 +153,8 @@ type DELTA_HEADER_INFO struct {
 	TargetHash      DELTA_HASH
 }
 
-// DELTA_INPUT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DELTA_INPUT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DELTA_INPUT_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -220,8 +220,8 @@ type PATCH_INTERLEAVE_MAP struct {
 	Range       [1]PATCH_INTERLEAVE_MAP_Anonymous_e__Struct
 }
 
-// PATCH_OLD_FILE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PATCH_OLD_FILE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PATCH_OLD_FILE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -302,8 +302,8 @@ type PM_BWTASKID struct {
 	TaskID    foundation.BSTR
 }
 
-// PM_ENUM_FILTER_FilterParameter_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PM_ENUM_FILTER_FilterParameter_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PM_ENUM_FILTER_FilterParameter_e__Union struct {
 	Data [3]uint64
 }

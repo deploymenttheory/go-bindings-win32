@@ -352,8 +352,9 @@ func JsGetProperty(object unsafe.Pointer, propertyId unsafe.Pointer, value *unsa
 }
 
 // JsGetPropertyIdFromName calls chakra!JsGetPropertyIdFromName.
-func JsGetPropertyIdFromName(name foundation.PWSTR, propertyId *unsafe.Pointer) JsErrorCode {
-	r1, _, _ := syscall.SyscallN(procJsGetPropertyIdFromName.Addr(), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(propertyId)))
+func JsGetPropertyIdFromName(name string, propertyId *unsafe.Pointer) JsErrorCode {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(procJsGetPropertyIdFromName.Addr(), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(propertyId)))
 	return JsErrorCode(r1)
 }
 
@@ -466,20 +467,25 @@ func JsNumberToDouble(value unsafe.Pointer, doubleValue *float64) JsErrorCode {
 }
 
 // JsParseScript calls chakra!JsParseScript.
-func JsParseScript(script foundation.PWSTR, sourceContext uintptr, sourceUrl foundation.PWSTR, result *unsafe.Pointer) JsErrorCode {
-	r1, _, _ := syscall.SyscallN(procJsParseScript.Addr(), uintptr(unsafe.Pointer(script)), uintptr(sourceContext), uintptr(unsafe.Pointer(sourceUrl)), uintptr(unsafe.Pointer(result)))
+func JsParseScript(script string, sourceContext uintptr, sourceUrl string, result *unsafe.Pointer) JsErrorCode {
+	_script := win32.UTF16Ptr(script)
+	_sourceUrl := win32.UTF16Ptr(sourceUrl)
+	r1, _, _ := syscall.SyscallN(procJsParseScript.Addr(), uintptr(unsafe.Pointer(_script)), uintptr(sourceContext), uintptr(unsafe.Pointer(_sourceUrl)), uintptr(unsafe.Pointer(result)))
 	return JsErrorCode(r1)
 }
 
 // JsParseSerializedScript calls chakra!JsParseSerializedScript.
-func JsParseSerializedScript(script foundation.PWSTR, buffer *byte, sourceContext uintptr, sourceUrl foundation.PWSTR, result *unsafe.Pointer) JsErrorCode {
-	r1, _, _ := syscall.SyscallN(procJsParseSerializedScript.Addr(), uintptr(unsafe.Pointer(script)), uintptr(unsafe.Pointer(buffer)), uintptr(sourceContext), uintptr(unsafe.Pointer(sourceUrl)), uintptr(unsafe.Pointer(result)))
+func JsParseSerializedScript(script string, buffer *byte, sourceContext uintptr, sourceUrl string, result *unsafe.Pointer) JsErrorCode {
+	_script := win32.UTF16Ptr(script)
+	_sourceUrl := win32.UTF16Ptr(sourceUrl)
+	r1, _, _ := syscall.SyscallN(procJsParseSerializedScript.Addr(), uintptr(unsafe.Pointer(_script)), uintptr(unsafe.Pointer(buffer)), uintptr(sourceContext), uintptr(unsafe.Pointer(_sourceUrl)), uintptr(unsafe.Pointer(result)))
 	return JsErrorCode(r1)
 }
 
 // JsPointerToString calls chakra!JsPointerToString.
-func JsPointerToString(stringValue foundation.PWSTR, stringLength uintptr, value *unsafe.Pointer) JsErrorCode {
-	r1, _, _ := syscall.SyscallN(procJsPointerToString.Addr(), uintptr(unsafe.Pointer(stringValue)), uintptr(stringLength), uintptr(unsafe.Pointer(value)))
+func JsPointerToString(stringValue string, stringLength uintptr, value *unsafe.Pointer) JsErrorCode {
+	_stringValue := win32.UTF16Ptr(stringValue)
+	r1, _, _ := syscall.SyscallN(procJsPointerToString.Addr(), uintptr(unsafe.Pointer(_stringValue)), uintptr(stringLength), uintptr(unsafe.Pointer(value)))
 	return JsErrorCode(r1)
 }
 
@@ -496,20 +502,25 @@ func JsRelease(ref unsafe.Pointer, count *uint32) JsErrorCode {
 }
 
 // JsRunScript calls chakra!JsRunScript.
-func JsRunScript(script foundation.PWSTR, sourceContext uintptr, sourceUrl foundation.PWSTR, result *unsafe.Pointer) JsErrorCode {
-	r1, _, _ := syscall.SyscallN(procJsRunScript.Addr(), uintptr(unsafe.Pointer(script)), uintptr(sourceContext), uintptr(unsafe.Pointer(sourceUrl)), uintptr(unsafe.Pointer(result)))
+func JsRunScript(script string, sourceContext uintptr, sourceUrl string, result *unsafe.Pointer) JsErrorCode {
+	_script := win32.UTF16Ptr(script)
+	_sourceUrl := win32.UTF16Ptr(sourceUrl)
+	r1, _, _ := syscall.SyscallN(procJsRunScript.Addr(), uintptr(unsafe.Pointer(_script)), uintptr(sourceContext), uintptr(unsafe.Pointer(_sourceUrl)), uintptr(unsafe.Pointer(result)))
 	return JsErrorCode(r1)
 }
 
 // JsRunSerializedScript calls chakra!JsRunSerializedScript.
-func JsRunSerializedScript(script foundation.PWSTR, buffer *byte, sourceContext uintptr, sourceUrl foundation.PWSTR, result *unsafe.Pointer) JsErrorCode {
-	r1, _, _ := syscall.SyscallN(procJsRunSerializedScript.Addr(), uintptr(unsafe.Pointer(script)), uintptr(unsafe.Pointer(buffer)), uintptr(sourceContext), uintptr(unsafe.Pointer(sourceUrl)), uintptr(unsafe.Pointer(result)))
+func JsRunSerializedScript(script string, buffer *byte, sourceContext uintptr, sourceUrl string, result *unsafe.Pointer) JsErrorCode {
+	_script := win32.UTF16Ptr(script)
+	_sourceUrl := win32.UTF16Ptr(sourceUrl)
+	r1, _, _ := syscall.SyscallN(procJsRunSerializedScript.Addr(), uintptr(unsafe.Pointer(_script)), uintptr(unsafe.Pointer(buffer)), uintptr(sourceContext), uintptr(unsafe.Pointer(_sourceUrl)), uintptr(unsafe.Pointer(result)))
 	return JsErrorCode(r1)
 }
 
 // JsSerializeScript calls chakra!JsSerializeScript.
-func JsSerializeScript(script foundation.PWSTR, buffer *byte, bufferSize *uint32) JsErrorCode {
-	r1, _, _ := syscall.SyscallN(procJsSerializeScript.Addr(), uintptr(unsafe.Pointer(script)), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(bufferSize)))
+func JsSerializeScript(script string, buffer *byte, bufferSize *uint32) JsErrorCode {
+	_script := win32.UTF16Ptr(script)
+	r1, _, _ := syscall.SyscallN(procJsSerializeScript.Addr(), uintptr(unsafe.Pointer(_script)), uintptr(unsafe.Pointer(buffer)), uintptr(unsafe.Pointer(bufferSize)))
 	return JsErrorCode(r1)
 }
 

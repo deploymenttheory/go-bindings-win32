@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect3d11 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d11"
 	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
@@ -25,9 +24,9 @@ type ID3D11On12Device struct {
 var IID_ID3D11On12Device = win32.GUID{Data1: 0x85611e73, Data2: 0x70a9, Data3: 0x490e, Data4: [8]byte{0x96, 0x14, 0xa9, 0xe3, 0x02, 0x77, 0x79, 0x04}}
 
 // CreateWrappedResource dispatches through ID3D11On12Device's vtable slot 3.
-func (self *ID3D11On12Device) CreateWrappedResource(pResource12 *systemcom.IUnknown, pFlags11 *D3D11_RESOURCE_FLAGS, InState graphicsdirect3d12.D3D12_RESOURCE_STATES, OutState graphicsdirect3d12.D3D12_RESOURCE_STATES, riid *win32.GUID, ppResource11 *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D11On12Device) CreateWrappedResource(pResource12 *systemcom.IUnknown, pFlags11 *D3D11_RESOURCE_FLAGS, InState graphicsdirect3d12.D3D12_RESOURCE_STATES, OutState graphicsdirect3d12.D3D12_RESOURCE_STATES, riid *win32.GUID, ppResource11 *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource12)), uintptr(unsafe.Pointer(pFlags11)), uintptr(InState), uintptr(OutState), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppResource11)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseWrappedResources dispatches through ID3D11On12Device's vtable slot 4.
@@ -50,9 +49,9 @@ type ID3D11On12Device1 struct {
 var IID_ID3D11On12Device1 = win32.GUID{Data1: 0xbdb64df4, Data2: 0xea2f, Data3: 0x4c70, Data4: [8]byte{0xb8, 0x61, 0xaa, 0xab, 0x12, 0x58, 0xbb, 0x5d}}
 
 // GetD3D12Device dispatches through ID3D11On12Device1's vtable slot 6.
-func (self *ID3D11On12Device1) GetD3D12Device(riid *win32.GUID, ppvDevice *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D11On12Device1) GetD3D12Device(riid *win32.GUID, ppvDevice *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ID3D11On12Device2: https://learn.microsoft.com/windows/win32/api/d3d11on12/nn-d3d11on12-id3d11on12device2
@@ -65,13 +64,13 @@ type ID3D11On12Device2 struct {
 var IID_ID3D11On12Device2 = win32.GUID{Data1: 0xdc90f331, Data2: 0x4740, Data3: 0x43fa, Data4: [8]byte{0x86, 0x6e, 0x67, 0xf1, 0x2c, 0xb5, 0x82, 0x23}}
 
 // UnwrapUnderlyingResource dispatches through ID3D11On12Device2's vtable slot 7.
-func (self *ID3D11On12Device2) UnwrapUnderlyingResource(pResource11 *graphicsdirect3d11.ID3D11Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue, riid *win32.GUID, ppvResource12 *unsafe.Pointer) foundation.HRESULT {
+func (self *ID3D11On12Device2) UnwrapUnderlyingResource(pResource11 *graphicsdirect3d11.ID3D11Resource, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue, riid *win32.GUID, ppvResource12 *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource11)), uintptr(unsafe.Pointer(pCommandQueue)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvResource12)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReturnUnderlyingResource dispatches through ID3D11On12Device2's vtable slot 8.
-func (self *ID3D11On12Device2) ReturnUnderlyingResource(pResource11 *graphicsdirect3d11.ID3D11Resource, NumSync uint32, pSignalValues *uint64, ppFences **graphicsdirect3d12.ID3D12Fence) foundation.HRESULT {
+func (self *ID3D11On12Device2) ReturnUnderlyingResource(pResource11 *graphicsdirect3d11.ID3D11Resource, NumSync uint32, pSignalValues *uint64, ppFences **graphicsdirect3d12.ID3D12Fence) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource11)), uintptr(NumSync), uintptr(unsafe.Pointer(pSignalValues)), uintptr(unsafe.Pointer(ppFences)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

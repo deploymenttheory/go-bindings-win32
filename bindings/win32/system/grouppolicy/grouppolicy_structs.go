@@ -204,8 +204,8 @@ type INSTALLDATA struct {
 }
 
 // INSTALLSPEC: https://learn.microsoft.com/windows/win32/api/appmgmt/ns-appmgmt-installspec
-// INSTALLSPEC is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INSTALLSPEC is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INSTALLSPEC struct {
 	Data [3]uint64
 }

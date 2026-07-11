@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 var (
@@ -23,13 +22,13 @@ var (
 )
 
 // MLCreateOperatorRegistry calls windows.ai.machinelearning!MLCreateOperatorRegistry.
-func MLCreateOperatorRegistry(registry **IMLOperatorRegistry) foundation.HRESULT {
+func MLCreateOperatorRegistry(registry **IMLOperatorRegistry) error {
 	r1, _, _ := syscall.SyscallN(procMLCreateOperatorRegistry.Addr(), uintptr(unsafe.Pointer(registry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WinMLCreateRuntime calls winml!WinMLCreateRuntime.
-func WinMLCreateRuntime(runtime **IWinMLRuntime) foundation.HRESULT {
+func WinMLCreateRuntime(runtime **IWinMLRuntime) error {
 	r1, _, _ := syscall.SyscallN(procWinMLCreateRuntime.Addr(), uintptr(unsafe.Pointer(runtime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

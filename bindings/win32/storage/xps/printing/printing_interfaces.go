@@ -23,9 +23,9 @@ type IPrintDocumentPackageStatusEvent struct {
 var IID_IPrintDocumentPackageStatusEvent = win32.GUID{Data1: 0xed90c8ad, Data2: 0x5c34, Data3: 0x4d05, Data4: [8]byte{0xa1, 0xec, 0x0e, 0x8a, 0x9b, 0x3a, 0xd7, 0xaf}}
 
 // PackageStatusUpdated dispatches through IPrintDocumentPackageStatusEvent's vtable slot 7.
-func (self *IPrintDocumentPackageStatusEvent) PackageStatusUpdated(packageStatus *PrintDocumentPackageStatus) foundation.HRESULT {
+func (self *IPrintDocumentPackageStatusEvent) PackageStatusUpdated(packageStatus *PrintDocumentPackageStatus) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(packageStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPrintDocumentPackageTarget: https://learn.microsoft.com/windows/win32/api/documenttarget/nn-documenttarget-iprintdocumentpackagetarget
@@ -38,21 +38,21 @@ type IPrintDocumentPackageTarget struct {
 var IID_IPrintDocumentPackageTarget = win32.GUID{Data1: 0x1b8efec4, Data2: 0x3019, Data3: 0x4c27, Data4: [8]byte{0x96, 0x4e, 0x36, 0x72, 0x02, 0x15, 0x69, 0x06}}
 
 // GetPackageTargetTypes dispatches through IPrintDocumentPackageTarget's vtable slot 3.
-func (self *IPrintDocumentPackageTarget) GetPackageTargetTypes(targetCount *uint32, targetTypes **win32.GUID) foundation.HRESULT {
+func (self *IPrintDocumentPackageTarget) GetPackageTargetTypes(targetCount *uint32, targetTypes **win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(targetCount)), uintptr(unsafe.Pointer(targetTypes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPackageTarget dispatches through IPrintDocumentPackageTarget's vtable slot 4.
-func (self *IPrintDocumentPackageTarget) GetPackageTarget(guidTargetType *win32.GUID, riid *win32.GUID, ppvTarget *unsafe.Pointer) foundation.HRESULT {
+func (self *IPrintDocumentPackageTarget) GetPackageTarget(guidTargetType *win32.GUID, riid *win32.GUID, ppvTarget *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidTargetType)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through IPrintDocumentPackageTarget's vtable slot 5.
-func (self *IPrintDocumentPackageTarget) Cancel() foundation.HRESULT {
+func (self *IPrintDocumentPackageTarget) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c560298a-535c-48f9-866a-632540660cb4
@@ -64,15 +64,15 @@ type IPrintDocumentPackageTarget2 struct {
 var IID_IPrintDocumentPackageTarget2 = win32.GUID{Data1: 0xc560298a, Data2: 0x535c, Data3: 0x48f9, Data4: [8]byte{0x86, 0x6a, 0x63, 0x25, 0x40, 0x66, 0x0c, 0xb4}}
 
 // GetIsTargetIppPrinter dispatches through IPrintDocumentPackageTarget2's vtable slot 3.
-func (self *IPrintDocumentPackageTarget2) GetIsTargetIppPrinter(isIppPrinter *foundation.BOOL) foundation.HRESULT {
+func (self *IPrintDocumentPackageTarget2) GetIsTargetIppPrinter(isIppPrinter *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isIppPrinter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTargetIppPrintDevice dispatches through IPrintDocumentPackageTarget2's vtable slot 4.
-func (self *IPrintDocumentPackageTarget2) GetTargetIppPrintDevice(riid *win32.GUID, ppvTarget *unsafe.Pointer) foundation.HRESULT {
+func (self *IPrintDocumentPackageTarget2) GetTargetIppPrintDevice(riid *win32.GUID, ppvTarget *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPrintDocumentPackageTargetFactory: https://learn.microsoft.com/windows/win32/api/documenttarget/nn-documenttarget-iprintdocumentpackagetargetfactory
@@ -85,9 +85,11 @@ type IPrintDocumentPackageTargetFactory struct {
 var IID_IPrintDocumentPackageTargetFactory = win32.GUID{Data1: 0xd2959bf7, Data2: 0xb31b, Data3: 0x4a3d, Data4: [8]byte{0x96, 0x00, 0x71, 0x2e, 0xb1, 0x33, 0x5b, 0xa4}}
 
 // CreateDocumentPackageTargetForPrintJob dispatches through IPrintDocumentPackageTargetFactory's vtable slot 3.
-func (self *IPrintDocumentPackageTargetFactory) CreateDocumentPackageTargetForPrintJob(printerName foundation.PWSTR, jobName foundation.PWSTR, jobOutputStream *systemcom.IStream, jobPrintTicketStream *systemcom.IStream, docPackageTarget **IPrintDocumentPackageTarget) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(printerName)), uintptr(unsafe.Pointer(jobName)), uintptr(unsafe.Pointer(jobOutputStream)), uintptr(unsafe.Pointer(jobPrintTicketStream)), uintptr(unsafe.Pointer(docPackageTarget)))
-	return foundation.HRESULT(r1)
+func (self *IPrintDocumentPackageTargetFactory) CreateDocumentPackageTargetForPrintJob(printerName string, jobName string, jobOutputStream *systemcom.IStream, jobPrintTicketStream *systemcom.IStream, docPackageTarget **IPrintDocumentPackageTarget) error {
+	_printerName := win32.UTF16Ptr(printerName)
+	_jobName := win32.UTF16Ptr(jobName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_printerName)), uintptr(unsafe.Pointer(_jobName)), uintptr(unsafe.Pointer(jobOutputStream)), uintptr(unsafe.Pointer(jobPrintTicketStream)), uintptr(unsafe.Pointer(docPackageTarget)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IXpsPrintJob: https://learn.microsoft.com/windows/win32/api/xpsprint/nn-xpsprint-ixpsprintjob
@@ -100,15 +102,15 @@ type IXpsPrintJob struct {
 var IID_IXpsPrintJob = win32.GUID{Data1: 0x5ab89b06, Data2: 0x8194, Data3: 0x425f, Data4: [8]byte{0xab, 0x3b, 0xd7, 0xa9, 0x6e, 0x35, 0x01, 0x61}}
 
 // Cancel dispatches through IXpsPrintJob's vtable slot 3.
-func (self *IXpsPrintJob) Cancel() foundation.HRESULT {
+func (self *IXpsPrintJob) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetJobStatus dispatches through IXpsPrintJob's vtable slot 4.
-func (self *IXpsPrintJob) GetJobStatus(jobStatus *XPS_JOB_STATUS) foundation.HRESULT {
+func (self *IXpsPrintJob) GetJobStatus(jobStatus *XPS_JOB_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(jobStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IXpsPrintJobStream: https://learn.microsoft.com/windows/win32/api/xpsprint/nn-xpsprint-ixpsprintjobstream
@@ -121,7 +123,7 @@ type IXpsPrintJobStream struct {
 var IID_IXpsPrintJobStream = win32.GUID{Data1: 0x7a77dc5f, Data2: 0x45d6, Data3: 0x4dff, Data4: [8]byte{0x93, 0x07, 0xd8, 0xcb, 0x84, 0x63, 0x47, 0xca}}
 
 // Close dispatches through IXpsPrintJobStream's vtable slot 5.
-func (self *IXpsPrintJobStream) Close() foundation.HRESULT {
+func (self *IXpsPrintJobStream) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

@@ -23,27 +23,27 @@ type ISceSvcAttachmentData struct {
 var IID_ISceSvcAttachmentData = win32.GUID{Data1: 0x17c35fde, Data2: 0x200d, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xfb, 0x00, 0xc0, 0x4f, 0xb9, 0x84, 0xf9}}
 
 // GetData dispatches through ISceSvcAttachmentData's vtable slot 3.
-func (self *ISceSvcAttachmentData) GetData(scesvcHandle unsafe.Pointer, sceType SCESVC_INFO_TYPE, ppvData *unsafe.Pointer, psceEnumHandle *uint32) foundation.HRESULT {
+func (self *ISceSvcAttachmentData) GetData(scesvcHandle unsafe.Pointer, sceType SCESVC_INFO_TYPE, ppvData *unsafe.Pointer, psceEnumHandle *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scesvcHandle)), uintptr(sceType), uintptr(unsafe.Pointer(ppvData)), uintptr(unsafe.Pointer(psceEnumHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through ISceSvcAttachmentData's vtable slot 4.
-func (self *ISceSvcAttachmentData) Initialize(lpServiceName *int8, lpTemplateName *int8, lpSceSvcPersistInfo *ISceSvcAttachmentPersistInfo, pscesvcHandle *unsafe.Pointer) foundation.HRESULT {
+func (self *ISceSvcAttachmentData) Initialize(lpServiceName *int8, lpTemplateName *int8, lpSceSvcPersistInfo *ISceSvcAttachmentPersistInfo, pscesvcHandle *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpServiceName)), uintptr(unsafe.Pointer(lpTemplateName)), uintptr(unsafe.Pointer(lpSceSvcPersistInfo)), uintptr(unsafe.Pointer(pscesvcHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreeBuffer dispatches through ISceSvcAttachmentData's vtable slot 5.
-func (self *ISceSvcAttachmentData) FreeBuffer(pvData unsafe.Pointer) foundation.HRESULT {
+func (self *ISceSvcAttachmentData) FreeBuffer(pvData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CloseHandle dispatches through ISceSvcAttachmentData's vtable slot 6.
-func (self *ISceSvcAttachmentData) CloseHandle(scesvcHandle unsafe.Pointer) foundation.HRESULT {
+func (self *ISceSvcAttachmentData) CloseHandle(scesvcHandle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scesvcHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISceSvcAttachmentPersistInfo: https://learn.microsoft.com/windows/win32/api/scesvc/nn-scesvc-iscesvcattachmentpersistinfo
@@ -56,19 +56,19 @@ type ISceSvcAttachmentPersistInfo struct {
 var IID_ISceSvcAttachmentPersistInfo = win32.GUID{Data1: 0x6d90e0d0, Data2: 0x200d, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xfb, 0x00, 0xc0, 0x4f, 0xb9, 0x84, 0xf9}}
 
 // Save dispatches through ISceSvcAttachmentPersistInfo's vtable slot 3.
-func (self *ISceSvcAttachmentPersistInfo) Save(lpTemplateName *int8, scesvcHandle *unsafe.Pointer, ppvData *unsafe.Pointer, pbOverwriteAll *foundation.BOOL) foundation.HRESULT {
+func (self *ISceSvcAttachmentPersistInfo) Save(lpTemplateName *int8, scesvcHandle *unsafe.Pointer, ppvData *unsafe.Pointer, pbOverwriteAll *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpTemplateName)), uintptr(unsafe.Pointer(scesvcHandle)), uintptr(unsafe.Pointer(ppvData)), uintptr(unsafe.Pointer(pbOverwriteAll)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsDirty dispatches through ISceSvcAttachmentPersistInfo's vtable slot 4.
-func (self *ISceSvcAttachmentPersistInfo) IsDirty(lpTemplateName *int8) foundation.HRESULT {
+func (self *ISceSvcAttachmentPersistInfo) IsDirty(lpTemplateName *int8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpTemplateName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreeBuffer dispatches through ISceSvcAttachmentPersistInfo's vtable slot 5.
-func (self *ISceSvcAttachmentPersistInfo) FreeBuffer(pvData unsafe.Pointer) foundation.HRESULT {
+func (self *ISceSvcAttachmentPersistInfo) FreeBuffer(pvData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

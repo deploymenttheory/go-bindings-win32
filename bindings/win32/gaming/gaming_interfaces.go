@@ -22,15 +22,15 @@ type IGameExplorer struct {
 var IID_IGameExplorer = win32.GUID{Data1: 0xe7b2fb72, Data2: 0xd728, Data3: 0x49b3, Data4: [8]byte{0xa5, 0xf2, 0x18, 0xeb, 0xf5, 0xf1, 0x34, 0x9e}}
 
 // AddGame dispatches through IGameExplorer's vtable slot 3.
-func (self *IGameExplorer) AddGame(bstrGDFBinaryPath foundation.BSTR, bstrGameInstallDirectory foundation.BSTR, installScope GAME_INSTALL_SCOPE, pguidInstanceID *win32.GUID) foundation.HRESULT {
+func (self *IGameExplorer) AddGame(bstrGDFBinaryPath foundation.BSTR, bstrGameInstallDirectory foundation.BSTR, installScope GAME_INSTALL_SCOPE, pguidInstanceID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGDFBinaryPath)), uintptr(unsafe.Pointer(bstrGameInstallDirectory)), uintptr(installScope), uintptr(unsafe.Pointer(pguidInstanceID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VerifyAccess dispatches through IGameExplorer's vtable slot 6.
-func (self *IGameExplorer) VerifyAccess(bstrGDFBinaryPath foundation.BSTR, pfHasAccess *foundation.BOOL) foundation.HRESULT {
+func (self *IGameExplorer) VerifyAccess(bstrGDFBinaryPath foundation.BSTR, pfHasAccess *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrGDFBinaryPath)), uintptr(unsafe.Pointer(pfHasAccess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 86874aa7-a1ed-450d-a7eb-b89e20b2fff3
@@ -42,21 +42,25 @@ type IGameExplorer2 struct {
 var IID_IGameExplorer2 = win32.GUID{Data1: 0x86874aa7, Data2: 0xa1ed, Data3: 0x450d, Data4: [8]byte{0xa7, 0xeb, 0xb8, 0x9e, 0x20, 0xb2, 0xff, 0xf3}}
 
 // InstallGame dispatches through IGameExplorer2's vtable slot 3.
-func (self *IGameExplorer2) InstallGame(binaryGDFPath foundation.PWSTR, installDirectory foundation.PWSTR, installScope GAME_INSTALL_SCOPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(binaryGDFPath)), uintptr(unsafe.Pointer(installDirectory)), uintptr(installScope))
-	return foundation.HRESULT(r1)
+func (self *IGameExplorer2) InstallGame(binaryGDFPath string, installDirectory string, installScope GAME_INSTALL_SCOPE) error {
+	_binaryGDFPath := win32.UTF16Ptr(binaryGDFPath)
+	_installDirectory := win32.UTF16Ptr(installDirectory)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_binaryGDFPath)), uintptr(unsafe.Pointer(_installDirectory)), uintptr(installScope))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UninstallGame dispatches through IGameExplorer2's vtable slot 4.
-func (self *IGameExplorer2) UninstallGame(binaryGDFPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(binaryGDFPath)))
-	return foundation.HRESULT(r1)
+func (self *IGameExplorer2) UninstallGame(binaryGDFPath string) error {
+	_binaryGDFPath := win32.UTF16Ptr(binaryGDFPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_binaryGDFPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CheckAccess dispatches through IGameExplorer2's vtable slot 5.
-func (self *IGameExplorer2) CheckAccess(binaryGDFPath foundation.PWSTR, pHasAccess *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(binaryGDFPath)), uintptr(unsafe.Pointer(pHasAccess)))
-	return foundation.HRESULT(r1)
+func (self *IGameExplorer2) CheckAccess(binaryGDFPath string, pHasAccess *foundation.BOOL) error {
+	_binaryGDFPath := win32.UTF16Ptr(binaryGDFPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_binaryGDFPath)), uintptr(unsafe.Pointer(pHasAccess)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3887c9ca-04a0-42ae-bc4c-5fa6c7721145
@@ -68,75 +72,79 @@ type IGameStatistics struct {
 var IID_IGameStatistics = win32.GUID{Data1: 0x3887c9ca, Data2: 0x04a0, Data3: 0x42ae, Data4: [8]byte{0xbc, 0x4c, 0x5f, 0xa6, 0xc7, 0x72, 0x11, 0x45}}
 
 // GetMaxCategoryLength dispatches through IGameStatistics's vtable slot 3.
-func (self *IGameStatistics) GetMaxCategoryLength(cch *uint32) foundation.HRESULT {
+func (self *IGameStatistics) GetMaxCategoryLength(cch *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaxNameLength dispatches through IGameStatistics's vtable slot 4.
-func (self *IGameStatistics) GetMaxNameLength(cch *uint32) foundation.HRESULT {
+func (self *IGameStatistics) GetMaxNameLength(cch *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaxValueLength dispatches through IGameStatistics's vtable slot 5.
-func (self *IGameStatistics) GetMaxValueLength(cch *uint32) foundation.HRESULT {
+func (self *IGameStatistics) GetMaxValueLength(cch *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaxCategories dispatches through IGameStatistics's vtable slot 6.
-func (self *IGameStatistics) GetMaxCategories(pMax *uint16) foundation.HRESULT {
+func (self *IGameStatistics) GetMaxCategories(pMax *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMax)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaxStatsPerCategory dispatches through IGameStatistics's vtable slot 7.
-func (self *IGameStatistics) GetMaxStatsPerCategory(pMax *uint16) foundation.HRESULT {
+func (self *IGameStatistics) GetMaxStatsPerCategory(pMax *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMax)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCategoryTitle dispatches through IGameStatistics's vtable slot 8.
-func (self *IGameStatistics) SetCategoryTitle(categoryIndex uint16, title foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(categoryIndex), uintptr(unsafe.Pointer(title)))
-	return foundation.HRESULT(r1)
+func (self *IGameStatistics) SetCategoryTitle(categoryIndex uint16, title string) error {
+	_title := win32.UTF16Ptr(title)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(categoryIndex), uintptr(unsafe.Pointer(_title)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCategoryTitle dispatches through IGameStatistics's vtable slot 9.
-func (self *IGameStatistics) GetCategoryTitle(categoryIndex uint16, pTitle *foundation.PWSTR) foundation.HRESULT {
+func (self *IGameStatistics) GetCategoryTitle(categoryIndex uint16, pTitle *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(categoryIndex), uintptr(unsafe.Pointer(pTitle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatistic dispatches through IGameStatistics's vtable slot 10.
-func (self *IGameStatistics) GetStatistic(categoryIndex uint16, statIndex uint16, pName *foundation.PWSTR, pValue *foundation.PWSTR) foundation.HRESULT {
+func (self *IGameStatistics) GetStatistic(categoryIndex uint16, statIndex uint16, pName *foundation.PWSTR, pValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(categoryIndex), uintptr(statIndex), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStatistic dispatches through IGameStatistics's vtable slot 11.
-func (self *IGameStatistics) SetStatistic(categoryIndex uint16, statIndex uint16, name foundation.PWSTR, value foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(categoryIndex), uintptr(statIndex), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *IGameStatistics) SetStatistic(categoryIndex uint16, statIndex uint16, name string, value string) error {
+	_name := win32.UTF16Ptr(name)
+	_value := win32.UTF16Ptr(value)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(categoryIndex), uintptr(statIndex), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(_value)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Save dispatches through IGameStatistics's vtable slot 12.
-func (self *IGameStatistics) Save(trackChanges foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(trackChanges))
-	return foundation.HRESULT(r1)
+func (self *IGameStatistics) Save(trackChanges bool) error {
+	_trackChanges := win32.Bool32(trackChanges)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(_trackChanges))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLastPlayedCategory dispatches through IGameStatistics's vtable slot 13.
-func (self *IGameStatistics) SetLastPlayedCategory(categoryIndex uint32) foundation.HRESULT {
+func (self *IGameStatistics) SetLastPlayedCategory(categoryIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(categoryIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLastPlayedCategory dispatches through IGameStatistics's vtable slot 14.
-func (self *IGameStatistics) GetLastPlayedCategory(pCategoryIndex *uint32) foundation.HRESULT {
+func (self *IGameStatistics) GetLastPlayedCategory(pCategoryIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCategoryIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: aff3ea11-e70e-407d-95dd-35e612c41ce2
@@ -148,15 +156,17 @@ type IGameStatisticsMgr struct {
 var IID_IGameStatisticsMgr = win32.GUID{Data1: 0xaff3ea11, Data2: 0xe70e, Data3: 0x407d, Data4: [8]byte{0x95, 0xdd, 0x35, 0xe6, 0x12, 0xc4, 0x1c, 0xe2}}
 
 // GetGameStatistics dispatches through IGameStatisticsMgr's vtable slot 3.
-func (self *IGameStatisticsMgr) GetGameStatistics(GDFBinaryPath foundation.PWSTR, openType GAMESTATS_OPEN_TYPE, pOpenResult *GAMESTATS_OPEN_RESULT, ppiStats **IGameStatistics) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(GDFBinaryPath)), uintptr(openType), uintptr(unsafe.Pointer(pOpenResult)), uintptr(unsafe.Pointer(ppiStats)))
-	return foundation.HRESULT(r1)
+func (self *IGameStatisticsMgr) GetGameStatistics(GDFBinaryPath string, openType GAMESTATS_OPEN_TYPE, pOpenResult *GAMESTATS_OPEN_RESULT, ppiStats **IGameStatistics) error {
+	_GDFBinaryPath := win32.UTF16Ptr(GDFBinaryPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_GDFBinaryPath)), uintptr(openType), uintptr(unsafe.Pointer(pOpenResult)), uintptr(unsafe.Pointer(ppiStats)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveGameStatistics dispatches through IGameStatisticsMgr's vtable slot 4.
-func (self *IGameStatisticsMgr) RemoveGameStatistics(GDFBinaryPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(GDFBinaryPath)))
-	return foundation.HRESULT(r1)
+func (self *IGameStatisticsMgr) RemoveGameStatistics(GDFBinaryPath string) error {
+	_GDFBinaryPath := win32.UTF16Ptr(GDFBinaryPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_GDFBinaryPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IXblIdpAuthManager: https://learn.microsoft.com/windows/win32/api/xblidpauthmanager/nn-xblidpauthmanager-ixblidpauthmanager
@@ -169,39 +179,51 @@ type IXblIdpAuthManager struct {
 var IID_IXblIdpAuthManager = win32.GUID{Data1: 0xeb5ddb08, Data2: 0x8bbf, Data3: 0x449b, Data4: [8]byte{0xac, 0x21, 0xb0, 0x2d, 0xde, 0xb3, 0xb1, 0x36}}
 
 // SetGamerAccount dispatches through IXblIdpAuthManager's vtable slot 3.
-func (self *IXblIdpAuthManager) SetGamerAccount(msaAccountId foundation.PWSTR, xuid foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(msaAccountId)), uintptr(unsafe.Pointer(xuid)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthManager) SetGamerAccount(msaAccountId string, xuid string) error {
+	_msaAccountId := win32.UTF16Ptr(msaAccountId)
+	_xuid := win32.UTF16Ptr(xuid)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_msaAccountId)), uintptr(unsafe.Pointer(_xuid)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGamerAccount dispatches through IXblIdpAuthManager's vtable slot 4.
-func (self *IXblIdpAuthManager) GetGamerAccount(msaAccountId *foundation.PWSTR, xuid *foundation.PWSTR) foundation.HRESULT {
+func (self *IXblIdpAuthManager) GetGamerAccount(msaAccountId *foundation.PWSTR, xuid *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(msaAccountId)), uintptr(unsafe.Pointer(xuid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAppViewInitialized dispatches through IXblIdpAuthManager's vtable slot 5.
-func (self *IXblIdpAuthManager) SetAppViewInitialized(appSid foundation.PWSTR, msaAccountId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(appSid)), uintptr(unsafe.Pointer(msaAccountId)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthManager) SetAppViewInitialized(appSid string, msaAccountId string) error {
+	_appSid := win32.UTF16Ptr(appSid)
+	_msaAccountId := win32.UTF16Ptr(msaAccountId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_appSid)), uintptr(unsafe.Pointer(_msaAccountId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEnvironment dispatches through IXblIdpAuthManager's vtable slot 6.
-func (self *IXblIdpAuthManager) GetEnvironment(environment *foundation.PWSTR) foundation.HRESULT {
+func (self *IXblIdpAuthManager) GetEnvironment(environment *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(environment)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSandbox dispatches through IXblIdpAuthManager's vtable slot 7.
-func (self *IXblIdpAuthManager) GetSandbox(sandbox *foundation.PWSTR) foundation.HRESULT {
+func (self *IXblIdpAuthManager) GetSandbox(sandbox *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sandbox)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTokenAndSignatureWithTokenResult dispatches through IXblIdpAuthManager's vtable slot 8.
-func (self *IXblIdpAuthManager) GetTokenAndSignatureWithTokenResult(msaAccountId foundation.PWSTR, appSid foundation.PWSTR, msaTarget foundation.PWSTR, msaPolicy foundation.PWSTR, httpMethod foundation.PWSTR, uri foundation.PWSTR, headers foundation.PWSTR, body *byte, bodySize uint32, forceRefresh foundation.BOOL, result **IXblIdpAuthTokenResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(msaAccountId)), uintptr(unsafe.Pointer(appSid)), uintptr(unsafe.Pointer(msaTarget)), uintptr(unsafe.Pointer(msaPolicy)), uintptr(unsafe.Pointer(httpMethod)), uintptr(unsafe.Pointer(uri)), uintptr(unsafe.Pointer(headers)), uintptr(unsafe.Pointer(body)), uintptr(bodySize), uintptr(forceRefresh), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthManager) GetTokenAndSignatureWithTokenResult(msaAccountId string, appSid string, msaTarget string, msaPolicy string, httpMethod string, uri string, headers string, body *byte, bodySize uint32, forceRefresh bool, result **IXblIdpAuthTokenResult) error {
+	_msaAccountId := win32.UTF16Ptr(msaAccountId)
+	_appSid := win32.UTF16Ptr(appSid)
+	_msaTarget := win32.UTF16Ptr(msaTarget)
+	_msaPolicy := win32.UTF16Ptr(msaPolicy)
+	_httpMethod := win32.UTF16Ptr(httpMethod)
+	_uri := win32.UTF16Ptr(uri)
+	_headers := win32.UTF16Ptr(headers)
+	_forceRefresh := win32.Bool32(forceRefresh)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_msaAccountId)), uintptr(unsafe.Pointer(_appSid)), uintptr(unsafe.Pointer(_msaTarget)), uintptr(unsafe.Pointer(_msaPolicy)), uintptr(unsafe.Pointer(_httpMethod)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(_headers)), uintptr(unsafe.Pointer(body)), uintptr(bodySize), uintptr(_forceRefresh), uintptr(unsafe.Pointer(result)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bf8c0950-8389-43dd-9a76-a19728ec5dc5
@@ -213,9 +235,16 @@ type IXblIdpAuthManager2 struct {
 var IID_IXblIdpAuthManager2 = win32.GUID{Data1: 0xbf8c0950, Data2: 0x8389, Data3: 0x43dd, Data4: [8]byte{0x9a, 0x76, 0xa1, 0x97, 0x28, 0xec, 0x5d, 0xc5}}
 
 // GetUserlessTokenAndSignatureWithTokenResult dispatches through IXblIdpAuthManager2's vtable slot 3.
-func (self *IXblIdpAuthManager2) GetUserlessTokenAndSignatureWithTokenResult(appSid foundation.PWSTR, msaTarget foundation.PWSTR, msaPolicy foundation.PWSTR, httpMethod foundation.PWSTR, uri foundation.PWSTR, headers foundation.PWSTR, body *byte, bodySize uint32, forceRefresh foundation.BOOL, result **IXblIdpAuthTokenResult) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(appSid)), uintptr(unsafe.Pointer(msaTarget)), uintptr(unsafe.Pointer(msaPolicy)), uintptr(unsafe.Pointer(httpMethod)), uintptr(unsafe.Pointer(uri)), uintptr(unsafe.Pointer(headers)), uintptr(unsafe.Pointer(body)), uintptr(bodySize), uintptr(forceRefresh), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthManager2) GetUserlessTokenAndSignatureWithTokenResult(appSid string, msaTarget string, msaPolicy string, httpMethod string, uri string, headers string, body *byte, bodySize uint32, forceRefresh bool, result **IXblIdpAuthTokenResult) error {
+	_appSid := win32.UTF16Ptr(appSid)
+	_msaTarget := win32.UTF16Ptr(msaTarget)
+	_msaPolicy := win32.UTF16Ptr(msaPolicy)
+	_httpMethod := win32.UTF16Ptr(httpMethod)
+	_uri := win32.UTF16Ptr(uri)
+	_headers := win32.UTF16Ptr(headers)
+	_forceRefresh := win32.Bool32(forceRefresh)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_appSid)), uintptr(unsafe.Pointer(_msaTarget)), uintptr(unsafe.Pointer(_msaPolicy)), uintptr(unsafe.Pointer(_httpMethod)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(_headers)), uintptr(unsafe.Pointer(body)), uintptr(bodySize), uintptr(_forceRefresh), uintptr(unsafe.Pointer(result)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IXblIdpAuthTokenResult: https://learn.microsoft.com/windows/win32/api/xblidpauthmanager/nn-xblidpauthmanager-ixblidpauthtokenresult
@@ -228,123 +257,141 @@ type IXblIdpAuthTokenResult struct {
 var IID_IXblIdpAuthTokenResult = win32.GUID{Data1: 0x46ce0225, Data2: 0xf267, Data3: 0x4d68, Data4: [8]byte{0xb2, 0x99, 0xb2, 0x76, 0x25, 0x52, 0xde, 0xc1}}
 
 // GetStatus dispatches through IXblIdpAuthTokenResult's vtable slot 3.
-func (self *IXblIdpAuthTokenResult) GetStatus(status *XBL_IDP_AUTH_TOKEN_STATUS) foundation.HRESULT {
+func (self *IXblIdpAuthTokenResult) GetStatus(status *XBL_IDP_AUTH_TOKEN_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(status)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrorCode dispatches through IXblIdpAuthTokenResult's vtable slot 4.
-func (self *IXblIdpAuthTokenResult) GetErrorCode(errorCode *foundation.HRESULT) foundation.HRESULT {
+func (self *IXblIdpAuthTokenResult) GetErrorCode(errorCode *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(errorCode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetToken dispatches through IXblIdpAuthTokenResult's vtable slot 5.
-func (self *IXblIdpAuthTokenResult) GetToken(token *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(token)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetToken() (foundation.PWSTR, error) {
+	var _token foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_token)))
+	return _token, win32.HRESULTError(int32(r1))
 }
 
 // GetSignature dispatches through IXblIdpAuthTokenResult's vtable slot 6.
-func (self *IXblIdpAuthTokenResult) GetSignature(signature *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signature)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetSignature() (foundation.PWSTR, error) {
+	var _signature foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_signature)))
+	return _signature, win32.HRESULTError(int32(r1))
 }
 
 // GetSandbox dispatches through IXblIdpAuthTokenResult's vtable slot 7.
-func (self *IXblIdpAuthTokenResult) GetSandbox(sandbox *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sandbox)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetSandbox() (foundation.PWSTR, error) {
+	var _sandbox foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_sandbox)))
+	return _sandbox, win32.HRESULTError(int32(r1))
 }
 
 // GetEnvironment dispatches through IXblIdpAuthTokenResult's vtable slot 8.
-func (self *IXblIdpAuthTokenResult) GetEnvironment(environment *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(environment)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetEnvironment() (foundation.PWSTR, error) {
+	var _environment foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_environment)))
+	return _environment, win32.HRESULTError(int32(r1))
 }
 
 // GetMsaAccountId dispatches through IXblIdpAuthTokenResult's vtable slot 9.
-func (self *IXblIdpAuthTokenResult) GetMsaAccountId(msaAccountId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(msaAccountId)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetMsaAccountId() (foundation.PWSTR, error) {
+	var _msaAccountId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_msaAccountId)))
+	return _msaAccountId, win32.HRESULTError(int32(r1))
 }
 
 // GetXuid dispatches through IXblIdpAuthTokenResult's vtable slot 10.
-func (self *IXblIdpAuthTokenResult) GetXuid(xuid *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xuid)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetXuid() (foundation.PWSTR, error) {
+	var _xuid foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_xuid)))
+	return _xuid, win32.HRESULTError(int32(r1))
 }
 
 // GetGamertag dispatches through IXblIdpAuthTokenResult's vtable slot 11.
-func (self *IXblIdpAuthTokenResult) GetGamertag(gamertag *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(gamertag)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetGamertag() (foundation.PWSTR, error) {
+	var _gamertag foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_gamertag)))
+	return _gamertag, win32.HRESULTError(int32(r1))
 }
 
 // GetAgeGroup dispatches through IXblIdpAuthTokenResult's vtable slot 12.
-func (self *IXblIdpAuthTokenResult) GetAgeGroup(ageGroup *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ageGroup)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetAgeGroup() (foundation.PWSTR, error) {
+	var _ageGroup foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ageGroup)))
+	return _ageGroup, win32.HRESULTError(int32(r1))
 }
 
 // GetPrivileges dispatches through IXblIdpAuthTokenResult's vtable slot 13.
-func (self *IXblIdpAuthTokenResult) GetPrivileges(privileges *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(privileges)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetPrivileges() (foundation.PWSTR, error) {
+	var _privileges foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_privileges)))
+	return _privileges, win32.HRESULTError(int32(r1))
 }
 
 // GetMsaTarget dispatches through IXblIdpAuthTokenResult's vtable slot 14.
-func (self *IXblIdpAuthTokenResult) GetMsaTarget(msaTarget *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(msaTarget)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetMsaTarget() (foundation.PWSTR, error) {
+	var _msaTarget foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_msaTarget)))
+	return _msaTarget, win32.HRESULTError(int32(r1))
 }
 
 // GetMsaPolicy dispatches through IXblIdpAuthTokenResult's vtable slot 15.
-func (self *IXblIdpAuthTokenResult) GetMsaPolicy(msaPolicy *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(msaPolicy)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetMsaPolicy() (foundation.PWSTR, error) {
+	var _msaPolicy foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_msaPolicy)))
+	return _msaPolicy, win32.HRESULTError(int32(r1))
 }
 
 // GetMsaAppId dispatches through IXblIdpAuthTokenResult's vtable slot 16.
-func (self *IXblIdpAuthTokenResult) GetMsaAppId(msaAppId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(msaAppId)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetMsaAppId() (foundation.PWSTR, error) {
+	var _msaAppId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_msaAppId)))
+	return _msaAppId, win32.HRESULTError(int32(r1))
 }
 
 // GetRedirect dispatches through IXblIdpAuthTokenResult's vtable slot 17.
-func (self *IXblIdpAuthTokenResult) GetRedirect(redirect *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(redirect)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetRedirect() (foundation.PWSTR, error) {
+	var _redirect foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_redirect)))
+	return _redirect, win32.HRESULTError(int32(r1))
 }
 
 // GetMessage dispatches through IXblIdpAuthTokenResult's vtable slot 18.
-func (self *IXblIdpAuthTokenResult) GetMessage(message *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(message)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetMessage() (foundation.PWSTR, error) {
+	var _message foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_message)))
+	return _message, win32.HRESULTError(int32(r1))
 }
 
 // GetHelpId dispatches through IXblIdpAuthTokenResult's vtable slot 19.
-func (self *IXblIdpAuthTokenResult) GetHelpId(helpId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(helpId)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetHelpId() (foundation.PWSTR, error) {
+	var _helpId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_helpId)))
+	return _helpId, win32.HRESULTError(int32(r1))
 }
 
 // GetEnforcementBans dispatches through IXblIdpAuthTokenResult's vtable slot 20.
-func (self *IXblIdpAuthTokenResult) GetEnforcementBans(enforcementBans *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(enforcementBans)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetEnforcementBans() (foundation.PWSTR, error) {
+	var _enforcementBans foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_enforcementBans)))
+	return _enforcementBans, win32.HRESULTError(int32(r1))
 }
 
 // GetRestrictions dispatches through IXblIdpAuthTokenResult's vtable slot 21.
-func (self *IXblIdpAuthTokenResult) GetRestrictions(restrictions *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(restrictions)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetRestrictions() (foundation.PWSTR, error) {
+	var _restrictions foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_restrictions)))
+	return _restrictions, win32.HRESULTError(int32(r1))
 }
 
 // GetTitleRestrictions dispatches through IXblIdpAuthTokenResult's vtable slot 22.
-func (self *IXblIdpAuthTokenResult) GetTitleRestrictions(titleRestrictions *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(titleRestrictions)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult) GetTitleRestrictions() (foundation.PWSTR, error) {
+	var _titleRestrictions foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_titleRestrictions)))
+	return _titleRestrictions, win32.HRESULTError(int32(r1))
 }
 
 // IID: 75d760b0-60b9-412d-994f-26b2cd5f7812
@@ -356,19 +403,22 @@ type IXblIdpAuthTokenResult2 struct {
 var IID_IXblIdpAuthTokenResult2 = win32.GUID{Data1: 0x75d760b0, Data2: 0x60b9, Data3: 0x412d, Data4: [8]byte{0x99, 0x4f, 0x26, 0xb2, 0xcd, 0x5f, 0x78, 0x12}}
 
 // GetModernGamertag dispatches through IXblIdpAuthTokenResult2's vtable slot 3.
-func (self *IXblIdpAuthTokenResult2) GetModernGamertag(value *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult2) GetModernGamertag() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
+	return _value, win32.HRESULTError(int32(r1))
 }
 
 // GetModernGamertagSuffix dispatches through IXblIdpAuthTokenResult2's vtable slot 4.
-func (self *IXblIdpAuthTokenResult2) GetModernGamertagSuffix(value *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult2) GetModernGamertagSuffix() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
+	return _value, win32.HRESULTError(int32(r1))
 }
 
 // GetUniqueModernGamertag dispatches through IXblIdpAuthTokenResult2's vtable slot 5.
-func (self *IXblIdpAuthTokenResult2) GetUniqueModernGamertag(value *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+func (self *IXblIdpAuthTokenResult2) GetUniqueModernGamertag() (foundation.PWSTR, error) {
+	var _value foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_value)))
+	return _value, win32.HRESULTError(int32(r1))
 }

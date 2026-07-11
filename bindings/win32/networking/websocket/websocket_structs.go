@@ -11,8 +11,8 @@ import (
 )
 
 // WEB_SOCKET_BUFFER: https://learn.microsoft.com/windows/win32/api/websocket/ns-websocket-web_socket_buffer
-// WEB_SOCKET_BUFFER is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WEB_SOCKET_BUFFER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WEB_SOCKET_BUFFER struct {
 	Data [2]uint64
 }

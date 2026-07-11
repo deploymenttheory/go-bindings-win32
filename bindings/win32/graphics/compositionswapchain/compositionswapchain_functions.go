@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
@@ -23,7 +22,7 @@ var (
 
 // CreatePresentationFactory calls dcomp!CreatePresentationFactory.
 // https://learn.microsoft.com/windows/win32/api/presentation/nf-presentation-createpresentationfactory
-func CreatePresentationFactory(d3dDevice *systemcom.IUnknown, riid *win32.GUID, presentationFactory *unsafe.Pointer) foundation.HRESULT {
+func CreatePresentationFactory(d3dDevice *systemcom.IUnknown, riid *win32.GUID, presentationFactory *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procCreatePresentationFactory.Addr(), uintptr(unsafe.Pointer(d3dDevice)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(presentationFactory)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

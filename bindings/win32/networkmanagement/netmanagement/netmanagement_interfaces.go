@@ -24,27 +24,27 @@ type IEnumNetCfgBindingInterface struct {
 var IID_IEnumNetCfgBindingInterface = win32.GUID{Data1: 0xc0e8ae90, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetCfgBindingInterface's vtable slot 3.
-func (self *IEnumNetCfgBindingInterface) Next(celt uint32, rgelt **INetCfgBindingInterface, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumNetCfgBindingInterface) Next(celt uint32, rgelt **INetCfgBindingInterface, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumNetCfgBindingInterface's vtable slot 4.
-func (self *IEnumNetCfgBindingInterface) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumNetCfgBindingInterface) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumNetCfgBindingInterface's vtable slot 5.
-func (self *IEnumNetCfgBindingInterface) Reset() foundation.HRESULT {
+func (self *IEnumNetCfgBindingInterface) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumNetCfgBindingInterface's vtable slot 6.
-func (self *IEnumNetCfgBindingInterface) Clone(ppenum **IEnumNetCfgBindingInterface) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumNetCfgBindingInterface) Clone() error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), 0)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c0e8ae91-306e-11d1-aacf-00805fc1270e
@@ -56,27 +56,27 @@ type IEnumNetCfgBindingPath struct {
 var IID_IEnumNetCfgBindingPath = win32.GUID{Data1: 0xc0e8ae91, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetCfgBindingPath's vtable slot 3.
-func (self *IEnumNetCfgBindingPath) Next(celt uint32, rgelt **INetCfgBindingPath, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumNetCfgBindingPath) Next(celt uint32, rgelt **INetCfgBindingPath, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumNetCfgBindingPath's vtable slot 4.
-func (self *IEnumNetCfgBindingPath) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumNetCfgBindingPath) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumNetCfgBindingPath's vtable slot 5.
-func (self *IEnumNetCfgBindingPath) Reset() foundation.HRESULT {
+func (self *IEnumNetCfgBindingPath) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumNetCfgBindingPath's vtable slot 6.
-func (self *IEnumNetCfgBindingPath) Clone(ppenum **IEnumNetCfgBindingPath) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumNetCfgBindingPath) Clone() error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), 0)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c0e8ae92-306e-11d1-aacf-00805fc1270e
@@ -88,27 +88,27 @@ type IEnumNetCfgComponent struct {
 var IID_IEnumNetCfgComponent = win32.GUID{Data1: 0xc0e8ae92, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetCfgComponent's vtable slot 3.
-func (self *IEnumNetCfgComponent) Next(celt uint32, rgelt **INetCfgComponent, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumNetCfgComponent) Next(celt uint32, rgelt **INetCfgComponent, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumNetCfgComponent's vtable slot 4.
-func (self *IEnumNetCfgComponent) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumNetCfgComponent) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumNetCfgComponent's vtable slot 5.
-func (self *IEnumNetCfgComponent) Reset() foundation.HRESULT {
+func (self *IEnumNetCfgComponent) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumNetCfgComponent's vtable slot 6.
-func (self *IEnumNetCfgComponent) Clone(ppenum **IEnumNetCfgComponent) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumNetCfgComponent) Clone() error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), 0)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c0e8ae93-306e-11d1-aacf-00805fc1270e
@@ -120,45 +120,46 @@ type INetCfg struct {
 var IID_INetCfg = win32.GUID{Data1: 0xc0e8ae93, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Initialize dispatches through INetCfg's vtable slot 3.
-func (self *INetCfg) Initialize(pvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.HRESULT(r1)
+func (self *INetCfg) Initialize() error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), 0)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Uninitialize dispatches through INetCfg's vtable slot 4.
-func (self *INetCfg) Uninitialize() foundation.HRESULT {
+func (self *INetCfg) Uninitialize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Apply dispatches through INetCfg's vtable slot 5.
-func (self *INetCfg) Apply() foundation.HRESULT {
+func (self *INetCfg) Apply() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Cancel dispatches through INetCfg's vtable slot 6.
-func (self *INetCfg) Cancel() foundation.HRESULT {
+func (self *INetCfg) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumComponents dispatches through INetCfg's vtable slot 7.
-func (self *INetCfg) EnumComponents(pguidClass *win32.GUID, ppenumComponent **IEnumNetCfgComponent) foundation.HRESULT {
+func (self *INetCfg) EnumComponents(pguidClass *win32.GUID, ppenumComponent **IEnumNetCfgComponent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidClass)), uintptr(unsafe.Pointer(ppenumComponent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindComponent dispatches through INetCfg's vtable slot 8.
-func (self *INetCfg) FindComponent(pszwInfId foundation.PWSTR, pComponent **INetCfgComponent) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszwInfId)), uintptr(unsafe.Pointer(pComponent)))
-	return foundation.HRESULT(r1)
+func (self *INetCfg) FindComponent(pszwInfId string, pComponent **INetCfgComponent) error {
+	_pszwInfId := win32.UTF16Ptr(pszwInfId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszwInfId)), uintptr(unsafe.Pointer(pComponent)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryNetCfgClass dispatches through INetCfg's vtable slot 9.
-func (self *INetCfg) QueryNetCfgClass(pguidClass *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func (self *INetCfg) QueryNetCfgClass(pguidClass *win32.GUID, riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidClass)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c0e8ae94-306e-11d1-aacf-00805fc1270e
@@ -170,21 +171,21 @@ type INetCfgBindingInterface struct {
 var IID_INetCfgBindingInterface = win32.GUID{Data1: 0xc0e8ae94, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // GetName dispatches through INetCfgBindingInterface's vtable slot 3.
-func (self *INetCfgBindingInterface) GetName(ppszwInterfaceName *foundation.PWSTR) foundation.HRESULT {
+func (self *INetCfgBindingInterface) GetName(ppszwInterfaceName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszwInterfaceName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUpperComponent dispatches through INetCfgBindingInterface's vtable slot 4.
-func (self *INetCfgBindingInterface) GetUpperComponent(ppnccItem **INetCfgComponent) foundation.HRESULT {
+func (self *INetCfgBindingInterface) GetUpperComponent(ppnccItem **INetCfgComponent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppnccItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLowerComponent dispatches through INetCfgBindingInterface's vtable slot 5.
-func (self *INetCfgBindingInterface) GetLowerComponent(ppnccItem **INetCfgComponent) foundation.HRESULT {
+func (self *INetCfgBindingInterface) GetLowerComponent(ppnccItem **INetCfgComponent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppnccItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c0e8ae96-306e-11d1-aacf-00805fc1270e
@@ -196,51 +197,52 @@ type INetCfgBindingPath struct {
 var IID_INetCfgBindingPath = win32.GUID{Data1: 0xc0e8ae96, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // IsSamePathAs dispatches through INetCfgBindingPath's vtable slot 3.
-func (self *INetCfgBindingPath) IsSamePathAs(pPath *INetCfgBindingPath) foundation.HRESULT {
+func (self *INetCfgBindingPath) IsSamePathAs(pPath *INetCfgBindingPath) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsSubPathOf dispatches through INetCfgBindingPath's vtable slot 4.
-func (self *INetCfgBindingPath) IsSubPathOf(pPath *INetCfgBindingPath) foundation.HRESULT {
+func (self *INetCfgBindingPath) IsSubPathOf(pPath *INetCfgBindingPath) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsEnabled dispatches through INetCfgBindingPath's vtable slot 5.
-func (self *INetCfgBindingPath) IsEnabled() foundation.HRESULT {
+func (self *INetCfgBindingPath) IsEnabled() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Enable dispatches through INetCfgBindingPath's vtable slot 6.
-func (self *INetCfgBindingPath) Enable(fEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+func (self *INetCfgBindingPath) Enable(fEnable bool) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPathToken dispatches through INetCfgBindingPath's vtable slot 7.
-func (self *INetCfgBindingPath) GetPathToken(ppszwPathToken *foundation.PWSTR) foundation.HRESULT {
+func (self *INetCfgBindingPath) GetPathToken(ppszwPathToken *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszwPathToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOwner dispatches through INetCfgBindingPath's vtable slot 8.
-func (self *INetCfgBindingPath) GetOwner(ppComponent **INetCfgComponent) foundation.HRESULT {
+func (self *INetCfgBindingPath) GetOwner(ppComponent **INetCfgComponent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppComponent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDepth dispatches through INetCfgBindingPath's vtable slot 9.
-func (self *INetCfgBindingPath) GetDepth(pcInterfaces *uint32) foundation.HRESULT {
+func (self *INetCfgBindingPath) GetDepth(pcInterfaces *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcInterfaces)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumBindingInterfaces dispatches through INetCfgBindingPath's vtable slot 10.
-func (self *INetCfgBindingPath) EnumBindingInterfaces(ppenumInterface **IEnumNetCfgBindingInterface) foundation.HRESULT {
+func (self *INetCfgBindingPath) EnumBindingInterfaces(ppenumInterface **IEnumNetCfgBindingInterface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenumInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c0e8ae97-306e-11d1-aacf-00805fc1270e
@@ -252,15 +254,16 @@ type INetCfgClass struct {
 var IID_INetCfgClass = win32.GUID{Data1: 0xc0e8ae97, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // FindComponent dispatches through INetCfgClass's vtable slot 3.
-func (self *INetCfgClass) FindComponent(pszwInfId foundation.PWSTR, ppnccItem **INetCfgComponent) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszwInfId)), uintptr(unsafe.Pointer(ppnccItem)))
-	return foundation.HRESULT(r1)
+func (self *INetCfgClass) FindComponent(pszwInfId string, ppnccItem **INetCfgComponent) error {
+	_pszwInfId := win32.UTF16Ptr(pszwInfId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszwInfId)), uintptr(unsafe.Pointer(ppnccItem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumComponents dispatches through INetCfgClass's vtable slot 4.
-func (self *INetCfgClass) EnumComponents(ppenumComponent **IEnumNetCfgComponent) foundation.HRESULT {
+func (self *INetCfgClass) EnumComponents(ppenumComponent **IEnumNetCfgComponent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenumComponent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c0e8ae9d-306e-11d1-aacf-00805fc1270e
@@ -272,21 +275,24 @@ type INetCfgClassSetup struct {
 var IID_INetCfgClassSetup = win32.GUID{Data1: 0xc0e8ae9d, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // SelectAndInstall dispatches through INetCfgClassSetup's vtable slot 3.
-func (self *INetCfgClassSetup) SelectAndInstall(hwndParent foundation.HWND, pOboToken *OBO_TOKEN, ppnccItem **INetCfgComponent) foundation.HRESULT {
+func (self *INetCfgClassSetup) SelectAndInstall(hwndParent foundation.HWND, pOboToken *OBO_TOKEN, ppnccItem **INetCfgComponent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(pOboToken)), uintptr(unsafe.Pointer(ppnccItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Install dispatches through INetCfgClassSetup's vtable slot 4.
-func (self *INetCfgClassSetup) Install(pszwInfId foundation.PWSTR, pOboToken *OBO_TOKEN, dwSetupFlags uint32, dwUpgradeFromBuildNo uint32, pszwAnswerFile foundation.PWSTR, pszwAnswerSections foundation.PWSTR, ppnccItem **INetCfgComponent) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszwInfId)), uintptr(unsafe.Pointer(pOboToken)), uintptr(dwSetupFlags), uintptr(dwUpgradeFromBuildNo), uintptr(unsafe.Pointer(pszwAnswerFile)), uintptr(unsafe.Pointer(pszwAnswerSections)), uintptr(unsafe.Pointer(ppnccItem)))
-	return foundation.HRESULT(r1)
+func (self *INetCfgClassSetup) Install(pszwInfId string, pOboToken *OBO_TOKEN, dwSetupFlags uint32, dwUpgradeFromBuildNo uint32, pszwAnswerFile string, pszwAnswerSections string, ppnccItem **INetCfgComponent) error {
+	_pszwInfId := win32.UTF16Ptr(pszwInfId)
+	_pszwAnswerFile := win32.UTF16Ptr(pszwAnswerFile)
+	_pszwAnswerSections := win32.UTF16Ptr(pszwAnswerSections)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszwInfId)), uintptr(unsafe.Pointer(pOboToken)), uintptr(dwSetupFlags), uintptr(dwUpgradeFromBuildNo), uintptr(unsafe.Pointer(_pszwAnswerFile)), uintptr(unsafe.Pointer(_pszwAnswerSections)), uintptr(unsafe.Pointer(ppnccItem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeInstall dispatches through INetCfgClassSetup's vtable slot 5.
-func (self *INetCfgClassSetup) DeInstall(pComponent *INetCfgComponent, pOboToken *OBO_TOKEN, pmszwRefs *foundation.PWSTR) foundation.HRESULT {
+func (self *INetCfgClassSetup) DeInstall(pComponent *INetCfgComponent, pOboToken *OBO_TOKEN, pmszwRefs *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pComponent)), uintptr(unsafe.Pointer(pOboToken)), uintptr(unsafe.Pointer(pmszwRefs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c0e8aea0-306e-11d1-aacf-00805fc1270e
@@ -298,9 +304,9 @@ type INetCfgClassSetup2 struct {
 var IID_INetCfgClassSetup2 = win32.GUID{Data1: 0xc0e8aea0, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // UpdateNonEnumeratedComponent dispatches through INetCfgClassSetup2's vtable slot 6.
-func (self *INetCfgClassSetup2) UpdateNonEnumeratedComponent(pIComp *INetCfgComponent, dwSetupFlags uint32, dwUpgradeFromBuildNo uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIComp)), uintptr(dwSetupFlags), uintptr(dwUpgradeFromBuildNo))
-	return foundation.HRESULT(r1)
+func (self *INetCfgClassSetup2) UpdateNonEnumeratedComponent(pIComp *INetCfgComponent) error {
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIComp)), 0, 0)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c0e8ae99-306e-11d1-aacf-00805fc1270e
@@ -312,75 +318,76 @@ type INetCfgComponent struct {
 var IID_INetCfgComponent = win32.GUID{Data1: 0xc0e8ae99, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // GetDisplayName dispatches through INetCfgComponent's vtable slot 3.
-func (self *INetCfgComponent) GetDisplayName(ppszwDisplayName *foundation.PWSTR) foundation.HRESULT {
+func (self *INetCfgComponent) GetDisplayName(ppszwDisplayName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszwDisplayName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDisplayName dispatches through INetCfgComponent's vtable slot 4.
-func (self *INetCfgComponent) SetDisplayName(pszwDisplayName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszwDisplayName)))
-	return foundation.HRESULT(r1)
+func (self *INetCfgComponent) SetDisplayName(pszwDisplayName string) error {
+	_pszwDisplayName := win32.UTF16Ptr(pszwDisplayName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszwDisplayName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHelpText dispatches through INetCfgComponent's vtable slot 5.
-func (self *INetCfgComponent) GetHelpText(pszwHelpText *foundation.PWSTR) foundation.HRESULT {
+func (self *INetCfgComponent) GetHelpText(pszwHelpText *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszwHelpText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetId dispatches through INetCfgComponent's vtable slot 6.
-func (self *INetCfgComponent) GetId(ppszwId *foundation.PWSTR) foundation.HRESULT {
+func (self *INetCfgComponent) GetId(ppszwId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszwId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCharacteristics dispatches through INetCfgComponent's vtable slot 7.
-func (self *INetCfgComponent) GetCharacteristics(pdwCharacteristics *uint32) foundation.HRESULT {
+func (self *INetCfgComponent) GetCharacteristics(pdwCharacteristics *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCharacteristics)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInstanceGuid dispatches through INetCfgComponent's vtable slot 8.
-func (self *INetCfgComponent) GetInstanceGuid(pGuid *win32.GUID) foundation.HRESULT {
+func (self *INetCfgComponent) GetInstanceGuid(pGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPnpDevNodeId dispatches through INetCfgComponent's vtable slot 9.
-func (self *INetCfgComponent) GetPnpDevNodeId(ppszwDevNodeId *foundation.PWSTR) foundation.HRESULT {
+func (self *INetCfgComponent) GetPnpDevNodeId(ppszwDevNodeId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszwDevNodeId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClassGuid dispatches through INetCfgComponent's vtable slot 10.
-func (self *INetCfgComponent) GetClassGuid(pGuid *win32.GUID) foundation.HRESULT {
+func (self *INetCfgComponent) GetClassGuid(pGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBindName dispatches through INetCfgComponent's vtable slot 11.
-func (self *INetCfgComponent) GetBindName(ppszwBindName *foundation.PWSTR) foundation.HRESULT {
+func (self *INetCfgComponent) GetBindName(ppszwBindName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszwBindName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceStatus dispatches through INetCfgComponent's vtable slot 12.
-func (self *INetCfgComponent) GetDeviceStatus(pulStatus *uint32) foundation.HRESULT {
+func (self *INetCfgComponent) GetDeviceStatus(pulStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenParamKey dispatches through INetCfgComponent's vtable slot 13.
-func (self *INetCfgComponent) OpenParamKey(phkey *systemregistry.HKEY) foundation.HRESULT {
+func (self *INetCfgComponent) OpenParamKey(phkey *systemregistry.HKEY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phkey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RaisePropertyUi dispatches through INetCfgComponent's vtable slot 14.
-func (self *INetCfgComponent) RaisePropertyUi(hwndParent foundation.HWND, dwFlags uint32, punkContext *systemcom.IUnknown) foundation.HRESULT {
+func (self *INetCfgComponent) RaisePropertyUi(hwndParent foundation.HWND, dwFlags uint32, punkContext *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(dwFlags), uintptr(unsafe.Pointer(punkContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c0e8ae9e-306e-11d1-aacf-00805fc1270e
@@ -392,51 +399,52 @@ type INetCfgComponentBindings struct {
 var IID_INetCfgComponentBindings = win32.GUID{Data1: 0xc0e8ae9e, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // BindTo dispatches through INetCfgComponentBindings's vtable slot 3.
-func (self *INetCfgComponentBindings) BindTo(pnccItem *INetCfgComponent) foundation.HRESULT {
+func (self *INetCfgComponentBindings) BindTo(pnccItem *INetCfgComponent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnccItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnbindFrom dispatches through INetCfgComponentBindings's vtable slot 4.
-func (self *INetCfgComponentBindings) UnbindFrom(pnccItem *INetCfgComponent) foundation.HRESULT {
+func (self *INetCfgComponentBindings) UnbindFrom(pnccItem *INetCfgComponent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnccItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SupportsBindingInterface dispatches through INetCfgComponentBindings's vtable slot 5.
-func (self *INetCfgComponentBindings) SupportsBindingInterface(dwFlags uint32, pszwInterfaceName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszwInterfaceName)))
-	return foundation.HRESULT(r1)
+func (self *INetCfgComponentBindings) SupportsBindingInterface(dwFlags uint32, pszwInterfaceName string) error {
+	_pszwInterfaceName := win32.UTF16Ptr(pszwInterfaceName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszwInterfaceName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsBoundTo dispatches through INetCfgComponentBindings's vtable slot 6.
-func (self *INetCfgComponentBindings) IsBoundTo(pnccItem *INetCfgComponent) foundation.HRESULT {
+func (self *INetCfgComponentBindings) IsBoundTo(pnccItem *INetCfgComponent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnccItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsBindableTo dispatches through INetCfgComponentBindings's vtable slot 7.
-func (self *INetCfgComponentBindings) IsBindableTo(pnccItem *INetCfgComponent) foundation.HRESULT {
+func (self *INetCfgComponentBindings) IsBindableTo(pnccItem *INetCfgComponent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnccItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumBindingPaths dispatches through INetCfgComponentBindings's vtable slot 8.
-func (self *INetCfgComponentBindings) EnumBindingPaths(dwFlags uint32, ppIEnum **IEnumNetCfgBindingPath) foundation.HRESULT {
+func (self *INetCfgComponentBindings) EnumBindingPaths(dwFlags uint32, ppIEnum **IEnumNetCfgBindingPath) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppIEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveBefore dispatches through INetCfgComponentBindings's vtable slot 9.
-func (self *INetCfgComponentBindings) MoveBefore(pncbItemSrc *INetCfgBindingPath, pncbItemDest *INetCfgBindingPath) foundation.HRESULT {
+func (self *INetCfgComponentBindings) MoveBefore(pncbItemSrc *INetCfgBindingPath, pncbItemDest *INetCfgBindingPath) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pncbItemSrc)), uintptr(unsafe.Pointer(pncbItemDest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveAfter dispatches through INetCfgComponentBindings's vtable slot 10.
-func (self *INetCfgComponentBindings) MoveAfter(pncbItemSrc *INetCfgBindingPath, pncbItemDest *INetCfgBindingPath) foundation.HRESULT {
+func (self *INetCfgComponentBindings) MoveAfter(pncbItemSrc *INetCfgBindingPath, pncbItemDest *INetCfgBindingPath) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pncbItemSrc)), uintptr(unsafe.Pointer(pncbItemDest)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 932238df-bea1-11d0-9298-00c04fc99dcf
@@ -448,27 +456,28 @@ type INetCfgComponentControl struct {
 var IID_INetCfgComponentControl = win32.GUID{Data1: 0x932238df, Data2: 0xbea1, Data3: 0x11d0, Data4: [8]byte{0x92, 0x98, 0x00, 0xc0, 0x4f, 0xc9, 0x9d, 0xcf}}
 
 // Initialize dispatches through INetCfgComponentControl's vtable slot 3.
-func (self *INetCfgComponentControl) Initialize(pIComp *INetCfgComponent, pINetCfg *INetCfg, fInstalling foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIComp)), uintptr(unsafe.Pointer(pINetCfg)), uintptr(fInstalling))
-	return foundation.HRESULT(r1)
+func (self *INetCfgComponentControl) Initialize(pIComp *INetCfgComponent, pINetCfg *INetCfg, fInstalling bool) error {
+	_fInstalling := win32.Bool32(fInstalling)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIComp)), uintptr(unsafe.Pointer(pINetCfg)), uintptr(_fInstalling))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ApplyRegistryChanges dispatches through INetCfgComponentControl's vtable slot 4.
-func (self *INetCfgComponentControl) ApplyRegistryChanges() foundation.HRESULT {
+func (self *INetCfgComponentControl) ApplyRegistryChanges() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ApplyPnpChanges dispatches through INetCfgComponentControl's vtable slot 5.
-func (self *INetCfgComponentControl) ApplyPnpChanges(pICallback *INetCfgPnpReconfigCallback) foundation.HRESULT {
+func (self *INetCfgComponentControl) ApplyPnpChanges(pICallback *INetCfgPnpReconfigCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pICallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelChanges dispatches through INetCfgComponentControl's vtable slot 6.
-func (self *INetCfgComponentControl) CancelChanges() foundation.HRESULT {
+func (self *INetCfgComponentControl) CancelChanges() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 932238e1-bea1-11d0-9298-00c04fc99dcf
@@ -480,15 +489,15 @@ type INetCfgComponentNotifyBinding struct {
 var IID_INetCfgComponentNotifyBinding = win32.GUID{Data1: 0x932238e1, Data2: 0xbea1, Data3: 0x11d0, Data4: [8]byte{0x92, 0x98, 0x00, 0xc0, 0x4f, 0xc9, 0x9d, 0xcf}}
 
 // QueryBindingPath dispatches through INetCfgComponentNotifyBinding's vtable slot 3.
-func (self *INetCfgComponentNotifyBinding) QueryBindingPath(dwChangeFlag uint32, pIPath *INetCfgBindingPath) foundation.HRESULT {
+func (self *INetCfgComponentNotifyBinding) QueryBindingPath(dwChangeFlag uint32, pIPath *INetCfgBindingPath) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwChangeFlag), uintptr(unsafe.Pointer(pIPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NotifyBindingPath dispatches through INetCfgComponentNotifyBinding's vtable slot 4.
-func (self *INetCfgComponentNotifyBinding) NotifyBindingPath(dwChangeFlag uint32, pIPath *INetCfgBindingPath) foundation.HRESULT {
+func (self *INetCfgComponentNotifyBinding) NotifyBindingPath(dwChangeFlag uint32, pIPath *INetCfgBindingPath) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwChangeFlag), uintptr(unsafe.Pointer(pIPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 932238e2-bea1-11d0-9298-00c04fc99dcf
@@ -500,27 +509,27 @@ type INetCfgComponentNotifyGlobal struct {
 var IID_INetCfgComponentNotifyGlobal = win32.GUID{Data1: 0x932238e2, Data2: 0xbea1, Data3: 0x11d0, Data4: [8]byte{0x92, 0x98, 0x00, 0xc0, 0x4f, 0xc9, 0x9d, 0xcf}}
 
 // GetSupportedNotifications dispatches through INetCfgComponentNotifyGlobal's vtable slot 3.
-func (self *INetCfgComponentNotifyGlobal) GetSupportedNotifications(dwNotifications *uint32) foundation.HRESULT {
+func (self *INetCfgComponentNotifyGlobal) GetSupportedNotifications(dwNotifications *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dwNotifications)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SysQueryBindingPath dispatches through INetCfgComponentNotifyGlobal's vtable slot 4.
-func (self *INetCfgComponentNotifyGlobal) SysQueryBindingPath(dwChangeFlag uint32, pIPath *INetCfgBindingPath) foundation.HRESULT {
+func (self *INetCfgComponentNotifyGlobal) SysQueryBindingPath(dwChangeFlag uint32, pIPath *INetCfgBindingPath) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwChangeFlag), uintptr(unsafe.Pointer(pIPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SysNotifyBindingPath dispatches through INetCfgComponentNotifyGlobal's vtable slot 5.
-func (self *INetCfgComponentNotifyGlobal) SysNotifyBindingPath(dwChangeFlag uint32, pIPath *INetCfgBindingPath) foundation.HRESULT {
+func (self *INetCfgComponentNotifyGlobal) SysNotifyBindingPath(dwChangeFlag uint32, pIPath *INetCfgBindingPath) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwChangeFlag), uintptr(unsafe.Pointer(pIPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SysNotifyComponent dispatches through INetCfgComponentNotifyGlobal's vtable slot 6.
-func (self *INetCfgComponentNotifyGlobal) SysNotifyComponent(dwChangeFlag uint32, pIComp *INetCfgComponent) foundation.HRESULT {
+func (self *INetCfgComponentNotifyGlobal) SysNotifyComponent(dwChangeFlag uint32, pIComp *INetCfgComponent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwChangeFlag), uintptr(unsafe.Pointer(pIComp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 932238e0-bea1-11d0-9298-00c04fc99dcf
@@ -532,39 +541,39 @@ type INetCfgComponentPropertyUi struct {
 var IID_INetCfgComponentPropertyUi = win32.GUID{Data1: 0x932238e0, Data2: 0xbea1, Data3: 0x11d0, Data4: [8]byte{0x92, 0x98, 0x00, 0xc0, 0x4f, 0xc9, 0x9d, 0xcf}}
 
 // QueryPropertyUi dispatches through INetCfgComponentPropertyUi's vtable slot 3.
-func (self *INetCfgComponentPropertyUi) QueryPropertyUi(pUnkReserved *systemcom.IUnknown) foundation.HRESULT {
+func (self *INetCfgComponentPropertyUi) QueryPropertyUi(pUnkReserved *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkReserved)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetContext dispatches through INetCfgComponentPropertyUi's vtable slot 4.
-func (self *INetCfgComponentPropertyUi) SetContext(pUnkReserved *systemcom.IUnknown) foundation.HRESULT {
+func (self *INetCfgComponentPropertyUi) SetContext(pUnkReserved *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkReserved)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MergePropPages dispatches through INetCfgComponentPropertyUi's vtable slot 5.
-func (self *INetCfgComponentPropertyUi) MergePropPages(pdwDefPages *uint32, pahpspPrivate **byte, pcPages *uint32, hwndParent foundation.HWND, pszStartPage *foundation.PWSTR) foundation.HRESULT {
+func (self *INetCfgComponentPropertyUi) MergePropPages(pdwDefPages *uint32, pahpspPrivate **byte, pcPages *uint32, hwndParent foundation.HWND, pszStartPage *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwDefPages)), uintptr(unsafe.Pointer(pahpspPrivate)), uintptr(unsafe.Pointer(pcPages)), uintptr(hwndParent), uintptr(unsafe.Pointer(pszStartPage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ValidateProperties dispatches through INetCfgComponentPropertyUi's vtable slot 6.
-func (self *INetCfgComponentPropertyUi) ValidateProperties(hwndSheet foundation.HWND) foundation.HRESULT {
+func (self *INetCfgComponentPropertyUi) ValidateProperties(hwndSheet foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwndSheet))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ApplyProperties dispatches through INetCfgComponentPropertyUi's vtable slot 7.
-func (self *INetCfgComponentPropertyUi) ApplyProperties() foundation.HRESULT {
+func (self *INetCfgComponentPropertyUi) ApplyProperties() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelProperties dispatches through INetCfgComponentPropertyUi's vtable slot 8.
-func (self *INetCfgComponentPropertyUi) CancelProperties() foundation.HRESULT {
+func (self *INetCfgComponentPropertyUi) CancelProperties() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 932238e3-bea1-11d0-9298-00c04fc99dcf
@@ -576,27 +585,29 @@ type INetCfgComponentSetup struct {
 var IID_INetCfgComponentSetup = win32.GUID{Data1: 0x932238e3, Data2: 0xbea1, Data3: 0x11d0, Data4: [8]byte{0x92, 0x98, 0x00, 0xc0, 0x4f, 0xc9, 0x9d, 0xcf}}
 
 // Install dispatches through INetCfgComponentSetup's vtable slot 3.
-func (self *INetCfgComponentSetup) Install(dwSetupFlags uint32) foundation.HRESULT {
+func (self *INetCfgComponentSetup) Install(dwSetupFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwSetupFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Upgrade dispatches through INetCfgComponentSetup's vtable slot 4.
-func (self *INetCfgComponentSetup) Upgrade(dwSetupFlags uint32, dwUpgradeFomBuildNo uint32) foundation.HRESULT {
+func (self *INetCfgComponentSetup) Upgrade(dwSetupFlags uint32, dwUpgradeFomBuildNo uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwSetupFlags), uintptr(dwUpgradeFomBuildNo))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadAnswerFile dispatches through INetCfgComponentSetup's vtable slot 5.
-func (self *INetCfgComponentSetup) ReadAnswerFile(pszwAnswerFile foundation.PWSTR, pszwAnswerSections foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszwAnswerFile)), uintptr(unsafe.Pointer(pszwAnswerSections)))
-	return foundation.HRESULT(r1)
+func (self *INetCfgComponentSetup) ReadAnswerFile(pszwAnswerFile string, pszwAnswerSections string) error {
+	_pszwAnswerFile := win32.UTF16Ptr(pszwAnswerFile)
+	_pszwAnswerSections := win32.UTF16Ptr(pszwAnswerSections)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszwAnswerFile)), uintptr(unsafe.Pointer(_pszwAnswerSections)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Removing dispatches through INetCfgComponentSetup's vtable slot 6.
-func (self *INetCfgComponentSetup) Removing() foundation.HRESULT {
+func (self *INetCfgComponentSetup) Removing() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c0e8ae9a-306e-11d1-aacf-00805fc1270e
@@ -608,15 +619,18 @@ type INetCfgComponentSysPrep struct {
 var IID_INetCfgComponentSysPrep = win32.GUID{Data1: 0xc0e8ae9a, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // SaveAdapterParameters dispatches through INetCfgComponentSysPrep's vtable slot 3.
-func (self *INetCfgComponentSysPrep) SaveAdapterParameters(pncsp *INetCfgSysPrep, pszwAnswerSections foundation.PWSTR, pAdapterInstanceGuid *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pncsp)), uintptr(unsafe.Pointer(pszwAnswerSections)), uintptr(unsafe.Pointer(pAdapterInstanceGuid)))
-	return foundation.HRESULT(r1)
+func (self *INetCfgComponentSysPrep) SaveAdapterParameters(pncsp *INetCfgSysPrep, pszwAnswerSections string, pAdapterInstanceGuid *win32.GUID) error {
+	_pszwAnswerSections := win32.UTF16Ptr(pszwAnswerSections)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pncsp)), uintptr(unsafe.Pointer(_pszwAnswerSections)), uintptr(unsafe.Pointer(pAdapterInstanceGuid)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RestoreAdapterParameters dispatches through INetCfgComponentSysPrep's vtable slot 4.
-func (self *INetCfgComponentSysPrep) RestoreAdapterParameters(pszwAnswerFile foundation.PWSTR, pszwAnswerSection foundation.PWSTR, pAdapterInstanceGuid *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszwAnswerFile)), uintptr(unsafe.Pointer(pszwAnswerSection)), uintptr(unsafe.Pointer(pAdapterInstanceGuid)))
-	return foundation.HRESULT(r1)
+func (self *INetCfgComponentSysPrep) RestoreAdapterParameters(pszwAnswerFile string, pszwAnswerSection string, pAdapterInstanceGuid *win32.GUID) error {
+	_pszwAnswerFile := win32.UTF16Ptr(pszwAnswerFile)
+	_pszwAnswerSection := win32.UTF16Ptr(pszwAnswerSection)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszwAnswerFile)), uintptr(unsafe.Pointer(_pszwAnswerSection)), uintptr(unsafe.Pointer(pAdapterInstanceGuid)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 932238e4-bea1-11d0-9298-00c04fc99dcf
@@ -628,21 +642,21 @@ type INetCfgComponentUpperEdge struct {
 var IID_INetCfgComponentUpperEdge = win32.GUID{Data1: 0x932238e4, Data2: 0xbea1, Data3: 0x11d0, Data4: [8]byte{0x92, 0x98, 0x00, 0xc0, 0x4f, 0xc9, 0x9d, 0xcf}}
 
 // GetInterfaceIdsForAdapter dispatches through INetCfgComponentUpperEdge's vtable slot 3.
-func (self *INetCfgComponentUpperEdge) GetInterfaceIdsForAdapter(pAdapter *INetCfgComponent, pdwNumInterfaces *uint32, ppguidInterfaceIds **win32.GUID) foundation.HRESULT {
+func (self *INetCfgComponentUpperEdge) GetInterfaceIdsForAdapter(pAdapter *INetCfgComponent, pdwNumInterfaces *uint32, ppguidInterfaceIds **win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAdapter)), uintptr(unsafe.Pointer(pdwNumInterfaces)), uintptr(unsafe.Pointer(ppguidInterfaceIds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddInterfacesToAdapter dispatches through INetCfgComponentUpperEdge's vtable slot 4.
-func (self *INetCfgComponentUpperEdge) AddInterfacesToAdapter(pAdapter *INetCfgComponent, dwNumInterfaces uint32) foundation.HRESULT {
+func (self *INetCfgComponentUpperEdge) AddInterfacesToAdapter(pAdapter *INetCfgComponent, dwNumInterfaces uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAdapter)), uintptr(dwNumInterfaces))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveInterfacesFromAdapter dispatches through INetCfgComponentUpperEdge's vtable slot 5.
-func (self *INetCfgComponentUpperEdge) RemoveInterfacesFromAdapter(pAdapter *INetCfgComponent, dwNumInterfaces uint32, pguidInterfaceIds *win32.GUID) foundation.HRESULT {
+func (self *INetCfgComponentUpperEdge) RemoveInterfacesFromAdapter(pAdapter *INetCfgComponent, dwNumInterfaces uint32, pguidInterfaceIds *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAdapter)), uintptr(dwNumInterfaces), uintptr(unsafe.Pointer(pguidInterfaceIds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c0e8ae9f-306e-11d1-aacf-00805fc1270e
@@ -654,21 +668,22 @@ type INetCfgLock struct {
 var IID_INetCfgLock = win32.GUID{Data1: 0xc0e8ae9f, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // AcquireWriteLock dispatches through INetCfgLock's vtable slot 3.
-func (self *INetCfgLock) AcquireWriteLock(cmsTimeout uint32, pszwClientDescription foundation.PWSTR, ppszwClientDescription *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cmsTimeout), uintptr(unsafe.Pointer(pszwClientDescription)), uintptr(unsafe.Pointer(ppszwClientDescription)))
-	return foundation.HRESULT(r1)
+func (self *INetCfgLock) AcquireWriteLock(cmsTimeout uint32, pszwClientDescription string, ppszwClientDescription *foundation.PWSTR) error {
+	_pszwClientDescription := win32.UTF16Ptr(pszwClientDescription)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cmsTimeout), uintptr(unsafe.Pointer(_pszwClientDescription)), uintptr(unsafe.Pointer(ppszwClientDescription)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseWriteLock dispatches through INetCfgLock's vtable slot 4.
-func (self *INetCfgLock) ReleaseWriteLock() foundation.HRESULT {
+func (self *INetCfgLock) ReleaseWriteLock() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsWriteLocked dispatches through INetCfgLock's vtable slot 5.
-func (self *INetCfgLock) IsWriteLocked(ppszwClientDescription *foundation.PWSTR) foundation.HRESULT {
+func (self *INetCfgLock) IsWriteLocked(ppszwClientDescription *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszwClientDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8d84bd35-e227-11d2-b700-00a0c98a6a85
@@ -680,9 +695,11 @@ type INetCfgPnpReconfigCallback struct {
 var IID_INetCfgPnpReconfigCallback = win32.GUID{Data1: 0x8d84bd35, Data2: 0xe227, Data3: 0x11d2, Data4: [8]byte{0xb7, 0x00, 0x00, 0xa0, 0xc9, 0x8a, 0x6a, 0x85}}
 
 // SendPnpReconfig dispatches through INetCfgPnpReconfigCallback's vtable slot 3.
-func (self *INetCfgPnpReconfigCallback) SendPnpReconfig(Layer NCPNP_RECONFIG_LAYER, pszwUpper foundation.PWSTR, pszwLower foundation.PWSTR, pvData unsafe.Pointer, dwSizeOfData uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Layer), uintptr(unsafe.Pointer(pszwUpper)), uintptr(unsafe.Pointer(pszwLower)), uintptr(unsafe.Pointer(pvData)), uintptr(dwSizeOfData))
-	return foundation.HRESULT(r1)
+func (self *INetCfgPnpReconfigCallback) SendPnpReconfig(Layer NCPNP_RECONFIG_LAYER, pszwUpper string, pszwLower string, pvData unsafe.Pointer, dwSizeOfData uint32) error {
+	_pszwUpper := win32.UTF16Ptr(pszwUpper)
+	_pszwLower := win32.UTF16Ptr(pszwLower)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Layer), uintptr(unsafe.Pointer(_pszwUpper)), uintptr(unsafe.Pointer(_pszwLower)), uintptr(unsafe.Pointer(pvData)), uintptr(dwSizeOfData))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c0e8ae98-306e-11d1-aacf-00805fc1270e
@@ -694,27 +711,38 @@ type INetCfgSysPrep struct {
 var IID_INetCfgSysPrep = win32.GUID{Data1: 0xc0e8ae98, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // HrSetupSetFirstDword dispatches through INetCfgSysPrep's vtable slot 3.
-func (self *INetCfgSysPrep) HrSetupSetFirstDword(pwszSection foundation.PWSTR, pwszKey foundation.PWSTR, dwValue uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSection)), uintptr(unsafe.Pointer(pwszKey)), uintptr(dwValue))
-	return foundation.HRESULT(r1)
+func (self *INetCfgSysPrep) HrSetupSetFirstDword(pwszSection string, pwszKey string, dwValue uint32) error {
+	_pwszSection := win32.UTF16Ptr(pwszSection)
+	_pwszKey := win32.UTF16Ptr(pwszKey)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszSection)), uintptr(unsafe.Pointer(_pwszKey)), uintptr(dwValue))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrSetupSetFirstString dispatches through INetCfgSysPrep's vtable slot 4.
-func (self *INetCfgSysPrep) HrSetupSetFirstString(pwszSection foundation.PWSTR, pwszKey foundation.PWSTR, pwszValue foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSection)), uintptr(unsafe.Pointer(pwszKey)), uintptr(unsafe.Pointer(pwszValue)))
-	return foundation.HRESULT(r1)
+func (self *INetCfgSysPrep) HrSetupSetFirstString(pwszSection string, pwszKey string, pwszValue string) error {
+	_pwszSection := win32.UTF16Ptr(pwszSection)
+	_pwszKey := win32.UTF16Ptr(pwszKey)
+	_pwszValue := win32.UTF16Ptr(pwszValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszSection)), uintptr(unsafe.Pointer(_pwszKey)), uintptr(unsafe.Pointer(_pwszValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrSetupSetFirstStringAsBool dispatches through INetCfgSysPrep's vtable slot 5.
-func (self *INetCfgSysPrep) HrSetupSetFirstStringAsBool(pwszSection foundation.PWSTR, pwszKey foundation.PWSTR, fValue foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSection)), uintptr(unsafe.Pointer(pwszKey)), uintptr(fValue))
-	return foundation.HRESULT(r1)
+func (self *INetCfgSysPrep) HrSetupSetFirstStringAsBool(pwszSection string, pwszKey string, fValue bool) error {
+	_pwszSection := win32.UTF16Ptr(pwszSection)
+	_pwszKey := win32.UTF16Ptr(pwszKey)
+	_fValue := win32.Bool32(fValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszSection)), uintptr(unsafe.Pointer(_pwszKey)), uintptr(_fValue))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrSetupSetFirstMultiSzField dispatches through INetCfgSysPrep's vtable slot 6.
-func (self *INetCfgSysPrep) HrSetupSetFirstMultiSzField(pwszSection foundation.PWSTR, pwszKey foundation.PWSTR, pmszValue foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszSection)), uintptr(unsafe.Pointer(pwszKey)), uintptr(unsafe.Pointer(pmszValue)))
-	return foundation.HRESULT(r1)
+func (self *INetCfgSysPrep) HrSetupSetFirstMultiSzField(pwszSection string, pwszKey string, pmszValue string) error {
+	_pwszSection := win32.UTF16Ptr(pwszSection)
+	_pwszKey := win32.UTF16Ptr(pwszKey)
+	_pmszValue := win32.UTF16Ptr(pmszValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszSection)), uintptr(unsafe.Pointer(_pwszKey)), uintptr(unsafe.Pointer(_pmszValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c08956a6-1cd3-11d1-b1c5-00805fc1270e
@@ -726,9 +754,9 @@ type INetLanConnectionUiInfo struct {
 var IID_INetLanConnectionUiInfo = win32.GUID{Data1: 0xc08956a6, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // GetDeviceGuid dispatches through INetLanConnectionUiInfo's vtable slot 3.
-func (self *INetLanConnectionUiInfo) GetDeviceGuid(pguid *win32.GUID) foundation.HRESULT {
+func (self *INetLanConnectionUiInfo) GetDeviceGuid(pguid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: faedcf58-31fe-11d1-aad2-00805fc1270e
@@ -740,9 +768,9 @@ type INetRasConnectionIpUiInfo struct {
 var IID_INetRasConnectionIpUiInfo = win32.GUID{Data1: 0xfaedcf58, Data2: 0x31fe, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xd2, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // GetUiInfo dispatches through INetRasConnectionIpUiInfo's vtable slot 3.
-func (self *INetRasConnectionIpUiInfo) GetUiInfo(pInfo *RASCON_IPUI) foundation.HRESULT {
+func (self *INetRasConnectionIpUiInfo) GetUiInfo(pInfo *RASCON_IPUI) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c96fbd50-24dd-11d8-89fb-00904b2ea9c6
@@ -754,15 +782,19 @@ type IProvisioningDomain struct {
 var IID_IProvisioningDomain = win32.GUID{Data1: 0xc96fbd50, Data2: 0x24dd, Data3: 0x11d8, Data4: [8]byte{0x89, 0xfb, 0x00, 0x90, 0x4b, 0x2e, 0xa9, 0xc6}}
 
 // Add dispatches through IProvisioningDomain's vtable slot 3.
-func (self *IProvisioningDomain) Add(pszwPathToFolder foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszwPathToFolder)))
-	return foundation.HRESULT(r1)
+func (self *IProvisioningDomain) Add(pszwPathToFolder string) error {
+	_pszwPathToFolder := win32.UTF16Ptr(pszwPathToFolder)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszwPathToFolder)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Query dispatches through IProvisioningDomain's vtable slot 4.
-func (self *IProvisioningDomain) Query(pszwDomain foundation.PWSTR, pszwLanguage foundation.PWSTR, pszwXPathQuery foundation.PWSTR, Nodes **dataxmlmsxml.IXMLDOMNodeList) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszwDomain)), uintptr(unsafe.Pointer(pszwLanguage)), uintptr(unsafe.Pointer(pszwXPathQuery)), uintptr(unsafe.Pointer(Nodes)))
-	return foundation.HRESULT(r1)
+func (self *IProvisioningDomain) Query(pszwDomain string, pszwLanguage string, pszwXPathQuery string, Nodes **dataxmlmsxml.IXMLDOMNodeList) error {
+	_pszwDomain := win32.UTF16Ptr(pszwDomain)
+	_pszwLanguage := win32.UTF16Ptr(pszwLanguage)
+	_pszwXPathQuery := win32.UTF16Ptr(pszwXPathQuery)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszwDomain)), uintptr(unsafe.Pointer(_pszwLanguage)), uintptr(unsafe.Pointer(_pszwXPathQuery)), uintptr(unsafe.Pointer(Nodes)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c96fbd51-24dd-11d8-89fb-00904b2ea9c6
@@ -774,7 +806,7 @@ type IProvisioningProfileWireless struct {
 var IID_IProvisioningProfileWireless = win32.GUID{Data1: 0xc96fbd51, Data2: 0x24dd, Data3: 0x11d8, Data4: [8]byte{0x89, 0xfb, 0x00, 0x90, 0x4b, 0x2e, 0xa9, 0xc6}}
 
 // CreateProfile dispatches through IProvisioningProfileWireless's vtable slot 3.
-func (self *IProvisioningProfileWireless) CreateProfile(bstrXMLWirelessConfigProfile foundation.BSTR, bstrXMLConnectionConfigProfile foundation.BSTR, pAdapterInstanceGuid *win32.GUID, pulStatus *uint32) foundation.HRESULT {
+func (self *IProvisioningProfileWireless) CreateProfile(bstrXMLWirelessConfigProfile foundation.BSTR, bstrXMLConnectionConfigProfile foundation.BSTR, pAdapterInstanceGuid *win32.GUID, pulStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrXMLWirelessConfigProfile)), uintptr(unsafe.Pointer(bstrXMLConnectionConfigProfile)), uintptr(unsafe.Pointer(pAdapterInstanceGuid)), uintptr(unsafe.Pointer(pulStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

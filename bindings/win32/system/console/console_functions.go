@@ -21,8 +21,8 @@ var (
 )
 
 var (
+	procAddConsoleAlias                 = modKERNEL32.NewProc("AddConsoleAliasW")
 	procAddConsoleAliasA                = modKERNEL32.NewProc("AddConsoleAliasA")
-	procAddConsoleAliasW                = modKERNEL32.NewProc("AddConsoleAliasW")
 	procAllocConsole                    = modKERNEL32.NewProc("AllocConsole")
 	procAllocConsoleWithOptions         = modKERNEL32.NewProc("AllocConsoleWithOptions")
 	procAttachConsole                   = modKERNEL32.NewProc("AttachConsole")
@@ -31,46 +31,46 @@ var (
 	procConsoleMenuControl              = modKERNEL32.NewProc("ConsoleMenuControl")
 	procCreateConsoleScreenBuffer       = modKERNEL32.NewProc("CreateConsoleScreenBuffer")
 	procDuplicateConsoleHandle          = modKERNEL32.NewProc("DuplicateConsoleHandle")
+	procExpungeConsoleCommandHistory    = modKERNEL32.NewProc("ExpungeConsoleCommandHistoryW")
 	procExpungeConsoleCommandHistoryA   = modKERNEL32.NewProc("ExpungeConsoleCommandHistoryA")
-	procExpungeConsoleCommandHistoryW   = modKERNEL32.NewProc("ExpungeConsoleCommandHistoryW")
 	procFlushConsoleInputBuffer         = modKERNEL32.NewProc("FlushConsoleInputBuffer")
 	procFreeConsole                     = modKERNEL32.NewProc("FreeConsole")
 	procGenerateConsoleCtrlEvent        = modKERNEL32.NewProc("GenerateConsoleCtrlEvent")
+	procGetConsoleAlias                 = modKERNEL32.NewProc("GetConsoleAliasW")
 	procGetConsoleAliasA                = modKERNEL32.NewProc("GetConsoleAliasA")
+	procGetConsoleAliasExes             = modKERNEL32.NewProc("GetConsoleAliasExesW")
 	procGetConsoleAliasExesA            = modKERNEL32.NewProc("GetConsoleAliasExesA")
+	procGetConsoleAliasExesLength       = modKERNEL32.NewProc("GetConsoleAliasExesLengthW")
 	procGetConsoleAliasExesLengthA      = modKERNEL32.NewProc("GetConsoleAliasExesLengthA")
-	procGetConsoleAliasExesLengthW      = modKERNEL32.NewProc("GetConsoleAliasExesLengthW")
-	procGetConsoleAliasExesW            = modKERNEL32.NewProc("GetConsoleAliasExesW")
-	procGetConsoleAliasW                = modKERNEL32.NewProc("GetConsoleAliasW")
+	procGetConsoleAliases               = modKERNEL32.NewProc("GetConsoleAliasesW")
 	procGetConsoleAliasesA              = modKERNEL32.NewProc("GetConsoleAliasesA")
+	procGetConsoleAliasesLength         = modKERNEL32.NewProc("GetConsoleAliasesLengthW")
 	procGetConsoleAliasesLengthA        = modKERNEL32.NewProc("GetConsoleAliasesLengthA")
-	procGetConsoleAliasesLengthW        = modKERNEL32.NewProc("GetConsoleAliasesLengthW")
-	procGetConsoleAliasesW              = modKERNEL32.NewProc("GetConsoleAliasesW")
 	procGetConsoleCP                    = modKERNEL32.NewProc("GetConsoleCP")
+	procGetConsoleCommandHistory        = modKERNEL32.NewProc("GetConsoleCommandHistoryW")
 	procGetConsoleCommandHistoryA       = modKERNEL32.NewProc("GetConsoleCommandHistoryA")
+	procGetConsoleCommandHistoryLength  = modKERNEL32.NewProc("GetConsoleCommandHistoryLengthW")
 	procGetConsoleCommandHistoryLengthA = modKERNEL32.NewProc("GetConsoleCommandHistoryLengthA")
-	procGetConsoleCommandHistoryLengthW = modKERNEL32.NewProc("GetConsoleCommandHistoryLengthW")
-	procGetConsoleCommandHistoryW       = modKERNEL32.NewProc("GetConsoleCommandHistoryW")
 	procGetConsoleCursorInfo            = modKERNEL32.NewProc("GetConsoleCursorInfo")
 	procGetConsoleCursorMode            = modKERNEL32.NewProc("GetConsoleCursorMode")
 	procGetConsoleDisplayMode           = modKERNEL32.NewProc("GetConsoleDisplayMode")
 	procGetConsoleFontInfo              = modKERNEL32.NewProc("GetConsoleFontInfo")
 	procGetConsoleHardwareState         = modKERNEL32.NewProc("GetConsoleHardwareState")
 	procGetConsoleHistoryInfo           = modKERNEL32.NewProc("GetConsoleHistoryInfo")
+	procGetConsoleInputExeName          = modKERNEL32.NewProc("GetConsoleInputExeNameW")
 	procGetConsoleInputExeNameA         = modKERNEL32.NewProc("GetConsoleInputExeNameA")
-	procGetConsoleInputExeNameW         = modKERNEL32.NewProc("GetConsoleInputExeNameW")
 	procGetConsoleInputWaitHandle       = modKERNEL32.NewProc("GetConsoleInputWaitHandle")
 	procGetConsoleMode                  = modKERNEL32.NewProc("GetConsoleMode")
 	procGetConsoleNlsMode               = modKERNEL32.NewProc("GetConsoleNlsMode")
+	procGetConsoleOriginalTitle         = modKERNEL32.NewProc("GetConsoleOriginalTitleW")
 	procGetConsoleOriginalTitleA        = modKERNEL32.NewProc("GetConsoleOriginalTitleA")
-	procGetConsoleOriginalTitleW        = modKERNEL32.NewProc("GetConsoleOriginalTitleW")
 	procGetConsoleOutputCP              = modKERNEL32.NewProc("GetConsoleOutputCP")
 	procGetConsoleProcessList           = modKERNEL32.NewProc("GetConsoleProcessList")
 	procGetConsoleScreenBufferInfo      = modKERNEL32.NewProc("GetConsoleScreenBufferInfo")
 	procGetConsoleScreenBufferInfoEx    = modKERNEL32.NewProc("GetConsoleScreenBufferInfoEx")
 	procGetConsoleSelectionInfo         = modKERNEL32.NewProc("GetConsoleSelectionInfo")
+	procGetConsoleTitle                 = modKERNEL32.NewProc("GetConsoleTitleW")
 	procGetConsoleTitleA                = modKERNEL32.NewProc("GetConsoleTitleA")
-	procGetConsoleTitleW                = modKERNEL32.NewProc("GetConsoleTitleW")
 	procGetConsoleWindow                = modKERNEL32.NewProc("GetConsoleWindow")
 	procGetCurrentConsoleFont           = modKERNEL32.NewProc("GetCurrentConsoleFont")
 	procGetCurrentConsoleFontEx         = modKERNEL32.NewProc("GetCurrentConsoleFontEx")
@@ -80,14 +80,14 @@ var (
 	procGetStdHandle                    = modKERNEL32.NewProc("GetStdHandle")
 	procInvalidateConsoleDIBits         = modKERNEL32.NewProc("InvalidateConsoleDIBits")
 	procOpenConsoleW                    = modKERNEL32.NewProc("OpenConsoleW")
+	procPeekConsoleInput                = modKERNEL32.NewProc("PeekConsoleInputW")
 	procPeekConsoleInputA               = modKERNEL32.NewProc("PeekConsoleInputA")
-	procPeekConsoleInputW               = modKERNEL32.NewProc("PeekConsoleInputW")
+	procReadConsole                     = modKERNEL32.NewProc("ReadConsoleW")
 	procReadConsoleA                    = modKERNEL32.NewProc("ReadConsoleA")
+	procReadConsoleInput                = modKERNEL32.NewProc("ReadConsoleInputW")
 	procReadConsoleInputA               = modKERNEL32.NewProc("ReadConsoleInputA")
+	procReadConsoleInputEx              = modKERNEL32.NewProc("ReadConsoleInputExW")
 	procReadConsoleInputExA             = modKERNEL32.NewProc("ReadConsoleInputExA")
-	procReadConsoleInputExW             = modKERNEL32.NewProc("ReadConsoleInputExW")
-	procReadConsoleInputW               = modKERNEL32.NewProc("ReadConsoleInputW")
-	procReadConsoleW                    = modKERNEL32.NewProc("ReadConsoleW")
 	procRegisterConsoleIME              = modKERNEL32.NewProc("RegisterConsoleIME")
 	procRegisterConsoleOS2              = modKERNEL32.NewProc("RegisterConsoleOS2")
 	procReleasePseudoConsole            = modKERNEL32.NewProc("ReleasePseudoConsole")
@@ -101,21 +101,21 @@ var (
 	procSetConsoleFont                  = modKERNEL32.NewProc("SetConsoleFont")
 	procSetConsoleHistoryInfo           = modKERNEL32.NewProc("SetConsoleHistoryInfo")
 	procSetConsoleIcon                  = modKERNEL32.NewProc("SetConsoleIcon")
+	procSetConsoleInputExeName          = modKERNEL32.NewProc("SetConsoleInputExeNameW")
 	procSetConsoleInputExeNameA         = modKERNEL32.NewProc("SetConsoleInputExeNameA")
-	procSetConsoleInputExeNameW         = modKERNEL32.NewProc("SetConsoleInputExeNameW")
 	procSetConsoleKeyShortcuts          = modKERNEL32.NewProc("SetConsoleKeyShortcuts")
 	procSetConsoleMenuClose             = modKERNEL32.NewProc("SetConsoleMenuClose")
 	procSetConsoleMode                  = modKERNEL32.NewProc("SetConsoleMode")
 	procSetConsoleNlsMode               = modKERNEL32.NewProc("SetConsoleNlsMode")
+	procSetConsoleNumberOfCommands      = modKERNEL32.NewProc("SetConsoleNumberOfCommandsW")
 	procSetConsoleNumberOfCommandsA     = modKERNEL32.NewProc("SetConsoleNumberOfCommandsA")
-	procSetConsoleNumberOfCommandsW     = modKERNEL32.NewProc("SetConsoleNumberOfCommandsW")
 	procSetConsoleOS2OemFormat          = modKERNEL32.NewProc("SetConsoleOS2OemFormat")
 	procSetConsoleOutputCP              = modKERNEL32.NewProc("SetConsoleOutputCP")
 	procSetConsolePalette               = modKERNEL32.NewProc("SetConsolePalette")
 	procSetConsoleScreenBufferInfoEx    = modKERNEL32.NewProc("SetConsoleScreenBufferInfoEx")
 	procSetConsoleTextAttribute         = modKERNEL32.NewProc("SetConsoleTextAttribute")
+	procSetConsoleTitle                 = modKERNEL32.NewProc("SetConsoleTitleW")
 	procSetConsoleTitleA                = modKERNEL32.NewProc("SetConsoleTitleA")
-	procSetConsoleTitleW                = modKERNEL32.NewProc("SetConsoleTitleW")
 	procSetConsoleWindowInfo            = modKERNEL32.NewProc("SetConsoleWindowInfo")
 	procSetCurrentConsoleFontEx         = modKERNEL32.NewProc("SetCurrentConsoleFontEx")
 	procSetLastConsoleEventActive       = modKERNEL32.NewProc("SetLastConsoleEventActive")
@@ -125,31 +125,34 @@ var (
 	procUnregisterConsoleIME            = modKERNEL32.NewProc("UnregisterConsoleIME")
 	procVDMConsoleOperation             = modKERNEL32.NewProc("VDMConsoleOperation")
 	procVerifyConsoleIoHandle           = modKERNEL32.NewProc("VerifyConsoleIoHandle")
+	procWriteConsole                    = modKERNEL32.NewProc("WriteConsoleW")
 	procWriteConsoleA                   = modKERNEL32.NewProc("WriteConsoleA")
+	procWriteConsoleInput               = modKERNEL32.NewProc("WriteConsoleInputW")
 	procWriteConsoleInputA              = modKERNEL32.NewProc("WriteConsoleInputA")
+	procWriteConsoleInputVDM            = modKERNEL32.NewProc("WriteConsoleInputVDMW")
 	procWriteConsoleInputVDMA           = modKERNEL32.NewProc("WriteConsoleInputVDMA")
-	procWriteConsoleInputVDMW           = modKERNEL32.NewProc("WriteConsoleInputVDMW")
-	procWriteConsoleInputW              = modKERNEL32.NewProc("WriteConsoleInputW")
-	procWriteConsoleW                   = modKERNEL32.NewProc("WriteConsoleW")
 	procConsoleControl                  = modUSER32.NewProc("ConsoleControl")
+	procGetConsoleKeyboardLayoutName    = modUSER32.NewProc("GetConsoleKeyboardLayoutNameW")
 	procGetConsoleKeyboardLayoutNameA   = modUSER32.NewProc("GetConsoleKeyboardLayoutNameA")
-	procGetConsoleKeyboardLayoutNameW   = modUSER32.NewProc("GetConsoleKeyboardLayoutNameW")
 )
 
-// AddConsoleAliasA calls KERNEL32!AddConsoleAliasA.
+// AddConsoleAlias calls KERNEL32!AddConsoleAliasW.
 // https://learn.microsoft.com/windows/console/addconsolealias
-func AddConsoleAliasA(Source foundation.PSTR, Target foundation.PSTR, ExeName foundation.PSTR) error {
-	r1, _, e1 := syscall.SyscallN(procAddConsoleAliasA.Addr(), uintptr(unsafe.Pointer(Source)), uintptr(unsafe.Pointer(Target)), uintptr(unsafe.Pointer(ExeName)))
+func AddConsoleAlias(Source string, Target string, ExeName string) error {
+	_Source := win32.UTF16Ptr(Source)
+	_Target := win32.UTF16Ptr(Target)
+	_ExeName := win32.UTF16Ptr(ExeName)
+	r1, _, e1 := syscall.SyscallN(procAddConsoleAlias.Addr(), uintptr(unsafe.Pointer(_Source)), uintptr(unsafe.Pointer(_Target)), uintptr(unsafe.Pointer(_ExeName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// AddConsoleAliasW calls KERNEL32!AddConsoleAliasW.
+// AddConsoleAliasA calls KERNEL32!AddConsoleAliasA.
 // https://learn.microsoft.com/windows/console/addconsolealias
-func AddConsoleAliasW(Source foundation.PWSTR, Target foundation.PWSTR, ExeName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procAddConsoleAliasW.Addr(), uintptr(unsafe.Pointer(Source)), uintptr(unsafe.Pointer(Target)), uintptr(unsafe.Pointer(ExeName)))
+func AddConsoleAliasA(Source foundation.PSTR, Target foundation.PSTR, ExeName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procAddConsoleAliasA.Addr(), uintptr(unsafe.Pointer(Source)), uintptr(unsafe.Pointer(Target)), uintptr(unsafe.Pointer(ExeName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -167,9 +170,9 @@ func AllocConsole() error {
 }
 
 // AllocConsoleWithOptions calls KERNEL32!AllocConsoleWithOptions.
-func AllocConsoleWithOptions(options *ALLOC_CONSOLE_OPTIONS, result *ALLOC_CONSOLE_RESULT) foundation.HRESULT {
+func AllocConsoleWithOptions(options *ALLOC_CONSOLE_OPTIONS, result *ALLOC_CONSOLE_RESULT) error {
 	r1, _, _ := syscall.SyscallN(procAllocConsoleWithOptions.Addr(), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AttachConsole calls KERNEL32!AttachConsole.
@@ -183,9 +186,9 @@ func AttachConsole(dwProcessId uint32) error {
 }
 
 // CloseConsoleHandle calls KERNEL32!CloseConsoleHandle.
-func CloseConsoleHandle(hConsole foundation.HANDLE) foundation.BOOL {
+func CloseConsoleHandle(hConsole foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procCloseConsoleHandle.Addr(), uintptr(hConsole))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ClosePseudoConsole calls KERNEL32!ClosePseudoConsole.
@@ -208,8 +211,8 @@ func ConsoleMenuControl(hConsoleOutput foundation.HANDLE, dwCommandIdLow uint32,
 
 // CreateConsoleScreenBuffer calls KERNEL32!CreateConsoleScreenBuffer.
 // https://learn.microsoft.com/windows/console/createconsolescreenbuffer
-func CreateConsoleScreenBuffer(dwDesiredAccess uint32, dwShareMode uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, dwFlags uint32, lpScreenBufferData unsafe.Pointer) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateConsoleScreenBuffer.Addr(), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpScreenBufferData)))
+func CreateConsoleScreenBuffer(dwDesiredAccess uint32, dwShareMode uint32, lpSecurityAttributes *security.SECURITY_ATTRIBUTES, dwFlags uint32) (foundation.HANDLE, error) {
+	r1, _, e1 := syscall.SyscallN(procCreateConsoleScreenBuffer.Addr(), uintptr(dwDesiredAccess), uintptr(dwShareMode), uintptr(unsafe.Pointer(lpSecurityAttributes)), uintptr(dwFlags), 0)
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -218,19 +221,21 @@ func CreateConsoleScreenBuffer(dwDesiredAccess uint32, dwShareMode uint32, lpSec
 }
 
 // DuplicateConsoleHandle calls KERNEL32!DuplicateConsoleHandle.
-func DuplicateConsoleHandle(hSourceHandle foundation.HANDLE, dwDesiredAccess uint32, bInheritHandle foundation.BOOL, dwOptions uint32) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procDuplicateConsoleHandle.Addr(), uintptr(hSourceHandle), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(dwOptions))
+func DuplicateConsoleHandle(hSourceHandle foundation.HANDLE, dwDesiredAccess uint32, bInheritHandle bool, dwOptions uint32) foundation.HANDLE {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	r1, _, _ := syscall.SyscallN(procDuplicateConsoleHandle.Addr(), uintptr(hSourceHandle), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(dwOptions))
 	return foundation.HANDLE(r1)
+}
+
+// ExpungeConsoleCommandHistory calls KERNEL32!ExpungeConsoleCommandHistoryW.
+func ExpungeConsoleCommandHistory(ExeName string) {
+	_ExeName := win32.UTF16Ptr(ExeName)
+	syscall.SyscallN(procExpungeConsoleCommandHistory.Addr(), uintptr(unsafe.Pointer(_ExeName)))
 }
 
 // ExpungeConsoleCommandHistoryA calls KERNEL32!ExpungeConsoleCommandHistoryA.
 func ExpungeConsoleCommandHistoryA(ExeName foundation.PSTR) {
 	syscall.SyscallN(procExpungeConsoleCommandHistoryA.Addr(), uintptr(unsafe.Pointer(ExeName)))
-}
-
-// ExpungeConsoleCommandHistoryW calls KERNEL32!ExpungeConsoleCommandHistoryW.
-func ExpungeConsoleCommandHistoryW(ExeName foundation.PWSTR) {
-	syscall.SyscallN(procExpungeConsoleCommandHistoryW.Addr(), uintptr(unsafe.Pointer(ExeName)))
 }
 
 // FlushConsoleInputBuffer calls KERNEL32!FlushConsoleInputBuffer.
@@ -263,10 +268,32 @@ func GenerateConsoleCtrlEvent(dwCtrlEvent uint32, dwProcessGroupId uint32) error
 	return nil
 }
 
+// GetConsoleAlias calls KERNEL32!GetConsoleAliasW.
+// https://learn.microsoft.com/windows/console/getconsolealias
+func GetConsoleAlias(Source string, TargetBuffer foundation.PWSTR, TargetBufferLength uint32, ExeName string) (uint32, error) {
+	_Source := win32.UTF16Ptr(Source)
+	_ExeName := win32.UTF16Ptr(ExeName)
+	r1, _, e1 := syscall.SyscallN(procGetConsoleAlias.Addr(), uintptr(unsafe.Pointer(_Source)), uintptr(unsafe.Pointer(TargetBuffer)), uintptr(TargetBufferLength), uintptr(unsafe.Pointer(_ExeName)))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
 // GetConsoleAliasA calls KERNEL32!GetConsoleAliasA.
 // https://learn.microsoft.com/windows/console/getconsolealias
 func GetConsoleAliasA(Source foundation.PSTR, TargetBuffer foundation.PSTR, TargetBufferLength uint32, ExeName foundation.PSTR) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetConsoleAliasA.Addr(), uintptr(unsafe.Pointer(Source)), uintptr(unsafe.Pointer(TargetBuffer)), uintptr(TargetBufferLength), uintptr(unsafe.Pointer(ExeName)))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
+// GetConsoleAliasExes calls KERNEL32!GetConsoleAliasExesW.
+// https://learn.microsoft.com/windows/console/getconsolealiasexes
+func GetConsoleAliasExes(ExeNameBuffer foundation.PWSTR, ExeNameBufferLength uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetConsoleAliasExes.Addr(), uintptr(unsafe.Pointer(ExeNameBuffer)), uintptr(ExeNameBufferLength))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -283,6 +310,13 @@ func GetConsoleAliasExesA(ExeNameBuffer foundation.PSTR, ExeNameBufferLength uin
 	return uint32(r1), nil
 }
 
+// GetConsoleAliasExesLength calls KERNEL32!GetConsoleAliasExesLengthW.
+// https://learn.microsoft.com/windows/console/getconsolealiasexeslength
+func GetConsoleAliasExesLength() uint32 {
+	r1, _, _ := syscall.SyscallN(procGetConsoleAliasExesLength.Addr())
+	return uint32(r1)
+}
+
 // GetConsoleAliasExesLengthA calls KERNEL32!GetConsoleAliasExesLengthA.
 // https://learn.microsoft.com/windows/console/getconsolealiasexeslength
 func GetConsoleAliasExesLengthA() uint32 {
@@ -290,27 +324,11 @@ func GetConsoleAliasExesLengthA() uint32 {
 	return uint32(r1)
 }
 
-// GetConsoleAliasExesLengthW calls KERNEL32!GetConsoleAliasExesLengthW.
-// https://learn.microsoft.com/windows/console/getconsolealiasexeslength
-func GetConsoleAliasExesLengthW() uint32 {
-	r1, _, _ := syscall.SyscallN(procGetConsoleAliasExesLengthW.Addr())
-	return uint32(r1)
-}
-
-// GetConsoleAliasExesW calls KERNEL32!GetConsoleAliasExesW.
-// https://learn.microsoft.com/windows/console/getconsolealiasexes
-func GetConsoleAliasExesW(ExeNameBuffer foundation.PWSTR, ExeNameBufferLength uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetConsoleAliasExesW.Addr(), uintptr(unsafe.Pointer(ExeNameBuffer)), uintptr(ExeNameBufferLength))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GetConsoleAliasW calls KERNEL32!GetConsoleAliasW.
-// https://learn.microsoft.com/windows/console/getconsolealias
-func GetConsoleAliasW(Source foundation.PWSTR, TargetBuffer foundation.PWSTR, TargetBufferLength uint32, ExeName foundation.PWSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetConsoleAliasW.Addr(), uintptr(unsafe.Pointer(Source)), uintptr(unsafe.Pointer(TargetBuffer)), uintptr(TargetBufferLength), uintptr(unsafe.Pointer(ExeName)))
+// GetConsoleAliases calls KERNEL32!GetConsoleAliasesW.
+// https://learn.microsoft.com/windows/console/getconsolealiases
+func GetConsoleAliases(AliasBuffer foundation.PWSTR, AliasBufferLength uint32, ExeName string) (uint32, error) {
+	_ExeName := win32.UTF16Ptr(ExeName)
+	r1, _, e1 := syscall.SyscallN(procGetConsoleAliases.Addr(), uintptr(unsafe.Pointer(AliasBuffer)), uintptr(AliasBufferLength), uintptr(unsafe.Pointer(_ExeName)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -327,28 +345,19 @@ func GetConsoleAliasesA(AliasBuffer foundation.PSTR, AliasBufferLength uint32, E
 	return uint32(r1), nil
 }
 
+// GetConsoleAliasesLength calls KERNEL32!GetConsoleAliasesLengthW.
+// https://learn.microsoft.com/windows/console/getconsolealiaseslength
+func GetConsoleAliasesLength(ExeName string) uint32 {
+	_ExeName := win32.UTF16Ptr(ExeName)
+	r1, _, _ := syscall.SyscallN(procGetConsoleAliasesLength.Addr(), uintptr(unsafe.Pointer(_ExeName)))
+	return uint32(r1)
+}
+
 // GetConsoleAliasesLengthA calls KERNEL32!GetConsoleAliasesLengthA.
 // https://learn.microsoft.com/windows/console/getconsolealiaseslength
 func GetConsoleAliasesLengthA(ExeName foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procGetConsoleAliasesLengthA.Addr(), uintptr(unsafe.Pointer(ExeName)))
 	return uint32(r1)
-}
-
-// GetConsoleAliasesLengthW calls KERNEL32!GetConsoleAliasesLengthW.
-// https://learn.microsoft.com/windows/console/getconsolealiaseslength
-func GetConsoleAliasesLengthW(ExeName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetConsoleAliasesLengthW.Addr(), uintptr(unsafe.Pointer(ExeName)))
-	return uint32(r1)
-}
-
-// GetConsoleAliasesW calls KERNEL32!GetConsoleAliasesW.
-// https://learn.microsoft.com/windows/console/getconsolealiases
-func GetConsoleAliasesW(AliasBuffer foundation.PWSTR, AliasBufferLength uint32, ExeName foundation.PWSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetConsoleAliasesW.Addr(), uintptr(unsafe.Pointer(AliasBuffer)), uintptr(AliasBufferLength), uintptr(unsafe.Pointer(ExeName)))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
 }
 
 // GetConsoleCP calls KERNEL32!GetConsoleCP.
@@ -361,27 +370,29 @@ func GetConsoleCP() (uint32, error) {
 	return uint32(r1), nil
 }
 
+// GetConsoleCommandHistory calls KERNEL32!GetConsoleCommandHistoryW.
+func GetConsoleCommandHistory(Commands foundation.PWSTR, CommandBufferLength uint32, ExeName string) uint32 {
+	_ExeName := win32.UTF16Ptr(ExeName)
+	r1, _, _ := syscall.SyscallN(procGetConsoleCommandHistory.Addr(), uintptr(unsafe.Pointer(Commands)), uintptr(CommandBufferLength), uintptr(unsafe.Pointer(_ExeName)))
+	return uint32(r1)
+}
+
 // GetConsoleCommandHistoryA calls KERNEL32!GetConsoleCommandHistoryA.
 func GetConsoleCommandHistoryA(Commands foundation.PSTR, CommandBufferLength uint32, ExeName foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procGetConsoleCommandHistoryA.Addr(), uintptr(unsafe.Pointer(Commands)), uintptr(CommandBufferLength), uintptr(unsafe.Pointer(ExeName)))
 	return uint32(r1)
 }
 
+// GetConsoleCommandHistoryLength calls KERNEL32!GetConsoleCommandHistoryLengthW.
+func GetConsoleCommandHistoryLength(ExeName string) uint32 {
+	_ExeName := win32.UTF16Ptr(ExeName)
+	r1, _, _ := syscall.SyscallN(procGetConsoleCommandHistoryLength.Addr(), uintptr(unsafe.Pointer(_ExeName)))
+	return uint32(r1)
+}
+
 // GetConsoleCommandHistoryLengthA calls KERNEL32!GetConsoleCommandHistoryLengthA.
 func GetConsoleCommandHistoryLengthA(ExeName foundation.PSTR) uint32 {
 	r1, _, _ := syscall.SyscallN(procGetConsoleCommandHistoryLengthA.Addr(), uintptr(unsafe.Pointer(ExeName)))
-	return uint32(r1)
-}
-
-// GetConsoleCommandHistoryLengthW calls KERNEL32!GetConsoleCommandHistoryLengthW.
-func GetConsoleCommandHistoryLengthW(ExeName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetConsoleCommandHistoryLengthW.Addr(), uintptr(unsafe.Pointer(ExeName)))
-	return uint32(r1)
-}
-
-// GetConsoleCommandHistoryW calls KERNEL32!GetConsoleCommandHistoryW.
-func GetConsoleCommandHistoryW(Commands foundation.PWSTR, CommandBufferLength uint32, ExeName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetConsoleCommandHistoryW.Addr(), uintptr(unsafe.Pointer(Commands)), uintptr(CommandBufferLength), uintptr(unsafe.Pointer(ExeName)))
 	return uint32(r1)
 }
 
@@ -396,9 +407,9 @@ func GetConsoleCursorInfo(hConsoleOutput foundation.HANDLE, lpConsoleCursorInfo 
 }
 
 // GetConsoleCursorMode calls KERNEL32!GetConsoleCursorMode.
-func GetConsoleCursorMode(hConsoleHandle foundation.HANDLE, pbBlink *foundation.BOOL, pbDBEnable *foundation.BOOL) foundation.BOOL {
+func GetConsoleCursorMode(hConsoleHandle foundation.HANDLE, pbBlink *foundation.BOOL, pbDBEnable *foundation.BOOL) bool {
 	r1, _, _ := syscall.SyscallN(procGetConsoleCursorMode.Addr(), uintptr(hConsoleHandle), uintptr(unsafe.Pointer(pbBlink)), uintptr(unsafe.Pointer(pbDBEnable)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetConsoleDisplayMode calls KERNEL32!GetConsoleDisplayMode.
@@ -412,15 +423,16 @@ func GetConsoleDisplayMode(lpModeFlags *uint32) error {
 }
 
 // GetConsoleFontInfo calls KERNEL32!GetConsoleFontInfo.
-func GetConsoleFontInfo(hConsoleOutput foundation.HANDLE, bMaximumWindow foundation.BOOL, nLength uint32, lpConsoleFontInfo *CONSOLE_FONT_INFO) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetConsoleFontInfo.Addr(), uintptr(hConsoleOutput), uintptr(bMaximumWindow), uintptr(nLength), uintptr(unsafe.Pointer(lpConsoleFontInfo)))
+func GetConsoleFontInfo(hConsoleOutput foundation.HANDLE, bMaximumWindow bool, nLength uint32, lpConsoleFontInfo *CONSOLE_FONT_INFO) uint32 {
+	_bMaximumWindow := win32.Bool32(bMaximumWindow)
+	r1, _, _ := syscall.SyscallN(procGetConsoleFontInfo.Addr(), uintptr(hConsoleOutput), uintptr(_bMaximumWindow), uintptr(nLength), uintptr(unsafe.Pointer(lpConsoleFontInfo)))
 	return uint32(r1)
 }
 
 // GetConsoleHardwareState calls KERNEL32!GetConsoleHardwareState.
-func GetConsoleHardwareState(hConsoleOutput foundation.HANDLE, lpResolution *COORD, lpFontSize *COORD) foundation.BOOL {
+func GetConsoleHardwareState(hConsoleOutput foundation.HANDLE, lpResolution *COORD, lpFontSize *COORD) bool {
 	r1, _, _ := syscall.SyscallN(procGetConsoleHardwareState.Addr(), uintptr(hConsoleOutput), uintptr(unsafe.Pointer(lpResolution)), uintptr(unsafe.Pointer(lpFontSize)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetConsoleHistoryInfo calls KERNEL32!GetConsoleHistoryInfo.
@@ -433,15 +445,15 @@ func GetConsoleHistoryInfo(lpConsoleHistoryInfo *CONSOLE_HISTORY_INFO) error {
 	return nil
 }
 
-// GetConsoleInputExeNameA calls KERNEL32!GetConsoleInputExeNameA.
-func GetConsoleInputExeNameA(nBufferLength uint32, lpBuffer foundation.PSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetConsoleInputExeNameA.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
+// GetConsoleInputExeName calls KERNEL32!GetConsoleInputExeNameW.
+func GetConsoleInputExeName(nBufferLength uint32, lpBuffer foundation.PWSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procGetConsoleInputExeName.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
 	return uint32(r1)
 }
 
-// GetConsoleInputExeNameW calls KERNEL32!GetConsoleInputExeNameW.
-func GetConsoleInputExeNameW(nBufferLength uint32, lpBuffer foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetConsoleInputExeNameW.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
+// GetConsoleInputExeNameA calls KERNEL32!GetConsoleInputExeNameA.
+func GetConsoleInputExeNameA(nBufferLength uint32, lpBuffer foundation.PSTR) uint32 {
+	r1, _, _ := syscall.SyscallN(procGetConsoleInputExeNameA.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
 	return uint32(r1)
 }
 
@@ -451,16 +463,16 @@ func GetConsoleInputWaitHandle() foundation.HANDLE {
 	return foundation.HANDLE(r1)
 }
 
-// GetConsoleKeyboardLayoutNameA calls user32!GetConsoleKeyboardLayoutNameA.
-func GetConsoleKeyboardLayoutNameA(pszLayout foundation.PSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetConsoleKeyboardLayoutNameA.Addr(), uintptr(unsafe.Pointer(pszLayout)))
-	return foundation.BOOL(r1)
+// GetConsoleKeyboardLayoutName calls user32!GetConsoleKeyboardLayoutNameW.
+func GetConsoleKeyboardLayoutName(pszLayout foundation.PWSTR) bool {
+	r1, _, _ := syscall.SyscallN(procGetConsoleKeyboardLayoutName.Addr(), uintptr(unsafe.Pointer(pszLayout)))
+	return r1 != 0
 }
 
-// GetConsoleKeyboardLayoutNameW calls user32!GetConsoleKeyboardLayoutNameW.
-func GetConsoleKeyboardLayoutNameW(pszLayout foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetConsoleKeyboardLayoutNameW.Addr(), uintptr(unsafe.Pointer(pszLayout)))
-	return foundation.BOOL(r1)
+// GetConsoleKeyboardLayoutNameA calls user32!GetConsoleKeyboardLayoutNameA.
+func GetConsoleKeyboardLayoutNameA(pszLayout foundation.PSTR) bool {
+	r1, _, _ := syscall.SyscallN(procGetConsoleKeyboardLayoutNameA.Addr(), uintptr(unsafe.Pointer(pszLayout)))
+	return r1 != 0
 }
 
 // GetConsoleMode calls KERNEL32!GetConsoleMode.
@@ -474,25 +486,25 @@ func GetConsoleMode(hConsoleHandle foundation.HANDLE, lpMode *CONSOLE_MODE) erro
 }
 
 // GetConsoleNlsMode calls KERNEL32!GetConsoleNlsMode.
-func GetConsoleNlsMode(hConsole foundation.HANDLE, lpdwNlsMode *uint32) foundation.BOOL {
+func GetConsoleNlsMode(hConsole foundation.HANDLE, lpdwNlsMode *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procGetConsoleNlsMode.Addr(), uintptr(hConsole), uintptr(unsafe.Pointer(lpdwNlsMode)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetConsoleOriginalTitleA calls KERNEL32!GetConsoleOriginalTitleA.
+// GetConsoleOriginalTitle calls KERNEL32!GetConsoleOriginalTitleW.
 // https://learn.microsoft.com/windows/console/getconsoleoriginaltitle
-func GetConsoleOriginalTitleA(lpConsoleTitle foundation.PSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetConsoleOriginalTitleA.Addr(), uintptr(unsafe.Pointer(lpConsoleTitle)), uintptr(nSize))
+func GetConsoleOriginalTitle(lpConsoleTitle foundation.PWSTR, nSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetConsoleOriginalTitle.Addr(), uintptr(unsafe.Pointer(lpConsoleTitle)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
 }
 
-// GetConsoleOriginalTitleW calls KERNEL32!GetConsoleOriginalTitleW.
+// GetConsoleOriginalTitleA calls KERNEL32!GetConsoleOriginalTitleA.
 // https://learn.microsoft.com/windows/console/getconsoleoriginaltitle
-func GetConsoleOriginalTitleW(lpConsoleTitle foundation.PWSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetConsoleOriginalTitleW.Addr(), uintptr(unsafe.Pointer(lpConsoleTitle)), uintptr(nSize))
+func GetConsoleOriginalTitleA(lpConsoleTitle foundation.PSTR, nSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetConsoleOriginalTitleA.Addr(), uintptr(unsafe.Pointer(lpConsoleTitle)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -511,8 +523,12 @@ func GetConsoleOutputCP() (uint32, error) {
 
 // GetConsoleProcessList calls KERNEL32!GetConsoleProcessList.
 // https://learn.microsoft.com/windows/console/getconsoleprocesslist
-func GetConsoleProcessList(lpdwProcessList *uint32, dwProcessCount uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetConsoleProcessList.Addr(), uintptr(unsafe.Pointer(lpdwProcessList)), uintptr(dwProcessCount))
+func GetConsoleProcessList(lpdwProcessList []uint32) (uint32, error) {
+	var _lpdwProcessList *uint32
+	if len(lpdwProcessList) > 0 {
+		_lpdwProcessList = &lpdwProcessList[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetConsoleProcessList.Addr(), uintptr(unsafe.Pointer(_lpdwProcessList)), uintptr(len(lpdwProcessList)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -549,20 +565,20 @@ func GetConsoleSelectionInfo(lpConsoleSelectionInfo *CONSOLE_SELECTION_INFO) err
 	return nil
 }
 
-// GetConsoleTitleA calls KERNEL32!GetConsoleTitleA.
+// GetConsoleTitle calls KERNEL32!GetConsoleTitleW.
 // https://learn.microsoft.com/windows/console/getconsoletitle
-func GetConsoleTitleA(lpConsoleTitle foundation.PSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetConsoleTitleA.Addr(), uintptr(unsafe.Pointer(lpConsoleTitle)), uintptr(nSize))
+func GetConsoleTitle(lpConsoleTitle foundation.PWSTR, nSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetConsoleTitle.Addr(), uintptr(unsafe.Pointer(lpConsoleTitle)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
 }
 
-// GetConsoleTitleW calls KERNEL32!GetConsoleTitleW.
+// GetConsoleTitleA calls KERNEL32!GetConsoleTitleA.
 // https://learn.microsoft.com/windows/console/getconsoletitle
-func GetConsoleTitleW(lpConsoleTitle foundation.PWSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetConsoleTitleW.Addr(), uintptr(unsafe.Pointer(lpConsoleTitle)), uintptr(nSize))
+func GetConsoleTitleA(lpConsoleTitle foundation.PSTR, nSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetConsoleTitleA.Addr(), uintptr(unsafe.Pointer(lpConsoleTitle)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -578,8 +594,9 @@ func GetConsoleWindow() foundation.HWND {
 
 // GetCurrentConsoleFont calls KERNEL32!GetCurrentConsoleFont.
 // https://learn.microsoft.com/windows/console/getcurrentconsolefont
-func GetCurrentConsoleFont(hConsoleOutput foundation.HANDLE, bMaximumWindow foundation.BOOL, lpConsoleCurrentFont *CONSOLE_FONT_INFO) error {
-	r1, _, e1 := syscall.SyscallN(procGetCurrentConsoleFont.Addr(), uintptr(hConsoleOutput), uintptr(bMaximumWindow), uintptr(unsafe.Pointer(lpConsoleCurrentFont)))
+func GetCurrentConsoleFont(hConsoleOutput foundation.HANDLE, bMaximumWindow bool, lpConsoleCurrentFont *CONSOLE_FONT_INFO) error {
+	_bMaximumWindow := win32.Bool32(bMaximumWindow)
+	r1, _, e1 := syscall.SyscallN(procGetCurrentConsoleFont.Addr(), uintptr(hConsoleOutput), uintptr(_bMaximumWindow), uintptr(unsafe.Pointer(lpConsoleCurrentFont)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -588,8 +605,9 @@ func GetCurrentConsoleFont(hConsoleOutput foundation.HANDLE, bMaximumWindow foun
 
 // GetCurrentConsoleFontEx calls KERNEL32!GetCurrentConsoleFontEx.
 // https://learn.microsoft.com/windows/console/getcurrentconsolefontex
-func GetCurrentConsoleFontEx(hConsoleOutput foundation.HANDLE, bMaximumWindow foundation.BOOL, lpConsoleCurrentFontEx *CONSOLE_FONT_INFOEX) error {
-	r1, _, e1 := syscall.SyscallN(procGetCurrentConsoleFontEx.Addr(), uintptr(hConsoleOutput), uintptr(bMaximumWindow), uintptr(unsafe.Pointer(lpConsoleCurrentFontEx)))
+func GetCurrentConsoleFontEx(hConsoleOutput foundation.HANDLE, bMaximumWindow bool, lpConsoleCurrentFontEx *CONSOLE_FONT_INFOEX) error {
+	_bMaximumWindow := win32.Bool32(bMaximumWindow)
+	r1, _, e1 := syscall.SyscallN(procGetCurrentConsoleFontEx.Addr(), uintptr(hConsoleOutput), uintptr(_bMaximumWindow), uintptr(unsafe.Pointer(lpConsoleCurrentFontEx)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -634,31 +652,51 @@ func GetStdHandle(nStdHandle STD_HANDLE) (foundation.HANDLE, error) {
 }
 
 // InvalidateConsoleDIBits calls KERNEL32!InvalidateConsoleDIBits.
-func InvalidateConsoleDIBits(hConsoleOutput foundation.HANDLE, lpRect *SMALL_RECT) foundation.BOOL {
+func InvalidateConsoleDIBits(hConsoleOutput foundation.HANDLE, lpRect *SMALL_RECT) bool {
 	r1, _, _ := syscall.SyscallN(procInvalidateConsoleDIBits.Addr(), uintptr(hConsoleOutput), uintptr(unsafe.Pointer(lpRect)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // OpenConsoleW calls KERNEL32!OpenConsoleW.
-func OpenConsoleW(lpConsoleDevice foundation.PWSTR, dwDesiredAccess uint32, bInheritHandle foundation.BOOL, dwShareMode uint32) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procOpenConsoleW.Addr(), uintptr(unsafe.Pointer(lpConsoleDevice)), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(dwShareMode))
+func OpenConsoleW(lpConsoleDevice string, dwDesiredAccess uint32, bInheritHandle bool, dwShareMode uint32) foundation.HANDLE {
+	_lpConsoleDevice := win32.UTF16Ptr(lpConsoleDevice)
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	r1, _, _ := syscall.SyscallN(procOpenConsoleW.Addr(), uintptr(unsafe.Pointer(_lpConsoleDevice)), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(dwShareMode))
 	return foundation.HANDLE(r1)
 }
 
-// PeekConsoleInputA calls KERNEL32!PeekConsoleInputA.
+// PeekConsoleInput calls KERNEL32!PeekConsoleInputW.
 // https://learn.microsoft.com/windows/console/peekconsoleinput
-func PeekConsoleInputA(hConsoleInput foundation.HANDLE, lpBuffer *INPUT_RECORD, nLength uint32, lpNumberOfEventsRead *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procPeekConsoleInputA.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nLength), uintptr(unsafe.Pointer(lpNumberOfEventsRead)))
+func PeekConsoleInput(hConsoleInput foundation.HANDLE, lpBuffer []INPUT_RECORD, lpNumberOfEventsRead *uint32) error {
+	var _lpBuffer *INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procPeekConsoleInput.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfEventsRead)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// PeekConsoleInputW calls KERNEL32!PeekConsoleInputW.
+// PeekConsoleInputA calls KERNEL32!PeekConsoleInputA.
 // https://learn.microsoft.com/windows/console/peekconsoleinput
-func PeekConsoleInputW(hConsoleInput foundation.HANDLE, lpBuffer *INPUT_RECORD, nLength uint32, lpNumberOfEventsRead *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procPeekConsoleInputW.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nLength), uintptr(unsafe.Pointer(lpNumberOfEventsRead)))
+func PeekConsoleInputA(hConsoleInput foundation.HANDLE, lpBuffer []INPUT_RECORD, lpNumberOfEventsRead *uint32) error {
+	var _lpBuffer *INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procPeekConsoleInputA.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfEventsRead)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// ReadConsole calls KERNEL32!ReadConsoleW.
+// https://learn.microsoft.com/windows/console/readconsole
+func ReadConsole(hConsoleInput foundation.HANDLE, lpBuffer unsafe.Pointer, nNumberOfCharsToRead uint32, lpNumberOfCharsRead *uint32, pInputControl *CONSOLE_READCONSOLE_CONTROL) error {
+	r1, _, e1 := syscall.SyscallN(procReadConsole.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfCharsToRead), uintptr(unsafe.Pointer(lpNumberOfCharsRead)), uintptr(unsafe.Pointer(pInputControl)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -675,66 +713,73 @@ func ReadConsoleA(hConsoleInput foundation.HANDLE, lpBuffer unsafe.Pointer, nNum
 	return nil
 }
 
-// ReadConsoleInputA calls KERNEL32!ReadConsoleInputA.
+// ReadConsoleInput calls KERNEL32!ReadConsoleInputW.
 // https://learn.microsoft.com/windows/console/readconsoleinput
-func ReadConsoleInputA(hConsoleInput foundation.HANDLE, lpBuffer *INPUT_RECORD, nLength uint32, lpNumberOfEventsRead *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procReadConsoleInputA.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nLength), uintptr(unsafe.Pointer(lpNumberOfEventsRead)))
+func ReadConsoleInput(hConsoleInput foundation.HANDLE, lpBuffer []INPUT_RECORD, lpNumberOfEventsRead *uint32) error {
+	var _lpBuffer *INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procReadConsoleInput.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfEventsRead)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// ReadConsoleInputA calls KERNEL32!ReadConsoleInputA.
+// https://learn.microsoft.com/windows/console/readconsoleinput
+func ReadConsoleInputA(hConsoleInput foundation.HANDLE, lpBuffer []INPUT_RECORD, lpNumberOfEventsRead *uint32) error {
+	var _lpBuffer *INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procReadConsoleInputA.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfEventsRead)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// ReadConsoleInputEx calls KERNEL32!ReadConsoleInputExW.
+// https://learn.microsoft.com/windows/console/readconsoleinputex
+func ReadConsoleInputEx(hConsoleInput foundation.HANDLE, lpBuffer []INPUT_RECORD, lpNumberOfEventsRead *uint32, wFlags uint16) bool {
+	var _lpBuffer *INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procReadConsoleInputEx.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfEventsRead)), uintptr(wFlags))
+	return r1 != 0
 }
 
 // ReadConsoleInputExA calls KERNEL32!ReadConsoleInputExA.
 // https://learn.microsoft.com/windows/console/readconsoleinputex
-func ReadConsoleInputExA(hConsoleInput foundation.HANDLE, lpBuffer *INPUT_RECORD, nLength uint32, lpNumberOfEventsRead *uint32, wFlags uint16) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procReadConsoleInputExA.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nLength), uintptr(unsafe.Pointer(lpNumberOfEventsRead)), uintptr(wFlags))
-	return foundation.BOOL(r1)
-}
-
-// ReadConsoleInputExW calls KERNEL32!ReadConsoleInputExW.
-// https://learn.microsoft.com/windows/console/readconsoleinputex
-func ReadConsoleInputExW(hConsoleInput foundation.HANDLE, lpBuffer *INPUT_RECORD, nLength uint32, lpNumberOfEventsRead *uint32, wFlags uint16) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procReadConsoleInputExW.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nLength), uintptr(unsafe.Pointer(lpNumberOfEventsRead)), uintptr(wFlags))
-	return foundation.BOOL(r1)
-}
-
-// ReadConsoleInputW calls KERNEL32!ReadConsoleInputW.
-// https://learn.microsoft.com/windows/console/readconsoleinput
-func ReadConsoleInputW(hConsoleInput foundation.HANDLE, lpBuffer *INPUT_RECORD, nLength uint32, lpNumberOfEventsRead *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procReadConsoleInputW.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nLength), uintptr(unsafe.Pointer(lpNumberOfEventsRead)))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func ReadConsoleInputExA(hConsoleInput foundation.HANDLE, lpBuffer []INPUT_RECORD, lpNumberOfEventsRead *uint32, wFlags uint16) bool {
+	var _lpBuffer *INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
 	}
-	return nil
-}
-
-// ReadConsoleW calls KERNEL32!ReadConsoleW.
-// https://learn.microsoft.com/windows/console/readconsole
-func ReadConsoleW(hConsoleInput foundation.HANDLE, lpBuffer unsafe.Pointer, nNumberOfCharsToRead uint32, lpNumberOfCharsRead *uint32, pInputControl *CONSOLE_READCONSOLE_CONTROL) error {
-	r1, _, e1 := syscall.SyscallN(procReadConsoleW.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfCharsToRead), uintptr(unsafe.Pointer(lpNumberOfCharsRead)), uintptr(unsafe.Pointer(pInputControl)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+	r1, _, _ := syscall.SyscallN(procReadConsoleInputExA.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfEventsRead)), uintptr(wFlags))
+	return r1 != 0
 }
 
 // RegisterConsoleIME calls KERNEL32!RegisterConsoleIME.
-func RegisterConsoleIME(hWndConsoleIME foundation.HWND, lpdwConsoleThreadId *uint32) foundation.BOOL {
+func RegisterConsoleIME(hWndConsoleIME foundation.HWND, lpdwConsoleThreadId *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procRegisterConsoleIME.Addr(), uintptr(hWndConsoleIME), uintptr(unsafe.Pointer(lpdwConsoleThreadId)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // RegisterConsoleOS2 calls KERNEL32!RegisterConsoleOS2.
-func RegisterConsoleOS2(fOs2Register foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procRegisterConsoleOS2.Addr(), uintptr(fOs2Register))
-	return foundation.BOOL(r1)
+func RegisterConsoleOS2(fOs2Register bool) bool {
+	_fOs2Register := win32.Bool32(fOs2Register)
+	r1, _, _ := syscall.SyscallN(procRegisterConsoleOS2.Addr(), uintptr(_fOs2Register))
+	return r1 != 0
 }
 
 // ReleasePseudoConsole calls KERNEL32!ReleasePseudoConsole.
-func ReleasePseudoConsole(hPC HPCON) foundation.HRESULT {
+func ReleasePseudoConsole(hPC HPCON) error {
 	r1, _, _ := syscall.SyscallN(procReleasePseudoConsole.Addr(), uintptr(hPC))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetConsoleActiveScreenBuffer calls KERNEL32!SetConsoleActiveScreenBuffer.
@@ -759,8 +804,9 @@ func SetConsoleCP(wCodePageID uint32) error {
 
 // SetConsoleCtrlHandler calls KERNEL32!SetConsoleCtrlHandler.
 // https://learn.microsoft.com/windows/console/setconsolectrlhandler
-func SetConsoleCtrlHandler(HandlerRoutine PHANDLER_ROUTINE, Add foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSetConsoleCtrlHandler.Addr(), uintptr(HandlerRoutine), uintptr(Add))
+func SetConsoleCtrlHandler(HandlerRoutine PHANDLER_ROUTINE, Add bool) error {
+	_Add := win32.Bool32(Add)
+	r1, _, e1 := syscall.SyscallN(procSetConsoleCtrlHandler.Addr(), uintptr(HandlerRoutine), uintptr(_Add))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -768,9 +814,9 @@ func SetConsoleCtrlHandler(HandlerRoutine PHANDLER_ROUTINE, Add foundation.BOOL)
 }
 
 // SetConsoleCursor calls KERNEL32!SetConsoleCursor.
-func SetConsoleCursor(hConsoleOutput foundation.HANDLE, hCursor uiwindowsandmessaging.HCURSOR) foundation.BOOL {
+func SetConsoleCursor(hConsoleOutput foundation.HANDLE, hCursor uiwindowsandmessaging.HCURSOR) bool {
 	r1, _, _ := syscall.SyscallN(procSetConsoleCursor.Addr(), uintptr(hConsoleOutput), uintptr(hCursor))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetConsoleCursorInfo calls KERNEL32!SetConsoleCursorInfo.
@@ -784,9 +830,11 @@ func SetConsoleCursorInfo(hConsoleOutput foundation.HANDLE, lpConsoleCursorInfo 
 }
 
 // SetConsoleCursorMode calls KERNEL32!SetConsoleCursorMode.
-func SetConsoleCursorMode(hConsoleHandle foundation.HANDLE, Blink foundation.BOOL, DBEnable foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetConsoleCursorMode.Addr(), uintptr(hConsoleHandle), uintptr(Blink), uintptr(DBEnable))
-	return foundation.BOOL(r1)
+func SetConsoleCursorMode(hConsoleHandle foundation.HANDLE, Blink bool, DBEnable bool) bool {
+	_Blink := win32.Bool32(Blink)
+	_DBEnable := win32.Bool32(DBEnable)
+	r1, _, _ := syscall.SyscallN(procSetConsoleCursorMode.Addr(), uintptr(hConsoleHandle), uintptr(_Blink), uintptr(_DBEnable))
+	return r1 != 0
 }
 
 // SetConsoleDisplayMode calls KERNEL32!SetConsoleDisplayMode.
@@ -800,9 +848,9 @@ func SetConsoleDisplayMode(hConsoleOutput foundation.HANDLE, dwFlags uint32, lpN
 }
 
 // SetConsoleFont calls KERNEL32!SetConsoleFont.
-func SetConsoleFont(hConsoleOutput foundation.HANDLE, nFont uint32) foundation.BOOL {
+func SetConsoleFont(hConsoleOutput foundation.HANDLE, nFont uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSetConsoleFont.Addr(), uintptr(hConsoleOutput), uintptr(nFont))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetConsoleHistoryInfo calls KERNEL32!SetConsoleHistoryInfo.
@@ -816,33 +864,40 @@ func SetConsoleHistoryInfo(lpConsoleHistoryInfo *CONSOLE_HISTORY_INFO) error {
 }
 
 // SetConsoleIcon calls KERNEL32!SetConsoleIcon.
-func SetConsoleIcon(hIcon uiwindowsandmessaging.HICON) foundation.BOOL {
+func SetConsoleIcon(hIcon uiwindowsandmessaging.HICON) bool {
 	r1, _, _ := syscall.SyscallN(procSetConsoleIcon.Addr(), uintptr(hIcon))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// SetConsoleInputExeName calls KERNEL32!SetConsoleInputExeNameW.
+func SetConsoleInputExeName(lpExeName string) bool {
+	_lpExeName := win32.UTF16Ptr(lpExeName)
+	r1, _, _ := syscall.SyscallN(procSetConsoleInputExeName.Addr(), uintptr(unsafe.Pointer(_lpExeName)))
+	return r1 != 0
 }
 
 // SetConsoleInputExeNameA calls KERNEL32!SetConsoleInputExeNameA.
-func SetConsoleInputExeNameA(lpExeName foundation.PSTR) foundation.BOOL {
+func SetConsoleInputExeNameA(lpExeName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procSetConsoleInputExeNameA.Addr(), uintptr(unsafe.Pointer(lpExeName)))
-	return foundation.BOOL(r1)
-}
-
-// SetConsoleInputExeNameW calls KERNEL32!SetConsoleInputExeNameW.
-func SetConsoleInputExeNameW(lpExeName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetConsoleInputExeNameW.Addr(), uintptr(unsafe.Pointer(lpExeName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetConsoleKeyShortcuts calls KERNEL32!SetConsoleKeyShortcuts.
-func SetConsoleKeyShortcuts(bSet foundation.BOOL, bReserveKeys byte, lpAppKeys *APPKEY, dwNumAppKeys uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetConsoleKeyShortcuts.Addr(), uintptr(bSet), uintptr(bReserveKeys), uintptr(unsafe.Pointer(lpAppKeys)), uintptr(dwNumAppKeys))
-	return foundation.BOOL(r1)
+func SetConsoleKeyShortcuts(bSet bool, bReserveKeys byte, lpAppKeys []APPKEY) bool {
+	_bSet := win32.Bool32(bSet)
+	var _lpAppKeys *APPKEY
+	if len(lpAppKeys) > 0 {
+		_lpAppKeys = &lpAppKeys[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetConsoleKeyShortcuts.Addr(), uintptr(_bSet), uintptr(bReserveKeys), uintptr(unsafe.Pointer(_lpAppKeys)), uintptr(len(lpAppKeys)))
+	return r1 != 0
 }
 
 // SetConsoleMenuClose calls KERNEL32!SetConsoleMenuClose.
-func SetConsoleMenuClose(bEnable foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetConsoleMenuClose.Addr(), uintptr(bEnable))
-	return foundation.BOOL(r1)
+func SetConsoleMenuClose(bEnable bool) bool {
+	_bEnable := win32.Bool32(bEnable)
+	r1, _, _ := syscall.SyscallN(procSetConsoleMenuClose.Addr(), uintptr(_bEnable))
+	return r1 != 0
 }
 
 // SetConsoleMode calls KERNEL32!SetConsoleMode.
@@ -856,27 +911,29 @@ func SetConsoleMode(hConsoleHandle foundation.HANDLE, dwMode CONSOLE_MODE) error
 }
 
 // SetConsoleNlsMode calls KERNEL32!SetConsoleNlsMode.
-func SetConsoleNlsMode(hConsole foundation.HANDLE, fdwNlsMode uint32) foundation.BOOL {
+func SetConsoleNlsMode(hConsole foundation.HANDLE, fdwNlsMode uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSetConsoleNlsMode.Addr(), uintptr(hConsole), uintptr(fdwNlsMode))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// SetConsoleNumberOfCommands calls KERNEL32!SetConsoleNumberOfCommandsW.
+func SetConsoleNumberOfCommands(Number uint32, ExeName string) bool {
+	_ExeName := win32.UTF16Ptr(ExeName)
+	r1, _, _ := syscall.SyscallN(procSetConsoleNumberOfCommands.Addr(), uintptr(Number), uintptr(unsafe.Pointer(_ExeName)))
+	return r1 != 0
 }
 
 // SetConsoleNumberOfCommandsA calls KERNEL32!SetConsoleNumberOfCommandsA.
-func SetConsoleNumberOfCommandsA(Number uint32, ExeName foundation.PSTR) foundation.BOOL {
+func SetConsoleNumberOfCommandsA(Number uint32, ExeName foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procSetConsoleNumberOfCommandsA.Addr(), uintptr(Number), uintptr(unsafe.Pointer(ExeName)))
-	return foundation.BOOL(r1)
-}
-
-// SetConsoleNumberOfCommandsW calls KERNEL32!SetConsoleNumberOfCommandsW.
-func SetConsoleNumberOfCommandsW(Number uint32, ExeName foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetConsoleNumberOfCommandsW.Addr(), uintptr(Number), uintptr(unsafe.Pointer(ExeName)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetConsoleOS2OemFormat calls KERNEL32!SetConsoleOS2OemFormat.
-func SetConsoleOS2OemFormat(fOs2OemFormat foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetConsoleOS2OemFormat.Addr(), uintptr(fOs2OemFormat))
-	return foundation.BOOL(r1)
+func SetConsoleOS2OemFormat(fOs2OemFormat bool) bool {
+	_fOs2OemFormat := win32.Bool32(fOs2OemFormat)
+	r1, _, _ := syscall.SyscallN(procSetConsoleOS2OemFormat.Addr(), uintptr(_fOs2OemFormat))
+	return r1 != 0
 }
 
 // SetConsoleOutputCP calls KERNEL32!SetConsoleOutputCP.
@@ -890,9 +947,9 @@ func SetConsoleOutputCP(wCodePageID uint32) error {
 }
 
 // SetConsolePalette calls KERNEL32!SetConsolePalette.
-func SetConsolePalette(hConsoleOutput foundation.HANDLE, hPalette graphicsgdi.HPALETTE, dwUsage uint32) foundation.BOOL {
+func SetConsolePalette(hConsoleOutput foundation.HANDLE, hPalette graphicsgdi.HPALETTE, dwUsage uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSetConsolePalette.Addr(), uintptr(hConsoleOutput), uintptr(hPalette), uintptr(dwUsage))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetConsoleScreenBufferInfoEx calls KERNEL32!SetConsoleScreenBufferInfoEx.
@@ -915,6 +972,17 @@ func SetConsoleTextAttribute(hConsoleOutput foundation.HANDLE, wAttributes CONSO
 	return nil
 }
 
+// SetConsoleTitle calls KERNEL32!SetConsoleTitleW.
+// https://learn.microsoft.com/windows/console/setconsoletitle
+func SetConsoleTitle(lpConsoleTitle string) error {
+	_lpConsoleTitle := win32.UTF16Ptr(lpConsoleTitle)
+	r1, _, e1 := syscall.SyscallN(procSetConsoleTitle.Addr(), uintptr(unsafe.Pointer(_lpConsoleTitle)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetConsoleTitleA calls KERNEL32!SetConsoleTitleA.
 // https://learn.microsoft.com/windows/console/setconsoletitle
 func SetConsoleTitleA(lpConsoleTitle foundation.PSTR) error {
@@ -925,20 +993,11 @@ func SetConsoleTitleA(lpConsoleTitle foundation.PSTR) error {
 	return nil
 }
 
-// SetConsoleTitleW calls KERNEL32!SetConsoleTitleW.
-// https://learn.microsoft.com/windows/console/setconsoletitle
-func SetConsoleTitleW(lpConsoleTitle foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetConsoleTitleW.Addr(), uintptr(unsafe.Pointer(lpConsoleTitle)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // SetConsoleWindowInfo calls KERNEL32!SetConsoleWindowInfo.
 // https://learn.microsoft.com/windows/console/setconsolewindowinfo
-func SetConsoleWindowInfo(hConsoleOutput foundation.HANDLE, bAbsolute foundation.BOOL, lpConsoleWindow *SMALL_RECT) error {
-	r1, _, e1 := syscall.SyscallN(procSetConsoleWindowInfo.Addr(), uintptr(hConsoleOutput), uintptr(bAbsolute), uintptr(unsafe.Pointer(lpConsoleWindow)))
+func SetConsoleWindowInfo(hConsoleOutput foundation.HANDLE, bAbsolute bool, lpConsoleWindow *SMALL_RECT) error {
+	_bAbsolute := win32.Bool32(bAbsolute)
+	r1, _, e1 := syscall.SyscallN(procSetConsoleWindowInfo.Addr(), uintptr(hConsoleOutput), uintptr(_bAbsolute), uintptr(unsafe.Pointer(lpConsoleWindow)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -947,8 +1006,9 @@ func SetConsoleWindowInfo(hConsoleOutput foundation.HANDLE, bAbsolute foundation
 
 // SetCurrentConsoleFontEx calls KERNEL32!SetCurrentConsoleFontEx.
 // https://learn.microsoft.com/windows/console/setcurrentconsolefontex
-func SetCurrentConsoleFontEx(hConsoleOutput foundation.HANDLE, bMaximumWindow foundation.BOOL, lpConsoleCurrentFontEx *CONSOLE_FONT_INFOEX) error {
-	r1, _, e1 := syscall.SyscallN(procSetCurrentConsoleFontEx.Addr(), uintptr(hConsoleOutput), uintptr(bMaximumWindow), uintptr(unsafe.Pointer(lpConsoleCurrentFontEx)))
+func SetCurrentConsoleFontEx(hConsoleOutput foundation.HANDLE, bMaximumWindow bool, lpConsoleCurrentFontEx *CONSOLE_FONT_INFOEX) error {
+	_bMaximumWindow := win32.Bool32(bMaximumWindow)
+	r1, _, e1 := syscall.SyscallN(procSetCurrentConsoleFontEx.Addr(), uintptr(hConsoleOutput), uintptr(_bMaximumWindow), uintptr(unsafe.Pointer(lpConsoleCurrentFontEx)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -972,39 +1032,65 @@ func SetStdHandle(nStdHandle STD_HANDLE, hHandle foundation.HANDLE) error {
 
 // SetStdHandleEx calls KERNEL32!SetStdHandleEx.
 // https://learn.microsoft.com/windows/win32/api/processenv/nf-processenv-setstdhandleex
-func SetStdHandleEx(nStdHandle STD_HANDLE, hHandle foundation.HANDLE, phPrevValue *foundation.HANDLE) foundation.BOOL {
+func SetStdHandleEx(nStdHandle STD_HANDLE, hHandle foundation.HANDLE, phPrevValue *foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procSetStdHandleEx.Addr(), uintptr(nStdHandle), uintptr(hHandle), uintptr(unsafe.Pointer(phPrevValue)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // ShowConsoleCursor calls KERNEL32!ShowConsoleCursor.
-func ShowConsoleCursor(hConsoleOutput foundation.HANDLE, bShow foundation.BOOL) int32 {
-	r1, _, _ := syscall.SyscallN(procShowConsoleCursor.Addr(), uintptr(hConsoleOutput), uintptr(bShow))
+func ShowConsoleCursor(hConsoleOutput foundation.HANDLE, bShow bool) int32 {
+	_bShow := win32.Bool32(bShow)
+	r1, _, _ := syscall.SyscallN(procShowConsoleCursor.Addr(), uintptr(hConsoleOutput), uintptr(_bShow))
 	return int32(r1)
 }
 
 // UnregisterConsoleIME calls KERNEL32!UnregisterConsoleIME.
-func UnregisterConsoleIME() foundation.BOOL {
+func UnregisterConsoleIME() bool {
 	r1, _, _ := syscall.SyscallN(procUnregisterConsoleIME.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // VDMConsoleOperation calls KERNEL32!VDMConsoleOperation.
-func VDMConsoleOperation(iFunction uint32, lpData unsafe.Pointer) foundation.BOOL {
+func VDMConsoleOperation(iFunction uint32, lpData unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procVDMConsoleOperation.Addr(), uintptr(iFunction), uintptr(unsafe.Pointer(lpData)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // VerifyConsoleIoHandle calls KERNEL32!VerifyConsoleIoHandle.
-func VerifyConsoleIoHandle(hIoHandle foundation.HANDLE) foundation.BOOL {
+func VerifyConsoleIoHandle(hIoHandle foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procVerifyConsoleIoHandle.Addr(), uintptr(hIoHandle))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// WriteConsole calls KERNEL32!WriteConsoleW.
+// https://learn.microsoft.com/windows/console/writeconsole
+func WriteConsole(hConsoleOutput foundation.HANDLE, lpBuffer string, nNumberOfCharsToWrite uint32, lpNumberOfCharsWritten *uint32) error {
+	_lpBuffer := win32.UTF16Ptr(lpBuffer)
+	r1, _, e1 := syscall.SyscallN(procWriteConsole.Addr(), uintptr(hConsoleOutput), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(nNumberOfCharsToWrite), uintptr(unsafe.Pointer(lpNumberOfCharsWritten)), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // WriteConsoleA calls KERNEL32!WriteConsoleA.
 // https://learn.microsoft.com/windows/console/writeconsole
-func WriteConsoleA(hConsoleOutput foundation.HANDLE, lpBuffer foundation.PSTR, nNumberOfCharsToWrite uint32, lpNumberOfCharsWritten *uint32, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procWriteConsoleA.Addr(), uintptr(hConsoleOutput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfCharsToWrite), uintptr(unsafe.Pointer(lpNumberOfCharsWritten)), uintptr(unsafe.Pointer(lpReserved)))
+func WriteConsoleA(hConsoleOutput foundation.HANDLE, lpBuffer foundation.PSTR, nNumberOfCharsToWrite uint32, lpNumberOfCharsWritten *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procWriteConsoleA.Addr(), uintptr(hConsoleOutput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfCharsToWrite), uintptr(unsafe.Pointer(lpNumberOfCharsWritten)), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// WriteConsoleInput calls KERNEL32!WriteConsoleInputW.
+// https://learn.microsoft.com/windows/console/writeconsoleinput
+func WriteConsoleInput(hConsoleInput foundation.HANDLE, lpBuffer []INPUT_RECORD, lpNumberOfEventsWritten *uint32) error {
+	var _lpBuffer *INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWriteConsoleInput.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfEventsWritten)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1013,42 +1099,34 @@ func WriteConsoleA(hConsoleOutput foundation.HANDLE, lpBuffer foundation.PSTR, n
 
 // WriteConsoleInputA calls KERNEL32!WriteConsoleInputA.
 // https://learn.microsoft.com/windows/console/writeconsoleinput
-func WriteConsoleInputA(hConsoleInput foundation.HANDLE, lpBuffer *INPUT_RECORD, nLength uint32, lpNumberOfEventsWritten *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWriteConsoleInputA.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nLength), uintptr(unsafe.Pointer(lpNumberOfEventsWritten)))
+func WriteConsoleInputA(hConsoleInput foundation.HANDLE, lpBuffer []INPUT_RECORD, lpNumberOfEventsWritten *uint32) error {
+	var _lpBuffer *INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWriteConsoleInputA.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfEventsWritten)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
+}
+
+// WriteConsoleInputVDM calls KERNEL32!WriteConsoleInputVDMW.
+func WriteConsoleInputVDM(hConsoleInput foundation.HANDLE, lpBuffer []INPUT_RECORD, lpNumberOfEventsWritten *uint32) bool {
+	var _lpBuffer *INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWriteConsoleInputVDM.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfEventsWritten)))
+	return r1 != 0
 }
 
 // WriteConsoleInputVDMA calls KERNEL32!WriteConsoleInputVDMA.
-func WriteConsoleInputVDMA(hConsoleInput foundation.HANDLE, lpBuffer *INPUT_RECORD, nLength uint32, lpNumberOfEventsWritten *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWriteConsoleInputVDMA.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nLength), uintptr(unsafe.Pointer(lpNumberOfEventsWritten)))
-	return foundation.BOOL(r1)
-}
-
-// WriteConsoleInputVDMW calls KERNEL32!WriteConsoleInputVDMW.
-func WriteConsoleInputVDMW(hConsoleInput foundation.HANDLE, lpBuffer *INPUT_RECORD, nLength uint32, lpNumberOfEventsWritten *uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procWriteConsoleInputVDMW.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nLength), uintptr(unsafe.Pointer(lpNumberOfEventsWritten)))
-	return foundation.BOOL(r1)
-}
-
-// WriteConsoleInputW calls KERNEL32!WriteConsoleInputW.
-// https://learn.microsoft.com/windows/console/writeconsoleinput
-func WriteConsoleInputW(hConsoleInput foundation.HANDLE, lpBuffer *INPUT_RECORD, nLength uint32, lpNumberOfEventsWritten *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWriteConsoleInputW.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nLength), uintptr(unsafe.Pointer(lpNumberOfEventsWritten)))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func WriteConsoleInputVDMA(hConsoleInput foundation.HANDLE, lpBuffer []INPUT_RECORD, lpNumberOfEventsWritten *uint32) bool {
+	var _lpBuffer *INPUT_RECORD
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
 	}
-	return nil
-}
-
-// WriteConsoleW calls KERNEL32!WriteConsoleW.
-// https://learn.microsoft.com/windows/console/writeconsole
-func WriteConsoleW(hConsoleOutput foundation.HANDLE, lpBuffer foundation.PWSTR, nNumberOfCharsToWrite uint32, lpNumberOfCharsWritten *uint32, lpReserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procWriteConsoleW.Addr(), uintptr(hConsoleOutput), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfCharsToWrite), uintptr(unsafe.Pointer(lpNumberOfCharsWritten)), uintptr(unsafe.Pointer(lpReserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+	r1, _, _ := syscall.SyscallN(procWriteConsoleInputVDMA.Addr(), uintptr(hConsoleInput), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfEventsWritten)))
+	return r1 != 0
 }

@@ -148,123 +148,126 @@ var (
 )
 
 // ApplyGuestMemoryFix calls VmSavedStateDumpProvider!ApplyGuestMemoryFix.
-func ApplyGuestMemoryFix(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, virtualAddress uint64, fixBuffer unsafe.Pointer, fixBufferSize uint32) foundation.HRESULT {
+func ApplyGuestMemoryFix(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, virtualAddress uint64, fixBuffer unsafe.Pointer, fixBufferSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procApplyGuestMemoryFix.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(virtualAddress), uintptr(unsafe.Pointer(fixBuffer)), uintptr(fixBufferSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ApplyPendingSavedStateFileReplayLog calls VmSavedStateDumpProvider!ApplyPendingSavedStateFileReplayLog.
-func ApplyPendingSavedStateFileReplayLog(vmrsFile foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procApplyPendingSavedStateFileReplayLog.Addr(), uintptr(unsafe.Pointer(vmrsFile)))
-	return foundation.HRESULT(r1)
+func ApplyPendingSavedStateFileReplayLog(vmrsFile string) error {
+	_vmrsFile := win32.UTF16Ptr(vmrsFile)
+	r1, _, _ := syscall.SyscallN(procApplyPendingSavedStateFileReplayLog.Addr(), uintptr(unsafe.Pointer(_vmrsFile)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CallStackUnwind calls VmSavedStateDumpProvider!CallStackUnwind.
-func CallStackUnwind(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, imageInfo *MODULE_INFO, imageInfoCount uint32, frameCount uint32, callStack *foundation.PWSTR) foundation.HRESULT {
+func CallStackUnwind(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, imageInfo *MODULE_INFO, imageInfoCount uint32, frameCount uint32, callStack *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procCallStackUnwind.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(imageInfo)), uintptr(imageInfoCount), uintptr(frameCount), uintptr(unsafe.Pointer(callStack)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindSavedStateSymbolFieldInType calls VmSavedStateDumpProvider!FindSavedStateSymbolFieldInType.
-func FindSavedStateSymbolFieldInType(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, typeName foundation.PSTR, fieldName foundation.PWSTR, offset *uint32, found *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procFindSavedStateSymbolFieldInType.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(typeName)), uintptr(unsafe.Pointer(fieldName)), uintptr(unsafe.Pointer(offset)), uintptr(unsafe.Pointer(found)))
-	return foundation.HRESULT(r1)
+func FindSavedStateSymbolFieldInType(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, typeName foundation.PSTR, fieldName string, offset *uint32, found *foundation.BOOL) error {
+	_fieldName := win32.UTF16Ptr(fieldName)
+	r1, _, _ := syscall.SyscallN(procFindSavedStateSymbolFieldInType.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(typeName)), uintptr(unsafe.Pointer(_fieldName)), uintptr(unsafe.Pointer(offset)), uintptr(unsafe.Pointer(found)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ForceActiveVirtualTrustLevel calls VmSavedStateDumpProvider!ForceActiveVirtualTrustLevel.
-func ForceActiveVirtualTrustLevel(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, virtualTrustLevel byte) foundation.HRESULT {
+func ForceActiveVirtualTrustLevel(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, virtualTrustLevel byte) error {
 	r1, _, _ := syscall.SyscallN(procForceActiveVirtualTrustLevel.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(virtualTrustLevel))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ForceArchitecture calls VmSavedStateDumpProvider!ForceArchitecture.
-func ForceArchitecture(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, architecture VIRTUAL_PROCESSOR_ARCH) foundation.HRESULT {
+func ForceArchitecture(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, architecture VIRTUAL_PROCESSOR_ARCH) error {
 	r1, _, _ := syscall.SyscallN(procForceArchitecture.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(architecture))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ForceNestedHostMode calls VmSavedStateDumpProvider!ForceNestedHostMode.
-func ForceNestedHostMode(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, hostMode foundation.BOOL, oldMode *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procForceNestedHostMode.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(hostMode), uintptr(unsafe.Pointer(oldMode)))
-	return foundation.HRESULT(r1)
+func ForceNestedHostMode(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, hostMode bool, oldMode *foundation.BOOL) error {
+	_hostMode := win32.Bool32(hostMode)
+	r1, _, _ := syscall.SyscallN(procForceNestedHostMode.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(_hostMode), uintptr(unsafe.Pointer(oldMode)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ForcePagingMode calls VmSavedStateDumpProvider!ForcePagingMode.
-func ForcePagingMode(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, pagingMode PAGING_MODE) foundation.HRESULT {
+func ForcePagingMode(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, pagingMode PAGING_MODE) error {
 	r1, _, _ := syscall.SyscallN(procForcePagingMode.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(pagingMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetActiveVirtualTrustLevel calls VmSavedStateDumpProvider!GetActiveVirtualTrustLevel.
-func GetActiveVirtualTrustLevel(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, virtualTrustLevel *byte) foundation.HRESULT {
+func GetActiveVirtualTrustLevel(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, virtualTrustLevel *byte) error {
 	r1, _, _ := syscall.SyscallN(procGetActiveVirtualTrustLevel.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(virtualTrustLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetArchitecture calls VmSavedStateDumpProvider!GetArchitecture.
-func GetArchitecture(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, architecture *VIRTUAL_PROCESSOR_ARCH) foundation.HRESULT {
+func GetArchitecture(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, architecture *VIRTUAL_PROCESSOR_ARCH) error {
 	r1, _, _ := syscall.SyscallN(procGetArchitecture.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(architecture)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEnabledVirtualTrustLevels calls VmSavedStateDumpProvider!GetEnabledVirtualTrustLevels.
-func GetEnabledVirtualTrustLevels(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, virtualTrustLevels *uint32) foundation.HRESULT {
+func GetEnabledVirtualTrustLevels(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, virtualTrustLevels *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetEnabledVirtualTrustLevels.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(virtualTrustLevels)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGuestEnabledVirtualTrustLevels calls VmSavedStateDumpProvider!GetGuestEnabledVirtualTrustLevels.
-func GetGuestEnabledVirtualTrustLevels(vmSavedStateDumpHandle unsafe.Pointer, virtualTrustLevels *uint32) foundation.HRESULT {
+func GetGuestEnabledVirtualTrustLevels(vmSavedStateDumpHandle unsafe.Pointer, virtualTrustLevels *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetGuestEnabledVirtualTrustLevels.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(unsafe.Pointer(virtualTrustLevels)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGuestOsInfo calls VmSavedStateDumpProvider!GetGuestOsInfo.
-func GetGuestOsInfo(vmSavedStateDumpHandle unsafe.Pointer, virtualTrustLevel byte, guestOsInfo *GUEST_OS_INFO) foundation.HRESULT {
+func GetGuestOsInfo(vmSavedStateDumpHandle unsafe.Pointer, virtualTrustLevel byte, guestOsInfo *GUEST_OS_INFO) error {
 	r1, _, _ := syscall.SyscallN(procGetGuestOsInfo.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(virtualTrustLevel), uintptr(unsafe.Pointer(guestOsInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGuestPhysicalMemoryChunks calls VmSavedStateDumpProvider!GetGuestPhysicalMemoryChunks.
-func GetGuestPhysicalMemoryChunks(vmSavedStateDumpHandle unsafe.Pointer, memoryChunkPageSize *uint64, memoryChunks *GPA_MEMORY_CHUNK, memoryChunkCount *uint64) foundation.HRESULT {
+func GetGuestPhysicalMemoryChunks(vmSavedStateDumpHandle unsafe.Pointer, memoryChunkPageSize *uint64, memoryChunks *GPA_MEMORY_CHUNK, memoryChunkCount *uint64) error {
 	r1, _, _ := syscall.SyscallN(procGetGuestPhysicalMemoryChunks.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(unsafe.Pointer(memoryChunkPageSize)), uintptr(unsafe.Pointer(memoryChunks)), uintptr(unsafe.Pointer(memoryChunkCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGuestRawSavedMemorySize calls VmSavedStateDumpProvider!GetGuestRawSavedMemorySize.
-func GetGuestRawSavedMemorySize(vmSavedStateDumpHandle unsafe.Pointer, guestRawSavedMemorySize *uint64) foundation.HRESULT {
+func GetGuestRawSavedMemorySize(vmSavedStateDumpHandle unsafe.Pointer, guestRawSavedMemorySize *uint64) error {
 	r1, _, _ := syscall.SyscallN(procGetGuestRawSavedMemorySize.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(unsafe.Pointer(guestRawSavedMemorySize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMemoryBlockCacheLimit calls VmSavedStateDumpProvider!GetMemoryBlockCacheLimit.
-func GetMemoryBlockCacheLimit(vmSavedStateDumpHandle unsafe.Pointer, memoryBlockCacheLimit *uint64) foundation.HRESULT {
+func GetMemoryBlockCacheLimit(vmSavedStateDumpHandle unsafe.Pointer, memoryBlockCacheLimit *uint64) error {
 	r1, _, _ := syscall.SyscallN(procGetMemoryBlockCacheLimit.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(unsafe.Pointer(memoryBlockCacheLimit)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNestedVirtualizationMode calls VmSavedStateDumpProvider!GetNestedVirtualizationMode.
-func GetNestedVirtualizationMode(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, enabled *foundation.BOOL) foundation.HRESULT {
+func GetNestedVirtualizationMode(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, enabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procGetNestedVirtualizationMode.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(enabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPagingMode calls VmSavedStateDumpProvider!GetPagingMode.
-func GetPagingMode(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, pagingMode *PAGING_MODE) foundation.HRESULT {
+func GetPagingMode(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, pagingMode *PAGING_MODE) error {
 	r1, _, _ := syscall.SyscallN(procGetPagingMode.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(pagingMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRegisterValue calls VmSavedStateDumpProvider!GetRegisterValue.
-func GetRegisterValue(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, registerId uint32, registerValue *VIRTUAL_PROCESSOR_REGISTER) foundation.HRESULT {
+func GetRegisterValue(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, registerId uint32, registerValue *VIRTUAL_PROCESSOR_REGISTER) error {
 	r1, _, _ := syscall.SyscallN(procGetRegisterValue.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(registerId), uintptr(unsafe.Pointer(registerValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSavedStateSymbolFieldInfo calls VmSavedStateDumpProvider!GetSavedStateSymbolFieldInfo.
-func GetSavedStateSymbolFieldInfo(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, typeName foundation.PSTR, typeFieldInfoMap *foundation.PWSTR) foundation.HRESULT {
+func GetSavedStateSymbolFieldInfo(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, typeName foundation.PSTR, typeFieldInfoMap *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procGetSavedStateSymbolFieldInfo.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(typeName)), uintptr(unsafe.Pointer(typeFieldInfoMap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSavedStateSymbolProviderHandle calls VmSavedStateDumpProvider!GetSavedStateSymbolProviderHandle.
@@ -274,620 +277,648 @@ func GetSavedStateSymbolProviderHandle(vmSavedStateDumpHandle unsafe.Pointer) fo
 }
 
 // GetSavedStateSymbolTypeSize calls VmSavedStateDumpProvider!GetSavedStateSymbolTypeSize.
-func GetSavedStateSymbolTypeSize(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, typeName foundation.PSTR, size *uint32) foundation.HRESULT {
+func GetSavedStateSymbolTypeSize(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, typeName foundation.PSTR, size *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetSavedStateSymbolTypeSize.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(typeName)), uintptr(unsafe.Pointer(size)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVpCount calls VmSavedStateDumpProvider!GetVpCount.
-func GetVpCount(vmSavedStateDumpHandle unsafe.Pointer, vpCount *uint32) foundation.HRESULT {
+func GetVpCount(vmSavedStateDumpHandle unsafe.Pointer, vpCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetVpCount.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(unsafe.Pointer(vpCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GuestPhysicalAddressToRawSavedMemoryOffset calls VmSavedStateDumpProvider!GuestPhysicalAddressToRawSavedMemoryOffset.
-func GuestPhysicalAddressToRawSavedMemoryOffset(vmSavedStateDumpHandle unsafe.Pointer, physicalAddress uint64, rawSavedMemoryOffset *uint64) foundation.HRESULT {
+func GuestPhysicalAddressToRawSavedMemoryOffset(vmSavedStateDumpHandle unsafe.Pointer, physicalAddress uint64, rawSavedMemoryOffset *uint64) error {
 	r1, _, _ := syscall.SyscallN(procGuestPhysicalAddressToRawSavedMemoryOffset.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(physicalAddress), uintptr(unsafe.Pointer(rawSavedMemoryOffset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GuestVirtualAddressToPhysicalAddress calls VmSavedStateDumpProvider!GuestVirtualAddressToPhysicalAddress.
-func GuestVirtualAddressToPhysicalAddress(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, virtualAddress uint64, physicalAddress *uint64, unmappedRegionSize *uint64) foundation.HRESULT {
+func GuestVirtualAddressToPhysicalAddress(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, virtualAddress uint64, physicalAddress *uint64, unmappedRegionSize *uint64) error {
 	r1, _, _ := syscall.SyscallN(procGuestVirtualAddressToPhysicalAddress.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(virtualAddress), uintptr(unsafe.Pointer(physicalAddress)), uintptr(unsafe.Pointer(unmappedRegionSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HdvCreateDeviceInstance calls vmdevicehost!HdvCreateDeviceInstance.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/hdv/HdvCreateDeviceInstance
-func HdvCreateDeviceInstance(deviceHostHandle unsafe.Pointer, deviceType HDV_DEVICE_TYPE, deviceClassId *win32.GUID, deviceInstanceId *win32.GUID, deviceInterface unsafe.Pointer, deviceContext unsafe.Pointer, deviceHandle *unsafe.Pointer) foundation.HRESULT {
+func HdvCreateDeviceInstance(deviceHostHandle unsafe.Pointer, deviceType HDV_DEVICE_TYPE, deviceClassId *win32.GUID, deviceInstanceId *win32.GUID, deviceInterface unsafe.Pointer, deviceContext unsafe.Pointer, deviceHandle *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHdvCreateDeviceInstance.Addr(), uintptr(unsafe.Pointer(deviceHostHandle)), uintptr(deviceType), uintptr(unsafe.Pointer(deviceClassId)), uintptr(unsafe.Pointer(deviceInstanceId)), uintptr(unsafe.Pointer(deviceInterface)), uintptr(unsafe.Pointer(deviceContext)), uintptr(unsafe.Pointer(deviceHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HdvCreateGuestMemoryAperture calls vmdevicehost!HdvCreateGuestMemoryAperture.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/hdv/HdvCreateGuestMemoryAperture
-func HdvCreateGuestMemoryAperture(requestor unsafe.Pointer, guestPhysicalAddress uint64, byteCount uint32, writeProtected foundation.BOOL, mappedAddress *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHdvCreateGuestMemoryAperture.Addr(), uintptr(unsafe.Pointer(requestor)), uintptr(guestPhysicalAddress), uintptr(byteCount), uintptr(writeProtected), uintptr(unsafe.Pointer(mappedAddress)))
-	return foundation.HRESULT(r1)
+func HdvCreateGuestMemoryAperture(requestor unsafe.Pointer, guestPhysicalAddress uint64, byteCount uint32, writeProtected bool, mappedAddress *unsafe.Pointer) error {
+	_writeProtected := win32.Bool32(writeProtected)
+	r1, _, _ := syscall.SyscallN(procHdvCreateGuestMemoryAperture.Addr(), uintptr(unsafe.Pointer(requestor)), uintptr(guestPhysicalAddress), uintptr(byteCount), uintptr(_writeProtected), uintptr(unsafe.Pointer(mappedAddress)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HdvCreateSectionBackedMmioRange calls vmdevicehost!HdvCreateSectionBackedMmioRange.
-func HdvCreateSectionBackedMmioRange(requestor unsafe.Pointer, barIndex HDV_PCI_BAR_SELECTOR, offsetInPages uint64, lengthInPages uint64, MappingFlags HDV_MMIO_MAPPING_FLAGS, sectionHandle foundation.HANDLE, sectionOffsetInPages uint64) foundation.HRESULT {
+func HdvCreateSectionBackedMmioRange(requestor unsafe.Pointer, barIndex HDV_PCI_BAR_SELECTOR, offsetInPages uint64, lengthInPages uint64, MappingFlags HDV_MMIO_MAPPING_FLAGS, sectionHandle foundation.HANDLE, sectionOffsetInPages uint64) error {
 	r1, _, _ := syscall.SyscallN(procHdvCreateSectionBackedMmioRange.Addr(), uintptr(unsafe.Pointer(requestor)), uintptr(barIndex), uintptr(offsetInPages), uintptr(lengthInPages), uintptr(MappingFlags), uintptr(sectionHandle), uintptr(sectionOffsetInPages))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HdvDeliverGuestInterrupt calls vmdevicehost!HdvDeliverGuestInterrupt.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/hdv/HdvDeliverGuestInterrupt
-func HdvDeliverGuestInterrupt(requestor unsafe.Pointer, msiAddress uint64, msiData uint32) foundation.HRESULT {
+func HdvDeliverGuestInterrupt(requestor unsafe.Pointer, msiAddress uint64, msiData uint32) error {
 	r1, _, _ := syscall.SyscallN(procHdvDeliverGuestInterrupt.Addr(), uintptr(unsafe.Pointer(requestor)), uintptr(msiAddress), uintptr(msiData))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HdvDestroyGuestMemoryAperture calls vmdevicehost!HdvDestroyGuestMemoryAperture.
-func HdvDestroyGuestMemoryAperture(requestor unsafe.Pointer, mappedAddress unsafe.Pointer) foundation.HRESULT {
+func HdvDestroyGuestMemoryAperture(requestor unsafe.Pointer, mappedAddress unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHdvDestroyGuestMemoryAperture.Addr(), uintptr(unsafe.Pointer(requestor)), uintptr(unsafe.Pointer(mappedAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HdvDestroySectionBackedMmioRange calls vmdevicehost!HdvDestroySectionBackedMmioRange.
-func HdvDestroySectionBackedMmioRange(requestor unsafe.Pointer, barIndex HDV_PCI_BAR_SELECTOR, offsetInPages uint64) foundation.HRESULT {
+func HdvDestroySectionBackedMmioRange(requestor unsafe.Pointer, barIndex HDV_PCI_BAR_SELECTOR, offsetInPages uint64) error {
 	r1, _, _ := syscall.SyscallN(procHdvDestroySectionBackedMmioRange.Addr(), uintptr(unsafe.Pointer(requestor)), uintptr(barIndex), uintptr(offsetInPages))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HdvInitializeDeviceHost calls vmdevicehost!HdvInitializeDeviceHost.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/hdv/HdvInitializeDeviceHost
-func HdvInitializeDeviceHost(computeSystem systemhostcomputesystem.HCS_SYSTEM, deviceHostHandle *unsafe.Pointer) foundation.HRESULT {
+func HdvInitializeDeviceHost(computeSystem systemhostcomputesystem.HCS_SYSTEM, deviceHostHandle *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHdvInitializeDeviceHost.Addr(), uintptr(computeSystem), uintptr(unsafe.Pointer(deviceHostHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HdvInitializeDeviceHostEx calls vmdevicehost!HdvInitializeDeviceHostEx.
-func HdvInitializeDeviceHostEx(computeSystem systemhostcomputesystem.HCS_SYSTEM, flags HDV_DEVICE_HOST_FLAGS, deviceHostHandle *unsafe.Pointer) foundation.HRESULT {
+func HdvInitializeDeviceHostEx(computeSystem systemhostcomputesystem.HCS_SYSTEM, flags HDV_DEVICE_HOST_FLAGS, deviceHostHandle *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHdvInitializeDeviceHostEx.Addr(), uintptr(computeSystem), uintptr(flags), uintptr(unsafe.Pointer(deviceHostHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HdvReadGuestMemory calls vmdevicehost!HdvReadGuestMemory.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/hdv/HdvReadGuestMemory
-func HdvReadGuestMemory(requestor unsafe.Pointer, guestPhysicalAddress uint64, byteCount uint32, buffer *byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHdvReadGuestMemory.Addr(), uintptr(unsafe.Pointer(requestor)), uintptr(guestPhysicalAddress), uintptr(byteCount), uintptr(unsafe.Pointer(buffer)))
-	return foundation.HRESULT(r1)
+func HdvReadGuestMemory(requestor unsafe.Pointer, guestPhysicalAddress uint64, buffer []byte) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHdvReadGuestMemory.Addr(), uintptr(unsafe.Pointer(requestor)), uintptr(guestPhysicalAddress), uintptr(len(buffer)), uintptr(unsafe.Pointer(_buffer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // HdvRegisterDoorbell calls vmdevicehost!HdvRegisterDoorbell.
-func HdvRegisterDoorbell(requestor unsafe.Pointer, BarIndex HDV_PCI_BAR_SELECTOR, BarOffset uint64, TriggerValue uint64, Flags uint64, DoorbellEvent foundation.HANDLE) foundation.HRESULT {
+func HdvRegisterDoorbell(requestor unsafe.Pointer, BarIndex HDV_PCI_BAR_SELECTOR, BarOffset uint64, TriggerValue uint64, Flags uint64, DoorbellEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procHdvRegisterDoorbell.Addr(), uintptr(unsafe.Pointer(requestor)), uintptr(BarIndex), uintptr(BarOffset), uintptr(TriggerValue), uintptr(Flags), uintptr(DoorbellEvent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HdvTeardownDeviceHost calls vmdevicehost!HdvTeardownDeviceHost.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/hdv/HdvTeardownDeviceHost
-func HdvTeardownDeviceHost(deviceHostHandle unsafe.Pointer) foundation.HRESULT {
+func HdvTeardownDeviceHost(deviceHostHandle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procHdvTeardownDeviceHost.Addr(), uintptr(unsafe.Pointer(deviceHostHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HdvUnregisterDoorbell calls vmdevicehost!HdvUnregisterDoorbell.
-func HdvUnregisterDoorbell(requestor unsafe.Pointer, BarIndex HDV_PCI_BAR_SELECTOR, BarOffset uint64, TriggerValue uint64, Flags uint64) foundation.HRESULT {
+func HdvUnregisterDoorbell(requestor unsafe.Pointer, BarIndex HDV_PCI_BAR_SELECTOR, BarOffset uint64, TriggerValue uint64, Flags uint64) error {
 	r1, _, _ := syscall.SyscallN(procHdvUnregisterDoorbell.Addr(), uintptr(unsafe.Pointer(requestor)), uintptr(BarIndex), uintptr(BarOffset), uintptr(TriggerValue), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HdvWriteGuestMemory calls vmdevicehost!HdvWriteGuestMemory.
 // https://learn.microsoft.com/virtualization/api/hcs/Reference/hdv/HdvWriteGuestMemory
-func HdvWriteGuestMemory(requestor unsafe.Pointer, guestPhysicalAddress uint64, byteCount uint32, buffer *byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procHdvWriteGuestMemory.Addr(), uintptr(unsafe.Pointer(requestor)), uintptr(guestPhysicalAddress), uintptr(byteCount), uintptr(unsafe.Pointer(buffer)))
-	return foundation.HRESULT(r1)
+func HdvWriteGuestMemory(requestor unsafe.Pointer, guestPhysicalAddress uint64, buffer []byte) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHdvWriteGuestMemory.Addr(), uintptr(unsafe.Pointer(requestor)), uintptr(guestPhysicalAddress), uintptr(len(buffer)), uintptr(unsafe.Pointer(_buffer)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InKernelSpace calls VmSavedStateDumpProvider!InKernelSpace.
-func InKernelSpace(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, inKernelSpace *foundation.BOOL) foundation.HRESULT {
+func InKernelSpace(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, inKernelSpace *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procInKernelSpace.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(inKernelSpace)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsActiveVirtualTrustLevelEnabled calls VmSavedStateDumpProvider!IsActiveVirtualTrustLevelEnabled.
-func IsActiveVirtualTrustLevelEnabled(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, activeVirtualTrustLevelEnabled *foundation.BOOL) foundation.HRESULT {
+func IsActiveVirtualTrustLevelEnabled(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, activeVirtualTrustLevelEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procIsActiveVirtualTrustLevelEnabled.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(activeVirtualTrustLevelEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsNestedVirtualizationEnabled calls VmSavedStateDumpProvider!IsNestedVirtualizationEnabled.
-func IsNestedVirtualizationEnabled(vmSavedStateDumpHandle unsafe.Pointer, enabled *foundation.BOOL) foundation.HRESULT {
+func IsNestedVirtualizationEnabled(vmSavedStateDumpHandle unsafe.Pointer, enabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procIsNestedVirtualizationEnabled.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(unsafe.Pointer(enabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadSavedStateFile calls VmSavedStateDumpProvider!LoadSavedStateFile.
-func LoadSavedStateFile(vmrsFile foundation.PWSTR, vmSavedStateDumpHandle *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procLoadSavedStateFile.Addr(), uintptr(unsafe.Pointer(vmrsFile)), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)))
-	return foundation.HRESULT(r1)
+func LoadSavedStateFile(vmrsFile string, vmSavedStateDumpHandle *unsafe.Pointer) error {
+	_vmrsFile := win32.UTF16Ptr(vmrsFile)
+	r1, _, _ := syscall.SyscallN(procLoadSavedStateFile.Addr(), uintptr(unsafe.Pointer(_vmrsFile)), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadSavedStateFiles calls VmSavedStateDumpProvider!LoadSavedStateFiles.
-func LoadSavedStateFiles(binFile foundation.PWSTR, vsvFile foundation.PWSTR, vmSavedStateDumpHandle *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procLoadSavedStateFiles.Addr(), uintptr(unsafe.Pointer(binFile)), uintptr(unsafe.Pointer(vsvFile)), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)))
-	return foundation.HRESULT(r1)
+func LoadSavedStateFiles(binFile string, vsvFile string, vmSavedStateDumpHandle *unsafe.Pointer) error {
+	_binFile := win32.UTF16Ptr(binFile)
+	_vsvFile := win32.UTF16Ptr(vsvFile)
+	r1, _, _ := syscall.SyscallN(procLoadSavedStateFiles.Addr(), uintptr(unsafe.Pointer(_binFile)), uintptr(unsafe.Pointer(_vsvFile)), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadSavedStateModuleSymbols calls VmSavedStateDumpProvider!LoadSavedStateModuleSymbols.
-func LoadSavedStateModuleSymbols(vmSavedStateDumpHandle unsafe.Pointer, imageName foundation.PSTR, moduleName foundation.PSTR, baseAddress uint64, sizeOfBase uint32) foundation.HRESULT {
+func LoadSavedStateModuleSymbols(vmSavedStateDumpHandle unsafe.Pointer, imageName foundation.PSTR, moduleName foundation.PSTR, baseAddress uint64, sizeOfBase uint32) error {
 	r1, _, _ := syscall.SyscallN(procLoadSavedStateModuleSymbols.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(unsafe.Pointer(imageName)), uintptr(unsafe.Pointer(moduleName)), uintptr(baseAddress), uintptr(sizeOfBase))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadSavedStateModuleSymbolsEx calls VmSavedStateDumpProvider!LoadSavedStateModuleSymbolsEx.
-func LoadSavedStateModuleSymbolsEx(vmSavedStateDumpHandle unsafe.Pointer, imageName foundation.PSTR, imageTimestamp uint32, moduleName foundation.PSTR, baseAddress uint64, sizeOfBase uint32) foundation.HRESULT {
+func LoadSavedStateModuleSymbolsEx(vmSavedStateDumpHandle unsafe.Pointer, imageName foundation.PSTR, imageTimestamp uint32, moduleName foundation.PSTR, baseAddress uint64, sizeOfBase uint32) error {
 	r1, _, _ := syscall.SyscallN(procLoadSavedStateModuleSymbolsEx.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(unsafe.Pointer(imageName)), uintptr(imageTimestamp), uintptr(unsafe.Pointer(moduleName)), uintptr(baseAddress), uintptr(sizeOfBase))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadSavedStateSymbolProvider calls VmSavedStateDumpProvider!LoadSavedStateSymbolProvider.
-func LoadSavedStateSymbolProvider(vmSavedStateDumpHandle unsafe.Pointer, userSymbols foundation.PWSTR, force foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procLoadSavedStateSymbolProvider.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(unsafe.Pointer(userSymbols)), uintptr(force))
-	return foundation.HRESULT(r1)
+func LoadSavedStateSymbolProvider(vmSavedStateDumpHandle unsafe.Pointer, userSymbols string, force bool) error {
+	_userSymbols := win32.UTF16Ptr(userSymbols)
+	_force := win32.Bool32(force)
+	r1, _, _ := syscall.SyscallN(procLoadSavedStateSymbolProvider.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(unsafe.Pointer(_userSymbols)), uintptr(_force))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LocateSavedStateFiles calls VmSavedStateDumpProvider!LocateSavedStateFiles.
-func LocateSavedStateFiles(vmName foundation.PWSTR, snapshotName foundation.PWSTR, binPath *foundation.PWSTR, vsvPath *foundation.PWSTR, vmrsPath *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procLocateSavedStateFiles.Addr(), uintptr(unsafe.Pointer(vmName)), uintptr(unsafe.Pointer(snapshotName)), uintptr(unsafe.Pointer(binPath)), uintptr(unsafe.Pointer(vsvPath)), uintptr(unsafe.Pointer(vmrsPath)))
-	return foundation.HRESULT(r1)
+func LocateSavedStateFiles(vmName string, snapshotName string, binPath *foundation.PWSTR, vsvPath *foundation.PWSTR, vmrsPath *foundation.PWSTR) error {
+	_vmName := win32.UTF16Ptr(vmName)
+	_snapshotName := win32.UTF16Ptr(snapshotName)
+	r1, _, _ := syscall.SyscallN(procLocateSavedStateFiles.Addr(), uintptr(unsafe.Pointer(_vmName)), uintptr(unsafe.Pointer(_snapshotName)), uintptr(unsafe.Pointer(binPath)), uintptr(unsafe.Pointer(vsvPath)), uintptr(unsafe.Pointer(vmrsPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadGuestPhysicalAddress calls VmSavedStateDumpProvider!ReadGuestPhysicalAddress.
-func ReadGuestPhysicalAddress(vmSavedStateDumpHandle unsafe.Pointer, physicalAddress uint64, buffer unsafe.Pointer, bufferSize uint32, bytesRead *uint32) foundation.HRESULT {
+func ReadGuestPhysicalAddress(vmSavedStateDumpHandle unsafe.Pointer, physicalAddress uint64, buffer unsafe.Pointer, bufferSize uint32, bytesRead *uint32) error {
 	r1, _, _ := syscall.SyscallN(procReadGuestPhysicalAddress.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(physicalAddress), uintptr(unsafe.Pointer(buffer)), uintptr(bufferSize), uintptr(unsafe.Pointer(bytesRead)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadGuestRawSavedMemory calls VmSavedStateDumpProvider!ReadGuestRawSavedMemory.
-func ReadGuestRawSavedMemory(vmSavedStateDumpHandle unsafe.Pointer, rawSavedMemoryOffset uint64, buffer unsafe.Pointer, bufferSize uint32, bytesRead *uint32) foundation.HRESULT {
+func ReadGuestRawSavedMemory(vmSavedStateDumpHandle unsafe.Pointer, rawSavedMemoryOffset uint64, buffer unsafe.Pointer, bufferSize uint32, bytesRead *uint32) error {
 	r1, _, _ := syscall.SyscallN(procReadGuestRawSavedMemory.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(rawSavedMemoryOffset), uintptr(unsafe.Pointer(buffer)), uintptr(bufferSize), uintptr(unsafe.Pointer(bytesRead)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadSavedStateGlobalVariable calls VmSavedStateDumpProvider!ReadSavedStateGlobalVariable.
-func ReadSavedStateGlobalVariable(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, globalName foundation.PSTR, buffer unsafe.Pointer, bufferSize uint32) foundation.HRESULT {
+func ReadSavedStateGlobalVariable(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, globalName foundation.PSTR, buffer unsafe.Pointer, bufferSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procReadSavedStateGlobalVariable.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(globalName)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseSavedStateFiles calls VmSavedStateDumpProvider!ReleaseSavedStateFiles.
-func ReleaseSavedStateFiles(vmSavedStateDumpHandle unsafe.Pointer) foundation.HRESULT {
+func ReleaseSavedStateFiles(vmSavedStateDumpHandle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procReleaseSavedStateFiles.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseSavedStateSymbolProvider calls VmSavedStateDumpProvider!ReleaseSavedStateSymbolProvider.
-func ReleaseSavedStateSymbolProvider(vmSavedStateDumpHandle unsafe.Pointer) foundation.HRESULT {
+func ReleaseSavedStateSymbolProvider(vmSavedStateDumpHandle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procReleaseSavedStateSymbolProvider.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResolveSavedStateGlobalVariableAddress calls VmSavedStateDumpProvider!ResolveSavedStateGlobalVariableAddress.
-func ResolveSavedStateGlobalVariableAddress(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, globalName foundation.PSTR, virtualAddress *uint64, size *uint32) foundation.HRESULT {
+func ResolveSavedStateGlobalVariableAddress(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, globalName foundation.PSTR, virtualAddress *uint64, size *uint32) error {
 	r1, _, _ := syscall.SyscallN(procResolveSavedStateGlobalVariableAddress.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(unsafe.Pointer(globalName)), uintptr(unsafe.Pointer(virtualAddress)), uintptr(unsafe.Pointer(size)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScanMemoryForDosImages calls VmSavedStateDumpProvider!ScanMemoryForDosImages.
-func ScanMemoryForDosImages(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, startAddress uint64, endAddress uint64, callbackContext unsafe.Pointer, foundImageCallback FOUND_IMAGE_CALLBACK, standaloneAddress *uint64, standaloneAddressCount uint32) foundation.HRESULT {
+func ScanMemoryForDosImages(vmSavedStateDumpHandle unsafe.Pointer, vpId uint32, startAddress uint64, endAddress uint64, callbackContext unsafe.Pointer, foundImageCallback FOUND_IMAGE_CALLBACK, standaloneAddress *uint64, standaloneAddressCount uint32) error {
 	r1, _, _ := syscall.SyscallN(procScanMemoryForDosImages.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(vpId), uintptr(startAddress), uintptr(endAddress), uintptr(unsafe.Pointer(callbackContext)), uintptr(foundImageCallback), uintptr(unsafe.Pointer(standaloneAddress)), uintptr(standaloneAddressCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMemoryBlockCacheLimit calls VmSavedStateDumpProvider!SetMemoryBlockCacheLimit.
-func SetMemoryBlockCacheLimit(vmSavedStateDumpHandle unsafe.Pointer, memoryBlockCacheLimit uint64) foundation.HRESULT {
+func SetMemoryBlockCacheLimit(vmSavedStateDumpHandle unsafe.Pointer, memoryBlockCacheLimit uint64) error {
 	r1, _, _ := syscall.SyscallN(procSetMemoryBlockCacheLimit.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(memoryBlockCacheLimit))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSavedStateSymbolProviderDebugInfoCallback calls VmSavedStateDumpProvider!SetSavedStateSymbolProviderDebugInfoCallback.
-func SetSavedStateSymbolProviderDebugInfoCallback(vmSavedStateDumpHandle unsafe.Pointer, Callback GUEST_SYMBOLS_PROVIDER_DEBUG_INFO_CALLBACK) foundation.HRESULT {
+func SetSavedStateSymbolProviderDebugInfoCallback(vmSavedStateDumpHandle unsafe.Pointer, Callback GUEST_SYMBOLS_PROVIDER_DEBUG_INFO_CALLBACK) error {
 	r1, _, _ := syscall.SyscallN(procSetSavedStateSymbolProviderDebugInfoCallback.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(Callback))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvAcceptPartitionMigration calls WinHvPlatform!WHvAcceptPartitionMigration.
-func WHvAcceptPartitionMigration(MigrationHandle foundation.HANDLE, Partition *WHV_PARTITION_HANDLE) foundation.HRESULT {
+func WHvAcceptPartitionMigration(MigrationHandle foundation.HANDLE, Partition *WHV_PARTITION_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvAcceptPartitionMigration.Addr(), uintptr(MigrationHandle), uintptr(unsafe.Pointer(Partition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvAdviseGpaRange calls WinHvPlatform!WHvAdviseGpaRange.
-func WHvAdviseGpaRange(Partition WHV_PARTITION_HANDLE, GpaRanges *WHV_MEMORY_RANGE_ENTRY, GpaRangesCount uint32, Advice WHV_ADVISE_GPA_RANGE_CODE, AdviceBuffer unsafe.Pointer, AdviceBufferSizeInBytes uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWHvAdviseGpaRange.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(GpaRanges)), uintptr(GpaRangesCount), uintptr(Advice), uintptr(unsafe.Pointer(AdviceBuffer)), uintptr(AdviceBufferSizeInBytes))
-	return foundation.HRESULT(r1)
+func WHvAdviseGpaRange(Partition WHV_PARTITION_HANDLE, GpaRanges []WHV_MEMORY_RANGE_ENTRY, Advice WHV_ADVISE_GPA_RANGE_CODE, AdviceBuffer unsafe.Pointer, AdviceBufferSizeInBytes uint32) error {
+	var _GpaRanges *WHV_MEMORY_RANGE_ENTRY
+	if len(GpaRanges) > 0 {
+		_GpaRanges = &GpaRanges[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvAdviseGpaRange.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(_GpaRanges)), uintptr(len(GpaRanges)), uintptr(Advice), uintptr(unsafe.Pointer(AdviceBuffer)), uintptr(AdviceBufferSizeInBytes))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvAllocateVpciResource calls WinHvPlatform!WHvAllocateVpciResource.
-func WHvAllocateVpciResource(ProviderId *win32.GUID, Flags WHV_ALLOCATE_VPCI_RESOURCE_FLAGS, ResourceDescriptor unsafe.Pointer, ResourceDescriptorSizeInBytes uint32, VpciResource *foundation.HANDLE) foundation.HRESULT {
+func WHvAllocateVpciResource(ProviderId *win32.GUID, Flags WHV_ALLOCATE_VPCI_RESOURCE_FLAGS, ResourceDescriptor unsafe.Pointer, ResourceDescriptorSizeInBytes uint32, VpciResource *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvAllocateVpciResource.Addr(), uintptr(unsafe.Pointer(ProviderId)), uintptr(Flags), uintptr(unsafe.Pointer(ResourceDescriptor)), uintptr(ResourceDescriptorSizeInBytes), uintptr(unsafe.Pointer(VpciResource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvCancelPartitionMigration calls WinHvPlatform!WHvCancelPartitionMigration.
-func WHvCancelPartitionMigration(Partition WHV_PARTITION_HANDLE) foundation.HRESULT {
+func WHvCancelPartitionMigration(Partition WHV_PARTITION_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvCancelPartitionMigration.Addr(), uintptr(Partition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvCancelRunVirtualProcessor calls WinHvPlatform!WHvCancelRunVirtualProcessor.
-func WHvCancelRunVirtualProcessor(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Flags uint32) foundation.HRESULT {
+func WHvCancelRunVirtualProcessor(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvCancelRunVirtualProcessor.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvCompletePartitionMigration calls WinHvPlatform!WHvCompletePartitionMigration.
-func WHvCompletePartitionMigration(Partition WHV_PARTITION_HANDLE) foundation.HRESULT {
+func WHvCompletePartitionMigration(Partition WHV_PARTITION_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvCompletePartitionMigration.Addr(), uintptr(Partition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvCreateNotificationPort calls WinHvPlatform!WHvCreateNotificationPort.
-func WHvCreateNotificationPort(Partition WHV_PARTITION_HANDLE, Parameters *WHV_NOTIFICATION_PORT_PARAMETERS, EventHandle foundation.HANDLE, PortHandle *unsafe.Pointer) foundation.HRESULT {
+func WHvCreateNotificationPort(Partition WHV_PARTITION_HANDLE, Parameters *WHV_NOTIFICATION_PORT_PARAMETERS, EventHandle foundation.HANDLE, PortHandle *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWHvCreateNotificationPort.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(Parameters)), uintptr(EventHandle), uintptr(unsafe.Pointer(PortHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvCreatePartition calls WinHvPlatform!WHvCreatePartition.
-func WHvCreatePartition(Partition *WHV_PARTITION_HANDLE) foundation.HRESULT {
+func WHvCreatePartition(Partition *WHV_PARTITION_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvCreatePartition.Addr(), uintptr(unsafe.Pointer(Partition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvCreateTrigger calls WinHvPlatform!WHvCreateTrigger.
-func WHvCreateTrigger(Partition WHV_PARTITION_HANDLE, Parameters *WHV_TRIGGER_PARAMETERS, TriggerHandle *unsafe.Pointer, EventHandle *foundation.HANDLE) foundation.HRESULT {
+func WHvCreateTrigger(Partition WHV_PARTITION_HANDLE, Parameters *WHV_TRIGGER_PARAMETERS, TriggerHandle *unsafe.Pointer, EventHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvCreateTrigger.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(Parameters)), uintptr(unsafe.Pointer(TriggerHandle)), uintptr(unsafe.Pointer(EventHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvCreateVirtualProcessor calls WinHvPlatform!WHvCreateVirtualProcessor.
-func WHvCreateVirtualProcessor(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Flags uint32) foundation.HRESULT {
+func WHvCreateVirtualProcessor(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvCreateVirtualProcessor.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvCreateVirtualProcessor2 calls WinHvPlatform!WHvCreateVirtualProcessor2.
-func WHvCreateVirtualProcessor2(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Properties *WHV_VIRTUAL_PROCESSOR_PROPERTY, PropertyCount uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWHvCreateVirtualProcessor2.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(Properties)), uintptr(PropertyCount))
-	return foundation.HRESULT(r1)
+func WHvCreateVirtualProcessor2(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Properties []WHV_VIRTUAL_PROCESSOR_PROPERTY) error {
+	var _Properties *WHV_VIRTUAL_PROCESSOR_PROPERTY
+	if len(Properties) > 0 {
+		_Properties = &Properties[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvCreateVirtualProcessor2.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(_Properties)), uintptr(len(Properties)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvCreateVpciDevice calls WinHvPlatform!WHvCreateVpciDevice.
-func WHvCreateVpciDevice(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, VpciResource foundation.HANDLE, Flags WHV_CREATE_VPCI_DEVICE_FLAGS, NotificationEventHandle foundation.HANDLE) foundation.HRESULT {
+func WHvCreateVpciDevice(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, VpciResource foundation.HANDLE, Flags WHV_CREATE_VPCI_DEVICE_FLAGS, NotificationEventHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvCreateVpciDevice.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(VpciResource), uintptr(Flags), uintptr(NotificationEventHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvDeleteNotificationPort calls WinHvPlatform!WHvDeleteNotificationPort.
-func WHvDeleteNotificationPort(Partition WHV_PARTITION_HANDLE, PortHandle unsafe.Pointer) foundation.HRESULT {
+func WHvDeleteNotificationPort(Partition WHV_PARTITION_HANDLE, PortHandle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWHvDeleteNotificationPort.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(PortHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvDeletePartition calls WinHvPlatform!WHvDeletePartition.
-func WHvDeletePartition(Partition WHV_PARTITION_HANDLE) foundation.HRESULT {
+func WHvDeletePartition(Partition WHV_PARTITION_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvDeletePartition.Addr(), uintptr(Partition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvDeleteTrigger calls WinHvPlatform!WHvDeleteTrigger.
-func WHvDeleteTrigger(Partition WHV_PARTITION_HANDLE, TriggerHandle unsafe.Pointer) foundation.HRESULT {
+func WHvDeleteTrigger(Partition WHV_PARTITION_HANDLE, TriggerHandle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWHvDeleteTrigger.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(TriggerHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvDeleteVirtualProcessor calls WinHvPlatform!WHvDeleteVirtualProcessor.
-func WHvDeleteVirtualProcessor(Partition WHV_PARTITION_HANDLE, VpIndex uint32) foundation.HRESULT {
+func WHvDeleteVirtualProcessor(Partition WHV_PARTITION_HANDLE, VpIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvDeleteVirtualProcessor.Addr(), uintptr(Partition), uintptr(VpIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvDeleteVpciDevice calls WinHvPlatform!WHvDeleteVpciDevice.
-func WHvDeleteVpciDevice(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64) foundation.HRESULT {
+func WHvDeleteVpciDevice(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64) error {
 	r1, _, _ := syscall.SyscallN(procWHvDeleteVpciDevice.Addr(), uintptr(Partition), uintptr(LogicalDeviceId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvEmulatorCreateEmulator calls WinHvEmulation!WHvEmulatorCreateEmulator.
-func WHvEmulatorCreateEmulator(Callbacks *WHV_EMULATOR_CALLBACKS, Emulator *unsafe.Pointer) foundation.HRESULT {
+func WHvEmulatorCreateEmulator(Callbacks *WHV_EMULATOR_CALLBACKS, Emulator *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWHvEmulatorCreateEmulator.Addr(), uintptr(unsafe.Pointer(Callbacks)), uintptr(unsafe.Pointer(Emulator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvEmulatorDestroyEmulator calls WinHvEmulation!WHvEmulatorDestroyEmulator.
-func WHvEmulatorDestroyEmulator(Emulator unsafe.Pointer) foundation.HRESULT {
+func WHvEmulatorDestroyEmulator(Emulator unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWHvEmulatorDestroyEmulator.Addr(), uintptr(unsafe.Pointer(Emulator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvEmulatorTryIoEmulation calls WinHvEmulation!WHvEmulatorTryIoEmulation.
-func WHvEmulatorTryIoEmulation(Emulator unsafe.Pointer, Context unsafe.Pointer, VpContext *WHV_VP_EXIT_CONTEXT, IoInstructionContext *WHV_X64_IO_PORT_ACCESS_CONTEXT, EmulatorReturnStatus *WHV_EMULATOR_STATUS) foundation.HRESULT {
+func WHvEmulatorTryIoEmulation(Emulator unsafe.Pointer, Context unsafe.Pointer, VpContext *WHV_VP_EXIT_CONTEXT, IoInstructionContext *WHV_X64_IO_PORT_ACCESS_CONTEXT, EmulatorReturnStatus *WHV_EMULATOR_STATUS) error {
 	r1, _, _ := syscall.SyscallN(procWHvEmulatorTryIoEmulation.Addr(), uintptr(unsafe.Pointer(Emulator)), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(VpContext)), uintptr(unsafe.Pointer(IoInstructionContext)), uintptr(unsafe.Pointer(EmulatorReturnStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvEmulatorTryMmioEmulation calls WinHvEmulation!WHvEmulatorTryMmioEmulation.
-func WHvEmulatorTryMmioEmulation(Emulator unsafe.Pointer, Context unsafe.Pointer, VpContext *WHV_VP_EXIT_CONTEXT, MmioInstructionContext *WHV_MEMORY_ACCESS_CONTEXT, EmulatorReturnStatus *WHV_EMULATOR_STATUS) foundation.HRESULT {
+func WHvEmulatorTryMmioEmulation(Emulator unsafe.Pointer, Context unsafe.Pointer, VpContext *WHV_VP_EXIT_CONTEXT, MmioInstructionContext *WHV_MEMORY_ACCESS_CONTEXT, EmulatorReturnStatus *WHV_EMULATOR_STATUS) error {
 	r1, _, _ := syscall.SyscallN(procWHvEmulatorTryMmioEmulation.Addr(), uintptr(unsafe.Pointer(Emulator)), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(VpContext)), uintptr(unsafe.Pointer(MmioInstructionContext)), uintptr(unsafe.Pointer(EmulatorReturnStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetCapability calls WinHvPlatform!WHvGetCapability.
-func WHvGetCapability(CapabilityCode WHV_CAPABILITY_CODE, CapabilityBuffer unsafe.Pointer, CapabilityBufferSizeInBytes uint32, WrittenSizeInBytes *uint32) foundation.HRESULT {
+func WHvGetCapability(CapabilityCode WHV_CAPABILITY_CODE, CapabilityBuffer unsafe.Pointer, CapabilityBufferSizeInBytes uint32, WrittenSizeInBytes *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvGetCapability.Addr(), uintptr(CapabilityCode), uintptr(unsafe.Pointer(CapabilityBuffer)), uintptr(CapabilityBufferSizeInBytes), uintptr(unsafe.Pointer(WrittenSizeInBytes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetInterruptTargetVpSet calls WinHvPlatform!WHvGetInterruptTargetVpSet.
-func WHvGetInterruptTargetVpSet(Partition WHV_PARTITION_HANDLE, Destination uint64, DestinationMode WHV_INTERRUPT_DESTINATION_MODE, TargetVps *uint32, VpCount uint32, TargetVpCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procWHvGetInterruptTargetVpSet.Addr(), uintptr(Partition), uintptr(Destination), uintptr(DestinationMode), uintptr(unsafe.Pointer(TargetVps)), uintptr(VpCount), uintptr(unsafe.Pointer(TargetVpCount)))
-	return foundation.HRESULT(r1)
+func WHvGetInterruptTargetVpSet(Partition WHV_PARTITION_HANDLE, Destination uint64, DestinationMode WHV_INTERRUPT_DESTINATION_MODE, TargetVps []uint32, TargetVpCount *uint32) error {
+	var _TargetVps *uint32
+	if len(TargetVps) > 0 {
+		_TargetVps = &TargetVps[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvGetInterruptTargetVpSet.Addr(), uintptr(Partition), uintptr(Destination), uintptr(DestinationMode), uintptr(unsafe.Pointer(_TargetVps)), uintptr(len(TargetVps)), uintptr(unsafe.Pointer(TargetVpCount)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetPartitionCounters calls WinHvPlatform!WHvGetPartitionCounters.
-func WHvGetPartitionCounters(Partition WHV_PARTITION_HANDLE, CounterSet WHV_PARTITION_COUNTER_SET, Buffer unsafe.Pointer, BufferSizeInBytes uint32, BytesWritten *uint32) foundation.HRESULT {
+func WHvGetPartitionCounters(Partition WHV_PARTITION_HANDLE, CounterSet WHV_PARTITION_COUNTER_SET, Buffer unsafe.Pointer, BufferSizeInBytes uint32, BytesWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvGetPartitionCounters.Addr(), uintptr(Partition), uintptr(CounterSet), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSizeInBytes), uintptr(unsafe.Pointer(BytesWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetPartitionProperty calls WinHvPlatform!WHvGetPartitionProperty.
-func WHvGetPartitionProperty(Partition WHV_PARTITION_HANDLE, PropertyCode WHV_PARTITION_PROPERTY_CODE, PropertyBuffer unsafe.Pointer, PropertyBufferSizeInBytes uint32, WrittenSizeInBytes *uint32) foundation.HRESULT {
+func WHvGetPartitionProperty(Partition WHV_PARTITION_HANDLE, PropertyCode WHV_PARTITION_PROPERTY_CODE, PropertyBuffer unsafe.Pointer, PropertyBufferSizeInBytes uint32, WrittenSizeInBytes *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvGetPartitionProperty.Addr(), uintptr(Partition), uintptr(PropertyCode), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSizeInBytes), uintptr(unsafe.Pointer(WrittenSizeInBytes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetVirtualProcessorCounters calls WinHvPlatform!WHvGetVirtualProcessorCounters.
-func WHvGetVirtualProcessorCounters(Partition WHV_PARTITION_HANDLE, VpIndex uint32, CounterSet WHV_PROCESSOR_COUNTER_SET, Buffer unsafe.Pointer, BufferSizeInBytes uint32, BytesWritten *uint32) foundation.HRESULT {
+func WHvGetVirtualProcessorCounters(Partition WHV_PARTITION_HANDLE, VpIndex uint32, CounterSet WHV_PROCESSOR_COUNTER_SET, Buffer unsafe.Pointer, BufferSizeInBytes uint32, BytesWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorCounters.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(CounterSet), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSizeInBytes), uintptr(unsafe.Pointer(BytesWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetVirtualProcessorCpuidOutput calls WinHvPlatform!WHvGetVirtualProcessorCpuidOutput.
-func WHvGetVirtualProcessorCpuidOutput(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Eax uint32, Ecx uint32, CpuidOutput *WHV_CPUID_OUTPUT) foundation.HRESULT {
+func WHvGetVirtualProcessorCpuidOutput(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Eax uint32, Ecx uint32, CpuidOutput *WHV_CPUID_OUTPUT) error {
 	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorCpuidOutput.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(Eax), uintptr(Ecx), uintptr(unsafe.Pointer(CpuidOutput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetVirtualProcessorInterruptControllerState calls WinHvPlatform!WHvGetVirtualProcessorInterruptControllerState.
-func WHvGetVirtualProcessorInterruptControllerState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State unsafe.Pointer, StateSize uint32, WrittenSize *uint32) foundation.HRESULT {
+func WHvGetVirtualProcessorInterruptControllerState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State unsafe.Pointer, StateSize uint32, WrittenSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorInterruptControllerState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(State)), uintptr(StateSize), uintptr(unsafe.Pointer(WrittenSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetVirtualProcessorInterruptControllerState2 calls WinHvPlatform!WHvGetVirtualProcessorInterruptControllerState2.
-func WHvGetVirtualProcessorInterruptControllerState2(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State unsafe.Pointer, StateSize uint32, WrittenSize *uint32) foundation.HRESULT {
+func WHvGetVirtualProcessorInterruptControllerState2(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State unsafe.Pointer, StateSize uint32, WrittenSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorInterruptControllerState2.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(State)), uintptr(StateSize), uintptr(unsafe.Pointer(WrittenSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetVirtualProcessorRegisters calls WinHvPlatform!WHvGetVirtualProcessorRegisters.
-func WHvGetVirtualProcessorRegisters(Partition WHV_PARTITION_HANDLE, VpIndex uint32, RegisterNames *WHV_REGISTER_NAME, RegisterCount uint32, RegisterValues *WHV_REGISTER_VALUE) foundation.HRESULT {
+func WHvGetVirtualProcessorRegisters(Partition WHV_PARTITION_HANDLE, VpIndex uint32, RegisterNames *WHV_REGISTER_NAME, RegisterCount uint32, RegisterValues *WHV_REGISTER_VALUE) error {
 	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorRegisters.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(RegisterNames)), uintptr(RegisterCount), uintptr(unsafe.Pointer(RegisterValues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetVirtualProcessorState calls WinHvPlatform!WHvGetVirtualProcessorState.
-func WHvGetVirtualProcessorState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, StateType WHV_VIRTUAL_PROCESSOR_STATE_TYPE, Buffer unsafe.Pointer, BufferSizeInBytes uint32, BytesWritten *uint32) foundation.HRESULT {
+func WHvGetVirtualProcessorState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, StateType WHV_VIRTUAL_PROCESSOR_STATE_TYPE, Buffer unsafe.Pointer, BufferSizeInBytes uint32, BytesWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(StateType), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSizeInBytes), uintptr(unsafe.Pointer(BytesWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetVirtualProcessorXsaveState calls WinHvPlatform!WHvGetVirtualProcessorXsaveState.
-func WHvGetVirtualProcessorXsaveState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Buffer unsafe.Pointer, BufferSizeInBytes uint32, BytesWritten *uint32) foundation.HRESULT {
+func WHvGetVirtualProcessorXsaveState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Buffer unsafe.Pointer, BufferSizeInBytes uint32, BytesWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorXsaveState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSizeInBytes), uintptr(unsafe.Pointer(BytesWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetVpciDeviceInterruptTarget calls WinHvPlatform!WHvGetVpciDeviceInterruptTarget.
-func WHvGetVpciDeviceInterruptTarget(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, Index uint32, MultiMessageNumber uint32, Target *WHV_VPCI_INTERRUPT_TARGET, TargetSizeInBytes uint32, BytesWritten *uint32) foundation.HRESULT {
+func WHvGetVpciDeviceInterruptTarget(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, Index uint32, MultiMessageNumber uint32, Target *WHV_VPCI_INTERRUPT_TARGET, TargetSizeInBytes uint32, BytesWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvGetVpciDeviceInterruptTarget.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(Index), uintptr(MultiMessageNumber), uintptr(unsafe.Pointer(Target)), uintptr(TargetSizeInBytes), uintptr(unsafe.Pointer(BytesWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetVpciDeviceNotification calls WinHvPlatform!WHvGetVpciDeviceNotification.
-func WHvGetVpciDeviceNotification(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, Notification *WHV_VPCI_DEVICE_NOTIFICATION, NotificationSizeInBytes uint32) foundation.HRESULT {
+func WHvGetVpciDeviceNotification(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, Notification *WHV_VPCI_DEVICE_NOTIFICATION, NotificationSizeInBytes uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvGetVpciDeviceNotification.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(unsafe.Pointer(Notification)), uintptr(NotificationSizeInBytes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetVpciDeviceProperty calls WinHvPlatform!WHvGetVpciDeviceProperty.
-func WHvGetVpciDeviceProperty(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, PropertyCode WHV_VPCI_DEVICE_PROPERTY_CODE, PropertyBuffer unsafe.Pointer, PropertyBufferSizeInBytes uint32, WrittenSizeInBytes *uint32) foundation.HRESULT {
+func WHvGetVpciDeviceProperty(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, PropertyCode WHV_VPCI_DEVICE_PROPERTY_CODE, PropertyBuffer unsafe.Pointer, PropertyBufferSizeInBytes uint32, WrittenSizeInBytes *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvGetVpciDeviceProperty.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(PropertyCode), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSizeInBytes), uintptr(unsafe.Pointer(WrittenSizeInBytes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvMapGpaRange calls WinHvPlatform!WHvMapGpaRange.
-func WHvMapGpaRange(Partition WHV_PARTITION_HANDLE, SourceAddress unsafe.Pointer, GuestAddress uint64, SizeInBytes uint64, Flags WHV_MAP_GPA_RANGE_FLAGS) foundation.HRESULT {
+func WHvMapGpaRange(Partition WHV_PARTITION_HANDLE, SourceAddress unsafe.Pointer, GuestAddress uint64, SizeInBytes uint64, Flags WHV_MAP_GPA_RANGE_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(procWHvMapGpaRange.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(SourceAddress)), uintptr(GuestAddress), uintptr(SizeInBytes), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvMapGpaRange2 calls WinHvPlatform!WHvMapGpaRange2.
-func WHvMapGpaRange2(Partition WHV_PARTITION_HANDLE, Process foundation.HANDLE, SourceAddress unsafe.Pointer, GuestAddress uint64, SizeInBytes uint64, Flags WHV_MAP_GPA_RANGE_FLAGS) foundation.HRESULT {
+func WHvMapGpaRange2(Partition WHV_PARTITION_HANDLE, Process foundation.HANDLE, SourceAddress unsafe.Pointer, GuestAddress uint64, SizeInBytes uint64, Flags WHV_MAP_GPA_RANGE_FLAGS) error {
 	r1, _, _ := syscall.SyscallN(procWHvMapGpaRange2.Addr(), uintptr(Partition), uintptr(Process), uintptr(unsafe.Pointer(SourceAddress)), uintptr(GuestAddress), uintptr(SizeInBytes), uintptr(Flags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvMapVpciDeviceInterrupt calls WinHvPlatform!WHvMapVpciDeviceInterrupt.
-func WHvMapVpciDeviceInterrupt(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, Index uint32, MessageCount uint32, Target *WHV_VPCI_INTERRUPT_TARGET, MsiAddress *uint64, MsiData *uint32) foundation.HRESULT {
+func WHvMapVpciDeviceInterrupt(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, Index uint32, MessageCount uint32, Target *WHV_VPCI_INTERRUPT_TARGET, MsiAddress *uint64, MsiData *uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvMapVpciDeviceInterrupt.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(Index), uintptr(MessageCount), uintptr(unsafe.Pointer(Target)), uintptr(unsafe.Pointer(MsiAddress)), uintptr(unsafe.Pointer(MsiData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvMapVpciDeviceMmioRanges calls WinHvPlatform!WHvMapVpciDeviceMmioRanges.
-func WHvMapVpciDeviceMmioRanges(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, MappingCount *uint32, Mappings **WHV_VPCI_MMIO_MAPPING) foundation.HRESULT {
+func WHvMapVpciDeviceMmioRanges(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, MappingCount *uint32, Mappings **WHV_VPCI_MMIO_MAPPING) error {
 	r1, _, _ := syscall.SyscallN(procWHvMapVpciDeviceMmioRanges.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(unsafe.Pointer(MappingCount)), uintptr(unsafe.Pointer(Mappings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvPostVirtualProcessorSynicMessage calls WinHvPlatform!WHvPostVirtualProcessorSynicMessage.
-func WHvPostVirtualProcessorSynicMessage(Partition WHV_PARTITION_HANDLE, VpIndex uint32, SintIndex uint32, Message unsafe.Pointer, MessageSizeInBytes uint32) foundation.HRESULT {
+func WHvPostVirtualProcessorSynicMessage(Partition WHV_PARTITION_HANDLE, VpIndex uint32, SintIndex uint32, Message unsafe.Pointer, MessageSizeInBytes uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvPostVirtualProcessorSynicMessage.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(SintIndex), uintptr(unsafe.Pointer(Message)), uintptr(MessageSizeInBytes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvQueryGpaRangeDirtyBitmap calls WinHvPlatform!WHvQueryGpaRangeDirtyBitmap.
-func WHvQueryGpaRangeDirtyBitmap(Partition WHV_PARTITION_HANDLE, GuestAddress uint64, RangeSizeInBytes uint64, Bitmap *uint64, BitmapSizeInBytes uint32) foundation.HRESULT {
+func WHvQueryGpaRangeDirtyBitmap(Partition WHV_PARTITION_HANDLE, GuestAddress uint64, RangeSizeInBytes uint64, Bitmap *uint64, BitmapSizeInBytes uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvQueryGpaRangeDirtyBitmap.Addr(), uintptr(Partition), uintptr(GuestAddress), uintptr(RangeSizeInBytes), uintptr(unsafe.Pointer(Bitmap)), uintptr(BitmapSizeInBytes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvReadVpciDeviceRegister calls WinHvPlatform!WHvReadVpciDeviceRegister.
-func WHvReadVpciDeviceRegister(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, Register *WHV_VPCI_DEVICE_REGISTER, Data unsafe.Pointer) foundation.HRESULT {
+func WHvReadVpciDeviceRegister(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, Register *WHV_VPCI_DEVICE_REGISTER, Data unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWHvReadVpciDeviceRegister.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(unsafe.Pointer(Register)), uintptr(unsafe.Pointer(Data)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvRegisterPartitionDoorbellEvent calls WinHvPlatform!WHvRegisterPartitionDoorbellEvent.
-func WHvRegisterPartitionDoorbellEvent(Partition WHV_PARTITION_HANDLE, MatchData *WHV_DOORBELL_MATCH_DATA, EventHandle foundation.HANDLE) foundation.HRESULT {
+func WHvRegisterPartitionDoorbellEvent(Partition WHV_PARTITION_HANDLE, MatchData *WHV_DOORBELL_MATCH_DATA, EventHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvRegisterPartitionDoorbellEvent.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(MatchData)), uintptr(EventHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvRequestInterrupt calls WinHvPlatform!WHvRequestInterrupt.
-func WHvRequestInterrupt(Partition WHV_PARTITION_HANDLE, Interrupt *WHV_INTERRUPT_CONTROL, InterruptControlSize uint32) foundation.HRESULT {
+func WHvRequestInterrupt(Partition WHV_PARTITION_HANDLE, Interrupt *WHV_INTERRUPT_CONTROL, InterruptControlSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvRequestInterrupt.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(Interrupt)), uintptr(InterruptControlSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvRequestVpciDeviceInterrupt calls WinHvPlatform!WHvRequestVpciDeviceInterrupt.
-func WHvRequestVpciDeviceInterrupt(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, MsiAddress uint64, MsiData uint32) foundation.HRESULT {
+func WHvRequestVpciDeviceInterrupt(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, MsiAddress uint64, MsiData uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvRequestVpciDeviceInterrupt.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(MsiAddress), uintptr(MsiData))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvResetPartition calls WinHvPlatform!WHvResetPartition.
-func WHvResetPartition(Partition WHV_PARTITION_HANDLE) foundation.HRESULT {
+func WHvResetPartition(Partition WHV_PARTITION_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvResetPartition.Addr(), uintptr(Partition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvResumePartitionTime calls WinHvPlatform!WHvResumePartitionTime.
-func WHvResumePartitionTime(Partition WHV_PARTITION_HANDLE) foundation.HRESULT {
+func WHvResumePartitionTime(Partition WHV_PARTITION_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvResumePartitionTime.Addr(), uintptr(Partition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvRetargetVpciDeviceInterrupt calls WinHvPlatform!WHvRetargetVpciDeviceInterrupt.
-func WHvRetargetVpciDeviceInterrupt(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, MsiAddress uint64, MsiData uint32, Target *WHV_VPCI_INTERRUPT_TARGET) foundation.HRESULT {
+func WHvRetargetVpciDeviceInterrupt(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, MsiAddress uint64, MsiData uint32, Target *WHV_VPCI_INTERRUPT_TARGET) error {
 	r1, _, _ := syscall.SyscallN(procWHvRetargetVpciDeviceInterrupt.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(MsiAddress), uintptr(MsiData), uintptr(unsafe.Pointer(Target)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvRunVirtualProcessor calls WinHvPlatform!WHvRunVirtualProcessor.
-func WHvRunVirtualProcessor(Partition WHV_PARTITION_HANDLE, VpIndex uint32, ExitContext unsafe.Pointer, ExitContextSizeInBytes uint32) foundation.HRESULT {
+func WHvRunVirtualProcessor(Partition WHV_PARTITION_HANDLE, VpIndex uint32, ExitContext unsafe.Pointer, ExitContextSizeInBytes uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvRunVirtualProcessor.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(ExitContext)), uintptr(ExitContextSizeInBytes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvSetNotificationPortProperty calls WinHvPlatform!WHvSetNotificationPortProperty.
-func WHvSetNotificationPortProperty(Partition WHV_PARTITION_HANDLE, PortHandle unsafe.Pointer, PropertyCode WHV_NOTIFICATION_PORT_PROPERTY_CODE, PropertyValue uint64) foundation.HRESULT {
+func WHvSetNotificationPortProperty(Partition WHV_PARTITION_HANDLE, PortHandle unsafe.Pointer, PropertyCode WHV_NOTIFICATION_PORT_PROPERTY_CODE, PropertyValue uint64) error {
 	r1, _, _ := syscall.SyscallN(procWHvSetNotificationPortProperty.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(PortHandle)), uintptr(PropertyCode), uintptr(PropertyValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvSetPartitionProperty calls WinHvPlatform!WHvSetPartitionProperty.
-func WHvSetPartitionProperty(Partition WHV_PARTITION_HANDLE, PropertyCode WHV_PARTITION_PROPERTY_CODE, PropertyBuffer unsafe.Pointer, PropertyBufferSizeInBytes uint32) foundation.HRESULT {
+func WHvSetPartitionProperty(Partition WHV_PARTITION_HANDLE, PropertyCode WHV_PARTITION_PROPERTY_CODE, PropertyBuffer unsafe.Pointer, PropertyBufferSizeInBytes uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvSetPartitionProperty.Addr(), uintptr(Partition), uintptr(PropertyCode), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSizeInBytes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvSetVirtualProcessorInterruptControllerState calls WinHvPlatform!WHvSetVirtualProcessorInterruptControllerState.
-func WHvSetVirtualProcessorInterruptControllerState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State unsafe.Pointer, StateSize uint32) foundation.HRESULT {
+func WHvSetVirtualProcessorInterruptControllerState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State unsafe.Pointer, StateSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvSetVirtualProcessorInterruptControllerState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(State)), uintptr(StateSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvSetVirtualProcessorInterruptControllerState2 calls WinHvPlatform!WHvSetVirtualProcessorInterruptControllerState2.
-func WHvSetVirtualProcessorInterruptControllerState2(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State unsafe.Pointer, StateSize uint32) foundation.HRESULT {
+func WHvSetVirtualProcessorInterruptControllerState2(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State unsafe.Pointer, StateSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvSetVirtualProcessorInterruptControllerState2.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(State)), uintptr(StateSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvSetVirtualProcessorRegisters calls WinHvPlatform!WHvSetVirtualProcessorRegisters.
-func WHvSetVirtualProcessorRegisters(Partition WHV_PARTITION_HANDLE, VpIndex uint32, RegisterNames *WHV_REGISTER_NAME, RegisterCount uint32, RegisterValues *WHV_REGISTER_VALUE) foundation.HRESULT {
+func WHvSetVirtualProcessorRegisters(Partition WHV_PARTITION_HANDLE, VpIndex uint32, RegisterNames *WHV_REGISTER_NAME, RegisterCount uint32, RegisterValues *WHV_REGISTER_VALUE) error {
 	r1, _, _ := syscall.SyscallN(procWHvSetVirtualProcessorRegisters.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(RegisterNames)), uintptr(RegisterCount), uintptr(unsafe.Pointer(RegisterValues)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvSetVirtualProcessorState calls WinHvPlatform!WHvSetVirtualProcessorState.
-func WHvSetVirtualProcessorState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, StateType WHV_VIRTUAL_PROCESSOR_STATE_TYPE, Buffer unsafe.Pointer, BufferSizeInBytes uint32) foundation.HRESULT {
+func WHvSetVirtualProcessorState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, StateType WHV_VIRTUAL_PROCESSOR_STATE_TYPE, Buffer unsafe.Pointer, BufferSizeInBytes uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvSetVirtualProcessorState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(StateType), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSizeInBytes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvSetVirtualProcessorXsaveState calls WinHvPlatform!WHvSetVirtualProcessorXsaveState.
-func WHvSetVirtualProcessorXsaveState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Buffer unsafe.Pointer, BufferSizeInBytes uint32) foundation.HRESULT {
+func WHvSetVirtualProcessorXsaveState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Buffer unsafe.Pointer, BufferSizeInBytes uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvSetVirtualProcessorXsaveState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSizeInBytes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvSetVpciDevicePowerState calls WinHvPlatform!WHvSetVpciDevicePowerState.
-func WHvSetVpciDevicePowerState(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, PowerState systempower.DEVICE_POWER_STATE) foundation.HRESULT {
+func WHvSetVpciDevicePowerState(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, PowerState systempower.DEVICE_POWER_STATE) error {
 	r1, _, _ := syscall.SyscallN(procWHvSetVpciDevicePowerState.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(PowerState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvSetupPartition calls WinHvPlatform!WHvSetupPartition.
-func WHvSetupPartition(Partition WHV_PARTITION_HANDLE) foundation.HRESULT {
+func WHvSetupPartition(Partition WHV_PARTITION_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvSetupPartition.Addr(), uintptr(Partition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvStartPartitionMigration calls WinHvPlatform!WHvStartPartitionMigration.
-func WHvStartPartitionMigration(Partition WHV_PARTITION_HANDLE, MigrationHandle *foundation.HANDLE) foundation.HRESULT {
+func WHvStartPartitionMigration(Partition WHV_PARTITION_HANDLE, MigrationHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvStartPartitionMigration.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(MigrationHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvSuspendPartitionTime calls WinHvPlatform!WHvSuspendPartitionTime.
-func WHvSuspendPartitionTime(Partition WHV_PARTITION_HANDLE) foundation.HRESULT {
+func WHvSuspendPartitionTime(Partition WHV_PARTITION_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWHvSuspendPartitionTime.Addr(), uintptr(Partition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvTranslateGva calls WinHvPlatform!WHvTranslateGva.
-func WHvTranslateGva(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Gva uint64, TranslateFlags WHV_TRANSLATE_GVA_FLAGS, TranslationResult *WHV_TRANSLATE_GVA_RESULT, Gpa *uint64) foundation.HRESULT {
+func WHvTranslateGva(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Gva uint64, TranslateFlags WHV_TRANSLATE_GVA_FLAGS, TranslationResult *WHV_TRANSLATE_GVA_RESULT, Gpa *uint64) error {
 	r1, _, _ := syscall.SyscallN(procWHvTranslateGva.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(Gva), uintptr(TranslateFlags), uintptr(unsafe.Pointer(TranslationResult)), uintptr(unsafe.Pointer(Gpa)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvUnmapGpaRange calls WinHvPlatform!WHvUnmapGpaRange.
-func WHvUnmapGpaRange(Partition WHV_PARTITION_HANDLE, GuestAddress uint64, SizeInBytes uint64) foundation.HRESULT {
+func WHvUnmapGpaRange(Partition WHV_PARTITION_HANDLE, GuestAddress uint64, SizeInBytes uint64) error {
 	r1, _, _ := syscall.SyscallN(procWHvUnmapGpaRange.Addr(), uintptr(Partition), uintptr(GuestAddress), uintptr(SizeInBytes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvUnmapVpciDeviceInterrupt calls WinHvPlatform!WHvUnmapVpciDeviceInterrupt.
-func WHvUnmapVpciDeviceInterrupt(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, Index uint32) foundation.HRESULT {
+func WHvUnmapVpciDeviceInterrupt(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, Index uint32) error {
 	r1, _, _ := syscall.SyscallN(procWHvUnmapVpciDeviceInterrupt.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(Index))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvUnmapVpciDeviceMmioRanges calls WinHvPlatform!WHvUnmapVpciDeviceMmioRanges.
-func WHvUnmapVpciDeviceMmioRanges(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64) foundation.HRESULT {
+func WHvUnmapVpciDeviceMmioRanges(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64) error {
 	r1, _, _ := syscall.SyscallN(procWHvUnmapVpciDeviceMmioRanges.Addr(), uintptr(Partition), uintptr(LogicalDeviceId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvUnregisterPartitionDoorbellEvent calls WinHvPlatform!WHvUnregisterPartitionDoorbellEvent.
-func WHvUnregisterPartitionDoorbellEvent(Partition WHV_PARTITION_HANDLE, MatchData *WHV_DOORBELL_MATCH_DATA) foundation.HRESULT {
+func WHvUnregisterPartitionDoorbellEvent(Partition WHV_PARTITION_HANDLE, MatchData *WHV_DOORBELL_MATCH_DATA) error {
 	r1, _, _ := syscall.SyscallN(procWHvUnregisterPartitionDoorbellEvent.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(MatchData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvUpdateTriggerParameters calls WinHvPlatform!WHvUpdateTriggerParameters.
-func WHvUpdateTriggerParameters(Partition WHV_PARTITION_HANDLE, Parameters *WHV_TRIGGER_PARAMETERS, TriggerHandle unsafe.Pointer) foundation.HRESULT {
+func WHvUpdateTriggerParameters(Partition WHV_PARTITION_HANDLE, Parameters *WHV_TRIGGER_PARAMETERS, TriggerHandle unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWHvUpdateTriggerParameters.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(Parameters)), uintptr(unsafe.Pointer(TriggerHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WHvWriteVpciDeviceRegister calls WinHvPlatform!WHvWriteVpciDeviceRegister.
-func WHvWriteVpciDeviceRegister(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, Register *WHV_VPCI_DEVICE_REGISTER, Data unsafe.Pointer) foundation.HRESULT {
+func WHvWriteVpciDeviceRegister(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, Register *WHV_VPCI_DEVICE_REGISTER, Data unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWHvWriteVpciDeviceRegister.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(unsafe.Pointer(Register)), uintptr(unsafe.Pointer(Data)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

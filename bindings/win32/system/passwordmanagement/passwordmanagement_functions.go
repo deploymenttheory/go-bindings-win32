@@ -24,15 +24,19 @@ var (
 // MSChapSrvChangePassword calls ADVAPI32!MSChapSrvChangePassword.
 // https://learn.microsoft.com/windows/win32/api/mschapp/nf-mschapp-mschapsrvchangepassword
 // Minimum OS: windows5.1.2600.
-func MSChapSrvChangePassword(ServerName foundation.PWSTR, UserName foundation.PWSTR, LmOldPresent foundation.BOOLEAN, LmOldOwfPassword *LM_OWF_PASSWORD, LmNewOwfPassword *LM_OWF_PASSWORD, NtOldOwfPassword *LM_OWF_PASSWORD, NtNewOwfPassword *LM_OWF_PASSWORD) uint32 {
-	r1, _, _ := syscall.SyscallN(procMSChapSrvChangePassword.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(UserName)), uintptr(LmOldPresent), uintptr(unsafe.Pointer(LmOldOwfPassword)), uintptr(unsafe.Pointer(LmNewOwfPassword)), uintptr(unsafe.Pointer(NtOldOwfPassword)), uintptr(unsafe.Pointer(NtNewOwfPassword)))
+func MSChapSrvChangePassword(ServerName string, UserName string, LmOldPresent foundation.BOOLEAN, LmOldOwfPassword *LM_OWF_PASSWORD, LmNewOwfPassword *LM_OWF_PASSWORD, NtOldOwfPassword *LM_OWF_PASSWORD, NtNewOwfPassword *LM_OWF_PASSWORD) uint32 {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_UserName := win32.UTF16Ptr(UserName)
+	r1, _, _ := syscall.SyscallN(procMSChapSrvChangePassword.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_UserName)), uintptr(LmOldPresent), uintptr(unsafe.Pointer(LmOldOwfPassword)), uintptr(unsafe.Pointer(LmNewOwfPassword)), uintptr(unsafe.Pointer(NtOldOwfPassword)), uintptr(unsafe.Pointer(NtNewOwfPassword)))
 	return uint32(r1)
 }
 
 // MSChapSrvChangePassword2 calls ADVAPI32!MSChapSrvChangePassword2.
 // https://learn.microsoft.com/windows/win32/api/mschapp/nf-mschapp-mschapsrvchangepassword2
 // Minimum OS: windows5.1.2600.
-func MSChapSrvChangePassword2(ServerName foundation.PWSTR, UserName foundation.PWSTR, NewPasswordEncryptedWithOldNt *SAMPR_ENCRYPTED_USER_PASSWORD, OldNtOwfPasswordEncryptedWithNewNt *ENCRYPTED_LM_OWF_PASSWORD, LmPresent foundation.BOOLEAN, NewPasswordEncryptedWithOldLm *SAMPR_ENCRYPTED_USER_PASSWORD, OldLmOwfPasswordEncryptedWithNewLmOrNt *ENCRYPTED_LM_OWF_PASSWORD) uint32 {
-	r1, _, _ := syscall.SyscallN(procMSChapSrvChangePassword2.Addr(), uintptr(unsafe.Pointer(ServerName)), uintptr(unsafe.Pointer(UserName)), uintptr(unsafe.Pointer(NewPasswordEncryptedWithOldNt)), uintptr(unsafe.Pointer(OldNtOwfPasswordEncryptedWithNewNt)), uintptr(LmPresent), uintptr(unsafe.Pointer(NewPasswordEncryptedWithOldLm)), uintptr(unsafe.Pointer(OldLmOwfPasswordEncryptedWithNewLmOrNt)))
+func MSChapSrvChangePassword2(ServerName string, UserName string, NewPasswordEncryptedWithOldNt *SAMPR_ENCRYPTED_USER_PASSWORD, OldNtOwfPasswordEncryptedWithNewNt *ENCRYPTED_LM_OWF_PASSWORD, LmPresent foundation.BOOLEAN, NewPasswordEncryptedWithOldLm *SAMPR_ENCRYPTED_USER_PASSWORD, OldLmOwfPasswordEncryptedWithNewLmOrNt *ENCRYPTED_LM_OWF_PASSWORD) uint32 {
+	_ServerName := win32.UTF16Ptr(ServerName)
+	_UserName := win32.UTF16Ptr(UserName)
+	r1, _, _ := syscall.SyscallN(procMSChapSrvChangePassword2.Addr(), uintptr(unsafe.Pointer(_ServerName)), uintptr(unsafe.Pointer(_UserName)), uintptr(unsafe.Pointer(NewPasswordEncryptedWithOldNt)), uintptr(unsafe.Pointer(OldNtOwfPasswordEncryptedWithNewNt)), uintptr(LmPresent), uintptr(unsafe.Pointer(NewPasswordEncryptedWithOldLm)), uintptr(unsafe.Pointer(OldLmOwfPasswordEncryptedWithNewLmOrNt)))
 	return uint32(r1)
 }

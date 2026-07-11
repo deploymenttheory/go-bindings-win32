@@ -113,15 +113,17 @@ type IPresentationBuffer struct {
 var IID_IPresentationBuffer = win32.GUID{Data1: 0x2e217d3a, Data2: 0x5abb, Data3: 0x4138, Data4: [8]byte{0x9a, 0x13, 0xa7, 0x75, 0x59, 0x3c, 0x89, 0xca}}
 
 // GetAvailableEvent dispatches through IPresentationBuffer's vtable slot 3.
-func (self *IPresentationBuffer) GetAvailableEvent(availableEventHandle *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(availableEventHandle)))
-	return foundation.HRESULT(r1)
+func (self *IPresentationBuffer) GetAvailableEvent() (foundation.HANDLE, error) {
+	var _availableEventHandle foundation.HANDLE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_availableEventHandle)))
+	return _availableEventHandle, win32.HRESULTError(int32(r1))
 }
 
 // IsAvailable dispatches through IPresentationBuffer's vtable slot 4.
-func (self *IPresentationBuffer) IsAvailable(isAvailable *byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isAvailable)))
-	return foundation.HRESULT(r1)
+func (self *IPresentationBuffer) IsAvailable() (byte, error) {
+	var _isAvailable byte
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isAvailable)))
+	return _isAvailable, win32.HRESULTError(int32(r1))
 }
 
 // IPresentationContent: https://learn.microsoft.com/windows/win32/api/presentation/nn-presentation-ipresentationcontent
@@ -160,9 +162,10 @@ func (self *IPresentationFactory) IsPresentationSupportedWithIndependentFlip() b
 }
 
 // CreatePresentationManager dispatches through IPresentationFactory's vtable slot 5.
-func (self *IPresentationFactory) CreatePresentationManager(ppPresentationManager **IPresentationManager) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPresentationManager)))
-	return foundation.HRESULT(r1)
+func (self *IPresentationFactory) CreatePresentationManager() (*IPresentationManager, error) {
+	var _ppPresentationManager *IPresentationManager
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppPresentationManager)))
+	return _ppPresentationManager, win32.HRESULTError(int32(r1))
 }
 
 // IID: 2bd0b885-a16f-4bd9-a59a-d073e069d416
@@ -183,15 +186,17 @@ type IPresentationManager struct {
 var IID_IPresentationManager = win32.GUID{Data1: 0xfb562f82, Data2: 0x6292, Data3: 0x470a, Data4: [8]byte{0x88, 0xb1, 0x84, 0x36, 0x61, 0xe7, 0xf2, 0x0c}}
 
 // AddBufferFromResource dispatches through IPresentationManager's vtable slot 3.
-func (self *IPresentationManager) AddBufferFromResource(resource *systemcom.IUnknown, presentationBuffer **IPresentationBuffer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resource)), uintptr(unsafe.Pointer(presentationBuffer)))
-	return foundation.HRESULT(r1)
+func (self *IPresentationManager) AddBufferFromResource(resource *systemcom.IUnknown) (*IPresentationBuffer, error) {
+	var _presentationBuffer *IPresentationBuffer
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(resource)), uintptr(unsafe.Pointer(&_presentationBuffer)))
+	return _presentationBuffer, win32.HRESULTError(int32(r1))
 }
 
 // CreatePresentationSurface dispatches through IPresentationManager's vtable slot 4.
-func (self *IPresentationManager) CreatePresentationSurface(compositionSurfaceHandle foundation.HANDLE, presentationSurface **IPresentationSurface) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(compositionSurfaceHandle), uintptr(unsafe.Pointer(presentationSurface)))
-	return foundation.HRESULT(r1)
+func (self *IPresentationManager) CreatePresentationSurface(compositionSurfaceHandle foundation.HANDLE) (*IPresentationSurface, error) {
+	var _presentationSurface *IPresentationSurface
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(compositionSurfaceHandle), uintptr(unsafe.Pointer(&_presentationSurface)))
+	return _presentationSurface, win32.HRESULTError(int32(r1))
 }
 
 // GetNextPresentId dispatches through IPresentationManager's vtable slot 5.
@@ -201,51 +206,54 @@ func (self *IPresentationManager) GetNextPresentId() uint64 {
 }
 
 // ForceVSyncInterrupt dispatches through IPresentationManager's vtable slot 8.
-func (self *IPresentationManager) ForceVSyncInterrupt(forceVsyncInterrupt byte) foundation.HRESULT {
+func (self *IPresentationManager) ForceVSyncInterrupt(forceVsyncInterrupt byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(forceVsyncInterrupt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Present dispatches through IPresentationManager's vtable slot 9.
-func (self *IPresentationManager) Present() foundation.HRESULT {
+func (self *IPresentationManager) Present() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPresentRetiringFence dispatches through IPresentationManager's vtable slot 10.
-func (self *IPresentationManager) GetPresentRetiringFence(riid *win32.GUID, fence *unsafe.Pointer) foundation.HRESULT {
+func (self *IPresentationManager) GetPresentRetiringFence(riid *win32.GUID, fence *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(fence)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelPresentsFrom dispatches through IPresentationManager's vtable slot 11.
-func (self *IPresentationManager) CancelPresentsFrom(presentIdToCancelFrom uint64) foundation.HRESULT {
+func (self *IPresentationManager) CancelPresentsFrom(presentIdToCancelFrom uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(presentIdToCancelFrom))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLostEvent dispatches through IPresentationManager's vtable slot 12.
-func (self *IPresentationManager) GetLostEvent(lostEventHandle *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lostEventHandle)))
-	return foundation.HRESULT(r1)
+func (self *IPresentationManager) GetLostEvent() (foundation.HANDLE, error) {
+	var _lostEventHandle foundation.HANDLE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_lostEventHandle)))
+	return _lostEventHandle, win32.HRESULTError(int32(r1))
 }
 
 // GetPresentStatisticsAvailableEvent dispatches through IPresentationManager's vtable slot 13.
-func (self *IPresentationManager) GetPresentStatisticsAvailableEvent(presentStatisticsAvailableEventHandle *foundation.HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(presentStatisticsAvailableEventHandle)))
-	return foundation.HRESULT(r1)
+func (self *IPresentationManager) GetPresentStatisticsAvailableEvent() (foundation.HANDLE, error) {
+	var _presentStatisticsAvailableEventHandle foundation.HANDLE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_presentStatisticsAvailableEventHandle)))
+	return _presentStatisticsAvailableEventHandle, win32.HRESULTError(int32(r1))
 }
 
 // EnablePresentStatisticsKind dispatches through IPresentationManager's vtable slot 14.
-func (self *IPresentationManager) EnablePresentStatisticsKind(presentStatisticsKind PresentStatisticsKind, enabled byte) foundation.HRESULT {
+func (self *IPresentationManager) EnablePresentStatisticsKind(presentStatisticsKind PresentStatisticsKind, enabled byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(presentStatisticsKind), uintptr(enabled))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNextPresentStatistics dispatches through IPresentationManager's vtable slot 15.
-func (self *IPresentationManager) GetNextPresentStatistics(nextPresentStatistics **IPresentStatistics) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(nextPresentStatistics)))
-	return foundation.HRESULT(r1)
+func (self *IPresentationManager) GetNextPresentStatistics() (*IPresentStatistics, error) {
+	var _nextPresentStatistics *IPresentStatistics
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_nextPresentStatistics)))
+	return _nextPresentStatistics, win32.HRESULTError(int32(r1))
 }
 
 // IPresentationSurface: https://learn.microsoft.com/windows/win32/api/presentation/nn-presentation-ipresentationsurface
@@ -258,45 +266,45 @@ type IPresentationSurface struct {
 var IID_IPresentationSurface = win32.GUID{Data1: 0x956710fb, Data2: 0xea40, Data3: 0x4eba, Data4: [8]byte{0xa3, 0xeb, 0x43, 0x75, 0xa0, 0xeb, 0x4e, 0xdc}}
 
 // SetBuffer dispatches through IPresentationSurface's vtable slot 4.
-func (self *IPresentationSurface) SetBuffer(presentationBuffer *IPresentationBuffer) foundation.HRESULT {
+func (self *IPresentationSurface) SetBuffer(presentationBuffer *IPresentationBuffer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(presentationBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetColorSpace dispatches through IPresentationSurface's vtable slot 5.
-func (self *IPresentationSurface) SetColorSpace(colorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) foundation.HRESULT {
+func (self *IPresentationSurface) SetColorSpace(colorSpace graphicsdxgicommon.DXGI_COLOR_SPACE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(colorSpace))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAlphaMode dispatches through IPresentationSurface's vtable slot 6.
-func (self *IPresentationSurface) SetAlphaMode(alphaMode graphicsdxgicommon.DXGI_ALPHA_MODE) foundation.HRESULT {
+func (self *IPresentationSurface) SetAlphaMode(alphaMode graphicsdxgicommon.DXGI_ALPHA_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(alphaMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSourceRect dispatches through IPresentationSurface's vtable slot 7.
-func (self *IPresentationSurface) SetSourceRect(sourceRect *foundation.RECT) foundation.HRESULT {
+func (self *IPresentationSurface) SetSourceRect(sourceRect *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sourceRect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTransform dispatches through IPresentationSurface's vtable slot 8.
-func (self *IPresentationSurface) SetTransform(transform *PresentationTransform) foundation.HRESULT {
+func (self *IPresentationSurface) SetTransform(transform *PresentationTransform) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transform)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RestrictToOutput dispatches through IPresentationSurface's vtable slot 9.
-func (self *IPresentationSurface) RestrictToOutput(output *systemcom.IUnknown) foundation.HRESULT {
+func (self *IPresentationSurface) RestrictToOutput(output *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(output)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDisableReadback dispatches through IPresentationSurface's vtable slot 10.
-func (self *IPresentationSurface) SetDisableReadback(value byte) foundation.HRESULT {
+func (self *IPresentationSurface) SetDisableReadback(value byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 95609569-c5f0-47f9-8804-5345f2e2767e

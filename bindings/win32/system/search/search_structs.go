@@ -28,8 +28,8 @@ type BUCKETCATEGORIZE struct {
 	Distribution uint32
 }
 
-// CATEGORIZATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CATEGORIZATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CATEGORIZATION_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -444,14 +444,14 @@ type NOTRESTRICTION struct {
 type NegationCondition struct {
 }
 
-// ODBC_VS_ARGS_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// ODBC_VS_ARGS_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type ODBC_VS_ARGS_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// ODBC_VS_ARGS_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// ODBC_VS_ARGS_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type ODBC_VS_ARGS_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -495,8 +495,8 @@ type RANGECATEGORIZE struct {
 	ARangeBegin *systemcomstructuredstorage.PROPVARIANT
 }
 
-// RESTRICTION_URes is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RESTRICTION_URes is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RESTRICTION_URes struct {
 	Data [8]uint64
 }
@@ -621,8 +621,8 @@ type SQL_DAY_SECOND_STRUCT struct {
 	Fraction uint32
 }
 
-// SQL_INTERVAL_STRUCT_intval_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SQL_INTERVAL_STRUCT_intval_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SQL_INTERVAL_STRUCT_intval_e__Union struct {
 	Data [5]uint32
 }
@@ -655,8 +655,8 @@ type SSERRORINFO struct {
 	WLineNumber   uint16
 }
 
-// SSVARIANT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SSVARIANT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SSVARIANT_Anonymous_e__Union struct {
 	Data [5]uint64
 }

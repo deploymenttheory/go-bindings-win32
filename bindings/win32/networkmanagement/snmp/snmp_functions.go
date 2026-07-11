@@ -346,9 +346,9 @@ func SnmpListenEx(hEntity uintptr, lStatus uint32, nUseEntityAddr uint32) uint32
 // SnmpMgrClose calls mgmtapi!SnmpMgrClose.
 // https://learn.microsoft.com/windows/win32/api/mgmtapi/nf-mgmtapi-snmpmgrclose
 // Minimum OS: windows5.0.
-func SnmpMgrClose(session unsafe.Pointer) foundation.BOOL {
+func SnmpMgrClose(session unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procSnmpMgrClose.Addr(), uintptr(unsafe.Pointer(session)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SnmpMgrCtl calls mgmtapi!SnmpMgrCtl.
@@ -365,25 +365,25 @@ func SnmpMgrCtl(session unsafe.Pointer, dwCtlCode uint32, lpvInBuffer unsafe.Poi
 // SnmpMgrGetTrap calls mgmtapi!SnmpMgrGetTrap.
 // https://learn.microsoft.com/windows/win32/api/mgmtapi/nf-mgmtapi-snmpmgrgettrap
 // Minimum OS: windows5.0.
-func SnmpMgrGetTrap(enterprise unsafe.Pointer, IPAddress unsafe.Pointer, genericTrap *SNMP_GENERICTRAP, specificTrap *int32, timeStamp *uint32, variableBindings unsafe.Pointer) foundation.BOOL {
+func SnmpMgrGetTrap(enterprise unsafe.Pointer, IPAddress unsafe.Pointer, genericTrap *SNMP_GENERICTRAP, specificTrap *int32, timeStamp *uint32, variableBindings unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procSnmpMgrGetTrap.Addr(), uintptr(unsafe.Pointer(enterprise)), uintptr(unsafe.Pointer(IPAddress)), uintptr(unsafe.Pointer(genericTrap)), uintptr(unsafe.Pointer(specificTrap)), uintptr(unsafe.Pointer(timeStamp)), uintptr(unsafe.Pointer(variableBindings)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SnmpMgrGetTrapEx calls mgmtapi!SnmpMgrGetTrapEx.
 // https://learn.microsoft.com/windows/win32/api/mgmtapi/nf-mgmtapi-snmpmgrgettrapex
 // Minimum OS: windows5.0.
-func SnmpMgrGetTrapEx(enterprise unsafe.Pointer, agentAddress unsafe.Pointer, sourceAddress unsafe.Pointer, genericTrap *SNMP_GENERICTRAP, specificTrap *int32, community unsafe.Pointer, timeStamp *uint32, variableBindings unsafe.Pointer) foundation.BOOL {
+func SnmpMgrGetTrapEx(enterprise unsafe.Pointer, agentAddress unsafe.Pointer, sourceAddress unsafe.Pointer, genericTrap *SNMP_GENERICTRAP, specificTrap *int32, community unsafe.Pointer, timeStamp *uint32, variableBindings unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procSnmpMgrGetTrapEx.Addr(), uintptr(unsafe.Pointer(enterprise)), uintptr(unsafe.Pointer(agentAddress)), uintptr(unsafe.Pointer(sourceAddress)), uintptr(unsafe.Pointer(genericTrap)), uintptr(unsafe.Pointer(specificTrap)), uintptr(unsafe.Pointer(community)), uintptr(unsafe.Pointer(timeStamp)), uintptr(unsafe.Pointer(variableBindings)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SnmpMgrOidToStr calls mgmtapi!SnmpMgrOidToStr.
 // https://learn.microsoft.com/windows/win32/api/mgmtapi/nf-mgmtapi-snmpmgroidtostr
 // Minimum OS: windows5.0.
-func SnmpMgrOidToStr(oid unsafe.Pointer, string_ *foundation.PSTR) foundation.BOOL {
+func SnmpMgrOidToStr(oid unsafe.Pointer, string_ *foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procSnmpMgrOidToStr.Addr(), uintptr(unsafe.Pointer(oid)), uintptr(unsafe.Pointer(string_)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SnmpMgrOpen calls mgmtapi!SnmpMgrOpen.
@@ -412,9 +412,9 @@ func SnmpMgrRequest(session unsafe.Pointer, requestType byte, variableBindings u
 // SnmpMgrStrToOid calls mgmtapi!SnmpMgrStrToOid.
 // https://learn.microsoft.com/windows/win32/api/mgmtapi/nf-mgmtapi-snmpmgrstrtooid
 // Minimum OS: windows5.0.
-func SnmpMgrStrToOid(string_ foundation.PSTR, oid unsafe.Pointer) foundation.BOOL {
+func SnmpMgrStrToOid(string_ foundation.PSTR, oid unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procSnmpMgrStrToOid.Addr(), uintptr(unsafe.Pointer(string_)), uintptr(unsafe.Pointer(oid)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SnmpMgrTrapListen calls mgmtapi!SnmpMgrTrapListen.

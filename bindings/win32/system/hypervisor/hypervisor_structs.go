@@ -24,8 +24,8 @@ type GPA_MEMORY_CHUNK struct {
 	PageCount                   uint64
 }
 
-// GUEST_OS_INFO is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// GUEST_OS_INFO is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type GUEST_OS_INFO struct {
 	Data [1]uint64
 }
@@ -75,8 +75,8 @@ type SOCKADDR_HV struct {
 	ServiceId win32.GUID
 }
 
-// VIRTUAL_PROCESSOR_REGISTER is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VIRTUAL_PROCESSOR_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VIRTUAL_PROCESSOR_REGISTER struct {
 	Data [2]uint64
 }
@@ -87,14 +87,14 @@ type VM_GENCOUNTER struct {
 	GenerationCountHigh uint64
 }
 
-// WHV_ACCESS_GPA_CONTROLS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_ACCESS_GPA_CONTROLS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_ACCESS_GPA_CONTROLS struct {
 	Data [1]uint64
 }
 
-// WHV_ADVISE_GPA_RANGE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_ADVISE_GPA_RANGE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_ADVISE_GPA_RANGE struct {
 	Data [2]uint32
 }
@@ -104,20 +104,20 @@ type WHV_ADVISE_GPA_RANGE_POPULATE struct {
 	AccessType WHV_MEMORY_ACCESS_TYPE
 }
 
-// WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_ADVISE_GPA_RANGE_POPULATE_FLAGS struct {
 	Data [1]uint32
 }
 
-// WHV_CAPABILITY is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_CAPABILITY is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_CAPABILITY struct {
 	Data [3]uint64
 }
 
-// WHV_CAPABILITY_FEATURES is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_CAPABILITY_FEATURES is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_CAPABILITY_FEATURES struct {
 	Data [1]uint64
 }
@@ -168,14 +168,14 @@ type WHV_EMULATOR_MEMORY_ACCESS_INFO struct {
 	Data       [8]byte
 }
 
-// WHV_EMULATOR_STATUS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_EMULATOR_STATUS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_EMULATOR_STATUS struct {
 	Data [1]uint32
 }
 
-// WHV_EXTENDED_VM_EXITS is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_EXTENDED_VM_EXITS is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_EXTENDED_VM_EXITS struct {
 	Data [1]uint64
 }
@@ -193,8 +193,8 @@ type WHV_HYPERCALL_CONTEXT struct {
 	Reserved1    [2]uint64
 }
 
-// WHV_INTERNAL_ACTIVITY_REGISTER is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_INTERNAL_ACTIVITY_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_INTERNAL_ACTIVITY_REGISTER struct {
 	Data [1]uint64
 }
@@ -214,8 +214,8 @@ type WHV_MEMORY_ACCESS_CONTEXT struct {
 	Gva                  uint64
 }
 
-// WHV_MEMORY_ACCESS_INFO is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_MEMORY_ACCESS_INFO is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_MEMORY_ACCESS_INFO struct {
 	Data [1]uint32
 }
@@ -232,8 +232,8 @@ type WHV_MSR_ACTION_ENTRY struct {
 	Reserved    uint16
 }
 
-// WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_NOTIFICATION_PORT_PARAMETERS_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -250,8 +250,8 @@ type WHV_PARTITION_MEMORY_COUNTERS struct {
 	Mapped1GPageCount uint64
 }
 
-// WHV_PARTITION_PROPERTY is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_PARTITION_PROPERTY is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_PARTITION_PROPERTY struct {
 	Data [6]uint64
 }
@@ -270,20 +270,20 @@ type WHV_PROCESSOR_EVENT_COUNTERS struct {
 	InterruptCount uint64
 }
 
-// WHV_PROCESSOR_FEATURES is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_PROCESSOR_FEATURES is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_PROCESSOR_FEATURES struct {
 	Data [1]uint64
 }
 
-// WHV_PROCESSOR_FEATURES1 is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_PROCESSOR_FEATURES1 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_PROCESSOR_FEATURES1 struct {
 	Data [1]uint64
 }
 
-// WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -316,8 +316,8 @@ type WHV_PROCESSOR_INTERCEPT_COUNTERS struct {
 	RdpmcInstructions         WHV_PROCESSOR_INTERCEPT_COUNTER
 }
 
-// WHV_PROCESSOR_PERFMON_FEATURES is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_PROCESSOR_PERFMON_FEATURES is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_PROCESSOR_PERFMON_FEATURES struct {
 	Data [1]uint64
 }
@@ -336,14 +336,14 @@ type WHV_PROCESSOR_SYNTHETIC_FEATURES_COUNTERS struct {
 	VirtualMmuHypercallsCount         uint64
 }
 
-// WHV_PROCESSOR_XSAVE_FEATURES is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_PROCESSOR_XSAVE_FEATURES is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_PROCESSOR_XSAVE_FEATURES struct {
 	Data [1]uint64
 }
 
-// WHV_REGISTER_VALUE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_REGISTER_VALUE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_REGISTER_VALUE struct {
 	Data [2]uint64
 }
@@ -352,8 +352,8 @@ type WHV_RUN_VP_CANCELED_CONTEXT struct {
 	CancelReason WHV_RUN_VP_CANCEL_REASON
 }
 
-// WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union struct {
 	Data [22]uint64
 }
@@ -365,8 +365,8 @@ type WHV_RUN_VP_EXIT_CONTEXT struct {
 	Anonymous  WHV_RUN_VP_EXIT_CONTEXT_Anonymous_e__Union
 }
 
-// WHV_SCHEDULER_FEATURES is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_SCHEDULER_FEATURES is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_SCHEDULER_FEATURES struct {
 	Data [1]uint64
 }
@@ -391,14 +391,14 @@ type WHV_SYNIC_SINT_DELIVERABLE_CONTEXT struct {
 	Reserved2        uint32
 }
 
-// WHV_SYNTHETIC_PROCESSOR_FEATURES is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_SYNTHETIC_PROCESSOR_FEATURES is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_SYNTHETIC_PROCESSOR_FEATURES struct {
 	Data [1]uint64
 }
 
-// WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_SYNTHETIC_PROCESSOR_FEATURES_BANKS_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -414,8 +414,8 @@ type WHV_TRANSLATE_GVA_RESULT struct {
 	Reserved   uint32
 }
 
-// WHV_TRIGGER_PARAMETERS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_TRIGGER_PARAMETERS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_TRIGGER_PARAMETERS_Anonymous_e__Union struct {
 	Data [3]uint64
 }
@@ -426,14 +426,14 @@ type WHV_TRIGGER_PARAMETERS struct {
 	Anonymous   WHV_TRIGGER_PARAMETERS_Anonymous_e__Union
 }
 
-// WHV_UINT128 is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_UINT128 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_UINT128 struct {
 	Data [2]uint64
 }
 
-// WHV_VIRTUAL_PROCESSOR_PROPERTY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_VIRTUAL_PROCESSOR_PROPERTY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_VIRTUAL_PROCESSOR_PROPERTY_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -444,8 +444,8 @@ type WHV_VIRTUAL_PROCESSOR_PROPERTY struct {
 	Anonymous    WHV_VIRTUAL_PROCESSOR_PROPERTY_Anonymous_e__Union
 }
 
-// WHV_VPCI_DEVICE_NOTIFICATION_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_VPCI_DEVICE_NOTIFICATION_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_VPCI_DEVICE_NOTIFICATION_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -503,8 +503,8 @@ type WHV_VP_EXCEPTION_CONTEXT struct {
 	ExceptionParameter   uint64
 }
 
-// WHV_VP_EXCEPTION_INFO is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_VP_EXCEPTION_INFO is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_VP_EXCEPTION_INFO struct {
 	Data [1]uint32
 }
@@ -566,20 +566,20 @@ type WHV_X64_CPUID_RESULT2 struct {
 	Mask     WHV_CPUID_OUTPUT
 }
 
-// WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_DELIVERABILITY_NOTIFICATIONS_REGISTER struct {
 	Data [1]uint64
 }
 
-// WHV_X64_FP_CONTROL_STATUS_REGISTER is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_FP_CONTROL_STATUS_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_FP_CONTROL_STATUS_REGISTER struct {
 	Data [2]uint64
 }
 
-// WHV_X64_FP_REGISTER is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_FP_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_FP_REGISTER struct {
 	Data [2]uint64
 }
@@ -588,8 +588,8 @@ type WHV_X64_INTERRUPTION_DELIVERABLE_CONTEXT struct {
 	DeliverableType WHV_X64_PENDING_INTERRUPTION_TYPE
 }
 
-// WHV_X64_INTERRUPT_STATE_REGISTER is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_INTERRUPT_STATE_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_INTERRUPT_STATE_REGISTER struct {
 	Data [1]uint64
 }
@@ -609,8 +609,8 @@ type WHV_X64_IO_PORT_ACCESS_CONTEXT struct {
 	Es                   WHV_X64_SEGMENT_REGISTER
 }
 
-// WHV_X64_IO_PORT_ACCESS_INFO is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_IO_PORT_ACCESS_INFO is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_IO_PORT_ACCESS_INFO struct {
 	Data [1]uint32
 }
@@ -622,38 +622,38 @@ type WHV_X64_MSR_ACCESS_CONTEXT struct {
 	Rdx        uint64
 }
 
-// WHV_X64_MSR_ACCESS_INFO is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_MSR_ACCESS_INFO is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_MSR_ACCESS_INFO struct {
 	Data [1]uint32
 }
 
-// WHV_X64_MSR_EXIT_BITMAP is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_MSR_EXIT_BITMAP is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_MSR_EXIT_BITMAP struct {
 	Data [1]uint64
 }
 
-// WHV_X64_PENDING_DEBUG_EXCEPTION is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_PENDING_DEBUG_EXCEPTION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_PENDING_DEBUG_EXCEPTION struct {
 	Data [1]uint64
 }
 
-// WHV_X64_PENDING_EXCEPTION_EVENT is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_PENDING_EXCEPTION_EVENT is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_PENDING_EXCEPTION_EVENT struct {
 	Data [2]uint64
 }
 
-// WHV_X64_PENDING_EXT_INT_EVENT is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_PENDING_EXT_INT_EVENT is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_PENDING_EXT_INT_EVENT struct {
 	Data [2]uint64
 }
 
-// WHV_X64_PENDING_INTERRUPTION_REGISTER is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_PENDING_INTERRUPTION_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_PENDING_INTERRUPTION_REGISTER struct {
 	Data [1]uint64
 }
@@ -666,14 +666,14 @@ type WHV_X64_RDTSC_CONTEXT struct {
 	RdtscInfo     WHV_X64_RDTSC_INFO
 }
 
-// WHV_X64_RDTSC_INFO is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_RDTSC_INFO is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_RDTSC_INFO struct {
 	Data [1]uint64
 }
 
-// WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_SEGMENT_REGISTER_Anonymous_e__Union struct {
 	Data [1]uint16
 }
@@ -697,14 +697,14 @@ type WHV_X64_UNSUPPORTED_FEATURE_CONTEXT struct {
 	FeatureParameter uint64
 }
 
-// WHV_X64_VP_EXECUTION_STATE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_VP_EXECUTION_STATE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_VP_EXECUTION_STATE struct {
 	Data [1]uint16
 }
 
-// WHV_X64_XMM_CONTROL_STATUS_REGISTER is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WHV_X64_XMM_CONTROL_STATUS_REGISTER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WHV_X64_XMM_CONTROL_STATUS_REGISTER struct {
 	Data [2]uint64
 }

@@ -430,8 +430,8 @@ type UCPTrie struct {
 	NullValue          uint32
 }
 
-// UCPTrieData is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// UCPTrieData is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type UCPTrieData struct {
 	Data [1]uint64
 }

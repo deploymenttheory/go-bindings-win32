@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 var (
@@ -21,7 +20,7 @@ var (
 )
 
 // GameInputCreate calls GameInput!GameInputCreate.
-func GameInputCreate(gameInput **IGameInput) foundation.HRESULT {
+func GameInputCreate(gameInput **IGameInput) error {
 	r1, _, _ := syscall.SyscallN(procGameInputCreate.Addr(), uintptr(unsafe.Pointer(gameInput)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

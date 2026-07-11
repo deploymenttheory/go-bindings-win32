@@ -34,16 +34,21 @@ var (
 // DavAddConnection calls NETAPI32!DavAddConnection.
 // https://learn.microsoft.com/windows/win32/api/davclnt/nf-davclnt-davaddconnection
 // Minimum OS: windows6.0.6000.
-func DavAddConnection(ConnectionHandle *foundation.HANDLE, RemoteName foundation.PWSTR, UserName foundation.PWSTR, Password foundation.PWSTR, ClientCert *byte, CertSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procDavAddConnection.Addr(), uintptr(unsafe.Pointer(ConnectionHandle)), uintptr(unsafe.Pointer(RemoteName)), uintptr(unsafe.Pointer(UserName)), uintptr(unsafe.Pointer(Password)), uintptr(unsafe.Pointer(ClientCert)), uintptr(CertSize))
+func DavAddConnection(ConnectionHandle *foundation.HANDLE, RemoteName string, UserName string, Password string, ClientCert *byte, CertSize uint32) uint32 {
+	_RemoteName := win32.UTF16Ptr(RemoteName)
+	_UserName := win32.UTF16Ptr(UserName)
+	_Password := win32.UTF16Ptr(Password)
+	r1, _, _ := syscall.SyscallN(procDavAddConnection.Addr(), uintptr(unsafe.Pointer(ConnectionHandle)), uintptr(unsafe.Pointer(_RemoteName)), uintptr(unsafe.Pointer(_UserName)), uintptr(unsafe.Pointer(_Password)), uintptr(unsafe.Pointer(ClientCert)), uintptr(CertSize))
 	return uint32(r1)
 }
 
 // DavCancelConnectionsToServer calls davclnt!DavCancelConnectionsToServer.
 // https://learn.microsoft.com/windows/win32/api/davclnt/nf-davclnt-davcancelconnectionstoserver
 // Minimum OS: windows6.0.6000.
-func DavCancelConnectionsToServer(lpName foundation.PWSTR, fForce foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procDavCancelConnectionsToServer.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(fForce))
+func DavCancelConnectionsToServer(lpName string, fForce bool) uint32 {
+	_lpName := win32.UTF16Ptr(lpName)
+	_fForce := win32.Bool32(fForce)
+	r1, _, _ := syscall.SyscallN(procDavCancelConnectionsToServer.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(_fForce))
 	return uint32(r1)
 }
 
@@ -74,32 +79,36 @@ func DavGetExtendedError(hFile foundation.HANDLE, ExtError *uint32, ExtErrorStri
 // DavGetHTTPFromUNCPath calls NETAPI32!DavGetHTTPFromUNCPath.
 // https://learn.microsoft.com/windows/win32/api/davclnt/nf-davclnt-davgethttpfromuncpath
 // Minimum OS: windows6.0.6000.
-func DavGetHTTPFromUNCPath(UncPath foundation.PWSTR, Url foundation.PWSTR, lpSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procDavGetHTTPFromUNCPath.Addr(), uintptr(unsafe.Pointer(UncPath)), uintptr(unsafe.Pointer(Url)), uintptr(unsafe.Pointer(lpSize)))
+func DavGetHTTPFromUNCPath(UncPath string, Url foundation.PWSTR, lpSize *uint32) uint32 {
+	_UncPath := win32.UTF16Ptr(UncPath)
+	r1, _, _ := syscall.SyscallN(procDavGetHTTPFromUNCPath.Addr(), uintptr(unsafe.Pointer(_UncPath)), uintptr(unsafe.Pointer(Url)), uintptr(unsafe.Pointer(lpSize)))
 	return uint32(r1)
 }
 
 // DavGetTheLockOwnerOfTheFile calls davclnt!DavGetTheLockOwnerOfTheFile.
 // https://learn.microsoft.com/windows/win32/api/davclnt/nf-davclnt-davgetthelockownerofthefile
 // Minimum OS: windows6.0.6000.
-func DavGetTheLockOwnerOfTheFile(FileName foundation.PWSTR, LockOwnerName foundation.PWSTR, LockOwnerNameLengthInBytes *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procDavGetTheLockOwnerOfTheFile.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(LockOwnerName)), uintptr(unsafe.Pointer(LockOwnerNameLengthInBytes)))
+func DavGetTheLockOwnerOfTheFile(FileName string, LockOwnerName foundation.PWSTR, LockOwnerNameLengthInBytes *uint32) uint32 {
+	_FileName := win32.UTF16Ptr(FileName)
+	r1, _, _ := syscall.SyscallN(procDavGetTheLockOwnerOfTheFile.Addr(), uintptr(unsafe.Pointer(_FileName)), uintptr(unsafe.Pointer(LockOwnerName)), uintptr(unsafe.Pointer(LockOwnerNameLengthInBytes)))
 	return uint32(r1)
 }
 
 // DavGetUNCFromHTTPPath calls NETAPI32!DavGetUNCFromHTTPPath.
 // https://learn.microsoft.com/windows/win32/api/davclnt/nf-davclnt-davgetuncfromhttppath
 // Minimum OS: windows6.0.6000.
-func DavGetUNCFromHTTPPath(Url foundation.PWSTR, UncPath foundation.PWSTR, lpSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procDavGetUNCFromHTTPPath.Addr(), uintptr(unsafe.Pointer(Url)), uintptr(unsafe.Pointer(UncPath)), uintptr(unsafe.Pointer(lpSize)))
+func DavGetUNCFromHTTPPath(Url string, UncPath foundation.PWSTR, lpSize *uint32) uint32 {
+	_Url := win32.UTF16Ptr(Url)
+	r1, _, _ := syscall.SyscallN(procDavGetUNCFromHTTPPath.Addr(), uintptr(unsafe.Pointer(_Url)), uintptr(unsafe.Pointer(UncPath)), uintptr(unsafe.Pointer(lpSize)))
 	return uint32(r1)
 }
 
 // DavInvalidateCache calls davclnt!DavInvalidateCache.
 // https://learn.microsoft.com/windows/win32/api/davclnt/nf-davclnt-davinvalidatecache
 // Minimum OS: windows6.0.6000.
-func DavInvalidateCache(URLName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procDavInvalidateCache.Addr(), uintptr(unsafe.Pointer(URLName)))
+func DavInvalidateCache(URLName string) uint32 {
+	_URLName := win32.UTF16Ptr(URLName)
+	r1, _, _ := syscall.SyscallN(procDavInvalidateCache.Addr(), uintptr(unsafe.Pointer(_URLName)))
 	return uint32(r1)
 }
 

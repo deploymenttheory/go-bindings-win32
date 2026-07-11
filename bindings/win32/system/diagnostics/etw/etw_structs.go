@@ -48,8 +48,8 @@ type ETW_BUFFER_CALLBACK_INFORMATION struct {
 	BuffersRead   uint32
 }
 
-// ETW_BUFFER_CONTEXT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// ETW_BUFFER_CONTEXT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type ETW_BUFFER_CONTEXT_Anonymous_e__Union struct {
 	Data [1]uint16
 }
@@ -115,8 +115,8 @@ type ETW_TRACE_PARTITION_INFORMATION_V2 struct {
 	ParentId          foundation.PWSTR
 }
 
-// EVENT_DATA_DESCRIPTOR_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_DATA_DESCRIPTOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_DATA_DESCRIPTOR_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -244,8 +244,8 @@ type EVENT_FILTER_LEVEL_KW struct {
 	FilterIn        foundation.BOOLEAN
 }
 
-// EVENT_HEADER_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_HEADER_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_HEADER_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -278,20 +278,20 @@ type EVENT_HEADER_EXTENDED_DATA_ITEM struct {
 	DataPtr   uint64
 }
 
-// EVENT_INSTANCE_HEADER_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_INSTANCE_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_INSTANCE_HEADER_Anonymous1_e__Union struct {
 	Data [1]uint16
 }
 
-// EVENT_INSTANCE_HEADER_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_INSTANCE_HEADER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_INSTANCE_HEADER_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
-// EVENT_INSTANCE_HEADER_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_INSTANCE_HEADER_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_INSTANCE_HEADER_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
@@ -317,8 +317,8 @@ type EVENT_INSTANCE_INFO struct {
 	InstanceId uint32
 }
 
-// EVENT_MAP_ENTRY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_MAP_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_MAP_ENTRY_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -329,8 +329,8 @@ type EVENT_MAP_ENTRY struct {
 	Anonymous    EVENT_MAP_ENTRY_Anonymous_e__Union
 }
 
-// EVENT_MAP_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_MAP_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_MAP_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -344,26 +344,26 @@ type EVENT_MAP_INFO struct {
 	MapEntryArray [1]EVENT_MAP_ENTRY
 }
 
-// EVENT_PROPERTY_INFO_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_PROPERTY_INFO_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_PROPERTY_INFO_Anonymous1_e__Union struct {
 	Data [2]uint32
 }
 
-// EVENT_PROPERTY_INFO_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_PROPERTY_INFO_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_PROPERTY_INFO_Anonymous2_e__Union struct {
 	Data [1]uint16
 }
 
-// EVENT_PROPERTY_INFO_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_PROPERTY_INFO_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_PROPERTY_INFO_Anonymous3_e__Union struct {
 	Data [1]uint16
 }
 
-// EVENT_PROPERTY_INFO_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_PROPERTY_INFO_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_PROPERTY_INFO_Anonymous4_e__Union struct {
 	Data [1]uint32
 }
@@ -389,8 +389,8 @@ type EVENT_RECORD struct {
 	UserContext       unsafe.Pointer
 }
 
-// EVENT_TRACE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_TRACE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_TRACE_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -406,26 +406,26 @@ type EVENT_TRACE struct {
 	Anonymous        EVENT_TRACE_Anonymous_e__Union
 }
 
-// EVENT_TRACE_HEADER_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_TRACE_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_TRACE_HEADER_Anonymous1_e__Union struct {
 	Data [1]uint16
 }
 
-// EVENT_TRACE_HEADER_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_TRACE_HEADER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_TRACE_HEADER_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
-// EVENT_TRACE_HEADER_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_TRACE_HEADER_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_TRACE_HEADER_Anonymous3_e__Union struct {
 	Data [2]uint64
 }
 
-// EVENT_TRACE_HEADER_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_TRACE_HEADER_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_TRACE_HEADER_Anonymous4_e__Union struct {
 	Data [1]uint64
 }
@@ -442,14 +442,14 @@ type EVENT_TRACE_HEADER struct {
 	Anonymous4 EVENT_TRACE_HEADER_Anonymous4_e__Union
 }
 
-// EVENT_TRACE_LOGFILEA_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_TRACE_LOGFILEA_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_TRACE_LOGFILEA_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// EVENT_TRACE_LOGFILEA_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_TRACE_LOGFILEA_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_TRACE_LOGFILEA_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -472,14 +472,14 @@ type EVENT_TRACE_LOGFILEA struct {
 	Context        unsafe.Pointer
 }
 
-// EVENT_TRACE_LOGFILEW_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_TRACE_LOGFILEW_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_TRACE_LOGFILEW_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// EVENT_TRACE_LOGFILEW_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_TRACE_LOGFILEW_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_TRACE_LOGFILEW_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -502,8 +502,8 @@ type EVENT_TRACE_LOGFILEW struct {
 	Context        unsafe.Pointer
 }
 
-// EVENT_TRACE_PROPERTIES_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_TRACE_PROPERTIES_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_TRACE_PROPERTIES_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -530,20 +530,20 @@ type EVENT_TRACE_PROPERTIES struct {
 	LoggerNameOffset    uint32
 }
 
-// EVENT_TRACE_PROPERTIES_V2_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_TRACE_PROPERTIES_V2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_TRACE_PROPERTIES_V2_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_TRACE_PROPERTIES_V2_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
-// EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EVENT_TRACE_PROPERTIES_V2_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
@@ -671,20 +671,20 @@ type TRACE_ENABLE_INFO struct {
 	MatchAllKeyword uint64
 }
 
-// TRACE_EVENT_INFO_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TRACE_EVENT_INFO_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TRACE_EVENT_INFO_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// TRACE_EVENT_INFO_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TRACE_EVENT_INFO_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TRACE_EVENT_INFO_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
 
-// TRACE_EVENT_INFO_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TRACE_EVENT_INFO_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TRACE_EVENT_INFO_Anonymous3_e__Union struct {
 	Data [1]uint32
 }
@@ -735,14 +735,14 @@ type TRACE_GUID_REGISTRATION struct {
 	RegHandle foundation.HANDLE
 }
 
-// TRACE_LOGFILE_HEADER_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TRACE_LOGFILE_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TRACE_LOGFILE_HEADER_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// TRACE_LOGFILE_HEADER_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TRACE_LOGFILE_HEADER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TRACE_LOGFILE_HEADER_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
@@ -769,14 +769,14 @@ type TRACE_LOGFILE_HEADER struct {
 	BuffersLost        uint32
 }
 
-// TRACE_LOGFILE_HEADER32_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TRACE_LOGFILE_HEADER32_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TRACE_LOGFILE_HEADER32_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// TRACE_LOGFILE_HEADER32_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TRACE_LOGFILE_HEADER32_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TRACE_LOGFILE_HEADER32_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
@@ -802,14 +802,14 @@ type TRACE_LOGFILE_HEADER32 struct {
 	BuffersLost        uint32
 }
 
-// TRACE_LOGFILE_HEADER64_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TRACE_LOGFILE_HEADER64_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TRACE_LOGFILE_HEADER64_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// TRACE_LOGFILE_HEADER64_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TRACE_LOGFILE_HEADER64_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TRACE_LOGFILE_HEADER64_Anonymous2_e__Union struct {
 	Data [4]uint32
 }
@@ -874,8 +874,8 @@ type TRACE_VERSION_INFO struct {
 	Reserved                  uint32
 }
 
-// WMIREGGUIDW_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WMIREGGUIDW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WMIREGGUIDW_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -896,8 +896,8 @@ type WMIREGINFOW struct {
 	WmiRegGuid      [1]WMIREGGUIDW
 }
 
-// WNODE_ALL_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WNODE_ALL_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WNODE_ALL_DATA_Anonymous_e__Union struct {
 	Data [2]uint32
 }
@@ -914,8 +914,8 @@ type WNODE_EVENT_ITEM struct {
 	WnodeHeader WNODE_HEADER
 }
 
-// WNODE_EVENT_REFERENCE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WNODE_EVENT_REFERENCE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WNODE_EVENT_REFERENCE_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -927,14 +927,14 @@ type WNODE_EVENT_REFERENCE struct {
 	Anonymous           WNODE_EVENT_REFERENCE_Anonymous_e__Union
 }
 
-// WNODE_HEADER_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WNODE_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WNODE_HEADER_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// WNODE_HEADER_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WNODE_HEADER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WNODE_HEADER_Anonymous2_e__Union struct {
 	Data [1]uint64
 }

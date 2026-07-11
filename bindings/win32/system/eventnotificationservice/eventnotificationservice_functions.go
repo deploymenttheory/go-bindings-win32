@@ -17,27 +17,28 @@ var (
 )
 
 var (
+	procIsDestinationReachable  = modSensApi.NewProc("IsDestinationReachableW")
 	procIsDestinationReachableA = modSensApi.NewProc("IsDestinationReachableA")
-	procIsDestinationReachableW = modSensApi.NewProc("IsDestinationReachableW")
 	procIsNetworkAlive          = modSensApi.NewProc("IsNetworkAlive")
 )
 
-// IsDestinationReachableA calls SensApi!IsDestinationReachableA.
-// https://learn.microsoft.com/windows/win32/api/sensapi/nf-sensapi-isdestinationreachablea
+// IsDestinationReachable calls SensApi!IsDestinationReachableW.
+// https://learn.microsoft.com/windows/win32/api/sensapi/nf-sensapi-isdestinationreachablew
 // Minimum OS: windows5.1.2600.
-func IsDestinationReachableA(lpszDestination foundation.PSTR, lpQOCInfo *QOCINFO) error {
-	r1, _, e1 := syscall.SyscallN(procIsDestinationReachableA.Addr(), uintptr(unsafe.Pointer(lpszDestination)), uintptr(unsafe.Pointer(lpQOCInfo)))
+func IsDestinationReachable(lpszDestination string, lpQOCInfo *QOCINFO) error {
+	_lpszDestination := win32.UTF16Ptr(lpszDestination)
+	r1, _, e1 := syscall.SyscallN(procIsDestinationReachable.Addr(), uintptr(unsafe.Pointer(_lpszDestination)), uintptr(unsafe.Pointer(lpQOCInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// IsDestinationReachableW calls SensApi!IsDestinationReachableW.
-// https://learn.microsoft.com/windows/win32/api/sensapi/nf-sensapi-isdestinationreachablew
+// IsDestinationReachableA calls SensApi!IsDestinationReachableA.
+// https://learn.microsoft.com/windows/win32/api/sensapi/nf-sensapi-isdestinationreachablea
 // Minimum OS: windows5.1.2600.
-func IsDestinationReachableW(lpszDestination foundation.PWSTR, lpQOCInfo *QOCINFO) error {
-	r1, _, e1 := syscall.SyscallN(procIsDestinationReachableW.Addr(), uintptr(unsafe.Pointer(lpszDestination)), uintptr(unsafe.Pointer(lpQOCInfo)))
+func IsDestinationReachableA(lpszDestination foundation.PSTR, lpQOCInfo *QOCINFO) error {
+	r1, _, e1 := syscall.SyscallN(procIsDestinationReachableA.Addr(), uintptr(unsafe.Pointer(lpszDestination)), uintptr(unsafe.Pointer(lpQOCInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

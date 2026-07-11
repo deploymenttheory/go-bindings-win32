@@ -24,9 +24,9 @@ type IDirectManipulationAutoScrollBehavior struct {
 var IID_IDirectManipulationAutoScrollBehavior = win32.GUID{Data1: 0x6d5954d4, Data2: 0x2003, Data3: 0x4356, Data4: [8]byte{0x9b, 0x31, 0xd0, 0x51, 0xc9, 0xff, 0x0a, 0xf7}}
 
 // SetConfiguration dispatches through IDirectManipulationAutoScrollBehavior's vtable slot 3.
-func (self *IDirectManipulationAutoScrollBehavior) SetConfiguration(motionTypes DIRECTMANIPULATION_MOTION_TYPES, scrollMotion DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION) foundation.HRESULT {
+func (self *IDirectManipulationAutoScrollBehavior) SetConfiguration(motionTypes DIRECTMANIPULATION_MOTION_TYPES, scrollMotion DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(motionTypes), uintptr(scrollMotion))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationCompositor: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationcompositor
@@ -39,27 +39,27 @@ type IDirectManipulationCompositor struct {
 var IID_IDirectManipulationCompositor = win32.GUID{Data1: 0x537a0825, Data2: 0x0387, Data3: 0x4efa, Data4: [8]byte{0xb6, 0x2f, 0x71, 0xeb, 0x1f, 0x08, 0x5a, 0x7e}}
 
 // AddContent dispatches through IDirectManipulationCompositor's vtable slot 3.
-func (self *IDirectManipulationCompositor) AddContent(content *IDirectManipulationContent, device *systemcom.IUnknown, parentVisual *systemcom.IUnknown, childVisual *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectManipulationCompositor) AddContent(content *IDirectManipulationContent, device *systemcom.IUnknown, parentVisual *systemcom.IUnknown, childVisual *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(content)), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(parentVisual)), uintptr(unsafe.Pointer(childVisual)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveContent dispatches through IDirectManipulationCompositor's vtable slot 4.
-func (self *IDirectManipulationCompositor) RemoveContent(content *IDirectManipulationContent) foundation.HRESULT {
+func (self *IDirectManipulationCompositor) RemoveContent(content *IDirectManipulationContent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(content)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUpdateManager dispatches through IDirectManipulationCompositor's vtable slot 5.
-func (self *IDirectManipulationCompositor) SetUpdateManager(updateManager *IDirectManipulationUpdateManager) foundation.HRESULT {
+func (self *IDirectManipulationCompositor) SetUpdateManager(updateManager *IDirectManipulationUpdateManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(updateManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Flush dispatches through IDirectManipulationCompositor's vtable slot 6.
-func (self *IDirectManipulationCompositor) Flush() foundation.HRESULT {
+func (self *IDirectManipulationCompositor) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationCompositor2: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationcompositor2
@@ -72,9 +72,9 @@ type IDirectManipulationCompositor2 struct {
 var IID_IDirectManipulationCompositor2 = win32.GUID{Data1: 0xd38c7822, Data2: 0xf1cb, Data3: 0x43cb, Data4: [8]byte{0xb4, 0xb9, 0xac, 0x0c, 0x76, 0x7a, 0x41, 0x2e}}
 
 // AddContentWithCrossProcessChaining dispatches through IDirectManipulationCompositor2's vtable slot 7.
-func (self *IDirectManipulationCompositor2) AddContentWithCrossProcessChaining(content *IDirectManipulationPrimaryContent, device *systemcom.IUnknown, parentVisual *systemcom.IUnknown, childVisual *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDirectManipulationCompositor2) AddContentWithCrossProcessChaining(content *IDirectManipulationPrimaryContent, device *systemcom.IUnknown, parentVisual *systemcom.IUnknown, childVisual *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(content)), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(parentVisual)), uintptr(unsafe.Pointer(childVisual)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationContent: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationcontent
@@ -87,51 +87,51 @@ type IDirectManipulationContent struct {
 var IID_IDirectManipulationContent = win32.GUID{Data1: 0xb89962cb, Data2: 0x3d89, Data3: 0x442b, Data4: [8]byte{0xbb, 0x58, 0x50, 0x98, 0xfa, 0x0f, 0x9f, 0x16}}
 
 // GetContentRect dispatches through IDirectManipulationContent's vtable slot 3.
-func (self *IDirectManipulationContent) GetContentRect(contentSize *foundation.RECT) foundation.HRESULT {
+func (self *IDirectManipulationContent) GetContentRect(contentSize *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contentSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetContentRect dispatches through IDirectManipulationContent's vtable slot 4.
-func (self *IDirectManipulationContent) SetContentRect(contentSize *foundation.RECT) foundation.HRESULT {
+func (self *IDirectManipulationContent) SetContentRect(contentSize *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contentSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetViewport dispatches through IDirectManipulationContent's vtable slot 5.
-func (self *IDirectManipulationContent) GetViewport(riid *win32.GUID, object *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectManipulationContent) GetViewport(riid *win32.GUID, object *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTag dispatches through IDirectManipulationContent's vtable slot 6.
-func (self *IDirectManipulationContent) GetTag(riid *win32.GUID, object *unsafe.Pointer, id *uint32) foundation.HRESULT {
+func (self *IDirectManipulationContent) GetTag(riid *win32.GUID, object *unsafe.Pointer, id *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTag dispatches through IDirectManipulationContent's vtable slot 7.
-func (self *IDirectManipulationContent) SetTag(object *systemcom.IUnknown, id uint32) foundation.HRESULT {
+func (self *IDirectManipulationContent) SetTag(object *systemcom.IUnknown, id uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(id))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputTransform dispatches through IDirectManipulationContent's vtable slot 8.
-func (self *IDirectManipulationContent) GetOutputTransform(matrix *float32, pointCount uint32) foundation.HRESULT {
+func (self *IDirectManipulationContent) GetOutputTransform(matrix *float32, pointCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)), uintptr(pointCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContentTransform dispatches through IDirectManipulationContent's vtable slot 9.
-func (self *IDirectManipulationContent) GetContentTransform(matrix *float32, pointCount uint32) foundation.HRESULT {
+func (self *IDirectManipulationContent) GetContentTransform(matrix *float32, pointCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)), uintptr(pointCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SyncContentTransform dispatches through IDirectManipulationContent's vtable slot 10.
-func (self *IDirectManipulationContent) SyncContentTransform(matrix *float32, pointCount uint32) foundation.HRESULT {
+func (self *IDirectManipulationContent) SyncContentTransform(matrix *float32, pointCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)), uintptr(pointCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationDeferContactService: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationdefercontactservice
@@ -144,21 +144,21 @@ type IDirectManipulationDeferContactService struct {
 var IID_IDirectManipulationDeferContactService = win32.GUID{Data1: 0x652d5c71, Data2: 0xfe60, Data3: 0x4a98, Data4: [8]byte{0xbe, 0x70, 0xe5, 0xf2, 0x12, 0x91, 0xe7, 0xf1}}
 
 // DeferContact dispatches through IDirectManipulationDeferContactService's vtable slot 3.
-func (self *IDirectManipulationDeferContactService) DeferContact(pointerId uint32, timeout uint32) foundation.HRESULT {
+func (self *IDirectManipulationDeferContactService) DeferContact(pointerId uint32, timeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(pointerId), uintptr(timeout))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelContact dispatches through IDirectManipulationDeferContactService's vtable slot 4.
-func (self *IDirectManipulationDeferContactService) CancelContact(pointerId uint32) foundation.HRESULT {
+func (self *IDirectManipulationDeferContactService) CancelContact(pointerId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(pointerId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CancelDeferral dispatches through IDirectManipulationDeferContactService's vtable slot 5.
-func (self *IDirectManipulationDeferContactService) CancelDeferral(pointerId uint32) foundation.HRESULT {
+func (self *IDirectManipulationDeferContactService) CancelDeferral(pointerId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(pointerId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationDragDropBehavior: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationdragdropbehavior
@@ -171,15 +171,15 @@ type IDirectManipulationDragDropBehavior struct {
 var IID_IDirectManipulationDragDropBehavior = win32.GUID{Data1: 0x814b5af5, Data2: 0xc2c8, Data3: 0x4270, Data4: [8]byte{0xa9, 0xb7, 0xa1, 0x98, 0xce, 0x8d, 0x02, 0xfa}}
 
 // SetConfiguration dispatches through IDirectManipulationDragDropBehavior's vtable slot 3.
-func (self *IDirectManipulationDragDropBehavior) SetConfiguration(configuration DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION) foundation.HRESULT {
+func (self *IDirectManipulationDragDropBehavior) SetConfiguration(configuration DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(configuration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IDirectManipulationDragDropBehavior's vtable slot 4.
-func (self *IDirectManipulationDragDropBehavior) GetStatus(status *DIRECTMANIPULATION_DRAG_DROP_STATUS) foundation.HRESULT {
+func (self *IDirectManipulationDragDropBehavior) GetStatus(status *DIRECTMANIPULATION_DRAG_DROP_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(status)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationDragDropEventHandler: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationdragdropeventhandler
@@ -192,9 +192,9 @@ type IDirectManipulationDragDropEventHandler struct {
 var IID_IDirectManipulationDragDropEventHandler = win32.GUID{Data1: 0x1fa11b10, Data2: 0x701b, Data3: 0x41ae, Data4: [8]byte{0xb5, 0xf2, 0x49, 0xe3, 0x6b, 0xd5, 0x95, 0xaa}}
 
 // OnDragDropStatusChange dispatches through IDirectManipulationDragDropEventHandler's vtable slot 3.
-func (self *IDirectManipulationDragDropEventHandler) OnDragDropStatusChange(viewport *IDirectManipulationViewport2, current DIRECTMANIPULATION_DRAG_DROP_STATUS, previous DIRECTMANIPULATION_DRAG_DROP_STATUS) foundation.HRESULT {
+func (self *IDirectManipulationDragDropEventHandler) OnDragDropStatusChange(viewport *IDirectManipulationViewport2, current DIRECTMANIPULATION_DRAG_DROP_STATUS, previous DIRECTMANIPULATION_DRAG_DROP_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)), uintptr(current), uintptr(previous))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationFrameInfoProvider: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationframeinfoprovider
@@ -207,9 +207,9 @@ type IDirectManipulationFrameInfoProvider struct {
 var IID_IDirectManipulationFrameInfoProvider = win32.GUID{Data1: 0xfb759dba, Data2: 0x6f4c, Data3: 0x4c01, Data4: [8]byte{0x87, 0x4e, 0x19, 0xc8, 0xa0, 0x59, 0x07, 0xf9}}
 
 // GetNextFrameInfo dispatches through IDirectManipulationFrameInfoProvider's vtable slot 3.
-func (self *IDirectManipulationFrameInfoProvider) GetNextFrameInfo(time *uint64, processTime *uint64, compositionTime *uint64) foundation.HRESULT {
+func (self *IDirectManipulationFrameInfoProvider) GetNextFrameInfo(time *uint64, processTime *uint64, compositionTime *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(time)), uintptr(unsafe.Pointer(processTime)), uintptr(unsafe.Pointer(compositionTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationInteractionEventHandler: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationinteractioneventhandler
@@ -222,9 +222,9 @@ type IDirectManipulationInteractionEventHandler struct {
 var IID_IDirectManipulationInteractionEventHandler = win32.GUID{Data1: 0xe43f45b8, Data2: 0x42b4, Data3: 0x403e, Data4: [8]byte{0xb1, 0xf2, 0x27, 0x3b, 0x8f, 0x51, 0x08, 0x30}}
 
 // OnInteraction dispatches through IDirectManipulationInteractionEventHandler's vtable slot 3.
-func (self *IDirectManipulationInteractionEventHandler) OnInteraction(viewport *IDirectManipulationViewport2, interaction DIRECTMANIPULATION_INTERACTION_TYPE) foundation.HRESULT {
+func (self *IDirectManipulationInteractionEventHandler) OnInteraction(viewport *IDirectManipulationViewport2, interaction DIRECTMANIPULATION_INTERACTION_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)), uintptr(interaction))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationManager: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationmanager
@@ -237,45 +237,45 @@ type IDirectManipulationManager struct {
 var IID_IDirectManipulationManager = win32.GUID{Data1: 0xfbf5d3b4, Data2: 0x70c7, Data3: 0x4163, Data4: [8]byte{0x93, 0x22, 0x5a, 0x6f, 0x66, 0x0d, 0x6f, 0xbc}}
 
 // Activate dispatches through IDirectManipulationManager's vtable slot 3.
-func (self *IDirectManipulationManager) Activate(window foundation.HWND) foundation.HRESULT {
+func (self *IDirectManipulationManager) Activate(window foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(window))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Deactivate dispatches through IDirectManipulationManager's vtable slot 4.
-func (self *IDirectManipulationManager) Deactivate(window foundation.HWND) foundation.HRESULT {
+func (self *IDirectManipulationManager) Deactivate(window foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(window))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterHitTestTarget dispatches through IDirectManipulationManager's vtable slot 5.
-func (self *IDirectManipulationManager) RegisterHitTestTarget(window foundation.HWND, hitTestWindow foundation.HWND, type_ DIRECTMANIPULATION_HITTEST_TYPE) foundation.HRESULT {
+func (self *IDirectManipulationManager) RegisterHitTestTarget(window foundation.HWND, hitTestWindow foundation.HWND, type_ DIRECTMANIPULATION_HITTEST_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(hitTestWindow), uintptr(type_))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessInput dispatches through IDirectManipulationManager's vtable slot 6.
-func (self *IDirectManipulationManager) ProcessInput(message *uiwindowsandmessaging.MSG, handled *foundation.BOOL) foundation.HRESULT {
+func (self *IDirectManipulationManager) ProcessInput(message *uiwindowsandmessaging.MSG, handled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(handled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUpdateManager dispatches through IDirectManipulationManager's vtable slot 7.
-func (self *IDirectManipulationManager) GetUpdateManager(riid *win32.GUID, object *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectManipulationManager) GetUpdateManager(riid *win32.GUID, object *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateViewport dispatches through IDirectManipulationManager's vtable slot 8.
-func (self *IDirectManipulationManager) CreateViewport(frameInfo *IDirectManipulationFrameInfoProvider, window foundation.HWND, riid *win32.GUID, object *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectManipulationManager) CreateViewport(frameInfo *IDirectManipulationFrameInfoProvider, window foundation.HWND, riid *win32.GUID, object *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(frameInfo)), uintptr(window), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateContent dispatches through IDirectManipulationManager's vtable slot 9.
-func (self *IDirectManipulationManager) CreateContent(frameInfo *IDirectManipulationFrameInfoProvider, clsid *win32.GUID, riid *win32.GUID, object *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectManipulationManager) CreateContent(frameInfo *IDirectManipulationFrameInfoProvider, clsid *win32.GUID, riid *win32.GUID, object *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(frameInfo)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationManager2: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationmanager2
@@ -288,9 +288,9 @@ type IDirectManipulationManager2 struct {
 var IID_IDirectManipulationManager2 = win32.GUID{Data1: 0xfa1005e9, Data2: 0x3d16, Data3: 0x484c, Data4: [8]byte{0xbf, 0xc9, 0x62, 0xb6, 0x1e, 0x56, 0xec, 0x4e}}
 
 // CreateBehavior dispatches through IDirectManipulationManager2's vtable slot 10.
-func (self *IDirectManipulationManager2) CreateBehavior(clsid *win32.GUID, riid *win32.GUID, object *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectManipulationManager2) CreateBehavior(clsid *win32.GUID, riid *win32.GUID, object *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationManager3: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationmanager3
@@ -303,9 +303,9 @@ type IDirectManipulationManager3 struct {
 var IID_IDirectManipulationManager3 = win32.GUID{Data1: 0x2cb6b33d, Data2: 0xffe8, Data3: 0x488c, Data4: [8]byte{0xb7, 0x50, 0xfb, 0xdf, 0xe8, 0x8d, 0xca, 0x8c}}
 
 // GetService dispatches through IDirectManipulationManager3's vtable slot 11.
-func (self *IDirectManipulationManager3) GetService(clsid *win32.GUID, riid *win32.GUID, object *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectManipulationManager3) GetService(clsid *win32.GUID, riid *win32.GUID, object *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationPrimaryContent: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationprimarycontent
@@ -318,39 +318,39 @@ type IDirectManipulationPrimaryContent struct {
 var IID_IDirectManipulationPrimaryContent = win32.GUID{Data1: 0xc12851e4, Data2: 0x1698, Data3: 0x4625, Data4: [8]byte{0xb9, 0xb1, 0x7c, 0xa3, 0xec, 0x18, 0x63, 0x0b}}
 
 // SetSnapPoints dispatches through IDirectManipulationPrimaryContent's vtable slot 4.
-func (self *IDirectManipulationPrimaryContent) SetSnapPoints(motion DIRECTMANIPULATION_MOTION_TYPES, points *float32, pointCount uint32) foundation.HRESULT {
+func (self *IDirectManipulationPrimaryContent) SetSnapPoints(motion DIRECTMANIPULATION_MOTION_TYPES, points *float32, pointCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(motion), uintptr(unsafe.Pointer(points)), uintptr(pointCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSnapType dispatches through IDirectManipulationPrimaryContent's vtable slot 5.
-func (self *IDirectManipulationPrimaryContent) SetSnapType(motion DIRECTMANIPULATION_MOTION_TYPES, type_ DIRECTMANIPULATION_SNAPPOINT_TYPE) foundation.HRESULT {
+func (self *IDirectManipulationPrimaryContent) SetSnapType(motion DIRECTMANIPULATION_MOTION_TYPES, type_ DIRECTMANIPULATION_SNAPPOINT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(motion), uintptr(type_))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetHorizontalAlignment dispatches through IDirectManipulationPrimaryContent's vtable slot 8.
-func (self *IDirectManipulationPrimaryContent) SetHorizontalAlignment(alignment DIRECTMANIPULATION_HORIZONTALALIGNMENT) foundation.HRESULT {
+func (self *IDirectManipulationPrimaryContent) SetHorizontalAlignment(alignment DIRECTMANIPULATION_HORIZONTALALIGNMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(alignment))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVerticalAlignment dispatches through IDirectManipulationPrimaryContent's vtable slot 9.
-func (self *IDirectManipulationPrimaryContent) SetVerticalAlignment(alignment DIRECTMANIPULATION_VERTICALALIGNMENT) foundation.HRESULT {
+func (self *IDirectManipulationPrimaryContent) SetVerticalAlignment(alignment DIRECTMANIPULATION_VERTICALALIGNMENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(alignment))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInertiaEndTransform dispatches through IDirectManipulationPrimaryContent's vtable slot 10.
-func (self *IDirectManipulationPrimaryContent) GetInertiaEndTransform(matrix *float32, pointCount uint32) foundation.HRESULT {
+func (self *IDirectManipulationPrimaryContent) GetInertiaEndTransform(matrix *float32, pointCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)), uintptr(pointCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCenterPoint dispatches through IDirectManipulationPrimaryContent's vtable slot 11.
-func (self *IDirectManipulationPrimaryContent) GetCenterPoint(centerX *float32, centerY *float32) foundation.HRESULT {
+func (self *IDirectManipulationPrimaryContent) GetCenterPoint(centerX *float32, centerY *float32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(centerX)), uintptr(unsafe.Pointer(centerY)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationUpdateHandler: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationupdatehandler
@@ -363,9 +363,9 @@ type IDirectManipulationUpdateHandler struct {
 var IID_IDirectManipulationUpdateHandler = win32.GUID{Data1: 0x790b6337, Data2: 0x64f8, Data3: 0x4ff5, Data4: [8]byte{0xa2, 0x69, 0xb3, 0x2b, 0xc2, 0xaf, 0x27, 0xa7}}
 
 // Update dispatches through IDirectManipulationUpdateHandler's vtable slot 3.
-func (self *IDirectManipulationUpdateHandler) Update() foundation.HRESULT {
+func (self *IDirectManipulationUpdateHandler) Update() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationUpdateManager: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationupdatemanager
@@ -378,21 +378,21 @@ type IDirectManipulationUpdateManager struct {
 var IID_IDirectManipulationUpdateManager = win32.GUID{Data1: 0xb0ae62fd, Data2: 0xbe34, Data3: 0x46e7, Data4: [8]byte{0x9c, 0xaa, 0xd3, 0x61, 0xfa, 0xcb, 0xb9, 0xcc}}
 
 // RegisterWaitHandleCallback dispatches through IDirectManipulationUpdateManager's vtable slot 3.
-func (self *IDirectManipulationUpdateManager) RegisterWaitHandleCallback(handle foundation.HANDLE, eventHandler *IDirectManipulationUpdateHandler, cookie *uint32) foundation.HRESULT {
+func (self *IDirectManipulationUpdateManager) RegisterWaitHandleCallback(handle foundation.HANDLE, eventHandler *IDirectManipulationUpdateHandler, cookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(handle), uintptr(unsafe.Pointer(eventHandler)), uintptr(unsafe.Pointer(cookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterWaitHandleCallback dispatches through IDirectManipulationUpdateManager's vtable slot 4.
-func (self *IDirectManipulationUpdateManager) UnregisterWaitHandleCallback(cookie uint32) foundation.HRESULT {
+func (self *IDirectManipulationUpdateManager) UnregisterWaitHandleCallback(cookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Update dispatches through IDirectManipulationUpdateManager's vtable slot 5.
-func (self *IDirectManipulationUpdateManager) Update(frameInfo *IDirectManipulationFrameInfoProvider) foundation.HRESULT {
+func (self *IDirectManipulationUpdateManager) Update(frameInfo *IDirectManipulationFrameInfoProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(frameInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationViewport: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationviewport
@@ -405,165 +405,165 @@ type IDirectManipulationViewport struct {
 var IID_IDirectManipulationViewport = win32.GUID{Data1: 0x28b85a3d, Data2: 0x60a0, Data3: 0x48bd, Data4: [8]byte{0x9b, 0xa1, 0x5c, 0xe8, 0xd9, 0xea, 0x3a, 0x6d}}
 
 // Enable dispatches through IDirectManipulationViewport's vtable slot 3.
-func (self *IDirectManipulationViewport) Enable() foundation.HRESULT {
+func (self *IDirectManipulationViewport) Enable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disable dispatches through IDirectManipulationViewport's vtable slot 4.
-func (self *IDirectManipulationViewport) Disable() foundation.HRESULT {
+func (self *IDirectManipulationViewport) Disable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetContact dispatches through IDirectManipulationViewport's vtable slot 5.
-func (self *IDirectManipulationViewport) SetContact(pointerId uint32) foundation.HRESULT {
+func (self *IDirectManipulationViewport) SetContact(pointerId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(pointerId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseContact dispatches through IDirectManipulationViewport's vtable slot 6.
-func (self *IDirectManipulationViewport) ReleaseContact(pointerId uint32) foundation.HRESULT {
+func (self *IDirectManipulationViewport) ReleaseContact(pointerId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(pointerId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseAllContacts dispatches through IDirectManipulationViewport's vtable slot 7.
-func (self *IDirectManipulationViewport) ReleaseAllContacts() foundation.HRESULT {
+func (self *IDirectManipulationViewport) ReleaseAllContacts() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IDirectManipulationViewport's vtable slot 8.
-func (self *IDirectManipulationViewport) GetStatus(status *DIRECTMANIPULATION_STATUS) foundation.HRESULT {
+func (self *IDirectManipulationViewport) GetStatus(status *DIRECTMANIPULATION_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(status)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTag dispatches through IDirectManipulationViewport's vtable slot 9.
-func (self *IDirectManipulationViewport) GetTag(riid *win32.GUID, object *unsafe.Pointer, id *uint32) foundation.HRESULT {
+func (self *IDirectManipulationViewport) GetTag(riid *win32.GUID, object *unsafe.Pointer, id *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTag dispatches through IDirectManipulationViewport's vtable slot 10.
-func (self *IDirectManipulationViewport) SetTag(object *systemcom.IUnknown, id uint32) foundation.HRESULT {
+func (self *IDirectManipulationViewport) SetTag(object *systemcom.IUnknown, id uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(id))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetViewportRect dispatches through IDirectManipulationViewport's vtable slot 11.
-func (self *IDirectManipulationViewport) GetViewportRect(viewport *foundation.RECT) foundation.HRESULT {
+func (self *IDirectManipulationViewport) GetViewportRect(viewport *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetViewportRect dispatches through IDirectManipulationViewport's vtable slot 12.
-func (self *IDirectManipulationViewport) SetViewportRect(viewport *foundation.RECT) foundation.HRESULT {
+func (self *IDirectManipulationViewport) SetViewportRect(viewport *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetViewportTransform dispatches through IDirectManipulationViewport's vtable slot 14.
-func (self *IDirectManipulationViewport) SetViewportTransform(matrix *float32, pointCount uint32) foundation.HRESULT {
+func (self *IDirectManipulationViewport) SetViewportTransform(matrix *float32, pointCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)), uintptr(pointCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SyncDisplayTransform dispatches through IDirectManipulationViewport's vtable slot 15.
-func (self *IDirectManipulationViewport) SyncDisplayTransform(matrix *float32, pointCount uint32) foundation.HRESULT {
+func (self *IDirectManipulationViewport) SyncDisplayTransform(matrix *float32, pointCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)), uintptr(pointCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrimaryContent dispatches through IDirectManipulationViewport's vtable slot 16.
-func (self *IDirectManipulationViewport) GetPrimaryContent(riid *win32.GUID, object *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirectManipulationViewport) GetPrimaryContent(riid *win32.GUID, object *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(object)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddContent dispatches through IDirectManipulationViewport's vtable slot 17.
-func (self *IDirectManipulationViewport) AddContent(content *IDirectManipulationContent) foundation.HRESULT {
+func (self *IDirectManipulationViewport) AddContent(content *IDirectManipulationContent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(content)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveContent dispatches through IDirectManipulationViewport's vtable slot 18.
-func (self *IDirectManipulationViewport) RemoveContent(content *IDirectManipulationContent) foundation.HRESULT {
+func (self *IDirectManipulationViewport) RemoveContent(content *IDirectManipulationContent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(content)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetViewportOptions dispatches through IDirectManipulationViewport's vtable slot 19.
-func (self *IDirectManipulationViewport) SetViewportOptions(options DIRECTMANIPULATION_VIEWPORT_OPTIONS) foundation.HRESULT {
+func (self *IDirectManipulationViewport) SetViewportOptions(options DIRECTMANIPULATION_VIEWPORT_OPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(options))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddConfiguration dispatches through IDirectManipulationViewport's vtable slot 20.
-func (self *IDirectManipulationViewport) AddConfiguration(configuration DIRECTMANIPULATION_CONFIGURATION) foundation.HRESULT {
+func (self *IDirectManipulationViewport) AddConfiguration(configuration DIRECTMANIPULATION_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(configuration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveConfiguration dispatches through IDirectManipulationViewport's vtable slot 21.
-func (self *IDirectManipulationViewport) RemoveConfiguration(configuration DIRECTMANIPULATION_CONFIGURATION) foundation.HRESULT {
+func (self *IDirectManipulationViewport) RemoveConfiguration(configuration DIRECTMANIPULATION_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(configuration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ActivateConfiguration dispatches through IDirectManipulationViewport's vtable slot 22.
-func (self *IDirectManipulationViewport) ActivateConfiguration(configuration DIRECTMANIPULATION_CONFIGURATION) foundation.HRESULT {
+func (self *IDirectManipulationViewport) ActivateConfiguration(configuration DIRECTMANIPULATION_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(configuration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetManualGesture dispatches through IDirectManipulationViewport's vtable slot 23.
-func (self *IDirectManipulationViewport) SetManualGesture(configuration DIRECTMANIPULATION_GESTURE_CONFIGURATION) foundation.HRESULT {
+func (self *IDirectManipulationViewport) SetManualGesture(configuration DIRECTMANIPULATION_GESTURE_CONFIGURATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(configuration))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetChaining dispatches through IDirectManipulationViewport's vtable slot 24.
-func (self *IDirectManipulationViewport) SetChaining(enabledTypes DIRECTMANIPULATION_MOTION_TYPES) foundation.HRESULT {
+func (self *IDirectManipulationViewport) SetChaining(enabledTypes DIRECTMANIPULATION_MOTION_TYPES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(enabledTypes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddEventHandler dispatches through IDirectManipulationViewport's vtable slot 25.
-func (self *IDirectManipulationViewport) AddEventHandler(window foundation.HWND, eventHandler *IDirectManipulationViewportEventHandler, cookie *uint32) foundation.HRESULT {
+func (self *IDirectManipulationViewport) AddEventHandler(window foundation.HWND, eventHandler *IDirectManipulationViewportEventHandler, cookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(window), uintptr(unsafe.Pointer(eventHandler)), uintptr(unsafe.Pointer(cookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveEventHandler dispatches through IDirectManipulationViewport's vtable slot 26.
-func (self *IDirectManipulationViewport) RemoveEventHandler(cookie uint32) foundation.HRESULT {
+func (self *IDirectManipulationViewport) RemoveEventHandler(cookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(cookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInputMode dispatches through IDirectManipulationViewport's vtable slot 27.
-func (self *IDirectManipulationViewport) SetInputMode(mode DIRECTMANIPULATION_INPUT_MODE) foundation.HRESULT {
+func (self *IDirectManipulationViewport) SetInputMode(mode DIRECTMANIPULATION_INPUT_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUpdateMode dispatches through IDirectManipulationViewport's vtable slot 28.
-func (self *IDirectManipulationViewport) SetUpdateMode(mode DIRECTMANIPULATION_INPUT_MODE) foundation.HRESULT {
+func (self *IDirectManipulationViewport) SetUpdateMode(mode DIRECTMANIPULATION_INPUT_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IDirectManipulationViewport's vtable slot 29.
-func (self *IDirectManipulationViewport) Stop() foundation.HRESULT {
+func (self *IDirectManipulationViewport) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Abandon dispatches through IDirectManipulationViewport's vtable slot 30.
-func (self *IDirectManipulationViewport) Abandon() foundation.HRESULT {
+func (self *IDirectManipulationViewport) Abandon() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationViewport2: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationviewport2
@@ -576,21 +576,21 @@ type IDirectManipulationViewport2 struct {
 var IID_IDirectManipulationViewport2 = win32.GUID{Data1: 0x923ccaac, Data2: 0x61e1, Data3: 0x4385, Data4: [8]byte{0xb7, 0x26, 0x01, 0x7a, 0xf1, 0x89, 0x88, 0x2a}}
 
 // AddBehavior dispatches through IDirectManipulationViewport2's vtable slot 31.
-func (self *IDirectManipulationViewport2) AddBehavior(behavior *systemcom.IUnknown, cookie *uint32) foundation.HRESULT {
+func (self *IDirectManipulationViewport2) AddBehavior(behavior *systemcom.IUnknown, cookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(behavior)), uintptr(unsafe.Pointer(cookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveBehavior dispatches through IDirectManipulationViewport2's vtable slot 32.
-func (self *IDirectManipulationViewport2) RemoveBehavior(cookie uint32) foundation.HRESULT {
+func (self *IDirectManipulationViewport2) RemoveBehavior(cookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(cookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAllBehaviors dispatches through IDirectManipulationViewport2's vtable slot 33.
-func (self *IDirectManipulationViewport2) RemoveAllBehaviors() foundation.HRESULT {
+func (self *IDirectManipulationViewport2) RemoveAllBehaviors() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDirectManipulationViewportEventHandler: https://learn.microsoft.com/windows/win32/api/directmanipulation/nn-directmanipulation-idirectmanipulationviewporteventhandler
@@ -603,19 +603,19 @@ type IDirectManipulationViewportEventHandler struct {
 var IID_IDirectManipulationViewportEventHandler = win32.GUID{Data1: 0x952121da, Data2: 0xd69f, Data3: 0x45f9, Data4: [8]byte{0xb0, 0xf9, 0xf2, 0x39, 0x44, 0x32, 0x1a, 0x6d}}
 
 // OnViewportStatusChanged dispatches through IDirectManipulationViewportEventHandler's vtable slot 3.
-func (self *IDirectManipulationViewportEventHandler) OnViewportStatusChanged(viewport *IDirectManipulationViewport, current DIRECTMANIPULATION_STATUS, previous DIRECTMANIPULATION_STATUS) foundation.HRESULT {
+func (self *IDirectManipulationViewportEventHandler) OnViewportStatusChanged(viewport *IDirectManipulationViewport, current DIRECTMANIPULATION_STATUS, previous DIRECTMANIPULATION_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)), uintptr(current), uintptr(previous))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnViewportUpdated dispatches through IDirectManipulationViewportEventHandler's vtable slot 4.
-func (self *IDirectManipulationViewportEventHandler) OnViewportUpdated(viewport *IDirectManipulationViewport) foundation.HRESULT {
+func (self *IDirectManipulationViewportEventHandler) OnViewportUpdated(viewport *IDirectManipulationViewport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnContentUpdated dispatches through IDirectManipulationViewportEventHandler's vtable slot 5.
-func (self *IDirectManipulationViewportEventHandler) OnContentUpdated(viewport *IDirectManipulationViewport, content *IDirectManipulationContent) foundation.HRESULT {
+func (self *IDirectManipulationViewportEventHandler) OnContentUpdated(viewport *IDirectManipulationViewport, content *IDirectManipulationContent) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(viewport)), uintptr(unsafe.Pointer(content)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

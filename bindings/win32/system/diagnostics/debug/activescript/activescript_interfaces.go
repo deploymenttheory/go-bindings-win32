@@ -24,51 +24,51 @@ type AsyncIDebugApplicationNodeEvents struct {
 var IID_AsyncIDebugApplicationNodeEvents = win32.GUID{Data1: 0xa2e3aa3b, Data2: 0xaa8d, Data3: 0x4ebf, Data4: [8]byte{0x84, 0xcd, 0x64, 0x8b, 0x73, 0x7b, 0x8c, 0x13}}
 
 // Begin_onAddChild dispatches through AsyncIDebugApplicationNodeEvents's vtable slot 3.
-func (self *AsyncIDebugApplicationNodeEvents) Begin_onAddChild(prddpChild *IDebugApplicationNode) foundation.HRESULT {
+func (self *AsyncIDebugApplicationNodeEvents) Begin_onAddChild(prddpChild *IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prddpChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_onAddChild dispatches through AsyncIDebugApplicationNodeEvents's vtable slot 4.
-func (self *AsyncIDebugApplicationNodeEvents) Finish_onAddChild() foundation.HRESULT {
+func (self *AsyncIDebugApplicationNodeEvents) Finish_onAddChild() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_onRemoveChild dispatches through AsyncIDebugApplicationNodeEvents's vtable slot 5.
-func (self *AsyncIDebugApplicationNodeEvents) Begin_onRemoveChild(prddpChild *IDebugApplicationNode) foundation.HRESULT {
+func (self *AsyncIDebugApplicationNodeEvents) Begin_onRemoveChild(prddpChild *IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prddpChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_onRemoveChild dispatches through AsyncIDebugApplicationNodeEvents's vtable slot 6.
-func (self *AsyncIDebugApplicationNodeEvents) Finish_onRemoveChild() foundation.HRESULT {
+func (self *AsyncIDebugApplicationNodeEvents) Finish_onRemoveChild() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_onDetach dispatches through AsyncIDebugApplicationNodeEvents's vtable slot 7.
-func (self *AsyncIDebugApplicationNodeEvents) Begin_onDetach() foundation.HRESULT {
+func (self *AsyncIDebugApplicationNodeEvents) Begin_onDetach() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_onDetach dispatches through AsyncIDebugApplicationNodeEvents's vtable slot 8.
-func (self *AsyncIDebugApplicationNodeEvents) Finish_onDetach() foundation.HRESULT {
+func (self *AsyncIDebugApplicationNodeEvents) Finish_onDetach() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_onAttach dispatches through AsyncIDebugApplicationNodeEvents's vtable slot 9.
-func (self *AsyncIDebugApplicationNodeEvents) Begin_onAttach(prddpParent *IDebugApplicationNode) foundation.HRESULT {
+func (self *AsyncIDebugApplicationNodeEvents) Begin_onAttach(prddpParent *IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prddpParent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_onAttach dispatches through AsyncIDebugApplicationNodeEvents's vtable slot 10.
-func (self *AsyncIDebugApplicationNodeEvents) Finish_onAttach() foundation.HRESULT {
+func (self *AsyncIDebugApplicationNodeEvents) Finish_onAttach() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bb1a2ae1-a4f9-11cf-8f20-00805f2cd064
@@ -80,81 +80,83 @@ type IActiveScript struct {
 var IID_IActiveScript = win32.GUID{Data1: 0xbb1a2ae1, Data2: 0xa4f9, Data3: 0x11cf, Data4: [8]byte{0x8f, 0x20, 0x00, 0x80, 0x5f, 0x2c, 0xd0, 0x64}}
 
 // SetScriptSite dispatches through IActiveScript's vtable slot 3.
-func (self *IActiveScript) SetScriptSite(pass *IActiveScriptSite) foundation.HRESULT {
+func (self *IActiveScript) SetScriptSite(pass *IActiveScriptSite) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScriptSite dispatches through IActiveScript's vtable slot 4.
-func (self *IActiveScript) GetScriptSite(riid *win32.GUID, ppvObject *unsafe.Pointer) foundation.HRESULT {
+func (self *IActiveScript) GetScriptSite(riid *win32.GUID, ppvObject *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetScriptState dispatches through IActiveScript's vtable slot 5.
-func (self *IActiveScript) SetScriptState(ss SCRIPTSTATE) foundation.HRESULT {
+func (self *IActiveScript) SetScriptState(ss SCRIPTSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ss))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScriptState dispatches through IActiveScript's vtable slot 6.
-func (self *IActiveScript) GetScriptState(pssState *SCRIPTSTATE) foundation.HRESULT {
+func (self *IActiveScript) GetScriptState(pssState *SCRIPTSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pssState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IActiveScript's vtable slot 7.
-func (self *IActiveScript) Close() foundation.HRESULT {
+func (self *IActiveScript) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddNamedItem dispatches through IActiveScript's vtable slot 8.
-func (self *IActiveScript) AddNamedItem(pstrName foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrName)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+func (self *IActiveScript) AddNamedItem(pstrName string, dwFlags uint32) error {
+	_pstrName := win32.UTF16Ptr(pstrName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrName)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddTypeLib dispatches through IActiveScript's vtable slot 9.
-func (self *IActiveScript) AddTypeLib(rguidTypeLib *win32.GUID, dwMajor uint32, dwMinor uint32, dwFlags uint32) foundation.HRESULT {
+func (self *IActiveScript) AddTypeLib(rguidTypeLib *win32.GUID, dwMajor uint32, dwMinor uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidTypeLib)), uintptr(dwMajor), uintptr(dwMinor), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScriptDispatch dispatches through IActiveScript's vtable slot 10.
-func (self *IActiveScript) GetScriptDispatch(pstrItemName foundation.PWSTR, ppdisp **systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrItemName)), uintptr(unsafe.Pointer(ppdisp)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScript) GetScriptDispatch(pstrItemName string, ppdisp **systemcom.IDispatch) error {
+	_pstrItemName := win32.UTF16Ptr(pstrItemName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrItemName)), uintptr(unsafe.Pointer(ppdisp)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentScriptThreadID dispatches through IActiveScript's vtable slot 11.
-func (self *IActiveScript) GetCurrentScriptThreadID(pstidThread *uint32) foundation.HRESULT {
+func (self *IActiveScript) GetCurrentScriptThreadID(pstidThread *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstidThread)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScriptThreadID dispatches through IActiveScript's vtable slot 12.
-func (self *IActiveScript) GetScriptThreadID(dwWin32ThreadId uint32, pstidThread *uint32) foundation.HRESULT {
+func (self *IActiveScript) GetScriptThreadID(dwWin32ThreadId uint32, pstidThread *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwWin32ThreadId), uintptr(unsafe.Pointer(pstidThread)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScriptThreadState dispatches through IActiveScript's vtable slot 13.
-func (self *IActiveScript) GetScriptThreadState(stidThread uint32, pstsState *SCRIPTTHREADSTATE) foundation.HRESULT {
+func (self *IActiveScript) GetScriptThreadState(stidThread uint32, pstsState *SCRIPTTHREADSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(stidThread), uintptr(unsafe.Pointer(pstsState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InterruptScriptThread dispatches through IActiveScript's vtable slot 14.
-func (self *IActiveScript) InterruptScriptThread(stidThread uint32, pexcepinfo *systemcom.EXCEPINFO, dwFlags uint32) foundation.HRESULT {
+func (self *IActiveScript) InterruptScriptThread(stidThread uint32, pexcepinfo *systemcom.EXCEPINFO, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(stidThread), uintptr(unsafe.Pointer(pexcepinfo)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IActiveScript's vtable slot 15.
-func (self *IActiveScript) Clone(ppscript **IActiveScript) foundation.HRESULT {
+func (self *IActiveScript) Clone(ppscript **IActiveScript) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppscript)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 9c109da0-7006-11d1-b36c-00a0c911e8b2
@@ -166,87 +168,106 @@ type IActiveScriptAuthor struct {
 var IID_IActiveScriptAuthor = win32.GUID{Data1: 0x9c109da0, Data2: 0x7006, Data3: 0x11d1, Data4: [8]byte{0xb3, 0x6c, 0x00, 0xa0, 0xc9, 0x11, 0xe8, 0xb2}}
 
 // AddNamedItem dispatches through IActiveScriptAuthor's vtable slot 3.
-func (self *IActiveScriptAuthor) AddNamedItem(pszName foundation.PWSTR, dwFlags uint32, pdisp *systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdisp)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptAuthor) AddNamedItem(pszName string, dwFlags uint32, pdisp *systemcom.IDispatch) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdisp)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddScriptlet dispatches through IActiveScriptAuthor's vtable slot 4.
-func (self *IActiveScriptAuthor) AddScriptlet(pszDefaultName foundation.PWSTR, pszCode foundation.PWSTR, pszItemName foundation.PWSTR, pszSubItemName foundation.PWSTR, pszEventName foundation.PWSTR, pszDelimiter foundation.PWSTR, dwCookie uint32, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDefaultName)), uintptr(unsafe.Pointer(pszCode)), uintptr(unsafe.Pointer(pszItemName)), uintptr(unsafe.Pointer(pszSubItemName)), uintptr(unsafe.Pointer(pszEventName)), uintptr(unsafe.Pointer(pszDelimiter)), uintptr(dwCookie), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptAuthor) AddScriptlet(pszDefaultName string, pszCode string, pszItemName string, pszSubItemName string, pszEventName string, pszDelimiter string, dwCookie uint32, dwFlags uint32) error {
+	_pszDefaultName := win32.UTF16Ptr(pszDefaultName)
+	_pszCode := win32.UTF16Ptr(pszCode)
+	_pszItemName := win32.UTF16Ptr(pszItemName)
+	_pszSubItemName := win32.UTF16Ptr(pszSubItemName)
+	_pszEventName := win32.UTF16Ptr(pszEventName)
+	_pszDelimiter := win32.UTF16Ptr(pszDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszDefaultName)), uintptr(unsafe.Pointer(_pszCode)), uintptr(unsafe.Pointer(_pszItemName)), uintptr(unsafe.Pointer(_pszSubItemName)), uintptr(unsafe.Pointer(_pszEventName)), uintptr(unsafe.Pointer(_pszDelimiter)), uintptr(dwCookie), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ParseScriptText dispatches through IActiveScriptAuthor's vtable slot 5.
-func (self *IActiveScriptAuthor) ParseScriptText(pszCode foundation.PWSTR, pszItemName foundation.PWSTR, pszDelimiter foundation.PWSTR, dwCookie uint32, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCode)), uintptr(unsafe.Pointer(pszItemName)), uintptr(unsafe.Pointer(pszDelimiter)), uintptr(dwCookie), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptAuthor) ParseScriptText(pszCode string, pszItemName string, pszDelimiter string, dwCookie uint32, dwFlags uint32) error {
+	_pszCode := win32.UTF16Ptr(pszCode)
+	_pszItemName := win32.UTF16Ptr(pszItemName)
+	_pszDelimiter := win32.UTF16Ptr(pszDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCode)), uintptr(unsafe.Pointer(_pszItemName)), uintptr(unsafe.Pointer(_pszDelimiter)), uintptr(dwCookie), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScriptTextAttributes dispatches through IActiveScriptAuthor's vtable slot 6.
-func (self *IActiveScriptAuthor) GetScriptTextAttributes(pszCode foundation.PWSTR, cch uint32, pszDelimiter foundation.PWSTR, dwFlags uint32, pattr *uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCode)), uintptr(cch), uintptr(unsafe.Pointer(pszDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(pattr)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptAuthor) GetScriptTextAttributes(pszCode string, cch uint32, pszDelimiter string, dwFlags uint32, pattr *uint16) error {
+	_pszCode := win32.UTF16Ptr(pszCode)
+	_pszDelimiter := win32.UTF16Ptr(pszDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCode)), uintptr(cch), uintptr(unsafe.Pointer(_pszDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(pattr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScriptletTextAttributes dispatches through IActiveScriptAuthor's vtable slot 7.
-func (self *IActiveScriptAuthor) GetScriptletTextAttributes(pszCode foundation.PWSTR, cch uint32, pszDelimiter foundation.PWSTR, dwFlags uint32, pattr *uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCode)), uintptr(cch), uintptr(unsafe.Pointer(pszDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(pattr)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptAuthor) GetScriptletTextAttributes(pszCode string, cch uint32, pszDelimiter string, dwFlags uint32, pattr *uint16) error {
+	_pszCode := win32.UTF16Ptr(pszCode)
+	_pszDelimiter := win32.UTF16Ptr(pszDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCode)), uintptr(cch), uintptr(unsafe.Pointer(_pszDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(pattr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRoot dispatches through IActiveScriptAuthor's vtable slot 8.
-func (self *IActiveScriptAuthor) GetRoot(ppsp **IScriptNode) foundation.HRESULT {
+func (self *IActiveScriptAuthor) GetRoot(ppsp **IScriptNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppsp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLanguageFlags dispatches through IActiveScriptAuthor's vtable slot 9.
-func (self *IActiveScriptAuthor) GetLanguageFlags(pgrfasa *uint32) foundation.HRESULT {
+func (self *IActiveScriptAuthor) GetLanguageFlags(pgrfasa *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pgrfasa)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEventHandler dispatches through IActiveScriptAuthor's vtable slot 10.
-func (self *IActiveScriptAuthor) GetEventHandler(pdisp *systemcom.IDispatch, pszItem foundation.PWSTR, pszSubItem foundation.PWSTR, pszEvent foundation.PWSTR, ppse **IScriptEntry) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdisp)), uintptr(unsafe.Pointer(pszItem)), uintptr(unsafe.Pointer(pszSubItem)), uintptr(unsafe.Pointer(pszEvent)), uintptr(unsafe.Pointer(ppse)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptAuthor) GetEventHandler(pdisp *systemcom.IDispatch, pszItem string, pszSubItem string, pszEvent string, ppse **IScriptEntry) error {
+	_pszItem := win32.UTF16Ptr(pszItem)
+	_pszSubItem := win32.UTF16Ptr(pszSubItem)
+	_pszEvent := win32.UTF16Ptr(pszEvent)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdisp)), uintptr(unsafe.Pointer(_pszItem)), uintptr(unsafe.Pointer(_pszSubItem)), uintptr(unsafe.Pointer(_pszEvent)), uintptr(unsafe.Pointer(ppse)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveNamedItem dispatches through IActiveScriptAuthor's vtable slot 11.
-func (self *IActiveScriptAuthor) RemoveNamedItem(pszName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptAuthor) RemoveNamedItem(pszName string) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddTypeLib dispatches through IActiveScriptAuthor's vtable slot 12.
-func (self *IActiveScriptAuthor) AddTypeLib(rguidTypeLib *win32.GUID, dwMajor uint32, dwMinor uint32, dwFlags uint32) foundation.HRESULT {
+func (self *IActiveScriptAuthor) AddTypeLib(rguidTypeLib *win32.GUID, dwMajor uint32, dwMinor uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidTypeLib)), uintptr(dwMajor), uintptr(dwMinor), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveTypeLib dispatches through IActiveScriptAuthor's vtable slot 13.
-func (self *IActiveScriptAuthor) RemoveTypeLib(rguidTypeLib *win32.GUID, dwMajor uint32, dwMinor uint32) foundation.HRESULT {
+func (self *IActiveScriptAuthor) RemoveTypeLib(rguidTypeLib *win32.GUID, dwMajor uint32, dwMinor uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidTypeLib)), uintptr(dwMajor), uintptr(dwMinor))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChars dispatches through IActiveScriptAuthor's vtable slot 14.
-func (self *IActiveScriptAuthor) GetChars(fRequestedList uint32, pbstrChars *foundation.BSTR) foundation.HRESULT {
+func (self *IActiveScriptAuthor) GetChars(fRequestedList uint32, pbstrChars *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(fRequestedList), uintptr(unsafe.Pointer(pbstrChars)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInfoFromContext dispatches through IActiveScriptAuthor's vtable slot 15.
-func (self *IActiveScriptAuthor) GetInfoFromContext(pszCode foundation.PWSTR, cchCode uint32, ichCurrentPosition uint32, dwListTypesRequested uint32, pdwListTypesProvided *uint32, pichListAnchorPosition *uint32, pichFuncAnchorPosition *uint32, pmemid *int32, piCurrentParameter *int32, ppunk **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCode)), uintptr(cchCode), uintptr(ichCurrentPosition), uintptr(dwListTypesRequested), uintptr(unsafe.Pointer(pdwListTypesProvided)), uintptr(unsafe.Pointer(pichListAnchorPosition)), uintptr(unsafe.Pointer(pichFuncAnchorPosition)), uintptr(unsafe.Pointer(pmemid)), uintptr(unsafe.Pointer(piCurrentParameter)), uintptr(unsafe.Pointer(ppunk)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptAuthor) GetInfoFromContext(pszCode string, cchCode uint32, ichCurrentPosition uint32, dwListTypesRequested uint32, pdwListTypesProvided *uint32, pichListAnchorPosition *uint32, pichFuncAnchorPosition *uint32, pmemid *int32, piCurrentParameter *int32, ppunk **systemcom.IUnknown) error {
+	_pszCode := win32.UTF16Ptr(pszCode)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCode)), uintptr(cchCode), uintptr(ichCurrentPosition), uintptr(dwListTypesRequested), uintptr(unsafe.Pointer(pdwListTypesProvided)), uintptr(unsafe.Pointer(pichListAnchorPosition)), uintptr(unsafe.Pointer(pichFuncAnchorPosition)), uintptr(unsafe.Pointer(pmemid)), uintptr(unsafe.Pointer(piCurrentParameter)), uintptr(unsafe.Pointer(ppunk)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsCommitChar dispatches through IActiveScriptAuthor's vtable slot 16.
-func (self *IActiveScriptAuthor) IsCommitChar(ch uint16, pfcommit *foundation.BOOL) foundation.HRESULT {
+func (self *IActiveScriptAuthor) IsCommitChar(ch uint16, pfcommit *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(ch), uintptr(unsafe.Pointer(pfcommit)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7e2d4b70-bd9a-11d0-9336-00a0c90dcaa9
@@ -258,9 +279,14 @@ type IActiveScriptAuthorProcedure struct {
 var IID_IActiveScriptAuthorProcedure = win32.GUID{Data1: 0x7e2d4b70, Data2: 0xbd9a, Data3: 0x11d0, Data4: [8]byte{0x93, 0x36, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9}}
 
 // ParseProcedureText dispatches through IActiveScriptAuthorProcedure's vtable slot 3.
-func (self *IActiveScriptAuthorProcedure) ParseProcedureText(pszCode foundation.PWSTR, pszFormalParams foundation.PWSTR, pszProcedureName foundation.PWSTR, pszItemName foundation.PWSTR, pszDelimiter foundation.PWSTR, dwCookie uint32, dwFlags uint32, pdispFor *systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCode)), uintptr(unsafe.Pointer(pszFormalParams)), uintptr(unsafe.Pointer(pszProcedureName)), uintptr(unsafe.Pointer(pszItemName)), uintptr(unsafe.Pointer(pszDelimiter)), uintptr(dwCookie), uintptr(dwFlags), uintptr(unsafe.Pointer(pdispFor)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptAuthorProcedure) ParseProcedureText(pszCode string, pszFormalParams string, pszProcedureName string, pszItemName string, pszDelimiter string, dwCookie uint32, dwFlags uint32, pdispFor *systemcom.IDispatch) error {
+	_pszCode := win32.UTF16Ptr(pszCode)
+	_pszFormalParams := win32.UTF16Ptr(pszFormalParams)
+	_pszProcedureName := win32.UTF16Ptr(pszProcedureName)
+	_pszItemName := win32.UTF16Ptr(pszItemName)
+	_pszDelimiter := win32.UTF16Ptr(pszDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCode)), uintptr(unsafe.Pointer(_pszFormalParams)), uintptr(unsafe.Pointer(_pszProcedureName)), uintptr(unsafe.Pointer(_pszItemName)), uintptr(unsafe.Pointer(_pszDelimiter)), uintptr(dwCookie), uintptr(dwFlags), uintptr(unsafe.Pointer(pdispFor)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c10-cb0c-11d0-b5c9-00a0244a0e7a
@@ -272,21 +298,25 @@ type IActiveScriptDebug32 struct {
 var IID_IActiveScriptDebug32 = win32.GUID{Data1: 0x51973c10, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetScriptTextAttributes dispatches through IActiveScriptDebug32's vtable slot 3.
-func (self *IActiveScriptDebug32) GetScriptTextAttributes(pstrCode foundation.PWSTR, uNumCodeChars uint32, pstrDelimiter foundation.PWSTR, dwFlags uint32, pattr *uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrCode)), uintptr(uNumCodeChars), uintptr(unsafe.Pointer(pstrDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(pattr)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptDebug32) GetScriptTextAttributes(pstrCode string, uNumCodeChars uint32, pstrDelimiter string, dwFlags uint32, pattr *uint16) error {
+	_pstrCode := win32.UTF16Ptr(pstrCode)
+	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrCode)), uintptr(uNumCodeChars), uintptr(unsafe.Pointer(_pstrDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(pattr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScriptletTextAttributes dispatches through IActiveScriptDebug32's vtable slot 4.
-func (self *IActiveScriptDebug32) GetScriptletTextAttributes(pstrCode foundation.PWSTR, uNumCodeChars uint32, pstrDelimiter foundation.PWSTR, dwFlags uint32, pattr *uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrCode)), uintptr(uNumCodeChars), uintptr(unsafe.Pointer(pstrDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(pattr)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptDebug32) GetScriptletTextAttributes(pstrCode string, uNumCodeChars uint32, pstrDelimiter string, dwFlags uint32, pattr *uint16) error {
+	_pstrCode := win32.UTF16Ptr(pstrCode)
+	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrCode)), uintptr(uNumCodeChars), uintptr(unsafe.Pointer(_pstrDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(pattr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumCodeContextsOfPosition dispatches through IActiveScriptDebug32's vtable slot 5.
-func (self *IActiveScriptDebug32) EnumCodeContextsOfPosition(dwSourceContext uint32, uCharacterOffset uint32, uNumChars uint32, ppescc **IEnumDebugCodeContexts) foundation.HRESULT {
+func (self *IActiveScriptDebug32) EnumCodeContextsOfPosition(dwSourceContext uint32, uCharacterOffset uint32, uNumChars uint32, ppescc **IEnumDebugCodeContexts) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwSourceContext), uintptr(uCharacterOffset), uintptr(uNumChars), uintptr(unsafe.Pointer(ppescc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bc437e23-f5b8-47f4-bb79-7d1ce5483b86
@@ -298,21 +328,25 @@ type IActiveScriptDebug64 struct {
 var IID_IActiveScriptDebug64 = win32.GUID{Data1: 0xbc437e23, Data2: 0xf5b8, Data3: 0x47f4, Data4: [8]byte{0xbb, 0x79, 0x7d, 0x1c, 0xe5, 0x48, 0x3b, 0x86}}
 
 // GetScriptTextAttributes dispatches through IActiveScriptDebug64's vtable slot 3.
-func (self *IActiveScriptDebug64) GetScriptTextAttributes(pstrCode foundation.PWSTR, uNumCodeChars uint32, pstrDelimiter foundation.PWSTR, dwFlags uint32, pattr *uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrCode)), uintptr(uNumCodeChars), uintptr(unsafe.Pointer(pstrDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(pattr)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptDebug64) GetScriptTextAttributes(pstrCode string, uNumCodeChars uint32, pstrDelimiter string, dwFlags uint32, pattr *uint16) error {
+	_pstrCode := win32.UTF16Ptr(pstrCode)
+	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrCode)), uintptr(uNumCodeChars), uintptr(unsafe.Pointer(_pstrDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(pattr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScriptletTextAttributes dispatches through IActiveScriptDebug64's vtable slot 4.
-func (self *IActiveScriptDebug64) GetScriptletTextAttributes(pstrCode foundation.PWSTR, uNumCodeChars uint32, pstrDelimiter foundation.PWSTR, dwFlags uint32, pattr *uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrCode)), uintptr(uNumCodeChars), uintptr(unsafe.Pointer(pstrDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(pattr)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptDebug64) GetScriptletTextAttributes(pstrCode string, uNumCodeChars uint32, pstrDelimiter string, dwFlags uint32, pattr *uint16) error {
+	_pstrCode := win32.UTF16Ptr(pstrCode)
+	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrCode)), uintptr(uNumCodeChars), uintptr(unsafe.Pointer(_pstrDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(pattr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumCodeContextsOfPosition dispatches through IActiveScriptDebug64's vtable slot 5.
-func (self *IActiveScriptDebug64) EnumCodeContextsOfPosition(dwSourceContext uint64, uCharacterOffset uint32, uNumChars uint32, ppescc **IEnumDebugCodeContexts) foundation.HRESULT {
+func (self *IActiveScriptDebug64) EnumCodeContextsOfPosition(dwSourceContext uint64, uCharacterOffset uint32, uNumChars uint32, ppescc **IEnumDebugCodeContexts) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwSourceContext), uintptr(uCharacterOffset), uintptr(uNumChars), uintptr(unsafe.Pointer(ppescc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bb1a2ae3-a4f9-11cf-8f20-00805f2cd064
@@ -324,21 +358,23 @@ type IActiveScriptEncode struct {
 var IID_IActiveScriptEncode = win32.GUID{Data1: 0xbb1a2ae3, Data2: 0xa4f9, Data3: 0x11cf, Data4: [8]byte{0x8f, 0x20, 0x00, 0x80, 0x5f, 0x2c, 0xd0, 0x64}}
 
 // EncodeSection dispatches through IActiveScriptEncode's vtable slot 3.
-func (self *IActiveScriptEncode) EncodeSection(pchIn foundation.PWSTR, cchIn uint32, pchOut foundation.PWSTR, cchOut uint32, pcchRet *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pchIn)), uintptr(cchIn), uintptr(unsafe.Pointer(pchOut)), uintptr(cchOut), uintptr(unsafe.Pointer(pcchRet)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptEncode) EncodeSection(pchIn string, cchIn uint32, pchOut foundation.PWSTR, cchOut uint32, pcchRet *uint32) error {
+	_pchIn := win32.UTF16Ptr(pchIn)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pchIn)), uintptr(cchIn), uintptr(unsafe.Pointer(pchOut)), uintptr(cchOut), uintptr(unsafe.Pointer(pcchRet)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DecodeScript dispatches through IActiveScriptEncode's vtable slot 4.
-func (self *IActiveScriptEncode) DecodeScript(pchIn foundation.PWSTR, cchIn uint32, pchOut foundation.PWSTR, cchOut uint32, pcchRet *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pchIn)), uintptr(cchIn), uintptr(unsafe.Pointer(pchOut)), uintptr(cchOut), uintptr(unsafe.Pointer(pcchRet)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptEncode) DecodeScript(pchIn string, cchIn uint32, pchOut foundation.PWSTR, cchOut uint32, pcchRet *uint32) error {
+	_pchIn := win32.UTF16Ptr(pchIn)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pchIn)), uintptr(cchIn), uintptr(unsafe.Pointer(pchOut)), uintptr(cchOut), uintptr(unsafe.Pointer(pcchRet)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEncodeProgId dispatches through IActiveScriptEncode's vtable slot 5.
-func (self *IActiveScriptEncode) GetEncodeProgId(pbstrOut *foundation.BSTR) foundation.HRESULT {
+func (self *IActiveScriptEncode) GetEncodeProgId(pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eae1ba61-a4ed-11cf-8f20-00805f2cd064
@@ -350,21 +386,21 @@ type IActiveScriptError struct {
 var IID_IActiveScriptError = win32.GUID{Data1: 0xeae1ba61, Data2: 0xa4ed, Data3: 0x11cf, Data4: [8]byte{0x8f, 0x20, 0x00, 0x80, 0x5f, 0x2c, 0xd0, 0x64}}
 
 // GetExceptionInfo dispatches through IActiveScriptError's vtable slot 3.
-func (self *IActiveScriptError) GetExceptionInfo(pexcepinfo *systemcom.EXCEPINFO) foundation.HRESULT {
+func (self *IActiveScriptError) GetExceptionInfo(pexcepinfo *systemcom.EXCEPINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pexcepinfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourcePosition dispatches through IActiveScriptError's vtable slot 4.
-func (self *IActiveScriptError) GetSourcePosition(pdwSourceContext *uint32, pulLineNumber *uint32, plCharacterPosition *int32) foundation.HRESULT {
+func (self *IActiveScriptError) GetSourcePosition(pdwSourceContext *uint32, pulLineNumber *uint32, plCharacterPosition *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSourceContext)), uintptr(unsafe.Pointer(pulLineNumber)), uintptr(unsafe.Pointer(plCharacterPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceLineText dispatches through IActiveScriptError's vtable slot 5.
-func (self *IActiveScriptError) GetSourceLineText(pbstrSourceLine *foundation.BSTR) foundation.HRESULT {
+func (self *IActiveScriptError) GetSourceLineText(pbstrSourceLine *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSourceLine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b21fb2a1-5b8f-4963-8c21-21450f84ed7f
@@ -376,9 +412,9 @@ type IActiveScriptError64 struct {
 var IID_IActiveScriptError64 = win32.GUID{Data1: 0xb21fb2a1, Data2: 0x5b8f, Data3: 0x4963, Data4: [8]byte{0x8c, 0x21, 0x21, 0x45, 0x0f, 0x84, 0xed, 0x7f}}
 
 // GetSourcePosition64 dispatches through IActiveScriptError64's vtable slot 6.
-func (self *IActiveScriptError64) GetSourcePosition64(pdwSourceContext *uint64, pulLineNumber *uint32, plCharacterPosition *int32) foundation.HRESULT {
+func (self *IActiveScriptError64) GetSourcePosition64(pdwSourceContext *uint64, pulLineNumber *uint32, plCharacterPosition *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwSourceContext)), uintptr(unsafe.Pointer(pulLineNumber)), uintptr(unsafe.Pointer(plCharacterPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c12-cb0c-11d0-b5c9-00a0244a0e7a
@@ -390,15 +426,15 @@ type IActiveScriptErrorDebug struct {
 var IID_IActiveScriptErrorDebug = win32.GUID{Data1: 0x51973c12, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetDocumentContext dispatches through IActiveScriptErrorDebug's vtable slot 6.
-func (self *IActiveScriptErrorDebug) GetDocumentContext(ppssc **IDebugDocumentContext) foundation.HRESULT {
+func (self *IActiveScriptErrorDebug) GetDocumentContext(ppssc **IDebugDocumentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppssc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStackFrame dispatches through IActiveScriptErrorDebug's vtable slot 7.
-func (self *IActiveScriptErrorDebug) GetStackFrame(ppdsf **IDebugStackFrame) foundation.HRESULT {
+func (self *IActiveScriptErrorDebug) GetStackFrame(ppdsf **IDebugStackFrame) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdsf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 516e42b6-89a8-4530-937b-5f0708431442
@@ -410,9 +446,9 @@ type IActiveScriptErrorDebug110 struct {
 var IID_IActiveScriptErrorDebug110 = win32.GUID{Data1: 0x516e42b6, Data2: 0x89a8, Data3: 0x4530, Data4: [8]byte{0x93, 0x7b, 0x5f, 0x07, 0x08, 0x43, 0x14, 0x42}}
 
 // GetExceptionThrownKind dispatches through IActiveScriptErrorDebug110's vtable slot 3.
-func (self *IActiveScriptErrorDebug110) GetExceptionThrownKind(pExceptionKind *SCRIPT_ERROR_DEBUG_EXCEPTION_THROWN_KIND) foundation.HRESULT {
+func (self *IActiveScriptErrorDebug110) GetExceptionThrownKind(pExceptionKind *SCRIPT_ERROR_DEBUG_EXCEPTION_THROWN_KIND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExceptionKind)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 6aa2c4a0-2b53-11d4-a2a0-00104bd35090
@@ -424,9 +460,9 @@ type IActiveScriptGarbageCollector struct {
 var IID_IActiveScriptGarbageCollector = win32.GUID{Data1: 0x6aa2c4a0, Data2: 0x2b53, Data3: 0x11d4, Data4: [8]byte{0xa2, 0xa0, 0x00, 0x10, 0x4b, 0xd3, 0x50, 0x90}}
 
 // CollectGarbage dispatches through IActiveScriptGarbageCollector's vtable slot 3.
-func (self *IActiveScriptGarbageCollector) CollectGarbage(scriptgctype SCRIPTGCTYPE) foundation.HRESULT {
+func (self *IActiveScriptGarbageCollector) CollectGarbage(scriptgctype SCRIPTGCTYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(scriptgctype))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bee9b76e-cfe3-11d1-b747-00c04fc2b085
@@ -438,9 +474,9 @@ type IActiveScriptHostEncode struct {
 var IID_IActiveScriptHostEncode = win32.GUID{Data1: 0xbee9b76e, Data2: 0xcfe3, Data3: 0x11d1, Data4: [8]byte{0xb7, 0x47, 0x00, 0xc0, 0x4f, 0xc2, 0xb0, 0x85}}
 
 // EncodeScriptHostFile dispatches through IActiveScriptHostEncode's vtable slot 3.
-func (self *IActiveScriptHostEncode) EncodeScriptHostFile(bstrInFile foundation.BSTR, pbstrOutFile *foundation.BSTR, cFlags uint32, bstrDefaultLang foundation.BSTR) foundation.HRESULT {
+func (self *IActiveScriptHostEncode) EncodeScriptHostFile(bstrInFile foundation.BSTR, pbstrOutFile *foundation.BSTR, cFlags uint32, bstrDefaultLang foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrInFile)), uintptr(unsafe.Pointer(pbstrOutFile)), uintptr(cFlags), uintptr(unsafe.Pointer(bstrDefaultLang)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bb1a2ae2-a4f9-11cf-8f20-00805f2cd064
@@ -452,21 +488,30 @@ type IActiveScriptParse32 struct {
 var IID_IActiveScriptParse32 = win32.GUID{Data1: 0xbb1a2ae2, Data2: 0xa4f9, Data3: 0x11cf, Data4: [8]byte{0x8f, 0x20, 0x00, 0x80, 0x5f, 0x2c, 0xd0, 0x64}}
 
 // InitNew dispatches through IActiveScriptParse32's vtable slot 3.
-func (self *IActiveScriptParse32) InitNew() foundation.HRESULT {
+func (self *IActiveScriptParse32) InitNew() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddScriptlet dispatches through IActiveScriptParse32's vtable slot 4.
-func (self *IActiveScriptParse32) AddScriptlet(pstrDefaultName foundation.PWSTR, pstrCode foundation.PWSTR, pstrItemName foundation.PWSTR, pstrSubItemName foundation.PWSTR, pstrEventName foundation.PWSTR, pstrDelimiter foundation.PWSTR, dwSourceContextCookie uint32, ulStartingLineNumber uint32, dwFlags uint32, pbstrName *foundation.BSTR, pexcepinfo *systemcom.EXCEPINFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrDefaultName)), uintptr(unsafe.Pointer(pstrCode)), uintptr(unsafe.Pointer(pstrItemName)), uintptr(unsafe.Pointer(pstrSubItemName)), uintptr(unsafe.Pointer(pstrEventName)), uintptr(unsafe.Pointer(pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrName)), uintptr(unsafe.Pointer(pexcepinfo)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptParse32) AddScriptlet(pstrDefaultName string, pstrCode string, pstrItemName string, pstrSubItemName string, pstrEventName string, pstrDelimiter string, dwSourceContextCookie uint32, ulStartingLineNumber uint32, dwFlags uint32, pbstrName *foundation.BSTR, pexcepinfo *systemcom.EXCEPINFO) error {
+	_pstrDefaultName := win32.UTF16Ptr(pstrDefaultName)
+	_pstrCode := win32.UTF16Ptr(pstrCode)
+	_pstrItemName := win32.UTF16Ptr(pstrItemName)
+	_pstrSubItemName := win32.UTF16Ptr(pstrSubItemName)
+	_pstrEventName := win32.UTF16Ptr(pstrEventName)
+	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrDefaultName)), uintptr(unsafe.Pointer(_pstrCode)), uintptr(unsafe.Pointer(_pstrItemName)), uintptr(unsafe.Pointer(_pstrSubItemName)), uintptr(unsafe.Pointer(_pstrEventName)), uintptr(unsafe.Pointer(_pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrName)), uintptr(unsafe.Pointer(pexcepinfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ParseScriptText dispatches through IActiveScriptParse32's vtable slot 5.
-func (self *IActiveScriptParse32) ParseScriptText(pstrCode foundation.PWSTR, pstrItemName foundation.PWSTR, punkContext *systemcom.IUnknown, pstrDelimiter foundation.PWSTR, dwSourceContextCookie uint32, ulStartingLineNumber uint32, dwFlags uint32, pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrCode)), uintptr(unsafe.Pointer(pstrItemName)), uintptr(unsafe.Pointer(punkContext)), uintptr(unsafe.Pointer(pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(pvarResult)), uintptr(unsafe.Pointer(pexcepinfo)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptParse32) ParseScriptText(pstrCode string, pstrItemName string, punkContext *systemcom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint32, ulStartingLineNumber uint32, dwFlags uint32, pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO) error {
+	_pstrCode := win32.UTF16Ptr(pstrCode)
+	_pstrItemName := win32.UTF16Ptr(pstrItemName)
+	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrCode)), uintptr(unsafe.Pointer(_pstrItemName)), uintptr(unsafe.Pointer(punkContext)), uintptr(unsafe.Pointer(_pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(pvarResult)), uintptr(unsafe.Pointer(pexcepinfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c7ef7658-e1ee-480e-97ea-d52cb4d76d17
@@ -478,21 +523,30 @@ type IActiveScriptParse64 struct {
 var IID_IActiveScriptParse64 = win32.GUID{Data1: 0xc7ef7658, Data2: 0xe1ee, Data3: 0x480e, Data4: [8]byte{0x97, 0xea, 0xd5, 0x2c, 0xb4, 0xd7, 0x6d, 0x17}}
 
 // InitNew dispatches through IActiveScriptParse64's vtable slot 3.
-func (self *IActiveScriptParse64) InitNew() foundation.HRESULT {
+func (self *IActiveScriptParse64) InitNew() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddScriptlet dispatches through IActiveScriptParse64's vtable slot 4.
-func (self *IActiveScriptParse64) AddScriptlet(pstrDefaultName foundation.PWSTR, pstrCode foundation.PWSTR, pstrItemName foundation.PWSTR, pstrSubItemName foundation.PWSTR, pstrEventName foundation.PWSTR, pstrDelimiter foundation.PWSTR, dwSourceContextCookie uint64, ulStartingLineNumber uint32, dwFlags uint32, pbstrName *foundation.BSTR, pexcepinfo *systemcom.EXCEPINFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrDefaultName)), uintptr(unsafe.Pointer(pstrCode)), uintptr(unsafe.Pointer(pstrItemName)), uintptr(unsafe.Pointer(pstrSubItemName)), uintptr(unsafe.Pointer(pstrEventName)), uintptr(unsafe.Pointer(pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrName)), uintptr(unsafe.Pointer(pexcepinfo)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptParse64) AddScriptlet(pstrDefaultName string, pstrCode string, pstrItemName string, pstrSubItemName string, pstrEventName string, pstrDelimiter string, dwSourceContextCookie uint64, ulStartingLineNumber uint32, dwFlags uint32, pbstrName *foundation.BSTR, pexcepinfo *systemcom.EXCEPINFO) error {
+	_pstrDefaultName := win32.UTF16Ptr(pstrDefaultName)
+	_pstrCode := win32.UTF16Ptr(pstrCode)
+	_pstrItemName := win32.UTF16Ptr(pstrItemName)
+	_pstrSubItemName := win32.UTF16Ptr(pstrSubItemName)
+	_pstrEventName := win32.UTF16Ptr(pstrEventName)
+	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrDefaultName)), uintptr(unsafe.Pointer(_pstrCode)), uintptr(unsafe.Pointer(_pstrItemName)), uintptr(unsafe.Pointer(_pstrSubItemName)), uintptr(unsafe.Pointer(_pstrEventName)), uintptr(unsafe.Pointer(_pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrName)), uintptr(unsafe.Pointer(pexcepinfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ParseScriptText dispatches through IActiveScriptParse64's vtable slot 5.
-func (self *IActiveScriptParse64) ParseScriptText(pstrCode foundation.PWSTR, pstrItemName foundation.PWSTR, punkContext *systemcom.IUnknown, pstrDelimiter foundation.PWSTR, dwSourceContextCookie uint64, ulStartingLineNumber uint32, dwFlags uint32, pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrCode)), uintptr(unsafe.Pointer(pstrItemName)), uintptr(unsafe.Pointer(punkContext)), uintptr(unsafe.Pointer(pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(pvarResult)), uintptr(unsafe.Pointer(pexcepinfo)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptParse64) ParseScriptText(pstrCode string, pstrItemName string, punkContext *systemcom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint64, ulStartingLineNumber uint32, dwFlags uint32, pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO) error {
+	_pstrCode := win32.UTF16Ptr(pstrCode)
+	_pstrItemName := win32.UTF16Ptr(pstrItemName)
+	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrCode)), uintptr(unsafe.Pointer(_pstrItemName)), uintptr(unsafe.Pointer(punkContext)), uintptr(unsafe.Pointer(_pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(pvarResult)), uintptr(unsafe.Pointer(pexcepinfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 71ee5b20-fb04-11d1-b3a8-00a0c911e8b2
@@ -520,9 +574,14 @@ type IActiveScriptParseProcedure32 struct {
 var IID_IActiveScriptParseProcedure32 = win32.GUID{Data1: 0xaa5b6a80, Data2: 0xb834, Data3: 0x11d0, Data4: [8]byte{0x93, 0x2f, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9}}
 
 // ParseProcedureText dispatches through IActiveScriptParseProcedure32's vtable slot 3.
-func (self *IActiveScriptParseProcedure32) ParseProcedureText(pstrCode foundation.PWSTR, pstrFormalParams foundation.PWSTR, pstrProcedureName foundation.PWSTR, pstrItemName foundation.PWSTR, punkContext *systemcom.IUnknown, pstrDelimiter foundation.PWSTR, dwSourceContextCookie uint32, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrCode)), uintptr(unsafe.Pointer(pstrFormalParams)), uintptr(unsafe.Pointer(pstrProcedureName)), uintptr(unsafe.Pointer(pstrItemName)), uintptr(unsafe.Pointer(punkContext)), uintptr(unsafe.Pointer(pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(ppdisp)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptParseProcedure32) ParseProcedureText(pstrCode string, pstrFormalParams string, pstrProcedureName string, pstrItemName string, punkContext *systemcom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint32, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) error {
+	_pstrCode := win32.UTF16Ptr(pstrCode)
+	_pstrFormalParams := win32.UTF16Ptr(pstrFormalParams)
+	_pstrProcedureName := win32.UTF16Ptr(pstrProcedureName)
+	_pstrItemName := win32.UTF16Ptr(pstrItemName)
+	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrCode)), uintptr(unsafe.Pointer(_pstrFormalParams)), uintptr(unsafe.Pointer(_pstrProcedureName)), uintptr(unsafe.Pointer(_pstrItemName)), uintptr(unsafe.Pointer(punkContext)), uintptr(unsafe.Pointer(_pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(ppdisp)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c64713b6-e029-4cc5-9200-438b72890b6a
@@ -534,9 +593,14 @@ type IActiveScriptParseProcedure64 struct {
 var IID_IActiveScriptParseProcedure64 = win32.GUID{Data1: 0xc64713b6, Data2: 0xe029, Data3: 0x4cc5, Data4: [8]byte{0x92, 0x00, 0x43, 0x8b, 0x72, 0x89, 0x0b, 0x6a}}
 
 // ParseProcedureText dispatches through IActiveScriptParseProcedure64's vtable slot 3.
-func (self *IActiveScriptParseProcedure64) ParseProcedureText(pstrCode foundation.PWSTR, pstrFormalParams foundation.PWSTR, pstrProcedureName foundation.PWSTR, pstrItemName foundation.PWSTR, punkContext *systemcom.IUnknown, pstrDelimiter foundation.PWSTR, dwSourceContextCookie uint64, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrCode)), uintptr(unsafe.Pointer(pstrFormalParams)), uintptr(unsafe.Pointer(pstrProcedureName)), uintptr(unsafe.Pointer(pstrItemName)), uintptr(unsafe.Pointer(punkContext)), uintptr(unsafe.Pointer(pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(ppdisp)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptParseProcedure64) ParseProcedureText(pstrCode string, pstrFormalParams string, pstrProcedureName string, pstrItemName string, punkContext *systemcom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint64, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) error {
+	_pstrCode := win32.UTF16Ptr(pstrCode)
+	_pstrFormalParams := win32.UTF16Ptr(pstrFormalParams)
+	_pstrProcedureName := win32.UTF16Ptr(pstrProcedureName)
+	_pstrItemName := win32.UTF16Ptr(pstrItemName)
+	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrCode)), uintptr(unsafe.Pointer(_pstrFormalParams)), uintptr(unsafe.Pointer(_pstrProcedureName)), uintptr(unsafe.Pointer(_pstrItemName)), uintptr(unsafe.Pointer(punkContext)), uintptr(unsafe.Pointer(_pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(ppdisp)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 1cff0050-6fdd-11d0-9328-00a0c90dcaa9
@@ -548,9 +612,13 @@ type IActiveScriptParseProcedureOld32 struct {
 var IID_IActiveScriptParseProcedureOld32 = win32.GUID{Data1: 0x1cff0050, Data2: 0x6fdd, Data3: 0x11d0, Data4: [8]byte{0x93, 0x28, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9}}
 
 // ParseProcedureText dispatches through IActiveScriptParseProcedureOld32's vtable slot 3.
-func (self *IActiveScriptParseProcedureOld32) ParseProcedureText(pstrCode foundation.PWSTR, pstrFormalParams foundation.PWSTR, pstrItemName foundation.PWSTR, punkContext *systemcom.IUnknown, pstrDelimiter foundation.PWSTR, dwSourceContextCookie uint32, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrCode)), uintptr(unsafe.Pointer(pstrFormalParams)), uintptr(unsafe.Pointer(pstrItemName)), uintptr(unsafe.Pointer(punkContext)), uintptr(unsafe.Pointer(pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(ppdisp)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptParseProcedureOld32) ParseProcedureText(pstrCode string, pstrFormalParams string, pstrItemName string, punkContext *systemcom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint32, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) error {
+	_pstrCode := win32.UTF16Ptr(pstrCode)
+	_pstrFormalParams := win32.UTF16Ptr(pstrFormalParams)
+	_pstrItemName := win32.UTF16Ptr(pstrItemName)
+	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrCode)), uintptr(unsafe.Pointer(_pstrFormalParams)), uintptr(unsafe.Pointer(_pstrItemName)), uintptr(unsafe.Pointer(punkContext)), uintptr(unsafe.Pointer(_pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(ppdisp)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 21f57128-08c9-4638-ba12-22d15d88dc5c
@@ -562,9 +630,13 @@ type IActiveScriptParseProcedureOld64 struct {
 var IID_IActiveScriptParseProcedureOld64 = win32.GUID{Data1: 0x21f57128, Data2: 0x08c9, Data3: 0x4638, Data4: [8]byte{0xba, 0x12, 0x22, 0xd1, 0x5d, 0x88, 0xdc, 0x5c}}
 
 // ParseProcedureText dispatches through IActiveScriptParseProcedureOld64's vtable slot 3.
-func (self *IActiveScriptParseProcedureOld64) ParseProcedureText(pstrCode foundation.PWSTR, pstrFormalParams foundation.PWSTR, pstrItemName foundation.PWSTR, punkContext *systemcom.IUnknown, pstrDelimiter foundation.PWSTR, dwSourceContextCookie uint64, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrCode)), uintptr(unsafe.Pointer(pstrFormalParams)), uintptr(unsafe.Pointer(pstrItemName)), uintptr(unsafe.Pointer(punkContext)), uintptr(unsafe.Pointer(pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(ppdisp)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptParseProcedureOld64) ParseProcedureText(pstrCode string, pstrFormalParams string, pstrItemName string, punkContext *systemcom.IUnknown, pstrDelimiter string, dwSourceContextCookie uint64, ulStartingLineNumber uint32, dwFlags uint32, ppdisp **systemcom.IDispatch) error {
+	_pstrCode := win32.UTF16Ptr(pstrCode)
+	_pstrFormalParams := win32.UTF16Ptr(pstrFormalParams)
+	_pstrItemName := win32.UTF16Ptr(pstrItemName)
+	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrCode)), uintptr(unsafe.Pointer(_pstrFormalParams)), uintptr(unsafe.Pointer(_pstrItemName)), uintptr(unsafe.Pointer(punkContext)), uintptr(unsafe.Pointer(_pstrDelimiter)), uintptr(dwSourceContextCookie), uintptr(ulStartingLineNumber), uintptr(dwFlags), uintptr(unsafe.Pointer(ppdisp)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 740eca23-7d9d-42e5-ba9d-f8b24b1c7a9b
@@ -576,39 +648,41 @@ type IActiveScriptProfilerCallback struct {
 var IID_IActiveScriptProfilerCallback = win32.GUID{Data1: 0x740eca23, Data2: 0x7d9d, Data3: 0x42e5, Data4: [8]byte{0xba, 0x9d, 0xf8, 0xb2, 0x4b, 0x1c, 0x7a, 0x9b}}
 
 // Initialize dispatches through IActiveScriptProfilerCallback's vtable slot 3.
-func (self *IActiveScriptProfilerCallback) Initialize(dwContext uint32) foundation.HRESULT {
+func (self *IActiveScriptProfilerCallback) Initialize(dwContext uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwContext))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IActiveScriptProfilerCallback's vtable slot 4.
-func (self *IActiveScriptProfilerCallback) Shutdown(hrReason foundation.HRESULT) foundation.HRESULT {
+func (self *IActiveScriptProfilerCallback) Shutdown(hrReason foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hrReason))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScriptCompiled dispatches through IActiveScriptProfilerCallback's vtable slot 5.
-func (self *IActiveScriptProfilerCallback) ScriptCompiled(scriptId int32, type_ PROFILER_SCRIPT_TYPE, pIDebugDocumentContext *systemcom.IUnknown) foundation.HRESULT {
+func (self *IActiveScriptProfilerCallback) ScriptCompiled(scriptId int32, type_ PROFILER_SCRIPT_TYPE, pIDebugDocumentContext *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(scriptId), uintptr(type_), uintptr(unsafe.Pointer(pIDebugDocumentContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FunctionCompiled dispatches through IActiveScriptProfilerCallback's vtable slot 6.
-func (self *IActiveScriptProfilerCallback) FunctionCompiled(functionId int32, scriptId int32, pwszFunctionName foundation.PWSTR, pwszFunctionNameHint foundation.PWSTR, pIDebugDocumentContext *systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(scriptId), uintptr(unsafe.Pointer(pwszFunctionName)), uintptr(unsafe.Pointer(pwszFunctionNameHint)), uintptr(unsafe.Pointer(pIDebugDocumentContext)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptProfilerCallback) FunctionCompiled(functionId int32, scriptId int32, pwszFunctionName string, pwszFunctionNameHint string, pIDebugDocumentContext *systemcom.IUnknown) error {
+	_pwszFunctionName := win32.UTF16Ptr(pwszFunctionName)
+	_pwszFunctionNameHint := win32.UTF16Ptr(pwszFunctionNameHint)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(scriptId), uintptr(unsafe.Pointer(_pwszFunctionName)), uintptr(unsafe.Pointer(_pwszFunctionNameHint)), uintptr(unsafe.Pointer(pIDebugDocumentContext)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnFunctionEnter dispatches through IActiveScriptProfilerCallback's vtable slot 7.
-func (self *IActiveScriptProfilerCallback) OnFunctionEnter(scriptId int32, functionId int32) foundation.HRESULT {
+func (self *IActiveScriptProfilerCallback) OnFunctionEnter(scriptId int32, functionId int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(scriptId), uintptr(functionId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnFunctionExit dispatches through IActiveScriptProfilerCallback's vtable slot 8.
-func (self *IActiveScriptProfilerCallback) OnFunctionExit(scriptId int32, functionId int32) foundation.HRESULT {
+func (self *IActiveScriptProfilerCallback) OnFunctionExit(scriptId int32, functionId int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(scriptId), uintptr(functionId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 31b7f8ad-a637-409c-b22f-040995b6103d
@@ -620,15 +694,17 @@ type IActiveScriptProfilerCallback2 struct {
 var IID_IActiveScriptProfilerCallback2 = win32.GUID{Data1: 0x31b7f8ad, Data2: 0xa637, Data3: 0x409c, Data4: [8]byte{0xb2, 0x2f, 0x04, 0x09, 0x95, 0xb6, 0x10, 0x3d}}
 
 // OnFunctionEnterByName dispatches through IActiveScriptProfilerCallback2's vtable slot 9.
-func (self *IActiveScriptProfilerCallback2) OnFunctionEnterByName(pwszFunctionName foundation.PWSTR, type_ PROFILER_SCRIPT_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszFunctionName)), uintptr(type_))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptProfilerCallback2) OnFunctionEnterByName(pwszFunctionName string, type_ PROFILER_SCRIPT_TYPE) error {
+	_pwszFunctionName := win32.UTF16Ptr(pwszFunctionName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszFunctionName)), uintptr(type_))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnFunctionExitByName dispatches through IActiveScriptProfilerCallback2's vtable slot 10.
-func (self *IActiveScriptProfilerCallback2) OnFunctionExitByName(pwszFunctionName foundation.PWSTR, type_ PROFILER_SCRIPT_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszFunctionName)), uintptr(type_))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptProfilerCallback2) OnFunctionExitByName(pwszFunctionName string, type_ PROFILER_SCRIPT_TYPE) error {
+	_pwszFunctionName := win32.UTF16Ptr(pwszFunctionName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszFunctionName)), uintptr(type_))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 6ac5ad25-2037-4687-91df-b59979d93d73
@@ -640,9 +716,9 @@ type IActiveScriptProfilerCallback3 struct {
 var IID_IActiveScriptProfilerCallback3 = win32.GUID{Data1: 0x6ac5ad25, Data2: 0x2037, Data3: 0x4687, Data4: [8]byte{0x91, 0xdf, 0xb5, 0x99, 0x79, 0xd9, 0x3d, 0x73}}
 
 // SetWebWorkerId dispatches through IActiveScriptProfilerCallback3's vtable slot 11.
-func (self *IActiveScriptProfilerCallback3) SetWebWorkerId(webWorkerId uint32) foundation.HRESULT {
+func (self *IActiveScriptProfilerCallback3) SetWebWorkerId(webWorkerId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(webWorkerId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 784b5ff0-69b0-47d1-a7dc-2518f4230e90
@@ -654,21 +730,21 @@ type IActiveScriptProfilerControl struct {
 var IID_IActiveScriptProfilerControl = win32.GUID{Data1: 0x784b5ff0, Data2: 0x69b0, Data3: 0x47d1, Data4: [8]byte{0xa7, 0xdc, 0x25, 0x18, 0xf4, 0x23, 0x0e, 0x90}}
 
 // StartProfiling dispatches through IActiveScriptProfilerControl's vtable slot 3.
-func (self *IActiveScriptProfilerControl) StartProfiling(clsidProfilerObject *win32.GUID, dwEventMask uint32, dwContext uint32) foundation.HRESULT {
+func (self *IActiveScriptProfilerControl) StartProfiling(clsidProfilerObject *win32.GUID, dwEventMask uint32, dwContext uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidProfilerObject)), uintptr(dwEventMask), uintptr(dwContext))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProfilerEventMask dispatches through IActiveScriptProfilerControl's vtable slot 4.
-func (self *IActiveScriptProfilerControl) SetProfilerEventMask(dwEventMask uint32) foundation.HRESULT {
+func (self *IActiveScriptProfilerControl) SetProfilerEventMask(dwEventMask uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwEventMask))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopProfiling dispatches through IActiveScriptProfilerControl's vtable slot 5.
-func (self *IActiveScriptProfilerControl) StopProfiling(hrShutdownReason foundation.HRESULT) foundation.HRESULT {
+func (self *IActiveScriptProfilerControl) StopProfiling(hrShutdownReason foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hrShutdownReason))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 47810165-498f-40be-94f1-653557e9e7da
@@ -680,15 +756,15 @@ type IActiveScriptProfilerControl2 struct {
 var IID_IActiveScriptProfilerControl2 = win32.GUID{Data1: 0x47810165, Data2: 0x498f, Data3: 0x40be, Data4: [8]byte{0x94, 0xf1, 0x65, 0x35, 0x57, 0xe9, 0xe7, 0xda}}
 
 // CompleteProfilerStart dispatches through IActiveScriptProfilerControl2's vtable slot 6.
-func (self *IActiveScriptProfilerControl2) CompleteProfilerStart() foundation.HRESULT {
+func (self *IActiveScriptProfilerControl2) CompleteProfilerStart() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrepareProfilerStop dispatches through IActiveScriptProfilerControl2's vtable slot 7.
-func (self *IActiveScriptProfilerControl2) PrepareProfilerStop() foundation.HRESULT {
+func (self *IActiveScriptProfilerControl2) PrepareProfilerStop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0b403015-f381-4023-a5d0-6fed076de716
@@ -700,9 +776,9 @@ type IActiveScriptProfilerControl3 struct {
 var IID_IActiveScriptProfilerControl3 = win32.GUID{Data1: 0x0b403015, Data2: 0xf381, Data3: 0x4023, Data4: [8]byte{0xa5, 0xd0, 0x6f, 0xed, 0x07, 0x6d, 0xe7, 0x16}}
 
 // EnumHeap dispatches through IActiveScriptProfilerControl3's vtable slot 8.
-func (self *IActiveScriptProfilerControl3) EnumHeap(ppEnum **IActiveScriptProfilerHeapEnum) foundation.HRESULT {
+func (self *IActiveScriptProfilerControl3) EnumHeap(ppEnum **IActiveScriptProfilerHeapEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 160f94fd-9dbc-40d4-9eac-2b71db3132f4
@@ -714,9 +790,9 @@ type IActiveScriptProfilerControl4 struct {
 var IID_IActiveScriptProfilerControl4 = win32.GUID{Data1: 0x160f94fd, Data2: 0x9dbc, Data3: 0x40d4, Data4: [8]byte{0x9e, 0xac, 0x2b, 0x71, 0xdb, 0x31, 0x32, 0xf4}}
 
 // SummarizeHeap dispatches through IActiveScriptProfilerControl4's vtable slot 9.
-func (self *IActiveScriptProfilerControl4) SummarizeHeap(heapSummary *PROFILER_HEAP_SUMMARY) foundation.HRESULT {
+func (self *IActiveScriptProfilerControl4) SummarizeHeap(heapSummary *PROFILER_HEAP_SUMMARY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(heapSummary)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 1c01a2d1-8f0f-46a5-9720-0d7ed2c62f0a
@@ -728,9 +804,9 @@ type IActiveScriptProfilerControl5 struct {
 var IID_IActiveScriptProfilerControl5 = win32.GUID{Data1: 0x1c01a2d1, Data2: 0x8f0f, Data3: 0x46a5, Data4: [8]byte{0x97, 0x20, 0x0d, 0x7e, 0xd2, 0xc6, 0x2f, 0x0a}}
 
 // EnumHeap2 dispatches through IActiveScriptProfilerControl5's vtable slot 10.
-func (self *IActiveScriptProfilerControl5) EnumHeap2(enumFlags PROFILER_HEAP_ENUM_FLAGS, ppEnum **IActiveScriptProfilerHeapEnum) foundation.HRESULT {
+func (self *IActiveScriptProfilerControl5) EnumHeap2(enumFlags PROFILER_HEAP_ENUM_FLAGS, ppEnum **IActiveScriptProfilerHeapEnum) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(enumFlags), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 32e4694e-0d37-419b-b93d-fa20ded6e8ea
@@ -742,27 +818,27 @@ type IActiveScriptProfilerHeapEnum struct {
 var IID_IActiveScriptProfilerHeapEnum = win32.GUID{Data1: 0x32e4694e, Data2: 0x0d37, Data3: 0x419b, Data4: [8]byte{0xb9, 0x3d, 0xfa, 0x20, 0xde, 0xd6, 0xe8, 0xea}}
 
 // Next dispatches through IActiveScriptProfilerHeapEnum's vtable slot 3.
-func (self *IActiveScriptProfilerHeapEnum) Next(celt uint32, heapObjects **PROFILER_HEAP_OBJECT, pceltFetched *uint32) foundation.HRESULT {
+func (self *IActiveScriptProfilerHeapEnum) Next(celt uint32, heapObjects **PROFILER_HEAP_OBJECT, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(heapObjects)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOptionalInfo dispatches through IActiveScriptProfilerHeapEnum's vtable slot 4.
-func (self *IActiveScriptProfilerHeapEnum) GetOptionalInfo(heapObject *PROFILER_HEAP_OBJECT, celt uint32, optionalInfo *PROFILER_HEAP_OBJECT_OPTIONAL_INFO) foundation.HRESULT {
+func (self *IActiveScriptProfilerHeapEnum) GetOptionalInfo(heapObject *PROFILER_HEAP_OBJECT, celt uint32, optionalInfo *PROFILER_HEAP_OBJECT_OPTIONAL_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(heapObject)), uintptr(celt), uintptr(unsafe.Pointer(optionalInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreeObjectAndOptionalInfo dispatches through IActiveScriptProfilerHeapEnum's vtable slot 5.
-func (self *IActiveScriptProfilerHeapEnum) FreeObjectAndOptionalInfo(celt uint32, heapObjects **PROFILER_HEAP_OBJECT) foundation.HRESULT {
+func (self *IActiveScriptProfilerHeapEnum) FreeObjectAndOptionalInfo(celt uint32, heapObjects **PROFILER_HEAP_OBJECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(heapObjects)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNameIdMap dispatches through IActiveScriptProfilerHeapEnum's vtable slot 6.
-func (self *IActiveScriptProfilerHeapEnum) GetNameIdMap(pNameList ***foundation.PWSTR, pcelt *uint32) foundation.HRESULT {
+func (self *IActiveScriptProfilerHeapEnum) GetNameIdMap(pNameList ***foundation.PWSTR, pcelt *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNameList)), uintptr(unsafe.Pointer(pcelt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4954e0d0-fbc7-11d1-8410-006008c3fbfc
@@ -774,15 +850,15 @@ type IActiveScriptProperty struct {
 var IID_IActiveScriptProperty = win32.GUID{Data1: 0x4954e0d0, Data2: 0xfbc7, Data3: 0x11d1, Data4: [8]byte{0x84, 0x10, 0x00, 0x60, 0x08, 0xc3, 0xfb, 0xfc}}
 
 // GetProperty dispatches through IActiveScriptProperty's vtable slot 3.
-func (self *IActiveScriptProperty) GetProperty(dwProperty uint32, pvarIndex *systemvariant.VARIANT, pvarValue *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IActiveScriptProperty) GetProperty(dwProperty uint32, pvarIndex *systemvariant.VARIANT, pvarValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwProperty), uintptr(unsafe.Pointer(pvarIndex)), uintptr(unsafe.Pointer(pvarValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperty dispatches through IActiveScriptProperty's vtable slot 4.
-func (self *IActiveScriptProperty) SetProperty(dwProperty uint32, pvarIndex *systemvariant.VARIANT, pvarValue *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IActiveScriptProperty) SetProperty(dwProperty uint32, pvarIndex *systemvariant.VARIANT, pvarValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwProperty), uintptr(unsafe.Pointer(pvarIndex)), uintptr(unsafe.Pointer(pvarValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 764651d0-38de-11d4-a2a3-00104bd35090
@@ -794,9 +870,9 @@ type IActiveScriptSIPInfo struct {
 var IID_IActiveScriptSIPInfo = win32.GUID{Data1: 0x764651d0, Data2: 0x38de, Data3: 0x11d4, Data4: [8]byte{0xa2, 0xa3, 0x00, 0x10, 0x4b, 0xd3, 0x50, 0x90}}
 
 // GetSIPOID dispatches through IActiveScriptSIPInfo's vtable slot 3.
-func (self *IActiveScriptSIPInfo) GetSIPOID(poid_sip *win32.GUID) foundation.HRESULT {
+func (self *IActiveScriptSIPInfo) GetSIPOID(poid_sip *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(poid_sip)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: db01a1e3-a42b-11cf-8f20-00805f2cd064
@@ -808,51 +884,52 @@ type IActiveScriptSite struct {
 var IID_IActiveScriptSite = win32.GUID{Data1: 0xdb01a1e3, Data2: 0xa42b, Data3: 0x11cf, Data4: [8]byte{0x8f, 0x20, 0x00, 0x80, 0x5f, 0x2c, 0xd0, 0x64}}
 
 // GetLCID dispatches through IActiveScriptSite's vtable slot 3.
-func (self *IActiveScriptSite) GetLCID(plcid *uint32) foundation.HRESULT {
+func (self *IActiveScriptSite) GetLCID(plcid *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plcid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetItemInfo dispatches through IActiveScriptSite's vtable slot 4.
-func (self *IActiveScriptSite) GetItemInfo(pstrName foundation.PWSTR, dwReturnMask uint32, ppiunkItem **systemcom.IUnknown, ppti **systemcom.ITypeInfo) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrName)), uintptr(dwReturnMask), uintptr(unsafe.Pointer(ppiunkItem)), uintptr(unsafe.Pointer(ppti)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptSite) GetItemInfo(pstrName string, dwReturnMask uint32, ppiunkItem **systemcom.IUnknown, ppti **systemcom.ITypeInfo) error {
+	_pstrName := win32.UTF16Ptr(pstrName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrName)), uintptr(dwReturnMask), uintptr(unsafe.Pointer(ppiunkItem)), uintptr(unsafe.Pointer(ppti)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDocVersionString dispatches through IActiveScriptSite's vtable slot 5.
-func (self *IActiveScriptSite) GetDocVersionString(pbstrVersion *foundation.BSTR) foundation.HRESULT {
+func (self *IActiveScriptSite) GetDocVersionString(pbstrVersion *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnScriptTerminate dispatches through IActiveScriptSite's vtable slot 6.
-func (self *IActiveScriptSite) OnScriptTerminate(pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO) foundation.HRESULT {
+func (self *IActiveScriptSite) OnScriptTerminate(pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvarResult)), uintptr(unsafe.Pointer(pexcepinfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnStateChange dispatches through IActiveScriptSite's vtable slot 7.
-func (self *IActiveScriptSite) OnStateChange(ssScriptState SCRIPTSTATE) foundation.HRESULT {
+func (self *IActiveScriptSite) OnStateChange(ssScriptState SCRIPTSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ssScriptState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnScriptError dispatches through IActiveScriptSite's vtable slot 8.
-func (self *IActiveScriptSite) OnScriptError(pscripterror *IActiveScriptError) foundation.HRESULT {
+func (self *IActiveScriptSite) OnScriptError(pscripterror *IActiveScriptError) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pscripterror)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnEnterScript dispatches through IActiveScriptSite's vtable slot 9.
-func (self *IActiveScriptSite) OnEnterScript() foundation.HRESULT {
+func (self *IActiveScriptSite) OnEnterScript() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnLeaveScript dispatches through IActiveScriptSite's vtable slot 10.
-func (self *IActiveScriptSite) OnLeaveScript() foundation.HRESULT {
+func (self *IActiveScriptSite) OnLeaveScript() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c11-cb0c-11d0-b5c9-00a0244a0e7a
@@ -864,27 +941,27 @@ type IActiveScriptSiteDebug32 struct {
 var IID_IActiveScriptSiteDebug32 = win32.GUID{Data1: 0x51973c11, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetDocumentContextFromPosition dispatches through IActiveScriptSiteDebug32's vtable slot 3.
-func (self *IActiveScriptSiteDebug32) GetDocumentContextFromPosition(dwSourceContext uint32, uCharacterOffset uint32, uNumChars uint32, ppsc **IDebugDocumentContext) foundation.HRESULT {
+func (self *IActiveScriptSiteDebug32) GetDocumentContextFromPosition(dwSourceContext uint32, uCharacterOffset uint32, uNumChars uint32, ppsc **IDebugDocumentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwSourceContext), uintptr(uCharacterOffset), uintptr(uNumChars), uintptr(unsafe.Pointer(ppsc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetApplication dispatches through IActiveScriptSiteDebug32's vtable slot 4.
-func (self *IActiveScriptSiteDebug32) GetApplication(ppda **IDebugApplication32) foundation.HRESULT {
+func (self *IActiveScriptSiteDebug32) GetApplication(ppda **IDebugApplication32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppda)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRootApplicationNode dispatches through IActiveScriptSiteDebug32's vtable slot 5.
-func (self *IActiveScriptSiteDebug32) GetRootApplicationNode(ppdanRoot **IDebugApplicationNode) foundation.HRESULT {
+func (self *IActiveScriptSiteDebug32) GetRootApplicationNode(ppdanRoot **IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdanRoot)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnScriptErrorDebug dispatches through IActiveScriptSiteDebug32's vtable slot 6.
-func (self *IActiveScriptSiteDebug32) OnScriptErrorDebug(pErrorDebug *IActiveScriptErrorDebug, pfEnterDebugger *foundation.BOOL, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) foundation.HRESULT {
+func (self *IActiveScriptSiteDebug32) OnScriptErrorDebug(pErrorDebug *IActiveScriptErrorDebug, pfEnterDebugger *foundation.BOOL, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(unsafe.Pointer(pfEnterDebugger)), uintptr(unsafe.Pointer(pfCallOnScriptErrorWhenContinuing)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d6b96b0a-7463-402c-92ac-89984226942f
@@ -896,27 +973,27 @@ type IActiveScriptSiteDebug64 struct {
 var IID_IActiveScriptSiteDebug64 = win32.GUID{Data1: 0xd6b96b0a, Data2: 0x7463, Data3: 0x402c, Data4: [8]byte{0x92, 0xac, 0x89, 0x98, 0x42, 0x26, 0x94, 0x2f}}
 
 // GetDocumentContextFromPosition dispatches through IActiveScriptSiteDebug64's vtable slot 3.
-func (self *IActiveScriptSiteDebug64) GetDocumentContextFromPosition(dwSourceContext uint64, uCharacterOffset uint32, uNumChars uint32, ppsc **IDebugDocumentContext) foundation.HRESULT {
+func (self *IActiveScriptSiteDebug64) GetDocumentContextFromPosition(dwSourceContext uint64, uCharacterOffset uint32, uNumChars uint32, ppsc **IDebugDocumentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwSourceContext), uintptr(uCharacterOffset), uintptr(uNumChars), uintptr(unsafe.Pointer(ppsc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetApplication dispatches through IActiveScriptSiteDebug64's vtable slot 4.
-func (self *IActiveScriptSiteDebug64) GetApplication(ppda **IDebugApplication64) foundation.HRESULT {
+func (self *IActiveScriptSiteDebug64) GetApplication(ppda **IDebugApplication64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppda)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRootApplicationNode dispatches through IActiveScriptSiteDebug64's vtable slot 5.
-func (self *IActiveScriptSiteDebug64) GetRootApplicationNode(ppdanRoot **IDebugApplicationNode) foundation.HRESULT {
+func (self *IActiveScriptSiteDebug64) GetRootApplicationNode(ppdanRoot **IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdanRoot)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnScriptErrorDebug dispatches through IActiveScriptSiteDebug64's vtable slot 6.
-func (self *IActiveScriptSiteDebug64) OnScriptErrorDebug(pErrorDebug *IActiveScriptErrorDebug, pfEnterDebugger *foundation.BOOL, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) foundation.HRESULT {
+func (self *IActiveScriptSiteDebug64) OnScriptErrorDebug(pErrorDebug *IActiveScriptErrorDebug, pfEnterDebugger *foundation.BOOL, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(unsafe.Pointer(pfEnterDebugger)), uintptr(unsafe.Pointer(pfCallOnScriptErrorWhenContinuing)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bb722ccb-6ad2-41c6-b780-af9c03ee69f5
@@ -928,9 +1005,9 @@ type IActiveScriptSiteDebugEx struct {
 var IID_IActiveScriptSiteDebugEx = win32.GUID{Data1: 0xbb722ccb, Data2: 0x6ad2, Data3: 0x41c6, Data4: [8]byte{0xb7, 0x80, 0xaf, 0x9c, 0x03, 0xee, 0x69, 0xf5}}
 
 // OnCanNotJITScriptErrorDebug dispatches through IActiveScriptSiteDebugEx's vtable slot 3.
-func (self *IActiveScriptSiteDebugEx) OnCanNotJITScriptErrorDebug(pErrorDebug *IActiveScriptErrorDebug, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) foundation.HRESULT {
+func (self *IActiveScriptSiteDebugEx) OnCanNotJITScriptErrorDebug(pErrorDebug *IActiveScriptErrorDebug, pfCallOnScriptErrorWhenContinuing *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(unsafe.Pointer(pfCallOnScriptErrorWhenContinuing)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 539698a0-cdca-11cf-a5eb-00aa0047a063
@@ -942,9 +1019,9 @@ type IActiveScriptSiteInterruptPoll struct {
 var IID_IActiveScriptSiteInterruptPoll = win32.GUID{Data1: 0x539698a0, Data2: 0xcdca, Data3: 0x11cf, Data4: [8]byte{0xa5, 0xeb, 0x00, 0xaa, 0x00, 0x47, 0xa0, 0x63}}
 
 // QueryContinue dispatches through IActiveScriptSiteInterruptPoll's vtable slot 3.
-func (self *IActiveScriptSiteInterruptPoll) QueryContinue() foundation.HRESULT {
+func (self *IActiveScriptSiteInterruptPoll) QueryContinue() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4b7272ae-1955-4bfe-98b0-780621888569
@@ -964,9 +1041,9 @@ type IActiveScriptSiteUIControl struct {
 var IID_IActiveScriptSiteUIControl = win32.GUID{Data1: 0xaedae97e, Data2: 0xd7ee, Data3: 0x4796, Data4: [8]byte{0xb9, 0x60, 0x7f, 0x09, 0x2a, 0xe8, 0x44, 0xab}}
 
 // GetUIBehavior dispatches through IActiveScriptSiteUIControl's vtable slot 3.
-func (self *IActiveScriptSiteUIControl) GetUIBehavior(UicItem SCRIPTUICITEM, pUicHandling *SCRIPTUICHANDLING) foundation.HRESULT {
+func (self *IActiveScriptSiteUIControl) GetUIBehavior(UicItem SCRIPTUICITEM, pUicHandling *SCRIPTUICHANDLING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(UicItem), uintptr(unsafe.Pointer(pUicHandling)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d10f6761-83e9-11cf-8f20-00805f2cd064
@@ -978,15 +1055,16 @@ type IActiveScriptSiteWindow struct {
 var IID_IActiveScriptSiteWindow = win32.GUID{Data1: 0xd10f6761, Data2: 0x83e9, Data3: 0x11cf, Data4: [8]byte{0x8f, 0x20, 0x00, 0x80, 0x5f, 0x2c, 0xd0, 0x64}}
 
 // GetWindow dispatches through IActiveScriptSiteWindow's vtable slot 3.
-func (self *IActiveScriptSiteWindow) GetWindow(phwnd *foundation.HWND) foundation.HRESULT {
+func (self *IActiveScriptSiteWindow) GetWindow(phwnd *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phwnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnableModeless dispatches through IActiveScriptSiteWindow's vtable slot 4.
-func (self *IActiveScriptSiteWindow) EnableModeless(fEnable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fEnable))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptSiteWindow) EnableModeless(fEnable bool) error {
+	_fEnable := win32.Bool32(fEnable)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fEnable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b8da6310-e19b-11d0-933c-00a0c90dcaa9
@@ -998,21 +1076,21 @@ type IActiveScriptStats struct {
 var IID_IActiveScriptStats = win32.GUID{Data1: 0xb8da6310, Data2: 0xe19b, Data3: 0x11d0, Data4: [8]byte{0x93, 0x3c, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9}}
 
 // GetStat dispatches through IActiveScriptStats's vtable slot 3.
-func (self *IActiveScriptStats) GetStat(stid uint32, pluHi *uint32, pluLo *uint32) foundation.HRESULT {
+func (self *IActiveScriptStats) GetStat(stid uint32, pluHi *uint32, pluLo *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(stid), uintptr(unsafe.Pointer(pluHi)), uintptr(unsafe.Pointer(pluLo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatEx dispatches through IActiveScriptStats's vtable slot 4.
-func (self *IActiveScriptStats) GetStatEx(guid *win32.GUID, pluHi *uint32, pluLo *uint32) foundation.HRESULT {
+func (self *IActiveScriptStats) GetStatEx(guid *win32.GUID, pluHi *uint32, pluLo *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(unsafe.Pointer(pluHi)), uintptr(unsafe.Pointer(pluLo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResetStats dispatches through IActiveScriptStats's vtable slot 5.
-func (self *IActiveScriptStats) ResetStats() foundation.HRESULT {
+func (self *IActiveScriptStats) ResetStats() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 58562769-ed52-42f7-8403-4963514e1f11
@@ -1024,9 +1102,10 @@ type IActiveScriptStringCompare struct {
 var IID_IActiveScriptStringCompare = win32.GUID{Data1: 0x58562769, Data2: 0xed52, Data3: 0x42f7, Data4: [8]byte{0x84, 0x03, 0x49, 0x63, 0x51, 0x4e, 0x1f, 0x11}}
 
 // StrComp dispatches through IActiveScriptStringCompare's vtable slot 3.
-func (self *IActiveScriptStringCompare) StrComp(bszStr1 foundation.BSTR, bszStr2 foundation.BSTR, iRet *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bszStr1)), uintptr(unsafe.Pointer(bszStr2)), uintptr(unsafe.Pointer(iRet)))
-	return foundation.HRESULT(r1)
+func (self *IActiveScriptStringCompare) StrComp(bszStr1 foundation.BSTR, bszStr2 foundation.BSTR) (int32, error) {
+	var _iRet int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bszStr1)), uintptr(unsafe.Pointer(bszStr2)), uintptr(unsafe.Pointer(&_iRet)))
+	return _iRet, win32.HRESULTError(int32(r1))
 }
 
 // IID: c35456e7-bebf-4a1b-86a9-24d56be8b369
@@ -1038,9 +1117,9 @@ type IActiveScriptTraceInfo struct {
 var IID_IActiveScriptTraceInfo = win32.GUID{Data1: 0xc35456e7, Data2: 0xbebf, Data3: 0x4a1b, Data4: [8]byte{0x86, 0xa9, 0x24, 0xd5, 0x6b, 0xe8, 0xb3, 0x69}}
 
 // StopScriptTracing dispatches through IActiveScriptTraceInfo's vtable slot 4.
-func (self *IActiveScriptTraceInfo) StopScriptTracing() foundation.HRESULT {
+func (self *IActiveScriptTraceInfo) StopScriptTracing() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 73a3f82a-0fe9-4b33-ba3b-fe095f697e0a
@@ -1052,21 +1131,21 @@ type IActiveScriptWinRTErrorDebug struct {
 var IID_IActiveScriptWinRTErrorDebug = win32.GUID{Data1: 0x73a3f82a, Data2: 0x0fe9, Data3: 0x4b33, Data4: [8]byte{0xba, 0x3b, 0xfe, 0x09, 0x5f, 0x69, 0x7e, 0x0a}}
 
 // GetRestrictedErrorString dispatches through IActiveScriptWinRTErrorDebug's vtable slot 6.
-func (self *IActiveScriptWinRTErrorDebug) GetRestrictedErrorString(errorString *foundation.BSTR) foundation.HRESULT {
+func (self *IActiveScriptWinRTErrorDebug) GetRestrictedErrorString(errorString *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(errorString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRestrictedErrorReference dispatches through IActiveScriptWinRTErrorDebug's vtable slot 7.
-func (self *IActiveScriptWinRTErrorDebug) GetRestrictedErrorReference(referenceString *foundation.BSTR) foundation.HRESULT {
+func (self *IActiveScriptWinRTErrorDebug) GetRestrictedErrorReference(referenceString *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(referenceString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCapabilitySid dispatches through IActiveScriptWinRTErrorDebug's vtable slot 8.
-func (self *IActiveScriptWinRTErrorDebug) GetCapabilitySid(capabilitySid *foundation.BSTR) foundation.HRESULT {
+func (self *IActiveScriptWinRTErrorDebug) GetCapabilitySid(capabilitySid *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(capabilitySid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c2a-cb0c-11d0-b5c9-00a0244a0e7a
@@ -1078,39 +1157,40 @@ type IApplicationDebugger struct {
 var IID_IApplicationDebugger = win32.GUID{Data1: 0x51973c2a, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // QueryAlive dispatches through IApplicationDebugger's vtable slot 3.
-func (self *IApplicationDebugger) QueryAlive() foundation.HRESULT {
+func (self *IApplicationDebugger) QueryAlive() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateInstanceAtDebugger dispatches through IApplicationDebugger's vtable slot 4.
-func (self *IApplicationDebugger) CreateInstanceAtDebugger(rclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppvObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *IApplicationDebugger) CreateInstanceAtDebugger(rclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppvObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsContext), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDebugOutput dispatches through IApplicationDebugger's vtable slot 5.
-func (self *IApplicationDebugger) OnDebugOutput(pstr foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstr)))
-	return foundation.HRESULT(r1)
+func (self *IApplicationDebugger) OnDebugOutput(pstr string) error {
+	_pstr := win32.UTF16Ptr(pstr)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnHandleBreakPoint dispatches through IApplicationDebugger's vtable slot 6.
-func (self *IApplicationDebugger) OnHandleBreakPoint(prpt *IRemoteDebugApplicationThread, br BREAKREASON, pError *IActiveScriptErrorDebug) foundation.HRESULT {
+func (self *IApplicationDebugger) OnHandleBreakPoint(prpt *IRemoteDebugApplicationThread, br BREAKREASON, pError *IActiveScriptErrorDebug) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prpt)), uintptr(br), uintptr(unsafe.Pointer(pError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnClose dispatches through IApplicationDebugger's vtable slot 7.
-func (self *IApplicationDebugger) OnClose() foundation.HRESULT {
+func (self *IApplicationDebugger) OnClose() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDebuggerEvent dispatches through IApplicationDebugger's vtable slot 8.
-func (self *IApplicationDebugger) OnDebuggerEvent(riid *win32.GUID, punk *systemcom.IUnknown) foundation.HRESULT {
+func (self *IApplicationDebugger) OnDebuggerEvent(riid *win32.GUID, punk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(punk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c2b-cb0c-11d0-b5c9-00a0244a0e7a
@@ -1122,15 +1202,15 @@ type IApplicationDebuggerUI struct {
 var IID_IApplicationDebuggerUI = win32.GUID{Data1: 0x51973c2b, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // BringDocumentToTop dispatches through IApplicationDebuggerUI's vtable slot 3.
-func (self *IApplicationDebuggerUI) BringDocumentToTop(pddt *IDebugDocumentText) foundation.HRESULT {
+func (self *IApplicationDebuggerUI) BringDocumentToTop(pddt *IDebugDocumentText) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pddt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BringDocumentContextToTop dispatches through IApplicationDebuggerUI's vtable slot 4.
-func (self *IApplicationDebuggerUI) BringDocumentContextToTop(pddc *IDebugDocumentContext) foundation.HRESULT {
+func (self *IApplicationDebuggerUI) BringDocumentContextToTop(pddc *IDebugDocumentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pddc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 63cdbcb0-c1b1-11d0-9336-00a0c90dcaa9
@@ -1142,9 +1222,10 @@ type IBindEventHandler struct {
 var IID_IBindEventHandler = win32.GUID{Data1: 0x63cdbcb0, Data2: 0xc1b1, Data3: 0x11d0, Data4: [8]byte{0x93, 0x36, 0x00, 0xa0, 0xc9, 0x0d, 0xca, 0xa9}}
 
 // BindHandler dispatches through IBindEventHandler's vtable slot 3.
-func (self *IBindEventHandler) BindHandler(pstrEvent foundation.PWSTR, pdisp *systemcom.IDispatch) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrEvent)), uintptr(unsafe.Pointer(pdisp)))
-	return foundation.HRESULT(r1)
+func (self *IBindEventHandler) BindHandler(pstrEvent string, pdisp *systemcom.IDispatch) error {
+	_pstrEvent := win32.UTF16Ptr(pstrEvent)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrEvent)), uintptr(unsafe.Pointer(pdisp)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bdb3b5de-89f2-4e11-84a5-97445f941c7d
@@ -1156,21 +1237,21 @@ type IDebugApplication11032 struct {
 var IID_IDebugApplication11032 = win32.GUID{Data1: 0xbdb3b5de, Data2: 0x89f2, Data3: 0x4e11, Data4: [8]byte{0x84, 0xa5, 0x97, 0x44, 0x5f, 0x94, 0x1c, 0x7d}}
 
 // SynchronousCallInMainThread dispatches through IDebugApplication11032's vtable slot 6.
-func (self *IDebugApplication11032) SynchronousCallInMainThread(pptc *IDebugThreadCall32, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) foundation.HRESULT {
+func (self *IDebugApplication11032) SynchronousCallInMainThread(pptc *IDebugThreadCall32, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pptc)), uintptr(dwParam1), uintptr(dwParam2), uintptr(dwParam3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AsynchronousCallInMainThread dispatches through IDebugApplication11032's vtable slot 7.
-func (self *IDebugApplication11032) AsynchronousCallInMainThread(pptc *IDebugThreadCall32, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) foundation.HRESULT {
+func (self *IDebugApplication11032) AsynchronousCallInMainThread(pptc *IDebugThreadCall32, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pptc)), uintptr(dwParam1), uintptr(dwParam2), uintptr(dwParam3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CallableWaitForHandles dispatches through IDebugApplication11032's vtable slot 8.
-func (self *IDebugApplication11032) CallableWaitForHandles(handleCount uint32, pHandles *foundation.HANDLE, pIndex *uint32) foundation.HRESULT {
+func (self *IDebugApplication11032) CallableWaitForHandles(handleCount uint32, pHandles *foundation.HANDLE, pIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(handleCount), uintptr(unsafe.Pointer(pHandles)), uintptr(unsafe.Pointer(pIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2039d958-4eeb-496a-87bb-2e5201eadeef
@@ -1182,21 +1263,21 @@ type IDebugApplication11064 struct {
 var IID_IDebugApplication11064 = win32.GUID{Data1: 0x2039d958, Data2: 0x4eeb, Data3: 0x496a, Data4: [8]byte{0x87, 0xbb, 0x2e, 0x52, 0x01, 0xea, 0xde, 0xef}}
 
 // SynchronousCallInMainThread dispatches through IDebugApplication11064's vtable slot 6.
-func (self *IDebugApplication11064) SynchronousCallInMainThread(pptc *IDebugThreadCall64, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) foundation.HRESULT {
+func (self *IDebugApplication11064) SynchronousCallInMainThread(pptc *IDebugThreadCall64, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pptc)), uintptr(dwParam1), uintptr(dwParam2), uintptr(dwParam3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AsynchronousCallInMainThread dispatches through IDebugApplication11064's vtable slot 7.
-func (self *IDebugApplication11064) AsynchronousCallInMainThread(pptc *IDebugThreadCall64, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) foundation.HRESULT {
+func (self *IDebugApplication11064) AsynchronousCallInMainThread(pptc *IDebugThreadCall64, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pptc)), uintptr(dwParam1), uintptr(dwParam2), uintptr(dwParam3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CallableWaitForHandles dispatches through IDebugApplication11064's vtable slot 8.
-func (self *IDebugApplication11064) CallableWaitForHandles(handleCount uint32, pHandles *foundation.HANDLE, pIndex *uint32) foundation.HRESULT {
+func (self *IDebugApplication11064) CallableWaitForHandles(handleCount uint32, pHandles *foundation.HANDLE, pIndex *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(handleCount), uintptr(unsafe.Pointer(pHandles)), uintptr(unsafe.Pointer(pIndex)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c32-cb0c-11d0-b5c9-00a0244a0e7a
@@ -1208,99 +1289,101 @@ type IDebugApplication32 struct {
 var IID_IDebugApplication32 = win32.GUID{Data1: 0x51973c32, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // SetName dispatches through IDebugApplication32's vtable slot 14.
-func (self *IDebugApplication32) SetName(pstrName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrName)))
-	return foundation.HRESULT(r1)
+func (self *IDebugApplication32) SetName(pstrName string) error {
+	_pstrName := win32.UTF16Ptr(pstrName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StepOutComplete dispatches through IDebugApplication32's vtable slot 15.
-func (self *IDebugApplication32) StepOutComplete() foundation.HRESULT {
+func (self *IDebugApplication32) StepOutComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DebugOutput dispatches through IDebugApplication32's vtable slot 16.
-func (self *IDebugApplication32) DebugOutput(pstr foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstr)))
-	return foundation.HRESULT(r1)
+func (self *IDebugApplication32) DebugOutput(pstr string) error {
+	_pstr := win32.UTF16Ptr(pstr)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartDebugSession dispatches through IDebugApplication32's vtable slot 17.
-func (self *IDebugApplication32) StartDebugSession() foundation.HRESULT {
+func (self *IDebugApplication32) StartDebugSession() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HandleBreakPoint dispatches through IDebugApplication32's vtable slot 18.
-func (self *IDebugApplication32) HandleBreakPoint(br BREAKREASON, pbra *BREAKRESUMEACTION) foundation.HRESULT {
+func (self *IDebugApplication32) HandleBreakPoint(br BREAKREASON, pbra *BREAKRESUMEACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(br), uintptr(unsafe.Pointer(pbra)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IDebugApplication32's vtable slot 19.
-func (self *IDebugApplication32) Close() foundation.HRESULT {
+func (self *IDebugApplication32) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBreakFlags dispatches through IDebugApplication32's vtable slot 20.
-func (self *IDebugApplication32) GetBreakFlags(pabf *uint32, pprdatSteppingThread **IRemoteDebugApplicationThread) foundation.HRESULT {
+func (self *IDebugApplication32) GetBreakFlags(pabf *uint32, pprdatSteppingThread **IRemoteDebugApplicationThread) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pabf)), uintptr(unsafe.Pointer(pprdatSteppingThread)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentThread dispatches through IDebugApplication32's vtable slot 21.
-func (self *IDebugApplication32) GetCurrentThread(pat **IDebugApplicationThread) foundation.HRESULT {
+func (self *IDebugApplication32) GetCurrentThread(pat **IDebugApplicationThread) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateAsyncDebugOperation dispatches through IDebugApplication32's vtable slot 22.
-func (self *IDebugApplication32) CreateAsyncDebugOperation(psdo *IDebugSyncOperation, ppado **IDebugAsyncOperation) foundation.HRESULT {
+func (self *IDebugApplication32) CreateAsyncDebugOperation(psdo *IDebugSyncOperation, ppado **IDebugAsyncOperation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psdo)), uintptr(unsafe.Pointer(ppado)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddStackFrameSniffer dispatches through IDebugApplication32's vtable slot 23.
-func (self *IDebugApplication32) AddStackFrameSniffer(pdsfs *IDebugStackFrameSniffer, pdwCookie *uint32) foundation.HRESULT {
+func (self *IDebugApplication32) AddStackFrameSniffer(pdsfs *IDebugStackFrameSniffer, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdsfs)), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveStackFrameSniffer dispatches through IDebugApplication32's vtable slot 24.
-func (self *IDebugApplication32) RemoveStackFrameSniffer(dwCookie uint32) foundation.HRESULT {
+func (self *IDebugApplication32) RemoveStackFrameSniffer(dwCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(dwCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryCurrentThreadIsDebuggerThread dispatches through IDebugApplication32's vtable slot 25.
-func (self *IDebugApplication32) QueryCurrentThreadIsDebuggerThread() foundation.HRESULT {
+func (self *IDebugApplication32) QueryCurrentThreadIsDebuggerThread() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SynchronousCallInDebuggerThread dispatches through IDebugApplication32's vtable slot 26.
-func (self *IDebugApplication32) SynchronousCallInDebuggerThread(pptc *IDebugThreadCall32, dwParam1 uint32, dwParam2 uint32, dwParam3 uint32) foundation.HRESULT {
+func (self *IDebugApplication32) SynchronousCallInDebuggerThread(pptc *IDebugThreadCall32, dwParam1 uint32, dwParam2 uint32, dwParam3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pptc)), uintptr(dwParam1), uintptr(dwParam2), uintptr(dwParam3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateApplicationNode dispatches through IDebugApplication32's vtable slot 27.
-func (self *IDebugApplication32) CreateApplicationNode(ppdanNew **IDebugApplicationNode) foundation.HRESULT {
+func (self *IDebugApplication32) CreateApplicationNode(ppdanNew **IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdanNew)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FireDebuggerEvent dispatches through IDebugApplication32's vtable slot 28.
-func (self *IDebugApplication32) FireDebuggerEvent(riid *win32.GUID, punk *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDebugApplication32) FireDebuggerEvent(riid *win32.GUID, punk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(punk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HandleRuntimeError dispatches through IDebugApplication32's vtable slot 29.
-func (self *IDebugApplication32) HandleRuntimeError(pErrorDebug *IActiveScriptErrorDebug, pScriptSite *IActiveScriptSite, pbra *BREAKRESUMEACTION, perra *ERRORRESUMEACTION, pfCallOnScriptError *foundation.BOOL) foundation.HRESULT {
+func (self *IDebugApplication32) HandleRuntimeError(pErrorDebug *IActiveScriptErrorDebug, pScriptSite *IActiveScriptSite, pbra *BREAKRESUMEACTION, perra *ERRORRESUMEACTION, pfCallOnScriptError *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(unsafe.Pointer(pScriptSite)), uintptr(unsafe.Pointer(pbra)), uintptr(unsafe.Pointer(perra)), uintptr(unsafe.Pointer(pfCallOnScriptError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FCanJitDebug dispatches through IDebugApplication32's vtable slot 30.
@@ -1316,15 +1399,15 @@ func (self *IDebugApplication32) FIsAutoJitDebugEnabled() foundation.BOOL {
 }
 
 // AddGlobalExpressionContextProvider dispatches through IDebugApplication32's vtable slot 32.
-func (self *IDebugApplication32) AddGlobalExpressionContextProvider(pdsfs *IProvideExpressionContexts, pdwCookie *uint32) foundation.HRESULT {
+func (self *IDebugApplication32) AddGlobalExpressionContextProvider(pdsfs *IProvideExpressionContexts, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdsfs)), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveGlobalExpressionContextProvider dispatches through IDebugApplication32's vtable slot 33.
-func (self *IDebugApplication32) RemoveGlobalExpressionContextProvider(dwCookie uint32) foundation.HRESULT {
+func (self *IDebugApplication32) RemoveGlobalExpressionContextProvider(dwCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(dwCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4dedc754-04c7-4f10-9e60-16a390fe6e62
@@ -1336,99 +1419,101 @@ type IDebugApplication64 struct {
 var IID_IDebugApplication64 = win32.GUID{Data1: 0x4dedc754, Data2: 0x04c7, Data3: 0x4f10, Data4: [8]byte{0x9e, 0x60, 0x16, 0xa3, 0x90, 0xfe, 0x6e, 0x62}}
 
 // SetName dispatches through IDebugApplication64's vtable slot 14.
-func (self *IDebugApplication64) SetName(pstrName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrName)))
-	return foundation.HRESULT(r1)
+func (self *IDebugApplication64) SetName(pstrName string) error {
+	_pstrName := win32.UTF16Ptr(pstrName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StepOutComplete dispatches through IDebugApplication64's vtable slot 15.
-func (self *IDebugApplication64) StepOutComplete() foundation.HRESULT {
+func (self *IDebugApplication64) StepOutComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DebugOutput dispatches through IDebugApplication64's vtable slot 16.
-func (self *IDebugApplication64) DebugOutput(pstr foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstr)))
-	return foundation.HRESULT(r1)
+func (self *IDebugApplication64) DebugOutput(pstr string) error {
+	_pstr := win32.UTF16Ptr(pstr)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartDebugSession dispatches through IDebugApplication64's vtable slot 17.
-func (self *IDebugApplication64) StartDebugSession() foundation.HRESULT {
+func (self *IDebugApplication64) StartDebugSession() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HandleBreakPoint dispatches through IDebugApplication64's vtable slot 18.
-func (self *IDebugApplication64) HandleBreakPoint(br BREAKREASON, pbra *BREAKRESUMEACTION) foundation.HRESULT {
+func (self *IDebugApplication64) HandleBreakPoint(br BREAKREASON, pbra *BREAKRESUMEACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(br), uintptr(unsafe.Pointer(pbra)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IDebugApplication64's vtable slot 19.
-func (self *IDebugApplication64) Close() foundation.HRESULT {
+func (self *IDebugApplication64) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBreakFlags dispatches through IDebugApplication64's vtable slot 20.
-func (self *IDebugApplication64) GetBreakFlags(pabf *uint32, pprdatSteppingThread **IRemoteDebugApplicationThread) foundation.HRESULT {
+func (self *IDebugApplication64) GetBreakFlags(pabf *uint32, pprdatSteppingThread **IRemoteDebugApplicationThread) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pabf)), uintptr(unsafe.Pointer(pprdatSteppingThread)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentThread dispatches through IDebugApplication64's vtable slot 21.
-func (self *IDebugApplication64) GetCurrentThread(pat **IDebugApplicationThread) foundation.HRESULT {
+func (self *IDebugApplication64) GetCurrentThread(pat **IDebugApplicationThread) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateAsyncDebugOperation dispatches through IDebugApplication64's vtable slot 22.
-func (self *IDebugApplication64) CreateAsyncDebugOperation(psdo *IDebugSyncOperation, ppado **IDebugAsyncOperation) foundation.HRESULT {
+func (self *IDebugApplication64) CreateAsyncDebugOperation(psdo *IDebugSyncOperation, ppado **IDebugAsyncOperation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psdo)), uintptr(unsafe.Pointer(ppado)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddStackFrameSniffer dispatches through IDebugApplication64's vtable slot 23.
-func (self *IDebugApplication64) AddStackFrameSniffer(pdsfs *IDebugStackFrameSniffer, pdwCookie *uint32) foundation.HRESULT {
+func (self *IDebugApplication64) AddStackFrameSniffer(pdsfs *IDebugStackFrameSniffer, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdsfs)), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveStackFrameSniffer dispatches through IDebugApplication64's vtable slot 24.
-func (self *IDebugApplication64) RemoveStackFrameSniffer(dwCookie uint32) foundation.HRESULT {
+func (self *IDebugApplication64) RemoveStackFrameSniffer(dwCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(dwCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryCurrentThreadIsDebuggerThread dispatches through IDebugApplication64's vtable slot 25.
-func (self *IDebugApplication64) QueryCurrentThreadIsDebuggerThread() foundation.HRESULT {
+func (self *IDebugApplication64) QueryCurrentThreadIsDebuggerThread() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SynchronousCallInDebuggerThread dispatches through IDebugApplication64's vtable slot 26.
-func (self *IDebugApplication64) SynchronousCallInDebuggerThread(pptc *IDebugThreadCall64, dwParam1 uint64, dwParam2 uint64, dwParam3 uint64) foundation.HRESULT {
+func (self *IDebugApplication64) SynchronousCallInDebuggerThread(pptc *IDebugThreadCall64, dwParam1 uint64, dwParam2 uint64, dwParam3 uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pptc)), uintptr(dwParam1), uintptr(dwParam2), uintptr(dwParam3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateApplicationNode dispatches through IDebugApplication64's vtable slot 27.
-func (self *IDebugApplication64) CreateApplicationNode(ppdanNew **IDebugApplicationNode) foundation.HRESULT {
+func (self *IDebugApplication64) CreateApplicationNode(ppdanNew **IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdanNew)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FireDebuggerEvent dispatches through IDebugApplication64's vtable slot 28.
-func (self *IDebugApplication64) FireDebuggerEvent(riid *win32.GUID, punk *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDebugApplication64) FireDebuggerEvent(riid *win32.GUID, punk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(punk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HandleRuntimeError dispatches through IDebugApplication64's vtable slot 29.
-func (self *IDebugApplication64) HandleRuntimeError(pErrorDebug *IActiveScriptErrorDebug, pScriptSite *IActiveScriptSite, pbra *BREAKRESUMEACTION, perra *ERRORRESUMEACTION, pfCallOnScriptError *foundation.BOOL) foundation.HRESULT {
+func (self *IDebugApplication64) HandleRuntimeError(pErrorDebug *IActiveScriptErrorDebug, pScriptSite *IActiveScriptSite, pbra *BREAKRESUMEACTION, perra *ERRORRESUMEACTION, pfCallOnScriptError *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorDebug)), uintptr(unsafe.Pointer(pScriptSite)), uintptr(unsafe.Pointer(pbra)), uintptr(unsafe.Pointer(perra)), uintptr(unsafe.Pointer(pfCallOnScriptError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FCanJitDebug dispatches through IDebugApplication64's vtable slot 30.
@@ -1444,15 +1529,15 @@ func (self *IDebugApplication64) FIsAutoJitDebugEnabled() foundation.BOOL {
 }
 
 // AddGlobalExpressionContextProvider dispatches through IDebugApplication64's vtable slot 32.
-func (self *IDebugApplication64) AddGlobalExpressionContextProvider(pdsfs *IProvideExpressionContexts, pdwCookie *uint64) foundation.HRESULT {
+func (self *IDebugApplication64) AddGlobalExpressionContextProvider(pdsfs *IProvideExpressionContexts, pdwCookie *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdsfs)), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveGlobalExpressionContextProvider dispatches through IDebugApplication64's vtable slot 33.
-func (self *IDebugApplication64) RemoveGlobalExpressionContextProvider(dwCookie uint64) foundation.HRESULT {
+func (self *IDebugApplication64) RemoveGlobalExpressionContextProvider(dwCookie uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(dwCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c34-cb0c-11d0-b5c9-00a0244a0e7a
@@ -1464,39 +1549,39 @@ type IDebugApplicationNode struct {
 var IID_IDebugApplicationNode = win32.GUID{Data1: 0x51973c34, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // EnumChildren dispatches through IDebugApplicationNode's vtable slot 6.
-func (self *IDebugApplicationNode) EnumChildren(pperddp **IEnumDebugApplicationNodes) foundation.HRESULT {
+func (self *IDebugApplicationNode) EnumChildren(pperddp **IEnumDebugApplicationNodes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pperddp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetParent dispatches through IDebugApplicationNode's vtable slot 7.
-func (self *IDebugApplicationNode) GetParent(pprddp **IDebugApplicationNode) foundation.HRESULT {
+func (self *IDebugApplicationNode) GetParent(pprddp **IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pprddp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDocumentProvider dispatches through IDebugApplicationNode's vtable slot 8.
-func (self *IDebugApplicationNode) SetDocumentProvider(pddp *IDebugDocumentProvider) foundation.HRESULT {
+func (self *IDebugApplicationNode) SetDocumentProvider(pddp *IDebugDocumentProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pddp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Close dispatches through IDebugApplicationNode's vtable slot 9.
-func (self *IDebugApplicationNode) Close() foundation.HRESULT {
+func (self *IDebugApplicationNode) Close() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Attach dispatches through IDebugApplicationNode's vtable slot 10.
-func (self *IDebugApplicationNode) Attach(pdanParent *IDebugApplicationNode) foundation.HRESULT {
+func (self *IDebugApplicationNode) Attach(pdanParent *IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdanParent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Detach dispatches through IDebugApplicationNode's vtable slot 11.
-func (self *IDebugApplicationNode) Detach() foundation.HRESULT {
+func (self *IDebugApplicationNode) Detach() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 90a7734e-841b-4f77-9384-a2891e76e7e2
@@ -1508,21 +1593,21 @@ type IDebugApplicationNode100 struct {
 var IID_IDebugApplicationNode100 = win32.GUID{Data1: 0x90a7734e, Data2: 0x841b, Data3: 0x4f77, Data4: [8]byte{0x93, 0x84, 0xa2, 0x89, 0x1e, 0x76, 0xe7, 0xe2}}
 
 // SetFilterForEventSink dispatches through IDebugApplicationNode100's vtable slot 3.
-func (self *IDebugApplicationNode100) SetFilterForEventSink(dwCookie uint32, filter APPLICATION_NODE_EVENT_FILTER) foundation.HRESULT {
+func (self *IDebugApplicationNode100) SetFilterForEventSink(dwCookie uint32, filter APPLICATION_NODE_EVENT_FILTER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwCookie), uintptr(filter))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetExcludedDocuments dispatches through IDebugApplicationNode100's vtable slot 4.
-func (self *IDebugApplicationNode100) GetExcludedDocuments(filter APPLICATION_NODE_EVENT_FILTER, pDocuments *TEXT_DOCUMENT_ARRAY) foundation.HRESULT {
+func (self *IDebugApplicationNode100) GetExcludedDocuments(filter APPLICATION_NODE_EVENT_FILTER, pDocuments *TEXT_DOCUMENT_ARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(filter), uintptr(unsafe.Pointer(pDocuments)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryIsChildNode dispatches through IDebugApplicationNode100's vtable slot 5.
-func (self *IDebugApplicationNode100) QueryIsChildNode(pSearchKey *IDebugDocument) foundation.HRESULT {
+func (self *IDebugApplicationNode100) QueryIsChildNode(pSearchKey *IDebugDocument) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSearchKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c35-cb0c-11d0-b5c9-00a0244a0e7a
@@ -1534,27 +1619,27 @@ type IDebugApplicationNodeEvents struct {
 var IID_IDebugApplicationNodeEvents = win32.GUID{Data1: 0x51973c35, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // OnAddChild dispatches through IDebugApplicationNodeEvents's vtable slot 3.
-func (self *IDebugApplicationNodeEvents) OnAddChild(prddpChild *IDebugApplicationNode) foundation.HRESULT {
+func (self *IDebugApplicationNodeEvents) OnAddChild(prddpChild *IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prddpChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnRemoveChild dispatches through IDebugApplicationNodeEvents's vtable slot 4.
-func (self *IDebugApplicationNodeEvents) OnRemoveChild(prddpChild *IDebugApplicationNode) foundation.HRESULT {
+func (self *IDebugApplicationNodeEvents) OnRemoveChild(prddpChild *IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prddpChild)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDetach dispatches through IDebugApplicationNodeEvents's vtable slot 5.
-func (self *IDebugApplicationNodeEvents) OnDetach() foundation.HRESULT {
+func (self *IDebugApplicationNodeEvents) OnDetach() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnAttach dispatches through IDebugApplicationNodeEvents's vtable slot 6.
-func (self *IDebugApplicationNodeEvents) OnAttach(prddpParent *IDebugApplicationNode) foundation.HRESULT {
+func (self *IDebugApplicationNodeEvents) OnAttach(prddpParent *IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prddpParent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c38-cb0c-11d0-b5c9-00a0244a0e7a
@@ -1566,33 +1651,35 @@ type IDebugApplicationThread struct {
 var IID_IDebugApplicationThread = win32.GUID{Data1: 0x51973c38, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // SynchronousCallIntoThread32 dispatches through IDebugApplicationThread's vtable slot 12.
-func (self *IDebugApplicationThread) SynchronousCallIntoThread32(pstcb *IDebugThreadCall32, dwParam1 uint32, dwParam2 uint32, dwParam3 uint32) foundation.HRESULT {
+func (self *IDebugApplicationThread) SynchronousCallIntoThread32(pstcb *IDebugThreadCall32, dwParam1 uint32, dwParam2 uint32, dwParam3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstcb)), uintptr(dwParam1), uintptr(dwParam2), uintptr(dwParam3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryIsCurrentThread dispatches through IDebugApplicationThread's vtable slot 13.
-func (self *IDebugApplicationThread) QueryIsCurrentThread() foundation.HRESULT {
+func (self *IDebugApplicationThread) QueryIsCurrentThread() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryIsDebuggerThread dispatches through IDebugApplicationThread's vtable slot 14.
-func (self *IDebugApplicationThread) QueryIsDebuggerThread() foundation.HRESULT {
+func (self *IDebugApplicationThread) QueryIsDebuggerThread() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDescription dispatches through IDebugApplicationThread's vtable slot 15.
-func (self *IDebugApplicationThread) SetDescription(pstrDescription foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrDescription)))
-	return foundation.HRESULT(r1)
+func (self *IDebugApplicationThread) SetDescription(pstrDescription string) error {
+	_pstrDescription := win32.UTF16Ptr(pstrDescription)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrDescription)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStateString dispatches through IDebugApplicationThread's vtable slot 16.
-func (self *IDebugApplicationThread) SetStateString(pstrState foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrState)))
-	return foundation.HRESULT(r1)
+func (self *IDebugApplicationThread) SetStateString(pstrState string) error {
+	_pstrState := win32.UTF16Ptr(pstrState)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrState)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2194ac5c-6561-404a-a2e9-f57d72de3702
@@ -1604,27 +1691,27 @@ type IDebugApplicationThread11032 struct {
 var IID_IDebugApplicationThread11032 = win32.GUID{Data1: 0x2194ac5c, Data2: 0x6561, Data3: 0x404a, Data4: [8]byte{0xa2, 0xe9, 0xf5, 0x7d, 0x72, 0xde, 0x37, 0x02}}
 
 // GetActiveThreadRequestCount dispatches through IDebugApplicationThread11032's vtable slot 3.
-func (self *IDebugApplicationThread11032) GetActiveThreadRequestCount(puiThreadRequests *uint32) foundation.HRESULT {
+func (self *IDebugApplicationThread11032) GetActiveThreadRequestCount(puiThreadRequests *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiThreadRequests)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsSuspendedForBreakPoint dispatches through IDebugApplicationThread11032's vtable slot 4.
-func (self *IDebugApplicationThread11032) IsSuspendedForBreakPoint(pfIsSuspended *foundation.BOOL) foundation.HRESULT {
+func (self *IDebugApplicationThread11032) IsSuspendedForBreakPoint(pfIsSuspended *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsSuspended)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsThreadCallable dispatches through IDebugApplicationThread11032's vtable slot 5.
-func (self *IDebugApplicationThread11032) IsThreadCallable(pfIsCallable *foundation.BOOL) foundation.HRESULT {
+func (self *IDebugApplicationThread11032) IsThreadCallable(pfIsCallable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsCallable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AsynchronousCallIntoThread dispatches through IDebugApplicationThread11032's vtable slot 6.
-func (self *IDebugApplicationThread11032) AsynchronousCallIntoThread(pptc *IDebugThreadCall32, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) foundation.HRESULT {
+func (self *IDebugApplicationThread11032) AsynchronousCallIntoThread(pptc *IDebugThreadCall32, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pptc)), uintptr(dwParam1), uintptr(dwParam2), uintptr(dwParam3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 420aa4cc-efd8-4dac-983b-47127826917d
@@ -1636,27 +1723,27 @@ type IDebugApplicationThread11064 struct {
 var IID_IDebugApplicationThread11064 = win32.GUID{Data1: 0x420aa4cc, Data2: 0xefd8, Data3: 0x4dac, Data4: [8]byte{0x98, 0x3b, 0x47, 0x12, 0x78, 0x26, 0x91, 0x7d}}
 
 // GetActiveThreadRequestCount dispatches through IDebugApplicationThread11064's vtable slot 3.
-func (self *IDebugApplicationThread11064) GetActiveThreadRequestCount(puiThreadRequests *uint32) foundation.HRESULT {
+func (self *IDebugApplicationThread11064) GetActiveThreadRequestCount(puiThreadRequests *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puiThreadRequests)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsSuspendedForBreakPoint dispatches through IDebugApplicationThread11064's vtable slot 4.
-func (self *IDebugApplicationThread11064) IsSuspendedForBreakPoint(pfIsSuspended *foundation.BOOL) foundation.HRESULT {
+func (self *IDebugApplicationThread11064) IsSuspendedForBreakPoint(pfIsSuspended *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsSuspended)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsThreadCallable dispatches through IDebugApplicationThread11064's vtable slot 5.
-func (self *IDebugApplicationThread11064) IsThreadCallable(pfIsCallable *foundation.BOOL) foundation.HRESULT {
+func (self *IDebugApplicationThread11064) IsThreadCallable(pfIsCallable *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsCallable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AsynchronousCallIntoThread dispatches through IDebugApplicationThread11064's vtable slot 6.
-func (self *IDebugApplicationThread11064) AsynchronousCallIntoThread(pptc *IDebugThreadCall64, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) foundation.HRESULT {
+func (self *IDebugApplicationThread11064) AsynchronousCallIntoThread(pptc *IDebugThreadCall64, dwParam1 uintptr, dwParam2 uintptr, dwParam3 uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pptc)), uintptr(dwParam1), uintptr(dwParam2), uintptr(dwParam3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 9dac5886-dbad-456d-9dee-5dec39ab3dda
@@ -1668,9 +1755,9 @@ type IDebugApplicationThread64 struct {
 var IID_IDebugApplicationThread64 = win32.GUID{Data1: 0x9dac5886, Data2: 0xdbad, Data3: 0x456d, Data4: [8]byte{0x9d, 0xee, 0x5d, 0xec, 0x39, 0xab, 0x3d, 0xda}}
 
 // SynchronousCallIntoThread64 dispatches through IDebugApplicationThread64's vtable slot 17.
-func (self *IDebugApplicationThread64) SynchronousCallIntoThread64(pstcb *IDebugThreadCall64, dwParam1 uint64, dwParam2 uint64, dwParam3 uint64) foundation.HRESULT {
+func (self *IDebugApplicationThread64) SynchronousCallIntoThread64(pstcb *IDebugThreadCall64, dwParam1 uint64, dwParam2 uint64, dwParam3 uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstcb)), uintptr(dwParam1), uintptr(dwParam2), uintptr(dwParam3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 84e5e468-d5da-48a8-83f4-40366429007b
@@ -1682,27 +1769,27 @@ type IDebugApplicationThreadEvents110 struct {
 var IID_IDebugApplicationThreadEvents110 = win32.GUID{Data1: 0x84e5e468, Data2: 0xd5da, Data3: 0x48a8, Data4: [8]byte{0x83, 0xf4, 0x40, 0x36, 0x64, 0x29, 0x00, 0x7b}}
 
 // OnSuspendForBreakPoint dispatches through IDebugApplicationThreadEvents110's vtable slot 3.
-func (self *IDebugApplicationThreadEvents110) OnSuspendForBreakPoint() foundation.HRESULT {
+func (self *IDebugApplicationThreadEvents110) OnSuspendForBreakPoint() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnResumeFromBreakPoint dispatches through IDebugApplicationThreadEvents110's vtable slot 4.
-func (self *IDebugApplicationThreadEvents110) OnResumeFromBreakPoint() foundation.HRESULT {
+func (self *IDebugApplicationThreadEvents110) OnResumeFromBreakPoint() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnThreadRequestComplete dispatches through IDebugApplicationThreadEvents110's vtable slot 5.
-func (self *IDebugApplicationThreadEvents110) OnThreadRequestComplete() foundation.HRESULT {
+func (self *IDebugApplicationThreadEvents110) OnThreadRequestComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnBeginThreadRequest dispatches through IDebugApplicationThreadEvents110's vtable slot 6.
-func (self *IDebugApplicationThreadEvents110) OnBeginThreadRequest() foundation.HRESULT {
+func (self *IDebugApplicationThreadEvents110) OnBeginThreadRequest() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c1b-cb0c-11d0-b5c9-00a0244a0e7a
@@ -1714,33 +1801,33 @@ type IDebugAsyncOperation struct {
 var IID_IDebugAsyncOperation = win32.GUID{Data1: 0x51973c1b, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetSyncDebugOperation dispatches through IDebugAsyncOperation's vtable slot 3.
-func (self *IDebugAsyncOperation) GetSyncDebugOperation(ppsdo **IDebugSyncOperation) foundation.HRESULT {
+func (self *IDebugAsyncOperation) GetSyncDebugOperation(ppsdo **IDebugSyncOperation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppsdo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Start dispatches through IDebugAsyncOperation's vtable slot 4.
-func (self *IDebugAsyncOperation) Start(padocb *IDebugAsyncOperationCallBack) foundation.HRESULT {
+func (self *IDebugAsyncOperation) Start(padocb *IDebugAsyncOperationCallBack) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(padocb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Abort dispatches through IDebugAsyncOperation's vtable slot 5.
-func (self *IDebugAsyncOperation) Abort() foundation.HRESULT {
+func (self *IDebugAsyncOperation) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryIsComplete dispatches through IDebugAsyncOperation's vtable slot 6.
-func (self *IDebugAsyncOperation) QueryIsComplete() foundation.HRESULT {
+func (self *IDebugAsyncOperation) QueryIsComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResult dispatches through IDebugAsyncOperation's vtable slot 7.
-func (self *IDebugAsyncOperation) GetResult(phrResult *foundation.HRESULT, ppunkResult **systemcom.IUnknown) foundation.HRESULT {
+func (self *IDebugAsyncOperation) GetResult(phrResult *foundation.HRESULT, ppunkResult **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrResult)), uintptr(unsafe.Pointer(ppunkResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c1c-cb0c-11d0-b5c9-00a0244a0e7a
@@ -1752,9 +1839,9 @@ type IDebugAsyncOperationCallBack struct {
 var IID_IDebugAsyncOperationCallBack = win32.GUID{Data1: 0x51973c1c, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // OnComplete dispatches through IDebugAsyncOperationCallBack's vtable slot 3.
-func (self *IDebugAsyncOperationCallBack) OnComplete() foundation.HRESULT {
+func (self *IDebugAsyncOperationCallBack) OnComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c13-cb0c-11d0-b5c9-00a0244a0e7a
@@ -1766,15 +1853,15 @@ type IDebugCodeContext struct {
 var IID_IDebugCodeContext = win32.GUID{Data1: 0x51973c13, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetDocumentContext dispatches through IDebugCodeContext's vtable slot 3.
-func (self *IDebugCodeContext) GetDocumentContext(ppsc **IDebugDocumentContext) foundation.HRESULT {
+func (self *IDebugCodeContext) GetDocumentContext(ppsc **IDebugDocumentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppsc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBreakPoint dispatches through IDebugCodeContext's vtable slot 4.
-func (self *IDebugCodeContext) SetBreakPoint(bps BREAKPOINT_STATE) foundation.HRESULT {
+func (self *IDebugCodeContext) SetBreakPoint(bps BREAKPOINT_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(bps))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c39-cb0c-11d0-b5c9-00a0244a0e7a
@@ -1786,9 +1873,9 @@ type IDebugCookie struct {
 var IID_IDebugCookie = win32.GUID{Data1: 0x51973c39, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // SetDebugCookie dispatches through IDebugCookie's vtable slot 3.
-func (self *IDebugCookie) SetDebugCookie(dwDebugAppCookie uint32) foundation.HRESULT {
+func (self *IDebugCookie) SetDebugCookie(dwDebugAppCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwDebugAppCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c21-cb0c-11d0-b5c9-00a0244a0e7a
@@ -1808,15 +1895,15 @@ type IDebugDocumentContext struct {
 var IID_IDebugDocumentContext = win32.GUID{Data1: 0x51973c28, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetDocument dispatches through IDebugDocumentContext's vtable slot 3.
-func (self *IDebugDocumentContext) GetDocument(ppsd **IDebugDocument) foundation.HRESULT {
+func (self *IDebugDocumentContext) GetDocument(ppsd **IDebugDocument) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppsd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumCodeContexts dispatches through IDebugDocumentContext's vtable slot 4.
-func (self *IDebugDocumentContext) EnumCodeContexts(ppescc **IEnumDebugCodeContexts) foundation.HRESULT {
+func (self *IDebugDocumentContext) EnumCodeContexts(ppescc **IEnumDebugCodeContexts) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppescc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c26-cb0c-11d0-b5c9-00a0244a0e7a
@@ -1828,111 +1915,117 @@ type IDebugDocumentHelper32 struct {
 var IID_IDebugDocumentHelper32 = win32.GUID{Data1: 0x51973c26, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Init dispatches through IDebugDocumentHelper32's vtable slot 3.
-func (self *IDebugDocumentHelper32) Init(pda *IDebugApplication32, pszShortName foundation.PWSTR, pszLongName foundation.PWSTR, docAttr uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pda)), uintptr(unsafe.Pointer(pszShortName)), uintptr(unsafe.Pointer(pszLongName)), uintptr(docAttr))
-	return foundation.HRESULT(r1)
+func (self *IDebugDocumentHelper32) Init(pda *IDebugApplication32, pszShortName string, pszLongName string, docAttr uint32) error {
+	_pszShortName := win32.UTF16Ptr(pszShortName)
+	_pszLongName := win32.UTF16Ptr(pszLongName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pda)), uintptr(unsafe.Pointer(_pszShortName)), uintptr(unsafe.Pointer(_pszLongName)), uintptr(docAttr))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Attach dispatches through IDebugDocumentHelper32's vtable slot 4.
-func (self *IDebugDocumentHelper32) Attach(pddhParent *IDebugDocumentHelper32) foundation.HRESULT {
+func (self *IDebugDocumentHelper32) Attach(pddhParent *IDebugDocumentHelper32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pddhParent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Detach dispatches through IDebugDocumentHelper32's vtable slot 5.
-func (self *IDebugDocumentHelper32) Detach() foundation.HRESULT {
+func (self *IDebugDocumentHelper32) Detach() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddUnicodeText dispatches through IDebugDocumentHelper32's vtable slot 6.
-func (self *IDebugDocumentHelper32) AddUnicodeText(pszText foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszText)))
-	return foundation.HRESULT(r1)
+func (self *IDebugDocumentHelper32) AddUnicodeText(pszText string) error {
+	_pszText := win32.UTF16Ptr(pszText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszText)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDBCSText dispatches through IDebugDocumentHelper32's vtable slot 7.
-func (self *IDebugDocumentHelper32) AddDBCSText(pszText foundation.PSTR) foundation.HRESULT {
+func (self *IDebugDocumentHelper32) AddDBCSText(pszText foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDebugDocumentHost dispatches through IDebugDocumentHelper32's vtable slot 8.
-func (self *IDebugDocumentHelper32) SetDebugDocumentHost(pddh *IDebugDocumentHost) foundation.HRESULT {
+func (self *IDebugDocumentHelper32) SetDebugDocumentHost(pddh *IDebugDocumentHost) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pddh)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDeferredText dispatches through IDebugDocumentHelper32's vtable slot 9.
-func (self *IDebugDocumentHelper32) AddDeferredText(cChars uint32, dwTextStartCookie uint32) foundation.HRESULT {
+func (self *IDebugDocumentHelper32) AddDeferredText(cChars uint32, dwTextStartCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(cChars), uintptr(dwTextStartCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineScriptBlock dispatches through IDebugDocumentHelper32's vtable slot 10.
-func (self *IDebugDocumentHelper32) DefineScriptBlock(ulCharOffset uint32, cChars uint32, pas *IActiveScript, fScriptlet foundation.BOOL, pdwSourceContext *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ulCharOffset), uintptr(cChars), uintptr(unsafe.Pointer(pas)), uintptr(fScriptlet), uintptr(unsafe.Pointer(pdwSourceContext)))
-	return foundation.HRESULT(r1)
+func (self *IDebugDocumentHelper32) DefineScriptBlock(ulCharOffset uint32, cChars uint32, pas *IActiveScript, fScriptlet bool, pdwSourceContext *uint32) error {
+	_fScriptlet := win32.Bool32(fScriptlet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ulCharOffset), uintptr(cChars), uintptr(unsafe.Pointer(pas)), uintptr(_fScriptlet), uintptr(unsafe.Pointer(pdwSourceContext)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDefaultTextAttr dispatches through IDebugDocumentHelper32's vtable slot 11.
-func (self *IDebugDocumentHelper32) SetDefaultTextAttr(staTextAttr uint16) foundation.HRESULT {
+func (self *IDebugDocumentHelper32) SetDefaultTextAttr(staTextAttr uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(staTextAttr))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTextAttributes dispatches through IDebugDocumentHelper32's vtable slot 12.
-func (self *IDebugDocumentHelper32) SetTextAttributes(ulCharOffset uint32, cChars uint32, pstaTextAttr *uint16) foundation.HRESULT {
+func (self *IDebugDocumentHelper32) SetTextAttributes(ulCharOffset uint32, cChars uint32, pstaTextAttr *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ulCharOffset), uintptr(cChars), uintptr(unsafe.Pointer(pstaTextAttr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLongName dispatches through IDebugDocumentHelper32's vtable slot 13.
-func (self *IDebugDocumentHelper32) SetLongName(pszLongName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszLongName)))
-	return foundation.HRESULT(r1)
+func (self *IDebugDocumentHelper32) SetLongName(pszLongName string) error {
+	_pszLongName := win32.UTF16Ptr(pszLongName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszLongName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetShortName dispatches through IDebugDocumentHelper32's vtable slot 14.
-func (self *IDebugDocumentHelper32) SetShortName(pszShortName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszShortName)))
-	return foundation.HRESULT(r1)
+func (self *IDebugDocumentHelper32) SetShortName(pszShortName string) error {
+	_pszShortName := win32.UTF16Ptr(pszShortName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszShortName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDocumentAttr dispatches through IDebugDocumentHelper32's vtable slot 15.
-func (self *IDebugDocumentHelper32) SetDocumentAttr(pszAttributes uint32) foundation.HRESULT {
+func (self *IDebugDocumentHelper32) SetDocumentAttr(pszAttributes uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(pszAttributes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDebugApplicationNode dispatches through IDebugDocumentHelper32's vtable slot 16.
-func (self *IDebugDocumentHelper32) GetDebugApplicationNode(ppdan **IDebugApplicationNode) foundation.HRESULT {
+func (self *IDebugDocumentHelper32) GetDebugApplicationNode(ppdan **IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdan)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScriptBlockInfo dispatches through IDebugDocumentHelper32's vtable slot 17.
-func (self *IDebugDocumentHelper32) GetScriptBlockInfo(dwSourceContext uint32, ppasd **IActiveScript, piCharPos *uint32, pcChars *uint32) foundation.HRESULT {
+func (self *IDebugDocumentHelper32) GetScriptBlockInfo(dwSourceContext uint32, ppasd **IActiveScript, piCharPos *uint32, pcChars *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwSourceContext), uintptr(unsafe.Pointer(ppasd)), uintptr(unsafe.Pointer(piCharPos)), uintptr(unsafe.Pointer(pcChars)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDebugDocumentContext dispatches through IDebugDocumentHelper32's vtable slot 18.
-func (self *IDebugDocumentHelper32) CreateDebugDocumentContext(iCharPos uint32, cChars uint32, ppddc **IDebugDocumentContext) foundation.HRESULT {
+func (self *IDebugDocumentHelper32) CreateDebugDocumentContext(iCharPos uint32, cChars uint32, ppddc **IDebugDocumentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(iCharPos), uintptr(cChars), uintptr(unsafe.Pointer(ppddc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BringDocumentToTop dispatches through IDebugDocumentHelper32's vtable slot 19.
-func (self *IDebugDocumentHelper32) BringDocumentToTop() foundation.HRESULT {
+func (self *IDebugDocumentHelper32) BringDocumentToTop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BringDocumentContextToTop dispatches through IDebugDocumentHelper32's vtable slot 20.
-func (self *IDebugDocumentHelper32) BringDocumentContextToTop(pddc *IDebugDocumentContext) foundation.HRESULT {
+func (self *IDebugDocumentHelper32) BringDocumentContextToTop(pddc *IDebugDocumentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pddc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c4c7363c-20fd-47f9-bd82-4855e0150871
@@ -1944,111 +2037,117 @@ type IDebugDocumentHelper64 struct {
 var IID_IDebugDocumentHelper64 = win32.GUID{Data1: 0xc4c7363c, Data2: 0x20fd, Data3: 0x47f9, Data4: [8]byte{0xbd, 0x82, 0x48, 0x55, 0xe0, 0x15, 0x08, 0x71}}
 
 // Init dispatches through IDebugDocumentHelper64's vtable slot 3.
-func (self *IDebugDocumentHelper64) Init(pda *IDebugApplication64, pszShortName foundation.PWSTR, pszLongName foundation.PWSTR, docAttr uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pda)), uintptr(unsafe.Pointer(pszShortName)), uintptr(unsafe.Pointer(pszLongName)), uintptr(docAttr))
-	return foundation.HRESULT(r1)
+func (self *IDebugDocumentHelper64) Init(pda *IDebugApplication64, pszShortName string, pszLongName string, docAttr uint32) error {
+	_pszShortName := win32.UTF16Ptr(pszShortName)
+	_pszLongName := win32.UTF16Ptr(pszLongName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pda)), uintptr(unsafe.Pointer(_pszShortName)), uintptr(unsafe.Pointer(_pszLongName)), uintptr(docAttr))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Attach dispatches through IDebugDocumentHelper64's vtable slot 4.
-func (self *IDebugDocumentHelper64) Attach(pddhParent *IDebugDocumentHelper64) foundation.HRESULT {
+func (self *IDebugDocumentHelper64) Attach(pddhParent *IDebugDocumentHelper64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pddhParent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Detach dispatches through IDebugDocumentHelper64's vtable slot 5.
-func (self *IDebugDocumentHelper64) Detach() foundation.HRESULT {
+func (self *IDebugDocumentHelper64) Detach() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddUnicodeText dispatches through IDebugDocumentHelper64's vtable slot 6.
-func (self *IDebugDocumentHelper64) AddUnicodeText(pszText foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszText)))
-	return foundation.HRESULT(r1)
+func (self *IDebugDocumentHelper64) AddUnicodeText(pszText string) error {
+	_pszText := win32.UTF16Ptr(pszText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszText)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDBCSText dispatches through IDebugDocumentHelper64's vtable slot 7.
-func (self *IDebugDocumentHelper64) AddDBCSText(pszText foundation.PSTR) foundation.HRESULT {
+func (self *IDebugDocumentHelper64) AddDBCSText(pszText foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDebugDocumentHost dispatches through IDebugDocumentHelper64's vtable slot 8.
-func (self *IDebugDocumentHelper64) SetDebugDocumentHost(pddh *IDebugDocumentHost) foundation.HRESULT {
+func (self *IDebugDocumentHelper64) SetDebugDocumentHost(pddh *IDebugDocumentHost) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pddh)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddDeferredText dispatches through IDebugDocumentHelper64's vtable slot 9.
-func (self *IDebugDocumentHelper64) AddDeferredText(cChars uint32, dwTextStartCookie uint32) foundation.HRESULT {
+func (self *IDebugDocumentHelper64) AddDeferredText(cChars uint32, dwTextStartCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(cChars), uintptr(dwTextStartCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineScriptBlock dispatches through IDebugDocumentHelper64's vtable slot 10.
-func (self *IDebugDocumentHelper64) DefineScriptBlock(ulCharOffset uint32, cChars uint32, pas *IActiveScript, fScriptlet foundation.BOOL, pdwSourceContext *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ulCharOffset), uintptr(cChars), uintptr(unsafe.Pointer(pas)), uintptr(fScriptlet), uintptr(unsafe.Pointer(pdwSourceContext)))
-	return foundation.HRESULT(r1)
+func (self *IDebugDocumentHelper64) DefineScriptBlock(ulCharOffset uint32, cChars uint32, pas *IActiveScript, fScriptlet bool, pdwSourceContext *uint64) error {
+	_fScriptlet := win32.Bool32(fScriptlet)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ulCharOffset), uintptr(cChars), uintptr(unsafe.Pointer(pas)), uintptr(_fScriptlet), uintptr(unsafe.Pointer(pdwSourceContext)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDefaultTextAttr dispatches through IDebugDocumentHelper64's vtable slot 11.
-func (self *IDebugDocumentHelper64) SetDefaultTextAttr(staTextAttr uint16) foundation.HRESULT {
+func (self *IDebugDocumentHelper64) SetDefaultTextAttr(staTextAttr uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(staTextAttr))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTextAttributes dispatches through IDebugDocumentHelper64's vtable slot 12.
-func (self *IDebugDocumentHelper64) SetTextAttributes(ulCharOffset uint32, cChars uint32, pstaTextAttr *uint16) foundation.HRESULT {
+func (self *IDebugDocumentHelper64) SetTextAttributes(ulCharOffset uint32, cChars uint32, pstaTextAttr *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ulCharOffset), uintptr(cChars), uintptr(unsafe.Pointer(pstaTextAttr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLongName dispatches through IDebugDocumentHelper64's vtable slot 13.
-func (self *IDebugDocumentHelper64) SetLongName(pszLongName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszLongName)))
-	return foundation.HRESULT(r1)
+func (self *IDebugDocumentHelper64) SetLongName(pszLongName string) error {
+	_pszLongName := win32.UTF16Ptr(pszLongName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszLongName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetShortName dispatches through IDebugDocumentHelper64's vtable slot 14.
-func (self *IDebugDocumentHelper64) SetShortName(pszShortName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszShortName)))
-	return foundation.HRESULT(r1)
+func (self *IDebugDocumentHelper64) SetShortName(pszShortName string) error {
+	_pszShortName := win32.UTF16Ptr(pszShortName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszShortName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDocumentAttr dispatches through IDebugDocumentHelper64's vtable slot 15.
-func (self *IDebugDocumentHelper64) SetDocumentAttr(pszAttributes uint32) foundation.HRESULT {
+func (self *IDebugDocumentHelper64) SetDocumentAttr(pszAttributes uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(pszAttributes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDebugApplicationNode dispatches through IDebugDocumentHelper64's vtable slot 16.
-func (self *IDebugDocumentHelper64) GetDebugApplicationNode(ppdan **IDebugApplicationNode) foundation.HRESULT {
+func (self *IDebugDocumentHelper64) GetDebugApplicationNode(ppdan **IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdan)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScriptBlockInfo dispatches through IDebugDocumentHelper64's vtable slot 17.
-func (self *IDebugDocumentHelper64) GetScriptBlockInfo(dwSourceContext uint64, ppasd **IActiveScript, piCharPos *uint32, pcChars *uint32) foundation.HRESULT {
+func (self *IDebugDocumentHelper64) GetScriptBlockInfo(dwSourceContext uint64, ppasd **IActiveScript, piCharPos *uint32, pcChars *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwSourceContext), uintptr(unsafe.Pointer(ppasd)), uintptr(unsafe.Pointer(piCharPos)), uintptr(unsafe.Pointer(pcChars)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDebugDocumentContext dispatches through IDebugDocumentHelper64's vtable slot 18.
-func (self *IDebugDocumentHelper64) CreateDebugDocumentContext(iCharPos uint32, cChars uint32, ppddc **IDebugDocumentContext) foundation.HRESULT {
+func (self *IDebugDocumentHelper64) CreateDebugDocumentContext(iCharPos uint32, cChars uint32, ppddc **IDebugDocumentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(iCharPos), uintptr(cChars), uintptr(unsafe.Pointer(ppddc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BringDocumentToTop dispatches through IDebugDocumentHelper64's vtable slot 19.
-func (self *IDebugDocumentHelper64) BringDocumentToTop() foundation.HRESULT {
+func (self *IDebugDocumentHelper64) BringDocumentToTop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BringDocumentContextToTop dispatches through IDebugDocumentHelper64's vtable slot 20.
-func (self *IDebugDocumentHelper64) BringDocumentContextToTop(pddc *IDebugDocumentContext) foundation.HRESULT {
+func (self *IDebugDocumentHelper64) BringDocumentContextToTop(pddc *IDebugDocumentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pddc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c27-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2060,39 +2159,41 @@ type IDebugDocumentHost struct {
 var IID_IDebugDocumentHost = win32.GUID{Data1: 0x51973c27, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetDeferredText dispatches through IDebugDocumentHost's vtable slot 3.
-func (self *IDebugDocumentHost) GetDeferredText(dwTextStartCookie uint32, pcharText foundation.PWSTR, pstaTextAttr *uint16, pcNumChars *uint32, cMaxChars uint32) foundation.HRESULT {
+func (self *IDebugDocumentHost) GetDeferredText(dwTextStartCookie uint32, pcharText foundation.PWSTR, pstaTextAttr *uint16, pcNumChars *uint32, cMaxChars uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwTextStartCookie), uintptr(unsafe.Pointer(pcharText)), uintptr(unsafe.Pointer(pstaTextAttr)), uintptr(unsafe.Pointer(pcNumChars)), uintptr(cMaxChars))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScriptTextAttributes dispatches through IDebugDocumentHost's vtable slot 4.
-func (self *IDebugDocumentHost) GetScriptTextAttributes(pstrCode foundation.PWSTR, uNumCodeChars uint32, pstrDelimiter foundation.PWSTR, dwFlags uint32, pattr *uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrCode)), uintptr(uNumCodeChars), uintptr(unsafe.Pointer(pstrDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(pattr)))
-	return foundation.HRESULT(r1)
+func (self *IDebugDocumentHost) GetScriptTextAttributes(pstrCode string, uNumCodeChars uint32, pstrDelimiter string, dwFlags uint32, pattr *uint16) error {
+	_pstrCode := win32.UTF16Ptr(pstrCode)
+	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrCode)), uintptr(uNumCodeChars), uintptr(unsafe.Pointer(_pstrDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(pattr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnCreateDocumentContext dispatches through IDebugDocumentHost's vtable slot 5.
-func (self *IDebugDocumentHost) OnCreateDocumentContext(ppunkOuter **systemcom.IUnknown) foundation.HRESULT {
+func (self *IDebugDocumentHost) OnCreateDocumentContext(ppunkOuter **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppunkOuter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPathName dispatches through IDebugDocumentHost's vtable slot 6.
-func (self *IDebugDocumentHost) GetPathName(pbstrLongName *foundation.BSTR, pfIsOriginalFile *foundation.BOOL) foundation.HRESULT {
+func (self *IDebugDocumentHost) GetPathName(pbstrLongName *foundation.BSTR, pfIsOriginalFile *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLongName)), uintptr(unsafe.Pointer(pfIsOriginalFile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFileName dispatches through IDebugDocumentHost's vtable slot 7.
-func (self *IDebugDocumentHost) GetFileName(pbstrShortName *foundation.BSTR) foundation.HRESULT {
+func (self *IDebugDocumentHost) GetFileName(pbstrShortName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrShortName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NotifyChanged dispatches through IDebugDocumentHost's vtable slot 8.
-func (self *IDebugDocumentHost) NotifyChanged() foundation.HRESULT {
+func (self *IDebugDocumentHost) NotifyChanged() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c1f-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2104,15 +2205,15 @@ type IDebugDocumentInfo struct {
 var IID_IDebugDocumentInfo = win32.GUID{Data1: 0x51973c1f, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetName dispatches through IDebugDocumentInfo's vtable slot 3.
-func (self *IDebugDocumentInfo) GetName(dnt DOCUMENTNAMETYPE, pbstrName *foundation.BSTR) foundation.HRESULT {
+func (self *IDebugDocumentInfo) GetName(dnt DOCUMENTNAMETYPE, pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dnt), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDocumentClassId dispatches through IDebugDocumentInfo's vtable slot 4.
-func (self *IDebugDocumentInfo) GetDocumentClassId(pclsidDocument *win32.GUID) foundation.HRESULT {
+func (self *IDebugDocumentInfo) GetDocumentClassId(pclsidDocument *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pclsidDocument)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c20-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2124,9 +2225,9 @@ type IDebugDocumentProvider struct {
 var IID_IDebugDocumentProvider = win32.GUID{Data1: 0x51973c20, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetDocument dispatches through IDebugDocumentProvider's vtable slot 5.
-func (self *IDebugDocumentProvider) GetDocument(ppssd **IDebugDocument) foundation.HRESULT {
+func (self *IDebugDocumentProvider) GetDocument(ppssd **IDebugDocument) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppssd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c22-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2138,45 +2239,45 @@ type IDebugDocumentText struct {
 var IID_IDebugDocumentText = win32.GUID{Data1: 0x51973c22, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetDocumentAttributes dispatches through IDebugDocumentText's vtable slot 5.
-func (self *IDebugDocumentText) GetDocumentAttributes(ptextdocattr *uint32) foundation.HRESULT {
+func (self *IDebugDocumentText) GetDocumentAttributes(ptextdocattr *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ptextdocattr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSize dispatches through IDebugDocumentText's vtable slot 6.
-func (self *IDebugDocumentText) GetSize(pcNumLines *uint32, pcNumChars *uint32) foundation.HRESULT {
+func (self *IDebugDocumentText) GetSize(pcNumLines *uint32, pcNumChars *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcNumLines)), uintptr(unsafe.Pointer(pcNumChars)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPositionOfLine dispatches through IDebugDocumentText's vtable slot 7.
-func (self *IDebugDocumentText) GetPositionOfLine(cLineNumber uint32, pcCharacterPosition *uint32) foundation.HRESULT {
+func (self *IDebugDocumentText) GetPositionOfLine(cLineNumber uint32, pcCharacterPosition *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cLineNumber), uintptr(unsafe.Pointer(pcCharacterPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLineOfPosition dispatches through IDebugDocumentText's vtable slot 8.
-func (self *IDebugDocumentText) GetLineOfPosition(cCharacterPosition uint32, pcLineNumber *uint32, pcCharacterOffsetInLine *uint32) foundation.HRESULT {
+func (self *IDebugDocumentText) GetLineOfPosition(cCharacterPosition uint32, pcLineNumber *uint32, pcCharacterOffsetInLine *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(cCharacterPosition), uintptr(unsafe.Pointer(pcLineNumber)), uintptr(unsafe.Pointer(pcCharacterOffsetInLine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetText dispatches through IDebugDocumentText's vtable slot 9.
-func (self *IDebugDocumentText) GetText(cCharacterPosition uint32, pcharText foundation.PWSTR, pstaTextAttr *uint16, pcNumChars *uint32, cMaxChars uint32) foundation.HRESULT {
+func (self *IDebugDocumentText) GetText(cCharacterPosition uint32, pcharText foundation.PWSTR, pstaTextAttr *uint16, pcNumChars *uint32, cMaxChars uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(cCharacterPosition), uintptr(unsafe.Pointer(pcharText)), uintptr(unsafe.Pointer(pstaTextAttr)), uintptr(unsafe.Pointer(pcNumChars)), uintptr(cMaxChars))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPositionOfContext dispatches through IDebugDocumentText's vtable slot 10.
-func (self *IDebugDocumentText) GetPositionOfContext(psc *IDebugDocumentContext, pcCharacterPosition *uint32, cNumChars *uint32) foundation.HRESULT {
+func (self *IDebugDocumentText) GetPositionOfContext(psc *IDebugDocumentContext, pcCharacterPosition *uint32, cNumChars *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psc)), uintptr(unsafe.Pointer(pcCharacterPosition)), uintptr(unsafe.Pointer(cNumChars)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContextOfPosition dispatches through IDebugDocumentText's vtable slot 11.
-func (self *IDebugDocumentText) GetContextOfPosition(cCharacterPosition uint32, cNumChars uint32, ppsc **IDebugDocumentContext) foundation.HRESULT {
+func (self *IDebugDocumentText) GetContextOfPosition(cCharacterPosition uint32, cNumChars uint32, ppsc **IDebugDocumentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(cCharacterPosition), uintptr(cNumChars), uintptr(unsafe.Pointer(ppsc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c24-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2188,21 +2289,23 @@ type IDebugDocumentTextAuthor struct {
 var IID_IDebugDocumentTextAuthor = win32.GUID{Data1: 0x51973c24, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // InsertText dispatches through IDebugDocumentTextAuthor's vtable slot 12.
-func (self *IDebugDocumentTextAuthor) InsertText(cCharacterPosition uint32, cNumToInsert uint32, pcharText foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(cCharacterPosition), uintptr(cNumToInsert), uintptr(unsafe.Pointer(pcharText)))
-	return foundation.HRESULT(r1)
+func (self *IDebugDocumentTextAuthor) InsertText(cCharacterPosition uint32, cNumToInsert uint32, pcharText string) error {
+	_pcharText := win32.UTF16Ptr(pcharText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(cCharacterPosition), uintptr(cNumToInsert), uintptr(unsafe.Pointer(_pcharText)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveText dispatches through IDebugDocumentTextAuthor's vtable slot 13.
-func (self *IDebugDocumentTextAuthor) RemoveText(cCharacterPosition uint32, cNumToRemove uint32) foundation.HRESULT {
+func (self *IDebugDocumentTextAuthor) RemoveText(cCharacterPosition uint32, cNumToRemove uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(cCharacterPosition), uintptr(cNumToRemove))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReplaceText dispatches through IDebugDocumentTextAuthor's vtable slot 14.
-func (self *IDebugDocumentTextAuthor) ReplaceText(cCharacterPosition uint32, cNumToReplace uint32, pcharText foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(cCharacterPosition), uintptr(cNumToReplace), uintptr(unsafe.Pointer(pcharText)))
-	return foundation.HRESULT(r1)
+func (self *IDebugDocumentTextAuthor) ReplaceText(cCharacterPosition uint32, cNumToReplace uint32, pcharText string) error {
+	_pcharText := win32.UTF16Ptr(pcharText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(cCharacterPosition), uintptr(cNumToReplace), uintptr(unsafe.Pointer(_pcharText)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c23-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2214,39 +2317,39 @@ type IDebugDocumentTextEvents struct {
 var IID_IDebugDocumentTextEvents = win32.GUID{Data1: 0x51973c23, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // OnDestroy dispatches through IDebugDocumentTextEvents's vtable slot 3.
-func (self *IDebugDocumentTextEvents) OnDestroy() foundation.HRESULT {
+func (self *IDebugDocumentTextEvents) OnDestroy() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnInsertText dispatches through IDebugDocumentTextEvents's vtable slot 4.
-func (self *IDebugDocumentTextEvents) OnInsertText(cCharacterPosition uint32, cNumToInsert uint32) foundation.HRESULT {
+func (self *IDebugDocumentTextEvents) OnInsertText(cCharacterPosition uint32, cNumToInsert uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cCharacterPosition), uintptr(cNumToInsert))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnRemoveText dispatches through IDebugDocumentTextEvents's vtable slot 5.
-func (self *IDebugDocumentTextEvents) OnRemoveText(cCharacterPosition uint32, cNumToRemove uint32) foundation.HRESULT {
+func (self *IDebugDocumentTextEvents) OnRemoveText(cCharacterPosition uint32, cNumToRemove uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cCharacterPosition), uintptr(cNumToRemove))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnReplaceText dispatches through IDebugDocumentTextEvents's vtable slot 6.
-func (self *IDebugDocumentTextEvents) OnReplaceText(cCharacterPosition uint32, cNumToReplace uint32) foundation.HRESULT {
+func (self *IDebugDocumentTextEvents) OnReplaceText(cCharacterPosition uint32, cNumToReplace uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cCharacterPosition), uintptr(cNumToReplace))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnUpdateTextAttributes dispatches through IDebugDocumentTextEvents's vtable slot 7.
-func (self *IDebugDocumentTextEvents) OnUpdateTextAttributes(cCharacterPosition uint32, cNumToUpdate uint32) foundation.HRESULT {
+func (self *IDebugDocumentTextEvents) OnUpdateTextAttributes(cCharacterPosition uint32, cNumToUpdate uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cCharacterPosition), uintptr(cNumToUpdate))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnUpdateDocumentAttributes dispatches through IDebugDocumentTextEvents's vtable slot 8.
-func (self *IDebugDocumentTextEvents) OnUpdateDocumentAttributes(textdocattr uint32) foundation.HRESULT {
+func (self *IDebugDocumentTextEvents) OnUpdateDocumentAttributes(textdocattr uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(textdocattr))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c25-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2258,21 +2361,21 @@ type IDebugDocumentTextExternalAuthor struct {
 var IID_IDebugDocumentTextExternalAuthor = win32.GUID{Data1: 0x51973c25, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetPathName dispatches through IDebugDocumentTextExternalAuthor's vtable slot 3.
-func (self *IDebugDocumentTextExternalAuthor) GetPathName(pbstrLongName *foundation.BSTR, pfIsOriginalFile *foundation.BOOL) foundation.HRESULT {
+func (self *IDebugDocumentTextExternalAuthor) GetPathName(pbstrLongName *foundation.BSTR, pfIsOriginalFile *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLongName)), uintptr(unsafe.Pointer(pfIsOriginalFile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFileName dispatches through IDebugDocumentTextExternalAuthor's vtable slot 4.
-func (self *IDebugDocumentTextExternalAuthor) GetFileName(pbstrShortName *foundation.BSTR) foundation.HRESULT {
+func (self *IDebugDocumentTextExternalAuthor) GetFileName(pbstrShortName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrShortName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NotifyChanged dispatches through IDebugDocumentTextExternalAuthor's vtable slot 5.
-func (self *IDebugDocumentTextExternalAuthor) NotifyChanged() foundation.HRESULT {
+func (self *IDebugDocumentTextExternalAuthor) NotifyChanged() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c14-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2284,33 +2387,33 @@ type IDebugExpression struct {
 var IID_IDebugExpression = win32.GUID{Data1: 0x51973c14, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Start dispatches through IDebugExpression's vtable slot 3.
-func (self *IDebugExpression) Start(pdecb *IDebugExpressionCallBack) foundation.HRESULT {
+func (self *IDebugExpression) Start(pdecb *IDebugExpressionCallBack) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdecb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Abort dispatches through IDebugExpression's vtable slot 4.
-func (self *IDebugExpression) Abort() foundation.HRESULT {
+func (self *IDebugExpression) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryIsComplete dispatches through IDebugExpression's vtable slot 5.
-func (self *IDebugExpression) QueryIsComplete() foundation.HRESULT {
+func (self *IDebugExpression) QueryIsComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResultAsString dispatches through IDebugExpression's vtable slot 6.
-func (self *IDebugExpression) GetResultAsString(phrResult *foundation.HRESULT, pbstrResult *foundation.BSTR) foundation.HRESULT {
+func (self *IDebugExpression) GetResultAsString(phrResult *foundation.HRESULT, pbstrResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrResult)), uintptr(unsafe.Pointer(pbstrResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResultAsDebugProperty dispatches through IDebugExpression's vtable slot 7.
-func (self *IDebugExpression) GetResultAsDebugProperty(phrResult *foundation.HRESULT, ppdp **systemdiagnosticsdebug.IDebugProperty) foundation.HRESULT {
+func (self *IDebugExpression) GetResultAsDebugProperty(phrResult *foundation.HRESULT, ppdp **systemdiagnosticsdebug.IDebugProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrResult)), uintptr(unsafe.Pointer(ppdp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c16-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2322,9 +2425,9 @@ type IDebugExpressionCallBack struct {
 var IID_IDebugExpressionCallBack = win32.GUID{Data1: 0x51973c16, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // OnComplete dispatches through IDebugExpressionCallBack's vtable slot 3.
-func (self *IDebugExpressionCallBack) OnComplete() foundation.HRESULT {
+func (self *IDebugExpressionCallBack) OnComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c15-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2336,15 +2439,17 @@ type IDebugExpressionContext struct {
 var IID_IDebugExpressionContext = win32.GUID{Data1: 0x51973c15, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // ParseLanguageText dispatches through IDebugExpressionContext's vtable slot 3.
-func (self *IDebugExpressionContext) ParseLanguageText(pstrCode foundation.PWSTR, nRadix uint32, pstrDelimiter foundation.PWSTR, dwFlags uint32, ppe **IDebugExpression) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrCode)), uintptr(nRadix), uintptr(unsafe.Pointer(pstrDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppe)))
-	return foundation.HRESULT(r1)
+func (self *IDebugExpressionContext) ParseLanguageText(pstrCode string, nRadix uint32, pstrDelimiter string, dwFlags uint32, ppe **IDebugExpression) error {
+	_pstrCode := win32.UTF16Ptr(pstrCode)
+	_pstrDelimiter := win32.UTF16Ptr(pstrDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrCode)), uintptr(nRadix), uintptr(unsafe.Pointer(_pstrDelimiter)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppe)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLanguageInfo dispatches through IDebugExpressionContext's vtable slot 4.
-func (self *IDebugExpressionContext) GetLanguageInfo(pbstrLanguageName *foundation.BSTR, pLanguageID *win32.GUID) foundation.HRESULT {
+func (self *IDebugExpressionContext) GetLanguageInfo(pbstrLanguageName *foundation.BSTR, pLanguageID *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLanguageName)), uintptr(unsafe.Pointer(pLanguageID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c05-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2356,21 +2461,22 @@ type IDebugFormatter struct {
 var IID_IDebugFormatter = win32.GUID{Data1: 0x51973c05, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetStringForVariant dispatches through IDebugFormatter's vtable slot 3.
-func (self *IDebugFormatter) GetStringForVariant(pvar *systemvariant.VARIANT, nRadix uint32, pbstrValue *foundation.BSTR) foundation.HRESULT {
+func (self *IDebugFormatter) GetStringForVariant(pvar *systemvariant.VARIANT, nRadix uint32, pbstrValue *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvar)), uintptr(nRadix), uintptr(unsafe.Pointer(pbstrValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVariantForString dispatches through IDebugFormatter's vtable slot 4.
-func (self *IDebugFormatter) GetVariantForString(pwstrValue foundation.PWSTR, pvar *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwstrValue)), uintptr(unsafe.Pointer(pvar)))
-	return foundation.HRESULT(r1)
+func (self *IDebugFormatter) GetVariantForString(pwstrValue string, pvar *systemvariant.VARIANT) error {
+	_pwstrValue := win32.UTF16Ptr(pwstrValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwstrValue)), uintptr(unsafe.Pointer(pvar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStringForVarType dispatches through IDebugFormatter's vtable slot 5.
-func (self *IDebugFormatter) GetStringForVarType(vt systemvariant.VARENUM, ptdescArrayType *systemcom.TYPEDESC, pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *IDebugFormatter) GetStringForVarType(vt systemvariant.VARENUM, ptdescArrayType *systemcom.TYPEDESC, pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(vt), uintptr(unsafe.Pointer(ptdescArrayType)), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c3f-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2382,21 +2488,23 @@ type IDebugHelper struct {
 var IID_IDebugHelper = win32.GUID{Data1: 0x51973c3f, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // CreatePropertyBrowser dispatches through IDebugHelper's vtable slot 3.
-func (self *IDebugHelper) CreatePropertyBrowser(pvar *systemvariant.VARIANT, bstrName foundation.PWSTR, pdat *IDebugApplicationThread, ppdob **systemdiagnosticsdebug.IDebugProperty) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvar)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(pdat)), uintptr(unsafe.Pointer(ppdob)))
-	return foundation.HRESULT(r1)
+func (self *IDebugHelper) CreatePropertyBrowser(pvar *systemvariant.VARIANT, bstrName string, pdat *IDebugApplicationThread, ppdob **systemdiagnosticsdebug.IDebugProperty) error {
+	_bstrName := win32.UTF16Ptr(bstrName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvar)), uintptr(unsafe.Pointer(_bstrName)), uintptr(unsafe.Pointer(pdat)), uintptr(unsafe.Pointer(ppdob)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePropertyBrowserEx dispatches through IDebugHelper's vtable slot 4.
-func (self *IDebugHelper) CreatePropertyBrowserEx(pvar *systemvariant.VARIANT, bstrName foundation.PWSTR, pdat *IDebugApplicationThread, pdf *IDebugFormatter, ppdob **systemdiagnosticsdebug.IDebugProperty) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvar)), uintptr(unsafe.Pointer(bstrName)), uintptr(unsafe.Pointer(pdat)), uintptr(unsafe.Pointer(pdf)), uintptr(unsafe.Pointer(ppdob)))
-	return foundation.HRESULT(r1)
+func (self *IDebugHelper) CreatePropertyBrowserEx(pvar *systemvariant.VARIANT, bstrName string, pdat *IDebugApplicationThread, pdf *IDebugFormatter, ppdob **systemdiagnosticsdebug.IDebugProperty) error {
+	_bstrName := win32.UTF16Ptr(bstrName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvar)), uintptr(unsafe.Pointer(_bstrName)), uintptr(unsafe.Pointer(pdat)), uintptr(unsafe.Pointer(pdf)), uintptr(unsafe.Pointer(ppdob)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSimpleConnectionPoint dispatches through IDebugHelper's vtable slot 5.
-func (self *IDebugHelper) CreateSimpleConnectionPoint(pdisp *systemcom.IDispatch, ppscp **ISimpleConnectionPoint) foundation.HRESULT {
+func (self *IDebugHelper) CreateSimpleConnectionPoint(pdisp *systemcom.IDispatch, ppscp **ISimpleConnectionPoint) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdisp)), uintptr(unsafe.Pointer(ppscp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c29-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2408,9 +2516,9 @@ type IDebugSessionProvider struct {
 var IID_IDebugSessionProvider = win32.GUID{Data1: 0x51973c29, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // StartDebugSession dispatches through IDebugSessionProvider's vtable slot 3.
-func (self *IDebugSessionProvider) StartDebugSession(pda *IRemoteDebugApplication) foundation.HRESULT {
+func (self *IDebugSessionProvider) StartDebugSession(pda *IRemoteDebugApplication) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pda)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c17-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2422,33 +2530,35 @@ type IDebugStackFrame struct {
 var IID_IDebugStackFrame = win32.GUID{Data1: 0x51973c17, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetCodeContext dispatches through IDebugStackFrame's vtable slot 3.
-func (self *IDebugStackFrame) GetCodeContext(ppcc **IDebugCodeContext) foundation.HRESULT {
+func (self *IDebugStackFrame) GetCodeContext(ppcc **IDebugCodeContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppcc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDescriptionString dispatches through IDebugStackFrame's vtable slot 4.
-func (self *IDebugStackFrame) GetDescriptionString(fLong foundation.BOOL, pbstrDescription *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fLong), uintptr(unsafe.Pointer(pbstrDescription)))
-	return foundation.HRESULT(r1)
+func (self *IDebugStackFrame) GetDescriptionString(fLong bool, pbstrDescription *foundation.BSTR) error {
+	_fLong := win32.Bool32(fLong)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fLong), uintptr(unsafe.Pointer(pbstrDescription)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLanguageString dispatches through IDebugStackFrame's vtable slot 5.
-func (self *IDebugStackFrame) GetLanguageString(fLong foundation.BOOL, pbstrLanguage *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(fLong), uintptr(unsafe.Pointer(pbstrLanguage)))
-	return foundation.HRESULT(r1)
+func (self *IDebugStackFrame) GetLanguageString(fLong bool, pbstrLanguage *foundation.BSTR) error {
+	_fLong := win32.Bool32(fLong)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_fLong), uintptr(unsafe.Pointer(pbstrLanguage)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThread dispatches through IDebugStackFrame's vtable slot 6.
-func (self *IDebugStackFrame) GetThread(ppat **IDebugApplicationThread) foundation.HRESULT {
+func (self *IDebugStackFrame) GetThread(ppat **IDebugApplicationThread) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDebugProperty dispatches through IDebugStackFrame's vtable slot 7.
-func (self *IDebugStackFrame) GetDebugProperty(ppDebugProp **systemdiagnosticsdebug.IDebugProperty) foundation.HRESULT {
+func (self *IDebugStackFrame) GetDebugProperty(ppDebugProp **systemdiagnosticsdebug.IDebugProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDebugProp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4b509611-b6ea-4b24-adcb-d0ccfd1a7e33
@@ -2460,15 +2570,15 @@ type IDebugStackFrame110 struct {
 var IID_IDebugStackFrame110 = win32.GUID{Data1: 0x4b509611, Data2: 0xb6ea, Data3: 0x4b24, Data4: [8]byte{0xad, 0xcb, 0xd0, 0xcc, 0xfd, 0x1a, 0x7e, 0x33}}
 
 // GetStackFrameType dispatches through IDebugStackFrame110's vtable slot 8.
-func (self *IDebugStackFrame110) GetStackFrameType(pStackFrameKind *DEBUG_STACKFRAME_TYPE) foundation.HRESULT {
+func (self *IDebugStackFrame110) GetStackFrameType(pStackFrameKind *DEBUG_STACKFRAME_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStackFrameKind)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScriptInvocationContext dispatches through IDebugStackFrame110's vtable slot 9.
-func (self *IDebugStackFrame110) GetScriptInvocationContext(ppInvocationContext **IScriptInvocationContext) foundation.HRESULT {
+func (self *IDebugStackFrame110) GetScriptInvocationContext(ppInvocationContext **IScriptInvocationContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppInvocationContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c18-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2480,9 +2590,9 @@ type IDebugStackFrameSniffer struct {
 var IID_IDebugStackFrameSniffer = win32.GUID{Data1: 0x51973c18, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // EnumStackFrames dispatches through IDebugStackFrameSniffer's vtable slot 3.
-func (self *IDebugStackFrameSniffer) EnumStackFrames(ppedsf **IEnumDebugStackFrames) foundation.HRESULT {
+func (self *IDebugStackFrameSniffer) EnumStackFrames(ppedsf **IEnumDebugStackFrames) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppedsf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c19-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2494,9 +2604,9 @@ type IDebugStackFrameSnifferEx32 struct {
 var IID_IDebugStackFrameSnifferEx32 = win32.GUID{Data1: 0x51973c19, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // EnumStackFramesEx32 dispatches through IDebugStackFrameSnifferEx32's vtable slot 4.
-func (self *IDebugStackFrameSnifferEx32) EnumStackFramesEx32(dwSpMin uint32, ppedsf **IEnumDebugStackFrames) foundation.HRESULT {
+func (self *IDebugStackFrameSnifferEx32) EnumStackFramesEx32(dwSpMin uint32, ppedsf **IEnumDebugStackFrames) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwSpMin), uintptr(unsafe.Pointer(ppedsf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8cd12af4-49c1-4d52-8d8a-c146f47581aa
@@ -2508,9 +2618,9 @@ type IDebugStackFrameSnifferEx64 struct {
 var IID_IDebugStackFrameSnifferEx64 = win32.GUID{Data1: 0x8cd12af4, Data2: 0x49c1, Data3: 0x4d52, Data4: [8]byte{0x8d, 0x8a, 0xc1, 0x46, 0xf4, 0x75, 0x81, 0xaa}}
 
 // EnumStackFramesEx64 dispatches through IDebugStackFrameSnifferEx64's vtable slot 4.
-func (self *IDebugStackFrameSnifferEx64) EnumStackFramesEx64(dwSpMin uint64, ppedsf **IEnumDebugStackFrames64) foundation.HRESULT {
+func (self *IDebugStackFrameSnifferEx64) EnumStackFramesEx64(dwSpMin uint64, ppedsf **IEnumDebugStackFrames64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwSpMin), uintptr(unsafe.Pointer(ppedsf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c1a-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2522,21 +2632,21 @@ type IDebugSyncOperation struct {
 var IID_IDebugSyncOperation = win32.GUID{Data1: 0x51973c1a, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetTargetThread dispatches through IDebugSyncOperation's vtable slot 3.
-func (self *IDebugSyncOperation) GetTargetThread(ppatTarget **IDebugApplicationThread) foundation.HRESULT {
+func (self *IDebugSyncOperation) GetTargetThread(ppatTarget **IDebugApplicationThread) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppatTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Execute dispatches through IDebugSyncOperation's vtable slot 4.
-func (self *IDebugSyncOperation) Execute(ppunkResult **systemcom.IUnknown) foundation.HRESULT {
+func (self *IDebugSyncOperation) Execute(ppunkResult **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppunkResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InProgressAbort dispatches through IDebugSyncOperation's vtable slot 5.
-func (self *IDebugSyncOperation) InProgressAbort() foundation.HRESULT {
+func (self *IDebugSyncOperation) InProgressAbort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c36-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2548,9 +2658,9 @@ type IDebugThreadCall32 struct {
 var IID_IDebugThreadCall32 = win32.GUID{Data1: 0x51973c36, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // ThreadCallHandler dispatches through IDebugThreadCall32's vtable slot 3.
-func (self *IDebugThreadCall32) ThreadCallHandler(dwParam1 uint32, dwParam2 uint32, dwParam3 uint32) foundation.HRESULT {
+func (self *IDebugThreadCall32) ThreadCallHandler(dwParam1 uint32, dwParam2 uint32, dwParam3 uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwParam1), uintptr(dwParam2), uintptr(dwParam3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: cb3fa335-e979-42fd-9fcf-a7546a0f3905
@@ -2562,9 +2672,9 @@ type IDebugThreadCall64 struct {
 var IID_IDebugThreadCall64 = win32.GUID{Data1: 0xcb3fa335, Data2: 0xe979, Data3: 0x42fd, Data4: [8]byte{0x9f, 0xcf, 0xa7, 0x54, 0x6a, 0x0f, 0x39, 0x05}}
 
 // ThreadCallHandler dispatches through IDebugThreadCall64's vtable slot 3.
-func (self *IDebugThreadCall64) ThreadCallHandler(dwParam1 uint64, dwParam2 uint64, dwParam3 uint64) foundation.HRESULT {
+func (self *IDebugThreadCall64) ThreadCallHandler(dwParam1 uint64, dwParam2 uint64, dwParam3 uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwParam1), uintptr(dwParam2), uintptr(dwParam3))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c3a-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2576,27 +2686,27 @@ type IEnumDebugApplicationNodes struct {
 var IID_IEnumDebugApplicationNodes = win32.GUID{Data1: 0x51973c3a, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumDebugApplicationNodes's vtable slot 3.
-func (self *IEnumDebugApplicationNodes) Next(celt uint32, pprddp **IDebugApplicationNode, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumDebugApplicationNodes) Next(celt uint32, pprddp **IDebugApplicationNode, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pprddp)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumDebugApplicationNodes's vtable slot 4.
-func (self *IEnumDebugApplicationNodes) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumDebugApplicationNodes) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumDebugApplicationNodes's vtable slot 5.
-func (self *IEnumDebugApplicationNodes) Reset() foundation.HRESULT {
+func (self *IEnumDebugApplicationNodes) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumDebugApplicationNodes's vtable slot 6.
-func (self *IEnumDebugApplicationNodes) Clone(pperddp **IEnumDebugApplicationNodes) foundation.HRESULT {
+func (self *IEnumDebugApplicationNodes) Clone(pperddp **IEnumDebugApplicationNodes) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pperddp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c1d-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2608,27 +2718,27 @@ type IEnumDebugCodeContexts struct {
 var IID_IEnumDebugCodeContexts = win32.GUID{Data1: 0x51973c1d, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumDebugCodeContexts's vtable slot 3.
-func (self *IEnumDebugCodeContexts) Next(celt uint32, pscc **IDebugCodeContext, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumDebugCodeContexts) Next(celt uint32, pscc **IDebugCodeContext, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pscc)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumDebugCodeContexts's vtable slot 4.
-func (self *IEnumDebugCodeContexts) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumDebugCodeContexts) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumDebugCodeContexts's vtable slot 5.
-func (self *IEnumDebugCodeContexts) Reset() foundation.HRESULT {
+func (self *IEnumDebugCodeContexts) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumDebugCodeContexts's vtable slot 6.
-func (self *IEnumDebugCodeContexts) Clone(ppescc **IEnumDebugCodeContexts) foundation.HRESULT {
+func (self *IEnumDebugCodeContexts) Clone(ppescc **IEnumDebugCodeContexts) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppescc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c40-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2640,27 +2750,27 @@ type IEnumDebugExpressionContexts struct {
 var IID_IEnumDebugExpressionContexts = win32.GUID{Data1: 0x51973c40, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumDebugExpressionContexts's vtable slot 3.
-func (self *IEnumDebugExpressionContexts) Next(celt uint32, ppdec **IDebugExpressionContext, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumDebugExpressionContexts) Next(celt uint32, ppdec **IDebugExpressionContext, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppdec)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumDebugExpressionContexts's vtable slot 4.
-func (self *IEnumDebugExpressionContexts) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumDebugExpressionContexts) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumDebugExpressionContexts's vtable slot 5.
-func (self *IEnumDebugExpressionContexts) Reset() foundation.HRESULT {
+func (self *IEnumDebugExpressionContexts) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumDebugExpressionContexts's vtable slot 6.
-func (self *IEnumDebugExpressionContexts) Clone(ppedec **IEnumDebugExpressionContexts) foundation.HRESULT {
+func (self *IEnumDebugExpressionContexts) Clone(ppedec **IEnumDebugExpressionContexts) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppedec)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c1e-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2672,27 +2782,27 @@ type IEnumDebugStackFrames struct {
 var IID_IEnumDebugStackFrames = win32.GUID{Data1: 0x51973c1e, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumDebugStackFrames's vtable slot 3.
-func (self *IEnumDebugStackFrames) Next(celt uint32, prgdsfd *DebugStackFrameDescriptor, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumDebugStackFrames) Next(celt uint32, prgdsfd *DebugStackFrameDescriptor, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(prgdsfd)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumDebugStackFrames's vtable slot 4.
-func (self *IEnumDebugStackFrames) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumDebugStackFrames) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumDebugStackFrames's vtable slot 5.
-func (self *IEnumDebugStackFrames) Reset() foundation.HRESULT {
+func (self *IEnumDebugStackFrames) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumDebugStackFrames's vtable slot 6.
-func (self *IEnumDebugStackFrames) Clone(ppedsf **IEnumDebugStackFrames) foundation.HRESULT {
+func (self *IEnumDebugStackFrames) Clone(ppedsf **IEnumDebugStackFrames) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppedsf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0dc38853-c1b0-4176-a984-b298361027af
@@ -2704,9 +2814,9 @@ type IEnumDebugStackFrames64 struct {
 var IID_IEnumDebugStackFrames64 = win32.GUID{Data1: 0x0dc38853, Data2: 0xc1b0, Data3: 0x4176, Data4: [8]byte{0xa9, 0x84, 0xb2, 0x98, 0x36, 0x10, 0x27, 0xaf}}
 
 // Next64 dispatches through IEnumDebugStackFrames64's vtable slot 7.
-func (self *IEnumDebugStackFrames64) Next64(celt uint32, prgdsfd *DebugStackFrameDescriptor64, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumDebugStackFrames64) Next64(celt uint32, prgdsfd *DebugStackFrameDescriptor64, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(prgdsfd)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 5e7da34b-fb51-4791-abe7-cb5bdf419755
@@ -2718,15 +2828,15 @@ type IEnumJsStackFrames struct {
 var IID_IEnumJsStackFrames = win32.GUID{Data1: 0x5e7da34b, Data2: 0xfb51, Data3: 0x4791, Data4: [8]byte{0xab, 0xe7, 0xcb, 0x5b, 0xdf, 0x41, 0x97, 0x55}}
 
 // Next dispatches through IEnumJsStackFrames's vtable slot 3.
-func (self *IEnumJsStackFrames) Next(cFrameCount uint32, pFrames *JS_NATIVE_FRAME, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumJsStackFrames) Next(cFrameCount uint32, pFrames *JS_NATIVE_FRAME, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFrameCount), uintptr(unsafe.Pointer(pFrames)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumJsStackFrames's vtable slot 4.
-func (self *IEnumJsStackFrames) Reset() foundation.HRESULT {
+func (self *IEnumJsStackFrames) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c3c-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2738,27 +2848,27 @@ type IEnumRemoteDebugApplicationThreads struct {
 var IID_IEnumRemoteDebugApplicationThreads = win32.GUID{Data1: 0x51973c3c, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumRemoteDebugApplicationThreads's vtable slot 3.
-func (self *IEnumRemoteDebugApplicationThreads) Next(celt uint32, pprdat **IRemoteDebugApplicationThread, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumRemoteDebugApplicationThreads) Next(celt uint32, pprdat **IRemoteDebugApplicationThread, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pprdat)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumRemoteDebugApplicationThreads's vtable slot 4.
-func (self *IEnumRemoteDebugApplicationThreads) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumRemoteDebugApplicationThreads) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumRemoteDebugApplicationThreads's vtable slot 5.
-func (self *IEnumRemoteDebugApplicationThreads) Reset() foundation.HRESULT {
+func (self *IEnumRemoteDebugApplicationThreads) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumRemoteDebugApplicationThreads's vtable slot 6.
-func (self *IEnumRemoteDebugApplicationThreads) Clone(pperdat **IEnumRemoteDebugApplicationThreads) foundation.HRESULT {
+func (self *IEnumRemoteDebugApplicationThreads) Clone(pperdat **IEnumRemoteDebugApplicationThreads) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pperdat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c3b-cb0c-11d0-b5c9-00a0244a0e7a
@@ -2770,27 +2880,27 @@ type IEnumRemoteDebugApplications struct {
 var IID_IEnumRemoteDebugApplications = win32.GUID{Data1: 0x51973c3b, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumRemoteDebugApplications's vtable slot 3.
-func (self *IEnumRemoteDebugApplications) Next(celt uint32, ppda **IRemoteDebugApplication, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumRemoteDebugApplications) Next(celt uint32, ppda **IRemoteDebugApplication, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppda)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumRemoteDebugApplications's vtable slot 4.
-func (self *IEnumRemoteDebugApplications) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumRemoteDebugApplications) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumRemoteDebugApplications's vtable slot 5.
-func (self *IEnumRemoteDebugApplications) Reset() foundation.HRESULT {
+func (self *IEnumRemoteDebugApplications) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumRemoteDebugApplications's vtable slot 6.
-func (self *IEnumRemoteDebugApplications) Clone(ppessd **IEnumRemoteDebugApplications) foundation.HRESULT {
+func (self *IEnumRemoteDebugApplications) Clone(ppessd **IEnumRemoteDebugApplications) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppessd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: be0e89da-2ac5-4c04-ac5e-59956aae3613
@@ -2802,9 +2912,9 @@ type IJsDebug struct {
 var IID_IJsDebug = win32.GUID{Data1: 0xbe0e89da, Data2: 0x2ac5, Data3: 0x4c04, Data4: [8]byte{0xac, 0x5e, 0x59, 0x95, 0x6a, 0xae, 0x36, 0x13}}
 
 // OpenVirtualProcess dispatches through IJsDebug's vtable slot 3.
-func (self *IJsDebug) OpenVirtualProcess(processId uint32, runtimeJsBaseAddress uint64, pDataTarget *IJsDebugDataTarget, ppProcess **IJsDebugProcess) foundation.HRESULT {
+func (self *IJsDebug) OpenVirtualProcess(processId uint32, runtimeJsBaseAddress uint64, pDataTarget *IJsDebugDataTarget, ppProcess **IJsDebugProcess) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(processId), uintptr(runtimeJsBaseAddress), uintptr(unsafe.Pointer(pDataTarget)), uintptr(unsafe.Pointer(ppProcess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: df6773e3-ed8d-488b-8a3e-5812577d1542
@@ -2816,33 +2926,33 @@ type IJsDebugBreakPoint struct {
 var IID_IJsDebugBreakPoint = win32.GUID{Data1: 0xdf6773e3, Data2: 0xed8d, Data3: 0x488b, Data4: [8]byte{0x8a, 0x3e, 0x58, 0x12, 0x57, 0x7d, 0x15, 0x42}}
 
 // IsEnabled dispatches through IJsDebugBreakPoint's vtable slot 3.
-func (self *IJsDebugBreakPoint) IsEnabled(pIsEnabled *foundation.BOOL) foundation.HRESULT {
+func (self *IJsDebugBreakPoint) IsEnabled(pIsEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Enable dispatches through IJsDebugBreakPoint's vtable slot 4.
-func (self *IJsDebugBreakPoint) Enable() foundation.HRESULT {
+func (self *IJsDebugBreakPoint) Enable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disable dispatches through IJsDebugBreakPoint's vtable slot 5.
-func (self *IJsDebugBreakPoint) Disable() foundation.HRESULT {
+func (self *IJsDebugBreakPoint) Disable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IJsDebugBreakPoint's vtable slot 6.
-func (self *IJsDebugBreakPoint) Delete() foundation.HRESULT {
+func (self *IJsDebugBreakPoint) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDocumentPosition dispatches through IJsDebugBreakPoint's vtable slot 7.
-func (self *IJsDebugBreakPoint) GetDocumentPosition(pDocumentId *uint64, pCharacterOffset *uint32, pStatementCharCount *uint32) foundation.HRESULT {
+func (self *IJsDebugBreakPoint) GetDocumentPosition(pDocumentId *uint64, pCharacterOffset *uint32, pStatementCharCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDocumentId)), uintptr(unsafe.Pointer(pCharacterOffset)), uintptr(unsafe.Pointer(pStatementCharCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 53b28977-53a1-48e5-9000-5d0dfa893931
@@ -2854,57 +2964,57 @@ type IJsDebugDataTarget struct {
 var IID_IJsDebugDataTarget = win32.GUID{Data1: 0x53b28977, Data2: 0x53a1, Data3: 0x48e5, Data4: [8]byte{0x90, 0x00, 0x5d, 0x0d, 0xfa, 0x89, 0x39, 0x31}}
 
 // ReadMemory dispatches through IJsDebugDataTarget's vtable slot 3.
-func (self *IJsDebugDataTarget) ReadMemory(address uint64, flags JsDebugReadMemoryFlags, pBuffer *byte, size uint32, pBytesRead *uint32) foundation.HRESULT {
+func (self *IJsDebugDataTarget) ReadMemory(address uint64, flags JsDebugReadMemoryFlags, pBuffer *byte, size uint32, pBytesRead *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(address), uintptr(flags), uintptr(unsafe.Pointer(pBuffer)), uintptr(size), uintptr(unsafe.Pointer(pBytesRead)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WriteMemory dispatches through IJsDebugDataTarget's vtable slot 4.
-func (self *IJsDebugDataTarget) WriteMemory(address uint64, pMemory *byte, size uint32) foundation.HRESULT {
+func (self *IJsDebugDataTarget) WriteMemory(address uint64, pMemory *byte, size uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(address), uintptr(unsafe.Pointer(pMemory)), uintptr(size))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AllocateVirtualMemory dispatches through IJsDebugDataTarget's vtable slot 5.
-func (self *IJsDebugDataTarget) AllocateVirtualMemory(address uint64, size uint32, allocationType uint32, pageProtection uint32, pAllocatedAddress *uint64) foundation.HRESULT {
+func (self *IJsDebugDataTarget) AllocateVirtualMemory(address uint64, size uint32, allocationType uint32, pageProtection uint32, pAllocatedAddress *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(address), uintptr(size), uintptr(allocationType), uintptr(pageProtection), uintptr(unsafe.Pointer(pAllocatedAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreeVirtualMemory dispatches through IJsDebugDataTarget's vtable slot 6.
-func (self *IJsDebugDataTarget) FreeVirtualMemory(address uint64, size uint32, freeType uint32) foundation.HRESULT {
+func (self *IJsDebugDataTarget) FreeVirtualMemory(address uint64, size uint32, freeType uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(address), uintptr(size), uintptr(freeType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTlsValue dispatches through IJsDebugDataTarget's vtable slot 7.
-func (self *IJsDebugDataTarget) GetTlsValue(threadId uint32, tlsIndex uint32, pValue *uint64) foundation.HRESULT {
+func (self *IJsDebugDataTarget) GetTlsValue(threadId uint32, tlsIndex uint32, pValue *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(threadId), uintptr(tlsIndex), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadBSTR dispatches through IJsDebugDataTarget's vtable slot 8.
-func (self *IJsDebugDataTarget) ReadBSTR(address uint64, pString *foundation.BSTR) foundation.HRESULT {
+func (self *IJsDebugDataTarget) ReadBSTR(address uint64, pString *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(address), uintptr(unsafe.Pointer(pString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadNullTerminatedString dispatches through IJsDebugDataTarget's vtable slot 9.
-func (self *IJsDebugDataTarget) ReadNullTerminatedString(address uint64, characterSize uint16, maxCharacters uint32, pString *foundation.BSTR) foundation.HRESULT {
+func (self *IJsDebugDataTarget) ReadNullTerminatedString(address uint64, characterSize uint16, maxCharacters uint32, pString *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(address), uintptr(characterSize), uintptr(maxCharacters), uintptr(unsafe.Pointer(pString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStackFrameEnumerator dispatches through IJsDebugDataTarget's vtable slot 10.
-func (self *IJsDebugDataTarget) CreateStackFrameEnumerator(threadId uint32, ppEnumerator **IEnumJsStackFrames) foundation.HRESULT {
+func (self *IJsDebugDataTarget) CreateStackFrameEnumerator(threadId uint32, ppEnumerator **IEnumJsStackFrames) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(threadId), uintptr(unsafe.Pointer(ppEnumerator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetThreadContext dispatches through IJsDebugDataTarget's vtable slot 11.
-func (self *IJsDebugDataTarget) GetThreadContext(threadId uint32, contextFlags uint32, contextSize uint32, pContext unsafe.Pointer) foundation.HRESULT {
+func (self *IJsDebugDataTarget) GetThreadContext(threadId uint32, contextFlags uint32, contextSize uint32, pContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(threadId), uintptr(contextFlags), uintptr(contextSize), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c9196637-ab9d-44b2-bad2-13b95b3f390e
@@ -2916,45 +3026,46 @@ type IJsDebugFrame struct {
 var IID_IJsDebugFrame = win32.GUID{Data1: 0xc9196637, Data2: 0xab9d, Data3: 0x44b2, Data4: [8]byte{0xba, 0xd2, 0x13, 0xb9, 0x5b, 0x3f, 0x39, 0x0e}}
 
 // GetStackRange dispatches through IJsDebugFrame's vtable slot 3.
-func (self *IJsDebugFrame) GetStackRange(pStart *uint64, pEnd *uint64) foundation.HRESULT {
+func (self *IJsDebugFrame) GetStackRange(pStart *uint64, pEnd *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStart)), uintptr(unsafe.Pointer(pEnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetName dispatches through IJsDebugFrame's vtable slot 4.
-func (self *IJsDebugFrame) GetName(pName *foundation.BSTR) foundation.HRESULT {
+func (self *IJsDebugFrame) GetName(pName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDocumentPositionWithId dispatches through IJsDebugFrame's vtable slot 5.
-func (self *IJsDebugFrame) GetDocumentPositionWithId(pDocumentId *uint64, pCharacterOffset *uint32, pStatementCharCount *uint32) foundation.HRESULT {
+func (self *IJsDebugFrame) GetDocumentPositionWithId(pDocumentId *uint64, pCharacterOffset *uint32, pStatementCharCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDocumentId)), uintptr(unsafe.Pointer(pCharacterOffset)), uintptr(unsafe.Pointer(pStatementCharCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDocumentPositionWithName dispatches through IJsDebugFrame's vtable slot 6.
-func (self *IJsDebugFrame) GetDocumentPositionWithName(pDocumentName *foundation.BSTR, pLine *uint32, pColumn *uint32) foundation.HRESULT {
+func (self *IJsDebugFrame) GetDocumentPositionWithName(pDocumentName *foundation.BSTR, pLine *uint32, pColumn *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDocumentName)), uintptr(unsafe.Pointer(pLine)), uintptr(unsafe.Pointer(pColumn)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDebugProperty dispatches through IJsDebugFrame's vtable slot 7.
-func (self *IJsDebugFrame) GetDebugProperty(ppDebugProperty **IJsDebugProperty) foundation.HRESULT {
+func (self *IJsDebugFrame) GetDebugProperty(ppDebugProperty **IJsDebugProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppDebugProperty)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReturnAddress dispatches through IJsDebugFrame's vtable slot 8.
-func (self *IJsDebugFrame) GetReturnAddress(pReturnAddress *uint64) foundation.HRESULT {
+func (self *IJsDebugFrame) GetReturnAddress(pReturnAddress *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pReturnAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Evaluate dispatches through IJsDebugFrame's vtable slot 9.
-func (self *IJsDebugFrame) Evaluate(pExpressionText foundation.PWSTR, ppDebugProperty **IJsDebugProperty, pError *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExpressionText)), uintptr(unsafe.Pointer(ppDebugProperty)), uintptr(unsafe.Pointer(pError)))
-	return foundation.HRESULT(r1)
+func (self *IJsDebugFrame) Evaluate(pExpressionText string, ppDebugProperty **IJsDebugProperty, pError *foundation.BSTR) error {
+	_pExpressionText := win32.UTF16Ptr(pExpressionText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pExpressionText)), uintptr(unsafe.Pointer(ppDebugProperty)), uintptr(unsafe.Pointer(pError)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3d587168-6a2d-4041-bd3b-0de674502862
@@ -2966,27 +3077,28 @@ type IJsDebugProcess struct {
 var IID_IJsDebugProcess = win32.GUID{Data1: 0x3d587168, Data2: 0x6a2d, Data3: 0x4041, Data4: [8]byte{0xbd, 0x3b, 0x0d, 0xe6, 0x74, 0x50, 0x28, 0x62}}
 
 // CreateStackWalker dispatches through IJsDebugProcess's vtable slot 3.
-func (self *IJsDebugProcess) CreateStackWalker(threadId uint32, ppStackWalker **IJsDebugStackWalker) foundation.HRESULT {
+func (self *IJsDebugProcess) CreateStackWalker(threadId uint32, ppStackWalker **IJsDebugStackWalker) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(threadId), uintptr(unsafe.Pointer(ppStackWalker)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBreakPoint dispatches through IJsDebugProcess's vtable slot 4.
-func (self *IJsDebugProcess) CreateBreakPoint(documentId uint64, characterOffset uint32, characterCount uint32, isEnabled foundation.BOOL, ppDebugBreakPoint **IJsDebugBreakPoint) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(documentId), uintptr(characterOffset), uintptr(characterCount), uintptr(isEnabled), uintptr(unsafe.Pointer(ppDebugBreakPoint)))
-	return foundation.HRESULT(r1)
+func (self *IJsDebugProcess) CreateBreakPoint(documentId uint64, characterOffset uint32, characterCount uint32, isEnabled bool, ppDebugBreakPoint **IJsDebugBreakPoint) error {
+	_isEnabled := win32.Bool32(isEnabled)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(documentId), uintptr(characterOffset), uintptr(characterCount), uintptr(_isEnabled), uintptr(unsafe.Pointer(ppDebugBreakPoint)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PerformAsyncBreak dispatches through IJsDebugProcess's vtable slot 5.
-func (self *IJsDebugProcess) PerformAsyncBreak(threadId uint32) foundation.HRESULT {
+func (self *IJsDebugProcess) PerformAsyncBreak(threadId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(threadId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetExternalStepAddress dispatches through IJsDebugProcess's vtable slot 6.
-func (self *IJsDebugProcess) GetExternalStepAddress(pCodeAddress *uint64) foundation.HRESULT {
+func (self *IJsDebugProcess) GetExternalStepAddress(pCodeAddress *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCodeAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f8ffcf2b-3aa4-4320-85c3-52a312ba9633
@@ -2998,15 +3110,15 @@ type IJsDebugProperty struct {
 var IID_IJsDebugProperty = win32.GUID{Data1: 0xf8ffcf2b, Data2: 0x3aa4, Data3: 0x4320, Data4: [8]byte{0x85, 0xc3, 0x52, 0xa3, 0x12, 0xba, 0x96, 0x33}}
 
 // GetPropertyInfo dispatches through IJsDebugProperty's vtable slot 3.
-func (self *IJsDebugProperty) GetPropertyInfo(nRadix uint32, pPropertyInfo *JsDebugPropertyInfo) foundation.HRESULT {
+func (self *IJsDebugProperty) GetPropertyInfo(nRadix uint32, pPropertyInfo *JsDebugPropertyInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(nRadix), uintptr(unsafe.Pointer(pPropertyInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMembers dispatches through IJsDebugProperty's vtable slot 4.
-func (self *IJsDebugProperty) GetMembers(members JS_PROPERTY_MEMBERS, ppEnum **IJsEnumDebugProperty) foundation.HRESULT {
+func (self *IJsDebugProperty) GetMembers(members JS_PROPERTY_MEMBERS, ppEnum **IJsEnumDebugProperty) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(members), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: db24b094-73c4-456c-a4ec-e90ea00bdfe3
@@ -3018,9 +3130,9 @@ type IJsDebugStackWalker struct {
 var IID_IJsDebugStackWalker = win32.GUID{Data1: 0xdb24b094, Data2: 0x73c4, Data3: 0x456c, Data4: [8]byte{0xa4, 0xec, 0xe9, 0x0e, 0xa0, 0x0b, 0xdf, 0xe3}}
 
 // GetNext dispatches through IJsDebugStackWalker's vtable slot 3.
-func (self *IJsDebugStackWalker) GetNext(ppFrame **IJsDebugFrame) foundation.HRESULT {
+func (self *IJsDebugStackWalker) GetNext(ppFrame **IJsDebugFrame) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFrame)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4092432f-2f0f-4fe1-b638-5b74a52cdcbe
@@ -3032,15 +3144,15 @@ type IJsEnumDebugProperty struct {
 var IID_IJsEnumDebugProperty = win32.GUID{Data1: 0x4092432f, Data2: 0x2f0f, Data3: 0x4fe1, Data4: [8]byte{0xb6, 0x38, 0x5b, 0x74, 0xa5, 0x2c, 0xdc, 0xbe}}
 
 // Next dispatches through IJsEnumDebugProperty's vtable slot 3.
-func (self *IJsEnumDebugProperty) Next(count uint32, ppDebugProperty **IJsDebugProperty, pActualCount *uint32) foundation.HRESULT {
+func (self *IJsEnumDebugProperty) Next(count uint32, ppDebugProperty **IJsDebugProperty, pActualCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(count), uintptr(unsafe.Pointer(ppDebugProperty)), uintptr(unsafe.Pointer(pActualCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through IJsEnumDebugProperty's vtable slot 4.
-func (self *IJsEnumDebugProperty) GetCount(pCount *uint32) foundation.HRESULT {
+func (self *IJsEnumDebugProperty) GetCount(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c2c-cb0c-11d0-b5c9-00a0244a0e7a
@@ -3052,21 +3164,21 @@ type IMachineDebugManager struct {
 var IID_IMachineDebugManager = win32.GUID{Data1: 0x51973c2c, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // AddApplication dispatches through IMachineDebugManager's vtable slot 3.
-func (self *IMachineDebugManager) AddApplication(pda *IRemoteDebugApplication, pdwAppCookie *uint32) foundation.HRESULT {
+func (self *IMachineDebugManager) AddApplication(pda *IRemoteDebugApplication, pdwAppCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pda)), uintptr(unsafe.Pointer(pdwAppCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveApplication dispatches through IMachineDebugManager's vtable slot 4.
-func (self *IMachineDebugManager) RemoveApplication(dwAppCookie uint32) foundation.HRESULT {
+func (self *IMachineDebugManager) RemoveApplication(dwAppCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwAppCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumApplications dispatches through IMachineDebugManager's vtable slot 5.
-func (self *IMachineDebugManager) EnumApplications(ppeda **IEnumRemoteDebugApplications) foundation.HRESULT {
+func (self *IMachineDebugManager) EnumApplications(ppeda **IEnumRemoteDebugApplications) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppeda)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c2d-cb0c-11d0-b5c9-00a0244a0e7a
@@ -3078,21 +3190,21 @@ type IMachineDebugManagerCookie struct {
 var IID_IMachineDebugManagerCookie = win32.GUID{Data1: 0x51973c2d, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // AddApplication dispatches through IMachineDebugManagerCookie's vtable slot 3.
-func (self *IMachineDebugManagerCookie) AddApplication(pda *IRemoteDebugApplication, dwDebugAppCookie uint32, pdwAppCookie *uint32) foundation.HRESULT {
+func (self *IMachineDebugManagerCookie) AddApplication(pda *IRemoteDebugApplication, dwDebugAppCookie uint32, pdwAppCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pda)), uintptr(dwDebugAppCookie), uintptr(unsafe.Pointer(pdwAppCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveApplication dispatches through IMachineDebugManagerCookie's vtable slot 4.
-func (self *IMachineDebugManagerCookie) RemoveApplication(dwDebugAppCookie uint32, dwAppCookie uint32) foundation.HRESULT {
+func (self *IMachineDebugManagerCookie) RemoveApplication(dwDebugAppCookie uint32, dwAppCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwDebugAppCookie), uintptr(dwAppCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumApplications dispatches through IMachineDebugManagerCookie's vtable slot 5.
-func (self *IMachineDebugManagerCookie) EnumApplications(ppeda **IEnumRemoteDebugApplications) foundation.HRESULT {
+func (self *IMachineDebugManagerCookie) EnumApplications(ppeda **IEnumRemoteDebugApplications) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppeda)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c2e-cb0c-11d0-b5c9-00a0244a0e7a
@@ -3104,15 +3216,15 @@ type IMachineDebugManagerEvents struct {
 var IID_IMachineDebugManagerEvents = win32.GUID{Data1: 0x51973c2e, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // OnAddApplication dispatches through IMachineDebugManagerEvents's vtable slot 3.
-func (self *IMachineDebugManagerEvents) OnAddApplication(pda *IRemoteDebugApplication, dwAppCookie uint32) foundation.HRESULT {
+func (self *IMachineDebugManagerEvents) OnAddApplication(pda *IRemoteDebugApplication, dwAppCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pda)), uintptr(dwAppCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnRemoveApplication dispatches through IMachineDebugManagerEvents's vtable slot 4.
-func (self *IMachineDebugManagerEvents) OnRemoveApplication(pda *IRemoteDebugApplication, dwAppCookie uint32) foundation.HRESULT {
+func (self *IMachineDebugManagerEvents) OnRemoveApplication(pda *IRemoteDebugApplication, dwAppCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pda)), uintptr(dwAppCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c2f-cb0c-11d0-b5c9-00a0244a0e7a
@@ -3124,33 +3236,33 @@ type IProcessDebugManager32 struct {
 var IID_IProcessDebugManager32 = win32.GUID{Data1: 0x51973c2f, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // CreateApplication dispatches through IProcessDebugManager32's vtable slot 3.
-func (self *IProcessDebugManager32) CreateApplication(ppda **IDebugApplication32) foundation.HRESULT {
+func (self *IProcessDebugManager32) CreateApplication(ppda **IDebugApplication32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppda)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultApplication dispatches through IProcessDebugManager32's vtable slot 4.
-func (self *IProcessDebugManager32) GetDefaultApplication(ppda **IDebugApplication32) foundation.HRESULT {
+func (self *IProcessDebugManager32) GetDefaultApplication(ppda **IDebugApplication32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppda)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddApplication dispatches through IProcessDebugManager32's vtable slot 5.
-func (self *IProcessDebugManager32) AddApplication(pda *IDebugApplication32, pdwAppCookie *uint32) foundation.HRESULT {
+func (self *IProcessDebugManager32) AddApplication(pda *IDebugApplication32, pdwAppCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pda)), uintptr(unsafe.Pointer(pdwAppCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveApplication dispatches through IProcessDebugManager32's vtable slot 6.
-func (self *IProcessDebugManager32) RemoveApplication(dwAppCookie uint32) foundation.HRESULT {
+func (self *IProcessDebugManager32) RemoveApplication(dwAppCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwAppCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDebugDocumentHelper dispatches through IProcessDebugManager32's vtable slot 7.
-func (self *IProcessDebugManager32) CreateDebugDocumentHelper(punkOuter *systemcom.IUnknown, pddh **IDebugDocumentHelper32) foundation.HRESULT {
+func (self *IProcessDebugManager32) CreateDebugDocumentHelper(punkOuter *systemcom.IUnknown, pddh **IDebugDocumentHelper32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punkOuter)), uintptr(unsafe.Pointer(pddh)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 56b9fc1c-63a9-4cc1-ac21-087d69a17fab
@@ -3162,33 +3274,33 @@ type IProcessDebugManager64 struct {
 var IID_IProcessDebugManager64 = win32.GUID{Data1: 0x56b9fc1c, Data2: 0x63a9, Data3: 0x4cc1, Data4: [8]byte{0xac, 0x21, 0x08, 0x7d, 0x69, 0xa1, 0x7f, 0xab}}
 
 // CreateApplication dispatches through IProcessDebugManager64's vtable slot 3.
-func (self *IProcessDebugManager64) CreateApplication(ppda **IDebugApplication64) foundation.HRESULT {
+func (self *IProcessDebugManager64) CreateApplication(ppda **IDebugApplication64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppda)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultApplication dispatches through IProcessDebugManager64's vtable slot 4.
-func (self *IProcessDebugManager64) GetDefaultApplication(ppda **IDebugApplication64) foundation.HRESULT {
+func (self *IProcessDebugManager64) GetDefaultApplication(ppda **IDebugApplication64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppda)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddApplication dispatches through IProcessDebugManager64's vtable slot 5.
-func (self *IProcessDebugManager64) AddApplication(pda *IDebugApplication64, pdwAppCookie *uint32) foundation.HRESULT {
+func (self *IProcessDebugManager64) AddApplication(pda *IDebugApplication64, pdwAppCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pda)), uintptr(unsafe.Pointer(pdwAppCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveApplication dispatches through IProcessDebugManager64's vtable slot 6.
-func (self *IProcessDebugManager64) RemoveApplication(dwAppCookie uint32) foundation.HRESULT {
+func (self *IProcessDebugManager64) RemoveApplication(dwAppCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwAppCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDebugDocumentHelper dispatches through IProcessDebugManager64's vtable slot 7.
-func (self *IProcessDebugManager64) CreateDebugDocumentHelper(punkOuter *systemcom.IUnknown, pddh **IDebugDocumentHelper64) foundation.HRESULT {
+func (self *IProcessDebugManager64) CreateDebugDocumentHelper(punkOuter *systemcom.IUnknown, pddh **IDebugDocumentHelper64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punkOuter)), uintptr(unsafe.Pointer(pddh)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c41-cb0c-11d0-b5c9-00a0244a0e7a
@@ -3200,9 +3312,9 @@ type IProvideExpressionContexts struct {
 var IID_IProvideExpressionContexts = win32.GUID{Data1: 0x51973c41, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // EnumExpressionContexts dispatches through IProvideExpressionContexts's vtable slot 3.
-func (self *IProvideExpressionContexts) EnumExpressionContexts(ppedec **IEnumDebugExpressionContexts) foundation.HRESULT {
+func (self *IProvideExpressionContexts) EnumExpressionContexts(ppedec **IEnumDebugExpressionContexts) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppedec)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c30-cb0c-11d0-b5c9-00a0244a0e7a
@@ -3214,69 +3326,69 @@ type IRemoteDebugApplication struct {
 var IID_IRemoteDebugApplication = win32.GUID{Data1: 0x51973c30, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // ResumeFromBreakPoint dispatches through IRemoteDebugApplication's vtable slot 3.
-func (self *IRemoteDebugApplication) ResumeFromBreakPoint(prptFocus *IRemoteDebugApplicationThread, bra BREAKRESUMEACTION, era ERRORRESUMEACTION) foundation.HRESULT {
+func (self *IRemoteDebugApplication) ResumeFromBreakPoint(prptFocus *IRemoteDebugApplicationThread, bra BREAKRESUMEACTION, era ERRORRESUMEACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prptFocus)), uintptr(bra), uintptr(era))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CauseBreak dispatches through IRemoteDebugApplication's vtable slot 4.
-func (self *IRemoteDebugApplication) CauseBreak() foundation.HRESULT {
+func (self *IRemoteDebugApplication) CauseBreak() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConnectDebugger dispatches through IRemoteDebugApplication's vtable slot 5.
-func (self *IRemoteDebugApplication) ConnectDebugger(pad *IApplicationDebugger) foundation.HRESULT {
+func (self *IRemoteDebugApplication) ConnectDebugger(pad *IApplicationDebugger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pad)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisconnectDebugger dispatches through IRemoteDebugApplication's vtable slot 6.
-func (self *IRemoteDebugApplication) DisconnectDebugger() foundation.HRESULT {
+func (self *IRemoteDebugApplication) DisconnectDebugger() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDebugger dispatches through IRemoteDebugApplication's vtable slot 7.
-func (self *IRemoteDebugApplication) GetDebugger(pad **IApplicationDebugger) foundation.HRESULT {
+func (self *IRemoteDebugApplication) GetDebugger(pad **IApplicationDebugger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pad)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateInstanceAtApplication dispatches through IRemoteDebugApplication's vtable slot 8.
-func (self *IRemoteDebugApplication) CreateInstanceAtApplication(rclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppvObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *IRemoteDebugApplication) CreateInstanceAtApplication(rclsid *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsContext uint32, riid *win32.GUID, ppvObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsContext), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryAlive dispatches through IRemoteDebugApplication's vtable slot 9.
-func (self *IRemoteDebugApplication) QueryAlive() foundation.HRESULT {
+func (self *IRemoteDebugApplication) QueryAlive() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumThreads dispatches through IRemoteDebugApplication's vtable slot 10.
-func (self *IRemoteDebugApplication) EnumThreads(pperdat **IEnumRemoteDebugApplicationThreads) foundation.HRESULT {
+func (self *IRemoteDebugApplication) EnumThreads(pperdat **IEnumRemoteDebugApplicationThreads) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pperdat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetName dispatches through IRemoteDebugApplication's vtable slot 11.
-func (self *IRemoteDebugApplication) GetName(pbstrName *foundation.BSTR) foundation.HRESULT {
+func (self *IRemoteDebugApplication) GetName(pbstrName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRootNode dispatches through IRemoteDebugApplication's vtable slot 12.
-func (self *IRemoteDebugApplication) GetRootNode(ppdanRoot **IDebugApplicationNode) foundation.HRESULT {
+func (self *IRemoteDebugApplication) GetRootNode(ppdanRoot **IDebugApplicationNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppdanRoot)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumGlobalExpressionContexts dispatches through IRemoteDebugApplication's vtable slot 13.
-func (self *IRemoteDebugApplication) EnumGlobalExpressionContexts(ppedec **IEnumDebugExpressionContexts) foundation.HRESULT {
+func (self *IRemoteDebugApplication) EnumGlobalExpressionContexts(ppedec **IEnumDebugExpressionContexts) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppedec)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d5fe005b-2836-485e-b1f9-89d91aa24fd4
@@ -3288,21 +3400,21 @@ type IRemoteDebugApplication110 struct {
 var IID_IRemoteDebugApplication110 = win32.GUID{Data1: 0xd5fe005b, Data2: 0x2836, Data3: 0x485e, Data4: [8]byte{0xb1, 0xf9, 0x89, 0xd9, 0x1a, 0xa2, 0x4f, 0xd4}}
 
 // SetDebuggerOptions dispatches through IRemoteDebugApplication110's vtable slot 3.
-func (self *IRemoteDebugApplication110) SetDebuggerOptions(mask SCRIPT_DEBUGGER_OPTIONS, value SCRIPT_DEBUGGER_OPTIONS) foundation.HRESULT {
+func (self *IRemoteDebugApplication110) SetDebuggerOptions(mask SCRIPT_DEBUGGER_OPTIONS, value SCRIPT_DEBUGGER_OPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(mask), uintptr(value))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentDebuggerOptions dispatches through IRemoteDebugApplication110's vtable slot 4.
-func (self *IRemoteDebugApplication110) GetCurrentDebuggerOptions(pCurrentOptions *SCRIPT_DEBUGGER_OPTIONS) foundation.HRESULT {
+func (self *IRemoteDebugApplication110) GetCurrentDebuggerOptions(pCurrentOptions *SCRIPT_DEBUGGER_OPTIONS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCurrentOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMainThread dispatches through IRemoteDebugApplication110's vtable slot 5.
-func (self *IRemoteDebugApplication110) GetMainThread(ppThread **IRemoteDebugApplicationThread) foundation.HRESULT {
+func (self *IRemoteDebugApplication110) GetMainThread(ppThread **IRemoteDebugApplicationThread) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppThread)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c33-cb0c-11d0-b5c9-00a0244a0e7a
@@ -3314,63 +3426,65 @@ type IRemoteDebugApplicationEvents struct {
 var IID_IRemoteDebugApplicationEvents = win32.GUID{Data1: 0x51973c33, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // OnConnectDebugger dispatches through IRemoteDebugApplicationEvents's vtable slot 3.
-func (self *IRemoteDebugApplicationEvents) OnConnectDebugger(pad *IApplicationDebugger) foundation.HRESULT {
+func (self *IRemoteDebugApplicationEvents) OnConnectDebugger(pad *IApplicationDebugger) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pad)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDisconnectDebugger dispatches through IRemoteDebugApplicationEvents's vtable slot 4.
-func (self *IRemoteDebugApplicationEvents) OnDisconnectDebugger() foundation.HRESULT {
+func (self *IRemoteDebugApplicationEvents) OnDisconnectDebugger() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSetName dispatches through IRemoteDebugApplicationEvents's vtable slot 5.
-func (self *IRemoteDebugApplicationEvents) OnSetName(pstrName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrName)))
-	return foundation.HRESULT(r1)
+func (self *IRemoteDebugApplicationEvents) OnSetName(pstrName string) error {
+	_pstrName := win32.UTF16Ptr(pstrName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDebugOutput dispatches through IRemoteDebugApplicationEvents's vtable slot 6.
-func (self *IRemoteDebugApplicationEvents) OnDebugOutput(pstr foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstr)))
-	return foundation.HRESULT(r1)
+func (self *IRemoteDebugApplicationEvents) OnDebugOutput(pstr string) error {
+	_pstr := win32.UTF16Ptr(pstr)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnClose dispatches through IRemoteDebugApplicationEvents's vtable slot 7.
-func (self *IRemoteDebugApplicationEvents) OnClose() foundation.HRESULT {
+func (self *IRemoteDebugApplicationEvents) OnClose() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnEnterBreakPoint dispatches through IRemoteDebugApplicationEvents's vtable slot 8.
-func (self *IRemoteDebugApplicationEvents) OnEnterBreakPoint(prdat *IRemoteDebugApplicationThread) foundation.HRESULT {
+func (self *IRemoteDebugApplicationEvents) OnEnterBreakPoint(prdat *IRemoteDebugApplicationThread) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prdat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnLeaveBreakPoint dispatches through IRemoteDebugApplicationEvents's vtable slot 9.
-func (self *IRemoteDebugApplicationEvents) OnLeaveBreakPoint(prdat *IRemoteDebugApplicationThread) foundation.HRESULT {
+func (self *IRemoteDebugApplicationEvents) OnLeaveBreakPoint(prdat *IRemoteDebugApplicationThread) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prdat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnCreateThread dispatches through IRemoteDebugApplicationEvents's vtable slot 10.
-func (self *IRemoteDebugApplicationEvents) OnCreateThread(prdat *IRemoteDebugApplicationThread) foundation.HRESULT {
+func (self *IRemoteDebugApplicationEvents) OnCreateThread(prdat *IRemoteDebugApplicationThread) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prdat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDestroyThread dispatches through IRemoteDebugApplicationEvents's vtable slot 11.
-func (self *IRemoteDebugApplicationEvents) OnDestroyThread(prdat *IRemoteDebugApplicationThread) foundation.HRESULT {
+func (self *IRemoteDebugApplicationEvents) OnDestroyThread(prdat *IRemoteDebugApplicationThread) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prdat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnBreakFlagChange dispatches through IRemoteDebugApplicationEvents's vtable slot 12.
-func (self *IRemoteDebugApplicationEvents) OnBreakFlagChange(abf uint32, prdatSteppingThread *IRemoteDebugApplicationThread) foundation.HRESULT {
+func (self *IRemoteDebugApplicationEvents) OnBreakFlagChange(abf uint32, prdatSteppingThread *IRemoteDebugApplicationThread) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(abf), uintptr(unsafe.Pointer(prdatSteppingThread)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c37-cb0c-11d0-b5c9-00a0244a0e7a
@@ -3382,57 +3496,57 @@ type IRemoteDebugApplicationThread struct {
 var IID_IRemoteDebugApplicationThread = win32.GUID{Data1: 0x51973c37, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetSystemThreadId dispatches through IRemoteDebugApplicationThread's vtable slot 3.
-func (self *IRemoteDebugApplicationThread) GetSystemThreadId(dwThreadId *uint32) foundation.HRESULT {
+func (self *IRemoteDebugApplicationThread) GetSystemThreadId(dwThreadId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dwThreadId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetApplication dispatches through IRemoteDebugApplicationThread's vtable slot 4.
-func (self *IRemoteDebugApplicationThread) GetApplication(pprda **IRemoteDebugApplication) foundation.HRESULT {
+func (self *IRemoteDebugApplicationThread) GetApplication(pprda **IRemoteDebugApplication) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pprda)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumStackFrames dispatches through IRemoteDebugApplicationThread's vtable slot 5.
-func (self *IRemoteDebugApplicationThread) EnumStackFrames(ppedsf **IEnumDebugStackFrames) foundation.HRESULT {
+func (self *IRemoteDebugApplicationThread) EnumStackFrames(ppedsf **IEnumDebugStackFrames) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppedsf)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDescription dispatches through IRemoteDebugApplicationThread's vtable slot 6.
-func (self *IRemoteDebugApplicationThread) GetDescription(pbstrDescription *foundation.BSTR, pbstrState *foundation.BSTR) foundation.HRESULT {
+func (self *IRemoteDebugApplicationThread) GetDescription(pbstrDescription *foundation.BSTR, pbstrState *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDescription)), uintptr(unsafe.Pointer(pbstrState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetNextStatement dispatches through IRemoteDebugApplicationThread's vtable slot 7.
-func (self *IRemoteDebugApplicationThread) SetNextStatement(pStackFrame *IDebugStackFrame, pCodeContext *IDebugCodeContext) foundation.HRESULT {
+func (self *IRemoteDebugApplicationThread) SetNextStatement(pStackFrame *IDebugStackFrame, pCodeContext *IDebugCodeContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStackFrame)), uintptr(unsafe.Pointer(pCodeContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetState dispatches through IRemoteDebugApplicationThread's vtable slot 8.
-func (self *IRemoteDebugApplicationThread) GetState(pState *uint32) foundation.HRESULT {
+func (self *IRemoteDebugApplicationThread) GetState(pState *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Suspend dispatches through IRemoteDebugApplicationThread's vtable slot 9.
-func (self *IRemoteDebugApplicationThread) Suspend(pdwCount *uint32) foundation.HRESULT {
+func (self *IRemoteDebugApplicationThread) Suspend(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through IRemoteDebugApplicationThread's vtable slot 10.
-func (self *IRemoteDebugApplicationThread) Resume(pdwCount *uint32) foundation.HRESULT {
+func (self *IRemoteDebugApplicationThread) Resume(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSuspendCount dispatches through IRemoteDebugApplicationThread's vtable slot 11.
-func (self *IRemoteDebugApplicationThread) GetSuspendCount(pdwCount *uint32) foundation.HRESULT {
+func (self *IRemoteDebugApplicationThread) GetSuspendCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2f69c611-6b14-47e8-9260-4bb7c52f504b
@@ -3444,9 +3558,9 @@ type IRemoteDebugCriticalErrorEvent110 struct {
 var IID_IRemoteDebugCriticalErrorEvent110 = win32.GUID{Data1: 0x2f69c611, Data2: 0x6b14, Data3: 0x47e8, Data4: [8]byte{0x92, 0x60, 0x4b, 0xb7, 0xc5, 0x2f, 0x50, 0x4b}}
 
 // GetErrorInfo dispatches through IRemoteDebugCriticalErrorEvent110's vtable slot 3.
-func (self *IRemoteDebugCriticalErrorEvent110) GetErrorInfo(pbstrSource *foundation.BSTR, pMessageId *int32, pbstrMessage *foundation.BSTR, ppLocation **IDebugDocumentContext) foundation.HRESULT {
+func (self *IRemoteDebugCriticalErrorEvent110) GetErrorInfo(pbstrSource *foundation.BSTR, pMessageId *int32, pbstrMessage *foundation.BSTR, ppLocation **IDebugDocumentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSource)), uintptr(unsafe.Pointer(pMessageId)), uintptr(unsafe.Pointer(pbstrMessage)), uintptr(unsafe.Pointer(ppLocation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 9ff56bb6-eb89-4c0f-8823-cc2a4c0b7f26
@@ -3458,9 +3572,9 @@ type IRemoteDebugInfoEvent110 struct {
 var IID_IRemoteDebugInfoEvent110 = win32.GUID{Data1: 0x9ff56bb6, Data2: 0xeb89, Data3: 0x4c0f, Data4: [8]byte{0x88, 0x23, 0xcc, 0x2a, 0x4c, 0x0b, 0x7f, 0x26}}
 
 // GetEventInfo dispatches through IRemoteDebugInfoEvent110's vtable slot 3.
-func (self *IRemoteDebugInfoEvent110) GetEventInfo(pMessageType *DEBUG_EVENT_INFO_TYPE, pbstrMessage *foundation.BSTR, pbstrUrl *foundation.BSTR, ppLocation **IDebugDocumentContext) foundation.HRESULT {
+func (self *IRemoteDebugInfoEvent110) GetEventInfo(pMessageType *DEBUG_EVENT_INFO_TYPE, pbstrMessage *foundation.BSTR, pbstrUrl *foundation.BSTR, ppLocation **IDebugDocumentContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMessageType)), uintptr(unsafe.Pointer(pbstrMessage)), uintptr(unsafe.Pointer(pbstrUrl)), uintptr(unsafe.Pointer(ppLocation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0aee2a95-bcbb-11d0-8c72-00c04fc2b085
@@ -3472,69 +3586,73 @@ type IScriptEntry struct {
 var IID_IScriptEntry = win32.GUID{Data1: 0x0aee2a95, Data2: 0xbcbb, Data3: 0x11d0, Data4: [8]byte{0x8c, 0x72, 0x00, 0xc0, 0x4f, 0xc2, 0xb0, 0x85}}
 
 // GetText dispatches through IScriptEntry's vtable slot 13.
-func (self *IScriptEntry) GetText(pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *IScriptEntry) GetText(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetText dispatches through IScriptEntry's vtable slot 14.
-func (self *IScriptEntry) SetText(psz foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psz)))
-	return foundation.HRESULT(r1)
+func (self *IScriptEntry) SetText(psz string) error {
+	_psz := win32.UTF16Ptr(psz)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_psz)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBody dispatches through IScriptEntry's vtable slot 15.
-func (self *IScriptEntry) GetBody(pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *IScriptEntry) GetBody(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBody dispatches through IScriptEntry's vtable slot 16.
-func (self *IScriptEntry) SetBody(psz foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psz)))
-	return foundation.HRESULT(r1)
+func (self *IScriptEntry) SetBody(psz string) error {
+	_psz := win32.UTF16Ptr(psz)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_psz)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetName dispatches through IScriptEntry's vtable slot 17.
-func (self *IScriptEntry) GetName(pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *IScriptEntry) GetName(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetName dispatches through IScriptEntry's vtable slot 18.
-func (self *IScriptEntry) SetName(psz foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psz)))
-	return foundation.HRESULT(r1)
+func (self *IScriptEntry) SetName(psz string) error {
+	_psz := win32.UTF16Ptr(psz)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_psz)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetItemName dispatches through IScriptEntry's vtable slot 19.
-func (self *IScriptEntry) GetItemName(pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *IScriptEntry) GetItemName(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetItemName dispatches through IScriptEntry's vtable slot 20.
-func (self *IScriptEntry) SetItemName(psz foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psz)))
-	return foundation.HRESULT(r1)
+func (self *IScriptEntry) SetItemName(psz string) error {
+	_psz := win32.UTF16Ptr(psz)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_psz)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSignature dispatches through IScriptEntry's vtable slot 21.
-func (self *IScriptEntry) GetSignature(ppti **systemcom.ITypeInfo, piMethod *uint32) foundation.HRESULT {
+func (self *IScriptEntry) GetSignature(ppti **systemcom.ITypeInfo, piMethod *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppti)), uintptr(unsafe.Pointer(piMethod)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSignature dispatches through IScriptEntry's vtable slot 22.
-func (self *IScriptEntry) SetSignature(pti *systemcom.ITypeInfo, iMethod uint32) foundation.HRESULT {
+func (self *IScriptEntry) SetSignature(pti *systemcom.ITypeInfo, iMethod uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pti)), uintptr(iMethod))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRange dispatches through IScriptEntry's vtable slot 23.
-func (self *IScriptEntry) GetRange(pichMin *uint32, pcch *uint32) foundation.HRESULT {
+func (self *IScriptEntry) GetRange(pichMin *uint32, pcch *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pichMin)), uintptr(unsafe.Pointer(pcch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 5d7741b7-af7e-4a2a-85e5-c77f4d0659fb
@@ -3546,21 +3664,21 @@ type IScriptInvocationContext struct {
 var IID_IScriptInvocationContext = win32.GUID{Data1: 0x5d7741b7, Data2: 0xaf7e, Data3: 0x4a2a, Data4: [8]byte{0x85, 0xe5, 0xc7, 0x7f, 0x4d, 0x06, 0x59, 0xfb}}
 
 // GetContextType dispatches through IScriptInvocationContext's vtable slot 3.
-func (self *IScriptInvocationContext) GetContextType(pInvocationContextType *SCRIPT_INVOCATION_CONTEXT_TYPE) foundation.HRESULT {
+func (self *IScriptInvocationContext) GetContextType(pInvocationContextType *SCRIPT_INVOCATION_CONTEXT_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInvocationContextType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContextDescription dispatches through IScriptInvocationContext's vtable slot 4.
-func (self *IScriptInvocationContext) GetContextDescription(pDescription *foundation.BSTR) foundation.HRESULT {
+func (self *IScriptInvocationContext) GetContextDescription(pDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContextObject dispatches through IScriptInvocationContext's vtable slot 5.
-func (self *IScriptInvocationContext) GetContextObject(ppContextObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *IScriptInvocationContext) GetContextObject(ppContextObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContextObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0aee2a94-bcbb-11d0-8c72-00c04fc2b085
@@ -3572,63 +3690,67 @@ type IScriptNode struct {
 var IID_IScriptNode = win32.GUID{Data1: 0x0aee2a94, Data2: 0xbcbb, Data3: 0x11d0, Data4: [8]byte{0x8c, 0x72, 0x00, 0xc0, 0x4f, 0xc2, 0xb0, 0x85}}
 
 // Alive dispatches through IScriptNode's vtable slot 3.
-func (self *IScriptNode) Alive() foundation.HRESULT {
+func (self *IScriptNode) Alive() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IScriptNode's vtable slot 4.
-func (self *IScriptNode) Delete() foundation.HRESULT {
+func (self *IScriptNode) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetParent dispatches through IScriptNode's vtable slot 5.
-func (self *IScriptNode) GetParent(ppsnParent **IScriptNode) foundation.HRESULT {
+func (self *IScriptNode) GetParent(ppsnParent **IScriptNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppsnParent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIndexInParent dispatches through IScriptNode's vtable slot 6.
-func (self *IScriptNode) GetIndexInParent(pisn *uint32) foundation.HRESULT {
+func (self *IScriptNode) GetIndexInParent(pisn *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pisn)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCookie dispatches through IScriptNode's vtable slot 7.
-func (self *IScriptNode) GetCookie(pdwCookie *uint32) foundation.HRESULT {
+func (self *IScriptNode) GetCookie(pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNumberOfChildren dispatches through IScriptNode's vtable slot 8.
-func (self *IScriptNode) GetNumberOfChildren(pcsn *uint32) foundation.HRESULT {
+func (self *IScriptNode) GetNumberOfChildren(pcsn *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcsn)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChild dispatches through IScriptNode's vtable slot 9.
-func (self *IScriptNode) GetChild(isn uint32, ppsn **IScriptNode) foundation.HRESULT {
+func (self *IScriptNode) GetChild(isn uint32, ppsn **IScriptNode) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(isn), uintptr(unsafe.Pointer(ppsn)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLanguage dispatches through IScriptNode's vtable slot 10.
-func (self *IScriptNode) GetLanguage(pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *IScriptNode) GetLanguage(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateChildEntry dispatches through IScriptNode's vtable slot 11.
-func (self *IScriptNode) CreateChildEntry(isn uint32, dwCookie uint32, pszDelimiter foundation.PWSTR, ppse **IScriptEntry) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(isn), uintptr(dwCookie), uintptr(unsafe.Pointer(pszDelimiter)), uintptr(unsafe.Pointer(ppse)))
-	return foundation.HRESULT(r1)
+func (self *IScriptNode) CreateChildEntry(isn uint32, dwCookie uint32, pszDelimiter string, ppse **IScriptEntry) error {
+	_pszDelimiter := win32.UTF16Ptr(pszDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(isn), uintptr(dwCookie), uintptr(unsafe.Pointer(_pszDelimiter)), uintptr(unsafe.Pointer(ppse)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateChildHandler dispatches through IScriptNode's vtable slot 12.
-func (self *IScriptNode) CreateChildHandler(pszDefaultName foundation.PWSTR, prgpszNames *foundation.PWSTR, cpszNames uint32, pszEvent foundation.PWSTR, pszDelimiter foundation.PWSTR, ptiSignature *systemcom.ITypeInfo, iMethodSignature uint32, isn uint32, dwCookie uint32, ppse **IScriptEntry) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDefaultName)), uintptr(unsafe.Pointer(prgpszNames)), uintptr(cpszNames), uintptr(unsafe.Pointer(pszEvent)), uintptr(unsafe.Pointer(pszDelimiter)), uintptr(unsafe.Pointer(ptiSignature)), uintptr(iMethodSignature), uintptr(isn), uintptr(dwCookie), uintptr(unsafe.Pointer(ppse)))
-	return foundation.HRESULT(r1)
+func (self *IScriptNode) CreateChildHandler(pszDefaultName string, prgpszNames *foundation.PWSTR, cpszNames uint32, pszEvent string, pszDelimiter string, ptiSignature *systemcom.ITypeInfo, iMethodSignature uint32, isn uint32, dwCookie uint32, ppse **IScriptEntry) error {
+	_pszDefaultName := win32.UTF16Ptr(pszDefaultName)
+	_pszEvent := win32.UTF16Ptr(pszEvent)
+	_pszDelimiter := win32.UTF16Ptr(pszDelimiter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszDefaultName)), uintptr(unsafe.Pointer(prgpszNames)), uintptr(cpszNames), uintptr(unsafe.Pointer(_pszEvent)), uintptr(unsafe.Pointer(_pszDelimiter)), uintptr(unsafe.Pointer(ptiSignature)), uintptr(iMethodSignature), uintptr(isn), uintptr(dwCookie), uintptr(unsafe.Pointer(ppse)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0aee2a96-bcbb-11d0-8c72-00c04fc2b085
@@ -3640,39 +3762,42 @@ type IScriptScriptlet struct {
 var IID_IScriptScriptlet = win32.GUID{Data1: 0x0aee2a96, Data2: 0xbcbb, Data3: 0x11d0, Data4: [8]byte{0x8c, 0x72, 0x00, 0xc0, 0x4f, 0xc2, 0xb0, 0x85}}
 
 // GetSubItemName dispatches through IScriptScriptlet's vtable slot 24.
-func (self *IScriptScriptlet) GetSubItemName(pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *IScriptScriptlet) GetSubItemName(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSubItemName dispatches through IScriptScriptlet's vtable slot 25.
-func (self *IScriptScriptlet) SetSubItemName(psz foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psz)))
-	return foundation.HRESULT(r1)
+func (self *IScriptScriptlet) SetSubItemName(psz string) error {
+	_psz := win32.UTF16Ptr(psz)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_psz)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEventName dispatches through IScriptScriptlet's vtable slot 26.
-func (self *IScriptScriptlet) GetEventName(pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *IScriptScriptlet) GetEventName(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEventName dispatches through IScriptScriptlet's vtable slot 27.
-func (self *IScriptScriptlet) SetEventName(psz foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psz)))
-	return foundation.HRESULT(r1)
+func (self *IScriptScriptlet) SetEventName(psz string) error {
+	_psz := win32.UTF16Ptr(psz)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_psz)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSimpleEventName dispatches through IScriptScriptlet's vtable slot 28.
-func (self *IScriptScriptlet) GetSimpleEventName(pbstr *foundation.BSTR) foundation.HRESULT {
+func (self *IScriptScriptlet) GetSimpleEventName(pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSimpleEventName dispatches through IScriptScriptlet's vtable slot 29.
-func (self *IScriptScriptlet) SetSimpleEventName(psz foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psz)))
-	return foundation.HRESULT(r1)
+func (self *IScriptScriptlet) SetSimpleEventName(psz string) error {
+	_psz := win32.UTF16Ptr(psz)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_psz)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51973c3e-cb0c-11d0-b5c9-00a0244a0e7a
@@ -3684,27 +3809,27 @@ type ISimpleConnectionPoint struct {
 var IID_ISimpleConnectionPoint = win32.GUID{Data1: 0x51973c3e, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // GetEventCount dispatches through ISimpleConnectionPoint's vtable slot 3.
-func (self *ISimpleConnectionPoint) GetEventCount(pulCount *uint32) foundation.HRESULT {
+func (self *ISimpleConnectionPoint) GetEventCount(pulCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DescribeEvents dispatches through ISimpleConnectionPoint's vtable slot 4.
-func (self *ISimpleConnectionPoint) DescribeEvents(iEvent uint32, cEvents uint32, prgid *int32, prgbstr *foundation.BSTR, pcEventsFetched *uint32) foundation.HRESULT {
+func (self *ISimpleConnectionPoint) DescribeEvents(iEvent uint32, cEvents uint32, prgid *int32, prgbstr *foundation.BSTR, pcEventsFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iEvent), uintptr(cEvents), uintptr(unsafe.Pointer(prgid)), uintptr(unsafe.Pointer(prgbstr)), uintptr(unsafe.Pointer(pcEventsFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Advise dispatches through ISimpleConnectionPoint's vtable slot 5.
-func (self *ISimpleConnectionPoint) Advise(pdisp *systemcom.IDispatch, pdwCookie *uint32) foundation.HRESULT {
+func (self *ISimpleConnectionPoint) Advise(pdisp *systemcom.IDispatch, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdisp)), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unadvise dispatches through ISimpleConnectionPoint's vtable slot 6.
-func (self *ISimpleConnectionPoint) Unadvise(dwCookie uint32) foundation.HRESULT {
+func (self *ISimpleConnectionPoint) Unadvise(dwCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 1dc9ca50-06ef-11d2-8415-006008c3fbfc
@@ -3716,9 +3841,10 @@ type ITridentEventSink struct {
 var IID_ITridentEventSink = win32.GUID{Data1: 0x1dc9ca50, Data2: 0x06ef, Data3: 0x11d2, Data4: [8]byte{0x84, 0x15, 0x00, 0x60, 0x08, 0xc3, 0xfb, 0xfc}}
 
 // FireEvent dispatches through ITridentEventSink's vtable slot 3.
-func (self *ITridentEventSink) FireEvent(pstrEvent foundation.PWSTR, pdp *systemcom.DISPPARAMS, pvarRes *systemvariant.VARIANT, pei *systemcom.EXCEPINFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pstrEvent)), uintptr(unsafe.Pointer(pdp)), uintptr(unsafe.Pointer(pvarRes)), uintptr(unsafe.Pointer(pei)))
-	return foundation.HRESULT(r1)
+func (self *ITridentEventSink) FireEvent(pstrEvent string, pdp *systemcom.DISPPARAMS, pvarRes *systemvariant.VARIANT, pei *systemcom.EXCEPINFO) error {
+	_pstrEvent := win32.UTF16Ptr(pstrEvent)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pstrEvent)), uintptr(unsafe.Pointer(pdp)), uintptr(unsafe.Pointer(pvarRes)), uintptr(unsafe.Pointer(pei)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 16ff3a42-a5f5-432b-b625-8e8e16f57e15
@@ -3730,9 +3856,9 @@ type IWebAppDiagnosticsObjectInitialization struct {
 var IID_IWebAppDiagnosticsObjectInitialization = win32.GUID{Data1: 0x16ff3a42, Data2: 0xa5f5, Data3: 0x432b, Data4: [8]byte{0xb6, 0x25, 0x8e, 0x8e, 0x16, 0xf5, 0x7e, 0x15}}
 
 // Initialize dispatches through IWebAppDiagnosticsObjectInitialization's vtable slot 3.
-func (self *IWebAppDiagnosticsObjectInitialization) Initialize(hPassedHandle foundation.HANDLE_PTR, pDebugApplication *systemcom.IUnknown) foundation.HRESULT {
+func (self *IWebAppDiagnosticsObjectInitialization) Initialize(hPassedHandle foundation.HANDLE_PTR, pDebugApplication *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hPassedHandle), uintptr(unsafe.Pointer(pDebugApplication)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 379bfbe1-c6c9-432a-93e1-6d17656c538c
@@ -3744,13 +3870,14 @@ type IWebAppDiagnosticsSetup struct {
 var IID_IWebAppDiagnosticsSetup = win32.GUID{Data1: 0x379bfbe1, Data2: 0xc6c9, Data3: 0x432a, Data4: [8]byte{0x93, 0xe1, 0x6d, 0x17, 0x65, 0x6c, 0x53, 0x8c}}
 
 // DiagnosticsSupported dispatches through IWebAppDiagnosticsSetup's vtable slot 3.
-func (self *IWebAppDiagnosticsSetup) DiagnosticsSupported(pRetVal *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRetVal)))
-	return foundation.HRESULT(r1)
+func (self *IWebAppDiagnosticsSetup) DiagnosticsSupported() (foundation.VARIANT_BOOL, error) {
+	var _pRetVal foundation.VARIANT_BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRetVal)))
+	return _pRetVal, win32.HRESULTError(int32(r1))
 }
 
 // CreateObjectWithSiteAtWebApp dispatches through IWebAppDiagnosticsSetup's vtable slot 4.
-func (self *IWebAppDiagnosticsSetup) CreateObjectWithSiteAtWebApp(rclsid *win32.GUID, dwClsContext uint32, riid *win32.GUID, hPassToObject uintptr) foundation.HRESULT {
+func (self *IWebAppDiagnosticsSetup) CreateObjectWithSiteAtWebApp(rclsid *win32.GUID, dwClsContext uint32, riid *win32.GUID, hPassToObject uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(dwClsContext), uintptr(unsafe.Pointer(riid)), uintptr(hPassToObject))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

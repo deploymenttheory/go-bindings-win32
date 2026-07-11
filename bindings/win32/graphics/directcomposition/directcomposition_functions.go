@@ -35,79 +35,87 @@ var (
 
 // DCompositionAttachMouseDragToHwnd calls dcomp!DCompositionAttachMouseDragToHwnd.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositionattachmousedragtohwnd
-func DCompositionAttachMouseDragToHwnd(visual *IDCompositionVisual, hwnd foundation.HWND, enable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDCompositionAttachMouseDragToHwnd.Addr(), uintptr(unsafe.Pointer(visual)), uintptr(hwnd), uintptr(enable))
-	return foundation.HRESULT(r1)
+func DCompositionAttachMouseDragToHwnd(visual *IDCompositionVisual, hwnd foundation.HWND, enable bool) error {
+	_enable := win32.Bool32(enable)
+	r1, _, _ := syscall.SyscallN(procDCompositionAttachMouseDragToHwnd.Addr(), uintptr(unsafe.Pointer(visual)), uintptr(hwnd), uintptr(_enable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DCompositionAttachMouseWheelToHwnd calls dcomp!DCompositionAttachMouseWheelToHwnd.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositionattachmousewheeltohwnd
-func DCompositionAttachMouseWheelToHwnd(visual *IDCompositionVisual, hwnd foundation.HWND, enable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDCompositionAttachMouseWheelToHwnd.Addr(), uintptr(unsafe.Pointer(visual)), uintptr(hwnd), uintptr(enable))
-	return foundation.HRESULT(r1)
+func DCompositionAttachMouseWheelToHwnd(visual *IDCompositionVisual, hwnd foundation.HWND, enable bool) error {
+	_enable := win32.Bool32(enable)
+	r1, _, _ := syscall.SyscallN(procDCompositionAttachMouseWheelToHwnd.Addr(), uintptr(unsafe.Pointer(visual)), uintptr(hwnd), uintptr(_enable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DCompositionBoostCompositorClock calls dcomp!DCompositionBoostCompositorClock.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositionboostcompositorclock
-func DCompositionBoostCompositorClock(enable foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDCompositionBoostCompositorClock.Addr(), uintptr(enable))
-	return foundation.HRESULT(r1)
+func DCompositionBoostCompositorClock(enable bool) error {
+	_enable := win32.Bool32(enable)
+	r1, _, _ := syscall.SyscallN(procDCompositionBoostCompositorClock.Addr(), uintptr(_enable))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DCompositionCreateDevice calls dcomp!DCompositionCreateDevice.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatedevice
 // Minimum OS: windows8.0.
-func DCompositionCreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) foundation.HRESULT {
+func DCompositionCreateDevice(dxgiDevice *graphicsdxgi.IDXGIDevice, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice.Addr(), uintptr(unsafe.Pointer(dxgiDevice)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DCompositionCreateDevice2 calls dcomp!DCompositionCreateDevice2.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatedevice2
 // Minimum OS: windows8.1.
-func DCompositionCreateDevice2(renderingDevice *systemcom.IUnknown, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) foundation.HRESULT {
+func DCompositionCreateDevice2(renderingDevice *systemcom.IUnknown, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice2.Addr(), uintptr(unsafe.Pointer(renderingDevice)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DCompositionCreateDevice3 calls dcomp!DCompositionCreateDevice3.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatedevice3
-func DCompositionCreateDevice3(renderingDevice *systemcom.IUnknown, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) foundation.HRESULT {
+func DCompositionCreateDevice3(renderingDevice *systemcom.IUnknown, iid *win32.GUID, dcompositionDevice *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionCreateDevice3.Addr(), uintptr(unsafe.Pointer(renderingDevice)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(dcompositionDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DCompositionCreateSurfaceHandle calls dcomp!DCompositionCreateSurfaceHandle.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatesurfacehandle
 // Minimum OS: windows8.0.
-func DCompositionCreateSurfaceHandle(desiredAccess uint32, securityAttributes *security.SECURITY_ATTRIBUTES, surfaceHandle *foundation.HANDLE) foundation.HRESULT {
+func DCompositionCreateSurfaceHandle(desiredAccess uint32, securityAttributes *security.SECURITY_ATTRIBUTES, surfaceHandle *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionCreateSurfaceHandle.Addr(), uintptr(desiredAccess), uintptr(unsafe.Pointer(securityAttributes)), uintptr(unsafe.Pointer(surfaceHandle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DCompositionGetFrameId calls dcomp!DCompositionGetFrameId.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositiongetframeid
-func DCompositionGetFrameId(frameIdType COMPOSITION_FRAME_ID_TYPE, frameId *uint64) foundation.HRESULT {
+func DCompositionGetFrameId(frameIdType COMPOSITION_FRAME_ID_TYPE, frameId *uint64) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionGetFrameId.Addr(), uintptr(frameIdType), uintptr(unsafe.Pointer(frameId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DCompositionGetStatistics calls dcomp!DCompositionGetStatistics.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositiongetstatistics
-func DCompositionGetStatistics(frameId uint64, frameStats *COMPOSITION_FRAME_STATS, targetIdCount uint32, targetIds *COMPOSITION_TARGET_ID, actualTargetIdCount *uint32) foundation.HRESULT {
+func DCompositionGetStatistics(frameId uint64, frameStats *COMPOSITION_FRAME_STATS, targetIdCount uint32, targetIds *COMPOSITION_TARGET_ID, actualTargetIdCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDCompositionGetStatistics.Addr(), uintptr(frameId), uintptr(unsafe.Pointer(frameStats)), uintptr(targetIdCount), uintptr(unsafe.Pointer(targetIds)), uintptr(unsafe.Pointer(actualTargetIdCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DCompositionGetTargetStatistics calls dcomp!DCompositionGetTargetStatistics.
-func DCompositionGetTargetStatistics(frameId uint64, targetId *COMPOSITION_TARGET_ID, targetStats *COMPOSITION_TARGET_STATS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDCompositionGetTargetStatistics.Addr(), uintptr(frameId), uintptr(unsafe.Pointer(targetId)), uintptr(unsafe.Pointer(targetStats)))
-	return foundation.HRESULT(r1)
+func DCompositionGetTargetStatistics(frameId uint64, targetId *COMPOSITION_TARGET_ID) (COMPOSITION_TARGET_STATS, error) {
+	var _targetStats COMPOSITION_TARGET_STATS
+	r1, _, _ := syscall.SyscallN(procDCompositionGetTargetStatistics.Addr(), uintptr(frameId), uintptr(unsafe.Pointer(targetId)), uintptr(unsafe.Pointer(&_targetStats)))
+	return _targetStats, win32.HRESULTError(int32(r1))
 }
 
 // DCompositionWaitForCompositorClock calls dcomp!DCompositionWaitForCompositorClock.
 // https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositionwaitforcompositorclock
-func DCompositionWaitForCompositorClock(count uint32, handles *foundation.HANDLE, timeoutInMs uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procDCompositionWaitForCompositorClock.Addr(), uintptr(count), uintptr(unsafe.Pointer(handles)), uintptr(timeoutInMs))
+func DCompositionWaitForCompositorClock(handles []foundation.HANDLE, timeoutInMs uint32) uint32 {
+	var _handles *foundation.HANDLE
+	if len(handles) > 0 {
+		_handles = &handles[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDCompositionWaitForCompositorClock.Addr(), uintptr(len(handles)), uintptr(unsafe.Pointer(_handles)), uintptr(timeoutInMs))
 	return uint32(r1)
 }

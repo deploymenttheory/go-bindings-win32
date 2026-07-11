@@ -584,8 +584,8 @@ type CERT_ACCESS_DESCRIPTION struct {
 	AccessLocation  CERT_ALT_NAME_ENTRY
 }
 
-// CERT_ALT_NAME_ENTRY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CERT_ALT_NAME_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CERT_ALT_NAME_ENTRY_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -638,8 +638,8 @@ type CERT_BASIC_CONSTRAINTS_INFO struct {
 	RgSubtreesConstraint *CRYPT_INTEGER_BLOB
 }
 
-// CERT_BIOMETRIC_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CERT_BIOMETRIC_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CERT_BIOMETRIC_DATA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -823,8 +823,8 @@ type CERT_HASHED_URL struct {
 	PwszUrl       foundation.PWSTR
 }
 
-// CERT_ID_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CERT_ID_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CERT_ID_Anonymous_e__Union struct {
 	Data [4]uint64
 }
@@ -871,8 +871,8 @@ type CERT_KEY_ATTRIBUTES_INFO struct {
 	PPrivateKeyUsagePeriod *CERT_PRIVATE_KEY_VALIDITY
 }
 
-// CERT_KEY_CONTEXT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CERT_KEY_CONTEXT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CERT_KEY_CONTEXT_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -943,8 +943,8 @@ type CERT_LOGOTYPE_IMAGE struct {
 	PLogotypeImageInfo *CERT_LOGOTYPE_IMAGE_INFO
 }
 
-// CERT_LOGOTYPE_IMAGE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CERT_LOGOTYPE_IMAGE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CERT_LOGOTYPE_IMAGE_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -960,8 +960,8 @@ type CERT_LOGOTYPE_IMAGE_INFO struct {
 	PwszLanguage                    foundation.PWSTR
 }
 
-// CERT_LOGOTYPE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CERT_LOGOTYPE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CERT_LOGOTYPE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1280,8 +1280,8 @@ type CERT_STORE_PROV_INFO struct {
 	HStoreProvFuncAddr2 unsafe.Pointer
 }
 
-// CERT_STRONG_SIGN_PARA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CERT_STRONG_SIGN_PARA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CERT_STRONG_SIGN_PARA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1311,14 +1311,14 @@ type CERT_SYSTEM_STORE_INFO struct {
 	CbSize uint32
 }
 
-// CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CERT_SYSTEM_STORE_RELOCATE_PARA_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -1450,8 +1450,8 @@ type CMC_RESPONSE_INFO struct {
 	RgTaggedOtherMsg    *CMC_TAGGED_OTHER_MSG
 }
 
-// CMC_STATUS_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CMC_STATUS_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CMC_STATUS_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1491,8 +1491,8 @@ type CMC_TAGGED_OTHER_MSG struct {
 	Value        CRYPT_INTEGER_BLOB
 }
 
-// CMC_TAGGED_REQUEST_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CMC_TAGGED_REQUEST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CMC_TAGGED_REQUEST_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1506,8 +1506,8 @@ type CMC_TAGGED_REQUEST struct {
 type CMSCEPSetup struct {
 }
 
-// CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CMSG_CMS_RECIPIENT_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1542,8 +1542,8 @@ type CMSG_CNG_CONTENT_DECRYPT_INFO struct {
 	PbCNGContentEncryptKeyObject *byte
 }
 
-// CMSG_CONTENT_ENCRYPT_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CMSG_CONTENT_ENCRYPT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CMSG_CONTENT_ENCRYPT_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1574,8 +1574,8 @@ type CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA struct {
 	Blob          CRYPT_INTEGER_BLOB
 }
 
-// CMSG_CTRL_DECRYPT_PARA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CMSG_CTRL_DECRYPT_PARA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CMSG_CTRL_DECRYPT_PARA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1595,8 +1595,8 @@ type CMSG_CTRL_DEL_SIGNER_UNAUTH_ATTR_PARA struct {
 	DwUnauthAttrIndex uint32
 }
 
-// CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CMSG_CTRL_KEY_AGREE_DECRYPT_PARA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1612,8 +1612,8 @@ type CMSG_CTRL_KEY_AGREE_DECRYPT_PARA struct {
 	OriginatorPublicKey          CRYPT_BIT_BLOB
 }
 
-// CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CMSG_CTRL_KEY_TRANS_DECRYPT_PARA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1627,8 +1627,8 @@ type CMSG_CTRL_KEY_TRANS_DECRYPT_PARA struct {
 	DwRecipientIndex uint32
 }
 
-// CMSG_CTRL_MAIL_LIST_DECRYPT_PARA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CMSG_CTRL_MAIL_LIST_DECRYPT_PARA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CMSG_CTRL_MAIL_LIST_DECRYPT_PARA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1676,8 +1676,8 @@ type CMSG_HASHED_ENCODE_INFO struct {
 	PvHashAuxInfo unsafe.Pointer
 }
 
-// CMSG_KEY_AGREE_ENCRYPT_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CMSG_KEY_AGREE_ENCRYPT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CMSG_KEY_AGREE_ENCRYPT_INFO_Anonymous_e__Union struct {
 	Data [6]uint64
 }
@@ -1701,8 +1701,8 @@ type CMSG_KEY_AGREE_KEY_ENCRYPT_INFO struct {
 	EncryptedKey CRYPT_INTEGER_BLOB
 }
 
-// CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1723,8 +1723,8 @@ type CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO struct {
 	RgpRecipientEncryptedKeys **CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO
 }
 
-// CMSG_KEY_AGREE_RECIPIENT_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CMSG_KEY_AGREE_RECIPIENT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CMSG_KEY_AGREE_RECIPIENT_INFO_Anonymous_e__Union struct {
 	Data [6]uint64
 }
@@ -1776,8 +1776,8 @@ type CMSG_MAIL_LIST_ENCRYPT_INFO struct {
 	DwFlags                uint32
 }
 
-// CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CMSG_MAIL_LIST_RECIPIENT_ENCODE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1817,8 +1817,8 @@ type CMSG_RC4_AUX_INFO struct {
 	DwBitLen uint32
 }
 
-// CMSG_RECIPIENT_ENCODE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CMSG_RECIPIENT_ENCODE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CMSG_RECIPIENT_ENCODE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1863,8 +1863,8 @@ type CMSG_SIGNED_ENCODE_INFO struct {
 	RgCrlEncoded  *CRYPT_INTEGER_BLOB
 }
 
-// CMSG_SIGNER_ENCODE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CMSG_SIGNER_ENCODE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CMSG_SIGNER_ENCODE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -1970,8 +1970,8 @@ type CRL_DIST_POINTS_INFO struct {
 	RgDistPoint *CRL_DIST_POINT
 }
 
-// CRL_DIST_POINT_NAME_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CRL_DIST_POINT_NAME_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CRL_DIST_POINT_NAME_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -2333,8 +2333,8 @@ type CRYPT_KEY_PROV_PARAM struct {
 	DwFlags uint32
 }
 
-// CRYPT_KEY_SIGN_MESSAGE_PARA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CRYPT_KEY_SIGN_MESSAGE_PARA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CRYPT_KEY_SIGN_MESSAGE_PARA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -2384,8 +2384,8 @@ type CRYPT_OID_FUNC_ENTRY struct {
 	PvFuncAddr unsafe.Pointer
 }
 
-// CRYPT_OID_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CRYPT_OID_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CRYPT_OID_INFO_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -2799,8 +2799,8 @@ type CRYPT_XML_KEY_INFO struct {
 	HVerifyKey BCRYPT_KEY_HANDLE
 }
 
-// CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CRYPT_XML_KEY_INFO_ITEM_Anonymous_e__Union struct {
 	Data [15]uint64
 }
@@ -2817,8 +2817,8 @@ type CRYPT_XML_KEY_RSA_KEY_VALUE struct {
 	Exponent CRYPT_XML_DATA_BLOB
 }
 
-// CRYPT_XML_KEY_VALUE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CRYPT_XML_KEY_VALUE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CRYPT_XML_KEY_VALUE_Anonymous_e__Union struct {
 	Data [14]uint64
 }
@@ -2918,8 +2918,8 @@ type CRYPT_XML_X509DATA struct {
 	RgX509Data *CRYPT_XML_X509DATA_ITEM
 }
 
-// CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CRYPT_XML_X509DATA_ITEM_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -3068,8 +3068,8 @@ type HMAC_INFO struct {
 	CbOuterString uint32
 }
 
-// HTTPSPolicyCallbackData_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// HTTPSPolicyCallbackData_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type HTTPSPolicyCallbackData_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -3484,8 +3484,8 @@ type NCryptProviderName struct {
 	PszComment foundation.PWSTR
 }
 
-// OCSP_BASIC_RESPONSE_ENTRY_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// OCSP_BASIC_RESPONSE_ENTRY_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type OCSP_BASIC_RESPONSE_ENTRY_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -3501,8 +3501,8 @@ type OCSP_BASIC_RESPONSE_ENTRY struct {
 	RgExtension  *CERT_EXTENSION
 }
 
-// OCSP_BASIC_RESPONSE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// OCSP_BASIC_RESPONSE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type OCSP_BASIC_RESPONSE_INFO_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -3730,8 +3730,8 @@ type SIGNER_BLOB_INFO struct {
 	PwszDisplayName foundation.PWSTR
 }
 
-// SIGNER_CERT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SIGNER_CERT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SIGNER_CERT_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -3759,8 +3759,8 @@ type SIGNER_CONTEXT struct {
 	PbBlob *byte
 }
 
-// SIGNER_DIGEST_SIGN_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SIGNER_DIGEST_SIGN_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SIGNER_DIGEST_SIGN_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -3798,8 +3798,8 @@ type SIGNER_FILE_INFO struct {
 	HFile        foundation.HANDLE
 }
 
-// SIGNER_PROVIDER_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SIGNER_PROVIDER_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SIGNER_PROVIDER_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -3814,8 +3814,8 @@ type SIGNER_PROVIDER_INFO struct {
 	Anonymous        SIGNER_PROVIDER_INFO_Anonymous_e__Union
 }
 
-// SIGNER_SIGNATURE_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SIGNER_SIGNATURE_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SIGNER_SIGNATURE_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -3838,8 +3838,8 @@ type SIGNER_SPC_CHAIN_INFO struct {
 	HCertStore   HCERTSTORE
 }
 
-// SIGNER_SUBJECT_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SIGNER_SUBJECT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SIGNER_SUBJECT_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }

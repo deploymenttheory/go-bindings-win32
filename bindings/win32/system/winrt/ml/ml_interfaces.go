@@ -10,7 +10,6 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	aimachinelearningwinml "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ai/machinelearning/winml"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
@@ -24,9 +23,9 @@ type ILearningModelDeviceFactoryNative struct {
 var IID_ILearningModelDeviceFactoryNative = win32.GUID{Data1: 0x1e9b31a1, Data2: 0x662e, Data3: 0x4ae0, Data4: [8]byte{0xaf, 0x67, 0xf6, 0x3b, 0xb3, 0x37, 0xe6, 0x34}}
 
 // CreateFromD3D12CommandQueue dispatches through ILearningModelDeviceFactoryNative's vtable slot 3.
-func (self *ILearningModelDeviceFactoryNative) CreateFromD3D12CommandQueue(value *graphicsdirect3d12.ID3D12CommandQueue, result **systemcom.IUnknown) foundation.HRESULT {
+func (self *ILearningModelDeviceFactoryNative) CreateFromD3D12CommandQueue(value *graphicsdirect3d12.ID3D12CommandQueue, result **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 1adaa23a-eb67-41f3-aad8-5d984e9bacd4
@@ -38,9 +37,9 @@ type ILearningModelOperatorProviderNative struct {
 var IID_ILearningModelOperatorProviderNative = win32.GUID{Data1: 0x1adaa23a, Data2: 0xeb67, Data3: 0x41f3, Data4: [8]byte{0xaa, 0xd8, 0x5d, 0x98, 0x4e, 0x9b, 0xac, 0xd4}}
 
 // GetRegistry dispatches through ILearningModelOperatorProviderNative's vtable slot 3.
-func (self *ILearningModelOperatorProviderNative) GetRegistry(ppOperatorRegistry **aimachinelearningwinml.IMLOperatorRegistry) foundation.HRESULT {
+func (self *ILearningModelOperatorProviderNative) GetRegistry(ppOperatorRegistry **aimachinelearningwinml.IMLOperatorRegistry) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppOperatorRegistry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c71e953f-37b4-4564-8658-d8396866db0d
@@ -52,9 +51,9 @@ type ILearningModelSessionOptionsNative struct {
 var IID_ILearningModelSessionOptionsNative = win32.GUID{Data1: 0xc71e953f, Data2: 0x37b4, Data3: 0x4564, Data4: [8]byte{0x86, 0x58, 0xd8, 0x39, 0x68, 0x66, 0xdb, 0x0d}}
 
 // SetIntraOpNumThreadsOverride dispatches through ILearningModelSessionOptionsNative's vtable slot 3.
-func (self *ILearningModelSessionOptionsNative) SetIntraOpNumThreadsOverride(intraOpNumThreads uint32) foundation.HRESULT {
+func (self *ILearningModelSessionOptionsNative) SetIntraOpNumThreadsOverride(intraOpNumThreads uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(intraOpNumThreads))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 5da37a26-0526-414b-91e4-2a0fa3ddba40
@@ -66,9 +65,9 @@ type ILearningModelSessionOptionsNative1 struct {
 var IID_ILearningModelSessionOptionsNative1 = win32.GUID{Data1: 0x5da37a26, Data2: 0x0526, Data3: 0x414b, Data4: [8]byte{0x91, 0xe4, 0x2a, 0x0f, 0xa3, 0xdd, 0xba, 0x40}}
 
 // SetIntraOpThreadSpinning dispatches through ILearningModelSessionOptionsNative1's vtable slot 3.
-func (self *ILearningModelSessionOptionsNative1) SetIntraOpThreadSpinning(allowSpinning byte) foundation.HRESULT {
+func (self *ILearningModelSessionOptionsNative1) SetIntraOpThreadSpinning(allowSpinning byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(allowSpinning))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 52f547ef-5b03-49b5-82d6-565f1ee0dd49
@@ -80,15 +79,15 @@ type ITensorNative struct {
 var IID_ITensorNative = win32.GUID{Data1: 0x52f547ef, Data2: 0x5b03, Data3: 0x49b5, Data4: [8]byte{0x82, 0xd6, 0x56, 0x5f, 0x1e, 0xe0, 0xdd, 0x49}}
 
 // GetBuffer dispatches through ITensorNative's vtable slot 3.
-func (self *ITensorNative) GetBuffer(value **byte, capacity *uint32) foundation.HRESULT {
+func (self *ITensorNative) GetBuffer(value **byte, capacity *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(capacity)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetD3D12Resource dispatches through ITensorNative's vtable slot 4.
-func (self *ITensorNative) GetD3D12Resource(result **graphicsdirect3d12.ID3D12Resource) foundation.HRESULT {
+func (self *ITensorNative) GetD3D12Resource(result **graphicsdirect3d12.ID3D12Resource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 39d055a4-66f6-4ebc-95d9-7a29ebe7690a
@@ -100,7 +99,7 @@ type ITensorStaticsNative struct {
 var IID_ITensorStaticsNative = win32.GUID{Data1: 0x39d055a4, Data2: 0x66f6, Data3: 0x4ebc, Data4: [8]byte{0x95, 0xd9, 0x7a, 0x29, 0xeb, 0xe7, 0x69, 0x0a}}
 
 // CreateFromD3D12Resource dispatches through ITensorStaticsNative's vtable slot 3.
-func (self *ITensorStaticsNative) CreateFromD3D12Resource(value *graphicsdirect3d12.ID3D12Resource, shape *int64, shapeCount int32, result **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITensorStaticsNative) CreateFromD3D12Resource(value *graphicsdirect3d12.ID3D12Resource, shape *int64, shapeCount int32, result **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(unsafe.Pointer(shape)), uintptr(shapeCount), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

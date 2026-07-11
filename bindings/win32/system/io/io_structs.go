@@ -8,8 +8,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
-// IO_STATUS_BLOCK_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// IO_STATUS_BLOCK_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type IO_STATUS_BLOCK_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -19,8 +19,8 @@ type IO_STATUS_BLOCK struct {
 	Information uintptr
 }
 
-// OVERLAPPED_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// OVERLAPPED_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type OVERLAPPED_Anonymous_e__Union struct {
 	Data [1]uint64
 }

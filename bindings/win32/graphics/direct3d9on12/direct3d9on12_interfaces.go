@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
 	graphicsdirect3d9 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d9"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
@@ -24,19 +23,19 @@ type IDirect3DDevice9On12 struct {
 var IID_IDirect3DDevice9On12 = win32.GUID{Data1: 0xe7fda234, Data2: 0xb589, Data3: 0x4049, Data4: [8]byte{0x94, 0x0d, 0x88, 0x78, 0x97, 0x75, 0x31, 0xc8}}
 
 // GetD3D12Device dispatches through IDirect3DDevice9On12's vtable slot 3.
-func (self *IDirect3DDevice9On12) GetD3D12Device(riid *win32.GUID, ppvDevice *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirect3DDevice9On12) GetD3D12Device(riid *win32.GUID, ppvDevice *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnwrapUnderlyingResource dispatches through IDirect3DDevice9On12's vtable slot 4.
-func (self *IDirect3DDevice9On12) UnwrapUnderlyingResource(pResource *graphicsdirect3d9.IDirect3DResource9, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue, riid *win32.GUID, ppvResource12 *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirect3DDevice9On12) UnwrapUnderlyingResource(pResource *graphicsdirect3d9.IDirect3DResource9, pCommandQueue *graphicsdirect3d12.ID3D12CommandQueue, riid *win32.GUID, ppvResource12 *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(unsafe.Pointer(pCommandQueue)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvResource12)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReturnUnderlyingResource dispatches through IDirect3DDevice9On12's vtable slot 5.
-func (self *IDirect3DDevice9On12) ReturnUnderlyingResource(pResource *graphicsdirect3d9.IDirect3DResource9, NumSync uint32, pSignalValues *uint64, ppFences **graphicsdirect3d12.ID3D12Fence) foundation.HRESULT {
+func (self *IDirect3DDevice9On12) ReturnUnderlyingResource(pResource *graphicsdirect3d9.IDirect3DResource9, NumSync uint32, pSignalValues *uint64, ppFences **graphicsdirect3d12.ID3D12Fence) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResource)), uintptr(NumSync), uintptr(unsafe.Pointer(pSignalValues)), uintptr(unsafe.Pointer(ppFences)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

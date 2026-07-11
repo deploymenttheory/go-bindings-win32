@@ -35,8 +35,8 @@ type ADSPROPINITPARAMS struct {
 	PWritableAttrs *ADS_ATTR_INFO
 }
 
-// ADSVALUE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// ADSVALUE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type ADSVALUE_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -1108,8 +1108,8 @@ type NameTranslate struct {
 type NetAddress struct {
 }
 
-// OPENQUERYWINDOW_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// OPENQUERYWINDOW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type OPENQUERYWINDOW_Anonymous_e__Union struct {
 	Data [1]uint64
 }

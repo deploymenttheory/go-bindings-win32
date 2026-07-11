@@ -200,14 +200,14 @@ type DESIGNVECTOR struct {
 	DvValues   [16]int32
 }
 
-// DEVMODEA_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DEVMODEA_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DEVMODEA_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// DEVMODEA_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DEVMODEA_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DEVMODEA_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
@@ -243,14 +243,14 @@ type DEVMODEA struct {
 	DmPanningHeight    uint32
 }
 
-// DEVMODEW_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DEVMODEW_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DEVMODEW_Anonymous1_e__Union struct {
 	Data [4]uint32
 }
 
-// DEVMODEW_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DEVMODEW_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DEVMODEW_Anonymous2_e__Union struct {
 	Data [1]uint32
 }

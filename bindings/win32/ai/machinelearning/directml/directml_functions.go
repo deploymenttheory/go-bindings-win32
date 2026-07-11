@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect3d12 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d12"
 )
 
@@ -25,14 +24,14 @@ var (
 // DMLCreateDevice calls DirectML!DMLCreateDevice.
 // https://learn.microsoft.com/windows/win32/api/directml/nf-directml-dmlcreatedevice
 // Minimum OS: windows10.0.10240.
-func DMLCreateDevice(d3d12Device *graphicsdirect3d12.ID3D12Device, flags DML_CREATE_DEVICE_FLAGS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func DMLCreateDevice(d3d12Device *graphicsdirect3d12.ID3D12Device, flags DML_CREATE_DEVICE_FLAGS, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDMLCreateDevice.Addr(), uintptr(unsafe.Pointer(d3d12Device)), uintptr(flags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DMLCreateDevice1 calls DirectML!DMLCreateDevice1.
 // https://learn.microsoft.com/windows/win32/api/directml/nf-directml-dmlcreatedevice1
-func DMLCreateDevice1(d3d12Device *graphicsdirect3d12.ID3D12Device, flags DML_CREATE_DEVICE_FLAGS, minimumFeatureLevel DML_FEATURE_LEVEL, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func DMLCreateDevice1(d3d12Device *graphicsdirect3d12.ID3D12Device, flags DML_CREATE_DEVICE_FLAGS, minimumFeatureLevel DML_FEATURE_LEVEL, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDMLCreateDevice1.Addr(), uintptr(unsafe.Pointer(d3d12Device)), uintptr(flags), uintptr(minimumFeatureLevel), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

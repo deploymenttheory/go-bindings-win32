@@ -107,14 +107,14 @@ type WINHTTP_CURRENT_USER_IE_PROXY_CONFIG struct {
 	LpszProxyBypass   foundation.PWSTR
 }
 
-// WINHTTP_EXTENDED_HEADER_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINHTTP_EXTENDED_HEADER_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINHTTP_EXTENDED_HEADER_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// WINHTTP_EXTENDED_HEADER_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINHTTP_EXTENDED_HEADER_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINHTTP_EXTENDED_HEADER_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -138,8 +138,8 @@ type WINHTTP_FAST_FORWARDING_STATUS struct {
 }
 
 // WINHTTP_HEADER_NAME: https://learn.microsoft.com/windows/win32/api/winhttp/ns-winhttp-winhttp_header_name
-// WINHTTP_HEADER_NAME is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WINHTTP_HEADER_NAME is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WINHTTP_HEADER_NAME struct {
 	Data [1]uint64
 }

@@ -31,62 +31,64 @@ var (
 // ApplicationRecoveryFinished calls KERNEL32!ApplicationRecoveryFinished.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-applicationrecoveryfinished
 // Minimum OS: windows6.0.6000.
-func ApplicationRecoveryFinished(bSuccess foundation.BOOL) {
-	syscall.SyscallN(procApplicationRecoveryFinished.Addr(), uintptr(bSuccess))
+func ApplicationRecoveryFinished(bSuccess bool) {
+	_bSuccess := win32.Bool32(bSuccess)
+	syscall.SyscallN(procApplicationRecoveryFinished.Addr(), uintptr(_bSuccess))
 }
 
 // ApplicationRecoveryInProgress calls KERNEL32!ApplicationRecoveryInProgress.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-applicationrecoveryinprogress
 // Minimum OS: windows6.0.6000.
-func ApplicationRecoveryInProgress(pbCancelled *foundation.BOOL) foundation.HRESULT {
+func ApplicationRecoveryInProgress(pbCancelled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procApplicationRecoveryInProgress.Addr(), uintptr(unsafe.Pointer(pbCancelled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetApplicationRecoveryCallback calls KERNEL32!GetApplicationRecoveryCallback.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getapplicationrecoverycallback
 // Minimum OS: windows6.0.6000.
-func GetApplicationRecoveryCallback(hProcess foundation.HANDLE, pRecoveryCallback *systemwindowsprogramming.APPLICATION_RECOVERY_CALLBACK, ppvParameter *unsafe.Pointer, pdwPingInterval *uint32, pdwFlags *uint32) foundation.HRESULT {
+func GetApplicationRecoveryCallback(hProcess foundation.HANDLE, pRecoveryCallback *systemwindowsprogramming.APPLICATION_RECOVERY_CALLBACK, ppvParameter *unsafe.Pointer, pdwPingInterval *uint32, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetApplicationRecoveryCallback.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pRecoveryCallback)), uintptr(unsafe.Pointer(ppvParameter)), uintptr(unsafe.Pointer(pdwPingInterval)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetApplicationRestartSettings calls KERNEL32!GetApplicationRestartSettings.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getapplicationrestartsettings
 // Minimum OS: windows6.0.6000.
-func GetApplicationRestartSettings(hProcess foundation.HANDLE, pwzCommandline foundation.PWSTR, pcchSize *uint32, pdwFlags *uint32) foundation.HRESULT {
+func GetApplicationRestartSettings(hProcess foundation.HANDLE, pwzCommandline foundation.PWSTR, pcchSize *uint32, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetApplicationRestartSettings.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pwzCommandline)), uintptr(unsafe.Pointer(pcchSize)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterApplicationRecoveryCallback calls KERNEL32!RegisterApplicationRecoveryCallback.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-registerapplicationrecoverycallback
 // Minimum OS: windows6.0.6000.
-func RegisterApplicationRecoveryCallback(pRecoveyCallback systemwindowsprogramming.APPLICATION_RECOVERY_CALLBACK, pvParameter unsafe.Pointer, dwPingInterval uint32, dwFlags uint32) foundation.HRESULT {
+func RegisterApplicationRecoveryCallback(pRecoveyCallback systemwindowsprogramming.APPLICATION_RECOVERY_CALLBACK, pvParameter unsafe.Pointer, dwPingInterval uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procRegisterApplicationRecoveryCallback.Addr(), uintptr(pRecoveyCallback), uintptr(unsafe.Pointer(pvParameter)), uintptr(dwPingInterval), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterApplicationRestart calls KERNEL32!RegisterApplicationRestart.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-registerapplicationrestart
 // Minimum OS: windows6.0.6000.
-func RegisterApplicationRestart(pwzCommandline foundation.PWSTR, dwFlags REGISTER_APPLICATION_RESTART_FLAGS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRegisterApplicationRestart.Addr(), uintptr(unsafe.Pointer(pwzCommandline)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+func RegisterApplicationRestart(pwzCommandline string, dwFlags REGISTER_APPLICATION_RESTART_FLAGS) error {
+	_pwzCommandline := win32.UTF16Ptr(pwzCommandline)
+	r1, _, _ := syscall.SyscallN(procRegisterApplicationRestart.Addr(), uintptr(unsafe.Pointer(_pwzCommandline)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterApplicationRecoveryCallback calls KERNEL32!UnregisterApplicationRecoveryCallback.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-unregisterapplicationrecoverycallback
 // Minimum OS: windows6.0.6000.
-func UnregisterApplicationRecoveryCallback() foundation.HRESULT {
+func UnregisterApplicationRecoveryCallback() error {
 	r1, _, _ := syscall.SyscallN(procUnregisterApplicationRecoveryCallback.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterApplicationRestart calls KERNEL32!UnregisterApplicationRestart.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-unregisterapplicationrestart
 // Minimum OS: windows6.0.6000.
-func UnregisterApplicationRestart() foundation.HRESULT {
+func UnregisterApplicationRestart() error {
 	r1, _, _ := syscall.SyscallN(procUnregisterApplicationRestart.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

@@ -167,8 +167,8 @@ type EAP_METHOD_PROPERTY_ARRAY struct {
 }
 
 // EAP_METHOD_PROPERTY_VALUE: https://learn.microsoft.com/windows/win32/api/eaptypes/ns-eaptypes-eap_method_property_value
-// EAP_METHOD_PROPERTY_VALUE is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EAP_METHOD_PROPERTY_VALUE is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EAP_METHOD_PROPERTY_VALUE struct {
 	Data [2]uint64
 }
@@ -224,8 +224,8 @@ type EAP_TYPE struct {
 }
 
 // EAP_UI_DATA_FORMAT: https://learn.microsoft.com/windows/win32/api/eaptypes/ns-eaptypes-eap_ui_data_format
-// EAP_UI_DATA_FORMAT is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EAP_UI_DATA_FORMAT is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EAP_UI_DATA_FORMAT struct {
 	Data [1]uint64
 }
@@ -242,8 +242,8 @@ type EapCredential struct {
 	CredData EapCredentialTypeData
 }
 
-// EapCredentialTypeData is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// EapCredentialTypeData is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type EapCredentialTypeData struct {
 	Data [4]uint64
 }

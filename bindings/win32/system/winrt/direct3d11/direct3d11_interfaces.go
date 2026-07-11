@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
@@ -23,7 +22,7 @@ type IDirect3DDxgiInterfaceAccess struct {
 var IID_IDirect3DDxgiInterfaceAccess = win32.GUID{Data1: 0xa9b3d012, Data2: 0x3df2, Data3: 0x4ee3, Data4: [8]byte{0xb8, 0xd1, 0x86, 0x95, 0xf4, 0x57, 0xd3, 0xc1}}
 
 // GetInterface dispatches through IDirect3DDxgiInterfaceAccess's vtable slot 3.
-func (self *IDirect3DDxgiInterfaceAccess) GetInterface(iid *win32.GUID, p *unsafe.Pointer) foundation.HRESULT {
+func (self *IDirect3DDxgiInterfaceAccess) GetInterface(iid *win32.GUID, p *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(p)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

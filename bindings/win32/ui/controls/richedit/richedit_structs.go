@@ -21,8 +21,8 @@ type BIDIOPTIONS struct {
 	WEffects uint16
 }
 
-// CARET_INFO is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CARET_INFO is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CARET_INFO struct {
 	Data [1]uint64
 }
@@ -33,8 +33,8 @@ type CHANGENOTIFY struct {
 	PvCookieData unsafe.Pointer
 }
 
-// CHARFORMAT2A_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CHARFORMAT2A_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CHARFORMAT2A_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -55,8 +55,8 @@ type CHARFORMAT2A struct {
 	BUnderlineColor byte
 }
 
-// CHARFORMAT2W_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CHARFORMAT2W_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CHARFORMAT2W_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -135,8 +135,8 @@ type IMECOMPTEXT struct {
 	Flags IMECOMPTEXT_FLAGS
 }
 
-// PARAFORMAT_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PARAFORMAT_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PARAFORMAT_Anonymous_e__Union struct {
 	Data [1]uint16
 }

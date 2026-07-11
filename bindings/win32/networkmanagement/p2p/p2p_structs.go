@@ -45,8 +45,8 @@ type DRT_DATA struct {
 	Pb *byte
 }
 
-// DRT_EVENT_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DRT_EVENT_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DRT_EVENT_DATA_Anonymous_e__Union struct {
 	Data [5]uint64
 }
@@ -176,8 +176,8 @@ type PEER_APP_LAUNCH_INFO struct {
 	PInvitation *PEER_INVITATION
 }
 
-// PEER_COLLAB_EVENT_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PEER_COLLAB_EVENT_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PEER_COLLAB_EVENT_DATA_Anonymous_e__Union struct {
 	Data [4]uint64
 }
@@ -336,8 +336,8 @@ type PEER_EVENT_WATCHLIST_CHANGED_DATA struct {
 	ChangeType PEER_CHANGE_TYPE
 }
 
-// PEER_GRAPH_EVENT_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PEER_GRAPH_EVENT_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PEER_GRAPH_EVENT_DATA_Anonymous_e__Union struct {
 	Data [6]uint64
 }
@@ -368,8 +368,8 @@ type PEER_GRAPH_PROPERTIES struct {
 	CPresenceMax       uint32
 }
 
-// PEER_GROUP_EVENT_DATA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PEER_GROUP_EVENT_DATA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PEER_GROUP_EVENT_DATA_Anonymous_e__Union struct {
 	Data [6]uint64
 }
@@ -574,8 +574,8 @@ type PNRPINFO_V1 struct {
 	EnNameState       PNRP_REGISTERED_ID_STATE
 }
 
-// PNRPINFO_V2_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PNRPINFO_V2_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PNRPINFO_V2_Anonymous_e__Union struct {
 	Data [2]uint64
 }

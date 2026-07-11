@@ -39,133 +39,146 @@ var (
 )
 
 // ApplyLocalManagementSyncML calls MDMLocalManagement!ApplyLocalManagementSyncML.
-func ApplyLocalManagementSyncML(syncMLRequest foundation.PWSTR, syncMLResult *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procApplyLocalManagementSyncML.Addr(), uintptr(unsafe.Pointer(syncMLRequest)), uintptr(unsafe.Pointer(syncMLResult)))
-	return foundation.HRESULT(r1)
+func ApplyLocalManagementSyncML(syncMLRequest string, syncMLResult *foundation.PWSTR) error {
+	_syncMLRequest := win32.UTF16Ptr(syncMLRequest)
+	r1, _, _ := syscall.SyscallN(procApplyLocalManagementSyncML.Addr(), uintptr(unsafe.Pointer(_syncMLRequest)), uintptr(unsafe.Pointer(syncMLResult)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DiscoverManagementService calls MDMRegistration!DiscoverManagementService.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-discovermanagementservice
 // Minimum OS: windows8.1.
-func DiscoverManagementService(pszUPN foundation.PWSTR, ppMgmtInfo **MANAGEMENT_SERVICE_INFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDiscoverManagementService.Addr(), uintptr(unsafe.Pointer(pszUPN)), uintptr(unsafe.Pointer(ppMgmtInfo)))
-	return foundation.HRESULT(r1)
+func DiscoverManagementService(pszUPN string, ppMgmtInfo **MANAGEMENT_SERVICE_INFO) error {
+	_pszUPN := win32.UTF16Ptr(pszUPN)
+	r1, _, _ := syscall.SyscallN(procDiscoverManagementService.Addr(), uintptr(unsafe.Pointer(_pszUPN)), uintptr(unsafe.Pointer(ppMgmtInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DiscoverManagementServiceEx calls MDMRegistration!DiscoverManagementServiceEx.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-discovermanagementserviceex
 // Minimum OS: windows8.1.
-func DiscoverManagementServiceEx(pszUPN foundation.PWSTR, pszDiscoveryServiceCandidate foundation.PWSTR, ppMgmtInfo **MANAGEMENT_SERVICE_INFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDiscoverManagementServiceEx.Addr(), uintptr(unsafe.Pointer(pszUPN)), uintptr(unsafe.Pointer(pszDiscoveryServiceCandidate)), uintptr(unsafe.Pointer(ppMgmtInfo)))
-	return foundation.HRESULT(r1)
+func DiscoverManagementServiceEx(pszUPN string, pszDiscoveryServiceCandidate string, ppMgmtInfo **MANAGEMENT_SERVICE_INFO) error {
+	_pszUPN := win32.UTF16Ptr(pszUPN)
+	_pszDiscoveryServiceCandidate := win32.UTF16Ptr(pszDiscoveryServiceCandidate)
+	r1, _, _ := syscall.SyscallN(procDiscoverManagementServiceEx.Addr(), uintptr(unsafe.Pointer(_pszUPN)), uintptr(unsafe.Pointer(_pszDiscoveryServiceCandidate)), uintptr(unsafe.Pointer(ppMgmtInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceManagementConfigInfo calls MDMRegistration!GetDeviceManagementConfigInfo.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-getdevicemanagementconfiginfo
-func GetDeviceManagementConfigInfo(providerID foundation.PWSTR, configStringBufferLength *uint32, configString foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetDeviceManagementConfigInfo.Addr(), uintptr(unsafe.Pointer(providerID)), uintptr(unsafe.Pointer(configStringBufferLength)), uintptr(unsafe.Pointer(configString)))
-	return foundation.HRESULT(r1)
+func GetDeviceManagementConfigInfo(providerID string, configStringBufferLength *uint32, configString foundation.PWSTR) error {
+	_providerID := win32.UTF16Ptr(providerID)
+	r1, _, _ := syscall.SyscallN(procGetDeviceManagementConfigInfo.Addr(), uintptr(unsafe.Pointer(_providerID)), uintptr(unsafe.Pointer(configStringBufferLength)), uintptr(unsafe.Pointer(configString)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceRegistrationInfo calls MDMRegistration!GetDeviceRegistrationInfo.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-getdeviceregistrationinfo
 // Minimum OS: windows8.1.
-func GetDeviceRegistrationInfo(DeviceInformationClass REGISTRATION_INFORMATION_CLASS, ppDeviceRegistrationInfo *unsafe.Pointer) foundation.HRESULT {
+func GetDeviceRegistrationInfo(DeviceInformationClass REGISTRATION_INFORMATION_CLASS, ppDeviceRegistrationInfo *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procGetDeviceRegistrationInfo.Addr(), uintptr(DeviceInformationClass), uintptr(unsafe.Pointer(ppDeviceRegistrationInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetManagementAppHyperlink calls MDMRegistration!GetManagementAppHyperlink.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-getmanagementapphyperlink
 // Minimum OS: windows8.1.
-func GetManagementAppHyperlink(cchHyperlink uint32, pszHyperlink foundation.PWSTR) foundation.HRESULT {
+func GetManagementAppHyperlink(cchHyperlink uint32, pszHyperlink foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procGetManagementAppHyperlink.Addr(), uintptr(cchHyperlink), uintptr(unsafe.Pointer(pszHyperlink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsDeviceRegisteredWithManagement calls MDMRegistration!IsDeviceRegisteredWithManagement.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-isdeviceregisteredwithmanagement
 // Minimum OS: windows8.1.
-func IsDeviceRegisteredWithManagement(pfIsDeviceRegisteredWithManagement *foundation.BOOL, cchUPN uint32, pszUPN foundation.PWSTR) foundation.HRESULT {
+func IsDeviceRegisteredWithManagement(pfIsDeviceRegisteredWithManagement *foundation.BOOL, cchUPN uint32, pszUPN foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procIsDeviceRegisteredWithManagement.Addr(), uintptr(unsafe.Pointer(pfIsDeviceRegisteredWithManagement)), uintptr(cchUPN), uintptr(unsafe.Pointer(pszUPN)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsManagementRegistrationAllowed calls MDMRegistration!IsManagementRegistrationAllowed.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-ismanagementregistrationallowed
 // Minimum OS: windows8.1.
-func IsManagementRegistrationAllowed(pfIsManagementRegistrationAllowed *foundation.BOOL) foundation.HRESULT {
+func IsManagementRegistrationAllowed(pfIsManagementRegistrationAllowed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procIsManagementRegistrationAllowed.Addr(), uintptr(unsafe.Pointer(pfIsManagementRegistrationAllowed)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsMdmUxWithoutAadAllowed calls MDMRegistration!IsMdmUxWithoutAadAllowed.
-func IsMdmUxWithoutAadAllowed(isEnrollmentAllowed *foundation.BOOL) foundation.HRESULT {
+func IsMdmUxWithoutAadAllowed(isEnrollmentAllowed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procIsMdmUxWithoutAadAllowed.Addr(), uintptr(unsafe.Pointer(isEnrollmentAllowed)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterDeviceWithLocalManagement calls MDMLocalManagement!RegisterDeviceWithLocalManagement.
-func RegisterDeviceWithLocalManagement(alreadyRegistered *foundation.BOOL) foundation.HRESULT {
+func RegisterDeviceWithLocalManagement(alreadyRegistered *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithLocalManagement.Addr(), uintptr(unsafe.Pointer(alreadyRegistered)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterDeviceWithManagement calls MDMRegistration!RegisterDeviceWithManagement.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-registerdevicewithmanagement
 // Minimum OS: windows8.1.
-func RegisterDeviceWithManagement(pszUPN foundation.PWSTR, ppszMDMServiceUri foundation.PWSTR, ppzsAccessToken foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithManagement.Addr(), uintptr(unsafe.Pointer(pszUPN)), uintptr(unsafe.Pointer(ppszMDMServiceUri)), uintptr(unsafe.Pointer(ppzsAccessToken)))
-	return foundation.HRESULT(r1)
+func RegisterDeviceWithManagement(pszUPN string, ppszMDMServiceUri string, ppzsAccessToken string) error {
+	_pszUPN := win32.UTF16Ptr(pszUPN)
+	_ppszMDMServiceUri := win32.UTF16Ptr(ppszMDMServiceUri)
+	_ppzsAccessToken := win32.UTF16Ptr(ppzsAccessToken)
+	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithManagement.Addr(), uintptr(unsafe.Pointer(_pszUPN)), uintptr(unsafe.Pointer(_ppszMDMServiceUri)), uintptr(unsafe.Pointer(_ppzsAccessToken)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterDeviceWithManagementUsingAADCredentials calls MDMRegistration!RegisterDeviceWithManagementUsingAADCredentials.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-registerdevicewithmanagementusingaadcredentials
 // Minimum OS: windows8.1.
-func RegisterDeviceWithManagementUsingAADCredentials(UserToken foundation.HANDLE) foundation.HRESULT {
+func RegisterDeviceWithManagementUsingAADCredentials(UserToken foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithManagementUsingAADCredentials.Addr(), uintptr(UserToken))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterDeviceWithManagementUsingAADDeviceCredentials calls MDMRegistration!RegisterDeviceWithManagementUsingAADDeviceCredentials.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-registerdevicewithmanagementusingaaddevicecredentials
 // Minimum OS: windows8.1.
-func RegisterDeviceWithManagementUsingAADDeviceCredentials() foundation.HRESULT {
+func RegisterDeviceWithManagementUsingAADDeviceCredentials() error {
 	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithManagementUsingAADDeviceCredentials.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterDeviceWithManagementUsingAADDeviceCredentials2 calls MDMRegistration!RegisterDeviceWithManagementUsingAADDeviceCredentials2.
-func RegisterDeviceWithManagementUsingAADDeviceCredentials2(MDMApplicationID foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithManagementUsingAADDeviceCredentials2.Addr(), uintptr(unsafe.Pointer(MDMApplicationID)))
-	return foundation.HRESULT(r1)
+func RegisterDeviceWithManagementUsingAADDeviceCredentials2(MDMApplicationID string) error {
+	_MDMApplicationID := win32.UTF16Ptr(MDMApplicationID)
+	r1, _, _ := syscall.SyscallN(procRegisterDeviceWithManagementUsingAADDeviceCredentials2.Addr(), uintptr(unsafe.Pointer(_MDMApplicationID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDeviceManagementConfigInfo calls MDMRegistration!SetDeviceManagementConfigInfo.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-setdevicemanagementconfiginfo
-func SetDeviceManagementConfigInfo(providerID foundation.PWSTR, configString foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSetDeviceManagementConfigInfo.Addr(), uintptr(unsafe.Pointer(providerID)), uintptr(unsafe.Pointer(configString)))
-	return foundation.HRESULT(r1)
+func SetDeviceManagementConfigInfo(providerID string, configString string) error {
+	_providerID := win32.UTF16Ptr(providerID)
+	_configString := win32.UTF16Ptr(configString)
+	r1, _, _ := syscall.SyscallN(procSetDeviceManagementConfigInfo.Addr(), uintptr(unsafe.Pointer(_providerID)), uintptr(unsafe.Pointer(_configString)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetManagedExternally calls MDMRegistration!SetManagedExternally.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-setmanagedexternally
 // Minimum OS: windows8.1.
-func SetManagedExternally(IsManagedExternally foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procSetManagedExternally.Addr(), uintptr(IsManagedExternally))
-	return foundation.HRESULT(r1)
+func SetManagedExternally(IsManagedExternally bool) error {
+	_IsManagedExternally := win32.Bool32(IsManagedExternally)
+	r1, _, _ := syscall.SyscallN(procSetManagedExternally.Addr(), uintptr(_IsManagedExternally))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterDeviceWithLocalManagement calls MDMLocalManagement!UnregisterDeviceWithLocalManagement.
-func UnregisterDeviceWithLocalManagement() foundation.HRESULT {
+func UnregisterDeviceWithLocalManagement() error {
 	r1, _, _ := syscall.SyscallN(procUnregisterDeviceWithLocalManagement.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterDeviceWithManagement calls MDMRegistration!UnregisterDeviceWithManagement.
 // https://learn.microsoft.com/windows/win32/api/mdmregistration/nf-mdmregistration-unregisterdevicewithmanagement
 // Minimum OS: windows8.1.
-func UnregisterDeviceWithManagement(enrollmentID foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procUnregisterDeviceWithManagement.Addr(), uintptr(unsafe.Pointer(enrollmentID)))
-	return foundation.HRESULT(r1)
+func UnregisterDeviceWithManagement(enrollmentID string) error {
+	_enrollmentID := win32.UTF16Ptr(enrollmentID)
+	r1, _, _ := syscall.SyscallN(procUnregisterDeviceWithManagement.Addr(), uintptr(unsafe.Pointer(_enrollmentID)))
+	return win32.HRESULTError(int32(r1))
 }

@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirectcomposition "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/directcomposition"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
@@ -24,21 +23,21 @@ type IUIAnimationInterpolator struct {
 var IID_IUIAnimationInterpolator = win32.GUID{Data1: 0x7815cbba, Data2: 0xddf7, Data3: 0x478c, Data4: [8]byte{0xa4, 0x6c, 0x7b, 0x6c, 0x73, 0x8b, 0x79, 0x78}}
 
 // GetDuration dispatches through IUIAnimationInterpolator's vtable slot 5.
-func (self *IUIAnimationInterpolator) GetDuration(duration *float64) foundation.HRESULT {
+func (self *IUIAnimationInterpolator) GetDuration(duration *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(duration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFinalValue dispatches through IUIAnimationInterpolator's vtable slot 6.
-func (self *IUIAnimationInterpolator) GetFinalValue(value *float64) foundation.HRESULT {
+func (self *IUIAnimationInterpolator) GetFinalValue(value *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDependencies dispatches through IUIAnimationInterpolator's vtable slot 9.
-func (self *IUIAnimationInterpolator) GetDependencies(initialValueDependencies *UI_ANIMATION_DEPENDENCIES, initialVelocityDependencies *UI_ANIMATION_DEPENDENCIES, durationDependencies *UI_ANIMATION_DEPENDENCIES) foundation.HRESULT {
+func (self *IUIAnimationInterpolator) GetDependencies(initialValueDependencies *UI_ANIMATION_DEPENDENCIES, initialVelocityDependencies *UI_ANIMATION_DEPENDENCIES, durationDependencies *UI_ANIMATION_DEPENDENCIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(initialValueDependencies)), uintptr(unsafe.Pointer(initialVelocityDependencies)), uintptr(unsafe.Pointer(durationDependencies)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationInterpolator2: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationinterpolator2
@@ -51,39 +50,39 @@ type IUIAnimationInterpolator2 struct {
 var IID_IUIAnimationInterpolator2 = win32.GUID{Data1: 0xea76aff8, Data2: 0xea22, Data3: 0x4a23, Data4: [8]byte{0xa0, 0xef, 0xa6, 0xa9, 0x66, 0x70, 0x35, 0x18}}
 
 // GetDimension dispatches through IUIAnimationInterpolator2's vtable slot 3.
-func (self *IUIAnimationInterpolator2) GetDimension(dimension *uint32) foundation.HRESULT {
+func (self *IUIAnimationInterpolator2) GetDimension(dimension *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dimension)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInitialValueAndVelocity dispatches through IUIAnimationInterpolator2's vtable slot 4.
-func (self *IUIAnimationInterpolator2) SetInitialValueAndVelocity(initialValue *float64, initialVelocity *float64, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationInterpolator2) SetInitialValueAndVelocity(initialValue *float64, initialVelocity *float64, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(initialValue)), uintptr(unsafe.Pointer(initialVelocity)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDuration dispatches through IUIAnimationInterpolator2's vtable slot 6.
-func (self *IUIAnimationInterpolator2) GetDuration(duration *float64) foundation.HRESULT {
+func (self *IUIAnimationInterpolator2) GetDuration(duration *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(duration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFinalValue dispatches through IUIAnimationInterpolator2's vtable slot 7.
-func (self *IUIAnimationInterpolator2) GetFinalValue(value *float64, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationInterpolator2) GetFinalValue(value *float64, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrimitiveInterpolation dispatches through IUIAnimationInterpolator2's vtable slot 10.
-func (self *IUIAnimationInterpolator2) GetPrimitiveInterpolation(interpolation *IUIAnimationPrimitiveInterpolation, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationInterpolator2) GetPrimitiveInterpolation(interpolation *IUIAnimationPrimitiveInterpolation, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interpolation)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDependencies dispatches through IUIAnimationInterpolator2's vtable slot 11.
-func (self *IUIAnimationInterpolator2) GetDependencies(initialValueDependencies *UI_ANIMATION_DEPENDENCIES, initialVelocityDependencies *UI_ANIMATION_DEPENDENCIES, durationDependencies *UI_ANIMATION_DEPENDENCIES) foundation.HRESULT {
+func (self *IUIAnimationInterpolator2) GetDependencies(initialValueDependencies *UI_ANIMATION_DEPENDENCIES, initialVelocityDependencies *UI_ANIMATION_DEPENDENCIES, durationDependencies *UI_ANIMATION_DEPENDENCIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(initialValueDependencies)), uintptr(unsafe.Pointer(initialVelocityDependencies)), uintptr(unsafe.Pointer(durationDependencies)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationLoopIterationChangeHandler2: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationloopiterationchangehandler2
@@ -96,9 +95,9 @@ type IUIAnimationLoopIterationChangeHandler2 struct {
 var IID_IUIAnimationLoopIterationChangeHandler2 = win32.GUID{Data1: 0x2d3b15a4, Data2: 0x4762, Data3: 0x47ab, Data4: [8]byte{0xa0, 0x30, 0xb2, 0x32, 0x21, 0xdf, 0x3a, 0xe0}}
 
 // OnLoopIterationChanged dispatches through IUIAnimationLoopIterationChangeHandler2's vtable slot 3.
-func (self *IUIAnimationLoopIterationChangeHandler2) OnLoopIterationChanged(storyboard *IUIAnimationStoryboard2, id uintptr, newIterationCount uint32, oldIterationCount uint32) foundation.HRESULT {
+func (self *IUIAnimationLoopIterationChangeHandler2) OnLoopIterationChanged(storyboard *IUIAnimationStoryboard2, id uintptr, newIterationCount uint32, oldIterationCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)), uintptr(id), uintptr(newIterationCount), uintptr(oldIterationCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationManager: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationmanager
@@ -111,87 +110,87 @@ type IUIAnimationManager struct {
 var IID_IUIAnimationManager = win32.GUID{Data1: 0x9169896c, Data2: 0xac8d, Data3: 0x4e7d, Data4: [8]byte{0x94, 0xe5, 0x67, 0xfa, 0x4d, 0xc2, 0xf2, 0xe8}}
 
 // CreateStoryboard dispatches through IUIAnimationManager's vtable slot 5.
-func (self *IUIAnimationManager) CreateStoryboard(storyboard **IUIAnimationStoryboard) foundation.HRESULT {
+func (self *IUIAnimationManager) CreateStoryboard(storyboard **IUIAnimationStoryboard) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AbandonAllStoryboards dispatches through IUIAnimationManager's vtable slot 7.
-func (self *IUIAnimationManager) AbandonAllStoryboards() foundation.HRESULT {
+func (self *IUIAnimationManager) AbandonAllStoryboards() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVariableFromTag dispatches through IUIAnimationManager's vtable slot 9.
-func (self *IUIAnimationManager) GetVariableFromTag(object *systemcom.IUnknown, id uint32, variable **IUIAnimationVariable) foundation.HRESULT {
+func (self *IUIAnimationManager) GetVariableFromTag(object *systemcom.IUnknown, id uint32, variable **IUIAnimationVariable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(id), uintptr(unsafe.Pointer(variable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStoryboardFromTag dispatches through IUIAnimationManager's vtable slot 10.
-func (self *IUIAnimationManager) GetStoryboardFromTag(object *systemcom.IUnknown, id uint32, storyboard **IUIAnimationStoryboard) foundation.HRESULT {
+func (self *IUIAnimationManager) GetStoryboardFromTag(object *systemcom.IUnknown, id uint32, storyboard **IUIAnimationStoryboard) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(id), uintptr(unsafe.Pointer(storyboard)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IUIAnimationManager's vtable slot 11.
-func (self *IUIAnimationManager) GetStatus(status *UI_ANIMATION_MANAGER_STATUS) foundation.HRESULT {
+func (self *IUIAnimationManager) GetStatus(status *UI_ANIMATION_MANAGER_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(status)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAnimationMode dispatches through IUIAnimationManager's vtable slot 12.
-func (self *IUIAnimationManager) SetAnimationMode(mode UI_ANIMATION_MODE) foundation.HRESULT {
+func (self *IUIAnimationManager) SetAnimationMode(mode UI_ANIMATION_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through IUIAnimationManager's vtable slot 13.
-func (self *IUIAnimationManager) Pause() foundation.HRESULT {
+func (self *IUIAnimationManager) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through IUIAnimationManager's vtable slot 14.
-func (self *IUIAnimationManager) Resume() foundation.HRESULT {
+func (self *IUIAnimationManager) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetManagerEventHandler dispatches through IUIAnimationManager's vtable slot 15.
-func (self *IUIAnimationManager) SetManagerEventHandler(handler *IUIAnimationManagerEventHandler) foundation.HRESULT {
+func (self *IUIAnimationManager) SetManagerEventHandler(handler *IUIAnimationManagerEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCancelPriorityComparison dispatches through IUIAnimationManager's vtable slot 16.
-func (self *IUIAnimationManager) SetCancelPriorityComparison(comparison *IUIAnimationPriorityComparison) foundation.HRESULT {
+func (self *IUIAnimationManager) SetCancelPriorityComparison(comparison *IUIAnimationPriorityComparison) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(comparison)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTrimPriorityComparison dispatches through IUIAnimationManager's vtable slot 17.
-func (self *IUIAnimationManager) SetTrimPriorityComparison(comparison *IUIAnimationPriorityComparison) foundation.HRESULT {
+func (self *IUIAnimationManager) SetTrimPriorityComparison(comparison *IUIAnimationPriorityComparison) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(comparison)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompressPriorityComparison dispatches through IUIAnimationManager's vtable slot 18.
-func (self *IUIAnimationManager) SetCompressPriorityComparison(comparison *IUIAnimationPriorityComparison) foundation.HRESULT {
+func (self *IUIAnimationManager) SetCompressPriorityComparison(comparison *IUIAnimationPriorityComparison) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(comparison)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetConcludePriorityComparison dispatches through IUIAnimationManager's vtable slot 19.
-func (self *IUIAnimationManager) SetConcludePriorityComparison(comparison *IUIAnimationPriorityComparison) foundation.HRESULT {
+func (self *IUIAnimationManager) SetConcludePriorityComparison(comparison *IUIAnimationPriorityComparison) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(comparison)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IUIAnimationManager's vtable slot 21.
-func (self *IUIAnimationManager) Shutdown() foundation.HRESULT {
+func (self *IUIAnimationManager) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationManager2: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationmanager2
@@ -204,99 +203,100 @@ type IUIAnimationManager2 struct {
 var IID_IUIAnimationManager2 = win32.GUID{Data1: 0xd8b6f7d4, Data2: 0x4109, Data3: 0x4d3f, Data4: [8]byte{0xac, 0xee, 0x87, 0x99, 0x26, 0x96, 0x8c, 0xb1}}
 
 // CreateAnimationVectorVariable dispatches through IUIAnimationManager2's vtable slot 3.
-func (self *IUIAnimationManager2) CreateAnimationVectorVariable(initialValue *float64, cDimension uint32, variable **IUIAnimationVariable2) foundation.HRESULT {
+func (self *IUIAnimationManager2) CreateAnimationVectorVariable(initialValue *float64, cDimension uint32, variable **IUIAnimationVariable2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(initialValue)), uintptr(cDimension), uintptr(unsafe.Pointer(variable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStoryboard dispatches through IUIAnimationManager2's vtable slot 6.
-func (self *IUIAnimationManager2) CreateStoryboard(storyboard **IUIAnimationStoryboard2) foundation.HRESULT {
+func (self *IUIAnimationManager2) CreateStoryboard(storyboard **IUIAnimationStoryboard2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AbandonAllStoryboards dispatches through IUIAnimationManager2's vtable slot 8.
-func (self *IUIAnimationManager2) AbandonAllStoryboards() foundation.HRESULT {
+func (self *IUIAnimationManager2) AbandonAllStoryboards() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVariableFromTag dispatches through IUIAnimationManager2's vtable slot 10.
-func (self *IUIAnimationManager2) GetVariableFromTag(object *systemcom.IUnknown, id uint32, variable **IUIAnimationVariable2) foundation.HRESULT {
+func (self *IUIAnimationManager2) GetVariableFromTag(object *systemcom.IUnknown, id uint32, variable **IUIAnimationVariable2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(id), uintptr(unsafe.Pointer(variable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStoryboardFromTag dispatches through IUIAnimationManager2's vtable slot 11.
-func (self *IUIAnimationManager2) GetStoryboardFromTag(object *systemcom.IUnknown, id uint32, storyboard **IUIAnimationStoryboard2) foundation.HRESULT {
+func (self *IUIAnimationManager2) GetStoryboardFromTag(object *systemcom.IUnknown, id uint32, storyboard **IUIAnimationStoryboard2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(id), uintptr(unsafe.Pointer(storyboard)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EstimateNextEventTime dispatches through IUIAnimationManager2's vtable slot 12.
-func (self *IUIAnimationManager2) EstimateNextEventTime(seconds *float64) foundation.HRESULT {
+func (self *IUIAnimationManager2) EstimateNextEventTime(seconds *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(seconds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IUIAnimationManager2's vtable slot 13.
-func (self *IUIAnimationManager2) GetStatus(status *UI_ANIMATION_MANAGER_STATUS) foundation.HRESULT {
+func (self *IUIAnimationManager2) GetStatus(status *UI_ANIMATION_MANAGER_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(status)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAnimationMode dispatches through IUIAnimationManager2's vtable slot 14.
-func (self *IUIAnimationManager2) SetAnimationMode(mode UI_ANIMATION_MODE) foundation.HRESULT {
+func (self *IUIAnimationManager2) SetAnimationMode(mode UI_ANIMATION_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Pause dispatches through IUIAnimationManager2's vtable slot 15.
-func (self *IUIAnimationManager2) Pause() foundation.HRESULT {
+func (self *IUIAnimationManager2) Pause() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resume dispatches through IUIAnimationManager2's vtable slot 16.
-func (self *IUIAnimationManager2) Resume() foundation.HRESULT {
+func (self *IUIAnimationManager2) Resume() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetManagerEventHandler dispatches through IUIAnimationManager2's vtable slot 17.
-func (self *IUIAnimationManager2) SetManagerEventHandler(handler *IUIAnimationManagerEventHandler2, fRegisterForNextAnimationEvent foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)), uintptr(fRegisterForNextAnimationEvent))
-	return foundation.HRESULT(r1)
+func (self *IUIAnimationManager2) SetManagerEventHandler(handler *IUIAnimationManagerEventHandler2, fRegisterForNextAnimationEvent bool) error {
+	_fRegisterForNextAnimationEvent := win32.Bool32(fRegisterForNextAnimationEvent)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)), uintptr(_fRegisterForNextAnimationEvent))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCancelPriorityComparison dispatches through IUIAnimationManager2's vtable slot 18.
-func (self *IUIAnimationManager2) SetCancelPriorityComparison(comparison *IUIAnimationPriorityComparison2) foundation.HRESULT {
+func (self *IUIAnimationManager2) SetCancelPriorityComparison(comparison *IUIAnimationPriorityComparison2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(comparison)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTrimPriorityComparison dispatches through IUIAnimationManager2's vtable slot 19.
-func (self *IUIAnimationManager2) SetTrimPriorityComparison(comparison *IUIAnimationPriorityComparison2) foundation.HRESULT {
+func (self *IUIAnimationManager2) SetTrimPriorityComparison(comparison *IUIAnimationPriorityComparison2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(comparison)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCompressPriorityComparison dispatches through IUIAnimationManager2's vtable slot 20.
-func (self *IUIAnimationManager2) SetCompressPriorityComparison(comparison *IUIAnimationPriorityComparison2) foundation.HRESULT {
+func (self *IUIAnimationManager2) SetCompressPriorityComparison(comparison *IUIAnimationPriorityComparison2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(comparison)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetConcludePriorityComparison dispatches through IUIAnimationManager2's vtable slot 21.
-func (self *IUIAnimationManager2) SetConcludePriorityComparison(comparison *IUIAnimationPriorityComparison2) foundation.HRESULT {
+func (self *IUIAnimationManager2) SetConcludePriorityComparison(comparison *IUIAnimationPriorityComparison2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(comparison)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Shutdown dispatches through IUIAnimationManager2's vtable slot 23.
-func (self *IUIAnimationManager2) Shutdown() foundation.HRESULT {
+func (self *IUIAnimationManager2) Shutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationManagerEventHandler: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationmanagereventhandler
@@ -309,9 +309,9 @@ type IUIAnimationManagerEventHandler struct {
 var IID_IUIAnimationManagerEventHandler = win32.GUID{Data1: 0x783321ed, Data2: 0x78a3, Data3: 0x4366, Data4: [8]byte{0xb5, 0x74, 0x6a, 0xf6, 0x07, 0xa6, 0x47, 0x88}}
 
 // OnManagerStatusChanged dispatches through IUIAnimationManagerEventHandler's vtable slot 3.
-func (self *IUIAnimationManagerEventHandler) OnManagerStatusChanged(newStatus UI_ANIMATION_MANAGER_STATUS, previousStatus UI_ANIMATION_MANAGER_STATUS) foundation.HRESULT {
+func (self *IUIAnimationManagerEventHandler) OnManagerStatusChanged(newStatus UI_ANIMATION_MANAGER_STATUS, previousStatus UI_ANIMATION_MANAGER_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(newStatus), uintptr(previousStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationManagerEventHandler2: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationmanagereventhandler2
@@ -324,9 +324,9 @@ type IUIAnimationManagerEventHandler2 struct {
 var IID_IUIAnimationManagerEventHandler2 = win32.GUID{Data1: 0xf6e022ba, Data2: 0xbff3, Data3: 0x42ec, Data4: [8]byte{0x90, 0x33, 0xe0, 0x73, 0xf3, 0x3e, 0x83, 0xc3}}
 
 // OnManagerStatusChanged dispatches through IUIAnimationManagerEventHandler2's vtable slot 3.
-func (self *IUIAnimationManagerEventHandler2) OnManagerStatusChanged(newStatus UI_ANIMATION_MANAGER_STATUS, previousStatus UI_ANIMATION_MANAGER_STATUS) foundation.HRESULT {
+func (self *IUIAnimationManagerEventHandler2) OnManagerStatusChanged(newStatus UI_ANIMATION_MANAGER_STATUS, previousStatus UI_ANIMATION_MANAGER_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(newStatus), uintptr(previousStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationPrimitiveInterpolation: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationprimitiveinterpolation
@@ -348,9 +348,9 @@ type IUIAnimationPriorityComparison struct {
 var IID_IUIAnimationPriorityComparison = win32.GUID{Data1: 0x83fa9b74, Data2: 0x5f86, Data3: 0x4618, Data4: [8]byte{0xbc, 0x6a, 0xa2, 0xfa, 0xc1, 0x9b, 0x3f, 0x44}}
 
 // HasPriority dispatches through IUIAnimationPriorityComparison's vtable slot 3.
-func (self *IUIAnimationPriorityComparison) HasPriority(scheduledStoryboard *IUIAnimationStoryboard, newStoryboard *IUIAnimationStoryboard, priorityEffect UI_ANIMATION_PRIORITY_EFFECT) foundation.HRESULT {
+func (self *IUIAnimationPriorityComparison) HasPriority(scheduledStoryboard *IUIAnimationStoryboard, newStoryboard *IUIAnimationStoryboard, priorityEffect UI_ANIMATION_PRIORITY_EFFECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scheduledStoryboard)), uintptr(unsafe.Pointer(newStoryboard)), uintptr(priorityEffect))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationPriorityComparison2: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationprioritycomparison2
@@ -363,9 +363,9 @@ type IUIAnimationPriorityComparison2 struct {
 var IID_IUIAnimationPriorityComparison2 = win32.GUID{Data1: 0x5b6d7a37, Data2: 0x4621, Data3: 0x467c, Data4: [8]byte{0x8b, 0x05, 0x70, 0x13, 0x1d, 0xe6, 0x2d, 0xdb}}
 
 // HasPriority dispatches through IUIAnimationPriorityComparison2's vtable slot 3.
-func (self *IUIAnimationPriorityComparison2) HasPriority(scheduledStoryboard *IUIAnimationStoryboard2, newStoryboard *IUIAnimationStoryboard2, priorityEffect UI_ANIMATION_PRIORITY_EFFECT) foundation.HRESULT {
+func (self *IUIAnimationPriorityComparison2) HasPriority(scheduledStoryboard *IUIAnimationStoryboard2, newStoryboard *IUIAnimationStoryboard2, priorityEffect UI_ANIMATION_PRIORITY_EFFECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scheduledStoryboard)), uintptr(unsafe.Pointer(newStoryboard)), uintptr(priorityEffect))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationStoryboard: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationstoryboard
@@ -378,81 +378,81 @@ type IUIAnimationStoryboard struct {
 var IID_IUIAnimationStoryboard = win32.GUID{Data1: 0xa8ff128f, Data2: 0x9bf9, Data3: 0x4af1, Data4: [8]byte{0x9e, 0x67, 0xe5, 0xe4, 0x10, 0xde, 0xfb, 0x84}}
 
 // AddTransition dispatches through IUIAnimationStoryboard's vtable slot 3.
-func (self *IUIAnimationStoryboard) AddTransition(variable *IUIAnimationVariable, transition *IUIAnimationTransition) foundation.HRESULT {
+func (self *IUIAnimationStoryboard) AddTransition(variable *IUIAnimationVariable, transition *IUIAnimationTransition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(variable)), uintptr(unsafe.Pointer(transition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddKeyframeAfterTransition dispatches through IUIAnimationStoryboard's vtable slot 5.
-func (self *IUIAnimationStoryboard) AddKeyframeAfterTransition(transition *IUIAnimationTransition, keyframe *UI_ANIMATION_KEYFRAME) foundation.HRESULT {
+func (self *IUIAnimationStoryboard) AddKeyframeAfterTransition(transition *IUIAnimationTransition, keyframe *UI_ANIMATION_KEYFRAME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transition)), uintptr(unsafe.Pointer(keyframe)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddTransitionAtKeyframe dispatches through IUIAnimationStoryboard's vtable slot 6.
-func (self *IUIAnimationStoryboard) AddTransitionAtKeyframe(variable *IUIAnimationVariable, transition *IUIAnimationTransition, startKeyframe UI_ANIMATION_KEYFRAME) foundation.HRESULT {
+func (self *IUIAnimationStoryboard) AddTransitionAtKeyframe(variable *IUIAnimationVariable, transition *IUIAnimationTransition, startKeyframe UI_ANIMATION_KEYFRAME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(variable)), uintptr(unsafe.Pointer(transition)), uintptr(startKeyframe))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddTransitionBetweenKeyframes dispatches through IUIAnimationStoryboard's vtable slot 7.
-func (self *IUIAnimationStoryboard) AddTransitionBetweenKeyframes(variable *IUIAnimationVariable, transition *IUIAnimationTransition, startKeyframe UI_ANIMATION_KEYFRAME, endKeyframe UI_ANIMATION_KEYFRAME) foundation.HRESULT {
+func (self *IUIAnimationStoryboard) AddTransitionBetweenKeyframes(variable *IUIAnimationVariable, transition *IUIAnimationTransition, startKeyframe UI_ANIMATION_KEYFRAME, endKeyframe UI_ANIMATION_KEYFRAME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(variable)), uintptr(unsafe.Pointer(transition)), uintptr(startKeyframe), uintptr(endKeyframe))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RepeatBetweenKeyframes dispatches through IUIAnimationStoryboard's vtable slot 8.
-func (self *IUIAnimationStoryboard) RepeatBetweenKeyframes(startKeyframe UI_ANIMATION_KEYFRAME, endKeyframe UI_ANIMATION_KEYFRAME, repetitionCount int32) foundation.HRESULT {
+func (self *IUIAnimationStoryboard) RepeatBetweenKeyframes(startKeyframe UI_ANIMATION_KEYFRAME, endKeyframe UI_ANIMATION_KEYFRAME, repetitionCount int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(startKeyframe), uintptr(endKeyframe), uintptr(repetitionCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HoldVariable dispatches through IUIAnimationStoryboard's vtable slot 9.
-func (self *IUIAnimationStoryboard) HoldVariable(variable *IUIAnimationVariable) foundation.HRESULT {
+func (self *IUIAnimationStoryboard) HoldVariable(variable *IUIAnimationVariable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(variable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Conclude dispatches through IUIAnimationStoryboard's vtable slot 12.
-func (self *IUIAnimationStoryboard) Conclude() foundation.HRESULT {
+func (self *IUIAnimationStoryboard) Conclude() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Abandon dispatches through IUIAnimationStoryboard's vtable slot 14.
-func (self *IUIAnimationStoryboard) Abandon() foundation.HRESULT {
+func (self *IUIAnimationStoryboard) Abandon() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTag dispatches through IUIAnimationStoryboard's vtable slot 15.
-func (self *IUIAnimationStoryboard) SetTag(object *systemcom.IUnknown, id uint32) foundation.HRESULT {
+func (self *IUIAnimationStoryboard) SetTag(object *systemcom.IUnknown, id uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(id))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTag dispatches through IUIAnimationStoryboard's vtable slot 16.
-func (self *IUIAnimationStoryboard) GetTag(object **systemcom.IUnknown, id *uint32) foundation.HRESULT {
+func (self *IUIAnimationStoryboard) GetTag(object **systemcom.IUnknown, id *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IUIAnimationStoryboard's vtable slot 17.
-func (self *IUIAnimationStoryboard) GetStatus(status *UI_ANIMATION_STORYBOARD_STATUS) foundation.HRESULT {
+func (self *IUIAnimationStoryboard) GetStatus(status *UI_ANIMATION_STORYBOARD_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(status)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetElapsedTime dispatches through IUIAnimationStoryboard's vtable slot 18.
-func (self *IUIAnimationStoryboard) GetElapsedTime(elapsedTime *float64) foundation.HRESULT {
+func (self *IUIAnimationStoryboard) GetElapsedTime(elapsedTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(elapsedTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStoryboardEventHandler dispatches through IUIAnimationStoryboard's vtable slot 19.
-func (self *IUIAnimationStoryboard) SetStoryboardEventHandler(handler *IUIAnimationStoryboardEventHandler) foundation.HRESULT {
+func (self *IUIAnimationStoryboard) SetStoryboardEventHandler(handler *IUIAnimationStoryboardEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationStoryboard2: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationstoryboard2
@@ -465,75 +465,77 @@ type IUIAnimationStoryboard2 struct {
 var IID_IUIAnimationStoryboard2 = win32.GUID{Data1: 0xae289cd2, Data2: 0x12d4, Data3: 0x4945, Data4: [8]byte{0x94, 0x19, 0x9e, 0x41, 0xbe, 0x03, 0x4d, 0xf2}}
 
 // AddTransition dispatches through IUIAnimationStoryboard2's vtable slot 3.
-func (self *IUIAnimationStoryboard2) AddTransition(variable *IUIAnimationVariable2, transition *IUIAnimationTransition2) foundation.HRESULT {
+func (self *IUIAnimationStoryboard2) AddTransition(variable *IUIAnimationVariable2, transition *IUIAnimationTransition2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(variable)), uintptr(unsafe.Pointer(transition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddKeyframeAfterTransition dispatches through IUIAnimationStoryboard2's vtable slot 5.
-func (self *IUIAnimationStoryboard2) AddKeyframeAfterTransition(transition *IUIAnimationTransition2, keyframe *UI_ANIMATION_KEYFRAME) foundation.HRESULT {
+func (self *IUIAnimationStoryboard2) AddKeyframeAfterTransition(transition *IUIAnimationTransition2, keyframe *UI_ANIMATION_KEYFRAME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transition)), uintptr(unsafe.Pointer(keyframe)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddTransitionAtKeyframe dispatches through IUIAnimationStoryboard2's vtable slot 6.
-func (self *IUIAnimationStoryboard2) AddTransitionAtKeyframe(variable *IUIAnimationVariable2, transition *IUIAnimationTransition2, startKeyframe UI_ANIMATION_KEYFRAME) foundation.HRESULT {
+func (self *IUIAnimationStoryboard2) AddTransitionAtKeyframe(variable *IUIAnimationVariable2, transition *IUIAnimationTransition2, startKeyframe UI_ANIMATION_KEYFRAME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(variable)), uintptr(unsafe.Pointer(transition)), uintptr(startKeyframe))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddTransitionBetweenKeyframes dispatches through IUIAnimationStoryboard2's vtable slot 7.
-func (self *IUIAnimationStoryboard2) AddTransitionBetweenKeyframes(variable *IUIAnimationVariable2, transition *IUIAnimationTransition2, startKeyframe UI_ANIMATION_KEYFRAME, endKeyframe UI_ANIMATION_KEYFRAME) foundation.HRESULT {
+func (self *IUIAnimationStoryboard2) AddTransitionBetweenKeyframes(variable *IUIAnimationVariable2, transition *IUIAnimationTransition2, startKeyframe UI_ANIMATION_KEYFRAME, endKeyframe UI_ANIMATION_KEYFRAME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(variable)), uintptr(unsafe.Pointer(transition)), uintptr(startKeyframe), uintptr(endKeyframe))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HoldVariable dispatches through IUIAnimationStoryboard2's vtable slot 9.
-func (self *IUIAnimationStoryboard2) HoldVariable(variable *IUIAnimationVariable2) foundation.HRESULT {
+func (self *IUIAnimationStoryboard2) HoldVariable(variable *IUIAnimationVariable2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(variable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Conclude dispatches through IUIAnimationStoryboard2's vtable slot 13.
-func (self *IUIAnimationStoryboard2) Conclude() foundation.HRESULT {
+func (self *IUIAnimationStoryboard2) Conclude() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Abandon dispatches through IUIAnimationStoryboard2's vtable slot 15.
-func (self *IUIAnimationStoryboard2) Abandon() foundation.HRESULT {
+func (self *IUIAnimationStoryboard2) Abandon() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTag dispatches through IUIAnimationStoryboard2's vtable slot 16.
-func (self *IUIAnimationStoryboard2) SetTag(object *systemcom.IUnknown, id uint32) foundation.HRESULT {
+func (self *IUIAnimationStoryboard2) SetTag(object *systemcom.IUnknown, id uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(id))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTag dispatches through IUIAnimationStoryboard2's vtable slot 17.
-func (self *IUIAnimationStoryboard2) GetTag(object **systemcom.IUnknown, id *uint32) foundation.HRESULT {
+func (self *IUIAnimationStoryboard2) GetTag(object **systemcom.IUnknown, id *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IUIAnimationStoryboard2's vtable slot 18.
-func (self *IUIAnimationStoryboard2) GetStatus(status *UI_ANIMATION_STORYBOARD_STATUS) foundation.HRESULT {
+func (self *IUIAnimationStoryboard2) GetStatus(status *UI_ANIMATION_STORYBOARD_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(status)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetElapsedTime dispatches through IUIAnimationStoryboard2's vtable slot 19.
-func (self *IUIAnimationStoryboard2) GetElapsedTime(elapsedTime *float64) foundation.HRESULT {
+func (self *IUIAnimationStoryboard2) GetElapsedTime(elapsedTime *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(elapsedTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStoryboardEventHandler dispatches through IUIAnimationStoryboard2's vtable slot 20.
-func (self *IUIAnimationStoryboard2) SetStoryboardEventHandler(handler *IUIAnimationStoryboardEventHandler2, fRegisterStatusChangeForNextAnimationEvent foundation.BOOL, fRegisterUpdateForNextAnimationEvent foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)), uintptr(fRegisterStatusChangeForNextAnimationEvent), uintptr(fRegisterUpdateForNextAnimationEvent))
-	return foundation.HRESULT(r1)
+func (self *IUIAnimationStoryboard2) SetStoryboardEventHandler(handler *IUIAnimationStoryboardEventHandler2, fRegisterStatusChangeForNextAnimationEvent bool, fRegisterUpdateForNextAnimationEvent bool) error {
+	_fRegisterStatusChangeForNextAnimationEvent := win32.Bool32(fRegisterStatusChangeForNextAnimationEvent)
+	_fRegisterUpdateForNextAnimationEvent := win32.Bool32(fRegisterUpdateForNextAnimationEvent)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)), uintptr(_fRegisterStatusChangeForNextAnimationEvent), uintptr(_fRegisterUpdateForNextAnimationEvent))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationStoryboardEventHandler: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationstoryboardeventhandler
@@ -546,15 +548,15 @@ type IUIAnimationStoryboardEventHandler struct {
 var IID_IUIAnimationStoryboardEventHandler = win32.GUID{Data1: 0x3d5c9008, Data2: 0xec7c, Data3: 0x4364, Data4: [8]byte{0x9f, 0x8a, 0x9a, 0xf3, 0xc5, 0x8c, 0xba, 0xe6}}
 
 // OnStoryboardStatusChanged dispatches through IUIAnimationStoryboardEventHandler's vtable slot 3.
-func (self *IUIAnimationStoryboardEventHandler) OnStoryboardStatusChanged(storyboard *IUIAnimationStoryboard, newStatus UI_ANIMATION_STORYBOARD_STATUS, previousStatus UI_ANIMATION_STORYBOARD_STATUS) foundation.HRESULT {
+func (self *IUIAnimationStoryboardEventHandler) OnStoryboardStatusChanged(storyboard *IUIAnimationStoryboard, newStatus UI_ANIMATION_STORYBOARD_STATUS, previousStatus UI_ANIMATION_STORYBOARD_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)), uintptr(newStatus), uintptr(previousStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnStoryboardUpdated dispatches through IUIAnimationStoryboardEventHandler's vtable slot 4.
-func (self *IUIAnimationStoryboardEventHandler) OnStoryboardUpdated(storyboard *IUIAnimationStoryboard) foundation.HRESULT {
+func (self *IUIAnimationStoryboardEventHandler) OnStoryboardUpdated(storyboard *IUIAnimationStoryboard) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationStoryboardEventHandler2: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationstoryboardeventhandler2
@@ -567,15 +569,15 @@ type IUIAnimationStoryboardEventHandler2 struct {
 var IID_IUIAnimationStoryboardEventHandler2 = win32.GUID{Data1: 0xbac5f55a, Data2: 0xba7c, Data3: 0x414c, Data4: [8]byte{0xb5, 0x99, 0xfb, 0xf8, 0x50, 0xf5, 0x53, 0xc6}}
 
 // OnStoryboardStatusChanged dispatches through IUIAnimationStoryboardEventHandler2's vtable slot 3.
-func (self *IUIAnimationStoryboardEventHandler2) OnStoryboardStatusChanged(storyboard *IUIAnimationStoryboard2, newStatus UI_ANIMATION_STORYBOARD_STATUS, previousStatus UI_ANIMATION_STORYBOARD_STATUS) foundation.HRESULT {
+func (self *IUIAnimationStoryboardEventHandler2) OnStoryboardStatusChanged(storyboard *IUIAnimationStoryboard2, newStatus UI_ANIMATION_STORYBOARD_STATUS, previousStatus UI_ANIMATION_STORYBOARD_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)), uintptr(newStatus), uintptr(previousStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnStoryboardUpdated dispatches through IUIAnimationStoryboardEventHandler2's vtable slot 4.
-func (self *IUIAnimationStoryboardEventHandler2) OnStoryboardUpdated(storyboard *IUIAnimationStoryboard2) foundation.HRESULT {
+func (self *IUIAnimationStoryboardEventHandler2) OnStoryboardUpdated(storyboard *IUIAnimationStoryboard2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationTimer: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationtimer
@@ -588,45 +590,45 @@ type IUIAnimationTimer struct {
 var IID_IUIAnimationTimer = win32.GUID{Data1: 0x6b0efad1, Data2: 0xa053, Data3: 0x41d6, Data4: [8]byte{0x90, 0x85, 0x33, 0xa6, 0x89, 0x14, 0x46, 0x65}}
 
 // SetTimerUpdateHandler dispatches through IUIAnimationTimer's vtable slot 3.
-func (self *IUIAnimationTimer) SetTimerUpdateHandler(updateHandler *IUIAnimationTimerUpdateHandler, idleBehavior UI_ANIMATION_IDLE_BEHAVIOR) foundation.HRESULT {
+func (self *IUIAnimationTimer) SetTimerUpdateHandler(updateHandler *IUIAnimationTimerUpdateHandler, idleBehavior UI_ANIMATION_IDLE_BEHAVIOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(updateHandler)), uintptr(idleBehavior))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTimerEventHandler dispatches through IUIAnimationTimer's vtable slot 4.
-func (self *IUIAnimationTimer) SetTimerEventHandler(handler *IUIAnimationTimerEventHandler) foundation.HRESULT {
+func (self *IUIAnimationTimer) SetTimerEventHandler(handler *IUIAnimationTimerEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Enable dispatches through IUIAnimationTimer's vtable slot 5.
-func (self *IUIAnimationTimer) Enable() foundation.HRESULT {
+func (self *IUIAnimationTimer) Enable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disable dispatches through IUIAnimationTimer's vtable slot 6.
-func (self *IUIAnimationTimer) Disable() foundation.HRESULT {
+func (self *IUIAnimationTimer) Disable() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsEnabled dispatches through IUIAnimationTimer's vtable slot 7.
-func (self *IUIAnimationTimer) IsEnabled() foundation.HRESULT {
+func (self *IUIAnimationTimer) IsEnabled() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTime dispatches through IUIAnimationTimer's vtable slot 8.
-func (self *IUIAnimationTimer) GetTime(seconds *float64) foundation.HRESULT {
+func (self *IUIAnimationTimer) GetTime(seconds *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(seconds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFrameRateThreshold dispatches through IUIAnimationTimer's vtable slot 9.
-func (self *IUIAnimationTimer) SetFrameRateThreshold(framesPerSecond uint32) foundation.HRESULT {
+func (self *IUIAnimationTimer) SetFrameRateThreshold(framesPerSecond uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(framesPerSecond))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationTimerClientEventHandler: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationtimerclienteventhandler
@@ -639,9 +641,9 @@ type IUIAnimationTimerClientEventHandler struct {
 var IID_IUIAnimationTimerClientEventHandler = win32.GUID{Data1: 0xbedb4db6, Data2: 0x94fa, Data3: 0x4bfb, Data4: [8]byte{0xa4, 0x7f, 0xef, 0x2d, 0x9e, 0x40, 0x8c, 0x25}}
 
 // OnTimerClientStatusChanged dispatches through IUIAnimationTimerClientEventHandler's vtable slot 3.
-func (self *IUIAnimationTimerClientEventHandler) OnTimerClientStatusChanged(newStatus UI_ANIMATION_TIMER_CLIENT_STATUS, previousStatus UI_ANIMATION_TIMER_CLIENT_STATUS) foundation.HRESULT {
+func (self *IUIAnimationTimerClientEventHandler) OnTimerClientStatusChanged(newStatus UI_ANIMATION_TIMER_CLIENT_STATUS, previousStatus UI_ANIMATION_TIMER_CLIENT_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(newStatus), uintptr(previousStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationTimerEventHandler: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationtimereventhandler
@@ -654,21 +656,21 @@ type IUIAnimationTimerEventHandler struct {
 var IID_IUIAnimationTimerEventHandler = win32.GUID{Data1: 0x274a7dea, Data2: 0xd771, Data3: 0x4095, Data4: [8]byte{0xab, 0xbd, 0x8d, 0xf7, 0xab, 0xd2, 0x3c, 0xe3}}
 
 // OnPreUpdate dispatches through IUIAnimationTimerEventHandler's vtable slot 3.
-func (self *IUIAnimationTimerEventHandler) OnPreUpdate() foundation.HRESULT {
+func (self *IUIAnimationTimerEventHandler) OnPreUpdate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnPostUpdate dispatches through IUIAnimationTimerEventHandler's vtable slot 4.
-func (self *IUIAnimationTimerEventHandler) OnPostUpdate() foundation.HRESULT {
+func (self *IUIAnimationTimerEventHandler) OnPostUpdate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnRenderingTooSlow dispatches through IUIAnimationTimerEventHandler's vtable slot 5.
-func (self *IUIAnimationTimerEventHandler) OnRenderingTooSlow(framesPerSecond uint32) foundation.HRESULT {
+func (self *IUIAnimationTimerEventHandler) OnRenderingTooSlow(framesPerSecond uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(framesPerSecond))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationTimerUpdateHandler: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationtimerupdatehandler
@@ -681,15 +683,15 @@ type IUIAnimationTimerUpdateHandler struct {
 var IID_IUIAnimationTimerUpdateHandler = win32.GUID{Data1: 0x195509b7, Data2: 0x5d5e, Data3: 0x4e3e, Data4: [8]byte{0xb2, 0x78, 0xee, 0x37, 0x59, 0xb3, 0x67, 0xad}}
 
 // SetTimerClientEventHandler dispatches through IUIAnimationTimerUpdateHandler's vtable slot 4.
-func (self *IUIAnimationTimerUpdateHandler) SetTimerClientEventHandler(handler *IUIAnimationTimerClientEventHandler) foundation.HRESULT {
+func (self *IUIAnimationTimerUpdateHandler) SetTimerClientEventHandler(handler *IUIAnimationTimerClientEventHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearTimerClientEventHandler dispatches through IUIAnimationTimerUpdateHandler's vtable slot 5.
-func (self *IUIAnimationTimerUpdateHandler) ClearTimerClientEventHandler() foundation.HRESULT {
+func (self *IUIAnimationTimerUpdateHandler) ClearTimerClientEventHandler() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationTransition: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationtransition
@@ -702,15 +704,15 @@ type IUIAnimationTransition struct {
 var IID_IUIAnimationTransition = win32.GUID{Data1: 0xdc6ce252, Data2: 0xf731, Data3: 0x41cf, Data4: [8]byte{0xb6, 0x10, 0x61, 0x4b, 0x6c, 0xa0, 0x49, 0xad}}
 
 // IsDurationKnown dispatches through IUIAnimationTransition's vtable slot 5.
-func (self *IUIAnimationTransition) IsDurationKnown() foundation.HRESULT {
+func (self *IUIAnimationTransition) IsDurationKnown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDuration dispatches through IUIAnimationTransition's vtable slot 6.
-func (self *IUIAnimationTransition) GetDuration(duration *float64) foundation.HRESULT {
+func (self *IUIAnimationTransition) GetDuration(duration *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(duration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationTransition2: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationtransition2
@@ -723,33 +725,33 @@ type IUIAnimationTransition2 struct {
 var IID_IUIAnimationTransition2 = win32.GUID{Data1: 0x62ff9123, Data2: 0xa85a, Data3: 0x4e9b, Data4: [8]byte{0xa2, 0x18, 0x43, 0x5a, 0x93, 0xe2, 0x68, 0xfd}}
 
 // GetDimension dispatches through IUIAnimationTransition2's vtable slot 3.
-func (self *IUIAnimationTransition2) GetDimension(dimension *uint32) foundation.HRESULT {
+func (self *IUIAnimationTransition2) GetDimension(dimension *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dimension)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInitialVectorValue dispatches through IUIAnimationTransition2's vtable slot 5.
-func (self *IUIAnimationTransition2) SetInitialVectorValue(value *float64, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationTransition2) SetInitialVectorValue(value *float64, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInitialVectorVelocity dispatches through IUIAnimationTransition2's vtable slot 7.
-func (self *IUIAnimationTransition2) SetInitialVectorVelocity(velocity *float64, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationTransition2) SetInitialVectorVelocity(velocity *float64, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(velocity)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsDurationKnown dispatches through IUIAnimationTransition2's vtable slot 8.
-func (self *IUIAnimationTransition2) IsDurationKnown() foundation.HRESULT {
+func (self *IUIAnimationTransition2) IsDurationKnown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDuration dispatches through IUIAnimationTransition2's vtable slot 9.
-func (self *IUIAnimationTransition2) GetDuration(duration *float64) foundation.HRESULT {
+func (self *IUIAnimationTransition2) GetDuration(duration *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(duration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationTransitionFactory: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationtransitionfactory
@@ -762,9 +764,9 @@ type IUIAnimationTransitionFactory struct {
 var IID_IUIAnimationTransitionFactory = win32.GUID{Data1: 0xfcd91e03, Data2: 0x3e3b, Data3: 0x45ad, Data4: [8]byte{0xbb, 0xb1, 0x6d, 0xfc, 0x81, 0x53, 0x74, 0x3d}}
 
 // CreateTransition dispatches through IUIAnimationTransitionFactory's vtable slot 3.
-func (self *IUIAnimationTransitionFactory) CreateTransition(interpolator *IUIAnimationInterpolator, transition **IUIAnimationTransition) foundation.HRESULT {
+func (self *IUIAnimationTransitionFactory) CreateTransition(interpolator *IUIAnimationInterpolator, transition **IUIAnimationTransition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interpolator)), uintptr(unsafe.Pointer(transition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationTransitionFactory2: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationtransitionfactory2
@@ -777,9 +779,9 @@ type IUIAnimationTransitionFactory2 struct {
 var IID_IUIAnimationTransitionFactory2 = win32.GUID{Data1: 0x937d4916, Data2: 0xc1a6, Data3: 0x42d5, Data4: [8]byte{0x88, 0xd8, 0x30, 0x34, 0x4d, 0x6e, 0xfe, 0x31}}
 
 // CreateTransition dispatches through IUIAnimationTransitionFactory2's vtable slot 3.
-func (self *IUIAnimationTransitionFactory2) CreateTransition(interpolator *IUIAnimationInterpolator2, transition **IUIAnimationTransition2) foundation.HRESULT {
+func (self *IUIAnimationTransitionFactory2) CreateTransition(interpolator *IUIAnimationInterpolator2, transition **IUIAnimationTransition2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interpolator)), uintptr(unsafe.Pointer(transition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationTransitionLibrary: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationtransitionlibrary
@@ -801,9 +803,9 @@ type IUIAnimationTransitionLibrary2 struct {
 var IID_IUIAnimationTransitionLibrary2 = win32.GUID{Data1: 0x03cfae53, Data2: 0x9580, Data3: 0x4ee3, Data4: [8]byte{0xb3, 0x63, 0x2e, 0xce, 0x51, 0xb4, 0xaf, 0x6a}}
 
 // CreateInstantaneousVectorTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 4.
-func (self *IUIAnimationTransitionLibrary2) CreateInstantaneousVectorTransition(finalValue *float64, cDimension uint32, transition **IUIAnimationTransition2) foundation.HRESULT {
+func (self *IUIAnimationTransitionLibrary2) CreateInstantaneousVectorTransition(finalValue *float64, cDimension uint32, transition **IUIAnimationTransition2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(finalValue)), uintptr(cDimension), uintptr(unsafe.Pointer(transition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationVariable: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationvariable
@@ -816,75 +818,75 @@ type IUIAnimationVariable struct {
 var IID_IUIAnimationVariable = win32.GUID{Data1: 0x8ceeb155, Data2: 0x2849, Data3: 0x4ce5, Data4: [8]byte{0x94, 0x48, 0x91, 0xff, 0x70, 0xe1, 0xe4, 0xd9}}
 
 // GetValue dispatches through IUIAnimationVariable's vtable slot 3.
-func (self *IUIAnimationVariable) GetValue(value *float64) foundation.HRESULT {
+func (self *IUIAnimationVariable) GetValue(value *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFinalValue dispatches through IUIAnimationVariable's vtable slot 4.
-func (self *IUIAnimationVariable) GetFinalValue(finalValue *float64) foundation.HRESULT {
+func (self *IUIAnimationVariable) GetFinalValue(finalValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(finalValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreviousValue dispatches through IUIAnimationVariable's vtable slot 5.
-func (self *IUIAnimationVariable) GetPreviousValue(previousValue *float64) foundation.HRESULT {
+func (self *IUIAnimationVariable) GetPreviousValue(previousValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(previousValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIntegerValue dispatches through IUIAnimationVariable's vtable slot 6.
-func (self *IUIAnimationVariable) GetIntegerValue(value *int32) foundation.HRESULT {
+func (self *IUIAnimationVariable) GetIntegerValue(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFinalIntegerValue dispatches through IUIAnimationVariable's vtable slot 7.
-func (self *IUIAnimationVariable) GetFinalIntegerValue(finalValue *int32) foundation.HRESULT {
+func (self *IUIAnimationVariable) GetFinalIntegerValue(finalValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(finalValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreviousIntegerValue dispatches through IUIAnimationVariable's vtable slot 8.
-func (self *IUIAnimationVariable) GetPreviousIntegerValue(previousValue *int32) foundation.HRESULT {
+func (self *IUIAnimationVariable) GetPreviousIntegerValue(previousValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(previousValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentStoryboard dispatches through IUIAnimationVariable's vtable slot 9.
-func (self *IUIAnimationVariable) GetCurrentStoryboard(storyboard **IUIAnimationStoryboard) foundation.HRESULT {
+func (self *IUIAnimationVariable) GetCurrentStoryboard(storyboard **IUIAnimationStoryboard) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRoundingMode dispatches through IUIAnimationVariable's vtable slot 12.
-func (self *IUIAnimationVariable) SetRoundingMode(mode UI_ANIMATION_ROUNDING_MODE) foundation.HRESULT {
+func (self *IUIAnimationVariable) SetRoundingMode(mode UI_ANIMATION_ROUNDING_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTag dispatches through IUIAnimationVariable's vtable slot 13.
-func (self *IUIAnimationVariable) SetTag(object *systemcom.IUnknown, id uint32) foundation.HRESULT {
+func (self *IUIAnimationVariable) SetTag(object *systemcom.IUnknown, id uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(id))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTag dispatches through IUIAnimationVariable's vtable slot 14.
-func (self *IUIAnimationVariable) GetTag(object **systemcom.IUnknown, id *uint32) foundation.HRESULT {
+func (self *IUIAnimationVariable) GetTag(object **systemcom.IUnknown, id *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVariableChangeHandler dispatches through IUIAnimationVariable's vtable slot 15.
-func (self *IUIAnimationVariable) SetVariableChangeHandler(handler *IUIAnimationVariableChangeHandler) foundation.HRESULT {
+func (self *IUIAnimationVariable) SetVariableChangeHandler(handler *IUIAnimationVariableChangeHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVariableIntegerChangeHandler dispatches through IUIAnimationVariable's vtable slot 16.
-func (self *IUIAnimationVariable) SetVariableIntegerChangeHandler(handler *IUIAnimationVariableIntegerChangeHandler) foundation.HRESULT {
+func (self *IUIAnimationVariable) SetVariableIntegerChangeHandler(handler *IUIAnimationVariableIntegerChangeHandler) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationVariable2: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationvariable2
@@ -897,147 +899,149 @@ type IUIAnimationVariable2 struct {
 var IID_IUIAnimationVariable2 = win32.GUID{Data1: 0x4914b304, Data2: 0x96ab, Data3: 0x44d9, Data4: [8]byte{0x9e, 0x77, 0xd5, 0x10, 0x9b, 0x7e, 0x74, 0x66}}
 
 // GetDimension dispatches through IUIAnimationVariable2's vtable slot 3.
-func (self *IUIAnimationVariable2) GetDimension(dimension *uint32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetDimension(dimension *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(dimension)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetValue dispatches through IUIAnimationVariable2's vtable slot 4.
-func (self *IUIAnimationVariable2) GetValue(value *float64) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetValue(value *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVectorValue dispatches through IUIAnimationVariable2's vtable slot 5.
-func (self *IUIAnimationVariable2) GetVectorValue(value *float64, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetVectorValue(value *float64, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurve dispatches through IUIAnimationVariable2's vtable slot 6.
-func (self *IUIAnimationVariable2) GetCurve(animation *graphicsdirectcomposition.IDCompositionAnimation) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetCurve(animation *graphicsdirectcomposition.IDCompositionAnimation) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVectorCurve dispatches through IUIAnimationVariable2's vtable slot 7.
-func (self *IUIAnimationVariable2) GetVectorCurve(animation **graphicsdirectcomposition.IDCompositionAnimation, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetVectorCurve(animation **graphicsdirectcomposition.IDCompositionAnimation, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFinalValue dispatches through IUIAnimationVariable2's vtable slot 8.
-func (self *IUIAnimationVariable2) GetFinalValue(finalValue *float64) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetFinalValue(finalValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(finalValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFinalVectorValue dispatches through IUIAnimationVariable2's vtable slot 9.
-func (self *IUIAnimationVariable2) GetFinalVectorValue(finalValue *float64, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetFinalVectorValue(finalValue *float64, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(finalValue)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreviousValue dispatches through IUIAnimationVariable2's vtable slot 10.
-func (self *IUIAnimationVariable2) GetPreviousValue(previousValue *float64) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetPreviousValue(previousValue *float64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(previousValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreviousVectorValue dispatches through IUIAnimationVariable2's vtable slot 11.
-func (self *IUIAnimationVariable2) GetPreviousVectorValue(previousValue *float64, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetPreviousVectorValue(previousValue *float64, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(previousValue)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIntegerValue dispatches through IUIAnimationVariable2's vtable slot 12.
-func (self *IUIAnimationVariable2) GetIntegerValue(value *int32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetIntegerValue(value *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIntegerVectorValue dispatches through IUIAnimationVariable2's vtable slot 13.
-func (self *IUIAnimationVariable2) GetIntegerVectorValue(value *int32, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetIntegerVectorValue(value *int32, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFinalIntegerValue dispatches through IUIAnimationVariable2's vtable slot 14.
-func (self *IUIAnimationVariable2) GetFinalIntegerValue(finalValue *int32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetFinalIntegerValue(finalValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(finalValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFinalIntegerVectorValue dispatches through IUIAnimationVariable2's vtable slot 15.
-func (self *IUIAnimationVariable2) GetFinalIntegerVectorValue(finalValue *int32, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetFinalIntegerVectorValue(finalValue *int32, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(finalValue)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreviousIntegerValue dispatches through IUIAnimationVariable2's vtable slot 16.
-func (self *IUIAnimationVariable2) GetPreviousIntegerValue(previousValue *int32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetPreviousIntegerValue(previousValue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(previousValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreviousIntegerVectorValue dispatches through IUIAnimationVariable2's vtable slot 17.
-func (self *IUIAnimationVariable2) GetPreviousIntegerVectorValue(previousValue *int32, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetPreviousIntegerVectorValue(previousValue *int32, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(previousValue)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentStoryboard dispatches through IUIAnimationVariable2's vtable slot 18.
-func (self *IUIAnimationVariable2) GetCurrentStoryboard(storyboard **IUIAnimationStoryboard2) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetCurrentStoryboard(storyboard **IUIAnimationStoryboard2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLowerBoundVector dispatches through IUIAnimationVariable2's vtable slot 20.
-func (self *IUIAnimationVariable2) SetLowerBoundVector(bound *float64, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) SetLowerBoundVector(bound *float64, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bound)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetUpperBoundVector dispatches through IUIAnimationVariable2's vtable slot 22.
-func (self *IUIAnimationVariable2) SetUpperBoundVector(bound *float64, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) SetUpperBoundVector(bound *float64, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bound)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRoundingMode dispatches through IUIAnimationVariable2's vtable slot 23.
-func (self *IUIAnimationVariable2) SetRoundingMode(mode UI_ANIMATION_ROUNDING_MODE) foundation.HRESULT {
+func (self *IUIAnimationVariable2) SetRoundingMode(mode UI_ANIMATION_ROUNDING_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(mode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTag dispatches through IUIAnimationVariable2's vtable slot 24.
-func (self *IUIAnimationVariable2) SetTag(object *systemcom.IUnknown, id uint32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) SetTag(object *systemcom.IUnknown, id uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(id))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTag dispatches through IUIAnimationVariable2's vtable slot 25.
-func (self *IUIAnimationVariable2) GetTag(object **systemcom.IUnknown, id *uint32) foundation.HRESULT {
+func (self *IUIAnimationVariable2) GetTag(object **systemcom.IUnknown, id *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(id)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVariableChangeHandler dispatches through IUIAnimationVariable2's vtable slot 26.
-func (self *IUIAnimationVariable2) SetVariableChangeHandler(handler *IUIAnimationVariableChangeHandler2, fRegisterForNextAnimationEvent foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)), uintptr(fRegisterForNextAnimationEvent))
-	return foundation.HRESULT(r1)
+func (self *IUIAnimationVariable2) SetVariableChangeHandler(handler *IUIAnimationVariableChangeHandler2, fRegisterForNextAnimationEvent bool) error {
+	_fRegisterForNextAnimationEvent := win32.Bool32(fRegisterForNextAnimationEvent)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)), uintptr(_fRegisterForNextAnimationEvent))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVariableIntegerChangeHandler dispatches through IUIAnimationVariable2's vtable slot 27.
-func (self *IUIAnimationVariable2) SetVariableIntegerChangeHandler(handler *IUIAnimationVariableIntegerChangeHandler2, fRegisterForNextAnimationEvent foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)), uintptr(fRegisterForNextAnimationEvent))
-	return foundation.HRESULT(r1)
+func (self *IUIAnimationVariable2) SetVariableIntegerChangeHandler(handler *IUIAnimationVariableIntegerChangeHandler2, fRegisterForNextAnimationEvent bool) error {
+	_fRegisterForNextAnimationEvent := win32.Bool32(fRegisterForNextAnimationEvent)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)), uintptr(_fRegisterForNextAnimationEvent))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetVariableCurveChangeHandler dispatches through IUIAnimationVariable2's vtable slot 28.
-func (self *IUIAnimationVariable2) SetVariableCurveChangeHandler(handler *IUIAnimationVariableCurveChangeHandler2) foundation.HRESULT {
+func (self *IUIAnimationVariable2) SetVariableCurveChangeHandler(handler *IUIAnimationVariableCurveChangeHandler2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(handler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationVariableChangeHandler: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationvariablechangehandler
@@ -1059,9 +1063,9 @@ type IUIAnimationVariableChangeHandler2 struct {
 var IID_IUIAnimationVariableChangeHandler2 = win32.GUID{Data1: 0x63acc8d2, Data2: 0x6eae, Data3: 0x4bb0, Data4: [8]byte{0xb8, 0x79, 0x58, 0x6d, 0xd8, 0xcf, 0xbe, 0x42}}
 
 // OnValueChanged dispatches through IUIAnimationVariableChangeHandler2's vtable slot 3.
-func (self *IUIAnimationVariableChangeHandler2) OnValueChanged(storyboard *IUIAnimationStoryboard2, variable *IUIAnimationVariable2, newValue *float64, previousValue *float64, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationVariableChangeHandler2) OnValueChanged(storyboard *IUIAnimationStoryboard2, variable *IUIAnimationVariable2, newValue *float64, previousValue *float64, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)), uintptr(unsafe.Pointer(variable)), uintptr(unsafe.Pointer(newValue)), uintptr(unsafe.Pointer(previousValue)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationVariableCurveChangeHandler2: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationvariablecurvechangehandler2
@@ -1074,9 +1078,9 @@ type IUIAnimationVariableCurveChangeHandler2 struct {
 var IID_IUIAnimationVariableCurveChangeHandler2 = win32.GUID{Data1: 0x72895e91, Data2: 0x0145, Data3: 0x4c21, Data4: [8]byte{0x91, 0x92, 0x5a, 0xab, 0x40, 0xed, 0xdf, 0x80}}
 
 // OnCurveChanged dispatches through IUIAnimationVariableCurveChangeHandler2's vtable slot 3.
-func (self *IUIAnimationVariableCurveChangeHandler2) OnCurveChanged(variable *IUIAnimationVariable2) foundation.HRESULT {
+func (self *IUIAnimationVariableCurveChangeHandler2) OnCurveChanged(variable *IUIAnimationVariable2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(variable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationVariableIntegerChangeHandler: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationvariableintegerchangehandler
@@ -1089,9 +1093,9 @@ type IUIAnimationVariableIntegerChangeHandler struct {
 var IID_IUIAnimationVariableIntegerChangeHandler = win32.GUID{Data1: 0xbb3e1550, Data2: 0x356e, Data3: 0x44b0, Data4: [8]byte{0x99, 0xda, 0x85, 0xac, 0x60, 0x17, 0x86, 0x5e}}
 
 // OnIntegerValueChanged dispatches through IUIAnimationVariableIntegerChangeHandler's vtable slot 3.
-func (self *IUIAnimationVariableIntegerChangeHandler) OnIntegerValueChanged(storyboard *IUIAnimationStoryboard, variable *IUIAnimationVariable, newValue int32, previousValue int32) foundation.HRESULT {
+func (self *IUIAnimationVariableIntegerChangeHandler) OnIntegerValueChanged(storyboard *IUIAnimationStoryboard, variable *IUIAnimationVariable, newValue int32, previousValue int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)), uintptr(unsafe.Pointer(variable)), uintptr(newValue), uintptr(previousValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUIAnimationVariableIntegerChangeHandler2: https://learn.microsoft.com/windows/win32/api/uianimation/nn-uianimation-iuianimationvariableintegerchangehandler2
@@ -1104,7 +1108,7 @@ type IUIAnimationVariableIntegerChangeHandler2 struct {
 var IID_IUIAnimationVariableIntegerChangeHandler2 = win32.GUID{Data1: 0x829b6cf1, Data2: 0x4f3a, Data3: 0x4412, Data4: [8]byte{0xae, 0x09, 0xb2, 0x43, 0xeb, 0x4c, 0x6b, 0x58}}
 
 // OnIntegerValueChanged dispatches through IUIAnimationVariableIntegerChangeHandler2's vtable slot 3.
-func (self *IUIAnimationVariableIntegerChangeHandler2) OnIntegerValueChanged(storyboard *IUIAnimationStoryboard2, variable *IUIAnimationVariable2, newValue *int32, previousValue *int32, cDimension uint32) foundation.HRESULT {
+func (self *IUIAnimationVariableIntegerChangeHandler2) OnIntegerValueChanged(storyboard *IUIAnimationStoryboard2, variable *IUIAnimationVariable2, newValue *int32, previousValue *int32, cDimension uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(storyboard)), uintptr(unsafe.Pointer(variable)), uintptr(unsafe.Pointer(newValue)), uintptr(unsafe.Pointer(previousValue)), uintptr(cDimension))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

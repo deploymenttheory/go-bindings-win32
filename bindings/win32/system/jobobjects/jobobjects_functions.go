@@ -20,13 +20,13 @@ var (
 
 var (
 	procAssignProcessToJobObject               = modKERNEL32.NewProc("AssignProcessToJobObject")
+	procCreateJobObject                        = modKERNEL32.NewProc("CreateJobObjectW")
 	procCreateJobObjectA                       = modKERNEL32.NewProc("CreateJobObjectA")
-	procCreateJobObjectW                       = modKERNEL32.NewProc("CreateJobObjectW")
 	procCreateJobSet                           = modKERNEL32.NewProc("CreateJobSet")
 	procFreeMemoryJobObject                    = modKERNEL32.NewProc("FreeMemoryJobObject")
 	procIsProcessInJob                         = modKERNEL32.NewProc("IsProcessInJob")
+	procOpenJobObject                          = modKERNEL32.NewProc("OpenJobObjectW")
 	procOpenJobObjectA                         = modKERNEL32.NewProc("OpenJobObjectA")
-	procOpenJobObjectW                         = modKERNEL32.NewProc("OpenJobObjectW")
 	procQueryInformationJobObject              = modKERNEL32.NewProc("QueryInformationJobObject")
 	procQueryIoRateControlInformationJobObject = modKERNEL32.NewProc("QueryIoRateControlInformationJobObject")
 	procSetInformationJobObject                = modKERNEL32.NewProc("SetInformationJobObject")
@@ -46,6 +46,19 @@ func AssignProcessToJobObject(hJob foundation.HANDLE, hProcess foundation.HANDLE
 	return nil
 }
 
+// CreateJobObject calls KERNEL32!CreateJobObjectW.
+// https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-createjobobjectw
+// Minimum OS: windows5.1.2600.
+func CreateJobObject(lpJobAttributes *security.SECURITY_ATTRIBUTES, lpName string) (foundation.HANDLE, error) {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procCreateJobObject.Addr(), uintptr(unsafe.Pointer(lpJobAttributes)), uintptr(unsafe.Pointer(_lpName)))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // CreateJobObjectA calls KERNEL32!CreateJobObjectA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-createjobobjecta
 // Minimum OS: windows5.1.2600.
@@ -58,22 +71,14 @@ func CreateJobObjectA(lpJobAttributes *security.SECURITY_ATTRIBUTES, lpName foun
 	return ret, nil
 }
 
-// CreateJobObjectW calls KERNEL32!CreateJobObjectW.
-// https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-createjobobjectw
-// Minimum OS: windows5.1.2600.
-func CreateJobObjectW(lpJobAttributes *security.SECURITY_ATTRIBUTES, lpName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateJobObjectW.Addr(), uintptr(unsafe.Pointer(lpJobAttributes)), uintptr(unsafe.Pointer(lpName)))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
 // CreateJobSet calls KERNEL32!CreateJobSet.
-func CreateJobSet(NumJob uint32, UserJobSet *JOB_SET_ARRAY, Flags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procCreateJobSet.Addr(), uintptr(NumJob), uintptr(unsafe.Pointer(UserJobSet)), uintptr(Flags))
-	return foundation.BOOL(r1)
+func CreateJobSet(UserJobSet []JOB_SET_ARRAY, Flags uint32) bool {
+	var _UserJobSet *JOB_SET_ARRAY
+	if len(UserJobSet) > 0 {
+		_UserJobSet = &UserJobSet[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCreateJobSet.Addr(), uintptr(len(UserJobSet)), uintptr(unsafe.Pointer(_UserJobSet)), uintptr(Flags))
+	return r1 != 0
 }
 
 // FreeMemoryJobObject calls KERNEL32!FreeMemoryJobObject.
@@ -94,11 +99,13 @@ func IsProcessInJob(ProcessHandle foundation.HANDLE, JobHandle foundation.HANDLE
 	return nil
 }
 
-// OpenJobObjectA calls KERNEL32!OpenJobObjectA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-openjobobjecta
+// OpenJobObject calls KERNEL32!OpenJobObjectW.
+// https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-openjobobjectw
 // Minimum OS: windows5.1.2600.
-func OpenJobObjectA(dwDesiredAccess uint32, bInheritHandle foundation.BOOL, lpName foundation.PSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenJobObjectA.Addr(), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(unsafe.Pointer(lpName)))
+func OpenJobObject(dwDesiredAccess uint32, bInheritHandle bool, lpName string) (foundation.HANDLE, error) {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procOpenJobObject.Addr(), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(unsafe.Pointer(_lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -106,11 +113,12 @@ func OpenJobObjectA(dwDesiredAccess uint32, bInheritHandle foundation.BOOL, lpNa
 	return ret, nil
 }
 
-// OpenJobObjectW calls KERNEL32!OpenJobObjectW.
-// https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-openjobobjectw
+// OpenJobObjectA calls KERNEL32!OpenJobObjectA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-openjobobjecta
 // Minimum OS: windows5.1.2600.
-func OpenJobObjectW(dwDesiredAccess uint32, bInheritHandle foundation.BOOL, lpName foundation.PWSTR) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenJobObjectW.Addr(), uintptr(dwDesiredAccess), uintptr(bInheritHandle), uintptr(unsafe.Pointer(lpName)))
+func OpenJobObjectA(dwDesiredAccess uint32, bInheritHandle bool, lpName foundation.PSTR) (foundation.HANDLE, error) {
+	_bInheritHandle := win32.Bool32(bInheritHandle)
+	r1, _, e1 := syscall.SyscallN(procOpenJobObjectA.Addr(), uintptr(dwDesiredAccess), uintptr(_bInheritHandle), uintptr(unsafe.Pointer(lpName)))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -132,8 +140,9 @@ func QueryInformationJobObject(hJob foundation.HANDLE, JobObjectInformationClass
 // QueryIoRateControlInformationJobObject calls KERNEL32!QueryIoRateControlInformationJobObject.
 // https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-queryioratecontrolinformationjobobject
 // Minimum OS: windows10.0.10240.
-func QueryIoRateControlInformationJobObject(hJob foundation.HANDLE, VolumeName foundation.PWSTR, InfoBlocks **JOBOBJECT_IO_RATE_CONTROL_INFORMATION, InfoBlockCount *uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procQueryIoRateControlInformationJobObject.Addr(), uintptr(hJob), uintptr(unsafe.Pointer(VolumeName)), uintptr(unsafe.Pointer(InfoBlocks)), uintptr(unsafe.Pointer(InfoBlockCount)))
+func QueryIoRateControlInformationJobObject(hJob foundation.HANDLE, VolumeName string, InfoBlocks **JOBOBJECT_IO_RATE_CONTROL_INFORMATION, InfoBlockCount *uint32) (uint32, error) {
+	_VolumeName := win32.UTF16Ptr(VolumeName)
+	r1, _, e1 := syscall.SyscallN(procQueryIoRateControlInformationJobObject.Addr(), uintptr(hJob), uintptr(unsafe.Pointer(_VolumeName)), uintptr(unsafe.Pointer(InfoBlocks)), uintptr(unsafe.Pointer(InfoBlockCount)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -176,8 +185,9 @@ func TerminateJobObject(hJob foundation.HANDLE, uExitCode uint32) error {
 // UserHandleGrantAccess calls USER32!UserHandleGrantAccess.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-userhandlegrantaccess
 // Minimum OS: windows5.1.2600.
-func UserHandleGrantAccess(hUserHandle foundation.HANDLE, hJob foundation.HANDLE, bGrant foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procUserHandleGrantAccess.Addr(), uintptr(hUserHandle), uintptr(hJob), uintptr(bGrant))
+func UserHandleGrantAccess(hUserHandle foundation.HANDLE, hJob foundation.HANDLE, bGrant bool) error {
+	_bGrant := win32.Bool32(bGrant)
+	r1, _, e1 := syscall.SyscallN(procUserHandleGrantAccess.Addr(), uintptr(hUserHandle), uintptr(hJob), uintptr(_bGrant))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

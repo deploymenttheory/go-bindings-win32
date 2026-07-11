@@ -27,28 +27,28 @@ var (
 	procCMP_WaitNoPendingInstallEvents              = modCFGMGR32.NewProc("CMP_WaitNoPendingInstallEvents")
 	procCM_Add_Empty_Log_Conf                       = modCFGMGR32.NewProc("CM_Add_Empty_Log_Conf")
 	procCM_Add_Empty_Log_Conf_Ex                    = modCFGMGR32.NewProc("CM_Add_Empty_Log_Conf_Ex")
+	procCM_Add_ID                                   = modCFGMGR32.NewProc("CM_Add_IDW")
 	procCM_Add_IDA                                  = modCFGMGR32.NewProc("CM_Add_IDA")
-	procCM_Add_IDW                                  = modCFGMGR32.NewProc("CM_Add_IDW")
+	procCM_Add_ID_Ex                                = modCFGMGR32.NewProc("CM_Add_ID_ExW")
 	procCM_Add_ID_ExA                               = modCFGMGR32.NewProc("CM_Add_ID_ExA")
-	procCM_Add_ID_ExW                               = modCFGMGR32.NewProc("CM_Add_ID_ExW")
 	procCM_Add_Range                                = modCFGMGR32.NewProc("CM_Add_Range")
 	procCM_Add_Res_Des                              = modCFGMGR32.NewProc("CM_Add_Res_Des")
 	procCM_Add_Res_Des_Ex                           = modCFGMGR32.NewProc("CM_Add_Res_Des_Ex")
+	procCM_Connect_Machine                          = modCFGMGR32.NewProc("CM_Connect_MachineW")
 	procCM_Connect_MachineA                         = modCFGMGR32.NewProc("CM_Connect_MachineA")
-	procCM_Connect_MachineW                         = modCFGMGR32.NewProc("CM_Connect_MachineW")
+	procCM_Create_DevNode                           = modCFGMGR32.NewProc("CM_Create_DevNodeW")
 	procCM_Create_DevNodeA                          = modCFGMGR32.NewProc("CM_Create_DevNodeA")
-	procCM_Create_DevNodeW                          = modCFGMGR32.NewProc("CM_Create_DevNodeW")
+	procCM_Create_DevNode_Ex                        = modCFGMGR32.NewProc("CM_Create_DevNode_ExW")
 	procCM_Create_DevNode_ExA                       = modCFGMGR32.NewProc("CM_Create_DevNode_ExA")
-	procCM_Create_DevNode_ExW                       = modCFGMGR32.NewProc("CM_Create_DevNode_ExW")
 	procCM_Create_Range_List                        = modCFGMGR32.NewProc("CM_Create_Range_List")
 	procCM_Delete_Class_Key                         = modCFGMGR32.NewProc("CM_Delete_Class_Key")
 	procCM_Delete_Class_Key_Ex                      = modCFGMGR32.NewProc("CM_Delete_Class_Key_Ex")
 	procCM_Delete_DevNode_Key                       = modCFGMGR32.NewProc("CM_Delete_DevNode_Key")
 	procCM_Delete_DevNode_Key_Ex                    = modCFGMGR32.NewProc("CM_Delete_DevNode_Key_Ex")
+	procCM_Delete_Device_Interface_Key              = modCFGMGR32.NewProc("CM_Delete_Device_Interface_KeyW")
 	procCM_Delete_Device_Interface_KeyA             = modCFGMGR32.NewProc("CM_Delete_Device_Interface_KeyA")
-	procCM_Delete_Device_Interface_KeyW             = modCFGMGR32.NewProc("CM_Delete_Device_Interface_KeyW")
+	procCM_Delete_Device_Interface_Key_Ex           = modCFGMGR32.NewProc("CM_Delete_Device_Interface_Key_ExW")
 	procCM_Delete_Device_Interface_Key_ExA          = modCFGMGR32.NewProc("CM_Delete_Device_Interface_Key_ExA")
-	procCM_Delete_Device_Interface_Key_ExW          = modCFGMGR32.NewProc("CM_Delete_Device_Interface_Key_ExW")
 	procCM_Delete_Range                             = modCFGMGR32.NewProc("CM_Delete_Range")
 	procCM_Detect_Resource_Conflict                 = modCFGMGR32.NewProc("CM_Detect_Resource_Conflict")
 	procCM_Detect_Resource_Conflict_Ex              = modCFGMGR32.NewProc("CM_Detect_Resource_Conflict_Ex")
@@ -60,10 +60,10 @@ var (
 	procCM_Enable_DevNode_Ex                        = modCFGMGR32.NewProc("CM_Enable_DevNode_Ex")
 	procCM_Enumerate_Classes                        = modCFGMGR32.NewProc("CM_Enumerate_Classes")
 	procCM_Enumerate_Classes_Ex                     = modCFGMGR32.NewProc("CM_Enumerate_Classes_Ex")
+	procCM_Enumerate_Enumerators                    = modCFGMGR32.NewProc("CM_Enumerate_EnumeratorsW")
 	procCM_Enumerate_EnumeratorsA                   = modCFGMGR32.NewProc("CM_Enumerate_EnumeratorsA")
-	procCM_Enumerate_EnumeratorsW                   = modCFGMGR32.NewProc("CM_Enumerate_EnumeratorsW")
+	procCM_Enumerate_Enumerators_Ex                 = modCFGMGR32.NewProc("CM_Enumerate_Enumerators_ExW")
 	procCM_Enumerate_Enumerators_ExA                = modCFGMGR32.NewProc("CM_Enumerate_Enumerators_ExA")
-	procCM_Enumerate_Enumerators_ExW                = modCFGMGR32.NewProc("CM_Enumerate_Enumerators_ExW")
 	procCM_Find_Range                               = modCFGMGR32.NewProc("CM_Find_Range")
 	procCM_First_Range                              = modCFGMGR32.NewProc("CM_First_Range")
 	procCM_Free_Log_Conf                            = modCFGMGR32.NewProc("CM_Free_Log_Conf")
@@ -76,62 +76,62 @@ var (
 	procCM_Free_Resource_Conflict_Handle            = modCFGMGR32.NewProc("CM_Free_Resource_Conflict_Handle")
 	procCM_Get_Child                                = modCFGMGR32.NewProc("CM_Get_Child")
 	procCM_Get_Child_Ex                             = modCFGMGR32.NewProc("CM_Get_Child_Ex")
+	procCM_Get_Class_Key_Name                       = modCFGMGR32.NewProc("CM_Get_Class_Key_NameW")
 	procCM_Get_Class_Key_NameA                      = modCFGMGR32.NewProc("CM_Get_Class_Key_NameA")
-	procCM_Get_Class_Key_NameW                      = modCFGMGR32.NewProc("CM_Get_Class_Key_NameW")
+	procCM_Get_Class_Key_Name_Ex                    = modCFGMGR32.NewProc("CM_Get_Class_Key_Name_ExW")
 	procCM_Get_Class_Key_Name_ExA                   = modCFGMGR32.NewProc("CM_Get_Class_Key_Name_ExA")
-	procCM_Get_Class_Key_Name_ExW                   = modCFGMGR32.NewProc("CM_Get_Class_Key_Name_ExW")
+	procCM_Get_Class_Name                           = modCFGMGR32.NewProc("CM_Get_Class_NameW")
 	procCM_Get_Class_NameA                          = modCFGMGR32.NewProc("CM_Get_Class_NameA")
-	procCM_Get_Class_NameW                          = modCFGMGR32.NewProc("CM_Get_Class_NameW")
+	procCM_Get_Class_Name_Ex                        = modCFGMGR32.NewProc("CM_Get_Class_Name_ExW")
 	procCM_Get_Class_Name_ExA                       = modCFGMGR32.NewProc("CM_Get_Class_Name_ExA")
-	procCM_Get_Class_Name_ExW                       = modCFGMGR32.NewProc("CM_Get_Class_Name_ExW")
 	procCM_Get_Class_PropertyW                      = modCFGMGR32.NewProc("CM_Get_Class_PropertyW")
 	procCM_Get_Class_Property_ExW                   = modCFGMGR32.NewProc("CM_Get_Class_Property_ExW")
 	procCM_Get_Class_Property_Keys                  = modCFGMGR32.NewProc("CM_Get_Class_Property_Keys")
 	procCM_Get_Class_Property_Keys_Ex               = modCFGMGR32.NewProc("CM_Get_Class_Property_Keys_Ex")
+	procCM_Get_Class_Registry_Property              = modCFGMGR32.NewProc("CM_Get_Class_Registry_PropertyW")
 	procCM_Get_Class_Registry_PropertyA             = modCFGMGR32.NewProc("CM_Get_Class_Registry_PropertyA")
-	procCM_Get_Class_Registry_PropertyW             = modCFGMGR32.NewProc("CM_Get_Class_Registry_PropertyW")
 	procCM_Get_Depth                                = modCFGMGR32.NewProc("CM_Get_Depth")
 	procCM_Get_Depth_Ex                             = modCFGMGR32.NewProc("CM_Get_Depth_Ex")
+	procCM_Get_DevNode_Custom_Property              = modCFGMGR32.NewProc("CM_Get_DevNode_Custom_PropertyW")
 	procCM_Get_DevNode_Custom_PropertyA             = modCFGMGR32.NewProc("CM_Get_DevNode_Custom_PropertyA")
-	procCM_Get_DevNode_Custom_PropertyW             = modCFGMGR32.NewProc("CM_Get_DevNode_Custom_PropertyW")
+	procCM_Get_DevNode_Custom_Property_Ex           = modCFGMGR32.NewProc("CM_Get_DevNode_Custom_Property_ExW")
 	procCM_Get_DevNode_Custom_Property_ExA          = modCFGMGR32.NewProc("CM_Get_DevNode_Custom_Property_ExA")
-	procCM_Get_DevNode_Custom_Property_ExW          = modCFGMGR32.NewProc("CM_Get_DevNode_Custom_Property_ExW")
 	procCM_Get_DevNode_PropertyW                    = modCFGMGR32.NewProc("CM_Get_DevNode_PropertyW")
 	procCM_Get_DevNode_Property_ExW                 = modCFGMGR32.NewProc("CM_Get_DevNode_Property_ExW")
 	procCM_Get_DevNode_Property_Keys                = modCFGMGR32.NewProc("CM_Get_DevNode_Property_Keys")
 	procCM_Get_DevNode_Property_Keys_Ex             = modCFGMGR32.NewProc("CM_Get_DevNode_Property_Keys_Ex")
+	procCM_Get_DevNode_Registry_Property            = modCFGMGR32.NewProc("CM_Get_DevNode_Registry_PropertyW")
 	procCM_Get_DevNode_Registry_PropertyA           = modCFGMGR32.NewProc("CM_Get_DevNode_Registry_PropertyA")
-	procCM_Get_DevNode_Registry_PropertyW           = modCFGMGR32.NewProc("CM_Get_DevNode_Registry_PropertyW")
+	procCM_Get_DevNode_Registry_Property_Ex         = modCFGMGR32.NewProc("CM_Get_DevNode_Registry_Property_ExW")
 	procCM_Get_DevNode_Registry_Property_ExA        = modCFGMGR32.NewProc("CM_Get_DevNode_Registry_Property_ExA")
-	procCM_Get_DevNode_Registry_Property_ExW        = modCFGMGR32.NewProc("CM_Get_DevNode_Registry_Property_ExW")
 	procCM_Get_DevNode_Status                       = modCFGMGR32.NewProc("CM_Get_DevNode_Status")
 	procCM_Get_DevNode_Status_Ex                    = modCFGMGR32.NewProc("CM_Get_DevNode_Status_Ex")
+	procCM_Get_Device_ID                            = modCFGMGR32.NewProc("CM_Get_Device_IDW")
 	procCM_Get_Device_IDA                           = modCFGMGR32.NewProc("CM_Get_Device_IDA")
-	procCM_Get_Device_IDW                           = modCFGMGR32.NewProc("CM_Get_Device_IDW")
+	procCM_Get_Device_ID_Ex                         = modCFGMGR32.NewProc("CM_Get_Device_ID_ExW")
 	procCM_Get_Device_ID_ExA                        = modCFGMGR32.NewProc("CM_Get_Device_ID_ExA")
-	procCM_Get_Device_ID_ExW                        = modCFGMGR32.NewProc("CM_Get_Device_ID_ExW")
+	procCM_Get_Device_ID_List                       = modCFGMGR32.NewProc("CM_Get_Device_ID_ListW")
 	procCM_Get_Device_ID_ListA                      = modCFGMGR32.NewProc("CM_Get_Device_ID_ListA")
-	procCM_Get_Device_ID_ListW                      = modCFGMGR32.NewProc("CM_Get_Device_ID_ListW")
+	procCM_Get_Device_ID_List_Ex                    = modCFGMGR32.NewProc("CM_Get_Device_ID_List_ExW")
 	procCM_Get_Device_ID_List_ExA                   = modCFGMGR32.NewProc("CM_Get_Device_ID_List_ExA")
-	procCM_Get_Device_ID_List_ExW                   = modCFGMGR32.NewProc("CM_Get_Device_ID_List_ExW")
+	procCM_Get_Device_ID_List_Size                  = modCFGMGR32.NewProc("CM_Get_Device_ID_List_SizeW")
 	procCM_Get_Device_ID_List_SizeA                 = modCFGMGR32.NewProc("CM_Get_Device_ID_List_SizeA")
-	procCM_Get_Device_ID_List_SizeW                 = modCFGMGR32.NewProc("CM_Get_Device_ID_List_SizeW")
+	procCM_Get_Device_ID_List_Size_Ex               = modCFGMGR32.NewProc("CM_Get_Device_ID_List_Size_ExW")
 	procCM_Get_Device_ID_List_Size_ExA              = modCFGMGR32.NewProc("CM_Get_Device_ID_List_Size_ExA")
-	procCM_Get_Device_ID_List_Size_ExW              = modCFGMGR32.NewProc("CM_Get_Device_ID_List_Size_ExW")
 	procCM_Get_Device_ID_Size                       = modCFGMGR32.NewProc("CM_Get_Device_ID_Size")
 	procCM_Get_Device_ID_Size_Ex                    = modCFGMGR32.NewProc("CM_Get_Device_ID_Size_Ex")
+	procCM_Get_Device_Interface_Alias               = modCFGMGR32.NewProc("CM_Get_Device_Interface_AliasW")
 	procCM_Get_Device_Interface_AliasA              = modCFGMGR32.NewProc("CM_Get_Device_Interface_AliasA")
-	procCM_Get_Device_Interface_AliasW              = modCFGMGR32.NewProc("CM_Get_Device_Interface_AliasW")
+	procCM_Get_Device_Interface_Alias_Ex            = modCFGMGR32.NewProc("CM_Get_Device_Interface_Alias_ExW")
 	procCM_Get_Device_Interface_Alias_ExA           = modCFGMGR32.NewProc("CM_Get_Device_Interface_Alias_ExA")
-	procCM_Get_Device_Interface_Alias_ExW           = modCFGMGR32.NewProc("CM_Get_Device_Interface_Alias_ExW")
+	procCM_Get_Device_Interface_List                = modCFGMGR32.NewProc("CM_Get_Device_Interface_ListW")
 	procCM_Get_Device_Interface_ListA               = modCFGMGR32.NewProc("CM_Get_Device_Interface_ListA")
-	procCM_Get_Device_Interface_ListW               = modCFGMGR32.NewProc("CM_Get_Device_Interface_ListW")
+	procCM_Get_Device_Interface_List_Ex             = modCFGMGR32.NewProc("CM_Get_Device_Interface_List_ExW")
 	procCM_Get_Device_Interface_List_ExA            = modCFGMGR32.NewProc("CM_Get_Device_Interface_List_ExA")
-	procCM_Get_Device_Interface_List_ExW            = modCFGMGR32.NewProc("CM_Get_Device_Interface_List_ExW")
+	procCM_Get_Device_Interface_List_Size           = modCFGMGR32.NewProc("CM_Get_Device_Interface_List_SizeW")
 	procCM_Get_Device_Interface_List_SizeA          = modCFGMGR32.NewProc("CM_Get_Device_Interface_List_SizeA")
-	procCM_Get_Device_Interface_List_SizeW          = modCFGMGR32.NewProc("CM_Get_Device_Interface_List_SizeW")
+	procCM_Get_Device_Interface_List_Size_Ex        = modCFGMGR32.NewProc("CM_Get_Device_Interface_List_Size_ExW")
 	procCM_Get_Device_Interface_List_Size_ExA       = modCFGMGR32.NewProc("CM_Get_Device_Interface_List_Size_ExA")
-	procCM_Get_Device_Interface_List_Size_ExW       = modCFGMGR32.NewProc("CM_Get_Device_Interface_List_Size_ExW")
 	procCM_Get_Device_Interface_PropertyW           = modCFGMGR32.NewProc("CM_Get_Device_Interface_PropertyW")
 	procCM_Get_Device_Interface_Property_ExW        = modCFGMGR32.NewProc("CM_Get_Device_Interface_Property_ExW")
 	procCM_Get_Device_Interface_Property_KeysW      = modCFGMGR32.NewProc("CM_Get_Device_Interface_Property_KeysW")
@@ -140,14 +140,14 @@ var (
 	procCM_Get_First_Log_Conf_Ex                    = modCFGMGR32.NewProc("CM_Get_First_Log_Conf_Ex")
 	procCM_Get_Global_State                         = modCFGMGR32.NewProc("CM_Get_Global_State")
 	procCM_Get_Global_State_Ex                      = modCFGMGR32.NewProc("CM_Get_Global_State_Ex")
+	procCM_Get_HW_Prof_Flags                        = modCFGMGR32.NewProc("CM_Get_HW_Prof_FlagsW")
 	procCM_Get_HW_Prof_FlagsA                       = modCFGMGR32.NewProc("CM_Get_HW_Prof_FlagsA")
-	procCM_Get_HW_Prof_FlagsW                       = modCFGMGR32.NewProc("CM_Get_HW_Prof_FlagsW")
+	procCM_Get_HW_Prof_Flags_Ex                     = modCFGMGR32.NewProc("CM_Get_HW_Prof_Flags_ExW")
 	procCM_Get_HW_Prof_Flags_ExA                    = modCFGMGR32.NewProc("CM_Get_HW_Prof_Flags_ExA")
-	procCM_Get_HW_Prof_Flags_ExW                    = modCFGMGR32.NewProc("CM_Get_HW_Prof_Flags_ExW")
+	procCM_Get_Hardware_Profile_Info                = modCFGMGR32.NewProc("CM_Get_Hardware_Profile_InfoW")
 	procCM_Get_Hardware_Profile_InfoA               = modCFGMGR32.NewProc("CM_Get_Hardware_Profile_InfoA")
-	procCM_Get_Hardware_Profile_InfoW               = modCFGMGR32.NewProc("CM_Get_Hardware_Profile_InfoW")
+	procCM_Get_Hardware_Profile_Info_Ex             = modCFGMGR32.NewProc("CM_Get_Hardware_Profile_Info_ExW")
 	procCM_Get_Hardware_Profile_Info_ExA            = modCFGMGR32.NewProc("CM_Get_Hardware_Profile_Info_ExA")
-	procCM_Get_Hardware_Profile_Info_ExW            = modCFGMGR32.NewProc("CM_Get_Hardware_Profile_Info_ExW")
 	procCM_Get_Log_Conf_Priority                    = modCFGMGR32.NewProc("CM_Get_Log_Conf_Priority")
 	procCM_Get_Log_Conf_Priority_Ex                 = modCFGMGR32.NewProc("CM_Get_Log_Conf_Priority_Ex")
 	procCM_Get_Next_Log_Conf                        = modCFGMGR32.NewProc("CM_Get_Next_Log_Conf")
@@ -161,8 +161,8 @@ var (
 	procCM_Get_Res_Des_Data_Size                    = modCFGMGR32.NewProc("CM_Get_Res_Des_Data_Size")
 	procCM_Get_Res_Des_Data_Size_Ex                 = modCFGMGR32.NewProc("CM_Get_Res_Des_Data_Size_Ex")
 	procCM_Get_Resource_Conflict_Count              = modCFGMGR32.NewProc("CM_Get_Resource_Conflict_Count")
+	procCM_Get_Resource_Conflict_Details            = modCFGMGR32.NewProc("CM_Get_Resource_Conflict_DetailsW")
 	procCM_Get_Resource_Conflict_DetailsA           = modCFGMGR32.NewProc("CM_Get_Resource_Conflict_DetailsA")
-	procCM_Get_Resource_Conflict_DetailsW           = modCFGMGR32.NewProc("CM_Get_Resource_Conflict_DetailsW")
 	procCM_Get_Sibling                              = modCFGMGR32.NewProc("CM_Get_Sibling")
 	procCM_Get_Sibling_Ex                           = modCFGMGR32.NewProc("CM_Get_Sibling_Ex")
 	procCM_Get_Version                              = modCFGMGR32.NewProc("CM_Get_Version")
@@ -173,10 +173,10 @@ var (
 	procCM_Is_Dock_Station_Present_Ex               = modCFGMGR32.NewProc("CM_Is_Dock_Station_Present_Ex")
 	procCM_Is_Version_Available                     = modCFGMGR32.NewProc("CM_Is_Version_Available")
 	procCM_Is_Version_Available_Ex                  = modCFGMGR32.NewProc("CM_Is_Version_Available_Ex")
+	procCM_Locate_DevNode                           = modCFGMGR32.NewProc("CM_Locate_DevNodeW")
 	procCM_Locate_DevNodeA                          = modCFGMGR32.NewProc("CM_Locate_DevNodeA")
-	procCM_Locate_DevNodeW                          = modCFGMGR32.NewProc("CM_Locate_DevNodeW")
+	procCM_Locate_DevNode_Ex                        = modCFGMGR32.NewProc("CM_Locate_DevNode_ExW")
 	procCM_Locate_DevNode_ExA                       = modCFGMGR32.NewProc("CM_Locate_DevNode_ExA")
-	procCM_Locate_DevNode_ExW                       = modCFGMGR32.NewProc("CM_Locate_DevNode_ExW")
 	procCM_MapCrToWin32Err                          = modCFGMGR32.NewProc("CM_MapCrToWin32Err")
 	procCM_Merge_Range_List                         = modCFGMGR32.NewProc("CM_Merge_Range_List")
 	procCM_Modify_Res_Des                           = modCFGMGR32.NewProc("CM_Modify_Res_Des")
@@ -184,20 +184,20 @@ var (
 	procCM_Move_DevNode                             = modCFGMGR32.NewProc("CM_Move_DevNode")
 	procCM_Move_DevNode_Ex                          = modCFGMGR32.NewProc("CM_Move_DevNode_Ex")
 	procCM_Next_Range                               = modCFGMGR32.NewProc("CM_Next_Range")
+	procCM_Open_Class_Key                           = modCFGMGR32.NewProc("CM_Open_Class_KeyW")
 	procCM_Open_Class_KeyA                          = modCFGMGR32.NewProc("CM_Open_Class_KeyA")
-	procCM_Open_Class_KeyW                          = modCFGMGR32.NewProc("CM_Open_Class_KeyW")
+	procCM_Open_Class_Key_Ex                        = modCFGMGR32.NewProc("CM_Open_Class_Key_ExW")
 	procCM_Open_Class_Key_ExA                       = modCFGMGR32.NewProc("CM_Open_Class_Key_ExA")
-	procCM_Open_Class_Key_ExW                       = modCFGMGR32.NewProc("CM_Open_Class_Key_ExW")
 	procCM_Open_DevNode_Key                         = modCFGMGR32.NewProc("CM_Open_DevNode_Key")
 	procCM_Open_DevNode_Key_Ex                      = modCFGMGR32.NewProc("CM_Open_DevNode_Key_Ex")
+	procCM_Open_Device_Interface_Key                = modCFGMGR32.NewProc("CM_Open_Device_Interface_KeyW")
 	procCM_Open_Device_Interface_KeyA               = modCFGMGR32.NewProc("CM_Open_Device_Interface_KeyA")
-	procCM_Open_Device_Interface_KeyW               = modCFGMGR32.NewProc("CM_Open_Device_Interface_KeyW")
+	procCM_Open_Device_Interface_Key_Ex             = modCFGMGR32.NewProc("CM_Open_Device_Interface_Key_ExW")
 	procCM_Open_Device_Interface_Key_ExA            = modCFGMGR32.NewProc("CM_Open_Device_Interface_Key_ExA")
-	procCM_Open_Device_Interface_Key_ExW            = modCFGMGR32.NewProc("CM_Open_Device_Interface_Key_ExW")
+	procCM_Query_And_Remove_SubTree                 = modCFGMGR32.NewProc("CM_Query_And_Remove_SubTreeW")
 	procCM_Query_And_Remove_SubTreeA                = modCFGMGR32.NewProc("CM_Query_And_Remove_SubTreeA")
-	procCM_Query_And_Remove_SubTreeW                = modCFGMGR32.NewProc("CM_Query_And_Remove_SubTreeW")
+	procCM_Query_And_Remove_SubTree_Ex              = modCFGMGR32.NewProc("CM_Query_And_Remove_SubTree_ExW")
 	procCM_Query_And_Remove_SubTree_ExA             = modCFGMGR32.NewProc("CM_Query_And_Remove_SubTree_ExA")
-	procCM_Query_And_Remove_SubTree_ExW             = modCFGMGR32.NewProc("CM_Query_And_Remove_SubTree_ExW")
 	procCM_Query_Arbitrator_Free_Data               = modCFGMGR32.NewProc("CM_Query_Arbitrator_Free_Data")
 	procCM_Query_Arbitrator_Free_Data_Ex            = modCFGMGR32.NewProc("CM_Query_Arbitrator_Free_Data_Ex")
 	procCM_Query_Arbitrator_Free_Size               = modCFGMGR32.NewProc("CM_Query_Arbitrator_Free_Size")
@@ -209,124 +209,124 @@ var (
 	procCM_Reenumerate_DevNode_Ex                   = modCFGMGR32.NewProc("CM_Reenumerate_DevNode_Ex")
 	procCM_Register_Device_Driver                   = modCFGMGR32.NewProc("CM_Register_Device_Driver")
 	procCM_Register_Device_Driver_Ex                = modCFGMGR32.NewProc("CM_Register_Device_Driver_Ex")
+	procCM_Register_Device_Interface                = modCFGMGR32.NewProc("CM_Register_Device_InterfaceW")
 	procCM_Register_Device_InterfaceA               = modCFGMGR32.NewProc("CM_Register_Device_InterfaceA")
-	procCM_Register_Device_InterfaceW               = modCFGMGR32.NewProc("CM_Register_Device_InterfaceW")
+	procCM_Register_Device_Interface_Ex             = modCFGMGR32.NewProc("CM_Register_Device_Interface_ExW")
 	procCM_Register_Device_Interface_ExA            = modCFGMGR32.NewProc("CM_Register_Device_Interface_ExA")
-	procCM_Register_Device_Interface_ExW            = modCFGMGR32.NewProc("CM_Register_Device_Interface_ExW")
 	procCM_Register_Notification                    = modCFGMGR32.NewProc("CM_Register_Notification")
 	procCM_Remove_SubTree                           = modCFGMGR32.NewProc("CM_Remove_SubTree")
 	procCM_Remove_SubTree_Ex                        = modCFGMGR32.NewProc("CM_Remove_SubTree_Ex")
+	procCM_Request_Device_Eject                     = modCFGMGR32.NewProc("CM_Request_Device_EjectW")
 	procCM_Request_Device_EjectA                    = modCFGMGR32.NewProc("CM_Request_Device_EjectA")
-	procCM_Request_Device_EjectW                    = modCFGMGR32.NewProc("CM_Request_Device_EjectW")
+	procCM_Request_Device_Eject_Ex                  = modCFGMGR32.NewProc("CM_Request_Device_Eject_ExW")
 	procCM_Request_Device_Eject_ExA                 = modCFGMGR32.NewProc("CM_Request_Device_Eject_ExA")
-	procCM_Request_Device_Eject_ExW                 = modCFGMGR32.NewProc("CM_Request_Device_Eject_ExW")
 	procCM_Request_Eject_PC                         = modCFGMGR32.NewProc("CM_Request_Eject_PC")
 	procCM_Request_Eject_PC_Ex                      = modCFGMGR32.NewProc("CM_Request_Eject_PC_Ex")
 	procCM_Run_Detection                            = modCFGMGR32.NewProc("CM_Run_Detection")
 	procCM_Run_Detection_Ex                         = modCFGMGR32.NewProc("CM_Run_Detection_Ex")
 	procCM_Set_Class_PropertyW                      = modCFGMGR32.NewProc("CM_Set_Class_PropertyW")
 	procCM_Set_Class_Property_ExW                   = modCFGMGR32.NewProc("CM_Set_Class_Property_ExW")
+	procCM_Set_Class_Registry_Property              = modCFGMGR32.NewProc("CM_Set_Class_Registry_PropertyW")
 	procCM_Set_Class_Registry_PropertyA             = modCFGMGR32.NewProc("CM_Set_Class_Registry_PropertyA")
-	procCM_Set_Class_Registry_PropertyW             = modCFGMGR32.NewProc("CM_Set_Class_Registry_PropertyW")
 	procCM_Set_DevNode_Problem                      = modCFGMGR32.NewProc("CM_Set_DevNode_Problem")
 	procCM_Set_DevNode_Problem_Ex                   = modCFGMGR32.NewProc("CM_Set_DevNode_Problem_Ex")
 	procCM_Set_DevNode_PropertyW                    = modCFGMGR32.NewProc("CM_Set_DevNode_PropertyW")
 	procCM_Set_DevNode_Property_ExW                 = modCFGMGR32.NewProc("CM_Set_DevNode_Property_ExW")
+	procCM_Set_DevNode_Registry_Property            = modCFGMGR32.NewProc("CM_Set_DevNode_Registry_PropertyW")
 	procCM_Set_DevNode_Registry_PropertyA           = modCFGMGR32.NewProc("CM_Set_DevNode_Registry_PropertyA")
-	procCM_Set_DevNode_Registry_PropertyW           = modCFGMGR32.NewProc("CM_Set_DevNode_Registry_PropertyW")
+	procCM_Set_DevNode_Registry_Property_Ex         = modCFGMGR32.NewProc("CM_Set_DevNode_Registry_Property_ExW")
 	procCM_Set_DevNode_Registry_Property_ExA        = modCFGMGR32.NewProc("CM_Set_DevNode_Registry_Property_ExA")
-	procCM_Set_DevNode_Registry_Property_ExW        = modCFGMGR32.NewProc("CM_Set_DevNode_Registry_Property_ExW")
 	procCM_Set_Device_Interface_PropertyW           = modCFGMGR32.NewProc("CM_Set_Device_Interface_PropertyW")
 	procCM_Set_Device_Interface_Property_ExW        = modCFGMGR32.NewProc("CM_Set_Device_Interface_Property_ExW")
 	procCM_Set_HW_Prof                              = modCFGMGR32.NewProc("CM_Set_HW_Prof")
 	procCM_Set_HW_Prof_Ex                           = modCFGMGR32.NewProc("CM_Set_HW_Prof_Ex")
+	procCM_Set_HW_Prof_Flags                        = modCFGMGR32.NewProc("CM_Set_HW_Prof_FlagsW")
 	procCM_Set_HW_Prof_FlagsA                       = modCFGMGR32.NewProc("CM_Set_HW_Prof_FlagsA")
-	procCM_Set_HW_Prof_FlagsW                       = modCFGMGR32.NewProc("CM_Set_HW_Prof_FlagsW")
+	procCM_Set_HW_Prof_Flags_Ex                     = modCFGMGR32.NewProc("CM_Set_HW_Prof_Flags_ExW")
 	procCM_Set_HW_Prof_Flags_ExA                    = modCFGMGR32.NewProc("CM_Set_HW_Prof_Flags_ExA")
-	procCM_Set_HW_Prof_Flags_ExW                    = modCFGMGR32.NewProc("CM_Set_HW_Prof_Flags_ExW")
 	procCM_Setup_DevNode                            = modCFGMGR32.NewProc("CM_Setup_DevNode")
 	procCM_Setup_DevNode_Ex                         = modCFGMGR32.NewProc("CM_Setup_DevNode_Ex")
 	procCM_Test_Range_Available                     = modCFGMGR32.NewProc("CM_Test_Range_Available")
 	procCM_Uninstall_DevNode                        = modCFGMGR32.NewProc("CM_Uninstall_DevNode")
 	procCM_Uninstall_DevNode_Ex                     = modCFGMGR32.NewProc("CM_Uninstall_DevNode_Ex")
+	procCM_Unregister_Device_Interface              = modCFGMGR32.NewProc("CM_Unregister_Device_InterfaceW")
 	procCM_Unregister_Device_InterfaceA             = modCFGMGR32.NewProc("CM_Unregister_Device_InterfaceA")
-	procCM_Unregister_Device_InterfaceW             = modCFGMGR32.NewProc("CM_Unregister_Device_InterfaceW")
+	procCM_Unregister_Device_Interface_Ex           = modCFGMGR32.NewProc("CM_Unregister_Device_Interface_ExW")
 	procCM_Unregister_Device_Interface_ExA          = modCFGMGR32.NewProc("CM_Unregister_Device_Interface_ExA")
-	procCM_Unregister_Device_Interface_ExW          = modCFGMGR32.NewProc("CM_Unregister_Device_Interface_ExW")
 	procCM_Unregister_Notification                  = modCFGMGR32.NewProc("CM_Unregister_Notification")
 	procDiInstallDevice                             = modnewdev.NewProc("DiInstallDevice")
+	procDiInstallDriver                             = modnewdev.NewProc("DiInstallDriverW")
 	procDiInstallDriverA                            = modnewdev.NewProc("DiInstallDriverA")
-	procDiInstallDriverW                            = modnewdev.NewProc("DiInstallDriverW")
 	procDiRollbackDriver                            = modnewdev.NewProc("DiRollbackDriver")
 	procDiShowUpdateDevice                          = modnewdev.NewProc("DiShowUpdateDevice")
 	procDiShowUpdateDriver                          = modnewdev.NewProc("DiShowUpdateDriver")
 	procDiUninstallDevice                           = modnewdev.NewProc("DiUninstallDevice")
+	procDiUninstallDriver                           = modnewdev.NewProc("DiUninstallDriverW")
 	procDiUninstallDriverA                          = modnewdev.NewProc("DiUninstallDriverA")
-	procDiUninstallDriverW                          = modnewdev.NewProc("DiUninstallDriverW")
+	procUpdateDriverForPlugAndPlayDevices           = modnewdev.NewProc("UpdateDriverForPlugAndPlayDevicesW")
 	procUpdateDriverForPlugAndPlayDevicesA          = modnewdev.NewProc("UpdateDriverForPlugAndPlayDevicesA")
-	procUpdateDriverForPlugAndPlayDevicesW          = modnewdev.NewProc("UpdateDriverForPlugAndPlayDevicesW")
+	procInstallHinfSection                          = modSETUPAPI.NewProc("InstallHinfSectionW")
 	procInstallHinfSectionA                         = modSETUPAPI.NewProc("InstallHinfSectionA")
-	procInstallHinfSectionW                         = modSETUPAPI.NewProc("InstallHinfSectionW")
+	procSetupAddInstallSectionToDiskSpaceList       = modSETUPAPI.NewProc("SetupAddInstallSectionToDiskSpaceListW")
 	procSetupAddInstallSectionToDiskSpaceListA      = modSETUPAPI.NewProc("SetupAddInstallSectionToDiskSpaceListA")
-	procSetupAddInstallSectionToDiskSpaceListW      = modSETUPAPI.NewProc("SetupAddInstallSectionToDiskSpaceListW")
+	procSetupAddSectionToDiskSpaceList              = modSETUPAPI.NewProc("SetupAddSectionToDiskSpaceListW")
 	procSetupAddSectionToDiskSpaceListA             = modSETUPAPI.NewProc("SetupAddSectionToDiskSpaceListA")
-	procSetupAddSectionToDiskSpaceListW             = modSETUPAPI.NewProc("SetupAddSectionToDiskSpaceListW")
+	procSetupAddToDiskSpaceList                     = modSETUPAPI.NewProc("SetupAddToDiskSpaceListW")
 	procSetupAddToDiskSpaceListA                    = modSETUPAPI.NewProc("SetupAddToDiskSpaceListA")
-	procSetupAddToDiskSpaceListW                    = modSETUPAPI.NewProc("SetupAddToDiskSpaceListW")
+	procSetupAddToSourceList                        = modSETUPAPI.NewProc("SetupAddToSourceListW")
 	procSetupAddToSourceListA                       = modSETUPAPI.NewProc("SetupAddToSourceListA")
-	procSetupAddToSourceListW                       = modSETUPAPI.NewProc("SetupAddToSourceListW")
+	procSetupAdjustDiskSpaceList                    = modSETUPAPI.NewProc("SetupAdjustDiskSpaceListW")
 	procSetupAdjustDiskSpaceListA                   = modSETUPAPI.NewProc("SetupAdjustDiskSpaceListA")
-	procSetupAdjustDiskSpaceListW                   = modSETUPAPI.NewProc("SetupAdjustDiskSpaceListW")
+	procSetupBackupError                            = modSETUPAPI.NewProc("SetupBackupErrorW")
 	procSetupBackupErrorA                           = modSETUPAPI.NewProc("SetupBackupErrorA")
-	procSetupBackupErrorW                           = modSETUPAPI.NewProc("SetupBackupErrorW")
 	procSetupCancelTemporarySourceList              = modSETUPAPI.NewProc("SetupCancelTemporarySourceList")
 	procSetupCloseFileQueue                         = modSETUPAPI.NewProc("SetupCloseFileQueue")
 	procSetupCloseInfFile                           = modSETUPAPI.NewProc("SetupCloseInfFile")
 	procSetupCloseLog                               = modSETUPAPI.NewProc("SetupCloseLog")
+	procSetupCommitFileQueue                        = modSETUPAPI.NewProc("SetupCommitFileQueueW")
 	procSetupCommitFileQueueA                       = modSETUPAPI.NewProc("SetupCommitFileQueueA")
-	procSetupCommitFileQueueW                       = modSETUPAPI.NewProc("SetupCommitFileQueueW")
+	procSetupConfigureWmiFromInfSection             = modSETUPAPI.NewProc("SetupConfigureWmiFromInfSectionW")
 	procSetupConfigureWmiFromInfSectionA            = modSETUPAPI.NewProc("SetupConfigureWmiFromInfSectionA")
-	procSetupConfigureWmiFromInfSectionW            = modSETUPAPI.NewProc("SetupConfigureWmiFromInfSectionW")
+	procSetupCopyError                              = modSETUPAPI.NewProc("SetupCopyErrorW")
 	procSetupCopyErrorA                             = modSETUPAPI.NewProc("SetupCopyErrorA")
-	procSetupCopyErrorW                             = modSETUPAPI.NewProc("SetupCopyErrorW")
+	procSetupCopyOEMInf                             = modSETUPAPI.NewProc("SetupCopyOEMInfW")
 	procSetupCopyOEMInfA                            = modSETUPAPI.NewProc("SetupCopyOEMInfA")
-	procSetupCopyOEMInfW                            = modSETUPAPI.NewProc("SetupCopyOEMInfW")
+	procSetupCreateDiskSpaceList                    = modSETUPAPI.NewProc("SetupCreateDiskSpaceListW")
 	procSetupCreateDiskSpaceListA                   = modSETUPAPI.NewProc("SetupCreateDiskSpaceListA")
-	procSetupCreateDiskSpaceListW                   = modSETUPAPI.NewProc("SetupCreateDiskSpaceListW")
+	procSetupDecompressOrCopyFile                   = modSETUPAPI.NewProc("SetupDecompressOrCopyFileW")
 	procSetupDecompressOrCopyFileA                  = modSETUPAPI.NewProc("SetupDecompressOrCopyFileA")
-	procSetupDecompressOrCopyFileW                  = modSETUPAPI.NewProc("SetupDecompressOrCopyFileW")
+	procSetupDefaultQueueCallback                   = modSETUPAPI.NewProc("SetupDefaultQueueCallbackW")
 	procSetupDefaultQueueCallbackA                  = modSETUPAPI.NewProc("SetupDefaultQueueCallbackA")
-	procSetupDefaultQueueCallbackW                  = modSETUPAPI.NewProc("SetupDefaultQueueCallbackW")
+	procSetupDeleteError                            = modSETUPAPI.NewProc("SetupDeleteErrorW")
 	procSetupDeleteErrorA                           = modSETUPAPI.NewProc("SetupDeleteErrorA")
-	procSetupDeleteErrorW                           = modSETUPAPI.NewProc("SetupDeleteErrorW")
 	procSetupDestroyDiskSpaceList                   = modSETUPAPI.NewProc("SetupDestroyDiskSpaceList")
 	procSetupDiAskForOEMDisk                        = modSETUPAPI.NewProc("SetupDiAskForOEMDisk")
 	procSetupDiBuildClassInfoList                   = modSETUPAPI.NewProc("SetupDiBuildClassInfoList")
+	procSetupDiBuildClassInfoListEx                 = modSETUPAPI.NewProc("SetupDiBuildClassInfoListExW")
 	procSetupDiBuildClassInfoListExA                = modSETUPAPI.NewProc("SetupDiBuildClassInfoListExA")
-	procSetupDiBuildClassInfoListExW                = modSETUPAPI.NewProc("SetupDiBuildClassInfoListExW")
 	procSetupDiBuildDriverInfoList                  = modSETUPAPI.NewProc("SetupDiBuildDriverInfoList")
 	procSetupDiCallClassInstaller                   = modSETUPAPI.NewProc("SetupDiCallClassInstaller")
 	procSetupDiCancelDriverInfoSearch               = modSETUPAPI.NewProc("SetupDiCancelDriverInfoSearch")
 	procSetupDiChangeState                          = modSETUPAPI.NewProc("SetupDiChangeState")
+	procSetupDiClassGuidsFromName                   = modSETUPAPI.NewProc("SetupDiClassGuidsFromNameW")
 	procSetupDiClassGuidsFromNameA                  = modSETUPAPI.NewProc("SetupDiClassGuidsFromNameA")
+	procSetupDiClassGuidsFromNameEx                 = modSETUPAPI.NewProc("SetupDiClassGuidsFromNameExW")
 	procSetupDiClassGuidsFromNameExA                = modSETUPAPI.NewProc("SetupDiClassGuidsFromNameExA")
-	procSetupDiClassGuidsFromNameExW                = modSETUPAPI.NewProc("SetupDiClassGuidsFromNameExW")
-	procSetupDiClassGuidsFromNameW                  = modSETUPAPI.NewProc("SetupDiClassGuidsFromNameW")
+	procSetupDiClassNameFromGuid                    = modSETUPAPI.NewProc("SetupDiClassNameFromGuidW")
 	procSetupDiClassNameFromGuidA                   = modSETUPAPI.NewProc("SetupDiClassNameFromGuidA")
+	procSetupDiClassNameFromGuidEx                  = modSETUPAPI.NewProc("SetupDiClassNameFromGuidExW")
 	procSetupDiClassNameFromGuidExA                 = modSETUPAPI.NewProc("SetupDiClassNameFromGuidExA")
-	procSetupDiClassNameFromGuidExW                 = modSETUPAPI.NewProc("SetupDiClassNameFromGuidExW")
-	procSetupDiClassNameFromGuidW                   = modSETUPAPI.NewProc("SetupDiClassNameFromGuidW")
+	procSetupDiCreateDevRegKey                      = modSETUPAPI.NewProc("SetupDiCreateDevRegKeyW")
 	procSetupDiCreateDevRegKeyA                     = modSETUPAPI.NewProc("SetupDiCreateDevRegKeyA")
-	procSetupDiCreateDevRegKeyW                     = modSETUPAPI.NewProc("SetupDiCreateDevRegKeyW")
+	procSetupDiCreateDeviceInfo                     = modSETUPAPI.NewProc("SetupDiCreateDeviceInfoW")
 	procSetupDiCreateDeviceInfoA                    = modSETUPAPI.NewProc("SetupDiCreateDeviceInfoA")
 	procSetupDiCreateDeviceInfoList                 = modSETUPAPI.NewProc("SetupDiCreateDeviceInfoList")
+	procSetupDiCreateDeviceInfoListEx               = modSETUPAPI.NewProc("SetupDiCreateDeviceInfoListExW")
 	procSetupDiCreateDeviceInfoListExA              = modSETUPAPI.NewProc("SetupDiCreateDeviceInfoListExA")
-	procSetupDiCreateDeviceInfoListExW              = modSETUPAPI.NewProc("SetupDiCreateDeviceInfoListExW")
-	procSetupDiCreateDeviceInfoW                    = modSETUPAPI.NewProc("SetupDiCreateDeviceInfoW")
+	procSetupDiCreateDeviceInterface                = modSETUPAPI.NewProc("SetupDiCreateDeviceInterfaceW")
 	procSetupDiCreateDeviceInterfaceA               = modSETUPAPI.NewProc("SetupDiCreateDeviceInterfaceA")
+	procSetupDiCreateDeviceInterfaceRegKey          = modSETUPAPI.NewProc("SetupDiCreateDeviceInterfaceRegKeyW")
 	procSetupDiCreateDeviceInterfaceRegKeyA         = modSETUPAPI.NewProc("SetupDiCreateDeviceInterfaceRegKeyA")
-	procSetupDiCreateDeviceInterfaceRegKeyW         = modSETUPAPI.NewProc("SetupDiCreateDeviceInterfaceRegKeyW")
-	procSetupDiCreateDeviceInterfaceW               = modSETUPAPI.NewProc("SetupDiCreateDeviceInterfaceW")
 	procSetupDiDeleteDevRegKey                      = modSETUPAPI.NewProc("SetupDiDeleteDevRegKey")
 	procSetupDiDeleteDeviceInfo                     = modSETUPAPI.NewProc("SetupDiDeleteDeviceInfo")
 	procSetupDiDeleteDeviceInterfaceData            = modSETUPAPI.NewProc("SetupDiDeleteDeviceInterfaceData")
@@ -336,90 +336,90 @@ var (
 	procSetupDiDestroyDriverInfoList                = modSETUPAPI.NewProc("SetupDiDestroyDriverInfoList")
 	procSetupDiEnumDeviceInfo                       = modSETUPAPI.NewProc("SetupDiEnumDeviceInfo")
 	procSetupDiEnumDeviceInterfaces                 = modSETUPAPI.NewProc("SetupDiEnumDeviceInterfaces")
+	procSetupDiEnumDriverInfo                       = modSETUPAPI.NewProc("SetupDiEnumDriverInfoW")
 	procSetupDiEnumDriverInfoA                      = modSETUPAPI.NewProc("SetupDiEnumDriverInfoA")
-	procSetupDiEnumDriverInfoW                      = modSETUPAPI.NewProc("SetupDiEnumDriverInfoW")
+	procSetupDiGetActualModelsSection               = modSETUPAPI.NewProc("SetupDiGetActualModelsSectionW")
 	procSetupDiGetActualModelsSectionA              = modSETUPAPI.NewProc("SetupDiGetActualModelsSectionA")
-	procSetupDiGetActualModelsSectionW              = modSETUPAPI.NewProc("SetupDiGetActualModelsSectionW")
+	procSetupDiGetActualSectionToInstall            = modSETUPAPI.NewProc("SetupDiGetActualSectionToInstallW")
 	procSetupDiGetActualSectionToInstallA           = modSETUPAPI.NewProc("SetupDiGetActualSectionToInstallA")
+	procSetupDiGetActualSectionToInstallEx          = modSETUPAPI.NewProc("SetupDiGetActualSectionToInstallExW")
 	procSetupDiGetActualSectionToInstallExA         = modSETUPAPI.NewProc("SetupDiGetActualSectionToInstallExA")
-	procSetupDiGetActualSectionToInstallExW         = modSETUPAPI.NewProc("SetupDiGetActualSectionToInstallExW")
-	procSetupDiGetActualSectionToInstallW           = modSETUPAPI.NewProc("SetupDiGetActualSectionToInstallW")
 	procSetupDiGetClassBitmapIndex                  = modSETUPAPI.NewProc("SetupDiGetClassBitmapIndex")
+	procSetupDiGetClassDescription                  = modSETUPAPI.NewProc("SetupDiGetClassDescriptionW")
 	procSetupDiGetClassDescriptionA                 = modSETUPAPI.NewProc("SetupDiGetClassDescriptionA")
+	procSetupDiGetClassDescriptionEx                = modSETUPAPI.NewProc("SetupDiGetClassDescriptionExW")
 	procSetupDiGetClassDescriptionExA               = modSETUPAPI.NewProc("SetupDiGetClassDescriptionExA")
-	procSetupDiGetClassDescriptionExW               = modSETUPAPI.NewProc("SetupDiGetClassDescriptionExW")
-	procSetupDiGetClassDescriptionW                 = modSETUPAPI.NewProc("SetupDiGetClassDescriptionW")
+	procSetupDiGetClassDevPropertySheets            = modSETUPAPI.NewProc("SetupDiGetClassDevPropertySheetsW")
 	procSetupDiGetClassDevPropertySheetsA           = modSETUPAPI.NewProc("SetupDiGetClassDevPropertySheetsA")
-	procSetupDiGetClassDevPropertySheetsW           = modSETUPAPI.NewProc("SetupDiGetClassDevPropertySheetsW")
+	procSetupDiGetClassDevs                         = modSETUPAPI.NewProc("SetupDiGetClassDevsW")
 	procSetupDiGetClassDevsA                        = modSETUPAPI.NewProc("SetupDiGetClassDevsA")
+	procSetupDiGetClassDevsEx                       = modSETUPAPI.NewProc("SetupDiGetClassDevsExW")
 	procSetupDiGetClassDevsExA                      = modSETUPAPI.NewProc("SetupDiGetClassDevsExA")
-	procSetupDiGetClassDevsExW                      = modSETUPAPI.NewProc("SetupDiGetClassDevsExW")
-	procSetupDiGetClassDevsW                        = modSETUPAPI.NewProc("SetupDiGetClassDevsW")
 	procSetupDiGetClassImageIndex                   = modSETUPAPI.NewProc("SetupDiGetClassImageIndex")
 	procSetupDiGetClassImageList                    = modSETUPAPI.NewProc("SetupDiGetClassImageList")
+	procSetupDiGetClassImageListEx                  = modSETUPAPI.NewProc("SetupDiGetClassImageListExW")
 	procSetupDiGetClassImageListExA                 = modSETUPAPI.NewProc("SetupDiGetClassImageListExA")
-	procSetupDiGetClassImageListExW                 = modSETUPAPI.NewProc("SetupDiGetClassImageListExW")
+	procSetupDiGetClassInstallParams                = modSETUPAPI.NewProc("SetupDiGetClassInstallParamsW")
 	procSetupDiGetClassInstallParamsA               = modSETUPAPI.NewProc("SetupDiGetClassInstallParamsA")
-	procSetupDiGetClassInstallParamsW               = modSETUPAPI.NewProc("SetupDiGetClassInstallParamsW")
 	procSetupDiGetClassPropertyExW                  = modSETUPAPI.NewProc("SetupDiGetClassPropertyExW")
 	procSetupDiGetClassPropertyKeys                 = modSETUPAPI.NewProc("SetupDiGetClassPropertyKeys")
 	procSetupDiGetClassPropertyKeysExW              = modSETUPAPI.NewProc("SetupDiGetClassPropertyKeysExW")
 	procSetupDiGetClassPropertyW                    = modSETUPAPI.NewProc("SetupDiGetClassPropertyW")
+	procSetupDiGetClassRegistryProperty             = modSETUPAPI.NewProc("SetupDiGetClassRegistryPropertyW")
 	procSetupDiGetClassRegistryPropertyA            = modSETUPAPI.NewProc("SetupDiGetClassRegistryPropertyA")
-	procSetupDiGetClassRegistryPropertyW            = modSETUPAPI.NewProc("SetupDiGetClassRegistryPropertyW")
+	procSetupDiGetCustomDeviceProperty              = modSETUPAPI.NewProc("SetupDiGetCustomDevicePropertyW")
 	procSetupDiGetCustomDevicePropertyA             = modSETUPAPI.NewProc("SetupDiGetCustomDevicePropertyA")
-	procSetupDiGetCustomDevicePropertyW             = modSETUPAPI.NewProc("SetupDiGetCustomDevicePropertyW")
 	procSetupDiGetDeviceInfoListClass               = modSETUPAPI.NewProc("SetupDiGetDeviceInfoListClass")
+	procSetupDiGetDeviceInfoListDetail              = modSETUPAPI.NewProc("SetupDiGetDeviceInfoListDetailW")
 	procSetupDiGetDeviceInfoListDetailA             = modSETUPAPI.NewProc("SetupDiGetDeviceInfoListDetailA")
-	procSetupDiGetDeviceInfoListDetailW             = modSETUPAPI.NewProc("SetupDiGetDeviceInfoListDetailW")
+	procSetupDiGetDeviceInstallParams               = modSETUPAPI.NewProc("SetupDiGetDeviceInstallParamsW")
 	procSetupDiGetDeviceInstallParamsA              = modSETUPAPI.NewProc("SetupDiGetDeviceInstallParamsA")
-	procSetupDiGetDeviceInstallParamsW              = modSETUPAPI.NewProc("SetupDiGetDeviceInstallParamsW")
+	procSetupDiGetDeviceInstanceId                  = modSETUPAPI.NewProc("SetupDiGetDeviceInstanceIdW")
 	procSetupDiGetDeviceInstanceIdA                 = modSETUPAPI.NewProc("SetupDiGetDeviceInstanceIdA")
-	procSetupDiGetDeviceInstanceIdW                 = modSETUPAPI.NewProc("SetupDiGetDeviceInstanceIdW")
 	procSetupDiGetDeviceInterfaceAlias              = modSETUPAPI.NewProc("SetupDiGetDeviceInterfaceAlias")
+	procSetupDiGetDeviceInterfaceDetail             = modSETUPAPI.NewProc("SetupDiGetDeviceInterfaceDetailW")
 	procSetupDiGetDeviceInterfaceDetailA            = modSETUPAPI.NewProc("SetupDiGetDeviceInterfaceDetailA")
-	procSetupDiGetDeviceInterfaceDetailW            = modSETUPAPI.NewProc("SetupDiGetDeviceInterfaceDetailW")
 	procSetupDiGetDeviceInterfacePropertyKeys       = modSETUPAPI.NewProc("SetupDiGetDeviceInterfacePropertyKeys")
 	procSetupDiGetDeviceInterfacePropertyW          = modSETUPAPI.NewProc("SetupDiGetDeviceInterfacePropertyW")
 	procSetupDiGetDevicePropertyKeys                = modSETUPAPI.NewProc("SetupDiGetDevicePropertyKeys")
 	procSetupDiGetDevicePropertyW                   = modSETUPAPI.NewProc("SetupDiGetDevicePropertyW")
+	procSetupDiGetDeviceRegistryProperty            = modSETUPAPI.NewProc("SetupDiGetDeviceRegistryPropertyW")
 	procSetupDiGetDeviceRegistryPropertyA           = modSETUPAPI.NewProc("SetupDiGetDeviceRegistryPropertyA")
-	procSetupDiGetDeviceRegistryPropertyW           = modSETUPAPI.NewProc("SetupDiGetDeviceRegistryPropertyW")
+	procSetupDiGetDriverInfoDetail                  = modSETUPAPI.NewProc("SetupDiGetDriverInfoDetailW")
 	procSetupDiGetDriverInfoDetailA                 = modSETUPAPI.NewProc("SetupDiGetDriverInfoDetailA")
-	procSetupDiGetDriverInfoDetailW                 = modSETUPAPI.NewProc("SetupDiGetDriverInfoDetailW")
+	procSetupDiGetDriverInstallParams               = modSETUPAPI.NewProc("SetupDiGetDriverInstallParamsW")
 	procSetupDiGetDriverInstallParamsA              = modSETUPAPI.NewProc("SetupDiGetDriverInstallParamsA")
-	procSetupDiGetDriverInstallParamsW              = modSETUPAPI.NewProc("SetupDiGetDriverInstallParamsW")
+	procSetupDiGetHwProfileFriendlyName             = modSETUPAPI.NewProc("SetupDiGetHwProfileFriendlyNameW")
 	procSetupDiGetHwProfileFriendlyNameA            = modSETUPAPI.NewProc("SetupDiGetHwProfileFriendlyNameA")
+	procSetupDiGetHwProfileFriendlyNameEx           = modSETUPAPI.NewProc("SetupDiGetHwProfileFriendlyNameExW")
 	procSetupDiGetHwProfileFriendlyNameExA          = modSETUPAPI.NewProc("SetupDiGetHwProfileFriendlyNameExA")
-	procSetupDiGetHwProfileFriendlyNameExW          = modSETUPAPI.NewProc("SetupDiGetHwProfileFriendlyNameExW")
-	procSetupDiGetHwProfileFriendlyNameW            = modSETUPAPI.NewProc("SetupDiGetHwProfileFriendlyNameW")
 	procSetupDiGetHwProfileList                     = modSETUPAPI.NewProc("SetupDiGetHwProfileList")
+	procSetupDiGetHwProfileListEx                   = modSETUPAPI.NewProc("SetupDiGetHwProfileListExW")
 	procSetupDiGetHwProfileListExA                  = modSETUPAPI.NewProc("SetupDiGetHwProfileListExA")
-	procSetupDiGetHwProfileListExW                  = modSETUPAPI.NewProc("SetupDiGetHwProfileListExW")
+	procSetupDiGetINFClass                          = modSETUPAPI.NewProc("SetupDiGetINFClassW")
 	procSetupDiGetINFClassA                         = modSETUPAPI.NewProc("SetupDiGetINFClassA")
-	procSetupDiGetINFClassW                         = modSETUPAPI.NewProc("SetupDiGetINFClassW")
 	procSetupDiGetSelectedDevice                    = modSETUPAPI.NewProc("SetupDiGetSelectedDevice")
+	procSetupDiGetSelectedDriver                    = modSETUPAPI.NewProc("SetupDiGetSelectedDriverW")
 	procSetupDiGetSelectedDriverA                   = modSETUPAPI.NewProc("SetupDiGetSelectedDriverA")
-	procSetupDiGetSelectedDriverW                   = modSETUPAPI.NewProc("SetupDiGetSelectedDriverW")
 	procSetupDiGetWizardPage                        = modSETUPAPI.NewProc("SetupDiGetWizardPage")
+	procSetupDiInstallClass                         = modSETUPAPI.NewProc("SetupDiInstallClassW")
 	procSetupDiInstallClassA                        = modSETUPAPI.NewProc("SetupDiInstallClassA")
+	procSetupDiInstallClassEx                       = modSETUPAPI.NewProc("SetupDiInstallClassExW")
 	procSetupDiInstallClassExA                      = modSETUPAPI.NewProc("SetupDiInstallClassExA")
-	procSetupDiInstallClassExW                      = modSETUPAPI.NewProc("SetupDiInstallClassExW")
-	procSetupDiInstallClassW                        = modSETUPAPI.NewProc("SetupDiInstallClassW")
 	procSetupDiInstallDevice                        = modSETUPAPI.NewProc("SetupDiInstallDevice")
 	procSetupDiInstallDeviceInterfaces              = modSETUPAPI.NewProc("SetupDiInstallDeviceInterfaces")
 	procSetupDiInstallDriverFiles                   = modSETUPAPI.NewProc("SetupDiInstallDriverFiles")
 	procSetupDiLoadClassIcon                        = modSETUPAPI.NewProc("SetupDiLoadClassIcon")
 	procSetupDiLoadDeviceIcon                       = modSETUPAPI.NewProc("SetupDiLoadDeviceIcon")
 	procSetupDiOpenClassRegKey                      = modSETUPAPI.NewProc("SetupDiOpenClassRegKey")
+	procSetupDiOpenClassRegKeyEx                    = modSETUPAPI.NewProc("SetupDiOpenClassRegKeyExW")
 	procSetupDiOpenClassRegKeyExA                   = modSETUPAPI.NewProc("SetupDiOpenClassRegKeyExA")
-	procSetupDiOpenClassRegKeyExW                   = modSETUPAPI.NewProc("SetupDiOpenClassRegKeyExW")
 	procSetupDiOpenDevRegKey                        = modSETUPAPI.NewProc("SetupDiOpenDevRegKey")
+	procSetupDiOpenDeviceInfo                       = modSETUPAPI.NewProc("SetupDiOpenDeviceInfoW")
 	procSetupDiOpenDeviceInfoA                      = modSETUPAPI.NewProc("SetupDiOpenDeviceInfoA")
-	procSetupDiOpenDeviceInfoW                      = modSETUPAPI.NewProc("SetupDiOpenDeviceInfoW")
+	procSetupDiOpenDeviceInterface                  = modSETUPAPI.NewProc("SetupDiOpenDeviceInterfaceW")
 	procSetupDiOpenDeviceInterfaceA                 = modSETUPAPI.NewProc("SetupDiOpenDeviceInterfaceA")
 	procSetupDiOpenDeviceInterfaceRegKey            = modSETUPAPI.NewProc("SetupDiOpenDeviceInterfaceRegKey")
-	procSetupDiOpenDeviceInterfaceW                 = modSETUPAPI.NewProc("SetupDiOpenDeviceInterfaceW")
 	procSetupDiRegisterCoDeviceInstallers           = modSETUPAPI.NewProc("SetupDiRegisterCoDeviceInstallers")
 	procSetupDiRegisterDeviceInfo                   = modSETUPAPI.NewProc("SetupDiRegisterDeviceInfo")
 	procSetupDiRemoveDevice                         = modSETUPAPI.NewProc("SetupDiRemoveDevice")
@@ -428,173 +428,173 @@ var (
 	procSetupDiSelectBestCompatDrv                  = modSETUPAPI.NewProc("SetupDiSelectBestCompatDrv")
 	procSetupDiSelectDevice                         = modSETUPAPI.NewProc("SetupDiSelectDevice")
 	procSetupDiSelectOEMDrv                         = modSETUPAPI.NewProc("SetupDiSelectOEMDrv")
+	procSetupDiSetClassInstallParams                = modSETUPAPI.NewProc("SetupDiSetClassInstallParamsW")
 	procSetupDiSetClassInstallParamsA               = modSETUPAPI.NewProc("SetupDiSetClassInstallParamsA")
-	procSetupDiSetClassInstallParamsW               = modSETUPAPI.NewProc("SetupDiSetClassInstallParamsW")
 	procSetupDiSetClassPropertyExW                  = modSETUPAPI.NewProc("SetupDiSetClassPropertyExW")
 	procSetupDiSetClassPropertyW                    = modSETUPAPI.NewProc("SetupDiSetClassPropertyW")
+	procSetupDiSetClassRegistryProperty             = modSETUPAPI.NewProc("SetupDiSetClassRegistryPropertyW")
 	procSetupDiSetClassRegistryPropertyA            = modSETUPAPI.NewProc("SetupDiSetClassRegistryPropertyA")
-	procSetupDiSetClassRegistryPropertyW            = modSETUPAPI.NewProc("SetupDiSetClassRegistryPropertyW")
+	procSetupDiSetDeviceInstallParams               = modSETUPAPI.NewProc("SetupDiSetDeviceInstallParamsW")
 	procSetupDiSetDeviceInstallParamsA              = modSETUPAPI.NewProc("SetupDiSetDeviceInstallParamsA")
-	procSetupDiSetDeviceInstallParamsW              = modSETUPAPI.NewProc("SetupDiSetDeviceInstallParamsW")
 	procSetupDiSetDeviceInterfaceDefault            = modSETUPAPI.NewProc("SetupDiSetDeviceInterfaceDefault")
 	procSetupDiSetDeviceInterfacePropertyW          = modSETUPAPI.NewProc("SetupDiSetDeviceInterfacePropertyW")
 	procSetupDiSetDevicePropertyW                   = modSETUPAPI.NewProc("SetupDiSetDevicePropertyW")
+	procSetupDiSetDeviceRegistryProperty            = modSETUPAPI.NewProc("SetupDiSetDeviceRegistryPropertyW")
 	procSetupDiSetDeviceRegistryPropertyA           = modSETUPAPI.NewProc("SetupDiSetDeviceRegistryPropertyA")
-	procSetupDiSetDeviceRegistryPropertyW           = modSETUPAPI.NewProc("SetupDiSetDeviceRegistryPropertyW")
+	procSetupDiSetDriverInstallParams               = modSETUPAPI.NewProc("SetupDiSetDriverInstallParamsW")
 	procSetupDiSetDriverInstallParamsA              = modSETUPAPI.NewProc("SetupDiSetDriverInstallParamsA")
-	procSetupDiSetDriverInstallParamsW              = modSETUPAPI.NewProc("SetupDiSetDriverInstallParamsW")
 	procSetupDiSetSelectedDevice                    = modSETUPAPI.NewProc("SetupDiSetSelectedDevice")
+	procSetupDiSetSelectedDriver                    = modSETUPAPI.NewProc("SetupDiSetSelectedDriverW")
 	procSetupDiSetSelectedDriverA                   = modSETUPAPI.NewProc("SetupDiSetSelectedDriverA")
-	procSetupDiSetSelectedDriverW                   = modSETUPAPI.NewProc("SetupDiSetSelectedDriverW")
 	procSetupDiUnremoveDevice                       = modSETUPAPI.NewProc("SetupDiUnremoveDevice")
+	procSetupDuplicateDiskSpaceList                 = modSETUPAPI.NewProc("SetupDuplicateDiskSpaceListW")
 	procSetupDuplicateDiskSpaceListA                = modSETUPAPI.NewProc("SetupDuplicateDiskSpaceListA")
-	procSetupDuplicateDiskSpaceListW                = modSETUPAPI.NewProc("SetupDuplicateDiskSpaceListW")
+	procSetupEnumInfSections                        = modSETUPAPI.NewProc("SetupEnumInfSectionsW")
 	procSetupEnumInfSectionsA                       = modSETUPAPI.NewProc("SetupEnumInfSectionsA")
-	procSetupEnumInfSectionsW                       = modSETUPAPI.NewProc("SetupEnumInfSectionsW")
+	procSetupFindFirstLine                          = modSETUPAPI.NewProc("SetupFindFirstLineW")
 	procSetupFindFirstLineA                         = modSETUPAPI.NewProc("SetupFindFirstLineA")
-	procSetupFindFirstLineW                         = modSETUPAPI.NewProc("SetupFindFirstLineW")
 	procSetupFindNextLine                           = modSETUPAPI.NewProc("SetupFindNextLine")
+	procSetupFindNextMatchLine                      = modSETUPAPI.NewProc("SetupFindNextMatchLineW")
 	procSetupFindNextMatchLineA                     = modSETUPAPI.NewProc("SetupFindNextMatchLineA")
-	procSetupFindNextMatchLineW                     = modSETUPAPI.NewProc("SetupFindNextMatchLineW")
+	procSetupFreeSourceList                         = modSETUPAPI.NewProc("SetupFreeSourceListW")
 	procSetupFreeSourceListA                        = modSETUPAPI.NewProc("SetupFreeSourceListA")
-	procSetupFreeSourceListW                        = modSETUPAPI.NewProc("SetupFreeSourceListW")
+	procSetupGetBackupInformation                   = modSETUPAPI.NewProc("SetupGetBackupInformationW")
 	procSetupGetBackupInformationA                  = modSETUPAPI.NewProc("SetupGetBackupInformationA")
-	procSetupGetBackupInformationW                  = modSETUPAPI.NewProc("SetupGetBackupInformationW")
 	procSetupGetBinaryField                         = modSETUPAPI.NewProc("SetupGetBinaryField")
 	procSetupGetFieldCount                          = modSETUPAPI.NewProc("SetupGetFieldCount")
+	procSetupGetFileCompressionInfo                 = modSETUPAPI.NewProc("SetupGetFileCompressionInfoW")
 	procSetupGetFileCompressionInfoA                = modSETUPAPI.NewProc("SetupGetFileCompressionInfoA")
+	procSetupGetFileCompressionInfoEx               = modSETUPAPI.NewProc("SetupGetFileCompressionInfoExW")
 	procSetupGetFileCompressionInfoExA              = modSETUPAPI.NewProc("SetupGetFileCompressionInfoExA")
-	procSetupGetFileCompressionInfoExW              = modSETUPAPI.NewProc("SetupGetFileCompressionInfoExW")
-	procSetupGetFileCompressionInfoW                = modSETUPAPI.NewProc("SetupGetFileCompressionInfoW")
 	procSetupGetFileQueueCount                      = modSETUPAPI.NewProc("SetupGetFileQueueCount")
 	procSetupGetFileQueueFlags                      = modSETUPAPI.NewProc("SetupGetFileQueueFlags")
+	procSetupGetInfDriverStoreLocation              = modSETUPAPI.NewProc("SetupGetInfDriverStoreLocationW")
 	procSetupGetInfDriverStoreLocationA             = modSETUPAPI.NewProc("SetupGetInfDriverStoreLocationA")
-	procSetupGetInfDriverStoreLocationW             = modSETUPAPI.NewProc("SetupGetInfDriverStoreLocationW")
+	procSetupGetInfFileList                         = modSETUPAPI.NewProc("SetupGetInfFileListW")
 	procSetupGetInfFileListA                        = modSETUPAPI.NewProc("SetupGetInfFileListA")
-	procSetupGetInfFileListW                        = modSETUPAPI.NewProc("SetupGetInfFileListW")
+	procSetupGetInfInformation                      = modSETUPAPI.NewProc("SetupGetInfInformationW")
 	procSetupGetInfInformationA                     = modSETUPAPI.NewProc("SetupGetInfInformationA")
-	procSetupGetInfInformationW                     = modSETUPAPI.NewProc("SetupGetInfInformationW")
+	procSetupGetInfPublishedName                    = modSETUPAPI.NewProc("SetupGetInfPublishedNameW")
 	procSetupGetInfPublishedNameA                   = modSETUPAPI.NewProc("SetupGetInfPublishedNameA")
-	procSetupGetInfPublishedNameW                   = modSETUPAPI.NewProc("SetupGetInfPublishedNameW")
 	procSetupGetIntField                            = modSETUPAPI.NewProc("SetupGetIntField")
+	procSetupGetLineByIndex                         = modSETUPAPI.NewProc("SetupGetLineByIndexW")
 	procSetupGetLineByIndexA                        = modSETUPAPI.NewProc("SetupGetLineByIndexA")
-	procSetupGetLineByIndexW                        = modSETUPAPI.NewProc("SetupGetLineByIndexW")
+	procSetupGetLineCount                           = modSETUPAPI.NewProc("SetupGetLineCountW")
 	procSetupGetLineCountA                          = modSETUPAPI.NewProc("SetupGetLineCountA")
-	procSetupGetLineCountW                          = modSETUPAPI.NewProc("SetupGetLineCountW")
+	procSetupGetLineText                            = modSETUPAPI.NewProc("SetupGetLineTextW")
 	procSetupGetLineTextA                           = modSETUPAPI.NewProc("SetupGetLineTextA")
-	procSetupGetLineTextW                           = modSETUPAPI.NewProc("SetupGetLineTextW")
+	procSetupGetMultiSzField                        = modSETUPAPI.NewProc("SetupGetMultiSzFieldW")
 	procSetupGetMultiSzFieldA                       = modSETUPAPI.NewProc("SetupGetMultiSzFieldA")
-	procSetupGetMultiSzFieldW                       = modSETUPAPI.NewProc("SetupGetMultiSzFieldW")
 	procSetupGetNonInteractiveMode                  = modSETUPAPI.NewProc("SetupGetNonInteractiveMode")
+	procSetupGetSourceFileLocation                  = modSETUPAPI.NewProc("SetupGetSourceFileLocationW")
 	procSetupGetSourceFileLocationA                 = modSETUPAPI.NewProc("SetupGetSourceFileLocationA")
-	procSetupGetSourceFileLocationW                 = modSETUPAPI.NewProc("SetupGetSourceFileLocationW")
+	procSetupGetSourceFileSize                      = modSETUPAPI.NewProc("SetupGetSourceFileSizeW")
 	procSetupGetSourceFileSizeA                     = modSETUPAPI.NewProc("SetupGetSourceFileSizeA")
-	procSetupGetSourceFileSizeW                     = modSETUPAPI.NewProc("SetupGetSourceFileSizeW")
+	procSetupGetSourceInfo                          = modSETUPAPI.NewProc("SetupGetSourceInfoW")
 	procSetupGetSourceInfoA                         = modSETUPAPI.NewProc("SetupGetSourceInfoA")
-	procSetupGetSourceInfoW                         = modSETUPAPI.NewProc("SetupGetSourceInfoW")
+	procSetupGetStringField                         = modSETUPAPI.NewProc("SetupGetStringFieldW")
 	procSetupGetStringFieldA                        = modSETUPAPI.NewProc("SetupGetStringFieldA")
-	procSetupGetStringFieldW                        = modSETUPAPI.NewProc("SetupGetStringFieldW")
+	procSetupGetTargetPath                          = modSETUPAPI.NewProc("SetupGetTargetPathW")
 	procSetupGetTargetPathA                         = modSETUPAPI.NewProc("SetupGetTargetPathA")
-	procSetupGetTargetPathW                         = modSETUPAPI.NewProc("SetupGetTargetPathW")
 	procSetupGetThreadLogToken                      = modSETUPAPI.NewProc("SetupGetThreadLogToken")
 	procSetupInitDefaultQueueCallback               = modSETUPAPI.NewProc("SetupInitDefaultQueueCallback")
 	procSetupInitDefaultQueueCallbackEx             = modSETUPAPI.NewProc("SetupInitDefaultQueueCallbackEx")
+	procSetupInitializeFileLog                      = modSETUPAPI.NewProc("SetupInitializeFileLogW")
 	procSetupInitializeFileLogA                     = modSETUPAPI.NewProc("SetupInitializeFileLogA")
-	procSetupInitializeFileLogW                     = modSETUPAPI.NewProc("SetupInitializeFileLogW")
+	procSetupInstallFile                            = modSETUPAPI.NewProc("SetupInstallFileW")
 	procSetupInstallFileA                           = modSETUPAPI.NewProc("SetupInstallFileA")
+	procSetupInstallFileEx                          = modSETUPAPI.NewProc("SetupInstallFileExW")
 	procSetupInstallFileExA                         = modSETUPAPI.NewProc("SetupInstallFileExA")
-	procSetupInstallFileExW                         = modSETUPAPI.NewProc("SetupInstallFileExW")
-	procSetupInstallFileW                           = modSETUPAPI.NewProc("SetupInstallFileW")
+	procSetupInstallFilesFromInfSection             = modSETUPAPI.NewProc("SetupInstallFilesFromInfSectionW")
 	procSetupInstallFilesFromInfSectionA            = modSETUPAPI.NewProc("SetupInstallFilesFromInfSectionA")
-	procSetupInstallFilesFromInfSectionW            = modSETUPAPI.NewProc("SetupInstallFilesFromInfSectionW")
+	procSetupInstallFromInfSection                  = modSETUPAPI.NewProc("SetupInstallFromInfSectionW")
 	procSetupInstallFromInfSectionA                 = modSETUPAPI.NewProc("SetupInstallFromInfSectionA")
-	procSetupInstallFromInfSectionW                 = modSETUPAPI.NewProc("SetupInstallFromInfSectionW")
+	procSetupInstallServicesFromInfSection          = modSETUPAPI.NewProc("SetupInstallServicesFromInfSectionW")
 	procSetupInstallServicesFromInfSectionA         = modSETUPAPI.NewProc("SetupInstallServicesFromInfSectionA")
+	procSetupInstallServicesFromInfSectionEx        = modSETUPAPI.NewProc("SetupInstallServicesFromInfSectionExW")
 	procSetupInstallServicesFromInfSectionExA       = modSETUPAPI.NewProc("SetupInstallServicesFromInfSectionExA")
-	procSetupInstallServicesFromInfSectionExW       = modSETUPAPI.NewProc("SetupInstallServicesFromInfSectionExW")
-	procSetupInstallServicesFromInfSectionW         = modSETUPAPI.NewProc("SetupInstallServicesFromInfSectionW")
+	procSetupIterateCabinet                         = modSETUPAPI.NewProc("SetupIterateCabinetW")
 	procSetupIterateCabinetA                        = modSETUPAPI.NewProc("SetupIterateCabinetA")
-	procSetupIterateCabinetW                        = modSETUPAPI.NewProc("SetupIterateCabinetW")
+	procSetupLogError                               = modSETUPAPI.NewProc("SetupLogErrorW")
 	procSetupLogErrorA                              = modSETUPAPI.NewProc("SetupLogErrorA")
-	procSetupLogErrorW                              = modSETUPAPI.NewProc("SetupLogErrorW")
+	procSetupLogFile                                = modSETUPAPI.NewProc("SetupLogFileW")
 	procSetupLogFileA                               = modSETUPAPI.NewProc("SetupLogFileA")
-	procSetupLogFileW                               = modSETUPAPI.NewProc("SetupLogFileW")
+	procSetupOpenAppendInfFile                      = modSETUPAPI.NewProc("SetupOpenAppendInfFileW")
 	procSetupOpenAppendInfFileA                     = modSETUPAPI.NewProc("SetupOpenAppendInfFileA")
-	procSetupOpenAppendInfFileW                     = modSETUPAPI.NewProc("SetupOpenAppendInfFileW")
 	procSetupOpenFileQueue                          = modSETUPAPI.NewProc("SetupOpenFileQueue")
+	procSetupOpenInfFile                            = modSETUPAPI.NewProc("SetupOpenInfFileW")
 	procSetupOpenInfFileA                           = modSETUPAPI.NewProc("SetupOpenInfFileA")
-	procSetupOpenInfFileW                           = modSETUPAPI.NewProc("SetupOpenInfFileW")
 	procSetupOpenLog                                = modSETUPAPI.NewProc("SetupOpenLog")
 	procSetupOpenMasterInf                          = modSETUPAPI.NewProc("SetupOpenMasterInf")
+	procSetupPrepareQueueForRestore                 = modSETUPAPI.NewProc("SetupPrepareQueueForRestoreW")
 	procSetupPrepareQueueForRestoreA                = modSETUPAPI.NewProc("SetupPrepareQueueForRestoreA")
-	procSetupPrepareQueueForRestoreW                = modSETUPAPI.NewProc("SetupPrepareQueueForRestoreW")
+	procSetupPromptForDisk                          = modSETUPAPI.NewProc("SetupPromptForDiskW")
 	procSetupPromptForDiskA                         = modSETUPAPI.NewProc("SetupPromptForDiskA")
-	procSetupPromptForDiskW                         = modSETUPAPI.NewProc("SetupPromptForDiskW")
 	procSetupPromptReboot                           = modSETUPAPI.NewProc("SetupPromptReboot")
+	procSetupQueryDrivesInDiskSpaceList             = modSETUPAPI.NewProc("SetupQueryDrivesInDiskSpaceListW")
 	procSetupQueryDrivesInDiskSpaceListA            = modSETUPAPI.NewProc("SetupQueryDrivesInDiskSpaceListA")
-	procSetupQueryDrivesInDiskSpaceListW            = modSETUPAPI.NewProc("SetupQueryDrivesInDiskSpaceListW")
+	procSetupQueryFileLog                           = modSETUPAPI.NewProc("SetupQueryFileLogW")
 	procSetupQueryFileLogA                          = modSETUPAPI.NewProc("SetupQueryFileLogA")
-	procSetupQueryFileLogW                          = modSETUPAPI.NewProc("SetupQueryFileLogW")
+	procSetupQueryInfFileInformation                = modSETUPAPI.NewProc("SetupQueryInfFileInformationW")
 	procSetupQueryInfFileInformationA               = modSETUPAPI.NewProc("SetupQueryInfFileInformationA")
-	procSetupQueryInfFileInformationW               = modSETUPAPI.NewProc("SetupQueryInfFileInformationW")
+	procSetupQueryInfOriginalFileInformation        = modSETUPAPI.NewProc("SetupQueryInfOriginalFileInformationW")
 	procSetupQueryInfOriginalFileInformationA       = modSETUPAPI.NewProc("SetupQueryInfOriginalFileInformationA")
-	procSetupQueryInfOriginalFileInformationW       = modSETUPAPI.NewProc("SetupQueryInfOriginalFileInformationW")
+	procSetupQueryInfVersionInformation             = modSETUPAPI.NewProc("SetupQueryInfVersionInformationW")
 	procSetupQueryInfVersionInformationA            = modSETUPAPI.NewProc("SetupQueryInfVersionInformationA")
-	procSetupQueryInfVersionInformationW            = modSETUPAPI.NewProc("SetupQueryInfVersionInformationW")
+	procSetupQuerySourceList                        = modSETUPAPI.NewProc("SetupQuerySourceListW")
 	procSetupQuerySourceListA                       = modSETUPAPI.NewProc("SetupQuerySourceListA")
-	procSetupQuerySourceListW                       = modSETUPAPI.NewProc("SetupQuerySourceListW")
+	procSetupQuerySpaceRequiredOnDrive              = modSETUPAPI.NewProc("SetupQuerySpaceRequiredOnDriveW")
 	procSetupQuerySpaceRequiredOnDriveA             = modSETUPAPI.NewProc("SetupQuerySpaceRequiredOnDriveA")
-	procSetupQuerySpaceRequiredOnDriveW             = modSETUPAPI.NewProc("SetupQuerySpaceRequiredOnDriveW")
+	procSetupQueueCopy                              = modSETUPAPI.NewProc("SetupQueueCopyW")
 	procSetupQueueCopyA                             = modSETUPAPI.NewProc("SetupQueueCopyA")
+	procSetupQueueCopyIndirect                      = modSETUPAPI.NewProc("SetupQueueCopyIndirectW")
 	procSetupQueueCopyIndirectA                     = modSETUPAPI.NewProc("SetupQueueCopyIndirectA")
-	procSetupQueueCopyIndirectW                     = modSETUPAPI.NewProc("SetupQueueCopyIndirectW")
+	procSetupQueueCopySection                       = modSETUPAPI.NewProc("SetupQueueCopySectionW")
 	procSetupQueueCopySectionA                      = modSETUPAPI.NewProc("SetupQueueCopySectionA")
-	procSetupQueueCopySectionW                      = modSETUPAPI.NewProc("SetupQueueCopySectionW")
-	procSetupQueueCopyW                             = modSETUPAPI.NewProc("SetupQueueCopyW")
+	procSetupQueueDefaultCopy                       = modSETUPAPI.NewProc("SetupQueueDefaultCopyW")
 	procSetupQueueDefaultCopyA                      = modSETUPAPI.NewProc("SetupQueueDefaultCopyA")
-	procSetupQueueDefaultCopyW                      = modSETUPAPI.NewProc("SetupQueueDefaultCopyW")
+	procSetupQueueDelete                            = modSETUPAPI.NewProc("SetupQueueDeleteW")
 	procSetupQueueDeleteA                           = modSETUPAPI.NewProc("SetupQueueDeleteA")
+	procSetupQueueDeleteSection                     = modSETUPAPI.NewProc("SetupQueueDeleteSectionW")
 	procSetupQueueDeleteSectionA                    = modSETUPAPI.NewProc("SetupQueueDeleteSectionA")
-	procSetupQueueDeleteSectionW                    = modSETUPAPI.NewProc("SetupQueueDeleteSectionW")
-	procSetupQueueDeleteW                           = modSETUPAPI.NewProc("SetupQueueDeleteW")
+	procSetupQueueRename                            = modSETUPAPI.NewProc("SetupQueueRenameW")
 	procSetupQueueRenameA                           = modSETUPAPI.NewProc("SetupQueueRenameA")
+	procSetupQueueRenameSection                     = modSETUPAPI.NewProc("SetupQueueRenameSectionW")
 	procSetupQueueRenameSectionA                    = modSETUPAPI.NewProc("SetupQueueRenameSectionA")
-	procSetupQueueRenameSectionW                    = modSETUPAPI.NewProc("SetupQueueRenameSectionW")
-	procSetupQueueRenameW                           = modSETUPAPI.NewProc("SetupQueueRenameW")
+	procSetupRemoveFileLogEntry                     = modSETUPAPI.NewProc("SetupRemoveFileLogEntryW")
 	procSetupRemoveFileLogEntryA                    = modSETUPAPI.NewProc("SetupRemoveFileLogEntryA")
-	procSetupRemoveFileLogEntryW                    = modSETUPAPI.NewProc("SetupRemoveFileLogEntryW")
+	procSetupRemoveFromDiskSpaceList                = modSETUPAPI.NewProc("SetupRemoveFromDiskSpaceListW")
 	procSetupRemoveFromDiskSpaceListA               = modSETUPAPI.NewProc("SetupRemoveFromDiskSpaceListA")
-	procSetupRemoveFromDiskSpaceListW               = modSETUPAPI.NewProc("SetupRemoveFromDiskSpaceListW")
+	procSetupRemoveFromSourceList                   = modSETUPAPI.NewProc("SetupRemoveFromSourceListW")
 	procSetupRemoveFromSourceListA                  = modSETUPAPI.NewProc("SetupRemoveFromSourceListA")
-	procSetupRemoveFromSourceListW                  = modSETUPAPI.NewProc("SetupRemoveFromSourceListW")
+	procSetupRemoveInstallSectionFromDiskSpaceList  = modSETUPAPI.NewProc("SetupRemoveInstallSectionFromDiskSpaceListW")
 	procSetupRemoveInstallSectionFromDiskSpaceListA = modSETUPAPI.NewProc("SetupRemoveInstallSectionFromDiskSpaceListA")
-	procSetupRemoveInstallSectionFromDiskSpaceListW = modSETUPAPI.NewProc("SetupRemoveInstallSectionFromDiskSpaceListW")
+	procSetupRemoveSectionFromDiskSpaceList         = modSETUPAPI.NewProc("SetupRemoveSectionFromDiskSpaceListW")
 	procSetupRemoveSectionFromDiskSpaceListA        = modSETUPAPI.NewProc("SetupRemoveSectionFromDiskSpaceListA")
-	procSetupRemoveSectionFromDiskSpaceListW        = modSETUPAPI.NewProc("SetupRemoveSectionFromDiskSpaceListW")
+	procSetupRenameError                            = modSETUPAPI.NewProc("SetupRenameErrorW")
 	procSetupRenameErrorA                           = modSETUPAPI.NewProc("SetupRenameErrorA")
-	procSetupRenameErrorW                           = modSETUPAPI.NewProc("SetupRenameErrorW")
+	procSetupScanFileQueue                          = modSETUPAPI.NewProc("SetupScanFileQueueW")
 	procSetupScanFileQueueA                         = modSETUPAPI.NewProc("SetupScanFileQueueA")
-	procSetupScanFileQueueW                         = modSETUPAPI.NewProc("SetupScanFileQueueW")
+	procSetupSetDirectoryId                         = modSETUPAPI.NewProc("SetupSetDirectoryIdW")
 	procSetupSetDirectoryIdA                        = modSETUPAPI.NewProc("SetupSetDirectoryIdA")
+	procSetupSetDirectoryIdEx                       = modSETUPAPI.NewProc("SetupSetDirectoryIdExW")
 	procSetupSetDirectoryIdExA                      = modSETUPAPI.NewProc("SetupSetDirectoryIdExA")
-	procSetupSetDirectoryIdExW                      = modSETUPAPI.NewProc("SetupSetDirectoryIdExW")
-	procSetupSetDirectoryIdW                        = modSETUPAPI.NewProc("SetupSetDirectoryIdW")
+	procSetupSetFileQueueAlternatePlatform          = modSETUPAPI.NewProc("SetupSetFileQueueAlternatePlatformW")
 	procSetupSetFileQueueAlternatePlatformA         = modSETUPAPI.NewProc("SetupSetFileQueueAlternatePlatformA")
-	procSetupSetFileQueueAlternatePlatformW         = modSETUPAPI.NewProc("SetupSetFileQueueAlternatePlatformW")
 	procSetupSetFileQueueFlags                      = modSETUPAPI.NewProc("SetupSetFileQueueFlags")
 	procSetupSetNonInteractiveMode                  = modSETUPAPI.NewProc("SetupSetNonInteractiveMode")
+	procSetupSetPlatformPathOverride                = modSETUPAPI.NewProc("SetupSetPlatformPathOverrideW")
 	procSetupSetPlatformPathOverrideA               = modSETUPAPI.NewProc("SetupSetPlatformPathOverrideA")
-	procSetupSetPlatformPathOverrideW               = modSETUPAPI.NewProc("SetupSetPlatformPathOverrideW")
+	procSetupSetSourceList                          = modSETUPAPI.NewProc("SetupSetSourceListW")
 	procSetupSetSourceListA                         = modSETUPAPI.NewProc("SetupSetSourceListA")
-	procSetupSetSourceListW                         = modSETUPAPI.NewProc("SetupSetSourceListW")
 	procSetupSetThreadLogToken                      = modSETUPAPI.NewProc("SetupSetThreadLogToken")
 	procSetupTermDefaultQueueCallback               = modSETUPAPI.NewProc("SetupTermDefaultQueueCallback")
 	procSetupTerminateFileLog                       = modSETUPAPI.NewProc("SetupTerminateFileLog")
 	procSetupUninstallNewlyCopiedInfs               = modSETUPAPI.NewProc("SetupUninstallNewlyCopiedInfs")
+	procSetupUninstallOEMInf                        = modSETUPAPI.NewProc("SetupUninstallOEMInfW")
 	procSetupUninstallOEMInfA                       = modSETUPAPI.NewProc("SetupUninstallOEMInfA")
-	procSetupUninstallOEMInfW                       = modSETUPAPI.NewProc("SetupUninstallOEMInfW")
+	procSetupVerifyInfFile                          = modSETUPAPI.NewProc("SetupVerifyInfFileW")
 	procSetupVerifyInfFileA                         = modSETUPAPI.NewProc("SetupVerifyInfFileA")
-	procSetupVerifyInfFileW                         = modSETUPAPI.NewProc("SetupVerifyInfFileW")
 	procSetupWriteTextLog                           = modSETUPAPI.NewProc("SetupWriteTextLog")
 	procSetupWriteTextLogError                      = modSETUPAPI.NewProc("SetupWriteTextLogError")
 	procSetupWriteTextLogInfLine                    = modSETUPAPI.NewProc("SetupWriteTextLogInfLine")
@@ -622,6 +622,15 @@ func CM_Add_Empty_Log_Conf_Ex(plcLogConf *uintptr, dnDevInst uint32, Priority da
 	return CONFIGRET(r1)
 }
 
+// CM_Add_ID calls CFGMGR32!CM_Add_IDW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_add_idw
+// Minimum OS: windows5.0.
+func CM_Add_ID(dnDevInst uint32, pszID string, ulFlags uint32) CONFIGRET {
+	_pszID := win32.UTF16Ptr(pszID)
+	r1, _, _ := syscall.SyscallN(procCM_Add_ID.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(_pszID)), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Add_IDA calls CFGMGR32!CM_Add_IDA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_add_ida
 func CM_Add_IDA(dnDevInst uint32, pszID foundation.PSTR, ulFlags uint32) CONFIGRET {
@@ -629,11 +638,12 @@ func CM_Add_IDA(dnDevInst uint32, pszID foundation.PSTR, ulFlags uint32) CONFIGR
 	return CONFIGRET(r1)
 }
 
-// CM_Add_IDW calls CFGMGR32!CM_Add_IDW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_add_idw
+// CM_Add_ID_Ex calls CFGMGR32!CM_Add_ID_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_add_id_exw
 // Minimum OS: windows5.0.
-func CM_Add_IDW(dnDevInst uint32, pszID foundation.PWSTR, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Add_IDW.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(pszID)), uintptr(ulFlags))
+func CM_Add_ID_Ex(dnDevInst uint32, pszID string, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pszID := win32.UTF16Ptr(pszID)
+	r1, _, _ := syscall.SyscallN(procCM_Add_ID_Ex.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(_pszID)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -641,14 +651,6 @@ func CM_Add_IDW(dnDevInst uint32, pszID foundation.PWSTR, ulFlags uint32) CONFIG
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_add_id_exa
 func CM_Add_ID_ExA(dnDevInst uint32, pszID foundation.PSTR, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Add_ID_ExA.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(pszID)), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Add_ID_ExW calls CFGMGR32!CM_Add_ID_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_add_id_exw
-// Minimum OS: windows5.0.
-func CM_Add_ID_ExW(dnDevInst uint32, pszID foundation.PWSTR, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Add_ID_ExW.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(pszID)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -675,6 +677,15 @@ func CM_Add_Res_Des_Ex(prdResDes *uintptr, lcLogConf uintptr, ResourceID uint32,
 	return CONFIGRET(r1)
 }
 
+// CM_Connect_Machine calls CFGMGR32!CM_Connect_MachineW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_connect_machinew
+// Minimum OS: windows5.0.
+func CM_Connect_Machine(UNCServerName string, phMachine *uintptr) CONFIGRET {
+	_UNCServerName := win32.UTF16Ptr(UNCServerName)
+	r1, _, _ := syscall.SyscallN(procCM_Connect_Machine.Addr(), uintptr(unsafe.Pointer(_UNCServerName)), uintptr(unsafe.Pointer(phMachine)))
+	return CONFIGRET(r1)
+}
+
 // CM_Connect_MachineA calls CFGMGR32!CM_Connect_MachineA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_connect_machinea
 func CM_Connect_MachineA(UNCServerName foundation.PSTR, phMachine *uintptr) CONFIGRET {
@@ -682,11 +693,11 @@ func CM_Connect_MachineA(UNCServerName foundation.PSTR, phMachine *uintptr) CONF
 	return CONFIGRET(r1)
 }
 
-// CM_Connect_MachineW calls CFGMGR32!CM_Connect_MachineW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_connect_machinew
-// Minimum OS: windows5.0.
-func CM_Connect_MachineW(UNCServerName foundation.PWSTR, phMachine *uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Connect_MachineW.Addr(), uintptr(unsafe.Pointer(UNCServerName)), uintptr(unsafe.Pointer(phMachine)))
+// CM_Create_DevNode calls CFGMGR32!CM_Create_DevNodeW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_create_devnodew
+func CM_Create_DevNode(pdnDevInst *uint32, pDeviceID string, dnParent uint32, ulFlags uint32) CONFIGRET {
+	_pDeviceID := win32.UTF16Ptr(pDeviceID)
+	r1, _, _ := syscall.SyscallN(procCM_Create_DevNode.Addr(), uintptr(unsafe.Pointer(pdnDevInst)), uintptr(unsafe.Pointer(_pDeviceID)), uintptr(dnParent), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
@@ -697,10 +708,11 @@ func CM_Create_DevNodeA(pdnDevInst *uint32, pDeviceID foundation.PSTR, dnParent 
 	return CONFIGRET(r1)
 }
 
-// CM_Create_DevNodeW calls CFGMGR32!CM_Create_DevNodeW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_create_devnodew
-func CM_Create_DevNodeW(pdnDevInst *uint32, pDeviceID foundation.PWSTR, dnParent uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Create_DevNodeW.Addr(), uintptr(unsafe.Pointer(pdnDevInst)), uintptr(unsafe.Pointer(pDeviceID)), uintptr(dnParent), uintptr(ulFlags))
+// CM_Create_DevNode_Ex calls CFGMGR32!CM_Create_DevNode_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_create_devnode_exw
+func CM_Create_DevNode_Ex(pdnDevInst *uint32, pDeviceID string, dnParent uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pDeviceID := win32.UTF16Ptr(pDeviceID)
+	r1, _, _ := syscall.SyscallN(procCM_Create_DevNode_Ex.Addr(), uintptr(unsafe.Pointer(pdnDevInst)), uintptr(unsafe.Pointer(_pDeviceID)), uintptr(dnParent), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -708,13 +720,6 @@ func CM_Create_DevNodeW(pdnDevInst *uint32, pDeviceID foundation.PWSTR, dnParent
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_create_devnode_exa
 func CM_Create_DevNode_ExA(pdnDevInst *uint32, pDeviceID foundation.PSTR, dnParent uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Create_DevNode_ExA.Addr(), uintptr(unsafe.Pointer(pdnDevInst)), uintptr(unsafe.Pointer(pDeviceID)), uintptr(dnParent), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Create_DevNode_ExW calls CFGMGR32!CM_Create_DevNode_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_create_devnode_exw
-func CM_Create_DevNode_ExW(pdnDevInst *uint32, pDeviceID foundation.PWSTR, dnParent uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Create_DevNode_ExW.Addr(), uintptr(unsafe.Pointer(pdnDevInst)), uintptr(unsafe.Pointer(pDeviceID)), uintptr(dnParent), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -755,6 +760,15 @@ func CM_Delete_DevNode_Key_Ex(dnDevNode uint32, ulHardwareProfile uint32, ulFlag
 	return CONFIGRET(r1)
 }
 
+// CM_Delete_Device_Interface_Key calls CFGMGR32!CM_Delete_Device_Interface_KeyW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_delete_device_interface_keyw
+// Minimum OS: windows6.0.6000.
+func CM_Delete_Device_Interface_Key(pszDeviceInterface string, ulFlags uint32) CONFIGRET {
+	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
+	r1, _, _ := syscall.SyscallN(procCM_Delete_Device_Interface_Key.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Delete_Device_Interface_KeyA calls CFGMGR32!CM_Delete_Device_Interface_KeyA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_delete_device_interface_keya
 func CM_Delete_Device_Interface_KeyA(pszDeviceInterface foundation.PSTR, ulFlags uint32) CONFIGRET {
@@ -762,11 +776,12 @@ func CM_Delete_Device_Interface_KeyA(pszDeviceInterface foundation.PSTR, ulFlags
 	return CONFIGRET(r1)
 }
 
-// CM_Delete_Device_Interface_KeyW calls CFGMGR32!CM_Delete_Device_Interface_KeyW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_delete_device_interface_keyw
-// Minimum OS: windows6.0.6000.
-func CM_Delete_Device_Interface_KeyW(pszDeviceInterface foundation.PWSTR, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Delete_Device_Interface_KeyW.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(ulFlags))
+// CM_Delete_Device_Interface_Key_Ex calls CFGMGR32!CM_Delete_Device_Interface_Key_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_delete_device_interface_key_exw
+// Minimum OS: windows10.0.10240.
+func CM_Delete_Device_Interface_Key_Ex(pszDeviceInterface string, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
+	r1, _, _ := syscall.SyscallN(procCM_Delete_Device_Interface_Key_Ex.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -775,14 +790,6 @@ func CM_Delete_Device_Interface_KeyW(pszDeviceInterface foundation.PWSTR, ulFlag
 // Minimum OS: windows10.0.10240.
 func CM_Delete_Device_Interface_Key_ExA(pszDeviceInterface foundation.PSTR, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Delete_Device_Interface_Key_ExA.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Delete_Device_Interface_Key_ExW calls CFGMGR32!CM_Delete_Device_Interface_Key_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_delete_device_interface_key_exw
-// Minimum OS: windows10.0.10240.
-func CM_Delete_Device_Interface_Key_ExW(pszDeviceInterface foundation.PWSTR, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Delete_Device_Interface_Key_ExW.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -868,6 +875,14 @@ func CM_Enumerate_Classes_Ex(ulClassIndex uint32, ClassGuid *win32.GUID, ulFlags
 	return CONFIGRET(r1)
 }
 
+// CM_Enumerate_Enumerators calls CFGMGR32!CM_Enumerate_EnumeratorsW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_enumerate_enumeratorsw
+// Minimum OS: windows5.0.
+func CM_Enumerate_Enumerators(ulEnumIndex uint32, Buffer foundation.PWSTR, pulLength *uint32, ulFlags uint32) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Enumerate_Enumerators.Addr(), uintptr(ulEnumIndex), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Enumerate_EnumeratorsA calls CFGMGR32!CM_Enumerate_EnumeratorsA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_enumerate_enumeratorsa
 func CM_Enumerate_EnumeratorsA(ulEnumIndex uint32, Buffer foundation.PSTR, pulLength *uint32, ulFlags uint32) CONFIGRET {
@@ -875,11 +890,11 @@ func CM_Enumerate_EnumeratorsA(ulEnumIndex uint32, Buffer foundation.PSTR, pulLe
 	return CONFIGRET(r1)
 }
 
-// CM_Enumerate_EnumeratorsW calls CFGMGR32!CM_Enumerate_EnumeratorsW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_enumerate_enumeratorsw
+// CM_Enumerate_Enumerators_Ex calls CFGMGR32!CM_Enumerate_Enumerators_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_enumerate_enumerators_exw
 // Minimum OS: windows5.0.
-func CM_Enumerate_EnumeratorsW(ulEnumIndex uint32, Buffer foundation.PWSTR, pulLength *uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Enumerate_EnumeratorsW.Addr(), uintptr(ulEnumIndex), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags))
+func CM_Enumerate_Enumerators_Ex(ulEnumIndex uint32, Buffer foundation.PWSTR, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Enumerate_Enumerators_Ex.Addr(), uintptr(ulEnumIndex), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -887,14 +902,6 @@ func CM_Enumerate_EnumeratorsW(ulEnumIndex uint32, Buffer foundation.PWSTR, pulL
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_enumerate_enumerators_exa
 func CM_Enumerate_Enumerators_ExA(ulEnumIndex uint32, Buffer foundation.PSTR, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Enumerate_Enumerators_ExA.Addr(), uintptr(ulEnumIndex), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Enumerate_Enumerators_ExW calls CFGMGR32!CM_Enumerate_Enumerators_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_enumerate_enumerators_exw
-// Minimum OS: windows5.0.
-func CM_Enumerate_Enumerators_ExW(ulEnumIndex uint32, Buffer foundation.PWSTR, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Enumerate_Enumerators_ExW.Addr(), uintptr(ulEnumIndex), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -991,6 +998,13 @@ func CM_Get_Child_Ex(pdnDevInst *uint32, dnDevInst uint32, ulFlags uint32, hMach
 	return CONFIGRET(r1)
 }
 
+// CM_Get_Class_Key_Name calls CFGMGR32!CM_Get_Class_Key_NameW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_class_key_namew
+func CM_Get_Class_Key_Name(ClassGuid *win32.GUID, pszKeyName foundation.PWSTR, pulLength *uint32, ulFlags uint32) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Get_Class_Key_Name.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(pszKeyName)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Get_Class_Key_NameA calls CFGMGR32!CM_Get_Class_Key_NameA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_class_key_namea
 func CM_Get_Class_Key_NameA(ClassGuid *win32.GUID, pszKeyName foundation.PSTR, pulLength *uint32, ulFlags uint32) CONFIGRET {
@@ -998,10 +1012,10 @@ func CM_Get_Class_Key_NameA(ClassGuid *win32.GUID, pszKeyName foundation.PSTR, p
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Class_Key_NameW calls CFGMGR32!CM_Get_Class_Key_NameW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_class_key_namew
-func CM_Get_Class_Key_NameW(ClassGuid *win32.GUID, pszKeyName foundation.PWSTR, pulLength *uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Class_Key_NameW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(pszKeyName)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags))
+// CM_Get_Class_Key_Name_Ex calls CFGMGR32!CM_Get_Class_Key_Name_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_class_key_name_exw
+func CM_Get_Class_Key_Name_Ex(ClassGuid *win32.GUID, pszKeyName foundation.PWSTR, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Get_Class_Key_Name_Ex.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(pszKeyName)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1012,10 +1026,10 @@ func CM_Get_Class_Key_Name_ExA(ClassGuid *win32.GUID, pszKeyName foundation.PSTR
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Class_Key_Name_ExW calls CFGMGR32!CM_Get_Class_Key_Name_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_class_key_name_exw
-func CM_Get_Class_Key_Name_ExW(ClassGuid *win32.GUID, pszKeyName foundation.PWSTR, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Class_Key_Name_ExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(pszKeyName)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
+// CM_Get_Class_Name calls CFGMGR32!CM_Get_Class_NameW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_class_namew
+func CM_Get_Class_Name(ClassGuid *win32.GUID, Buffer foundation.PWSTR, pulLength *uint32, ulFlags uint32) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Get_Class_Name.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
@@ -1026,10 +1040,10 @@ func CM_Get_Class_NameA(ClassGuid *win32.GUID, Buffer foundation.PSTR, pulLength
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Class_NameW calls CFGMGR32!CM_Get_Class_NameW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_class_namew
-func CM_Get_Class_NameW(ClassGuid *win32.GUID, Buffer foundation.PWSTR, pulLength *uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Class_NameW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags))
+// CM_Get_Class_Name_Ex calls CFGMGR32!CM_Get_Class_Name_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_class_name_exw
+func CM_Get_Class_Name_Ex(ClassGuid *win32.GUID, Buffer foundation.PWSTR, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Get_Class_Name_Ex.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1037,13 +1051,6 @@ func CM_Get_Class_NameW(ClassGuid *win32.GUID, Buffer foundation.PWSTR, pulLengt
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_class_name_exa
 func CM_Get_Class_Name_ExA(ClassGuid *win32.GUID, Buffer foundation.PSTR, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Get_Class_Name_ExA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Get_Class_Name_ExW calls CFGMGR32!CM_Get_Class_Name_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_class_name_exw
-func CM_Get_Class_Name_ExW(ClassGuid *win32.GUID, Buffer foundation.PWSTR, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Class_Name_ExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1079,18 +1086,18 @@ func CM_Get_Class_Property_Keys_Ex(ClassGUID *win32.GUID, PropertyKeyArray *foun
 	return CONFIGRET(r1)
 }
 
+// CM_Get_Class_Registry_Property calls CFGMGR32!CM_Get_Class_Registry_PropertyW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_class_registry_propertyw
+// Minimum OS: windows5.0.
+func CM_Get_Class_Registry_Property(ClassGuid *win32.GUID, ulProperty uint32, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Get_Class_Registry_Property.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(ulProperty), uintptr(unsafe.Pointer(pulRegDataType)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
+	return CONFIGRET(r1)
+}
+
 // CM_Get_Class_Registry_PropertyA calls CFGMGR32!CM_Get_Class_Registry_PropertyA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_class_registry_propertya
 func CM_Get_Class_Registry_PropertyA(ClassGuid *win32.GUID, ulProperty uint32, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Get_Class_Registry_PropertyA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(ulProperty), uintptr(unsafe.Pointer(pulRegDataType)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Get_Class_Registry_PropertyW calls CFGMGR32!CM_Get_Class_Registry_PropertyW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_class_registry_propertyw
-// Minimum OS: windows5.0.
-func CM_Get_Class_Registry_PropertyW(ClassGuid *win32.GUID, ulProperty uint32, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Class_Registry_PropertyW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(ulProperty), uintptr(unsafe.Pointer(pulRegDataType)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1110,6 +1117,14 @@ func CM_Get_Depth_Ex(pulDepth *uint32, dnDevInst uint32, ulFlags uint32, hMachin
 	return CONFIGRET(r1)
 }
 
+// CM_Get_DevNode_Custom_Property calls CFGMGR32!CM_Get_DevNode_Custom_PropertyW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_devnode_custom_propertyw
+func CM_Get_DevNode_Custom_Property(dnDevInst uint32, pszCustomPropertyName string, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32) CONFIGRET {
+	_pszCustomPropertyName := win32.UTF16Ptr(pszCustomPropertyName)
+	r1, _, _ := syscall.SyscallN(procCM_Get_DevNode_Custom_Property.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(_pszCustomPropertyName)), uintptr(unsafe.Pointer(pulRegDataType)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Get_DevNode_Custom_PropertyA calls CFGMGR32!CM_Get_DevNode_Custom_PropertyA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_devnode_custom_propertya
 func CM_Get_DevNode_Custom_PropertyA(dnDevInst uint32, pszCustomPropertyName foundation.PSTR, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32) CONFIGRET {
@@ -1117,10 +1132,11 @@ func CM_Get_DevNode_Custom_PropertyA(dnDevInst uint32, pszCustomPropertyName fou
 	return CONFIGRET(r1)
 }
 
-// CM_Get_DevNode_Custom_PropertyW calls CFGMGR32!CM_Get_DevNode_Custom_PropertyW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_devnode_custom_propertyw
-func CM_Get_DevNode_Custom_PropertyW(dnDevInst uint32, pszCustomPropertyName foundation.PWSTR, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_DevNode_Custom_PropertyW.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(pszCustomPropertyName)), uintptr(unsafe.Pointer(pulRegDataType)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags))
+// CM_Get_DevNode_Custom_Property_Ex calls CFGMGR32!CM_Get_DevNode_Custom_Property_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_devnode_custom_property_exw
+func CM_Get_DevNode_Custom_Property_Ex(dnDevInst uint32, pszCustomPropertyName string, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pszCustomPropertyName := win32.UTF16Ptr(pszCustomPropertyName)
+	r1, _, _ := syscall.SyscallN(procCM_Get_DevNode_Custom_Property_Ex.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(_pszCustomPropertyName)), uintptr(unsafe.Pointer(pulRegDataType)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1128,13 +1144,6 @@ func CM_Get_DevNode_Custom_PropertyW(dnDevInst uint32, pszCustomPropertyName fou
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_devnode_custom_property_exa
 func CM_Get_DevNode_Custom_Property_ExA(dnDevInst uint32, pszCustomPropertyName foundation.PSTR, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Get_DevNode_Custom_Property_ExA.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(pszCustomPropertyName)), uintptr(unsafe.Pointer(pulRegDataType)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Get_DevNode_Custom_Property_ExW calls CFGMGR32!CM_Get_DevNode_Custom_Property_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_devnode_custom_property_exw
-func CM_Get_DevNode_Custom_Property_ExW(dnDevInst uint32, pszCustomPropertyName foundation.PWSTR, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_DevNode_Custom_Property_ExW.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(pszCustomPropertyName)), uintptr(unsafe.Pointer(pulRegDataType)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1170,6 +1179,14 @@ func CM_Get_DevNode_Property_Keys_Ex(dnDevInst uint32, PropertyKeyArray *foundat
 	return CONFIGRET(r1)
 }
 
+// CM_Get_DevNode_Registry_Property calls CFGMGR32!CM_Get_DevNode_Registry_PropertyW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_devnode_registry_propertyw
+// Minimum OS: windows5.0.
+func CM_Get_DevNode_Registry_Property(dnDevInst uint32, ulProperty uint32, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Get_DevNode_Registry_Property.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(pulRegDataType)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Get_DevNode_Registry_PropertyA calls CFGMGR32!CM_Get_DevNode_Registry_PropertyA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_devnode_registry_propertya
 func CM_Get_DevNode_Registry_PropertyA(dnDevInst uint32, ulProperty uint32, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32) CONFIGRET {
@@ -1177,11 +1194,10 @@ func CM_Get_DevNode_Registry_PropertyA(dnDevInst uint32, ulProperty uint32, pulR
 	return CONFIGRET(r1)
 }
 
-// CM_Get_DevNode_Registry_PropertyW calls CFGMGR32!CM_Get_DevNode_Registry_PropertyW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_devnode_registry_propertyw
-// Minimum OS: windows5.0.
-func CM_Get_DevNode_Registry_PropertyW(dnDevInst uint32, ulProperty uint32, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_DevNode_Registry_PropertyW.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(pulRegDataType)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags))
+// CM_Get_DevNode_Registry_Property_Ex calls CFGMGR32!CM_Get_DevNode_Registry_Property_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_devnode_registry_property_exw
+func CM_Get_DevNode_Registry_Property_Ex(dnDevInst uint32, ulProperty uint32, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Get_DevNode_Registry_Property_Ex.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(pulRegDataType)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1189,13 +1205,6 @@ func CM_Get_DevNode_Registry_PropertyW(dnDevInst uint32, ulProperty uint32, pulR
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_devnode_registry_property_exa
 func CM_Get_DevNode_Registry_Property_ExA(dnDevInst uint32, ulProperty uint32, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Get_DevNode_Registry_Property_ExA.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(pulRegDataType)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Get_DevNode_Registry_Property_ExW calls CFGMGR32!CM_Get_DevNode_Registry_Property_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_devnode_registry_property_exw
-func CM_Get_DevNode_Registry_Property_ExW(dnDevInst uint32, ulProperty uint32, pulRegDataType *uint32, Buffer unsafe.Pointer, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_DevNode_Registry_Property_ExW.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(pulRegDataType)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1215,6 +1224,14 @@ func CM_Get_DevNode_Status_Ex(pulStatus *CM_DEVNODE_STATUS_FLAGS, pulProblemNumb
 	return CONFIGRET(r1)
 }
 
+// CM_Get_Device_ID calls CFGMGR32!CM_Get_Device_IDW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_idw
+// Minimum OS: windows5.0.
+func CM_Get_Device_ID(dnDevInst uint32, Buffer foundation.PWSTR, BufferLen uint32, ulFlags uint32) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_ID.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLen), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Get_Device_IDA calls CFGMGR32!CM_Get_Device_IDA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_ida
 func CM_Get_Device_IDA(dnDevInst uint32, Buffer foundation.PSTR, BufferLen uint32, ulFlags uint32) CONFIGRET {
@@ -1222,11 +1239,11 @@ func CM_Get_Device_IDA(dnDevInst uint32, Buffer foundation.PSTR, BufferLen uint3
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Device_IDW calls CFGMGR32!CM_Get_Device_IDW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_idw
+// CM_Get_Device_ID_Ex calls CFGMGR32!CM_Get_Device_ID_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_id_exw
 // Minimum OS: windows5.0.
-func CM_Get_Device_IDW(dnDevInst uint32, Buffer foundation.PWSTR, BufferLen uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_IDW.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLen), uintptr(ulFlags))
+func CM_Get_Device_ID_Ex(dnDevInst uint32, Buffer foundation.PWSTR, BufferLen uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_ID_Ex.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLen), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1237,11 +1254,12 @@ func CM_Get_Device_ID_ExA(dnDevInst uint32, Buffer foundation.PSTR, BufferLen ui
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Device_ID_ExW calls CFGMGR32!CM_Get_Device_ID_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_id_exw
+// CM_Get_Device_ID_List calls CFGMGR32!CM_Get_Device_ID_ListW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_id_listw
 // Minimum OS: windows5.0.
-func CM_Get_Device_ID_ExW(dnDevInst uint32, Buffer foundation.PWSTR, BufferLen uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_ID_ExW.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLen), uintptr(ulFlags), uintptr(hMachine))
+func CM_Get_Device_ID_List(pszFilter string, Buffer foundation.PWSTR, BufferLen uint32, ulFlags uint32) CONFIGRET {
+	_pszFilter := win32.UTF16Ptr(pszFilter)
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_ID_List.Addr(), uintptr(unsafe.Pointer(_pszFilter)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLen), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
@@ -1253,11 +1271,12 @@ func CM_Get_Device_ID_ListA(pszFilter foundation.PSTR, Buffer foundation.PSTR, B
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Device_ID_ListW calls CFGMGR32!CM_Get_Device_ID_ListW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_id_listw
+// CM_Get_Device_ID_List_Ex calls CFGMGR32!CM_Get_Device_ID_List_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_id_list_exw
 // Minimum OS: windows5.0.
-func CM_Get_Device_ID_ListW(pszFilter foundation.PWSTR, Buffer foundation.PWSTR, BufferLen uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_ID_ListW.Addr(), uintptr(unsafe.Pointer(pszFilter)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLen), uintptr(ulFlags))
+func CM_Get_Device_ID_List_Ex(pszFilter string, Buffer foundation.PWSTR, BufferLen uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pszFilter := win32.UTF16Ptr(pszFilter)
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_ID_List_Ex.Addr(), uintptr(unsafe.Pointer(_pszFilter)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLen), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1268,11 +1287,12 @@ func CM_Get_Device_ID_List_ExA(pszFilter foundation.PSTR, Buffer foundation.PSTR
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Device_ID_List_ExW calls CFGMGR32!CM_Get_Device_ID_List_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_id_list_exw
+// CM_Get_Device_ID_List_Size calls CFGMGR32!CM_Get_Device_ID_List_SizeW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_id_list_sizew
 // Minimum OS: windows5.0.
-func CM_Get_Device_ID_List_ExW(pszFilter foundation.PWSTR, Buffer foundation.PWSTR, BufferLen uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_ID_List_ExW.Addr(), uintptr(unsafe.Pointer(pszFilter)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLen), uintptr(ulFlags), uintptr(hMachine))
+func CM_Get_Device_ID_List_Size(pulLen *uint32, pszFilter string, ulFlags uint32) CONFIGRET {
+	_pszFilter := win32.UTF16Ptr(pszFilter)
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_ID_List_Size.Addr(), uintptr(unsafe.Pointer(pulLen)), uintptr(unsafe.Pointer(_pszFilter)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
@@ -1284,11 +1304,12 @@ func CM_Get_Device_ID_List_SizeA(pulLen *uint32, pszFilter foundation.PSTR, ulFl
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Device_ID_List_SizeW calls CFGMGR32!CM_Get_Device_ID_List_SizeW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_id_list_sizew
+// CM_Get_Device_ID_List_Size_Ex calls CFGMGR32!CM_Get_Device_ID_List_Size_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_id_list_size_exw
 // Minimum OS: windows5.0.
-func CM_Get_Device_ID_List_SizeW(pulLen *uint32, pszFilter foundation.PWSTR, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_ID_List_SizeW.Addr(), uintptr(unsafe.Pointer(pulLen)), uintptr(unsafe.Pointer(pszFilter)), uintptr(ulFlags))
+func CM_Get_Device_ID_List_Size_Ex(pulLen *uint32, pszFilter string, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pszFilter := win32.UTF16Ptr(pszFilter)
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_ID_List_Size_Ex.Addr(), uintptr(unsafe.Pointer(pulLen)), uintptr(unsafe.Pointer(_pszFilter)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1296,14 +1317,6 @@ func CM_Get_Device_ID_List_SizeW(pulLen *uint32, pszFilter foundation.PWSTR, ulF
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_id_list_size_exa
 func CM_Get_Device_ID_List_Size_ExA(pulLen *uint32, pszFilter foundation.PSTR, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Get_Device_ID_List_Size_ExA.Addr(), uintptr(unsafe.Pointer(pulLen)), uintptr(unsafe.Pointer(pszFilter)), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Get_Device_ID_List_Size_ExW calls CFGMGR32!CM_Get_Device_ID_List_Size_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_id_list_size_exw
-// Minimum OS: windows5.0.
-func CM_Get_Device_ID_List_Size_ExW(pulLen *uint32, pszFilter foundation.PWSTR, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_ID_List_Size_ExW.Addr(), uintptr(unsafe.Pointer(pulLen)), uintptr(unsafe.Pointer(pszFilter)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1323,6 +1336,15 @@ func CM_Get_Device_ID_Size_Ex(pulLen *uint32, dnDevInst uint32, ulFlags uint32, 
 	return CONFIGRET(r1)
 }
 
+// CM_Get_Device_Interface_Alias calls CFGMGR32!CM_Get_Device_Interface_AliasW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_aliasw
+// Minimum OS: windows5.0.
+func CM_Get_Device_Interface_Alias(pszDeviceInterface string, AliasInterfaceGuid *win32.GUID, pszAliasDeviceInterface foundation.PWSTR, pulLength *uint32, ulFlags uint32) CONFIGRET {
+	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_Alias.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(unsafe.Pointer(AliasInterfaceGuid)), uintptr(unsafe.Pointer(pszAliasDeviceInterface)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Get_Device_Interface_AliasA calls CFGMGR32!CM_Get_Device_Interface_AliasA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_aliasa
 func CM_Get_Device_Interface_AliasA(pszDeviceInterface foundation.PSTR, AliasInterfaceGuid *win32.GUID, pszAliasDeviceInterface foundation.PSTR, pulLength *uint32, ulFlags uint32) CONFIGRET {
@@ -1330,11 +1352,11 @@ func CM_Get_Device_Interface_AliasA(pszDeviceInterface foundation.PSTR, AliasInt
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Device_Interface_AliasW calls CFGMGR32!CM_Get_Device_Interface_AliasW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_aliasw
-// Minimum OS: windows5.0.
-func CM_Get_Device_Interface_AliasW(pszDeviceInterface foundation.PWSTR, AliasInterfaceGuid *win32.GUID, pszAliasDeviceInterface foundation.PWSTR, pulLength *uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_AliasW.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(unsafe.Pointer(AliasInterfaceGuid)), uintptr(unsafe.Pointer(pszAliasDeviceInterface)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags))
+// CM_Get_Device_Interface_Alias_Ex calls CFGMGR32!CM_Get_Device_Interface_Alias_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_alias_exw
+func CM_Get_Device_Interface_Alias_Ex(pszDeviceInterface string, AliasInterfaceGuid *win32.GUID, pszAliasDeviceInterface foundation.PWSTR, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_Alias_Ex.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(unsafe.Pointer(AliasInterfaceGuid)), uintptr(unsafe.Pointer(pszAliasDeviceInterface)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1345,10 +1367,12 @@ func CM_Get_Device_Interface_Alias_ExA(pszDeviceInterface foundation.PSTR, Alias
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Device_Interface_Alias_ExW calls CFGMGR32!CM_Get_Device_Interface_Alias_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_alias_exw
-func CM_Get_Device_Interface_Alias_ExW(pszDeviceInterface foundation.PWSTR, AliasInterfaceGuid *win32.GUID, pszAliasDeviceInterface foundation.PWSTR, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_Alias_ExW.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(unsafe.Pointer(AliasInterfaceGuid)), uintptr(unsafe.Pointer(pszAliasDeviceInterface)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
+// CM_Get_Device_Interface_List calls CFGMGR32!CM_Get_Device_Interface_ListW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_listw
+// Minimum OS: windows5.0.
+func CM_Get_Device_Interface_List(InterfaceClassGuid *win32.GUID, pDeviceID string, Buffer foundation.PWSTR, BufferLen uint32, ulFlags CM_GET_DEVICE_INTERFACE_LIST_FLAGS) CONFIGRET {
+	_pDeviceID := win32.UTF16Ptr(pDeviceID)
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_List.Addr(), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(_pDeviceID)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLen), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
@@ -1360,11 +1384,11 @@ func CM_Get_Device_Interface_ListA(InterfaceClassGuid *win32.GUID, pDeviceID fou
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Device_Interface_ListW calls CFGMGR32!CM_Get_Device_Interface_ListW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_listw
-// Minimum OS: windows5.0.
-func CM_Get_Device_Interface_ListW(InterfaceClassGuid *win32.GUID, pDeviceID foundation.PWSTR, Buffer foundation.PWSTR, BufferLen uint32, ulFlags CM_GET_DEVICE_INTERFACE_LIST_FLAGS) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_ListW.Addr(), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(pDeviceID)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLen), uintptr(ulFlags))
+// CM_Get_Device_Interface_List_Ex calls CFGMGR32!CM_Get_Device_Interface_List_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_list_exw
+func CM_Get_Device_Interface_List_Ex(InterfaceClassGuid *win32.GUID, pDeviceID string, Buffer foundation.PWSTR, BufferLen uint32, ulFlags CM_GET_DEVICE_INTERFACE_LIST_FLAGS, hMachine uintptr) CONFIGRET {
+	_pDeviceID := win32.UTF16Ptr(pDeviceID)
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_List_Ex.Addr(), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(_pDeviceID)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLen), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1375,10 +1399,12 @@ func CM_Get_Device_Interface_List_ExA(InterfaceClassGuid *win32.GUID, pDeviceID 
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Device_Interface_List_ExW calls CFGMGR32!CM_Get_Device_Interface_List_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_list_exw
-func CM_Get_Device_Interface_List_ExW(InterfaceClassGuid *win32.GUID, pDeviceID foundation.PWSTR, Buffer foundation.PWSTR, BufferLen uint32, ulFlags CM_GET_DEVICE_INTERFACE_LIST_FLAGS, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_List_ExW.Addr(), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(pDeviceID)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLen), uintptr(ulFlags), uintptr(hMachine))
+// CM_Get_Device_Interface_List_Size calls CFGMGR32!CM_Get_Device_Interface_List_SizeW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_list_sizew
+// Minimum OS: windows5.0.
+func CM_Get_Device_Interface_List_Size(pulLen *uint32, InterfaceClassGuid *win32.GUID, pDeviceID string, ulFlags CM_GET_DEVICE_INTERFACE_LIST_FLAGS) CONFIGRET {
+	_pDeviceID := win32.UTF16Ptr(pDeviceID)
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_List_Size.Addr(), uintptr(unsafe.Pointer(pulLen)), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(_pDeviceID)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
@@ -1390,11 +1416,11 @@ func CM_Get_Device_Interface_List_SizeA(pulLen *uint32, InterfaceClassGuid *win3
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Device_Interface_List_SizeW calls CFGMGR32!CM_Get_Device_Interface_List_SizeW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_list_sizew
-// Minimum OS: windows5.0.
-func CM_Get_Device_Interface_List_SizeW(pulLen *uint32, InterfaceClassGuid *win32.GUID, pDeviceID foundation.PWSTR, ulFlags CM_GET_DEVICE_INTERFACE_LIST_FLAGS) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_List_SizeW.Addr(), uintptr(unsafe.Pointer(pulLen)), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(pDeviceID)), uintptr(ulFlags))
+// CM_Get_Device_Interface_List_Size_Ex calls CFGMGR32!CM_Get_Device_Interface_List_Size_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_list_size_exw
+func CM_Get_Device_Interface_List_Size_Ex(pulLen *uint32, InterfaceClassGuid *win32.GUID, pDeviceID string, ulFlags CM_GET_DEVICE_INTERFACE_LIST_FLAGS, hMachine uintptr) CONFIGRET {
+	_pDeviceID := win32.UTF16Ptr(pDeviceID)
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_List_Size_Ex.Addr(), uintptr(unsafe.Pointer(pulLen)), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(_pDeviceID)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1405,42 +1431,39 @@ func CM_Get_Device_Interface_List_Size_ExA(pulLen *uint32, InterfaceClassGuid *w
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Device_Interface_List_Size_ExW calls CFGMGR32!CM_Get_Device_Interface_List_Size_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_list_size_exw
-func CM_Get_Device_Interface_List_Size_ExW(pulLen *uint32, InterfaceClassGuid *win32.GUID, pDeviceID foundation.PWSTR, ulFlags CM_GET_DEVICE_INTERFACE_LIST_FLAGS, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_List_Size_ExW.Addr(), uintptr(unsafe.Pointer(pulLen)), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(pDeviceID)), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
 // CM_Get_Device_Interface_PropertyW calls CFGMGR32!CM_Get_Device_Interface_PropertyW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_propertyw
 // Minimum OS: windows6.0.6000.
-func CM_Get_Device_Interface_PropertyW(pszDeviceInterface foundation.PWSTR, PropertyKey *foundation.DEVPROPKEY, PropertyType *devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize *uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_PropertyW.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(unsafe.Pointer(PropertyBufferSize)), uintptr(ulFlags))
+func CM_Get_Device_Interface_PropertyW(pszDeviceInterface string, PropertyKey *foundation.DEVPROPKEY, PropertyType *devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize *uint32, ulFlags uint32) CONFIGRET {
+	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_PropertyW.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(unsafe.Pointer(PropertyBufferSize)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Get_Device_Interface_Property_ExW calls CFGMGR32!CM_Get_Device_Interface_Property_ExW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_property_exw
 // Minimum OS: windows10.0.10240.
-func CM_Get_Device_Interface_Property_ExW(pszDeviceInterface foundation.PWSTR, PropertyKey *foundation.DEVPROPKEY, PropertyType *devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_Property_ExW.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(unsafe.Pointer(PropertyBufferSize)), uintptr(ulFlags), uintptr(hMachine))
+func CM_Get_Device_Interface_Property_ExW(pszDeviceInterface string, PropertyKey *foundation.DEVPROPKEY, PropertyType *devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_Property_ExW.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(unsafe.Pointer(PropertyBufferSize)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
 // CM_Get_Device_Interface_Property_KeysW calls CFGMGR32!CM_Get_Device_Interface_Property_KeysW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_property_keysw
 // Minimum OS: windows6.0.6000.
-func CM_Get_Device_Interface_Property_KeysW(pszDeviceInterface foundation.PWSTR, PropertyKeyArray *foundation.DEVPROPKEY, PropertyKeyCount *uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_Property_KeysW.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKeyArray)), uintptr(unsafe.Pointer(PropertyKeyCount)), uintptr(ulFlags))
+func CM_Get_Device_Interface_Property_KeysW(pszDeviceInterface string, PropertyKeyArray *foundation.DEVPROPKEY, PropertyKeyCount *uint32, ulFlags uint32) CONFIGRET {
+	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_Property_KeysW.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKeyArray)), uintptr(unsafe.Pointer(PropertyKeyCount)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Get_Device_Interface_Property_Keys_ExW calls CFGMGR32!CM_Get_Device_Interface_Property_Keys_ExW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_device_interface_property_keys_exw
 // Minimum OS: windows10.0.10240.
-func CM_Get_Device_Interface_Property_Keys_ExW(pszDeviceInterface foundation.PWSTR, PropertyKeyArray *foundation.DEVPROPKEY, PropertyKeyCount *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_Property_Keys_ExW.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKeyArray)), uintptr(unsafe.Pointer(PropertyKeyCount)), uintptr(ulFlags), uintptr(hMachine))
+func CM_Get_Device_Interface_Property_Keys_ExW(pszDeviceInterface string, PropertyKeyArray *foundation.DEVPROPKEY, PropertyKeyCount *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
+	r1, _, _ := syscall.SyscallN(procCM_Get_Device_Interface_Property_Keys_ExW.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKeyArray)), uintptr(unsafe.Pointer(PropertyKeyCount)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1474,6 +1497,15 @@ func CM_Get_Global_State_Ex(pulState *uint32, ulFlags uint32, hMachine uintptr) 
 	return CONFIGRET(r1)
 }
 
+// CM_Get_HW_Prof_Flags calls CFGMGR32!CM_Get_HW_Prof_FlagsW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_hw_prof_flagsw
+// Minimum OS: windows5.0.
+func CM_Get_HW_Prof_Flags(pDeviceID string, ulHardwareProfile uint32, pulValue *uint32, ulFlags uint32) CONFIGRET {
+	_pDeviceID := win32.UTF16Ptr(pDeviceID)
+	r1, _, _ := syscall.SyscallN(procCM_Get_HW_Prof_Flags.Addr(), uintptr(unsafe.Pointer(_pDeviceID)), uintptr(ulHardwareProfile), uintptr(unsafe.Pointer(pulValue)), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Get_HW_Prof_FlagsA calls CFGMGR32!CM_Get_HW_Prof_FlagsA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_hw_prof_flagsa
 // Minimum OS: windows5.0.
@@ -1482,11 +1514,12 @@ func CM_Get_HW_Prof_FlagsA(pDeviceID foundation.PSTR, ulHardwareProfile uint32, 
 	return CONFIGRET(r1)
 }
 
-// CM_Get_HW_Prof_FlagsW calls CFGMGR32!CM_Get_HW_Prof_FlagsW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_hw_prof_flagsw
+// CM_Get_HW_Prof_Flags_Ex calls CFGMGR32!CM_Get_HW_Prof_Flags_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_hw_prof_flags_exw
 // Minimum OS: windows5.0.
-func CM_Get_HW_Prof_FlagsW(pDeviceID foundation.PWSTR, ulHardwareProfile uint32, pulValue *uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_HW_Prof_FlagsW.Addr(), uintptr(unsafe.Pointer(pDeviceID)), uintptr(ulHardwareProfile), uintptr(unsafe.Pointer(pulValue)), uintptr(ulFlags))
+func CM_Get_HW_Prof_Flags_Ex(pDeviceID string, ulHardwareProfile uint32, pulValue *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pDeviceID := win32.UTF16Ptr(pDeviceID)
+	r1, _, _ := syscall.SyscallN(procCM_Get_HW_Prof_Flags_Ex.Addr(), uintptr(unsafe.Pointer(_pDeviceID)), uintptr(ulHardwareProfile), uintptr(unsafe.Pointer(pulValue)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1498,11 +1531,10 @@ func CM_Get_HW_Prof_Flags_ExA(pDeviceID foundation.PSTR, ulHardwareProfile uint3
 	return CONFIGRET(r1)
 }
 
-// CM_Get_HW_Prof_Flags_ExW calls CFGMGR32!CM_Get_HW_Prof_Flags_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_hw_prof_flags_exw
-// Minimum OS: windows5.0.
-func CM_Get_HW_Prof_Flags_ExW(pDeviceID foundation.PWSTR, ulHardwareProfile uint32, pulValue *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_HW_Prof_Flags_ExW.Addr(), uintptr(unsafe.Pointer(pDeviceID)), uintptr(ulHardwareProfile), uintptr(unsafe.Pointer(pulValue)), uintptr(ulFlags), uintptr(hMachine))
+// CM_Get_Hardware_Profile_Info calls CFGMGR32!CM_Get_Hardware_Profile_InfoW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_hardware_profile_infow
+func CM_Get_Hardware_Profile_Info(ulIndex uint32, pHWProfileInfo unsafe.Pointer, ulFlags uint32) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Get_Hardware_Profile_Info.Addr(), uintptr(ulIndex), uintptr(unsafe.Pointer(pHWProfileInfo)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
@@ -1513,10 +1545,10 @@ func CM_Get_Hardware_Profile_InfoA(ulIndex uint32, pHWProfileInfo unsafe.Pointer
 	return CONFIGRET(r1)
 }
 
-// CM_Get_Hardware_Profile_InfoW calls CFGMGR32!CM_Get_Hardware_Profile_InfoW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_hardware_profile_infow
-func CM_Get_Hardware_Profile_InfoW(ulIndex uint32, pHWProfileInfo unsafe.Pointer, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Hardware_Profile_InfoW.Addr(), uintptr(ulIndex), uintptr(unsafe.Pointer(pHWProfileInfo)), uintptr(ulFlags))
+// CM_Get_Hardware_Profile_Info_Ex calls CFGMGR32!CM_Get_Hardware_Profile_Info_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_hardware_profile_info_exw
+func CM_Get_Hardware_Profile_Info_Ex(ulIndex uint32, pHWProfileInfo unsafe.Pointer, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Get_Hardware_Profile_Info_Ex.Addr(), uintptr(ulIndex), uintptr(unsafe.Pointer(pHWProfileInfo)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1524,13 +1556,6 @@ func CM_Get_Hardware_Profile_InfoW(ulIndex uint32, pHWProfileInfo unsafe.Pointer
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_hardware_profile_info_exa
 func CM_Get_Hardware_Profile_Info_ExA(ulIndex uint32, pHWProfileInfo unsafe.Pointer, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Get_Hardware_Profile_Info_ExA.Addr(), uintptr(ulIndex), uintptr(unsafe.Pointer(pHWProfileInfo)), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Get_Hardware_Profile_Info_ExW calls CFGMGR32!CM_Get_Hardware_Profile_Info_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_hardware_profile_info_exw
-func CM_Get_Hardware_Profile_Info_ExW(ulIndex uint32, pHWProfileInfo unsafe.Pointer, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Hardware_Profile_Info_ExW.Addr(), uintptr(ulIndex), uintptr(unsafe.Pointer(pHWProfileInfo)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1553,16 +1578,16 @@ func CM_Get_Log_Conf_Priority_Ex(lcLogConf uintptr, pPriority *uint32, ulFlags u
 // CM_Get_Next_Log_Conf calls CFGMGR32!CM_Get_Next_Log_Conf.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_next_log_conf
 // Minimum OS: windows5.0.
-func CM_Get_Next_Log_Conf(plcLogConf *uintptr, lcLogConf uintptr, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Next_Log_Conf.Addr(), uintptr(unsafe.Pointer(plcLogConf)), uintptr(lcLogConf), uintptr(ulFlags))
+func CM_Get_Next_Log_Conf(plcLogConf *uintptr, lcLogConf uintptr) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Get_Next_Log_Conf.Addr(), uintptr(unsafe.Pointer(plcLogConf)), uintptr(lcLogConf), 0)
 	return CONFIGRET(r1)
 }
 
 // CM_Get_Next_Log_Conf_Ex calls CFGMGR32!CM_Get_Next_Log_Conf_Ex.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_next_log_conf_ex
 // Minimum OS: windows5.0.
-func CM_Get_Next_Log_Conf_Ex(plcLogConf *uintptr, lcLogConf uintptr, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Next_Log_Conf_Ex.Addr(), uintptr(unsafe.Pointer(plcLogConf)), uintptr(lcLogConf), uintptr(ulFlags), uintptr(hMachine))
+func CM_Get_Next_Log_Conf_Ex(plcLogConf *uintptr, lcLogConf uintptr, hMachine uintptr) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Get_Next_Log_Conf_Ex.Addr(), uintptr(unsafe.Pointer(plcLogConf)), uintptr(lcLogConf), 0, uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1638,18 +1663,18 @@ func CM_Get_Resource_Conflict_Count(clConflictList uintptr, pulCount *uint32) CO
 	return CONFIGRET(r1)
 }
 
+// CM_Get_Resource_Conflict_Details calls CFGMGR32!CM_Get_Resource_Conflict_DetailsW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_resource_conflict_detailsw
+// Minimum OS: windows5.0.
+func CM_Get_Resource_Conflict_Details(clConflictList uintptr, ulIndex uint32, pConflictDetails *CONFLICT_DETAILS_W) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Get_Resource_Conflict_Details.Addr(), uintptr(clConflictList), uintptr(ulIndex), uintptr(unsafe.Pointer(pConflictDetails)))
+	return CONFIGRET(r1)
+}
+
 // CM_Get_Resource_Conflict_DetailsA calls CFGMGR32!CM_Get_Resource_Conflict_DetailsA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_resource_conflict_detailsa
 func CM_Get_Resource_Conflict_DetailsA(clConflictList uintptr, ulIndex uint32, pConflictDetails *CONFLICT_DETAILS_A) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Get_Resource_Conflict_DetailsA.Addr(), uintptr(clConflictList), uintptr(ulIndex), uintptr(unsafe.Pointer(pConflictDetails)))
-	return CONFIGRET(r1)
-}
-
-// CM_Get_Resource_Conflict_DetailsW calls CFGMGR32!CM_Get_Resource_Conflict_DetailsW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_resource_conflict_detailsw
-// Minimum OS: windows5.0.
-func CM_Get_Resource_Conflict_DetailsW(clConflictList uintptr, ulIndex uint32, pConflictDetails *CONFLICT_DETAILS_W) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Resource_Conflict_DetailsW.Addr(), uintptr(clConflictList), uintptr(ulIndex), uintptr(unsafe.Pointer(pConflictDetails)))
 	return CONFIGRET(r1)
 }
 
@@ -1724,17 +1749,26 @@ func CM_Is_Dock_Station_Present_Ex(pbPresent *foundation.BOOL, hMachine uintptr)
 // CM_Is_Version_Available calls CFGMGR32!CM_Is_Version_Available.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_is_version_available
 // Minimum OS: windows5.1.2600.
-func CM_Is_Version_Available(wVersion uint16) foundation.BOOL {
+func CM_Is_Version_Available(wVersion uint16) bool {
 	r1, _, _ := syscall.SyscallN(procCM_Is_Version_Available.Addr(), uintptr(wVersion))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CM_Is_Version_Available_Ex calls CFGMGR32!CM_Is_Version_Available_Ex.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_is_version_available_ex
 // Minimum OS: windows5.1.2600.
-func CM_Is_Version_Available_Ex(wVersion uint16, hMachine uintptr) foundation.BOOL {
+func CM_Is_Version_Available_Ex(wVersion uint16, hMachine uintptr) bool {
 	r1, _, _ := syscall.SyscallN(procCM_Is_Version_Available_Ex.Addr(), uintptr(wVersion), uintptr(hMachine))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// CM_Locate_DevNode calls CFGMGR32!CM_Locate_DevNodeW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_locate_devnodew
+// Minimum OS: windows5.0.
+func CM_Locate_DevNode(pdnDevInst *uint32, pDeviceID string, ulFlags CM_LOCATE_DEVNODE_FLAGS) CONFIGRET {
+	_pDeviceID := win32.UTF16Ptr(pDeviceID)
+	r1, _, _ := syscall.SyscallN(procCM_Locate_DevNode.Addr(), uintptr(unsafe.Pointer(pdnDevInst)), uintptr(unsafe.Pointer(_pDeviceID)), uintptr(ulFlags))
+	return CONFIGRET(r1)
 }
 
 // CM_Locate_DevNodeA calls CFGMGR32!CM_Locate_DevNodeA.
@@ -1745,11 +1779,12 @@ func CM_Locate_DevNodeA(pdnDevInst *uint32, pDeviceID foundation.PSTR, ulFlags C
 	return CONFIGRET(r1)
 }
 
-// CM_Locate_DevNodeW calls CFGMGR32!CM_Locate_DevNodeW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_locate_devnodew
+// CM_Locate_DevNode_Ex calls CFGMGR32!CM_Locate_DevNode_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_locate_devnode_exw
 // Minimum OS: windows5.0.
-func CM_Locate_DevNodeW(pdnDevInst *uint32, pDeviceID foundation.PWSTR, ulFlags CM_LOCATE_DEVNODE_FLAGS) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Locate_DevNodeW.Addr(), uintptr(unsafe.Pointer(pdnDevInst)), uintptr(unsafe.Pointer(pDeviceID)), uintptr(ulFlags))
+func CM_Locate_DevNode_Ex(pdnDevInst *uint32, pDeviceID string, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pDeviceID := win32.UTF16Ptr(pDeviceID)
+	r1, _, _ := syscall.SyscallN(procCM_Locate_DevNode_Ex.Addr(), uintptr(unsafe.Pointer(pdnDevInst)), uintptr(unsafe.Pointer(_pDeviceID)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1757,14 +1792,6 @@ func CM_Locate_DevNodeW(pdnDevInst *uint32, pDeviceID foundation.PWSTR, ulFlags 
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_locate_devnode_exa
 func CM_Locate_DevNode_ExA(pdnDevInst *uint32, pDeviceID foundation.PSTR, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Locate_DevNode_ExA.Addr(), uintptr(unsafe.Pointer(pdnDevInst)), uintptr(unsafe.Pointer(pDeviceID)), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Locate_DevNode_ExW calls CFGMGR32!CM_Locate_DevNode_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_locate_devnode_exw
-// Minimum OS: windows5.0.
-func CM_Locate_DevNode_ExW(pdnDevInst *uint32, pDeviceID foundation.PWSTR, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Locate_DevNode_ExW.Addr(), uintptr(unsafe.Pointer(pdnDevInst)), uintptr(unsafe.Pointer(pDeviceID)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1820,6 +1847,15 @@ func CM_Next_Range(preElement *uintptr, pullStart *uint64, pullEnd *uint64, ulFl
 	return CONFIGRET(r1)
 }
 
+// CM_Open_Class_Key calls CFGMGR32!CM_Open_Class_KeyW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_open_class_keyw
+// Minimum OS: windows5.0.
+func CM_Open_Class_Key(ClassGuid *win32.GUID, pszClassName string, samDesired uint32, Disposition uint32, phkClass *systemregistry.HKEY, ulFlags uint32) CONFIGRET {
+	_pszClassName := win32.UTF16Ptr(pszClassName)
+	r1, _, _ := syscall.SyscallN(procCM_Open_Class_Key.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(_pszClassName)), uintptr(samDesired), uintptr(Disposition), uintptr(unsafe.Pointer(phkClass)), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Open_Class_KeyA calls CFGMGR32!CM_Open_Class_KeyA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_open_class_keya
 func CM_Open_Class_KeyA(ClassGuid *win32.GUID, pszClassName foundation.PSTR, samDesired uint32, Disposition uint32, phkClass *systemregistry.HKEY, ulFlags uint32) CONFIGRET {
@@ -1827,11 +1863,11 @@ func CM_Open_Class_KeyA(ClassGuid *win32.GUID, pszClassName foundation.PSTR, sam
 	return CONFIGRET(r1)
 }
 
-// CM_Open_Class_KeyW calls CFGMGR32!CM_Open_Class_KeyW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_open_class_keyw
-// Minimum OS: windows5.0.
-func CM_Open_Class_KeyW(ClassGuid *win32.GUID, pszClassName foundation.PWSTR, samDesired uint32, Disposition uint32, phkClass *systemregistry.HKEY, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Open_Class_KeyW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(pszClassName)), uintptr(samDesired), uintptr(Disposition), uintptr(unsafe.Pointer(phkClass)), uintptr(ulFlags))
+// CM_Open_Class_Key_Ex calls CFGMGR32!CM_Open_Class_Key_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_open_class_key_exw
+func CM_Open_Class_Key_Ex(ClassGuid *win32.GUID, pszClassName string, samDesired uint32, Disposition uint32, phkClass *systemregistry.HKEY, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pszClassName := win32.UTF16Ptr(pszClassName)
+	r1, _, _ := syscall.SyscallN(procCM_Open_Class_Key_Ex.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(_pszClassName)), uintptr(samDesired), uintptr(Disposition), uintptr(unsafe.Pointer(phkClass)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1839,13 +1875,6 @@ func CM_Open_Class_KeyW(ClassGuid *win32.GUID, pszClassName foundation.PWSTR, sa
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_open_class_key_exa
 func CM_Open_Class_Key_ExA(ClassGuid *win32.GUID, pszClassName foundation.PSTR, samDesired uint32, Disposition uint32, phkClass *systemregistry.HKEY, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Open_Class_Key_ExA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(pszClassName)), uintptr(samDesired), uintptr(Disposition), uintptr(unsafe.Pointer(phkClass)), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Open_Class_Key_ExW calls CFGMGR32!CM_Open_Class_Key_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_open_class_key_exw
-func CM_Open_Class_Key_ExW(ClassGuid *win32.GUID, pszClassName foundation.PWSTR, samDesired uint32, Disposition uint32, phkClass *systemregistry.HKEY, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Open_Class_Key_ExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(pszClassName)), uintptr(samDesired), uintptr(Disposition), uintptr(unsafe.Pointer(phkClass)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1864,6 +1893,15 @@ func CM_Open_DevNode_Key_Ex(dnDevNode uint32, samDesired uint32, ulHardwareProfi
 	return CONFIGRET(r1)
 }
 
+// CM_Open_Device_Interface_Key calls CFGMGR32!CM_Open_Device_Interface_KeyW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_open_device_interface_keyw
+// Minimum OS: windows6.0.6000.
+func CM_Open_Device_Interface_Key(pszDeviceInterface string, samDesired uint32, Disposition uint32, phkDeviceInterface *systemregistry.HKEY, ulFlags uint32) CONFIGRET {
+	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
+	r1, _, _ := syscall.SyscallN(procCM_Open_Device_Interface_Key.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(samDesired), uintptr(Disposition), uintptr(unsafe.Pointer(phkDeviceInterface)), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Open_Device_Interface_KeyA calls CFGMGR32!CM_Open_Device_Interface_KeyA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_open_device_interface_keya
 // Minimum OS: windows6.0.6000.
@@ -1872,11 +1910,12 @@ func CM_Open_Device_Interface_KeyA(pszDeviceInterface foundation.PSTR, samDesire
 	return CONFIGRET(r1)
 }
 
-// CM_Open_Device_Interface_KeyW calls CFGMGR32!CM_Open_Device_Interface_KeyW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_open_device_interface_keyw
-// Minimum OS: windows6.0.6000.
-func CM_Open_Device_Interface_KeyW(pszDeviceInterface foundation.PWSTR, samDesired uint32, Disposition uint32, phkDeviceInterface *systemregistry.HKEY, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Open_Device_Interface_KeyW.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(samDesired), uintptr(Disposition), uintptr(unsafe.Pointer(phkDeviceInterface)), uintptr(ulFlags))
+// CM_Open_Device_Interface_Key_Ex calls CFGMGR32!CM_Open_Device_Interface_Key_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_open_device_interface_key_exw
+// Minimum OS: windows10.0.10240.
+func CM_Open_Device_Interface_Key_Ex(pszDeviceInterface string, samDesired uint32, Disposition uint32, phkDeviceInterface *systemregistry.HKEY, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
+	r1, _, _ := syscall.SyscallN(procCM_Open_Device_Interface_Key_Ex.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(samDesired), uintptr(Disposition), uintptr(unsafe.Pointer(phkDeviceInterface)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1888,11 +1927,11 @@ func CM_Open_Device_Interface_Key_ExA(pszDeviceInterface foundation.PSTR, samDes
 	return CONFIGRET(r1)
 }
 
-// CM_Open_Device_Interface_Key_ExW calls CFGMGR32!CM_Open_Device_Interface_Key_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_open_device_interface_key_exw
-// Minimum OS: windows10.0.10240.
-func CM_Open_Device_Interface_Key_ExW(pszDeviceInterface foundation.PWSTR, samDesired uint32, Disposition uint32, phkDeviceInterface *systemregistry.HKEY, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Open_Device_Interface_Key_ExW.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(samDesired), uintptr(Disposition), uintptr(unsafe.Pointer(phkDeviceInterface)), uintptr(ulFlags), uintptr(hMachine))
+// CM_Query_And_Remove_SubTree calls CFGMGR32!CM_Query_And_Remove_SubTreeW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_query_and_remove_subtreew
+// Minimum OS: windows5.0.
+func CM_Query_And_Remove_SubTree(dnAncestor uint32, pVetoType *PNP_VETO_TYPE, pszVetoName foundation.PWSTR, ulNameLength uint32, ulFlags uint32) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Query_And_Remove_SubTree.Addr(), uintptr(dnAncestor), uintptr(unsafe.Pointer(pVetoType)), uintptr(unsafe.Pointer(pszVetoName)), uintptr(ulNameLength), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
@@ -1903,11 +1942,11 @@ func CM_Query_And_Remove_SubTreeA(dnAncestor uint32, pVetoType *PNP_VETO_TYPE, p
 	return CONFIGRET(r1)
 }
 
-// CM_Query_And_Remove_SubTreeW calls CFGMGR32!CM_Query_And_Remove_SubTreeW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_query_and_remove_subtreew
+// CM_Query_And_Remove_SubTree_Ex calls CFGMGR32!CM_Query_And_Remove_SubTree_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_query_and_remove_subtree_exw
 // Minimum OS: windows5.0.
-func CM_Query_And_Remove_SubTreeW(dnAncestor uint32, pVetoType *PNP_VETO_TYPE, pszVetoName foundation.PWSTR, ulNameLength uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Query_And_Remove_SubTreeW.Addr(), uintptr(dnAncestor), uintptr(unsafe.Pointer(pVetoType)), uintptr(unsafe.Pointer(pszVetoName)), uintptr(ulNameLength), uintptr(ulFlags))
+func CM_Query_And_Remove_SubTree_Ex(dnAncestor uint32, pVetoType *PNP_VETO_TYPE, pszVetoName foundation.PWSTR, ulNameLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Query_And_Remove_SubTree_Ex.Addr(), uintptr(dnAncestor), uintptr(unsafe.Pointer(pVetoType)), uintptr(unsafe.Pointer(pszVetoName)), uintptr(ulNameLength), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1915,14 +1954,6 @@ func CM_Query_And_Remove_SubTreeW(dnAncestor uint32, pVetoType *PNP_VETO_TYPE, p
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_query_and_remove_subtree_exa
 func CM_Query_And_Remove_SubTree_ExA(dnAncestor uint32, pVetoType *PNP_VETO_TYPE, pszVetoName foundation.PSTR, ulNameLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Query_And_Remove_SubTree_ExA.Addr(), uintptr(dnAncestor), uintptr(unsafe.Pointer(pVetoType)), uintptr(unsafe.Pointer(pszVetoName)), uintptr(ulNameLength), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Query_And_Remove_SubTree_ExW calls CFGMGR32!CM_Query_And_Remove_SubTree_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_query_and_remove_subtree_exw
-// Minimum OS: windows5.0.
-func CM_Query_And_Remove_SubTree_ExW(dnAncestor uint32, pVetoType *PNP_VETO_TYPE, pszVetoName foundation.PWSTR, ulNameLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Query_And_Remove_SubTree_ExW.Addr(), uintptr(dnAncestor), uintptr(unsafe.Pointer(pVetoType)), uintptr(unsafe.Pointer(pszVetoName)), uintptr(ulNameLength), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2006,6 +2037,14 @@ func CM_Register_Device_Driver_Ex(dnDevInst uint32, ulFlags uint32, hMachine uin
 	return CONFIGRET(r1)
 }
 
+// CM_Register_Device_Interface calls CFGMGR32!CM_Register_Device_InterfaceW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_register_device_interfacew
+func CM_Register_Device_Interface(dnDevInst uint32, InterfaceClassGuid *win32.GUID, pszReference string, pszDeviceInterface foundation.PWSTR, pulLength *uint32, ulFlags uint32) CONFIGRET {
+	_pszReference := win32.UTF16Ptr(pszReference)
+	r1, _, _ := syscall.SyscallN(procCM_Register_Device_Interface.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(_pszReference)), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Register_Device_InterfaceA calls CFGMGR32!CM_Register_Device_InterfaceA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_register_device_interfacea
 func CM_Register_Device_InterfaceA(dnDevInst uint32, InterfaceClassGuid *win32.GUID, pszReference foundation.PSTR, pszDeviceInterface foundation.PSTR, pulLength *uint32, ulFlags uint32) CONFIGRET {
@@ -2013,10 +2052,11 @@ func CM_Register_Device_InterfaceA(dnDevInst uint32, InterfaceClassGuid *win32.G
 	return CONFIGRET(r1)
 }
 
-// CM_Register_Device_InterfaceW calls CFGMGR32!CM_Register_Device_InterfaceW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_register_device_interfacew
-func CM_Register_Device_InterfaceW(dnDevInst uint32, InterfaceClassGuid *win32.GUID, pszReference foundation.PWSTR, pszDeviceInterface foundation.PWSTR, pulLength *uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Register_Device_InterfaceW.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(pszReference)), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags))
+// CM_Register_Device_Interface_Ex calls CFGMGR32!CM_Register_Device_Interface_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_register_device_interface_exw
+func CM_Register_Device_Interface_Ex(dnDevInst uint32, InterfaceClassGuid *win32.GUID, pszReference string, pszDeviceInterface foundation.PWSTR, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pszReference := win32.UTF16Ptr(pszReference)
+	r1, _, _ := syscall.SyscallN(procCM_Register_Device_Interface_Ex.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(_pszReference)), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2024,13 +2064,6 @@ func CM_Register_Device_InterfaceW(dnDevInst uint32, InterfaceClassGuid *win32.G
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_register_device_interface_exa
 func CM_Register_Device_Interface_ExA(dnDevInst uint32, InterfaceClassGuid *win32.GUID, pszReference foundation.PSTR, pszDeviceInterface foundation.PSTR, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Register_Device_Interface_ExA.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(pszReference)), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Register_Device_Interface_ExW calls CFGMGR32!CM_Register_Device_Interface_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_register_device_interface_exw
-func CM_Register_Device_Interface_ExW(dnDevInst uint32, InterfaceClassGuid *win32.GUID, pszReference foundation.PWSTR, pszDeviceInterface foundation.PWSTR, pulLength *uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Register_Device_Interface_ExW.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(pszReference)), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(unsafe.Pointer(pulLength)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2056,6 +2089,14 @@ func CM_Remove_SubTree_Ex(dnAncestor uint32, ulFlags uint32, hMachine uintptr) C
 	return CONFIGRET(r1)
 }
 
+// CM_Request_Device_Eject calls CFGMGR32!CM_Request_Device_EjectW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_request_device_ejectw
+// Minimum OS: windows5.0.
+func CM_Request_Device_Eject(dnDevInst uint32, pVetoType *PNP_VETO_TYPE, pszVetoName foundation.PWSTR, ulNameLength uint32, ulFlags uint32) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Request_Device_Eject.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(pVetoType)), uintptr(unsafe.Pointer(pszVetoName)), uintptr(ulNameLength), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Request_Device_EjectA calls CFGMGR32!CM_Request_Device_EjectA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_request_device_ejecta
 func CM_Request_Device_EjectA(dnDevInst uint32, pVetoType *PNP_VETO_TYPE, pszVetoName foundation.PSTR, ulNameLength uint32, ulFlags uint32) CONFIGRET {
@@ -2063,11 +2104,11 @@ func CM_Request_Device_EjectA(dnDevInst uint32, pVetoType *PNP_VETO_TYPE, pszVet
 	return CONFIGRET(r1)
 }
 
-// CM_Request_Device_EjectW calls CFGMGR32!CM_Request_Device_EjectW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_request_device_ejectw
+// CM_Request_Device_Eject_Ex calls CFGMGR32!CM_Request_Device_Eject_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_request_device_eject_exw
 // Minimum OS: windows5.0.
-func CM_Request_Device_EjectW(dnDevInst uint32, pVetoType *PNP_VETO_TYPE, pszVetoName foundation.PWSTR, ulNameLength uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Request_Device_EjectW.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(pVetoType)), uintptr(unsafe.Pointer(pszVetoName)), uintptr(ulNameLength), uintptr(ulFlags))
+func CM_Request_Device_Eject_Ex(dnDevInst uint32, pVetoType *PNP_VETO_TYPE, pszVetoName foundation.PWSTR, ulNameLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Request_Device_Eject_Ex.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(pVetoType)), uintptr(unsafe.Pointer(pszVetoName)), uintptr(ulNameLength), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2075,14 +2116,6 @@ func CM_Request_Device_EjectW(dnDevInst uint32, pVetoType *PNP_VETO_TYPE, pszVet
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_request_device_eject_exa
 func CM_Request_Device_Eject_ExA(dnDevInst uint32, pVetoType *PNP_VETO_TYPE, pszVetoName foundation.PSTR, ulNameLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Request_Device_Eject_ExA.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(pVetoType)), uintptr(unsafe.Pointer(pszVetoName)), uintptr(ulNameLength), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Request_Device_Eject_ExW calls CFGMGR32!CM_Request_Device_Eject_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_request_device_eject_exw
-// Minimum OS: windows5.0.
-func CM_Request_Device_Eject_ExW(dnDevInst uint32, pVetoType *PNP_VETO_TYPE, pszVetoName foundation.PWSTR, ulNameLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Request_Device_Eject_ExW.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(pVetoType)), uintptr(unsafe.Pointer(pszVetoName)), uintptr(ulNameLength), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2132,18 +2165,18 @@ func CM_Set_Class_Property_ExW(ClassGUID *win32.GUID, PropertyKey *foundation.DE
 	return CONFIGRET(r1)
 }
 
+// CM_Set_Class_Registry_Property calls CFGMGR32!CM_Set_Class_Registry_PropertyW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_class_registry_propertyw
+// Minimum OS: windows5.0.
+func CM_Set_Class_Registry_Property(ClassGuid *win32.GUID, ulProperty uint32, Buffer unsafe.Pointer, ulLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Set_Class_Registry_Property.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(ulProperty), uintptr(unsafe.Pointer(Buffer)), uintptr(ulLength), uintptr(ulFlags), uintptr(hMachine))
+	return CONFIGRET(r1)
+}
+
 // CM_Set_Class_Registry_PropertyA calls CFGMGR32!CM_Set_Class_Registry_PropertyA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_class_registry_propertya
 func CM_Set_Class_Registry_PropertyA(ClassGuid *win32.GUID, ulProperty uint32, Buffer unsafe.Pointer, ulLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Set_Class_Registry_PropertyA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(ulProperty), uintptr(unsafe.Pointer(Buffer)), uintptr(ulLength), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Set_Class_Registry_PropertyW calls CFGMGR32!CM_Set_Class_Registry_PropertyW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_class_registry_propertyw
-// Minimum OS: windows5.0.
-func CM_Set_Class_Registry_PropertyW(ClassGuid *win32.GUID, ulProperty uint32, Buffer unsafe.Pointer, ulLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_Class_Registry_PropertyW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(ulProperty), uintptr(unsafe.Pointer(Buffer)), uintptr(ulLength), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2179,6 +2212,14 @@ func CM_Set_DevNode_Property_ExW(dnDevInst uint32, PropertyKey *foundation.DEVPR
 	return CONFIGRET(r1)
 }
 
+// CM_Set_DevNode_Registry_Property calls CFGMGR32!CM_Set_DevNode_Registry_PropertyW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_devnode_registry_propertyw
+// Minimum OS: windows5.0.
+func CM_Set_DevNode_Registry_Property(dnDevInst uint32, ulProperty uint32, Buffer unsafe.Pointer, ulLength uint32, ulFlags uint32) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_Registry_Property.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(Buffer)), uintptr(ulLength), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Set_DevNode_Registry_PropertyA calls CFGMGR32!CM_Set_DevNode_Registry_PropertyA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_devnode_registry_propertya
 func CM_Set_DevNode_Registry_PropertyA(dnDevInst uint32, ulProperty uint32, Buffer unsafe.Pointer, ulLength uint32, ulFlags uint32) CONFIGRET {
@@ -2186,11 +2227,10 @@ func CM_Set_DevNode_Registry_PropertyA(dnDevInst uint32, ulProperty uint32, Buff
 	return CONFIGRET(r1)
 }
 
-// CM_Set_DevNode_Registry_PropertyW calls CFGMGR32!CM_Set_DevNode_Registry_PropertyW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_devnode_registry_propertyw
-// Minimum OS: windows5.0.
-func CM_Set_DevNode_Registry_PropertyW(dnDevInst uint32, ulProperty uint32, Buffer unsafe.Pointer, ulLength uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_Registry_PropertyW.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(Buffer)), uintptr(ulLength), uintptr(ulFlags))
+// CM_Set_DevNode_Registry_Property_Ex calls CFGMGR32!CM_Set_DevNode_Registry_Property_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_devnode_registry_property_exw
+func CM_Set_DevNode_Registry_Property_Ex(dnDevInst uint32, ulProperty uint32, Buffer unsafe.Pointer, ulLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_Registry_Property_Ex.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(Buffer)), uintptr(ulLength), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2201,26 +2241,21 @@ func CM_Set_DevNode_Registry_Property_ExA(dnDevInst uint32, ulProperty uint32, B
 	return CONFIGRET(r1)
 }
 
-// CM_Set_DevNode_Registry_Property_ExW calls CFGMGR32!CM_Set_DevNode_Registry_Property_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_devnode_registry_property_exw
-func CM_Set_DevNode_Registry_Property_ExW(dnDevInst uint32, ulProperty uint32, Buffer unsafe.Pointer, ulLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_Registry_Property_ExW.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(Buffer)), uintptr(ulLength), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
 // CM_Set_Device_Interface_PropertyW calls CFGMGR32!CM_Set_Device_Interface_PropertyW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_device_interface_propertyw
 // Minimum OS: windows6.0.6000.
-func CM_Set_Device_Interface_PropertyW(pszDeviceInterface foundation.PWSTR, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_Device_Interface_PropertyW.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(ulFlags))
+func CM_Set_Device_Interface_PropertyW(pszDeviceInterface string, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, ulFlags uint32) CONFIGRET {
+	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
+	r1, _, _ := syscall.SyscallN(procCM_Set_Device_Interface_PropertyW.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Set_Device_Interface_Property_ExW calls CFGMGR32!CM_Set_Device_Interface_Property_ExW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_device_interface_property_exw
 // Minimum OS: windows10.0.10240.
-func CM_Set_Device_Interface_Property_ExW(pszDeviceInterface foundation.PWSTR, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_Device_Interface_Property_ExW.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(ulFlags), uintptr(hMachine))
+func CM_Set_Device_Interface_Property_ExW(pszDeviceInterface string, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
+	r1, _, _ := syscall.SyscallN(procCM_Set_Device_Interface_Property_ExW.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2238,6 +2273,14 @@ func CM_Set_HW_Prof_Ex(ulHardwareProfile uint32, ulFlags uint32, hMachine uintpt
 	return CONFIGRET(r1)
 }
 
+// CM_Set_HW_Prof_Flags calls CFGMGR32!CM_Set_HW_Prof_FlagsW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_hw_prof_flagsw
+func CM_Set_HW_Prof_Flags(pDeviceID string, ulConfig uint32, ulValue uint32, ulFlags uint32) CONFIGRET {
+	_pDeviceID := win32.UTF16Ptr(pDeviceID)
+	r1, _, _ := syscall.SyscallN(procCM_Set_HW_Prof_Flags.Addr(), uintptr(unsafe.Pointer(_pDeviceID)), uintptr(ulConfig), uintptr(ulValue), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Set_HW_Prof_FlagsA calls CFGMGR32!CM_Set_HW_Prof_FlagsA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_hw_prof_flagsa
 func CM_Set_HW_Prof_FlagsA(pDeviceID foundation.PSTR, ulConfig uint32, ulValue uint32, ulFlags uint32) CONFIGRET {
@@ -2245,10 +2288,11 @@ func CM_Set_HW_Prof_FlagsA(pDeviceID foundation.PSTR, ulConfig uint32, ulValue u
 	return CONFIGRET(r1)
 }
 
-// CM_Set_HW_Prof_FlagsW calls CFGMGR32!CM_Set_HW_Prof_FlagsW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_hw_prof_flagsw
-func CM_Set_HW_Prof_FlagsW(pDeviceID foundation.PWSTR, ulConfig uint32, ulValue uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_HW_Prof_FlagsW.Addr(), uintptr(unsafe.Pointer(pDeviceID)), uintptr(ulConfig), uintptr(ulValue), uintptr(ulFlags))
+// CM_Set_HW_Prof_Flags_Ex calls CFGMGR32!CM_Set_HW_Prof_Flags_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_hw_prof_flags_exw
+func CM_Set_HW_Prof_Flags_Ex(pDeviceID string, ulConfig uint32, ulValue uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pDeviceID := win32.UTF16Ptr(pDeviceID)
+	r1, _, _ := syscall.SyscallN(procCM_Set_HW_Prof_Flags_Ex.Addr(), uintptr(unsafe.Pointer(_pDeviceID)), uintptr(ulConfig), uintptr(ulValue), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2256,13 +2300,6 @@ func CM_Set_HW_Prof_FlagsW(pDeviceID foundation.PWSTR, ulConfig uint32, ulValue 
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_hw_prof_flags_exa
 func CM_Set_HW_Prof_Flags_ExA(pDeviceID foundation.PSTR, ulConfig uint32, ulValue uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Set_HW_Prof_Flags_ExA.Addr(), uintptr(unsafe.Pointer(pDeviceID)), uintptr(ulConfig), uintptr(ulValue), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Set_HW_Prof_Flags_ExW calls CFGMGR32!CM_Set_HW_Prof_Flags_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_hw_prof_flags_exw
-func CM_Set_HW_Prof_Flags_ExW(pDeviceID foundation.PWSTR, ulConfig uint32, ulValue uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_HW_Prof_Flags_ExW.Addr(), uintptr(unsafe.Pointer(pDeviceID)), uintptr(ulConfig), uintptr(ulValue), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2303,6 +2340,14 @@ func CM_Uninstall_DevNode_Ex(dnDevInst uint32, ulFlags uint32, hMachine uintptr)
 	return CONFIGRET(r1)
 }
 
+// CM_Unregister_Device_Interface calls CFGMGR32!CM_Unregister_Device_InterfaceW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_unregister_device_interfacew
+func CM_Unregister_Device_Interface(pszDeviceInterface string, ulFlags uint32) CONFIGRET {
+	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
+	r1, _, _ := syscall.SyscallN(procCM_Unregister_Device_Interface.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(ulFlags))
+	return CONFIGRET(r1)
+}
+
 // CM_Unregister_Device_InterfaceA calls CFGMGR32!CM_Unregister_Device_InterfaceA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_unregister_device_interfacea
 func CM_Unregister_Device_InterfaceA(pszDeviceInterface foundation.PSTR, ulFlags uint32) CONFIGRET {
@@ -2310,10 +2355,11 @@ func CM_Unregister_Device_InterfaceA(pszDeviceInterface foundation.PSTR, ulFlags
 	return CONFIGRET(r1)
 }
 
-// CM_Unregister_Device_InterfaceW calls CFGMGR32!CM_Unregister_Device_InterfaceW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_unregister_device_interfacew
-func CM_Unregister_Device_InterfaceW(pszDeviceInterface foundation.PWSTR, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Unregister_Device_InterfaceW.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(ulFlags))
+// CM_Unregister_Device_Interface_Ex calls CFGMGR32!CM_Unregister_Device_Interface_ExW.
+// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_unregister_device_interface_exw
+func CM_Unregister_Device_Interface_Ex(pszDeviceInterface string, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
+	r1, _, _ := syscall.SyscallN(procCM_Unregister_Device_Interface_Ex.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2321,13 +2367,6 @@ func CM_Unregister_Device_InterfaceW(pszDeviceInterface foundation.PWSTR, ulFlag
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_unregister_device_interface_exa
 func CM_Unregister_Device_Interface_ExA(pszDeviceInterface foundation.PSTR, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Unregister_Device_Interface_ExA.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(ulFlags), uintptr(hMachine))
-	return CONFIGRET(r1)
-}
-
-// CM_Unregister_Device_Interface_ExW calls CFGMGR32!CM_Unregister_Device_Interface_ExW.
-// https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_unregister_device_interface_exw
-func CM_Unregister_Device_Interface_ExW(pszDeviceInterface foundation.PWSTR, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Unregister_Device_Interface_ExW.Addr(), uintptr(unsafe.Pointer(pszDeviceInterface)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2350,22 +2389,23 @@ func DiInstallDevice(hwndParent foundation.HWND, DeviceInfoSet HDEVINFO, DeviceI
 	return nil
 }
 
-// DiInstallDriverA calls newdev!DiInstallDriverA.
-// https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-diinstalldrivera
+// DiInstallDriver calls newdev!DiInstallDriverW.
+// https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-diinstalldriverw
 // Minimum OS: windows6.0.6000.
-func DiInstallDriverA(hwndParent foundation.HWND, InfPath foundation.PSTR, Flags DIINSTALLDRIVER_FLAGS, NeedReboot *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procDiInstallDriverA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(InfPath)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
+func DiInstallDriver(hwndParent foundation.HWND, InfPath string, Flags DIINSTALLDRIVER_FLAGS, NeedReboot *foundation.BOOL) error {
+	_InfPath := win32.UTF16Ptr(InfPath)
+	r1, _, e1 := syscall.SyscallN(procDiInstallDriver.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_InfPath)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// DiInstallDriverW calls newdev!DiInstallDriverW.
-// https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-diinstalldriverw
+// DiInstallDriverA calls newdev!DiInstallDriverA.
+// https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-diinstalldrivera
 // Minimum OS: windows6.0.6000.
-func DiInstallDriverW(hwndParent foundation.HWND, InfPath foundation.PWSTR, Flags DIINSTALLDRIVER_FLAGS, NeedReboot *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procDiInstallDriverW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(InfPath)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
+func DiInstallDriverA(hwndParent foundation.HWND, InfPath foundation.PSTR, Flags DIINSTALLDRIVER_FLAGS, NeedReboot *foundation.BOOL) error {
+	r1, _, e1 := syscall.SyscallN(procDiInstallDriverA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(InfPath)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2395,9 +2435,10 @@ func DiShowUpdateDevice(hwndParent foundation.HWND, DeviceInfoSet HDEVINFO, Devi
 }
 
 // DiShowUpdateDriver calls newdev!DiShowUpdateDriver.
-func DiShowUpdateDriver(hwndParent foundation.HWND, FilePath foundation.PWSTR, Flags uint32, NeedReboot *foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDiShowUpdateDriver.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(FilePath)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
-	return foundation.BOOL(r1)
+func DiShowUpdateDriver(hwndParent foundation.HWND, FilePath string, Flags uint32, NeedReboot *foundation.BOOL) bool {
+	_FilePath := win32.UTF16Ptr(FilePath)
+	r1, _, _ := syscall.SyscallN(procDiShowUpdateDriver.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_FilePath)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
+	return r1 != 0
 }
 
 // DiUninstallDevice calls newdev!DiUninstallDevice.
@@ -2405,6 +2446,18 @@ func DiShowUpdateDriver(hwndParent foundation.HWND, FilePath foundation.PWSTR, F
 // Minimum OS: windows6.1.
 func DiUninstallDevice(hwndParent foundation.HWND, DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Flags uint32, NeedReboot *foundation.BOOL) error {
 	r1, _, e1 := syscall.SyscallN(procDiUninstallDevice.Addr(), uintptr(hwndParent), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// DiUninstallDriver calls newdev!DiUninstallDriverW.
+// https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-diuninstalldriverw
+// Minimum OS: windows10.0.10240.
+func DiUninstallDriver(hwndParent foundation.HWND, InfPath string, Flags DIUNINSTALLDRIVER_FLAGS, NeedReboot *foundation.BOOL) error {
+	_InfPath := win32.UTF16Ptr(InfPath)
+	r1, _, e1 := syscall.SyscallN(procDiUninstallDriver.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_InfPath)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2421,15 +2474,12 @@ func DiUninstallDriverA(hwndParent foundation.HWND, InfPath foundation.PSTR, Fla
 	return nil
 }
 
-// DiUninstallDriverW calls newdev!DiUninstallDriverW.
-// https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-diuninstalldriverw
-// Minimum OS: windows10.0.10240.
-func DiUninstallDriverW(hwndParent foundation.HWND, InfPath foundation.PWSTR, Flags DIUNINSTALLDRIVER_FLAGS, NeedReboot *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procDiUninstallDriverW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(InfPath)), uintptr(Flags), uintptr(unsafe.Pointer(NeedReboot)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+// InstallHinfSection calls SETUPAPI!InstallHinfSectionW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-installhinfsectionw
+// Minimum OS: windows5.1.2600.
+func InstallHinfSection(Window foundation.HWND, ModuleHandle foundation.HINSTANCE, CommandLine string, ShowCommand int32) {
+	_CommandLine := win32.UTF16Ptr(CommandLine)
+	syscall.SyscallN(procInstallHinfSection.Addr(), uintptr(Window), uintptr(ModuleHandle), uintptr(unsafe.Pointer(_CommandLine)), uintptr(ShowCommand))
 }
 
 // InstallHinfSectionA calls SETUPAPI!InstallHinfSectionA.
@@ -2439,29 +2489,35 @@ func InstallHinfSectionA(Window foundation.HWND, ModuleHandle foundation.HINSTAN
 	syscall.SyscallN(procInstallHinfSectionA.Addr(), uintptr(Window), uintptr(ModuleHandle), uintptr(unsafe.Pointer(CommandLine)), uintptr(ShowCommand))
 }
 
-// InstallHinfSectionW calls SETUPAPI!InstallHinfSectionW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-installhinfsectionw
+// SetupAddInstallSectionToDiskSpaceList calls SETUPAPI!SetupAddInstallSectionToDiskSpaceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupaddinstallsectiontodiskspacelistw
 // Minimum OS: windows5.1.2600.
-func InstallHinfSectionW(Window foundation.HWND, ModuleHandle foundation.HINSTANCE, CommandLine foundation.PWSTR, ShowCommand int32) {
-	syscall.SyscallN(procInstallHinfSectionW.Addr(), uintptr(Window), uintptr(ModuleHandle), uintptr(unsafe.Pointer(CommandLine)), uintptr(ShowCommand))
-}
-
-// SetupAddInstallSectionToDiskSpaceListA calls SETUPAPI!SetupAddInstallSectionToDiskSpaceListA.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupaddinstallsectiontodiskspacelista
-// Minimum OS: windows5.1.2600.
-func SetupAddInstallSectionToDiskSpaceListA(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, LayoutInfHandle unsafe.Pointer, SectionName foundation.PSTR, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupAddInstallSectionToDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(LayoutInfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
+func SetupAddInstallSectionToDiskSpaceList(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, LayoutInfHandle unsafe.Pointer, SectionName string) error {
+	_SectionName := win32.UTF16Ptr(SectionName)
+	r1, _, e1 := syscall.SyscallN(procSetupAddInstallSectionToDiskSpaceList.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(LayoutInfHandle)), uintptr(unsafe.Pointer(_SectionName)), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupAddInstallSectionToDiskSpaceListW calls SETUPAPI!SetupAddInstallSectionToDiskSpaceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupaddinstallsectiontodiskspacelistw
+// SetupAddInstallSectionToDiskSpaceListA calls SETUPAPI!SetupAddInstallSectionToDiskSpaceListA.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupaddinstallsectiontodiskspacelista
 // Minimum OS: windows5.1.2600.
-func SetupAddInstallSectionToDiskSpaceListW(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, LayoutInfHandle unsafe.Pointer, SectionName foundation.PWSTR, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupAddInstallSectionToDiskSpaceListW.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(LayoutInfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
+func SetupAddInstallSectionToDiskSpaceListA(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, LayoutInfHandle unsafe.Pointer, SectionName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procSetupAddInstallSectionToDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(LayoutInfHandle)), uintptr(unsafe.Pointer(SectionName)), 0, 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// SetupAddSectionToDiskSpaceList calls SETUPAPI!SetupAddSectionToDiskSpaceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupaddsectiontodiskspacelistw
+// Minimum OS: windows5.1.2600.
+func SetupAddSectionToDiskSpaceList(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, ListInfHandle unsafe.Pointer, SectionName string, Operation SETUP_FILE_OPERATION) error {
+	_SectionName := win32.UTF16Ptr(SectionName)
+	r1, _, e1 := syscall.SyscallN(procSetupAddSectionToDiskSpaceList.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ListInfHandle)), uintptr(unsafe.Pointer(_SectionName)), uintptr(Operation), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2471,19 +2527,20 @@ func SetupAddInstallSectionToDiskSpaceListW(DiskSpace unsafe.Pointer, InfHandle 
 // SetupAddSectionToDiskSpaceListA calls SETUPAPI!SetupAddSectionToDiskSpaceListA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupaddsectiontodiskspacelista
 // Minimum OS: windows5.1.2600.
-func SetupAddSectionToDiskSpaceListA(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, ListInfHandle unsafe.Pointer, SectionName foundation.PSTR, Operation SETUP_FILE_OPERATION, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupAddSectionToDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ListInfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(Operation), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
+func SetupAddSectionToDiskSpaceListA(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, ListInfHandle unsafe.Pointer, SectionName foundation.PSTR, Operation SETUP_FILE_OPERATION) error {
+	r1, _, e1 := syscall.SyscallN(procSetupAddSectionToDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ListInfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(Operation), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupAddSectionToDiskSpaceListW calls SETUPAPI!SetupAddSectionToDiskSpaceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupaddsectiontodiskspacelistw
+// SetupAddToDiskSpaceList calls SETUPAPI!SetupAddToDiskSpaceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupaddtodiskspacelistw
 // Minimum OS: windows5.1.2600.
-func SetupAddSectionToDiskSpaceListW(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, ListInfHandle unsafe.Pointer, SectionName foundation.PWSTR, Operation SETUP_FILE_OPERATION, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupAddSectionToDiskSpaceListW.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ListInfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(Operation), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
+func SetupAddToDiskSpaceList(DiskSpace unsafe.Pointer, TargetFilespec string, FileSize int64, Operation SETUP_FILE_OPERATION) error {
+	_TargetFilespec := win32.UTF16Ptr(TargetFilespec)
+	r1, _, e1 := syscall.SyscallN(procSetupAddToDiskSpaceList.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(_TargetFilespec)), uintptr(FileSize), uintptr(Operation), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2493,19 +2550,20 @@ func SetupAddSectionToDiskSpaceListW(DiskSpace unsafe.Pointer, InfHandle unsafe.
 // SetupAddToDiskSpaceListA calls SETUPAPI!SetupAddToDiskSpaceListA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupaddtodiskspacelista
 // Minimum OS: windows5.1.2600.
-func SetupAddToDiskSpaceListA(DiskSpace unsafe.Pointer, TargetFilespec foundation.PSTR, FileSize int64, Operation SETUP_FILE_OPERATION, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupAddToDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(TargetFilespec)), uintptr(FileSize), uintptr(Operation), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
+func SetupAddToDiskSpaceListA(DiskSpace unsafe.Pointer, TargetFilespec foundation.PSTR, FileSize int64, Operation SETUP_FILE_OPERATION) error {
+	r1, _, e1 := syscall.SyscallN(procSetupAddToDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(TargetFilespec)), uintptr(FileSize), uintptr(Operation), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupAddToDiskSpaceListW calls SETUPAPI!SetupAddToDiskSpaceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupaddtodiskspacelistw
+// SetupAddToSourceList calls SETUPAPI!SetupAddToSourceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupaddtosourcelistw
 // Minimum OS: windows5.1.2600.
-func SetupAddToDiskSpaceListW(DiskSpace unsafe.Pointer, TargetFilespec foundation.PWSTR, FileSize int64, Operation SETUP_FILE_OPERATION, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupAddToDiskSpaceListW.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(TargetFilespec)), uintptr(FileSize), uintptr(Operation), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
+func SetupAddToSourceList(Flags uint32, Source string) error {
+	_Source := win32.UTF16Ptr(Source)
+	r1, _, e1 := syscall.SyscallN(procSetupAddToSourceList.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(_Source)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2523,11 +2581,12 @@ func SetupAddToSourceListA(Flags uint32, Source foundation.PSTR) error {
 	return nil
 }
 
-// SetupAddToSourceListW calls SETUPAPI!SetupAddToSourceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupaddtosourcelistw
+// SetupAdjustDiskSpaceList calls SETUPAPI!SetupAdjustDiskSpaceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupadjustdiskspacelistw
 // Minimum OS: windows5.1.2600.
-func SetupAddToSourceListW(Flags uint32, Source foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetupAddToSourceListW.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(Source)))
+func SetupAdjustDiskSpaceList(DiskSpace unsafe.Pointer, DriveRoot string, Amount int64) error {
+	_DriveRoot := win32.UTF16Ptr(DriveRoot)
+	r1, _, e1 := syscall.SyscallN(procSetupAdjustDiskSpaceList.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(_DriveRoot)), uintptr(Amount), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2537,23 +2596,26 @@ func SetupAddToSourceListW(Flags uint32, Source foundation.PWSTR) error {
 // SetupAdjustDiskSpaceListA calls SETUPAPI!SetupAdjustDiskSpaceListA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupadjustdiskspacelista
 // Minimum OS: windows5.1.2600.
-func SetupAdjustDiskSpaceListA(DiskSpace unsafe.Pointer, DriveRoot foundation.PSTR, Amount int64, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupAdjustDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(DriveRoot)), uintptr(Amount), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
+func SetupAdjustDiskSpaceListA(DiskSpace unsafe.Pointer, DriveRoot foundation.PSTR, Amount int64) error {
+	r1, _, e1 := syscall.SyscallN(procSetupAdjustDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(DriveRoot)), uintptr(Amount), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupAdjustDiskSpaceListW calls SETUPAPI!SetupAdjustDiskSpaceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupadjustdiskspacelistw
+// SetupBackupError calls SETUPAPI!SetupBackupErrorW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupbackuperrorw
 // Minimum OS: windows5.1.2600.
-func SetupAdjustDiskSpaceListW(DiskSpace unsafe.Pointer, DriveRoot foundation.PWSTR, Amount int64, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupAdjustDiskSpaceListW.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(DriveRoot)), uintptr(Amount), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func SetupBackupError(hwndParent foundation.HWND, DialogTitle string, SourceFile string, TargetFile string, Win32ErrorCode uint32, Style uint32) (uint32, error) {
+	_DialogTitle := win32.UTF16Ptr(DialogTitle)
+	_SourceFile := win32.UTF16Ptr(SourceFile)
+	_TargetFile := win32.UTF16Ptr(TargetFile)
+	r1, _, e1 := syscall.SyscallN(procSetupBackupError.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_DialogTitle)), uintptr(unsafe.Pointer(_SourceFile)), uintptr(unsafe.Pointer(_TargetFile)), uintptr(Win32ErrorCode), uintptr(Style))
+	if e1 != 0 {
+		return uint32(r1), e1
 	}
-	return nil
+	return uint32(r1), nil
 }
 
 // SetupBackupErrorA calls SETUPAPI!SetupBackupErrorA.
@@ -2561,17 +2623,6 @@ func SetupAdjustDiskSpaceListW(DiskSpace unsafe.Pointer, DriveRoot foundation.PW
 // Minimum OS: windows5.1.2600.
 func SetupBackupErrorA(hwndParent foundation.HWND, DialogTitle foundation.PSTR, SourceFile foundation.PSTR, TargetFile foundation.PSTR, Win32ErrorCode uint32, Style uint32) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procSetupBackupErrorA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(DialogTitle)), uintptr(unsafe.Pointer(SourceFile)), uintptr(unsafe.Pointer(TargetFile)), uintptr(Win32ErrorCode), uintptr(Style))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// SetupBackupErrorW calls SETUPAPI!SetupBackupErrorW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupbackuperrorw
-// Minimum OS: windows5.1.2600.
-func SetupBackupErrorW(hwndParent foundation.HWND, DialogTitle foundation.PWSTR, SourceFile foundation.PWSTR, TargetFile foundation.PWSTR, Win32ErrorCode uint32, Style uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupBackupErrorW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(DialogTitle)), uintptr(unsafe.Pointer(SourceFile)), uintptr(unsafe.Pointer(TargetFile)), uintptr(Win32ErrorCode), uintptr(Style))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -2592,9 +2643,9 @@ func SetupCancelTemporarySourceList() error {
 // SetupCloseFileQueue calls SETUPAPI!SetupCloseFileQueue.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupclosefilequeue
 // Minimum OS: windows5.1.2600.
-func SetupCloseFileQueue(QueueHandle unsafe.Pointer) foundation.BOOL {
+func SetupCloseFileQueue(QueueHandle unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procSetupCloseFileQueue.Addr(), uintptr(unsafe.Pointer(QueueHandle)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetupCloseInfFile calls SETUPAPI!SetupCloseInfFile.
@@ -2611,6 +2662,17 @@ func SetupCloseLog() {
 	syscall.SyscallN(procSetupCloseLog.Addr())
 }
 
+// SetupCommitFileQueue calls SETUPAPI!SetupCommitFileQueueW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupcommitfilequeuew
+// Minimum OS: windows5.1.2600.
+func SetupCommitFileQueue(Owner foundation.HWND, QueueHandle unsafe.Pointer, MsgHandler PSP_FILE_CALLBACK_W, Context unsafe.Pointer) error {
+	r1, _, e1 := syscall.SyscallN(procSetupCommitFileQueue.Addr(), uintptr(Owner), uintptr(unsafe.Pointer(QueueHandle)), uintptr(MsgHandler), uintptr(unsafe.Pointer(Context)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupCommitFileQueueA calls SETUPAPI!SetupCommitFileQueueA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupcommitfilequeuea
 // Minimum OS: windows5.1.2600.
@@ -2622,31 +2684,37 @@ func SetupCommitFileQueueA(Owner foundation.HWND, QueueHandle unsafe.Pointer, Ms
 	return nil
 }
 
-// SetupCommitFileQueueW calls SETUPAPI!SetupCommitFileQueueW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupcommitfilequeuew
-// Minimum OS: windows5.1.2600.
-func SetupCommitFileQueueW(Owner foundation.HWND, QueueHandle unsafe.Pointer, MsgHandler PSP_FILE_CALLBACK_W, Context unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupCommitFileQueueW.Addr(), uintptr(Owner), uintptr(unsafe.Pointer(QueueHandle)), uintptr(MsgHandler), uintptr(unsafe.Pointer(Context)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+// SetupConfigureWmiFromInfSection calls SETUPAPI!SetupConfigureWmiFromInfSectionW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupconfigurewmifrominfsectionw
+// Minimum OS: windowsserver2003.
+func SetupConfigureWmiFromInfSection(InfHandle unsafe.Pointer, SectionName string, Flags uint32) bool {
+	_SectionName := win32.UTF16Ptr(SectionName)
+	r1, _, _ := syscall.SyscallN(procSetupConfigureWmiFromInfSection.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(_SectionName)), uintptr(Flags))
+	return r1 != 0
 }
 
 // SetupConfigureWmiFromInfSectionA calls SETUPAPI!SetupConfigureWmiFromInfSectionA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupconfigurewmifrominfsectiona
 // Minimum OS: windowsserver2003.
-func SetupConfigureWmiFromInfSectionA(InfHandle unsafe.Pointer, SectionName foundation.PSTR, Flags uint32) foundation.BOOL {
+func SetupConfigureWmiFromInfSectionA(InfHandle unsafe.Pointer, SectionName foundation.PSTR, Flags uint32) bool {
 	r1, _, _ := syscall.SyscallN(procSetupConfigureWmiFromInfSectionA.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(Flags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// SetupConfigureWmiFromInfSectionW calls SETUPAPI!SetupConfigureWmiFromInfSectionW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupconfigurewmifrominfsectionw
-// Minimum OS: windowsserver2003.
-func SetupConfigureWmiFromInfSectionW(InfHandle unsafe.Pointer, SectionName foundation.PWSTR, Flags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetupConfigureWmiFromInfSectionW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(Flags))
-	return foundation.BOOL(r1)
+// SetupCopyError calls SETUPAPI!SetupCopyErrorW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupcopyerrorw
+// Minimum OS: windows5.1.2600.
+func SetupCopyError(hwndParent foundation.HWND, DialogTitle string, DiskName string, PathToSource string, SourceFile string, TargetPathFile string, Win32ErrorCode uint32, Style uint32, PathBuffer foundation.PWSTR, PathBufferSize uint32, PathRequiredSize *uint32) (uint32, error) {
+	_DialogTitle := win32.UTF16Ptr(DialogTitle)
+	_DiskName := win32.UTF16Ptr(DiskName)
+	_PathToSource := win32.UTF16Ptr(PathToSource)
+	_SourceFile := win32.UTF16Ptr(SourceFile)
+	_TargetPathFile := win32.UTF16Ptr(TargetPathFile)
+	r1, _, e1 := syscall.SyscallN(procSetupCopyError.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_DialogTitle)), uintptr(unsafe.Pointer(_DiskName)), uintptr(unsafe.Pointer(_PathToSource)), uintptr(unsafe.Pointer(_SourceFile)), uintptr(unsafe.Pointer(_TargetPathFile)), uintptr(Win32ErrorCode), uintptr(Style), uintptr(unsafe.Pointer(PathBuffer)), uintptr(PathBufferSize), uintptr(unsafe.Pointer(PathRequiredSize)))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
 }
 
 // SetupCopyErrorA calls SETUPAPI!SetupCopyErrorA.
@@ -2660,15 +2728,17 @@ func SetupCopyErrorA(hwndParent foundation.HWND, DialogTitle foundation.PSTR, Di
 	return uint32(r1), nil
 }
 
-// SetupCopyErrorW calls SETUPAPI!SetupCopyErrorW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupcopyerrorw
+// SetupCopyOEMInf calls SETUPAPI!SetupCopyOEMInfW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupcopyoeminfw
 // Minimum OS: windows5.1.2600.
-func SetupCopyErrorW(hwndParent foundation.HWND, DialogTitle foundation.PWSTR, DiskName foundation.PWSTR, PathToSource foundation.PWSTR, SourceFile foundation.PWSTR, TargetPathFile foundation.PWSTR, Win32ErrorCode uint32, Style uint32, PathBuffer foundation.PWSTR, PathBufferSize uint32, PathRequiredSize *uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupCopyErrorW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(DialogTitle)), uintptr(unsafe.Pointer(DiskName)), uintptr(unsafe.Pointer(PathToSource)), uintptr(unsafe.Pointer(SourceFile)), uintptr(unsafe.Pointer(TargetPathFile)), uintptr(Win32ErrorCode), uintptr(Style), uintptr(unsafe.Pointer(PathBuffer)), uintptr(PathBufferSize), uintptr(unsafe.Pointer(PathRequiredSize)))
-	if e1 != 0 {
-		return uint32(r1), e1
+func SetupCopyOEMInf(SourceInfFileName string, OEMSourceMediaLocation string, OEMSourceMediaType OEM_SOURCE_MEDIA_TYPE, CopyStyle SP_COPY_STYLE, DestinationInfFileName foundation.PWSTR, DestinationInfFileNameSize uint32, RequiredSize *uint32, DestinationInfFileNameComponent *foundation.PWSTR) error {
+	_SourceInfFileName := win32.UTF16Ptr(SourceInfFileName)
+	_OEMSourceMediaLocation := win32.UTF16Ptr(OEMSourceMediaLocation)
+	r1, _, e1 := syscall.SyscallN(procSetupCopyOEMInf.Addr(), uintptr(unsafe.Pointer(_SourceInfFileName)), uintptr(unsafe.Pointer(_OEMSourceMediaLocation)), uintptr(OEMSourceMediaType), uintptr(CopyStyle), uintptr(unsafe.Pointer(DestinationInfFileName)), uintptr(DestinationInfFileNameSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(DestinationInfFileNameComponent)))
+	if r1 == 0 {
+		return win32.LastError(e1)
 	}
-	return uint32(r1), nil
+	return nil
 }
 
 // SetupCopyOEMInfA calls SETUPAPI!SetupCopyOEMInfA.
@@ -2682,22 +2752,23 @@ func SetupCopyOEMInfA(SourceInfFileName foundation.PSTR, OEMSourceMediaLocation 
 	return nil
 }
 
-// SetupCopyOEMInfW calls SETUPAPI!SetupCopyOEMInfW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupcopyoeminfw
+// SetupCreateDiskSpaceList calls SETUPAPI!SetupCreateDiskSpaceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupcreatediskspacelistw
 // Minimum OS: windows5.1.2600.
-func SetupCopyOEMInfW(SourceInfFileName foundation.PWSTR, OEMSourceMediaLocation foundation.PWSTR, OEMSourceMediaType OEM_SOURCE_MEDIA_TYPE, CopyStyle SP_COPY_STYLE, DestinationInfFileName foundation.PWSTR, DestinationInfFileNameSize uint32, RequiredSize *uint32, DestinationInfFileNameComponent *foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetupCopyOEMInfW.Addr(), uintptr(unsafe.Pointer(SourceInfFileName)), uintptr(unsafe.Pointer(OEMSourceMediaLocation)), uintptr(OEMSourceMediaType), uintptr(CopyStyle), uintptr(unsafe.Pointer(DestinationInfFileName)), uintptr(DestinationInfFileNameSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(DestinationInfFileNameComponent)))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func SetupCreateDiskSpaceList(Flags uint32) (unsafe.Pointer, error) {
+	r1, _, e1 := syscall.SyscallN(procSetupCreateDiskSpaceList.Addr(), 0, 0, uintptr(Flags))
+	ret := unsafe.Pointer(r1)
+	if ret == nil {
+		return ret, win32.LastError(e1)
 	}
-	return nil
+	return ret, nil
 }
 
 // SetupCreateDiskSpaceListA calls SETUPAPI!SetupCreateDiskSpaceListA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupcreatediskspacelista
 // Minimum OS: windows5.1.2600.
-func SetupCreateDiskSpaceListA(Reserved1 unsafe.Pointer, Reserved2 uint32, Flags uint32) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupCreateDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2), uintptr(Flags))
+func SetupCreateDiskSpaceListA(Flags uint32) (unsafe.Pointer, error) {
+	r1, _, e1 := syscall.SyscallN(procSetupCreateDiskSpaceListA.Addr(), 0, 0, uintptr(Flags))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -2705,16 +2776,17 @@ func SetupCreateDiskSpaceListA(Reserved1 unsafe.Pointer, Reserved2 uint32, Flags
 	return ret, nil
 }
 
-// SetupCreateDiskSpaceListW calls SETUPAPI!SetupCreateDiskSpaceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupcreatediskspacelistw
+// SetupDecompressOrCopyFile calls SETUPAPI!SetupDecompressOrCopyFileW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdecompressorcopyfilew
 // Minimum OS: windows5.1.2600.
-func SetupCreateDiskSpaceListW(Reserved1 unsafe.Pointer, Reserved2 uint32, Flags uint32) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupCreateDiskSpaceListW.Addr(), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2), uintptr(Flags))
-	ret := unsafe.Pointer(r1)
-	if ret == nil {
-		return ret, win32.LastError(e1)
+func SetupDecompressOrCopyFile(SourceFileName string, TargetFileName string, CompressionType *FILE_COMPRESSION_TYPE) (uint32, error) {
+	_SourceFileName := win32.UTF16Ptr(SourceFileName)
+	_TargetFileName := win32.UTF16Ptr(TargetFileName)
+	r1, _, e1 := syscall.SyscallN(procSetupDecompressOrCopyFile.Addr(), uintptr(unsafe.Pointer(_SourceFileName)), uintptr(unsafe.Pointer(_TargetFileName)), uintptr(unsafe.Pointer(CompressionType)))
+	if e1 != 0 {
+		return uint32(r1), e1
 	}
-	return ret, nil
+	return uint32(r1), nil
 }
 
 // SetupDecompressOrCopyFileA calls SETUPAPI!SetupDecompressOrCopyFileA.
@@ -2728,11 +2800,11 @@ func SetupDecompressOrCopyFileA(SourceFileName foundation.PSTR, TargetFileName f
 	return uint32(r1), nil
 }
 
-// SetupDecompressOrCopyFileW calls SETUPAPI!SetupDecompressOrCopyFileW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdecompressorcopyfilew
+// SetupDefaultQueueCallback calls SETUPAPI!SetupDefaultQueueCallbackW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdefaultqueuecallbackw
 // Minimum OS: windows5.1.2600.
-func SetupDecompressOrCopyFileW(SourceFileName foundation.PWSTR, TargetFileName foundation.PWSTR, CompressionType *FILE_COMPRESSION_TYPE) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDecompressOrCopyFileW.Addr(), uintptr(unsafe.Pointer(SourceFileName)), uintptr(unsafe.Pointer(TargetFileName)), uintptr(unsafe.Pointer(CompressionType)))
+func SetupDefaultQueueCallback(Context unsafe.Pointer, Notification uint32, Param1 uintptr, Param2 uintptr) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procSetupDefaultQueueCallback.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(Notification), uintptr(Param1), uintptr(Param2))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -2750,11 +2822,13 @@ func SetupDefaultQueueCallbackA(Context unsafe.Pointer, Notification uint32, Par
 	return uint32(r1), nil
 }
 
-// SetupDefaultQueueCallbackW calls SETUPAPI!SetupDefaultQueueCallbackW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdefaultqueuecallbackw
+// SetupDeleteError calls SETUPAPI!SetupDeleteErrorW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdeleteerrorw
 // Minimum OS: windows5.1.2600.
-func SetupDefaultQueueCallbackW(Context unsafe.Pointer, Notification uint32, Param1 uintptr, Param2 uintptr) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDefaultQueueCallbackW.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(Notification), uintptr(Param1), uintptr(Param2))
+func SetupDeleteError(hwndParent foundation.HWND, DialogTitle string, File string, Win32ErrorCode uint32, Style uint32) (uint32, error) {
+	_DialogTitle := win32.UTF16Ptr(DialogTitle)
+	_File := win32.UTF16Ptr(File)
+	r1, _, e1 := syscall.SyscallN(procSetupDeleteError.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_DialogTitle)), uintptr(unsafe.Pointer(_File)), uintptr(Win32ErrorCode), uintptr(Style))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -2766,17 +2840,6 @@ func SetupDefaultQueueCallbackW(Context unsafe.Pointer, Notification uint32, Par
 // Minimum OS: windows5.1.2600.
 func SetupDeleteErrorA(hwndParent foundation.HWND, DialogTitle foundation.PSTR, File foundation.PSTR, Win32ErrorCode uint32, Style uint32) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procSetupDeleteErrorA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(DialogTitle)), uintptr(unsafe.Pointer(File)), uintptr(Win32ErrorCode), uintptr(Style))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// SetupDeleteErrorW calls SETUPAPI!SetupDeleteErrorW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdeleteerrorw
-// Minimum OS: windows5.1.2600.
-func SetupDeleteErrorW(hwndParent foundation.HWND, DialogTitle foundation.PWSTR, File foundation.PWSTR, Win32ErrorCode uint32, Style uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDeleteErrorW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(DialogTitle)), uintptr(unsafe.Pointer(File)), uintptr(Win32ErrorCode), uintptr(Style))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -2808,8 +2871,28 @@ func SetupDiAskForOEMDisk(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DAT
 // SetupDiBuildClassInfoList calls SETUPAPI!SetupDiBuildClassInfoList.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdibuildclassinfolist
 // Minimum OS: windows5.0.
-func SetupDiBuildClassInfoList(Flags uint32, ClassGuidList *win32.GUID, ClassGuidListSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiBuildClassInfoList.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(ClassGuidList)), uintptr(ClassGuidListSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupDiBuildClassInfoList(Flags uint32, ClassGuidList []win32.GUID, RequiredSize *uint32) error {
+	var _ClassGuidList *win32.GUID
+	if len(ClassGuidList) > 0 {
+		_ClassGuidList = &ClassGuidList[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiBuildClassInfoList.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(_ClassGuidList)), uintptr(len(ClassGuidList)), uintptr(unsafe.Pointer(RequiredSize)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// SetupDiBuildClassInfoListEx calls SETUPAPI!SetupDiBuildClassInfoListExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdibuildclassinfolistexw
+// Minimum OS: windows5.0.
+func SetupDiBuildClassInfoListEx(Flags uint32, ClassGuidList []win32.GUID, RequiredSize *uint32, MachineName string) error {
+	var _ClassGuidList *win32.GUID
+	if len(ClassGuidList) > 0 {
+		_ClassGuidList = &ClassGuidList[0]
+	}
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiBuildClassInfoListEx.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(_ClassGuidList)), uintptr(len(ClassGuidList)), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(_MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2819,19 +2902,12 @@ func SetupDiBuildClassInfoList(Flags uint32, ClassGuidList *win32.GUID, ClassGui
 // SetupDiBuildClassInfoListExA calls SETUPAPI!SetupDiBuildClassInfoListExA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdibuildclassinfolistexa
 // Minimum OS: windows5.0.
-func SetupDiBuildClassInfoListExA(Flags uint32, ClassGuidList *win32.GUID, ClassGuidListSize uint32, RequiredSize *uint32, MachineName foundation.PSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiBuildClassInfoListExA.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(ClassGuidList)), uintptr(ClassGuidListSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func SetupDiBuildClassInfoListExA(Flags uint32, ClassGuidList []win32.GUID, RequiredSize *uint32, MachineName foundation.PSTR) error {
+	var _ClassGuidList *win32.GUID
+	if len(ClassGuidList) > 0 {
+		_ClassGuidList = &ClassGuidList[0]
 	}
-	return nil
-}
-
-// SetupDiBuildClassInfoListExW calls SETUPAPI!SetupDiBuildClassInfoListExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdibuildclassinfolistexw
-// Minimum OS: windows5.0.
-func SetupDiBuildClassInfoListExW(Flags uint32, ClassGuidList *win32.GUID, ClassGuidListSize uint32, RequiredSize *uint32, MachineName foundation.PWSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiBuildClassInfoListExW.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(ClassGuidList)), uintptr(ClassGuidListSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+	r1, _, e1 := syscall.SyscallN(procSetupDiBuildClassInfoListExA.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(_ClassGuidList)), uintptr(len(ClassGuidList)), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2882,11 +2958,48 @@ func SetupDiChangeState(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA)
 	return nil
 }
 
+// SetupDiClassGuidsFromName calls SETUPAPI!SetupDiClassGuidsFromNameW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassguidsfromnamew
+// Minimum OS: windows5.0.
+func SetupDiClassGuidsFromName(ClassName string, ClassGuidList []win32.GUID, RequiredSize *uint32) error {
+	_ClassName := win32.UTF16Ptr(ClassName)
+	var _ClassGuidList *win32.GUID
+	if len(ClassGuidList) > 0 {
+		_ClassGuidList = &ClassGuidList[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiClassGuidsFromName.Addr(), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_ClassGuidList)), uintptr(len(ClassGuidList)), uintptr(unsafe.Pointer(RequiredSize)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupDiClassGuidsFromNameA calls SETUPAPI!SetupDiClassGuidsFromNameA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassguidsfromnamea
 // Minimum OS: windows5.0.
-func SetupDiClassGuidsFromNameA(ClassName foundation.PSTR, ClassGuidList *win32.GUID, ClassGuidListSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiClassGuidsFromNameA.Addr(), uintptr(unsafe.Pointer(ClassName)), uintptr(unsafe.Pointer(ClassGuidList)), uintptr(ClassGuidListSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupDiClassGuidsFromNameA(ClassName foundation.PSTR, ClassGuidList []win32.GUID, RequiredSize *uint32) error {
+	var _ClassGuidList *win32.GUID
+	if len(ClassGuidList) > 0 {
+		_ClassGuidList = &ClassGuidList[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiClassGuidsFromNameA.Addr(), uintptr(unsafe.Pointer(ClassName)), uintptr(unsafe.Pointer(_ClassGuidList)), uintptr(len(ClassGuidList)), uintptr(unsafe.Pointer(RequiredSize)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// SetupDiClassGuidsFromNameEx calls SETUPAPI!SetupDiClassGuidsFromNameExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassguidsfromnameexw
+// Minimum OS: windows5.0.
+func SetupDiClassGuidsFromNameEx(ClassName string, ClassGuidList []win32.GUID, RequiredSize *uint32, MachineName string) error {
+	_ClassName := win32.UTF16Ptr(ClassName)
+	var _ClassGuidList *win32.GUID
+	if len(ClassGuidList) > 0 {
+		_ClassGuidList = &ClassGuidList[0]
+	}
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiClassGuidsFromNameEx.Addr(), uintptr(unsafe.Pointer(_ClassName)), uintptr(unsafe.Pointer(_ClassGuidList)), uintptr(len(ClassGuidList)), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(_MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2896,30 +3009,23 @@ func SetupDiClassGuidsFromNameA(ClassName foundation.PSTR, ClassGuidList *win32.
 // SetupDiClassGuidsFromNameExA calls SETUPAPI!SetupDiClassGuidsFromNameExA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassguidsfromnameexa
 // Minimum OS: windows5.0.
-func SetupDiClassGuidsFromNameExA(ClassName foundation.PSTR, ClassGuidList *win32.GUID, ClassGuidListSize uint32, RequiredSize *uint32, MachineName foundation.PSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiClassGuidsFromNameExA.Addr(), uintptr(unsafe.Pointer(ClassName)), uintptr(unsafe.Pointer(ClassGuidList)), uintptr(ClassGuidListSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiClassGuidsFromNameExA(ClassName foundation.PSTR, ClassGuidList []win32.GUID, RequiredSize *uint32, MachineName foundation.PSTR) error {
+	var _ClassGuidList *win32.GUID
+	if len(ClassGuidList) > 0 {
+		_ClassGuidList = &ClassGuidList[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiClassGuidsFromNameExA.Addr(), uintptr(unsafe.Pointer(ClassName)), uintptr(unsafe.Pointer(_ClassGuidList)), uintptr(len(ClassGuidList)), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupDiClassGuidsFromNameExW calls SETUPAPI!SetupDiClassGuidsFromNameExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassguidsfromnameexw
+// SetupDiClassNameFromGuid calls SETUPAPI!SetupDiClassNameFromGuidW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassnamefromguidw
 // Minimum OS: windows5.0.
-func SetupDiClassGuidsFromNameExW(ClassName foundation.PWSTR, ClassGuidList *win32.GUID, ClassGuidListSize uint32, RequiredSize *uint32, MachineName foundation.PWSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiClassGuidsFromNameExW.Addr(), uintptr(unsafe.Pointer(ClassName)), uintptr(unsafe.Pointer(ClassGuidList)), uintptr(ClassGuidListSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupDiClassGuidsFromNameW calls SETUPAPI!SetupDiClassGuidsFromNameW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassguidsfromnamew
-// Minimum OS: windows5.0.
-func SetupDiClassGuidsFromNameW(ClassName foundation.PWSTR, ClassGuidList *win32.GUID, ClassGuidListSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiClassGuidsFromNameW.Addr(), uintptr(unsafe.Pointer(ClassName)), uintptr(unsafe.Pointer(ClassGuidList)), uintptr(ClassGuidListSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupDiClassNameFromGuid(ClassGuid *win32.GUID, ClassName foundation.PWSTR, ClassNameSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiClassNameFromGuid.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(ClassName)), uintptr(ClassNameSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2937,37 +3043,40 @@ func SetupDiClassNameFromGuidA(ClassGuid *win32.GUID, ClassName foundation.PSTR,
 	return nil
 }
 
+// SetupDiClassNameFromGuidEx calls SETUPAPI!SetupDiClassNameFromGuidExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassnamefromguidexw
+// Minimum OS: windows5.0.
+func SetupDiClassNameFromGuidEx(ClassGuid *win32.GUID, ClassName foundation.PWSTR, ClassNameSize uint32, RequiredSize *uint32, MachineName string) error {
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiClassNameFromGuidEx.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(ClassName)), uintptr(ClassNameSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(_MachineName)), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupDiClassNameFromGuidExA calls SETUPAPI!SetupDiClassNameFromGuidExA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassnamefromguidexa
 // Minimum OS: windows5.0.
-func SetupDiClassNameFromGuidExA(ClassGuid *win32.GUID, ClassName foundation.PSTR, ClassNameSize uint32, RequiredSize *uint32, MachineName foundation.PSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiClassNameFromGuidExA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(ClassName)), uintptr(ClassNameSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiClassNameFromGuidExA(ClassGuid *win32.GUID, ClassName foundation.PSTR, ClassNameSize uint32, RequiredSize *uint32, MachineName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiClassNameFromGuidExA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(ClassName)), uintptr(ClassNameSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupDiClassNameFromGuidExW calls SETUPAPI!SetupDiClassNameFromGuidExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassnamefromguidexw
+// SetupDiCreateDevRegKey calls SETUPAPI!SetupDiCreateDevRegKeyW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdicreatedevregkeyw
 // Minimum OS: windows5.0.
-func SetupDiClassNameFromGuidExW(ClassGuid *win32.GUID, ClassName foundation.PWSTR, ClassNameSize uint32, RequiredSize *uint32, MachineName foundation.PWSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiClassNameFromGuidExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(ClassName)), uintptr(ClassNameSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func SetupDiCreateDevRegKey(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Scope uint32, HwProfile uint32, KeyType uint32, InfHandle unsafe.Pointer, InfSectionName string) (systemregistry.HKEY, error) {
+	_InfSectionName := win32.UTF16Ptr(InfSectionName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiCreateDevRegKey.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Scope), uintptr(HwProfile), uintptr(KeyType), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(_InfSectionName)))
+	ret := systemregistry.HKEY(r1)
+	if ret == ^systemregistry.HKEY(0) || ret == 0 {
+		return ret, win32.LastError(e1)
 	}
-	return nil
-}
-
-// SetupDiClassNameFromGuidW calls SETUPAPI!SetupDiClassNameFromGuidW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiclassnamefromguidw
-// Minimum OS: windows5.0.
-func SetupDiClassNameFromGuidW(ClassGuid *win32.GUID, ClassName foundation.PWSTR, ClassNameSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiClassNameFromGuidW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(ClassName)), uintptr(ClassNameSize), uintptr(unsafe.Pointer(RequiredSize)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+	return ret, nil
 }
 
 // SetupDiCreateDevRegKeyA calls SETUPAPI!SetupDiCreateDevRegKeyA.
@@ -2982,16 +3091,17 @@ func SetupDiCreateDevRegKeyA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_
 	return ret, nil
 }
 
-// SetupDiCreateDevRegKeyW calls SETUPAPI!SetupDiCreateDevRegKeyW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdicreatedevregkeyw
+// SetupDiCreateDeviceInfo calls SETUPAPI!SetupDiCreateDeviceInfoW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdicreatedeviceinfow
 // Minimum OS: windows5.0.
-func SetupDiCreateDevRegKeyW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Scope uint32, HwProfile uint32, KeyType uint32, InfHandle unsafe.Pointer, InfSectionName foundation.PWSTR) (systemregistry.HKEY, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDiCreateDevRegKeyW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Scope), uintptr(HwProfile), uintptr(KeyType), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfSectionName)))
-	ret := systemregistry.HKEY(r1)
-	if ret == ^systemregistry.HKEY(0) || ret == 0 {
-		return ret, win32.LastError(e1)
+func SetupDiCreateDeviceInfo(DeviceInfoSet HDEVINFO, DeviceName string, ClassGuid *win32.GUID, DeviceDescription string, hwndParent foundation.HWND, CreationFlags SETUP_DI_DEVICE_CREATION_FLAGS, DeviceInfoData *SP_DEVINFO_DATA) error {
+	_DeviceName := win32.UTF16Ptr(DeviceName)
+	_DeviceDescription := win32.UTF16Ptr(DeviceDescription)
+	r1, _, e1 := syscall.SyscallN(procSetupDiCreateDeviceInfo.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(_DeviceName)), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(_DeviceDescription)), uintptr(hwndParent), uintptr(CreationFlags), uintptr(unsafe.Pointer(DeviceInfoData)))
+	if r1 == 0 {
+		return win32.LastError(e1)
 	}
-	return ret, nil
+	return nil
 }
 
 // SetupDiCreateDeviceInfoA calls SETUPAPI!SetupDiCreateDeviceInfoA.
@@ -3016,33 +3126,35 @@ func SetupDiCreateDeviceInfoList(ClassGuid *win32.GUID, hwndParent foundation.HW
 	return HDEVINFO(r1), nil
 }
 
+// SetupDiCreateDeviceInfoListEx calls SETUPAPI!SetupDiCreateDeviceInfoListExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdicreatedeviceinfolistexw
+// Minimum OS: windows5.0.
+func SetupDiCreateDeviceInfoListEx(ClassGuid *win32.GUID, hwndParent foundation.HWND, MachineName string) (HDEVINFO, error) {
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiCreateDeviceInfoListEx.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(hwndParent), uintptr(unsafe.Pointer(_MachineName)), 0)
+	if e1 != 0 {
+		return HDEVINFO(r1), e1
+	}
+	return HDEVINFO(r1), nil
+}
+
 // SetupDiCreateDeviceInfoListExA calls SETUPAPI!SetupDiCreateDeviceInfoListExA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdicreatedeviceinfolistexa
 // Minimum OS: windows5.0.
-func SetupDiCreateDeviceInfoListExA(ClassGuid *win32.GUID, hwndParent foundation.HWND, MachineName foundation.PSTR, Reserved unsafe.Pointer) (HDEVINFO, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDiCreateDeviceInfoListExA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(hwndParent), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiCreateDeviceInfoListExA(ClassGuid *win32.GUID, hwndParent foundation.HWND, MachineName foundation.PSTR) (HDEVINFO, error) {
+	r1, _, e1 := syscall.SyscallN(procSetupDiCreateDeviceInfoListExA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(hwndParent), uintptr(unsafe.Pointer(MachineName)), 0)
 	if e1 != 0 {
 		return HDEVINFO(r1), e1
 	}
 	return HDEVINFO(r1), nil
 }
 
-// SetupDiCreateDeviceInfoListExW calls SETUPAPI!SetupDiCreateDeviceInfoListExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdicreatedeviceinfolistexw
+// SetupDiCreateDeviceInterface calls SETUPAPI!SetupDiCreateDeviceInterfaceW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdicreatedeviceinterfacew
 // Minimum OS: windows5.0.
-func SetupDiCreateDeviceInfoListExW(ClassGuid *win32.GUID, hwndParent foundation.HWND, MachineName foundation.PWSTR, Reserved unsafe.Pointer) (HDEVINFO, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDiCreateDeviceInfoListExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(hwndParent), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
-	if e1 != 0 {
-		return HDEVINFO(r1), e1
-	}
-	return HDEVINFO(r1), nil
-}
-
-// SetupDiCreateDeviceInfoW calls SETUPAPI!SetupDiCreateDeviceInfoW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdicreatedeviceinfow
-// Minimum OS: windows5.0.
-func SetupDiCreateDeviceInfoW(DeviceInfoSet HDEVINFO, DeviceName foundation.PWSTR, ClassGuid *win32.GUID, DeviceDescription foundation.PWSTR, hwndParent foundation.HWND, CreationFlags SETUP_DI_DEVICE_CREATION_FLAGS, DeviceInfoData *SP_DEVINFO_DATA) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiCreateDeviceInfoW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceName)), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(DeviceDescription)), uintptr(hwndParent), uintptr(CreationFlags), uintptr(unsafe.Pointer(DeviceInfoData)))
+func SetupDiCreateDeviceInterface(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, InterfaceClassGuid *win32.GUID, ReferenceString string, CreationFlags uint32, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA) error {
+	_ReferenceString := win32.UTF16Ptr(ReferenceString)
+	r1, _, e1 := syscall.SyscallN(procSetupDiCreateDeviceInterface.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(_ReferenceString)), uintptr(CreationFlags), uintptr(unsafe.Pointer(DeviceInterfaceData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3060,39 +3172,29 @@ func SetupDiCreateDeviceInterfaceA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DE
 	return nil
 }
 
+// SetupDiCreateDeviceInterfaceRegKey calls SETUPAPI!SetupDiCreateDeviceInterfaceRegKeyW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdicreatedeviceinterfaceregkeyw
+// Minimum OS: windows5.0.
+func SetupDiCreateDeviceInterfaceRegKey(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, samDesired uint32, InfHandle unsafe.Pointer, InfSectionName string) (systemregistry.HKEY, error) {
+	_InfSectionName := win32.UTF16Ptr(InfSectionName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiCreateDeviceInterfaceRegKey.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), 0, uintptr(samDesired), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(_InfSectionName)))
+	ret := systemregistry.HKEY(r1)
+	if ret == ^systemregistry.HKEY(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // SetupDiCreateDeviceInterfaceRegKeyA calls SETUPAPI!SetupDiCreateDeviceInterfaceRegKeyA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdicreatedeviceinterfaceregkeya
 // Minimum OS: windows5.0.
-func SetupDiCreateDeviceInterfaceRegKeyA(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, Reserved uint32, samDesired uint32, InfHandle unsafe.Pointer, InfSectionName foundation.PSTR) (systemregistry.HKEY, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDiCreateDeviceInterfaceRegKeyA.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(Reserved), uintptr(samDesired), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfSectionName)))
+func SetupDiCreateDeviceInterfaceRegKeyA(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, samDesired uint32, InfHandle unsafe.Pointer, InfSectionName foundation.PSTR) (systemregistry.HKEY, error) {
+	r1, _, e1 := syscall.SyscallN(procSetupDiCreateDeviceInterfaceRegKeyA.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), 0, uintptr(samDesired), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfSectionName)))
 	ret := systemregistry.HKEY(r1)
 	if ret == ^systemregistry.HKEY(0) || ret == 0 {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
-}
-
-// SetupDiCreateDeviceInterfaceRegKeyW calls SETUPAPI!SetupDiCreateDeviceInterfaceRegKeyW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdicreatedeviceinterfaceregkeyw
-// Minimum OS: windows5.0.
-func SetupDiCreateDeviceInterfaceRegKeyW(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, Reserved uint32, samDesired uint32, InfHandle unsafe.Pointer, InfSectionName foundation.PWSTR) (systemregistry.HKEY, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDiCreateDeviceInterfaceRegKeyW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(Reserved), uintptr(samDesired), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfSectionName)))
-	ret := systemregistry.HKEY(r1)
-	if ret == ^systemregistry.HKEY(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// SetupDiCreateDeviceInterfaceW calls SETUPAPI!SetupDiCreateDeviceInterfaceW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdicreatedeviceinterfacew
-// Minimum OS: windows5.0.
-func SetupDiCreateDeviceInterfaceW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, InterfaceClassGuid *win32.GUID, ReferenceString foundation.PWSTR, CreationFlags uint32, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiCreateDeviceInterfaceW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(ReferenceString)), uintptr(CreationFlags), uintptr(unsafe.Pointer(DeviceInterfaceData)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
 }
 
 // SetupDiDeleteDevRegKey calls SETUPAPI!SetupDiDeleteDevRegKey.
@@ -3131,8 +3233,8 @@ func SetupDiDeleteDeviceInterfaceData(DeviceInfoSet HDEVINFO, DeviceInterfaceDat
 // SetupDiDeleteDeviceInterfaceRegKey calls SETUPAPI!SetupDiDeleteDeviceInterfaceRegKey.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdideletedeviceinterfaceregkey
 // Minimum OS: windows5.0.
-func SetupDiDeleteDeviceInterfaceRegKey(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, Reserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiDeleteDeviceInterfaceRegKey.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(Reserved))
+func SetupDiDeleteDeviceInterfaceRegKey(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiDeleteDeviceInterfaceRegKey.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3194,6 +3296,17 @@ func SetupDiEnumDeviceInterfaces(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVI
 	return nil
 }
 
+// SetupDiEnumDriverInfo calls SETUPAPI!SetupDiEnumDriverInfoW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdienumdriverinfow
+// Minimum OS: windows5.0.
+func SetupDiEnumDriverInfo(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DriverType SETUP_DI_DRIVER_TYPE, MemberIndex uint32, DriverInfoData *SP_DRVINFO_DATA_V2_W) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiEnumDriverInfo.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(DriverType), uintptr(MemberIndex), uintptr(unsafe.Pointer(DriverInfoData)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupDiEnumDriverInfoA calls SETUPAPI!SetupDiEnumDriverInfoA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdienumdriverinfoa
 // Minimum OS: windows5.0.
@@ -3205,11 +3318,10 @@ func SetupDiEnumDriverInfoA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_D
 	return nil
 }
 
-// SetupDiEnumDriverInfoW calls SETUPAPI!SetupDiEnumDriverInfoW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdienumdriverinfow
-// Minimum OS: windows5.0.
-func SetupDiEnumDriverInfoW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DriverType SETUP_DI_DRIVER_TYPE, MemberIndex uint32, DriverInfoData *SP_DRVINFO_DATA_V2_W) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiEnumDriverInfoW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(DriverType), uintptr(MemberIndex), uintptr(unsafe.Pointer(DriverInfoData)))
+// SetupDiGetActualModelsSection calls SETUPAPI!SetupDiGetActualModelsSectionW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetactualmodelssectionw
+func SetupDiGetActualModelsSection(Context *INFCONTEXT, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, InfSectionWithExt foundation.PWSTR, InfSectionWithExtSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetActualModelsSection.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(InfSectionWithExt)), uintptr(InfSectionWithExtSize), uintptr(unsafe.Pointer(RequiredSize)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3218,18 +3330,20 @@ func SetupDiEnumDriverInfoW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_D
 
 // SetupDiGetActualModelsSectionA calls SETUPAPI!SetupDiGetActualModelsSectionA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetactualmodelssectiona
-func SetupDiGetActualModelsSectionA(Context *INFCONTEXT, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, InfSectionWithExt foundation.PSTR, InfSectionWithExtSize uint32, RequiredSize *uint32, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetActualModelsSectionA.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(InfSectionWithExt)), uintptr(InfSectionWithExtSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiGetActualModelsSectionA(Context *INFCONTEXT, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, InfSectionWithExt foundation.PSTR, InfSectionWithExtSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetActualModelsSectionA.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(InfSectionWithExt)), uintptr(InfSectionWithExtSize), uintptr(unsafe.Pointer(RequiredSize)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupDiGetActualModelsSectionW calls SETUPAPI!SetupDiGetActualModelsSectionW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetactualmodelssectionw
-func SetupDiGetActualModelsSectionW(Context *INFCONTEXT, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, InfSectionWithExt foundation.PWSTR, InfSectionWithExtSize uint32, RequiredSize *uint32, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetActualModelsSectionW.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(InfSectionWithExt)), uintptr(InfSectionWithExtSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(Reserved)))
+// SetupDiGetActualSectionToInstall calls SETUPAPI!SetupDiGetActualSectionToInstallW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetactualsectiontoinstallw
+// Minimum OS: windows5.0.
+func SetupDiGetActualSectionToInstall(InfHandle unsafe.Pointer, InfSectionName string, InfSectionWithExt foundation.PWSTR, InfSectionWithExtSize uint32, RequiredSize *uint32, Extension *foundation.PWSTR) error {
+	_InfSectionName := win32.UTF16Ptr(InfSectionName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetActualSectionToInstall.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(_InfSectionName)), uintptr(unsafe.Pointer(InfSectionWithExt)), uintptr(InfSectionWithExtSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(Extension)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3247,33 +3361,23 @@ func SetupDiGetActualSectionToInstallA(InfHandle unsafe.Pointer, InfSectionName 
 	return nil
 }
 
+// SetupDiGetActualSectionToInstallEx calls SETUPAPI!SetupDiGetActualSectionToInstallExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetactualsectiontoinstallexw
+// Minimum OS: windows5.1.2600.
+func SetupDiGetActualSectionToInstallEx(InfHandle unsafe.Pointer, InfSectionName string, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, InfSectionWithExt foundation.PWSTR, InfSectionWithExtSize uint32, RequiredSize *uint32, Extension *foundation.PWSTR) error {
+	_InfSectionName := win32.UTF16Ptr(InfSectionName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetActualSectionToInstallEx.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(_InfSectionName)), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(InfSectionWithExt)), uintptr(InfSectionWithExtSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(Extension)), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupDiGetActualSectionToInstallExA calls SETUPAPI!SetupDiGetActualSectionToInstallExA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetactualsectiontoinstallexa
 // Minimum OS: windows5.1.2600.
-func SetupDiGetActualSectionToInstallExA(InfHandle unsafe.Pointer, InfSectionName foundation.PSTR, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, InfSectionWithExt foundation.PSTR, InfSectionWithExtSize uint32, RequiredSize *uint32, Extension *foundation.PSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetActualSectionToInstallExA.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfSectionName)), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(InfSectionWithExt)), uintptr(InfSectionWithExtSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(Extension)), uintptr(unsafe.Pointer(Reserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupDiGetActualSectionToInstallExW calls SETUPAPI!SetupDiGetActualSectionToInstallExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetactualsectiontoinstallexw
-// Minimum OS: windows5.1.2600.
-func SetupDiGetActualSectionToInstallExW(InfHandle unsafe.Pointer, InfSectionName foundation.PWSTR, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, InfSectionWithExt foundation.PWSTR, InfSectionWithExtSize uint32, RequiredSize *uint32, Extension *foundation.PWSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetActualSectionToInstallExW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfSectionName)), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(InfSectionWithExt)), uintptr(InfSectionWithExtSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(Extension)), uintptr(unsafe.Pointer(Reserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupDiGetActualSectionToInstallW calls SETUPAPI!SetupDiGetActualSectionToInstallW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetactualsectiontoinstallw
-// Minimum OS: windows5.0.
-func SetupDiGetActualSectionToInstallW(InfHandle unsafe.Pointer, InfSectionName foundation.PWSTR, InfSectionWithExt foundation.PWSTR, InfSectionWithExtSize uint32, RequiredSize *uint32, Extension *foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetActualSectionToInstallW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfSectionName)), uintptr(unsafe.Pointer(InfSectionWithExt)), uintptr(InfSectionWithExtSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(Extension)))
+func SetupDiGetActualSectionToInstallExA(InfHandle unsafe.Pointer, InfSectionName foundation.PSTR, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, InfSectionWithExt foundation.PSTR, InfSectionWithExtSize uint32, RequiredSize *uint32, Extension *foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetActualSectionToInstallExA.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfSectionName)), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(InfSectionWithExt)), uintptr(InfSectionWithExtSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(Extension)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3291,6 +3395,17 @@ func SetupDiGetClassBitmapIndex(ClassGuid *win32.GUID, MiniIconIndex *int32) err
 	return nil
 }
 
+// SetupDiGetClassDescription calls SETUPAPI!SetupDiGetClassDescriptionW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassdescriptionw
+// Minimum OS: windows5.0.
+func SetupDiGetClassDescription(ClassGuid *win32.GUID, ClassDescription foundation.PWSTR, ClassDescriptionSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassDescription.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(ClassDescription)), uintptr(ClassDescriptionSize), uintptr(unsafe.Pointer(RequiredSize)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupDiGetClassDescriptionA calls SETUPAPI!SetupDiGetClassDescriptionA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassdescriptiona
 // Minimum OS: windows5.0.
@@ -3302,33 +3417,34 @@ func SetupDiGetClassDescriptionA(ClassGuid *win32.GUID, ClassDescription foundat
 	return nil
 }
 
+// SetupDiGetClassDescriptionEx calls SETUPAPI!SetupDiGetClassDescriptionExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassdescriptionexw
+// Minimum OS: windows5.0.
+func SetupDiGetClassDescriptionEx(ClassGuid *win32.GUID, ClassDescription foundation.PWSTR, ClassDescriptionSize uint32, RequiredSize *uint32, MachineName string) error {
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassDescriptionEx.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(ClassDescription)), uintptr(ClassDescriptionSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(_MachineName)), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupDiGetClassDescriptionExA calls SETUPAPI!SetupDiGetClassDescriptionExA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassdescriptionexa
 // Minimum OS: windows5.0.
-func SetupDiGetClassDescriptionExA(ClassGuid *win32.GUID, ClassDescription foundation.PSTR, ClassDescriptionSize uint32, RequiredSize *uint32, MachineName foundation.PSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassDescriptionExA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(ClassDescription)), uintptr(ClassDescriptionSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiGetClassDescriptionExA(ClassGuid *win32.GUID, ClassDescription foundation.PSTR, ClassDescriptionSize uint32, RequiredSize *uint32, MachineName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassDescriptionExA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(ClassDescription)), uintptr(ClassDescriptionSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupDiGetClassDescriptionExW calls SETUPAPI!SetupDiGetClassDescriptionExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassdescriptionexw
+// SetupDiGetClassDevPropertySheets calls SETUPAPI!SetupDiGetClassDevPropertySheetsW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassdevpropertysheetsw
 // Minimum OS: windows5.0.
-func SetupDiGetClassDescriptionExW(ClassGuid *win32.GUID, ClassDescription foundation.PWSTR, ClassDescriptionSize uint32, RequiredSize *uint32, MachineName foundation.PWSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassDescriptionExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(ClassDescription)), uintptr(ClassDescriptionSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupDiGetClassDescriptionW calls SETUPAPI!SetupDiGetClassDescriptionW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassdescriptionw
-// Minimum OS: windows5.0.
-func SetupDiGetClassDescriptionW(ClassGuid *win32.GUID, ClassDescription foundation.PWSTR, ClassDescriptionSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassDescriptionW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(ClassDescription)), uintptr(ClassDescriptionSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupDiGetClassDevPropertySheets(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, PropertySheetHeader *uicontrols.PROPSHEETHEADERW_V2, PropertySheetHeaderPageListSize uint32, RequiredSize *uint32, PropertySheetType uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassDevPropertySheets.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(PropertySheetHeader)), uintptr(PropertySheetHeaderPageListSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(PropertySheetType))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3346,15 +3462,16 @@ func SetupDiGetClassDevPropertySheetsA(DeviceInfoSet HDEVINFO, DeviceInfoData *S
 	return nil
 }
 
-// SetupDiGetClassDevPropertySheetsW calls SETUPAPI!SetupDiGetClassDevPropertySheetsW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassdevpropertysheetsw
+// SetupDiGetClassDevs calls SETUPAPI!SetupDiGetClassDevsW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassdevsw
 // Minimum OS: windows5.0.
-func SetupDiGetClassDevPropertySheetsW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, PropertySheetHeader *uicontrols.PROPSHEETHEADERW_V2, PropertySheetHeaderPageListSize uint32, RequiredSize *uint32, PropertySheetType uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassDevPropertySheetsW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(PropertySheetHeader)), uintptr(PropertySheetHeaderPageListSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(PropertySheetType))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func SetupDiGetClassDevs(ClassGuid *win32.GUID, Enumerator string, hwndParent foundation.HWND, Flags SETUP_DI_GET_CLASS_DEVS_FLAGS) (HDEVINFO, error) {
+	_Enumerator := win32.UTF16Ptr(Enumerator)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassDevs.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(_Enumerator)), uintptr(hwndParent), uintptr(Flags))
+	if e1 != 0 {
+		return HDEVINFO(r1), e1
 	}
-	return nil
+	return HDEVINFO(r1), nil
 }
 
 // SetupDiGetClassDevsA calls SETUPAPI!SetupDiGetClassDevsA.
@@ -3368,33 +3485,24 @@ func SetupDiGetClassDevsA(ClassGuid *win32.GUID, Enumerator foundation.PSTR, hwn
 	return HDEVINFO(r1), nil
 }
 
+// SetupDiGetClassDevsEx calls SETUPAPI!SetupDiGetClassDevsExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassdevsexw
+// Minimum OS: windows5.0.
+func SetupDiGetClassDevsEx(ClassGuid *win32.GUID, Enumerator string, hwndParent foundation.HWND, Flags SETUP_DI_GET_CLASS_DEVS_FLAGS, DeviceInfoSet HDEVINFO, MachineName string) (HDEVINFO, error) {
+	_Enumerator := win32.UTF16Ptr(Enumerator)
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassDevsEx.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(_Enumerator)), uintptr(hwndParent), uintptr(Flags), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(_MachineName)), 0)
+	if e1 != 0 {
+		return HDEVINFO(r1), e1
+	}
+	return HDEVINFO(r1), nil
+}
+
 // SetupDiGetClassDevsExA calls SETUPAPI!SetupDiGetClassDevsExA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassdevsexa
 // Minimum OS: windows5.0.
-func SetupDiGetClassDevsExA(ClassGuid *win32.GUID, Enumerator foundation.PSTR, hwndParent foundation.HWND, Flags SETUP_DI_GET_CLASS_DEVS_FLAGS, DeviceInfoSet HDEVINFO, MachineName foundation.PSTR, Reserved unsafe.Pointer) (HDEVINFO, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassDevsExA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(Enumerator)), uintptr(hwndParent), uintptr(Flags), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
-	if e1 != 0 {
-		return HDEVINFO(r1), e1
-	}
-	return HDEVINFO(r1), nil
-}
-
-// SetupDiGetClassDevsExW calls SETUPAPI!SetupDiGetClassDevsExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassdevsexw
-// Minimum OS: windows5.0.
-func SetupDiGetClassDevsExW(ClassGuid *win32.GUID, Enumerator foundation.PWSTR, hwndParent foundation.HWND, Flags SETUP_DI_GET_CLASS_DEVS_FLAGS, DeviceInfoSet HDEVINFO, MachineName foundation.PWSTR, Reserved unsafe.Pointer) (HDEVINFO, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassDevsExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(Enumerator)), uintptr(hwndParent), uintptr(Flags), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
-	if e1 != 0 {
-		return HDEVINFO(r1), e1
-	}
-	return HDEVINFO(r1), nil
-}
-
-// SetupDiGetClassDevsW calls SETUPAPI!SetupDiGetClassDevsW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassdevsw
-// Minimum OS: windows5.0.
-func SetupDiGetClassDevsW(ClassGuid *win32.GUID, Enumerator foundation.PWSTR, hwndParent foundation.HWND, Flags SETUP_DI_GET_CLASS_DEVS_FLAGS) (HDEVINFO, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassDevsW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(Enumerator)), uintptr(hwndParent), uintptr(Flags))
+func SetupDiGetClassDevsExA(ClassGuid *win32.GUID, Enumerator foundation.PSTR, hwndParent foundation.HWND, Flags SETUP_DI_GET_CLASS_DEVS_FLAGS, DeviceInfoSet HDEVINFO, MachineName foundation.PSTR) (HDEVINFO, error) {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassDevsExA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(Enumerator)), uintptr(hwndParent), uintptr(Flags), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(MachineName)), 0)
 	if e1 != 0 {
 		return HDEVINFO(r1), e1
 	}
@@ -3423,22 +3531,34 @@ func SetupDiGetClassImageList(ClassImageListData *SP_CLASSIMAGELIST_DATA) error 
 	return nil
 }
 
-// SetupDiGetClassImageListExA calls SETUPAPI!SetupDiGetClassImageListExA.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassimagelistexa
+// SetupDiGetClassImageListEx calls SETUPAPI!SetupDiGetClassImageListExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassimagelistexw
 // Minimum OS: windows5.0.
-func SetupDiGetClassImageListExA(ClassImageListData *SP_CLASSIMAGELIST_DATA, MachineName foundation.PSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassImageListExA.Addr(), uintptr(unsafe.Pointer(ClassImageListData)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiGetClassImageListEx(ClassImageListData *SP_CLASSIMAGELIST_DATA, MachineName string) error {
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassImageListEx.Addr(), uintptr(unsafe.Pointer(ClassImageListData)), uintptr(unsafe.Pointer(_MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupDiGetClassImageListExW calls SETUPAPI!SetupDiGetClassImageListExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassimagelistexw
+// SetupDiGetClassImageListExA calls SETUPAPI!SetupDiGetClassImageListExA.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassimagelistexa
 // Minimum OS: windows5.0.
-func SetupDiGetClassImageListExW(ClassImageListData *SP_CLASSIMAGELIST_DATA, MachineName foundation.PWSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassImageListExW.Addr(), uintptr(unsafe.Pointer(ClassImageListData)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiGetClassImageListExA(ClassImageListData *SP_CLASSIMAGELIST_DATA, MachineName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassImageListExA.Addr(), uintptr(unsafe.Pointer(ClassImageListData)), uintptr(unsafe.Pointer(MachineName)), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// SetupDiGetClassInstallParams calls SETUPAPI!SetupDiGetClassInstallParamsW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassinstallparamsw
+// Minimum OS: windows5.0.
+func SetupDiGetClassInstallParams(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, ClassInstallParams *SP_CLASSINSTALL_HEADER, ClassInstallParamsSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassInstallParams.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(ClassInstallParams)), uintptr(ClassInstallParamsSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3456,22 +3576,12 @@ func SetupDiGetClassInstallParamsA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DE
 	return nil
 }
 
-// SetupDiGetClassInstallParamsW calls SETUPAPI!SetupDiGetClassInstallParamsW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassinstallparamsw
-// Minimum OS: windows5.0.
-func SetupDiGetClassInstallParamsW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, ClassInstallParams *SP_CLASSINSTALL_HEADER, ClassInstallParamsSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassInstallParamsW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(ClassInstallParams)), uintptr(ClassInstallParamsSize), uintptr(unsafe.Pointer(RequiredSize)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // SetupDiGetClassPropertyExW calls SETUPAPI!SetupDiGetClassPropertyExW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclasspropertyexw
 // Minimum OS: windows6.0.6000.
-func SetupDiGetClassPropertyExW(ClassGuid *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType *devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32, Flags uint32, MachineName foundation.PWSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassPropertyExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(Flags), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiGetClassPropertyExW(ClassGuid *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType *devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32, Flags uint32, MachineName string) error {
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassPropertyExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(Flags), uintptr(unsafe.Pointer(_MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3481,8 +3591,12 @@ func SetupDiGetClassPropertyExW(ClassGuid *win32.GUID, PropertyKey *foundation.D
 // SetupDiGetClassPropertyKeys calls SETUPAPI!SetupDiGetClassPropertyKeys.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclasspropertykeys
 // Minimum OS: windows6.0.6000.
-func SetupDiGetClassPropertyKeys(ClassGuid *win32.GUID, PropertyKeyArray *foundation.DEVPROPKEY, PropertyKeyCount uint32, RequiredPropertyKeyCount *uint32, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassPropertyKeys.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(PropertyKeyArray)), uintptr(PropertyKeyCount), uintptr(unsafe.Pointer(RequiredPropertyKeyCount)), uintptr(Flags))
+func SetupDiGetClassPropertyKeys(ClassGuid *win32.GUID, PropertyKeyArray []foundation.DEVPROPKEY, RequiredPropertyKeyCount *uint32, Flags uint32) error {
+	var _PropertyKeyArray *foundation.DEVPROPKEY
+	if len(PropertyKeyArray) > 0 {
+		_PropertyKeyArray = &PropertyKeyArray[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassPropertyKeys.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(_PropertyKeyArray)), uintptr(len(PropertyKeyArray)), uintptr(unsafe.Pointer(RequiredPropertyKeyCount)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3492,8 +3606,13 @@ func SetupDiGetClassPropertyKeys(ClassGuid *win32.GUID, PropertyKeyArray *founda
 // SetupDiGetClassPropertyKeysExW calls SETUPAPI!SetupDiGetClassPropertyKeysExW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclasspropertykeysexw
 // Minimum OS: windows6.0.6000.
-func SetupDiGetClassPropertyKeysExW(ClassGuid *win32.GUID, PropertyKeyArray *foundation.DEVPROPKEY, PropertyKeyCount uint32, RequiredPropertyKeyCount *uint32, Flags uint32, MachineName foundation.PWSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassPropertyKeysExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(PropertyKeyArray)), uintptr(PropertyKeyCount), uintptr(unsafe.Pointer(RequiredPropertyKeyCount)), uintptr(Flags), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiGetClassPropertyKeysExW(ClassGuid *win32.GUID, PropertyKeyArray []foundation.DEVPROPKEY, RequiredPropertyKeyCount *uint32, Flags uint32, MachineName string) error {
+	var _PropertyKeyArray *foundation.DEVPROPKEY
+	if len(PropertyKeyArray) > 0 {
+		_PropertyKeyArray = &PropertyKeyArray[0]
+	}
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassPropertyKeysExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(_PropertyKeyArray)), uintptr(len(PropertyKeyArray)), uintptr(unsafe.Pointer(RequiredPropertyKeyCount)), uintptr(Flags), uintptr(unsafe.Pointer(_MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3511,22 +3630,35 @@ func SetupDiGetClassPropertyW(ClassGuid *win32.GUID, PropertyKey *foundation.DEV
 	return nil
 }
 
-// SetupDiGetClassRegistryPropertyA calls SETUPAPI!SetupDiGetClassRegistryPropertyA.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassregistrypropertya
+// SetupDiGetClassRegistryProperty calls SETUPAPI!SetupDiGetClassRegistryPropertyW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassregistrypropertyw
 // Minimum OS: windows5.1.2600.
-func SetupDiGetClassRegistryPropertyA(ClassGuid *win32.GUID, Property uint32, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32, MachineName foundation.PSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassRegistryPropertyA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiGetClassRegistryProperty(ClassGuid *win32.GUID, Property uint32, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32, MachineName string) error {
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassRegistryProperty.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(_MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupDiGetClassRegistryPropertyW calls SETUPAPI!SetupDiGetClassRegistryPropertyW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassregistrypropertyw
+// SetupDiGetClassRegistryPropertyA calls SETUPAPI!SetupDiGetClassRegistryPropertyA.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassregistrypropertya
 // Minimum OS: windows5.1.2600.
-func SetupDiGetClassRegistryPropertyW(ClassGuid *win32.GUID, Property uint32, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32, MachineName foundation.PWSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassRegistryPropertyW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiGetClassRegistryPropertyA(ClassGuid *win32.GUID, Property uint32, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32, MachineName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassRegistryPropertyA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// SetupDiGetCustomDeviceProperty calls SETUPAPI!SetupDiGetCustomDevicePropertyW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetcustomdevicepropertyw
+// Minimum OS: windows5.1.2600.
+func SetupDiGetCustomDeviceProperty(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, CustomPropertyName string, Flags uint32, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32) error {
+	_CustomPropertyName := win32.UTF16Ptr(CustomPropertyName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetCustomDeviceProperty.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(_CustomPropertyName)), uintptr(Flags), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3544,22 +3676,22 @@ func SetupDiGetCustomDevicePropertyA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_
 	return nil
 }
 
-// SetupDiGetCustomDevicePropertyW calls SETUPAPI!SetupDiGetCustomDevicePropertyW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetcustomdevicepropertyw
-// Minimum OS: windows5.1.2600.
-func SetupDiGetCustomDevicePropertyW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, CustomPropertyName foundation.PWSTR, Flags uint32, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetCustomDevicePropertyW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(CustomPropertyName)), uintptr(Flags), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+// SetupDiGetDeviceInfoListClass calls SETUPAPI!SetupDiGetDeviceInfoListClass.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinfolistclass
+// Minimum OS: windows5.0.
+func SetupDiGetDeviceInfoListClass(DeviceInfoSet HDEVINFO, ClassGuid *win32.GUID) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInfoListClass.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(ClassGuid)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupDiGetDeviceInfoListClass calls SETUPAPI!SetupDiGetDeviceInfoListClass.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinfolistclass
+// SetupDiGetDeviceInfoListDetail calls SETUPAPI!SetupDiGetDeviceInfoListDetailW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinfolistdetailw
 // Minimum OS: windows5.0.
-func SetupDiGetDeviceInfoListClass(DeviceInfoSet HDEVINFO, ClassGuid *win32.GUID) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInfoListClass.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(ClassGuid)))
+func SetupDiGetDeviceInfoListDetail(DeviceInfoSet HDEVINFO, DeviceInfoSetDetailData *SP_DEVINFO_LIST_DETAIL_DATA_W) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInfoListDetail.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoSetDetailData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3577,11 +3709,11 @@ func SetupDiGetDeviceInfoListDetailA(DeviceInfoSet HDEVINFO, DeviceInfoSetDetail
 	return nil
 }
 
-// SetupDiGetDeviceInfoListDetailW calls SETUPAPI!SetupDiGetDeviceInfoListDetailW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinfolistdetailw
+// SetupDiGetDeviceInstallParams calls SETUPAPI!SetupDiGetDeviceInstallParamsW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinstallparamsw
 // Minimum OS: windows5.0.
-func SetupDiGetDeviceInfoListDetailW(DeviceInfoSet HDEVINFO, DeviceInfoSetDetailData *SP_DEVINFO_LIST_DETAIL_DATA_W) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInfoListDetailW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoSetDetailData)))
+func SetupDiGetDeviceInstallParams(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DeviceInstallParams *SP_DEVINSTALL_PARAMS_W) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInstallParams.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DeviceInstallParams)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3599,11 +3731,11 @@ func SetupDiGetDeviceInstallParamsA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_D
 	return nil
 }
 
-// SetupDiGetDeviceInstallParamsW calls SETUPAPI!SetupDiGetDeviceInstallParamsW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinstallparamsw
+// SetupDiGetDeviceInstanceId calls SETUPAPI!SetupDiGetDeviceInstanceIdW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinstanceidw
 // Minimum OS: windows5.0.
-func SetupDiGetDeviceInstallParamsW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DeviceInstallParams *SP_DEVINSTALL_PARAMS_W) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInstallParamsW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DeviceInstallParams)))
+func SetupDiGetDeviceInstanceId(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DeviceInstanceId foundation.PWSTR, DeviceInstanceIdSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInstanceId.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DeviceInstanceId)), uintptr(DeviceInstanceIdSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3621,22 +3753,22 @@ func SetupDiGetDeviceInstanceIdA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVI
 	return nil
 }
 
-// SetupDiGetDeviceInstanceIdW calls SETUPAPI!SetupDiGetDeviceInstanceIdW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinstanceidw
+// SetupDiGetDeviceInterfaceAlias calls SETUPAPI!SetupDiGetDeviceInterfaceAlias.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinterfacealias
 // Minimum OS: windows5.0.
-func SetupDiGetDeviceInstanceIdW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DeviceInstanceId foundation.PWSTR, DeviceInstanceIdSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInstanceIdW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DeviceInstanceId)), uintptr(DeviceInstanceIdSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupDiGetDeviceInterfaceAlias(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, AliasInterfaceClassGuid *win32.GUID, AliasDeviceInterfaceData *SP_DEVICE_INTERFACE_DATA) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInterfaceAlias.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(unsafe.Pointer(AliasInterfaceClassGuid)), uintptr(unsafe.Pointer(AliasDeviceInterfaceData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupDiGetDeviceInterfaceAlias calls SETUPAPI!SetupDiGetDeviceInterfaceAlias.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinterfacealias
+// SetupDiGetDeviceInterfaceDetail calls SETUPAPI!SetupDiGetDeviceInterfaceDetailW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinterfacedetailw
 // Minimum OS: windows5.0.
-func SetupDiGetDeviceInterfaceAlias(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, AliasInterfaceClassGuid *win32.GUID, AliasDeviceInterfaceData *SP_DEVICE_INTERFACE_DATA) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInterfaceAlias.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(unsafe.Pointer(AliasInterfaceClassGuid)), uintptr(unsafe.Pointer(AliasDeviceInterfaceData)))
+func SetupDiGetDeviceInterfaceDetail(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, DeviceInterfaceDetailData *SP_DEVICE_INTERFACE_DETAIL_DATA_W, DeviceInterfaceDetailDataSize uint32, RequiredSize *uint32, DeviceInfoData *SP_DEVINFO_DATA) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInterfaceDetail.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(unsafe.Pointer(DeviceInterfaceDetailData)), uintptr(DeviceInterfaceDetailDataSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(DeviceInfoData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3654,22 +3786,15 @@ func SetupDiGetDeviceInterfaceDetailA(DeviceInfoSet HDEVINFO, DeviceInterfaceDat
 	return nil
 }
 
-// SetupDiGetDeviceInterfaceDetailW calls SETUPAPI!SetupDiGetDeviceInterfaceDetailW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinterfacedetailw
-// Minimum OS: windows5.0.
-func SetupDiGetDeviceInterfaceDetailW(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, DeviceInterfaceDetailData *SP_DEVICE_INTERFACE_DETAIL_DATA_W, DeviceInterfaceDetailDataSize uint32, RequiredSize *uint32, DeviceInfoData *SP_DEVINFO_DATA) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInterfaceDetailW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(unsafe.Pointer(DeviceInterfaceDetailData)), uintptr(DeviceInterfaceDetailDataSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(DeviceInfoData)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // SetupDiGetDeviceInterfacePropertyKeys calls SETUPAPI!SetupDiGetDeviceInterfacePropertyKeys.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinterfacepropertykeys
 // Minimum OS: windows6.0.6000.
-func SetupDiGetDeviceInterfacePropertyKeys(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, PropertyKeyArray *foundation.DEVPROPKEY, PropertyKeyCount uint32, RequiredPropertyKeyCount *uint32, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInterfacePropertyKeys.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(unsafe.Pointer(PropertyKeyArray)), uintptr(PropertyKeyCount), uintptr(unsafe.Pointer(RequiredPropertyKeyCount)), uintptr(Flags))
+func SetupDiGetDeviceInterfacePropertyKeys(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, PropertyKeyArray []foundation.DEVPROPKEY, RequiredPropertyKeyCount *uint32, Flags uint32) error {
+	var _PropertyKeyArray *foundation.DEVPROPKEY
+	if len(PropertyKeyArray) > 0 {
+		_PropertyKeyArray = &PropertyKeyArray[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInterfacePropertyKeys.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(unsafe.Pointer(_PropertyKeyArray)), uintptr(len(PropertyKeyArray)), uintptr(unsafe.Pointer(RequiredPropertyKeyCount)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3690,8 +3815,12 @@ func SetupDiGetDeviceInterfacePropertyW(DeviceInfoSet HDEVINFO, DeviceInterfaceD
 // SetupDiGetDevicePropertyKeys calls SETUPAPI!SetupDiGetDevicePropertyKeys.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdevicepropertykeys
 // Minimum OS: windows6.0.6000.
-func SetupDiGetDevicePropertyKeys(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, PropertyKeyArray *foundation.DEVPROPKEY, PropertyKeyCount uint32, RequiredPropertyKeyCount *uint32, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDevicePropertyKeys.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(PropertyKeyArray)), uintptr(PropertyKeyCount), uintptr(unsafe.Pointer(RequiredPropertyKeyCount)), uintptr(Flags))
+func SetupDiGetDevicePropertyKeys(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, PropertyKeyArray []foundation.DEVPROPKEY, RequiredPropertyKeyCount *uint32, Flags uint32) error {
+	var _PropertyKeyArray *foundation.DEVPROPKEY
+	if len(PropertyKeyArray) > 0 {
+		_PropertyKeyArray = &PropertyKeyArray[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDevicePropertyKeys.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(_PropertyKeyArray)), uintptr(len(PropertyKeyArray)), uintptr(unsafe.Pointer(RequiredPropertyKeyCount)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3709,6 +3838,17 @@ func SetupDiGetDevicePropertyW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINF
 	return nil
 }
 
+// SetupDiGetDeviceRegistryProperty calls SETUPAPI!SetupDiGetDeviceRegistryPropertyW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceregistrypropertyw
+// Minimum OS: windows5.0.
+func SetupDiGetDeviceRegistryProperty(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Property SETUP_DI_REGISTRY_PROPERTY, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceRegistryProperty.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Property), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupDiGetDeviceRegistryPropertyA calls SETUPAPI!SetupDiGetDeviceRegistryPropertyA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceregistrypropertya
 // Minimum OS: windows5.0.
@@ -3720,11 +3860,11 @@ func SetupDiGetDeviceRegistryPropertyA(DeviceInfoSet HDEVINFO, DeviceInfoData *S
 	return nil
 }
 
-// SetupDiGetDeviceRegistryPropertyW calls SETUPAPI!SetupDiGetDeviceRegistryPropertyW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceregistrypropertyw
+// SetupDiGetDriverInfoDetail calls SETUPAPI!SetupDiGetDriverInfoDetailW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdriverinfodetailw
 // Minimum OS: windows5.0.
-func SetupDiGetDeviceRegistryPropertyW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Property SETUP_DI_REGISTRY_PROPERTY, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceRegistryPropertyW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Property), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupDiGetDriverInfoDetail(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DriverInfoData *SP_DRVINFO_DATA_V2_W, DriverInfoDetailData *SP_DRVINFO_DETAIL_DATA_W, DriverInfoDetailDataSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDriverInfoDetail.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DriverInfoData)), uintptr(unsafe.Pointer(DriverInfoDetailData)), uintptr(DriverInfoDetailDataSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3742,11 +3882,11 @@ func SetupDiGetDriverInfoDetailA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVI
 	return nil
 }
 
-// SetupDiGetDriverInfoDetailW calls SETUPAPI!SetupDiGetDriverInfoDetailW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdriverinfodetailw
+// SetupDiGetDriverInstallParams calls SETUPAPI!SetupDiGetDriverInstallParamsW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdriverinstallparamsw
 // Minimum OS: windows5.0.
-func SetupDiGetDriverInfoDetailW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DriverInfoData *SP_DRVINFO_DATA_V2_W, DriverInfoDetailData *SP_DRVINFO_DETAIL_DATA_W, DriverInfoDetailDataSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDriverInfoDetailW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DriverInfoData)), uintptr(unsafe.Pointer(DriverInfoDetailData)), uintptr(DriverInfoDetailDataSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupDiGetDriverInstallParams(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DriverInfoData *SP_DRVINFO_DATA_V2_W, DriverInstallParams *SP_DRVINSTALL_PARAMS) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDriverInstallParams.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DriverInfoData)), uintptr(unsafe.Pointer(DriverInstallParams)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3764,11 +3904,11 @@ func SetupDiGetDriverInstallParamsA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_D
 	return nil
 }
 
-// SetupDiGetDriverInstallParamsW calls SETUPAPI!SetupDiGetDriverInstallParamsW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdriverinstallparamsw
+// SetupDiGetHwProfileFriendlyName calls SETUPAPI!SetupDiGetHwProfileFriendlyNameW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigethwprofilefriendlynamew
 // Minimum OS: windows5.0.
-func SetupDiGetDriverInstallParamsW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DriverInfoData *SP_DRVINFO_DATA_V2_W, DriverInstallParams *SP_DRVINSTALL_PARAMS) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDriverInstallParamsW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DriverInfoData)), uintptr(unsafe.Pointer(DriverInstallParams)))
+func SetupDiGetHwProfileFriendlyName(HwProfile uint32, FriendlyName foundation.PWSTR, FriendlyNameSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetHwProfileFriendlyName.Addr(), uintptr(HwProfile), uintptr(unsafe.Pointer(FriendlyName)), uintptr(FriendlyNameSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3786,33 +3926,23 @@ func SetupDiGetHwProfileFriendlyNameA(HwProfile uint32, FriendlyName foundation.
 	return nil
 }
 
+// SetupDiGetHwProfileFriendlyNameEx calls SETUPAPI!SetupDiGetHwProfileFriendlyNameExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigethwprofilefriendlynameexw
+// Minimum OS: windows5.0.
+func SetupDiGetHwProfileFriendlyNameEx(HwProfile uint32, FriendlyName foundation.PWSTR, FriendlyNameSize uint32, RequiredSize *uint32, MachineName string) error {
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetHwProfileFriendlyNameEx.Addr(), uintptr(HwProfile), uintptr(unsafe.Pointer(FriendlyName)), uintptr(FriendlyNameSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(_MachineName)), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupDiGetHwProfileFriendlyNameExA calls SETUPAPI!SetupDiGetHwProfileFriendlyNameExA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigethwprofilefriendlynameexa
 // Minimum OS: windows5.0.
-func SetupDiGetHwProfileFriendlyNameExA(HwProfile uint32, FriendlyName foundation.PSTR, FriendlyNameSize uint32, RequiredSize *uint32, MachineName foundation.PSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetHwProfileFriendlyNameExA.Addr(), uintptr(HwProfile), uintptr(unsafe.Pointer(FriendlyName)), uintptr(FriendlyNameSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupDiGetHwProfileFriendlyNameExW calls SETUPAPI!SetupDiGetHwProfileFriendlyNameExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigethwprofilefriendlynameexw
-// Minimum OS: windows5.0.
-func SetupDiGetHwProfileFriendlyNameExW(HwProfile uint32, FriendlyName foundation.PWSTR, FriendlyNameSize uint32, RequiredSize *uint32, MachineName foundation.PWSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetHwProfileFriendlyNameExW.Addr(), uintptr(HwProfile), uintptr(unsafe.Pointer(FriendlyName)), uintptr(FriendlyNameSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupDiGetHwProfileFriendlyNameW calls SETUPAPI!SetupDiGetHwProfileFriendlyNameW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigethwprofilefriendlynamew
-// Minimum OS: windows5.0.
-func SetupDiGetHwProfileFriendlyNameW(HwProfile uint32, FriendlyName foundation.PWSTR, FriendlyNameSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetHwProfileFriendlyNameW.Addr(), uintptr(HwProfile), uintptr(unsafe.Pointer(FriendlyName)), uintptr(FriendlyNameSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupDiGetHwProfileFriendlyNameExA(HwProfile uint32, FriendlyName foundation.PSTR, FriendlyNameSize uint32, RequiredSize *uint32, MachineName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetHwProfileFriendlyNameExA.Addr(), uintptr(HwProfile), uintptr(unsafe.Pointer(FriendlyName)), uintptr(FriendlyNameSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3822,8 +3952,28 @@ func SetupDiGetHwProfileFriendlyNameW(HwProfile uint32, FriendlyName foundation.
 // SetupDiGetHwProfileList calls SETUPAPI!SetupDiGetHwProfileList.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigethwprofilelist
 // Minimum OS: windows5.0.
-func SetupDiGetHwProfileList(HwProfileList *uint32, HwProfileListSize uint32, RequiredSize *uint32, CurrentlyActiveIndex *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetHwProfileList.Addr(), uintptr(unsafe.Pointer(HwProfileList)), uintptr(HwProfileListSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(CurrentlyActiveIndex)))
+func SetupDiGetHwProfileList(HwProfileList []uint32, RequiredSize *uint32, CurrentlyActiveIndex *uint32) error {
+	var _HwProfileList *uint32
+	if len(HwProfileList) > 0 {
+		_HwProfileList = &HwProfileList[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetHwProfileList.Addr(), uintptr(unsafe.Pointer(_HwProfileList)), uintptr(len(HwProfileList)), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(CurrentlyActiveIndex)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// SetupDiGetHwProfileListEx calls SETUPAPI!SetupDiGetHwProfileListExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigethwprofilelistexw
+// Minimum OS: windows5.0.
+func SetupDiGetHwProfileListEx(HwProfileList []uint32, RequiredSize *uint32, CurrentlyActiveIndex *uint32, MachineName string) error {
+	var _HwProfileList *uint32
+	if len(HwProfileList) > 0 {
+		_HwProfileList = &HwProfileList[0]
+	}
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetHwProfileListEx.Addr(), uintptr(unsafe.Pointer(_HwProfileList)), uintptr(len(HwProfileList)), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(CurrentlyActiveIndex)), uintptr(unsafe.Pointer(_MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3833,19 +3983,24 @@ func SetupDiGetHwProfileList(HwProfileList *uint32, HwProfileListSize uint32, Re
 // SetupDiGetHwProfileListExA calls SETUPAPI!SetupDiGetHwProfileListExA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigethwprofilelistexa
 // Minimum OS: windows5.0.
-func SetupDiGetHwProfileListExA(HwProfileList *uint32, HwProfileListSize uint32, RequiredSize *uint32, CurrentlyActiveIndex *uint32, MachineName foundation.PSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetHwProfileListExA.Addr(), uintptr(unsafe.Pointer(HwProfileList)), uintptr(HwProfileListSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(CurrentlyActiveIndex)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiGetHwProfileListExA(HwProfileList []uint32, RequiredSize *uint32, CurrentlyActiveIndex *uint32, MachineName foundation.PSTR) error {
+	var _HwProfileList *uint32
+	if len(HwProfileList) > 0 {
+		_HwProfileList = &HwProfileList[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetHwProfileListExA.Addr(), uintptr(unsafe.Pointer(_HwProfileList)), uintptr(len(HwProfileList)), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(CurrentlyActiveIndex)), uintptr(unsafe.Pointer(MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupDiGetHwProfileListExW calls SETUPAPI!SetupDiGetHwProfileListExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigethwprofilelistexw
+// SetupDiGetINFClass calls SETUPAPI!SetupDiGetINFClassW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetinfclassw
 // Minimum OS: windows5.0.
-func SetupDiGetHwProfileListExW(HwProfileList *uint32, HwProfileListSize uint32, RequiredSize *uint32, CurrentlyActiveIndex *uint32, MachineName foundation.PWSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetHwProfileListExW.Addr(), uintptr(unsafe.Pointer(HwProfileList)), uintptr(HwProfileListSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(CurrentlyActiveIndex)), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiGetINFClass(InfName string, ClassGuid *win32.GUID, ClassName foundation.PWSTR, ClassNameSize uint32, RequiredSize *uint32) error {
+	_InfName := win32.UTF16Ptr(InfName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetINFClass.Addr(), uintptr(unsafe.Pointer(_InfName)), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(ClassName)), uintptr(ClassNameSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3863,22 +4018,22 @@ func SetupDiGetINFClassA(InfName foundation.PSTR, ClassGuid *win32.GUID, ClassNa
 	return nil
 }
 
-// SetupDiGetINFClassW calls SETUPAPI!SetupDiGetINFClassW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetinfclassw
+// SetupDiGetSelectedDevice calls SETUPAPI!SetupDiGetSelectedDevice.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetselecteddevice
 // Minimum OS: windows5.0.
-func SetupDiGetINFClassW(InfName foundation.PWSTR, ClassGuid *win32.GUID, ClassName foundation.PWSTR, ClassNameSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetINFClassW.Addr(), uintptr(unsafe.Pointer(InfName)), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(ClassName)), uintptr(ClassNameSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupDiGetSelectedDevice(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetSelectedDevice.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupDiGetSelectedDevice calls SETUPAPI!SetupDiGetSelectedDevice.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetselecteddevice
+// SetupDiGetSelectedDriver calls SETUPAPI!SetupDiGetSelectedDriverW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetselecteddriverw
 // Minimum OS: windows5.0.
-func SetupDiGetSelectedDevice(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetSelectedDevice.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)))
+func SetupDiGetSelectedDriver(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DriverInfoData *SP_DRVINFO_DATA_V2_W) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetSelectedDriver.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DriverInfoData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3896,21 +4051,22 @@ func SetupDiGetSelectedDriverA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINF
 	return nil
 }
 
-// SetupDiGetSelectedDriverW calls SETUPAPI!SetupDiGetSelectedDriverW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetselecteddriverw
-// Minimum OS: windows5.0.
-func SetupDiGetSelectedDriverW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DriverInfoData *SP_DRVINFO_DATA_V2_W) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetSelectedDriverW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DriverInfoData)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // SetupDiGetWizardPage calls SETUPAPI!SetupDiGetWizardPage.
 func SetupDiGetWizardPage(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, InstallWizardData *SP_INSTALLWIZARD_DATA, PageType uint32, Flags uint32) uicontrols.HPROPSHEETPAGE {
 	r1, _, _ := syscall.SyscallN(procSetupDiGetWizardPage.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(InstallWizardData)), uintptr(PageType), uintptr(Flags))
 	return uicontrols.HPROPSHEETPAGE(r1)
+}
+
+// SetupDiInstallClass calls SETUPAPI!SetupDiInstallClassW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiinstallclassw
+// Minimum OS: windows5.0.
+func SetupDiInstallClass(hwndParent foundation.HWND, InfFileName string, Flags uint32, FileQueue unsafe.Pointer) error {
+	_InfFileName := win32.UTF16Ptr(InfFileName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiInstallClass.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_InfFileName)), uintptr(Flags), uintptr(unsafe.Pointer(FileQueue)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // SetupDiInstallClassA calls SETUPAPI!SetupDiInstallClassA.
@@ -3924,33 +4080,23 @@ func SetupDiInstallClassA(hwndParent foundation.HWND, InfFileName foundation.PST
 	return nil
 }
 
+// SetupDiInstallClassEx calls SETUPAPI!SetupDiInstallClassExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiinstallclassexw
+// Minimum OS: windows5.0.
+func SetupDiInstallClassEx(hwndParent foundation.HWND, InfFileName string, Flags uint32, FileQueue unsafe.Pointer, InterfaceClassGuid *win32.GUID) error {
+	_InfFileName := win32.UTF16Ptr(InfFileName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiInstallClassEx.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_InfFileName)), uintptr(Flags), uintptr(unsafe.Pointer(FileQueue)), uintptr(unsafe.Pointer(InterfaceClassGuid)), 0, 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupDiInstallClassExA calls SETUPAPI!SetupDiInstallClassExA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiinstallclassexa
 // Minimum OS: windows5.0.
-func SetupDiInstallClassExA(hwndParent foundation.HWND, InfFileName foundation.PSTR, Flags uint32, FileQueue unsafe.Pointer, InterfaceClassGuid *win32.GUID, Reserved1 unsafe.Pointer, Reserved2 unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiInstallClassExA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(InfFileName)), uintptr(Flags), uintptr(unsafe.Pointer(FileQueue)), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(Reserved1)), uintptr(unsafe.Pointer(Reserved2)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupDiInstallClassExW calls SETUPAPI!SetupDiInstallClassExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiinstallclassexw
-// Minimum OS: windows5.0.
-func SetupDiInstallClassExW(hwndParent foundation.HWND, InfFileName foundation.PWSTR, Flags uint32, FileQueue unsafe.Pointer, InterfaceClassGuid *win32.GUID, Reserved1 unsafe.Pointer, Reserved2 unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiInstallClassExW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(InfFileName)), uintptr(Flags), uintptr(unsafe.Pointer(FileQueue)), uintptr(unsafe.Pointer(InterfaceClassGuid)), uintptr(unsafe.Pointer(Reserved1)), uintptr(unsafe.Pointer(Reserved2)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupDiInstallClassW calls SETUPAPI!SetupDiInstallClassW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiinstallclassw
-// Minimum OS: windows5.0.
-func SetupDiInstallClassW(hwndParent foundation.HWND, InfFileName foundation.PWSTR, Flags uint32, FileQueue unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiInstallClassW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(InfFileName)), uintptr(Flags), uintptr(unsafe.Pointer(FileQueue)))
+func SetupDiInstallClassExA(hwndParent foundation.HWND, InfFileName foundation.PSTR, Flags uint32, FileQueue unsafe.Pointer, InterfaceClassGuid *win32.GUID) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiInstallClassExA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(InfFileName)), uintptr(Flags), uintptr(unsafe.Pointer(FileQueue)), uintptr(unsafe.Pointer(InterfaceClassGuid)), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4024,11 +4170,12 @@ func SetupDiOpenClassRegKey(ClassGuid *win32.GUID, samDesired uint32) (systemreg
 	return ret, nil
 }
 
-// SetupDiOpenClassRegKeyExA calls SETUPAPI!SetupDiOpenClassRegKeyExA.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiopenclassregkeyexa
+// SetupDiOpenClassRegKeyEx calls SETUPAPI!SetupDiOpenClassRegKeyExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiopenclassregkeyexw
 // Minimum OS: windows5.0.
-func SetupDiOpenClassRegKeyExA(ClassGuid *win32.GUID, samDesired uint32, Flags uint32, MachineName foundation.PSTR, Reserved unsafe.Pointer) (systemregistry.HKEY, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDiOpenClassRegKeyExA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(samDesired), uintptr(Flags), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiOpenClassRegKeyEx(ClassGuid *win32.GUID, samDesired uint32, Flags uint32, MachineName string) (systemregistry.HKEY, error) {
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiOpenClassRegKeyEx.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(samDesired), uintptr(Flags), uintptr(unsafe.Pointer(_MachineName)), 0)
 	ret := systemregistry.HKEY(r1)
 	if ret == ^systemregistry.HKEY(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -4036,11 +4183,11 @@ func SetupDiOpenClassRegKeyExA(ClassGuid *win32.GUID, samDesired uint32, Flags u
 	return ret, nil
 }
 
-// SetupDiOpenClassRegKeyExW calls SETUPAPI!SetupDiOpenClassRegKeyExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiopenclassregkeyexw
+// SetupDiOpenClassRegKeyExA calls SETUPAPI!SetupDiOpenClassRegKeyExA.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiopenclassregkeyexa
 // Minimum OS: windows5.0.
-func SetupDiOpenClassRegKeyExW(ClassGuid *win32.GUID, samDesired uint32, Flags uint32, MachineName foundation.PWSTR, Reserved unsafe.Pointer) (systemregistry.HKEY, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDiOpenClassRegKeyExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(samDesired), uintptr(Flags), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiOpenClassRegKeyExA(ClassGuid *win32.GUID, samDesired uint32, Flags uint32, MachineName foundation.PSTR) (systemregistry.HKEY, error) {
+	r1, _, e1 := syscall.SyscallN(procSetupDiOpenClassRegKeyExA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(samDesired), uintptr(Flags), uintptr(unsafe.Pointer(MachineName)), 0)
 	ret := systemregistry.HKEY(r1)
 	if ret == ^systemregistry.HKEY(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -4060,6 +4207,18 @@ func SetupDiOpenDevRegKey(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DAT
 	return ret, nil
 }
 
+// SetupDiOpenDeviceInfo calls SETUPAPI!SetupDiOpenDeviceInfoW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiopendeviceinfow
+// Minimum OS: windows5.0.
+func SetupDiOpenDeviceInfo(DeviceInfoSet HDEVINFO, DeviceInstanceId string, hwndParent foundation.HWND, OpenFlags uint32, DeviceInfoData *SP_DEVINFO_DATA) error {
+	_DeviceInstanceId := win32.UTF16Ptr(DeviceInstanceId)
+	r1, _, e1 := syscall.SyscallN(procSetupDiOpenDeviceInfo.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(_DeviceInstanceId)), uintptr(hwndParent), uintptr(OpenFlags), uintptr(unsafe.Pointer(DeviceInfoData)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupDiOpenDeviceInfoA calls SETUPAPI!SetupDiOpenDeviceInfoA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiopendeviceinfoa
 // Minimum OS: windows5.0.
@@ -4071,11 +4230,12 @@ func SetupDiOpenDeviceInfoA(DeviceInfoSet HDEVINFO, DeviceInstanceId foundation.
 	return nil
 }
 
-// SetupDiOpenDeviceInfoW calls SETUPAPI!SetupDiOpenDeviceInfoW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiopendeviceinfow
+// SetupDiOpenDeviceInterface calls SETUPAPI!SetupDiOpenDeviceInterfaceW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiopendeviceinterfacew
 // Minimum OS: windows5.0.
-func SetupDiOpenDeviceInfoW(DeviceInfoSet HDEVINFO, DeviceInstanceId foundation.PWSTR, hwndParent foundation.HWND, OpenFlags uint32, DeviceInfoData *SP_DEVINFO_DATA) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiOpenDeviceInfoW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInstanceId)), uintptr(hwndParent), uintptr(OpenFlags), uintptr(unsafe.Pointer(DeviceInfoData)))
+func SetupDiOpenDeviceInterface(DeviceInfoSet HDEVINFO, DevicePath string, OpenFlags uint32, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA) error {
+	_DevicePath := win32.UTF16Ptr(DevicePath)
+	r1, _, e1 := syscall.SyscallN(procSetupDiOpenDeviceInterface.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(_DevicePath)), uintptr(OpenFlags), uintptr(unsafe.Pointer(DeviceInterfaceData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4096,24 +4256,13 @@ func SetupDiOpenDeviceInterfaceA(DeviceInfoSet HDEVINFO, DevicePath foundation.P
 // SetupDiOpenDeviceInterfaceRegKey calls SETUPAPI!SetupDiOpenDeviceInterfaceRegKey.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiopendeviceinterfaceregkey
 // Minimum OS: windows5.0.
-func SetupDiOpenDeviceInterfaceRegKey(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, Reserved uint32, samDesired uint32) (systemregistry.HKEY, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDiOpenDeviceInterfaceRegKey.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(Reserved), uintptr(samDesired))
+func SetupDiOpenDeviceInterfaceRegKey(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, samDesired uint32) (systemregistry.HKEY, error) {
+	r1, _, e1 := syscall.SyscallN(procSetupDiOpenDeviceInterfaceRegKey.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), 0, uintptr(samDesired))
 	ret := systemregistry.HKEY(r1)
 	if ret == ^systemregistry.HKEY(0) || ret == 0 {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
-}
-
-// SetupDiOpenDeviceInterfaceW calls SETUPAPI!SetupDiOpenDeviceInterfaceW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiopendeviceinterfacew
-// Minimum OS: windows5.0.
-func SetupDiOpenDeviceInterfaceW(DeviceInfoSet HDEVINFO, DevicePath foundation.PWSTR, OpenFlags uint32, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiOpenDeviceInterfaceW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DevicePath)), uintptr(OpenFlags), uintptr(unsafe.Pointer(DeviceInterfaceData)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
 }
 
 // SetupDiRegisterCoDeviceInstallers calls SETUPAPI!SetupDiRegisterCoDeviceInstallers.
@@ -4141,9 +4290,9 @@ func SetupDiRegisterDeviceInfo(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINF
 // SetupDiRemoveDevice calls SETUPAPI!SetupDiRemoveDevice.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiremovedevice
 // Minimum OS: windows5.0.
-func SetupDiRemoveDevice(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA) foundation.BOOL {
+func SetupDiRemoveDevice(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA) bool {
 	r1, _, _ := syscall.SyscallN(procSetupDiRemoveDevice.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetupDiRemoveDeviceInterface calls SETUPAPI!SetupDiRemoveDeviceInterface.
@@ -4200,6 +4349,17 @@ func SetupDiSelectOEMDrv(hwndParent foundation.HWND, DeviceInfoSet HDEVINFO, Dev
 	return nil
 }
 
+// SetupDiSetClassInstallParams calls SETUPAPI!SetupDiSetClassInstallParamsW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetclassinstallparamsw
+// Minimum OS: windows5.0.
+func SetupDiSetClassInstallParams(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, ClassInstallParams *SP_CLASSINSTALL_HEADER, ClassInstallParamsSize uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassInstallParams.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(ClassInstallParams)), uintptr(ClassInstallParamsSize))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupDiSetClassInstallParamsA calls SETUPAPI!SetupDiSetClassInstallParamsA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetclassinstallparamsa
 // Minimum OS: windows5.0.
@@ -4211,22 +4371,12 @@ func SetupDiSetClassInstallParamsA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DE
 	return nil
 }
 
-// SetupDiSetClassInstallParamsW calls SETUPAPI!SetupDiSetClassInstallParamsW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetclassinstallparamsw
-// Minimum OS: windows5.0.
-func SetupDiSetClassInstallParamsW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, ClassInstallParams *SP_CLASSINSTALL_HEADER, ClassInstallParamsSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassInstallParamsW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(ClassInstallParams)), uintptr(ClassInstallParamsSize))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // SetupDiSetClassPropertyExW calls SETUPAPI!SetupDiSetClassPropertyExW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetclasspropertyexw
 // Minimum OS: windows6.0.6000.
-func SetupDiSetClassPropertyExW(ClassGuid *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, Flags uint32, MachineName foundation.PWSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassPropertyExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(Flags), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiSetClassPropertyExW(ClassGuid *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, Flags uint32, MachineName string) error {
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassPropertyExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(Flags), uintptr(unsafe.Pointer(_MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4244,22 +4394,34 @@ func SetupDiSetClassPropertyW(ClassGuid *win32.GUID, PropertyKey *foundation.DEV
 	return nil
 }
 
-// SetupDiSetClassRegistryPropertyA calls SETUPAPI!SetupDiSetClassRegistryPropertyA.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetclassregistrypropertya
+// SetupDiSetClassRegistryProperty calls SETUPAPI!SetupDiSetClassRegistryPropertyW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetclassregistrypropertyw
 // Minimum OS: windows5.1.2600.
-func SetupDiSetClassRegistryPropertyA(ClassGuid *win32.GUID, Property uint32, PropertyBuffer *byte, PropertyBufferSize uint32, MachineName foundation.PSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassRegistryPropertyA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiSetClassRegistryProperty(ClassGuid *win32.GUID, Property uint32, PropertyBuffer *byte, PropertyBufferSize uint32, MachineName string) error {
+	_MachineName := win32.UTF16Ptr(MachineName)
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassRegistryProperty.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(_MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupDiSetClassRegistryPropertyW calls SETUPAPI!SetupDiSetClassRegistryPropertyW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetclassregistrypropertyw
+// SetupDiSetClassRegistryPropertyA calls SETUPAPI!SetupDiSetClassRegistryPropertyA.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetclassregistrypropertya
 // Minimum OS: windows5.1.2600.
-func SetupDiSetClassRegistryPropertyW(ClassGuid *win32.GUID, Property uint32, PropertyBuffer *byte, PropertyBufferSize uint32, MachineName foundation.PWSTR, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassRegistryPropertyW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(MachineName)), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiSetClassRegistryPropertyA(ClassGuid *win32.GUID, Property uint32, PropertyBuffer *byte, PropertyBufferSize uint32, MachineName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassRegistryPropertyA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(MachineName)), 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// SetupDiSetDeviceInstallParams calls SETUPAPI!SetupDiSetDeviceInstallParamsW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetdeviceinstallparamsw
+// Minimum OS: windows5.0.
+func SetupDiSetDeviceInstallParams(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DeviceInstallParams *SP_DEVINSTALL_PARAMS_W) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetDeviceInstallParams.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DeviceInstallParams)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4277,22 +4439,11 @@ func SetupDiSetDeviceInstallParamsA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_D
 	return nil
 }
 
-// SetupDiSetDeviceInstallParamsW calls SETUPAPI!SetupDiSetDeviceInstallParamsW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetdeviceinstallparamsw
-// Minimum OS: windows5.0.
-func SetupDiSetDeviceInstallParamsW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DeviceInstallParams *SP_DEVINSTALL_PARAMS_W) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetDeviceInstallParamsW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DeviceInstallParams)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // SetupDiSetDeviceInterfaceDefault calls SETUPAPI!SetupDiSetDeviceInterfaceDefault.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetdeviceinterfacedefault
 // Minimum OS: windows5.1.2600.
-func SetupDiSetDeviceInterfaceDefault(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, Flags uint32, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetDeviceInterfaceDefault.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(Flags), uintptr(unsafe.Pointer(Reserved)))
+func SetupDiSetDeviceInterfaceDefault(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, Flags uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetDeviceInterfaceDefault.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(Flags), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4321,6 +4472,17 @@ func SetupDiSetDevicePropertyW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINF
 	return nil
 }
 
+// SetupDiSetDeviceRegistryProperty calls SETUPAPI!SetupDiSetDeviceRegistryPropertyW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetdeviceregistrypropertyw
+// Minimum OS: windows5.0.
+func SetupDiSetDeviceRegistryProperty(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Property SETUP_DI_REGISTRY_PROPERTY, PropertyBuffer *byte, PropertyBufferSize uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetDeviceRegistryProperty.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Property), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupDiSetDeviceRegistryPropertyA calls SETUPAPI!SetupDiSetDeviceRegistryPropertyA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetdeviceregistrypropertya
 // Minimum OS: windows5.0.
@@ -4332,11 +4494,11 @@ func SetupDiSetDeviceRegistryPropertyA(DeviceInfoSet HDEVINFO, DeviceInfoData *S
 	return nil
 }
 
-// SetupDiSetDeviceRegistryPropertyW calls SETUPAPI!SetupDiSetDeviceRegistryPropertyW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetdeviceregistrypropertyw
+// SetupDiSetDriverInstallParams calls SETUPAPI!SetupDiSetDriverInstallParamsW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetdriverinstallparamsw
 // Minimum OS: windows5.0.
-func SetupDiSetDeviceRegistryPropertyW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Property SETUP_DI_REGISTRY_PROPERTY, PropertyBuffer *byte, PropertyBufferSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetDeviceRegistryPropertyW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Property), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize))
+func SetupDiSetDriverInstallParams(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DriverInfoData *SP_DRVINFO_DATA_V2_W, DriverInstallParams *SP_DRVINSTALL_PARAMS) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetDriverInstallParams.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DriverInfoData)), uintptr(unsafe.Pointer(DriverInstallParams)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4354,22 +4516,22 @@ func SetupDiSetDriverInstallParamsA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_D
 	return nil
 }
 
-// SetupDiSetDriverInstallParamsW calls SETUPAPI!SetupDiSetDriverInstallParamsW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetdriverinstallparamsw
+// SetupDiSetSelectedDevice calls SETUPAPI!SetupDiSetSelectedDevice.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetselecteddevice
 // Minimum OS: windows5.0.
-func SetupDiSetDriverInstallParamsW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DriverInfoData *SP_DRVINFO_DATA_V2_W, DriverInstallParams *SP_DRVINSTALL_PARAMS) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetDriverInstallParamsW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DriverInfoData)), uintptr(unsafe.Pointer(DriverInstallParams)))
+func SetupDiSetSelectedDevice(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetSelectedDevice.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupDiSetSelectedDevice calls SETUPAPI!SetupDiSetSelectedDevice.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetselecteddevice
+// SetupDiSetSelectedDriver calls SETUPAPI!SetupDiSetSelectedDriverW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetselecteddriverw
 // Minimum OS: windows5.0.
-func SetupDiSetSelectedDevice(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetSelectedDevice.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)))
+func SetupDiSetSelectedDriver(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DriverInfoData *SP_DRVINFO_DATA_V2_W) error {
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetSelectedDriver.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DriverInfoData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4387,17 +4549,6 @@ func SetupDiSetSelectedDriverA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINF
 	return nil
 }
 
-// SetupDiSetSelectedDriverW calls SETUPAPI!SetupDiSetSelectedDriverW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetselecteddriverw
-// Minimum OS: windows5.0.
-func SetupDiSetSelectedDriverW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, DriverInfoData *SP_DRVINFO_DATA_V2_W) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetSelectedDriverW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(DriverInfoData)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // SetupDiUnremoveDevice calls SETUPAPI!SetupDiUnremoveDevice.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdiunremovedevice
 // Minimum OS: windows5.0.
@@ -4409,11 +4560,11 @@ func SetupDiUnremoveDevice(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DA
 	return nil
 }
 
-// SetupDuplicateDiskSpaceListA calls SETUPAPI!SetupDuplicateDiskSpaceListA.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupduplicatediskspacelista
+// SetupDuplicateDiskSpaceList calls SETUPAPI!SetupDuplicateDiskSpaceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupduplicatediskspacelistw
 // Minimum OS: windows5.1.2600.
-func SetupDuplicateDiskSpaceListA(DiskSpace unsafe.Pointer, Reserved1 unsafe.Pointer, Reserved2 uint32, Flags uint32) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDuplicateDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2), uintptr(Flags))
+func SetupDuplicateDiskSpaceList(DiskSpace unsafe.Pointer, Flags uint32) (unsafe.Pointer, error) {
+	r1, _, e1 := syscall.SyscallN(procSetupDuplicateDiskSpaceList.Addr(), uintptr(unsafe.Pointer(DiskSpace)), 0, 0, uintptr(Flags))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -4421,16 +4572,27 @@ func SetupDuplicateDiskSpaceListA(DiskSpace unsafe.Pointer, Reserved1 unsafe.Poi
 	return ret, nil
 }
 
-// SetupDuplicateDiskSpaceListW calls SETUPAPI!SetupDuplicateDiskSpaceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupduplicatediskspacelistw
+// SetupDuplicateDiskSpaceListA calls SETUPAPI!SetupDuplicateDiskSpaceListA.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupduplicatediskspacelista
 // Minimum OS: windows5.1.2600.
-func SetupDuplicateDiskSpaceListW(DiskSpace unsafe.Pointer, Reserved1 unsafe.Pointer, Reserved2 uint32, Flags uint32) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupDuplicateDiskSpaceListW.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2), uintptr(Flags))
+func SetupDuplicateDiskSpaceListA(DiskSpace unsafe.Pointer, Flags uint32) (unsafe.Pointer, error) {
+	r1, _, e1 := syscall.SyscallN(procSetupDuplicateDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), 0, 0, uintptr(Flags))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
+}
+
+// SetupEnumInfSections calls SETUPAPI!SetupEnumInfSectionsW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupenuminfsectionsw
+// Minimum OS: windows5.1.2600.
+func SetupEnumInfSections(InfHandle unsafe.Pointer, Index uint32, Buffer foundation.PWSTR, Size uint32, SizeNeeded *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupEnumInfSections.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(Index), uintptr(unsafe.Pointer(Buffer)), uintptr(Size), uintptr(unsafe.Pointer(SizeNeeded)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // SetupEnumInfSectionsA calls SETUPAPI!SetupEnumInfSectionsA.
@@ -4444,11 +4606,13 @@ func SetupEnumInfSectionsA(InfHandle unsafe.Pointer, Index uint32, Buffer founda
 	return nil
 }
 
-// SetupEnumInfSectionsW calls SETUPAPI!SetupEnumInfSectionsW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupenuminfsectionsw
+// SetupFindFirstLine calls SETUPAPI!SetupFindFirstLineW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupfindfirstlinew
 // Minimum OS: windows5.1.2600.
-func SetupEnumInfSectionsW(InfHandle unsafe.Pointer, Index uint32, Buffer foundation.PWSTR, Size uint32, SizeNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupEnumInfSectionsW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(Index), uintptr(unsafe.Pointer(Buffer)), uintptr(Size), uintptr(unsafe.Pointer(SizeNeeded)))
+func SetupFindFirstLine(InfHandle unsafe.Pointer, Section string, Key string, Context *INFCONTEXT) error {
+	_Section := win32.UTF16Ptr(Section)
+	_Key := win32.UTF16Ptr(Key)
+	r1, _, e1 := syscall.SyscallN(procSetupFindFirstLine.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(_Section)), uintptr(unsafe.Pointer(_Key)), uintptr(unsafe.Pointer(Context)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4466,22 +4630,23 @@ func SetupFindFirstLineA(InfHandle unsafe.Pointer, Section foundation.PSTR, Key 
 	return nil
 }
 
-// SetupFindFirstLineW calls SETUPAPI!SetupFindFirstLineW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupfindfirstlinew
+// SetupFindNextLine calls SETUPAPI!SetupFindNextLine.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupfindnextline
 // Minimum OS: windows5.1.2600.
-func SetupFindFirstLineW(InfHandle unsafe.Pointer, Section foundation.PWSTR, Key foundation.PWSTR, Context *INFCONTEXT) error {
-	r1, _, e1 := syscall.SyscallN(procSetupFindFirstLineW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(Section)), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(Context)))
+func SetupFindNextLine(ContextIn *INFCONTEXT, ContextOut *INFCONTEXT) error {
+	r1, _, e1 := syscall.SyscallN(procSetupFindNextLine.Addr(), uintptr(unsafe.Pointer(ContextIn)), uintptr(unsafe.Pointer(ContextOut)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupFindNextLine calls SETUPAPI!SetupFindNextLine.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupfindnextline
+// SetupFindNextMatchLine calls SETUPAPI!SetupFindNextMatchLineW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupfindnextmatchlinew
 // Minimum OS: windows5.1.2600.
-func SetupFindNextLine(ContextIn *INFCONTEXT, ContextOut *INFCONTEXT) error {
-	r1, _, e1 := syscall.SyscallN(procSetupFindNextLine.Addr(), uintptr(unsafe.Pointer(ContextIn)), uintptr(unsafe.Pointer(ContextOut)))
+func SetupFindNextMatchLine(ContextIn *INFCONTEXT, Key string, ContextOut *INFCONTEXT) error {
+	_Key := win32.UTF16Ptr(Key)
+	r1, _, e1 := syscall.SyscallN(procSetupFindNextMatchLine.Addr(), uintptr(unsafe.Pointer(ContextIn)), uintptr(unsafe.Pointer(_Key)), uintptr(unsafe.Pointer(ContextOut)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4499,11 +4664,15 @@ func SetupFindNextMatchLineA(ContextIn *INFCONTEXT, Key foundation.PSTR, Context
 	return nil
 }
 
-// SetupFindNextMatchLineW calls SETUPAPI!SetupFindNextMatchLineW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupfindnextmatchlinew
+// SetupFreeSourceList calls SETUPAPI!SetupFreeSourceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupfreesourcelistw
 // Minimum OS: windows5.1.2600.
-func SetupFindNextMatchLineW(ContextIn *INFCONTEXT, Key foundation.PWSTR, ContextOut *INFCONTEXT) error {
-	r1, _, e1 := syscall.SyscallN(procSetupFindNextMatchLineW.Addr(), uintptr(unsafe.Pointer(ContextIn)), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ContextOut)))
+func SetupFreeSourceList(List []*foundation.PWSTR) error {
+	var _List **foundation.PWSTR
+	if len(List) > 0 {
+		_List = &List[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupFreeSourceList.Addr(), uintptr(unsafe.Pointer(_List)), uintptr(len(List)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4513,35 +4682,28 @@ func SetupFindNextMatchLineW(ContextIn *INFCONTEXT, Key foundation.PWSTR, Contex
 // SetupFreeSourceListA calls SETUPAPI!SetupFreeSourceListA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupfreesourcelista
 // Minimum OS: windows5.1.2600.
-func SetupFreeSourceListA(List **foundation.PSTR, Count uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupFreeSourceListA.Addr(), uintptr(unsafe.Pointer(List)), uintptr(Count))
+func SetupFreeSourceListA(List []*foundation.PSTR) error {
+	var _List **foundation.PSTR
+	if len(List) > 0 {
+		_List = &List[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupFreeSourceListA.Addr(), uintptr(unsafe.Pointer(_List)), uintptr(len(List)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupFreeSourceListW calls SETUPAPI!SetupFreeSourceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupfreesourcelistw
-// Minimum OS: windows5.1.2600.
-func SetupFreeSourceListW(List **foundation.PWSTR, Count uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupFreeSourceListW.Addr(), uintptr(unsafe.Pointer(List)), uintptr(Count))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+// SetupGetBackupInformation calls SETUPAPI!SetupGetBackupInformationW.
+func SetupGetBackupInformation(QueueHandle unsafe.Pointer, BackupParams *SP_BACKUP_QUEUE_PARAMS_V2_W) bool {
+	r1, _, _ := syscall.SyscallN(procSetupGetBackupInformation.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(BackupParams)))
+	return r1 != 0
 }
 
 // SetupGetBackupInformationA calls SETUPAPI!SetupGetBackupInformationA.
-func SetupGetBackupInformationA(QueueHandle unsafe.Pointer, BackupParams *SP_BACKUP_QUEUE_PARAMS_V2_A) foundation.BOOL {
+func SetupGetBackupInformationA(QueueHandle unsafe.Pointer, BackupParams *SP_BACKUP_QUEUE_PARAMS_V2_A) bool {
 	r1, _, _ := syscall.SyscallN(procSetupGetBackupInformationA.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(BackupParams)))
-	return foundation.BOOL(r1)
-}
-
-// SetupGetBackupInformationW calls SETUPAPI!SetupGetBackupInformationW.
-func SetupGetBackupInformationW(QueueHandle unsafe.Pointer, BackupParams *SP_BACKUP_QUEUE_PARAMS_V2_W) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetupGetBackupInformationW.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(BackupParams)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetupGetBinaryField calls SETUPAPI!SetupGetBinaryField.
@@ -4566,6 +4728,18 @@ func SetupGetFieldCount(Context *INFCONTEXT) (uint32, error) {
 	return uint32(r1), nil
 }
 
+// SetupGetFileCompressionInfo calls SETUPAPI!SetupGetFileCompressionInfoW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetfilecompressioninfow
+// Minimum OS: windows5.1.2600.
+func SetupGetFileCompressionInfo(SourceFileName string, ActualSourceFileName *foundation.PWSTR, SourceFileSize *uint32, TargetFileSize *uint32, CompressionType *FILE_COMPRESSION_TYPE) (uint32, error) {
+	_SourceFileName := win32.UTF16Ptr(SourceFileName)
+	r1, _, e1 := syscall.SyscallN(procSetupGetFileCompressionInfo.Addr(), uintptr(unsafe.Pointer(_SourceFileName)), uintptr(unsafe.Pointer(ActualSourceFileName)), uintptr(unsafe.Pointer(SourceFileSize)), uintptr(unsafe.Pointer(TargetFileSize)), uintptr(unsafe.Pointer(CompressionType)))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
 // SetupGetFileCompressionInfoA calls SETUPAPI!SetupGetFileCompressionInfoA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetfilecompressioninfoa
 // Minimum OS: windows5.1.2600.
@@ -4577,6 +4751,19 @@ func SetupGetFileCompressionInfoA(SourceFileName foundation.PSTR, ActualSourceFi
 	return uint32(r1), nil
 }
 
+// SetupGetFileCompressionInfoEx calls SETUPAPI!SetupGetFileCompressionInfoExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetfilecompressioninfoexw
+// Minimum OS: windows5.1.2600.
+func SetupGetFileCompressionInfoEx(SourceFileName string, ActualSourceFileNameBuffer string, ActualSourceFileNameBufferLen uint32, RequiredBufferLen *uint32, SourceFileSize *uint32, TargetFileSize *uint32, CompressionType *FILE_COMPRESSION_TYPE) error {
+	_SourceFileName := win32.UTF16Ptr(SourceFileName)
+	_ActualSourceFileNameBuffer := win32.UTF16Ptr(ActualSourceFileNameBuffer)
+	r1, _, e1 := syscall.SyscallN(procSetupGetFileCompressionInfoEx.Addr(), uintptr(unsafe.Pointer(_SourceFileName)), uintptr(unsafe.Pointer(_ActualSourceFileNameBuffer)), uintptr(ActualSourceFileNameBufferLen), uintptr(unsafe.Pointer(RequiredBufferLen)), uintptr(unsafe.Pointer(SourceFileSize)), uintptr(unsafe.Pointer(TargetFileSize)), uintptr(unsafe.Pointer(CompressionType)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupGetFileCompressionInfoExA calls SETUPAPI!SetupGetFileCompressionInfoExA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetfilecompressioninfoexa
 // Minimum OS: windows5.1.2600.
@@ -4586,28 +4773,6 @@ func SetupGetFileCompressionInfoExA(SourceFileName foundation.PSTR, ActualSource
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// SetupGetFileCompressionInfoExW calls SETUPAPI!SetupGetFileCompressionInfoExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetfilecompressioninfoexw
-// Minimum OS: windows5.1.2600.
-func SetupGetFileCompressionInfoExW(SourceFileName foundation.PWSTR, ActualSourceFileNameBuffer foundation.PWSTR, ActualSourceFileNameBufferLen uint32, RequiredBufferLen *uint32, SourceFileSize *uint32, TargetFileSize *uint32, CompressionType *FILE_COMPRESSION_TYPE) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetFileCompressionInfoExW.Addr(), uintptr(unsafe.Pointer(SourceFileName)), uintptr(unsafe.Pointer(ActualSourceFileNameBuffer)), uintptr(ActualSourceFileNameBufferLen), uintptr(unsafe.Pointer(RequiredBufferLen)), uintptr(unsafe.Pointer(SourceFileSize)), uintptr(unsafe.Pointer(TargetFileSize)), uintptr(unsafe.Pointer(CompressionType)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupGetFileCompressionInfoW calls SETUPAPI!SetupGetFileCompressionInfoW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetfilecompressioninfow
-// Minimum OS: windows5.1.2600.
-func SetupGetFileCompressionInfoW(SourceFileName foundation.PWSTR, ActualSourceFileName *foundation.PWSTR, SourceFileSize *uint32, TargetFileSize *uint32, CompressionType *FILE_COMPRESSION_TYPE) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupGetFileCompressionInfoW.Addr(), uintptr(unsafe.Pointer(SourceFileName)), uintptr(unsafe.Pointer(ActualSourceFileName)), uintptr(unsafe.Pointer(SourceFileSize)), uintptr(unsafe.Pointer(TargetFileSize)), uintptr(unsafe.Pointer(CompressionType)))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
 }
 
 // SetupGetFileQueueCount calls SETUPAPI!SetupGetFileQueueCount.
@@ -4632,6 +4797,19 @@ func SetupGetFileQueueFlags(FileQueue unsafe.Pointer, Flags *uint32) error {
 	return nil
 }
 
+// SetupGetInfDriverStoreLocation calls SETUPAPI!SetupGetInfDriverStoreLocationW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetinfdriverstorelocationw
+// Minimum OS: windows6.0.6000.
+func SetupGetInfDriverStoreLocation(FileName string, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, LocaleName string, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
+	_FileName := win32.UTF16Ptr(FileName)
+	_LocaleName := win32.UTF16Ptr(LocaleName)
+	r1, _, e1 := syscall.SyscallN(procSetupGetInfDriverStoreLocation.Addr(), uintptr(unsafe.Pointer(_FileName)), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(_LocaleName)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupGetInfDriverStoreLocationA calls SETUPAPI!SetupGetInfDriverStoreLocationA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetinfdriverstorelocationa
 // Minimum OS: windows6.0.6000.
@@ -4643,11 +4821,12 @@ func SetupGetInfDriverStoreLocationA(FileName foundation.PSTR, AlternatePlatform
 	return nil
 }
 
-// SetupGetInfDriverStoreLocationW calls SETUPAPI!SetupGetInfDriverStoreLocationW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetinfdriverstorelocationw
-// Minimum OS: windows6.0.6000.
-func SetupGetInfDriverStoreLocationW(FileName foundation.PWSTR, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, LocaleName foundation.PWSTR, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetInfDriverStoreLocationW.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(LocaleName)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+// SetupGetInfFileList calls SETUPAPI!SetupGetInfFileListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetinffilelistw
+// Minimum OS: windows5.1.2600.
+func SetupGetInfFileList(DirectoryPath string, InfStyle INF_STYLE, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
+	_DirectoryPath := win32.UTF16Ptr(DirectoryPath)
+	r1, _, e1 := syscall.SyscallN(procSetupGetInfFileList.Addr(), uintptr(unsafe.Pointer(_DirectoryPath)), uintptr(InfStyle), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4665,11 +4844,11 @@ func SetupGetInfFileListA(DirectoryPath foundation.PSTR, InfStyle INF_STYLE, Ret
 	return nil
 }
 
-// SetupGetInfFileListW calls SETUPAPI!SetupGetInfFileListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetinffilelistw
+// SetupGetInfInformation calls SETUPAPI!SetupGetInfInformationW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetinfinformationw
 // Minimum OS: windows5.1.2600.
-func SetupGetInfFileListW(DirectoryPath foundation.PWSTR, InfStyle INF_STYLE, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetInfFileListW.Addr(), uintptr(unsafe.Pointer(DirectoryPath)), uintptr(InfStyle), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupGetInfInformation(InfSpec unsafe.Pointer, SearchControl uint32, ReturnBuffer *SP_INF_INFORMATION, ReturnBufferSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupGetInfInformation.Addr(), uintptr(unsafe.Pointer(InfSpec)), uintptr(SearchControl), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4687,11 +4866,12 @@ func SetupGetInfInformationA(InfSpec unsafe.Pointer, SearchControl uint32, Retur
 	return nil
 }
 
-// SetupGetInfInformationW calls SETUPAPI!SetupGetInfInformationW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetinfinformationw
-// Minimum OS: windows5.1.2600.
-func SetupGetInfInformationW(InfSpec unsafe.Pointer, SearchControl uint32, ReturnBuffer *SP_INF_INFORMATION, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetInfInformationW.Addr(), uintptr(unsafe.Pointer(InfSpec)), uintptr(SearchControl), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+// SetupGetInfPublishedName calls SETUPAPI!SetupGetInfPublishedNameW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetinfpublishednamew
+// Minimum OS: windows6.0.6000.
+func SetupGetInfPublishedName(DriverStoreLocation string, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
+	_DriverStoreLocation := win32.UTF16Ptr(DriverStoreLocation)
+	r1, _, e1 := syscall.SyscallN(procSetupGetInfPublishedName.Addr(), uintptr(unsafe.Pointer(_DriverStoreLocation)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4709,22 +4889,23 @@ func SetupGetInfPublishedNameA(DriverStoreLocation foundation.PSTR, ReturnBuffer
 	return nil
 }
 
-// SetupGetInfPublishedNameW calls SETUPAPI!SetupGetInfPublishedNameW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetinfpublishednamew
-// Minimum OS: windows6.0.6000.
-func SetupGetInfPublishedNameW(DriverStoreLocation foundation.PWSTR, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetInfPublishedNameW.Addr(), uintptr(unsafe.Pointer(DriverStoreLocation)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+// SetupGetIntField calls SETUPAPI!SetupGetIntField.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetintfield
+// Minimum OS: windows5.1.2600.
+func SetupGetIntField(Context *INFCONTEXT, FieldIndex uint32, IntegerValue *int32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupGetIntField.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(FieldIndex), uintptr(unsafe.Pointer(IntegerValue)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupGetIntField calls SETUPAPI!SetupGetIntField.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetintfield
+// SetupGetLineByIndex calls SETUPAPI!SetupGetLineByIndexW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetlinebyindexw
 // Minimum OS: windows5.1.2600.
-func SetupGetIntField(Context *INFCONTEXT, FieldIndex uint32, IntegerValue *int32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetIntField.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(FieldIndex), uintptr(unsafe.Pointer(IntegerValue)))
+func SetupGetLineByIndex(InfHandle unsafe.Pointer, Section string, Index uint32, Context *INFCONTEXT) error {
+	_Section := win32.UTF16Ptr(Section)
+	r1, _, e1 := syscall.SyscallN(procSetupGetLineByIndex.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(_Section)), uintptr(Index), uintptr(unsafe.Pointer(Context)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4742,15 +4923,16 @@ func SetupGetLineByIndexA(InfHandle unsafe.Pointer, Section foundation.PSTR, Ind
 	return nil
 }
 
-// SetupGetLineByIndexW calls SETUPAPI!SetupGetLineByIndexW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetlinebyindexw
+// SetupGetLineCount calls SETUPAPI!SetupGetLineCountW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetlinecountw
 // Minimum OS: windows5.1.2600.
-func SetupGetLineByIndexW(InfHandle unsafe.Pointer, Section foundation.PWSTR, Index uint32, Context *INFCONTEXT) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetLineByIndexW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(Section)), uintptr(Index), uintptr(unsafe.Pointer(Context)))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func SetupGetLineCount(InfHandle unsafe.Pointer, Section string) (int32, error) {
+	_Section := win32.UTF16Ptr(Section)
+	r1, _, e1 := syscall.SyscallN(procSetupGetLineCount.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(_Section)))
+	if e1 != 0 {
+		return int32(r1), e1
 	}
-	return nil
+	return int32(r1), nil
 }
 
 // SetupGetLineCountA calls SETUPAPI!SetupGetLineCountA.
@@ -4764,15 +4946,17 @@ func SetupGetLineCountA(InfHandle unsafe.Pointer, Section foundation.PSTR) (int3
 	return int32(r1), nil
 }
 
-// SetupGetLineCountW calls SETUPAPI!SetupGetLineCountW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetlinecountw
+// SetupGetLineText calls SETUPAPI!SetupGetLineTextW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetlinetextw
 // Minimum OS: windows5.1.2600.
-func SetupGetLineCountW(InfHandle unsafe.Pointer, Section foundation.PWSTR) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupGetLineCountW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(Section)))
-	if e1 != 0 {
-		return int32(r1), e1
+func SetupGetLineText(Context *INFCONTEXT, InfHandle unsafe.Pointer, Section string, Key string, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
+	_Section := win32.UTF16Ptr(Section)
+	_Key := win32.UTF16Ptr(Key)
+	r1, _, e1 := syscall.SyscallN(procSetupGetLineText.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(_Section)), uintptr(unsafe.Pointer(_Key)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+	if r1 == 0 {
+		return win32.LastError(e1)
 	}
-	return int32(r1), nil
+	return nil
 }
 
 // SetupGetLineTextA calls SETUPAPI!SetupGetLineTextA.
@@ -4786,11 +4970,11 @@ func SetupGetLineTextA(Context *INFCONTEXT, InfHandle unsafe.Pointer, Section fo
 	return nil
 }
 
-// SetupGetLineTextW calls SETUPAPI!SetupGetLineTextW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetlinetextw
+// SetupGetMultiSzField calls SETUPAPI!SetupGetMultiSzFieldW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetmultiszfieldw
 // Minimum OS: windows5.1.2600.
-func SetupGetLineTextW(Context *INFCONTEXT, InfHandle unsafe.Pointer, Section foundation.PWSTR, Key foundation.PWSTR, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetLineTextW.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(Section)), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupGetMultiSzField(Context *INFCONTEXT, FieldIndex uint32, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupGetMultiSzField.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(FieldIndex), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4808,23 +4992,24 @@ func SetupGetMultiSzFieldA(Context *INFCONTEXT, FieldIndex uint32, ReturnBuffer 
 	return nil
 }
 
-// SetupGetMultiSzFieldW calls SETUPAPI!SetupGetMultiSzFieldW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetmultiszfieldw
+// SetupGetNonInteractiveMode calls SETUPAPI!SetupGetNonInteractiveMode.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetnoninteractivemode
 // Minimum OS: windows5.1.2600.
-func SetupGetMultiSzFieldW(Context *INFCONTEXT, FieldIndex uint32, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetMultiSzFieldW.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(FieldIndex), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupGetNonInteractiveMode() bool {
+	r1, _, _ := syscall.SyscallN(procSetupGetNonInteractiveMode.Addr())
+	return r1 != 0
+}
+
+// SetupGetSourceFileLocation calls SETUPAPI!SetupGetSourceFileLocationW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetsourcefilelocationw
+// Minimum OS: windows5.1.2600.
+func SetupGetSourceFileLocation(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, FileName string, SourceId *uint32, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
+	_FileName := win32.UTF16Ptr(FileName)
+	r1, _, e1 := syscall.SyscallN(procSetupGetSourceFileLocation.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(_FileName)), uintptr(unsafe.Pointer(SourceId)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// SetupGetNonInteractiveMode calls SETUPAPI!SetupGetNonInteractiveMode.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetnoninteractivemode
-// Minimum OS: windows5.1.2600.
-func SetupGetNonInteractiveMode() foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetupGetNonInteractiveMode.Addr())
-	return foundation.BOOL(r1)
 }
 
 // SetupGetSourceFileLocationA calls SETUPAPI!SetupGetSourceFileLocationA.
@@ -4838,11 +5023,13 @@ func SetupGetSourceFileLocationA(InfHandle unsafe.Pointer, InfContext *INFCONTEX
 	return nil
 }
 
-// SetupGetSourceFileLocationW calls SETUPAPI!SetupGetSourceFileLocationW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetsourcefilelocationw
+// SetupGetSourceFileSize calls SETUPAPI!SetupGetSourceFileSizeW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetsourcefilesizew
 // Minimum OS: windows5.1.2600.
-func SetupGetSourceFileLocationW(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, FileName foundation.PWSTR, SourceId *uint32, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetSourceFileLocationW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(SourceId)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupGetSourceFileSize(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, FileName string, Section string, FileSize *uint32, RoundingFactor uint32) error {
+	_FileName := win32.UTF16Ptr(FileName)
+	_Section := win32.UTF16Ptr(Section)
+	r1, _, e1 := syscall.SyscallN(procSetupGetSourceFileSize.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(_FileName)), uintptr(unsafe.Pointer(_Section)), uintptr(unsafe.Pointer(FileSize)), uintptr(RoundingFactor))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4860,11 +5047,11 @@ func SetupGetSourceFileSizeA(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, F
 	return nil
 }
 
-// SetupGetSourceFileSizeW calls SETUPAPI!SetupGetSourceFileSizeW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetsourcefilesizew
+// SetupGetSourceInfo calls SETUPAPI!SetupGetSourceInfoW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetsourceinfow
 // Minimum OS: windows5.1.2600.
-func SetupGetSourceFileSizeW(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, FileName foundation.PWSTR, Section foundation.PWSTR, FileSize *uint32, RoundingFactor uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetSourceFileSizeW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(Section)), uintptr(unsafe.Pointer(FileSize)), uintptr(RoundingFactor))
+func SetupGetSourceInfo(InfHandle unsafe.Pointer, SourceId uint32, InfoDesired uint32, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupGetSourceInfo.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(SourceId), uintptr(InfoDesired), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4882,11 +5069,11 @@ func SetupGetSourceInfoA(InfHandle unsafe.Pointer, SourceId uint32, InfoDesired 
 	return nil
 }
 
-// SetupGetSourceInfoW calls SETUPAPI!SetupGetSourceInfoW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetsourceinfow
+// SetupGetStringField calls SETUPAPI!SetupGetStringFieldW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetstringfieldw
 // Minimum OS: windows5.1.2600.
-func SetupGetSourceInfoW(InfHandle unsafe.Pointer, SourceId uint32, InfoDesired uint32, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetSourceInfoW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(SourceId), uintptr(InfoDesired), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupGetStringField(Context *INFCONTEXT, FieldIndex uint32, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupGetStringField.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(FieldIndex), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4904,11 +5091,12 @@ func SetupGetStringFieldA(Context *INFCONTEXT, FieldIndex uint32, ReturnBuffer f
 	return nil
 }
 
-// SetupGetStringFieldW calls SETUPAPI!SetupGetStringFieldW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetstringfieldw
+// SetupGetTargetPath calls SETUPAPI!SetupGetTargetPathW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgettargetpathw
 // Minimum OS: windows5.1.2600.
-func SetupGetStringFieldW(Context *INFCONTEXT, FieldIndex uint32, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetStringFieldW.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(FieldIndex), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupGetTargetPath(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, Section string, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
+	_Section := win32.UTF16Ptr(Section)
+	r1, _, e1 := syscall.SyscallN(procSetupGetTargetPath.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(_Section)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4920,17 +5108,6 @@ func SetupGetStringFieldW(Context *INFCONTEXT, FieldIndex uint32, ReturnBuffer f
 // Minimum OS: windows5.1.2600.
 func SetupGetTargetPathA(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, Section foundation.PSTR, ReturnBuffer foundation.PSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
 	r1, _, e1 := syscall.SyscallN(procSetupGetTargetPathA.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(Section)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupGetTargetPathW calls SETUPAPI!SetupGetTargetPathW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgettargetpathw
-// Minimum OS: windows5.1.2600.
-func SetupGetTargetPathW(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, Section foundation.PWSTR, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetTargetPathW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(Section)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4960,9 +5137,22 @@ func SetupInitDefaultQueueCallback(OwnerWindow foundation.HWND) (unsafe.Pointer,
 // SetupInitDefaultQueueCallbackEx calls SETUPAPI!SetupInitDefaultQueueCallbackEx.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinitdefaultqueuecallbackex
 // Minimum OS: windows5.1.2600.
-func SetupInitDefaultQueueCallbackEx(OwnerWindow foundation.HWND, AlternateProgressWindow foundation.HWND, ProgressMessage uint32, Reserved1 uint32, Reserved2 unsafe.Pointer) unsafe.Pointer {
-	r1, _, _ := syscall.SyscallN(procSetupInitDefaultQueueCallbackEx.Addr(), uintptr(OwnerWindow), uintptr(AlternateProgressWindow), uintptr(ProgressMessage), uintptr(Reserved1), uintptr(unsafe.Pointer(Reserved2)))
+func SetupInitDefaultQueueCallbackEx(OwnerWindow foundation.HWND, AlternateProgressWindow foundation.HWND, ProgressMessage uint32) unsafe.Pointer {
+	r1, _, _ := syscall.SyscallN(procSetupInitDefaultQueueCallbackEx.Addr(), uintptr(OwnerWindow), uintptr(AlternateProgressWindow), uintptr(ProgressMessage), 0, 0)
 	return unsafe.Pointer(r1)
+}
+
+// SetupInitializeFileLog calls SETUPAPI!SetupInitializeFileLogW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinitializefilelogw
+// Minimum OS: windows5.1.2600.
+func SetupInitializeFileLog(LogFileName string, Flags uint32) (unsafe.Pointer, error) {
+	_LogFileName := win32.UTF16Ptr(LogFileName)
+	r1, _, e1 := syscall.SyscallN(procSetupInitializeFileLog.Addr(), uintptr(unsafe.Pointer(_LogFileName)), uintptr(Flags))
+	ret := unsafe.Pointer(r1)
+	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // SetupInitializeFileLogA calls SETUPAPI!SetupInitializeFileLogA.
@@ -4977,16 +5167,18 @@ func SetupInitializeFileLogA(LogFileName foundation.PSTR, Flags uint32) (unsafe.
 	return ret, nil
 }
 
-// SetupInitializeFileLogW calls SETUPAPI!SetupInitializeFileLogW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinitializefilelogw
+// SetupInstallFile calls SETUPAPI!SetupInstallFileW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallfilew
 // Minimum OS: windows5.1.2600.
-func SetupInitializeFileLogW(LogFileName foundation.PWSTR, Flags uint32) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupInitializeFileLogW.Addr(), uintptr(unsafe.Pointer(LogFileName)), uintptr(Flags))
-	ret := unsafe.Pointer(r1)
-	if ret == nil {
-		return ret, win32.LastError(e1)
+func SetupInstallFile(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, SourceFile string, SourcePathRoot string, DestinationName string, CopyStyle SP_COPY_STYLE, CopyMsgHandler PSP_FILE_CALLBACK_W, Context unsafe.Pointer) error {
+	_SourceFile := win32.UTF16Ptr(SourceFile)
+	_SourcePathRoot := win32.UTF16Ptr(SourcePathRoot)
+	_DestinationName := win32.UTF16Ptr(DestinationName)
+	r1, _, e1 := syscall.SyscallN(procSetupInstallFile.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(_SourceFile)), uintptr(unsafe.Pointer(_SourcePathRoot)), uintptr(unsafe.Pointer(_DestinationName)), uintptr(CopyStyle), uintptr(CopyMsgHandler), uintptr(unsafe.Pointer(Context)))
+	if r1 == 0 {
+		return win32.LastError(e1)
 	}
-	return ret, nil
+	return nil
 }
 
 // SetupInstallFileA calls SETUPAPI!SetupInstallFileA.
@@ -4994,6 +5186,20 @@ func SetupInitializeFileLogW(LogFileName foundation.PWSTR, Flags uint32) (unsafe
 // Minimum OS: windows5.1.2600.
 func SetupInstallFileA(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, SourceFile foundation.PSTR, SourcePathRoot foundation.PSTR, DestinationName foundation.PSTR, CopyStyle SP_COPY_STYLE, CopyMsgHandler PSP_FILE_CALLBACK_A, Context unsafe.Pointer) error {
 	r1, _, e1 := syscall.SyscallN(procSetupInstallFileA.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(SourceFile)), uintptr(unsafe.Pointer(SourcePathRoot)), uintptr(unsafe.Pointer(DestinationName)), uintptr(CopyStyle), uintptr(CopyMsgHandler), uintptr(unsafe.Pointer(Context)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// SetupInstallFileEx calls SETUPAPI!SetupInstallFileExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallfileexw
+// Minimum OS: windows5.1.2600.
+func SetupInstallFileEx(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, SourceFile string, SourcePathRoot string, DestinationName string, CopyStyle SP_COPY_STYLE, CopyMsgHandler PSP_FILE_CALLBACK_W, Context unsafe.Pointer, FileWasInUse *foundation.BOOL) error {
+	_SourceFile := win32.UTF16Ptr(SourceFile)
+	_SourcePathRoot := win32.UTF16Ptr(SourcePathRoot)
+	_DestinationName := win32.UTF16Ptr(DestinationName)
+	r1, _, e1 := syscall.SyscallN(procSetupInstallFileEx.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(_SourceFile)), uintptr(unsafe.Pointer(_SourcePathRoot)), uintptr(unsafe.Pointer(_DestinationName)), uintptr(CopyStyle), uintptr(CopyMsgHandler), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(FileWasInUse)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5011,22 +5217,13 @@ func SetupInstallFileExA(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, Sourc
 	return nil
 }
 
-// SetupInstallFileExW calls SETUPAPI!SetupInstallFileExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallfileexw
+// SetupInstallFilesFromInfSection calls SETUPAPI!SetupInstallFilesFromInfSectionW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallfilesfrominfsectionw
 // Minimum OS: windows5.1.2600.
-func SetupInstallFileExW(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, SourceFile foundation.PWSTR, SourcePathRoot foundation.PWSTR, DestinationName foundation.PWSTR, CopyStyle SP_COPY_STYLE, CopyMsgHandler PSP_FILE_CALLBACK_W, Context unsafe.Pointer, FileWasInUse *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSetupInstallFileExW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(SourceFile)), uintptr(unsafe.Pointer(SourcePathRoot)), uintptr(unsafe.Pointer(DestinationName)), uintptr(CopyStyle), uintptr(CopyMsgHandler), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(FileWasInUse)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupInstallFileW calls SETUPAPI!SetupInstallFileW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallfilew
-// Minimum OS: windows5.1.2600.
-func SetupInstallFileW(InfHandle unsafe.Pointer, InfContext *INFCONTEXT, SourceFile foundation.PWSTR, SourcePathRoot foundation.PWSTR, DestinationName foundation.PWSTR, CopyStyle SP_COPY_STYLE, CopyMsgHandler PSP_FILE_CALLBACK_W, Context unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupInstallFileW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(InfContext)), uintptr(unsafe.Pointer(SourceFile)), uintptr(unsafe.Pointer(SourcePathRoot)), uintptr(unsafe.Pointer(DestinationName)), uintptr(CopyStyle), uintptr(CopyMsgHandler), uintptr(unsafe.Pointer(Context)))
+func SetupInstallFilesFromInfSection(InfHandle unsafe.Pointer, LayoutInfHandle unsafe.Pointer, FileQueue unsafe.Pointer, SectionName string, SourceRootPath string, CopyFlags uint32) error {
+	_SectionName := win32.UTF16Ptr(SectionName)
+	_SourceRootPath := win32.UTF16Ptr(SourceRootPath)
+	r1, _, e1 := syscall.SyscallN(procSetupInstallFilesFromInfSection.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(LayoutInfHandle)), uintptr(unsafe.Pointer(FileQueue)), uintptr(unsafe.Pointer(_SectionName)), uintptr(unsafe.Pointer(_SourceRootPath)), uintptr(CopyFlags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5044,11 +5241,13 @@ func SetupInstallFilesFromInfSectionA(InfHandle unsafe.Pointer, LayoutInfHandle 
 	return nil
 }
 
-// SetupInstallFilesFromInfSectionW calls SETUPAPI!SetupInstallFilesFromInfSectionW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallfilesfrominfsectionw
+// SetupInstallFromInfSection calls SETUPAPI!SetupInstallFromInfSectionW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallfrominfsectionw
 // Minimum OS: windows5.1.2600.
-func SetupInstallFilesFromInfSectionW(InfHandle unsafe.Pointer, LayoutInfHandle unsafe.Pointer, FileQueue unsafe.Pointer, SectionName foundation.PWSTR, SourceRootPath foundation.PWSTR, CopyFlags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupInstallFilesFromInfSectionW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(LayoutInfHandle)), uintptr(unsafe.Pointer(FileQueue)), uintptr(unsafe.Pointer(SectionName)), uintptr(unsafe.Pointer(SourceRootPath)), uintptr(CopyFlags))
+func SetupInstallFromInfSection(Owner foundation.HWND, InfHandle unsafe.Pointer, SectionName string, Flags uint32, RelativeKeyRoot systemregistry.HKEY, SourceRootPath string, CopyFlags uint32, MsgHandler PSP_FILE_CALLBACK_W, Context unsafe.Pointer, DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA) error {
+	_SectionName := win32.UTF16Ptr(SectionName)
+	_SourceRootPath := win32.UTF16Ptr(SourceRootPath)
+	r1, _, e1 := syscall.SyscallN(procSetupInstallFromInfSection.Addr(), uintptr(Owner), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(_SectionName)), uintptr(Flags), uintptr(RelativeKeyRoot), uintptr(unsafe.Pointer(_SourceRootPath)), uintptr(CopyFlags), uintptr(MsgHandler), uintptr(unsafe.Pointer(Context)), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5066,11 +5265,12 @@ func SetupInstallFromInfSectionA(Owner foundation.HWND, InfHandle unsafe.Pointer
 	return nil
 }
 
-// SetupInstallFromInfSectionW calls SETUPAPI!SetupInstallFromInfSectionW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallfrominfsectionw
+// SetupInstallServicesFromInfSection calls SETUPAPI!SetupInstallServicesFromInfSectionW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallservicesfrominfsectionw
 // Minimum OS: windows5.1.2600.
-func SetupInstallFromInfSectionW(Owner foundation.HWND, InfHandle unsafe.Pointer, SectionName foundation.PWSTR, Flags uint32, RelativeKeyRoot systemregistry.HKEY, SourceRootPath foundation.PWSTR, CopyFlags uint32, MsgHandler PSP_FILE_CALLBACK_W, Context unsafe.Pointer, DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA) error {
-	r1, _, e1 := syscall.SyscallN(procSetupInstallFromInfSectionW.Addr(), uintptr(Owner), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(Flags), uintptr(RelativeKeyRoot), uintptr(unsafe.Pointer(SourceRootPath)), uintptr(CopyFlags), uintptr(MsgHandler), uintptr(unsafe.Pointer(Context)), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)))
+func SetupInstallServicesFromInfSection(InfHandle unsafe.Pointer, SectionName string, Flags SPSVCINST_FLAGS) error {
+	_SectionName := win32.UTF16Ptr(SectionName)
+	r1, _, e1 := syscall.SyscallN(procSetupInstallServicesFromInfSection.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(_SectionName)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5088,33 +5288,35 @@ func SetupInstallServicesFromInfSectionA(InfHandle unsafe.Pointer, SectionName f
 	return nil
 }
 
+// SetupInstallServicesFromInfSectionEx calls SETUPAPI!SetupInstallServicesFromInfSectionExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallservicesfrominfsectionexw
+// Minimum OS: windows5.1.2600.
+func SetupInstallServicesFromInfSectionEx(InfHandle unsafe.Pointer, SectionName string, Flags SPSVCINST_FLAGS, DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA) error {
+	_SectionName := win32.UTF16Ptr(SectionName)
+	r1, _, e1 := syscall.SyscallN(procSetupInstallServicesFromInfSectionEx.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(_SectionName)), uintptr(Flags), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), 0, 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupInstallServicesFromInfSectionExA calls SETUPAPI!SetupInstallServicesFromInfSectionExA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallservicesfrominfsectionexa
 // Minimum OS: windows5.1.2600.
-func SetupInstallServicesFromInfSectionExA(InfHandle unsafe.Pointer, SectionName foundation.PSTR, Flags SPSVCINST_FLAGS, DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Reserved1 unsafe.Pointer, Reserved2 unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupInstallServicesFromInfSectionExA.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(Flags), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(Reserved1)), uintptr(unsafe.Pointer(Reserved2)))
+func SetupInstallServicesFromInfSectionExA(InfHandle unsafe.Pointer, SectionName foundation.PSTR, Flags SPSVCINST_FLAGS, DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA) error {
+	r1, _, e1 := syscall.SyscallN(procSetupInstallServicesFromInfSectionExA.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(Flags), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupInstallServicesFromInfSectionExW calls SETUPAPI!SetupInstallServicesFromInfSectionExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallservicesfrominfsectionexw
+// SetupIterateCabinet calls SETUPAPI!SetupIterateCabinetW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupiteratecabinetw
 // Minimum OS: windows5.1.2600.
-func SetupInstallServicesFromInfSectionExW(InfHandle unsafe.Pointer, SectionName foundation.PWSTR, Flags SPSVCINST_FLAGS, DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Reserved1 unsafe.Pointer, Reserved2 unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupInstallServicesFromInfSectionExW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(Flags), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(Reserved1)), uintptr(unsafe.Pointer(Reserved2)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupInstallServicesFromInfSectionW calls SETUPAPI!SetupInstallServicesFromInfSectionW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupinstallservicesfrominfsectionw
-// Minimum OS: windows5.1.2600.
-func SetupInstallServicesFromInfSectionW(InfHandle unsafe.Pointer, SectionName foundation.PWSTR, Flags SPSVCINST_FLAGS) error {
-	r1, _, e1 := syscall.SyscallN(procSetupInstallServicesFromInfSectionW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(Flags))
+func SetupIterateCabinet(CabinetFile string, MsgHandler PSP_FILE_CALLBACK_W, Context unsafe.Pointer) error {
+	_CabinetFile := win32.UTF16Ptr(CabinetFile)
+	r1, _, e1 := syscall.SyscallN(procSetupIterateCabinet.Addr(), uintptr(unsafe.Pointer(_CabinetFile)), 0, uintptr(MsgHandler), uintptr(unsafe.Pointer(Context)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5124,19 +5326,20 @@ func SetupInstallServicesFromInfSectionW(InfHandle unsafe.Pointer, SectionName f
 // SetupIterateCabinetA calls SETUPAPI!SetupIterateCabinetA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupiteratecabineta
 // Minimum OS: windows5.1.2600.
-func SetupIterateCabinetA(CabinetFile foundation.PSTR, Reserved uint32, MsgHandler PSP_FILE_CALLBACK_A, Context unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupIterateCabinetA.Addr(), uintptr(unsafe.Pointer(CabinetFile)), uintptr(Reserved), uintptr(MsgHandler), uintptr(unsafe.Pointer(Context)))
+func SetupIterateCabinetA(CabinetFile foundation.PSTR, MsgHandler PSP_FILE_CALLBACK_A, Context unsafe.Pointer) error {
+	r1, _, e1 := syscall.SyscallN(procSetupIterateCabinetA.Addr(), uintptr(unsafe.Pointer(CabinetFile)), 0, uintptr(MsgHandler), uintptr(unsafe.Pointer(Context)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupIterateCabinetW calls SETUPAPI!SetupIterateCabinetW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupiteratecabinetw
+// SetupLogError calls SETUPAPI!SetupLogErrorW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setuplogerrorw
 // Minimum OS: windows5.1.2600.
-func SetupIterateCabinetW(CabinetFile foundation.PWSTR, Reserved uint32, MsgHandler PSP_FILE_CALLBACK_W, Context unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupIterateCabinetW.Addr(), uintptr(unsafe.Pointer(CabinetFile)), uintptr(Reserved), uintptr(MsgHandler), uintptr(unsafe.Pointer(Context)))
+func SetupLogError(MessageString string, Severity uint32) error {
+	_MessageString := win32.UTF16Ptr(MessageString)
+	r1, _, e1 := syscall.SyscallN(procSetupLogError.Addr(), uintptr(unsafe.Pointer(_MessageString)), uintptr(Severity))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5154,11 +5357,17 @@ func SetupLogErrorA(MessageString foundation.PSTR, Severity uint32) error {
 	return nil
 }
 
-// SetupLogErrorW calls SETUPAPI!SetupLogErrorW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setuplogerrorw
+// SetupLogFile calls SETUPAPI!SetupLogFileW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setuplogfilew
 // Minimum OS: windows5.1.2600.
-func SetupLogErrorW(MessageString foundation.PWSTR, Severity uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupLogErrorW.Addr(), uintptr(unsafe.Pointer(MessageString)), uintptr(Severity))
+func SetupLogFile(FileLogHandle unsafe.Pointer, LogSectionName string, SourceFilename string, TargetFilename string, Checksum uint32, DiskTagfile string, DiskDescription string, OtherInfo string, Flags uint32) error {
+	_LogSectionName := win32.UTF16Ptr(LogSectionName)
+	_SourceFilename := win32.UTF16Ptr(SourceFilename)
+	_TargetFilename := win32.UTF16Ptr(TargetFilename)
+	_DiskTagfile := win32.UTF16Ptr(DiskTagfile)
+	_DiskDescription := win32.UTF16Ptr(DiskDescription)
+	_OtherInfo := win32.UTF16Ptr(OtherInfo)
+	r1, _, e1 := syscall.SyscallN(procSetupLogFile.Addr(), uintptr(unsafe.Pointer(FileLogHandle)), uintptr(unsafe.Pointer(_LogSectionName)), uintptr(unsafe.Pointer(_SourceFilename)), uintptr(unsafe.Pointer(_TargetFilename)), uintptr(Checksum), uintptr(unsafe.Pointer(_DiskTagfile)), uintptr(unsafe.Pointer(_DiskDescription)), uintptr(unsafe.Pointer(_OtherInfo)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5176,11 +5385,12 @@ func SetupLogFileA(FileLogHandle unsafe.Pointer, LogSectionName foundation.PSTR,
 	return nil
 }
 
-// SetupLogFileW calls SETUPAPI!SetupLogFileW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setuplogfilew
+// SetupOpenAppendInfFile calls SETUPAPI!SetupOpenAppendInfFileW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupopenappendinffilew
 // Minimum OS: windows5.1.2600.
-func SetupLogFileW(FileLogHandle unsafe.Pointer, LogSectionName foundation.PWSTR, SourceFilename foundation.PWSTR, TargetFilename foundation.PWSTR, Checksum uint32, DiskTagfile foundation.PWSTR, DiskDescription foundation.PWSTR, OtherInfo foundation.PWSTR, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupLogFileW.Addr(), uintptr(unsafe.Pointer(FileLogHandle)), uintptr(unsafe.Pointer(LogSectionName)), uintptr(unsafe.Pointer(SourceFilename)), uintptr(unsafe.Pointer(TargetFilename)), uintptr(Checksum), uintptr(unsafe.Pointer(DiskTagfile)), uintptr(unsafe.Pointer(DiskDescription)), uintptr(unsafe.Pointer(OtherInfo)), uintptr(Flags))
+func SetupOpenAppendInfFile(FileName string, InfHandle unsafe.Pointer, ErrorLine *uint32) error {
+	_FileName := win32.UTF16Ptr(FileName)
+	r1, _, e1 := syscall.SyscallN(procSetupOpenAppendInfFile.Addr(), uintptr(unsafe.Pointer(_FileName)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ErrorLine)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5198,22 +5408,25 @@ func SetupOpenAppendInfFileA(FileName foundation.PSTR, InfHandle unsafe.Pointer,
 	return nil
 }
 
-// SetupOpenAppendInfFileW calls SETUPAPI!SetupOpenAppendInfFileW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupopenappendinffilew
-// Minimum OS: windows5.1.2600.
-func SetupOpenAppendInfFileW(FileName foundation.PWSTR, InfHandle unsafe.Pointer, ErrorLine *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupOpenAppendInfFileW.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ErrorLine)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
 // SetupOpenFileQueue calls SETUPAPI!SetupOpenFileQueue.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupopenfilequeue
 // Minimum OS: windows5.1.2600.
 func SetupOpenFileQueue() (unsafe.Pointer, error) {
 	r1, _, e1 := syscall.SyscallN(procSetupOpenFileQueue.Addr())
+	ret := unsafe.Pointer(r1)
+	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// SetupOpenInfFile calls SETUPAPI!SetupOpenInfFileW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupopeninffilew
+// Minimum OS: windows5.1.2600.
+func SetupOpenInfFile(FileName string, InfClass string, InfStyle INF_STYLE, ErrorLine *uint32) (unsafe.Pointer, error) {
+	_FileName := win32.UTF16Ptr(FileName)
+	_InfClass := win32.UTF16Ptr(InfClass)
+	r1, _, e1 := syscall.SyscallN(procSetupOpenInfFile.Addr(), uintptr(unsafe.Pointer(_FileName)), uintptr(unsafe.Pointer(_InfClass)), uintptr(InfStyle), uintptr(unsafe.Pointer(ErrorLine)))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -5233,23 +5446,12 @@ func SetupOpenInfFileA(FileName foundation.PSTR, InfClass foundation.PSTR, InfSt
 	return ret, nil
 }
 
-// SetupOpenInfFileW calls SETUPAPI!SetupOpenInfFileW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupopeninffilew
-// Minimum OS: windows5.1.2600.
-func SetupOpenInfFileW(FileName foundation.PWSTR, InfClass foundation.PWSTR, InfStyle INF_STYLE, ErrorLine *uint32) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupOpenInfFileW.Addr(), uintptr(unsafe.Pointer(FileName)), uintptr(unsafe.Pointer(InfClass)), uintptr(InfStyle), uintptr(unsafe.Pointer(ErrorLine)))
-	ret := unsafe.Pointer(r1)
-	if ret == nil {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
 // SetupOpenLog calls SETUPAPI!SetupOpenLog.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupopenlog
 // Minimum OS: windows5.1.2600.
-func SetupOpenLog(Erase foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procSetupOpenLog.Addr(), uintptr(Erase))
+func SetupOpenLog(Erase bool) error {
+	_Erase := win32.Bool32(Erase)
+	r1, _, e1 := syscall.SyscallN(procSetupOpenLog.Addr(), uintptr(_Erase))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5268,16 +5470,33 @@ func SetupOpenMasterInf() (unsafe.Pointer, error) {
 	return ret, nil
 }
 
-// SetupPrepareQueueForRestoreA calls SETUPAPI!SetupPrepareQueueForRestoreA.
-func SetupPrepareQueueForRestoreA(QueueHandle unsafe.Pointer, BackupPath foundation.PSTR, RestoreFlags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetupPrepareQueueForRestoreA.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(BackupPath)), uintptr(RestoreFlags))
-	return foundation.BOOL(r1)
+// SetupPrepareQueueForRestore calls SETUPAPI!SetupPrepareQueueForRestoreW.
+func SetupPrepareQueueForRestore(QueueHandle unsafe.Pointer, BackupPath string, RestoreFlags uint32) bool {
+	_BackupPath := win32.UTF16Ptr(BackupPath)
+	r1, _, _ := syscall.SyscallN(procSetupPrepareQueueForRestore.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(_BackupPath)), uintptr(RestoreFlags))
+	return r1 != 0
 }
 
-// SetupPrepareQueueForRestoreW calls SETUPAPI!SetupPrepareQueueForRestoreW.
-func SetupPrepareQueueForRestoreW(QueueHandle unsafe.Pointer, BackupPath foundation.PWSTR, RestoreFlags uint32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetupPrepareQueueForRestoreW.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(BackupPath)), uintptr(RestoreFlags))
-	return foundation.BOOL(r1)
+// SetupPrepareQueueForRestoreA calls SETUPAPI!SetupPrepareQueueForRestoreA.
+func SetupPrepareQueueForRestoreA(QueueHandle unsafe.Pointer, BackupPath foundation.PSTR, RestoreFlags uint32) bool {
+	r1, _, _ := syscall.SyscallN(procSetupPrepareQueueForRestoreA.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(BackupPath)), uintptr(RestoreFlags))
+	return r1 != 0
+}
+
+// SetupPromptForDisk calls SETUPAPI!SetupPromptForDiskW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setuppromptfordiskw
+// Minimum OS: windows5.1.2600.
+func SetupPromptForDisk(hwndParent foundation.HWND, DialogTitle string, DiskName string, PathToSource string, FileSought string, TagFile string, DiskPromptStyle uint32, PathBuffer foundation.PWSTR, PathBufferSize uint32, PathRequiredSize *uint32) (uint32, error) {
+	_DialogTitle := win32.UTF16Ptr(DialogTitle)
+	_DiskName := win32.UTF16Ptr(DiskName)
+	_PathToSource := win32.UTF16Ptr(PathToSource)
+	_FileSought := win32.UTF16Ptr(FileSought)
+	_TagFile := win32.UTF16Ptr(TagFile)
+	r1, _, e1 := syscall.SyscallN(procSetupPromptForDisk.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_DialogTitle)), uintptr(unsafe.Pointer(_DiskName)), uintptr(unsafe.Pointer(_PathToSource)), uintptr(unsafe.Pointer(_FileSought)), uintptr(unsafe.Pointer(_TagFile)), uintptr(DiskPromptStyle), uintptr(unsafe.Pointer(PathBuffer)), uintptr(PathBufferSize), uintptr(unsafe.Pointer(PathRequiredSize)))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
 }
 
 // SetupPromptForDiskA calls SETUPAPI!SetupPromptForDiskA.
@@ -5291,26 +5510,27 @@ func SetupPromptForDiskA(hwndParent foundation.HWND, DialogTitle foundation.PSTR
 	return uint32(r1), nil
 }
 
-// SetupPromptForDiskW calls SETUPAPI!SetupPromptForDiskW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setuppromptfordiskw
-// Minimum OS: windows5.1.2600.
-func SetupPromptForDiskW(hwndParent foundation.HWND, DialogTitle foundation.PWSTR, DiskName foundation.PWSTR, PathToSource foundation.PWSTR, FileSought foundation.PWSTR, TagFile foundation.PWSTR, DiskPromptStyle uint32, PathBuffer foundation.PWSTR, PathBufferSize uint32, PathRequiredSize *uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupPromptForDiskW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(DialogTitle)), uintptr(unsafe.Pointer(DiskName)), uintptr(unsafe.Pointer(PathToSource)), uintptr(unsafe.Pointer(FileSought)), uintptr(unsafe.Pointer(TagFile)), uintptr(DiskPromptStyle), uintptr(unsafe.Pointer(PathBuffer)), uintptr(PathBufferSize), uintptr(unsafe.Pointer(PathRequiredSize)))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
 // SetupPromptReboot calls SETUPAPI!SetupPromptReboot.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setuppromptreboot
 // Minimum OS: windows5.1.2600.
-func SetupPromptReboot(FileQueue unsafe.Pointer, Owner foundation.HWND, ScanOnly foundation.BOOL) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupPromptReboot.Addr(), uintptr(unsafe.Pointer(FileQueue)), uintptr(Owner), uintptr(ScanOnly))
+func SetupPromptReboot(FileQueue unsafe.Pointer, Owner foundation.HWND, ScanOnly bool) (int32, error) {
+	_ScanOnly := win32.Bool32(ScanOnly)
+	r1, _, e1 := syscall.SyscallN(procSetupPromptReboot.Addr(), uintptr(unsafe.Pointer(FileQueue)), uintptr(Owner), uintptr(_ScanOnly))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
+}
+
+// SetupQueryDrivesInDiskSpaceList calls SETUPAPI!SetupQueryDrivesInDiskSpaceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupquerydrivesindiskspacelistw
+// Minimum OS: windows5.1.2600.
+func SetupQueryDrivesInDiskSpaceList(DiskSpace unsafe.Pointer, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupQueryDrivesInDiskSpaceList.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // SetupQueryDrivesInDiskSpaceListA calls SETUPAPI!SetupQueryDrivesInDiskSpaceListA.
@@ -5324,11 +5544,13 @@ func SetupQueryDrivesInDiskSpaceListA(DiskSpace unsafe.Pointer, ReturnBuffer fou
 	return nil
 }
 
-// SetupQueryDrivesInDiskSpaceListW calls SETUPAPI!SetupQueryDrivesInDiskSpaceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupquerydrivesindiskspacelistw
+// SetupQueryFileLog calls SETUPAPI!SetupQueryFileLogW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueryfilelogw
 // Minimum OS: windows5.1.2600.
-func SetupQueryDrivesInDiskSpaceListW(DiskSpace unsafe.Pointer, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQueryDrivesInDiskSpaceListW.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupQueryFileLog(FileLogHandle unsafe.Pointer, LogSectionName string, TargetFilename string, DesiredInfo SetupFileLogInfo, DataOut foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
+	_LogSectionName := win32.UTF16Ptr(LogSectionName)
+	_TargetFilename := win32.UTF16Ptr(TargetFilename)
+	r1, _, e1 := syscall.SyscallN(procSetupQueryFileLog.Addr(), uintptr(unsafe.Pointer(FileLogHandle)), uintptr(unsafe.Pointer(_LogSectionName)), uintptr(unsafe.Pointer(_TargetFilename)), uintptr(DesiredInfo), uintptr(unsafe.Pointer(DataOut)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5346,11 +5568,11 @@ func SetupQueryFileLogA(FileLogHandle unsafe.Pointer, LogSectionName foundation.
 	return nil
 }
 
-// SetupQueryFileLogW calls SETUPAPI!SetupQueryFileLogW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueryfilelogw
+// SetupQueryInfFileInformation calls SETUPAPI!SetupQueryInfFileInformationW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueryinffileinformationw
 // Minimum OS: windows5.1.2600.
-func SetupQueryFileLogW(FileLogHandle unsafe.Pointer, LogSectionName foundation.PWSTR, TargetFilename foundation.PWSTR, DesiredInfo SetupFileLogInfo, DataOut foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQueryFileLogW.Addr(), uintptr(unsafe.Pointer(FileLogHandle)), uintptr(unsafe.Pointer(LogSectionName)), uintptr(unsafe.Pointer(TargetFilename)), uintptr(DesiredInfo), uintptr(unsafe.Pointer(DataOut)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupQueryInfFileInformation(InfInformation *SP_INF_INFORMATION, InfIndex uint32, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupQueryInfFileInformation.Addr(), uintptr(unsafe.Pointer(InfInformation)), uintptr(InfIndex), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5368,11 +5590,11 @@ func SetupQueryInfFileInformationA(InfInformation *SP_INF_INFORMATION, InfIndex 
 	return nil
 }
 
-// SetupQueryInfFileInformationW calls SETUPAPI!SetupQueryInfFileInformationW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueryinffileinformationw
+// SetupQueryInfOriginalFileInformation calls SETUPAPI!SetupQueryInfOriginalFileInformationW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueryinforiginalfileinformationw
 // Minimum OS: windows5.1.2600.
-func SetupQueryInfFileInformationW(InfInformation *SP_INF_INFORMATION, InfIndex uint32, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQueryInfFileInformationW.Addr(), uintptr(unsafe.Pointer(InfInformation)), uintptr(InfIndex), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupQueryInfOriginalFileInformation(InfInformation *SP_INF_INFORMATION, InfIndex uint32, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, OriginalFileInfo *SP_ORIGINAL_FILE_INFO_W) error {
+	r1, _, e1 := syscall.SyscallN(procSetupQueryInfOriginalFileInformation.Addr(), uintptr(unsafe.Pointer(InfInformation)), uintptr(InfIndex), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(OriginalFileInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5390,11 +5612,12 @@ func SetupQueryInfOriginalFileInformationA(InfInformation *SP_INF_INFORMATION, I
 	return nil
 }
 
-// SetupQueryInfOriginalFileInformationW calls SETUPAPI!SetupQueryInfOriginalFileInformationW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueryinforiginalfileinformationw
+// SetupQueryInfVersionInformation calls SETUPAPI!SetupQueryInfVersionInformationW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueryinfversioninformationw
 // Minimum OS: windows5.1.2600.
-func SetupQueryInfOriginalFileInformationW(InfInformation *SP_INF_INFORMATION, InfIndex uint32, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, OriginalFileInfo *SP_ORIGINAL_FILE_INFO_W) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQueryInfOriginalFileInformationW.Addr(), uintptr(unsafe.Pointer(InfInformation)), uintptr(InfIndex), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(OriginalFileInfo)))
+func SetupQueryInfVersionInformation(InfInformation *SP_INF_INFORMATION, InfIndex uint32, Key string, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
+	_Key := win32.UTF16Ptr(Key)
+	r1, _, e1 := syscall.SyscallN(procSetupQueryInfVersionInformation.Addr(), uintptr(unsafe.Pointer(InfInformation)), uintptr(InfIndex), uintptr(unsafe.Pointer(_Key)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5412,11 +5635,11 @@ func SetupQueryInfVersionInformationA(InfInformation *SP_INF_INFORMATION, InfInd
 	return nil
 }
 
-// SetupQueryInfVersionInformationW calls SETUPAPI!SetupQueryInfVersionInformationW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueryinfversioninformationw
+// SetupQuerySourceList calls SETUPAPI!SetupQuerySourceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupquerysourcelistw
 // Minimum OS: windows5.1.2600.
-func SetupQueryInfVersionInformationW(InfInformation *SP_INF_INFORMATION, InfIndex uint32, Key foundation.PWSTR, ReturnBuffer foundation.PWSTR, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQueryInfVersionInformationW.Addr(), uintptr(unsafe.Pointer(InfInformation)), uintptr(InfIndex), uintptr(unsafe.Pointer(Key)), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupQuerySourceList(Flags uint32, List **foundation.PWSTR, Count *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupQuerySourceList.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(List)), uintptr(unsafe.Pointer(Count)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5434,11 +5657,12 @@ func SetupQuerySourceListA(Flags uint32, List **foundation.PSTR, Count *uint32) 
 	return nil
 }
 
-// SetupQuerySourceListW calls SETUPAPI!SetupQuerySourceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupquerysourcelistw
+// SetupQuerySpaceRequiredOnDrive calls SETUPAPI!SetupQuerySpaceRequiredOnDriveW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueryspacerequiredondrivew
 // Minimum OS: windows5.1.2600.
-func SetupQuerySourceListW(Flags uint32, List **foundation.PWSTR, Count *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQuerySourceListW.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(List)), uintptr(unsafe.Pointer(Count)))
+func SetupQuerySpaceRequiredOnDrive(DiskSpace unsafe.Pointer, DriveSpec string, SpaceRequired *int64) error {
+	_DriveSpec := win32.UTF16Ptr(DriveSpec)
+	r1, _, e1 := syscall.SyscallN(procSetupQuerySpaceRequiredOnDrive.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(_DriveSpec)), uintptr(unsafe.Pointer(SpaceRequired)), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5448,19 +5672,26 @@ func SetupQuerySourceListW(Flags uint32, List **foundation.PWSTR, Count *uint32)
 // SetupQuerySpaceRequiredOnDriveA calls SETUPAPI!SetupQuerySpaceRequiredOnDriveA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueryspacerequiredondrivea
 // Minimum OS: windows5.1.2600.
-func SetupQuerySpaceRequiredOnDriveA(DiskSpace unsafe.Pointer, DriveSpec foundation.PSTR, SpaceRequired *int64, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQuerySpaceRequiredOnDriveA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(DriveSpec)), uintptr(unsafe.Pointer(SpaceRequired)), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
+func SetupQuerySpaceRequiredOnDriveA(DiskSpace unsafe.Pointer, DriveSpec foundation.PSTR, SpaceRequired *int64) error {
+	r1, _, e1 := syscall.SyscallN(procSetupQuerySpaceRequiredOnDriveA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(DriveSpec)), uintptr(unsafe.Pointer(SpaceRequired)), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupQuerySpaceRequiredOnDriveW calls SETUPAPI!SetupQuerySpaceRequiredOnDriveW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueryspacerequiredondrivew
+// SetupQueueCopy calls SETUPAPI!SetupQueueCopyW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuecopyw
 // Minimum OS: windows5.1.2600.
-func SetupQuerySpaceRequiredOnDriveW(DiskSpace unsafe.Pointer, DriveSpec foundation.PWSTR, SpaceRequired *int64, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQuerySpaceRequiredOnDriveW.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(DriveSpec)), uintptr(unsafe.Pointer(SpaceRequired)), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
+func SetupQueueCopy(QueueHandle unsafe.Pointer, SourceRootPath string, SourcePath string, SourceFilename string, SourceDescription string, SourceTagfile string, TargetDirectory string, TargetFilename string, CopyStyle uint32) error {
+	_SourceRootPath := win32.UTF16Ptr(SourceRootPath)
+	_SourcePath := win32.UTF16Ptr(SourcePath)
+	_SourceFilename := win32.UTF16Ptr(SourceFilename)
+	_SourceDescription := win32.UTF16Ptr(SourceDescription)
+	_SourceTagfile := win32.UTF16Ptr(SourceTagfile)
+	_TargetDirectory := win32.UTF16Ptr(TargetDirectory)
+	_TargetFilename := win32.UTF16Ptr(TargetFilename)
+	r1, _, e1 := syscall.SyscallN(procSetupQueueCopy.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(_SourceRootPath)), uintptr(unsafe.Pointer(_SourcePath)), uintptr(unsafe.Pointer(_SourceFilename)), uintptr(unsafe.Pointer(_SourceDescription)), uintptr(unsafe.Pointer(_SourceTagfile)), uintptr(unsafe.Pointer(_TargetDirectory)), uintptr(unsafe.Pointer(_TargetFilename)), uintptr(CopyStyle))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5478,6 +5709,17 @@ func SetupQueueCopyA(QueueHandle unsafe.Pointer, SourceRootPath foundation.PSTR,
 	return nil
 }
 
+// SetupQueueCopyIndirect calls SETUPAPI!SetupQueueCopyIndirectW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuecopyindirectw
+// Minimum OS: windows5.1.2600.
+func SetupQueueCopyIndirect(CopyParams *SP_FILE_COPY_PARAMS_W) error {
+	r1, _, e1 := syscall.SyscallN(procSetupQueueCopyIndirect.Addr(), uintptr(unsafe.Pointer(CopyParams)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupQueueCopyIndirectA calls SETUPAPI!SetupQueueCopyIndirectA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuecopyindirecta
 // Minimum OS: windows5.1.2600.
@@ -5489,11 +5731,13 @@ func SetupQueueCopyIndirectA(CopyParams *SP_FILE_COPY_PARAMS_A) error {
 	return nil
 }
 
-// SetupQueueCopyIndirectW calls SETUPAPI!SetupQueueCopyIndirectW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuecopyindirectw
+// SetupQueueCopySection calls SETUPAPI!SetupQueueCopySectionW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuecopysectionw
 // Minimum OS: windows5.1.2600.
-func SetupQueueCopyIndirectW(CopyParams *SP_FILE_COPY_PARAMS_W) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQueueCopyIndirectW.Addr(), uintptr(unsafe.Pointer(CopyParams)))
+func SetupQueueCopySection(QueueHandle unsafe.Pointer, SourceRootPath string, InfHandle unsafe.Pointer, ListInfHandle unsafe.Pointer, Section string, CopyStyle uint32) error {
+	_SourceRootPath := win32.UTF16Ptr(SourceRootPath)
+	_Section := win32.UTF16Ptr(Section)
+	r1, _, e1 := syscall.SyscallN(procSetupQueueCopySection.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(_SourceRootPath)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ListInfHandle)), uintptr(unsafe.Pointer(_Section)), uintptr(CopyStyle))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5511,22 +5755,14 @@ func SetupQueueCopySectionA(QueueHandle unsafe.Pointer, SourceRootPath foundatio
 	return nil
 }
 
-// SetupQueueCopySectionW calls SETUPAPI!SetupQueueCopySectionW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuecopysectionw
+// SetupQueueDefaultCopy calls SETUPAPI!SetupQueueDefaultCopyW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuedefaultcopyw
 // Minimum OS: windows5.1.2600.
-func SetupQueueCopySectionW(QueueHandle unsafe.Pointer, SourceRootPath foundation.PWSTR, InfHandle unsafe.Pointer, ListInfHandle unsafe.Pointer, Section foundation.PWSTR, CopyStyle uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQueueCopySectionW.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(SourceRootPath)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ListInfHandle)), uintptr(unsafe.Pointer(Section)), uintptr(CopyStyle))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupQueueCopyW calls SETUPAPI!SetupQueueCopyW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuecopyw
-// Minimum OS: windows5.1.2600.
-func SetupQueueCopyW(QueueHandle unsafe.Pointer, SourceRootPath foundation.PWSTR, SourcePath foundation.PWSTR, SourceFilename foundation.PWSTR, SourceDescription foundation.PWSTR, SourceTagfile foundation.PWSTR, TargetDirectory foundation.PWSTR, TargetFilename foundation.PWSTR, CopyStyle uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQueueCopyW.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(SourceRootPath)), uintptr(unsafe.Pointer(SourcePath)), uintptr(unsafe.Pointer(SourceFilename)), uintptr(unsafe.Pointer(SourceDescription)), uintptr(unsafe.Pointer(SourceTagfile)), uintptr(unsafe.Pointer(TargetDirectory)), uintptr(unsafe.Pointer(TargetFilename)), uintptr(CopyStyle))
+func SetupQueueDefaultCopy(QueueHandle unsafe.Pointer, InfHandle unsafe.Pointer, SourceRootPath string, SourceFilename string, TargetFilename string, CopyStyle uint32) error {
+	_SourceRootPath := win32.UTF16Ptr(SourceRootPath)
+	_SourceFilename := win32.UTF16Ptr(SourceFilename)
+	_TargetFilename := win32.UTF16Ptr(TargetFilename)
+	r1, _, e1 := syscall.SyscallN(procSetupQueueDefaultCopy.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(_SourceRootPath)), uintptr(unsafe.Pointer(_SourceFilename)), uintptr(unsafe.Pointer(_TargetFilename)), uintptr(CopyStyle))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5544,11 +5780,13 @@ func SetupQueueDefaultCopyA(QueueHandle unsafe.Pointer, InfHandle unsafe.Pointer
 	return nil
 }
 
-// SetupQueueDefaultCopyW calls SETUPAPI!SetupQueueDefaultCopyW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuedefaultcopyw
+// SetupQueueDelete calls SETUPAPI!SetupQueueDeleteW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuedeletew
 // Minimum OS: windows5.1.2600.
-func SetupQueueDefaultCopyW(QueueHandle unsafe.Pointer, InfHandle unsafe.Pointer, SourceRootPath foundation.PWSTR, SourceFilename foundation.PWSTR, TargetFilename foundation.PWSTR, CopyStyle uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQueueDefaultCopyW.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(SourceRootPath)), uintptr(unsafe.Pointer(SourceFilename)), uintptr(unsafe.Pointer(TargetFilename)), uintptr(CopyStyle))
+func SetupQueueDelete(QueueHandle unsafe.Pointer, PathPart1 string, PathPart2 string) error {
+	_PathPart1 := win32.UTF16Ptr(PathPart1)
+	_PathPart2 := win32.UTF16Ptr(PathPart2)
+	r1, _, e1 := syscall.SyscallN(procSetupQueueDelete.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(_PathPart1)), uintptr(unsafe.Pointer(_PathPart2)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5566,6 +5804,18 @@ func SetupQueueDeleteA(QueueHandle unsafe.Pointer, PathPart1 foundation.PSTR, Pa
 	return nil
 }
 
+// SetupQueueDeleteSection calls SETUPAPI!SetupQueueDeleteSectionW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuedeletesectionw
+// Minimum OS: windows5.1.2600.
+func SetupQueueDeleteSection(QueueHandle unsafe.Pointer, InfHandle unsafe.Pointer, ListInfHandle unsafe.Pointer, Section string) error {
+	_Section := win32.UTF16Ptr(Section)
+	r1, _, e1 := syscall.SyscallN(procSetupQueueDeleteSection.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ListInfHandle)), uintptr(unsafe.Pointer(_Section)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupQueueDeleteSectionA calls SETUPAPI!SetupQueueDeleteSectionA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuedeletesectiona
 // Minimum OS: windows5.1.2600.
@@ -5577,22 +5827,15 @@ func SetupQueueDeleteSectionA(QueueHandle unsafe.Pointer, InfHandle unsafe.Point
 	return nil
 }
 
-// SetupQueueDeleteSectionW calls SETUPAPI!SetupQueueDeleteSectionW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuedeletesectionw
+// SetupQueueRename calls SETUPAPI!SetupQueueRenameW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuerenamew
 // Minimum OS: windows5.1.2600.
-func SetupQueueDeleteSectionW(QueueHandle unsafe.Pointer, InfHandle unsafe.Pointer, ListInfHandle unsafe.Pointer, Section foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQueueDeleteSectionW.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ListInfHandle)), uintptr(unsafe.Pointer(Section)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupQueueDeleteW calls SETUPAPI!SetupQueueDeleteW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuedeletew
-// Minimum OS: windows5.1.2600.
-func SetupQueueDeleteW(QueueHandle unsafe.Pointer, PathPart1 foundation.PWSTR, PathPart2 foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQueueDeleteW.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(PathPart1)), uintptr(unsafe.Pointer(PathPart2)))
+func SetupQueueRename(QueueHandle unsafe.Pointer, SourcePath string, SourceFilename string, TargetPath string, TargetFilename string) error {
+	_SourcePath := win32.UTF16Ptr(SourcePath)
+	_SourceFilename := win32.UTF16Ptr(SourceFilename)
+	_TargetPath := win32.UTF16Ptr(TargetPath)
+	_TargetFilename := win32.UTF16Ptr(TargetFilename)
+	r1, _, e1 := syscall.SyscallN(procSetupQueueRename.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(_SourcePath)), uintptr(unsafe.Pointer(_SourceFilename)), uintptr(unsafe.Pointer(_TargetPath)), uintptr(unsafe.Pointer(_TargetFilename)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5610,6 +5853,18 @@ func SetupQueueRenameA(QueueHandle unsafe.Pointer, SourcePath foundation.PSTR, S
 	return nil
 }
 
+// SetupQueueRenameSection calls SETUPAPI!SetupQueueRenameSectionW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuerenamesectionw
+// Minimum OS: windows5.1.2600.
+func SetupQueueRenameSection(QueueHandle unsafe.Pointer, InfHandle unsafe.Pointer, ListInfHandle unsafe.Pointer, Section string) error {
+	_Section := win32.UTF16Ptr(Section)
+	r1, _, e1 := syscall.SyscallN(procSetupQueueRenameSection.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ListInfHandle)), uintptr(unsafe.Pointer(_Section)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupQueueRenameSectionA calls SETUPAPI!SetupQueueRenameSectionA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuerenamesectiona
 // Minimum OS: windows5.1.2600.
@@ -5621,22 +5876,13 @@ func SetupQueueRenameSectionA(QueueHandle unsafe.Pointer, InfHandle unsafe.Point
 	return nil
 }
 
-// SetupQueueRenameSectionW calls SETUPAPI!SetupQueueRenameSectionW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuerenamesectionw
+// SetupRemoveFileLogEntry calls SETUPAPI!SetupRemoveFileLogEntryW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupremovefilelogentryw
 // Minimum OS: windows5.1.2600.
-func SetupQueueRenameSectionW(QueueHandle unsafe.Pointer, InfHandle unsafe.Pointer, ListInfHandle unsafe.Pointer, Section foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQueueRenameSectionW.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ListInfHandle)), uintptr(unsafe.Pointer(Section)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupQueueRenameW calls SETUPAPI!SetupQueueRenameW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupqueuerenamew
-// Minimum OS: windows5.1.2600.
-func SetupQueueRenameW(QueueHandle unsafe.Pointer, SourcePath foundation.PWSTR, SourceFilename foundation.PWSTR, TargetPath foundation.PWSTR, TargetFilename foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetupQueueRenameW.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(SourcePath)), uintptr(unsafe.Pointer(SourceFilename)), uintptr(unsafe.Pointer(TargetPath)), uintptr(unsafe.Pointer(TargetFilename)))
+func SetupRemoveFileLogEntry(FileLogHandle unsafe.Pointer, LogSectionName string, TargetFilename string) error {
+	_LogSectionName := win32.UTF16Ptr(LogSectionName)
+	_TargetFilename := win32.UTF16Ptr(TargetFilename)
+	r1, _, e1 := syscall.SyscallN(procSetupRemoveFileLogEntry.Addr(), uintptr(unsafe.Pointer(FileLogHandle)), uintptr(unsafe.Pointer(_LogSectionName)), uintptr(unsafe.Pointer(_TargetFilename)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5654,11 +5900,12 @@ func SetupRemoveFileLogEntryA(FileLogHandle unsafe.Pointer, LogSectionName found
 	return nil
 }
 
-// SetupRemoveFileLogEntryW calls SETUPAPI!SetupRemoveFileLogEntryW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupremovefilelogentryw
+// SetupRemoveFromDiskSpaceList calls SETUPAPI!SetupRemoveFromDiskSpaceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupremovefromdiskspacelistw
 // Minimum OS: windows5.1.2600.
-func SetupRemoveFileLogEntryW(FileLogHandle unsafe.Pointer, LogSectionName foundation.PWSTR, TargetFilename foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetupRemoveFileLogEntryW.Addr(), uintptr(unsafe.Pointer(FileLogHandle)), uintptr(unsafe.Pointer(LogSectionName)), uintptr(unsafe.Pointer(TargetFilename)))
+func SetupRemoveFromDiskSpaceList(DiskSpace unsafe.Pointer, TargetFilespec string, Operation SETUP_FILE_OPERATION) error {
+	_TargetFilespec := win32.UTF16Ptr(TargetFilespec)
+	r1, _, e1 := syscall.SyscallN(procSetupRemoveFromDiskSpaceList.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(_TargetFilespec)), uintptr(Operation), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5668,19 +5915,20 @@ func SetupRemoveFileLogEntryW(FileLogHandle unsafe.Pointer, LogSectionName found
 // SetupRemoveFromDiskSpaceListA calls SETUPAPI!SetupRemoveFromDiskSpaceListA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupremovefromdiskspacelista
 // Minimum OS: windows5.1.2600.
-func SetupRemoveFromDiskSpaceListA(DiskSpace unsafe.Pointer, TargetFilespec foundation.PSTR, Operation SETUP_FILE_OPERATION, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupRemoveFromDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(TargetFilespec)), uintptr(Operation), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
+func SetupRemoveFromDiskSpaceListA(DiskSpace unsafe.Pointer, TargetFilespec foundation.PSTR, Operation SETUP_FILE_OPERATION) error {
+	r1, _, e1 := syscall.SyscallN(procSetupRemoveFromDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(TargetFilespec)), uintptr(Operation), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupRemoveFromDiskSpaceListW calls SETUPAPI!SetupRemoveFromDiskSpaceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupremovefromdiskspacelistw
+// SetupRemoveFromSourceList calls SETUPAPI!SetupRemoveFromSourceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupremovefromsourcelistw
 // Minimum OS: windows5.1.2600.
-func SetupRemoveFromDiskSpaceListW(DiskSpace unsafe.Pointer, TargetFilespec foundation.PWSTR, Operation SETUP_FILE_OPERATION, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupRemoveFromDiskSpaceListW.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(TargetFilespec)), uintptr(Operation), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
+func SetupRemoveFromSourceList(Flags uint32, Source string) error {
+	_Source := win32.UTF16Ptr(Source)
+	r1, _, e1 := syscall.SyscallN(procSetupRemoveFromSourceList.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(_Source)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5698,11 +5946,12 @@ func SetupRemoveFromSourceListA(Flags uint32, Source foundation.PSTR) error {
 	return nil
 }
 
-// SetupRemoveFromSourceListW calls SETUPAPI!SetupRemoveFromSourceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupremovefromsourcelistw
+// SetupRemoveInstallSectionFromDiskSpaceList calls SETUPAPI!SetupRemoveInstallSectionFromDiskSpaceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupremoveinstallsectionfromdiskspacelistw
 // Minimum OS: windows5.1.2600.
-func SetupRemoveFromSourceListW(Flags uint32, Source foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetupRemoveFromSourceListW.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(Source)))
+func SetupRemoveInstallSectionFromDiskSpaceList(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, LayoutInfHandle unsafe.Pointer, SectionName string) error {
+	_SectionName := win32.UTF16Ptr(SectionName)
+	r1, _, e1 := syscall.SyscallN(procSetupRemoveInstallSectionFromDiskSpaceList.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(LayoutInfHandle)), uintptr(unsafe.Pointer(_SectionName)), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5712,19 +5961,20 @@ func SetupRemoveFromSourceListW(Flags uint32, Source foundation.PWSTR) error {
 // SetupRemoveInstallSectionFromDiskSpaceListA calls SETUPAPI!SetupRemoveInstallSectionFromDiskSpaceListA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupremoveinstallsectionfromdiskspacelista
 // Minimum OS: windows5.1.2600.
-func SetupRemoveInstallSectionFromDiskSpaceListA(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, LayoutInfHandle unsafe.Pointer, SectionName foundation.PSTR, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupRemoveInstallSectionFromDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(LayoutInfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
+func SetupRemoveInstallSectionFromDiskSpaceListA(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, LayoutInfHandle unsafe.Pointer, SectionName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procSetupRemoveInstallSectionFromDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(LayoutInfHandle)), uintptr(unsafe.Pointer(SectionName)), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupRemoveInstallSectionFromDiskSpaceListW calls SETUPAPI!SetupRemoveInstallSectionFromDiskSpaceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupremoveinstallsectionfromdiskspacelistw
+// SetupRemoveSectionFromDiskSpaceList calls SETUPAPI!SetupRemoveSectionFromDiskSpaceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupremovesectionfromdiskspacelistw
 // Minimum OS: windows5.1.2600.
-func SetupRemoveInstallSectionFromDiskSpaceListW(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, LayoutInfHandle unsafe.Pointer, SectionName foundation.PWSTR, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupRemoveInstallSectionFromDiskSpaceListW.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(LayoutInfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
+func SetupRemoveSectionFromDiskSpaceList(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, ListInfHandle unsafe.Pointer, SectionName string, Operation SETUP_FILE_OPERATION) error {
+	_SectionName := win32.UTF16Ptr(SectionName)
+	r1, _, e1 := syscall.SyscallN(procSetupRemoveSectionFromDiskSpaceList.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ListInfHandle)), uintptr(unsafe.Pointer(_SectionName)), uintptr(Operation), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5734,23 +5984,26 @@ func SetupRemoveInstallSectionFromDiskSpaceListW(DiskSpace unsafe.Pointer, InfHa
 // SetupRemoveSectionFromDiskSpaceListA calls SETUPAPI!SetupRemoveSectionFromDiskSpaceListA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupremovesectionfromdiskspacelista
 // Minimum OS: windows5.1.2600.
-func SetupRemoveSectionFromDiskSpaceListA(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, ListInfHandle unsafe.Pointer, SectionName foundation.PSTR, Operation SETUP_FILE_OPERATION, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupRemoveSectionFromDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ListInfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(Operation), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
+func SetupRemoveSectionFromDiskSpaceListA(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, ListInfHandle unsafe.Pointer, SectionName foundation.PSTR, Operation SETUP_FILE_OPERATION) error {
+	r1, _, e1 := syscall.SyscallN(procSetupRemoveSectionFromDiskSpaceListA.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ListInfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(Operation), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupRemoveSectionFromDiskSpaceListW calls SETUPAPI!SetupRemoveSectionFromDiskSpaceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupremovesectionfromdiskspacelistw
+// SetupRenameError calls SETUPAPI!SetupRenameErrorW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setuprenameerrorw
 // Minimum OS: windows5.1.2600.
-func SetupRemoveSectionFromDiskSpaceListW(DiskSpace unsafe.Pointer, InfHandle unsafe.Pointer, ListInfHandle unsafe.Pointer, SectionName foundation.PWSTR, Operation SETUP_FILE_OPERATION, Reserved1 unsafe.Pointer, Reserved2 uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupRemoveSectionFromDiskSpaceListW.Addr(), uintptr(unsafe.Pointer(DiskSpace)), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(ListInfHandle)), uintptr(unsafe.Pointer(SectionName)), uintptr(Operation), uintptr(unsafe.Pointer(Reserved1)), uintptr(Reserved2))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func SetupRenameError(hwndParent foundation.HWND, DialogTitle string, SourceFile string, TargetFile string, Win32ErrorCode uint32, Style uint32) (uint32, error) {
+	_DialogTitle := win32.UTF16Ptr(DialogTitle)
+	_SourceFile := win32.UTF16Ptr(SourceFile)
+	_TargetFile := win32.UTF16Ptr(TargetFile)
+	r1, _, e1 := syscall.SyscallN(procSetupRenameError.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_DialogTitle)), uintptr(unsafe.Pointer(_SourceFile)), uintptr(unsafe.Pointer(_TargetFile)), uintptr(Win32ErrorCode), uintptr(Style))
+	if e1 != 0 {
+		return uint32(r1), e1
 	}
-	return nil
+	return uint32(r1), nil
 }
 
 // SetupRenameErrorA calls SETUPAPI!SetupRenameErrorA.
@@ -5764,15 +6017,15 @@ func SetupRenameErrorA(hwndParent foundation.HWND, DialogTitle foundation.PSTR, 
 	return uint32(r1), nil
 }
 
-// SetupRenameErrorW calls SETUPAPI!SetupRenameErrorW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setuprenameerrorw
+// SetupScanFileQueue calls SETUPAPI!SetupScanFileQueueW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupscanfilequeuew
 // Minimum OS: windows5.1.2600.
-func SetupRenameErrorW(hwndParent foundation.HWND, DialogTitle foundation.PWSTR, SourceFile foundation.PWSTR, TargetFile foundation.PWSTR, Win32ErrorCode uint32, Style uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procSetupRenameErrorW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(DialogTitle)), uintptr(unsafe.Pointer(SourceFile)), uintptr(unsafe.Pointer(TargetFile)), uintptr(Win32ErrorCode), uintptr(Style))
-	if e1 != 0 {
-		return uint32(r1), e1
+func SetupScanFileQueue(FileQueue unsafe.Pointer, Flags SETUPSCANFILEQUEUE_FLAGS, Window foundation.HWND, CallbackRoutine PSP_FILE_CALLBACK_W, CallbackContext unsafe.Pointer, Result *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupScanFileQueue.Addr(), uintptr(unsafe.Pointer(FileQueue)), uintptr(Flags), uintptr(Window), uintptr(CallbackRoutine), uintptr(unsafe.Pointer(CallbackContext)), uintptr(unsafe.Pointer(Result)))
+	if r1 == 0 {
+		return win32.LastError(e1)
 	}
-	return uint32(r1), nil
+	return nil
 }
 
 // SetupScanFileQueueA calls SETUPAPI!SetupScanFileQueueA.
@@ -5786,11 +6039,12 @@ func SetupScanFileQueueA(FileQueue unsafe.Pointer, Flags SETUPSCANFILEQUEUE_FLAG
 	return nil
 }
 
-// SetupScanFileQueueW calls SETUPAPI!SetupScanFileQueueW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupscanfilequeuew
+// SetupSetDirectoryId calls SETUPAPI!SetupSetDirectoryIdW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetdirectoryidw
 // Minimum OS: windows5.1.2600.
-func SetupScanFileQueueW(FileQueue unsafe.Pointer, Flags SETUPSCANFILEQUEUE_FLAGS, Window foundation.HWND, CallbackRoutine PSP_FILE_CALLBACK_W, CallbackContext unsafe.Pointer, Result *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupScanFileQueueW.Addr(), uintptr(unsafe.Pointer(FileQueue)), uintptr(Flags), uintptr(Window), uintptr(CallbackRoutine), uintptr(unsafe.Pointer(CallbackContext)), uintptr(unsafe.Pointer(Result)))
+func SetupSetDirectoryId(InfHandle unsafe.Pointer, Id uint32, Directory string) error {
+	_Directory := win32.UTF16Ptr(Directory)
+	r1, _, e1 := syscall.SyscallN(procSetupSetDirectoryId.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(Id), uintptr(unsafe.Pointer(_Directory)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5808,33 +6062,35 @@ func SetupSetDirectoryIdA(InfHandle unsafe.Pointer, Id uint32, Directory foundat
 	return nil
 }
 
+// SetupSetDirectoryIdEx calls SETUPAPI!SetupSetDirectoryIdExW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetdirectoryidexw
+// Minimum OS: windows5.1.2600.
+func SetupSetDirectoryIdEx(InfHandle unsafe.Pointer, Id uint32, Directory string, Flags uint32) error {
+	_Directory := win32.UTF16Ptr(Directory)
+	r1, _, e1 := syscall.SyscallN(procSetupSetDirectoryIdEx.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(Id), uintptr(unsafe.Pointer(_Directory)), uintptr(Flags), 0, 0)
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // SetupSetDirectoryIdExA calls SETUPAPI!SetupSetDirectoryIdExA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetdirectoryidexa
 // Minimum OS: windows5.1.2600.
-func SetupSetDirectoryIdExA(InfHandle unsafe.Pointer, Id uint32, Directory foundation.PSTR, Flags uint32, Reserved1 uint32, Reserved2 unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupSetDirectoryIdExA.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(Id), uintptr(unsafe.Pointer(Directory)), uintptr(Flags), uintptr(Reserved1), uintptr(unsafe.Pointer(Reserved2)))
+func SetupSetDirectoryIdExA(InfHandle unsafe.Pointer, Id uint32, Directory foundation.PSTR, Flags uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupSetDirectoryIdExA.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(Id), uintptr(unsafe.Pointer(Directory)), uintptr(Flags), 0, 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetupSetDirectoryIdExW calls SETUPAPI!SetupSetDirectoryIdExW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetdirectoryidexw
+// SetupSetFileQueueAlternatePlatform calls SETUPAPI!SetupSetFileQueueAlternatePlatformW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetfilequeuealternateplatformw
 // Minimum OS: windows5.1.2600.
-func SetupSetDirectoryIdExW(InfHandle unsafe.Pointer, Id uint32, Directory foundation.PWSTR, Flags uint32, Reserved1 uint32, Reserved2 unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupSetDirectoryIdExW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(Id), uintptr(unsafe.Pointer(Directory)), uintptr(Flags), uintptr(Reserved1), uintptr(unsafe.Pointer(Reserved2)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupSetDirectoryIdW calls SETUPAPI!SetupSetDirectoryIdW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetdirectoryidw
-// Minimum OS: windows5.1.2600.
-func SetupSetDirectoryIdW(InfHandle unsafe.Pointer, Id uint32, Directory foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetupSetDirectoryIdW.Addr(), uintptr(unsafe.Pointer(InfHandle)), uintptr(Id), uintptr(unsafe.Pointer(Directory)))
+func SetupSetFileQueueAlternatePlatform(QueueHandle unsafe.Pointer, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, AlternateDefaultCatalogFile string) error {
+	_AlternateDefaultCatalogFile := win32.UTF16Ptr(AlternateDefaultCatalogFile)
+	r1, _, e1 := syscall.SyscallN(procSetupSetFileQueueAlternatePlatform.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(_AlternateDefaultCatalogFile)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5846,17 +6102,6 @@ func SetupSetDirectoryIdW(InfHandle unsafe.Pointer, Id uint32, Directory foundat
 // Minimum OS: windows5.1.2600.
 func SetupSetFileQueueAlternatePlatformA(QueueHandle unsafe.Pointer, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, AlternateDefaultCatalogFile foundation.PSTR) error {
 	r1, _, e1 := syscall.SyscallN(procSetupSetFileQueueAlternatePlatformA.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(AlternateDefaultCatalogFile)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// SetupSetFileQueueAlternatePlatformW calls SETUPAPI!SetupSetFileQueueAlternatePlatformW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetfilequeuealternateplatformw
-// Minimum OS: windows5.1.2600.
-func SetupSetFileQueueAlternatePlatformW(QueueHandle unsafe.Pointer, AlternatePlatformInfo *SP_ALTPLATFORM_INFO_V2, AlternateDefaultCatalogFile foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetupSetFileQueueAlternatePlatformW.Addr(), uintptr(unsafe.Pointer(QueueHandle)), uintptr(unsafe.Pointer(AlternatePlatformInfo)), uintptr(unsafe.Pointer(AlternateDefaultCatalogFile)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5877,9 +6122,22 @@ func SetupSetFileQueueFlags(FileQueue unsafe.Pointer, FlagMask uint32, Flags uin
 // SetupSetNonInteractiveMode calls SETUPAPI!SetupSetNonInteractiveMode.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetnoninteractivemode
 // Minimum OS: windows5.1.2600.
-func SetupSetNonInteractiveMode(NonInteractiveFlag foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetupSetNonInteractiveMode.Addr(), uintptr(NonInteractiveFlag))
-	return foundation.BOOL(r1)
+func SetupSetNonInteractiveMode(NonInteractiveFlag bool) bool {
+	_NonInteractiveFlag := win32.Bool32(NonInteractiveFlag)
+	r1, _, _ := syscall.SyscallN(procSetupSetNonInteractiveMode.Addr(), uintptr(_NonInteractiveFlag))
+	return r1 != 0
+}
+
+// SetupSetPlatformPathOverride calls SETUPAPI!SetupSetPlatformPathOverrideW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetplatformpathoverridew
+// Minimum OS: windows5.1.2600.
+func SetupSetPlatformPathOverride(Override string) error {
+	_Override := win32.UTF16Ptr(Override)
+	r1, _, e1 := syscall.SyscallN(procSetupSetPlatformPathOverride.Addr(), uintptr(unsafe.Pointer(_Override)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // SetupSetPlatformPathOverrideA calls SETUPAPI!SetupSetPlatformPathOverrideA.
@@ -5893,11 +6151,15 @@ func SetupSetPlatformPathOverrideA(Override foundation.PSTR) error {
 	return nil
 }
 
-// SetupSetPlatformPathOverrideW calls SETUPAPI!SetupSetPlatformPathOverrideW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetplatformpathoverridew
+// SetupSetSourceList calls SETUPAPI!SetupSetSourceListW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetsourcelistw
 // Minimum OS: windows5.1.2600.
-func SetupSetPlatformPathOverrideW(Override foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetupSetPlatformPathOverrideW.Addr(), uintptr(unsafe.Pointer(Override)))
+func SetupSetSourceList(Flags uint32, SourceList []foundation.PWSTR) error {
+	var _SourceList *foundation.PWSTR
+	if len(SourceList) > 0 {
+		_SourceList = &SourceList[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupSetSourceList.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(_SourceList)), uintptr(len(SourceList)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5907,19 +6169,12 @@ func SetupSetPlatformPathOverrideW(Override foundation.PWSTR) error {
 // SetupSetSourceListA calls SETUPAPI!SetupSetSourceListA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetsourcelista
 // Minimum OS: windows5.1.2600.
-func SetupSetSourceListA(Flags uint32, SourceList *foundation.PSTR, SourceCount uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupSetSourceListA.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(SourceList)), uintptr(SourceCount))
-	if r1 == 0 {
-		return win32.LastError(e1)
+func SetupSetSourceListA(Flags uint32, SourceList []foundation.PSTR) error {
+	var _SourceList *foundation.PSTR
+	if len(SourceList) > 0 {
+		_SourceList = &SourceList[0]
 	}
-	return nil
-}
-
-// SetupSetSourceListW calls SETUPAPI!SetupSetSourceListW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupsetsourcelistw
-// Minimum OS: windows5.1.2600.
-func SetupSetSourceListW(Flags uint32, SourceList *foundation.PWSTR, SourceCount uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupSetSourceListW.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(SourceList)), uintptr(SourceCount))
+	r1, _, e1 := syscall.SyscallN(procSetupSetSourceListA.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(_SourceList)), uintptr(len(SourceList)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -5954,44 +6209,46 @@ func SetupTerminateFileLog(FileLogHandle unsafe.Pointer) error {
 // SetupUninstallNewlyCopiedInfs calls SETUPAPI!SetupUninstallNewlyCopiedInfs.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupuninstallnewlycopiedinfs
 // Minimum OS: windows5.1.2600.
-func SetupUninstallNewlyCopiedInfs(FileQueue unsafe.Pointer, Flags uint32, Reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSetupUninstallNewlyCopiedInfs.Addr(), uintptr(unsafe.Pointer(FileQueue)), uintptr(Flags), uintptr(unsafe.Pointer(Reserved)))
+func SetupUninstallNewlyCopiedInfs(FileQueue unsafe.Pointer, Flags uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetupUninstallNewlyCopiedInfs.Addr(), uintptr(unsafe.Pointer(FileQueue)), uintptr(Flags), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
+// SetupUninstallOEMInf calls SETUPAPI!SetupUninstallOEMInfW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupuninstalloeminfw
+// Minimum OS: windows5.1.2600.
+func SetupUninstallOEMInf(InfFileName string, Flags uint32) bool {
+	_InfFileName := win32.UTF16Ptr(InfFileName)
+	r1, _, _ := syscall.SyscallN(procSetupUninstallOEMInf.Addr(), uintptr(unsafe.Pointer(_InfFileName)), uintptr(Flags), 0)
+	return r1 != 0
+}
+
 // SetupUninstallOEMInfA calls SETUPAPI!SetupUninstallOEMInfA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupuninstalloeminfa
 // Minimum OS: windows5.1.2600.
-func SetupUninstallOEMInfA(InfFileName foundation.PSTR, Flags uint32, Reserved unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetupUninstallOEMInfA.Addr(), uintptr(unsafe.Pointer(InfFileName)), uintptr(Flags), uintptr(unsafe.Pointer(Reserved)))
-	return foundation.BOOL(r1)
+func SetupUninstallOEMInfA(InfFileName foundation.PSTR, Flags uint32) bool {
+	r1, _, _ := syscall.SyscallN(procSetupUninstallOEMInfA.Addr(), uintptr(unsafe.Pointer(InfFileName)), uintptr(Flags), 0)
+	return r1 != 0
 }
 
-// SetupUninstallOEMInfW calls SETUPAPI!SetupUninstallOEMInfW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupuninstalloeminfw
+// SetupVerifyInfFile calls SETUPAPI!SetupVerifyInfFileW.
+// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupverifyinffilew
 // Minimum OS: windows5.1.2600.
-func SetupUninstallOEMInfW(InfFileName foundation.PWSTR, Flags uint32, Reserved unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetupUninstallOEMInfW.Addr(), uintptr(unsafe.Pointer(InfFileName)), uintptr(Flags), uintptr(unsafe.Pointer(Reserved)))
-	return foundation.BOOL(r1)
+func SetupVerifyInfFile(InfName string, AltPlatformInfo *SP_ALTPLATFORM_INFO_V2, InfSignerInfo *SP_INF_SIGNER_INFO_V2_W) bool {
+	_InfName := win32.UTF16Ptr(InfName)
+	r1, _, _ := syscall.SyscallN(procSetupVerifyInfFile.Addr(), uintptr(unsafe.Pointer(_InfName)), uintptr(unsafe.Pointer(AltPlatformInfo)), uintptr(unsafe.Pointer(InfSignerInfo)))
+	return r1 != 0
 }
 
 // SetupVerifyInfFileA calls SETUPAPI!SetupVerifyInfFileA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupverifyinffilea
 // Minimum OS: windows5.1.2600.
-func SetupVerifyInfFileA(InfName foundation.PSTR, AltPlatformInfo *SP_ALTPLATFORM_INFO_V2, InfSignerInfo *SP_INF_SIGNER_INFO_V2_A) foundation.BOOL {
+func SetupVerifyInfFileA(InfName foundation.PSTR, AltPlatformInfo *SP_ALTPLATFORM_INFO_V2, InfSignerInfo *SP_INF_SIGNER_INFO_V2_A) bool {
 	r1, _, _ := syscall.SyscallN(procSetupVerifyInfFileA.Addr(), uintptr(unsafe.Pointer(InfName)), uintptr(unsafe.Pointer(AltPlatformInfo)), uintptr(unsafe.Pointer(InfSignerInfo)))
-	return foundation.BOOL(r1)
-}
-
-// SetupVerifyInfFileW calls SETUPAPI!SetupVerifyInfFileW.
-// https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupverifyinffilew
-// Minimum OS: windows5.1.2600.
-func SetupVerifyInfFileW(InfName foundation.PWSTR, AltPlatformInfo *SP_ALTPLATFORM_INFO_V2, InfSignerInfo *SP_INF_SIGNER_INFO_V2_W) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSetupVerifyInfFileW.Addr(), uintptr(unsafe.Pointer(InfName)), uintptr(unsafe.Pointer(AltPlatformInfo)), uintptr(unsafe.Pointer(InfSignerInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetupWriteTextLog calls SETUPAPI!SetupWriteTextLog.
@@ -6015,22 +6272,24 @@ func SetupWriteTextLogInfLine(LogToken uint64, Flags uint32, InfHandle unsafe.Po
 	syscall.SyscallN(procSetupWriteTextLogInfLine.Addr(), uintptr(LogToken), uintptr(Flags), uintptr(unsafe.Pointer(InfHandle)), uintptr(unsafe.Pointer(Context)))
 }
 
-// UpdateDriverForPlugAndPlayDevicesA calls newdev!UpdateDriverForPlugAndPlayDevicesA.
-// https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-updatedriverforplugandplaydevicesa
+// UpdateDriverForPlugAndPlayDevices calls newdev!UpdateDriverForPlugAndPlayDevicesW.
+// https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-updatedriverforplugandplaydevicesw
 // Minimum OS: windows5.0.
-func UpdateDriverForPlugAndPlayDevicesA(hwndParent foundation.HWND, HardwareId foundation.PSTR, FullInfPath foundation.PSTR, InstallFlags UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS, bRebootRequired *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procUpdateDriverForPlugAndPlayDevicesA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(HardwareId)), uintptr(unsafe.Pointer(FullInfPath)), uintptr(InstallFlags), uintptr(unsafe.Pointer(bRebootRequired)))
+func UpdateDriverForPlugAndPlayDevices(hwndParent foundation.HWND, HardwareId string, FullInfPath string, InstallFlags UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS, bRebootRequired *foundation.BOOL) error {
+	_HardwareId := win32.UTF16Ptr(HardwareId)
+	_FullInfPath := win32.UTF16Ptr(FullInfPath)
+	r1, _, e1 := syscall.SyscallN(procUpdateDriverForPlugAndPlayDevices.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(_HardwareId)), uintptr(unsafe.Pointer(_FullInfPath)), uintptr(InstallFlags), uintptr(unsafe.Pointer(bRebootRequired)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// UpdateDriverForPlugAndPlayDevicesW calls newdev!UpdateDriverForPlugAndPlayDevicesW.
-// https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-updatedriverforplugandplaydevicesw
+// UpdateDriverForPlugAndPlayDevicesA calls newdev!UpdateDriverForPlugAndPlayDevicesA.
+// https://learn.microsoft.com/windows/win32/api/newdev/nf-newdev-updatedriverforplugandplaydevicesa
 // Minimum OS: windows5.0.
-func UpdateDriverForPlugAndPlayDevicesW(hwndParent foundation.HWND, HardwareId foundation.PWSTR, FullInfPath foundation.PWSTR, InstallFlags UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS, bRebootRequired *foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procUpdateDriverForPlugAndPlayDevicesW.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(HardwareId)), uintptr(unsafe.Pointer(FullInfPath)), uintptr(InstallFlags), uintptr(unsafe.Pointer(bRebootRequired)))
+func UpdateDriverForPlugAndPlayDevicesA(hwndParent foundation.HWND, HardwareId foundation.PSTR, FullInfPath foundation.PSTR, InstallFlags UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS, bRebootRequired *foundation.BOOL) error {
+	r1, _, e1 := syscall.SyscallN(procUpdateDriverForPlugAndPlayDevicesA.Addr(), uintptr(hwndParent), uintptr(unsafe.Pointer(HardwareId)), uintptr(unsafe.Pointer(FullInfPath)), uintptr(InstallFlags), uintptr(unsafe.Pointer(bRebootRequired)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

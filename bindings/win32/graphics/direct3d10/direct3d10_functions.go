@@ -53,86 +53,88 @@ var (
 
 // D3D10CompileEffectFromMemory calls d3d10!D3D10CompileEffectFromMemory.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10compileeffectfrommemory
-func D3D10CompileEffectFromMemory(pData unsafe.Pointer, DataLength uintptr, pSrcFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, HLSLFlags uint32, FXFlags uint32, ppCompiledEffect **graphicsdirect3d.ID3DBlob, ppErrors **graphicsdirect3d.ID3DBlob) foundation.HRESULT {
+func D3D10CompileEffectFromMemory(pData unsafe.Pointer, DataLength uintptr, pSrcFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, HLSLFlags uint32, FXFlags uint32, ppCompiledEffect **graphicsdirect3d.ID3DBlob, ppErrors **graphicsdirect3d.ID3DBlob) error {
 	r1, _, _ := syscall.SyscallN(procD3D10CompileEffectFromMemory.Addr(), uintptr(unsafe.Pointer(pData)), uintptr(DataLength), uintptr(unsafe.Pointer(pSrcFileName)), uintptr(unsafe.Pointer(pDefines)), uintptr(unsafe.Pointer(pInclude)), uintptr(HLSLFlags), uintptr(FXFlags), uintptr(unsafe.Pointer(ppCompiledEffect)), uintptr(unsafe.Pointer(ppErrors)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10CompileShader calls d3d10!D3D10CompileShader.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10compileshader
-func D3D10CompileShader(pSrcData foundation.PSTR, SrcDataSize uintptr, pFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, pFunctionName foundation.PSTR, pProfile foundation.PSTR, Flags uint32, ppShader **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) foundation.HRESULT {
+func D3D10CompileShader(pSrcData foundation.PSTR, SrcDataSize uintptr, pFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, pFunctionName foundation.PSTR, pProfile foundation.PSTR, Flags uint32, ppShader **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
 	r1, _, _ := syscall.SyscallN(procD3D10CompileShader.Addr(), uintptr(unsafe.Pointer(pSrcData)), uintptr(SrcDataSize), uintptr(unsafe.Pointer(pFileName)), uintptr(unsafe.Pointer(pDefines)), uintptr(unsafe.Pointer(pInclude)), uintptr(unsafe.Pointer(pFunctionName)), uintptr(unsafe.Pointer(pProfile)), uintptr(Flags), uintptr(unsafe.Pointer(ppShader)), uintptr(unsafe.Pointer(ppErrorMsgs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10CreateBlob calls d3d10!D3D10CreateBlob.
 // https://learn.microsoft.com/windows/win32/api/d3d10misc/nf-d3d10misc-d3d10createblob
-func D3D10CreateBlob(NumBytes uintptr, ppBuffer **graphicsdirect3d.ID3DBlob) foundation.HRESULT {
+func D3D10CreateBlob(NumBytes uintptr, ppBuffer **graphicsdirect3d.ID3DBlob) error {
 	r1, _, _ := syscall.SyscallN(procD3D10CreateBlob.Addr(), uintptr(NumBytes), uintptr(unsafe.Pointer(ppBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10CreateDevice calls d3d10!D3D10CreateDevice.
 // https://learn.microsoft.com/windows/win32/api/d3d10misc/nf-d3d10misc-d3d10createdevice
-func D3D10CreateDevice(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, SDKVersion uint32, ppDevice **ID3D10Device) foundation.HRESULT {
+func D3D10CreateDevice(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, SDKVersion uint32, ppDevice **ID3D10Device) error {
 	r1, _, _ := syscall.SyscallN(procD3D10CreateDevice.Addr(), uintptr(unsafe.Pointer(pAdapter)), uintptr(DriverType), uintptr(Software), uintptr(Flags), uintptr(SDKVersion), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10CreateDevice1 calls d3d10_1!D3D10CreateDevice1.
 // https://learn.microsoft.com/windows/win32/api/d3d10_1/nf-d3d10_1-d3d10createdevice1
-func D3D10CreateDevice1(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, HardwareLevel D3D10_FEATURE_LEVEL1, SDKVersion uint32, ppDevice **ID3D10Device1) foundation.HRESULT {
+func D3D10CreateDevice1(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, HardwareLevel D3D10_FEATURE_LEVEL1, SDKVersion uint32, ppDevice **ID3D10Device1) error {
 	r1, _, _ := syscall.SyscallN(procD3D10CreateDevice1.Addr(), uintptr(unsafe.Pointer(pAdapter)), uintptr(DriverType), uintptr(Software), uintptr(Flags), uintptr(HardwareLevel), uintptr(SDKVersion), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10CreateDeviceAndSwapChain calls d3d10!D3D10CreateDeviceAndSwapChain.
 // https://learn.microsoft.com/windows/win32/api/d3d10misc/nf-d3d10misc-d3d10createdeviceandswapchain
-func D3D10CreateDeviceAndSwapChain(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, SDKVersion uint32, pSwapChainDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain, ppDevice **ID3D10Device) foundation.HRESULT {
+func D3D10CreateDeviceAndSwapChain(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, SDKVersion uint32, pSwapChainDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain, ppDevice **ID3D10Device) error {
 	r1, _, _ := syscall.SyscallN(procD3D10CreateDeviceAndSwapChain.Addr(), uintptr(unsafe.Pointer(pAdapter)), uintptr(DriverType), uintptr(Software), uintptr(Flags), uintptr(SDKVersion), uintptr(unsafe.Pointer(pSwapChainDesc)), uintptr(unsafe.Pointer(ppSwapChain)), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10CreateDeviceAndSwapChain1 calls d3d10_1!D3D10CreateDeviceAndSwapChain1.
 // https://learn.microsoft.com/windows/win32/api/d3d10_1/nf-d3d10_1-d3d10createdeviceandswapchain1
-func D3D10CreateDeviceAndSwapChain1(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, HardwareLevel D3D10_FEATURE_LEVEL1, SDKVersion uint32, pSwapChainDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain, ppDevice **ID3D10Device1) foundation.HRESULT {
+func D3D10CreateDeviceAndSwapChain1(pAdapter *graphicsdxgi.IDXGIAdapter, DriverType D3D10_DRIVER_TYPE, Software foundation.HMODULE, Flags uint32, HardwareLevel D3D10_FEATURE_LEVEL1, SDKVersion uint32, pSwapChainDesc *graphicsdxgi.DXGI_SWAP_CHAIN_DESC, ppSwapChain **graphicsdxgi.IDXGISwapChain, ppDevice **ID3D10Device1) error {
 	r1, _, _ := syscall.SyscallN(procD3D10CreateDeviceAndSwapChain1.Addr(), uintptr(unsafe.Pointer(pAdapter)), uintptr(DriverType), uintptr(Software), uintptr(Flags), uintptr(HardwareLevel), uintptr(SDKVersion), uintptr(unsafe.Pointer(pSwapChainDesc)), uintptr(unsafe.Pointer(ppSwapChain)), uintptr(unsafe.Pointer(ppDevice)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10CreateEffectFromMemory calls d3d10!D3D10CreateEffectFromMemory.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10createeffectfrommemory
-func D3D10CreateEffectFromMemory(pData unsafe.Pointer, DataLength uintptr, FXFlags uint32, pDevice *ID3D10Device, pEffectPool *ID3D10EffectPool, ppEffect **ID3D10Effect) foundation.HRESULT {
+func D3D10CreateEffectFromMemory(pData unsafe.Pointer, DataLength uintptr, FXFlags uint32, pDevice *ID3D10Device, pEffectPool *ID3D10EffectPool, ppEffect **ID3D10Effect) error {
 	r1, _, _ := syscall.SyscallN(procD3D10CreateEffectFromMemory.Addr(), uintptr(unsafe.Pointer(pData)), uintptr(DataLength), uintptr(FXFlags), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pEffectPool)), uintptr(unsafe.Pointer(ppEffect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10CreateEffectPoolFromMemory calls d3d10!D3D10CreateEffectPoolFromMemory.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10createeffectpoolfrommemory
-func D3D10CreateEffectPoolFromMemory(pData unsafe.Pointer, DataLength uintptr, FXFlags uint32, pDevice *ID3D10Device, ppEffectPool **ID3D10EffectPool) foundation.HRESULT {
+func D3D10CreateEffectPoolFromMemory(pData unsafe.Pointer, DataLength uintptr, FXFlags uint32, pDevice *ID3D10Device, ppEffectPool **ID3D10EffectPool) error {
 	r1, _, _ := syscall.SyscallN(procD3D10CreateEffectPoolFromMemory.Addr(), uintptr(unsafe.Pointer(pData)), uintptr(DataLength), uintptr(FXFlags), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(ppEffectPool)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10CreateStateBlock calls d3d10!D3D10CreateStateBlock.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10createstateblock
-func D3D10CreateStateBlock(pDevice *ID3D10Device, pStateBlockMask *D3D10_STATE_BLOCK_MASK, ppStateBlock **ID3D10StateBlock) foundation.HRESULT {
+func D3D10CreateStateBlock(pDevice *ID3D10Device, pStateBlockMask *D3D10_STATE_BLOCK_MASK, ppStateBlock **ID3D10StateBlock) error {
 	r1, _, _ := syscall.SyscallN(procD3D10CreateStateBlock.Addr(), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pStateBlockMask)), uintptr(unsafe.Pointer(ppStateBlock)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10DisassembleEffect calls d3d10!D3D10DisassembleEffect.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10disassembleeffect
-func D3D10DisassembleEffect(pEffect *ID3D10Effect, EnableColorCode foundation.BOOL, ppDisassembly **graphicsdirect3d.ID3DBlob) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procD3D10DisassembleEffect.Addr(), uintptr(unsafe.Pointer(pEffect)), uintptr(EnableColorCode), uintptr(unsafe.Pointer(ppDisassembly)))
-	return foundation.HRESULT(r1)
+func D3D10DisassembleEffect(pEffect *ID3D10Effect, EnableColorCode bool, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
+	_EnableColorCode := win32.Bool32(EnableColorCode)
+	r1, _, _ := syscall.SyscallN(procD3D10DisassembleEffect.Addr(), uintptr(unsafe.Pointer(pEffect)), uintptr(_EnableColorCode), uintptr(unsafe.Pointer(ppDisassembly)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10DisassembleShader calls d3d10!D3D10DisassembleShader.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10disassembleshader
-func D3D10DisassembleShader(pShader unsafe.Pointer, BytecodeLength uintptr, EnableColorCode foundation.BOOL, pComments foundation.PSTR, ppDisassembly **graphicsdirect3d.ID3DBlob) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procD3D10DisassembleShader.Addr(), uintptr(unsafe.Pointer(pShader)), uintptr(BytecodeLength), uintptr(EnableColorCode), uintptr(unsafe.Pointer(pComments)), uintptr(unsafe.Pointer(ppDisassembly)))
-	return foundation.HRESULT(r1)
+func D3D10DisassembleShader(pShader unsafe.Pointer, BytecodeLength uintptr, EnableColorCode bool, pComments foundation.PSTR, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
+	_EnableColorCode := win32.Bool32(EnableColorCode)
+	r1, _, _ := syscall.SyscallN(procD3D10DisassembleShader.Addr(), uintptr(unsafe.Pointer(pShader)), uintptr(BytecodeLength), uintptr(_EnableColorCode), uintptr(unsafe.Pointer(pComments)), uintptr(unsafe.Pointer(ppDisassembly)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10GetGeometryShaderProfile calls d3d10!D3D10GetGeometryShaderProfile.
@@ -144,23 +146,23 @@ func D3D10GetGeometryShaderProfile(pDevice *ID3D10Device) foundation.PSTR {
 
 // D3D10GetInputAndOutputSignatureBlob calls d3d10!D3D10GetInputAndOutputSignatureBlob.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10getinputandoutputsignatureblob
-func D3D10GetInputAndOutputSignatureBlob(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppSignatureBlob **graphicsdirect3d.ID3DBlob) foundation.HRESULT {
+func D3D10GetInputAndOutputSignatureBlob(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppSignatureBlob **graphicsdirect3d.ID3DBlob) error {
 	r1, _, _ := syscall.SyscallN(procD3D10GetInputAndOutputSignatureBlob.Addr(), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppSignatureBlob)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10GetInputSignatureBlob calls d3d10!D3D10GetInputSignatureBlob.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10getinputsignatureblob
-func D3D10GetInputSignatureBlob(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppSignatureBlob **graphicsdirect3d.ID3DBlob) foundation.HRESULT {
+func D3D10GetInputSignatureBlob(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppSignatureBlob **graphicsdirect3d.ID3DBlob) error {
 	r1, _, _ := syscall.SyscallN(procD3D10GetInputSignatureBlob.Addr(), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppSignatureBlob)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10GetOutputSignatureBlob calls d3d10!D3D10GetOutputSignatureBlob.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10getoutputsignatureblob
-func D3D10GetOutputSignatureBlob(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppSignatureBlob **graphicsdirect3d.ID3DBlob) foundation.HRESULT {
+func D3D10GetOutputSignatureBlob(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppSignatureBlob **graphicsdirect3d.ID3DBlob) error {
 	r1, _, _ := syscall.SyscallN(procD3D10GetOutputSignatureBlob.Addr(), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppSignatureBlob)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10GetPixelShaderProfile calls d3d10!D3D10GetPixelShaderProfile.
@@ -172,9 +174,9 @@ func D3D10GetPixelShaderProfile(pDevice *ID3D10Device) foundation.PSTR {
 
 // D3D10GetShaderDebugInfo calls d3d10!D3D10GetShaderDebugInfo.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10getshaderdebuginfo
-func D3D10GetShaderDebugInfo(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppDebugInfo **graphicsdirect3d.ID3DBlob) foundation.HRESULT {
+func D3D10GetShaderDebugInfo(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppDebugInfo **graphicsdirect3d.ID3DBlob) error {
 	r1, _, _ := syscall.SyscallN(procD3D10GetShaderDebugInfo.Addr(), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppDebugInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10GetVertexShaderProfile calls d3d10!D3D10GetVertexShaderProfile.
@@ -186,70 +188,70 @@ func D3D10GetVertexShaderProfile(pDevice *ID3D10Device) foundation.PSTR {
 
 // D3D10PreprocessShader calls d3d10!D3D10PreprocessShader.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10preprocessshader
-func D3D10PreprocessShader(pSrcData foundation.PSTR, SrcDataSize uintptr, pFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, ppShaderText **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) foundation.HRESULT {
+func D3D10PreprocessShader(pSrcData foundation.PSTR, SrcDataSize uintptr, pFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, ppShaderText **graphicsdirect3d.ID3DBlob, ppErrorMsgs **graphicsdirect3d.ID3DBlob) error {
 	r1, _, _ := syscall.SyscallN(procD3D10PreprocessShader.Addr(), uintptr(unsafe.Pointer(pSrcData)), uintptr(SrcDataSize), uintptr(unsafe.Pointer(pFileName)), uintptr(unsafe.Pointer(pDefines)), uintptr(unsafe.Pointer(pInclude)), uintptr(unsafe.Pointer(ppShaderText)), uintptr(unsafe.Pointer(ppErrorMsgs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10ReflectShader calls d3d10!D3D10ReflectShader.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10reflectshader
-func D3D10ReflectShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppReflector **ID3D10ShaderReflection) foundation.HRESULT {
+func D3D10ReflectShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppReflector **ID3D10ShaderReflection) error {
 	r1, _, _ := syscall.SyscallN(procD3D10ReflectShader.Addr(), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppReflector)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10StateBlockMaskDifference calls d3d10!D3D10StateBlockMaskDifference.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10stateblockmaskdifference
-func D3D10StateBlockMaskDifference(pA *D3D10_STATE_BLOCK_MASK, pB *D3D10_STATE_BLOCK_MASK, pResult *D3D10_STATE_BLOCK_MASK) foundation.HRESULT {
+func D3D10StateBlockMaskDifference(pA *D3D10_STATE_BLOCK_MASK, pB *D3D10_STATE_BLOCK_MASK, pResult *D3D10_STATE_BLOCK_MASK) error {
 	r1, _, _ := syscall.SyscallN(procD3D10StateBlockMaskDifference.Addr(), uintptr(unsafe.Pointer(pA)), uintptr(unsafe.Pointer(pB)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10StateBlockMaskDisableAll calls d3d10!D3D10StateBlockMaskDisableAll.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10stateblockmaskdisableall
-func D3D10StateBlockMaskDisableAll(pMask *D3D10_STATE_BLOCK_MASK) foundation.HRESULT {
+func D3D10StateBlockMaskDisableAll(pMask *D3D10_STATE_BLOCK_MASK) error {
 	r1, _, _ := syscall.SyscallN(procD3D10StateBlockMaskDisableAll.Addr(), uintptr(unsafe.Pointer(pMask)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10StateBlockMaskDisableCapture calls d3d10!D3D10StateBlockMaskDisableCapture.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10stateblockmaskdisablecapture
-func D3D10StateBlockMaskDisableCapture(pMask *D3D10_STATE_BLOCK_MASK, StateType D3D10_DEVICE_STATE_TYPES, RangeStart uint32, RangeLength uint32) foundation.HRESULT {
+func D3D10StateBlockMaskDisableCapture(pMask *D3D10_STATE_BLOCK_MASK, StateType D3D10_DEVICE_STATE_TYPES, RangeStart uint32, RangeLength uint32) error {
 	r1, _, _ := syscall.SyscallN(procD3D10StateBlockMaskDisableCapture.Addr(), uintptr(unsafe.Pointer(pMask)), uintptr(StateType), uintptr(RangeStart), uintptr(RangeLength))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10StateBlockMaskEnableAll calls d3d10!D3D10StateBlockMaskEnableAll.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10stateblockmaskenableall
-func D3D10StateBlockMaskEnableAll(pMask *D3D10_STATE_BLOCK_MASK) foundation.HRESULT {
+func D3D10StateBlockMaskEnableAll(pMask *D3D10_STATE_BLOCK_MASK) error {
 	r1, _, _ := syscall.SyscallN(procD3D10StateBlockMaskEnableAll.Addr(), uintptr(unsafe.Pointer(pMask)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10StateBlockMaskEnableCapture calls d3d10!D3D10StateBlockMaskEnableCapture.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10stateblockmaskenablecapture
-func D3D10StateBlockMaskEnableCapture(pMask *D3D10_STATE_BLOCK_MASK, StateType D3D10_DEVICE_STATE_TYPES, RangeStart uint32, RangeLength uint32) foundation.HRESULT {
+func D3D10StateBlockMaskEnableCapture(pMask *D3D10_STATE_BLOCK_MASK, StateType D3D10_DEVICE_STATE_TYPES, RangeStart uint32, RangeLength uint32) error {
 	r1, _, _ := syscall.SyscallN(procD3D10StateBlockMaskEnableCapture.Addr(), uintptr(unsafe.Pointer(pMask)), uintptr(StateType), uintptr(RangeStart), uintptr(RangeLength))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10StateBlockMaskGetSetting calls d3d10!D3D10StateBlockMaskGetSetting.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10stateblockmaskgetsetting
-func D3D10StateBlockMaskGetSetting(pMask *D3D10_STATE_BLOCK_MASK, StateType D3D10_DEVICE_STATE_TYPES, Entry uint32) foundation.BOOL {
+func D3D10StateBlockMaskGetSetting(pMask *D3D10_STATE_BLOCK_MASK, StateType D3D10_DEVICE_STATE_TYPES, Entry uint32) bool {
 	r1, _, _ := syscall.SyscallN(procD3D10StateBlockMaskGetSetting.Addr(), uintptr(unsafe.Pointer(pMask)), uintptr(StateType), uintptr(Entry))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // D3D10StateBlockMaskIntersect calls d3d10!D3D10StateBlockMaskIntersect.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10stateblockmaskintersect
-func D3D10StateBlockMaskIntersect(pA *D3D10_STATE_BLOCK_MASK, pB *D3D10_STATE_BLOCK_MASK, pResult *D3D10_STATE_BLOCK_MASK) foundation.HRESULT {
+func D3D10StateBlockMaskIntersect(pA *D3D10_STATE_BLOCK_MASK, pB *D3D10_STATE_BLOCK_MASK, pResult *D3D10_STATE_BLOCK_MASK) error {
 	r1, _, _ := syscall.SyscallN(procD3D10StateBlockMaskIntersect.Addr(), uintptr(unsafe.Pointer(pA)), uintptr(unsafe.Pointer(pB)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10StateBlockMaskUnion calls d3d10!D3D10StateBlockMaskUnion.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10stateblockmaskunion
-func D3D10StateBlockMaskUnion(pA *D3D10_STATE_BLOCK_MASK, pB *D3D10_STATE_BLOCK_MASK, pResult *D3D10_STATE_BLOCK_MASK) foundation.HRESULT {
+func D3D10StateBlockMaskUnion(pA *D3D10_STATE_BLOCK_MASK, pB *D3D10_STATE_BLOCK_MASK, pResult *D3D10_STATE_BLOCK_MASK) error {
 	r1, _, _ := syscall.SyscallN(procD3D10StateBlockMaskUnion.Addr(), uintptr(unsafe.Pointer(pA)), uintptr(unsafe.Pointer(pB)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

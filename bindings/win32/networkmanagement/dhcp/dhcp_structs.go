@@ -251,8 +251,8 @@ type DHCP_ALL_OPTION_VALUES_PB struct {
 	Options     *DHCP_ALL_OPTION_VALUES_PB_Anonymous_e__Struct
 }
 
-// DHCP_ATTRIB_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DHCP_ATTRIB_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DHCP_ATTRIB_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -748,8 +748,8 @@ type DHCP_OPTION_DATA struct {
 	Elements    *DHCP_OPTION_DATA_ELEMENT
 }
 
-// DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DHCP_OPTION_DATA_ELEMENT_DHCP_OPTION_ELEMENT_UNION struct {
 	Data [2]uint64
 }
@@ -766,8 +766,8 @@ type DHCP_OPTION_LIST struct {
 	Options    *DHCP_OPTION_VALUE
 }
 
-// DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION struct {
 	Data [1]uint64
 }
@@ -778,8 +778,8 @@ type DHCP_OPTION_SCOPE_INFO struct {
 	ScopeInfo DHCP_OPTION_SCOPE_INFO_DHCP_OPTION_SCOPE_UNION
 }
 
-// DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DHCP_OPTION_SCOPE_INFO6_DHCP_OPTION_SCOPE_UNION6 struct {
 	Data [4]uint64
 }
@@ -891,8 +891,8 @@ type DHCP_POL_EXPR_ARRAY struct {
 	Elements    *DHCP_POL_EXPR
 }
 
-// DHCP_PROPERTY_DHCP_PROPERTY_VALUE_UNION is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DHCP_PROPERTY_DHCP_PROPERTY_VALUE_UNION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DHCP_PROPERTY_DHCP_PROPERTY_VALUE_UNION struct {
 	Data [2]uint64
 }
@@ -937,8 +937,8 @@ type DHCP_SCAN_LIST struct {
 	ScanItems    *DHCP_SCAN_ITEM
 }
 
-// DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION struct {
 	Data [2]uint64
 }
@@ -949,8 +949,8 @@ type DHCP_SEARCH_INFO struct {
 	SearchInfo DHCP_SEARCH_INFO_DHCP_CLIENT_SEARCH_UNION
 }
 
-// DHCP_SEARCH_INFO_V6_DHCP_CLIENT_SEARCH_UNION_V6 is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DHCP_SEARCH_INFO_V6_DHCP_CLIENT_SEARCH_UNION_V6 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DHCP_SEARCH_INFO_V6_DHCP_CLIENT_SEARCH_UNION_V6 struct {
 	Data [2]uint64
 }
@@ -1059,8 +1059,8 @@ type DHCP_SERVER_SPECIFIC_STRINGS struct {
 	DefaultUserClassName   foundation.PWSTR
 }
 
-// DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION struct {
 	Data [1]uint64
 }
@@ -1071,8 +1071,8 @@ type DHCP_SUBNET_ELEMENT_DATA struct {
 	Element     DHCP_SUBNET_ELEMENT_DATA_DHCP_SUBNET_ELEMENT_UNION
 }
 
-// DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4 struct {
 	Data [1]uint64
 }
@@ -1083,8 +1083,8 @@ type DHCP_SUBNET_ELEMENT_DATA_V4 struct {
 	Element     DHCP_SUBNET_ELEMENT_DATA_V4_DHCP_SUBNET_ELEMENT_UNION_V4
 }
 
-// DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5 is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5 struct {
 	Data [1]uint64
 }
@@ -1095,8 +1095,8 @@ type DHCP_SUBNET_ELEMENT_DATA_V5 struct {
 	Element     DHCP_SUBNET_ELEMENT_DATA_V5_DHCP_SUBNET_ELEMENT_UNION_V5
 }
 
-// DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type DHCP_SUBNET_ELEMENT_DATA_V6_DHCP_SUBNET_ELEMENT_UNION_V6 struct {
 	Data [1]uint64
 }

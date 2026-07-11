@@ -29,33 +29,36 @@ type DataSource struct {
 var IID_DataSource = win32.GUID{Data1: 0x7c0ffab3, Data2: 0xcd84, Data3: 0x11d0, Data4: [8]byte{0x94, 0x9a, 0x00, 0xa0, 0xc9, 0x11, 0x10, 0xed}}
 
 // GetDataMember dispatches through DataSource's vtable slot 3.
-func (self *DataSource) GetDataMember(bstrDM *uint16, riid *win32.GUID, ppunk **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDM)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppunk)))
-	return foundation.HRESULT(r1)
+func (self *DataSource) GetDataMember(bstrDM *uint16, riid *win32.GUID) (*systemcom.IUnknown, error) {
+	var _ppunk *systemcom.IUnknown
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDM)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(&_ppunk)))
+	return _ppunk, win32.HRESULTError(int32(r1))
 }
 
 // GetDataMemberName dispatches through DataSource's vtable slot 4.
-func (self *DataSource) GetDataMemberName(lIndex int32, pbstrDM **uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(pbstrDM)))
-	return foundation.HRESULT(r1)
+func (self *DataSource) GetDataMemberName(lIndex int32) (*uint16, error) {
+	var _pbstrDM *uint16
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lIndex), uintptr(unsafe.Pointer(&_pbstrDM)))
+	return _pbstrDM, win32.HRESULTError(int32(r1))
 }
 
 // GetDataMemberCount dispatches through DataSource's vtable slot 5.
-func (self *DataSource) GetDataMemberCount(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *DataSource) GetDataMemberCount() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // AddDataSourceListener dispatches through DataSource's vtable slot 6.
-func (self *DataSource) AddDataSourceListener(pDSL *DataSourceListener) foundation.HRESULT {
+func (self *DataSource) AddDataSourceListener(pDSL *DataSourceListener) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDSL)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveDataSourceListener dispatches through DataSource's vtable slot 7.
-func (self *DataSource) RemoveDataSourceListener(pDSL *DataSourceListener) foundation.HRESULT {
+func (self *DataSource) RemoveDataSourceListener(pDSL *DataSourceListener) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDSL)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7c0ffab2-cd84-11d0-949a-00a0c91110ed
@@ -67,21 +70,21 @@ type DataSourceListener struct {
 var IID_DataSourceListener = win32.GUID{Data1: 0x7c0ffab2, Data2: 0xcd84, Data3: 0x11d0, Data4: [8]byte{0x94, 0x9a, 0x00, 0xa0, 0xc9, 0x11, 0x10, 0xed}}
 
 // DataMemberChanged dispatches through DataSourceListener's vtable slot 3.
-func (self *DataSourceListener) DataMemberChanged(bstrDM *uint16) foundation.HRESULT {
+func (self *DataSourceListener) DataMemberChanged(bstrDM *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDM)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DataMemberAdded dispatches through DataSourceListener's vtable slot 4.
-func (self *DataSourceListener) DataMemberAdded(bstrDM *uint16) foundation.HRESULT {
+func (self *DataSourceListener) DataMemberAdded(bstrDM *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDM)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DataMemberRemoved dispatches through DataSourceListener's vtable slot 5.
-func (self *DataSourceListener) DataMemberRemoved(bstrDM *uint16) foundation.HRESULT {
+func (self *DataSourceListener) DataMemberRemoved(bstrDM *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrDM)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0ae9a4e4-18d4-11d1-b3b3-00aa00c1a924
@@ -101,27 +104,27 @@ type IAccessor struct {
 var IID_IAccessor = win32.GUID{Data1: 0x0c733a8c, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // AddRefAccessor dispatches through IAccessor's vtable slot 3.
-func (self *IAccessor) AddRefAccessor(hAccessor HACCESSOR, pcRefCount *uint32) foundation.HRESULT {
+func (self *IAccessor) AddRefAccessor(hAccessor HACCESSOR, pcRefCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hAccessor), uintptr(unsafe.Pointer(pcRefCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateAccessor dispatches through IAccessor's vtable slot 4.
-func (self *IAccessor) CreateAccessor(dwAccessorFlags uint32, cBindings uintptr, rgBindings *DBBINDING, cbRowSize uintptr, phAccessor *HACCESSOR, rgStatus *uint32) foundation.HRESULT {
+func (self *IAccessor) CreateAccessor(dwAccessorFlags uint32, cBindings uintptr, rgBindings *DBBINDING, cbRowSize uintptr, phAccessor *HACCESSOR, rgStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwAccessorFlags), uintptr(cBindings), uintptr(unsafe.Pointer(rgBindings)), uintptr(cbRowSize), uintptr(unsafe.Pointer(phAccessor)), uintptr(unsafe.Pointer(rgStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBindings dispatches through IAccessor's vtable slot 5.
-func (self *IAccessor) GetBindings(hAccessor HACCESSOR, pdwAccessorFlags *uint32, pcBindings *uintptr, prgBindings **DBBINDING) foundation.HRESULT {
+func (self *IAccessor) GetBindings(hAccessor HACCESSOR, pdwAccessorFlags *uint32, pcBindings *uintptr, prgBindings **DBBINDING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hAccessor), uintptr(unsafe.Pointer(pdwAccessorFlags)), uintptr(unsafe.Pointer(pcBindings)), uintptr(unsafe.Pointer(prgBindings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseAccessor dispatches through IAccessor's vtable slot 6.
-func (self *IAccessor) ReleaseAccessor(hAccessor HACCESSOR, pcRefCount *uint32) foundation.HRESULT {
+func (self *IAccessor) ReleaseAccessor(hAccessor HACCESSOR, pcRefCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hAccessor), uintptr(unsafe.Pointer(pcRefCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aa6-2a1c-11ce-ade5-00aa0044773d
@@ -133,9 +136,9 @@ type IAlterIndex struct {
 var IID_IAlterIndex = win32.GUID{Data1: 0x0c733aa6, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // AlterIndex dispatches through IAlterIndex's vtable slot 3.
-func (self *IAlterIndex) AlterIndex(pTableId *storageindexserver.DBID, pIndexId *storageindexserver.DBID, pNewIndexId *storageindexserver.DBID, cPropertySets uint32, rgPropertySets *DBPROPSET) foundation.HRESULT {
+func (self *IAlterIndex) AlterIndex(pTableId *storageindexserver.DBID, pIndexId *storageindexserver.DBID, pNewIndexId *storageindexserver.DBID, cPropertySets uint32, rgPropertySets *DBPROPSET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableId)), uintptr(unsafe.Pointer(pIndexId)), uintptr(unsafe.Pointer(pNewIndexId)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aa5-2a1c-11ce-ade5-00aa0044773d
@@ -147,15 +150,15 @@ type IAlterTable struct {
 var IID_IAlterTable = win32.GUID{Data1: 0x0c733aa5, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // AlterColumn dispatches through IAlterTable's vtable slot 3.
-func (self *IAlterTable) AlterColumn(pTableId *storageindexserver.DBID, pColumnId *storageindexserver.DBID, dwColumnDescFlags uint32, pColumnDesc *DBCOLUMNDESC) foundation.HRESULT {
+func (self *IAlterTable) AlterColumn(pTableId *storageindexserver.DBID, pColumnId *storageindexserver.DBID, dwColumnDescFlags uint32, pColumnDesc *DBCOLUMNDESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableId)), uintptr(unsafe.Pointer(pColumnId)), uintptr(dwColumnDescFlags), uintptr(unsafe.Pointer(pColumnDesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AlterTable dispatches through IAlterTable's vtable slot 4.
-func (self *IAlterTable) AlterTable(pTableId *storageindexserver.DBID, pNewTableId *storageindexserver.DBID, cPropertySets uint32, rgPropertySets *DBPROPSET) foundation.HRESULT {
+func (self *IAlterTable) AlterTable(pTableId *storageindexserver.DBID, pNewTableId *storageindexserver.DBID, cPropertySets uint32, rgPropertySets *DBPROPSET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableId)), uintptr(unsafe.Pointer(pNewTableId)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733ab1-2a1c-11ce-ade5-00aa0044773d
@@ -167,9 +170,10 @@ type IBindResource struct {
 var IID_IBindResource = win32.GUID{Data1: 0x0c733ab1, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // Bind dispatches through IBindResource's vtable slot 3.
-func (self *IBindResource) Bind(pUnkOuter *systemcom.IUnknown, pwszURL foundation.PWSTR, dwBindURLFlags uint32, rguid *win32.GUID, riid *win32.GUID, pAuthenticate *systemcom.IAuthenticate, pImplSession *DBIMPLICITSESSION, pdwBindStatus *uint32, ppUnk **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pwszURL)), uintptr(dwBindURLFlags), uintptr(unsafe.Pointer(rguid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pAuthenticate)), uintptr(unsafe.Pointer(pImplSession)), uintptr(unsafe.Pointer(pdwBindStatus)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+func (self *IBindResource) Bind(pUnkOuter *systemcom.IUnknown, pwszURL string, dwBindURLFlags uint32, rguid *win32.GUID, riid *win32.GUID, pAuthenticate *systemcom.IAuthenticate, pImplSession *DBIMPLICITSESSION, pdwBindStatus *uint32, ppUnk **systemcom.IUnknown) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(dwBindURLFlags), uintptr(unsafe.Pointer(rguid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pAuthenticate)), uintptr(unsafe.Pointer(pImplSession)), uintptr(unsafe.Pointer(pdwBindStatus)), uintptr(unsafe.Pointer(ppUnk)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a93-2a1c-11ce-ade5-00aa0044773d
@@ -181,15 +185,15 @@ type IChapteredRowset struct {
 var IID_IChapteredRowset = win32.GUID{Data1: 0x0c733a93, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // AddRefChapter dispatches through IChapteredRowset's vtable slot 3.
-func (self *IChapteredRowset) AddRefChapter(hChapter uintptr, pcRefCount *uint32) foundation.HRESULT {
+func (self *IChapteredRowset) AddRefChapter(hChapter uintptr, pcRefCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(unsafe.Pointer(pcRefCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseChapter dispatches through IChapteredRowset's vtable slot 4.
-func (self *IChapteredRowset) ReleaseChapter(hChapter uintptr, pcRefCount *uint32) foundation.HRESULT {
+func (self *IChapteredRowset) ReleaseChapter(hChapter uintptr, pcRefCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(unsafe.Pointer(pcRefCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IColumnMapper: https://learn.microsoft.com/windows/win32/api/indexsrv/nn-indexsrv-icolumnmapper
@@ -202,27 +206,28 @@ type IColumnMapper struct {
 var IID_IColumnMapper = win32.GUID{Data1: 0x0b63e37a, Data2: 0x9ccc, Data3: 0x11d0, Data4: [8]byte{0xbc, 0xdb, 0x00, 0x80, 0x5f, 0xcc, 0xce, 0x04}}
 
 // GetPropInfoFromName dispatches through IColumnMapper's vtable slot 3.
-func (self *IColumnMapper) GetPropInfoFromName(wcsPropName foundation.PWSTR, ppPropId **storageindexserver.DBID, pPropType *uint16, puiWidth *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wcsPropName)), uintptr(unsafe.Pointer(ppPropId)), uintptr(unsafe.Pointer(pPropType)), uintptr(unsafe.Pointer(puiWidth)))
-	return foundation.HRESULT(r1)
+func (self *IColumnMapper) GetPropInfoFromName(wcsPropName string, ppPropId **storageindexserver.DBID, pPropType *uint16, puiWidth *uint32) error {
+	_wcsPropName := win32.UTF16Ptr(wcsPropName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wcsPropName)), uintptr(unsafe.Pointer(ppPropId)), uintptr(unsafe.Pointer(pPropType)), uintptr(unsafe.Pointer(puiWidth)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropInfoFromId dispatches through IColumnMapper's vtable slot 4.
-func (self *IColumnMapper) GetPropInfoFromId(pPropId *storageindexserver.DBID, pwcsName **uint16, pPropType *uint16, puiWidth *uint32) foundation.HRESULT {
+func (self *IColumnMapper) GetPropInfoFromId(pPropId *storageindexserver.DBID, pwcsName **uint16, pPropType *uint16, puiWidth *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropId)), uintptr(unsafe.Pointer(pwcsName)), uintptr(unsafe.Pointer(pPropType)), uintptr(unsafe.Pointer(puiWidth)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumPropInfo dispatches through IColumnMapper's vtable slot 5.
-func (self *IColumnMapper) EnumPropInfo(iEntry uint32, pwcsName **uint16, ppPropId **storageindexserver.DBID, pPropType *uint16, puiWidth *uint32) foundation.HRESULT {
+func (self *IColumnMapper) EnumPropInfo(iEntry uint32, pwcsName **uint16, ppPropId **storageindexserver.DBID, pPropType *uint16, puiWidth *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(iEntry), uintptr(unsafe.Pointer(pwcsName)), uintptr(unsafe.Pointer(ppPropId)), uintptr(unsafe.Pointer(pPropType)), uintptr(unsafe.Pointer(puiWidth)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsMapUpToDate dispatches through IColumnMapper's vtable slot 6.
-func (self *IColumnMapper) IsMapUpToDate() foundation.HRESULT {
+func (self *IColumnMapper) IsMapUpToDate() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IColumnMapperCreator: https://learn.microsoft.com/windows/win32/api/indexsrv/nn-indexsrv-icolumnmappercreator
@@ -235,9 +240,11 @@ type IColumnMapperCreator struct {
 var IID_IColumnMapperCreator = win32.GUID{Data1: 0x0b63e37b, Data2: 0x9ccc, Data3: 0x11d0, Data4: [8]byte{0xbc, 0xdb, 0x00, 0x80, 0x5f, 0xcc, 0xce, 0x04}}
 
 // GetColumnMapper dispatches through IColumnMapperCreator's vtable slot 3.
-func (self *IColumnMapperCreator) GetColumnMapper(wcsMachineName foundation.PWSTR, wcsCatalogName foundation.PWSTR, ppColumnMapper **IColumnMapper) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wcsMachineName)), uintptr(unsafe.Pointer(wcsCatalogName)), uintptr(unsafe.Pointer(ppColumnMapper)))
-	return foundation.HRESULT(r1)
+func (self *IColumnMapperCreator) GetColumnMapper(wcsMachineName string, wcsCatalogName string, ppColumnMapper **IColumnMapper) error {
+	_wcsMachineName := win32.UTF16Ptr(wcsMachineName)
+	_wcsCatalogName := win32.UTF16Ptr(wcsCatalogName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wcsMachineName)), uintptr(unsafe.Pointer(_wcsCatalogName)), uintptr(unsafe.Pointer(ppColumnMapper)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a11-2a1c-11ce-ade5-00aa0044773d
@@ -249,15 +256,15 @@ type IColumnsInfo struct {
 var IID_IColumnsInfo = win32.GUID{Data1: 0x0c733a11, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetColumnInfo dispatches through IColumnsInfo's vtable slot 3.
-func (self *IColumnsInfo) GetColumnInfo(pcColumns *uintptr, prgInfo **DBCOLUMNINFO, ppStringsBuffer **uint16) foundation.HRESULT {
+func (self *IColumnsInfo) GetColumnInfo(pcColumns *uintptr, prgInfo **DBCOLUMNINFO, ppStringsBuffer **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcColumns)), uintptr(unsafe.Pointer(prgInfo)), uintptr(unsafe.Pointer(ppStringsBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MapColumnIDs dispatches through IColumnsInfo's vtable slot 4.
-func (self *IColumnsInfo) MapColumnIDs(cColumnIDs uintptr, rgColumnIDs *storageindexserver.DBID, rgColumns *uintptr) foundation.HRESULT {
+func (self *IColumnsInfo) MapColumnIDs(cColumnIDs uintptr, rgColumnIDs *storageindexserver.DBID, rgColumns *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cColumnIDs), uintptr(unsafe.Pointer(rgColumnIDs)), uintptr(unsafe.Pointer(rgColumns)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733ab8-2a1c-11ce-ade5-00aa0044773d
@@ -269,9 +276,9 @@ type IColumnsInfo2 struct {
 var IID_IColumnsInfo2 = win32.GUID{Data1: 0x0c733ab8, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetRestrictedColumnInfo dispatches through IColumnsInfo2's vtable slot 5.
-func (self *IColumnsInfo2) GetRestrictedColumnInfo(cColumnIDMasks uintptr, rgColumnIDMasks *storageindexserver.DBID, dwFlags uint32, pcColumns *uintptr, prgColumnIDs **storageindexserver.DBID, prgColumnInfo **DBCOLUMNINFO, ppStringsBuffer **uint16) foundation.HRESULT {
+func (self *IColumnsInfo2) GetRestrictedColumnInfo(cColumnIDMasks uintptr, rgColumnIDMasks *storageindexserver.DBID, dwFlags uint32, pcColumns *uintptr, prgColumnIDs **storageindexserver.DBID, prgColumnInfo **DBCOLUMNINFO, ppStringsBuffer **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cColumnIDMasks), uintptr(unsafe.Pointer(rgColumnIDMasks)), uintptr(dwFlags), uintptr(unsafe.Pointer(pcColumns)), uintptr(unsafe.Pointer(prgColumnIDs)), uintptr(unsafe.Pointer(prgColumnInfo)), uintptr(unsafe.Pointer(ppStringsBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a10-2a1c-11ce-ade5-00aa0044773d
@@ -283,15 +290,15 @@ type IColumnsRowset struct {
 var IID_IColumnsRowset = win32.GUID{Data1: 0x0c733a10, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetAvailableColumns dispatches through IColumnsRowset's vtable slot 3.
-func (self *IColumnsRowset) GetAvailableColumns(pcOptColumns *uintptr, prgOptColumns **storageindexserver.DBID) foundation.HRESULT {
+func (self *IColumnsRowset) GetAvailableColumns(pcOptColumns *uintptr, prgOptColumns **storageindexserver.DBID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcOptColumns)), uintptr(unsafe.Pointer(prgOptColumns)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetColumnsRowset dispatches through IColumnsRowset's vtable slot 4.
-func (self *IColumnsRowset) GetColumnsRowset(pUnkOuter *systemcom.IUnknown, cOptColumns uintptr, rgOptColumns *storageindexserver.DBID, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppColRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *IColumnsRowset) GetColumnsRowset(pUnkOuter *systemcom.IUnknown, cOptColumns uintptr, rgOptColumns *storageindexserver.DBID, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppColRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(cOptColumns), uintptr(unsafe.Pointer(rgOptColumns)), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppColRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a63-2a1c-11ce-ade5-00aa0044773d
@@ -303,21 +310,21 @@ type ICommand struct {
 var IID_ICommand = win32.GUID{Data1: 0x0c733a63, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // Cancel dispatches through ICommand's vtable slot 3.
-func (self *ICommand) Cancel() foundation.HRESULT {
+func (self *ICommand) Cancel() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Execute dispatches through ICommand's vtable slot 4.
-func (self *ICommand) Execute(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, pParams *DBPARAMS, pcRowsAffected *uintptr, ppRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *ICommand) Execute(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, pParams *DBPARAMS, pcRowsAffected *uintptr, ppRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pParams)), uintptr(unsafe.Pointer(pcRowsAffected)), uintptr(unsafe.Pointer(ppRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDBSession dispatches through ICommand's vtable slot 5.
-func (self *ICommand) GetDBSession(riid *win32.GUID, ppSession **systemcom.IUnknown) foundation.HRESULT {
+func (self *ICommand) GetDBSession(riid *win32.GUID, ppSession **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a4e-2a1c-11ce-ade5-00aa0044773d
@@ -329,39 +336,45 @@ type ICommandCost struct {
 var IID_ICommandCost = win32.GUID{Data1: 0x0c733a4e, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetAccumulatedCost dispatches through ICommandCost's vtable slot 3.
-func (self *ICommandCost) GetAccumulatedCost(pwszRowsetName foundation.PWSTR, pcCostLimits *uint32, prgCostLimits **DBCOST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszRowsetName)), uintptr(unsafe.Pointer(pcCostLimits)), uintptr(unsafe.Pointer(prgCostLimits)))
-	return foundation.HRESULT(r1)
+func (self *ICommandCost) GetAccumulatedCost(pwszRowsetName string, pcCostLimits *uint32, prgCostLimits **DBCOST) error {
+	_pwszRowsetName := win32.UTF16Ptr(pwszRowsetName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszRowsetName)), uintptr(unsafe.Pointer(pcCostLimits)), uintptr(unsafe.Pointer(prgCostLimits)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCostEstimate dispatches through ICommandCost's vtable slot 4.
-func (self *ICommandCost) GetCostEstimate(pwszRowsetName foundation.PWSTR, pcCostEstimates *uint32, prgCostEstimates *DBCOST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszRowsetName)), uintptr(unsafe.Pointer(pcCostEstimates)), uintptr(unsafe.Pointer(prgCostEstimates)))
-	return foundation.HRESULT(r1)
+func (self *ICommandCost) GetCostEstimate(pwszRowsetName string, pcCostEstimates *uint32, prgCostEstimates *DBCOST) error {
+	_pwszRowsetName := win32.UTF16Ptr(pwszRowsetName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszRowsetName)), uintptr(unsafe.Pointer(pcCostEstimates)), uintptr(unsafe.Pointer(prgCostEstimates)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCostGoals dispatches through ICommandCost's vtable slot 5.
-func (self *ICommandCost) GetCostGoals(pwszRowsetName foundation.PWSTR, pcCostGoals *uint32, prgCostGoals *DBCOST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszRowsetName)), uintptr(unsafe.Pointer(pcCostGoals)), uintptr(unsafe.Pointer(prgCostGoals)))
-	return foundation.HRESULT(r1)
+func (self *ICommandCost) GetCostGoals(pwszRowsetName string, pcCostGoals *uint32, prgCostGoals *DBCOST) error {
+	_pwszRowsetName := win32.UTF16Ptr(pwszRowsetName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszRowsetName)), uintptr(unsafe.Pointer(pcCostGoals)), uintptr(unsafe.Pointer(prgCostGoals)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCostLimits dispatches through ICommandCost's vtable slot 6.
-func (self *ICommandCost) GetCostLimits(pwszRowsetName foundation.PWSTR, pcCostLimits *uint32, prgCostLimits *DBCOST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszRowsetName)), uintptr(unsafe.Pointer(pcCostLimits)), uintptr(unsafe.Pointer(prgCostLimits)))
-	return foundation.HRESULT(r1)
+func (self *ICommandCost) GetCostLimits(pwszRowsetName string, pcCostLimits *uint32, prgCostLimits *DBCOST) error {
+	_pwszRowsetName := win32.UTF16Ptr(pwszRowsetName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszRowsetName)), uintptr(unsafe.Pointer(pcCostLimits)), uintptr(unsafe.Pointer(prgCostLimits)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCostGoals dispatches through ICommandCost's vtable slot 7.
-func (self *ICommandCost) SetCostGoals(pwszRowsetName foundation.PWSTR, cCostGoals uint32, rgCostGoals *DBCOST) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszRowsetName)), uintptr(cCostGoals), uintptr(unsafe.Pointer(rgCostGoals)))
-	return foundation.HRESULT(r1)
+func (self *ICommandCost) SetCostGoals(pwszRowsetName string, cCostGoals uint32, rgCostGoals *DBCOST) error {
+	_pwszRowsetName := win32.UTF16Ptr(pwszRowsetName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszRowsetName)), uintptr(cCostGoals), uintptr(unsafe.Pointer(rgCostGoals)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCostLimits dispatches through ICommandCost's vtable slot 8.
-func (self *ICommandCost) SetCostLimits(pwszRowsetName foundation.PWSTR, cCostLimits uint32, prgCostLimits *DBCOST, dwExecutionFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszRowsetName)), uintptr(cCostLimits), uintptr(unsafe.Pointer(prgCostLimits)), uintptr(dwExecutionFlags))
-	return foundation.HRESULT(r1)
+func (self *ICommandCost) SetCostLimits(pwszRowsetName string, cCostLimits uint32, prgCostLimits *DBCOST, dwExecutionFlags uint32) error {
+	_pwszRowsetName := win32.UTF16Ptr(pwszRowsetName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszRowsetName)), uintptr(cCostLimits), uintptr(unsafe.Pointer(prgCostLimits)), uintptr(dwExecutionFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aa7-2a1c-11ce-ade5-00aa0044773d
@@ -373,27 +386,27 @@ type ICommandPersist struct {
 var IID_ICommandPersist = win32.GUID{Data1: 0x0c733aa7, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // DeleteCommand dispatches through ICommandPersist's vtable slot 3.
-func (self *ICommandPersist) DeleteCommand(pCommandID *storageindexserver.DBID) foundation.HRESULT {
+func (self *ICommandPersist) DeleteCommand(pCommandID *storageindexserver.DBID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCommandID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentCommand dispatches through ICommandPersist's vtable slot 4.
-func (self *ICommandPersist) GetCurrentCommand(ppCommandID **storageindexserver.DBID) foundation.HRESULT {
+func (self *ICommandPersist) GetCurrentCommand(ppCommandID **storageindexserver.DBID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCommandID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadCommand dispatches through ICommandPersist's vtable slot 5.
-func (self *ICommandPersist) LoadCommand(pCommandID *storageindexserver.DBID, dwFlags uint32) foundation.HRESULT {
+func (self *ICommandPersist) LoadCommand(pCommandID *storageindexserver.DBID, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCommandID)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveCommand dispatches through ICommandPersist's vtable slot 6.
-func (self *ICommandPersist) SaveCommand(pCommandID *storageindexserver.DBID, dwFlags uint32) foundation.HRESULT {
+func (self *ICommandPersist) SaveCommand(pCommandID *storageindexserver.DBID, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCommandID)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a26-2a1c-11ce-ade5-00aa0044773d
@@ -405,15 +418,15 @@ type ICommandPrepare struct {
 var IID_ICommandPrepare = win32.GUID{Data1: 0x0c733a26, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // Prepare dispatches through ICommandPrepare's vtable slot 3.
-func (self *ICommandPrepare) Prepare(cExpectedRuns uint32) foundation.HRESULT {
+func (self *ICommandPrepare) Prepare(cExpectedRuns uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cExpectedRuns))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unprepare dispatches through ICommandPrepare's vtable slot 4.
-func (self *ICommandPrepare) Unprepare() foundation.HRESULT {
+func (self *ICommandPrepare) Unprepare() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a79-2a1c-11ce-ade5-00aa0044773d
@@ -425,15 +438,15 @@ type ICommandProperties struct {
 var IID_ICommandProperties = win32.GUID{Data1: 0x0c733a79, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetProperties dispatches through ICommandProperties's vtable slot 3.
-func (self *ICommandProperties) GetProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) foundation.HRESULT {
+func (self *ICommandProperties) GetProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cPropertyIDSets), uintptr(unsafe.Pointer(rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperties dispatches through ICommandProperties's vtable slot 4.
-func (self *ICommandProperties) SetProperties(cPropertySets uint32, rgPropertySets *DBPROPSET) foundation.HRESULT {
+func (self *ICommandProperties) SetProperties(cPropertySets uint32, rgPropertySets *DBPROPSET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733abf-2a1c-11ce-ade5-00aa0044773d
@@ -445,15 +458,15 @@ type ICommandStream struct {
 var IID_ICommandStream = win32.GUID{Data1: 0x0c733abf, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetCommandStream dispatches through ICommandStream's vtable slot 3.
-func (self *ICommandStream) GetCommandStream(piid *win32.GUID, pguidDialect *win32.GUID, ppCommandStream **systemcom.IUnknown) foundation.HRESULT {
+func (self *ICommandStream) GetCommandStream(piid *win32.GUID, pguidDialect *win32.GUID, ppCommandStream **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piid)), uintptr(unsafe.Pointer(pguidDialect)), uintptr(unsafe.Pointer(ppCommandStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCommandStream dispatches through ICommandStream's vtable slot 4.
-func (self *ICommandStream) SetCommandStream(riid *win32.GUID, rguidDialect *win32.GUID, pCommandStream *systemcom.IUnknown) foundation.HRESULT {
+func (self *ICommandStream) SetCommandStream(riid *win32.GUID, rguidDialect *win32.GUID, pCommandStream *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(rguidDialect)), uintptr(unsafe.Pointer(pCommandStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a27-2a1c-11ce-ade5-00aa0044773d
@@ -465,15 +478,16 @@ type ICommandText struct {
 var IID_ICommandText = win32.GUID{Data1: 0x0c733a27, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetCommandText dispatches through ICommandText's vtable slot 6.
-func (self *ICommandText) GetCommandText(pguidDialect *win32.GUID, ppwszCommand *foundation.PWSTR) foundation.HRESULT {
+func (self *ICommandText) GetCommandText(pguidDialect *win32.GUID, ppwszCommand *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidDialect)), uintptr(unsafe.Pointer(ppwszCommand)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCommandText dispatches through ICommandText's vtable slot 7.
-func (self *ICommandText) SetCommandText(rguidDialect *win32.GUID, pwszCommand foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidDialect)), uintptr(unsafe.Pointer(pwszCommand)))
-	return foundation.HRESULT(r1)
+func (self *ICommandText) SetCommandText(rguidDialect *win32.GUID, pwszCommand string) error {
+	_pwszCommand := win32.UTF16Ptr(pwszCommand)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidDialect)), uintptr(unsafe.Pointer(_pwszCommand)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a18-2a1c-11ce-ade5-00aa0044773d
@@ -485,15 +499,15 @@ type ICommandValidate struct {
 var IID_ICommandValidate = win32.GUID{Data1: 0x0c733a18, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // ValidateCompletely dispatches through ICommandValidate's vtable slot 3.
-func (self *ICommandValidate) ValidateCompletely() foundation.HRESULT {
+func (self *ICommandValidate) ValidateCompletely() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ValidateSyntax dispatches through ICommandValidate's vtable slot 4.
-func (self *ICommandValidate) ValidateSyntax() foundation.HRESULT {
+func (self *ICommandValidate) ValidateSyntax() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a64-2a1c-11ce-ade5-00aa0044773d
@@ -505,21 +519,21 @@ type ICommandWithParameters struct {
 var IID_ICommandWithParameters = win32.GUID{Data1: 0x0c733a64, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetParameterInfo dispatches through ICommandWithParameters's vtable slot 3.
-func (self *ICommandWithParameters) GetParameterInfo(pcParams *uintptr, prgParamInfo **DBPARAMINFO, ppNamesBuffer **uint16) foundation.HRESULT {
+func (self *ICommandWithParameters) GetParameterInfo(pcParams *uintptr, prgParamInfo **DBPARAMINFO, ppNamesBuffer **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcParams)), uintptr(unsafe.Pointer(prgParamInfo)), uintptr(unsafe.Pointer(ppNamesBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MapParameterNames dispatches through ICommandWithParameters's vtable slot 4.
-func (self *ICommandWithParameters) MapParameterNames(cParamNames uintptr, rgParamNames *foundation.PWSTR, rgParamOrdinals *uintptr) foundation.HRESULT {
+func (self *ICommandWithParameters) MapParameterNames(cParamNames uintptr, rgParamNames *foundation.PWSTR, rgParamOrdinals *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cParamNames), uintptr(unsafe.Pointer(rgParamNames)), uintptr(unsafe.Pointer(rgParamOrdinals)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetParameterInfo dispatches through ICommandWithParameters's vtable slot 5.
-func (self *ICommandWithParameters) SetParameterInfo(cParams uintptr, rgParamOrdinals *uintptr, rgParamBindInfo *DBPARAMBINDINFO) foundation.HRESULT {
+func (self *ICommandWithParameters) SetParameterInfo(cParams uintptr, rgParamOrdinals *uintptr, rgParamBindInfo *DBPARAMBINDINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cParams), uintptr(unsafe.Pointer(rgParamOrdinals)), uintptr(unsafe.Pointer(rgParamBindInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ICondition: https://learn.microsoft.com/windows/win32/api/structuredquerycondition/nn-structuredquerycondition-icondition
@@ -532,45 +546,49 @@ type ICondition struct {
 var IID_ICondition = win32.GUID{Data1: 0x0fc988d4, Data2: 0xc935, Data3: 0x4b97, Data4: [8]byte{0xa9, 0x73, 0x46, 0x28, 0x2e, 0xa1, 0x75, 0xc8}}
 
 // GetConditionType dispatches through ICondition's vtable slot 8.
-func (self *ICondition) GetConditionType(pNodeType *systemsearchcommon.CONDITION_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNodeType)))
-	return foundation.HRESULT(r1)
+func (self *ICondition) GetConditionType() (systemsearchcommon.CONDITION_TYPE, error) {
+	var _pNodeType systemsearchcommon.CONDITION_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pNodeType)))
+	return _pNodeType, win32.HRESULTError(int32(r1))
 }
 
 // GetSubConditions dispatches through ICondition's vtable slot 9.
-func (self *ICondition) GetSubConditions(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *ICondition) GetSubConditions(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetComparisonInfo dispatches through ICondition's vtable slot 10.
-func (self *ICondition) GetComparisonInfo(ppszPropertyName *foundation.PWSTR, pcop *systemsearchcommon.CONDITION_OPERATION, ppropvar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *ICondition) GetComparisonInfo(ppszPropertyName *foundation.PWSTR, pcop *systemsearchcommon.CONDITION_OPERATION, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPropertyName)), uintptr(unsafe.Pointer(pcop)), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetValueType dispatches through ICondition's vtable slot 11.
-func (self *ICondition) GetValueType(ppszValueTypeName *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszValueTypeName)))
-	return foundation.HRESULT(r1)
+func (self *ICondition) GetValueType() (foundation.PWSTR, error) {
+	var _ppszValueTypeName foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszValueTypeName)))
+	return _ppszValueTypeName, win32.HRESULTError(int32(r1))
 }
 
 // GetValueNormalization dispatches through ICondition's vtable slot 12.
-func (self *ICondition) GetValueNormalization(ppszNormalization *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszNormalization)))
-	return foundation.HRESULT(r1)
+func (self *ICondition) GetValueNormalization() (foundation.PWSTR, error) {
+	var _ppszNormalization foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszNormalization)))
+	return _ppszNormalization, win32.HRESULTError(int32(r1))
 }
 
 // GetInputTerms dispatches through ICondition's vtable slot 13.
-func (self *ICondition) GetInputTerms(ppPropertyTerm **IRichChunk, ppOperationTerm **IRichChunk, ppValueTerm **IRichChunk) foundation.HRESULT {
+func (self *ICondition) GetInputTerms(ppPropertyTerm **IRichChunk, ppOperationTerm **IRichChunk, ppValueTerm **IRichChunk) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPropertyTerm)), uintptr(unsafe.Pointer(ppOperationTerm)), uintptr(unsafe.Pointer(ppValueTerm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through ICondition's vtable slot 14.
-func (self *ICondition) Clone(ppc **ICondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppc)))
-	return foundation.HRESULT(r1)
+func (self *ICondition) Clone() (*ICondition, error) {
+	var _ppc *ICondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppc)))
+	return _ppc, win32.HRESULTError(int32(r1))
 }
 
 // ICondition2: https://learn.microsoft.com/windows/win32/api/structuredquerycondition/nn-structuredquerycondition-icondition2
@@ -583,15 +601,15 @@ type ICondition2 struct {
 var IID_ICondition2 = win32.GUID{Data1: 0x0db8851d, Data2: 0x2e5b, Data3: 0x47eb, Data4: [8]byte{0x92, 0x08, 0xd2, 0x8c, 0x32, 0x5a, 0x01, 0xd7}}
 
 // GetLocale dispatches through ICondition2's vtable slot 15.
-func (self *ICondition2) GetLocale(ppszLocaleName *foundation.PWSTR) foundation.HRESULT {
+func (self *ICondition2) GetLocale(ppszLocaleName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszLocaleName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLeafConditionInfo dispatches through ICondition2's vtable slot 16.
-func (self *ICondition2) GetLeafConditionInfo(ppropkey *foundation.PROPERTYKEY, pcop *systemsearchcommon.CONDITION_OPERATION, ppropvar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *ICondition2) GetLeafConditionInfo(ppropkey *foundation.PROPERTYKEY, pcop *systemsearchcommon.CONDITION_OPERATION, ppropvar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppropkey)), uintptr(unsafe.Pointer(pcop)), uintptr(unsafe.Pointer(ppropvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IConditionFactory: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-iconditionfactory
@@ -604,27 +622,35 @@ type IConditionFactory struct {
 var IID_IConditionFactory = win32.GUID{Data1: 0xa5efe073, Data2: 0xb16f, Data3: 0x474f, Data4: [8]byte{0x9f, 0x3e, 0x9f, 0x8b, 0x49, 0x7a, 0x3e, 0x08}}
 
 // MakeNot dispatches through IConditionFactory's vtable slot 3.
-func (self *IConditionFactory) MakeNot(pcSub *ICondition, fSimplify foundation.BOOL, ppcResult **ICondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcSub)), uintptr(fSimplify), uintptr(unsafe.Pointer(ppcResult)))
-	return foundation.HRESULT(r1)
+func (self *IConditionFactory) MakeNot(pcSub *ICondition, fSimplify bool) (*ICondition, error) {
+	_fSimplify := win32.Bool32(fSimplify)
+	var _ppcResult *ICondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcSub)), uintptr(_fSimplify), uintptr(unsafe.Pointer(&_ppcResult)))
+	return _ppcResult, win32.HRESULTError(int32(r1))
 }
 
 // MakeAndOr dispatches through IConditionFactory's vtable slot 4.
-func (self *IConditionFactory) MakeAndOr(ct systemsearchcommon.CONDITION_TYPE, peuSubs *systemcom.IEnumUnknown, fSimplify foundation.BOOL, ppcResult **ICondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ct), uintptr(unsafe.Pointer(peuSubs)), uintptr(fSimplify), uintptr(unsafe.Pointer(ppcResult)))
-	return foundation.HRESULT(r1)
+func (self *IConditionFactory) MakeAndOr(ct systemsearchcommon.CONDITION_TYPE, peuSubs *systemcom.IEnumUnknown, fSimplify bool) (*ICondition, error) {
+	_fSimplify := win32.Bool32(fSimplify)
+	var _ppcResult *ICondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ct), uintptr(unsafe.Pointer(peuSubs)), uintptr(_fSimplify), uintptr(unsafe.Pointer(&_ppcResult)))
+	return _ppcResult, win32.HRESULTError(int32(r1))
 }
 
 // MakeLeaf dispatches through IConditionFactory's vtable slot 5.
-func (self *IConditionFactory) MakeLeaf(pszPropertyName foundation.PWSTR, cop systemsearchcommon.CONDITION_OPERATION, pszValueType foundation.PWSTR, ppropvar *systemcomstructuredstorage.PROPVARIANT, pPropertyNameTerm *IRichChunk, pOperationTerm *IRichChunk, pValueTerm *IRichChunk, fExpand foundation.BOOL, ppcResult **ICondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPropertyName)), uintptr(cop), uintptr(unsafe.Pointer(pszValueType)), uintptr(unsafe.Pointer(ppropvar)), uintptr(unsafe.Pointer(pPropertyNameTerm)), uintptr(unsafe.Pointer(pOperationTerm)), uintptr(unsafe.Pointer(pValueTerm)), uintptr(fExpand), uintptr(unsafe.Pointer(ppcResult)))
-	return foundation.HRESULT(r1)
+func (self *IConditionFactory) MakeLeaf(pszPropertyName string, cop systemsearchcommon.CONDITION_OPERATION, pszValueType string, ppropvar *systemcomstructuredstorage.PROPVARIANT, pPropertyNameTerm *IRichChunk, pOperationTerm *IRichChunk, pValueTerm *IRichChunk, fExpand bool) (*ICondition, error) {
+	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
+	_pszValueType := win32.UTF16Ptr(pszValueType)
+	_fExpand := win32.Bool32(fExpand)
+	var _ppcResult *ICondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(cop), uintptr(unsafe.Pointer(_pszValueType)), uintptr(unsafe.Pointer(ppropvar)), uintptr(unsafe.Pointer(pPropertyNameTerm)), uintptr(unsafe.Pointer(pOperationTerm)), uintptr(unsafe.Pointer(pValueTerm)), uintptr(_fExpand), uintptr(unsafe.Pointer(&_ppcResult)))
+	return _ppcResult, win32.HRESULTError(int32(r1))
 }
 
 // Resolve dispatches through IConditionFactory's vtable slot 6.
-func (self *IConditionFactory) Resolve(pc *ICondition, sqro STRUCTURED_QUERY_RESOLVE_OPTION, pstReferenceTime *foundation.SYSTEMTIME, ppcResolved **ICondition) foundation.HRESULT {
+func (self *IConditionFactory) Resolve(pc *ICondition, sqro STRUCTURED_QUERY_RESOLVE_OPTION, pstReferenceTime *foundation.SYSTEMTIME, ppcResolved **ICondition) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pc)), uintptr(sqro), uintptr(unsafe.Pointer(pstReferenceTime)), uintptr(unsafe.Pointer(ppcResolved)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IConditionFactory2: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-iconditionfactory2
@@ -637,57 +663,63 @@ type IConditionFactory2 struct {
 var IID_IConditionFactory2 = win32.GUID{Data1: 0x71d222e1, Data2: 0x432f, Data3: 0x429e, Data4: [8]byte{0x8c, 0x13, 0xb6, 0xda, 0xfd, 0xe5, 0x07, 0x7a}}
 
 // CreateTrueFalse dispatches through IConditionFactory2's vtable slot 7.
-func (self *IConditionFactory2) CreateTrueFalse(fVal foundation.BOOL, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fVal), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func (self *IConditionFactory2) CreateTrueFalse(fVal bool, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_fVal := win32.Bool32(fVal)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(_fVal), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateNegation dispatches through IConditionFactory2's vtable slot 8.
-func (self *IConditionFactory2) CreateNegation(pcSub *ICondition, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IConditionFactory2) CreateNegation(pcSub *ICondition, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcSub)), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateCompoundFromObjectArray dispatches through IConditionFactory2's vtable slot 9.
-func (self *IConditionFactory2) CreateCompoundFromObjectArray(ct systemsearchcommon.CONDITION_TYPE, poaSubs *uishellcommon.IObjectArray, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IConditionFactory2) CreateCompoundFromObjectArray(ct systemsearchcommon.CONDITION_TYPE, poaSubs *uishellcommon.IObjectArray, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ct), uintptr(unsafe.Pointer(poaSubs)), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateCompoundFromArray dispatches through IConditionFactory2's vtable slot 10.
-func (self *IConditionFactory2) CreateCompoundFromArray(ct systemsearchcommon.CONDITION_TYPE, ppcondSubs **ICondition, cSubs uint32, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IConditionFactory2) CreateCompoundFromArray(ct systemsearchcommon.CONDITION_TYPE, ppcondSubs **ICondition, cSubs uint32, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ct), uintptr(unsafe.Pointer(ppcondSubs)), uintptr(cSubs), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStringLeaf dispatches through IConditionFactory2's vtable slot 11.
-func (self *IConditionFactory2) CreateStringLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, pszValue foundation.PWSTR, pszLocaleName foundation.PWSTR, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(cop), uintptr(unsafe.Pointer(pszValue)), uintptr(unsafe.Pointer(pszLocaleName)), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func (self *IConditionFactory2) CreateStringLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, pszValue string, pszLocaleName string, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_pszValue := win32.UTF16Ptr(pszValue)
+	_pszLocaleName := win32.UTF16Ptr(pszLocaleName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(cop), uintptr(unsafe.Pointer(_pszValue)), uintptr(unsafe.Pointer(_pszLocaleName)), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateIntegerLeaf dispatches through IConditionFactory2's vtable slot 12.
-func (self *IConditionFactory2) CreateIntegerLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, lValue int32, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IConditionFactory2) CreateIntegerLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, lValue int32, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(cop), uintptr(lValue), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBooleanLeaf dispatches through IConditionFactory2's vtable slot 13.
-func (self *IConditionFactory2) CreateBooleanLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, fValue foundation.BOOL, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(cop), uintptr(fValue), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func (self *IConditionFactory2) CreateBooleanLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, fValue bool, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_fValue := win32.Bool32(fValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(cop), uintptr(_fValue), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateLeaf dispatches through IConditionFactory2's vtable slot 14.
-func (self *IConditionFactory2) CreateLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, propvar *systemcomstructuredstorage.PROPVARIANT, pszSemanticType foundation.PWSTR, pszLocaleName foundation.PWSTR, pPropertyNameTerm *IRichChunk, pOperationTerm *IRichChunk, pValueTerm *IRichChunk, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(cop), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(pszSemanticType)), uintptr(unsafe.Pointer(pszLocaleName)), uintptr(unsafe.Pointer(pPropertyNameTerm)), uintptr(unsafe.Pointer(pOperationTerm)), uintptr(unsafe.Pointer(pValueTerm)), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func (self *IConditionFactory2) CreateLeaf(propkey *foundation.PROPERTYKEY, cop systemsearchcommon.CONDITION_OPERATION, propvar *systemcomstructuredstorage.PROPVARIANT, pszSemanticType string, pszLocaleName string, pPropertyNameTerm *IRichChunk, pOperationTerm *IRichChunk, pValueTerm *IRichChunk, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_pszSemanticType := win32.UTF16Ptr(pszSemanticType)
+	_pszLocaleName := win32.UTF16Ptr(pszLocaleName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(propkey)), uintptr(cop), uintptr(unsafe.Pointer(propvar)), uintptr(unsafe.Pointer(_pszSemanticType)), uintptr(unsafe.Pointer(_pszLocaleName)), uintptr(unsafe.Pointer(pPropertyNameTerm)), uintptr(unsafe.Pointer(pOperationTerm)), uintptr(unsafe.Pointer(pValueTerm)), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResolveCondition dispatches through IConditionFactory2's vtable slot 15.
-func (self *IConditionFactory2) ResolveCondition(pc *ICondition, sqro STRUCTURED_QUERY_RESOLVE_OPTION, pstReferenceTime *foundation.SYSTEMTIME, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IConditionFactory2) ResolveCondition(pc *ICondition, sqro STRUCTURED_QUERY_RESOLVE_OPTION, pstReferenceTime *foundation.SYSTEMTIME, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pc)), uintptr(sqro), uintptr(unsafe.Pointer(pstReferenceTime)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IConditionGenerator: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-iconditiongenerator
@@ -700,27 +732,36 @@ type IConditionGenerator struct {
 var IID_IConditionGenerator = win32.GUID{Data1: 0x92d2cc58, Data2: 0x4386, Data3: 0x45a3, Data4: [8]byte{0xb9, 0x8c, 0x7e, 0x0c, 0xe6, 0x4a, 0x41, 0x17}}
 
 // Initialize dispatches through IConditionGenerator's vtable slot 3.
-func (self *IConditionGenerator) Initialize(pSchemaProvider *ISchemaProvider) foundation.HRESULT {
+func (self *IConditionGenerator) Initialize(pSchemaProvider *ISchemaProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSchemaProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RecognizeNamedEntities dispatches through IConditionGenerator's vtable slot 4.
-func (self *IConditionGenerator) RecognizeNamedEntities(pszInputString foundation.PWSTR, lcidUserLocale uint32, pTokenCollection *ITokenCollection, pNamedEntities *INamedEntityCollector) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszInputString)), uintptr(lcidUserLocale), uintptr(unsafe.Pointer(pTokenCollection)), uintptr(unsafe.Pointer(pNamedEntities)))
-	return foundation.HRESULT(r1)
+func (self *IConditionGenerator) RecognizeNamedEntities(pszInputString string, lcidUserLocale uint32, pTokenCollection *ITokenCollection, pNamedEntities *INamedEntityCollector) error {
+	_pszInputString := win32.UTF16Ptr(pszInputString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszInputString)), uintptr(lcidUserLocale), uintptr(unsafe.Pointer(pTokenCollection)), uintptr(unsafe.Pointer(pNamedEntities)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GenerateForLeaf dispatches through IConditionGenerator's vtable slot 5.
-func (self *IConditionGenerator) GenerateForLeaf(pConditionFactory *IConditionFactory, pszPropertyName foundation.PWSTR, cop systemsearchcommon.CONDITION_OPERATION, pszValueType foundation.PWSTR, pszValue foundation.PWSTR, pszValue2 foundation.PWSTR, pPropertyNameTerm *IRichChunk, pOperationTerm *IRichChunk, pValueTerm *IRichChunk, automaticWildcard foundation.BOOL, pNoStringQuery *foundation.BOOL, ppQueryExpression **ICondition) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConditionFactory)), uintptr(unsafe.Pointer(pszPropertyName)), uintptr(cop), uintptr(unsafe.Pointer(pszValueType)), uintptr(unsafe.Pointer(pszValue)), uintptr(unsafe.Pointer(pszValue2)), uintptr(unsafe.Pointer(pPropertyNameTerm)), uintptr(unsafe.Pointer(pOperationTerm)), uintptr(unsafe.Pointer(pValueTerm)), uintptr(automaticWildcard), uintptr(unsafe.Pointer(pNoStringQuery)), uintptr(unsafe.Pointer(ppQueryExpression)))
-	return foundation.HRESULT(r1)
+func (self *IConditionGenerator) GenerateForLeaf(pConditionFactory *IConditionFactory, pszPropertyName string, cop systemsearchcommon.CONDITION_OPERATION, pszValueType string, pszValue string, pszValue2 string, pPropertyNameTerm *IRichChunk, pOperationTerm *IRichChunk, pValueTerm *IRichChunk, automaticWildcard bool, pNoStringQuery *foundation.BOOL) (*ICondition, error) {
+	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
+	_pszValueType := win32.UTF16Ptr(pszValueType)
+	_pszValue := win32.UTF16Ptr(pszValue)
+	_pszValue2 := win32.UTF16Ptr(pszValue2)
+	_automaticWildcard := win32.Bool32(automaticWildcard)
+	var _ppQueryExpression *ICondition
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConditionFactory)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(cop), uintptr(unsafe.Pointer(_pszValueType)), uintptr(unsafe.Pointer(_pszValue)), uintptr(unsafe.Pointer(_pszValue2)), uintptr(unsafe.Pointer(pPropertyNameTerm)), uintptr(unsafe.Pointer(pOperationTerm)), uintptr(unsafe.Pointer(pValueTerm)), uintptr(_automaticWildcard), uintptr(unsafe.Pointer(pNoStringQuery)), uintptr(unsafe.Pointer(&_ppQueryExpression)))
+	return _ppQueryExpression, win32.HRESULTError(int32(r1))
 }
 
 // DefaultPhrase dispatches through IConditionGenerator's vtable slot 6.
-func (self *IConditionGenerator) DefaultPhrase(pszValueType foundation.PWSTR, ppropvar *systemcomstructuredstorage.PROPVARIANT, fUseEnglish foundation.BOOL, ppszPhrase *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszValueType)), uintptr(unsafe.Pointer(ppropvar)), uintptr(fUseEnglish), uintptr(unsafe.Pointer(ppszPhrase)))
-	return foundation.HRESULT(r1)
+func (self *IConditionGenerator) DefaultPhrase(pszValueType string, ppropvar *systemcomstructuredstorage.PROPVARIANT, fUseEnglish bool, ppszPhrase *foundation.PWSTR) error {
+	_pszValueType := win32.UTF16Ptr(pszValueType)
+	_fUseEnglish := win32.Bool32(fUseEnglish)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszValueType)), uintptr(unsafe.Pointer(ppropvar)), uintptr(_fUseEnglish), uintptr(unsafe.Pointer(ppszPhrase)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a88-2a1c-11ce-ade5-00aa0044773d
@@ -732,9 +773,9 @@ type IConvertType struct {
 var IID_IConvertType = win32.GUID{Data1: 0x0c733a88, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // CanConvert dispatches through IConvertType's vtable slot 3.
-func (self *IConvertType) CanConvert(wFromType uint16, wToType uint16, dwConvertFlags uint32) foundation.HRESULT {
+func (self *IConvertType) CanConvert(wFromType uint16, wToType uint16, dwConvertFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(wFromType), uintptr(wToType), uintptr(dwConvertFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733ab2-2a1c-11ce-ade5-00aa0044773d
@@ -746,9 +787,10 @@ type ICreateRow struct {
 var IID_ICreateRow = win32.GUID{Data1: 0x0c733ab2, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // CreateRow dispatches through ICreateRow's vtable slot 3.
-func (self *ICreateRow) CreateRow(pUnkOuter *systemcom.IUnknown, pwszURL foundation.PWSTR, dwBindURLFlags uint32, rguid *win32.GUID, riid *win32.GUID, pAuthenticate *systemcom.IAuthenticate, pImplSession *DBIMPLICITSESSION, pdwBindStatus *uint32, ppwszNewURL *foundation.PWSTR, ppUnk **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pwszURL)), uintptr(dwBindURLFlags), uintptr(unsafe.Pointer(rguid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pAuthenticate)), uintptr(unsafe.Pointer(pImplSession)), uintptr(unsafe.Pointer(pdwBindStatus)), uintptr(unsafe.Pointer(ppwszNewURL)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+func (self *ICreateRow) CreateRow(pUnkOuter *systemcom.IUnknown, pwszURL string, dwBindURLFlags uint32, rguid *win32.GUID, riid *win32.GUID, pAuthenticate *systemcom.IAuthenticate, pImplSession *DBIMPLICITSESSION, pdwBindStatus *uint32, ppwszNewURL *foundation.PWSTR, ppUnk **systemcom.IUnknown) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(dwBindURLFlags), uintptr(unsafe.Pointer(rguid)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pAuthenticate)), uintptr(unsafe.Pointer(pImplSession)), uintptr(unsafe.Pointer(pdwBindStatus)), uintptr(unsafe.Pointer(ppwszNewURL)), uintptr(unsafe.Pointer(ppUnk)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a96-2a1c-11ce-ade5-00aa0044773d
@@ -760,21 +802,23 @@ type IDBAsynchNotify struct {
 var IID_IDBAsynchNotify = win32.GUID{Data1: 0x0c733a96, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // OnLowResource dispatches through IDBAsynchNotify's vtable slot 3.
-func (self *IDBAsynchNotify) OnLowResource(dwReserved uintptr) foundation.HRESULT {
+func (self *IDBAsynchNotify) OnLowResource(dwReserved uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnProgress dispatches through IDBAsynchNotify's vtable slot 4.
-func (self *IDBAsynchNotify) OnProgress(hChapter uintptr, eOperation uint32, ulProgress uintptr, ulProgressMax uintptr, eAsynchPhase uint32, pwszStatusText foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(eOperation), uintptr(ulProgress), uintptr(ulProgressMax), uintptr(eAsynchPhase), uintptr(unsafe.Pointer(pwszStatusText)))
-	return foundation.HRESULT(r1)
+func (self *IDBAsynchNotify) OnProgress(hChapter uintptr, eOperation uint32, ulProgress uintptr, ulProgressMax uintptr, eAsynchPhase uint32, pwszStatusText string) error {
+	_pwszStatusText := win32.UTF16Ptr(pwszStatusText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(eOperation), uintptr(ulProgress), uintptr(ulProgressMax), uintptr(eAsynchPhase), uintptr(unsafe.Pointer(_pwszStatusText)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnStop dispatches through IDBAsynchNotify's vtable slot 5.
-func (self *IDBAsynchNotify) OnStop(hChapter uintptr, eOperation uint32, hrStatus foundation.HRESULT, pwszStatusText foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(eOperation), uintptr(hrStatus), uintptr(unsafe.Pointer(pwszStatusText)))
-	return foundation.HRESULT(r1)
+func (self *IDBAsynchNotify) OnStop(hChapter uintptr, eOperation uint32, hrStatus foundation.HRESULT, pwszStatusText string) error {
+	_pwszStatusText := win32.UTF16Ptr(pwszStatusText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(eOperation), uintptr(hrStatus), uintptr(unsafe.Pointer(_pwszStatusText)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a95-2a1c-11ce-ade5-00aa0044773d
@@ -786,15 +830,15 @@ type IDBAsynchStatus struct {
 var IID_IDBAsynchStatus = win32.GUID{Data1: 0x0c733a95, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // Abort dispatches through IDBAsynchStatus's vtable slot 3.
-func (self *IDBAsynchStatus) Abort(hChapter uintptr, eOperation uint32) foundation.HRESULT {
+func (self *IDBAsynchStatus) Abort(hChapter uintptr, eOperation uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(eOperation))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IDBAsynchStatus's vtable slot 4.
-func (self *IDBAsynchStatus) GetStatus(hChapter uintptr, eOperation uint32, pulProgress *uintptr, pulProgressMax *uintptr, peAsynchPhase *uint32, ppwszStatusText *foundation.PWSTR) foundation.HRESULT {
+func (self *IDBAsynchStatus) GetStatus(hChapter uintptr, eOperation uint32, pulProgress *uintptr, pulProgressMax *uintptr, peAsynchPhase *uint32, ppwszStatusText *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(eOperation), uintptr(unsafe.Pointer(pulProgress)), uintptr(unsafe.Pointer(pulProgressMax)), uintptr(unsafe.Pointer(peAsynchPhase)), uintptr(unsafe.Pointer(ppwszStatusText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733ab3-2a1c-11ce-ade5-00aa0044773d
@@ -806,9 +850,9 @@ type IDBBinderProperties struct {
 var IID_IDBBinderProperties = win32.GUID{Data1: 0x0c733ab3, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // Reset dispatches through IDBBinderProperties's vtable slot 6.
-func (self *IDBBinderProperties) Reset() foundation.HRESULT {
+func (self *IDBBinderProperties) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a1d-2a1c-11ce-ade5-00aa0044773d
@@ -820,9 +864,9 @@ type IDBCreateCommand struct {
 var IID_IDBCreateCommand = win32.GUID{Data1: 0x0c733a1d, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // CreateCommand dispatches through IDBCreateCommand's vtable slot 3.
-func (self *IDBCreateCommand) CreateCommand(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppCommand **systemcom.IUnknown) foundation.HRESULT {
+func (self *IDBCreateCommand) CreateCommand(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppCommand **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppCommand)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a5d-2a1c-11ce-ade5-00aa0044773d
@@ -834,9 +878,9 @@ type IDBCreateSession struct {
 var IID_IDBCreateSession = win32.GUID{Data1: 0x0c733a5d, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // CreateSession dispatches through IDBCreateSession's vtable slot 3.
-func (self *IDBCreateSession) CreateSession(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppDBSession **systemcom.IUnknown) foundation.HRESULT {
+func (self *IDBCreateSession) CreateSession(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppDBSession **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDBSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a7a-2a1c-11ce-ade5-00aa0044773d
@@ -848,27 +892,27 @@ type IDBDataSourceAdmin struct {
 var IID_IDBDataSourceAdmin = win32.GUID{Data1: 0x0c733a7a, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // CreateDataSource dispatches through IDBDataSourceAdmin's vtable slot 3.
-func (self *IDBDataSourceAdmin) CreateDataSource(cPropertySets uint32, rgPropertySets *DBPROPSET, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppDBSession **systemcom.IUnknown) foundation.HRESULT {
+func (self *IDBDataSourceAdmin) CreateDataSource(cPropertySets uint32, rgPropertySets *DBPROPSET, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppDBSession **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDBSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DestroyDataSource dispatches through IDBDataSourceAdmin's vtable slot 4.
-func (self *IDBDataSourceAdmin) DestroyDataSource() foundation.HRESULT {
+func (self *IDBDataSourceAdmin) DestroyDataSource() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCreationProperties dispatches through IDBDataSourceAdmin's vtable slot 5.
-func (self *IDBDataSourceAdmin) GetCreationProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertyInfoSets *uint32, prgPropertyInfoSets **DBPROPINFOSET, ppDescBuffer **uint16) foundation.HRESULT {
+func (self *IDBDataSourceAdmin) GetCreationProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertyInfoSets *uint32, prgPropertyInfoSets **DBPROPINFOSET, ppDescBuffer **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cPropertyIDSets), uintptr(unsafe.Pointer(rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertyInfoSets)), uintptr(unsafe.Pointer(prgPropertyInfoSets)), uintptr(unsafe.Pointer(ppDescBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ModifyDataSource dispatches through IDBDataSourceAdmin's vtable slot 6.
-func (self *IDBDataSourceAdmin) ModifyDataSource(cPropertySets uint32, rgPropertySets *DBPROPSET) foundation.HRESULT {
+func (self *IDBDataSourceAdmin) ModifyDataSource(cPropertySets uint32, rgPropertySets *DBPROPSET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a89-2a1c-11ce-ade5-00aa0044773d
@@ -880,15 +924,15 @@ type IDBInfo struct {
 var IID_IDBInfo = win32.GUID{Data1: 0x0c733a89, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetKeywords dispatches through IDBInfo's vtable slot 3.
-func (self *IDBInfo) GetKeywords(ppwszKeywords *foundation.PWSTR) foundation.HRESULT {
+func (self *IDBInfo) GetKeywords(ppwszKeywords *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwszKeywords)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLiteralInfo dispatches through IDBInfo's vtable slot 4.
-func (self *IDBInfo) GetLiteralInfo(cLiterals uint32, rgLiterals *uint32, pcLiteralInfo *uint32, prgLiteralInfo **DBLITERALINFO, ppCharBuffer **uint16) foundation.HRESULT {
+func (self *IDBInfo) GetLiteralInfo(cLiterals uint32, rgLiterals *uint32, pcLiteralInfo *uint32, prgLiteralInfo **DBLITERALINFO, ppCharBuffer **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cLiterals), uintptr(unsafe.Pointer(rgLiterals)), uintptr(unsafe.Pointer(pcLiteralInfo)), uintptr(unsafe.Pointer(prgLiteralInfo)), uintptr(unsafe.Pointer(ppCharBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a8b-2a1c-11ce-ade5-00aa0044773d
@@ -900,15 +944,15 @@ type IDBInitialize struct {
 var IID_IDBInitialize = win32.GUID{Data1: 0x0c733a8b, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // Initialize dispatches through IDBInitialize's vtable slot 3.
-func (self *IDBInitialize) Initialize() foundation.HRESULT {
+func (self *IDBInitialize) Initialize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Uninitialize dispatches through IDBInitialize's vtable slot 4.
-func (self *IDBInitialize) Uninitialize() foundation.HRESULT {
+func (self *IDBInitialize) Uninitialize() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2206ccb0-19c1-11d1-89e0-00c04fd7a829
@@ -920,15 +964,18 @@ type IDBPromptInitialize struct {
 var IID_IDBPromptInitialize = win32.GUID{Data1: 0x2206ccb0, Data2: 0x19c1, Data3: 0x11d1, Data4: [8]byte{0x89, 0xe0, 0x00, 0xc0, 0x4f, 0xd7, 0xa8, 0x29}}
 
 // PromptDataSource dispatches through IDBPromptInitialize's vtable slot 3.
-func (self *IDBPromptInitialize) PromptDataSource(pUnkOuter *systemcom.IUnknown, hWndParent foundation.HWND, dwPromptOptions uint32, cSourceTypeFilter uint32, rgSourceTypeFilter *uint32, pwszszzProviderFilter foundation.PWSTR, riid *win32.GUID, ppDataSource **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(hWndParent), uintptr(dwPromptOptions), uintptr(cSourceTypeFilter), uintptr(unsafe.Pointer(rgSourceTypeFilter)), uintptr(unsafe.Pointer(pwszszzProviderFilter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDataSource)))
-	return foundation.HRESULT(r1)
+func (self *IDBPromptInitialize) PromptDataSource(pUnkOuter *systemcom.IUnknown, hWndParent foundation.HWND, dwPromptOptions uint32, cSourceTypeFilter uint32, rgSourceTypeFilter *uint32, pwszszzProviderFilter string, riid *win32.GUID, ppDataSource **systemcom.IUnknown) error {
+	_pwszszzProviderFilter := win32.UTF16Ptr(pwszszzProviderFilter)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(hWndParent), uintptr(dwPromptOptions), uintptr(cSourceTypeFilter), uintptr(unsafe.Pointer(rgSourceTypeFilter)), uintptr(unsafe.Pointer(_pwszszzProviderFilter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDataSource)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PromptFileName dispatches through IDBPromptInitialize's vtable slot 4.
-func (self *IDBPromptInitialize) PromptFileName(hWndParent foundation.HWND, dwPromptOptions uint32, pwszInitialDirectory foundation.PWSTR, pwszInitialFile foundation.PWSTR, ppwszSelectedFile *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hWndParent), uintptr(dwPromptOptions), uintptr(unsafe.Pointer(pwszInitialDirectory)), uintptr(unsafe.Pointer(pwszInitialFile)), uintptr(unsafe.Pointer(ppwszSelectedFile)))
-	return foundation.HRESULT(r1)
+func (self *IDBPromptInitialize) PromptFileName(hWndParent foundation.HWND, dwPromptOptions uint32, pwszInitialDirectory string, pwszInitialFile string, ppwszSelectedFile *foundation.PWSTR) error {
+	_pwszInitialDirectory := win32.UTF16Ptr(pwszInitialDirectory)
+	_pwszInitialFile := win32.UTF16Ptr(pwszInitialFile)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hWndParent), uintptr(dwPromptOptions), uintptr(unsafe.Pointer(_pwszInitialDirectory)), uintptr(unsafe.Pointer(_pwszInitialFile)), uintptr(unsafe.Pointer(ppwszSelectedFile)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a8a-2a1c-11ce-ade5-00aa0044773d
@@ -940,21 +987,21 @@ type IDBProperties struct {
 var IID_IDBProperties = win32.GUID{Data1: 0x0c733a8a, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetProperties dispatches through IDBProperties's vtable slot 3.
-func (self *IDBProperties) GetProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) foundation.HRESULT {
+func (self *IDBProperties) GetProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cPropertyIDSets), uintptr(unsafe.Pointer(rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyInfo dispatches through IDBProperties's vtable slot 4.
-func (self *IDBProperties) GetPropertyInfo(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertyInfoSets *uint32, prgPropertyInfoSets **DBPROPINFOSET, ppDescBuffer **uint16) foundation.HRESULT {
+func (self *IDBProperties) GetPropertyInfo(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertyInfoSets *uint32, prgPropertyInfoSets **DBPROPINFOSET, ppDescBuffer **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cPropertyIDSets), uintptr(unsafe.Pointer(rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertyInfoSets)), uintptr(unsafe.Pointer(prgPropertyInfoSets)), uintptr(unsafe.Pointer(ppDescBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperties dispatches through IDBProperties's vtable slot 5.
-func (self *IDBProperties) SetProperties(cPropertySets uint32, rgPropertySets *DBPROPSET) foundation.HRESULT {
+func (self *IDBProperties) SetProperties(cPropertySets uint32, rgPropertySets *DBPROPSET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a50-2a1c-11ce-ade5-00aa0044773d
@@ -966,15 +1013,15 @@ type IDBSchemaCommand struct {
 var IID_IDBSchemaCommand = win32.GUID{Data1: 0x0c733a50, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetCommand dispatches through IDBSchemaCommand's vtable slot 3.
-func (self *IDBSchemaCommand) GetCommand(pUnkOuter *systemcom.IUnknown, rguidSchema *win32.GUID, ppCommand **ICommand) foundation.HRESULT {
+func (self *IDBSchemaCommand) GetCommand(pUnkOuter *systemcom.IUnknown, rguidSchema *win32.GUID, ppCommand **ICommand) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(rguidSchema)), uintptr(unsafe.Pointer(ppCommand)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSchemas dispatches through IDBSchemaCommand's vtable slot 4.
-func (self *IDBSchemaCommand) GetSchemas(pcSchemas *uint32, prgSchemas **win32.GUID) foundation.HRESULT {
+func (self *IDBSchemaCommand) GetSchemas(pcSchemas *uint32, prgSchemas **win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcSchemas)), uintptr(unsafe.Pointer(prgSchemas)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a7b-2a1c-11ce-ade5-00aa0044773d
@@ -986,15 +1033,15 @@ type IDBSchemaRowset struct {
 var IID_IDBSchemaRowset = win32.GUID{Data1: 0x0c733a7b, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetRowset dispatches through IDBSchemaRowset's vtable slot 3.
-func (self *IDBSchemaRowset) GetRowset(pUnkOuter *systemcom.IUnknown, rguidSchema *win32.GUID, cRestrictions uint32, rgRestrictions *systemvariant.VARIANT, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *IDBSchemaRowset) GetRowset(pUnkOuter *systemcom.IUnknown, rguidSchema *win32.GUID, cRestrictions uint32, rgRestrictions *systemvariant.VARIANT, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(rguidSchema)), uintptr(cRestrictions), uintptr(unsafe.Pointer(rgRestrictions)), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSchemas dispatches through IDBSchemaRowset's vtable slot 4.
-func (self *IDBSchemaRowset) GetSchemas(pcSchemas *uint32, prgSchemas **win32.GUID, prgRestrictionSupport **uint32) foundation.HRESULT {
+func (self *IDBSchemaRowset) GetSchemas(pcSchemas *uint32, prgSchemas **win32.GUID, prgRestrictionSupport **uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcSchemas)), uintptr(unsafe.Pointer(prgSchemas)), uintptr(unsafe.Pointer(prgRestrictionSupport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a9c-2a1c-11ce-ade5-00aa0044773d
@@ -1006,15 +1053,15 @@ type IDCInfo struct {
 var IID_IDCInfo = win32.GUID{Data1: 0x0c733a9c, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetInfo dispatches through IDCInfo's vtable slot 3.
-func (self *IDCInfo) GetInfo(cInfo uint32, rgeInfoType *uint32, prgInfo **DCINFO) foundation.HRESULT {
+func (self *IDCInfo) GetInfo(cInfo uint32, rgeInfoType *uint32, prgInfo **DCINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cInfo), uintptr(unsafe.Pointer(rgeInfoType)), uintptr(unsafe.Pointer(prgInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInfo dispatches through IDCInfo's vtable slot 4.
-func (self *IDCInfo) SetInfo(cInfo uint32, rgInfo *DCINFO) foundation.HRESULT {
+func (self *IDCInfo) SetInfo(cInfo uint32, rgInfo *DCINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cInfo), uintptr(unsafe.Pointer(rgInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a8d-2a1c-11ce-ade5-00aa0044773d
@@ -1026,21 +1073,21 @@ type IDataConvert struct {
 var IID_IDataConvert = win32.GUID{Data1: 0x0c733a8d, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // DataConvert dispatches through IDataConvert's vtable slot 3.
-func (self *IDataConvert) DataConvert(wSrcType uint16, wDstType uint16, cbSrcLength uintptr, pcbDstLength *uintptr, pSrc unsafe.Pointer, pDst unsafe.Pointer, cbDstMaxLength uintptr, dbsSrcStatus uint32, pdbsStatus *uint32, bPrecision byte, bScale byte, dwFlags uint32) foundation.HRESULT {
+func (self *IDataConvert) DataConvert(wSrcType uint16, wDstType uint16, cbSrcLength uintptr, pcbDstLength *uintptr, pSrc unsafe.Pointer, pDst unsafe.Pointer, cbDstMaxLength uintptr, dbsSrcStatus uint32, pdbsStatus *uint32, bPrecision byte, bScale byte, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(wSrcType), uintptr(wDstType), uintptr(cbSrcLength), uintptr(unsafe.Pointer(pcbDstLength)), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pDst)), uintptr(cbDstMaxLength), uintptr(dbsSrcStatus), uintptr(unsafe.Pointer(pdbsStatus)), uintptr(bPrecision), uintptr(bScale), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CanConvert dispatches through IDataConvert's vtable slot 4.
-func (self *IDataConvert) CanConvert(wSrcType uint16, wDstType uint16) foundation.HRESULT {
+func (self *IDataConvert) CanConvert(wSrcType uint16, wDstType uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(wSrcType), uintptr(wDstType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConversionSize dispatches through IDataConvert's vtable slot 5.
-func (self *IDataConvert) GetConversionSize(wSrcType uint16, wDstType uint16, pcbSrcLength *uintptr, pcbDstLength *uintptr, pSrc unsafe.Pointer) foundation.HRESULT {
+func (self *IDataConvert) GetConversionSize(wSrcType uint16, wDstType uint16, pcbSrcLength *uintptr, pcbDstLength *uintptr, pSrc unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(wSrcType), uintptr(wDstType), uintptr(unsafe.Pointer(pcbSrcLength)), uintptr(unsafe.Pointer(pcbDstLength)), uintptr(unsafe.Pointer(pSrc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2206ccb1-19c1-11d1-89e0-00c04fd7a829
@@ -1052,39 +1099,45 @@ type IDataInitialize struct {
 var IID_IDataInitialize = win32.GUID{Data1: 0x2206ccb1, Data2: 0x19c1, Data3: 0x11d1, Data4: [8]byte{0x89, 0xe0, 0x00, 0xc0, 0x4f, 0xd7, 0xa8, 0x29}}
 
 // GetDataSource dispatches through IDataInitialize's vtable slot 3.
-func (self *IDataInitialize) GetDataSource(pUnkOuter *systemcom.IUnknown, dwClsCtx uint32, pwszInitializationString foundation.PWSTR, riid *win32.GUID, ppDataSource **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(pwszInitializationString)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDataSource)))
-	return foundation.HRESULT(r1)
+func (self *IDataInitialize) GetDataSource(pUnkOuter *systemcom.IUnknown, dwClsCtx uint32, pwszInitializationString string, riid *win32.GUID, ppDataSource **systemcom.IUnknown) error {
+	_pwszInitializationString := win32.UTF16Ptr(pwszInitializationString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(_pwszInitializationString)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDataSource)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInitializationString dispatches through IDataInitialize's vtable slot 4.
-func (self *IDataInitialize) GetInitializationString(pDataSource *systemcom.IUnknown, fIncludePassword byte, ppwszInitString *foundation.PWSTR) foundation.HRESULT {
+func (self *IDataInitialize) GetInitializationString(pDataSource *systemcom.IUnknown, fIncludePassword byte, ppwszInitString *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataSource)), uintptr(fIncludePassword), uintptr(unsafe.Pointer(ppwszInitString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDBInstance dispatches through IDataInitialize's vtable slot 5.
-func (self *IDataInitialize) CreateDBInstance(clsidProvider *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsCtx uint32, pwszReserved foundation.PWSTR, riid *win32.GUID, ppDataSource **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidProvider)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(pwszReserved)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDataSource)))
-	return foundation.HRESULT(r1)
+func (self *IDataInitialize) CreateDBInstance(clsidProvider *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsCtx uint32, pwszReserved string, riid *win32.GUID, ppDataSource **systemcom.IUnknown) error {
+	_pwszReserved := win32.UTF16Ptr(pwszReserved)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidProvider)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(_pwszReserved)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDataSource)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateDBInstanceEx dispatches through IDataInitialize's vtable slot 6.
-func (self *IDataInitialize) CreateDBInstanceEx(clsidProvider *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsCtx uint32, pwszReserved foundation.PWSTR, pServerInfo *systemcom.COSERVERINFO, cmq uint32, rgmqResults *systemcom.MULTI_QI) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidProvider)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(pwszReserved)), uintptr(unsafe.Pointer(pServerInfo)), uintptr(cmq), uintptr(unsafe.Pointer(rgmqResults)))
-	return foundation.HRESULT(r1)
+func (self *IDataInitialize) CreateDBInstanceEx(clsidProvider *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsCtx uint32, pwszReserved string, pServerInfo *systemcom.COSERVERINFO, cmq uint32, rgmqResults *systemcom.MULTI_QI) error {
+	_pwszReserved := win32.UTF16Ptr(pwszReserved)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidProvider)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(_pwszReserved)), uintptr(unsafe.Pointer(pServerInfo)), uintptr(cmq), uintptr(unsafe.Pointer(rgmqResults)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadStringFromStorage dispatches through IDataInitialize's vtable slot 7.
-func (self *IDataInitialize) LoadStringFromStorage(pwszFileName foundation.PWSTR, ppwszInitializationString *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszFileName)), uintptr(unsafe.Pointer(ppwszInitializationString)))
-	return foundation.HRESULT(r1)
+func (self *IDataInitialize) LoadStringFromStorage(pwszFileName string, ppwszInitializationString *foundation.PWSTR) error {
+	_pwszFileName := win32.UTF16Ptr(pwszFileName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszFileName)), uintptr(unsafe.Pointer(ppwszInitializationString)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // WriteStringToStorage dispatches through IDataInitialize's vtable slot 8.
-func (self *IDataInitialize) WriteStringToStorage(pwszFileName foundation.PWSTR, pwszInitializationString foundation.PWSTR, dwCreationDisposition uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszFileName)), uintptr(unsafe.Pointer(pwszInitializationString)), uintptr(dwCreationDisposition))
-	return foundation.HRESULT(r1)
+func (self *IDataInitialize) WriteStringToStorage(pwszFileName string, pwszInitializationString string, dwCreationDisposition uint32) error {
+	_pwszFileName := win32.UTF16Ptr(pwszFileName)
+	_pwszInitializationString := win32.UTF16Ptr(pwszInitializationString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszFileName)), uintptr(unsafe.Pointer(_pwszInitializationString)), uintptr(dwCreationDisposition))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 2206ccb2-19c1-11d1-89e0-00c04fd7a829
@@ -1096,27 +1149,27 @@ type IDataSourceLocator struct {
 var IID_IDataSourceLocator = win32.GUID{Data1: 0x2206ccb2, Data2: 0x19c1, Data3: 0x11d1, Data4: [8]byte{0x89, 0xe0, 0x00, 0xc0, 0x4f, 0xd7, 0xa8, 0x29}}
 
 // Get_hWnd dispatches through IDataSourceLocator's vtable slot 7.
-func (self *IDataSourceLocator) Get_hWnd(phwndParent *foundation.HWND) foundation.HRESULT {
+func (self *IDataSourceLocator) Get_hWnd(phwndParent *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phwndParent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_hWnd dispatches through IDataSourceLocator's vtable slot 8.
-func (self *IDataSourceLocator) Put_hWnd(hwndParent foundation.HWND) foundation.HRESULT {
+func (self *IDataSourceLocator) Put_hWnd(hwndParent foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hwndParent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PromptNew dispatches through IDataSourceLocator's vtable slot 9.
-func (self *IDataSourceLocator) PromptNew(ppADOConnection **systemcom.IDispatch) foundation.HRESULT {
+func (self *IDataSourceLocator) PromptNew(ppADOConnection **systemcom.IDispatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppADOConnection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PromptEdit dispatches through IDataSourceLocator's vtable slot 10.
-func (self *IDataSourceLocator) PromptEdit(ppADOConnection **systemcom.IDispatch, pbSuccess *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IDataSourceLocator) PromptEdit(ppADOConnection **systemcom.IDispatch, pbSuccess *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppADOConnection)), uintptr(unsafe.Pointer(pbSuccess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEntity: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-ientity
@@ -1129,51 +1182,56 @@ type IEntity struct {
 var IID_IEntity = win32.GUID{Data1: 0x24264891, Data2: 0xe80b, Data3: 0x4fd3, Data4: [8]byte{0xb7, 0xce, 0x4f, 0xf2, 0xfa, 0xe8, 0x93, 0x1f}}
 
 // Name dispatches through IEntity's vtable slot 3.
-func (self *IEntity) Name(ppszName *foundation.PWSTR) foundation.HRESULT {
+func (self *IEntity) Name(ppszName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Base dispatches through IEntity's vtable slot 4.
-func (self *IEntity) Base(pBaseEntity **IEntity) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBaseEntity)))
-	return foundation.HRESULT(r1)
+func (self *IEntity) Base() (*IEntity, error) {
+	var _pBaseEntity *IEntity
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pBaseEntity)))
+	return _pBaseEntity, win32.HRESULTError(int32(r1))
 }
 
 // Relationships dispatches through IEntity's vtable slot 5.
-func (self *IEntity) Relationships(riid *win32.GUID, pRelationships *unsafe.Pointer) foundation.HRESULT {
+func (self *IEntity) Relationships(riid *win32.GUID, pRelationships *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pRelationships)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRelationship dispatches through IEntity's vtable slot 6.
-func (self *IEntity) GetRelationship(pszRelationName foundation.PWSTR, pRelationship **IRelationship) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszRelationName)), uintptr(unsafe.Pointer(pRelationship)))
-	return foundation.HRESULT(r1)
+func (self *IEntity) GetRelationship(pszRelationName string) (*IRelationship, error) {
+	_pszRelationName := win32.UTF16Ptr(pszRelationName)
+	var _pRelationship *IRelationship
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRelationName)), uintptr(unsafe.Pointer(&_pRelationship)))
+	return _pRelationship, win32.HRESULTError(int32(r1))
 }
 
 // MetaData dispatches through IEntity's vtable slot 7.
-func (self *IEntity) MetaData(riid *win32.GUID, pMetaData *unsafe.Pointer) foundation.HRESULT {
+func (self *IEntity) MetaData(riid *win32.GUID, pMetaData *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pMetaData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NamedEntities dispatches through IEntity's vtable slot 8.
-func (self *IEntity) NamedEntities(riid *win32.GUID, pNamedEntities *unsafe.Pointer) foundation.HRESULT {
+func (self *IEntity) NamedEntities(riid *win32.GUID, pNamedEntities *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pNamedEntities)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNamedEntity dispatches through IEntity's vtable slot 9.
-func (self *IEntity) GetNamedEntity(pszValue foundation.PWSTR, ppNamedEntity **INamedEntity) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszValue)), uintptr(unsafe.Pointer(ppNamedEntity)))
-	return foundation.HRESULT(r1)
+func (self *IEntity) GetNamedEntity(pszValue string) (*INamedEntity, error) {
+	_pszValue := win32.UTF16Ptr(pszValue)
+	var _ppNamedEntity *INamedEntity
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszValue)), uintptr(unsafe.Pointer(&_ppNamedEntity)))
+	return _ppNamedEntity, win32.HRESULTError(int32(r1))
 }
 
 // DefaultPhrase dispatches through IEntity's vtable slot 10.
-func (self *IEntity) DefaultPhrase(ppszPhrase *foundation.PWSTR) foundation.HRESULT {
+func (self *IEntity) DefaultPhrase(ppszPhrase *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPhrase)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f72c8d96-6dbd-11d1-a1e8-00c04fc2fbe1
@@ -1185,33 +1243,33 @@ type IEnumItemProperties struct {
 var IID_IEnumItemProperties = win32.GUID{Data1: 0xf72c8d96, Data2: 0x6dbd, Data3: 0x11d1, Data4: [8]byte{0xa1, 0xe8, 0x00, 0xc0, 0x4f, 0xc2, 0xfb, 0xe1}}
 
 // Next dispatches through IEnumItemProperties's vtable slot 3.
-func (self *IEnumItemProperties) Next(celt uint32, rgelt *ITEMPROP, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumItemProperties) Next(celt uint32, rgelt *ITEMPROP, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumItemProperties's vtable slot 4.
-func (self *IEnumItemProperties) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumItemProperties) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumItemProperties's vtable slot 5.
-func (self *IEnumItemProperties) Reset() foundation.HRESULT {
+func (self *IEnumItemProperties) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumItemProperties's vtable slot 6.
-func (self *IEnumItemProperties) Clone(ppenum **IEnumItemProperties) foundation.HRESULT {
+func (self *IEnumItemProperties) Clone(ppenum **IEnumItemProperties) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through IEnumItemProperties's vtable slot 7.
-func (self *IEnumItemProperties) GetCount(pnCount *uint32) foundation.HRESULT {
+func (self *IEnumItemProperties) GetCount(pnCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumSearchRoots: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-ienumsearchroots
@@ -1224,27 +1282,28 @@ type IEnumSearchRoots struct {
 var IID_IEnumSearchRoots = win32.GUID{Data1: 0xab310581, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x52}}
 
 // Next dispatches through IEnumSearchRoots's vtable slot 3.
-func (self *IEnumSearchRoots) Next(celt uint32, rgelt **ISearchRoot, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumSearchRoots) Next(celt uint32, rgelt **ISearchRoot, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumSearchRoots's vtable slot 4.
-func (self *IEnumSearchRoots) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumSearchRoots) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumSearchRoots's vtable slot 5.
-func (self *IEnumSearchRoots) Reset() foundation.HRESULT {
+func (self *IEnumSearchRoots) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumSearchRoots's vtable slot 6.
-func (self *IEnumSearchRoots) Clone(ppenum **IEnumSearchRoots) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumSearchRoots) Clone() (*IEnumSearchRoots, error) {
+	var _ppenum *IEnumSearchRoots
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppenum)))
+	return _ppenum, win32.HRESULTError(int32(r1))
 }
 
 // IEnumSearchScopeRules: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-ienumsearchscoperules
@@ -1257,27 +1316,28 @@ type IEnumSearchScopeRules struct {
 var IID_IEnumSearchScopeRules = win32.GUID{Data1: 0xab310581, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x54}}
 
 // Next dispatches through IEnumSearchScopeRules's vtable slot 3.
-func (self *IEnumSearchScopeRules) Next(celt uint32, pprgelt **ISearchScopeRule, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumSearchScopeRules) Next(celt uint32, pprgelt **ISearchScopeRule, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pprgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumSearchScopeRules's vtable slot 4.
-func (self *IEnumSearchScopeRules) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumSearchScopeRules) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumSearchScopeRules's vtable slot 5.
-func (self *IEnumSearchScopeRules) Reset() foundation.HRESULT {
+func (self *IEnumSearchScopeRules) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumSearchScopeRules's vtable slot 6.
-func (self *IEnumSearchScopeRules) Clone(ppenum **IEnumSearchScopeRules) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+func (self *IEnumSearchScopeRules) Clone() (*IEnumSearchScopeRules, error) {
+	var _ppenum *IEnumSearchScopeRules
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppenum)))
+	return _ppenum, win32.HRESULTError(int32(r1))
 }
 
 // IID: f72c8d97-6dbd-11d1-a1e8-00c04fc2fbe1
@@ -1289,33 +1349,33 @@ type IEnumSubscription struct {
 var IID_IEnumSubscription = win32.GUID{Data1: 0xf72c8d97, Data2: 0x6dbd, Data3: 0x11d1, Data4: [8]byte{0xa1, 0xe8, 0x00, 0xc0, 0x4f, 0xc2, 0xfb, 0xe1}}
 
 // Next dispatches through IEnumSubscription's vtable slot 3.
-func (self *IEnumSubscription) Next(celt uint32, rgelt *win32.GUID, pceltFetched *uint32) foundation.HRESULT {
+func (self *IEnumSubscription) Next(celt uint32, rgelt *win32.GUID, pceltFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumSubscription's vtable slot 4.
-func (self *IEnumSubscription) Skip(celt uint32) foundation.HRESULT {
+func (self *IEnumSubscription) Skip(celt uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(celt))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumSubscription's vtable slot 5.
-func (self *IEnumSubscription) Reset() foundation.HRESULT {
+func (self *IEnumSubscription) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumSubscription's vtable slot 6.
-func (self *IEnumSubscription) Clone(ppenum **IEnumSubscription) foundation.HRESULT {
+func (self *IEnumSubscription) Clone(ppenum **IEnumSubscription) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCount dispatches through IEnumSubscription's vtable slot 7.
-func (self *IEnumSubscription) GetCount(pnCount *uint32) foundation.HRESULT {
+func (self *IEnumSubscription) GetCount(pnCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a66-2a1c-11ce-ade5-00aa0044773d
@@ -1327,21 +1387,21 @@ type IErrorLookup struct {
 var IID_IErrorLookup = win32.GUID{Data1: 0x0c733a66, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetErrorDescription dispatches through IErrorLookup's vtable slot 3.
-func (self *IErrorLookup) GetErrorDescription(hrError foundation.HRESULT, dwLookupID uint32, pdispparams *systemcom.DISPPARAMS, lcid uint32, pbstrSource *foundation.BSTR, pbstrDescription *foundation.BSTR) foundation.HRESULT {
+func (self *IErrorLookup) GetErrorDescription(hrError foundation.HRESULT, dwLookupID uint32, pdispparams *systemcom.DISPPARAMS, lcid uint32, pbstrSource *foundation.BSTR, pbstrDescription *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hrError), uintptr(dwLookupID), uintptr(unsafe.Pointer(pdispparams)), uintptr(lcid), uintptr(unsafe.Pointer(pbstrSource)), uintptr(unsafe.Pointer(pbstrDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHelpInfo dispatches through IErrorLookup's vtable slot 4.
-func (self *IErrorLookup) GetHelpInfo(hrError foundation.HRESULT, dwLookupID uint32, lcid uint32, pbstrHelpFile *foundation.BSTR, pdwHelpContext *uint32) foundation.HRESULT {
+func (self *IErrorLookup) GetHelpInfo(hrError foundation.HRESULT, dwLookupID uint32, lcid uint32, pbstrHelpFile *foundation.BSTR, pdwHelpContext *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hrError), uintptr(dwLookupID), uintptr(lcid), uintptr(unsafe.Pointer(pbstrHelpFile)), uintptr(unsafe.Pointer(pdwHelpContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseErrors dispatches through IErrorLookup's vtable slot 5.
-func (self *IErrorLookup) ReleaseErrors(dwDynamicErrorID uint32) foundation.HRESULT {
+func (self *IErrorLookup) ReleaseErrors(dwDynamicErrorID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwDynamicErrorID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a67-2a1c-11ce-ade5-00aa0044773d
@@ -1353,39 +1413,39 @@ type IErrorRecords struct {
 var IID_IErrorRecords = win32.GUID{Data1: 0x0c733a67, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // AddErrorRecord dispatches through IErrorRecords's vtable slot 3.
-func (self *IErrorRecords) AddErrorRecord(pErrorInfo *ERRORINFO, dwLookupID uint32, pdispparams *systemcom.DISPPARAMS, punkCustomError *systemcom.IUnknown, dwDynamicErrorID uint32) foundation.HRESULT {
+func (self *IErrorRecords) AddErrorRecord(pErrorInfo *ERRORINFO, dwLookupID uint32, pdispparams *systemcom.DISPPARAMS, punkCustomError *systemcom.IUnknown, dwDynamicErrorID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pErrorInfo)), uintptr(dwLookupID), uintptr(unsafe.Pointer(pdispparams)), uintptr(unsafe.Pointer(punkCustomError)), uintptr(dwDynamicErrorID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBasicErrorInfo dispatches through IErrorRecords's vtable slot 4.
-func (self *IErrorRecords) GetBasicErrorInfo(ulRecordNum uint32, pErrorInfo *ERRORINFO) foundation.HRESULT {
+func (self *IErrorRecords) GetBasicErrorInfo(ulRecordNum uint32, pErrorInfo *ERRORINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulRecordNum), uintptr(unsafe.Pointer(pErrorInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCustomErrorObject dispatches through IErrorRecords's vtable slot 5.
-func (self *IErrorRecords) GetCustomErrorObject(ulRecordNum uint32, riid *win32.GUID, ppObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *IErrorRecords) GetCustomErrorObject(ulRecordNum uint32, riid *win32.GUID, ppObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulRecordNum), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrorInfo dispatches through IErrorRecords's vtable slot 6.
-func (self *IErrorRecords) GetErrorInfo(ulRecordNum uint32, lcid uint32, ppErrorInfo **systemcom.IErrorInfo) foundation.HRESULT {
+func (self *IErrorRecords) GetErrorInfo(ulRecordNum uint32, lcid uint32, ppErrorInfo **systemcom.IErrorInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulRecordNum), uintptr(lcid), uintptr(unsafe.Pointer(ppErrorInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrorParameters dispatches through IErrorRecords's vtable slot 7.
-func (self *IErrorRecords) GetErrorParameters(ulRecordNum uint32, pdispparams *systemcom.DISPPARAMS) foundation.HRESULT {
+func (self *IErrorRecords) GetErrorParameters(ulRecordNum uint32, pdispparams *systemcom.DISPPARAMS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ulRecordNum), uintptr(unsafe.Pointer(pdispparams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecordCount dispatches through IErrorRecords's vtable slot 8.
-func (self *IErrorRecords) GetRecordCount(pcRecords *uint32) foundation.HRESULT {
+func (self *IErrorRecords) GetRecordCount(pcRecords *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcRecords)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a75-2a1c-11ce-ade5-00aa0044773d
@@ -1397,9 +1457,9 @@ type IGetDataSource struct {
 var IID_IGetDataSource = win32.GUID{Data1: 0x0c733a75, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetDataSource dispatches through IGetDataSource's vtable slot 3.
-func (self *IGetDataSource) GetDataSource(riid *win32.GUID, ppDataSource **systemcom.IUnknown) foundation.HRESULT {
+func (self *IGetDataSource) GetDataSource(riid *win32.GUID, ppDataSource **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDataSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aaf-2a1c-11ce-ade5-00aa0044773d
@@ -1411,15 +1471,15 @@ type IGetRow struct {
 var IID_IGetRow = win32.GUID{Data1: 0x0c733aaf, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetRowFromHROW dispatches through IGetRow's vtable slot 3.
-func (self *IGetRow) GetRowFromHROW(pUnkOuter *systemcom.IUnknown, hRow uintptr, riid *win32.GUID, ppUnk **systemcom.IUnknown) foundation.HRESULT {
+func (self *IGetRow) GetRowFromHROW(pUnkOuter *systemcom.IUnknown, hRow uintptr, riid *win32.GUID, ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(hRow), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetURLFromHROW dispatches through IGetRow's vtable slot 4.
-func (self *IGetRow) GetURLFromHROW(hRow uintptr, ppwszURL *foundation.PWSTR) foundation.HRESULT {
+func (self *IGetRow) GetURLFromHROW(hRow uintptr, ppwszURL *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hRow), uintptr(unsafe.Pointer(ppwszURL)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aba-2a1c-11ce-ade5-00aa0044773d
@@ -1431,9 +1491,9 @@ type IGetSession struct {
 var IID_IGetSession = win32.GUID{Data1: 0x0c733aba, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetSession dispatches through IGetSession's vtable slot 3.
-func (self *IGetSession) GetSession(riid *win32.GUID, ppSession **systemcom.IUnknown) foundation.HRESULT {
+func (self *IGetSession) GetSession(riid *win32.GUID, ppSession **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733abb-2a1c-11ce-ade5-00aa0044773d
@@ -1445,9 +1505,9 @@ type IGetSourceRow struct {
 var IID_IGetSourceRow = win32.GUID{Data1: 0x0c733abb, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetSourceRow dispatches through IGetSourceRow's vtable slot 3.
-func (self *IGetSourceRow) GetSourceRow(riid *win32.GUID, ppRow **systemcom.IUnknown) foundation.HRESULT {
+func (self *IGetSourceRow) GetSourceRow(riid *win32.GUID, ppRow **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppRow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a68-2a1c-11ce-ade5-00aa0044773d
@@ -1459,15 +1519,15 @@ type IIndexDefinition struct {
 var IID_IIndexDefinition = win32.GUID{Data1: 0x0c733a68, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // CreateIndex dispatches through IIndexDefinition's vtable slot 3.
-func (self *IIndexDefinition) CreateIndex(pTableID *storageindexserver.DBID, pIndexID *storageindexserver.DBID, cIndexColumnDescs uintptr, rgIndexColumnDescs *DBINDEXCOLUMNDESC, cPropertySets uint32, rgPropertySets *DBPROPSET, ppIndexID **storageindexserver.DBID) foundation.HRESULT {
+func (self *IIndexDefinition) CreateIndex(pTableID *storageindexserver.DBID, pIndexID *storageindexserver.DBID, cIndexColumnDescs uintptr, rgIndexColumnDescs *DBINDEXCOLUMNDESC, cPropertySets uint32, rgPropertySets *DBPROPSET, ppIndexID **storageindexserver.DBID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pIndexID)), uintptr(cIndexColumnDescs), uintptr(unsafe.Pointer(rgIndexColumnDescs)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppIndexID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DropIndex dispatches through IIndexDefinition's vtable slot 4.
-func (self *IIndexDefinition) DropIndex(pTableID *storageindexserver.DBID, pIndexID *storageindexserver.DBID) foundation.HRESULT {
+func (self *IIndexDefinition) DropIndex(pTableID *storageindexserver.DBID, pIndexID *storageindexserver.DBID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pIndexID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IInterval: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-iinterval
@@ -1480,9 +1540,9 @@ type IInterval struct {
 var IID_IInterval = win32.GUID{Data1: 0x6bf0a714, Data2: 0x3c18, Data3: 0x430b, Data4: [8]byte{0x8b, 0x5d, 0x83, 0xb1, 0xc2, 0x34, 0xd3, 0xdb}}
 
 // GetLimits dispatches through IInterval's vtable slot 3.
-func (self *IInterval) GetLimits(pilkLower *INTERVAL_LIMIT_KIND, ppropvarLower *systemcomstructuredstorage.PROPVARIANT, pilkUpper *INTERVAL_LIMIT_KIND, ppropvarUpper *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IInterval) GetLimits(pilkLower *INTERVAL_LIMIT_KIND, ppropvarLower *systemcomstructuredstorage.PROPVARIANT, pilkUpper *INTERVAL_LIMIT_KIND, ppropvarUpper *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pilkLower)), uintptr(unsafe.Pointer(ppropvarLower)), uintptr(unsafe.Pointer(pilkUpper)), uintptr(unsafe.Pointer(ppropvarUpper)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ILoadFilter: https://learn.microsoft.com/windows/win32/api/filtereg/nn-filtereg-iloadfilter
@@ -1495,21 +1555,26 @@ type ILoadFilter struct {
 var IID_ILoadFilter = win32.GUID{Data1: 0xc7310722, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x4f}}
 
 // LoadIFilter dispatches through ILoadFilter's vtable slot 3.
-func (self *ILoadFilter) LoadIFilter(pwcsPath foundation.PWSTR, pFilteredSources *FILTERED_DATA_SOURCES, pUnkOuter *systemcom.IUnknown, fUseDefault foundation.BOOL, pFilterClsid *win32.GUID, SearchDecSize *int32, pwcsSearchDesc **uint16, ppIFilt **storageindexserver.IFilter) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwcsPath)), uintptr(unsafe.Pointer(pFilteredSources)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(fUseDefault), uintptr(unsafe.Pointer(pFilterClsid)), uintptr(unsafe.Pointer(SearchDecSize)), uintptr(unsafe.Pointer(pwcsSearchDesc)), uintptr(unsafe.Pointer(ppIFilt)))
-	return foundation.HRESULT(r1)
+func (self *ILoadFilter) LoadIFilter(pwcsPath string, pFilteredSources *FILTERED_DATA_SOURCES, pUnkOuter *systemcom.IUnknown, fUseDefault bool, pFilterClsid *win32.GUID, SearchDecSize *int32, pwcsSearchDesc **uint16, ppIFilt **storageindexserver.IFilter) error {
+	_pwcsPath := win32.UTF16Ptr(pwcsPath)
+	_fUseDefault := win32.Bool32(fUseDefault)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcsPath)), uintptr(unsafe.Pointer(pFilteredSources)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(_fUseDefault), uintptr(unsafe.Pointer(pFilterClsid)), uintptr(unsafe.Pointer(SearchDecSize)), uintptr(unsafe.Pointer(pwcsSearchDesc)), uintptr(unsafe.Pointer(ppIFilt)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadIFilterFromStorage dispatches through ILoadFilter's vtable slot 4.
-func (self *ILoadFilter) LoadIFilterFromStorage(pStg *systemcomstructuredstorage.IStorage, pUnkOuter *systemcom.IUnknown, pwcsOverride foundation.PWSTR, fUseDefault foundation.BOOL, pFilterClsid *win32.GUID, SearchDecSize *int32, pwcsSearchDesc **uint16, ppIFilt **storageindexserver.IFilter) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pwcsOverride)), uintptr(fUseDefault), uintptr(unsafe.Pointer(pFilterClsid)), uintptr(unsafe.Pointer(SearchDecSize)), uintptr(unsafe.Pointer(pwcsSearchDesc)), uintptr(unsafe.Pointer(ppIFilt)))
-	return foundation.HRESULT(r1)
+func (self *ILoadFilter) LoadIFilterFromStorage(pStg *systemcomstructuredstorage.IStorage, pUnkOuter *systemcom.IUnknown, pwcsOverride string, fUseDefault bool, pFilterClsid *win32.GUID, SearchDecSize *int32, pwcsSearchDesc **uint16, ppIFilt **storageindexserver.IFilter) error {
+	_pwcsOverride := win32.UTF16Ptr(pwcsOverride)
+	_fUseDefault := win32.Bool32(fUseDefault)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(_pwcsOverride)), uintptr(_fUseDefault), uintptr(unsafe.Pointer(pFilterClsid)), uintptr(unsafe.Pointer(SearchDecSize)), uintptr(unsafe.Pointer(pwcsSearchDesc)), uintptr(unsafe.Pointer(ppIFilt)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadIFilterFromStream dispatches through ILoadFilter's vtable slot 5.
-func (self *ILoadFilter) LoadIFilterFromStream(pStm *systemcom.IStream, pFilteredSources *FILTERED_DATA_SOURCES, pUnkOuter *systemcom.IUnknown, fUseDefault foundation.BOOL, pFilterClsid *win32.GUID, SearchDecSize *int32, pwcsSearchDesc **uint16, ppIFilt **storageindexserver.IFilter) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(pFilteredSources)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(fUseDefault), uintptr(unsafe.Pointer(pFilterClsid)), uintptr(unsafe.Pointer(SearchDecSize)), uintptr(unsafe.Pointer(pwcsSearchDesc)), uintptr(unsafe.Pointer(ppIFilt)))
-	return foundation.HRESULT(r1)
+func (self *ILoadFilter) LoadIFilterFromStream(pStm *systemcom.IStream, pFilteredSources *FILTERED_DATA_SOURCES, pUnkOuter *systemcom.IUnknown, fUseDefault bool, pFilterClsid *win32.GUID, SearchDecSize *int32, pwcsSearchDesc **uint16, ppIFilt **storageindexserver.IFilter) error {
+	_fUseDefault := win32.Bool32(fUseDefault)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(pFilteredSources)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(_fUseDefault), uintptr(unsafe.Pointer(pFilterClsid)), uintptr(unsafe.Pointer(SearchDecSize)), uintptr(unsafe.Pointer(pwcsSearchDesc)), uintptr(unsafe.Pointer(ppIFilt)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 40bdbd34-780b-48d3-9bb6-12ebd4ad2e75
@@ -1521,9 +1586,10 @@ type ILoadFilterWithPrivateComActivation struct {
 var IID_ILoadFilterWithPrivateComActivation = win32.GUID{Data1: 0x40bdbd34, Data2: 0x780b, Data3: 0x48d3, Data4: [8]byte{0x9b, 0xb6, 0x12, 0xeb, 0xd4, 0xad, 0x2e, 0x75}}
 
 // LoadIFilterWithPrivateComActivation dispatches through ILoadFilterWithPrivateComActivation's vtable slot 6.
-func (self *ILoadFilterWithPrivateComActivation) LoadIFilterWithPrivateComActivation(filteredSources *FILTERED_DATA_SOURCES, useDefault foundation.BOOL, filterClsid *win32.GUID, isFilterPrivateComActivated *foundation.BOOL, filterObj **storageindexserver.IFilter) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filteredSources)), uintptr(useDefault), uintptr(unsafe.Pointer(filterClsid)), uintptr(unsafe.Pointer(isFilterPrivateComActivated)), uintptr(unsafe.Pointer(filterObj)))
-	return foundation.HRESULT(r1)
+func (self *ILoadFilterWithPrivateComActivation) LoadIFilterWithPrivateComActivation(filteredSources *FILTERED_DATA_SOURCES, useDefault bool, filterClsid *win32.GUID, isFilterPrivateComActivated *foundation.BOOL, filterObj **storageindexserver.IFilter) error {
+	_useDefault := win32.Bool32(useDefault)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(filteredSources)), uintptr(_useDefault), uintptr(unsafe.Pointer(filterClsid)), uintptr(unsafe.Pointer(isFilterPrivateComActivated)), uintptr(unsafe.Pointer(filterObj)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a07cccd1-8148-11d0-87bb-00c04fc33942
@@ -1535,33 +1601,33 @@ type IMDDataset struct {
 var IID_IMDDataset = win32.GUID{Data1: 0xa07cccd1, Data2: 0x8148, Data3: 0x11d0, Data4: [8]byte{0x87, 0xbb, 0x00, 0xc0, 0x4f, 0xc3, 0x39, 0x42}}
 
 // FreeAxisInfo dispatches through IMDDataset's vtable slot 3.
-func (self *IMDDataset) FreeAxisInfo(cAxes uintptr, rgAxisInfo *MDAXISINFO) foundation.HRESULT {
+func (self *IMDDataset) FreeAxisInfo(cAxes uintptr, rgAxisInfo *MDAXISINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cAxes), uintptr(unsafe.Pointer(rgAxisInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAxisInfo dispatches through IMDDataset's vtable slot 4.
-func (self *IMDDataset) GetAxisInfo(pcAxes *uintptr, prgAxisInfo **MDAXISINFO) foundation.HRESULT {
+func (self *IMDDataset) GetAxisInfo(pcAxes *uintptr, prgAxisInfo **MDAXISINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcAxes)), uintptr(unsafe.Pointer(prgAxisInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAxisRowset dispatches through IMDDataset's vtable slot 5.
-func (self *IMDDataset) GetAxisRowset(pUnkOuter *systemcom.IUnknown, iAxis uintptr, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMDDataset) GetAxisRowset(pUnkOuter *systemcom.IUnknown, iAxis uintptr, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(iAxis), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCellData dispatches through IMDDataset's vtable slot 6.
-func (self *IMDDataset) GetCellData(hAccessor HACCESSOR, ulStartCell uintptr, ulEndCell uintptr, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IMDDataset) GetCellData(hAccessor HACCESSOR, ulStartCell uintptr, ulEndCell uintptr, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hAccessor), uintptr(ulStartCell), uintptr(ulEndCell), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSpecification dispatches through IMDDataset's vtable slot 7.
-func (self *IMDDataset) GetSpecification(riid *win32.GUID, ppSpecification **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMDDataset) GetSpecification(riid *win32.GUID, ppSpecification **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppSpecification)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a07cccd2-8148-11d0-87bb-00c04fc33942
@@ -1573,15 +1639,15 @@ type IMDFind struct {
 var IID_IMDFind = win32.GUID{Data1: 0xa07cccd2, Data2: 0x8148, Data3: 0x11d0, Data4: [8]byte{0x87, 0xbb, 0x00, 0xc0, 0x4f, 0xc3, 0x39, 0x42}}
 
 // FindCell dispatches through IMDFind's vtable slot 3.
-func (self *IMDFind) FindCell(ulStartingOrdinal uintptr, cMembers uintptr, rgpwszMember *foundation.PWSTR, pulCellOrdinal *uintptr) foundation.HRESULT {
+func (self *IMDFind) FindCell(ulStartingOrdinal uintptr, cMembers uintptr, rgpwszMember *foundation.PWSTR, pulCellOrdinal *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulStartingOrdinal), uintptr(cMembers), uintptr(unsafe.Pointer(rgpwszMember)), uintptr(unsafe.Pointer(pulCellOrdinal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindTuple dispatches through IMDFind's vtable slot 4.
-func (self *IMDFind) FindTuple(ulAxisIdentifier uint32, ulStartingOrdinal uintptr, cMembers uintptr, rgpwszMember *foundation.PWSTR, pulTupleOrdinal *uint32) foundation.HRESULT {
+func (self *IMDFind) FindTuple(ulAxisIdentifier uint32, ulStartingOrdinal uintptr, cMembers uintptr, rgpwszMember *foundation.PWSTR, pulTupleOrdinal *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulAxisIdentifier), uintptr(ulStartingOrdinal), uintptr(cMembers), uintptr(unsafe.Pointer(rgpwszMember)), uintptr(unsafe.Pointer(pulTupleOrdinal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aa0-2a1c-11ce-ade5-00aa0044773d
@@ -1593,9 +1659,9 @@ type IMDRangeRowset struct {
 var IID_IMDRangeRowset = win32.GUID{Data1: 0x0c733aa0, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetRangeRowset dispatches through IMDRangeRowset's vtable slot 3.
-func (self *IMDRangeRowset) GetRangeRowset(pUnkOuter *systemcom.IUnknown, ulStartCell uintptr, ulEndCell uintptr, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMDRangeRowset) GetRangeRowset(pUnkOuter *systemcom.IUnknown, ulStartCell uintptr, ulEndCell uintptr, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(ulStartCell), uintptr(ulEndCell), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMetaData: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-imetadata
@@ -1608,9 +1674,9 @@ type IMetaData struct {
 var IID_IMetaData = win32.GUID{Data1: 0x780102b0, Data2: 0xc43b, Data3: 0x4876, Data4: [8]byte{0xbc, 0x7b, 0x5e, 0x9b, 0xa5, 0xc8, 0x87, 0x94}}
 
 // GetData dispatches through IMetaData's vtable slot 3.
-func (self *IMetaData) GetData(ppszKey *foundation.PWSTR, ppszValue *foundation.PWSTR) foundation.HRESULT {
+func (self *IMetaData) GetData(ppszKey *foundation.PWSTR, ppszValue *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszKey)), uintptr(unsafe.Pointer(ppszValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a90-2a1c-11ce-ade5-00aa0044773d
@@ -1622,9 +1688,9 @@ type IMultipleResults struct {
 var IID_IMultipleResults = win32.GUID{Data1: 0x0c733a90, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetResult dispatches through IMultipleResults's vtable slot 3.
-func (self *IMultipleResults) GetResult(pUnkOuter *systemcom.IUnknown, lResultFlag uintptr, riid *win32.GUID, pcRowsAffected *uintptr, ppRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMultipleResults) GetResult(pUnkOuter *systemcom.IUnknown, lResultFlag uintptr, riid *win32.GUID, pcRowsAffected *uintptr, ppRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(lResultFlag), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pcRowsAffected)), uintptr(unsafe.Pointer(ppRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INamedEntity: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-inamedentity
@@ -1637,15 +1703,16 @@ type INamedEntity struct {
 var IID_INamedEntity = win32.GUID{Data1: 0xabdbd0b1, Data2: 0x7d54, Data3: 0x49fb, Data4: [8]byte{0xab, 0x5c, 0xbf, 0xf4, 0x13, 0x00, 0x04, 0xcd}}
 
 // GetValue dispatches through INamedEntity's vtable slot 3.
-func (self *INamedEntity) GetValue(ppszValue *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszValue)))
-	return foundation.HRESULT(r1)
+func (self *INamedEntity) GetValue() (foundation.PWSTR, error) {
+	var _ppszValue foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszValue)))
+	return _ppszValue, win32.HRESULTError(int32(r1))
 }
 
 // DefaultPhrase dispatches through INamedEntity's vtable slot 4.
-func (self *INamedEntity) DefaultPhrase(ppszPhrase *foundation.PWSTR) foundation.HRESULT {
+func (self *INamedEntity) DefaultPhrase(ppszPhrase *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPhrase)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // INamedEntityCollector: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-inamedentitycollector
@@ -1658,9 +1725,10 @@ type INamedEntityCollector struct {
 var IID_INamedEntityCollector = win32.GUID{Data1: 0xaf2440f6, Data2: 0x8afc, Data3: 0x47d0, Data4: [8]byte{0x9a, 0x7f, 0x39, 0x6a, 0x0a, 0xcf, 0xb4, 0x3d}}
 
 // Add dispatches through INamedEntityCollector's vtable slot 3.
-func (self *INamedEntityCollector) Add(beginSpan uint32, endSpan uint32, beginActual uint32, endActual uint32, pType *IEntity, pszValue foundation.PWSTR, certainty NAMED_ENTITY_CERTAINTY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(beginSpan), uintptr(endSpan), uintptr(beginActual), uintptr(endActual), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pszValue)), uintptr(certainty))
-	return foundation.HRESULT(r1)
+func (self *INamedEntityCollector) Add(beginSpan uint32, endSpan uint32, beginActual uint32, endActual uint32, pType *IEntity, pszValue string, certainty NAMED_ENTITY_CERTAINTY) error {
+	_pszValue := win32.UTF16Ptr(pszValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(beginSpan), uintptr(endSpan), uintptr(beginActual), uintptr(endActual), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(_pszValue)), uintptr(certainty))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aa3-2a1c-11ce-ade5-00aa0044773d
@@ -1672,33 +1740,33 @@ type IObjectAccessControl struct {
 var IID_IObjectAccessControl = win32.GUID{Data1: 0x0c733aa3, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetObjectAccessRights dispatches through IObjectAccessControl's vtable slot 3.
-func (self *IObjectAccessControl) GetObjectAccessRights(pObject *SEC_OBJECT, pcAccessEntries *uint32, prgAccessEntries **securityauthorization.EXPLICIT_ACCESS_W) foundation.HRESULT {
+func (self *IObjectAccessControl) GetObjectAccessRights(pObject *SEC_OBJECT, pcAccessEntries *uint32, prgAccessEntries **securityauthorization.EXPLICIT_ACCESS_W) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(pcAccessEntries)), uintptr(unsafe.Pointer(prgAccessEntries)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetObjectOwner dispatches through IObjectAccessControl's vtable slot 4.
-func (self *IObjectAccessControl) GetObjectOwner(pObject *SEC_OBJECT, ppOwner **securityauthorization.TRUSTEE_W) foundation.HRESULT {
+func (self *IObjectAccessControl) GetObjectOwner(pObject *SEC_OBJECT, ppOwner **securityauthorization.TRUSTEE_W) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(ppOwner)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsObjectAccessAllowed dispatches through IObjectAccessControl's vtable slot 5.
-func (self *IObjectAccessControl) IsObjectAccessAllowed(pObject *SEC_OBJECT, pAccessEntry *securityauthorization.EXPLICIT_ACCESS_W, pfResult *foundation.BOOL) foundation.HRESULT {
+func (self *IObjectAccessControl) IsObjectAccessAllowed(pObject *SEC_OBJECT, pAccessEntry *securityauthorization.EXPLICIT_ACCESS_W, pfResult *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(pAccessEntry)), uintptr(unsafe.Pointer(pfResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetObjectAccessRights dispatches through IObjectAccessControl's vtable slot 6.
-func (self *IObjectAccessControl) SetObjectAccessRights(pObject *SEC_OBJECT, cAccessEntries uint32, prgAccessEntries *securityauthorization.EXPLICIT_ACCESS_W) foundation.HRESULT {
+func (self *IObjectAccessControl) SetObjectAccessRights(pObject *SEC_OBJECT, cAccessEntries uint32, prgAccessEntries *securityauthorization.EXPLICIT_ACCESS_W) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(cAccessEntries), uintptr(unsafe.Pointer(prgAccessEntries)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetObjectOwner dispatches through IObjectAccessControl's vtable slot 7.
-func (self *IObjectAccessControl) SetObjectOwner(pObject *SEC_OBJECT, pOwner *securityauthorization.TRUSTEE_W) foundation.HRESULT {
+func (self *IObjectAccessControl) SetObjectOwner(pObject *SEC_OBJECT, pOwner *securityauthorization.TRUSTEE_W) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObject)), uintptr(unsafe.Pointer(pOwner)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IOpLockStatus: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-ioplockstatus
@@ -1711,21 +1779,21 @@ type IOpLockStatus struct {
 var IID_IOpLockStatus = win32.GUID{Data1: 0xc731065d, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x4f}}
 
 // IsOplockValid dispatches through IOpLockStatus's vtable slot 3.
-func (self *IOpLockStatus) IsOplockValid(pfIsOplockValid *foundation.BOOL) foundation.HRESULT {
+func (self *IOpLockStatus) IsOplockValid(pfIsOplockValid *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsOplockValid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsOplockBroken dispatches through IOpLockStatus's vtable slot 4.
-func (self *IOpLockStatus) IsOplockBroken(pfIsOplockBroken *foundation.BOOL) foundation.HRESULT {
+func (self *IOpLockStatus) IsOplockBroken(pfIsOplockBroken *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsOplockBroken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOplockEventHandle dispatches through IOpLockStatus's vtable slot 5.
-func (self *IOpLockStatus) GetOplockEventHandle(phOplockEv *foundation.HANDLE) foundation.HRESULT {
+func (self *IOpLockStatus) GetOplockEventHandle(phOplockEv *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phOplockEv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a69-2a1c-11ce-ade5-00aa0044773d
@@ -1737,9 +1805,9 @@ type IOpenRowset struct {
 var IID_IOpenRowset = win32.GUID{Data1: 0x0c733a69, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // OpenRowset dispatches through IOpenRowset's vtable slot 3.
-func (self *IOpenRowset) OpenRowset(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, pIndexID *storageindexserver.DBID, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *IOpenRowset) OpenRowset(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, pIndexID *storageindexserver.DBID, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pIndexID)), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aaa-2a1c-11ce-ade5-00aa0044773d
@@ -1751,9 +1819,9 @@ type IParentRowset struct {
 var IID_IParentRowset = win32.GUID{Data1: 0x0c733aaa, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetChildRowset dispatches through IParentRowset's vtable slot 3.
-func (self *IParentRowset) GetChildRowset(pUnkOuter *systemcom.IUnknown, iOrdinal uintptr, riid *win32.GUID, ppRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *IParentRowset) GetChildRowset(pUnkOuter *systemcom.IUnknown, iOrdinal uintptr, riid *win32.GUID, ppRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(iOrdinal), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IProtocolHandlerSite: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-iprotocolhandlersite
@@ -1766,9 +1834,11 @@ type IProtocolHandlerSite struct {
 var IID_IProtocolHandlerSite = win32.GUID{Data1: 0x0b63e385, Data2: 0x9ccc, Data3: 0x11d0, Data4: [8]byte{0xbc, 0xdb, 0x00, 0x80, 0x5f, 0xcc, 0xce, 0x04}}
 
 // GetFilter dispatches through IProtocolHandlerSite's vtable slot 3.
-func (self *IProtocolHandlerSite) GetFilter(pclsidObj *win32.GUID, pcwszContentType foundation.PWSTR, pcwszExtension foundation.PWSTR, ppFilter **storageindexserver.IFilter) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pclsidObj)), uintptr(unsafe.Pointer(pcwszContentType)), uintptr(unsafe.Pointer(pcwszExtension)), uintptr(unsafe.Pointer(ppFilter)))
-	return foundation.HRESULT(r1)
+func (self *IProtocolHandlerSite) GetFilter(pclsidObj *win32.GUID, pcwszContentType string, pcwszExtension string, ppFilter **storageindexserver.IFilter) error {
+	_pcwszContentType := win32.UTF16Ptr(pcwszContentType)
+	_pcwszExtension := win32.UTF16Ptr(pcwszExtension)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pclsidObj)), uintptr(unsafe.Pointer(_pcwszContentType)), uintptr(unsafe.Pointer(_pcwszExtension)), uintptr(unsafe.Pointer(ppFilter)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a4d-2a1c-11ce-ade5-00aa0044773d
@@ -1780,9 +1850,9 @@ type IProvideMoniker struct {
 var IID_IProvideMoniker = win32.GUID{Data1: 0x0c733a4d, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetMoniker dispatches through IProvideMoniker's vtable slot 3.
-func (self *IProvideMoniker) GetMoniker(ppIMoniker **systemcom.IMoniker) foundation.HRESULT {
+func (self *IProvideMoniker) GetMoniker(ppIMoniker **systemcom.IMoniker) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIMoniker)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IQueryParser: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-iqueryparser
@@ -1795,51 +1865,61 @@ type IQueryParser struct {
 var IID_IQueryParser = win32.GUID{Data1: 0x2ebdee67, Data2: 0x3505, Data3: 0x43f8, Data4: [8]byte{0x99, 0x46, 0xea, 0x44, 0xab, 0xc8, 0xe5, 0xb0}}
 
 // Parse dispatches through IQueryParser's vtable slot 3.
-func (self *IQueryParser) Parse(pszInputString foundation.PWSTR, pCustomProperties *systemcom.IEnumUnknown, ppSolution **IQuerySolution) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszInputString)), uintptr(unsafe.Pointer(pCustomProperties)), uintptr(unsafe.Pointer(ppSolution)))
-	return foundation.HRESULT(r1)
+func (self *IQueryParser) Parse(pszInputString string, pCustomProperties *systemcom.IEnumUnknown) (*IQuerySolution, error) {
+	_pszInputString := win32.UTF16Ptr(pszInputString)
+	var _ppSolution *IQuerySolution
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszInputString)), uintptr(unsafe.Pointer(pCustomProperties)), uintptr(unsafe.Pointer(&_ppSolution)))
+	return _ppSolution, win32.HRESULTError(int32(r1))
 }
 
 // SetOption dispatches through IQueryParser's vtable slot 4.
-func (self *IQueryParser) SetOption(option STRUCTURED_QUERY_SINGLE_OPTION, pOptionValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IQueryParser) SetOption(option STRUCTURED_QUERY_SINGLE_OPTION, pOptionValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(option), uintptr(unsafe.Pointer(pOptionValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOption dispatches through IQueryParser's vtable slot 5.
-func (self *IQueryParser) GetOption(option STRUCTURED_QUERY_SINGLE_OPTION, pOptionValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(option), uintptr(unsafe.Pointer(pOptionValue)))
-	return foundation.HRESULT(r1)
+func (self *IQueryParser) GetOption(option STRUCTURED_QUERY_SINGLE_OPTION) (systemcomstructuredstorage.PROPVARIANT, error) {
+	var _pOptionValue systemcomstructuredstorage.PROPVARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(option), uintptr(unsafe.Pointer(&_pOptionValue)))
+	return _pOptionValue, win32.HRESULTError(int32(r1))
 }
 
 // SetMultiOption dispatches through IQueryParser's vtable slot 6.
-func (self *IQueryParser) SetMultiOption(option STRUCTURED_QUERY_MULTIOPTION, pszOptionKey foundation.PWSTR, pOptionValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(option), uintptr(unsafe.Pointer(pszOptionKey)), uintptr(unsafe.Pointer(pOptionValue)))
-	return foundation.HRESULT(r1)
+func (self *IQueryParser) SetMultiOption(option STRUCTURED_QUERY_MULTIOPTION, pszOptionKey string, pOptionValue *systemcomstructuredstorage.PROPVARIANT) error {
+	_pszOptionKey := win32.UTF16Ptr(pszOptionKey)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(option), uintptr(unsafe.Pointer(_pszOptionKey)), uintptr(unsafe.Pointer(pOptionValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSchemaProvider dispatches through IQueryParser's vtable slot 7.
-func (self *IQueryParser) GetSchemaProvider(ppSchemaProvider **ISchemaProvider) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSchemaProvider)))
-	return foundation.HRESULT(r1)
+func (self *IQueryParser) GetSchemaProvider() (*ISchemaProvider, error) {
+	var _ppSchemaProvider *ISchemaProvider
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSchemaProvider)))
+	return _ppSchemaProvider, win32.HRESULTError(int32(r1))
 }
 
 // RestateToString dispatches through IQueryParser's vtable slot 8.
-func (self *IQueryParser) RestateToString(pCondition *ICondition, fUseEnglish foundation.BOOL, ppszQueryString *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCondition)), uintptr(fUseEnglish), uintptr(unsafe.Pointer(ppszQueryString)))
-	return foundation.HRESULT(r1)
+func (self *IQueryParser) RestateToString(pCondition *ICondition, fUseEnglish bool, ppszQueryString *foundation.PWSTR) error {
+	_fUseEnglish := win32.Bool32(fUseEnglish)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCondition)), uintptr(_fUseEnglish), uintptr(unsafe.Pointer(ppszQueryString)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ParsePropertyValue dispatches through IQueryParser's vtable slot 9.
-func (self *IQueryParser) ParsePropertyValue(pszPropertyName foundation.PWSTR, pszInputString foundation.PWSTR, ppSolution **IQuerySolution) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPropertyName)), uintptr(unsafe.Pointer(pszInputString)), uintptr(unsafe.Pointer(ppSolution)))
-	return foundation.HRESULT(r1)
+func (self *IQueryParser) ParsePropertyValue(pszPropertyName string, pszInputString string) (*IQuerySolution, error) {
+	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
+	_pszInputString := win32.UTF16Ptr(pszInputString)
+	var _ppSolution *IQuerySolution
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(_pszInputString)), uintptr(unsafe.Pointer(&_ppSolution)))
+	return _ppSolution, win32.HRESULTError(int32(r1))
 }
 
 // RestatePropertyValueToString dispatches through IQueryParser's vtable slot 10.
-func (self *IQueryParser) RestatePropertyValueToString(pCondition *ICondition, fUseEnglish foundation.BOOL, ppszPropertyName *foundation.PWSTR, ppszQueryString *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCondition)), uintptr(fUseEnglish), uintptr(unsafe.Pointer(ppszPropertyName)), uintptr(unsafe.Pointer(ppszQueryString)))
-	return foundation.HRESULT(r1)
+func (self *IQueryParser) RestatePropertyValueToString(pCondition *ICondition, fUseEnglish bool, ppszPropertyName *foundation.PWSTR, ppszQueryString *foundation.PWSTR) error {
+	_fUseEnglish := win32.Bool32(fUseEnglish)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCondition)), uintptr(_fUseEnglish), uintptr(unsafe.Pointer(ppszPropertyName)), uintptr(unsafe.Pointer(ppszQueryString)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IQueryParserManager: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-iqueryparsermanager
@@ -1852,21 +1932,24 @@ type IQueryParserManager struct {
 var IID_IQueryParserManager = win32.GUID{Data1: 0xa879e3c4, Data2: 0xaf77, Data3: 0x44fb, Data4: [8]byte{0x8f, 0x37, 0xeb, 0xd1, 0x48, 0x7c, 0xf9, 0x20}}
 
 // CreateLoadedParser dispatches through IQueryParserManager's vtable slot 3.
-func (self *IQueryParserManager) CreateLoadedParser(pszCatalog foundation.PWSTR, langidForKeywords uint16, riid *win32.GUID, ppQueryParser *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCatalog)), uintptr(langidForKeywords), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppQueryParser)))
-	return foundation.HRESULT(r1)
+func (self *IQueryParserManager) CreateLoadedParser(pszCatalog string, langidForKeywords uint16, riid *win32.GUID, ppQueryParser *unsafe.Pointer) error {
+	_pszCatalog := win32.UTF16Ptr(pszCatalog)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCatalog)), uintptr(langidForKeywords), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppQueryParser)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitializeOptions dispatches through IQueryParserManager's vtable slot 4.
-func (self *IQueryParserManager) InitializeOptions(fUnderstandNQS foundation.BOOL, fAutoWildCard foundation.BOOL, pQueryParser *IQueryParser) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fUnderstandNQS), uintptr(fAutoWildCard), uintptr(unsafe.Pointer(pQueryParser)))
-	return foundation.HRESULT(r1)
+func (self *IQueryParserManager) InitializeOptions(fUnderstandNQS bool, fAutoWildCard bool, pQueryParser *IQueryParser) error {
+	_fUnderstandNQS := win32.Bool32(fUnderstandNQS)
+	_fAutoWildCard := win32.Bool32(fAutoWildCard)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fUnderstandNQS), uintptr(_fAutoWildCard), uintptr(unsafe.Pointer(pQueryParser)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOption dispatches through IQueryParserManager's vtable slot 5.
-func (self *IQueryParserManager) SetOption(option QUERY_PARSER_MANAGER_OPTION, pOptionValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IQueryParserManager) SetOption(option QUERY_PARSER_MANAGER_OPTION, pOptionValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(option), uintptr(unsafe.Pointer(pOptionValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IQuerySolution: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-iquerysolution
@@ -1879,21 +1962,21 @@ type IQuerySolution struct {
 var IID_IQuerySolution = win32.GUID{Data1: 0xd6ebc66b, Data2: 0x8921, Data3: 0x4193, Data4: [8]byte{0xaf, 0xdd, 0xa1, 0x78, 0x9f, 0xb7, 0xff, 0x57}}
 
 // GetQuery dispatches through IQuerySolution's vtable slot 7.
-func (self *IQuerySolution) GetQuery(ppQueryNode **ICondition, ppMainType **IEntity) foundation.HRESULT {
+func (self *IQuerySolution) GetQuery(ppQueryNode **ICondition, ppMainType **IEntity) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppQueryNode)), uintptr(unsafe.Pointer(ppMainType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrors dispatches through IQuerySolution's vtable slot 8.
-func (self *IQuerySolution) GetErrors(riid *win32.GUID, ppParseErrors *unsafe.Pointer) foundation.HRESULT {
+func (self *IQuerySolution) GetErrors(riid *win32.GUID, ppParseErrors *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppParseErrors)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLexicalData dispatches through IQuerySolution's vtable slot 9.
-func (self *IQuerySolution) GetLexicalData(ppszInputString *foundation.PWSTR, ppTokens **ITokenCollection, plcid *uint32, ppWordBreaker **systemcom.IUnknown) foundation.HRESULT {
+func (self *IQuerySolution) GetLexicalData(ppszInputString *foundation.PWSTR, ppTokens **ITokenCollection, plcid *uint32, ppWordBreaker **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszInputString)), uintptr(unsafe.Pointer(ppTokens)), uintptr(unsafe.Pointer(plcid)), uintptr(unsafe.Pointer(ppWordBreaker)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a6a-2a1c-11ce-ade5-00aa0044773d
@@ -1905,15 +1988,15 @@ type IReadData struct {
 var IID_IReadData = win32.GUID{Data1: 0x0c733a6a, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // ReadData dispatches through IReadData's vtable slot 3.
-func (self *IReadData) ReadData(hChapter uintptr, cbBookmark uintptr, pBookmark *byte, lRowsOffset uintptr, hAccessor HACCESSOR, cRows uintptr, pcRowsObtained *uintptr, ppFixedData **byte, pcbVariableTotal *uintptr, ppVariableData **byte) foundation.HRESULT {
+func (self *IReadData) ReadData(hChapter uintptr, cbBookmark uintptr, pBookmark *byte, lRowsOffset uintptr, hAccessor HACCESSOR, cRows uintptr, pcRowsObtained *uintptr, ppFixedData **byte, pcbVariableTotal *uintptr, ppVariableData **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(cbBookmark), uintptr(unsafe.Pointer(pBookmark)), uintptr(lRowsOffset), uintptr(hAccessor), uintptr(cRows), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(ppFixedData)), uintptr(unsafe.Pointer(pcbVariableTotal)), uintptr(unsafe.Pointer(ppVariableData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseChapter dispatches through IReadData's vtable slot 4.
-func (self *IReadData) ReleaseChapter(hChapter uintptr) foundation.HRESULT {
+func (self *IReadData) ReleaseChapter(hChapter uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hChapter))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733ab9-2a1c-11ce-ade5-00aa0044773d
@@ -1925,21 +2008,24 @@ type IRegisterProvider struct {
 var IID_IRegisterProvider = win32.GUID{Data1: 0x0c733ab9, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetURLMapping dispatches through IRegisterProvider's vtable slot 3.
-func (self *IRegisterProvider) GetURLMapping(pwszURL foundation.PWSTR, dwReserved uintptr, pclsidProvider *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszURL)), uintptr(dwReserved), uintptr(unsafe.Pointer(pclsidProvider)))
-	return foundation.HRESULT(r1)
+func (self *IRegisterProvider) GetURLMapping(pwszURL string, dwReserved uintptr, pclsidProvider *win32.GUID) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(dwReserved), uintptr(unsafe.Pointer(pclsidProvider)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetURLMapping dispatches through IRegisterProvider's vtable slot 4.
-func (self *IRegisterProvider) SetURLMapping(pwszURL foundation.PWSTR, dwReserved uintptr, rclsidProvider *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszURL)), uintptr(dwReserved), uintptr(unsafe.Pointer(rclsidProvider)))
-	return foundation.HRESULT(r1)
+func (self *IRegisterProvider) SetURLMapping(pwszURL string, dwReserved uintptr, rclsidProvider *win32.GUID) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(dwReserved), uintptr(unsafe.Pointer(rclsidProvider)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterProvider dispatches through IRegisterProvider's vtable slot 5.
-func (self *IRegisterProvider) UnregisterProvider(pwszURL foundation.PWSTR, dwReserved uintptr, rclsidProvider *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszURL)), uintptr(dwReserved), uintptr(unsafe.Pointer(rclsidProvider)))
-	return foundation.HRESULT(r1)
+func (self *IRegisterProvider) UnregisterProvider(pwszURL string, dwReserved uintptr, rclsidProvider *win32.GUID) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(dwReserved), uintptr(unsafe.Pointer(rclsidProvider)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRelationship: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-irelationship
@@ -1952,33 +2038,35 @@ type IRelationship struct {
 var IID_IRelationship = win32.GUID{Data1: 0x2769280b, Data2: 0x5108, Data3: 0x498c, Data4: [8]byte{0x9c, 0x7f, 0xa5, 0x12, 0x39, 0xb6, 0x31, 0x47}}
 
 // Name dispatches through IRelationship's vtable slot 3.
-func (self *IRelationship) Name(ppszName *foundation.PWSTR) foundation.HRESULT {
+func (self *IRelationship) Name(ppszName *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsReal dispatches through IRelationship's vtable slot 4.
-func (self *IRelationship) IsReal(pIsReal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsReal)))
-	return foundation.HRESULT(r1)
+func (self *IRelationship) IsReal() (foundation.BOOL, error) {
+	var _pIsReal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pIsReal)))
+	return _pIsReal, win32.HRESULTError(int32(r1))
 }
 
 // Destination dispatches through IRelationship's vtable slot 5.
-func (self *IRelationship) Destination(pDestinationEntity **IEntity) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationEntity)))
-	return foundation.HRESULT(r1)
+func (self *IRelationship) Destination() (*IEntity, error) {
+	var _pDestinationEntity *IEntity
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pDestinationEntity)))
+	return _pDestinationEntity, win32.HRESULTError(int32(r1))
 }
 
 // MetaData dispatches through IRelationship's vtable slot 6.
-func (self *IRelationship) MetaData(riid *win32.GUID, pMetaData *unsafe.Pointer) foundation.HRESULT {
+func (self *IRelationship) MetaData(riid *win32.GUID, pMetaData *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pMetaData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefaultPhrase dispatches through IRelationship's vtable slot 7.
-func (self *IRelationship) DefaultPhrase(ppszPhrase *foundation.PWSTR) foundation.HRESULT {
+func (self *IRelationship) DefaultPhrase(ppszPhrase *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPhrase)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRichChunk: https://learn.microsoft.com/windows/win32/api/structuredquerycondition/nn-structuredquerycondition-irichchunk
@@ -1991,9 +2079,9 @@ type IRichChunk struct {
 var IID_IRichChunk = win32.GUID{Data1: 0x4fdef69c, Data2: 0xdbc9, Data3: 0x454e, Data4: [8]byte{0x99, 0x10, 0xb3, 0x4f, 0x3c, 0x64, 0xb5, 0x10}}
 
 // GetData dispatches through IRichChunk's vtable slot 3.
-func (self *IRichChunk) GetData(pFirstPos *uint32, pLength *uint32, ppsz *foundation.PWSTR, pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IRichChunk) GetData(pFirstPos *uint32, pLength *uint32, ppsz *foundation.PWSTR, pValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFirstPos)), uintptr(unsafe.Pointer(pLength)), uintptr(unsafe.Pointer(ppsz)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733ab4-2a1c-11ce-ade5-00aa0044773d
@@ -2005,21 +2093,21 @@ type IRow struct {
 var IID_IRow = win32.GUID{Data1: 0x0c733ab4, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetColumns dispatches through IRow's vtable slot 3.
-func (self *IRow) GetColumns(cColumns uintptr, rgColumns *DBCOLUMNACCESS) foundation.HRESULT {
+func (self *IRow) GetColumns(cColumns uintptr, rgColumns *DBCOLUMNACCESS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cColumns), uintptr(unsafe.Pointer(rgColumns)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceRowset dispatches through IRow's vtable slot 4.
-func (self *IRow) GetSourceRowset(riid *win32.GUID, ppRowset **systemcom.IUnknown, phRow *uintptr) foundation.HRESULT {
+func (self *IRow) GetSourceRowset(riid *win32.GUID, ppRowset **systemcom.IUnknown, phRow *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppRowset)), uintptr(unsafe.Pointer(phRow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Open dispatches through IRow's vtable slot 5.
-func (self *IRow) Open(pUnkOuter *systemcom.IUnknown, pColumnID *storageindexserver.DBID, rguidColumnType *win32.GUID, dwBindFlags uint32, riid *win32.GUID, ppUnk **systemcom.IUnknown) foundation.HRESULT {
+func (self *IRow) Open(pUnkOuter *systemcom.IUnknown, pColumnID *storageindexserver.DBID, rguidColumnType *win32.GUID, dwBindFlags uint32, riid *win32.GUID, ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pColumnID)), uintptr(unsafe.Pointer(rguidColumnType)), uintptr(dwBindFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733ab5-2a1c-11ce-ade5-00aa0044773d
@@ -2031,9 +2119,9 @@ type IRowChange struct {
 var IID_IRowChange = win32.GUID{Data1: 0x0c733ab5, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // SetColumns dispatches through IRowChange's vtable slot 3.
-func (self *IRowChange) SetColumns(cColumns uintptr, rgColumns *DBCOLUMNACCESS) foundation.HRESULT {
+func (self *IRowChange) SetColumns(cColumns uintptr, rgColumns *DBCOLUMNACCESS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cColumns), uintptr(unsafe.Pointer(rgColumns)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a94-2a1c-11ce-ade5-00aa0044773d
@@ -2045,33 +2133,33 @@ type IRowPosition struct {
 var IID_IRowPosition = win32.GUID{Data1: 0x0c733a94, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // ClearRowPosition dispatches through IRowPosition's vtable slot 3.
-func (self *IRowPosition) ClearRowPosition() foundation.HRESULT {
+func (self *IRowPosition) ClearRowPosition() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRowPosition dispatches through IRowPosition's vtable slot 4.
-func (self *IRowPosition) GetRowPosition(phChapter *uintptr, phRow *uintptr, pdwPositionFlags *uint32) foundation.HRESULT {
+func (self *IRowPosition) GetRowPosition(phChapter *uintptr, phRow *uintptr, pdwPositionFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phChapter)), uintptr(unsafe.Pointer(phRow)), uintptr(unsafe.Pointer(pdwPositionFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRowset dispatches through IRowPosition's vtable slot 5.
-func (self *IRowPosition) GetRowset(riid *win32.GUID, ppRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *IRowPosition) GetRowset(riid *win32.GUID, ppRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IRowPosition's vtable slot 6.
-func (self *IRowPosition) Initialize(pRowset *systemcom.IUnknown) foundation.HRESULT {
+func (self *IRowPosition) Initialize(pRowset *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRowPosition dispatches through IRowPosition's vtable slot 7.
-func (self *IRowPosition) SetRowPosition(hChapter uintptr, hRow uintptr, dwPositionFlags uint32) foundation.HRESULT {
+func (self *IRowPosition) SetRowPosition(hChapter uintptr, hRow uintptr, dwPositionFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(hRow), uintptr(dwPositionFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0997a571-126e-11d0-9f8a-00a0c9a0631e
@@ -2083,9 +2171,10 @@ type IRowPositionChange struct {
 var IID_IRowPositionChange = win32.GUID{Data1: 0x0997a571, Data2: 0x126e, Data3: 0x11d0, Data4: [8]byte{0x9f, 0x8a, 0x00, 0xa0, 0xc9, 0xa0, 0x63, 0x1e}}
 
 // OnRowPositionChange dispatches through IRowPositionChange's vtable slot 3.
-func (self *IRowPositionChange) OnRowPositionChange(eReason uint32, ePhase uint32, fCantDeny foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eReason), uintptr(ePhase), uintptr(fCantDeny))
-	return foundation.HRESULT(r1)
+func (self *IRowPositionChange) OnRowPositionChange(eReason uint32, ePhase uint32, fCantDeny bool) error {
+	_fCantDeny := win32.Bool32(fCantDeny)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eReason), uintptr(ePhase), uintptr(_fCantDeny))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aae-2a1c-11ce-ade5-00aa0044773d
@@ -2097,15 +2186,15 @@ type IRowSchemaChange struct {
 var IID_IRowSchemaChange = win32.GUID{Data1: 0x0c733aae, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // DeleteColumns dispatches through IRowSchemaChange's vtable slot 4.
-func (self *IRowSchemaChange) DeleteColumns(cColumns uintptr, rgColumnIDs *storageindexserver.DBID, rgdwStatus *uint32) foundation.HRESULT {
+func (self *IRowSchemaChange) DeleteColumns(cColumns uintptr, rgColumnIDs *storageindexserver.DBID, rgdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cColumns), uintptr(unsafe.Pointer(rgColumnIDs)), uintptr(unsafe.Pointer(rgdwStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddColumns dispatches through IRowSchemaChange's vtable slot 5.
-func (self *IRowSchemaChange) AddColumns(cColumns uintptr, rgNewColumnInfo *DBCOLUMNINFO, rgColumns *DBCOLUMNACCESS) foundation.HRESULT {
+func (self *IRowSchemaChange) AddColumns(cColumns uintptr, rgNewColumnInfo *DBCOLUMNINFO, rgColumns *DBCOLUMNACCESS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cColumns), uintptr(unsafe.Pointer(rgNewColumnInfo)), uintptr(unsafe.Pointer(rgColumns)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a7c-2a1c-11ce-ade5-00aa0044773d
@@ -2117,33 +2206,33 @@ type IRowset struct {
 var IID_IRowset = win32.GUID{Data1: 0x0c733a7c, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // AddRefRows dispatches through IRowset's vtable slot 3.
-func (self *IRowset) AddRefRows(cRows uintptr, rghRows *uintptr, rgRefCounts *uint32, rgRowStatus *uint32) foundation.HRESULT {
+func (self *IRowset) AddRefRows(cRows uintptr, rghRows *uintptr, rgRefCounts *uint32, rgRowStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(unsafe.Pointer(rgRefCounts)), uintptr(unsafe.Pointer(rgRowStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetData dispatches through IRowset's vtable slot 4.
-func (self *IRowset) GetData(hRow uintptr, hAccessor HACCESSOR, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IRowset) GetData(hRow uintptr, hAccessor HACCESSOR, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hRow), uintptr(hAccessor), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNextRows dispatches through IRowset's vtable slot 5.
-func (self *IRowset) GetNextRows(hReserved uintptr, lRowsOffset uintptr, cRows uintptr, pcRowsObtained *uintptr, prghRows **uintptr) foundation.HRESULT {
+func (self *IRowset) GetNextRows(hReserved uintptr, lRowsOffset uintptr, cRows uintptr, pcRowsObtained *uintptr, prghRows **uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(lRowsOffset), uintptr(cRows), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(prghRows)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseRows dispatches through IRowset's vtable slot 6.
-func (self *IRowset) ReleaseRows(cRows uintptr, rghRows *uintptr, rgRowOptions *uint32, rgRefCounts *uint32, rgRowStatus *uint32) foundation.HRESULT {
+func (self *IRowset) ReleaseRows(cRows uintptr, rghRows *uintptr, rgRowOptions *uint32, rgRefCounts *uint32, rgRowStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(unsafe.Pointer(rgRowOptions)), uintptr(unsafe.Pointer(rgRefCounts)), uintptr(unsafe.Pointer(rgRowStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RestartPosition dispatches through IRowset's vtable slot 7.
-func (self *IRowset) RestartPosition(hReserved uintptr) foundation.HRESULT {
+func (self *IRowset) RestartPosition(hReserved uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hReserved))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a0f-2a1c-11ce-ade5-00aa0044773d
@@ -2155,15 +2244,15 @@ type IRowsetAsynch struct {
 var IID_IRowsetAsynch = win32.GUID{Data1: 0x0c733a0f, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // RatioFinished dispatches through IRowsetAsynch's vtable slot 3.
-func (self *IRowsetAsynch) RatioFinished(pulDenominator *uintptr, pulNumerator *uintptr, pcRows *uintptr, pfNewRows *foundation.BOOL) foundation.HRESULT {
+func (self *IRowsetAsynch) RatioFinished(pulDenominator *uintptr, pulNumerator *uintptr, pcRows *uintptr, pfNewRows *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulDenominator)), uintptr(unsafe.Pointer(pulNumerator)), uintptr(unsafe.Pointer(pcRows)), uintptr(unsafe.Pointer(pfNewRows)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Stop dispatches through IRowsetAsynch's vtable slot 4.
-func (self *IRowsetAsynch) Stop() foundation.HRESULT {
+func (self *IRowsetAsynch) Stop() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733ac2-2a1c-11ce-ade5-00aa0044773d
@@ -2175,9 +2264,9 @@ type IRowsetBookmark struct {
 var IID_IRowsetBookmark = win32.GUID{Data1: 0x0c733ac2, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // PositionOnBookmark dispatches through IRowsetBookmark's vtable slot 3.
-func (self *IRowsetBookmark) PositionOnBookmark(hChapter uintptr, cbBookmark uintptr, pBookmark *byte) foundation.HRESULT {
+func (self *IRowsetBookmark) PositionOnBookmark(hChapter uintptr, cbBookmark uintptr, pBookmark *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(cbBookmark), uintptr(unsafe.Pointer(pBookmark)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a05-2a1c-11ce-ade5-00aa0044773d
@@ -2189,21 +2278,21 @@ type IRowsetChange struct {
 var IID_IRowsetChange = win32.GUID{Data1: 0x0c733a05, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // DeleteRows dispatches through IRowsetChange's vtable slot 3.
-func (self *IRowsetChange) DeleteRows(hReserved uintptr, cRows uintptr, rghRows *uintptr, rgRowStatus *uint32) foundation.HRESULT {
+func (self *IRowsetChange) DeleteRows(hReserved uintptr, cRows uintptr, rghRows *uintptr, rgRowStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(unsafe.Pointer(rgRowStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetData dispatches through IRowsetChange's vtable slot 4.
-func (self *IRowsetChange) SetData(hRow uintptr, hAccessor HACCESSOR, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IRowsetChange) SetData(hRow uintptr, hAccessor HACCESSOR, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hRow), uintptr(hAccessor), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertRow dispatches through IRowsetChange's vtable slot 5.
-func (self *IRowsetChange) InsertRow(hReserved uintptr, hAccessor HACCESSOR, pData unsafe.Pointer, phRow *uintptr) foundation.HRESULT {
+func (self *IRowsetChange) InsertRow(hReserved uintptr, hAccessor HACCESSOR, pData unsafe.Pointer, phRow *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(hAccessor), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(phRow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a8f-2a1c-11ce-ade5-00aa0044773d
@@ -2215,15 +2304,15 @@ type IRowsetChangeExtInfo struct {
 var IID_IRowsetChangeExtInfo = win32.GUID{Data1: 0x0c733a8f, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetOriginalRow dispatches through IRowsetChangeExtInfo's vtable slot 3.
-func (self *IRowsetChangeExtInfo) GetOriginalRow(hReserved uintptr, hRow uintptr, phRowOriginal *uintptr) foundation.HRESULT {
+func (self *IRowsetChangeExtInfo) GetOriginalRow(hReserved uintptr, hRow uintptr, phRowOriginal *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(hRow), uintptr(unsafe.Pointer(phRowOriginal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPendingColumns dispatches through IRowsetChangeExtInfo's vtable slot 4.
-func (self *IRowsetChangeExtInfo) GetPendingColumns(hReserved uintptr, hRow uintptr, cColumnOrdinals uint32, rgiOrdinals *uint32, rgColumnStatus *uint32) foundation.HRESULT {
+func (self *IRowsetChangeExtInfo) GetPendingColumns(hReserved uintptr, hRow uintptr, cColumnOrdinals uint32, rgiOrdinals *uint32, rgColumnStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(hRow), uintptr(cColumnOrdinals), uintptr(unsafe.Pointer(rgiOrdinals)), uintptr(unsafe.Pointer(rgColumnStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aa8-2a1c-11ce-ade5-00aa0044773d
@@ -2235,9 +2324,9 @@ type IRowsetChapterMember struct {
 var IID_IRowsetChapterMember = win32.GUID{Data1: 0x0c733aa8, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // IsRowInChapter dispatches through IRowsetChapterMember's vtable slot 3.
-func (self *IRowsetChapterMember) IsRowInChapter(hChapter uintptr, hRow uintptr) foundation.HRESULT {
+func (self *IRowsetChapterMember) IsRowInChapter(hChapter uintptr, hRow uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(hRow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a6b-2a1c-11ce-ade5-00aa0044773d
@@ -2249,27 +2338,27 @@ type IRowsetCopyRows struct {
 var IID_IRowsetCopyRows = win32.GUID{Data1: 0x0c733a6b, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // CloseSource dispatches through IRowsetCopyRows's vtable slot 3.
-func (self *IRowsetCopyRows) CloseSource(hSourceID uint16) foundation.HRESULT {
+func (self *IRowsetCopyRows) CloseSource(hSourceID uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hSourceID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyByHROWS dispatches through IRowsetCopyRows's vtable slot 4.
-func (self *IRowsetCopyRows) CopyByHROWS(hSourceID uint16, hReserved uintptr, cRows uintptr, rghRows *uintptr, bFlags uint32) foundation.HRESULT {
+func (self *IRowsetCopyRows) CopyByHROWS(hSourceID uint16, hReserved uintptr, cRows uintptr, rghRows *uintptr, bFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hSourceID), uintptr(hReserved), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(bFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyRows dispatches through IRowsetCopyRows's vtable slot 5.
-func (self *IRowsetCopyRows) CopyRows(hSourceID uint16, hReserved uintptr, cRows uintptr, bFlags uint32, pcRowsCopied *uintptr) foundation.HRESULT {
+func (self *IRowsetCopyRows) CopyRows(hSourceID uint16, hReserved uintptr, cRows uintptr, bFlags uint32, pcRowsCopied *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hSourceID), uintptr(hReserved), uintptr(cRows), uintptr(bFlags), uintptr(unsafe.Pointer(pcRowsCopied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineSource dispatches through IRowsetCopyRows's vtable slot 6.
-func (self *IRowsetCopyRows) DefineSource(pRowsetSource *IRowset, cColIds uintptr, rgSourceColumns *uintptr, rgTargetColumns *uintptr, phSourceID *uint16) foundation.HRESULT {
+func (self *IRowsetCopyRows) DefineSource(pRowsetSource *IRowset, cColIds uintptr, rgSourceColumns *uintptr, rgTargetColumns *uintptr, phSourceID *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRowsetSource)), uintptr(cColIds), uintptr(unsafe.Pointer(rgSourceColumns)), uintptr(unsafe.Pointer(rgTargetColumns)), uintptr(unsafe.Pointer(phSourceID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733abd-2a1c-11ce-ade5-00aa0044773d
@@ -2281,15 +2370,15 @@ type IRowsetCurrentIndex struct {
 var IID_IRowsetCurrentIndex = win32.GUID{Data1: 0x0c733abd, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetIndex dispatches through IRowsetCurrentIndex's vtable slot 6.
-func (self *IRowsetCurrentIndex) GetIndex(ppIndexID **storageindexserver.DBID) foundation.HRESULT {
+func (self *IRowsetCurrentIndex) GetIndex(ppIndexID **storageindexserver.DBID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIndexID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetIndex dispatches through IRowsetCurrentIndex's vtable slot 7.
-func (self *IRowsetCurrentIndex) SetIndex(pIndexID *storageindexserver.DBID) foundation.HRESULT {
+func (self *IRowsetCurrentIndex) SetIndex(pIndexID *storageindexserver.DBID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndexID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRowsetEvents: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-irowsetevents
@@ -2302,27 +2391,27 @@ type IRowsetEvents struct {
 var IID_IRowsetEvents = win32.GUID{Data1: 0x1551aea5, Data2: 0x5d66, Data3: 0x4b11, Data4: [8]byte{0x86, 0xf5, 0xd5, 0x63, 0x4c, 0xb2, 0x11, 0xb9}}
 
 // OnNewItem dispatches through IRowsetEvents's vtable slot 3.
-func (self *IRowsetEvents) OnNewItem(itemID *systemcomstructuredstorage.PROPVARIANT, newItemState ROWSETEVENT_ITEMSTATE) foundation.HRESULT {
+func (self *IRowsetEvents) OnNewItem(itemID *systemcomstructuredstorage.PROPVARIANT, newItemState ROWSETEVENT_ITEMSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(itemID)), uintptr(newItemState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnChangedItem dispatches through IRowsetEvents's vtable slot 4.
-func (self *IRowsetEvents) OnChangedItem(itemID *systemcomstructuredstorage.PROPVARIANT, rowsetItemState ROWSETEVENT_ITEMSTATE, changedItemState ROWSETEVENT_ITEMSTATE) foundation.HRESULT {
+func (self *IRowsetEvents) OnChangedItem(itemID *systemcomstructuredstorage.PROPVARIANT, rowsetItemState ROWSETEVENT_ITEMSTATE, changedItemState ROWSETEVENT_ITEMSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(itemID)), uintptr(rowsetItemState), uintptr(changedItemState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDeletedItem dispatches through IRowsetEvents's vtable slot 5.
-func (self *IRowsetEvents) OnDeletedItem(itemID *systemcomstructuredstorage.PROPVARIANT, deletedItemState ROWSETEVENT_ITEMSTATE) foundation.HRESULT {
+func (self *IRowsetEvents) OnDeletedItem(itemID *systemcomstructuredstorage.PROPVARIANT, deletedItemState ROWSETEVENT_ITEMSTATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(itemID)), uintptr(deletedItemState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnRowsetEvent dispatches through IRowsetEvents's vtable slot 6.
-func (self *IRowsetEvents) OnRowsetEvent(eventType ROWSETEVENT_TYPE, eventData *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IRowsetEvents) OnRowsetEvent(eventType ROWSETEVENT_TYPE, eventData *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(eventType), uintptr(unsafe.Pointer(eventData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a7f-2a1c-11ce-ade5-00aa0044773d
@@ -2334,9 +2423,9 @@ type IRowsetExactScroll struct {
 var IID_IRowsetExactScroll = win32.GUID{Data1: 0x0c733a7f, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetExactPosition dispatches through IRowsetExactScroll's vtable slot 14.
-func (self *IRowsetExactScroll) GetExactPosition(hChapter uintptr, cbBookmark uintptr, pBookmark *byte, pulPosition *uintptr, pcRows *uintptr) foundation.HRESULT {
+func (self *IRowsetExactScroll) GetExactPosition(hChapter uintptr, cbBookmark uintptr, pBookmark *byte, pulPosition *uintptr, pcRows *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(cbBookmark), uintptr(unsafe.Pointer(pBookmark)), uintptr(unsafe.Pointer(pulPosition)), uintptr(unsafe.Pointer(pcRows)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 5cf4ca13-ef21-11d0-97e7-00c04fc2ad98
@@ -2348,15 +2437,16 @@ type IRowsetFastLoad struct {
 var IID_IRowsetFastLoad = win32.GUID{Data1: 0x5cf4ca13, Data2: 0xef21, Data3: 0x11d0, Data4: [8]byte{0x97, 0xe7, 0x00, 0xc0, 0x4f, 0xc2, 0xad, 0x98}}
 
 // InsertRow dispatches through IRowsetFastLoad's vtable slot 3.
-func (self *IRowsetFastLoad) InsertRow(hAccessor HACCESSOR, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IRowsetFastLoad) InsertRow(hAccessor HACCESSOR, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hAccessor), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Commit dispatches through IRowsetFastLoad's vtable slot 4.
-func (self *IRowsetFastLoad) Commit(fDone foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fDone))
-	return foundation.HRESULT(r1)
+func (self *IRowsetFastLoad) Commit(fDone bool) error {
+	_fDone := win32.Bool32(fDone)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fDone))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a9d-2a1c-11ce-ade5-00aa0044773d
@@ -2368,9 +2458,9 @@ type IRowsetFind struct {
 var IID_IRowsetFind = win32.GUID{Data1: 0x0c733a9d, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // FindNextRow dispatches through IRowsetFind's vtable slot 3.
-func (self *IRowsetFind) FindNextRow(hChapter uintptr, hAccessor HACCESSOR, pFindValue unsafe.Pointer, CompareOp uint32, cbBookmark uintptr, pBookmark *byte, lRowsOffset uintptr, cRows uintptr, pcRowsObtained *uintptr, prghRows **uintptr) foundation.HRESULT {
+func (self *IRowsetFind) FindNextRow(hChapter uintptr, hAccessor HACCESSOR, pFindValue unsafe.Pointer, CompareOp uint32, cbBookmark uintptr, pBookmark *byte, lRowsOffset uintptr, cRows uintptr, pcRowsObtained *uintptr, prghRows **uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(hAccessor), uintptr(unsafe.Pointer(pFindValue)), uintptr(CompareOp), uintptr(cbBookmark), uintptr(unsafe.Pointer(pBookmark)), uintptr(lRowsOffset), uintptr(cRows), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(prghRows)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a09-2a1c-11ce-ade5-00aa0044773d
@@ -2382,9 +2472,9 @@ type IRowsetIdentity struct {
 var IID_IRowsetIdentity = win32.GUID{Data1: 0x0c733a09, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // IsSameRow dispatches through IRowsetIdentity's vtable slot 3.
-func (self *IRowsetIdentity) IsSameRow(hThisRow uintptr, hThatRow uintptr) foundation.HRESULT {
+func (self *IRowsetIdentity) IsSameRow(hThisRow uintptr, hThatRow uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hThisRow), uintptr(hThatRow))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a82-2a1c-11ce-ade5-00aa0044773d
@@ -2396,21 +2486,21 @@ type IRowsetIndex struct {
 var IID_IRowsetIndex = win32.GUID{Data1: 0x0c733a82, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetIndexInfo dispatches through IRowsetIndex's vtable slot 3.
-func (self *IRowsetIndex) GetIndexInfo(pcKeyColumns *uintptr, prgIndexColumnDesc **DBINDEXCOLUMNDESC, pcIndexPropertySets *uint32, prgIndexPropertySets **DBPROPSET) foundation.HRESULT {
+func (self *IRowsetIndex) GetIndexInfo(pcKeyColumns *uintptr, prgIndexColumnDesc **DBINDEXCOLUMNDESC, pcIndexPropertySets *uint32, prgIndexPropertySets **DBPROPSET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcKeyColumns)), uintptr(unsafe.Pointer(prgIndexColumnDesc)), uintptr(unsafe.Pointer(pcIndexPropertySets)), uintptr(unsafe.Pointer(prgIndexPropertySets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Seek dispatches through IRowsetIndex's vtable slot 4.
-func (self *IRowsetIndex) Seek(hAccessor HACCESSOR, cKeyValues uintptr, pData unsafe.Pointer, dwSeekOptions uint32) foundation.HRESULT {
+func (self *IRowsetIndex) Seek(hAccessor HACCESSOR, cKeyValues uintptr, pData unsafe.Pointer, dwSeekOptions uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hAccessor), uintptr(cKeyValues), uintptr(unsafe.Pointer(pData)), uintptr(dwSeekOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRange dispatches through IRowsetIndex's vtable slot 5.
-func (self *IRowsetIndex) SetRange(hAccessor HACCESSOR, cStartKeyColumns uintptr, pStartData unsafe.Pointer, cEndKeyColumns uintptr, pEndData unsafe.Pointer, dwRangeOptions uint32) foundation.HRESULT {
+func (self *IRowsetIndex) SetRange(hAccessor HACCESSOR, cStartKeyColumns uintptr, pStartData unsafe.Pointer, cEndKeyColumns uintptr, pEndData unsafe.Pointer, dwRangeOptions uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hAccessor), uintptr(cStartKeyColumns), uintptr(unsafe.Pointer(pStartData)), uintptr(cEndKeyColumns), uintptr(unsafe.Pointer(pEndData)), uintptr(dwRangeOptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a55-2a1c-11ce-ade5-00aa0044773d
@@ -2422,21 +2512,21 @@ type IRowsetInfo struct {
 var IID_IRowsetInfo = win32.GUID{Data1: 0x0c733a55, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetProperties dispatches through IRowsetInfo's vtable slot 3.
-func (self *IRowsetInfo) GetProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) foundation.HRESULT {
+func (self *IRowsetInfo) GetProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cPropertyIDSets), uintptr(unsafe.Pointer(rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReferencedRowset dispatches through IRowsetInfo's vtable slot 4.
-func (self *IRowsetInfo) GetReferencedRowset(iOrdinal uintptr, riid *win32.GUID, ppReferencedRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *IRowsetInfo) GetReferencedRowset(iOrdinal uintptr, riid *win32.GUID, ppReferencedRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iOrdinal), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppReferencedRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSpecification dispatches through IRowsetInfo's vtable slot 5.
-func (self *IRowsetInfo) GetSpecification(riid *win32.GUID, ppSpecification **systemcom.IUnknown) foundation.HRESULT {
+func (self *IRowsetInfo) GetSpecification(riid *win32.GUID, ppSpecification **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppSpecification)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a12-2a1c-11ce-ade5-00aa0044773d
@@ -2448,9 +2538,9 @@ type IRowsetKeys struct {
 var IID_IRowsetKeys = win32.GUID{Data1: 0x0c733a12, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // ListKeys dispatches through IRowsetKeys's vtable slot 3.
-func (self *IRowsetKeys) ListKeys(pcColumns *uintptr, prgColumns **uintptr) foundation.HRESULT {
+func (self *IRowsetKeys) ListKeys(pcColumns *uintptr, prgColumns **uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcColumns)), uintptr(unsafe.Pointer(prgColumns)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a7d-2a1c-11ce-ade5-00aa0044773d
@@ -2462,27 +2552,27 @@ type IRowsetLocate struct {
 var IID_IRowsetLocate = win32.GUID{Data1: 0x0c733a7d, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // Compare dispatches through IRowsetLocate's vtable slot 8.
-func (self *IRowsetLocate) Compare(hReserved uintptr, cbBookmark1 uintptr, pBookmark1 *byte, cbBookmark2 uintptr, pBookmark2 *byte, pComparison *uint32) foundation.HRESULT {
+func (self *IRowsetLocate) Compare(hReserved uintptr, cbBookmark1 uintptr, pBookmark1 *byte, cbBookmark2 uintptr, pBookmark2 *byte, pComparison *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(cbBookmark1), uintptr(unsafe.Pointer(pBookmark1)), uintptr(cbBookmark2), uintptr(unsafe.Pointer(pBookmark2)), uintptr(unsafe.Pointer(pComparison)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRowsAt dispatches through IRowsetLocate's vtable slot 9.
-func (self *IRowsetLocate) GetRowsAt(hReserved1 uintptr, hReserved2 uintptr, cbBookmark uintptr, pBookmark *byte, lRowsOffset uintptr, cRows uintptr, pcRowsObtained *uintptr, prghRows **uintptr) foundation.HRESULT {
+func (self *IRowsetLocate) GetRowsAt(hReserved1 uintptr, hReserved2 uintptr, cbBookmark uintptr, pBookmark *byte, lRowsOffset uintptr, cRows uintptr, pcRowsObtained *uintptr, prghRows **uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hReserved1), uintptr(hReserved2), uintptr(cbBookmark), uintptr(unsafe.Pointer(pBookmark)), uintptr(lRowsOffset), uintptr(cRows), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(prghRows)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRowsByBookmark dispatches through IRowsetLocate's vtable slot 10.
-func (self *IRowsetLocate) GetRowsByBookmark(hReserved uintptr, cRows uintptr, rgcbBookmarks *uintptr, rgpBookmarks **byte, rghRows *uintptr, rgRowStatus *uint32) foundation.HRESULT {
+func (self *IRowsetLocate) GetRowsByBookmark(hReserved uintptr, cRows uintptr, rgcbBookmarks *uintptr, rgpBookmarks **byte, rghRows *uintptr, rgRowStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(cRows), uintptr(unsafe.Pointer(rgcbBookmarks)), uintptr(unsafe.Pointer(rgpBookmarks)), uintptr(unsafe.Pointer(rghRows)), uintptr(unsafe.Pointer(rgRowStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Hash dispatches through IRowsetLocate's vtable slot 11.
-func (self *IRowsetLocate) Hash(hReserved uintptr, cBookmarks uintptr, rgcbBookmarks *uintptr, rgpBookmarks **byte, rgHashedValues *uintptr, rgBookmarkStatus *uint32) foundation.HRESULT {
+func (self *IRowsetLocate) Hash(hReserved uintptr, cBookmarks uintptr, rgcbBookmarks *uintptr, rgpBookmarks **byte, rgHashedValues *uintptr, rgBookmarkStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(cBookmarks), uintptr(unsafe.Pointer(rgcbBookmarks)), uintptr(unsafe.Pointer(rgpBookmarks)), uintptr(unsafe.Pointer(rgHashedValues)), uintptr(unsafe.Pointer(rgBookmarkStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a71-2a1c-11ce-ade5-00aa0044773d
@@ -2494,9 +2584,9 @@ type IRowsetNewRowAfter struct {
 var IID_IRowsetNewRowAfter = win32.GUID{Data1: 0x0c733a71, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // SetNewDataAfter dispatches through IRowsetNewRowAfter's vtable slot 3.
-func (self *IRowsetNewRowAfter) SetNewDataAfter(hChapter uintptr, cbbmPrevious uint32, pbmPrevious *byte, hAccessor HACCESSOR, pData *byte, phRow *uintptr) foundation.HRESULT {
+func (self *IRowsetNewRowAfter) SetNewDataAfter(hChapter uintptr, cbbmPrevious uint32, pbmPrevious *byte, hAccessor HACCESSOR, pData *byte, phRow *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(cbbmPrevious), uintptr(unsafe.Pointer(pbmPrevious)), uintptr(hAccessor), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(phRow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a72-2a1c-11ce-ade5-00aa0044773d
@@ -2508,9 +2598,9 @@ type IRowsetNextRowset struct {
 var IID_IRowsetNextRowset = win32.GUID{Data1: 0x0c733a72, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetNextRowset dispatches through IRowsetNextRowset's vtable slot 3.
-func (self *IRowsetNextRowset) GetNextRowset(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppNextRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *IRowsetNextRowset) GetNextRowset(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppNextRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppNextRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a83-2a1c-11ce-ade5-00aa0044773d
@@ -2522,21 +2612,24 @@ type IRowsetNotify struct {
 var IID_IRowsetNotify = win32.GUID{Data1: 0x0c733a83, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // OnFieldChange dispatches through IRowsetNotify's vtable slot 3.
-func (self *IRowsetNotify) OnFieldChange(pRowset *IRowset, hRow uintptr, cColumns uintptr, rgColumns *uintptr, eReason uint32, ePhase uint32, fCantDeny foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRowset)), uintptr(hRow), uintptr(cColumns), uintptr(unsafe.Pointer(rgColumns)), uintptr(eReason), uintptr(ePhase), uintptr(fCantDeny))
-	return foundation.HRESULT(r1)
+func (self *IRowsetNotify) OnFieldChange(pRowset *IRowset, hRow uintptr, cColumns uintptr, rgColumns *uintptr, eReason uint32, ePhase uint32, fCantDeny bool) error {
+	_fCantDeny := win32.Bool32(fCantDeny)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRowset)), uintptr(hRow), uintptr(cColumns), uintptr(unsafe.Pointer(rgColumns)), uintptr(eReason), uintptr(ePhase), uintptr(_fCantDeny))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnRowChange dispatches through IRowsetNotify's vtable slot 4.
-func (self *IRowsetNotify) OnRowChange(pRowset *IRowset, cRows uintptr, rghRows *uintptr, eReason uint32, ePhase uint32, fCantDeny foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRowset)), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(eReason), uintptr(ePhase), uintptr(fCantDeny))
-	return foundation.HRESULT(r1)
+func (self *IRowsetNotify) OnRowChange(pRowset *IRowset, cRows uintptr, rghRows *uintptr, eReason uint32, ePhase uint32, fCantDeny bool) error {
+	_fCantDeny := win32.Bool32(fCantDeny)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRowset)), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(eReason), uintptr(ePhase), uintptr(_fCantDeny))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnRowsetChange dispatches through IRowsetNotify's vtable slot 5.
-func (self *IRowsetNotify) OnRowsetChange(pRowset *IRowset, eReason uint32, ePhase uint32, fCantDeny foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRowset)), uintptr(eReason), uintptr(ePhase), uintptr(fCantDeny))
-	return foundation.HRESULT(r1)
+func (self *IRowsetNotify) OnRowsetChange(pRowset *IRowset, eReason uint32, ePhase uint32, fCantDeny bool) error {
+	_fCantDeny := win32.Bool32(fCantDeny)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRowset)), uintptr(eReason), uintptr(ePhase), uintptr(_fCantDeny))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRowsetPrioritization: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-irowsetprioritization
@@ -2549,21 +2642,21 @@ type IRowsetPrioritization struct {
 var IID_IRowsetPrioritization = win32.GUID{Data1: 0x42811652, Data2: 0x079d, Data3: 0x481b, Data4: [8]byte{0x87, 0xa2, 0x09, 0xa6, 0x9e, 0xcc, 0x5f, 0x44}}
 
 // SetScopePriority dispatches through IRowsetPrioritization's vtable slot 3.
-func (self *IRowsetPrioritization) SetScopePriority(priority PRIORITY_LEVEL, scopeStatisticsEventFrequency uint32) foundation.HRESULT {
+func (self *IRowsetPrioritization) SetScopePriority(priority PRIORITY_LEVEL, scopeStatisticsEventFrequency uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(priority), uintptr(scopeStatisticsEventFrequency))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScopePriority dispatches through IRowsetPrioritization's vtable slot 4.
-func (self *IRowsetPrioritization) GetScopePriority(priority *PRIORITY_LEVEL, scopeStatisticsEventFrequency *uint32) foundation.HRESULT {
+func (self *IRowsetPrioritization) GetScopePriority(priority *PRIORITY_LEVEL, scopeStatisticsEventFrequency *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(priority)), uintptr(unsafe.Pointer(scopeStatisticsEventFrequency)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScopeStatistics dispatches through IRowsetPrioritization's vtable slot 5.
-func (self *IRowsetPrioritization) GetScopeStatistics(indexedDocumentCount *uint32, oustandingAddCount *uint32, oustandingModifyCount *uint32) foundation.HRESULT {
+func (self *IRowsetPrioritization) GetScopeStatistics(indexedDocumentCount *uint32, oustandingAddCount *uint32, oustandingModifyCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(indexedDocumentCount)), uintptr(unsafe.Pointer(oustandingAddCount)), uintptr(unsafe.Pointer(oustandingModifyCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a7ac77ed-f8d7-11ce-a798-0020f8008024
@@ -2575,15 +2668,15 @@ type IRowsetQueryStatus struct {
 var IID_IRowsetQueryStatus = win32.GUID{Data1: 0xa7ac77ed, Data2: 0xf8d7, Data3: 0x11ce, Data4: [8]byte{0xa7, 0x98, 0x00, 0x20, 0xf8, 0x00, 0x80, 0x24}}
 
 // GetStatus dispatches through IRowsetQueryStatus's vtable slot 3.
-func (self *IRowsetQueryStatus) GetStatus(pdwStatus *uint32) foundation.HRESULT {
+func (self *IRowsetQueryStatus) GetStatus(pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatusEx dispatches through IRowsetQueryStatus's vtable slot 4.
-func (self *IRowsetQueryStatus) GetStatusEx(pdwStatus *uint32, pcFilteredDocuments *uint32, pcDocumentsToFilter *uint32, pdwRatioFinishedDenominator *uintptr, pdwRatioFinishedNumerator *uintptr, cbBmk uintptr, pBmk *byte, piRowBmk *uintptr, pcRowsTotal *uintptr) foundation.HRESULT {
+func (self *IRowsetQueryStatus) GetStatusEx(pdwStatus *uint32, pcFilteredDocuments *uint32, pcDocumentsToFilter *uint32, pdwRatioFinishedDenominator *uintptr, pdwRatioFinishedNumerator *uintptr, cbBmk uintptr, pBmk *byte, piRowBmk *uintptr, pcRowsTotal *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwStatus)), uintptr(unsafe.Pointer(pcFilteredDocuments)), uintptr(unsafe.Pointer(pcDocumentsToFilter)), uintptr(unsafe.Pointer(pdwRatioFinishedDenominator)), uintptr(unsafe.Pointer(pdwRatioFinishedNumerator)), uintptr(cbBmk), uintptr(unsafe.Pointer(pBmk)), uintptr(unsafe.Pointer(piRowBmk)), uintptr(unsafe.Pointer(pcRowsTotal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aa9-2a1c-11ce-ade5-00aa0044773d
@@ -2595,15 +2688,16 @@ type IRowsetRefresh struct {
 var IID_IRowsetRefresh = win32.GUID{Data1: 0x0c733aa9, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // RefreshVisibleData dispatches through IRowsetRefresh's vtable slot 3.
-func (self *IRowsetRefresh) RefreshVisibleData(hChapter uintptr, cRows uintptr, rghRows *uintptr, fOverWrite foundation.BOOL, pcRowsRefreshed *uintptr, prghRowsRefreshed **uintptr, prgRowStatus **uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(fOverWrite), uintptr(unsafe.Pointer(pcRowsRefreshed)), uintptr(unsafe.Pointer(prghRowsRefreshed)), uintptr(unsafe.Pointer(prgRowStatus)))
-	return foundation.HRESULT(r1)
+func (self *IRowsetRefresh) RefreshVisibleData(hChapter uintptr, cRows uintptr, rghRows *uintptr, fOverWrite bool, pcRowsRefreshed *uintptr, prghRowsRefreshed **uintptr, prgRowStatus **uint32) error {
+	_fOverWrite := win32.Bool32(fOverWrite)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(_fOverWrite), uintptr(unsafe.Pointer(pcRowsRefreshed)), uintptr(unsafe.Pointer(prghRowsRefreshed)), uintptr(unsafe.Pointer(prgRowStatus)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLastVisibleData dispatches through IRowsetRefresh's vtable slot 4.
-func (self *IRowsetRefresh) GetLastVisibleData(hRow uintptr, hAccessor HACCESSOR, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IRowsetRefresh) GetLastVisibleData(hRow uintptr, hAccessor HACCESSOR, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hRow), uintptr(hAccessor), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a84-2a1c-11ce-ade5-00aa0044773d
@@ -2615,15 +2709,15 @@ type IRowsetResynch struct {
 var IID_IRowsetResynch = win32.GUID{Data1: 0x0c733a84, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetVisibleData dispatches through IRowsetResynch's vtable slot 3.
-func (self *IRowsetResynch) GetVisibleData(hRow uintptr, hAccessor HACCESSOR, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IRowsetResynch) GetVisibleData(hRow uintptr, hAccessor HACCESSOR, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hRow), uintptr(hAccessor), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResynchRows dispatches through IRowsetResynch's vtable slot 4.
-func (self *IRowsetResynch) ResynchRows(cRows uintptr, rghRows *uintptr, pcRowsResynched *uintptr, prghRowsResynched **uintptr, prgRowStatus **uint32) foundation.HRESULT {
+func (self *IRowsetResynch) ResynchRows(cRows uintptr, rghRows *uintptr, pcRowsResynched *uintptr, prghRowsResynched **uintptr, prgRowStatus **uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(unsafe.Pointer(pcRowsResynched)), uintptr(unsafe.Pointer(prghRowsResynched)), uintptr(unsafe.Pointer(prgRowStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a7e-2a1c-11ce-ade5-00aa0044773d
@@ -2635,15 +2729,15 @@ type IRowsetScroll struct {
 var IID_IRowsetScroll = win32.GUID{Data1: 0x0c733a7e, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetApproximatePosition dispatches through IRowsetScroll's vtable slot 12.
-func (self *IRowsetScroll) GetApproximatePosition(hReserved uintptr, cbBookmark uintptr, pBookmark *byte, pulPosition *uintptr, pcRows *uintptr) foundation.HRESULT {
+func (self *IRowsetScroll) GetApproximatePosition(hReserved uintptr, cbBookmark uintptr, pBookmark *byte, pulPosition *uintptr, pcRows *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(cbBookmark), uintptr(unsafe.Pointer(pBookmark)), uintptr(unsafe.Pointer(pulPosition)), uintptr(unsafe.Pointer(pcRows)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRowsAtRatio dispatches through IRowsetScroll's vtable slot 13.
-func (self *IRowsetScroll) GetRowsAtRatio(hReserved1 uintptr, hReserved2 uintptr, ulNumerator uintptr, ulDenominator uintptr, cRows uintptr, pcRowsObtained *uintptr, prghRows **uintptr) foundation.HRESULT {
+func (self *IRowsetScroll) GetRowsAtRatio(hReserved1 uintptr, hReserved2 uintptr, ulNumerator uintptr, ulDenominator uintptr, cRows uintptr, pcRowsObtained *uintptr, prghRows **uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(hReserved1), uintptr(hReserved2), uintptr(ulNumerator), uintptr(ulDenominator), uintptr(cRows), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(prghRows)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a6d-2a1c-11ce-ade5-00aa0044773d
@@ -2655,33 +2749,33 @@ type IRowsetUpdate struct {
 var IID_IRowsetUpdate = win32.GUID{Data1: 0x0c733a6d, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetOriginalData dispatches through IRowsetUpdate's vtable slot 6.
-func (self *IRowsetUpdate) GetOriginalData(hRow uintptr, hAccessor HACCESSOR, pData unsafe.Pointer) foundation.HRESULT {
+func (self *IRowsetUpdate) GetOriginalData(hRow uintptr, hAccessor HACCESSOR, pData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hRow), uintptr(hAccessor), uintptr(unsafe.Pointer(pData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPendingRows dispatches through IRowsetUpdate's vtable slot 7.
-func (self *IRowsetUpdate) GetPendingRows(hReserved uintptr, dwRowStatus uint32, pcPendingRows *uintptr, prgPendingRows **uintptr, prgPendingStatus **uint32) foundation.HRESULT {
+func (self *IRowsetUpdate) GetPendingRows(hReserved uintptr, dwRowStatus uint32, pcPendingRows *uintptr, prgPendingRows **uintptr, prgPendingStatus **uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(dwRowStatus), uintptr(unsafe.Pointer(pcPendingRows)), uintptr(unsafe.Pointer(prgPendingRows)), uintptr(unsafe.Pointer(prgPendingStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRowStatus dispatches through IRowsetUpdate's vtable slot 8.
-func (self *IRowsetUpdate) GetRowStatus(hReserved uintptr, cRows uintptr, rghRows *uintptr, rgPendingStatus *uint32) foundation.HRESULT {
+func (self *IRowsetUpdate) GetRowStatus(hReserved uintptr, cRows uintptr, rghRows *uintptr, rgPendingStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(unsafe.Pointer(rgPendingStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Undo dispatches through IRowsetUpdate's vtable slot 9.
-func (self *IRowsetUpdate) Undo(hReserved uintptr, cRows uintptr, rghRows *uintptr, pcRowsUndone *uintptr, prgRowsUndone **uintptr, prgRowStatus **uint32) foundation.HRESULT {
+func (self *IRowsetUpdate) Undo(hReserved uintptr, cRows uintptr, rghRows *uintptr, pcRowsUndone *uintptr, prgRowsUndone **uintptr, prgRowStatus **uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(unsafe.Pointer(pcRowsUndone)), uintptr(unsafe.Pointer(prgRowsUndone)), uintptr(unsafe.Pointer(prgRowStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Update dispatches through IRowsetUpdate's vtable slot 10.
-func (self *IRowsetUpdate) Update(hReserved uintptr, cRows uintptr, rghRows *uintptr, pcRows *uintptr, prgRows **uintptr, prgRowStatus **uint32) foundation.HRESULT {
+func (self *IRowsetUpdate) Update(hReserved uintptr, cRows uintptr, rghRows *uintptr, pcRows *uintptr, prgRows **uintptr, prgRowStatus **uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(unsafe.Pointer(pcRows)), uintptr(unsafe.Pointer(prgRows)), uintptr(unsafe.Pointer(prgRowStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a99-2a1c-11ce-ade5-00aa0044773d
@@ -2693,15 +2787,15 @@ type IRowsetView struct {
 var IID_IRowsetView = win32.GUID{Data1: 0x0c733a99, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // CreateView dispatches through IRowsetView's vtable slot 3.
-func (self *IRowsetView) CreateView(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppView **systemcom.IUnknown) foundation.HRESULT {
+func (self *IRowsetView) CreateView(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppView **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppView)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetView dispatches through IRowsetView's vtable slot 4.
-func (self *IRowsetView) GetView(hChapter uintptr, riid *win32.GUID, phChapterSource *uintptr, ppView **systemcom.IUnknown) foundation.HRESULT {
+func (self *IRowsetView) GetView(hChapter uintptr, riid *win32.GUID, phChapterSource *uintptr, ppView **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(phChapterSource)), uintptr(unsafe.Pointer(ppView)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a73-2a1c-11ce-ade5-00aa0044773d
@@ -2713,21 +2807,21 @@ type IRowsetWatchAll struct {
 var IID_IRowsetWatchAll = win32.GUID{Data1: 0x0c733a73, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // Acknowledge dispatches through IRowsetWatchAll's vtable slot 3.
-func (self *IRowsetWatchAll) Acknowledge() foundation.HRESULT {
+func (self *IRowsetWatchAll) Acknowledge() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Start dispatches through IRowsetWatchAll's vtable slot 4.
-func (self *IRowsetWatchAll) Start() foundation.HRESULT {
+func (self *IRowsetWatchAll) Start() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StopWatching dispatches through IRowsetWatchAll's vtable slot 5.
-func (self *IRowsetWatchAll) StopWatching() foundation.HRESULT {
+func (self *IRowsetWatchAll) StopWatching() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a44-2a1c-11ce-ade5-00aa0044773d
@@ -2739,9 +2833,9 @@ type IRowsetWatchNotify struct {
 var IID_IRowsetWatchNotify = win32.GUID{Data1: 0x0c733a44, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // OnChange dispatches through IRowsetWatchNotify's vtable slot 3.
-func (self *IRowsetWatchNotify) OnChange(pRowset *IRowset, eChangeReason uint32) foundation.HRESULT {
+func (self *IRowsetWatchNotify) OnChange(pRowset *IRowset, eChangeReason uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRowset)), uintptr(eChangeReason))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a45-2a1c-11ce-ade5-00aa0044773d
@@ -2753,39 +2847,39 @@ type IRowsetWatchRegion struct {
 var IID_IRowsetWatchRegion = win32.GUID{Data1: 0x0c733a45, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // CreateWatchRegion dispatches through IRowsetWatchRegion's vtable slot 6.
-func (self *IRowsetWatchRegion) CreateWatchRegion(dwWatchMode uint32, phRegion *uintptr) foundation.HRESULT {
+func (self *IRowsetWatchRegion) CreateWatchRegion(dwWatchMode uint32, phRegion *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwWatchMode), uintptr(unsafe.Pointer(phRegion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ChangeWatchMode dispatches through IRowsetWatchRegion's vtable slot 7.
-func (self *IRowsetWatchRegion) ChangeWatchMode(hRegion uintptr, dwWatchMode uint32) foundation.HRESULT {
+func (self *IRowsetWatchRegion) ChangeWatchMode(hRegion uintptr, dwWatchMode uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hRegion), uintptr(dwWatchMode))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteWatchRegion dispatches through IRowsetWatchRegion's vtable slot 8.
-func (self *IRowsetWatchRegion) DeleteWatchRegion(hRegion uintptr) foundation.HRESULT {
+func (self *IRowsetWatchRegion) DeleteWatchRegion(hRegion uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hRegion))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWatchRegionInfo dispatches through IRowsetWatchRegion's vtable slot 9.
-func (self *IRowsetWatchRegion) GetWatchRegionInfo(hRegion uintptr, pdwWatchMode *uint32, phChapter *uintptr, pcbBookmark *uintptr, ppBookmark **byte, pcRows *uintptr) foundation.HRESULT {
+func (self *IRowsetWatchRegion) GetWatchRegionInfo(hRegion uintptr, pdwWatchMode *uint32, phChapter *uintptr, pcbBookmark *uintptr, ppBookmark **byte, pcRows *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hRegion), uintptr(unsafe.Pointer(pdwWatchMode)), uintptr(unsafe.Pointer(phChapter)), uintptr(unsafe.Pointer(pcbBookmark)), uintptr(unsafe.Pointer(ppBookmark)), uintptr(unsafe.Pointer(pcRows)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Refresh dispatches through IRowsetWatchRegion's vtable slot 10.
-func (self *IRowsetWatchRegion) Refresh(pcChangesObtained *uintptr, prgChanges **DBROWWATCHCHANGE) foundation.HRESULT {
+func (self *IRowsetWatchRegion) Refresh(pcChangesObtained *uintptr, prgChanges **DBROWWATCHCHANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcChangesObtained)), uintptr(unsafe.Pointer(prgChanges)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShrinkWatchRegion dispatches through IRowsetWatchRegion's vtable slot 11.
-func (self *IRowsetWatchRegion) ShrinkWatchRegion(hRegion uintptr, hChapter uintptr, cbBookmark uintptr, pBookmark *byte, cRows uintptr) foundation.HRESULT {
+func (self *IRowsetWatchRegion) ShrinkWatchRegion(hRegion uintptr, hChapter uintptr, cbBookmark uintptr, pBookmark *byte, cRows uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hRegion), uintptr(hChapter), uintptr(cbBookmark), uintptr(unsafe.Pointer(pBookmark)), uintptr(cRows))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a6e-2a1c-11ce-ade5-00aa0044773d
@@ -2797,15 +2891,15 @@ type IRowsetWithParameters struct {
 var IID_IRowsetWithParameters = win32.GUID{Data1: 0x0c733a6e, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetParameterInfo dispatches through IRowsetWithParameters's vtable slot 3.
-func (self *IRowsetWithParameters) GetParameterInfo(pcParams *uintptr, prgParamInfo **DBPARAMINFO, ppNamesBuffer **uint16) foundation.HRESULT {
+func (self *IRowsetWithParameters) GetParameterInfo(pcParams *uintptr, prgParamInfo **DBPARAMINFO, ppNamesBuffer **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcParams)), uintptr(unsafe.Pointer(prgParamInfo)), uintptr(unsafe.Pointer(ppNamesBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Requery dispatches through IRowsetWithParameters's vtable slot 4.
-func (self *IRowsetWithParameters) Requery(pParams *DBPARAMS, pulErrorParam *uint32, phReserved *uintptr) foundation.HRESULT {
+func (self *IRowsetWithParameters) Requery(pParams *DBPARAMS, pulErrorParam *uint32, phReserved *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParams)), uintptr(unsafe.Pointer(pulErrorParam)), uintptr(unsafe.Pointer(phReserved)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a74-2a1c-11ce-ade5-00aa0044773d
@@ -2817,9 +2911,9 @@ type ISQLErrorInfo struct {
 var IID_ISQLErrorInfo = win32.GUID{Data1: 0x0c733a74, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetSQLInfo dispatches through ISQLErrorInfo's vtable slot 3.
-func (self *ISQLErrorInfo) GetSQLInfo(pbstrSQLState *foundation.BSTR, plNativeError *int32) foundation.HRESULT {
+func (self *ISQLErrorInfo) GetSQLInfo(pbstrSQLState *foundation.BSTR, plNativeError *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSQLState)), uintptr(unsafe.Pointer(plNativeError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 228972f1-b5ff-11d0-8a80-00c04fd611cd
@@ -2831,9 +2925,9 @@ type ISQLGetDiagField struct {
 var IID_ISQLGetDiagField = win32.GUID{Data1: 0x228972f1, Data2: 0xb5ff, Data3: 0x11d0, Data4: [8]byte{0x8a, 0x80, 0x00, 0xc0, 0x4f, 0xd6, 0x11, 0xcd}}
 
 // GetDiagField dispatches through ISQLGetDiagField's vtable slot 3.
-func (self *ISQLGetDiagField) GetDiagField(pDiagInfo *KAGGETDIAG) foundation.HRESULT {
+func (self *ISQLGetDiagField) GetDiagField(pDiagInfo *KAGGETDIAG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDiagInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 228972f0-b5ff-11d0-8a80-00c04fd611cd
@@ -2845,9 +2939,9 @@ type ISQLRequestDiagFields struct {
 var IID_ISQLRequestDiagFields = win32.GUID{Data1: 0x228972f0, Data2: 0xb5ff, Data3: 0x11d0, Data4: [8]byte{0x8a, 0x80, 0x00, 0xc0, 0x4f, 0xd6, 0x11, 0xcd}}
 
 // RequestDiagFields dispatches through ISQLRequestDiagFields's vtable slot 3.
-func (self *ISQLRequestDiagFields) RequestDiagFields(cDiagFields uint32, rgDiagFields *KAGREQDIAG) foundation.HRESULT {
+func (self *ISQLRequestDiagFields) RequestDiagFields(cDiagFields uint32, rgDiagFields *KAGREQDIAG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cDiagFields), uintptr(unsafe.Pointer(rgDiagFields)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 5cf4ca12-ef21-11d0-97e7-00c04fc2ad98
@@ -2859,9 +2953,9 @@ type ISQLServerErrorInfo struct {
 var IID_ISQLServerErrorInfo = win32.GUID{Data1: 0x5cf4ca12, Data2: 0xef21, Data3: 0x11d0, Data4: [8]byte{0x97, 0xe7, 0x00, 0xc0, 0x4f, 0xc2, 0xad, 0x98}}
 
 // GetErrorInfo dispatches through ISQLServerErrorInfo's vtable slot 3.
-func (self *ISQLServerErrorInfo) GetErrorInfo(ppErrorInfo **SSERRORINFO, ppStringsBuffer **uint16) foundation.HRESULT {
+func (self *ISQLServerErrorInfo) GetErrorInfo(ppErrorInfo **SSERRORINFO, ppStringsBuffer **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppErrorInfo)), uintptr(unsafe.Pointer(ppStringsBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISchemaLocalizerSupport: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-ischemalocalizersupport
@@ -2874,9 +2968,11 @@ type ISchemaLocalizerSupport struct {
 var IID_ISchemaLocalizerSupport = win32.GUID{Data1: 0xca3fdca2, Data2: 0xbfbe, Data3: 0x4eed, Data4: [8]byte{0x90, 0xd7, 0x0c, 0xae, 0xf0, 0xa1, 0xbd, 0xa1}}
 
 // Localize dispatches through ISchemaLocalizerSupport's vtable slot 3.
-func (self *ISchemaLocalizerSupport) Localize(pszGlobalString foundation.PWSTR, ppszLocalString *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszGlobalString)), uintptr(unsafe.Pointer(ppszLocalString)))
-	return foundation.HRESULT(r1)
+func (self *ISchemaLocalizerSupport) Localize(pszGlobalString string) (foundation.PWSTR, error) {
+	_pszGlobalString := win32.UTF16Ptr(pszGlobalString)
+	var _ppszLocalString foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszGlobalString)), uintptr(unsafe.Pointer(&_ppszLocalString)))
+	return _ppszLocalString, win32.HRESULTError(int32(r1))
 }
 
 // IID: 4c2389fb-2511-11d4-b258-00c04f7971ce
@@ -2888,15 +2984,15 @@ type ISchemaLock struct {
 var IID_ISchemaLock = win32.GUID{Data1: 0x4c2389fb, Data2: 0x2511, Data3: 0x11d4, Data4: [8]byte{0xb2, 0x58, 0x00, 0xc0, 0x4f, 0x79, 0x71, 0xce}}
 
 // GetSchemaLock dispatches through ISchemaLock's vtable slot 3.
-func (self *ISchemaLock) GetSchemaLock(pTableID *storageindexserver.DBID, lmMode uint32, phLockHandle *foundation.HANDLE, pTableVersion *uint64) foundation.HRESULT {
+func (self *ISchemaLock) GetSchemaLock(pTableID *storageindexserver.DBID, lmMode uint32, phLockHandle *foundation.HANDLE, pTableVersion *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableID)), uintptr(lmMode), uintptr(unsafe.Pointer(phLockHandle)), uintptr(unsafe.Pointer(pTableVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseSchemaLock dispatches through ISchemaLock's vtable slot 4.
-func (self *ISchemaLock) ReleaseSchemaLock(hLockHandle foundation.HANDLE) foundation.HRESULT {
+func (self *ISchemaLock) ReleaseSchemaLock(hLockHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hLockHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISchemaProvider: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-ischemaprovider
@@ -2909,45 +3005,50 @@ type ISchemaProvider struct {
 var IID_ISchemaProvider = win32.GUID{Data1: 0x8cf89bcb, Data2: 0x394c, Data3: 0x49b2, Data4: [8]byte{0xae, 0x28, 0xa5, 0x9d, 0xd4, 0xed, 0x7f, 0x68}}
 
 // Entities dispatches through ISchemaProvider's vtable slot 3.
-func (self *ISchemaProvider) Entities(riid *win32.GUID, pEntities *unsafe.Pointer) foundation.HRESULT {
+func (self *ISchemaProvider) Entities(riid *win32.GUID, pEntities *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pEntities)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RootEntity dispatches through ISchemaProvider's vtable slot 4.
-func (self *ISchemaProvider) RootEntity(pRootEntity **IEntity) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRootEntity)))
-	return foundation.HRESULT(r1)
+func (self *ISchemaProvider) RootEntity() (*IEntity, error) {
+	var _pRootEntity *IEntity
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pRootEntity)))
+	return _pRootEntity, win32.HRESULTError(int32(r1))
 }
 
 // GetEntity dispatches through ISchemaProvider's vtable slot 5.
-func (self *ISchemaProvider) GetEntity(pszEntityName foundation.PWSTR, pEntity **IEntity) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszEntityName)), uintptr(unsafe.Pointer(pEntity)))
-	return foundation.HRESULT(r1)
+func (self *ISchemaProvider) GetEntity(pszEntityName string) (*IEntity, error) {
+	_pszEntityName := win32.UTF16Ptr(pszEntityName)
+	var _pEntity *IEntity
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszEntityName)), uintptr(unsafe.Pointer(&_pEntity)))
+	return _pEntity, win32.HRESULTError(int32(r1))
 }
 
 // MetaData dispatches through ISchemaProvider's vtable slot 6.
-func (self *ISchemaProvider) MetaData(riid *win32.GUID, pMetaData *unsafe.Pointer) foundation.HRESULT {
+func (self *ISchemaProvider) MetaData(riid *win32.GUID, pMetaData *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pMetaData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Localize dispatches through ISchemaProvider's vtable slot 7.
-func (self *ISchemaProvider) Localize(lcid uint32, pSchemaLocalizerSupport *ISchemaLocalizerSupport) foundation.HRESULT {
+func (self *ISchemaProvider) Localize(lcid uint32, pSchemaLocalizerSupport *ISchemaLocalizerSupport) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lcid), uintptr(unsafe.Pointer(pSchemaLocalizerSupport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveBinary dispatches through ISchemaProvider's vtable slot 8.
-func (self *ISchemaProvider) SaveBinary(pszSchemaBinaryPath foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSchemaBinaryPath)))
-	return foundation.HRESULT(r1)
+func (self *ISchemaProvider) SaveBinary(pszSchemaBinaryPath string) error {
+	_pszSchemaBinaryPath := win32.UTF16Ptr(pszSchemaBinaryPath)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSchemaBinaryPath)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LookupAuthoredNamedEntity dispatches through ISchemaProvider's vtable slot 9.
-func (self *ISchemaProvider) LookupAuthoredNamedEntity(pEntity *IEntity, pszInputString foundation.PWSTR, pTokenCollection *ITokenCollection, cTokensBegin uint32, pcTokensLength *uint32, ppszValue *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEntity)), uintptr(unsafe.Pointer(pszInputString)), uintptr(unsafe.Pointer(pTokenCollection)), uintptr(cTokensBegin), uintptr(unsafe.Pointer(pcTokensLength)), uintptr(unsafe.Pointer(ppszValue)))
-	return foundation.HRESULT(r1)
+func (self *ISchemaProvider) LookupAuthoredNamedEntity(pEntity *IEntity, pszInputString string, pTokenCollection *ITokenCollection, cTokensBegin uint32, pcTokensLength *uint32, ppszValue *foundation.PWSTR) error {
+	_pszInputString := win32.UTF16Ptr(pszInputString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pEntity)), uintptr(unsafe.Pointer(_pszInputString)), uintptr(unsafe.Pointer(pTokenCollection)), uintptr(cTokensBegin), uintptr(unsafe.Pointer(pcTokensLength)), uintptr(unsafe.Pointer(ppszValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733ab0-2a1c-11ce-ade5-00aa0044773d
@@ -2959,27 +3060,27 @@ type IScopedOperations struct {
 var IID_IScopedOperations = win32.GUID{Data1: 0x0c733ab0, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // Copy dispatches through IScopedOperations's vtable slot 4.
-func (self *IScopedOperations) Copy(cRows uintptr, rgpwszSourceURLs *foundation.PWSTR, rgpwszDestURLs *foundation.PWSTR, dwCopyFlags uint32, pAuthenticate *systemcom.IAuthenticate, rgdwStatus *uint32, rgpwszNewURLs *foundation.PWSTR, ppStringsBuffer **uint16) foundation.HRESULT {
+func (self *IScopedOperations) Copy(cRows uintptr, rgpwszSourceURLs *foundation.PWSTR, rgpwszDestURLs *foundation.PWSTR, dwCopyFlags uint32, pAuthenticate *systemcom.IAuthenticate, rgdwStatus *uint32, rgpwszNewURLs *foundation.PWSTR, ppStringsBuffer **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cRows), uintptr(unsafe.Pointer(rgpwszSourceURLs)), uintptr(unsafe.Pointer(rgpwszDestURLs)), uintptr(dwCopyFlags), uintptr(unsafe.Pointer(pAuthenticate)), uintptr(unsafe.Pointer(rgdwStatus)), uintptr(unsafe.Pointer(rgpwszNewURLs)), uintptr(unsafe.Pointer(ppStringsBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Move dispatches through IScopedOperations's vtable slot 5.
-func (self *IScopedOperations) Move(cRows uintptr, rgpwszSourceURLs *foundation.PWSTR, rgpwszDestURLs *foundation.PWSTR, dwMoveFlags uint32, pAuthenticate *systemcom.IAuthenticate, rgdwStatus *uint32, rgpwszNewURLs *foundation.PWSTR, ppStringsBuffer **uint16) foundation.HRESULT {
+func (self *IScopedOperations) Move(cRows uintptr, rgpwszSourceURLs *foundation.PWSTR, rgpwszDestURLs *foundation.PWSTR, dwMoveFlags uint32, pAuthenticate *systemcom.IAuthenticate, rgdwStatus *uint32, rgpwszNewURLs *foundation.PWSTR, ppStringsBuffer **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cRows), uintptr(unsafe.Pointer(rgpwszSourceURLs)), uintptr(unsafe.Pointer(rgpwszDestURLs)), uintptr(dwMoveFlags), uintptr(unsafe.Pointer(pAuthenticate)), uintptr(unsafe.Pointer(rgdwStatus)), uintptr(unsafe.Pointer(rgpwszNewURLs)), uintptr(unsafe.Pointer(ppStringsBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IScopedOperations's vtable slot 6.
-func (self *IScopedOperations) Delete(cRows uintptr, rgpwszURLs *foundation.PWSTR, dwDeleteFlags uint32, rgdwStatus *uint32) foundation.HRESULT {
+func (self *IScopedOperations) Delete(cRows uintptr, rgpwszURLs *foundation.PWSTR, dwDeleteFlags uint32, rgdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cRows), uintptr(unsafe.Pointer(rgpwszURLs)), uintptr(dwDeleteFlags), uintptr(unsafe.Pointer(rgdwStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenRowset dispatches through IScopedOperations's vtable slot 7.
-func (self *IScopedOperations) OpenRowset(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, pIndexID *storageindexserver.DBID, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *IScopedOperations) OpenRowset(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, pIndexID *storageindexserver.DBID, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pIndexID)), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISearchCatalogManager: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchcatalogmanager
@@ -2992,159 +3093,180 @@ type ISearchCatalogManager struct {
 var IID_ISearchCatalogManager = win32.GUID{Data1: 0xab310581, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x50}}
 
 // Get_Name dispatches through ISearchCatalogManager's vtable slot 3.
-func (self *ISearchCatalogManager) Get_Name(pszName *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) Get_Name() (foundation.PWSTR, error) {
+	var _pszName foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszName)))
+	return _pszName, win32.HRESULTError(int32(r1))
 }
 
 // GetParameter dispatches through ISearchCatalogManager's vtable slot 4.
-func (self *ISearchCatalogManager) GetParameter(pszName foundation.PWSTR, ppValue **systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(ppValue)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) GetParameter(pszName string) (*systemcomstructuredstorage.PROPVARIANT, error) {
+	_pszName := win32.UTF16Ptr(pszName)
+	var _ppValue *systemcomstructuredstorage.PROPVARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(&_ppValue)))
+	return _ppValue, win32.HRESULTError(int32(r1))
 }
 
 // SetParameter dispatches through ISearchCatalogManager's vtable slot 5.
-func (self *ISearchCatalogManager) SetParameter(pszName foundation.PWSTR, pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) SetParameter(pszName string, pValue *systemcomstructuredstorage.PROPVARIANT) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCatalogStatus dispatches through ISearchCatalogManager's vtable slot 6.
-func (self *ISearchCatalogManager) GetCatalogStatus(pStatus *CatalogStatus, pPausedReason *CatalogPausedReason) foundation.HRESULT {
+func (self *ISearchCatalogManager) GetCatalogStatus(pStatus *CatalogStatus, pPausedReason *CatalogPausedReason) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStatus)), uintptr(unsafe.Pointer(pPausedReason)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through ISearchCatalogManager's vtable slot 7.
-func (self *ISearchCatalogManager) Reset() foundation.HRESULT {
+func (self *ISearchCatalogManager) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reindex dispatches through ISearchCatalogManager's vtable slot 8.
-func (self *ISearchCatalogManager) Reindex() foundation.HRESULT {
+func (self *ISearchCatalogManager) Reindex() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReindexMatchingURLs dispatches through ISearchCatalogManager's vtable slot 9.
-func (self *ISearchCatalogManager) ReindexMatchingURLs(pszPattern foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPattern)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) ReindexMatchingURLs(pszPattern string) error {
+	_pszPattern := win32.UTF16Ptr(pszPattern)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPattern)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReindexSearchRoot dispatches through ISearchCatalogManager's vtable slot 10.
-func (self *ISearchCatalogManager) ReindexSearchRoot(pszRootURL foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszRootURL)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) ReindexSearchRoot(pszRootURL string) error {
+	_pszRootURL := win32.UTF16Ptr(pszRootURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRootURL)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ConnectTimeout dispatches through ISearchCatalogManager's vtable slot 11.
-func (self *ISearchCatalogManager) Put_ConnectTimeout(dwConnectTimeout uint32) foundation.HRESULT {
+func (self *ISearchCatalogManager) Put_ConnectTimeout(dwConnectTimeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(dwConnectTimeout))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ConnectTimeout dispatches through ISearchCatalogManager's vtable slot 12.
-func (self *ISearchCatalogManager) Get_ConnectTimeout(pdwConnectTimeout *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwConnectTimeout)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) Get_ConnectTimeout() (uint32, error) {
+	var _pdwConnectTimeout uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwConnectTimeout)))
+	return _pdwConnectTimeout, win32.HRESULTError(int32(r1))
 }
 
 // Put_DataTimeout dispatches through ISearchCatalogManager's vtable slot 13.
-func (self *ISearchCatalogManager) Put_DataTimeout(dwDataTimeout uint32) foundation.HRESULT {
+func (self *ISearchCatalogManager) Put_DataTimeout(dwDataTimeout uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwDataTimeout))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DataTimeout dispatches through ISearchCatalogManager's vtable slot 14.
-func (self *ISearchCatalogManager) Get_DataTimeout(pdwDataTimeout *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwDataTimeout)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) Get_DataTimeout() (uint32, error) {
+	var _pdwDataTimeout uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwDataTimeout)))
+	return _pdwDataTimeout, win32.HRESULTError(int32(r1))
 }
 
 // NumberOfItems dispatches through ISearchCatalogManager's vtable slot 15.
-func (self *ISearchCatalogManager) NumberOfItems(plCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plCount)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) NumberOfItems() (int32, error) {
+	var _plCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plCount)))
+	return _plCount, win32.HRESULTError(int32(r1))
 }
 
 // NumberOfItemsToIndex dispatches through ISearchCatalogManager's vtable slot 16.
-func (self *ISearchCatalogManager) NumberOfItemsToIndex(plIncrementalCount *int32, plNotificationQueue *int32, plHighPriorityQueue *int32) foundation.HRESULT {
+func (self *ISearchCatalogManager) NumberOfItemsToIndex(plIncrementalCount *int32, plNotificationQueue *int32, plHighPriorityQueue *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plIncrementalCount)), uintptr(unsafe.Pointer(plNotificationQueue)), uintptr(unsafe.Pointer(plHighPriorityQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // URLBeingIndexed dispatches through ISearchCatalogManager's vtable slot 17.
-func (self *ISearchCatalogManager) URLBeingIndexed(pszUrl *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszUrl)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) URLBeingIndexed() (foundation.PWSTR, error) {
+	var _pszUrl foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszUrl)))
+	return _pszUrl, win32.HRESULTError(int32(r1))
 }
 
 // GetURLIndexingState dispatches through ISearchCatalogManager's vtable slot 18.
-func (self *ISearchCatalogManager) GetURLIndexingState(pszURL foundation.PWSTR, pdwState *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(pdwState)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) GetURLIndexingState(pszURL string) (uint32, error) {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	var _pdwState uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(&_pdwState)))
+	return _pdwState, win32.HRESULTError(int32(r1))
 }
 
 // GetPersistentItemsChangedSink dispatches through ISearchCatalogManager's vtable slot 19.
-func (self *ISearchCatalogManager) GetPersistentItemsChangedSink(ppISearchPersistentItemsChangedSink **ISearchPersistentItemsChangedSink) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppISearchPersistentItemsChangedSink)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) GetPersistentItemsChangedSink() (*ISearchPersistentItemsChangedSink, error) {
+	var _ppISearchPersistentItemsChangedSink *ISearchPersistentItemsChangedSink
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppISearchPersistentItemsChangedSink)))
+	return _ppISearchPersistentItemsChangedSink, win32.HRESULTError(int32(r1))
 }
 
 // RegisterViewForNotification dispatches through ISearchCatalogManager's vtable slot 20.
-func (self *ISearchCatalogManager) RegisterViewForNotification(pszView foundation.PWSTR, pViewChangedSink *ISearchViewChangedSink, pdwCookie *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszView)), uintptr(unsafe.Pointer(pViewChangedSink)), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) RegisterViewForNotification(pszView string, pViewChangedSink *ISearchViewChangedSink, pdwCookie *uint32) error {
+	_pszView := win32.UTF16Ptr(pszView)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszView)), uintptr(unsafe.Pointer(pViewChangedSink)), uintptr(unsafe.Pointer(pdwCookie)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetItemsChangedSink dispatches through ISearchCatalogManager's vtable slot 21.
-func (self *ISearchCatalogManager) GetItemsChangedSink(pISearchNotifyInlineSite *ISearchNotifyInlineSite, riid *win32.GUID, ppv *unsafe.Pointer, pGUIDCatalogResetSignature *win32.GUID, pGUIDCheckPointSignature *win32.GUID, pdwLastCheckPointNumber *uint32) foundation.HRESULT {
+func (self *ISearchCatalogManager) GetItemsChangedSink(pISearchNotifyInlineSite *ISearchNotifyInlineSite, riid *win32.GUID, ppv *unsafe.Pointer, pGUIDCatalogResetSignature *win32.GUID, pGUIDCheckPointSignature *win32.GUID, pdwLastCheckPointNumber *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pISearchNotifyInlineSite)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)), uintptr(unsafe.Pointer(pGUIDCatalogResetSignature)), uintptr(unsafe.Pointer(pGUIDCheckPointSignature)), uintptr(unsafe.Pointer(pdwLastCheckPointNumber)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterViewForNotification dispatches through ISearchCatalogManager's vtable slot 22.
-func (self *ISearchCatalogManager) UnregisterViewForNotification(dwCookie uint32) foundation.HRESULT {
+func (self *ISearchCatalogManager) UnregisterViewForNotification(dwCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(dwCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetExtensionClusion dispatches through ISearchCatalogManager's vtable slot 23.
-func (self *ISearchCatalogManager) SetExtensionClusion(pszExtension foundation.PWSTR, fExclude foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszExtension)), uintptr(fExclude))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) SetExtensionClusion(pszExtension string, fExclude bool) error {
+	_pszExtension := win32.UTF16Ptr(pszExtension)
+	_fExclude := win32.Bool32(fExclude)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszExtension)), uintptr(_fExclude))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateExcludedExtensions dispatches through ISearchCatalogManager's vtable slot 24.
-func (self *ISearchCatalogManager) EnumerateExcludedExtensions(ppExtensions **systemcom.IEnumString) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppExtensions)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) EnumerateExcludedExtensions() (*systemcom.IEnumString, error) {
+	var _ppExtensions *systemcom.IEnumString
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppExtensions)))
+	return _ppExtensions, win32.HRESULTError(int32(r1))
 }
 
 // GetQueryHelper dispatches through ISearchCatalogManager's vtable slot 25.
-func (self *ISearchCatalogManager) GetQueryHelper(ppSearchQueryHelper **ISearchQueryHelper) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSearchQueryHelper)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) GetQueryHelper() (*ISearchQueryHelper, error) {
+	var _ppSearchQueryHelper *ISearchQueryHelper
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSearchQueryHelper)))
+	return _ppSearchQueryHelper, win32.HRESULTError(int32(r1))
 }
 
 // Put_DiacriticSensitivity dispatches through ISearchCatalogManager's vtable slot 26.
-func (self *ISearchCatalogManager) Put_DiacriticSensitivity(fDiacriticSensitive foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(fDiacriticSensitive))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) Put_DiacriticSensitivity(fDiacriticSensitive bool) error {
+	_fDiacriticSensitive := win32.Bool32(fDiacriticSensitive)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(_fDiacriticSensitive))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DiacriticSensitivity dispatches through ISearchCatalogManager's vtable slot 27.
-func (self *ISearchCatalogManager) Get_DiacriticSensitivity(pfDiacriticSensitive *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfDiacriticSensitive)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) Get_DiacriticSensitivity() (foundation.BOOL, error) {
+	var _pfDiacriticSensitive foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfDiacriticSensitive)))
+	return _pfDiacriticSensitive, win32.HRESULTError(int32(r1))
 }
 
 // GetCrawlScopeManager dispatches through ISearchCatalogManager's vtable slot 28.
-func (self *ISearchCatalogManager) GetCrawlScopeManager(ppCrawlScopeManager **ISearchCrawlScopeManager) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppCrawlScopeManager)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager) GetCrawlScopeManager() (*ISearchCrawlScopeManager, error) {
+	var _ppCrawlScopeManager *ISearchCrawlScopeManager
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppCrawlScopeManager)))
+	return _ppCrawlScopeManager, win32.HRESULTError(int32(r1))
 }
 
 // ISearchCatalogManager2: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchcatalogmanager2
@@ -3157,9 +3279,10 @@ type ISearchCatalogManager2 struct {
 var IID_ISearchCatalogManager2 = win32.GUID{Data1: 0x7ac3286d, Data2: 0x4d1d, Data3: 0x4817, Data4: [8]byte{0x84, 0xfc, 0xc1, 0xc8, 0x5e, 0x3a, 0xf0, 0xd9}}
 
 // PrioritizeMatchingURLs dispatches through ISearchCatalogManager2's vtable slot 29.
-func (self *ISearchCatalogManager2) PrioritizeMatchingURLs(pszPattern foundation.PWSTR, dwPrioritizeFlags PRIORITIZE_FLAGS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPattern)), uintptr(dwPrioritizeFlags))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager2) PrioritizeMatchingURLs(pszPattern string, dwPrioritizeFlags PRIORITIZE_FLAGS) error {
+	_pszPattern := win32.UTF16Ptr(pszPattern)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPattern)), uintptr(dwPrioritizeFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: de837e8f-634f-4ab0-bdfc-9fc3a1fc50dc
@@ -3171,9 +3294,10 @@ type ISearchCatalogManager3 struct {
 var IID_ISearchCatalogManager3 = win32.GUID{Data1: 0xde837e8f, Data2: 0x634f, Data3: 0x4ab0, Data4: [8]byte{0xbd, 0xfc, 0x9f, 0xc3, 0xa1, 0xfc, 0x50, 0xdc}}
 
 // IsContainsSemanticSupported dispatches through ISearchCatalogManager3's vtable slot 30.
-func (self *ISearchCatalogManager3) IsContainsSemanticSupported(isContainsSemanticSupported *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(isContainsSemanticSupported)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCatalogManager3) IsContainsSemanticSupported() (foundation.BOOL, error) {
+	var _isContainsSemanticSupported foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_isContainsSemanticSupported)))
+	return _isContainsSemanticSupported, win32.HRESULTError(int32(r1))
 }
 
 // ISearchCrawlScopeManager: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchcrawlscopemanager
@@ -3186,99 +3310,122 @@ type ISearchCrawlScopeManager struct {
 var IID_ISearchCrawlScopeManager = win32.GUID{Data1: 0xab310581, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x55}}
 
 // AddDefaultScopeRule dispatches through ISearchCrawlScopeManager's vtable slot 3.
-func (self *ISearchCrawlScopeManager) AddDefaultScopeRule(pszURL foundation.PWSTR, fInclude foundation.BOOL, fFollowFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)), uintptr(fInclude), uintptr(fFollowFlags))
-	return foundation.HRESULT(r1)
+func (self *ISearchCrawlScopeManager) AddDefaultScopeRule(pszURL string, fInclude bool, fFollowFlags uint32) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	_fInclude := win32.Bool32(fInclude)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(_fInclude), uintptr(fFollowFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddRoot dispatches through ISearchCrawlScopeManager's vtable slot 4.
-func (self *ISearchCrawlScopeManager) AddRoot(pSearchRoot *ISearchRoot) foundation.HRESULT {
+func (self *ISearchCrawlScopeManager) AddRoot(pSearchRoot *ISearchRoot) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSearchRoot)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveRoot dispatches through ISearchCrawlScopeManager's vtable slot 5.
-func (self *ISearchCrawlScopeManager) RemoveRoot(pszURL foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCrawlScopeManager) RemoveRoot(pszURL string) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateRoots dispatches through ISearchCrawlScopeManager's vtable slot 6.
-func (self *ISearchCrawlScopeManager) EnumerateRoots(ppSearchRoots **IEnumSearchRoots) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSearchRoots)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCrawlScopeManager) EnumerateRoots() (*IEnumSearchRoots, error) {
+	var _ppSearchRoots *IEnumSearchRoots
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSearchRoots)))
+	return _ppSearchRoots, win32.HRESULTError(int32(r1))
 }
 
 // AddHierarchicalScope dispatches through ISearchCrawlScopeManager's vtable slot 7.
-func (self *ISearchCrawlScopeManager) AddHierarchicalScope(pszURL foundation.PWSTR, fInclude foundation.BOOL, fDefault foundation.BOOL, fOverrideChildren foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)), uintptr(fInclude), uintptr(fDefault), uintptr(fOverrideChildren))
-	return foundation.HRESULT(r1)
+func (self *ISearchCrawlScopeManager) AddHierarchicalScope(pszURL string, fInclude bool, fDefault bool, fOverrideChildren bool) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	_fInclude := win32.Bool32(fInclude)
+	_fDefault := win32.Bool32(fDefault)
+	_fOverrideChildren := win32.Bool32(fOverrideChildren)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(_fInclude), uintptr(_fDefault), uintptr(_fOverrideChildren))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddUserScopeRule dispatches through ISearchCrawlScopeManager's vtable slot 8.
-func (self *ISearchCrawlScopeManager) AddUserScopeRule(pszURL foundation.PWSTR, fInclude foundation.BOOL, fOverrideChildren foundation.BOOL, fFollowFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)), uintptr(fInclude), uintptr(fOverrideChildren), uintptr(fFollowFlags))
-	return foundation.HRESULT(r1)
+func (self *ISearchCrawlScopeManager) AddUserScopeRule(pszURL string, fInclude bool, fOverrideChildren bool, fFollowFlags uint32) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	_fInclude := win32.Bool32(fInclude)
+	_fOverrideChildren := win32.Bool32(fOverrideChildren)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(_fInclude), uintptr(_fOverrideChildren), uintptr(fFollowFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveScopeRule dispatches through ISearchCrawlScopeManager's vtable slot 9.
-func (self *ISearchCrawlScopeManager) RemoveScopeRule(pszRule foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszRule)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCrawlScopeManager) RemoveScopeRule(pszRule string) error {
+	_pszRule := win32.UTF16Ptr(pszRule)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRule)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateScopeRules dispatches through ISearchCrawlScopeManager's vtable slot 10.
-func (self *ISearchCrawlScopeManager) EnumerateScopeRules(ppSearchScopeRules **IEnumSearchScopeRules) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSearchScopeRules)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCrawlScopeManager) EnumerateScopeRules() (*IEnumSearchScopeRules, error) {
+	var _ppSearchScopeRules *IEnumSearchScopeRules
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSearchScopeRules)))
+	return _ppSearchScopeRules, win32.HRESULTError(int32(r1))
 }
 
 // HasParentScopeRule dispatches through ISearchCrawlScopeManager's vtable slot 11.
-func (self *ISearchCrawlScopeManager) HasParentScopeRule(pszURL foundation.PWSTR, pfHasParentRule *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(pfHasParentRule)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCrawlScopeManager) HasParentScopeRule(pszURL string) (foundation.BOOL, error) {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	var _pfHasParentRule foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(&_pfHasParentRule)))
+	return _pfHasParentRule, win32.HRESULTError(int32(r1))
 }
 
 // HasChildScopeRule dispatches through ISearchCrawlScopeManager's vtable slot 12.
-func (self *ISearchCrawlScopeManager) HasChildScopeRule(pszURL foundation.PWSTR, pfHasChildRule *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(pfHasChildRule)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCrawlScopeManager) HasChildScopeRule(pszURL string) (foundation.BOOL, error) {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	var _pfHasChildRule foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(&_pfHasChildRule)))
+	return _pfHasChildRule, win32.HRESULTError(int32(r1))
 }
 
 // IncludedInCrawlScope dispatches through ISearchCrawlScopeManager's vtable slot 13.
-func (self *ISearchCrawlScopeManager) IncludedInCrawlScope(pszURL foundation.PWSTR, pfIsIncluded *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(pfIsIncluded)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCrawlScopeManager) IncludedInCrawlScope(pszURL string) (foundation.BOOL, error) {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	var _pfIsIncluded foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(&_pfIsIncluded)))
+	return _pfIsIncluded, win32.HRESULTError(int32(r1))
 }
 
 // IncludedInCrawlScopeEx dispatches through ISearchCrawlScopeManager's vtable slot 14.
-func (self *ISearchCrawlScopeManager) IncludedInCrawlScopeEx(pszURL foundation.PWSTR, pfIsIncluded *foundation.BOOL, pReason *CLUSION_REASON) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(pfIsIncluded)), uintptr(unsafe.Pointer(pReason)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCrawlScopeManager) IncludedInCrawlScopeEx(pszURL string, pfIsIncluded *foundation.BOOL, pReason *CLUSION_REASON) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(pfIsIncluded)), uintptr(unsafe.Pointer(pReason)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RevertToDefaultScopes dispatches through ISearchCrawlScopeManager's vtable slot 15.
-func (self *ISearchCrawlScopeManager) RevertToDefaultScopes() foundation.HRESULT {
+func (self *ISearchCrawlScopeManager) RevertToDefaultScopes() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveAll dispatches through ISearchCrawlScopeManager's vtable slot 16.
-func (self *ISearchCrawlScopeManager) SaveAll() foundation.HRESULT {
+func (self *ISearchCrawlScopeManager) SaveAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetParentScopeVersionId dispatches through ISearchCrawlScopeManager's vtable slot 17.
-func (self *ISearchCrawlScopeManager) GetParentScopeVersionId(pszURL foundation.PWSTR, plScopeId *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(plScopeId)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCrawlScopeManager) GetParentScopeVersionId(pszURL string) (int32, error) {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	var _plScopeId int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(&_plScopeId)))
+	return _plScopeId, win32.HRESULTError(int32(r1))
 }
 
 // RemoveDefaultScopeRule dispatches through ISearchCrawlScopeManager's vtable slot 18.
-func (self *ISearchCrawlScopeManager) RemoveDefaultScopeRule(pszURL foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)))
-	return foundation.HRESULT(r1)
+func (self *ISearchCrawlScopeManager) RemoveDefaultScopeRule(pszURL string) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISearchCrawlScopeManager2: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchcrawlscopemanager2
@@ -3291,9 +3438,9 @@ type ISearchCrawlScopeManager2 struct {
 var IID_ISearchCrawlScopeManager2 = win32.GUID{Data1: 0x6292f7ad, Data2: 0x4e19, Data3: 0x4717, Data4: [8]byte{0xa5, 0x34, 0x8f, 0xc2, 0x2b, 0xcd, 0x5c, 0xcd}}
 
 // GetVersion dispatches through ISearchCrawlScopeManager2's vtable slot 19.
-func (self *ISearchCrawlScopeManager2) GetVersion(plVersion **int32, phFileMapping *foundation.HANDLE) foundation.HRESULT {
+func (self *ISearchCrawlScopeManager2) GetVersion(plVersion **int32, phFileMapping *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plVersion)), uintptr(unsafe.Pointer(phFileMapping)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISearchItemsChangedSink: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchitemschangedsink
@@ -3306,21 +3453,23 @@ type ISearchItemsChangedSink struct {
 var IID_ISearchItemsChangedSink = win32.GUID{Data1: 0xab310581, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x58}}
 
 // StartedMonitoringScope dispatches through ISearchItemsChangedSink's vtable slot 3.
-func (self *ISearchItemsChangedSink) StartedMonitoringScope(pszURL foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)))
-	return foundation.HRESULT(r1)
+func (self *ISearchItemsChangedSink) StartedMonitoringScope(pszURL string) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StoppedMonitoringScope dispatches through ISearchItemsChangedSink's vtable slot 4.
-func (self *ISearchItemsChangedSink) StoppedMonitoringScope(pszURL foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)))
-	return foundation.HRESULT(r1)
+func (self *ISearchItemsChangedSink) StoppedMonitoringScope(pszURL string) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnItemsChanged dispatches through ISearchItemsChangedSink's vtable slot 5.
-func (self *ISearchItemsChangedSink) OnItemsChanged(dwNumberOfChanges uint32, rgDataChangeEntries *SEARCH_ITEM_CHANGE, rgdwDocIds *uint32, rghrCompletionCodes *foundation.HRESULT) foundation.HRESULT {
+func (self *ISearchItemsChangedSink) OnItemsChanged(dwNumberOfChanges uint32, rgDataChangeEntries *SEARCH_ITEM_CHANGE, rgdwDocIds *uint32, rghrCompletionCodes *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwNumberOfChanges), uintptr(unsafe.Pointer(rgDataChangeEntries)), uintptr(unsafe.Pointer(rgdwDocIds)), uintptr(unsafe.Pointer(rghrCompletionCodes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISearchLanguageSupport: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchlanguagesupport
@@ -3333,33 +3482,37 @@ type ISearchLanguageSupport struct {
 var IID_ISearchLanguageSupport = win32.GUID{Data1: 0x24c3cbaa, Data2: 0xebc1, Data3: 0x491a, Data4: [8]byte{0x9e, 0xf1, 0x9f, 0x6d, 0x8d, 0xeb, 0x1b, 0x8f}}
 
 // SetDiacriticSensitivity dispatches through ISearchLanguageSupport's vtable slot 3.
-func (self *ISearchLanguageSupport) SetDiacriticSensitivity(fDiacriticSensitive foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(fDiacriticSensitive))
-	return foundation.HRESULT(r1)
+func (self *ISearchLanguageSupport) SetDiacriticSensitivity(fDiacriticSensitive bool) error {
+	_fDiacriticSensitive := win32.Bool32(fDiacriticSensitive)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_fDiacriticSensitive))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDiacriticSensitivity dispatches through ISearchLanguageSupport's vtable slot 4.
-func (self *ISearchLanguageSupport) GetDiacriticSensitivity(pfDiacriticSensitive *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfDiacriticSensitive)))
-	return foundation.HRESULT(r1)
+func (self *ISearchLanguageSupport) GetDiacriticSensitivity() (foundation.BOOL, error) {
+	var _pfDiacriticSensitive foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfDiacriticSensitive)))
+	return _pfDiacriticSensitive, win32.HRESULTError(int32(r1))
 }
 
 // LoadWordBreaker dispatches through ISearchLanguageSupport's vtable slot 5.
-func (self *ISearchLanguageSupport) LoadWordBreaker(lcid uint32, riid *win32.GUID, ppWordBreaker *unsafe.Pointer, pLcidUsed *uint32) foundation.HRESULT {
+func (self *ISearchLanguageSupport) LoadWordBreaker(lcid uint32, riid *win32.GUID, ppWordBreaker *unsafe.Pointer, pLcidUsed *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lcid), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppWordBreaker)), uintptr(unsafe.Pointer(pLcidUsed)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadStemmer dispatches through ISearchLanguageSupport's vtable slot 6.
-func (self *ISearchLanguageSupport) LoadStemmer(lcid uint32, riid *win32.GUID, ppStemmer *unsafe.Pointer, pLcidUsed *uint32) foundation.HRESULT {
+func (self *ISearchLanguageSupport) LoadStemmer(lcid uint32, riid *win32.GUID, ppStemmer *unsafe.Pointer, pLcidUsed *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lcid), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppStemmer)), uintptr(unsafe.Pointer(pLcidUsed)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsPrefixNormalized dispatches through ISearchLanguageSupport's vtable slot 7.
-func (self *ISearchLanguageSupport) IsPrefixNormalized(pwcsQueryToken foundation.PWSTR, cwcQueryToken uint32, pwcsDocumentToken foundation.PWSTR, cwcDocumentToken uint32, pulPrefixLength *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwcsQueryToken)), uintptr(cwcQueryToken), uintptr(unsafe.Pointer(pwcsDocumentToken)), uintptr(cwcDocumentToken), uintptr(unsafe.Pointer(pulPrefixLength)))
-	return foundation.HRESULT(r1)
+func (self *ISearchLanguageSupport) IsPrefixNormalized(pwcsQueryToken string, cwcQueryToken uint32, pwcsDocumentToken string, cwcDocumentToken uint32, pulPrefixLength *uint32) error {
+	_pwcsQueryToken := win32.UTF16Ptr(pwcsQueryToken)
+	_pwcsDocumentToken := win32.UTF16Ptr(pwcsDocumentToken)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcsQueryToken)), uintptr(cwcQueryToken), uintptr(unsafe.Pointer(_pwcsDocumentToken)), uintptr(cwcDocumentToken), uintptr(unsafe.Pointer(pulPrefixLength)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISearchManager: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchmanager
@@ -3372,81 +3525,96 @@ type ISearchManager struct {
 var IID_ISearchManager = win32.GUID{Data1: 0xab310581, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x69}}
 
 // GetIndexerVersionStr dispatches through ISearchManager's vtable slot 3.
-func (self *ISearchManager) GetIndexerVersionStr(ppszVersionString *foundation.PWSTR) foundation.HRESULT {
+func (self *ISearchManager) GetIndexerVersionStr(ppszVersionString *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszVersionString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIndexerVersion dispatches through ISearchManager's vtable slot 4.
-func (self *ISearchManager) GetIndexerVersion(pdwMajor *uint32, pdwMinor *uint32) foundation.HRESULT {
+func (self *ISearchManager) GetIndexerVersion(pdwMajor *uint32, pdwMinor *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwMajor)), uintptr(unsafe.Pointer(pdwMinor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetParameter dispatches through ISearchManager's vtable slot 5.
-func (self *ISearchManager) GetParameter(pszName foundation.PWSTR, ppValue **systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(ppValue)))
-	return foundation.HRESULT(r1)
+func (self *ISearchManager) GetParameter(pszName string) (*systemcomstructuredstorage.PROPVARIANT, error) {
+	_pszName := win32.UTF16Ptr(pszName)
+	var _ppValue *systemcomstructuredstorage.PROPVARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(&_ppValue)))
+	return _ppValue, win32.HRESULTError(int32(r1))
 }
 
 // SetParameter dispatches through ISearchManager's vtable slot 6.
-func (self *ISearchManager) SetParameter(pszName foundation.PWSTR, pValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszName)), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+func (self *ISearchManager) SetParameter(pszName string, pValue *systemcomstructuredstorage.PROPVARIANT) error {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ProxyName dispatches through ISearchManager's vtable slot 7.
-func (self *ISearchManager) Get_ProxyName(ppszProxyName *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszProxyName)))
-	return foundation.HRESULT(r1)
+func (self *ISearchManager) Get_ProxyName() (foundation.PWSTR, error) {
+	var _ppszProxyName foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszProxyName)))
+	return _ppszProxyName, win32.HRESULTError(int32(r1))
 }
 
 // Get_BypassList dispatches through ISearchManager's vtable slot 8.
-func (self *ISearchManager) Get_BypassList(ppszBypassList *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszBypassList)))
-	return foundation.HRESULT(r1)
+func (self *ISearchManager) Get_BypassList() (foundation.PWSTR, error) {
+	var _ppszBypassList foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszBypassList)))
+	return _ppszBypassList, win32.HRESULTError(int32(r1))
 }
 
 // SetProxy dispatches through ISearchManager's vtable slot 9.
-func (self *ISearchManager) SetProxy(sUseProxy PROXY_ACCESS, fLocalByPassProxy foundation.BOOL, dwPortNumber uint32, pszProxyName foundation.PWSTR, pszByPassList foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(sUseProxy), uintptr(fLocalByPassProxy), uintptr(dwPortNumber), uintptr(unsafe.Pointer(pszProxyName)), uintptr(unsafe.Pointer(pszByPassList)))
-	return foundation.HRESULT(r1)
+func (self *ISearchManager) SetProxy(sUseProxy PROXY_ACCESS, fLocalByPassProxy bool, dwPortNumber uint32, pszProxyName string, pszByPassList string) error {
+	_fLocalByPassProxy := win32.Bool32(fLocalByPassProxy)
+	_pszProxyName := win32.UTF16Ptr(pszProxyName)
+	_pszByPassList := win32.UTF16Ptr(pszByPassList)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(sUseProxy), uintptr(_fLocalByPassProxy), uintptr(dwPortNumber), uintptr(unsafe.Pointer(_pszProxyName)), uintptr(unsafe.Pointer(_pszByPassList)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCatalog dispatches through ISearchManager's vtable slot 10.
-func (self *ISearchManager) GetCatalog(pszCatalog foundation.PWSTR, ppCatalogManager **ISearchCatalogManager) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCatalog)), uintptr(unsafe.Pointer(ppCatalogManager)))
-	return foundation.HRESULT(r1)
+func (self *ISearchManager) GetCatalog(pszCatalog string) (*ISearchCatalogManager, error) {
+	_pszCatalog := win32.UTF16Ptr(pszCatalog)
+	var _ppCatalogManager *ISearchCatalogManager
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCatalog)), uintptr(unsafe.Pointer(&_ppCatalogManager)))
+	return _ppCatalogManager, win32.HRESULTError(int32(r1))
 }
 
 // Get_UserAgent dispatches through ISearchManager's vtable slot 11.
-func (self *ISearchManager) Get_UserAgent(ppszUserAgent *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszUserAgent)))
-	return foundation.HRESULT(r1)
+func (self *ISearchManager) Get_UserAgent() (foundation.PWSTR, error) {
+	var _ppszUserAgent foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszUserAgent)))
+	return _ppszUserAgent, win32.HRESULTError(int32(r1))
 }
 
 // Put_UserAgent dispatches through ISearchManager's vtable slot 12.
-func (self *ISearchManager) Put_UserAgent(pszUserAgent foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszUserAgent)))
-	return foundation.HRESULT(r1)
+func (self *ISearchManager) Put_UserAgent(pszUserAgent string) error {
+	_pszUserAgent := win32.UTF16Ptr(pszUserAgent)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUserAgent)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_UseProxy dispatches through ISearchManager's vtable slot 13.
-func (self *ISearchManager) Get_UseProxy(pUseProxy *PROXY_ACCESS) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUseProxy)))
-	return foundation.HRESULT(r1)
+func (self *ISearchManager) Get_UseProxy() (PROXY_ACCESS, error) {
+	var _pUseProxy PROXY_ACCESS
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pUseProxy)))
+	return _pUseProxy, win32.HRESULTError(int32(r1))
 }
 
 // Get_LocalBypass dispatches through ISearchManager's vtable slot 14.
-func (self *ISearchManager) Get_LocalBypass(pfLocalBypass *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLocalBypass)))
-	return foundation.HRESULT(r1)
+func (self *ISearchManager) Get_LocalBypass() (foundation.BOOL, error) {
+	var _pfLocalBypass foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfLocalBypass)))
+	return _pfLocalBypass, win32.HRESULTError(int32(r1))
 }
 
 // Get_PortNumber dispatches through ISearchManager's vtable slot 15.
-func (self *ISearchManager) Get_PortNumber(pdwPortNumber *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwPortNumber)))
-	return foundation.HRESULT(r1)
+func (self *ISearchManager) Get_PortNumber() (uint32, error) {
+	var _pdwPortNumber uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwPortNumber)))
+	return _pdwPortNumber, win32.HRESULTError(int32(r1))
 }
 
 // ISearchManager2: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchmanager2
@@ -3459,15 +3627,17 @@ type ISearchManager2 struct {
 var IID_ISearchManager2 = win32.GUID{Data1: 0xdbab3f73, Data2: 0xdb19, Data3: 0x4a79, Data4: [8]byte{0xbf, 0xc0, 0xa6, 0x1a, 0x93, 0x88, 0x6d, 0xdf}}
 
 // CreateCatalog dispatches through ISearchManager2's vtable slot 16.
-func (self *ISearchManager2) CreateCatalog(pszCatalog foundation.PWSTR, ppCatalogManager **ISearchCatalogManager) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCatalog)), uintptr(unsafe.Pointer(ppCatalogManager)))
-	return foundation.HRESULT(r1)
+func (self *ISearchManager2) CreateCatalog(pszCatalog string, ppCatalogManager **ISearchCatalogManager) error {
+	_pszCatalog := win32.UTF16Ptr(pszCatalog)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCatalog)), uintptr(unsafe.Pointer(ppCatalogManager)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteCatalog dispatches through ISearchManager2's vtable slot 17.
-func (self *ISearchManager2) DeleteCatalog(pszCatalog foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCatalog)))
-	return foundation.HRESULT(r1)
+func (self *ISearchManager2) DeleteCatalog(pszCatalog string) error {
+	_pszCatalog := win32.UTF16Ptr(pszCatalog)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCatalog)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISearchNotifyInlineSite: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchnotifyinlinesite
@@ -3480,15 +3650,15 @@ type ISearchNotifyInlineSite struct {
 var IID_ISearchNotifyInlineSite = win32.GUID{Data1: 0xb5702e61, Data2: 0xe75c, Data3: 0x4b64, Data4: [8]byte{0x82, 0xa1, 0x6c, 0xb4, 0xf8, 0x32, 0xfc, 0xcf}}
 
 // OnItemIndexedStatusChange dispatches through ISearchNotifyInlineSite's vtable slot 3.
-func (self *ISearchNotifyInlineSite) OnItemIndexedStatusChange(sipStatus SEARCH_INDEXING_PHASE, dwNumEntries uint32, rgItemStatusEntries *SEARCH_ITEM_INDEXING_STATUS) foundation.HRESULT {
+func (self *ISearchNotifyInlineSite) OnItemIndexedStatusChange(sipStatus SEARCH_INDEXING_PHASE, dwNumEntries uint32, rgItemStatusEntries *SEARCH_ITEM_INDEXING_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(sipStatus), uintptr(dwNumEntries), uintptr(unsafe.Pointer(rgItemStatusEntries)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnCatalogStatusChange dispatches through ISearchNotifyInlineSite's vtable slot 4.
-func (self *ISearchNotifyInlineSite) OnCatalogStatusChange(guidCatalogResetSignature *win32.GUID, guidCheckPointSignature *win32.GUID, dwLastCheckPointNumber uint32) foundation.HRESULT {
+func (self *ISearchNotifyInlineSite) OnCatalogStatusChange(guidCatalogResetSignature *win32.GUID, guidCheckPointSignature *win32.GUID, dwLastCheckPointNumber uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidCatalogResetSignature)), uintptr(unsafe.Pointer(guidCheckPointSignature)), uintptr(dwLastCheckPointNumber))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISearchPersistentItemsChangedSink: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchpersistentitemschangedsink
@@ -3501,21 +3671,23 @@ type ISearchPersistentItemsChangedSink struct {
 var IID_ISearchPersistentItemsChangedSink = win32.GUID{Data1: 0xa2ffdf9b, Data2: 0x4758, Data3: 0x4f84, Data4: [8]byte{0xb7, 0x29, 0xdf, 0x81, 0xa1, 0xa0, 0x61, 0x2f}}
 
 // StartedMonitoringScope dispatches through ISearchPersistentItemsChangedSink's vtable slot 3.
-func (self *ISearchPersistentItemsChangedSink) StartedMonitoringScope(pszURL foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)))
-	return foundation.HRESULT(r1)
+func (self *ISearchPersistentItemsChangedSink) StartedMonitoringScope(pszURL string) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StoppedMonitoringScope dispatches through ISearchPersistentItemsChangedSink's vtable slot 4.
-func (self *ISearchPersistentItemsChangedSink) StoppedMonitoringScope(pszURL foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)))
-	return foundation.HRESULT(r1)
+func (self *ISearchPersistentItemsChangedSink) StoppedMonitoringScope(pszURL string) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnItemsChanged dispatches through ISearchPersistentItemsChangedSink's vtable slot 5.
-func (self *ISearchPersistentItemsChangedSink) OnItemsChanged(dwNumberOfChanges uint32, DataChangeEntries *SEARCH_ITEM_PERSISTENT_CHANGE, hrCompletionCodes *foundation.HRESULT) foundation.HRESULT {
+func (self *ISearchPersistentItemsChangedSink) OnItemsChanged(dwNumberOfChanges uint32, DataChangeEntries *SEARCH_ITEM_PERSISTENT_CHANGE, hrCompletionCodes *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwNumberOfChanges), uintptr(unsafe.Pointer(DataChangeEntries)), uintptr(unsafe.Pointer(hrCompletionCodes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISearchProtocol: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchprotocol
@@ -3528,27 +3700,28 @@ type ISearchProtocol struct {
 var IID_ISearchProtocol = win32.GUID{Data1: 0xc73106ba, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x4f}}
 
 // Init dispatches through ISearchProtocol's vtable slot 3.
-func (self *ISearchProtocol) Init(pTimeoutInfo *TIMEOUT_INFO, pProtocolHandlerSite *IProtocolHandlerSite, pProxyInfo *PROXY_INFO) foundation.HRESULT {
+func (self *ISearchProtocol) Init(pTimeoutInfo *TIMEOUT_INFO, pProtocolHandlerSite *IProtocolHandlerSite, pProxyInfo *PROXY_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTimeoutInfo)), uintptr(unsafe.Pointer(pProtocolHandlerSite)), uintptr(unsafe.Pointer(pProxyInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateAccessor dispatches through ISearchProtocol's vtable slot 4.
-func (self *ISearchProtocol) CreateAccessor(pcwszURL foundation.PWSTR, pAuthenticationInfo *AUTHENTICATION_INFO, pIncrementalAccessInfo *INCREMENTAL_ACCESS_INFO, pItemInfo *ITEM_INFO, ppAccessor **IUrlAccessor) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcwszURL)), uintptr(unsafe.Pointer(pAuthenticationInfo)), uintptr(unsafe.Pointer(pIncrementalAccessInfo)), uintptr(unsafe.Pointer(pItemInfo)), uintptr(unsafe.Pointer(ppAccessor)))
-	return foundation.HRESULT(r1)
+func (self *ISearchProtocol) CreateAccessor(pcwszURL string, pAuthenticationInfo *AUTHENTICATION_INFO, pIncrementalAccessInfo *INCREMENTAL_ACCESS_INFO, pItemInfo *ITEM_INFO, ppAccessor **IUrlAccessor) error {
+	_pcwszURL := win32.UTF16Ptr(pcwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pcwszURL)), uintptr(unsafe.Pointer(pAuthenticationInfo)), uintptr(unsafe.Pointer(pIncrementalAccessInfo)), uintptr(unsafe.Pointer(pItemInfo)), uintptr(unsafe.Pointer(ppAccessor)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CloseAccessor dispatches through ISearchProtocol's vtable slot 5.
-func (self *ISearchProtocol) CloseAccessor(pAccessor *IUrlAccessor) foundation.HRESULT {
+func (self *ISearchProtocol) CloseAccessor(pAccessor *IUrlAccessor) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAccessor)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShutDown dispatches through ISearchProtocol's vtable slot 6.
-func (self *ISearchProtocol) ShutDown() foundation.HRESULT {
+func (self *ISearchProtocol) ShutDown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISearchProtocol2: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchprotocol2
@@ -3561,9 +3734,10 @@ type ISearchProtocol2 struct {
 var IID_ISearchProtocol2 = win32.GUID{Data1: 0x7789f0b2, Data2: 0xb5b2, Data3: 0x4722, Data4: [8]byte{0x8b, 0x65, 0x5d, 0xbd, 0x15, 0x06, 0x97, 0xa9}}
 
 // CreateAccessorEx dispatches through ISearchProtocol2's vtable slot 7.
-func (self *ISearchProtocol2) CreateAccessorEx(pcwszURL foundation.PWSTR, pAuthenticationInfo *AUTHENTICATION_INFO, pIncrementalAccessInfo *INCREMENTAL_ACCESS_INFO, pItemInfo *ITEM_INFO, pUserData *systemcom.BLOB, ppAccessor **IUrlAccessor) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcwszURL)), uintptr(unsafe.Pointer(pAuthenticationInfo)), uintptr(unsafe.Pointer(pIncrementalAccessInfo)), uintptr(unsafe.Pointer(pItemInfo)), uintptr(unsafe.Pointer(pUserData)), uintptr(unsafe.Pointer(ppAccessor)))
-	return foundation.HRESULT(r1)
+func (self *ISearchProtocol2) CreateAccessorEx(pcwszURL string, pAuthenticationInfo *AUTHENTICATION_INFO, pIncrementalAccessInfo *INCREMENTAL_ACCESS_INFO, pItemInfo *ITEM_INFO, pUserData *systemcom.BLOB, ppAccessor **IUrlAccessor) error {
+	_pcwszURL := win32.UTF16Ptr(pcwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pcwszURL)), uintptr(unsafe.Pointer(pAuthenticationInfo)), uintptr(unsafe.Pointer(pIncrementalAccessInfo)), uintptr(unsafe.Pointer(pItemInfo)), uintptr(unsafe.Pointer(pUserData)), uintptr(unsafe.Pointer(ppAccessor)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISearchProtocolThreadContext: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchprotocolthreadcontext
@@ -3576,21 +3750,21 @@ type ISearchProtocolThreadContext struct {
 var IID_ISearchProtocolThreadContext = win32.GUID{Data1: 0xc73106e1, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x4f}}
 
 // ThreadInit dispatches through ISearchProtocolThreadContext's vtable slot 3.
-func (self *ISearchProtocolThreadContext) ThreadInit() foundation.HRESULT {
+func (self *ISearchProtocolThreadContext) ThreadInit() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ThreadShutdown dispatches through ISearchProtocolThreadContext's vtable slot 4.
-func (self *ISearchProtocolThreadContext) ThreadShutdown() foundation.HRESULT {
+func (self *ISearchProtocolThreadContext) ThreadShutdown() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ThreadIdle dispatches through ISearchProtocolThreadContext's vtable slot 5.
-func (self *ISearchProtocolThreadContext) ThreadIdle(dwTimeElaspedSinceLastCallInMS uint32) foundation.HRESULT {
+func (self *ISearchProtocolThreadContext) ThreadIdle(dwTimeElaspedSinceLastCallInMS uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwTimeElaspedSinceLastCallInMS))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISearchQueryHelper: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchqueryhelper
@@ -3603,129 +3777,145 @@ type ISearchQueryHelper struct {
 var IID_ISearchQueryHelper = win32.GUID{Data1: 0xab310581, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x63}}
 
 // Get_ConnectionString dispatches through ISearchQueryHelper's vtable slot 3.
-func (self *ISearchQueryHelper) Get_ConnectionString(pszConnectionString *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszConnectionString)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) Get_ConnectionString() (foundation.PWSTR, error) {
+	var _pszConnectionString foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pszConnectionString)))
+	return _pszConnectionString, win32.HRESULTError(int32(r1))
 }
 
 // Put_QueryContentLocale dispatches through ISearchQueryHelper's vtable slot 4.
-func (self *ISearchQueryHelper) Put_QueryContentLocale(lcid uint32) foundation.HRESULT {
+func (self *ISearchQueryHelper) Put_QueryContentLocale(lcid uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lcid))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QueryContentLocale dispatches through ISearchQueryHelper's vtable slot 5.
-func (self *ISearchQueryHelper) Get_QueryContentLocale(plcid *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plcid)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) Get_QueryContentLocale() (uint32, error) {
+	var _plcid uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plcid)))
+	return _plcid, win32.HRESULTError(int32(r1))
 }
 
 // Put_QueryKeywordLocale dispatches through ISearchQueryHelper's vtable slot 6.
-func (self *ISearchQueryHelper) Put_QueryKeywordLocale(lcid uint32) foundation.HRESULT {
+func (self *ISearchQueryHelper) Put_QueryKeywordLocale(lcid uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lcid))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QueryKeywordLocale dispatches through ISearchQueryHelper's vtable slot 7.
-func (self *ISearchQueryHelper) Get_QueryKeywordLocale(plcid *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plcid)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) Get_QueryKeywordLocale() (uint32, error) {
+	var _plcid uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_plcid)))
+	return _plcid, win32.HRESULTError(int32(r1))
 }
 
 // Put_QueryTermExpansion dispatches through ISearchQueryHelper's vtable slot 8.
-func (self *ISearchQueryHelper) Put_QueryTermExpansion(expandTerms SEARCH_TERM_EXPANSION) foundation.HRESULT {
+func (self *ISearchQueryHelper) Put_QueryTermExpansion(expandTerms SEARCH_TERM_EXPANSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(expandTerms))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QueryTermExpansion dispatches through ISearchQueryHelper's vtable slot 9.
-func (self *ISearchQueryHelper) Get_QueryTermExpansion(pExpandTerms *SEARCH_TERM_EXPANSION) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pExpandTerms)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) Get_QueryTermExpansion() (SEARCH_TERM_EXPANSION, error) {
+	var _pExpandTerms SEARCH_TERM_EXPANSION
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pExpandTerms)))
+	return _pExpandTerms, win32.HRESULTError(int32(r1))
 }
 
 // Put_QuerySyntax dispatches through ISearchQueryHelper's vtable slot 10.
-func (self *ISearchQueryHelper) Put_QuerySyntax(querySyntax SEARCH_QUERY_SYNTAX) foundation.HRESULT {
+func (self *ISearchQueryHelper) Put_QuerySyntax(querySyntax SEARCH_QUERY_SYNTAX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(querySyntax))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QuerySyntax dispatches through ISearchQueryHelper's vtable slot 11.
-func (self *ISearchQueryHelper) Get_QuerySyntax(pQuerySyntax *SEARCH_QUERY_SYNTAX) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pQuerySyntax)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) Get_QuerySyntax() (SEARCH_QUERY_SYNTAX, error) {
+	var _pQuerySyntax SEARCH_QUERY_SYNTAX
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pQuerySyntax)))
+	return _pQuerySyntax, win32.HRESULTError(int32(r1))
 }
 
 // Put_QueryContentProperties dispatches through ISearchQueryHelper's vtable slot 12.
-func (self *ISearchQueryHelper) Put_QueryContentProperties(pszContentProperties foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszContentProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) Put_QueryContentProperties(pszContentProperties string) error {
+	_pszContentProperties := win32.UTF16Ptr(pszContentProperties)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszContentProperties)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QueryContentProperties dispatches through ISearchQueryHelper's vtable slot 13.
-func (self *ISearchQueryHelper) Get_QueryContentProperties(ppszContentProperties *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszContentProperties)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) Get_QueryContentProperties() (foundation.PWSTR, error) {
+	var _ppszContentProperties foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszContentProperties)))
+	return _ppszContentProperties, win32.HRESULTError(int32(r1))
 }
 
 // Put_QuerySelectColumns dispatches through ISearchQueryHelper's vtable slot 14.
-func (self *ISearchQueryHelper) Put_QuerySelectColumns(pszSelectColumns foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSelectColumns)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) Put_QuerySelectColumns(pszSelectColumns string) error {
+	_pszSelectColumns := win32.UTF16Ptr(pszSelectColumns)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSelectColumns)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QuerySelectColumns dispatches through ISearchQueryHelper's vtable slot 15.
-func (self *ISearchQueryHelper) Get_QuerySelectColumns(ppszSelectColumns *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszSelectColumns)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) Get_QuerySelectColumns() (foundation.PWSTR, error) {
+	var _ppszSelectColumns foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszSelectColumns)))
+	return _ppszSelectColumns, win32.HRESULTError(int32(r1))
 }
 
 // Put_QueryWhereRestrictions dispatches through ISearchQueryHelper's vtable slot 16.
-func (self *ISearchQueryHelper) Put_QueryWhereRestrictions(pszRestrictions foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszRestrictions)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) Put_QueryWhereRestrictions(pszRestrictions string) error {
+	_pszRestrictions := win32.UTF16Ptr(pszRestrictions)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRestrictions)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QueryWhereRestrictions dispatches through ISearchQueryHelper's vtable slot 17.
-func (self *ISearchQueryHelper) Get_QueryWhereRestrictions(ppszRestrictions *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszRestrictions)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) Get_QueryWhereRestrictions() (foundation.PWSTR, error) {
+	var _ppszRestrictions foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszRestrictions)))
+	return _ppszRestrictions, win32.HRESULTError(int32(r1))
 }
 
 // Put_QuerySorting dispatches through ISearchQueryHelper's vtable slot 18.
-func (self *ISearchQueryHelper) Put_QuerySorting(pszSorting foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSorting)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) Put_QuerySorting(pszSorting string) error {
+	_pszSorting := win32.UTF16Ptr(pszSorting)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSorting)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QuerySorting dispatches through ISearchQueryHelper's vtable slot 19.
-func (self *ISearchQueryHelper) Get_QuerySorting(ppszSorting *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszSorting)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) Get_QuerySorting() (foundation.PWSTR, error) {
+	var _ppszSorting foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszSorting)))
+	return _ppszSorting, win32.HRESULTError(int32(r1))
 }
 
 // GenerateSQLFromUserQuery dispatches through ISearchQueryHelper's vtable slot 20.
-func (self *ISearchQueryHelper) GenerateSQLFromUserQuery(pszQuery foundation.PWSTR, ppszSQL *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszQuery)), uintptr(unsafe.Pointer(ppszSQL)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) GenerateSQLFromUserQuery(pszQuery string) (foundation.PWSTR, error) {
+	_pszQuery := win32.UTF16Ptr(pszQuery)
+	var _ppszSQL foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszQuery)), uintptr(unsafe.Pointer(&_ppszSQL)))
+	return _ppszSQL, win32.HRESULTError(int32(r1))
 }
 
 // WriteProperties dispatches through ISearchQueryHelper's vtable slot 21.
-func (self *ISearchQueryHelper) WriteProperties(itemID int32, dwNumberOfColumns uint32, pColumns *foundation.PROPERTYKEY, pValues *SEARCH_COLUMN_PROPERTIES, pftGatherModifiedTime *foundation.FILETIME) foundation.HRESULT {
+func (self *ISearchQueryHelper) WriteProperties(itemID int32, dwNumberOfColumns uint32, pColumns *foundation.PROPERTYKEY, pValues *SEARCH_COLUMN_PROPERTIES, pftGatherModifiedTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(itemID), uintptr(dwNumberOfColumns), uintptr(unsafe.Pointer(pColumns)), uintptr(unsafe.Pointer(pValues)), uintptr(unsafe.Pointer(pftGatherModifiedTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_QueryMaxResults dispatches through ISearchQueryHelper's vtable slot 22.
-func (self *ISearchQueryHelper) Put_QueryMaxResults(cMaxResults int32) foundation.HRESULT {
+func (self *ISearchQueryHelper) Put_QueryMaxResults(cMaxResults int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(cMaxResults))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_QueryMaxResults dispatches through ISearchQueryHelper's vtable slot 23.
-func (self *ISearchQueryHelper) Get_QueryMaxResults(pcMaxResults *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcMaxResults)))
-	return foundation.HRESULT(r1)
+func (self *ISearchQueryHelper) Get_QueryMaxResults() (int32, error) {
+	var _pcMaxResults int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pcMaxResults)))
+	return _pcMaxResults, win32.HRESULTError(int32(r1))
 }
 
 // IID: ed8ce7e0-106c-11ce-84e2-00aa004b9986
@@ -3764,135 +3954,154 @@ type ISearchRoot struct {
 var IID_ISearchRoot = win32.GUID{Data1: 0x04c18ccf, Data2: 0x1f57, Data3: 0x4cbd, Data4: [8]byte{0x88, 0xcc, 0x39, 0x00, 0xf5, 0x19, 0x5c, 0xe3}}
 
 // Put_Schedule dispatches through ISearchRoot's vtable slot 3.
-func (self *ISearchRoot) Put_Schedule(pszTaskArg foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszTaskArg)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Put_Schedule(pszTaskArg string) error {
+	_pszTaskArg := win32.UTF16Ptr(pszTaskArg)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTaskArg)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Schedule dispatches through ISearchRoot's vtable slot 4.
-func (self *ISearchRoot) Get_Schedule(ppszTaskArg *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszTaskArg)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Get_Schedule() (foundation.PWSTR, error) {
+	var _ppszTaskArg foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszTaskArg)))
+	return _ppszTaskArg, win32.HRESULTError(int32(r1))
 }
 
 // Put_RootURL dispatches through ISearchRoot's vtable slot 5.
-func (self *ISearchRoot) Put_RootURL(pszURL foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszURL)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Put_RootURL(pszURL string) error {
+	_pszURL := win32.UTF16Ptr(pszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszURL)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RootURL dispatches through ISearchRoot's vtable slot 6.
-func (self *ISearchRoot) Get_RootURL(ppszURL *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszURL)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Get_RootURL() (foundation.PWSTR, error) {
+	var _ppszURL foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszURL)))
+	return _ppszURL, win32.HRESULTError(int32(r1))
 }
 
 // Put_IsHierarchical dispatches through ISearchRoot's vtable slot 7.
-func (self *ISearchRoot) Put_IsHierarchical(fIsHierarchical foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fIsHierarchical))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Put_IsHierarchical(fIsHierarchical bool) error {
+	_fIsHierarchical := win32.Bool32(fIsHierarchical)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(_fIsHierarchical))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsHierarchical dispatches through ISearchRoot's vtable slot 8.
-func (self *ISearchRoot) Get_IsHierarchical(pfIsHierarchical *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsHierarchical)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Get_IsHierarchical() (foundation.BOOL, error) {
+	var _pfIsHierarchical foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfIsHierarchical)))
+	return _pfIsHierarchical, win32.HRESULTError(int32(r1))
 }
 
 // Put_ProvidesNotifications dispatches through ISearchRoot's vtable slot 9.
-func (self *ISearchRoot) Put_ProvidesNotifications(fProvidesNotifications foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fProvidesNotifications))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Put_ProvidesNotifications(fProvidesNotifications bool) error {
+	_fProvidesNotifications := win32.Bool32(fProvidesNotifications)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(_fProvidesNotifications))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ProvidesNotifications dispatches through ISearchRoot's vtable slot 10.
-func (self *ISearchRoot) Get_ProvidesNotifications(pfProvidesNotifications *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfProvidesNotifications)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Get_ProvidesNotifications() (foundation.BOOL, error) {
+	var _pfProvidesNotifications foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfProvidesNotifications)))
+	return _pfProvidesNotifications, win32.HRESULTError(int32(r1))
 }
 
 // Put_UseNotificationsOnly dispatches through ISearchRoot's vtable slot 11.
-func (self *ISearchRoot) Put_UseNotificationsOnly(fUseNotificationsOnly foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(fUseNotificationsOnly))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Put_UseNotificationsOnly(fUseNotificationsOnly bool) error {
+	_fUseNotificationsOnly := win32.Bool32(fUseNotificationsOnly)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(_fUseNotificationsOnly))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_UseNotificationsOnly dispatches through ISearchRoot's vtable slot 12.
-func (self *ISearchRoot) Get_UseNotificationsOnly(pfUseNotificationsOnly *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfUseNotificationsOnly)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Get_UseNotificationsOnly() (foundation.BOOL, error) {
+	var _pfUseNotificationsOnly foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfUseNotificationsOnly)))
+	return _pfUseNotificationsOnly, win32.HRESULTError(int32(r1))
 }
 
 // Put_EnumerationDepth dispatches through ISearchRoot's vtable slot 13.
-func (self *ISearchRoot) Put_EnumerationDepth(dwDepth uint32) foundation.HRESULT {
+func (self *ISearchRoot) Put_EnumerationDepth(dwDepth uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwDepth))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EnumerationDepth dispatches through ISearchRoot's vtable slot 14.
-func (self *ISearchRoot) Get_EnumerationDepth(pdwDepth *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwDepth)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Get_EnumerationDepth() (uint32, error) {
+	var _pdwDepth uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwDepth)))
+	return _pdwDepth, win32.HRESULTError(int32(r1))
 }
 
 // Put_HostDepth dispatches through ISearchRoot's vtable slot 15.
-func (self *ISearchRoot) Put_HostDepth(dwDepth uint32) foundation.HRESULT {
+func (self *ISearchRoot) Put_HostDepth(dwDepth uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwDepth))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_HostDepth dispatches through ISearchRoot's vtable slot 16.
-func (self *ISearchRoot) Get_HostDepth(pdwDepth *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwDepth)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Get_HostDepth() (uint32, error) {
+	var _pdwDepth uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pdwDepth)))
+	return _pdwDepth, win32.HRESULTError(int32(r1))
 }
 
 // Put_FollowDirectories dispatches through ISearchRoot's vtable slot 17.
-func (self *ISearchRoot) Put_FollowDirectories(fFollowDirectories foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(fFollowDirectories))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Put_FollowDirectories(fFollowDirectories bool) error {
+	_fFollowDirectories := win32.Bool32(fFollowDirectories)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(_fFollowDirectories))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FollowDirectories dispatches through ISearchRoot's vtable slot 18.
-func (self *ISearchRoot) Get_FollowDirectories(pfFollowDirectories *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfFollowDirectories)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Get_FollowDirectories() (foundation.BOOL, error) {
+	var _pfFollowDirectories foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfFollowDirectories)))
+	return _pfFollowDirectories, win32.HRESULTError(int32(r1))
 }
 
 // Put_AuthenticationType dispatches through ISearchRoot's vtable slot 19.
-func (self *ISearchRoot) Put_AuthenticationType(authType AUTH_TYPE) foundation.HRESULT {
+func (self *ISearchRoot) Put_AuthenticationType(authType AUTH_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(authType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AuthenticationType dispatches through ISearchRoot's vtable slot 20.
-func (self *ISearchRoot) Get_AuthenticationType(pAuthType *AUTH_TYPE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAuthType)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Get_AuthenticationType() (AUTH_TYPE, error) {
+	var _pAuthType AUTH_TYPE
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pAuthType)))
+	return _pAuthType, win32.HRESULTError(int32(r1))
 }
 
 // Put_User dispatches through ISearchRoot's vtable slot 21.
-func (self *ISearchRoot) Put_User(pszUser foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszUser)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Put_User(pszUser string) error {
+	_pszUser := win32.UTF16Ptr(pszUser)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUser)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_User dispatches through ISearchRoot's vtable slot 22.
-func (self *ISearchRoot) Get_User(ppszUser *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszUser)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Get_User() (foundation.PWSTR, error) {
+	var _ppszUser foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszUser)))
+	return _ppszUser, win32.HRESULTError(int32(r1))
 }
 
 // Put_Password dispatches through ISearchRoot's vtable slot 23.
-func (self *ISearchRoot) Put_Password(pszPassword foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPassword)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Put_Password(pszPassword string) error {
+	_pszPassword := win32.UTF16Ptr(pszPassword)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPassword)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Password dispatches through ISearchRoot's vtable slot 24.
-func (self *ISearchRoot) Get_Password(ppszPassword *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPassword)))
-	return foundation.HRESULT(r1)
+func (self *ISearchRoot) Get_Password() (foundation.PWSTR, error) {
+	var _ppszPassword foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszPassword)))
+	return _ppszPassword, win32.HRESULTError(int32(r1))
 }
 
 // ISearchScopeRule: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchscoperule
@@ -3905,27 +4114,31 @@ type ISearchScopeRule struct {
 var IID_ISearchScopeRule = win32.GUID{Data1: 0xab310581, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x53}}
 
 // Get_PatternOrURL dispatches through ISearchScopeRule's vtable slot 3.
-func (self *ISearchScopeRule) Get_PatternOrURL(ppszPatternOrURL *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppszPatternOrURL)))
-	return foundation.HRESULT(r1)
+func (self *ISearchScopeRule) Get_PatternOrURL() (foundation.PWSTR, error) {
+	var _ppszPatternOrURL foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppszPatternOrURL)))
+	return _ppszPatternOrURL, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsIncluded dispatches through ISearchScopeRule's vtable slot 4.
-func (self *ISearchScopeRule) Get_IsIncluded(pfIsIncluded *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsIncluded)))
-	return foundation.HRESULT(r1)
+func (self *ISearchScopeRule) Get_IsIncluded() (foundation.BOOL, error) {
+	var _pfIsIncluded foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfIsIncluded)))
+	return _pfIsIncluded, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsDefault dispatches through ISearchScopeRule's vtable slot 5.
-func (self *ISearchScopeRule) Get_IsDefault(pfIsDefault *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsDefault)))
-	return foundation.HRESULT(r1)
+func (self *ISearchScopeRule) Get_IsDefault() (foundation.BOOL, error) {
+	var _pfIsDefault foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pfIsDefault)))
+	return _pfIsDefault, win32.HRESULTError(int32(r1))
 }
 
 // Get_FollowFlags dispatches through ISearchScopeRule's vtable slot 6.
-func (self *ISearchScopeRule) Get_FollowFlags(pFollowFlags *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFollowFlags)))
-	return foundation.HRESULT(r1)
+func (self *ISearchScopeRule) Get_FollowFlags() (uint32, error) {
+	var _pFollowFlags uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pFollowFlags)))
+	return _pFollowFlags, win32.HRESULTError(int32(r1))
 }
 
 // ISearchViewChangedSink: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-isearchviewchangedsink
@@ -3938,9 +4151,9 @@ type ISearchViewChangedSink struct {
 var IID_ISearchViewChangedSink = win32.GUID{Data1: 0xab310581, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x65}}
 
 // OnChange dispatches through ISearchViewChangedSink's vtable slot 3.
-func (self *ISearchViewChangedSink) OnChange(pdwDocID *int32, pChange *SEARCH_ITEM_CHANGE, pfInView *foundation.BOOL) foundation.HRESULT {
+func (self *ISearchViewChangedSink) OnChange(pdwDocID *int32, pChange *SEARCH_ITEM_CHANGE, pfInView *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwDocID)), uintptr(unsafe.Pointer(pChange)), uintptr(unsafe.Pointer(pfInView)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aa4-2a1c-11ce-ade5-00aa0044773d
@@ -3952,15 +4165,15 @@ type ISecurityInfo struct {
 var IID_ISecurityInfo = win32.GUID{Data1: 0x0c733aa4, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetCurrentTrustee dispatches through ISecurityInfo's vtable slot 3.
-func (self *ISecurityInfo) GetCurrentTrustee(ppTrustee **securityauthorization.TRUSTEE_W) foundation.HRESULT {
+func (self *ISecurityInfo) GetCurrentTrustee(ppTrustee **securityauthorization.TRUSTEE_W) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppTrustee)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetObjectTypes dispatches through ISecurityInfo's vtable slot 4.
-func (self *ISecurityInfo) GetObjectTypes(cObjectTypes *uint32, rgObjectTypes **win32.GUID) foundation.HRESULT {
+func (self *ISecurityInfo) GetObjectTypes(cObjectTypes *uint32, rgObjectTypes **win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cObjectTypes)), uintptr(unsafe.Pointer(rgObjectTypes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 06210e88-01f5-11d1-b512-0080c781c384
@@ -3972,9 +4185,9 @@ type IService struct {
 var IID_IService = win32.GUID{Data1: 0x06210e88, Data2: 0x01f5, Data3: 0x11d1, Data4: [8]byte{0xb5, 0x12, 0x00, 0x80, 0xc7, 0x81, 0xc3, 0x84}}
 
 // InvokeService dispatches through IService's vtable slot 3.
-func (self *IService) InvokeService(pUnkInner *systemcom.IUnknown) foundation.HRESULT {
+func (self *IService) InvokeService(pUnkInner *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkInner)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a85-2a1c-11ce-ade5-00aa0044773d
@@ -3986,15 +4199,15 @@ type ISessionProperties struct {
 var IID_ISessionProperties = win32.GUID{Data1: 0x0c733a85, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetProperties dispatches through ISessionProperties's vtable slot 3.
-func (self *ISessionProperties) GetProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) foundation.HRESULT {
+func (self *ISessionProperties) GetProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cPropertyIDSets), uintptr(unsafe.Pointer(rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperties dispatches through ISessionProperties's vtable slot 4.
-func (self *ISessionProperties) SetProperties(cPropertySets uint32, rgPropertySets *DBPROPSET) foundation.HRESULT {
+func (self *ISessionProperties) SetProperties(cPropertySets uint32, rgPropertySets *DBPROPSET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISimpleCommandCreator: https://learn.microsoft.com/windows/win32/api/indexsrv/nn-indexsrv-isimplecommandcreator
@@ -4007,21 +4220,24 @@ type ISimpleCommandCreator struct {
 var IID_ISimpleCommandCreator = win32.GUID{Data1: 0x5e341ab7, Data2: 0x02d0, Data3: 0x11d1, Data4: [8]byte{0x90, 0x0c, 0x00, 0xa0, 0xc9, 0x06, 0x37, 0x96}}
 
 // CreateICommand dispatches through ISimpleCommandCreator's vtable slot 3.
-func (self *ISimpleCommandCreator) CreateICommand(ppIUnknown **systemcom.IUnknown, pOuterUnk *systemcom.IUnknown) foundation.HRESULT {
+func (self *ISimpleCommandCreator) CreateICommand(ppIUnknown **systemcom.IUnknown, pOuterUnk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIUnknown)), uintptr(unsafe.Pointer(pOuterUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VerifyCatalog dispatches through ISimpleCommandCreator's vtable slot 4.
-func (self *ISimpleCommandCreator) VerifyCatalog(pwszMachine foundation.PWSTR, pwszCatalogName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszMachine)), uintptr(unsafe.Pointer(pwszCatalogName)))
-	return foundation.HRESULT(r1)
+func (self *ISimpleCommandCreator) VerifyCatalog(pwszMachine string, pwszCatalogName string) error {
+	_pwszMachine := win32.UTF16Ptr(pwszMachine)
+	_pwszCatalogName := win32.UTF16Ptr(pwszCatalogName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszMachine)), uintptr(unsafe.Pointer(_pwszCatalogName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultCatalog dispatches through ISimpleCommandCreator's vtable slot 5.
-func (self *ISimpleCommandCreator) GetDefaultCatalog(pwszCatalogName foundation.PWSTR, cwcIn uint32, pcwcOut *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszCatalogName)), uintptr(cwcIn), uintptr(unsafe.Pointer(pcwcOut)))
-	return foundation.HRESULT(r1)
+func (self *ISimpleCommandCreator) GetDefaultCatalog(pwszCatalogName string, cwcIn uint32, pcwcOut *uint32) error {
+	_pwszCatalogName := win32.UTF16Ptr(pwszCatalogName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszCatalogName)), uintptr(cwcIn), uintptr(unsafe.Pointer(pcwcOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a1e-2a1c-11ce-ade5-00aa0044773d
@@ -4033,9 +4249,9 @@ type ISourcesRowset struct {
 var IID_ISourcesRowset = win32.GUID{Data1: 0x0c733a1e, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetSourcesRowset dispatches through ISourcesRowset's vtable slot 3.
-func (self *ISourcesRowset) GetSourcesRowset(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, cPropertySets uint32, rgProperties *DBPROPSET, ppSourcesRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISourcesRowset) GetSourcesRowset(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, cPropertySets uint32, rgProperties *DBPROPSET, ppSourcesRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgProperties)), uintptr(unsafe.Pointer(ppSourcesRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IStemmer: https://learn.microsoft.com/windows/win32/api/indexsrv/nn-indexsrv-istemmer
@@ -4048,21 +4264,22 @@ type IStemmer struct {
 var IID_IStemmer = win32.GUID{Data1: 0xefbaf140, Data2: 0x7f42, Data3: 0x11ce, Data4: [8]byte{0xbe, 0x57, 0x00, 0xaa, 0x00, 0x51, 0xfe, 0x20}}
 
 // Init dispatches through IStemmer's vtable slot 3.
-func (self *IStemmer) Init(ulMaxTokenSize uint32, pfLicense *foundation.BOOL) foundation.HRESULT {
+func (self *IStemmer) Init(ulMaxTokenSize uint32, pfLicense *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulMaxTokenSize), uintptr(unsafe.Pointer(pfLicense)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GenerateWordForms dispatches through IStemmer's vtable slot 4.
-func (self *IStemmer) GenerateWordForms(pwcInBuf foundation.PWSTR, cwc uint32, pStemSink *IWordFormSink) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwcInBuf)), uintptr(cwc), uintptr(unsafe.Pointer(pStemSink)))
-	return foundation.HRESULT(r1)
+func (self *IStemmer) GenerateWordForms(pwcInBuf string, cwc uint32, pStemSink *IWordFormSink) error {
+	_pwcInBuf := win32.UTF16Ptr(pwcInBuf)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcInBuf)), uintptr(cwc), uintptr(unsafe.Pointer(pStemSink)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLicenseToUse dispatches through IStemmer's vtable slot 5.
-func (self *IStemmer) GetLicenseToUse(ppwcsLicense **uint16) foundation.HRESULT {
+func (self *IStemmer) GetLicenseToUse(ppwcsLicense **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwcsLicense)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: a97559f8-6c4a-11d1-a1e8-00c04fc2fbe1
@@ -4074,45 +4291,45 @@ type ISubscriptionItem struct {
 var IID_ISubscriptionItem = win32.GUID{Data1: 0xa97559f8, Data2: 0x6c4a, Data3: 0x11d1, Data4: [8]byte{0xa1, 0xe8, 0x00, 0xc0, 0x4f, 0xc2, 0xfb, 0xe1}}
 
 // GetCookie dispatches through ISubscriptionItem's vtable slot 3.
-func (self *ISubscriptionItem) GetCookie(pCookie *win32.GUID) foundation.HRESULT {
+func (self *ISubscriptionItem) GetCookie(pCookie *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSubscriptionItemInfo dispatches through ISubscriptionItem's vtable slot 4.
-func (self *ISubscriptionItem) GetSubscriptionItemInfo(pSubscriptionItemInfo *SUBSCRIPTIONITEMINFO) foundation.HRESULT {
+func (self *ISubscriptionItem) GetSubscriptionItemInfo(pSubscriptionItemInfo *SUBSCRIPTIONITEMINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSubscriptionItemInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSubscriptionItemInfo dispatches through ISubscriptionItem's vtable slot 5.
-func (self *ISubscriptionItem) SetSubscriptionItemInfo(pSubscriptionItemInfo *SUBSCRIPTIONITEMINFO) foundation.HRESULT {
+func (self *ISubscriptionItem) SetSubscriptionItemInfo(pSubscriptionItemInfo *SUBSCRIPTIONITEMINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSubscriptionItemInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadProperties dispatches through ISubscriptionItem's vtable slot 6.
-func (self *ISubscriptionItem) ReadProperties(nCount uint32, rgwszName *foundation.PWSTR, rgValue *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISubscriptionItem) ReadProperties(nCount uint32, rgwszName *foundation.PWSTR, rgValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(nCount), uintptr(unsafe.Pointer(rgwszName)), uintptr(unsafe.Pointer(rgValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WriteProperties dispatches through ISubscriptionItem's vtable slot 7.
-func (self *ISubscriptionItem) WriteProperties(nCount uint32, rgwszName *foundation.PWSTR, rgValue *systemvariant.VARIANT) foundation.HRESULT {
+func (self *ISubscriptionItem) WriteProperties(nCount uint32, rgwszName *foundation.PWSTR, rgValue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(nCount), uintptr(unsafe.Pointer(rgwszName)), uintptr(unsafe.Pointer(rgValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumProperties dispatches through ISubscriptionItem's vtable slot 8.
-func (self *ISubscriptionItem) EnumProperties(ppEnumItemProperties **IEnumItemProperties) foundation.HRESULT {
+func (self *ISubscriptionItem) EnumProperties(ppEnumItemProperties **IEnumItemProperties) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumItemProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NotifyChanged dispatches through ISubscriptionItem's vtable slot 9.
-func (self *ISubscriptionItem) NotifyChanged() foundation.HRESULT {
+func (self *ISubscriptionItem) NotifyChanged() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 085fb2c0-0df8-11d1-8f4b-00a0c905413f
@@ -4124,51 +4341,58 @@ type ISubscriptionMgr struct {
 var IID_ISubscriptionMgr = win32.GUID{Data1: 0x085fb2c0, Data2: 0x0df8, Data3: 0x11d1, Data4: [8]byte{0x8f, 0x4b, 0x00, 0xa0, 0xc9, 0x05, 0x41, 0x3f}}
 
 // DeleteSubscription dispatches through ISubscriptionMgr's vtable slot 3.
-func (self *ISubscriptionMgr) DeleteSubscription(pwszURL foundation.PWSTR, hwnd foundation.HWND) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszURL)), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+func (self *ISubscriptionMgr) DeleteSubscription(pwszURL string, hwnd foundation.HWND) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(hwnd))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateSubscription dispatches through ISubscriptionMgr's vtable slot 4.
-func (self *ISubscriptionMgr) UpdateSubscription(pwszURL foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszURL)))
-	return foundation.HRESULT(r1)
+func (self *ISubscriptionMgr) UpdateSubscription(pwszURL string) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateAll dispatches through ISubscriptionMgr's vtable slot 5.
-func (self *ISubscriptionMgr) UpdateAll() foundation.HRESULT {
+func (self *ISubscriptionMgr) UpdateAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsSubscribed dispatches through ISubscriptionMgr's vtable slot 6.
-func (self *ISubscriptionMgr) IsSubscribed(pwszURL foundation.PWSTR, pfSubscribed *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszURL)), uintptr(unsafe.Pointer(pfSubscribed)))
-	return foundation.HRESULT(r1)
+func (self *ISubscriptionMgr) IsSubscribed(pwszURL string, pfSubscribed *foundation.BOOL) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(unsafe.Pointer(pfSubscribed)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSubscriptionInfo dispatches through ISubscriptionMgr's vtable slot 7.
-func (self *ISubscriptionMgr) GetSubscriptionInfo(pwszURL foundation.PWSTR, pInfo *SUBSCRIPTIONINFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszURL)), uintptr(unsafe.Pointer(pInfo)))
-	return foundation.HRESULT(r1)
+func (self *ISubscriptionMgr) GetSubscriptionInfo(pwszURL string, pInfo *SUBSCRIPTIONINFO) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(unsafe.Pointer(pInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultInfo dispatches through ISubscriptionMgr's vtable slot 8.
-func (self *ISubscriptionMgr) GetDefaultInfo(subType SUBSCRIPTIONTYPE, pInfo *SUBSCRIPTIONINFO) foundation.HRESULT {
+func (self *ISubscriptionMgr) GetDefaultInfo(subType SUBSCRIPTIONTYPE, pInfo *SUBSCRIPTIONINFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(subType), uintptr(unsafe.Pointer(pInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowSubscriptionProperties dispatches through ISubscriptionMgr's vtable slot 9.
-func (self *ISubscriptionMgr) ShowSubscriptionProperties(pwszURL foundation.PWSTR, hwnd foundation.HWND) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszURL)), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+func (self *ISubscriptionMgr) ShowSubscriptionProperties(pwszURL string, hwnd foundation.HWND) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(hwnd))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSubscription dispatches through ISubscriptionMgr's vtable slot 10.
-func (self *ISubscriptionMgr) CreateSubscription(hwnd foundation.HWND, pwszURL foundation.PWSTR, pwszFriendlyName foundation.PWSTR, dwFlags uint32, subsType SUBSCRIPTIONTYPE, pInfo *SUBSCRIPTIONINFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(pwszURL)), uintptr(unsafe.Pointer(pwszFriendlyName)), uintptr(dwFlags), uintptr(subsType), uintptr(unsafe.Pointer(pInfo)))
-	return foundation.HRESULT(r1)
+func (self *ISubscriptionMgr) CreateSubscription(hwnd foundation.HWND, pwszURL string, pwszFriendlyName string, dwFlags uint32, subsType SUBSCRIPTIONTYPE, pInfo *SUBSCRIPTIONINFO) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	_pwszFriendlyName := win32.UTF16Ptr(pwszFriendlyName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(unsafe.Pointer(_pwszURL)), uintptr(unsafe.Pointer(_pwszFriendlyName)), uintptr(dwFlags), uintptr(subsType), uintptr(unsafe.Pointer(pInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 614bc270-aedf-11d1-a1f9-00c04fc2fbe1
@@ -4180,45 +4404,46 @@ type ISubscriptionMgr2 struct {
 var IID_ISubscriptionMgr2 = win32.GUID{Data1: 0x614bc270, Data2: 0xaedf, Data3: 0x11d1, Data4: [8]byte{0xa1, 0xf9, 0x00, 0xc0, 0x4f, 0xc2, 0xfb, 0xe1}}
 
 // GetItemFromURL dispatches through ISubscriptionMgr2's vtable slot 11.
-func (self *ISubscriptionMgr2) GetItemFromURL(pwszURL foundation.PWSTR, ppSubscriptionItem **ISubscriptionItem) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwszURL)), uintptr(unsafe.Pointer(ppSubscriptionItem)))
-	return foundation.HRESULT(r1)
+func (self *ISubscriptionMgr2) GetItemFromURL(pwszURL string, ppSubscriptionItem **ISubscriptionItem) error {
+	_pwszURL := win32.UTF16Ptr(pwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszURL)), uintptr(unsafe.Pointer(ppSubscriptionItem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetItemFromCookie dispatches through ISubscriptionMgr2's vtable slot 12.
-func (self *ISubscriptionMgr2) GetItemFromCookie(pSubscriptionCookie *win32.GUID, ppSubscriptionItem **ISubscriptionItem) foundation.HRESULT {
+func (self *ISubscriptionMgr2) GetItemFromCookie(pSubscriptionCookie *win32.GUID, ppSubscriptionItem **ISubscriptionItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSubscriptionCookie)), uintptr(unsafe.Pointer(ppSubscriptionItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSubscriptionRunState dispatches through ISubscriptionMgr2's vtable slot 13.
-func (self *ISubscriptionMgr2) GetSubscriptionRunState(dwNumCookies uint32, pCookies *win32.GUID, pdwRunState *uint32) foundation.HRESULT {
+func (self *ISubscriptionMgr2) GetSubscriptionRunState(dwNumCookies uint32, pCookies *win32.GUID, pdwRunState *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwNumCookies), uintptr(unsafe.Pointer(pCookies)), uintptr(unsafe.Pointer(pdwRunState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumSubscriptions dispatches through ISubscriptionMgr2's vtable slot 14.
-func (self *ISubscriptionMgr2) EnumSubscriptions(dwFlags uint32, ppEnumSubscriptions **IEnumSubscription) foundation.HRESULT {
+func (self *ISubscriptionMgr2) EnumSubscriptions(dwFlags uint32, ppEnumSubscriptions **IEnumSubscription) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppEnumSubscriptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateItems dispatches through ISubscriptionMgr2's vtable slot 15.
-func (self *ISubscriptionMgr2) UpdateItems(dwFlags uint32, dwNumCookies uint32, pCookies *win32.GUID) foundation.HRESULT {
+func (self *ISubscriptionMgr2) UpdateItems(dwFlags uint32, dwNumCookies uint32, pCookies *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(dwNumCookies), uintptr(unsafe.Pointer(pCookies)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AbortItems dispatches through ISubscriptionMgr2's vtable slot 16.
-func (self *ISubscriptionMgr2) AbortItems(dwNumCookies uint32, pCookies *win32.GUID) foundation.HRESULT {
+func (self *ISubscriptionMgr2) AbortItems(dwNumCookies uint32, pCookies *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwNumCookies), uintptr(unsafe.Pointer(pCookies)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AbortAll dispatches through ISubscriptionMgr2's vtable slot 17.
-func (self *ISubscriptionMgr2) AbortAll() foundation.HRESULT {
+func (self *ISubscriptionMgr2) AbortAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733abc-2a1c-11ce-ade5-00aa0044773d
@@ -4230,9 +4455,9 @@ type ITableCreation struct {
 var IID_ITableCreation = win32.GUID{Data1: 0x0c733abc, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetTableDefinition dispatches through ITableCreation's vtable slot 7.
-func (self *ITableCreation) GetTableDefinition(pTableID *storageindexserver.DBID, pcColumnDescs *uintptr, prgColumnDescs **DBCOLUMNDESC, pcPropertySets *uint32, prgPropertySets **DBPROPSET, pcConstraintDescs *uint32, prgConstraintDescs **DBCONSTRAINTDESC, ppwszStringBuffer **uint16) foundation.HRESULT {
+func (self *ITableCreation) GetTableDefinition(pTableID *storageindexserver.DBID, pcColumnDescs *uintptr, prgColumnDescs **DBCOLUMNDESC, pcPropertySets *uint32, prgPropertySets **DBPROPSET, pcConstraintDescs *uint32, prgConstraintDescs **DBCONSTRAINTDESC, ppwszStringBuffer **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pcColumnDescs)), uintptr(unsafe.Pointer(prgColumnDescs)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)), uintptr(unsafe.Pointer(pcConstraintDescs)), uintptr(unsafe.Pointer(prgConstraintDescs)), uintptr(unsafe.Pointer(ppwszStringBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a86-2a1c-11ce-ade5-00aa0044773d
@@ -4244,27 +4469,27 @@ type ITableDefinition struct {
 var IID_ITableDefinition = win32.GUID{Data1: 0x0c733a86, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // CreateTable dispatches through ITableDefinition's vtable slot 3.
-func (self *ITableDefinition) CreateTable(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, cColumnDescs uintptr, rgColumnDescs *DBCOLUMNDESC, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppTableID **storageindexserver.DBID, ppRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITableDefinition) CreateTable(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, cColumnDescs uintptr, rgColumnDescs *DBCOLUMNDESC, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppTableID **storageindexserver.DBID, ppRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pTableID)), uintptr(cColumnDescs), uintptr(unsafe.Pointer(rgColumnDescs)), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppTableID)), uintptr(unsafe.Pointer(ppRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DropTable dispatches through ITableDefinition's vtable slot 4.
-func (self *ITableDefinition) DropTable(pTableID *storageindexserver.DBID) foundation.HRESULT {
+func (self *ITableDefinition) DropTable(pTableID *storageindexserver.DBID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddColumn dispatches through ITableDefinition's vtable slot 5.
-func (self *ITableDefinition) AddColumn(pTableID *storageindexserver.DBID, pColumnDesc *DBCOLUMNDESC, ppColumnID **storageindexserver.DBID) foundation.HRESULT {
+func (self *ITableDefinition) AddColumn(pTableID *storageindexserver.DBID, pColumnDesc *DBCOLUMNDESC, ppColumnID **storageindexserver.DBID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pColumnDesc)), uintptr(unsafe.Pointer(ppColumnID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DropColumn dispatches through ITableDefinition's vtable slot 6.
-func (self *ITableDefinition) DropColumn(pTableID *storageindexserver.DBID, pColumnID *storageindexserver.DBID) foundation.HRESULT {
+func (self *ITableDefinition) DropColumn(pTableID *storageindexserver.DBID, pColumnID *storageindexserver.DBID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pColumnID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aab-2a1c-11ce-ade5-00aa0044773d
@@ -4276,21 +4501,21 @@ type ITableDefinitionWithConstraints struct {
 var IID_ITableDefinitionWithConstraints = win32.GUID{Data1: 0x0c733aab, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // AddConstraint dispatches through ITableDefinitionWithConstraints's vtable slot 8.
-func (self *ITableDefinitionWithConstraints) AddConstraint(pTableID *storageindexserver.DBID, pConstraintDesc *DBCONSTRAINTDESC) foundation.HRESULT {
+func (self *ITableDefinitionWithConstraints) AddConstraint(pTableID *storageindexserver.DBID, pConstraintDesc *DBCONSTRAINTDESC) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pConstraintDesc)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateTableWithConstraints dispatches through ITableDefinitionWithConstraints's vtable slot 9.
-func (self *ITableDefinitionWithConstraints) CreateTableWithConstraints(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, cColumnDescs uintptr, rgColumnDescs *DBCOLUMNDESC, cConstraintDescs uint32, rgConstraintDescs *DBCONSTRAINTDESC, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppTableID **storageindexserver.DBID, ppRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *ITableDefinitionWithConstraints) CreateTableWithConstraints(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, cColumnDescs uintptr, rgColumnDescs *DBCOLUMNDESC, cConstraintDescs uint32, rgConstraintDescs *DBCONSTRAINTDESC, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppTableID **storageindexserver.DBID, ppRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pTableID)), uintptr(cColumnDescs), uintptr(unsafe.Pointer(rgColumnDescs)), uintptr(cConstraintDescs), uintptr(unsafe.Pointer(rgConstraintDescs)), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppTableID)), uintptr(unsafe.Pointer(ppRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DropConstraint dispatches through ITableDefinitionWithConstraints's vtable slot 10.
-func (self *ITableDefinitionWithConstraints) DropConstraint(pTableID *storageindexserver.DBID, pConstraintID *storageindexserver.DBID) foundation.HRESULT {
+func (self *ITableDefinitionWithConstraints) DropConstraint(pTableID *storageindexserver.DBID, pConstraintID *storageindexserver.DBID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pConstraintID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a77-2a1c-11ce-ade5-00aa0044773d
@@ -4302,15 +4527,15 @@ type ITableRename struct {
 var IID_ITableRename = win32.GUID{Data1: 0x0c733a77, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // RenameColumn dispatches through ITableRename's vtable slot 3.
-func (self *ITableRename) RenameColumn(pTableId *storageindexserver.DBID, pOldColumnId *storageindexserver.DBID, pNewColumnId *storageindexserver.DBID) foundation.HRESULT {
+func (self *ITableRename) RenameColumn(pTableId *storageindexserver.DBID, pOldColumnId *storageindexserver.DBID, pNewColumnId *storageindexserver.DBID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableId)), uintptr(unsafe.Pointer(pOldColumnId)), uintptr(unsafe.Pointer(pNewColumnId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RenameTable dispatches through ITableRename's vtable slot 4.
-func (self *ITableRename) RenameTable(pOldTableId *storageindexserver.DBID, pOldIndexId *storageindexserver.DBID, pNewTableId *storageindexserver.DBID, pNewIndexId *storageindexserver.DBID) foundation.HRESULT {
+func (self *ITableRename) RenameTable(pOldTableId *storageindexserver.DBID, pOldIndexId *storageindexserver.DBID, pNewTableId *storageindexserver.DBID, pNewIndexId *storageindexserver.DBID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOldTableId)), uintptr(unsafe.Pointer(pOldIndexId)), uintptr(unsafe.Pointer(pNewTableId)), uintptr(unsafe.Pointer(pNewIndexId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITokenCollection: https://learn.microsoft.com/windows/win32/api/structuredquery/nn-structuredquery-itokencollection
@@ -4323,15 +4548,15 @@ type ITokenCollection struct {
 var IID_ITokenCollection = win32.GUID{Data1: 0x22d8b4f2, Data2: 0xf577, Data3: 0x4adb, Data4: [8]byte{0xa3, 0x35, 0xc2, 0xae, 0x88, 0x41, 0x6f, 0xab}}
 
 // NumberOfTokens dispatches through ITokenCollection's vtable slot 3.
-func (self *ITokenCollection) NumberOfTokens(pCount *uint32) foundation.HRESULT {
+func (self *ITokenCollection) NumberOfTokens(pCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetToken dispatches through ITokenCollection's vtable slot 4.
-func (self *ITokenCollection) GetToken(i uint32, pBegin *uint32, pLength *uint32, ppsz *foundation.PWSTR) foundation.HRESULT {
+func (self *ITokenCollection) GetToken(i uint32, pBegin *uint32, pLength *uint32, ppsz *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(i), uintptr(unsafe.Pointer(pBegin)), uintptr(unsafe.Pointer(pLength)), uintptr(unsafe.Pointer(ppsz)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a5e-2a1c-11ce-ade5-00aa0044773d
@@ -4343,15 +4568,15 @@ type ITransactionJoin struct {
 var IID_ITransactionJoin = win32.GUID{Data1: 0x0c733a5e, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetOptionsObject dispatches through ITransactionJoin's vtable slot 3.
-func (self *ITransactionJoin) GetOptionsObject(ppOptions **systemdistributedtransactioncoordinator.ITransactionOptions) foundation.HRESULT {
+func (self *ITransactionJoin) GetOptionsObject(ppOptions **systemdistributedtransactioncoordinator.ITransactionOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // JoinTransaction dispatches through ITransactionJoin's vtable slot 4.
-func (self *ITransactionJoin) JoinTransaction(punkTransactionCoord *systemcom.IUnknown, isoLevel int32, isoFlags uint32, pOtherOptions *systemdistributedtransactioncoordinator.ITransactionOptions) foundation.HRESULT {
+func (self *ITransactionJoin) JoinTransaction(punkTransactionCoord *systemcom.IUnknown, isoLevel int32, isoFlags uint32, pOtherOptions *systemdistributedtransactioncoordinator.ITransactionOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punkTransactionCoord)), uintptr(isoLevel), uintptr(isoFlags), uintptr(unsafe.Pointer(pOtherOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a5f-2a1c-11ce-ade5-00aa0044773d
@@ -4363,15 +4588,15 @@ type ITransactionLocal struct {
 var IID_ITransactionLocal = win32.GUID{Data1: 0x0c733a5f, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetOptionsObject dispatches through ITransactionLocal's vtable slot 6.
-func (self *ITransactionLocal) GetOptionsObject(ppOptions **systemdistributedtransactioncoordinator.ITransactionOptions) foundation.HRESULT {
+func (self *ITransactionLocal) GetOptionsObject(ppOptions **systemdistributedtransactioncoordinator.ITransactionOptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartTransaction dispatches through ITransactionLocal's vtable slot 7.
-func (self *ITransactionLocal) StartTransaction(isoLevel int32, isoFlags uint32, pOtherOptions *systemdistributedtransactioncoordinator.ITransactionOptions, pulTransactionLevel *uint32) foundation.HRESULT {
+func (self *ITransactionLocal) StartTransaction(isoLevel int32, isoFlags uint32, pOtherOptions *systemdistributedtransactioncoordinator.ITransactionOptions, pulTransactionLevel *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(isoLevel), uintptr(isoFlags), uintptr(unsafe.Pointer(pOtherOptions)), uintptr(unsafe.Pointer(pulTransactionLevel)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a60-2a1c-11ce-ade5-00aa0044773d
@@ -4383,9 +4608,9 @@ type ITransactionObject struct {
 var IID_ITransactionObject = win32.GUID{Data1: 0x0c733a60, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetTransactionObject dispatches through ITransactionObject's vtable slot 3.
-func (self *ITransactionObject) GetTransactionObject(ulTransactionLevel uint32, ppTransactionObject **systemdistributedtransactioncoordinator.ITransaction) foundation.HRESULT {
+func (self *ITransactionObject) GetTransactionObject(ulTransactionLevel uint32, ppTransactionObject **systemdistributedtransactioncoordinator.ITransaction) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulTransactionLevel), uintptr(unsafe.Pointer(ppTransactionObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aa1-2a1c-11ce-ade5-00aa0044773d
@@ -4397,33 +4622,33 @@ type ITrusteeAdmin struct {
 var IID_ITrusteeAdmin = win32.GUID{Data1: 0x0c733aa1, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // CompareTrustees dispatches through ITrusteeAdmin's vtable slot 3.
-func (self *ITrusteeAdmin) CompareTrustees(pTrustee1 *securityauthorization.TRUSTEE_W, pTrustee2 *securityauthorization.TRUSTEE_W) foundation.HRESULT {
+func (self *ITrusteeAdmin) CompareTrustees(pTrustee1 *securityauthorization.TRUSTEE_W, pTrustee2 *securityauthorization.TRUSTEE_W) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrustee1)), uintptr(unsafe.Pointer(pTrustee2)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateTrustee dispatches through ITrusteeAdmin's vtable slot 4.
-func (self *ITrusteeAdmin) CreateTrustee(pTrustee *securityauthorization.TRUSTEE_W, cPropertySets uint32, rgPropertySets *DBPROPSET) foundation.HRESULT {
+func (self *ITrusteeAdmin) CreateTrustee(pTrustee *securityauthorization.TRUSTEE_W, cPropertySets uint32, rgPropertySets *DBPROPSET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrustee)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteTrustee dispatches through ITrusteeAdmin's vtable slot 5.
-func (self *ITrusteeAdmin) DeleteTrustee(pTrustee *securityauthorization.TRUSTEE_W) foundation.HRESULT {
+func (self *ITrusteeAdmin) DeleteTrustee(pTrustee *securityauthorization.TRUSTEE_W) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrustee)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTrusteeProperties dispatches through ITrusteeAdmin's vtable slot 6.
-func (self *ITrusteeAdmin) SetTrusteeProperties(pTrustee *securityauthorization.TRUSTEE_W, cPropertySets uint32, rgPropertySets *DBPROPSET) foundation.HRESULT {
+func (self *ITrusteeAdmin) SetTrusteeProperties(pTrustee *securityauthorization.TRUSTEE_W, cPropertySets uint32, rgPropertySets *DBPROPSET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrustee)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTrusteeProperties dispatches through ITrusteeAdmin's vtable slot 7.
-func (self *ITrusteeAdmin) GetTrusteeProperties(pTrustee *securityauthorization.TRUSTEE_W, cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) foundation.HRESULT {
+func (self *ITrusteeAdmin) GetTrusteeProperties(pTrustee *securityauthorization.TRUSTEE_W, cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrustee)), uintptr(cPropertyIDSets), uintptr(unsafe.Pointer(rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733aa2-2a1c-11ce-ade5-00aa0044773d
@@ -4435,33 +4660,33 @@ type ITrusteeGroupAdmin struct {
 var IID_ITrusteeGroupAdmin = win32.GUID{Data1: 0x0c733aa2, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // AddMember dispatches through ITrusteeGroupAdmin's vtable slot 3.
-func (self *ITrusteeGroupAdmin) AddMember(pMembershipTrustee *securityauthorization.TRUSTEE_W, pMemberTrustee *securityauthorization.TRUSTEE_W) foundation.HRESULT {
+func (self *ITrusteeGroupAdmin) AddMember(pMembershipTrustee *securityauthorization.TRUSTEE_W, pMemberTrustee *securityauthorization.TRUSTEE_W) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMembershipTrustee)), uintptr(unsafe.Pointer(pMemberTrustee)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteMember dispatches through ITrusteeGroupAdmin's vtable slot 4.
-func (self *ITrusteeGroupAdmin) DeleteMember(pMembershipTrustee *securityauthorization.TRUSTEE_W, pMemberTrustee *securityauthorization.TRUSTEE_W) foundation.HRESULT {
+func (self *ITrusteeGroupAdmin) DeleteMember(pMembershipTrustee *securityauthorization.TRUSTEE_W, pMemberTrustee *securityauthorization.TRUSTEE_W) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMembershipTrustee)), uintptr(unsafe.Pointer(pMemberTrustee)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsMember dispatches through ITrusteeGroupAdmin's vtable slot 5.
-func (self *ITrusteeGroupAdmin) IsMember(pMembershipTrustee *securityauthorization.TRUSTEE_W, pMemberTrustee *securityauthorization.TRUSTEE_W, pfStatus *foundation.BOOL) foundation.HRESULT {
+func (self *ITrusteeGroupAdmin) IsMember(pMembershipTrustee *securityauthorization.TRUSTEE_W, pMemberTrustee *securityauthorization.TRUSTEE_W, pfStatus *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMembershipTrustee)), uintptr(unsafe.Pointer(pMemberTrustee)), uintptr(unsafe.Pointer(pfStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMembers dispatches through ITrusteeGroupAdmin's vtable slot 6.
-func (self *ITrusteeGroupAdmin) GetMembers(pMembershipTrustee *securityauthorization.TRUSTEE_W, pcMembers *uint32, prgMembers **securityauthorization.TRUSTEE_W) foundation.HRESULT {
+func (self *ITrusteeGroupAdmin) GetMembers(pMembershipTrustee *securityauthorization.TRUSTEE_W, pcMembers *uint32, prgMembers **securityauthorization.TRUSTEE_W) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMembershipTrustee)), uintptr(unsafe.Pointer(pcMembers)), uintptr(unsafe.Pointer(prgMembers)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMemberships dispatches through ITrusteeGroupAdmin's vtable slot 7.
-func (self *ITrusteeGroupAdmin) GetMemberships(pTrustee *securityauthorization.TRUSTEE_W, pcMemberships *uint32, prgMemberships **securityauthorization.TRUSTEE_W) foundation.HRESULT {
+func (self *ITrusteeGroupAdmin) GetMemberships(pTrustee *securityauthorization.TRUSTEE_W, pcMemberships *uint32, prgMemberships **securityauthorization.TRUSTEE_W) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrustee)), uintptr(unsafe.Pointer(pcMemberships)), uintptr(unsafe.Pointer(prgMemberships)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 type IUMS struct {
@@ -4503,9 +4728,9 @@ type IUMSInitialize struct {
 var IID_IUMSInitialize = win32.GUID{Data1: 0x5cf4ca14, Data2: 0xef21, Data3: 0x11d0, Data4: [8]byte{0x97, 0xe7, 0x00, 0xc0, 0x4f, 0xc2, 0xad, 0x98}}
 
 // Initialize dispatches through IUMSInitialize's vtable slot 3.
-func (self *IUMSInitialize) Initialize(pUMS unsafe.Pointer) foundation.HRESULT {
+func (self *IUMSInitialize) Initialize(pUMS unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUMS)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUrlAccessor: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-iurlaccessor
@@ -4518,81 +4743,81 @@ type IUrlAccessor struct {
 var IID_IUrlAccessor = win32.GUID{Data1: 0x0b63e318, Data2: 0x9ccc, Data3: 0x11d0, Data4: [8]byte{0xbc, 0xdb, 0x00, 0x80, 0x5f, 0xcc, 0xce, 0x04}}
 
 // AddRequestParameter dispatches through IUrlAccessor's vtable slot 3.
-func (self *IUrlAccessor) AddRequestParameter(pSpec *systemcomstructuredstorage.PROPSPEC, pVar *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IUrlAccessor) AddRequestParameter(pSpec *systemcomstructuredstorage.PROPSPEC, pVar *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSpec)), uintptr(unsafe.Pointer(pVar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDocFormat dispatches through IUrlAccessor's vtable slot 4.
-func (self *IUrlAccessor) GetDocFormat(wszDocFormat foundation.PWSTR, dwSize uint32, pdwLength *uint32) foundation.HRESULT {
+func (self *IUrlAccessor) GetDocFormat(wszDocFormat foundation.PWSTR, dwSize uint32, pdwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszDocFormat)), uintptr(dwSize), uintptr(unsafe.Pointer(pdwLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCLSID dispatches through IUrlAccessor's vtable slot 5.
-func (self *IUrlAccessor) GetCLSID(pClsid *win32.GUID) foundation.HRESULT {
+func (self *IUrlAccessor) GetCLSID(pClsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClsid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHost dispatches through IUrlAccessor's vtable slot 6.
-func (self *IUrlAccessor) GetHost(wszHost foundation.PWSTR, dwSize uint32, pdwLength *uint32) foundation.HRESULT {
+func (self *IUrlAccessor) GetHost(wszHost foundation.PWSTR, dwSize uint32, pdwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszHost)), uintptr(dwSize), uintptr(unsafe.Pointer(pdwLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsDirectory dispatches through IUrlAccessor's vtable slot 7.
-func (self *IUrlAccessor) IsDirectory() foundation.HRESULT {
+func (self *IUrlAccessor) IsDirectory() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSize dispatches through IUrlAccessor's vtable slot 8.
-func (self *IUrlAccessor) GetSize(pllSize *uint64) foundation.HRESULT {
+func (self *IUrlAccessor) GetSize(pllSize *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pllSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLastModified dispatches through IUrlAccessor's vtable slot 9.
-func (self *IUrlAccessor) GetLastModified(pftLastModified *foundation.FILETIME) foundation.HRESULT {
+func (self *IUrlAccessor) GetLastModified(pftLastModified *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pftLastModified)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFileName dispatches through IUrlAccessor's vtable slot 10.
-func (self *IUrlAccessor) GetFileName(wszFileName foundation.PWSTR, dwSize uint32, pdwLength *uint32) foundation.HRESULT {
+func (self *IUrlAccessor) GetFileName(wszFileName foundation.PWSTR, dwSize uint32, pdwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszFileName)), uintptr(dwSize), uintptr(unsafe.Pointer(pdwLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSecurityDescriptor dispatches through IUrlAccessor's vtable slot 11.
-func (self *IUrlAccessor) GetSecurityDescriptor(pSD *byte, dwSize uint32, pdwLength *uint32) foundation.HRESULT {
+func (self *IUrlAccessor) GetSecurityDescriptor(pSD *byte, dwSize uint32, pdwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSD)), uintptr(dwSize), uintptr(unsafe.Pointer(pdwLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRedirectedURL dispatches through IUrlAccessor's vtable slot 12.
-func (self *IUrlAccessor) GetRedirectedURL(wszRedirectedURL foundation.PWSTR, dwSize uint32, pdwLength *uint32) foundation.HRESULT {
+func (self *IUrlAccessor) GetRedirectedURL(wszRedirectedURL foundation.PWSTR, dwSize uint32, pdwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszRedirectedURL)), uintptr(dwSize), uintptr(unsafe.Pointer(pdwLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSecurityProvider dispatches through IUrlAccessor's vtable slot 13.
-func (self *IUrlAccessor) GetSecurityProvider(pSPClsid *win32.GUID) foundation.HRESULT {
+func (self *IUrlAccessor) GetSecurityProvider(pSPClsid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSPClsid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BindToStream dispatches through IUrlAccessor's vtable slot 14.
-func (self *IUrlAccessor) BindToStream(ppStream **systemcom.IStream) foundation.HRESULT {
+func (self *IUrlAccessor) BindToStream(ppStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BindToFilter dispatches through IUrlAccessor's vtable slot 15.
-func (self *IUrlAccessor) BindToFilter(ppFilter **storageindexserver.IFilter) foundation.HRESULT {
+func (self *IUrlAccessor) BindToFilter(ppFilter **storageindexserver.IFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFilter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUrlAccessor2: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-iurlaccessor2
@@ -4605,21 +4830,21 @@ type IUrlAccessor2 struct {
 var IID_IUrlAccessor2 = win32.GUID{Data1: 0xc7310734, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x4f}}
 
 // GetDisplayUrl dispatches through IUrlAccessor2's vtable slot 16.
-func (self *IUrlAccessor2) GetDisplayUrl(wszDocUrl foundation.PWSTR, dwSize uint32, pdwLength *uint32) foundation.HRESULT {
+func (self *IUrlAccessor2) GetDisplayUrl(wszDocUrl foundation.PWSTR, dwSize uint32, pdwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszDocUrl)), uintptr(dwSize), uintptr(unsafe.Pointer(pdwLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsDocument dispatches through IUrlAccessor2's vtable slot 17.
-func (self *IUrlAccessor2) IsDocument() foundation.HRESULT {
+func (self *IUrlAccessor2) IsDocument() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCodePage dispatches through IUrlAccessor2's vtable slot 18.
-func (self *IUrlAccessor2) GetCodePage(wszCodePage foundation.PWSTR, dwSize uint32, pdwLength *uint32) foundation.HRESULT {
+func (self *IUrlAccessor2) GetCodePage(wszCodePage foundation.PWSTR, dwSize uint32, pdwLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszCodePage)), uintptr(dwSize), uintptr(unsafe.Pointer(pdwLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUrlAccessor3: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-iurlaccessor3
@@ -4632,9 +4857,10 @@ type IUrlAccessor3 struct {
 var IID_IUrlAccessor3 = win32.GUID{Data1: 0x6fbc7005, Data2: 0x0455, Data3: 0x4874, Data4: [8]byte{0xb8, 0xff, 0x74, 0x39, 0x45, 0x02, 0x41, 0xa3}}
 
 // GetImpersonationSidBlobs dispatches through IUrlAccessor3's vtable slot 19.
-func (self *IUrlAccessor3) GetImpersonationSidBlobs(pcwszURL foundation.PWSTR, pcSidCount *uint32, ppSidBlobs **systemcom.BLOB) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcwszURL)), uintptr(unsafe.Pointer(pcSidCount)), uintptr(unsafe.Pointer(ppSidBlobs)))
-	return foundation.HRESULT(r1)
+func (self *IUrlAccessor3) GetImpersonationSidBlobs(pcwszURL string, pcSidCount *uint32, ppSidBlobs **systemcom.BLOB) error {
+	_pcwszURL := win32.UTF16Ptr(pcwszURL)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pcwszURL)), uintptr(unsafe.Pointer(pcSidCount)), uintptr(unsafe.Pointer(ppSidBlobs)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUrlAccessor4: https://learn.microsoft.com/windows/win32/api/searchapi/nn-searchapi-iurlaccessor4
@@ -4647,15 +4873,15 @@ type IUrlAccessor4 struct {
 var IID_IUrlAccessor4 = win32.GUID{Data1: 0x5cc51041, Data2: 0xc8d2, Data3: 0x41d7, Data4: [8]byte{0xbc, 0xa3, 0x9e, 0x9e, 0x28, 0x62, 0x97, 0xdc}}
 
 // ShouldIndexItemContent dispatches through IUrlAccessor4's vtable slot 20.
-func (self *IUrlAccessor4) ShouldIndexItemContent(pfIndexContent *foundation.BOOL) foundation.HRESULT {
+func (self *IUrlAccessor4) ShouldIndexItemContent(pfIndexContent *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIndexContent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShouldIndexProperty dispatches through IUrlAccessor4's vtable slot 21.
-func (self *IUrlAccessor4) ShouldIndexProperty(key *foundation.PROPERTYKEY, pfIndexProperty *foundation.BOOL) foundation.HRESULT {
+func (self *IUrlAccessor4) ShouldIndexProperty(key *foundation.PROPERTYKEY, pfIndexProperty *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pfIndexProperty)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a98-2a1c-11ce-ade5-00aa0044773d
@@ -4667,15 +4893,15 @@ type IViewChapter struct {
 var IID_IViewChapter = win32.GUID{Data1: 0x0c733a98, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetSpecification dispatches through IViewChapter's vtable slot 3.
-func (self *IViewChapter) GetSpecification(riid *win32.GUID, ppRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *IViewChapter) GetSpecification(riid *win32.GUID, ppRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenViewChapter dispatches through IViewChapter's vtable slot 4.
-func (self *IViewChapter) OpenViewChapter(hSource uintptr, phViewChapter *uintptr) foundation.HRESULT {
+func (self *IViewChapter) OpenViewChapter(hSource uintptr, phViewChapter *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hSource), uintptr(unsafe.Pointer(phViewChapter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a9b-2a1c-11ce-ade5-00aa0044773d
@@ -4687,21 +4913,21 @@ type IViewFilter struct {
 var IID_IViewFilter = win32.GUID{Data1: 0x0c733a9b, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetFilter dispatches through IViewFilter's vtable slot 3.
-func (self *IViewFilter) GetFilter(hAccessor HACCESSOR, pcRows *uintptr, pCompareOps **uint32, pCriteriaData unsafe.Pointer) foundation.HRESULT {
+func (self *IViewFilter) GetFilter(hAccessor HACCESSOR, pcRows *uintptr, pCompareOps **uint32, pCriteriaData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hAccessor), uintptr(unsafe.Pointer(pcRows)), uintptr(unsafe.Pointer(pCompareOps)), uintptr(unsafe.Pointer(pCriteriaData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilterBindings dispatches through IViewFilter's vtable slot 4.
-func (self *IViewFilter) GetFilterBindings(pcBindings *uintptr, prgBindings **DBBINDING) foundation.HRESULT {
+func (self *IViewFilter) GetFilterBindings(pcBindings *uintptr, prgBindings **DBBINDING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcBindings)), uintptr(unsafe.Pointer(prgBindings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFilter dispatches through IViewFilter's vtable slot 5.
-func (self *IViewFilter) SetFilter(hAccessor HACCESSOR, cRows uintptr, CompareOps *uint32, pCriteriaData unsafe.Pointer) foundation.HRESULT {
+func (self *IViewFilter) SetFilter(hAccessor HACCESSOR, cRows uintptr, CompareOps *uint32, pCriteriaData unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hAccessor), uintptr(cRows), uintptr(unsafe.Pointer(CompareOps)), uintptr(unsafe.Pointer(pCriteriaData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a97-2a1c-11ce-ade5-00aa0044773d
@@ -4713,15 +4939,15 @@ type IViewRowset struct {
 var IID_IViewRowset = win32.GUID{Data1: 0x0c733a97, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetSpecification dispatches through IViewRowset's vtable slot 3.
-func (self *IViewRowset) GetSpecification(riid *win32.GUID, ppObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *IViewRowset) GetSpecification(riid *win32.GUID, ppObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenViewRowset dispatches through IViewRowset's vtable slot 4.
-func (self *IViewRowset) OpenViewRowset(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppRowset **systemcom.IUnknown) foundation.HRESULT {
+func (self *IViewRowset) OpenViewRowset(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppRowset **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppRowset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 0c733a9a-2a1c-11ce-ade5-00aa0044773d
@@ -4733,15 +4959,15 @@ type IViewSort struct {
 var IID_IViewSort = win32.GUID{Data1: 0x0c733a9a, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetSortOrder dispatches through IViewSort's vtable slot 3.
-func (self *IViewSort) GetSortOrder(pcValues *uintptr, prgColumns **uintptr, prgOrders **uint32) foundation.HRESULT {
+func (self *IViewSort) GetSortOrder(pcValues *uintptr, prgColumns **uintptr, prgOrders **uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcValues)), uintptr(unsafe.Pointer(prgColumns)), uintptr(unsafe.Pointer(prgOrders)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSortOrder dispatches through IViewSort's vtable slot 4.
-func (self *IViewSort) SetSortOrder(cValues uintptr, rgColumns *uintptr, rgOrders *uint32) foundation.HRESULT {
+func (self *IViewSort) SetSortOrder(cValues uintptr, rgColumns *uintptr, rgOrders *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cValues), uintptr(unsafe.Pointer(rgColumns)), uintptr(unsafe.Pointer(rgOrders)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWordBreaker: https://learn.microsoft.com/windows/win32/api/indexsrv/nn-indexsrv-iwordbreaker
@@ -4754,27 +4980,31 @@ type IWordBreaker struct {
 var IID_IWordBreaker = win32.GUID{Data1: 0xd53552c8, Data2: 0x77e3, Data3: 0x101a, Data4: [8]byte{0xb5, 0x52, 0x08, 0x00, 0x2b, 0x33, 0xb0, 0xe6}}
 
 // Init dispatches through IWordBreaker's vtable slot 3.
-func (self *IWordBreaker) Init(fQuery foundation.BOOL, ulMaxTokenSize uint32, pfLicense *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(fQuery), uintptr(ulMaxTokenSize), uintptr(unsafe.Pointer(pfLicense)))
-	return foundation.HRESULT(r1)
+func (self *IWordBreaker) Init(fQuery bool, ulMaxTokenSize uint32, pfLicense *foundation.BOOL) error {
+	_fQuery := win32.Bool32(fQuery)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(_fQuery), uintptr(ulMaxTokenSize), uintptr(unsafe.Pointer(pfLicense)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // BreakText dispatches through IWordBreaker's vtable slot 4.
-func (self *IWordBreaker) BreakText(pTextSource *TEXT_SOURCE, pWordSink *IWordSink, pPhraseSink *storageindexserver.IPhraseSink) foundation.HRESULT {
+func (self *IWordBreaker) BreakText(pTextSource *TEXT_SOURCE, pWordSink *IWordSink, pPhraseSink *storageindexserver.IPhraseSink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTextSource)), uintptr(unsafe.Pointer(pWordSink)), uintptr(unsafe.Pointer(pPhraseSink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ComposePhrase dispatches through IWordBreaker's vtable slot 5.
-func (self *IWordBreaker) ComposePhrase(pwcNoun foundation.PWSTR, cwcNoun uint32, pwcModifier foundation.PWSTR, cwcModifier uint32, ulAttachmentType uint32, pwcPhrase foundation.PWSTR, pcwcPhrase *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwcNoun)), uintptr(cwcNoun), uintptr(unsafe.Pointer(pwcModifier)), uintptr(cwcModifier), uintptr(ulAttachmentType), uintptr(unsafe.Pointer(pwcPhrase)), uintptr(unsafe.Pointer(pcwcPhrase)))
-	return foundation.HRESULT(r1)
+func (self *IWordBreaker) ComposePhrase(pwcNoun string, cwcNoun uint32, pwcModifier string, cwcModifier uint32, ulAttachmentType uint32, pwcPhrase string, pcwcPhrase *uint32) error {
+	_pwcNoun := win32.UTF16Ptr(pwcNoun)
+	_pwcModifier := win32.UTF16Ptr(pwcModifier)
+	_pwcPhrase := win32.UTF16Ptr(pwcPhrase)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcNoun)), uintptr(cwcNoun), uintptr(unsafe.Pointer(_pwcModifier)), uintptr(cwcModifier), uintptr(ulAttachmentType), uintptr(unsafe.Pointer(_pwcPhrase)), uintptr(unsafe.Pointer(pcwcPhrase)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLicenseToUse dispatches through IWordBreaker's vtable slot 6.
-func (self *IWordBreaker) GetLicenseToUse(ppwcsLicense **uint16) foundation.HRESULT {
+func (self *IWordBreaker) GetLicenseToUse(ppwcsLicense **uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppwcsLicense)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWordFormSink: https://learn.microsoft.com/windows/win32/api/indexsrv/nn-indexsrv-iwordformsink
@@ -4787,15 +5017,17 @@ type IWordFormSink struct {
 var IID_IWordFormSink = win32.GUID{Data1: 0xfe77c330, Data2: 0x7f42, Data3: 0x11ce, Data4: [8]byte{0xbe, 0x57, 0x00, 0xaa, 0x00, 0x51, 0xfe, 0x20}}
 
 // PutAltWord dispatches through IWordFormSink's vtable slot 3.
-func (self *IWordFormSink) PutAltWord(pwcInBuf foundation.PWSTR, cwc uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwcInBuf)), uintptr(cwc))
-	return foundation.HRESULT(r1)
+func (self *IWordFormSink) PutAltWord(pwcInBuf string, cwc uint32) error {
+	_pwcInBuf := win32.UTF16Ptr(pwcInBuf)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcInBuf)), uintptr(cwc))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PutWord dispatches through IWordFormSink's vtable slot 4.
-func (self *IWordFormSink) PutWord(pwcInBuf foundation.PWSTR, cwc uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwcInBuf)), uintptr(cwc))
-	return foundation.HRESULT(r1)
+func (self *IWordFormSink) PutWord(pwcInBuf string, cwc uint32) error {
+	_pwcInBuf := win32.UTF16Ptr(pwcInBuf)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwcInBuf)), uintptr(cwc))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWordSink: https://learn.microsoft.com/windows/win32/search/iwordsink
@@ -4808,33 +5040,35 @@ type IWordSink struct {
 var IID_IWordSink = win32.GUID{Data1: 0xcc907054, Data2: 0xc058, Data3: 0x101a, Data4: [8]byte{0xb5, 0x54, 0x08, 0x00, 0x2b, 0x33, 0xb0, 0xe6}}
 
 // PutWord dispatches through IWordSink's vtable slot 3.
-func (self *IWordSink) PutWord(cwc uint32, pwcInBuf foundation.PWSTR, cwcSrcLen uint32, cwcSrcPos uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cwc), uintptr(unsafe.Pointer(pwcInBuf)), uintptr(cwcSrcLen), uintptr(cwcSrcPos))
-	return foundation.HRESULT(r1)
+func (self *IWordSink) PutWord(cwc uint32, pwcInBuf string, cwcSrcLen uint32, cwcSrcPos uint32) error {
+	_pwcInBuf := win32.UTF16Ptr(pwcInBuf)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cwc), uintptr(unsafe.Pointer(_pwcInBuf)), uintptr(cwcSrcLen), uintptr(cwcSrcPos))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PutAltWord dispatches through IWordSink's vtable slot 4.
-func (self *IWordSink) PutAltWord(cwc uint32, pwcInBuf foundation.PWSTR, cwcSrcLen uint32, cwcSrcPos uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cwc), uintptr(unsafe.Pointer(pwcInBuf)), uintptr(cwcSrcLen), uintptr(cwcSrcPos))
-	return foundation.HRESULT(r1)
+func (self *IWordSink) PutAltWord(cwc uint32, pwcInBuf string, cwcSrcLen uint32, cwcSrcPos uint32) error {
+	_pwcInBuf := win32.UTF16Ptr(pwcInBuf)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cwc), uintptr(unsafe.Pointer(_pwcInBuf)), uintptr(cwcSrcLen), uintptr(cwcSrcPos))
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartAltPhrase dispatches through IWordSink's vtable slot 5.
-func (self *IWordSink) StartAltPhrase() foundation.HRESULT {
+func (self *IWordSink) StartAltPhrase() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndAltPhrase dispatches through IWordSink's vtable slot 6.
-func (self *IWordSink) EndAltPhrase() foundation.HRESULT {
+func (self *IWordSink) EndAltPhrase() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PutBreak dispatches through IWordSink's vtable slot 7.
-func (self *IWordSink) PutBreak(breakType storageindexserver.WORDREP_BREAK_TYPE) foundation.HRESULT {
+func (self *IWordSink) PutBreak(breakType storageindexserver.WORDREP_BREAK_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(breakType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: e0e270c0-c0be-11d0-8fe4-00a0c90a6341
@@ -4846,75 +5080,84 @@ type OLEDBSimpleProvider struct {
 var IID_OLEDBSimpleProvider = win32.GUID{Data1: 0xe0e270c0, Data2: 0xc0be, Data3: 0x11d0, Data4: [8]byte{0x8f, 0xe4, 0x00, 0xa0, 0xc9, 0x0a, 0x63, 0x41}}
 
 // GetRowCount dispatches through OLEDBSimpleProvider's vtable slot 3.
-func (self *OLEDBSimpleProvider) GetRowCount(pcRows *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcRows)))
-	return foundation.HRESULT(r1)
+func (self *OLEDBSimpleProvider) GetRowCount() (uintptr, error) {
+	var _pcRows uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pcRows)))
+	return _pcRows, win32.HRESULTError(int32(r1))
 }
 
 // GetColumnCount dispatches through OLEDBSimpleProvider's vtable slot 4.
-func (self *OLEDBSimpleProvider) GetColumnCount(pcColumns *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcColumns)))
-	return foundation.HRESULT(r1)
+func (self *OLEDBSimpleProvider) GetColumnCount() (uintptr, error) {
+	var _pcColumns uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pcColumns)))
+	return _pcColumns, win32.HRESULTError(int32(r1))
 }
 
 // GetRWStatus dispatches through OLEDBSimpleProvider's vtable slot 5.
-func (self *OLEDBSimpleProvider) GetRWStatus(iRow uintptr, iColumn uintptr, prwStatus *OSPRW) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(iColumn), uintptr(unsafe.Pointer(prwStatus)))
-	return foundation.HRESULT(r1)
+func (self *OLEDBSimpleProvider) GetRWStatus(iRow uintptr, iColumn uintptr) (OSPRW, error) {
+	var _prwStatus OSPRW
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(iColumn), uintptr(unsafe.Pointer(&_prwStatus)))
+	return _prwStatus, win32.HRESULTError(int32(r1))
 }
 
 // GetVariant dispatches through OLEDBSimpleProvider's vtable slot 6.
-func (self *OLEDBSimpleProvider) GetVariant(iRow uintptr, iColumn uintptr, format OSPFORMAT, pVar *systemvariant.VARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(iColumn), uintptr(format), uintptr(unsafe.Pointer(pVar)))
-	return foundation.HRESULT(r1)
+func (self *OLEDBSimpleProvider) GetVariant(iRow uintptr, iColumn uintptr, format OSPFORMAT) (systemvariant.VARIANT, error) {
+	var _pVar systemvariant.VARIANT
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(iColumn), uintptr(format), uintptr(unsafe.Pointer(&_pVar)))
+	return _pVar, win32.HRESULTError(int32(r1))
 }
 
 // GetLocale dispatches through OLEDBSimpleProvider's vtable slot 8.
-func (self *OLEDBSimpleProvider) GetLocale(pbstrLocale *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrLocale)))
-	return foundation.HRESULT(r1)
+func (self *OLEDBSimpleProvider) GetLocale() (foundation.BSTR, error) {
+	var _pbstrLocale foundation.BSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbstrLocale)))
+	return _pbstrLocale, win32.HRESULTError(int32(r1))
 }
 
 // DeleteRows dispatches through OLEDBSimpleProvider's vtable slot 9.
-func (self *OLEDBSimpleProvider) DeleteRows(iRow uintptr, cRows uintptr, pcRowsDeleted *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(cRows), uintptr(unsafe.Pointer(pcRowsDeleted)))
-	return foundation.HRESULT(r1)
+func (self *OLEDBSimpleProvider) DeleteRows(iRow uintptr, cRows uintptr) (uintptr, error) {
+	var _pcRowsDeleted uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(cRows), uintptr(unsafe.Pointer(&_pcRowsDeleted)))
+	return _pcRowsDeleted, win32.HRESULTError(int32(r1))
 }
 
 // InsertRows dispatches through OLEDBSimpleProvider's vtable slot 10.
-func (self *OLEDBSimpleProvider) InsertRows(iRow uintptr, cRows uintptr, pcRowsInserted *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(cRows), uintptr(unsafe.Pointer(pcRowsInserted)))
-	return foundation.HRESULT(r1)
+func (self *OLEDBSimpleProvider) InsertRows(iRow uintptr, cRows uintptr) (uintptr, error) {
+	var _pcRowsInserted uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(cRows), uintptr(unsafe.Pointer(&_pcRowsInserted)))
+	return _pcRowsInserted, win32.HRESULTError(int32(r1))
 }
 
 // AddOLEDBSimpleProviderListener dispatches through OLEDBSimpleProvider's vtable slot 12.
-func (self *OLEDBSimpleProvider) AddOLEDBSimpleProviderListener(pospIListener *OLEDBSimpleProviderListener) foundation.HRESULT {
+func (self *OLEDBSimpleProvider) AddOLEDBSimpleProviderListener(pospIListener *OLEDBSimpleProviderListener) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pospIListener)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveOLEDBSimpleProviderListener dispatches through OLEDBSimpleProvider's vtable slot 13.
-func (self *OLEDBSimpleProvider) RemoveOLEDBSimpleProviderListener(pospIListener *OLEDBSimpleProviderListener) foundation.HRESULT {
+func (self *OLEDBSimpleProvider) RemoveOLEDBSimpleProviderListener(pospIListener *OLEDBSimpleProviderListener) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pospIListener)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsAsync dispatches through OLEDBSimpleProvider's vtable slot 14.
-func (self *OLEDBSimpleProvider) IsAsync(pbAsynch *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbAsynch)))
-	return foundation.HRESULT(r1)
+func (self *OLEDBSimpleProvider) IsAsync() (foundation.BOOL, error) {
+	var _pbAsynch foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pbAsynch)))
+	return _pbAsynch, win32.HRESULTError(int32(r1))
 }
 
 // GetEstimatedRows dispatches through OLEDBSimpleProvider's vtable slot 15.
-func (self *OLEDBSimpleProvider) GetEstimatedRows(piRows *uintptr) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRows)))
-	return foundation.HRESULT(r1)
+func (self *OLEDBSimpleProvider) GetEstimatedRows() (uintptr, error) {
+	var _piRows uintptr
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_piRows)))
+	return _piRows, win32.HRESULTError(int32(r1))
 }
 
 // StopTransfer dispatches through OLEDBSimpleProvider's vtable slot 16.
-func (self *OLEDBSimpleProvider) StopTransfer() foundation.HRESULT {
+func (self *OLEDBSimpleProvider) StopTransfer() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: e0e270c1-c0be-11d0-8fe4-00a0c90a6341
@@ -4926,49 +5169,49 @@ type OLEDBSimpleProviderListener struct {
 var IID_OLEDBSimpleProviderListener = win32.GUID{Data1: 0xe0e270c1, Data2: 0xc0be, Data3: 0x11d0, Data4: [8]byte{0x8f, 0xe4, 0x00, 0xa0, 0xc9, 0x0a, 0x63, 0x41}}
 
 // AboutToChangeCell dispatches through OLEDBSimpleProviderListener's vtable slot 3.
-func (self *OLEDBSimpleProviderListener) AboutToChangeCell(iRow uintptr, iColumn uintptr) foundation.HRESULT {
+func (self *OLEDBSimpleProviderListener) AboutToChangeCell(iRow uintptr, iColumn uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(iColumn))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CellChanged dispatches through OLEDBSimpleProviderListener's vtable slot 4.
-func (self *OLEDBSimpleProviderListener) CellChanged(iRow uintptr, iColumn uintptr) foundation.HRESULT {
+func (self *OLEDBSimpleProviderListener) CellChanged(iRow uintptr, iColumn uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(iColumn))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AboutToDeleteRows dispatches through OLEDBSimpleProviderListener's vtable slot 5.
-func (self *OLEDBSimpleProviderListener) AboutToDeleteRows(iRow uintptr, cRows uintptr) foundation.HRESULT {
+func (self *OLEDBSimpleProviderListener) AboutToDeleteRows(iRow uintptr, cRows uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(cRows))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeletedRows dispatches through OLEDBSimpleProviderListener's vtable slot 6.
-func (self *OLEDBSimpleProviderListener) DeletedRows(iRow uintptr, cRows uintptr) foundation.HRESULT {
+func (self *OLEDBSimpleProviderListener) DeletedRows(iRow uintptr, cRows uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(cRows))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AboutToInsertRows dispatches through OLEDBSimpleProviderListener's vtable slot 7.
-func (self *OLEDBSimpleProviderListener) AboutToInsertRows(iRow uintptr, cRows uintptr) foundation.HRESULT {
+func (self *OLEDBSimpleProviderListener) AboutToInsertRows(iRow uintptr, cRows uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(cRows))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InsertedRows dispatches through OLEDBSimpleProviderListener's vtable slot 8.
-func (self *OLEDBSimpleProviderListener) InsertedRows(iRow uintptr, cRows uintptr) foundation.HRESULT {
+func (self *OLEDBSimpleProviderListener) InsertedRows(iRow uintptr, cRows uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(cRows))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RowsAvailable dispatches through OLEDBSimpleProviderListener's vtable slot 9.
-func (self *OLEDBSimpleProviderListener) RowsAvailable(iRow uintptr, cRows uintptr) foundation.HRESULT {
+func (self *OLEDBSimpleProviderListener) RowsAvailable(iRow uintptr, cRows uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(iRow), uintptr(cRows))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TransferComplete dispatches through OLEDBSimpleProviderListener's vtable slot 10.
-func (self *OLEDBSimpleProviderListener) TransferComplete(xfer OSPXFER) foundation.HRESULT {
+func (self *OLEDBSimpleProviderListener) TransferComplete(xfer OSPXFER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(xfer))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

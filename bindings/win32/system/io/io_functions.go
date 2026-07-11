@@ -100,8 +100,9 @@ func DeviceIoControl(hDevice foundation.HANDLE, dwIoControlCode uint32, lpInBuff
 // GetOverlappedResult calls KERNEL32!GetOverlappedResult.
 // https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-getoverlappedresult
 // Minimum OS: windows5.1.2600.
-func GetOverlappedResult(hFile foundation.HANDLE, lpOverlapped *OVERLAPPED, lpNumberOfBytesTransferred *uint32, bWait foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procGetOverlappedResult.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(unsafe.Pointer(lpNumberOfBytesTransferred)), uintptr(bWait))
+func GetOverlappedResult(hFile foundation.HANDLE, lpOverlapped *OVERLAPPED, lpNumberOfBytesTransferred *uint32, bWait bool) error {
+	_bWait := win32.Bool32(bWait)
+	r1, _, e1 := syscall.SyscallN(procGetOverlappedResult.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(unsafe.Pointer(lpNumberOfBytesTransferred)), uintptr(_bWait))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -111,8 +112,9 @@ func GetOverlappedResult(hFile foundation.HANDLE, lpOverlapped *OVERLAPPED, lpNu
 // GetOverlappedResultEx calls KERNEL32!GetOverlappedResultEx.
 // https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-getoverlappedresultex
 // Minimum OS: windows8.0.
-func GetOverlappedResultEx(hFile foundation.HANDLE, lpOverlapped *OVERLAPPED, lpNumberOfBytesTransferred *uint32, dwMilliseconds uint32, bAlertable foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procGetOverlappedResultEx.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(unsafe.Pointer(lpNumberOfBytesTransferred)), uintptr(dwMilliseconds), uintptr(bAlertable))
+func GetOverlappedResultEx(hFile foundation.HANDLE, lpOverlapped *OVERLAPPED, lpNumberOfBytesTransferred *uint32, dwMilliseconds uint32, bAlertable bool) error {
+	_bAlertable := win32.Bool32(bAlertable)
+	r1, _, e1 := syscall.SyscallN(procGetOverlappedResultEx.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(unsafe.Pointer(lpNumberOfBytesTransferred)), uintptr(dwMilliseconds), uintptr(_bAlertable))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -133,8 +135,13 @@ func GetQueuedCompletionStatus(CompletionPort foundation.HANDLE, lpNumberOfBytes
 // GetQueuedCompletionStatusEx calls KERNEL32!GetQueuedCompletionStatusEx.
 // https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-getqueuedcompletionstatusex
 // Minimum OS: windows6.0.6000.
-func GetQueuedCompletionStatusEx(CompletionPort foundation.HANDLE, lpCompletionPortEntries *OVERLAPPED_ENTRY, ulCount uint32, ulNumEntriesRemoved *uint32, dwMilliseconds uint32, fAlertable foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procGetQueuedCompletionStatusEx.Addr(), uintptr(CompletionPort), uintptr(unsafe.Pointer(lpCompletionPortEntries)), uintptr(ulCount), uintptr(unsafe.Pointer(ulNumEntriesRemoved)), uintptr(dwMilliseconds), uintptr(fAlertable))
+func GetQueuedCompletionStatusEx(CompletionPort foundation.HANDLE, lpCompletionPortEntries []OVERLAPPED_ENTRY, ulNumEntriesRemoved *uint32, dwMilliseconds uint32, fAlertable bool) error {
+	var _lpCompletionPortEntries *OVERLAPPED_ENTRY
+	if len(lpCompletionPortEntries) > 0 {
+		_lpCompletionPortEntries = &lpCompletionPortEntries[0]
+	}
+	_fAlertable := win32.Bool32(fAlertable)
+	r1, _, e1 := syscall.SyscallN(procGetQueuedCompletionStatusEx.Addr(), uintptr(CompletionPort), uintptr(unsafe.Pointer(_lpCompletionPortEntries)), uintptr(len(lpCompletionPortEntries)), uintptr(unsafe.Pointer(ulNumEntriesRemoved)), uintptr(dwMilliseconds), uintptr(_fAlertable))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

@@ -21,8 +21,8 @@ type DiagnosticsInfo struct {
 	Flags uint32
 }
 
-// HELPER_ATTRIBUTE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// HELPER_ATTRIBUTE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type HELPER_ATTRIBUTE_Anonymous_e__Union struct {
 	Data [16]uint64
 }
@@ -105,8 +105,8 @@ type ShellCommandInfo struct {
 	NShowCmd       uint32
 }
 
-// UiInfo_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// UiInfo_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type UiInfo_Anonymous_e__Union struct {
 	Data [5]uint64
 }

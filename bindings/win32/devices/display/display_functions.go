@@ -174,16 +174,17 @@ func BRUSHOBJ_ulGetBrushColor(pbo *BRUSHOBJ) uint32 {
 // CLIPOBJ_bEnum calls GDI32!CLIPOBJ_bEnum.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-clipobj_benum
 // Minimum OS: windows5.0.
-func CLIPOBJ_bEnum(pco *CLIPOBJ, cj uint32, pul *uint32) foundation.BOOL {
+func CLIPOBJ_bEnum(pco *CLIPOBJ, cj uint32, pul *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procCLIPOBJ_bEnum.Addr(), uintptr(unsafe.Pointer(pco)), uintptr(cj), uintptr(unsafe.Pointer(pul)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CLIPOBJ_cEnumStart calls GDI32!CLIPOBJ_cEnumStart.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-clipobj_cenumstart
 // Minimum OS: windows5.0.
-func CLIPOBJ_cEnumStart(pco *CLIPOBJ, bAll foundation.BOOL, iType uint32, iDirection uint32, cLimit uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procCLIPOBJ_cEnumStart.Addr(), uintptr(unsafe.Pointer(pco)), uintptr(bAll), uintptr(iType), uintptr(iDirection), uintptr(cLimit))
+func CLIPOBJ_cEnumStart(pco *CLIPOBJ, bAll bool, iType uint32, iDirection uint32, cLimit uint32) uint32 {
+	_bAll := win32.Bool32(bAll)
+	r1, _, _ := syscall.SyscallN(procCLIPOBJ_cEnumStart.Addr(), uintptr(unsafe.Pointer(pco)), uintptr(_bAll), uintptr(iType), uintptr(iDirection), uintptr(cLimit))
 	return uint32(r1)
 }
 
@@ -265,33 +266,33 @@ func EngAcquireSemaphore(hsem HSEMAPHORE) {
 // EngAlphaBlend calls GDI32!EngAlphaBlend.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engalphablend
 // Minimum OS: windows5.0.
-func EngAlphaBlend(psoDest *SURFOBJ, psoSrc *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, prclDest *foundation.RECTL, prclSrc *foundation.RECTL, pBlendObj *BLENDOBJ) foundation.BOOL {
+func EngAlphaBlend(psoDest *SURFOBJ, psoSrc *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, prclDest *foundation.RECTL, prclSrc *foundation.RECTL, pBlendObj *BLENDOBJ) bool {
 	r1, _, _ := syscall.SyscallN(procEngAlphaBlend.Addr(), uintptr(unsafe.Pointer(psoDest)), uintptr(unsafe.Pointer(psoSrc)), uintptr(unsafe.Pointer(pco)), uintptr(unsafe.Pointer(pxlo)), uintptr(unsafe.Pointer(prclDest)), uintptr(unsafe.Pointer(prclSrc)), uintptr(unsafe.Pointer(pBlendObj)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngAssociateSurface calls GDI32!EngAssociateSurface.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engassociatesurface
 // Minimum OS: windows5.0.
-func EngAssociateSurface(hsurf HSURF, hdev HDEV, flHooks uint32) foundation.BOOL {
+func EngAssociateSurface(hsurf HSURF, hdev HDEV, flHooks uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEngAssociateSurface.Addr(), uintptr(hsurf), uintptr(hdev), uintptr(flHooks))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngBitBlt calls GDI32!EngBitBlt.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engbitblt
 // Minimum OS: windows5.0.
-func EngBitBlt(psoTrg *SURFOBJ, psoSrc *SURFOBJ, psoMask *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, prclTrg *foundation.RECTL, pptlSrc *foundation.POINTL, pptlMask *foundation.POINTL, pbo *BRUSHOBJ, pptlBrush *foundation.POINTL, rop4 uint32) foundation.BOOL {
+func EngBitBlt(psoTrg *SURFOBJ, psoSrc *SURFOBJ, psoMask *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, prclTrg *foundation.RECTL, pptlSrc *foundation.POINTL, pptlMask *foundation.POINTL, pbo *BRUSHOBJ, pptlBrush *foundation.POINTL, rop4 uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEngBitBlt.Addr(), uintptr(unsafe.Pointer(psoTrg)), uintptr(unsafe.Pointer(psoSrc)), uintptr(unsafe.Pointer(psoMask)), uintptr(unsafe.Pointer(pco)), uintptr(unsafe.Pointer(pxlo)), uintptr(unsafe.Pointer(prclTrg)), uintptr(unsafe.Pointer(pptlSrc)), uintptr(unsafe.Pointer(pptlMask)), uintptr(unsafe.Pointer(pbo)), uintptr(unsafe.Pointer(pptlBrush)), uintptr(rop4))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngCheckAbort calls GDI32!EngCheckAbort.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engcheckabort
 // Minimum OS: windows5.0.
-func EngCheckAbort(pso *SURFOBJ) foundation.BOOL {
+func EngCheckAbort(pso *SURFOBJ) bool {
 	r1, _, _ := syscall.SyscallN(procEngCheckAbort.Addr(), uintptr(unsafe.Pointer(pso)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngComputeGlyphSet calls GDI32!EngComputeGlyphSet.
@@ -305,9 +306,9 @@ func EngComputeGlyphSet(nCodePage int32, nFirstChar int32, cChars int32) *FD_GLY
 // EngCopyBits calls GDI32!EngCopyBits.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engcopybits
 // Minimum OS: windows5.0.
-func EngCopyBits(psoDest *SURFOBJ, psoSrc *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, prclDest *foundation.RECTL, pptlSrc *foundation.POINTL) foundation.BOOL {
+func EngCopyBits(psoDest *SURFOBJ, psoSrc *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, prclDest *foundation.RECTL, pptlSrc *foundation.POINTL) bool {
 	r1, _, _ := syscall.SyscallN(procEngCopyBits.Addr(), uintptr(unsafe.Pointer(psoDest)), uintptr(unsafe.Pointer(psoSrc)), uintptr(unsafe.Pointer(pco)), uintptr(unsafe.Pointer(pxlo)), uintptr(unsafe.Pointer(prclDest)), uintptr(unsafe.Pointer(pptlSrc)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngCreateClip calls GDI32!EngCreateClip.
@@ -344,9 +345,9 @@ func EngDeleteClip(pco *CLIPOBJ) {
 // EngDeletePalette calls GDI32!EngDeletePalette.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engdeletepalette
 // Minimum OS: windows5.0.
-func EngDeletePalette(hpal graphicsgdi.HPALETTE) foundation.BOOL {
+func EngDeletePalette(hpal graphicsgdi.HPALETTE) bool {
 	r1, _, _ := syscall.SyscallN(procEngDeletePalette.Addr(), uintptr(hpal))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngDeletePath calls GDI32!EngDeletePath.
@@ -366,25 +367,25 @@ func EngDeleteSemaphore(hsem HSEMAPHORE) {
 // EngDeleteSurface calls GDI32!EngDeleteSurface.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engdeletesurface
 // Minimum OS: windows5.0.
-func EngDeleteSurface(hsurf HSURF) foundation.BOOL {
+func EngDeleteSurface(hsurf HSURF) bool {
 	r1, _, _ := syscall.SyscallN(procEngDeleteSurface.Addr(), uintptr(hsurf))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngEraseSurface calls GDI32!EngEraseSurface.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engerasesurface
 // Minimum OS: windows5.0.
-func EngEraseSurface(pso *SURFOBJ, prcl *foundation.RECTL, iColor uint32) foundation.BOOL {
+func EngEraseSurface(pso *SURFOBJ, prcl *foundation.RECTL, iColor uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEngEraseSurface.Addr(), uintptr(unsafe.Pointer(pso)), uintptr(unsafe.Pointer(prcl)), uintptr(iColor))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngFillPath calls GDI32!EngFillPath.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engfillpath
 // Minimum OS: windows5.0.
-func EngFillPath(pso *SURFOBJ, ppo *PATHOBJ, pco *CLIPOBJ, pbo *BRUSHOBJ, pptlBrushOrg *foundation.POINTL, mix uint32, flOptions uint32) foundation.BOOL {
+func EngFillPath(pso *SURFOBJ, ppo *PATHOBJ, pco *CLIPOBJ, pbo *BRUSHOBJ, pptlBrushOrg *foundation.POINTL, mix uint32, flOptions uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEngFillPath.Addr(), uintptr(unsafe.Pointer(pso)), uintptr(unsafe.Pointer(ppo)), uintptr(unsafe.Pointer(pco)), uintptr(unsafe.Pointer(pbo)), uintptr(unsafe.Pointer(pptlBrushOrg)), uintptr(mix), uintptr(flOptions))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngFindResource calls GDI32!EngFindResource.
@@ -428,24 +429,25 @@ func EngGetPrinterDataFileName(hdev HDEV) foundation.PWSTR {
 // EngGradientFill calls GDI32!EngGradientFill.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-enggradientfill
 // Minimum OS: windows5.0.
-func EngGradientFill(psoDest *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, pVertex *graphicsgdi.TRIVERTEX, nVertex uint32, pMesh unsafe.Pointer, nMesh uint32, prclExtents *foundation.RECTL, pptlDitherOrg *foundation.POINTL, ulMode uint32) foundation.BOOL {
+func EngGradientFill(psoDest *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, pVertex *graphicsgdi.TRIVERTEX, nVertex uint32, pMesh unsafe.Pointer, nMesh uint32, prclExtents *foundation.RECTL, pptlDitherOrg *foundation.POINTL, ulMode uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEngGradientFill.Addr(), uintptr(unsafe.Pointer(psoDest)), uintptr(unsafe.Pointer(pco)), uintptr(unsafe.Pointer(pxlo)), uintptr(unsafe.Pointer(pVertex)), uintptr(nVertex), uintptr(unsafe.Pointer(pMesh)), uintptr(nMesh), uintptr(unsafe.Pointer(prclExtents)), uintptr(unsafe.Pointer(pptlDitherOrg)), uintptr(ulMode))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngLineTo calls GDI32!EngLineTo.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-englineto
 // Minimum OS: windows5.0.
-func EngLineTo(pso *SURFOBJ, pco *CLIPOBJ, pbo *BRUSHOBJ, x1 int32, y1 int32, x2 int32, y2 int32, prclBounds *foundation.RECTL, mix uint32) foundation.BOOL {
+func EngLineTo(pso *SURFOBJ, pco *CLIPOBJ, pbo *BRUSHOBJ, x1 int32, y1 int32, x2 int32, y2 int32, prclBounds *foundation.RECTL, mix uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEngLineTo.Addr(), uintptr(unsafe.Pointer(pso)), uintptr(unsafe.Pointer(pco)), uintptr(unsafe.Pointer(pbo)), uintptr(x1), uintptr(y1), uintptr(x2), uintptr(y2), uintptr(unsafe.Pointer(prclBounds)), uintptr(mix))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngLoadModule calls GDI32!EngLoadModule.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engloadmodule
 // Minimum OS: windows5.0.
-func EngLoadModule(pwsz foundation.PWSTR) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procEngLoadModule.Addr(), uintptr(unsafe.Pointer(pwsz)))
+func EngLoadModule(pwsz string) foundation.HANDLE {
+	_pwsz := win32.UTF16Ptr(pwsz)
+	r1, _, _ := syscall.SyscallN(procEngLoadModule.Addr(), uintptr(unsafe.Pointer(_pwsz)))
 	return foundation.HANDLE(r1)
 }
 
@@ -460,9 +462,9 @@ func EngLockSurface(hsurf HSURF) *SURFOBJ {
 // EngMarkBandingSurface calls GDI32!EngMarkBandingSurface.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engmarkbandingsurface
 // Minimum OS: windows5.0.
-func EngMarkBandingSurface(hsurf HSURF) foundation.BOOL {
+func EngMarkBandingSurface(hsurf HSURF) bool {
 	r1, _, _ := syscall.SyscallN(procEngMarkBandingSurface.Addr(), uintptr(hsurf))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngMultiByteToUnicodeN calls GDI32!EngMultiByteToUnicodeN.
@@ -483,23 +485,23 @@ func EngMultiByteToWideChar(CodePage uint32, WideCharString foundation.PWSTR, By
 // EngPaint calls GDI32!EngPaint.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engpaint
 // Minimum OS: windows5.0.
-func EngPaint(pso *SURFOBJ, pco *CLIPOBJ, pbo *BRUSHOBJ, pptlBrushOrg *foundation.POINTL, mix uint32) foundation.BOOL {
+func EngPaint(pso *SURFOBJ, pco *CLIPOBJ, pbo *BRUSHOBJ, pptlBrushOrg *foundation.POINTL, mix uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEngPaint.Addr(), uintptr(unsafe.Pointer(pso)), uintptr(unsafe.Pointer(pco)), uintptr(unsafe.Pointer(pbo)), uintptr(unsafe.Pointer(pptlBrushOrg)), uintptr(mix))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngPlgBlt calls GDI32!EngPlgBlt.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engplgblt
 // Minimum OS: windows5.0.
-func EngPlgBlt(psoTrg *SURFOBJ, psoSrc *SURFOBJ, psoMsk *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, pca *graphicsgdi.COLORADJUSTMENT, pptlBrushOrg *foundation.POINTL, pptfx *POINTFIX, prcl *foundation.RECTL, pptl *foundation.POINTL, iMode uint32) foundation.BOOL {
+func EngPlgBlt(psoTrg *SURFOBJ, psoSrc *SURFOBJ, psoMsk *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, pca *graphicsgdi.COLORADJUSTMENT, pptlBrushOrg *foundation.POINTL, pptfx *POINTFIX, prcl *foundation.RECTL, pptl *foundation.POINTL, iMode uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEngPlgBlt.Addr(), uintptr(unsafe.Pointer(psoTrg)), uintptr(unsafe.Pointer(psoSrc)), uintptr(unsafe.Pointer(psoMsk)), uintptr(unsafe.Pointer(pco)), uintptr(unsafe.Pointer(pxlo)), uintptr(unsafe.Pointer(pca)), uintptr(unsafe.Pointer(pptlBrushOrg)), uintptr(unsafe.Pointer(pptfx)), uintptr(unsafe.Pointer(prcl)), uintptr(unsafe.Pointer(pptl)), uintptr(iMode))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngQueryEMFInfo calls GDI32!EngQueryEMFInfo.
-func EngQueryEMFInfo(hdev HDEV, pEMFInfo *EMFINFO) foundation.BOOL {
+func EngQueryEMFInfo(hdev HDEV, pEMFInfo *EMFINFO) bool {
 	r1, _, _ := syscall.SyscallN(procEngQueryEMFInfo.Addr(), uintptr(hdev), uintptr(unsafe.Pointer(pEMFInfo)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngQueryLocalTime calls GDI32!EngQueryLocalTime.
@@ -519,56 +521,57 @@ func EngReleaseSemaphore(hsem HSEMAPHORE) {
 // EngStretchBlt calls GDI32!EngStretchBlt.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engstretchblt
 // Minimum OS: windows5.0.
-func EngStretchBlt(psoDest *SURFOBJ, psoSrc *SURFOBJ, psoMask *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, pca *graphicsgdi.COLORADJUSTMENT, pptlHTOrg *foundation.POINTL, prclDest *foundation.RECTL, prclSrc *foundation.RECTL, pptlMask *foundation.POINTL, iMode uint32) foundation.BOOL {
+func EngStretchBlt(psoDest *SURFOBJ, psoSrc *SURFOBJ, psoMask *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, pca *graphicsgdi.COLORADJUSTMENT, pptlHTOrg *foundation.POINTL, prclDest *foundation.RECTL, prclSrc *foundation.RECTL, pptlMask *foundation.POINTL, iMode uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEngStretchBlt.Addr(), uintptr(unsafe.Pointer(psoDest)), uintptr(unsafe.Pointer(psoSrc)), uintptr(unsafe.Pointer(psoMask)), uintptr(unsafe.Pointer(pco)), uintptr(unsafe.Pointer(pxlo)), uintptr(unsafe.Pointer(pca)), uintptr(unsafe.Pointer(pptlHTOrg)), uintptr(unsafe.Pointer(prclDest)), uintptr(unsafe.Pointer(prclSrc)), uintptr(unsafe.Pointer(pptlMask)), uintptr(iMode))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngStretchBltROP calls GDI32!EngStretchBltROP.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engstretchbltrop
 // Minimum OS: windows5.0.
-func EngStretchBltROP(psoDest *SURFOBJ, psoSrc *SURFOBJ, psoMask *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, pca *graphicsgdi.COLORADJUSTMENT, pptlHTOrg *foundation.POINTL, prclDest *foundation.RECTL, prclSrc *foundation.RECTL, pptlMask *foundation.POINTL, iMode uint32, pbo *BRUSHOBJ, rop4 uint32) foundation.BOOL {
+func EngStretchBltROP(psoDest *SURFOBJ, psoSrc *SURFOBJ, psoMask *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, pca *graphicsgdi.COLORADJUSTMENT, pptlHTOrg *foundation.POINTL, prclDest *foundation.RECTL, prclSrc *foundation.RECTL, pptlMask *foundation.POINTL, iMode uint32, pbo *BRUSHOBJ, rop4 uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEngStretchBltROP.Addr(), uintptr(unsafe.Pointer(psoDest)), uintptr(unsafe.Pointer(psoSrc)), uintptr(unsafe.Pointer(psoMask)), uintptr(unsafe.Pointer(pco)), uintptr(unsafe.Pointer(pxlo)), uintptr(unsafe.Pointer(pca)), uintptr(unsafe.Pointer(pptlHTOrg)), uintptr(unsafe.Pointer(prclDest)), uintptr(unsafe.Pointer(prclSrc)), uintptr(unsafe.Pointer(pptlMask)), uintptr(iMode), uintptr(unsafe.Pointer(pbo)), uintptr(rop4))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngStrokeAndFillPath calls GDI32!EngStrokeAndFillPath.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engstrokeandfillpath
 // Minimum OS: windows5.0.
-func EngStrokeAndFillPath(pso *SURFOBJ, ppo *PATHOBJ, pco *CLIPOBJ, pxo *XFORMOBJ, pboStroke *BRUSHOBJ, plineattrs *LINEATTRS, pboFill *BRUSHOBJ, pptlBrushOrg *foundation.POINTL, mixFill uint32, flOptions uint32) foundation.BOOL {
+func EngStrokeAndFillPath(pso *SURFOBJ, ppo *PATHOBJ, pco *CLIPOBJ, pxo *XFORMOBJ, pboStroke *BRUSHOBJ, plineattrs *LINEATTRS, pboFill *BRUSHOBJ, pptlBrushOrg *foundation.POINTL, mixFill uint32, flOptions uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEngStrokeAndFillPath.Addr(), uintptr(unsafe.Pointer(pso)), uintptr(unsafe.Pointer(ppo)), uintptr(unsafe.Pointer(pco)), uintptr(unsafe.Pointer(pxo)), uintptr(unsafe.Pointer(pboStroke)), uintptr(unsafe.Pointer(plineattrs)), uintptr(unsafe.Pointer(pboFill)), uintptr(unsafe.Pointer(pptlBrushOrg)), uintptr(mixFill), uintptr(flOptions))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngStrokePath calls GDI32!EngStrokePath.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engstrokepath
 // Minimum OS: windows5.0.
-func EngStrokePath(pso *SURFOBJ, ppo *PATHOBJ, pco *CLIPOBJ, pxo *XFORMOBJ, pbo *BRUSHOBJ, pptlBrushOrg *foundation.POINTL, plineattrs *LINEATTRS, mix uint32) foundation.BOOL {
+func EngStrokePath(pso *SURFOBJ, ppo *PATHOBJ, pco *CLIPOBJ, pxo *XFORMOBJ, pbo *BRUSHOBJ, pptlBrushOrg *foundation.POINTL, plineattrs *LINEATTRS, mix uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEngStrokePath.Addr(), uintptr(unsafe.Pointer(pso)), uintptr(unsafe.Pointer(ppo)), uintptr(unsafe.Pointer(pco)), uintptr(unsafe.Pointer(pxo)), uintptr(unsafe.Pointer(pbo)), uintptr(unsafe.Pointer(pptlBrushOrg)), uintptr(unsafe.Pointer(plineattrs)), uintptr(mix))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngTextOut calls GDI32!EngTextOut.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engtextout
 // Minimum OS: windows5.0.
-func EngTextOut(pso *SURFOBJ, pstro *STROBJ, pfo *FONTOBJ, pco *CLIPOBJ, prclExtra *foundation.RECTL, prclOpaque *foundation.RECTL, pboFore *BRUSHOBJ, pboOpaque *BRUSHOBJ, pptlOrg *foundation.POINTL, mix uint32) foundation.BOOL {
+func EngTextOut(pso *SURFOBJ, pstro *STROBJ, pfo *FONTOBJ, pco *CLIPOBJ, prclExtra *foundation.RECTL, prclOpaque *foundation.RECTL, pboFore *BRUSHOBJ, pboOpaque *BRUSHOBJ, pptlOrg *foundation.POINTL, mix uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEngTextOut.Addr(), uintptr(unsafe.Pointer(pso)), uintptr(unsafe.Pointer(pstro)), uintptr(unsafe.Pointer(pfo)), uintptr(unsafe.Pointer(pco)), uintptr(unsafe.Pointer(prclExtra)), uintptr(unsafe.Pointer(prclOpaque)), uintptr(unsafe.Pointer(pboFore)), uintptr(unsafe.Pointer(pboOpaque)), uintptr(unsafe.Pointer(pptlOrg)), uintptr(mix))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngTransparentBlt calls GDI32!EngTransparentBlt.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engtransparentblt
 // Minimum OS: windows5.0.
-func EngTransparentBlt(psoDst *SURFOBJ, psoSrc *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, prclDst *foundation.RECTL, prclSrc *foundation.RECTL, TransColor uint32, bCalledFromBitBlt uint32) foundation.BOOL {
+func EngTransparentBlt(psoDst *SURFOBJ, psoSrc *SURFOBJ, pco *CLIPOBJ, pxlo *XLATEOBJ, prclDst *foundation.RECTL, prclSrc *foundation.RECTL, TransColor uint32, bCalledFromBitBlt uint32) bool {
 	r1, _, _ := syscall.SyscallN(procEngTransparentBlt.Addr(), uintptr(unsafe.Pointer(psoDst)), uintptr(unsafe.Pointer(psoSrc)), uintptr(unsafe.Pointer(pco)), uintptr(unsafe.Pointer(pxlo)), uintptr(unsafe.Pointer(prclDst)), uintptr(unsafe.Pointer(prclSrc)), uintptr(TransColor), uintptr(bCalledFromBitBlt))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // EngUnicodeToMultiByteN calls GDI32!EngUnicodeToMultiByteN.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engunicodetomultibyten
 // Minimum OS: windows5.0.
-func EngUnicodeToMultiByteN(MultiByteString foundation.PSTR, MaxBytesInMultiByteString uint32, BytesInMultiByteString *uint32, UnicodeString foundation.PWSTR, BytesInUnicodeString uint32) {
-	syscall.SyscallN(procEngUnicodeToMultiByteN.Addr(), uintptr(unsafe.Pointer(MultiByteString)), uintptr(MaxBytesInMultiByteString), uintptr(unsafe.Pointer(BytesInMultiByteString)), uintptr(unsafe.Pointer(UnicodeString)), uintptr(BytesInUnicodeString))
+func EngUnicodeToMultiByteN(MultiByteString foundation.PSTR, MaxBytesInMultiByteString uint32, BytesInMultiByteString *uint32, UnicodeString string, BytesInUnicodeString uint32) {
+	_UnicodeString := win32.UTF16Ptr(UnicodeString)
+	syscall.SyscallN(procEngUnicodeToMultiByteN.Addr(), uintptr(unsafe.Pointer(MultiByteString)), uintptr(MaxBytesInMultiByteString), uintptr(unsafe.Pointer(BytesInMultiByteString)), uintptr(unsafe.Pointer(_UnicodeString)), uintptr(BytesInUnicodeString))
 }
 
 // EngUnlockSurface calls GDI32!EngUnlockSurface.
@@ -581,8 +584,9 @@ func EngUnlockSurface(pso *SURFOBJ) {
 // EngWideCharToMultiByte calls GDI32!EngWideCharToMultiByte.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-engwidechartomultibyte
 // Minimum OS: windows5.0.
-func EngWideCharToMultiByte(CodePage uint32, WideCharString foundation.PWSTR, BytesInWideCharString int32, MultiByteString foundation.PSTR, BytesInMultiByteString int32) int32 {
-	r1, _, _ := syscall.SyscallN(procEngWideCharToMultiByte.Addr(), uintptr(CodePage), uintptr(unsafe.Pointer(WideCharString)), uintptr(BytesInWideCharString), uintptr(unsafe.Pointer(MultiByteString)), uintptr(BytesInMultiByteString))
+func EngWideCharToMultiByte(CodePage uint32, WideCharString string, BytesInWideCharString int32, MultiByteString foundation.PSTR, BytesInMultiByteString int32) int32 {
+	_WideCharString := win32.UTF16Ptr(WideCharString)
+	r1, _, _ := syscall.SyscallN(procEngWideCharToMultiByte.Addr(), uintptr(CodePage), uintptr(unsafe.Pointer(_WideCharString)), uintptr(BytesInWideCharString), uintptr(unsafe.Pointer(MultiByteString)), uintptr(BytesInMultiByteString))
 	return int32(r1)
 }
 
@@ -651,9 +655,9 @@ func FONTOBJ_vGetInfo(pfo *FONTOBJ, cjSize uint32, pfi *FONTINFO) {
 
 // GetAutoRotationState calls USER32!GetAutoRotationState.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getautorotationstate
-func GetAutoRotationState(pState *AR_STATE) foundation.BOOL {
+func GetAutoRotationState(pState *AR_STATE) bool {
 	r1, _, _ := syscall.SyscallN(procGetAutoRotationState.Addr(), uintptr(unsafe.Pointer(pState)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetCapabilitiesStringLength calls dxva2!GetCapabilitiesStringLength.
@@ -669,9 +673,9 @@ func GetCapabilitiesStringLength(hMonitor foundation.HANDLE, pdwCapabilitiesStri
 
 // GetDisplayAutoRotationPreferences calls USER32!GetDisplayAutoRotationPreferences.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getdisplayautorotationpreferences
-func GetDisplayAutoRotationPreferences(pOrientation *ORIENTATION_PREFERENCE) foundation.BOOL {
+func GetDisplayAutoRotationPreferences(pOrientation *ORIENTATION_PREFERENCE) bool {
 	r1, _, _ := syscall.SyscallN(procGetDisplayAutoRotationPreferences.Addr(), uintptr(unsafe.Pointer(pOrientation)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetDisplayConfigBufferSizes calls USER32!GetDisplayConfigBufferSizes.
@@ -792,9 +796,9 @@ func GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor graphicsgdi.HMONITOR, pdwN
 // GetNumberOfPhysicalMonitorsFromIDirect3DDevice9 calls dxva2!GetNumberOfPhysicalMonitorsFromIDirect3DDevice9.
 // https://learn.microsoft.com/windows/win32/api/physicalmonitorenumerationapi/nf-physicalmonitorenumerationapi-getnumberofphysicalmonitorsfromidirect3ddevice9
 // Minimum OS: windows6.0.6000.
-func GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, pdwNumberOfPhysicalMonitors *uint32) foundation.HRESULT {
+func GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, pdwNumberOfPhysicalMonitors *uint32) error {
 	r1, _, _ := syscall.SyscallN(procGetNumberOfPhysicalMonitorsFromIDirect3DDevice9.Addr(), uintptr(unsafe.Pointer(pDirect3DDevice9)), uintptr(unsafe.Pointer(pdwNumberOfPhysicalMonitors)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPhysicalMonitorsFromHMONITOR calls dxva2!GetPhysicalMonitorsFromHMONITOR.
@@ -811,9 +815,9 @@ func GetPhysicalMonitorsFromHMONITOR(hMonitor graphicsgdi.HMONITOR, dwPhysicalMo
 // GetPhysicalMonitorsFromIDirect3DDevice9 calls dxva2!GetPhysicalMonitorsFromIDirect3DDevice9.
 // https://learn.microsoft.com/windows/win32/api/physicalmonitorenumerationapi/nf-physicalmonitorenumerationapi-getphysicalmonitorsfromidirect3ddevice9
 // Minimum OS: windows6.0.6000.
-func GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, dwPhysicalMonitorArraySize uint32, pPhysicalMonitorArray unsafe.Pointer) foundation.HRESULT {
+func GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 *graphicsdirect3d9.IDirect3DDevice9, dwPhysicalMonitorArraySize uint32, pPhysicalMonitorArray unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procGetPhysicalMonitorsFromIDirect3DDevice9.Addr(), uintptr(unsafe.Pointer(pDirect3DDevice9)), uintptr(dwPhysicalMonitorArraySize), uintptr(unsafe.Pointer(pPhysicalMonitorArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTimingReport calls dxva2!GetTimingReport.
@@ -849,25 +853,26 @@ func HT_Get8BPPFormatPalette(pPaletteEntry *graphicsgdi.PALETTEENTRY, RedGamma u
 // HT_Get8BPPMaskPalette calls GDI32!HT_Get8BPPMaskPalette.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-ht_get8bppmaskpalette
 // Minimum OS: windows5.0.
-func HT_Get8BPPMaskPalette(pPaletteEntry *graphicsgdi.PALETTEENTRY, Use8BPPMaskPal foundation.BOOL, CMYMask byte, RedGamma uint16, GreenGamma uint16, BlueGamma uint16) int32 {
-	r1, _, _ := syscall.SyscallN(procHT_Get8BPPMaskPalette.Addr(), uintptr(unsafe.Pointer(pPaletteEntry)), uintptr(Use8BPPMaskPal), uintptr(CMYMask), uintptr(RedGamma), uintptr(GreenGamma), uintptr(BlueGamma))
+func HT_Get8BPPMaskPalette(pPaletteEntry *graphicsgdi.PALETTEENTRY, Use8BPPMaskPal bool, CMYMask byte, RedGamma uint16, GreenGamma uint16, BlueGamma uint16) int32 {
+	_Use8BPPMaskPal := win32.Bool32(Use8BPPMaskPal)
+	r1, _, _ := syscall.SyscallN(procHT_Get8BPPMaskPalette.Addr(), uintptr(unsafe.Pointer(pPaletteEntry)), uintptr(_Use8BPPMaskPal), uintptr(CMYMask), uintptr(RedGamma), uintptr(GreenGamma), uintptr(BlueGamma))
 	return int32(r1)
 }
 
 // PATHOBJ_bEnum calls GDI32!PATHOBJ_bEnum.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-pathobj_benum
 // Minimum OS: windows5.0.
-func PATHOBJ_bEnum(ppo *PATHOBJ, ppd *PATHDATA) foundation.BOOL {
+func PATHOBJ_bEnum(ppo *PATHOBJ, ppd *PATHDATA) bool {
 	r1, _, _ := syscall.SyscallN(procPATHOBJ_bEnum.Addr(), uintptr(unsafe.Pointer(ppo)), uintptr(unsafe.Pointer(ppd)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PATHOBJ_bEnumClipLines calls GDI32!PATHOBJ_bEnumClipLines.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-pathobj_benumcliplines
 // Minimum OS: windows5.0.
-func PATHOBJ_bEnumClipLines(ppo *PATHOBJ, cb uint32, pcl *CLIPLINE) foundation.BOOL {
+func PATHOBJ_bEnumClipLines(ppo *PATHOBJ, cb uint32, pcl *CLIPLINE) bool {
 	r1, _, _ := syscall.SyscallN(procPATHOBJ_bEnumClipLines.Addr(), uintptr(unsafe.Pointer(ppo)), uintptr(cb), uintptr(unsafe.Pointer(pcl)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // PATHOBJ_vEnumStart calls GDI32!PATHOBJ_vEnumStart.
@@ -924,25 +929,25 @@ func RestoreMonitorFactoryDefaults(hMonitor foundation.HANDLE) (int32, error) {
 // STROBJ_bEnum calls GDI32!STROBJ_bEnum.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-strobj_benum
 // Minimum OS: windows5.0.
-func STROBJ_bEnum(pstro *STROBJ, pc *uint32, ppgpos **GLYPHPOS) foundation.BOOL {
+func STROBJ_bEnum(pstro *STROBJ, pc *uint32, ppgpos **GLYPHPOS) bool {
 	r1, _, _ := syscall.SyscallN(procSTROBJ_bEnum.Addr(), uintptr(unsafe.Pointer(pstro)), uintptr(unsafe.Pointer(pc)), uintptr(unsafe.Pointer(ppgpos)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // STROBJ_bEnumPositionsOnly calls GDI32!STROBJ_bEnumPositionsOnly.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-strobj_benumpositionsonly
 // Minimum OS: windows5.0.
-func STROBJ_bEnumPositionsOnly(pstro *STROBJ, pc *uint32, ppgpos **GLYPHPOS) foundation.BOOL {
+func STROBJ_bEnumPositionsOnly(pstro *STROBJ, pc *uint32, ppgpos **GLYPHPOS) bool {
 	r1, _, _ := syscall.SyscallN(procSTROBJ_bEnumPositionsOnly.Addr(), uintptr(unsafe.Pointer(pstro)), uintptr(unsafe.Pointer(pc)), uintptr(unsafe.Pointer(ppgpos)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // STROBJ_bGetAdvanceWidths calls GDI32!STROBJ_bGetAdvanceWidths.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-strobj_bgetadvancewidths
 // Minimum OS: windows5.0.
-func STROBJ_bGetAdvanceWidths(pso *STROBJ, iFirst uint32, c uint32, pptqD *POINTQF) foundation.BOOL {
+func STROBJ_bGetAdvanceWidths(pso *STROBJ, iFirst uint32, c uint32, pptqD *POINTQF) bool {
 	r1, _, _ := syscall.SyscallN(procSTROBJ_bGetAdvanceWidths.Addr(), uintptr(unsafe.Pointer(pso)), uintptr(iFirst), uintptr(c), uintptr(unsafe.Pointer(pptqD)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // STROBJ_dwGetCodePage calls GDI32!STROBJ_dwGetCodePage.
@@ -984,16 +989,24 @@ func SaveCurrentSettings(hMonitor foundation.HANDLE) (int32, error) {
 
 // SetDisplayAutoRotationPreferences calls USER32!SetDisplayAutoRotationPreferences.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setdisplayautorotationpreferences
-func SetDisplayAutoRotationPreferences(orientation ORIENTATION_PREFERENCE) foundation.BOOL {
+func SetDisplayAutoRotationPreferences(orientation ORIENTATION_PREFERENCE) bool {
 	r1, _, _ := syscall.SyscallN(procSetDisplayAutoRotationPreferences.Addr(), uintptr(orientation))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetDisplayConfig calls USER32!SetDisplayConfig.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setdisplayconfig
 // Minimum OS: windows6.1.
-func SetDisplayConfig(numPathArrayElements uint32, pathArray *DISPLAYCONFIG_PATH_INFO, numModeInfoArrayElements uint32, modeInfoArray *DISPLAYCONFIG_MODE_INFO, flags SET_DISPLAY_CONFIG_FLAGS) int32 {
-	r1, _, _ := syscall.SyscallN(procSetDisplayConfig.Addr(), uintptr(numPathArrayElements), uintptr(unsafe.Pointer(pathArray)), uintptr(numModeInfoArrayElements), uintptr(unsafe.Pointer(modeInfoArray)), uintptr(flags))
+func SetDisplayConfig(pathArray []DISPLAYCONFIG_PATH_INFO, modeInfoArray []DISPLAYCONFIG_MODE_INFO, flags SET_DISPLAY_CONFIG_FLAGS) int32 {
+	var _pathArray *DISPLAYCONFIG_PATH_INFO
+	if len(pathArray) > 0 {
+		_pathArray = &pathArray[0]
+	}
+	var _modeInfoArray *DISPLAYCONFIG_MODE_INFO
+	if len(modeInfoArray) > 0 {
+		_modeInfoArray = &modeInfoArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetDisplayConfig.Addr(), uintptr(len(pathArray)), uintptr(unsafe.Pointer(_pathArray)), uintptr(len(modeInfoArray)), uintptr(unsafe.Pointer(_modeInfoArray)), uintptr(flags))
 	return int32(r1)
 }
 
@@ -1079,9 +1092,9 @@ func SetVCPFeature(hMonitor foundation.HANDLE, bVCPCode byte, dwNewValue uint32)
 // XFORMOBJ_bApplyXform calls GDI32!XFORMOBJ_bApplyXform.
 // https://learn.microsoft.com/windows/win32/api/winddi/nf-winddi-xformobj_bapplyxform
 // Minimum OS: windows5.0.
-func XFORMOBJ_bApplyXform(pxo *XFORMOBJ, iMode uint32, cPoints uint32, pvIn unsafe.Pointer, pvOut unsafe.Pointer) foundation.BOOL {
+func XFORMOBJ_bApplyXform(pxo *XFORMOBJ, iMode uint32, cPoints uint32, pvIn unsafe.Pointer, pvOut unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procXFORMOBJ_bApplyXform.Addr(), uintptr(unsafe.Pointer(pxo)), uintptr(iMode), uintptr(cPoints), uintptr(unsafe.Pointer(pvIn)), uintptr(unsafe.Pointer(pvOut)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // XFORMOBJ_iGetXform calls GDI32!XFORMOBJ_iGetXform.

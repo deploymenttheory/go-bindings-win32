@@ -89,8 +89,8 @@ type GOPHER_ASK_ATTRIBUTE_TYPE struct {
 	QuestionText *int8
 }
 
-// GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type GOPHER_ATTRIBUTE_TYPE_AttributeType_e__Union struct {
 	Data [3]uint64
 }
@@ -250,8 +250,8 @@ type INTERNET_BUFFERSW struct {
 	DwOffsetHigh    uint32
 }
 
-// INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INTERNET_CACHE_CONFIG_INFOA_Anonymous_e__Union struct {
 	Data [66]uint32
 }
@@ -270,8 +270,8 @@ type INTERNET_CACHE_CONFIG_INFOA struct {
 	DwExemptUsage   uint32
 }
 
-// INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INTERNET_CACHE_CONFIG_INFOW_Anonymous_e__Union struct {
 	Data [131]uint32
 }
@@ -316,8 +316,8 @@ type INTERNET_CACHE_CONTAINER_INFOW struct {
 	LpszVolumeTitle foundation.PWSTR
 }
 
-// INTERNET_CACHE_ENTRY_INFOA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INTERNET_CACHE_ENTRY_INFOA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INTERNET_CACHE_ENTRY_INFOA_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -342,8 +342,8 @@ type INTERNET_CACHE_ENTRY_INFOA struct {
 	Anonymous         INTERNET_CACHE_ENTRY_INFOA_Anonymous_e__Union
 }
 
-// INTERNET_CACHE_ENTRY_INFOW_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INTERNET_CACHE_ENTRY_INFOW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INTERNET_CACHE_ENTRY_INFOW_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -446,8 +446,8 @@ type INTERNET_COOKIE2 struct {
 	FExpiresSet foundation.BOOL
 }
 
-// INTERNET_CREDENTIALS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INTERNET_CREDENTIALS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INTERNET_CREDENTIALS_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -480,8 +480,8 @@ type INTERNET_END_BROWSER_SESSION_DATA struct {
 	DwBufferLength uint32
 }
 
-// INTERNET_PER_CONN_OPTIONA_Value_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INTERNET_PER_CONN_OPTIONA_Value_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INTERNET_PER_CONN_OPTIONA_Value_e__Union struct {
 	Data [1]uint64
 }
@@ -492,8 +492,8 @@ type INTERNET_PER_CONN_OPTIONA struct {
 	Value    INTERNET_PER_CONN_OPTIONA_Value_e__Union
 }
 
-// INTERNET_PER_CONN_OPTIONW_Value_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// INTERNET_PER_CONN_OPTIONW_Value_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type INTERNET_PER_CONN_OPTIONW_Value_e__Union struct {
 	Data [1]uint64
 }

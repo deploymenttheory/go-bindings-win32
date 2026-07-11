@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 )
 
 var (
@@ -29,55 +28,58 @@ var (
 // FhServiceBlockBackup calls fhsvcctl!FhServiceBlockBackup.
 // https://learn.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhserviceblockbackup
 // Minimum OS: windows8.0.
-func FhServiceBlockBackup(Pipe FH_SERVICE_PIPE_HANDLE) foundation.HRESULT {
+func FhServiceBlockBackup(Pipe FH_SERVICE_PIPE_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procFhServiceBlockBackup.Addr(), uintptr(Pipe))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FhServiceClosePipe calls fhsvcctl!FhServiceClosePipe.
 // https://learn.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhserviceclosepipe
 // Minimum OS: windows8.0.
-func FhServiceClosePipe(Pipe FH_SERVICE_PIPE_HANDLE) foundation.HRESULT {
+func FhServiceClosePipe(Pipe FH_SERVICE_PIPE_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procFhServiceClosePipe.Addr(), uintptr(Pipe))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FhServiceOpenPipe calls fhsvcctl!FhServiceOpenPipe.
 // https://learn.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhserviceopenpipe
 // Minimum OS: windows8.0.
-func FhServiceOpenPipe(StartServiceIfStopped foundation.BOOL, Pipe *FH_SERVICE_PIPE_HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procFhServiceOpenPipe.Addr(), uintptr(StartServiceIfStopped), uintptr(unsafe.Pointer(Pipe)))
-	return foundation.HRESULT(r1)
+func FhServiceOpenPipe(StartServiceIfStopped bool, Pipe *FH_SERVICE_PIPE_HANDLE) error {
+	_StartServiceIfStopped := win32.Bool32(StartServiceIfStopped)
+	r1, _, _ := syscall.SyscallN(procFhServiceOpenPipe.Addr(), uintptr(_StartServiceIfStopped), uintptr(unsafe.Pointer(Pipe)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // FhServiceReloadConfiguration calls fhsvcctl!FhServiceReloadConfiguration.
 // https://learn.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhservicereloadconfiguration
 // Minimum OS: windows8.0.
-func FhServiceReloadConfiguration(Pipe FH_SERVICE_PIPE_HANDLE) foundation.HRESULT {
+func FhServiceReloadConfiguration(Pipe FH_SERVICE_PIPE_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procFhServiceReloadConfiguration.Addr(), uintptr(Pipe))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FhServiceStartBackup calls fhsvcctl!FhServiceStartBackup.
 // https://learn.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhservicestartbackup
 // Minimum OS: windows8.0.
-func FhServiceStartBackup(Pipe FH_SERVICE_PIPE_HANDLE, LowPriorityIo foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procFhServiceStartBackup.Addr(), uintptr(Pipe), uintptr(LowPriorityIo))
-	return foundation.HRESULT(r1)
+func FhServiceStartBackup(Pipe FH_SERVICE_PIPE_HANDLE, LowPriorityIo bool) error {
+	_LowPriorityIo := win32.Bool32(LowPriorityIo)
+	r1, _, _ := syscall.SyscallN(procFhServiceStartBackup.Addr(), uintptr(Pipe), uintptr(_LowPriorityIo))
+	return win32.HRESULTError(int32(r1))
 }
 
 // FhServiceStopBackup calls fhsvcctl!FhServiceStopBackup.
 // https://learn.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhservicestopbackup
 // Minimum OS: windows8.0.
-func FhServiceStopBackup(Pipe FH_SERVICE_PIPE_HANDLE, StopTracking foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procFhServiceStopBackup.Addr(), uintptr(Pipe), uintptr(StopTracking))
-	return foundation.HRESULT(r1)
+func FhServiceStopBackup(Pipe FH_SERVICE_PIPE_HANDLE, StopTracking bool) error {
+	_StopTracking := win32.Bool32(StopTracking)
+	r1, _, _ := syscall.SyscallN(procFhServiceStopBackup.Addr(), uintptr(Pipe), uintptr(_StopTracking))
+	return win32.HRESULTError(int32(r1))
 }
 
 // FhServiceUnblockBackup calls fhsvcctl!FhServiceUnblockBackup.
 // https://learn.microsoft.com/windows/win32/api/fhsvcctl/nf-fhsvcctl-fhserviceunblockbackup
 // Minimum OS: windows8.0.
-func FhServiceUnblockBackup(Pipe FH_SERVICE_PIPE_HANDLE) foundation.HRESULT {
+func FhServiceUnblockBackup(Pipe FH_SERVICE_PIPE_HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procFhServiceUnblockBackup.Addr(), uintptr(Pipe))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

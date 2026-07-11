@@ -27,21 +27,24 @@ type IPhotoAcquire struct {
 var IID_IPhotoAcquire = win32.GUID{Data1: 0x00f23353, Data2: 0xe31b, Data3: 0x4955, Data4: [8]byte{0xa8, 0xad, 0xca, 0x5e, 0xbf, 0x31, 0xe2, 0xce}}
 
 // CreatePhotoSource dispatches through IPhotoAcquire's vtable slot 3.
-func (self *IPhotoAcquire) CreatePhotoSource(pszDevice foundation.PWSTR, ppPhotoAcquireSource **IPhotoAcquireSource) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDevice)), uintptr(unsafe.Pointer(ppPhotoAcquireSource)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoAcquire) CreatePhotoSource(pszDevice string, ppPhotoAcquireSource **IPhotoAcquireSource) error {
+	_pszDevice := win32.UTF16Ptr(pszDevice)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszDevice)), uintptr(unsafe.Pointer(ppPhotoAcquireSource)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Acquire dispatches through IPhotoAcquire's vtable slot 4.
-func (self *IPhotoAcquire) Acquire(pPhotoAcquireSource *IPhotoAcquireSource, fShowProgress foundation.BOOL, hWndParent foundation.HWND, pszApplicationName foundation.PWSTR, pPhotoAcquireProgressCB *IPhotoAcquireProgressCB) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhotoAcquireSource)), uintptr(fShowProgress), uintptr(hWndParent), uintptr(unsafe.Pointer(pszApplicationName)), uintptr(unsafe.Pointer(pPhotoAcquireProgressCB)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoAcquire) Acquire(pPhotoAcquireSource *IPhotoAcquireSource, fShowProgress bool, hWndParent foundation.HWND, pszApplicationName string, pPhotoAcquireProgressCB *IPhotoAcquireProgressCB) error {
+	_fShowProgress := win32.Bool32(fShowProgress)
+	_pszApplicationName := win32.UTF16Ptr(pszApplicationName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhotoAcquireSource)), uintptr(_fShowProgress), uintptr(hWndParent), uintptr(unsafe.Pointer(_pszApplicationName)), uintptr(unsafe.Pointer(pPhotoAcquireProgressCB)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumResults dispatches through IPhotoAcquire's vtable slot 5.
-func (self *IPhotoAcquire) EnumResults(ppEnumFilePaths **systemcom.IEnumString) foundation.HRESULT {
+func (self *IPhotoAcquire) EnumResults(ppEnumFilePaths **systemcom.IEnumString) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnumFilePaths)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPhotoAcquireDeviceSelectionDialog: https://learn.microsoft.com/windows/win32/api/photoacquire/nn-photoacquire-iphotoacquiredeviceselectiondialog
@@ -54,21 +57,23 @@ type IPhotoAcquireDeviceSelectionDialog struct {
 var IID_IPhotoAcquireDeviceSelectionDialog = win32.GUID{Data1: 0x00f28837, Data2: 0x55dd, Data3: 0x4f37, Data4: [8]byte{0xaa, 0xf5, 0x68, 0x55, 0xa9, 0x64, 0x04, 0x67}}
 
 // SetTitle dispatches through IPhotoAcquireDeviceSelectionDialog's vtable slot 3.
-func (self *IPhotoAcquireDeviceSelectionDialog) SetTitle(pszTitle foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszTitle)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoAcquireDeviceSelectionDialog) SetTitle(pszTitle string) error {
+	_pszTitle := win32.UTF16Ptr(pszTitle)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTitle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSubmitButtonText dispatches through IPhotoAcquireDeviceSelectionDialog's vtable slot 4.
-func (self *IPhotoAcquireDeviceSelectionDialog) SetSubmitButtonText(pszSubmitButtonText foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSubmitButtonText)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoAcquireDeviceSelectionDialog) SetSubmitButtonText(pszSubmitButtonText string) error {
+	_pszSubmitButtonText := win32.UTF16Ptr(pszSubmitButtonText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszSubmitButtonText)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DoModal dispatches through IPhotoAcquireDeviceSelectionDialog's vtable slot 5.
-func (self *IPhotoAcquireDeviceSelectionDialog) DoModal(hWndParent foundation.HWND, dwDeviceFlags uint32, pbstrDeviceId *foundation.BSTR, pnDeviceType *DEVICE_SELECTION_DEVICE_TYPE) foundation.HRESULT {
+func (self *IPhotoAcquireDeviceSelectionDialog) DoModal(hWndParent foundation.HWND, dwDeviceFlags uint32, pbstrDeviceId *foundation.BSTR, pnDeviceType *DEVICE_SELECTION_DEVICE_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hWndParent), uintptr(dwDeviceFlags), uintptr(unsafe.Pointer(pbstrDeviceId)), uintptr(unsafe.Pointer(pnDeviceType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPhotoAcquireItem: https://learn.microsoft.com/windows/win32/api/photoacquire/nn-photoacquire-iphotoacquireitem
@@ -81,51 +86,51 @@ type IPhotoAcquireItem struct {
 var IID_IPhotoAcquireItem = win32.GUID{Data1: 0x00f21c97, Data2: 0x28bf, Data3: 0x4c02, Data4: [8]byte{0xb8, 0x42, 0x5e, 0x4e, 0x90, 0x13, 0x9a, 0x30}}
 
 // GetItemName dispatches through IPhotoAcquireItem's vtable slot 3.
-func (self *IPhotoAcquireItem) GetItemName(pbstrItemName *foundation.BSTR) foundation.HRESULT {
+func (self *IPhotoAcquireItem) GetItemName(pbstrItemName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrItemName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProperty dispatches through IPhotoAcquireItem's vtable slot 5.
-func (self *IPhotoAcquireItem) GetProperty(key *foundation.PROPERTYKEY, pv *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IPhotoAcquireItem) GetProperty(key *foundation.PROPERTYKEY, pv *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperty dispatches through IPhotoAcquireItem's vtable slot 6.
-func (self *IPhotoAcquireItem) SetProperty(key *foundation.PROPERTYKEY, pv *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IPhotoAcquireItem) SetProperty(key *foundation.PROPERTYKEY, pv *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStream dispatches through IPhotoAcquireItem's vtable slot 7.
-func (self *IPhotoAcquireItem) GetStream(ppStream **systemcom.IStream) foundation.HRESULT {
+func (self *IPhotoAcquireItem) GetStream(ppStream **systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CanDelete dispatches through IPhotoAcquireItem's vtable slot 8.
-func (self *IPhotoAcquireItem) CanDelete(pfCanDelete *foundation.BOOL) foundation.HRESULT {
+func (self *IPhotoAcquireItem) CanDelete(pfCanDelete *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCanDelete)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IPhotoAcquireItem's vtable slot 9.
-func (self *IPhotoAcquireItem) Delete() foundation.HRESULT {
+func (self *IPhotoAcquireItem) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSubItemCount dispatches through IPhotoAcquireItem's vtable slot 10.
-func (self *IPhotoAcquireItem) GetSubItemCount(pnCount *uint32) foundation.HRESULT {
+func (self *IPhotoAcquireItem) GetSubItemCount(pnCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSubItemAt dispatches through IPhotoAcquireItem's vtable slot 11.
-func (self *IPhotoAcquireItem) GetSubItemAt(nItemIndex uint32, ppPhotoAcquireItem **IPhotoAcquireItem) foundation.HRESULT {
+func (self *IPhotoAcquireItem) GetSubItemAt(nItemIndex uint32, ppPhotoAcquireItem **IPhotoAcquireItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(nItemIndex), uintptr(unsafe.Pointer(ppPhotoAcquireItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPhotoAcquireOptionsDialog: https://learn.microsoft.com/windows/win32/api/photoacquire/nn-photoacquire-iphotoacquireoptionsdialog
@@ -138,33 +143,34 @@ type IPhotoAcquireOptionsDialog struct {
 var IID_IPhotoAcquireOptionsDialog = win32.GUID{Data1: 0x00f2b3ee, Data2: 0xbf64, Data3: 0x47ee, Data4: [8]byte{0x89, 0xf4, 0x4d, 0xed, 0xd7, 0x96, 0x43, 0xf2}}
 
 // Initialize dispatches through IPhotoAcquireOptionsDialog's vtable slot 3.
-func (self *IPhotoAcquireOptionsDialog) Initialize(pszRegistryRoot foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszRegistryRoot)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoAcquireOptionsDialog) Initialize(pszRegistryRoot string) error {
+	_pszRegistryRoot := win32.UTF16Ptr(pszRegistryRoot)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRegistryRoot)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Create dispatches through IPhotoAcquireOptionsDialog's vtable slot 4.
-func (self *IPhotoAcquireOptionsDialog) Create(hWndParent foundation.HWND, phWndDialog *foundation.HWND) foundation.HRESULT {
+func (self *IPhotoAcquireOptionsDialog) Create(hWndParent foundation.HWND, phWndDialog *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hWndParent), uintptr(unsafe.Pointer(phWndDialog)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Destroy dispatches through IPhotoAcquireOptionsDialog's vtable slot 5.
-func (self *IPhotoAcquireOptionsDialog) Destroy() foundation.HRESULT {
+func (self *IPhotoAcquireOptionsDialog) Destroy() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DoModal dispatches through IPhotoAcquireOptionsDialog's vtable slot 6.
-func (self *IPhotoAcquireOptionsDialog) DoModal(hWndParent foundation.HWND, ppnReturnCode *uintptr) foundation.HRESULT {
+func (self *IPhotoAcquireOptionsDialog) DoModal(hWndParent foundation.HWND, ppnReturnCode *uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hWndParent), uintptr(unsafe.Pointer(ppnReturnCode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveData dispatches through IPhotoAcquireOptionsDialog's vtable slot 7.
-func (self *IPhotoAcquireOptionsDialog) SaveData() foundation.HRESULT {
+func (self *IPhotoAcquireOptionsDialog) SaveData() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPhotoAcquirePlugin: https://learn.microsoft.com/windows/win32/api/photoacquire/nn-photoacquire-iphotoacquireplugin
@@ -177,27 +183,28 @@ type IPhotoAcquirePlugin struct {
 var IID_IPhotoAcquirePlugin = win32.GUID{Data1: 0x00f2dceb, Data2: 0xecb8, Data3: 0x4f77, Data4: [8]byte{0x8e, 0x47, 0xe7, 0xa9, 0x87, 0xc8, 0x3d, 0xd0}}
 
 // Initialize dispatches through IPhotoAcquirePlugin's vtable slot 3.
-func (self *IPhotoAcquirePlugin) Initialize(pPhotoAcquireSource *IPhotoAcquireSource, pPhotoAcquireProgressCB *IPhotoAcquireProgressCB) foundation.HRESULT {
+func (self *IPhotoAcquirePlugin) Initialize(pPhotoAcquireSource *IPhotoAcquireSource, pPhotoAcquireProgressCB *IPhotoAcquireProgressCB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhotoAcquireSource)), uintptr(unsafe.Pointer(pPhotoAcquireProgressCB)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessItem dispatches through IPhotoAcquirePlugin's vtable slot 4.
-func (self *IPhotoAcquirePlugin) ProcessItem(dwAcquireStage uint32, pPhotoAcquireItem *IPhotoAcquireItem, pOriginalItemStream *systemcom.IStream, pszFinalFilename foundation.PWSTR, pPropertyStore *uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwAcquireStage), uintptr(unsafe.Pointer(pPhotoAcquireItem)), uintptr(unsafe.Pointer(pOriginalItemStream)), uintptr(unsafe.Pointer(pszFinalFilename)), uintptr(unsafe.Pointer(pPropertyStore)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoAcquirePlugin) ProcessItem(dwAcquireStage uint32, pPhotoAcquireItem *IPhotoAcquireItem, pOriginalItemStream *systemcom.IStream, pszFinalFilename string, pPropertyStore *uishellpropertiessystem.IPropertyStore) error {
+	_pszFinalFilename := win32.UTF16Ptr(pszFinalFilename)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwAcquireStage), uintptr(unsafe.Pointer(pPhotoAcquireItem)), uintptr(unsafe.Pointer(pOriginalItemStream)), uintptr(unsafe.Pointer(_pszFinalFilename)), uintptr(unsafe.Pointer(pPropertyStore)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // TransferComplete dispatches through IPhotoAcquirePlugin's vtable slot 5.
-func (self *IPhotoAcquirePlugin) TransferComplete(hr foundation.HRESULT) foundation.HRESULT {
+func (self *IPhotoAcquirePlugin) TransferComplete(hr foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hr))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisplayConfigureDialog dispatches through IPhotoAcquirePlugin's vtable slot 6.
-func (self *IPhotoAcquirePlugin) DisplayConfigureDialog(hWndParent foundation.HWND) foundation.HRESULT {
+func (self *IPhotoAcquirePlugin) DisplayConfigureDialog(hWndParent foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hWndParent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPhotoAcquireProgressCB: https://learn.microsoft.com/windows/win32/api/photoacquire/nn-photoacquire-iphotoacquireprogresscb
@@ -210,117 +217,120 @@ type IPhotoAcquireProgressCB struct {
 var IID_IPhotoAcquireProgressCB = win32.GUID{Data1: 0x00f2ce1e, Data2: 0x935e, Data3: 0x4248, Data4: [8]byte{0x89, 0x2c, 0x13, 0x0f, 0x32, 0xc4, 0x5c, 0xb4}}
 
 // Cancelled dispatches through IPhotoAcquireProgressCB's vtable slot 3.
-func (self *IPhotoAcquireProgressCB) Cancelled(pfCancelled *foundation.BOOL) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) Cancelled(pfCancelled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCancelled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartEnumeration dispatches through IPhotoAcquireProgressCB's vtable slot 4.
-func (self *IPhotoAcquireProgressCB) StartEnumeration(pPhotoAcquireSource *IPhotoAcquireSource) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) StartEnumeration(pPhotoAcquireSource *IPhotoAcquireSource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhotoAcquireSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FoundItem dispatches through IPhotoAcquireProgressCB's vtable slot 5.
-func (self *IPhotoAcquireProgressCB) FoundItem(pPhotoAcquireItem *IPhotoAcquireItem) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) FoundItem(pPhotoAcquireItem *IPhotoAcquireItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhotoAcquireItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndEnumeration dispatches through IPhotoAcquireProgressCB's vtable slot 6.
-func (self *IPhotoAcquireProgressCB) EndEnumeration(hr foundation.HRESULT) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) EndEnumeration(hr foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hr))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartTransfer dispatches through IPhotoAcquireProgressCB's vtable slot 7.
-func (self *IPhotoAcquireProgressCB) StartTransfer(pPhotoAcquireSource *IPhotoAcquireSource) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) StartTransfer(pPhotoAcquireSource *IPhotoAcquireSource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhotoAcquireSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartItemTransfer dispatches through IPhotoAcquireProgressCB's vtable slot 8.
-func (self *IPhotoAcquireProgressCB) StartItemTransfer(nItemIndex uint32, pPhotoAcquireItem *IPhotoAcquireItem) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) StartItemTransfer(nItemIndex uint32, pPhotoAcquireItem *IPhotoAcquireItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(nItemIndex), uintptr(unsafe.Pointer(pPhotoAcquireItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DirectoryCreated dispatches through IPhotoAcquireProgressCB's vtable slot 9.
-func (self *IPhotoAcquireProgressCB) DirectoryCreated(pszDirectory foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszDirectory)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoAcquireProgressCB) DirectoryCreated(pszDirectory string) error {
+	_pszDirectory := win32.UTF16Ptr(pszDirectory)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszDirectory)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateTransferPercent dispatches through IPhotoAcquireProgressCB's vtable slot 10.
-func (self *IPhotoAcquireProgressCB) UpdateTransferPercent(fOverall foundation.BOOL, nPercent uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(fOverall), uintptr(nPercent))
-	return foundation.HRESULT(r1)
+func (self *IPhotoAcquireProgressCB) UpdateTransferPercent(fOverall bool, nPercent uint32) error {
+	_fOverall := win32.Bool32(fOverall)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(_fOverall), uintptr(nPercent))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndItemTransfer dispatches through IPhotoAcquireProgressCB's vtable slot 11.
-func (self *IPhotoAcquireProgressCB) EndItemTransfer(nItemIndex uint32, pPhotoAcquireItem *IPhotoAcquireItem, hr foundation.HRESULT) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) EndItemTransfer(nItemIndex uint32, pPhotoAcquireItem *IPhotoAcquireItem, hr foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(nItemIndex), uintptr(unsafe.Pointer(pPhotoAcquireItem)), uintptr(hr))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndTransfer dispatches through IPhotoAcquireProgressCB's vtable slot 12.
-func (self *IPhotoAcquireProgressCB) EndTransfer(hr foundation.HRESULT) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) EndTransfer(hr foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hr))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartDelete dispatches through IPhotoAcquireProgressCB's vtable slot 13.
-func (self *IPhotoAcquireProgressCB) StartDelete(pPhotoAcquireSource *IPhotoAcquireSource) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) StartDelete(pPhotoAcquireSource *IPhotoAcquireSource) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhotoAcquireSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StartItemDelete dispatches through IPhotoAcquireProgressCB's vtable slot 14.
-func (self *IPhotoAcquireProgressCB) StartItemDelete(nItemIndex uint32, pPhotoAcquireItem *IPhotoAcquireItem) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) StartItemDelete(nItemIndex uint32, pPhotoAcquireItem *IPhotoAcquireItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(nItemIndex), uintptr(unsafe.Pointer(pPhotoAcquireItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateDeletePercent dispatches through IPhotoAcquireProgressCB's vtable slot 15.
-func (self *IPhotoAcquireProgressCB) UpdateDeletePercent(nPercent uint32) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) UpdateDeletePercent(nPercent uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(nPercent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndItemDelete dispatches through IPhotoAcquireProgressCB's vtable slot 16.
-func (self *IPhotoAcquireProgressCB) EndItemDelete(nItemIndex uint32, pPhotoAcquireItem *IPhotoAcquireItem, hr foundation.HRESULT) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) EndItemDelete(nItemIndex uint32, pPhotoAcquireItem *IPhotoAcquireItem, hr foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(nItemIndex), uintptr(unsafe.Pointer(pPhotoAcquireItem)), uintptr(hr))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndDelete dispatches through IPhotoAcquireProgressCB's vtable slot 17.
-func (self *IPhotoAcquireProgressCB) EndDelete(hr foundation.HRESULT) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) EndDelete(hr foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(hr))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndSession dispatches through IPhotoAcquireProgressCB's vtable slot 18.
-func (self *IPhotoAcquireProgressCB) EndSession(hr foundation.HRESULT) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) EndSession(hr foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(hr))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeleteAfterAcquire dispatches through IPhotoAcquireProgressCB's vtable slot 19.
-func (self *IPhotoAcquireProgressCB) GetDeleteAfterAcquire(pfDeleteAfterAcquire *foundation.BOOL) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) GetDeleteAfterAcquire(pfDeleteAfterAcquire *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfDeleteAfterAcquire)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ErrorAdvise dispatches through IPhotoAcquireProgressCB's vtable slot 20.
-func (self *IPhotoAcquireProgressCB) ErrorAdvise(hr foundation.HRESULT, pszErrorMessage foundation.PWSTR, nMessageType ERROR_ADVISE_MESSAGE_TYPE, pnErrorAdviseResult *ERROR_ADVISE_RESULT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(unsafe.Pointer(pszErrorMessage)), uintptr(nMessageType), uintptr(unsafe.Pointer(pnErrorAdviseResult)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoAcquireProgressCB) ErrorAdvise(hr foundation.HRESULT, pszErrorMessage string, nMessageType ERROR_ADVISE_MESSAGE_TYPE, pnErrorAdviseResult *ERROR_ADVISE_RESULT) error {
+	_pszErrorMessage := win32.UTF16Ptr(pszErrorMessage)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(hr), uintptr(unsafe.Pointer(_pszErrorMessage)), uintptr(nMessageType), uintptr(unsafe.Pointer(pnErrorAdviseResult)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUserInput dispatches through IPhotoAcquireProgressCB's vtable slot 21.
-func (self *IPhotoAcquireProgressCB) GetUserInput(riidType *win32.GUID, pUnknown *systemcom.IUnknown, pPropVarResult *systemcomstructuredstorage.PROPVARIANT, pPropVarDefault *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IPhotoAcquireProgressCB) GetUserInput(riidType *win32.GUID, pUnknown *systemcom.IUnknown, pPropVarResult *systemcomstructuredstorage.PROPVARIANT, pPropVarDefault *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riidType)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(pPropVarResult)), uintptr(unsafe.Pointer(pPropVarDefault)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPhotoAcquireSettings: https://learn.microsoft.com/windows/win32/api/photoacquire/nn-photoacquire-iphotoacquiresettings
@@ -333,81 +343,85 @@ type IPhotoAcquireSettings struct {
 var IID_IPhotoAcquireSettings = win32.GUID{Data1: 0x00f2b868, Data2: 0xdd67, Data3: 0x487c, Data4: [8]byte{0x95, 0x53, 0x04, 0x92, 0x40, 0x76, 0x7e, 0x91}}
 
 // InitializeFromRegistry dispatches through IPhotoAcquireSettings's vtable slot 3.
-func (self *IPhotoAcquireSettings) InitializeFromRegistry(pszRegistryKey foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszRegistryKey)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoAcquireSettings) InitializeFromRegistry(pszRegistryKey string) error {
+	_pszRegistryKey := win32.UTF16Ptr(pszRegistryKey)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszRegistryKey)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFlags dispatches through IPhotoAcquireSettings's vtable slot 4.
-func (self *IPhotoAcquireSettings) SetFlags(dwPhotoAcquireFlags uint32) foundation.HRESULT {
+func (self *IPhotoAcquireSettings) SetFlags(dwPhotoAcquireFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwPhotoAcquireFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutputFilenameTemplate dispatches through IPhotoAcquireSettings's vtable slot 5.
-func (self *IPhotoAcquireSettings) SetOutputFilenameTemplate(pszTemplate foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszTemplate)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoAcquireSettings) SetOutputFilenameTemplate(pszTemplate string) error {
+	_pszTemplate := win32.UTF16Ptr(pszTemplate)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTemplate)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSequencePaddingWidth dispatches through IPhotoAcquireSettings's vtable slot 6.
-func (self *IPhotoAcquireSettings) SetSequencePaddingWidth(dwWidth uint32) foundation.HRESULT {
+func (self *IPhotoAcquireSettings) SetSequencePaddingWidth(dwWidth uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwWidth))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSequenceZeroPadding dispatches through IPhotoAcquireSettings's vtable slot 7.
-func (self *IPhotoAcquireSettings) SetSequenceZeroPadding(fZeroPad foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fZeroPad))
-	return foundation.HRESULT(r1)
+func (self *IPhotoAcquireSettings) SetSequenceZeroPadding(fZeroPad bool) error {
+	_fZeroPad := win32.Bool32(fZeroPad)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(_fZeroPad))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGroupTag dispatches through IPhotoAcquireSettings's vtable slot 8.
-func (self *IPhotoAcquireSettings) SetGroupTag(pszGroupTag foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszGroupTag)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoAcquireSettings) SetGroupTag(pszGroupTag string) error {
+	_pszGroupTag := win32.UTF16Ptr(pszGroupTag)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszGroupTag)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAcquisitionTime dispatches through IPhotoAcquireSettings's vtable slot 9.
-func (self *IPhotoAcquireSettings) SetAcquisitionTime(pftAcquisitionTime *foundation.FILETIME) foundation.HRESULT {
+func (self *IPhotoAcquireSettings) SetAcquisitionTime(pftAcquisitionTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pftAcquisitionTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlags dispatches through IPhotoAcquireSettings's vtable slot 10.
-func (self *IPhotoAcquireSettings) GetFlags(pdwPhotoAcquireFlags *uint32) foundation.HRESULT {
+func (self *IPhotoAcquireSettings) GetFlags(pdwPhotoAcquireFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwPhotoAcquireFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputFilenameTemplate dispatches through IPhotoAcquireSettings's vtable slot 11.
-func (self *IPhotoAcquireSettings) GetOutputFilenameTemplate(pbstrTemplate *foundation.BSTR) foundation.HRESULT {
+func (self *IPhotoAcquireSettings) GetOutputFilenameTemplate(pbstrTemplate *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTemplate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSequencePaddingWidth dispatches through IPhotoAcquireSettings's vtable slot 12.
-func (self *IPhotoAcquireSettings) GetSequencePaddingWidth(pdwWidth *uint32) foundation.HRESULT {
+func (self *IPhotoAcquireSettings) GetSequencePaddingWidth(pdwWidth *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwWidth)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSequenceZeroPadding dispatches through IPhotoAcquireSettings's vtable slot 13.
-func (self *IPhotoAcquireSettings) GetSequenceZeroPadding(pfZeroPad *foundation.BOOL) foundation.HRESULT {
+func (self *IPhotoAcquireSettings) GetSequenceZeroPadding(pfZeroPad *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfZeroPad)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGroupTag dispatches through IPhotoAcquireSettings's vtable slot 14.
-func (self *IPhotoAcquireSettings) GetGroupTag(pbstrGroupTag *foundation.BSTR) foundation.HRESULT {
+func (self *IPhotoAcquireSettings) GetGroupTag(pbstrGroupTag *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrGroupTag)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAcquisitionTime dispatches through IPhotoAcquireSettings's vtable slot 15.
-func (self *IPhotoAcquireSettings) GetAcquisitionTime(pftAcquisitionTime *foundation.FILETIME) foundation.HRESULT {
+func (self *IPhotoAcquireSettings) GetAcquisitionTime(pftAcquisitionTime *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pftAcquisitionTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPhotoAcquireSource: https://learn.microsoft.com/windows/win32/api/photoacquire/nn-photoacquire-iphotoacquiresource
@@ -420,51 +434,52 @@ type IPhotoAcquireSource struct {
 var IID_IPhotoAcquireSource = win32.GUID{Data1: 0x00f2c703, Data2: 0x8613, Data3: 0x4282, Data4: [8]byte{0xa5, 0x3b, 0x6e, 0xc5, 0x9c, 0x58, 0x83, 0xac}}
 
 // GetFriendlyName dispatches through IPhotoAcquireSource's vtable slot 3.
-func (self *IPhotoAcquireSource) GetFriendlyName(pbstrFriendlyName *foundation.BSTR) foundation.HRESULT {
+func (self *IPhotoAcquireSource) GetFriendlyName(pbstrFriendlyName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrFriendlyName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceIcons dispatches through IPhotoAcquireSource's vtable slot 4.
-func (self *IPhotoAcquireSource) GetDeviceIcons(nSize uint32, phLargeIcon *uiwindowsandmessaging.HICON, phSmallIcon *uiwindowsandmessaging.HICON) foundation.HRESULT {
+func (self *IPhotoAcquireSource) GetDeviceIcons(nSize uint32, phLargeIcon *uiwindowsandmessaging.HICON, phSmallIcon *uiwindowsandmessaging.HICON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nSize), uintptr(unsafe.Pointer(phLargeIcon)), uintptr(unsafe.Pointer(phSmallIcon)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InitializeItemList dispatches through IPhotoAcquireSource's vtable slot 5.
-func (self *IPhotoAcquireSource) InitializeItemList(fForceEnumeration foundation.BOOL, pPhotoAcquireProgressCB *IPhotoAcquireProgressCB, pnItemCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(fForceEnumeration), uintptr(unsafe.Pointer(pPhotoAcquireProgressCB)), uintptr(unsafe.Pointer(pnItemCount)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoAcquireSource) InitializeItemList(fForceEnumeration bool, pPhotoAcquireProgressCB *IPhotoAcquireProgressCB, pnItemCount *uint32) error {
+	_fForceEnumeration := win32.Bool32(fForceEnumeration)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(_fForceEnumeration), uintptr(unsafe.Pointer(pPhotoAcquireProgressCB)), uintptr(unsafe.Pointer(pnItemCount)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetItemCount dispatches through IPhotoAcquireSource's vtable slot 6.
-func (self *IPhotoAcquireSource) GetItemCount(pnItemCount *uint32) foundation.HRESULT {
+func (self *IPhotoAcquireSource) GetItemCount(pnItemCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnItemCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetItemAt dispatches through IPhotoAcquireSource's vtable slot 7.
-func (self *IPhotoAcquireSource) GetItemAt(nIndex uint32, ppPhotoAcquireItem **IPhotoAcquireItem) foundation.HRESULT {
+func (self *IPhotoAcquireSource) GetItemAt(nIndex uint32, ppPhotoAcquireItem **IPhotoAcquireItem) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(ppPhotoAcquireItem)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPhotoAcquireSettings dispatches through IPhotoAcquireSource's vtable slot 8.
-func (self *IPhotoAcquireSource) GetPhotoAcquireSettings(ppPhotoAcquireSettings **IPhotoAcquireSettings) foundation.HRESULT {
+func (self *IPhotoAcquireSource) GetPhotoAcquireSettings(ppPhotoAcquireSettings **IPhotoAcquireSettings) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPhotoAcquireSettings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceId dispatches through IPhotoAcquireSource's vtable slot 9.
-func (self *IPhotoAcquireSource) GetDeviceId(pbstrDeviceId *foundation.BSTR) foundation.HRESULT {
+func (self *IPhotoAcquireSource) GetDeviceId(pbstrDeviceId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDeviceId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BindToObject dispatches through IPhotoAcquireSource's vtable slot 10.
-func (self *IPhotoAcquireSource) BindToObject(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IPhotoAcquireSource) BindToObject(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 00f242d0-b206-4e7d-b4c1-4755bcbb9c9f
@@ -476,9 +491,9 @@ type IPhotoProgressActionCB struct {
 var IID_IPhotoProgressActionCB = win32.GUID{Data1: 0x00f242d0, Data2: 0xb206, Data3: 0x4e7d, Data4: [8]byte{0xb4, 0xc1, 0x47, 0x55, 0xbc, 0xbb, 0x9c, 0x9f}}
 
 // DoAction dispatches through IPhotoProgressActionCB's vtable slot 3.
-func (self *IPhotoProgressActionCB) DoAction(hWndParent foundation.HWND) foundation.HRESULT {
+func (self *IPhotoProgressActionCB) DoAction(hWndParent foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hWndParent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IPhotoProgressDialog: https://learn.microsoft.com/windows/win32/api/photoacquire/nn-photoacquire-iphotoprogressdialog
@@ -491,111 +506,120 @@ type IPhotoProgressDialog struct {
 var IID_IPhotoProgressDialog = win32.GUID{Data1: 0x00f246f9, Data2: 0x0750, Data3: 0x4f08, Data4: [8]byte{0x93, 0x81, 0x2c, 0xd8, 0xe9, 0x06, 0xa4, 0xae}}
 
 // Create dispatches through IPhotoProgressDialog's vtable slot 3.
-func (self *IPhotoProgressDialog) Create(hwndParent foundation.HWND) foundation.HRESULT {
+func (self *IPhotoProgressDialog) Create(hwndParent foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwndParent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWindow dispatches through IPhotoProgressDialog's vtable slot 4.
-func (self *IPhotoProgressDialog) GetWindow(phwndProgressDialog *foundation.HWND) foundation.HRESULT {
+func (self *IPhotoProgressDialog) GetWindow(phwndProgressDialog *foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phwndProgressDialog)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Destroy dispatches through IPhotoProgressDialog's vtable slot 5.
-func (self *IPhotoProgressDialog) Destroy() foundation.HRESULT {
+func (self *IPhotoProgressDialog) Destroy() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTitle dispatches through IPhotoProgressDialog's vtable slot 6.
-func (self *IPhotoProgressDialog) SetTitle(pszTitle foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszTitle)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoProgressDialog) SetTitle(pszTitle string) error {
+	_pszTitle := win32.UTF16Ptr(pszTitle)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTitle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowCheckbox dispatches through IPhotoProgressDialog's vtable slot 7.
-func (self *IPhotoProgressDialog) ShowCheckbox(nCheckboxId PROGRESS_DIALOG_CHECKBOX_ID, fShow foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(nCheckboxId), uintptr(fShow))
-	return foundation.HRESULT(r1)
+func (self *IPhotoProgressDialog) ShowCheckbox(nCheckboxId PROGRESS_DIALOG_CHECKBOX_ID, fShow bool) error {
+	_fShow := win32.Bool32(fShow)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(nCheckboxId), uintptr(_fShow))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCheckboxText dispatches through IPhotoProgressDialog's vtable slot 8.
-func (self *IPhotoProgressDialog) SetCheckboxText(nCheckboxId PROGRESS_DIALOG_CHECKBOX_ID, pszCheckboxText foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(nCheckboxId), uintptr(unsafe.Pointer(pszCheckboxText)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoProgressDialog) SetCheckboxText(nCheckboxId PROGRESS_DIALOG_CHECKBOX_ID, pszCheckboxText string) error {
+	_pszCheckboxText := win32.UTF16Ptr(pszCheckboxText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(nCheckboxId), uintptr(unsafe.Pointer(_pszCheckboxText)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCheckboxCheck dispatches through IPhotoProgressDialog's vtable slot 9.
-func (self *IPhotoProgressDialog) SetCheckboxCheck(nCheckboxId PROGRESS_DIALOG_CHECKBOX_ID, fChecked foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(nCheckboxId), uintptr(fChecked))
-	return foundation.HRESULT(r1)
+func (self *IPhotoProgressDialog) SetCheckboxCheck(nCheckboxId PROGRESS_DIALOG_CHECKBOX_ID, fChecked bool) error {
+	_fChecked := win32.Bool32(fChecked)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(nCheckboxId), uintptr(_fChecked))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCheckboxTooltip dispatches through IPhotoProgressDialog's vtable slot 10.
-func (self *IPhotoProgressDialog) SetCheckboxTooltip(nCheckboxId PROGRESS_DIALOG_CHECKBOX_ID, pszCheckboxTooltipText foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(nCheckboxId), uintptr(unsafe.Pointer(pszCheckboxTooltipText)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoProgressDialog) SetCheckboxTooltip(nCheckboxId PROGRESS_DIALOG_CHECKBOX_ID, pszCheckboxTooltipText string) error {
+	_pszCheckboxTooltipText := win32.UTF16Ptr(pszCheckboxTooltipText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(nCheckboxId), uintptr(unsafe.Pointer(_pszCheckboxTooltipText)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsCheckboxChecked dispatches through IPhotoProgressDialog's vtable slot 11.
-func (self *IPhotoProgressDialog) IsCheckboxChecked(nCheckboxId PROGRESS_DIALOG_CHECKBOX_ID, pfChecked *foundation.BOOL) foundation.HRESULT {
+func (self *IPhotoProgressDialog) IsCheckboxChecked(nCheckboxId PROGRESS_DIALOG_CHECKBOX_ID, pfChecked *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(nCheckboxId), uintptr(unsafe.Pointer(pfChecked)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCaption dispatches through IPhotoProgressDialog's vtable slot 12.
-func (self *IPhotoProgressDialog) SetCaption(pszTitle foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszTitle)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoProgressDialog) SetCaption(pszTitle string) error {
+	_pszTitle := win32.UTF16Ptr(pszTitle)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszTitle)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetImage dispatches through IPhotoProgressDialog's vtable slot 13.
-func (self *IPhotoProgressDialog) SetImage(nImageType PROGRESS_DIALOG_IMAGE_TYPE, hIcon uiwindowsandmessaging.HICON, hBitmap graphicsgdi.HBITMAP) foundation.HRESULT {
+func (self *IPhotoProgressDialog) SetImage(nImageType PROGRESS_DIALOG_IMAGE_TYPE, hIcon uiwindowsandmessaging.HICON, hBitmap graphicsgdi.HBITMAP) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(nImageType), uintptr(hIcon), uintptr(hBitmap))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPercentComplete dispatches through IPhotoProgressDialog's vtable slot 14.
-func (self *IPhotoProgressDialog) SetPercentComplete(nPercent int32) foundation.HRESULT {
+func (self *IPhotoProgressDialog) SetPercentComplete(nPercent int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(nPercent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProgressText dispatches through IPhotoProgressDialog's vtable slot 15.
-func (self *IPhotoProgressDialog) SetProgressText(pszProgressText foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszProgressText)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoProgressDialog) SetProgressText(pszProgressText string) error {
+	_pszProgressText := win32.UTF16Ptr(pszProgressText)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszProgressText)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetActionLinkCallback dispatches through IPhotoProgressDialog's vtable slot 16.
-func (self *IPhotoProgressDialog) SetActionLinkCallback(pPhotoProgressActionCB *IPhotoProgressActionCB) foundation.HRESULT {
+func (self *IPhotoProgressDialog) SetActionLinkCallback(pPhotoProgressActionCB *IPhotoProgressActionCB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPhotoProgressActionCB)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetActionLinkText dispatches through IPhotoProgressDialog's vtable slot 17.
-func (self *IPhotoProgressDialog) SetActionLinkText(pszCaption foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszCaption)))
-	return foundation.HRESULT(r1)
+func (self *IPhotoProgressDialog) SetActionLinkText(pszCaption string) error {
+	_pszCaption := win32.UTF16Ptr(pszCaption)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszCaption)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShowActionLink dispatches through IPhotoProgressDialog's vtable slot 18.
-func (self *IPhotoProgressDialog) ShowActionLink(fShow foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(fShow))
-	return foundation.HRESULT(r1)
+func (self *IPhotoProgressDialog) ShowActionLink(fShow bool) error {
+	_fShow := win32.Bool32(fShow)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(_fShow))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsCancelled dispatches through IPhotoProgressDialog's vtable slot 19.
-func (self *IPhotoProgressDialog) IsCancelled(pfCancelled *foundation.BOOL) foundation.HRESULT {
+func (self *IPhotoProgressDialog) IsCancelled(pfCancelled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCancelled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUserInput dispatches through IPhotoProgressDialog's vtable slot 20.
-func (self *IPhotoProgressDialog) GetUserInput(riidType *win32.GUID, pUnknown *systemcom.IUnknown, pPropVarResult *systemcomstructuredstorage.PROPVARIANT, pPropVarDefault *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *IPhotoProgressDialog) GetUserInput(riidType *win32.GUID, pUnknown *systemcom.IUnknown, pPropVarResult *systemcomstructuredstorage.PROPVARIANT, pPropVarDefault *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riidType)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(pPropVarResult)), uintptr(unsafe.Pointer(pPropVarDefault)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IUserInputString: https://learn.microsoft.com/windows/win32/api/photoacquire/nn-photoacquire-iuserinputstring
@@ -608,61 +632,61 @@ type IUserInputString struct {
 var IID_IUserInputString = win32.GUID{Data1: 0x00f243a1, Data2: 0x205b, Data3: 0x45ba, Data4: [8]byte{0xae, 0x26, 0xab, 0xbc, 0x53, 0xaa, 0x7a, 0x6f}}
 
 // GetSubmitButtonText dispatches through IUserInputString's vtable slot 3.
-func (self *IUserInputString) GetSubmitButtonText(pbstrSubmitButtonText *foundation.BSTR) foundation.HRESULT {
+func (self *IUserInputString) GetSubmitButtonText(pbstrSubmitButtonText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrSubmitButtonText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrompt dispatches through IUserInputString's vtable slot 4.
-func (self *IUserInputString) GetPrompt(pbstrPromptTitle *foundation.BSTR) foundation.HRESULT {
+func (self *IUserInputString) GetPrompt(pbstrPromptTitle *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrPromptTitle)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStringId dispatches through IUserInputString's vtable slot 5.
-func (self *IUserInputString) GetStringId(pbstrStringId *foundation.BSTR) foundation.HRESULT {
+func (self *IUserInputString) GetStringId(pbstrStringId *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrStringId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStringType dispatches through IUserInputString's vtable slot 6.
-func (self *IUserInputString) GetStringType(pnStringType *USER_INPUT_STRING_TYPE) foundation.HRESULT {
+func (self *IUserInputString) GetStringType(pnStringType *USER_INPUT_STRING_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnStringType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTooltipText dispatches through IUserInputString's vtable slot 7.
-func (self *IUserInputString) GetTooltipText(pbstrTooltipText *foundation.BSTR) foundation.HRESULT {
+func (self *IUserInputString) GetTooltipText(pbstrTooltipText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrTooltipText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMaxLength dispatches through IUserInputString's vtable slot 8.
-func (self *IUserInputString) GetMaxLength(pcchMaxLength *uint32) foundation.HRESULT {
+func (self *IUserInputString) GetMaxLength(pcchMaxLength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcchMaxLength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefault dispatches through IUserInputString's vtable slot 9.
-func (self *IUserInputString) GetDefault(pbstrDefault *foundation.BSTR) foundation.HRESULT {
+func (self *IUserInputString) GetDefault(pbstrDefault *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbstrDefault)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMruCount dispatches through IUserInputString's vtable slot 10.
-func (self *IUserInputString) GetMruCount(pnMruCount *uint32) foundation.HRESULT {
+func (self *IUserInputString) GetMruCount(pnMruCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pnMruCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMruEntryAt dispatches through IUserInputString's vtable slot 11.
-func (self *IUserInputString) GetMruEntryAt(nIndex uint32, pbstrMruEntry *foundation.BSTR) foundation.HRESULT {
+func (self *IUserInputString) GetMruEntryAt(nIndex uint32, pbstrMruEntry *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(nIndex), uintptr(unsafe.Pointer(pbstrMruEntry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetImage dispatches through IUserInputString's vtable slot 12.
-func (self *IUserInputString) GetImage(nSize uint32, phBitmap *graphicsgdi.HBITMAP, phIcon *uiwindowsandmessaging.HICON) foundation.HRESULT {
+func (self *IUserInputString) GetImage(nSize uint32, phBitmap *graphicsgdi.HBITMAP, phIcon *uiwindowsandmessaging.HICON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(nSize), uintptr(unsafe.Pointer(phBitmap)), uintptr(unsafe.Pointer(phIcon)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

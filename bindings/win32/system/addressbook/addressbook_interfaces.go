@@ -19,27 +19,27 @@ type IABContainer struct {
 }
 
 // CreateEntry dispatches through IABContainer's vtable slot 19.
-func (self *IABContainer) CreateEntry(cbEntryID uint32, lpEntryID *ENTRYID, ulCreateFlags uint32, lppMAPIPropEntry **IMAPIProp) foundation.HRESULT {
+func (self *IABContainer) CreateEntry(cbEntryID uint32, lpEntryID *ENTRYID, ulCreateFlags uint32, lppMAPIPropEntry **IMAPIProp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)), uintptr(ulCreateFlags), uintptr(unsafe.Pointer(lppMAPIPropEntry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyEntries dispatches through IABContainer's vtable slot 20.
-func (self *IABContainer) CopyEntries(lpEntries *SBinaryArray, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) foundation.HRESULT {
+func (self *IABContainer) CopyEntries(lpEntries *SBinaryArray, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpEntries)), uintptr(ulUIParam), uintptr(unsafe.Pointer(lpProgress)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteEntries dispatches through IABContainer's vtable slot 21.
-func (self *IABContainer) DeleteEntries(lpEntries *SBinaryArray, ulFlags uint32) foundation.HRESULT {
+func (self *IABContainer) DeleteEntries(lpEntries *SBinaryArray, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpEntries)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResolveNames dispatches through IABContainer's vtable slot 22.
-func (self *IABContainer) ResolveNames(lpPropTagArray *SPropTagArray, ulFlags uint32, lpAdrList *ADRLIST, lpFlagList *FlagList) foundation.HRESULT {
+func (self *IABContainer) ResolveNames(lpPropTagArray *SPropTagArray, ulFlags uint32, lpAdrList *ADRLIST, lpFlagList *FlagList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpPropTagArray)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpAdrList)), uintptr(unsafe.Pointer(lpFlagList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAddrBook: https://learn.microsoft.com/windows/win32/api/wabiab/nn-wabiab-iaddrbook
@@ -48,111 +48,111 @@ type IAddrBook struct {
 }
 
 // OpenEntry dispatches through IAddrBook's vtable slot 14.
-func (self *IAddrBook) OpenEntry(cbEntryID uint32, lpEntryID *ENTRYID, lpInterface *win32.GUID, ulFlags uint32, lpulObjType *uint32, lppUnk **systemcom.IUnknown) foundation.HRESULT {
+func (self *IAddrBook) OpenEntry(cbEntryID uint32, lpEntryID *ENTRYID, lpInterface *win32.GUID, ulFlags uint32, lpulObjType *uint32, lppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)), uintptr(unsafe.Pointer(lpInterface)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpulObjType)), uintptr(unsafe.Pointer(lppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CompareEntryIDs dispatches through IAddrBook's vtable slot 15.
-func (self *IAddrBook) CompareEntryIDs(cbEntryID1 uint32, lpEntryID1 *ENTRYID, cbEntryID2 uint32, lpEntryID2 *ENTRYID, ulFlags uint32, lpulResult *uint32) foundation.HRESULT {
+func (self *IAddrBook) CompareEntryIDs(cbEntryID1 uint32, lpEntryID1 *ENTRYID, cbEntryID2 uint32, lpEntryID2 *ENTRYID, ulFlags uint32, lpulResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID1), uintptr(unsafe.Pointer(lpEntryID1)), uintptr(cbEntryID2), uintptr(unsafe.Pointer(lpEntryID2)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpulResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Advise dispatches through IAddrBook's vtable slot 16.
-func (self *IAddrBook) Advise(cbEntryID uint32, lpEntryID *ENTRYID, ulEventMask uint32, lpAdviseSink *IMAPIAdviseSink, lpulConnection *uint32) foundation.HRESULT {
+func (self *IAddrBook) Advise(cbEntryID uint32, lpEntryID *ENTRYID, ulEventMask uint32, lpAdviseSink *IMAPIAdviseSink, lpulConnection *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)), uintptr(ulEventMask), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(lpulConnection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unadvise dispatches through IAddrBook's vtable slot 17.
-func (self *IAddrBook) Unadvise(ulConnection uint32) foundation.HRESULT {
+func (self *IAddrBook) Unadvise(ulConnection uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(ulConnection))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateOneOff dispatches through IAddrBook's vtable slot 18.
-func (self *IAddrBook) CreateOneOff(lpszName *int8, lpszAdrType *int8, lpszAddress *int8, ulFlags uint32, lpcbEntryID *uint32, lppEntryID **ENTRYID) foundation.HRESULT {
+func (self *IAddrBook) CreateOneOff(lpszName *int8, lpszAdrType *int8, lpszAddress *int8, ulFlags uint32, lpcbEntryID *uint32, lppEntryID **ENTRYID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszName)), uintptr(unsafe.Pointer(lpszAdrType)), uintptr(unsafe.Pointer(lpszAddress)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpcbEntryID)), uintptr(unsafe.Pointer(lppEntryID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NewEntry dispatches through IAddrBook's vtable slot 19.
-func (self *IAddrBook) NewEntry(ulUIParam uint32, ulFlags uint32, cbEIDContainer uint32, lpEIDContainer *ENTRYID, cbEIDNewEntryTpl uint32, lpEIDNewEntryTpl *ENTRYID, lpcbEIDNewEntry *uint32, lppEIDNewEntry **ENTRYID) foundation.HRESULT {
+func (self *IAddrBook) NewEntry(ulUIParam uint32, ulFlags uint32, cbEIDContainer uint32, lpEIDContainer *ENTRYID, cbEIDNewEntryTpl uint32, lpEIDNewEntryTpl *ENTRYID, lpcbEIDNewEntry *uint32, lppEIDNewEntry **ENTRYID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(ulUIParam), uintptr(ulFlags), uintptr(cbEIDContainer), uintptr(unsafe.Pointer(lpEIDContainer)), uintptr(cbEIDNewEntryTpl), uintptr(unsafe.Pointer(lpEIDNewEntryTpl)), uintptr(unsafe.Pointer(lpcbEIDNewEntry)), uintptr(unsafe.Pointer(lppEIDNewEntry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResolveName dispatches through IAddrBook's vtable slot 20.
-func (self *IAddrBook) ResolveName(ulUIParam uintptr, ulFlags uint32, lpszNewEntryTitle *int8, lpAdrList *ADRLIST) foundation.HRESULT {
+func (self *IAddrBook) ResolveName(ulUIParam uintptr, ulFlags uint32, lpszNewEntryTitle *int8, lpAdrList *ADRLIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(ulUIParam), uintptr(ulFlags), uintptr(unsafe.Pointer(lpszNewEntryTitle)), uintptr(unsafe.Pointer(lpAdrList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Address dispatches through IAddrBook's vtable slot 21.
-func (self *IAddrBook) Address(lpulUIParam *uint32, lpAdrParms *ADRPARM, lppAdrList **ADRLIST) foundation.HRESULT {
+func (self *IAddrBook) Address(lpulUIParam *uint32, lpAdrParms *ADRPARM, lppAdrList **ADRLIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpulUIParam)), uintptr(unsafe.Pointer(lpAdrParms)), uintptr(unsafe.Pointer(lppAdrList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Details dispatches through IAddrBook's vtable slot 22.
-func (self *IAddrBook) Details(lpulUIParam *uintptr, lpfnDismiss LPFNDISMISS, lpvDismissContext unsafe.Pointer, cbEntryID uint32, lpEntryID *ENTRYID, lpfButtonCallback LPFNBUTTON, lpvButtonContext unsafe.Pointer, lpszButtonText *int8, ulFlags uint32) foundation.HRESULT {
+func (self *IAddrBook) Details(lpulUIParam *uintptr, lpfnDismiss LPFNDISMISS, lpvDismissContext unsafe.Pointer, cbEntryID uint32, lpEntryID *ENTRYID, lpfButtonCallback LPFNBUTTON, lpvButtonContext unsafe.Pointer, lpszButtonText *int8, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpulUIParam)), uintptr(lpfnDismiss), uintptr(unsafe.Pointer(lpvDismissContext)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)), uintptr(lpfButtonCallback), uintptr(unsafe.Pointer(lpvButtonContext)), uintptr(unsafe.Pointer(lpszButtonText)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RecipOptions dispatches through IAddrBook's vtable slot 23.
-func (self *IAddrBook) RecipOptions(ulUIParam uint32, ulFlags uint32, lpRecip *ADRENTRY) foundation.HRESULT {
+func (self *IAddrBook) RecipOptions(ulUIParam uint32, ulFlags uint32, lpRecip *ADRENTRY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(ulUIParam), uintptr(ulFlags), uintptr(unsafe.Pointer(lpRecip)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryDefaultRecipOpt dispatches through IAddrBook's vtable slot 24.
-func (self *IAddrBook) QueryDefaultRecipOpt(lpszAdrType *int8, ulFlags uint32, lpcValues *uint32, lppOptions **SPropValue) foundation.HRESULT {
+func (self *IAddrBook) QueryDefaultRecipOpt(lpszAdrType *int8, ulFlags uint32, lpcValues *uint32, lppOptions **SPropValue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszAdrType)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpcValues)), uintptr(unsafe.Pointer(lppOptions)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPAB dispatches through IAddrBook's vtable slot 25.
-func (self *IAddrBook) GetPAB(lpcbEntryID *uint32, lppEntryID **ENTRYID) foundation.HRESULT {
+func (self *IAddrBook) GetPAB(lpcbEntryID *uint32, lppEntryID **ENTRYID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpcbEntryID)), uintptr(unsafe.Pointer(lppEntryID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPAB dispatches through IAddrBook's vtable slot 26.
-func (self *IAddrBook) SetPAB(cbEntryID uint32, lpEntryID *ENTRYID) foundation.HRESULT {
+func (self *IAddrBook) SetPAB(cbEntryID uint32, lpEntryID *ENTRYID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDefaultDir dispatches through IAddrBook's vtable slot 27.
-func (self *IAddrBook) GetDefaultDir(lpcbEntryID *uint32, lppEntryID **ENTRYID) foundation.HRESULT {
+func (self *IAddrBook) GetDefaultDir(lpcbEntryID *uint32, lppEntryID **ENTRYID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpcbEntryID)), uintptr(unsafe.Pointer(lppEntryID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetDefaultDir dispatches through IAddrBook's vtable slot 28.
-func (self *IAddrBook) SetDefaultDir(cbEntryID uint32, lpEntryID *ENTRYID) foundation.HRESULT {
+func (self *IAddrBook) SetDefaultDir(cbEntryID uint32, lpEntryID *ENTRYID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSearchPath dispatches through IAddrBook's vtable slot 29.
-func (self *IAddrBook) GetSearchPath(ulFlags uint32, lppSearchPath **SRowSet) foundation.HRESULT {
+func (self *IAddrBook) GetSearchPath(ulFlags uint32, lppSearchPath **SRowSet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppSearchPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSearchPath dispatches through IAddrBook's vtable slot 30.
-func (self *IAddrBook) SetSearchPath(ulFlags uint32, lpSearchPath *SRowSet) foundation.HRESULT {
+func (self *IAddrBook) SetSearchPath(ulFlags uint32, lpSearchPath *SRowSet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpSearchPath)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrepareRecips dispatches through IAddrBook's vtable slot 31.
-func (self *IAddrBook) PrepareRecips(ulFlags uint32, lpPropTagArray *SPropTagArray, lpRecipList *ADRLIST) foundation.HRESULT {
+func (self *IAddrBook) PrepareRecips(ulFlags uint32, lpPropTagArray *SPropTagArray, lpRecipList *ADRLIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpPropTagArray)), uintptr(unsafe.Pointer(lpRecipList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAttach: https://learn.microsoft.com/office/client-developer/outlook/mapi/iattachimapiprop
@@ -166,27 +166,27 @@ type IDistList struct {
 }
 
 // CreateEntry dispatches through IDistList's vtable slot 19.
-func (self *IDistList) CreateEntry(cbEntryID uint32, lpEntryID *ENTRYID, ulCreateFlags uint32, lppMAPIPropEntry **IMAPIProp) foundation.HRESULT {
+func (self *IDistList) CreateEntry(cbEntryID uint32, lpEntryID *ENTRYID, ulCreateFlags uint32, lppMAPIPropEntry **IMAPIProp) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)), uintptr(ulCreateFlags), uintptr(unsafe.Pointer(lppMAPIPropEntry)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyEntries dispatches through IDistList's vtable slot 20.
-func (self *IDistList) CopyEntries(lpEntries *SBinaryArray, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) foundation.HRESULT {
+func (self *IDistList) CopyEntries(lpEntries *SBinaryArray, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpEntries)), uintptr(ulUIParam), uintptr(unsafe.Pointer(lpProgress)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteEntries dispatches through IDistList's vtable slot 21.
-func (self *IDistList) DeleteEntries(lpEntries *SBinaryArray, ulFlags uint32) foundation.HRESULT {
+func (self *IDistList) DeleteEntries(lpEntries *SBinaryArray, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpEntries)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResolveNames dispatches through IDistList's vtable slot 22.
-func (self *IDistList) ResolveNames(lpPropTagArray *SPropTagArray, ulFlags uint32, lpAdrList *ADRLIST, lpFlagList *FlagList) foundation.HRESULT {
+func (self *IDistList) ResolveNames(lpPropTagArray *SPropTagArray, ulFlags uint32, lpAdrList *ADRLIST, lpFlagList *FlagList) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpPropTagArray)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpAdrList)), uintptr(unsafe.Pointer(lpFlagList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMAPIAdviseSink: https://learn.microsoft.com/office/client-developer/outlook/mapi/imapiadvisesinkiunknown
@@ -206,33 +206,33 @@ type IMAPIContainer struct {
 }
 
 // GetContentsTable dispatches through IMAPIContainer's vtable slot 14.
-func (self *IMAPIContainer) GetContentsTable(ulFlags uint32, lppTable **IMAPITable) foundation.HRESULT {
+func (self *IMAPIContainer) GetContentsTable(ulFlags uint32, lppTable **IMAPITable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppTable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHierarchyTable dispatches through IMAPIContainer's vtable slot 15.
-func (self *IMAPIContainer) GetHierarchyTable(ulFlags uint32, lppTable **IMAPITable) foundation.HRESULT {
+func (self *IMAPIContainer) GetHierarchyTable(ulFlags uint32, lppTable **IMAPITable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppTable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenEntry dispatches through IMAPIContainer's vtable slot 16.
-func (self *IMAPIContainer) OpenEntry(cbEntryID uint32, lpEntryID *ENTRYID, lpInterface *win32.GUID, ulFlags uint32, lpulObjType *uint32, lppUnk **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMAPIContainer) OpenEntry(cbEntryID uint32, lpEntryID *ENTRYID, lpInterface *win32.GUID, ulFlags uint32, lpulObjType *uint32, lppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)), uintptr(unsafe.Pointer(lpInterface)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpulObjType)), uintptr(unsafe.Pointer(lppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSearchCriteria dispatches through IMAPIContainer's vtable slot 17.
-func (self *IMAPIContainer) SetSearchCriteria(lpRestriction *SRestriction, lpContainerList *SBinaryArray, ulSearchFlags uint32) foundation.HRESULT {
+func (self *IMAPIContainer) SetSearchCriteria(lpRestriction *SRestriction, lpContainerList *SBinaryArray, ulSearchFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpRestriction)), uintptr(unsafe.Pointer(lpContainerList)), uintptr(ulSearchFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSearchCriteria dispatches through IMAPIContainer's vtable slot 18.
-func (self *IMAPIContainer) GetSearchCriteria(ulFlags uint32, lppRestriction **SRestriction, lppContainerList **SBinaryArray, lpulSearchState *uint32) foundation.HRESULT {
+func (self *IMAPIContainer) GetSearchCriteria(ulFlags uint32, lppRestriction **SRestriction, lppContainerList **SBinaryArray, lpulSearchState *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppRestriction)), uintptr(unsafe.Pointer(lppContainerList)), uintptr(unsafe.Pointer(lpulSearchState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMAPIControl: https://learn.microsoft.com/office/client-developer/outlook/mapi/imapicontroliunknown
@@ -241,21 +241,21 @@ type IMAPIControl struct {
 }
 
 // GetLastError dispatches through IMAPIControl's vtable slot 3.
-func (self *IMAPIControl) GetLastError(hResult foundation.HRESULT, ulFlags uint32, lppMAPIError **MAPIERROR) foundation.HRESULT {
+func (self *IMAPIControl) GetLastError(hResult foundation.HRESULT, ulFlags uint32, lppMAPIError **MAPIERROR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hResult), uintptr(ulFlags), uintptr(unsafe.Pointer(lppMAPIError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Activate dispatches through IMAPIControl's vtable slot 4.
-func (self *IMAPIControl) Activate(ulFlags uint32, ulUIParam uintptr) foundation.HRESULT {
+func (self *IMAPIControl) Activate(ulFlags uint32, ulUIParam uintptr) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(ulUIParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetState dispatches through IMAPIControl's vtable slot 5.
-func (self *IMAPIControl) GetState(ulFlags uint32, lpulState *uint32) foundation.HRESULT {
+func (self *IMAPIControl) GetState(ulFlags uint32, lpulState *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpulState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMAPIFolder: https://learn.microsoft.com/office/client-developer/outlook/mapi/imapifolderimapicontainer
@@ -264,69 +264,69 @@ type IMAPIFolder struct {
 }
 
 // CreateMessage dispatches through IMAPIFolder's vtable slot 19.
-func (self *IMAPIFolder) CreateMessage(lpInterface *win32.GUID, ulFlags uint32, lppMessage **IMessage) foundation.HRESULT {
+func (self *IMAPIFolder) CreateMessage(lpInterface *win32.GUID, ulFlags uint32, lppMessage **IMessage) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpInterface)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppMessage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyMessages dispatches through IMAPIFolder's vtable slot 20.
-func (self *IMAPIFolder) CopyMessages(lpMsgList *SBinaryArray, lpInterface *win32.GUID, lpDestFolder unsafe.Pointer, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPIFolder) CopyMessages(lpMsgList *SBinaryArray, lpInterface *win32.GUID, lpDestFolder unsafe.Pointer, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpMsgList)), uintptr(unsafe.Pointer(lpInterface)), uintptr(unsafe.Pointer(lpDestFolder)), uintptr(ulUIParam), uintptr(unsafe.Pointer(lpProgress)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteMessages dispatches through IMAPIFolder's vtable slot 21.
-func (self *IMAPIFolder) DeleteMessages(lpMsgList *SBinaryArray, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPIFolder) DeleteMessages(lpMsgList *SBinaryArray, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpMsgList)), uintptr(ulUIParam), uintptr(unsafe.Pointer(lpProgress)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateFolder dispatches through IMAPIFolder's vtable slot 22.
-func (self *IMAPIFolder) CreateFolder(ulFolderType uint32, lpszFolderName *int8, lpszFolderComment *int8, lpInterface *win32.GUID, ulFlags uint32, lppFolder **IMAPIFolder) foundation.HRESULT {
+func (self *IMAPIFolder) CreateFolder(ulFolderType uint32, lpszFolderName *int8, lpszFolderComment *int8, lpInterface *win32.GUID, ulFlags uint32, lppFolder **IMAPIFolder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(ulFolderType), uintptr(unsafe.Pointer(lpszFolderName)), uintptr(unsafe.Pointer(lpszFolderComment)), uintptr(unsafe.Pointer(lpInterface)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppFolder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyFolder dispatches through IMAPIFolder's vtable slot 23.
-func (self *IMAPIFolder) CopyFolder(cbEntryID uint32, lpEntryID *ENTRYID, lpInterface *win32.GUID, lpDestFolder unsafe.Pointer, lpszNewFolderName *int8, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPIFolder) CopyFolder(cbEntryID uint32, lpEntryID *ENTRYID, lpInterface *win32.GUID, lpDestFolder unsafe.Pointer, lpszNewFolderName *int8, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)), uintptr(unsafe.Pointer(lpInterface)), uintptr(unsafe.Pointer(lpDestFolder)), uintptr(unsafe.Pointer(lpszNewFolderName)), uintptr(ulUIParam), uintptr(unsafe.Pointer(lpProgress)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteFolder dispatches through IMAPIFolder's vtable slot 24.
-func (self *IMAPIFolder) DeleteFolder(cbEntryID uint32, lpEntryID *ENTRYID, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPIFolder) DeleteFolder(cbEntryID uint32, lpEntryID *ENTRYID, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)), uintptr(ulUIParam), uintptr(unsafe.Pointer(lpProgress)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetReadFlags dispatches through IMAPIFolder's vtable slot 25.
-func (self *IMAPIFolder) SetReadFlags(lpMsgList *SBinaryArray, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPIFolder) SetReadFlags(lpMsgList *SBinaryArray, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpMsgList)), uintptr(ulUIParam), uintptr(unsafe.Pointer(lpProgress)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMessageStatus dispatches through IMAPIFolder's vtable slot 26.
-func (self *IMAPIFolder) GetMessageStatus(cbEntryID uint32, lpEntryID *ENTRYID, ulFlags uint32, lpulMessageStatus *uint32) foundation.HRESULT {
+func (self *IMAPIFolder) GetMessageStatus(cbEntryID uint32, lpEntryID *ENTRYID, ulFlags uint32, lpulMessageStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpulMessageStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMessageStatus dispatches through IMAPIFolder's vtable slot 27.
-func (self *IMAPIFolder) SetMessageStatus(cbEntryID uint32, lpEntryID *ENTRYID, ulNewStatus uint32, ulNewStatusMask uint32, lpulOldStatus *uint32) foundation.HRESULT {
+func (self *IMAPIFolder) SetMessageStatus(cbEntryID uint32, lpEntryID *ENTRYID, ulNewStatus uint32, ulNewStatusMask uint32, lpulOldStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)), uintptr(ulNewStatus), uintptr(ulNewStatusMask), uintptr(unsafe.Pointer(lpulOldStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveContentsSort dispatches through IMAPIFolder's vtable slot 28.
-func (self *IMAPIFolder) SaveContentsSort(lpSortCriteria *SSortOrderSet, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPIFolder) SaveContentsSort(lpSortCriteria *SSortOrderSet, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpSortCriteria)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EmptyFolder dispatches through IMAPIFolder's vtable slot 29.
-func (self *IMAPIFolder) EmptyFolder(ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPIFolder) EmptyFolder(ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(ulUIParam), uintptr(unsafe.Pointer(lpProgress)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMAPIProgress: https://learn.microsoft.com/office/client-developer/outlook/mapi/imapiprogressiunknown
@@ -335,33 +335,33 @@ type IMAPIProgress struct {
 }
 
 // Progress dispatches through IMAPIProgress's vtable slot 3.
-func (self *IMAPIProgress) Progress(ulValue uint32, ulCount uint32, ulTotal uint32) foundation.HRESULT {
+func (self *IMAPIProgress) Progress(ulValue uint32, ulCount uint32, ulTotal uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulValue), uintptr(ulCount), uintptr(ulTotal))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlags dispatches through IMAPIProgress's vtable slot 4.
-func (self *IMAPIProgress) GetFlags(lpulFlags *uint32) foundation.HRESULT {
+func (self *IMAPIProgress) GetFlags(lpulFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpulFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMax dispatches through IMAPIProgress's vtable slot 5.
-func (self *IMAPIProgress) GetMax(lpulMax *uint32) foundation.HRESULT {
+func (self *IMAPIProgress) GetMax(lpulMax *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpulMax)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMin dispatches through IMAPIProgress's vtable slot 6.
-func (self *IMAPIProgress) GetMin(lpulMin *uint32) foundation.HRESULT {
+func (self *IMAPIProgress) GetMin(lpulMin *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpulMin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLimits dispatches through IMAPIProgress's vtable slot 7.
-func (self *IMAPIProgress) SetLimits(lpulMin *uint32, lpulMax *uint32, lpulFlags *uint32) foundation.HRESULT {
+func (self *IMAPIProgress) SetLimits(lpulMin *uint32, lpulMax *uint32, lpulFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpulMin)), uintptr(unsafe.Pointer(lpulMax)), uintptr(unsafe.Pointer(lpulFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMAPIProp: https://learn.microsoft.com/office/client-developer/outlook/mapi/imapipropiunknown
@@ -370,69 +370,69 @@ type IMAPIProp struct {
 }
 
 // GetLastError dispatches through IMAPIProp's vtable slot 3.
-func (self *IMAPIProp) GetLastError(hResult foundation.HRESULT, ulFlags uint32, lppMAPIError **MAPIERROR) foundation.HRESULT {
+func (self *IMAPIProp) GetLastError(hResult foundation.HRESULT, ulFlags uint32, lppMAPIError **MAPIERROR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hResult), uintptr(ulFlags), uintptr(unsafe.Pointer(lppMAPIError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveChanges dispatches through IMAPIProp's vtable slot 4.
-func (self *IMAPIProp) SaveChanges(ulFlags uint32) foundation.HRESULT {
+func (self *IMAPIProp) SaveChanges(ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProps dispatches through IMAPIProp's vtable slot 5.
-func (self *IMAPIProp) GetProps(lpPropTagArray *SPropTagArray, ulFlags uint32, lpcValues *uint32, lppPropArray **SPropValue) foundation.HRESULT {
+func (self *IMAPIProp) GetProps(lpPropTagArray *SPropTagArray, ulFlags uint32, lpcValues *uint32, lppPropArray **SPropValue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpPropTagArray)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpcValues)), uintptr(unsafe.Pointer(lppPropArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropList dispatches through IMAPIProp's vtable slot 6.
-func (self *IMAPIProp) GetPropList(ulFlags uint32, lppPropTagArray **SPropTagArray) foundation.HRESULT {
+func (self *IMAPIProp) GetPropList(ulFlags uint32, lppPropTagArray **SPropTagArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppPropTagArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenProperty dispatches through IMAPIProp's vtable slot 7.
-func (self *IMAPIProp) OpenProperty(ulPropTag uint32, lpiid *win32.GUID, ulInterfaceOptions uint32, ulFlags uint32, lppUnk **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMAPIProp) OpenProperty(ulPropTag uint32, lpiid *win32.GUID, ulInterfaceOptions uint32, ulFlags uint32, lppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ulPropTag), uintptr(unsafe.Pointer(lpiid)), uintptr(ulInterfaceOptions), uintptr(ulFlags), uintptr(unsafe.Pointer(lppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetProps dispatches through IMAPIProp's vtable slot 8.
-func (self *IMAPIProp) SetProps(cValues uint32, lpPropArray *SPropValue, lppProblems **SPropProblemArray) foundation.HRESULT {
+func (self *IMAPIProp) SetProps(cValues uint32, lpPropArray *SPropValue, lppProblems **SPropProblemArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(cValues), uintptr(unsafe.Pointer(lpPropArray)), uintptr(unsafe.Pointer(lppProblems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteProps dispatches through IMAPIProp's vtable slot 9.
-func (self *IMAPIProp) DeleteProps(lpPropTagArray *SPropTagArray, lppProblems **SPropProblemArray) foundation.HRESULT {
+func (self *IMAPIProp) DeleteProps(lpPropTagArray *SPropTagArray, lppProblems **SPropProblemArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpPropTagArray)), uintptr(unsafe.Pointer(lppProblems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyTo dispatches through IMAPIProp's vtable slot 10.
-func (self *IMAPIProp) CopyTo(ciidExclude uint32, rgiidExclude *win32.GUID, lpExcludeProps *SPropTagArray, ulUIParam uintptr, lpProgress *IMAPIProgress, lpInterface *win32.GUID, lpDestObj unsafe.Pointer, ulFlags uint32, lppProblems **SPropProblemArray) foundation.HRESULT {
+func (self *IMAPIProp) CopyTo(ciidExclude uint32, rgiidExclude *win32.GUID, lpExcludeProps *SPropTagArray, ulUIParam uintptr, lpProgress *IMAPIProgress, lpInterface *win32.GUID, lpDestObj unsafe.Pointer, ulFlags uint32, lppProblems **SPropProblemArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ciidExclude), uintptr(unsafe.Pointer(rgiidExclude)), uintptr(unsafe.Pointer(lpExcludeProps)), uintptr(ulUIParam), uintptr(unsafe.Pointer(lpProgress)), uintptr(unsafe.Pointer(lpInterface)), uintptr(unsafe.Pointer(lpDestObj)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppProblems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CopyProps dispatches through IMAPIProp's vtable slot 11.
-func (self *IMAPIProp) CopyProps(lpIncludeProps *SPropTagArray, ulUIParam uintptr, lpProgress *IMAPIProgress, lpInterface *win32.GUID, lpDestObj unsafe.Pointer, ulFlags uint32, lppProblems **SPropProblemArray) foundation.HRESULT {
+func (self *IMAPIProp) CopyProps(lpIncludeProps *SPropTagArray, ulUIParam uintptr, lpProgress *IMAPIProgress, lpInterface *win32.GUID, lpDestObj unsafe.Pointer, ulFlags uint32, lppProblems **SPropProblemArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpIncludeProps)), uintptr(ulUIParam), uintptr(unsafe.Pointer(lpProgress)), uintptr(unsafe.Pointer(lpInterface)), uintptr(unsafe.Pointer(lpDestObj)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppProblems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNamesFromIDs dispatches through IMAPIProp's vtable slot 12.
-func (self *IMAPIProp) GetNamesFromIDs(lppPropTags **SPropTagArray, lpPropSetGuid *win32.GUID, ulFlags uint32, lpcPropNames *uint32, lpppPropNames ***MAPINAMEID) foundation.HRESULT {
+func (self *IMAPIProp) GetNamesFromIDs(lppPropTags **SPropTagArray, lpPropSetGuid *win32.GUID, ulFlags uint32, lpcPropNames *uint32, lpppPropNames ***MAPINAMEID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lppPropTags)), uintptr(unsafe.Pointer(lpPropSetGuid)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpcPropNames)), uintptr(unsafe.Pointer(lpppPropNames)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIDsFromNames dispatches through IMAPIProp's vtable slot 13.
-func (self *IMAPIProp) GetIDsFromNames(cPropNames uint32, lppPropNames **MAPINAMEID, ulFlags uint32, lppPropTags **SPropTagArray) foundation.HRESULT {
+func (self *IMAPIProp) GetIDsFromNames(cPropNames uint32, lppPropNames **MAPINAMEID, ulFlags uint32, lppPropTags **SPropTagArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(cPropNames), uintptr(unsafe.Pointer(lppPropNames)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppPropTags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMAPIStatus: https://learn.microsoft.com/office/client-developer/outlook/mapi/imapistatusimapiprop
@@ -441,27 +441,27 @@ type IMAPIStatus struct {
 }
 
 // ValidateState dispatches through IMAPIStatus's vtable slot 14.
-func (self *IMAPIStatus) ValidateState(ulUIParam uintptr, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPIStatus) ValidateState(ulUIParam uintptr, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ulUIParam), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SettingsDialog dispatches through IMAPIStatus's vtable slot 15.
-func (self *IMAPIStatus) SettingsDialog(ulUIParam uintptr, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPIStatus) SettingsDialog(ulUIParam uintptr, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(ulUIParam), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ChangePassword dispatches through IMAPIStatus's vtable slot 16.
-func (self *IMAPIStatus) ChangePassword(lpOldPass *int8, lpNewPass *int8, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPIStatus) ChangePassword(lpOldPass *int8, lpNewPass *int8, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpOldPass)), uintptr(unsafe.Pointer(lpNewPass)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FlushQueues dispatches through IMAPIStatus's vtable slot 17.
-func (self *IMAPIStatus) FlushQueues(ulUIParam uintptr, cbTargetTransport uint32, lpTargetTransport *ENTRYID, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPIStatus) FlushQueues(ulUIParam uintptr, cbTargetTransport uint32, lpTargetTransport *ENTRYID, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(ulUIParam), uintptr(cbTargetTransport), uintptr(unsafe.Pointer(lpTargetTransport)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMAPITable: https://learn.microsoft.com/windows/win32/api/wabdefs/nn-wabdefs-imapitable
@@ -470,141 +470,141 @@ type IMAPITable struct {
 }
 
 // GetLastError dispatches through IMAPITable's vtable slot 3.
-func (self *IMAPITable) GetLastError(hResult foundation.HRESULT, ulFlags uint32, lppMAPIError **MAPIERROR) foundation.HRESULT {
+func (self *IMAPITable) GetLastError(hResult foundation.HRESULT, ulFlags uint32, lppMAPIError **MAPIERROR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hResult), uintptr(ulFlags), uintptr(unsafe.Pointer(lppMAPIError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Advise dispatches through IMAPITable's vtable slot 4.
-func (self *IMAPITable) Advise(ulEventMask uint32, lpAdviseSink *IMAPIAdviseSink, lpulConnection *uint32) foundation.HRESULT {
+func (self *IMAPITable) Advise(ulEventMask uint32, lpAdviseSink *IMAPIAdviseSink, lpulConnection *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulEventMask), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(lpulConnection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unadvise dispatches through IMAPITable's vtable slot 5.
-func (self *IMAPITable) Unadvise(ulConnection uint32) foundation.HRESULT {
+func (self *IMAPITable) Unadvise(ulConnection uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulConnection))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IMAPITable's vtable slot 6.
-func (self *IMAPITable) GetStatus(lpulTableStatus *uint32, lpulTableType *uint32) foundation.HRESULT {
+func (self *IMAPITable) GetStatus(lpulTableStatus *uint32, lpulTableType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpulTableStatus)), uintptr(unsafe.Pointer(lpulTableType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetColumns dispatches through IMAPITable's vtable slot 7.
-func (self *IMAPITable) SetColumns(lpPropTagArray *SPropTagArray, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPITable) SetColumns(lpPropTagArray *SPropTagArray, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpPropTagArray)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryColumns dispatches through IMAPITable's vtable slot 8.
-func (self *IMAPITable) QueryColumns(ulFlags uint32, lpPropTagArray **SPropTagArray) foundation.HRESULT {
+func (self *IMAPITable) QueryColumns(ulFlags uint32, lpPropTagArray **SPropTagArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpPropTagArray)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRowCount dispatches through IMAPITable's vtable slot 9.
-func (self *IMAPITable) GetRowCount(ulFlags uint32, lpulCount *uint32) foundation.HRESULT {
+func (self *IMAPITable) GetRowCount(ulFlags uint32, lpulCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpulCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SeekRow dispatches through IMAPITable's vtable slot 10.
-func (self *IMAPITable) SeekRow(bkOrigin uint32, lRowCount int32, lplRowsSought *int32) foundation.HRESULT {
+func (self *IMAPITable) SeekRow(bkOrigin uint32, lRowCount int32, lplRowsSought *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(bkOrigin), uintptr(lRowCount), uintptr(unsafe.Pointer(lplRowsSought)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SeekRowApprox dispatches through IMAPITable's vtable slot 11.
-func (self *IMAPITable) SeekRowApprox(ulNumerator uint32, ulDenominator uint32) foundation.HRESULT {
+func (self *IMAPITable) SeekRowApprox(ulNumerator uint32, ulDenominator uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(ulNumerator), uintptr(ulDenominator))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryPosition dispatches through IMAPITable's vtable slot 12.
-func (self *IMAPITable) QueryPosition(lpulRow *uint32, lpulNumerator *uint32, lpulDenominator *uint32) foundation.HRESULT {
+func (self *IMAPITable) QueryPosition(lpulRow *uint32, lpulNumerator *uint32, lpulDenominator *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpulRow)), uintptr(unsafe.Pointer(lpulNumerator)), uintptr(unsafe.Pointer(lpulDenominator)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindRow dispatches through IMAPITable's vtable slot 13.
-func (self *IMAPITable) FindRow(lpRestriction *SRestriction, bkOrigin uint32, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPITable) FindRow(lpRestriction *SRestriction, bkOrigin uint32, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpRestriction)), uintptr(bkOrigin), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Restrict dispatches through IMAPITable's vtable slot 14.
-func (self *IMAPITable) Restrict(lpRestriction *SRestriction, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPITable) Restrict(lpRestriction *SRestriction, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpRestriction)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBookmark dispatches through IMAPITable's vtable slot 15.
-func (self *IMAPITable) CreateBookmark(lpbkPosition *uint32) foundation.HRESULT {
+func (self *IMAPITable) CreateBookmark(lpbkPosition *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpbkPosition)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreeBookmark dispatches through IMAPITable's vtable slot 16.
-func (self *IMAPITable) FreeBookmark(bkPosition uint32) foundation.HRESULT {
+func (self *IMAPITable) FreeBookmark(bkPosition uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(bkPosition))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SortTable dispatches through IMAPITable's vtable slot 17.
-func (self *IMAPITable) SortTable(lpSortCriteria *SSortOrderSet, ulFlags uint32) foundation.HRESULT {
+func (self *IMAPITable) SortTable(lpSortCriteria *SSortOrderSet, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpSortCriteria)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QuerySortOrder dispatches through IMAPITable's vtable slot 18.
-func (self *IMAPITable) QuerySortOrder(lppSortCriteria **SSortOrderSet) foundation.HRESULT {
+func (self *IMAPITable) QuerySortOrder(lppSortCriteria **SSortOrderSet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lppSortCriteria)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryRows dispatches through IMAPITable's vtable slot 19.
-func (self *IMAPITable) QueryRows(lRowCount int32, ulFlags uint32, lppRows **SRowSet) foundation.HRESULT {
+func (self *IMAPITable) QueryRows(lRowCount int32, ulFlags uint32, lppRows **SRowSet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(lRowCount), uintptr(ulFlags), uintptr(unsafe.Pointer(lppRows)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Abort dispatches through IMAPITable's vtable slot 20.
-func (self *IMAPITable) Abort() foundation.HRESULT {
+func (self *IMAPITable) Abort() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ExpandRow dispatches through IMAPITable's vtable slot 21.
-func (self *IMAPITable) ExpandRow(cbInstanceKey uint32, pbInstanceKey *byte, ulRowCount uint32, ulFlags uint32, lppRows **SRowSet, lpulMoreRows *uint32) foundation.HRESULT {
+func (self *IMAPITable) ExpandRow(cbInstanceKey uint32, pbInstanceKey *byte, ulRowCount uint32, ulFlags uint32, lppRows **SRowSet, lpulMoreRows *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(cbInstanceKey), uintptr(unsafe.Pointer(pbInstanceKey)), uintptr(ulRowCount), uintptr(ulFlags), uintptr(unsafe.Pointer(lppRows)), uintptr(unsafe.Pointer(lpulMoreRows)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CollapseRow dispatches through IMAPITable's vtable slot 22.
-func (self *IMAPITable) CollapseRow(cbInstanceKey uint32, pbInstanceKey *byte, ulFlags uint32, lpulRowCount *uint32) foundation.HRESULT {
+func (self *IMAPITable) CollapseRow(cbInstanceKey uint32, pbInstanceKey *byte, ulFlags uint32, lpulRowCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(cbInstanceKey), uintptr(unsafe.Pointer(pbInstanceKey)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpulRowCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WaitForCompletion dispatches through IMAPITable's vtable slot 23.
-func (self *IMAPITable) WaitForCompletion(ulFlags uint32, ulTimeout uint32, lpulTableStatus *uint32) foundation.HRESULT {
+func (self *IMAPITable) WaitForCompletion(ulFlags uint32, ulTimeout uint32, lpulTableStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(ulTimeout), uintptr(unsafe.Pointer(lpulTableStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCollapseState dispatches through IMAPITable's vtable slot 24.
-func (self *IMAPITable) GetCollapseState(ulFlags uint32, cbInstanceKey uint32, lpbInstanceKey *byte, lpcbCollapseState *uint32, lppbCollapseState **byte) foundation.HRESULT {
+func (self *IMAPITable) GetCollapseState(ulFlags uint32, cbInstanceKey uint32, lpbInstanceKey *byte, lpcbCollapseState *uint32, lppbCollapseState **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(cbInstanceKey), uintptr(unsafe.Pointer(lpbInstanceKey)), uintptr(unsafe.Pointer(lpcbCollapseState)), uintptr(unsafe.Pointer(lppbCollapseState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCollapseState dispatches through IMAPITable's vtable slot 25.
-func (self *IMAPITable) SetCollapseState(ulFlags uint32, cbCollapseState uint32, pbCollapseState *byte, lpbkLocation *uint32) foundation.HRESULT {
+func (self *IMAPITable) SetCollapseState(ulFlags uint32, cbCollapseState uint32, pbCollapseState *byte, lpbkLocation *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(cbCollapseState), uintptr(unsafe.Pointer(pbCollapseState)), uintptr(unsafe.Pointer(lpbkLocation)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMailUser: https://learn.microsoft.com/windows/win32/api/wabdefs/nn-wabdefs-imailuser
@@ -618,51 +618,51 @@ type IMessage struct {
 }
 
 // GetAttachmentTable dispatches through IMessage's vtable slot 14.
-func (self *IMessage) GetAttachmentTable(ulFlags uint32, lppTable **IMAPITable) foundation.HRESULT {
+func (self *IMessage) GetAttachmentTable(ulFlags uint32, lppTable **IMAPITable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppTable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenAttach dispatches through IMessage's vtable slot 15.
-func (self *IMessage) OpenAttach(ulAttachmentNum uint32, lpInterface *win32.GUID, ulFlags uint32, lppAttach **IAttach) foundation.HRESULT {
+func (self *IMessage) OpenAttach(ulAttachmentNum uint32, lpInterface *win32.GUID, ulFlags uint32, lppAttach **IAttach) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(ulAttachmentNum), uintptr(unsafe.Pointer(lpInterface)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppAttach)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateAttach dispatches through IMessage's vtable slot 16.
-func (self *IMessage) CreateAttach(lpInterface *win32.GUID, ulFlags uint32, lpulAttachmentNum *uint32, lppAttach **IAttach) foundation.HRESULT {
+func (self *IMessage) CreateAttach(lpInterface *win32.GUID, ulFlags uint32, lpulAttachmentNum *uint32, lppAttach **IAttach) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpInterface)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpulAttachmentNum)), uintptr(unsafe.Pointer(lppAttach)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteAttach dispatches through IMessage's vtable slot 17.
-func (self *IMessage) DeleteAttach(ulAttachmentNum uint32, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) foundation.HRESULT {
+func (self *IMessage) DeleteAttach(ulAttachmentNum uint32, ulUIParam uintptr, lpProgress *IMAPIProgress, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(ulAttachmentNum), uintptr(ulUIParam), uintptr(unsafe.Pointer(lpProgress)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecipientTable dispatches through IMessage's vtable slot 18.
-func (self *IMessage) GetRecipientTable(ulFlags uint32, lppTable **IMAPITable) foundation.HRESULT {
+func (self *IMessage) GetRecipientTable(ulFlags uint32, lppTable **IMAPITable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppTable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ModifyRecipients dispatches through IMessage's vtable slot 19.
-func (self *IMessage) ModifyRecipients(ulFlags uint32, lpMods *ADRLIST) foundation.HRESULT {
+func (self *IMessage) ModifyRecipients(ulFlags uint32, lpMods *ADRLIST) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpMods)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SubmitMessage dispatches through IMessage's vtable slot 20.
-func (self *IMessage) SubmitMessage(ulFlags uint32) foundation.HRESULT {
+func (self *IMessage) SubmitMessage(ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetReadFlag dispatches through IMessage's vtable slot 21.
-func (self *IMessage) SetReadFlag(ulFlags uint32) foundation.HRESULT {
+func (self *IMessage) SetReadFlag(ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMsgStore: https://learn.microsoft.com/office/client-developer/outlook/mapi/imsgstoreimapiprop
@@ -671,81 +671,81 @@ type IMsgStore struct {
 }
 
 // Advise dispatches through IMsgStore's vtable slot 14.
-func (self *IMsgStore) Advise(cbEntryID uint32, lpEntryID *ENTRYID, ulEventMask uint32, lpAdviseSink *IMAPIAdviseSink, lpulConnection *uint32) foundation.HRESULT {
+func (self *IMsgStore) Advise(cbEntryID uint32, lpEntryID *ENTRYID, ulEventMask uint32, lpAdviseSink *IMAPIAdviseSink, lpulConnection *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)), uintptr(ulEventMask), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(lpulConnection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unadvise dispatches through IMsgStore's vtable slot 15.
-func (self *IMsgStore) Unadvise(ulConnection uint32) foundation.HRESULT {
+func (self *IMsgStore) Unadvise(ulConnection uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(ulConnection))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CompareEntryIDs dispatches through IMsgStore's vtable slot 16.
-func (self *IMsgStore) CompareEntryIDs(cbEntryID1 uint32, lpEntryID1 *ENTRYID, cbEntryID2 uint32, lpEntryID2 *ENTRYID, ulFlags uint32, lpulResult *uint32) foundation.HRESULT {
+func (self *IMsgStore) CompareEntryIDs(cbEntryID1 uint32, lpEntryID1 *ENTRYID, cbEntryID2 uint32, lpEntryID2 *ENTRYID, ulFlags uint32, lpulResult *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID1), uintptr(unsafe.Pointer(lpEntryID1)), uintptr(cbEntryID2), uintptr(unsafe.Pointer(lpEntryID2)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpulResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenEntry dispatches through IMsgStore's vtable slot 17.
-func (self *IMsgStore) OpenEntry(cbEntryID uint32, lpEntryID *ENTRYID, lpInterface *win32.GUID, ulFlags uint32, lpulObjType *uint32, ppUnk **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMsgStore) OpenEntry(cbEntryID uint32, lpEntryID *ENTRYID, lpInterface *win32.GUID, ulFlags uint32, lpulObjType *uint32, ppUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)), uintptr(unsafe.Pointer(lpInterface)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpulObjType)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetReceiveFolder dispatches through IMsgStore's vtable slot 18.
-func (self *IMsgStore) SetReceiveFolder(lpszMessageClass *int8, ulFlags uint32, cbEntryID uint32, lpEntryID *ENTRYID) foundation.HRESULT {
+func (self *IMsgStore) SetReceiveFolder(lpszMessageClass *int8, ulFlags uint32, cbEntryID uint32, lpEntryID *ENTRYID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszMessageClass)), uintptr(ulFlags), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReceiveFolder dispatches through IMsgStore's vtable slot 19.
-func (self *IMsgStore) GetReceiveFolder(lpszMessageClass *int8, ulFlags uint32, lpcbEntryID *uint32, lppEntryID **ENTRYID, lppszExplicitClass **int8) foundation.HRESULT {
+func (self *IMsgStore) GetReceiveFolder(lpszMessageClass *int8, ulFlags uint32, lpcbEntryID *uint32, lppEntryID **ENTRYID, lppszExplicitClass **int8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszMessageClass)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpcbEntryID)), uintptr(unsafe.Pointer(lppEntryID)), uintptr(unsafe.Pointer(lppszExplicitClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReceiveFolderTable dispatches through IMsgStore's vtable slot 20.
-func (self *IMsgStore) GetReceiveFolderTable(ulFlags uint32, lppTable **IMAPITable) foundation.HRESULT {
+func (self *IMsgStore) GetReceiveFolderTable(ulFlags uint32, lppTable **IMAPITable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppTable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // StoreLogoff dispatches through IMsgStore's vtable slot 21.
-func (self *IMsgStore) StoreLogoff(lpulFlags *uint32) foundation.HRESULT {
+func (self *IMsgStore) StoreLogoff(lpulFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpulFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AbortSubmit dispatches through IMsgStore's vtable slot 22.
-func (self *IMsgStore) AbortSubmit(cbEntryID uint32, lpEntryID *ENTRYID, ulFlags uint32) foundation.HRESULT {
+func (self *IMsgStore) AbortSubmit(cbEntryID uint32, lpEntryID *ENTRYID, ulFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)), uintptr(ulFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutgoingQueue dispatches through IMsgStore's vtable slot 23.
-func (self *IMsgStore) GetOutgoingQueue(ulFlags uint32, lppTable **IMAPITable) foundation.HRESULT {
+func (self *IMsgStore) GetOutgoingQueue(ulFlags uint32, lppTable **IMAPITable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppTable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLockState dispatches through IMsgStore's vtable slot 24.
-func (self *IMsgStore) SetLockState(lpMessage *IMessage, ulLockState uint32) foundation.HRESULT {
+func (self *IMsgStore) SetLockState(lpMessage *IMessage, ulLockState uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpMessage)), uintptr(ulLockState))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FinishedMsg dispatches through IMsgStore's vtable slot 25.
-func (self *IMsgStore) FinishedMsg(ulFlags uint32, cbEntryID uint32, lpEntryID *ENTRYID) foundation.HRESULT {
+func (self *IMsgStore) FinishedMsg(ulFlags uint32, cbEntryID uint32, lpEntryID *ENTRYID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(cbEntryID), uintptr(unsafe.Pointer(lpEntryID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NotifyNewMail dispatches through IMsgStore's vtable slot 26.
-func (self *IMsgStore) NotifyNewMail(lpNotification *NOTIFICATION) foundation.HRESULT {
+func (self *IMsgStore) NotifyNewMail(lpNotification *NOTIFICATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpNotification)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IProfSect: https://learn.microsoft.com/office/client-developer/outlook/mapi/iprofsectimapiprop
@@ -759,27 +759,27 @@ type IPropData struct {
 }
 
 // HrSetObjAccess dispatches through IPropData's vtable slot 14.
-func (self *IPropData) HrSetObjAccess(ulAccess uint32) foundation.HRESULT {
+func (self *IPropData) HrSetObjAccess(ulAccess uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ulAccess))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrSetPropAccess dispatches through IPropData's vtable slot 15.
-func (self *IPropData) HrSetPropAccess(lpPropTagArray *SPropTagArray, rgulAccess *uint32) foundation.HRESULT {
+func (self *IPropData) HrSetPropAccess(lpPropTagArray *SPropTagArray, rgulAccess *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpPropTagArray)), uintptr(unsafe.Pointer(rgulAccess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrGetPropAccess dispatches through IPropData's vtable slot 16.
-func (self *IPropData) HrGetPropAccess(lppPropTagArray **SPropTagArray, lprgulAccess **uint32) foundation.HRESULT {
+func (self *IPropData) HrGetPropAccess(lppPropTagArray **SPropTagArray, lprgulAccess **uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lppPropTagArray)), uintptr(unsafe.Pointer(lprgulAccess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrAddObjProps dispatches through IPropData's vtable slot 17.
-func (self *IPropData) HrAddObjProps(lppPropTagArray *SPropTagArray, lprgulAccess **SPropProblemArray) foundation.HRESULT {
+func (self *IPropData) HrAddObjProps(lppPropTagArray *SPropTagArray, lprgulAccess **SPropProblemArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lppPropTagArray)), uintptr(unsafe.Pointer(lprgulAccess)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IProviderAdmin: https://learn.microsoft.com/office/client-developer/outlook/mapi/iprovideradminiunknown
@@ -788,33 +788,33 @@ type IProviderAdmin struct {
 }
 
 // GetLastError dispatches through IProviderAdmin's vtable slot 3.
-func (self *IProviderAdmin) GetLastError(hResult foundation.HRESULT, ulFlags uint32, lppMAPIError **MAPIERROR) foundation.HRESULT {
+func (self *IProviderAdmin) GetLastError(hResult foundation.HRESULT, ulFlags uint32, lppMAPIError **MAPIERROR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hResult), uintptr(ulFlags), uintptr(unsafe.Pointer(lppMAPIError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProviderTable dispatches through IProviderAdmin's vtable slot 4.
-func (self *IProviderAdmin) GetProviderTable(ulFlags uint32, lppTable **IMAPITable) foundation.HRESULT {
+func (self *IProviderAdmin) GetProviderTable(ulFlags uint32, lppTable **IMAPITable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppTable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProvider dispatches through IProviderAdmin's vtable slot 5.
-func (self *IProviderAdmin) CreateProvider(lpszProvider *int8, cValues uint32, lpProps *SPropValue, ulUIParam uintptr, ulFlags uint32, lpUID *MAPIUID) foundation.HRESULT {
+func (self *IProviderAdmin) CreateProvider(lpszProvider *int8, cValues uint32, lpProps *SPropValue, ulUIParam uintptr, ulFlags uint32, lpUID *MAPIUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszProvider)), uintptr(cValues), uintptr(unsafe.Pointer(lpProps)), uintptr(ulUIParam), uintptr(ulFlags), uintptr(unsafe.Pointer(lpUID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteProvider dispatches through IProviderAdmin's vtable slot 6.
-func (self *IProviderAdmin) DeleteProvider(lpUID *MAPIUID) foundation.HRESULT {
+func (self *IProviderAdmin) DeleteProvider(lpUID *MAPIUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpUID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenProfileSection dispatches through IProviderAdmin's vtable slot 7.
-func (self *IProviderAdmin) OpenProfileSection(lpUID *MAPIUID, lpInterface *win32.GUID, ulFlags uint32, lppProfSect **IProfSect) foundation.HRESULT {
+func (self *IProviderAdmin) OpenProfileSection(lpUID *MAPIUID, lpInterface *win32.GUID, ulFlags uint32, lppProfSect **IProfSect) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpUID)), uintptr(unsafe.Pointer(lpInterface)), uintptr(ulFlags), uintptr(unsafe.Pointer(lppProfSect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ITableData: https://learn.microsoft.com/office/client-developer/outlook/mapi/itabledataiunknown
@@ -823,57 +823,57 @@ type ITableData struct {
 }
 
 // HrGetView dispatches through ITableData's vtable slot 3.
-func (self *ITableData) HrGetView(lpSSortOrderSet *SSortOrderSet, lpfCallerRelease *CALLERRELEASE, ulCallerData uint32, lppMAPITable **IMAPITable) foundation.HRESULT {
+func (self *ITableData) HrGetView(lpSSortOrderSet *SSortOrderSet, lpfCallerRelease *CALLERRELEASE, ulCallerData uint32, lppMAPITable **IMAPITable) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpSSortOrderSet)), uintptr(unsafe.Pointer(lpfCallerRelease)), uintptr(ulCallerData), uintptr(unsafe.Pointer(lppMAPITable)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrModifyRow dispatches through ITableData's vtable slot 4.
-func (self *ITableData) HrModifyRow(param0 *SRow) foundation.HRESULT {
+func (self *ITableData) HrModifyRow(param0 *SRow) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(param0)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrDeleteRow dispatches through ITableData's vtable slot 5.
-func (self *ITableData) HrDeleteRow(lpSPropValue *SPropValue) foundation.HRESULT {
+func (self *ITableData) HrDeleteRow(lpSPropValue *SPropValue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpSPropValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrQueryRow dispatches through ITableData's vtable slot 6.
-func (self *ITableData) HrQueryRow(lpsPropValue *SPropValue, lppSRow **SRow, lpuliRow *uint32) foundation.HRESULT {
+func (self *ITableData) HrQueryRow(lpsPropValue *SPropValue, lppSRow **SRow, lpuliRow *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpsPropValue)), uintptr(unsafe.Pointer(lppSRow)), uintptr(unsafe.Pointer(lpuliRow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrEnumRow dispatches through ITableData's vtable slot 7.
-func (self *ITableData) HrEnumRow(ulRowNumber uint32, lppSRow **SRow) foundation.HRESULT {
+func (self *ITableData) HrEnumRow(ulRowNumber uint32, lppSRow **SRow) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ulRowNumber), uintptr(unsafe.Pointer(lppSRow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrNotify dispatches through ITableData's vtable slot 8.
-func (self *ITableData) HrNotify(ulFlags uint32, cValues uint32, lpSPropValue *SPropValue) foundation.HRESULT {
+func (self *ITableData) HrNotify(ulFlags uint32, cValues uint32, lpSPropValue *SPropValue) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(cValues), uintptr(unsafe.Pointer(lpSPropValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrInsertRow dispatches through ITableData's vtable slot 9.
-func (self *ITableData) HrInsertRow(uliRow uint32, lpSRow *SRow) foundation.HRESULT {
+func (self *ITableData) HrInsertRow(uliRow uint32, lpSRow *SRow) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(uliRow), uintptr(unsafe.Pointer(lpSRow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrModifyRows dispatches through ITableData's vtable slot 10.
-func (self *ITableData) HrModifyRows(ulFlags uint32, lpSRowSet *SRowSet) foundation.HRESULT {
+func (self *ITableData) HrModifyRows(ulFlags uint32, lpSRowSet *SRowSet) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpSRowSet)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HrDeleteRows dispatches through ITableData's vtable slot 11.
-func (self *ITableData) HrDeleteRows(ulFlags uint32, lprowsetToDelete *SRowSet, cRowsDeleted *uint32) foundation.HRESULT {
+func (self *ITableData) HrDeleteRows(ulFlags uint32, lprowsetToDelete *SRowSet, cRowsDeleted *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(ulFlags), uintptr(unsafe.Pointer(lprowsetToDelete)), uintptr(unsafe.Pointer(cRowsDeleted)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWABExtInit: https://learn.microsoft.com/windows/win32/api/wabapi/nn-wabapi-iwabextinit
@@ -886,9 +886,9 @@ type IWABExtInit struct {
 var IID_IWABExtInit = win32.GUID{Data1: 0xea22ebf0, Data2: 0x87a4, Data3: 0x11d1, Data4: [8]byte{0x9a, 0xcf, 0x00, 0xa0, 0xc9, 0x1f, 0x9c, 0x8b}}
 
 // Initialize dispatches through IWABExtInit's vtable slot 3.
-func (self *IWABExtInit) Initialize(lpWABExtDisplay *WABEXTDISPLAY) foundation.HRESULT {
+func (self *IWABExtInit) Initialize(lpWABExtDisplay *WABEXTDISPLAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpWABExtDisplay)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IWABObject: https://learn.microsoft.com/windows/win32/api/wabapi/nn-wabapi-iwabobject
@@ -897,73 +897,73 @@ type IWABObject struct {
 }
 
 // GetLastError dispatches through IWABObject's vtable slot 3.
-func (self *IWABObject) GetLastError(hResult foundation.HRESULT, ulFlags uint32, lppMAPIError **MAPIERROR) foundation.HRESULT {
+func (self *IWABObject) GetLastError(hResult foundation.HRESULT, ulFlags uint32, lppMAPIError **MAPIERROR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hResult), uintptr(ulFlags), uintptr(unsafe.Pointer(lppMAPIError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AllocateBuffer dispatches through IWABObject's vtable slot 4.
-func (self *IWABObject) AllocateBuffer(cbSize uint32, lppBuffer *unsafe.Pointer) foundation.HRESULT {
+func (self *IWABObject) AllocateBuffer(cbSize uint32, lppBuffer *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cbSize), uintptr(unsafe.Pointer(lppBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AllocateMore dispatches through IWABObject's vtable slot 5.
-func (self *IWABObject) AllocateMore(cbSize uint32, lpObject unsafe.Pointer, lppBuffer *unsafe.Pointer) foundation.HRESULT {
+func (self *IWABObject) AllocateMore(cbSize uint32, lpObject unsafe.Pointer, lppBuffer *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cbSize), uintptr(unsafe.Pointer(lpObject)), uintptr(unsafe.Pointer(lppBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FreeBuffer dispatches through IWABObject's vtable slot 6.
-func (self *IWABObject) FreeBuffer(lpBuffer unsafe.Pointer) foundation.HRESULT {
+func (self *IWABObject) FreeBuffer(lpBuffer unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Backup dispatches through IWABObject's vtable slot 7.
-func (self *IWABObject) Backup(lpFileName foundation.PSTR) foundation.HRESULT {
+func (self *IWABObject) Backup(lpFileName foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpFileName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Import dispatches through IWABObject's vtable slot 8.
-func (self *IWABObject) Import(lpWIP foundation.PSTR) foundation.HRESULT {
+func (self *IWABObject) Import(lpWIP foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpWIP)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Find dispatches through IWABObject's vtable slot 9.
-func (self *IWABObject) Find(lpIAB *IAddrBook, hWnd foundation.HWND) foundation.HRESULT {
+func (self *IWABObject) Find(lpIAB *IAddrBook, hWnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpIAB)), uintptr(hWnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VCardDisplay dispatches through IWABObject's vtable slot 10.
-func (self *IWABObject) VCardDisplay(lpIAB *IAddrBook, hWnd foundation.HWND, lpszFileName foundation.PSTR) foundation.HRESULT {
+func (self *IWABObject) VCardDisplay(lpIAB *IAddrBook, hWnd foundation.HWND, lpszFileName foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpIAB)), uintptr(hWnd), uintptr(unsafe.Pointer(lpszFileName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LDAPUrl dispatches through IWABObject's vtable slot 11.
-func (self *IWABObject) LDAPUrl(lpIAB *IAddrBook, hWnd foundation.HWND, ulFlags uint32, lpszURL foundation.PSTR, lppMailUser **IMailUser) foundation.HRESULT {
+func (self *IWABObject) LDAPUrl(lpIAB *IAddrBook, hWnd foundation.HWND, ulFlags uint32, lpszURL foundation.PSTR, lppMailUser **IMailUser) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpIAB)), uintptr(hWnd), uintptr(ulFlags), uintptr(unsafe.Pointer(lpszURL)), uintptr(unsafe.Pointer(lppMailUser)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VCardCreate dispatches through IWABObject's vtable slot 12.
-func (self *IWABObject) VCardCreate(lpIAB *IAddrBook, ulFlags uint32, lpszVCard foundation.PSTR, lpMailUser *IMailUser) foundation.HRESULT {
+func (self *IWABObject) VCardCreate(lpIAB *IAddrBook, ulFlags uint32, lpszVCard foundation.PSTR, lpMailUser *IMailUser) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpIAB)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpszVCard)), uintptr(unsafe.Pointer(lpMailUser)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VCardRetrieve dispatches through IWABObject's vtable slot 13.
-func (self *IWABObject) VCardRetrieve(lpIAB *IAddrBook, ulFlags uint32, lpszVCard foundation.PSTR, lppMailUser **IMailUser) foundation.HRESULT {
+func (self *IWABObject) VCardRetrieve(lpIAB *IAddrBook, ulFlags uint32, lpszVCard foundation.PSTR, lppMailUser **IMailUser) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpIAB)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpszVCard)), uintptr(unsafe.Pointer(lppMailUser)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMe dispatches through IWABObject's vtable slot 14.
-func (self *IWABObject) GetMe(lpIAB *IAddrBook, ulFlags uint32, lpdwAction *uint32, lpsbEID *SBinary, hwnd foundation.HWND) foundation.HRESULT {
+func (self *IWABObject) GetMe(lpIAB *IAddrBook, ulFlags uint32, lpdwAction *uint32, lpsbEID *SBinary, hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpIAB)), uintptr(ulFlags), uintptr(unsafe.Pointer(lpdwAction)), uintptr(unsafe.Pointer(lpsbEID)), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

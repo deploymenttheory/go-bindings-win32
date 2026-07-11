@@ -25,15 +25,16 @@ type IDesktopWindowXamlSourceNative struct {
 var IID_IDesktopWindowXamlSourceNative = win32.GUID{Data1: 0x3cbcf1bf, Data2: 0x2f76, Data3: 0x4e9c, Data4: [8]byte{0x96, 0xab, 0xe8, 0x4b, 0x37, 0x97, 0x25, 0x54}}
 
 // AttachToWindow dispatches through IDesktopWindowXamlSourceNative's vtable slot 3.
-func (self *IDesktopWindowXamlSourceNative) AttachToWindow(parentWnd foundation.HWND) foundation.HRESULT {
+func (self *IDesktopWindowXamlSourceNative) AttachToWindow(parentWnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(parentWnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_WindowHandle dispatches through IDesktopWindowXamlSourceNative's vtable slot 4.
-func (self *IDesktopWindowXamlSourceNative) Get_WindowHandle(hWnd *foundation.HWND) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hWnd)))
-	return foundation.HRESULT(r1)
+func (self *IDesktopWindowXamlSourceNative) Get_WindowHandle() (foundation.HWND, error) {
+	var _hWnd foundation.HWND
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_hWnd)))
+	return _hWnd, win32.HRESULTError(int32(r1))
 }
 
 // IDesktopWindowXamlSourceNative2: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.desktopwindowxamlsource/nn-windows-ui-xaml-hosting-desktopwindowxamlsource-idesktopwindowxamlsourcenative2
@@ -46,9 +47,9 @@ type IDesktopWindowXamlSourceNative2 struct {
 var IID_IDesktopWindowXamlSourceNative2 = win32.GUID{Data1: 0xe3dcd8c7, Data2: 0x3057, Data3: 0x4692, Data4: [8]byte{0x99, 0xc3, 0x7b, 0x77, 0x20, 0xaf, 0xda, 0x31}}
 
 // PreTranslateMessage dispatches through IDesktopWindowXamlSourceNative2's vtable slot 5.
-func (self *IDesktopWindowXamlSourceNative2) PreTranslateMessage(message *uiwindowsandmessaging.MSG, result *foundation.BOOL) foundation.HRESULT {
+func (self *IDesktopWindowXamlSourceNative2) PreTranslateMessage(message *uiwindowsandmessaging.MSG, result *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(result)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFindReferenceTargetsCallback: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ifindreferencetargetscallback
@@ -61,9 +62,9 @@ type IFindReferenceTargetsCallback struct {
 var IID_IFindReferenceTargetsCallback = win32.GUID{Data1: 0x04b3486c, Data2: 0x4687, Data3: 0x4229, Data4: [8]byte{0x8d, 0x14, 0x50, 0x5a, 0xb5, 0x84, 0xdd, 0x88}}
 
 // FoundTrackerTarget dispatches through IFindReferenceTargetsCallback's vtable slot 3.
-func (self *IFindReferenceTargetsCallback) FoundTrackerTarget(target *IReferenceTrackerTarget) foundation.HRESULT {
+func (self *IFindReferenceTargetsCallback) FoundTrackerTarget(target *IReferenceTrackerTarget) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(target)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IReferenceTracker: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ireferencetracker
@@ -76,45 +77,45 @@ type IReferenceTracker struct {
 var IID_IReferenceTracker = win32.GUID{Data1: 0x11d3b13a, Data2: 0x180e, Data3: 0x4789, Data4: [8]byte{0xa8, 0xbe, 0x77, 0x12, 0x88, 0x28, 0x93, 0xe6}}
 
 // ConnectFromTrackerSource dispatches through IReferenceTracker's vtable slot 3.
-func (self *IReferenceTracker) ConnectFromTrackerSource() foundation.HRESULT {
+func (self *IReferenceTracker) ConnectFromTrackerSource() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisconnectFromTrackerSource dispatches through IReferenceTracker's vtable slot 4.
-func (self *IReferenceTracker) DisconnectFromTrackerSource() foundation.HRESULT {
+func (self *IReferenceTracker) DisconnectFromTrackerSource() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindTrackerTargets dispatches through IReferenceTracker's vtable slot 5.
-func (self *IReferenceTracker) FindTrackerTargets(callback *IFindReferenceTargetsCallback) foundation.HRESULT {
+func (self *IReferenceTracker) FindTrackerTargets(callback *IFindReferenceTargetsCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(callback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReferenceTrackerManager dispatches through IReferenceTracker's vtable slot 6.
-func (self *IReferenceTracker) GetReferenceTrackerManager(value **IReferenceTrackerManager) foundation.HRESULT {
+func (self *IReferenceTracker) GetReferenceTrackerManager(value **IReferenceTrackerManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddRefFromTrackerSource dispatches through IReferenceTracker's vtable slot 7.
-func (self *IReferenceTracker) AddRefFromTrackerSource() foundation.HRESULT {
+func (self *IReferenceTracker) AddRefFromTrackerSource() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseFromTrackerSource dispatches through IReferenceTracker's vtable slot 8.
-func (self *IReferenceTracker) ReleaseFromTrackerSource() foundation.HRESULT {
+func (self *IReferenceTracker) ReleaseFromTrackerSource() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PegFromTrackerSource dispatches through IReferenceTracker's vtable slot 9.
-func (self *IReferenceTracker) PegFromTrackerSource() foundation.HRESULT {
+func (self *IReferenceTracker) PegFromTrackerSource() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4e897caa-59d5-4613-8f8c-f7ebd1f399b0
@@ -135,39 +136,39 @@ type IReferenceTrackerHost struct {
 var IID_IReferenceTrackerHost = win32.GUID{Data1: 0x29a71c6a, Data2: 0x3c42, Data3: 0x4416, Data4: [8]byte{0xa3, 0x9d, 0xe2, 0x82, 0x5a, 0x07, 0xa7, 0x73}}
 
 // DisconnectUnusedReferenceSources dispatches through IReferenceTrackerHost's vtable slot 3.
-func (self *IReferenceTrackerHost) DisconnectUnusedReferenceSources(options XAML_REFERENCETRACKER_DISCONNECT) foundation.HRESULT {
+func (self *IReferenceTrackerHost) DisconnectUnusedReferenceSources(options XAML_REFERENCETRACKER_DISCONNECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(options))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseDisconnectedReferenceSources dispatches through IReferenceTrackerHost's vtable slot 4.
-func (self *IReferenceTrackerHost) ReleaseDisconnectedReferenceSources() foundation.HRESULT {
+func (self *IReferenceTrackerHost) ReleaseDisconnectedReferenceSources() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NotifyEndOfReferenceTrackingOnThread dispatches through IReferenceTrackerHost's vtable slot 5.
-func (self *IReferenceTrackerHost) NotifyEndOfReferenceTrackingOnThread() foundation.HRESULT {
+func (self *IReferenceTrackerHost) NotifyEndOfReferenceTrackingOnThread() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTrackerTarget dispatches through IReferenceTrackerHost's vtable slot 6.
-func (self *IReferenceTrackerHost) GetTrackerTarget(unknown *systemcom.IUnknown, newReference **IReferenceTrackerTarget) foundation.HRESULT {
+func (self *IReferenceTrackerHost) GetTrackerTarget(unknown *systemcom.IUnknown, newReference **IReferenceTrackerTarget) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(unknown)), uintptr(unsafe.Pointer(newReference)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddMemoryPressure dispatches through IReferenceTrackerHost's vtable slot 7.
-func (self *IReferenceTrackerHost) AddMemoryPressure(bytesAllocated uint64) foundation.HRESULT {
+func (self *IReferenceTrackerHost) AddMemoryPressure(bytesAllocated uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(bytesAllocated))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveMemoryPressure dispatches through IReferenceTrackerHost's vtable slot 8.
-func (self *IReferenceTrackerHost) RemoveMemoryPressure(bytesAllocated uint64) foundation.HRESULT {
+func (self *IReferenceTrackerHost) RemoveMemoryPressure(bytesAllocated uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(bytesAllocated))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IReferenceTrackerManager: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ireferencetrackermanager
@@ -180,27 +181,27 @@ type IReferenceTrackerManager struct {
 var IID_IReferenceTrackerManager = win32.GUID{Data1: 0x3cf184b4, Data2: 0x7ccb, Data3: 0x4dda, Data4: [8]byte{0x84, 0x55, 0x7e, 0x6c, 0xe9, 0x9a, 0x32, 0x98}}
 
 // ReferenceTrackingStarted dispatches through IReferenceTrackerManager's vtable slot 3.
-func (self *IReferenceTrackerManager) ReferenceTrackingStarted() foundation.HRESULT {
+func (self *IReferenceTrackerManager) ReferenceTrackingStarted() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindTrackerTargetsCompleted dispatches through IReferenceTrackerManager's vtable slot 4.
-func (self *IReferenceTrackerManager) FindTrackerTargetsCompleted(findFailed byte) foundation.HRESULT {
+func (self *IReferenceTrackerManager) FindTrackerTargetsCompleted(findFailed byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(findFailed))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReferenceTrackingCompleted dispatches through IReferenceTrackerManager's vtable slot 5.
-func (self *IReferenceTrackerManager) ReferenceTrackingCompleted() foundation.HRESULT {
+func (self *IReferenceTrackerManager) ReferenceTrackingCompleted() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetReferenceTrackerHost dispatches through IReferenceTrackerManager's vtable slot 6.
-func (self *IReferenceTrackerManager) SetReferenceTrackerHost(value *IReferenceTrackerHost) foundation.HRESULT {
+func (self *IReferenceTrackerManager) SetReferenceTrackerHost(value *IReferenceTrackerHost) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IReferenceTrackerTarget: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.hosting.referencetracker/nn-windows-ui-xaml-hosting-referencetracker-ireferencetrackertarget
@@ -225,15 +226,15 @@ func (self *IReferenceTrackerTarget) ReleaseFromReferenceTracker() uint32 {
 }
 
 // Peg dispatches through IReferenceTrackerTarget's vtable slot 5.
-func (self *IReferenceTrackerTarget) Peg() foundation.HRESULT {
+func (self *IReferenceTrackerTarget) Peg() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unpeg dispatches through IReferenceTrackerTarget's vtable slot 6.
-func (self *IReferenceTrackerTarget) Unpeg() foundation.HRESULT {
+func (self *IReferenceTrackerTarget) Unpeg() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISurfaceImageSourceManagerNative: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.media.dxinterop/nn-windows-ui-xaml-media-dxinterop-isurfaceimagesourcemanagernative
@@ -246,9 +247,9 @@ type ISurfaceImageSourceManagerNative struct {
 var IID_ISurfaceImageSourceManagerNative = win32.GUID{Data1: 0x4c8798b7, Data2: 0x1d88, Data3: 0x4a0f, Data4: [8]byte{0xb5, 0x9b, 0xb9, 0x3f, 0x60, 0x0d, 0xe8, 0xc8}}
 
 // FlushAllSurfacesWithDevice dispatches through ISurfaceImageSourceManagerNative's vtable slot 3.
-func (self *ISurfaceImageSourceManagerNative) FlushAllSurfacesWithDevice(device *systemcom.IUnknown) foundation.HRESULT {
+func (self *ISurfaceImageSourceManagerNative) FlushAllSurfacesWithDevice(device *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(device)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISurfaceImageSourceNative: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.media.dxinterop/nn-windows-ui-xaml-media-dxinterop-isurfaceimagesourcenative
@@ -261,15 +262,15 @@ type ISurfaceImageSourceNative struct {
 var IID_ISurfaceImageSourceNative = win32.GUID{Data1: 0xf2e9edc1, Data2: 0xd307, Data3: 0x4525, Data4: [8]byte{0x98, 0x86, 0x0f, 0xaf, 0xaa, 0x44, 0x16, 0x3c}}
 
 // SetDevice dispatches through ISurfaceImageSourceNative's vtable slot 3.
-func (self *ISurfaceImageSourceNative) SetDevice(device *graphicsdxgi.IDXGIDevice) foundation.HRESULT {
+func (self *ISurfaceImageSourceNative) SetDevice(device *graphicsdxgi.IDXGIDevice) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(device)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndDraw dispatches through ISurfaceImageSourceNative's vtable slot 5.
-func (self *ISurfaceImageSourceNative) EndDraw() foundation.HRESULT {
+func (self *ISurfaceImageSourceNative) EndDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISurfaceImageSourceNativeWithD2D: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.media.dxinterop/nn-windows-ui-xaml-media-dxinterop-isurfaceimagesourcenativewithd2d
@@ -282,33 +283,33 @@ type ISurfaceImageSourceNativeWithD2D struct {
 var IID_ISurfaceImageSourceNativeWithD2D = win32.GUID{Data1: 0x54298223, Data2: 0x41e1, Data3: 0x4a41, Data4: [8]byte{0x9c, 0x08, 0x02, 0xe8, 0x25, 0x68, 0x64, 0xa1}}
 
 // SetDevice dispatches through ISurfaceImageSourceNativeWithD2D's vtable slot 3.
-func (self *ISurfaceImageSourceNativeWithD2D) SetDevice(device *systemcom.IUnknown) foundation.HRESULT {
+func (self *ISurfaceImageSourceNativeWithD2D) SetDevice(device *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(device)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginDraw dispatches through ISurfaceImageSourceNativeWithD2D's vtable slot 4.
-func (self *ISurfaceImageSourceNativeWithD2D) BeginDraw(updateRect *foundation.RECT, iid *win32.GUID, updateObject *unsafe.Pointer, offset *foundation.POINT) foundation.HRESULT {
+func (self *ISurfaceImageSourceNativeWithD2D) BeginDraw(updateRect *foundation.RECT, iid *win32.GUID, updateObject *unsafe.Pointer, offset *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(updateRect)), uintptr(unsafe.Pointer(iid)), uintptr(unsafe.Pointer(updateObject)), uintptr(unsafe.Pointer(offset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndDraw dispatches through ISurfaceImageSourceNativeWithD2D's vtable slot 5.
-func (self *ISurfaceImageSourceNativeWithD2D) EndDraw() foundation.HRESULT {
+func (self *ISurfaceImageSourceNativeWithD2D) EndDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SuspendDraw dispatches through ISurfaceImageSourceNativeWithD2D's vtable slot 6.
-func (self *ISurfaceImageSourceNativeWithD2D) SuspendDraw() foundation.HRESULT {
+func (self *ISurfaceImageSourceNativeWithD2D) SuspendDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResumeDraw dispatches through ISurfaceImageSourceNativeWithD2D's vtable slot 7.
-func (self *ISurfaceImageSourceNativeWithD2D) ResumeDraw() foundation.HRESULT {
+func (self *ISurfaceImageSourceNativeWithD2D) ResumeDraw() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISwapChainBackgroundPanelNative: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.media.dxinterop/nn-windows-ui-xaml-media-dxinterop-iswapchainbackgroundpanelnative
@@ -321,9 +322,9 @@ type ISwapChainBackgroundPanelNative struct {
 var IID_ISwapChainBackgroundPanelNative = win32.GUID{Data1: 0x43bebd4e, Data2: 0xadd5, Data3: 0x4035, Data4: [8]byte{0x8f, 0x85, 0x56, 0x08, 0xd0, 0x8e, 0x9d, 0xc9}}
 
 // SetSwapChain dispatches through ISwapChainBackgroundPanelNative's vtable slot 3.
-func (self *ISwapChainBackgroundPanelNative) SetSwapChain(swapChain *graphicsdxgi.IDXGISwapChain) foundation.HRESULT {
+func (self *ISwapChainBackgroundPanelNative) SetSwapChain(swapChain *graphicsdxgi.IDXGISwapChain) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(swapChain)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISwapChainPanelNative: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.media.dxinterop/nn-windows-ui-xaml-media-dxinterop-iswapchainpanelnative
@@ -336,9 +337,9 @@ type ISwapChainPanelNative struct {
 var IID_ISwapChainPanelNative = win32.GUID{Data1: 0xf92f19d2, Data2: 0x3ade, Data3: 0x45a6, Data4: [8]byte{0xa2, 0x0c, 0xf6, 0xf1, 0xea, 0x90, 0x55, 0x4b}}
 
 // SetSwapChain dispatches through ISwapChainPanelNative's vtable slot 3.
-func (self *ISwapChainPanelNative) SetSwapChain(swapChain *graphicsdxgi.IDXGISwapChain) foundation.HRESULT {
+func (self *ISwapChainPanelNative) SetSwapChain(swapChain *graphicsdxgi.IDXGISwapChain) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(swapChain)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISwapChainPanelNative2: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.media.dxinterop/nn-windows-ui-xaml-media-dxinterop-iswapchainpanelnative2
@@ -351,9 +352,9 @@ type ISwapChainPanelNative2 struct {
 var IID_ISwapChainPanelNative2 = win32.GUID{Data1: 0xd5a2f60c, Data2: 0x37b2, Data3: 0x44a2, Data4: [8]byte{0x93, 0x7b, 0x8d, 0x8e, 0xb9, 0x72, 0x68, 0x21}}
 
 // SetSwapChainHandle dispatches through ISwapChainPanelNative2's vtable slot 4.
-func (self *ISwapChainPanelNative2) SetSwapChainHandle(swapChainHandle foundation.HANDLE) foundation.HRESULT {
+func (self *ISwapChainPanelNative2) SetSwapChainHandle(swapChainHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(swapChainHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eb24c20b-9816-4ac7-8cff-36f67a118f4e
@@ -365,21 +366,22 @@ type ITrackerOwner struct {
 var IID_ITrackerOwner = win32.GUID{Data1: 0xeb24c20b, Data2: 0x9816, Data3: 0x4ac7, Data4: [8]byte{0x8c, 0xff, 0x36, 0xf6, 0x7a, 0x11, 0x8f, 0x4e}}
 
 // CreateTrackerHandle dispatches through ITrackerOwner's vtable slot 3.
-func (self *ITrackerOwner) CreateTrackerHandle(returnValue *TrackerHandle) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(returnValue)))
-	return foundation.HRESULT(r1)
+func (self *ITrackerOwner) CreateTrackerHandle() (TrackerHandle, error) {
+	var _returnValue TrackerHandle
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_returnValue)))
+	return _returnValue, win32.HRESULTError(int32(r1))
 }
 
 // DeleteTrackerHandle dispatches through ITrackerOwner's vtable slot 4.
-func (self *ITrackerOwner) DeleteTrackerHandle(handle TrackerHandle) foundation.HRESULT {
+func (self *ITrackerOwner) DeleteTrackerHandle(handle TrackerHandle) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(handle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTrackerValue dispatches through ITrackerOwner's vtable slot 5.
-func (self *ITrackerOwner) SetTrackerValue(handle TrackerHandle, value *systemcom.IUnknown) foundation.HRESULT {
+func (self *ITrackerOwner) SetTrackerValue(handle TrackerHandle, value *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(handle), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TryGetSafeTrackerValue dispatches through ITrackerOwner's vtable slot 6.
@@ -398,33 +400,33 @@ type IVirtualSurfaceImageSourceNative struct {
 var IID_IVirtualSurfaceImageSourceNative = win32.GUID{Data1: 0xe9550983, Data2: 0x360b, Data3: 0x4f53, Data4: [8]byte{0xb3, 0x91, 0xaf, 0xd6, 0x95, 0x07, 0x86, 0x91}}
 
 // GetUpdateRectCount dispatches through IVirtualSurfaceImageSourceNative's vtable slot 7.
-func (self *IVirtualSurfaceImageSourceNative) GetUpdateRectCount(count *uint32) foundation.HRESULT {
+func (self *IVirtualSurfaceImageSourceNative) GetUpdateRectCount(count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUpdateRects dispatches through IVirtualSurfaceImageSourceNative's vtable slot 8.
-func (self *IVirtualSurfaceImageSourceNative) GetUpdateRects(updates *foundation.RECT, count uint32) foundation.HRESULT {
+func (self *IVirtualSurfaceImageSourceNative) GetUpdateRects(updates *foundation.RECT, count uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(updates)), uintptr(count))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVisibleBounds dispatches through IVirtualSurfaceImageSourceNative's vtable slot 9.
-func (self *IVirtualSurfaceImageSourceNative) GetVisibleBounds(bounds *foundation.RECT) foundation.HRESULT {
+func (self *IVirtualSurfaceImageSourceNative) GetVisibleBounds(bounds *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bounds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterForUpdatesNeeded dispatches through IVirtualSurfaceImageSourceNative's vtable slot 10.
-func (self *IVirtualSurfaceImageSourceNative) RegisterForUpdatesNeeded(callback *IVirtualSurfaceUpdatesCallbackNative) foundation.HRESULT {
+func (self *IVirtualSurfaceImageSourceNative) RegisterForUpdatesNeeded(callback *IVirtualSurfaceUpdatesCallbackNative) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(callback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Resize dispatches through IVirtualSurfaceImageSourceNative's vtable slot 11.
-func (self *IVirtualSurfaceImageSourceNative) Resize(newWidth int32, newHeight int32) foundation.HRESULT {
+func (self *IVirtualSurfaceImageSourceNative) Resize(newWidth int32, newHeight int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(newWidth), uintptr(newHeight))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVirtualSurfaceUpdatesCallbackNative: https://learn.microsoft.com/windows/win32/api/windows.ui.xaml.media.dxinterop/nn-windows-ui-xaml-media-dxinterop-ivirtualsurfaceupdatescallbacknative
@@ -437,7 +439,7 @@ type IVirtualSurfaceUpdatesCallbackNative struct {
 var IID_IVirtualSurfaceUpdatesCallbackNative = win32.GUID{Data1: 0xdbf2e947, Data2: 0x8e6c, Data3: 0x4254, Data4: [8]byte{0x9e, 0xee, 0x77, 0x38, 0xf7, 0x13, 0x86, 0xc9}}
 
 // UpdatesNeeded dispatches through IVirtualSurfaceUpdatesCallbackNative's vtable slot 3.
-func (self *IVirtualSurfaceUpdatesCallbackNative) UpdatesNeeded() foundation.HRESULT {
+func (self *IVirtualSurfaceUpdatesCallbackNative) UpdatesNeeded() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

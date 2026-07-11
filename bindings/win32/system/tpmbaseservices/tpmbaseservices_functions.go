@@ -35,15 +35,15 @@ var (
 )
 
 // GetDeviceID calls tbs!GetDeviceID.
-func GetDeviceID(pbWindowsAIK *byte, cbWindowsAIK uint32, pcbResult *uint32, pfProtectedByTPM *foundation.BOOL) foundation.HRESULT {
+func GetDeviceID(pbWindowsAIK *byte, cbWindowsAIK uint32, pcbResult *uint32, pfProtectedByTPM *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procGetDeviceID.Addr(), uintptr(unsafe.Pointer(pbWindowsAIK)), uintptr(cbWindowsAIK), uintptr(unsafe.Pointer(pcbResult)), uintptr(unsafe.Pointer(pfProtectedByTPM)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceIDString calls tbs!GetDeviceIDString.
-func GetDeviceIDString(pszWindowsAIK foundation.PWSTR, cchWindowsAIK uint32, pcchResult *uint32, pfProtectedByTPM *foundation.BOOL) foundation.HRESULT {
+func GetDeviceIDString(pszWindowsAIK foundation.PWSTR, cchWindowsAIK uint32, pcchResult *uint32, pfProtectedByTPM *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procGetDeviceIDString.Addr(), uintptr(unsafe.Pointer(pszWindowsAIK)), uintptr(cchWindowsAIK), uintptr(unsafe.Pointer(pcchResult)), uintptr(unsafe.Pointer(pfProtectedByTPM)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Tbsi_Context_Create calls tbs!Tbsi_Context_Create.
@@ -93,9 +93,9 @@ func Tbsi_Get_TCG_Log_Ex(logType uint32, pbOutput *byte, pcbOutput *uint32) uint
 }
 
 // Tbsi_Is_Tpm_Present calls tbs!Tbsi_Is_Tpm_Present.
-func Tbsi_Is_Tpm_Present() foundation.BOOL {
+func Tbsi_Is_Tpm_Present() bool {
 	r1, _, _ := syscall.SyscallN(procTbsi_Is_Tpm_Present.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // Tbsi_Physical_Presence_Command calls tbs!Tbsi_Physical_Presence_Command.

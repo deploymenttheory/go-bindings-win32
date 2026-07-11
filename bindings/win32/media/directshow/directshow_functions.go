@@ -17,20 +17,20 @@ var (
 )
 
 var (
+	procAMGetErrorText  = modQUARTZ.NewProc("AMGetErrorTextW")
 	procAMGetErrorTextA = modQUARTZ.NewProc("AMGetErrorTextA")
-	procAMGetErrorTextW = modQUARTZ.NewProc("AMGetErrorTextW")
 )
+
+// AMGetErrorText calls QUARTZ!AMGetErrorTextW.
+// https://learn.microsoft.com/windows/win32/api/errors/nf-errors-amgeterrortextw
+func AMGetErrorText(hr foundation.HRESULT, pbuffer foundation.PWSTR, MaxLen uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procAMGetErrorText.Addr(), uintptr(hr), uintptr(unsafe.Pointer(pbuffer)), uintptr(MaxLen))
+	return uint32(r1)
+}
 
 // AMGetErrorTextA calls QUARTZ!AMGetErrorTextA.
 // https://learn.microsoft.com/windows/win32/api/errors/nf-errors-amgeterrortexta
 func AMGetErrorTextA(hr foundation.HRESULT, pbuffer foundation.PSTR, MaxLen uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAMGetErrorTextA.Addr(), uintptr(hr), uintptr(unsafe.Pointer(pbuffer)), uintptr(MaxLen))
-	return uint32(r1)
-}
-
-// AMGetErrorTextW calls QUARTZ!AMGetErrorTextW.
-// https://learn.microsoft.com/windows/win32/api/errors/nf-errors-amgeterrortextw
-func AMGetErrorTextW(hr foundation.HRESULT, pbuffer foundation.PWSTR, MaxLen uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procAMGetErrorTextW.Addr(), uintptr(hr), uintptr(unsafe.Pointer(pbuffer)), uintptr(MaxLen))
 	return uint32(r1)
 }

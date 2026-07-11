@@ -376,36 +376,36 @@ var (
 	procVarWeekdayName                    = modOLEAUT32.NewProc("VarWeekdayName")
 	procVarXor                            = modOLEAUT32.NewProc("VarXor")
 	procVectorFromBstr                    = modOLEAUT32.NewProc("VectorFromBstr")
+	procOleUIAddVerbMenu                  = modoledlg.NewProc("OleUIAddVerbMenuW")
 	procOleUIAddVerbMenuA                 = modoledlg.NewProc("OleUIAddVerbMenuA")
-	procOleUIAddVerbMenuW                 = modoledlg.NewProc("OleUIAddVerbMenuW")
+	procOleUIBusy                         = modoledlg.NewProc("OleUIBusyW")
 	procOleUIBusyA                        = modoledlg.NewProc("OleUIBusyA")
-	procOleUIBusyW                        = modoledlg.NewProc("OleUIBusyW")
 	procOleUICanConvertOrActivateAs       = modoledlg.NewProc("OleUICanConvertOrActivateAs")
+	procOleUIChangeIcon                   = modoledlg.NewProc("OleUIChangeIconW")
 	procOleUIChangeIconA                  = modoledlg.NewProc("OleUIChangeIconA")
-	procOleUIChangeIconW                  = modoledlg.NewProc("OleUIChangeIconW")
+	procOleUIChangeSource                 = modoledlg.NewProc("OleUIChangeSourceW")
 	procOleUIChangeSourceA                = modoledlg.NewProc("OleUIChangeSourceA")
-	procOleUIChangeSourceW                = modoledlg.NewProc("OleUIChangeSourceW")
+	procOleUIConvert                      = modoledlg.NewProc("OleUIConvertW")
 	procOleUIConvertA                     = modoledlg.NewProc("OleUIConvertA")
-	procOleUIConvertW                     = modoledlg.NewProc("OleUIConvertW")
+	procOleUIEditLinks                    = modoledlg.NewProc("OleUIEditLinksW")
 	procOleUIEditLinksA                   = modoledlg.NewProc("OleUIEditLinksA")
-	procOleUIEditLinksW                   = modoledlg.NewProc("OleUIEditLinksW")
+	procOleUIInsertObject                 = modoledlg.NewProc("OleUIInsertObjectW")
 	procOleUIInsertObjectA                = modoledlg.NewProc("OleUIInsertObjectA")
-	procOleUIInsertObjectW                = modoledlg.NewProc("OleUIInsertObjectW")
+	procOleUIObjectProperties             = modoledlg.NewProc("OleUIObjectPropertiesW")
 	procOleUIObjectPropertiesA            = modoledlg.NewProc("OleUIObjectPropertiesA")
-	procOleUIObjectPropertiesW            = modoledlg.NewProc("OleUIObjectPropertiesW")
+	procOleUIPasteSpecial                 = modoledlg.NewProc("OleUIPasteSpecialW")
 	procOleUIPasteSpecialA                = modoledlg.NewProc("OleUIPasteSpecialA")
-	procOleUIPasteSpecialW                = modoledlg.NewProc("OleUIPasteSpecialW")
+	procOleUIPromptUser                   = modoledlg.NewProc("OleUIPromptUserW")
 	procOleUIPromptUserA                  = modoledlg.NewProc("OleUIPromptUserA")
-	procOleUIPromptUserW                  = modoledlg.NewProc("OleUIPromptUserW")
+	procOleUIUpdateLinks                  = modoledlg.NewProc("OleUIUpdateLinksW")
 	procOleUIUpdateLinksA                 = modoledlg.NewProc("OleUIUpdateLinksA")
-	procOleUIUpdateLinksW                 = modoledlg.NewProc("OleUIUpdateLinksW")
 )
 
 // BstrFromVector calls OLEAUT32!BstrFromVector.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-bstrfromvector
-func BstrFromVector(psa *systemcom.SAFEARRAY, pbstr *foundation.BSTR) foundation.HRESULT {
+func BstrFromVector(psa *systemcom.SAFEARRAY, pbstr *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procBstrFromVector.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(pbstr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ClearCustData calls OLEAUT32!ClearCustData.
@@ -416,109 +416,111 @@ func ClearCustData(pCustData *systemcom.CUSTDATA) {
 
 // CreateDispTypeInfo calls OLEAUT32!CreateDispTypeInfo.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-createdisptypeinfo
-func CreateDispTypeInfo(pidata *INTERFACEDATA, lcid uint32, pptinfo **systemcom.ITypeInfo) foundation.HRESULT {
+func CreateDispTypeInfo(pidata *INTERFACEDATA, lcid uint32, pptinfo **systemcom.ITypeInfo) error {
 	r1, _, _ := syscall.SyscallN(procCreateDispTypeInfo.Addr(), uintptr(unsafe.Pointer(pidata)), uintptr(lcid), uintptr(unsafe.Pointer(pptinfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateErrorInfo calls OLEAUT32!CreateErrorInfo.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-createerrorinfo
-func CreateErrorInfo(pperrinfo **ICreateErrorInfo) foundation.HRESULT {
+func CreateErrorInfo(pperrinfo **ICreateErrorInfo) error {
 	r1, _, _ := syscall.SyscallN(procCreateErrorInfo.Addr(), uintptr(unsafe.Pointer(pperrinfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateOleAdviseHolder calls OLE32!CreateOleAdviseHolder.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-createoleadviseholder
 // Minimum OS: windows5.0.
-func CreateOleAdviseHolder(ppOAHolder **IOleAdviseHolder) foundation.HRESULT {
+func CreateOleAdviseHolder(ppOAHolder **IOleAdviseHolder) error {
 	r1, _, _ := syscall.SyscallN(procCreateOleAdviseHolder.Addr(), uintptr(unsafe.Pointer(ppOAHolder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStdDispatch calls OLEAUT32!CreateStdDispatch.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-createstddispatch
-func CreateStdDispatch(punkOuter *systemcom.IUnknown, pvThis unsafe.Pointer, ptinfo *systemcom.ITypeInfo, ppunkStdDisp **systemcom.IUnknown) foundation.HRESULT {
+func CreateStdDispatch(punkOuter *systemcom.IUnknown, pvThis unsafe.Pointer, ptinfo *systemcom.ITypeInfo, ppunkStdDisp **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procCreateStdDispatch.Addr(), uintptr(unsafe.Pointer(punkOuter)), uintptr(unsafe.Pointer(pvThis)), uintptr(unsafe.Pointer(ptinfo)), uintptr(unsafe.Pointer(ppunkStdDisp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateTypeLib calls OLEAUT32!CreateTypeLib.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-createtypelib
-func CreateTypeLib(syskind systemcom.SYSKIND, szFile foundation.PWSTR, ppctlib **ICreateTypeLib) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateTypeLib.Addr(), uintptr(syskind), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(ppctlib)))
-	return foundation.HRESULT(r1)
+func CreateTypeLib(syskind systemcom.SYSKIND, szFile string, ppctlib **ICreateTypeLib) error {
+	_szFile := win32.UTF16Ptr(szFile)
+	r1, _, _ := syscall.SyscallN(procCreateTypeLib.Addr(), uintptr(syskind), uintptr(unsafe.Pointer(_szFile)), uintptr(unsafe.Pointer(ppctlib)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateTypeLib2 calls OLEAUT32!CreateTypeLib2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-createtypelib2
-func CreateTypeLib2(syskind systemcom.SYSKIND, szFile foundation.PWSTR, ppctlib **ICreateTypeLib2) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procCreateTypeLib2.Addr(), uintptr(syskind), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(ppctlib)))
-	return foundation.HRESULT(r1)
+func CreateTypeLib2(syskind systemcom.SYSKIND, szFile string, ppctlib **ICreateTypeLib2) error {
+	_szFile := win32.UTF16Ptr(szFile)
+	r1, _, _ := syscall.SyscallN(procCreateTypeLib2.Addr(), uintptr(syskind), uintptr(unsafe.Pointer(_szFile)), uintptr(unsafe.Pointer(ppctlib)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DispCallFunc calls OLEAUT32!DispCallFunc.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-dispcallfunc
-func DispCallFunc(pvInstance unsafe.Pointer, oVft uintptr, cc systemcom.CALLCONV, vtReturn systemvariant.VARENUM, cActuals uint32, prgvt *uint16, prgpvarg **systemvariant.VARIANT, pvargResult *systemvariant.VARIANT) foundation.HRESULT {
+func DispCallFunc(pvInstance unsafe.Pointer, oVft uintptr, cc systemcom.CALLCONV, vtReturn systemvariant.VARENUM, cActuals uint32, prgvt *uint16, prgpvarg **systemvariant.VARIANT, pvargResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procDispCallFunc.Addr(), uintptr(unsafe.Pointer(pvInstance)), uintptr(oVft), uintptr(cc), uintptr(vtReturn), uintptr(cActuals), uintptr(unsafe.Pointer(prgvt)), uintptr(unsafe.Pointer(prgpvarg)), uintptr(unsafe.Pointer(pvargResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DispGetIDsOfNames calls OLEAUT32!DispGetIDsOfNames.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-dispgetidsofnames
-func DispGetIDsOfNames(ptinfo *systemcom.ITypeInfo, rgszNames *foundation.PWSTR, cNames uint32, rgdispid *int32) foundation.HRESULT {
+func DispGetIDsOfNames(ptinfo *systemcom.ITypeInfo, rgszNames *foundation.PWSTR, cNames uint32, rgdispid *int32) error {
 	r1, _, _ := syscall.SyscallN(procDispGetIDsOfNames.Addr(), uintptr(unsafe.Pointer(ptinfo)), uintptr(unsafe.Pointer(rgszNames)), uintptr(cNames), uintptr(unsafe.Pointer(rgdispid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DispGetParam calls OLEAUT32!DispGetParam.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-dispgetparam
-func DispGetParam(pdispparams *systemcom.DISPPARAMS, position uint32, vtTarg systemvariant.VARENUM, pvarResult *systemvariant.VARIANT, puArgErr *uint32) foundation.HRESULT {
+func DispGetParam(pdispparams *systemcom.DISPPARAMS, position uint32, vtTarg systemvariant.VARENUM, pvarResult *systemvariant.VARIANT, puArgErr *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDispGetParam.Addr(), uintptr(unsafe.Pointer(pdispparams)), uintptr(position), uintptr(vtTarg), uintptr(unsafe.Pointer(pvarResult)), uintptr(unsafe.Pointer(puArgErr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DispInvoke calls OLEAUT32!DispInvoke.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-dispinvoke
-func DispInvoke(_this unsafe.Pointer, ptinfo *systemcom.ITypeInfo, dispidMember int32, wFlags uint16, pparams *systemcom.DISPPARAMS, pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO, puArgErr *uint32) foundation.HRESULT {
+func DispInvoke(_this unsafe.Pointer, ptinfo *systemcom.ITypeInfo, dispidMember int32, wFlags uint16, pparams *systemcom.DISPPARAMS, pvarResult *systemvariant.VARIANT, pexcepinfo *systemcom.EXCEPINFO, puArgErr *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDispInvoke.Addr(), uintptr(unsafe.Pointer(_this)), uintptr(unsafe.Pointer(ptinfo)), uintptr(dispidMember), uintptr(wFlags), uintptr(unsafe.Pointer(pparams)), uintptr(unsafe.Pointer(pvarResult)), uintptr(unsafe.Pointer(pexcepinfo)), uintptr(unsafe.Pointer(puArgErr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DoDragDrop calls OLE32!DoDragDrop.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-dodragdrop
 // Minimum OS: windows5.0.
-func DoDragDrop(pDataObj *systemcom.IDataObject, pDropSource *IDropSource, dwOKEffects DROPEFFECT, pdwEffect *DROPEFFECT) foundation.HRESULT {
+func DoDragDrop(pDataObj *systemcom.IDataObject, pDropSource *IDropSource, dwOKEffects DROPEFFECT, pdwEffect *DROPEFFECT) error {
 	r1, _, _ := syscall.SyscallN(procDoDragDrop.Addr(), uintptr(unsafe.Pointer(pDataObj)), uintptr(unsafe.Pointer(pDropSource)), uintptr(dwOKEffects), uintptr(unsafe.Pointer(pdwEffect)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetActiveObject calls OLEAUT32!GetActiveObject.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-getactiveobject
-func GetActiveObject(rclsid *win32.GUID, pvReserved unsafe.Pointer, ppunk **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procGetActiveObject.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(pvReserved)), uintptr(unsafe.Pointer(ppunk)))
-	return foundation.HRESULT(r1)
+func GetActiveObject(rclsid *win32.GUID, ppunk **systemcom.IUnknown) error {
+	r1, _, _ := syscall.SyscallN(procGetActiveObject.Addr(), uintptr(unsafe.Pointer(rclsid)), 0, uintptr(unsafe.Pointer(ppunk)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAltMonthNames calls OLEAUT32!GetAltMonthNames.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-getaltmonthnames
-func GetAltMonthNames(lcid uint32, prgp **foundation.PWSTR) foundation.HRESULT {
+func GetAltMonthNames(lcid uint32, prgp **foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procGetAltMonthNames.Addr(), uintptr(lcid), uintptr(unsafe.Pointer(prgp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecordInfoFromGuids calls OLEAUT32!GetRecordInfoFromGuids.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-getrecordinfofromguids
-func GetRecordInfoFromGuids(rGuidTypeLib *win32.GUID, uVerMajor uint32, uVerMinor uint32, lcid uint32, rGuidTypeInfo *win32.GUID, ppRecInfo **IRecordInfo) foundation.HRESULT {
+func GetRecordInfoFromGuids(rGuidTypeLib *win32.GUID, uVerMajor uint32, uVerMinor uint32, lcid uint32, rGuidTypeInfo *win32.GUID, ppRecInfo **IRecordInfo) error {
 	r1, _, _ := syscall.SyscallN(procGetRecordInfoFromGuids.Addr(), uintptr(unsafe.Pointer(rGuidTypeLib)), uintptr(uVerMajor), uintptr(uVerMinor), uintptr(lcid), uintptr(unsafe.Pointer(rGuidTypeInfo)), uintptr(unsafe.Pointer(ppRecInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecordInfoFromTypeInfo calls OLEAUT32!GetRecordInfoFromTypeInfo.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-getrecordinfofromtypeinfo
-func GetRecordInfoFromTypeInfo(pTypeInfo *systemcom.ITypeInfo, ppRecInfo **IRecordInfo) foundation.HRESULT {
+func GetRecordInfoFromTypeInfo(pTypeInfo *systemcom.ITypeInfo, ppRecInfo **IRecordInfo) error {
 	r1, _, _ := syscall.SyscallN(procGetRecordInfoFromTypeInfo.Addr(), uintptr(unsafe.Pointer(pTypeInfo)), uintptr(unsafe.Pointer(ppRecInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HRGN_UserFree calls OLE32!HRGN_UserFree.
@@ -570,15 +572,16 @@ func HRGN_UserUnmarshal64(param0 *uint32, param1 *byte, param2 *graphicsgdi.HRGN
 // IsAccelerator calls OLE32!IsAccelerator.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-isaccelerator
 // Minimum OS: windows5.0.
-func IsAccelerator(hAccel uiwindowsandmessaging.HACCEL, cAccelEntries int32, lpMsg *uiwindowsandmessaging.MSG, lpwCmd *uint16) foundation.BOOL {
+func IsAccelerator(hAccel uiwindowsandmessaging.HACCEL, cAccelEntries int32, lpMsg *uiwindowsandmessaging.MSG, lpwCmd *uint16) bool {
 	r1, _, _ := syscall.SyscallN(procIsAccelerator.Addr(), uintptr(hAccel), uintptr(cAccelEntries), uintptr(unsafe.Pointer(lpMsg)), uintptr(unsafe.Pointer(lpwCmd)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // LHashValOfNameSys calls OLEAUT32!LHashValOfNameSys.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-lhashvalofnamesys
-func LHashValOfNameSys(syskind systemcom.SYSKIND, lcid uint32, szName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procLHashValOfNameSys.Addr(), uintptr(syskind), uintptr(lcid), uintptr(unsafe.Pointer(szName)))
+func LHashValOfNameSys(syskind systemcom.SYSKIND, lcid uint32, szName string) uint32 {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(procLHashValOfNameSys.Addr(), uintptr(syskind), uintptr(lcid), uintptr(unsafe.Pointer(_szName)))
 	return uint32(r1)
 }
 
@@ -591,23 +594,25 @@ func LHashValOfNameSysA(syskind systemcom.SYSKIND, lcid uint32, szName foundatio
 
 // LoadRegTypeLib calls OLEAUT32!LoadRegTypeLib.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-loadregtypelib
-func LoadRegTypeLib(rguid *win32.GUID, wVerMajor uint16, wVerMinor uint16, lcid uint32, pptlib **systemcom.ITypeLib) foundation.HRESULT {
+func LoadRegTypeLib(rguid *win32.GUID, wVerMajor uint16, wVerMinor uint16, lcid uint32, pptlib **systemcom.ITypeLib) error {
 	r1, _, _ := syscall.SyscallN(procLoadRegTypeLib.Addr(), uintptr(unsafe.Pointer(rguid)), uintptr(wVerMajor), uintptr(wVerMinor), uintptr(lcid), uintptr(unsafe.Pointer(pptlib)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadTypeLib calls OLEAUT32!LoadTypeLib.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-loadtypelib
-func LoadTypeLib(szFile foundation.PWSTR, pptlib **systemcom.ITypeLib) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procLoadTypeLib.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(unsafe.Pointer(pptlib)))
-	return foundation.HRESULT(r1)
+func LoadTypeLib(szFile string, pptlib **systemcom.ITypeLib) error {
+	_szFile := win32.UTF16Ptr(szFile)
+	r1, _, _ := syscall.SyscallN(procLoadTypeLib.Addr(), uintptr(unsafe.Pointer(_szFile)), uintptr(unsafe.Pointer(pptlib)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadTypeLibEx calls OLEAUT32!LoadTypeLibEx.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-loadtypelibex
-func LoadTypeLibEx(szFile foundation.PWSTR, regkind REGKIND, pptlib **systemcom.ITypeLib) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procLoadTypeLibEx.Addr(), uintptr(unsafe.Pointer(szFile)), uintptr(regkind), uintptr(unsafe.Pointer(pptlib)))
-	return foundation.HRESULT(r1)
+func LoadTypeLibEx(szFile string, regkind REGKIND, pptlib **systemcom.ITypeLib) error {
+	_szFile := win32.UTF16Ptr(szFile)
+	r1, _, _ := syscall.SyscallN(procLoadTypeLibEx.Addr(), uintptr(unsafe.Pointer(_szFile)), uintptr(regkind), uintptr(unsafe.Pointer(pptlib)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OaBuildVersion calls OLEAUT32!OaBuildVersion.
@@ -631,135 +636,139 @@ func OleBuildVersion() uint32 {
 }
 
 // OleConvertOLESTREAMToIStorage2 calls ole32!OleConvertOLESTREAMToIStorage2.
-func OleConvertOLESTREAMToIStorage2(lpolestream *systemcomstructuredstorage.OLESTREAM, pstg *systemcomstructuredstorage.IStorage, ptd *systemcom.DVTARGETDEVICE, opt uint32, pvCallbackContext unsafe.Pointer, pQueryConvertOLELinkCallback OLESTREAMQUERYCONVERTOLELINKCALLBACK) foundation.HRESULT {
+func OleConvertOLESTREAMToIStorage2(lpolestream *systemcomstructuredstorage.OLESTREAM, pstg *systemcomstructuredstorage.IStorage, ptd *systemcom.DVTARGETDEVICE, opt uint32, pvCallbackContext unsafe.Pointer, pQueryConvertOLELinkCallback OLESTREAMQUERYCONVERTOLELINKCALLBACK) error {
 	r1, _, _ := syscall.SyscallN(procOleConvertOLESTREAMToIStorage2.Addr(), uintptr(unsafe.Pointer(lpolestream)), uintptr(unsafe.Pointer(pstg)), uintptr(unsafe.Pointer(ptd)), uintptr(opt), uintptr(unsafe.Pointer(pvCallbackContext)), uintptr(pQueryConvertOLELinkCallback))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleConvertOLESTREAMToIStorageEx2 calls ole32!OleConvertOLESTREAMToIStorageEx2.
-func OleConvertOLESTREAMToIStorageEx2(polestm *systemcomstructuredstorage.OLESTREAM, pstg *systemcomstructuredstorage.IStorage, pcfFormat *uint16, plwWidth *int32, plHeight *int32, pdwSize *uint32, pmedium *systemcom.STGMEDIUM, opt uint32, pvCallbackContext unsafe.Pointer, pQueryConvertOLELinkCallback OLESTREAMQUERYCONVERTOLELINKCALLBACK) foundation.HRESULT {
+func OleConvertOLESTREAMToIStorageEx2(polestm *systemcomstructuredstorage.OLESTREAM, pstg *systemcomstructuredstorage.IStorage, pcfFormat *uint16, plwWidth *int32, plHeight *int32, pdwSize *uint32, pmedium *systemcom.STGMEDIUM, opt uint32, pvCallbackContext unsafe.Pointer, pQueryConvertOLELinkCallback OLESTREAMQUERYCONVERTOLELINKCALLBACK) error {
 	r1, _, _ := syscall.SyscallN(procOleConvertOLESTREAMToIStorageEx2.Addr(), uintptr(unsafe.Pointer(polestm)), uintptr(unsafe.Pointer(pstg)), uintptr(unsafe.Pointer(pcfFormat)), uintptr(unsafe.Pointer(plwWidth)), uintptr(unsafe.Pointer(plHeight)), uintptr(unsafe.Pointer(pdwSize)), uintptr(unsafe.Pointer(pmedium)), uintptr(opt), uintptr(unsafe.Pointer(pvCallbackContext)), uintptr(pQueryConvertOLELinkCallback))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreate calls OLE32!OleCreate.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreate
 // Minimum OS: windows5.0.
-func OleCreate(rclsid *win32.GUID, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) foundation.HRESULT {
+func OleCreate(rclsid *win32.GUID, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOleCreate.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(renderopt), uintptr(unsafe.Pointer(pFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateDefaultHandler calls ole32!OleCreateDefaultHandler.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatedefaulthandler
 // Minimum OS: windows5.0.
-func OleCreateDefaultHandler(clsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, lplpObj *unsafe.Pointer) foundation.HRESULT {
+func OleCreateDefaultHandler(clsid *win32.GUID, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, lplpObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateDefaultHandler.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(lplpObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateEmbeddingHelper calls OLE32!OleCreateEmbeddingHelper.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreateembeddinghelper
 // Minimum OS: windows5.0.
-func OleCreateEmbeddingHelper(clsid *win32.GUID, pUnkOuter *systemcom.IUnknown, flags EMBDHLP_FLAGS, pCF *systemcom.IClassFactory, riid *win32.GUID, lplpObj *unsafe.Pointer) foundation.HRESULT {
+func OleCreateEmbeddingHelper(clsid *win32.GUID, pUnkOuter *systemcom.IUnknown, flags EMBDHLP_FLAGS, pCF *systemcom.IClassFactory, riid *win32.GUID, lplpObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateEmbeddingHelper.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(flags), uintptr(unsafe.Pointer(pCF)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(lplpObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateEx calls ole32!OleCreateEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreateex
 // Minimum OS: windows5.0.
-func OleCreateEx(rclsid *win32.GUID, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) foundation.HRESULT {
+func OleCreateEx(rclsid *win32.GUID, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateEx.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(riid)), uintptr(dwFlags), uintptr(renderopt), uintptr(cFormats), uintptr(unsafe.Pointer(rgAdvf)), uintptr(unsafe.Pointer(rgFormatEtc)), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(rgdwConnection)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateFontIndirect calls OLEAUT32!OleCreateFontIndirect.
 // https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-olecreatefontindirect
 // Minimum OS: windows5.0.
-func OleCreateFontIndirect(lpFontDesc *FONTDESC, riid *win32.GUID, lplpvObj *unsafe.Pointer) foundation.HRESULT {
+func OleCreateFontIndirect(lpFontDesc *FONTDESC, riid *win32.GUID, lplpvObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateFontIndirect.Addr(), uintptr(unsafe.Pointer(lpFontDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(lplpvObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateFromData calls OLE32!OleCreateFromData.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatefromdata
 // Minimum OS: windows5.0.
-func OleCreateFromData(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) foundation.HRESULT {
+func OleCreateFromData(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateFromData.Addr(), uintptr(unsafe.Pointer(pSrcDataObj)), uintptr(unsafe.Pointer(riid)), uintptr(renderopt), uintptr(unsafe.Pointer(pFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateFromDataEx calls ole32!OleCreateFromDataEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatefromdataex
 // Minimum OS: windows5.0.
-func OleCreateFromDataEx(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) foundation.HRESULT {
+func OleCreateFromDataEx(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateFromDataEx.Addr(), uintptr(unsafe.Pointer(pSrcDataObj)), uintptr(unsafe.Pointer(riid)), uintptr(dwFlags), uintptr(renderopt), uintptr(cFormats), uintptr(unsafe.Pointer(rgAdvf)), uintptr(unsafe.Pointer(rgFormatEtc)), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(rgdwConnection)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateFromFile calls OLE32!OleCreateFromFile.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatefromfile
 // Minimum OS: windows5.0.
-func OleCreateFromFile(rclsid *win32.GUID, lpszFileName foundation.PWSTR, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleCreateFromFile.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(lpszFileName)), uintptr(unsafe.Pointer(riid)), uintptr(renderopt), uintptr(unsafe.Pointer(lpFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+func OleCreateFromFile(rclsid *win32.GUID, lpszFileName string, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
+	_lpszFileName := win32.UTF16Ptr(lpszFileName)
+	r1, _, _ := syscall.SyscallN(procOleCreateFromFile.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(_lpszFileName)), uintptr(unsafe.Pointer(riid)), uintptr(renderopt), uintptr(unsafe.Pointer(lpFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateFromFileEx calls ole32!OleCreateFromFileEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatefromfileex
 // Minimum OS: windows5.0.
-func OleCreateFromFileEx(rclsid *win32.GUID, lpszFileName foundation.PWSTR, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleCreateFromFileEx.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(lpszFileName)), uintptr(unsafe.Pointer(riid)), uintptr(dwFlags), uintptr(renderopt), uintptr(cFormats), uintptr(unsafe.Pointer(rgAdvf)), uintptr(unsafe.Pointer(rgFormatEtc)), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(rgdwConnection)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+func OleCreateFromFileEx(rclsid *win32.GUID, lpszFileName string, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
+	_lpszFileName := win32.UTF16Ptr(lpszFileName)
+	r1, _, _ := syscall.SyscallN(procOleCreateFromFileEx.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(_lpszFileName)), uintptr(unsafe.Pointer(riid)), uintptr(dwFlags), uintptr(renderopt), uintptr(cFormats), uintptr(unsafe.Pointer(rgAdvf)), uintptr(unsafe.Pointer(rgFormatEtc)), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(rgdwConnection)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateLink calls ole32!OleCreateLink.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelink
 // Minimum OS: windows5.0.
-func OleCreateLink(pmkLinkSrc *systemcom.IMoniker, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) foundation.HRESULT {
+func OleCreateLink(pmkLinkSrc *systemcom.IMoniker, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateLink.Addr(), uintptr(unsafe.Pointer(pmkLinkSrc)), uintptr(unsafe.Pointer(riid)), uintptr(renderopt), uintptr(unsafe.Pointer(lpFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateLinkEx calls ole32!OleCreateLinkEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinkex
 // Minimum OS: windows5.0.
-func OleCreateLinkEx(pmkLinkSrc *systemcom.IMoniker, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) foundation.HRESULT {
+func OleCreateLinkEx(pmkLinkSrc *systemcom.IMoniker, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateLinkEx.Addr(), uintptr(unsafe.Pointer(pmkLinkSrc)), uintptr(unsafe.Pointer(riid)), uintptr(dwFlags), uintptr(renderopt), uintptr(cFormats), uintptr(unsafe.Pointer(rgAdvf)), uintptr(unsafe.Pointer(rgFormatEtc)), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(rgdwConnection)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateLinkFromData calls OLE32!OleCreateLinkFromData.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinkfromdata
 // Minimum OS: windows5.0.
-func OleCreateLinkFromData(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) foundation.HRESULT {
+func OleCreateLinkFromData(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateLinkFromData.Addr(), uintptr(unsafe.Pointer(pSrcDataObj)), uintptr(unsafe.Pointer(riid)), uintptr(renderopt), uintptr(unsafe.Pointer(pFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateLinkFromDataEx calls ole32!OleCreateLinkFromDataEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinkfromdataex
 // Minimum OS: windows5.0.
-func OleCreateLinkFromDataEx(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) foundation.HRESULT {
+func OleCreateLinkFromDataEx(pSrcDataObj *systemcom.IDataObject, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateLinkFromDataEx.Addr(), uintptr(unsafe.Pointer(pSrcDataObj)), uintptr(unsafe.Pointer(riid)), uintptr(dwFlags), uintptr(renderopt), uintptr(cFormats), uintptr(unsafe.Pointer(rgAdvf)), uintptr(unsafe.Pointer(rgFormatEtc)), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(rgdwConnection)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateLinkToFile calls OLE32!OleCreateLinkToFile.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinktofile
 // Minimum OS: windows5.0.
-func OleCreateLinkToFile(lpszFileName foundation.PWSTR, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleCreateLinkToFile.Addr(), uintptr(unsafe.Pointer(lpszFileName)), uintptr(unsafe.Pointer(riid)), uintptr(renderopt), uintptr(unsafe.Pointer(lpFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+func OleCreateLinkToFile(lpszFileName string, riid *win32.GUID, renderopt uint32, lpFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
+	_lpszFileName := win32.UTF16Ptr(lpszFileName)
+	r1, _, _ := syscall.SyscallN(procOleCreateLinkToFile.Addr(), uintptr(unsafe.Pointer(_lpszFileName)), uintptr(unsafe.Pointer(riid)), uintptr(renderopt), uintptr(unsafe.Pointer(lpFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateLinkToFileEx calls ole32!OleCreateLinkToFileEx.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatelinktofileex
 // Minimum OS: windows5.0.
-func OleCreateLinkToFileEx(lpszFileName foundation.PWSTR, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleCreateLinkToFileEx.Addr(), uintptr(unsafe.Pointer(lpszFileName)), uintptr(unsafe.Pointer(riid)), uintptr(dwFlags), uintptr(renderopt), uintptr(cFormats), uintptr(unsafe.Pointer(rgAdvf)), uintptr(unsafe.Pointer(rgFormatEtc)), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(rgdwConnection)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+func OleCreateLinkToFileEx(lpszFileName string, riid *win32.GUID, dwFlags OLECREATE, renderopt uint32, cFormats uint32, rgAdvf *uint32, rgFormatEtc *systemcom.FORMATETC, lpAdviseSink *systemcom.IAdviseSink, rgdwConnection *uint32, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
+	_lpszFileName := win32.UTF16Ptr(lpszFileName)
+	r1, _, _ := syscall.SyscallN(procOleCreateLinkToFileEx.Addr(), uintptr(unsafe.Pointer(_lpszFileName)), uintptr(unsafe.Pointer(riid)), uintptr(dwFlags), uintptr(renderopt), uintptr(cFormats), uintptr(unsafe.Pointer(rgAdvf)), uintptr(unsafe.Pointer(rgFormatEtc)), uintptr(unsafe.Pointer(lpAdviseSink)), uintptr(unsafe.Pointer(rgdwConnection)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateMenuDescriptor calls OLE32!OleCreateMenuDescriptor.
@@ -773,57 +782,59 @@ func OleCreateMenuDescriptor(hmenuCombined uiwindowsandmessaging.HMENU, lpMenuWi
 // OleCreatePictureIndirect calls OLEAUT32!OleCreatePictureIndirect.
 // https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-olecreatepictureindirect
 // Minimum OS: windows5.0.
-func OleCreatePictureIndirect(lpPictDesc *PICTDESC, riid *win32.GUID, fOwn foundation.BOOL, lplpvObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleCreatePictureIndirect.Addr(), uintptr(unsafe.Pointer(lpPictDesc)), uintptr(unsafe.Pointer(riid)), uintptr(fOwn), uintptr(unsafe.Pointer(lplpvObj)))
-	return foundation.HRESULT(r1)
+func OleCreatePictureIndirect(lpPictDesc *PICTDESC, riid *win32.GUID, fOwn bool, lplpvObj *unsafe.Pointer) error {
+	_fOwn := win32.Bool32(fOwn)
+	r1, _, _ := syscall.SyscallN(procOleCreatePictureIndirect.Addr(), uintptr(unsafe.Pointer(lpPictDesc)), uintptr(unsafe.Pointer(riid)), uintptr(_fOwn), uintptr(unsafe.Pointer(lplpvObj)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreatePropertyFrame calls OLEAUT32!OleCreatePropertyFrame.
 // https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-olecreatepropertyframe
 // Minimum OS: windows5.0.
-func OleCreatePropertyFrame(hwndOwner foundation.HWND, x uint32, y uint32, lpszCaption foundation.PWSTR, cObjects uint32, ppUnk **systemcom.IUnknown, cPages uint32, pPageClsID *win32.GUID, lcid uint32, dwReserved uint32, pvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleCreatePropertyFrame.Addr(), uintptr(hwndOwner), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(lpszCaption)), uintptr(cObjects), uintptr(unsafe.Pointer(ppUnk)), uintptr(cPages), uintptr(unsafe.Pointer(pPageClsID)), uintptr(lcid), uintptr(dwReserved), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.HRESULT(r1)
+func OleCreatePropertyFrame(hwndOwner foundation.HWND, x uint32, y uint32, lpszCaption string, cObjects uint32, ppUnk **systemcom.IUnknown, cPages uint32, pPageClsID *win32.GUID, lcid uint32) error {
+	_lpszCaption := win32.UTF16Ptr(lpszCaption)
+	r1, _, _ := syscall.SyscallN(procOleCreatePropertyFrame.Addr(), uintptr(hwndOwner), uintptr(x), uintptr(y), uintptr(unsafe.Pointer(_lpszCaption)), uintptr(cObjects), uintptr(unsafe.Pointer(ppUnk)), uintptr(cPages), uintptr(unsafe.Pointer(pPageClsID)), uintptr(lcid), 0, 0)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreatePropertyFrameIndirect calls OLEAUT32!OleCreatePropertyFrameIndirect.
 // https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-olecreatepropertyframeindirect
 // Minimum OS: windows5.0.
-func OleCreatePropertyFrameIndirect(lpParams *OCPFIPARAMS) foundation.HRESULT {
+func OleCreatePropertyFrameIndirect(lpParams *OCPFIPARAMS) error {
 	r1, _, _ := syscall.SyscallN(procOleCreatePropertyFrameIndirect.Addr(), uintptr(unsafe.Pointer(lpParams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleCreateStaticFromData calls OLE32!OleCreateStaticFromData.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olecreatestaticfromdata
 // Minimum OS: windows5.0.
-func OleCreateStaticFromData(pSrcDataObj *systemcom.IDataObject, iid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) foundation.HRESULT {
+func OleCreateStaticFromData(pSrcDataObj *systemcom.IDataObject, iid *win32.GUID, renderopt uint32, pFormatEtc *systemcom.FORMATETC, pClientSite *IOleClientSite, pStg *systemcomstructuredstorage.IStorage, ppvObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOleCreateStaticFromData.Addr(), uintptr(unsafe.Pointer(pSrcDataObj)), uintptr(unsafe.Pointer(iid)), uintptr(renderopt), uintptr(unsafe.Pointer(pFormatEtc)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleDestroyMenuDescriptor calls OLE32!OleDestroyMenuDescriptor.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oledestroymenudescriptor
 // Minimum OS: windows5.0.
-func OleDestroyMenuDescriptor(holemenu uintptr) foundation.HRESULT {
+func OleDestroyMenuDescriptor(holemenu uintptr) error {
 	r1, _, _ := syscall.SyscallN(procOleDestroyMenuDescriptor.Addr(), uintptr(holemenu))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleDoAutoConvert calls ole32!OleDoAutoConvert.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oledoautoconvert
 // Minimum OS: windows5.0.
-func OleDoAutoConvert(pStg *systemcomstructuredstorage.IStorage, pClsidNew *win32.GUID) foundation.HRESULT {
+func OleDoAutoConvert(pStg *systemcomstructuredstorage.IStorage, pClsidNew *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procOleDoAutoConvert.Addr(), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(pClsidNew)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleDraw calls OLE32!OleDraw.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oledraw
 // Minimum OS: windows5.0.
-func OleDraw(pUnknown *systemcom.IUnknown, dwAspect uint32, hdcDraw graphicsgdi.HDC, lprcBounds *foundation.RECT) foundation.HRESULT {
+func OleDraw(pUnknown *systemcom.IUnknown, dwAspect uint32, hdcDraw graphicsgdi.HDC, lprcBounds *foundation.RECT) error {
 	r1, _, _ := syscall.SyscallN(procOleDraw.Addr(), uintptr(unsafe.Pointer(pUnknown)), uintptr(dwAspect), uintptr(hdcDraw), uintptr(unsafe.Pointer(lprcBounds)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleDuplicateData calls OLE32!OleDuplicateData.
@@ -837,48 +848,52 @@ func OleDuplicateData(hSrc foundation.HANDLE, cfFormat CLIPBOARD_FORMAT, uiFlags
 // OleFlushClipboard calls OLE32!OleFlushClipboard.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleflushclipboard
 // Minimum OS: windows5.0.
-func OleFlushClipboard() foundation.HRESULT {
+func OleFlushClipboard() error {
 	r1, _, _ := syscall.SyscallN(procOleFlushClipboard.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleGetAutoConvert calls OLE32!OleGetAutoConvert.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olegetautoconvert
 // Minimum OS: windows5.0.
-func OleGetAutoConvert(clsidOld *win32.GUID, pClsidNew *win32.GUID) foundation.HRESULT {
+func OleGetAutoConvert(clsidOld *win32.GUID, pClsidNew *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procOleGetAutoConvert.Addr(), uintptr(unsafe.Pointer(clsidOld)), uintptr(unsafe.Pointer(pClsidNew)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleGetClipboard calls OLE32!OleGetClipboard.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olegetclipboard
 // Minimum OS: windows5.0.
-func OleGetClipboard(ppDataObj **systemcom.IDataObject) foundation.HRESULT {
+func OleGetClipboard(ppDataObj **systemcom.IDataObject) error {
 	r1, _, _ := syscall.SyscallN(procOleGetClipboard.Addr(), uintptr(unsafe.Pointer(ppDataObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleGetClipboardWithEnterpriseInfo calls ole32!OleGetClipboardWithEnterpriseInfo.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olegetclipboardwithenterpriseinfo
 // Minimum OS: windows10.0.10240.
-func OleGetClipboardWithEnterpriseInfo(dataObject **systemcom.IDataObject, dataEnterpriseId *foundation.PWSTR, sourceDescription *foundation.PWSTR, targetDescription *foundation.PWSTR, dataDescription *foundation.PWSTR) foundation.HRESULT {
+func OleGetClipboardWithEnterpriseInfo(dataObject **systemcom.IDataObject, dataEnterpriseId *foundation.PWSTR, sourceDescription *foundation.PWSTR, targetDescription *foundation.PWSTR, dataDescription *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procOleGetClipboardWithEnterpriseInfo.Addr(), uintptr(unsafe.Pointer(dataObject)), uintptr(unsafe.Pointer(dataEnterpriseId)), uintptr(unsafe.Pointer(sourceDescription)), uintptr(unsafe.Pointer(targetDescription)), uintptr(unsafe.Pointer(dataDescription)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleGetIconOfClass calls OLE32!OleGetIconOfClass.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olegeticonofclass
 // Minimum OS: windows5.0.
-func OleGetIconOfClass(rclsid *win32.GUID, lpszLabel foundation.PWSTR, fUseTypeAsLabel foundation.BOOL) foundation.HGLOBAL {
-	r1, _, _ := syscall.SyscallN(procOleGetIconOfClass.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(lpszLabel)), uintptr(fUseTypeAsLabel))
+func OleGetIconOfClass(rclsid *win32.GUID, lpszLabel string, fUseTypeAsLabel bool) foundation.HGLOBAL {
+	_lpszLabel := win32.UTF16Ptr(lpszLabel)
+	_fUseTypeAsLabel := win32.Bool32(fUseTypeAsLabel)
+	r1, _, _ := syscall.SyscallN(procOleGetIconOfClass.Addr(), uintptr(unsafe.Pointer(rclsid)), uintptr(unsafe.Pointer(_lpszLabel)), uintptr(_fUseTypeAsLabel))
 	return foundation.HGLOBAL(r1)
 }
 
 // OleGetIconOfFile calls ole32!OleGetIconOfFile.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olegeticonoffile
 // Minimum OS: windows5.0.
-func OleGetIconOfFile(lpszPath foundation.PWSTR, fUseFileAsLabel foundation.BOOL) foundation.HGLOBAL {
-	r1, _, _ := syscall.SyscallN(procOleGetIconOfFile.Addr(), uintptr(unsafe.Pointer(lpszPath)), uintptr(fUseFileAsLabel))
+func OleGetIconOfFile(lpszPath string, fUseFileAsLabel bool) foundation.HGLOBAL {
+	_lpszPath := win32.UTF16Ptr(lpszPath)
+	_fUseFileAsLabel := win32.Bool32(fUseFileAsLabel)
+	r1, _, _ := syscall.SyscallN(procOleGetIconOfFile.Addr(), uintptr(unsafe.Pointer(_lpszPath)), uintptr(_fUseFileAsLabel))
 	return foundation.HGLOBAL(r1)
 }
 
@@ -893,80 +908,87 @@ func OleIconToCursor(hinstExe foundation.HINSTANCE, hIcon uiwindowsandmessaging.
 // OleInitialize calls OLE32!OleInitialize.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleinitialize
 // Minimum OS: windows5.0.
-func OleInitialize(pvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleInitialize.Addr(), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.HRESULT(r1)
+func OleInitialize() error {
+	r1, _, _ := syscall.SyscallN(procOleInitialize.Addr(), 0)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleIsCurrentClipboard calls OLE32!OleIsCurrentClipboard.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleiscurrentclipboard
 // Minimum OS: windows5.0.
-func OleIsCurrentClipboard(pDataObj *systemcom.IDataObject) foundation.HRESULT {
+func OleIsCurrentClipboard(pDataObj *systemcom.IDataObject) error {
 	r1, _, _ := syscall.SyscallN(procOleIsCurrentClipboard.Addr(), uintptr(unsafe.Pointer(pDataObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleIsRunning calls OLE32!OleIsRunning.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleisrunning
 // Minimum OS: windows5.0.
-func OleIsRunning(pObject *IOleObject) foundation.BOOL {
+func OleIsRunning(pObject *IOleObject) bool {
 	r1, _, _ := syscall.SyscallN(procOleIsRunning.Addr(), uintptr(unsafe.Pointer(pObject)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // OleLoad calls OLE32!OleLoad.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleload
 // Minimum OS: windows5.0.
-func OleLoad(pStg *systemcomstructuredstorage.IStorage, riid *win32.GUID, pClientSite *IOleClientSite, ppvObj *unsafe.Pointer) foundation.HRESULT {
+func OleLoad(pStg *systemcomstructuredstorage.IStorage, riid *win32.GUID, pClientSite *IOleClientSite, ppvObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOleLoad.Addr(), uintptr(unsafe.Pointer(pStg)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pClientSite)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleLoadFromStream calls OLE32!OleLoadFromStream.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleloadfromstream
 // Minimum OS: windows5.0.
-func OleLoadFromStream(pStm *systemcom.IStream, iidInterface *win32.GUID, ppvObj *unsafe.Pointer) foundation.HRESULT {
+func OleLoadFromStream(pStm *systemcom.IStream, iidInterface *win32.GUID, ppvObj *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procOleLoadFromStream.Addr(), uintptr(unsafe.Pointer(pStm)), uintptr(unsafe.Pointer(iidInterface)), uintptr(unsafe.Pointer(ppvObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleLoadPicture calls OLEAUT32!OleLoadPicture.
 // https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-oleloadpicture
 // Minimum OS: windows5.0.
-func OleLoadPicture(lpstream *systemcom.IStream, lSize int32, fRunmode foundation.BOOL, riid *win32.GUID, lplpvObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleLoadPicture.Addr(), uintptr(unsafe.Pointer(lpstream)), uintptr(lSize), uintptr(fRunmode), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(lplpvObj)))
-	return foundation.HRESULT(r1)
+func OleLoadPicture(lpstream *systemcom.IStream, lSize int32, fRunmode bool, riid *win32.GUID, lplpvObj *unsafe.Pointer) error {
+	_fRunmode := win32.Bool32(fRunmode)
+	r1, _, _ := syscall.SyscallN(procOleLoadPicture.Addr(), uintptr(unsafe.Pointer(lpstream)), uintptr(lSize), uintptr(_fRunmode), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(lplpvObj)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleLoadPictureEx calls OLEAUT32!OleLoadPictureEx.
 // https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-oleloadpictureex
 // Minimum OS: windows5.0.
-func OleLoadPictureEx(lpstream *systemcom.IStream, lSize int32, fRunmode foundation.BOOL, riid *win32.GUID, xSizeDesired uint32, ySizeDesired uint32, dwFlags LOAD_PICTURE_FLAGS, lplpvObj *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleLoadPictureEx.Addr(), uintptr(unsafe.Pointer(lpstream)), uintptr(lSize), uintptr(fRunmode), uintptr(unsafe.Pointer(riid)), uintptr(xSizeDesired), uintptr(ySizeDesired), uintptr(dwFlags), uintptr(unsafe.Pointer(lplpvObj)))
-	return foundation.HRESULT(r1)
+func OleLoadPictureEx(lpstream *systemcom.IStream, lSize int32, fRunmode bool, riid *win32.GUID, xSizeDesired uint32, ySizeDesired uint32, dwFlags LOAD_PICTURE_FLAGS, lplpvObj *unsafe.Pointer) error {
+	_fRunmode := win32.Bool32(fRunmode)
+	r1, _, _ := syscall.SyscallN(procOleLoadPictureEx.Addr(), uintptr(unsafe.Pointer(lpstream)), uintptr(lSize), uintptr(_fRunmode), uintptr(unsafe.Pointer(riid)), uintptr(xSizeDesired), uintptr(ySizeDesired), uintptr(dwFlags), uintptr(unsafe.Pointer(lplpvObj)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleLoadPicturePath calls OLEAUT32!OleLoadPicturePath.
 // https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-oleloadpicturepath
 // Minimum OS: windows5.0.
-func OleLoadPicturePath(szURLorPath foundation.PWSTR, punkCaller *systemcom.IUnknown, dwReserved uint32, clrReserved uint32, riid *win32.GUID, ppvRet *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleLoadPicturePath.Addr(), uintptr(unsafe.Pointer(szURLorPath)), uintptr(unsafe.Pointer(punkCaller)), uintptr(dwReserved), uintptr(clrReserved), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvRet)))
-	return foundation.HRESULT(r1)
+func OleLoadPicturePath(szURLorPath string, punkCaller *systemcom.IUnknown, clrReserved uint32, riid *win32.GUID, ppvRet *unsafe.Pointer) error {
+	_szURLorPath := win32.UTF16Ptr(szURLorPath)
+	r1, _, _ := syscall.SyscallN(procOleLoadPicturePath.Addr(), uintptr(unsafe.Pointer(_szURLorPath)), uintptr(unsafe.Pointer(punkCaller)), 0, uintptr(clrReserved), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvRet)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleLockRunning calls OLE32!OleLockRunning.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olelockrunning
 // Minimum OS: windows5.0.
-func OleLockRunning(pUnknown *systemcom.IUnknown, fLock foundation.BOOL, fLastUnlockCloses foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleLockRunning.Addr(), uintptr(unsafe.Pointer(pUnknown)), uintptr(fLock), uintptr(fLastUnlockCloses))
-	return foundation.HRESULT(r1)
+func OleLockRunning(pUnknown *systemcom.IUnknown, fLock bool, fLastUnlockCloses bool) error {
+	_fLock := win32.Bool32(fLock)
+	_fLastUnlockCloses := win32.Bool32(fLastUnlockCloses)
+	r1, _, _ := syscall.SyscallN(procOleLockRunning.Addr(), uintptr(unsafe.Pointer(pUnknown)), uintptr(_fLock), uintptr(_fLastUnlockCloses))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleMetafilePictFromIconAndLabel calls ole32!OleMetafilePictFromIconAndLabel.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olemetafilepictfromiconandlabel
 // Minimum OS: windows5.0.
-func OleMetafilePictFromIconAndLabel(hIcon uiwindowsandmessaging.HICON, lpszLabel foundation.PWSTR, lpszSourceFile foundation.PWSTR, iIconIndex uint32) (foundation.HGLOBAL, error) {
-	r1, _, e1 := syscall.SyscallN(procOleMetafilePictFromIconAndLabel.Addr(), uintptr(hIcon), uintptr(unsafe.Pointer(lpszLabel)), uintptr(unsafe.Pointer(lpszSourceFile)), uintptr(iIconIndex))
+func OleMetafilePictFromIconAndLabel(hIcon uiwindowsandmessaging.HICON, lpszLabel string, lpszSourceFile string, iIconIndex uint32) (foundation.HGLOBAL, error) {
+	_lpszLabel := win32.UTF16Ptr(lpszLabel)
+	_lpszSourceFile := win32.UTF16Ptr(lpszSourceFile)
+	r1, _, e1 := syscall.SyscallN(procOleMetafilePictFromIconAndLabel.Addr(), uintptr(hIcon), uintptr(unsafe.Pointer(_lpszLabel)), uintptr(unsafe.Pointer(_lpszSourceFile)), uintptr(iIconIndex))
 	ret := foundation.HGLOBAL(r1)
 	if ret == ^foundation.HGLOBAL(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -977,152 +999,166 @@ func OleMetafilePictFromIconAndLabel(hIcon uiwindowsandmessaging.HICON, lpszLabe
 // OleNoteObjectVisible calls ole32!OleNoteObjectVisible.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olenoteobjectvisible
 // Minimum OS: windows5.0.
-func OleNoteObjectVisible(pUnknown *systemcom.IUnknown, fVisible foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleNoteObjectVisible.Addr(), uintptr(unsafe.Pointer(pUnknown)), uintptr(fVisible))
-	return foundation.HRESULT(r1)
+func OleNoteObjectVisible(pUnknown *systemcom.IUnknown, fVisible bool) error {
+	_fVisible := win32.Bool32(fVisible)
+	r1, _, _ := syscall.SyscallN(procOleNoteObjectVisible.Addr(), uintptr(unsafe.Pointer(pUnknown)), uintptr(_fVisible))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleQueryCreateFromData calls OLE32!OleQueryCreateFromData.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olequerycreatefromdata
 // Minimum OS: windows5.0.
-func OleQueryCreateFromData(pSrcDataObject *systemcom.IDataObject) foundation.HRESULT {
+func OleQueryCreateFromData(pSrcDataObject *systemcom.IDataObject) error {
 	r1, _, _ := syscall.SyscallN(procOleQueryCreateFromData.Addr(), uintptr(unsafe.Pointer(pSrcDataObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleQueryLinkFromData calls OLE32!OleQueryLinkFromData.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olequerylinkfromdata
 // Minimum OS: windows5.0.
-func OleQueryLinkFromData(pSrcDataObject *systemcom.IDataObject) foundation.HRESULT {
+func OleQueryLinkFromData(pSrcDataObject *systemcom.IDataObject) error {
 	r1, _, _ := syscall.SyscallN(procOleQueryLinkFromData.Addr(), uintptr(unsafe.Pointer(pSrcDataObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleRegEnumFormatEtc calls ole32!OleRegEnumFormatEtc.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleregenumformatetc
 // Minimum OS: windows5.0.
-func OleRegEnumFormatEtc(clsid *win32.GUID, dwDirection uint32, ppenum **systemcom.IEnumFORMATETC) foundation.HRESULT {
+func OleRegEnumFormatEtc(clsid *win32.GUID, dwDirection uint32, ppenum **systemcom.IEnumFORMATETC) error {
 	r1, _, _ := syscall.SyscallN(procOleRegEnumFormatEtc.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(dwDirection), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleRegEnumVerbs calls OLE32!OleRegEnumVerbs.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oleregenumverbs
 // Minimum OS: windows5.0.
-func OleRegEnumVerbs(clsid *win32.GUID, ppenum **IEnumOLEVERB) foundation.HRESULT {
+func OleRegEnumVerbs(clsid *win32.GUID, ppenum **IEnumOLEVERB) error {
 	r1, _, _ := syscall.SyscallN(procOleRegEnumVerbs.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(ppenum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleRegGetMiscStatus calls OLE32!OleRegGetMiscStatus.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olereggetmiscstatus
 // Minimum OS: windows5.0.
-func OleRegGetMiscStatus(clsid *win32.GUID, dwAspect uint32, pdwStatus *uint32) foundation.HRESULT {
+func OleRegGetMiscStatus(clsid *win32.GUID, dwAspect uint32, pdwStatus *uint32) error {
 	r1, _, _ := syscall.SyscallN(procOleRegGetMiscStatus.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(dwAspect), uintptr(unsafe.Pointer(pdwStatus)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleRegGetUserType calls OLE32!OleRegGetUserType.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olereggetusertype
 // Minimum OS: windows5.0.
-func OleRegGetUserType(clsid *win32.GUID, dwFormOfType uint32, pszUserType *foundation.PWSTR) foundation.HRESULT {
+func OleRegGetUserType(clsid *win32.GUID, dwFormOfType uint32, pszUserType *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procOleRegGetUserType.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(dwFormOfType), uintptr(unsafe.Pointer(pszUserType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleRun calls OLE32!OleRun.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olerun
 // Minimum OS: windows5.0.
-func OleRun(pUnknown *systemcom.IUnknown) foundation.HRESULT {
+func OleRun(pUnknown *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(procOleRun.Addr(), uintptr(unsafe.Pointer(pUnknown)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleSave calls OLE32!OleSave.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olesave
 // Minimum OS: windows5.0.
-func OleSave(pPS *systemcomstructuredstorage.IPersistStorage, pStg *systemcomstructuredstorage.IStorage, fSameAsLoad foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleSave.Addr(), uintptr(unsafe.Pointer(pPS)), uintptr(unsafe.Pointer(pStg)), uintptr(fSameAsLoad))
-	return foundation.HRESULT(r1)
+func OleSave(pPS *systemcomstructuredstorage.IPersistStorage, pStg *systemcomstructuredstorage.IStorage, fSameAsLoad bool) error {
+	_fSameAsLoad := win32.Bool32(fSameAsLoad)
+	r1, _, _ := syscall.SyscallN(procOleSave.Addr(), uintptr(unsafe.Pointer(pPS)), uintptr(unsafe.Pointer(pStg)), uintptr(_fSameAsLoad))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleSavePictureFile calls OLEAUT32!OleSavePictureFile.
 // https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-olesavepicturefile
-func OleSavePictureFile(lpdispPicture *systemcom.IDispatch, bstrFileName foundation.BSTR) foundation.HRESULT {
+func OleSavePictureFile(lpdispPicture *systemcom.IDispatch, bstrFileName foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procOleSavePictureFile.Addr(), uintptr(unsafe.Pointer(lpdispPicture)), uintptr(unsafe.Pointer(bstrFileName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleSaveToStream calls OLE32!OleSaveToStream.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olesavetostream
 // Minimum OS: windows5.0.
-func OleSaveToStream(pPStm *systemcom.IPersistStream, pStm *systemcom.IStream) foundation.HRESULT {
+func OleSaveToStream(pPStm *systemcom.IPersistStream, pStm *systemcom.IStream) error {
 	r1, _, _ := syscall.SyscallN(procOleSaveToStream.Addr(), uintptr(unsafe.Pointer(pPStm)), uintptr(unsafe.Pointer(pStm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleSetAutoConvert calls ole32!OleSetAutoConvert.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olesetautoconvert
 // Minimum OS: windows5.0.
-func OleSetAutoConvert(clsidOld *win32.GUID, clsidNew *win32.GUID) foundation.HRESULT {
+func OleSetAutoConvert(clsidOld *win32.GUID, clsidNew *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procOleSetAutoConvert.Addr(), uintptr(unsafe.Pointer(clsidOld)), uintptr(unsafe.Pointer(clsidNew)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleSetClipboard calls OLE32!OleSetClipboard.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olesetclipboard
 // Minimum OS: windows5.0.
-func OleSetClipboard(pDataObj *systemcom.IDataObject) foundation.HRESULT {
+func OleSetClipboard(pDataObj *systemcom.IDataObject) error {
 	r1, _, _ := syscall.SyscallN(procOleSetClipboard.Addr(), uintptr(unsafe.Pointer(pDataObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleSetContainedObject calls OLE32!OleSetContainedObject.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olesetcontainedobject
 // Minimum OS: windows5.0.
-func OleSetContainedObject(pUnknown *systemcom.IUnknown, fContained foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procOleSetContainedObject.Addr(), uintptr(unsafe.Pointer(pUnknown)), uintptr(fContained))
-	return foundation.HRESULT(r1)
+func OleSetContainedObject(pUnknown *systemcom.IUnknown, fContained bool) error {
+	_fContained := win32.Bool32(fContained)
+	r1, _, _ := syscall.SyscallN(procOleSetContainedObject.Addr(), uintptr(unsafe.Pointer(pUnknown)), uintptr(_fContained))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleSetMenuDescriptor calls OLE32!OleSetMenuDescriptor.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-olesetmenudescriptor
 // Minimum OS: windows5.0.
-func OleSetMenuDescriptor(holemenu uintptr, hwndFrame foundation.HWND, hwndActiveObject foundation.HWND, lpFrame *IOleInPlaceFrame, lpActiveObj *IOleInPlaceActiveObject) foundation.HRESULT {
+func OleSetMenuDescriptor(holemenu uintptr, hwndFrame foundation.HWND, hwndActiveObject foundation.HWND, lpFrame *IOleInPlaceFrame, lpActiveObj *IOleInPlaceActiveObject) error {
 	r1, _, _ := syscall.SyscallN(procOleSetMenuDescriptor.Addr(), uintptr(holemenu), uintptr(hwndFrame), uintptr(hwndActiveObject), uintptr(unsafe.Pointer(lpFrame)), uintptr(unsafe.Pointer(lpActiveObj)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleTranslateAccelerator calls OLE32!OleTranslateAccelerator.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-oletranslateaccelerator
 // Minimum OS: windows5.0.
-func OleTranslateAccelerator(lpFrame *IOleInPlaceFrame, lpFrameInfo *OLEINPLACEFRAMEINFO, lpmsg *uiwindowsandmessaging.MSG) foundation.HRESULT {
+func OleTranslateAccelerator(lpFrame *IOleInPlaceFrame, lpFrameInfo *OLEINPLACEFRAMEINFO, lpmsg *uiwindowsandmessaging.MSG) error {
 	r1, _, _ := syscall.SyscallN(procOleTranslateAccelerator.Addr(), uintptr(unsafe.Pointer(lpFrame)), uintptr(unsafe.Pointer(lpFrameInfo)), uintptr(unsafe.Pointer(lpmsg)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OleTranslateColor calls OLEAUT32!OleTranslateColor.
 // https://learn.microsoft.com/windows/win32/api/olectl/nf-olectl-oletranslatecolor
 // Minimum OS: windows5.0.
-func OleTranslateColor(clr uint32, hpal graphicsgdi.HPALETTE, lpcolorref *foundation.COLORREF) foundation.HRESULT {
+func OleTranslateColor(clr uint32, hpal graphicsgdi.HPALETTE, lpcolorref *foundation.COLORREF) error {
 	r1, _, _ := syscall.SyscallN(procOleTranslateColor.Addr(), uintptr(clr), uintptr(hpal), uintptr(unsafe.Pointer(lpcolorref)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
+}
+
+// OleUIAddVerbMenu calls oledlg!OleUIAddVerbMenuW.
+// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiaddverbmenuw
+// Minimum OS: windows5.0.
+func OleUIAddVerbMenu(lpOleObj *IOleObject, lpszShortType string, hMenu uiwindowsandmessaging.HMENU, uPos uint32, uIDVerbMin uint32, uIDVerbMax uint32, bAddConvert bool, idConvert uint32, lphMenu *uiwindowsandmessaging.HMENU) bool {
+	_lpszShortType := win32.UTF16Ptr(lpszShortType)
+	_bAddConvert := win32.Bool32(bAddConvert)
+	r1, _, _ := syscall.SyscallN(procOleUIAddVerbMenu.Addr(), uintptr(unsafe.Pointer(lpOleObj)), uintptr(unsafe.Pointer(_lpszShortType)), uintptr(hMenu), uintptr(uPos), uintptr(uIDVerbMin), uintptr(uIDVerbMax), uintptr(_bAddConvert), uintptr(idConvert), uintptr(unsafe.Pointer(lphMenu)))
+	return r1 != 0
 }
 
 // OleUIAddVerbMenuA calls oledlg!OleUIAddVerbMenuA.
 // https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiaddverbmenua
 // Minimum OS: windows5.0.
-func OleUIAddVerbMenuA(lpOleObj *IOleObject, lpszShortType foundation.PSTR, hMenu uiwindowsandmessaging.HMENU, uPos uint32, uIDVerbMin uint32, uIDVerbMax uint32, bAddConvert foundation.BOOL, idConvert uint32, lphMenu *uiwindowsandmessaging.HMENU) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procOleUIAddVerbMenuA.Addr(), uintptr(unsafe.Pointer(lpOleObj)), uintptr(unsafe.Pointer(lpszShortType)), uintptr(hMenu), uintptr(uPos), uintptr(uIDVerbMin), uintptr(uIDVerbMax), uintptr(bAddConvert), uintptr(idConvert), uintptr(unsafe.Pointer(lphMenu)))
-	return foundation.BOOL(r1)
+func OleUIAddVerbMenuA(lpOleObj *IOleObject, lpszShortType foundation.PSTR, hMenu uiwindowsandmessaging.HMENU, uPos uint32, uIDVerbMin uint32, uIDVerbMax uint32, bAddConvert bool, idConvert uint32, lphMenu *uiwindowsandmessaging.HMENU) bool {
+	_bAddConvert := win32.Bool32(bAddConvert)
+	r1, _, _ := syscall.SyscallN(procOleUIAddVerbMenuA.Addr(), uintptr(unsafe.Pointer(lpOleObj)), uintptr(unsafe.Pointer(lpszShortType)), uintptr(hMenu), uintptr(uPos), uintptr(uIDVerbMin), uintptr(uIDVerbMax), uintptr(_bAddConvert), uintptr(idConvert), uintptr(unsafe.Pointer(lphMenu)))
+	return r1 != 0
 }
 
-// OleUIAddVerbMenuW calls oledlg!OleUIAddVerbMenuW.
-// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiaddverbmenuw
+// OleUIBusy calls oledlg!OleUIBusyW.
+// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuibusyw
 // Minimum OS: windows5.0.
-func OleUIAddVerbMenuW(lpOleObj *IOleObject, lpszShortType foundation.PWSTR, hMenu uiwindowsandmessaging.HMENU, uPos uint32, uIDVerbMin uint32, uIDVerbMax uint32, bAddConvert foundation.BOOL, idConvert uint32, lphMenu *uiwindowsandmessaging.HMENU) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procOleUIAddVerbMenuW.Addr(), uintptr(unsafe.Pointer(lpOleObj)), uintptr(unsafe.Pointer(lpszShortType)), uintptr(hMenu), uintptr(uPos), uintptr(uIDVerbMin), uintptr(uIDVerbMax), uintptr(bAddConvert), uintptr(idConvert), uintptr(unsafe.Pointer(lphMenu)))
-	return foundation.BOOL(r1)
+func OleUIBusy(param0 *OLEUIBUSYW) uint32 {
+	r1, _, _ := syscall.SyscallN(procOleUIBusy.Addr(), uintptr(unsafe.Pointer(param0)))
+	return uint32(r1)
 }
 
 // OleUIBusyA calls oledlg!OleUIBusyA.
@@ -1133,20 +1169,21 @@ func OleUIBusyA(param0 *OLEUIBUSYA) uint32 {
 	return uint32(r1)
 }
 
-// OleUIBusyW calls oledlg!OleUIBusyW.
-// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuibusyw
-// Minimum OS: windows5.0.
-func OleUIBusyW(param0 *OLEUIBUSYW) uint32 {
-	r1, _, _ := syscall.SyscallN(procOleUIBusyW.Addr(), uintptr(unsafe.Pointer(param0)))
-	return uint32(r1)
-}
-
 // OleUICanConvertOrActivateAs calls oledlg!OleUICanConvertOrActivateAs.
 // https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuicanconvertoractivateas
 // Minimum OS: windows5.0.
-func OleUICanConvertOrActivateAs(rClsid *win32.GUID, fIsLinkedObject foundation.BOOL, wFormat uint16) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procOleUICanConvertOrActivateAs.Addr(), uintptr(unsafe.Pointer(rClsid)), uintptr(fIsLinkedObject), uintptr(wFormat))
-	return foundation.BOOL(r1)
+func OleUICanConvertOrActivateAs(rClsid *win32.GUID, fIsLinkedObject bool, wFormat uint16) bool {
+	_fIsLinkedObject := win32.Bool32(fIsLinkedObject)
+	r1, _, _ := syscall.SyscallN(procOleUICanConvertOrActivateAs.Addr(), uintptr(unsafe.Pointer(rClsid)), uintptr(_fIsLinkedObject), uintptr(wFormat))
+	return r1 != 0
+}
+
+// OleUIChangeIcon calls oledlg!OleUIChangeIconW.
+// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuichangeiconw
+// Minimum OS: windows5.0.
+func OleUIChangeIcon(param0 *OLEUICHANGEICONW) uint32 {
+	r1, _, _ := syscall.SyscallN(procOleUIChangeIcon.Addr(), uintptr(unsafe.Pointer(param0)))
+	return uint32(r1)
 }
 
 // OleUIChangeIconA calls oledlg!OleUIChangeIconA.
@@ -1157,11 +1194,11 @@ func OleUIChangeIconA(param0 *OLEUICHANGEICONA) uint32 {
 	return uint32(r1)
 }
 
-// OleUIChangeIconW calls oledlg!OleUIChangeIconW.
-// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuichangeiconw
+// OleUIChangeSource calls oledlg!OleUIChangeSourceW.
+// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuichangesourcew
 // Minimum OS: windows5.0.
-func OleUIChangeIconW(param0 *OLEUICHANGEICONW) uint32 {
-	r1, _, _ := syscall.SyscallN(procOleUIChangeIconW.Addr(), uintptr(unsafe.Pointer(param0)))
+func OleUIChangeSource(param0 *OLEUICHANGESOURCEW) uint32 {
+	r1, _, _ := syscall.SyscallN(procOleUIChangeSource.Addr(), uintptr(unsafe.Pointer(param0)))
 	return uint32(r1)
 }
 
@@ -1173,11 +1210,11 @@ func OleUIChangeSourceA(param0 *OLEUICHANGESOURCEA) uint32 {
 	return uint32(r1)
 }
 
-// OleUIChangeSourceW calls oledlg!OleUIChangeSourceW.
-// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuichangesourcew
+// OleUIConvert calls oledlg!OleUIConvertW.
+// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiconvertw
 // Minimum OS: windows5.0.
-func OleUIChangeSourceW(param0 *OLEUICHANGESOURCEW) uint32 {
-	r1, _, _ := syscall.SyscallN(procOleUIChangeSourceW.Addr(), uintptr(unsafe.Pointer(param0)))
+func OleUIConvert(param0 *OLEUICONVERTW) uint32 {
+	r1, _, _ := syscall.SyscallN(procOleUIConvert.Addr(), uintptr(unsafe.Pointer(param0)))
 	return uint32(r1)
 }
 
@@ -1189,11 +1226,11 @@ func OleUIConvertA(param0 *OLEUICONVERTA) uint32 {
 	return uint32(r1)
 }
 
-// OleUIConvertW calls oledlg!OleUIConvertW.
-// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiconvertw
+// OleUIEditLinks calls oledlg!OleUIEditLinksW.
+// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuieditlinksw
 // Minimum OS: windows5.0.
-func OleUIConvertW(param0 *OLEUICONVERTW) uint32 {
-	r1, _, _ := syscall.SyscallN(procOleUIConvertW.Addr(), uintptr(unsafe.Pointer(param0)))
+func OleUIEditLinks(param0 *OLEUIEDITLINKSW) uint32 {
+	r1, _, _ := syscall.SyscallN(procOleUIEditLinks.Addr(), uintptr(unsafe.Pointer(param0)))
 	return uint32(r1)
 }
 
@@ -1205,11 +1242,11 @@ func OleUIEditLinksA(param0 *OLEUIEDITLINKSA) uint32 {
 	return uint32(r1)
 }
 
-// OleUIEditLinksW calls oledlg!OleUIEditLinksW.
-// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuieditlinksw
+// OleUIInsertObject calls oledlg!OleUIInsertObjectW.
+// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiinsertobjectw
 // Minimum OS: windows5.0.
-func OleUIEditLinksW(param0 *OLEUIEDITLINKSW) uint32 {
-	r1, _, _ := syscall.SyscallN(procOleUIEditLinksW.Addr(), uintptr(unsafe.Pointer(param0)))
+func OleUIInsertObject(param0 *OLEUIINSERTOBJECTW) uint32 {
+	r1, _, _ := syscall.SyscallN(procOleUIInsertObject.Addr(), uintptr(unsafe.Pointer(param0)))
 	return uint32(r1)
 }
 
@@ -1221,11 +1258,11 @@ func OleUIInsertObjectA(param0 *OLEUIINSERTOBJECTA) uint32 {
 	return uint32(r1)
 }
 
-// OleUIInsertObjectW calls oledlg!OleUIInsertObjectW.
-// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiinsertobjectw
+// OleUIObjectProperties calls oledlg!OleUIObjectPropertiesW.
+// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiobjectpropertiesw
 // Minimum OS: windows5.0.
-func OleUIInsertObjectW(param0 *OLEUIINSERTOBJECTW) uint32 {
-	r1, _, _ := syscall.SyscallN(procOleUIInsertObjectW.Addr(), uintptr(unsafe.Pointer(param0)))
+func OleUIObjectProperties(param0 *OLEUIOBJECTPROPSW) uint32 {
+	r1, _, _ := syscall.SyscallN(procOleUIObjectProperties.Addr(), uintptr(unsafe.Pointer(param0)))
 	return uint32(r1)
 }
 
@@ -1237,11 +1274,11 @@ func OleUIObjectPropertiesA(param0 *OLEUIOBJECTPROPSA) uint32 {
 	return uint32(r1)
 }
 
-// OleUIObjectPropertiesW calls oledlg!OleUIObjectPropertiesW.
-// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiobjectpropertiesw
+// OleUIPasteSpecial calls oledlg!OleUIPasteSpecialW.
+// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuipastespecialw
 // Minimum OS: windows5.0.
-func OleUIObjectPropertiesW(param0 *OLEUIOBJECTPROPSW) uint32 {
-	r1, _, _ := syscall.SyscallN(procOleUIObjectPropertiesW.Addr(), uintptr(unsafe.Pointer(param0)))
+func OleUIPasteSpecial(param0 *OLEUIPASTESPECIALW) uint32 {
+	r1, _, _ := syscall.SyscallN(procOleUIPasteSpecial.Addr(), uintptr(unsafe.Pointer(param0)))
 	return uint32(r1)
 }
 
@@ -1253,12 +1290,12 @@ func OleUIPasteSpecialA(param0 *OLEUIPASTESPECIALA) uint32 {
 	return uint32(r1)
 }
 
-// OleUIPasteSpecialW calls oledlg!OleUIPasteSpecialW.
-// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuipastespecialw
+// OleUIPromptUser calls oledlg!OleUIPromptUserW.
+// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuipromptuserw
 // Minimum OS: windows5.0.
-func OleUIPasteSpecialW(param0 *OLEUIPASTESPECIALW) uint32 {
-	r1, _, _ := syscall.SyscallN(procOleUIPasteSpecialW.Addr(), uintptr(unsafe.Pointer(param0)))
-	return uint32(r1)
+func OleUIPromptUser(nTemplate int32, hwndParent foundation.HWND) int32 {
+	r1, _, _ := syscall.SyscallN(procOleUIPromptUser.Addr(), uintptr(nTemplate), uintptr(hwndParent))
+	return int32(r1)
 }
 
 // OleUIPromptUserA calls oledlg!OleUIPromptUserA.
@@ -1269,28 +1306,21 @@ func OleUIPromptUserA(nTemplate int32, hwndParent foundation.HWND) int32 {
 	return int32(r1)
 }
 
-// OleUIPromptUserW calls oledlg!OleUIPromptUserW.
-// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuipromptuserw
+// OleUIUpdateLinks calls oledlg!OleUIUpdateLinksW.
+// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiupdatelinksw
 // Minimum OS: windows5.0.
-func OleUIPromptUserW(nTemplate int32, hwndParent foundation.HWND) int32 {
-	r1, _, _ := syscall.SyscallN(procOleUIPromptUserW.Addr(), uintptr(nTemplate), uintptr(hwndParent))
-	return int32(r1)
+func OleUIUpdateLinks(lpOleUILinkCntr *IOleUILinkContainerW, hwndParent foundation.HWND, lpszTitle string, cLinks int32) bool {
+	_lpszTitle := win32.UTF16Ptr(lpszTitle)
+	r1, _, _ := syscall.SyscallN(procOleUIUpdateLinks.Addr(), uintptr(unsafe.Pointer(lpOleUILinkCntr)), uintptr(hwndParent), uintptr(unsafe.Pointer(_lpszTitle)), uintptr(cLinks))
+	return r1 != 0
 }
 
 // OleUIUpdateLinksA calls oledlg!OleUIUpdateLinksA.
 // https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiupdatelinksa
 // Minimum OS: windows5.0.
-func OleUIUpdateLinksA(lpOleUILinkCntr *IOleUILinkContainerA, hwndParent foundation.HWND, lpszTitle foundation.PSTR, cLinks int32) foundation.BOOL {
+func OleUIUpdateLinksA(lpOleUILinkCntr *IOleUILinkContainerA, hwndParent foundation.HWND, lpszTitle foundation.PSTR, cLinks int32) bool {
 	r1, _, _ := syscall.SyscallN(procOleUIUpdateLinksA.Addr(), uintptr(unsafe.Pointer(lpOleUILinkCntr)), uintptr(hwndParent), uintptr(unsafe.Pointer(lpszTitle)), uintptr(cLinks))
-	return foundation.BOOL(r1)
-}
-
-// OleUIUpdateLinksW calls oledlg!OleUIUpdateLinksW.
-// https://learn.microsoft.com/windows/win32/api/oledlg/nf-oledlg-oleuiupdatelinksw
-// Minimum OS: windows5.0.
-func OleUIUpdateLinksW(lpOleUILinkCntr *IOleUILinkContainerW, hwndParent foundation.HWND, lpszTitle foundation.PWSTR, cLinks int32) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procOleUIUpdateLinksW.Addr(), uintptr(unsafe.Pointer(lpOleUILinkCntr)), uintptr(hwndParent), uintptr(unsafe.Pointer(lpszTitle)), uintptr(cLinks))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // OleUninitialize calls OLE32!OleUninitialize.
@@ -1302,38 +1332,42 @@ func OleUninitialize() {
 
 // QueryPathOfRegTypeLib calls OLEAUT32!QueryPathOfRegTypeLib.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-querypathofregtypelib
-func QueryPathOfRegTypeLib(guid *win32.GUID, wMaj uint16, wMin uint16, lcid uint32, lpbstrPathName *foundation.BSTR) foundation.HRESULT {
+func QueryPathOfRegTypeLib(guid *win32.GUID, wMaj uint16, wMin uint16, lcid uint32, lpbstrPathName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procQueryPathOfRegTypeLib.Addr(), uintptr(unsafe.Pointer(guid)), uintptr(wMaj), uintptr(wMin), uintptr(lcid), uintptr(unsafe.Pointer(lpbstrPathName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterActiveObject calls OLEAUT32!RegisterActiveObject.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-registeractiveobject
-func RegisterActiveObject(punk *systemcom.IUnknown, rclsid *win32.GUID, dwFlags ACTIVEOBJECT_FLAGS, pdwRegister *uint32) foundation.HRESULT {
+func RegisterActiveObject(punk *systemcom.IUnknown, rclsid *win32.GUID, dwFlags ACTIVEOBJECT_FLAGS, pdwRegister *uint32) error {
 	r1, _, _ := syscall.SyscallN(procRegisterActiveObject.Addr(), uintptr(unsafe.Pointer(punk)), uintptr(unsafe.Pointer(rclsid)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdwRegister)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterDragDrop calls OLE32!RegisterDragDrop.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-registerdragdrop
 // Minimum OS: windows5.0.
-func RegisterDragDrop(hwnd foundation.HWND, pDropTarget *IDropTarget) foundation.HRESULT {
+func RegisterDragDrop(hwnd foundation.HWND, pDropTarget *IDropTarget) error {
 	r1, _, _ := syscall.SyscallN(procRegisterDragDrop.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pDropTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterTypeLib calls OLEAUT32!RegisterTypeLib.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-registertypelib
-func RegisterTypeLib(ptlib *systemcom.ITypeLib, szFullPath foundation.PWSTR, szHelpDir foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRegisterTypeLib.Addr(), uintptr(unsafe.Pointer(ptlib)), uintptr(unsafe.Pointer(szFullPath)), uintptr(unsafe.Pointer(szHelpDir)))
-	return foundation.HRESULT(r1)
+func RegisterTypeLib(ptlib *systemcom.ITypeLib, szFullPath string, szHelpDir string) error {
+	_szFullPath := win32.UTF16Ptr(szFullPath)
+	_szHelpDir := win32.UTF16Ptr(szHelpDir)
+	r1, _, _ := syscall.SyscallN(procRegisterTypeLib.Addr(), uintptr(unsafe.Pointer(ptlib)), uintptr(unsafe.Pointer(_szFullPath)), uintptr(unsafe.Pointer(_szHelpDir)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterTypeLibForUser calls OLEAUT32!RegisterTypeLibForUser.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-registertypelibforuser
-func RegisterTypeLibForUser(ptlib *systemcom.ITypeLib, szFullPath foundation.PWSTR, szHelpDir foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRegisterTypeLibForUser.Addr(), uintptr(unsafe.Pointer(ptlib)), uintptr(unsafe.Pointer(szFullPath)), uintptr(unsafe.Pointer(szHelpDir)))
-	return foundation.HRESULT(r1)
+func RegisterTypeLibForUser(ptlib *systemcom.ITypeLib, szFullPath string, szHelpDir string) error {
+	_szFullPath := win32.UTF16Ptr(szFullPath)
+	_szHelpDir := win32.UTF16Ptr(szHelpDir)
+	r1, _, _ := syscall.SyscallN(procRegisterTypeLibForUser.Addr(), uintptr(unsafe.Pointer(ptlib)), uintptr(unsafe.Pointer(_szFullPath)), uintptr(unsafe.Pointer(_szHelpDir)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReleaseStgMedium calls OLE32!ReleaseStgMedium.
@@ -1345,67 +1379,67 @@ func ReleaseStgMedium(param0 *systemcom.STGMEDIUM) {
 
 // RevokeActiveObject calls OLEAUT32!RevokeActiveObject.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-revokeactiveobject
-func RevokeActiveObject(dwRegister uint32, pvReserved unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procRevokeActiveObject.Addr(), uintptr(dwRegister), uintptr(unsafe.Pointer(pvReserved)))
-	return foundation.HRESULT(r1)
+func RevokeActiveObject(dwRegister uint32) error {
+	r1, _, _ := syscall.SyscallN(procRevokeActiveObject.Addr(), uintptr(dwRegister), 0)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RevokeDragDrop calls OLE32!RevokeDragDrop.
 // https://learn.microsoft.com/windows/win32/api/ole2/nf-ole2-revokedragdrop
 // Minimum OS: windows5.0.
-func RevokeDragDrop(hwnd foundation.HWND) foundation.HRESULT {
+func RevokeDragDrop(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procRevokeDragDrop.Addr(), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayAccessData calls OLEAUT32!SafeArrayAccessData.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayaccessdata
-func SafeArrayAccessData(psa *systemcom.SAFEARRAY, ppvData *unsafe.Pointer) foundation.HRESULT {
+func SafeArrayAccessData(psa *systemcom.SAFEARRAY, ppvData *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayAccessData.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(ppvData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayAddRef calls OLEAUT32!SafeArrayAddRef.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayaddref
 // Minimum OS: windows5.1.2600.
-func SafeArrayAddRef(psa *systemcom.SAFEARRAY, ppDataToRelease *unsafe.Pointer) foundation.HRESULT {
+func SafeArrayAddRef(psa *systemcom.SAFEARRAY, ppDataToRelease *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayAddRef.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(ppDataToRelease)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayAllocData calls OLEAUT32!SafeArrayAllocData.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayallocdata
-func SafeArrayAllocData(psa *systemcom.SAFEARRAY) foundation.HRESULT {
+func SafeArrayAllocData(psa *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayAllocData.Addr(), uintptr(unsafe.Pointer(psa)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayAllocDescriptor calls OLEAUT32!SafeArrayAllocDescriptor.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayallocdescriptor
-func SafeArrayAllocDescriptor(cDims uint32, ppsaOut **systemcom.SAFEARRAY) foundation.HRESULT {
+func SafeArrayAllocDescriptor(cDims uint32, ppsaOut **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayAllocDescriptor.Addr(), uintptr(cDims), uintptr(unsafe.Pointer(ppsaOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayAllocDescriptorEx calls OLEAUT32!SafeArrayAllocDescriptorEx.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayallocdescriptorex
-func SafeArrayAllocDescriptorEx(vt systemvariant.VARENUM, cDims uint32, ppsaOut **systemcom.SAFEARRAY) foundation.HRESULT {
+func SafeArrayAllocDescriptorEx(vt systemvariant.VARENUM, cDims uint32, ppsaOut **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayAllocDescriptorEx.Addr(), uintptr(vt), uintptr(cDims), uintptr(unsafe.Pointer(ppsaOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayCopy calls OLEAUT32!SafeArrayCopy.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraycopy
-func SafeArrayCopy(psa *systemcom.SAFEARRAY, ppsaOut **systemcom.SAFEARRAY) foundation.HRESULT {
+func SafeArrayCopy(psa *systemcom.SAFEARRAY, ppsaOut **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayCopy.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(ppsaOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayCopyData calls OLEAUT32!SafeArrayCopyData.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraycopydata
-func SafeArrayCopyData(psaSource *systemcom.SAFEARRAY, psaTarget *systemcom.SAFEARRAY) foundation.HRESULT {
+func SafeArrayCopyData(psaSource *systemcom.SAFEARRAY, psaTarget *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayCopyData.Addr(), uintptr(unsafe.Pointer(psaSource)), uintptr(unsafe.Pointer(psaTarget)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayCreate calls OLEAUT32!SafeArrayCreate.
@@ -1438,23 +1472,23 @@ func SafeArrayCreateVectorEx(vt systemvariant.VARENUM, lLbound int32, cElements 
 
 // SafeArrayDestroy calls OLEAUT32!SafeArrayDestroy.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraydestroy
-func SafeArrayDestroy(psa *systemcom.SAFEARRAY) foundation.HRESULT {
+func SafeArrayDestroy(psa *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayDestroy.Addr(), uintptr(unsafe.Pointer(psa)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayDestroyData calls OLEAUT32!SafeArrayDestroyData.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraydestroydata
-func SafeArrayDestroyData(psa *systemcom.SAFEARRAY) foundation.HRESULT {
+func SafeArrayDestroyData(psa *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayDestroyData.Addr(), uintptr(unsafe.Pointer(psa)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayDestroyDescriptor calls OLEAUT32!SafeArrayDestroyDescriptor.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraydestroydescriptor
-func SafeArrayDestroyDescriptor(psa *systemcom.SAFEARRAY) foundation.HRESULT {
+func SafeArrayDestroyDescriptor(psa *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayDestroyDescriptor.Addr(), uintptr(unsafe.Pointer(psa)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayGetDim calls OLEAUT32!SafeArrayGetDim.
@@ -1466,9 +1500,9 @@ func SafeArrayGetDim(psa *systemcom.SAFEARRAY) uint32 {
 
 // SafeArrayGetElement calls OLEAUT32!SafeArrayGetElement.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraygetelement
-func SafeArrayGetElement(psa *systemcom.SAFEARRAY, rgIndices *int32, pv unsafe.Pointer) foundation.HRESULT {
+func SafeArrayGetElement(psa *systemcom.SAFEARRAY, rgIndices *int32, pv unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayGetElement.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(rgIndices)), uintptr(unsafe.Pointer(pv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayGetElemsize calls OLEAUT32!SafeArrayGetElemsize.
@@ -1480,65 +1514,65 @@ func SafeArrayGetElemsize(psa *systemcom.SAFEARRAY) uint32 {
 
 // SafeArrayGetIID calls OLEAUT32!SafeArrayGetIID.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraygetiid
-func SafeArrayGetIID(psa *systemcom.SAFEARRAY, pguid *win32.GUID) foundation.HRESULT {
+func SafeArrayGetIID(psa *systemcom.SAFEARRAY, pguid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayGetIID.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(pguid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayGetLBound calls OLEAUT32!SafeArrayGetLBound.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraygetlbound
-func SafeArrayGetLBound(psa *systemcom.SAFEARRAY, nDim uint32, plLbound *int32) foundation.HRESULT {
+func SafeArrayGetLBound(psa *systemcom.SAFEARRAY, nDim uint32, plLbound *int32) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayGetLBound.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(nDim), uintptr(unsafe.Pointer(plLbound)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayGetRecordInfo calls OLEAUT32!SafeArrayGetRecordInfo.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraygetrecordinfo
-func SafeArrayGetRecordInfo(psa *systemcom.SAFEARRAY, prinfo **IRecordInfo) foundation.HRESULT {
+func SafeArrayGetRecordInfo(psa *systemcom.SAFEARRAY, prinfo **IRecordInfo) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayGetRecordInfo.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(prinfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayGetUBound calls OLEAUT32!SafeArrayGetUBound.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraygetubound
-func SafeArrayGetUBound(psa *systemcom.SAFEARRAY, nDim uint32, plUbound *int32) foundation.HRESULT {
+func SafeArrayGetUBound(psa *systemcom.SAFEARRAY, nDim uint32, plUbound *int32) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayGetUBound.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(nDim), uintptr(unsafe.Pointer(plUbound)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayGetVartype calls OLEAUT32!SafeArrayGetVartype.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraygetvartype
-func SafeArrayGetVartype(psa *systemcom.SAFEARRAY, pvt *systemvariant.VARENUM) foundation.HRESULT {
+func SafeArrayGetVartype(psa *systemcom.SAFEARRAY, pvt *systemvariant.VARENUM) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayGetVartype.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(pvt)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayLock calls OLEAUT32!SafeArrayLock.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraylock
-func SafeArrayLock(psa *systemcom.SAFEARRAY) foundation.HRESULT {
+func SafeArrayLock(psa *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayLock.Addr(), uintptr(unsafe.Pointer(psa)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayPtrOfIndex calls OLEAUT32!SafeArrayPtrOfIndex.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayptrofindex
-func SafeArrayPtrOfIndex(psa *systemcom.SAFEARRAY, rgIndices *int32, ppvData *unsafe.Pointer) foundation.HRESULT {
+func SafeArrayPtrOfIndex(psa *systemcom.SAFEARRAY, rgIndices *int32, ppvData *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayPtrOfIndex.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(rgIndices)), uintptr(unsafe.Pointer(ppvData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayPutElement calls OLEAUT32!SafeArrayPutElement.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayputelement
-func SafeArrayPutElement(psa *systemcom.SAFEARRAY, rgIndices *int32, pv unsafe.Pointer) foundation.HRESULT {
+func SafeArrayPutElement(psa *systemcom.SAFEARRAY, rgIndices *int32, pv unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayPutElement.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(rgIndices)), uintptr(unsafe.Pointer(pv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayRedim calls OLEAUT32!SafeArrayRedim.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayredim
-func SafeArrayRedim(psa *systemcom.SAFEARRAY, psaboundNew *systemcom.SAFEARRAYBOUND) foundation.HRESULT {
+func SafeArrayRedim(psa *systemcom.SAFEARRAY, psaboundNew *systemcom.SAFEARRAYBOUND) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayRedim.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(psaboundNew)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayReleaseData calls OLEAUT32!SafeArrayReleaseData.
@@ -1557,240 +1591,241 @@ func SafeArrayReleaseDescriptor(psa *systemcom.SAFEARRAY) {
 
 // SafeArraySetIID calls OLEAUT32!SafeArraySetIID.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraysetiid
-func SafeArraySetIID(psa *systemcom.SAFEARRAY, guid *win32.GUID) foundation.HRESULT {
+func SafeArraySetIID(psa *systemcom.SAFEARRAY, guid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procSafeArraySetIID.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(guid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArraySetRecordInfo calls OLEAUT32!SafeArraySetRecordInfo.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearraysetrecordinfo
-func SafeArraySetRecordInfo(psa *systemcom.SAFEARRAY, prinfo *IRecordInfo) foundation.HRESULT {
+func SafeArraySetRecordInfo(psa *systemcom.SAFEARRAY, prinfo *IRecordInfo) error {
 	r1, _, _ := syscall.SyscallN(procSafeArraySetRecordInfo.Addr(), uintptr(unsafe.Pointer(psa)), uintptr(unsafe.Pointer(prinfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayUnaccessData calls OLEAUT32!SafeArrayUnaccessData.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayunaccessdata
-func SafeArrayUnaccessData(psa *systemcom.SAFEARRAY) foundation.HRESULT {
+func SafeArrayUnaccessData(psa *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayUnaccessData.Addr(), uintptr(unsafe.Pointer(psa)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SafeArrayUnlock calls OLEAUT32!SafeArrayUnlock.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-safearrayunlock
-func SafeArrayUnlock(psa *systemcom.SAFEARRAY) foundation.HRESULT {
+func SafeArrayUnlock(psa *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procSafeArrayUnlock.Addr(), uintptr(unsafe.Pointer(psa)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnRegisterTypeLib calls OLEAUT32!UnRegisterTypeLib.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-unregistertypelib
-func UnRegisterTypeLib(libID *win32.GUID, wVerMajor uint16, wVerMinor uint16, lcid uint32, syskind systemcom.SYSKIND) foundation.HRESULT {
+func UnRegisterTypeLib(libID *win32.GUID, wVerMajor uint16, wVerMinor uint16, lcid uint32, syskind systemcom.SYSKIND) error {
 	r1, _, _ := syscall.SyscallN(procUnRegisterTypeLib.Addr(), uintptr(unsafe.Pointer(libID)), uintptr(wVerMajor), uintptr(wVerMinor), uintptr(lcid), uintptr(syskind))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnRegisterTypeLibForUser calls OLEAUT32!UnRegisterTypeLibForUser.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-unregistertypelibforuser
-func UnRegisterTypeLibForUser(libID *win32.GUID, wMajorVerNum uint16, wMinorVerNum uint16, lcid uint32, syskind systemcom.SYSKIND) foundation.HRESULT {
+func UnRegisterTypeLibForUser(libID *win32.GUID, wMajorVerNum uint16, wMinorVerNum uint16, lcid uint32, syskind systemcom.SYSKIND) error {
 	r1, _, _ := syscall.SyscallN(procUnRegisterTypeLibForUser.Addr(), uintptr(unsafe.Pointer(libID)), uintptr(wMajorVerNum), uintptr(wMinorVerNum), uintptr(lcid), uintptr(syskind))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarAbs calls OLEAUT32!VarAbs.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varabs
-func VarAbs(pvarIn *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarAbs(pvarIn *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarAbs.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarAdd calls OLEAUT32!VarAdd.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varadd
-func VarAdd(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarAdd(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarAdd.Addr(), uintptr(unsafe.Pointer(pvarLeft)), uintptr(unsafe.Pointer(pvarRight)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarAnd calls OLEAUT32!VarAnd.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varand
-func VarAnd(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarAnd(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarAnd.Addr(), uintptr(unsafe.Pointer(pvarLeft)), uintptr(unsafe.Pointer(pvarRight)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBoolFromDec calls OLEAUT32!VarBoolFromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromdec
-func VarBoolFromDec(pdecIn *foundation.DECIMAL, pboolOut *foundation.VARIANT_BOOL) foundation.HRESULT {
+func VarBoolFromDec(pdecIn *foundation.DECIMAL, pboolOut *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(procVarBoolFromDec.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(pboolOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBoolFromDisp calls OLEAUT32!VarBoolFromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromdisp
-func VarBoolFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pboolOut *foundation.VARIANT_BOOL) foundation.HRESULT {
+func VarBoolFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pboolOut *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(procVarBoolFromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(unsafe.Pointer(pboolOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBoolFromI1 calls OLEAUT32!VarBoolFromI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromi1
-func VarBoolFromI1(cIn foundation.CHAR, pboolOut *foundation.VARIANT_BOOL) foundation.HRESULT {
+func VarBoolFromI1(cIn foundation.CHAR, pboolOut *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(procVarBoolFromI1.Addr(), uintptr(cIn), uintptr(unsafe.Pointer(pboolOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBoolFromI2 calls OLEAUT32!VarBoolFromI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromi2
-func VarBoolFromI2(sIn int16, pboolOut *foundation.VARIANT_BOOL) foundation.HRESULT {
+func VarBoolFromI2(sIn int16, pboolOut *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(procVarBoolFromI2.Addr(), uintptr(sIn), uintptr(unsafe.Pointer(pboolOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBoolFromI4 calls OLEAUT32!VarBoolFromI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromi4
-func VarBoolFromI4(lIn int32, pboolOut *foundation.VARIANT_BOOL) foundation.HRESULT {
+func VarBoolFromI4(lIn int32, pboolOut *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(procVarBoolFromI4.Addr(), uintptr(lIn), uintptr(unsafe.Pointer(pboolOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBoolFromI8 calls OLEAUT32!VarBoolFromI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromi8
-func VarBoolFromI8(i64In int64, pboolOut *foundation.VARIANT_BOOL) foundation.HRESULT {
+func VarBoolFromI8(i64In int64, pboolOut *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(procVarBoolFromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pboolOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBoolFromStr calls OLEAUT32!VarBoolFromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromstr
-func VarBoolFromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, pboolOut *foundation.VARIANT_BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarBoolFromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pboolOut)))
-	return foundation.HRESULT(r1)
+func VarBoolFromStr(strIn string, lcid uint32, dwFlags uint32, pboolOut *foundation.VARIANT_BOOL) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarBoolFromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pboolOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBoolFromUI1 calls OLEAUT32!VarBoolFromUI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromui1
-func VarBoolFromUI1(bIn byte, pboolOut *foundation.VARIANT_BOOL) foundation.HRESULT {
+func VarBoolFromUI1(bIn byte, pboolOut *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(procVarBoolFromUI1.Addr(), uintptr(bIn), uintptr(unsafe.Pointer(pboolOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBoolFromUI2 calls OLEAUT32!VarBoolFromUI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromui2
-func VarBoolFromUI2(uiIn uint16, pboolOut *foundation.VARIANT_BOOL) foundation.HRESULT {
+func VarBoolFromUI2(uiIn uint16, pboolOut *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(procVarBoolFromUI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(pboolOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBoolFromUI4 calls OLEAUT32!VarBoolFromUI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromui4
-func VarBoolFromUI4(ulIn uint32, pboolOut *foundation.VARIANT_BOOL) foundation.HRESULT {
+func VarBoolFromUI4(ulIn uint32, pboolOut *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(procVarBoolFromUI4.Addr(), uintptr(ulIn), uintptr(unsafe.Pointer(pboolOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBoolFromUI8 calls OLEAUT32!VarBoolFromUI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varboolfromui8
-func VarBoolFromUI8(i64In uint64, pboolOut *foundation.VARIANT_BOOL) foundation.HRESULT {
+func VarBoolFromUI8(i64In uint64, pboolOut *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(procVarBoolFromUI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pboolOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBstrCat calls OLEAUT32!VarBstrCat.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrcat
-func VarBstrCat(bstrLeft foundation.BSTR, bstrRight foundation.BSTR, pbstrResult *foundation.BSTR) foundation.HRESULT {
+func VarBstrCat(bstrLeft foundation.BSTR, bstrRight foundation.BSTR, pbstrResult *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarBstrCat.Addr(), uintptr(unsafe.Pointer(bstrLeft)), uintptr(unsafe.Pointer(bstrRight)), uintptr(unsafe.Pointer(pbstrResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBstrCmp calls OLEAUT32!VarBstrCmp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrcmp
-func VarBstrCmp(bstrLeft foundation.BSTR, bstrRight foundation.BSTR, lcid uint32, dwFlags uint32) foundation.HRESULT {
+func VarBstrCmp(bstrLeft foundation.BSTR, bstrRight foundation.BSTR, lcid uint32, dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procVarBstrCmp.Addr(), uintptr(unsafe.Pointer(bstrLeft)), uintptr(unsafe.Pointer(bstrRight)), uintptr(lcid), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBstrFromBool calls OLEAUT32!VarBstrFromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfrombool
-func VarBstrFromBool(boolIn foundation.VARIANT_BOOL, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarBstrFromBool(boolIn foundation.VARIANT_BOOL, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarBstrFromBool.Addr(), uintptr(boolIn), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBstrFromDec calls OLEAUT32!VarBstrFromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromdec
-func VarBstrFromDec(pdecIn *foundation.DECIMAL, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarBstrFromDec(pdecIn *foundation.DECIMAL, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarBstrFromDec.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBstrFromDisp calls OLEAUT32!VarBstrFromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromdisp
-func VarBstrFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarBstrFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarBstrFromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBstrFromI1 calls OLEAUT32!VarBstrFromI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromi1
-func VarBstrFromI1(cIn foundation.CHAR, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarBstrFromI1(cIn foundation.CHAR, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarBstrFromI1.Addr(), uintptr(cIn), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBstrFromI2 calls OLEAUT32!VarBstrFromI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromi2
-func VarBstrFromI2(iVal int16, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarBstrFromI2(iVal int16, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarBstrFromI2.Addr(), uintptr(iVal), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBstrFromI4 calls OLEAUT32!VarBstrFromI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromi4
-func VarBstrFromI4(lIn int32, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarBstrFromI4(lIn int32, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarBstrFromI4.Addr(), uintptr(lIn), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBstrFromI8 calls OLEAUT32!VarBstrFromI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromi8
-func VarBstrFromI8(i64In int64, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarBstrFromI8(i64In int64, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarBstrFromI8.Addr(), uintptr(i64In), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBstrFromUI1 calls OLEAUT32!VarBstrFromUI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromui1
-func VarBstrFromUI1(bVal byte, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarBstrFromUI1(bVal byte, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarBstrFromUI1.Addr(), uintptr(bVal), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBstrFromUI2 calls OLEAUT32!VarBstrFromUI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromui2
-func VarBstrFromUI2(uiIn uint16, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarBstrFromUI2(uiIn uint16, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarBstrFromUI2.Addr(), uintptr(uiIn), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBstrFromUI4 calls OLEAUT32!VarBstrFromUI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromui4
-func VarBstrFromUI4(ulIn uint32, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarBstrFromUI4(ulIn uint32, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarBstrFromUI4.Addr(), uintptr(ulIn), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarBstrFromUI8 calls OLEAUT32!VarBstrFromUI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varbstrfromui8
-func VarBstrFromUI8(ui64In uint64, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarBstrFromUI8(ui64In uint64, lcid uint32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarBstrFromUI8.Addr(), uintptr(ui64In), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarCat calls OLEAUT32!VarCat.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcat
-func VarCat(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarCat(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarCat.Addr(), uintptr(unsafe.Pointer(pvarLeft)), uintptr(unsafe.Pointer(pvarRight)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarCmp calls OLEAUT32!VarCmp.
@@ -1802,198 +1837,200 @@ func VarCmp(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, l
 
 // VarCyFromBool calls OLEAUT32!VarCyFromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfrombool
-func VarCyFromBool(boolIn foundation.VARIANT_BOOL, pcyOut *systemcom.CY) foundation.HRESULT {
+func VarCyFromBool(boolIn foundation.VARIANT_BOOL, pcyOut *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(procVarCyFromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pcyOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarCyFromDec calls OLEAUT32!VarCyFromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromdec
-func VarCyFromDec(pdecIn *foundation.DECIMAL, pcyOut *systemcom.CY) foundation.HRESULT {
+func VarCyFromDec(pdecIn *foundation.DECIMAL, pcyOut *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(procVarCyFromDec.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(pcyOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarCyFromDisp calls OLEAUT32!VarCyFromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromdisp
-func VarCyFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pcyOut *systemcom.CY) foundation.HRESULT {
+func VarCyFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pcyOut *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(procVarCyFromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(unsafe.Pointer(pcyOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarCyFromI1 calls OLEAUT32!VarCyFromI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromi1
-func VarCyFromI1(cIn foundation.CHAR, pcyOut *systemcom.CY) foundation.HRESULT {
+func VarCyFromI1(cIn foundation.CHAR, pcyOut *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(procVarCyFromI1.Addr(), uintptr(cIn), uintptr(unsafe.Pointer(pcyOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarCyFromI2 calls OLEAUT32!VarCyFromI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromi2
-func VarCyFromI2(sIn int16, pcyOut *systemcom.CY) foundation.HRESULT {
+func VarCyFromI2(sIn int16, pcyOut *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(procVarCyFromI2.Addr(), uintptr(sIn), uintptr(unsafe.Pointer(pcyOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarCyFromI4 calls OLEAUT32!VarCyFromI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromi4
-func VarCyFromI4(lIn int32, pcyOut *systemcom.CY) foundation.HRESULT {
+func VarCyFromI4(lIn int32, pcyOut *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(procVarCyFromI4.Addr(), uintptr(lIn), uintptr(unsafe.Pointer(pcyOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarCyFromI8 calls OLEAUT32!VarCyFromI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromi8
-func VarCyFromI8(i64In int64, pcyOut *systemcom.CY) foundation.HRESULT {
+func VarCyFromI8(i64In int64, pcyOut *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(procVarCyFromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pcyOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarCyFromStr calls OLEAUT32!VarCyFromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromstr
-func VarCyFromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, pcyOut *systemcom.CY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarCyFromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pcyOut)))
-	return foundation.HRESULT(r1)
+func VarCyFromStr(strIn string, lcid uint32, dwFlags uint32, pcyOut *systemcom.CY) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarCyFromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pcyOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarCyFromUI1 calls OLEAUT32!VarCyFromUI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromui1
-func VarCyFromUI1(bIn byte, pcyOut *systemcom.CY) foundation.HRESULT {
+func VarCyFromUI1(bIn byte, pcyOut *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(procVarCyFromUI1.Addr(), uintptr(bIn), uintptr(unsafe.Pointer(pcyOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarCyFromUI2 calls OLEAUT32!VarCyFromUI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromui2
-func VarCyFromUI2(uiIn uint16, pcyOut *systemcom.CY) foundation.HRESULT {
+func VarCyFromUI2(uiIn uint16, pcyOut *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(procVarCyFromUI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(pcyOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarCyFromUI4 calls OLEAUT32!VarCyFromUI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromui4
-func VarCyFromUI4(ulIn uint32, pcyOut *systemcom.CY) foundation.HRESULT {
+func VarCyFromUI4(ulIn uint32, pcyOut *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(procVarCyFromUI4.Addr(), uintptr(ulIn), uintptr(unsafe.Pointer(pcyOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarCyFromUI8 calls OLEAUT32!VarCyFromUI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varcyfromui8
-func VarCyFromUI8(ui64In uint64, pcyOut *systemcom.CY) foundation.HRESULT {
+func VarCyFromUI8(ui64In uint64, pcyOut *systemcom.CY) error {
 	r1, _, _ := syscall.SyscallN(procVarCyFromUI8.Addr(), uintptr(ui64In), uintptr(unsafe.Pointer(pcyOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDateFromBool calls OLEAUT32!VarDateFromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefrombool
-func VarDateFromBool(boolIn foundation.VARIANT_BOOL, pdateOut *float64) foundation.HRESULT {
+func VarDateFromBool(boolIn foundation.VARIANT_BOOL, pdateOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarDateFromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pdateOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDateFromDec calls OLEAUT32!VarDateFromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromdec
-func VarDateFromDec(pdecIn *foundation.DECIMAL, pdateOut *float64) foundation.HRESULT {
+func VarDateFromDec(pdecIn *foundation.DECIMAL, pdateOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarDateFromDec.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(pdateOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDateFromDisp calls OLEAUT32!VarDateFromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromdisp
-func VarDateFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pdateOut *float64) foundation.HRESULT {
+func VarDateFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pdateOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarDateFromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(unsafe.Pointer(pdateOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDateFromI1 calls OLEAUT32!VarDateFromI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromi1
-func VarDateFromI1(cIn foundation.CHAR, pdateOut *float64) foundation.HRESULT {
+func VarDateFromI1(cIn foundation.CHAR, pdateOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarDateFromI1.Addr(), uintptr(cIn), uintptr(unsafe.Pointer(pdateOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDateFromI2 calls OLEAUT32!VarDateFromI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromi2
-func VarDateFromI2(sIn int16, pdateOut *float64) foundation.HRESULT {
+func VarDateFromI2(sIn int16, pdateOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarDateFromI2.Addr(), uintptr(sIn), uintptr(unsafe.Pointer(pdateOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDateFromI4 calls OLEAUT32!VarDateFromI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromi4
-func VarDateFromI4(lIn int32, pdateOut *float64) foundation.HRESULT {
+func VarDateFromI4(lIn int32, pdateOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarDateFromI4.Addr(), uintptr(lIn), uintptr(unsafe.Pointer(pdateOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDateFromI8 calls OLEAUT32!VarDateFromI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromi8
-func VarDateFromI8(i64In int64, pdateOut *float64) foundation.HRESULT {
+func VarDateFromI8(i64In int64, pdateOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarDateFromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pdateOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDateFromStr calls OLEAUT32!VarDateFromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromstr
-func VarDateFromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, pdateOut *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarDateFromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pdateOut)))
-	return foundation.HRESULT(r1)
+func VarDateFromStr(strIn string, lcid uint32, dwFlags uint32, pdateOut *float64) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarDateFromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pdateOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDateFromUI1 calls OLEAUT32!VarDateFromUI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromui1
-func VarDateFromUI1(bIn byte, pdateOut *float64) foundation.HRESULT {
+func VarDateFromUI1(bIn byte, pdateOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarDateFromUI1.Addr(), uintptr(bIn), uintptr(unsafe.Pointer(pdateOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDateFromUI2 calls OLEAUT32!VarDateFromUI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromui2
-func VarDateFromUI2(uiIn uint16, pdateOut *float64) foundation.HRESULT {
+func VarDateFromUI2(uiIn uint16, pdateOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarDateFromUI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(pdateOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDateFromUI4 calls OLEAUT32!VarDateFromUI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromui4
-func VarDateFromUI4(ulIn uint32, pdateOut *float64) foundation.HRESULT {
+func VarDateFromUI4(ulIn uint32, pdateOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarDateFromUI4.Addr(), uintptr(ulIn), uintptr(unsafe.Pointer(pdateOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDateFromUI8 calls OLEAUT32!VarDateFromUI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromui8
-func VarDateFromUI8(ui64In uint64, pdateOut *float64) foundation.HRESULT {
+func VarDateFromUI8(ui64In uint64, pdateOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarDateFromUI8.Addr(), uintptr(ui64In), uintptr(unsafe.Pointer(pdateOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDateFromUdate calls OLEAUT32!VarDateFromUdate.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromudate
-func VarDateFromUdate(pudateIn *UDATE, dwFlags uint32, pdateOut *float64) foundation.HRESULT {
+func VarDateFromUdate(pudateIn *UDATE, dwFlags uint32, pdateOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarDateFromUdate.Addr(), uintptr(unsafe.Pointer(pudateIn)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdateOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDateFromUdateEx calls OLEAUT32!VarDateFromUdateEx.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardatefromudateex
-func VarDateFromUdateEx(pudateIn *UDATE, lcid uint32, dwFlags uint32, pdateOut *float64) foundation.HRESULT {
+func VarDateFromUdateEx(pudateIn *UDATE, lcid uint32, dwFlags uint32, pdateOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarDateFromUdateEx.Addr(), uintptr(unsafe.Pointer(pudateIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pdateOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecAbs calls OLEAUT32!VarDecAbs.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecabs
-func VarDecAbs(pdecIn *foundation.DECIMAL, pdecResult *foundation.DECIMAL) foundation.HRESULT {
+func VarDecAbs(pdecIn *foundation.DECIMAL, pdecResult *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecAbs.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(pdecResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecAdd calls OLEAUT32!VarDecAdd.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecadd
-func VarDecAdd(pdecLeft *foundation.DECIMAL, pdecRight *foundation.DECIMAL, pdecResult *foundation.DECIMAL) foundation.HRESULT {
+func VarDecAdd(pdecLeft *foundation.DECIMAL, pdecRight *foundation.DECIMAL, pdecResult *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecAdd.Addr(), uintptr(unsafe.Pointer(pdecLeft)), uintptr(unsafe.Pointer(pdecRight)), uintptr(unsafe.Pointer(pdecResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecCmp calls OLEAUT32!VarDecCmp.
@@ -2005,1085 +2042,1104 @@ func VarDecCmp(pdecLeft *foundation.DECIMAL, pdecRight *foundation.DECIMAL) VARC
 
 // VarDecDiv calls OLEAUT32!VarDecDiv.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecdiv
-func VarDecDiv(pdecLeft *foundation.DECIMAL, pdecRight *foundation.DECIMAL, pdecResult *foundation.DECIMAL) foundation.HRESULT {
+func VarDecDiv(pdecLeft *foundation.DECIMAL, pdecRight *foundation.DECIMAL, pdecResult *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecDiv.Addr(), uintptr(unsafe.Pointer(pdecLeft)), uintptr(unsafe.Pointer(pdecRight)), uintptr(unsafe.Pointer(pdecResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecFix calls OLEAUT32!VarDecFix.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfix
-func VarDecFix(pdecIn *foundation.DECIMAL, pdecResult *foundation.DECIMAL) foundation.HRESULT {
+func VarDecFix(pdecIn *foundation.DECIMAL, pdecResult *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecFix.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(pdecResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecFromBool calls OLEAUT32!VarDecFromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfrombool
-func VarDecFromBool(boolIn foundation.VARIANT_BOOL, pdecOut *foundation.DECIMAL) foundation.HRESULT {
+func VarDecFromBool(boolIn foundation.VARIANT_BOOL, pdecOut *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecFromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pdecOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecFromDisp calls OLEAUT32!VarDecFromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromdisp
-func VarDecFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pdecOut *foundation.DECIMAL) foundation.HRESULT {
+func VarDecFromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pdecOut *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecFromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(unsafe.Pointer(pdecOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecFromI1 calls OLEAUT32!VarDecFromI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromi1
-func VarDecFromI1(cIn foundation.CHAR, pdecOut *foundation.DECIMAL) foundation.HRESULT {
+func VarDecFromI1(cIn foundation.CHAR, pdecOut *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecFromI1.Addr(), uintptr(cIn), uintptr(unsafe.Pointer(pdecOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecFromI2 calls OLEAUT32!VarDecFromI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromi2
-func VarDecFromI2(uiIn int16, pdecOut *foundation.DECIMAL) foundation.HRESULT {
+func VarDecFromI2(uiIn int16, pdecOut *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecFromI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(pdecOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecFromI4 calls OLEAUT32!VarDecFromI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromi4
-func VarDecFromI4(lIn int32, pdecOut *foundation.DECIMAL) foundation.HRESULT {
+func VarDecFromI4(lIn int32, pdecOut *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecFromI4.Addr(), uintptr(lIn), uintptr(unsafe.Pointer(pdecOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecFromI8 calls OLEAUT32!VarDecFromI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromi8
-func VarDecFromI8(i64In int64, pdecOut *foundation.DECIMAL) foundation.HRESULT {
+func VarDecFromI8(i64In int64, pdecOut *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecFromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pdecOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecFromStr calls OLEAUT32!VarDecFromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromstr
-func VarDecFromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, pdecOut *foundation.DECIMAL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarDecFromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pdecOut)))
-	return foundation.HRESULT(r1)
+func VarDecFromStr(strIn string, lcid uint32, dwFlags uint32, pdecOut *foundation.DECIMAL) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarDecFromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pdecOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecFromUI1 calls OLEAUT32!VarDecFromUI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromui1
-func VarDecFromUI1(bIn byte, pdecOut *foundation.DECIMAL) foundation.HRESULT {
+func VarDecFromUI1(bIn byte, pdecOut *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecFromUI1.Addr(), uintptr(bIn), uintptr(unsafe.Pointer(pdecOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecFromUI2 calls OLEAUT32!VarDecFromUI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromui2
-func VarDecFromUI2(uiIn uint16, pdecOut *foundation.DECIMAL) foundation.HRESULT {
+func VarDecFromUI2(uiIn uint16, pdecOut *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecFromUI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(pdecOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecFromUI4 calls OLEAUT32!VarDecFromUI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromui4
-func VarDecFromUI4(ulIn uint32, pdecOut *foundation.DECIMAL) foundation.HRESULT {
+func VarDecFromUI4(ulIn uint32, pdecOut *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecFromUI4.Addr(), uintptr(ulIn), uintptr(unsafe.Pointer(pdecOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecFromUI8 calls OLEAUT32!VarDecFromUI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecfromui8
-func VarDecFromUI8(ui64In uint64, pdecOut *foundation.DECIMAL) foundation.HRESULT {
+func VarDecFromUI8(ui64In uint64, pdecOut *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecFromUI8.Addr(), uintptr(ui64In), uintptr(unsafe.Pointer(pdecOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecInt calls OLEAUT32!VarDecInt.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecint
-func VarDecInt(pdecIn *foundation.DECIMAL, pdecResult *foundation.DECIMAL) foundation.HRESULT {
+func VarDecInt(pdecIn *foundation.DECIMAL, pdecResult *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecInt.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(pdecResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecMul calls OLEAUT32!VarDecMul.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecmul
-func VarDecMul(pdecLeft *foundation.DECIMAL, pdecRight *foundation.DECIMAL, pdecResult *foundation.DECIMAL) foundation.HRESULT {
+func VarDecMul(pdecLeft *foundation.DECIMAL, pdecRight *foundation.DECIMAL, pdecResult *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecMul.Addr(), uintptr(unsafe.Pointer(pdecLeft)), uintptr(unsafe.Pointer(pdecRight)), uintptr(unsafe.Pointer(pdecResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecNeg calls OLEAUT32!VarDecNeg.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecneg
-func VarDecNeg(pdecIn *foundation.DECIMAL, pdecResult *foundation.DECIMAL) foundation.HRESULT {
+func VarDecNeg(pdecIn *foundation.DECIMAL, pdecResult *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecNeg.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(pdecResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecRound calls OLEAUT32!VarDecRound.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecround
-func VarDecRound(pdecIn *foundation.DECIMAL, cDecimals int32, pdecResult *foundation.DECIMAL) foundation.HRESULT {
+func VarDecRound(pdecIn *foundation.DECIMAL, cDecimals int32, pdecResult *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecRound.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(cDecimals), uintptr(unsafe.Pointer(pdecResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDecSub calls OLEAUT32!VarDecSub.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardecsub
-func VarDecSub(pdecLeft *foundation.DECIMAL, pdecRight *foundation.DECIMAL, pdecResult *foundation.DECIMAL) foundation.HRESULT {
+func VarDecSub(pdecLeft *foundation.DECIMAL, pdecRight *foundation.DECIMAL, pdecResult *foundation.DECIMAL) error {
 	r1, _, _ := syscall.SyscallN(procVarDecSub.Addr(), uintptr(unsafe.Pointer(pdecLeft)), uintptr(unsafe.Pointer(pdecRight)), uintptr(unsafe.Pointer(pdecResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarDiv calls OLEAUT32!VarDiv.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vardiv
-func VarDiv(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarDiv(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarDiv.Addr(), uintptr(unsafe.Pointer(pvarLeft)), uintptr(unsafe.Pointer(pvarRight)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarEqv calls OLEAUT32!VarEqv.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vareqv
-func VarEqv(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarEqv(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarEqv.Addr(), uintptr(unsafe.Pointer(pvarLeft)), uintptr(unsafe.Pointer(pvarRight)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarFix calls OLEAUT32!VarFix.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varfix
-func VarFix(pvarIn *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarFix(pvarIn *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarFix.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarFormat calls OLEAUT32!VarFormat.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varformat
-func VarFormat(pvarIn *systemvariant.VARIANT, pstrFormat foundation.PWSTR, iFirstDay VARFORMAT_FIRST_DAY, iFirstWeek VARFORMAT_FIRST_WEEK, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarFormat.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(unsafe.Pointer(pstrFormat)), uintptr(iFirstDay), uintptr(iFirstWeek), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+func VarFormat(pvarIn *systemvariant.VARIANT, pstrFormat string, iFirstDay VARFORMAT_FIRST_DAY, iFirstWeek VARFORMAT_FIRST_WEEK, dwFlags uint32, pbstrOut *foundation.BSTR) error {
+	_pstrFormat := win32.UTF16Ptr(pstrFormat)
+	r1, _, _ := syscall.SyscallN(procVarFormat.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(unsafe.Pointer(_pstrFormat)), uintptr(iFirstDay), uintptr(iFirstWeek), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarFormatCurrency calls OLEAUT32!VarFormatCurrency.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varformatcurrency
-func VarFormatCurrency(pvarIn *systemvariant.VARIANT, iNumDig int32, iIncLead int32, iUseParens int32, iGroup int32, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarFormatCurrency(pvarIn *systemvariant.VARIANT, iNumDig int32, iIncLead int32, iUseParens int32, iGroup int32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarFormatCurrency.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(iNumDig), uintptr(iIncLead), uintptr(iUseParens), uintptr(iGroup), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarFormatDateTime calls OLEAUT32!VarFormatDateTime.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varformatdatetime
-func VarFormatDateTime(pvarIn *systemvariant.VARIANT, iNamedFormat VARFORMAT_NAMED_FORMAT, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarFormatDateTime(pvarIn *systemvariant.VARIANT, iNamedFormat VARFORMAT_NAMED_FORMAT, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarFormatDateTime.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(iNamedFormat), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarFormatFromTokens calls OLEAUT32!VarFormatFromTokens.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varformatfromtokens
-func VarFormatFromTokens(pvarIn *systemvariant.VARIANT, pstrFormat foundation.PWSTR, pbTokCur *byte, dwFlags uint32, pbstrOut *foundation.BSTR, lcid uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarFormatFromTokens.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(unsafe.Pointer(pstrFormat)), uintptr(unsafe.Pointer(pbTokCur)), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)), uintptr(lcid))
-	return foundation.HRESULT(r1)
+func VarFormatFromTokens(pvarIn *systemvariant.VARIANT, pstrFormat string, pbTokCur *byte, dwFlags uint32, pbstrOut *foundation.BSTR, lcid uint32) error {
+	_pstrFormat := win32.UTF16Ptr(pstrFormat)
+	r1, _, _ := syscall.SyscallN(procVarFormatFromTokens.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(unsafe.Pointer(_pstrFormat)), uintptr(unsafe.Pointer(pbTokCur)), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)), uintptr(lcid))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarFormatNumber calls OLEAUT32!VarFormatNumber.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varformatnumber
-func VarFormatNumber(pvarIn *systemvariant.VARIANT, iNumDig int32, iIncLead VARFORMAT_LEADING_DIGIT, iUseParens VARFORMAT_PARENTHESES, iGroup VARFORMAT_GROUP, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarFormatNumber(pvarIn *systemvariant.VARIANT, iNumDig int32, iIncLead VARFORMAT_LEADING_DIGIT, iUseParens VARFORMAT_PARENTHESES, iGroup VARFORMAT_GROUP, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarFormatNumber.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(iNumDig), uintptr(iIncLead), uintptr(iUseParens), uintptr(iGroup), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarFormatPercent calls OLEAUT32!VarFormatPercent.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varformatpercent
-func VarFormatPercent(pvarIn *systemvariant.VARIANT, iNumDig int32, iIncLead VARFORMAT_LEADING_DIGIT, iUseParens VARFORMAT_PARENTHESES, iGroup VARFORMAT_GROUP, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarFormatPercent(pvarIn *systemvariant.VARIANT, iNumDig int32, iIncLead VARFORMAT_LEADING_DIGIT, iUseParens VARFORMAT_PARENTHESES, iGroup VARFORMAT_GROUP, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarFormatPercent.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(iNumDig), uintptr(iIncLead), uintptr(iUseParens), uintptr(iGroup), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI1FromBool calls OLEAUT32!VarI1FromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1frombool
-func VarI1FromBool(boolIn foundation.VARIANT_BOOL, pcOut foundation.PSTR) foundation.HRESULT {
+func VarI1FromBool(boolIn foundation.VARIANT_BOOL, pcOut foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarI1FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pcOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI1FromDec calls OLEAUT32!VarI1FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromdec
-func VarI1FromDec(pdecIn *foundation.DECIMAL, pcOut foundation.PSTR) foundation.HRESULT {
+func VarI1FromDec(pdecIn *foundation.DECIMAL, pcOut foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarI1FromDec.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(pcOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI1FromDisp calls OLEAUT32!VarI1FromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromdisp
-func VarI1FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pcOut foundation.PSTR) foundation.HRESULT {
+func VarI1FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pcOut foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarI1FromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(unsafe.Pointer(pcOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI1FromI2 calls OLEAUT32!VarI1FromI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromi2
-func VarI1FromI2(uiIn int16, pcOut foundation.PSTR) foundation.HRESULT {
+func VarI1FromI2(uiIn int16, pcOut foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarI1FromI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(pcOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI1FromI4 calls OLEAUT32!VarI1FromI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromi4
-func VarI1FromI4(lIn int32, pcOut foundation.PSTR) foundation.HRESULT {
+func VarI1FromI4(lIn int32, pcOut foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarI1FromI4.Addr(), uintptr(lIn), uintptr(unsafe.Pointer(pcOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI1FromI8 calls OLEAUT32!VarI1FromI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromi8
-func VarI1FromI8(i64In int64, pcOut foundation.PSTR) foundation.HRESULT {
+func VarI1FromI8(i64In int64, pcOut foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarI1FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pcOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI1FromStr calls OLEAUT32!VarI1FromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromstr
-func VarI1FromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, pcOut foundation.PSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarI1FromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pcOut)))
-	return foundation.HRESULT(r1)
+func VarI1FromStr(strIn string, lcid uint32, dwFlags uint32, pcOut foundation.PSTR) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarI1FromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pcOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI1FromUI1 calls OLEAUT32!VarI1FromUI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromui1
-func VarI1FromUI1(bIn byte, pcOut foundation.PSTR) foundation.HRESULT {
+func VarI1FromUI1(bIn byte, pcOut foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarI1FromUI1.Addr(), uintptr(bIn), uintptr(unsafe.Pointer(pcOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI1FromUI2 calls OLEAUT32!VarI1FromUI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromui2
-func VarI1FromUI2(uiIn uint16, pcOut foundation.PSTR) foundation.HRESULT {
+func VarI1FromUI2(uiIn uint16, pcOut foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarI1FromUI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(pcOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI1FromUI4 calls OLEAUT32!VarI1FromUI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromui4
-func VarI1FromUI4(ulIn uint32, pcOut foundation.PSTR) foundation.HRESULT {
+func VarI1FromUI4(ulIn uint32, pcOut foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarI1FromUI4.Addr(), uintptr(ulIn), uintptr(unsafe.Pointer(pcOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI1FromUI8 calls OLEAUT32!VarI1FromUI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari1fromui8
-func VarI1FromUI8(i64In uint64, pcOut foundation.PSTR) foundation.HRESULT {
+func VarI1FromUI8(i64In uint64, pcOut foundation.PSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarI1FromUI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pcOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI2FromBool calls OLEAUT32!VarI2FromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2frombool
-func VarI2FromBool(boolIn foundation.VARIANT_BOOL, psOut *int16) foundation.HRESULT {
+func VarI2FromBool(boolIn foundation.VARIANT_BOOL, psOut *int16) error {
 	r1, _, _ := syscall.SyscallN(procVarI2FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(psOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI2FromDec calls OLEAUT32!VarI2FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromdec
-func VarI2FromDec(pdecIn *foundation.DECIMAL, psOut *int16) foundation.HRESULT {
+func VarI2FromDec(pdecIn *foundation.DECIMAL, psOut *int16) error {
 	r1, _, _ := syscall.SyscallN(procVarI2FromDec.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(psOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI2FromDisp calls OLEAUT32!VarI2FromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromdisp
-func VarI2FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, psOut *int16) foundation.HRESULT {
+func VarI2FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, psOut *int16) error {
 	r1, _, _ := syscall.SyscallN(procVarI2FromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(unsafe.Pointer(psOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI2FromI1 calls OLEAUT32!VarI2FromI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromi1
-func VarI2FromI1(cIn foundation.CHAR, psOut *int16) foundation.HRESULT {
+func VarI2FromI1(cIn foundation.CHAR, psOut *int16) error {
 	r1, _, _ := syscall.SyscallN(procVarI2FromI1.Addr(), uintptr(cIn), uintptr(unsafe.Pointer(psOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI2FromI4 calls OLEAUT32!VarI2FromI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromi4
-func VarI2FromI4(lIn int32, psOut *int16) foundation.HRESULT {
+func VarI2FromI4(lIn int32, psOut *int16) error {
 	r1, _, _ := syscall.SyscallN(procVarI2FromI4.Addr(), uintptr(lIn), uintptr(unsafe.Pointer(psOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI2FromI8 calls OLEAUT32!VarI2FromI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromi8
-func VarI2FromI8(i64In int64, psOut *int16) foundation.HRESULT {
+func VarI2FromI8(i64In int64, psOut *int16) error {
 	r1, _, _ := syscall.SyscallN(procVarI2FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(psOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI2FromStr calls OLEAUT32!VarI2FromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromstr
-func VarI2FromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, psOut *int16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarI2FromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(psOut)))
-	return foundation.HRESULT(r1)
+func VarI2FromStr(strIn string, lcid uint32, dwFlags uint32, psOut *int16) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarI2FromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(psOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI2FromUI1 calls OLEAUT32!VarI2FromUI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromui1
-func VarI2FromUI1(bIn byte, psOut *int16) foundation.HRESULT {
+func VarI2FromUI1(bIn byte, psOut *int16) error {
 	r1, _, _ := syscall.SyscallN(procVarI2FromUI1.Addr(), uintptr(bIn), uintptr(unsafe.Pointer(psOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI2FromUI2 calls OLEAUT32!VarI2FromUI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromui2
-func VarI2FromUI2(uiIn uint16, psOut *int16) foundation.HRESULT {
+func VarI2FromUI2(uiIn uint16, psOut *int16) error {
 	r1, _, _ := syscall.SyscallN(procVarI2FromUI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(psOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI2FromUI4 calls OLEAUT32!VarI2FromUI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromui4
-func VarI2FromUI4(ulIn uint32, psOut *int16) foundation.HRESULT {
+func VarI2FromUI4(ulIn uint32, psOut *int16) error {
 	r1, _, _ := syscall.SyscallN(procVarI2FromUI4.Addr(), uintptr(ulIn), uintptr(unsafe.Pointer(psOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI2FromUI8 calls OLEAUT32!VarI2FromUI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari2fromui8
-func VarI2FromUI8(ui64In uint64, psOut *int16) foundation.HRESULT {
+func VarI2FromUI8(ui64In uint64, psOut *int16) error {
 	r1, _, _ := syscall.SyscallN(procVarI2FromUI8.Addr(), uintptr(ui64In), uintptr(unsafe.Pointer(psOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI4FromBool calls OLEAUT32!VarI4FromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4frombool
-func VarI4FromBool(boolIn foundation.VARIANT_BOOL, plOut *int32) foundation.HRESULT {
+func VarI4FromBool(boolIn foundation.VARIANT_BOOL, plOut *int32) error {
 	r1, _, _ := syscall.SyscallN(procVarI4FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(plOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI4FromDec calls OLEAUT32!VarI4FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromdec
-func VarI4FromDec(pdecIn *foundation.DECIMAL, plOut *int32) foundation.HRESULT {
+func VarI4FromDec(pdecIn *foundation.DECIMAL, plOut *int32) error {
 	r1, _, _ := syscall.SyscallN(procVarI4FromDec.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(plOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI4FromDisp calls OLEAUT32!VarI4FromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromdisp
-func VarI4FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, plOut *int32) foundation.HRESULT {
+func VarI4FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, plOut *int32) error {
 	r1, _, _ := syscall.SyscallN(procVarI4FromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(unsafe.Pointer(plOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI4FromI1 calls OLEAUT32!VarI4FromI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromi1
-func VarI4FromI1(cIn foundation.CHAR, plOut *int32) foundation.HRESULT {
+func VarI4FromI1(cIn foundation.CHAR, plOut *int32) error {
 	r1, _, _ := syscall.SyscallN(procVarI4FromI1.Addr(), uintptr(cIn), uintptr(unsafe.Pointer(plOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI4FromI2 calls OLEAUT32!VarI4FromI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromi2
-func VarI4FromI2(sIn int16, plOut *int32) foundation.HRESULT {
+func VarI4FromI2(sIn int16, plOut *int32) error {
 	r1, _, _ := syscall.SyscallN(procVarI4FromI2.Addr(), uintptr(sIn), uintptr(unsafe.Pointer(plOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI4FromI8 calls OLEAUT32!VarI4FromI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromi8
-func VarI4FromI8(i64In int64, plOut *int32) foundation.HRESULT {
+func VarI4FromI8(i64In int64, plOut *int32) error {
 	r1, _, _ := syscall.SyscallN(procVarI4FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(plOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI4FromStr calls OLEAUT32!VarI4FromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromstr
-func VarI4FromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, plOut *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarI4FromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(plOut)))
-	return foundation.HRESULT(r1)
+func VarI4FromStr(strIn string, lcid uint32, dwFlags uint32, plOut *int32) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarI4FromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(plOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI4FromUI1 calls OLEAUT32!VarI4FromUI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromui1
-func VarI4FromUI1(bIn byte, plOut *int32) foundation.HRESULT {
+func VarI4FromUI1(bIn byte, plOut *int32) error {
 	r1, _, _ := syscall.SyscallN(procVarI4FromUI1.Addr(), uintptr(bIn), uintptr(unsafe.Pointer(plOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI4FromUI2 calls OLEAUT32!VarI4FromUI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromui2
-func VarI4FromUI2(uiIn uint16, plOut *int32) foundation.HRESULT {
+func VarI4FromUI2(uiIn uint16, plOut *int32) error {
 	r1, _, _ := syscall.SyscallN(procVarI4FromUI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(plOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI4FromUI4 calls OLEAUT32!VarI4FromUI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromui4
-func VarI4FromUI4(ulIn uint32, plOut *int32) foundation.HRESULT {
+func VarI4FromUI4(ulIn uint32, plOut *int32) error {
 	r1, _, _ := syscall.SyscallN(procVarI4FromUI4.Addr(), uintptr(ulIn), uintptr(unsafe.Pointer(plOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI4FromUI8 calls OLEAUT32!VarI4FromUI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari4fromui8
-func VarI4FromUI8(ui64In uint64, plOut *int32) foundation.HRESULT {
+func VarI4FromUI8(ui64In uint64, plOut *int32) error {
 	r1, _, _ := syscall.SyscallN(procVarI4FromUI8.Addr(), uintptr(ui64In), uintptr(unsafe.Pointer(plOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI8FromBool calls OLEAUT32!VarI8FromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8frombool
-func VarI8FromBool(boolIn foundation.VARIANT_BOOL, pi64Out *int64) foundation.HRESULT {
+func VarI8FromBool(boolIn foundation.VARIANT_BOOL, pi64Out *int64) error {
 	r1, _, _ := syscall.SyscallN(procVarI8FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI8FromDec calls OLEAUT32!VarI8FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromdec
-func VarI8FromDec(pdecIn *foundation.DECIMAL, pi64Out *int64) foundation.HRESULT {
+func VarI8FromDec(pdecIn *foundation.DECIMAL, pi64Out *int64) error {
 	r1, _, _ := syscall.SyscallN(procVarI8FromDec.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI8FromDisp calls OLEAUT32!VarI8FromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromdisp
-func VarI8FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pi64Out *int64) foundation.HRESULT {
+func VarI8FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pi64Out *int64) error {
 	r1, _, _ := syscall.SyscallN(procVarI8FromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI8FromI1 calls OLEAUT32!VarI8FromI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromi1
-func VarI8FromI1(cIn foundation.CHAR, pi64Out *int64) foundation.HRESULT {
+func VarI8FromI1(cIn foundation.CHAR, pi64Out *int64) error {
 	r1, _, _ := syscall.SyscallN(procVarI8FromI1.Addr(), uintptr(cIn), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI8FromI2 calls OLEAUT32!VarI8FromI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromi2
-func VarI8FromI2(sIn int16, pi64Out *int64) foundation.HRESULT {
+func VarI8FromI2(sIn int16, pi64Out *int64) error {
 	r1, _, _ := syscall.SyscallN(procVarI8FromI2.Addr(), uintptr(sIn), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI8FromStr calls OLEAUT32!VarI8FromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromstr
-func VarI8FromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, pi64Out *int64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarI8FromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+func VarI8FromStr(strIn string, lcid uint32, dwFlags uint32, pi64Out *int64) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarI8FromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pi64Out)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI8FromUI1 calls OLEAUT32!VarI8FromUI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromui1
-func VarI8FromUI1(bIn byte, pi64Out *int64) foundation.HRESULT {
+func VarI8FromUI1(bIn byte, pi64Out *int64) error {
 	r1, _, _ := syscall.SyscallN(procVarI8FromUI1.Addr(), uintptr(bIn), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI8FromUI2 calls OLEAUT32!VarI8FromUI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromui2
-func VarI8FromUI2(uiIn uint16, pi64Out *int64) foundation.HRESULT {
+func VarI8FromUI2(uiIn uint16, pi64Out *int64) error {
 	r1, _, _ := syscall.SyscallN(procVarI8FromUI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI8FromUI4 calls OLEAUT32!VarI8FromUI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromui4
-func VarI8FromUI4(ulIn uint32, pi64Out *int64) foundation.HRESULT {
+func VarI8FromUI4(ulIn uint32, pi64Out *int64) error {
 	r1, _, _ := syscall.SyscallN(procVarI8FromUI4.Addr(), uintptr(ulIn), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarI8FromUI8 calls OLEAUT32!VarI8FromUI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vari8fromui8
-func VarI8FromUI8(ui64In uint64, pi64Out *int64) foundation.HRESULT {
+func VarI8FromUI8(ui64In uint64, pi64Out *int64) error {
 	r1, _, _ := syscall.SyscallN(procVarI8FromUI8.Addr(), uintptr(ui64In), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarIdiv calls OLEAUT32!VarIdiv.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varidiv
-func VarIdiv(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarIdiv(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarIdiv.Addr(), uintptr(unsafe.Pointer(pvarLeft)), uintptr(unsafe.Pointer(pvarRight)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarImp calls OLEAUT32!VarImp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varimp
-func VarImp(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarImp(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarImp.Addr(), uintptr(unsafe.Pointer(pvarLeft)), uintptr(unsafe.Pointer(pvarRight)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarInt calls OLEAUT32!VarInt.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varint
-func VarInt(pvarIn *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarInt(pvarIn *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarInt.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarMod calls OLEAUT32!VarMod.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varmod
-func VarMod(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarMod(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarMod.Addr(), uintptr(unsafe.Pointer(pvarLeft)), uintptr(unsafe.Pointer(pvarRight)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarMonthName calls OLEAUT32!VarMonthName.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varmonthname
-func VarMonthName(iMonth int32, fAbbrev int32, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarMonthName(iMonth int32, fAbbrev int32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarMonthName.Addr(), uintptr(iMonth), uintptr(fAbbrev), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarMul calls OLEAUT32!VarMul.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varmul
-func VarMul(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarMul(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarMul.Addr(), uintptr(unsafe.Pointer(pvarLeft)), uintptr(unsafe.Pointer(pvarRight)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarNeg calls OLEAUT32!VarNeg.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varneg
-func VarNeg(pvarIn *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarNeg(pvarIn *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarNeg.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarNot calls OLEAUT32!VarNot.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varnot
-func VarNot(pvarIn *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarNot(pvarIn *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarNot.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarNumFromParseNum calls OLEAUT32!VarNumFromParseNum.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varnumfromparsenum
-func VarNumFromParseNum(pnumprs *NUMPARSE, rgbDig *byte, dwVtBits uint32, pvar *systemvariant.VARIANT) foundation.HRESULT {
+func VarNumFromParseNum(pnumprs *NUMPARSE, rgbDig *byte, dwVtBits uint32, pvar *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarNumFromParseNum.Addr(), uintptr(unsafe.Pointer(pnumprs)), uintptr(unsafe.Pointer(rgbDig)), uintptr(dwVtBits), uintptr(unsafe.Pointer(pvar)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarOr calls OLEAUT32!VarOr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varor
-func VarOr(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarOr(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarOr.Addr(), uintptr(unsafe.Pointer(pvarLeft)), uintptr(unsafe.Pointer(pvarRight)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarParseNumFromStr calls OLEAUT32!VarParseNumFromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varparsenumfromstr
-func VarParseNumFromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, pnumprs *NUMPARSE, rgbDig *byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarParseNumFromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pnumprs)), uintptr(unsafe.Pointer(rgbDig)))
-	return foundation.HRESULT(r1)
+func VarParseNumFromStr(strIn string, lcid uint32, dwFlags uint32, pnumprs *NUMPARSE, rgbDig *byte) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarParseNumFromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pnumprs)), uintptr(unsafe.Pointer(rgbDig)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarPow calls OLEAUT32!VarPow.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varpow
-func VarPow(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarPow(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarPow.Addr(), uintptr(unsafe.Pointer(pvarLeft)), uintptr(unsafe.Pointer(pvarRight)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR4FromBool calls OLEAUT32!VarR4FromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4frombool
-func VarR4FromBool(boolIn foundation.VARIANT_BOOL, pfltOut *float32) foundation.HRESULT {
+func VarR4FromBool(boolIn foundation.VARIANT_BOOL, pfltOut *float32) error {
 	r1, _, _ := syscall.SyscallN(procVarR4FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pfltOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR4FromDec calls OLEAUT32!VarR4FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromdec
-func VarR4FromDec(pdecIn *foundation.DECIMAL, pfltOut *float32) foundation.HRESULT {
+func VarR4FromDec(pdecIn *foundation.DECIMAL, pfltOut *float32) error {
 	r1, _, _ := syscall.SyscallN(procVarR4FromDec.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(pfltOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR4FromDisp calls OLEAUT32!VarR4FromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromdisp
-func VarR4FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pfltOut *float32) foundation.HRESULT {
+func VarR4FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pfltOut *float32) error {
 	r1, _, _ := syscall.SyscallN(procVarR4FromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(unsafe.Pointer(pfltOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR4FromI1 calls OLEAUT32!VarR4FromI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromi1
-func VarR4FromI1(cIn foundation.CHAR, pfltOut *float32) foundation.HRESULT {
+func VarR4FromI1(cIn foundation.CHAR, pfltOut *float32) error {
 	r1, _, _ := syscall.SyscallN(procVarR4FromI1.Addr(), uintptr(cIn), uintptr(unsafe.Pointer(pfltOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR4FromI2 calls OLEAUT32!VarR4FromI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromi2
-func VarR4FromI2(sIn int16, pfltOut *float32) foundation.HRESULT {
+func VarR4FromI2(sIn int16, pfltOut *float32) error {
 	r1, _, _ := syscall.SyscallN(procVarR4FromI2.Addr(), uintptr(sIn), uintptr(unsafe.Pointer(pfltOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR4FromI4 calls OLEAUT32!VarR4FromI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromi4
-func VarR4FromI4(lIn int32, pfltOut *float32) foundation.HRESULT {
+func VarR4FromI4(lIn int32, pfltOut *float32) error {
 	r1, _, _ := syscall.SyscallN(procVarR4FromI4.Addr(), uintptr(lIn), uintptr(unsafe.Pointer(pfltOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR4FromI8 calls OLEAUT32!VarR4FromI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromi8
-func VarR4FromI8(i64In int64, pfltOut *float32) foundation.HRESULT {
+func VarR4FromI8(i64In int64, pfltOut *float32) error {
 	r1, _, _ := syscall.SyscallN(procVarR4FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pfltOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR4FromStr calls OLEAUT32!VarR4FromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromstr
-func VarR4FromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, pfltOut *float32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarR4FromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pfltOut)))
-	return foundation.HRESULT(r1)
+func VarR4FromStr(strIn string, lcid uint32, dwFlags uint32, pfltOut *float32) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarR4FromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pfltOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR4FromUI1 calls OLEAUT32!VarR4FromUI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromui1
-func VarR4FromUI1(bIn byte, pfltOut *float32) foundation.HRESULT {
+func VarR4FromUI1(bIn byte, pfltOut *float32) error {
 	r1, _, _ := syscall.SyscallN(procVarR4FromUI1.Addr(), uintptr(bIn), uintptr(unsafe.Pointer(pfltOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR4FromUI2 calls OLEAUT32!VarR4FromUI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromui2
-func VarR4FromUI2(uiIn uint16, pfltOut *float32) foundation.HRESULT {
+func VarR4FromUI2(uiIn uint16, pfltOut *float32) error {
 	r1, _, _ := syscall.SyscallN(procVarR4FromUI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(pfltOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR4FromUI4 calls OLEAUT32!VarR4FromUI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromui4
-func VarR4FromUI4(ulIn uint32, pfltOut *float32) foundation.HRESULT {
+func VarR4FromUI4(ulIn uint32, pfltOut *float32) error {
 	r1, _, _ := syscall.SyscallN(procVarR4FromUI4.Addr(), uintptr(ulIn), uintptr(unsafe.Pointer(pfltOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR4FromUI8 calls OLEAUT32!VarR4FromUI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr4fromui8
-func VarR4FromUI8(ui64In uint64, pfltOut *float32) foundation.HRESULT {
+func VarR4FromUI8(ui64In uint64, pfltOut *float32) error {
 	r1, _, _ := syscall.SyscallN(procVarR4FromUI8.Addr(), uintptr(ui64In), uintptr(unsafe.Pointer(pfltOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR8FromBool calls OLEAUT32!VarR8FromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8frombool
-func VarR8FromBool(boolIn foundation.VARIANT_BOOL, pdblOut *float64) foundation.HRESULT {
+func VarR8FromBool(boolIn foundation.VARIANT_BOOL, pdblOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarR8FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pdblOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR8FromDec calls OLEAUT32!VarR8FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromdec
-func VarR8FromDec(pdecIn *foundation.DECIMAL, pdblOut *float64) foundation.HRESULT {
+func VarR8FromDec(pdecIn *foundation.DECIMAL, pdblOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarR8FromDec.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(pdblOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR8FromDisp calls OLEAUT32!VarR8FromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromdisp
-func VarR8FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pdblOut *float64) foundation.HRESULT {
+func VarR8FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pdblOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarR8FromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(unsafe.Pointer(pdblOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR8FromI1 calls OLEAUT32!VarR8FromI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromi1
-func VarR8FromI1(cIn foundation.CHAR, pdblOut *float64) foundation.HRESULT {
+func VarR8FromI1(cIn foundation.CHAR, pdblOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarR8FromI1.Addr(), uintptr(cIn), uintptr(unsafe.Pointer(pdblOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR8FromI2 calls OLEAUT32!VarR8FromI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromi2
-func VarR8FromI2(sIn int16, pdblOut *float64) foundation.HRESULT {
+func VarR8FromI2(sIn int16, pdblOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarR8FromI2.Addr(), uintptr(sIn), uintptr(unsafe.Pointer(pdblOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR8FromI4 calls OLEAUT32!VarR8FromI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromi4
-func VarR8FromI4(lIn int32, pdblOut *float64) foundation.HRESULT {
+func VarR8FromI4(lIn int32, pdblOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarR8FromI4.Addr(), uintptr(lIn), uintptr(unsafe.Pointer(pdblOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR8FromI8 calls OLEAUT32!VarR8FromI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromi8
-func VarR8FromI8(i64In int64, pdblOut *float64) foundation.HRESULT {
+func VarR8FromI8(i64In int64, pdblOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarR8FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pdblOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR8FromStr calls OLEAUT32!VarR8FromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromstr
-func VarR8FromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, pdblOut *float64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarR8FromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pdblOut)))
-	return foundation.HRESULT(r1)
+func VarR8FromStr(strIn string, lcid uint32, dwFlags uint32, pdblOut *float64) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarR8FromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pdblOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR8FromUI1 calls OLEAUT32!VarR8FromUI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromui1
-func VarR8FromUI1(bIn byte, pdblOut *float64) foundation.HRESULT {
+func VarR8FromUI1(bIn byte, pdblOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarR8FromUI1.Addr(), uintptr(bIn), uintptr(unsafe.Pointer(pdblOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR8FromUI2 calls OLEAUT32!VarR8FromUI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromui2
-func VarR8FromUI2(uiIn uint16, pdblOut *float64) foundation.HRESULT {
+func VarR8FromUI2(uiIn uint16, pdblOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarR8FromUI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(pdblOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR8FromUI4 calls OLEAUT32!VarR8FromUI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromui4
-func VarR8FromUI4(ulIn uint32, pdblOut *float64) foundation.HRESULT {
+func VarR8FromUI4(ulIn uint32, pdblOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarR8FromUI4.Addr(), uintptr(ulIn), uintptr(unsafe.Pointer(pdblOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarR8FromUI8 calls OLEAUT32!VarR8FromUI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varr8fromui8
-func VarR8FromUI8(ui64In uint64, pdblOut *float64) foundation.HRESULT {
+func VarR8FromUI8(ui64In uint64, pdblOut *float64) error {
 	r1, _, _ := syscall.SyscallN(procVarR8FromUI8.Addr(), uintptr(ui64In), uintptr(unsafe.Pointer(pdblOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarRound calls OLEAUT32!VarRound.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varround
-func VarRound(pvarIn *systemvariant.VARIANT, cDecimals int32, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarRound(pvarIn *systemvariant.VARIANT, cDecimals int32, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarRound.Addr(), uintptr(unsafe.Pointer(pvarIn)), uintptr(cDecimals), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarSub calls OLEAUT32!VarSub.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varsub
-func VarSub(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarSub(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarSub.Addr(), uintptr(unsafe.Pointer(pvarLeft)), uintptr(unsafe.Pointer(pvarRight)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarTokenizeFormatString calls OLEAUT32!VarTokenizeFormatString.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vartokenizeformatstring
-func VarTokenizeFormatString(pstrFormat foundation.PWSTR, rgbTok *byte, cbTok int32, iFirstDay VARFORMAT_FIRST_DAY, iFirstWeek VARFORMAT_FIRST_WEEK, lcid uint32, pcbActual *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarTokenizeFormatString.Addr(), uintptr(unsafe.Pointer(pstrFormat)), uintptr(unsafe.Pointer(rgbTok)), uintptr(cbTok), uintptr(iFirstDay), uintptr(iFirstWeek), uintptr(lcid), uintptr(unsafe.Pointer(pcbActual)))
-	return foundation.HRESULT(r1)
+func VarTokenizeFormatString(pstrFormat string, rgbTok []byte, iFirstDay VARFORMAT_FIRST_DAY, iFirstWeek VARFORMAT_FIRST_WEEK, lcid uint32, pcbActual *int32) error {
+	_pstrFormat := win32.UTF16Ptr(pstrFormat)
+	var _rgbTok *byte
+	if len(rgbTok) > 0 {
+		_rgbTok = &rgbTok[0]
+	}
+	r1, _, _ := syscall.SyscallN(procVarTokenizeFormatString.Addr(), uintptr(unsafe.Pointer(_pstrFormat)), uintptr(unsafe.Pointer(_rgbTok)), uintptr(len(rgbTok)), uintptr(iFirstDay), uintptr(iFirstWeek), uintptr(lcid), uintptr(unsafe.Pointer(pcbActual)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI1FromBool calls OLEAUT32!VarUI1FromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1frombool
-func VarUI1FromBool(boolIn foundation.VARIANT_BOOL, pbOut *byte) foundation.HRESULT {
+func VarUI1FromBool(boolIn foundation.VARIANT_BOOL, pbOut *byte) error {
 	r1, _, _ := syscall.SyscallN(procVarUI1FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pbOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI1FromDec calls OLEAUT32!VarUI1FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromdec
-func VarUI1FromDec(pdecIn *foundation.DECIMAL, pbOut *byte) foundation.HRESULT {
+func VarUI1FromDec(pdecIn *foundation.DECIMAL, pbOut *byte) error {
 	r1, _, _ := syscall.SyscallN(procVarUI1FromDec.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(pbOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI1FromDisp calls OLEAUT32!VarUI1FromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromdisp
-func VarUI1FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pbOut *byte) foundation.HRESULT {
+func VarUI1FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pbOut *byte) error {
 	r1, _, _ := syscall.SyscallN(procVarUI1FromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(unsafe.Pointer(pbOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI1FromI1 calls OLEAUT32!VarUI1FromI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromi1
-func VarUI1FromI1(cIn foundation.CHAR, pbOut *byte) foundation.HRESULT {
+func VarUI1FromI1(cIn foundation.CHAR, pbOut *byte) error {
 	r1, _, _ := syscall.SyscallN(procVarUI1FromI1.Addr(), uintptr(cIn), uintptr(unsafe.Pointer(pbOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI1FromI2 calls OLEAUT32!VarUI1FromI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromi2
-func VarUI1FromI2(sIn int16, pbOut *byte) foundation.HRESULT {
+func VarUI1FromI2(sIn int16, pbOut *byte) error {
 	r1, _, _ := syscall.SyscallN(procVarUI1FromI2.Addr(), uintptr(sIn), uintptr(unsafe.Pointer(pbOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI1FromI4 calls OLEAUT32!VarUI1FromI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromi4
-func VarUI1FromI4(lIn int32, pbOut *byte) foundation.HRESULT {
+func VarUI1FromI4(lIn int32, pbOut *byte) error {
 	r1, _, _ := syscall.SyscallN(procVarUI1FromI4.Addr(), uintptr(lIn), uintptr(unsafe.Pointer(pbOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI1FromI8 calls OLEAUT32!VarUI1FromI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromi8
-func VarUI1FromI8(i64In int64, pbOut *byte) foundation.HRESULT {
+func VarUI1FromI8(i64In int64, pbOut *byte) error {
 	r1, _, _ := syscall.SyscallN(procVarUI1FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(pbOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI1FromStr calls OLEAUT32!VarUI1FromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromstr
-func VarUI1FromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, pbOut *byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarUI1FromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbOut)))
-	return foundation.HRESULT(r1)
+func VarUI1FromStr(strIn string, lcid uint32, dwFlags uint32, pbOut *byte) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarUI1FromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pbOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI1FromUI2 calls OLEAUT32!VarUI1FromUI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromui2
-func VarUI1FromUI2(uiIn uint16, pbOut *byte) foundation.HRESULT {
+func VarUI1FromUI2(uiIn uint16, pbOut *byte) error {
 	r1, _, _ := syscall.SyscallN(procVarUI1FromUI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(pbOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI1FromUI4 calls OLEAUT32!VarUI1FromUI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromui4
-func VarUI1FromUI4(ulIn uint32, pbOut *byte) foundation.HRESULT {
+func VarUI1FromUI4(ulIn uint32, pbOut *byte) error {
 	r1, _, _ := syscall.SyscallN(procVarUI1FromUI4.Addr(), uintptr(ulIn), uintptr(unsafe.Pointer(pbOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI1FromUI8 calls OLEAUT32!VarUI1FromUI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui1fromui8
-func VarUI1FromUI8(ui64In uint64, pbOut *byte) foundation.HRESULT {
+func VarUI1FromUI8(ui64In uint64, pbOut *byte) error {
 	r1, _, _ := syscall.SyscallN(procVarUI1FromUI8.Addr(), uintptr(ui64In), uintptr(unsafe.Pointer(pbOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI2FromBool calls OLEAUT32!VarUI2FromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2frombool
-func VarUI2FromBool(boolIn foundation.VARIANT_BOOL, puiOut *uint16) foundation.HRESULT {
+func VarUI2FromBool(boolIn foundation.VARIANT_BOOL, puiOut *uint16) error {
 	r1, _, _ := syscall.SyscallN(procVarUI2FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(puiOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI2FromDec calls OLEAUT32!VarUI2FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromdec
-func VarUI2FromDec(pdecIn *foundation.DECIMAL, puiOut *uint16) foundation.HRESULT {
+func VarUI2FromDec(pdecIn *foundation.DECIMAL, puiOut *uint16) error {
 	r1, _, _ := syscall.SyscallN(procVarUI2FromDec.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(puiOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI2FromDisp calls OLEAUT32!VarUI2FromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromdisp
-func VarUI2FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, puiOut *uint16) foundation.HRESULT {
+func VarUI2FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, puiOut *uint16) error {
 	r1, _, _ := syscall.SyscallN(procVarUI2FromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(unsafe.Pointer(puiOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI2FromI1 calls OLEAUT32!VarUI2FromI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromi1
-func VarUI2FromI1(cIn foundation.CHAR, puiOut *uint16) foundation.HRESULT {
+func VarUI2FromI1(cIn foundation.CHAR, puiOut *uint16) error {
 	r1, _, _ := syscall.SyscallN(procVarUI2FromI1.Addr(), uintptr(cIn), uintptr(unsafe.Pointer(puiOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI2FromI2 calls OLEAUT32!VarUI2FromI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromi2
-func VarUI2FromI2(uiIn int16, puiOut *uint16) foundation.HRESULT {
+func VarUI2FromI2(uiIn int16, puiOut *uint16) error {
 	r1, _, _ := syscall.SyscallN(procVarUI2FromI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(puiOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI2FromI4 calls OLEAUT32!VarUI2FromI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromi4
-func VarUI2FromI4(lIn int32, puiOut *uint16) foundation.HRESULT {
+func VarUI2FromI4(lIn int32, puiOut *uint16) error {
 	r1, _, _ := syscall.SyscallN(procVarUI2FromI4.Addr(), uintptr(lIn), uintptr(unsafe.Pointer(puiOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI2FromI8 calls OLEAUT32!VarUI2FromI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromi8
-func VarUI2FromI8(i64In int64, puiOut *uint16) foundation.HRESULT {
+func VarUI2FromI8(i64In int64, puiOut *uint16) error {
 	r1, _, _ := syscall.SyscallN(procVarUI2FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(puiOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI2FromStr calls OLEAUT32!VarUI2FromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromstr
-func VarUI2FromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, puiOut *uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarUI2FromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(puiOut)))
-	return foundation.HRESULT(r1)
+func VarUI2FromStr(strIn string, lcid uint32, dwFlags uint32, puiOut *uint16) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarUI2FromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(puiOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI2FromUI1 calls OLEAUT32!VarUI2FromUI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromui1
-func VarUI2FromUI1(bIn byte, puiOut *uint16) foundation.HRESULT {
+func VarUI2FromUI1(bIn byte, puiOut *uint16) error {
 	r1, _, _ := syscall.SyscallN(procVarUI2FromUI1.Addr(), uintptr(bIn), uintptr(unsafe.Pointer(puiOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI2FromUI4 calls OLEAUT32!VarUI2FromUI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromui4
-func VarUI2FromUI4(ulIn uint32, puiOut *uint16) foundation.HRESULT {
+func VarUI2FromUI4(ulIn uint32, puiOut *uint16) error {
 	r1, _, _ := syscall.SyscallN(procVarUI2FromUI4.Addr(), uintptr(ulIn), uintptr(unsafe.Pointer(puiOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI2FromUI8 calls OLEAUT32!VarUI2FromUI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui2fromui8
-func VarUI2FromUI8(i64In uint64, puiOut *uint16) foundation.HRESULT {
+func VarUI2FromUI8(i64In uint64, puiOut *uint16) error {
 	r1, _, _ := syscall.SyscallN(procVarUI2FromUI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(puiOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI4FromBool calls OLEAUT32!VarUI4FromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4frombool
-func VarUI4FromBool(boolIn foundation.VARIANT_BOOL, pulOut *uint32) foundation.HRESULT {
+func VarUI4FromBool(boolIn foundation.VARIANT_BOOL, pulOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procVarUI4FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pulOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI4FromDec calls OLEAUT32!VarUI4FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromdec
-func VarUI4FromDec(pdecIn *foundation.DECIMAL, pulOut *uint32) foundation.HRESULT {
+func VarUI4FromDec(pdecIn *foundation.DECIMAL, pulOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procVarUI4FromDec.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(pulOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI4FromDisp calls OLEAUT32!VarUI4FromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromdisp
-func VarUI4FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pulOut *uint32) foundation.HRESULT {
+func VarUI4FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pulOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procVarUI4FromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(unsafe.Pointer(pulOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI4FromI1 calls OLEAUT32!VarUI4FromI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromi1
-func VarUI4FromI1(cIn foundation.CHAR, pulOut *uint32) foundation.HRESULT {
+func VarUI4FromI1(cIn foundation.CHAR, pulOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procVarUI4FromI1.Addr(), uintptr(cIn), uintptr(unsafe.Pointer(pulOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI4FromI2 calls OLEAUT32!VarUI4FromI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromi2
-func VarUI4FromI2(uiIn int16, pulOut *uint32) foundation.HRESULT {
+func VarUI4FromI2(uiIn int16, pulOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procVarUI4FromI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(pulOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI4FromI4 calls OLEAUT32!VarUI4FromI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromi4
-func VarUI4FromI4(lIn int32, pulOut *uint32) foundation.HRESULT {
+func VarUI4FromI4(lIn int32, pulOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procVarUI4FromI4.Addr(), uintptr(lIn), uintptr(unsafe.Pointer(pulOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI4FromI8 calls OLEAUT32!VarUI4FromI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromi8
-func VarUI4FromI8(i64In int64, plOut *uint32) foundation.HRESULT {
+func VarUI4FromI8(i64In int64, plOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procVarUI4FromI8.Addr(), uintptr(i64In), uintptr(unsafe.Pointer(plOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI4FromStr calls OLEAUT32!VarUI4FromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromstr
-func VarUI4FromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, pulOut *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarUI4FromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pulOut)))
-	return foundation.HRESULT(r1)
+func VarUI4FromStr(strIn string, lcid uint32, dwFlags uint32, pulOut *uint32) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarUI4FromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pulOut)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI4FromUI1 calls OLEAUT32!VarUI4FromUI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromui1
-func VarUI4FromUI1(bIn byte, pulOut *uint32) foundation.HRESULT {
+func VarUI4FromUI1(bIn byte, pulOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procVarUI4FromUI1.Addr(), uintptr(bIn), uintptr(unsafe.Pointer(pulOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI4FromUI2 calls OLEAUT32!VarUI4FromUI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromui2
-func VarUI4FromUI2(uiIn uint16, pulOut *uint32) foundation.HRESULT {
+func VarUI4FromUI2(uiIn uint16, pulOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procVarUI4FromUI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(pulOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI4FromUI8 calls OLEAUT32!VarUI4FromUI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui4fromui8
-func VarUI4FromUI8(ui64In uint64, plOut *uint32) foundation.HRESULT {
+func VarUI4FromUI8(ui64In uint64, plOut *uint32) error {
 	r1, _, _ := syscall.SyscallN(procVarUI4FromUI8.Addr(), uintptr(ui64In), uintptr(unsafe.Pointer(plOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI8FromBool calls OLEAUT32!VarUI8FromBool.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8frombool
-func VarUI8FromBool(boolIn foundation.VARIANT_BOOL, pi64Out *uint64) foundation.HRESULT {
+func VarUI8FromBool(boolIn foundation.VARIANT_BOOL, pi64Out *uint64) error {
 	r1, _, _ := syscall.SyscallN(procVarUI8FromBool.Addr(), uintptr(boolIn), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI8FromDec calls OLEAUT32!VarUI8FromDec.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromdec
-func VarUI8FromDec(pdecIn *foundation.DECIMAL, pi64Out *uint64) foundation.HRESULT {
+func VarUI8FromDec(pdecIn *foundation.DECIMAL, pi64Out *uint64) error {
 	r1, _, _ := syscall.SyscallN(procVarUI8FromDec.Addr(), uintptr(unsafe.Pointer(pdecIn)), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI8FromDisp calls OLEAUT32!VarUI8FromDisp.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromdisp
-func VarUI8FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pi64Out *uint64) foundation.HRESULT {
+func VarUI8FromDisp(pdispIn *systemcom.IDispatch, lcid uint32, pi64Out *uint64) error {
 	r1, _, _ := syscall.SyscallN(procVarUI8FromDisp.Addr(), uintptr(unsafe.Pointer(pdispIn)), uintptr(lcid), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI8FromI1 calls OLEAUT32!VarUI8FromI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromi1
-func VarUI8FromI1(cIn foundation.CHAR, pi64Out *uint64) foundation.HRESULT {
+func VarUI8FromI1(cIn foundation.CHAR, pi64Out *uint64) error {
 	r1, _, _ := syscall.SyscallN(procVarUI8FromI1.Addr(), uintptr(cIn), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI8FromI2 calls OLEAUT32!VarUI8FromI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromi2
-func VarUI8FromI2(sIn int16, pi64Out *uint64) foundation.HRESULT {
+func VarUI8FromI2(sIn int16, pi64Out *uint64) error {
 	r1, _, _ := syscall.SyscallN(procVarUI8FromI2.Addr(), uintptr(sIn), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI8FromI8 calls OLEAUT32!VarUI8FromI8.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromi8
-func VarUI8FromI8(ui64In int64, pi64Out *uint64) foundation.HRESULT {
+func VarUI8FromI8(ui64In int64, pi64Out *uint64) error {
 	r1, _, _ := syscall.SyscallN(procVarUI8FromI8.Addr(), uintptr(ui64In), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI8FromStr calls OLEAUT32!VarUI8FromStr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromstr
-func VarUI8FromStr(strIn foundation.PWSTR, lcid uint32, dwFlags uint32, pi64Out *uint64) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procVarUI8FromStr.Addr(), uintptr(unsafe.Pointer(strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+func VarUI8FromStr(strIn string, lcid uint32, dwFlags uint32, pi64Out *uint64) error {
+	_strIn := win32.UTF16Ptr(strIn)
+	r1, _, _ := syscall.SyscallN(procVarUI8FromStr.Addr(), uintptr(unsafe.Pointer(_strIn)), uintptr(lcid), uintptr(dwFlags), uintptr(unsafe.Pointer(pi64Out)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI8FromUI1 calls OLEAUT32!VarUI8FromUI1.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromui1
-func VarUI8FromUI1(bIn byte, pi64Out *uint64) foundation.HRESULT {
+func VarUI8FromUI1(bIn byte, pi64Out *uint64) error {
 	r1, _, _ := syscall.SyscallN(procVarUI8FromUI1.Addr(), uintptr(bIn), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI8FromUI2 calls OLEAUT32!VarUI8FromUI2.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromui2
-func VarUI8FromUI2(uiIn uint16, pi64Out *uint64) foundation.HRESULT {
+func VarUI8FromUI2(uiIn uint16, pi64Out *uint64) error {
 	r1, _, _ := syscall.SyscallN(procVarUI8FromUI2.Addr(), uintptr(uiIn), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarUI8FromUI4 calls OLEAUT32!VarUI8FromUI4.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varui8fromui4
-func VarUI8FromUI4(ulIn uint32, pi64Out *uint64) foundation.HRESULT {
+func VarUI8FromUI4(ulIn uint32, pi64Out *uint64) error {
 	r1, _, _ := syscall.SyscallN(procVarUI8FromUI4.Addr(), uintptr(ulIn), uintptr(unsafe.Pointer(pi64Out)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarWeekdayName calls OLEAUT32!VarWeekdayName.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varweekdayname
-func VarWeekdayName(iWeekday int32, fAbbrev int32, iFirstDay int32, dwFlags uint32, pbstrOut *foundation.BSTR) foundation.HRESULT {
+func VarWeekdayName(iWeekday int32, fAbbrev int32, iFirstDay int32, dwFlags uint32, pbstrOut *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(procVarWeekdayName.Addr(), uintptr(iWeekday), uintptr(fAbbrev), uintptr(iFirstDay), uintptr(dwFlags), uintptr(unsafe.Pointer(pbstrOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VarXor calls OLEAUT32!VarXor.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-varxor
-func VarXor(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) foundation.HRESULT {
+func VarXor(pvarLeft *systemvariant.VARIANT, pvarRight *systemvariant.VARIANT, pvarResult *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(procVarXor.Addr(), uintptr(unsafe.Pointer(pvarLeft)), uintptr(unsafe.Pointer(pvarRight)), uintptr(unsafe.Pointer(pvarResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // VectorFromBstr calls OLEAUT32!VectorFromBstr.
 // https://learn.microsoft.com/windows/win32/api/oleauto/nf-oleauto-vectorfrombstr
-func VectorFromBstr(bstr foundation.BSTR, ppsa **systemcom.SAFEARRAY) foundation.HRESULT {
+func VectorFromBstr(bstr foundation.BSTR, ppsa **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(procVectorFromBstr.Addr(), uintptr(unsafe.Pointer(bstr)), uintptr(unsafe.Pointer(ppsa)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

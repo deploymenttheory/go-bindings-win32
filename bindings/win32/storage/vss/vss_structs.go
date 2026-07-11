@@ -54,8 +54,8 @@ type VSS_MGMT_OBJECT_PROP struct {
 	Obj  VSS_MGMT_OBJECT_UNION
 }
 
-// VSS_MGMT_OBJECT_UNION is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VSS_MGMT_OBJECT_UNION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VSS_MGMT_OBJECT_UNION struct {
 	Data [5]uint64
 }
@@ -66,8 +66,8 @@ type VSS_OBJECT_PROP struct {
 	Obj  VSS_OBJECT_UNION
 }
 
-// VSS_OBJECT_UNION is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// VSS_OBJECT_UNION is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type VSS_OBJECT_UNION struct {
 	Data [16]uint64
 }

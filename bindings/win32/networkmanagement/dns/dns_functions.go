@@ -17,8 +17,8 @@ var (
 )
 
 var (
+	procDnsAcquireContextHandle_              = modDNSAPI.NewProc("DnsAcquireContextHandle_W")
 	procDnsAcquireContextHandle_A             = modDNSAPI.NewProc("DnsAcquireContextHandle_A")
-	procDnsAcquireContextHandle_W             = modDNSAPI.NewProc("DnsAcquireContextHandle_W")
 	procDnsCancelQuery                        = modDNSAPI.NewProc("DnsCancelQuery")
 	procDnsCancelQueryRaw                     = modDNSAPI.NewProc("DnsCancelQueryRaw")
 	procDnsConnectionDeletePolicyEntries      = modDNSAPI.NewProc("DnsConnectionDeletePolicyEntries")
@@ -43,27 +43,27 @@ var (
 	procDnsGetApplicationSettings             = modDNSAPI.NewProc("DnsGetApplicationSettings")
 	procDnsGetProxyInformation                = modDNSAPI.NewProc("DnsGetProxyInformation")
 	procDnsIsFlatRecord                       = modDNSAPI.NewProc("DnsIsFlatRecord")
+	procDnsModifyRecordsInSet_                = modDNSAPI.NewProc("DnsModifyRecordsInSet_W")
 	procDnsModifyRecordsInSet_A               = modDNSAPI.NewProc("DnsModifyRecordsInSet_A")
 	procDnsModifyRecordsInSet_UTF8            = modDNSAPI.NewProc("DnsModifyRecordsInSet_UTF8")
-	procDnsModifyRecordsInSet_W               = modDNSAPI.NewProc("DnsModifyRecordsInSet_W")
+	procDnsNameCompare_                       = modDNSAPI.NewProc("DnsNameCompare_W")
 	procDnsNameCompare_A                      = modDNSAPI.NewProc("DnsNameCompare_A")
-	procDnsNameCompare_W                      = modDNSAPI.NewProc("DnsNameCompare_W")
 	procDnsQueryConfig                        = modDNSAPI.NewProc("DnsQueryConfig")
 	procDnsQueryEx                            = modDNSAPI.NewProc("DnsQueryEx")
 	procDnsQueryRaw                           = modDNSAPI.NewProc("DnsQueryRaw")
 	procDnsQueryRawResultFree                 = modDNSAPI.NewProc("DnsQueryRawResultFree")
+	procDnsQuery_                             = modDNSAPI.NewProc("DnsQuery_W")
 	procDnsQuery_A                            = modDNSAPI.NewProc("DnsQuery_A")
 	procDnsQuery_UTF8                         = modDNSAPI.NewProc("DnsQuery_UTF8")
-	procDnsQuery_W                            = modDNSAPI.NewProc("DnsQuery_W")
 	procDnsRecordCompare                      = modDNSAPI.NewProc("DnsRecordCompare")
 	procDnsRecordCopyEx                       = modDNSAPI.NewProc("DnsRecordCopyEx")
 	procDnsRecordSetCompare                   = modDNSAPI.NewProc("DnsRecordSetCompare")
 	procDnsRecordSetCopyEx                    = modDNSAPI.NewProc("DnsRecordSetCopyEx")
 	procDnsRecordSetDetach                    = modDNSAPI.NewProc("DnsRecordSetDetach")
 	procDnsReleaseContextHandle               = modDNSAPI.NewProc("DnsReleaseContextHandle")
+	procDnsReplaceRecordSet                   = modDNSAPI.NewProc("DnsReplaceRecordSetW")
 	procDnsReplaceRecordSetA                  = modDNSAPI.NewProc("DnsReplaceRecordSetA")
 	procDnsReplaceRecordSetUTF8               = modDNSAPI.NewProc("DnsReplaceRecordSetUTF8")
-	procDnsReplaceRecordSetW                  = modDNSAPI.NewProc("DnsReplaceRecordSetW")
 	procDnsServiceBrowse                      = modDNSAPI.NewProc("DnsServiceBrowse")
 	procDnsServiceBrowseCancel                = modDNSAPI.NewProc("DnsServiceBrowseCancel")
 	procDnsServiceConstructInstance           = modDNSAPI.NewProc("DnsServiceConstructInstance")
@@ -77,26 +77,26 @@ var (
 	procDnsSetApplicationSettings             = modDNSAPI.NewProc("DnsSetApplicationSettings")
 	procDnsStartMulticastQuery                = modDNSAPI.NewProc("DnsStartMulticastQuery")
 	procDnsStopMulticastQuery                 = modDNSAPI.NewProc("DnsStopMulticastQuery")
+	procDnsValidateName_                      = modDNSAPI.NewProc("DnsValidateName_W")
 	procDnsValidateName_A                     = modDNSAPI.NewProc("DnsValidateName_A")
 	procDnsValidateName_UTF8                  = modDNSAPI.NewProc("DnsValidateName_UTF8")
-	procDnsValidateName_W                     = modDNSAPI.NewProc("DnsValidateName_W")
 	procDnsWriteQuestionToBuffer_UTF8         = modDNSAPI.NewProc("DnsWriteQuestionToBuffer_UTF8")
 	procDnsWriteQuestionToBuffer_W            = modDNSAPI.NewProc("DnsWriteQuestionToBuffer_W")
 )
+
+// DnsAcquireContextHandle_ calls DNSAPI!DnsAcquireContextHandle_W.
+// https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsacquirecontexthandle_w
+// Minimum OS: windows5.0.
+func DnsAcquireContextHandle_(CredentialFlags uint32, Credentials unsafe.Pointer, pContext *foundation.HANDLE) int32 {
+	r1, _, _ := syscall.SyscallN(procDnsAcquireContextHandle_.Addr(), uintptr(CredentialFlags), uintptr(unsafe.Pointer(Credentials)), uintptr(unsafe.Pointer(pContext)))
+	return int32(r1)
+}
 
 // DnsAcquireContextHandle_A calls DNSAPI!DnsAcquireContextHandle_A.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsacquirecontexthandle_a
 // Minimum OS: windows5.0.
 func DnsAcquireContextHandle_A(CredentialFlags uint32, Credentials unsafe.Pointer, pContext *foundation.HANDLE) int32 {
 	r1, _, _ := syscall.SyscallN(procDnsAcquireContextHandle_A.Addr(), uintptr(CredentialFlags), uintptr(unsafe.Pointer(Credentials)), uintptr(unsafe.Pointer(pContext)))
-	return int32(r1)
-}
-
-// DnsAcquireContextHandle_W calls DNSAPI!DnsAcquireContextHandle_W.
-// https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsacquirecontexthandle_w
-// Minimum OS: windows5.0.
-func DnsAcquireContextHandle_W(CredentialFlags uint32, Credentials unsafe.Pointer, pContext *foundation.HANDLE) int32 {
-	r1, _, _ := syscall.SyscallN(procDnsAcquireContextHandle_W.Addr(), uintptr(CredentialFlags), uintptr(unsafe.Pointer(Credentials)), uintptr(unsafe.Pointer(pContext)))
 	return int32(r1)
 }
 
@@ -121,8 +121,9 @@ func DnsConnectionDeletePolicyEntries(PolicyEntryTag DNS_CONNECTION_POLICY_TAG) 
 }
 
 // DnsConnectionDeleteProxyInfo calls DNSAPI!DnsConnectionDeleteProxyInfo.
-func DnsConnectionDeleteProxyInfo(pwszConnectionName foundation.PWSTR, Type DNS_CONNECTION_PROXY_TYPE) uint32 {
-	r1, _, _ := syscall.SyscallN(procDnsConnectionDeleteProxyInfo.Addr(), uintptr(unsafe.Pointer(pwszConnectionName)), uintptr(Type))
+func DnsConnectionDeleteProxyInfo(pwszConnectionName string, Type DNS_CONNECTION_PROXY_TYPE) uint32 {
+	_pwszConnectionName := win32.UTF16Ptr(pwszConnectionName)
+	r1, _, _ := syscall.SyscallN(procDnsConnectionDeleteProxyInfo.Addr(), uintptr(unsafe.Pointer(_pwszConnectionName)), uintptr(Type))
 	return uint32(r1)
 }
 
@@ -153,26 +154,39 @@ func DnsConnectionGetNameList(pNameList *DNS_CONNECTION_NAME_LIST) uint32 {
 }
 
 // DnsConnectionGetProxyInfo calls DNSAPI!DnsConnectionGetProxyInfo.
-func DnsConnectionGetProxyInfo(pwszConnectionName foundation.PWSTR, Type DNS_CONNECTION_PROXY_TYPE, pProxyInfo *DNS_CONNECTION_PROXY_INFO) uint32 {
-	r1, _, _ := syscall.SyscallN(procDnsConnectionGetProxyInfo.Addr(), uintptr(unsafe.Pointer(pwszConnectionName)), uintptr(Type), uintptr(unsafe.Pointer(pProxyInfo)))
+func DnsConnectionGetProxyInfo(pwszConnectionName string, Type DNS_CONNECTION_PROXY_TYPE, pProxyInfo *DNS_CONNECTION_PROXY_INFO) uint32 {
+	_pwszConnectionName := win32.UTF16Ptr(pwszConnectionName)
+	r1, _, _ := syscall.SyscallN(procDnsConnectionGetProxyInfo.Addr(), uintptr(unsafe.Pointer(_pwszConnectionName)), uintptr(Type), uintptr(unsafe.Pointer(pProxyInfo)))
 	return uint32(r1)
 }
 
 // DnsConnectionGetProxyInfoForHostUrl calls DNSAPI!DnsConnectionGetProxyInfoForHostUrl.
-func DnsConnectionGetProxyInfoForHostUrl(pwszHostUrl foundation.PWSTR, pSelectionContext *byte, dwSelectionContextLength uint32, dwExplicitInterfaceIndex uint32, pProxyInfoEx *DNS_CONNECTION_PROXY_INFO_EX) uint32 {
-	r1, _, _ := syscall.SyscallN(procDnsConnectionGetProxyInfoForHostUrl.Addr(), uintptr(unsafe.Pointer(pwszHostUrl)), uintptr(unsafe.Pointer(pSelectionContext)), uintptr(dwSelectionContextLength), uintptr(dwExplicitInterfaceIndex), uintptr(unsafe.Pointer(pProxyInfoEx)))
+func DnsConnectionGetProxyInfoForHostUrl(pwszHostUrl string, pSelectionContext []byte, dwExplicitInterfaceIndex uint32, pProxyInfoEx *DNS_CONNECTION_PROXY_INFO_EX) uint32 {
+	_pwszHostUrl := win32.UTF16Ptr(pwszHostUrl)
+	var _pSelectionContext *byte
+	if len(pSelectionContext) > 0 {
+		_pSelectionContext = &pSelectionContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDnsConnectionGetProxyInfoForHostUrl.Addr(), uintptr(unsafe.Pointer(_pwszHostUrl)), uintptr(unsafe.Pointer(_pSelectionContext)), uintptr(len(pSelectionContext)), uintptr(dwExplicitInterfaceIndex), uintptr(unsafe.Pointer(pProxyInfoEx)))
 	return uint32(r1)
 }
 
 // DnsConnectionGetProxyInfoForHostUrlEx calls DNSAPI!DnsConnectionGetProxyInfoForHostUrlEx.
-func DnsConnectionGetProxyInfoForHostUrlEx(pwszHostUrl foundation.PWSTR, pSelectionContext *byte, dwSelectionContextLength uint32, dwExplicitInterfaceIndex uint32, pwszConnectionName foundation.PWSTR, pProxyInfoEx *DNS_CONNECTION_PROXY_INFO_EX) uint32 {
-	r1, _, _ := syscall.SyscallN(procDnsConnectionGetProxyInfoForHostUrlEx.Addr(), uintptr(unsafe.Pointer(pwszHostUrl)), uintptr(unsafe.Pointer(pSelectionContext)), uintptr(dwSelectionContextLength), uintptr(dwExplicitInterfaceIndex), uintptr(unsafe.Pointer(pwszConnectionName)), uintptr(unsafe.Pointer(pProxyInfoEx)))
+func DnsConnectionGetProxyInfoForHostUrlEx(pwszHostUrl string, pSelectionContext []byte, dwExplicitInterfaceIndex uint32, pwszConnectionName string, pProxyInfoEx *DNS_CONNECTION_PROXY_INFO_EX) uint32 {
+	_pwszHostUrl := win32.UTF16Ptr(pwszHostUrl)
+	var _pSelectionContext *byte
+	if len(pSelectionContext) > 0 {
+		_pSelectionContext = &pSelectionContext[0]
+	}
+	_pwszConnectionName := win32.UTF16Ptr(pwszConnectionName)
+	r1, _, _ := syscall.SyscallN(procDnsConnectionGetProxyInfoForHostUrlEx.Addr(), uintptr(unsafe.Pointer(_pwszHostUrl)), uintptr(unsafe.Pointer(_pSelectionContext)), uintptr(len(pSelectionContext)), uintptr(dwExplicitInterfaceIndex), uintptr(unsafe.Pointer(_pwszConnectionName)), uintptr(unsafe.Pointer(pProxyInfoEx)))
 	return uint32(r1)
 }
 
 // DnsConnectionGetProxyList calls DNSAPI!DnsConnectionGetProxyList.
-func DnsConnectionGetProxyList(pwszConnectionName foundation.PWSTR, pProxyList *DNS_CONNECTION_PROXY_LIST) uint32 {
-	r1, _, _ := syscall.SyscallN(procDnsConnectionGetProxyList.Addr(), uintptr(unsafe.Pointer(pwszConnectionName)), uintptr(unsafe.Pointer(pProxyList)))
+func DnsConnectionGetProxyList(pwszConnectionName string, pProxyList *DNS_CONNECTION_PROXY_LIST) uint32 {
+	_pwszConnectionName := win32.UTF16Ptr(pwszConnectionName)
+	r1, _, _ := syscall.SyscallN(procDnsConnectionGetProxyList.Addr(), uintptr(unsafe.Pointer(_pwszConnectionName)), uintptr(unsafe.Pointer(pProxyList)))
 	return uint32(r1)
 }
 
@@ -183,8 +197,9 @@ func DnsConnectionSetPolicyEntries(PolicyEntryTag DNS_CONNECTION_POLICY_TAG, pPo
 }
 
 // DnsConnectionSetProxyInfo calls DNSAPI!DnsConnectionSetProxyInfo.
-func DnsConnectionSetProxyInfo(pwszConnectionName foundation.PWSTR, Type DNS_CONNECTION_PROXY_TYPE, pProxyInfo *DNS_CONNECTION_PROXY_INFO) uint32 {
-	r1, _, _ := syscall.SyscallN(procDnsConnectionSetProxyInfo.Addr(), uintptr(unsafe.Pointer(pwszConnectionName)), uintptr(Type), uintptr(unsafe.Pointer(pProxyInfo)))
+func DnsConnectionSetProxyInfo(pwszConnectionName string, Type DNS_CONNECTION_PROXY_TYPE, pProxyInfo *DNS_CONNECTION_PROXY_INFO) uint32 {
+	_pwszConnectionName := win32.UTF16Ptr(pwszConnectionName)
+	r1, _, _ := syscall.SyscallN(procDnsConnectionSetProxyInfo.Addr(), uintptr(unsafe.Pointer(_pwszConnectionName)), uintptr(Type), uintptr(unsafe.Pointer(pProxyInfo)))
 	return uint32(r1)
 }
 
@@ -226,8 +241,9 @@ func DnsFreeCustomServers(pcServers *uint32, ppServers **DNS_CUSTOM_SERVER) {
 // DnsFreeProxyName calls DNSAPI!DnsFreeProxyName.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsfreeproxyname
 // Minimum OS: windows6.1.
-func DnsFreeProxyName(proxyName foundation.PWSTR) {
-	syscall.SyscallN(procDnsFreeProxyName.Addr(), uintptr(unsafe.Pointer(proxyName)))
+func DnsFreeProxyName(proxyName string) {
+	_proxyName := win32.UTF16Ptr(proxyName)
+	syscall.SyscallN(procDnsFreeProxyName.Addr(), uintptr(unsafe.Pointer(_proxyName)))
 }
 
 // DnsGetApplicationSettings calls DNSAPI!DnsGetApplicationSettings.
@@ -240,14 +256,23 @@ func DnsGetApplicationSettings(pcServers *uint32, ppDefaultServers **DNS_CUSTOM_
 // DnsGetProxyInformation calls DNSAPI!DnsGetProxyInformation.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsgetproxyinformation
 // Minimum OS: windows6.1.
-func DnsGetProxyInformation(hostName foundation.PWSTR, proxyInformation *DNS_PROXY_INFORMATION, defaultProxyInformation *DNS_PROXY_INFORMATION, completionRoutine DNS_PROXY_COMPLETION_ROUTINE, completionContext unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procDnsGetProxyInformation.Addr(), uintptr(unsafe.Pointer(hostName)), uintptr(unsafe.Pointer(proxyInformation)), uintptr(unsafe.Pointer(defaultProxyInformation)), uintptr(completionRoutine), uintptr(unsafe.Pointer(completionContext)))
+func DnsGetProxyInformation(hostName string, proxyInformation *DNS_PROXY_INFORMATION, defaultProxyInformation *DNS_PROXY_INFORMATION, completionRoutine DNS_PROXY_COMPLETION_ROUTINE, completionContext unsafe.Pointer) uint32 {
+	_hostName := win32.UTF16Ptr(hostName)
+	r1, _, _ := syscall.SyscallN(procDnsGetProxyInformation.Addr(), uintptr(unsafe.Pointer(_hostName)), uintptr(unsafe.Pointer(proxyInformation)), uintptr(unsafe.Pointer(defaultProxyInformation)), uintptr(completionRoutine), uintptr(unsafe.Pointer(completionContext)))
 	return uint32(r1)
 }
 
 // DnsIsFlatRecord calls DNSAPI!DnsIsFlatRecord.
 func DnsIsFlatRecord(pRecord *DNS_RECORDA, ullFlags uint64, pfFlat *foundation.BOOL) int32 {
 	r1, _, _ := syscall.SyscallN(procDnsIsFlatRecord.Addr(), uintptr(unsafe.Pointer(pRecord)), uintptr(ullFlags), uintptr(unsafe.Pointer(pfFlat)))
+	return int32(r1)
+}
+
+// DnsModifyRecordsInSet_ calls DNSAPI!DnsModifyRecordsInSet_W.
+// https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsmodifyrecordsinset_w
+// Minimum OS: windows5.0.
+func DnsModifyRecordsInSet_(pAddRecords *DNS_RECORDA, pDeleteRecords *DNS_RECORDA, Options uint32, hCredentials foundation.HANDLE, pExtraList unsafe.Pointer, pReserved unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procDnsModifyRecordsInSet_.Addr(), uintptr(unsafe.Pointer(pAddRecords)), uintptr(unsafe.Pointer(pDeleteRecords)), uintptr(Options), uintptr(hCredentials), uintptr(unsafe.Pointer(pExtraList)), uintptr(unsafe.Pointer(pReserved)))
 	return int32(r1)
 }
 
@@ -267,35 +292,30 @@ func DnsModifyRecordsInSet_UTF8(pAddRecords *DNS_RECORDA, pDeleteRecords *DNS_RE
 	return int32(r1)
 }
 
-// DnsModifyRecordsInSet_W calls DNSAPI!DnsModifyRecordsInSet_W.
-// https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsmodifyrecordsinset_w
+// DnsNameCompare_ calls DNSAPI!DnsNameCompare_W.
+// https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsnamecompare_w
 // Minimum OS: windows5.0.
-func DnsModifyRecordsInSet_W(pAddRecords *DNS_RECORDA, pDeleteRecords *DNS_RECORDA, Options uint32, hCredentials foundation.HANDLE, pExtraList unsafe.Pointer, pReserved unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procDnsModifyRecordsInSet_W.Addr(), uintptr(unsafe.Pointer(pAddRecords)), uintptr(unsafe.Pointer(pDeleteRecords)), uintptr(Options), uintptr(hCredentials), uintptr(unsafe.Pointer(pExtraList)), uintptr(unsafe.Pointer(pReserved)))
-	return int32(r1)
+func DnsNameCompare_(pName1 string, pName2 string) bool {
+	_pName1 := win32.UTF16Ptr(pName1)
+	_pName2 := win32.UTF16Ptr(pName2)
+	r1, _, _ := syscall.SyscallN(procDnsNameCompare_.Addr(), uintptr(unsafe.Pointer(_pName1)), uintptr(unsafe.Pointer(_pName2)))
+	return r1 != 0
 }
 
 // DnsNameCompare_A calls DNSAPI!DnsNameCompare_A.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsnamecompare_a
 // Minimum OS: windows5.0.
-func DnsNameCompare_A(pName1 foundation.PSTR, pName2 foundation.PSTR) foundation.BOOL {
+func DnsNameCompare_A(pName1 foundation.PSTR, pName2 foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procDnsNameCompare_A.Addr(), uintptr(unsafe.Pointer(pName1)), uintptr(unsafe.Pointer(pName2)))
-	return foundation.BOOL(r1)
-}
-
-// DnsNameCompare_W calls DNSAPI!DnsNameCompare_W.
-// https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsnamecompare_w
-// Minimum OS: windows5.0.
-func DnsNameCompare_W(pName1 foundation.PWSTR, pName2 foundation.PWSTR) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDnsNameCompare_W.Addr(), uintptr(unsafe.Pointer(pName1)), uintptr(unsafe.Pointer(pName2)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DnsQueryConfig calls DNSAPI!DnsQueryConfig.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsqueryconfig
 // Minimum OS: windows5.0.
-func DnsQueryConfig(Config DNS_CONFIG_TYPE, Flag uint32, pwsAdapterName foundation.PWSTR, pReserved unsafe.Pointer, pBuffer unsafe.Pointer, pBufLen *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procDnsQueryConfig.Addr(), uintptr(Config), uintptr(Flag), uintptr(unsafe.Pointer(pwsAdapterName)), uintptr(unsafe.Pointer(pReserved)), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pBufLen)))
+func DnsQueryConfig(Config DNS_CONFIG_TYPE, Flag uint32, pwsAdapterName string, pReserved unsafe.Pointer, pBuffer unsafe.Pointer, pBufLen *uint32) int32 {
+	_pwsAdapterName := win32.UTF16Ptr(pwsAdapterName)
+	r1, _, _ := syscall.SyscallN(procDnsQueryConfig.Addr(), uintptr(Config), uintptr(Flag), uintptr(unsafe.Pointer(_pwsAdapterName)), uintptr(unsafe.Pointer(pReserved)), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pBufLen)))
 	return int32(r1)
 }
 
@@ -318,6 +338,15 @@ func DnsQueryRawResultFree(queryResults *DNS_QUERY_RAW_RESULT) {
 	syscall.SyscallN(procDnsQueryRawResultFree.Addr(), uintptr(unsafe.Pointer(queryResults)))
 }
 
+// DnsQuery_ calls DNSAPI!DnsQuery_W.
+// https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsquery_w
+// Minimum OS: windows5.0.
+func DnsQuery_(pszName string, wType uint16, Options DNS_QUERY_OPTIONS, pExtra unsafe.Pointer, ppQueryResults **DNS_RECORDA, pReserved *unsafe.Pointer) foundation.WIN32_ERROR {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(procDnsQuery_.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(wType), uintptr(Options), uintptr(unsafe.Pointer(pExtra)), uintptr(unsafe.Pointer(ppQueryResults)), uintptr(unsafe.Pointer(pReserved)))
+	return foundation.WIN32_ERROR(r1)
+}
+
 // DnsQuery_A calls DNSAPI!DnsQuery_A.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsquery_a
 // Minimum OS: windows5.0.
@@ -334,20 +363,12 @@ func DnsQuery_UTF8(pszName foundation.PSTR, wType uint16, Options DNS_QUERY_OPTI
 	return foundation.WIN32_ERROR(r1)
 }
 
-// DnsQuery_W calls DNSAPI!DnsQuery_W.
-// https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsquery_w
-// Minimum OS: windows5.0.
-func DnsQuery_W(pszName foundation.PWSTR, wType uint16, Options DNS_QUERY_OPTIONS, pExtra unsafe.Pointer, ppQueryResults **DNS_RECORDA, pReserved *unsafe.Pointer) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procDnsQuery_W.Addr(), uintptr(unsafe.Pointer(pszName)), uintptr(wType), uintptr(Options), uintptr(unsafe.Pointer(pExtra)), uintptr(unsafe.Pointer(ppQueryResults)), uintptr(unsafe.Pointer(pReserved)))
-	return foundation.WIN32_ERROR(r1)
-}
-
 // DnsRecordCompare calls DNSAPI!DnsRecordCompare.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsrecordcompare
 // Minimum OS: windows5.0.
-func DnsRecordCompare(pRecord1 *DNS_RECORDA, pRecord2 *DNS_RECORDA) foundation.BOOL {
+func DnsRecordCompare(pRecord1 *DNS_RECORDA, pRecord2 *DNS_RECORDA) bool {
 	r1, _, _ := syscall.SyscallN(procDnsRecordCompare.Addr(), uintptr(unsafe.Pointer(pRecord1)), uintptr(unsafe.Pointer(pRecord2)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DnsRecordCopyEx calls DNSAPI!DnsRecordCopyEx.
@@ -361,9 +382,9 @@ func DnsRecordCopyEx(pRecord *DNS_RECORDA, CharSetIn DNS_CHARSET, CharSetOut DNS
 // DnsRecordSetCompare calls DNSAPI!DnsRecordSetCompare.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsrecordsetcompare
 // Minimum OS: windows5.0.
-func DnsRecordSetCompare(pRR1 *DNS_RECORDA, pRR2 *DNS_RECORDA, ppDiff1 **DNS_RECORDA, ppDiff2 **DNS_RECORDA) foundation.BOOL {
+func DnsRecordSetCompare(pRR1 *DNS_RECORDA, pRR2 *DNS_RECORDA, ppDiff1 **DNS_RECORDA, ppDiff2 **DNS_RECORDA) bool {
 	r1, _, _ := syscall.SyscallN(procDnsRecordSetCompare.Addr(), uintptr(unsafe.Pointer(pRR1)), uintptr(unsafe.Pointer(pRR2)), uintptr(unsafe.Pointer(ppDiff1)), uintptr(unsafe.Pointer(ppDiff2)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DnsRecordSetCopyEx calls DNSAPI!DnsRecordSetCopyEx.
@@ -389,6 +410,14 @@ func DnsReleaseContextHandle(hContext foundation.HANDLE) {
 	syscall.SyscallN(procDnsReleaseContextHandle.Addr(), uintptr(hContext))
 }
 
+// DnsReplaceRecordSet calls DNSAPI!DnsReplaceRecordSetW.
+// https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsreplacerecordsetw
+// Minimum OS: windows5.0.
+func DnsReplaceRecordSet(pReplaceSet *DNS_RECORDA, Options uint32, hContext foundation.HANDLE, pExtraInfo unsafe.Pointer, pReserved unsafe.Pointer) int32 {
+	r1, _, _ := syscall.SyscallN(procDnsReplaceRecordSet.Addr(), uintptr(unsafe.Pointer(pReplaceSet)), uintptr(Options), uintptr(hContext), uintptr(unsafe.Pointer(pExtraInfo)), uintptr(unsafe.Pointer(pReserved)))
+	return int32(r1)
+}
+
 // DnsReplaceRecordSetA calls DNSAPI!DnsReplaceRecordSetA.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsreplacerecordseta
 // Minimum OS: windows5.0.
@@ -402,14 +431,6 @@ func DnsReplaceRecordSetA(pReplaceSet *DNS_RECORDA, Options uint32, hContext fou
 // Minimum OS: windows5.0.
 func DnsReplaceRecordSetUTF8(pReplaceSet *DNS_RECORDA, Options uint32, hContext foundation.HANDLE, pExtraInfo unsafe.Pointer, pReserved unsafe.Pointer) int32 {
 	r1, _, _ := syscall.SyscallN(procDnsReplaceRecordSetUTF8.Addr(), uintptr(unsafe.Pointer(pReplaceSet)), uintptr(Options), uintptr(hContext), uintptr(unsafe.Pointer(pExtraInfo)), uintptr(unsafe.Pointer(pReserved)))
-	return int32(r1)
-}
-
-// DnsReplaceRecordSetW calls DNSAPI!DnsReplaceRecordSetW.
-// https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsreplacerecordsetw
-// Minimum OS: windows5.0.
-func DnsReplaceRecordSetW(pReplaceSet *DNS_RECORDA, Options uint32, hContext foundation.HANDLE, pExtraInfo unsafe.Pointer, pReserved unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procDnsReplaceRecordSetW.Addr(), uintptr(unsafe.Pointer(pReplaceSet)), uintptr(Options), uintptr(hContext), uintptr(unsafe.Pointer(pExtraInfo)), uintptr(unsafe.Pointer(pReserved)))
 	return int32(r1)
 }
 
@@ -438,8 +459,10 @@ func DnsServiceBrowseCancel(pCancelHandle *DNS_SERVICE_CANCEL) (int32, error) {
 // DnsServiceConstructInstance calls DNSAPI!DnsServiceConstructInstance.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsserviceconstructinstance
 // Minimum OS: windows10.0.10240.
-func DnsServiceConstructInstance(pServiceName foundation.PWSTR, pHostName foundation.PWSTR, pIp4 *uint32, pIp6 *IP6_ADDRESS, wPort uint16, wPriority uint16, wWeight uint16, dwPropertiesCount uint32, keys *foundation.PWSTR, values *foundation.PWSTR) *DNS_SERVICE_INSTANCE {
-	r1, _, _ := syscall.SyscallN(procDnsServiceConstructInstance.Addr(), uintptr(unsafe.Pointer(pServiceName)), uintptr(unsafe.Pointer(pHostName)), uintptr(unsafe.Pointer(pIp4)), uintptr(unsafe.Pointer(pIp6)), uintptr(wPort), uintptr(wPriority), uintptr(wWeight), uintptr(dwPropertiesCount), uintptr(unsafe.Pointer(keys)), uintptr(unsafe.Pointer(values)))
+func DnsServiceConstructInstance(pServiceName string, pHostName string, pIp4 *uint32, pIp6 *IP6_ADDRESS, wPort uint16, wPriority uint16, wWeight uint16, dwPropertiesCount uint32, keys *foundation.PWSTR, values *foundation.PWSTR) *DNS_SERVICE_INSTANCE {
+	_pServiceName := win32.UTF16Ptr(pServiceName)
+	_pHostName := win32.UTF16Ptr(pHostName)
+	r1, _, _ := syscall.SyscallN(procDnsServiceConstructInstance.Addr(), uintptr(unsafe.Pointer(_pServiceName)), uintptr(unsafe.Pointer(_pHostName)), uintptr(unsafe.Pointer(pIp4)), uintptr(unsafe.Pointer(pIp6)), uintptr(wPort), uintptr(wPriority), uintptr(wWeight), uintptr(dwPropertiesCount), uintptr(unsafe.Pointer(keys)), uintptr(unsafe.Pointer(values)))
 	return (*DNS_SERVICE_INSTANCE)(unsafe.Pointer(r1))
 }
 
@@ -512,8 +535,12 @@ func DnsServiceResolveCancel(pCancelHandle *DNS_SERVICE_CANCEL) (int32, error) {
 
 // DnsSetApplicationSettings calls DNSAPI!DnsSetApplicationSettings.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnssetapplicationsettings
-func DnsSetApplicationSettings(cServers uint32, pServers *DNS_CUSTOM_SERVER, pSettings *DNS_APPLICATION_SETTINGS) uint32 {
-	r1, _, _ := syscall.SyscallN(procDnsSetApplicationSettings.Addr(), uintptr(cServers), uintptr(unsafe.Pointer(pServers)), uintptr(unsafe.Pointer(pSettings)))
+func DnsSetApplicationSettings(pServers []DNS_CUSTOM_SERVER, pSettings *DNS_APPLICATION_SETTINGS) uint32 {
+	var _pServers *DNS_CUSTOM_SERVER
+	if len(pServers) > 0 {
+		_pServers = &pServers[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDnsSetApplicationSettings.Addr(), uintptr(len(pServers)), uintptr(unsafe.Pointer(_pServers)), uintptr(unsafe.Pointer(pSettings)))
 	return uint32(r1)
 }
 
@@ -539,6 +566,15 @@ func DnsStopMulticastQuery(pHandle *MDNS_QUERY_HANDLE) (int32, error) {
 	return int32(r1), nil
 }
 
+// DnsValidateName_ calls DNSAPI!DnsValidateName_W.
+// https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsvalidatename_w
+// Minimum OS: windows5.0.
+func DnsValidateName_(pszName string, Format DNS_NAME_FORMAT) int32 {
+	_pszName := win32.UTF16Ptr(pszName)
+	r1, _, _ := syscall.SyscallN(procDnsValidateName_.Addr(), uintptr(unsafe.Pointer(_pszName)), uintptr(Format))
+	return int32(r1)
+}
+
 // DnsValidateName_A calls DNSAPI!DnsValidateName_A.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsvalidatename_a
 // Minimum OS: windows5.0.
@@ -555,26 +591,21 @@ func DnsValidateName_UTF8(pszName foundation.PSTR, Format DNS_NAME_FORMAT) int32
 	return int32(r1)
 }
 
-// DnsValidateName_W calls DNSAPI!DnsValidateName_W.
-// https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnsvalidatename_w
-// Minimum OS: windows5.0.
-func DnsValidateName_W(pszName foundation.PWSTR, Format DNS_NAME_FORMAT) int32 {
-	r1, _, _ := syscall.SyscallN(procDnsValidateName_W.Addr(), uintptr(unsafe.Pointer(pszName)), uintptr(Format))
-	return int32(r1)
-}
-
 // DnsWriteQuestionToBuffer_UTF8 calls DNSAPI!DnsWriteQuestionToBuffer_UTF8.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnswritequestiontobuffer_utf8
 // Minimum OS: windows5.0.
-func DnsWriteQuestionToBuffer_UTF8(pDnsBuffer *DNS_MESSAGE_BUFFER, pdwBufferSize *uint32, pszName foundation.PSTR, wType uint16, Xid uint16, fRecursionDesired foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDnsWriteQuestionToBuffer_UTF8.Addr(), uintptr(unsafe.Pointer(pDnsBuffer)), uintptr(unsafe.Pointer(pdwBufferSize)), uintptr(unsafe.Pointer(pszName)), uintptr(wType), uintptr(Xid), uintptr(fRecursionDesired))
-	return foundation.BOOL(r1)
+func DnsWriteQuestionToBuffer_UTF8(pDnsBuffer *DNS_MESSAGE_BUFFER, pdwBufferSize *uint32, pszName foundation.PSTR, wType uint16, Xid uint16, fRecursionDesired bool) bool {
+	_fRecursionDesired := win32.Bool32(fRecursionDesired)
+	r1, _, _ := syscall.SyscallN(procDnsWriteQuestionToBuffer_UTF8.Addr(), uintptr(unsafe.Pointer(pDnsBuffer)), uintptr(unsafe.Pointer(pdwBufferSize)), uintptr(unsafe.Pointer(pszName)), uintptr(wType), uintptr(Xid), uintptr(_fRecursionDesired))
+	return r1 != 0
 }
 
 // DnsWriteQuestionToBuffer_W calls DNSAPI!DnsWriteQuestionToBuffer_W.
 // https://learn.microsoft.com/windows/win32/api/windns/nf-windns-dnswritequestiontobuffer_w
 // Minimum OS: windows5.0.
-func DnsWriteQuestionToBuffer_W(pDnsBuffer *DNS_MESSAGE_BUFFER, pdwBufferSize *uint32, pszName foundation.PWSTR, wType uint16, Xid uint16, fRecursionDesired foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procDnsWriteQuestionToBuffer_W.Addr(), uintptr(unsafe.Pointer(pDnsBuffer)), uintptr(unsafe.Pointer(pdwBufferSize)), uintptr(unsafe.Pointer(pszName)), uintptr(wType), uintptr(Xid), uintptr(fRecursionDesired))
-	return foundation.BOOL(r1)
+func DnsWriteQuestionToBuffer_W(pDnsBuffer *DNS_MESSAGE_BUFFER, pdwBufferSize *uint32, pszName string, wType uint16, Xid uint16, fRecursionDesired bool) bool {
+	_pszName := win32.UTF16Ptr(pszName)
+	_fRecursionDesired := win32.Bool32(fRecursionDesired)
+	r1, _, _ := syscall.SyscallN(procDnsWriteQuestionToBuffer_W.Addr(), uintptr(unsafe.Pointer(pDnsBuffer)), uintptr(unsafe.Pointer(pdwBufferSize)), uintptr(unsafe.Pointer(_pszName)), uintptr(wType), uintptr(Xid), uintptr(_fRecursionDesired))
+	return r1 != 0
 }

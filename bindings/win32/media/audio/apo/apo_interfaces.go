@@ -31,9 +31,9 @@ type IApoAcousticEchoCancellation2 struct {
 var IID_IApoAcousticEchoCancellation2 = win32.GUID{Data1: 0xf235855f, Data2: 0xf06d, Data3: 0x45b3, Data4: [8]byte{0xa6, 0x3f, 0xee, 0x4b, 0x71, 0x50, 0x9d, 0xc2}}
 
 // GetDesiredReferenceStreamProperties dispatches through IApoAcousticEchoCancellation2's vtable slot 3.
-func (self *IApoAcousticEchoCancellation2) GetDesiredReferenceStreamProperties(pProperties *APO_REFERENCE_STREAM_PROPERTIES) foundation.HRESULT {
+func (self *IApoAcousticEchoCancellation2) GetDesiredReferenceStreamProperties(pProperties *APO_REFERENCE_STREAM_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IApoAuxiliaryInputConfiguration: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iapoauxiliaryinputconfiguration
@@ -46,21 +46,21 @@ type IApoAuxiliaryInputConfiguration struct {
 var IID_IApoAuxiliaryInputConfiguration = win32.GUID{Data1: 0x4ceb0aab, Data2: 0xfa19, Data3: 0x48ed, Data4: [8]byte{0xa8, 0x57, 0x87, 0x77, 0x1a, 0xe1, 0xb7, 0x68}}
 
 // AddAuxiliaryInput dispatches through IApoAuxiliaryInputConfiguration's vtable slot 3.
-func (self *IApoAuxiliaryInputConfiguration) AddAuxiliaryInput(dwInputId uint32, cbDataSize uint32, pbyData *byte, pInputConnection *APO_CONNECTION_DESCRIPTOR) foundation.HRESULT {
+func (self *IApoAuxiliaryInputConfiguration) AddAuxiliaryInput(dwInputId uint32, cbDataSize uint32, pbyData *byte, pInputConnection *APO_CONNECTION_DESCRIPTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwInputId), uintptr(cbDataSize), uintptr(unsafe.Pointer(pbyData)), uintptr(unsafe.Pointer(pInputConnection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveAuxiliaryInput dispatches through IApoAuxiliaryInputConfiguration's vtable slot 4.
-func (self *IApoAuxiliaryInputConfiguration) RemoveAuxiliaryInput(dwInputId uint32) foundation.HRESULT {
+func (self *IApoAuxiliaryInputConfiguration) RemoveAuxiliaryInput(dwInputId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwInputId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsInputFormatSupported dispatches through IApoAuxiliaryInputConfiguration's vtable slot 5.
-func (self *IApoAuxiliaryInputConfiguration) IsInputFormatSupported(pRequestedInputFormat *IAudioMediaType, ppSupportedInputFormat **IAudioMediaType) foundation.HRESULT {
+func (self *IApoAuxiliaryInputConfiguration) IsInputFormatSupported(pRequestedInputFormat *IAudioMediaType, ppSupportedInputFormat **IAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRequestedInputFormat)), uintptr(unsafe.Pointer(ppSupportedInputFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IApoAuxiliaryInputRT: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iapoauxiliaryinputrt
@@ -87,9 +87,9 @@ type IAudioDeviceModulesClient struct {
 var IID_IAudioDeviceModulesClient = win32.GUID{Data1: 0x98f37dac, Data2: 0xd0b6, Data3: 0x49f5, Data4: [8]byte{0x89, 0x6a, 0xaa, 0x4d, 0x16, 0x9a, 0x4c, 0x48}}
 
 // SetAudioDeviceModulesManager dispatches through IAudioDeviceModulesClient's vtable slot 3.
-func (self *IAudioDeviceModulesClient) SetAudioDeviceModulesManager(pAudioDeviceModulesManager *systemcom.IUnknown) foundation.HRESULT {
+func (self *IAudioDeviceModulesClient) SetAudioDeviceModulesManager(pAudioDeviceModulesManager *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAudioDeviceModulesManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioMediaType: https://learn.microsoft.com/windows/win32/api/audiomediatype/nn-audiomediatype-iaudiomediatype
@@ -102,15 +102,15 @@ type IAudioMediaType struct {
 var IID_IAudioMediaType = win32.GUID{Data1: 0x4e997f73, Data2: 0xb71f, Data3: 0x4798, Data4: [8]byte{0x87, 0x3b, 0xed, 0x7d, 0xfc, 0xf1, 0x5b, 0x4d}}
 
 // IsCompressedFormat dispatches through IAudioMediaType's vtable slot 3.
-func (self *IAudioMediaType) IsCompressedFormat(pfCompressed *foundation.BOOL) foundation.HRESULT {
+func (self *IAudioMediaType) IsCompressedFormat(pfCompressed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfCompressed)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsEqual dispatches through IAudioMediaType's vtable slot 4.
-func (self *IAudioMediaType) IsEqual(pIAudioType *IAudioMediaType, pdwFlags *uint32) foundation.HRESULT {
+func (self *IAudioMediaType) IsEqual(pIAudioType *IAudioMediaType, pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIAudioType)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAudioFormat dispatches through IAudioMediaType's vtable slot 5.
@@ -120,9 +120,9 @@ func (self *IAudioMediaType) GetAudioFormat() unsafe.Pointer {
 }
 
 // GetUncompressedAudioFormat dispatches through IAudioMediaType's vtable slot 6.
-func (self *IAudioMediaType) GetUncompressedAudioFormat(pUncompressedAudioFormat *UNCOMPRESSEDAUDIOFORMAT) foundation.HRESULT {
+func (self *IAudioMediaType) GetUncompressedAudioFormat(pUncompressedAudioFormat *UNCOMPRESSEDAUDIOFORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUncompressedAudioFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioProcessingObject: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iaudioprocessingobject
@@ -135,45 +135,45 @@ type IAudioProcessingObject struct {
 var IID_IAudioProcessingObject = win32.GUID{Data1: 0xfd7f2b29, Data2: 0x24d0, Data3: 0x4b5c, Data4: [8]byte{0xb1, 0x77, 0x59, 0x2c, 0x39, 0xf9, 0xca, 0x10}}
 
 // Reset dispatches through IAudioProcessingObject's vtable slot 3.
-func (self *IAudioProcessingObject) Reset() foundation.HRESULT {
+func (self *IAudioProcessingObject) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLatency dispatches through IAudioProcessingObject's vtable slot 4.
-func (self *IAudioProcessingObject) GetLatency(pTime *int64) foundation.HRESULT {
+func (self *IAudioProcessingObject) GetLatency(pTime *int64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRegistrationProperties dispatches through IAudioProcessingObject's vtable slot 5.
-func (self *IAudioProcessingObject) GetRegistrationProperties(ppRegProps **APO_REG_PROPERTIES) foundation.HRESULT {
+func (self *IAudioProcessingObject) GetRegistrationProperties(ppRegProps **APO_REG_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRegProps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Initialize dispatches through IAudioProcessingObject's vtable slot 6.
-func (self *IAudioProcessingObject) Initialize(cbDataSize uint32, pbyData *byte) foundation.HRESULT {
+func (self *IAudioProcessingObject) Initialize(cbDataSize uint32, pbyData *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cbDataSize), uintptr(unsafe.Pointer(pbyData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsInputFormatSupported dispatches through IAudioProcessingObject's vtable slot 7.
-func (self *IAudioProcessingObject) IsInputFormatSupported(pOppositeFormat *IAudioMediaType, pRequestedInputFormat *IAudioMediaType, ppSupportedInputFormat **IAudioMediaType) foundation.HRESULT {
+func (self *IAudioProcessingObject) IsInputFormatSupported(pOppositeFormat *IAudioMediaType, pRequestedInputFormat *IAudioMediaType, ppSupportedInputFormat **IAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOppositeFormat)), uintptr(unsafe.Pointer(pRequestedInputFormat)), uintptr(unsafe.Pointer(ppSupportedInputFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsOutputFormatSupported dispatches through IAudioProcessingObject's vtable slot 8.
-func (self *IAudioProcessingObject) IsOutputFormatSupported(pOppositeFormat *IAudioMediaType, pRequestedOutputFormat *IAudioMediaType, ppSupportedOutputFormat **IAudioMediaType) foundation.HRESULT {
+func (self *IAudioProcessingObject) IsOutputFormatSupported(pOppositeFormat *IAudioMediaType, pRequestedOutputFormat *IAudioMediaType, ppSupportedOutputFormat **IAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOppositeFormat)), uintptr(unsafe.Pointer(pRequestedOutputFormat)), uintptr(unsafe.Pointer(ppSupportedOutputFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInputChannelCount dispatches through IAudioProcessingObject's vtable slot 9.
-func (self *IAudioProcessingObject) GetInputChannelCount(pu32ChannelCount *uint32) foundation.HRESULT {
+func (self *IAudioProcessingObject) GetInputChannelCount(pu32ChannelCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pu32ChannelCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioProcessingObjectConfiguration: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iaudioprocessingobjectconfiguration
@@ -186,15 +186,15 @@ type IAudioProcessingObjectConfiguration struct {
 var IID_IAudioProcessingObjectConfiguration = win32.GUID{Data1: 0x0e5ed805, Data2: 0xaba6, Data3: 0x49c3, Data4: [8]byte{0x8f, 0x9a, 0x2b, 0x8c, 0x88, 0x9c, 0x4f, 0xa8}}
 
 // LockForProcess dispatches through IAudioProcessingObjectConfiguration's vtable slot 3.
-func (self *IAudioProcessingObjectConfiguration) LockForProcess(u32NumInputConnections uint32, ppInputConnections **APO_CONNECTION_DESCRIPTOR, u32NumOutputConnections uint32, ppOutputConnections **APO_CONNECTION_DESCRIPTOR) foundation.HRESULT {
+func (self *IAudioProcessingObjectConfiguration) LockForProcess(u32NumInputConnections uint32, ppInputConnections **APO_CONNECTION_DESCRIPTOR, u32NumOutputConnections uint32, ppOutputConnections **APO_CONNECTION_DESCRIPTOR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(u32NumInputConnections), uintptr(unsafe.Pointer(ppInputConnections)), uintptr(u32NumOutputConnections), uintptr(unsafe.Pointer(ppOutputConnections)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnlockForProcess dispatches through IAudioProcessingObjectConfiguration's vtable slot 4.
-func (self *IAudioProcessingObjectConfiguration) UnlockForProcess() foundation.HRESULT {
+func (self *IAudioProcessingObjectConfiguration) UnlockForProcess() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioProcessingObjectLoggingService: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/nn-audioengineextensionapo-iaudioprocessingobjectloggingservice
@@ -207,8 +207,9 @@ type IAudioProcessingObjectLoggingService struct {
 var IID_IAudioProcessingObjectLoggingService = win32.GUID{Data1: 0x698f0107, Data2: 0x1745, Data3: 0x4708, Data4: [8]byte{0x95, 0xa5, 0xd8, 0x44, 0x78, 0xa6, 0x2a, 0x65}}
 
 // ApoLog dispatches through IAudioProcessingObjectLoggingService's vtable slot 3.
-func (self *IAudioProcessingObjectLoggingService) ApoLog(level APO_LOG_LEVEL, format foundation.PWSTR) {
-	syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(level), uintptr(unsafe.Pointer(format)))
+func (self *IAudioProcessingObjectLoggingService) ApoLog(level APO_LOG_LEVEL, format string) {
+	_format := win32.UTF16Ptr(format)
+	syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(level), uintptr(unsafe.Pointer(_format)))
 }
 
 // IAudioProcessingObjectNotifications: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/nn-audioengineextensionapo-iaudioprocessingobjectnotifications
@@ -221,9 +222,9 @@ type IAudioProcessingObjectNotifications struct {
 var IID_IAudioProcessingObjectNotifications = win32.GUID{Data1: 0x56b0c76f, Data2: 0x02fd, Data3: 0x4b21, Data4: [8]byte{0xa5, 0x2e, 0x9f, 0x82, 0x19, 0xfc, 0x86, 0xe4}}
 
 // GetApoNotificationRegistrationInfo dispatches through IAudioProcessingObjectNotifications's vtable slot 3.
-func (self *IAudioProcessingObjectNotifications) GetApoNotificationRegistrationInfo(apoNotifications **APO_NOTIFICATION_DESCRIPTOR, count *uint32) foundation.HRESULT {
+func (self *IAudioProcessingObjectNotifications) GetApoNotificationRegistrationInfo(apoNotifications **APO_NOTIFICATION_DESCRIPTOR, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(apoNotifications)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // HandleNotification dispatches through IAudioProcessingObjectNotifications's vtable slot 4.
@@ -241,9 +242,9 @@ type IAudioProcessingObjectNotifications2 struct {
 var IID_IAudioProcessingObjectNotifications2 = win32.GUID{Data1: 0xca2cfbde, Data2: 0xa9d6, Data3: 0x4eb0, Data4: [8]byte{0xbc, 0x95, 0xc4, 0xd0, 0x26, 0xb3, 0x80, 0xf0}}
 
 // GetApoNotificationRegistrationInfo2 dispatches through IAudioProcessingObjectNotifications2's vtable slot 5.
-func (self *IAudioProcessingObjectNotifications2) GetApoNotificationRegistrationInfo2(maxApoNotificationTypeSupported APO_NOTIFICATION_TYPE, apoNotifications **APO_NOTIFICATION_DESCRIPTOR, count *uint32) foundation.HRESULT {
+func (self *IAudioProcessingObjectNotifications2) GetApoNotificationRegistrationInfo2(maxApoNotificationTypeSupported APO_NOTIFICATION_TYPE, apoNotifications **APO_NOTIFICATION_DESCRIPTOR, count *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(maxApoNotificationTypeSupported), uintptr(unsafe.Pointer(apoNotifications)), uintptr(unsafe.Pointer(count)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 51cbd3c4-f1f3-4d2f-a0e1-7e9c4dd0feb3
@@ -255,15 +256,15 @@ type IAudioProcessingObjectPreferredFormatSupport struct {
 var IID_IAudioProcessingObjectPreferredFormatSupport = win32.GUID{Data1: 0x51cbd3c4, Data2: 0xf1f3, Data3: 0x4d2f, Data4: [8]byte{0xa0, 0xe1, 0x7e, 0x9c, 0x4d, 0xd0, 0xfe, 0xb3}}
 
 // GetPreferredInputFormat dispatches through IAudioProcessingObjectPreferredFormatSupport's vtable slot 3.
-func (self *IAudioProcessingObjectPreferredFormatSupport) GetPreferredInputFormat(outputFormat *IAudioMediaType, preferredFormat **IAudioMediaType) foundation.HRESULT {
+func (self *IAudioProcessingObjectPreferredFormatSupport) GetPreferredInputFormat(outputFormat *IAudioMediaType, preferredFormat **IAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(outputFormat)), uintptr(unsafe.Pointer(preferredFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreferredOutputFormat dispatches through IAudioProcessingObjectPreferredFormatSupport's vtable slot 4.
-func (self *IAudioProcessingObjectPreferredFormatSupport) GetPreferredOutputFormat(inputFormat *IAudioMediaType, preferredFormat **IAudioMediaType) foundation.HRESULT {
+func (self *IAudioProcessingObjectPreferredFormatSupport) GetPreferredOutputFormat(inputFormat *IAudioMediaType, preferredFormat **IAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inputFormat)), uintptr(unsafe.Pointer(preferredFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioProcessingObjectRT: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iaudioprocessingobjectrt
@@ -302,9 +303,9 @@ type IAudioProcessingObjectRTQueueService struct {
 var IID_IAudioProcessingObjectRTQueueService = win32.GUID{Data1: 0xacd65e2f, Data2: 0x955b, Data3: 0x4b57, Data4: [8]byte{0xb9, 0xbf, 0xac, 0x29, 0x7b, 0xb7, 0x52, 0xc9}}
 
 // GetRealTimeWorkQueue dispatches through IAudioProcessingObjectRTQueueService's vtable slot 3.
-func (self *IAudioProcessingObjectRTQueueService) GetRealTimeWorkQueue(workQueueId *uint32) foundation.HRESULT {
+func (self *IAudioProcessingObjectRTQueueService) GetRealTimeWorkQueue(workQueueId *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(workQueueId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7ba1db8f-78ad-49cd-9591-f79d80a17c81
@@ -316,15 +317,15 @@ type IAudioProcessingObjectVBR struct {
 var IID_IAudioProcessingObjectVBR = win32.GUID{Data1: 0x7ba1db8f, Data2: 0x78ad, Data3: 0x49cd, Data4: [8]byte{0x95, 0x91, 0xf7, 0x9d, 0x80, 0xa1, 0x7c, 0x81}}
 
 // CalcMaxInputFrames dispatches through IAudioProcessingObjectVBR's vtable slot 3.
-func (self *IAudioProcessingObjectVBR) CalcMaxInputFrames(u32MaxOutputFrameCount uint32, pu32InputFrameCount *uint32) foundation.HRESULT {
+func (self *IAudioProcessingObjectVBR) CalcMaxInputFrames(u32MaxOutputFrameCount uint32, pu32InputFrameCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(u32MaxOutputFrameCount), uintptr(unsafe.Pointer(pu32InputFrameCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CalcMaxOutputFrames dispatches through IAudioProcessingObjectVBR's vtable slot 4.
-func (self *IAudioProcessingObjectVBR) CalcMaxOutputFrames(u32MaxInputFrameCount uint32, pu32OutputFrameCount *uint32) foundation.HRESULT {
+func (self *IAudioProcessingObjectVBR) CalcMaxOutputFrames(u32MaxInputFrameCount uint32, pu32OutputFrameCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(u32MaxInputFrameCount), uintptr(unsafe.Pointer(pu32OutputFrameCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioSystemEffects: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iaudiosystemeffects
@@ -346,9 +347,9 @@ type IAudioSystemEffects2 struct {
 var IID_IAudioSystemEffects2 = win32.GUID{Data1: 0xbafe99d2, Data2: 0x7436, Data3: 0x44ce, Data4: [8]byte{0x9e, 0x0e, 0x4d, 0x89, 0xaf, 0xbf, 0xff, 0x56}}
 
 // GetEffectsList dispatches through IAudioSystemEffects2's vtable slot 3.
-func (self *IAudioSystemEffects2) GetEffectsList(ppEffectsIds **win32.GUID, pcEffects *uint32, Event foundation.HANDLE) foundation.HRESULT {
+func (self *IAudioSystemEffects2) GetEffectsList(ppEffectsIds **win32.GUID, pcEffects *uint32, Event foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEffectsIds)), uintptr(unsafe.Pointer(pcEffects)), uintptr(Event))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioSystemEffects3: https://learn.microsoft.com/windows/win32/api/audioengineextensionapo/nn-audioengineextensionapo-iaudiosystemeffects3
@@ -361,9 +362,9 @@ type IAudioSystemEffects3 struct {
 var IID_IAudioSystemEffects3 = win32.GUID{Data1: 0xc58b31cd, Data2: 0xfc6a, Data3: 0x4255, Data4: [8]byte{0xbc, 0x1f, 0xad, 0x29, 0xbb, 0x0a, 0x4a, 0x17}}
 
 // GetControllableSystemEffectsList dispatches through IAudioSystemEffects3's vtable slot 4.
-func (self *IAudioSystemEffects3) GetControllableSystemEffectsList(effects **AUDIO_SYSTEMEFFECT, numEffects *uint32, event foundation.HANDLE) foundation.HRESULT {
+func (self *IAudioSystemEffects3) GetControllableSystemEffectsList(effects **AUDIO_SYSTEMEFFECT, numEffects *uint32, event foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(effects)), uintptr(unsafe.Pointer(numEffects)), uintptr(event))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioSystemEffectsCustomFormats: https://learn.microsoft.com/windows/win32/api/audioenginebaseapo/nn-audioenginebaseapo-iaudiosystemeffectscustomformats
@@ -376,19 +377,19 @@ type IAudioSystemEffectsCustomFormats struct {
 var IID_IAudioSystemEffectsCustomFormats = win32.GUID{Data1: 0xb1176e34, Data2: 0xbb7f, Data3: 0x4f05, Data4: [8]byte{0xbe, 0xbd, 0x1b, 0x18, 0xa5, 0x34, 0xe0, 0x97}}
 
 // GetFormatCount dispatches through IAudioSystemEffectsCustomFormats's vtable slot 3.
-func (self *IAudioSystemEffectsCustomFormats) GetFormatCount(pcFormats *uint32) foundation.HRESULT {
+func (self *IAudioSystemEffectsCustomFormats) GetFormatCount(pcFormats *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcFormats)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFormat dispatches through IAudioSystemEffectsCustomFormats's vtable slot 4.
-func (self *IAudioSystemEffectsCustomFormats) GetFormat(nFormat uint32, ppFormat **IAudioMediaType) foundation.HRESULT {
+func (self *IAudioSystemEffectsCustomFormats) GetFormat(nFormat uint32, ppFormat **IAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(nFormat), uintptr(unsafe.Pointer(ppFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFormatRepresentation dispatches through IAudioSystemEffectsCustomFormats's vtable slot 5.
-func (self *IAudioSystemEffectsCustomFormats) GetFormatRepresentation(nFormat uint32, ppwstrFormatRep *foundation.PWSTR) foundation.HRESULT {
+func (self *IAudioSystemEffectsCustomFormats) GetFormatRepresentation(nFormat uint32, ppwstrFormatRep *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(nFormat), uintptr(unsafe.Pointer(ppwstrFormatRep)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

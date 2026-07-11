@@ -24,33 +24,33 @@ type IAVIEditStream struct {
 var IID_IAVIEditStream = win32.GUID{Data1: 0x00020024, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Cut dispatches through IAVIEditStream's vtable slot 3.
-func (self *IAVIEditStream) Cut(plStart *int32, plLength *int32, ppResult **IAVIStream) foundation.HRESULT {
+func (self *IAVIEditStream) Cut(plStart *int32, plLength *int32, ppResult **IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStart)), uintptr(unsafe.Pointer(plLength)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Copy dispatches through IAVIEditStream's vtable slot 4.
-func (self *IAVIEditStream) Copy(plStart *int32, plLength *int32, ppResult **IAVIStream) foundation.HRESULT {
+func (self *IAVIEditStream) Copy(plStart *int32, plLength *int32, ppResult **IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plStart)), uintptr(unsafe.Pointer(plLength)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Paste dispatches through IAVIEditStream's vtable slot 5.
-func (self *IAVIEditStream) Paste(plPos *int32, plLength *int32, pstream *IAVIStream, lStart int32, lEnd int32) foundation.HRESULT {
+func (self *IAVIEditStream) Paste(plPos *int32, plLength *int32, pstream *IAVIStream, lStart int32, lEnd int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plPos)), uintptr(unsafe.Pointer(plLength)), uintptr(unsafe.Pointer(pstream)), uintptr(lStart), uintptr(lEnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IAVIEditStream's vtable slot 6.
-func (self *IAVIEditStream) Clone(ppResult **IAVIStream) foundation.HRESULT {
+func (self *IAVIEditStream) Clone(ppResult **IAVIStream) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInfo dispatches through IAVIEditStream's vtable slot 7.
-func (self *IAVIEditStream) SetInfo(lpInfo *AVISTREAMINFOW, cbInfo int32) foundation.HRESULT {
+func (self *IAVIEditStream) SetInfo(lpInfo *AVISTREAMINFOW, cbInfo int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpInfo)), uintptr(cbInfo))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAVIFile: https://learn.microsoft.com/windows/win32/api/vfw/nn-vfw-iavifile
@@ -63,45 +63,45 @@ type IAVIFile struct {
 var IID_IAVIFile = win32.GUID{Data1: 0x00020020, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Info dispatches through IAVIFile's vtable slot 3.
-func (self *IAVIFile) Info(pfi *AVIFILEINFOW, lSize int32) foundation.HRESULT {
+func (self *IAVIFile) Info(pfi *AVIFILEINFOW, lSize int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfi)), uintptr(lSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStream dispatches through IAVIFile's vtable slot 4.
-func (self *IAVIFile) GetStream(ppStream **IAVIStream, fccType uint32, lParam int32) foundation.HRESULT {
+func (self *IAVIFile) GetStream(ppStream **IAVIStream, fccType uint32, lParam int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStream)), uintptr(fccType), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateStream dispatches through IAVIFile's vtable slot 5.
-func (self *IAVIFile) CreateStream(ppStream **IAVIStream, psi *AVISTREAMINFOW) foundation.HRESULT {
+func (self *IAVIFile) CreateStream(ppStream **IAVIStream, psi *AVISTREAMINFOW) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStream)), uintptr(unsafe.Pointer(psi)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WriteData dispatches through IAVIFile's vtable slot 6.
-func (self *IAVIFile) WriteData(ckid uint32, lpData unsafe.Pointer, cbData int32) foundation.HRESULT {
+func (self *IAVIFile) WriteData(ckid uint32, lpData unsafe.Pointer, cbData int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ckid), uintptr(unsafe.Pointer(lpData)), uintptr(cbData))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadData dispatches through IAVIFile's vtable slot 7.
-func (self *IAVIFile) ReadData(ckid uint32, lpData unsafe.Pointer, lpcbData *int32) foundation.HRESULT {
+func (self *IAVIFile) ReadData(ckid uint32, lpData unsafe.Pointer, lpcbData *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ckid), uintptr(unsafe.Pointer(lpData)), uintptr(unsafe.Pointer(lpcbData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndRecord dispatches through IAVIFile's vtable slot 8.
-func (self *IAVIFile) EndRecord() foundation.HRESULT {
+func (self *IAVIFile) EndRecord() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteStream dispatches through IAVIFile's vtable slot 9.
-func (self *IAVIFile) DeleteStream(fccType uint32, lParam int32) foundation.HRESULT {
+func (self *IAVIFile) DeleteStream(fccType uint32, lParam int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fccType), uintptr(lParam))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 00020025-0000-0000-c000-000000000046
@@ -113,9 +113,9 @@ type IAVIPersistFile struct {
 var IID_IAVIPersistFile = win32.GUID{Data1: 0x00020025, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Reserved1 dispatches through IAVIPersistFile's vtable slot 9.
-func (self *IAVIPersistFile) Reserved1() foundation.HRESULT {
+func (self *IAVIPersistFile) Reserved1() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAVIStream: https://learn.microsoft.com/windows/win32/api/vfw/nn-vfw-iavistream
@@ -128,15 +128,15 @@ type IAVIStream struct {
 var IID_IAVIStream = win32.GUID{Data1: 0x00020021, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Create dispatches through IAVIStream's vtable slot 3.
-func (self *IAVIStream) Create(lParam1 foundation.LPARAM, lParam2 foundation.LPARAM) foundation.HRESULT {
+func (self *IAVIStream) Create(lParam1 foundation.LPARAM, lParam2 foundation.LPARAM) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lParam1), uintptr(lParam2))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Info dispatches through IAVIStream's vtable slot 4.
-func (self *IAVIStream) Info(psi *AVISTREAMINFOW, lSize int32) foundation.HRESULT {
+func (self *IAVIStream) Info(psi *AVISTREAMINFOW, lSize int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psi)), uintptr(lSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindSample dispatches through IAVIStream's vtable slot 5.
@@ -146,51 +146,51 @@ func (self *IAVIStream) FindSample(lPos int32, lFlags int32) int32 {
 }
 
 // ReadFormat dispatches through IAVIStream's vtable slot 6.
-func (self *IAVIStream) ReadFormat(lPos int32, lpFormat unsafe.Pointer, lpcbFormat *int32) foundation.HRESULT {
+func (self *IAVIStream) ReadFormat(lPos int32, lpFormat unsafe.Pointer, lpcbFormat *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(lPos), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpcbFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFormat dispatches through IAVIStream's vtable slot 7.
-func (self *IAVIStream) SetFormat(lPos int32, lpFormat unsafe.Pointer, cbFormat int32) foundation.HRESULT {
+func (self *IAVIStream) SetFormat(lPos int32, lpFormat unsafe.Pointer, cbFormat int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lPos), uintptr(unsafe.Pointer(lpFormat)), uintptr(cbFormat))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Read dispatches through IAVIStream's vtable slot 8.
-func (self *IAVIStream) Read(lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, plBytes *int32, plSamples *int32) foundation.HRESULT {
+func (self *IAVIStream) Read(lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, plBytes *int32, plSamples *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(plBytes)), uintptr(unsafe.Pointer(plSamples)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Write dispatches through IAVIStream's vtable slot 9.
-func (self *IAVIStream) Write(lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, dwFlags uint32, plSampWritten *int32, plBytesWritten *int32) foundation.HRESULT {
+func (self *IAVIStream) Write(lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, dwFlags uint32, plSampWritten *int32, plBytesWritten *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(plSampWritten)), uintptr(unsafe.Pointer(plBytesWritten)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IAVIStream's vtable slot 10.
-func (self *IAVIStream) Delete(lStart int32, lSamples int32) foundation.HRESULT {
+func (self *IAVIStream) Delete(lStart int32, lSamples int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lStart), uintptr(lSamples))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ReadData dispatches through IAVIStream's vtable slot 11.
-func (self *IAVIStream) ReadData(fcc uint32, lp unsafe.Pointer, lpcb *int32) foundation.HRESULT {
+func (self *IAVIStream) ReadData(fcc uint32, lp unsafe.Pointer, lpcb *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(fcc), uintptr(unsafe.Pointer(lp)), uintptr(unsafe.Pointer(lpcb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WriteData dispatches through IAVIStream's vtable slot 12.
-func (self *IAVIStream) WriteData(fcc uint32, lp unsafe.Pointer, cb int32) foundation.HRESULT {
+func (self *IAVIStream) WriteData(fcc uint32, lp unsafe.Pointer, cb int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(fcc), uintptr(unsafe.Pointer(lp)), uintptr(cb))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInfo dispatches through IAVIStream's vtable slot 13.
-func (self *IAVIStream) SetInfo(lpInfo *AVISTREAMINFOW, cbInfo int32) foundation.HRESULT {
+func (self *IAVIStream) SetInfo(lpInfo *AVISTREAMINFOW, cbInfo int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpInfo)), uintptr(cbInfo))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAVIStreaming: https://learn.microsoft.com/windows/win32/api/vfw/nn-vfw-iavistreaming
@@ -203,15 +203,15 @@ type IAVIStreaming struct {
 var IID_IAVIStreaming = win32.GUID{Data1: 0x00020022, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Begin dispatches through IAVIStreaming's vtable slot 3.
-func (self *IAVIStreaming) Begin(lStart int32, lEnd int32, lRate int32) foundation.HRESULT {
+func (self *IAVIStreaming) Begin(lStart int32, lEnd int32, lRate int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lStart), uintptr(lEnd), uintptr(lRate))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // End dispatches through IAVIStreaming's vtable slot 4.
-func (self *IAVIStreaming) End() foundation.HRESULT {
+func (self *IAVIStreaming) End() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IGetFrame: https://learn.microsoft.com/windows/win32/api/vfw/nn-vfw-igetframe
@@ -230,19 +230,19 @@ func (self *IGetFrame) GetFrame(lPos int32) unsafe.Pointer {
 }
 
 // Begin dispatches through IGetFrame's vtable slot 4.
-func (self *IGetFrame) Begin(lStart int32, lEnd int32, lRate int32) foundation.HRESULT {
+func (self *IGetFrame) Begin(lStart int32, lEnd int32, lRate int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lStart), uintptr(lEnd), uintptr(lRate))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // End dispatches through IGetFrame's vtable slot 5.
-func (self *IGetFrame) End() foundation.HRESULT {
+func (self *IGetFrame) End() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFormat dispatches through IGetFrame's vtable slot 6.
-func (self *IGetFrame) SetFormat(lpbi *graphicsgdi.BITMAPINFOHEADER, lpBits unsafe.Pointer, x int32, y int32, dx int32, dy int32) foundation.HRESULT {
+func (self *IGetFrame) SetFormat(lpbi *graphicsgdi.BITMAPINFOHEADER, lpBits unsafe.Pointer, x int32, y int32, dx int32, dy int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpbi)), uintptr(unsafe.Pointer(lpBits)), uintptr(x), uintptr(y), uintptr(dx), uintptr(dy))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

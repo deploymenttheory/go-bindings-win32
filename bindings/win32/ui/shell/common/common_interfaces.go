@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
@@ -23,15 +22,15 @@ type IObjectArray struct {
 var IID_IObjectArray = win32.GUID{Data1: 0x92ca9dcd, Data2: 0x5622, Data3: 0x4bba, Data4: [8]byte{0xa8, 0x05, 0x5e, 0x9f, 0x54, 0x1b, 0xd8, 0xc9}}
 
 // GetCount dispatches through IObjectArray's vtable slot 3.
-func (self *IObjectArray) GetCount(pcObjects *uint32) foundation.HRESULT {
+func (self *IObjectArray) GetCount(pcObjects *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcObjects)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAt dispatches through IObjectArray's vtable slot 4.
-func (self *IObjectArray) GetAt(uiIndex uint32, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IObjectArray) GetAt(uiIndex uint32, riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IObjectCollection: https://learn.microsoft.com/windows/win32/api/objectarray/nn-objectarray-iobjectcollection
@@ -44,25 +43,25 @@ type IObjectCollection struct {
 var IID_IObjectCollection = win32.GUID{Data1: 0x5632b1a4, Data2: 0xe38a, Data3: 0x400a, Data4: [8]byte{0x92, 0x8a, 0xd4, 0xcd, 0x63, 0x23, 0x02, 0x95}}
 
 // AddObject dispatches through IObjectCollection's vtable slot 5.
-func (self *IObjectCollection) AddObject(punk *systemcom.IUnknown) foundation.HRESULT {
+func (self *IObjectCollection) AddObject(punk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddFromArray dispatches through IObjectCollection's vtable slot 6.
-func (self *IObjectCollection) AddFromArray(poaSource *IObjectArray) foundation.HRESULT {
+func (self *IObjectCollection) AddFromArray(poaSource *IObjectArray) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(poaSource)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RemoveObjectAt dispatches through IObjectCollection's vtable slot 7.
-func (self *IObjectCollection) RemoveObjectAt(uiIndex uint32) foundation.HRESULT {
+func (self *IObjectCollection) RemoveObjectAt(uiIndex uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(uiIndex))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clear dispatches through IObjectCollection's vtable slot 8.
-func (self *IObjectCollection) Clear() foundation.HRESULT {
+func (self *IObjectCollection) Clear() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

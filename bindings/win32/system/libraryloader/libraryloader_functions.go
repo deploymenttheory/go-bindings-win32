@@ -20,62 +20,77 @@ var (
 var (
 	procQueryOptionalDelayLoadedAPI = modapi_ms_win_core_libraryloader_l2_1_0.NewProc("QueryOptionalDelayLoadedAPI")
 	procAddDllDirectory             = modKERNEL32.NewProc("AddDllDirectory")
+	procBeginUpdateResource         = modKERNEL32.NewProc("BeginUpdateResourceW")
 	procBeginUpdateResourceA        = modKERNEL32.NewProc("BeginUpdateResourceA")
-	procBeginUpdateResourceW        = modKERNEL32.NewProc("BeginUpdateResourceW")
 	procDisableThreadLibraryCalls   = modKERNEL32.NewProc("DisableThreadLibraryCalls")
+	procEndUpdateResource           = modKERNEL32.NewProc("EndUpdateResourceW")
 	procEndUpdateResourceA          = modKERNEL32.NewProc("EndUpdateResourceA")
-	procEndUpdateResourceW          = modKERNEL32.NewProc("EndUpdateResourceW")
+	procEnumResourceLanguages       = modKERNEL32.NewProc("EnumResourceLanguagesW")
 	procEnumResourceLanguagesA      = modKERNEL32.NewProc("EnumResourceLanguagesA")
+	procEnumResourceLanguagesEx     = modKERNEL32.NewProc("EnumResourceLanguagesExW")
 	procEnumResourceLanguagesExA    = modKERNEL32.NewProc("EnumResourceLanguagesExA")
-	procEnumResourceLanguagesExW    = modKERNEL32.NewProc("EnumResourceLanguagesExW")
-	procEnumResourceLanguagesW      = modKERNEL32.NewProc("EnumResourceLanguagesW")
+	procEnumResourceNames           = modKERNEL32.NewProc("EnumResourceNamesW")
 	procEnumResourceNamesA          = modKERNEL32.NewProc("EnumResourceNamesA")
+	procEnumResourceNamesEx         = modKERNEL32.NewProc("EnumResourceNamesExW")
 	procEnumResourceNamesExA        = modKERNEL32.NewProc("EnumResourceNamesExA")
-	procEnumResourceNamesExW        = modKERNEL32.NewProc("EnumResourceNamesExW")
-	procEnumResourceNamesW          = modKERNEL32.NewProc("EnumResourceNamesW")
+	procEnumResourceTypes           = modKERNEL32.NewProc("EnumResourceTypesW")
 	procEnumResourceTypesA          = modKERNEL32.NewProc("EnumResourceTypesA")
+	procEnumResourceTypesEx         = modKERNEL32.NewProc("EnumResourceTypesExW")
 	procEnumResourceTypesExA        = modKERNEL32.NewProc("EnumResourceTypesExA")
-	procEnumResourceTypesExW        = modKERNEL32.NewProc("EnumResourceTypesExW")
-	procEnumResourceTypesW          = modKERNEL32.NewProc("EnumResourceTypesW")
+	procFindResource                = modKERNEL32.NewProc("FindResourceW")
 	procFindResourceA               = modKERNEL32.NewProc("FindResourceA")
+	procFindResourceEx              = modKERNEL32.NewProc("FindResourceExW")
 	procFindResourceExA             = modKERNEL32.NewProc("FindResourceExA")
-	procFindResourceExW             = modKERNEL32.NewProc("FindResourceExW")
-	procFindResourceW               = modKERNEL32.NewProc("FindResourceW")
 	procFreeLibraryAndExitThread    = modKERNEL32.NewProc("FreeLibraryAndExitThread")
 	procFreeResource                = modKERNEL32.NewProc("FreeResource")
+	procGetDllDirectory             = modKERNEL32.NewProc("GetDllDirectoryW")
 	procGetDllDirectoryA            = modKERNEL32.NewProc("GetDllDirectoryA")
-	procGetDllDirectoryW            = modKERNEL32.NewProc("GetDllDirectoryW")
+	procGetModuleFileName           = modKERNEL32.NewProc("GetModuleFileNameW")
 	procGetModuleFileNameA          = modKERNEL32.NewProc("GetModuleFileNameA")
-	procGetModuleFileNameW          = modKERNEL32.NewProc("GetModuleFileNameW")
+	procGetModuleHandle             = modKERNEL32.NewProc("GetModuleHandleW")
 	procGetModuleHandleA            = modKERNEL32.NewProc("GetModuleHandleA")
+	procGetModuleHandleEx           = modKERNEL32.NewProc("GetModuleHandleExW")
 	procGetModuleHandleExA          = modKERNEL32.NewProc("GetModuleHandleExA")
-	procGetModuleHandleExW          = modKERNEL32.NewProc("GetModuleHandleExW")
-	procGetModuleHandleW            = modKERNEL32.NewProc("GetModuleHandleW")
 	procGetProcAddress              = modKERNEL32.NewProc("GetProcAddress")
+	procLoadLibrary                 = modKERNEL32.NewProc("LoadLibraryW")
 	procLoadLibraryA                = modKERNEL32.NewProc("LoadLibraryA")
+	procLoadLibraryEx               = modKERNEL32.NewProc("LoadLibraryExW")
 	procLoadLibraryExA              = modKERNEL32.NewProc("LoadLibraryExA")
-	procLoadLibraryExW              = modKERNEL32.NewProc("LoadLibraryExW")
-	procLoadLibraryW                = modKERNEL32.NewProc("LoadLibraryW")
 	procLoadModule                  = modKERNEL32.NewProc("LoadModule")
 	procLoadPackagedLibrary         = modKERNEL32.NewProc("LoadPackagedLibrary")
 	procLoadResource                = modKERNEL32.NewProc("LoadResource")
 	procLockResource                = modKERNEL32.NewProc("LockResource")
 	procRemoveDllDirectory          = modKERNEL32.NewProc("RemoveDllDirectory")
 	procSetDefaultDllDirectories    = modKERNEL32.NewProc("SetDefaultDllDirectories")
+	procSetDllDirectory             = modKERNEL32.NewProc("SetDllDirectoryW")
 	procSetDllDirectoryA            = modKERNEL32.NewProc("SetDllDirectoryA")
-	procSetDllDirectoryW            = modKERNEL32.NewProc("SetDllDirectoryW")
 	procSizeofResource              = modKERNEL32.NewProc("SizeofResource")
+	procUpdateResource              = modKERNEL32.NewProc("UpdateResourceW")
 	procUpdateResourceA             = modKERNEL32.NewProc("UpdateResourceA")
-	procUpdateResourceW             = modKERNEL32.NewProc("UpdateResourceW")
 )
 
 // AddDllDirectory calls KERNEL32!AddDllDirectory.
 // https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-adddlldirectory
 // Minimum OS: windows8.0.
-func AddDllDirectory(NewDirectory foundation.PWSTR) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procAddDllDirectory.Addr(), uintptr(unsafe.Pointer(NewDirectory)))
+func AddDllDirectory(NewDirectory string) (unsafe.Pointer, error) {
+	_NewDirectory := win32.UTF16Ptr(NewDirectory)
+	r1, _, e1 := syscall.SyscallN(procAddDllDirectory.Addr(), uintptr(unsafe.Pointer(_NewDirectory)))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// BeginUpdateResource calls KERNEL32!BeginUpdateResourceW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-beginupdateresourcew
+// Minimum OS: windows5.0.
+func BeginUpdateResource(pFileName string, bDeleteExistingResources bool) (foundation.HANDLE, error) {
+	_pFileName := win32.UTF16Ptr(pFileName)
+	_bDeleteExistingResources := win32.Bool32(bDeleteExistingResources)
+	r1, _, e1 := syscall.SyscallN(procBeginUpdateResource.Addr(), uintptr(unsafe.Pointer(_pFileName)), uintptr(_bDeleteExistingResources))
+	ret := foundation.HANDLE(r1)
+	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
@@ -84,20 +99,9 @@ func AddDllDirectory(NewDirectory foundation.PWSTR) (unsafe.Pointer, error) {
 // BeginUpdateResourceA calls KERNEL32!BeginUpdateResourceA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-beginupdateresourcea
 // Minimum OS: windows5.0.
-func BeginUpdateResourceA(pFileName foundation.PSTR, bDeleteExistingResources foundation.BOOL) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procBeginUpdateResourceA.Addr(), uintptr(unsafe.Pointer(pFileName)), uintptr(bDeleteExistingResources))
-	ret := foundation.HANDLE(r1)
-	if ret == ^foundation.HANDLE(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// BeginUpdateResourceW calls KERNEL32!BeginUpdateResourceW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-beginupdateresourcew
-// Minimum OS: windows5.0.
-func BeginUpdateResourceW(pFileName foundation.PWSTR, bDeleteExistingResources foundation.BOOL) (foundation.HANDLE, error) {
-	r1, _, e1 := syscall.SyscallN(procBeginUpdateResourceW.Addr(), uintptr(unsafe.Pointer(pFileName)), uintptr(bDeleteExistingResources))
+func BeginUpdateResourceA(pFileName foundation.PSTR, bDeleteExistingResources bool) (foundation.HANDLE, error) {
+	_bDeleteExistingResources := win32.Bool32(bDeleteExistingResources)
+	r1, _, e1 := syscall.SyscallN(procBeginUpdateResourceA.Addr(), uintptr(unsafe.Pointer(pFileName)), uintptr(_bDeleteExistingResources))
 	ret := foundation.HANDLE(r1)
 	if ret == ^foundation.HANDLE(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -116,22 +120,37 @@ func DisableThreadLibraryCalls(hLibModule foundation.HMODULE) error {
 	return nil
 }
 
-// EndUpdateResourceA calls KERNEL32!EndUpdateResourceA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-endupdateresourcea
+// EndUpdateResource calls KERNEL32!EndUpdateResourceW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-endupdateresourcew
 // Minimum OS: windows5.0.
-func EndUpdateResourceA(hUpdate foundation.HANDLE, fDiscard foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procEndUpdateResourceA.Addr(), uintptr(hUpdate), uintptr(fDiscard))
+func EndUpdateResource(hUpdate foundation.HANDLE, fDiscard bool) error {
+	_fDiscard := win32.Bool32(fDiscard)
+	r1, _, e1 := syscall.SyscallN(procEndUpdateResource.Addr(), uintptr(hUpdate), uintptr(_fDiscard))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// EndUpdateResourceW calls KERNEL32!EndUpdateResourceW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-endupdateresourcew
+// EndUpdateResourceA calls KERNEL32!EndUpdateResourceA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-endupdateresourcea
 // Minimum OS: windows5.0.
-func EndUpdateResourceW(hUpdate foundation.HANDLE, fDiscard foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procEndUpdateResourceW.Addr(), uintptr(hUpdate), uintptr(fDiscard))
+func EndUpdateResourceA(hUpdate foundation.HANDLE, fDiscard bool) error {
+	_fDiscard := win32.Bool32(fDiscard)
+	r1, _, e1 := syscall.SyscallN(procEndUpdateResourceA.Addr(), uintptr(hUpdate), uintptr(_fDiscard))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// EnumResourceLanguages calls KERNEL32!EnumResourceLanguagesW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-enumresourcelanguagesw
+// Minimum OS: windows5.0.
+func EnumResourceLanguages(hModule foundation.HMODULE, lpType string, lpName string, lpEnumFunc ENUMRESLANGPROCW, lParam uintptr) error {
+	_lpType := win32.UTF16Ptr(lpType)
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procEnumResourceLanguages.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(_lpType)), uintptr(unsafe.Pointer(_lpName)), uintptr(lpEnumFunc), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -149,6 +168,19 @@ func EnumResourceLanguagesA(hModule foundation.HMODULE, lpType foundation.PSTR, 
 	return nil
 }
 
+// EnumResourceLanguagesEx calls KERNEL32!EnumResourceLanguagesExW.
+// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-enumresourcelanguagesexw
+// Minimum OS: windows6.0.6000.
+func EnumResourceLanguagesEx(hModule foundation.HMODULE, lpType string, lpName string, lpEnumFunc ENUMRESLANGPROCW, lParam uintptr, dwFlags uint32, LangId uint16) error {
+	_lpType := win32.UTF16Ptr(lpType)
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procEnumResourceLanguagesEx.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(_lpType)), uintptr(unsafe.Pointer(_lpName)), uintptr(lpEnumFunc), uintptr(lParam), uintptr(dwFlags), uintptr(LangId))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // EnumResourceLanguagesExA calls KERNEL32!EnumResourceLanguagesExA.
 // https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-enumresourcelanguagesexa
 // Minimum OS: windows6.0.6000.
@@ -160,26 +192,12 @@ func EnumResourceLanguagesExA(hModule foundation.HMODULE, lpType foundation.PSTR
 	return nil
 }
 
-// EnumResourceLanguagesExW calls KERNEL32!EnumResourceLanguagesExW.
-// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-enumresourcelanguagesexw
-// Minimum OS: windows6.0.6000.
-func EnumResourceLanguagesExW(hModule foundation.HMODULE, lpType foundation.PWSTR, lpName foundation.PWSTR, lpEnumFunc ENUMRESLANGPROCW, lParam uintptr, dwFlags uint32, LangId uint16) error {
-	r1, _, e1 := syscall.SyscallN(procEnumResourceLanguagesExW.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(lpType)), uintptr(unsafe.Pointer(lpName)), uintptr(lpEnumFunc), uintptr(lParam), uintptr(dwFlags), uintptr(LangId))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// EnumResourceLanguagesW calls KERNEL32!EnumResourceLanguagesW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-enumresourcelanguagesw
-// Minimum OS: windows5.0.
-func EnumResourceLanguagesW(hModule foundation.HMODULE, lpType foundation.PWSTR, lpName foundation.PWSTR, lpEnumFunc ENUMRESLANGPROCW, lParam uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procEnumResourceLanguagesW.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(lpType)), uintptr(unsafe.Pointer(lpName)), uintptr(lpEnumFunc), uintptr(lParam))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+// EnumResourceNames calls KERNEL32!EnumResourceNamesW.
+// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-enumresourcenamesw
+func EnumResourceNames(hModule foundation.HMODULE, lpType string, lpEnumFunc ENUMRESNAMEPROCW, lParam uintptr) bool {
+	_lpType := win32.UTF16Ptr(lpType)
+	r1, _, _ := syscall.SyscallN(procEnumResourceNames.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(_lpType)), uintptr(lpEnumFunc), uintptr(lParam))
+	return r1 != 0
 }
 
 // EnumResourceNamesA calls KERNEL32!EnumResourceNamesA.
@@ -187,6 +205,18 @@ func EnumResourceLanguagesW(hModule foundation.HMODULE, lpType foundation.PWSTR,
 // Minimum OS: windows5.0.
 func EnumResourceNamesA(hModule foundation.HMODULE, lpType foundation.PSTR, lpEnumFunc ENUMRESNAMEPROCA, lParam uintptr) error {
 	r1, _, e1 := syscall.SyscallN(procEnumResourceNamesA.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(lpType)), uintptr(lpEnumFunc), uintptr(lParam))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// EnumResourceNamesEx calls KERNEL32!EnumResourceNamesExW.
+// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-enumresourcenamesexw
+// Minimum OS: windows6.0.6000.
+func EnumResourceNamesEx(hModule foundation.HMODULE, lpType string, lpEnumFunc ENUMRESNAMEPROCW, lParam uintptr, dwFlags uint32, LangId uint16) error {
+	_lpType := win32.UTF16Ptr(lpType)
+	r1, _, e1 := syscall.SyscallN(procEnumResourceNamesEx.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(_lpType)), uintptr(lpEnumFunc), uintptr(lParam), uintptr(dwFlags), uintptr(LangId))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -204,22 +234,15 @@ func EnumResourceNamesExA(hModule foundation.HMODULE, lpType foundation.PSTR, lp
 	return nil
 }
 
-// EnumResourceNamesExW calls KERNEL32!EnumResourceNamesExW.
-// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-enumresourcenamesexw
-// Minimum OS: windows6.0.6000.
-func EnumResourceNamesExW(hModule foundation.HMODULE, lpType foundation.PWSTR, lpEnumFunc ENUMRESNAMEPROCW, lParam uintptr, dwFlags uint32, LangId uint16) error {
-	r1, _, e1 := syscall.SyscallN(procEnumResourceNamesExW.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(lpType)), uintptr(lpEnumFunc), uintptr(lParam), uintptr(dwFlags), uintptr(LangId))
+// EnumResourceTypes calls KERNEL32!EnumResourceTypesW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-enumresourcetypesw
+// Minimum OS: windows5.0.
+func EnumResourceTypes(hModule foundation.HMODULE, lpEnumFunc ENUMRESTYPEPROCW, lParam uintptr) error {
+	r1, _, e1 := syscall.SyscallN(procEnumResourceTypes.Addr(), uintptr(hModule), uintptr(lpEnumFunc), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
-}
-
-// EnumResourceNamesW calls KERNEL32!EnumResourceNamesW.
-// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-enumresourcenamesw
-func EnumResourceNamesW(hModule foundation.HMODULE, lpType foundation.PWSTR, lpEnumFunc ENUMRESNAMEPROCW, lParam uintptr) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procEnumResourceNamesW.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(lpType)), uintptr(lpEnumFunc), uintptr(lParam))
-	return foundation.BOOL(r1)
 }
 
 // EnumResourceTypesA calls KERNEL32!EnumResourceTypesA.
@@ -227,6 +250,17 @@ func EnumResourceNamesW(hModule foundation.HMODULE, lpType foundation.PWSTR, lpE
 // Minimum OS: windows5.0.
 func EnumResourceTypesA(hModule foundation.HMODULE, lpEnumFunc ENUMRESTYPEPROCA, lParam uintptr) error {
 	r1, _, e1 := syscall.SyscallN(procEnumResourceTypesA.Addr(), uintptr(hModule), uintptr(lpEnumFunc), uintptr(lParam))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
+// EnumResourceTypesEx calls KERNEL32!EnumResourceTypesExW.
+// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-enumresourcetypesexw
+// Minimum OS: windows6.0.6000.
+func EnumResourceTypesEx(hModule foundation.HMODULE, lpEnumFunc ENUMRESTYPEPROCW, lParam uintptr, dwFlags uint32, LangId uint16) error {
+	r1, _, e1 := syscall.SyscallN(procEnumResourceTypesEx.Addr(), uintptr(hModule), uintptr(lpEnumFunc), uintptr(lParam), uintptr(dwFlags), uintptr(LangId))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -244,26 +278,13 @@ func EnumResourceTypesExA(hModule foundation.HMODULE, lpEnumFunc ENUMRESTYPEPROC
 	return nil
 }
 
-// EnumResourceTypesExW calls KERNEL32!EnumResourceTypesExW.
-// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-enumresourcetypesexw
-// Minimum OS: windows6.0.6000.
-func EnumResourceTypesExW(hModule foundation.HMODULE, lpEnumFunc ENUMRESTYPEPROCW, lParam uintptr, dwFlags uint32, LangId uint16) error {
-	r1, _, e1 := syscall.SyscallN(procEnumResourceTypesExW.Addr(), uintptr(hModule), uintptr(lpEnumFunc), uintptr(lParam), uintptr(dwFlags), uintptr(LangId))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// EnumResourceTypesW calls KERNEL32!EnumResourceTypesW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-enumresourcetypesw
-// Minimum OS: windows5.0.
-func EnumResourceTypesW(hModule foundation.HMODULE, lpEnumFunc ENUMRESTYPEPROCW, lParam uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procEnumResourceTypesW.Addr(), uintptr(hModule), uintptr(lpEnumFunc), uintptr(lParam))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
+// FindResource calls KERNEL32!FindResourceW.
+// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-findresourcew
+func FindResource(hModule foundation.HMODULE, lpName string, lpType string) foundation.HRSRC {
+	_lpName := win32.UTF16Ptr(lpName)
+	_lpType := win32.UTF16Ptr(lpType)
+	r1, _, _ := syscall.SyscallN(procFindResource.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpType)))
+	return foundation.HRSRC(r1)
 }
 
 // FindResourceA calls KERNEL32!FindResourceA.
@@ -278,6 +299,15 @@ func FindResourceA(hModule foundation.HMODULE, lpName foundation.PSTR, lpType fo
 	return ret, nil
 }
 
+// FindResourceEx calls KERNEL32!FindResourceExW.
+// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-findresourceexw
+func FindResourceEx(hModule foundation.HMODULE, lpType string, lpName string, wLanguage uint16) foundation.HRSRC {
+	_lpType := win32.UTF16Ptr(lpType)
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, _ := syscall.SyscallN(procFindResourceEx.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(_lpType)), uintptr(unsafe.Pointer(_lpName)), uintptr(wLanguage))
+	return foundation.HRSRC(r1)
+}
+
 // FindResourceExA calls KERNEL32!FindResourceExA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-findresourceexa
 // Minimum OS: windows5.0.
@@ -290,20 +320,6 @@ func FindResourceExA(hModule foundation.HMODULE, lpType foundation.PSTR, lpName 
 	return ret, nil
 }
 
-// FindResourceExW calls KERNEL32!FindResourceExW.
-// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-findresourceexw
-func FindResourceExW(hModule foundation.HMODULE, lpType foundation.PWSTR, lpName foundation.PWSTR, wLanguage uint16) foundation.HRSRC {
-	r1, _, _ := syscall.SyscallN(procFindResourceExW.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(lpType)), uintptr(unsafe.Pointer(lpName)), uintptr(wLanguage))
-	return foundation.HRSRC(r1)
-}
-
-// FindResourceW calls KERNEL32!FindResourceW.
-// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-findresourcew
-func FindResourceW(hModule foundation.HMODULE, lpName foundation.PWSTR, lpType foundation.PWSTR) foundation.HRSRC {
-	r1, _, _ := syscall.SyscallN(procFindResourceW.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpType)))
-	return foundation.HRSRC(r1)
-}
-
 // FreeLibraryAndExitThread calls KERNEL32!FreeLibraryAndExitThread.
 // https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-freelibraryandexitthread
 // Minimum OS: windows5.1.2600.
@@ -314,9 +330,20 @@ func FreeLibraryAndExitThread(hLibModule foundation.HMODULE, dwExitCode uint32) 
 // FreeResource calls KERNEL32!FreeResource.
 // https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-freeresource
 // Minimum OS: windows5.0.
-func FreeResource(hResData foundation.HGLOBAL) foundation.BOOL {
+func FreeResource(hResData foundation.HGLOBAL) bool {
 	r1, _, _ := syscall.SyscallN(procFreeResource.Addr(), uintptr(hResData))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// GetDllDirectory calls KERNEL32!GetDllDirectoryW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getdlldirectoryw
+// Minimum OS: windows6.0.6000.
+func GetDllDirectory(nBufferLength uint32, lpBuffer foundation.PWSTR) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetDllDirectory.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
 }
 
 // GetDllDirectoryA calls KERNEL32!GetDllDirectoryA.
@@ -330,11 +357,11 @@ func GetDllDirectoryA(nBufferLength uint32, lpBuffer foundation.PSTR) (uint32, e
 	return uint32(r1), nil
 }
 
-// GetDllDirectoryW calls KERNEL32!GetDllDirectoryW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getdlldirectoryw
-// Minimum OS: windows6.0.6000.
-func GetDllDirectoryW(nBufferLength uint32, lpBuffer foundation.PWSTR) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetDllDirectoryW.Addr(), uintptr(nBufferLength), uintptr(unsafe.Pointer(lpBuffer)))
+// GetModuleFileName calls KERNEL32!GetModuleFileNameW.
+// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulefilenamew
+// Minimum OS: windows5.1.2600.
+func GetModuleFileName(hModule foundation.HMODULE, lpFilename foundation.PWSTR, nSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetModuleFileName.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -352,15 +379,17 @@ func GetModuleFileNameA(hModule foundation.HMODULE, lpFilename foundation.PSTR, 
 	return uint32(r1), nil
 }
 
-// GetModuleFileNameW calls KERNEL32!GetModuleFileNameW.
-// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulefilenamew
+// GetModuleHandle calls KERNEL32!GetModuleHandleW.
+// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandlew
 // Minimum OS: windows5.1.2600.
-func GetModuleFileNameW(hModule foundation.HMODULE, lpFilename foundation.PWSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetModuleFileNameW.Addr(), uintptr(hModule), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
-	if e1 != 0 {
-		return uint32(r1), e1
+func GetModuleHandle(lpModuleName string) (foundation.HMODULE, error) {
+	_lpModuleName := win32.UTF16Ptr(lpModuleName)
+	r1, _, e1 := syscall.SyscallN(procGetModuleHandle.Addr(), uintptr(unsafe.Pointer(_lpModuleName)))
+	ret := foundation.HMODULE(r1)
+	if ret == 0 {
+		return ret, win32.LastError(e1)
 	}
-	return uint32(r1), nil
+	return ret, nil
 }
 
 // GetModuleHandleA calls KERNEL32!GetModuleHandleA.
@@ -375,6 +404,18 @@ func GetModuleHandleA(lpModuleName foundation.PSTR) (foundation.HMODULE, error) 
 	return ret, nil
 }
 
+// GetModuleHandleEx calls KERNEL32!GetModuleHandleExW.
+// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandleexw
+// Minimum OS: windows5.1.2600.
+func GetModuleHandleEx(dwFlags uint32, lpModuleName string, phModule *foundation.HMODULE) error {
+	_lpModuleName := win32.UTF16Ptr(lpModuleName)
+	r1, _, e1 := syscall.SyscallN(procGetModuleHandleEx.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpModuleName)), uintptr(unsafe.Pointer(phModule)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // GetModuleHandleExA calls KERNEL32!GetModuleHandleExA.
 // https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandleexa
 // Minimum OS: windows5.1.2600.
@@ -386,29 +427,6 @@ func GetModuleHandleExA(dwFlags uint32, lpModuleName foundation.PSTR, phModule *
 	return nil
 }
 
-// GetModuleHandleExW calls KERNEL32!GetModuleHandleExW.
-// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandleexw
-// Minimum OS: windows5.1.2600.
-func GetModuleHandleExW(dwFlags uint32, lpModuleName foundation.PWSTR, phModule *foundation.HMODULE) error {
-	r1, _, e1 := syscall.SyscallN(procGetModuleHandleExW.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpModuleName)), uintptr(unsafe.Pointer(phModule)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// GetModuleHandleW calls KERNEL32!GetModuleHandleW.
-// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandlew
-// Minimum OS: windows5.1.2600.
-func GetModuleHandleW(lpModuleName foundation.PWSTR) (foundation.HMODULE, error) {
-	r1, _, e1 := syscall.SyscallN(procGetModuleHandleW.Addr(), uintptr(unsafe.Pointer(lpModuleName)))
-	ret := foundation.HMODULE(r1)
-	if ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
 // GetProcAddress calls KERNEL32!GetProcAddress.
 // https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-getprocaddress
 // Minimum OS: windows5.1.2600.
@@ -418,6 +436,19 @@ func GetProcAddress(hModule foundation.HMODULE, lpProcName foundation.PSTR) (fou
 		return foundation.FARPROC(r1), e1
 	}
 	return foundation.FARPROC(r1), nil
+}
+
+// LoadLibrary calls KERNEL32!LoadLibraryW.
+// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryw
+// Minimum OS: windows5.1.2600.
+func LoadLibrary(lpLibFileName string) (foundation.HMODULE, error) {
+	_lpLibFileName := win32.UTF16Ptr(lpLibFileName)
+	r1, _, e1 := syscall.SyscallN(procLoadLibrary.Addr(), uintptr(unsafe.Pointer(_lpLibFileName)))
+	ret := foundation.HMODULE(r1)
+	if ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // LoadLibraryA calls KERNEL32!LoadLibraryA.
@@ -432,35 +463,24 @@ func LoadLibraryA(lpLibFileName foundation.PSTR) (foundation.HMODULE, error) {
 	return ret, nil
 }
 
+// LoadLibraryEx calls KERNEL32!LoadLibraryExW.
+// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryexw
+// Minimum OS: windows5.1.2600.
+func LoadLibraryEx(lpLibFileName string, dwFlags LOAD_LIBRARY_FLAGS) (foundation.HMODULE, error) {
+	_lpLibFileName := win32.UTF16Ptr(lpLibFileName)
+	r1, _, e1 := syscall.SyscallN(procLoadLibraryEx.Addr(), uintptr(unsafe.Pointer(_lpLibFileName)), 0, uintptr(dwFlags))
+	ret := foundation.HMODULE(r1)
+	if ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // LoadLibraryExA calls KERNEL32!LoadLibraryExA.
 // https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryexa
 // Minimum OS: windows5.1.2600.
-func LoadLibraryExA(lpLibFileName foundation.PSTR, hFile foundation.HANDLE, dwFlags LOAD_LIBRARY_FLAGS) (foundation.HMODULE, error) {
-	r1, _, e1 := syscall.SyscallN(procLoadLibraryExA.Addr(), uintptr(unsafe.Pointer(lpLibFileName)), uintptr(hFile), uintptr(dwFlags))
-	ret := foundation.HMODULE(r1)
-	if ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// LoadLibraryExW calls KERNEL32!LoadLibraryExW.
-// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryexw
-// Minimum OS: windows5.1.2600.
-func LoadLibraryExW(lpLibFileName foundation.PWSTR, hFile foundation.HANDLE, dwFlags LOAD_LIBRARY_FLAGS) (foundation.HMODULE, error) {
-	r1, _, e1 := syscall.SyscallN(procLoadLibraryExW.Addr(), uintptr(unsafe.Pointer(lpLibFileName)), uintptr(hFile), uintptr(dwFlags))
-	ret := foundation.HMODULE(r1)
-	if ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// LoadLibraryW calls KERNEL32!LoadLibraryW.
-// https://learn.microsoft.com/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryw
-// Minimum OS: windows5.1.2600.
-func LoadLibraryW(lpLibFileName foundation.PWSTR) (foundation.HMODULE, error) {
-	r1, _, e1 := syscall.SyscallN(procLoadLibraryW.Addr(), uintptr(unsafe.Pointer(lpLibFileName)))
+func LoadLibraryExA(lpLibFileName foundation.PSTR, dwFlags LOAD_LIBRARY_FLAGS) (foundation.HMODULE, error) {
+	r1, _, e1 := syscall.SyscallN(procLoadLibraryExA.Addr(), uintptr(unsafe.Pointer(lpLibFileName)), 0, uintptr(dwFlags))
 	ret := foundation.HMODULE(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -479,8 +499,9 @@ func LoadModule(lpModuleName foundation.PSTR, lpParameterBlock unsafe.Pointer) u
 // LoadPackagedLibrary calls KERNEL32!LoadPackagedLibrary.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-loadpackagedlibrary
 // Minimum OS: windows8.0.
-func LoadPackagedLibrary(lpwLibFileName foundation.PWSTR, Reserved uint32) (foundation.HMODULE, error) {
-	r1, _, e1 := syscall.SyscallN(procLoadPackagedLibrary.Addr(), uintptr(unsafe.Pointer(lpwLibFileName)), uintptr(Reserved))
+func LoadPackagedLibrary(lpwLibFileName string) (foundation.HMODULE, error) {
+	_lpwLibFileName := win32.UTF16Ptr(lpwLibFileName)
+	r1, _, e1 := syscall.SyscallN(procLoadPackagedLibrary.Addr(), uintptr(unsafe.Pointer(_lpwLibFileName)), 0)
 	ret := foundation.HMODULE(r1)
 	if ret == 0 {
 		return ret, win32.LastError(e1)
@@ -511,8 +532,8 @@ func LockResource(hResData foundation.HGLOBAL) unsafe.Pointer {
 // QueryOptionalDelayLoadedAPI calls api-ms-win-core-libraryloader-l2-1-0!QueryOptionalDelayLoadedAPI.
 // https://learn.microsoft.com/windows/win32/api/libloaderapi2/nf-libloaderapi2-queryoptionaldelayloadedapi
 // Minimum OS: windows10.0.10240.
-func QueryOptionalDelayLoadedAPI(hParentModule foundation.HMODULE, lpDllName foundation.PSTR, lpProcName foundation.PSTR, Reserved uint32) error {
-	r1, _, e1 := syscall.SyscallN(procQueryOptionalDelayLoadedAPI.Addr(), uintptr(hParentModule), uintptr(unsafe.Pointer(lpDllName)), uintptr(unsafe.Pointer(lpProcName)), uintptr(Reserved))
+func QueryOptionalDelayLoadedAPI(hParentModule foundation.HMODULE, lpDllName foundation.PSTR, lpProcName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procQueryOptionalDelayLoadedAPI.Addr(), uintptr(hParentModule), uintptr(unsafe.Pointer(lpDllName)), uintptr(unsafe.Pointer(lpProcName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -541,22 +562,23 @@ func SetDefaultDllDirectories(DirectoryFlags LOAD_LIBRARY_FLAGS) error {
 	return nil
 }
 
-// SetDllDirectoryA calls KERNEL32!SetDllDirectoryA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setdlldirectorya
+// SetDllDirectory calls KERNEL32!SetDllDirectoryW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setdlldirectoryw
 // Minimum OS: windows6.0.6000.
-func SetDllDirectoryA(lpPathName foundation.PSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetDllDirectoryA.Addr(), uintptr(unsafe.Pointer(lpPathName)))
+func SetDllDirectory(lpPathName string) error {
+	_lpPathName := win32.UTF16Ptr(lpPathName)
+	r1, _, e1 := syscall.SyscallN(procSetDllDirectory.Addr(), uintptr(unsafe.Pointer(_lpPathName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetDllDirectoryW calls KERNEL32!SetDllDirectoryW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setdlldirectoryw
+// SetDllDirectoryA calls KERNEL32!SetDllDirectoryA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setdlldirectorya
 // Minimum OS: windows6.0.6000.
-func SetDllDirectoryW(lpPathName foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetDllDirectoryW.Addr(), uintptr(unsafe.Pointer(lpPathName)))
+func SetDllDirectoryA(lpPathName foundation.PSTR) error {
+	r1, _, e1 := syscall.SyscallN(procSetDllDirectoryA.Addr(), uintptr(unsafe.Pointer(lpPathName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -574,22 +596,24 @@ func SizeofResource(hModule foundation.HMODULE, hResInfo foundation.HRSRC) (uint
 	return uint32(r1), nil
 }
 
-// UpdateResourceA calls KERNEL32!UpdateResourceA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-updateresourcea
+// UpdateResource calls KERNEL32!UpdateResourceW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-updateresourcew
 // Minimum OS: windows5.0.
-func UpdateResourceA(hUpdate foundation.HANDLE, lpType foundation.PSTR, lpName foundation.PSTR, wLanguage uint16, lpData unsafe.Pointer, cb uint32) error {
-	r1, _, e1 := syscall.SyscallN(procUpdateResourceA.Addr(), uintptr(hUpdate), uintptr(unsafe.Pointer(lpType)), uintptr(unsafe.Pointer(lpName)), uintptr(wLanguage), uintptr(unsafe.Pointer(lpData)), uintptr(cb))
+func UpdateResource(hUpdate foundation.HANDLE, lpType string, lpName string, wLanguage uint16, lpData unsafe.Pointer, cb uint32) error {
+	_lpType := win32.UTF16Ptr(lpType)
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, e1 := syscall.SyscallN(procUpdateResource.Addr(), uintptr(hUpdate), uintptr(unsafe.Pointer(_lpType)), uintptr(unsafe.Pointer(_lpName)), uintptr(wLanguage), uintptr(unsafe.Pointer(lpData)), uintptr(cb))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// UpdateResourceW calls KERNEL32!UpdateResourceW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-updateresourcew
+// UpdateResourceA calls KERNEL32!UpdateResourceA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-updateresourcea
 // Minimum OS: windows5.0.
-func UpdateResourceW(hUpdate foundation.HANDLE, lpType foundation.PWSTR, lpName foundation.PWSTR, wLanguage uint16, lpData unsafe.Pointer, cb uint32) error {
-	r1, _, e1 := syscall.SyscallN(procUpdateResourceW.Addr(), uintptr(hUpdate), uintptr(unsafe.Pointer(lpType)), uintptr(unsafe.Pointer(lpName)), uintptr(wLanguage), uintptr(unsafe.Pointer(lpData)), uintptr(cb))
+func UpdateResourceA(hUpdate foundation.HANDLE, lpType foundation.PSTR, lpName foundation.PSTR, wLanguage uint16, lpData unsafe.Pointer, cb uint32) error {
+	r1, _, e1 := syscall.SyscallN(procUpdateResourceA.Addr(), uintptr(hUpdate), uintptr(unsafe.Pointer(lpType)), uintptr(unsafe.Pointer(lpName)), uintptr(wLanguage), uintptr(unsafe.Pointer(lpData)), uintptr(cb))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

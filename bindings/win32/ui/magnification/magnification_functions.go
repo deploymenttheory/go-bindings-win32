@@ -39,25 +39,25 @@ var (
 // MagGetColorEffect calls MAGNIFICATION!MagGetColorEffect.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-maggetcoloreffect
 // Minimum OS: windows6.0.6000.
-func MagGetColorEffect(hwnd foundation.HWND, pEffect *MAGCOLOREFFECT) foundation.BOOL {
+func MagGetColorEffect(hwnd foundation.HWND, pEffect *MAGCOLOREFFECT) bool {
 	r1, _, _ := syscall.SyscallN(procMagGetColorEffect.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pEffect)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MagGetFullscreenColorEffect calls MAGNIFICATION!MagGetFullscreenColorEffect.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-maggetfullscreencoloreffect
 // Minimum OS: windows8.0.
-func MagGetFullscreenColorEffect(pEffect *MAGCOLOREFFECT) foundation.BOOL {
+func MagGetFullscreenColorEffect(pEffect *MAGCOLOREFFECT) bool {
 	r1, _, _ := syscall.SyscallN(procMagGetFullscreenColorEffect.Addr(), uintptr(unsafe.Pointer(pEffect)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MagGetFullscreenTransform calls MAGNIFICATION!MagGetFullscreenTransform.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-maggetfullscreentransform
 // Minimum OS: windows8.0.
-func MagGetFullscreenTransform(pMagLevel *float32, pxOffset *int32, pyOffset *int32) foundation.BOOL {
+func MagGetFullscreenTransform(pMagLevel *float32, pxOffset *int32, pyOffset *int32) bool {
 	r1, _, _ := syscall.SyscallN(procMagGetFullscreenTransform.Addr(), uintptr(unsafe.Pointer(pMagLevel)), uintptr(unsafe.Pointer(pxOffset)), uintptr(unsafe.Pointer(pyOffset)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MagGetImageScalingCallback calls MAGNIFICATION!MagGetImageScalingCallback.
@@ -71,9 +71,9 @@ func MagGetImageScalingCallback(hwnd foundation.HWND) MagImageScalingCallback {
 // MagGetInputTransform calls MAGNIFICATION!MagGetInputTransform.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-maggetinputtransform
 // Minimum OS: windows8.0.
-func MagGetInputTransform(pfEnabled *foundation.BOOL, pRectSource *foundation.RECT, pRectDest *foundation.RECT) foundation.BOOL {
+func MagGetInputTransform(pfEnabled *foundation.BOOL, pRectSource *foundation.RECT, pRectDest *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procMagGetInputTransform.Addr(), uintptr(unsafe.Pointer(pfEnabled)), uintptr(unsafe.Pointer(pRectSource)), uintptr(unsafe.Pointer(pRectDest)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MagGetWindowFilterList calls MAGNIFICATION!MagGetWindowFilterList.
@@ -87,56 +87,57 @@ func MagGetWindowFilterList(hwnd foundation.HWND, pdwFilterMode *MW_FILTERMODE, 
 // MagGetWindowSource calls MAGNIFICATION!MagGetWindowSource.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-maggetwindowsource
 // Minimum OS: windows6.0.6000.
-func MagGetWindowSource(hwnd foundation.HWND, pRect *foundation.RECT) foundation.BOOL {
+func MagGetWindowSource(hwnd foundation.HWND, pRect *foundation.RECT) bool {
 	r1, _, _ := syscall.SyscallN(procMagGetWindowSource.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pRect)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MagGetWindowTransform calls MAGNIFICATION!MagGetWindowTransform.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-maggetwindowtransform
 // Minimum OS: windows6.0.6000.
-func MagGetWindowTransform(hwnd foundation.HWND, pTransform *MAGTRANSFORM) foundation.BOOL {
+func MagGetWindowTransform(hwnd foundation.HWND, pTransform *MAGTRANSFORM) bool {
 	r1, _, _ := syscall.SyscallN(procMagGetWindowTransform.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pTransform)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MagInitialize calls MAGNIFICATION!MagInitialize.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-maginitialize
 // Minimum OS: windows6.0.6000.
-func MagInitialize() foundation.BOOL {
+func MagInitialize() bool {
 	r1, _, _ := syscall.SyscallN(procMagInitialize.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MagSetColorEffect calls MAGNIFICATION!MagSetColorEffect.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-magsetcoloreffect
 // Minimum OS: windows6.0.6000.
-func MagSetColorEffect(hwnd foundation.HWND, pEffect *MAGCOLOREFFECT) foundation.BOOL {
+func MagSetColorEffect(hwnd foundation.HWND, pEffect *MAGCOLOREFFECT) bool {
 	r1, _, _ := syscall.SyscallN(procMagSetColorEffect.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pEffect)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MagSetFullscreenColorEffect calls MAGNIFICATION!MagSetFullscreenColorEffect.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-magsetfullscreencoloreffect
 // Minimum OS: windows8.0.
-func MagSetFullscreenColorEffect(pEffect *MAGCOLOREFFECT) foundation.BOOL {
+func MagSetFullscreenColorEffect(pEffect *MAGCOLOREFFECT) bool {
 	r1, _, _ := syscall.SyscallN(procMagSetFullscreenColorEffect.Addr(), uintptr(unsafe.Pointer(pEffect)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MagSetImageScalingCallback calls MAGNIFICATION!MagSetImageScalingCallback.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-magsetimagescalingcallback
 // Minimum OS: windows6.0.6000.
-func MagSetImageScalingCallback(hwnd foundation.HWND, callback MagImageScalingCallback) foundation.BOOL {
+func MagSetImageScalingCallback(hwnd foundation.HWND, callback MagImageScalingCallback) bool {
 	r1, _, _ := syscall.SyscallN(procMagSetImageScalingCallback.Addr(), uintptr(hwnd), uintptr(callback))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MagSetInputTransform calls MAGNIFICATION!MagSetInputTransform.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-magsetinputtransform
 // Minimum OS: windows8.0.
-func MagSetInputTransform(fEnabled foundation.BOOL, pRectSource *foundation.RECT, pRectDest *foundation.RECT) error {
-	r1, _, e1 := syscall.SyscallN(procMagSetInputTransform.Addr(), uintptr(fEnabled), uintptr(unsafe.Pointer(pRectSource)), uintptr(unsafe.Pointer(pRectDest)))
+func MagSetInputTransform(fEnabled bool, pRectSource *foundation.RECT, pRectDest *foundation.RECT) error {
+	_fEnabled := win32.Bool32(fEnabled)
+	r1, _, e1 := syscall.SyscallN(procMagSetInputTransform.Addr(), uintptr(_fEnabled), uintptr(unsafe.Pointer(pRectSource)), uintptr(unsafe.Pointer(pRectDest)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -146,31 +147,32 @@ func MagSetInputTransform(fEnabled foundation.BOOL, pRectSource *foundation.RECT
 // MagSetWindowFilterList calls MAGNIFICATION!MagSetWindowFilterList.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-magsetwindowfilterlist
 // Minimum OS: windows6.0.6000.
-func MagSetWindowFilterList(hwnd foundation.HWND, dwFilterMode MW_FILTERMODE, count int32, pHWND *foundation.HWND) foundation.BOOL {
+func MagSetWindowFilterList(hwnd foundation.HWND, dwFilterMode MW_FILTERMODE, count int32, pHWND *foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procMagSetWindowFilterList.Addr(), uintptr(hwnd), uintptr(dwFilterMode), uintptr(count), uintptr(unsafe.Pointer(pHWND)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MagSetWindowTransform calls MAGNIFICATION!MagSetWindowTransform.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-magsetwindowtransform
 // Minimum OS: windows6.0.6000.
-func MagSetWindowTransform(hwnd foundation.HWND, pTransform *MAGTRANSFORM) foundation.BOOL {
+func MagSetWindowTransform(hwnd foundation.HWND, pTransform *MAGTRANSFORM) bool {
 	r1, _, _ := syscall.SyscallN(procMagSetWindowTransform.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pTransform)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // MagShowSystemCursor calls MAGNIFICATION!MagShowSystemCursor.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-magshowsystemcursor
 // Minimum OS: windows8.0.
-func MagShowSystemCursor(fShowCursor foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procMagShowSystemCursor.Addr(), uintptr(fShowCursor))
-	return foundation.BOOL(r1)
+func MagShowSystemCursor(fShowCursor bool) bool {
+	_fShowCursor := win32.Bool32(fShowCursor)
+	r1, _, _ := syscall.SyscallN(procMagShowSystemCursor.Addr(), uintptr(_fShowCursor))
+	return r1 != 0
 }
 
 // MagUninitialize calls MAGNIFICATION!MagUninitialize.
 // https://learn.microsoft.com/windows/win32/api/magnification/nf-magnification-maguninitialize
 // Minimum OS: windows6.0.6000.
-func MagUninitialize() foundation.BOOL {
+func MagUninitialize() bool {
 	r1, _, _ := syscall.SyscallN(procMagUninitialize.Addr())
-	return foundation.BOOL(r1)
+	return r1 != 0
 }

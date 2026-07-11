@@ -104,8 +104,8 @@ type COR_PRF_NONGC_HEAP_RANGE struct {
 	RangeLengthReserved uintptr
 }
 
-// FunctionIDOrClientID is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// FunctionIDOrClientID is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type FunctionIDOrClientID struct {
 	Data [1]uint64
 }

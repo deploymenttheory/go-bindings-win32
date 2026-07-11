@@ -23,21 +23,21 @@ type IContact struct {
 var IID_IContact = win32.GUID{Data1: 0xf941b671, Data2: 0xbda7, Data3: 0x4f77, Data4: [8]byte{0x88, 0x4a, 0xf4, 0x64, 0x62, 0xf2, 0x26, 0xa7}}
 
 // GetContactID dispatches through IContact's vtable slot 3.
-func (self *IContact) GetContactID(pszContactID foundation.PWSTR, cchContactID uint32, pdwcchContactIDRequired *uint32) foundation.HRESULT {
+func (self *IContact) GetContactID(pszContactID foundation.PWSTR, cchContactID uint32, pdwcchContactIDRequired *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszContactID)), uintptr(cchContactID), uintptr(unsafe.Pointer(pdwcchContactIDRequired)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPath dispatches through IContact's vtable slot 4.
-func (self *IContact) GetPath(pszPath foundation.PWSTR, cchPath uint32, pdwcchPathRequired *uint32) foundation.HRESULT {
+func (self *IContact) GetPath(pszPath foundation.PWSTR, cchPath uint32, pdwcchPathRequired *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPath)), uintptr(cchPath), uintptr(unsafe.Pointer(pdwcchPathRequired)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CommitChanges dispatches through IContact's vtable slot 5.
-func (self *IContact) CommitChanges(dwCommitFlags uint32) foundation.HRESULT {
+func (self *IContact) CommitChanges(dwCommitFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwCommitFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7ed1c814-cd30-43c8-9b8d-2e489e53d54b
@@ -49,57 +49,62 @@ type IContactAggregationAggregate struct {
 var IID_IContactAggregationAggregate = win32.GUID{Data1: 0x7ed1c814, Data2: 0xcd30, Data3: 0x43c8, Data4: [8]byte{0x9b, 0x8d, 0x2e, 0x48, 0x9e, 0x53, 0xd5, 0x4b}}
 
 // Save dispatches through IContactAggregationAggregate's vtable slot 3.
-func (self *IContactAggregationAggregate) Save() foundation.HRESULT {
+func (self *IContactAggregationAggregate) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetComponentItems dispatches through IContactAggregationAggregate's vtable slot 4.
-func (self *IContactAggregationAggregate) GetComponentItems(pComponentItems **IContactAggregationContactCollection) foundation.HRESULT {
+func (self *IContactAggregationAggregate) GetComponentItems(pComponentItems **IContactAggregationContactCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pComponentItems)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Link dispatches through IContactAggregationAggregate's vtable slot 5.
-func (self *IContactAggregationAggregate) Link(pAggregateId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAggregateId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationAggregate) Link(pAggregateId string) error {
+	_pAggregateId := win32.UTF16Ptr(pAggregateId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAggregateId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Groups dispatches through IContactAggregationAggregate's vtable slot 6.
-func (self *IContactAggregationAggregate) Get_Groups(options CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppGroups **IContactAggregationGroupCollection) foundation.HRESULT {
+func (self *IContactAggregationAggregate) Get_Groups(options CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppGroups **IContactAggregationGroupCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(ppGroups)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AntiLink dispatches through IContactAggregationAggregate's vtable slot 7.
-func (self *IContactAggregationAggregate) Get_AntiLink(ppAntiLink *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAntiLink)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationAggregate) Get_AntiLink() (foundation.PWSTR, error) {
+	var _ppAntiLink foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAntiLink)))
+	return _ppAntiLink, win32.HRESULTError(int32(r1))
 }
 
 // Put_AntiLink dispatches through IContactAggregationAggregate's vtable slot 8.
-func (self *IContactAggregationAggregate) Put_AntiLink(pAntiLink foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAntiLink)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationAggregate) Put_AntiLink(pAntiLink string) error {
+	_pAntiLink := win32.UTF16Ptr(pAntiLink)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAntiLink)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FavoriteOrder dispatches through IContactAggregationAggregate's vtable slot 9.
-func (self *IContactAggregationAggregate) Get_FavoriteOrder(pFavoriteOrder *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFavoriteOrder)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationAggregate) Get_FavoriteOrder() (uint32, error) {
+	var _pFavoriteOrder uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pFavoriteOrder)))
+	return _pFavoriteOrder, win32.HRESULTError(int32(r1))
 }
 
 // Put_FavoriteOrder dispatches through IContactAggregationAggregate's vtable slot 10.
-func (self *IContactAggregationAggregate) Put_FavoriteOrder(favoriteOrder uint32) foundation.HRESULT {
+func (self *IContactAggregationAggregate) Put_FavoriteOrder(favoriteOrder uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(favoriteOrder))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through IContactAggregationAggregate's vtable slot 11.
-func (self *IContactAggregationAggregate) Get_Id(ppItemId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppItemId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationAggregate) Get_Id() (foundation.PWSTR, error) {
+	var _ppItemId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppItemId)))
+	return _ppItemId, win32.HRESULTError(int32(r1))
 }
 
 // IID: 2359f3a6-3a68-40af-98db-0f9eb143c3bb
@@ -111,27 +116,32 @@ type IContactAggregationAggregateCollection struct {
 var IID_IContactAggregationAggregateCollection = win32.GUID{Data1: 0x2359f3a6, Data2: 0x3a68, Data3: 0x40af, Data4: [8]byte{0x98, 0xdb, 0x0f, 0x9e, 0xb1, 0x43, 0xc3, 0xbb}}
 
 // FindFirst dispatches through IContactAggregationAggregateCollection's vtable slot 3.
-func (self *IContactAggregationAggregateCollection) FindFirst(ppAggregate **IContactAggregationAggregate) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAggregate)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationAggregateCollection) FindFirst() (*IContactAggregationAggregate, error) {
+	var _ppAggregate *IContactAggregationAggregate
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAggregate)))
+	return _ppAggregate, win32.HRESULTError(int32(r1))
 }
 
 // FindFirstByAntiLinkId dispatches through IContactAggregationAggregateCollection's vtable slot 4.
-func (self *IContactAggregationAggregateCollection) FindFirstByAntiLinkId(pAntiLinkId foundation.PWSTR, ppAggregate **IContactAggregationAggregate) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAntiLinkId)), uintptr(unsafe.Pointer(ppAggregate)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationAggregateCollection) FindFirstByAntiLinkId(pAntiLinkId string) (*IContactAggregationAggregate, error) {
+	_pAntiLinkId := win32.UTF16Ptr(pAntiLinkId)
+	var _ppAggregate *IContactAggregationAggregate
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAntiLinkId)), uintptr(unsafe.Pointer(&_ppAggregate)))
+	return _ppAggregate, win32.HRESULTError(int32(r1))
 }
 
 // FindNext dispatches through IContactAggregationAggregateCollection's vtable slot 5.
-func (self *IContactAggregationAggregateCollection) FindNext(ppAggregate **IContactAggregationAggregate) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAggregate)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationAggregateCollection) FindNext() (*IContactAggregationAggregate, error) {
+	var _ppAggregate *IContactAggregationAggregate
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAggregate)))
+	return _ppAggregate, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IContactAggregationAggregateCollection's vtable slot 6.
-func (self *IContactAggregationAggregateCollection) Get_Count(pCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationAggregateCollection) Get_Count() (int32, error) {
+	var _pCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
+	return _pCount, win32.HRESULTError(int32(r1))
 }
 
 // IID: 1eb22e86-4c86-41f0-9f9f-c251e9fda6c3
@@ -143,111 +153,122 @@ type IContactAggregationContact struct {
 var IID_IContactAggregationContact = win32.GUID{Data1: 0x1eb22e86, Data2: 0x4c86, Data3: 0x41f0, Data4: [8]byte{0x9f, 0x9f, 0xc2, 0x51, 0xe9, 0xfd, 0xa6, 0xc3}}
 
 // Delete dispatches through IContactAggregationContact's vtable slot 3.
-func (self *IContactAggregationContact) Delete() foundation.HRESULT {
+func (self *IContactAggregationContact) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Save dispatches through IContactAggregationContact's vtable slot 4.
-func (self *IContactAggregationContact) Save() foundation.HRESULT {
+func (self *IContactAggregationContact) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MoveToAggregate dispatches through IContactAggregationContact's vtable slot 5.
-func (self *IContactAggregationContact) MoveToAggregate(pAggregateId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAggregateId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContact) MoveToAggregate(pAggregateId string) error {
+	_pAggregateId := win32.UTF16Ptr(pAggregateId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAggregateId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unlink dispatches through IContactAggregationContact's vtable slot 6.
-func (self *IContactAggregationContact) Unlink() foundation.HRESULT {
+func (self *IContactAggregationContact) Unlink() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AccountId dispatches through IContactAggregationContact's vtable slot 7.
-func (self *IContactAggregationContact) Get_AccountId(ppAccountId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAccountId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContact) Get_AccountId() (foundation.PWSTR, error) {
+	var _ppAccountId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAccountId)))
+	return _ppAccountId, win32.HRESULTError(int32(r1))
 }
 
 // Put_AccountId dispatches through IContactAggregationContact's vtable slot 8.
-func (self *IContactAggregationContact) Put_AccountId(pAccountId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAccountId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContact) Put_AccountId(pAccountId string) error {
+	_pAccountId := win32.UTF16Ptr(pAccountId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAccountId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AggregateId dispatches through IContactAggregationContact's vtable slot 9.
-func (self *IContactAggregationContact) Get_AggregateId(ppAggregateId *foundation.PWSTR) foundation.HRESULT {
+func (self *IContactAggregationContact) Get_AggregateId(ppAggregateId *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAggregateId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through IContactAggregationContact's vtable slot 10.
-func (self *IContactAggregationContact) Get_Id(ppItemId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppItemId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContact) Get_Id() (foundation.PWSTR, error) {
+	var _ppItemId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppItemId)))
+	return _ppItemId, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsMe dispatches through IContactAggregationContact's vtable slot 11.
-func (self *IContactAggregationContact) Get_IsMe(pIsMe *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsMe)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContact) Get_IsMe() (foundation.BOOL, error) {
+	var _pIsMe foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pIsMe)))
+	return _pIsMe, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsExternal dispatches through IContactAggregationContact's vtable slot 12.
-func (self *IContactAggregationContact) Get_IsExternal(pIsExternal *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsExternal)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContact) Get_IsExternal() (foundation.BOOL, error) {
+	var _pIsExternal foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pIsExternal)))
+	return _pIsExternal, win32.HRESULTError(int32(r1))
 }
 
 // Get_NetworkSourceId dispatches through IContactAggregationContact's vtable slot 13.
-func (self *IContactAggregationContact) Get_NetworkSourceId(pNetworkSourceId *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNetworkSourceId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContact) Get_NetworkSourceId() (uint32, error) {
+	var _pNetworkSourceId uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pNetworkSourceId)))
+	return _pNetworkSourceId, win32.HRESULTError(int32(r1))
 }
 
 // Put_NetworkSourceId dispatches through IContactAggregationContact's vtable slot 14.
-func (self *IContactAggregationContact) Put_NetworkSourceId(networkSourceId uint32) foundation.HRESULT {
+func (self *IContactAggregationContact) Put_NetworkSourceId(networkSourceId uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(networkSourceId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NetworkSourceIdString dispatches through IContactAggregationContact's vtable slot 15.
-func (self *IContactAggregationContact) Get_NetworkSourceIdString(ppNetworkSourceId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNetworkSourceId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContact) Get_NetworkSourceIdString() (foundation.PWSTR, error) {
+	var _ppNetworkSourceId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNetworkSourceId)))
+	return _ppNetworkSourceId, win32.HRESULTError(int32(r1))
 }
 
 // Put_NetworkSourceIdString dispatches through IContactAggregationContact's vtable slot 16.
-func (self *IContactAggregationContact) Put_NetworkSourceIdString(pNetworkSourceId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNetworkSourceId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContact) Put_NetworkSourceIdString(pNetworkSourceId string) error {
+	_pNetworkSourceId := win32.UTF16Ptr(pNetworkSourceId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pNetworkSourceId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RemoteObjectId dispatches through IContactAggregationContact's vtable slot 17.
-func (self *IContactAggregationContact) Get_RemoteObjectId(ppRemoteObjectId **CONTACT_AGGREGATION_BLOB) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRemoteObjectId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContact) Get_RemoteObjectId() (*CONTACT_AGGREGATION_BLOB, error) {
+	var _ppRemoteObjectId *CONTACT_AGGREGATION_BLOB
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppRemoteObjectId)))
+	return _ppRemoteObjectId, win32.HRESULTError(int32(r1))
 }
 
 // Put_RemoteObjectId dispatches through IContactAggregationContact's vtable slot 18.
-func (self *IContactAggregationContact) Put_RemoteObjectId(pRemoteObjectId *CONTACT_AGGREGATION_BLOB) foundation.HRESULT {
+func (self *IContactAggregationContact) Put_RemoteObjectId(pRemoteObjectId *CONTACT_AGGREGATION_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRemoteObjectId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SyncIdentityHash dispatches through IContactAggregationContact's vtable slot 19.
-func (self *IContactAggregationContact) Get_SyncIdentityHash(ppSyncIdentityHash **CONTACT_AGGREGATION_BLOB) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSyncIdentityHash)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContact) Get_SyncIdentityHash() (*CONTACT_AGGREGATION_BLOB, error) {
+	var _ppSyncIdentityHash *CONTACT_AGGREGATION_BLOB
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSyncIdentityHash)))
+	return _ppSyncIdentityHash, win32.HRESULTError(int32(r1))
 }
 
 // Put_SyncIdentityHash dispatches through IContactAggregationContact's vtable slot 20.
-func (self *IContactAggregationContact) Put_SyncIdentityHash(pSyncIdentityHash *CONTACT_AGGREGATION_BLOB) foundation.HRESULT {
+func (self *IContactAggregationContact) Put_SyncIdentityHash(pSyncIdentityHash *CONTACT_AGGREGATION_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSyncIdentityHash)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 826e66fa-81de-43ca-a6fb-8c785cd996c6
@@ -259,33 +280,42 @@ type IContactAggregationContactCollection struct {
 var IID_IContactAggregationContactCollection = win32.GUID{Data1: 0x826e66fa, Data2: 0x81de, Data3: 0x43ca, Data4: [8]byte{0xa6, 0xfb, 0x8c, 0x78, 0x5c, 0xd9, 0x96, 0xc6}}
 
 // FindFirst dispatches through IContactAggregationContactCollection's vtable slot 3.
-func (self *IContactAggregationContactCollection) FindFirst(ppItem **IContactAggregationContact) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppItem)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContactCollection) FindFirst() (*IContactAggregationContact, error) {
+	var _ppItem *IContactAggregationContact
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppItem)))
+	return _ppItem, win32.HRESULTError(int32(r1))
 }
 
 // FindNext dispatches through IContactAggregationContactCollection's vtable slot 4.
-func (self *IContactAggregationContactCollection) FindNext(ppItem **IContactAggregationContact) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppItem)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContactCollection) FindNext() (*IContactAggregationContact, error) {
+	var _ppItem *IContactAggregationContact
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppItem)))
+	return _ppItem, win32.HRESULTError(int32(r1))
 }
 
 // FindFirstByIdentityHash dispatches through IContactAggregationContactCollection's vtable slot 5.
-func (self *IContactAggregationContactCollection) FindFirstByIdentityHash(pSourceType foundation.PWSTR, pAccountId foundation.PWSTR, pIdentityHash *CONTACT_AGGREGATION_BLOB, ppItem **IContactAggregationContact) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceType)), uintptr(unsafe.Pointer(pAccountId)), uintptr(unsafe.Pointer(pIdentityHash)), uintptr(unsafe.Pointer(ppItem)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContactCollection) FindFirstByIdentityHash(pSourceType string, pAccountId string, pIdentityHash *CONTACT_AGGREGATION_BLOB) (*IContactAggregationContact, error) {
+	_pSourceType := win32.UTF16Ptr(pSourceType)
+	_pAccountId := win32.UTF16Ptr(pAccountId)
+	var _ppItem *IContactAggregationContact
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSourceType)), uintptr(unsafe.Pointer(_pAccountId)), uintptr(unsafe.Pointer(pIdentityHash)), uintptr(unsafe.Pointer(&_ppItem)))
+	return _ppItem, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IContactAggregationContactCollection's vtable slot 6.
-func (self *IContactAggregationContactCollection) Get_Count(pCount *int32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContactCollection) Get_Count() (int32, error) {
+	var _pCount int32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
+	return _pCount, win32.HRESULTError(int32(r1))
 }
 
 // FindFirstByRemoteId dispatches through IContactAggregationContactCollection's vtable slot 7.
-func (self *IContactAggregationContactCollection) FindFirstByRemoteId(pSourceType foundation.PWSTR, pAccountId foundation.PWSTR, pRemoteObjectId *CONTACT_AGGREGATION_BLOB, ppItem **IContactAggregationContact) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceType)), uintptr(unsafe.Pointer(pAccountId)), uintptr(unsafe.Pointer(pRemoteObjectId)), uintptr(unsafe.Pointer(ppItem)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationContactCollection) FindFirstByRemoteId(pSourceType string, pAccountId string, pRemoteObjectId *CONTACT_AGGREGATION_BLOB) (*IContactAggregationContact, error) {
+	_pSourceType := win32.UTF16Ptr(pSourceType)
+	_pAccountId := win32.UTF16Ptr(pAccountId)
+	var _ppItem *IContactAggregationContact
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSourceType)), uintptr(unsafe.Pointer(_pAccountId)), uintptr(unsafe.Pointer(pRemoteObjectId)), uintptr(unsafe.Pointer(&_ppItem)))
+	return _ppItem, win32.HRESULTError(int32(r1))
 }
 
 // IID: c93c545f-1284-499b-96af-07372af473e0
@@ -297,63 +327,70 @@ type IContactAggregationGroup struct {
 var IID_IContactAggregationGroup = win32.GUID{Data1: 0xc93c545f, Data2: 0x1284, Data3: 0x499b, Data4: [8]byte{0x96, 0xaf, 0x07, 0x37, 0x2a, 0xf4, 0x73, 0xe0}}
 
 // Delete dispatches through IContactAggregationGroup's vtable slot 3.
-func (self *IContactAggregationGroup) Delete() foundation.HRESULT {
+func (self *IContactAggregationGroup) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Save dispatches through IContactAggregationGroup's vtable slot 4.
-func (self *IContactAggregationGroup) Save() foundation.HRESULT {
+func (self *IContactAggregationGroup) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Add dispatches through IContactAggregationGroup's vtable slot 5.
-func (self *IContactAggregationGroup) Add(pAggregateId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAggregateId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationGroup) Add(pAggregateId string) error {
+	_pAggregateId := win32.UTF16Ptr(pAggregateId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAggregateId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Remove dispatches through IContactAggregationGroup's vtable slot 6.
-func (self *IContactAggregationGroup) Remove(pAggregateId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAggregateId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationGroup) Remove(pAggregateId string) error {
+	_pAggregateId := win32.UTF16Ptr(pAggregateId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAggregateId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Members dispatches through IContactAggregationGroup's vtable slot 7.
-func (self *IContactAggregationGroup) Get_Members(ppAggregateContactCollection **IContactAggregationAggregateCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAggregateContactCollection)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationGroup) Get_Members() (*IContactAggregationAggregateCollection, error) {
+	var _ppAggregateContactCollection *IContactAggregationAggregateCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAggregateContactCollection)))
+	return _ppAggregateContactCollection, win32.HRESULTError(int32(r1))
 }
 
 // Get_GlobalObjectId dispatches through IContactAggregationGroup's vtable slot 8.
-func (self *IContactAggregationGroup) Get_GlobalObjectId(pGlobalObjectId *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGlobalObjectId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationGroup) Get_GlobalObjectId() (win32.GUID, error) {
+	var _pGlobalObjectId win32.GUID
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pGlobalObjectId)))
+	return _pGlobalObjectId, win32.HRESULTError(int32(r1))
 }
 
 // Put_GlobalObjectId dispatches through IContactAggregationGroup's vtable slot 9.
-func (self *IContactAggregationGroup) Put_GlobalObjectId(pGlobalObjectId *win32.GUID) foundation.HRESULT {
+func (self *IContactAggregationGroup) Put_GlobalObjectId(pGlobalObjectId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGlobalObjectId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through IContactAggregationGroup's vtable slot 10.
-func (self *IContactAggregationGroup) Get_Id(ppItemId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppItemId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationGroup) Get_Id() (foundation.PWSTR, error) {
+	var _ppItemId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppItemId)))
+	return _ppItemId, win32.HRESULTError(int32(r1))
 }
 
 // Get_Name dispatches through IContactAggregationGroup's vtable slot 11.
-func (self *IContactAggregationGroup) Get_Name(ppName *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationGroup) Get_Name() (foundation.PWSTR, error) {
+	var _ppName foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppName)))
+	return _ppName, win32.HRESULTError(int32(r1))
 }
 
 // Put_Name dispatches through IContactAggregationGroup's vtable slot 12.
-func (self *IContactAggregationGroup) Put_Name(pName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pName)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationGroup) Put_Name(pName string) error {
+	_pName := win32.UTF16Ptr(pName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 20a19a9c-d2f3-4b83-9143-beffd2cc226d
@@ -365,27 +402,31 @@ type IContactAggregationGroupCollection struct {
 var IID_IContactAggregationGroupCollection = win32.GUID{Data1: 0x20a19a9c, Data2: 0xd2f3, Data3: 0x4b83, Data4: [8]byte{0x91, 0x43, 0xbe, 0xff, 0xd2, 0xcc, 0x22, 0x6d}}
 
 // FindFirst dispatches through IContactAggregationGroupCollection's vtable slot 3.
-func (self *IContactAggregationGroupCollection) FindFirst(ppGroup **IContactAggregationGroup) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppGroup)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationGroupCollection) FindFirst() (*IContactAggregationGroup, error) {
+	var _ppGroup *IContactAggregationGroup
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppGroup)))
+	return _ppGroup, win32.HRESULTError(int32(r1))
 }
 
 // FindFirstByGlobalObjectId dispatches through IContactAggregationGroupCollection's vtable slot 4.
-func (self *IContactAggregationGroupCollection) FindFirstByGlobalObjectId(pGlobalObjectId *win32.GUID, ppGroup **IContactAggregationGroup) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGlobalObjectId)), uintptr(unsafe.Pointer(ppGroup)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationGroupCollection) FindFirstByGlobalObjectId(pGlobalObjectId *win32.GUID) (*IContactAggregationGroup, error) {
+	var _ppGroup *IContactAggregationGroup
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGlobalObjectId)), uintptr(unsafe.Pointer(&_ppGroup)))
+	return _ppGroup, win32.HRESULTError(int32(r1))
 }
 
 // FindNext dispatches through IContactAggregationGroupCollection's vtable slot 5.
-func (self *IContactAggregationGroupCollection) FindNext(ppGroup **IContactAggregationGroup) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppGroup)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationGroupCollection) FindNext() (*IContactAggregationGroup, error) {
+	var _ppGroup *IContactAggregationGroup
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppGroup)))
+	return _ppGroup, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IContactAggregationGroupCollection's vtable slot 6.
-func (self *IContactAggregationGroupCollection) Get_Count(pCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationGroupCollection) Get_Count() (uint32, error) {
+	var _pCount uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
+	return _pCount, win32.HRESULTError(int32(r1))
 }
 
 // IID: b6813323-a183-4654-8627-79b30de3a0ec
@@ -397,105 +438,118 @@ type IContactAggregationLink struct {
 var IID_IContactAggregationLink = win32.GUID{Data1: 0xb6813323, Data2: 0xa183, Data3: 0x4654, Data4: [8]byte{0x86, 0x27, 0x79, 0xb3, 0x0d, 0xe3, 0xa0, 0xec}}
 
 // Delete dispatches through IContactAggregationLink's vtable slot 3.
-func (self *IContactAggregationLink) Delete() foundation.HRESULT {
+func (self *IContactAggregationLink) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Save dispatches through IContactAggregationLink's vtable slot 4.
-func (self *IContactAggregationLink) Save() foundation.HRESULT {
+func (self *IContactAggregationLink) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AccountId dispatches through IContactAggregationLink's vtable slot 5.
-func (self *IContactAggregationLink) Get_AccountId(ppAccountId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAccountId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLink) Get_AccountId() (foundation.PWSTR, error) {
+	var _ppAccountId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAccountId)))
+	return _ppAccountId, win32.HRESULTError(int32(r1))
 }
 
 // Put_AccountId dispatches through IContactAggregationLink's vtable slot 6.
-func (self *IContactAggregationLink) Put_AccountId(pAccountId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAccountId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLink) Put_AccountId(pAccountId string) error {
+	_pAccountId := win32.UTF16Ptr(pAccountId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAccountId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through IContactAggregationLink's vtable slot 7.
-func (self *IContactAggregationLink) Get_Id(ppItemId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppItemId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLink) Get_Id() (foundation.PWSTR, error) {
+	var _ppItemId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppItemId)))
+	return _ppItemId, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsLinkResolved dispatches through IContactAggregationLink's vtable slot 8.
-func (self *IContactAggregationLink) Get_IsLinkResolved(pIsLinkResolved *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsLinkResolved)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLink) Get_IsLinkResolved() (foundation.BOOL, error) {
+	var _pIsLinkResolved foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pIsLinkResolved)))
+	return _pIsLinkResolved, win32.HRESULTError(int32(r1))
 }
 
 // Put_IsLinkResolved dispatches through IContactAggregationLink's vtable slot 9.
-func (self *IContactAggregationLink) Put_IsLinkResolved(isLinkResolved foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(isLinkResolved))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLink) Put_IsLinkResolved(isLinkResolved bool) error {
+	_isLinkResolved := win32.Bool32(isLinkResolved)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(_isLinkResolved))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_NetworkSourceIdString dispatches through IContactAggregationLink's vtable slot 10.
-func (self *IContactAggregationLink) Get_NetworkSourceIdString(ppNetworkSourceId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppNetworkSourceId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLink) Get_NetworkSourceIdString() (foundation.PWSTR, error) {
+	var _ppNetworkSourceId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppNetworkSourceId)))
+	return _ppNetworkSourceId, win32.HRESULTError(int32(r1))
 }
 
 // Put_NetworkSourceIdString dispatches through IContactAggregationLink's vtable slot 11.
-func (self *IContactAggregationLink) Put_NetworkSourceIdString(pNetworkSourceId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNetworkSourceId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLink) Put_NetworkSourceIdString(pNetworkSourceId string) error {
+	_pNetworkSourceId := win32.UTF16Ptr(pNetworkSourceId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pNetworkSourceId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_RemoteObjectId dispatches through IContactAggregationLink's vtable slot 12.
-func (self *IContactAggregationLink) Get_RemoteObjectId(ppRemoteObjectId **CONTACT_AGGREGATION_BLOB) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppRemoteObjectId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLink) Get_RemoteObjectId() (*CONTACT_AGGREGATION_BLOB, error) {
+	var _ppRemoteObjectId *CONTACT_AGGREGATION_BLOB
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppRemoteObjectId)))
+	return _ppRemoteObjectId, win32.HRESULTError(int32(r1))
 }
 
 // Put_RemoteObjectId dispatches through IContactAggregationLink's vtable slot 13.
-func (self *IContactAggregationLink) Put_RemoteObjectId(pRemoteObjectId *CONTACT_AGGREGATION_BLOB) foundation.HRESULT {
+func (self *IContactAggregationLink) Put_RemoteObjectId(pRemoteObjectId *CONTACT_AGGREGATION_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRemoteObjectId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ServerPerson dispatches through IContactAggregationLink's vtable slot 14.
-func (self *IContactAggregationLink) Get_ServerPerson(ppServerPersonId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppServerPersonId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLink) Get_ServerPerson() (foundation.PWSTR, error) {
+	var _ppServerPersonId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppServerPersonId)))
+	return _ppServerPersonId, win32.HRESULTError(int32(r1))
 }
 
 // Put_ServerPerson dispatches through IContactAggregationLink's vtable slot 15.
-func (self *IContactAggregationLink) Put_ServerPerson(pServerPersonId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pServerPersonId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLink) Put_ServerPerson(pServerPersonId string) error {
+	_pServerPersonId := win32.UTF16Ptr(pServerPersonId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pServerPersonId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ServerPersonBaseline dispatches through IContactAggregationLink's vtable slot 16.
-func (self *IContactAggregationLink) Get_ServerPersonBaseline(ppServerPersonId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppServerPersonId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLink) Get_ServerPersonBaseline() (foundation.PWSTR, error) {
+	var _ppServerPersonId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppServerPersonId)))
+	return _ppServerPersonId, win32.HRESULTError(int32(r1))
 }
 
 // Put_ServerPersonBaseline dispatches through IContactAggregationLink's vtable slot 17.
-func (self *IContactAggregationLink) Put_ServerPersonBaseline(pServerPersonId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pServerPersonId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLink) Put_ServerPersonBaseline(pServerPersonId string) error {
+	_pServerPersonId := win32.UTF16Ptr(pServerPersonId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pServerPersonId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SyncIdentityHash dispatches through IContactAggregationLink's vtable slot 18.
-func (self *IContactAggregationLink) Get_SyncIdentityHash(ppSyncIdentityHash **CONTACT_AGGREGATION_BLOB) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSyncIdentityHash)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLink) Get_SyncIdentityHash() (*CONTACT_AGGREGATION_BLOB, error) {
+	var _ppSyncIdentityHash *CONTACT_AGGREGATION_BLOB
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppSyncIdentityHash)))
+	return _ppSyncIdentityHash, win32.HRESULTError(int32(r1))
 }
 
 // Put_SyncIdentityHash dispatches through IContactAggregationLink's vtable slot 19.
-func (self *IContactAggregationLink) Put_SyncIdentityHash(pSyncIdentityHash *CONTACT_AGGREGATION_BLOB) foundation.HRESULT {
+func (self *IContactAggregationLink) Put_SyncIdentityHash(pSyncIdentityHash *CONTACT_AGGREGATION_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSyncIdentityHash)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f8bc0e93-fb55-4f28-b9fa-b1c274153292
@@ -507,27 +561,33 @@ type IContactAggregationLinkCollection struct {
 var IID_IContactAggregationLinkCollection = win32.GUID{Data1: 0xf8bc0e93, Data2: 0xfb55, Data3: 0x4f28, Data4: [8]byte{0xb9, 0xfa, 0xb1, 0xc2, 0x74, 0x15, 0x32, 0x92}}
 
 // FindFirst dispatches through IContactAggregationLinkCollection's vtable slot 3.
-func (self *IContactAggregationLinkCollection) FindFirst(ppServerContactLink **IContactAggregationLink) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppServerContactLink)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLinkCollection) FindFirst() (*IContactAggregationLink, error) {
+	var _ppServerContactLink *IContactAggregationLink
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppServerContactLink)))
+	return _ppServerContactLink, win32.HRESULTError(int32(r1))
 }
 
 // FindFirstByRemoteId dispatches through IContactAggregationLinkCollection's vtable slot 4.
-func (self *IContactAggregationLinkCollection) FindFirstByRemoteId(pSourceType foundation.PWSTR, pAccountId foundation.PWSTR, pRemoteId *CONTACT_AGGREGATION_BLOB, ppServerContactLink **IContactAggregationLink) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSourceType)), uintptr(unsafe.Pointer(pAccountId)), uintptr(unsafe.Pointer(pRemoteId)), uintptr(unsafe.Pointer(ppServerContactLink)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLinkCollection) FindFirstByRemoteId(pSourceType string, pAccountId string, pRemoteId *CONTACT_AGGREGATION_BLOB) (*IContactAggregationLink, error) {
+	_pSourceType := win32.UTF16Ptr(pSourceType)
+	_pAccountId := win32.UTF16Ptr(pAccountId)
+	var _ppServerContactLink *IContactAggregationLink
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSourceType)), uintptr(unsafe.Pointer(_pAccountId)), uintptr(unsafe.Pointer(pRemoteId)), uintptr(unsafe.Pointer(&_ppServerContactLink)))
+	return _ppServerContactLink, win32.HRESULTError(int32(r1))
 }
 
 // FindNext dispatches through IContactAggregationLinkCollection's vtable slot 5.
-func (self *IContactAggregationLinkCollection) FindNext(ppServerContactLink **IContactAggregationLink) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppServerContactLink)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLinkCollection) FindNext() (*IContactAggregationLink, error) {
+	var _ppServerContactLink *IContactAggregationLink
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppServerContactLink)))
+	return _ppServerContactLink, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IContactAggregationLinkCollection's vtable slot 6.
-func (self *IContactAggregationLinkCollection) Get_Count(pCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationLinkCollection) Get_Count() (uint32, error) {
+	var _pCount uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
+	return _pCount, win32.HRESULTError(int32(r1))
 }
 
 // IID: 1d865989-4b1f-4b60-8f34-c2ad468b2b50
@@ -539,93 +599,102 @@ type IContactAggregationManager struct {
 var IID_IContactAggregationManager = win32.GUID{Data1: 0x1d865989, Data2: 0x4b1f, Data3: 0x4b60, Data4: [8]byte{0x8f, 0x34, 0xc2, 0xad, 0x46, 0x8b, 0x2b, 0x50}}
 
 // GetVersionInfo dispatches through IContactAggregationManager's vtable slot 3.
-func (self *IContactAggregationManager) GetVersionInfo(plMajorVersion *int32, plMinorVersion *int32) foundation.HRESULT {
+func (self *IContactAggregationManager) GetVersionInfo(plMajorVersion *int32, plMinorVersion *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(plMajorVersion)), uintptr(unsafe.Pointer(plMinorVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateOrOpenGroup dispatches through IContactAggregationManager's vtable slot 4.
-func (self *IContactAggregationManager) CreateOrOpenGroup(pGroupName foundation.PWSTR, options CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS, pCreatedGroup *foundation.BOOL, ppGroup **IContactAggregationGroup) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGroupName)), uintptr(options), uintptr(unsafe.Pointer(pCreatedGroup)), uintptr(unsafe.Pointer(ppGroup)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationManager) CreateOrOpenGroup(pGroupName string, options CONTACT_AGGREGATION_CREATE_OR_OPEN_OPTIONS, pCreatedGroup *foundation.BOOL) (*IContactAggregationGroup, error) {
+	_pGroupName := win32.UTF16Ptr(pGroupName)
+	var _ppGroup *IContactAggregationGroup
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pGroupName)), uintptr(options), uintptr(unsafe.Pointer(pCreatedGroup)), uintptr(unsafe.Pointer(&_ppGroup)))
+	return _ppGroup, win32.HRESULTError(int32(r1))
 }
 
 // CreateExternalContact dispatches through IContactAggregationManager's vtable slot 5.
-func (self *IContactAggregationManager) CreateExternalContact(ppItem **IContactAggregationContact) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppItem)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationManager) CreateExternalContact() (*IContactAggregationContact, error) {
+	var _ppItem *IContactAggregationContact
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppItem)))
+	return _ppItem, win32.HRESULTError(int32(r1))
 }
 
 // CreateServerPerson dispatches through IContactAggregationManager's vtable slot 6.
-func (self *IContactAggregationManager) CreateServerPerson(ppServerPerson **IContactAggregationServerPerson) foundation.HRESULT {
+func (self *IContactAggregationManager) CreateServerPerson(ppServerPerson **IContactAggregationServerPerson) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppServerPerson)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateServerContactLink dispatches through IContactAggregationManager's vtable slot 7.
-func (self *IContactAggregationManager) CreateServerContactLink(ppServerContactLink **IContactAggregationLink) foundation.HRESULT {
+func (self *IContactAggregationManager) CreateServerContactLink(ppServerContactLink **IContactAggregationLink) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppServerContactLink)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Flush dispatches through IContactAggregationManager's vtable slot 8.
-func (self *IContactAggregationManager) Flush() foundation.HRESULT {
+func (self *IContactAggregationManager) Flush() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenAggregateContact dispatches through IContactAggregationManager's vtable slot 9.
-func (self *IContactAggregationManager) OpenAggregateContact(pItemId foundation.PWSTR, ppItem **IContactAggregationAggregate) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItemId)), uintptr(unsafe.Pointer(ppItem)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationManager) OpenAggregateContact(pItemId string, ppItem **IContactAggregationAggregate) error {
+	_pItemId := win32.UTF16Ptr(pItemId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pItemId)), uintptr(unsafe.Pointer(ppItem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenContact dispatches through IContactAggregationManager's vtable slot 10.
-func (self *IContactAggregationManager) OpenContact(pItemId foundation.PWSTR, ppItem **IContactAggregationContact) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItemId)), uintptr(unsafe.Pointer(ppItem)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationManager) OpenContact(pItemId string, ppItem **IContactAggregationContact) error {
+	_pItemId := win32.UTF16Ptr(pItemId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pItemId)), uintptr(unsafe.Pointer(ppItem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenServerContactLink dispatches through IContactAggregationManager's vtable slot 11.
-func (self *IContactAggregationManager) OpenServerContactLink(pItemId foundation.PWSTR, ppItem **IContactAggregationLink) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItemId)), uintptr(unsafe.Pointer(ppItem)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationManager) OpenServerContactLink(pItemId string, ppItem **IContactAggregationLink) error {
+	_pItemId := win32.UTF16Ptr(pItemId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pItemId)), uintptr(unsafe.Pointer(ppItem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenServerPerson dispatches through IContactAggregationManager's vtable slot 12.
-func (self *IContactAggregationManager) OpenServerPerson(pItemId foundation.PWSTR, ppItem **IContactAggregationServerPerson) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItemId)), uintptr(unsafe.Pointer(ppItem)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationManager) OpenServerPerson(pItemId string, ppItem **IContactAggregationServerPerson) error {
+	_pItemId := win32.UTF16Ptr(pItemId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pItemId)), uintptr(unsafe.Pointer(ppItem)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Contacts dispatches through IContactAggregationManager's vtable slot 13.
-func (self *IContactAggregationManager) Get_Contacts(options CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppItems **IContactAggregationContactCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(ppItems)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationManager) Get_Contacts(options CONTACT_AGGREGATION_COLLECTION_OPTIONS) (*IContactAggregationContactCollection, error) {
+	var _ppItems *IContactAggregationContactCollection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(&_ppItems)))
+	return _ppItems, win32.HRESULTError(int32(r1))
 }
 
 // Get_AggregateContacts dispatches through IContactAggregationManager's vtable slot 14.
-func (self *IContactAggregationManager) Get_AggregateContacts(options CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppAggregates **IContactAggregationAggregateCollection) foundation.HRESULT {
+func (self *IContactAggregationManager) Get_AggregateContacts(options CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppAggregates **IContactAggregationAggregateCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(ppAggregates)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Groups dispatches through IContactAggregationManager's vtable slot 15.
-func (self *IContactAggregationManager) Get_Groups(options CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppGroups **IContactAggregationGroupCollection) foundation.HRESULT {
+func (self *IContactAggregationManager) Get_Groups(options CONTACT_AGGREGATION_COLLECTION_OPTIONS, ppGroups **IContactAggregationGroupCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(options), uintptr(unsafe.Pointer(ppGroups)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ServerPersons dispatches through IContactAggregationManager's vtable slot 16.
-func (self *IContactAggregationManager) Get_ServerPersons(ppServerPersonCollection **IContactAggregationServerPersonCollection) foundation.HRESULT {
+func (self *IContactAggregationManager) Get_ServerPersons(ppServerPersonCollection **IContactAggregationServerPersonCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppServerPersonCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ServerContactLinks dispatches through IContactAggregationManager's vtable slot 17.
-func (self *IContactAggregationManager) Get_ServerContactLinks(pPersonItemId foundation.PWSTR, ppServerContactLinkCollection **IContactAggregationLinkCollection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPersonItemId)), uintptr(unsafe.Pointer(ppServerContactLinkCollection)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationManager) Get_ServerContactLinks(pPersonItemId string, ppServerContactLinkCollection **IContactAggregationLinkCollection) error {
+	_pPersonItemId := win32.UTF16Ptr(pPersonItemId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pPersonItemId)), uintptr(unsafe.Pointer(ppServerContactLinkCollection)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7fdc3d4b-1b82-4334-85c5-25184ee5a5f2
@@ -637,141 +706,158 @@ type IContactAggregationServerPerson struct {
 var IID_IContactAggregationServerPerson = win32.GUID{Data1: 0x7fdc3d4b, Data2: 0x1b82, Data3: 0x4334, Data4: [8]byte{0x85, 0xc5, 0x25, 0x18, 0x4e, 0xe5, 0xa5, 0xf2}}
 
 // Delete dispatches through IContactAggregationServerPerson's vtable slot 3.
-func (self *IContactAggregationServerPerson) Delete() foundation.HRESULT {
+func (self *IContactAggregationServerPerson) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Save dispatches through IContactAggregationServerPerson's vtable slot 4.
-func (self *IContactAggregationServerPerson) Save() foundation.HRESULT {
+func (self *IContactAggregationServerPerson) Save() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AggregateId dispatches through IContactAggregationServerPerson's vtable slot 5.
-func (self *IContactAggregationServerPerson) Get_AggregateId(ppAggregateId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAggregateId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Get_AggregateId() (foundation.PWSTR, error) {
+	var _ppAggregateId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAggregateId)))
+	return _ppAggregateId, win32.HRESULTError(int32(r1))
 }
 
 // Put_AggregateId dispatches through IContactAggregationServerPerson's vtable slot 6.
-func (self *IContactAggregationServerPerson) Put_AggregateId(pAggregateId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAggregateId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Put_AggregateId(pAggregateId string) error {
+	_pAggregateId := win32.UTF16Ptr(pAggregateId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAggregateId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AntiLink dispatches through IContactAggregationServerPerson's vtable slot 7.
-func (self *IContactAggregationServerPerson) Get_AntiLink(ppAntiLink *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAntiLink)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Get_AntiLink() (foundation.PWSTR, error) {
+	var _ppAntiLink foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAntiLink)))
+	return _ppAntiLink, win32.HRESULTError(int32(r1))
 }
 
 // Put_AntiLink dispatches through IContactAggregationServerPerson's vtable slot 8.
-func (self *IContactAggregationServerPerson) Put_AntiLink(pAntiLink foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAntiLink)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Put_AntiLink(pAntiLink string) error {
+	_pAntiLink := win32.UTF16Ptr(pAntiLink)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAntiLink)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_AntiLinkBaseline dispatches through IContactAggregationServerPerson's vtable slot 9.
-func (self *IContactAggregationServerPerson) Get_AntiLinkBaseline(ppAntiLink *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppAntiLink)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Get_AntiLinkBaseline() (foundation.PWSTR, error) {
+	var _ppAntiLink foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppAntiLink)))
+	return _ppAntiLink, win32.HRESULTError(int32(r1))
 }
 
 // Put_AntiLinkBaseline dispatches through IContactAggregationServerPerson's vtable slot 10.
-func (self *IContactAggregationServerPerson) Put_AntiLinkBaseline(pAntiLink foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAntiLink)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Put_AntiLinkBaseline(pAntiLink string) error {
+	_pAntiLink := win32.UTF16Ptr(pAntiLink)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAntiLink)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FavoriteOrder dispatches through IContactAggregationServerPerson's vtable slot 11.
-func (self *IContactAggregationServerPerson) Get_FavoriteOrder(pFavoriteOrder *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFavoriteOrder)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Get_FavoriteOrder() (uint32, error) {
+	var _pFavoriteOrder uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pFavoriteOrder)))
+	return _pFavoriteOrder, win32.HRESULTError(int32(r1))
 }
 
 // Put_FavoriteOrder dispatches through IContactAggregationServerPerson's vtable slot 12.
-func (self *IContactAggregationServerPerson) Put_FavoriteOrder(favoriteOrder uint32) foundation.HRESULT {
+func (self *IContactAggregationServerPerson) Put_FavoriteOrder(favoriteOrder uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(favoriteOrder))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_FavoriteOrderBaseline dispatches through IContactAggregationServerPerson's vtable slot 13.
-func (self *IContactAggregationServerPerson) Get_FavoriteOrderBaseline(pFavoriteOrder *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFavoriteOrder)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Get_FavoriteOrderBaseline() (uint32, error) {
+	var _pFavoriteOrder uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pFavoriteOrder)))
+	return _pFavoriteOrder, win32.HRESULTError(int32(r1))
 }
 
 // Put_FavoriteOrderBaseline dispatches through IContactAggregationServerPerson's vtable slot 14.
-func (self *IContactAggregationServerPerson) Put_FavoriteOrderBaseline(favoriteOrder uint32) foundation.HRESULT {
+func (self *IContactAggregationServerPerson) Put_FavoriteOrderBaseline(favoriteOrder uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(favoriteOrder))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Groups dispatches through IContactAggregationServerPerson's vtable slot 15.
-func (self *IContactAggregationServerPerson) Get_Groups(pGroups **CONTACT_AGGREGATION_BLOB) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGroups)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Get_Groups() (*CONTACT_AGGREGATION_BLOB, error) {
+	var _pGroups *CONTACT_AGGREGATION_BLOB
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pGroups)))
+	return _pGroups, win32.HRESULTError(int32(r1))
 }
 
 // Put_Groups dispatches through IContactAggregationServerPerson's vtable slot 16.
-func (self *IContactAggregationServerPerson) Put_Groups(pGroups *CONTACT_AGGREGATION_BLOB) foundation.HRESULT {
+func (self *IContactAggregationServerPerson) Put_Groups(pGroups *CONTACT_AGGREGATION_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGroups)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_GroupsBaseline dispatches through IContactAggregationServerPerson's vtable slot 17.
-func (self *IContactAggregationServerPerson) Get_GroupsBaseline(ppGroups **CONTACT_AGGREGATION_BLOB) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppGroups)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Get_GroupsBaseline() (*CONTACT_AGGREGATION_BLOB, error) {
+	var _ppGroups *CONTACT_AGGREGATION_BLOB
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppGroups)))
+	return _ppGroups, win32.HRESULTError(int32(r1))
 }
 
 // Put_GroupsBaseline dispatches through IContactAggregationServerPerson's vtable slot 18.
-func (self *IContactAggregationServerPerson) Put_GroupsBaseline(pGroups *CONTACT_AGGREGATION_BLOB) foundation.HRESULT {
+func (self *IContactAggregationServerPerson) Put_GroupsBaseline(pGroups *CONTACT_AGGREGATION_BLOB) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGroups)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Id dispatches through IContactAggregationServerPerson's vtable slot 19.
-func (self *IContactAggregationServerPerson) Get_Id(ppId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Get_Id() (foundation.PWSTR, error) {
+	var _ppId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppId)))
+	return _ppId, win32.HRESULTError(int32(r1))
 }
 
 // Get_IsTombstone dispatches through IContactAggregationServerPerson's vtable slot 20.
-func (self *IContactAggregationServerPerson) Get_IsTombstone(pIsTombstone *foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIsTombstone)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Get_IsTombstone() (foundation.BOOL, error) {
+	var _pIsTombstone foundation.BOOL
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pIsTombstone)))
+	return _pIsTombstone, win32.HRESULTError(int32(r1))
 }
 
 // Put_IsTombstone dispatches through IContactAggregationServerPerson's vtable slot 21.
-func (self *IContactAggregationServerPerson) Put_IsTombstone(isTombstone foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(isTombstone))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Put_IsTombstone(isTombstone bool) error {
+	_isTombstone := win32.Bool32(isTombstone)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(_isTombstone))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LinkedAggregateId dispatches through IContactAggregationServerPerson's vtable slot 22.
-func (self *IContactAggregationServerPerson) Get_LinkedAggregateId(ppLinkedAggregateId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppLinkedAggregateId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Get_LinkedAggregateId() (foundation.PWSTR, error) {
+	var _ppLinkedAggregateId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppLinkedAggregateId)))
+	return _ppLinkedAggregateId, win32.HRESULTError(int32(r1))
 }
 
 // Put_LinkedAggregateId dispatches through IContactAggregationServerPerson's vtable slot 23.
-func (self *IContactAggregationServerPerson) Put_LinkedAggregateId(pLinkedAggregateId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLinkedAggregateId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Put_LinkedAggregateId(pLinkedAggregateId string) error {
+	_pLinkedAggregateId := win32.UTF16Ptr(pLinkedAggregateId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pLinkedAggregateId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_ObjectId dispatches through IContactAggregationServerPerson's vtable slot 24.
-func (self *IContactAggregationServerPerson) Get_ObjectId(ppObjectId *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppObjectId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Get_ObjectId() (foundation.PWSTR, error) {
+	var _ppObjectId foundation.PWSTR
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppObjectId)))
+	return _ppObjectId, win32.HRESULTError(int32(r1))
 }
 
 // Put_ObjectId dispatches through IContactAggregationServerPerson's vtable slot 25.
-func (self *IContactAggregationServerPerson) Put_ObjectId(pObjectId foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pObjectId)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPerson) Put_ObjectId(pObjectId string) error {
+	_pObjectId := win32.UTF16Ptr(pObjectId)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pObjectId)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4f730a4a-6604-47b6-a987-669ecf1e5751
@@ -783,39 +869,48 @@ type IContactAggregationServerPersonCollection struct {
 var IID_IContactAggregationServerPersonCollection = win32.GUID{Data1: 0x4f730a4a, Data2: 0x6604, Data3: 0x47b6, Data4: [8]byte{0xa9, 0x87, 0x66, 0x9e, 0xcf, 0x1e, 0x57, 0x51}}
 
 // FindFirst dispatches through IContactAggregationServerPersonCollection's vtable slot 3.
-func (self *IContactAggregationServerPersonCollection) FindFirst(ppServerPerson **IContactAggregationServerPerson) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppServerPerson)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPersonCollection) FindFirst() (*IContactAggregationServerPerson, error) {
+	var _ppServerPerson *IContactAggregationServerPerson
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppServerPerson)))
+	return _ppServerPerson, win32.HRESULTError(int32(r1))
 }
 
 // FindFirstByServerId dispatches through IContactAggregationServerPersonCollection's vtable slot 4.
-func (self *IContactAggregationServerPersonCollection) FindFirstByServerId(pServerId foundation.PWSTR, ppServerPerson **IContactAggregationServerPerson) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pServerId)), uintptr(unsafe.Pointer(ppServerPerson)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPersonCollection) FindFirstByServerId(pServerId string) (*IContactAggregationServerPerson, error) {
+	_pServerId := win32.UTF16Ptr(pServerId)
+	var _ppServerPerson *IContactAggregationServerPerson
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pServerId)), uintptr(unsafe.Pointer(&_ppServerPerson)))
+	return _ppServerPerson, win32.HRESULTError(int32(r1))
 }
 
 // FindFirstByAggregateId dispatches through IContactAggregationServerPersonCollection's vtable slot 5.
-func (self *IContactAggregationServerPersonCollection) FindFirstByAggregateId(pAggregateId foundation.PWSTR, ppServerPerson **IContactAggregationServerPerson) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAggregateId)), uintptr(unsafe.Pointer(ppServerPerson)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPersonCollection) FindFirstByAggregateId(pAggregateId string) (*IContactAggregationServerPerson, error) {
+	_pAggregateId := win32.UTF16Ptr(pAggregateId)
+	var _ppServerPerson *IContactAggregationServerPerson
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAggregateId)), uintptr(unsafe.Pointer(&_ppServerPerson)))
+	return _ppServerPerson, win32.HRESULTError(int32(r1))
 }
 
 // FindFirstByLinkedAggregateId dispatches through IContactAggregationServerPersonCollection's vtable slot 6.
-func (self *IContactAggregationServerPersonCollection) FindFirstByLinkedAggregateId(pAggregateId foundation.PWSTR, ppServerPerson **IContactAggregationServerPerson) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAggregateId)), uintptr(unsafe.Pointer(ppServerPerson)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPersonCollection) FindFirstByLinkedAggregateId(pAggregateId string) (*IContactAggregationServerPerson, error) {
+	_pAggregateId := win32.UTF16Ptr(pAggregateId)
+	var _ppServerPerson *IContactAggregationServerPerson
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAggregateId)), uintptr(unsafe.Pointer(&_ppServerPerson)))
+	return _ppServerPerson, win32.HRESULTError(int32(r1))
 }
 
 // FindNext dispatches through IContactAggregationServerPersonCollection's vtable slot 7.
-func (self *IContactAggregationServerPersonCollection) FindNext(ppServerPerson **IContactAggregationServerPerson) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppServerPerson)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPersonCollection) FindNext() (*IContactAggregationServerPerson, error) {
+	var _ppServerPerson *IContactAggregationServerPerson
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_ppServerPerson)))
+	return _ppServerPerson, win32.HRESULTError(int32(r1))
 }
 
 // Get_Count dispatches through IContactAggregationServerPersonCollection's vtable slot 8.
-func (self *IContactAggregationServerPersonCollection) Get_Count(pCount *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCount)))
-	return foundation.HRESULT(r1)
+func (self *IContactAggregationServerPersonCollection) Get_Count() (uint32, error) {
+	var _pCount uint32
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_pCount)))
+	return _pCount, win32.HRESULTError(int32(r1))
 }
 
 // IContactCollection: https://learn.microsoft.com/windows/win32/api/icontact/nn-icontact-icontactcollection
@@ -828,21 +923,21 @@ type IContactCollection struct {
 var IID_IContactCollection = win32.GUID{Data1: 0xb6afa338, Data2: 0xd779, Data3: 0x11d9, Data4: [8]byte{0x8b, 0xde, 0xf6, 0x6b, 0xad, 0x1e, 0x3f, 0x3a}}
 
 // Reset dispatches through IContactCollection's vtable slot 3.
-func (self *IContactCollection) Reset() foundation.HRESULT {
+func (self *IContactCollection) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Next dispatches through IContactCollection's vtable slot 4.
-func (self *IContactCollection) Next() foundation.HRESULT {
+func (self *IContactCollection) Next() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrent dispatches through IContactCollection's vtable slot 5.
-func (self *IContactCollection) GetCurrent(ppContact **IContact) foundation.HRESULT {
+func (self *IContactCollection) GetCurrent(ppContact **IContact) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContact)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IContactManager: https://learn.microsoft.com/windows/win32/api/icontact/nn-icontact-icontactmanager
@@ -855,39 +950,44 @@ type IContactManager struct {
 var IID_IContactManager = win32.GUID{Data1: 0xad553d98, Data2: 0xdeb1, Data3: 0x474a, Data4: [8]byte{0x8e, 0x17, 0xfc, 0x0c, 0x20, 0x75, 0xb7, 0x38}}
 
 // Initialize dispatches through IContactManager's vtable slot 3.
-func (self *IContactManager) Initialize(pszAppName foundation.PWSTR, pszAppVersion foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszAppName)), uintptr(unsafe.Pointer(pszAppVersion)))
-	return foundation.HRESULT(r1)
+func (self *IContactManager) Initialize(pszAppName string, pszAppVersion string) error {
+	_pszAppName := win32.UTF16Ptr(pszAppName)
+	_pszAppVersion := win32.UTF16Ptr(pszAppVersion)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszAppName)), uintptr(unsafe.Pointer(_pszAppVersion)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Load dispatches through IContactManager's vtable slot 4.
-func (self *IContactManager) Load(pszContactID foundation.PWSTR, ppContact **IContact) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszContactID)), uintptr(unsafe.Pointer(ppContact)))
-	return foundation.HRESULT(r1)
+func (self *IContactManager) Load(pszContactID string, ppContact **IContact) error {
+	_pszContactID := win32.UTF16Ptr(pszContactID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszContactID)), uintptr(unsafe.Pointer(ppContact)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // MergeContactIDs dispatches through IContactManager's vtable slot 5.
-func (self *IContactManager) MergeContactIDs(pszNewContactID foundation.PWSTR, pszOldContactID foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszNewContactID)), uintptr(unsafe.Pointer(pszOldContactID)))
-	return foundation.HRESULT(r1)
+func (self *IContactManager) MergeContactIDs(pszNewContactID string, pszOldContactID string) error {
+	_pszNewContactID := win32.UTF16Ptr(pszNewContactID)
+	_pszOldContactID := win32.UTF16Ptr(pszOldContactID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszNewContactID)), uintptr(unsafe.Pointer(_pszOldContactID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMeContact dispatches through IContactManager's vtable slot 6.
-func (self *IContactManager) GetMeContact(ppMeContact **IContact) foundation.HRESULT {
+func (self *IContactManager) GetMeContact(ppMeContact **IContact) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMeContact)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMeContact dispatches through IContactManager's vtable slot 7.
-func (self *IContactManager) SetMeContact(pMeContact *IContact) foundation.HRESULT {
+func (self *IContactManager) SetMeContact(pMeContact *IContact) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMeContact)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetContactCollection dispatches through IContactManager's vtable slot 8.
-func (self *IContactManager) GetContactCollection(ppContactCollection **IContactCollection) foundation.HRESULT {
+func (self *IContactManager) GetContactCollection(ppContactCollection **IContactCollection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppContactCollection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IContactProperties: https://learn.microsoft.com/windows/win32/api/icontact/nn-icontact-icontactproperties
@@ -900,75 +1000,91 @@ type IContactProperties struct {
 var IID_IContactProperties = win32.GUID{Data1: 0x70dd27dd, Data2: 0x5cbd, Data3: 0x46e8, Data4: [8]byte{0xbe, 0xf0, 0x23, 0xb6, 0xb3, 0x46, 0x28, 0x8f}}
 
 // GetString dispatches through IContactProperties's vtable slot 3.
-func (self *IContactProperties) GetString(pszPropertyName foundation.PWSTR, dwFlags uint32, pszValue foundation.PWSTR, cchValue uint32, pdwcchPropertyValueRequired *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszValue)), uintptr(cchValue), uintptr(unsafe.Pointer(pdwcchPropertyValueRequired)))
-	return foundation.HRESULT(r1)
+func (self *IContactProperties) GetString(pszPropertyName string, dwFlags uint32, pszValue foundation.PWSTR, cchValue uint32, pdwcchPropertyValueRequired *uint32) error {
+	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszValue)), uintptr(cchValue), uintptr(unsafe.Pointer(pdwcchPropertyValueRequired)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDate dispatches through IContactProperties's vtable slot 4.
-func (self *IContactProperties) GetDate(pszPropertyName foundation.PWSTR, dwFlags uint32, pftDateTime *foundation.FILETIME) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pftDateTime)))
-	return foundation.HRESULT(r1)
+func (self *IContactProperties) GetDate(pszPropertyName string, dwFlags uint32, pftDateTime *foundation.FILETIME) error {
+	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pftDateTime)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBinary dispatches through IContactProperties's vtable slot 5.
-func (self *IContactProperties) GetBinary(pszPropertyName foundation.PWSTR, dwFlags uint32, pszContentType foundation.PWSTR, cchContentType uint32, pdwcchContentTypeRequired *uint32, ppStream **systemcom.IStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszContentType)), uintptr(cchContentType), uintptr(unsafe.Pointer(pdwcchContentTypeRequired)), uintptr(unsafe.Pointer(ppStream)))
-	return foundation.HRESULT(r1)
+func (self *IContactProperties) GetBinary(pszPropertyName string, dwFlags uint32, pszContentType foundation.PWSTR, cchContentType uint32, pdwcchContentTypeRequired *uint32, ppStream **systemcom.IStream) error {
+	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszContentType)), uintptr(cchContentType), uintptr(unsafe.Pointer(pdwcchContentTypeRequired)), uintptr(unsafe.Pointer(ppStream)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLabels dispatches through IContactProperties's vtable slot 6.
-func (self *IContactProperties) GetLabels(pszArrayElementName foundation.PWSTR, dwFlags uint32, pszLabels foundation.PWSTR, cchLabels uint32, pdwcchLabelsRequired *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszArrayElementName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszLabels)), uintptr(cchLabels), uintptr(unsafe.Pointer(pdwcchLabelsRequired)))
-	return foundation.HRESULT(r1)
+func (self *IContactProperties) GetLabels(pszArrayElementName string, dwFlags uint32, pszLabels foundation.PWSTR, cchLabels uint32, pdwcchLabelsRequired *uint32) error {
+	_pszArrayElementName := win32.UTF16Ptr(pszArrayElementName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszArrayElementName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszLabels)), uintptr(cchLabels), uintptr(unsafe.Pointer(pdwcchLabelsRequired)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetString dispatches through IContactProperties's vtable slot 7.
-func (self *IContactProperties) SetString(pszPropertyName foundation.PWSTR, dwFlags uint32, pszValue foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszValue)))
-	return foundation.HRESULT(r1)
+func (self *IContactProperties) SetString(pszPropertyName string, dwFlags uint32, pszValue string) error {
+	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
+	_pszValue := win32.UTF16Ptr(pszValue)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszValue)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetBinary dispatches through IContactProperties's vtable slot 9.
-func (self *IContactProperties) SetBinary(pszPropertyName foundation.PWSTR, dwFlags uint32, pszContentType foundation.PWSTR, pStream *systemcom.IStream) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszContentType)), uintptr(unsafe.Pointer(pStream)))
-	return foundation.HRESULT(r1)
+func (self *IContactProperties) SetBinary(pszPropertyName string, dwFlags uint32, pszContentType string, pStream *systemcom.IStream) error {
+	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
+	_pszContentType := win32.UTF16Ptr(pszContentType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszContentType)), uintptr(unsafe.Pointer(pStream)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLabels dispatches through IContactProperties's vtable slot 10.
-func (self *IContactProperties) SetLabels(pszArrayElementName foundation.PWSTR, dwFlags uint32, dwLabelCount uint32, ppszLabels *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszArrayElementName)), uintptr(dwFlags), uintptr(dwLabelCount), uintptr(unsafe.Pointer(ppszLabels)))
-	return foundation.HRESULT(r1)
+func (self *IContactProperties) SetLabels(pszArrayElementName string, dwFlags uint32, dwLabelCount uint32, ppszLabels *foundation.PWSTR) error {
+	_pszArrayElementName := win32.UTF16Ptr(pszArrayElementName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszArrayElementName)), uintptr(dwFlags), uintptr(dwLabelCount), uintptr(unsafe.Pointer(ppszLabels)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateArrayNode dispatches through IContactProperties's vtable slot 11.
-func (self *IContactProperties) CreateArrayNode(pszArrayName foundation.PWSTR, dwFlags uint32, fAppend foundation.BOOL, pszNewArrayElementName foundation.PWSTR, cchNewArrayElementName uint32, pdwcchNewArrayElementNameRequired *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszArrayName)), uintptr(dwFlags), uintptr(fAppend), uintptr(unsafe.Pointer(pszNewArrayElementName)), uintptr(cchNewArrayElementName), uintptr(unsafe.Pointer(pdwcchNewArrayElementNameRequired)))
-	return foundation.HRESULT(r1)
+func (self *IContactProperties) CreateArrayNode(pszArrayName string, dwFlags uint32, fAppend bool, pszNewArrayElementName foundation.PWSTR, cchNewArrayElementName uint32, pdwcchNewArrayElementNameRequired *uint32) error {
+	_pszArrayName := win32.UTF16Ptr(pszArrayName)
+	_fAppend := win32.Bool32(fAppend)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszArrayName)), uintptr(dwFlags), uintptr(_fAppend), uintptr(unsafe.Pointer(pszNewArrayElementName)), uintptr(cchNewArrayElementName), uintptr(unsafe.Pointer(pdwcchNewArrayElementNameRequired)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteProperty dispatches through IContactProperties's vtable slot 12.
-func (self *IContactProperties) DeleteProperty(pszPropertyName foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPropertyName)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+func (self *IContactProperties) DeleteProperty(pszPropertyName string, dwFlags uint32) error {
+	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteArrayNode dispatches through IContactProperties's vtable slot 13.
-func (self *IContactProperties) DeleteArrayNode(pszArrayElementName foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszArrayElementName)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+func (self *IContactProperties) DeleteArrayNode(pszArrayElementName string, dwFlags uint32) error {
+	_pszArrayElementName := win32.UTF16Ptr(pszArrayElementName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszArrayElementName)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteLabels dispatches through IContactProperties's vtable slot 14.
-func (self *IContactProperties) DeleteLabels(pszArrayElementName foundation.PWSTR, dwFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszArrayElementName)), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+func (self *IContactProperties) DeleteLabels(pszArrayElementName string, dwFlags uint32) error {
+	_pszArrayElementName := win32.UTF16Ptr(pszArrayElementName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszArrayElementName)), uintptr(dwFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyCollection dispatches through IContactProperties's vtable slot 15.
-func (self *IContactProperties) GetPropertyCollection(ppPropertyCollection **IContactPropertyCollection, dwFlags uint32, pszMultiValueName foundation.PWSTR, dwLabelCount uint32, ppszLabels *foundation.PWSTR, fAnyLabelMatches foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPropertyCollection)), uintptr(dwFlags), uintptr(unsafe.Pointer(pszMultiValueName)), uintptr(dwLabelCount), uintptr(unsafe.Pointer(ppszLabels)), uintptr(fAnyLabelMatches))
-	return foundation.HRESULT(r1)
+func (self *IContactProperties) GetPropertyCollection(ppPropertyCollection **IContactPropertyCollection, dwFlags uint32, pszMultiValueName string, dwLabelCount uint32, ppszLabels *foundation.PWSTR, fAnyLabelMatches bool) error {
+	_pszMultiValueName := win32.UTF16Ptr(pszMultiValueName)
+	_fAnyLabelMatches := win32.Bool32(fAnyLabelMatches)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPropertyCollection)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszMultiValueName)), uintptr(dwLabelCount), uintptr(unsafe.Pointer(ppszLabels)), uintptr(_fAnyLabelMatches))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IContactPropertyCollection: https://learn.microsoft.com/windows/win32/api/icontact/nn-icontact-icontactpropertycollection
@@ -981,43 +1097,43 @@ type IContactPropertyCollection struct {
 var IID_IContactPropertyCollection = win32.GUID{Data1: 0xffd3adf8, Data2: 0xfa64, Data3: 0x4328, Data4: [8]byte{0xb1, 0xb6, 0x2e, 0x0d, 0xb5, 0x09, 0xcb, 0x3c}}
 
 // Reset dispatches through IContactPropertyCollection's vtable slot 3.
-func (self *IContactPropertyCollection) Reset() foundation.HRESULT {
+func (self *IContactPropertyCollection) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Next dispatches through IContactPropertyCollection's vtable slot 4.
-func (self *IContactPropertyCollection) Next() foundation.HRESULT {
+func (self *IContactPropertyCollection) Next() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyName dispatches through IContactPropertyCollection's vtable slot 5.
-func (self *IContactPropertyCollection) GetPropertyName(pszPropertyName foundation.PWSTR, cchPropertyName uint32, pdwcchPropertyNameRequired *uint32) foundation.HRESULT {
+func (self *IContactPropertyCollection) GetPropertyName(pszPropertyName foundation.PWSTR, cchPropertyName uint32, pdwcchPropertyNameRequired *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszPropertyName)), uintptr(cchPropertyName), uintptr(unsafe.Pointer(pdwcchPropertyNameRequired)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyType dispatches through IContactPropertyCollection's vtable slot 6.
-func (self *IContactPropertyCollection) GetPropertyType(pdwType *uint32) foundation.HRESULT {
+func (self *IContactPropertyCollection) GetPropertyType(pdwType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyVersion dispatches through IContactPropertyCollection's vtable slot 7.
-func (self *IContactPropertyCollection) GetPropertyVersion(pdwVersion *uint32) foundation.HRESULT {
+func (self *IContactPropertyCollection) GetPropertyVersion(pdwVersion *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyModificationDate dispatches through IContactPropertyCollection's vtable slot 8.
-func (self *IContactPropertyCollection) GetPropertyModificationDate(pftModificationDate *foundation.FILETIME) foundation.HRESULT {
+func (self *IContactPropertyCollection) GetPropertyModificationDate(pftModificationDate *foundation.FILETIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pftModificationDate)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyArrayElementID dispatches through IContactPropertyCollection's vtable slot 9.
-func (self *IContactPropertyCollection) GetPropertyArrayElementID(pszArrayElementID foundation.PWSTR, cchArrayElementID uint32, pdwcchArrayElementIDRequired *uint32) foundation.HRESULT {
+func (self *IContactPropertyCollection) GetPropertyArrayElementID(pszArrayElementID foundation.PWSTR, cchArrayElementID uint32, pdwcchArrayElementIDRequired *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszArrayElementID)), uintptr(cchArrayElementID), uintptr(unsafe.Pointer(pdwcchArrayElementIDRequired)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

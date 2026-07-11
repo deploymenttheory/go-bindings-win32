@@ -10,14 +10,14 @@ import (
 	storagestructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/structuredstorage"
 )
 
-// JET_BKLOGTIME_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_BKLOGTIME_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_BKLOGTIME_Anonymous1_e__Union struct {
 	Data [1]byte
 }
 
-// JET_BKLOGTIME_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_BKLOGTIME_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_BKLOGTIME_Anonymous2_e__Union struct {
 	Data [1]byte
 }
@@ -141,8 +141,8 @@ type JET_CONDITIONALCOLUMN_W struct {
 	Grbit        uint32
 }
 
-// JET_CONVERT_A_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_CONVERT_A_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_CONVERT_A_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -152,8 +152,8 @@ type JET_CONVERT_A struct {
 	Anonymous JET_CONVERT_A_Anonymous_e__Union
 }
 
-// JET_CONVERT_W_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_CONVERT_W_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_CONVERT_W_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -312,8 +312,8 @@ type JET_DBINFOMISC4 struct {
 	BkinfoDiffPrev       [24]byte
 }
 
-// JET_DBINFOUPGRADE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_DBINFOUPGRADE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_DBINFOUPGRADE_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -329,8 +329,8 @@ type JET_DBINFOUPGRADE struct {
 	Anonymous               JET_DBINFOUPGRADE_Anonymous_e__Union
 }
 
-// JET_ENUMCOLUMN_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_ENUMCOLUMN_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_ENUMCOLUMN_Anonymous_e__Union struct {
 	Data [2]uint64
 }
@@ -366,14 +366,14 @@ type JET_ERRINFOBASIC_W struct {
 	RgszSourceFile         [64]uint16
 }
 
-// JET_INDEXCREATE2_A_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_INDEXCREATE2_A_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_INDEXCREATE2_A_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// JET_INDEXCREATE2_A_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_INDEXCREATE2_A_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_INDEXCREATE2_A_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -394,14 +394,14 @@ type JET_INDEXCREATE2_A struct {
 	PSpacehints         *JET_SPACEHINTS
 }
 
-// JET_INDEXCREATE2_W_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_INDEXCREATE2_W_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_INDEXCREATE2_W_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// JET_INDEXCREATE2_W_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_INDEXCREATE2_W_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_INDEXCREATE2_W_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -422,8 +422,8 @@ type JET_INDEXCREATE2_W struct {
 	PSpacehints         *JET_SPACEHINTS
 }
 
-// JET_INDEXCREATE3_A_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_INDEXCREATE3_A_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_INDEXCREATE3_A_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -444,8 +444,8 @@ type JET_INDEXCREATE3_A struct {
 	PSpacehints         *JET_SPACEHINTS
 }
 
-// JET_INDEXCREATE3_W_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_INDEXCREATE3_W_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_INDEXCREATE3_W_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -466,14 +466,14 @@ type JET_INDEXCREATE3_W struct {
 	PSpacehints         *JET_SPACEHINTS
 }
 
-// JET_INDEXCREATE_A_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_INDEXCREATE_A_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_INDEXCREATE_A_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// JET_INDEXCREATE_A_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_INDEXCREATE_A_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_INDEXCREATE_A_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -493,14 +493,14 @@ type JET_INDEXCREATE_A struct {
 	CbKeyMost           uint32
 }
 
-// JET_INDEXCREATE_W_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_INDEXCREATE_W_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_INDEXCREATE_W_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// JET_INDEXCREATE_W_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_INDEXCREATE_W_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_INDEXCREATE_W_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -605,14 +605,14 @@ type JET_LOGINFO_W struct {
 	SzBaseName [4]uint16
 }
 
-// JET_LOGTIME_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_LOGTIME_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_LOGTIME_Anonymous1_e__Union struct {
 	Data [1]byte
 }
 
-// JET_LOGTIME_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// JET_LOGTIME_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_LOGTIME_Anonymous2_e__Union struct {
 	Data [1]byte
 }

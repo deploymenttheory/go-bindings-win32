@@ -20,8 +20,8 @@ type AMBISONICS_PARAMS struct {
 	Pu32ChannelMap     *uint32
 }
 
-// AUDIOCLIENT_ACTIVATION_PARAMS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// AUDIOCLIENT_ACTIVATION_PARAMS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type AUDIOCLIENT_ACTIVATION_PARAMS_Anonymous_e__Union struct {
 	Data [2]uint32
 }
@@ -98,8 +98,8 @@ type SpatialAudioClientActivationParams struct {
 }
 
 // SpatialAudioHrtfDirectivityUnion: https://learn.microsoft.com/windows/win32/api/spatialaudiohrtf/ns-spatialaudiohrtf-spatialaudiohrtfdirectivityunion
-// SpatialAudioHrtfDirectivityUnion is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SpatialAudioHrtfDirectivityUnion is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SpatialAudioHrtfDirectivityUnion struct {
 	Data [16]byte
 }

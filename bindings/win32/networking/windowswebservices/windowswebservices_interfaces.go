@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	systemwinrt "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt"
 )
 
@@ -23,13 +22,15 @@ type IContentPrefetcherTaskTrigger struct {
 var IID_IContentPrefetcherTaskTrigger = win32.GUID{Data1: 0x1b35a14a, Data2: 0x6094, Data3: 0x4799, Data4: [8]byte{0xa6, 0x0e, 0xe4, 0x74, 0xe1, 0x5d, 0x4d, 0xc9}}
 
 // TriggerContentPrefetcherTask dispatches through IContentPrefetcherTaskTrigger's vtable slot 6.
-func (self *IContentPrefetcherTaskTrigger) TriggerContentPrefetcherTask(packageFullName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(packageFullName)))
-	return foundation.HRESULT(r1)
+func (self *IContentPrefetcherTaskTrigger) TriggerContentPrefetcherTask(packageFullName string) error {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_packageFullName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsRegisteredForContentPrefetch dispatches through IContentPrefetcherTaskTrigger's vtable slot 7.
-func (self *IContentPrefetcherTaskTrigger) IsRegisteredForContentPrefetch(packageFullName foundation.PWSTR, isRegistered *byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(packageFullName)), uintptr(unsafe.Pointer(isRegistered)))
-	return foundation.HRESULT(r1)
+func (self *IContentPrefetcherTaskTrigger) IsRegisteredForContentPrefetch(packageFullName string, isRegistered *byte) error {
+	_packageFullName := win32.UTF16Ptr(packageFullName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_packageFullName)), uintptr(unsafe.Pointer(isRegistered)))
+	return win32.HRESULTError(int32(r1))
 }

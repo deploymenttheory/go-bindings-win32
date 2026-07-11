@@ -51,14 +51,14 @@ type D3D10_BUFFER_DESC struct {
 	MiscFlags      uint32
 }
 
-// D3D10_BUFFER_RTV_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D10_BUFFER_RTV_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D10_BUFFER_RTV_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// D3D10_BUFFER_RTV_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D10_BUFFER_RTV_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D10_BUFFER_RTV_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
@@ -69,14 +69,14 @@ type D3D10_BUFFER_RTV struct {
 	Anonymous2 D3D10_BUFFER_RTV_Anonymous2_e__Union
 }
 
-// D3D10_BUFFER_SRV_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D10_BUFFER_SRV_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D10_BUFFER_SRV_Anonymous1_e__Union struct {
 	Data [1]uint32
 }
 
-// D3D10_BUFFER_SRV_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D10_BUFFER_SRV_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D10_BUFFER_SRV_Anonymous2_e__Union struct {
 	Data [1]uint32
 }
@@ -120,8 +120,8 @@ type D3D10_DEPTH_STENCIL_DESC struct {
 	BackFace         D3D10_DEPTH_STENCILOP_DESC
 }
 
-// D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D10_DEPTH_STENCIL_VIEW_DESC_Anonymous_e__Union struct {
 	Data [3]uint32
 }
@@ -300,8 +300,8 @@ type D3D10_RENDER_TARGET_BLEND_DESC1 struct {
 	RenderTargetWriteMask byte
 }
 
-// D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D10_RENDER_TARGET_VIEW_DESC_Anonymous_e__Union struct {
 	Data [3]uint32
 }
@@ -504,8 +504,8 @@ type D3D10_SHADER_INPUT_BIND_DESC struct {
 	NumSamples uint32
 }
 
-// D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union struct {
 	Data [4]uint32
 }
@@ -517,8 +517,8 @@ type D3D10_SHADER_RESOURCE_VIEW_DESC struct {
 	Anonymous     D3D10_SHADER_RESOURCE_VIEW_DESC_Anonymous_e__Union
 }
 
-// D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type D3D10_SHADER_RESOURCE_VIEW_DESC1_Anonymous_e__Union struct {
 	Data [4]uint32
 }

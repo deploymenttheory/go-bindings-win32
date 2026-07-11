@@ -54,239 +54,241 @@ var (
 // DwmAttachMilContent calls dwmapi!DwmAttachMilContent.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmattachmilcontent
 // Minimum OS: windows6.0.6000.
-func DwmAttachMilContent(hwnd foundation.HWND) foundation.HRESULT {
+func DwmAttachMilContent(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procDwmAttachMilContent.Addr(), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmDefWindowProc calls dwmapi!DwmDefWindowProc.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmdefwindowproc
 // Minimum OS: windows6.0.6000.
-func DwmDefWindowProc(hWnd foundation.HWND, msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, plResult *foundation.LRESULT) foundation.BOOL {
+func DwmDefWindowProc(hWnd foundation.HWND, msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, plResult *foundation.LRESULT) bool {
 	r1, _, _ := syscall.SyscallN(procDwmDefWindowProc.Addr(), uintptr(hWnd), uintptr(msg), uintptr(wParam), uintptr(lParam), uintptr(unsafe.Pointer(plResult)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // DwmDetachMilContent calls dwmapi!DwmDetachMilContent.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmdetachmilcontent
 // Minimum OS: windows6.0.6000.
-func DwmDetachMilContent(hwnd foundation.HWND) foundation.HRESULT {
+func DwmDetachMilContent(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procDwmDetachMilContent.Addr(), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmEnableBlurBehindWindow calls dwmapi!DwmEnableBlurBehindWindow.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmenableblurbehindwindow
 // Minimum OS: windows6.0.6000.
-func DwmEnableBlurBehindWindow(hWnd foundation.HWND, pBlurBehind unsafe.Pointer) foundation.HRESULT {
+func DwmEnableBlurBehindWindow(hWnd foundation.HWND, pBlurBehind unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDwmEnableBlurBehindWindow.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pBlurBehind)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmEnableComposition calls dwmapi!DwmEnableComposition.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmenablecomposition
 // Minimum OS: windows6.0.6000.
-func DwmEnableComposition(uCompositionAction uint32) foundation.HRESULT {
+func DwmEnableComposition(uCompositionAction uint32) error {
 	r1, _, _ := syscall.SyscallN(procDwmEnableComposition.Addr(), uintptr(uCompositionAction))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmEnableMMCSS calls dwmapi!DwmEnableMMCSS.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmenablemmcss
 // Minimum OS: windows6.0.6000.
-func DwmEnableMMCSS(fEnableMMCSS foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDwmEnableMMCSS.Addr(), uintptr(fEnableMMCSS))
-	return foundation.HRESULT(r1)
+func DwmEnableMMCSS(fEnableMMCSS bool) error {
+	_fEnableMMCSS := win32.Bool32(fEnableMMCSS)
+	r1, _, _ := syscall.SyscallN(procDwmEnableMMCSS.Addr(), uintptr(_fEnableMMCSS))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmExtendFrameIntoClientArea calls dwmapi!DwmExtendFrameIntoClientArea.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmextendframeintoclientarea
 // Minimum OS: windows6.0.6000.
-func DwmExtendFrameIntoClientArea(hWnd foundation.HWND, pMarInset *uicontrols.MARGINS) foundation.HRESULT {
+func DwmExtendFrameIntoClientArea(hWnd foundation.HWND, pMarInset *uicontrols.MARGINS) error {
 	r1, _, _ := syscall.SyscallN(procDwmExtendFrameIntoClientArea.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pMarInset)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmFlush calls dwmapi!DwmFlush.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmflush
 // Minimum OS: windows6.0.6000.
-func DwmFlush() foundation.HRESULT {
+func DwmFlush() error {
 	r1, _, _ := syscall.SyscallN(procDwmFlush.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmGetColorizationColor calls dwmapi!DwmGetColorizationColor.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmgetcolorizationcolor
 // Minimum OS: windows6.0.6000.
-func DwmGetColorizationColor(pcrColorization *uint32, pfOpaqueBlend *foundation.BOOL) foundation.HRESULT {
+func DwmGetColorizationColor(pcrColorization *uint32, pfOpaqueBlend *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetColorizationColor.Addr(), uintptr(unsafe.Pointer(pcrColorization)), uintptr(unsafe.Pointer(pfOpaqueBlend)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmGetCompositionTimingInfo calls dwmapi!DwmGetCompositionTimingInfo.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmgetcompositiontiminginfo
 // Minimum OS: windows6.0.6000.
-func DwmGetCompositionTimingInfo(hwnd foundation.HWND, pTimingInfo unsafe.Pointer) foundation.HRESULT {
+func DwmGetCompositionTimingInfo(hwnd foundation.HWND, pTimingInfo unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetCompositionTimingInfo.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pTimingInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmGetGraphicsStreamClient calls dwmapi!DwmGetGraphicsStreamClient.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmgetgraphicsstreamclient
 // Minimum OS: windows6.0.6000.
-func DwmGetGraphicsStreamClient(uIndex uint32, pClientUuid *win32.GUID) foundation.HRESULT {
+func DwmGetGraphicsStreamClient(uIndex uint32, pClientUuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetGraphicsStreamClient.Addr(), uintptr(uIndex), uintptr(unsafe.Pointer(pClientUuid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmGetGraphicsStreamTransformHint calls dwmapi!DwmGetGraphicsStreamTransformHint.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmgetgraphicsstreamtransformhint
 // Minimum OS: windows6.0.6000.
-func DwmGetGraphicsStreamTransformHint(uIndex uint32, pTransform unsafe.Pointer) foundation.HRESULT {
+func DwmGetGraphicsStreamTransformHint(uIndex uint32, pTransform unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetGraphicsStreamTransformHint.Addr(), uintptr(uIndex), uintptr(unsafe.Pointer(pTransform)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmGetTransportAttributes calls dwmapi!DwmGetTransportAttributes.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmgettransportattributes
 // Minimum OS: windows6.0.6000.
-func DwmGetTransportAttributes(pfIsRemoting *foundation.BOOL, pfIsConnected *foundation.BOOL, pDwGeneration *uint32) foundation.HRESULT {
+func DwmGetTransportAttributes(pfIsRemoting *foundation.BOOL, pfIsConnected *foundation.BOOL, pDwGeneration *uint32) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetTransportAttributes.Addr(), uintptr(unsafe.Pointer(pfIsRemoting)), uintptr(unsafe.Pointer(pfIsConnected)), uintptr(unsafe.Pointer(pDwGeneration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmGetUnmetTabRequirements calls dwmapi!DwmGetUnmetTabRequirements.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmgetunmettabrequirements
 // Minimum OS: windows10.0.17134.
-func DwmGetUnmetTabRequirements(appWindow foundation.HWND, value *DWM_TAB_WINDOW_REQUIREMENTS) foundation.HRESULT {
+func DwmGetUnmetTabRequirements(appWindow foundation.HWND, value *DWM_TAB_WINDOW_REQUIREMENTS) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetUnmetTabRequirements.Addr(), uintptr(appWindow), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmGetWindowAttribute calls dwmapi!DwmGetWindowAttribute.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmgetwindowattribute
 // Minimum OS: windows6.0.6000.
-func DwmGetWindowAttribute(hwnd foundation.HWND, dwAttribute uint32, pvAttribute unsafe.Pointer, cbAttribute uint32) foundation.HRESULT {
+func DwmGetWindowAttribute(hwnd foundation.HWND, dwAttribute uint32, pvAttribute unsafe.Pointer, cbAttribute uint32) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetWindowAttribute.Addr(), uintptr(hwnd), uintptr(dwAttribute), uintptr(unsafe.Pointer(pvAttribute)), uintptr(cbAttribute))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmInvalidateIconicBitmaps calls dwmapi!DwmInvalidateIconicBitmaps.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwminvalidateiconicbitmaps
 // Minimum OS: windows6.1.
-func DwmInvalidateIconicBitmaps(hwnd foundation.HWND) foundation.HRESULT {
+func DwmInvalidateIconicBitmaps(hwnd foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(procDwmInvalidateIconicBitmaps.Addr(), uintptr(hwnd))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmIsCompositionEnabled calls dwmapi!DwmIsCompositionEnabled.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmiscompositionenabled
 // Minimum OS: windows6.0.6000.
-func DwmIsCompositionEnabled(pfEnabled *foundation.BOOL) foundation.HRESULT {
+func DwmIsCompositionEnabled(pfEnabled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procDwmIsCompositionEnabled.Addr(), uintptr(unsafe.Pointer(pfEnabled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmModifyPreviousDxFrameDuration calls dwmapi!DwmModifyPreviousDxFrameDuration.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmmodifypreviousdxframeduration
 // Minimum OS: windows6.0.6000.
-func DwmModifyPreviousDxFrameDuration(hwnd foundation.HWND, cRefreshes int32, fRelative foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procDwmModifyPreviousDxFrameDuration.Addr(), uintptr(hwnd), uintptr(cRefreshes), uintptr(fRelative))
-	return foundation.HRESULT(r1)
+func DwmModifyPreviousDxFrameDuration(hwnd foundation.HWND, cRefreshes int32, fRelative bool) error {
+	_fRelative := win32.Bool32(fRelative)
+	r1, _, _ := syscall.SyscallN(procDwmModifyPreviousDxFrameDuration.Addr(), uintptr(hwnd), uintptr(cRefreshes), uintptr(_fRelative))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmQueryThumbnailSourceSize calls dwmapi!DwmQueryThumbnailSourceSize.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmquerythumbnailsourcesize
 // Minimum OS: windows6.0.6000.
-func DwmQueryThumbnailSourceSize(hThumbnail uintptr, pSize *foundation.SIZE) foundation.HRESULT {
+func DwmQueryThumbnailSourceSize(hThumbnail uintptr, pSize *foundation.SIZE) error {
 	r1, _, _ := syscall.SyscallN(procDwmQueryThumbnailSourceSize.Addr(), uintptr(hThumbnail), uintptr(unsafe.Pointer(pSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmRegisterThumbnail calls dwmapi!DwmRegisterThumbnail.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmregisterthumbnail
 // Minimum OS: windows6.0.6000.
-func DwmRegisterThumbnail(hwndDestination foundation.HWND, hwndSource foundation.HWND, phThumbnailId *uintptr) foundation.HRESULT {
+func DwmRegisterThumbnail(hwndDestination foundation.HWND, hwndSource foundation.HWND, phThumbnailId *uintptr) error {
 	r1, _, _ := syscall.SyscallN(procDwmRegisterThumbnail.Addr(), uintptr(hwndDestination), uintptr(hwndSource), uintptr(unsafe.Pointer(phThumbnailId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmRenderGesture calls dwmapi!DwmRenderGesture.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmrendergesture
 // Minimum OS: windows8.0.
-func DwmRenderGesture(gt GESTURE_TYPE, cContacts uint32, pdwPointerID *uint32, pPoints *foundation.POINT) foundation.HRESULT {
+func DwmRenderGesture(gt GESTURE_TYPE, cContacts uint32, pdwPointerID *uint32, pPoints *foundation.POINT) error {
 	r1, _, _ := syscall.SyscallN(procDwmRenderGesture.Addr(), uintptr(gt), uintptr(cContacts), uintptr(unsafe.Pointer(pdwPointerID)), uintptr(unsafe.Pointer(pPoints)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmSetDxFrameDuration calls dwmapi!DwmSetDxFrameDuration.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmsetdxframeduration
 // Minimum OS: windows6.0.6000.
-func DwmSetDxFrameDuration(hwnd foundation.HWND, cRefreshes int32) foundation.HRESULT {
+func DwmSetDxFrameDuration(hwnd foundation.HWND, cRefreshes int32) error {
 	r1, _, _ := syscall.SyscallN(procDwmSetDxFrameDuration.Addr(), uintptr(hwnd), uintptr(cRefreshes))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmSetIconicLivePreviewBitmap calls dwmapi!DwmSetIconicLivePreviewBitmap.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmseticoniclivepreviewbitmap
 // Minimum OS: windows6.1.
-func DwmSetIconicLivePreviewBitmap(hwnd foundation.HWND, hbmp graphicsgdi.HBITMAP, pptClient *foundation.POINT, dwSITFlags uint32) foundation.HRESULT {
+func DwmSetIconicLivePreviewBitmap(hwnd foundation.HWND, hbmp graphicsgdi.HBITMAP, pptClient *foundation.POINT, dwSITFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procDwmSetIconicLivePreviewBitmap.Addr(), uintptr(hwnd), uintptr(hbmp), uintptr(unsafe.Pointer(pptClient)), uintptr(dwSITFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmSetIconicThumbnail calls dwmapi!DwmSetIconicThumbnail.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmseticonicthumbnail
 // Minimum OS: windows6.1.
-func DwmSetIconicThumbnail(hwnd foundation.HWND, hbmp graphicsgdi.HBITMAP, dwSITFlags uint32) foundation.HRESULT {
+func DwmSetIconicThumbnail(hwnd foundation.HWND, hbmp graphicsgdi.HBITMAP, dwSITFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procDwmSetIconicThumbnail.Addr(), uintptr(hwnd), uintptr(hbmp), uintptr(dwSITFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmSetPresentParameters calls dwmapi!DwmSetPresentParameters.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmsetpresentparameters
 // Minimum OS: windows6.0.6000.
-func DwmSetPresentParameters(hwnd foundation.HWND, pPresentParams unsafe.Pointer) foundation.HRESULT {
+func DwmSetPresentParameters(hwnd foundation.HWND, pPresentParams unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDwmSetPresentParameters.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pPresentParams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmSetWindowAttribute calls dwmapi!DwmSetWindowAttribute.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmsetwindowattribute
 // Minimum OS: windows6.0.6000.
-func DwmSetWindowAttribute(hwnd foundation.HWND, dwAttribute uint32, pvAttribute unsafe.Pointer, cbAttribute uint32) foundation.HRESULT {
+func DwmSetWindowAttribute(hwnd foundation.HWND, dwAttribute uint32, pvAttribute unsafe.Pointer, cbAttribute uint32) error {
 	r1, _, _ := syscall.SyscallN(procDwmSetWindowAttribute.Addr(), uintptr(hwnd), uintptr(dwAttribute), uintptr(unsafe.Pointer(pvAttribute)), uintptr(cbAttribute))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmShowContact calls dwmapi!DwmShowContact.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmshowcontact
 // Minimum OS: windows8.0.
-func DwmShowContact(dwPointerID uint32, eShowContact DWM_SHOWCONTACT) foundation.HRESULT {
+func DwmShowContact(dwPointerID uint32, eShowContact DWM_SHOWCONTACT) error {
 	r1, _, _ := syscall.SyscallN(procDwmShowContact.Addr(), uintptr(dwPointerID), uintptr(eShowContact))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmTransitionOwnedWindow calls dwmapi!DwmTransitionOwnedWindow.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmtransitionownedwindow
 // Minimum OS: windows8.0.
-func DwmTransitionOwnedWindow(hwnd foundation.HWND, target DWMTRANSITION_OWNEDWINDOW_TARGET) foundation.HRESULT {
+func DwmTransitionOwnedWindow(hwnd foundation.HWND, target DWMTRANSITION_OWNEDWINDOW_TARGET) error {
 	r1, _, _ := syscall.SyscallN(procDwmTransitionOwnedWindow.Addr(), uintptr(hwnd), uintptr(target))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmUnregisterThumbnail calls dwmapi!DwmUnregisterThumbnail.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmunregisterthumbnail
 // Minimum OS: windows6.0.6000.
-func DwmUnregisterThumbnail(hThumbnailId uintptr) foundation.HRESULT {
+func DwmUnregisterThumbnail(hThumbnailId uintptr) error {
 	r1, _, _ := syscall.SyscallN(procDwmUnregisterThumbnail.Addr(), uintptr(hThumbnailId))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DwmUpdateThumbnailProperties calls dwmapi!DwmUpdateThumbnailProperties.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmupdatethumbnailproperties
 // Minimum OS: windows6.0.6000.
-func DwmUpdateThumbnailProperties(hThumbnailId uintptr, ptnProperties unsafe.Pointer) foundation.HRESULT {
+func DwmUpdateThumbnailProperties(hThumbnailId uintptr, ptnProperties unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procDwmUpdateThumbnailProperties.Addr(), uintptr(hThumbnailId), uintptr(unsafe.Pointer(ptnProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

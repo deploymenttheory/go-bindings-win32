@@ -26,25 +26,25 @@ var (
 	procGetDoubleClickTime     = modUSER32.NewProc("GetDoubleClickTime")
 	procGetFocus               = modUSER32.NewProc("GetFocus")
 	procGetKBCodePage          = modUSER32.NewProc("GetKBCodePage")
+	procGetKeyNameText         = modUSER32.NewProc("GetKeyNameTextW")
 	procGetKeyNameTextA        = modUSER32.NewProc("GetKeyNameTextA")
-	procGetKeyNameTextW        = modUSER32.NewProc("GetKeyNameTextW")
 	procGetKeyState            = modUSER32.NewProc("GetKeyState")
 	procGetKeyboardLayout      = modUSER32.NewProc("GetKeyboardLayout")
 	procGetKeyboardLayoutList  = modUSER32.NewProc("GetKeyboardLayoutList")
+	procGetKeyboardLayoutName  = modUSER32.NewProc("GetKeyboardLayoutNameW")
 	procGetKeyboardLayoutNameA = modUSER32.NewProc("GetKeyboardLayoutNameA")
-	procGetKeyboardLayoutNameW = modUSER32.NewProc("GetKeyboardLayoutNameW")
 	procGetKeyboardState       = modUSER32.NewProc("GetKeyboardState")
 	procGetKeyboardType        = modUSER32.NewProc("GetKeyboardType")
 	procGetLastInputInfo       = modUSER32.NewProc("GetLastInputInfo")
 	procGetMouseMovePointsEx   = modUSER32.NewProc("GetMouseMovePointsEx")
 	procIsWindowEnabled        = modUSER32.NewProc("IsWindowEnabled")
 	procKeybd_event            = modUSER32.NewProc("keybd_event")
+	procLoadKeyboardLayout     = modUSER32.NewProc("LoadKeyboardLayoutW")
 	procLoadKeyboardLayoutA    = modUSER32.NewProc("LoadKeyboardLayoutA")
-	procLoadKeyboardLayoutW    = modUSER32.NewProc("LoadKeyboardLayoutW")
+	procMapVirtualKey          = modUSER32.NewProc("MapVirtualKeyW")
 	procMapVirtualKeyA         = modUSER32.NewProc("MapVirtualKeyA")
+	procMapVirtualKeyEx        = modUSER32.NewProc("MapVirtualKeyExW")
 	procMapVirtualKeyExA       = modUSER32.NewProc("MapVirtualKeyExA")
-	procMapVirtualKeyExW       = modUSER32.NewProc("MapVirtualKeyExW")
-	procMapVirtualKeyW         = modUSER32.NewProc("MapVirtualKeyW")
 	procMouse_event            = modUSER32.NewProc("mouse_event")
 	procOemKeyScan             = modUSER32.NewProc("OemKeyScan")
 	procRegisterHotKey         = modUSER32.NewProc("RegisterHotKey")
@@ -63,10 +63,10 @@ var (
 	procTrackMouseEvent        = modUSER32.NewProc("TrackMouseEvent")
 	procUnloadKeyboardLayout   = modUSER32.NewProc("UnloadKeyboardLayout")
 	procUnregisterHotKey       = modUSER32.NewProc("UnregisterHotKey")
+	procVkKeyScan              = modUSER32.NewProc("VkKeyScanW")
 	procVkKeyScanA             = modUSER32.NewProc("VkKeyScanA")
+	procVkKeyScanEx            = modUSER32.NewProc("VkKeyScanExW")
 	procVkKeyScanExA           = modUSER32.NewProc("VkKeyScanExA")
-	procVkKeyScanExW           = modUSER32.NewProc("VkKeyScanExW")
-	procVkKeyScanW             = modUSER32.NewProc("VkKeyScanW")
 )
 
 // ActivateKeyboardLayout calls USER32!ActivateKeyboardLayout.
@@ -84,8 +84,9 @@ func ActivateKeyboardLayout(hkl HKL, Flags ACTIVATE_KEYBOARD_LAYOUT_FLAGS) (HKL,
 // BlockInput calls USER32!BlockInput.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-blockinput
 // Minimum OS: windows5.0.
-func BlockInput(fBlockIt foundation.BOOL) error {
-	r1, _, e1 := syscall.SyscallN(procBlockInput.Addr(), uintptr(fBlockIt))
+func BlockInput(fBlockIt bool) error {
+	_fBlockIt := win32.Bool32(fBlockIt)
+	r1, _, e1 := syscall.SyscallN(procBlockInput.Addr(), uintptr(_fBlockIt))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -95,9 +96,10 @@ func BlockInput(fBlockIt foundation.BOOL) error {
 // EnableWindow calls USER32!EnableWindow.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enablewindow
 // Minimum OS: windows5.0.
-func EnableWindow(hWnd foundation.HWND, bEnable foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procEnableWindow.Addr(), uintptr(hWnd), uintptr(bEnable))
-	return foundation.BOOL(r1)
+func EnableWindow(hWnd foundation.HWND, bEnable bool) bool {
+	_bEnable := win32.Bool32(bEnable)
+	r1, _, _ := syscall.SyscallN(procEnableWindow.Addr(), uintptr(hWnd), uintptr(_bEnable))
+	return r1 != 0
 }
 
 // GetActiveWindow calls USER32!GetActiveWindow.
@@ -148,22 +150,22 @@ func GetKBCodePage() uint32 {
 	return uint32(r1)
 }
 
-// GetKeyNameTextA calls USER32!GetKeyNameTextA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getkeynametexta
+// GetKeyNameText calls USER32!GetKeyNameTextW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getkeynametextw
 // Minimum OS: windows5.0.
-func GetKeyNameTextA(lParam int32, lpString foundation.PSTR, cchSize int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetKeyNameTextA.Addr(), uintptr(lParam), uintptr(unsafe.Pointer(lpString)), uintptr(cchSize))
+func GetKeyNameText(lParam int32, lpString foundation.PWSTR, cchSize int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetKeyNameText.Addr(), uintptr(lParam), uintptr(unsafe.Pointer(lpString)), uintptr(cchSize))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
 }
 
-// GetKeyNameTextW calls USER32!GetKeyNameTextW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getkeynametextw
+// GetKeyNameTextA calls USER32!GetKeyNameTextA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getkeynametexta
 // Minimum OS: windows5.0.
-func GetKeyNameTextW(lParam int32, lpString foundation.PWSTR, cchSize int32) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetKeyNameTextW.Addr(), uintptr(lParam), uintptr(unsafe.Pointer(lpString)), uintptr(cchSize))
+func GetKeyNameTextA(lParam int32, lpString foundation.PSTR, cchSize int32) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetKeyNameTextA.Addr(), uintptr(lParam), uintptr(unsafe.Pointer(lpString)), uintptr(cchSize))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -189,12 +191,27 @@ func GetKeyboardLayout(idThread uint32) HKL {
 // GetKeyboardLayoutList calls USER32!GetKeyboardLayoutList.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getkeyboardlayoutlist
 // Minimum OS: windows5.0.
-func GetKeyboardLayoutList(nBuff int32, lpList *HKL) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetKeyboardLayoutList.Addr(), uintptr(nBuff), uintptr(unsafe.Pointer(lpList)))
+func GetKeyboardLayoutList(lpList []HKL) (int32, error) {
+	var _lpList *HKL
+	if len(lpList) > 0 {
+		_lpList = &lpList[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetKeyboardLayoutList.Addr(), uintptr(len(lpList)), uintptr(unsafe.Pointer(_lpList)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
 	return int32(r1), nil
+}
+
+// GetKeyboardLayoutName calls USER32!GetKeyboardLayoutNameW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getkeyboardlayoutnamew
+// Minimum OS: windows5.0.
+func GetKeyboardLayoutName(pwszKLID foundation.PWSTR) error {
+	r1, _, e1 := syscall.SyscallN(procGetKeyboardLayoutName.Addr(), uintptr(unsafe.Pointer(pwszKLID)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
 }
 
 // GetKeyboardLayoutNameA calls USER32!GetKeyboardLayoutNameA.
@@ -202,17 +219,6 @@ func GetKeyboardLayoutList(nBuff int32, lpList *HKL) (int32, error) {
 // Minimum OS: windows5.0.
 func GetKeyboardLayoutNameA(pwszKLID foundation.PSTR) error {
 	r1, _, e1 := syscall.SyscallN(procGetKeyboardLayoutNameA.Addr(), uintptr(unsafe.Pointer(pwszKLID)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// GetKeyboardLayoutNameW calls USER32!GetKeyboardLayoutNameW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getkeyboardlayoutnamew
-// Minimum OS: windows5.0.
-func GetKeyboardLayoutNameW(pwszKLID foundation.PWSTR) error {
-	r1, _, e1 := syscall.SyscallN(procGetKeyboardLayoutNameW.Addr(), uintptr(unsafe.Pointer(pwszKLID)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -244,16 +250,20 @@ func GetKeyboardType(nTypeFlag int32) (int32, error) {
 // GetLastInputInfo calls USER32!GetLastInputInfo.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getlastinputinfo
 // Minimum OS: windows5.0.
-func GetLastInputInfo(plii *LASTINPUTINFO) foundation.BOOL {
+func GetLastInputInfo(plii *LASTINPUTINFO) bool {
 	r1, _, _ := syscall.SyscallN(procGetLastInputInfo.Addr(), uintptr(unsafe.Pointer(plii)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // GetMouseMovePointsEx calls USER32!GetMouseMovePointsEx.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getmousemovepointsex
 // Minimum OS: windows5.0.
-func GetMouseMovePointsEx(cbSize uint32, lppt *MOUSEMOVEPOINT, lpptBuf *MOUSEMOVEPOINT, nBufPoints int32, resolution GET_MOUSE_MOVE_POINTS_EX_RESOLUTION) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetMouseMovePointsEx.Addr(), uintptr(cbSize), uintptr(unsafe.Pointer(lppt)), uintptr(unsafe.Pointer(lpptBuf)), uintptr(nBufPoints), uintptr(resolution))
+func GetMouseMovePointsEx(cbSize uint32, lppt *MOUSEMOVEPOINT, lpptBuf []MOUSEMOVEPOINT, resolution GET_MOUSE_MOVE_POINTS_EX_RESOLUTION) (int32, error) {
+	var _lpptBuf *MOUSEMOVEPOINT
+	if len(lpptBuf) > 0 {
+		_lpptBuf = &lpptBuf[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetMouseMovePointsEx.Addr(), uintptr(cbSize), uintptr(unsafe.Pointer(lppt)), uintptr(unsafe.Pointer(_lpptBuf)), uintptr(len(lpptBuf)), uintptr(resolution))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -263,9 +273,29 @@ func GetMouseMovePointsEx(cbSize uint32, lppt *MOUSEMOVEPOINT, lpptBuf *MOUSEMOV
 // IsWindowEnabled calls USER32!IsWindowEnabled.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-iswindowenabled
 // Minimum OS: windows5.0.
-func IsWindowEnabled(hWnd foundation.HWND) foundation.BOOL {
+func IsWindowEnabled(hWnd foundation.HWND) bool {
 	r1, _, _ := syscall.SyscallN(procIsWindowEnabled.Addr(), uintptr(hWnd))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// Keybd_event calls USER32!keybd_event.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-keybd_event
+// Minimum OS: windows5.0.
+func Keybd_event(bVk byte, bScan byte, dwFlags KEYBD_EVENT_FLAGS, dwExtraInfo uintptr) {
+	syscall.SyscallN(procKeybd_event.Addr(), uintptr(bVk), uintptr(bScan), uintptr(dwFlags), uintptr(dwExtraInfo))
+}
+
+// LoadKeyboardLayout calls USER32!LoadKeyboardLayoutW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadkeyboardlayoutw
+// Minimum OS: windows5.0.
+func LoadKeyboardLayout(pwszKLID string, Flags ACTIVATE_KEYBOARD_LAYOUT_FLAGS) (HKL, error) {
+	_pwszKLID := win32.UTF16Ptr(pwszKLID)
+	r1, _, e1 := syscall.SyscallN(procLoadKeyboardLayout.Addr(), uintptr(unsafe.Pointer(_pwszKLID)), uintptr(Flags))
+	ret := HKL(r1)
+	if ret == ^HKL(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
 }
 
 // LoadKeyboardLayoutA calls USER32!LoadKeyboardLayoutA.
@@ -280,16 +310,12 @@ func LoadKeyboardLayoutA(pwszKLID foundation.PSTR, Flags ACTIVATE_KEYBOARD_LAYOU
 	return ret, nil
 }
 
-// LoadKeyboardLayoutW calls USER32!LoadKeyboardLayoutW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-loadkeyboardlayoutw
+// MapVirtualKey calls USER32!MapVirtualKeyW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-mapvirtualkeyw
 // Minimum OS: windows5.0.
-func LoadKeyboardLayoutW(pwszKLID foundation.PWSTR, Flags ACTIVATE_KEYBOARD_LAYOUT_FLAGS) (HKL, error) {
-	r1, _, e1 := syscall.SyscallN(procLoadKeyboardLayoutW.Addr(), uintptr(unsafe.Pointer(pwszKLID)), uintptr(Flags))
-	ret := HKL(r1)
-	if ret == ^HKL(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
+func MapVirtualKey(uCode uint32, uMapType MAP_VIRTUAL_KEY_TYPE) uint32 {
+	r1, _, _ := syscall.SyscallN(procMapVirtualKey.Addr(), uintptr(uCode), uintptr(uMapType))
+	return uint32(r1)
 }
 
 // MapVirtualKeyA calls USER32!MapVirtualKeyA.
@@ -297,6 +323,14 @@ func LoadKeyboardLayoutW(pwszKLID foundation.PWSTR, Flags ACTIVATE_KEYBOARD_LAYO
 // Minimum OS: windows5.0.
 func MapVirtualKeyA(uCode uint32, uMapType MAP_VIRTUAL_KEY_TYPE) uint32 {
 	r1, _, _ := syscall.SyscallN(procMapVirtualKeyA.Addr(), uintptr(uCode), uintptr(uMapType))
+	return uint32(r1)
+}
+
+// MapVirtualKeyEx calls USER32!MapVirtualKeyExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-mapvirtualkeyexw
+// Minimum OS: windows5.0.
+func MapVirtualKeyEx(uCode uint32, uMapType MAP_VIRTUAL_KEY_TYPE, dwhkl HKL) uint32 {
+	r1, _, _ := syscall.SyscallN(procMapVirtualKeyEx.Addr(), uintptr(uCode), uintptr(uMapType), uintptr(dwhkl))
 	return uint32(r1)
 }
 
@@ -308,20 +342,11 @@ func MapVirtualKeyExA(uCode uint32, uMapType MAP_VIRTUAL_KEY_TYPE, dwhkl HKL) ui
 	return uint32(r1)
 }
 
-// MapVirtualKeyExW calls USER32!MapVirtualKeyExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-mapvirtualkeyexw
+// Mouse_event calls USER32!mouse_event.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-mouse_event
 // Minimum OS: windows5.0.
-func MapVirtualKeyExW(uCode uint32, uMapType MAP_VIRTUAL_KEY_TYPE, dwhkl HKL) uint32 {
-	r1, _, _ := syscall.SyscallN(procMapVirtualKeyExW.Addr(), uintptr(uCode), uintptr(uMapType), uintptr(dwhkl))
-	return uint32(r1)
-}
-
-// MapVirtualKeyW calls USER32!MapVirtualKeyW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-mapvirtualkeyw
-// Minimum OS: windows5.0.
-func MapVirtualKeyW(uCode uint32, uMapType MAP_VIRTUAL_KEY_TYPE) uint32 {
-	r1, _, _ := syscall.SyscallN(procMapVirtualKeyW.Addr(), uintptr(uCode), uintptr(uMapType))
-	return uint32(r1)
+func Mouse_event(dwFlags MOUSE_EVENT_FLAGS, dx int32, dy int32, dwData int32, dwExtraInfo uintptr) {
+	syscall.SyscallN(procMouse_event.Addr(), uintptr(dwFlags), uintptr(dx), uintptr(dy), uintptr(dwData), uintptr(dwExtraInfo))
 }
 
 // OemKeyScan calls USER32!OemKeyScan.
@@ -357,8 +382,12 @@ func ReleaseCapture() error {
 // SendInput calls USER32!SendInput.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-sendinput
 // Minimum OS: windows5.0.
-func SendInput(cInputs uint32, pInputs *INPUT, cbSize int32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procSendInput.Addr(), uintptr(cInputs), uintptr(unsafe.Pointer(pInputs)), uintptr(cbSize))
+func SendInput(pInputs []INPUT, cbSize int32) (uint32, error) {
+	var _pInputs *INPUT
+	if len(pInputs) > 0 {
+		_pInputs = &pInputs[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSendInput.Addr(), uintptr(len(pInputs)), uintptr(unsafe.Pointer(_pInputs)), uintptr(cbSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -422,9 +451,10 @@ func SetKeyboardState(lpKeyState *byte) error {
 // SwapMouseButton calls USER32!SwapMouseButton.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-swapmousebutton
 // Minimum OS: windows5.0.
-func SwapMouseButton(fSwap foundation.BOOL) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procSwapMouseButton.Addr(), uintptr(fSwap))
-	return foundation.BOOL(r1)
+func SwapMouseButton(fSwap bool) bool {
+	_fSwap := win32.Bool32(fSwap)
+	r1, _, _ := syscall.SyscallN(procSwapMouseButton.Addr(), uintptr(_fSwap))
+	return r1 != 0
 }
 
 // ToAscii calls USER32!ToAscii.
@@ -492,11 +522,27 @@ func UnregisterHotKey(hWnd foundation.HWND, id int32) error {
 	return nil
 }
 
+// VkKeyScan calls USER32!VkKeyScanW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-vkkeyscanw
+// Minimum OS: windows5.0.
+func VkKeyScan(ch uint16) int16 {
+	r1, _, _ := syscall.SyscallN(procVkKeyScan.Addr(), uintptr(ch))
+	return int16(r1)
+}
+
 // VkKeyScanA calls USER32!VkKeyScanA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-vkkeyscana
 // Minimum OS: windows5.0.
 func VkKeyScanA(ch foundation.CHAR) int16 {
 	r1, _, _ := syscall.SyscallN(procVkKeyScanA.Addr(), uintptr(ch))
+	return int16(r1)
+}
+
+// VkKeyScanEx calls USER32!VkKeyScanExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-vkkeyscanexw
+// Minimum OS: windows5.0.
+func VkKeyScanEx(ch uint16, dwhkl HKL) int16 {
+	r1, _, _ := syscall.SyscallN(procVkKeyScanEx.Addr(), uintptr(ch), uintptr(dwhkl))
 	return int16(r1)
 }
 
@@ -506,34 +552,4 @@ func VkKeyScanA(ch foundation.CHAR) int16 {
 func VkKeyScanExA(ch foundation.CHAR, dwhkl HKL) int16 {
 	r1, _, _ := syscall.SyscallN(procVkKeyScanExA.Addr(), uintptr(ch), uintptr(dwhkl))
 	return int16(r1)
-}
-
-// VkKeyScanExW calls USER32!VkKeyScanExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-vkkeyscanexw
-// Minimum OS: windows5.0.
-func VkKeyScanExW(ch uint16, dwhkl HKL) int16 {
-	r1, _, _ := syscall.SyscallN(procVkKeyScanExW.Addr(), uintptr(ch), uintptr(dwhkl))
-	return int16(r1)
-}
-
-// VkKeyScanW calls USER32!VkKeyScanW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-vkkeyscanw
-// Minimum OS: windows5.0.
-func VkKeyScanW(ch uint16) int16 {
-	r1, _, _ := syscall.SyscallN(procVkKeyScanW.Addr(), uintptr(ch))
-	return int16(r1)
-}
-
-// keybd_event calls USER32!keybd_event.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-keybd_event
-// Minimum OS: windows5.0.
-func Keybd_event(bVk byte, bScan byte, dwFlags KEYBD_EVENT_FLAGS, dwExtraInfo uintptr) {
-	syscall.SyscallN(procKeybd_event.Addr(), uintptr(bVk), uintptr(bScan), uintptr(dwFlags), uintptr(dwExtraInfo))
-}
-
-// mouse_event calls USER32!mouse_event.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-mouse_event
-// Minimum OS: windows5.0.
-func Mouse_event(dwFlags MOUSE_EVENT_FLAGS, dx int32, dy int32, dwData int32, dwExtraInfo uintptr) {
-	syscall.SyscallN(procMouse_event.Addr(), uintptr(dwFlags), uintptr(dx), uintptr(dy), uintptr(dwData), uintptr(dwExtraInfo))
 }

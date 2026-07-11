@@ -25,39 +25,41 @@ type AsyncIAssociatedIdentityProvider struct {
 var IID_AsyncIAssociatedIdentityProvider = win32.GUID{Data1: 0x2834d6ed, Data2: 0x297e, Data3: 0x4e72, Data4: [8]byte{0x8a, 0x51, 0x96, 0x1e, 0x86, 0xf0, 0x51, 0x52}}
 
 // Begin_AssociateIdentity dispatches through AsyncIAssociatedIdentityProvider's vtable slot 3.
-func (self *AsyncIAssociatedIdentityProvider) Begin_AssociateIdentity(hwndParent foundation.HWND) foundation.HRESULT {
+func (self *AsyncIAssociatedIdentityProvider) Begin_AssociateIdentity(hwndParent foundation.HWND) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwndParent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_AssociateIdentity dispatches through AsyncIAssociatedIdentityProvider's vtable slot 4.
-func (self *AsyncIAssociatedIdentityProvider) Finish_AssociateIdentity(ppPropertyStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *AsyncIAssociatedIdentityProvider) Finish_AssociateIdentity(ppPropertyStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPropertyStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_DisassociateIdentity dispatches through AsyncIAssociatedIdentityProvider's vtable slot 5.
-func (self *AsyncIAssociatedIdentityProvider) Begin_DisassociateIdentity(hwndParent foundation.HWND, lpszUniqueID foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(lpszUniqueID)))
-	return foundation.HRESULT(r1)
+func (self *AsyncIAssociatedIdentityProvider) Begin_DisassociateIdentity(hwndParent foundation.HWND, lpszUniqueID string) error {
+	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_lpszUniqueID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_DisassociateIdentity dispatches through AsyncIAssociatedIdentityProvider's vtable slot 6.
-func (self *AsyncIAssociatedIdentityProvider) Finish_DisassociateIdentity() foundation.HRESULT {
+func (self *AsyncIAssociatedIdentityProvider) Finish_DisassociateIdentity() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_ChangeCredential dispatches through AsyncIAssociatedIdentityProvider's vtable slot 7.
-func (self *AsyncIAssociatedIdentityProvider) Begin_ChangeCredential(hwndParent foundation.HWND, lpszUniqueID foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(lpszUniqueID)))
-	return foundation.HRESULT(r1)
+func (self *AsyncIAssociatedIdentityProvider) Begin_ChangeCredential(hwndParent foundation.HWND, lpszUniqueID string) error {
+	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_lpszUniqueID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_ChangeCredential dispatches through AsyncIAssociatedIdentityProvider's vtable slot 8.
-func (self *AsyncIAssociatedIdentityProvider) Finish_ChangeCredential() foundation.HRESULT {
+func (self *AsyncIAssociatedIdentityProvider) Finish_ChangeCredential() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 9ce55141-bce9-4e15-824d-43d79f512f93
@@ -69,63 +71,63 @@ type AsyncIConnectedIdentityProvider struct {
 var IID_AsyncIConnectedIdentityProvider = win32.GUID{Data1: 0x9ce55141, Data2: 0xbce9, Data3: 0x4e15, Data4: [8]byte{0x82, 0x4d, 0x43, 0xd7, 0x9f, 0x51, 0x2f, 0x93}}
 
 // Begin_ConnectIdentity dispatches through AsyncIConnectedIdentityProvider's vtable slot 3.
-func (self *AsyncIConnectedIdentityProvider) Begin_ConnectIdentity(AuthBuffer *byte, AuthBufferSize uint32) foundation.HRESULT {
+func (self *AsyncIConnectedIdentityProvider) Begin_ConnectIdentity(AuthBuffer *byte, AuthBufferSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AuthBuffer)), uintptr(AuthBufferSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_ConnectIdentity dispatches through AsyncIConnectedIdentityProvider's vtable slot 4.
-func (self *AsyncIConnectedIdentityProvider) Finish_ConnectIdentity() foundation.HRESULT {
+func (self *AsyncIConnectedIdentityProvider) Finish_ConnectIdentity() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_DisconnectIdentity dispatches through AsyncIConnectedIdentityProvider's vtable slot 5.
-func (self *AsyncIConnectedIdentityProvider) Begin_DisconnectIdentity() foundation.HRESULT {
+func (self *AsyncIConnectedIdentityProvider) Begin_DisconnectIdentity() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_DisconnectIdentity dispatches through AsyncIConnectedIdentityProvider's vtable slot 6.
-func (self *AsyncIConnectedIdentityProvider) Finish_DisconnectIdentity() foundation.HRESULT {
+func (self *AsyncIConnectedIdentityProvider) Finish_DisconnectIdentity() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_IsConnected dispatches through AsyncIConnectedIdentityProvider's vtable slot 7.
-func (self *AsyncIConnectedIdentityProvider) Begin_IsConnected() foundation.HRESULT {
+func (self *AsyncIConnectedIdentityProvider) Begin_IsConnected() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_IsConnected dispatches through AsyncIConnectedIdentityProvider's vtable slot 8.
-func (self *AsyncIConnectedIdentityProvider) Finish_IsConnected(Connected *foundation.BOOL) foundation.HRESULT {
+func (self *AsyncIConnectedIdentityProvider) Finish_IsConnected(Connected *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Connected)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_GetUrl dispatches through AsyncIConnectedIdentityProvider's vtable slot 9.
-func (self *AsyncIConnectedIdentityProvider) Begin_GetUrl(Identifier IDENTITY_URL, Context *systemcom.IBindCtx) foundation.HRESULT {
+func (self *AsyncIConnectedIdentityProvider) Begin_GetUrl(Identifier IDENTITY_URL, Context *systemcom.IBindCtx) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Identifier), uintptr(unsafe.Pointer(Context)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_GetUrl dispatches through AsyncIConnectedIdentityProvider's vtable slot 10.
-func (self *AsyncIConnectedIdentityProvider) Finish_GetUrl(PostData *systemvariant.VARIANT, Url *foundation.PWSTR) foundation.HRESULT {
+func (self *AsyncIConnectedIdentityProvider) Finish_GetUrl(PostData *systemvariant.VARIANT, Url *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PostData)), uintptr(unsafe.Pointer(Url)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_GetAccountState dispatches through AsyncIConnectedIdentityProvider's vtable slot 11.
-func (self *AsyncIConnectedIdentityProvider) Begin_GetAccountState() foundation.HRESULT {
+func (self *AsyncIConnectedIdentityProvider) Begin_GetAccountState() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_GetAccountState dispatches through AsyncIConnectedIdentityProvider's vtable slot 12.
-func (self *AsyncIConnectedIdentityProvider) Finish_GetAccountState(pState *ACCOUNT_STATE) foundation.HRESULT {
+func (self *AsyncIConnectedIdentityProvider) Finish_GetAccountState(pState *ACCOUNT_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 3ab4c8da-d038-4830-8dd9-3253c55a127f
@@ -137,15 +139,16 @@ type AsyncIIdentityAdvise struct {
 var IID_AsyncIIdentityAdvise = win32.GUID{Data1: 0x3ab4c8da, Data2: 0xd038, Data3: 0x4830, Data4: [8]byte{0x8d, 0xd9, 0x32, 0x53, 0xc5, 0x5a, 0x12, 0x7f}}
 
 // Begin_IdentityUpdated dispatches through AsyncIIdentityAdvise's vtable slot 3.
-func (self *AsyncIIdentityAdvise) Begin_IdentityUpdated(dwIdentityUpdateEvents uint32, lpszUniqueID foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwIdentityUpdateEvents), uintptr(unsafe.Pointer(lpszUniqueID)))
-	return foundation.HRESULT(r1)
+func (self *AsyncIIdentityAdvise) Begin_IdentityUpdated(dwIdentityUpdateEvents uint32, lpszUniqueID string) error {
+	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwIdentityUpdateEvents), uintptr(unsafe.Pointer(_lpszUniqueID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_IdentityUpdated dispatches through AsyncIIdentityAdvise's vtable slot 4.
-func (self *AsyncIIdentityAdvise) Finish_IdentityUpdated() foundation.HRESULT {
+func (self *AsyncIIdentityAdvise) Finish_IdentityUpdated() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f9a2f918-feca-4e9c-9633-61cbf13ed34d
@@ -157,27 +160,27 @@ type AsyncIIdentityAuthentication struct {
 var IID_AsyncIIdentityAuthentication = win32.GUID{Data1: 0xf9a2f918, Data2: 0xfeca, Data3: 0x4e9c, Data4: [8]byte{0x96, 0x33, 0x61, 0xcb, 0xf1, 0x3e, 0xd3, 0x4d}}
 
 // Begin_SetIdentityCredential dispatches through AsyncIIdentityAuthentication's vtable slot 3.
-func (self *AsyncIIdentityAuthentication) Begin_SetIdentityCredential(CredBuffer *byte, CredBufferLength uint32) foundation.HRESULT {
+func (self *AsyncIIdentityAuthentication) Begin_SetIdentityCredential(CredBuffer *byte, CredBufferLength uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CredBuffer)), uintptr(CredBufferLength))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_SetIdentityCredential dispatches through AsyncIIdentityAuthentication's vtable slot 4.
-func (self *AsyncIIdentityAuthentication) Finish_SetIdentityCredential() foundation.HRESULT {
+func (self *AsyncIIdentityAuthentication) Finish_SetIdentityCredential() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_ValidateIdentityCredential dispatches through AsyncIIdentityAuthentication's vtable slot 5.
-func (self *AsyncIIdentityAuthentication) Begin_ValidateIdentityCredential(CredBuffer *byte, CredBufferLength uint32, ppIdentityProperties **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *AsyncIIdentityAuthentication) Begin_ValidateIdentityCredential(CredBuffer *byte, CredBufferLength uint32, ppIdentityProperties **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CredBuffer)), uintptr(CredBufferLength), uintptr(unsafe.Pointer(ppIdentityProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_ValidateIdentityCredential dispatches through AsyncIIdentityAuthentication's vtable slot 6.
-func (self *AsyncIIdentityAuthentication) Finish_ValidateIdentityCredential(ppIdentityProperties **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *AsyncIIdentityAuthentication) Finish_ValidateIdentityCredential(ppIdentityProperties **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIdentityProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: c6fc9901-c433-4646-8f48-4e4687aae2a0
@@ -189,99 +192,102 @@ type AsyncIIdentityProvider struct {
 var IID_AsyncIIdentityProvider = win32.GUID{Data1: 0xc6fc9901, Data2: 0xc433, Data3: 0x4646, Data4: [8]byte{0x8f, 0x48, 0x4e, 0x46, 0x87, 0xaa, 0xe2, 0xa0}}
 
 // Begin_GetIdentityEnum dispatches through AsyncIIdentityProvider's vtable slot 3.
-func (self *AsyncIIdentityProvider) Begin_GetIdentityEnum(eIdentityType IDENTITY_TYPE, pFilterkey *foundation.PROPERTYKEY, pFilterPropVarValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *AsyncIIdentityProvider) Begin_GetIdentityEnum(eIdentityType IDENTITY_TYPE, pFilterkey *foundation.PROPERTYKEY, pFilterPropVarValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eIdentityType), uintptr(unsafe.Pointer(pFilterkey)), uintptr(unsafe.Pointer(pFilterPropVarValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_GetIdentityEnum dispatches through AsyncIIdentityProvider's vtable slot 4.
-func (self *AsyncIIdentityProvider) Finish_GetIdentityEnum(ppIdentityEnum **systemcom.IEnumUnknown) foundation.HRESULT {
+func (self *AsyncIIdentityProvider) Finish_GetIdentityEnum(ppIdentityEnum **systemcom.IEnumUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIdentityEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_Create dispatches through AsyncIIdentityProvider's vtable slot 5.
-func (self *AsyncIIdentityProvider) Begin_Create(lpszUserName foundation.PWSTR, pKeywordsToAdd *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszUserName)), uintptr(unsafe.Pointer(pKeywordsToAdd)))
-	return foundation.HRESULT(r1)
+func (self *AsyncIIdentityProvider) Begin_Create(lpszUserName string, pKeywordsToAdd *systemcomstructuredstorage.PROPVARIANT) error {
+	_lpszUserName := win32.UTF16Ptr(lpszUserName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpszUserName)), uintptr(unsafe.Pointer(pKeywordsToAdd)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_Create dispatches through AsyncIIdentityProvider's vtable slot 6.
-func (self *AsyncIIdentityProvider) Finish_Create(ppPropertyStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *AsyncIIdentityProvider) Finish_Create(ppPropertyStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPropertyStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_Import dispatches through AsyncIIdentityProvider's vtable slot 7.
-func (self *AsyncIIdentityProvider) Begin_Import(pPropertyStore *uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *AsyncIIdentityProvider) Begin_Import(pPropertyStore *uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropertyStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_Import dispatches through AsyncIIdentityProvider's vtable slot 8.
-func (self *AsyncIIdentityProvider) Finish_Import() foundation.HRESULT {
+func (self *AsyncIIdentityProvider) Finish_Import() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_Delete dispatches through AsyncIIdentityProvider's vtable slot 9.
-func (self *AsyncIIdentityProvider) Begin_Delete(lpszUniqueID foundation.PWSTR, pKeywordsToDelete *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszUniqueID)), uintptr(unsafe.Pointer(pKeywordsToDelete)))
-	return foundation.HRESULT(r1)
+func (self *AsyncIIdentityProvider) Begin_Delete(lpszUniqueID string, pKeywordsToDelete *systemcomstructuredstorage.PROPVARIANT) error {
+	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpszUniqueID)), uintptr(unsafe.Pointer(pKeywordsToDelete)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_Delete dispatches through AsyncIIdentityProvider's vtable slot 10.
-func (self *AsyncIIdentityProvider) Finish_Delete() foundation.HRESULT {
+func (self *AsyncIIdentityProvider) Finish_Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_FindByUniqueID dispatches through AsyncIIdentityProvider's vtable slot 11.
-func (self *AsyncIIdentityProvider) Begin_FindByUniqueID(lpszUniqueID foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszUniqueID)))
-	return foundation.HRESULT(r1)
+func (self *AsyncIIdentityProvider) Begin_FindByUniqueID(lpszUniqueID string) error {
+	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpszUniqueID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_FindByUniqueID dispatches through AsyncIIdentityProvider's vtable slot 12.
-func (self *AsyncIIdentityProvider) Finish_FindByUniqueID(ppPropertyStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *AsyncIIdentityProvider) Finish_FindByUniqueID(ppPropertyStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPropertyStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_GetProviderPropertyStore dispatches through AsyncIIdentityProvider's vtable slot 13.
-func (self *AsyncIIdentityProvider) Begin_GetProviderPropertyStore() foundation.HRESULT {
+func (self *AsyncIIdentityProvider) Begin_GetProviderPropertyStore() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_GetProviderPropertyStore dispatches through AsyncIIdentityProvider's vtable slot 14.
-func (self *AsyncIIdentityProvider) Finish_GetProviderPropertyStore(ppPropertyStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *AsyncIIdentityProvider) Finish_GetProviderPropertyStore(ppPropertyStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPropertyStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_Advise dispatches through AsyncIIdentityProvider's vtable slot 15.
-func (self *AsyncIIdentityProvider) Begin_Advise(pIdentityAdvise *IIdentityAdvise, dwIdentityUpdateEvents uint32) foundation.HRESULT {
+func (self *AsyncIIdentityProvider) Begin_Advise(pIdentityAdvise *IIdentityAdvise, dwIdentityUpdateEvents uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIdentityAdvise)), uintptr(dwIdentityUpdateEvents))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_Advise dispatches through AsyncIIdentityProvider's vtable slot 16.
-func (self *AsyncIIdentityProvider) Finish_Advise(pdwCookie *uint32) foundation.HRESULT {
+func (self *AsyncIIdentityProvider) Finish_Advise(pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_UnAdvise dispatches through AsyncIIdentityProvider's vtable slot 17.
-func (self *AsyncIIdentityProvider) Begin_UnAdvise(dwCookie uint32) foundation.HRESULT {
+func (self *AsyncIIdentityProvider) Begin_UnAdvise(dwCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(dwCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_UnAdvise dispatches through AsyncIIdentityProvider's vtable slot 18.
-func (self *AsyncIIdentityProvider) Finish_UnAdvise() foundation.HRESULT {
+func (self *AsyncIIdentityProvider) Finish_UnAdvise() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: eefa1616-48de-4872-aa64-6e6206535a51
@@ -293,75 +299,77 @@ type AsyncIIdentityStore struct {
 var IID_AsyncIIdentityStore = win32.GUID{Data1: 0xeefa1616, Data2: 0x48de, Data3: 0x4872, Data4: [8]byte{0xaa, 0x64, 0x6e, 0x62, 0x06, 0x53, 0x5a, 0x51}}
 
 // Begin_GetCount dispatches through AsyncIIdentityStore's vtable slot 3.
-func (self *AsyncIIdentityStore) Begin_GetCount() foundation.HRESULT {
+func (self *AsyncIIdentityStore) Begin_GetCount() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_GetCount dispatches through AsyncIIdentityStore's vtable slot 4.
-func (self *AsyncIIdentityStore) Finish_GetCount(pdwProviders *uint32) foundation.HRESULT {
+func (self *AsyncIIdentityStore) Finish_GetCount(pdwProviders *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwProviders)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_GetAt dispatches through AsyncIIdentityStore's vtable slot 5.
-func (self *AsyncIIdentityStore) Begin_GetAt(dwProvider uint32, pProvGuid *win32.GUID) foundation.HRESULT {
+func (self *AsyncIIdentityStore) Begin_GetAt(dwProvider uint32, pProvGuid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwProvider), uintptr(unsafe.Pointer(pProvGuid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_GetAt dispatches through AsyncIIdentityStore's vtable slot 6.
-func (self *AsyncIIdentityStore) Finish_GetAt(pProvGuid *win32.GUID, ppIdentityProvider **systemcom.IUnknown) foundation.HRESULT {
+func (self *AsyncIIdentityStore) Finish_GetAt(pProvGuid *win32.GUID, ppIdentityProvider **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProvGuid)), uintptr(unsafe.Pointer(ppIdentityProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_AddToCache dispatches through AsyncIIdentityStore's vtable slot 7.
-func (self *AsyncIIdentityStore) Begin_AddToCache(lpszUniqueID foundation.PWSTR, ProviderGUID *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszUniqueID)), uintptr(unsafe.Pointer(ProviderGUID)))
-	return foundation.HRESULT(r1)
+func (self *AsyncIIdentityStore) Begin_AddToCache(lpszUniqueID string, ProviderGUID *win32.GUID) error {
+	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpszUniqueID)), uintptr(unsafe.Pointer(ProviderGUID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_AddToCache dispatches through AsyncIIdentityStore's vtable slot 8.
-func (self *AsyncIIdentityStore) Finish_AddToCache() foundation.HRESULT {
+func (self *AsyncIIdentityStore) Finish_AddToCache() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_ConvertToSid dispatches through AsyncIIdentityStore's vtable slot 9.
-func (self *AsyncIIdentityStore) Begin_ConvertToSid(lpszUniqueID foundation.PWSTR, ProviderGUID *win32.GUID, cbSid uint16, pSid *byte) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszUniqueID)), uintptr(unsafe.Pointer(ProviderGUID)), uintptr(cbSid), uintptr(unsafe.Pointer(pSid)))
-	return foundation.HRESULT(r1)
+func (self *AsyncIIdentityStore) Begin_ConvertToSid(lpszUniqueID string, ProviderGUID *win32.GUID, cbSid uint16, pSid *byte) error {
+	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpszUniqueID)), uintptr(unsafe.Pointer(ProviderGUID)), uintptr(cbSid), uintptr(unsafe.Pointer(pSid)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_ConvertToSid dispatches through AsyncIIdentityStore's vtable slot 10.
-func (self *AsyncIIdentityStore) Finish_ConvertToSid(pSid *byte, pcbRequiredSid *uint16) foundation.HRESULT {
+func (self *AsyncIIdentityStore) Finish_ConvertToSid(pSid *byte, pcbRequiredSid *uint16) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSid)), uintptr(unsafe.Pointer(pcbRequiredSid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_EnumerateIdentities dispatches through AsyncIIdentityStore's vtable slot 11.
-func (self *AsyncIIdentityStore) Begin_EnumerateIdentities(eIdentityType IDENTITY_TYPE, pFilterkey *foundation.PROPERTYKEY, pFilterPropVarValue *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
+func (self *AsyncIIdentityStore) Begin_EnumerateIdentities(eIdentityType IDENTITY_TYPE, pFilterkey *foundation.PROPERTYKEY, pFilterPropVarValue *systemcomstructuredstorage.PROPVARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(eIdentityType), uintptr(unsafe.Pointer(pFilterkey)), uintptr(unsafe.Pointer(pFilterPropVarValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_EnumerateIdentities dispatches through AsyncIIdentityStore's vtable slot 12.
-func (self *AsyncIIdentityStore) Finish_EnumerateIdentities(ppIdentityEnum **systemcom.IEnumUnknown) foundation.HRESULT {
+func (self *AsyncIIdentityStore) Finish_EnumerateIdentities(ppIdentityEnum **systemcom.IEnumUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIdentityEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_Reset dispatches through AsyncIIdentityStore's vtable slot 13.
-func (self *AsyncIIdentityStore) Begin_Reset() foundation.HRESULT {
+func (self *AsyncIIdentityStore) Begin_Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_Reset dispatches through AsyncIIdentityStore's vtable slot 14.
-func (self *AsyncIIdentityStore) Finish_Reset() foundation.HRESULT {
+func (self *AsyncIIdentityStore) Finish_Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: fca3af9a-8a07-4eae-8632-ec3de658a36a
@@ -373,27 +381,30 @@ type AsyncIIdentityStoreEx struct {
 var IID_AsyncIIdentityStoreEx = win32.GUID{Data1: 0xfca3af9a, Data2: 0x8a07, Data3: 0x4eae, Data4: [8]byte{0x86, 0x32, 0xec, 0x3d, 0xe6, 0x58, 0xa3, 0x6a}}
 
 // Begin_CreateConnectedIdentity dispatches through AsyncIIdentityStoreEx's vtable slot 3.
-func (self *AsyncIIdentityStoreEx) Begin_CreateConnectedIdentity(LocalName foundation.PWSTR, ConnectedName foundation.PWSTR, ProviderGUID *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LocalName)), uintptr(unsafe.Pointer(ConnectedName)), uintptr(unsafe.Pointer(ProviderGUID)))
-	return foundation.HRESULT(r1)
+func (self *AsyncIIdentityStoreEx) Begin_CreateConnectedIdentity(LocalName string, ConnectedName string, ProviderGUID *win32.GUID) error {
+	_LocalName := win32.UTF16Ptr(LocalName)
+	_ConnectedName := win32.UTF16Ptr(ConnectedName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_LocalName)), uintptr(unsafe.Pointer(_ConnectedName)), uintptr(unsafe.Pointer(ProviderGUID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_CreateConnectedIdentity dispatches through AsyncIIdentityStoreEx's vtable slot 4.
-func (self *AsyncIIdentityStoreEx) Finish_CreateConnectedIdentity() foundation.HRESULT {
+func (self *AsyncIIdentityStoreEx) Finish_CreateConnectedIdentity() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Begin_DeleteConnectedIdentity dispatches through AsyncIIdentityStoreEx's vtable slot 5.
-func (self *AsyncIIdentityStoreEx) Begin_DeleteConnectedIdentity(ConnectedName foundation.PWSTR, ProviderGUID *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ConnectedName)), uintptr(unsafe.Pointer(ProviderGUID)))
-	return foundation.HRESULT(r1)
+func (self *AsyncIIdentityStoreEx) Begin_DeleteConnectedIdentity(ConnectedName string, ProviderGUID *win32.GUID) error {
+	_ConnectedName := win32.UTF16Ptr(ConnectedName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ConnectedName)), uintptr(unsafe.Pointer(ProviderGUID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Finish_DeleteConnectedIdentity dispatches through AsyncIIdentityStoreEx's vtable slot 6.
-func (self *AsyncIIdentityStoreEx) Finish_DeleteConnectedIdentity() foundation.HRESULT {
+func (self *AsyncIIdentityStoreEx) Finish_DeleteConnectedIdentity() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAssociatedIdentityProvider: https://learn.microsoft.com/windows/win32/api/identityprovider/nn-identityprovider-iassociatedidentityprovider
@@ -406,21 +417,23 @@ type IAssociatedIdentityProvider struct {
 var IID_IAssociatedIdentityProvider = win32.GUID{Data1: 0x2af066b3, Data2: 0x4cbb, Data3: 0x4cba, Data4: [8]byte{0xa7, 0x98, 0x20, 0x4b, 0x6a, 0xf6, 0x8c, 0xc0}}
 
 // AssociateIdentity dispatches through IAssociatedIdentityProvider's vtable slot 3.
-func (self *IAssociatedIdentityProvider) AssociateIdentity(hwndParent foundation.HWND, ppPropertyStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *IAssociatedIdentityProvider) AssociateIdentity(hwndParent foundation.HWND, ppPropertyStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(ppPropertyStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisassociateIdentity dispatches through IAssociatedIdentityProvider's vtable slot 4.
-func (self *IAssociatedIdentityProvider) DisassociateIdentity(hwndParent foundation.HWND, lpszUniqueID foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(lpszUniqueID)))
-	return foundation.HRESULT(r1)
+func (self *IAssociatedIdentityProvider) DisassociateIdentity(hwndParent foundation.HWND, lpszUniqueID string) error {
+	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_lpszUniqueID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ChangeCredential dispatches through IAssociatedIdentityProvider's vtable slot 5.
-func (self *IAssociatedIdentityProvider) ChangeCredential(hwndParent foundation.HWND, lpszUniqueID foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(lpszUniqueID)))
-	return foundation.HRESULT(r1)
+func (self *IAssociatedIdentityProvider) ChangeCredential(hwndParent foundation.HWND, lpszUniqueID string) error {
+	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_lpszUniqueID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IConnectedIdentityProvider: https://learn.microsoft.com/windows/win32/api/identityprovider/nn-identityprovider-iconnectedidentityprovider
@@ -433,33 +446,33 @@ type IConnectedIdentityProvider struct {
 var IID_IConnectedIdentityProvider = win32.GUID{Data1: 0xb7417b54, Data2: 0xe08c, Data3: 0x429b, Data4: [8]byte{0x96, 0xc8, 0x67, 0x8d, 0x13, 0x69, 0xec, 0xb1}}
 
 // ConnectIdentity dispatches through IConnectedIdentityProvider's vtable slot 3.
-func (self *IConnectedIdentityProvider) ConnectIdentity(AuthBuffer *byte, AuthBufferSize uint32) foundation.HRESULT {
+func (self *IConnectedIdentityProvider) ConnectIdentity(AuthBuffer *byte, AuthBufferSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AuthBuffer)), uintptr(AuthBufferSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DisconnectIdentity dispatches through IConnectedIdentityProvider's vtable slot 4.
-func (self *IConnectedIdentityProvider) DisconnectIdentity() foundation.HRESULT {
+func (self *IConnectedIdentityProvider) DisconnectIdentity() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsConnected dispatches through IConnectedIdentityProvider's vtable slot 5.
-func (self *IConnectedIdentityProvider) IsConnected(Connected *foundation.BOOL) foundation.HRESULT {
+func (self *IConnectedIdentityProvider) IsConnected(Connected *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Connected)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUrl dispatches through IConnectedIdentityProvider's vtable slot 6.
-func (self *IConnectedIdentityProvider) GetUrl(Identifier IDENTITY_URL, Context *systemcom.IBindCtx, PostData *systemvariant.VARIANT, Url *foundation.PWSTR) foundation.HRESULT {
+func (self *IConnectedIdentityProvider) GetUrl(Identifier IDENTITY_URL, Context *systemcom.IBindCtx, PostData *systemvariant.VARIANT, Url *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Identifier), uintptr(unsafe.Pointer(Context)), uintptr(unsafe.Pointer(PostData)), uintptr(unsafe.Pointer(Url)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAccountState dispatches through IConnectedIdentityProvider's vtable slot 7.
-func (self *IConnectedIdentityProvider) GetAccountState(pState *ACCOUNT_STATE) foundation.HRESULT {
+func (self *IConnectedIdentityProvider) GetAccountState(pState *ACCOUNT_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IIdentityAdvise: https://learn.microsoft.com/windows/win32/api/identityprovider/nn-identityprovider-iidentityadvise
@@ -472,9 +485,10 @@ type IIdentityAdvise struct {
 var IID_IIdentityAdvise = win32.GUID{Data1: 0x4e982fed, Data2: 0xd14b, Data3: 0x440c, Data4: [8]byte{0xb8, 0xd6, 0xbb, 0x38, 0x64, 0x53, 0xd3, 0x86}}
 
 // IdentityUpdated dispatches through IIdentityAdvise's vtable slot 3.
-func (self *IIdentityAdvise) IdentityUpdated(dwIdentityUpdateEvents uint32, lpszUniqueID foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwIdentityUpdateEvents), uintptr(unsafe.Pointer(lpszUniqueID)))
-	return foundation.HRESULT(r1)
+func (self *IIdentityAdvise) IdentityUpdated(dwIdentityUpdateEvents uint32, lpszUniqueID string) error {
+	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwIdentityUpdateEvents), uintptr(unsafe.Pointer(_lpszUniqueID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 5e7ef254-979f-43b5-b74e-06e4eb7df0f9
@@ -486,15 +500,15 @@ type IIdentityAuthentication struct {
 var IID_IIdentityAuthentication = win32.GUID{Data1: 0x5e7ef254, Data2: 0x979f, Data3: 0x43b5, Data4: [8]byte{0xb7, 0x4e, 0x06, 0xe4, 0xeb, 0x7d, 0xf0, 0xf9}}
 
 // SetIdentityCredential dispatches through IIdentityAuthentication's vtable slot 3.
-func (self *IIdentityAuthentication) SetIdentityCredential(CredBuffer *byte, CredBufferLength uint32) foundation.HRESULT {
+func (self *IIdentityAuthentication) SetIdentityCredential(CredBuffer *byte, CredBufferLength uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CredBuffer)), uintptr(CredBufferLength))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ValidateIdentityCredential dispatches through IIdentityAuthentication's vtable slot 4.
-func (self *IIdentityAuthentication) ValidateIdentityCredential(CredBuffer *byte, CredBufferLength uint32, ppIdentityProperties **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *IIdentityAuthentication) ValidateIdentityCredential(CredBuffer *byte, CredBufferLength uint32, ppIdentityProperties **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CredBuffer)), uintptr(CredBufferLength), uintptr(unsafe.Pointer(ppIdentityProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IIdentityProvider: https://learn.microsoft.com/windows/win32/api/identityprovider/nn-identityprovider-iidentityprovider
@@ -507,51 +521,54 @@ type IIdentityProvider struct {
 var IID_IIdentityProvider = win32.GUID{Data1: 0x0d1b9e0c, Data2: 0xe8ba, Data3: 0x4f55, Data4: [8]byte{0xa8, 0x1b, 0xbc, 0xe9, 0x34, 0xb9, 0x48, 0xf5}}
 
 // GetIdentityEnum dispatches through IIdentityProvider's vtable slot 3.
-func (self *IIdentityProvider) GetIdentityEnum(eIdentityType IDENTITY_TYPE, pFilterkey *foundation.PROPERTYKEY, pFilterPropVarValue *systemcomstructuredstorage.PROPVARIANT, ppIdentityEnum **systemcom.IEnumUnknown) foundation.HRESULT {
+func (self *IIdentityProvider) GetIdentityEnum(eIdentityType IDENTITY_TYPE, pFilterkey *foundation.PROPERTYKEY, pFilterPropVarValue *systemcomstructuredstorage.PROPVARIANT, ppIdentityEnum **systemcom.IEnumUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(eIdentityType), uintptr(unsafe.Pointer(pFilterkey)), uintptr(unsafe.Pointer(pFilterPropVarValue)), uintptr(unsafe.Pointer(ppIdentityEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Create dispatches through IIdentityProvider's vtable slot 4.
-func (self *IIdentityProvider) Create(lpszUserName foundation.PWSTR, ppPropertyStore **uishellpropertiessystem.IPropertyStore, pKeywordsToAdd *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszUserName)), uintptr(unsafe.Pointer(ppPropertyStore)), uintptr(unsafe.Pointer(pKeywordsToAdd)))
-	return foundation.HRESULT(r1)
+func (self *IIdentityProvider) Create(lpszUserName string, ppPropertyStore **uishellpropertiessystem.IPropertyStore, pKeywordsToAdd *systemcomstructuredstorage.PROPVARIANT) error {
+	_lpszUserName := win32.UTF16Ptr(lpszUserName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpszUserName)), uintptr(unsafe.Pointer(ppPropertyStore)), uintptr(unsafe.Pointer(pKeywordsToAdd)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Import dispatches through IIdentityProvider's vtable slot 5.
-func (self *IIdentityProvider) Import(pPropertyStore *uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *IIdentityProvider) Import(pPropertyStore *uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropertyStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IIdentityProvider's vtable slot 6.
-func (self *IIdentityProvider) Delete(lpszUniqueID foundation.PWSTR, pKeywordsToDelete *systemcomstructuredstorage.PROPVARIANT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszUniqueID)), uintptr(unsafe.Pointer(pKeywordsToDelete)))
-	return foundation.HRESULT(r1)
+func (self *IIdentityProvider) Delete(lpszUniqueID string, pKeywordsToDelete *systemcomstructuredstorage.PROPVARIANT) error {
+	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpszUniqueID)), uintptr(unsafe.Pointer(pKeywordsToDelete)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindByUniqueID dispatches through IIdentityProvider's vtable slot 7.
-func (self *IIdentityProvider) FindByUniqueID(lpszUniqueID foundation.PWSTR, ppPropertyStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszUniqueID)), uintptr(unsafe.Pointer(ppPropertyStore)))
-	return foundation.HRESULT(r1)
+func (self *IIdentityProvider) FindByUniqueID(lpszUniqueID string, ppPropertyStore **uishellpropertiessystem.IPropertyStore) error {
+	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpszUniqueID)), uintptr(unsafe.Pointer(ppPropertyStore)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProviderPropertyStore dispatches through IIdentityProvider's vtable slot 8.
-func (self *IIdentityProvider) GetProviderPropertyStore(ppPropertyStore **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *IIdentityProvider) GetProviderPropertyStore(ppPropertyStore **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPropertyStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Advise dispatches through IIdentityProvider's vtable slot 9.
-func (self *IIdentityProvider) Advise(pIdentityAdvise *IIdentityAdvise, dwIdentityUpdateEvents uint32, pdwCookie *uint32) foundation.HRESULT {
+func (self *IIdentityProvider) Advise(pIdentityAdvise *IIdentityAdvise, dwIdentityUpdateEvents uint32, pdwCookie *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIdentityAdvise)), uintptr(dwIdentityUpdateEvents), uintptr(unsafe.Pointer(pdwCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnAdvise dispatches through IIdentityProvider's vtable slot 10.
-func (self *IIdentityProvider) UnAdvise(dwCookie uint32) foundation.HRESULT {
+func (self *IIdentityProvider) UnAdvise(dwCookie uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwCookie))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IIdentityStore: https://learn.microsoft.com/windows/win32/api/identitystore/nn-identitystore-iidentitystore
@@ -564,39 +581,41 @@ type IIdentityStore struct {
 var IID_IIdentityStore = win32.GUID{Data1: 0xdf586fa5, Data2: 0x6f35, Data3: 0x44f1, Data4: [8]byte{0xb2, 0x09, 0xb3, 0x8e, 0x16, 0x97, 0x72, 0xeb}}
 
 // GetCount dispatches through IIdentityStore's vtable slot 3.
-func (self *IIdentityStore) GetCount(pdwProviders *uint32) foundation.HRESULT {
+func (self *IIdentityStore) GetCount(pdwProviders *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwProviders)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAt dispatches through IIdentityStore's vtable slot 4.
-func (self *IIdentityStore) GetAt(dwProvider uint32, pProvGuid *win32.GUID, ppIdentityProvider **systemcom.IUnknown) foundation.HRESULT {
+func (self *IIdentityStore) GetAt(dwProvider uint32, pProvGuid *win32.GUID, ppIdentityProvider **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwProvider), uintptr(unsafe.Pointer(pProvGuid)), uintptr(unsafe.Pointer(ppIdentityProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddToCache dispatches through IIdentityStore's vtable slot 5.
-func (self *IIdentityStore) AddToCache(lpszUniqueID foundation.PWSTR, ProviderGUID *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszUniqueID)), uintptr(unsafe.Pointer(ProviderGUID)))
-	return foundation.HRESULT(r1)
+func (self *IIdentityStore) AddToCache(lpszUniqueID string, ProviderGUID *win32.GUID) error {
+	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpszUniqueID)), uintptr(unsafe.Pointer(ProviderGUID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConvertToSid dispatches through IIdentityStore's vtable slot 6.
-func (self *IIdentityStore) ConvertToSid(lpszUniqueID foundation.PWSTR, ProviderGUID *win32.GUID, cbSid uint16, pSid *byte, pcbRequiredSid *uint16) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszUniqueID)), uintptr(unsafe.Pointer(ProviderGUID)), uintptr(cbSid), uintptr(unsafe.Pointer(pSid)), uintptr(unsafe.Pointer(pcbRequiredSid)))
-	return foundation.HRESULT(r1)
+func (self *IIdentityStore) ConvertToSid(lpszUniqueID string, ProviderGUID *win32.GUID, cbSid uint16, pSid *byte, pcbRequiredSid *uint16) error {
+	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpszUniqueID)), uintptr(unsafe.Pointer(ProviderGUID)), uintptr(cbSid), uintptr(unsafe.Pointer(pSid)), uintptr(unsafe.Pointer(pcbRequiredSid)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateIdentities dispatches through IIdentityStore's vtable slot 7.
-func (self *IIdentityStore) EnumerateIdentities(eIdentityType IDENTITY_TYPE, pFilterkey *foundation.PROPERTYKEY, pFilterPropVarValue *systemcomstructuredstorage.PROPVARIANT, ppIdentityEnum **systemcom.IEnumUnknown) foundation.HRESULT {
+func (self *IIdentityStore) EnumerateIdentities(eIdentityType IDENTITY_TYPE, pFilterkey *foundation.PROPERTYKEY, pFilterPropVarValue *systemcomstructuredstorage.PROPVARIANT, ppIdentityEnum **systemcom.IEnumUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(eIdentityType), uintptr(unsafe.Pointer(pFilterkey)), uintptr(unsafe.Pointer(pFilterPropVarValue)), uintptr(unsafe.Pointer(ppIdentityEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IIdentityStore's vtable slot 8.
-func (self *IIdentityStore) Reset() foundation.HRESULT {
+func (self *IIdentityStore) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f9f9eb98-8f7f-4e38-9577-6980114ce32b
@@ -608,13 +627,16 @@ type IIdentityStoreEx struct {
 var IID_IIdentityStoreEx = win32.GUID{Data1: 0xf9f9eb98, Data2: 0x8f7f, Data3: 0x4e38, Data4: [8]byte{0x95, 0x77, 0x69, 0x80, 0x11, 0x4c, 0xe3, 0x2b}}
 
 // CreateConnectedIdentity dispatches through IIdentityStoreEx's vtable slot 3.
-func (self *IIdentityStoreEx) CreateConnectedIdentity(LocalName foundation.PWSTR, ConnectedName foundation.PWSTR, ProviderGUID *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LocalName)), uintptr(unsafe.Pointer(ConnectedName)), uintptr(unsafe.Pointer(ProviderGUID)))
-	return foundation.HRESULT(r1)
+func (self *IIdentityStoreEx) CreateConnectedIdentity(LocalName string, ConnectedName string, ProviderGUID *win32.GUID) error {
+	_LocalName := win32.UTF16Ptr(LocalName)
+	_ConnectedName := win32.UTF16Ptr(ConnectedName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_LocalName)), uintptr(unsafe.Pointer(_ConnectedName)), uintptr(unsafe.Pointer(ProviderGUID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteConnectedIdentity dispatches through IIdentityStoreEx's vtable slot 4.
-func (self *IIdentityStoreEx) DeleteConnectedIdentity(ConnectedName foundation.PWSTR, ProviderGUID *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ConnectedName)), uintptr(unsafe.Pointer(ProviderGUID)))
-	return foundation.HRESULT(r1)
+func (self *IIdentityStoreEx) DeleteConnectedIdentity(ConnectedName string, ProviderGUID *win32.GUID) error {
+	_ConnectedName := win32.UTF16Ptr(ConnectedName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ConnectedName)), uintptr(unsafe.Pointer(ProviderGUID)))
+	return win32.HRESULTError(int32(r1))
 }

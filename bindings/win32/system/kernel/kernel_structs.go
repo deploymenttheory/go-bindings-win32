@@ -50,8 +50,8 @@ type LIST_ENTRY64 struct {
 	Blink uint64
 }
 
-// NT_TIB_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// NT_TIB_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type NT_TIB_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -78,8 +78,8 @@ type PROCESSOR_NUMBER struct {
 	Reserved byte
 }
 
-// QUAD_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// QUAD_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type QUAD_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -88,14 +88,14 @@ type QUAD struct {
 	Anonymous QUAD_Anonymous_e__Union
 }
 
-// RTL_BALANCED_NODE_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RTL_BALANCED_NODE_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RTL_BALANCED_NODE_Anonymous1_e__Union struct {
 	Data [2]uint64
 }
 
-// RTL_BALANCED_NODE_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RTL_BALANCED_NODE_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RTL_BALANCED_NODE_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -119,8 +119,8 @@ type SLIST_ENTRY struct {
 	Next *SLIST_ENTRY
 }
 
-// SLIST_HEADER is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SLIST_HEADER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SLIST_HEADER struct {
 	Data [2]uint64
 }

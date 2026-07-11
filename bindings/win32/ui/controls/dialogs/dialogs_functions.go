@@ -17,54 +17,54 @@ var (
 )
 
 var (
+	procChooseColor          = modCOMDLG32.NewProc("ChooseColorW")
 	procChooseColorA         = modCOMDLG32.NewProc("ChooseColorA")
-	procChooseColorW         = modCOMDLG32.NewProc("ChooseColorW")
+	procChooseFont           = modCOMDLG32.NewProc("ChooseFontW")
 	procChooseFontA          = modCOMDLG32.NewProc("ChooseFontA")
-	procChooseFontW          = modCOMDLG32.NewProc("ChooseFontW")
 	procCommDlgExtendedError = modCOMDLG32.NewProc("CommDlgExtendedError")
+	procFindText             = modCOMDLG32.NewProc("FindTextW")
 	procFindTextA            = modCOMDLG32.NewProc("FindTextA")
-	procFindTextW            = modCOMDLG32.NewProc("FindTextW")
+	procGetFileTitle         = modCOMDLG32.NewProc("GetFileTitleW")
 	procGetFileTitleA        = modCOMDLG32.NewProc("GetFileTitleA")
-	procGetFileTitleW        = modCOMDLG32.NewProc("GetFileTitleW")
+	procGetOpenFileName      = modCOMDLG32.NewProc("GetOpenFileNameW")
 	procGetOpenFileNameA     = modCOMDLG32.NewProc("GetOpenFileNameA")
-	procGetOpenFileNameW     = modCOMDLG32.NewProc("GetOpenFileNameW")
+	procGetSaveFileName      = modCOMDLG32.NewProc("GetSaveFileNameW")
 	procGetSaveFileNameA     = modCOMDLG32.NewProc("GetSaveFileNameA")
-	procGetSaveFileNameW     = modCOMDLG32.NewProc("GetSaveFileNameW")
+	procPageSetupDlg         = modCOMDLG32.NewProc("PageSetupDlgW")
 	procPageSetupDlgA        = modCOMDLG32.NewProc("PageSetupDlgA")
-	procPageSetupDlgW        = modCOMDLG32.NewProc("PageSetupDlgW")
+	procPrintDlg             = modCOMDLG32.NewProc("PrintDlgW")
 	procPrintDlgA            = modCOMDLG32.NewProc("PrintDlgA")
+	procPrintDlgEx           = modCOMDLG32.NewProc("PrintDlgExW")
 	procPrintDlgExA          = modCOMDLG32.NewProc("PrintDlgExA")
-	procPrintDlgExW          = modCOMDLG32.NewProc("PrintDlgExW")
-	procPrintDlgW            = modCOMDLG32.NewProc("PrintDlgW")
+	procReplaceText          = modCOMDLG32.NewProc("ReplaceTextW")
 	procReplaceTextA         = modCOMDLG32.NewProc("ReplaceTextA")
-	procReplaceTextW         = modCOMDLG32.NewProc("ReplaceTextW")
 )
 
-// ChooseColorA calls COMDLG32!ChooseColorA.
-func ChooseColorA(param0 *CHOOSECOLORA) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procChooseColorA.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.BOOL(r1)
+// ChooseColor calls COMDLG32!ChooseColorW.
+// https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-choosecolorw
+func ChooseColor(param0 *CHOOSECOLORW) bool {
+	r1, _, _ := syscall.SyscallN(procChooseColor.Addr(), uintptr(unsafe.Pointer(param0)))
+	return r1 != 0
 }
 
-// ChooseColorW calls COMDLG32!ChooseColorW.
-// https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-choosecolorw
-func ChooseColorW(param0 *CHOOSECOLORW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procChooseColorW.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.BOOL(r1)
+// ChooseColorA calls COMDLG32!ChooseColorA.
+func ChooseColorA(param0 *CHOOSECOLORA) bool {
+	r1, _, _ := syscall.SyscallN(procChooseColorA.Addr(), uintptr(unsafe.Pointer(param0)))
+	return r1 != 0
+}
+
+// ChooseFont calls COMDLG32!ChooseFontW.
+// https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-choosefontw
+func ChooseFont(param0 *CHOOSEFONTW) bool {
+	r1, _, _ := syscall.SyscallN(procChooseFont.Addr(), uintptr(unsafe.Pointer(param0)))
+	return r1 != 0
 }
 
 // ChooseFontA calls COMDLG32!ChooseFontA.
 // https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-choosefonta
-func ChooseFontA(param0 *CHOOSEFONTA) foundation.BOOL {
+func ChooseFontA(param0 *CHOOSEFONTA) bool {
 	r1, _, _ := syscall.SyscallN(procChooseFontA.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.BOOL(r1)
-}
-
-// ChooseFontW calls COMDLG32!ChooseFontW.
-// https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-choosefontw
-func ChooseFontW(param0 *CHOOSEFONTW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procChooseFontW.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // CommDlgExtendedError calls COMDLG32!CommDlgExtendedError.
@@ -75,6 +75,14 @@ func CommDlgExtendedError() COMMON_DLG_ERRORS {
 	return COMMON_DLG_ERRORS(r1)
 }
 
+// FindText calls COMDLG32!FindTextW.
+// https://learn.microsoft.com/windows/win32/api/commdlg/nf-commdlg-findtextw
+// Minimum OS: windows5.0.
+func FindText(param0 *FINDREPLACEW) foundation.HWND {
+	r1, _, _ := syscall.SyscallN(procFindText.Addr(), uintptr(unsafe.Pointer(param0)))
+	return foundation.HWND(r1)
+}
+
 // FindTextA calls COMDLG32!FindTextA.
 // https://learn.microsoft.com/windows/win32/api/commdlg/nf-commdlg-findtexta
 // Minimum OS: windows5.0.
@@ -83,12 +91,13 @@ func FindTextA(param0 *FINDREPLACEA) foundation.HWND {
 	return foundation.HWND(r1)
 }
 
-// FindTextW calls COMDLG32!FindTextW.
-// https://learn.microsoft.com/windows/win32/api/commdlg/nf-commdlg-findtextw
+// GetFileTitle calls COMDLG32!GetFileTitleW.
+// https://learn.microsoft.com/windows/win32/api/commdlg/nf-commdlg-getfiletitlew
 // Minimum OS: windows5.0.
-func FindTextW(param0 *FINDREPLACEW) foundation.HWND {
-	r1, _, _ := syscall.SyscallN(procFindTextW.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.HWND(r1)
+func GetFileTitle(param0 string, Buf foundation.PWSTR, cchSize uint16) int16 {
+	_param0 := win32.UTF16Ptr(param0)
+	r1, _, _ := syscall.SyscallN(procGetFileTitle.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(Buf)), uintptr(cchSize))
+	return int16(r1)
 }
 
 // GetFileTitleA calls COMDLG32!GetFileTitleA.
@@ -99,86 +108,86 @@ func GetFileTitleA(param0 foundation.PSTR, Buf foundation.PSTR, cchSize uint16) 
 	return int16(r1)
 }
 
-// GetFileTitleW calls COMDLG32!GetFileTitleW.
-// https://learn.microsoft.com/windows/win32/api/commdlg/nf-commdlg-getfiletitlew
+// GetOpenFileName calls COMDLG32!GetOpenFileNameW.
+// https://learn.microsoft.com/windows/win32/api/commdlg/nf-commdlg-getopenfilenamew
 // Minimum OS: windows5.0.
-func GetFileTitleW(param0 foundation.PWSTR, Buf foundation.PWSTR, cchSize uint16) int16 {
-	r1, _, _ := syscall.SyscallN(procGetFileTitleW.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(Buf)), uintptr(cchSize))
-	return int16(r1)
+func GetOpenFileName(param0 *OPENFILENAMEW) bool {
+	r1, _, _ := syscall.SyscallN(procGetOpenFileName.Addr(), uintptr(unsafe.Pointer(param0)))
+	return r1 != 0
 }
 
 // GetOpenFileNameA calls COMDLG32!GetOpenFileNameA.
 // https://learn.microsoft.com/windows/win32/api/commdlg/nf-commdlg-getopenfilenamea
 // Minimum OS: windows5.0.
-func GetOpenFileNameA(param0 *OPENFILENAMEA) foundation.BOOL {
+func GetOpenFileNameA(param0 *OPENFILENAMEA) bool {
 	r1, _, _ := syscall.SyscallN(procGetOpenFileNameA.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetOpenFileNameW calls COMDLG32!GetOpenFileNameW.
-// https://learn.microsoft.com/windows/win32/api/commdlg/nf-commdlg-getopenfilenamew
+// GetSaveFileName calls COMDLG32!GetSaveFileNameW.
+// https://learn.microsoft.com/windows/win32/api/commdlg/nf-commdlg-getsavefilenamew
 // Minimum OS: windows5.0.
-func GetOpenFileNameW(param0 *OPENFILENAMEW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetOpenFileNameW.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.BOOL(r1)
+func GetSaveFileName(param0 *OPENFILENAMEW) bool {
+	r1, _, _ := syscall.SyscallN(procGetSaveFileName.Addr(), uintptr(unsafe.Pointer(param0)))
+	return r1 != 0
 }
 
 // GetSaveFileNameA calls COMDLG32!GetSaveFileNameA.
 // https://learn.microsoft.com/windows/win32/api/commdlg/nf-commdlg-getsavefilenamea
 // Minimum OS: windows5.0.
-func GetSaveFileNameA(param0 *OPENFILENAMEA) foundation.BOOL {
+func GetSaveFileNameA(param0 *OPENFILENAMEA) bool {
 	r1, _, _ := syscall.SyscallN(procGetSaveFileNameA.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// GetSaveFileNameW calls COMDLG32!GetSaveFileNameW.
-// https://learn.microsoft.com/windows/win32/api/commdlg/nf-commdlg-getsavefilenamew
-// Minimum OS: windows5.0.
-func GetSaveFileNameW(param0 *OPENFILENAMEW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procGetSaveFileNameW.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.BOOL(r1)
+// PageSetupDlg calls COMDLG32!PageSetupDlgW.
+// https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-pagesetupdlgw
+func PageSetupDlg(param0 *PAGESETUPDLGW) bool {
+	r1, _, _ := syscall.SyscallN(procPageSetupDlg.Addr(), uintptr(unsafe.Pointer(param0)))
+	return r1 != 0
 }
 
 // PageSetupDlgA calls COMDLG32!PageSetupDlgA.
 // https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-pagesetupdlga
-func PageSetupDlgA(param0 *PAGESETUPDLGA) foundation.BOOL {
+func PageSetupDlgA(param0 *PAGESETUPDLGA) bool {
 	r1, _, _ := syscall.SyscallN(procPageSetupDlgA.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
-// PageSetupDlgW calls COMDLG32!PageSetupDlgW.
-// https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-pagesetupdlgw
-func PageSetupDlgW(param0 *PAGESETUPDLGW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPageSetupDlgW.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.BOOL(r1)
+// PrintDlg calls COMDLG32!PrintDlgW.
+// https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-printdlgw
+func PrintDlg(pPD *PRINTDLGW) bool {
+	r1, _, _ := syscall.SyscallN(procPrintDlg.Addr(), uintptr(unsafe.Pointer(pPD)))
+	return r1 != 0
 }
 
 // PrintDlgA calls COMDLG32!PrintDlgA.
 // https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-printdlga
-func PrintDlgA(pPD *PRINTDLGA) foundation.BOOL {
+func PrintDlgA(pPD *PRINTDLGA) bool {
 	r1, _, _ := syscall.SyscallN(procPrintDlgA.Addr(), uintptr(unsafe.Pointer(pPD)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// PrintDlgEx calls COMDLG32!PrintDlgExW.
+// https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-printdlgexw
+func PrintDlgEx(pPD *PRINTDLGEXW) error {
+	r1, _, _ := syscall.SyscallN(procPrintDlgEx.Addr(), uintptr(unsafe.Pointer(pPD)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrintDlgExA calls COMDLG32!PrintDlgExA.
 // https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-printdlgexa
-func PrintDlgExA(pPD *PRINTDLGEXA) foundation.HRESULT {
+func PrintDlgExA(pPD *PRINTDLGEXA) error {
 	r1, _, _ := syscall.SyscallN(procPrintDlgExA.Addr(), uintptr(unsafe.Pointer(pPD)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
-// PrintDlgExW calls COMDLG32!PrintDlgExW.
-// https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-printdlgexw
-func PrintDlgExW(pPD *PRINTDLGEXW) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPrintDlgExW.Addr(), uintptr(unsafe.Pointer(pPD)))
-	return foundation.HRESULT(r1)
-}
-
-// PrintDlgW calls COMDLG32!PrintDlgW.
-// https://learn.microsoft.com/windows/win32/api/commdlg/nc-commdlg-printdlgw
-func PrintDlgW(pPD *PRINTDLGW) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procPrintDlgW.Addr(), uintptr(unsafe.Pointer(pPD)))
-	return foundation.BOOL(r1)
+// ReplaceText calls COMDLG32!ReplaceTextW.
+// https://learn.microsoft.com/windows/win32/api/commdlg/nf-commdlg-replacetextw
+// Minimum OS: windows5.0.
+func ReplaceText(param0 *FINDREPLACEW) foundation.HWND {
+	r1, _, _ := syscall.SyscallN(procReplaceText.Addr(), uintptr(unsafe.Pointer(param0)))
+	return foundation.HWND(r1)
 }
 
 // ReplaceTextA calls COMDLG32!ReplaceTextA.
@@ -186,13 +195,5 @@ func PrintDlgW(pPD *PRINTDLGW) foundation.BOOL {
 // Minimum OS: windows5.0.
 func ReplaceTextA(param0 *FINDREPLACEA) foundation.HWND {
 	r1, _, _ := syscall.SyscallN(procReplaceTextA.Addr(), uintptr(unsafe.Pointer(param0)))
-	return foundation.HWND(r1)
-}
-
-// ReplaceTextW calls COMDLG32!ReplaceTextW.
-// https://learn.microsoft.com/windows/win32/api/commdlg/nf-commdlg-replacetextw
-// Minimum OS: windows5.0.
-func ReplaceTextW(param0 *FINDREPLACEW) foundation.HWND {
-	r1, _, _ := syscall.SyscallN(procReplaceTextW.Addr(), uintptr(unsafe.Pointer(param0)))
 	return foundation.HWND(r1)
 }

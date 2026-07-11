@@ -22,23 +22,23 @@ var (
 )
 
 // DoMsCtfMonitor calls MsCtfMonitor!DoMsCtfMonitor.
-func DoMsCtfMonitor(dwFlags uint32, hEventForServiceStop foundation.HANDLE) foundation.BOOL {
+func DoMsCtfMonitor(dwFlags uint32, hEventForServiceStop foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procDoMsCtfMonitor.Addr(), uintptr(dwFlags), uintptr(hEventForServiceStop))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // InitLocalMsCtfMonitor calls MsCtfMonitor!InitLocalMsCtfMonitor.
 // https://learn.microsoft.com/windows/win32/api/msctfmonitorapi/nf-msctfmonitorapi-initlocalmsctfmonitor
 // Minimum OS: windows6.0.6000.
-func InitLocalMsCtfMonitor(dwFlags uint32) foundation.HRESULT {
+func InitLocalMsCtfMonitor(dwFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(procInitLocalMsCtfMonitor.Addr(), uintptr(dwFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UninitLocalMsCtfMonitor calls MsCtfMonitor!UninitLocalMsCtfMonitor.
 // https://learn.microsoft.com/windows/win32/api/msctfmonitorapi/nf-msctfmonitorapi-uninitlocalmsctfmonitor
 // Minimum OS: windows6.0.6000.
-func UninitLocalMsCtfMonitor() foundation.HRESULT {
+func UninitLocalMsCtfMonitor() error {
 	r1, _, _ := syscall.SyscallN(procUninitLocalMsCtfMonitor.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

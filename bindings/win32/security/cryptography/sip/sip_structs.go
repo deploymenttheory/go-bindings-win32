@@ -58,8 +58,8 @@ type SIP_CAP_SET_V2 struct {
 	DwReserved  uint32
 }
 
-// SIP_CAP_SET_V3_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SIP_CAP_SET_V3_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SIP_CAP_SET_V3_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -90,8 +90,8 @@ type SIP_INDIRECT_DATA struct {
 	Digest          securitycryptography.CRYPT_INTEGER_BLOB
 }
 
-// SIP_SUBJECTINFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SIP_SUBJECTINFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SIP_SUBJECTINFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }

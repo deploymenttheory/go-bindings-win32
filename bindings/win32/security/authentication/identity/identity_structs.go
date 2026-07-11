@@ -723,8 +723,8 @@ type LSA_FOREST_TRUST_INFORMATION2 struct {
 	Entries     **LSA_FOREST_TRUST_RECORD2
 }
 
-// LSA_FOREST_TRUST_RECORD_ForestTrustData_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// LSA_FOREST_TRUST_RECORD_ForestTrustData_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type LSA_FOREST_TRUST_RECORD_ForestTrustData_e__Union struct {
 	Data [5]uint64
 }
@@ -737,8 +737,8 @@ type LSA_FOREST_TRUST_RECORD struct {
 	ForestTrustData LSA_FOREST_TRUST_RECORD_ForestTrustData_e__Union
 }
 
-// LSA_FOREST_TRUST_RECORD2_ForestTrustData_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// LSA_FOREST_TRUST_RECORD2_ForestTrustData_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type LSA_FOREST_TRUST_RECORD2_ForestTrustData_e__Union struct {
 	Data [5]uint64
 }
@@ -1562,8 +1562,8 @@ type SECPKG_EVENT_ROLE_CHANGE struct {
 	NewRole      uint32
 }
 
-// SECPKG_EXTENDED_INFORMATION_Info_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SECPKG_EXTENDED_INFORMATION_Info_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SECPKG_EXTENDED_INFORMATION_Info_e__Union struct {
 	Data [6]uint64
 }
@@ -2081,8 +2081,8 @@ type SEC_WINNT_AUTH_IDENTITY_EXW struct {
 }
 
 // SEC_WINNT_AUTH_IDENTITY_INFO: https://learn.microsoft.com/windows/win32/api/sspi/ns-sspi-sec_winnt_auth_identity_info
-// SEC_WINNT_AUTH_IDENTITY_INFO is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SEC_WINNT_AUTH_IDENTITY_INFO is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SEC_WINNT_AUTH_IDENTITY_INFO struct {
 	Data [9]uint64
 }

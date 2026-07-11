@@ -31,45 +31,46 @@ type IMbnConnection struct {
 var IID_IMbnConnection = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x200d, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // Get_ConnectionID dispatches through IMbnConnection's vtable slot 3.
-func (self *IMbnConnection) Get_ConnectionID(ConnectionID *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnConnection) Get_ConnectionID(ConnectionID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ConnectionID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_InterfaceID dispatches through IMbnConnection's vtable slot 4.
-func (self *IMbnConnection) Get_InterfaceID(InterfaceID *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnConnection) Get_InterfaceID(InterfaceID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InterfaceID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Connect dispatches through IMbnConnection's vtable slot 5.
-func (self *IMbnConnection) Connect(connectionMode MBN_CONNECTION_MODE, strProfile foundation.PWSTR, requestID *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(connectionMode), uintptr(unsafe.Pointer(strProfile)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+func (self *IMbnConnection) Connect(connectionMode MBN_CONNECTION_MODE, strProfile string, requestID *uint32) error {
+	_strProfile := win32.UTF16Ptr(strProfile)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(connectionMode), uintptr(unsafe.Pointer(_strProfile)), uintptr(unsafe.Pointer(requestID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disconnect dispatches through IMbnConnection's vtable slot 6.
-func (self *IMbnConnection) Disconnect(requestID *uint32) foundation.HRESULT {
+func (self *IMbnConnection) Disconnect(requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConnectionState dispatches through IMbnConnection's vtable slot 7.
-func (self *IMbnConnection) GetConnectionState(ConnectionState *MBN_ACTIVATION_STATE, ProfileName *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnConnection) GetConnectionState(ConnectionState *MBN_ACTIVATION_STATE, ProfileName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ConnectionState)), uintptr(unsafe.Pointer(ProfileName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVoiceCallState dispatches through IMbnConnection's vtable slot 8.
-func (self *IMbnConnection) GetVoiceCallState(voiceCallState *MBN_VOICE_CALL_STATE) foundation.HRESULT {
+func (self *IMbnConnection) GetVoiceCallState(voiceCallState *MBN_VOICE_CALL_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(voiceCallState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetActivationNetworkError dispatches through IMbnConnection's vtable slot 9.
-func (self *IMbnConnection) GetActivationNetworkError(networkError *uint32) foundation.HRESULT {
+func (self *IMbnConnection) GetActivationNetworkError(networkError *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(networkError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnConnectionContext: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnconnectioncontext
@@ -82,9 +83,9 @@ type IMbnConnectionContext struct {
 var IID_IMbnConnectionContext = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x200b, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // GetProvisionedContexts dispatches through IMbnConnectionContext's vtable slot 3.
-func (self *IMbnConnectionContext) GetProvisionedContexts(provisionedContexts **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnConnectionContext) GetProvisionedContexts(provisionedContexts **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(provisionedContexts)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnConnectionContextEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnconnectioncontextevents
@@ -97,15 +98,15 @@ type IMbnConnectionContextEvents struct {
 var IID_IMbnConnectionContextEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x200c, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnProvisionedContextListChange dispatches through IMbnConnectionContextEvents's vtable slot 3.
-func (self *IMbnConnectionContextEvents) OnProvisionedContextListChange(newInterface *IMbnConnectionContext) foundation.HRESULT {
+func (self *IMbnConnectionContextEvents) OnProvisionedContextListChange(newInterface *IMbnConnectionContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSetProvisionedContextComplete dispatches through IMbnConnectionContextEvents's vtable slot 4.
-func (self *IMbnConnectionContextEvents) OnSetProvisionedContextComplete(newInterface *IMbnConnectionContext, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnConnectionContextEvents) OnSetProvisionedContextComplete(newInterface *IMbnConnectionContext, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnConnectionEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnconnectionevents
@@ -118,27 +119,27 @@ type IMbnConnectionEvents struct {
 var IID_IMbnConnectionEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x200e, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnConnectComplete dispatches through IMbnConnectionEvents's vtable slot 3.
-func (self *IMbnConnectionEvents) OnConnectComplete(newConnection *IMbnConnection, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnConnectionEvents) OnConnectComplete(newConnection *IMbnConnection, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newConnection)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDisconnectComplete dispatches through IMbnConnectionEvents's vtable slot 4.
-func (self *IMbnConnectionEvents) OnDisconnectComplete(newConnection *IMbnConnection, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnConnectionEvents) OnDisconnectComplete(newConnection *IMbnConnection, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newConnection)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnConnectStateChange dispatches through IMbnConnectionEvents's vtable slot 5.
-func (self *IMbnConnectionEvents) OnConnectStateChange(newConnection *IMbnConnection) foundation.HRESULT {
+func (self *IMbnConnectionEvents) OnConnectStateChange(newConnection *IMbnConnection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newConnection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnVoiceCallStateChange dispatches through IMbnConnectionEvents's vtable slot 6.
-func (self *IMbnConnectionEvents) OnVoiceCallStateChange(newConnection *IMbnConnection) foundation.HRESULT {
+func (self *IMbnConnectionEvents) OnVoiceCallStateChange(newConnection *IMbnConnection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newConnection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnConnectionManager: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnconnectionmanager
@@ -151,15 +152,16 @@ type IMbnConnectionManager struct {
 var IID_IMbnConnectionManager = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x201d, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // GetConnection dispatches through IMbnConnectionManager's vtable slot 3.
-func (self *IMbnConnectionManager) GetConnection(connectionID foundation.PWSTR, mbnConnection **IMbnConnection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(connectionID)), uintptr(unsafe.Pointer(mbnConnection)))
-	return foundation.HRESULT(r1)
+func (self *IMbnConnectionManager) GetConnection(connectionID string, mbnConnection **IMbnConnection) error {
+	_connectionID := win32.UTF16Ptr(connectionID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_connectionID)), uintptr(unsafe.Pointer(mbnConnection)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConnections dispatches through IMbnConnectionManager's vtable slot 4.
-func (self *IMbnConnectionManager) GetConnections(mbnConnections **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnConnectionManager) GetConnections(mbnConnections **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mbnConnections)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnConnectionManagerEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnconnectionmanagerevents
@@ -172,15 +174,15 @@ type IMbnConnectionManagerEvents struct {
 var IID_IMbnConnectionManagerEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x201e, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnConnectionArrival dispatches through IMbnConnectionManagerEvents's vtable slot 3.
-func (self *IMbnConnectionManagerEvents) OnConnectionArrival(newConnection *IMbnConnection) foundation.HRESULT {
+func (self *IMbnConnectionManagerEvents) OnConnectionArrival(newConnection *IMbnConnection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newConnection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnConnectionRemoval dispatches through IMbnConnectionManagerEvents's vtable slot 4.
-func (self *IMbnConnectionManagerEvents) OnConnectionRemoval(oldConnection *IMbnConnection) foundation.HRESULT {
+func (self *IMbnConnectionManagerEvents) OnConnectionRemoval(oldConnection *IMbnConnection) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oldConnection)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnConnectionProfile: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnconnectionprofile
@@ -193,21 +195,22 @@ type IMbnConnectionProfile struct {
 var IID_IMbnConnectionProfile = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2010, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // GetProfileXmlData dispatches through IMbnConnectionProfile's vtable slot 3.
-func (self *IMbnConnectionProfile) GetProfileXmlData(profileData *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnConnectionProfile) GetProfileXmlData(profileData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(profileData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UpdateProfile dispatches through IMbnConnectionProfile's vtable slot 4.
-func (self *IMbnConnectionProfile) UpdateProfile(strProfile foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strProfile)))
-	return foundation.HRESULT(r1)
+func (self *IMbnConnectionProfile) UpdateProfile(strProfile string) error {
+	_strProfile := win32.UTF16Ptr(strProfile)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_strProfile)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IMbnConnectionProfile's vtable slot 5.
-func (self *IMbnConnectionProfile) Delete() foundation.HRESULT {
+func (self *IMbnConnectionProfile) Delete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnConnectionProfileEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnconnectionprofileevents
@@ -220,9 +223,9 @@ type IMbnConnectionProfileEvents struct {
 var IID_IMbnConnectionProfileEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2011, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnProfileUpdate dispatches through IMbnConnectionProfileEvents's vtable slot 3.
-func (self *IMbnConnectionProfileEvents) OnProfileUpdate(newProfile *IMbnConnectionProfile) foundation.HRESULT {
+func (self *IMbnConnectionProfileEvents) OnProfileUpdate(newProfile *IMbnConnectionProfile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnConnectionProfileManager: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnconnectionprofilemanager
@@ -235,21 +238,23 @@ type IMbnConnectionProfileManager struct {
 var IID_IMbnConnectionProfileManager = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x200f, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // GetConnectionProfiles dispatches through IMbnConnectionProfileManager's vtable slot 3.
-func (self *IMbnConnectionProfileManager) GetConnectionProfiles(mbnInterface *IMbnInterface, connectionProfiles **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnConnectionProfileManager) GetConnectionProfiles(mbnInterface *IMbnInterface, connectionProfiles **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mbnInterface)), uintptr(unsafe.Pointer(connectionProfiles)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConnectionProfile dispatches through IMbnConnectionProfileManager's vtable slot 4.
-func (self *IMbnConnectionProfileManager) GetConnectionProfile(mbnInterface *IMbnInterface, profileName foundation.PWSTR, connectionProfile **IMbnConnectionProfile) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mbnInterface)), uintptr(unsafe.Pointer(profileName)), uintptr(unsafe.Pointer(connectionProfile)))
-	return foundation.HRESULT(r1)
+func (self *IMbnConnectionProfileManager) GetConnectionProfile(mbnInterface *IMbnInterface, profileName string, connectionProfile **IMbnConnectionProfile) error {
+	_profileName := win32.UTF16Ptr(profileName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mbnInterface)), uintptr(unsafe.Pointer(_profileName)), uintptr(unsafe.Pointer(connectionProfile)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateConnectionProfile dispatches through IMbnConnectionProfileManager's vtable slot 5.
-func (self *IMbnConnectionProfileManager) CreateConnectionProfile(xmlProfile foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xmlProfile)))
-	return foundation.HRESULT(r1)
+func (self *IMbnConnectionProfileManager) CreateConnectionProfile(xmlProfile string) error {
+	_xmlProfile := win32.UTF16Ptr(xmlProfile)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_xmlProfile)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnConnectionProfileManagerEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnconnectionprofilemanagerevents
@@ -262,15 +267,15 @@ type IMbnConnectionProfileManagerEvents struct {
 var IID_IMbnConnectionProfileManagerEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x201f, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnConnectionProfileArrival dispatches through IMbnConnectionProfileManagerEvents's vtable slot 3.
-func (self *IMbnConnectionProfileManagerEvents) OnConnectionProfileArrival(newConnectionProfile *IMbnConnectionProfile) foundation.HRESULT {
+func (self *IMbnConnectionProfileManagerEvents) OnConnectionProfileArrival(newConnectionProfile *IMbnConnectionProfile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newConnectionProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnConnectionProfileRemoval dispatches through IMbnConnectionProfileManagerEvents's vtable slot 4.
-func (self *IMbnConnectionProfileManagerEvents) OnConnectionProfileRemoval(oldConnectionProfile *IMbnConnectionProfile) foundation.HRESULT {
+func (self *IMbnConnectionProfileManagerEvents) OnConnectionProfileRemoval(oldConnectionProfile *IMbnConnectionProfile) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oldConnectionProfile)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnDeviceService: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbndeviceservice
@@ -283,75 +288,75 @@ type IMbnDeviceService struct {
 var IID_IMbnDeviceService = win32.GUID{Data1: 0xb3bb9a71, Data2: 0xdc70, Data3: 0x4be9, Data4: [8]byte{0xa4, 0xda, 0x78, 0x86, 0xae, 0x8b, 0x19, 0x1b}}
 
 // QuerySupportedCommands dispatches through IMbnDeviceService's vtable slot 3.
-func (self *IMbnDeviceService) QuerySupportedCommands(requestID *uint32) foundation.HRESULT {
+func (self *IMbnDeviceService) QuerySupportedCommands(requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenCommandSession dispatches through IMbnDeviceService's vtable slot 4.
-func (self *IMbnDeviceService) OpenCommandSession(requestID *uint32) foundation.HRESULT {
+func (self *IMbnDeviceService) OpenCommandSession(requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CloseCommandSession dispatches through IMbnDeviceService's vtable slot 5.
-func (self *IMbnDeviceService) CloseCommandSession(requestID *uint32) foundation.HRESULT {
+func (self *IMbnDeviceService) CloseCommandSession(requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCommand dispatches through IMbnDeviceService's vtable slot 6.
-func (self *IMbnDeviceService) SetCommand(commandID uint32, deviceServiceData *systemcom.SAFEARRAY, requestID *uint32) foundation.HRESULT {
+func (self *IMbnDeviceService) SetCommand(commandID uint32, deviceServiceData *systemcom.SAFEARRAY, requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(commandID), uintptr(unsafe.Pointer(deviceServiceData)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // QueryCommand dispatches through IMbnDeviceService's vtable slot 7.
-func (self *IMbnDeviceService) QueryCommand(commandID uint32, deviceServiceData *systemcom.SAFEARRAY, requestID *uint32) foundation.HRESULT {
+func (self *IMbnDeviceService) QueryCommand(commandID uint32, deviceServiceData *systemcom.SAFEARRAY, requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(commandID), uintptr(unsafe.Pointer(deviceServiceData)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenDataSession dispatches through IMbnDeviceService's vtable slot 8.
-func (self *IMbnDeviceService) OpenDataSession(requestID *uint32) foundation.HRESULT {
+func (self *IMbnDeviceService) OpenDataSession(requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CloseDataSession dispatches through IMbnDeviceService's vtable slot 9.
-func (self *IMbnDeviceService) CloseDataSession(requestID *uint32) foundation.HRESULT {
+func (self *IMbnDeviceService) CloseDataSession(requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WriteData dispatches through IMbnDeviceService's vtable slot 10.
-func (self *IMbnDeviceService) WriteData(deviceServiceData *systemcom.SAFEARRAY, requestID *uint32) foundation.HRESULT {
+func (self *IMbnDeviceService) WriteData(deviceServiceData *systemcom.SAFEARRAY, requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceServiceData)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_InterfaceID dispatches through IMbnDeviceService's vtable slot 11.
-func (self *IMbnDeviceService) Get_InterfaceID(InterfaceID *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnDeviceService) Get_InterfaceID(InterfaceID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InterfaceID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_DeviceServiceID dispatches through IMbnDeviceService's vtable slot 12.
-func (self *IMbnDeviceService) Get_DeviceServiceID(DeviceServiceID *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnDeviceService) Get_DeviceServiceID(DeviceServiceID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(DeviceServiceID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsCommandSessionOpen dispatches through IMbnDeviceService's vtable slot 13.
-func (self *IMbnDeviceService) Get_IsCommandSessionOpen(value *foundation.BOOL) foundation.HRESULT {
+func (self *IMbnDeviceService) Get_IsCommandSessionOpen(value *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_IsDataSessionOpen dispatches through IMbnDeviceService's vtable slot 14.
-func (self *IMbnDeviceService) Get_IsDataSessionOpen(value *foundation.BOOL) foundation.HRESULT {
+func (self *IMbnDeviceService) Get_IsDataSessionOpen(value *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 5d3ff196-89ee-49d8-8b60-33ffddffc58d
@@ -363,9 +368,9 @@ type IMbnDeviceServiceStateEvents struct {
 var IID_IMbnDeviceServiceStateEvents = win32.GUID{Data1: 0x5d3ff196, Data2: 0x89ee, Data3: 0x49d8, Data4: [8]byte{0x8b, 0x60, 0x33, 0xff, 0xdd, 0xff, 0xc5, 0x8d}}
 
 // OnSessionsStateChange dispatches through IMbnDeviceServiceStateEvents's vtable slot 3.
-func (self *IMbnDeviceServiceStateEvents) OnSessionsStateChange(interfaceID foundation.BSTR, stateChange MBN_DEVICE_SERVICE_SESSIONS_STATE) foundation.HRESULT {
+func (self *IMbnDeviceServiceStateEvents) OnSessionsStateChange(interfaceID foundation.BSTR, stateChange MBN_DEVICE_SERVICE_SESSIONS_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interfaceID)), uintptr(stateChange))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnDeviceServicesContext: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbndeviceservicescontext
@@ -378,27 +383,28 @@ type IMbnDeviceServicesContext struct {
 var IID_IMbnDeviceServicesContext = win32.GUID{Data1: 0xfc5ac347, Data2: 0x1592, Data3: 0x4068, Data4: [8]byte{0x80, 0xbb, 0x6a, 0x57, 0x58, 0x01, 0x50, 0xd8}}
 
 // EnumerateDeviceServices dispatches through IMbnDeviceServicesContext's vtable slot 3.
-func (self *IMbnDeviceServicesContext) EnumerateDeviceServices(deviceServices **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceServices)))
-	return foundation.HRESULT(r1)
+func (self *IMbnDeviceServicesContext) EnumerateDeviceServices() (*systemcom.SAFEARRAY, error) {
+	var _deviceServices *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_deviceServices)))
+	return _deviceServices, win32.HRESULTError(int32(r1))
 }
 
 // GetDeviceService dispatches through IMbnDeviceServicesContext's vtable slot 4.
-func (self *IMbnDeviceServicesContext) GetDeviceService(deviceServiceID foundation.BSTR, mbnDeviceService **IMbnDeviceService) foundation.HRESULT {
+func (self *IMbnDeviceServicesContext) GetDeviceService(deviceServiceID foundation.BSTR, mbnDeviceService **IMbnDeviceService) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceServiceID)), uintptr(unsafe.Pointer(mbnDeviceService)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MaxCommandSize dispatches through IMbnDeviceServicesContext's vtable slot 5.
-func (self *IMbnDeviceServicesContext) Get_MaxCommandSize(maxCommandSize *uint32) foundation.HRESULT {
+func (self *IMbnDeviceServicesContext) Get_MaxCommandSize(maxCommandSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(maxCommandSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MaxDataSize dispatches through IMbnDeviceServicesContext's vtable slot 6.
-func (self *IMbnDeviceServicesContext) Get_MaxDataSize(maxDataSize *uint32) foundation.HRESULT {
+func (self *IMbnDeviceServicesContext) Get_MaxDataSize(maxDataSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(maxDataSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnDeviceServicesEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbndeviceservicesevents
@@ -411,69 +417,69 @@ type IMbnDeviceServicesEvents struct {
 var IID_IMbnDeviceServicesEvents = win32.GUID{Data1: 0x0a900c19, Data2: 0x6824, Data3: 0x4e97, Data4: [8]byte{0xb7, 0x6e, 0xcf, 0x23, 0x9d, 0x0c, 0xa6, 0x42}}
 
 // OnQuerySupportedCommandsComplete dispatches through IMbnDeviceServicesEvents's vtable slot 3.
-func (self *IMbnDeviceServicesEvents) OnQuerySupportedCommandsComplete(deviceService *IMbnDeviceService, commandIDList *systemcom.SAFEARRAY, status foundation.HRESULT, requestID uint32) foundation.HRESULT {
+func (self *IMbnDeviceServicesEvents) OnQuerySupportedCommandsComplete(deviceService *IMbnDeviceService, commandIDList *systemcom.SAFEARRAY, status foundation.HRESULT, requestID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceService)), uintptr(unsafe.Pointer(commandIDList)), uintptr(status), uintptr(requestID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnOpenCommandSessionComplete dispatches through IMbnDeviceServicesEvents's vtable slot 4.
-func (self *IMbnDeviceServicesEvents) OnOpenCommandSessionComplete(deviceService *IMbnDeviceService, status foundation.HRESULT, requestID uint32) foundation.HRESULT {
+func (self *IMbnDeviceServicesEvents) OnOpenCommandSessionComplete(deviceService *IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceService)), uintptr(status), uintptr(requestID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnCloseCommandSessionComplete dispatches through IMbnDeviceServicesEvents's vtable slot 5.
-func (self *IMbnDeviceServicesEvents) OnCloseCommandSessionComplete(deviceService *IMbnDeviceService, status foundation.HRESULT, requestID uint32) foundation.HRESULT {
+func (self *IMbnDeviceServicesEvents) OnCloseCommandSessionComplete(deviceService *IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceService)), uintptr(status), uintptr(requestID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSetCommandComplete dispatches through IMbnDeviceServicesEvents's vtable slot 6.
-func (self *IMbnDeviceServicesEvents) OnSetCommandComplete(deviceService *IMbnDeviceService, responseID uint32, deviceServiceData *systemcom.SAFEARRAY, status foundation.HRESULT, requestID uint32) foundation.HRESULT {
+func (self *IMbnDeviceServicesEvents) OnSetCommandComplete(deviceService *IMbnDeviceService, responseID uint32, deviceServiceData *systemcom.SAFEARRAY, status foundation.HRESULT, requestID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceService)), uintptr(responseID), uintptr(unsafe.Pointer(deviceServiceData)), uintptr(status), uintptr(requestID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnQueryCommandComplete dispatches through IMbnDeviceServicesEvents's vtable slot 7.
-func (self *IMbnDeviceServicesEvents) OnQueryCommandComplete(deviceService *IMbnDeviceService, responseID uint32, deviceServiceData *systemcom.SAFEARRAY, status foundation.HRESULT, requestID uint32) foundation.HRESULT {
+func (self *IMbnDeviceServicesEvents) OnQueryCommandComplete(deviceService *IMbnDeviceService, responseID uint32, deviceServiceData *systemcom.SAFEARRAY, status foundation.HRESULT, requestID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceService)), uintptr(responseID), uintptr(unsafe.Pointer(deviceServiceData)), uintptr(status), uintptr(requestID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnEventNotification dispatches through IMbnDeviceServicesEvents's vtable slot 8.
-func (self *IMbnDeviceServicesEvents) OnEventNotification(deviceService *IMbnDeviceService, eventID uint32, deviceServiceData *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnDeviceServicesEvents) OnEventNotification(deviceService *IMbnDeviceService, eventID uint32, deviceServiceData *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceService)), uintptr(eventID), uintptr(unsafe.Pointer(deviceServiceData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnOpenDataSessionComplete dispatches through IMbnDeviceServicesEvents's vtable slot 9.
-func (self *IMbnDeviceServicesEvents) OnOpenDataSessionComplete(deviceService *IMbnDeviceService, status foundation.HRESULT, requestID uint32) foundation.HRESULT {
+func (self *IMbnDeviceServicesEvents) OnOpenDataSessionComplete(deviceService *IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceService)), uintptr(status), uintptr(requestID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnCloseDataSessionComplete dispatches through IMbnDeviceServicesEvents's vtable slot 10.
-func (self *IMbnDeviceServicesEvents) OnCloseDataSessionComplete(deviceService *IMbnDeviceService, status foundation.HRESULT, requestID uint32) foundation.HRESULT {
+func (self *IMbnDeviceServicesEvents) OnCloseDataSessionComplete(deviceService *IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceService)), uintptr(status), uintptr(requestID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnWriteDataComplete dispatches through IMbnDeviceServicesEvents's vtable slot 11.
-func (self *IMbnDeviceServicesEvents) OnWriteDataComplete(deviceService *IMbnDeviceService, status foundation.HRESULT, requestID uint32) foundation.HRESULT {
+func (self *IMbnDeviceServicesEvents) OnWriteDataComplete(deviceService *IMbnDeviceService, status foundation.HRESULT, requestID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceService)), uintptr(status), uintptr(requestID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnReadData dispatches through IMbnDeviceServicesEvents's vtable slot 12.
-func (self *IMbnDeviceServicesEvents) OnReadData(deviceService *IMbnDeviceService, deviceServiceData *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnDeviceServicesEvents) OnReadData(deviceService *IMbnDeviceService, deviceServiceData *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(deviceService)), uintptr(unsafe.Pointer(deviceServiceData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnInterfaceStateChange dispatches through IMbnDeviceServicesEvents's vtable slot 13.
-func (self *IMbnDeviceServicesEvents) OnInterfaceStateChange(interfaceID foundation.BSTR, stateChange MBN_DEVICE_SERVICES_INTERFACE_STATE) foundation.HRESULT {
+func (self *IMbnDeviceServicesEvents) OnInterfaceStateChange(interfaceID foundation.BSTR, stateChange MBN_DEVICE_SERVICES_INTERFACE_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interfaceID)), uintptr(stateChange))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnDeviceServicesManager: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbndeviceservicesmanager
@@ -486,9 +492,9 @@ type IMbnDeviceServicesManager struct {
 var IID_IMbnDeviceServicesManager = win32.GUID{Data1: 0x20a26258, Data2: 0x6811, Data3: 0x4478, Data4: [8]byte{0xac, 0x1d, 0x13, 0x32, 0x4e, 0x45, 0xe4, 0x1c}}
 
 // GetDeviceServicesContext dispatches through IMbnDeviceServicesManager's vtable slot 3.
-func (self *IMbnDeviceServicesManager) GetDeviceServicesContext(networkInterfaceID foundation.BSTR, mbnDevicesContext **IMbnDeviceServicesContext) foundation.HRESULT {
+func (self *IMbnDeviceServicesManager) GetDeviceServicesContext(networkInterfaceID foundation.BSTR, mbnDevicesContext **IMbnDeviceServicesContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(networkInterfaceID)), uintptr(unsafe.Pointer(mbnDevicesContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnInterface: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbninterface
@@ -501,69 +507,72 @@ type IMbnInterface struct {
 var IID_IMbnInterface = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2001, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // Get_InterfaceID dispatches through IMbnInterface's vtable slot 3.
-func (self *IMbnInterface) Get_InterfaceID(InterfaceID *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnInterface) Get_InterfaceID(InterfaceID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InterfaceID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInterfaceCapability dispatches through IMbnInterface's vtable slot 4.
-func (self *IMbnInterface) GetInterfaceCapability(interfaceCaps *MBN_INTERFACE_CAPS) foundation.HRESULT {
+func (self *IMbnInterface) GetInterfaceCapability(interfaceCaps *MBN_INTERFACE_CAPS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interfaceCaps)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSubscriberInformation dispatches through IMbnInterface's vtable slot 5.
-func (self *IMbnInterface) GetSubscriberInformation(subscriberInformation **IMbnSubscriberInformation) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(subscriberInformation)))
-	return foundation.HRESULT(r1)
+func (self *IMbnInterface) GetSubscriberInformation() (*IMbnSubscriberInformation, error) {
+	var _subscriberInformation *IMbnSubscriberInformation
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_subscriberInformation)))
+	return _subscriberInformation, win32.HRESULTError(int32(r1))
 }
 
 // GetReadyState dispatches through IMbnInterface's vtable slot 6.
-func (self *IMbnInterface) GetReadyState(readyState *MBN_READY_STATE) foundation.HRESULT {
+func (self *IMbnInterface) GetReadyState(readyState *MBN_READY_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(readyState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // InEmergencyMode dispatches through IMbnInterface's vtable slot 7.
-func (self *IMbnInterface) InEmergencyMode(emergencyMode *foundation.VARIANT_BOOL) foundation.HRESULT {
+func (self *IMbnInterface) InEmergencyMode(emergencyMode *foundation.VARIANT_BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(emergencyMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetHomeProvider dispatches through IMbnInterface's vtable slot 8.
-func (self *IMbnInterface) GetHomeProvider(homeProvider *MBN_PROVIDER) foundation.HRESULT {
+func (self *IMbnInterface) GetHomeProvider(homeProvider *MBN_PROVIDER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(homeProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreferredProviders dispatches through IMbnInterface's vtable slot 9.
-func (self *IMbnInterface) GetPreferredProviders(preferredProviders **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnInterface) GetPreferredProviders(preferredProviders **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(preferredProviders)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPreferredProviders dispatches through IMbnInterface's vtable slot 10.
-func (self *IMbnInterface) SetPreferredProviders(preferredProviders *systemcom.SAFEARRAY, requestID *uint32) foundation.HRESULT {
+func (self *IMbnInterface) SetPreferredProviders(preferredProviders *systemcom.SAFEARRAY, requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(preferredProviders)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVisibleProviders dispatches through IMbnInterface's vtable slot 11.
-func (self *IMbnInterface) GetVisibleProviders(age *uint32, visibleProviders **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(age)), uintptr(unsafe.Pointer(visibleProviders)))
-	return foundation.HRESULT(r1)
+func (self *IMbnInterface) GetVisibleProviders(age *uint32) (*systemcom.SAFEARRAY, error) {
+	var _visibleProviders *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(age)), uintptr(unsafe.Pointer(&_visibleProviders)))
+	return _visibleProviders, win32.HRESULTError(int32(r1))
 }
 
 // ScanNetwork dispatches through IMbnInterface's vtable slot 12.
-func (self *IMbnInterface) ScanNetwork(requestID *uint32) foundation.HRESULT {
+func (self *IMbnInterface) ScanNetwork(requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConnection dispatches through IMbnInterface's vtable slot 13.
-func (self *IMbnInterface) GetConnection(mbnConnection **IMbnConnection) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mbnConnection)))
-	return foundation.HRESULT(r1)
+func (self *IMbnInterface) GetConnection() (*IMbnConnection, error) {
+	var _mbnConnection *IMbnConnection
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(&_mbnConnection)))
+	return _mbnConnection, win32.HRESULTError(int32(r1))
 }
 
 // IMbnInterfaceEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbninterfaceevents
@@ -576,51 +585,51 @@ type IMbnInterfaceEvents struct {
 var IID_IMbnInterfaceEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2002, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnInterfaceCapabilityAvailable dispatches through IMbnInterfaceEvents's vtable slot 3.
-func (self *IMbnInterfaceEvents) OnInterfaceCapabilityAvailable(newInterface *IMbnInterface) foundation.HRESULT {
+func (self *IMbnInterfaceEvents) OnInterfaceCapabilityAvailable(newInterface *IMbnInterface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSubscriberInformationChange dispatches through IMbnInterfaceEvents's vtable slot 4.
-func (self *IMbnInterfaceEvents) OnSubscriberInformationChange(newInterface *IMbnInterface) foundation.HRESULT {
+func (self *IMbnInterfaceEvents) OnSubscriberInformationChange(newInterface *IMbnInterface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnReadyStateChange dispatches through IMbnInterfaceEvents's vtable slot 5.
-func (self *IMbnInterfaceEvents) OnReadyStateChange(newInterface *IMbnInterface) foundation.HRESULT {
+func (self *IMbnInterfaceEvents) OnReadyStateChange(newInterface *IMbnInterface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnEmergencyModeChange dispatches through IMbnInterfaceEvents's vtable slot 6.
-func (self *IMbnInterfaceEvents) OnEmergencyModeChange(newInterface *IMbnInterface) foundation.HRESULT {
+func (self *IMbnInterfaceEvents) OnEmergencyModeChange(newInterface *IMbnInterface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnHomeProviderAvailable dispatches through IMbnInterfaceEvents's vtable slot 7.
-func (self *IMbnInterfaceEvents) OnHomeProviderAvailable(newInterface *IMbnInterface) foundation.HRESULT {
+func (self *IMbnInterfaceEvents) OnHomeProviderAvailable(newInterface *IMbnInterface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnPreferredProvidersChange dispatches through IMbnInterfaceEvents's vtable slot 8.
-func (self *IMbnInterfaceEvents) OnPreferredProvidersChange(newInterface *IMbnInterface) foundation.HRESULT {
+func (self *IMbnInterfaceEvents) OnPreferredProvidersChange(newInterface *IMbnInterface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSetPreferredProvidersComplete dispatches through IMbnInterfaceEvents's vtable slot 9.
-func (self *IMbnInterfaceEvents) OnSetPreferredProvidersComplete(newInterface *IMbnInterface, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnInterfaceEvents) OnSetPreferredProvidersComplete(newInterface *IMbnInterface, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnScanNetworkComplete dispatches through IMbnInterfaceEvents's vtable slot 10.
-func (self *IMbnInterfaceEvents) OnScanNetworkComplete(newInterface *IMbnInterface, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnInterfaceEvents) OnScanNetworkComplete(newInterface *IMbnInterface, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnInterfaceManager: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbninterfacemanager
@@ -633,15 +642,16 @@ type IMbnInterfaceManager struct {
 var IID_IMbnInterfaceManager = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x201b, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // GetInterface dispatches through IMbnInterfaceManager's vtable slot 3.
-func (self *IMbnInterfaceManager) GetInterface(interfaceID foundation.PWSTR, mbnInterface **IMbnInterface) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(interfaceID)), uintptr(unsafe.Pointer(mbnInterface)))
-	return foundation.HRESULT(r1)
+func (self *IMbnInterfaceManager) GetInterface(interfaceID string, mbnInterface **IMbnInterface) error {
+	_interfaceID := win32.UTF16Ptr(interfaceID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_interfaceID)), uintptr(unsafe.Pointer(mbnInterface)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInterfaces dispatches through IMbnInterfaceManager's vtable slot 4.
-func (self *IMbnInterfaceManager) GetInterfaces(mbnInterfaces **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnInterfaceManager) GetInterfaces(mbnInterfaces **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mbnInterfaces)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnInterfaceManagerEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbninterfacemanagerevents
@@ -654,15 +664,15 @@ type IMbnInterfaceManagerEvents struct {
 var IID_IMbnInterfaceManagerEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x201c, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnInterfaceArrival dispatches through IMbnInterfaceManagerEvents's vtable slot 3.
-func (self *IMbnInterfaceManagerEvents) OnInterfaceArrival(newInterface *IMbnInterface) foundation.HRESULT {
+func (self *IMbnInterfaceManagerEvents) OnInterfaceArrival(newInterface *IMbnInterface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnInterfaceRemoval dispatches through IMbnInterfaceManagerEvents's vtable slot 4.
-func (self *IMbnInterfaceManagerEvents) OnInterfaceRemoval(oldInterface *IMbnInterface) foundation.HRESULT {
+func (self *IMbnInterfaceManagerEvents) OnInterfaceRemoval(oldInterface *IMbnInterface) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(oldInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnMultiCarrier: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnmulticarrier
@@ -675,39 +685,40 @@ type IMbnMultiCarrier struct {
 var IID_IMbnMultiCarrier = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2020, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // SetHomeProvider dispatches through IMbnMultiCarrier's vtable slot 3.
-func (self *IMbnMultiCarrier) SetHomeProvider(homeProvider *MBN_PROVIDER2, requestID *uint32) foundation.HRESULT {
+func (self *IMbnMultiCarrier) SetHomeProvider(homeProvider *MBN_PROVIDER2, requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(homeProvider)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPreferredProviders dispatches through IMbnMultiCarrier's vtable slot 4.
-func (self *IMbnMultiCarrier) GetPreferredProviders(preferredMulticarrierProviders **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnMultiCarrier) GetPreferredProviders(preferredMulticarrierProviders **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(preferredMulticarrierProviders)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVisibleProviders dispatches through IMbnMultiCarrier's vtable slot 5.
-func (self *IMbnMultiCarrier) GetVisibleProviders(age *uint32, visibleProviders **systemcom.SAFEARRAY) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(age)), uintptr(unsafe.Pointer(visibleProviders)))
-	return foundation.HRESULT(r1)
+func (self *IMbnMultiCarrier) GetVisibleProviders(age *uint32) (*systemcom.SAFEARRAY, error) {
+	var _visibleProviders *systemcom.SAFEARRAY
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(age)), uintptr(unsafe.Pointer(&_visibleProviders)))
+	return _visibleProviders, win32.HRESULTError(int32(r1))
 }
 
 // GetSupportedCellularClasses dispatches through IMbnMultiCarrier's vtable slot 6.
-func (self *IMbnMultiCarrier) GetSupportedCellularClasses(cellularClasses **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnMultiCarrier) GetSupportedCellularClasses(cellularClasses **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(cellularClasses)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentCellularClass dispatches through IMbnMultiCarrier's vtable slot 7.
-func (self *IMbnMultiCarrier) GetCurrentCellularClass(currentCellularClass *MBN_CELLULAR_CLASS) foundation.HRESULT {
+func (self *IMbnMultiCarrier) GetCurrentCellularClass(currentCellularClass *MBN_CELLULAR_CLASS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(currentCellularClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ScanNetwork dispatches through IMbnMultiCarrier's vtable slot 8.
-func (self *IMbnMultiCarrier) ScanNetwork(requestID *uint32) foundation.HRESULT {
+func (self *IMbnMultiCarrier) ScanNetwork(requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnMultiCarrierEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnmulticarrierevents
@@ -720,33 +731,33 @@ type IMbnMultiCarrierEvents struct {
 var IID_IMbnMultiCarrierEvents = win32.GUID{Data1: 0xdcdddab6, Data2: 0x2021, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnSetHomeProviderComplete dispatches through IMbnMultiCarrierEvents's vtable slot 3.
-func (self *IMbnMultiCarrierEvents) OnSetHomeProviderComplete(mbnInterface *IMbnMultiCarrier, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnMultiCarrierEvents) OnSetHomeProviderComplete(mbnInterface *IMbnMultiCarrier, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mbnInterface)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnCurrentCellularClassChange dispatches through IMbnMultiCarrierEvents's vtable slot 4.
-func (self *IMbnMultiCarrierEvents) OnCurrentCellularClassChange(mbnInterface *IMbnMultiCarrier) foundation.HRESULT {
+func (self *IMbnMultiCarrierEvents) OnCurrentCellularClassChange(mbnInterface *IMbnMultiCarrier) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mbnInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnPreferredProvidersChange dispatches through IMbnMultiCarrierEvents's vtable slot 5.
-func (self *IMbnMultiCarrierEvents) OnPreferredProvidersChange(mbnInterface *IMbnMultiCarrier) foundation.HRESULT {
+func (self *IMbnMultiCarrierEvents) OnPreferredProvidersChange(mbnInterface *IMbnMultiCarrier) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mbnInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnScanNetworkComplete dispatches through IMbnMultiCarrierEvents's vtable slot 6.
-func (self *IMbnMultiCarrierEvents) OnScanNetworkComplete(mbnInterface *IMbnMultiCarrier, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnMultiCarrierEvents) OnScanNetworkComplete(mbnInterface *IMbnMultiCarrier, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mbnInterface)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnInterfaceCapabilityChange dispatches through IMbnMultiCarrierEvents's vtable slot 7.
-func (self *IMbnMultiCarrierEvents) OnInterfaceCapabilityChange(mbnInterface *IMbnMultiCarrier) foundation.HRESULT {
+func (self *IMbnMultiCarrierEvents) OnInterfaceCapabilityChange(mbnInterface *IMbnMultiCarrier) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(mbnInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnPin: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnpin
@@ -759,69 +770,76 @@ type IMbnPin struct {
 var IID_IMbnPin = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2007, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // Get_PinType dispatches through IMbnPin's vtable slot 3.
-func (self *IMbnPin) Get_PinType(PinType *MBN_PIN_TYPE) foundation.HRESULT {
+func (self *IMbnPin) Get_PinType(PinType *MBN_PIN_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PinType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PinFormat dispatches through IMbnPin's vtable slot 4.
-func (self *IMbnPin) Get_PinFormat(PinFormat *MBN_PIN_FORMAT) foundation.HRESULT {
+func (self *IMbnPin) Get_PinFormat(PinFormat *MBN_PIN_FORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PinFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PinLengthMin dispatches through IMbnPin's vtable slot 5.
-func (self *IMbnPin) Get_PinLengthMin(PinLengthMin *uint32) foundation.HRESULT {
+func (self *IMbnPin) Get_PinLengthMin(PinLengthMin *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PinLengthMin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PinLengthMax dispatches through IMbnPin's vtable slot 6.
-func (self *IMbnPin) Get_PinLengthMax(PinLengthMax *uint32) foundation.HRESULT {
+func (self *IMbnPin) Get_PinLengthMax(PinLengthMax *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PinLengthMax)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PinMode dispatches through IMbnPin's vtable slot 7.
-func (self *IMbnPin) Get_PinMode(PinMode *MBN_PIN_MODE) foundation.HRESULT {
+func (self *IMbnPin) Get_PinMode(PinMode *MBN_PIN_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PinMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Enable dispatches through IMbnPin's vtable slot 8.
-func (self *IMbnPin) Enable(pin foundation.PWSTR, requestID *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pin)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+func (self *IMbnPin) Enable(pin string, requestID *uint32) error {
+	_pin := win32.UTF16Ptr(pin)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pin)), uintptr(unsafe.Pointer(requestID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Disable dispatches through IMbnPin's vtable slot 9.
-func (self *IMbnPin) Disable(pin foundation.PWSTR, requestID *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pin)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+func (self *IMbnPin) Disable(pin string, requestID *uint32) error {
+	_pin := win32.UTF16Ptr(pin)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pin)), uintptr(unsafe.Pointer(requestID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Enter dispatches through IMbnPin's vtable slot 10.
-func (self *IMbnPin) Enter(pin foundation.PWSTR, requestID *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pin)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+func (self *IMbnPin) Enter(pin string, requestID *uint32) error {
+	_pin := win32.UTF16Ptr(pin)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pin)), uintptr(unsafe.Pointer(requestID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Change dispatches through IMbnPin's vtable slot 11.
-func (self *IMbnPin) Change(pin foundation.PWSTR, newPin foundation.PWSTR, requestID *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pin)), uintptr(unsafe.Pointer(newPin)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+func (self *IMbnPin) Change(pin string, newPin string, requestID *uint32) error {
+	_pin := win32.UTF16Ptr(pin)
+	_newPin := win32.UTF16Ptr(newPin)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pin)), uintptr(unsafe.Pointer(_newPin)), uintptr(unsafe.Pointer(requestID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Unblock dispatches through IMbnPin's vtable slot 12.
-func (self *IMbnPin) Unblock(puk foundation.PWSTR, newPin foundation.PWSTR, requestID *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(puk)), uintptr(unsafe.Pointer(newPin)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+func (self *IMbnPin) Unblock(puk string, newPin string, requestID *uint32) error {
+	_puk := win32.UTF16Ptr(puk)
+	_newPin := win32.UTF16Ptr(newPin)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_puk)), uintptr(unsafe.Pointer(_newPin)), uintptr(unsafe.Pointer(requestID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPinManager dispatches through IMbnPin's vtable slot 13.
-func (self *IMbnPin) GetPinManager(pinManager **IMbnPinManager) foundation.HRESULT {
+func (self *IMbnPin) GetPinManager(pinManager **IMbnPinManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pinManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnPinEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnpinevents
@@ -834,33 +852,33 @@ type IMbnPinEvents struct {
 var IID_IMbnPinEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2008, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnEnableComplete dispatches through IMbnPinEvents's vtable slot 3.
-func (self *IMbnPinEvents) OnEnableComplete(pin *IMbnPin, pinInfo *MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnPinEvents) OnEnableComplete(pin *IMbnPin, pinInfo *MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pin)), uintptr(unsafe.Pointer(pinInfo)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnDisableComplete dispatches through IMbnPinEvents's vtable slot 4.
-func (self *IMbnPinEvents) OnDisableComplete(pin *IMbnPin, pinInfo *MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnPinEvents) OnDisableComplete(pin *IMbnPin, pinInfo *MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pin)), uintptr(unsafe.Pointer(pinInfo)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnEnterComplete dispatches through IMbnPinEvents's vtable slot 5.
-func (self *IMbnPinEvents) OnEnterComplete(Pin *IMbnPin, pinInfo *MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnPinEvents) OnEnterComplete(Pin *IMbnPin, pinInfo *MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Pin)), uintptr(unsafe.Pointer(pinInfo)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnChangeComplete dispatches through IMbnPinEvents's vtable slot 6.
-func (self *IMbnPinEvents) OnChangeComplete(Pin *IMbnPin, pinInfo *MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnPinEvents) OnChangeComplete(Pin *IMbnPin, pinInfo *MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Pin)), uintptr(unsafe.Pointer(pinInfo)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnUnblockComplete dispatches through IMbnPinEvents's vtable slot 7.
-func (self *IMbnPinEvents) OnUnblockComplete(Pin *IMbnPin, pinInfo *MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnPinEvents) OnUnblockComplete(Pin *IMbnPin, pinInfo *MBN_PIN_INFO, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Pin)), uintptr(unsafe.Pointer(pinInfo)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnPinManager: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnpinmanager
@@ -873,21 +891,21 @@ type IMbnPinManager struct {
 var IID_IMbnPinManager = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2005, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // GetPinList dispatches through IMbnPinManager's vtable slot 3.
-func (self *IMbnPinManager) GetPinList(pinList **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnPinManager) GetPinList(pinList **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pinList)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPin dispatches through IMbnPinManager's vtable slot 4.
-func (self *IMbnPinManager) GetPin(pinType MBN_PIN_TYPE, pin **IMbnPin) foundation.HRESULT {
+func (self *IMbnPinManager) GetPin(pinType MBN_PIN_TYPE, pin **IMbnPin) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(pinType), uintptr(unsafe.Pointer(pin)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPinState dispatches through IMbnPinManager's vtable slot 5.
-func (self *IMbnPinManager) GetPinState(requestID *uint32) foundation.HRESULT {
+func (self *IMbnPinManager) GetPinState(requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnPinManagerEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnpinmanagerevents
@@ -900,9 +918,9 @@ type IMbnPinManagerEvents struct {
 var IID_IMbnPinManagerEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2006, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnPinListAvailable dispatches through IMbnPinManagerEvents's vtable slot 3.
-func (self *IMbnPinManagerEvents) OnPinListAvailable(pinManager *IMbnPinManager) foundation.HRESULT {
+func (self *IMbnPinManagerEvents) OnPinListAvailable(pinManager *IMbnPinManager) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pinManager)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnRadio: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnradio
@@ -915,21 +933,21 @@ type IMbnRadio struct {
 var IID_IMbnRadio = win32.GUID{Data1: 0xdccccab6, Data2: 0x201f, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // Get_SoftwareRadioState dispatches through IMbnRadio's vtable slot 3.
-func (self *IMbnRadio) Get_SoftwareRadioState(SoftwareRadioState *MBN_RADIO) foundation.HRESULT {
+func (self *IMbnRadio) Get_SoftwareRadioState(SoftwareRadioState *MBN_RADIO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SoftwareRadioState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_HardwareRadioState dispatches through IMbnRadio's vtable slot 4.
-func (self *IMbnRadio) Get_HardwareRadioState(HardwareRadioState *MBN_RADIO) foundation.HRESULT {
+func (self *IMbnRadio) Get_HardwareRadioState(HardwareRadioState *MBN_RADIO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(HardwareRadioState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSoftwareRadioState dispatches through IMbnRadio's vtable slot 5.
-func (self *IMbnRadio) SetSoftwareRadioState(radioState MBN_RADIO, requestID *uint32) foundation.HRESULT {
+func (self *IMbnRadio) SetSoftwareRadioState(radioState MBN_RADIO, requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(radioState), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnRadioEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnradioevents
@@ -942,15 +960,15 @@ type IMbnRadioEvents struct {
 var IID_IMbnRadioEvents = win32.GUID{Data1: 0xdcdddab6, Data2: 0x201f, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnRadioStateChange dispatches through IMbnRadioEvents's vtable slot 3.
-func (self *IMbnRadioEvents) OnRadioStateChange(newInterface *IMbnRadio) foundation.HRESULT {
+func (self *IMbnRadioEvents) OnRadioStateChange(newInterface *IMbnRadio) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSetSoftwareRadioStateComplete dispatches through IMbnRadioEvents's vtable slot 4.
-func (self *IMbnRadioEvents) OnSetSoftwareRadioStateComplete(newInterface *IMbnRadio, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnRadioEvents) OnSetSoftwareRadioStateComplete(newInterface *IMbnRadio, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnRegistration: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnregistration
@@ -963,63 +981,64 @@ type IMbnRegistration struct {
 var IID_IMbnRegistration = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2009, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // GetRegisterState dispatches through IMbnRegistration's vtable slot 3.
-func (self *IMbnRegistration) GetRegisterState(registerState *MBN_REGISTER_STATE) foundation.HRESULT {
+func (self *IMbnRegistration) GetRegisterState(registerState *MBN_REGISTER_STATE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(registerState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRegisterMode dispatches through IMbnRegistration's vtable slot 4.
-func (self *IMbnRegistration) GetRegisterMode(registerMode *MBN_REGISTER_MODE) foundation.HRESULT {
+func (self *IMbnRegistration) GetRegisterMode(registerMode *MBN_REGISTER_MODE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(registerMode)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProviderID dispatches through IMbnRegistration's vtable slot 5.
-func (self *IMbnRegistration) GetProviderID(providerID *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnRegistration) GetProviderID(providerID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(providerID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProviderName dispatches through IMbnRegistration's vtable slot 6.
-func (self *IMbnRegistration) GetProviderName(providerName *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnRegistration) GetProviderName(providerName *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(providerName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRoamingText dispatches through IMbnRegistration's vtable slot 7.
-func (self *IMbnRegistration) GetRoamingText(roamingText *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnRegistration) GetRoamingText(roamingText *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(roamingText)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAvailableDataClasses dispatches through IMbnRegistration's vtable slot 8.
-func (self *IMbnRegistration) GetAvailableDataClasses(availableDataClasses *uint32) foundation.HRESULT {
+func (self *IMbnRegistration) GetAvailableDataClasses(availableDataClasses *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(availableDataClasses)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCurrentDataClass dispatches through IMbnRegistration's vtable slot 9.
-func (self *IMbnRegistration) GetCurrentDataClass(currentDataClass *uint32) foundation.HRESULT {
+func (self *IMbnRegistration) GetCurrentDataClass(currentDataClass *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(currentDataClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRegistrationNetworkError dispatches through IMbnRegistration's vtable slot 10.
-func (self *IMbnRegistration) GetRegistrationNetworkError(registrationNetworkError *uint32) foundation.HRESULT {
+func (self *IMbnRegistration) GetRegistrationNetworkError(registrationNetworkError *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(registrationNetworkError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPacketAttachNetworkError dispatches through IMbnRegistration's vtable slot 11.
-func (self *IMbnRegistration) GetPacketAttachNetworkError(packetAttachNetworkError *uint32) foundation.HRESULT {
+func (self *IMbnRegistration) GetPacketAttachNetworkError(packetAttachNetworkError *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(packetAttachNetworkError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRegisterMode dispatches through IMbnRegistration's vtable slot 12.
-func (self *IMbnRegistration) SetRegisterMode(registerMode MBN_REGISTER_MODE, providerID foundation.PWSTR, dataClass uint32, requestID *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(registerMode), uintptr(unsafe.Pointer(providerID)), uintptr(dataClass), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+func (self *IMbnRegistration) SetRegisterMode(registerMode MBN_REGISTER_MODE, providerID string, dataClass uint32, requestID *uint32) error {
+	_providerID := win32.UTF16Ptr(providerID)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(registerMode), uintptr(unsafe.Pointer(_providerID)), uintptr(dataClass), uintptr(unsafe.Pointer(requestID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnRegistrationEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnregistrationevents
@@ -1032,27 +1051,27 @@ type IMbnRegistrationEvents struct {
 var IID_IMbnRegistrationEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x200a, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnRegisterModeAvailable dispatches through IMbnRegistrationEvents's vtable slot 3.
-func (self *IMbnRegistrationEvents) OnRegisterModeAvailable(newInterface *IMbnRegistration) foundation.HRESULT {
+func (self *IMbnRegistrationEvents) OnRegisterModeAvailable(newInterface *IMbnRegistration) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnRegisterStateChange dispatches through IMbnRegistrationEvents's vtable slot 4.
-func (self *IMbnRegistrationEvents) OnRegisterStateChange(newInterface *IMbnRegistration) foundation.HRESULT {
+func (self *IMbnRegistrationEvents) OnRegisterStateChange(newInterface *IMbnRegistration) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnPacketServiceStateChange dispatches through IMbnRegistrationEvents's vtable slot 5.
-func (self *IMbnRegistrationEvents) OnPacketServiceStateChange(newInterface *IMbnRegistration) foundation.HRESULT {
+func (self *IMbnRegistrationEvents) OnPacketServiceStateChange(newInterface *IMbnRegistration) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSetRegisterModeComplete dispatches through IMbnRegistrationEvents's vtable slot 6.
-func (self *IMbnRegistrationEvents) OnSetRegisterModeComplete(newInterface *IMbnRegistration, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnRegistrationEvents) OnSetRegisterModeComplete(newInterface *IMbnRegistration, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnServiceActivation: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnserviceactivation
@@ -1065,9 +1084,9 @@ type IMbnServiceActivation struct {
 var IID_IMbnServiceActivation = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2017, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // Activate dispatches through IMbnServiceActivation's vtable slot 3.
-func (self *IMbnServiceActivation) Activate(vendorSpecificData *systemcom.SAFEARRAY, requestID *uint32) foundation.HRESULT {
+func (self *IMbnServiceActivation) Activate(vendorSpecificData *systemcom.SAFEARRAY, requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(vendorSpecificData)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnServiceActivationEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnserviceactivationevents
@@ -1080,9 +1099,9 @@ type IMbnServiceActivationEvents struct {
 var IID_IMbnServiceActivationEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2018, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnActivationComplete dispatches through IMbnServiceActivationEvents's vtable slot 3.
-func (self *IMbnServiceActivationEvents) OnActivationComplete(serviceActivation *IMbnServiceActivation, vendorSpecificData *systemcom.SAFEARRAY, requestID uint32, status foundation.HRESULT, networkError uint32) foundation.HRESULT {
+func (self *IMbnServiceActivationEvents) OnActivationComplete(serviceActivation *IMbnServiceActivation, vendorSpecificData *systemcom.SAFEARRAY, requestID uint32, status foundation.HRESULT, networkError uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(serviceActivation)), uintptr(unsafe.Pointer(vendorSpecificData)), uintptr(requestID), uintptr(status), uintptr(networkError))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnSignal: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnsignal
@@ -1095,15 +1114,15 @@ type IMbnSignal struct {
 var IID_IMbnSignal = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2003, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // GetSignalStrength dispatches through IMbnSignal's vtable slot 3.
-func (self *IMbnSignal) GetSignalStrength(signalStrength *uint32) foundation.HRESULT {
+func (self *IMbnSignal) GetSignalStrength(signalStrength *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signalStrength)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSignalError dispatches through IMbnSignal's vtable slot 4.
-func (self *IMbnSignal) GetSignalError(signalError *uint32) foundation.HRESULT {
+func (self *IMbnSignal) GetSignalError(signalError *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signalError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnSignalEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnsignalevents
@@ -1116,9 +1135,9 @@ type IMbnSignalEvents struct {
 var IID_IMbnSignalEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2004, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnSignalStateChange dispatches through IMbnSignalEvents's vtable slot 3.
-func (self *IMbnSignalEvents) OnSignalStateChange(newInterface *IMbnSignal) foundation.HRESULT {
+func (self *IMbnSignalEvents) OnSignalStateChange(newInterface *IMbnSignal) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(newInterface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnSms: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnsms
@@ -1131,51 +1150,53 @@ type IMbnSms struct {
 var IID_IMbnSms = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2015, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // GetSmsConfiguration dispatches through IMbnSms's vtable slot 3.
-func (self *IMbnSms) GetSmsConfiguration(smsConfiguration **IMbnSmsConfiguration) foundation.HRESULT {
+func (self *IMbnSms) GetSmsConfiguration(smsConfiguration **IMbnSmsConfiguration) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(smsConfiguration)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSmsConfiguration dispatches through IMbnSms's vtable slot 4.
-func (self *IMbnSms) SetSmsConfiguration(smsConfiguration *IMbnSmsConfiguration, requestID *uint32) foundation.HRESULT {
+func (self *IMbnSms) SetSmsConfiguration(smsConfiguration *IMbnSmsConfiguration, requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(smsConfiguration)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SmsSendPdu dispatches through IMbnSms's vtable slot 5.
-func (self *IMbnSms) SmsSendPdu(pduData foundation.PWSTR, size byte, requestID *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pduData)), uintptr(size), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+func (self *IMbnSms) SmsSendPdu(pduData string, size byte, requestID *uint32) error {
+	_pduData := win32.UTF16Ptr(pduData)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pduData)), uintptr(size), uintptr(unsafe.Pointer(requestID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SmsSendCdma dispatches through IMbnSms's vtable slot 6.
-func (self *IMbnSms) SmsSendCdma(address foundation.PWSTR, encoding MBN_SMS_CDMA_ENCODING, language MBN_SMS_CDMA_LANG, sizeInCharacters uint32, message *systemcom.SAFEARRAY, requestID *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(address)), uintptr(encoding), uintptr(language), uintptr(sizeInCharacters), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+func (self *IMbnSms) SmsSendCdma(address string, encoding MBN_SMS_CDMA_ENCODING, language MBN_SMS_CDMA_LANG, sizeInCharacters uint32, message *systemcom.SAFEARRAY, requestID *uint32) error {
+	_address := win32.UTF16Ptr(address)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_address)), uintptr(encoding), uintptr(language), uintptr(sizeInCharacters), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(requestID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SmsSendCdmaPdu dispatches through IMbnSms's vtable slot 7.
-func (self *IMbnSms) SmsSendCdmaPdu(message *systemcom.SAFEARRAY, requestID *uint32) foundation.HRESULT {
+func (self *IMbnSms) SmsSendCdmaPdu(message *systemcom.SAFEARRAY, requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SmsRead dispatches through IMbnSms's vtable slot 8.
-func (self *IMbnSms) SmsRead(smsFilter *MBN_SMS_FILTER, smsFormat MBN_SMS_FORMAT, requestID *uint32) foundation.HRESULT {
+func (self *IMbnSms) SmsRead(smsFilter *MBN_SMS_FILTER, smsFormat MBN_SMS_FORMAT, requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(smsFilter)), uintptr(smsFormat), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SmsDelete dispatches through IMbnSms's vtable slot 9.
-func (self *IMbnSms) SmsDelete(smsFilter *MBN_SMS_FILTER, requestID *uint32) foundation.HRESULT {
+func (self *IMbnSms) SmsDelete(smsFilter *MBN_SMS_FILTER, requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(smsFilter)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSmsStatus dispatches through IMbnSms's vtable slot 10.
-func (self *IMbnSms) GetSmsStatus(smsStatusInfo *MBN_SMS_STATUS_INFO) foundation.HRESULT {
+func (self *IMbnSms) GetSmsStatus(smsStatusInfo *MBN_SMS_STATUS_INFO) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(smsStatusInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnSmsConfiguration: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnsmsconfiguration
@@ -1188,39 +1209,40 @@ type IMbnSmsConfiguration struct {
 var IID_IMbnSmsConfiguration = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2012, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // Get_ServiceCenterAddress dispatches through IMbnSmsConfiguration's vtable slot 3.
-func (self *IMbnSmsConfiguration) Get_ServiceCenterAddress(scAddress *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnSmsConfiguration) Get_ServiceCenterAddress(scAddress *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scAddress)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_ServiceCenterAddress dispatches through IMbnSmsConfiguration's vtable slot 4.
-func (self *IMbnSmsConfiguration) Put_ServiceCenterAddress(scAddress foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(scAddress)))
-	return foundation.HRESULT(r1)
+func (self *IMbnSmsConfiguration) Put_ServiceCenterAddress(scAddress string) error {
+	_scAddress := win32.UTF16Ptr(scAddress)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_scAddress)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_MaxMessageIndex dispatches through IMbnSmsConfiguration's vtable slot 5.
-func (self *IMbnSmsConfiguration) Get_MaxMessageIndex(index *uint32) foundation.HRESULT {
+func (self *IMbnSmsConfiguration) Get_MaxMessageIndex(index *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(index)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_CdmaShortMsgSize dispatches through IMbnSmsConfiguration's vtable slot 6.
-func (self *IMbnSmsConfiguration) Get_CdmaShortMsgSize(shortMsgSize *uint32) foundation.HRESULT {
+func (self *IMbnSmsConfiguration) Get_CdmaShortMsgSize(shortMsgSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(shortMsgSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SmsFormat dispatches through IMbnSmsConfiguration's vtable slot 7.
-func (self *IMbnSmsConfiguration) Get_SmsFormat(smsFormat *MBN_SMS_FORMAT) foundation.HRESULT {
+func (self *IMbnSmsConfiguration) Get_SmsFormat(smsFormat *MBN_SMS_FORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(smsFormat)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Put_SmsFormat dispatches through IMbnSmsConfiguration's vtable slot 8.
-func (self *IMbnSmsConfiguration) Put_SmsFormat(smsFormat MBN_SMS_FORMAT) foundation.HRESULT {
+func (self *IMbnSmsConfiguration) Put_SmsFormat(smsFormat MBN_SMS_FORMAT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(smsFormat))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnSmsEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnsmsevents
@@ -1233,45 +1255,45 @@ type IMbnSmsEvents struct {
 var IID_IMbnSmsEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2016, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnSmsConfigurationChange dispatches through IMbnSmsEvents's vtable slot 3.
-func (self *IMbnSmsEvents) OnSmsConfigurationChange(sms *IMbnSms) foundation.HRESULT {
+func (self *IMbnSmsEvents) OnSmsConfigurationChange(sms *IMbnSms) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sms)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSetSmsConfigurationComplete dispatches through IMbnSmsEvents's vtable slot 4.
-func (self *IMbnSmsEvents) OnSetSmsConfigurationComplete(sms *IMbnSms, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnSmsEvents) OnSetSmsConfigurationComplete(sms *IMbnSms, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sms)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSmsSendComplete dispatches through IMbnSmsEvents's vtable slot 5.
-func (self *IMbnSmsEvents) OnSmsSendComplete(sms *IMbnSms, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnSmsEvents) OnSmsSendComplete(sms *IMbnSms, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sms)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSmsReadComplete dispatches through IMbnSmsEvents's vtable slot 6.
-func (self *IMbnSmsEvents) OnSmsReadComplete(sms *IMbnSms, smsFormat MBN_SMS_FORMAT, readMsgs *systemcom.SAFEARRAY, moreMsgs foundation.VARIANT_BOOL, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnSmsEvents) OnSmsReadComplete(sms *IMbnSms, smsFormat MBN_SMS_FORMAT, readMsgs *systemcom.SAFEARRAY, moreMsgs foundation.VARIANT_BOOL, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sms)), uintptr(smsFormat), uintptr(unsafe.Pointer(readMsgs)), uintptr(moreMsgs), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSmsNewClass0Message dispatches through IMbnSmsEvents's vtable slot 7.
-func (self *IMbnSmsEvents) OnSmsNewClass0Message(sms *IMbnSms, smsFormat MBN_SMS_FORMAT, readMsgs *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnSmsEvents) OnSmsNewClass0Message(sms *IMbnSms, smsFormat MBN_SMS_FORMAT, readMsgs *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sms)), uintptr(smsFormat), uintptr(unsafe.Pointer(readMsgs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSmsDeleteComplete dispatches through IMbnSmsEvents's vtable slot 8.
-func (self *IMbnSmsEvents) OnSmsDeleteComplete(sms *IMbnSms, requestID uint32, status foundation.HRESULT) foundation.HRESULT {
+func (self *IMbnSmsEvents) OnSmsDeleteComplete(sms *IMbnSms, requestID uint32, status foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sms)), uintptr(requestID), uintptr(status))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSmsStatusChange dispatches through IMbnSmsEvents's vtable slot 9.
-func (self *IMbnSmsEvents) OnSmsStatusChange(sms *IMbnSms) foundation.HRESULT {
+func (self *IMbnSmsEvents) OnSmsStatusChange(sms *IMbnSms) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sms)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnSmsReadMsgPdu: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnsmsreadmsgpdu
@@ -1284,27 +1306,27 @@ type IMbnSmsReadMsgPdu struct {
 var IID_IMbnSmsReadMsgPdu = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2013, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // Get_Index dispatches through IMbnSmsReadMsgPdu's vtable slot 3.
-func (self *IMbnSmsReadMsgPdu) Get_Index(Index *uint32) foundation.HRESULT {
+func (self *IMbnSmsReadMsgPdu) Get_Index(Index *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Index)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Status dispatches through IMbnSmsReadMsgPdu's vtable slot 4.
-func (self *IMbnSmsReadMsgPdu) Get_Status(Status *MBN_MSG_STATUS) foundation.HRESULT {
+func (self *IMbnSmsReadMsgPdu) Get_Status(Status *MBN_MSG_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Status)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_PduData dispatches through IMbnSmsReadMsgPdu's vtable slot 5.
-func (self *IMbnSmsReadMsgPdu) Get_PduData(PduData *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnSmsReadMsgPdu) Get_PduData(PduData *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(PduData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Message dispatches through IMbnSmsReadMsgPdu's vtable slot 6.
-func (self *IMbnSmsReadMsgPdu) Get_Message(Message **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnSmsReadMsgPdu) Get_Message(Message **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Message)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnSmsReadMsgTextCdma: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnsmsreadmsgtextcdma
@@ -1317,51 +1339,51 @@ type IMbnSmsReadMsgTextCdma struct {
 var IID_IMbnSmsReadMsgTextCdma = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2014, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // Get_Index dispatches through IMbnSmsReadMsgTextCdma's vtable slot 3.
-func (self *IMbnSmsReadMsgTextCdma) Get_Index(Index *uint32) foundation.HRESULT {
+func (self *IMbnSmsReadMsgTextCdma) Get_Index(Index *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Index)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Status dispatches through IMbnSmsReadMsgTextCdma's vtable slot 4.
-func (self *IMbnSmsReadMsgTextCdma) Get_Status(Status *MBN_MSG_STATUS) foundation.HRESULT {
+func (self *IMbnSmsReadMsgTextCdma) Get_Status(Status *MBN_MSG_STATUS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Status)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Address dispatches through IMbnSmsReadMsgTextCdma's vtable slot 5.
-func (self *IMbnSmsReadMsgTextCdma) Get_Address(Address *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnSmsReadMsgTextCdma) Get_Address(Address *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Address)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Timestamp dispatches through IMbnSmsReadMsgTextCdma's vtable slot 6.
-func (self *IMbnSmsReadMsgTextCdma) Get_Timestamp(Timestamp *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnSmsReadMsgTextCdma) Get_Timestamp(Timestamp *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Timestamp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_EncodingID dispatches through IMbnSmsReadMsgTextCdma's vtable slot 7.
-func (self *IMbnSmsReadMsgTextCdma) Get_EncodingID(EncodingID *MBN_SMS_CDMA_ENCODING) foundation.HRESULT {
+func (self *IMbnSmsReadMsgTextCdma) Get_EncodingID(EncodingID *MBN_SMS_CDMA_ENCODING) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(EncodingID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_LanguageID dispatches through IMbnSmsReadMsgTextCdma's vtable slot 8.
-func (self *IMbnSmsReadMsgTextCdma) Get_LanguageID(LanguageID *MBN_SMS_CDMA_LANG) foundation.HRESULT {
+func (self *IMbnSmsReadMsgTextCdma) Get_LanguageID(LanguageID *MBN_SMS_CDMA_LANG) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(LanguageID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SizeInCharacters dispatches through IMbnSmsReadMsgTextCdma's vtable slot 9.
-func (self *IMbnSmsReadMsgTextCdma) Get_SizeInCharacters(SizeInCharacters *uint32) foundation.HRESULT {
+func (self *IMbnSmsReadMsgTextCdma) Get_SizeInCharacters(SizeInCharacters *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SizeInCharacters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_Message dispatches through IMbnSmsReadMsgTextCdma's vtable slot 10.
-func (self *IMbnSmsReadMsgTextCdma) Get_Message(Message **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnSmsReadMsgTextCdma) Get_Message(Message **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Message)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnSubscriberInformation: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnsubscriberinformation
@@ -1374,21 +1396,21 @@ type IMbnSubscriberInformation struct {
 var IID_IMbnSubscriberInformation = win32.GUID{Data1: 0x459ecc43, Data2: 0xbcf5, Data3: 0x11dc, Data4: [8]byte{0xa8, 0xa8, 0x00, 0x13, 0x21, 0xf1, 0x40, 0x5f}}
 
 // Get_SubscriberID dispatches through IMbnSubscriberInformation's vtable slot 3.
-func (self *IMbnSubscriberInformation) Get_SubscriberID(SubscriberID *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnSubscriberInformation) Get_SubscriberID(SubscriberID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SubscriberID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_SimIccID dispatches through IMbnSubscriberInformation's vtable slot 4.
-func (self *IMbnSubscriberInformation) Get_SimIccID(SimIccID *foundation.BSTR) foundation.HRESULT {
+func (self *IMbnSubscriberInformation) Get_SimIccID(SimIccID *foundation.BSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SimIccID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Get_TelephoneNumbers dispatches through IMbnSubscriberInformation's vtable slot 5.
-func (self *IMbnSubscriberInformation) Get_TelephoneNumbers(TelephoneNumbers **systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnSubscriberInformation) Get_TelephoneNumbers(TelephoneNumbers **systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(TelephoneNumbers)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnVendorSpecificEvents: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnvendorspecificevents
@@ -1401,15 +1423,15 @@ type IMbnVendorSpecificEvents struct {
 var IID_IMbnVendorSpecificEvents = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x201a, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // OnEventNotification dispatches through IMbnVendorSpecificEvents's vtable slot 3.
-func (self *IMbnVendorSpecificEvents) OnEventNotification(vendorOperation *IMbnVendorSpecificOperation, vendorSpecificData *systemcom.SAFEARRAY) foundation.HRESULT {
+func (self *IMbnVendorSpecificEvents) OnEventNotification(vendorOperation *IMbnVendorSpecificOperation, vendorSpecificData *systemcom.SAFEARRAY) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(vendorOperation)), uintptr(unsafe.Pointer(vendorSpecificData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnSetVendorSpecificComplete dispatches through IMbnVendorSpecificEvents's vtable slot 4.
-func (self *IMbnVendorSpecificEvents) OnSetVendorSpecificComplete(vendorOperation *IMbnVendorSpecificOperation, vendorSpecificData *systemcom.SAFEARRAY, requestID uint32) foundation.HRESULT {
+func (self *IMbnVendorSpecificEvents) OnSetVendorSpecificComplete(vendorOperation *IMbnVendorSpecificOperation, vendorSpecificData *systemcom.SAFEARRAY, requestID uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(vendorOperation)), uintptr(unsafe.Pointer(vendorSpecificData)), uintptr(requestID))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMbnVendorSpecificOperation: https://learn.microsoft.com/windows/win32/api/mbnapi/nn-mbnapi-imbnvendorspecificoperation
@@ -1422,7 +1444,7 @@ type IMbnVendorSpecificOperation struct {
 var IID_IMbnVendorSpecificOperation = win32.GUID{Data1: 0xdcbbbab6, Data2: 0x2019, Data3: 0x4bbb, Data4: [8]byte{0xaa, 0xee, 0x33, 0x8e, 0x36, 0x8a, 0xf6, 0xfa}}
 
 // SetVendorSpecific dispatches through IMbnVendorSpecificOperation's vtable slot 3.
-func (self *IMbnVendorSpecificOperation) SetVendorSpecific(vendorSpecificData *systemcom.SAFEARRAY, requestID *uint32) foundation.HRESULT {
+func (self *IMbnVendorSpecificOperation) SetVendorSpecific(vendorSpecificData *systemcom.SAFEARRAY, requestID *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(vendorSpecificData)), uintptr(unsafe.Pointer(requestID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

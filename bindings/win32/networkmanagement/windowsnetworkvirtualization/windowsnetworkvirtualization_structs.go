@@ -18,8 +18,8 @@ type WNV_CUSTOMER_ADDRESS_CHANGE_PARAM struct {
 	NotificationReason WNV_CA_NOTIFICATION_TYPE
 }
 
-// WNV_IP_ADDRESS_IP_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WNV_IP_ADDRESS_IP_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WNV_IP_ADDRESS_IP_e__Union struct {
 	Data [4]uint32
 }
@@ -37,8 +37,8 @@ type WNV_NOTIFICATION_PARAM struct {
 	Buffer               *byte
 }
 
-// WNV_OBJECT_CHANGE_PARAM_ObjectParam_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// WNV_OBJECT_CHANGE_PARAM_ObjectParam_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type WNV_OBJECT_CHANGE_PARAM_ObjectParam_e__Union struct {
 	Data [13]uint32
 }

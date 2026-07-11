@@ -23,93 +23,94 @@ type ICeeGen struct {
 var IID_ICeeGen = win32.GUID{Data1: 0x7ed1bdff, Data2: 0x8e36, Data3: 0x11d2, Data4: [8]byte{0x9c, 0x56, 0x00, 0xa0, 0xc9, 0xb7, 0xcc, 0x45}}
 
 // EmitString dispatches through ICeeGen's vtable slot 3.
-func (self *ICeeGen) EmitString(lpString foundation.PWSTR, RVA *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpString)), uintptr(unsafe.Pointer(RVA)))
-	return foundation.HRESULT(r1)
+func (self *ICeeGen) EmitString(lpString string, RVA *uint32) error {
+	_lpString := win32.UTF16Ptr(lpString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpString)), uintptr(unsafe.Pointer(RVA)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetString dispatches through ICeeGen's vtable slot 4.
-func (self *ICeeGen) GetString(RVA uint32, lpString *foundation.PWSTR) foundation.HRESULT {
+func (self *ICeeGen) GetString(RVA uint32, lpString *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(RVA), uintptr(unsafe.Pointer(lpString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AllocateMethodBuffer dispatches through ICeeGen's vtable slot 5.
-func (self *ICeeGen) AllocateMethodBuffer(cchBuffer uint32, lpBuffer **byte, RVA *uint32) foundation.HRESULT {
+func (self *ICeeGen) AllocateMethodBuffer(cchBuffer uint32, lpBuffer **byte, RVA *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cchBuffer), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(RVA)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMethodBuffer dispatches through ICeeGen's vtable slot 6.
-func (self *ICeeGen) GetMethodBuffer(RVA uint32, lpBuffer **byte) foundation.HRESULT {
+func (self *ICeeGen) GetMethodBuffer(RVA uint32, lpBuffer **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(RVA), uintptr(unsafe.Pointer(lpBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIMapTokenIface dispatches through ICeeGen's vtable slot 7.
-func (self *ICeeGen) GetIMapTokenIface(pIMapToken **systemcom.IUnknown) foundation.HRESULT {
+func (self *ICeeGen) GetIMapTokenIface(pIMapToken **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIMapToken)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GenerateCeeFile dispatches through ICeeGen's vtable slot 8.
-func (self *ICeeGen) GenerateCeeFile() foundation.HRESULT {
+func (self *ICeeGen) GenerateCeeFile() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIlSection dispatches through ICeeGen's vtable slot 9.
-func (self *ICeeGen) GetIlSection(section *unsafe.Pointer) foundation.HRESULT {
+func (self *ICeeGen) GetIlSection(section *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(section)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStringSection dispatches through ICeeGen's vtable slot 10.
-func (self *ICeeGen) GetStringSection(section *unsafe.Pointer) foundation.HRESULT {
+func (self *ICeeGen) GetStringSection(section *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(section)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddSectionReloc dispatches through ICeeGen's vtable slot 11.
-func (self *ICeeGen) AddSectionReloc(section unsafe.Pointer, offset uint32, relativeTo unsafe.Pointer, relocType CeeSectionRelocType) foundation.HRESULT {
+func (self *ICeeGen) AddSectionReloc(section unsafe.Pointer, offset uint32, relativeTo unsafe.Pointer, relocType CeeSectionRelocType) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(section)), uintptr(offset), uintptr(unsafe.Pointer(relativeTo)), uintptr(relocType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSectionCreate dispatches through ICeeGen's vtable slot 12.
-func (self *ICeeGen) GetSectionCreate(name foundation.PSTR, flags uint32, section *unsafe.Pointer) foundation.HRESULT {
+func (self *ICeeGen) GetSectionCreate(name foundation.PSTR, flags uint32, section *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(flags), uintptr(unsafe.Pointer(section)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSectionDataLen dispatches through ICeeGen's vtable slot 13.
-func (self *ICeeGen) GetSectionDataLen(section unsafe.Pointer, dataLen *uint32) foundation.HRESULT {
+func (self *ICeeGen) GetSectionDataLen(section unsafe.Pointer, dataLen *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(section)), uintptr(unsafe.Pointer(dataLen)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSectionBlock dispatches through ICeeGen's vtable slot 14.
-func (self *ICeeGen) GetSectionBlock(section unsafe.Pointer, len_ uint32, align uint32, ppBytes *unsafe.Pointer) foundation.HRESULT {
+func (self *ICeeGen) GetSectionBlock(section unsafe.Pointer, len_ uint32, align uint32, ppBytes *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(section)), uintptr(len_), uintptr(align), uintptr(unsafe.Pointer(ppBytes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TruncateSection dispatches through ICeeGen's vtable slot 15.
-func (self *ICeeGen) TruncateSection(section unsafe.Pointer, len_ uint32) foundation.HRESULT {
+func (self *ICeeGen) TruncateSection(section unsafe.Pointer, len_ uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(section)), uintptr(len_))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GenerateCeeMemoryImage dispatches through ICeeGen's vtable slot 16.
-func (self *ICeeGen) GenerateCeeMemoryImage(ppImage *unsafe.Pointer) foundation.HRESULT {
+func (self *ICeeGen) GenerateCeeMemoryImage(ppImage *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppImage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ComputePointer dispatches through ICeeGen's vtable slot 17.
-func (self *ICeeGen) ComputePointer(section unsafe.Pointer, RVA uint32, lpBuffer **byte) foundation.HRESULT {
+func (self *ICeeGen) ComputePointer(section unsafe.Pointer, RVA uint32, lpBuffer **byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(section)), uintptr(RVA), uintptr(unsafe.Pointer(lpBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d0e80dd3-12d4-11d3-b39d-00c04ff81795
@@ -121,9 +122,9 @@ type IHostFilter struct {
 var IID_IHostFilter = win32.GUID{Data1: 0xd0e80dd3, Data2: 0x12d4, Data3: 0x11d3, Data4: [8]byte{0xb3, 0x9d, 0x00, 0xc0, 0x4f, 0xf8, 0x17, 0x95}}
 
 // MarkToken dispatches through IHostFilter's vtable slot 3.
-func (self *IHostFilter) MarkToken(tk uint32) foundation.HRESULT {
+func (self *IHostFilter) MarkToken(tk uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(tk))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 06a3ea8b-0225-11d1-bf72-00c04fc31e12
@@ -135,9 +136,9 @@ type IMapToken struct {
 var IID_IMapToken = win32.GUID{Data1: 0x06a3ea8b, Data2: 0x0225, Data3: 0x11d1, Data4: [8]byte{0xbf, 0x72, 0x00, 0xc0, 0x4f, 0xc3, 0x1e, 0x12}}
 
 // Map dispatches through IMapToken's vtable slot 3.
-func (self *IMapToken) Map(tkImp uint32, tkEmit uint32) foundation.HRESULT {
+func (self *IMapToken) Map(tkImp uint32, tkEmit uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(tkImp), uintptr(tkEmit))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 211ef15b-5317-4438-b196-dec87b887693
@@ -149,63 +150,70 @@ type IMetaDataAssemblyEmit struct {
 var IID_IMetaDataAssemblyEmit = win32.GUID{Data1: 0x211ef15b, Data2: 0x5317, Data3: 0x4438, Data4: [8]byte{0xb1, 0x96, 0xde, 0xc8, 0x7b, 0x88, 0x76, 0x93}}
 
 // DefineAssembly dispatches through IMetaDataAssemblyEmit's vtable slot 3.
-func (self *IMetaDataAssemblyEmit) DefineAssembly(pbPublicKey unsafe.Pointer, cbPublicKey uint32, ulHashAlgId uint32, szName foundation.PWSTR, pMetaData *ASSEMBLYMETADATA, dwAssemblyFlags uint32, pma *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPublicKey)), uintptr(cbPublicKey), uintptr(ulHashAlgId), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pMetaData)), uintptr(dwAssemblyFlags), uintptr(unsafe.Pointer(pma)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataAssemblyEmit) DefineAssembly(pbPublicKey unsafe.Pointer, cbPublicKey uint32, ulHashAlgId uint32, szName string, pMetaData *ASSEMBLYMETADATA, dwAssemblyFlags uint32, pma *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPublicKey)), uintptr(cbPublicKey), uintptr(ulHashAlgId), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(pMetaData)), uintptr(dwAssemblyFlags), uintptr(unsafe.Pointer(pma)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineAssemblyRef dispatches through IMetaDataAssemblyEmit's vtable slot 4.
-func (self *IMetaDataAssemblyEmit) DefineAssemblyRef(pbPublicKeyOrToken unsafe.Pointer, cbPublicKeyOrToken uint32, szName foundation.PWSTR, pMetaData *ASSEMBLYMETADATA, pbHashValue unsafe.Pointer, cbHashValue uint32, dwAssemblyRefFlags uint32, pmdar *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPublicKeyOrToken)), uintptr(cbPublicKeyOrToken), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pMetaData)), uintptr(unsafe.Pointer(pbHashValue)), uintptr(cbHashValue), uintptr(dwAssemblyRefFlags), uintptr(unsafe.Pointer(pmdar)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataAssemblyEmit) DefineAssemblyRef(pbPublicKeyOrToken unsafe.Pointer, cbPublicKeyOrToken uint32, szName string, pMetaData *ASSEMBLYMETADATA, pbHashValue unsafe.Pointer, cbHashValue uint32, dwAssemblyRefFlags uint32, pmdar *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbPublicKeyOrToken)), uintptr(cbPublicKeyOrToken), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(pMetaData)), uintptr(unsafe.Pointer(pbHashValue)), uintptr(cbHashValue), uintptr(dwAssemblyRefFlags), uintptr(unsafe.Pointer(pmdar)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineFile dispatches through IMetaDataAssemblyEmit's vtable slot 5.
-func (self *IMetaDataAssemblyEmit) DefineFile(szName foundation.PWSTR, pbHashValue unsafe.Pointer, cbHashValue uint32, dwFileFlags uint32, pmdf *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pbHashValue)), uintptr(cbHashValue), uintptr(dwFileFlags), uintptr(unsafe.Pointer(pmdf)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataAssemblyEmit) DefineFile(szName string, pbHashValue unsafe.Pointer, cbHashValue uint32, dwFileFlags uint32, pmdf *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(pbHashValue)), uintptr(cbHashValue), uintptr(dwFileFlags), uintptr(unsafe.Pointer(pmdf)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineExportedType dispatches through IMetaDataAssemblyEmit's vtable slot 6.
-func (self *IMetaDataAssemblyEmit) DefineExportedType(szName foundation.PWSTR, tkImplementation uint32, tkTypeDef uint32, dwExportedTypeFlags uint32, pmdct *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szName)), uintptr(tkImplementation), uintptr(tkTypeDef), uintptr(dwExportedTypeFlags), uintptr(unsafe.Pointer(pmdct)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataAssemblyEmit) DefineExportedType(szName string, tkImplementation uint32, tkTypeDef uint32, dwExportedTypeFlags uint32, pmdct *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szName)), uintptr(tkImplementation), uintptr(tkTypeDef), uintptr(dwExportedTypeFlags), uintptr(unsafe.Pointer(pmdct)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineManifestResource dispatches through IMetaDataAssemblyEmit's vtable slot 7.
-func (self *IMetaDataAssemblyEmit) DefineManifestResource(szName foundation.PWSTR, tkImplementation uint32, dwOffset uint32, dwResourceFlags uint32, pmdmr *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szName)), uintptr(tkImplementation), uintptr(dwOffset), uintptr(dwResourceFlags), uintptr(unsafe.Pointer(pmdmr)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataAssemblyEmit) DefineManifestResource(szName string, tkImplementation uint32, dwOffset uint32, dwResourceFlags uint32, pmdmr *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szName)), uintptr(tkImplementation), uintptr(dwOffset), uintptr(dwResourceFlags), uintptr(unsafe.Pointer(pmdmr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAssemblyProps dispatches through IMetaDataAssemblyEmit's vtable slot 8.
-func (self *IMetaDataAssemblyEmit) SetAssemblyProps(pma uint32, pbPublicKey unsafe.Pointer, cbPublicKey uint32, ulHashAlgId uint32, szName foundation.PWSTR, pMetaData *ASSEMBLYMETADATA, dwAssemblyFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(pma), uintptr(unsafe.Pointer(pbPublicKey)), uintptr(cbPublicKey), uintptr(ulHashAlgId), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pMetaData)), uintptr(dwAssemblyFlags))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataAssemblyEmit) SetAssemblyProps(pma uint32, pbPublicKey unsafe.Pointer, cbPublicKey uint32, ulHashAlgId uint32, szName string, pMetaData *ASSEMBLYMETADATA, dwAssemblyFlags uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(pma), uintptr(unsafe.Pointer(pbPublicKey)), uintptr(cbPublicKey), uintptr(ulHashAlgId), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(pMetaData)), uintptr(dwAssemblyFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAssemblyRefProps dispatches through IMetaDataAssemblyEmit's vtable slot 9.
-func (self *IMetaDataAssemblyEmit) SetAssemblyRefProps(ar uint32, pbPublicKeyOrToken unsafe.Pointer, cbPublicKeyOrToken uint32, szName foundation.PWSTR, pMetaData *ASSEMBLYMETADATA, pbHashValue unsafe.Pointer, cbHashValue uint32, dwAssemblyRefFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ar), uintptr(unsafe.Pointer(pbPublicKeyOrToken)), uintptr(cbPublicKeyOrToken), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pMetaData)), uintptr(unsafe.Pointer(pbHashValue)), uintptr(cbHashValue), uintptr(dwAssemblyRefFlags))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataAssemblyEmit) SetAssemblyRefProps(ar uint32, pbPublicKeyOrToken unsafe.Pointer, cbPublicKeyOrToken uint32, szName string, pMetaData *ASSEMBLYMETADATA, pbHashValue unsafe.Pointer, cbHashValue uint32, dwAssemblyRefFlags uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ar), uintptr(unsafe.Pointer(pbPublicKeyOrToken)), uintptr(cbPublicKeyOrToken), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(pMetaData)), uintptr(unsafe.Pointer(pbHashValue)), uintptr(cbHashValue), uintptr(dwAssemblyRefFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFileProps dispatches through IMetaDataAssemblyEmit's vtable slot 10.
-func (self *IMetaDataAssemblyEmit) SetFileProps(file uint32, pbHashValue unsafe.Pointer, cbHashValue uint32, dwFileFlags uint32) foundation.HRESULT {
+func (self *IMetaDataAssemblyEmit) SetFileProps(file uint32, pbHashValue unsafe.Pointer, cbHashValue uint32, dwFileFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(file), uintptr(unsafe.Pointer(pbHashValue)), uintptr(cbHashValue), uintptr(dwFileFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetExportedTypeProps dispatches through IMetaDataAssemblyEmit's vtable slot 11.
-func (self *IMetaDataAssemblyEmit) SetExportedTypeProps(ct uint32, tkImplementation uint32, tkTypeDef uint32, dwExportedTypeFlags uint32) foundation.HRESULT {
+func (self *IMetaDataAssemblyEmit) SetExportedTypeProps(ct uint32, tkImplementation uint32, tkTypeDef uint32, dwExportedTypeFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(ct), uintptr(tkImplementation), uintptr(tkTypeDef), uintptr(dwExportedTypeFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetManifestResourceProps dispatches through IMetaDataAssemblyEmit's vtable slot 12.
-func (self *IMetaDataAssemblyEmit) SetManifestResourceProps(mr uint32, tkImplementation uint32, dwOffset uint32, dwResourceFlags uint32) foundation.HRESULT {
+func (self *IMetaDataAssemblyEmit) SetManifestResourceProps(mr uint32, tkImplementation uint32, dwOffset uint32, dwResourceFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(mr), uintptr(tkImplementation), uintptr(dwOffset), uintptr(dwResourceFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMetaDataAssemblyImport: https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadataassemblyimport
@@ -218,75 +226,77 @@ type IMetaDataAssemblyImport struct {
 var IID_IMetaDataAssemblyImport = win32.GUID{Data1: 0xee62470b, Data2: 0xe94b, Data3: 0x424e, Data4: [8]byte{0x9b, 0x7c, 0x2f, 0x00, 0xc9, 0x24, 0x9f, 0x93}}
 
 // GetAssemblyProps dispatches through IMetaDataAssemblyImport's vtable slot 3.
-func (self *IMetaDataAssemblyImport) GetAssemblyProps(mda uint32, ppbPublicKey *unsafe.Pointer, pcbPublicKey *uint32, pulHashAlgId *uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32, pMetaData *ASSEMBLYMETADATA, pdwAssemblyFlags *uint32) foundation.HRESULT {
+func (self *IMetaDataAssemblyImport) GetAssemblyProps(mda uint32, ppbPublicKey *unsafe.Pointer, pcbPublicKey *uint32, pulHashAlgId *uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32, pMetaData *ASSEMBLYMETADATA, pdwAssemblyFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(mda), uintptr(unsafe.Pointer(ppbPublicKey)), uintptr(unsafe.Pointer(pcbPublicKey)), uintptr(unsafe.Pointer(pulHashAlgId)), uintptr(unsafe.Pointer(szName)), uintptr(cchName), uintptr(unsafe.Pointer(pchName)), uintptr(unsafe.Pointer(pMetaData)), uintptr(unsafe.Pointer(pdwAssemblyFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAssemblyRefProps dispatches through IMetaDataAssemblyImport's vtable slot 4.
-func (self *IMetaDataAssemblyImport) GetAssemblyRefProps(mdar uint32, ppbPublicKeyOrToken *unsafe.Pointer, pcbPublicKeyOrToken *uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32, pMetaData *ASSEMBLYMETADATA, ppbHashValue *unsafe.Pointer, pcbHashValue *uint32, pdwAssemblyRefFlags *uint32) foundation.HRESULT {
+func (self *IMetaDataAssemblyImport) GetAssemblyRefProps(mdar uint32, ppbPublicKeyOrToken *unsafe.Pointer, pcbPublicKeyOrToken *uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32, pMetaData *ASSEMBLYMETADATA, ppbHashValue *unsafe.Pointer, pcbHashValue *uint32, pdwAssemblyRefFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(mdar), uintptr(unsafe.Pointer(ppbPublicKeyOrToken)), uintptr(unsafe.Pointer(pcbPublicKeyOrToken)), uintptr(unsafe.Pointer(szName)), uintptr(cchName), uintptr(unsafe.Pointer(pchName)), uintptr(unsafe.Pointer(pMetaData)), uintptr(unsafe.Pointer(ppbHashValue)), uintptr(unsafe.Pointer(pcbHashValue)), uintptr(unsafe.Pointer(pdwAssemblyRefFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFileProps dispatches through IMetaDataAssemblyImport's vtable slot 5.
-func (self *IMetaDataAssemblyImport) GetFileProps(mdf uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32, ppbHashValue *unsafe.Pointer, pcbHashValue *uint32, pdwFileFlags *uint32) foundation.HRESULT {
+func (self *IMetaDataAssemblyImport) GetFileProps(mdf uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32, ppbHashValue *unsafe.Pointer, pcbHashValue *uint32, pdwFileFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(mdf), uintptr(unsafe.Pointer(szName)), uintptr(cchName), uintptr(unsafe.Pointer(pchName)), uintptr(unsafe.Pointer(ppbHashValue)), uintptr(unsafe.Pointer(pcbHashValue)), uintptr(unsafe.Pointer(pdwFileFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetExportedTypeProps dispatches through IMetaDataAssemblyImport's vtable slot 6.
-func (self *IMetaDataAssemblyImport) GetExportedTypeProps(mdct uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32, ptkImplementation *uint32, ptkTypeDef *uint32, pdwExportedTypeFlags *uint32) foundation.HRESULT {
+func (self *IMetaDataAssemblyImport) GetExportedTypeProps(mdct uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32, ptkImplementation *uint32, ptkTypeDef *uint32, pdwExportedTypeFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(mdct), uintptr(unsafe.Pointer(szName)), uintptr(cchName), uintptr(unsafe.Pointer(pchName)), uintptr(unsafe.Pointer(ptkImplementation)), uintptr(unsafe.Pointer(ptkTypeDef)), uintptr(unsafe.Pointer(pdwExportedTypeFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetManifestResourceProps dispatches through IMetaDataAssemblyImport's vtable slot 7.
-func (self *IMetaDataAssemblyImport) GetManifestResourceProps(mdmr uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32, ptkImplementation *uint32, pdwOffset *uint32, pdwResourceFlags *uint32) foundation.HRESULT {
+func (self *IMetaDataAssemblyImport) GetManifestResourceProps(mdmr uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32, ptkImplementation *uint32, pdwOffset *uint32, pdwResourceFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(mdmr), uintptr(unsafe.Pointer(szName)), uintptr(cchName), uintptr(unsafe.Pointer(pchName)), uintptr(unsafe.Pointer(ptkImplementation)), uintptr(unsafe.Pointer(pdwOffset)), uintptr(unsafe.Pointer(pdwResourceFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumAssemblyRefs dispatches through IMetaDataAssemblyImport's vtable slot 8.
-func (self *IMetaDataAssemblyImport) EnumAssemblyRefs(phEnum *unsafe.Pointer, rAssemblyRefs *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
+func (self *IMetaDataAssemblyImport) EnumAssemblyRefs(phEnum *unsafe.Pointer, rAssemblyRefs *uint32, cMax uint32, pcTokens *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(unsafe.Pointer(rAssemblyRefs)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumFiles dispatches through IMetaDataAssemblyImport's vtable slot 9.
-func (self *IMetaDataAssemblyImport) EnumFiles(phEnum *unsafe.Pointer, rFiles *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
+func (self *IMetaDataAssemblyImport) EnumFiles(phEnum *unsafe.Pointer, rFiles *uint32, cMax uint32, pcTokens *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(unsafe.Pointer(rFiles)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumExportedTypes dispatches through IMetaDataAssemblyImport's vtable slot 10.
-func (self *IMetaDataAssemblyImport) EnumExportedTypes(phEnum *unsafe.Pointer, rExportedTypes *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
+func (self *IMetaDataAssemblyImport) EnumExportedTypes(phEnum *unsafe.Pointer, rExportedTypes *uint32, cMax uint32, pcTokens *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(unsafe.Pointer(rExportedTypes)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumManifestResources dispatches through IMetaDataAssemblyImport's vtable slot 11.
-func (self *IMetaDataAssemblyImport) EnumManifestResources(phEnum *unsafe.Pointer, rManifestResources *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
+func (self *IMetaDataAssemblyImport) EnumManifestResources(phEnum *unsafe.Pointer, rManifestResources *uint32, cMax uint32, pcTokens *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(unsafe.Pointer(rManifestResources)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAssemblyFromScope dispatches through IMetaDataAssemblyImport's vtable slot 12.
-func (self *IMetaDataAssemblyImport) GetAssemblyFromScope(ptkAssembly *uint32) foundation.HRESULT {
+func (self *IMetaDataAssemblyImport) GetAssemblyFromScope(ptkAssembly *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ptkAssembly)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindExportedTypeByName dispatches through IMetaDataAssemblyImport's vtable slot 13.
-func (self *IMetaDataAssemblyImport) FindExportedTypeByName(szName foundation.PWSTR, mdtExportedType uint32, ptkExportedType *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szName)), uintptr(mdtExportedType), uintptr(unsafe.Pointer(ptkExportedType)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataAssemblyImport) FindExportedTypeByName(szName string, mdtExportedType uint32, ptkExportedType *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szName)), uintptr(mdtExportedType), uintptr(unsafe.Pointer(ptkExportedType)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindManifestResourceByName dispatches through IMetaDataAssemblyImport's vtable slot 14.
-func (self *IMetaDataAssemblyImport) FindManifestResourceByName(szName foundation.PWSTR, ptkManifestResource *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(ptkManifestResource)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataAssemblyImport) FindManifestResourceByName(szName string, ptkManifestResource *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(ptkManifestResource)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // CloseEnum dispatches through IMetaDataAssemblyImport's vtable slot 15.
@@ -295,9 +305,12 @@ func (self *IMetaDataAssemblyImport) CloseEnum(hEnum unsafe.Pointer) {
 }
 
 // FindAssembliesByName dispatches through IMetaDataAssemblyImport's vtable slot 16.
-func (self *IMetaDataAssemblyImport) FindAssembliesByName(szAppBase foundation.PWSTR, szPrivateBin foundation.PWSTR, szAssemblyName foundation.PWSTR, ppIUnk **systemcom.IUnknown, cMax uint32, pcAssemblies *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szAppBase)), uintptr(unsafe.Pointer(szPrivateBin)), uintptr(unsafe.Pointer(szAssemblyName)), uintptr(unsafe.Pointer(ppIUnk)), uintptr(cMax), uintptr(unsafe.Pointer(pcAssemblies)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataAssemblyImport) FindAssembliesByName(szAppBase string, szPrivateBin string, szAssemblyName string, ppIUnk **systemcom.IUnknown, cMax uint32, pcAssemblies *uint32) error {
+	_szAppBase := win32.UTF16Ptr(szAppBase)
+	_szPrivateBin := win32.UTF16Ptr(szPrivateBin)
+	_szAssemblyName := win32.UTF16Ptr(szAssemblyName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szAppBase)), uintptr(unsafe.Pointer(_szPrivateBin)), uintptr(unsafe.Pointer(_szAssemblyName)), uintptr(unsafe.Pointer(ppIUnk)), uintptr(cMax), uintptr(unsafe.Pointer(pcAssemblies)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMetaDataDispenser: https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadatadispenser
@@ -310,21 +323,22 @@ type IMetaDataDispenser struct {
 var IID_IMetaDataDispenser = win32.GUID{Data1: 0x809c652e, Data2: 0x7396, Data3: 0x11d2, Data4: [8]byte{0x97, 0x71, 0x00, 0xa0, 0xc9, 0xb4, 0xd5, 0x0c}}
 
 // DefineScope dispatches through IMetaDataDispenser's vtable slot 3.
-func (self *IMetaDataDispenser) DefineScope(rclsid *win32.GUID, dwCreateFlags uint32, riid *win32.GUID, ppIUnk **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMetaDataDispenser) DefineScope(rclsid *win32.GUID, dwCreateFlags uint32, riid *win32.GUID, ppIUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(dwCreateFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppIUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenScope dispatches through IMetaDataDispenser's vtable slot 4.
-func (self *IMetaDataDispenser) OpenScope(szScope foundation.PWSTR, dwOpenFlags uint32, riid *win32.GUID, ppIUnk **systemcom.IUnknown) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szScope)), uintptr(dwOpenFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppIUnk)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataDispenser) OpenScope(szScope string, dwOpenFlags uint32, riid *win32.GUID, ppIUnk **systemcom.IUnknown) error {
+	_szScope := win32.UTF16Ptr(szScope)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szScope)), uintptr(dwOpenFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppIUnk)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenScopeOnMemory dispatches through IMetaDataDispenser's vtable slot 5.
-func (self *IMetaDataDispenser) OpenScopeOnMemory(pData unsafe.Pointer, cbData uint32, dwOpenFlags uint32, riid *win32.GUID, ppIUnk **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMetaDataDispenser) OpenScopeOnMemory(pData unsafe.Pointer, cbData uint32, dwOpenFlags uint32, riid *win32.GUID, ppIUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(cbData), uintptr(dwOpenFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppIUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMetaDataDispenserEx: https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadatadispenserex
@@ -337,39 +351,49 @@ type IMetaDataDispenserEx struct {
 var IID_IMetaDataDispenserEx = win32.GUID{Data1: 0x31bcfce2, Data2: 0xdafb, Data3: 0x11d2, Data4: [8]byte{0x9f, 0x81, 0x00, 0xc0, 0x4f, 0x79, 0xa0, 0xa3}}
 
 // SetOption dispatches through IMetaDataDispenserEx's vtable slot 6.
-func (self *IMetaDataDispenserEx) SetOption(optionid *win32.GUID, value *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMetaDataDispenserEx) SetOption(optionid *win32.GUID, value *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(optionid)), uintptr(unsafe.Pointer(value)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetOption dispatches through IMetaDataDispenserEx's vtable slot 7.
-func (self *IMetaDataDispenserEx) GetOption(optionid *win32.GUID, pvalue *systemvariant.VARIANT) foundation.HRESULT {
+func (self *IMetaDataDispenserEx) GetOption(optionid *win32.GUID, pvalue *systemvariant.VARIANT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(optionid)), uintptr(unsafe.Pointer(pvalue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OpenScopeOnITypeInfo dispatches through IMetaDataDispenserEx's vtable slot 8.
-func (self *IMetaDataDispenserEx) OpenScopeOnITypeInfo(pITI *systemcom.ITypeInfo, dwOpenFlags uint32, riid *win32.GUID, ppIUnk **systemcom.IUnknown) foundation.HRESULT {
+func (self *IMetaDataDispenserEx) OpenScopeOnITypeInfo(pITI *systemcom.ITypeInfo, dwOpenFlags uint32, riid *win32.GUID, ppIUnk **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pITI)), uintptr(dwOpenFlags), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppIUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCORSystemDirectory dispatches through IMetaDataDispenserEx's vtable slot 9.
-func (self *IMetaDataDispenserEx) GetCORSystemDirectory(szBuffer foundation.PWSTR, cchBuffer uint32, pchBuffer *uint32) foundation.HRESULT {
+func (self *IMetaDataDispenserEx) GetCORSystemDirectory(szBuffer foundation.PWSTR, cchBuffer uint32, pchBuffer *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szBuffer)), uintptr(cchBuffer), uintptr(unsafe.Pointer(pchBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindAssembly dispatches through IMetaDataDispenserEx's vtable slot 10.
-func (self *IMetaDataDispenserEx) FindAssembly(szAppBase foundation.PWSTR, szPrivateBin foundation.PWSTR, szGlobalBin foundation.PWSTR, szAssemblyName foundation.PWSTR, szName foundation.PWSTR, cchName uint32, pcName *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szAppBase)), uintptr(unsafe.Pointer(szPrivateBin)), uintptr(unsafe.Pointer(szGlobalBin)), uintptr(unsafe.Pointer(szAssemblyName)), uintptr(unsafe.Pointer(szName)), uintptr(cchName), uintptr(unsafe.Pointer(pcName)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataDispenserEx) FindAssembly(szAppBase string, szPrivateBin string, szGlobalBin string, szAssemblyName string, szName string, cchName uint32, pcName *uint32) error {
+	_szAppBase := win32.UTF16Ptr(szAppBase)
+	_szPrivateBin := win32.UTF16Ptr(szPrivateBin)
+	_szGlobalBin := win32.UTF16Ptr(szGlobalBin)
+	_szAssemblyName := win32.UTF16Ptr(szAssemblyName)
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szAppBase)), uintptr(unsafe.Pointer(_szPrivateBin)), uintptr(unsafe.Pointer(_szGlobalBin)), uintptr(unsafe.Pointer(_szAssemblyName)), uintptr(unsafe.Pointer(_szName)), uintptr(cchName), uintptr(unsafe.Pointer(pcName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindAssemblyModule dispatches through IMetaDataDispenserEx's vtable slot 11.
-func (self *IMetaDataDispenserEx) FindAssemblyModule(szAppBase foundation.PWSTR, szPrivateBin foundation.PWSTR, szGlobalBin foundation.PWSTR, szAssemblyName foundation.PWSTR, szModuleName foundation.PWSTR, szName foundation.PWSTR, cchName uint32, pcName *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szAppBase)), uintptr(unsafe.Pointer(szPrivateBin)), uintptr(unsafe.Pointer(szGlobalBin)), uintptr(unsafe.Pointer(szAssemblyName)), uintptr(unsafe.Pointer(szModuleName)), uintptr(unsafe.Pointer(szName)), uintptr(cchName), uintptr(unsafe.Pointer(pcName)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataDispenserEx) FindAssemblyModule(szAppBase string, szPrivateBin string, szGlobalBin string, szAssemblyName string, szModuleName string, szName foundation.PWSTR, cchName uint32, pcName *uint32) error {
+	_szAppBase := win32.UTF16Ptr(szAppBase)
+	_szPrivateBin := win32.UTF16Ptr(szPrivateBin)
+	_szGlobalBin := win32.UTF16Ptr(szGlobalBin)
+	_szAssemblyName := win32.UTF16Ptr(szAssemblyName)
+	_szModuleName := win32.UTF16Ptr(szModuleName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szAppBase)), uintptr(unsafe.Pointer(_szPrivateBin)), uintptr(unsafe.Pointer(_szGlobalBin)), uintptr(unsafe.Pointer(_szAssemblyName)), uintptr(unsafe.Pointer(_szModuleName)), uintptr(unsafe.Pointer(szName)), uintptr(cchName), uintptr(unsafe.Pointer(pcName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ba3fee4c-ecb9-4e41-83b7-183fa41cd859
@@ -381,297 +405,313 @@ type IMetaDataEmit struct {
 var IID_IMetaDataEmit = win32.GUID{Data1: 0xba3fee4c, Data2: 0xecb9, Data3: 0x4e41, Data4: [8]byte{0x83, 0xb7, 0x18, 0x3f, 0xa4, 0x1c, 0xd8, 0x59}}
 
 // SetModuleProps dispatches through IMetaDataEmit's vtable slot 3.
-func (self *IMetaDataEmit) SetModuleProps(szName foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szName)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) SetModuleProps(szName string) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // Save dispatches through IMetaDataEmit's vtable slot 4.
-func (self *IMetaDataEmit) Save(szFile foundation.PWSTR, dwSaveFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szFile)), uintptr(dwSaveFlags))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) Save(szFile string, dwSaveFlags uint32) error {
+	_szFile := win32.UTF16Ptr(szFile)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szFile)), uintptr(dwSaveFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveToStream dispatches through IMetaDataEmit's vtable slot 5.
-func (self *IMetaDataEmit) SaveToStream(pIStream *systemcom.IStream, dwSaveFlags uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SaveToStream(pIStream *systemcom.IStream, dwSaveFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIStream)), uintptr(dwSaveFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSaveSize dispatches through IMetaDataEmit's vtable slot 6.
-func (self *IMetaDataEmit) GetSaveSize(fSave CorSaveSize, pdwSaveSize *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) GetSaveSize(fSave CorSaveSize, pdwSaveSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(fSave), uintptr(unsafe.Pointer(pdwSaveSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineTypeDef dispatches through IMetaDataEmit's vtable slot 7.
-func (self *IMetaDataEmit) DefineTypeDef(szTypeDef foundation.PWSTR, dwTypeDefFlags uint32, tkExtends uint32, rtkImplements *uint32, ptd *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szTypeDef)), uintptr(dwTypeDefFlags), uintptr(tkExtends), uintptr(unsafe.Pointer(rtkImplements)), uintptr(unsafe.Pointer(ptd)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) DefineTypeDef(szTypeDef string, dwTypeDefFlags uint32, tkExtends uint32, rtkImplements *uint32, ptd *uint32) error {
+	_szTypeDef := win32.UTF16Ptr(szTypeDef)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szTypeDef)), uintptr(dwTypeDefFlags), uintptr(tkExtends), uintptr(unsafe.Pointer(rtkImplements)), uintptr(unsafe.Pointer(ptd)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineNestedType dispatches through IMetaDataEmit's vtable slot 8.
-func (self *IMetaDataEmit) DefineNestedType(szTypeDef foundation.PWSTR, dwTypeDefFlags uint32, tkExtends uint32, rtkImplements *uint32, tdEncloser uint32, ptd *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szTypeDef)), uintptr(dwTypeDefFlags), uintptr(tkExtends), uintptr(unsafe.Pointer(rtkImplements)), uintptr(tdEncloser), uintptr(unsafe.Pointer(ptd)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) DefineNestedType(szTypeDef string, dwTypeDefFlags uint32, tkExtends uint32, rtkImplements *uint32, tdEncloser uint32, ptd *uint32) error {
+	_szTypeDef := win32.UTF16Ptr(szTypeDef)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szTypeDef)), uintptr(dwTypeDefFlags), uintptr(tkExtends), uintptr(unsafe.Pointer(rtkImplements)), uintptr(tdEncloser), uintptr(unsafe.Pointer(ptd)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetHandler dispatches through IMetaDataEmit's vtable slot 9.
-func (self *IMetaDataEmit) SetHandler(pUnk *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMetaDataEmit) SetHandler(pUnk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineMethod dispatches through IMetaDataEmit's vtable slot 10.
-func (self *IMetaDataEmit) DefineMethod(td uint32, szName foundation.PWSTR, dwMethodFlags uint32, pvSigBlob *byte, cbSigBlob uint32, ulCodeRVA uint32, dwImplFlags uint32, pmd *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(szName)), uintptr(dwMethodFlags), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(ulCodeRVA), uintptr(dwImplFlags), uintptr(unsafe.Pointer(pmd)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) DefineMethod(td uint32, szName string, dwMethodFlags uint32, pvSigBlob *byte, cbSigBlob uint32, ulCodeRVA uint32, dwImplFlags uint32, pmd *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(_szName)), uintptr(dwMethodFlags), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(ulCodeRVA), uintptr(dwImplFlags), uintptr(unsafe.Pointer(pmd)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineMethodImpl dispatches through IMetaDataEmit's vtable slot 11.
-func (self *IMetaDataEmit) DefineMethodImpl(td uint32, tkBody uint32, tkDecl uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) DefineMethodImpl(td uint32, tkBody uint32, tkDecl uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(tkBody), uintptr(tkDecl))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineTypeRefByName dispatches through IMetaDataEmit's vtable slot 12.
-func (self *IMetaDataEmit) DefineTypeRefByName(tkResolutionScope uint32, szName foundation.PWSTR, ptr *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(tkResolutionScope), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(ptr)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) DefineTypeRefByName(tkResolutionScope uint32, szName string, ptr *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(tkResolutionScope), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(ptr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineImportType dispatches through IMetaDataEmit's vtable slot 13.
-func (self *IMetaDataEmit) DefineImportType(pAssemImport *IMetaDataAssemblyImport, pbHashValue unsafe.Pointer, cbHashValue uint32, pImport *IMetaDataImport, tdImport uint32, pAssemEmit *IMetaDataAssemblyEmit, ptr *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) DefineImportType(pAssemImport *IMetaDataAssemblyImport, pbHashValue unsafe.Pointer, cbHashValue uint32, pImport *IMetaDataImport, tdImport uint32, pAssemEmit *IMetaDataAssemblyEmit, ptr *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAssemImport)), uintptr(unsafe.Pointer(pbHashValue)), uintptr(cbHashValue), uintptr(unsafe.Pointer(pImport)), uintptr(tdImport), uintptr(unsafe.Pointer(pAssemEmit)), uintptr(unsafe.Pointer(ptr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineMemberRef dispatches through IMetaDataEmit's vtable slot 14.
-func (self *IMetaDataEmit) DefineMemberRef(tkImport uint32, szName foundation.PWSTR, pvSigBlob *byte, cbSigBlob uint32, pmr *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(tkImport), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(unsafe.Pointer(pmr)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) DefineMemberRef(tkImport uint32, szName string, pvSigBlob *byte, cbSigBlob uint32, pmr *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(tkImport), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(unsafe.Pointer(pmr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineImportMember dispatches through IMetaDataEmit's vtable slot 15.
-func (self *IMetaDataEmit) DefineImportMember(pAssemImport *IMetaDataAssemblyImport, pbHashValue unsafe.Pointer, cbHashValue uint32, pImport *IMetaDataImport, mbMember uint32, pAssemEmit *IMetaDataAssemblyEmit, tkParent uint32, pmr *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) DefineImportMember(pAssemImport *IMetaDataAssemblyImport, pbHashValue unsafe.Pointer, cbHashValue uint32, pImport *IMetaDataImport, mbMember uint32, pAssemEmit *IMetaDataAssemblyEmit, tkParent uint32, pmr *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAssemImport)), uintptr(unsafe.Pointer(pbHashValue)), uintptr(cbHashValue), uintptr(unsafe.Pointer(pImport)), uintptr(mbMember), uintptr(unsafe.Pointer(pAssemEmit)), uintptr(tkParent), uintptr(unsafe.Pointer(pmr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineEvent dispatches through IMetaDataEmit's vtable slot 16.
-func (self *IMetaDataEmit) DefineEvent(td uint32, szEvent foundation.PWSTR, dwEventFlags uint32, tkEventType uint32, mdAddOn uint32, mdRemoveOn uint32, mdFire uint32, rmdOtherMethods *uint32, pmdEvent *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(szEvent)), uintptr(dwEventFlags), uintptr(tkEventType), uintptr(mdAddOn), uintptr(mdRemoveOn), uintptr(mdFire), uintptr(unsafe.Pointer(rmdOtherMethods)), uintptr(unsafe.Pointer(pmdEvent)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) DefineEvent(td uint32, szEvent string, dwEventFlags uint32, tkEventType uint32, mdAddOn uint32, mdRemoveOn uint32, mdFire uint32, rmdOtherMethods *uint32, pmdEvent *uint32) error {
+	_szEvent := win32.UTF16Ptr(szEvent)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(_szEvent)), uintptr(dwEventFlags), uintptr(tkEventType), uintptr(mdAddOn), uintptr(mdRemoveOn), uintptr(mdFire), uintptr(unsafe.Pointer(rmdOtherMethods)), uintptr(unsafe.Pointer(pmdEvent)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetClassLayout dispatches through IMetaDataEmit's vtable slot 17.
-func (self *IMetaDataEmit) SetClassLayout(td uint32, dwPackSize uint32, rFieldOffsets *COR_FIELD_OFFSET, ulClassSize uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SetClassLayout(td uint32, dwPackSize uint32, rFieldOffsets *COR_FIELD_OFFSET, ulClassSize uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(dwPackSize), uintptr(unsafe.Pointer(rFieldOffsets)), uintptr(ulClassSize))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteClassLayout dispatches through IMetaDataEmit's vtable slot 18.
-func (self *IMetaDataEmit) DeleteClassLayout(td uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) DeleteClassLayout(td uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(td))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFieldMarshal dispatches through IMetaDataEmit's vtable slot 19.
-func (self *IMetaDataEmit) SetFieldMarshal(tk uint32, pvNativeType *byte, cbNativeType uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SetFieldMarshal(tk uint32, pvNativeType *byte, cbNativeType uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(unsafe.Pointer(pvNativeType)), uintptr(cbNativeType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteFieldMarshal dispatches through IMetaDataEmit's vtable slot 20.
-func (self *IMetaDataEmit) DeleteFieldMarshal(tk uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) DeleteFieldMarshal(tk uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(tk))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefinePermissionSet dispatches through IMetaDataEmit's vtable slot 21.
-func (self *IMetaDataEmit) DefinePermissionSet(tk uint32, dwAction uint32, pvPermission unsafe.Pointer, cbPermission uint32, ppm *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) DefinePermissionSet(tk uint32, dwAction uint32, pvPermission unsafe.Pointer, cbPermission uint32, ppm *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(dwAction), uintptr(unsafe.Pointer(pvPermission)), uintptr(cbPermission), uintptr(unsafe.Pointer(ppm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRVA dispatches through IMetaDataEmit's vtable slot 22.
-func (self *IMetaDataEmit) SetRVA(md uint32, ulRVA uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SetRVA(md uint32, ulRVA uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(md), uintptr(ulRVA))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTokenFromSig dispatches through IMetaDataEmit's vtable slot 23.
-func (self *IMetaDataEmit) GetTokenFromSig(pvSig *byte, cbSig uint32, pmsig *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) GetTokenFromSig(pvSig *byte, cbSig uint32, pmsig *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvSig)), uintptr(cbSig), uintptr(unsafe.Pointer(pmsig)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineModuleRef dispatches through IMetaDataEmit's vtable slot 24.
-func (self *IMetaDataEmit) DefineModuleRef(szName foundation.PWSTR, pmur *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pmur)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) DefineModuleRef(szName string, pmur *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(pmur)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetParent dispatches through IMetaDataEmit's vtable slot 25.
-func (self *IMetaDataEmit) SetParent(mr uint32, tk uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SetParent(mr uint32, tk uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(mr), uintptr(tk))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTokenFromTypeSpec dispatches through IMetaDataEmit's vtable slot 26.
-func (self *IMetaDataEmit) GetTokenFromTypeSpec(pvSig *byte, cbSig uint32, ptypespec *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) GetTokenFromTypeSpec(pvSig *byte, cbSig uint32, ptypespec *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvSig)), uintptr(cbSig), uintptr(unsafe.Pointer(ptypespec)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveToMemory dispatches through IMetaDataEmit's vtable slot 27.
-func (self *IMetaDataEmit) SaveToMemory(pbData unsafe.Pointer, cbData uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SaveToMemory(pbData unsafe.Pointer, cbData uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbData)), uintptr(cbData))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineUserString dispatches through IMetaDataEmit's vtable slot 28.
-func (self *IMetaDataEmit) DefineUserString(szString foundation.PWSTR, cchString uint32, pstk *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szString)), uintptr(cchString), uintptr(unsafe.Pointer(pstk)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) DefineUserString(szString string, cchString uint32, pstk *uint32) error {
+	_szString := win32.UTF16Ptr(szString)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szString)), uintptr(cchString), uintptr(unsafe.Pointer(pstk)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteToken dispatches through IMetaDataEmit's vtable slot 29.
-func (self *IMetaDataEmit) DeleteToken(tkObj uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) DeleteToken(tkObj uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(tkObj))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMethodProps dispatches through IMetaDataEmit's vtable slot 30.
-func (self *IMetaDataEmit) SetMethodProps(md uint32, dwMethodFlags uint32, ulCodeRVA uint32, dwImplFlags uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SetMethodProps(md uint32, dwMethodFlags uint32, ulCodeRVA uint32, dwImplFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(md), uintptr(dwMethodFlags), uintptr(ulCodeRVA), uintptr(dwImplFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetTypeDefProps dispatches through IMetaDataEmit's vtable slot 31.
-func (self *IMetaDataEmit) SetTypeDefProps(td uint32, dwTypeDefFlags uint32, tkExtends uint32, rtkImplements *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SetTypeDefProps(td uint32, dwTypeDefFlags uint32, tkExtends uint32, rtkImplements *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(dwTypeDefFlags), uintptr(tkExtends), uintptr(unsafe.Pointer(rtkImplements)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEventProps dispatches through IMetaDataEmit's vtable slot 32.
-func (self *IMetaDataEmit) SetEventProps(ev uint32, dwEventFlags uint32, tkEventType uint32, mdAddOn uint32, mdRemoveOn uint32, mdFire uint32, rmdOtherMethods *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SetEventProps(ev uint32, dwEventFlags uint32, tkEventType uint32, mdAddOn uint32, mdRemoveOn uint32, mdFire uint32, rmdOtherMethods *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(ev), uintptr(dwEventFlags), uintptr(tkEventType), uintptr(mdAddOn), uintptr(mdRemoveOn), uintptr(mdFire), uintptr(unsafe.Pointer(rmdOtherMethods)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPermissionSetProps dispatches through IMetaDataEmit's vtable slot 33.
-func (self *IMetaDataEmit) SetPermissionSetProps(tk uint32, dwAction uint32, pvPermission unsafe.Pointer, cbPermission uint32, ppm *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SetPermissionSetProps(tk uint32, dwAction uint32, pvPermission unsafe.Pointer, cbPermission uint32, ppm *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(dwAction), uintptr(unsafe.Pointer(pvPermission)), uintptr(cbPermission), uintptr(unsafe.Pointer(ppm)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefinePinvokeMap dispatches through IMetaDataEmit's vtable slot 34.
-func (self *IMetaDataEmit) DefinePinvokeMap(tk uint32, dwMappingFlags uint32, szImportName foundation.PWSTR, mrImportDLL uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(dwMappingFlags), uintptr(unsafe.Pointer(szImportName)), uintptr(mrImportDLL))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) DefinePinvokeMap(tk uint32, dwMappingFlags uint32, szImportName string, mrImportDLL uint32) error {
+	_szImportName := win32.UTF16Ptr(szImportName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(dwMappingFlags), uintptr(unsafe.Pointer(_szImportName)), uintptr(mrImportDLL))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPinvokeMap dispatches through IMetaDataEmit's vtable slot 35.
-func (self *IMetaDataEmit) SetPinvokeMap(tk uint32, dwMappingFlags uint32, szImportName foundation.PWSTR, mrImportDLL uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(dwMappingFlags), uintptr(unsafe.Pointer(szImportName)), uintptr(mrImportDLL))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) SetPinvokeMap(tk uint32, dwMappingFlags uint32, szImportName string, mrImportDLL uint32) error {
+	_szImportName := win32.UTF16Ptr(szImportName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(dwMappingFlags), uintptr(unsafe.Pointer(_szImportName)), uintptr(mrImportDLL))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DeletePinvokeMap dispatches through IMetaDataEmit's vtable slot 36.
-func (self *IMetaDataEmit) DeletePinvokeMap(tk uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) DeletePinvokeMap(tk uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(tk))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineCustomAttribute dispatches through IMetaDataEmit's vtable slot 37.
-func (self *IMetaDataEmit) DefineCustomAttribute(tkOwner uint32, tkCtor uint32, pCustomAttribute unsafe.Pointer, cbCustomAttribute uint32, pcv *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) DefineCustomAttribute(tkOwner uint32, tkCtor uint32, pCustomAttribute unsafe.Pointer, cbCustomAttribute uint32, pcv *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(tkOwner), uintptr(tkCtor), uintptr(unsafe.Pointer(pCustomAttribute)), uintptr(cbCustomAttribute), uintptr(unsafe.Pointer(pcv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetCustomAttributeValue dispatches through IMetaDataEmit's vtable slot 38.
-func (self *IMetaDataEmit) SetCustomAttributeValue(pcv uint32, pCustomAttribute unsafe.Pointer, cbCustomAttribute uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SetCustomAttributeValue(pcv uint32, pCustomAttribute unsafe.Pointer, cbCustomAttribute uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(pcv), uintptr(unsafe.Pointer(pCustomAttribute)), uintptr(cbCustomAttribute))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineField dispatches through IMetaDataEmit's vtable slot 39.
-func (self *IMetaDataEmit) DefineField(td uint32, szName foundation.PWSTR, dwFieldFlags uint32, pvSigBlob *byte, cbSigBlob uint32, dwCPlusTypeFlag uint32, pValue unsafe.Pointer, cchValue uint32, pmd *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(szName)), uintptr(dwFieldFlags), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(dwCPlusTypeFlag), uintptr(unsafe.Pointer(pValue)), uintptr(cchValue), uintptr(unsafe.Pointer(pmd)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) DefineField(td uint32, szName string, dwFieldFlags uint32, pvSigBlob *byte, cbSigBlob uint32, dwCPlusTypeFlag uint32, pValue unsafe.Pointer, cchValue uint32, pmd *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(_szName)), uintptr(dwFieldFlags), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(dwCPlusTypeFlag), uintptr(unsafe.Pointer(pValue)), uintptr(cchValue), uintptr(unsafe.Pointer(pmd)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineProperty dispatches through IMetaDataEmit's vtable slot 40.
-func (self *IMetaDataEmit) DefineProperty(td uint32, szProperty foundation.PWSTR, dwPropFlags uint32, pvSig *byte, cbSig uint32, dwCPlusTypeFlag uint32, pValue unsafe.Pointer, cchValue uint32, mdSetter uint32, mdGetter uint32, rmdOtherMethods *uint32, pmdProp *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(szProperty)), uintptr(dwPropFlags), uintptr(unsafe.Pointer(pvSig)), uintptr(cbSig), uintptr(dwCPlusTypeFlag), uintptr(unsafe.Pointer(pValue)), uintptr(cchValue), uintptr(mdSetter), uintptr(mdGetter), uintptr(unsafe.Pointer(rmdOtherMethods)), uintptr(unsafe.Pointer(pmdProp)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) DefineProperty(td uint32, szProperty string, dwPropFlags uint32, pvSig *byte, cbSig uint32, dwCPlusTypeFlag uint32, pValue unsafe.Pointer, cchValue uint32, mdSetter uint32, mdGetter uint32, rmdOtherMethods *uint32, pmdProp *uint32) error {
+	_szProperty := win32.UTF16Ptr(szProperty)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(_szProperty)), uintptr(dwPropFlags), uintptr(unsafe.Pointer(pvSig)), uintptr(cbSig), uintptr(dwCPlusTypeFlag), uintptr(unsafe.Pointer(pValue)), uintptr(cchValue), uintptr(mdSetter), uintptr(mdGetter), uintptr(unsafe.Pointer(rmdOtherMethods)), uintptr(unsafe.Pointer(pmdProp)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineParam dispatches through IMetaDataEmit's vtable slot 41.
-func (self *IMetaDataEmit) DefineParam(md uint32, ulParamSeq uint32, szName foundation.PWSTR, dwParamFlags uint32, dwCPlusTypeFlag uint32, pValue unsafe.Pointer, cchValue uint32, ppd *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(md), uintptr(ulParamSeq), uintptr(unsafe.Pointer(szName)), uintptr(dwParamFlags), uintptr(dwCPlusTypeFlag), uintptr(unsafe.Pointer(pValue)), uintptr(cchValue), uintptr(unsafe.Pointer(ppd)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) DefineParam(md uint32, ulParamSeq uint32, szName string, dwParamFlags uint32, dwCPlusTypeFlag uint32, pValue unsafe.Pointer, cchValue uint32, ppd *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(md), uintptr(ulParamSeq), uintptr(unsafe.Pointer(_szName)), uintptr(dwParamFlags), uintptr(dwCPlusTypeFlag), uintptr(unsafe.Pointer(pValue)), uintptr(cchValue), uintptr(unsafe.Pointer(ppd)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFieldProps dispatches through IMetaDataEmit's vtable slot 42.
-func (self *IMetaDataEmit) SetFieldProps(fd uint32, dwFieldFlags uint32, dwCPlusTypeFlag uint32, pValue unsafe.Pointer, cchValue uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SetFieldProps(fd uint32, dwFieldFlags uint32, dwCPlusTypeFlag uint32, pValue unsafe.Pointer, cchValue uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(fd), uintptr(dwFieldFlags), uintptr(dwCPlusTypeFlag), uintptr(unsafe.Pointer(pValue)), uintptr(cchValue))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetPropertyProps dispatches through IMetaDataEmit's vtable slot 43.
-func (self *IMetaDataEmit) SetPropertyProps(pr uint32, dwPropFlags uint32, dwCPlusTypeFlag uint32, pValue unsafe.Pointer, cchValue uint32, mdSetter uint32, mdGetter uint32, rmdOtherMethods *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SetPropertyProps(pr uint32, dwPropFlags uint32, dwCPlusTypeFlag uint32, pValue unsafe.Pointer, cchValue uint32, mdSetter uint32, mdGetter uint32, rmdOtherMethods *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(pr), uintptr(dwPropFlags), uintptr(dwCPlusTypeFlag), uintptr(unsafe.Pointer(pValue)), uintptr(cchValue), uintptr(mdSetter), uintptr(mdGetter), uintptr(unsafe.Pointer(rmdOtherMethods)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetParamProps dispatches through IMetaDataEmit's vtable slot 44.
-func (self *IMetaDataEmit) SetParamProps(pd uint32, szName foundation.PWSTR, dwParamFlags uint32, dwCPlusTypeFlag uint32, pValue unsafe.Pointer, cchValue uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(pd), uintptr(unsafe.Pointer(szName)), uintptr(dwParamFlags), uintptr(dwCPlusTypeFlag), uintptr(unsafe.Pointer(pValue)), uintptr(cchValue))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit) SetParamProps(pd uint32, szName string, dwParamFlags uint32, dwCPlusTypeFlag uint32, pValue unsafe.Pointer, cchValue uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(pd), uintptr(unsafe.Pointer(_szName)), uintptr(dwParamFlags), uintptr(dwCPlusTypeFlag), uintptr(unsafe.Pointer(pValue)), uintptr(cchValue))
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineSecurityAttributeSet dispatches through IMetaDataEmit's vtable slot 45.
-func (self *IMetaDataEmit) DefineSecurityAttributeSet(tkObj uint32, rSecAttrs *COR_SECATTR, cSecAttrs uint32, pulErrorAttr *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) DefineSecurityAttributeSet(tkObj uint32, rSecAttrs *COR_SECATTR, cSecAttrs uint32, pulErrorAttr *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(tkObj), uintptr(unsafe.Pointer(rSecAttrs)), uintptr(cSecAttrs), uintptr(unsafe.Pointer(pulErrorAttr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ApplyEditAndContinue dispatches through IMetaDataEmit's vtable slot 46.
-func (self *IMetaDataEmit) ApplyEditAndContinue(pImport *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMetaDataEmit) ApplyEditAndContinue(pImport *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pImport)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // TranslateSigWithScope dispatches through IMetaDataEmit's vtable slot 47.
-func (self *IMetaDataEmit) TranslateSigWithScope(pAssemImport *IMetaDataAssemblyImport, pbHashValue unsafe.Pointer, cbHashValue uint32, import_ *IMetaDataImport, pbSigBlob *byte, cbSigBlob uint32, pAssemEmit *IMetaDataAssemblyEmit, emit *IMetaDataEmit, pvTranslatedSig *byte, cbTranslatedSigMax uint32, pcbTranslatedSig *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) TranslateSigWithScope(pAssemImport *IMetaDataAssemblyImport, pbHashValue unsafe.Pointer, cbHashValue uint32, import_ *IMetaDataImport, pbSigBlob *byte, cbSigBlob uint32, pAssemEmit *IMetaDataAssemblyEmit, emit *IMetaDataEmit, pvTranslatedSig *byte, cbTranslatedSigMax uint32, pcbTranslatedSig *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAssemImport)), uintptr(unsafe.Pointer(pbHashValue)), uintptr(cbHashValue), uintptr(unsafe.Pointer(import_)), uintptr(unsafe.Pointer(pbSigBlob)), uintptr(cbSigBlob), uintptr(unsafe.Pointer(pAssemEmit)), uintptr(unsafe.Pointer(emit)), uintptr(unsafe.Pointer(pvTranslatedSig)), uintptr(cbTranslatedSigMax), uintptr(unsafe.Pointer(pcbTranslatedSig)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetMethodImplFlags dispatches through IMetaDataEmit's vtable slot 48.
-func (self *IMetaDataEmit) SetMethodImplFlags(md uint32, dwImplFlags uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SetMethodImplFlags(md uint32, dwImplFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(md), uintptr(dwImplFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFieldRVA dispatches through IMetaDataEmit's vtable slot 49.
-func (self *IMetaDataEmit) SetFieldRVA(fd uint32, ulRVA uint32) foundation.HRESULT {
+func (self *IMetaDataEmit) SetFieldRVA(fd uint32, ulRVA uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(fd), uintptr(ulRVA))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Merge dispatches through IMetaDataEmit's vtable slot 50.
-func (self *IMetaDataEmit) Merge(pImport *IMetaDataImport, pHostMapToken *IMapToken, pHandler *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMetaDataEmit) Merge(pImport *IMetaDataImport, pHostMapToken *IMapToken, pHandler *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pImport)), uintptr(unsafe.Pointer(pHostMapToken)), uintptr(unsafe.Pointer(pHandler)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MergeEnd dispatches through IMetaDataEmit's vtable slot 51.
-func (self *IMetaDataEmit) MergeEnd() foundation.HRESULT {
+func (self *IMetaDataEmit) MergeEnd() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: f5dd9950-f693-42e6-830e-7b833e8146a9
@@ -683,51 +723,54 @@ type IMetaDataEmit2 struct {
 var IID_IMetaDataEmit2 = win32.GUID{Data1: 0xf5dd9950, Data2: 0xf693, Data3: 0x42e6, Data4: [8]byte{0x83, 0x0e, 0x7b, 0x83, 0x3e, 0x81, 0x46, 0xa9}}
 
 // DefineMethodSpec dispatches through IMetaDataEmit2's vtable slot 52.
-func (self *IMetaDataEmit2) DefineMethodSpec(tkParent uint32, pvSigBlob *byte, cbSigBlob uint32, pmi *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit2) DefineMethodSpec(tkParent uint32, pvSigBlob *byte, cbSigBlob uint32, pmi *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(tkParent), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(unsafe.Pointer(pmi)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDeltaSaveSize dispatches through IMetaDataEmit2's vtable slot 53.
-func (self *IMetaDataEmit2) GetDeltaSaveSize(fSave CorSaveSize, pdwSaveSize *uint32) foundation.HRESULT {
+func (self *IMetaDataEmit2) GetDeltaSaveSize(fSave CorSaveSize, pdwSaveSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(fSave), uintptr(unsafe.Pointer(pdwSaveSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveDelta dispatches through IMetaDataEmit2's vtable slot 54.
-func (self *IMetaDataEmit2) SaveDelta(szFile foundation.PWSTR, dwSaveFlags uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szFile)), uintptr(dwSaveFlags))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit2) SaveDelta(szFile string, dwSaveFlags uint32) error {
+	_szFile := win32.UTF16Ptr(szFile)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szFile)), uintptr(dwSaveFlags))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveDeltaToStream dispatches through IMetaDataEmit2's vtable slot 55.
-func (self *IMetaDataEmit2) SaveDeltaToStream(pIStream *systemcom.IStream, dwSaveFlags uint32) foundation.HRESULT {
+func (self *IMetaDataEmit2) SaveDeltaToStream(pIStream *systemcom.IStream, dwSaveFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIStream)), uintptr(dwSaveFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SaveDeltaToMemory dispatches through IMetaDataEmit2's vtable slot 56.
-func (self *IMetaDataEmit2) SaveDeltaToMemory(pbData unsafe.Pointer, cbData uint32) foundation.HRESULT {
+func (self *IMetaDataEmit2) SaveDeltaToMemory(pbData unsafe.Pointer, cbData uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbData)), uintptr(cbData))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // DefineGenericParam dispatches through IMetaDataEmit2's vtable slot 57.
-func (self *IMetaDataEmit2) DefineGenericParam(tk uint32, ulParamSeq uint32, dwParamFlags uint32, szname foundation.PWSTR, reserved uint32, rtkConstraints *uint32, pgp *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(ulParamSeq), uintptr(dwParamFlags), uintptr(unsafe.Pointer(szname)), uintptr(reserved), uintptr(unsafe.Pointer(rtkConstraints)), uintptr(unsafe.Pointer(pgp)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit2) DefineGenericParam(tk uint32, ulParamSeq uint32, dwParamFlags uint32, szname string, reserved uint32, rtkConstraints *uint32, pgp *uint32) error {
+	_szname := win32.UTF16Ptr(szname)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(ulParamSeq), uintptr(dwParamFlags), uintptr(unsafe.Pointer(_szname)), uintptr(reserved), uintptr(unsafe.Pointer(rtkConstraints)), uintptr(unsafe.Pointer(pgp)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetGenericParamProps dispatches through IMetaDataEmit2's vtable slot 58.
-func (self *IMetaDataEmit2) SetGenericParamProps(gp uint32, dwParamFlags uint32, szName foundation.PWSTR, reserved uint32, rtkConstraints *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(gp), uintptr(dwParamFlags), uintptr(unsafe.Pointer(szName)), uintptr(reserved), uintptr(unsafe.Pointer(rtkConstraints)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataEmit2) SetGenericParamProps(gp uint32, dwParamFlags uint32, szName string, reserved uint32, rtkConstraints *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(gp), uintptr(dwParamFlags), uintptr(unsafe.Pointer(_szName)), uintptr(reserved), uintptr(unsafe.Pointer(rtkConstraints)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResetENCLog dispatches through IMetaDataEmit2's vtable slot 59.
-func (self *IMetaDataEmit2) ResetENCLog() foundation.HRESULT {
+func (self *IMetaDataEmit2) ResetENCLog() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b81ff171-20f3-11d2-8dcc-00a0c9b09c19
@@ -739,9 +782,9 @@ type IMetaDataError struct {
 var IID_IMetaDataError = win32.GUID{Data1: 0xb81ff171, Data2: 0x20f3, Data3: 0x11d2, Data4: [8]byte{0x8d, 0xcc, 0x00, 0xa0, 0xc9, 0xb0, 0x9c, 0x19}}
 
 // OnError dispatches through IMetaDataError's vtable slot 3.
-func (self *IMetaDataError) OnError(hrError foundation.HRESULT, token uint32) foundation.HRESULT {
+func (self *IMetaDataError) OnError(hrError foundation.HRESULT, token uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hrError), uintptr(token))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: d0e80dd1-12d4-11d3-b39d-00c04ff81795
@@ -753,21 +796,21 @@ type IMetaDataFilter struct {
 var IID_IMetaDataFilter = win32.GUID{Data1: 0xd0e80dd1, Data2: 0x12d4, Data3: 0x11d3, Data4: [8]byte{0xb3, 0x9d, 0x00, 0xc0, 0x4f, 0xf8, 0x17, 0x95}}
 
 // UnmarkAll dispatches through IMetaDataFilter's vtable slot 3.
-func (self *IMetaDataFilter) UnmarkAll() foundation.HRESULT {
+func (self *IMetaDataFilter) UnmarkAll() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MarkToken dispatches through IMetaDataFilter's vtable slot 4.
-func (self *IMetaDataFilter) MarkToken(tk uint32) foundation.HRESULT {
+func (self *IMetaDataFilter) MarkToken(tk uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(tk))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsTokenMarked dispatches through IMetaDataFilter's vtable slot 5.
-func (self *IMetaDataFilter) IsTokenMarked(tk uint32, pIsMarked *foundation.BOOL) foundation.HRESULT {
+func (self *IMetaDataFilter) IsTokenMarked(tk uint32, pIsMarked *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(unsafe.Pointer(pIsMarked)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMetaDataImport: https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadataimport
@@ -785,345 +828,357 @@ func (self *IMetaDataImport) CloseEnum(hEnum unsafe.Pointer) {
 }
 
 // CountEnum dispatches through IMetaDataImport's vtable slot 4.
-func (self *IMetaDataImport) CountEnum(hEnum unsafe.Pointer, pulCount *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) CountEnum(hEnum unsafe.Pointer, pulCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hEnum)), uintptr(unsafe.Pointer(pulCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResetEnum dispatches through IMetaDataImport's vtable slot 5.
-func (self *IMetaDataImport) ResetEnum(hEnum unsafe.Pointer, ulPos uint32) foundation.HRESULT {
+func (self *IMetaDataImport) ResetEnum(hEnum unsafe.Pointer, ulPos uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(hEnum)), uintptr(ulPos))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumTypeDefs dispatches through IMetaDataImport's vtable slot 6.
-func (self *IMetaDataImport) EnumTypeDefs(phEnum *unsafe.Pointer, rTypeDefs *uint32, cMax uint32, pcTypeDefs *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumTypeDefs(phEnum *unsafe.Pointer, rTypeDefs *uint32, cMax uint32, pcTypeDefs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(unsafe.Pointer(rTypeDefs)), uintptr(cMax), uintptr(unsafe.Pointer(pcTypeDefs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumInterfaceImpls dispatches through IMetaDataImport's vtable slot 7.
-func (self *IMetaDataImport) EnumInterfaceImpls(phEnum *unsafe.Pointer, td uint32, rImpls *uint32, cMax uint32, pcImpls *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumInterfaceImpls(phEnum *unsafe.Pointer, td uint32, rImpls *uint32, cMax uint32, pcImpls *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(td), uintptr(unsafe.Pointer(rImpls)), uintptr(cMax), uintptr(unsafe.Pointer(pcImpls)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumTypeRefs dispatches through IMetaDataImport's vtable slot 8.
-func (self *IMetaDataImport) EnumTypeRefs(phEnum *unsafe.Pointer, rTypeRefs *uint32, cMax uint32, pcTypeRefs *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumTypeRefs(phEnum *unsafe.Pointer, rTypeRefs *uint32, cMax uint32, pcTypeRefs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(unsafe.Pointer(rTypeRefs)), uintptr(cMax), uintptr(unsafe.Pointer(pcTypeRefs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindTypeDefByName dispatches through IMetaDataImport's vtable slot 9.
-func (self *IMetaDataImport) FindTypeDefByName(szTypeDef foundation.PWSTR, tkEnclosingClass uint32, ptd *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szTypeDef)), uintptr(tkEnclosingClass), uintptr(unsafe.Pointer(ptd)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataImport) FindTypeDefByName(szTypeDef string, tkEnclosingClass uint32, ptd *uint32) error {
+	_szTypeDef := win32.UTF16Ptr(szTypeDef)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_szTypeDef)), uintptr(tkEnclosingClass), uintptr(unsafe.Pointer(ptd)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScopeProps dispatches through IMetaDataImport's vtable slot 10.
-func (self *IMetaDataImport) GetScopeProps(szName foundation.PWSTR, cchName uint32, pchName *uint32, pmvid *win32.GUID) foundation.HRESULT {
+func (self *IMetaDataImport) GetScopeProps(szName foundation.PWSTR, cchName uint32, pchName *uint32, pmvid *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(szName)), uintptr(cchName), uintptr(unsafe.Pointer(pchName)), uintptr(unsafe.Pointer(pmvid)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetModuleFromScope dispatches through IMetaDataImport's vtable slot 11.
-func (self *IMetaDataImport) GetModuleFromScope(pmd *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetModuleFromScope(pmd *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pmd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTypeDefProps dispatches through IMetaDataImport's vtable slot 12.
-func (self *IMetaDataImport) GetTypeDefProps(td uint32, szTypeDef foundation.PWSTR, cchTypeDef uint32, pchTypeDef *uint32, pdwTypeDefFlags *uint32, ptkExtends *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetTypeDefProps(td uint32, szTypeDef foundation.PWSTR, cchTypeDef uint32, pchTypeDef *uint32, pdwTypeDefFlags *uint32, ptkExtends *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(szTypeDef)), uintptr(cchTypeDef), uintptr(unsafe.Pointer(pchTypeDef)), uintptr(unsafe.Pointer(pdwTypeDefFlags)), uintptr(unsafe.Pointer(ptkExtends)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInterfaceImplProps dispatches through IMetaDataImport's vtable slot 13.
-func (self *IMetaDataImport) GetInterfaceImplProps(iiImpl uint32, pClass *uint32, ptkIface *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetInterfaceImplProps(iiImpl uint32, pClass *uint32, ptkIface *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(iiImpl), uintptr(unsafe.Pointer(pClass)), uintptr(unsafe.Pointer(ptkIface)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTypeRefProps dispatches through IMetaDataImport's vtable slot 14.
-func (self *IMetaDataImport) GetTypeRefProps(tr uint32, ptkResolutionScope *uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetTypeRefProps(tr uint32, ptkResolutionScope *uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(tr), uintptr(unsafe.Pointer(ptkResolutionScope)), uintptr(unsafe.Pointer(szName)), uintptr(cchName), uintptr(unsafe.Pointer(pchName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ResolveTypeRef dispatches through IMetaDataImport's vtable slot 15.
-func (self *IMetaDataImport) ResolveTypeRef(tr uint32, riid *win32.GUID, ppIScope **systemcom.IUnknown, ptd *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) ResolveTypeRef(tr uint32, riid *win32.GUID, ppIScope **systemcom.IUnknown, ptd *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(tr), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppIScope)), uintptr(unsafe.Pointer(ptd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumMembers dispatches through IMetaDataImport's vtable slot 16.
-func (self *IMetaDataImport) EnumMembers(phEnum *unsafe.Pointer, cl uint32, rMembers *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumMembers(phEnum *unsafe.Pointer, cl uint32, rMembers *uint32, cMax uint32, pcTokens *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(cl), uintptr(unsafe.Pointer(rMembers)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumMembersWithName dispatches through IMetaDataImport's vtable slot 17.
-func (self *IMetaDataImport) EnumMembersWithName(phEnum *unsafe.Pointer, cl uint32, szName foundation.PWSTR, rMembers *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(cl), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(rMembers)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataImport) EnumMembersWithName(phEnum *unsafe.Pointer, cl uint32, szName string, rMembers *uint32, cMax uint32, pcTokens *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(cl), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(rMembers)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumMethods dispatches through IMetaDataImport's vtable slot 18.
-func (self *IMetaDataImport) EnumMethods(phEnum *unsafe.Pointer, cl uint32, rMethods *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumMethods(phEnum *unsafe.Pointer, cl uint32, rMethods *uint32, cMax uint32, pcTokens *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(cl), uintptr(unsafe.Pointer(rMethods)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumMethodsWithName dispatches through IMetaDataImport's vtable slot 19.
-func (self *IMetaDataImport) EnumMethodsWithName(phEnum *unsafe.Pointer, cl uint32, szName foundation.PWSTR, rMethods *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(cl), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(rMethods)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataImport) EnumMethodsWithName(phEnum *unsafe.Pointer, cl uint32, szName string, rMethods *uint32, cMax uint32, pcTokens *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(cl), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(rMethods)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumFields dispatches through IMetaDataImport's vtable slot 20.
-func (self *IMetaDataImport) EnumFields(phEnum *unsafe.Pointer, cl uint32, rFields *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumFields(phEnum *unsafe.Pointer, cl uint32, rFields *uint32, cMax uint32, pcTokens *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(cl), uintptr(unsafe.Pointer(rFields)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumFieldsWithName dispatches through IMetaDataImport's vtable slot 21.
-func (self *IMetaDataImport) EnumFieldsWithName(phEnum *unsafe.Pointer, cl uint32, szName foundation.PWSTR, rFields *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(cl), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(rFields)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataImport) EnumFieldsWithName(phEnum *unsafe.Pointer, cl uint32, szName string, rFields *uint32, cMax uint32, pcTokens *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(cl), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(rFields)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumParams dispatches through IMetaDataImport's vtable slot 22.
-func (self *IMetaDataImport) EnumParams(phEnum *unsafe.Pointer, mb uint32, rParams *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumParams(phEnum *unsafe.Pointer, mb uint32, rParams *uint32, cMax uint32, pcTokens *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(mb), uintptr(unsafe.Pointer(rParams)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumMemberRefs dispatches through IMetaDataImport's vtable slot 23.
-func (self *IMetaDataImport) EnumMemberRefs(phEnum *unsafe.Pointer, tkParent uint32, rMemberRefs *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumMemberRefs(phEnum *unsafe.Pointer, tkParent uint32, rMemberRefs *uint32, cMax uint32, pcTokens *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(tkParent), uintptr(unsafe.Pointer(rMemberRefs)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumMethodImpls dispatches through IMetaDataImport's vtable slot 24.
-func (self *IMetaDataImport) EnumMethodImpls(phEnum *unsafe.Pointer, td uint32, rMethodBody *uint32, rMethodDecl *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumMethodImpls(phEnum *unsafe.Pointer, td uint32, rMethodBody *uint32, rMethodDecl *uint32, cMax uint32, pcTokens *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(td), uintptr(unsafe.Pointer(rMethodBody)), uintptr(unsafe.Pointer(rMethodDecl)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumPermissionSets dispatches through IMetaDataImport's vtable slot 25.
-func (self *IMetaDataImport) EnumPermissionSets(phEnum *unsafe.Pointer, tk uint32, dwActions uint32, rPermission *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumPermissionSets(phEnum *unsafe.Pointer, tk uint32, dwActions uint32, rPermission *uint32, cMax uint32, pcTokens *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(tk), uintptr(dwActions), uintptr(unsafe.Pointer(rPermission)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindMember dispatches through IMetaDataImport's vtable slot 26.
-func (self *IMetaDataImport) FindMember(td uint32, szName foundation.PWSTR, pvSigBlob *byte, cbSigBlob uint32, pmb *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(unsafe.Pointer(pmb)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataImport) FindMember(td uint32, szName string, pvSigBlob *byte, cbSigBlob uint32, pmb *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(unsafe.Pointer(pmb)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindMethod dispatches through IMetaDataImport's vtable slot 27.
-func (self *IMetaDataImport) FindMethod(td uint32, szName foundation.PWSTR, pvSigBlob *byte, cbSigBlob uint32, pmb *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(unsafe.Pointer(pmb)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataImport) FindMethod(td uint32, szName string, pvSigBlob *byte, cbSigBlob uint32, pmb *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(unsafe.Pointer(pmb)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindField dispatches through IMetaDataImport's vtable slot 28.
-func (self *IMetaDataImport) FindField(td uint32, szName foundation.PWSTR, pvSigBlob *byte, cbSigBlob uint32, pmb *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(unsafe.Pointer(pmb)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataImport) FindField(td uint32, szName string, pvSigBlob *byte, cbSigBlob uint32, pmb *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(unsafe.Pointer(pmb)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindMemberRef dispatches through IMetaDataImport's vtable slot 29.
-func (self *IMetaDataImport) FindMemberRef(td uint32, szName foundation.PWSTR, pvSigBlob *byte, cbSigBlob uint32, pmr *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(unsafe.Pointer(pmr)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataImport) FindMemberRef(td uint32, szName string, pvSigBlob *byte, cbSigBlob uint32, pmr *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(pvSigBlob)), uintptr(cbSigBlob), uintptr(unsafe.Pointer(pmr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMethodProps dispatches through IMetaDataImport's vtable slot 30.
-func (self *IMetaDataImport) GetMethodProps(mb uint32, pClass *uint32, szMethod foundation.PWSTR, cchMethod uint32, pchMethod *uint32, pdwAttr *uint32, ppvSigBlob **byte, pcbSigBlob *uint32, pulCodeRVA *uint32, pdwImplFlags *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetMethodProps(mb uint32, pClass *uint32, szMethod foundation.PWSTR, cchMethod uint32, pchMethod *uint32, pdwAttr *uint32, ppvSigBlob **byte, pcbSigBlob *uint32, pulCodeRVA *uint32, pdwImplFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(mb), uintptr(unsafe.Pointer(pClass)), uintptr(unsafe.Pointer(szMethod)), uintptr(cchMethod), uintptr(unsafe.Pointer(pchMethod)), uintptr(unsafe.Pointer(pdwAttr)), uintptr(unsafe.Pointer(ppvSigBlob)), uintptr(unsafe.Pointer(pcbSigBlob)), uintptr(unsafe.Pointer(pulCodeRVA)), uintptr(unsafe.Pointer(pdwImplFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMemberRefProps dispatches through IMetaDataImport's vtable slot 31.
-func (self *IMetaDataImport) GetMemberRefProps(mr uint32, ptk *uint32, szMember foundation.PWSTR, cchMember uint32, pchMember *uint32, ppvSigBlob **byte, pbSig *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetMemberRefProps(mr uint32, ptk *uint32, szMember foundation.PWSTR, cchMember uint32, pchMember *uint32, ppvSigBlob **byte, pbSig *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(mr), uintptr(unsafe.Pointer(ptk)), uintptr(unsafe.Pointer(szMember)), uintptr(cchMember), uintptr(unsafe.Pointer(pchMember)), uintptr(unsafe.Pointer(ppvSigBlob)), uintptr(unsafe.Pointer(pbSig)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumProperties dispatches through IMetaDataImport's vtable slot 32.
-func (self *IMetaDataImport) EnumProperties(phEnum *unsafe.Pointer, td uint32, rProperties *uint32, cMax uint32, pcProperties *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumProperties(phEnum *unsafe.Pointer, td uint32, rProperties *uint32, cMax uint32, pcProperties *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(td), uintptr(unsafe.Pointer(rProperties)), uintptr(cMax), uintptr(unsafe.Pointer(pcProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumEvents dispatches through IMetaDataImport's vtable slot 33.
-func (self *IMetaDataImport) EnumEvents(phEnum *unsafe.Pointer, td uint32, rEvents *uint32, cMax uint32, pcEvents *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumEvents(phEnum *unsafe.Pointer, td uint32, rEvents *uint32, cMax uint32, pcEvents *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(td), uintptr(unsafe.Pointer(rEvents)), uintptr(cMax), uintptr(unsafe.Pointer(pcEvents)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetEventProps dispatches through IMetaDataImport's vtable slot 34.
-func (self *IMetaDataImport) GetEventProps(ev uint32, pClass *uint32, szEvent foundation.PWSTR, cchEvent uint32, pchEvent *uint32, pdwEventFlags *uint32, ptkEventType *uint32, pmdAddOn *uint32, pmdRemoveOn *uint32, pmdFire *uint32, rmdOtherMethod *uint32, cMax uint32, pcOtherMethod *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(ev), uintptr(unsafe.Pointer(pClass)), uintptr(unsafe.Pointer(szEvent)), uintptr(cchEvent), uintptr(unsafe.Pointer(pchEvent)), uintptr(unsafe.Pointer(pdwEventFlags)), uintptr(unsafe.Pointer(ptkEventType)), uintptr(unsafe.Pointer(pmdAddOn)), uintptr(unsafe.Pointer(pmdRemoveOn)), uintptr(unsafe.Pointer(pmdFire)), uintptr(unsafe.Pointer(rmdOtherMethod)), uintptr(cMax), uintptr(unsafe.Pointer(pcOtherMethod)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataImport) GetEventProps(ev uint32, pClass *uint32, szEvent string, cchEvent uint32, pchEvent *uint32, pdwEventFlags *uint32, ptkEventType *uint32, pmdAddOn *uint32, pmdRemoveOn *uint32, pmdFire *uint32, rmdOtherMethod *uint32, cMax uint32, pcOtherMethod *uint32) error {
+	_szEvent := win32.UTF16Ptr(szEvent)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(ev), uintptr(unsafe.Pointer(pClass)), uintptr(unsafe.Pointer(_szEvent)), uintptr(cchEvent), uintptr(unsafe.Pointer(pchEvent)), uintptr(unsafe.Pointer(pdwEventFlags)), uintptr(unsafe.Pointer(ptkEventType)), uintptr(unsafe.Pointer(pmdAddOn)), uintptr(unsafe.Pointer(pmdRemoveOn)), uintptr(unsafe.Pointer(pmdFire)), uintptr(unsafe.Pointer(rmdOtherMethod)), uintptr(cMax), uintptr(unsafe.Pointer(pcOtherMethod)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumMethodSemantics dispatches through IMetaDataImport's vtable slot 35.
-func (self *IMetaDataImport) EnumMethodSemantics(phEnum *unsafe.Pointer, mb uint32, rEventProp *uint32, cMax uint32, pcEventProp *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumMethodSemantics(phEnum *unsafe.Pointer, mb uint32, rEventProp *uint32, cMax uint32, pcEventProp *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(mb), uintptr(unsafe.Pointer(rEventProp)), uintptr(cMax), uintptr(unsafe.Pointer(pcEventProp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMethodSemantics dispatches through IMetaDataImport's vtable slot 36.
-func (self *IMetaDataImport) GetMethodSemantics(mb uint32, tkEventProp uint32, pdwSemanticsFlags *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetMethodSemantics(mb uint32, tkEventProp uint32, pdwSemanticsFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(mb), uintptr(tkEventProp), uintptr(unsafe.Pointer(pdwSemanticsFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClassLayout dispatches through IMetaDataImport's vtable slot 37.
-func (self *IMetaDataImport) GetClassLayout(td uint32, pdwPackSize *uint32, rFieldOffset *COR_FIELD_OFFSET, cMax uint32, pcFieldOffset *uint32, pulClassSize *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetClassLayout(td uint32, pdwPackSize *uint32, rFieldOffset *COR_FIELD_OFFSET, cMax uint32, pcFieldOffset *uint32, pulClassSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(td), uintptr(unsafe.Pointer(pdwPackSize)), uintptr(unsafe.Pointer(rFieldOffset)), uintptr(cMax), uintptr(unsafe.Pointer(pcFieldOffset)), uintptr(unsafe.Pointer(pulClassSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFieldMarshal dispatches through IMetaDataImport's vtable slot 38.
-func (self *IMetaDataImport) GetFieldMarshal(tk uint32, ppvNativeType **byte, pcbNativeType *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetFieldMarshal(tk uint32, ppvNativeType **byte, pcbNativeType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(unsafe.Pointer(ppvNativeType)), uintptr(unsafe.Pointer(pcbNativeType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRVA dispatches through IMetaDataImport's vtable slot 39.
-func (self *IMetaDataImport) GetRVA(tk uint32, pulCodeRVA *uint32, pdwImplFlags *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetRVA(tk uint32, pulCodeRVA *uint32, pdwImplFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(unsafe.Pointer(pulCodeRVA)), uintptr(unsafe.Pointer(pdwImplFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPermissionSetProps dispatches through IMetaDataImport's vtable slot 40.
-func (self *IMetaDataImport) GetPermissionSetProps(pm uint32, pdwAction *uint32, ppvPermission *unsafe.Pointer, pcbPermission *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetPermissionSetProps(pm uint32, pdwAction *uint32, ppvPermission *unsafe.Pointer, pcbPermission *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(pm), uintptr(unsafe.Pointer(pdwAction)), uintptr(unsafe.Pointer(ppvPermission)), uintptr(unsafe.Pointer(pcbPermission)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSigFromToken dispatches through IMetaDataImport's vtable slot 41.
-func (self *IMetaDataImport) GetSigFromToken(mdSig uint32, ppvSig **byte, pcbSig *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetSigFromToken(mdSig uint32, ppvSig **byte, pcbSig *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(mdSig), uintptr(unsafe.Pointer(ppvSig)), uintptr(unsafe.Pointer(pcbSig)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetModuleRefProps dispatches through IMetaDataImport's vtable slot 42.
-func (self *IMetaDataImport) GetModuleRefProps(mur uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetModuleRefProps(mur uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(mur), uintptr(unsafe.Pointer(szName)), uintptr(cchName), uintptr(unsafe.Pointer(pchName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumModuleRefs dispatches through IMetaDataImport's vtable slot 43.
-func (self *IMetaDataImport) EnumModuleRefs(phEnum *unsafe.Pointer, rModuleRefs *uint32, cmax uint32, pcModuleRefs *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumModuleRefs(phEnum *unsafe.Pointer, rModuleRefs *uint32, cmax uint32, pcModuleRefs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(unsafe.Pointer(rModuleRefs)), uintptr(cmax), uintptr(unsafe.Pointer(pcModuleRefs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTypeSpecFromToken dispatches through IMetaDataImport's vtable slot 44.
-func (self *IMetaDataImport) GetTypeSpecFromToken(typespec uint32, ppvSig **byte, pcbSig *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetTypeSpecFromToken(typespec uint32, ppvSig **byte, pcbSig *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(typespec), uintptr(unsafe.Pointer(ppvSig)), uintptr(unsafe.Pointer(pcbSig)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNameFromToken dispatches through IMetaDataImport's vtable slot 45.
-func (self *IMetaDataImport) GetNameFromToken(tk uint32, pszUtf8NamePtr **int8) foundation.HRESULT {
+func (self *IMetaDataImport) GetNameFromToken(tk uint32, pszUtf8NamePtr **int8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(unsafe.Pointer(pszUtf8NamePtr)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumUnresolvedMethods dispatches through IMetaDataImport's vtable slot 46.
-func (self *IMetaDataImport) EnumUnresolvedMethods(phEnum *unsafe.Pointer, rMethods *uint32, cMax uint32, pcTokens *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumUnresolvedMethods(phEnum *unsafe.Pointer, rMethods *uint32, cMax uint32, pcTokens *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(unsafe.Pointer(rMethods)), uintptr(cMax), uintptr(unsafe.Pointer(pcTokens)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUserString dispatches through IMetaDataImport's vtable slot 47.
-func (self *IMetaDataImport) GetUserString(stk uint32, szString foundation.PWSTR, cchString uint32, pchString *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetUserString(stk uint32, szString foundation.PWSTR, cchString uint32, pchString *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(stk), uintptr(unsafe.Pointer(szString)), uintptr(cchString), uintptr(unsafe.Pointer(pchString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPinvokeMap dispatches through IMetaDataImport's vtable slot 48.
-func (self *IMetaDataImport) GetPinvokeMap(tk uint32, pdwMappingFlags *uint32, szImportName foundation.PWSTR, cchImportName uint32, pchImportName *uint32, pmrImportDLL *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetPinvokeMap(tk uint32, pdwMappingFlags *uint32, szImportName foundation.PWSTR, cchImportName uint32, pchImportName *uint32, pmrImportDLL *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(unsafe.Pointer(pdwMappingFlags)), uintptr(unsafe.Pointer(szImportName)), uintptr(cchImportName), uintptr(unsafe.Pointer(pchImportName)), uintptr(unsafe.Pointer(pmrImportDLL)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumSignatures dispatches through IMetaDataImport's vtable slot 49.
-func (self *IMetaDataImport) EnumSignatures(phEnum *unsafe.Pointer, rSignatures *uint32, cmax uint32, pcSignatures *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumSignatures(phEnum *unsafe.Pointer, rSignatures *uint32, cmax uint32, pcSignatures *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[49], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(unsafe.Pointer(rSignatures)), uintptr(cmax), uintptr(unsafe.Pointer(pcSignatures)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumTypeSpecs dispatches through IMetaDataImport's vtable slot 50.
-func (self *IMetaDataImport) EnumTypeSpecs(phEnum *unsafe.Pointer, rTypeSpecs *uint32, cmax uint32, pcTypeSpecs *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumTypeSpecs(phEnum *unsafe.Pointer, rTypeSpecs *uint32, cmax uint32, pcTypeSpecs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(unsafe.Pointer(rTypeSpecs)), uintptr(cmax), uintptr(unsafe.Pointer(pcTypeSpecs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumUserStrings dispatches through IMetaDataImport's vtable slot 51.
-func (self *IMetaDataImport) EnumUserStrings(phEnum *unsafe.Pointer, rStrings *uint32, cmax uint32, pcStrings *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumUserStrings(phEnum *unsafe.Pointer, rStrings *uint32, cmax uint32, pcStrings *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(unsafe.Pointer(rStrings)), uintptr(cmax), uintptr(unsafe.Pointer(pcStrings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetParamForMethodIndex dispatches through IMetaDataImport's vtable slot 52.
-func (self *IMetaDataImport) GetParamForMethodIndex(md uint32, ulParamSeq uint32, ppd *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetParamForMethodIndex(md uint32, ulParamSeq uint32, ppd *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(md), uintptr(ulParamSeq), uintptr(unsafe.Pointer(ppd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumCustomAttributes dispatches through IMetaDataImport's vtable slot 53.
-func (self *IMetaDataImport) EnumCustomAttributes(phEnum *unsafe.Pointer, tk uint32, tkType uint32, rCustomAttributes *uint32, cMax uint32, pcCustomAttributes *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) EnumCustomAttributes(phEnum *unsafe.Pointer, tk uint32, tkType uint32, rCustomAttributes *uint32, cMax uint32, pcCustomAttributes *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(tk), uintptr(tkType), uintptr(unsafe.Pointer(rCustomAttributes)), uintptr(cMax), uintptr(unsafe.Pointer(pcCustomAttributes)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCustomAttributeProps dispatches through IMetaDataImport's vtable slot 54.
-func (self *IMetaDataImport) GetCustomAttributeProps(cv uint32, ptkObj *uint32, ptkType *uint32, ppBlob *unsafe.Pointer, pcbSize *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetCustomAttributeProps(cv uint32, ptkObj *uint32, ptkType *uint32, ppBlob *unsafe.Pointer, pcbSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(cv), uintptr(unsafe.Pointer(ptkObj)), uintptr(unsafe.Pointer(ptkType)), uintptr(unsafe.Pointer(ppBlob)), uintptr(unsafe.Pointer(pcbSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindTypeRef dispatches through IMetaDataImport's vtable slot 55.
-func (self *IMetaDataImport) FindTypeRef(tkResolutionScope uint32, szName foundation.PWSTR, ptr *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(tkResolutionScope), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(ptr)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataImport) FindTypeRef(tkResolutionScope uint32, szName string, ptr *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(tkResolutionScope), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(ptr)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMemberProps dispatches through IMetaDataImport's vtable slot 56.
-func (self *IMetaDataImport) GetMemberProps(mb uint32, pClass *uint32, szMember foundation.PWSTR, cchMember uint32, pchMember *uint32, pdwAttr *uint32, ppvSigBlob **byte, pcbSigBlob *uint32, pulCodeRVA *uint32, pdwImplFlags *uint32, pdwCPlusTypeFlag *uint32, ppValue *unsafe.Pointer, pcchValue *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetMemberProps(mb uint32, pClass *uint32, szMember foundation.PWSTR, cchMember uint32, pchMember *uint32, pdwAttr *uint32, ppvSigBlob **byte, pcbSigBlob *uint32, pulCodeRVA *uint32, pdwImplFlags *uint32, pdwCPlusTypeFlag *uint32, ppValue *unsafe.Pointer, pcchValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(mb), uintptr(unsafe.Pointer(pClass)), uintptr(unsafe.Pointer(szMember)), uintptr(cchMember), uintptr(unsafe.Pointer(pchMember)), uintptr(unsafe.Pointer(pdwAttr)), uintptr(unsafe.Pointer(ppvSigBlob)), uintptr(unsafe.Pointer(pcbSigBlob)), uintptr(unsafe.Pointer(pulCodeRVA)), uintptr(unsafe.Pointer(pdwImplFlags)), uintptr(unsafe.Pointer(pdwCPlusTypeFlag)), uintptr(unsafe.Pointer(ppValue)), uintptr(unsafe.Pointer(pcchValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFieldProps dispatches through IMetaDataImport's vtable slot 57.
-func (self *IMetaDataImport) GetFieldProps(mb uint32, pClass *uint32, szField foundation.PWSTR, cchField uint32, pchField *uint32, pdwAttr *uint32, ppvSigBlob **byte, pcbSigBlob *uint32, pdwCPlusTypeFlag *uint32, ppValue *unsafe.Pointer, pcchValue *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetFieldProps(mb uint32, pClass *uint32, szField foundation.PWSTR, cchField uint32, pchField *uint32, pdwAttr *uint32, ppvSigBlob **byte, pcbSigBlob *uint32, pdwCPlusTypeFlag *uint32, ppValue *unsafe.Pointer, pcchValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(mb), uintptr(unsafe.Pointer(pClass)), uintptr(unsafe.Pointer(szField)), uintptr(cchField), uintptr(unsafe.Pointer(pchField)), uintptr(unsafe.Pointer(pdwAttr)), uintptr(unsafe.Pointer(ppvSigBlob)), uintptr(unsafe.Pointer(pcbSigBlob)), uintptr(unsafe.Pointer(pdwCPlusTypeFlag)), uintptr(unsafe.Pointer(ppValue)), uintptr(unsafe.Pointer(pcchValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyProps dispatches through IMetaDataImport's vtable slot 58.
-func (self *IMetaDataImport) GetPropertyProps(prop uint32, pClass *uint32, szProperty foundation.PWSTR, cchProperty uint32, pchProperty *uint32, pdwPropFlags *uint32, ppvSig **byte, pbSig *uint32, pdwCPlusTypeFlag *uint32, ppDefaultValue *unsafe.Pointer, pcchDefaultValue *uint32, pmdSetter *uint32, pmdGetter *uint32, rmdOtherMethod *uint32, cMax uint32, pcOtherMethod *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(prop), uintptr(unsafe.Pointer(pClass)), uintptr(unsafe.Pointer(szProperty)), uintptr(cchProperty), uintptr(unsafe.Pointer(pchProperty)), uintptr(unsafe.Pointer(pdwPropFlags)), uintptr(unsafe.Pointer(ppvSig)), uintptr(unsafe.Pointer(pbSig)), uintptr(unsafe.Pointer(pdwCPlusTypeFlag)), uintptr(unsafe.Pointer(ppDefaultValue)), uintptr(unsafe.Pointer(pcchDefaultValue)), uintptr(unsafe.Pointer(pmdSetter)), uintptr(unsafe.Pointer(pmdGetter)), uintptr(unsafe.Pointer(rmdOtherMethod)), uintptr(cMax), uintptr(unsafe.Pointer(pcOtherMethod)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataImport) GetPropertyProps(prop uint32, pClass *uint32, szProperty string, cchProperty uint32, pchProperty *uint32, pdwPropFlags *uint32, ppvSig **byte, pbSig *uint32, pdwCPlusTypeFlag *uint32, ppDefaultValue *unsafe.Pointer, pcchDefaultValue *uint32, pmdSetter *uint32, pmdGetter *uint32, rmdOtherMethod *uint32, cMax uint32, pcOtherMethod *uint32) error {
+	_szProperty := win32.UTF16Ptr(szProperty)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[58], uintptr(unsafe.Pointer(self)), uintptr(prop), uintptr(unsafe.Pointer(pClass)), uintptr(unsafe.Pointer(_szProperty)), uintptr(cchProperty), uintptr(unsafe.Pointer(pchProperty)), uintptr(unsafe.Pointer(pdwPropFlags)), uintptr(unsafe.Pointer(ppvSig)), uintptr(unsafe.Pointer(pbSig)), uintptr(unsafe.Pointer(pdwCPlusTypeFlag)), uintptr(unsafe.Pointer(ppDefaultValue)), uintptr(unsafe.Pointer(pcchDefaultValue)), uintptr(unsafe.Pointer(pmdSetter)), uintptr(unsafe.Pointer(pmdGetter)), uintptr(unsafe.Pointer(rmdOtherMethod)), uintptr(cMax), uintptr(unsafe.Pointer(pcOtherMethod)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetParamProps dispatches through IMetaDataImport's vtable slot 59.
-func (self *IMetaDataImport) GetParamProps(tk uint32, pmd *uint32, pulSequence *uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32, pdwAttr *uint32, pdwCPlusTypeFlag *uint32, ppValue *unsafe.Pointer, pcchValue *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetParamProps(tk uint32, pmd *uint32, pulSequence *uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32, pdwAttr *uint32, pdwCPlusTypeFlag *uint32, ppValue *unsafe.Pointer, pcchValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(tk), uintptr(unsafe.Pointer(pmd)), uintptr(unsafe.Pointer(pulSequence)), uintptr(unsafe.Pointer(szName)), uintptr(cchName), uintptr(unsafe.Pointer(pchName)), uintptr(unsafe.Pointer(pdwAttr)), uintptr(unsafe.Pointer(pdwCPlusTypeFlag)), uintptr(unsafe.Pointer(ppValue)), uintptr(unsafe.Pointer(pcchValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCustomAttributeByName dispatches through IMetaDataImport's vtable slot 60.
-func (self *IMetaDataImport) GetCustomAttributeByName(tkObj uint32, szName foundation.PWSTR, ppData *unsafe.Pointer, pcbData *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(tkObj), uintptr(unsafe.Pointer(szName)), uintptr(unsafe.Pointer(ppData)), uintptr(unsafe.Pointer(pcbData)))
-	return foundation.HRESULT(r1)
+func (self *IMetaDataImport) GetCustomAttributeByName(tkObj uint32, szName string, ppData *unsafe.Pointer, pcbData *uint32) error {
+	_szName := win32.UTF16Ptr(szName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(tkObj), uintptr(unsafe.Pointer(_szName)), uintptr(unsafe.Pointer(ppData)), uintptr(unsafe.Pointer(pcbData)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsValidToken dispatches through IMetaDataImport's vtable slot 61.
@@ -1133,21 +1188,21 @@ func (self *IMetaDataImport) IsValidToken(tk uint32) foundation.BOOL {
 }
 
 // GetNestedClassProps dispatches through IMetaDataImport's vtable slot 62.
-func (self *IMetaDataImport) GetNestedClassProps(tdNestedClass uint32, ptdEnclosingClass *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetNestedClassProps(tdNestedClass uint32, ptdEnclosingClass *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(tdNestedClass), uintptr(unsafe.Pointer(ptdEnclosingClass)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNativeCallConvFromSig dispatches through IMetaDataImport's vtable slot 63.
-func (self *IMetaDataImport) GetNativeCallConvFromSig(pvSig unsafe.Pointer, cbSig uint32, pCallConv *uint32) foundation.HRESULT {
+func (self *IMetaDataImport) GetNativeCallConvFromSig(pvSig unsafe.Pointer, cbSig uint32, pCallConv *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvSig)), uintptr(cbSig), uintptr(unsafe.Pointer(pCallConv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsGlobal dispatches through IMetaDataImport's vtable slot 64.
-func (self *IMetaDataImport) IsGlobal(pd uint32, pbGlobal *int32) foundation.HRESULT {
+func (self *IMetaDataImport) IsGlobal(pd uint32, pbGlobal *int32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(pd), uintptr(unsafe.Pointer(pbGlobal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMetaDataImport2: https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadataimport2
@@ -1160,51 +1215,51 @@ type IMetaDataImport2 struct {
 var IID_IMetaDataImport2 = win32.GUID{Data1: 0xfce5efa0, Data2: 0x8bba, Data3: 0x4f8e, Data4: [8]byte{0xa0, 0x36, 0x8f, 0x20, 0x22, 0xb0, 0x84, 0x66}}
 
 // EnumGenericParams dispatches through IMetaDataImport2's vtable slot 65.
-func (self *IMetaDataImport2) EnumGenericParams(phEnum *unsafe.Pointer, tk uint32, rGenericParams *uint32, cMax uint32, pcGenericParams *uint32) foundation.HRESULT {
+func (self *IMetaDataImport2) EnumGenericParams(phEnum *unsafe.Pointer, tk uint32, rGenericParams *uint32, cMax uint32, pcGenericParams *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(tk), uintptr(unsafe.Pointer(rGenericParams)), uintptr(cMax), uintptr(unsafe.Pointer(pcGenericParams)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGenericParamProps dispatches through IMetaDataImport2's vtable slot 66.
-func (self *IMetaDataImport2) GetGenericParamProps(gp uint32, pulParamSeq *uint32, pdwParamFlags *uint32, ptOwner *uint32, reserved *uint32, wzname foundation.PWSTR, cchName uint32, pchName *uint32) foundation.HRESULT {
+func (self *IMetaDataImport2) GetGenericParamProps(gp uint32, pulParamSeq *uint32, pdwParamFlags *uint32, ptOwner *uint32, reserved *uint32, wzname foundation.PWSTR, cchName uint32, pchName *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(gp), uintptr(unsafe.Pointer(pulParamSeq)), uintptr(unsafe.Pointer(pdwParamFlags)), uintptr(unsafe.Pointer(ptOwner)), uintptr(unsafe.Pointer(reserved)), uintptr(unsafe.Pointer(wzname)), uintptr(cchName), uintptr(unsafe.Pointer(pchName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMethodSpecProps dispatches through IMetaDataImport2's vtable slot 67.
-func (self *IMetaDataImport2) GetMethodSpecProps(mi uint32, tkParent *uint32, ppvSigBlob **byte, pcbSigBlob *uint32) foundation.HRESULT {
+func (self *IMetaDataImport2) GetMethodSpecProps(mi uint32, tkParent *uint32, ppvSigBlob **byte, pcbSigBlob *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(mi), uintptr(unsafe.Pointer(tkParent)), uintptr(unsafe.Pointer(ppvSigBlob)), uintptr(unsafe.Pointer(pcbSigBlob)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumGenericParamConstraints dispatches through IMetaDataImport2's vtable slot 68.
-func (self *IMetaDataImport2) EnumGenericParamConstraints(phEnum *unsafe.Pointer, tk uint32, rGenericParamConstraints *uint32, cMax uint32, pcGenericParamConstraints *uint32) foundation.HRESULT {
+func (self *IMetaDataImport2) EnumGenericParamConstraints(phEnum *unsafe.Pointer, tk uint32, rGenericParamConstraints *uint32, cMax uint32, pcGenericParamConstraints *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(tk), uintptr(unsafe.Pointer(rGenericParamConstraints)), uintptr(cMax), uintptr(unsafe.Pointer(pcGenericParamConstraints)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGenericParamConstraintProps dispatches through IMetaDataImport2's vtable slot 69.
-func (self *IMetaDataImport2) GetGenericParamConstraintProps(gpc uint32, ptGenericParam *uint32, ptkConstraintType *uint32) foundation.HRESULT {
+func (self *IMetaDataImport2) GetGenericParamConstraintProps(gpc uint32, ptGenericParam *uint32, ptkConstraintType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(gpc), uintptr(unsafe.Pointer(ptGenericParam)), uintptr(unsafe.Pointer(ptkConstraintType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPEKind dispatches through IMetaDataImport2's vtable slot 70.
-func (self *IMetaDataImport2) GetPEKind(pdwPEKind *uint32, pdwMAchine *uint32) foundation.HRESULT {
+func (self *IMetaDataImport2) GetPEKind(pdwPEKind *uint32, pdwMAchine *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwPEKind)), uintptr(unsafe.Pointer(pdwMAchine)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVersionString dispatches through IMetaDataImport2's vtable slot 71.
-func (self *IMetaDataImport2) GetVersionString(pwzBuf foundation.PWSTR, ccBufSize uint32, pccBufSize *uint32) foundation.HRESULT {
+func (self *IMetaDataImport2) GetVersionString(pwzBuf foundation.PWSTR, ccBufSize uint32, pccBufSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwzBuf)), uintptr(ccBufSize), uintptr(unsafe.Pointer(pccBufSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumMethodSpecs dispatches through IMetaDataImport2's vtable slot 72.
-func (self *IMetaDataImport2) EnumMethodSpecs(phEnum *unsafe.Pointer, tk uint32, rMethodSpecs *uint32, cMax uint32, pcMethodSpecs *uint32) foundation.HRESULT {
+func (self *IMetaDataImport2) EnumMethodSpecs(phEnum *unsafe.Pointer, tk uint32, rMethodSpecs *uint32, cMax uint32, pcMethodSpecs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEnum)), uintptr(tk), uintptr(unsafe.Pointer(rMethodSpecs)), uintptr(cMax), uintptr(unsafe.Pointer(pcMethodSpecs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 7998ea64-7f95-48b8-86fc-17caf48bf5cb
@@ -1216,9 +1271,9 @@ type IMetaDataInfo struct {
 var IID_IMetaDataInfo = win32.GUID{Data1: 0x7998ea64, Data2: 0x7f95, Data3: 0x48b8, Data4: [8]byte{0x86, 0xfc, 0x17, 0xca, 0xf4, 0x8b, 0xf5, 0xcb}}
 
 // GetFileMapping dispatches through IMetaDataInfo's vtable slot 3.
-func (self *IMetaDataInfo) GetFileMapping(ppvData *unsafe.Pointer, pcbData *uint64, pdwMappingType *uint32) foundation.HRESULT {
+func (self *IMetaDataInfo) GetFileMapping(ppvData *unsafe.Pointer, pcbData *uint64, pdwMappingType *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppvData)), uintptr(unsafe.Pointer(pcbData)), uintptr(unsafe.Pointer(pdwMappingType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMetaDataTables: https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadatatables
@@ -1231,117 +1286,117 @@ type IMetaDataTables struct {
 var IID_IMetaDataTables = win32.GUID{Data1: 0xd8f579ab, Data2: 0x402d, Data3: 0x4b8e, Data4: [8]byte{0x82, 0xd9, 0x5d, 0x63, 0xb1, 0x06, 0x5c, 0x68}}
 
 // GetStringHeapSize dispatches through IMetaDataTables's vtable slot 3.
-func (self *IMetaDataTables) GetStringHeapSize(pcbStrings *uint32) foundation.HRESULT {
+func (self *IMetaDataTables) GetStringHeapSize(pcbStrings *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbStrings)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBlobHeapSize dispatches through IMetaDataTables's vtable slot 4.
-func (self *IMetaDataTables) GetBlobHeapSize(pcbBlobs *uint32) foundation.HRESULT {
+func (self *IMetaDataTables) GetBlobHeapSize(pcbBlobs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbBlobs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGuidHeapSize dispatches through IMetaDataTables's vtable slot 5.
-func (self *IMetaDataTables) GetGuidHeapSize(pcbGuids *uint32) foundation.HRESULT {
+func (self *IMetaDataTables) GetGuidHeapSize(pcbGuids *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbGuids)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUserStringHeapSize dispatches through IMetaDataTables's vtable slot 6.
-func (self *IMetaDataTables) GetUserStringHeapSize(pcbBlobs *uint32) foundation.HRESULT {
+func (self *IMetaDataTables) GetUserStringHeapSize(pcbBlobs *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcbBlobs)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNumTables dispatches through IMetaDataTables's vtable slot 7.
-func (self *IMetaDataTables) GetNumTables(pcTables *uint32) foundation.HRESULT {
+func (self *IMetaDataTables) GetNumTables(pcTables *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcTables)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTableIndex dispatches through IMetaDataTables's vtable slot 8.
-func (self *IMetaDataTables) GetTableIndex(token uint32, pixTbl *uint32) foundation.HRESULT {
+func (self *IMetaDataTables) GetTableIndex(token uint32, pixTbl *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(token), uintptr(unsafe.Pointer(pixTbl)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTableInfo dispatches through IMetaDataTables's vtable slot 9.
-func (self *IMetaDataTables) GetTableInfo(ixTbl uint32, pcbRow *uint32, pcRows *uint32, pcCols *uint32, piKey *uint32, ppName **int8) foundation.HRESULT {
+func (self *IMetaDataTables) GetTableInfo(ixTbl uint32, pcbRow *uint32, pcRows *uint32, pcCols *uint32, piKey *uint32, ppName **int8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ixTbl), uintptr(unsafe.Pointer(pcbRow)), uintptr(unsafe.Pointer(pcRows)), uintptr(unsafe.Pointer(pcCols)), uintptr(unsafe.Pointer(piKey)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetColumnInfo dispatches through IMetaDataTables's vtable slot 10.
-func (self *IMetaDataTables) GetColumnInfo(ixTbl uint32, ixCol uint32, poCol *uint32, pcbCol *uint32, pType *uint32, ppName **int8) foundation.HRESULT {
+func (self *IMetaDataTables) GetColumnInfo(ixTbl uint32, ixCol uint32, poCol *uint32, pcbCol *uint32, pType *uint32, ppName **int8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ixTbl), uintptr(ixCol), uintptr(unsafe.Pointer(poCol)), uintptr(unsafe.Pointer(pcbCol)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCodedTokenInfo dispatches through IMetaDataTables's vtable slot 11.
-func (self *IMetaDataTables) GetCodedTokenInfo(ixCdTkn uint32, pcTokens *uint32, ppTokens **uint32, ppName **int8) foundation.HRESULT {
+func (self *IMetaDataTables) GetCodedTokenInfo(ixCdTkn uint32, pcTokens *uint32, ppTokens **uint32, ppName **int8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(ixCdTkn), uintptr(unsafe.Pointer(pcTokens)), uintptr(unsafe.Pointer(ppTokens)), uintptr(unsafe.Pointer(ppName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRow dispatches through IMetaDataTables's vtable slot 12.
-func (self *IMetaDataTables) GetRow(ixTbl uint32, rid uint32, ppRow *unsafe.Pointer) foundation.HRESULT {
+func (self *IMetaDataTables) GetRow(ixTbl uint32, rid uint32, ppRow *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ixTbl), uintptr(rid), uintptr(unsafe.Pointer(ppRow)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetColumn dispatches through IMetaDataTables's vtable slot 13.
-func (self *IMetaDataTables) GetColumn(ixTbl uint32, ixCol uint32, rid uint32, pVal *uint32) foundation.HRESULT {
+func (self *IMetaDataTables) GetColumn(ixTbl uint32, ixCol uint32, rid uint32, pVal *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(ixTbl), uintptr(ixCol), uintptr(rid), uintptr(unsafe.Pointer(pVal)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetString dispatches through IMetaDataTables's vtable slot 14.
-func (self *IMetaDataTables) GetString(ixString uint32, ppString **int8) foundation.HRESULT {
+func (self *IMetaDataTables) GetString(ixString uint32, ppString **int8) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ixString), uintptr(unsafe.Pointer(ppString)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBlob dispatches through IMetaDataTables's vtable slot 15.
-func (self *IMetaDataTables) GetBlob(ixBlob uint32, pcbData *uint32, ppData *unsafe.Pointer) foundation.HRESULT {
+func (self *IMetaDataTables) GetBlob(ixBlob uint32, pcbData *uint32, ppData *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(ixBlob), uintptr(unsafe.Pointer(pcbData)), uintptr(unsafe.Pointer(ppData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetGuid dispatches through IMetaDataTables's vtable slot 16.
-func (self *IMetaDataTables) GetGuid(ixGuid uint32, ppGUID **win32.GUID) foundation.HRESULT {
+func (self *IMetaDataTables) GetGuid(ixGuid uint32, ppGUID **win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(ixGuid), uintptr(unsafe.Pointer(ppGUID)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUserString dispatches through IMetaDataTables's vtable slot 17.
-func (self *IMetaDataTables) GetUserString(ixUserString uint32, pcbData *uint32, ppData *unsafe.Pointer) foundation.HRESULT {
+func (self *IMetaDataTables) GetUserString(ixUserString uint32, pcbData *uint32, ppData *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(ixUserString), uintptr(unsafe.Pointer(pcbData)), uintptr(unsafe.Pointer(ppData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNextString dispatches through IMetaDataTables's vtable slot 18.
-func (self *IMetaDataTables) GetNextString(ixString uint32, pNext *uint32) foundation.HRESULT {
+func (self *IMetaDataTables) GetNextString(ixString uint32, pNext *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(ixString), uintptr(unsafe.Pointer(pNext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNextBlob dispatches through IMetaDataTables's vtable slot 19.
-func (self *IMetaDataTables) GetNextBlob(ixBlob uint32, pNext *uint32) foundation.HRESULT {
+func (self *IMetaDataTables) GetNextBlob(ixBlob uint32, pNext *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(ixBlob), uintptr(unsafe.Pointer(pNext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNextGuid dispatches through IMetaDataTables's vtable slot 20.
-func (self *IMetaDataTables) GetNextGuid(ixGuid uint32, pNext *uint32) foundation.HRESULT {
+func (self *IMetaDataTables) GetNextGuid(ixGuid uint32, pNext *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(ixGuid), uintptr(unsafe.Pointer(pNext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetNextUserString dispatches through IMetaDataTables's vtable slot 21.
-func (self *IMetaDataTables) GetNextUserString(ixUserString uint32, pNext *uint32) foundation.HRESULT {
+func (self *IMetaDataTables) GetNextUserString(ixUserString uint32, pNext *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(ixUserString), uintptr(unsafe.Pointer(pNext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IMetaDataTables2: https://learn.microsoft.com/windows/win32/api/rometadataapi/nn-rometadataapi-imetadatatables2
@@ -1354,15 +1409,15 @@ type IMetaDataTables2 struct {
 var IID_IMetaDataTables2 = win32.GUID{Data1: 0xbadb5f70, Data2: 0x58da, Data3: 0x43a9, Data4: [8]byte{0xa1, 0xc6, 0xd7, 0x48, 0x19, 0xf1, 0x9b, 0x15}}
 
 // GetMetaDataStorage dispatches through IMetaDataTables2's vtable slot 22.
-func (self *IMetaDataTables2) GetMetaDataStorage(ppvMd *unsafe.Pointer, pcbMd *uint32) foundation.HRESULT {
+func (self *IMetaDataTables2) GetMetaDataStorage(ppvMd *unsafe.Pointer, pcbMd *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppvMd)), uintptr(unsafe.Pointer(pcbMd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMetaDataStreamInfo dispatches through IMetaDataTables2's vtable slot 23.
-func (self *IMetaDataTables2) GetMetaDataStreamInfo(ix uint32, ppchName **int8, ppv *unsafe.Pointer, pcb *uint32) foundation.HRESULT {
+func (self *IMetaDataTables2) GetMetaDataStreamInfo(ix uint32, ppchName **int8, ppv *unsafe.Pointer, pcb *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(ix), uintptr(unsafe.Pointer(ppchName)), uintptr(unsafe.Pointer(ppv)), uintptr(unsafe.Pointer(pcb)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 4709c9c6-81ff-11d3-9fc7-00c04f79a0a3
@@ -1374,15 +1429,15 @@ type IMetaDataValidate struct {
 var IID_IMetaDataValidate = win32.GUID{Data1: 0x4709c9c6, Data2: 0x81ff, Data3: 0x11d3, Data4: [8]byte{0x9f, 0xc7, 0x00, 0xc0, 0x4f, 0x79, 0xa0, 0xa3}}
 
 // ValidatorInit dispatches through IMetaDataValidate's vtable slot 3.
-func (self *IMetaDataValidate) ValidatorInit(dwModuleType uint32, pUnk *systemcom.IUnknown) foundation.HRESULT {
+func (self *IMetaDataValidate) ValidatorInit(dwModuleType uint32, pUnk *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwModuleType), uintptr(unsafe.Pointer(pUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ValidateMetaData dispatches through IMetaDataValidate's vtable slot 4.
-func (self *IMetaDataValidate) ValidateMetaData() foundation.HRESULT {
+func (self *IMetaDataValidate) ValidateMetaData() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 969ea0c5-964e-411b-a807-b0f3c2dfcbd4
@@ -1394,9 +1449,9 @@ type IMetaDataWinMDImport struct {
 var IID_IMetaDataWinMDImport = win32.GUID{Data1: 0x969ea0c5, Data2: 0x964e, Data3: 0x411b, Data4: [8]byte{0xa8, 0x07, 0xb0, 0xf3, 0xc2, 0xdf, 0xcb, 0xd4}}
 
 // GetUntransformedTypeRefProps dispatches through IMetaDataWinMDImport's vtable slot 3.
-func (self *IMetaDataWinMDImport) GetUntransformedTypeRefProps(tr uint32, ptkResolutionScope *uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32) foundation.HRESULT {
+func (self *IMetaDataWinMDImport) GetUntransformedTypeRefProps(tr uint32, ptkResolutionScope *uint32, szName foundation.PWSTR, cchName uint32, pchName *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(tr), uintptr(unsafe.Pointer(ptkResolutionScope)), uintptr(unsafe.Pointer(szName)), uintptr(cchName), uintptr(unsafe.Pointer(pchName)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRoMetaDataLocator: https://learn.microsoft.com/windows/win32/api/roparameterizediid/ns-roparameterizediid-irometadatalocator
@@ -1405,9 +1460,10 @@ type IRoMetaDataLocator struct {
 }
 
 // Locate dispatches through IRoMetaDataLocator's vtable slot 0.
-func (self *IRoMetaDataLocator) Locate(nameElement foundation.PWSTR, metaDataDestination *IRoSimpleMetaDataBuilder) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(nameElement)), uintptr(unsafe.Pointer(metaDataDestination)))
-	return foundation.HRESULT(r1)
+func (self *IRoMetaDataLocator) Locate(nameElement string, metaDataDestination *IRoSimpleMetaDataBuilder) error {
+	_nameElement := win32.UTF16Ptr(nameElement)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[0], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_nameElement)), uintptr(unsafe.Pointer(metaDataDestination)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRoSimpleMetaDataBuilder: https://learn.microsoft.com/windows/win32/api/roparameterizediid/ns-roparameterizediid-irosimplemetadatabuilder
@@ -1416,37 +1472,46 @@ type IRoSimpleMetaDataBuilder struct {
 }
 
 // SetInterfaceGroupSimpleDefault dispatches through IRoSimpleMetaDataBuilder's vtable slot 2.
-func (self *IRoSimpleMetaDataBuilder) SetInterfaceGroupSimpleDefault(name foundation.PWSTR, defaultInterfaceName foundation.PWSTR, defaultInterfaceIID *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[2], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(defaultInterfaceName)), uintptr(unsafe.Pointer(defaultInterfaceIID)))
-	return foundation.HRESULT(r1)
+func (self *IRoSimpleMetaDataBuilder) SetInterfaceGroupSimpleDefault(name string, defaultInterfaceName string, defaultInterfaceIID *win32.GUID) error {
+	_name := win32.UTF16Ptr(name)
+	_defaultInterfaceName := win32.UTF16Ptr(defaultInterfaceName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[2], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(_defaultInterfaceName)), uintptr(unsafe.Pointer(defaultInterfaceIID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetInterfaceGroupParameterizedDefault dispatches through IRoSimpleMetaDataBuilder's vtable slot 3.
-func (self *IRoSimpleMetaDataBuilder) SetInterfaceGroupParameterizedDefault(name foundation.PWSTR, elementCount uint32, defaultInterfaceNameElements *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(elementCount), uintptr(unsafe.Pointer(defaultInterfaceNameElements)))
-	return foundation.HRESULT(r1)
+func (self *IRoSimpleMetaDataBuilder) SetInterfaceGroupParameterizedDefault(name string, elementCount uint32, defaultInterfaceNameElements *foundation.PWSTR) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(elementCount), uintptr(unsafe.Pointer(defaultInterfaceNameElements)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRuntimeClassSimpleDefault dispatches through IRoSimpleMetaDataBuilder's vtable slot 4.
-func (self *IRoSimpleMetaDataBuilder) SetRuntimeClassSimpleDefault(name foundation.PWSTR, defaultInterfaceName foundation.PWSTR, defaultInterfaceIID *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(defaultInterfaceName)), uintptr(unsafe.Pointer(defaultInterfaceIID)))
-	return foundation.HRESULT(r1)
+func (self *IRoSimpleMetaDataBuilder) SetRuntimeClassSimpleDefault(name string, defaultInterfaceName string, defaultInterfaceIID *win32.GUID) error {
+	_name := win32.UTF16Ptr(name)
+	_defaultInterfaceName := win32.UTF16Ptr(defaultInterfaceName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(_defaultInterfaceName)), uintptr(unsafe.Pointer(defaultInterfaceIID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRuntimeClassParameterizedDefault dispatches through IRoSimpleMetaDataBuilder's vtable slot 5.
-func (self *IRoSimpleMetaDataBuilder) SetRuntimeClassParameterizedDefault(name foundation.PWSTR, elementCount uint32, defaultInterfaceNameElements *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(elementCount), uintptr(unsafe.Pointer(defaultInterfaceNameElements)))
-	return foundation.HRESULT(r1)
+func (self *IRoSimpleMetaDataBuilder) SetRuntimeClassParameterizedDefault(name string, elementCount uint32, defaultInterfaceNameElements *foundation.PWSTR) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(elementCount), uintptr(unsafe.Pointer(defaultInterfaceNameElements)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStruct dispatches through IRoSimpleMetaDataBuilder's vtable slot 6.
-func (self *IRoSimpleMetaDataBuilder) SetStruct(name foundation.PWSTR, numFields uint32, fieldTypeNames *foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(numFields), uintptr(unsafe.Pointer(fieldTypeNames)))
-	return foundation.HRESULT(r1)
+func (self *IRoSimpleMetaDataBuilder) SetStruct(name string, numFields uint32, fieldTypeNames *foundation.PWSTR) error {
+	_name := win32.UTF16Ptr(name)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(numFields), uintptr(unsafe.Pointer(fieldTypeNames)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetEnum dispatches through IRoSimpleMetaDataBuilder's vtable slot 7.
-func (self *IRoSimpleMetaDataBuilder) SetEnum(name foundation.PWSTR, baseType foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(name)), uintptr(unsafe.Pointer(baseType)))
-	return foundation.HRESULT(r1)
+func (self *IRoSimpleMetaDataBuilder) SetEnum(name string, baseType string) error {
+	_name := win32.UTF16Ptr(name)
+	_baseType := win32.UTF16Ptr(baseType)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(unsafe.Pointer(_baseType)))
+	return win32.HRESULTError(int32(r1))
 }

@@ -20,25 +20,25 @@ var (
 var (
 	procK32EmptyWorkingSet             = modKERNEL32.NewProc("K32EmptyWorkingSet")
 	procK32EnumDeviceDrivers           = modKERNEL32.NewProc("K32EnumDeviceDrivers")
+	procK32EnumPageFiles               = modKERNEL32.NewProc("K32EnumPageFilesW")
 	procK32EnumPageFilesA              = modKERNEL32.NewProc("K32EnumPageFilesA")
-	procK32EnumPageFilesW              = modKERNEL32.NewProc("K32EnumPageFilesW")
 	procK32EnumProcessModules          = modKERNEL32.NewProc("K32EnumProcessModules")
 	procK32EnumProcessModulesEx        = modKERNEL32.NewProc("K32EnumProcessModulesEx")
 	procK32EnumProcesses               = modKERNEL32.NewProc("K32EnumProcesses")
+	procK32GetDeviceDriverBaseName     = modKERNEL32.NewProc("K32GetDeviceDriverBaseNameW")
 	procK32GetDeviceDriverBaseNameA    = modKERNEL32.NewProc("K32GetDeviceDriverBaseNameA")
-	procK32GetDeviceDriverBaseNameW    = modKERNEL32.NewProc("K32GetDeviceDriverBaseNameW")
+	procK32GetDeviceDriverFileName     = modKERNEL32.NewProc("K32GetDeviceDriverFileNameW")
 	procK32GetDeviceDriverFileNameA    = modKERNEL32.NewProc("K32GetDeviceDriverFileNameA")
-	procK32GetDeviceDriverFileNameW    = modKERNEL32.NewProc("K32GetDeviceDriverFileNameW")
+	procK32GetMappedFileName           = modKERNEL32.NewProc("K32GetMappedFileNameW")
 	procK32GetMappedFileNameA          = modKERNEL32.NewProc("K32GetMappedFileNameA")
-	procK32GetMappedFileNameW          = modKERNEL32.NewProc("K32GetMappedFileNameW")
+	procK32GetModuleBaseName           = modKERNEL32.NewProc("K32GetModuleBaseNameW")
 	procK32GetModuleBaseNameA          = modKERNEL32.NewProc("K32GetModuleBaseNameA")
-	procK32GetModuleBaseNameW          = modKERNEL32.NewProc("K32GetModuleBaseNameW")
+	procK32GetModuleFileNameEx         = modKERNEL32.NewProc("K32GetModuleFileNameExW")
 	procK32GetModuleFileNameExA        = modKERNEL32.NewProc("K32GetModuleFileNameExA")
-	procK32GetModuleFileNameExW        = modKERNEL32.NewProc("K32GetModuleFileNameExW")
 	procK32GetModuleInformation        = modKERNEL32.NewProc("K32GetModuleInformation")
 	procK32GetPerformanceInfo          = modKERNEL32.NewProc("K32GetPerformanceInfo")
+	procK32GetProcessImageFileName     = modKERNEL32.NewProc("K32GetProcessImageFileNameW")
 	procK32GetProcessImageFileNameA    = modKERNEL32.NewProc("K32GetProcessImageFileNameA")
-	procK32GetProcessImageFileNameW    = modKERNEL32.NewProc("K32GetProcessImageFileNameW")
 	procK32GetProcessMemoryInfo        = modKERNEL32.NewProc("K32GetProcessMemoryInfo")
 	procK32GetWsChanges                = modKERNEL32.NewProc("K32GetWsChanges")
 	procK32GetWsChangesEx              = modKERNEL32.NewProc("K32GetWsChangesEx")
@@ -47,25 +47,25 @@ var (
 	procK32QueryWorkingSetEx           = modKERNEL32.NewProc("K32QueryWorkingSetEx")
 	procEmptyWorkingSet                = modPSAPI.NewProc("EmptyWorkingSet")
 	procEnumDeviceDrivers              = modPSAPI.NewProc("EnumDeviceDrivers")
+	procEnumPageFiles                  = modPSAPI.NewProc("EnumPageFilesW")
 	procEnumPageFilesA                 = modPSAPI.NewProc("EnumPageFilesA")
-	procEnumPageFilesW                 = modPSAPI.NewProc("EnumPageFilesW")
 	procEnumProcessModules             = modPSAPI.NewProc("EnumProcessModules")
 	procEnumProcessModulesEx           = modPSAPI.NewProc("EnumProcessModulesEx")
 	procEnumProcesses                  = modPSAPI.NewProc("EnumProcesses")
+	procGetDeviceDriverBaseName        = modPSAPI.NewProc("GetDeviceDriverBaseNameW")
 	procGetDeviceDriverBaseNameA       = modPSAPI.NewProc("GetDeviceDriverBaseNameA")
-	procGetDeviceDriverBaseNameW       = modPSAPI.NewProc("GetDeviceDriverBaseNameW")
+	procGetDeviceDriverFileName        = modPSAPI.NewProc("GetDeviceDriverFileNameW")
 	procGetDeviceDriverFileNameA       = modPSAPI.NewProc("GetDeviceDriverFileNameA")
-	procGetDeviceDriverFileNameW       = modPSAPI.NewProc("GetDeviceDriverFileNameW")
+	procGetMappedFileName              = modPSAPI.NewProc("GetMappedFileNameW")
 	procGetMappedFileNameA             = modPSAPI.NewProc("GetMappedFileNameA")
-	procGetMappedFileNameW             = modPSAPI.NewProc("GetMappedFileNameW")
+	procGetModuleBaseName              = modPSAPI.NewProc("GetModuleBaseNameW")
 	procGetModuleBaseNameA             = modPSAPI.NewProc("GetModuleBaseNameA")
-	procGetModuleBaseNameW             = modPSAPI.NewProc("GetModuleBaseNameW")
+	procGetModuleFileNameEx            = modPSAPI.NewProc("GetModuleFileNameExW")
 	procGetModuleFileNameExA           = modPSAPI.NewProc("GetModuleFileNameExA")
-	procGetModuleFileNameExW           = modPSAPI.NewProc("GetModuleFileNameExW")
 	procGetModuleInformation           = modPSAPI.NewProc("GetModuleInformation")
 	procGetPerformanceInfo             = modPSAPI.NewProc("GetPerformanceInfo")
+	procGetProcessImageFileName        = modPSAPI.NewProc("GetProcessImageFileNameW")
 	procGetProcessImageFileNameA       = modPSAPI.NewProc("GetProcessImageFileNameA")
-	procGetProcessImageFileNameW       = modPSAPI.NewProc("GetProcessImageFileNameW")
 	procGetProcessMemoryInfo           = modPSAPI.NewProc("GetProcessMemoryInfo")
 	procGetWsChanges                   = modPSAPI.NewProc("GetWsChanges")
 	procGetWsChangesEx                 = modPSAPI.NewProc("GetWsChangesEx")
@@ -96,22 +96,22 @@ func EnumDeviceDrivers(lpImageBase *unsafe.Pointer, cb uint32, lpcbNeeded *uint3
 	return nil
 }
 
-// EnumPageFilesA calls PSAPI!EnumPageFilesA.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-enumpagefilesa
+// EnumPageFiles calls PSAPI!EnumPageFilesW.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-enumpagefilesw
 // Minimum OS: windows5.1.2600.
-func EnumPageFilesA(pCallBackRoutine PENUM_PAGE_FILE_CALLBACKA, pContext unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procEnumPageFilesA.Addr(), uintptr(pCallBackRoutine), uintptr(unsafe.Pointer(pContext)))
+func EnumPageFiles(pCallBackRoutine PENUM_PAGE_FILE_CALLBACKW, pContext unsafe.Pointer) error {
+	r1, _, e1 := syscall.SyscallN(procEnumPageFiles.Addr(), uintptr(pCallBackRoutine), uintptr(unsafe.Pointer(pContext)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// EnumPageFilesW calls PSAPI!EnumPageFilesW.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-enumpagefilesw
+// EnumPageFilesA calls PSAPI!EnumPageFilesA.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-enumpagefilesa
 // Minimum OS: windows5.1.2600.
-func EnumPageFilesW(pCallBackRoutine PENUM_PAGE_FILE_CALLBACKW, pContext unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procEnumPageFilesW.Addr(), uintptr(pCallBackRoutine), uintptr(unsafe.Pointer(pContext)))
+func EnumPageFilesA(pCallBackRoutine PENUM_PAGE_FILE_CALLBACKA, pContext unsafe.Pointer) error {
+	r1, _, e1 := syscall.SyscallN(procEnumPageFilesA.Addr(), uintptr(pCallBackRoutine), uintptr(unsafe.Pointer(pContext)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -151,6 +151,17 @@ func EnumProcesses(lpidProcess *uint32, cb uint32, lpcbNeeded *uint32) error {
 	return nil
 }
 
+// GetDeviceDriverBaseName calls PSAPI!GetDeviceDriverBaseNameW.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getdevicedriverbasenamew
+// Minimum OS: windows5.1.2600.
+func GetDeviceDriverBaseName(ImageBase unsafe.Pointer, lpBaseName foundation.PWSTR, nSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetDeviceDriverBaseName.Addr(), uintptr(unsafe.Pointer(ImageBase)), uintptr(unsafe.Pointer(lpBaseName)), uintptr(nSize))
+	if e1 != 0 {
+		return uint32(r1), e1
+	}
+	return uint32(r1), nil
+}
+
 // GetDeviceDriverBaseNameA calls PSAPI!GetDeviceDriverBaseNameA.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getdevicedriverbasenamea
 // Minimum OS: windows5.1.2600.
@@ -162,11 +173,11 @@ func GetDeviceDriverBaseNameA(ImageBase unsafe.Pointer, lpFilename foundation.PS
 	return uint32(r1), nil
 }
 
-// GetDeviceDriverBaseNameW calls PSAPI!GetDeviceDriverBaseNameW.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getdevicedriverbasenamew
+// GetDeviceDriverFileName calls PSAPI!GetDeviceDriverFileNameW.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getdevicedriverfilenamew
 // Minimum OS: windows5.1.2600.
-func GetDeviceDriverBaseNameW(ImageBase unsafe.Pointer, lpBaseName foundation.PWSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetDeviceDriverBaseNameW.Addr(), uintptr(unsafe.Pointer(ImageBase)), uintptr(unsafe.Pointer(lpBaseName)), uintptr(nSize))
+func GetDeviceDriverFileName(ImageBase unsafe.Pointer, lpFilename foundation.PWSTR, nSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetDeviceDriverFileName.Addr(), uintptr(unsafe.Pointer(ImageBase)), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -184,11 +195,11 @@ func GetDeviceDriverFileNameA(ImageBase unsafe.Pointer, lpFilename foundation.PS
 	return uint32(r1), nil
 }
 
-// GetDeviceDriverFileNameW calls PSAPI!GetDeviceDriverFileNameW.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getdevicedriverfilenamew
+// GetMappedFileName calls PSAPI!GetMappedFileNameW.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmappedfilenamew
 // Minimum OS: windows5.1.2600.
-func GetDeviceDriverFileNameW(ImageBase unsafe.Pointer, lpFilename foundation.PWSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetDeviceDriverFileNameW.Addr(), uintptr(unsafe.Pointer(ImageBase)), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
+func GetMappedFileName(hProcess foundation.HANDLE, lpv unsafe.Pointer, lpFilename foundation.PWSTR, nSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetMappedFileName.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpv)), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -206,11 +217,11 @@ func GetMappedFileNameA(hProcess foundation.HANDLE, lpv unsafe.Pointer, lpFilena
 	return uint32(r1), nil
 }
 
-// GetMappedFileNameW calls PSAPI!GetMappedFileNameW.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmappedfilenamew
+// GetModuleBaseName calls PSAPI!GetModuleBaseNameW.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmodulebasenamew
 // Minimum OS: windows5.1.2600.
-func GetMappedFileNameW(hProcess foundation.HANDLE, lpv unsafe.Pointer, lpFilename foundation.PWSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetMappedFileNameW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpv)), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
+func GetModuleBaseName(hProcess foundation.HANDLE, hModule foundation.HMODULE, lpBaseName foundation.PWSTR, nSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetModuleBaseName.Addr(), uintptr(hProcess), uintptr(hModule), uintptr(unsafe.Pointer(lpBaseName)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -228,11 +239,11 @@ func GetModuleBaseNameA(hProcess foundation.HANDLE, hModule foundation.HMODULE, 
 	return uint32(r1), nil
 }
 
-// GetModuleBaseNameW calls PSAPI!GetModuleBaseNameW.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmodulebasenamew
+// GetModuleFileNameEx calls PSAPI!GetModuleFileNameExW.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmodulefilenameexw
 // Minimum OS: windows5.1.2600.
-func GetModuleBaseNameW(hProcess foundation.HANDLE, hModule foundation.HMODULE, lpBaseName foundation.PWSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetModuleBaseNameW.Addr(), uintptr(hProcess), uintptr(hModule), uintptr(unsafe.Pointer(lpBaseName)), uintptr(nSize))
+func GetModuleFileNameEx(hProcess foundation.HANDLE, hModule foundation.HMODULE, lpFilename foundation.PWSTR, nSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetModuleFileNameEx.Addr(), uintptr(hProcess), uintptr(hModule), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -244,17 +255,6 @@ func GetModuleBaseNameW(hProcess foundation.HANDLE, hModule foundation.HMODULE, 
 // Minimum OS: windows5.1.2600.
 func GetModuleFileNameExA(hProcess foundation.HANDLE, hModule foundation.HMODULE, lpFilename foundation.PSTR, nSize uint32) (uint32, error) {
 	r1, _, e1 := syscall.SyscallN(procGetModuleFileNameExA.Addr(), uintptr(hProcess), uintptr(hModule), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
-	if e1 != 0 {
-		return uint32(r1), e1
-	}
-	return uint32(r1), nil
-}
-
-// GetModuleFileNameExW calls PSAPI!GetModuleFileNameExW.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmodulefilenameexw
-// Minimum OS: windows5.1.2600.
-func GetModuleFileNameExW(hProcess foundation.HANDLE, hModule foundation.HMODULE, lpFilename foundation.PWSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetModuleFileNameExW.Addr(), uintptr(hProcess), uintptr(hModule), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -283,22 +283,22 @@ func GetPerformanceInfo(pPerformanceInformation *PERFORMANCE_INFORMATION, cb uin
 	return nil
 }
 
-// GetProcessImageFileNameA calls PSAPI!GetProcessImageFileNameA.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getprocessimagefilenamea
+// GetProcessImageFileName calls PSAPI!GetProcessImageFileNameW.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getprocessimagefilenamew
 // Minimum OS: windows5.1.2600.
-func GetProcessImageFileNameA(hProcess foundation.HANDLE, lpImageFileName foundation.PSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetProcessImageFileNameA.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpImageFileName)), uintptr(nSize))
+func GetProcessImageFileName(hProcess foundation.HANDLE, lpImageFileName foundation.PWSTR, nSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetProcessImageFileName.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpImageFileName)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
 	return uint32(r1), nil
 }
 
-// GetProcessImageFileNameW calls PSAPI!GetProcessImageFileNameW.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getprocessimagefilenamew
+// GetProcessImageFileNameA calls PSAPI!GetProcessImageFileNameA.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getprocessimagefilenamea
 // Minimum OS: windows5.1.2600.
-func GetProcessImageFileNameW(hProcess foundation.HANDLE, lpImageFileName foundation.PWSTR, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetProcessImageFileNameW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpImageFileName)), uintptr(nSize))
+func GetProcessImageFileNameA(hProcess foundation.HANDLE, lpImageFileName foundation.PSTR, nSize uint32) (uint32, error) {
+	r1, _, e1 := syscall.SyscallN(procGetProcessImageFileNameA.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpImageFileName)), uintptr(nSize))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -351,51 +351,58 @@ func InitializeProcessForWsWatch(hProcess foundation.HANDLE) error {
 
 // K32EmptyWorkingSet calls KERNEL32!K32EmptyWorkingSet.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-emptyworkingset
-func K32EmptyWorkingSet(hProcess foundation.HANDLE) foundation.BOOL {
+func K32EmptyWorkingSet(hProcess foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procK32EmptyWorkingSet.Addr(), uintptr(hProcess))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // K32EnumDeviceDrivers calls KERNEL32!K32EnumDeviceDrivers.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-enumdevicedrivers
-func K32EnumDeviceDrivers(lpImageBase *unsafe.Pointer, cb uint32, lpcbNeeded *uint32) foundation.BOOL {
+func K32EnumDeviceDrivers(lpImageBase *unsafe.Pointer, cb uint32, lpcbNeeded *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procK32EnumDeviceDrivers.Addr(), uintptr(unsafe.Pointer(lpImageBase)), uintptr(cb), uintptr(unsafe.Pointer(lpcbNeeded)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// K32EnumPageFiles calls KERNEL32!K32EnumPageFilesW.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-enumpagefilesa
+func K32EnumPageFiles(pCallBackRoutine PENUM_PAGE_FILE_CALLBACKW, pContext unsafe.Pointer) bool {
+	r1, _, _ := syscall.SyscallN(procK32EnumPageFiles.Addr(), uintptr(pCallBackRoutine), uintptr(unsafe.Pointer(pContext)))
+	return r1 != 0
 }
 
 // K32EnumPageFilesA calls KERNEL32!K32EnumPageFilesA.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-enumpagefilesa
-func K32EnumPageFilesA(pCallBackRoutine PENUM_PAGE_FILE_CALLBACKA, pContext unsafe.Pointer) foundation.BOOL {
+func K32EnumPageFilesA(pCallBackRoutine PENUM_PAGE_FILE_CALLBACKA, pContext unsafe.Pointer) bool {
 	r1, _, _ := syscall.SyscallN(procK32EnumPageFilesA.Addr(), uintptr(pCallBackRoutine), uintptr(unsafe.Pointer(pContext)))
-	return foundation.BOOL(r1)
-}
-
-// K32EnumPageFilesW calls KERNEL32!K32EnumPageFilesW.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-enumpagefilesa
-func K32EnumPageFilesW(pCallBackRoutine PENUM_PAGE_FILE_CALLBACKW, pContext unsafe.Pointer) foundation.BOOL {
-	r1, _, _ := syscall.SyscallN(procK32EnumPageFilesW.Addr(), uintptr(pCallBackRoutine), uintptr(unsafe.Pointer(pContext)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // K32EnumProcessModules calls KERNEL32!K32EnumProcessModules.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-enumprocessmodules
-func K32EnumProcessModules(hProcess foundation.HANDLE, lphModule *foundation.HMODULE, cb uint32, lpcbNeeded *uint32) foundation.BOOL {
+func K32EnumProcessModules(hProcess foundation.HANDLE, lphModule *foundation.HMODULE, cb uint32, lpcbNeeded *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procK32EnumProcessModules.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lphModule)), uintptr(cb), uintptr(unsafe.Pointer(lpcbNeeded)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // K32EnumProcessModulesEx calls KERNEL32!K32EnumProcessModulesEx.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-enumprocessmodulesex
-func K32EnumProcessModulesEx(hProcess foundation.HANDLE, lphModule *foundation.HMODULE, cb uint32, lpcbNeeded *uint32, dwFilterFlag uint32) foundation.BOOL {
+func K32EnumProcessModulesEx(hProcess foundation.HANDLE, lphModule *foundation.HMODULE, cb uint32, lpcbNeeded *uint32, dwFilterFlag uint32) bool {
 	r1, _, _ := syscall.SyscallN(procK32EnumProcessModulesEx.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lphModule)), uintptr(cb), uintptr(unsafe.Pointer(lpcbNeeded)), uintptr(dwFilterFlag))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // K32EnumProcesses calls KERNEL32!K32EnumProcesses.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-enumprocesses
-func K32EnumProcesses(lpidProcess *uint32, cb uint32, lpcbNeeded *uint32) foundation.BOOL {
+func K32EnumProcesses(lpidProcess *uint32, cb uint32, lpcbNeeded *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procK32EnumProcesses.Addr(), uintptr(unsafe.Pointer(lpidProcess)), uintptr(cb), uintptr(unsafe.Pointer(lpcbNeeded)))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// K32GetDeviceDriverBaseName calls KERNEL32!K32GetDeviceDriverBaseNameW.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getdevicedriverbasenamea
+func K32GetDeviceDriverBaseName(ImageBase unsafe.Pointer, lpBaseName foundation.PWSTR, nSize uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procK32GetDeviceDriverBaseName.Addr(), uintptr(unsafe.Pointer(ImageBase)), uintptr(unsafe.Pointer(lpBaseName)), uintptr(nSize))
+	return uint32(r1)
 }
 
 // K32GetDeviceDriverBaseNameA calls KERNEL32!K32GetDeviceDriverBaseNameA.
@@ -405,10 +412,10 @@ func K32GetDeviceDriverBaseNameA(ImageBase unsafe.Pointer, lpFilename foundation
 	return uint32(r1)
 }
 
-// K32GetDeviceDriverBaseNameW calls KERNEL32!K32GetDeviceDriverBaseNameW.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getdevicedriverbasenamea
-func K32GetDeviceDriverBaseNameW(ImageBase unsafe.Pointer, lpBaseName foundation.PWSTR, nSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procK32GetDeviceDriverBaseNameW.Addr(), uintptr(unsafe.Pointer(ImageBase)), uintptr(unsafe.Pointer(lpBaseName)), uintptr(nSize))
+// K32GetDeviceDriverFileName calls KERNEL32!K32GetDeviceDriverFileNameW.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getdevicedriverfilenamew
+func K32GetDeviceDriverFileName(ImageBase unsafe.Pointer, lpFilename foundation.PWSTR, nSize uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procK32GetDeviceDriverFileName.Addr(), uintptr(unsafe.Pointer(ImageBase)), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
 	return uint32(r1)
 }
 
@@ -419,10 +426,10 @@ func K32GetDeviceDriverFileNameA(ImageBase unsafe.Pointer, lpFilename foundation
 	return uint32(r1)
 }
 
-// K32GetDeviceDriverFileNameW calls KERNEL32!K32GetDeviceDriverFileNameW.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getdevicedriverfilenamew
-func K32GetDeviceDriverFileNameW(ImageBase unsafe.Pointer, lpFilename foundation.PWSTR, nSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procK32GetDeviceDriverFileNameW.Addr(), uintptr(unsafe.Pointer(ImageBase)), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
+// K32GetMappedFileName calls KERNEL32!K32GetMappedFileNameW.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmappedfilenamew
+func K32GetMappedFileName(hProcess foundation.HANDLE, lpv unsafe.Pointer, lpFilename foundation.PWSTR, nSize uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procK32GetMappedFileName.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpv)), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
 	return uint32(r1)
 }
 
@@ -433,10 +440,10 @@ func K32GetMappedFileNameA(hProcess foundation.HANDLE, lpv unsafe.Pointer, lpFil
 	return uint32(r1)
 }
 
-// K32GetMappedFileNameW calls KERNEL32!K32GetMappedFileNameW.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmappedfilenamew
-func K32GetMappedFileNameW(hProcess foundation.HANDLE, lpv unsafe.Pointer, lpFilename foundation.PWSTR, nSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procK32GetMappedFileNameW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpv)), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
+// K32GetModuleBaseName calls KERNEL32!K32GetModuleBaseNameW.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmodulebasenamew
+func K32GetModuleBaseName(hProcess foundation.HANDLE, hModule foundation.HMODULE, lpBaseName foundation.PWSTR, nSize uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procK32GetModuleBaseName.Addr(), uintptr(hProcess), uintptr(hModule), uintptr(unsafe.Pointer(lpBaseName)), uintptr(nSize))
 	return uint32(r1)
 }
 
@@ -447,10 +454,10 @@ func K32GetModuleBaseNameA(hProcess foundation.HANDLE, hModule foundation.HMODUL
 	return uint32(r1)
 }
 
-// K32GetModuleBaseNameW calls KERNEL32!K32GetModuleBaseNameW.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmodulebasenamew
-func K32GetModuleBaseNameW(hProcess foundation.HANDLE, hModule foundation.HMODULE, lpBaseName foundation.PWSTR, nSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procK32GetModuleBaseNameW.Addr(), uintptr(hProcess), uintptr(hModule), uintptr(unsafe.Pointer(lpBaseName)), uintptr(nSize))
+// K32GetModuleFileNameEx calls KERNEL32!K32GetModuleFileNameExW.
+// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmodulefilenameexw
+func K32GetModuleFileNameEx(hProcess foundation.HANDLE, hModule foundation.HMODULE, lpFilename foundation.PWSTR, nSize uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procK32GetModuleFileNameEx.Addr(), uintptr(hProcess), uintptr(hModule), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
 	return uint32(r1)
 }
 
@@ -461,25 +468,24 @@ func K32GetModuleFileNameExA(hProcess foundation.HANDLE, hModule foundation.HMOD
 	return uint32(r1)
 }
 
-// K32GetModuleFileNameExW calls KERNEL32!K32GetModuleFileNameExW.
-// https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmodulefilenameexw
-func K32GetModuleFileNameExW(hProcess foundation.HANDLE, hModule foundation.HMODULE, lpFilename foundation.PWSTR, nSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procK32GetModuleFileNameExW.Addr(), uintptr(hProcess), uintptr(hModule), uintptr(unsafe.Pointer(lpFilename)), uintptr(nSize))
-	return uint32(r1)
-}
-
 // K32GetModuleInformation calls KERNEL32!K32GetModuleInformation.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getmoduleinformation
-func K32GetModuleInformation(hProcess foundation.HANDLE, hModule foundation.HMODULE, lpmodinfo *MODULEINFO, cb uint32) foundation.BOOL {
+func K32GetModuleInformation(hProcess foundation.HANDLE, hModule foundation.HMODULE, lpmodinfo *MODULEINFO, cb uint32) bool {
 	r1, _, _ := syscall.SyscallN(procK32GetModuleInformation.Addr(), uintptr(hProcess), uintptr(hModule), uintptr(unsafe.Pointer(lpmodinfo)), uintptr(cb))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // K32GetPerformanceInfo calls KERNEL32!K32GetPerformanceInfo.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getperformanceinfo
-func K32GetPerformanceInfo(pPerformanceInformation *PERFORMANCE_INFORMATION, cb uint32) foundation.BOOL {
+func K32GetPerformanceInfo(pPerformanceInformation *PERFORMANCE_INFORMATION, cb uint32) bool {
 	r1, _, _ := syscall.SyscallN(procK32GetPerformanceInfo.Addr(), uintptr(unsafe.Pointer(pPerformanceInformation)), uintptr(cb))
-	return foundation.BOOL(r1)
+	return r1 != 0
+}
+
+// K32GetProcessImageFileName calls KERNEL32!K32GetProcessImageFileNameW.
+func K32GetProcessImageFileName(hProcess foundation.HANDLE, lpImageFileName foundation.PWSTR, nSize uint32) uint32 {
+	r1, _, _ := syscall.SyscallN(procK32GetProcessImageFileName.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpImageFileName)), uintptr(nSize))
+	return uint32(r1)
 }
 
 // K32GetProcessImageFileNameA calls KERNEL32!K32GetProcessImageFileNameA.
@@ -488,52 +494,46 @@ func K32GetProcessImageFileNameA(hProcess foundation.HANDLE, lpImageFileName fou
 	return uint32(r1)
 }
 
-// K32GetProcessImageFileNameW calls KERNEL32!K32GetProcessImageFileNameW.
-func K32GetProcessImageFileNameW(hProcess foundation.HANDLE, lpImageFileName foundation.PWSTR, nSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procK32GetProcessImageFileNameW.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpImageFileName)), uintptr(nSize))
-	return uint32(r1)
-}
-
 // K32GetProcessMemoryInfo calls KERNEL32!K32GetProcessMemoryInfo.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getprocessmemoryinfo
-func K32GetProcessMemoryInfo(Process foundation.HANDLE, ppsmemCounters *PROCESS_MEMORY_COUNTERS, cb uint32) foundation.BOOL {
+func K32GetProcessMemoryInfo(Process foundation.HANDLE, ppsmemCounters *PROCESS_MEMORY_COUNTERS, cb uint32) bool {
 	r1, _, _ := syscall.SyscallN(procK32GetProcessMemoryInfo.Addr(), uintptr(Process), uintptr(unsafe.Pointer(ppsmemCounters)), uintptr(cb))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // K32GetWsChanges calls KERNEL32!K32GetWsChanges.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getwschanges
-func K32GetWsChanges(hProcess foundation.HANDLE, lpWatchInfo *PSAPI_WS_WATCH_INFORMATION, cb uint32) foundation.BOOL {
+func K32GetWsChanges(hProcess foundation.HANDLE, lpWatchInfo *PSAPI_WS_WATCH_INFORMATION, cb uint32) bool {
 	r1, _, _ := syscall.SyscallN(procK32GetWsChanges.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpWatchInfo)), uintptr(cb))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // K32GetWsChangesEx calls KERNEL32!K32GetWsChangesEx.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-getwschangesex
-func K32GetWsChangesEx(hProcess foundation.HANDLE, lpWatchInfoEx *PSAPI_WS_WATCH_INFORMATION_EX, cb *uint32) foundation.BOOL {
+func K32GetWsChangesEx(hProcess foundation.HANDLE, lpWatchInfoEx *PSAPI_WS_WATCH_INFORMATION_EX, cb *uint32) bool {
 	r1, _, _ := syscall.SyscallN(procK32GetWsChangesEx.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpWatchInfoEx)), uintptr(unsafe.Pointer(cb)))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // K32InitializeProcessForWsWatch calls KERNEL32!K32InitializeProcessForWsWatch.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-initializeprocessforwswatch
-func K32InitializeProcessForWsWatch(hProcess foundation.HANDLE) foundation.BOOL {
+func K32InitializeProcessForWsWatch(hProcess foundation.HANDLE) bool {
 	r1, _, _ := syscall.SyscallN(procK32InitializeProcessForWsWatch.Addr(), uintptr(hProcess))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // K32QueryWorkingSet calls KERNEL32!K32QueryWorkingSet.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-queryworkingset
-func K32QueryWorkingSet(hProcess foundation.HANDLE, pv unsafe.Pointer, cb uint32) foundation.BOOL {
+func K32QueryWorkingSet(hProcess foundation.HANDLE, pv unsafe.Pointer, cb uint32) bool {
 	r1, _, _ := syscall.SyscallN(procK32QueryWorkingSet.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pv)), uintptr(cb))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // K32QueryWorkingSetEx calls KERNEL32!K32QueryWorkingSetEx.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-queryworkingsetex
-func K32QueryWorkingSetEx(hProcess foundation.HANDLE, pv unsafe.Pointer, cb uint32) foundation.BOOL {
+func K32QueryWorkingSetEx(hProcess foundation.HANDLE, pv unsafe.Pointer, cb uint32) bool {
 	r1, _, _ := syscall.SyscallN(procK32QueryWorkingSetEx.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pv)), uintptr(cb))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // QueryWorkingSet calls PSAPI!QueryWorkingSet.

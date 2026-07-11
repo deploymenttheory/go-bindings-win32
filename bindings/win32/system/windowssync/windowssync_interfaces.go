@@ -24,27 +24,27 @@ type IAsynchronousDataRetriever struct {
 var IID_IAsynchronousDataRetriever = win32.GUID{Data1: 0x9fc7e470, Data2: 0x61ea, Data3: 0x4a88, Data4: [8]byte{0x9b, 0xe4, 0xdf, 0x56, 0xa2, 0x7c, 0xfe, 0xf2}}
 
 // GetIdParameters dispatches through IAsynchronousDataRetriever's vtable slot 3.
-func (self *IAsynchronousDataRetriever) GetIdParameters(pIdParameters *ID_PARAMETERS) foundation.HRESULT {
+func (self *IAsynchronousDataRetriever) GetIdParameters(pIdParameters *ID_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIdParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterCallback dispatches through IAsynchronousDataRetriever's vtable slot 4.
-func (self *IAsynchronousDataRetriever) RegisterCallback(pDataRetrieverCallback *IDataRetrieverCallback) foundation.HRESULT {
+func (self *IAsynchronousDataRetriever) RegisterCallback(pDataRetrieverCallback *IDataRetrieverCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataRetrieverCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RevokeCallback dispatches through IAsynchronousDataRetriever's vtable slot 5.
-func (self *IAsynchronousDataRetriever) RevokeCallback(pDataRetrieverCallback *IDataRetrieverCallback) foundation.HRESULT {
+func (self *IAsynchronousDataRetriever) RevokeCallback(pDataRetrieverCallback *IDataRetrieverCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataRetrieverCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadChangeData dispatches through IAsynchronousDataRetriever's vtable slot 6.
-func (self *IAsynchronousDataRetriever) LoadChangeData(pLoadChangeContext *ILoadChangeContext) foundation.HRESULT {
+func (self *IAsynchronousDataRetriever) LoadChangeData(pLoadChangeContext *ILoadChangeContext) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLoadChangeContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IChangeConflict: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-ichangeconflict
@@ -57,51 +57,51 @@ type IChangeConflict struct {
 var IID_IChangeConflict = win32.GUID{Data1: 0x014ebf97, Data2: 0x9f20, Data3: 0x4f7a, Data4: [8]byte{0xbd, 0xd4, 0x25, 0x97, 0x9c, 0x77, 0xc0, 0x02}}
 
 // GetDestinationProviderConflictingChange dispatches through IChangeConflict's vtable slot 3.
-func (self *IChangeConflict) GetDestinationProviderConflictingChange(ppConflictingChange **ISyncChange) foundation.HRESULT {
+func (self *IChangeConflict) GetDestinationProviderConflictingChange(ppConflictingChange **ISyncChange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppConflictingChange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceProviderConflictingChange dispatches through IChangeConflict's vtable slot 4.
-func (self *IChangeConflict) GetSourceProviderConflictingChange(ppConflictingChange **ISyncChange) foundation.HRESULT {
+func (self *IChangeConflict) GetSourceProviderConflictingChange(ppConflictingChange **ISyncChange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppConflictingChange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDestinationProviderConflictingData dispatches through IChangeConflict's vtable slot 5.
-func (self *IChangeConflict) GetDestinationProviderConflictingData(ppConflictingData **systemcom.IUnknown) foundation.HRESULT {
+func (self *IChangeConflict) GetDestinationProviderConflictingData(ppConflictingData **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppConflictingData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceProviderConflictingData dispatches through IChangeConflict's vtable slot 6.
-func (self *IChangeConflict) GetSourceProviderConflictingData(ppConflictingData **systemcom.IUnknown) foundation.HRESULT {
+func (self *IChangeConflict) GetSourceProviderConflictingData(ppConflictingData **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppConflictingData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResolveActionForChange dispatches through IChangeConflict's vtable slot 7.
-func (self *IChangeConflict) GetResolveActionForChange(pResolveAction *SYNC_RESOLVE_ACTION) foundation.HRESULT {
+func (self *IChangeConflict) GetResolveActionForChange(pResolveAction *SYNC_RESOLVE_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResolveAction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetResolveActionForChange dispatches through IChangeConflict's vtable slot 8.
-func (self *IChangeConflict) SetResolveActionForChange(resolveAction SYNC_RESOLVE_ACTION) foundation.HRESULT {
+func (self *IChangeConflict) SetResolveActionForChange(resolveAction SYNC_RESOLVE_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(resolveAction))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetResolveActionForChangeUnit dispatches through IChangeConflict's vtable slot 9.
-func (self *IChangeConflict) GetResolveActionForChangeUnit(pChangeUnit *ISyncChangeUnit, pResolveAction *SYNC_RESOLVE_ACTION) foundation.HRESULT {
+func (self *IChangeConflict) GetResolveActionForChangeUnit(pChangeUnit *ISyncChangeUnit, pResolveAction *SYNC_RESOLVE_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChangeUnit)), uintptr(unsafe.Pointer(pResolveAction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetResolveActionForChangeUnit dispatches through IChangeConflict's vtable slot 10.
-func (self *IChangeConflict) SetResolveActionForChangeUnit(pChangeUnit *ISyncChangeUnit, resolveAction SYNC_RESOLVE_ACTION) foundation.HRESULT {
+func (self *IChangeConflict) SetResolveActionForChangeUnit(pChangeUnit *ISyncChangeUnit, resolveAction SYNC_RESOLVE_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChangeUnit)), uintptr(resolveAction))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IChangeUnitException: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-ichangeunitexception
@@ -114,21 +114,21 @@ type IChangeUnitException struct {
 var IID_IChangeUnitException = win32.GUID{Data1: 0x0cd7ee7c, Data2: 0xfec0, Data3: 0x4021, Data4: [8]byte{0x99, 0xee, 0xf0, 0xe5, 0x34, 0x8f, 0x2a, 0x5f}}
 
 // GetItemId dispatches through IChangeUnitException's vtable slot 3.
-func (self *IChangeUnitException) GetItemId(pbItemId *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *IChangeUnitException) GetItemId(pbItemId *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChangeUnitId dispatches through IChangeUnitException's vtable slot 4.
-func (self *IChangeUnitException) GetChangeUnitId(pbChangeUnitId *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *IChangeUnitException) GetChangeUnitId(pbChangeUnitId *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbChangeUnitId)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClockVector dispatches through IChangeUnitException's vtable slot 5.
-func (self *IChangeUnitException) GetClockVector(riid *win32.GUID, ppUnk *unsafe.Pointer) foundation.HRESULT {
+func (self *IChangeUnitException) GetClockVector(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IChangeUnitListFilterInfo: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-ichangeunitlistfilterinfo
@@ -141,21 +141,21 @@ type IChangeUnitListFilterInfo struct {
 var IID_IChangeUnitListFilterInfo = win32.GUID{Data1: 0xf2837671, Data2: 0x0bdf, Data3: 0x43fa, Data4: [8]byte{0xb5, 0x02, 0x23, 0x23, 0x75, 0xfb, 0x50, 0xc2}}
 
 // Initialize dispatches through IChangeUnitListFilterInfo's vtable slot 4.
-func (self *IChangeUnitListFilterInfo) Initialize(ppbChangeUnitIds **byte, dwChangeUnitCount uint32) foundation.HRESULT {
+func (self *IChangeUnitListFilterInfo) Initialize(ppbChangeUnitIds **byte, dwChangeUnitCount uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppbChangeUnitIds)), uintptr(dwChangeUnitCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChangeUnitIdCount dispatches through IChangeUnitListFilterInfo's vtable slot 5.
-func (self *IChangeUnitListFilterInfo) GetChangeUnitIdCount(pdwChangeUnitIdCount *uint32) foundation.HRESULT {
+func (self *IChangeUnitListFilterInfo) GetChangeUnitIdCount(pdwChangeUnitIdCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwChangeUnitIdCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChangeUnitId dispatches through IChangeUnitListFilterInfo's vtable slot 6.
-func (self *IChangeUnitListFilterInfo) GetChangeUnitId(dwChangeUnitIdIndex uint32, pbChangeUnitId *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *IChangeUnitListFilterInfo) GetChangeUnitId(dwChangeUnitIdIndex uint32, pbChangeUnitId *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwChangeUnitIdIndex), uintptr(unsafe.Pointer(pbChangeUnitId)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IClockVector: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-iclockvector
@@ -168,15 +168,15 @@ type IClockVector struct {
 var IID_IClockVector = win32.GUID{Data1: 0x14b2274a, Data2: 0x8698, Data3: 0x4cc6, Data4: [8]byte{0x93, 0x33, 0xf8, 0x9b, 0xd1, 0xd4, 0x7b, 0xc4}}
 
 // GetClockVectorElements dispatches through IClockVector's vtable slot 3.
-func (self *IClockVector) GetClockVectorElements(riid *win32.GUID, ppiEnumClockVector *unsafe.Pointer) foundation.HRESULT {
+func (self *IClockVector) GetClockVectorElements(riid *win32.GUID, ppiEnumClockVector *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppiEnumClockVector)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClockVectorElementCount dispatches through IClockVector's vtable slot 4.
-func (self *IClockVector) GetClockVectorElementCount(pdwCount *uint32) foundation.HRESULT {
+func (self *IClockVector) GetClockVectorElementCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IClockVectorElement: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-iclockvectorelement
@@ -189,15 +189,15 @@ type IClockVectorElement struct {
 var IID_IClockVectorElement = win32.GUID{Data1: 0xe71c4250, Data2: 0xadf8, Data3: 0x4a07, Data4: [8]byte{0x8f, 0xae, 0x56, 0x69, 0x59, 0x69, 0x09, 0xc1}}
 
 // GetReplicaKey dispatches through IClockVectorElement's vtable slot 3.
-func (self *IClockVectorElement) GetReplicaKey(pdwReplicaKey *uint32) foundation.HRESULT {
+func (self *IClockVectorElement) GetReplicaKey(pdwReplicaKey *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwReplicaKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetTickCount dispatches through IClockVectorElement's vtable slot 4.
-func (self *IClockVectorElement) GetTickCount(pullTickCount *uint64) foundation.HRESULT {
+func (self *IClockVectorElement) GetTickCount(pullTickCount *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pullTickCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 11f9de71-2818-4779-b2ac-42d450565f45
@@ -209,21 +209,21 @@ type ICombinedFilterInfo struct {
 var IID_ICombinedFilterInfo = win32.GUID{Data1: 0x11f9de71, Data2: 0x2818, Data3: 0x4779, Data4: [8]byte{0xb2, 0xac, 0x42, 0xd4, 0x50, 0x56, 0x5f, 0x45}}
 
 // GetFilterCount dispatches through ICombinedFilterInfo's vtable slot 4.
-func (self *ICombinedFilterInfo) GetFilterCount(pdwFilterCount *uint32) foundation.HRESULT {
+func (self *ICombinedFilterInfo) GetFilterCount(pdwFilterCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFilterCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilterInfo dispatches through ICombinedFilterInfo's vtable slot 5.
-func (self *ICombinedFilterInfo) GetFilterInfo(dwFilterIndex uint32, ppIFilterInfo **ISyncFilterInfo) foundation.HRESULT {
+func (self *ICombinedFilterInfo) GetFilterInfo(dwFilterIndex uint32, ppIFilterInfo **ISyncFilterInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwFilterIndex), uintptr(unsafe.Pointer(ppIFilterInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilterCombinationType dispatches through ICombinedFilterInfo's vtable slot 6.
-func (self *ICombinedFilterInfo) GetFilterCombinationType(pFilterCombinationType *FILTER_COMBINATION_TYPE) foundation.HRESULT {
+func (self *ICombinedFilterInfo) GetFilterCombinationType(pFilterCombinationType *FILTER_COMBINATION_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilterCombinationType)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 00d2302e-1cf8-4835-b85f-b7ca4f799e0a
@@ -235,75 +235,75 @@ type IConstraintConflict struct {
 var IID_IConstraintConflict = win32.GUID{Data1: 0x00d2302e, Data2: 0x1cf8, Data3: 0x4835, Data4: [8]byte{0xb8, 0x5f, 0xb7, 0xca, 0x4f, 0x79, 0x9e, 0x0a}}
 
 // GetDestinationProviderConflictingChange dispatches through IConstraintConflict's vtable slot 3.
-func (self *IConstraintConflict) GetDestinationProviderConflictingChange(ppConflictingChange **ISyncChange) foundation.HRESULT {
+func (self *IConstraintConflict) GetDestinationProviderConflictingChange(ppConflictingChange **ISyncChange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppConflictingChange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceProviderConflictingChange dispatches through IConstraintConflict's vtable slot 4.
-func (self *IConstraintConflict) GetSourceProviderConflictingChange(ppConflictingChange **ISyncChange) foundation.HRESULT {
+func (self *IConstraintConflict) GetSourceProviderConflictingChange(ppConflictingChange **ISyncChange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppConflictingChange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDestinationProviderOriginalChange dispatches through IConstraintConflict's vtable slot 5.
-func (self *IConstraintConflict) GetDestinationProviderOriginalChange(ppOriginalChange **ISyncChange) foundation.HRESULT {
+func (self *IConstraintConflict) GetDestinationProviderOriginalChange(ppOriginalChange **ISyncChange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppOriginalChange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDestinationProviderConflictingData dispatches through IConstraintConflict's vtable slot 6.
-func (self *IConstraintConflict) GetDestinationProviderConflictingData(ppConflictingData **systemcom.IUnknown) foundation.HRESULT {
+func (self *IConstraintConflict) GetDestinationProviderConflictingData(ppConflictingData **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppConflictingData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceProviderConflictingData dispatches through IConstraintConflict's vtable slot 7.
-func (self *IConstraintConflict) GetSourceProviderConflictingData(ppConflictingData **systemcom.IUnknown) foundation.HRESULT {
+func (self *IConstraintConflict) GetSourceProviderConflictingData(ppConflictingData **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppConflictingData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDestinationProviderOriginalData dispatches through IConstraintConflict's vtable slot 8.
-func (self *IConstraintConflict) GetDestinationProviderOriginalData(ppOriginalData **systemcom.IUnknown) foundation.HRESULT {
+func (self *IConstraintConflict) GetDestinationProviderOriginalData(ppOriginalData **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppOriginalData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConstraintResolveActionForChange dispatches through IConstraintConflict's vtable slot 9.
-func (self *IConstraintConflict) GetConstraintResolveActionForChange(pConstraintResolveAction *SYNC_CONSTRAINT_RESOLVE_ACTION) foundation.HRESULT {
+func (self *IConstraintConflict) GetConstraintResolveActionForChange(pConstraintResolveAction *SYNC_CONSTRAINT_RESOLVE_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConstraintResolveAction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetConstraintResolveActionForChange dispatches through IConstraintConflict's vtable slot 10.
-func (self *IConstraintConflict) SetConstraintResolveActionForChange(constraintResolveAction SYNC_CONSTRAINT_RESOLVE_ACTION) foundation.HRESULT {
+func (self *IConstraintConflict) SetConstraintResolveActionForChange(constraintResolveAction SYNC_CONSTRAINT_RESOLVE_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(constraintResolveAction))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConstraintResolveActionForChangeUnit dispatches through IConstraintConflict's vtable slot 11.
-func (self *IConstraintConflict) GetConstraintResolveActionForChangeUnit(pChangeUnit *ISyncChangeUnit, pConstraintResolveAction *SYNC_CONSTRAINT_RESOLVE_ACTION) foundation.HRESULT {
+func (self *IConstraintConflict) GetConstraintResolveActionForChangeUnit(pChangeUnit *ISyncChangeUnit, pConstraintResolveAction *SYNC_CONSTRAINT_RESOLVE_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChangeUnit)), uintptr(unsafe.Pointer(pConstraintResolveAction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetConstraintResolveActionForChangeUnit dispatches through IConstraintConflict's vtable slot 12.
-func (self *IConstraintConflict) SetConstraintResolveActionForChangeUnit(pChangeUnit *ISyncChangeUnit, constraintResolveAction SYNC_CONSTRAINT_RESOLVE_ACTION) foundation.HRESULT {
+func (self *IConstraintConflict) SetConstraintResolveActionForChangeUnit(pChangeUnit *ISyncChangeUnit, constraintResolveAction SYNC_CONSTRAINT_RESOLVE_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChangeUnit)), uintptr(constraintResolveAction))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetConstraintConflictReason dispatches through IConstraintConflict's vtable slot 13.
-func (self *IConstraintConflict) GetConstraintConflictReason(pConstraintConflictReason *CONSTRAINT_CONFLICT_REASON) foundation.HRESULT {
+func (self *IConstraintConflict) GetConstraintConflictReason(pConstraintConflictReason *CONSTRAINT_CONFLICT_REASON) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConstraintConflictReason)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsTemporary dispatches through IConstraintConflict's vtable slot 14.
-func (self *IConstraintConflict) IsTemporary() foundation.HRESULT {
+func (self *IConstraintConflict) IsTemporary() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IConstructReplicaKeyMap: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-iconstructreplicakeymap
@@ -316,9 +316,9 @@ type IConstructReplicaKeyMap struct {
 var IID_IConstructReplicaKeyMap = win32.GUID{Data1: 0xded10970, Data2: 0xec85, Data3: 0x4115, Data4: [8]byte{0xb5, 0x2c, 0x44, 0x05, 0x84, 0x56, 0x42, 0xa5}}
 
 // FindOrAddReplica dispatches through IConstructReplicaKeyMap's vtable slot 3.
-func (self *IConstructReplicaKeyMap) FindOrAddReplica(pbReplicaId *byte, pdwReplicaKey *uint32) foundation.HRESULT {
+func (self *IConstructReplicaKeyMap) FindOrAddReplica(pbReplicaId *byte, pdwReplicaKey *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbReplicaId)), uintptr(unsafe.Pointer(pdwReplicaKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ICoreFragment: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-icorefragment
@@ -331,33 +331,33 @@ type ICoreFragment struct {
 var IID_ICoreFragment = win32.GUID{Data1: 0x613b2ab5, Data2: 0xb304, Data3: 0x47d9, Data4: [8]byte{0x9c, 0x31, 0xce, 0x6c, 0x54, 0x40, 0x1a, 0x15}}
 
 // NextColumn dispatches through ICoreFragment's vtable slot 3.
-func (self *ICoreFragment) NextColumn(pChangeUnitId *byte, pChangeUnitIdSize *uint32) foundation.HRESULT {
+func (self *ICoreFragment) NextColumn(pChangeUnitId *byte, pChangeUnitIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChangeUnitId)), uintptr(unsafe.Pointer(pChangeUnitIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // NextRange dispatches through ICoreFragment's vtable slot 4.
-func (self *ICoreFragment) NextRange(pItemId *byte, pItemIdSize *uint32, piClockVector **IClockVector) foundation.HRESULT {
+func (self *ICoreFragment) NextRange(pItemId *byte, pItemIdSize *uint32, piClockVector **IClockVector) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pItemId)), uintptr(unsafe.Pointer(pItemIdSize)), uintptr(unsafe.Pointer(piClockVector)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through ICoreFragment's vtable slot 5.
-func (self *ICoreFragment) Reset() foundation.HRESULT {
+func (self *ICoreFragment) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetColumnCount dispatches through ICoreFragment's vtable slot 6.
-func (self *ICoreFragment) GetColumnCount(pColumnCount *uint32) foundation.HRESULT {
+func (self *ICoreFragment) GetColumnCount(pColumnCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColumnCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRangeCount dispatches through ICoreFragment's vtable slot 7.
-func (self *ICoreFragment) GetRangeCount(pRangeCount *uint32) foundation.HRESULT {
+func (self *ICoreFragment) GetRangeCount(pRangeCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRangeCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ICoreFragmentInspector: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-icorefragmentinspector
@@ -370,15 +370,15 @@ type ICoreFragmentInspector struct {
 var IID_ICoreFragmentInspector = win32.GUID{Data1: 0xf7fcc5fd, Data2: 0xae26, Data3: 0x4679, Data4: [8]byte{0xba, 0x16, 0x96, 0xaa, 0xc5, 0x83, 0xc1, 0x34}}
 
 // NextCoreFragments dispatches through ICoreFragmentInspector's vtable slot 3.
-func (self *ICoreFragmentInspector) NextCoreFragments(requestedCount uint32, ppiCoreFragments **ICoreFragment, pFetchedCount *uint32) foundation.HRESULT {
+func (self *ICoreFragmentInspector) NextCoreFragments(requestedCount uint32, ppiCoreFragments **ICoreFragment, pFetchedCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(requestedCount), uintptr(unsafe.Pointer(ppiCoreFragments)), uintptr(unsafe.Pointer(pFetchedCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through ICoreFragmentInspector's vtable slot 4.
-func (self *ICoreFragmentInspector) Reset() foundation.HRESULT {
+func (self *ICoreFragmentInspector) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 1d335dff-6f88-4e4d-91a8-a3f351cfd473
@@ -390,9 +390,9 @@ type ICustomFilterInfo struct {
 var IID_ICustomFilterInfo = win32.GUID{Data1: 0x1d335dff, Data2: 0x6f88, Data3: 0x4e4d, Data4: [8]byte{0x91, 0xa8, 0xa3, 0xf3, 0x51, 0xcf, 0xd4, 0x73}}
 
 // GetSyncFilter dispatches through ICustomFilterInfo's vtable slot 4.
-func (self *ICustomFilterInfo) GetSyncFilter(pISyncFilter **ISyncFilter) foundation.HRESULT {
+func (self *ICustomFilterInfo) GetSyncFilter(pISyncFilter **ISyncFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pISyncFilter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IDataRetrieverCallback: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-idataretrievercallback
@@ -405,15 +405,15 @@ type IDataRetrieverCallback struct {
 var IID_IDataRetrieverCallback = win32.GUID{Data1: 0x71b4863b, Data2: 0xf969, Data3: 0x4676, Data4: [8]byte{0xbb, 0xc3, 0x3d, 0x9f, 0xdc, 0x3f, 0xb2, 0xc7}}
 
 // LoadChangeDataComplete dispatches through IDataRetrieverCallback's vtable slot 3.
-func (self *IDataRetrieverCallback) LoadChangeDataComplete(pUnkData *systemcom.IUnknown) foundation.HRESULT {
+func (self *IDataRetrieverCallback) LoadChangeDataComplete(pUnkData *systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadChangeDataError dispatches through IDataRetrieverCallback's vtable slot 4.
-func (self *IDataRetrieverCallback) LoadChangeDataError(hrError foundation.HRESULT) foundation.HRESULT {
+func (self *IDataRetrieverCallback) LoadChangeDataError(hrError foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hrError))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumChangeUnitExceptions: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-ienumchangeunitexceptions
@@ -426,27 +426,27 @@ type IEnumChangeUnitExceptions struct {
 var IID_IEnumChangeUnitExceptions = win32.GUID{Data1: 0x3074e802, Data2: 0x9319, Data3: 0x4420, Data4: [8]byte{0xbe, 0x21, 0x10, 0x22, 0xe2, 0xe2, 0x1d, 0xa8}}
 
 // Next dispatches through IEnumChangeUnitExceptions's vtable slot 3.
-func (self *IEnumChangeUnitExceptions) Next(cExceptions uint32, ppChangeUnitException **IChangeUnitException, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumChangeUnitExceptions) Next(cExceptions uint32, ppChangeUnitException **IChangeUnitException, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cExceptions), uintptr(unsafe.Pointer(ppChangeUnitException)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumChangeUnitExceptions's vtable slot 4.
-func (self *IEnumChangeUnitExceptions) Skip(cExceptions uint32) foundation.HRESULT {
+func (self *IEnumChangeUnitExceptions) Skip(cExceptions uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cExceptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumChangeUnitExceptions's vtable slot 5.
-func (self *IEnumChangeUnitExceptions) Reset() foundation.HRESULT {
+func (self *IEnumChangeUnitExceptions) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumChangeUnitExceptions's vtable slot 6.
-func (self *IEnumChangeUnitExceptions) Clone(ppEnum **IEnumChangeUnitExceptions) foundation.HRESULT {
+func (self *IEnumChangeUnitExceptions) Clone(ppEnum **IEnumChangeUnitExceptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumClockVector: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-ienumclockvector
@@ -459,27 +459,27 @@ type IEnumClockVector struct {
 var IID_IEnumClockVector = win32.GUID{Data1: 0x525844db, Data2: 0x2837, Data3: 0x4799, Data4: [8]byte{0x9e, 0x80, 0x81, 0xa6, 0x6e, 0x02, 0x22, 0x0c}}
 
 // Next dispatches through IEnumClockVector's vtable slot 3.
-func (self *IEnumClockVector) Next(cClockVectorElements uint32, ppiClockVectorElements **IClockVectorElement, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumClockVector) Next(cClockVectorElements uint32, ppiClockVectorElements **IClockVectorElement, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cClockVectorElements), uintptr(unsafe.Pointer(ppiClockVectorElements)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumClockVector's vtable slot 4.
-func (self *IEnumClockVector) Skip(cSyncVersions uint32) foundation.HRESULT {
+func (self *IEnumClockVector) Skip(cSyncVersions uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cSyncVersions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumClockVector's vtable slot 5.
-func (self *IEnumClockVector) Reset() foundation.HRESULT {
+func (self *IEnumClockVector) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumClockVector's vtable slot 6.
-func (self *IEnumClockVector) Clone(ppiEnum **IEnumClockVector) foundation.HRESULT {
+func (self *IEnumClockVector) Clone(ppiEnum **IEnumClockVector) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppiEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumFeedClockVector: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-ienumfeedclockvector
@@ -492,27 +492,27 @@ type IEnumFeedClockVector struct {
 var IID_IEnumFeedClockVector = win32.GUID{Data1: 0x550f763d, Data2: 0x146a, Data3: 0x48f6, Data4: [8]byte{0xab, 0xeb, 0x6c, 0x88, 0xc7, 0xf7, 0x05, 0x14}}
 
 // Next dispatches through IEnumFeedClockVector's vtable slot 3.
-func (self *IEnumFeedClockVector) Next(cClockVectorElements uint32, ppiClockVectorElements **IFeedClockVectorElement, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumFeedClockVector) Next(cClockVectorElements uint32, ppiClockVectorElements **IFeedClockVectorElement, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cClockVectorElements), uintptr(unsafe.Pointer(ppiClockVectorElements)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumFeedClockVector's vtable slot 4.
-func (self *IEnumFeedClockVector) Skip(cSyncVersions uint32) foundation.HRESULT {
+func (self *IEnumFeedClockVector) Skip(cSyncVersions uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cSyncVersions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumFeedClockVector's vtable slot 5.
-func (self *IEnumFeedClockVector) Reset() foundation.HRESULT {
+func (self *IEnumFeedClockVector) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumFeedClockVector's vtable slot 6.
-func (self *IEnumFeedClockVector) Clone(ppiEnum **IEnumFeedClockVector) foundation.HRESULT {
+func (self *IEnumFeedClockVector) Clone(ppiEnum **IEnumFeedClockVector) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppiEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 43aa3f61-4b2e-4b60-83df-b110d3e148f1
@@ -524,9 +524,9 @@ type IEnumItemIds struct {
 var IID_IEnumItemIds = win32.GUID{Data1: 0x43aa3f61, Data2: 0x4b2e, Data3: 0x4b60, Data4: [8]byte{0x83, 0xdf, 0xb1, 0x10, 0xd3, 0xe1, 0x48, 0xf1}}
 
 // Next dispatches through IEnumItemIds's vtable slot 3.
-func (self *IEnumItemIds) Next(pbItemId *byte, pcbItemIdSize *uint32) foundation.HRESULT {
+func (self *IEnumItemIds) Next(pbItemId *byte, pcbItemIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pcbItemIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumRangeExceptions: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-ienumrangeexceptions
@@ -539,27 +539,27 @@ type IEnumRangeExceptions struct {
 var IID_IEnumRangeExceptions = win32.GUID{Data1: 0x0944439f, Data2: 0xddb1, Data3: 0x4176, Data4: [8]byte{0xb7, 0x03, 0x04, 0x6f, 0xf2, 0x2a, 0x23, 0x86}}
 
 // Next dispatches through IEnumRangeExceptions's vtable slot 3.
-func (self *IEnumRangeExceptions) Next(cExceptions uint32, ppRangeException **IRangeException, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumRangeExceptions) Next(cExceptions uint32, ppRangeException **IRangeException, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cExceptions), uintptr(unsafe.Pointer(ppRangeException)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumRangeExceptions's vtable slot 4.
-func (self *IEnumRangeExceptions) Skip(cExceptions uint32) foundation.HRESULT {
+func (self *IEnumRangeExceptions) Skip(cExceptions uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cExceptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumRangeExceptions's vtable slot 5.
-func (self *IEnumRangeExceptions) Reset() foundation.HRESULT {
+func (self *IEnumRangeExceptions) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumRangeExceptions's vtable slot 6.
-func (self *IEnumRangeExceptions) Clone(ppEnum **IEnumRangeExceptions) foundation.HRESULT {
+func (self *IEnumRangeExceptions) Clone(ppEnum **IEnumRangeExceptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumSingleItemExceptions: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-ienumsingleitemexceptions
@@ -572,27 +572,27 @@ type IEnumSingleItemExceptions struct {
 var IID_IEnumSingleItemExceptions = win32.GUID{Data1: 0xe563381c, Data2: 0x1b4d, Data3: 0x4c66, Data4: [8]byte{0x97, 0x96, 0xc8, 0x6f, 0xac, 0xcd, 0xcd, 0x40}}
 
 // Next dispatches through IEnumSingleItemExceptions's vtable slot 3.
-func (self *IEnumSingleItemExceptions) Next(cExceptions uint32, ppSingleItemException **ISingleItemException, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumSingleItemExceptions) Next(cExceptions uint32, ppSingleItemException **ISingleItemException, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cExceptions), uintptr(unsafe.Pointer(ppSingleItemException)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumSingleItemExceptions's vtable slot 4.
-func (self *IEnumSingleItemExceptions) Skip(cExceptions uint32) foundation.HRESULT {
+func (self *IEnumSingleItemExceptions) Skip(cExceptions uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cExceptions))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumSingleItemExceptions's vtable slot 5.
-func (self *IEnumSingleItemExceptions) Reset() foundation.HRESULT {
+func (self *IEnumSingleItemExceptions) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumSingleItemExceptions's vtable slot 6.
-func (self *IEnumSingleItemExceptions) Clone(ppEnum **IEnumSingleItemExceptions) foundation.HRESULT {
+func (self *IEnumSingleItemExceptions) Clone(ppEnum **IEnumSingleItemExceptions) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumSyncChangeUnits: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-ienumsyncchangeunits
@@ -605,27 +605,27 @@ type IEnumSyncChangeUnits struct {
 var IID_IEnumSyncChangeUnits = win32.GUID{Data1: 0x346b35f1, Data2: 0x8703, Data3: 0x4c6d, Data4: [8]byte{0xab, 0x1a, 0x4d, 0xbc, 0xa2, 0xcf, 0xf9, 0x7f}}
 
 // Next dispatches through IEnumSyncChangeUnits's vtable slot 3.
-func (self *IEnumSyncChangeUnits) Next(cChanges uint32, ppChangeUnit **ISyncChangeUnit, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumSyncChangeUnits) Next(cChanges uint32, ppChangeUnit **ISyncChangeUnit, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cChanges), uintptr(unsafe.Pointer(ppChangeUnit)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumSyncChangeUnits's vtable slot 4.
-func (self *IEnumSyncChangeUnits) Skip(cChanges uint32) foundation.HRESULT {
+func (self *IEnumSyncChangeUnits) Skip(cChanges uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cChanges))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumSyncChangeUnits's vtable slot 5.
-func (self *IEnumSyncChangeUnits) Reset() foundation.HRESULT {
+func (self *IEnumSyncChangeUnits) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumSyncChangeUnits's vtable slot 6.
-func (self *IEnumSyncChangeUnits) Clone(ppEnum **IEnumSyncChangeUnits) foundation.HRESULT {
+func (self *IEnumSyncChangeUnits) Clone(ppEnum **IEnumSyncChangeUnits) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumSyncChanges: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-ienumsyncchanges
@@ -638,27 +638,27 @@ type IEnumSyncChanges struct {
 var IID_IEnumSyncChanges = win32.GUID{Data1: 0x5f86be4a, Data2: 0x5e78, Data3: 0x4e32, Data4: [8]byte{0xac, 0x1c, 0xc2, 0x4f, 0xd2, 0x23, 0xef, 0x85}}
 
 // Next dispatches through IEnumSyncChanges's vtable slot 3.
-func (self *IEnumSyncChanges) Next(cChanges uint32, ppChange **ISyncChange, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumSyncChanges) Next(cChanges uint32, ppChange **ISyncChange, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cChanges), uintptr(unsafe.Pointer(ppChange)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumSyncChanges's vtable slot 4.
-func (self *IEnumSyncChanges) Skip(cChanges uint32) foundation.HRESULT {
+func (self *IEnumSyncChanges) Skip(cChanges uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cChanges))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumSyncChanges's vtable slot 5.
-func (self *IEnumSyncChanges) Reset() foundation.HRESULT {
+func (self *IEnumSyncChanges) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumSyncChanges's vtable slot 6.
-func (self *IEnumSyncChanges) Clone(ppEnum **IEnumSyncChanges) foundation.HRESULT {
+func (self *IEnumSyncChanges) Clone(ppEnum **IEnumSyncChanges) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumSyncProviderConfigUIInfos: https://learn.microsoft.com/windows/win32/api/syncregistration/nn-syncregistration-ienumsyncproviderconfiguiinfos
@@ -671,27 +671,27 @@ type IEnumSyncProviderConfigUIInfos struct {
 var IID_IEnumSyncProviderConfigUIInfos = win32.GUID{Data1: 0xf6be2602, Data2: 0x17c6, Data3: 0x4658, Data4: [8]byte{0xa2, 0xd7, 0x68, 0xed, 0x33, 0x30, 0xf6, 0x41}}
 
 // Next dispatches through IEnumSyncProviderConfigUIInfos's vtable slot 3.
-func (self *IEnumSyncProviderConfigUIInfos) Next(cFactories uint32, ppSyncProviderConfigUIInfo **ISyncProviderConfigUIInfo, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumSyncProviderConfigUIInfos) Next(cFactories uint32, ppSyncProviderConfigUIInfo **ISyncProviderConfigUIInfo, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFactories), uintptr(unsafe.Pointer(ppSyncProviderConfigUIInfo)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumSyncProviderConfigUIInfos's vtable slot 4.
-func (self *IEnumSyncProviderConfigUIInfos) Skip(cFactories uint32) foundation.HRESULT {
+func (self *IEnumSyncProviderConfigUIInfos) Skip(cFactories uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cFactories))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumSyncProviderConfigUIInfos's vtable slot 5.
-func (self *IEnumSyncProviderConfigUIInfos) Reset() foundation.HRESULT {
+func (self *IEnumSyncProviderConfigUIInfos) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumSyncProviderConfigUIInfos's vtable slot 6.
-func (self *IEnumSyncProviderConfigUIInfos) Clone(ppEnum **IEnumSyncProviderConfigUIInfos) foundation.HRESULT {
+func (self *IEnumSyncProviderConfigUIInfos) Clone(ppEnum **IEnumSyncProviderConfigUIInfos) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IEnumSyncProviderInfos: https://learn.microsoft.com/windows/win32/api/syncregistration/nn-syncregistration-ienumsyncproviderinfos
@@ -704,27 +704,27 @@ type IEnumSyncProviderInfos struct {
 var IID_IEnumSyncProviderInfos = win32.GUID{Data1: 0xa04ba850, Data2: 0x5eb1, Data3: 0x460d, Data4: [8]byte{0xa9, 0x73, 0x39, 0x3f, 0xcb, 0x60, 0x8a, 0x11}}
 
 // Next dispatches through IEnumSyncProviderInfos's vtable slot 3.
-func (self *IEnumSyncProviderInfos) Next(cInstances uint32, ppSyncProviderInfo **ISyncProviderInfo, pcFetched *uint32) foundation.HRESULT {
+func (self *IEnumSyncProviderInfos) Next(cInstances uint32, ppSyncProviderInfo **ISyncProviderInfo, pcFetched *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cInstances), uintptr(unsafe.Pointer(ppSyncProviderInfo)), uintptr(unsafe.Pointer(pcFetched)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Skip dispatches through IEnumSyncProviderInfos's vtable slot 4.
-func (self *IEnumSyncProviderInfos) Skip(cInstances uint32) foundation.HRESULT {
+func (self *IEnumSyncProviderInfos) Skip(cInstances uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cInstances))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IEnumSyncProviderInfos's vtable slot 5.
-func (self *IEnumSyncProviderInfos) Reset() foundation.HRESULT {
+func (self *IEnumSyncProviderInfos) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through IEnumSyncProviderInfos's vtable slot 6.
-func (self *IEnumSyncProviderInfos) Clone(ppEnum **IEnumSyncProviderInfos) foundation.HRESULT {
+func (self *IEnumSyncProviderInfos) Clone(ppEnum **IEnumSyncProviderInfos) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFeedClockVector: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-ifeedclockvector
@@ -737,15 +737,15 @@ type IFeedClockVector struct {
 var IID_IFeedClockVector = win32.GUID{Data1: 0x8d1d98d1, Data2: 0x9fb8, Data3: 0x4ec9, Data4: [8]byte{0xa5, 0x53, 0x54, 0xdd, 0x92, 0x4e, 0x0f, 0x67}}
 
 // GetUpdateCount dispatches through IFeedClockVector's vtable slot 5.
-func (self *IFeedClockVector) GetUpdateCount(pdwUpdateCount *uint32) foundation.HRESULT {
+func (self *IFeedClockVector) GetUpdateCount(pdwUpdateCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwUpdateCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IsNoConflictsSpecified dispatches through IFeedClockVector's vtable slot 6.
-func (self *IFeedClockVector) IsNoConflictsSpecified(pfIsNoConflictsSpecified *foundation.BOOL) foundation.HRESULT {
+func (self *IFeedClockVector) IsNoConflictsSpecified(pfIsNoConflictsSpecified *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsNoConflictsSpecified)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFeedClockVectorElement: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-ifeedclockvectorelement
@@ -758,15 +758,15 @@ type IFeedClockVectorElement struct {
 var IID_IFeedClockVectorElement = win32.GUID{Data1: 0xa40b46d2, Data2: 0xe97b, Data3: 0x4156, Data4: [8]byte{0xb6, 0xda, 0x99, 0x1f, 0x50, 0x1b, 0x0f, 0x05}}
 
 // GetSyncTime dispatches through IFeedClockVectorElement's vtable slot 5.
-func (self *IFeedClockVectorElement) GetSyncTime(pSyncTime *SYNC_TIME) foundation.HRESULT {
+func (self *IFeedClockVectorElement) GetSyncTime(pSyncTime *SYNC_TIME) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSyncTime)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlags dispatches through IFeedClockVectorElement's vtable slot 6.
-func (self *IFeedClockVectorElement) GetFlags(pbFlags *byte) foundation.HRESULT {
+func (self *IFeedClockVectorElement) GetFlags(pbFlags *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: ca169652-07c6-4708-a3da-6e4eba8d2297
@@ -778,27 +778,27 @@ type IFilterKeyMap struct {
 var IID_IFilterKeyMap = win32.GUID{Data1: 0xca169652, Data2: 0x07c6, Data3: 0x4708, Data4: [8]byte{0xa3, 0xda, 0x6e, 0x4e, 0xba, 0x8d, 0x22, 0x97}}
 
 // GetCount dispatches through IFilterKeyMap's vtable slot 3.
-func (self *IFilterKeyMap) GetCount(pdwCount *uint32) foundation.HRESULT {
+func (self *IFilterKeyMap) GetCount(pdwCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddFilter dispatches through IFilterKeyMap's vtable slot 4.
-func (self *IFilterKeyMap) AddFilter(pISyncFilter *ISyncFilter, pdwFilterKey *uint32) foundation.HRESULT {
+func (self *IFilterKeyMap) AddFilter(pISyncFilter *ISyncFilter, pdwFilterKey *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pISyncFilter)), uintptr(unsafe.Pointer(pdwFilterKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilter dispatches through IFilterKeyMap's vtable slot 5.
-func (self *IFilterKeyMap) GetFilter(dwFilterKey uint32, ppISyncFilter **ISyncFilter) foundation.HRESULT {
+func (self *IFilterKeyMap) GetFilter(dwFilterKey uint32, ppISyncFilter **ISyncFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwFilterKey), uintptr(unsafe.Pointer(ppISyncFilter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Serialize dispatches through IFilterKeyMap's vtable slot 6.
-func (self *IFilterKeyMap) Serialize(pbFilterKeyMap *byte, pcbFilterKeyMap *uint32) foundation.HRESULT {
+func (self *IFilterKeyMap) Serialize(pbFilterKeyMap *byte, pcbFilterKeyMap *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbFilterKeyMap)), uintptr(unsafe.Pointer(pcbFilterKeyMap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IFilterRequestCallback: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-ifilterrequestcallback
@@ -811,9 +811,9 @@ type IFilterRequestCallback struct {
 var IID_IFilterRequestCallback = win32.GUID{Data1: 0x82df8873, Data2: 0x6360, Data3: 0x463a, Data4: [8]byte{0xa8, 0xa1, 0xed, 0xe5, 0xe1, 0xa1, 0x59, 0x4d}}
 
 // RequestFilter dispatches through IFilterRequestCallback's vtable slot 3.
-func (self *IFilterRequestCallback) RequestFilter(pFilter *systemcom.IUnknown, filteringType FILTERING_TYPE) foundation.HRESULT {
+func (self *IFilterRequestCallback) RequestFilter(pFilter *systemcom.IUnknown, filteringType FILTERING_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)), uintptr(filteringType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 743383c0-fc4e-45ba-ad81-d9d84c7a24f8
@@ -825,15 +825,15 @@ type IFilterTrackingProvider struct {
 var IID_IFilterTrackingProvider = win32.GUID{Data1: 0x743383c0, Data2: 0xfc4e, Data3: 0x45ba, Data4: [8]byte{0xad, 0x81, 0xd9, 0xd8, 0x4c, 0x7a, 0x24, 0xf8}}
 
 // SpecifyTrackedFilters dispatches through IFilterTrackingProvider's vtable slot 3.
-func (self *IFilterTrackingProvider) SpecifyTrackedFilters(pCallback *IFilterTrackingRequestCallback) foundation.HRESULT {
+func (self *IFilterTrackingProvider) SpecifyTrackedFilters(pCallback *IFilterTrackingRequestCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddTrackedFilter dispatches through IFilterTrackingProvider's vtable slot 4.
-func (self *IFilterTrackingProvider) AddTrackedFilter(pFilter *ISyncFilter) foundation.HRESULT {
+func (self *IFilterTrackingProvider) AddTrackedFilter(pFilter *ISyncFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 713ca7bb-c858-4674-b4b6-1122436587a9
@@ -845,9 +845,9 @@ type IFilterTrackingRequestCallback struct {
 var IID_IFilterTrackingRequestCallback = win32.GUID{Data1: 0x713ca7bb, Data2: 0xc858, Data3: 0x4674, Data4: [8]byte{0xb4, 0xb6, 0x11, 0x22, 0x43, 0x65, 0x87, 0xa9}}
 
 // RequestTrackedFilter dispatches through IFilterTrackingRequestCallback's vtable slot 3.
-func (self *IFilterTrackingRequestCallback) RequestTrackedFilter(pFilter *ISyncFilter) foundation.HRESULT {
+func (self *IFilterTrackingRequestCallback) RequestTrackedFilter(pFilter *ISyncFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 295024a0-70da-4c58-883c-ce2afb308d0b
@@ -859,15 +859,15 @@ type IFilterTrackingSyncChangeBuilder struct {
 var IID_IFilterTrackingSyncChangeBuilder = win32.GUID{Data1: 0x295024a0, Data2: 0x70da, Data3: 0x4c58, Data4: [8]byte{0x88, 0x3c, 0xce, 0x2a, 0xfb, 0x30, 0x8d, 0x0b}}
 
 // AddFilterChange dispatches through IFilterTrackingSyncChangeBuilder's vtable slot 3.
-func (self *IFilterTrackingSyncChangeBuilder) AddFilterChange(dwFilterKey uint32, pFilterChange *SYNC_FILTER_CHANGE) foundation.HRESULT {
+func (self *IFilterTrackingSyncChangeBuilder) AddFilterChange(dwFilterKey uint32, pFilterChange *SYNC_FILTER_CHANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFilterKey), uintptr(unsafe.Pointer(pFilterChange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetAllChangeUnitsPresentFlag dispatches through IFilterTrackingSyncChangeBuilder's vtable slot 4.
-func (self *IFilterTrackingSyncChangeBuilder) SetAllChangeUnitsPresentFlag() foundation.HRESULT {
+func (self *IFilterTrackingSyncChangeBuilder) SetAllChangeUnitsPresentFlag() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IForgottenKnowledge: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-iforgottenknowledge
@@ -880,9 +880,9 @@ type IForgottenKnowledge struct {
 var IID_IForgottenKnowledge = win32.GUID{Data1: 0x456e0f96, Data2: 0x6036, Data3: 0x452b, Data4: [8]byte{0x9f, 0x9d, 0xbc, 0xc4, 0xb4, 0xa8, 0x5d, 0xb2}}
 
 // ForgetToVersion dispatches through IForgottenKnowledge's vtable slot 27.
-func (self *IForgottenKnowledge) ForgetToVersion(pKnowledge *ISyncKnowledge, pVersion *SYNC_VERSION) foundation.HRESULT {
+func (self *IForgottenKnowledge) ForgetToVersion(pKnowledge *ISyncKnowledge, pVersion *SYNC_VERSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKnowledge)), uintptr(unsafe.Pointer(pVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IKnowledgeSyncProvider: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-iknowledgesyncprovider
@@ -895,45 +895,45 @@ type IKnowledgeSyncProvider struct {
 var IID_IKnowledgeSyncProvider = win32.GUID{Data1: 0x43434a49, Data2: 0x8da4, Data3: 0x47f2, Data4: [8]byte{0x81, 0x72, 0xad, 0x7b, 0x8b, 0x02, 0x49, 0x78}}
 
 // BeginSession dispatches through IKnowledgeSyncProvider's vtable slot 4.
-func (self *IKnowledgeSyncProvider) BeginSession(role SYNC_PROVIDER_ROLE, pSessionState *ISyncSessionState) foundation.HRESULT {
+func (self *IKnowledgeSyncProvider) BeginSession(role SYNC_PROVIDER_ROLE, pSessionState *ISyncSessionState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(role), uintptr(unsafe.Pointer(pSessionState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSyncBatchParameters dispatches through IKnowledgeSyncProvider's vtable slot 5.
-func (self *IKnowledgeSyncProvider) GetSyncBatchParameters(ppSyncKnowledge **ISyncKnowledge, pdwRequestedBatchSize *uint32) foundation.HRESULT {
+func (self *IKnowledgeSyncProvider) GetSyncBatchParameters(ppSyncKnowledge **ISyncKnowledge, pdwRequestedBatchSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSyncKnowledge)), uintptr(unsafe.Pointer(pdwRequestedBatchSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChangeBatch dispatches through IKnowledgeSyncProvider's vtable slot 6.
-func (self *IKnowledgeSyncProvider) GetChangeBatch(dwBatchSize uint32, pSyncKnowledge *ISyncKnowledge, ppSyncChangeBatch **ISyncChangeBatch, ppUnkDataRetriever **systemcom.IUnknown) foundation.HRESULT {
+func (self *IKnowledgeSyncProvider) GetChangeBatch(dwBatchSize uint32, pSyncKnowledge *ISyncKnowledge, ppSyncChangeBatch **ISyncChangeBatch, ppUnkDataRetriever **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwBatchSize), uintptr(unsafe.Pointer(pSyncKnowledge)), uintptr(unsafe.Pointer(ppSyncChangeBatch)), uintptr(unsafe.Pointer(ppUnkDataRetriever)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFullEnumerationChangeBatch dispatches through IKnowledgeSyncProvider's vtable slot 7.
-func (self *IKnowledgeSyncProvider) GetFullEnumerationChangeBatch(dwBatchSize uint32, pbLowerEnumerationBound *byte, pSyncKnowledge *ISyncKnowledge, ppSyncChangeBatch **ISyncFullEnumerationChangeBatch, ppUnkDataRetriever **systemcom.IUnknown) foundation.HRESULT {
+func (self *IKnowledgeSyncProvider) GetFullEnumerationChangeBatch(dwBatchSize uint32, pbLowerEnumerationBound *byte, pSyncKnowledge *ISyncKnowledge, ppSyncChangeBatch **ISyncFullEnumerationChangeBatch, ppUnkDataRetriever **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwBatchSize), uintptr(unsafe.Pointer(pbLowerEnumerationBound)), uintptr(unsafe.Pointer(pSyncKnowledge)), uintptr(unsafe.Pointer(ppSyncChangeBatch)), uintptr(unsafe.Pointer(ppUnkDataRetriever)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessChangeBatch dispatches through IKnowledgeSyncProvider's vtable slot 8.
-func (self *IKnowledgeSyncProvider) ProcessChangeBatch(resolutionPolicy CONFLICT_RESOLUTION_POLICY, pSourceChangeBatch *ISyncChangeBatch, pUnkDataRetriever *systemcom.IUnknown, pCallback *ISyncCallback, pSyncSessionStatistics *SYNC_SESSION_STATISTICS) foundation.HRESULT {
+func (self *IKnowledgeSyncProvider) ProcessChangeBatch(resolutionPolicy CONFLICT_RESOLUTION_POLICY, pSourceChangeBatch *ISyncChangeBatch, pUnkDataRetriever *systemcom.IUnknown, pCallback *ISyncCallback, pSyncSessionStatistics *SYNC_SESSION_STATISTICS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(resolutionPolicy), uintptr(unsafe.Pointer(pSourceChangeBatch)), uintptr(unsafe.Pointer(pUnkDataRetriever)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pSyncSessionStatistics)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessFullEnumerationChangeBatch dispatches through IKnowledgeSyncProvider's vtable slot 9.
-func (self *IKnowledgeSyncProvider) ProcessFullEnumerationChangeBatch(resolutionPolicy CONFLICT_RESOLUTION_POLICY, pSourceChangeBatch *ISyncFullEnumerationChangeBatch, pUnkDataRetriever *systemcom.IUnknown, pCallback *ISyncCallback, pSyncSessionStatistics *SYNC_SESSION_STATISTICS) foundation.HRESULT {
+func (self *IKnowledgeSyncProvider) ProcessFullEnumerationChangeBatch(resolutionPolicy CONFLICT_RESOLUTION_POLICY, pSourceChangeBatch *ISyncFullEnumerationChangeBatch, pUnkDataRetriever *systemcom.IUnknown, pCallback *ISyncCallback, pSyncSessionStatistics *SYNC_SESSION_STATISTICS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(resolutionPolicy), uintptr(unsafe.Pointer(pSourceChangeBatch)), uintptr(unsafe.Pointer(pUnkDataRetriever)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pSyncSessionStatistics)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndSession dispatches through IKnowledgeSyncProvider's vtable slot 10.
-func (self *IKnowledgeSyncProvider) EndSession(pSessionState *ISyncSessionState) foundation.HRESULT {
+func (self *IKnowledgeSyncProvider) EndSession(pSessionState *ISyncSessionState) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSessionState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ILoadChangeContext: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-iloadchangecontext
@@ -946,21 +946,21 @@ type ILoadChangeContext struct {
 var IID_ILoadChangeContext = win32.GUID{Data1: 0x44a4aaca, Data2: 0xec39, Data3: 0x46d5, Data4: [8]byte{0xb5, 0xc9, 0xd6, 0x33, 0xc0, 0xee, 0x67, 0xe2}}
 
 // GetSyncChange dispatches through ILoadChangeContext's vtable slot 3.
-func (self *ILoadChangeContext) GetSyncChange(ppSyncChange **ISyncChange) foundation.HRESULT {
+func (self *ILoadChangeContext) GetSyncChange(ppSyncChange **ISyncChange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSyncChange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRecoverableErrorOnChange dispatches through ILoadChangeContext's vtable slot 4.
-func (self *ILoadChangeContext) SetRecoverableErrorOnChange(hrError foundation.HRESULT, pErrorData *IRecoverableErrorData) foundation.HRESULT {
+func (self *ILoadChangeContext) SetRecoverableErrorOnChange(hrError foundation.HRESULT, pErrorData *IRecoverableErrorData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hrError), uintptr(unsafe.Pointer(pErrorData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRecoverableErrorOnChangeUnit dispatches through ILoadChangeContext's vtable slot 5.
-func (self *ILoadChangeContext) SetRecoverableErrorOnChangeUnit(hrError foundation.HRESULT, pChangeUnit *ISyncChangeUnit, pErrorData *IRecoverableErrorData) foundation.HRESULT {
+func (self *ILoadChangeContext) SetRecoverableErrorOnChangeUnit(hrError foundation.HRESULT, pChangeUnit *ISyncChangeUnit, pErrorData *IRecoverableErrorData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hrError), uintptr(unsafe.Pointer(pChangeUnit)), uintptr(unsafe.Pointer(pErrorData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IProviderConverter: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-iproviderconverter
@@ -973,9 +973,9 @@ type IProviderConverter struct {
 var IID_IProviderConverter = win32.GUID{Data1: 0x809b7276, Data2: 0x98cf, Data3: 0x4957, Data4: [8]byte{0x93, 0xa5, 0x0e, 0xbd, 0xd3, 0xdd, 0xdf, 0xfd}}
 
 // Initialize dispatches through IProviderConverter's vtable slot 3.
-func (self *IProviderConverter) Initialize(pISyncProvider *ISyncProvider) foundation.HRESULT {
+func (self *IProviderConverter) Initialize(pISyncProvider *ISyncProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pISyncProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRangeException: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-irangeexception
@@ -988,21 +988,21 @@ type IRangeException struct {
 var IID_IRangeException = win32.GUID{Data1: 0x75ae8777, Data2: 0x6848, Data3: 0x49f7, Data4: [8]byte{0x95, 0x6c, 0xa3, 0xa9, 0x2f, 0x50, 0x96, 0xe8}}
 
 // GetClosedRangeStart dispatches through IRangeException's vtable slot 3.
-func (self *IRangeException) GetClosedRangeStart(pbClosedRangeStart *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *IRangeException) GetClosedRangeStart(pbClosedRangeStart *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbClosedRangeStart)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClosedRangeEnd dispatches through IRangeException's vtable slot 4.
-func (self *IRangeException) GetClosedRangeEnd(pbClosedRangeEnd *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *IRangeException) GetClosedRangeEnd(pbClosedRangeEnd *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbClosedRangeEnd)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClockVector dispatches through IRangeException's vtable slot 5.
-func (self *IRangeException) GetClockVector(riid *win32.GUID, ppUnk *unsafe.Pointer) foundation.HRESULT {
+func (self *IRangeException) GetClockVector(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRecoverableError: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-irecoverableerror
@@ -1015,33 +1015,33 @@ type IRecoverableError struct {
 var IID_IRecoverableError = win32.GUID{Data1: 0x0f5625e8, Data2: 0x0a7b, Data3: 0x45ee, Data4: [8]byte{0x96, 0x37, 0x1c, 0xe1, 0x36, 0x45, 0x90, 0x9e}}
 
 // GetStage dispatches through IRecoverableError's vtable slot 3.
-func (self *IRecoverableError) GetStage(pStage *SYNC_PROGRESS_STAGE) foundation.HRESULT {
+func (self *IRecoverableError) GetStage(pStage *SYNC_PROGRESS_STAGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStage)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetProvider dispatches through IRecoverableError's vtable slot 4.
-func (self *IRecoverableError) GetProvider(pProviderRole *SYNC_PROVIDER_ROLE) foundation.HRESULT {
+func (self *IRecoverableError) GetProvider(pProviderRole *SYNC_PROVIDER_ROLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProviderRole)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChangeWithRecoverableError dispatches through IRecoverableError's vtable slot 5.
-func (self *IRecoverableError) GetChangeWithRecoverableError(ppChangeWithRecoverableError **ISyncChange) foundation.HRESULT {
+func (self *IRecoverableError) GetChangeWithRecoverableError(ppChangeWithRecoverableError **ISyncChange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppChangeWithRecoverableError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecoverableErrorDataForChange dispatches through IRecoverableError's vtable slot 6.
-func (self *IRecoverableError) GetRecoverableErrorDataForChange(phrError *foundation.HRESULT, ppErrorData **IRecoverableErrorData) foundation.HRESULT {
+func (self *IRecoverableError) GetRecoverableErrorDataForChange(phrError *foundation.HRESULT, ppErrorData **IRecoverableErrorData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrError)), uintptr(unsafe.Pointer(ppErrorData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecoverableErrorDataForChangeUnit dispatches through IRecoverableError's vtable slot 7.
-func (self *IRecoverableError) GetRecoverableErrorDataForChangeUnit(pChangeUnit *ISyncChangeUnit, phrError *foundation.HRESULT, ppErrorData **IRecoverableErrorData) foundation.HRESULT {
+func (self *IRecoverableError) GetRecoverableErrorDataForChangeUnit(pChangeUnit *ISyncChangeUnit, phrError *foundation.HRESULT, ppErrorData **IRecoverableErrorData) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChangeUnit)), uintptr(unsafe.Pointer(phrError)), uintptr(unsafe.Pointer(ppErrorData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRecoverableErrorData: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-irecoverableerrordata
@@ -1054,21 +1054,25 @@ type IRecoverableErrorData struct {
 var IID_IRecoverableErrorData = win32.GUID{Data1: 0xb37c4a0a, Data2: 0x4b7d, Data3: 0x4c2d, Data4: [8]byte{0x97, 0x11, 0x3b, 0x00, 0xd1, 0x19, 0xb1, 0xc8}}
 
 // Initialize dispatches through IRecoverableErrorData's vtable slot 3.
-func (self *IRecoverableErrorData) Initialize(pcszItemDisplayName foundation.PWSTR, pcszErrorDescription foundation.PWSTR) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcszItemDisplayName)), uintptr(unsafe.Pointer(pcszErrorDescription)))
-	return foundation.HRESULT(r1)
+func (self *IRecoverableErrorData) Initialize(pcszItemDisplayName string, pcszErrorDescription string) error {
+	_pcszItemDisplayName := win32.UTF16Ptr(pcszItemDisplayName)
+	_pcszErrorDescription := win32.UTF16Ptr(pcszErrorDescription)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pcszItemDisplayName)), uintptr(unsafe.Pointer(_pcszErrorDescription)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetItemDisplayName dispatches through IRecoverableErrorData's vtable slot 4.
-func (self *IRecoverableErrorData) GetItemDisplayName(pszItemDisplayName foundation.PWSTR, pcchItemDisplayName *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszItemDisplayName)), uintptr(unsafe.Pointer(pcchItemDisplayName)))
-	return foundation.HRESULT(r1)
+func (self *IRecoverableErrorData) GetItemDisplayName(pszItemDisplayName string, pcchItemDisplayName *uint32) error {
+	_pszItemDisplayName := win32.UTF16Ptr(pszItemDisplayName)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszItemDisplayName)), uintptr(unsafe.Pointer(pcchItemDisplayName)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetErrorDescription dispatches through IRecoverableErrorData's vtable slot 5.
-func (self *IRecoverableErrorData) GetErrorDescription(pszErrorDescription foundation.PWSTR, pcchErrorDescription *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszErrorDescription)), uintptr(unsafe.Pointer(pcchErrorDescription)))
-	return foundation.HRESULT(r1)
+func (self *IRecoverableErrorData) GetErrorDescription(pszErrorDescription string, pcchErrorDescription *uint32) error {
+	_pszErrorDescription := win32.UTF16Ptr(pszErrorDescription)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszErrorDescription)), uintptr(unsafe.Pointer(pcchErrorDescription)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRegisteredSyncProvider: https://learn.microsoft.com/windows/win32/api/syncregistration/nn-syncregistration-iregisteredsyncprovider
@@ -1081,21 +1085,21 @@ type IRegisteredSyncProvider struct {
 var IID_IRegisteredSyncProvider = win32.GUID{Data1: 0x913bcf76, Data2: 0x47c1, Data3: 0x40b5, Data4: [8]byte{0xa8, 0x96, 0x5e, 0x8a, 0x9c, 0x41, 0x4c, 0x14}}
 
 // Init dispatches through IRegisteredSyncProvider's vtable slot 3.
-func (self *IRegisteredSyncProvider) Init(pguidInstanceId *win32.GUID, pguidContentType *win32.GUID, pContextPropertyStore *uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *IRegisteredSyncProvider) Init(pguidInstanceId *win32.GUID, pguidContentType *win32.GUID, pContextPropertyStore *uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidInstanceId)), uintptr(unsafe.Pointer(pguidContentType)), uintptr(unsafe.Pointer(pContextPropertyStore)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInstanceId dispatches through IRegisteredSyncProvider's vtable slot 4.
-func (self *IRegisteredSyncProvider) GetInstanceId(pguidInstanceId *win32.GUID) foundation.HRESULT {
+func (self *IRegisteredSyncProvider) GetInstanceId(pguidInstanceId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidInstanceId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Reset dispatches through IRegisteredSyncProvider's vtable slot 5.
-func (self *IRegisteredSyncProvider) Reset() foundation.HRESULT {
+func (self *IRegisteredSyncProvider) Reset() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IReplicaKeyMap: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-ireplicakeymap
@@ -1108,21 +1112,21 @@ type IReplicaKeyMap struct {
 var IID_IReplicaKeyMap = win32.GUID{Data1: 0x2209f4fc, Data2: 0xfd10, Data3: 0x4ff0, Data4: [8]byte{0x84, 0xa8, 0xf0, 0xa1, 0x98, 0x2e, 0x44, 0x0e}}
 
 // LookupReplicaKey dispatches through IReplicaKeyMap's vtable slot 3.
-func (self *IReplicaKeyMap) LookupReplicaKey(pbReplicaId *byte, pdwReplicaKey *uint32) foundation.HRESULT {
+func (self *IReplicaKeyMap) LookupReplicaKey(pbReplicaId *byte, pdwReplicaKey *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbReplicaId)), uintptr(unsafe.Pointer(pdwReplicaKey)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LookupReplicaId dispatches through IReplicaKeyMap's vtable slot 4.
-func (self *IReplicaKeyMap) LookupReplicaId(dwReplicaKey uint32, pbReplicaId *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *IReplicaKeyMap) LookupReplicaId(dwReplicaKey uint32, pbReplicaId *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwReplicaKey), uintptr(unsafe.Pointer(pbReplicaId)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Serialize dispatches through IReplicaKeyMap's vtable slot 5.
-func (self *IReplicaKeyMap) Serialize(pbReplicaKeyMap *byte, pcbReplicaKeyMap *uint32) foundation.HRESULT {
+func (self *IReplicaKeyMap) Serialize(pbReplicaKeyMap *byte, pcbReplicaKeyMap *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbReplicaKeyMap)), uintptr(unsafe.Pointer(pcbReplicaKeyMap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRequestFilteredSync: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-irequestfilteredsync
@@ -1135,9 +1139,9 @@ type IRequestFilteredSync struct {
 var IID_IRequestFilteredSync = win32.GUID{Data1: 0x2e020184, Data2: 0x6d18, Data3: 0x46a7, Data4: [8]byte{0xa3, 0x2a, 0xda, 0x4a, 0xeb, 0x06, 0x69, 0x6c}}
 
 // SpecifyFilter dispatches through IRequestFilteredSync's vtable slot 3.
-func (self *IRequestFilteredSync) SpecifyFilter(pCallback *IFilterRequestCallback) foundation.HRESULT {
+func (self *IRequestFilteredSync) SpecifyFilter(pCallback *IFilterRequestCallback) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallback)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISingleItemException: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isingleitemexception
@@ -1150,15 +1154,15 @@ type ISingleItemException struct {
 var IID_ISingleItemException = win32.GUID{Data1: 0x892fb9b0, Data2: 0x7c55, Data3: 0x4a18, Data4: [8]byte{0x93, 0x16, 0xfd, 0xf4, 0x49, 0x56, 0x9b, 0x64}}
 
 // GetItemId dispatches through ISingleItemException's vtable slot 3.
-func (self *ISingleItemException) GetItemId(pbItemId *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *ISingleItemException) GetItemId(pbItemId *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClockVector dispatches through ISingleItemException's vtable slot 4.
-func (self *ISingleItemException) GetClockVector(riid *win32.GUID, ppUnk *unsafe.Pointer) foundation.HRESULT {
+func (self *ISingleItemException) GetClockVector(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISupportFilteredSync: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isupportfilteredsync
@@ -1171,9 +1175,9 @@ type ISupportFilteredSync struct {
 var IID_ISupportFilteredSync = win32.GUID{Data1: 0x3d128ded, Data2: 0xd555, Data3: 0x4e0d, Data4: [8]byte{0xbf, 0x4b, 0xfb, 0x21, 0x3a, 0x8a, 0x93, 0x02}}
 
 // AddFilter dispatches through ISupportFilteredSync's vtable slot 3.
-func (self *ISupportFilteredSync) AddFilter(pFilter *systemcom.IUnknown, filteringType FILTERING_TYPE) foundation.HRESULT {
+func (self *ISupportFilteredSync) AddFilter(pFilter *systemcom.IUnknown, filteringType FILTERING_TYPE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFilter)), uintptr(filteringType))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISupportLastWriteTime: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isupportlastwritetime
@@ -1186,15 +1190,15 @@ type ISupportLastWriteTime struct {
 var IID_ISupportLastWriteTime = win32.GUID{Data1: 0xeadf816f, Data2: 0xd0bd, Data3: 0x43ca, Data4: [8]byte{0x8f, 0x40, 0x5a, 0xcd, 0xc6, 0xc0, 0x6f, 0x7a}}
 
 // GetItemChangeTime dispatches through ISupportLastWriteTime's vtable slot 3.
-func (self *ISupportLastWriteTime) GetItemChangeTime(pbItemId *byte, pullTimestamp *uint64) foundation.HRESULT {
+func (self *ISupportLastWriteTime) GetItemChangeTime(pbItemId *byte, pullTimestamp *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pullTimestamp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChangeUnitChangeTime dispatches through ISupportLastWriteTime's vtable slot 4.
-func (self *ISupportLastWriteTime) GetChangeUnitChangeTime(pbItemId *byte, pbChangeUnitId *byte, pullTimestamp *uint64) foundation.HRESULT {
+func (self *ISupportLastWriteTime) GetChangeUnitChangeTime(pbItemId *byte, pbChangeUnitId *byte, pullTimestamp *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pbChangeUnitId)), uintptr(unsafe.Pointer(pullTimestamp)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncCallback: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isynccallback
@@ -1207,33 +1211,33 @@ type ISyncCallback struct {
 var IID_ISyncCallback = win32.GUID{Data1: 0x0599797f, Data2: 0x5ed9, Data3: 0x485c, Data4: [8]byte{0xae, 0x36, 0x0c, 0x5d, 0x1b, 0xf2, 0xe7, 0xa5}}
 
 // OnProgress dispatches through ISyncCallback's vtable slot 3.
-func (self *ISyncCallback) OnProgress(provider SYNC_PROVIDER_ROLE, syncStage SYNC_PROGRESS_STAGE, dwCompletedWork uint32, dwTotalWork uint32) foundation.HRESULT {
+func (self *ISyncCallback) OnProgress(provider SYNC_PROVIDER_ROLE, syncStage SYNC_PROGRESS_STAGE, dwCompletedWork uint32, dwTotalWork uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(provider), uintptr(syncStage), uintptr(dwCompletedWork), uintptr(dwTotalWork))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnChange dispatches through ISyncCallback's vtable slot 4.
-func (self *ISyncCallback) OnChange(pSyncChange *ISyncChange) foundation.HRESULT {
+func (self *ISyncCallback) OnChange(pSyncChange *ISyncChange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSyncChange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnConflict dispatches through ISyncCallback's vtable slot 5.
-func (self *ISyncCallback) OnConflict(pConflict *IChangeConflict) foundation.HRESULT {
+func (self *ISyncCallback) OnConflict(pConflict *IChangeConflict) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConflict)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnFullEnumerationNeeded dispatches through ISyncCallback's vtable slot 6.
-func (self *ISyncCallback) OnFullEnumerationNeeded(pFullEnumerationAction *SYNC_FULL_ENUMERATION_ACTION) foundation.HRESULT {
+func (self *ISyncCallback) OnFullEnumerationNeeded(pFullEnumerationAction *SYNC_FULL_ENUMERATION_ACTION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFullEnumerationAction)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnRecoverableError dispatches through ISyncCallback's vtable slot 7.
-func (self *ISyncCallback) OnRecoverableError(pRecoverableError *IRecoverableError) foundation.HRESULT {
+func (self *ISyncCallback) OnRecoverableError(pRecoverableError *IRecoverableError) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRecoverableError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncCallback2: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isynccallback2
@@ -1246,15 +1250,15 @@ type ISyncCallback2 struct {
 var IID_ISyncCallback2 = win32.GUID{Data1: 0x47ce84af, Data2: 0x7442, Data3: 0x4ead, Data4: [8]byte{0x86, 0x30, 0x12, 0x01, 0x5e, 0x03, 0x0a, 0xd7}}
 
 // OnChangeApplied dispatches through ISyncCallback2's vtable slot 8.
-func (self *ISyncCallback2) OnChangeApplied(dwChangesApplied uint32, dwChangesFailed uint32) foundation.HRESULT {
+func (self *ISyncCallback2) OnChangeApplied(dwChangesApplied uint32, dwChangesFailed uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwChangesApplied), uintptr(dwChangesFailed))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnChangeFailed dispatches through ISyncCallback2's vtable slot 9.
-func (self *ISyncCallback2) OnChangeFailed(dwChangesApplied uint32, dwChangesFailed uint32) foundation.HRESULT {
+func (self *ISyncCallback2) OnChangeFailed(dwChangesApplied uint32, dwChangesFailed uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwChangesApplied), uintptr(dwChangesFailed))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncChange: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncchange
@@ -1267,63 +1271,63 @@ type ISyncChange struct {
 var IID_ISyncChange = win32.GUID{Data1: 0xa1952beb, Data2: 0x0f6b, Data3: 0x4711, Data4: [8]byte{0xb1, 0x36, 0x01, 0xda, 0x85, 0xb9, 0x68, 0xa6}}
 
 // GetOwnerReplicaId dispatches through ISyncChange's vtable slot 3.
-func (self *ISyncChange) GetOwnerReplicaId(pbReplicaId *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *ISyncChange) GetOwnerReplicaId(pbReplicaId *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbReplicaId)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRootItemId dispatches through ISyncChange's vtable slot 4.
-func (self *ISyncChange) GetRootItemId(pbRootItemId *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *ISyncChange) GetRootItemId(pbRootItemId *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbRootItemId)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChangeVersion dispatches through ISyncChange's vtable slot 5.
-func (self *ISyncChange) GetChangeVersion(pbCurrentReplicaId *byte, pVersion *SYNC_VERSION) foundation.HRESULT {
+func (self *ISyncChange) GetChangeVersion(pbCurrentReplicaId *byte, pVersion *SYNC_VERSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbCurrentReplicaId)), uintptr(unsafe.Pointer(pVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetCreationVersion dispatches through ISyncChange's vtable slot 6.
-func (self *ISyncChange) GetCreationVersion(pbCurrentReplicaId *byte, pVersion *SYNC_VERSION) foundation.HRESULT {
+func (self *ISyncChange) GetCreationVersion(pbCurrentReplicaId *byte, pVersion *SYNC_VERSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbCurrentReplicaId)), uintptr(unsafe.Pointer(pVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFlags dispatches through ISyncChange's vtable slot 7.
-func (self *ISyncChange) GetFlags(pdwFlags *uint32) foundation.HRESULT {
+func (self *ISyncChange) GetFlags(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWorkEstimate dispatches through ISyncChange's vtable slot 8.
-func (self *ISyncChange) GetWorkEstimate(pdwWork *uint32) foundation.HRESULT {
+func (self *ISyncChange) GetWorkEstimate(pdwWork *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwWork)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChangeUnits dispatches through ISyncChange's vtable slot 9.
-func (self *ISyncChange) GetChangeUnits(ppEnum **IEnumSyncChangeUnits) foundation.HRESULT {
+func (self *ISyncChange) GetChangeUnits(ppEnum **IEnumSyncChangeUnits) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMadeWithKnowledge dispatches through ISyncChange's vtable slot 10.
-func (self *ISyncChange) GetMadeWithKnowledge(ppMadeWithKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChange) GetMadeWithKnowledge(ppMadeWithKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppMadeWithKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLearnedKnowledge dispatches through ISyncChange's vtable slot 11.
-func (self *ISyncChange) GetLearnedKnowledge(ppLearnedKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChange) GetLearnedKnowledge(ppLearnedKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppLearnedKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWorkEstimate dispatches through ISyncChange's vtable slot 12.
-func (self *ISyncChange) SetWorkEstimate(dwWork uint32) foundation.HRESULT {
+func (self *ISyncChange) SetWorkEstimate(dwWork uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwWork))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncChangeBatch: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncchangebatch
@@ -1336,21 +1340,22 @@ type ISyncChangeBatch struct {
 var IID_ISyncChangeBatch = win32.GUID{Data1: 0x70c64dee, Data2: 0x380f, Data3: 0x4c2e, Data4: [8]byte{0x8f, 0x70, 0x31, 0xc5, 0x5b, 0xd5, 0xf9, 0xb3}}
 
 // BeginUnorderedGroup dispatches through ISyncChangeBatch's vtable slot 17.
-func (self *ISyncChangeBatch) BeginUnorderedGroup() foundation.HRESULT {
+func (self *ISyncChangeBatch) BeginUnorderedGroup() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndUnorderedGroup dispatches through ISyncChangeBatch's vtable slot 18.
-func (self *ISyncChangeBatch) EndUnorderedGroup(pMadeWithKnowledge *ISyncKnowledge, fAllChangesForKnowledge foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMadeWithKnowledge)), uintptr(fAllChangesForKnowledge))
-	return foundation.HRESULT(r1)
+func (self *ISyncChangeBatch) EndUnorderedGroup(pMadeWithKnowledge *ISyncKnowledge, fAllChangesForKnowledge bool) error {
+	_fAllChangesForKnowledge := win32.Bool32(fAllChangesForKnowledge)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMadeWithKnowledge)), uintptr(_fAllChangesForKnowledge))
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddLoggedConflict dispatches through ISyncChangeBatch's vtable slot 19.
-func (self *ISyncChangeBatch) AddLoggedConflict(pbOwnerReplicaId *byte, pbItemId *byte, pChangeVersion *SYNC_VERSION, pCreationVersion *SYNC_VERSION, dwFlags uint32, dwWorkForChange uint32, pConflictKnowledge *ISyncKnowledge, ppChangeBuilder **ISyncChangeBuilder) foundation.HRESULT {
+func (self *ISyncChangeBatch) AddLoggedConflict(pbOwnerReplicaId *byte, pbItemId *byte, pChangeVersion *SYNC_VERSION, pCreationVersion *SYNC_VERSION, dwFlags uint32, dwWorkForChange uint32, pConflictKnowledge *ISyncKnowledge, ppChangeBuilder **ISyncChangeBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbOwnerReplicaId)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pChangeVersion)), uintptr(unsafe.Pointer(pCreationVersion)), uintptr(dwFlags), uintptr(dwWorkForChange), uintptr(unsafe.Pointer(pConflictKnowledge)), uintptr(unsafe.Pointer(ppChangeBuilder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 225f4a33-f5ee-4cc7-b039-67a262b4b2ac
@@ -1362,15 +1367,15 @@ type ISyncChangeBatch2 struct {
 var IID_ISyncChangeBatch2 = win32.GUID{Data1: 0x225f4a33, Data2: 0xf5ee, Data3: 0x4cc7, Data4: [8]byte{0xb0, 0x39, 0x67, 0xa2, 0x62, 0xb4, 0xb2, 0xac}}
 
 // AddMergeTombstoneMetadataToGroup dispatches through ISyncChangeBatch2's vtable slot 20.
-func (self *ISyncChangeBatch2) AddMergeTombstoneMetadataToGroup(pbOwnerReplicaId *byte, pbWinnerItemId *byte, pbItemId *byte, pChangeVersion *SYNC_VERSION, pCreationVersion *SYNC_VERSION, dwWorkForChange uint32, ppChangeBuilder **ISyncChangeBuilder) foundation.HRESULT {
+func (self *ISyncChangeBatch2) AddMergeTombstoneMetadataToGroup(pbOwnerReplicaId *byte, pbWinnerItemId *byte, pbItemId *byte, pChangeVersion *SYNC_VERSION, pCreationVersion *SYNC_VERSION, dwWorkForChange uint32, ppChangeBuilder **ISyncChangeBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbOwnerReplicaId)), uintptr(unsafe.Pointer(pbWinnerItemId)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pChangeVersion)), uintptr(unsafe.Pointer(pCreationVersion)), uintptr(dwWorkForChange), uintptr(unsafe.Pointer(ppChangeBuilder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddMergeTombstoneLoggedConflict dispatches through ISyncChangeBatch2's vtable slot 21.
-func (self *ISyncChangeBatch2) AddMergeTombstoneLoggedConflict(pbOwnerReplicaId *byte, pbWinnerItemId *byte, pbItemId *byte, pChangeVersion *SYNC_VERSION, pCreationVersion *SYNC_VERSION, dwWorkForChange uint32, pConflictKnowledge *ISyncKnowledge, ppChangeBuilder **ISyncChangeBuilder) foundation.HRESULT {
+func (self *ISyncChangeBatch2) AddMergeTombstoneLoggedConflict(pbOwnerReplicaId *byte, pbWinnerItemId *byte, pbItemId *byte, pChangeVersion *SYNC_VERSION, pCreationVersion *SYNC_VERSION, dwWorkForChange uint32, pConflictKnowledge *ISyncKnowledge, ppChangeBuilder **ISyncChangeBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbOwnerReplicaId)), uintptr(unsafe.Pointer(pbWinnerItemId)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pChangeVersion)), uintptr(unsafe.Pointer(pCreationVersion)), uintptr(dwWorkForChange), uintptr(unsafe.Pointer(pConflictKnowledge)), uintptr(unsafe.Pointer(ppChangeBuilder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncChangeBatchAdvanced: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncchangebatchadvanced
@@ -1383,27 +1388,27 @@ type ISyncChangeBatchAdvanced struct {
 var IID_ISyncChangeBatchAdvanced = win32.GUID{Data1: 0x0f1a4995, Data2: 0xcbc8, Data3: 0x421d, Data4: [8]byte{0xb5, 0x50, 0x5d, 0x0b, 0xeb, 0xf3, 0xe9, 0xa5}}
 
 // GetFilterInfo dispatches through ISyncChangeBatchAdvanced's vtable slot 3.
-func (self *ISyncChangeBatchAdvanced) GetFilterInfo(ppFilterInfo **ISyncFilterInfo) foundation.HRESULT {
+func (self *ISyncChangeBatchAdvanced) GetFilterInfo(ppFilterInfo **ISyncFilterInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFilterInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConvertFullEnumerationChangeBatchToRegularChangeBatch dispatches through ISyncChangeBatchAdvanced's vtable slot 4.
-func (self *ISyncChangeBatchAdvanced) ConvertFullEnumerationChangeBatchToRegularChangeBatch(ppChangeBatch **ISyncChangeBatch) foundation.HRESULT {
+func (self *ISyncChangeBatchAdvanced) ConvertFullEnumerationChangeBatchToRegularChangeBatch(ppChangeBatch **ISyncChangeBatch) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppChangeBatch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetUpperBoundItemId dispatches through ISyncChangeBatchAdvanced's vtable slot 5.
-func (self *ISyncChangeBatchAdvanced) GetUpperBoundItemId(pbItemId *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *ISyncChangeBatchAdvanced) GetUpperBoundItemId(pbItemId *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetBatchLevelKnowledgeShouldBeApplied dispatches through ISyncChangeBatchAdvanced's vtable slot 6.
-func (self *ISyncChangeBatchAdvanced) GetBatchLevelKnowledgeShouldBeApplied(pfBatchKnowledgeShouldBeApplied *foundation.BOOL) foundation.HRESULT {
+func (self *ISyncChangeBatchAdvanced) GetBatchLevelKnowledgeShouldBeApplied(pfBatchKnowledgeShouldBeApplied *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfBatchKnowledgeShouldBeApplied)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncChangeBatchBase: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncchangebatchbase
@@ -1416,87 +1421,87 @@ type ISyncChangeBatchBase struct {
 var IID_ISyncChangeBatchBase = win32.GUID{Data1: 0x52f6e694, Data2: 0x6a71, Data3: 0x4494, Data4: [8]byte{0xa1, 0x84, 0xa8, 0x31, 0x1b, 0xf5, 0xd2, 0x27}}
 
 // GetChangeEnumerator dispatches through ISyncChangeBatchBase's vtable slot 3.
-func (self *ISyncChangeBatchBase) GetChangeEnumerator(ppEnum **IEnumSyncChanges) foundation.HRESULT {
+func (self *ISyncChangeBatchBase) GetChangeEnumerator(ppEnum **IEnumSyncChanges) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppEnum)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetIsLastBatch dispatches through ISyncChangeBatchBase's vtable slot 4.
-func (self *ISyncChangeBatchBase) GetIsLastBatch(pfLastBatch *foundation.BOOL) foundation.HRESULT {
+func (self *ISyncChangeBatchBase) GetIsLastBatch(pfLastBatch *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfLastBatch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetWorkEstimateForBatch dispatches through ISyncChangeBatchBase's vtable slot 5.
-func (self *ISyncChangeBatchBase) GetWorkEstimateForBatch(pdwWorkForBatch *uint32) foundation.HRESULT {
+func (self *ISyncChangeBatchBase) GetWorkEstimateForBatch(pdwWorkForBatch *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwWorkForBatch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRemainingWorkEstimateForSession dispatches through ISyncChangeBatchBase's vtable slot 6.
-func (self *ISyncChangeBatchBase) GetRemainingWorkEstimateForSession(pdwRemainingWorkForSession *uint32) foundation.HRESULT {
+func (self *ISyncChangeBatchBase) GetRemainingWorkEstimateForSession(pdwRemainingWorkForSession *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwRemainingWorkForSession)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // BeginOrderedGroup dispatches through ISyncChangeBatchBase's vtable slot 7.
-func (self *ISyncChangeBatchBase) BeginOrderedGroup(pbLowerBound *byte) foundation.HRESULT {
+func (self *ISyncChangeBatchBase) BeginOrderedGroup(pbLowerBound *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbLowerBound)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EndOrderedGroup dispatches through ISyncChangeBatchBase's vtable slot 8.
-func (self *ISyncChangeBatchBase) EndOrderedGroup(pbUpperBound *byte, pMadeWithKnowledge *ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeBatchBase) EndOrderedGroup(pbUpperBound *byte, pMadeWithKnowledge *ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbUpperBound)), uintptr(unsafe.Pointer(pMadeWithKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // AddItemMetadataToGroup dispatches through ISyncChangeBatchBase's vtable slot 9.
-func (self *ISyncChangeBatchBase) AddItemMetadataToGroup(pbOwnerReplicaId *byte, pbItemId *byte, pChangeVersion *SYNC_VERSION, pCreationVersion *SYNC_VERSION, dwFlags uint32, dwWorkForChange uint32, ppChangeBuilder **ISyncChangeBuilder) foundation.HRESULT {
+func (self *ISyncChangeBatchBase) AddItemMetadataToGroup(pbOwnerReplicaId *byte, pbItemId *byte, pChangeVersion *SYNC_VERSION, pCreationVersion *SYNC_VERSION, dwFlags uint32, dwWorkForChange uint32, ppChangeBuilder **ISyncChangeBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbOwnerReplicaId)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pChangeVersion)), uintptr(unsafe.Pointer(pCreationVersion)), uintptr(dwFlags), uintptr(dwWorkForChange), uintptr(unsafe.Pointer(ppChangeBuilder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLearnedKnowledge dispatches through ISyncChangeBatchBase's vtable slot 10.
-func (self *ISyncChangeBatchBase) GetLearnedKnowledge(ppLearnedKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeBatchBase) GetLearnedKnowledge(ppLearnedKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppLearnedKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetPrerequisiteKnowledge dispatches through ISyncChangeBatchBase's vtable slot 11.
-func (self *ISyncChangeBatchBase) GetPrerequisiteKnowledge(ppPrerequisteKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeBatchBase) GetPrerequisiteKnowledge(ppPrerequisteKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPrerequisteKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceForgottenKnowledge dispatches through ISyncChangeBatchBase's vtable slot 12.
-func (self *ISyncChangeBatchBase) GetSourceForgottenKnowledge(ppSourceForgottenKnowledge **IForgottenKnowledge) foundation.HRESULT {
+func (self *ISyncChangeBatchBase) GetSourceForgottenKnowledge(ppSourceForgottenKnowledge **IForgottenKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSourceForgottenKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLastBatch dispatches through ISyncChangeBatchBase's vtable slot 13.
-func (self *ISyncChangeBatchBase) SetLastBatch() foundation.HRESULT {
+func (self *ISyncChangeBatchBase) SetLastBatch() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetWorkEstimateForBatch dispatches through ISyncChangeBatchBase's vtable slot 14.
-func (self *ISyncChangeBatchBase) SetWorkEstimateForBatch(dwWorkForBatch uint32) foundation.HRESULT {
+func (self *ISyncChangeBatchBase) SetWorkEstimateForBatch(dwWorkForBatch uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwWorkForBatch))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetRemainingWorkEstimateForSession dispatches through ISyncChangeBatchBase's vtable slot 15.
-func (self *ISyncChangeBatchBase) SetRemainingWorkEstimateForSession(dwRemainingWorkForSession uint32) foundation.HRESULT {
+func (self *ISyncChangeBatchBase) SetRemainingWorkEstimateForSession(dwRemainingWorkForSession uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwRemainingWorkForSession))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Serialize dispatches through ISyncChangeBatchBase's vtable slot 16.
-func (self *ISyncChangeBatchBase) Serialize(pbChangeBatch *byte, pcbChangeBatch *uint32) foundation.HRESULT {
+func (self *ISyncChangeBatchBase) Serialize(pbChangeBatch *byte, pcbChangeBatch *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbChangeBatch)), uintptr(unsafe.Pointer(pcbChangeBatch)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncChangeBatchBase2: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncchangebatchbase2
@@ -1509,9 +1514,9 @@ type ISyncChangeBatchBase2 struct {
 var IID_ISyncChangeBatchBase2 = win32.GUID{Data1: 0x6fdb596a, Data2: 0xd755, Data3: 0x4584, Data4: [8]byte{0xbd, 0x0c, 0xc0, 0xc2, 0x3a, 0x54, 0x8f, 0xbf}}
 
 // SerializeWithOptions dispatches through ISyncChangeBatchBase2's vtable slot 17.
-func (self *ISyncChangeBatchBase2) SerializeWithOptions(targetFormatVersion SYNC_SERIALIZATION_VERSION, dwFlags uint32, pbBuffer *byte, pdwSerializedSize *uint32) foundation.HRESULT {
+func (self *ISyncChangeBatchBase2) SerializeWithOptions(targetFormatVersion SYNC_SERIALIZATION_VERSION, dwFlags uint32, pbBuffer *byte, pdwSerializedSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(targetFormatVersion), uintptr(dwFlags), uintptr(unsafe.Pointer(pbBuffer)), uintptr(unsafe.Pointer(pdwSerializedSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: de247002-566d-459a-a6ed-a5aab3459fb7
@@ -1523,51 +1528,51 @@ type ISyncChangeBatchWithFilterKeyMap struct {
 var IID_ISyncChangeBatchWithFilterKeyMap = win32.GUID{Data1: 0xde247002, Data2: 0x566d, Data3: 0x459a, Data4: [8]byte{0xa6, 0xed, 0xa5, 0xaa, 0xb3, 0x45, 0x9f, 0xb7}}
 
 // GetFilterKeyMap dispatches through ISyncChangeBatchWithFilterKeyMap's vtable slot 3.
-func (self *ISyncChangeBatchWithFilterKeyMap) GetFilterKeyMap(ppIFilterKeyMap **IFilterKeyMap) foundation.HRESULT {
+func (self *ISyncChangeBatchWithFilterKeyMap) GetFilterKeyMap(ppIFilterKeyMap **IFilterKeyMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppIFilterKeyMap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFilterKeyMap dispatches through ISyncChangeBatchWithFilterKeyMap's vtable slot 4.
-func (self *ISyncChangeBatchWithFilterKeyMap) SetFilterKeyMap(pIFilterKeyMap *IFilterKeyMap) foundation.HRESULT {
+func (self *ISyncChangeBatchWithFilterKeyMap) SetFilterKeyMap(pIFilterKeyMap *IFilterKeyMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIFilterKeyMap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetFilterForgottenKnowledge dispatches through ISyncChangeBatchWithFilterKeyMap's vtable slot 5.
-func (self *ISyncChangeBatchWithFilterKeyMap) SetFilterForgottenKnowledge(dwFilterKey uint32, pFilterForgottenKnowledge *ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeBatchWithFilterKeyMap) SetFilterForgottenKnowledge(dwFilterKey uint32, pFilterForgottenKnowledge *ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwFilterKey), uintptr(unsafe.Pointer(pFilterForgottenKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilteredReplicaLearnedKnowledge dispatches through ISyncChangeBatchWithFilterKeyMap's vtable slot 6.
-func (self *ISyncChangeBatchWithFilterKeyMap) GetFilteredReplicaLearnedKnowledge(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, ppLearnedForgottenKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeBatchWithFilterKeyMap) GetFilteredReplicaLearnedKnowledge(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, ppLearnedForgottenKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationKnowledge)), uintptr(unsafe.Pointer(pNewMoveins)), uintptr(unsafe.Pointer(ppLearnedForgottenKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLearnedFilterForgottenKnowledge dispatches through ISyncChangeBatchWithFilterKeyMap's vtable slot 7.
-func (self *ISyncChangeBatchWithFilterKeyMap) GetLearnedFilterForgottenKnowledge(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeBatchWithFilterKeyMap) GetLearnedFilterForgottenKnowledge(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationKnowledge)), uintptr(unsafe.Pointer(pNewMoveins)), uintptr(dwFilterKey), uintptr(unsafe.Pointer(ppLearnedFilterForgottenKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilteredReplicaLearnedForgottenKnowledge dispatches through ISyncChangeBatchWithFilterKeyMap's vtable slot 8.
-func (self *ISyncChangeBatchWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledge(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, ppLearnedForgottenKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeBatchWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledge(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, ppLearnedForgottenKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationKnowledge)), uintptr(unsafe.Pointer(pNewMoveins)), uintptr(unsafe.Pointer(ppLearnedForgottenKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete dispatches through ISyncChangeBatchWithFilterKeyMap's vtable slot 9.
-func (self *ISyncChangeBatchWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, ppLearnedForgottenKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeBatchWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, ppLearnedForgottenKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationKnowledge)), uintptr(unsafe.Pointer(pNewMoveins)), uintptr(unsafe.Pointer(ppLearnedForgottenKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete dispatches through ISyncChangeBatchWithFilterKeyMap's vtable slot 10.
-func (self *ISyncChangeBatchWithFilterKeyMap) GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeBatchWithFilterKeyMap) GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationKnowledge)), uintptr(unsafe.Pointer(pNewMoveins)), uintptr(dwFilterKey), uintptr(unsafe.Pointer(ppLearnedFilterForgottenKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncChangeBatchWithPrerequisite: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncchangebatchwithprerequisite
@@ -1580,21 +1585,21 @@ type ISyncChangeBatchWithPrerequisite struct {
 var IID_ISyncChangeBatchWithPrerequisite = win32.GUID{Data1: 0x097f13be, Data2: 0x5b92, Data3: 0x4048, Data4: [8]byte{0xb3, 0xf2, 0x7b, 0x42, 0xa2, 0x51, 0x5e, 0x07}}
 
 // SetPrerequisiteKnowledge dispatches through ISyncChangeBatchWithPrerequisite's vtable slot 17.
-func (self *ISyncChangeBatchWithPrerequisite) SetPrerequisiteKnowledge(pPrerequisiteKnowledge *ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeBatchWithPrerequisite) SetPrerequisiteKnowledge(pPrerequisiteKnowledge *ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPrerequisiteKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLearnedKnowledgeWithPrerequisite dispatches through ISyncChangeBatchWithPrerequisite's vtable slot 18.
-func (self *ISyncChangeBatchWithPrerequisite) GetLearnedKnowledgeWithPrerequisite(pDestinationKnowledge *ISyncKnowledge, ppLearnedWithPrerequisiteKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeBatchWithPrerequisite) GetLearnedKnowledgeWithPrerequisite(pDestinationKnowledge *ISyncKnowledge, ppLearnedWithPrerequisiteKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationKnowledge)), uintptr(unsafe.Pointer(ppLearnedWithPrerequisiteKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLearnedForgottenKnowledge dispatches through ISyncChangeBatchWithPrerequisite's vtable slot 19.
-func (self *ISyncChangeBatchWithPrerequisite) GetLearnedForgottenKnowledge(ppLearnedForgottenKnowledge **IForgottenKnowledge) foundation.HRESULT {
+func (self *ISyncChangeBatchWithPrerequisite) GetLearnedForgottenKnowledge(ppLearnedForgottenKnowledge **IForgottenKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppLearnedForgottenKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncChangeBuilder: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncchangebuilder
@@ -1607,9 +1612,9 @@ type ISyncChangeBuilder struct {
 var IID_ISyncChangeBuilder = win32.GUID{Data1: 0x56f14771, Data2: 0x8677, Data3: 0x484f, Data4: [8]byte{0xa1, 0x70, 0xe3, 0x86, 0xe4, 0x18, 0xa6, 0x76}}
 
 // AddChangeUnitMetadata dispatches through ISyncChangeBuilder's vtable slot 3.
-func (self *ISyncChangeBuilder) AddChangeUnitMetadata(pbChangeUnitId *byte, pChangeUnitVersion *SYNC_VERSION) foundation.HRESULT {
+func (self *ISyncChangeBuilder) AddChangeUnitMetadata(pbChangeUnitId *byte, pChangeUnitVersion *SYNC_VERSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbChangeUnitId)), uintptr(unsafe.Pointer(pChangeUnitVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncChangeUnit: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncchangeunit
@@ -1622,21 +1627,21 @@ type ISyncChangeUnit struct {
 var IID_ISyncChangeUnit = win32.GUID{Data1: 0x60edd8ca, Data2: 0x7341, Data3: 0x4bb7, Data4: [8]byte{0x95, 0xce, 0xfa, 0xb6, 0x39, 0x4b, 0x51, 0xcb}}
 
 // GetItemChange dispatches through ISyncChangeUnit's vtable slot 3.
-func (self *ISyncChangeUnit) GetItemChange(ppSyncChange **ISyncChange) foundation.HRESULT {
+func (self *ISyncChangeUnit) GetItemChange(ppSyncChange **ISyncChange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppSyncChange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChangeUnitId dispatches through ISyncChangeUnit's vtable slot 4.
-func (self *ISyncChangeUnit) GetChangeUnitId(pbChangeUnitId *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *ISyncChangeUnit) GetChangeUnitId(pbChangeUnitId *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbChangeUnitId)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChangeUnitVersion dispatches through ISyncChangeUnit's vtable slot 5.
-func (self *ISyncChangeUnit) GetChangeUnitVersion(pbCurrentReplicaId *byte, pVersion *SYNC_VERSION) foundation.HRESULT {
+func (self *ISyncChangeUnit) GetChangeUnitVersion(pbCurrentReplicaId *byte, pVersion *SYNC_VERSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbCurrentReplicaId)), uintptr(unsafe.Pointer(pVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: bfe1ef00-e87d-42fd-a4e9-242d70414aef
@@ -1648,57 +1653,57 @@ type ISyncChangeWithFilterKeyMap struct {
 var IID_ISyncChangeWithFilterKeyMap = win32.GUID{Data1: 0xbfe1ef00, Data2: 0xe87d, Data3: 0x42fd, Data4: [8]byte{0xa4, 0xe9, 0x24, 0x2d, 0x70, 0x41, 0x4a, 0xef}}
 
 // GetFilterCount dispatches through ISyncChangeWithFilterKeyMap's vtable slot 3.
-func (self *ISyncChangeWithFilterKeyMap) GetFilterCount(pdwFilterCount *uint32) foundation.HRESULT {
+func (self *ISyncChangeWithFilterKeyMap) GetFilterCount(pdwFilterCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFilterCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilterChange dispatches through ISyncChangeWithFilterKeyMap's vtable slot 4.
-func (self *ISyncChangeWithFilterKeyMap) GetFilterChange(dwFilterKey uint32, pFilterChange *SYNC_FILTER_CHANGE) foundation.HRESULT {
+func (self *ISyncChangeWithFilterKeyMap) GetFilterChange(dwFilterKey uint32, pFilterChange *SYNC_FILTER_CHANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFilterKey), uintptr(unsafe.Pointer(pFilterChange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllChangeUnitsPresentFlag dispatches through ISyncChangeWithFilterKeyMap's vtable slot 5.
-func (self *ISyncChangeWithFilterKeyMap) GetAllChangeUnitsPresentFlag(pfAllChangeUnitsPresent *foundation.BOOL) foundation.HRESULT {
+func (self *ISyncChangeWithFilterKeyMap) GetAllChangeUnitsPresentFlag(pfAllChangeUnitsPresent *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfAllChangeUnitsPresent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilterForgottenKnowledge dispatches through ISyncChangeWithFilterKeyMap's vtable slot 6.
-func (self *ISyncChangeWithFilterKeyMap) GetFilterForgottenKnowledge(dwFilterKey uint32, ppIFilterForgottenKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeWithFilterKeyMap) GetFilterForgottenKnowledge(dwFilterKey uint32, ppIFilterForgottenKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwFilterKey), uintptr(unsafe.Pointer(ppIFilterForgottenKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilteredReplicaLearnedKnowledge dispatches through ISyncChangeWithFilterKeyMap's vtable slot 7.
-func (self *ISyncChangeWithFilterKeyMap) GetFilteredReplicaLearnedKnowledge(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, ppLearnedKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeWithFilterKeyMap) GetFilteredReplicaLearnedKnowledge(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, ppLearnedKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationKnowledge)), uintptr(unsafe.Pointer(pNewMoveins)), uintptr(unsafe.Pointer(ppLearnedKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLearnedFilterForgottenKnowledge dispatches through ISyncChangeWithFilterKeyMap's vtable slot 8.
-func (self *ISyncChangeWithFilterKeyMap) GetLearnedFilterForgottenKnowledge(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeWithFilterKeyMap) GetLearnedFilterForgottenKnowledge(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationKnowledge)), uintptr(unsafe.Pointer(pNewMoveins)), uintptr(dwFilterKey), uintptr(unsafe.Pointer(ppLearnedFilterForgottenKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilteredReplicaLearnedForgottenKnowledge dispatches through ISyncChangeWithFilterKeyMap's vtable slot 9.
-func (self *ISyncChangeWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledge(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, ppLearnedForgottenKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledge(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, ppLearnedForgottenKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationKnowledge)), uintptr(unsafe.Pointer(pNewMoveins)), uintptr(unsafe.Pointer(ppLearnedForgottenKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete dispatches through ISyncChangeWithFilterKeyMap's vtable slot 10.
-func (self *ISyncChangeWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, ppLearnedForgottenKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeWithFilterKeyMap) GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, ppLearnedForgottenKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationKnowledge)), uintptr(unsafe.Pointer(pNewMoveins)), uintptr(unsafe.Pointer(ppLearnedForgottenKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete dispatches through ISyncChangeWithFilterKeyMap's vtable slot 11.
-func (self *ISyncChangeWithFilterKeyMap) GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeWithFilterKeyMap) GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete(pDestinationKnowledge *ISyncKnowledge, pNewMoveins *IEnumItemIds, dwFilterKey uint32, ppLearnedFilterForgottenKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationKnowledge)), uintptr(unsafe.Pointer(pNewMoveins)), uintptr(dwFilterKey), uintptr(unsafe.Pointer(ppLearnedFilterForgottenKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncChangeWithPrerequisite: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncchangewithprerequisite
@@ -1711,15 +1716,15 @@ type ISyncChangeWithPrerequisite struct {
 var IID_ISyncChangeWithPrerequisite = win32.GUID{Data1: 0x9e38382f, Data2: 0x1589, Data3: 0x48c3, Data4: [8]byte{0x92, 0xe4, 0x05, 0xec, 0xdc, 0xb4, 0xf3, 0xf7}}
 
 // GetPrerequisiteKnowledge dispatches through ISyncChangeWithPrerequisite's vtable slot 3.
-func (self *ISyncChangeWithPrerequisite) GetPrerequisiteKnowledge(ppPrerequisiteKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeWithPrerequisite) GetPrerequisiteKnowledge(ppPrerequisiteKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPrerequisiteKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLearnedKnowledgeWithPrerequisite dispatches through ISyncChangeWithPrerequisite's vtable slot 4.
-func (self *ISyncChangeWithPrerequisite) GetLearnedKnowledgeWithPrerequisite(pDestinationKnowledge *ISyncKnowledge, ppLearnedKnowledgeWithPrerequisite **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncChangeWithPrerequisite) GetLearnedKnowledgeWithPrerequisite(pDestinationKnowledge *ISyncKnowledge, ppLearnedKnowledgeWithPrerequisite **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDestinationKnowledge)), uintptr(unsafe.Pointer(ppLearnedKnowledgeWithPrerequisite)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 8af3843e-75b3-438c-bb51-6f020d70d3cb
@@ -1731,9 +1736,9 @@ type ISyncConstraintCallback struct {
 var IID_ISyncConstraintCallback = win32.GUID{Data1: 0x8af3843e, Data2: 0x75b3, Data3: 0x438c, Data4: [8]byte{0xbb, 0x51, 0x6f, 0x02, 0x0d, 0x70, 0xd3, 0xcb}}
 
 // OnConstraintConflict dispatches through ISyncConstraintCallback's vtable slot 3.
-func (self *ISyncConstraintCallback) OnConstraintConflict(pConflict *IConstraintConflict) foundation.HRESULT {
+func (self *ISyncConstraintCallback) OnConstraintConflict(pConflict *IConstraintConflict) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConflict)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 435d4861-68d5-44aa-a0f9-72a0b00ef9cf
@@ -1745,27 +1750,27 @@ type ISyncDataConverter struct {
 var IID_ISyncDataConverter = win32.GUID{Data1: 0x435d4861, Data2: 0x68d5, Data3: 0x44aa, Data4: [8]byte{0xa0, 0xf9, 0x72, 0xa0, 0xb0, 0x0e, 0xf9, 0xcf}}
 
 // ConvertDataRetrieverFromProviderFormat dispatches through ISyncDataConverter's vtable slot 3.
-func (self *ISyncDataConverter) ConvertDataRetrieverFromProviderFormat(pUnkDataRetrieverIn *systemcom.IUnknown, pEnumSyncChanges *IEnumSyncChanges, ppUnkDataOut **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISyncDataConverter) ConvertDataRetrieverFromProviderFormat(pUnkDataRetrieverIn *systemcom.IUnknown, pEnumSyncChanges *IEnumSyncChanges, ppUnkDataOut **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkDataRetrieverIn)), uintptr(unsafe.Pointer(pEnumSyncChanges)), uintptr(unsafe.Pointer(ppUnkDataOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConvertDataRetrieverToProviderFormat dispatches through ISyncDataConverter's vtable slot 4.
-func (self *ISyncDataConverter) ConvertDataRetrieverToProviderFormat(pUnkDataRetrieverIn *systemcom.IUnknown, pEnumSyncChanges *IEnumSyncChanges, ppUnkDataOut **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISyncDataConverter) ConvertDataRetrieverToProviderFormat(pUnkDataRetrieverIn *systemcom.IUnknown, pEnumSyncChanges *IEnumSyncChanges, ppUnkDataOut **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkDataRetrieverIn)), uintptr(unsafe.Pointer(pEnumSyncChanges)), uintptr(unsafe.Pointer(ppUnkDataOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConvertDataFromProviderFormat dispatches through ISyncDataConverter's vtable slot 5.
-func (self *ISyncDataConverter) ConvertDataFromProviderFormat(pDataContext *ILoadChangeContext, pUnkDataIn *systemcom.IUnknown, ppUnkDataOut **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISyncDataConverter) ConvertDataFromProviderFormat(pDataContext *ILoadChangeContext, pUnkDataIn *systemcom.IUnknown, ppUnkDataOut **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataContext)), uintptr(unsafe.Pointer(pUnkDataIn)), uintptr(unsafe.Pointer(ppUnkDataOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConvertDataToProviderFormat dispatches through ISyncDataConverter's vtable slot 6.
-func (self *ISyncDataConverter) ConvertDataToProviderFormat(pDataContext *ILoadChangeContext, pUnkDataOut *systemcom.IUnknown, ppUnkDataout **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISyncDataConverter) ConvertDataToProviderFormat(pDataContext *ILoadChangeContext, pUnkDataOut *systemcom.IUnknown, ppUnkDataout **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDataContext)), uintptr(unsafe.Pointer(pUnkDataOut)), uintptr(unsafe.Pointer(ppUnkDataout)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 087a3f15-0fcb-44c1-9639-53c14e2b5506
@@ -1777,15 +1782,15 @@ type ISyncFilter struct {
 var IID_ISyncFilter = win32.GUID{Data1: 0x087a3f15, Data2: 0x0fcb, Data3: 0x44c1, Data4: [8]byte{0x96, 0x39, 0x53, 0xc1, 0x4e, 0x2b, 0x55, 0x06}}
 
 // IsIdentical dispatches through ISyncFilter's vtable slot 3.
-func (self *ISyncFilter) IsIdentical(pSyncFilter *ISyncFilter) foundation.HRESULT {
+func (self *ISyncFilter) IsIdentical(pSyncFilter *ISyncFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSyncFilter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Serialize dispatches through ISyncFilter's vtable slot 4.
-func (self *ISyncFilter) Serialize(pbSyncFilter *byte, pcbSyncFilter *uint32) foundation.HRESULT {
+func (self *ISyncFilter) Serialize(pbSyncFilter *byte, pcbSyncFilter *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSyncFilter)), uintptr(unsafe.Pointer(pcbSyncFilter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: b45b7a72-e5c7-46be-9c82-77b8b15dab8a
@@ -1797,9 +1802,9 @@ type ISyncFilterDeserializer struct {
 var IID_ISyncFilterDeserializer = win32.GUID{Data1: 0xb45b7a72, Data2: 0xe5c7, Data3: 0x46be, Data4: [8]byte{0x9c, 0x82, 0x77, 0xb8, 0xb1, 0x5d, 0xab, 0x8a}}
 
 // DeserializeSyncFilter dispatches through ISyncFilterDeserializer's vtable slot 3.
-func (self *ISyncFilterDeserializer) DeserializeSyncFilter(pbSyncFilter *byte, dwCbSyncFilter uint32, ppISyncFilter **ISyncFilter) foundation.HRESULT {
+func (self *ISyncFilterDeserializer) DeserializeSyncFilter(pbSyncFilter *byte, dwCbSyncFilter uint32, ppISyncFilter **ISyncFilter) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbSyncFilter)), uintptr(dwCbSyncFilter), uintptr(unsafe.Pointer(ppISyncFilter)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncFilterInfo: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncfilterinfo
@@ -1812,9 +1817,9 @@ type ISyncFilterInfo struct {
 var IID_ISyncFilterInfo = win32.GUID{Data1: 0x794eaaf8, Data2: 0x3f2e, Data3: 0x47e6, Data4: [8]byte{0x97, 0x28, 0x17, 0xe6, 0xfc, 0xf9, 0x4c, 0xb7}}
 
 // Serialize dispatches through ISyncFilterInfo's vtable slot 3.
-func (self *ISyncFilterInfo) Serialize(pbBuffer *byte, pcbBuffer *uint32) foundation.HRESULT {
+func (self *ISyncFilterInfo) Serialize(pbBuffer *byte, pcbBuffer *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBuffer)), uintptr(unsafe.Pointer(pcbBuffer)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncFilterInfo2: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncfilterinfo2
@@ -1827,9 +1832,9 @@ type ISyncFilterInfo2 struct {
 var IID_ISyncFilterInfo2 = win32.GUID{Data1: 0x19b394ba, Data2: 0xe3d0, Data3: 0x468c, Data4: [8]byte{0x93, 0x4d, 0x32, 0x19, 0x68, 0xb2, 0xab, 0x34}}
 
 // GetFlags dispatches through ISyncFilterInfo2's vtable slot 4.
-func (self *ISyncFilterInfo2) GetFlags(pdwFlags *uint32) foundation.HRESULT {
+func (self *ISyncFilterInfo2) GetFlags(pdwFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncFullEnumerationChange: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncfullenumerationchange
@@ -1842,15 +1847,15 @@ type ISyncFullEnumerationChange struct {
 var IID_ISyncFullEnumerationChange = win32.GUID{Data1: 0x9785e0bd, Data2: 0xbdff, Data3: 0x40c4, Data4: [8]byte{0x98, 0xc5, 0xb3, 0x4b, 0x2f, 0x19, 0x91, 0xb3}}
 
 // GetLearnedKnowledgeAfterRecoveryComplete dispatches through ISyncFullEnumerationChange's vtable slot 3.
-func (self *ISyncFullEnumerationChange) GetLearnedKnowledgeAfterRecoveryComplete(ppLearnedKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncFullEnumerationChange) GetLearnedKnowledgeAfterRecoveryComplete(ppLearnedKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppLearnedKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLearnedForgottenKnowledge dispatches through ISyncFullEnumerationChange's vtable slot 4.
-func (self *ISyncFullEnumerationChange) GetLearnedForgottenKnowledge(ppLearnedForgottenKnowledge **IForgottenKnowledge) foundation.HRESULT {
+func (self *ISyncFullEnumerationChange) GetLearnedForgottenKnowledge(ppLearnedForgottenKnowledge **IForgottenKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppLearnedForgottenKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncFullEnumerationChangeBatch: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncfullenumerationchangebatch
@@ -1863,21 +1868,21 @@ type ISyncFullEnumerationChangeBatch struct {
 var IID_ISyncFullEnumerationChangeBatch = win32.GUID{Data1: 0xef64197d, Data2: 0x4f44, Data3: 0x4ea2, Data4: [8]byte{0xb3, 0x55, 0x45, 0x24, 0x71, 0x3e, 0x3b, 0xed}}
 
 // GetLearnedKnowledgeAfterRecoveryComplete dispatches through ISyncFullEnumerationChangeBatch's vtable slot 17.
-func (self *ISyncFullEnumerationChangeBatch) GetLearnedKnowledgeAfterRecoveryComplete(ppLearnedKnowledgeAfterRecoveryComplete **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncFullEnumerationChangeBatch) GetLearnedKnowledgeAfterRecoveryComplete(ppLearnedKnowledgeAfterRecoveryComplete **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppLearnedKnowledgeAfterRecoveryComplete)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClosedLowerBoundItemId dispatches through ISyncFullEnumerationChangeBatch's vtable slot 18.
-func (self *ISyncFullEnumerationChangeBatch) GetClosedLowerBoundItemId(pbClosedLowerBoundItemId *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *ISyncFullEnumerationChangeBatch) GetClosedLowerBoundItemId(pbClosedLowerBoundItemId *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbClosedLowerBoundItemId)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetClosedUpperBoundItemId dispatches through ISyncFullEnumerationChangeBatch's vtable slot 19.
-func (self *ISyncFullEnumerationChangeBatch) GetClosedUpperBoundItemId(pbClosedUpperBoundItemId *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *ISyncFullEnumerationChangeBatch) GetClosedUpperBoundItemId(pbClosedUpperBoundItemId *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbClosedUpperBoundItemId)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: e06449f4-a205-4b65-9724-01b22101eec1
@@ -1889,9 +1894,9 @@ type ISyncFullEnumerationChangeBatch2 struct {
 var IID_ISyncFullEnumerationChangeBatch2 = win32.GUID{Data1: 0xe06449f4, Data2: 0xa205, Data3: 0x4b65, Data4: [8]byte{0x97, 0x24, 0x01, 0xb2, 0x21, 0x01, 0xee, 0xc1}}
 
 // AddMergeTombstoneMetadataToGroup dispatches through ISyncFullEnumerationChangeBatch2's vtable slot 20.
-func (self *ISyncFullEnumerationChangeBatch2) AddMergeTombstoneMetadataToGroup(pbOwnerReplicaId *byte, pbWinnerItemId *byte, pbItemId *byte, pChangeVersion *SYNC_VERSION, pCreationVersion *SYNC_VERSION, dwWorkForChange uint32, ppChangeBuilder **ISyncChangeBuilder) foundation.HRESULT {
+func (self *ISyncFullEnumerationChangeBatch2) AddMergeTombstoneMetadataToGroup(pbOwnerReplicaId *byte, pbWinnerItemId *byte, pbItemId *byte, pChangeVersion *SYNC_VERSION, pCreationVersion *SYNC_VERSION, dwWorkForChange uint32, ppChangeBuilder **ISyncChangeBuilder) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbOwnerReplicaId)), uintptr(unsafe.Pointer(pbWinnerItemId)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pChangeVersion)), uintptr(unsafe.Pointer(pCreationVersion)), uintptr(dwWorkForChange), uintptr(unsafe.Pointer(ppChangeBuilder)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncKnowledge: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncknowledge
@@ -1904,147 +1909,148 @@ type ISyncKnowledge struct {
 var IID_ISyncKnowledge = win32.GUID{Data1: 0x615bbb53, Data2: 0xc945, Data3: 0x4203, Data4: [8]byte{0xbf, 0x4b, 0x2c, 0xb6, 0x59, 0x19, 0xa0, 0xaa}}
 
 // GetOwnerReplicaId dispatches through ISyncKnowledge's vtable slot 3.
-func (self *ISyncKnowledge) GetOwnerReplicaId(pbReplicaId *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *ISyncKnowledge) GetOwnerReplicaId(pbReplicaId *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbReplicaId)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Serialize dispatches through ISyncKnowledge's vtable slot 4.
-func (self *ISyncKnowledge) Serialize(fSerializeReplicaKeyMap foundation.BOOL, pbKnowledge *byte, pcbKnowledge *uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fSerializeReplicaKeyMap), uintptr(unsafe.Pointer(pbKnowledge)), uintptr(unsafe.Pointer(pcbKnowledge)))
-	return foundation.HRESULT(r1)
+func (self *ISyncKnowledge) Serialize(fSerializeReplicaKeyMap bool, pbKnowledge *byte, pcbKnowledge *uint32) error {
+	_fSerializeReplicaKeyMap := win32.Bool32(fSerializeReplicaKeyMap)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_fSerializeReplicaKeyMap), uintptr(unsafe.Pointer(pbKnowledge)), uintptr(unsafe.Pointer(pcbKnowledge)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetLocalTickCount dispatches through ISyncKnowledge's vtable slot 5.
-func (self *ISyncKnowledge) SetLocalTickCount(ullTickCount uint64) foundation.HRESULT {
+func (self *ISyncKnowledge) SetLocalTickCount(ullTickCount uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ullTickCount))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ContainsChange dispatches through ISyncKnowledge's vtable slot 6.
-func (self *ISyncKnowledge) ContainsChange(pbVersionOwnerReplicaId *byte, pgidItemId *byte, pSyncVersion *SYNC_VERSION) foundation.HRESULT {
+func (self *ISyncKnowledge) ContainsChange(pbVersionOwnerReplicaId *byte, pgidItemId *byte, pSyncVersion *SYNC_VERSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbVersionOwnerReplicaId)), uintptr(unsafe.Pointer(pgidItemId)), uintptr(unsafe.Pointer(pSyncVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ContainsChangeUnit dispatches through ISyncKnowledge's vtable slot 7.
-func (self *ISyncKnowledge) ContainsChangeUnit(pbVersionOwnerReplicaId *byte, pbItemId *byte, pbChangeUnitId *byte, pSyncVersion *SYNC_VERSION) foundation.HRESULT {
+func (self *ISyncKnowledge) ContainsChangeUnit(pbVersionOwnerReplicaId *byte, pbItemId *byte, pbChangeUnitId *byte, pSyncVersion *SYNC_VERSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbVersionOwnerReplicaId)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pbChangeUnitId)), uintptr(unsafe.Pointer(pSyncVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetScopeVector dispatches through ISyncKnowledge's vtable slot 8.
-func (self *ISyncKnowledge) GetScopeVector(riid *win32.GUID, ppUnk *unsafe.Pointer) foundation.HRESULT {
+func (self *ISyncKnowledge) GetScopeVector(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetReplicaKeyMap dispatches through ISyncKnowledge's vtable slot 9.
-func (self *ISyncKnowledge) GetReplicaKeyMap(ppReplicaKeyMap **IReplicaKeyMap) foundation.HRESULT {
+func (self *ISyncKnowledge) GetReplicaKeyMap(ppReplicaKeyMap **IReplicaKeyMap) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppReplicaKeyMap)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Clone dispatches through ISyncKnowledge's vtable slot 10.
-func (self *ISyncKnowledge) Clone(ppClonedKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncKnowledge) Clone(ppClonedKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppClonedKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ConvertVersion dispatches through ISyncKnowledge's vtable slot 11.
-func (self *ISyncKnowledge) ConvertVersion(pKnowledgeIn *ISyncKnowledge, pbCurrentOwnerId *byte, pVersionIn *SYNC_VERSION, pbNewOwnerId *byte, pcbIdSize *uint32, pVersionOut *SYNC_VERSION) foundation.HRESULT {
+func (self *ISyncKnowledge) ConvertVersion(pKnowledgeIn *ISyncKnowledge, pbCurrentOwnerId *byte, pVersionIn *SYNC_VERSION, pbNewOwnerId *byte, pcbIdSize *uint32, pVersionOut *SYNC_VERSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKnowledgeIn)), uintptr(unsafe.Pointer(pbCurrentOwnerId)), uintptr(unsafe.Pointer(pVersionIn)), uintptr(unsafe.Pointer(pbNewOwnerId)), uintptr(unsafe.Pointer(pcbIdSize)), uintptr(unsafe.Pointer(pVersionOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // MapRemoteToLocal dispatches through ISyncKnowledge's vtable slot 12.
-func (self *ISyncKnowledge) MapRemoteToLocal(pRemoteKnowledge *ISyncKnowledge, ppMappedKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncKnowledge) MapRemoteToLocal(pRemoteKnowledge *ISyncKnowledge, ppMappedKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRemoteKnowledge)), uintptr(unsafe.Pointer(ppMappedKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Union dispatches through ISyncKnowledge's vtable slot 13.
-func (self *ISyncKnowledge) Union(pKnowledge *ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncKnowledge) Union(pKnowledge *ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProjectOntoItem dispatches through ISyncKnowledge's vtable slot 14.
-func (self *ISyncKnowledge) ProjectOntoItem(pbItemId *byte, ppKnowledgeOut **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncKnowledge) ProjectOntoItem(pbItemId *byte, ppKnowledgeOut **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(ppKnowledgeOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProjectOntoChangeUnit dispatches through ISyncKnowledge's vtable slot 15.
-func (self *ISyncKnowledge) ProjectOntoChangeUnit(pbItemId *byte, pbChangeUnitId *byte, ppKnowledgeOut **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncKnowledge) ProjectOntoChangeUnit(pbItemId *byte, pbChangeUnitId *byte, ppKnowledgeOut **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pbChangeUnitId)), uintptr(unsafe.Pointer(ppKnowledgeOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProjectOntoRange dispatches through ISyncKnowledge's vtable slot 16.
-func (self *ISyncKnowledge) ProjectOntoRange(psrngSyncRange *SYNC_RANGE, ppKnowledgeOut **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncKnowledge) ProjectOntoRange(psrngSyncRange *SYNC_RANGE, ppKnowledgeOut **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psrngSyncRange)), uintptr(unsafe.Pointer(ppKnowledgeOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ExcludeItem dispatches through ISyncKnowledge's vtable slot 17.
-func (self *ISyncKnowledge) ExcludeItem(pbItemId *byte) foundation.HRESULT {
+func (self *ISyncKnowledge) ExcludeItem(pbItemId *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbItemId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ExcludeChangeUnit dispatches through ISyncKnowledge's vtable slot 18.
-func (self *ISyncKnowledge) ExcludeChangeUnit(pbItemId *byte, pbChangeUnitId *byte) foundation.HRESULT {
+func (self *ISyncKnowledge) ExcludeChangeUnit(pbItemId *byte, pbChangeUnitId *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pbChangeUnitId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ContainsKnowledge dispatches through ISyncKnowledge's vtable slot 19.
-func (self *ISyncKnowledge) ContainsKnowledge(pKnowledge *ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncKnowledge) ContainsKnowledge(pKnowledge *ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindMinTickCountForReplica dispatches through ISyncKnowledge's vtable slot 20.
-func (self *ISyncKnowledge) FindMinTickCountForReplica(pbReplicaId *byte, pullReplicaTickCount *uint64) foundation.HRESULT {
+func (self *ISyncKnowledge) FindMinTickCountForReplica(pbReplicaId *byte, pullReplicaTickCount *uint64) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbReplicaId)), uintptr(unsafe.Pointer(pullReplicaTickCount)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRangeExceptions dispatches through ISyncKnowledge's vtable slot 21.
-func (self *ISyncKnowledge) GetRangeExceptions(riid *win32.GUID, ppUnk *unsafe.Pointer) foundation.HRESULT {
+func (self *ISyncKnowledge) GetRangeExceptions(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSingleItemExceptions dispatches through ISyncKnowledge's vtable slot 22.
-func (self *ISyncKnowledge) GetSingleItemExceptions(riid *win32.GUID, ppUnk *unsafe.Pointer) foundation.HRESULT {
+func (self *ISyncKnowledge) GetSingleItemExceptions(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChangeUnitExceptions dispatches through ISyncKnowledge's vtable slot 23.
-func (self *ISyncKnowledge) GetChangeUnitExceptions(riid *win32.GUID, ppUnk *unsafe.Pointer) foundation.HRESULT {
+func (self *ISyncKnowledge) GetChangeUnitExceptions(riid *win32.GUID, ppUnk *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindClockVectorForItem dispatches through ISyncKnowledge's vtable slot 24.
-func (self *ISyncKnowledge) FindClockVectorForItem(pbItemId *byte, riid *win32.GUID, ppUnk *unsafe.Pointer) foundation.HRESULT {
+func (self *ISyncKnowledge) FindClockVectorForItem(pbItemId *byte, riid *win32.GUID, ppUnk *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // FindClockVectorForChangeUnit dispatches through ISyncKnowledge's vtable slot 25.
-func (self *ISyncKnowledge) FindClockVectorForChangeUnit(pbItemId *byte, pbChangeUnitId *byte, riid *win32.GUID, ppUnk *unsafe.Pointer) foundation.HRESULT {
+func (self *ISyncKnowledge) FindClockVectorForChangeUnit(pbItemId *byte, pbChangeUnitId *byte, riid *win32.GUID, ppUnk *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pbChangeUnitId)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppUnk)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetVersion dispatches through ISyncKnowledge's vtable slot 26.
-func (self *ISyncKnowledge) GetVersion(pdwVersion *uint32) foundation.HRESULT {
+func (self *ISyncKnowledge) GetVersion(pdwVersion *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncKnowledge2: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncknowledge2
@@ -2057,87 +2063,87 @@ type ISyncKnowledge2 struct {
 var IID_ISyncKnowledge2 = win32.GUID{Data1: 0xed0addc0, Data2: 0x3b4b, Data3: 0x46a1, Data4: [8]byte{0x9a, 0x45, 0x45, 0x66, 0x1d, 0x21, 0x14, 0xc8}}
 
 // GetIdParameters dispatches through ISyncKnowledge2's vtable slot 27.
-func (self *ISyncKnowledge2) GetIdParameters(pIdParameters *ID_PARAMETERS) foundation.HRESULT {
+func (self *ISyncKnowledge2) GetIdParameters(pIdParameters *ID_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIdParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProjectOntoColumnSet dispatches through ISyncKnowledge2's vtable slot 28.
-func (self *ISyncKnowledge2) ProjectOntoColumnSet(ppColumns **byte, count uint32, ppiKnowledgeOut **ISyncKnowledge2) foundation.HRESULT {
+func (self *ISyncKnowledge2) ProjectOntoColumnSet(ppColumns **byte, count uint32, ppiKnowledgeOut **ISyncKnowledge2) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppColumns)), uintptr(count), uintptr(unsafe.Pointer(ppiKnowledgeOut)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SerializeWithOptions dispatches through ISyncKnowledge2's vtable slot 29.
-func (self *ISyncKnowledge2) SerializeWithOptions(targetFormatVersion SYNC_SERIALIZATION_VERSION, dwFlags uint32, pbBuffer *byte, pdwSerializedSize *uint32) foundation.HRESULT {
+func (self *ISyncKnowledge2) SerializeWithOptions(targetFormatVersion SYNC_SERIALIZATION_VERSION, dwFlags uint32, pbBuffer *byte, pdwSerializedSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(targetFormatVersion), uintptr(dwFlags), uintptr(unsafe.Pointer(pbBuffer)), uintptr(unsafe.Pointer(pdwSerializedSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetLowestUncontainedId dispatches through ISyncKnowledge2's vtable slot 30.
-func (self *ISyncKnowledge2) GetLowestUncontainedId(piSyncKnowledge *ISyncKnowledge2, pbItemId *byte, pcbItemIdSize *uint32) foundation.HRESULT {
+func (self *ISyncKnowledge2) GetLowestUncontainedId(piSyncKnowledge *ISyncKnowledge2, pbItemId *byte, pcbItemIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piSyncKnowledge)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pcbItemIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInspector dispatches through ISyncKnowledge2's vtable slot 31.
-func (self *ISyncKnowledge2) GetInspector(riid *win32.GUID, ppiInspector *unsafe.Pointer) foundation.HRESULT {
+func (self *ISyncKnowledge2) GetInspector(riid *win32.GUID, ppiInspector *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppiInspector)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetMinimumSupportedVersion dispatches through ISyncKnowledge2's vtable slot 32.
-func (self *ISyncKnowledge2) GetMinimumSupportedVersion(pVersion *SYNC_SERIALIZATION_VERSION) foundation.HRESULT {
+func (self *ISyncKnowledge2) GetMinimumSupportedVersion(pVersion *SYNC_SERIALIZATION_VERSION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVersion)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatistics dispatches through ISyncKnowledge2's vtable slot 33.
-func (self *ISyncKnowledge2) GetStatistics(which SYNC_STATISTICS, pValue *uint32) foundation.HRESULT {
+func (self *ISyncKnowledge2) GetStatistics(which SYNC_STATISTICS, pValue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(which), uintptr(unsafe.Pointer(pValue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ContainsKnowledgeForItem dispatches through ISyncKnowledge2's vtable slot 34.
-func (self *ISyncKnowledge2) ContainsKnowledgeForItem(pKnowledge *ISyncKnowledge, pbItemId *byte) foundation.HRESULT {
+func (self *ISyncKnowledge2) ContainsKnowledgeForItem(pKnowledge *ISyncKnowledge, pbItemId *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKnowledge)), uintptr(unsafe.Pointer(pbItemId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ContainsKnowledgeForChangeUnit dispatches through ISyncKnowledge2's vtable slot 35.
-func (self *ISyncKnowledge2) ContainsKnowledgeForChangeUnit(pKnowledge *ISyncKnowledge, pbItemId *byte, pbChangeUnitId *byte) foundation.HRESULT {
+func (self *ISyncKnowledge2) ContainsKnowledgeForChangeUnit(pKnowledge *ISyncKnowledge, pbItemId *byte, pbChangeUnitId *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKnowledge)), uintptr(unsafe.Pointer(pbItemId)), uintptr(unsafe.Pointer(pbChangeUnitId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ProjectOntoKnowledgeWithPrerequisite dispatches through ISyncKnowledge2's vtable slot 36.
-func (self *ISyncKnowledge2) ProjectOntoKnowledgeWithPrerequisite(pPrerequisiteKnowledge *ISyncKnowledge, pTemplateKnowledge *ISyncKnowledge, ppProjectedKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncKnowledge2) ProjectOntoKnowledgeWithPrerequisite(pPrerequisiteKnowledge *ISyncKnowledge, pTemplateKnowledge *ISyncKnowledge, ppProjectedKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPrerequisiteKnowledge)), uintptr(unsafe.Pointer(pTemplateKnowledge)), uintptr(unsafe.Pointer(ppProjectedKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Complement dispatches through ISyncKnowledge2's vtable slot 37.
-func (self *ISyncKnowledge2) Complement(pSyncKnowledge *ISyncKnowledge, ppComplementedKnowledge **ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncKnowledge2) Complement(pSyncKnowledge *ISyncKnowledge, ppComplementedKnowledge **ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSyncKnowledge)), uintptr(unsafe.Pointer(ppComplementedKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IntersectsWithKnowledge dispatches through ISyncKnowledge2's vtable slot 38.
-func (self *ISyncKnowledge2) IntersectsWithKnowledge(pSyncKnowledge *ISyncKnowledge) foundation.HRESULT {
+func (self *ISyncKnowledge2) IntersectsWithKnowledge(pSyncKnowledge *ISyncKnowledge) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSyncKnowledge)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetKnowledgeCookie dispatches through ISyncKnowledge2's vtable slot 39.
-func (self *ISyncKnowledge2) GetKnowledgeCookie(ppKnowledgeCookie **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISyncKnowledge2) GetKnowledgeCookie(ppKnowledgeCookie **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppKnowledgeCookie)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CompareToKnowledgeCookie dispatches through ISyncKnowledge2's vtable slot 40.
-func (self *ISyncKnowledge2) CompareToKnowledgeCookie(pKnowledgeCookie *systemcom.IUnknown, pResult *KNOWLEDGE_COOKIE_COMPARISON_RESULT) foundation.HRESULT {
+func (self *ISyncKnowledge2) CompareToKnowledgeCookie(pKnowledgeCookie *systemcom.IUnknown, pResult *KNOWLEDGE_COOKIE_COMPARISON_RESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKnowledgeCookie)), uintptr(unsafe.Pointer(pResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IID: 6ec62597-0903-484c-ad61-36d6e938f47b
@@ -2149,9 +2155,9 @@ type ISyncMergeTombstoneChange struct {
 var IID_ISyncMergeTombstoneChange = win32.GUID{Data1: 0x6ec62597, Data2: 0x0903, Data3: 0x484c, Data4: [8]byte{0xad, 0x61, 0x36, 0xd6, 0xe9, 0x38, 0xf4, 0x7b}}
 
 // GetWinnerItemId dispatches through ISyncMergeTombstoneChange's vtable slot 3.
-func (self *ISyncMergeTombstoneChange) GetWinnerItemId(pbWinnerItemId *byte, pcbIdSize *uint32) foundation.HRESULT {
+func (self *ISyncMergeTombstoneChange) GetWinnerItemId(pbWinnerItemId *byte, pcbIdSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbWinnerItemId)), uintptr(unsafe.Pointer(pcbIdSize)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncProvider: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncprovider
@@ -2164,9 +2170,9 @@ type ISyncProvider struct {
 var IID_ISyncProvider = win32.GUID{Data1: 0x8f657056, Data2: 0x2bce, Data3: 0x4a17, Data4: [8]byte{0x8c, 0x68, 0xc7, 0xbb, 0x78, 0x98, 0xb5, 0x6f}}
 
 // GetIdParameters dispatches through ISyncProvider's vtable slot 3.
-func (self *ISyncProvider) GetIdParameters(pIdParameters *ID_PARAMETERS) foundation.HRESULT {
+func (self *ISyncProvider) GetIdParameters(pIdParameters *ID_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIdParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncProviderConfigUI: https://learn.microsoft.com/windows/win32/api/syncregistration/nn-syncregistration-isyncproviderconfigui
@@ -2179,27 +2185,27 @@ type ISyncProviderConfigUI struct {
 var IID_ISyncProviderConfigUI = win32.GUID{Data1: 0x7b0705f6, Data2: 0xcbcd, Data3: 0x4071, Data4: [8]byte{0xab, 0x05, 0x3b, 0xdc, 0x36, 0x4d, 0x4a, 0x0c}}
 
 // Init dispatches through ISyncProviderConfigUI's vtable slot 3.
-func (self *ISyncProviderConfigUI) Init(pguidInstanceId *win32.GUID, pguidContentType *win32.GUID, pConfigurationProperties *uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *ISyncProviderConfigUI) Init(pguidInstanceId *win32.GUID, pguidContentType *win32.GUID, pConfigurationProperties *uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidInstanceId)), uintptr(unsafe.Pointer(pguidContentType)), uintptr(unsafe.Pointer(pConfigurationProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetRegisteredProperties dispatches through ISyncProviderConfigUI's vtable slot 4.
-func (self *ISyncProviderConfigUI) GetRegisteredProperties(ppConfigUIProperties **uishellpropertiessystem.IPropertyStore) foundation.HRESULT {
+func (self *ISyncProviderConfigUI) GetRegisteredProperties(ppConfigUIProperties **uishellpropertiessystem.IPropertyStore) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppConfigUIProperties)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateAndRegisterNewSyncProvider dispatches through ISyncProviderConfigUI's vtable slot 5.
-func (self *ISyncProviderConfigUI) CreateAndRegisterNewSyncProvider(hwndParent foundation.HWND, pUnkContext *systemcom.IUnknown, ppProviderInfo **ISyncProviderInfo) foundation.HRESULT {
+func (self *ISyncProviderConfigUI) CreateAndRegisterNewSyncProvider(hwndParent foundation.HWND, pUnkContext *systemcom.IUnknown, ppProviderInfo **ISyncProviderInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(pUnkContext)), uintptr(unsafe.Pointer(ppProviderInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ModifySyncProvider dispatches through ISyncProviderConfigUI's vtable slot 6.
-func (self *ISyncProviderConfigUI) ModifySyncProvider(hwndParent foundation.HWND, pUnkContext *systemcom.IUnknown, pProviderInfo *ISyncProviderInfo) foundation.HRESULT {
+func (self *ISyncProviderConfigUI) ModifySyncProvider(hwndParent foundation.HWND, pUnkContext *systemcom.IUnknown, pProviderInfo *ISyncProviderInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(pUnkContext)), uintptr(unsafe.Pointer(pProviderInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncProviderConfigUIInfo: https://learn.microsoft.com/windows/win32/api/syncregistration/nn-syncregistration-isyncproviderconfiguiinfo
@@ -2212,9 +2218,9 @@ type ISyncProviderConfigUIInfo struct {
 var IID_ISyncProviderConfigUIInfo = win32.GUID{Data1: 0x214141ae, Data2: 0x33d7, Data3: 0x4d8d, Data4: [8]byte{0x8e, 0x37, 0xf2, 0x27, 0xe8, 0x80, 0xce, 0x50}}
 
 // GetSyncProviderConfigUI dispatches through ISyncProviderConfigUIInfo's vtable slot 8.
-func (self *ISyncProviderConfigUIInfo) GetSyncProviderConfigUI(dwClsContext uint32, ppSyncProviderConfigUI **ISyncProviderConfigUI) foundation.HRESULT {
+func (self *ISyncProviderConfigUIInfo) GetSyncProviderConfigUI(dwClsContext uint32, ppSyncProviderConfigUI **ISyncProviderConfigUI) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwClsContext), uintptr(unsafe.Pointer(ppSyncProviderConfigUI)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncProviderInfo: https://learn.microsoft.com/windows/win32/api/syncregistration/nn-syncregistration-isyncproviderinfo
@@ -2227,9 +2233,9 @@ type ISyncProviderInfo struct {
 var IID_ISyncProviderInfo = win32.GUID{Data1: 0x1ee135de, Data2: 0x88a4, Data3: 0x4504, Data4: [8]byte{0xb0, 0xd0, 0xf7, 0x92, 0x0d, 0x7e, 0x5b, 0xa6}}
 
 // GetSyncProvider dispatches through ISyncProviderInfo's vtable slot 8.
-func (self *ISyncProviderInfo) GetSyncProvider(dwClsContext uint32, ppSyncProvider **IRegisteredSyncProvider) foundation.HRESULT {
+func (self *ISyncProviderInfo) GetSyncProvider(dwClsContext uint32, ppSyncProvider **IRegisteredSyncProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwClsContext), uintptr(unsafe.Pointer(ppSyncProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncProviderRegistration: https://learn.microsoft.com/windows/win32/api/syncregistration/nn-syncregistration-isyncproviderregistration
@@ -2242,99 +2248,99 @@ type ISyncProviderRegistration struct {
 var IID_ISyncProviderRegistration = win32.GUID{Data1: 0xcb45953b, Data2: 0x7624, Data3: 0x47bc, Data4: [8]byte{0xa4, 0x72, 0xeb, 0x8c, 0xac, 0x6b, 0x22, 0x2e}}
 
 // CreateSyncProviderConfigUIRegistrationInstance dispatches through ISyncProviderRegistration's vtable slot 3.
-func (self *ISyncProviderRegistration) CreateSyncProviderConfigUIRegistrationInstance(pConfigUIConfig *SyncProviderConfigUIConfiguration, ppConfigUIInfo **ISyncProviderConfigUIInfo) foundation.HRESULT {
+func (self *ISyncProviderRegistration) CreateSyncProviderConfigUIRegistrationInstance(pConfigUIConfig *SyncProviderConfigUIConfiguration, ppConfigUIInfo **ISyncProviderConfigUIInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pConfigUIConfig)), uintptr(unsafe.Pointer(ppConfigUIInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterSyncProviderConfigUI dispatches through ISyncProviderRegistration's vtable slot 4.
-func (self *ISyncProviderRegistration) UnregisterSyncProviderConfigUI(pguidInstanceId *win32.GUID) foundation.HRESULT {
+func (self *ISyncProviderRegistration) UnregisterSyncProviderConfigUI(pguidInstanceId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidInstanceId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateSyncProviderConfigUIs dispatches through ISyncProviderRegistration's vtable slot 5.
-func (self *ISyncProviderRegistration) EnumerateSyncProviderConfigUIs(pguidContentType *win32.GUID, dwSupportedArchitecture uint32, ppEnumSyncProviderConfigUIInfos **IEnumSyncProviderConfigUIInfos) foundation.HRESULT {
+func (self *ISyncProviderRegistration) EnumerateSyncProviderConfigUIs(pguidContentType *win32.GUID, dwSupportedArchitecture uint32, ppEnumSyncProviderConfigUIInfos **IEnumSyncProviderConfigUIInfos) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidContentType)), uintptr(dwSupportedArchitecture), uintptr(unsafe.Pointer(ppEnumSyncProviderConfigUIInfos)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // CreateSyncProviderRegistrationInstance dispatches through ISyncProviderRegistration's vtable slot 6.
-func (self *ISyncProviderRegistration) CreateSyncProviderRegistrationInstance(pProviderConfiguration *SyncProviderConfiguration, ppProviderInfo **ISyncProviderInfo) foundation.HRESULT {
+func (self *ISyncProviderRegistration) CreateSyncProviderRegistrationInstance(pProviderConfiguration *SyncProviderConfiguration, ppProviderInfo **ISyncProviderInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pProviderConfiguration)), uintptr(unsafe.Pointer(ppProviderInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // UnregisterSyncProvider dispatches through ISyncProviderRegistration's vtable slot 7.
-func (self *ISyncProviderRegistration) UnregisterSyncProvider(pguidInstanceId *win32.GUID) foundation.HRESULT {
+func (self *ISyncProviderRegistration) UnregisterSyncProvider(pguidInstanceId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidInstanceId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSyncProviderConfigUIInfoforProvider dispatches through ISyncProviderRegistration's vtable slot 8.
-func (self *ISyncProviderRegistration) GetSyncProviderConfigUIInfoforProvider(pguidProviderInstanceId *win32.GUID, ppProviderConfigUIInfo **ISyncProviderConfigUIInfo) foundation.HRESULT {
+func (self *ISyncProviderRegistration) GetSyncProviderConfigUIInfoforProvider(pguidProviderInstanceId *win32.GUID, ppProviderConfigUIInfo **ISyncProviderConfigUIInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidProviderInstanceId)), uintptr(unsafe.Pointer(ppProviderConfigUIInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // EnumerateSyncProviders dispatches through ISyncProviderRegistration's vtable slot 9.
-func (self *ISyncProviderRegistration) EnumerateSyncProviders(pguidContentType *win32.GUID, dwStateFlagsToFilterMask uint32, dwStateFlagsToFilter uint32, refProviderClsId *win32.GUID, dwSupportedArchitecture uint32, ppEnumSyncProviderInfos **IEnumSyncProviderInfos) foundation.HRESULT {
+func (self *ISyncProviderRegistration) EnumerateSyncProviders(pguidContentType *win32.GUID, dwStateFlagsToFilterMask uint32, dwStateFlagsToFilter uint32, refProviderClsId *win32.GUID, dwSupportedArchitecture uint32, ppEnumSyncProviderInfos **IEnumSyncProviderInfos) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidContentType)), uintptr(dwStateFlagsToFilterMask), uintptr(dwStateFlagsToFilter), uintptr(unsafe.Pointer(refProviderClsId)), uintptr(dwSupportedArchitecture), uintptr(unsafe.Pointer(ppEnumSyncProviderInfos)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSyncProviderInfo dispatches through ISyncProviderRegistration's vtable slot 10.
-func (self *ISyncProviderRegistration) GetSyncProviderInfo(pguidInstanceId *win32.GUID, ppProviderInfo **ISyncProviderInfo) foundation.HRESULT {
+func (self *ISyncProviderRegistration) GetSyncProviderInfo(pguidInstanceId *win32.GUID, ppProviderInfo **ISyncProviderInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidInstanceId)), uintptr(unsafe.Pointer(ppProviderInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSyncProviderFromInstanceId dispatches through ISyncProviderRegistration's vtable slot 11.
-func (self *ISyncProviderRegistration) GetSyncProviderFromInstanceId(pguidInstanceId *win32.GUID, dwClsContext uint32, ppSyncProvider **IRegisteredSyncProvider) foundation.HRESULT {
+func (self *ISyncProviderRegistration) GetSyncProviderFromInstanceId(pguidInstanceId *win32.GUID, dwClsContext uint32, ppSyncProvider **IRegisteredSyncProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidInstanceId)), uintptr(dwClsContext), uintptr(unsafe.Pointer(ppSyncProvider)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSyncProviderConfigUIInfo dispatches through ISyncProviderRegistration's vtable slot 12.
-func (self *ISyncProviderRegistration) GetSyncProviderConfigUIInfo(pguidInstanceId *win32.GUID, ppConfigUIInfo **ISyncProviderConfigUIInfo) foundation.HRESULT {
+func (self *ISyncProviderRegistration) GetSyncProviderConfigUIInfo(pguidInstanceId *win32.GUID, ppConfigUIInfo **ISyncProviderConfigUIInfo) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidInstanceId)), uintptr(unsafe.Pointer(ppConfigUIInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSyncProviderConfigUIFromInstanceId dispatches through ISyncProviderRegistration's vtable slot 13.
-func (self *ISyncProviderRegistration) GetSyncProviderConfigUIFromInstanceId(pguidInstanceId *win32.GUID, dwClsContext uint32, ppConfigUI **ISyncProviderConfigUI) foundation.HRESULT {
+func (self *ISyncProviderRegistration) GetSyncProviderConfigUIFromInstanceId(pguidInstanceId *win32.GUID, dwClsContext uint32, ppConfigUI **ISyncProviderConfigUI) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidInstanceId)), uintptr(dwClsContext), uintptr(unsafe.Pointer(ppConfigUI)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSyncProviderState dispatches through ISyncProviderRegistration's vtable slot 14.
-func (self *ISyncProviderRegistration) GetSyncProviderState(pguidInstanceId *win32.GUID, pdwStateFlags *uint32) foundation.HRESULT {
+func (self *ISyncProviderRegistration) GetSyncProviderState(pguidInstanceId *win32.GUID, pdwStateFlags *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidInstanceId)), uintptr(unsafe.Pointer(pdwStateFlags)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetSyncProviderState dispatches through ISyncProviderRegistration's vtable slot 15.
-func (self *ISyncProviderRegistration) SetSyncProviderState(pguidInstanceId *win32.GUID, dwStateFlagsMask uint32, dwStateFlags uint32) foundation.HRESULT {
+func (self *ISyncProviderRegistration) SetSyncProviderState(pguidInstanceId *win32.GUID, dwStateFlagsMask uint32, dwStateFlags uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidInstanceId)), uintptr(dwStateFlagsMask), uintptr(dwStateFlags))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterForEvent dispatches through ISyncProviderRegistration's vtable slot 16.
-func (self *ISyncProviderRegistration) RegisterForEvent(phEvent *foundation.HANDLE) foundation.HRESULT {
+func (self *ISyncProviderRegistration) RegisterForEvent(phEvent *foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // RevokeEvent dispatches through ISyncProviderRegistration's vtable slot 17.
-func (self *ISyncProviderRegistration) RevokeEvent(hEvent foundation.HANDLE) foundation.HRESULT {
+func (self *ISyncProviderRegistration) RevokeEvent(hEvent foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(hEvent))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetChange dispatches through ISyncProviderRegistration's vtable slot 18.
-func (self *ISyncProviderRegistration) GetChange(hEvent foundation.HANDLE, ppChange **ISyncRegistrationChange) foundation.HRESULT {
+func (self *ISyncProviderRegistration) GetChange(hEvent foundation.HANDLE, ppChange **ISyncRegistrationChange) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(hEvent), uintptr(unsafe.Pointer(ppChange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncRegistrationChange: https://learn.microsoft.com/windows/win32/api/syncregistration/nn-syncregistration-isyncregistrationchange
@@ -2347,15 +2353,15 @@ type ISyncRegistrationChange struct {
 var IID_ISyncRegistrationChange = win32.GUID{Data1: 0xeea0d9ae, Data2: 0x6b29, Data3: 0x43b4, Data4: [8]byte{0x9e, 0x70, 0xe3, 0xae, 0x33, 0xbb, 0x2c, 0x3b}}
 
 // GetEvent dispatches through ISyncRegistrationChange's vtable slot 3.
-func (self *ISyncRegistrationChange) GetEvent(psreEvent *SYNC_REGISTRATION_EVENT) foundation.HRESULT {
+func (self *ISyncRegistrationChange) GetEvent(psreEvent *SYNC_REGISTRATION_EVENT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(psreEvent)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInstanceId dispatches through ISyncRegistrationChange's vtable slot 4.
-func (self *ISyncRegistrationChange) GetInstanceId(pguidInstanceId *win32.GUID) foundation.HRESULT {
+func (self *ISyncRegistrationChange) GetInstanceId(pguidInstanceId *win32.GUID) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidInstanceId)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncSessionExtendedErrorInfo: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncsessionextendederrorinfo
@@ -2368,9 +2374,9 @@ type ISyncSessionExtendedErrorInfo struct {
 var IID_ISyncSessionExtendedErrorInfo = win32.GUID{Data1: 0x326c6810, Data2: 0x790a, Data3: 0x409b, Data4: [8]byte{0xb7, 0x41, 0x69, 0x99, 0x38, 0x87, 0x61, 0xeb}}
 
 // GetSyncProviderWithError dispatches through ISyncSessionExtendedErrorInfo's vtable slot 3.
-func (self *ISyncSessionExtendedErrorInfo) GetSyncProviderWithError(ppProviderWithError **ISyncProvider) foundation.HRESULT {
+func (self *ISyncSessionExtendedErrorInfo) GetSyncProviderWithError(ppProviderWithError **ISyncProvider) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppProviderWithError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncSessionState: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncsessionstate
@@ -2383,45 +2389,45 @@ type ISyncSessionState struct {
 var IID_ISyncSessionState = win32.GUID{Data1: 0xb8a940fe, Data2: 0x9f01, Data3: 0x483b, Data4: [8]byte{0x94, 0x34, 0xc3, 0x7d, 0x36, 0x12, 0x25, 0xd9}}
 
 // IsCanceled dispatches through ISyncSessionState's vtable slot 3.
-func (self *ISyncSessionState) IsCanceled(pfIsCanceled *foundation.BOOL) foundation.HRESULT {
+func (self *ISyncSessionState) IsCanceled(pfIsCanceled *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pfIsCanceled)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetInfoForChangeApplication dispatches through ISyncSessionState's vtable slot 4.
-func (self *ISyncSessionState) GetInfoForChangeApplication(pbChangeApplierInfo *byte, pcbChangeApplierInfo *uint32) foundation.HRESULT {
+func (self *ISyncSessionState) GetInfoForChangeApplication(pbChangeApplierInfo *byte, pcbChangeApplierInfo *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbChangeApplierInfo)), uintptr(unsafe.Pointer(pcbChangeApplierInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadInfoFromChangeApplication dispatches through ISyncSessionState's vtable slot 5.
-func (self *ISyncSessionState) LoadInfoFromChangeApplication(pbChangeApplierInfo *byte, cbChangeApplierInfo uint32) foundation.HRESULT {
+func (self *ISyncSessionState) LoadInfoFromChangeApplication(pbChangeApplierInfo *byte, cbChangeApplierInfo uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbChangeApplierInfo)), uintptr(cbChangeApplierInfo))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetForgottenKnowledgeRecoveryRangeStart dispatches through ISyncSessionState's vtable slot 6.
-func (self *ISyncSessionState) GetForgottenKnowledgeRecoveryRangeStart(pbRangeStart *byte, pcbRangeStart *uint32) foundation.HRESULT {
+func (self *ISyncSessionState) GetForgottenKnowledgeRecoveryRangeStart(pbRangeStart *byte, pcbRangeStart *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbRangeStart)), uintptr(unsafe.Pointer(pcbRangeStart)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetForgottenKnowledgeRecoveryRangeEnd dispatches through ISyncSessionState's vtable slot 7.
-func (self *ISyncSessionState) GetForgottenKnowledgeRecoveryRangeEnd(pbRangeEnd *byte, pcbRangeEnd *uint32) foundation.HRESULT {
+func (self *ISyncSessionState) GetForgottenKnowledgeRecoveryRangeEnd(pbRangeEnd *byte, pcbRangeEnd *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbRangeEnd)), uintptr(unsafe.Pointer(pcbRangeEnd)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetForgottenKnowledgeRecoveryRange dispatches through ISyncSessionState's vtable slot 8.
-func (self *ISyncSessionState) SetForgottenKnowledgeRecoveryRange(pRange *SYNC_RANGE) foundation.HRESULT {
+func (self *ISyncSessionState) SetForgottenKnowledgeRecoveryRange(pRange *SYNC_RANGE) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRange)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // OnProgress dispatches through ISyncSessionState's vtable slot 9.
-func (self *ISyncSessionState) OnProgress(provider SYNC_PROVIDER_ROLE, syncStage SYNC_PROGRESS_STAGE, dwCompletedWork uint32, dwTotalWork uint32) foundation.HRESULT {
+func (self *ISyncSessionState) OnProgress(provider SYNC_PROVIDER_ROLE, syncStage SYNC_PROGRESS_STAGE, dwCompletedWork uint32, dwTotalWork uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(provider), uintptr(syncStage), uintptr(dwCompletedWork), uintptr(dwTotalWork))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISyncSessionState2: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isyncsessionstate2
@@ -2434,15 +2440,16 @@ type ISyncSessionState2 struct {
 var IID_ISyncSessionState2 = win32.GUID{Data1: 0x9e37cfa3, Data2: 0x9e38, Data3: 0x4c61, Data4: [8]byte{0x9c, 0xa3, 0xff, 0xe8, 0x10, 0xb4, 0x5c, 0xa2}}
 
 // SetProviderWithError dispatches through ISyncSessionState2's vtable slot 10.
-func (self *ISyncSessionState2) SetProviderWithError(fSelf foundation.BOOL) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(fSelf))
-	return foundation.HRESULT(r1)
+func (self *ISyncSessionState2) SetProviderWithError(fSelf bool) error {
+	_fSelf := win32.Bool32(fSelf)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(_fSelf))
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetSessionErrorStatus dispatches through ISyncSessionState2's vtable slot 11.
-func (self *ISyncSessionState2) GetSessionErrorStatus(phrSessionError *foundation.HRESULT) foundation.HRESULT {
+func (self *ISyncSessionState2) GetSessionErrorStatus(phrSessionError *foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(phrSessionError)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ISynchronousDataRetriever: https://learn.microsoft.com/windows/win32/api/winsync/nn-winsync-isynchronousdataretriever
@@ -2455,13 +2462,13 @@ type ISynchronousDataRetriever struct {
 var IID_ISynchronousDataRetriever = win32.GUID{Data1: 0x9b22f2a9, Data2: 0xa4cd, Data3: 0x4648, Data4: [8]byte{0x9d, 0x8e, 0x3a, 0x51, 0x0d, 0x4d, 0xa0, 0x4b}}
 
 // GetIdParameters dispatches through ISynchronousDataRetriever's vtable slot 3.
-func (self *ISynchronousDataRetriever) GetIdParameters(pIdParameters *ID_PARAMETERS) foundation.HRESULT {
+func (self *ISynchronousDataRetriever) GetIdParameters(pIdParameters *ID_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIdParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // LoadChangeData dispatches through ISynchronousDataRetriever's vtable slot 4.
-func (self *ISynchronousDataRetriever) LoadChangeData(pLoadChangeContext *ILoadChangeContext, ppUnkData **systemcom.IUnknown) foundation.HRESULT {
+func (self *ISynchronousDataRetriever) LoadChangeData(pLoadChangeContext *ILoadChangeContext, ppUnkData **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLoadChangeContext)), uintptr(unsafe.Pointer(ppUnkData)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

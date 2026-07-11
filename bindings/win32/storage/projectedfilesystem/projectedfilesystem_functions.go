@@ -49,65 +49,73 @@ func PrjAllocateAlignedBuffer(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTU
 // PrjClearNegativePathCache calls PROJECTEDFSLIB!PrjClearNegativePathCache.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjclearnegativepathcache
 // Minimum OS: windows10.0.17763.
-func PrjClearNegativePathCache(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, totalEntryNumber *uint32) foundation.HRESULT {
+func PrjClearNegativePathCache(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, totalEntryNumber *uint32) error {
 	r1, _, _ := syscall.SyscallN(procPrjClearNegativePathCache.Addr(), uintptr(namespaceVirtualizationContext), uintptr(unsafe.Pointer(totalEntryNumber)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrjCompleteCommand calls PROJECTEDFSLIB!PrjCompleteCommand.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjcompletecommand
 // Minimum OS: windows10.0.17763.
-func PrjCompleteCommand(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, commandId int32, completionResult foundation.HRESULT, extendedParameters *PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS) foundation.HRESULT {
+func PrjCompleteCommand(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, commandId int32, completionResult foundation.HRESULT, extendedParameters *PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(procPrjCompleteCommand.Addr(), uintptr(namespaceVirtualizationContext), uintptr(commandId), uintptr(completionResult), uintptr(unsafe.Pointer(extendedParameters)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrjDeleteFile calls PROJECTEDFSLIB!PrjDeleteFile.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjdeletefile
 // Minimum OS: windows10.0.17763.
-func PrjDeleteFile(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName foundation.PWSTR, updateFlags PRJ_UPDATE_TYPES, failureReason *PRJ_UPDATE_FAILURE_CAUSES) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPrjDeleteFile.Addr(), uintptr(namespaceVirtualizationContext), uintptr(unsafe.Pointer(destinationFileName)), uintptr(updateFlags), uintptr(unsafe.Pointer(failureReason)))
-	return foundation.HRESULT(r1)
+func PrjDeleteFile(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName string, updateFlags PRJ_UPDATE_TYPES, failureReason *PRJ_UPDATE_FAILURE_CAUSES) error {
+	_destinationFileName := win32.UTF16Ptr(destinationFileName)
+	r1, _, _ := syscall.SyscallN(procPrjDeleteFile.Addr(), uintptr(namespaceVirtualizationContext), uintptr(unsafe.Pointer(_destinationFileName)), uintptr(updateFlags), uintptr(unsafe.Pointer(failureReason)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrjDoesNameContainWildCards calls PROJECTEDFSLIB!PrjDoesNameContainWildCards.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjdoesnamecontainwildcards
 // Minimum OS: windows10.0.17763.
-func PrjDoesNameContainWildCards(fileName foundation.PWSTR) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procPrjDoesNameContainWildCards.Addr(), uintptr(unsafe.Pointer(fileName)))
+func PrjDoesNameContainWildCards(fileName string) foundation.BOOLEAN {
+	_fileName := win32.UTF16Ptr(fileName)
+	r1, _, _ := syscall.SyscallN(procPrjDoesNameContainWildCards.Addr(), uintptr(unsafe.Pointer(_fileName)))
 	return foundation.BOOLEAN(r1)
 }
 
 // PrjFileNameCompare calls PROJECTEDFSLIB!PrjFileNameCompare.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjfilenamecompare
 // Minimum OS: windows10.0.17763.
-func PrjFileNameCompare(fileName1 foundation.PWSTR, fileName2 foundation.PWSTR) int32 {
-	r1, _, _ := syscall.SyscallN(procPrjFileNameCompare.Addr(), uintptr(unsafe.Pointer(fileName1)), uintptr(unsafe.Pointer(fileName2)))
+func PrjFileNameCompare(fileName1 string, fileName2 string) int32 {
+	_fileName1 := win32.UTF16Ptr(fileName1)
+	_fileName2 := win32.UTF16Ptr(fileName2)
+	r1, _, _ := syscall.SyscallN(procPrjFileNameCompare.Addr(), uintptr(unsafe.Pointer(_fileName1)), uintptr(unsafe.Pointer(_fileName2)))
 	return int32(r1)
 }
 
 // PrjFileNameMatch calls PROJECTEDFSLIB!PrjFileNameMatch.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjfilenamematch
 // Minimum OS: windows10.0.17763.
-func PrjFileNameMatch(fileNameToCheck foundation.PWSTR, pattern foundation.PWSTR) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procPrjFileNameMatch.Addr(), uintptr(unsafe.Pointer(fileNameToCheck)), uintptr(unsafe.Pointer(pattern)))
+func PrjFileNameMatch(fileNameToCheck string, pattern string) foundation.BOOLEAN {
+	_fileNameToCheck := win32.UTF16Ptr(fileNameToCheck)
+	_pattern := win32.UTF16Ptr(pattern)
+	r1, _, _ := syscall.SyscallN(procPrjFileNameMatch.Addr(), uintptr(unsafe.Pointer(_fileNameToCheck)), uintptr(unsafe.Pointer(_pattern)))
 	return foundation.BOOLEAN(r1)
 }
 
 // PrjFillDirEntryBuffer calls PROJECTEDFSLIB!PrjFillDirEntryBuffer.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjfilldirentrybuffer
 // Minimum OS: windows10.0.17763.
-func PrjFillDirEntryBuffer(fileName foundation.PWSTR, fileBasicInfo *PRJ_FILE_BASIC_INFO, dirEntryBufferHandle PRJ_DIR_ENTRY_BUFFER_HANDLE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPrjFillDirEntryBuffer.Addr(), uintptr(unsafe.Pointer(fileName)), uintptr(unsafe.Pointer(fileBasicInfo)), uintptr(dirEntryBufferHandle))
-	return foundation.HRESULT(r1)
+func PrjFillDirEntryBuffer(fileName string, fileBasicInfo *PRJ_FILE_BASIC_INFO, dirEntryBufferHandle PRJ_DIR_ENTRY_BUFFER_HANDLE) error {
+	_fileName := win32.UTF16Ptr(fileName)
+	r1, _, _ := syscall.SyscallN(procPrjFillDirEntryBuffer.Addr(), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(fileBasicInfo)), uintptr(dirEntryBufferHandle))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrjFillDirEntryBuffer2 calls PROJECTEDFSLIB!PrjFillDirEntryBuffer2.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjfilldirentrybuffer2
 // Minimum OS: windows10.0.19041.
-func PrjFillDirEntryBuffer2(dirEntryBufferHandle PRJ_DIR_ENTRY_BUFFER_HANDLE, fileName foundation.PWSTR, fileBasicInfo *PRJ_FILE_BASIC_INFO, extendedInfo *PRJ_EXTENDED_INFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPrjFillDirEntryBuffer2.Addr(), uintptr(dirEntryBufferHandle), uintptr(unsafe.Pointer(fileName)), uintptr(unsafe.Pointer(fileBasicInfo)), uintptr(unsafe.Pointer(extendedInfo)))
-	return foundation.HRESULT(r1)
+func PrjFillDirEntryBuffer2(dirEntryBufferHandle PRJ_DIR_ENTRY_BUFFER_HANDLE, fileName string, fileBasicInfo *PRJ_FILE_BASIC_INFO, extendedInfo *PRJ_EXTENDED_INFO) error {
+	_fileName := win32.UTF16Ptr(fileName)
+	r1, _, _ := syscall.SyscallN(procPrjFillDirEntryBuffer2.Addr(), uintptr(dirEntryBufferHandle), uintptr(unsafe.Pointer(_fileName)), uintptr(unsafe.Pointer(fileBasicInfo)), uintptr(unsafe.Pointer(extendedInfo)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrjFreeAlignedBuffer calls PROJECTEDFSLIB!PrjFreeAlignedBuffer.
@@ -120,33 +128,37 @@ func PrjFreeAlignedBuffer(buffer unsafe.Pointer) {
 // PrjGetOnDiskFileState calls PROJECTEDFSLIB!PrjGetOnDiskFileState.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjgetondiskfilestate
 // Minimum OS: windows10.0.17763.
-func PrjGetOnDiskFileState(destinationFileName foundation.PWSTR, fileState *PRJ_FILE_STATE) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPrjGetOnDiskFileState.Addr(), uintptr(unsafe.Pointer(destinationFileName)), uintptr(unsafe.Pointer(fileState)))
-	return foundation.HRESULT(r1)
+func PrjGetOnDiskFileState(destinationFileName string, fileState *PRJ_FILE_STATE) error {
+	_destinationFileName := win32.UTF16Ptr(destinationFileName)
+	r1, _, _ := syscall.SyscallN(procPrjGetOnDiskFileState.Addr(), uintptr(unsafe.Pointer(_destinationFileName)), uintptr(unsafe.Pointer(fileState)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrjGetVirtualizationInstanceInfo calls PROJECTEDFSLIB!PrjGetVirtualizationInstanceInfo.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjgetvirtualizationinstanceinfo
 // Minimum OS: windows10.0.17763.
-func PrjGetVirtualizationInstanceInfo(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, virtualizationInstanceInfo *PRJ_VIRTUALIZATION_INSTANCE_INFO) foundation.HRESULT {
+func PrjGetVirtualizationInstanceInfo(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, virtualizationInstanceInfo *PRJ_VIRTUALIZATION_INSTANCE_INFO) error {
 	r1, _, _ := syscall.SyscallN(procPrjGetVirtualizationInstanceInfo.Addr(), uintptr(namespaceVirtualizationContext), uintptr(unsafe.Pointer(virtualizationInstanceInfo)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrjMarkDirectoryAsPlaceholder calls PROJECTEDFSLIB!PrjMarkDirectoryAsPlaceholder.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjmarkdirectoryasplaceholder
 // Minimum OS: windows10.0.17763.
-func PrjMarkDirectoryAsPlaceholder(rootPathName foundation.PWSTR, targetPathName foundation.PWSTR, versionInfo *PRJ_PLACEHOLDER_VERSION_INFO, virtualizationInstanceID *win32.GUID) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPrjMarkDirectoryAsPlaceholder.Addr(), uintptr(unsafe.Pointer(rootPathName)), uintptr(unsafe.Pointer(targetPathName)), uintptr(unsafe.Pointer(versionInfo)), uintptr(unsafe.Pointer(virtualizationInstanceID)))
-	return foundation.HRESULT(r1)
+func PrjMarkDirectoryAsPlaceholder(rootPathName string, targetPathName string, versionInfo *PRJ_PLACEHOLDER_VERSION_INFO, virtualizationInstanceID *win32.GUID) error {
+	_rootPathName := win32.UTF16Ptr(rootPathName)
+	_targetPathName := win32.UTF16Ptr(targetPathName)
+	r1, _, _ := syscall.SyscallN(procPrjMarkDirectoryAsPlaceholder.Addr(), uintptr(unsafe.Pointer(_rootPathName)), uintptr(unsafe.Pointer(_targetPathName)), uintptr(unsafe.Pointer(versionInfo)), uintptr(unsafe.Pointer(virtualizationInstanceID)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrjStartVirtualizing calls PROJECTEDFSLIB!PrjStartVirtualizing.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjstartvirtualizing
 // Minimum OS: windows10.0.17763.
-func PrjStartVirtualizing(virtualizationRootPath foundation.PWSTR, callbacks *PRJ_CALLBACKS, instanceContext unsafe.Pointer, options *PRJ_STARTVIRTUALIZING_OPTIONS, namespaceVirtualizationContext *PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPrjStartVirtualizing.Addr(), uintptr(unsafe.Pointer(virtualizationRootPath)), uintptr(unsafe.Pointer(callbacks)), uintptr(unsafe.Pointer(instanceContext)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(namespaceVirtualizationContext)))
-	return foundation.HRESULT(r1)
+func PrjStartVirtualizing(virtualizationRootPath string, callbacks *PRJ_CALLBACKS, instanceContext unsafe.Pointer, options *PRJ_STARTVIRTUALIZING_OPTIONS, namespaceVirtualizationContext *PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT) error {
+	_virtualizationRootPath := win32.UTF16Ptr(virtualizationRootPath)
+	r1, _, _ := syscall.SyscallN(procPrjStartVirtualizing.Addr(), uintptr(unsafe.Pointer(_virtualizationRootPath)), uintptr(unsafe.Pointer(callbacks)), uintptr(unsafe.Pointer(instanceContext)), uintptr(unsafe.Pointer(options)), uintptr(unsafe.Pointer(namespaceVirtualizationContext)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrjStopVirtualizing calls PROJECTEDFSLIB!PrjStopVirtualizing.
@@ -159,31 +171,34 @@ func PrjStopVirtualizing(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZA
 // PrjUpdateFileIfNeeded calls PROJECTEDFSLIB!PrjUpdateFileIfNeeded.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjupdatefileifneeded
 // Minimum OS: windows10.0.17763.
-func PrjUpdateFileIfNeeded(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName foundation.PWSTR, placeholderInfo *PRJ_PLACEHOLDER_INFO, placeholderInfoSize uint32, updateFlags PRJ_UPDATE_TYPES, failureReason *PRJ_UPDATE_FAILURE_CAUSES) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPrjUpdateFileIfNeeded.Addr(), uintptr(namespaceVirtualizationContext), uintptr(unsafe.Pointer(destinationFileName)), uintptr(unsafe.Pointer(placeholderInfo)), uintptr(placeholderInfoSize), uintptr(updateFlags), uintptr(unsafe.Pointer(failureReason)))
-	return foundation.HRESULT(r1)
+func PrjUpdateFileIfNeeded(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName string, placeholderInfo *PRJ_PLACEHOLDER_INFO, placeholderInfoSize uint32, updateFlags PRJ_UPDATE_TYPES, failureReason *PRJ_UPDATE_FAILURE_CAUSES) error {
+	_destinationFileName := win32.UTF16Ptr(destinationFileName)
+	r1, _, _ := syscall.SyscallN(procPrjUpdateFileIfNeeded.Addr(), uintptr(namespaceVirtualizationContext), uintptr(unsafe.Pointer(_destinationFileName)), uintptr(unsafe.Pointer(placeholderInfo)), uintptr(placeholderInfoSize), uintptr(updateFlags), uintptr(unsafe.Pointer(failureReason)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrjWriteFileData calls PROJECTEDFSLIB!PrjWriteFileData.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjwritefiledata
 // Minimum OS: windows10.0.17763.
-func PrjWriteFileData(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, dataStreamId *win32.GUID, buffer unsafe.Pointer, byteOffset uint64, length uint32) foundation.HRESULT {
+func PrjWriteFileData(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, dataStreamId *win32.GUID, buffer unsafe.Pointer, byteOffset uint64, length uint32) error {
 	r1, _, _ := syscall.SyscallN(procPrjWriteFileData.Addr(), uintptr(namespaceVirtualizationContext), uintptr(unsafe.Pointer(dataStreamId)), uintptr(unsafe.Pointer(buffer)), uintptr(byteOffset), uintptr(length))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrjWritePlaceholderInfo calls PROJECTEDFSLIB!PrjWritePlaceholderInfo.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjwriteplaceholderinfo
 // Minimum OS: windows10.0.17763.
-func PrjWritePlaceholderInfo(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName foundation.PWSTR, placeholderInfo *PRJ_PLACEHOLDER_INFO, placeholderInfoSize uint32) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPrjWritePlaceholderInfo.Addr(), uintptr(namespaceVirtualizationContext), uintptr(unsafe.Pointer(destinationFileName)), uintptr(unsafe.Pointer(placeholderInfo)), uintptr(placeholderInfoSize))
-	return foundation.HRESULT(r1)
+func PrjWritePlaceholderInfo(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName string, placeholderInfo *PRJ_PLACEHOLDER_INFO, placeholderInfoSize uint32) error {
+	_destinationFileName := win32.UTF16Ptr(destinationFileName)
+	r1, _, _ := syscall.SyscallN(procPrjWritePlaceholderInfo.Addr(), uintptr(namespaceVirtualizationContext), uintptr(unsafe.Pointer(_destinationFileName)), uintptr(unsafe.Pointer(placeholderInfo)), uintptr(placeholderInfoSize))
+	return win32.HRESULTError(int32(r1))
 }
 
 // PrjWritePlaceholderInfo2 calls PROJECTEDFSLIB!PrjWritePlaceholderInfo2.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjwriteplaceholderinfo2
 // Minimum OS: windows10.0.19041.
-func PrjWritePlaceholderInfo2(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName foundation.PWSTR, placeholderInfo *PRJ_PLACEHOLDER_INFO, placeholderInfoSize uint32, ExtendedInfo *PRJ_EXTENDED_INFO) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(procPrjWritePlaceholderInfo2.Addr(), uintptr(namespaceVirtualizationContext), uintptr(unsafe.Pointer(destinationFileName)), uintptr(unsafe.Pointer(placeholderInfo)), uintptr(placeholderInfoSize), uintptr(unsafe.Pointer(ExtendedInfo)))
-	return foundation.HRESULT(r1)
+func PrjWritePlaceholderInfo2(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName string, placeholderInfo *PRJ_PLACEHOLDER_INFO, placeholderInfoSize uint32, ExtendedInfo *PRJ_EXTENDED_INFO) error {
+	_destinationFileName := win32.UTF16Ptr(destinationFileName)
+	r1, _, _ := syscall.SyscallN(procPrjWritePlaceholderInfo2.Addr(), uintptr(namespaceVirtualizationContext), uintptr(unsafe.Pointer(_destinationFileName)), uintptr(unsafe.Pointer(placeholderInfo)), uintptr(placeholderInfoSize), uintptr(unsafe.Pointer(ExtendedInfo)))
+	return win32.HRESULTError(int32(r1))
 }

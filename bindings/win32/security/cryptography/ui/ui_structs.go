@@ -165,8 +165,8 @@ type CRYPTUI_INITDIALOG_STRUCT struct {
 	PCertContext *securitycryptography.CERT_CONTEXT
 }
 
-// CRYPTUI_VIEWCERTIFICATE_STRUCTA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CRYPTUI_VIEWCERTIFICATE_STRUCTA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CRYPTUI_VIEWCERTIFICATE_STRUCTA_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -193,8 +193,8 @@ type CRYPTUI_VIEWCERTIFICATE_STRUCTA struct {
 	NStartPage                      uint32
 }
 
-// CRYPTUI_VIEWCERTIFICATE_STRUCTW_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CRYPTUI_VIEWCERTIFICATE_STRUCTW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CRYPTUI_VIEWCERTIFICATE_STRUCTW_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -230,8 +230,8 @@ type CRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO struct {
 	PwszDisplayName foundation.PWSTR
 }
 
-// CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -264,14 +264,14 @@ type CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO struct {
 	PsUnauthenticated            *securitycryptography.CRYPT_ATTRIBUTES
 }
 
-// CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CRYPTUI_WIZ_DIGITAL_SIGN_INFO_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -315,8 +315,8 @@ type CRYPTUI_WIZ_EXPORT_CERTCONTEXT_INFO struct {
 	FStrongEncryption  foundation.BOOL
 }
 
-// CRYPTUI_WIZ_EXPORT_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CRYPTUI_WIZ_EXPORT_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CRYPTUI_WIZ_EXPORT_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -331,8 +331,8 @@ type CRYPTUI_WIZ_EXPORT_INFO struct {
 	RghStores          *securitycryptography.HCERTSTORE
 }
 
-// CRYPTUI_WIZ_IMPORT_SRC_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CRYPTUI_WIZ_IMPORT_SRC_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CRYPTUI_WIZ_IMPORT_SRC_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }

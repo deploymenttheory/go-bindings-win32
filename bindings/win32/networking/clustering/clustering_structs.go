@@ -32,8 +32,8 @@ type CLRES_CALLBACK_FUNCTION_TABLE struct {
 	ArmWprWatchdogForCurrentResourceCall   PARM_WPR_WATCHDOG_FOR_CURRENT_RESOURCE_CALL_ROUTINE
 }
 
-// CLRES_FUNCTION_TABLE_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CLRES_FUNCTION_TABLE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CLRES_FUNCTION_TABLE_Anonymous_e__Union struct {
 	Data [14]uint64
 }
@@ -141,8 +141,8 @@ type CLUSPROP_BINARY struct {
 }
 
 // CLUSPROP_BUFFER_HELPER: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clusprop_buffer_helper
-// CLUSPROP_BUFFER_HELPER is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CLUSPROP_BUFFER_HELPER is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CLUSPROP_BUFFER_HELPER struct {
 	Data [1]uint64
 }
@@ -202,8 +202,8 @@ type CLUSPROP_PARTITION_INFO_EX2 struct {
 }
 
 // CLUSPROP_REQUIRED_DEPENDENCY: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clusprop_required_dependency
-// CLUSPROP_REQUIRED_DEPENDENCY is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CLUSPROP_REQUIRED_DEPENDENCY is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CLUSPROP_REQUIRED_DEPENDENCY struct {
 	Data [3]uint32
 }
@@ -226,8 +226,8 @@ type CLUSPROP_SCSI_ADDRESS struct {
 	Base2 CLUS_SCSI_ADDRESS
 }
 
-// CLUSPROP_SECURITY_DESCRIPTOR_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CLUSPROP_SECURITY_DESCRIPTOR_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CLUSPROP_SECURITY_DESCRIPTOR_Anonymous_e__Union struct {
 	Data [5]uint32
 }
@@ -239,8 +239,8 @@ type CLUSPROP_SECURITY_DESCRIPTOR struct {
 }
 
 // CLUSPROP_SYNTAX: https://learn.microsoft.com/windows/win32/api/clusapi/ns-clusapi-clusprop_syntax
-// CLUSPROP_SYNTAX is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CLUSPROP_SYNTAX is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CLUSPROP_SYNTAX struct {
 	Data [1]uint32
 }
@@ -424,8 +424,8 @@ type CLUSTER_SHARED_VOLUME_RENAME_INPUT_NAME struct {
 	NewVolumeName [260]uint16
 }
 
-// CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CLUSTER_SHARED_VOLUME_RENAME_INPUT_VOLUME_Anonymous_e__Union struct {
 	Data [65]uint64
 }
@@ -632,8 +632,8 @@ type CLUS_PROVIDER_STATE_CHANGE_INFO struct {
 	SzProviderId  [1]uint16
 }
 
-// CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union struct {
 	Data [1]uint64
 }
@@ -643,8 +643,8 @@ type CLUS_RESOURCE_CLASS_INFO struct {
 	Anonymous CLUS_RESOURCE_CLASS_INFO_Anonymous_e__Union
 }
 
-// CLUS_SCSI_ADDRESS_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// CLUS_SCSI_ADDRESS_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type CLUS_SCSI_ADDRESS_Anonymous_e__Union struct {
 	Data [1]uint32
 }
@@ -986,8 +986,8 @@ type RESUTIL_LARGEINT_DATA struct {
 	Maximum int64
 }
 
-// RESUTIL_PROPERTY_ITEM_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// RESUTIL_PROPERTY_ITEM_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type RESUTIL_PROPERTY_ITEM_Anonymous_e__Union struct {
 	Data [1]uint64
 }

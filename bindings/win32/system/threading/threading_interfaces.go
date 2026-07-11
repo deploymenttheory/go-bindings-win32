@@ -23,15 +23,15 @@ type IRtwqAsyncCallback struct {
 var IID_IRtwqAsyncCallback = win32.GUID{Data1: 0xa27003cf, Data2: 0x2354, Data3: 0x4f2a, Data4: [8]byte{0x8d, 0x6a, 0xab, 0x7c, 0xff, 0x15, 0x43, 0x7e}}
 
 // GetParameters dispatches through IRtwqAsyncCallback's vtable slot 3.
-func (self *IRtwqAsyncCallback) GetParameters(pdwFlags *uint32, pdwQueue *uint32) foundation.HRESULT {
+func (self *IRtwqAsyncCallback) GetParameters(pdwFlags *uint32, pdwQueue *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwFlags)), uintptr(unsafe.Pointer(pdwQueue)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // Invoke dispatches through IRtwqAsyncCallback's vtable slot 4.
-func (self *IRtwqAsyncCallback) Invoke(pAsyncResult *IRtwqAsyncResult) foundation.HRESULT {
+func (self *IRtwqAsyncCallback) Invoke(pAsyncResult *IRtwqAsyncResult) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAsyncResult)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IRtwqAsyncResult: https://learn.microsoft.com/windows/win32/api/rtworkq/nn-rtworkq-irtwqasyncresult
@@ -44,27 +44,27 @@ type IRtwqAsyncResult struct {
 var IID_IRtwqAsyncResult = win32.GUID{Data1: 0xac6b7889, Data2: 0x0740, Data3: 0x4d51, Data4: [8]byte{0x86, 0x19, 0x90, 0x59, 0x94, 0xa5, 0x5c, 0xc6}}
 
 // GetState dispatches through IRtwqAsyncResult's vtable slot 3.
-func (self *IRtwqAsyncResult) GetState(ppunkState **systemcom.IUnknown) foundation.HRESULT {
+func (self *IRtwqAsyncResult) GetState(ppunkState **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppunkState)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatus dispatches through IRtwqAsyncResult's vtable slot 4.
-func (self *IRtwqAsyncResult) GetStatus() foundation.HRESULT {
+func (self *IRtwqAsyncResult) GetStatus() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // SetStatus dispatches through IRtwqAsyncResult's vtable slot 5.
-func (self *IRtwqAsyncResult) SetStatus(hrStatus foundation.HRESULT) foundation.HRESULT {
+func (self *IRtwqAsyncResult) SetStatus(hrStatus foundation.HRESULT) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hrStatus))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetObject dispatches through IRtwqAsyncResult's vtable slot 6.
-func (self *IRtwqAsyncResult) GetObject(ppObject **systemcom.IUnknown) foundation.HRESULT {
+func (self *IRtwqAsyncResult) GetObject(ppObject **systemcom.IUnknown) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppObject)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetStateNoAddRef dispatches through IRtwqAsyncResult's vtable slot 7.
@@ -83,21 +83,21 @@ type IRtwqPlatformEvents struct {
 var IID_IRtwqPlatformEvents = win32.GUID{Data1: 0x63d9255a, Data2: 0x7ff1, Data3: 0x4b61, Data4: [8]byte{0x8f, 0xaf, 0xed, 0x64, 0x60, 0xda, 0xcf, 0x2b}}
 
 // InitializationComplete dispatches through IRtwqPlatformEvents's vtable slot 3.
-func (self *IRtwqPlatformEvents) InitializationComplete() foundation.HRESULT {
+func (self *IRtwqPlatformEvents) InitializationComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShutdownStart dispatches through IRtwqPlatformEvents's vtable slot 4.
-func (self *IRtwqPlatformEvents) ShutdownStart() foundation.HRESULT {
+func (self *IRtwqPlatformEvents) ShutdownStart() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // ShutdownComplete dispatches through IRtwqPlatformEvents's vtable slot 5.
-func (self *IRtwqPlatformEvents) ShutdownComplete() foundation.HRESULT {
+func (self *IRtwqPlatformEvents) ShutdownComplete() error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 type RTWQASYNCRESULT struct {

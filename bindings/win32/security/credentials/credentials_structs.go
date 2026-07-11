@@ -270,8 +270,8 @@ type OPENCARD_SEARCH_CRITERIAW struct {
 	DwPreferredProtocols uint32
 }
 
-// READER_SEL_REQUEST_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// READER_SEL_REQUEST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type READER_SEL_REQUEST_Anonymous_e__Union struct {
 	Data [6]uint32
 }
@@ -331,8 +331,8 @@ type SCARD_T0_COMMAND struct {
 	BP3  byte
 }
 
-// SCARD_T0_REQUEST_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// SCARD_T0_REQUEST_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type SCARD_T0_REQUEST_Anonymous_e__Union struct {
 	Data [5]byte
 }

@@ -22,14 +22,14 @@ var (
 var (
 	procOpenCommPort             = modapi_ms_win_core_comm_l1_1_1.NewProc("OpenCommPort")
 	procGetCommPorts             = modapi_ms_win_core_comm_l1_1_2.NewProc("GetCommPorts")
+	procBuildCommDCB             = modKERNEL32.NewProc("BuildCommDCBW")
 	procBuildCommDCBA            = modKERNEL32.NewProc("BuildCommDCBA")
+	procBuildCommDCBAndTimeouts  = modKERNEL32.NewProc("BuildCommDCBAndTimeoutsW")
 	procBuildCommDCBAndTimeoutsA = modKERNEL32.NewProc("BuildCommDCBAndTimeoutsA")
-	procBuildCommDCBAndTimeoutsW = modKERNEL32.NewProc("BuildCommDCBAndTimeoutsW")
-	procBuildCommDCBW            = modKERNEL32.NewProc("BuildCommDCBW")
 	procClearCommBreak           = modKERNEL32.NewProc("ClearCommBreak")
 	procClearCommError           = modKERNEL32.NewProc("ClearCommError")
+	procCommConfigDialog         = modKERNEL32.NewProc("CommConfigDialogW")
 	procCommConfigDialogA        = modKERNEL32.NewProc("CommConfigDialogA")
-	procCommConfigDialogW        = modKERNEL32.NewProc("CommConfigDialogW")
 	procEscapeCommFunction       = modKERNEL32.NewProc("EscapeCommFunction")
 	procGetCommConfig            = modKERNEL32.NewProc("GetCommConfig")
 	procGetCommMask              = modKERNEL32.NewProc("GetCommMask")
@@ -37,20 +37,32 @@ var (
 	procGetCommProperties        = modKERNEL32.NewProc("GetCommProperties")
 	procGetCommState             = modKERNEL32.NewProc("GetCommState")
 	procGetCommTimeouts          = modKERNEL32.NewProc("GetCommTimeouts")
+	procGetDefaultCommConfig     = modKERNEL32.NewProc("GetDefaultCommConfigW")
 	procGetDefaultCommConfigA    = modKERNEL32.NewProc("GetDefaultCommConfigA")
-	procGetDefaultCommConfigW    = modKERNEL32.NewProc("GetDefaultCommConfigW")
 	procPurgeComm                = modKERNEL32.NewProc("PurgeComm")
 	procSetCommBreak             = modKERNEL32.NewProc("SetCommBreak")
 	procSetCommConfig            = modKERNEL32.NewProc("SetCommConfig")
 	procSetCommMask              = modKERNEL32.NewProc("SetCommMask")
 	procSetCommState             = modKERNEL32.NewProc("SetCommState")
 	procSetCommTimeouts          = modKERNEL32.NewProc("SetCommTimeouts")
+	procSetDefaultCommConfig     = modKERNEL32.NewProc("SetDefaultCommConfigW")
 	procSetDefaultCommConfigA    = modKERNEL32.NewProc("SetDefaultCommConfigA")
-	procSetDefaultCommConfigW    = modKERNEL32.NewProc("SetDefaultCommConfigW")
 	procSetupComm                = modKERNEL32.NewProc("SetupComm")
 	procTransmitCommChar         = modKERNEL32.NewProc("TransmitCommChar")
 	procWaitCommEvent            = modKERNEL32.NewProc("WaitCommEvent")
 )
+
+// BuildCommDCB calls KERNEL32!BuildCommDCBW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-buildcommdcbw
+// Minimum OS: windows5.1.2600.
+func BuildCommDCB(lpDef string, lpDCB *DCB) error {
+	_lpDef := win32.UTF16Ptr(lpDef)
+	r1, _, e1 := syscall.SyscallN(procBuildCommDCB.Addr(), uintptr(unsafe.Pointer(_lpDef)), uintptr(unsafe.Pointer(lpDCB)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
 
 // BuildCommDCBA calls KERNEL32!BuildCommDCBA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-buildcommdcba
@@ -63,33 +75,23 @@ func BuildCommDCBA(lpDef foundation.PSTR, lpDCB *DCB) error {
 	return nil
 }
 
+// BuildCommDCBAndTimeouts calls KERNEL32!BuildCommDCBAndTimeoutsW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-buildcommdcbandtimeoutsw
+// Minimum OS: windows5.1.2600.
+func BuildCommDCBAndTimeouts(lpDef string, lpDCB *DCB, lpCommTimeouts *COMMTIMEOUTS) error {
+	_lpDef := win32.UTF16Ptr(lpDef)
+	r1, _, e1 := syscall.SyscallN(procBuildCommDCBAndTimeouts.Addr(), uintptr(unsafe.Pointer(_lpDef)), uintptr(unsafe.Pointer(lpDCB)), uintptr(unsafe.Pointer(lpCommTimeouts)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // BuildCommDCBAndTimeoutsA calls KERNEL32!BuildCommDCBAndTimeoutsA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-buildcommdcbandtimeoutsa
 // Minimum OS: windows5.1.2600.
 func BuildCommDCBAndTimeoutsA(lpDef foundation.PSTR, lpDCB *DCB, lpCommTimeouts *COMMTIMEOUTS) error {
 	r1, _, e1 := syscall.SyscallN(procBuildCommDCBAndTimeoutsA.Addr(), uintptr(unsafe.Pointer(lpDef)), uintptr(unsafe.Pointer(lpDCB)), uintptr(unsafe.Pointer(lpCommTimeouts)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// BuildCommDCBAndTimeoutsW calls KERNEL32!BuildCommDCBAndTimeoutsW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-buildcommdcbandtimeoutsw
-// Minimum OS: windows5.1.2600.
-func BuildCommDCBAndTimeoutsW(lpDef foundation.PWSTR, lpDCB *DCB, lpCommTimeouts *COMMTIMEOUTS) error {
-	r1, _, e1 := syscall.SyscallN(procBuildCommDCBAndTimeoutsW.Addr(), uintptr(unsafe.Pointer(lpDef)), uintptr(unsafe.Pointer(lpDCB)), uintptr(unsafe.Pointer(lpCommTimeouts)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// BuildCommDCBW calls KERNEL32!BuildCommDCBW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-buildcommdcbw
-// Minimum OS: windows5.1.2600.
-func BuildCommDCBW(lpDef foundation.PWSTR, lpDCB *DCB) error {
-	r1, _, e1 := syscall.SyscallN(procBuildCommDCBW.Addr(), uintptr(unsafe.Pointer(lpDef)), uintptr(unsafe.Pointer(lpDCB)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -118,22 +120,23 @@ func ClearCommError(hFile foundation.HANDLE, lpErrors *CLEAR_COMM_ERROR_FLAGS, l
 	return nil
 }
 
-// CommConfigDialogA calls KERNEL32!CommConfigDialogA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-commconfigdialoga
+// CommConfigDialog calls KERNEL32!CommConfigDialogW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-commconfigdialogw
 // Minimum OS: windows5.1.2600.
-func CommConfigDialogA(lpszName foundation.PSTR, hWnd foundation.HWND, lpCC *COMMCONFIG) error {
-	r1, _, e1 := syscall.SyscallN(procCommConfigDialogA.Addr(), uintptr(unsafe.Pointer(lpszName)), uintptr(hWnd), uintptr(unsafe.Pointer(lpCC)))
+func CommConfigDialog(lpszName string, hWnd foundation.HWND, lpCC *COMMCONFIG) error {
+	_lpszName := win32.UTF16Ptr(lpszName)
+	r1, _, e1 := syscall.SyscallN(procCommConfigDialog.Addr(), uintptr(unsafe.Pointer(_lpszName)), uintptr(hWnd), uintptr(unsafe.Pointer(lpCC)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// CommConfigDialogW calls KERNEL32!CommConfigDialogW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-commconfigdialogw
+// CommConfigDialogA calls KERNEL32!CommConfigDialogA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-commconfigdialoga
 // Minimum OS: windows5.1.2600.
-func CommConfigDialogW(lpszName foundation.PWSTR, hWnd foundation.HWND, lpCC *COMMCONFIG) error {
-	r1, _, e1 := syscall.SyscallN(procCommConfigDialogW.Addr(), uintptr(unsafe.Pointer(lpszName)), uintptr(hWnd), uintptr(unsafe.Pointer(lpCC)))
+func CommConfigDialogA(lpszName foundation.PSTR, hWnd foundation.HWND, lpCC *COMMCONFIG) error {
+	r1, _, e1 := syscall.SyscallN(procCommConfigDialogA.Addr(), uintptr(unsafe.Pointer(lpszName)), uintptr(hWnd), uintptr(unsafe.Pointer(lpCC)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -187,8 +190,12 @@ func GetCommModemStatus(hFile foundation.HANDLE, lpModemStat *MODEM_STATUS_FLAGS
 // GetCommPorts calls api-ms-win-core-comm-l1-1-2!GetCommPorts.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getcommports
 // Minimum OS: windows10.0.17134.
-func GetCommPorts(lpPortNumbers *uint32, uPortNumbersCount uint32, puPortNumbersFound *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetCommPorts.Addr(), uintptr(unsafe.Pointer(lpPortNumbers)), uintptr(uPortNumbersCount), uintptr(unsafe.Pointer(puPortNumbersFound)))
+func GetCommPorts(lpPortNumbers []uint32, puPortNumbersFound *uint32) uint32 {
+	var _lpPortNumbers *uint32
+	if len(lpPortNumbers) > 0 {
+		_lpPortNumbers = &lpPortNumbers[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetCommPorts.Addr(), uintptr(unsafe.Pointer(_lpPortNumbers)), uintptr(len(lpPortNumbers)), uintptr(unsafe.Pointer(puPortNumbersFound)))
 	return uint32(r1)
 }
 
@@ -225,22 +232,23 @@ func GetCommTimeouts(hFile foundation.HANDLE, lpCommTimeouts *COMMTIMEOUTS) erro
 	return nil
 }
 
-// GetDefaultCommConfigA calls KERNEL32!GetDefaultCommConfigA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getdefaultcommconfiga
+// GetDefaultCommConfig calls KERNEL32!GetDefaultCommConfigW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getdefaultcommconfigw
 // Minimum OS: windows5.1.2600.
-func GetDefaultCommConfigA(lpszName foundation.PSTR, lpCC *COMMCONFIG, lpdwSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetDefaultCommConfigA.Addr(), uintptr(unsafe.Pointer(lpszName)), uintptr(unsafe.Pointer(lpCC)), uintptr(unsafe.Pointer(lpdwSize)))
+func GetDefaultCommConfig(lpszName string, lpCC *COMMCONFIG, lpdwSize *uint32) error {
+	_lpszName := win32.UTF16Ptr(lpszName)
+	r1, _, e1 := syscall.SyscallN(procGetDefaultCommConfig.Addr(), uintptr(unsafe.Pointer(_lpszName)), uintptr(unsafe.Pointer(lpCC)), uintptr(unsafe.Pointer(lpdwSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// GetDefaultCommConfigW calls KERNEL32!GetDefaultCommConfigW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getdefaultcommconfigw
+// GetDefaultCommConfigA calls KERNEL32!GetDefaultCommConfigA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getdefaultcommconfiga
 // Minimum OS: windows5.1.2600.
-func GetDefaultCommConfigW(lpszName foundation.PWSTR, lpCC *COMMCONFIG, lpdwSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetDefaultCommConfigW.Addr(), uintptr(unsafe.Pointer(lpszName)), uintptr(unsafe.Pointer(lpCC)), uintptr(unsafe.Pointer(lpdwSize)))
+func GetDefaultCommConfigA(lpszName foundation.PSTR, lpCC *COMMCONFIG, lpdwSize *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procGetDefaultCommConfigA.Addr(), uintptr(unsafe.Pointer(lpszName)), uintptr(unsafe.Pointer(lpCC)), uintptr(unsafe.Pointer(lpdwSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -321,22 +329,23 @@ func SetCommTimeouts(hFile foundation.HANDLE, lpCommTimeouts *COMMTIMEOUTS) erro
 	return nil
 }
 
-// SetDefaultCommConfigA calls KERNEL32!SetDefaultCommConfigA.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setdefaultcommconfiga
+// SetDefaultCommConfig calls KERNEL32!SetDefaultCommConfigW.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setdefaultcommconfigw
 // Minimum OS: windows5.1.2600.
-func SetDefaultCommConfigA(lpszName foundation.PSTR, lpCC *COMMCONFIG, dwSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetDefaultCommConfigA.Addr(), uintptr(unsafe.Pointer(lpszName)), uintptr(unsafe.Pointer(lpCC)), uintptr(dwSize))
+func SetDefaultCommConfig(lpszName string, lpCC *COMMCONFIG, dwSize uint32) error {
+	_lpszName := win32.UTF16Ptr(lpszName)
+	r1, _, e1 := syscall.SyscallN(procSetDefaultCommConfig.Addr(), uintptr(unsafe.Pointer(_lpszName)), uintptr(unsafe.Pointer(lpCC)), uintptr(dwSize))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetDefaultCommConfigW calls KERNEL32!SetDefaultCommConfigW.
-// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setdefaultcommconfigw
+// SetDefaultCommConfigA calls KERNEL32!SetDefaultCommConfigA.
+// https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setdefaultcommconfiga
 // Minimum OS: windows5.1.2600.
-func SetDefaultCommConfigW(lpszName foundation.PWSTR, lpCC *COMMCONFIG, dwSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetDefaultCommConfigW.Addr(), uintptr(unsafe.Pointer(lpszName)), uintptr(unsafe.Pointer(lpCC)), uintptr(dwSize))
+func SetDefaultCommConfigA(lpszName foundation.PSTR, lpCC *COMMCONFIG, dwSize uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetDefaultCommConfigA.Addr(), uintptr(unsafe.Pointer(lpszName)), uintptr(unsafe.Pointer(lpCC)), uintptr(dwSize))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

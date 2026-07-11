@@ -9,7 +9,6 @@ import (
 	"unsafe"
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
-	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	mediamediafoundation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/mediafoundation"
 	systemwinrt "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/winrt"
 )
@@ -24,9 +23,9 @@ type IAudioFrameNative struct {
 var IID_IAudioFrameNative = win32.GUID{Data1: 0x20be1e2e, Data2: 0x930f, Data3: 0x4746, Data4: [8]byte{0x93, 0x35, 0x3c, 0x33, 0x2f, 0x25, 0x50, 0x93}}
 
 // GetData dispatches through IAudioFrameNative's vtable slot 6.
-func (self *IAudioFrameNative) GetData(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IAudioFrameNative) GetData(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IAudioFrameNativeFactory: https://learn.microsoft.com/windows/win32/api/windows.media.core.interop/nn-windows-media-core-interop-iaudioframenativefactory
@@ -39,9 +38,10 @@ type IAudioFrameNativeFactory struct {
 var IID_IAudioFrameNativeFactory = win32.GUID{Data1: 0x7bd67cf8, Data2: 0xbf7d, Data3: 0x43e6, Data4: [8]byte{0xaf, 0x8d, 0xb1, 0x70, 0xee, 0x0c, 0x01, 0x10}}
 
 // CreateFromMFSample dispatches through IAudioFrameNativeFactory's vtable slot 6.
-func (self *IAudioFrameNativeFactory) CreateFromMFSample(data *mediamediafoundation.IMFSample, forceReadOnly foundation.BOOL, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(forceReadOnly), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func (self *IAudioFrameNativeFactory) CreateFromMFSample(data *mediamediafoundation.IMFSample, forceReadOnly bool, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_forceReadOnly := win32.Bool32(forceReadOnly)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(_forceReadOnly), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVideoFrameNative: https://learn.microsoft.com/windows/win32/api/windows.media.core.interop/nn-windows-media-core-interop-ivideoframenative
@@ -54,15 +54,15 @@ type IVideoFrameNative struct {
 var IID_IVideoFrameNative = win32.GUID{Data1: 0x26ba702b, Data2: 0x314a, Data3: 0x4620, Data4: [8]byte{0xaa, 0xf6, 0x7a, 0x51, 0xaa, 0x58, 0xfa, 0x18}}
 
 // GetData dispatches through IVideoFrameNative's vtable slot 6.
-func (self *IVideoFrameNative) GetData(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IVideoFrameNative) GetData(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // GetDevice dispatches through IVideoFrameNative's vtable slot 7.
-func (self *IVideoFrameNative) GetDevice(riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
+func (self *IVideoFrameNative) GetDevice(riid *win32.GUID, ppv *unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // IVideoFrameNativeFactory: https://learn.microsoft.com/windows/win32/api/windows.media.core.interop/nn-windows-media-core-interop-ivideoframenativefactory
@@ -75,7 +75,8 @@ type IVideoFrameNativeFactory struct {
 var IID_IVideoFrameNativeFactory = win32.GUID{Data1: 0x69e3693e, Data2: 0x8e1e, Data3: 0x4e63, Data4: [8]byte{0xac, 0x4c, 0x7f, 0xdc, 0x21, 0xd9, 0x73, 0x1d}}
 
 // CreateFromMFSample dispatches through IVideoFrameNativeFactory's vtable slot 6.
-func (self *IVideoFrameNativeFactory) CreateFromMFSample(data *mediamediafoundation.IMFSample, subtype *win32.GUID, width uint32, height uint32, forceReadOnly foundation.BOOL, minDisplayAperture *mediamediafoundation.MFVideoArea, device *mediamediafoundation.IMFDXGIDeviceManager, riid *win32.GUID, ppv *unsafe.Pointer) foundation.HRESULT {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(subtype)), uintptr(width), uintptr(height), uintptr(forceReadOnly), uintptr(unsafe.Pointer(minDisplayAperture)), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
-	return foundation.HRESULT(r1)
+func (self *IVideoFrameNativeFactory) CreateFromMFSample(data *mediamediafoundation.IMFSample, subtype *win32.GUID, width uint32, height uint32, forceReadOnly bool, minDisplayAperture *mediamediafoundation.MFVideoArea, device *mediamediafoundation.IMFDXGIDeviceManager, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	_forceReadOnly := win32.Bool32(forceReadOnly)
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(subtype)), uintptr(width), uintptr(height), uintptr(_forceReadOnly), uintptr(unsafe.Pointer(minDisplayAperture)), uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+	return win32.HRESULTError(int32(r1))
 }

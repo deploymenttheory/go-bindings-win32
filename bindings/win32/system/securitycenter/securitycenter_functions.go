@@ -27,43 +27,43 @@ var (
 )
 
 // WscGetAntiMalwareUri calls WSCAPI!WscGetAntiMalwareUri.
-func WscGetAntiMalwareUri(ppszUri *foundation.PWSTR) foundation.HRESULT {
+func WscGetAntiMalwareUri(ppszUri *foundation.PWSTR) error {
 	r1, _, _ := syscall.SyscallN(procWscGetAntiMalwareUri.Addr(), uintptr(unsafe.Pointer(ppszUri)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WscGetSecurityProviderHealth calls WSCAPI!WscGetSecurityProviderHealth.
 // https://learn.microsoft.com/windows/win32/api/wscapi/nf-wscapi-wscgetsecurityproviderhealth
 // Minimum OS: windows6.0.6000.
-func WscGetSecurityProviderHealth(Providers uint32, pHealth *WSC_SECURITY_PROVIDER_HEALTH) foundation.HRESULT {
+func WscGetSecurityProviderHealth(Providers uint32, pHealth *WSC_SECURITY_PROVIDER_HEALTH) error {
 	r1, _, _ := syscall.SyscallN(procWscGetSecurityProviderHealth.Addr(), uintptr(Providers), uintptr(unsafe.Pointer(pHealth)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WscQueryAntiMalwareUri calls WSCAPI!WscQueryAntiMalwareUri.
-func WscQueryAntiMalwareUri() foundation.HRESULT {
+func WscQueryAntiMalwareUri() error {
 	r1, _, _ := syscall.SyscallN(procWscQueryAntiMalwareUri.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WscRegisterForChanges calls WSCAPI!WscRegisterForChanges.
 // https://learn.microsoft.com/windows/win32/api/wscapi/nf-wscapi-wscregisterforchanges
 // Minimum OS: windows6.0.6000.
-func WscRegisterForChanges(Reserved unsafe.Pointer, phCallbackRegistration *foundation.HANDLE, lpCallbackAddress systemthreading.LPTHREAD_START_ROUTINE, pContext unsafe.Pointer) foundation.HRESULT {
+func WscRegisterForChanges(Reserved unsafe.Pointer, phCallbackRegistration *foundation.HANDLE, lpCallbackAddress systemthreading.LPTHREAD_START_ROUTINE, pContext unsafe.Pointer) error {
 	r1, _, _ := syscall.SyscallN(procWscRegisterForChanges.Addr(), uintptr(unsafe.Pointer(Reserved)), uintptr(unsafe.Pointer(phCallbackRegistration)), uintptr(lpCallbackAddress), uintptr(unsafe.Pointer(pContext)))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WscRegisterForUserNotifications calls WSCAPI!WscRegisterForUserNotifications.
-func WscRegisterForUserNotifications() foundation.HRESULT {
+func WscRegisterForUserNotifications() error {
 	r1, _, _ := syscall.SyscallN(procWscRegisterForUserNotifications.Addr())
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }
 
 // WscUnRegisterChanges calls WSCAPI!WscUnRegisterChanges.
 // https://learn.microsoft.com/windows/win32/api/wscapi/nf-wscapi-wscunregisterchanges
 // Minimum OS: windows6.0.6000.
-func WscUnRegisterChanges(hRegistrationHandle foundation.HANDLE) foundation.HRESULT {
+func WscUnRegisterChanges(hRegistrationHandle foundation.HANDLE) error {
 	r1, _, _ := syscall.SyscallN(procWscUnRegisterChanges.Addr(), uintptr(hRegistrationHandle))
-	return foundation.HRESULT(r1)
+	return win32.HRESULTError(int32(r1))
 }

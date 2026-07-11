@@ -26,12 +26,12 @@ var (
 	procEscape              = modGDI32.NewProc("Escape")
 	procExtEscape           = modGDI32.NewProc("ExtEscape")
 	procSetAbortProc        = modGDI32.NewProc("SetAbortProc")
+	procStartDoc            = modGDI32.NewProc("StartDocW")
 	procStartDocA           = modGDI32.NewProc("StartDocA")
-	procStartDocW           = modGDI32.NewProc("StartDocW")
 	procStartPage           = modGDI32.NewProc("StartPage")
 	procPrintWindow         = modUSER32.NewProc("PrintWindow")
+	procDeviceCapabilities  = modwinspool_drv.NewProc("DeviceCapabilitiesW")
 	procDeviceCapabilitiesA = modwinspool_drv.NewProc("DeviceCapabilitiesA")
-	procDeviceCapabilitiesW = modwinspool_drv.NewProc("DeviceCapabilitiesW")
 )
 
 // AbortDoc calls GDI32!AbortDoc.
@@ -42,19 +42,21 @@ func AbortDoc(hdc graphicsgdi.HDC) int32 {
 	return int32(r1)
 }
 
+// DeviceCapabilities calls winspool.drv!DeviceCapabilitiesW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-devicecapabilitiesw
+// Minimum OS: windows5.0.
+func DeviceCapabilities(pDevice string, pPort string, fwCapability PRINTER_DEVICE_CAPABILITIES, pOutput foundation.PWSTR, pDevMode *graphicsgdi.DEVMODEW) int32 {
+	_pDevice := win32.UTF16Ptr(pDevice)
+	_pPort := win32.UTF16Ptr(pPort)
+	r1, _, _ := syscall.SyscallN(procDeviceCapabilities.Addr(), uintptr(unsafe.Pointer(_pDevice)), uintptr(unsafe.Pointer(_pPort)), uintptr(fwCapability), uintptr(unsafe.Pointer(pOutput)), uintptr(unsafe.Pointer(pDevMode)))
+	return int32(r1)
+}
+
 // DeviceCapabilitiesA calls winspool.drv!DeviceCapabilitiesA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-devicecapabilitiesa
 // Minimum OS: windows5.0.
 func DeviceCapabilitiesA(pDevice foundation.PSTR, pPort foundation.PSTR, fwCapability PRINTER_DEVICE_CAPABILITIES, pOutput foundation.PSTR, pDevMode *graphicsgdi.DEVMODEA) int32 {
 	r1, _, _ := syscall.SyscallN(procDeviceCapabilitiesA.Addr(), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pPort)), uintptr(fwCapability), uintptr(unsafe.Pointer(pOutput)), uintptr(unsafe.Pointer(pDevMode)))
-	return int32(r1)
-}
-
-// DeviceCapabilitiesW calls winspool.drv!DeviceCapabilitiesW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-devicecapabilitiesw
-// Minimum OS: windows5.0.
-func DeviceCapabilitiesW(pDevice foundation.PWSTR, pPort foundation.PWSTR, fwCapability PRINTER_DEVICE_CAPABILITIES, pOutput foundation.PWSTR, pDevMode *graphicsgdi.DEVMODEW) int32 {
-	r1, _, _ := syscall.SyscallN(procDeviceCapabilitiesW.Addr(), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pPort)), uintptr(fwCapability), uintptr(unsafe.Pointer(pOutput)), uintptr(unsafe.Pointer(pDevMode)))
 	return int32(r1)
 }
 
@@ -93,9 +95,9 @@ func ExtEscape(hdc graphicsgdi.HDC, iEscape int32, cjInput int32, lpInData found
 // PrintWindow calls USER32!PrintWindow.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-printwindow
 // Minimum OS: windows5.1.2600.
-func PrintWindow(hwnd foundation.HWND, hdcBlt graphicsgdi.HDC, nFlags PRINT_WINDOW_FLAGS) foundation.BOOL {
+func PrintWindow(hwnd foundation.HWND, hdcBlt graphicsgdi.HDC, nFlags PRINT_WINDOW_FLAGS) bool {
 	r1, _, _ := syscall.SyscallN(procPrintWindow.Addr(), uintptr(hwnd), uintptr(hdcBlt), uintptr(nFlags))
-	return foundation.BOOL(r1)
+	return r1 != 0
 }
 
 // SetAbortProc calls GDI32!SetAbortProc.
@@ -106,19 +108,19 @@ func SetAbortProc(hdc graphicsgdi.HDC, proc ABORTPROC) int32 {
 	return int32(r1)
 }
 
+// StartDoc calls GDI32!StartDocW.
+// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-startdocw
+// Minimum OS: windows5.0.
+func StartDoc(hdc graphicsgdi.HDC, lpdi *DOCINFOW) int32 {
+	r1, _, _ := syscall.SyscallN(procStartDoc.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpdi)))
+	return int32(r1)
+}
+
 // StartDocA calls GDI32!StartDocA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-startdoca
 // Minimum OS: windows5.0.
 func StartDocA(hdc graphicsgdi.HDC, lpdi *DOCINFOA) int32 {
 	r1, _, _ := syscall.SyscallN(procStartDocA.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpdi)))
-	return int32(r1)
-}
-
-// StartDocW calls GDI32!StartDocW.
-// https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-startdocw
-// Minimum OS: windows5.0.
-func StartDocW(hdc graphicsgdi.HDC, lpdi *DOCINFOW) int32 {
-	r1, _, _ := syscall.SyscallN(procStartDocW.Addr(), uintptr(hdc), uintptr(unsafe.Pointer(lpdi)))
 	return int32(r1)
 }
 

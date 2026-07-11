@@ -1391,20 +1391,20 @@ type PBRANGE struct {
 	IHigh int32
 }
 
-// PROPSHEETHEADERA_V1_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERA_V1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERA_V1_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETHEADERA_V1_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERA_V1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERA_V1_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETHEADERA_V1_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERA_V1_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERA_V1_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
@@ -1422,32 +1422,32 @@ type PROPSHEETHEADERA_V1 struct {
 	PfnCallback PFNPROPSHEETCALLBACK
 }
 
-// PROPSHEETHEADERA_V2_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERA_V2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERA_V2_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETHEADERA_V2_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERA_V2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERA_V2_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETHEADERA_V2_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERA_V2_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERA_V2_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETHEADERA_V2_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERA_V2_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERA_V2_Anonymous4_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETHEADERA_V2_Anonymous5_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERA_V2_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERA_V2_Anonymous5_e__Union struct {
 	Data [1]uint64
 }
@@ -1469,20 +1469,20 @@ type PROPSHEETHEADERA_V2 struct {
 	Anonymous5   PROPSHEETHEADERA_V2_Anonymous5_e__Union
 }
 
-// PROPSHEETHEADERW_V1_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERW_V1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERW_V1_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETHEADERW_V1_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERW_V1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERW_V1_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETHEADERW_V1_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERW_V1_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERW_V1_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
@@ -1500,32 +1500,32 @@ type PROPSHEETHEADERW_V1 struct {
 	PfnCallback PFNPROPSHEETCALLBACK
 }
 
-// PROPSHEETHEADERW_V2_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERW_V2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERW_V2_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETHEADERW_V2_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERW_V2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERW_V2_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETHEADERW_V2_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERW_V2_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERW_V2_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETHEADERW_V2_Anonymous4_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERW_V2_Anonymous4_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERW_V2_Anonymous4_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETHEADERW_V2_Anonymous5_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETHEADERW_V2_Anonymous5_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETHEADERW_V2_Anonymous5_e__Union struct {
 	Data [1]uint64
 }
@@ -1547,20 +1547,20 @@ type PROPSHEETHEADERW_V2 struct {
 	Anonymous5   PROPSHEETHEADERW_V2_Anonymous5_e__Union
 }
 
-// PROPSHEETPAGEA_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEA_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEA_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETPAGEA_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEA_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEA_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETPAGEA_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEA_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEA_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
@@ -1582,14 +1582,14 @@ type PROPSHEETPAGEA struct {
 	Anonymous3        PROPSHEETPAGEA_Anonymous3_e__Union
 }
 
-// PROPSHEETPAGEA_V1_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEA_V1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEA_V1_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETPAGEA_V1_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEA_V1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEA_V1_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -1607,14 +1607,14 @@ type PROPSHEETPAGEA_V1 struct {
 	PcRefParent *uint32
 }
 
-// PROPSHEETPAGEA_V2_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEA_V2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEA_V2_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETPAGEA_V2_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEA_V2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEA_V2_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -1635,14 +1635,14 @@ type PROPSHEETPAGEA_V2 struct {
 	PszHeaderSubTitle foundation.PSTR
 }
 
-// PROPSHEETPAGEA_V3_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEA_V3_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEA_V3_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETPAGEA_V3_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEA_V3_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEA_V3_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -1664,20 +1664,20 @@ type PROPSHEETPAGEA_V3 struct {
 	HActCtx           foundation.HANDLE
 }
 
-// PROPSHEETPAGEW_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEW_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEW_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETPAGEW_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEW_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEW_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETPAGEW_Anonymous3_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEW_Anonymous3_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEW_Anonymous3_e__Union struct {
 	Data [1]uint64
 }
@@ -1699,14 +1699,14 @@ type PROPSHEETPAGEW struct {
 	Anonymous3        PROPSHEETPAGEW_Anonymous3_e__Union
 }
 
-// PROPSHEETPAGEW_V1_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEW_V1_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEW_V1_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETPAGEW_V1_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEW_V1_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEW_V1_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -1724,14 +1724,14 @@ type PROPSHEETPAGEW_V1 struct {
 	PcRefParent *uint32
 }
 
-// PROPSHEETPAGEW_V2_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEW_V2_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEW_V2_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETPAGEW_V2_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEW_V2_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEW_V2_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -1752,14 +1752,14 @@ type PROPSHEETPAGEW_V2 struct {
 	PszHeaderSubTitle foundation.PWSTR
 }
 
-// PROPSHEETPAGEW_V3_Anonymous1_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEW_V3_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEW_V3_Anonymous1_e__Union struct {
 	Data [1]uint64
 }
 
-// PROPSHEETPAGEW_V3_Anonymous2_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// PROPSHEETPAGEW_V3_Anonymous2_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type PROPSHEETPAGEW_V3_Anonymous2_e__Union struct {
 	Data [1]uint64
 }
@@ -2112,8 +2112,8 @@ type TVHITTESTINFO struct {
 	HItem HTREEITEM
 }
 
-// TVINSERTSTRUCTA_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TVINSERTSTRUCTA_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TVINSERTSTRUCTA_Anonymous_e__Union struct {
 	Data [10]uint64
 }
@@ -2125,8 +2125,8 @@ type TVINSERTSTRUCTA struct {
 	Anonymous    TVINSERTSTRUCTA_Anonymous_e__Union
 }
 
-// TVINSERTSTRUCTW_Anonymous_e__Union is a C union; the raw tier exposes its correctly sized
-// and aligned backing storage. Typed accessors arrive with the idiomatic tier.
+// TVINSERTSTRUCTW_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
+// storage; read or write a specific member through an unsafe.Pointer cast.
 type TVINSERTSTRUCTW_Anonymous_e__Union struct {
 	Data [10]uint64
 }

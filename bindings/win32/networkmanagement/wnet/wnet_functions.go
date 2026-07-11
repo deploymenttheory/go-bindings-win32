@@ -32,59 +32,67 @@ var (
 	procNPGetUniversalName                     = moddavclnt.NewProc("NPGetUniversalName")
 	procNPGetUser                              = moddavclnt.NewProc("NPGetUser")
 	procNPOpenEnum                             = moddavclnt.NewProc("NPOpenEnum")
+	procMultinetGetConnectionPerformance       = modMPR.NewProc("MultinetGetConnectionPerformanceW")
 	procMultinetGetConnectionPerformanceA      = modMPR.NewProc("MultinetGetConnectionPerformanceA")
-	procMultinetGetConnectionPerformanceW      = modMPR.NewProc("MultinetGetConnectionPerformanceW")
+	procWNetAddConnection                      = modMPR.NewProc("WNetAddConnectionW")
+	procWNetAddConnection2                     = modMPR.NewProc("WNetAddConnection2W")
 	procWNetAddConnection2A                    = modMPR.NewProc("WNetAddConnection2A")
-	procWNetAddConnection2W                    = modMPR.NewProc("WNetAddConnection2W")
+	procWNetAddConnection3                     = modMPR.NewProc("WNetAddConnection3W")
 	procWNetAddConnection3A                    = modMPR.NewProc("WNetAddConnection3A")
-	procWNetAddConnection3W                    = modMPR.NewProc("WNetAddConnection3W")
+	procWNetAddConnection4                     = modMPR.NewProc("WNetAddConnection4W")
 	procWNetAddConnection4A                    = modMPR.NewProc("WNetAddConnection4A")
-	procWNetAddConnection4W                    = modMPR.NewProc("WNetAddConnection4W")
 	procWNetAddConnectionA                     = modMPR.NewProc("WNetAddConnectionA")
-	procWNetAddConnectionW                     = modMPR.NewProc("WNetAddConnectionW")
+	procWNetCancelConnection                   = modMPR.NewProc("WNetCancelConnectionW")
+	procWNetCancelConnection2                  = modMPR.NewProc("WNetCancelConnection2W")
 	procWNetCancelConnection2A                 = modMPR.NewProc("WNetCancelConnection2A")
-	procWNetCancelConnection2W                 = modMPR.NewProc("WNetCancelConnection2W")
 	procWNetCancelConnectionA                  = modMPR.NewProc("WNetCancelConnectionA")
-	procWNetCancelConnectionW                  = modMPR.NewProc("WNetCancelConnectionW")
 	procWNetCloseEnum                          = modMPR.NewProc("WNetCloseEnum")
 	procWNetConnectionDialog                   = modMPR.NewProc("WNetConnectionDialog")
+	procWNetConnectionDialog1                  = modMPR.NewProc("WNetConnectionDialog1W")
 	procWNetConnectionDialog1A                 = modMPR.NewProc("WNetConnectionDialog1A")
-	procWNetConnectionDialog1W                 = modMPR.NewProc("WNetConnectionDialog1W")
 	procWNetDisconnectDialog                   = modMPR.NewProc("WNetDisconnectDialog")
+	procWNetDisconnectDialog1                  = modMPR.NewProc("WNetDisconnectDialog1W")
 	procWNetDisconnectDialog1A                 = modMPR.NewProc("WNetDisconnectDialog1A")
-	procWNetDisconnectDialog1W                 = modMPR.NewProc("WNetDisconnectDialog1W")
+	procWNetEnumResource                       = modMPR.NewProc("WNetEnumResourceW")
 	procWNetEnumResourceA                      = modMPR.NewProc("WNetEnumResourceA")
-	procWNetEnumResourceW                      = modMPR.NewProc("WNetEnumResourceW")
+	procWNetGetConnection                      = modMPR.NewProc("WNetGetConnectionW")
 	procWNetGetConnectionA                     = modMPR.NewProc("WNetGetConnectionA")
-	procWNetGetConnectionW                     = modMPR.NewProc("WNetGetConnectionW")
+	procWNetGetLastError                       = modMPR.NewProc("WNetGetLastErrorW")
 	procWNetGetLastErrorA                      = modMPR.NewProc("WNetGetLastErrorA")
-	procWNetGetLastErrorW                      = modMPR.NewProc("WNetGetLastErrorW")
+	procWNetGetNetworkInformation              = modMPR.NewProc("WNetGetNetworkInformationW")
 	procWNetGetNetworkInformationA             = modMPR.NewProc("WNetGetNetworkInformationA")
-	procWNetGetNetworkInformationW             = modMPR.NewProc("WNetGetNetworkInformationW")
+	procWNetGetProviderName                    = modMPR.NewProc("WNetGetProviderNameW")
 	procWNetGetProviderNameA                   = modMPR.NewProc("WNetGetProviderNameA")
-	procWNetGetProviderNameW                   = modMPR.NewProc("WNetGetProviderNameW")
+	procWNetGetResourceInformation             = modMPR.NewProc("WNetGetResourceInformationW")
 	procWNetGetResourceInformationA            = modMPR.NewProc("WNetGetResourceInformationA")
-	procWNetGetResourceInformationW            = modMPR.NewProc("WNetGetResourceInformationW")
+	procWNetGetResourceParent                  = modMPR.NewProc("WNetGetResourceParentW")
 	procWNetGetResourceParentA                 = modMPR.NewProc("WNetGetResourceParentA")
-	procWNetGetResourceParentW                 = modMPR.NewProc("WNetGetResourceParentW")
+	procWNetGetUniversalName                   = modMPR.NewProc("WNetGetUniversalNameW")
 	procWNetGetUniversalNameA                  = modMPR.NewProc("WNetGetUniversalNameA")
-	procWNetGetUniversalNameW                  = modMPR.NewProc("WNetGetUniversalNameW")
+	procWNetGetUser                            = modMPR.NewProc("WNetGetUserW")
 	procWNetGetUserA                           = modMPR.NewProc("WNetGetUserA")
-	procWNetGetUserW                           = modMPR.NewProc("WNetGetUserW")
+	procWNetOpenEnum                           = modMPR.NewProc("WNetOpenEnumW")
 	procWNetOpenEnumA                          = modMPR.NewProc("WNetOpenEnumA")
-	procWNetOpenEnumW                          = modMPR.NewProc("WNetOpenEnumW")
+	procWNetSetLastError                       = modMPR.NewProc("WNetSetLastErrorW")
 	procWNetSetLastErrorA                      = modMPR.NewProc("WNetSetLastErrorA")
-	procWNetSetLastErrorW                      = modMPR.NewProc("WNetSetLastErrorW")
+	procWNetUseConnection                      = modMPR.NewProc("WNetUseConnectionW")
+	procWNetUseConnection4                     = modMPR.NewProc("WNetUseConnection4W")
 	procWNetUseConnection4A                    = modMPR.NewProc("WNetUseConnection4A")
-	procWNetUseConnection4W                    = modMPR.NewProc("WNetUseConnection4W")
 	procWNetUseConnectionA                     = modMPR.NewProc("WNetUseConnectionA")
-	procWNetUseConnectionW                     = modMPR.NewProc("WNetUseConnectionW")
 	procNPAddConnection4                       = modNTLANMAN.NewProc("NPAddConnection4")
 	procNPCancelConnection2                    = modNTLANMAN.NewProc("NPCancelConnection2")
 	procNPGetConnection3                       = modNTLANMAN.NewProc("NPGetConnection3")
 	procNPGetConnectionPerformance             = modNTLANMAN.NewProc("NPGetConnectionPerformance")
 	procNPGetPersistentUseOptionsForConnection = modNTLANMAN.NewProc("NPGetPersistentUseOptionsForConnection")
 )
+
+// MultinetGetConnectionPerformance calls MPR!MultinetGetConnectionPerformanceW.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-multinetgetconnectionperformancew
+// Minimum OS: windows5.0.
+func MultinetGetConnectionPerformance(lpNetResource *NETRESOURCEW, lpNetConnectInfoStruct *NETCONNECTINFOSTRUCT) uint32 {
+	r1, _, _ := syscall.SyscallN(procMultinetGetConnectionPerformance.Addr(), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lpNetConnectInfoStruct)))
+	return uint32(r1)
+}
 
 // MultinetGetConnectionPerformanceA calls MPR!MultinetGetConnectionPerformanceA.
 // https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-multinetgetconnectionperformancea
@@ -94,27 +102,23 @@ func MultinetGetConnectionPerformanceA(lpNetResource *NETRESOURCEA, lpNetConnect
 	return uint32(r1)
 }
 
-// MultinetGetConnectionPerformanceW calls MPR!MultinetGetConnectionPerformanceW.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-multinetgetconnectionperformancew
-// Minimum OS: windows5.0.
-func MultinetGetConnectionPerformanceW(lpNetResource *NETRESOURCEW, lpNetConnectInfoStruct *NETCONNECTINFOSTRUCT) uint32 {
-	r1, _, _ := syscall.SyscallN(procMultinetGetConnectionPerformanceW.Addr(), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lpNetConnectInfoStruct)))
-	return uint32(r1)
-}
-
 // NPAddConnection calls davclnt!NPAddConnection.
 // https://learn.microsoft.com/windows/win32/api/npapi/nf-npapi-npaddconnection
 // Minimum OS: windows5.1.2600.
-func NPAddConnection(lpNetResource *NETRESOURCEW, lpPassword foundation.PWSTR, lpUserName foundation.PWSTR) uint32 {
-	r1, _, _ := syscall.SyscallN(procNPAddConnection.Addr(), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lpPassword)), uintptr(unsafe.Pointer(lpUserName)))
+func NPAddConnection(lpNetResource *NETRESOURCEW, lpPassword string, lpUserName string) uint32 {
+	_lpPassword := win32.UTF16Ptr(lpPassword)
+	_lpUserName := win32.UTF16Ptr(lpUserName)
+	r1, _, _ := syscall.SyscallN(procNPAddConnection.Addr(), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(_lpUserName)))
 	return uint32(r1)
 }
 
 // NPAddConnection3 calls davclnt!NPAddConnection3.
 // https://learn.microsoft.com/windows/win32/api/npapi/nf-npapi-npaddconnection3
 // Minimum OS: windows5.1.2600.
-func NPAddConnection3(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lpPassword foundation.PWSTR, lpUserName foundation.PWSTR, dwFlags NET_CONNECT_FLAGS) uint32 {
-	r1, _, _ := syscall.SyscallN(procNPAddConnection3.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lpPassword)), uintptr(unsafe.Pointer(lpUserName)), uintptr(dwFlags))
+func NPAddConnection3(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lpPassword string, lpUserName string, dwFlags NET_CONNECT_FLAGS) uint32 {
+	_lpPassword := win32.UTF16Ptr(lpPassword)
+	_lpUserName := win32.UTF16Ptr(lpUserName)
+	r1, _, _ := syscall.SyscallN(procNPAddConnection3.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(_lpUserName)), uintptr(dwFlags))
 	return uint32(r1)
 }
 
@@ -127,14 +131,18 @@ func NPAddConnection4(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lp
 // NPCancelConnection calls davclnt!NPCancelConnection.
 // https://learn.microsoft.com/windows/win32/api/npapi/nf-npapi-npcancelconnection
 // Minimum OS: windows5.1.2600.
-func NPCancelConnection(lpName foundation.PWSTR, fForce foundation.BOOL) uint32 {
-	r1, _, _ := syscall.SyscallN(procNPCancelConnection.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(fForce))
+func NPCancelConnection(lpName string, fForce bool) uint32 {
+	_lpName := win32.UTF16Ptr(lpName)
+	_fForce := win32.Bool32(fForce)
+	r1, _, _ := syscall.SyscallN(procNPCancelConnection.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(_fForce))
 	return uint32(r1)
 }
 
 // NPCancelConnection2 calls NTLANMAN!NPCancelConnection2.
-func NPCancelConnection2(lpName foundation.PWSTR, fForce foundation.BOOL, dwFlags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNPCancelConnection2.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(fForce), uintptr(dwFlags))
+func NPCancelConnection2(lpName string, fForce bool, dwFlags uint32) uint32 {
+	_lpName := win32.UTF16Ptr(lpName)
+	_fForce := win32.Bool32(fForce)
+	r1, _, _ := syscall.SyscallN(procNPCancelConnection2.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(_fForce), uintptr(dwFlags))
 	return uint32(r1)
 }
 
@@ -157,8 +165,9 @@ func NPEnumResource(hEnum foundation.HANDLE, lpcCount *uint32, lpBuffer unsafe.P
 // NPFormatNetworkName calls davclnt!NPFormatNetworkName.
 // https://learn.microsoft.com/windows/win32/api/npapi/nf-npapi-npformatnetworkname
 // Minimum OS: windows5.1.2600.
-func NPFormatNetworkName(lpRemoteName foundation.PWSTR, lpFormattedName foundation.PWSTR, lpnLength *uint32, dwFlags NETWORK_NAME_FORMAT_FLAGS, dwAveCharPerLine uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNPFormatNetworkName.Addr(), uintptr(unsafe.Pointer(lpRemoteName)), uintptr(unsafe.Pointer(lpFormattedName)), uintptr(unsafe.Pointer(lpnLength)), uintptr(dwFlags), uintptr(dwAveCharPerLine))
+func NPFormatNetworkName(lpRemoteName string, lpFormattedName foundation.PWSTR, lpnLength *uint32, dwFlags NETWORK_NAME_FORMAT_FLAGS, dwAveCharPerLine uint32) uint32 {
+	_lpRemoteName := win32.UTF16Ptr(lpRemoteName)
+	r1, _, _ := syscall.SyscallN(procNPFormatNetworkName.Addr(), uintptr(unsafe.Pointer(_lpRemoteName)), uintptr(unsafe.Pointer(lpFormattedName)), uintptr(unsafe.Pointer(lpnLength)), uintptr(dwFlags), uintptr(dwAveCharPerLine))
 	return uint32(r1)
 }
 
@@ -173,30 +182,34 @@ func NPGetCaps(ndex uint32) uint32 {
 // NPGetConnection calls davclnt!NPGetConnection.
 // https://learn.microsoft.com/windows/win32/api/npapi/nf-npapi-npgetconnection
 // Minimum OS: windows5.1.2600.
-func NPGetConnection(lpLocalName foundation.PWSTR, lpRemoteName foundation.PWSTR, lpnBufferLen *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNPGetConnection.Addr(), uintptr(unsafe.Pointer(lpLocalName)), uintptr(unsafe.Pointer(lpRemoteName)), uintptr(unsafe.Pointer(lpnBufferLen)))
+func NPGetConnection(lpLocalName string, lpRemoteName foundation.PWSTR, lpnBufferLen *uint32) uint32 {
+	_lpLocalName := win32.UTF16Ptr(lpLocalName)
+	r1, _, _ := syscall.SyscallN(procNPGetConnection.Addr(), uintptr(unsafe.Pointer(_lpLocalName)), uintptr(unsafe.Pointer(lpRemoteName)), uintptr(unsafe.Pointer(lpnBufferLen)))
 	return uint32(r1)
 }
 
 // NPGetConnection3 calls NTLANMAN!NPGetConnection3.
 // https://learn.microsoft.com/windows/win32/api/npapi/nf-npapi-npgetconnection3
 // Minimum OS: windows5.1.2600.
-func NPGetConnection3(lpLocalName foundation.PWSTR, dwLevel uint32, lpBuffer unsafe.Pointer, lpBufferSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNPGetConnection3.Addr(), uintptr(unsafe.Pointer(lpLocalName)), uintptr(dwLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpBufferSize)))
+func NPGetConnection3(lpLocalName string, dwLevel uint32, lpBuffer unsafe.Pointer, lpBufferSize *uint32) uint32 {
+	_lpLocalName := win32.UTF16Ptr(lpLocalName)
+	r1, _, _ := syscall.SyscallN(procNPGetConnection3.Addr(), uintptr(unsafe.Pointer(_lpLocalName)), uintptr(dwLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpBufferSize)))
 	return uint32(r1)
 }
 
 // NPGetConnectionPerformance calls NTLANMAN!NPGetConnectionPerformance.
 // https://learn.microsoft.com/windows/win32/api/npapi/nf-npapi-npgetconnectionperformance
 // Minimum OS: windows5.1.2600.
-func NPGetConnectionPerformance(lpRemoteName foundation.PWSTR, lpNetConnectInfo *NETCONNECTINFOSTRUCT) uint32 {
-	r1, _, _ := syscall.SyscallN(procNPGetConnectionPerformance.Addr(), uintptr(unsafe.Pointer(lpRemoteName)), uintptr(unsafe.Pointer(lpNetConnectInfo)))
+func NPGetConnectionPerformance(lpRemoteName string, lpNetConnectInfo *NETCONNECTINFOSTRUCT) uint32 {
+	_lpRemoteName := win32.UTF16Ptr(lpRemoteName)
+	r1, _, _ := syscall.SyscallN(procNPGetConnectionPerformance.Addr(), uintptr(unsafe.Pointer(_lpRemoteName)), uintptr(unsafe.Pointer(lpNetConnectInfo)))
 	return uint32(r1)
 }
 
 // NPGetPersistentUseOptionsForConnection calls NTLANMAN!NPGetPersistentUseOptionsForConnection.
-func NPGetPersistentUseOptionsForConnection(lpRemotePath foundation.PWSTR, lpReadUseOptions *byte, cbReadUseOptions uint32, lpWriteUseOptions *byte, lpSizeWriteUseOptions *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNPGetPersistentUseOptionsForConnection.Addr(), uintptr(unsafe.Pointer(lpRemotePath)), uintptr(unsafe.Pointer(lpReadUseOptions)), uintptr(cbReadUseOptions), uintptr(unsafe.Pointer(lpWriteUseOptions)), uintptr(unsafe.Pointer(lpSizeWriteUseOptions)))
+func NPGetPersistentUseOptionsForConnection(lpRemotePath string, lpReadUseOptions *byte, cbReadUseOptions uint32, lpWriteUseOptions *byte, lpSizeWriteUseOptions *uint32) uint32 {
+	_lpRemotePath := win32.UTF16Ptr(lpRemotePath)
+	r1, _, _ := syscall.SyscallN(procNPGetPersistentUseOptionsForConnection.Addr(), uintptr(unsafe.Pointer(_lpRemotePath)), uintptr(unsafe.Pointer(lpReadUseOptions)), uintptr(cbReadUseOptions), uintptr(unsafe.Pointer(lpWriteUseOptions)), uintptr(unsafe.Pointer(lpSizeWriteUseOptions)))
 	return uint32(r1)
 }
 
@@ -219,16 +232,18 @@ func NPGetResourceParent(lpNetResource *NETRESOURCEW, lpBuffer unsafe.Pointer, l
 // NPGetUniversalName calls davclnt!NPGetUniversalName.
 // https://learn.microsoft.com/windows/win32/api/npapi/nf-npapi-npgetuniversalname
 // Minimum OS: windows5.1.2600.
-func NPGetUniversalName(lpLocalPath foundation.PWSTR, dwInfoLevel UNC_INFO_LEVEL, lpBuffer unsafe.Pointer, lpBufferSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNPGetUniversalName.Addr(), uintptr(unsafe.Pointer(lpLocalPath)), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpBufferSize)))
+func NPGetUniversalName(lpLocalPath string, dwInfoLevel UNC_INFO_LEVEL, lpBuffer unsafe.Pointer, lpBufferSize *uint32) uint32 {
+	_lpLocalPath := win32.UTF16Ptr(lpLocalPath)
+	r1, _, _ := syscall.SyscallN(procNPGetUniversalName.Addr(), uintptr(unsafe.Pointer(_lpLocalPath)), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpBufferSize)))
 	return uint32(r1)
 }
 
 // NPGetUser calls davclnt!NPGetUser.
 // https://learn.microsoft.com/windows/win32/api/npapi/nf-npapi-npgetuser
 // Minimum OS: windows5.1.2600.
-func NPGetUser(lpName foundation.PWSTR, lpUserName foundation.PWSTR, lpnBufferLen *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNPGetUser.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpUserName)), uintptr(unsafe.Pointer(lpnBufferLen)))
+func NPGetUser(lpName string, lpUserName foundation.PWSTR, lpnBufferLen *uint32) uint32 {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, _ := syscall.SyscallN(procNPGetUser.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(lpUserName)), uintptr(unsafe.Pointer(lpnBufferLen)))
 	return uint32(r1)
 }
 
@@ -240,6 +255,27 @@ func NPOpenEnum(dwScope uint32, dwType uint32, dwUsage uint32, lpNetResource *NE
 	return uint32(r1)
 }
 
+// WNetAddConnection calls MPR!WNetAddConnectionW.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetaddconnectionw
+// Minimum OS: windows5.0.
+func WNetAddConnection(lpRemoteName string, lpPassword string, lpLocalName string) foundation.WIN32_ERROR {
+	_lpRemoteName := win32.UTF16Ptr(lpRemoteName)
+	_lpPassword := win32.UTF16Ptr(lpPassword)
+	_lpLocalName := win32.UTF16Ptr(lpLocalName)
+	r1, _, _ := syscall.SyscallN(procWNetAddConnection.Addr(), uintptr(unsafe.Pointer(_lpRemoteName)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(_lpLocalName)))
+	return foundation.WIN32_ERROR(r1)
+}
+
+// WNetAddConnection2 calls MPR!WNetAddConnection2W.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetaddconnection2w
+// Minimum OS: windows5.0.
+func WNetAddConnection2(lpNetResource *NETRESOURCEW, lpPassword string, lpUserName string, dwFlags NET_CONNECT_FLAGS) foundation.WIN32_ERROR {
+	_lpPassword := win32.UTF16Ptr(lpPassword)
+	_lpUserName := win32.UTF16Ptr(lpUserName)
+	r1, _, _ := syscall.SyscallN(procWNetAddConnection2.Addr(), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(_lpUserName)), uintptr(dwFlags))
+	return foundation.WIN32_ERROR(r1)
+}
+
 // WNetAddConnection2A calls MPR!WNetAddConnection2A.
 // https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetaddconnection2a
 // Minimum OS: windows5.0.
@@ -248,11 +284,13 @@ func WNetAddConnection2A(lpNetResource *NETRESOURCEA, lpPassword foundation.PSTR
 	return foundation.WIN32_ERROR(r1)
 }
 
-// WNetAddConnection2W calls MPR!WNetAddConnection2W.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetaddconnection2w
+// WNetAddConnection3 calls MPR!WNetAddConnection3W.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetaddconnection3w
 // Minimum OS: windows5.0.
-func WNetAddConnection2W(lpNetResource *NETRESOURCEW, lpPassword foundation.PWSTR, lpUserName foundation.PWSTR, dwFlags NET_CONNECT_FLAGS) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetAddConnection2W.Addr(), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lpPassword)), uintptr(unsafe.Pointer(lpUserName)), uintptr(dwFlags))
+func WNetAddConnection3(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lpPassword string, lpUserName string, dwFlags NET_CONNECT_FLAGS) foundation.WIN32_ERROR {
+	_lpPassword := win32.UTF16Ptr(lpPassword)
+	_lpUserName := win32.UTF16Ptr(lpUserName)
+	r1, _, _ := syscall.SyscallN(procWNetAddConnection3.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(_lpUserName)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -264,23 +302,15 @@ func WNetAddConnection3A(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEA,
 	return foundation.WIN32_ERROR(r1)
 }
 
-// WNetAddConnection3W calls MPR!WNetAddConnection3W.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetaddconnection3w
-// Minimum OS: windows5.0.
-func WNetAddConnection3W(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lpPassword foundation.PWSTR, lpUserName foundation.PWSTR, dwFlags NET_CONNECT_FLAGS) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetAddConnection3W.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lpPassword)), uintptr(unsafe.Pointer(lpUserName)), uintptr(dwFlags))
+// WNetAddConnection4 calls MPR!WNetAddConnection4W.
+func WNetAddConnection4(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, pAuthBuffer unsafe.Pointer, cbAuthBuffer uint32, dwFlags NET_CONNECT_FLAGS, lpUseOptions *byte, cbUseOptions uint32) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procWNetAddConnection4.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(pAuthBuffer)), uintptr(cbAuthBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUseOptions)), uintptr(cbUseOptions))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // WNetAddConnection4A calls MPR!WNetAddConnection4A.
 func WNetAddConnection4A(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEA, pAuthBuffer unsafe.Pointer, cbAuthBuffer uint32, dwFlags NET_CONNECT_FLAGS, lpUseOptions *byte, cbUseOptions uint32) foundation.WIN32_ERROR {
 	r1, _, _ := syscall.SyscallN(procWNetAddConnection4A.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(pAuthBuffer)), uintptr(cbAuthBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUseOptions)), uintptr(cbUseOptions))
-	return foundation.WIN32_ERROR(r1)
-}
-
-// WNetAddConnection4W calls MPR!WNetAddConnection4W.
-func WNetAddConnection4W(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, pAuthBuffer unsafe.Pointer, cbAuthBuffer uint32, dwFlags NET_CONNECT_FLAGS, lpUseOptions *byte, cbUseOptions uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetAddConnection4W.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(pAuthBuffer)), uintptr(cbAuthBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUseOptions)), uintptr(cbUseOptions))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -292,43 +322,41 @@ func WNetAddConnectionA(lpRemoteName foundation.PSTR, lpPassword foundation.PSTR
 	return foundation.WIN32_ERROR(r1)
 }
 
-// WNetAddConnectionW calls MPR!WNetAddConnectionW.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetaddconnectionw
+// WNetCancelConnection calls MPR!WNetCancelConnectionW.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetcancelconnectionw
 // Minimum OS: windows5.0.
-func WNetAddConnectionW(lpRemoteName foundation.PWSTR, lpPassword foundation.PWSTR, lpLocalName foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetAddConnectionW.Addr(), uintptr(unsafe.Pointer(lpRemoteName)), uintptr(unsafe.Pointer(lpPassword)), uintptr(unsafe.Pointer(lpLocalName)))
+func WNetCancelConnection(lpName string, fForce bool) foundation.WIN32_ERROR {
+	_lpName := win32.UTF16Ptr(lpName)
+	_fForce := win32.Bool32(fForce)
+	r1, _, _ := syscall.SyscallN(procWNetCancelConnection.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(_fForce))
+	return foundation.WIN32_ERROR(r1)
+}
+
+// WNetCancelConnection2 calls MPR!WNetCancelConnection2W.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetcancelconnection2w
+// Minimum OS: windows5.0.
+func WNetCancelConnection2(lpName string, dwFlags NET_CONNECT_FLAGS, fForce bool) foundation.WIN32_ERROR {
+	_lpName := win32.UTF16Ptr(lpName)
+	_fForce := win32.Bool32(fForce)
+	r1, _, _ := syscall.SyscallN(procWNetCancelConnection2.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(dwFlags), uintptr(_fForce))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // WNetCancelConnection2A calls MPR!WNetCancelConnection2A.
 // https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetcancelconnection2a
 // Minimum OS: windows5.0.
-func WNetCancelConnection2A(lpName foundation.PSTR, dwFlags NET_CONNECT_FLAGS, fForce foundation.BOOL) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetCancelConnection2A.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(dwFlags), uintptr(fForce))
-	return foundation.WIN32_ERROR(r1)
-}
-
-// WNetCancelConnection2W calls MPR!WNetCancelConnection2W.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetcancelconnection2w
-// Minimum OS: windows5.0.
-func WNetCancelConnection2W(lpName foundation.PWSTR, dwFlags NET_CONNECT_FLAGS, fForce foundation.BOOL) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetCancelConnection2W.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(dwFlags), uintptr(fForce))
+func WNetCancelConnection2A(lpName foundation.PSTR, dwFlags NET_CONNECT_FLAGS, fForce bool) foundation.WIN32_ERROR {
+	_fForce := win32.Bool32(fForce)
+	r1, _, _ := syscall.SyscallN(procWNetCancelConnection2A.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(dwFlags), uintptr(_fForce))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // WNetCancelConnectionA calls MPR!WNetCancelConnectionA.
 // https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetcancelconnectiona
 // Minimum OS: windows5.0.
-func WNetCancelConnectionA(lpName foundation.PSTR, fForce foundation.BOOL) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetCancelConnectionA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(fForce))
-	return foundation.WIN32_ERROR(r1)
-}
-
-// WNetCancelConnectionW calls MPR!WNetCancelConnectionW.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetcancelconnectionw
-// Minimum OS: windows5.0.
-func WNetCancelConnectionW(lpName foundation.PWSTR, fForce foundation.BOOL) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetCancelConnectionW.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(fForce))
+func WNetCancelConnectionA(lpName foundation.PSTR, fForce bool) foundation.WIN32_ERROR {
+	_fForce := win32.Bool32(fForce)
+	r1, _, _ := syscall.SyscallN(procWNetCancelConnectionA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(_fForce))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -348,19 +376,19 @@ func WNetConnectionDialog(hwnd foundation.HWND, dwType uint32) foundation.WIN32_
 	return foundation.WIN32_ERROR(r1)
 }
 
+// WNetConnectionDialog1 calls MPR!WNetConnectionDialog1W.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetconnectiondialog1w
+// Minimum OS: windows5.0.
+func WNetConnectionDialog1(lpConnDlgStruct *CONNECTDLGSTRUCTW) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procWNetConnectionDialog1.Addr(), uintptr(unsafe.Pointer(lpConnDlgStruct)))
+	return foundation.WIN32_ERROR(r1)
+}
+
 // WNetConnectionDialog1A calls MPR!WNetConnectionDialog1A.
 // https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetconnectiondialog1a
 // Minimum OS: windows5.0.
 func WNetConnectionDialog1A(lpConnDlgStruct *CONNECTDLGSTRUCTA) foundation.WIN32_ERROR {
 	r1, _, _ := syscall.SyscallN(procWNetConnectionDialog1A.Addr(), uintptr(unsafe.Pointer(lpConnDlgStruct)))
-	return foundation.WIN32_ERROR(r1)
-}
-
-// WNetConnectionDialog1W calls MPR!WNetConnectionDialog1W.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetconnectiondialog1w
-// Minimum OS: windows5.0.
-func WNetConnectionDialog1W(lpConnDlgStruct *CONNECTDLGSTRUCTW) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetConnectionDialog1W.Addr(), uintptr(unsafe.Pointer(lpConnDlgStruct)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -372,6 +400,14 @@ func WNetDisconnectDialog(hwnd foundation.HWND, dwType uint32) foundation.WIN32_
 	return foundation.WIN32_ERROR(r1)
 }
 
+// WNetDisconnectDialog1 calls MPR!WNetDisconnectDialog1W.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetdisconnectdialog1w
+// Minimum OS: windows5.0.
+func WNetDisconnectDialog1(lpConnDlgStruct *DISCDLGSTRUCTW) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procWNetDisconnectDialog1.Addr(), uintptr(unsafe.Pointer(lpConnDlgStruct)))
+	return foundation.WIN32_ERROR(r1)
+}
+
 // WNetDisconnectDialog1A calls MPR!WNetDisconnectDialog1A.
 // https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetdisconnectdialog1a
 // Minimum OS: windows5.0.
@@ -380,11 +416,11 @@ func WNetDisconnectDialog1A(lpConnDlgStruct *DISCDLGSTRUCTA) foundation.WIN32_ER
 	return foundation.WIN32_ERROR(r1)
 }
 
-// WNetDisconnectDialog1W calls MPR!WNetDisconnectDialog1W.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetdisconnectdialog1w
+// WNetEnumResource calls MPR!WNetEnumResourceW.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetenumresourcew
 // Minimum OS: windows5.0.
-func WNetDisconnectDialog1W(lpConnDlgStruct *DISCDLGSTRUCTW) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetDisconnectDialog1W.Addr(), uintptr(unsafe.Pointer(lpConnDlgStruct)))
+func WNetEnumResource(hEnum foundation.HANDLE, lpcCount *uint32, lpBuffer unsafe.Pointer, lpBufferSize *uint32) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procWNetEnumResource.Addr(), uintptr(hEnum), uintptr(unsafe.Pointer(lpcCount)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpBufferSize)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -396,11 +432,12 @@ func WNetEnumResourceA(hEnum foundation.HANDLE, lpcCount *uint32, lpBuffer unsaf
 	return foundation.WIN32_ERROR(r1)
 }
 
-// WNetEnumResourceW calls MPR!WNetEnumResourceW.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetenumresourcew
+// WNetGetConnection calls MPR!WNetGetConnectionW.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetconnectionw
 // Minimum OS: windows5.0.
-func WNetEnumResourceW(hEnum foundation.HANDLE, lpcCount *uint32, lpBuffer unsafe.Pointer, lpBufferSize *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetEnumResourceW.Addr(), uintptr(hEnum), uintptr(unsafe.Pointer(lpcCount)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpBufferSize)))
+func WNetGetConnection(lpLocalName string, lpRemoteName foundation.PWSTR, lpnLength *uint32) foundation.WIN32_ERROR {
+	_lpLocalName := win32.UTF16Ptr(lpLocalName)
+	r1, _, _ := syscall.SyscallN(procWNetGetConnection.Addr(), uintptr(unsafe.Pointer(_lpLocalName)), uintptr(unsafe.Pointer(lpRemoteName)), uintptr(unsafe.Pointer(lpnLength)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -412,12 +449,15 @@ func WNetGetConnectionA(lpLocalName foundation.PSTR, lpRemoteName foundation.PST
 	return foundation.WIN32_ERROR(r1)
 }
 
-// WNetGetConnectionW calls MPR!WNetGetConnectionW.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetconnectionw
+// WNetGetLastError calls MPR!WNetGetLastErrorW.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetlasterrorw
 // Minimum OS: windows5.0.
-func WNetGetConnectionW(lpLocalName foundation.PWSTR, lpRemoteName foundation.PWSTR, lpnLength *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetGetConnectionW.Addr(), uintptr(unsafe.Pointer(lpLocalName)), uintptr(unsafe.Pointer(lpRemoteName)), uintptr(unsafe.Pointer(lpnLength)))
-	return foundation.WIN32_ERROR(r1)
+func WNetGetLastError(lpError *uint32, lpErrorBuf foundation.PWSTR, nErrorBufSize uint32, lpNameBuf foundation.PWSTR, nNameBufSize uint32) (foundation.WIN32_ERROR, error) {
+	r1, _, e1 := syscall.SyscallN(procWNetGetLastError.Addr(), uintptr(unsafe.Pointer(lpError)), uintptr(unsafe.Pointer(lpErrorBuf)), uintptr(nErrorBufSize), uintptr(unsafe.Pointer(lpNameBuf)), uintptr(nNameBufSize))
+	if e1 != 0 {
+		return foundation.WIN32_ERROR(r1), e1
+	}
+	return foundation.WIN32_ERROR(r1), nil
 }
 
 // WNetGetLastErrorA calls MPR!WNetGetLastErrorA.
@@ -431,15 +471,13 @@ func WNetGetLastErrorA(lpError *uint32, lpErrorBuf foundation.PSTR, nErrorBufSiz
 	return foundation.WIN32_ERROR(r1), nil
 }
 
-// WNetGetLastErrorW calls MPR!WNetGetLastErrorW.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetlasterrorw
+// WNetGetNetworkInformation calls MPR!WNetGetNetworkInformationW.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetnetworkinformationw
 // Minimum OS: windows5.0.
-func WNetGetLastErrorW(lpError *uint32, lpErrorBuf foundation.PWSTR, nErrorBufSize uint32, lpNameBuf foundation.PWSTR, nNameBufSize uint32) (foundation.WIN32_ERROR, error) {
-	r1, _, e1 := syscall.SyscallN(procWNetGetLastErrorW.Addr(), uintptr(unsafe.Pointer(lpError)), uintptr(unsafe.Pointer(lpErrorBuf)), uintptr(nErrorBufSize), uintptr(unsafe.Pointer(lpNameBuf)), uintptr(nNameBufSize))
-	if e1 != 0 {
-		return foundation.WIN32_ERROR(r1), e1
-	}
-	return foundation.WIN32_ERROR(r1), nil
+func WNetGetNetworkInformation(lpProvider string, lpNetInfoStruct *NETINFOSTRUCT) foundation.WIN32_ERROR {
+	_lpProvider := win32.UTF16Ptr(lpProvider)
+	r1, _, _ := syscall.SyscallN(procWNetGetNetworkInformation.Addr(), uintptr(unsafe.Pointer(_lpProvider)), uintptr(unsafe.Pointer(lpNetInfoStruct)))
+	return foundation.WIN32_ERROR(r1)
 }
 
 // WNetGetNetworkInformationA calls MPR!WNetGetNetworkInformationA.
@@ -450,11 +488,11 @@ func WNetGetNetworkInformationA(lpProvider foundation.PSTR, lpNetInfoStruct *NET
 	return foundation.WIN32_ERROR(r1)
 }
 
-// WNetGetNetworkInformationW calls MPR!WNetGetNetworkInformationW.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetnetworkinformationw
+// WNetGetProviderName calls MPR!WNetGetProviderNameW.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetprovidernamew
 // Minimum OS: windows5.0.
-func WNetGetNetworkInformationW(lpProvider foundation.PWSTR, lpNetInfoStruct *NETINFOSTRUCT) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetGetNetworkInformationW.Addr(), uintptr(unsafe.Pointer(lpProvider)), uintptr(unsafe.Pointer(lpNetInfoStruct)))
+func WNetGetProviderName(dwNetType uint32, lpProviderName foundation.PWSTR, lpBufferSize *uint32) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procWNetGetProviderName.Addr(), uintptr(dwNetType), uintptr(unsafe.Pointer(lpProviderName)), uintptr(unsafe.Pointer(lpBufferSize)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -466,11 +504,11 @@ func WNetGetProviderNameA(dwNetType uint32, lpProviderName foundation.PSTR, lpBu
 	return foundation.WIN32_ERROR(r1)
 }
 
-// WNetGetProviderNameW calls MPR!WNetGetProviderNameW.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetprovidernamew
+// WNetGetResourceInformation calls MPR!WNetGetResourceInformationW.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceinformationw
 // Minimum OS: windows5.0.
-func WNetGetProviderNameW(dwNetType uint32, lpProviderName foundation.PWSTR, lpBufferSize *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetGetProviderNameW.Addr(), uintptr(dwNetType), uintptr(unsafe.Pointer(lpProviderName)), uintptr(unsafe.Pointer(lpBufferSize)))
+func WNetGetResourceInformation(lpNetResource *NETRESOURCEW, lpBuffer unsafe.Pointer, lpcbBuffer *uint32, lplpSystem *foundation.PWSTR) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procWNetGetResourceInformation.Addr(), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpcbBuffer)), uintptr(unsafe.Pointer(lplpSystem)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -482,11 +520,11 @@ func WNetGetResourceInformationA(lpNetResource *NETRESOURCEA, lpBuffer unsafe.Po
 	return foundation.WIN32_ERROR(r1)
 }
 
-// WNetGetResourceInformationW calls MPR!WNetGetResourceInformationW.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceinformationw
+// WNetGetResourceParent calls MPR!WNetGetResourceParentW.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceparentw
 // Minimum OS: windows5.0.
-func WNetGetResourceInformationW(lpNetResource *NETRESOURCEW, lpBuffer unsafe.Pointer, lpcbBuffer *uint32, lplpSystem *foundation.PWSTR) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetGetResourceInformationW.Addr(), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpcbBuffer)), uintptr(unsafe.Pointer(lplpSystem)))
+func WNetGetResourceParent(lpNetResource *NETRESOURCEW, lpBuffer unsafe.Pointer, lpcbBuffer *uint32) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procWNetGetResourceParent.Addr(), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpcbBuffer)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -498,11 +536,12 @@ func WNetGetResourceParentA(lpNetResource *NETRESOURCEA, lpBuffer unsafe.Pointer
 	return foundation.WIN32_ERROR(r1)
 }
 
-// WNetGetResourceParentW calls MPR!WNetGetResourceParentW.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceparentw
+// WNetGetUniversalName calls MPR!WNetGetUniversalNameW.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetuniversalnamew
 // Minimum OS: windows5.0.
-func WNetGetResourceParentW(lpNetResource *NETRESOURCEW, lpBuffer unsafe.Pointer, lpcbBuffer *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetGetResourceParentW.Addr(), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpcbBuffer)))
+func WNetGetUniversalName(lpLocalPath string, dwInfoLevel UNC_INFO_LEVEL, lpBuffer unsafe.Pointer, lpBufferSize *uint32) foundation.WIN32_ERROR {
+	_lpLocalPath := win32.UTF16Ptr(lpLocalPath)
+	r1, _, _ := syscall.SyscallN(procWNetGetUniversalName.Addr(), uintptr(unsafe.Pointer(_lpLocalPath)), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpBufferSize)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -514,11 +553,12 @@ func WNetGetUniversalNameA(lpLocalPath foundation.PSTR, dwInfoLevel UNC_INFO_LEV
 	return foundation.WIN32_ERROR(r1)
 }
 
-// WNetGetUniversalNameW calls MPR!WNetGetUniversalNameW.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetuniversalnamew
+// WNetGetUser calls MPR!WNetGetUserW.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetuserw
 // Minimum OS: windows5.0.
-func WNetGetUniversalNameW(lpLocalPath foundation.PWSTR, dwInfoLevel UNC_INFO_LEVEL, lpBuffer unsafe.Pointer, lpBufferSize *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetGetUniversalNameW.Addr(), uintptr(unsafe.Pointer(lpLocalPath)), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(unsafe.Pointer(lpBufferSize)))
+func WNetGetUser(lpName string, lpUserName foundation.PWSTR, lpnLength *uint32) foundation.WIN32_ERROR {
+	_lpName := win32.UTF16Ptr(lpName)
+	r1, _, _ := syscall.SyscallN(procWNetGetUser.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(lpUserName)), uintptr(unsafe.Pointer(lpnLength)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -530,11 +570,11 @@ func WNetGetUserA(lpName foundation.PSTR, lpUserName foundation.PSTR, lpnLength 
 	return foundation.WIN32_ERROR(r1)
 }
 
-// WNetGetUserW calls MPR!WNetGetUserW.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetuserw
+// WNetOpenEnum calls MPR!WNetOpenEnumW.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetopenenumw
 // Minimum OS: windows5.0.
-func WNetGetUserW(lpName foundation.PWSTR, lpUserName foundation.PWSTR, lpnLength *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetGetUserW.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpUserName)), uintptr(unsafe.Pointer(lpnLength)))
+func WNetOpenEnum(dwScope NET_RESOURCE_SCOPE, dwType NET_RESOURCE_TYPE, dwUsage WNET_OPEN_ENUM_USAGE, lpNetResource *NETRESOURCEW, lphEnum *foundation.HANDLE) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procWNetOpenEnum.Addr(), uintptr(dwScope), uintptr(dwType), uintptr(dwUsage), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lphEnum)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -546,12 +586,12 @@ func WNetOpenEnumA(dwScope NET_RESOURCE_SCOPE, dwType NET_RESOURCE_TYPE, dwUsage
 	return foundation.WIN32_ERROR(r1)
 }
 
-// WNetOpenEnumW calls MPR!WNetOpenEnumW.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetopenenumw
-// Minimum OS: windows5.0.
-func WNetOpenEnumW(dwScope NET_RESOURCE_SCOPE, dwType NET_RESOURCE_TYPE, dwUsage WNET_OPEN_ENUM_USAGE, lpNetResource *NETRESOURCEW, lphEnum *foundation.HANDLE) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetOpenEnumW.Addr(), uintptr(dwScope), uintptr(dwType), uintptr(dwUsage), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lphEnum)))
-	return foundation.WIN32_ERROR(r1)
+// WNetSetLastError calls MPR!WNetSetLastErrorW.
+// https://learn.microsoft.com/windows/win32/api/npapi/nf-npapi-wnetsetlasterrorw
+func WNetSetLastError(err_ uint32, lpError string, lpProviders string) {
+	_lpError := win32.UTF16Ptr(lpError)
+	_lpProviders := win32.UTF16Ptr(lpProviders)
+	syscall.SyscallN(procWNetSetLastError.Addr(), uintptr(err_), uintptr(unsafe.Pointer(_lpError)), uintptr(unsafe.Pointer(_lpProviders)))
 }
 
 // WNetSetLastErrorA calls MPR!WNetSetLastErrorA.
@@ -561,10 +601,20 @@ func WNetSetLastErrorA(err_ uint32, lpError foundation.PSTR, lpProviders foundat
 	syscall.SyscallN(procWNetSetLastErrorA.Addr(), uintptr(err_), uintptr(unsafe.Pointer(lpError)), uintptr(unsafe.Pointer(lpProviders)))
 }
 
-// WNetSetLastErrorW calls MPR!WNetSetLastErrorW.
-// https://learn.microsoft.com/windows/win32/api/npapi/nf-npapi-wnetsetlasterrorw
-func WNetSetLastErrorW(err_ uint32, lpError foundation.PWSTR, lpProviders foundation.PWSTR) {
-	syscall.SyscallN(procWNetSetLastErrorW.Addr(), uintptr(err_), uintptr(unsafe.Pointer(lpError)), uintptr(unsafe.Pointer(lpProviders)))
+// WNetUseConnection calls MPR!WNetUseConnectionW.
+// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetuseconnectionw
+// Minimum OS: windows5.0.
+func WNetUseConnection(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lpPassword string, lpUserId string, dwFlags NET_CONNECT_FLAGS, lpAccessName foundation.PWSTR, lpBufferSize *uint32, lpResult *uint32) foundation.WIN32_ERROR {
+	_lpPassword := win32.UTF16Ptr(lpPassword)
+	_lpUserId := win32.UTF16Ptr(lpUserId)
+	r1, _, _ := syscall.SyscallN(procWNetUseConnection.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_lpPassword)), uintptr(unsafe.Pointer(_lpUserId)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpAccessName)), uintptr(unsafe.Pointer(lpBufferSize)), uintptr(unsafe.Pointer(lpResult)))
+	return foundation.WIN32_ERROR(r1)
+}
+
+// WNetUseConnection4 calls MPR!WNetUseConnection4W.
+func WNetUseConnection4(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, pAuthBuffer unsafe.Pointer, cbAuthBuffer uint32, dwFlags uint32, lpUseOptions *byte, cbUseOptions uint32, lpAccessName foundation.PWSTR, lpBufferSize *uint32, lpResult *uint32) foundation.WIN32_ERROR {
+	r1, _, _ := syscall.SyscallN(procWNetUseConnection4.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(pAuthBuffer)), uintptr(cbAuthBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUseOptions)), uintptr(cbUseOptions), uintptr(unsafe.Pointer(lpAccessName)), uintptr(unsafe.Pointer(lpBufferSize)), uintptr(unsafe.Pointer(lpResult)))
+	return foundation.WIN32_ERROR(r1)
 }
 
 // WNetUseConnection4A calls MPR!WNetUseConnection4A.
@@ -573,24 +623,10 @@ func WNetUseConnection4A(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEA,
 	return foundation.WIN32_ERROR(r1)
 }
 
-// WNetUseConnection4W calls MPR!WNetUseConnection4W.
-func WNetUseConnection4W(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, pAuthBuffer unsafe.Pointer, cbAuthBuffer uint32, dwFlags uint32, lpUseOptions *byte, cbUseOptions uint32, lpAccessName foundation.PWSTR, lpBufferSize *uint32, lpResult *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetUseConnection4W.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(pAuthBuffer)), uintptr(cbAuthBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUseOptions)), uintptr(cbUseOptions), uintptr(unsafe.Pointer(lpAccessName)), uintptr(unsafe.Pointer(lpBufferSize)), uintptr(unsafe.Pointer(lpResult)))
-	return foundation.WIN32_ERROR(r1)
-}
-
 // WNetUseConnectionA calls MPR!WNetUseConnectionA.
 // https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetuseconnectiona
 // Minimum OS: windows5.0.
 func WNetUseConnectionA(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEA, lpPassword foundation.PSTR, lpUserId foundation.PSTR, dwFlags NET_CONNECT_FLAGS, lpAccessName foundation.PSTR, lpBufferSize *uint32, lpResult *uint32) foundation.WIN32_ERROR {
 	r1, _, _ := syscall.SyscallN(procWNetUseConnectionA.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lpPassword)), uintptr(unsafe.Pointer(lpUserId)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpAccessName)), uintptr(unsafe.Pointer(lpBufferSize)), uintptr(unsafe.Pointer(lpResult)))
-	return foundation.WIN32_ERROR(r1)
-}
-
-// WNetUseConnectionW calls MPR!WNetUseConnectionW.
-// https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetuseconnectionw
-// Minimum OS: windows5.0.
-func WNetUseConnectionW(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lpPassword foundation.PWSTR, lpUserId foundation.PWSTR, dwFlags NET_CONNECT_FLAGS, lpAccessName foundation.PWSTR, lpBufferSize *uint32, lpResult *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetUseConnectionW.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lpPassword)), uintptr(unsafe.Pointer(lpUserId)), uintptr(dwFlags), uintptr(unsafe.Pointer(lpAccessName)), uintptr(unsafe.Pointer(lpBufferSize)), uintptr(unsafe.Pointer(lpResult)))
 	return foundation.WIN32_ERROR(r1)
 }

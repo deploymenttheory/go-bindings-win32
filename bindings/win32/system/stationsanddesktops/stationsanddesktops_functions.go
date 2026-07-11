@@ -10,7 +10,6 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
-	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/security"
 	uiwindowsandmessaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/windowsandmessaging"
 )
@@ -20,38 +19,49 @@ var (
 )
 
 var (
+	procBroadcastSystemMessage    = modUSER32.NewProc("BroadcastSystemMessageW")
 	procBroadcastSystemMessageA   = modUSER32.NewProc("BroadcastSystemMessageA")
+	procBroadcastSystemMessageEx  = modUSER32.NewProc("BroadcastSystemMessageExW")
 	procBroadcastSystemMessageExA = modUSER32.NewProc("BroadcastSystemMessageExA")
-	procBroadcastSystemMessageExW = modUSER32.NewProc("BroadcastSystemMessageExW")
-	procBroadcastSystemMessageW   = modUSER32.NewProc("BroadcastSystemMessageW")
 	procCloseDesktop              = modUSER32.NewProc("CloseDesktop")
 	procCloseWindowStation        = modUSER32.NewProc("CloseWindowStation")
+	procCreateDesktop             = modUSER32.NewProc("CreateDesktopW")
 	procCreateDesktopA            = modUSER32.NewProc("CreateDesktopA")
+	procCreateDesktopEx           = modUSER32.NewProc("CreateDesktopExW")
 	procCreateDesktopExA          = modUSER32.NewProc("CreateDesktopExA")
-	procCreateDesktopExW          = modUSER32.NewProc("CreateDesktopExW")
-	procCreateDesktopW            = modUSER32.NewProc("CreateDesktopW")
+	procCreateWindowStation       = modUSER32.NewProc("CreateWindowStationW")
 	procCreateWindowStationA      = modUSER32.NewProc("CreateWindowStationA")
-	procCreateWindowStationW      = modUSER32.NewProc("CreateWindowStationW")
 	procEnumDesktopWindows        = modUSER32.NewProc("EnumDesktopWindows")
+	procEnumDesktops              = modUSER32.NewProc("EnumDesktopsW")
 	procEnumDesktopsA             = modUSER32.NewProc("EnumDesktopsA")
-	procEnumDesktopsW             = modUSER32.NewProc("EnumDesktopsW")
+	procEnumWindowStations        = modUSER32.NewProc("EnumWindowStationsW")
 	procEnumWindowStationsA       = modUSER32.NewProc("EnumWindowStationsA")
-	procEnumWindowStationsW       = modUSER32.NewProc("EnumWindowStationsW")
 	procGetProcessWindowStation   = modUSER32.NewProc("GetProcessWindowStation")
 	procGetThreadDesktop          = modUSER32.NewProc("GetThreadDesktop")
+	procGetUserObjectInformation  = modUSER32.NewProc("GetUserObjectInformationW")
 	procGetUserObjectInformationA = modUSER32.NewProc("GetUserObjectInformationA")
-	procGetUserObjectInformationW = modUSER32.NewProc("GetUserObjectInformationW")
+	procOpenDesktop               = modUSER32.NewProc("OpenDesktopW")
 	procOpenDesktopA              = modUSER32.NewProc("OpenDesktopA")
-	procOpenDesktopW              = modUSER32.NewProc("OpenDesktopW")
 	procOpenInputDesktop          = modUSER32.NewProc("OpenInputDesktop")
+	procOpenWindowStation         = modUSER32.NewProc("OpenWindowStationW")
 	procOpenWindowStationA        = modUSER32.NewProc("OpenWindowStationA")
-	procOpenWindowStationW        = modUSER32.NewProc("OpenWindowStationW")
 	procSetProcessWindowStation   = modUSER32.NewProc("SetProcessWindowStation")
 	procSetThreadDesktop          = modUSER32.NewProc("SetThreadDesktop")
+	procSetUserObjectInformation  = modUSER32.NewProc("SetUserObjectInformationW")
 	procSetUserObjectInformationA = modUSER32.NewProc("SetUserObjectInformationA")
-	procSetUserObjectInformationW = modUSER32.NewProc("SetUserObjectInformationW")
 	procSwitchDesktop             = modUSER32.NewProc("SwitchDesktop")
 )
+
+// BroadcastSystemMessage calls USER32!BroadcastSystemMessageW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-broadcastsystemmessagew
+// Minimum OS: windows5.0.
+func BroadcastSystemMessage(flags BROADCAST_SYSTEM_MESSAGE_FLAGS, lpInfo *BROADCAST_SYSTEM_MESSAGE_INFO, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procBroadcastSystemMessage.Addr(), uintptr(flags), uintptr(unsafe.Pointer(lpInfo)), uintptr(Msg), uintptr(wParam), uintptr(lParam))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
 
 // BroadcastSystemMessageA calls USER32!BroadcastSystemMessageA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-broadcastsystemmessagea
@@ -60,33 +70,22 @@ func BroadcastSystemMessageA(flags uint32, lpInfo *uint32, Msg uint32, wParam fo
 	return int32(r1)
 }
 
+// BroadcastSystemMessageEx calls USER32!BroadcastSystemMessageExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-broadcastsystemmessageexw
+// Minimum OS: windows5.1.2600.
+func BroadcastSystemMessageEx(flags BROADCAST_SYSTEM_MESSAGE_FLAGS, lpInfo *BROADCAST_SYSTEM_MESSAGE_INFO, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, pbsmInfo *BSMINFO) (int32, error) {
+	r1, _, e1 := syscall.SyscallN(procBroadcastSystemMessageEx.Addr(), uintptr(flags), uintptr(unsafe.Pointer(lpInfo)), uintptr(Msg), uintptr(wParam), uintptr(lParam), uintptr(unsafe.Pointer(pbsmInfo)))
+	if e1 != 0 {
+		return int32(r1), e1
+	}
+	return int32(r1), nil
+}
+
 // BroadcastSystemMessageExA calls USER32!BroadcastSystemMessageExA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-broadcastsystemmessageexa
 // Minimum OS: windows5.1.2600.
 func BroadcastSystemMessageExA(flags BROADCAST_SYSTEM_MESSAGE_FLAGS, lpInfo *BROADCAST_SYSTEM_MESSAGE_INFO, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, pbsmInfo *BSMINFO) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procBroadcastSystemMessageExA.Addr(), uintptr(flags), uintptr(unsafe.Pointer(lpInfo)), uintptr(Msg), uintptr(wParam), uintptr(lParam), uintptr(unsafe.Pointer(pbsmInfo)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// BroadcastSystemMessageExW calls USER32!BroadcastSystemMessageExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-broadcastsystemmessageexw
-// Minimum OS: windows5.1.2600.
-func BroadcastSystemMessageExW(flags BROADCAST_SYSTEM_MESSAGE_FLAGS, lpInfo *BROADCAST_SYSTEM_MESSAGE_INFO, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM, pbsmInfo *BSMINFO) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procBroadcastSystemMessageExW.Addr(), uintptr(flags), uintptr(unsafe.Pointer(lpInfo)), uintptr(Msg), uintptr(wParam), uintptr(lParam), uintptr(unsafe.Pointer(pbsmInfo)))
-	if e1 != 0 {
-		return int32(r1), e1
-	}
-	return int32(r1), nil
-}
-
-// BroadcastSystemMessageW calls USER32!BroadcastSystemMessageW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-broadcastsystemmessagew
-// Minimum OS: windows5.0.
-func BroadcastSystemMessageW(flags BROADCAST_SYSTEM_MESSAGE_FLAGS, lpInfo *BROADCAST_SYSTEM_MESSAGE_INFO, Msg uint32, wParam foundation.WPARAM, lParam foundation.LPARAM) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procBroadcastSystemMessageW.Addr(), uintptr(flags), uintptr(unsafe.Pointer(lpInfo)), uintptr(Msg), uintptr(wParam), uintptr(lParam))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -115,11 +114,37 @@ func CloseWindowStation(hWinSta HWINSTA) error {
 	return nil
 }
 
+// CreateDesktop calls USER32!CreateDesktopW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createdesktopw
+// Minimum OS: windows5.0.
+func CreateDesktop(lpszDesktop string, dwFlags DESKTOP_CONTROL_FLAGS, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES) (HDESK, error) {
+	_lpszDesktop := win32.UTF16Ptr(lpszDesktop)
+	r1, _, e1 := syscall.SyscallN(procCreateDesktop.Addr(), uintptr(unsafe.Pointer(_lpszDesktop)), 0, 0, uintptr(dwFlags), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpsa)))
+	ret := HDESK(r1)
+	if ret == ^HDESK(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
 // CreateDesktopA calls USER32!CreateDesktopA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createdesktopa
 // Minimum OS: windows5.0.
-func CreateDesktopA(lpszDesktop foundation.PSTR, lpszDevice foundation.PSTR, pDevmode *graphicsgdi.DEVMODEA, dwFlags DESKTOP_CONTROL_FLAGS, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES) (HDESK, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateDesktopA.Addr(), uintptr(unsafe.Pointer(lpszDesktop)), uintptr(unsafe.Pointer(lpszDevice)), uintptr(unsafe.Pointer(pDevmode)), uintptr(dwFlags), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpsa)))
+func CreateDesktopA(lpszDesktop foundation.PSTR, dwFlags DESKTOP_CONTROL_FLAGS, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES) (HDESK, error) {
+	r1, _, e1 := syscall.SyscallN(procCreateDesktopA.Addr(), uintptr(unsafe.Pointer(lpszDesktop)), 0, 0, uintptr(dwFlags), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpsa)))
+	ret := HDESK(r1)
+	if ret == ^HDESK(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// CreateDesktopEx calls USER32!CreateDesktopExW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createdesktopexw
+// Minimum OS: windows6.0.6000.
+func CreateDesktopEx(lpszDesktop string, dwFlags DESKTOP_CONTROL_FLAGS, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES, ulHeapSize uint32) (HDESK, error) {
+	_lpszDesktop := win32.UTF16Ptr(lpszDesktop)
+	r1, _, e1 := syscall.SyscallN(procCreateDesktopEx.Addr(), uintptr(unsafe.Pointer(_lpszDesktop)), 0, 0, uintptr(dwFlags), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpsa)), uintptr(ulHeapSize), 0)
 	ret := HDESK(r1)
 	if ret == ^HDESK(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -130,8 +155,8 @@ func CreateDesktopA(lpszDesktop foundation.PSTR, lpszDevice foundation.PSTR, pDe
 // CreateDesktopExA calls USER32!CreateDesktopExA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createdesktopexa
 // Minimum OS: windows6.0.6000.
-func CreateDesktopExA(lpszDesktop foundation.PSTR, lpszDevice foundation.PSTR, pDevmode *graphicsgdi.DEVMODEA, dwFlags DESKTOP_CONTROL_FLAGS, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES, ulHeapSize uint32, pvoid unsafe.Pointer) (HDESK, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateDesktopExA.Addr(), uintptr(unsafe.Pointer(lpszDesktop)), uintptr(unsafe.Pointer(lpszDevice)), uintptr(unsafe.Pointer(pDevmode)), uintptr(dwFlags), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpsa)), uintptr(ulHeapSize), uintptr(unsafe.Pointer(pvoid)))
+func CreateDesktopExA(lpszDesktop foundation.PSTR, dwFlags DESKTOP_CONTROL_FLAGS, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES, ulHeapSize uint32) (HDESK, error) {
+	r1, _, e1 := syscall.SyscallN(procCreateDesktopExA.Addr(), uintptr(unsafe.Pointer(lpszDesktop)), 0, 0, uintptr(dwFlags), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpsa)), uintptr(ulHeapSize), 0)
 	ret := HDESK(r1)
 	if ret == ^HDESK(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -139,25 +164,14 @@ func CreateDesktopExA(lpszDesktop foundation.PSTR, lpszDevice foundation.PSTR, p
 	return ret, nil
 }
 
-// CreateDesktopExW calls USER32!CreateDesktopExW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createdesktopexw
-// Minimum OS: windows6.0.6000.
-func CreateDesktopExW(lpszDesktop foundation.PWSTR, lpszDevice foundation.PWSTR, pDevmode *graphicsgdi.DEVMODEW, dwFlags DESKTOP_CONTROL_FLAGS, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES, ulHeapSize uint32, pvoid unsafe.Pointer) (HDESK, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateDesktopExW.Addr(), uintptr(unsafe.Pointer(lpszDesktop)), uintptr(unsafe.Pointer(lpszDevice)), uintptr(unsafe.Pointer(pDevmode)), uintptr(dwFlags), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpsa)), uintptr(ulHeapSize), uintptr(unsafe.Pointer(pvoid)))
-	ret := HDESK(r1)
-	if ret == ^HDESK(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// CreateDesktopW calls USER32!CreateDesktopW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createdesktopw
+// CreateWindowStation calls USER32!CreateWindowStationW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowstationw
 // Minimum OS: windows5.0.
-func CreateDesktopW(lpszDesktop foundation.PWSTR, lpszDevice foundation.PWSTR, pDevmode *graphicsgdi.DEVMODEW, dwFlags DESKTOP_CONTROL_FLAGS, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES) (HDESK, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateDesktopW.Addr(), uintptr(unsafe.Pointer(lpszDesktop)), uintptr(unsafe.Pointer(lpszDevice)), uintptr(unsafe.Pointer(pDevmode)), uintptr(dwFlags), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpsa)))
-	ret := HDESK(r1)
-	if ret == ^HDESK(0) || ret == 0 {
+func CreateWindowStation(lpwinsta string, dwFlags uint32, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES) (HWINSTA, error) {
+	_lpwinsta := win32.UTF16Ptr(lpwinsta)
+	r1, _, e1 := syscall.SyscallN(procCreateWindowStation.Addr(), uintptr(unsafe.Pointer(_lpwinsta)), uintptr(dwFlags), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpsa)))
+	ret := HWINSTA(r1)
+	if ret == ^HWINSTA(0) || ret == 0 {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
@@ -168,18 +182,6 @@ func CreateDesktopW(lpszDesktop foundation.PWSTR, lpszDevice foundation.PWSTR, p
 // Minimum OS: windows5.0.
 func CreateWindowStationA(lpwinsta foundation.PSTR, dwFlags uint32, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES) (HWINSTA, error) {
 	r1, _, e1 := syscall.SyscallN(procCreateWindowStationA.Addr(), uintptr(unsafe.Pointer(lpwinsta)), uintptr(dwFlags), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpsa)))
-	ret := HWINSTA(r1)
-	if ret == ^HWINSTA(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// CreateWindowStationW calls USER32!CreateWindowStationW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createwindowstationw
-// Minimum OS: windows5.0.
-func CreateWindowStationW(lpwinsta foundation.PWSTR, dwFlags uint32, dwDesiredAccess uint32, lpsa *security.SECURITY_ATTRIBUTES) (HWINSTA, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateWindowStationW.Addr(), uintptr(unsafe.Pointer(lpwinsta)), uintptr(dwFlags), uintptr(dwDesiredAccess), uintptr(unsafe.Pointer(lpsa)))
 	ret := HWINSTA(r1)
 	if ret == ^HWINSTA(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -198,6 +200,17 @@ func EnumDesktopWindows(hDesktop HDESK, lpfn uiwindowsandmessaging.WNDENUMPROC, 
 	return nil
 }
 
+// EnumDesktops calls USER32!EnumDesktopsW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdesktopsw
+// Minimum OS: windows5.0.
+func EnumDesktops(hwinsta HWINSTA, lpEnumFunc DESKTOPENUMPROCW, lParam foundation.LPARAM) error {
+	r1, _, e1 := syscall.SyscallN(procEnumDesktops.Addr(), uintptr(hwinsta), uintptr(lpEnumFunc), uintptr(lParam))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // EnumDesktopsA calls USER32!EnumDesktopsA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdesktopsa
 // Minimum OS: windows5.0.
@@ -209,11 +222,11 @@ func EnumDesktopsA(hwinsta HWINSTA, lpEnumFunc DESKTOPENUMPROCA, lParam foundati
 	return nil
 }
 
-// EnumDesktopsW calls USER32!EnumDesktopsW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumdesktopsw
+// EnumWindowStations calls USER32!EnumWindowStationsW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumwindowstationsw
 // Minimum OS: windows5.0.
-func EnumDesktopsW(hwinsta HWINSTA, lpEnumFunc DESKTOPENUMPROCW, lParam foundation.LPARAM) error {
-	r1, _, e1 := syscall.SyscallN(procEnumDesktopsW.Addr(), uintptr(hwinsta), uintptr(lpEnumFunc), uintptr(lParam))
+func EnumWindowStations(lpEnumFunc WINSTAENUMPROCW, lParam foundation.LPARAM) error {
+	r1, _, e1 := syscall.SyscallN(procEnumWindowStations.Addr(), uintptr(lpEnumFunc), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -225,17 +238,6 @@ func EnumDesktopsW(hwinsta HWINSTA, lpEnumFunc DESKTOPENUMPROCW, lParam foundati
 // Minimum OS: windows5.0.
 func EnumWindowStationsA(lpEnumFunc WINSTAENUMPROCA, lParam foundation.LPARAM) error {
 	r1, _, e1 := syscall.SyscallN(procEnumWindowStationsA.Addr(), uintptr(lpEnumFunc), uintptr(lParam))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// EnumWindowStationsW calls USER32!EnumWindowStationsW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-enumwindowstationsw
-// Minimum OS: windows5.0.
-func EnumWindowStationsW(lpEnumFunc WINSTAENUMPROCW, lParam foundation.LPARAM) error {
-	r1, _, e1 := syscall.SyscallN(procEnumWindowStationsW.Addr(), uintptr(lpEnumFunc), uintptr(lParam))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -266,6 +268,17 @@ func GetThreadDesktop(dwThreadId uint32) (HDESK, error) {
 	return ret, nil
 }
 
+// GetUserObjectInformation calls USER32!GetUserObjectInformationW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getuserobjectinformationw
+// Minimum OS: windows5.0.
+func GetUserObjectInformation(hObj foundation.HANDLE, nIndex USER_OBJECT_INFORMATION_INDEX, pvInfo unsafe.Pointer, nLength uint32, lpnLengthNeeded *uint32) error {
+	r1, _, e1 := syscall.SyscallN(procGetUserObjectInformation.Addr(), uintptr(hObj), uintptr(nIndex), uintptr(unsafe.Pointer(pvInfo)), uintptr(nLength), uintptr(unsafe.Pointer(lpnLengthNeeded)))
+	if r1 == 0 {
+		return win32.LastError(e1)
+	}
+	return nil
+}
+
 // GetUserObjectInformationA calls USER32!GetUserObjectInformationA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getuserobjectinformationa
 // Minimum OS: windows5.0.
@@ -277,22 +290,13 @@ func GetUserObjectInformationA(hObj foundation.HANDLE, nIndex USER_OBJECT_INFORM
 	return nil
 }
 
-// GetUserObjectInformationW calls USER32!GetUserObjectInformationW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getuserobjectinformationw
+// OpenDesktop calls USER32!OpenDesktopW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-opendesktopw
 // Minimum OS: windows5.0.
-func GetUserObjectInformationW(hObj foundation.HANDLE, nIndex USER_OBJECT_INFORMATION_INDEX, pvInfo unsafe.Pointer, nLength uint32, lpnLengthNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetUserObjectInformationW.Addr(), uintptr(hObj), uintptr(nIndex), uintptr(unsafe.Pointer(pvInfo)), uintptr(nLength), uintptr(unsafe.Pointer(lpnLengthNeeded)))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// OpenDesktopA calls USER32!OpenDesktopA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-opendesktopa
-// Minimum OS: windows5.0.
-func OpenDesktopA(lpszDesktop foundation.PSTR, dwFlags DESKTOP_CONTROL_FLAGS, fInherit foundation.BOOL, dwDesiredAccess uint32) (HDESK, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenDesktopA.Addr(), uintptr(unsafe.Pointer(lpszDesktop)), uintptr(dwFlags), uintptr(fInherit), uintptr(dwDesiredAccess))
+func OpenDesktop(lpszDesktop string, dwFlags DESKTOP_CONTROL_FLAGS, fInherit bool, dwDesiredAccess uint32) (HDESK, error) {
+	_lpszDesktop := win32.UTF16Ptr(lpszDesktop)
+	_fInherit := win32.Bool32(fInherit)
+	r1, _, e1 := syscall.SyscallN(procOpenDesktop.Addr(), uintptr(unsafe.Pointer(_lpszDesktop)), uintptr(dwFlags), uintptr(_fInherit), uintptr(dwDesiredAccess))
 	ret := HDESK(r1)
 	if ret == ^HDESK(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -300,11 +304,12 @@ func OpenDesktopA(lpszDesktop foundation.PSTR, dwFlags DESKTOP_CONTROL_FLAGS, fI
 	return ret, nil
 }
 
-// OpenDesktopW calls USER32!OpenDesktopW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-opendesktopw
+// OpenDesktopA calls USER32!OpenDesktopA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-opendesktopa
 // Minimum OS: windows5.0.
-func OpenDesktopW(lpszDesktop foundation.PWSTR, dwFlags DESKTOP_CONTROL_FLAGS, fInherit foundation.BOOL, dwDesiredAccess uint32) (HDESK, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenDesktopW.Addr(), uintptr(unsafe.Pointer(lpszDesktop)), uintptr(dwFlags), uintptr(fInherit), uintptr(dwDesiredAccess))
+func OpenDesktopA(lpszDesktop foundation.PSTR, dwFlags DESKTOP_CONTROL_FLAGS, fInherit bool, dwDesiredAccess uint32) (HDESK, error) {
+	_fInherit := win32.Bool32(fInherit)
+	r1, _, e1 := syscall.SyscallN(procOpenDesktopA.Addr(), uintptr(unsafe.Pointer(lpszDesktop)), uintptr(dwFlags), uintptr(_fInherit), uintptr(dwDesiredAccess))
 	ret := HDESK(r1)
 	if ret == ^HDESK(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -315,10 +320,25 @@ func OpenDesktopW(lpszDesktop foundation.PWSTR, dwFlags DESKTOP_CONTROL_FLAGS, f
 // OpenInputDesktop calls USER32!OpenInputDesktop.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-openinputdesktop
 // Minimum OS: windows5.0.
-func OpenInputDesktop(dwFlags DESKTOP_CONTROL_FLAGS, fInherit foundation.BOOL, dwDesiredAccess DESKTOP_ACCESS_FLAGS) (HDESK, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenInputDesktop.Addr(), uintptr(dwFlags), uintptr(fInherit), uintptr(dwDesiredAccess))
+func OpenInputDesktop(dwFlags DESKTOP_CONTROL_FLAGS, fInherit bool, dwDesiredAccess DESKTOP_ACCESS_FLAGS) (HDESK, error) {
+	_fInherit := win32.Bool32(fInherit)
+	r1, _, e1 := syscall.SyscallN(procOpenInputDesktop.Addr(), uintptr(dwFlags), uintptr(_fInherit), uintptr(dwDesiredAccess))
 	ret := HDESK(r1)
 	if ret == ^HDESK(0) || ret == 0 {
+		return ret, win32.LastError(e1)
+	}
+	return ret, nil
+}
+
+// OpenWindowStation calls USER32!OpenWindowStationW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-openwindowstationw
+// Minimum OS: windows5.0.
+func OpenWindowStation(lpszWinSta string, fInherit bool, dwDesiredAccess uint32) (HWINSTA, error) {
+	_lpszWinSta := win32.UTF16Ptr(lpszWinSta)
+	_fInherit := win32.Bool32(fInherit)
+	r1, _, e1 := syscall.SyscallN(procOpenWindowStation.Addr(), uintptr(unsafe.Pointer(_lpszWinSta)), uintptr(_fInherit), uintptr(dwDesiredAccess))
+	ret := HWINSTA(r1)
+	if ret == ^HWINSTA(0) || ret == 0 {
 		return ret, win32.LastError(e1)
 	}
 	return ret, nil
@@ -327,20 +347,9 @@ func OpenInputDesktop(dwFlags DESKTOP_CONTROL_FLAGS, fInherit foundation.BOOL, d
 // OpenWindowStationA calls USER32!OpenWindowStationA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-openwindowstationa
 // Minimum OS: windows5.0.
-func OpenWindowStationA(lpszWinSta foundation.PSTR, fInherit foundation.BOOL, dwDesiredAccess uint32) (HWINSTA, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenWindowStationA.Addr(), uintptr(unsafe.Pointer(lpszWinSta)), uintptr(fInherit), uintptr(dwDesiredAccess))
-	ret := HWINSTA(r1)
-	if ret == ^HWINSTA(0) || ret == 0 {
-		return ret, win32.LastError(e1)
-	}
-	return ret, nil
-}
-
-// OpenWindowStationW calls USER32!OpenWindowStationW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-openwindowstationw
-// Minimum OS: windows5.0.
-func OpenWindowStationW(lpszWinSta foundation.PWSTR, fInherit foundation.BOOL, dwDesiredAccess uint32) (HWINSTA, error) {
-	r1, _, e1 := syscall.SyscallN(procOpenWindowStationW.Addr(), uintptr(unsafe.Pointer(lpszWinSta)), uintptr(fInherit), uintptr(dwDesiredAccess))
+func OpenWindowStationA(lpszWinSta foundation.PSTR, fInherit bool, dwDesiredAccess uint32) (HWINSTA, error) {
+	_fInherit := win32.Bool32(fInherit)
+	r1, _, e1 := syscall.SyscallN(procOpenWindowStationA.Addr(), uintptr(unsafe.Pointer(lpszWinSta)), uintptr(_fInherit), uintptr(dwDesiredAccess))
 	ret := HWINSTA(r1)
 	if ret == ^HWINSTA(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -370,22 +379,22 @@ func SetThreadDesktop(hDesktop HDESK) error {
 	return nil
 }
 
-// SetUserObjectInformationA calls USER32!SetUserObjectInformationA.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setuserobjectinformationa
+// SetUserObjectInformation calls USER32!SetUserObjectInformationW.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setuserobjectinformationw
 // Minimum OS: windows5.0.
-func SetUserObjectInformationA(hObj foundation.HANDLE, nIndex int32, pvInfo unsafe.Pointer, nLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetUserObjectInformationA.Addr(), uintptr(hObj), uintptr(nIndex), uintptr(unsafe.Pointer(pvInfo)), uintptr(nLength))
+func SetUserObjectInformation(hObj foundation.HANDLE, nIndex int32, pvInfo unsafe.Pointer, nLength uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetUserObjectInformation.Addr(), uintptr(hObj), uintptr(nIndex), uintptr(unsafe.Pointer(pvInfo)), uintptr(nLength))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
 	return nil
 }
 
-// SetUserObjectInformationW calls USER32!SetUserObjectInformationW.
-// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setuserobjectinformationw
+// SetUserObjectInformationA calls USER32!SetUserObjectInformationA.
+// https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setuserobjectinformationa
 // Minimum OS: windows5.0.
-func SetUserObjectInformationW(hObj foundation.HANDLE, nIndex int32, pvInfo unsafe.Pointer, nLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetUserObjectInformationW.Addr(), uintptr(hObj), uintptr(nIndex), uintptr(unsafe.Pointer(pvInfo)), uintptr(nLength))
+func SetUserObjectInformationA(hObj foundation.HANDLE, nIndex int32, pvInfo unsafe.Pointer, nLength uint32) error {
+	r1, _, e1 := syscall.SyscallN(procSetUserObjectInformationA.Addr(), uintptr(hObj), uintptr(nIndex), uintptr(unsafe.Pointer(pvInfo)), uintptr(nLength))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

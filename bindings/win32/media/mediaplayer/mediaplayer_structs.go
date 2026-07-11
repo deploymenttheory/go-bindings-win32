@@ -38,5 +38,21 @@ type WMPLib struct {
 type WMPRemoteMediaServices struct {
 }
 
+// WMP_WMDM_METADATA_ROUND_TRIP_DEVICE2PC: https://learn.microsoft.com/windows/win32/api/wmpdevices/ns-wmpdevices-wmp_wmdm_metadata_round_trip_device2pc
+// WMP_WMDM_METADATA_ROUND_TRIP_DEVICE2PC is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WMP_WMDM_METADATA_ROUND_TRIP_DEVICE2PC struct {
+	Data [22]byte
+}
+
+// WMP_WMDM_METADATA_ROUND_TRIP_PC2DEVICE: https://learn.microsoft.com/windows/win32/api/wmpdevices/ns-wmpdevices-wmp_wmdm_metadata_round_trip_pc2device
+// WMP_WMDM_METADATA_ROUND_TRIP_PC2DEVICE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WMP_WMDM_METADATA_ROUND_TRIP_PC2DEVICE struct {
+	Data [8]byte
+}
+
 type WindowsMediaPlayer struct {
 }

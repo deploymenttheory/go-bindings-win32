@@ -40,6 +40,48 @@ type DRV_VERSION struct {
 	Internal uint32
 }
 
+// EUSB2_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type EUSB2_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR struct {
+	Data [8]byte
+}
+
+// HCD_ISO_STAT_COUNTERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type HCD_ISO_STAT_COUNTERS struct {
+	Data [72]byte
+}
+
+// HCD_STAT_COUNTERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type HCD_STAT_COUNTERS struct {
+	Data [24]byte
+}
+
+// HCD_STAT_INFORMATION_1 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type HCD_STAT_INFORMATION_1 struct {
+	Data [44]byte
+}
+
+// HCD_STAT_INFORMATION_2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type HCD_STAT_INFORMATION_2 struct {
+	Data [120]byte
+}
+
+// HUB_DEVICE_CONFIG_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type HUB_DEVICE_CONFIG_INFO struct {
+	Data [204]byte
+}
+
 type IO_BLOCK struct {
 	UOffset uint32
 	ULength uint32
@@ -71,6 +113,34 @@ type OS_STRING struct {
 	Anonymous       OS_STRING_Anonymous_e__Union
 }
 
+// PACKET_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PACKET_PARAMETERS struct {
+	Data [32]byte
+}
+
+// RAW_RESET_PORT_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RAW_RESET_PORT_PARAMETERS struct {
+	Data [4]byte
+}
+
+// RAW_ROOTPORT_FEATURE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RAW_ROOTPORT_FEATURE struct {
+	Data [6]byte
+}
+
+// RAW_ROOTPORT_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RAW_ROOTPORT_PARAMETERS struct {
+	Data [4]byte
+}
+
 // URB_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type URB_Anonymous_e__Union struct {
@@ -81,6 +151,20 @@ type URB struct {
 	Anonymous URB_Anonymous_e__Union
 }
 
+// USB4_HRD_DEBUG_READ_CONFIGURATION_SPACE_INPUT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB4_HRD_DEBUG_READ_CONFIGURATION_SPACE_INPUT struct {
+	Data [21]byte
+}
+
+// USB4_HRD_DEBUG_READ_CONFIGURATION_SPACE_OUTPUT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB4_HRD_DEBUG_READ_CONFIGURATION_SPACE_OUTPUT struct {
+	Data [244]byte
+}
+
 type USB4_HRD_DEBUG_ROUTE_STRING struct {
 	Depth byte
 	Route [7]byte
@@ -89,7 +173,21 @@ type USB4_HRD_DEBUG_ROUTE_STRING struct {
 type USBD_DEVICE_INFORMATION struct {
 	OffsetNext       uint32
 	UsbdDeviceHandle unsafe.Pointer
-	DeviceDescriptor [18]byte
+	DeviceDescriptor USB_DEVICE_DESCRIPTOR
+}
+
+// USBD_ENDPOINT_OFFLOAD_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USBD_ENDPOINT_OFFLOAD_INFORMATION struct {
+	Data [130]byte
+}
+
+// USBD_ENDPOINT_OFFLOAD_INFORMATION_V1 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USBD_ENDPOINT_OFFLOAD_INFORMATION_V1 struct {
+	Data [82]byte
 }
 
 type USBD_INTERFACE_INFORMATION struct {
@@ -189,7 +287,7 @@ type USBFN_NOTIFICATION struct {
 }
 
 type USBFN_PIPE_INFORMATION struct {
-	EpDesc [7]byte
+	EpDesc USB_ENDPOINT_DESCRIPTOR
 	PipeId uint32
 }
 
@@ -224,83 +322,98 @@ type USBSCAN_TIMEOUT struct {
 
 // USBUSER_BANDWIDTH_INFO_REQUEST: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usbuser_bandwidth_info_request
 type USBUSER_BANDWIDTH_INFO_REQUEST struct {
-	Header               [16]byte
-	BandwidthInformation [44]byte
+	Header               USBUSER_REQUEST_HEADER
+	BandwidthInformation USB_BANDWIDTH_INFO
 }
 
 // USBUSER_BUS_STATISTICS_0_REQUEST: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usbuser_bus_statistics_0_request
 type USBUSER_BUS_STATISTICS_0_REQUEST struct {
-	Header         [16]byte
-	BusStatistics0 [56]byte
+	Header         USBUSER_REQUEST_HEADER
+	BusStatistics0 USB_BUS_STATISTICS_0
 }
 
 type USBUSER_CLOSE_RAW_DEVICE struct {
-	Header     [16]byte
-	Parameters [4]byte
+	Header     USBUSER_REQUEST_HEADER
+	Parameters USB_CLOSE_RAW_DEVICE_PARAMETERS
 }
 
 type USBUSER_CONTROLLER_INFO_0 struct {
-	Header [16]byte
-	Info0  [24]byte
+	Header USBUSER_REQUEST_HEADER
+	Info0  USB_CONTROLLER_INFO_0
 }
 
 // USBUSER_CONTROLLER_UNICODE_NAME: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usbuser_controller_unicode_name
 type USBUSER_CONTROLLER_UNICODE_NAME struct {
-	Header      [16]byte
-	UnicodeName [6]byte
+	Header      USBUSER_REQUEST_HEADER
+	UnicodeName USB_UNICODE_NAME
 }
 
 // USBUSER_GET_DRIVER_VERSION: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usbuser_get_driver_version
 type USBUSER_GET_DRIVER_VERSION struct {
-	Header     [16]byte
-	Parameters [16]byte
+	Header     USBUSER_REQUEST_HEADER
+	Parameters USB_DRIVER_VERSION_PARAMETERS
 }
 
 type USBUSER_GET_USB2HW_VERSION struct {
-	Header     [16]byte
+	Header     USBUSER_REQUEST_HEADER
 	Parameters USB_USB2HW_VERSION_PARAMETERS
 }
 
 type USBUSER_OPEN_RAW_DEVICE struct {
-	Header     [16]byte
-	Parameters [4]byte
+	Header     USBUSER_REQUEST_HEADER
+	Parameters USB_OPEN_RAW_DEVICE_PARAMETERS
 }
 
 // USBUSER_PASS_THRU_REQUEST: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usbuser_pass_thru_request
 type USBUSER_PASS_THRU_REQUEST struct {
-	Header   [16]byte
-	PassThru [24]byte
+	Header   USBUSER_REQUEST_HEADER
+	PassThru USB_PASS_THRU_PARAMETERS
 }
 
 // USBUSER_POWER_INFO_REQUEST: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usbuser_power_info_request
 type USBUSER_POWER_INFO_REQUEST struct {
-	Header           [16]byte
-	PowerInformation [34]byte
+	Header           USBUSER_REQUEST_HEADER
+	PowerInformation USB_POWER_INFO
 }
 
 type USBUSER_RAW_RESET_ROOT_PORT struct {
-	Header     [16]byte
-	Parameters [4]byte
+	Header     USBUSER_REQUEST_HEADER
+	Parameters RAW_RESET_PORT_PARAMETERS
+}
+
+// USBUSER_REFRESH_HCT_REG is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USBUSER_REFRESH_HCT_REG struct {
+	Data [20]byte
+}
+
+// USBUSER_REQUEST_HEADER: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usbuser_request_header
+// USBUSER_REQUEST_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USBUSER_REQUEST_HEADER struct {
+	Data [16]byte
 }
 
 type USBUSER_ROOTPORT_FEATURE_REQUEST struct {
-	Header     [16]byte
-	Parameters [6]byte
+	Header     USBUSER_REQUEST_HEADER
+	Parameters RAW_ROOTPORT_FEATURE
 }
 
 type USBUSER_ROOTPORT_PARAMETERS struct {
-	Header     [16]byte
-	Parameters [4]byte
+	Header     USBUSER_REQUEST_HEADER
+	Parameters RAW_ROOTPORT_PARAMETERS
 }
 
 type USBUSER_SEND_ONE_PACKET struct {
-	Header           [16]byte
-	PacketParameters [32]byte
+	Header           USBUSER_REQUEST_HEADER
+	PacketParameters PACKET_PARAMETERS
 }
 
 type USBUSER_SEND_RAW_COMMAND struct {
-	Header     [16]byte
-	Parameters [28]byte
+	Header     USBUSER_REQUEST_HEADER
+	Parameters USB_SEND_RAW_COMMAND_PARAMETERS
 }
 
 // USB_20_PORT_CHANGE is a C union, exposed as correctly sized and aligned backing
@@ -315,6 +428,13 @@ type USB_20_PORT_STATUS struct {
 	Data [2]byte
 }
 
+// USB_30_HUB_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_30_HUB_DESCRIPTOR struct {
+	Data [12]byte
+}
+
 // USB_30_PORT_CHANGE is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_30_PORT_CHANGE struct {
@@ -327,14 +447,59 @@ type USB_30_PORT_STATUS struct {
 	Data [2]byte
 }
 
+// USB_ACQUIRE_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_ACQUIRE_INFO struct {
+	Data [10]byte
+}
+
+// USB_BANDWIDTH_INFO: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usb_bandwidth_info
+// USB_BANDWIDTH_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_BANDWIDTH_INFO struct {
+	Data [44]byte
+}
+
+// USB_BOS_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_BOS_DESCRIPTOR struct {
+	Data [5]byte
+}
+
+// USB_BUS_NOTIFICATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_BUS_NOTIFICATION struct {
+	Data [16]byte
+}
+
+// USB_BUS_STATISTICS_0: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usb_bus_statistics_0
+// USB_BUS_STATISTICS_0 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_BUS_STATISTICS_0 struct {
+	Data [56]byte
+}
+
+// USB_CLOSE_RAW_DEVICE_PARAMETERS: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usb_close_raw_device_parameters
+// USB_CLOSE_RAW_DEVICE_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_CLOSE_RAW_DEVICE_PARAMETERS struct {
+	Data [4]byte
+}
+
 type USB_COMMON_DESCRIPTOR struct {
 	BLength         byte
 	BDescriptorType byte
 }
 
 type USB_COMPOSITE_DEVICE_INFO struct {
-	DeviceDescriptor          [18]byte
-	CurrentConfigDescriptor   [9]byte
+	DeviceDescriptor          USB_DEVICE_DESCRIPTOR
+	CurrentConfigDescriptor   USB_CONFIGURATION_DESCRIPTOR
 	CurrentConfigurationValue byte
 	NumberOfFunctions         byte
 	FunctionInfo              [1]USB_COMPOSITE_FUNCTION_INFO
@@ -345,6 +510,70 @@ type USB_COMPOSITE_FUNCTION_INFO struct {
 	BaseInterfaceNumber byte
 	NumberOfInterfaces  byte
 	FunctionIsIdle      foundation.BOOLEAN
+}
+
+// USB_CONFIGURATION_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_CONFIGURATION_DESCRIPTOR struct {
+	Data [9]byte
+}
+
+// USB_CONFIGURATION_POWER_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_CONFIGURATION_POWER_DESCRIPTOR struct {
+	Data [18]byte
+}
+
+// USB_CONNECTION_NOTIFICATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_CONNECTION_NOTIFICATION struct {
+	Data [24]byte
+}
+
+// USB_CONTROLLER_DEVICE_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_CONTROLLER_DEVICE_INFO struct {
+	Data [20]byte
+}
+
+// USB_CONTROLLER_INFO_0: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usb_controller_info_0
+// USB_CONTROLLER_INFO_0 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_CONTROLLER_INFO_0 struct {
+	Data [24]byte
+}
+
+// USB_CYCLE_PORT_PARAMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_CYCLE_PORT_PARAMS struct {
+	Data [8]byte
+}
+
+// USB_DEFAULT_PIPE_SETUP_PACKET is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEFAULT_PIPE_SETUP_PACKET struct {
+	Data [8]byte
+}
+
+// USB_DESCRIPTOR_REQUEST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DESCRIPTOR_REQUEST struct {
+	Data [13]byte
+}
+
+// USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_CAPABILITY_BILLBOARD_DESCRIPTOR struct {
+	Data [48]byte
 }
 
 type USB_DEVICE_CAPABILITY_CONTAINER_ID_DESCRIPTOR struct {
@@ -375,10 +604,45 @@ type USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR struct {
 	BmAttributes         USB_DEVICE_CAPABILITY_FIRMWARE_STATUS_DESCRIPTOR_bmAttributes_e__Union
 }
 
+// USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_CAPABILITY_PD_CONSUMER_PORT_DESCRIPTOR struct {
+	Data [24]byte
+}
+
+// USB_DEVICE_CAPABILITY_PLATFORM_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_CAPABILITY_PLATFORM_DESCRIPTOR struct {
+	Data [21]byte
+}
+
+// USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_CAPABILITY_POWER_DELIVERY_DESCRIPTOR struct {
+	Data [18]byte
+}
+
 // USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED struct {
 	Data [4]byte
+}
+
+// USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_USB_DESCRIPTOR struct {
+	Data [16]byte
+}
+
+// USB_DEVICE_CAPABILITY_SUPERSPEED_USB_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_CAPABILITY_SUPERSPEED_USB_DESCRIPTOR struct {
+	Data [10]byte
 }
 
 // USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union is a C union, exposed as correctly sized and aligned backing
@@ -394,10 +658,74 @@ type USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR struct {
 	BmAttributes       USB_DEVICE_CAPABILITY_USB20_EXTENSION_DESCRIPTOR_bmAttributes_e__Union
 }
 
+// USB_DEVICE_CHARACTERISTICS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_CHARACTERISTICS struct {
+	Data [24]byte
+}
+
+// USB_DEVICE_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_DESCRIPTOR struct {
+	Data [18]byte
+}
+
+// USB_DEVICE_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_INFO struct {
+	Data [1078]byte
+}
+
+// USB_DEVICE_NODE_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_NODE_INFO struct {
+	Data [1202]byte
+}
+
+// USB_DEVICE_PERFORMANCE_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_PERFORMANCE_INFO struct {
+	Data [228]byte
+}
+
+// USB_DEVICE_QUALIFIER_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_QUALIFIER_DESCRIPTOR struct {
+	Data [10]byte
+}
+
+// USB_DEVICE_STATE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DEVICE_STATE struct {
+	Data [4]byte
+}
+
 // USB_DEVICE_STATUS is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_DEVICE_STATUS struct {
 	Data [2]byte
+}
+
+// USB_DRIVER_VERSION_PARAMETERS: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usb_driver_version_parameters
+// USB_DRIVER_VERSION_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_DRIVER_VERSION_PARAMETERS struct {
+	Data [16]byte
+}
+
+// USB_ENDPOINT_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_ENDPOINT_DESCRIPTOR struct {
+	Data [7]byte
 }
 
 // USB_ENDPOINT_STATUS is a C union, exposed as correctly sized and aligned backing
@@ -406,10 +734,24 @@ type USB_ENDPOINT_STATUS struct {
 	Data [2]byte
 }
 
+// USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION struct {
+	Data [60]byte
+}
+
 // USB_FUNCTION_SUSPEND_OPTIONS is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_FUNCTION_SUSPEND_OPTIONS struct {
 	Data [1]byte
+}
+
+// USB_HCD_DRIVERKEY_NAME is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_HCD_DRIVERKEY_NAME struct {
+	Data [6]byte
 }
 
 // USB_HIGH_SPEED_MAXPACKET is a C union, exposed as correctly sized and aligned backing
@@ -422,6 +764,13 @@ type USB_HIGH_SPEED_MAXPACKET struct {
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_HUB_30_PORT_REMOTE_WAKE_MASK struct {
 	Data [1]byte
+}
+
+// USB_HUB_CAPABILITIES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_HUB_CAPABILITIES struct {
+	Data [4]byte
 }
 
 type USB_HUB_CAPABILITIES_EX struct {
@@ -440,9 +789,51 @@ type USB_HUB_CHANGE struct {
 	Data [2]byte
 }
 
+// USB_HUB_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_HUB_DESCRIPTOR struct {
+	Data [71]byte
+}
+
+// USB_HUB_DEVICE_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_HUB_DEVICE_INFO struct {
+	Data [103]byte
+}
+
+// USB_HUB_DEVICE_UXD_SETTINGS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_HUB_DEVICE_UXD_SETTINGS struct {
+	Data [68]byte
+}
+
 type USB_HUB_INFORMATION struct {
-	HubDescriptor   [71]byte
+	HubDescriptor   USB_HUB_DESCRIPTOR
 	HubIsBusPowered foundation.BOOLEAN
+}
+
+// USB_HUB_INFORMATION_EX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_HUB_INFORMATION_EX struct {
+	Data [77]byte
+}
+
+// USB_HUB_NAME is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_HUB_NAME struct {
+	Data [6]byte
+}
+
+// USB_HUB_PORT_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_HUB_PORT_INFORMATION struct {
+	Data [16]byte
 }
 
 // USB_HUB_STATUS is a C union, exposed as correctly sized and aligned backing
@@ -460,6 +851,13 @@ type USB_HUB_STATUS_AND_CHANGE struct {
 type USB_IDLE_CALLBACK_INFO struct {
 	IdleCallback USB_IDLE_CALLBACK
 	IdleContext  unsafe.Pointer
+}
+
+// USB_ID_STRING is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_ID_STRING struct {
+	Data [16]byte
 }
 
 type USB_INTERFACE_ASSOCIATION_DESCRIPTOR struct {
@@ -485,10 +883,59 @@ type USB_INTERFACE_DESCRIPTOR struct {
 	IInterface         byte
 }
 
+// USB_INTERFACE_POWER_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_INTERFACE_POWER_DESCRIPTOR struct {
+	Data [15]byte
+}
+
 // USB_INTERFACE_STATUS is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_INTERFACE_STATUS struct {
 	Data [2]byte
+}
+
+// USB_MI_PARENT_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_MI_PARENT_INFORMATION struct {
+	Data [4]byte
+}
+
+// USB_NODE_CONNECTION_ATTRIBUTES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_NODE_CONNECTION_ATTRIBUTES struct {
+	Data [12]byte
+}
+
+// USB_NODE_CONNECTION_DRIVERKEY_NAME is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_NODE_CONNECTION_DRIVERKEY_NAME struct {
+	Data [10]byte
+}
+
+// USB_NODE_CONNECTION_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_NODE_CONNECTION_INFORMATION struct {
+	Data [46]byte
+}
+
+// USB_NODE_CONNECTION_INFORMATION_EX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_NODE_CONNECTION_INFORMATION_EX struct {
+	Data [46]byte
+}
+
+// USB_NODE_CONNECTION_INFORMATION_EX_V2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_NODE_CONNECTION_INFORMATION_EX_V2 struct {
+	Data [16]byte
 }
 
 // USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS is a C union, exposed as correctly sized and aligned backing
@@ -497,10 +944,67 @@ type USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS struct {
 	Data [4]byte
 }
 
+// USB_NODE_CONNECTION_NAME is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_NODE_CONNECTION_NAME struct {
+	Data [10]byte
+}
+
+// USB_NODE_CONNECTION_SUPERSPEEDPLUS_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_NODE_CONNECTION_SUPERSPEEDPLUS_INFORMATION struct {
+	Data [24]byte
+}
+
+// USB_NODE_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_NODE_INFORMATION struct {
+	Data [76]byte
+}
+
+// USB_NOTIFICATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_NOTIFICATION struct {
+	Data [4]byte
+}
+
+// USB_OPEN_RAW_DEVICE_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_OPEN_RAW_DEVICE_PARAMETERS struct {
+	Data [4]byte
+}
+
+// USB_PASS_THRU_PARAMETERS: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usb_pass_thru_parameters
+// USB_PASS_THRU_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_PASS_THRU_PARAMETERS struct {
+	Data [24]byte
+}
+
+// USB_PIPE_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_PIPE_INFO struct {
+	Data [11]byte
+}
+
 // USB_PORT_CHANGE is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_PORT_CHANGE struct {
 	Data [2]byte
+}
+
+// USB_PORT_CONNECTOR_PROPERTIES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_PORT_CONNECTOR_PROPERTIES struct {
+	Data [18]byte
 }
 
 // USB_PORT_EXT_STATUS is a C union, exposed as correctly sized and aligned backing
@@ -533,10 +1037,67 @@ type USB_PORT_STATUS_AND_CHANGE struct {
 	Data [4]byte
 }
 
+// USB_POWER_INFO: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usb_power_info
+// USB_POWER_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_POWER_INFO struct {
+	Data [34]byte
+}
+
 // USB_PROTOCOLS is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type USB_PROTOCOLS struct {
 	Data [4]byte
+}
+
+// USB_ROOT_HUB_NAME is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_ROOT_HUB_NAME struct {
+	Data [6]byte
+}
+
+// USB_SEND_RAW_COMMAND_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_SEND_RAW_COMMAND_PARAMETERS struct {
+	Data [28]byte
+}
+
+// USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION struct {
+	Data [9]byte
+}
+
+// USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION struct {
+	Data [8]byte
+}
+
+// USB_STRING_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_STRING_DESCRIPTOR struct {
+	Data [4]byte
+}
+
+// USB_SUPERSPEEDPLUS_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_SUPERSPEEDPLUS_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR struct {
+	Data [8]byte
+}
+
+// USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_SUPERSPEED_ENDPOINT_COMPANION_DESCRIPTOR struct {
+	Data [6]byte
 }
 
 type USB_TOPOLOGY_ADDRESS struct {
@@ -547,6 +1108,42 @@ type USB_TOPOLOGY_ADDRESS struct {
 	RootHubPortNumber uint16
 	HubPortNumber     [5]uint16
 	Reserved2         uint16
+}
+
+// USB_TRANSPORT_CHARACTERISTICS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_TRANSPORT_CHARACTERISTICS struct {
+	Data [24]byte
+}
+
+// USB_TRANSPORT_CHARACTERISTICS_CHANGE_NOTIFICATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_TRANSPORT_CHARACTERISTICS_CHANGE_NOTIFICATION struct {
+	Data [32]byte
+}
+
+// USB_TRANSPORT_CHARACTERISTICS_CHANGE_REGISTRATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_TRANSPORT_CHARACTERISTICS_CHANGE_REGISTRATION struct {
+	Data [36]byte
+}
+
+// USB_TRANSPORT_CHARACTERISTICS_CHANGE_UNREGISTRATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_TRANSPORT_CHARACTERISTICS_CHANGE_UNREGISTRATION struct {
+	Data [8]byte
+}
+
+// USB_UNICODE_NAME: https://learn.microsoft.com/windows/win32/api/usbuser/ns-usbuser-usb_unicode_name
+// USB_UNICODE_NAME is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type USB_UNICODE_NAME struct {
+	Data [6]byte
 }
 
 type USB_USB2HW_VERSION_PARAMETERS struct {
@@ -568,6 +1165,14 @@ type WINUSB_PIPE_INFORMATION_EX struct {
 	MaximumPacketSize       uint16
 	Interval                byte
 	MaximumBytesPerInterval uint32
+}
+
+// WINUSB_SETUP_PACKET: https://learn.microsoft.com/windows/win32/api/winusb/ns-winusb-winusb_setup_packet
+// WINUSB_SETUP_PACKET is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WINUSB_SETUP_PACKET struct {
+	Data [8]byte
 }
 
 type URB_BULK_OR_INTERRUPT_TRANSFER struct {
@@ -775,7 +1380,7 @@ type URB_PIPE_REQUEST struct {
 
 type URB_SELECT_CONFIGURATION struct {
 	Hdr                     URB_HEADER
-	ConfigurationDescriptor unsafe.Pointer
+	ConfigurationDescriptor *USB_CONFIGURATION_DESCRIPTOR
 	ConfigurationHandle     unsafe.Pointer
 	Interface               USBD_INTERFACE_INFORMATION
 }

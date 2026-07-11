@@ -78,7 +78,7 @@ func DwmDetachMilContent(hwnd foundation.HWND) error {
 // DwmEnableBlurBehindWindow calls dwmapi!DwmEnableBlurBehindWindow.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmenableblurbehindwindow
 // Minimum OS: windows6.0.6000.
-func DwmEnableBlurBehindWindow(hWnd foundation.HWND, pBlurBehind unsafe.Pointer) error {
+func DwmEnableBlurBehindWindow(hWnd foundation.HWND, pBlurBehind *DWM_BLURBEHIND) error {
 	r1, _, _ := syscall.SyscallN(procDwmEnableBlurBehindWindow.Addr(), uintptr(hWnd), uintptr(unsafe.Pointer(pBlurBehind)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -127,7 +127,7 @@ func DwmGetColorizationColor(pcrColorization *uint32, pfOpaqueBlend *foundation.
 // DwmGetCompositionTimingInfo calls dwmapi!DwmGetCompositionTimingInfo.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmgetcompositiontiminginfo
 // Minimum OS: windows6.0.6000.
-func DwmGetCompositionTimingInfo(hwnd foundation.HWND, pTimingInfo unsafe.Pointer) error {
+func DwmGetCompositionTimingInfo(hwnd foundation.HWND, pTimingInfo *DWM_TIMING_INFO) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetCompositionTimingInfo.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pTimingInfo)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -143,7 +143,7 @@ func DwmGetGraphicsStreamClient(uIndex uint32, pClientUuid *win32.GUID) error {
 // DwmGetGraphicsStreamTransformHint calls dwmapi!DwmGetGraphicsStreamTransformHint.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmgetgraphicsstreamtransformhint
 // Minimum OS: windows6.0.6000.
-func DwmGetGraphicsStreamTransformHint(uIndex uint32, pTransform unsafe.Pointer) error {
+func DwmGetGraphicsStreamTransformHint(uIndex uint32, pTransform *MilMatrix3x2D) error {
 	r1, _, _ := syscall.SyscallN(procDwmGetGraphicsStreamTransformHint.Addr(), uintptr(uIndex), uintptr(unsafe.Pointer(pTransform)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -248,7 +248,7 @@ func DwmSetIconicThumbnail(hwnd foundation.HWND, hbmp graphicsgdi.HBITMAP, dwSIT
 // DwmSetPresentParameters calls dwmapi!DwmSetPresentParameters.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmsetpresentparameters
 // Minimum OS: windows6.0.6000.
-func DwmSetPresentParameters(hwnd foundation.HWND, pPresentParams unsafe.Pointer) error {
+func DwmSetPresentParameters(hwnd foundation.HWND, pPresentParams *DWM_PRESENT_PARAMETERS) error {
 	r1, _, _ := syscall.SyscallN(procDwmSetPresentParameters.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pPresentParams)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -288,7 +288,7 @@ func DwmUnregisterThumbnail(hThumbnailId uintptr) error {
 // DwmUpdateThumbnailProperties calls dwmapi!DwmUpdateThumbnailProperties.
 // https://learn.microsoft.com/windows/win32/api/dwmapi/nf-dwmapi-dwmupdatethumbnailproperties
 // Minimum OS: windows6.0.6000.
-func DwmUpdateThumbnailProperties(hThumbnailId uintptr, ptnProperties unsafe.Pointer) error {
+func DwmUpdateThumbnailProperties(hThumbnailId uintptr, ptnProperties *DWM_THUMBNAIL_PROPERTIES) error {
 	r1, _, _ := syscall.SyscallN(procDwmUpdateThumbnailProperties.Addr(), uintptr(hThumbnailId), uintptr(unsafe.Pointer(ptnProperties)))
 	return win32.HRESULTError(int32(r1))
 }

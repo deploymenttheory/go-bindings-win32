@@ -119,6 +119,14 @@ type WMT_PAYLOAD_FRAGMENT struct {
 	SegmentData    WMT_BUFFER_SEGMENT
 }
 
+// WMT_TIMECODE_EXTENSION_DATA: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ns-wmsdkidl-wmt_timecode_extension_data
+// WMT_TIMECODE_EXTENSION_DATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WMT_TIMECODE_EXTENSION_DATA struct {
+	Data [7]uint16
+}
+
 // WMT_VIDEOIMAGE_SAMPLE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ns-wmsdkidl-wmt_videoimage_sample
 type WMT_VIDEOIMAGE_SAMPLE struct {
 	DwMagic            uint32
@@ -246,6 +254,14 @@ type WM_CLIENT_PROPERTIES_EX struct {
 	PwszDNSName   foundation.PWSTR
 }
 
+// WM_LEAKY_BUCKET_PAIR: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ns-wmsdkidl-wm_leaky_bucket_pair
+// WM_LEAKY_BUCKET_PAIR is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WM_LEAKY_BUCKET_PAIR struct {
+	Data [8]byte
+}
+
 // WM_MEDIA_TYPE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ns-wmsdkidl-wm_media_type
 type WM_MEDIA_TYPE struct {
 	Majortype            win32.GUID
@@ -257,6 +273,14 @@ type WM_MEDIA_TYPE struct {
 	PUnk                 *systemcom.IUnknown
 	CbFormat             uint32
 	PbFormat             *byte
+}
+
+// WM_PICTURE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ns-wmsdkidl-wm_picture
+// WM_PICTURE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WM_PICTURE struct {
+	Data [29]byte
 }
 
 // WM_PORT_NUMBER_RANGE: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ns-wmsdkidl-wm_port_number_range
@@ -286,6 +310,46 @@ type WM_READER_STATISTICS struct {
 	CPacketsRecovered uint32
 	CPacketsLost      uint32
 	WQuality          uint16
+}
+
+// WM_STREAM_PRIORITY_RECORD: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ns-wmsdkidl-wm_stream_priority_record
+// WM_STREAM_PRIORITY_RECORD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WM_STREAM_PRIORITY_RECORD struct {
+	Data [3]uint16
+}
+
+// WM_STREAM_TYPE_INFO: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ns-wmsdkidl-wm_stream_type_info
+// WM_STREAM_TYPE_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WM_STREAM_TYPE_INFO struct {
+	Data [20]byte
+}
+
+// WM_SYNCHRONISED_LYRICS: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ns-wmsdkidl-wm_synchronised_lyrics
+// WM_SYNCHRONISED_LYRICS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WM_SYNCHRONISED_LYRICS struct {
+	Data [22]byte
+}
+
+// WM_USER_TEXT: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ns-wmsdkidl-wm_user_text
+// WM_USER_TEXT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WM_USER_TEXT struct {
+	Data [16]byte
+}
+
+// WM_USER_WEB_URL: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ns-wmsdkidl-wm_user_web_url
+// WM_USER_WEB_URL is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WM_USER_WEB_URL struct {
+	Data [16]byte
 }
 
 // WM_WRITER_STATISTICS: https://learn.microsoft.com/windows/win32/api/wmsdkidl/ns-wmsdkidl-wm_writer_statistics

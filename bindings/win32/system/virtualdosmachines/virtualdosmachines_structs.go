@@ -9,11 +9,25 @@ import (
 	systemkernel "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/kernel"
 )
 
+// GLOBALENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type GLOBALENTRY struct {
+	Data [13]uint32
+}
+
 type IMAGE_NOTE struct {
 	Module   [10]foundation.CHAR
 	FileName [256]foundation.CHAR
 	HModule  uint16
 	HTask    uint16
+}
+
+// MODULEENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MODULEENTRY struct {
+	Data [71]uint32
 }
 
 type SEGMENT_NOTE struct {

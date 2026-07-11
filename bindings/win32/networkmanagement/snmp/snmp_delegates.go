@@ -13,11 +13,11 @@ type PFNSNMPCLEANUPEX uintptr
 type PFNSNMPEXTENSIONCLOSE uintptr
 
 // PFNSNMPEXTENSIONINIT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, *foundation.HANDLE, unsafe.Pointer) foundation.BOOL.
+// syscall) using the shape func(uint32, *foundation.HANDLE, *AsnObjectIdentifier) foundation.BOOL.
 type PFNSNMPEXTENSIONINIT uintptr
 
 // PFNSNMPEXTENSIONINITEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer) foundation.BOOL.
+// syscall) using the shape func(*AsnObjectIdentifier) foundation.BOOL.
 type PFNSNMPEXTENSIONINITEX uintptr
 
 // PFNSNMPEXTENSIONMONITOR is a callback pointer: create one with NewCallback (package
@@ -25,15 +25,15 @@ type PFNSNMPEXTENSIONINITEX uintptr
 type PFNSNMPEXTENSIONMONITOR uintptr
 
 // PFNSNMPEXTENSIONQUERY is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(byte, unsafe.Pointer, *int32, *int32) foundation.BOOL.
+// syscall) using the shape func(byte, *SnmpVarBindList, *int32, *int32) foundation.BOOL.
 type PFNSNMPEXTENSIONQUERY uintptr
 
 // PFNSNMPEXTENSIONQUERYEX is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(uint32, uint32, unsafe.Pointer, unsafe.Pointer, *int32, *int32) foundation.BOOL.
+// syscall) using the shape func(uint32, uint32, *SnmpVarBindList, *AsnOctetString, *int32, *int32) foundation.BOOL.
 type PFNSNMPEXTENSIONQUERYEX uintptr
 
 // PFNSNMPEXTENSIONTRAP is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(unsafe.Pointer, *int32, *int32, *uint32, unsafe.Pointer) foundation.BOOL.
+// syscall) using the shape func(*AsnObjectIdentifier, *int32, *int32, *uint32, *SnmpVarBindList) foundation.BOOL.
 type PFNSNMPEXTENSIONTRAP uintptr
 
 // PFNSNMPSTARTUPEX is a callback pointer: create one with NewCallback (package

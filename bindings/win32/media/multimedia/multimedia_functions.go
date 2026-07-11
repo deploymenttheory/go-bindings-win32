@@ -1079,14 +1079,14 @@ func ICSeqCompressFrameStart(pc *COMPVARS, lpbiIn *graphicsgdi.BITMAPINFO) bool 
 // JoyGetDevCaps calls WINMM!joyGetDevCapsW.
 // https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetdevcapsw
 // Minimum OS: windows5.0.
-func JoyGetDevCaps(uJoyID uintptr, pjc unsafe.Pointer, cbjc uint32) uint32 {
+func JoyGetDevCaps(uJoyID uintptr, pjc *JOYCAPSW, cbjc uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procJoyGetDevCaps.Addr(), uintptr(uJoyID), uintptr(unsafe.Pointer(pjc)), uintptr(cbjc))
 	return uint32(r1)
 }
 
 // JoyGetDevCapsA calls WINMM!joyGetDevCapsA.
 // https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetdevcapsa
-func JoyGetDevCapsA(uJoyID uintptr, pjc unsafe.Pointer, cbjc uint32) uint32 {
+func JoyGetDevCapsA(uJoyID uintptr, pjc *JOYCAPSA, cbjc uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procJoyGetDevCapsA.Addr(), uintptr(uJoyID), uintptr(unsafe.Pointer(pjc)), uintptr(cbjc))
 	return uint32(r1)
 }
@@ -1102,7 +1102,7 @@ func JoyGetNumDevs() uint32 {
 // JoyGetPos calls WINMM!joyGetPos.
 // https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetpos
 // Minimum OS: windows5.0.
-func JoyGetPos(uJoyID uint32, pji unsafe.Pointer) uint32 {
+func JoyGetPos(uJoyID uint32, pji *JOYINFO) uint32 {
 	r1, _, _ := syscall.SyscallN(procJoyGetPos.Addr(), uintptr(uJoyID), uintptr(unsafe.Pointer(pji)))
 	return uint32(r1)
 }
@@ -1110,7 +1110,7 @@ func JoyGetPos(uJoyID uint32, pji unsafe.Pointer) uint32 {
 // JoyGetPosEx calls WINMM!joyGetPosEx.
 // https://learn.microsoft.com/windows/win32/api/joystickapi/nf-joystickapi-joygetposex
 // Minimum OS: windows5.0.
-func JoyGetPosEx(uJoyID uint32, pji unsafe.Pointer) uint32 {
+func JoyGetPosEx(uJoyID uint32, pji *JOYINFOEX) uint32 {
 	r1, _, _ := syscall.SyscallN(procJoyGetPosEx.Addr(), uintptr(uJoyID), uintptr(unsafe.Pointer(pji)))
 	return uint32(r1)
 }
@@ -1334,7 +1334,7 @@ func MmTaskYield() {
 // MmioAdvance calls WINMM!mmioAdvance.
 // https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioadvance
 // Minimum OS: windows5.0.
-func MmioAdvance(hmmio HMMIO, pmmioinfo unsafe.Pointer, fuAdvance uint32) uint32 {
+func MmioAdvance(hmmio HMMIO, pmmioinfo *MMIOINFO, fuAdvance uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMmioAdvance.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fuAdvance))
 	return uint32(r1)
 }
@@ -1342,7 +1342,7 @@ func MmioAdvance(hmmio HMMIO, pmmioinfo unsafe.Pointer, fuAdvance uint32) uint32
 // MmioAscend calls WINMM!mmioAscend.
 // https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioascend
 // Minimum OS: windows5.0.
-func MmioAscend(hmmio HMMIO, pmmcki unsafe.Pointer, fuAscend uint32) uint32 {
+func MmioAscend(hmmio HMMIO, pmmcki *MMCKINFO, fuAscend uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMmioAscend.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmcki)), uintptr(fuAscend))
 	return uint32(r1)
 }
@@ -1358,7 +1358,7 @@ func MmioClose(hmmio HMMIO, fuClose uint32) uint32 {
 // MmioCreateChunk calls WINMM!mmioCreateChunk.
 // https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiocreatechunk
 // Minimum OS: windows5.0.
-func MmioCreateChunk(hmmio HMMIO, pmmcki unsafe.Pointer, fuCreate uint32) uint32 {
+func MmioCreateChunk(hmmio HMMIO, pmmcki *MMCKINFO, fuCreate uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMmioCreateChunk.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmcki)), uintptr(fuCreate))
 	return uint32(r1)
 }
@@ -1366,7 +1366,7 @@ func MmioCreateChunk(hmmio HMMIO, pmmcki unsafe.Pointer, fuCreate uint32) uint32
 // MmioDescend calls WINMM!mmioDescend.
 // https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiodescend
 // Minimum OS: windows5.0.
-func MmioDescend(hmmio HMMIO, pmmcki unsafe.Pointer, pmmckiParent unsafe.Pointer, fuDescend uint32) uint32 {
+func MmioDescend(hmmio HMMIO, pmmcki *MMCKINFO, pmmckiParent *MMCKINFO, fuDescend uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMmioDescend.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmcki)), uintptr(unsafe.Pointer(pmmckiParent)), uintptr(fuDescend))
 	return uint32(r1)
 }
@@ -1382,7 +1382,7 @@ func MmioFlush(hmmio HMMIO, fuFlush uint32) uint32 {
 // MmioGetInfo calls WINMM!mmioGetInfo.
 // https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiogetinfo
 // Minimum OS: windows5.0.
-func MmioGetInfo(hmmio HMMIO, pmmioinfo unsafe.Pointer, fuInfo uint32) uint32 {
+func MmioGetInfo(hmmio HMMIO, pmmioinfo *MMIOINFO, fuInfo uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMmioGetInfo.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fuInfo))
 	return uint32(r1)
 }
@@ -1406,7 +1406,7 @@ func MmioInstallIOProcA(fccIOProc uint32, pIOProc LPMMIOPROC, dwFlags uint32) LP
 // MmioOpen calls WINMM!mmioOpenW.
 // https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioopenw
 // Minimum OS: windows5.0.
-func MmioOpen(pszFileName foundation.PWSTR, pmmioinfo unsafe.Pointer, fdwOpen uint32) HMMIO {
+func MmioOpen(pszFileName foundation.PWSTR, pmmioinfo *MMIOINFO, fdwOpen uint32) HMMIO {
 	r1, _, _ := syscall.SyscallN(procMmioOpen.Addr(), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fdwOpen))
 	return HMMIO(r1)
 }
@@ -1414,7 +1414,7 @@ func MmioOpen(pszFileName foundation.PWSTR, pmmioinfo unsafe.Pointer, fdwOpen ui
 // MmioOpenA calls WINMM!mmioOpenA.
 // https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmioopena
 // Minimum OS: windows5.0.
-func MmioOpenA(pszFileName foundation.PSTR, pmmioinfo unsafe.Pointer, fdwOpen uint32) HMMIO {
+func MmioOpenA(pszFileName foundation.PSTR, pmmioinfo *MMIOINFO, fdwOpen uint32) HMMIO {
 	r1, _, _ := syscall.SyscallN(procMmioOpenA.Addr(), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fdwOpen))
 	return HMMIO(r1)
 }
@@ -1430,7 +1430,7 @@ func MmioRead(hmmio HMMIO, pch *int8, cch int32) int32 {
 // MmioRename calls WINMM!mmioRenameW.
 // https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiorenamew
 // Minimum OS: windows5.0.
-func MmioRename(pszFileName string, pszNewFileName string, pmmioinfo unsafe.Pointer, fdwRename uint32) uint32 {
+func MmioRename(pszFileName string, pszNewFileName string, pmmioinfo *MMIOINFO, fdwRename uint32) uint32 {
 	_pszFileName := win32.UTF16Ptr(pszFileName)
 	_pszNewFileName := win32.UTF16Ptr(pszNewFileName)
 	r1, _, _ := syscall.SyscallN(procMmioRename.Addr(), uintptr(unsafe.Pointer(_pszFileName)), uintptr(unsafe.Pointer(_pszNewFileName)), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fdwRename))
@@ -1440,7 +1440,7 @@ func MmioRename(pszFileName string, pszNewFileName string, pmmioinfo unsafe.Poin
 // MmioRenameA calls WINMM!mmioRenameA.
 // https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiorenamea
 // Minimum OS: windows5.0.
-func MmioRenameA(pszFileName foundation.PSTR, pszNewFileName foundation.PSTR, pmmioinfo unsafe.Pointer, fdwRename uint32) uint32 {
+func MmioRenameA(pszFileName foundation.PSTR, pszNewFileName foundation.PSTR, pmmioinfo *MMIOINFO, fdwRename uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMmioRenameA.Addr(), uintptr(unsafe.Pointer(pszFileName)), uintptr(unsafe.Pointer(pszNewFileName)), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fdwRename))
 	return uint32(r1)
 }
@@ -1472,7 +1472,7 @@ func MmioSetBuffer(hmmio HMMIO, pchBuffer foundation.PSTR, cchBuffer int32, fuBu
 // MmioSetInfo calls WINMM!mmioSetInfo.
 // https://learn.microsoft.com/windows/win32/api/mmiscapi/nf-mmiscapi-mmiosetinfo
 // Minimum OS: windows5.0.
-func MmioSetInfo(hmmio HMMIO, pmmioinfo unsafe.Pointer, fuInfo uint32) uint32 {
+func MmioSetInfo(hmmio HMMIO, pmmioinfo *MMIOINFO, fuInfo uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMmioSetInfo.Addr(), uintptr(hmmio), uintptr(unsafe.Pointer(pmmioinfo)), uintptr(fuInfo))
 	return uint32(r1)
 }

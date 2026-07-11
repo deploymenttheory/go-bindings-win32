@@ -4,11 +4,15 @@
 
 package endpoints
 
+import (
+	mediaaudio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio"
+)
+
 type AUDIO_ENDPOINT_SHARED_CREATE_PARAMS struct {
 	U32Size                     uint32
 	U32TSSessionId              uint32
 	TargetEndpointConnectorType EndpointConnectorType
-	WfxDeviceFormat             [18]byte
+	WfxDeviceFormat             mediaaudio.WAVEFORMATEX
 }
 
 type DEVINTERFACE_AUDIOENDPOINTPLUGIN struct {

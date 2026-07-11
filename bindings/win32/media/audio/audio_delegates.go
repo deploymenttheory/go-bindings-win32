@@ -17,19 +17,19 @@ type ACMFILTERCHOOSEHOOKPROCA uintptr
 type ACMFILTERCHOOSEHOOKPROCW uintptr
 
 // ACMFILTERENUMCBA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, unsafe.Pointer, uintptr, uint32) foundation.BOOL.
+// syscall) using the shape func(HACMDRIVERID, *ACMFILTERDETAILSA, uintptr, uint32) foundation.BOOL.
 type ACMFILTERENUMCBA uintptr
 
 // ACMFILTERENUMCBW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, unsafe.Pointer, uintptr, uint32) foundation.BOOL.
+// syscall) using the shape func(HACMDRIVERID, *ACMFILTERDETAILSW, uintptr, uint32) foundation.BOOL.
 type ACMFILTERENUMCBW uintptr
 
 // ACMFILTERTAGENUMCBA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, unsafe.Pointer, uintptr, uint32) foundation.BOOL.
+// syscall) using the shape func(HACMDRIVERID, *ACMFILTERTAGDETAILSA, uintptr, uint32) foundation.BOOL.
 type ACMFILTERTAGENUMCBA uintptr
 
 // ACMFILTERTAGENUMCBW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, unsafe.Pointer, uintptr, uint32) foundation.BOOL.
+// syscall) using the shape func(HACMDRIVERID, *ACMFILTERTAGDETAILSW, uintptr, uint32) foundation.BOOL.
 type ACMFILTERTAGENUMCBW uintptr
 
 // ACMFORMATCHOOSEHOOKPROCA is a callback pointer: create one with NewCallback (package
@@ -41,19 +41,19 @@ type ACMFORMATCHOOSEHOOKPROCA uintptr
 type ACMFORMATCHOOSEHOOKPROCW uintptr
 
 // ACMFORMATENUMCBA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, unsafe.Pointer, uintptr, uint32) foundation.BOOL.
+// syscall) using the shape func(HACMDRIVERID, *ACMFORMATDETAILSA, uintptr, uint32) foundation.BOOL.
 type ACMFORMATENUMCBA uintptr
 
 // ACMFORMATENUMCBW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, unsafe.Pointer, uintptr, uint32) foundation.BOOL.
+// syscall) using the shape func(HACMDRIVERID, *TACMFORMATDETAILSW, uintptr, uint32) foundation.BOOL.
 type ACMFORMATENUMCBW uintptr
 
 // ACMFORMATTAGENUMCBA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, unsafe.Pointer, uintptr, uint32) foundation.BOOL.
+// syscall) using the shape func(HACMDRIVERID, *ACMFORMATTAGDETAILSA, uintptr, uint32) foundation.BOOL.
 type ACMFORMATTAGENUMCBA uintptr
 
 // ACMFORMATTAGENUMCBW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(HACMDRIVERID, unsafe.Pointer, uintptr, uint32) foundation.BOOL.
+// syscall) using the shape func(HACMDRIVERID, *ACMFORMATTAGDETAILSW, uintptr, uint32) foundation.BOOL.
 type ACMFORMATTAGENUMCBW uintptr
 
 // LPACMDRIVERPROC is a callback pointer: create one with NewCallback (package

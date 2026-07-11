@@ -14,6 +14,7 @@ import (
 	graphicsdirect3d9 "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d9"
 	graphicsdxgicommon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dxgi/common"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
+	mediaaudio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio"
 	mediadxmediaobjects "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/dxmediaobjects"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
@@ -645,7 +646,7 @@ func MFCreateAttributes(ppMFAttributes **IMFAttributes, cInitialSize uint32) err
 // MFCreateAudioMediaType calls MFPlat!MFCreateAudioMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreateaudiomediatype
 // Minimum OS: windows6.0.6000.
-func MFCreateAudioMediaType(pAudioFormat unsafe.Pointer, ppIAudioMediaType **IMFAudioMediaType) error {
+func MFCreateAudioMediaType(pAudioFormat *mediaaudio.WAVEFORMATEX, ppIAudioMediaType **IMFAudioMediaType) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateAudioMediaType.Addr(), uintptr(unsafe.Pointer(pAudioFormat)), uintptr(unsafe.Pointer(ppIAudioMediaType)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1457,7 +1458,7 @@ func MFCreateWMVEncoderActivate(pMediaType *IMFMediaType, pEncodingConfiguration
 // MFCreateWaveFormatExFromMFMediaType calls MFPlat!MFCreateWaveFormatExFromMFMediaType.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfcreatewaveformatexfrommfmediatype
 // Minimum OS: windows6.0.6000.
-func MFCreateWaveFormatExFromMFMediaType(pMFType *IMFMediaType, ppWF *unsafe.Pointer, pcbSize *uint32, Flags uint32) error {
+func MFCreateWaveFormatExFromMFMediaType(pMFType *IMFMediaType, ppWF **mediaaudio.WAVEFORMATEX, pcbSize *uint32, Flags uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFCreateWaveFormatExFromMFMediaType.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(ppWF)), uintptr(unsafe.Pointer(pcbSize)), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1755,7 +1756,7 @@ func MFInitMediaTypeFromVideoInfoHeader2(pMFType *IMFMediaType, pVIH2 *VIDEOINFO
 // MFInitMediaTypeFromWaveFormatEx calls MFPlat!MFInitMediaTypeFromWaveFormatEx.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitmediatypefromwaveformatex
 // Minimum OS: windows6.0.6000.
-func MFInitMediaTypeFromWaveFormatEx(pMFType *IMFMediaType, pWaveFormat unsafe.Pointer, cbBufSize uint32) error {
+func MFInitMediaTypeFromWaveFormatEx(pMFType *IMFMediaType, pWaveFormat *mediaaudio.WAVEFORMATEX, cbBufSize uint32) error {
 	r1, _, _ := syscall.SyscallN(procMFInitMediaTypeFromWaveFormatEx.Addr(), uintptr(unsafe.Pointer(pMFType)), uintptr(unsafe.Pointer(pWaveFormat)), uintptr(cbBufSize))
 	return win32.HRESULTError(int32(r1))
 }

@@ -664,6 +664,13 @@ type HIDD_ATTRIBUTES struct {
 	VersionNumber uint16
 }
 
+// HIDD_CONFIGURATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type HIDD_CONFIGURATION struct {
+	Data [4]uint32
+}
+
 type HIDP_BUTTON_ARRAY_DATA struct {
 	ArrayIndex uint16
 	On         foundation.BOOLEAN
@@ -724,6 +731,13 @@ type HIDP_DATA struct {
 	Anonymous HIDP_DATA_Anonymous_e__Union
 }
 
+// HIDP_EXTENDED_ATTRIBUTES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type HIDP_EXTENDED_ATTRIBUTES struct {
+	Data [4]uint32
+}
+
 // HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union struct {
@@ -732,6 +746,13 @@ type HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union struct {
 
 type HIDP_KEYBOARD_MODIFIER_STATE struct {
 	Anonymous HIDP_KEYBOARD_MODIFIER_STATE_Anonymous_e__Union
+}
+
+// HIDP_LINK_COLLECTION_NODE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type HIDP_LINK_COLLECTION_NODE struct {
+	Data [6]uint32
 }
 
 type HIDP_UNKNOWN_TOKEN struct {

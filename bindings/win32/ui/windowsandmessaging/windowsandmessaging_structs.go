@@ -298,6 +298,22 @@ type DISK_HEALTH_NOTIFICATION_DATA struct {
 	DeviceGuid win32.GUID
 }
 
+// DLGITEMTEMPLATE: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-dlgitemtemplate
+// DLGITEMTEMPLATE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DLGITEMTEMPLATE struct {
+	Data [9]uint16
+}
+
+// DLGTEMPLATE: https://learn.microsoft.com/windows/win32/api/winuser/ns-winuser-dlgtemplate
+// DLGTEMPLATE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DLGTEMPLATE struct {
+	Data [9]uint16
+}
+
 type DROPSTRUCT struct {
 	HwndSource    foundation.HWND
 	HwndSink      foundation.HWND

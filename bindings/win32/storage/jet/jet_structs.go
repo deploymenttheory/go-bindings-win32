@@ -10,6 +10,14 @@ import (
 	storagestructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/structuredstorage"
 )
 
+// JET_BKINFO: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-bkinfo-structure2
+// JET_BKINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type JET_BKINFO struct {
+	Data [24]byte
+}
+
 // JET_BKLOGTIME_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 type JET_BKLOGTIME_Anonymous1_e__Union struct {
@@ -124,7 +132,7 @@ type JET_COLUMNLIST struct {
 
 // JET_COMMIT_ID: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-commit-id-class
 type JET_COMMIT_ID struct {
-	SignLog  [28]byte
+	SignLog  JET_SIGNATURE
 	Reserved int32
 	CommitId int64
 }
@@ -167,18 +175,18 @@ type JET_CONVERT_W struct {
 type JET_DBINFOMISC struct {
 	UlVersion          uint32
 	UlUpdate           uint32
-	SignDb             [28]byte
+	SignDb             JET_SIGNATURE
 	Dbstate            uint32
-	LgposConsistent    [8]byte
+	LgposConsistent    JET_LGPOS
 	LogtimeConsistent  JET_LOGTIME
 	LogtimeAttach      JET_LOGTIME
-	LgposAttach        [8]byte
+	LgposAttach        JET_LGPOS
 	LogtimeDetach      JET_LOGTIME
-	LgposDetach        [8]byte
-	SignLog            [28]byte
-	BkinfoFullPrev     [24]byte
-	BkinfoIncPrev      [24]byte
-	BkinfoFullCur      [24]byte
+	LgposDetach        JET_LGPOS
+	SignLog            JET_SIGNATURE
+	BkinfoFullPrev     JET_BKINFO
+	BkinfoIncPrev      JET_BKINFO
+	BkinfoFullCur      JET_BKINFO
 	FShadowingDisabled uint32
 	FUpgradeDb         uint32
 	DwMajorVersion     uint32
@@ -192,18 +200,18 @@ type JET_DBINFOMISC struct {
 type JET_DBINFOMISC2 struct {
 	UlVersion            uint32
 	UlUpdate             uint32
-	SignDb               [28]byte
+	SignDb               JET_SIGNATURE
 	Dbstate              uint32
-	LgposConsistent      [8]byte
+	LgposConsistent      JET_LGPOS
 	LogtimeConsistent    JET_LOGTIME
 	LogtimeAttach        JET_LOGTIME
-	LgposAttach          [8]byte
+	LgposAttach          JET_LGPOS
 	LogtimeDetach        JET_LOGTIME
-	LgposDetach          [8]byte
-	SignLog              [28]byte
-	BkinfoFullPrev       [24]byte
-	BkinfoIncPrev        [24]byte
-	BkinfoFullCur        [24]byte
+	LgposDetach          JET_LGPOS
+	SignLog              JET_SIGNATURE
+	BkinfoFullPrev       JET_BKINFO
+	BkinfoIncPrev        JET_BKINFO
+	BkinfoFullCur        JET_BKINFO
 	FShadowingDisabled   uint32
 	FUpgradeDb           uint32
 	DwMajorVersion       uint32
@@ -232,18 +240,18 @@ type JET_DBINFOMISC2 struct {
 type JET_DBINFOMISC3 struct {
 	UlVersion            uint32
 	UlUpdate             uint32
-	SignDb               [28]byte
+	SignDb               JET_SIGNATURE
 	Dbstate              uint32
-	LgposConsistent      [8]byte
+	LgposConsistent      JET_LGPOS
 	LogtimeConsistent    JET_LOGTIME
 	LogtimeAttach        JET_LOGTIME
-	LgposAttach          [8]byte
+	LgposAttach          JET_LGPOS
 	LogtimeDetach        JET_LOGTIME
-	LgposDetach          [8]byte
-	SignLog              [28]byte
-	BkinfoFullPrev       [24]byte
-	BkinfoIncPrev        [24]byte
-	BkinfoFullCur        [24]byte
+	LgposDetach          JET_LGPOS
+	SignLog              JET_SIGNATURE
+	BkinfoFullPrev       JET_BKINFO
+	BkinfoIncPrev        JET_BKINFO
+	BkinfoFullCur        JET_BKINFO
 	FShadowingDisabled   uint32
 	FUpgradeDb           uint32
 	DwMajorVersion       uint32
@@ -273,18 +281,18 @@ type JET_DBINFOMISC3 struct {
 type JET_DBINFOMISC4 struct {
 	UlVersion            uint32
 	UlUpdate             uint32
-	SignDb               [28]byte
+	SignDb               JET_SIGNATURE
 	Dbstate              uint32
-	LgposConsistent      [8]byte
+	LgposConsistent      JET_LGPOS
 	LogtimeConsistent    JET_LOGTIME
 	LogtimeAttach        JET_LOGTIME
-	LgposAttach          [8]byte
+	LgposAttach          JET_LGPOS
 	LogtimeDetach        JET_LOGTIME
-	LgposDetach          [8]byte
-	SignLog              [28]byte
-	BkinfoFullPrev       [24]byte
-	BkinfoIncPrev        [24]byte
-	BkinfoFullCur        [24]byte
+	LgposDetach          JET_LGPOS
+	SignLog              JET_SIGNATURE
+	BkinfoFullPrev       JET_BKINFO
+	BkinfoIncPrev        JET_BKINFO
+	BkinfoFullCur        JET_BKINFO
 	FShadowingDisabled   uint32
 	FUpgradeDb           uint32
 	DwMajorVersion       uint32
@@ -308,8 +316,8 @@ type JET_DBINFOMISC4 struct {
 	LogtimeBadChecksum   JET_LOGTIME
 	UlBadChecksumOld     uint32
 	GenCommitted         uint32
-	BkinfoCopyPrev       [24]byte
-	BkinfoDiffPrev       [24]byte
+	BkinfoCopyPrev       JET_BKINFO
+	BkinfoDiffPrev       JET_BKINFO
 }
 
 // JET_DBINFOUPGRADE_Anonymous_e__Union is a C union, exposed as correctly sized and aligned backing
@@ -591,6 +599,14 @@ type JET_INSTANCE_INFO_W struct {
 	SzDatabaseSLVFileName_Obsolete **uint16
 }
 
+// JET_LGPOS: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-lgpos-structure2
+// JET_LGPOS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type JET_LGPOS struct {
+	Data [8]byte
+}
+
 type JET_LOGINFO_A struct {
 	CbSize     uint32
 	UlGenLow   uint32
@@ -767,7 +783,7 @@ type JET_RSTINFO_A struct {
 	CbStruct    uint32
 	Rgrstmap    *JET_RSTMAP_A
 	Crstmap     int32
-	LgposStop   [8]byte
+	LgposStop   JET_LGPOS
 	LogtimeStop JET_LOGTIME
 	PfnStatus   JET_PFNSTATUS
 }
@@ -776,7 +792,7 @@ type JET_RSTINFO_W struct {
 	CbStruct    uint32
 	Rgrstmap    *JET_RSTMAP_W
 	Crstmap     int32
-	LgposStop   [8]byte
+	LgposStop   JET_LGPOS
 	LogtimeStop JET_LOGTIME
 	PfnStatus   JET_PFNSTATUS
 }
@@ -821,6 +837,14 @@ type JET_SETSYSPARAM_W struct {
 	LParam  storagestructuredstorage.JET_API_PTR
 	Sz      *uint16
 	Err     int32
+}
+
+// JET_SIGNATURE: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-signature-structure
+// JET_SIGNATURE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type JET_SIGNATURE struct {
+	Data [28]byte
 }
 
 // JET_SNPROG: https://learn.microsoft.com/windows/win32/extensible-storage-engine/jet-snprog-class

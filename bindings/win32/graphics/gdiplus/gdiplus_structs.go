@@ -378,3 +378,10 @@ type TintParams struct {
 	Hue    int32
 	Amount int32
 }
+
+// WmfPlaceableFileHeader is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WmfPlaceableFileHeader struct {
+	Data [11]uint16
+}

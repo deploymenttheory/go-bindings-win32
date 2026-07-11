@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	mediaaudio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomurlmon "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/urlmon"
 	systemregistry "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/registry"
@@ -75,7 +76,7 @@ func (self *ISpAudio) SetState(NewState SPAUDIOSTATE, ullReserved uint64) error 
 }
 
 // SetFormat dispatches through ISpAudio's vtable slot 16.
-func (self *ISpAudio) SetFormat(rguidFmtId *win32.GUID, pWaveFormatEx unsafe.Pointer) error {
+func (self *ISpAudio) SetFormat(rguidFmtId *win32.GUID, pWaveFormatEx *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidFmtId)), uintptr(unsafe.Pointer(pWaveFormatEx)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -99,7 +100,7 @@ func (self *ISpAudio) GetBufferInfo(pBuffInfo *SPAUDIOBUFFERINFO) error {
 }
 
 // GetDefaultFormat dispatches through ISpAudio's vtable slot 20.
-func (self *ISpAudio) GetDefaultFormat(pFormatId *win32.GUID, ppCoMemWaveFormatEx *unsafe.Pointer) error {
+func (self *ISpAudio) GetDefaultFormat(pFormatId *win32.GUID, ppCoMemWaveFormatEx **mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormatId)), uintptr(unsafe.Pointer(ppCoMemWaveFormatEx)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1244,13 +1245,13 @@ func (self *ISpRecoContext) SetMaxAlternates(cAlternates uint32) error {
 }
 
 // SetAudioOptions dispatches through ISpRecoContext's vtable slot 18.
-func (self *ISpRecoContext) SetAudioOptions(Options SPAUDIOOPTIONS, pAudioFormatId *win32.GUID, pWaveFormatEx unsafe.Pointer) error {
+func (self *ISpRecoContext) SetAudioOptions(Options SPAUDIOOPTIONS, pAudioFormatId *win32.GUID, pWaveFormatEx *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(Options), uintptr(unsafe.Pointer(pAudioFormatId)), uintptr(unsafe.Pointer(pWaveFormatEx)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetAudioOptions dispatches through ISpRecoContext's vtable slot 19.
-func (self *ISpRecoContext) GetAudioOptions(pOptions *SPAUDIOOPTIONS, pAudioFormatId *win32.GUID, ppCoMemWFEX *unsafe.Pointer) error {
+func (self *ISpRecoContext) GetAudioOptions(pOptions *SPAUDIOOPTIONS, pAudioFormatId *win32.GUID, ppCoMemWFEX **mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOptions)), uintptr(unsafe.Pointer(pAudioFormatId)), uintptr(unsafe.Pointer(ppCoMemWFEX)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1565,7 +1566,7 @@ func (self *ISpRecoResult) Serialize(ppCoMemSerializedResult **SPSERIALIZEDRESUL
 }
 
 // ScaleAudio dispatches through ISpRecoResult's vtable slot 12.
-func (self *ISpRecoResult) ScaleAudio(pAudioFormatId *win32.GUID, pWaveFormatEx unsafe.Pointer) error {
+func (self *ISpRecoResult) ScaleAudio(pAudioFormatId *win32.GUID, pWaveFormatEx *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAudioFormatId)), uintptr(unsafe.Pointer(pWaveFormatEx)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1687,7 +1688,7 @@ func (self *ISpRecognizer) GetStatus(pStatus *SPRECOGNIZERSTATUS) error {
 }
 
 // GetFormat dispatches through ISpRecognizer's vtable slot 19.
-func (self *ISpRecognizer) GetFormat(WaveFormatType SPSTREAMFORMATTYPE, pFormatId *win32.GUID, ppCoMemWFEX *unsafe.Pointer) error {
+func (self *ISpRecognizer) GetFormat(WaveFormatType SPSTREAMFORMATTYPE, pFormatId *win32.GUID, ppCoMemWFEX **mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(WaveFormatType), uintptr(unsafe.Pointer(pFormatId)), uintptr(unsafe.Pointer(ppCoMemWFEX)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1827,13 +1828,13 @@ func (self *ISpSREngine) SetSite(pSite *ISpSREngineSite) error {
 }
 
 // GetInputAudioFormat dispatches through ISpSREngine's vtable slot 4.
-func (self *ISpSREngine) GetInputAudioFormat(pguidSourceFormatId *win32.GUID, pSourceWaveFormatEx unsafe.Pointer, pguidDesiredFormatId *win32.GUID, ppCoMemDesiredWaveFormatEx *unsafe.Pointer) error {
+func (self *ISpSREngine) GetInputAudioFormat(pguidSourceFormatId *win32.GUID, pSourceWaveFormatEx *mediaaudio.WAVEFORMATEX, pguidDesiredFormatId *win32.GUID, ppCoMemDesiredWaveFormatEx **mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidSourceFormatId)), uintptr(unsafe.Pointer(pSourceWaveFormatEx)), uintptr(unsafe.Pointer(pguidDesiredFormatId)), uintptr(unsafe.Pointer(ppCoMemDesiredWaveFormatEx)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RecognizeStream dispatches through ISpSREngine's vtable slot 5.
-func (self *ISpSREngine) RecognizeStream(rguidFmtId *win32.GUID, pWaveFormatEx unsafe.Pointer, hRequestSync foundation.HANDLE, hDataAvailable foundation.HANDLE, hExit foundation.HANDLE, fNewAudioStream bool, fRealTimeAudio bool, pAudioObjectToken *ISpObjectToken) error {
+func (self *ISpSREngine) RecognizeStream(rguidFmtId *win32.GUID, pWaveFormatEx *mediaaudio.WAVEFORMATEX, hRequestSync foundation.HANDLE, hDataAvailable foundation.HANDLE, hExit foundation.HANDLE, fNewAudioStream bool, fRealTimeAudio bool, pAudioObjectToken *ISpObjectToken) error {
 	_fNewAudioStream := win32.Bool32(fNewAudioStream)
 	_fRealTimeAudio := win32.Bool32(fRealTimeAudio)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidFmtId)), uintptr(unsafe.Pointer(pWaveFormatEx)), uintptr(hRequestSync), uintptr(hDataAvailable), uintptr(hExit), uintptr(_fNewAudioStream), uintptr(_fRealTimeAudio), uintptr(unsafe.Pointer(pAudioObjectToken)))
@@ -2313,7 +2314,7 @@ type ISpStream struct {
 var IID_ISpStream = win32.GUID{Data1: 0x12e3cca9, Data2: 0x7518, Data3: 0x44c5, Data4: [8]byte{0xa5, 0xe7, 0xba, 0x5a, 0x79, 0xcb, 0x92, 0x9e}}
 
 // SetBaseStream dispatches through ISpStream's vtable slot 15.
-func (self *ISpStream) SetBaseStream(pStream *systemcom.IStream, rguidFormat *win32.GUID, pWaveFormatEx unsafe.Pointer) error {
+func (self *ISpStream) SetBaseStream(pStream *systemcom.IStream, rguidFormat *win32.GUID, pWaveFormatEx *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStream)), uintptr(unsafe.Pointer(rguidFormat)), uintptr(unsafe.Pointer(pWaveFormatEx)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -2325,7 +2326,7 @@ func (self *ISpStream) GetBaseStream(ppStream **systemcom.IStream) error {
 }
 
 // BindToFile dispatches through ISpStream's vtable slot 17.
-func (self *ISpStream) BindToFile(pszFileName string, eMode SPFILEMODE, pFormatId *win32.GUID, pWaveFormatEx unsafe.Pointer, ullEventInterest uint64) error {
+func (self *ISpStream) BindToFile(pszFileName string, eMode SPFILEMODE, pFormatId *win32.GUID, pWaveFormatEx *mediaaudio.WAVEFORMATEX, ullEventInterest uint64) error {
 	_pszFileName := win32.UTF16Ptr(pszFileName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFileName)), uintptr(eMode), uintptr(unsafe.Pointer(pFormatId)), uintptr(unsafe.Pointer(pWaveFormatEx)), uintptr(ullEventInterest))
 	return win32.HRESULTError(int32(r1))
@@ -2346,7 +2347,7 @@ type ISpStreamFormat struct {
 var IID_ISpStreamFormat = win32.GUID{Data1: 0xbed530be, Data2: 0x2606, Data3: 0x4f4d, Data4: [8]byte{0xa1, 0xc0, 0x54, 0xc5, 0xcd, 0xa5, 0x56, 0x6f}}
 
 // GetFormat dispatches through ISpStreamFormat's vtable slot 14.
-func (self *ISpStreamFormat) GetFormat(pguidFormatId *win32.GUID, ppCoMemWaveFormatEx *unsafe.Pointer) error {
+func (self *ISpStreamFormat) GetFormat(pguidFormatId *win32.GUID, ppCoMemWaveFormatEx **mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pguidFormatId)), uintptr(unsafe.Pointer(ppCoMemWaveFormatEx)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -2374,7 +2375,7 @@ func (self *ISpStreamFormatConverter) GetBaseStream(ppStream **ISpStreamFormat) 
 }
 
 // SetFormat dispatches through ISpStreamFormatConverter's vtable slot 17.
-func (self *ISpStreamFormatConverter) SetFormat(rguidFormatIdOfConvertedStream *win32.GUID, pWaveFormatExOfConvertedStream unsafe.Pointer) error {
+func (self *ISpStreamFormatConverter) SetFormat(rguidFormatIdOfConvertedStream *win32.GUID, pWaveFormatExOfConvertedStream *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguidFormatIdOfConvertedStream)), uintptr(unsafe.Pointer(pWaveFormatExOfConvertedStream)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -2406,13 +2407,13 @@ type ISpTTSEngine struct {
 var IID_ISpTTSEngine = win32.GUID{Data1: 0xa74d7c8e, Data2: 0x4cc5, Data3: 0x4f2f, Data4: [8]byte{0xa6, 0xeb, 0x80, 0x4d, 0xee, 0x18, 0x50, 0x0e}}
 
 // Speak dispatches through ISpTTSEngine's vtable slot 3.
-func (self *ISpTTSEngine) Speak(dwSpeakFlags uint32, rguidFormatId *win32.GUID, pWaveFormatEx unsafe.Pointer, pTextFragList *SPVTEXTFRAG, pOutputSite *ISpTTSEngineSite) error {
+func (self *ISpTTSEngine) Speak(dwSpeakFlags uint32, rguidFormatId *win32.GUID, pWaveFormatEx *mediaaudio.WAVEFORMATEX, pTextFragList *SPVTEXTFRAG, pOutputSite *ISpTTSEngineSite) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwSpeakFlags), uintptr(unsafe.Pointer(rguidFormatId)), uintptr(unsafe.Pointer(pWaveFormatEx)), uintptr(unsafe.Pointer(pTextFragList)), uintptr(unsafe.Pointer(pOutputSite)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetOutputFormat dispatches through ISpTTSEngine's vtable slot 4.
-func (self *ISpTTSEngine) GetOutputFormat(pTargetFmtId *win32.GUID, pTargetWaveFormatEx unsafe.Pointer, pOutputFormatId *win32.GUID, ppCoMemOutputWaveFormatEx *unsafe.Pointer) error {
+func (self *ISpTTSEngine) GetOutputFormat(pTargetFmtId *win32.GUID, pTargetWaveFormatEx *mediaaudio.WAVEFORMATEX, pOutputFormatId *win32.GUID, ppCoMemOutputWaveFormatEx **mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTargetFmtId)), uintptr(unsafe.Pointer(pTargetWaveFormatEx)), uintptr(unsafe.Pointer(pOutputFormatId)), uintptr(unsafe.Pointer(ppCoMemOutputWaveFormatEx)))
 	return win32.HRESULTError(int32(r1))
 }

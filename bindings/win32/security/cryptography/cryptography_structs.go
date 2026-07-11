@@ -3059,6 +3059,13 @@ type EV_EXTRA_CERT_CHAIN_POLICY_STATUS struct {
 	DwIssuanceUsageIndex uint32
 }
 
+// GENERIC_XML_TOKEN is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type GENERIC_XML_TOKEN struct {
+	Data [40]byte
+}
+
 // HMAC_INFO: https://learn.microsoft.com/windows/win32/api/wincrypt/ns-wincrypt-hmac_info
 type HMAC_INFO struct {
 	HashAlgid     ALG_ID

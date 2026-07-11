@@ -8,13 +8,21 @@ import (
 	"unsafe"
 )
 
+// ENCLAVE_IDENTITY: https://learn.microsoft.com/windows/win32/api/ntenclv/ns-ntenclv-enclave_identity
+// ENCLAVE_IDENTITY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ENCLAVE_IDENTITY struct {
+	Data [152]byte
+}
+
 // ENCLAVE_INFORMATION: https://learn.microsoft.com/windows/win32/api/ntenclv/ns-ntenclv-enclave_information
 type ENCLAVE_INFORMATION struct {
 	EnclaveType uint32
 	Reserved    uint32
 	BaseAddress unsafe.Pointer
 	Size        uintptr
-	Identity    [152]byte
+	Identity    ENCLAVE_IDENTITY
 }
 
 type ENCLAVE_VBS_BASIC_KEY_REQUEST struct {
@@ -27,6 +35,13 @@ type ENCLAVE_VBS_BASIC_KEY_REQUEST struct {
 
 type PS_TRUSTLET_TKSESSION_ID struct {
 	SessionId [4]uint64
+}
+
+// TRUSTLET_BINDING_DATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TRUSTLET_BINDING_DATA struct {
+	Data [56]byte
 }
 
 type VBS_BASIC_ENCLAVE_EXCEPTION_AMD64 struct {
@@ -72,4 +87,36 @@ type VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR64 struct {
 	ExceptionEntryPoint uint64
 	ExceptionStack      uint64
 	ExceptionActive     uint32
+}
+
+// VBS_ENCLAVE_REPORT: https://learn.microsoft.com/windows/win32/api/ntenclv/ns-ntenclv-vbs_enclave_report
+// VBS_ENCLAVE_REPORT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type VBS_ENCLAVE_REPORT struct {
+	Data [224]byte
+}
+
+// VBS_ENCLAVE_REPORT_MODULE: https://learn.microsoft.com/windows/win32/api/ntenclv/ns-ntenclv-vbs_enclave_report_module
+// VBS_ENCLAVE_REPORT_MODULE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type VBS_ENCLAVE_REPORT_MODULE struct {
+	Data [110]byte
+}
+
+// VBS_ENCLAVE_REPORT_PKG_HEADER: https://learn.microsoft.com/windows/win32/api/ntenclv/ns-ntenclv-vbs_enclave_report_pkg_header
+// VBS_ENCLAVE_REPORT_PKG_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type VBS_ENCLAVE_REPORT_PKG_HEADER struct {
+	Data [24]byte
+}
+
+// VBS_ENCLAVE_REPORT_VARDATA_HEADER: https://learn.microsoft.com/windows/win32/api/ntenclv/ns-ntenclv-vbs_enclave_report_vardata_header
+// VBS_ENCLAVE_REPORT_VARDATA_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type VBS_ENCLAVE_REPORT_VARDATA_HEADER struct {
+	Data [8]byte
 }

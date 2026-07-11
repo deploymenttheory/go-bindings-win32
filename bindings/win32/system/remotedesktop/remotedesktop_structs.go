@@ -44,6 +44,13 @@ type BITMAP_RENDERER_STATISTICS struct {
 	DwFramesDropped   uint32
 }
 
+// CHANNEL_DEF is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CHANNEL_DEF struct {
+	Data [12]byte
+}
+
 // CHANNEL_ENTRY_POINTS: https://learn.microsoft.com/windows/win32/api/cchannel/ns-cchannel-channel_entry_points
 type CHANNEL_ENTRY_POINTS struct {
 	CbSize               uint32
@@ -77,22 +84,71 @@ type PRODUCT_INFOW struct {
 	ProductID   [4]uint16
 }
 
+// RFX_GFX_MONITOR_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RFX_GFX_MONITOR_INFO struct {
+	Data [32]byte
+}
+
 type RFX_GFX_MSG_CLIENT_DESKTOP_INFO_REQUEST struct {
-	ChannelHdr [4]byte
+	ChannelHdr RFX_GFX_MSG_HEADER
+}
+
+// RFX_GFX_MSG_CLIENT_DESKTOP_INFO_RESPONSE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RFX_GFX_MSG_CLIENT_DESKTOP_INFO_RESPONSE struct {
+	Data [588]byte
 }
 
 type RFX_GFX_MSG_DESKTOP_CONFIG_CHANGE_CONFIRM struct {
-	ChannelHdr [4]byte
+	ChannelHdr RFX_GFX_MSG_HEADER
+}
+
+// RFX_GFX_MSG_DESKTOP_CONFIG_CHANGE_NOTIFY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RFX_GFX_MSG_DESKTOP_CONFIG_CHANGE_NOTIFY struct {
+	Data [20]byte
+}
+
+// RFX_GFX_MSG_DESKTOP_INPUT_RESET is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RFX_GFX_MSG_DESKTOP_INPUT_RESET struct {
+	Data [12]byte
 }
 
 type RFX_GFX_MSG_DESKTOP_RESEND_REQUEST struct {
-	ChannelHdr [4]byte
-	RedrawRect [16]byte
+	ChannelHdr RFX_GFX_MSG_HEADER
+	RedrawRect RFX_GFX_RECT
+}
+
+// RFX_GFX_MSG_DISCONNECT_NOTIFY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RFX_GFX_MSG_DISCONNECT_NOTIFY struct {
+	Data [8]byte
+}
+
+// RFX_GFX_MSG_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RFX_GFX_MSG_HEADER struct {
+	Data [4]byte
 }
 
 type RFX_GFX_MSG_RDP_DATA struct {
-	ChannelHdr [4]byte
+	ChannelHdr RFX_GFX_MSG_HEADER
 	RdpData    [1]byte
+}
+
+// RFX_GFX_RECT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RFX_GFX_RECT struct {
+	Data [16]byte
 }
 
 // TSSD_ConnectionPoint: https://learn.microsoft.com/windows/win32/api/sessdirpublictypes/ns-sessdirpublictypes-tssd_connectionpoint

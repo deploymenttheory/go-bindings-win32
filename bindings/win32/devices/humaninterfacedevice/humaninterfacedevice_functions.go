@@ -94,7 +94,7 @@ func HidD_GetAttributes(HidDeviceObject foundation.HANDLE, Attributes *HIDD_ATTR
 }
 
 // HidD_GetConfiguration calls HID!HidD_GetConfiguration.
-func HidD_GetConfiguration(HidDeviceObject foundation.HANDLE, Configuration unsafe.Pointer, ConfigurationLength uint32) foundation.BOOLEAN {
+func HidD_GetConfiguration(HidDeviceObject foundation.HANDLE, Configuration *HIDD_CONFIGURATION, ConfigurationLength uint32) foundation.BOOLEAN {
 	r1, _, _ := syscall.SyscallN(procHidD_GetConfiguration.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(Configuration)), uintptr(ConfigurationLength))
 	return foundation.BOOLEAN(r1)
 }
@@ -165,7 +165,7 @@ func HidD_GetSerialNumberString(HidDeviceObject foundation.HANDLE, Buffer unsafe
 }
 
 // HidD_SetConfiguration calls HID!HidD_SetConfiguration.
-func HidD_SetConfiguration(HidDeviceObject foundation.HANDLE, Configuration unsafe.Pointer, ConfigurationLength uint32) foundation.BOOLEAN {
+func HidD_SetConfiguration(HidDeviceObject foundation.HANDLE, Configuration *HIDD_CONFIGURATION, ConfigurationLength uint32) foundation.BOOLEAN {
 	r1, _, _ := syscall.SyscallN(procHidD_SetConfiguration.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(Configuration)), uintptr(ConfigurationLength))
 	return foundation.BOOLEAN(r1)
 }
@@ -213,13 +213,13 @@ func HidP_GetData(ReportType HIDP_REPORT_TYPE, DataList *HIDP_DATA, DataLength *
 }
 
 // HidP_GetExtendedAttributes calls HID!HidP_GetExtendedAttributes.
-func HidP_GetExtendedAttributes(ReportType HIDP_REPORT_TYPE, DataIndex uint16, PreparsedData PHIDP_PREPARSED_DATA, Attributes unsafe.Pointer, LengthAttributes *uint32) foundation.NTSTATUS {
+func HidP_GetExtendedAttributes(ReportType HIDP_REPORT_TYPE, DataIndex uint16, PreparsedData PHIDP_PREPARSED_DATA, Attributes *HIDP_EXTENDED_ATTRIBUTES, LengthAttributes *uint32) foundation.NTSTATUS {
 	r1, _, _ := syscall.SyscallN(procHidP_GetExtendedAttributes.Addr(), uintptr(ReportType), uintptr(DataIndex), uintptr(PreparsedData), uintptr(unsafe.Pointer(Attributes)), uintptr(unsafe.Pointer(LengthAttributes)))
 	return foundation.NTSTATUS(r1)
 }
 
 // HidP_GetLinkCollectionNodes calls HID!HidP_GetLinkCollectionNodes.
-func HidP_GetLinkCollectionNodes(LinkCollectionNodes unsafe.Pointer, LinkCollectionNodesLength *uint32, PreparsedData PHIDP_PREPARSED_DATA) foundation.NTSTATUS {
+func HidP_GetLinkCollectionNodes(LinkCollectionNodes *HIDP_LINK_COLLECTION_NODE, LinkCollectionNodesLength *uint32, PreparsedData PHIDP_PREPARSED_DATA) foundation.NTSTATUS {
 	r1, _, _ := syscall.SyscallN(procHidP_GetLinkCollectionNodes.Addr(), uintptr(unsafe.Pointer(LinkCollectionNodes)), uintptr(unsafe.Pointer(LinkCollectionNodesLength)), uintptr(PreparsedData))
 	return foundation.NTSTATUS(r1)
 }

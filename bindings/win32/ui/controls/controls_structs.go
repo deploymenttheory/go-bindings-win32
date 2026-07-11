@@ -998,6 +998,14 @@ type NMLVGETINFOTIPW struct {
 	LParam     foundation.LPARAM
 }
 
+// NMLVKEYDOWN: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-nmlvkeydown
+// NMLVKEYDOWN is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NMLVKEYDOWN struct {
+	Data [30]byte
+}
+
 // NMLVLINK: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-nmlvlink
 type NMLVLINK struct {
 	Hdr      NMHDR
@@ -1055,6 +1063,14 @@ type NMPGHOTITEM struct {
 	IdOld   int32
 	IdNew   int32
 	DwFlags uint32
+}
+
+// NMPGSCROLL: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-nmpgscroll
+// NMPGSCROLL is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NMPGSCROLL struct {
+	Data [58]byte
 }
 
 // NMRBAUTOSIZE: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-nmrbautosize
@@ -1215,6 +1231,14 @@ type NMTBSAVE struct {
 	TbButton TBBUTTON
 }
 
+// NMTCKEYDOWN: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-nmtckeydown
+// NMTCKEYDOWN is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NMTCKEYDOWN struct {
+	Data [30]byte
+}
+
 // NMTOOLBARA: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-nmtoolbara
 type NMTOOLBARA struct {
 	Hdr      NMHDR
@@ -1361,6 +1385,14 @@ type NMTVITEMCHANGE struct {
 	UStateNew uint32
 	UStateOld uint32
 	LParam    foundation.LPARAM
+}
+
+// NMTVKEYDOWN: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-nmtvkeydown
+// NMTVKEYDOWN is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NMTVKEYDOWN struct {
+	Data [30]byte
 }
 
 // NMTVSTATEIMAGECHANGING: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-nmtvstateimagechanging
@@ -1851,6 +1883,22 @@ type REBARINFO struct {
 	CbSize uint32
 	FMask  uint32
 	Himl   HIMAGELIST
+}
+
+// TASKDIALOGCONFIG: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-taskdialogconfig
+// TASKDIALOGCONFIG is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TASKDIALOGCONFIG struct {
+	Data [160]byte
+}
+
+// TASKDIALOG_BUTTON: https://learn.microsoft.com/windows/win32/api/commctrl/ns-commctrl-taskdialog_button
+// TASKDIALOG_BUTTON is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TASKDIALOG_BUTTON struct {
+	Data [12]byte
 }
 
 type TA_CUBIC_BEZIER struct {

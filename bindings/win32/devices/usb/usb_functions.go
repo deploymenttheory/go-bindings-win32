@@ -19,7 +19,6 @@ var (
 
 var (
 	procWinUsb_AbortPipe                    = modWINUSB.NewProc("WinUsb_AbortPipe")
-	procWinUsb_ControlTransfer              = modWINUSB.NewProc("WinUsb_ControlTransfer")
 	procWinUsb_FlushPipe                    = modWINUSB.NewProc("WinUsb_FlushPipe")
 	procWinUsb_Free                         = modWINUSB.NewProc("WinUsb_Free")
 	procWinUsb_GetAdjustedFrameNumber       = modWINUSB.NewProc("WinUsb_GetAdjustedFrameNumber")
@@ -58,16 +57,6 @@ var (
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_abortpipe
 func WinUsb_AbortPipe(InterfaceHandle WINUSB_INTERFACE_HANDLE, PipeID byte) error {
 	r1, _, e1 := syscall.SyscallN(procWinUsb_AbortPipe.Addr(), uintptr(InterfaceHandle), uintptr(PipeID))
-	if r1 == 0 {
-		return win32.LastError(e1)
-	}
-	return nil
-}
-
-// WinUsb_ControlTransfer calls WINUSB!WinUsb_ControlTransfer.
-// https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_controltransfer
-func WinUsb_ControlTransfer(InterfaceHandle WINUSB_INTERFACE_HANDLE, SetupPacket uintptr, Buffer *byte, BufferLength uint32, LengthTransferred *uint32, Overlapped *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procWinUsb_ControlTransfer.Addr(), uintptr(InterfaceHandle), uintptr(SetupPacket), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength), uintptr(unsafe.Pointer(LengthTransferred)), uintptr(unsafe.Pointer(Overlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -136,7 +125,7 @@ func WinUsb_GetCurrentFrameNumber(InterfaceHandle WINUSB_INTERFACE_HANDLE, Curre
 // WinUsb_GetCurrentFrameNumberAndQpc calls WINUSB!WinUsb_GetCurrentFrameNumberAndQpc.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_getcurrentframenumberandqpc
 // Minimum OS: windows10.0.10240.
-func WinUsb_GetCurrentFrameNumberAndQpc(InterfaceHandle WINUSB_INTERFACE_HANDLE, FrameQpcInfo unsafe.Pointer) error {
+func WinUsb_GetCurrentFrameNumberAndQpc(InterfaceHandle WINUSB_INTERFACE_HANDLE, FrameQpcInfo *USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION) error {
 	r1, _, e1 := syscall.SyscallN(procWinUsb_GetCurrentFrameNumberAndQpc.Addr(), uintptr(InterfaceHandle), uintptr(unsafe.Pointer(FrameQpcInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -196,7 +185,7 @@ func WinUsb_Initialize(DeviceHandle foundation.HANDLE, InterfaceHandle *WINUSB_I
 }
 
 // WinUsb_ParseConfigurationDescriptor calls WINUSB!WinUsb_ParseConfigurationDescriptor.
-func WinUsb_ParseConfigurationDescriptor(ConfigurationDescriptor unsafe.Pointer, StartPosition unsafe.Pointer, InterfaceNumber int32, AlternateSetting int32, InterfaceClass int32, InterfaceSubClass int32, InterfaceProtocol int32) (*USB_INTERFACE_DESCRIPTOR, error) {
+func WinUsb_ParseConfigurationDescriptor(ConfigurationDescriptor *USB_CONFIGURATION_DESCRIPTOR, StartPosition unsafe.Pointer, InterfaceNumber int32, AlternateSetting int32, InterfaceClass int32, InterfaceSubClass int32, InterfaceProtocol int32) (*USB_INTERFACE_DESCRIPTOR, error) {
 	r1, _, e1 := syscall.SyscallN(procWinUsb_ParseConfigurationDescriptor.Addr(), uintptr(unsafe.Pointer(ConfigurationDescriptor)), uintptr(unsafe.Pointer(StartPosition)), uintptr(InterfaceNumber), uintptr(AlternateSetting), uintptr(InterfaceClass), uintptr(InterfaceSubClass), uintptr(InterfaceProtocol))
 	ret := (*USB_INTERFACE_DESCRIPTOR)(unsafe.Pointer(r1))
 	if ret == nil {
@@ -350,7 +339,7 @@ func WinUsb_SetPowerPolicy(InterfaceHandle WINUSB_INTERFACE_HANDLE, PolicyType W
 // WinUsb_StartTrackingForTimeSync calls WINUSB!WinUsb_StartTrackingForTimeSync.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_starttrackingfortimesync
 // Minimum OS: windows10.0.10240.
-func WinUsb_StartTrackingForTimeSync(InterfaceHandle WINUSB_INTERFACE_HANDLE, StartTrackingInfo unsafe.Pointer) error {
+func WinUsb_StartTrackingForTimeSync(InterfaceHandle WINUSB_INTERFACE_HANDLE, StartTrackingInfo *USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION) error {
 	r1, _, e1 := syscall.SyscallN(procWinUsb_StartTrackingForTimeSync.Addr(), uintptr(InterfaceHandle), uintptr(unsafe.Pointer(StartTrackingInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -361,7 +350,7 @@ func WinUsb_StartTrackingForTimeSync(InterfaceHandle WINUSB_INTERFACE_HANDLE, St
 // WinUsb_StopTrackingForTimeSync calls WINUSB!WinUsb_StopTrackingForTimeSync.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_stoptrackingfortimesync
 // Minimum OS: windows10.0.10240.
-func WinUsb_StopTrackingForTimeSync(InterfaceHandle WINUSB_INTERFACE_HANDLE, StopTrackingInfo unsafe.Pointer) error {
+func WinUsb_StopTrackingForTimeSync(InterfaceHandle WINUSB_INTERFACE_HANDLE, StopTrackingInfo *USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION) error {
 	r1, _, e1 := syscall.SyscallN(procWinUsb_StopTrackingForTimeSync.Addr(), uintptr(InterfaceHandle), uintptr(unsafe.Pointer(StopTrackingInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)

@@ -2693,9 +2693,9 @@ type IMFAudioMediaType struct {
 var IID_IMFAudioMediaType = win32.GUID{Data1: 0x26a0adc3, Data2: 0xce26, Data3: 0x4672, Data4: [8]byte{0x93, 0x04, 0x69, 0x55, 0x2e, 0xdd, 0x3f, 0xaf}}
 
 // GetAudioFormat dispatches through IMFAudioMediaType's vtable slot 38.
-func (self *IMFAudioMediaType) GetAudioFormat() unsafe.Pointer {
+func (self *IMFAudioMediaType) GetAudioFormat() *mediaaudio.WAVEFORMATEX {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)))
-	return unsafe.Pointer(r1)
+	return (*mediaaudio.WAVEFORMATEX)(unsafe.Pointer(r1))
 }
 
 // IMFAudioPolicy: https://learn.microsoft.com/windows/win32/api/mfidl/nn-mfidl-imfaudiopolicy
@@ -11955,19 +11955,19 @@ func (self *IOPMVideoOutput) FinishInitialization(pParameters *OPM_ENCRYPTED_INI
 }
 
 // GetInformation dispatches through IOPMVideoOutput's vtable slot 5.
-func (self *IOPMVideoOutput) GetInformation(pParameters unsafe.Pointer, pRequestedInformation unsafe.Pointer) error {
+func (self *IOPMVideoOutput) GetInformation(pParameters *OPM_GET_INFO_PARAMETERS, pRequestedInformation *OPM_REQUESTED_INFORMATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(pRequestedInformation)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // COPPCompatibleGetInformation dispatches through IOPMVideoOutput's vtable slot 6.
-func (self *IOPMVideoOutput) COPPCompatibleGetInformation(pParameters unsafe.Pointer, pRequestedInformation unsafe.Pointer) error {
+func (self *IOPMVideoOutput) COPPCompatibleGetInformation(pParameters *OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS, pRequestedInformation *OPM_REQUESTED_INFORMATION) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParameters)), uintptr(unsafe.Pointer(pRequestedInformation)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Configure dispatches through IOPMVideoOutput's vtable slot 7.
-func (self *IOPMVideoOutput) Configure(pParameters unsafe.Pointer, ulAdditionalParametersSize uint32, pbAdditionalParameters *byte) error {
+func (self *IOPMVideoOutput) Configure(pParameters *OPM_CONFIGURE_PARAMETERS, ulAdditionalParametersSize uint32, pbAdditionalParameters *byte) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParameters)), uintptr(ulAdditionalParametersSize), uintptr(unsafe.Pointer(pbAdditionalParameters)))
 	return win32.HRESULTError(int32(r1))
 }

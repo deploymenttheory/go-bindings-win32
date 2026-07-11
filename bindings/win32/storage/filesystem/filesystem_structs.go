@@ -1633,12 +1633,24 @@ type TRANSACTION_NOTIFICATION_TM_ONLINE_ARGUMENT struct {
 	Flags      uint32
 }
 
+// TXF_ID_Anonymous_e__Struct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TXF_ID_Anonymous_e__Struct struct {
+	Data [4]uint32
+}
+
+// TXF_ID: https://learn.microsoft.com/windows/win32/api/txfw32/ns-txfw32-txf_id
+type TXF_ID struct {
+	Anonymous TXF_ID_Anonymous_e__Struct
+}
+
 // TXF_LOG_RECORD_AFFECTED_FILE: https://learn.microsoft.com/windows/win32/api/txfw32/ns-txfw32-txf_log_record_affected_file
 type TXF_LOG_RECORD_AFFECTED_FILE struct {
 	Version                       uint16
 	RecordLength                  uint32
 	Flags                         uint32
-	TxfFileId                     [4]uint32
+	TxfFileId                     TXF_ID
 	KtmGuid                       win32.GUID
 	FileNameLength                uint32
 	FileNameByteOffsetInStructure uint32
@@ -1649,6 +1661,22 @@ type TXF_LOG_RECORD_BASE struct {
 	Version      uint16
 	RecordType   TXF_LOG_RECORD_TYPE
 	RecordLength uint32
+}
+
+// TXF_LOG_RECORD_TRUNCATE: https://learn.microsoft.com/windows/win32/api/txfw32/ns-txfw32-txf_log_record_truncate
+// TXF_LOG_RECORD_TRUNCATE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TXF_LOG_RECORD_TRUNCATE struct {
+	Data [15]uint32
+}
+
+// TXF_LOG_RECORD_WRITE: https://learn.microsoft.com/windows/win32/api/txfw32/ns-txfw32-txf_log_record_write
+// TXF_LOG_RECORD_WRITE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TXF_LOG_RECORD_WRITE struct {
+	Data [17]uint32
 }
 
 type VOLUME_ALLOCATE_BC_STREAM_INPUT struct {

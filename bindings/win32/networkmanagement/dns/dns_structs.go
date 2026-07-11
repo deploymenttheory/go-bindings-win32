@@ -27,6 +27,14 @@ type DNS_ADDR struct {
 	Data  DNS_ADDR_Data_e__Union
 }
 
+// DNS_ADDR_ARRAY: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_addr_array
+// DNS_ADDR_ARRAY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DNS_ADDR_ARRAY struct {
+	Data [96]byte
+}
+
 // DNS_APPLICATION_SETTINGS: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_application_settings
 type DNS_APPLICATION_SETTINGS struct {
 	Version uint32
@@ -146,6 +154,14 @@ type DNS_DS_DATA struct {
 	Digest        [1]byte
 }
 
+// DNS_HEADER: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_header
+// DNS_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DNS_HEADER struct {
+	Data [12]byte
+}
+
 type DNS_HEADER_EXT struct {
 	Bitfield  uint16
 	ChRcode   byte
@@ -175,7 +191,7 @@ type DNS_LOC_DATA struct {
 
 // DNS_MESSAGE_BUFFER: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_message_buffer
 type DNS_MESSAGE_BUFFER struct {
-	MessageHead [12]byte
+	MessageHead DNS_HEADER
 	MessageBody [1]foundation.CHAR
 }
 
@@ -362,7 +378,7 @@ type DNS_QUERY_REQUEST struct {
 	QueryName                foundation.PWSTR
 	QueryType                uint16
 	QueryOptions             uint64
-	PDnsServerList           unsafe.Pointer
+	PDnsServerList           *DNS_ADDR_ARRAY
 	InterfaceIndex           uint32
 	PQueryCompletionCallback PDNS_QUERY_COMPLETION_ROUTINE
 	PQueryContext            unsafe.Pointer
@@ -374,7 +390,7 @@ type DNS_QUERY_REQUEST3 struct {
 	QueryName                foundation.PWSTR
 	QueryType                uint16
 	QueryOptions             uint64
-	PDnsServerList           unsafe.Pointer
+	PDnsServerList           *DNS_ADDR_ARRAY
 	InterfaceIndex           uint32
 	PQueryCompletionCallback PDNS_QUERY_COMPLETION_ROUTINE
 	PQueryContext            unsafe.Pointer
@@ -760,6 +776,22 @@ type DNS_WINS_DATA struct {
 	DwCacheTimeout   uint32
 	CWinsServerCount uint32
 	WinsServers      [1]uint32
+}
+
+// DNS_WIRE_QUESTION: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_wire_question
+// DNS_WIRE_QUESTION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DNS_WIRE_QUESTION struct {
+	Data [4]byte
+}
+
+// DNS_WIRE_RECORD: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_wire_record
+// DNS_WIRE_RECORD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DNS_WIRE_RECORD struct {
+	Data [10]byte
 }
 
 // DNS_WKS_DATA: https://learn.microsoft.com/windows/win32/api/windns/ns-windns-dns_wks_data

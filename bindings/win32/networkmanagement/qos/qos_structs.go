@@ -122,6 +122,13 @@ type PARAM_BUFFER struct {
 	Buffer      [1]byte
 }
 
+// PLUTON_UPGRADE_IMAGEDATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PLUTON_UPGRADE_IMAGEDATA struct {
+	Data [196]byte
+}
+
 // QOS_DESTADDR: https://learn.microsoft.com/windows/win32/api/qossp/ns-qossp-qos_destaddr
 type QOS_DESTADDR struct {
 	ObjectHdr           QOS_OBJECT_HDR
@@ -302,9 +309,79 @@ type RSVP_STATUS_INFO struct {
 	ExtendedStatus2 uint32
 }
 
+// SIPAEVENT_KSR_SIGNATURE_PAYLOAD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SIPAEVENT_KSR_SIGNATURE_PAYLOAD struct {
+	Data [9]byte
+}
+
 type SIPAEVENT_REFS_ROLLBACK_PROTECTION_USER_PAYLOAD_HASH_DATA struct {
 	ChecksumType   uint16
 	ChecksumBuffer [1]byte
+}
+
+// SIPAEVENT_REVOCATION_LIST_PAYLOAD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SIPAEVENT_REVOCATION_LIST_PAYLOAD struct {
+	Data [15]byte
+}
+
+// SIPAEVENT_SBCP_INFO_PAYLOAD_V1 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SIPAEVENT_SBCP_INFO_PAYLOAD_V1 struct {
+	Data [21]byte
+}
+
+// SIPAEVENT_SI_POLICY_CERTIFICATE_PAYLOAD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SIPAEVENT_SI_POLICY_CERTIFICATE_PAYLOAD struct {
+	Data [11]byte
+}
+
+// SIPAEVENT_SI_POLICY_PAYLOAD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SIPAEVENT_SI_POLICY_PAYLOAD struct {
+	Data [17]byte
+}
+
+// SIPAEVENT_SI_POLICY_SIGNER_PAYLOAD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SIPAEVENT_SI_POLICY_SIGNER_PAYLOAD struct {
+	Data [17]byte
+}
+
+// SIPAEVENT_VSM_IDK_INFO_PAYLOAD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SIPAEVENT_VSM_IDK_INFO_PAYLOAD struct {
+	Data [17]byte
+}
+
+// SIPAEVENT_VSM_IDK_RSA_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SIPAEVENT_VSM_IDK_RSA_INFO struct {
+	Data [13]byte
+}
+
+// TCG_PCClientPCREventStruct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TCG_PCClientPCREventStruct struct {
+	Data [33]byte
+}
+
+// TCG_PCClientTaggedEventStruct is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TCG_PCClientTaggedEventStruct struct {
+	Data [9]byte
 }
 
 // TCI_CLIENT_FUNC_LIST: https://learn.microsoft.com/windows/win32/api/traffic/ns-traffic-tci_client_func_list
@@ -344,4 +421,18 @@ type TC_SUPPORTED_INFO_BUFFER struct {
 	InstanceID       [256]uint16
 	InterfaceLuid    uint64
 	AddrListDesc     ADDRESS_LIST_DESCRIPTOR
+}
+
+// WBCL_Iterator is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WBCL_Iterator struct {
+	Data [46]byte
+}
+
+// WBCL_LogHdr is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WBCL_LogHdr struct {
+	Data [16]byte
 }

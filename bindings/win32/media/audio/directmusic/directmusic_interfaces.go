@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/media"
+	mediaaudio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio"
 	mediaaudiodirectsound "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio/directsound"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/io"
@@ -348,7 +349,7 @@ func (self *IDirectMusicPort) SetDirectSound(pDirectSound *mediaaudiodirectsound
 }
 
 // GetFormat dispatches through IDirectMusicPort's vtable slot 19.
-func (self *IDirectMusicPort) GetFormat(pWaveFormatEx unsafe.Pointer, pdwWaveFormatExSize *uint32, pdwBufferSize *uint32) error {
+func (self *IDirectMusicPort) GetFormat(pWaveFormatEx *mediaaudio.WAVEFORMATEX, pdwWaveFormatExSize *uint32, pdwBufferSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWaveFormatEx)), uintptr(unsafe.Pointer(pdwWaveFormatExSize)), uintptr(unsafe.Pointer(pdwBufferSize)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -498,7 +499,7 @@ func (self *IDirectMusicSynth) GetChannelPriority(dwChannelGroup uint32, dwChann
 }
 
 // GetFormat dispatches through IDirectMusicSynth's vtable slot 18.
-func (self *IDirectMusicSynth) GetFormat(pWaveFormatEx unsafe.Pointer, pdwWaveFormatExSize *uint32) error {
+func (self *IDirectMusicSynth) GetFormat(pWaveFormatEx *mediaaudio.WAVEFORMATEX, pdwWaveFormatExSize *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pWaveFormatEx)), uintptr(unsafe.Pointer(pdwWaveFormatExSize)))
 	return win32.HRESULTError(int32(r1))
 }

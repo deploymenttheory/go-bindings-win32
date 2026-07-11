@@ -36,6 +36,22 @@ type AM_MEDIA_TYPE struct {
 	PbFormat             *byte
 }
 
+// ASF_FLAT_PICTURE: https://learn.microsoft.com/windows/win32/api/mfidl/ns-mfidl-asf_flat_picture
+// ASF_FLAT_PICTURE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ASF_FLAT_PICTURE struct {
+	Data [5]byte
+}
+
+// ASF_FLAT_SYNCHRONISED_LYRICS: https://learn.microsoft.com/windows/win32/api/mfidl/ns-mfidl-asf_flat_synchronised_lyrics
+// ASF_FLAT_SYNCHRONISED_LYRICS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ASF_FLAT_SYNCHRONISED_LYRICS struct {
+	Data [6]byte
+}
+
 // ASF_INDEX_DESCRIPTOR: https://learn.microsoft.com/windows/win32/api/wmcontainer/ns-wmcontainer-asf_index_descriptor
 type ASF_INDEX_DESCRIPTOR struct {
 	Identifier     ASF_INDEX_IDENTIFIER
@@ -3767,6 +3783,13 @@ type DXVA_AYUVsample2 struct {
 	BSampleAlpha8 byte
 }
 
+// DXVA_BufferDescription is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DXVA_BufferDescription struct {
+	Data [40]byte
+}
+
 type DXVA_COPPCommand struct {
 	MacKDI        win32.GUID
 	GuidCommandID win32.GUID
@@ -3791,6 +3814,13 @@ type DXVA_COPPStatusOutput struct {
 	MacKDI     win32.GUID
 	CbSizeData uint32
 	COPPStatus [4076]byte
+}
+
+// DXVA_ConfigPictureDecode is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DXVA_ConfigPictureDecode struct {
+	Data [76]byte
 }
 
 type DXVA_DeinterlaceBlt struct {
@@ -3858,6 +3888,13 @@ type DXVA_ExtendedFormat struct {
 type DXVA_Frequency struct {
 	Numerator   uint32
 	Denominator uint32
+}
+
+// DXVA_PictureParameters is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DXVA_PictureParameters struct {
+	Data [44]byte
 }
 
 type DXVA_ProcAmpControlBlt struct {
@@ -4611,9 +4648,73 @@ type MT_CUSTOM_VIDEO_PRIMARIES struct {
 type MULawCodecWrapper struct {
 }
 
+// OPM_ACP_AND_CGMSA_SIGNALING: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_acp_and_cgmsa_signaling
+// OPM_ACP_AND_CGMSA_SIGNALING is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OPM_ACP_AND_CGMSA_SIGNALING struct {
+	Data [88]byte
+}
+
+// OPM_ACTUAL_OUTPUT_FORMAT: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_actual_output_format
+// OPM_ACTUAL_OUTPUT_FORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OPM_ACTUAL_OUTPUT_FORMAT struct {
+	Data [44]byte
+}
+
+// OPM_CONFIGURE_PARAMETERS: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_configure_parameters
+// OPM_CONFIGURE_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OPM_CONFIGURE_PARAMETERS struct {
+	Data [4096]byte
+}
+
+// OPM_CONNECTED_HDCP_DEVICE_INFORMATION: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_connected_hdcp_device_information
+// OPM_CONNECTED_HDCP_DEVICE_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OPM_CONNECTED_HDCP_DEVICE_INFORMATION struct {
+	Data [72]byte
+}
+
+// OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_copp_compatible_get_info_parameters
+// OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OPM_COPP_COMPATIBLE_GET_INFO_PARAMETERS struct {
+	Data [4096]byte
+}
+
 // OPM_ENCRYPTED_INITIALIZATION_PARAMETERS: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_encrypted_initialization_parameters
 type OPM_ENCRYPTED_INITIALIZATION_PARAMETERS struct {
 	AbEncryptedInitializationParameters [256]byte
+}
+
+// OPM_GET_CODEC_INFO_INFORMATION: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_get_codec_info_information
+// OPM_GET_CODEC_INFO_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OPM_GET_CODEC_INFO_INFORMATION struct {
+	Data [20]byte
+}
+
+// OPM_GET_CODEC_INFO_PARAMETERS: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_get_codec_info_parameters
+// OPM_GET_CODEC_INFO_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OPM_GET_CODEC_INFO_PARAMETERS struct {
+	Data [4056]byte
+}
+
+// OPM_GET_INFO_PARAMETERS: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_get_info_parameters
+// OPM_GET_INFO_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OPM_GET_INFO_PARAMETERS struct {
+	Data [4112]byte
 }
 
 // OPM_HDCP_KEY_SELECTION_VECTOR: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_hdcp_key_selection_vector
@@ -4626,9 +4727,57 @@ type OPM_OMAC struct {
 	AbOMAC [16]byte
 }
 
+// OPM_OUTPUT_ID_DATA: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_output_id_data
+// OPM_OUTPUT_ID_DATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OPM_OUTPUT_ID_DATA struct {
+	Data [28]byte
+}
+
 // OPM_RANDOM_NUMBER: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_random_number
 type OPM_RANDOM_NUMBER struct {
 	AbRandomNumber [16]byte
+}
+
+// OPM_REQUESTED_INFORMATION: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_requested_information
+// OPM_REQUESTED_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OPM_REQUESTED_INFORMATION struct {
+	Data [4096]byte
+}
+
+// OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_set_acp_and_cgmsa_signaling_parameters
+// OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OPM_SET_ACP_AND_CGMSA_SIGNALING_PARAMETERS struct {
+	Data [64]byte
+}
+
+// OPM_SET_HDCP_SRM_PARAMETERS: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_set_hdcp_srm_parameters
+// OPM_SET_HDCP_SRM_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OPM_SET_HDCP_SRM_PARAMETERS struct {
+	Data [4]byte
+}
+
+// OPM_SET_PROTECTION_LEVEL_PARAMETERS: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_set_protection_level_parameters
+// OPM_SET_PROTECTION_LEVEL_PARAMETERS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OPM_SET_PROTECTION_LEVEL_PARAMETERS struct {
+	Data [16]byte
+}
+
+// OPM_STANDARD_INFORMATION: https://learn.microsoft.com/windows/win32/api/opmapi/ns-opmapi-opm_standard_information
+// OPM_STANDARD_INFORMATION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type OPM_STANDARD_INFORMATION struct {
+	Data [32]byte
 }
 
 // ROI_AREA: https://learn.microsoft.com/windows/win32/api/mfapi/ns-mfapi-roi_area

@@ -32,6 +32,14 @@ type ATSCLocator struct {
 type ATSCTuningSpace struct {
 }
 
+// ATSC_FILTER_OPTIONS: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-atsc_filter_options
+// ATSC_FILTER_OPTIONS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ATSC_FILTER_OPTIONS struct {
+	Data [8]byte
+}
+
 type ATSC_TERRESTRIAL_TV_NETWORK_TYPE struct {
 }
 
@@ -82,6 +90,13 @@ type BDA_TRANSPORT_INFO struct {
 }
 
 type BSKYB_TERRESTRIAL_TV_NETWORK_TYPE struct {
+}
+
+// BadSampleInfo is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BadSampleInfo struct {
+	Data [4]byte
 }
 
 type BroadcastEventService struct {
@@ -155,6 +170,30 @@ type DSHOW_STREAM_DESC struct {
 	Reserved  uint32
 }
 
+// DSMCC_ELEMENT: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-dsmcc_element
+// DSMCC_ELEMENT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DSMCC_ELEMENT struct {
+	Data [19]byte
+}
+
+// DSMCC_FILTER_OPTIONS: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-dsmcc_filter_options
+// DSMCC_FILTER_OPTIONS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DSMCC_FILTER_OPTIONS struct {
+	Data [45]byte
+}
+
+// DSMCC_SECTION: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-dsmcc_section
+// DSMCC_SECTION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DSMCC_SECTION struct {
+	Data [21]byte
+}
+
 type DTFilter struct {
 }
 
@@ -185,6 +224,14 @@ type DVBTuningSpace struct {
 }
 
 type DVB_CABLE_TV_NETWORK_TYPE struct {
+}
+
+// DVB_EIT_FILTER_OPTIONS: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-dvb_eit_filter_options
+// DVB_EIT_FILTER_OPTIONS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DVB_EIT_FILTER_OPTIONS struct {
+	Data [5]byte
 }
 
 type DVB_SATELLITE_TV_NETWORK_TYPE struct {
@@ -964,6 +1011,14 @@ type KS_DATARANGE_BDA_TRANSPORT struct {
 	BdaTransportInfo BDA_TRANSPORT_INFO
 }
 
+// LONG_SECTION: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-long_section
+// LONG_SECTION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type LONG_SECTION struct {
+	Data [9]byte
+}
+
 type LanguageComponentType struct {
 }
 
@@ -987,10 +1042,65 @@ type MPEG2TuneRequest struct {
 type MPEG2TuneRequestFactory struct {
 }
 
+// MPEG2_FILTER: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-mpeg2_filter
+// MPEG2_FILTER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG2_FILTER struct {
+	Data [124]byte
+}
+
+// MPEG2_FILTER2: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-mpeg2_filter2
+// MPEG2_FILTER2 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG2_FILTER2 struct {
+	Data [133]byte
+}
+
+// MPEG_BCS_DEMUX: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-mpeg_bcs_demux
+// MPEG_BCS_DEMUX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG_BCS_DEMUX struct {
+	Data [4]byte
+}
+
+// MPEG_CONTEXT: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-mpeg_context
+// MPEG_CONTEXT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG_CONTEXT struct {
+	Data [8]byte
+}
+
+// MPEG_DATE: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-mpeg_date
+// MPEG_DATE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG_DATE struct {
+	Data [4]byte
+}
+
 // MPEG_DATE_AND_TIME: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-mpeg_date_and_time
 type MPEG_DATE_AND_TIME struct {
-	D [4]byte
+	D MPEG_DATE
 	T MPEG_TIME
+}
+
+// MPEG_HEADER_BITS: https://learn.microsoft.com/windows/win32/api/mpeg2bits/ns-mpeg2bits-mpeg_header_bits
+// MPEG_HEADER_BITS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG_HEADER_BITS struct {
+	Data [2]byte
+}
+
+// MPEG_HEADER_BITS_MIDL is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG_HEADER_BITS_MIDL struct {
+	Data [2]byte
 }
 
 // MPEG_HEADER_VERSION_BITS: https://learn.microsoft.com/windows/win32/api/mpeg2bits/ns-mpeg2bits-mpeg_header_version_bits
@@ -1002,11 +1112,72 @@ type MPEG_HEADER_VERSION_BITS_MIDL struct {
 	Bits byte
 }
 
+// MPEG_PACKET_LIST: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-mpeg_packet_list
+// MPEG_PACKET_LIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG_PACKET_LIST struct {
+	Data [10]byte
+}
+
+// MPEG_RQST_PACKET: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-mpeg_rqst_packet
+// MPEG_RQST_PACKET is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG_RQST_PACKET struct {
+	Data [12]byte
+}
+
+// MPEG_SERVICE_REQUEST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG_SERVICE_REQUEST struct {
+	Data [143]byte
+}
+
+// MPEG_SERVICE_RESPONSE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG_SERVICE_RESPONSE struct {
+	Data [6]byte
+}
+
+// MPEG_STREAM_BUFFER: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-mpeg_stream_buffer
+// MPEG_STREAM_BUFFER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG_STREAM_BUFFER struct {
+	Data [20]byte
+}
+
+// MPEG_STREAM_FILTER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG_STREAM_FILTER struct {
+	Data [42]byte
+}
+
 // MPEG_TIME: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-mpeg_time
 type MPEG_TIME struct {
 	Hours   byte
 	Minutes byte
 	Seconds byte
+}
+
+// MPEG_WINSOCK: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-mpeg_winsock
+// MPEG_WINSOCK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG_WINSOCK struct {
+	Data [4]byte
+}
+
+// MPE_ELEMENT: https://learn.microsoft.com/windows/win32/api/mpeg2structs/ns-mpeg2structs-mpe_element
+// MPE_ELEMENT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPE_ELEMENT struct {
+	Data [11]byte
 }
 
 type MSEventBinder struct {
@@ -1207,6 +1378,20 @@ type Mpeg2DataLib struct {
 type Mpeg2Stream struct {
 }
 
+// Mpeg2TableSampleHdr is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type Mpeg2TableSampleHdr struct {
+	Data [8]byte
+}
+
+// PBDAParentalControl is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PBDAParentalControl struct {
+	Data [12]byte
+}
+
 type PBDA_ALWAYS_TUNE_IN_MUX struct {
 }
 
@@ -1225,6 +1410,20 @@ type PIC_SEQ_SAMPLE struct {
 type PIDListSpanningEvent struct {
 	WPIDCount uint16
 	PulPIDs   [1]uint32
+}
+
+// PID_BITS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PID_BITS struct {
+	Data [2]byte
+}
+
+// PID_BITS_MIDL is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PID_BITS_MIDL struct {
+	Data [2]byte
 }
 
 type PINNAME_BDA_ANALOG_AUDIO struct {
@@ -1257,6 +1456,27 @@ type PersistTuneXmlUtility struct {
 type ProgramElement struct {
 	WProgramNumber uint16
 	WProgramMapPID uint16
+}
+
+// RATING_ATTRIBUTE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RATING_ATTRIBUTE struct {
+	Data [8]byte
+}
+
+// RATING_INFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RATING_INFO struct {
+	Data [12]byte
+}
+
+// RATING_SYSTEM is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RATING_SYSTEM struct {
+	Data [32]byte
 }
 
 type SAMPLE_LIVE_STREAM_TIME struct {
@@ -1335,6 +1555,13 @@ type SpanningEventEmmMessage struct {
 type SystemTuningSpaces struct {
 }
 
+// TID_EXTENSION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TID_EXTENSION struct {
+	Data [4]byte
+}
+
 type TIFLoad struct {
 }
 
@@ -1379,6 +1606,13 @@ type VA_OPTIONAL_VIDEO_PROPERTIES struct {
 	VAColorPrimaries          VA_COLOR_PRIMARIES
 	VATransferCharacteristics VA_TRANSFER_CHARACTERISTICS
 	VAMatrixCoefficients      VA_MATRIX_COEFFICIENTS
+}
+
+// WMDRMProtectionInfo is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WMDRMProtectionInfo struct {
+	Data [67]byte
 }
 
 type XDSCodec struct {

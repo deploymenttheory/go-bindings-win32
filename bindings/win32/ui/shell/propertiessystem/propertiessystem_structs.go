@@ -10,5 +10,13 @@ type InMemoryPropertyStore struct {
 type InMemoryPropertyStoreMarshalByValue struct {
 }
 
+// PROPPRG: https://learn.microsoft.com/windows/win32/api/shlobj_core/ns-shlobj_core-propprg
+// PROPPRG is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PROPPRG struct {
+	Data [658]byte
+}
+
 type PropertySystem struct {
 }

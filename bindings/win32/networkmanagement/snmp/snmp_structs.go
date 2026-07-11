@@ -20,10 +20,34 @@ type AsnAny struct {
 	AsnValue AsnAny_asnValue_e__Union
 }
 
+// AsnObjectIdentifier: https://learn.microsoft.com/windows/win32/api/snmp/ns-snmp-asnobjectidentifier
+// AsnObjectIdentifier is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AsnObjectIdentifier struct {
+	Data [3]uint32
+}
+
+// AsnOctetString: https://learn.microsoft.com/windows/win32/api/snmp/ns-snmp-asnoctetstring
+// AsnOctetString is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AsnOctetString struct {
+	Data [4]uint32
+}
+
 // SnmpVarBind: https://learn.microsoft.com/windows/win32/api/snmp/ns-snmp-snmpvarbind
 type SnmpVarBind struct {
-	Name  [3]uint32
+	Name  AsnObjectIdentifier
 	Value AsnAny
+}
+
+// SnmpVarBindList: https://learn.microsoft.com/windows/win32/api/snmp/ns-snmp-snmpvarbindlist
+// SnmpVarBindList is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SnmpVarBindList struct {
+	Data [3]uint32
 }
 
 // SmiCNTR64: https://learn.microsoft.com/windows/win32/api/winsnmp/ns-winsnmp-smicntr64

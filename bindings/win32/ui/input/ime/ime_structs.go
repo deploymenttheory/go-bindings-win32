@@ -152,6 +152,21 @@ type IMECOMPOSITIONSTRINGINFO struct {
 	ITargetLen   int32
 }
 
+// IMEDLG: https://learn.microsoft.com/windows/win32/api/msime/ns-msime-imedlg
+// IMEDLG is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMEDLG struct {
+	Data [24]byte
+}
+
+// IMEDP is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMEDP struct {
+	Data [92]byte
+}
+
 type IMEFAREASTINFO struct {
 	DwSize uint32
 	DwType uint32
@@ -177,6 +192,55 @@ type IMEITEM struct {
 type IMEITEMCANDIDATE struct {
 	UCount  uint32
 	ImeItem [1]IMEITEM
+}
+
+// IMEKMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMEKMS struct {
+	Data [24]byte
+}
+
+// IMEKMSFUNCDESC is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMEKMSFUNCDESC struct {
+	Data [266]byte
+}
+
+// IMEKMSINIT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMEKMSINIT struct {
+	Data [12]byte
+}
+
+// IMEKMSINVK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMEKMSINVK struct {
+	Data [16]byte
+}
+
+// IMEKMSKEY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMEKMSKEY struct {
+	Data [78]byte
+}
+
+// IMEKMSKMP is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMEKMSKMP struct {
+	Data [30]byte
+}
+
+// IMEKMSNTFY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMEKMSNTFY struct {
+	Data [16]byte
 }
 
 // IMEMENUITEMINFOA: https://learn.microsoft.com/windows/win32/api/immdev/ns-immdev-imemenuiteminfoa
@@ -205,6 +269,14 @@ type IMEMENUITEMINFOW struct {
 	HbmpItem      graphicsgdi.HBITMAP
 }
 
+// IMESHF: https://learn.microsoft.com/windows/win32/api/msime/ns-msime-imeshf
+// IMESHF is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMESHF struct {
+	Data [436]byte
+}
+
 type IMESTRINGCANDIDATE struct {
 	UCount uint32
 	Lpwstr [1]foundation.PWSTR
@@ -222,6 +294,14 @@ type IMESTRINGCANDIDATEINFO struct {
 type IMESTRINGINFO struct {
 	DwFarEastId uint32
 	Lpwstr      foundation.PWSTR
+}
+
+// IMEWRD: https://learn.microsoft.com/windows/win32/api/msime/ns-msime-imewrd
+// IMEWRD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMEWRD struct {
+	Data [44]byte
 }
 
 // INPUTCONTEXT_lfFont_e__Union is a C union, exposed as correctly sized and aligned backing
@@ -248,6 +328,21 @@ type INPUTCONTEXT struct {
 	HMsgBuf        HIMCC
 	FdwInit        uint32
 	DwReserve      [3]uint32
+}
+
+// MORRSLT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MORRSLT struct {
+	Data [78]byte
+}
+
+// POSTBL: https://learn.microsoft.com/windows/win32/api/msime/ns-msime-postbl
+// POSTBL is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type POSTBL struct {
+	Data [10]byte
 }
 
 // RECONVERTSTRING: https://learn.microsoft.com/windows/win32/api/immdev/ns-immdev-reconvertstring
@@ -300,4 +395,11 @@ type TRANSMSG struct {
 type TRANSMSGLIST struct {
 	UMsgCount uint32
 	TransMsg  [1]TRANSMSG
+}
+
+// WDD is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WDD struct {
+	Data [24]byte
 }

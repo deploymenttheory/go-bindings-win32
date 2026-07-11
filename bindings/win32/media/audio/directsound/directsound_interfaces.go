@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsdirect3d "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/direct3d"
+	mediaaudio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
@@ -253,7 +254,7 @@ func (self *IDirectSoundBuffer) GetCurrentPosition(pdwCurrentPlayCursor *uint32,
 }
 
 // GetFormat dispatches through IDirectSoundBuffer's vtable slot 5.
-func (self *IDirectSoundBuffer) GetFormat(pwfxFormat unsafe.Pointer, dwSizeAllocated uint32, pdwSizeWritten *uint32) error {
+func (self *IDirectSoundBuffer) GetFormat(pwfxFormat *mediaaudio.WAVEFORMATEX, dwSizeAllocated uint32, pdwSizeWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwfxFormat)), uintptr(dwSizeAllocated), uintptr(unsafe.Pointer(pdwSizeWritten)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -307,7 +308,7 @@ func (self *IDirectSoundBuffer) SetCurrentPosition(dwNewPosition uint32) error {
 }
 
 // SetFormat dispatches through IDirectSoundBuffer's vtable slot 14.
-func (self *IDirectSoundBuffer) SetFormat(pcfxFormat unsafe.Pointer) error {
+func (self *IDirectSoundBuffer) SetFormat(pcfxFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pcfxFormat)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -421,7 +422,7 @@ func (self *IDirectSoundCaptureBuffer) GetCurrentPosition(pdwCapturePosition *ui
 }
 
 // GetFormat dispatches through IDirectSoundCaptureBuffer's vtable slot 5.
-func (self *IDirectSoundCaptureBuffer) GetFormat(pwfxFormat unsafe.Pointer, dwSizeAllocated uint32, pdwSizeWritten *uint32) error {
+func (self *IDirectSoundCaptureBuffer) GetFormat(pwfxFormat *mediaaudio.WAVEFORMATEX, dwSizeAllocated uint32, pdwSizeWritten *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pwfxFormat)), uintptr(dwSizeAllocated), uintptr(unsafe.Pointer(pdwSizeWritten)))
 	return win32.HRESULTError(int32(r1))
 }

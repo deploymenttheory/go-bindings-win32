@@ -31,7 +31,7 @@ type PXE_DHCPV6_MESSAGE struct {
 	TransactionIDByte1 byte
 	TransactionIDByte2 byte
 	TransactionIDByte3 byte
-	Options            [5]byte
+	Options            [1]PXE_DHCPV6_OPTION
 }
 
 // PXE_DHCPV6_MESSAGE_HEADER: https://learn.microsoft.com/windows/win32/api/wdspxe/ns-wdspxe-pxe_dhcpv6_message_header
@@ -48,13 +48,29 @@ type PXE_DHCPV6_NESTED_RELAY_MESSAGE struct {
 	CbInterfaceIdOption uint16
 }
 
+// PXE_DHCPV6_OPTION: https://learn.microsoft.com/windows/win32/api/wdspxe/ns-wdspxe-pxe_dhcpv6_option
+// PXE_DHCPV6_OPTION is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PXE_DHCPV6_OPTION struct {
+	Data [5]byte
+}
+
 // PXE_DHCPV6_RELAY_MESSAGE: https://learn.microsoft.com/windows/win32/api/wdspxe/ns-wdspxe-pxe_dhcpv6_relay_message
 type PXE_DHCPV6_RELAY_MESSAGE struct {
 	MessageType byte
 	HopCount    byte
 	LinkAddress [16]byte
 	PeerAddress [16]byte
-	Options     [5]byte
+	Options     [1]PXE_DHCPV6_OPTION
+}
+
+// PXE_DHCP_MESSAGE: https://learn.microsoft.com/windows/win32/api/wdspxe/ns-wdspxe-pxe_dhcp_message
+// PXE_DHCP_MESSAGE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PXE_DHCP_MESSAGE struct {
+	Data [243]byte
 }
 
 // PXE_DHCP_OPTION: https://learn.microsoft.com/windows/win32/api/wdspxe/ns-wdspxe-pxe_dhcp_option

@@ -1082,14 +1082,14 @@ func GdipCreateMetafileFromStream(stream *systemcom.IStream, metafile **GpMetafi
 }
 
 // GdipCreateMetafileFromWmf calls gdiplus!GdipCreateMetafileFromWmf.
-func GdipCreateMetafileFromWmf(hWmf graphicsgdi.HMETAFILE, deleteWmf bool, wmfPlaceableFileHeader unsafe.Pointer, metafile **GpMetafile) Status {
+func GdipCreateMetafileFromWmf(hWmf graphicsgdi.HMETAFILE, deleteWmf bool, wmfPlaceableFileHeader *WmfPlaceableFileHeader, metafile **GpMetafile) Status {
 	_deleteWmf := win32.Bool32(deleteWmf)
 	r1, _, _ := syscall.SyscallN(procGdipCreateMetafileFromWmf.Addr(), uintptr(hWmf), uintptr(_deleteWmf), uintptr(unsafe.Pointer(wmfPlaceableFileHeader)), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
 }
 
 // GdipCreateMetafileFromWmfFile calls gdiplus!GdipCreateMetafileFromWmfFile.
-func GdipCreateMetafileFromWmfFile(file string, wmfPlaceableFileHeader unsafe.Pointer, metafile **GpMetafile) Status {
+func GdipCreateMetafileFromWmfFile(file string, wmfPlaceableFileHeader *WmfPlaceableFileHeader, metafile **GpMetafile) Status {
 	_file := win32.UTF16Ptr(file)
 	r1, _, _ := syscall.SyscallN(procGdipCreateMetafileFromWmfFile.Addr(), uintptr(unsafe.Pointer(_file)), uintptr(unsafe.Pointer(wmfPlaceableFileHeader)), uintptr(unsafe.Pointer(metafile)))
 	return Status(r1)
@@ -2156,7 +2156,7 @@ func GdipGetMetafileHeaderFromStream(stream *systemcom.IStream, header *Metafile
 }
 
 // GdipGetMetafileHeaderFromWmf calls gdiplus!GdipGetMetafileHeaderFromWmf.
-func GdipGetMetafileHeaderFromWmf(hWmf graphicsgdi.HMETAFILE, wmfPlaceableFileHeader unsafe.Pointer, header *MetafileHeader) Status {
+func GdipGetMetafileHeaderFromWmf(hWmf graphicsgdi.HMETAFILE, wmfPlaceableFileHeader *WmfPlaceableFileHeader, header *MetafileHeader) Status {
 	r1, _, _ := syscall.SyscallN(procGdipGetMetafileHeaderFromWmf.Addr(), uintptr(hWmf), uintptr(unsafe.Pointer(wmfPlaceableFileHeader)), uintptr(unsafe.Pointer(header)))
 	return Status(r1)
 }

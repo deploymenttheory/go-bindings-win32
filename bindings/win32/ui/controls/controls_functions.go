@@ -2003,7 +2003,7 @@ func TaskDialog(hwndOwner foundation.HWND, hInstance foundation.HINSTANCE, pszWi
 // TaskDialogIndirect calls COMCTL32!TaskDialogIndirect.
 // https://learn.microsoft.com/windows/win32/api/commctrl/nf-commctrl-taskdialogindirect
 // Minimum OS: windows6.0.6000.
-func TaskDialogIndirect(pTaskConfig unsafe.Pointer, pnButton *int32, pnRadioButton *int32, pfVerificationFlagChecked *foundation.BOOL) error {
+func TaskDialogIndirect(pTaskConfig *TASKDIALOGCONFIG, pnButton *int32, pnRadioButton *int32, pfVerificationFlagChecked *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procTaskDialogIndirect.Addr(), uintptr(unsafe.Pointer(pTaskConfig)), uintptr(unsafe.Pointer(pnButton)), uintptr(unsafe.Pointer(pnRadioButton)), uintptr(unsafe.Pointer(pfVerificationFlagChecked)))
 	return win32.HRESULTError(int32(r1))
 }

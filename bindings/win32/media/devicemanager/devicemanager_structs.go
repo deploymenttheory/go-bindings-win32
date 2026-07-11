@@ -15,6 +15,22 @@ type MACINFO struct {
 	AbMacState [36]byte
 }
 
+// MTP_COMMAND_DATA_IN: https://learn.microsoft.com/windows/win32/api/mtpext/ns-mtpext-mtp_command_data_in
+// MTP_COMMAND_DATA_IN is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MTP_COMMAND_DATA_IN struct {
+	Data [35]byte
+}
+
+// MTP_COMMAND_DATA_OUT: https://learn.microsoft.com/windows/win32/api/mtpext/ns-mtpext-mtp_command_data_out
+// MTP_COMMAND_DATA_OUT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MTP_COMMAND_DATA_OUT struct {
+	Data [31]byte
+}
+
 type MediaDevMgr struct {
 }
 

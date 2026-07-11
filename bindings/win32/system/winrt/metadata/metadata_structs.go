@@ -28,6 +28,13 @@ type COR_FIELD_OFFSET struct {
 	UlOffset   uint32
 }
 
+// COR_NATIVE_LINK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type COR_NATIVE_LINK struct {
+	Data [6]byte
+}
+
 type COR_SECATTR struct {
 	TkCtor            uint32
 	PCustomAttribute  unsafe.Pointer

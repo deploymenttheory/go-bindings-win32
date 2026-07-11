@@ -14,10 +14,26 @@ import (
 	uicontrols "github.com/deploymenttheory/go-bindings-win32/bindings/win32/ui/controls"
 )
 
+// BUSNUMBER_DES: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-busnumber_des
+// BUSNUMBER_DES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BUSNUMBER_DES struct {
+	Data [20]byte
+}
+
+// BUSNUMBER_RANGE: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-busnumber_range
+// BUSNUMBER_RANGE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BUSNUMBER_RANGE struct {
+	Data [16]byte
+}
+
 // BUSNUMBER_RESOURCE: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-busnumber_resource
 type BUSNUMBER_RESOURCE struct {
-	BusNumber_Header [20]byte
-	BusNumber_Data   [16]byte
+	BusNumber_Header BUSNUMBER_DES
+	BusNumber_Data   [1]BUSNUMBER_RANGE
 }
 
 // CABINET_INFO_A: https://learn.microsoft.com/windows/win32/api/setupapi/ns-setupapi-cabinet_info_a
@@ -92,24 +108,69 @@ type CONFLICT_DETAILS_W struct {
 	CD_szDescription [260]uint16
 }
 
+// CONNECTION_DES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CONNECTION_DES struct {
+	Data [20]byte
+}
+
 type CONNECTION_RESOURCE struct {
-	Connection_Header [20]byte
+	Connection_Header CONNECTION_DES
+}
+
+// CS_DES: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-cs_des
+// CS_DES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CS_DES struct {
+	Data [33]byte
 }
 
 // CS_RESOURCE: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-cs_resource
 type CS_RESOURCE struct {
-	CS_Header [33]byte
+	CS_Header CS_DES
+}
+
+// DEVPRIVATE_DES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DEVPRIVATE_DES struct {
+	Data [24]byte
+}
+
+// DEVPRIVATE_RANGE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DEVPRIVATE_RANGE struct {
+	Data [12]byte
 }
 
 type DEVPRIVATE_RESOURCE struct {
-	PRV_Header [24]byte
-	PRV_Data   [12]byte
+	PRV_Header DEVPRIVATE_DES
+	PRV_Data   [1]DEVPRIVATE_RANGE
+}
+
+// DMA_DES: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-dma_des
+// DMA_DES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DMA_DES struct {
+	Data [16]byte
+}
+
+// DMA_RANGE: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-dma_range
+// DMA_RANGE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DMA_RANGE struct {
+	Data [12]byte
 }
 
 // DMA_RESOURCE: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-dma_resource
 type DMA_RESOURCE struct {
-	DMA_Header [16]byte
-	DMA_Data   [12]byte
+	DMA_Header DMA_DES
+	DMA_Data   [1]DMA_RANGE
 }
 
 // FILEPATHS_A: https://learn.microsoft.com/windows/win32/api/setupapi/ns-setupapi-filepaths_a
@@ -172,6 +233,20 @@ type FILE_IN_CABINET_INFO_W struct {
 	FullTargetName [260]uint16
 }
 
+// HWPROFILEINFO_A is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type HWPROFILEINFO_A struct {
+	Data [88]byte
+}
+
+// HWPROFILEINFO_W is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type HWPROFILEINFO_W struct {
+	Data [168]byte
+}
+
 // INFCONTEXT: https://learn.microsoft.com/windows/win32/api/setupapi/ns-setupapi-infcontext
 type INFCONTEXT struct {
 	Inf        unsafe.Pointer
@@ -180,43 +255,129 @@ type INFCONTEXT struct {
 	Line       uint32
 }
 
+// IO_DES: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-io_des
+// IO_DES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IO_DES struct {
+	Data [28]byte
+}
+
+// IO_RANGE: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-io_range
+// IO_RANGE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IO_RANGE struct {
+	Data [40]byte
+}
+
 // IO_RESOURCE: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-io_resource
 type IO_RESOURCE struct {
-	IO_Header [28]byte
-	IO_Data   [40]byte
+	IO_Header IO_DES
+	IO_Data   [1]IO_RANGE
+}
+
+// IRQ_DES_32: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-irq_des_32
+// IRQ_DES_32 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IRQ_DES_32 struct {
+	Data [20]byte
+}
+
+// IRQ_DES_64: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-irq_des_64
+// IRQ_DES_64 is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IRQ_DES_64 struct {
+	Data [24]byte
+}
+
+// IRQ_RANGE: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-irq_range
+// IRQ_RANGE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IRQ_RANGE struct {
+	Data [12]byte
 }
 
 // IRQ_RESOURCE_32: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-irq_resource_32
 type IRQ_RESOURCE_32 struct {
-	IRQ_Header [20]byte
-	IRQ_Data   [12]byte
+	IRQ_Header IRQ_DES_32
+	IRQ_Data   [1]IRQ_RANGE
 }
 
 // IRQ_RESOURCE_64: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-irq_resource_64
 type IRQ_RESOURCE_64 struct {
-	IRQ_Header [24]byte
-	IRQ_Data   [12]byte
+	IRQ_Header IRQ_DES_64
+	IRQ_Data   [1]IRQ_RANGE
+}
+
+// MEM_DES: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-mem_des
+// MEM_DES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MEM_DES struct {
+	Data [32]byte
+}
+
+// MEM_LARGE_DES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MEM_LARGE_DES struct {
+	Data [32]byte
+}
+
+// MEM_LARGE_RANGE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MEM_LARGE_RANGE struct {
+	Data [40]byte
 }
 
 type MEM_LARGE_RESOURCE struct {
-	MEM_LARGE_Header [32]byte
-	MEM_LARGE_Data   [40]byte
+	MEM_LARGE_Header MEM_LARGE_DES
+	MEM_LARGE_Data   [1]MEM_LARGE_RANGE
+}
+
+// MEM_RANGE: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-mem_range
+// MEM_RANGE is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MEM_RANGE struct {
+	Data [36]byte
 }
 
 // MEM_RESOURCE: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-mem_resource
 type MEM_RESOURCE struct {
-	MEM_Header [32]byte
-	MEM_Data   [36]byte
+	MEM_Header MEM_DES
+	MEM_Data   [1]MEM_RANGE
+}
+
+// MFCARD_DES: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-mfcard_des
+// MFCARD_DES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MFCARD_DES struct {
+	Data [20]byte
 }
 
 // MFCARD_RESOURCE: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-mfcard_resource
 type MFCARD_RESOURCE struct {
-	MfCard_Header [20]byte
+	MfCard_Header MFCARD_DES
+}
+
+// PCCARD_DES: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-pccard_des
+// PCCARD_DES is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type PCCARD_DES struct {
+	Data [38]byte
 }
 
 // PCCARD_RESOURCE: https://learn.microsoft.com/windows/win32/api/cfgmgr32/ns-cfgmgr32-pccard_resource
 type PCCARD_RESOURCE struct {
-	PcCard_Header [38]byte
+	PcCard_Header PCCARD_DES
 }
 
 // SOURCE_MEDIA_A: https://learn.microsoft.com/windows/win32/api/setupapi/ns-setupapi-source_media_a

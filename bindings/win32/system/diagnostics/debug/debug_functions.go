@@ -741,7 +741,7 @@ func GetErrorMode() uint32 {
 // GetImageConfigInformation calls imagehlp!GetImageConfigInformation.
 // https://learn.microsoft.com/windows/win32/api/imagehlp/nf-imagehlp-getimageconfiginformation
 // Minimum OS: windows5.1.2600.
-func GetImageConfigInformation(LoadedImage *LOADED_IMAGE, ImageConfigInformation unsafe.Pointer) error {
+func GetImageConfigInformation(LoadedImage *LOADED_IMAGE, ImageConfigInformation *IMAGE_LOAD_CONFIG_DIRECTORY64) error {
 	r1, _, e1 := syscall.SyscallN(procGetImageConfigInformation.Addr(), uintptr(unsafe.Pointer(LoadedImage)), uintptr(unsafe.Pointer(ImageConfigInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1085,7 +1085,7 @@ func MiniDumpReadDumpStream(BaseOfDump unsafe.Pointer, StreamNumber uint32, Dir 
 
 // MiniDumpWriteDump calls dbghelp!MiniDumpWriteDump.
 // https://learn.microsoft.com/windows/win32/api/minidumpapiset/nf-minidumpapiset-minidumpwritedump
-func MiniDumpWriteDump(hProcess foundation.HANDLE, ProcessId uint32, hFile foundation.HANDLE, DumpType MINIDUMP_TYPE, ExceptionParam unsafe.Pointer, UserStreamParam unsafe.Pointer, CallbackParam unsafe.Pointer) error {
+func MiniDumpWriteDump(hProcess foundation.HANDLE, ProcessId uint32, hFile foundation.HANDLE, DumpType MINIDUMP_TYPE, ExceptionParam *MINIDUMP_EXCEPTION_INFORMATION, UserStreamParam *MINIDUMP_USER_STREAM_INFORMATION, CallbackParam *MINIDUMP_CALLBACK_INFORMATION) error {
 	r1, _, e1 := syscall.SyscallN(procMiniDumpWriteDump.Addr(), uintptr(hProcess), uintptr(ProcessId), uintptr(hFile), uintptr(DumpType), uintptr(unsafe.Pointer(ExceptionParam)), uintptr(unsafe.Pointer(UserStreamParam)), uintptr(unsafe.Pointer(CallbackParam)))
 	if r1 == 0 {
 		return win32.LastError(e1)
@@ -1404,7 +1404,7 @@ func SetErrorMode(uMode THREAD_ERROR_MODE) THREAD_ERROR_MODE {
 // SetImageConfigInformation calls imagehlp!SetImageConfigInformation.
 // https://learn.microsoft.com/windows/win32/api/imagehlp/nf-imagehlp-setimageconfiginformation
 // Minimum OS: windows5.1.2600.
-func SetImageConfigInformation(LoadedImage *LOADED_IMAGE, ImageConfigInformation unsafe.Pointer) error {
+func SetImageConfigInformation(LoadedImage *LOADED_IMAGE, ImageConfigInformation *IMAGE_LOAD_CONFIG_DIRECTORY64) error {
 	r1, _, e1 := syscall.SyscallN(procSetImageConfigInformation.Addr(), uintptr(unsafe.Pointer(LoadedImage)), uintptr(unsafe.Pointer(ImageConfigInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)

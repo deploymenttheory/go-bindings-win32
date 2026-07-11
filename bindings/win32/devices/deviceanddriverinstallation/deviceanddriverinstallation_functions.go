@@ -1533,28 +1533,28 @@ func CM_Get_HW_Prof_Flags_ExA(pDeviceID foundation.PSTR, ulHardwareProfile uint3
 
 // CM_Get_Hardware_Profile_Info calls CFGMGR32!CM_Get_Hardware_Profile_InfoW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_hardware_profile_infow
-func CM_Get_Hardware_Profile_Info(ulIndex uint32, pHWProfileInfo unsafe.Pointer, ulFlags uint32) CONFIGRET {
+func CM_Get_Hardware_Profile_Info(ulIndex uint32, pHWProfileInfo *HWPROFILEINFO_W, ulFlags uint32) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Get_Hardware_Profile_Info.Addr(), uintptr(ulIndex), uintptr(unsafe.Pointer(pHWProfileInfo)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Get_Hardware_Profile_InfoA calls CFGMGR32!CM_Get_Hardware_Profile_InfoA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_hardware_profile_infoa
-func CM_Get_Hardware_Profile_InfoA(ulIndex uint32, pHWProfileInfo unsafe.Pointer, ulFlags uint32) CONFIGRET {
+func CM_Get_Hardware_Profile_InfoA(ulIndex uint32, pHWProfileInfo *HWPROFILEINFO_A, ulFlags uint32) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Get_Hardware_Profile_InfoA.Addr(), uintptr(ulIndex), uintptr(unsafe.Pointer(pHWProfileInfo)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Get_Hardware_Profile_Info_Ex calls CFGMGR32!CM_Get_Hardware_Profile_Info_ExW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_hardware_profile_info_exw
-func CM_Get_Hardware_Profile_Info_Ex(ulIndex uint32, pHWProfileInfo unsafe.Pointer, ulFlags uint32, hMachine uintptr) CONFIGRET {
+func CM_Get_Hardware_Profile_Info_Ex(ulIndex uint32, pHWProfileInfo *HWPROFILEINFO_W, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Get_Hardware_Profile_Info_Ex.Addr(), uintptr(ulIndex), uintptr(unsafe.Pointer(pHWProfileInfo)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
 // CM_Get_Hardware_Profile_Info_ExA calls CFGMGR32!CM_Get_Hardware_Profile_Info_ExA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_hardware_profile_info_exa
-func CM_Get_Hardware_Profile_Info_ExA(ulIndex uint32, pHWProfileInfo unsafe.Pointer, ulFlags uint32, hMachine uintptr) CONFIGRET {
+func CM_Get_Hardware_Profile_Info_ExA(ulIndex uint32, pHWProfileInfo *HWPROFILEINFO_A, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	r1, _, _ := syscall.SyscallN(procCM_Get_Hardware_Profile_Info_ExA.Addr(), uintptr(ulIndex), uintptr(unsafe.Pointer(pHWProfileInfo)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }

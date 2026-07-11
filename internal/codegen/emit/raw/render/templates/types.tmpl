@@ -17,6 +17,10 @@ type {{.TypeName}} {{.BaseType}}
 {{- if .IsUnionBlob}}// {{.TypeName}} is a C union, exposed as correctly sized and aligned backing
 // storage; read or write a specific member through an unsafe.Pointer cast.
 {{end -}}
+{{- if .IsPackedBlob}}// {{.TypeName}} is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+{{end -}}
 type {{.TypeName}} struct {
 {{- range .Fields}}
 	{{.Name}} {{.GoType}}

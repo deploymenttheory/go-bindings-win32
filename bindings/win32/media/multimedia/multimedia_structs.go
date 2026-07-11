@@ -9,18 +9,40 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
 	graphicsgdi "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/gdi"
+	mediaaudio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio"
 )
 
+// ADPCMCOEFSET is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ADPCMCOEFSET struct {
+	Data [4]byte
+}
+
+// ADPCMEWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ADPCMEWAVEFORMAT struct {
+	Data [20]byte
+}
+
+// ADPCMWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type ADPCMWAVEFORMAT struct {
+	Data [26]byte
+}
+
 type APTXWAVEFORMAT struct {
-	Wfx [18]byte
+	Wfx mediaaudio.WAVEFORMATEX
 }
 
 type AUDIOFILE_AF10WAVEFORMAT struct {
-	Wfx [18]byte
+	Wfx mediaaudio.WAVEFORMATEX
 }
 
 type AUDIOFILE_AF36WAVEFORMAT struct {
-	Wfx [18]byte
+	Wfx mediaaudio.WAVEFORMATEX
 }
 
 // AVICOMPRESSOPTIONS: https://learn.microsoft.com/windows/win32/api/vfw/ns-vfw-avicompressoptions
@@ -218,20 +240,76 @@ type COMPVARS struct {
 	CbState    int32
 }
 
+// CONTRESCR10WAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CONTRESCR10WAVEFORMAT struct {
+	Data [20]byte
+}
+
+// CONTRESVQLPCWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CONTRESVQLPCWAVEFORMAT struct {
+	Data [20]byte
+}
+
+// CREATIVEADPCMWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CREATIVEADPCMWAVEFORMAT struct {
+	Data [20]byte
+}
+
+// CREATIVEFASTSPEECH10WAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CREATIVEFASTSPEECH10WAVEFORMAT struct {
+	Data [20]byte
+}
+
+// CREATIVEFASTSPEECH8WAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type CREATIVEFASTSPEECH8WAVEFORMAT struct {
+	Data [20]byte
+}
+
 type CSIMAADPCMWAVEFORMAT struct {
-	Wfx [18]byte
+	Wfx mediaaudio.WAVEFORMATEX
 }
 
 type DIALOGICOKIADPCMWAVEFORMAT struct {
-	Ewf [18]byte
+	Ewf mediaaudio.WAVEFORMATEX
+}
+
+// DIGIADPCMWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DIGIADPCMWAVEFORMAT struct {
+	Data [20]byte
 }
 
 type DIGIFIXWAVEFORMAT struct {
-	Wfx [18]byte
+	Wfx mediaaudio.WAVEFORMATEX
+}
+
+// DIGIREALWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DIGIREALWAVEFORMAT struct {
+	Data [20]byte
 }
 
 type DIGISTDWAVEFORMAT struct {
-	Wfx [18]byte
+	Wfx mediaaudio.WAVEFORMATEX
+}
+
+// DOLBYAC2WAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DOLBYAC2WAVEFORMAT struct {
+	Data [20]byte
 }
 
 // DRAWDIBTIME: https://learn.microsoft.com/windows/win32/api/vfw/ns-vfw-drawdibtime
@@ -245,8 +323,79 @@ type DRAWDIBTIME struct {
 	TimeSetDIBits  int32
 }
 
+// DRMWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DRMWAVEFORMAT struct {
+	Data [42]byte
+}
+
+// DRVCONFIGINFO: https://learn.microsoft.com/windows/win32/api/mmiscapi/ns-mmiscapi-drvconfiginfo
+// DRVCONFIGINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DRVCONFIGINFO struct {
+	Data [20]byte
+}
+
+// DRVCONFIGINFOEX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DRVCONFIGINFOEX struct {
+	Data [24]byte
+}
+
+// DRVM_IOCTL_DATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DRVM_IOCTL_DATA struct {
+	Data [8]byte
+}
+
+// DVIADPCMWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DVIADPCMWAVEFORMAT struct {
+	Data [20]byte
+}
+
 type ECHOSC1WAVEFORMAT struct {
-	Wfx [18]byte
+	Wfx mediaaudio.WAVEFORMATEX
+}
+
+// EXBMINFOHEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type EXBMINFOHEADER struct {
+	Data [44]byte
+}
+
+// FMTOWNS_SND_WAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type FMTOWNS_SND_WAVEFORMAT struct {
+	Data [20]byte
+}
+
+// G721_ADPCMWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type G721_ADPCMWAVEFORMAT struct {
+	Data [20]byte
+}
+
+// G723_ADPCMWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type G723_ADPCMWAVEFORMAT struct {
+	Data [22]byte
+}
+
+// GSM610WAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type GSM610WAVEFORMAT struct {
+	Data [20]byte
 }
 
 // ICCOMPRESS: https://learn.microsoft.com/windows/win32/api/vfw/ns-vfw-iccompress
@@ -391,27 +540,782 @@ type ICSETSTATUSPROC struct {
 	Status  uintptr
 }
 
+// IMAADPCMWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IMAADPCMWAVEFORMAT struct {
+	Data [20]byte
+}
+
+// JOYCAPS2A is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type JOYCAPS2A struct {
+	Data [452]byte
+}
+
+// JOYCAPS2W is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type JOYCAPS2W struct {
+	Data [776]byte
+}
+
+// JOYCAPSA: https://learn.microsoft.com/windows/win32/api/joystickapi/ns-joystickapi-joycapsa
+// JOYCAPSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type JOYCAPSA struct {
+	Data [404]byte
+}
+
+// JOYCAPSW: https://learn.microsoft.com/windows/win32/api/joystickapi/ns-joystickapi-joycapsw
+// JOYCAPSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type JOYCAPSW struct {
+	Data [728]byte
+}
+
+// JOYINFO: https://learn.microsoft.com/windows/win32/api/joystickapi/ns-joystickapi-joyinfo
+// JOYINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type JOYINFO struct {
+	Data [16]byte
+}
+
+// JOYINFOEX: https://learn.microsoft.com/windows/win32/api/joystickapi/ns-joystickapi-joyinfoex
+// JOYINFOEX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type JOYINFOEX struct {
+	Data [52]byte
+}
+
+// JPEGINFOHEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type JPEGINFOHEADER struct {
+	Data [24]byte
+}
+
 type KSDATAFORMAT_SUBTYPE_IEEE_FLOAT struct {
 }
 
+// MCI_ANIM_OPEN_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_ANIM_OPEN_PARMSA struct {
+	Data [48]byte
+}
+
+// MCI_ANIM_OPEN_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_ANIM_OPEN_PARMSW struct {
+	Data [48]byte
+}
+
+// MCI_ANIM_PLAY_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_ANIM_PLAY_PARMS struct {
+	Data [20]byte
+}
+
+// MCI_ANIM_RECT_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_ANIM_RECT_PARMS struct {
+	Data [24]byte
+}
+
+// MCI_ANIM_STEP_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_ANIM_STEP_PARMS struct {
+	Data [12]byte
+}
+
+// MCI_ANIM_UPDATE_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_ANIM_UPDATE_PARMS struct {
+	Data [32]byte
+}
+
+// MCI_ANIM_WINDOW_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_ANIM_WINDOW_PARMSA struct {
+	Data [28]byte
+}
+
+// MCI_ANIM_WINDOW_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_ANIM_WINDOW_PARMSW struct {
+	Data [28]byte
+}
+
+// MCI_BREAK_PARMS: https://learn.microsoft.com/windows/win32/Multimedia/mci-break-parms
+// MCI_BREAK_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_BREAK_PARMS struct {
+	Data [20]byte
+}
+
+// MCI_DGV_CAPTURE_PARMSA: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_capture_parmsa
+// MCI_DGV_CAPTURE_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_CAPTURE_PARMSA struct {
+	Data [32]byte
+}
+
+// MCI_DGV_CAPTURE_PARMSW: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_capture_parmsw
+// MCI_DGV_CAPTURE_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_CAPTURE_PARMSW struct {
+	Data [32]byte
+}
+
+// MCI_DGV_COPY_PARMS: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_copy_parms
+// MCI_DGV_COPY_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_COPY_PARMS struct {
+	Data [40]byte
+}
+
+// MCI_DGV_CUE_PARMS: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_cue_parms
+// MCI_DGV_CUE_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_CUE_PARMS struct {
+	Data [12]byte
+}
+
+// MCI_DGV_CUT_PARMS: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_cut_parms
+// MCI_DGV_CUT_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_CUT_PARMS struct {
+	Data [40]byte
+}
+
+// MCI_DGV_DELETE_PARMS: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_delete_parms
+// MCI_DGV_DELETE_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_DELETE_PARMS struct {
+	Data [40]byte
+}
+
+// MCI_DGV_INFO_PARMSA: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_info_parmsa
+// MCI_DGV_INFO_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_INFO_PARMSA struct {
+	Data [24]byte
+}
+
+// MCI_DGV_INFO_PARMSW: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_info_parmsw
+// MCI_DGV_INFO_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_INFO_PARMSW struct {
+	Data [24]byte
+}
+
+// MCI_DGV_LIST_PARMSA: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_list_parmsa
+// MCI_DGV_LIST_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_LIST_PARMSA struct {
+	Data [36]byte
+}
+
+// MCI_DGV_LIST_PARMSW: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_list_parmsw
+// MCI_DGV_LIST_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_LIST_PARMSW struct {
+	Data [36]byte
+}
+
+// MCI_DGV_MONITOR_PARMS: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_monitor_parms
+// MCI_DGV_MONITOR_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_MONITOR_PARMS struct {
+	Data [16]byte
+}
+
+// MCI_DGV_OPEN_PARMSA: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_open_parmsa
+// MCI_DGV_OPEN_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_OPEN_PARMSA struct {
+	Data [48]byte
+}
+
+// MCI_DGV_OPEN_PARMSW: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_open_parmsw
+// MCI_DGV_OPEN_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_OPEN_PARMSW struct {
+	Data [48]byte
+}
+
+// MCI_DGV_PASTE_PARMS: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_paste_parms
+// MCI_DGV_PASTE_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_PASTE_PARMS struct {
+	Data [36]byte
+}
+
+// MCI_DGV_QUALITY_PARMSA: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_quality_parmsa
+// MCI_DGV_QUALITY_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_QUALITY_PARMSA struct {
+	Data [28]byte
+}
+
+// MCI_DGV_QUALITY_PARMSW: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_quality_parmsw
+// MCI_DGV_QUALITY_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_QUALITY_PARMSW struct {
+	Data [28]byte
+}
+
+// MCI_DGV_RECORD_PARMS: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_record_parms
+// MCI_DGV_RECORD_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_RECORD_PARMS struct {
+	Data [40]byte
+}
+
+// MCI_DGV_RECT_PARMS: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_rect_parms
+// MCI_DGV_RECT_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_RECT_PARMS struct {
+	Data [24]byte
+}
+
+// MCI_DGV_RESERVE_PARMSA: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_reserve_parmsa
+// MCI_DGV_RESERVE_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_RESERVE_PARMSA struct {
+	Data [20]byte
+}
+
+// MCI_DGV_RESERVE_PARMSW: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_reserve_parmsw
+// MCI_DGV_RESERVE_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_RESERVE_PARMSW struct {
+	Data [20]byte
+}
+
+// MCI_DGV_RESTORE_PARMSA: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_restore_parmsa
+// MCI_DGV_RESTORE_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_RESTORE_PARMSA struct {
+	Data [32]byte
+}
+
+// MCI_DGV_RESTORE_PARMSW: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_restore_parmsw
+// MCI_DGV_RESTORE_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_RESTORE_PARMSW struct {
+	Data [32]byte
+}
+
+// MCI_DGV_SAVE_PARMSA: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_save_parmsa
+// MCI_DGV_SAVE_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_SAVE_PARMSA struct {
+	Data [32]byte
+}
+
+// MCI_DGV_SAVE_PARMSW: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_save_parmsw
+// MCI_DGV_SAVE_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_SAVE_PARMSW struct {
+	Data [32]byte
+}
+
+// MCI_DGV_SETAUDIO_PARMSA: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_setaudio_parmsa
+// MCI_DGV_SETAUDIO_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_SETAUDIO_PARMSA struct {
+	Data [36]byte
+}
+
+// MCI_DGV_SETAUDIO_PARMSW: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_setaudio_parmsw
+// MCI_DGV_SETAUDIO_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_SETAUDIO_PARMSW struct {
+	Data [36]byte
+}
+
+// MCI_DGV_SETVIDEO_PARMSA: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_setvideo_parmsa
+// MCI_DGV_SETVIDEO_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_SETVIDEO_PARMSA struct {
+	Data [40]byte
+}
+
+// MCI_DGV_SETVIDEO_PARMSW: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_setvideo_parmsw
+// MCI_DGV_SETVIDEO_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_SETVIDEO_PARMSW struct {
+	Data [40]byte
+}
+
+// MCI_DGV_SET_PARMS: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_set_parms
+// MCI_DGV_SET_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_SET_PARMS struct {
+	Data [24]byte
+}
+
+// MCI_DGV_SIGNAL_PARMS: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_signal_parms
+// MCI_DGV_SIGNAL_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_SIGNAL_PARMS struct {
+	Data [20]byte
+}
+
+// MCI_DGV_STATUS_PARMSA: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_status_parmsa
+// MCI_DGV_STATUS_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_STATUS_PARMSA struct {
+	Data [36]byte
+}
+
+// MCI_DGV_STATUS_PARMSW: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_status_parmsw
+// MCI_DGV_STATUS_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_STATUS_PARMSW struct {
+	Data [36]byte
+}
+
+// MCI_DGV_STEP_PARMS: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_step_parms
+// MCI_DGV_STEP_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_STEP_PARMS struct {
+	Data [12]byte
+}
+
+// MCI_DGV_UPDATE_PARMS: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_update_parms
+// MCI_DGV_UPDATE_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_UPDATE_PARMS struct {
+	Data [32]byte
+}
+
+// MCI_DGV_WINDOW_PARMSA: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_window_parmsa
+// MCI_DGV_WINDOW_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_WINDOW_PARMSA struct {
+	Data [28]byte
+}
+
+// MCI_DGV_WINDOW_PARMSW: https://learn.microsoft.com/windows/win32/api/digitalv/ns-digitalv-mci_dgv_window_parmsw
+// MCI_DGV_WINDOW_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_DGV_WINDOW_PARMSW struct {
+	Data [28]byte
+}
+
+// MCI_GENERIC_PARMS: https://learn.microsoft.com/windows/win32/Multimedia/mci-generic-parms
+// MCI_GENERIC_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_GENERIC_PARMS struct {
+	Data [8]byte
+}
+
+// MCI_GETDEVCAPS_PARMS: https://learn.microsoft.com/windows/win32/Multimedia/mci-getdevcaps-parms
+// MCI_GETDEVCAPS_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_GETDEVCAPS_PARMS struct {
+	Data [16]byte
+}
+
+// MCI_INFO_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_INFO_PARMSA struct {
+	Data [20]byte
+}
+
+// MCI_INFO_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_INFO_PARMSW struct {
+	Data [20]byte
+}
+
+// MCI_LOAD_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_LOAD_PARMSA struct {
+	Data [16]byte
+}
+
+// MCI_LOAD_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_LOAD_PARMSW struct {
+	Data [16]byte
+}
+
+// MCI_OPEN_DRIVER_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_OPEN_DRIVER_PARMS struct {
+	Data [20]byte
+}
+
+// MCI_OPEN_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_OPEN_PARMSA struct {
+	Data [36]byte
+}
+
+// MCI_OPEN_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_OPEN_PARMSW struct {
+	Data [36]byte
+}
+
+// MCI_OVLY_LOAD_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_OVLY_LOAD_PARMSA struct {
+	Data [32]byte
+}
+
+// MCI_OVLY_LOAD_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_OVLY_LOAD_PARMSW struct {
+	Data [32]byte
+}
+
+// MCI_OVLY_OPEN_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_OVLY_OPEN_PARMSA struct {
+	Data [48]byte
+}
+
+// MCI_OVLY_OPEN_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_OVLY_OPEN_PARMSW struct {
+	Data [48]byte
+}
+
+// MCI_OVLY_RECT_PARMS: https://learn.microsoft.com/windows/win32/Multimedia/mci-ovly-rect-parms
+// MCI_OVLY_RECT_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_OVLY_RECT_PARMS struct {
+	Data [24]byte
+}
+
+// MCI_OVLY_SAVE_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_OVLY_SAVE_PARMSA struct {
+	Data [32]byte
+}
+
+// MCI_OVLY_SAVE_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_OVLY_SAVE_PARMSW struct {
+	Data [32]byte
+}
+
+// MCI_OVLY_WINDOW_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_OVLY_WINDOW_PARMSA struct {
+	Data [28]byte
+}
+
+// MCI_OVLY_WINDOW_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_OVLY_WINDOW_PARMSW struct {
+	Data [28]byte
+}
+
+// MCI_PLAY_PARMS: https://learn.microsoft.com/windows/win32/Multimedia/mci-play-parms
+// MCI_PLAY_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_PLAY_PARMS struct {
+	Data [16]byte
+}
+
+// MCI_RECORD_PARMS: https://learn.microsoft.com/windows/win32/Multimedia/mci-record-parms
+// MCI_RECORD_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_RECORD_PARMS struct {
+	Data [16]byte
+}
+
+// MCI_SAVE_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_SAVE_PARMSA struct {
+	Data [16]byte
+}
+
+// MCI_SAVE_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_SAVE_PARMSW struct {
+	Data [16]byte
+}
+
+// MCI_SEEK_PARMS: https://learn.microsoft.com/windows/win32/Multimedia/mci-seek-parms
+// MCI_SEEK_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_SEEK_PARMS struct {
+	Data [12]byte
+}
+
+// MCI_SEQ_SET_PARMS: https://learn.microsoft.com/windows/win32/Multimedia/mci-seq-set-parms
+// MCI_SEQ_SET_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_SEQ_SET_PARMS struct {
+	Data [36]byte
+}
+
+// MCI_SET_PARMS: https://learn.microsoft.com/windows/win32/Multimedia/mci-set-parms
+// MCI_SET_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_SET_PARMS struct {
+	Data [16]byte
+}
+
+// MCI_STATUS_PARMS: https://learn.microsoft.com/windows/win32/Multimedia/mci-status-parms
+// MCI_STATUS_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_STATUS_PARMS struct {
+	Data [24]byte
+}
+
+// MCI_SYSINFO_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_SYSINFO_PARMSA struct {
+	Data [28]byte
+}
+
+// MCI_SYSINFO_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_SYSINFO_PARMSW struct {
+	Data [28]byte
+}
+
+// MCI_VD_ESCAPE_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_VD_ESCAPE_PARMSA struct {
+	Data [16]byte
+}
+
+// MCI_VD_ESCAPE_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_VD_ESCAPE_PARMSW struct {
+	Data [16]byte
+}
+
+// MCI_VD_PLAY_PARMS: https://learn.microsoft.com/windows/win32/Multimedia/mci-vd-play-parms
+// MCI_VD_PLAY_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_VD_PLAY_PARMS struct {
+	Data [20]byte
+}
+
+// MCI_VD_STEP_PARMS: https://learn.microsoft.com/windows/win32/Multimedia/mci-vd-step-parms
+// MCI_VD_STEP_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_VD_STEP_PARMS struct {
+	Data [12]byte
+}
+
+// MCI_WAVE_DELETE_PARMS: https://learn.microsoft.com/windows/win32/Multimedia/mci-wave-delete-parms
+// MCI_WAVE_DELETE_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_WAVE_DELETE_PARMS struct {
+	Data [16]byte
+}
+
+// MCI_WAVE_OPEN_PARMSA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_WAVE_OPEN_PARMSA struct {
+	Data [40]byte
+}
+
+// MCI_WAVE_OPEN_PARMSW is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_WAVE_OPEN_PARMSW struct {
+	Data [40]byte
+}
+
+// MCI_WAVE_SET_PARMS: https://learn.microsoft.com/windows/win32/Multimedia/mci-wave-set-parms
+// MCI_WAVE_SET_PARMS is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MCI_WAVE_SET_PARMS struct {
+	Data [48]byte
+}
+
+// MEDIASPACEADPCMWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MEDIASPACEADPCMWAVEFORMAT struct {
+	Data [20]byte
+}
+
+// MIDIOPENSTRMID is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDIOPENSTRMID struct {
+	Data [8]byte
+}
+
+// MIXEROPENDESC is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIXEROPENDESC struct {
+	Data [40]byte
+}
+
+// MMCKINFO: https://learn.microsoft.com/windows/win32/api/mmiscapi/ns-mmiscapi-mmckinfo
+// MMCKINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MMCKINFO struct {
+	Data [20]byte
+}
+
+// MMIOINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MMIOINFO struct {
+	Data [100]byte
+}
+
+// MSAUDIO1WAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MSAUDIO1WAVEFORMAT struct {
+	Data [22]byte
+}
+
+// NMS_VBXADPCMWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type NMS_VBXADPCMWAVEFORMAT struct {
+	Data [20]byte
+}
+
 type OLIADPCMWAVEFORMAT struct {
-	Wfx [18]byte
+	Wfx mediaaudio.WAVEFORMATEX
 }
 
 type OLICELPWAVEFORMAT struct {
-	Wfx [18]byte
+	Wfx mediaaudio.WAVEFORMATEX
 }
 
 type OLIGSMWAVEFORMAT struct {
-	Wfx [18]byte
+	Wfx mediaaudio.WAVEFORMATEX
 }
 
 type OLIOPRWAVEFORMAT struct {
-	Wfx [18]byte
+	Wfx mediaaudio.WAVEFORMATEX
 }
 
 type OLISBCWAVEFORMAT struct {
-	Wfx [18]byte
+	Wfx mediaaudio.WAVEFORMATEX
+}
+
+// SIERRAADPCMWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SIERRAADPCMWAVEFORMAT struct {
+	Data [20]byte
+}
+
+// SONARCWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type SONARCWAVEFORMAT struct {
+	Data [20]byte
+}
+
+// TIMEREVENT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TIMEREVENT struct {
+	Data [20]byte
+}
+
+// TRUESPEECHWAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TRUESPEECHWAVEFORMAT struct {
+	Data [50]byte
 }
 
 // VIDEOHDR: https://learn.microsoft.com/windows/win32/api/vfw/ns-vfw-videohdr
@@ -425,8 +1329,29 @@ type VIDEOHDR struct {
 	DwReserved     [4]uintptr
 }
 
+// WAVEOPENDESC is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WAVEOPENDESC struct {
+	Data [44]byte
+}
+
+// WMAUDIO2WAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WMAUDIO2WAVEFORMAT struct {
+	Data [28]byte
+}
+
+// WMAUDIO3WAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type WMAUDIO3WAVEFORMAT struct {
+	Data [36]byte
+}
+
 type YAMAHA_ADPCMWAVEFORMAT struct {
-	Wfx [18]byte
+	Wfx mediaaudio.WAVEFORMATEX
 }
 
 type S_RIFFWAVE_inst struct {

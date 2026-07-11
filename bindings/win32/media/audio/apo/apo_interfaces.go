@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	mediaaudio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
 
@@ -114,9 +115,9 @@ func (self *IAudioMediaType) IsEqual(pIAudioType *IAudioMediaType, pdwFlags *uin
 }
 
 // GetAudioFormat dispatches through IAudioMediaType's vtable slot 5.
-func (self *IAudioMediaType) GetAudioFormat() unsafe.Pointer {
+func (self *IAudioMediaType) GetAudioFormat() *mediaaudio.WAVEFORMATEX {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)))
-	return unsafe.Pointer(r1)
+	return (*mediaaudio.WAVEFORMATEX)(unsafe.Pointer(r1))
 }
 
 // GetUncompressedAudioFormat dispatches through IAudioMediaType's vtable slot 6.

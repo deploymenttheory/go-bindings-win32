@@ -4,6 +4,13 @@
 
 package media
 
+// MMTIME is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MMTIME struct {
+	Data [12]byte
+}
+
 // TIMECAPS: https://learn.microsoft.com/windows/win32/api/timeapi/ns-timeapi-timecaps
 type TIMECAPS struct {
 	WPeriodMin uint32

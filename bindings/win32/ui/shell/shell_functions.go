@@ -929,7 +929,7 @@ func CreateProfile(pszUserSid string, pszUserName string, pszProfilePath foundat
 // DAD_AutoScroll calls SHELL32!DAD_AutoScroll.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-dad_autoscroll
 // Minimum OS: windows5.0.
-func DAD_AutoScroll(hwnd foundation.HWND, pad unsafe.Pointer, pptNow *foundation.POINT) bool {
+func DAD_AutoScroll(hwnd foundation.HWND, pad *AUTO_SCROLL_DATA, pptNow *foundation.POINT) bool {
 	r1, _, _ := syscall.SyscallN(procDAD_AutoScroll.Addr(), uintptr(hwnd), uintptr(unsafe.Pointer(pad)), uintptr(unsafe.Pointer(pptNow)))
 	return r1 != 0
 }
@@ -1605,7 +1605,7 @@ func HlinkUpdateStackItem(pihlframe *IHlinkFrame, pihlbc *IHlinkBrowseContext, u
 // ILAppendID calls SHELL32!ILAppendID.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-ilappendid
 // Minimum OS: windows5.1.2600.
-func ILAppendID(pidl *uishellcommon.ITEMIDLIST, pmkid unsafe.Pointer, fAppend bool) *uishellcommon.ITEMIDLIST {
+func ILAppendID(pidl *uishellcommon.ITEMIDLIST, pmkid *uishellcommon.SHITEMID, fAppend bool) *uishellcommon.ITEMIDLIST {
 	_fAppend := win32.Bool32(fAppend)
 	r1, _, _ := syscall.SyscallN(procILAppendID.Addr(), uintptr(unsafe.Pointer(pidl)), uintptr(unsafe.Pointer(pmkid)), uintptr(_fAppend))
 	return (*uishellcommon.ITEMIDLIST)(unsafe.Pointer(r1))
@@ -3279,7 +3279,7 @@ func QISearch(that unsafe.Pointer, pqit *QITAB, riid *win32.GUID, ppv *unsafe.Po
 // ReadCabinetState calls SHELL32!ReadCabinetState.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-readcabinetstate
 // Minimum OS: windows5.1.2600.
-func ReadCabinetState(pcs unsafe.Pointer, cLength int32) bool {
+func ReadCabinetState(pcs *CABINETSTATE, cLength int32) bool {
 	r1, _, _ := syscall.SyscallN(procReadCabinetState.Addr(), uintptr(unsafe.Pointer(pcs)), uintptr(cLength))
 	return r1 != 0
 }
@@ -3528,7 +3528,7 @@ func SHChangeNotifyDeregister(ulID uint32) bool {
 // SHChangeNotifyRegister calls SHELL32!SHChangeNotifyRegister.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shchangenotifyregister
 // Minimum OS: windows5.0.
-func SHChangeNotifyRegister(hwnd foundation.HWND, fSources SHCNRF_SOURCE, fEvents int32, wMsg uint32, cEntries int32, pshcne unsafe.Pointer) uint32 {
+func SHChangeNotifyRegister(hwnd foundation.HWND, fSources SHCNRF_SOURCE, fEvents int32, wMsg uint32, cEntries int32, pshcne *SHChangeNotifyEntry) uint32 {
 	r1, _, _ := syscall.SyscallN(procSHChangeNotifyRegister.Addr(), uintptr(hwnd), uintptr(fSources), uintptr(fEvents), uintptr(wMsg), uintptr(cEntries), uintptr(unsafe.Pointer(pshcne)))
 	return uint32(r1)
 }
@@ -4410,7 +4410,7 @@ func SHGetSetFolderCustomSettings(pfcs *SHFOLDERCUSTOMSETTINGS, pszPath string, 
 // SHGetSetSettings calls SHELL32!SHGetSetSettings.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetsetsettings
 // Minimum OS: windows5.1.2600.
-func SHGetSetSettings(lpss unsafe.Pointer, dwMask SSF_MASK, bSet bool) {
+func SHGetSetSettings(lpss *SHELLSTATEA, dwMask SSF_MASK, bSet bool) {
 	_bSet := win32.Bool32(bSet)
 	syscall.SyscallN(procSHGetSetSettings.Addr(), uintptr(unsafe.Pointer(lpss)), uintptr(dwMask), uintptr(_bSet))
 }
@@ -4418,7 +4418,7 @@ func SHGetSetSettings(lpss unsafe.Pointer, dwMask SSF_MASK, bSet bool) {
 // SHGetSettings calls SHELL32!SHGetSettings.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetsettings
 // Minimum OS: windows5.0.
-func SHGetSettings(psfs unsafe.Pointer, dwMask uint32) {
+func SHGetSettings(psfs *SHELLFLAGSTATE, dwMask uint32) {
 	syscall.SyscallN(procSHGetSettings.Addr(), uintptr(unsafe.Pointer(psfs)), uintptr(dwMask))
 }
 
@@ -6617,7 +6617,7 @@ func WnsprintfA(pszDest foundation.PSTR, cchDest int32, pszFmt foundation.PSTR) 
 // WriteCabinetState calls SHELL32!WriteCabinetState.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-writecabinetstate
 // Minimum OS: windows5.1.2600.
-func WriteCabinetState(pcs unsafe.Pointer) bool {
+func WriteCabinetState(pcs *CABINETSTATE) bool {
 	r1, _, _ := syscall.SyscallN(procWriteCabinetState.Addr(), uintptr(unsafe.Pointer(pcs)))
 	return r1 != 0
 }

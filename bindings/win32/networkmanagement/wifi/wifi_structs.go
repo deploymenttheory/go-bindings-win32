@@ -1433,6 +1433,13 @@ type DOT11_SCAN_REQUEST_V2 struct {
 	UcBuffer            [1]byte
 }
 
+// DOT11_SECURITY_PACKET_HEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DOT11_SECURITY_PACKET_HEADER struct {
+	Data [9]byte
+}
+
 type DOT11_SEND_GO_NEGOTIATION_CONFIRMATION_PARAMETERS struct {
 	Header            networkmanagementndis.NDIS_OBJECT_HEADER
 	PeerDeviceAddress [6]byte

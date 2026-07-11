@@ -138,7 +138,7 @@ type FIXED_INFO_W2KSP1 struct {
 
 // ICMPV6_ECHO_REPLY_LH: https://learn.microsoft.com/windows/win32/api/ipexport/ns-ipexport-icmpv6_echo_reply_lh
 type ICMPV6_ECHO_REPLY_LH struct {
-	Address       [26]byte
+	Address       IPV6_ADDRESS_EX
 	Status        uint32
 	RoundTripTime uint32
 }
@@ -200,6 +200,14 @@ type INTERFACE_TIMESTAMP_CAPABILITIES struct {
 	SupportsCrossTimestamp   foundation.BOOLEAN
 	HardwareCapabilities     INTERFACE_HARDWARE_TIMESTAMP_CAPABILITIES
 	SoftwareCapabilities     INTERFACE_SOFTWARE_TIMESTAMP_CAPABILITIES
+}
+
+// IPV6_ADDRESS_EX: https://learn.microsoft.com/windows/win32/api/ipexport/ns-ipexport-ipv6_address_ex
+// IPV6_ADDRESS_EX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type IPV6_ADDRESS_EX struct {
+	Data [26]byte
 }
 
 // IP_ADAPTER_ADDRESSES_LH_Anonymous1_e__Union is a C union, exposed as correctly sized and aligned backing

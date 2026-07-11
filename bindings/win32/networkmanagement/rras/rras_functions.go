@@ -1444,7 +1444,7 @@ func RasDeleteSubEntryA(pszPhonebook foundation.PSTR, pszEntry foundation.PSTR, 
 // RasDial calls RASAPI32!RasDialW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasdialw
 // Minimum OS: windows5.0.
-func RasDial(param0 unsafe.Pointer, param1 string, param2 unsafe.Pointer, param3 uint32, param4 unsafe.Pointer, param5 *HRASCONN) uint32 {
+func RasDial(param0 *RASDIALEXTENSIONS, param1 string, param2 *RASDIALPARAMSW, param3 uint32, param4 unsafe.Pointer, param5 *HRASCONN) uint32 {
 	_param1 := win32.UTF16Ptr(param1)
 	r1, _, _ := syscall.SyscallN(procRasDial.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(_param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)), uintptr(unsafe.Pointer(param5)))
 	return uint32(r1)
@@ -1453,7 +1453,7 @@ func RasDial(param0 unsafe.Pointer, param1 string, param2 unsafe.Pointer, param3
 // RasDialA calls RASAPI32!RasDialA.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasdiala
 // Minimum OS: windows5.0.
-func RasDialA(param0 unsafe.Pointer, param1 foundation.PSTR, param2 unsafe.Pointer, param3 uint32, param4 unsafe.Pointer, param5 *HRASCONN) uint32 {
+func RasDialA(param0 *RASDIALEXTENSIONS, param1 foundation.PSTR, param2 *RASDIALPARAMSA, param3 uint32, param4 unsafe.Pointer, param5 *HRASCONN) uint32 {
 	r1, _, _ := syscall.SyscallN(procRasDialA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)), uintptr(param3), uintptr(unsafe.Pointer(param4)), uintptr(unsafe.Pointer(param5)))
 	return uint32(r1)
 }
@@ -1461,7 +1461,7 @@ func RasDialA(param0 unsafe.Pointer, param1 foundation.PSTR, param2 unsafe.Point
 // RasDialDlg calls RASDLG!RasDialDlgW.
 // https://learn.microsoft.com/windows/win32/api/rasdlg/nf-rasdlg-rasdialdlgw
 // Minimum OS: windows5.0.
-func RasDialDlg(lpszPhonebook string, lpszEntry string, lpszPhoneNumber string, lpInfo unsafe.Pointer) bool {
+func RasDialDlg(lpszPhonebook string, lpszEntry string, lpszPhoneNumber string, lpInfo *RASDIALDLG) bool {
 	_lpszPhonebook := win32.UTF16Ptr(lpszPhonebook)
 	_lpszEntry := win32.UTF16Ptr(lpszEntry)
 	_lpszPhoneNumber := win32.UTF16Ptr(lpszPhoneNumber)
@@ -1472,7 +1472,7 @@ func RasDialDlg(lpszPhonebook string, lpszEntry string, lpszPhoneNumber string, 
 // RasDialDlgA calls RASDLG!RasDialDlgA.
 // https://learn.microsoft.com/windows/win32/api/rasdlg/nf-rasdlg-rasdialdlga
 // Minimum OS: windows5.0.
-func RasDialDlgA(lpszPhonebook foundation.PSTR, lpszEntry foundation.PSTR, lpszPhoneNumber foundation.PSTR, lpInfo unsafe.Pointer) bool {
+func RasDialDlgA(lpszPhonebook foundation.PSTR, lpszEntry foundation.PSTR, lpszPhoneNumber foundation.PSTR, lpInfo *RASDIALDLG) bool {
 	r1, _, _ := syscall.SyscallN(procRasDialDlgA.Addr(), uintptr(unsafe.Pointer(lpszPhonebook)), uintptr(unsafe.Pointer(lpszEntry)), uintptr(unsafe.Pointer(lpszPhoneNumber)), uintptr(unsafe.Pointer(lpInfo)))
 	return r1 != 0
 }
@@ -1498,7 +1498,7 @@ func RasEditPhonebookEntryA(param0 foundation.HWND, param1 foundation.PSTR, para
 // RasEntryDlg calls RASDLG!RasEntryDlgW.
 // https://learn.microsoft.com/windows/win32/api/rasdlg/nf-rasdlg-rasentrydlgw
 // Minimum OS: windows5.0.
-func RasEntryDlg(lpszPhonebook string, lpszEntry string, lpInfo unsafe.Pointer) bool {
+func RasEntryDlg(lpszPhonebook string, lpszEntry string, lpInfo *RASENTRYDLGW) bool {
 	_lpszPhonebook := win32.UTF16Ptr(lpszPhonebook)
 	_lpszEntry := win32.UTF16Ptr(lpszEntry)
 	r1, _, _ := syscall.SyscallN(procRasEntryDlg.Addr(), uintptr(unsafe.Pointer(_lpszPhonebook)), uintptr(unsafe.Pointer(_lpszEntry)), uintptr(unsafe.Pointer(lpInfo)))
@@ -1508,7 +1508,7 @@ func RasEntryDlg(lpszPhonebook string, lpszEntry string, lpInfo unsafe.Pointer) 
 // RasEntryDlgA calls RASDLG!RasEntryDlgA.
 // https://learn.microsoft.com/windows/win32/api/rasdlg/nf-rasdlg-rasentrydlga
 // Minimum OS: windows5.0.
-func RasEntryDlgA(lpszPhonebook foundation.PSTR, lpszEntry foundation.PSTR, lpInfo unsafe.Pointer) bool {
+func RasEntryDlgA(lpszPhonebook foundation.PSTR, lpszEntry foundation.PSTR, lpInfo *RASENTRYDLGA) bool {
 	r1, _, _ := syscall.SyscallN(procRasEntryDlgA.Addr(), uintptr(unsafe.Pointer(lpszPhonebook)), uintptr(unsafe.Pointer(lpszEntry)), uintptr(unsafe.Pointer(lpInfo)))
 	return r1 != 0
 }
@@ -1532,7 +1532,7 @@ func RasEnumAutodialAddressesA(lppRasAutodialAddresses *foundation.PSTR, lpdwcbR
 // RasEnumConnections calls RASAPI32!RasEnumConnectionsW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasenumconnectionsw
 // Minimum OS: windows5.0.
-func RasEnumConnections(param0 unsafe.Pointer, param1 *uint32, param2 *uint32) uint32 {
+func RasEnumConnections(param0 *RASCONNW, param1 *uint32, param2 *uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procRasEnumConnections.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
 	return uint32(r1)
 }
@@ -1540,7 +1540,7 @@ func RasEnumConnections(param0 unsafe.Pointer, param1 *uint32, param2 *uint32) u
 // RasEnumConnectionsA calls RASAPI32!RasEnumConnectionsA.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasenumconnectionsa
 // Minimum OS: windows5.0.
-func RasEnumConnectionsA(param0 unsafe.Pointer, param1 *uint32, param2 *uint32) uint32 {
+func RasEnumConnectionsA(param0 *RASCONNA, param1 *uint32, param2 *uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procRasEnumConnectionsA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
 	return uint32(r1)
 }
@@ -1757,7 +1757,7 @@ func RasGetEapUserIdentityA(pszPhonebook foundation.PSTR, pszEntry foundation.PS
 // RasGetEntryDialParams calls RASAPI32!RasGetEntryDialParamsW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetentrydialparamsw
 // Minimum OS: windows5.0.
-func RasGetEntryDialParams(param0 string, param1 unsafe.Pointer, param2 *foundation.BOOL) uint32 {
+func RasGetEntryDialParams(param0 string, param1 *RASDIALPARAMSW, param2 *foundation.BOOL) uint32 {
 	_param0 := win32.UTF16Ptr(param0)
 	r1, _, _ := syscall.SyscallN(procRasGetEntryDialParams.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
 	return uint32(r1)
@@ -1766,7 +1766,7 @@ func RasGetEntryDialParams(param0 string, param1 unsafe.Pointer, param2 *foundat
 // RasGetEntryDialParamsA calls RASAPI32!RasGetEntryDialParamsA.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasgetentrydialparamsa
 // Minimum OS: windows5.0.
-func RasGetEntryDialParamsA(param0 foundation.PSTR, param1 unsafe.Pointer, param2 *foundation.BOOL) uint32 {
+func RasGetEntryDialParamsA(param0 foundation.PSTR, param1 *RASDIALPARAMSA, param2 *foundation.BOOL) uint32 {
 	r1, _, _ := syscall.SyscallN(procRasGetEntryDialParamsA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(unsafe.Pointer(param2)))
 	return uint32(r1)
 }
@@ -1896,7 +1896,7 @@ func RasHangUpA(param0 HRASCONN) uint32 {
 // RasInvokeEapUI calls RASAPI32!RasInvokeEapUI.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rasinvokeeapui
 // Minimum OS: windows5.0.
-func RasInvokeEapUI(param0 HRASCONN, param1 uint32, param2 unsafe.Pointer, param3 foundation.HWND) uint32 {
+func RasInvokeEapUI(param0 HRASCONN, param1 uint32, param2 *RASDIALEXTENSIONS, param3 foundation.HWND) uint32 {
 	r1, _, _ := syscall.SyscallN(procRasInvokeEapUI.Addr(), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(param2)), uintptr(param3))
 	return uint32(r1)
 }
@@ -1904,7 +1904,7 @@ func RasInvokeEapUI(param0 HRASCONN, param1 uint32, param2 unsafe.Pointer, param
 // RasPhonebookDlg calls RASDLG!RasPhonebookDlgW.
 // https://learn.microsoft.com/windows/win32/api/rasdlg/nf-rasdlg-rasphonebookdlgw
 // Minimum OS: windows5.0.
-func RasPhonebookDlg(lpszPhonebook string, lpszEntry string, lpInfo unsafe.Pointer) bool {
+func RasPhonebookDlg(lpszPhonebook string, lpszEntry string, lpInfo *RASPBDLGW) bool {
 	_lpszPhonebook := win32.UTF16Ptr(lpszPhonebook)
 	_lpszEntry := win32.UTF16Ptr(lpszEntry)
 	r1, _, _ := syscall.SyscallN(procRasPhonebookDlg.Addr(), uintptr(unsafe.Pointer(_lpszPhonebook)), uintptr(unsafe.Pointer(_lpszEntry)), uintptr(unsafe.Pointer(lpInfo)))
@@ -1914,7 +1914,7 @@ func RasPhonebookDlg(lpszPhonebook string, lpszEntry string, lpInfo unsafe.Point
 // RasPhonebookDlgA calls RASDLG!RasPhonebookDlgA.
 // https://learn.microsoft.com/windows/win32/api/rasdlg/nf-rasdlg-rasphonebookdlga
 // Minimum OS: windows5.0.
-func RasPhonebookDlgA(lpszPhonebook foundation.PSTR, lpszEntry foundation.PSTR, lpInfo unsafe.Pointer) bool {
+func RasPhonebookDlgA(lpszPhonebook foundation.PSTR, lpszEntry foundation.PSTR, lpInfo *RASPBDLGA) bool {
 	r1, _, _ := syscall.SyscallN(procRasPhonebookDlgA.Addr(), uintptr(unsafe.Pointer(lpszPhonebook)), uintptr(unsafe.Pointer(lpszEntry)), uintptr(unsafe.Pointer(lpInfo)))
 	return r1 != 0
 }
@@ -2048,7 +2048,7 @@ func RasSetEapUserDataA(hToken foundation.HANDLE, pszPhonebook foundation.PSTR, 
 // RasSetEntryDialParams calls RASAPI32!RasSetEntryDialParamsW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetentrydialparamsw
 // Minimum OS: windows5.0.
-func RasSetEntryDialParams(param0 string, param1 unsafe.Pointer, param2 bool) uint32 {
+func RasSetEntryDialParams(param0 string, param1 *RASDIALPARAMSW, param2 bool) uint32 {
 	_param0 := win32.UTF16Ptr(param0)
 	_param2 := win32.Bool32(param2)
 	r1, _, _ := syscall.SyscallN(procRasSetEntryDialParams.Addr(), uintptr(unsafe.Pointer(_param0)), uintptr(unsafe.Pointer(param1)), uintptr(_param2))
@@ -2058,7 +2058,7 @@ func RasSetEntryDialParams(param0 string, param1 unsafe.Pointer, param2 bool) ui
 // RasSetEntryDialParamsA calls RASAPI32!RasSetEntryDialParamsA.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetentrydialparamsa
 // Minimum OS: windows5.0.
-func RasSetEntryDialParamsA(param0 foundation.PSTR, param1 unsafe.Pointer, param2 bool) uint32 {
+func RasSetEntryDialParamsA(param0 foundation.PSTR, param1 *RASDIALPARAMSA, param2 bool) uint32 {
 	_param2 := win32.Bool32(param2)
 	r1, _, _ := syscall.SyscallN(procRasSetEntryDialParamsA.Addr(), uintptr(unsafe.Pointer(param0)), uintptr(unsafe.Pointer(param1)), uintptr(_param2))
 	return uint32(r1)

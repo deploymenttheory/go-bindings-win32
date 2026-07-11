@@ -33,11 +33,11 @@ type PWLX_CREATE_USER_DESKTOP uintptr
 type PWLX_DIALOG_BOX uintptr
 
 // PWLX_DIALOG_BOX_INDIRECT is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, unsafe.Pointer, foundation.HWND, uiwindowsandmessaging.DLGPROC) int32.
+// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *uiwindowsandmessaging.DLGTEMPLATE, foundation.HWND, uiwindowsandmessaging.DLGPROC) int32.
 type PWLX_DIALOG_BOX_INDIRECT uintptr
 
 // PWLX_DIALOG_BOX_INDIRECT_PARAM is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, unsafe.Pointer, foundation.HWND, uiwindowsandmessaging.DLGPROC, foundation.LPARAM) int32.
+// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *uiwindowsandmessaging.DLGTEMPLATE, foundation.HWND, uiwindowsandmessaging.DLGPROC, foundation.LPARAM) int32.
 type PWLX_DIALOG_BOX_INDIRECT_PARAM uintptr
 
 // PWLX_DIALOG_BOX_PARAM is a callback pointer: create one with NewCallback (package

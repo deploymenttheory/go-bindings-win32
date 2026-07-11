@@ -9,6 +9,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	mediaaudio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio"
 )
 
 type CONNECTION struct {
@@ -90,6 +91,13 @@ type DMUS_DOWNLOADINFO struct {
 	DwDLId                  uint32
 	DwNumOffsetTableEntries uint32
 	CbSize                  uint32
+}
+
+// DMUS_EVENTHEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type DMUS_EVENTHEADER struct {
+	Data [5]uint32
 }
 
 type DMUS_EXTENSIONCHUNK struct {
@@ -232,7 +240,7 @@ type DMUS_WAVE struct {
 	UlFirstExtCkIdx uint32
 	UlCopyrightIdx  uint32
 	UlWaveDataIdx   uint32
-	WaveformatEx    [18]byte
+	WaveformatEx    mediaaudio.WAVEFORMATEX
 }
 
 type DMUS_WAVEARTDL struct {
@@ -333,9 +341,25 @@ type INSTHEADER struct {
 	Locale   MIDILOCALE
 }
 
+// MDEVICECAPSEX: https://learn.microsoft.com/windows/win32/api/mmddk/ns-mmddk-mdevicecapsex
+// MDEVICECAPSEX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MDEVICECAPSEX struct {
+	Data [12]byte
+}
+
 type MIDILOCALE struct {
 	UlBank       uint32
 	UlInstrument uint32
+}
+
+// MIDIOPENDESC: https://learn.microsoft.com/windows/win32/api/mmddk/ns-mmddk-midiopendesc
+// MIDIOPENDESC is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MIDIOPENDESC struct {
+	Data [44]byte
 }
 
 type POOLCUE struct {

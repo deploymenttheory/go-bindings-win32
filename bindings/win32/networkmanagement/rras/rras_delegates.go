@@ -145,11 +145,11 @@ type PMPRADMINRELEASEIPV6ADDRESSFORUSER uintptr
 type PMPRADMINTERMINATEDLL uintptr
 
 // RASADFUNCA is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PSTR, foundation.PSTR, unsafe.Pointer, *uint32) foundation.BOOL.
+// syscall) using the shape func(foundation.PSTR, foundation.PSTR, *RASADPARAMS, *uint32) foundation.BOOL.
 type RASADFUNCA uintptr
 
 // RASADFUNCW is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, unsafe.Pointer, *uint32) foundation.BOOL.
+// syscall) using the shape func(foundation.PWSTR, foundation.PWSTR, *RASADPARAMS, *uint32) foundation.BOOL.
 type RASADFUNCW uintptr
 
 // RASDIALFUNC is a callback pointer: create one with NewCallback (package
@@ -189,15 +189,15 @@ type RTM_EVENT_CALLBACK uintptr
 type RasCustomDeleteEntryNotifyFn uintptr
 
 // RasCustomDialDlgFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HINSTANCE, uint32, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, unsafe.Pointer, unsafe.Pointer) foundation.BOOL.
+// syscall) using the shape func(foundation.HINSTANCE, uint32, foundation.PWSTR, foundation.PWSTR, foundation.PWSTR, *RASDIALDLG, unsafe.Pointer) foundation.BOOL.
 type RasCustomDialDlgFn uintptr
 
 // RasCustomDialFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HINSTANCE, unsafe.Pointer, foundation.PWSTR, unsafe.Pointer, uint32, unsafe.Pointer, *HRASCONN, uint32) uint32.
+// syscall) using the shape func(foundation.HINSTANCE, *RASDIALEXTENSIONS, foundation.PWSTR, *RASDIALPARAMSA, uint32, unsafe.Pointer, *HRASCONN, uint32) uint32.
 type RasCustomDialFn uintptr
 
 // RasCustomEntryDlgFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HINSTANCE, foundation.PWSTR, foundation.PWSTR, unsafe.Pointer, uint32) foundation.BOOL.
+// syscall) using the shape func(foundation.HINSTANCE, foundation.PWSTR, foundation.PWSTR, *RASENTRYDLGA, uint32) foundation.BOOL.
 type RasCustomEntryDlgFn uintptr
 
 // RasCustomHangUpFn is a callback pointer: create one with NewCallback (package
@@ -205,5 +205,5 @@ type RasCustomEntryDlgFn uintptr
 type RasCustomHangUpFn uintptr
 
 // RasCustomScriptExecuteFn is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.PWSTR, foundation.PWSTR, PFNRASGETBUFFER, PFNRASFREEBUFFER, PFNRASSENDBUFFER, PFNRASRECEIVEBUFFER, PFNRASRETRIEVEBUFFER, foundation.HWND, unsafe.Pointer, unsafe.Pointer) uint32.
+// syscall) using the shape func(foundation.HANDLE, foundation.PWSTR, foundation.PWSTR, PFNRASGETBUFFER, PFNRASFREEBUFFER, PFNRASSENDBUFFER, PFNRASRECEIVEBUFFER, PFNRASRETRIEVEBUFFER, foundation.HWND, *RASDIALPARAMSA, unsafe.Pointer) uint32.
 type RasCustomScriptExecuteFn uintptr

@@ -4440,7 +4440,7 @@ func TxfLogReadRecords(TxfLogContext unsafe.Pointer, BufferLength uint32, Buffer
 }
 
 // TxfLogRecordGetFileName calls txfw32!TxfLogRecordGetFileName.
-func TxfLogRecordGetFileName(RecordBuffer unsafe.Pointer, RecordBufferLengthInBytes uint32, NameBuffer foundation.PWSTR, NameBufferLengthInBytes *uint32, TxfId unsafe.Pointer) bool {
+func TxfLogRecordGetFileName(RecordBuffer unsafe.Pointer, RecordBufferLengthInBytes uint32, NameBuffer foundation.PWSTR, NameBufferLengthInBytes *uint32, TxfId *TXF_ID) bool {
 	r1, _, _ := syscall.SyscallN(procTxfLogRecordGetFileName.Addr(), uintptr(unsafe.Pointer(RecordBuffer)), uintptr(RecordBufferLengthInBytes), uintptr(unsafe.Pointer(NameBuffer)), uintptr(unsafe.Pointer(NameBufferLengthInBytes)), uintptr(unsafe.Pointer(TxfId)))
 	return r1 != 0
 }
@@ -4452,7 +4452,7 @@ func TxfLogRecordGetGenericType(RecordBuffer unsafe.Pointer, RecordBufferLengthI
 }
 
 // TxfReadMetadataInfo calls txfw32!TxfReadMetadataInfo.
-func TxfReadMetadataInfo(FileHandle foundation.HANDLE, TxfFileId unsafe.Pointer, LastLsn *CLS_LSN, TransactionState *uint32, LockingTransaction *win32.GUID) bool {
+func TxfReadMetadataInfo(FileHandle foundation.HANDLE, TxfFileId *TXF_ID, LastLsn *CLS_LSN, TransactionState *uint32, LockingTransaction *win32.GUID) bool {
 	r1, _, _ := syscall.SyscallN(procTxfReadMetadataInfo.Addr(), uintptr(FileHandle), uintptr(unsafe.Pointer(TxfFileId)), uintptr(unsafe.Pointer(LastLsn)), uintptr(unsafe.Pointer(TransactionState)), uintptr(unsafe.Pointer(LockingTransaction)))
 	return r1 != 0
 }

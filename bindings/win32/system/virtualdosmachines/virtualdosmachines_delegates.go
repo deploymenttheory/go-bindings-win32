@@ -77,11 +77,11 @@ type VDMGETSYMBOLPROC uintptr
 type VDMGETTHREADSELECTORENTRYPROC uintptr
 
 // VDMGLOBALFIRSTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, unsafe.Pointer, uint16, DEBUGEVENTPROC, unsafe.Pointer) foundation.BOOL.
+// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *GLOBALENTRY, uint16, DEBUGEVENTPROC, unsafe.Pointer) foundation.BOOL.
 type VDMGLOBALFIRSTPROC uintptr
 
 // VDMGLOBALNEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, unsafe.Pointer, uint16, DEBUGEVENTPROC, unsafe.Pointer) foundation.BOOL.
+// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *GLOBALENTRY, uint16, DEBUGEVENTPROC, unsafe.Pointer) foundation.BOOL.
 type VDMGLOBALNEXTPROC uintptr
 
 // VDMISMODULELOADEDPROC is a callback pointer: create one with NewCallback (package
@@ -93,11 +93,11 @@ type VDMISMODULELOADEDPROC uintptr
 type VDMKILLWOWPROC uintptr
 
 // VDMMODULEFIRSTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, unsafe.Pointer, DEBUGEVENTPROC, unsafe.Pointer) foundation.BOOL.
+// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *MODULEENTRY, DEBUGEVENTPROC, unsafe.Pointer) foundation.BOOL.
 type VDMMODULEFIRSTPROC uintptr
 
 // VDMMODULENEXTPROC is a callback pointer: create one with NewCallback (package
-// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, unsafe.Pointer, DEBUGEVENTPROC, unsafe.Pointer) foundation.BOOL.
+// syscall) using the shape func(foundation.HANDLE, foundation.HANDLE, *MODULEENTRY, DEBUGEVENTPROC, unsafe.Pointer) foundation.BOOL.
 type VDMMODULENEXTPROC uintptr
 
 // VDMPROCESSEXCEPTIONPROC is a callback pointer: create one with NewCallback (package

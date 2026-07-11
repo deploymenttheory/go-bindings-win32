@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	storagepackagingappx "github.com/deploymenttheory/go-bindings-win32/bindings/win32/storage/packaging/appx"
 )
 
 var (
@@ -72,7 +73,7 @@ func SrpDisablePermissiveModeFileEncryption() error {
 // SrpDoesPolicyAllowAppExecution calls srpapi!SrpDoesPolicyAllowAppExecution.
 // https://learn.microsoft.com/windows/win32/api/srpapi/nf-srpapi-srpdoespolicyallowappexecution
 // Minimum OS: windows10.0.10240.
-func SrpDoesPolicyAllowAppExecution(packageId unsafe.Pointer, isAllowed *foundation.BOOL) error {
+func SrpDoesPolicyAllowAppExecution(packageId *storagepackagingappx.PACKAGE_ID, isAllowed *foundation.BOOL) error {
 	r1, _, _ := syscall.SyscallN(procSrpDoesPolicyAllowAppExecution.Addr(), uintptr(unsafe.Pointer(packageId)), uintptr(unsafe.Pointer(isAllowed)))
 	return win32.HRESULTError(int32(r1))
 }

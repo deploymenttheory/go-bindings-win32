@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	mediaaudio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio"
 	mediaaudioapo "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio/apo"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
@@ -249,7 +250,7 @@ type IAudioEndpoint struct {
 var IID_IAudioEndpoint = win32.GUID{Data1: 0x30a99515, Data2: 0x1527, Data3: 0x4451, Data4: [8]byte{0xaf, 0x9f, 0x00, 0xc5, 0xf0, 0x23, 0x4d, 0xaf}}
 
 // GetFrameFormat dispatches through IAudioEndpoint's vtable slot 3.
-func (self *IAudioEndpoint) GetFrameFormat(ppFormat *unsafe.Pointer) error {
+func (self *IAudioEndpoint) GetFrameFormat(ppFormat **mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFormat)))
 	return win32.HRESULTError(int32(r1))
 }

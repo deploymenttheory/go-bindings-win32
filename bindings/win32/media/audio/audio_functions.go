@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/media"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
 )
 
@@ -209,7 +210,7 @@ func AcmDriverClose(had HACMDRIVER, fdwClose uint32) uint32 {
 // AcmDriverDetails calls MSACM32!acmDriverDetailsW.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmdriverdetailsw
 // Minimum OS: windows5.0.
-func AcmDriverDetails(hadid HACMDRIVERID, padd unsafe.Pointer, fdwDetails uint32) uint32 {
+func AcmDriverDetails(hadid HACMDRIVERID, padd *ACMDRIVERDETAILSW, fdwDetails uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmDriverDetails.Addr(), uintptr(hadid), uintptr(unsafe.Pointer(padd)), uintptr(fdwDetails))
 	return uint32(r1)
 }
@@ -217,7 +218,7 @@ func AcmDriverDetails(hadid HACMDRIVERID, padd unsafe.Pointer, fdwDetails uint32
 // AcmDriverDetailsA calls MSACM32!acmDriverDetailsA.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmdriverdetailsa
 // Minimum OS: windows5.0.
-func AcmDriverDetailsA(hadid HACMDRIVERID, padd unsafe.Pointer, fdwDetails uint32) uint32 {
+func AcmDriverDetailsA(hadid HACMDRIVERID, padd *ACMDRIVERDETAILSA, fdwDetails uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmDriverDetailsA.Addr(), uintptr(hadid), uintptr(unsafe.Pointer(padd)), uintptr(fdwDetails))
 	return uint32(r1)
 }
@@ -273,7 +274,7 @@ func AcmDriverRemove(hadid HACMDRIVERID, fdwRemove uint32) uint32 {
 // AcmFilterChoose calls MSACM32!acmFilterChooseW.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmfilterchoosew
 // Minimum OS: windows5.0.
-func AcmFilterChoose(pafltrc unsafe.Pointer) uint32 {
+func AcmFilterChoose(pafltrc *ACMFILTERCHOOSEW) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFilterChoose.Addr(), uintptr(unsafe.Pointer(pafltrc)))
 	return uint32(r1)
 }
@@ -281,7 +282,7 @@ func AcmFilterChoose(pafltrc unsafe.Pointer) uint32 {
 // AcmFilterChooseA calls MSACM32!acmFilterChooseA.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmfilterchoosea
 // Minimum OS: windows5.0.
-func AcmFilterChooseA(pafltrc unsafe.Pointer) uint32 {
+func AcmFilterChooseA(pafltrc *ACMFILTERCHOOSEA) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFilterChooseA.Addr(), uintptr(unsafe.Pointer(pafltrc)))
 	return uint32(r1)
 }
@@ -289,7 +290,7 @@ func AcmFilterChooseA(pafltrc unsafe.Pointer) uint32 {
 // AcmFilterDetails calls MSACM32!acmFilterDetailsW.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmfilterdetailsw
 // Minimum OS: windows5.0.
-func AcmFilterDetails(had HACMDRIVER, pafd unsafe.Pointer, fdwDetails uint32) uint32 {
+func AcmFilterDetails(had HACMDRIVER, pafd *ACMFILTERDETAILSW, fdwDetails uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFilterDetails.Addr(), uintptr(had), uintptr(unsafe.Pointer(pafd)), uintptr(fdwDetails))
 	return uint32(r1)
 }
@@ -297,7 +298,7 @@ func AcmFilterDetails(had HACMDRIVER, pafd unsafe.Pointer, fdwDetails uint32) ui
 // AcmFilterDetailsA calls MSACM32!acmFilterDetailsA.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmfilterdetailsa
 // Minimum OS: windows5.0.
-func AcmFilterDetailsA(had HACMDRIVER, pafd unsafe.Pointer, fdwDetails uint32) uint32 {
+func AcmFilterDetailsA(had HACMDRIVER, pafd *ACMFILTERDETAILSA, fdwDetails uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFilterDetailsA.Addr(), uintptr(had), uintptr(unsafe.Pointer(pafd)), uintptr(fdwDetails))
 	return uint32(r1)
 }
@@ -305,7 +306,7 @@ func AcmFilterDetailsA(had HACMDRIVER, pafd unsafe.Pointer, fdwDetails uint32) u
 // AcmFilterEnum calls MSACM32!acmFilterEnumW.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmfilterenumw
 // Minimum OS: windows5.0.
-func AcmFilterEnum(had HACMDRIVER, pafd unsafe.Pointer, fnCallback ACMFILTERENUMCBW, dwInstance uintptr, fdwEnum uint32) uint32 {
+func AcmFilterEnum(had HACMDRIVER, pafd *ACMFILTERDETAILSW, fnCallback ACMFILTERENUMCBW, dwInstance uintptr, fdwEnum uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFilterEnum.Addr(), uintptr(had), uintptr(unsafe.Pointer(pafd)), uintptr(fnCallback), uintptr(dwInstance), uintptr(fdwEnum))
 	return uint32(r1)
 }
@@ -313,7 +314,7 @@ func AcmFilterEnum(had HACMDRIVER, pafd unsafe.Pointer, fnCallback ACMFILTERENUM
 // AcmFilterEnumA calls MSACM32!acmFilterEnumA.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmfilterenuma
 // Minimum OS: windows5.0.
-func AcmFilterEnumA(had HACMDRIVER, pafd unsafe.Pointer, fnCallback ACMFILTERENUMCBA, dwInstance uintptr, fdwEnum uint32) uint32 {
+func AcmFilterEnumA(had HACMDRIVER, pafd *ACMFILTERDETAILSA, fnCallback ACMFILTERENUMCBA, dwInstance uintptr, fdwEnum uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFilterEnumA.Addr(), uintptr(had), uintptr(unsafe.Pointer(pafd)), uintptr(fnCallback), uintptr(dwInstance), uintptr(fdwEnum))
 	return uint32(r1)
 }
@@ -321,7 +322,7 @@ func AcmFilterEnumA(had HACMDRIVER, pafd unsafe.Pointer, fnCallback ACMFILTERENU
 // AcmFilterTagDetails calls MSACM32!acmFilterTagDetailsW.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmfiltertagdetailsw
 // Minimum OS: windows5.0.
-func AcmFilterTagDetails(had HACMDRIVER, paftd unsafe.Pointer, fdwDetails uint32) uint32 {
+func AcmFilterTagDetails(had HACMDRIVER, paftd *ACMFILTERTAGDETAILSW, fdwDetails uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFilterTagDetails.Addr(), uintptr(had), uintptr(unsafe.Pointer(paftd)), uintptr(fdwDetails))
 	return uint32(r1)
 }
@@ -329,7 +330,7 @@ func AcmFilterTagDetails(had HACMDRIVER, paftd unsafe.Pointer, fdwDetails uint32
 // AcmFilterTagDetailsA calls MSACM32!acmFilterTagDetailsA.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmfiltertagdetailsa
 // Minimum OS: windows5.0.
-func AcmFilterTagDetailsA(had HACMDRIVER, paftd unsafe.Pointer, fdwDetails uint32) uint32 {
+func AcmFilterTagDetailsA(had HACMDRIVER, paftd *ACMFILTERTAGDETAILSA, fdwDetails uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFilterTagDetailsA.Addr(), uintptr(had), uintptr(unsafe.Pointer(paftd)), uintptr(fdwDetails))
 	return uint32(r1)
 }
@@ -337,7 +338,7 @@ func AcmFilterTagDetailsA(had HACMDRIVER, paftd unsafe.Pointer, fdwDetails uint3
 // AcmFilterTagEnum calls MSACM32!acmFilterTagEnumW.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmfiltertagenumw
 // Minimum OS: windows5.0.
-func AcmFilterTagEnum(had HACMDRIVER, paftd unsafe.Pointer, fnCallback ACMFILTERTAGENUMCBW, dwInstance uintptr, fdwEnum uint32) uint32 {
+func AcmFilterTagEnum(had HACMDRIVER, paftd *ACMFILTERTAGDETAILSW, fnCallback ACMFILTERTAGENUMCBW, dwInstance uintptr, fdwEnum uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFilterTagEnum.Addr(), uintptr(had), uintptr(unsafe.Pointer(paftd)), uintptr(fnCallback), uintptr(dwInstance), uintptr(fdwEnum))
 	return uint32(r1)
 }
@@ -345,7 +346,7 @@ func AcmFilterTagEnum(had HACMDRIVER, paftd unsafe.Pointer, fnCallback ACMFILTER
 // AcmFilterTagEnumA calls MSACM32!acmFilterTagEnumA.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmfiltertagenuma
 // Minimum OS: windows5.0.
-func AcmFilterTagEnumA(had HACMDRIVER, paftd unsafe.Pointer, fnCallback ACMFILTERTAGENUMCBA, dwInstance uintptr, fdwEnum uint32) uint32 {
+func AcmFilterTagEnumA(had HACMDRIVER, paftd *ACMFILTERTAGDETAILSA, fnCallback ACMFILTERTAGENUMCBA, dwInstance uintptr, fdwEnum uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFilterTagEnumA.Addr(), uintptr(had), uintptr(unsafe.Pointer(paftd)), uintptr(fnCallback), uintptr(dwInstance), uintptr(fdwEnum))
 	return uint32(r1)
 }
@@ -353,7 +354,7 @@ func AcmFilterTagEnumA(had HACMDRIVER, paftd unsafe.Pointer, fnCallback ACMFILTE
 // AcmFormatChoose calls MSACM32!acmFormatChooseW.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmformatchoosew
 // Minimum OS: windows5.0.
-func AcmFormatChoose(pafmtc unsafe.Pointer) uint32 {
+func AcmFormatChoose(pafmtc *ACMFORMATCHOOSEW) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFormatChoose.Addr(), uintptr(unsafe.Pointer(pafmtc)))
 	return uint32(r1)
 }
@@ -361,7 +362,7 @@ func AcmFormatChoose(pafmtc unsafe.Pointer) uint32 {
 // AcmFormatChooseA calls MSACM32!acmFormatChooseA.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmformatchoosea
 // Minimum OS: windows5.0.
-func AcmFormatChooseA(pafmtc unsafe.Pointer) uint32 {
+func AcmFormatChooseA(pafmtc *ACMFORMATCHOOSEA) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFormatChooseA.Addr(), uintptr(unsafe.Pointer(pafmtc)))
 	return uint32(r1)
 }
@@ -369,7 +370,7 @@ func AcmFormatChooseA(pafmtc unsafe.Pointer) uint32 {
 // AcmFormatDetails calls MSACM32!acmFormatDetailsW.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmformatdetailsw
 // Minimum OS: windows5.0.
-func AcmFormatDetails(had HACMDRIVER, pafd unsafe.Pointer, fdwDetails uint32) uint32 {
+func AcmFormatDetails(had HACMDRIVER, pafd *TACMFORMATDETAILSW, fdwDetails uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFormatDetails.Addr(), uintptr(had), uintptr(unsafe.Pointer(pafd)), uintptr(fdwDetails))
 	return uint32(r1)
 }
@@ -377,7 +378,7 @@ func AcmFormatDetails(had HACMDRIVER, pafd unsafe.Pointer, fdwDetails uint32) ui
 // AcmFormatDetailsA calls MSACM32!acmFormatDetailsA.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmformatdetailsa
 // Minimum OS: windows5.0.
-func AcmFormatDetailsA(had HACMDRIVER, pafd unsafe.Pointer, fdwDetails uint32) uint32 {
+func AcmFormatDetailsA(had HACMDRIVER, pafd *ACMFORMATDETAILSA, fdwDetails uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFormatDetailsA.Addr(), uintptr(had), uintptr(unsafe.Pointer(pafd)), uintptr(fdwDetails))
 	return uint32(r1)
 }
@@ -385,7 +386,7 @@ func AcmFormatDetailsA(had HACMDRIVER, pafd unsafe.Pointer, fdwDetails uint32) u
 // AcmFormatEnum calls MSACM32!acmFormatEnumW.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmformatenumw
 // Minimum OS: windows5.0.
-func AcmFormatEnum(had HACMDRIVER, pafd unsafe.Pointer, fnCallback ACMFORMATENUMCBW, dwInstance uintptr, fdwEnum uint32) uint32 {
+func AcmFormatEnum(had HACMDRIVER, pafd *TACMFORMATDETAILSW, fnCallback ACMFORMATENUMCBW, dwInstance uintptr, fdwEnum uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFormatEnum.Addr(), uintptr(had), uintptr(unsafe.Pointer(pafd)), uintptr(fnCallback), uintptr(dwInstance), uintptr(fdwEnum))
 	return uint32(r1)
 }
@@ -393,7 +394,7 @@ func AcmFormatEnum(had HACMDRIVER, pafd unsafe.Pointer, fnCallback ACMFORMATENUM
 // AcmFormatEnumA calls MSACM32!acmFormatEnumA.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmformatenuma
 // Minimum OS: windows5.0.
-func AcmFormatEnumA(had HACMDRIVER, pafd unsafe.Pointer, fnCallback ACMFORMATENUMCBA, dwInstance uintptr, fdwEnum uint32) uint32 {
+func AcmFormatEnumA(had HACMDRIVER, pafd *ACMFORMATDETAILSA, fnCallback ACMFORMATENUMCBA, dwInstance uintptr, fdwEnum uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFormatEnumA.Addr(), uintptr(had), uintptr(unsafe.Pointer(pafd)), uintptr(fnCallback), uintptr(dwInstance), uintptr(fdwEnum))
 	return uint32(r1)
 }
@@ -401,7 +402,7 @@ func AcmFormatEnumA(had HACMDRIVER, pafd unsafe.Pointer, fnCallback ACMFORMATENU
 // AcmFormatSuggest calls MSACM32!acmFormatSuggest.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmformatsuggest
 // Minimum OS: windows5.0.
-func AcmFormatSuggest(had HACMDRIVER, pwfxSrc unsafe.Pointer, pwfxDst unsafe.Pointer, cbwfxDst uint32, fdwSuggest uint32) uint32 {
+func AcmFormatSuggest(had HACMDRIVER, pwfxSrc *WAVEFORMATEX, pwfxDst *WAVEFORMATEX, cbwfxDst uint32, fdwSuggest uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFormatSuggest.Addr(), uintptr(had), uintptr(unsafe.Pointer(pwfxSrc)), uintptr(unsafe.Pointer(pwfxDst)), uintptr(cbwfxDst), uintptr(fdwSuggest))
 	return uint32(r1)
 }
@@ -409,7 +410,7 @@ func AcmFormatSuggest(had HACMDRIVER, pwfxSrc unsafe.Pointer, pwfxDst unsafe.Poi
 // AcmFormatTagDetails calls MSACM32!acmFormatTagDetailsW.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmformattagdetailsw
 // Minimum OS: windows5.0.
-func AcmFormatTagDetails(had HACMDRIVER, paftd unsafe.Pointer, fdwDetails uint32) uint32 {
+func AcmFormatTagDetails(had HACMDRIVER, paftd *ACMFORMATTAGDETAILSW, fdwDetails uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFormatTagDetails.Addr(), uintptr(had), uintptr(unsafe.Pointer(paftd)), uintptr(fdwDetails))
 	return uint32(r1)
 }
@@ -417,7 +418,7 @@ func AcmFormatTagDetails(had HACMDRIVER, paftd unsafe.Pointer, fdwDetails uint32
 // AcmFormatTagDetailsA calls MSACM32!acmFormatTagDetailsA.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmformattagdetailsa
 // Minimum OS: windows5.0.
-func AcmFormatTagDetailsA(had HACMDRIVER, paftd unsafe.Pointer, fdwDetails uint32) uint32 {
+func AcmFormatTagDetailsA(had HACMDRIVER, paftd *ACMFORMATTAGDETAILSA, fdwDetails uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFormatTagDetailsA.Addr(), uintptr(had), uintptr(unsafe.Pointer(paftd)), uintptr(fdwDetails))
 	return uint32(r1)
 }
@@ -425,7 +426,7 @@ func AcmFormatTagDetailsA(had HACMDRIVER, paftd unsafe.Pointer, fdwDetails uint3
 // AcmFormatTagEnum calls MSACM32!acmFormatTagEnumW.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmformattagenumw
 // Minimum OS: windows5.0.
-func AcmFormatTagEnum(had HACMDRIVER, paftd unsafe.Pointer, fnCallback ACMFORMATTAGENUMCBW, dwInstance uintptr, fdwEnum uint32) uint32 {
+func AcmFormatTagEnum(had HACMDRIVER, paftd *ACMFORMATTAGDETAILSW, fnCallback ACMFORMATTAGENUMCBW, dwInstance uintptr, fdwEnum uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFormatTagEnum.Addr(), uintptr(had), uintptr(unsafe.Pointer(paftd)), uintptr(fnCallback), uintptr(dwInstance), uintptr(fdwEnum))
 	return uint32(r1)
 }
@@ -433,7 +434,7 @@ func AcmFormatTagEnum(had HACMDRIVER, paftd unsafe.Pointer, fnCallback ACMFORMAT
 // AcmFormatTagEnumA calls MSACM32!acmFormatTagEnumA.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmformattagenuma
 // Minimum OS: windows5.0.
-func AcmFormatTagEnumA(had HACMDRIVER, paftd unsafe.Pointer, fnCallback ACMFORMATTAGENUMCBA, dwInstance uintptr, fdwEnum uint32) uint32 {
+func AcmFormatTagEnumA(had HACMDRIVER, paftd *ACMFORMATTAGDETAILSA, fnCallback ACMFORMATTAGENUMCBA, dwInstance uintptr, fdwEnum uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmFormatTagEnumA.Addr(), uintptr(had), uintptr(unsafe.Pointer(paftd)), uintptr(fnCallback), uintptr(dwInstance), uintptr(fdwEnum))
 	return uint32(r1)
 }
@@ -465,7 +466,7 @@ func AcmStreamClose(has HACMSTREAM, fdwClose uint32) uint32 {
 // AcmStreamConvert calls MSACM32!acmStreamConvert.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmstreamconvert
 // Minimum OS: windows5.0.
-func AcmStreamConvert(has HACMSTREAM, pash unsafe.Pointer, fdwConvert uint32) uint32 {
+func AcmStreamConvert(has HACMSTREAM, pash *ACMSTREAMHEADER, fdwConvert uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmStreamConvert.Addr(), uintptr(has), uintptr(unsafe.Pointer(pash)), uintptr(fdwConvert))
 	return uint32(r1)
 }
@@ -481,7 +482,7 @@ func AcmStreamMessage(has HACMSTREAM, uMsg uint32, lParam1 foundation.LPARAM, lP
 // AcmStreamOpen calls MSACM32!acmStreamOpen.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmstreamopen
 // Minimum OS: windows5.0.
-func AcmStreamOpen(phas *HACMSTREAM, had HACMDRIVER, pwfxSrc unsafe.Pointer, pwfxDst unsafe.Pointer, pwfltr unsafe.Pointer, dwCallback uintptr, dwInstance uintptr, fdwOpen uint32) uint32 {
+func AcmStreamOpen(phas *HACMSTREAM, had HACMDRIVER, pwfxSrc *WAVEFORMATEX, pwfxDst *WAVEFORMATEX, pwfltr *WAVEFILTER, dwCallback uintptr, dwInstance uintptr, fdwOpen uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmStreamOpen.Addr(), uintptr(unsafe.Pointer(phas)), uintptr(had), uintptr(unsafe.Pointer(pwfxSrc)), uintptr(unsafe.Pointer(pwfxDst)), uintptr(unsafe.Pointer(pwfltr)), uintptr(dwCallback), uintptr(dwInstance), uintptr(fdwOpen))
 	return uint32(r1)
 }
@@ -489,7 +490,7 @@ func AcmStreamOpen(phas *HACMSTREAM, had HACMDRIVER, pwfxSrc unsafe.Pointer, pwf
 // AcmStreamPrepareHeader calls MSACM32!acmStreamPrepareHeader.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmstreamprepareheader
 // Minimum OS: windows5.0.
-func AcmStreamPrepareHeader(has HACMSTREAM, pash unsafe.Pointer, fdwPrepare uint32) uint32 {
+func AcmStreamPrepareHeader(has HACMSTREAM, pash *ACMSTREAMHEADER, fdwPrepare uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmStreamPrepareHeader.Addr(), uintptr(has), uintptr(unsafe.Pointer(pash)), uintptr(fdwPrepare))
 	return uint32(r1)
 }
@@ -513,7 +514,7 @@ func AcmStreamSize(has HACMSTREAM, cbInput uint32, pdwOutputBytes *uint32, fdwSi
 // AcmStreamUnprepareHeader calls MSACM32!acmStreamUnprepareHeader.
 // https://learn.microsoft.com/windows/win32/api/msacm/nf-msacm-acmstreamunprepareheader
 // Minimum OS: windows5.0.
-func AcmStreamUnprepareHeader(has HACMSTREAM, pash unsafe.Pointer, fdwUnprepare uint32) uint32 {
+func AcmStreamUnprepareHeader(has HACMSTREAM, pash *ACMSTREAMHEADER, fdwUnprepare uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAcmStreamUnprepareHeader.Addr(), uintptr(has), uintptr(unsafe.Pointer(pash)), uintptr(fdwUnprepare))
 	return uint32(r1)
 }
@@ -530,7 +531,7 @@ func ActivateAudioInterfaceAsync(deviceInterfacePath string, riid *win32.GUID, a
 // AuxGetDevCaps calls WINMM!auxGetDevCapsW.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-auxgetdevcapsw
 // Minimum OS: windows5.0.
-func AuxGetDevCaps(uDeviceID uintptr, pac unsafe.Pointer, cbac uint32) uint32 {
+func AuxGetDevCaps(uDeviceID uintptr, pac *AUXCAPSW, cbac uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAuxGetDevCaps.Addr(), uintptr(uDeviceID), uintptr(unsafe.Pointer(pac)), uintptr(cbac))
 	return uint32(r1)
 }
@@ -538,7 +539,7 @@ func AuxGetDevCaps(uDeviceID uintptr, pac unsafe.Pointer, cbac uint32) uint32 {
 // AuxGetDevCapsA calls WINMM!auxGetDevCapsA.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-auxgetdevcapsa
 // Minimum OS: windows5.0.
-func AuxGetDevCapsA(uDeviceID uintptr, pac unsafe.Pointer, cbac uint32) uint32 {
+func AuxGetDevCapsA(uDeviceID uintptr, pac *AUXCAPSA, cbac uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procAuxGetDevCapsA.Addr(), uintptr(uDeviceID), uintptr(unsafe.Pointer(pac)), uintptr(cbac))
 	return uint32(r1)
 }
@@ -652,7 +653,7 @@ func MidiDisconnect(hmi HMIDI, hmo HMIDIOUT, pReserved unsafe.Pointer) uint32 {
 // MidiInAddBuffer calls WINMM!midiInAddBuffer.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiinaddbuffer
 // Minimum OS: windows5.0.
-func MidiInAddBuffer(hmi HMIDIIN, pmh unsafe.Pointer, cbmh uint32) uint32 {
+func MidiInAddBuffer(hmi HMIDIIN, pmh *MIDIHDR, cbmh uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMidiInAddBuffer.Addr(), uintptr(hmi), uintptr(unsafe.Pointer(pmh)), uintptr(cbmh))
 	return uint32(r1)
 }
@@ -668,7 +669,7 @@ func MidiInClose(hmi HMIDIIN) uint32 {
 // MidiInGetDevCaps calls WINMM!midiInGetDevCapsW.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiingetdevcapsw
 // Minimum OS: windows5.0.
-func MidiInGetDevCaps(uDeviceID uintptr, pmic unsafe.Pointer, cbmic uint32) uint32 {
+func MidiInGetDevCaps(uDeviceID uintptr, pmic *MIDIINCAPSW, cbmic uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMidiInGetDevCaps.Addr(), uintptr(uDeviceID), uintptr(unsafe.Pointer(pmic)), uintptr(cbmic))
 	return uint32(r1)
 }
@@ -676,7 +677,7 @@ func MidiInGetDevCaps(uDeviceID uintptr, pmic unsafe.Pointer, cbmic uint32) uint
 // MidiInGetDevCapsA calls WINMM!midiInGetDevCapsA.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiingetdevcapsa
 // Minimum OS: windows5.0.
-func MidiInGetDevCapsA(uDeviceID uintptr, pmic unsafe.Pointer, cbmic uint32) uint32 {
+func MidiInGetDevCapsA(uDeviceID uintptr, pmic *MIDIINCAPSA, cbmic uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMidiInGetDevCapsA.Addr(), uintptr(uDeviceID), uintptr(unsafe.Pointer(pmic)), uintptr(cbmic))
 	return uint32(r1)
 }
@@ -732,7 +733,7 @@ func MidiInOpen(phmi *HMIDIIN, uDeviceID uint32, dwCallback uintptr, dwInstance 
 // MidiInPrepareHeader calls WINMM!midiInPrepareHeader.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiinprepareheader
 // Minimum OS: windows5.0.
-func MidiInPrepareHeader(hmi HMIDIIN, pmh unsafe.Pointer, cbmh uint32) uint32 {
+func MidiInPrepareHeader(hmi HMIDIIN, pmh *MIDIHDR, cbmh uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMidiInPrepareHeader.Addr(), uintptr(hmi), uintptr(unsafe.Pointer(pmh)), uintptr(cbmh))
 	return uint32(r1)
 }
@@ -764,7 +765,7 @@ func MidiInStop(hmi HMIDIIN) uint32 {
 // MidiInUnprepareHeader calls WINMM!midiInUnprepareHeader.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midiinunprepareheader
 // Minimum OS: windows5.0.
-func MidiInUnprepareHeader(hmi HMIDIIN, pmh unsafe.Pointer, cbmh uint32) uint32 {
+func MidiInUnprepareHeader(hmi HMIDIIN, pmh *MIDIHDR, cbmh uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMidiInUnprepareHeader.Addr(), uintptr(hmi), uintptr(unsafe.Pointer(pmh)), uintptr(cbmh))
 	return uint32(r1)
 }
@@ -796,7 +797,7 @@ func MidiOutClose(hmo HMIDIOUT) uint32 {
 // MidiOutGetDevCaps calls WINMM!midiOutGetDevCapsW.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutgetdevcapsw
 // Minimum OS: windows5.0.
-func MidiOutGetDevCaps(uDeviceID uintptr, pmoc unsafe.Pointer, cbmoc uint32) uint32 {
+func MidiOutGetDevCaps(uDeviceID uintptr, pmoc *MIDIOUTCAPSW, cbmoc uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMidiOutGetDevCaps.Addr(), uintptr(uDeviceID), uintptr(unsafe.Pointer(pmoc)), uintptr(cbmoc))
 	return uint32(r1)
 }
@@ -804,7 +805,7 @@ func MidiOutGetDevCaps(uDeviceID uintptr, pmoc unsafe.Pointer, cbmoc uint32) uin
 // MidiOutGetDevCapsA calls WINMM!midiOutGetDevCapsA.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutgetdevcapsa
 // Minimum OS: windows5.0.
-func MidiOutGetDevCapsA(uDeviceID uintptr, pmoc unsafe.Pointer, cbmoc uint32) uint32 {
+func MidiOutGetDevCapsA(uDeviceID uintptr, pmoc *MIDIOUTCAPSA, cbmoc uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMidiOutGetDevCapsA.Addr(), uintptr(uDeviceID), uintptr(unsafe.Pointer(pmoc)), uintptr(cbmoc))
 	return uint32(r1)
 }
@@ -852,7 +853,7 @@ func MidiOutGetVolume(hmo HMIDIOUT, pdwVolume *uint32) uint32 {
 // MidiOutLongMsg calls WINMM!midiOutLongMsg.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutlongmsg
 // Minimum OS: windows5.0.
-func MidiOutLongMsg(hmo HMIDIOUT, pmh unsafe.Pointer, cbmh uint32) uint32 {
+func MidiOutLongMsg(hmo HMIDIOUT, pmh *MIDIHDR, cbmh uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMidiOutLongMsg.Addr(), uintptr(hmo), uintptr(unsafe.Pointer(pmh)), uintptr(cbmh))
 	return uint32(r1)
 }
@@ -876,7 +877,7 @@ func MidiOutOpen(phmo *HMIDIOUT, uDeviceID uint32, dwCallback uintptr, dwInstanc
 // MidiOutPrepareHeader calls WINMM!midiOutPrepareHeader.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutprepareheader
 // Minimum OS: windows5.0.
-func MidiOutPrepareHeader(hmo HMIDIOUT, pmh unsafe.Pointer, cbmh uint32) uint32 {
+func MidiOutPrepareHeader(hmo HMIDIOUT, pmh *MIDIHDR, cbmh uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMidiOutPrepareHeader.Addr(), uintptr(hmo), uintptr(unsafe.Pointer(pmh)), uintptr(cbmh))
 	return uint32(r1)
 }
@@ -908,7 +909,7 @@ func MidiOutShortMsg(hmo HMIDIOUT, dwMsg uint32) uint32 {
 // MidiOutUnprepareHeader calls WINMM!midiOutUnprepareHeader.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midioutunprepareheader
 // Minimum OS: windows5.0.
-func MidiOutUnprepareHeader(hmo HMIDIOUT, pmh unsafe.Pointer, cbmh uint32) uint32 {
+func MidiOutUnprepareHeader(hmo HMIDIOUT, pmh *MIDIHDR, cbmh uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMidiOutUnprepareHeader.Addr(), uintptr(hmo), uintptr(unsafe.Pointer(pmh)), uintptr(cbmh))
 	return uint32(r1)
 }
@@ -936,7 +937,7 @@ func MidiStreamOpen(phms *HMIDISTRM, puDeviceID []uint32, dwCallback uintptr, dw
 // MidiStreamOut calls WINMM!midiStreamOut.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midistreamout
 // Minimum OS: windows5.0.
-func MidiStreamOut(hms HMIDISTRM, pmh unsafe.Pointer, cbmh uint32) uint32 {
+func MidiStreamOut(hms HMIDISTRM, pmh *MIDIHDR, cbmh uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMidiStreamOut.Addr(), uintptr(hms), uintptr(unsafe.Pointer(pmh)), uintptr(cbmh))
 	return uint32(r1)
 }
@@ -952,7 +953,7 @@ func MidiStreamPause(hms HMIDISTRM) uint32 {
 // MidiStreamPosition calls WINMM!midiStreamPosition.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-midistreamposition
 // Minimum OS: windows5.0.
-func MidiStreamPosition(hms HMIDISTRM, lpmmt unsafe.Pointer, cbmmt uint32) uint32 {
+func MidiStreamPosition(hms HMIDISTRM, lpmmt *media.MMTIME, cbmmt uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMidiStreamPosition.Addr(), uintptr(hms), uintptr(unsafe.Pointer(lpmmt)), uintptr(cbmmt))
 	return uint32(r1)
 }
@@ -992,7 +993,7 @@ func MixerClose(hmx HMIXER) uint32 {
 // MixerGetControlDetails calls WINMM!mixerGetControlDetailsW.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-mixergetcontroldetailsw
 // Minimum OS: windows5.0.
-func MixerGetControlDetails(hmxobj HMIXEROBJ, pmxcd unsafe.Pointer, fdwDetails uint32) uint32 {
+func MixerGetControlDetails(hmxobj HMIXEROBJ, pmxcd *MIXERCONTROLDETAILS, fdwDetails uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMixerGetControlDetails.Addr(), uintptr(hmxobj), uintptr(unsafe.Pointer(pmxcd)), uintptr(fdwDetails))
 	return uint32(r1)
 }
@@ -1000,7 +1001,7 @@ func MixerGetControlDetails(hmxobj HMIXEROBJ, pmxcd unsafe.Pointer, fdwDetails u
 // MixerGetControlDetailsA calls WINMM!mixerGetControlDetailsA.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-mixergetcontroldetailsa
 // Minimum OS: windows5.0.
-func MixerGetControlDetailsA(hmxobj HMIXEROBJ, pmxcd unsafe.Pointer, fdwDetails uint32) uint32 {
+func MixerGetControlDetailsA(hmxobj HMIXEROBJ, pmxcd *MIXERCONTROLDETAILS, fdwDetails uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMixerGetControlDetailsA.Addr(), uintptr(hmxobj), uintptr(unsafe.Pointer(pmxcd)), uintptr(fdwDetails))
 	return uint32(r1)
 }
@@ -1008,7 +1009,7 @@ func MixerGetControlDetailsA(hmxobj HMIXEROBJ, pmxcd unsafe.Pointer, fdwDetails 
 // MixerGetDevCaps calls WINMM!mixerGetDevCapsW.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-mixergetdevcapsw
 // Minimum OS: windows5.0.
-func MixerGetDevCaps(uMxId uintptr, pmxcaps unsafe.Pointer, cbmxcaps uint32) uint32 {
+func MixerGetDevCaps(uMxId uintptr, pmxcaps *MIXERCAPSW, cbmxcaps uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMixerGetDevCaps.Addr(), uintptr(uMxId), uintptr(unsafe.Pointer(pmxcaps)), uintptr(cbmxcaps))
 	return uint32(r1)
 }
@@ -1016,7 +1017,7 @@ func MixerGetDevCaps(uMxId uintptr, pmxcaps unsafe.Pointer, cbmxcaps uint32) uin
 // MixerGetDevCapsA calls WINMM!mixerGetDevCapsA.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-mixergetdevcapsa
 // Minimum OS: windows5.0.
-func MixerGetDevCapsA(uMxId uintptr, pmxcaps unsafe.Pointer, cbmxcaps uint32) uint32 {
+func MixerGetDevCapsA(uMxId uintptr, pmxcaps *MIXERCAPSA, cbmxcaps uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMixerGetDevCapsA.Addr(), uintptr(uMxId), uintptr(unsafe.Pointer(pmxcaps)), uintptr(cbmxcaps))
 	return uint32(r1)
 }
@@ -1032,7 +1033,7 @@ func MixerGetID(hmxobj HMIXEROBJ, puMxId *uint32, fdwId uint32) uint32 {
 // MixerGetLineControls calls WINMM!mixerGetLineControlsW.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-mixergetlinecontrolsw
 // Minimum OS: windows5.0.
-func MixerGetLineControls(hmxobj HMIXEROBJ, pmxlc unsafe.Pointer, fdwControls uint32) uint32 {
+func MixerGetLineControls(hmxobj HMIXEROBJ, pmxlc *MIXERLINECONTROLSW, fdwControls uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMixerGetLineControls.Addr(), uintptr(hmxobj), uintptr(unsafe.Pointer(pmxlc)), uintptr(fdwControls))
 	return uint32(r1)
 }
@@ -1040,7 +1041,7 @@ func MixerGetLineControls(hmxobj HMIXEROBJ, pmxlc unsafe.Pointer, fdwControls ui
 // MixerGetLineControlsA calls WINMM!mixerGetLineControlsA.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-mixergetlinecontrolsa
 // Minimum OS: windows5.0.
-func MixerGetLineControlsA(hmxobj HMIXEROBJ, pmxlc unsafe.Pointer, fdwControls uint32) uint32 {
+func MixerGetLineControlsA(hmxobj HMIXEROBJ, pmxlc *MIXERLINECONTROLSA, fdwControls uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMixerGetLineControlsA.Addr(), uintptr(hmxobj), uintptr(unsafe.Pointer(pmxlc)), uintptr(fdwControls))
 	return uint32(r1)
 }
@@ -1048,7 +1049,7 @@ func MixerGetLineControlsA(hmxobj HMIXEROBJ, pmxlc unsafe.Pointer, fdwControls u
 // MixerGetLineInfo calls WINMM!mixerGetLineInfoW.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-mixergetlineinfow
 // Minimum OS: windows5.0.
-func MixerGetLineInfo(hmxobj HMIXEROBJ, pmxl unsafe.Pointer, fdwInfo uint32) uint32 {
+func MixerGetLineInfo(hmxobj HMIXEROBJ, pmxl *MIXERLINEW, fdwInfo uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMixerGetLineInfo.Addr(), uintptr(hmxobj), uintptr(unsafe.Pointer(pmxl)), uintptr(fdwInfo))
 	return uint32(r1)
 }
@@ -1056,7 +1057,7 @@ func MixerGetLineInfo(hmxobj HMIXEROBJ, pmxl unsafe.Pointer, fdwInfo uint32) uin
 // MixerGetLineInfoA calls WINMM!mixerGetLineInfoA.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-mixergetlineinfoa
 // Minimum OS: windows5.0.
-func MixerGetLineInfoA(hmxobj HMIXEROBJ, pmxl unsafe.Pointer, fdwInfo uint32) uint32 {
+func MixerGetLineInfoA(hmxobj HMIXEROBJ, pmxl *MIXERLINEA, fdwInfo uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMixerGetLineInfoA.Addr(), uintptr(hmxobj), uintptr(unsafe.Pointer(pmxl)), uintptr(fdwInfo))
 	return uint32(r1)
 }
@@ -1088,7 +1089,7 @@ func MixerOpen(phmx *HMIXER, uMxId uint32, dwCallback uintptr, dwInstance uintpt
 // MixerSetControlDetails calls WINMM!mixerSetControlDetails.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-mixersetcontroldetails
 // Minimum OS: windows5.0.
-func MixerSetControlDetails(hmxobj HMIXEROBJ, pmxcd unsafe.Pointer, fdwDetails uint32) uint32 {
+func MixerSetControlDetails(hmxobj HMIXEROBJ, pmxcd *MIXERCONTROLDETAILS, fdwDetails uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procMixerSetControlDetails.Addr(), uintptr(hmxobj), uintptr(unsafe.Pointer(pmxcd)), uintptr(fdwDetails))
 	return uint32(r1)
 }
@@ -1122,7 +1123,7 @@ func SndPlaySoundA(pszSound foundation.PSTR, fuSound uint32) bool {
 // WaveInAddBuffer calls WINMM!waveInAddBuffer.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveinaddbuffer
 // Minimum OS: windows5.0.
-func WaveInAddBuffer(hwi HWAVEIN, pwh unsafe.Pointer, cbwh uint32) uint32 {
+func WaveInAddBuffer(hwi HWAVEIN, pwh *WAVEHDR, cbwh uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procWaveInAddBuffer.Addr(), uintptr(hwi), uintptr(unsafe.Pointer(pwh)), uintptr(cbwh))
 	return uint32(r1)
 }
@@ -1136,13 +1137,13 @@ func WaveInClose(hwi HWAVEIN) uint32 {
 }
 
 // WaveInGetDevCaps calls WINMM!waveInGetDevCapsW.
-func WaveInGetDevCaps(uDeviceID uintptr, pwic unsafe.Pointer, cbwic uint32) uint32 {
+func WaveInGetDevCaps(uDeviceID uintptr, pwic *WAVEINCAPSW, cbwic uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procWaveInGetDevCaps.Addr(), uintptr(uDeviceID), uintptr(unsafe.Pointer(pwic)), uintptr(cbwic))
 	return uint32(r1)
 }
 
 // WaveInGetDevCapsA calls WINMM!waveInGetDevCapsA.
-func WaveInGetDevCapsA(uDeviceID uintptr, pwic unsafe.Pointer, cbwic uint32) uint32 {
+func WaveInGetDevCapsA(uDeviceID uintptr, pwic *WAVEINCAPSA, cbwic uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procWaveInGetDevCapsA.Addr(), uintptr(uDeviceID), uintptr(unsafe.Pointer(pwic)), uintptr(cbwic))
 	return uint32(r1)
 }
@@ -1178,7 +1179,7 @@ func WaveInGetNumDevs() uint32 {
 // WaveInGetPosition calls WINMM!waveInGetPosition.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveingetposition
 // Minimum OS: windows5.0.
-func WaveInGetPosition(hwi HWAVEIN, pmmt unsafe.Pointer, cbmmt uint32) uint32 {
+func WaveInGetPosition(hwi HWAVEIN, pmmt *media.MMTIME, cbmmt uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procWaveInGetPosition.Addr(), uintptr(hwi), uintptr(unsafe.Pointer(pmmt)), uintptr(cbmmt))
 	return uint32(r1)
 }
@@ -1194,7 +1195,7 @@ func WaveInMessage(hwi HWAVEIN, uMsg uint32, dw1 uintptr, dw2 uintptr) uint32 {
 // WaveInOpen calls WINMM!waveInOpen.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveinopen
 // Minimum OS: windows5.0.
-func WaveInOpen(phwi *HWAVEIN, uDeviceID uint32, pwfx unsafe.Pointer, dwCallback uintptr, dwInstance uintptr, fdwOpen MIDI_WAVE_OPEN_TYPE) uint32 {
+func WaveInOpen(phwi *HWAVEIN, uDeviceID uint32, pwfx *WAVEFORMATEX, dwCallback uintptr, dwInstance uintptr, fdwOpen MIDI_WAVE_OPEN_TYPE) uint32 {
 	r1, _, _ := syscall.SyscallN(procWaveInOpen.Addr(), uintptr(unsafe.Pointer(phwi)), uintptr(uDeviceID), uintptr(unsafe.Pointer(pwfx)), uintptr(dwCallback), uintptr(dwInstance), uintptr(fdwOpen))
 	return uint32(r1)
 }
@@ -1202,7 +1203,7 @@ func WaveInOpen(phwi *HWAVEIN, uDeviceID uint32, pwfx unsafe.Pointer, dwCallback
 // WaveInPrepareHeader calls WINMM!waveInPrepareHeader.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveinprepareheader
 // Minimum OS: windows5.0.
-func WaveInPrepareHeader(hwi HWAVEIN, pwh unsafe.Pointer, cbwh uint32) uint32 {
+func WaveInPrepareHeader(hwi HWAVEIN, pwh *WAVEHDR, cbwh uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procWaveInPrepareHeader.Addr(), uintptr(hwi), uintptr(unsafe.Pointer(pwh)), uintptr(cbwh))
 	return uint32(r1)
 }
@@ -1234,7 +1235,7 @@ func WaveInStop(hwi HWAVEIN) uint32 {
 // WaveInUnprepareHeader calls WINMM!waveInUnprepareHeader.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveinunprepareheader
 // Minimum OS: windows5.0.
-func WaveInUnprepareHeader(hwi HWAVEIN, pwh unsafe.Pointer, cbwh uint32) uint32 {
+func WaveInUnprepareHeader(hwi HWAVEIN, pwh *WAVEHDR, cbwh uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procWaveInUnprepareHeader.Addr(), uintptr(hwi), uintptr(unsafe.Pointer(pwh)), uintptr(cbwh))
 	return uint32(r1)
 }
@@ -1256,13 +1257,13 @@ func WaveOutClose(hwo HWAVEOUT) uint32 {
 }
 
 // WaveOutGetDevCaps calls WINMM!waveOutGetDevCapsW.
-func WaveOutGetDevCaps(uDeviceID uintptr, pwoc unsafe.Pointer, cbwoc uint32) uint32 {
+func WaveOutGetDevCaps(uDeviceID uintptr, pwoc *WAVEOUTCAPSW, cbwoc uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procWaveOutGetDevCaps.Addr(), uintptr(uDeviceID), uintptr(unsafe.Pointer(pwoc)), uintptr(cbwoc))
 	return uint32(r1)
 }
 
 // WaveOutGetDevCapsA calls WINMM!waveOutGetDevCapsA.
-func WaveOutGetDevCapsA(uDeviceID uintptr, pwoc unsafe.Pointer, cbwoc uint32) uint32 {
+func WaveOutGetDevCapsA(uDeviceID uintptr, pwoc *WAVEOUTCAPSA, cbwoc uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procWaveOutGetDevCapsA.Addr(), uintptr(uDeviceID), uintptr(unsafe.Pointer(pwoc)), uintptr(cbwoc))
 	return uint32(r1)
 }
@@ -1314,7 +1315,7 @@ func WaveOutGetPlaybackRate(hwo HWAVEOUT, pdwRate *uint32) uint32 {
 // WaveOutGetPosition calls WINMM!waveOutGetPosition.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutgetposition
 // Minimum OS: windows5.0.
-func WaveOutGetPosition(hwo HWAVEOUT, pmmt unsafe.Pointer, cbmmt uint32) uint32 {
+func WaveOutGetPosition(hwo HWAVEOUT, pmmt *media.MMTIME, cbmmt uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procWaveOutGetPosition.Addr(), uintptr(hwo), uintptr(unsafe.Pointer(pmmt)), uintptr(cbmmt))
 	return uint32(r1)
 }
@@ -1338,7 +1339,7 @@ func WaveOutMessage(hwo HWAVEOUT, uMsg uint32, dw1 uintptr, dw2 uintptr) uint32 
 // WaveOutOpen calls WINMM!waveOutOpen.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutopen
 // Minimum OS: windows5.0.
-func WaveOutOpen(phwo *HWAVEOUT, uDeviceID uint32, pwfx unsafe.Pointer, dwCallback uintptr, dwInstance uintptr, fdwOpen MIDI_WAVE_OPEN_TYPE) uint32 {
+func WaveOutOpen(phwo *HWAVEOUT, uDeviceID uint32, pwfx *WAVEFORMATEX, dwCallback uintptr, dwInstance uintptr, fdwOpen MIDI_WAVE_OPEN_TYPE) uint32 {
 	r1, _, _ := syscall.SyscallN(procWaveOutOpen.Addr(), uintptr(unsafe.Pointer(phwo)), uintptr(uDeviceID), uintptr(unsafe.Pointer(pwfx)), uintptr(dwCallback), uintptr(dwInstance), uintptr(fdwOpen))
 	return uint32(r1)
 }
@@ -1354,7 +1355,7 @@ func WaveOutPause(hwo HWAVEOUT) uint32 {
 // WaveOutPrepareHeader calls WINMM!waveOutPrepareHeader.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutprepareheader
 // Minimum OS: windows5.0.
-func WaveOutPrepareHeader(hwo HWAVEOUT, pwh unsafe.Pointer, cbwh uint32) uint32 {
+func WaveOutPrepareHeader(hwo HWAVEOUT, pwh *WAVEHDR, cbwh uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procWaveOutPrepareHeader.Addr(), uintptr(hwo), uintptr(unsafe.Pointer(pwh)), uintptr(cbwh))
 	return uint32(r1)
 }
@@ -1402,7 +1403,7 @@ func WaveOutSetVolume(hwo HWAVEOUT, dwVolume uint32) uint32 {
 // WaveOutUnprepareHeader calls WINMM!waveOutUnprepareHeader.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutunprepareheader
 // Minimum OS: windows5.0.
-func WaveOutUnprepareHeader(hwo HWAVEOUT, pwh unsafe.Pointer, cbwh uint32) uint32 {
+func WaveOutUnprepareHeader(hwo HWAVEOUT, pwh *WAVEHDR, cbwh uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procWaveOutUnprepareHeader.Addr(), uintptr(hwo), uintptr(unsafe.Pointer(pwh)), uintptr(cbwh))
 	return uint32(r1)
 }
@@ -1410,7 +1411,7 @@ func WaveOutUnprepareHeader(hwo HWAVEOUT, pwh unsafe.Pointer, cbwh uint32) uint3
 // WaveOutWrite calls WINMM!waveOutWrite.
 // https://learn.microsoft.com/windows/win32/api/mmeapi/nf-mmeapi-waveoutwrite
 // Minimum OS: windows5.0.
-func WaveOutWrite(hwo HWAVEOUT, pwh unsafe.Pointer, cbwh uint32) uint32 {
+func WaveOutWrite(hwo HWAVEOUT, pwh *WAVEHDR, cbwh uint32) uint32 {
 	r1, _, _ := syscall.SyscallN(procWaveOutWrite.Addr(), uintptr(hwo), uintptr(unsafe.Pointer(pwh)), uintptr(cbwh))
 	return uint32(r1)
 }

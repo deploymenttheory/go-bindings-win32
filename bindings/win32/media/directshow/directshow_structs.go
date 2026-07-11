@@ -349,11 +349,49 @@ type AUDIO_STREAM_CONFIG_CAPS struct {
 	SampleFrequencyGranularity uint32
 }
 
+// AVIEXTHEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AVIEXTHEADER struct {
+	Data [128]uint16
+}
+
+// AVIFIELDINDEX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AVIFIELDINDEX struct {
+	Data [22]uint16
+}
+
 type AVIINDEXENTRY struct {
 	Ckid          uint32
 	DwFlags       uint32
 	DwChunkOffset uint32
 	DwChunkLength uint32
+}
+
+// AVIMAINHEADER: https://learn.microsoft.com/windows/win32/api/aviriff/ns-aviriff-avimainheader
+// AVIMAINHEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AVIMAINHEADER struct {
+	Data [32]uint16
+}
+
+// AVIMETAINDEX: https://learn.microsoft.com/windows/win32/api/aviriff/ns-aviriff-avimetaindex
+// AVIMETAINDEX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AVIMETAINDEX struct {
+	Data [18]uint16
+}
+
+// AVIOLDINDEX: https://learn.microsoft.com/windows/win32/api/aviriff/ns-aviriff-avioldindex
+// AVIOLDINDEX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AVIOLDINDEX struct {
+	Data [12]uint16
 }
 
 // AVIPALCHANGE: https://learn.microsoft.com/windows/win32/api/avifmt/ns-avifmt-avipalchange
@@ -362,6 +400,38 @@ type AVIPALCHANGE struct {
 	BNumEntries byte
 	WFlags      uint16
 	PeNew       [1]graphicsgdi.PALETTEENTRY
+}
+
+// AVISTDINDEX: https://learn.microsoft.com/windows/win32/api/aviriff/ns-aviriff-avistdindex
+// AVISTDINDEX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AVISTDINDEX struct {
+	Data [8192]uint16
+}
+
+// AVISTDINDEX_ENTRY: https://learn.microsoft.com/windows/win32/api/aviriff/ns-aviriff-avistdindex_entry
+// AVISTDINDEX_ENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AVISTDINDEX_ENTRY struct {
+	Data [4]uint16
+}
+
+// AVISTREAMHEADER: https://learn.microsoft.com/previous-versions/windows/desktop/api/aviriff/ns-aviriff-avistreamheader
+// AVISTREAMHEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AVISTREAMHEADER struct {
+	Data [32]uint16
+}
+
+// AVISUPERINDEX: https://learn.microsoft.com/previous-versions/windows/desktop/api/aviriff/ns-aviriff-avisuperindex
+// AVISUPERINDEX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AVISUPERINDEX struct {
+	Data [8192]uint16
 }
 
 // AVIStreamHeader: https://learn.microsoft.com/previous-versions/windows/desktop/api/avifmt/ns-avifmt-avistreamheader
@@ -380,6 +450,41 @@ type AVIStreamHeader struct {
 	DwQuality             uint32
 	DwSampleSize          uint32
 	RcFrame               foundation.RECT
+}
+
+// AVITCDLINDEX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AVITCDLINDEX struct {
+	Data [16384]uint16
+}
+
+// AVITCDLINDEX_ENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AVITCDLINDEX_ENTRY struct {
+	Data [16]uint16
+}
+
+// AVITIMECODEINDEX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AVITIMECODEINDEX struct {
+	Data [8192]uint16
+}
+
+// AVITIMEDINDEX is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AVITIMEDINDEX struct {
+	Data [13656]uint16
+}
+
+// AVITIMEDINDEX_ENTRY is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type AVITIMEDINDEX_ENTRY struct {
+	Data [6]uint16
 }
 
 type BDANODE_DESCRIPTOR struct {
@@ -517,6 +622,27 @@ type BDA_ISDBCAS_EMG_REQ struct {
 	BMessageCode          [1]byte
 }
 
+// BDA_ISDBCAS_REQUESTHEADER is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BDA_ISDBCAS_REQUESTHEADER struct {
+	Data [9]byte
+}
+
+// BDA_ISDBCAS_RESPONSEDATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BDA_ISDBCAS_RESPONSEDATA struct {
+	Data [17]byte
+}
+
+// BDA_MUX_PIDLISTITEM is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BDA_MUX_PIDLISTITEM struct {
+	Data [4]uint16
+}
+
 type BDA_PID_MAP struct {
 	MediaSampleContent MEDIA_SAMPLE_CONTENT
 	UlcPIDs            uint32
@@ -586,6 +712,13 @@ type BDA_TEMPLATE_CONNECTION struct {
 type BDA_TEMPLATE_PIN_JOINT struct {
 	UliTemplateConnection uint32
 	UlcInstancesMax       uint32
+}
+
+// BDA_TS_SELECTORINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type BDA_TS_SELECTORINFO struct {
+	Data [22]byte
 }
 
 type BDA_TS_SELECTORINFO_ISDBS_EXT struct {
@@ -1004,8 +1137,16 @@ type FilgraphManager struct {
 
 // HEAACWAVEFORMAT: https://learn.microsoft.com/windows/win32/api/mmreg/ns-mmreg-heaacwaveformat
 type HEAACWAVEFORMAT struct {
-	WfInfo                [30]byte
+	WfInfo                HEAACWAVEINFO
 	PbAudioSpecificConfig [1]byte
+}
+
+// HEAACWAVEINFO: https://learn.microsoft.com/windows/win32/api/mmreg/ns-mmreg-heaacwaveinfo
+// HEAACWAVEINFO is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type HEAACWAVEINFO struct {
+	Data [30]byte
 }
 
 type KS_BDA_FRAME_INFO struct {
@@ -1017,11 +1158,27 @@ type KS_BDA_FRAME_INFO struct {
 	UlReason           uint32
 }
 
+// MPEG1WAVEFORMAT: https://learn.microsoft.com/windows/win32/api/mmreg/ns-mmreg-mpeg1waveformat
+// MPEG1WAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEG1WAVEFORMAT struct {
+	Data [40]byte
+}
+
 // MPEG2_TRANSPORT_STRIDE: https://learn.microsoft.com/windows/win32/DirectShow/mpeg2-transport-stride
 type MPEG2_TRANSPORT_STRIDE struct {
 	DwOffset       uint32
 	DwPacketLength uint32
 	DwStride       uint32
+}
+
+// MPEGLAYER3WAVEFORMAT: https://learn.microsoft.com/windows/win32/api/mmreg/ns-mmreg-mpeglayer3waveformat
+// MPEGLAYER3WAVEFORMAT is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type MPEGLAYER3WAVEFORMAT struct {
+	Data [30]byte
 }
 
 // MP_ENVELOPE_SEGMENT: https://learn.microsoft.com/windows/win32/api/medparam/ns-medparam-mp_envelope_segment
@@ -1143,6 +1300,20 @@ type REGPINTYPES struct {
 	ClsMinorType *win32.GUID
 }
 
+// RIFFCHUNK is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RIFFCHUNK struct {
+	Data [4]uint16
+}
+
+// RIFFLIST is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type RIFFLIST struct {
+	Data [6]uint16
+}
+
 // STREAM_ID_MAP: https://learn.microsoft.com/windows/win32/api/strmif/ns-strmif-stream_id_map
 type STREAM_ID_MAP struct {
 	Stream_id              uint32
@@ -1157,6 +1328,13 @@ type SmartCardApplication struct {
 	ApplicationVersion   uint16
 	PbstrApplicationName foundation.BSTR
 	PbstrApplicationURL  foundation.BSTR
+}
+
+// TIMECODEDATA is a packed C struct (non-default field alignment), exposed as
+// correctly sized and aligned opaque backing storage; read or write a specific
+// field through an unsafe.Pointer cast.
+type TIMECODEDATA struct {
+	Data [8]uint16
 }
 
 // TRUECOLORINFO: https://learn.microsoft.com/windows/win32/api/amvideo/ns-amvideo-truecolorinfo

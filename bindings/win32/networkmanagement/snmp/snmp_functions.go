@@ -365,7 +365,7 @@ func SnmpMgrCtl(session unsafe.Pointer, dwCtlCode uint32, lpvInBuffer unsafe.Poi
 // SnmpMgrGetTrap calls mgmtapi!SnmpMgrGetTrap.
 // https://learn.microsoft.com/windows/win32/api/mgmtapi/nf-mgmtapi-snmpmgrgettrap
 // Minimum OS: windows5.0.
-func SnmpMgrGetTrap(enterprise unsafe.Pointer, IPAddress unsafe.Pointer, genericTrap *SNMP_GENERICTRAP, specificTrap *int32, timeStamp *uint32, variableBindings unsafe.Pointer) bool {
+func SnmpMgrGetTrap(enterprise *AsnObjectIdentifier, IPAddress *AsnOctetString, genericTrap *SNMP_GENERICTRAP, specificTrap *int32, timeStamp *uint32, variableBindings *SnmpVarBindList) bool {
 	r1, _, _ := syscall.SyscallN(procSnmpMgrGetTrap.Addr(), uintptr(unsafe.Pointer(enterprise)), uintptr(unsafe.Pointer(IPAddress)), uintptr(unsafe.Pointer(genericTrap)), uintptr(unsafe.Pointer(specificTrap)), uintptr(unsafe.Pointer(timeStamp)), uintptr(unsafe.Pointer(variableBindings)))
 	return r1 != 0
 }
@@ -373,7 +373,7 @@ func SnmpMgrGetTrap(enterprise unsafe.Pointer, IPAddress unsafe.Pointer, generic
 // SnmpMgrGetTrapEx calls mgmtapi!SnmpMgrGetTrapEx.
 // https://learn.microsoft.com/windows/win32/api/mgmtapi/nf-mgmtapi-snmpmgrgettrapex
 // Minimum OS: windows5.0.
-func SnmpMgrGetTrapEx(enterprise unsafe.Pointer, agentAddress unsafe.Pointer, sourceAddress unsafe.Pointer, genericTrap *SNMP_GENERICTRAP, specificTrap *int32, community unsafe.Pointer, timeStamp *uint32, variableBindings unsafe.Pointer) bool {
+func SnmpMgrGetTrapEx(enterprise *AsnObjectIdentifier, agentAddress *AsnOctetString, sourceAddress *AsnOctetString, genericTrap *SNMP_GENERICTRAP, specificTrap *int32, community *AsnOctetString, timeStamp *uint32, variableBindings *SnmpVarBindList) bool {
 	r1, _, _ := syscall.SyscallN(procSnmpMgrGetTrapEx.Addr(), uintptr(unsafe.Pointer(enterprise)), uintptr(unsafe.Pointer(agentAddress)), uintptr(unsafe.Pointer(sourceAddress)), uintptr(unsafe.Pointer(genericTrap)), uintptr(unsafe.Pointer(specificTrap)), uintptr(unsafe.Pointer(community)), uintptr(unsafe.Pointer(timeStamp)), uintptr(unsafe.Pointer(variableBindings)))
 	return r1 != 0
 }
@@ -381,7 +381,7 @@ func SnmpMgrGetTrapEx(enterprise unsafe.Pointer, agentAddress unsafe.Pointer, so
 // SnmpMgrOidToStr calls mgmtapi!SnmpMgrOidToStr.
 // https://learn.microsoft.com/windows/win32/api/mgmtapi/nf-mgmtapi-snmpmgroidtostr
 // Minimum OS: windows5.0.
-func SnmpMgrOidToStr(oid unsafe.Pointer, string_ *foundation.PSTR) bool {
+func SnmpMgrOidToStr(oid *AsnObjectIdentifier, string_ *foundation.PSTR) bool {
 	r1, _, _ := syscall.SyscallN(procSnmpMgrOidToStr.Addr(), uintptr(unsafe.Pointer(oid)), uintptr(unsafe.Pointer(string_)))
 	return r1 != 0
 }
@@ -401,7 +401,7 @@ func SnmpMgrOpen(lpAgentAddress foundation.PSTR, lpAgentCommunity foundation.PST
 // SnmpMgrRequest calls mgmtapi!SnmpMgrRequest.
 // https://learn.microsoft.com/windows/win32/api/mgmtapi/nf-mgmtapi-snmpmgrrequest
 // Minimum OS: windows5.0.
-func SnmpMgrRequest(session unsafe.Pointer, requestType byte, variableBindings unsafe.Pointer, errorStatus *SNMP_ERROR_STATUS, errorIndex *int32) (int32, error) {
+func SnmpMgrRequest(session unsafe.Pointer, requestType byte, variableBindings *SnmpVarBindList, errorStatus *SNMP_ERROR_STATUS, errorIndex *int32) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procSnmpMgrRequest.Addr(), uintptr(unsafe.Pointer(session)), uintptr(requestType), uintptr(unsafe.Pointer(variableBindings)), uintptr(unsafe.Pointer(errorStatus)), uintptr(unsafe.Pointer(errorIndex)))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -412,7 +412,7 @@ func SnmpMgrRequest(session unsafe.Pointer, requestType byte, variableBindings u
 // SnmpMgrStrToOid calls mgmtapi!SnmpMgrStrToOid.
 // https://learn.microsoft.com/windows/win32/api/mgmtapi/nf-mgmtapi-snmpmgrstrtooid
 // Minimum OS: windows5.0.
-func SnmpMgrStrToOid(string_ foundation.PSTR, oid unsafe.Pointer) bool {
+func SnmpMgrStrToOid(string_ foundation.PSTR, oid *AsnObjectIdentifier) bool {
 	r1, _, _ := syscall.SyscallN(procSnmpMgrStrToOid.Addr(), uintptr(unsafe.Pointer(string_)), uintptr(unsafe.Pointer(oid)))
 	return r1 != 0
 }
@@ -658,7 +658,7 @@ func SnmpUtilMemReAlloc(pMem unsafe.Pointer, nBytes uint32) unsafe.Pointer {
 // SnmpUtilOctetsCmp calls snmpapi!SnmpUtilOctetsCmp.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputiloctetscmp
 // Minimum OS: windows5.0.
-func SnmpUtilOctetsCmp(pOctets1 unsafe.Pointer, pOctets2 unsafe.Pointer) int32 {
+func SnmpUtilOctetsCmp(pOctets1 *AsnOctetString, pOctets2 *AsnOctetString) int32 {
 	r1, _, _ := syscall.SyscallN(procSnmpUtilOctetsCmp.Addr(), uintptr(unsafe.Pointer(pOctets1)), uintptr(unsafe.Pointer(pOctets2)))
 	return int32(r1)
 }
@@ -666,7 +666,7 @@ func SnmpUtilOctetsCmp(pOctets1 unsafe.Pointer, pOctets2 unsafe.Pointer) int32 {
 // SnmpUtilOctetsCpy calls snmpapi!SnmpUtilOctetsCpy.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputiloctetscpy
 // Minimum OS: windows5.0.
-func SnmpUtilOctetsCpy(pOctetsDst unsafe.Pointer, pOctetsSrc unsafe.Pointer) int32 {
+func SnmpUtilOctetsCpy(pOctetsDst *AsnOctetString, pOctetsSrc *AsnOctetString) int32 {
 	r1, _, _ := syscall.SyscallN(procSnmpUtilOctetsCpy.Addr(), uintptr(unsafe.Pointer(pOctetsDst)), uintptr(unsafe.Pointer(pOctetsSrc)))
 	return int32(r1)
 }
@@ -674,14 +674,14 @@ func SnmpUtilOctetsCpy(pOctetsDst unsafe.Pointer, pOctetsSrc unsafe.Pointer) int
 // SnmpUtilOctetsFree calls snmpapi!SnmpUtilOctetsFree.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputiloctetsfree
 // Minimum OS: windows5.0.
-func SnmpUtilOctetsFree(pOctets unsafe.Pointer) {
+func SnmpUtilOctetsFree(pOctets *AsnOctetString) {
 	syscall.SyscallN(procSnmpUtilOctetsFree.Addr(), uintptr(unsafe.Pointer(pOctets)))
 }
 
 // SnmpUtilOctetsNCmp calls snmpapi!SnmpUtilOctetsNCmp.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputiloctetsncmp
 // Minimum OS: windows5.0.
-func SnmpUtilOctetsNCmp(pOctets1 unsafe.Pointer, pOctets2 unsafe.Pointer, nChars uint32) int32 {
+func SnmpUtilOctetsNCmp(pOctets1 *AsnOctetString, pOctets2 *AsnOctetString, nChars uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procSnmpUtilOctetsNCmp.Addr(), uintptr(unsafe.Pointer(pOctets1)), uintptr(unsafe.Pointer(pOctets2)), uintptr(nChars))
 	return int32(r1)
 }
@@ -689,7 +689,7 @@ func SnmpUtilOctetsNCmp(pOctets1 unsafe.Pointer, pOctets2 unsafe.Pointer, nChars
 // SnmpUtilOidAppend calls snmpapi!SnmpUtilOidAppend.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputiloidappend
 // Minimum OS: windows5.0.
-func SnmpUtilOidAppend(pOidDst unsafe.Pointer, pOidSrc unsafe.Pointer) (int32, error) {
+func SnmpUtilOidAppend(pOidDst *AsnObjectIdentifier, pOidSrc *AsnObjectIdentifier) (int32, error) {
 	r1, _, e1 := syscall.SyscallN(procSnmpUtilOidAppend.Addr(), uintptr(unsafe.Pointer(pOidDst)), uintptr(unsafe.Pointer(pOidSrc)))
 	if e1 != 0 {
 		return int32(r1), e1
@@ -700,7 +700,7 @@ func SnmpUtilOidAppend(pOidDst unsafe.Pointer, pOidSrc unsafe.Pointer) (int32, e
 // SnmpUtilOidCmp calls snmpapi!SnmpUtilOidCmp.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputiloidcmp
 // Minimum OS: windows5.0.
-func SnmpUtilOidCmp(pOid1 unsafe.Pointer, pOid2 unsafe.Pointer) int32 {
+func SnmpUtilOidCmp(pOid1 *AsnObjectIdentifier, pOid2 *AsnObjectIdentifier) int32 {
 	r1, _, _ := syscall.SyscallN(procSnmpUtilOidCmp.Addr(), uintptr(unsafe.Pointer(pOid1)), uintptr(unsafe.Pointer(pOid2)))
 	return int32(r1)
 }
@@ -708,7 +708,7 @@ func SnmpUtilOidCmp(pOid1 unsafe.Pointer, pOid2 unsafe.Pointer) int32 {
 // SnmpUtilOidCpy calls snmpapi!SnmpUtilOidCpy.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputiloidcpy
 // Minimum OS: windows5.0.
-func SnmpUtilOidCpy(pOidDst unsafe.Pointer, pOidSrc unsafe.Pointer) int32 {
+func SnmpUtilOidCpy(pOidDst *AsnObjectIdentifier, pOidSrc *AsnObjectIdentifier) int32 {
 	r1, _, _ := syscall.SyscallN(procSnmpUtilOidCpy.Addr(), uintptr(unsafe.Pointer(pOidDst)), uintptr(unsafe.Pointer(pOidSrc)))
 	return int32(r1)
 }
@@ -716,14 +716,14 @@ func SnmpUtilOidCpy(pOidDst unsafe.Pointer, pOidSrc unsafe.Pointer) int32 {
 // SnmpUtilOidFree calls snmpapi!SnmpUtilOidFree.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputiloidfree
 // Minimum OS: windows5.0.
-func SnmpUtilOidFree(pOid unsafe.Pointer) {
+func SnmpUtilOidFree(pOid *AsnObjectIdentifier) {
 	syscall.SyscallN(procSnmpUtilOidFree.Addr(), uintptr(unsafe.Pointer(pOid)))
 }
 
 // SnmpUtilOidNCmp calls snmpapi!SnmpUtilOidNCmp.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputiloidncmp
 // Minimum OS: windows5.0.
-func SnmpUtilOidNCmp(pOid1 unsafe.Pointer, pOid2 unsafe.Pointer, nSubIds uint32) int32 {
+func SnmpUtilOidNCmp(pOid1 *AsnObjectIdentifier, pOid2 *AsnObjectIdentifier, nSubIds uint32) int32 {
 	r1, _, _ := syscall.SyscallN(procSnmpUtilOidNCmp.Addr(), uintptr(unsafe.Pointer(pOid1)), uintptr(unsafe.Pointer(pOid2)), uintptr(nSubIds))
 	return int32(r1)
 }
@@ -731,7 +731,7 @@ func SnmpUtilOidNCmp(pOid1 unsafe.Pointer, pOid2 unsafe.Pointer, nSubIds uint32)
 // SnmpUtilOidToA calls snmpapi!SnmpUtilOidToA.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputiloidtoa
 // Minimum OS: windows5.0.
-func SnmpUtilOidToA(Oid unsafe.Pointer) foundation.PSTR {
+func SnmpUtilOidToA(Oid *AsnObjectIdentifier) foundation.PSTR {
 	r1, _, _ := syscall.SyscallN(procSnmpUtilOidToA.Addr(), uintptr(unsafe.Pointer(Oid)))
 	return foundation.PSTR(unsafe.Pointer(r1))
 }
@@ -746,7 +746,7 @@ func SnmpUtilPrintAsnAny(pAny *AsnAny) {
 // SnmpUtilPrintOid calls snmpapi!SnmpUtilPrintOid.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputilprintoid
 // Minimum OS: windows5.0.
-func SnmpUtilPrintOid(Oid unsafe.Pointer) {
+func SnmpUtilPrintOid(Oid *AsnObjectIdentifier) {
 	syscall.SyscallN(procSnmpUtilPrintOid.Addr(), uintptr(unsafe.Pointer(Oid)))
 }
 
@@ -768,7 +768,7 @@ func SnmpUtilVarBindFree(pVb *SnmpVarBind) {
 // SnmpUtilVarBindListCpy calls snmpapi!SnmpUtilVarBindListCpy.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputilvarbindlistcpy
 // Minimum OS: windows5.0.
-func SnmpUtilVarBindListCpy(pVblDst unsafe.Pointer, pVblSrc unsafe.Pointer) int32 {
+func SnmpUtilVarBindListCpy(pVblDst *SnmpVarBindList, pVblSrc *SnmpVarBindList) int32 {
 	r1, _, _ := syscall.SyscallN(procSnmpUtilVarBindListCpy.Addr(), uintptr(unsafe.Pointer(pVblDst)), uintptr(unsafe.Pointer(pVblSrc)))
 	return int32(r1)
 }
@@ -776,6 +776,6 @@ func SnmpUtilVarBindListCpy(pVblDst unsafe.Pointer, pVblSrc unsafe.Pointer) int3
 // SnmpUtilVarBindListFree calls snmpapi!SnmpUtilVarBindListFree.
 // https://learn.microsoft.com/windows/win32/api/snmp/nf-snmp-snmputilvarbindlistfree
 // Minimum OS: windows5.0.
-func SnmpUtilVarBindListFree(pVbl unsafe.Pointer) {
+func SnmpUtilVarBindListFree(pVbl *SnmpVarBindList) {
 	syscall.SyscallN(procSnmpUtilVarBindListFree.Addr(), uintptr(unsafe.Pointer(pVbl)))
 }

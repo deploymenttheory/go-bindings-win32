@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	mediaaudio "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/audio"
 	mediamediafoundation "github.com/deploymenttheory/go-bindings-win32/bindings/win32/media/mediafoundation"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 	systemcomstructuredstorage "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com/structuredstorage"
@@ -101,7 +102,7 @@ func (self *IMDSPDevice) EnumStorage(ppEnumStorage **IMDSPEnumStorage) error {
 }
 
 // GetFormatSupport dispatches through IMDSPDevice's vtable slot 12.
-func (self *IMDSPDevice) GetFormatSupport(pFormatEx *unsafe.Pointer, pnFormatCount *uint32, pppwszMimeType **foundation.PWSTR, pnMimeTypeCount *uint32) error {
+func (self *IMDSPDevice) GetFormatSupport(pFormatEx **mediaaudio.WAVEFORMATEX, pnFormatCount *uint32, pppwszMimeType **foundation.PWSTR, pnMimeTypeCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormatEx)), uintptr(unsafe.Pointer(pnFormatCount)), uintptr(unsafe.Pointer(pppwszMimeType)), uintptr(unsafe.Pointer(pnMimeTypeCount)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -129,7 +130,7 @@ func (self *IMDSPDevice2) GetStorage(pszStorageName string, ppStorage **IMDSPSto
 }
 
 // GetFormatSupport2 dispatches through IMDSPDevice2's vtable slot 15.
-func (self *IMDSPDevice2) GetFormatSupport2(dwFlags uint32, ppAudioFormatEx *unsafe.Pointer, pnAudioFormatCount *uint32, ppVideoFormatEx **mediamediafoundation.VIDEOINFOHEADER, pnVideoFormatCount *uint32, ppFileType **WMFILECAPABILITIES, pnFileTypeCount *uint32) error {
+func (self *IMDSPDevice2) GetFormatSupport2(dwFlags uint32, ppAudioFormatEx **mediaaudio.WAVEFORMATEX, pnAudioFormatCount *uint32, ppVideoFormatEx **mediamediafoundation.VIDEOINFOHEADER, pnVideoFormatCount *uint32, ppFileType **WMFILECAPABILITIES, pnFileTypeCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppAudioFormatEx)), uintptr(unsafe.Pointer(pnAudioFormatCount)), uintptr(unsafe.Pointer(ppVideoFormatEx)), uintptr(unsafe.Pointer(pnVideoFormatCount)), uintptr(unsafe.Pointer(ppFileType)), uintptr(unsafe.Pointer(pnFileTypeCount)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -216,7 +217,7 @@ func (self *IMDSPDeviceControl) Play() error {
 }
 
 // Record dispatches through IMDSPDeviceControl's vtable slot 6.
-func (self *IMDSPDeviceControl) Record(pFormat unsafe.Pointer) error {
+func (self *IMDSPDeviceControl) Record(pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -483,7 +484,7 @@ type IMDSPStorage struct {
 var IID_IMDSPStorage = win32.GUID{Data1: 0x1dcb3a16, Data2: 0x33ed, Data3: 0x11d3, Data4: [8]byte{0x84, 0x70, 0x00, 0xc0, 0x4f, 0x79, 0xdb, 0xc0}}
 
 // SetAttributes dispatches through IMDSPStorage's vtable slot 3.
-func (self *IMDSPStorage) SetAttributes(dwAttributes uint32, pFormat unsafe.Pointer) error {
+func (self *IMDSPStorage) SetAttributes(dwAttributes uint32, pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(unsafe.Pointer(pFormat)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -495,7 +496,7 @@ func (self *IMDSPStorage) GetStorageGlobals(ppStorageGlobals **IMDSPStorageGloba
 }
 
 // GetAttributes dispatches through IMDSPStorage's vtable slot 5.
-func (self *IMDSPStorage) GetAttributes(pdwAttributes *uint32, pFormat unsafe.Pointer) error {
+func (self *IMDSPStorage) GetAttributes(pdwAttributes *uint32, pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAttributes)), uintptr(unsafe.Pointer(pFormat)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -525,7 +526,7 @@ func (self *IMDSPStorage) GetRights(ppRights **WMDMRIGHTS, pnRightsCount *uint32
 }
 
 // CreateStorage dispatches through IMDSPStorage's vtable slot 10.
-func (self *IMDSPStorage) CreateStorage(dwAttributes uint32, pFormat unsafe.Pointer, pwszName string, ppNewStorage **IMDSPStorage) error {
+func (self *IMDSPStorage) CreateStorage(dwAttributes uint32, pFormat *mediaaudio.WAVEFORMATEX, pwszName string, ppNewStorage **IMDSPStorage) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(ppNewStorage)))
 	return win32.HRESULTError(int32(r1))
@@ -560,20 +561,20 @@ func (self *IMDSPStorage2) GetStorage(pszStorageName string, ppStorage **IMDSPSt
 }
 
 // CreateStorage2 dispatches through IMDSPStorage2's vtable slot 14.
-func (self *IMDSPStorage2) CreateStorage2(dwAttributes uint32, dwAttributesEx uint32, pAudioFormat unsafe.Pointer, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER, pwszName string, qwFileSize uint64, ppNewStorage **IMDSPStorage) error {
+func (self *IMDSPStorage2) CreateStorage2(dwAttributes uint32, dwAttributesEx uint32, pAudioFormat *mediaaudio.WAVEFORMATEX, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER, pwszName string, qwFileSize uint64, ppNewStorage **IMDSPStorage) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(dwAttributesEx), uintptr(unsafe.Pointer(pAudioFormat)), uintptr(unsafe.Pointer(pVideoFormat)), uintptr(unsafe.Pointer(_pwszName)), uintptr(qwFileSize), uintptr(unsafe.Pointer(ppNewStorage)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetAttributes2 dispatches through IMDSPStorage2's vtable slot 15.
-func (self *IMDSPStorage2) SetAttributes2(dwAttributes uint32, dwAttributesEx uint32, pAudioFormat unsafe.Pointer, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
+func (self *IMDSPStorage2) SetAttributes2(dwAttributes uint32, dwAttributesEx uint32, pAudioFormat *mediaaudio.WAVEFORMATEX, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(dwAttributesEx), uintptr(unsafe.Pointer(pAudioFormat)), uintptr(unsafe.Pointer(pVideoFormat)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetAttributes2 dispatches through IMDSPStorage2's vtable slot 16.
-func (self *IMDSPStorage2) GetAttributes2(pdwAttributes *uint32, pdwAttributesEx *uint32, pAudioFormat unsafe.Pointer, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
+func (self *IMDSPStorage2) GetAttributes2(pdwAttributes *uint32, pdwAttributesEx *uint32, pAudioFormat *mediaaudio.WAVEFORMATEX, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAttributes)), uintptr(unsafe.Pointer(pdwAttributesEx)), uintptr(unsafe.Pointer(pAudioFormat)), uintptr(unsafe.Pointer(pVideoFormat)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1021,7 +1022,7 @@ func (self *IWMDMDevice) EnumStorage(ppEnumStorage **IWMDMEnumStorage) error {
 }
 
 // GetFormatSupport dispatches through IWMDMDevice's vtable slot 12.
-func (self *IWMDMDevice) GetFormatSupport(ppFormatEx *unsafe.Pointer, pnFormatCount *uint32, pppwszMimeType **foundation.PWSTR, pnMimeTypeCount *uint32) error {
+func (self *IWMDMDevice) GetFormatSupport(ppFormatEx **mediaaudio.WAVEFORMATEX, pnFormatCount *uint32, pppwszMimeType **foundation.PWSTR, pnMimeTypeCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppFormatEx)), uintptr(unsafe.Pointer(pnFormatCount)), uintptr(unsafe.Pointer(pppwszMimeType)), uintptr(unsafe.Pointer(pnMimeTypeCount)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1049,7 +1050,7 @@ func (self *IWMDMDevice2) GetStorage(pszStorageName string, ppStorage **IWMDMSto
 }
 
 // GetFormatSupport2 dispatches through IWMDMDevice2's vtable slot 15.
-func (self *IWMDMDevice2) GetFormatSupport2(dwFlags uint32, ppAudioFormatEx *unsafe.Pointer, pnAudioFormatCount *uint32, ppVideoFormatEx **mediamediafoundation.VIDEOINFOHEADER, pnVideoFormatCount *uint32, ppFileType **WMFILECAPABILITIES, pnFileTypeCount *uint32) error {
+func (self *IWMDMDevice2) GetFormatSupport2(dwFlags uint32, ppAudioFormatEx **mediaaudio.WAVEFORMATEX, pnAudioFormatCount *uint32, ppVideoFormatEx **mediamediafoundation.VIDEOINFOHEADER, pnVideoFormatCount *uint32, ppFileType **WMFILECAPABILITIES, pnFileTypeCount *uint32) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(ppAudioFormatEx)), uintptr(unsafe.Pointer(pnAudioFormatCount)), uintptr(unsafe.Pointer(ppVideoFormatEx)), uintptr(unsafe.Pointer(pnVideoFormatCount)), uintptr(unsafe.Pointer(ppFileType)), uintptr(unsafe.Pointer(pnFileTypeCount)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1136,7 +1137,7 @@ func (self *IWMDMDeviceControl) Play() error {
 }
 
 // Record dispatches through IWMDMDeviceControl's vtable slot 6.
-func (self *IWMDMDeviceControl) Record(pFormat unsafe.Pointer) error {
+func (self *IWMDMDeviceControl) Record(pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pFormat)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1453,13 +1454,13 @@ func (self *IWMDMOperation) SetObjectName(pwszName string, nMaxChars uint32) err
 }
 
 // GetObjectAttributes dispatches through IWMDMOperation's vtable slot 7.
-func (self *IWMDMOperation) GetObjectAttributes(pdwAttributes *uint32, pFormat unsafe.Pointer) error {
+func (self *IWMDMOperation) GetObjectAttributes(pdwAttributes *uint32, pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAttributes)), uintptr(unsafe.Pointer(pFormat)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetObjectAttributes dispatches through IWMDMOperation's vtable slot 8.
-func (self *IWMDMOperation) SetObjectAttributes(dwAttributes uint32, pFormat unsafe.Pointer) error {
+func (self *IWMDMOperation) SetObjectAttributes(dwAttributes uint32, pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(unsafe.Pointer(pFormat)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1498,13 +1499,13 @@ type IWMDMOperation2 struct {
 var IID_IWMDMOperation2 = win32.GUID{Data1: 0x33445b48, Data2: 0x7df7, Data3: 0x425c, Data4: [8]byte{0xad, 0x8f, 0x0f, 0xc6, 0xd8, 0x2f, 0x9f, 0x75}}
 
 // SetObjectAttributes2 dispatches through IWMDMOperation2's vtable slot 13.
-func (self *IWMDMOperation2) SetObjectAttributes2(dwAttributes uint32, dwAttributesEx uint32, pFormat unsafe.Pointer, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
+func (self *IWMDMOperation2) SetObjectAttributes2(dwAttributes uint32, dwAttributesEx uint32, pFormat *mediaaudio.WAVEFORMATEX, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(dwAttributesEx), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(pVideoFormat)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetObjectAttributes2 dispatches through IWMDMOperation2's vtable slot 14.
-func (self *IWMDMOperation2) GetObjectAttributes2(pdwAttributes *uint32, pdwAttributesEx *uint32, pAudioFormat unsafe.Pointer, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
+func (self *IWMDMOperation2) GetObjectAttributes2(pdwAttributes *uint32, pdwAttributesEx *uint32, pAudioFormat *mediaaudio.WAVEFORMATEX, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAttributes)), uintptr(unsafe.Pointer(pdwAttributesEx)), uintptr(unsafe.Pointer(pAudioFormat)), uintptr(unsafe.Pointer(pVideoFormat)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1600,7 +1601,7 @@ type IWMDMStorage struct {
 var IID_IWMDMStorage = win32.GUID{Data1: 0x1dcb3a06, Data2: 0x33ed, Data3: 0x11d3, Data4: [8]byte{0x84, 0x70, 0x00, 0xc0, 0x4f, 0x79, 0xdb, 0xc0}}
 
 // SetAttributes dispatches through IWMDMStorage's vtable slot 3.
-func (self *IWMDMStorage) SetAttributes(dwAttributes uint32, pFormat unsafe.Pointer) error {
+func (self *IWMDMStorage) SetAttributes(dwAttributes uint32, pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(unsafe.Pointer(pFormat)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1612,7 +1613,7 @@ func (self *IWMDMStorage) GetStorageGlobals(ppStorageGlobals **IWMDMStorageGloba
 }
 
 // GetAttributes dispatches through IWMDMStorage's vtable slot 5.
-func (self *IWMDMStorage) GetAttributes(pdwAttributes *uint32, pFormat unsafe.Pointer) error {
+func (self *IWMDMStorage) GetAttributes(pdwAttributes *uint32, pFormat *mediaaudio.WAVEFORMATEX) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAttributes)), uintptr(unsafe.Pointer(pFormat)))
 	return win32.HRESULTError(int32(r1))
 }
@@ -1670,13 +1671,13 @@ func (self *IWMDMStorage2) GetStorage(pszStorageName string, ppStorage **IWMDMSt
 }
 
 // SetAttributes2 dispatches through IWMDMStorage2's vtable slot 13.
-func (self *IWMDMStorage2) SetAttributes2(dwAttributes uint32, dwAttributesEx uint32, pFormat unsafe.Pointer, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
+func (self *IWMDMStorage2) SetAttributes2(dwAttributes uint32, dwAttributesEx uint32, pFormat *mediaaudio.WAVEFORMATEX, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwAttributes), uintptr(dwAttributesEx), uintptr(unsafe.Pointer(pFormat)), uintptr(unsafe.Pointer(pVideoFormat)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetAttributes2 dispatches through IWMDMStorage2's vtable slot 14.
-func (self *IWMDMStorage2) GetAttributes2(pdwAttributes *uint32, pdwAttributesEx *uint32, pAudioFormat unsafe.Pointer, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
+func (self *IWMDMStorage2) GetAttributes2(pdwAttributes *uint32, pdwAttributesEx *uint32, pAudioFormat *mediaaudio.WAVEFORMATEX, pVideoFormat *mediamediafoundation.VIDEOINFOHEADER) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pdwAttributes)), uintptr(unsafe.Pointer(pdwAttributesEx)), uintptr(unsafe.Pointer(pAudioFormat)), uintptr(unsafe.Pointer(pVideoFormat)))
 	return win32.HRESULTError(int32(r1))
 }

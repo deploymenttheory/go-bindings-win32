@@ -10,6 +10,7 @@ import (
 
 	"github.com/deploymenttheory/go-bindings-win32/bindings/runtime/win32"
 	"github.com/deploymenttheory/go-bindings-win32/bindings/win32/foundation"
+	graphicsdwm "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/dwm"
 	graphicsimaging "github.com/deploymenttheory/go-bindings-win32/bindings/win32/graphics/imaging"
 	systemcom "github.com/deploymenttheory/go-bindings-win32/bindings/win32/system/com"
 )
@@ -460,7 +461,7 @@ func (self *IMILBitmapEffectPrimitive) HasInverseTransform(uiIndex uint32, pfHas
 }
 
 // GetAffineMatrix dispatches through IMILBitmapEffectPrimitive's vtable slot 8.
-func (self *IMILBitmapEffectPrimitive) GetAffineMatrix(uiIndex uint32, pMatrix unsafe.Pointer) error {
+func (self *IMILBitmapEffectPrimitive) GetAffineMatrix(uiIndex uint32, pMatrix *graphicsdwm.MilMatrix3x2D) error {
 	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(uiIndex), uintptr(unsafe.Pointer(pMatrix)))
 	return win32.HRESULTError(int32(r1))
 }

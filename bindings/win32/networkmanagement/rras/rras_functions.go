@@ -1107,9 +1107,13 @@ func MprConfigInterfaceSetInfo(hMprConfig foundation.HANDLE, hRouterInterface fo
 // MprConfigInterfaceTransportAdd calls MPRAPI!MprConfigInterfaceTransportAdd.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mprconfiginterfacetransportadd
 // Minimum OS: windowsserver2000.
-func MprConfigInterfaceTransportAdd(hMprConfig foundation.HANDLE, hRouterInterface foundation.HANDLE, dwTransportId uint32, lpwsTransportName string, pInterfaceInfo *byte, dwInterfaceInfoSize uint32, phRouterIfTransport *foundation.HANDLE) uint32 {
+func MprConfigInterfaceTransportAdd(hMprConfig foundation.HANDLE, hRouterInterface foundation.HANDLE, dwTransportId uint32, lpwsTransportName string, pInterfaceInfo []byte, phRouterIfTransport *foundation.HANDLE) uint32 {
 	_lpwsTransportName := win32.UTF16Ptr(lpwsTransportName)
-	r1, _, _ := syscall.SyscallN(procMprConfigInterfaceTransportAdd.Addr(), uintptr(hMprConfig), uintptr(hRouterInterface), uintptr(dwTransportId), uintptr(unsafe.Pointer(_lpwsTransportName)), uintptr(unsafe.Pointer(pInterfaceInfo)), uintptr(dwInterfaceInfoSize), uintptr(unsafe.Pointer(phRouterIfTransport)))
+	var _pInterfaceInfo *byte
+	if len(pInterfaceInfo) > 0 {
+		_pInterfaceInfo = &pInterfaceInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMprConfigInterfaceTransportAdd.Addr(), uintptr(hMprConfig), uintptr(hRouterInterface), uintptr(dwTransportId), uintptr(unsafe.Pointer(_lpwsTransportName)), uintptr(unsafe.Pointer(_pInterfaceInfo)), uintptr(len(pInterfaceInfo)), uintptr(unsafe.Pointer(phRouterIfTransport)))
 	return uint32(r1)
 }
 
@@ -1148,8 +1152,12 @@ func MprConfigInterfaceTransportRemove(hMprConfig foundation.HANDLE, hRouterInte
 // MprConfigInterfaceTransportSetInfo calls MPRAPI!MprConfigInterfaceTransportSetInfo.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mprconfiginterfacetransportsetinfo
 // Minimum OS: windowsserver2000.
-func MprConfigInterfaceTransportSetInfo(hMprConfig foundation.HANDLE, hRouterInterface foundation.HANDLE, hRouterIfTransport foundation.HANDLE, pInterfaceInfo *byte, dwInterfaceInfoSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMprConfigInterfaceTransportSetInfo.Addr(), uintptr(hMprConfig), uintptr(hRouterInterface), uintptr(hRouterIfTransport), uintptr(unsafe.Pointer(pInterfaceInfo)), uintptr(dwInterfaceInfoSize))
+func MprConfigInterfaceTransportSetInfo(hMprConfig foundation.HANDLE, hRouterInterface foundation.HANDLE, hRouterIfTransport foundation.HANDLE, pInterfaceInfo []byte) uint32 {
+	var _pInterfaceInfo *byte
+	if len(pInterfaceInfo) > 0 {
+		_pInterfaceInfo = &pInterfaceInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMprConfigInterfaceTransportSetInfo.Addr(), uintptr(hMprConfig), uintptr(hRouterInterface), uintptr(hRouterIfTransport), uintptr(unsafe.Pointer(_pInterfaceInfo)), uintptr(len(pInterfaceInfo)))
 	return uint32(r1)
 }
 
@@ -1236,10 +1244,18 @@ func MprConfigServerSetInfoEx(hMprConfig foundation.HANDLE, pSetServerConfig *MP
 // MprConfigTransportCreate calls MPRAPI!MprConfigTransportCreate.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mprconfigtransportcreate
 // Minimum OS: windowsserver2000.
-func MprConfigTransportCreate(hMprConfig foundation.HANDLE, dwTransportId uint32, lpwsTransportName string, pGlobalInfo *byte, dwGlobalInfoSize uint32, pClientInterfaceInfo *byte, dwClientInterfaceInfoSize uint32, lpwsDLLPath string, phRouterTransport *foundation.HANDLE) uint32 {
+func MprConfigTransportCreate(hMprConfig foundation.HANDLE, dwTransportId uint32, lpwsTransportName string, pGlobalInfo []byte, pClientInterfaceInfo []byte, lpwsDLLPath string, phRouterTransport *foundation.HANDLE) uint32 {
 	_lpwsTransportName := win32.UTF16Ptr(lpwsTransportName)
+	var _pGlobalInfo *byte
+	if len(pGlobalInfo) > 0 {
+		_pGlobalInfo = &pGlobalInfo[0]
+	}
+	var _pClientInterfaceInfo *byte
+	if len(pClientInterfaceInfo) > 0 {
+		_pClientInterfaceInfo = &pClientInterfaceInfo[0]
+	}
 	_lpwsDLLPath := win32.UTF16Ptr(lpwsDLLPath)
-	r1, _, _ := syscall.SyscallN(procMprConfigTransportCreate.Addr(), uintptr(hMprConfig), uintptr(dwTransportId), uintptr(unsafe.Pointer(_lpwsTransportName)), uintptr(unsafe.Pointer(pGlobalInfo)), uintptr(dwGlobalInfoSize), uintptr(unsafe.Pointer(pClientInterfaceInfo)), uintptr(dwClientInterfaceInfoSize), uintptr(unsafe.Pointer(_lpwsDLLPath)), uintptr(unsafe.Pointer(phRouterTransport)))
+	r1, _, _ := syscall.SyscallN(procMprConfigTransportCreate.Addr(), uintptr(hMprConfig), uintptr(dwTransportId), uintptr(unsafe.Pointer(_lpwsTransportName)), uintptr(unsafe.Pointer(_pGlobalInfo)), uintptr(len(pGlobalInfo)), uintptr(unsafe.Pointer(_pClientInterfaceInfo)), uintptr(len(pClientInterfaceInfo)), uintptr(unsafe.Pointer(_lpwsDLLPath)), uintptr(unsafe.Pointer(phRouterTransport)))
 	return uint32(r1)
 }
 
@@ -1278,9 +1294,17 @@ func MprConfigTransportGetInfo(hMprConfig foundation.HANDLE, hRouterTransport fo
 // MprConfigTransportSetInfo calls MPRAPI!MprConfigTransportSetInfo.
 // https://learn.microsoft.com/windows/win32/api/mprapi/nf-mprapi-mprconfigtransportsetinfo
 // Minimum OS: windowsserver2000.
-func MprConfigTransportSetInfo(hMprConfig foundation.HANDLE, hRouterTransport foundation.HANDLE, pGlobalInfo *byte, dwGlobalInfoSize uint32, pClientInterfaceInfo *byte, dwClientInterfaceInfoSize uint32, lpwsDLLPath string) uint32 {
+func MprConfigTransportSetInfo(hMprConfig foundation.HANDLE, hRouterTransport foundation.HANDLE, pGlobalInfo []byte, pClientInterfaceInfo []byte, lpwsDLLPath string) uint32 {
+	var _pGlobalInfo *byte
+	if len(pGlobalInfo) > 0 {
+		_pGlobalInfo = &pGlobalInfo[0]
+	}
+	var _pClientInterfaceInfo *byte
+	if len(pClientInterfaceInfo) > 0 {
+		_pClientInterfaceInfo = &pClientInterfaceInfo[0]
+	}
 	_lpwsDLLPath := win32.UTF16Ptr(lpwsDLLPath)
-	r1, _, _ := syscall.SyscallN(procMprConfigTransportSetInfo.Addr(), uintptr(hMprConfig), uintptr(hRouterTransport), uintptr(unsafe.Pointer(pGlobalInfo)), uintptr(dwGlobalInfoSize), uintptr(unsafe.Pointer(pClientInterfaceInfo)), uintptr(dwClientInterfaceInfoSize), uintptr(unsafe.Pointer(_lpwsDLLPath)))
+	r1, _, _ := syscall.SyscallN(procMprConfigTransportSetInfo.Addr(), uintptr(hMprConfig), uintptr(hRouterTransport), uintptr(unsafe.Pointer(_pGlobalInfo)), uintptr(len(pGlobalInfo)), uintptr(unsafe.Pointer(_pClientInterfaceInfo)), uintptr(len(pClientInterfaceInfo)), uintptr(unsafe.Pointer(_lpwsDLLPath)))
 	return uint32(r1)
 }
 
@@ -2012,18 +2036,26 @@ func RasSetCredentialsA(param0 foundation.PSTR, param1 foundation.PSTR, param2 *
 // RasSetCustomAuthData calls RASAPI32!RasSetCustomAuthDataW.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetcustomauthdataw
 // Minimum OS: windows5.0.
-func RasSetCustomAuthData(pszPhonebook string, pszEntry string, pbCustomAuthData *byte, dwSizeofCustomAuthData uint32) uint32 {
+func RasSetCustomAuthData(pszPhonebook string, pszEntry string, pbCustomAuthData []byte) uint32 {
 	_pszPhonebook := win32.UTF16Ptr(pszPhonebook)
 	_pszEntry := win32.UTF16Ptr(pszEntry)
-	r1, _, _ := syscall.SyscallN(procRasSetCustomAuthData.Addr(), uintptr(unsafe.Pointer(_pszPhonebook)), uintptr(unsafe.Pointer(_pszEntry)), uintptr(unsafe.Pointer(pbCustomAuthData)), uintptr(dwSizeofCustomAuthData))
+	var _pbCustomAuthData *byte
+	if len(pbCustomAuthData) > 0 {
+		_pbCustomAuthData = &pbCustomAuthData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRasSetCustomAuthData.Addr(), uintptr(unsafe.Pointer(_pszPhonebook)), uintptr(unsafe.Pointer(_pszEntry)), uintptr(unsafe.Pointer(_pbCustomAuthData)), uintptr(len(pbCustomAuthData)))
 	return uint32(r1)
 }
 
 // RasSetCustomAuthDataA calls RASAPI32!RasSetCustomAuthDataA.
 // https://learn.microsoft.com/windows/win32/api/ras/nf-ras-rassetcustomauthdataa
 // Minimum OS: windows5.0.
-func RasSetCustomAuthDataA(pszPhonebook foundation.PSTR, pszEntry foundation.PSTR, pbCustomAuthData *byte, dwSizeofCustomAuthData uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procRasSetCustomAuthDataA.Addr(), uintptr(unsafe.Pointer(pszPhonebook)), uintptr(unsafe.Pointer(pszEntry)), uintptr(unsafe.Pointer(pbCustomAuthData)), uintptr(dwSizeofCustomAuthData))
+func RasSetCustomAuthDataA(pszPhonebook foundation.PSTR, pszEntry foundation.PSTR, pbCustomAuthData []byte) uint32 {
+	var _pbCustomAuthData *byte
+	if len(pbCustomAuthData) > 0 {
+		_pbCustomAuthData = &pbCustomAuthData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRasSetCustomAuthDataA.Addr(), uintptr(unsafe.Pointer(pszPhonebook)), uintptr(unsafe.Pointer(pszEntry)), uintptr(unsafe.Pointer(_pbCustomAuthData)), uintptr(len(pbCustomAuthData)))
 	return uint32(r1)
 }
 

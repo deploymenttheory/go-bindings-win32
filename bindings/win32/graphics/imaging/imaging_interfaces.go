@@ -69,8 +69,12 @@ func (self *IWICBitmapCodecInfo) GetContainerFormat(pguidContainerFormat *win32.
 }
 
 // GetPixelFormats dispatches through IWICBitmapCodecInfo's vtable slot 12.
-func (self *IWICBitmapCodecInfo) GetPixelFormats(cFormats uint32, pguidPixelFormats *win32.GUID, pcActual *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(cFormats), uintptr(unsafe.Pointer(pguidPixelFormats)), uintptr(unsafe.Pointer(pcActual)))
+func (self *IWICBitmapCodecInfo) GetPixelFormats(pguidPixelFormats []win32.GUID, pcActual *uint32) error {
+	var _pguidPixelFormats *win32.GUID
+	if len(pguidPixelFormats) > 0 {
+		_pguidPixelFormats = &pguidPixelFormats[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(len(pguidPixelFormats)), uintptr(unsafe.Pointer(_pguidPixelFormats)), uintptr(unsafe.Pointer(pcActual)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -202,8 +206,12 @@ func (self *IWICBitmapDecoder) GetPreview(ppIBitmapSource **IWICBitmapSource) er
 }
 
 // GetColorContexts dispatches through IWICBitmapDecoder's vtable slot 10.
-func (self *IWICBitmapDecoder) GetColorContexts(cCount uint32, ppIColorContexts **IWICColorContext, pcActualCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(cCount), uintptr(unsafe.Pointer(ppIColorContexts)), uintptr(unsafe.Pointer(pcActualCount)))
+func (self *IWICBitmapDecoder) GetColorContexts(ppIColorContexts []*IWICColorContext, pcActualCount *uint32) error {
+	var _ppIColorContexts **IWICColorContext
+	if len(ppIColorContexts) > 0 {
+		_ppIColorContexts = &ppIColorContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(len(ppIColorContexts)), uintptr(unsafe.Pointer(_ppIColorContexts)), uintptr(unsafe.Pointer(pcActualCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -280,8 +288,12 @@ func (self *IWICBitmapEncoder) GetEncoderInfo(ppIEncoderInfo **IWICBitmapEncoder
 }
 
 // SetColorContexts dispatches through IWICBitmapEncoder's vtable slot 6.
-func (self *IWICBitmapEncoder) SetColorContexts(cCount uint32, ppIColorContext **IWICColorContext) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cCount), uintptr(unsafe.Pointer(ppIColorContext)))
+func (self *IWICBitmapEncoder) SetColorContexts(ppIColorContext []*IWICColorContext) error {
+	var _ppIColorContext **IWICColorContext
+	if len(ppIColorContext) > 0 {
+		_ppIColorContext = &ppIColorContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(ppIColorContext)), uintptr(unsafe.Pointer(_ppIColorContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -407,8 +419,12 @@ func (self *IWICBitmapFrameDecode) GetMetadataQueryReader(ppIMetadataQueryReader
 }
 
 // GetColorContexts dispatches through IWICBitmapFrameDecode's vtable slot 9.
-func (self *IWICBitmapFrameDecode) GetColorContexts(cCount uint32, ppIColorContexts **IWICColorContext, pcActualCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(cCount), uintptr(unsafe.Pointer(ppIColorContexts)), uintptr(unsafe.Pointer(pcActualCount)))
+func (self *IWICBitmapFrameDecode) GetColorContexts(ppIColorContexts []*IWICColorContext, pcActualCount *uint32) error {
+	var _ppIColorContexts **IWICColorContext
+	if len(ppIColorContexts) > 0 {
+		_ppIColorContexts = &ppIColorContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(ppIColorContexts)), uintptr(unsafe.Pointer(_ppIColorContexts)), uintptr(unsafe.Pointer(pcActualCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -446,8 +462,12 @@ func (self *IWICBitmapFrameEncode) SetPixelFormat(pPixelFormat *win32.GUID) erro
 }
 
 // SetColorContexts dispatches through IWICBitmapFrameEncode's vtable slot 7.
-func (self *IWICBitmapFrameEncode) SetColorContexts(cCount uint32, ppIColorContext **IWICColorContext) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cCount), uintptr(unsafe.Pointer(ppIColorContext)))
+func (self *IWICBitmapFrameEncode) SetColorContexts(ppIColorContext []*IWICColorContext) error {
+	var _ppIColorContext **IWICColorContext
+	if len(ppIColorContext) > 0 {
+		_ppIColorContext = &ppIColorContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(ppIColorContext)), uintptr(unsafe.Pointer(_ppIColorContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -464,8 +484,12 @@ func (self *IWICBitmapFrameEncode) SetThumbnail(pIThumbnail *IWICBitmapSource) e
 }
 
 // WritePixels dispatches through IWICBitmapFrameEncode's vtable slot 10.
-func (self *IWICBitmapFrameEncode) WritePixels(lineCount uint32, cbStride uint32, cbBufferSize uint32, pbPixels *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lineCount), uintptr(cbStride), uintptr(cbBufferSize), uintptr(unsafe.Pointer(pbPixels)))
+func (self *IWICBitmapFrameEncode) WritePixels(lineCount uint32, cbStride uint32, pbPixels []byte) error {
+	var _pbPixels *byte
+	if len(pbPixels) > 0 {
+		_pbPixels = &pbPixels[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(lineCount), uintptr(cbStride), uintptr(len(pbPixels)), uintptr(unsafe.Pointer(_pbPixels)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -569,8 +593,12 @@ func (self *IWICBitmapSource) CopyPalette(pIPalette *IWICPalette) error {
 }
 
 // CopyPixels dispatches through IWICBitmapSource's vtable slot 7.
-func (self *IWICBitmapSource) CopyPixels(prc *WICRect, cbStride uint32, cbBufferSize uint32, pbBuffer *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prc)), uintptr(cbStride), uintptr(cbBufferSize), uintptr(unsafe.Pointer(pbBuffer)))
+func (self *IWICBitmapSource) CopyPixels(prc *WICRect, cbStride uint32, pbBuffer []byte) error {
+	var _pbBuffer *byte
+	if len(pbBuffer) > 0 {
+		_pbBuffer = &pbBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prc)), uintptr(cbStride), uintptr(len(pbBuffer)), uintptr(unsafe.Pointer(_pbBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -584,8 +612,12 @@ type IWICBitmapSourceTransform struct {
 var IID_IWICBitmapSourceTransform = win32.GUID{Data1: 0x3b16811b, Data2: 0x6a43, Data3: 0x4ec9, Data4: [8]byte{0xb7, 0x13, 0x3d, 0x5a, 0x0c, 0x13, 0xb9, 0x40}}
 
 // CopyPixels dispatches through IWICBitmapSourceTransform's vtable slot 3.
-func (self *IWICBitmapSourceTransform) CopyPixels(prc *WICRect, uiWidth uint32, uiHeight uint32, pguidDstFormat *win32.GUID, dstTransform WICBitmapTransformOptions, nStride uint32, cbBufferSize uint32, pbBuffer *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prc)), uintptr(uiWidth), uintptr(uiHeight), uintptr(unsafe.Pointer(pguidDstFormat)), uintptr(dstTransform), uintptr(nStride), uintptr(cbBufferSize), uintptr(unsafe.Pointer(pbBuffer)))
+func (self *IWICBitmapSourceTransform) CopyPixels(prc *WICRect, uiWidth uint32, uiHeight uint32, pguidDstFormat *win32.GUID, dstTransform WICBitmapTransformOptions, nStride uint32, pbBuffer []byte) error {
+	var _pbBuffer *byte
+	if len(pbBuffer) > 0 {
+		_pbBuffer = &pbBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prc)), uintptr(uiWidth), uintptr(uiHeight), uintptr(unsafe.Pointer(pguidDstFormat)), uintptr(dstTransform), uintptr(nStride), uintptr(len(pbBuffer)), uintptr(unsafe.Pointer(_pbBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -616,8 +648,12 @@ type IWICBitmapSourceTransform2 struct {
 var IID_IWICBitmapSourceTransform2 = win32.GUID{Data1: 0xc3373fdf, Data2: 0x6d39, Data3: 0x4e5f, Data4: [8]byte{0x8e, 0x79, 0xbf, 0x40, 0xc0, 0xb7, 0xed, 0x77}}
 
 // GetColorContextsForPixelFormat dispatches through IWICBitmapSourceTransform2's vtable slot 7.
-func (self *IWICBitmapSourceTransform2) GetColorContextsForPixelFormat(pPixelFormat *win32.GUID, cCount uint32, ppIColorContexts **IWICColorContext, pcActualCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPixelFormat)), uintptr(cCount), uintptr(unsafe.Pointer(ppIColorContexts)), uintptr(unsafe.Pointer(pcActualCount)))
+func (self *IWICBitmapSourceTransform2) GetColorContextsForPixelFormat(pPixelFormat *win32.GUID, ppIColorContexts []*IWICColorContext, pcActualCount *uint32) error {
+	var _ppIColorContexts **IWICColorContext
+	if len(ppIColorContexts) > 0 {
+		_ppIColorContexts = &ppIColorContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPixelFormat)), uintptr(len(ppIColorContexts)), uintptr(unsafe.Pointer(_ppIColorContexts)), uintptr(unsafe.Pointer(pcActualCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -652,8 +688,12 @@ func (self *IWICColorContext) InitializeFromFilename(wzFilename string) error {
 }
 
 // InitializeFromMemory dispatches through IWICColorContext's vtable slot 4.
-func (self *IWICColorContext) InitializeFromMemory(pbBuffer *byte, cbBufferSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBuffer)), uintptr(cbBufferSize))
+func (self *IWICColorContext) InitializeFromMemory(pbBuffer []byte) error {
+	var _pbBuffer *byte
+	if len(pbBuffer) > 0 {
+		_pbBuffer = &pbBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pbBuffer)), uintptr(len(pbBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -670,8 +710,12 @@ func (self *IWICColorContext) GetType(pType *WICColorContextType) error {
 }
 
 // GetProfileBytes dispatches through IWICColorContext's vtable slot 7.
-func (self *IWICColorContext) GetProfileBytes(cbBuffer uint32, pbBuffer *byte, pcbActual *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pbBuffer)), uintptr(unsafe.Pointer(pcbActual)))
+func (self *IWICColorContext) GetProfileBytes(pbBuffer []byte, pcbActual *uint32) error {
+	var _pbBuffer *byte
+	if len(pbBuffer) > 0 {
+		_pbBuffer = &pbBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(pbBuffer)), uintptr(unsafe.Pointer(_pbBuffer)), uintptr(unsafe.Pointer(pcbActual)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -742,8 +786,12 @@ func (self *IWICComponentFactory) CreateQueryWriterFromBlockWriter(pIBlockWriter
 }
 
 // CreateEncoderPropertyBag dispatches through IWICComponentFactory's vtable slot 34.
-func (self *IWICComponentFactory) CreateEncoderPropertyBag(ppropOptions *systemcomstructuredstorage.PROPBAG2, cCount uint32, ppIPropertyBag **systemcomstructuredstorage.IPropertyBag2) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppropOptions)), uintptr(cCount), uintptr(unsafe.Pointer(ppIPropertyBag)))
+func (self *IWICComponentFactory) CreateEncoderPropertyBag(ppropOptions []systemcomstructuredstorage.PROPBAG2, ppIPropertyBag **systemcomstructuredstorage.IPropertyBag2) error {
+	var _ppropOptions *systemcomstructuredstorage.PROPBAG2
+	if len(ppropOptions) > 0 {
+		_ppropOptions = &ppropOptions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppropOptions)), uintptr(len(ppropOptions)), uintptr(unsafe.Pointer(ppIPropertyBag)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -907,8 +955,12 @@ func (self *IWICDdsFrameDecode) GetFormatInfo(pFormatInfo *WICDdsFormatInfo) err
 }
 
 // CopyBlocks dispatches through IWICDdsFrameDecode's vtable slot 5.
-func (self *IWICDdsFrameDecode) CopyBlocks(prcBoundsInBlocks *WICRect, cbStride uint32, cbBufferSize uint32, pbBuffer *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prcBoundsInBlocks)), uintptr(cbStride), uintptr(cbBufferSize), uintptr(unsafe.Pointer(pbBuffer)))
+func (self *IWICDdsFrameDecode) CopyBlocks(prcBoundsInBlocks *WICRect, cbStride uint32, pbBuffer []byte) error {
+	var _pbBuffer *byte
+	if len(pbBuffer) > 0 {
+		_pbBuffer = &pbBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prcBoundsInBlocks)), uintptr(cbStride), uintptr(len(pbBuffer)), uintptr(unsafe.Pointer(_pbBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1214,8 +1266,12 @@ type IWICFormatConverterInfo struct {
 var IID_IWICFormatConverterInfo = win32.GUID{Data1: 0x9f34fb65, Data2: 0x13f4, Data3: 0x4f15, Data4: [8]byte{0xbc, 0x57, 0x37, 0x26, 0xb5, 0xe5, 0x3d, 0x9f}}
 
 // GetPixelFormats dispatches through IWICFormatConverterInfo's vtable slot 11.
-func (self *IWICFormatConverterInfo) GetPixelFormats(cFormats uint32, pPixelFormatGUIDs *win32.GUID, pcActual *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(cFormats), uintptr(unsafe.Pointer(pPixelFormatGUIDs)), uintptr(unsafe.Pointer(pcActual)))
+func (self *IWICFormatConverterInfo) GetPixelFormats(pPixelFormatGUIDs []win32.GUID, pcActual *uint32) error {
+	var _pPixelFormatGUIDs *win32.GUID
+	if len(pPixelFormatGUIDs) > 0 {
+		_pPixelFormatGUIDs = &pPixelFormatGUIDs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(len(pPixelFormatGUIDs)), uintptr(unsafe.Pointer(_pPixelFormatGUIDs)), uintptr(unsafe.Pointer(pcActual)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1343,8 +1399,12 @@ func (self *IWICImagingFactory) CreateBitmapFromSourceRect(pIBitmapSource *IWICB
 }
 
 // CreateBitmapFromMemory dispatches through IWICImagingFactory's vtable slot 20.
-func (self *IWICImagingFactory) CreateBitmapFromMemory(uiWidth uint32, uiHeight uint32, pixelFormat *win32.GUID, cbStride uint32, cbBufferSize uint32, pbBuffer *byte, ppIBitmap **IWICBitmap) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(uiWidth), uintptr(uiHeight), uintptr(unsafe.Pointer(pixelFormat)), uintptr(cbStride), uintptr(cbBufferSize), uintptr(unsafe.Pointer(pbBuffer)), uintptr(unsafe.Pointer(ppIBitmap)))
+func (self *IWICImagingFactory) CreateBitmapFromMemory(uiWidth uint32, uiHeight uint32, pixelFormat *win32.GUID, cbStride uint32, pbBuffer []byte, ppIBitmap **IWICBitmap) error {
+	var _pbBuffer *byte
+	if len(pbBuffer) > 0 {
+		_pbBuffer = &pbBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(uiWidth), uintptr(uiHeight), uintptr(unsafe.Pointer(pixelFormat)), uintptr(cbStride), uintptr(len(pbBuffer)), uintptr(unsafe.Pointer(_pbBuffer)), uintptr(unsafe.Pointer(ppIBitmap)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1448,14 +1508,22 @@ func (self *IWICJpegFrameDecode) GetScanHeader(scanIndex uint32, pScanHeader *WI
 }
 
 // CopyScan dispatches through IWICJpegFrameDecode's vtable slot 11.
-func (self *IWICJpegFrameDecode) CopyScan(scanIndex uint32, scanOffset uint32, cbScanData uint32, pbScanData *byte, pcbScanDataActual *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(scanIndex), uintptr(scanOffset), uintptr(cbScanData), uintptr(unsafe.Pointer(pbScanData)), uintptr(unsafe.Pointer(pcbScanDataActual)))
+func (self *IWICJpegFrameDecode) CopyScan(scanIndex uint32, scanOffset uint32, pbScanData []byte, pcbScanDataActual *uint32) error {
+	var _pbScanData *byte
+	if len(pbScanData) > 0 {
+		_pbScanData = &pbScanData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(scanIndex), uintptr(scanOffset), uintptr(len(pbScanData)), uintptr(unsafe.Pointer(_pbScanData)), uintptr(unsafe.Pointer(pcbScanDataActual)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CopyMinimalStream dispatches through IWICJpegFrameDecode's vtable slot 12.
-func (self *IWICJpegFrameDecode) CopyMinimalStream(streamOffset uint32, cbStreamData uint32, pbStreamData *byte, pcbStreamDataActual *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(streamOffset), uintptr(cbStreamData), uintptr(unsafe.Pointer(pbStreamData)), uintptr(unsafe.Pointer(pcbStreamDataActual)))
+func (self *IWICJpegFrameDecode) CopyMinimalStream(streamOffset uint32, pbStreamData []byte, pcbStreamDataActual *uint32) error {
+	var _pbStreamData *byte
+	if len(pbStreamData) > 0 {
+		_pbStreamData = &pbStreamData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(streamOffset), uintptr(len(pbStreamData)), uintptr(unsafe.Pointer(_pbStreamData)), uintptr(unsafe.Pointer(pcbStreamDataActual)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1487,8 +1555,12 @@ func (self *IWICJpegFrameEncode) GetQuantizationTable(scanIndex uint32, tableInd
 }
 
 // WriteScan dispatches through IWICJpegFrameEncode's vtable slot 6.
-func (self *IWICJpegFrameEncode) WriteScan(cbScanData uint32, pbScanData *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cbScanData), uintptr(unsafe.Pointer(pbScanData)))
+func (self *IWICJpegFrameEncode) WriteScan(pbScanData []byte) error {
+	var _pbScanData *byte
+	if len(pbScanData) > 0 {
+		_pbScanData = &pbScanData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(pbScanData)), uintptr(unsafe.Pointer(_pbScanData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1580,8 +1652,12 @@ func (self *IWICMetadataHandlerInfo) GetMetadataFormat(pguidMetadataFormat *win3
 }
 
 // GetContainerFormats dispatches through IWICMetadataHandlerInfo's vtable slot 12.
-func (self *IWICMetadataHandlerInfo) GetContainerFormats(cContainerFormats uint32, pguidContainerFormats *win32.GUID, pcchActual *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(cContainerFormats), uintptr(unsafe.Pointer(pguidContainerFormats)), uintptr(unsafe.Pointer(pcchActual)))
+func (self *IWICMetadataHandlerInfo) GetContainerFormats(pguidContainerFormats []win32.GUID, pcchActual *uint32) error {
+	var _pguidContainerFormats *win32.GUID
+	if len(pguidContainerFormats) > 0 {
+		_pguidContainerFormats = &pguidContainerFormats[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(len(pguidContainerFormats)), uintptr(unsafe.Pointer(_pguidContainerFormats)), uintptr(unsafe.Pointer(pcchActual)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1815,8 +1891,12 @@ func (self *IWICPalette) InitializePredefined(ePaletteType WICBitmapPaletteType,
 }
 
 // InitializeCustom dispatches through IWICPalette's vtable slot 4.
-func (self *IWICPalette) InitializeCustom(pColors *uint32, cCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pColors)), uintptr(cCount))
+func (self *IWICPalette) InitializeCustom(pColors []uint32) error {
+	var _pColors *uint32
+	if len(pColors) > 0 {
+		_pColors = &pColors[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pColors)), uintptr(len(pColors)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1846,8 +1926,12 @@ func (self *IWICPalette) GetColorCount(pcCount *uint32) error {
 }
 
 // GetColors dispatches through IWICPalette's vtable slot 9.
-func (self *IWICPalette) GetColors(cCount uint32, pColors *uint32, pcActualColors *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(cCount), uintptr(unsafe.Pointer(pColors)), uintptr(unsafe.Pointer(pcActualColors)))
+func (self *IWICPalette) GetColors(pColors []uint32, pcActualColors *uint32) error {
+	var _pColors *uint32
+	if len(pColors) > 0 {
+		_pColors = &pColors[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(pColors)), uintptr(unsafe.Pointer(_pColors)), uintptr(unsafe.Pointer(pcActualColors)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1925,8 +2009,12 @@ func (self *IWICPixelFormatInfo) GetChannelCount(puiChannelCount *uint32) error 
 }
 
 // GetChannelMask dispatches through IWICPixelFormatInfo's vtable slot 15.
-func (self *IWICPixelFormatInfo) GetChannelMask(uiChannelIndex uint32, cbMaskBuffer uint32, pbMaskBuffer *byte, pcbActual *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(uiChannelIndex), uintptr(cbMaskBuffer), uintptr(unsafe.Pointer(pbMaskBuffer)), uintptr(unsafe.Pointer(pcbActual)))
+func (self *IWICPixelFormatInfo) GetChannelMask(uiChannelIndex uint32, pbMaskBuffer []byte, pcbActual *uint32) error {
+	var _pbMaskBuffer *byte
+	if len(pbMaskBuffer) > 0 {
+		_pbMaskBuffer = &pbMaskBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(uiChannelIndex), uintptr(len(pbMaskBuffer)), uintptr(unsafe.Pointer(_pbMaskBuffer)), uintptr(unsafe.Pointer(pcbActual)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1961,14 +2049,22 @@ type IWICPlanarBitmapFrameEncode struct {
 var IID_IWICPlanarBitmapFrameEncode = win32.GUID{Data1: 0xf928b7b8, Data2: 0x2221, Data3: 0x40c1, Data4: [8]byte{0xb7, 0x2e, 0x7e, 0x82, 0xf1, 0x97, 0x4d, 0x1a}}
 
 // WritePixels dispatches through IWICPlanarBitmapFrameEncode's vtable slot 3.
-func (self *IWICPlanarBitmapFrameEncode) WritePixels(lineCount uint32, pPlanes *WICBitmapPlane, cPlanes uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lineCount), uintptr(unsafe.Pointer(pPlanes)), uintptr(cPlanes))
+func (self *IWICPlanarBitmapFrameEncode) WritePixels(lineCount uint32, pPlanes []WICBitmapPlane) error {
+	var _pPlanes *WICBitmapPlane
+	if len(pPlanes) > 0 {
+		_pPlanes = &pPlanes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lineCount), uintptr(unsafe.Pointer(_pPlanes)), uintptr(len(pPlanes)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteSource dispatches through IWICPlanarBitmapFrameEncode's vtable slot 4.
-func (self *IWICPlanarBitmapFrameEncode) WriteSource(ppPlanes **IWICBitmapSource, cPlanes uint32, prcSource *WICRect) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPlanes)), uintptr(cPlanes), uintptr(unsafe.Pointer(prcSource)))
+func (self *IWICPlanarBitmapFrameEncode) WriteSource(ppPlanes []*IWICBitmapSource, prcSource *WICRect) error {
+	var _ppPlanes **IWICBitmapSource
+	if len(ppPlanes) > 0 {
+		_ppPlanes = &ppPlanes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppPlanes)), uintptr(len(ppPlanes)), uintptr(unsafe.Pointer(prcSource)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1988,8 +2084,12 @@ func (self *IWICPlanarBitmapSourceTransform) DoesSupportTransform(puiWidth *uint
 }
 
 // CopyPixels dispatches through IWICPlanarBitmapSourceTransform's vtable slot 4.
-func (self *IWICPlanarBitmapSourceTransform) CopyPixels(prcSource *WICRect, uiWidth uint32, uiHeight uint32, dstTransform WICBitmapTransformOptions, dstPlanarOptions WICPlanarOptions, pDstPlanes *WICBitmapPlane, cPlanes uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prcSource)), uintptr(uiWidth), uintptr(uiHeight), uintptr(dstTransform), uintptr(dstPlanarOptions), uintptr(unsafe.Pointer(pDstPlanes)), uintptr(cPlanes))
+func (self *IWICPlanarBitmapSourceTransform) CopyPixels(prcSource *WICRect, uiWidth uint32, uiHeight uint32, dstTransform WICBitmapTransformOptions, dstPlanarOptions WICPlanarOptions, pDstPlanes []WICBitmapPlane) error {
+	var _pDstPlanes *WICBitmapPlane
+	if len(pDstPlanes) > 0 {
+		_pDstPlanes = &pDstPlanes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prcSource)), uintptr(uiWidth), uintptr(uiHeight), uintptr(dstTransform), uintptr(dstPlanarOptions), uintptr(unsafe.Pointer(_pDstPlanes)), uintptr(len(pDstPlanes)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2003,8 +2103,12 @@ type IWICPlanarFormatConverter struct {
 var IID_IWICPlanarFormatConverter = win32.GUID{Data1: 0xbebee9cb, Data2: 0x83b0, Data3: 0x4dcc, Data4: [8]byte{0x81, 0x32, 0xb0, 0xaa, 0xa5, 0x5e, 0xac, 0x96}}
 
 // CanConvert dispatches through IWICPlanarFormatConverter's vtable slot 9.
-func (self *IWICPlanarFormatConverter) CanConvert(pSrcPixelFormats *win32.GUID, cSrcPlanes uint32, dstPixelFormat *win32.GUID, pfCanConvert *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSrcPixelFormats)), uintptr(cSrcPlanes), uintptr(unsafe.Pointer(dstPixelFormat)), uintptr(unsafe.Pointer(pfCanConvert)))
+func (self *IWICPlanarFormatConverter) CanConvert(pSrcPixelFormats []win32.GUID, dstPixelFormat *win32.GUID, pfCanConvert *foundation.BOOL) error {
+	var _pSrcPixelFormats *win32.GUID
+	if len(pSrcPixelFormats) > 0 {
+		_pSrcPixelFormats = &pSrcPixelFormats[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSrcPixelFormats)), uintptr(len(pSrcPixelFormats)), uintptr(unsafe.Pointer(dstPixelFormat)), uintptr(unsafe.Pointer(pfCanConvert)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2069,8 +2173,12 @@ func (self *IWICStream) InitializeFromFilename(wzFileName string, dwDesiredAcces
 }
 
 // InitializeFromMemory dispatches through IWICStream's vtable slot 16.
-func (self *IWICStream) InitializeFromMemory(pbBuffer *byte, cbBufferSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBuffer)), uintptr(cbBufferSize))
+func (self *IWICStream) InitializeFromMemory(pbBuffer []byte) error {
+	var _pbBuffer *byte
+	if len(pbBuffer) > 0 {
+		_pbBuffer = &pbBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pbBuffer)), uintptr(len(pbBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 

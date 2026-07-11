@@ -252,9 +252,13 @@ func WinHttpGetProxyForUrlEx(hResolver unsafe.Pointer, pcwszUrl string, pAutoPro
 }
 
 // WinHttpGetProxyForUrlEx2 calls WINHTTP!WinHttpGetProxyForUrlEx2.
-func WinHttpGetProxyForUrlEx2(hResolver unsafe.Pointer, pcwszUrl string, pAutoProxyOptions *WINHTTP_AUTOPROXY_OPTIONS, cbInterfaceSelectionContext uint32, pInterfaceSelectionContext *byte, pContext uintptr) uint32 {
+func WinHttpGetProxyForUrlEx2(hResolver unsafe.Pointer, pcwszUrl string, pAutoProxyOptions *WINHTTP_AUTOPROXY_OPTIONS, pInterfaceSelectionContext []byte, pContext uintptr) uint32 {
 	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
-	r1, _, _ := syscall.SyscallN(procWinHttpGetProxyForUrlEx2.Addr(), uintptr(unsafe.Pointer(hResolver)), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(pAutoProxyOptions)), uintptr(cbInterfaceSelectionContext), uintptr(unsafe.Pointer(pInterfaceSelectionContext)), uintptr(pContext))
+	var _pInterfaceSelectionContext *byte
+	if len(pInterfaceSelectionContext) > 0 {
+		_pInterfaceSelectionContext = &pInterfaceSelectionContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWinHttpGetProxyForUrlEx2.Addr(), uintptr(unsafe.Pointer(hResolver)), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(pAutoProxyOptions)), uintptr(len(pInterfaceSelectionContext)), uintptr(unsafe.Pointer(_pInterfaceSelectionContext)), uintptr(pContext))
 	return uint32(r1)
 }
 
@@ -330,8 +334,12 @@ func WinHttpProtocolCompleteUpgrade(hRequest unsafe.Pointer, dwContext uintptr) 
 }
 
 // WinHttpProtocolReceive calls WINHTTP!WinHttpProtocolReceive.
-func WinHttpProtocolReceive(ProtocolHandle unsafe.Pointer, Flags uint64, pvBuffer unsafe.Pointer, dwBufferLength uint32, pdwBytesRead *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procWinHttpProtocolReceive.Addr(), uintptr(unsafe.Pointer(ProtocolHandle)), uintptr(Flags), uintptr(unsafe.Pointer(pvBuffer)), uintptr(dwBufferLength), uintptr(unsafe.Pointer(pdwBytesRead)))
+func WinHttpProtocolReceive(ProtocolHandle unsafe.Pointer, Flags uint64, pvBuffer []byte, pdwBytesRead *uint32) uint32 {
+	var _pvBuffer *byte
+	if len(pvBuffer) > 0 {
+		_pvBuffer = &pvBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWinHttpProtocolReceive.Addr(), uintptr(unsafe.Pointer(ProtocolHandle)), uintptr(Flags), uintptr(unsafe.Pointer(_pvBuffer)), uintptr(len(pvBuffer)), uintptr(unsafe.Pointer(pdwBytesRead)))
 	return uint32(r1)
 }
 
@@ -403,8 +411,12 @@ func WinHttpQueryOption(hInternet unsafe.Pointer, dwOption uint32, lpBuffer unsa
 // WinHttpReadData calls WINHTTP!WinHttpReadData.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpreaddata
 // Minimum OS: windows5.1.2600.
-func WinHttpReadData(hRequest unsafe.Pointer, lpBuffer unsafe.Pointer, dwNumberOfBytesToRead uint32, lpdwNumberOfBytesRead *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWinHttpReadData.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(dwNumberOfBytesToRead), uintptr(unsafe.Pointer(lpdwNumberOfBytesRead)))
+func WinHttpReadData(hRequest unsafe.Pointer, lpBuffer []byte, lpdwNumberOfBytesRead *uint32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWinHttpReadData.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpdwNumberOfBytesRead)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -413,8 +425,16 @@ func WinHttpReadData(hRequest unsafe.Pointer, lpBuffer unsafe.Pointer, dwNumberO
 
 // WinHttpReadDataEx calls WINHTTP!WinHttpReadDataEx.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpreaddataex
-func WinHttpReadDataEx(hRequest unsafe.Pointer, lpBuffer unsafe.Pointer, dwNumberOfBytesToRead uint32, lpdwNumberOfBytesRead *uint32, ullFlags uint64, cbProperty uint32, pvProperty unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procWinHttpReadDataEx.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(dwNumberOfBytesToRead), uintptr(unsafe.Pointer(lpdwNumberOfBytesRead)), uintptr(ullFlags), uintptr(cbProperty), uintptr(unsafe.Pointer(pvProperty)))
+func WinHttpReadDataEx(hRequest unsafe.Pointer, lpBuffer []byte, lpdwNumberOfBytesRead *uint32, ullFlags uint64, pvProperty []byte) uint32 {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	var _pvProperty *byte
+	if len(pvProperty) > 0 {
+		_pvProperty = &pvProperty[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWinHttpReadDataEx.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpdwNumberOfBytesRead)), uintptr(ullFlags), uintptr(len(pvProperty)), uintptr(unsafe.Pointer(_pvProperty)))
 	return uint32(r1)
 }
 
@@ -456,9 +476,13 @@ func WinHttpResetAutoProxy(hSession unsafe.Pointer, dwFlags uint32) uint32 {
 // WinHttpSendRequest calls WINHTTP!WinHttpSendRequest.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpsendrequest
 // Minimum OS: windows5.1.2600.
-func WinHttpSendRequest(hRequest unsafe.Pointer, lpszHeaders string, dwHeadersLength uint32, lpOptional unsafe.Pointer, dwOptionalLength uint32, dwTotalLength uint32, dwContext uintptr) error {
+func WinHttpSendRequest(hRequest unsafe.Pointer, lpszHeaders string, dwHeadersLength uint32, lpOptional []byte, dwTotalLength uint32, dwContext uintptr) error {
 	_lpszHeaders := win32.UTF16Ptr(lpszHeaders)
-	r1, _, e1 := syscall.SyscallN(procWinHttpSendRequest.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(_lpszHeaders)), uintptr(dwHeadersLength), uintptr(unsafe.Pointer(lpOptional)), uintptr(dwOptionalLength), uintptr(dwTotalLength), uintptr(dwContext))
+	var _lpOptional *byte
+	if len(lpOptional) > 0 {
+		_lpOptional = &lpOptional[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWinHttpSendRequest.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(_lpszHeaders)), uintptr(dwHeadersLength), uintptr(unsafe.Pointer(_lpOptional)), uintptr(len(lpOptional)), uintptr(dwTotalLength), uintptr(dwContext))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -562,8 +586,12 @@ func WinHttpUnregisterProxyChangeNotification(hRegistration unsafe.Pointer) uint
 // WinHttpWebSocketClose calls WINHTTP!WinHttpWebSocketClose.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpwebsocketclose
 // Minimum OS: windows8.0.
-func WinHttpWebSocketClose(hWebSocket unsafe.Pointer, usStatus uint16, pvReason unsafe.Pointer, dwReasonLength uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procWinHttpWebSocketClose.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(usStatus), uintptr(unsafe.Pointer(pvReason)), uintptr(dwReasonLength))
+func WinHttpWebSocketClose(hWebSocket unsafe.Pointer, usStatus uint16, pvReason []byte) uint32 {
+	var _pvReason *byte
+	if len(pvReason) > 0 {
+		_pvReason = &pvReason[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWinHttpWebSocketClose.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(usStatus), uintptr(unsafe.Pointer(_pvReason)), uintptr(len(pvReason)))
 	return uint32(r1)
 }
 
@@ -582,16 +610,24 @@ func WinHttpWebSocketCompleteUpgrade(hRequest unsafe.Pointer, pContext uintptr) 
 // WinHttpWebSocketQueryCloseStatus calls WINHTTP!WinHttpWebSocketQueryCloseStatus.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpwebsocketqueryclosestatus
 // Minimum OS: windows8.0.
-func WinHttpWebSocketQueryCloseStatus(hWebSocket unsafe.Pointer, pusStatus *uint16, pvReason unsafe.Pointer, dwReasonLength uint32, pdwReasonLengthConsumed *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procWinHttpWebSocketQueryCloseStatus.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(unsafe.Pointer(pusStatus)), uintptr(unsafe.Pointer(pvReason)), uintptr(dwReasonLength), uintptr(unsafe.Pointer(pdwReasonLengthConsumed)))
+func WinHttpWebSocketQueryCloseStatus(hWebSocket unsafe.Pointer, pusStatus *uint16, pvReason []byte, pdwReasonLengthConsumed *uint32) uint32 {
+	var _pvReason *byte
+	if len(pvReason) > 0 {
+		_pvReason = &pvReason[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWinHttpWebSocketQueryCloseStatus.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(unsafe.Pointer(pusStatus)), uintptr(unsafe.Pointer(_pvReason)), uintptr(len(pvReason)), uintptr(unsafe.Pointer(pdwReasonLengthConsumed)))
 	return uint32(r1)
 }
 
 // WinHttpWebSocketReceive calls WINHTTP!WinHttpWebSocketReceive.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpwebsocketreceive
 // Minimum OS: windows8.0.
-func WinHttpWebSocketReceive(hWebSocket unsafe.Pointer, pvBuffer unsafe.Pointer, dwBufferLength uint32, pdwBytesRead *uint32, peBufferType *WINHTTP_WEB_SOCKET_BUFFER_TYPE) uint32 {
-	r1, _, _ := syscall.SyscallN(procWinHttpWebSocketReceive.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(unsafe.Pointer(pvBuffer)), uintptr(dwBufferLength), uintptr(unsafe.Pointer(pdwBytesRead)), uintptr(unsafe.Pointer(peBufferType)))
+func WinHttpWebSocketReceive(hWebSocket unsafe.Pointer, pvBuffer []byte, pdwBytesRead *uint32, peBufferType *WINHTTP_WEB_SOCKET_BUFFER_TYPE) uint32 {
+	var _pvBuffer *byte
+	if len(pvBuffer) > 0 {
+		_pvBuffer = &pvBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWinHttpWebSocketReceive.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(unsafe.Pointer(_pvBuffer)), uintptr(len(pvBuffer)), uintptr(unsafe.Pointer(pdwBytesRead)), uintptr(unsafe.Pointer(peBufferType)))
 	return uint32(r1)
 }
 
@@ -606,16 +642,24 @@ func WinHttpWebSocketSend(hWebSocket unsafe.Pointer, eBufferType WINHTTP_WEB_SOC
 // WinHttpWebSocketShutdown calls WINHTTP!WinHttpWebSocketShutdown.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpwebsocketshutdown
 // Minimum OS: windows8.0.
-func WinHttpWebSocketShutdown(hWebSocket unsafe.Pointer, usStatus uint16, pvReason unsafe.Pointer, dwReasonLength uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procWinHttpWebSocketShutdown.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(usStatus), uintptr(unsafe.Pointer(pvReason)), uintptr(dwReasonLength))
+func WinHttpWebSocketShutdown(hWebSocket unsafe.Pointer, usStatus uint16, pvReason []byte) uint32 {
+	var _pvReason *byte
+	if len(pvReason) > 0 {
+		_pvReason = &pvReason[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWinHttpWebSocketShutdown.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(usStatus), uintptr(unsafe.Pointer(_pvReason)), uintptr(len(pvReason)))
 	return uint32(r1)
 }
 
 // WinHttpWriteData calls WINHTTP!WinHttpWriteData.
 // https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpwritedata
 // Minimum OS: windows5.1.2600.
-func WinHttpWriteData(hRequest unsafe.Pointer, lpBuffer unsafe.Pointer, dwNumberOfBytesToWrite uint32, lpdwNumberOfBytesWritten *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWinHttpWriteData.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(dwNumberOfBytesToWrite), uintptr(unsafe.Pointer(lpdwNumberOfBytesWritten)))
+func WinHttpWriteData(hRequest unsafe.Pointer, lpBuffer []byte, lpdwNumberOfBytesWritten *uint32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWinHttpWriteData.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpdwNumberOfBytesWritten)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

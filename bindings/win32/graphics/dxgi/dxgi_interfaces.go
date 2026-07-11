@@ -248,8 +248,12 @@ func (self *IDXGIDevice) GetAdapter(pAdapter **IDXGIAdapter) error {
 }
 
 // CreateSurface dispatches through IDXGIDevice's vtable slot 8.
-func (self *IDXGIDevice) CreateSurface(pDesc *DXGI_SURFACE_DESC, NumSurfaces uint32, Usage DXGI_USAGE, pSharedResource *DXGI_SHARED_RESOURCE, ppSurface **IDXGISurface) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(NumSurfaces), uintptr(Usage), uintptr(unsafe.Pointer(pSharedResource)), uintptr(unsafe.Pointer(ppSurface)))
+func (self *IDXGIDevice) CreateSurface(pDesc *DXGI_SURFACE_DESC, Usage DXGI_USAGE, pSharedResource *DXGI_SHARED_RESOURCE, ppSurface []*IDXGISurface) error {
+	var _ppSurface **IDXGISurface
+	if len(ppSurface) > 0 {
+		_ppSurface = &ppSurface[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(len(ppSurface)), uintptr(Usage), uintptr(unsafe.Pointer(pSharedResource)), uintptr(unsafe.Pointer(_ppSurface)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -302,8 +306,12 @@ type IDXGIDevice2 struct {
 var IID_IDXGIDevice2 = win32.GUID{Data1: 0x05008617, Data2: 0xfbfd, Data3: 0x4051, Data4: [8]byte{0xa7, 0x90, 0x14, 0x48, 0x84, 0xb4, 0xf6, 0xa9}}
 
 // OfferResources dispatches through IDXGIDevice2's vtable slot 14.
-func (self *IDXGIDevice2) OfferResources(NumResources uint32, ppResources **IDXGIResource, Priority DXGI_OFFER_RESOURCE_PRIORITY) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(NumResources), uintptr(unsafe.Pointer(ppResources)), uintptr(Priority))
+func (self *IDXGIDevice2) OfferResources(ppResources []*IDXGIResource, Priority DXGI_OFFER_RESOURCE_PRIORITY) error {
+	var _ppResources **IDXGIResource
+	if len(ppResources) > 0 {
+		_ppResources = &ppResources[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(len(ppResources)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Priority))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -343,8 +351,12 @@ type IDXGIDevice4 struct {
 var IID_IDXGIDevice4 = win32.GUID{Data1: 0x95b4f95f, Data2: 0xd8da, Data3: 0x4ca4, Data4: [8]byte{0x9e, 0xe6, 0x3b, 0x76, 0xd5, 0x96, 0x8a, 0x10}}
 
 // OfferResources1 dispatches through IDXGIDevice4's vtable slot 18.
-func (self *IDXGIDevice4) OfferResources1(NumResources uint32, ppResources **IDXGIResource, Priority DXGI_OFFER_RESOURCE_PRIORITY, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(NumResources), uintptr(unsafe.Pointer(ppResources)), uintptr(Priority), uintptr(Flags))
+func (self *IDXGIDevice4) OfferResources1(ppResources []*IDXGIResource, Priority DXGI_OFFER_RESOURCE_PRIORITY, Flags uint32) error {
+	var _ppResources **IDXGIResource
+	if len(ppResources) > 0 {
+		_ppResources = &ppResources[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(len(ppResources)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Priority), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -563,8 +575,12 @@ type IDXGIFactory5 struct {
 var IID_IDXGIFactory5 = win32.GUID{Data1: 0x7632e1f5, Data2: 0xee65, Data3: 0x4dca, Data4: [8]byte{0x87, 0xfd, 0x84, 0xcd, 0x75, 0xf8, 0x83, 0x8d}}
 
 // CheckFeatureSupport dispatches through IDXGIFactory5's vtable slot 28.
-func (self *IDXGIFactory5) CheckFeatureSupport(Feature DXGI_FEATURE, pFeatureSupportData unsafe.Pointer, FeatureSupportDataSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Feature), uintptr(unsafe.Pointer(pFeatureSupportData)), uintptr(FeatureSupportDataSize))
+func (self *IDXGIFactory5) CheckFeatureSupport(Feature DXGI_FEATURE, pFeatureSupportData []byte) error {
+	var _pFeatureSupportData *byte
+	if len(pFeatureSupportData) > 0 {
+		_pFeatureSupportData = &pFeatureSupportData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Feature), uintptr(unsafe.Pointer(_pFeatureSupportData)), uintptr(len(pFeatureSupportData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -671,8 +687,12 @@ type IDXGIObject struct {
 var IID_IDXGIObject = win32.GUID{Data1: 0xaec22fb8, Data2: 0x76f3, Data3: 0x4639, Data4: [8]byte{0x9b, 0xe0, 0x28, 0xeb, 0x43, 0xa6, 0x7a, 0x2e}}
 
 // SetPrivateData dispatches through IDXGIObject's vtable slot 3.
-func (self *IDXGIObject) SetPrivateData(Name *win32.GUID, DataSize uint32, pData unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
+func (self *IDXGIObject) SetPrivateData(Name *win32.GUID, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Name)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -864,8 +884,12 @@ type IDXGIOutput5 struct {
 var IID_IDXGIOutput5 = win32.GUID{Data1: 0x80a07424, Data2: 0xab52, Data3: 0x42eb, Data4: [8]byte{0x83, 0x3c, 0x0c, 0x42, 0xfd, 0x28, 0x2d, 0x98}}
 
 // DuplicateOutput1 dispatches through IDXGIOutput5's vtable slot 26.
-func (self *IDXGIOutput5) DuplicateOutput1(pDevice *systemcom.IUnknown, Flags uint32, SupportedFormatsCount uint32, pSupportedFormats *graphicsdxgicommon.DXGI_FORMAT, ppOutputDuplication **IDXGIOutputDuplication) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(Flags), uintptr(SupportedFormatsCount), uintptr(unsafe.Pointer(pSupportedFormats)), uintptr(unsafe.Pointer(ppOutputDuplication)))
+func (self *IDXGIOutput5) DuplicateOutput1(pDevice *systemcom.IUnknown, Flags uint32, pSupportedFormats []graphicsdxgicommon.DXGI_FORMAT, ppOutputDuplication **IDXGIOutputDuplication) error {
+	var _pSupportedFormats *graphicsdxgicommon.DXGI_FORMAT
+	if len(pSupportedFormats) > 0 {
+		_pSupportedFormats = &pSupportedFormats[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(Flags), uintptr(len(pSupportedFormats)), uintptr(unsafe.Pointer(_pSupportedFormats)), uintptr(unsafe.Pointer(ppOutputDuplication)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -924,8 +948,12 @@ func (self *IDXGIOutputDuplication) GetFrameMoveRects(MoveRectsBufferSize uint32
 }
 
 // GetFramePointerShape dispatches through IDXGIOutputDuplication's vtable slot 11.
-func (self *IDXGIOutputDuplication) GetFramePointerShape(PointerShapeBufferSize uint32, pPointerShapeBuffer unsafe.Pointer, pPointerShapeBufferSizeRequired *uint32, pPointerShapeInfo *DXGI_OUTDUPL_POINTER_SHAPE_INFO) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(PointerShapeBufferSize), uintptr(unsafe.Pointer(pPointerShapeBuffer)), uintptr(unsafe.Pointer(pPointerShapeBufferSizeRequired)), uintptr(unsafe.Pointer(pPointerShapeInfo)))
+func (self *IDXGIOutputDuplication) GetFramePointerShape(pPointerShapeBuffer []byte, pPointerShapeBufferSizeRequired *uint32, pPointerShapeInfo *DXGI_OUTDUPL_POINTER_SHAPE_INFO) error {
+	var _pPointerShapeBuffer *byte
+	if len(pPointerShapeBuffer) > 0 {
+		_pPointerShapeBuffer = &pPointerShapeBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(len(pPointerShapeBuffer)), uintptr(unsafe.Pointer(_pPointerShapeBuffer)), uintptr(unsafe.Pointer(pPointerShapeBufferSizeRequired)), uintptr(unsafe.Pointer(pPointerShapeInfo)))
 	return win32.HRESULTError(int32(r1))
 }
 

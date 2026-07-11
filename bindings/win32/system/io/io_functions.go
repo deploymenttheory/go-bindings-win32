@@ -89,8 +89,16 @@ func CreateIoCompletionPort(FileHandle foundation.HANDLE, ExistingCompletionPort
 // DeviceIoControl calls KERNEL32!DeviceIoControl.
 // https://learn.microsoft.com/windows/win32/api/ioapiset/nf-ioapiset-deviceiocontrol
 // Minimum OS: windows5.1.2600.
-func DeviceIoControl(hDevice foundation.HANDLE, dwIoControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32, lpOverlapped *OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procDeviceIoControl.Addr(), uintptr(hDevice), uintptr(dwIoControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpOverlapped)))
+func DeviceIoControl(hDevice foundation.HANDLE, dwIoControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpOverlapped *OVERLAPPED) error {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procDeviceIoControl.Addr(), uintptr(hDevice), uintptr(dwIoControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpOverlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

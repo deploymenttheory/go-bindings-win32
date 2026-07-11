@@ -312,9 +312,13 @@ func (self *ILocation) SetDesiredAccuracy(reportType *win32.GUID, desiredAccurac
 }
 
 // RequestPermissions dispatches through ILocation's vtable slot 11.
-func (self *ILocation) RequestPermissions(hParent foundation.HWND, pReportTypes *win32.GUID, count uint32, fModal bool) error {
+func (self *ILocation) RequestPermissions(hParent foundation.HWND, pReportTypes []win32.GUID, fModal bool) error {
+	var _pReportTypes *win32.GUID
+	if len(pReportTypes) > 0 {
+		_pReportTypes = &pReportTypes[0]
+	}
 	_fModal := win32.Bool32(fModal)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hParent), uintptr(unsafe.Pointer(pReportTypes)), uintptr(count), uintptr(_fModal))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hParent), uintptr(unsafe.Pointer(_pReportTypes)), uintptr(len(pReportTypes)), uintptr(_fModal))
 	return win32.HRESULTError(int32(r1))
 }
 

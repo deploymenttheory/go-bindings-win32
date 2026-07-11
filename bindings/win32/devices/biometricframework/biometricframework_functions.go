@@ -177,16 +177,32 @@ func WinBioCloseSession(SessionHandle uint32) error {
 // WinBioControlUnit calls winbio!WinBioControlUnit.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiocontrolunit
 // Minimum OS: windows6.1.
-func WinBioControlUnit(SessionHandle uint32, UnitId uint32, Component WINBIO_COMPONENT, ControlCode uint32, SendBuffer *byte, SendBufferSize uintptr, ReceiveBuffer *byte, ReceiveBufferSize uintptr, ReceiveDataSize *uintptr, OperationStatus *uint32) error {
-	r1, _, _ := syscall.SyscallN(procWinBioControlUnit.Addr(), uintptr(SessionHandle), uintptr(UnitId), uintptr(Component), uintptr(ControlCode), uintptr(unsafe.Pointer(SendBuffer)), uintptr(SendBufferSize), uintptr(unsafe.Pointer(ReceiveBuffer)), uintptr(ReceiveBufferSize), uintptr(unsafe.Pointer(ReceiveDataSize)), uintptr(unsafe.Pointer(OperationStatus)))
+func WinBioControlUnit(SessionHandle uint32, UnitId uint32, Component WINBIO_COMPONENT, ControlCode uint32, SendBuffer []byte, ReceiveBuffer []byte, ReceiveDataSize *uintptr, OperationStatus *uint32) error {
+	var _SendBuffer *byte
+	if len(SendBuffer) > 0 {
+		_SendBuffer = &SendBuffer[0]
+	}
+	var _ReceiveBuffer *byte
+	if len(ReceiveBuffer) > 0 {
+		_ReceiveBuffer = &ReceiveBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWinBioControlUnit.Addr(), uintptr(SessionHandle), uintptr(UnitId), uintptr(Component), uintptr(ControlCode), uintptr(unsafe.Pointer(_SendBuffer)), uintptr(len(SendBuffer)), uintptr(unsafe.Pointer(_ReceiveBuffer)), uintptr(len(ReceiveBuffer)), uintptr(unsafe.Pointer(ReceiveDataSize)), uintptr(unsafe.Pointer(OperationStatus)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioControlUnitPrivileged calls winbio!WinBioControlUnitPrivileged.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiocontrolunitprivileged
 // Minimum OS: windows6.1.
-func WinBioControlUnitPrivileged(SessionHandle uint32, UnitId uint32, Component WINBIO_COMPONENT, ControlCode uint32, SendBuffer *byte, SendBufferSize uintptr, ReceiveBuffer *byte, ReceiveBufferSize uintptr, ReceiveDataSize *uintptr, OperationStatus *uint32) error {
-	r1, _, _ := syscall.SyscallN(procWinBioControlUnitPrivileged.Addr(), uintptr(SessionHandle), uintptr(UnitId), uintptr(Component), uintptr(ControlCode), uintptr(unsafe.Pointer(SendBuffer)), uintptr(SendBufferSize), uintptr(unsafe.Pointer(ReceiveBuffer)), uintptr(ReceiveBufferSize), uintptr(unsafe.Pointer(ReceiveDataSize)), uintptr(unsafe.Pointer(OperationStatus)))
+func WinBioControlUnitPrivileged(SessionHandle uint32, UnitId uint32, Component WINBIO_COMPONENT, ControlCode uint32, SendBuffer []byte, ReceiveBuffer []byte, ReceiveDataSize *uintptr, OperationStatus *uint32) error {
+	var _SendBuffer *byte
+	if len(SendBuffer) > 0 {
+		_SendBuffer = &SendBuffer[0]
+	}
+	var _ReceiveBuffer *byte
+	if len(ReceiveBuffer) > 0 {
+		_ReceiveBuffer = &ReceiveBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWinBioControlUnitPrivileged.Addr(), uintptr(SessionHandle), uintptr(UnitId), uintptr(Component), uintptr(ControlCode), uintptr(unsafe.Pointer(_SendBuffer)), uintptr(len(SendBuffer)), uintptr(unsafe.Pointer(_ReceiveBuffer)), uintptr(len(ReceiveBuffer)), uintptr(unsafe.Pointer(ReceiveDataSize)), uintptr(unsafe.Pointer(OperationStatus)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -444,16 +460,24 @@ func WinBioRemoveAllDomainCredentials() error {
 // WinBioSetCredential calls winbio!WinBioSetCredential.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiosetcredential
 // Minimum OS: windows8.1.
-func WinBioSetCredential(Type WINBIO_CREDENTIAL_TYPE, Credential *byte, CredentialSize uintptr, Format WINBIO_CREDENTIAL_FORMAT) error {
-	r1, _, _ := syscall.SyscallN(procWinBioSetCredential.Addr(), uintptr(Type), uintptr(unsafe.Pointer(Credential)), uintptr(CredentialSize), uintptr(Format))
+func WinBioSetCredential(Type WINBIO_CREDENTIAL_TYPE, Credential []byte, Format WINBIO_CREDENTIAL_FORMAT) error {
+	var _Credential *byte
+	if len(Credential) > 0 {
+		_Credential = &Credential[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWinBioSetCredential.Addr(), uintptr(Type), uintptr(unsafe.Pointer(_Credential)), uintptr(len(Credential)), uintptr(Format))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WinBioSetProperty calls winbio!WinBioSetProperty.
 // https://learn.microsoft.com/windows/win32/api/winbio/nf-winbio-winbiosetproperty
 // Minimum OS: windows10.0.10240.
-func WinBioSetProperty(SessionHandle uint32, PropertyType uint32, PropertyId uint32, UnitId uint32, Identity *WINBIO_IDENTITY, SubFactor byte, PropertyBuffer unsafe.Pointer, PropertyBufferSize uintptr) error {
-	r1, _, _ := syscall.SyscallN(procWinBioSetProperty.Addr(), uintptr(SessionHandle), uintptr(PropertyType), uintptr(PropertyId), uintptr(UnitId), uintptr(unsafe.Pointer(Identity)), uintptr(SubFactor), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize))
+func WinBioSetProperty(SessionHandle uint32, PropertyType uint32, PropertyId uint32, UnitId uint32, Identity *WINBIO_IDENTITY, SubFactor byte, PropertyBuffer []byte) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWinBioSetProperty.Addr(), uintptr(SessionHandle), uintptr(PropertyType), uintptr(PropertyId), uintptr(UnitId), uintptr(unsafe.Pointer(Identity)), uintptr(SubFactor), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 

@@ -291,8 +291,12 @@ func (self *IEnumITfCompositionView) Clone(ppEnum **IEnumITfCompositionView) err
 }
 
 // Next dispatches through IEnumITfCompositionView's vtable slot 4.
-func (self *IEnumITfCompositionView) Next(ulCount uint32, rgCompositionView **ITfCompositionView, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(rgCompositionView)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumITfCompositionView) Next(rgCompositionView []*ITfCompositionView, pcFetched *uint32) error {
+	var _rgCompositionView **ITfCompositionView
+	if len(rgCompositionView) > 0 {
+		_rgCompositionView = &rgCompositionView[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgCompositionView)), uintptr(unsafe.Pointer(_rgCompositionView)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -323,8 +327,12 @@ func (self *IEnumSpeechCommands) Clone(ppEnum **IEnumSpeechCommands) error {
 }
 
 // Next dispatches through IEnumSpeechCommands's vtable slot 4.
-func (self *IEnumSpeechCommands) Next(ulCount uint32, pSpCmds **uint16, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(pSpCmds)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumSpeechCommands) Next(pSpCmds []*uint16, pcFetched *uint32) error {
+	var _pSpCmds **uint16
+	if len(pSpCmds) > 0 {
+		_pSpCmds = &pSpCmds[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pSpCmds)), uintptr(unsafe.Pointer(_pSpCmds)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -356,8 +364,12 @@ func (self *IEnumTfCandidates) Clone(ppEnum **IEnumTfCandidates) error {
 }
 
 // Next dispatches through IEnumTfCandidates's vtable slot 4.
-func (self *IEnumTfCandidates) Next(ulCount uint32, ppCand **ITfCandidateString, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(ppCand)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumTfCandidates) Next(ppCand []*ITfCandidateString, pcFetched *uint32) error {
+	var _ppCand **ITfCandidateString
+	if len(ppCand) > 0 {
+		_ppCand = &ppCand[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(ppCand)), uintptr(unsafe.Pointer(_ppCand)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -389,8 +401,12 @@ func (self *IEnumTfContextViews) Clone(ppEnum **IEnumTfContextViews) error {
 }
 
 // Next dispatches through IEnumTfContextViews's vtable slot 4.
-func (self *IEnumTfContextViews) Next(ulCount uint32, rgViews **ITfContextView, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(rgViews)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumTfContextViews) Next(rgViews []*ITfContextView, pcFetched *uint32) error {
+	var _rgViews **ITfContextView
+	if len(rgViews) > 0 {
+		_rgViews = &rgViews[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgViews)), uintptr(unsafe.Pointer(_rgViews)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -422,8 +438,12 @@ func (self *IEnumTfContexts) Clone(ppEnum **IEnumTfContexts) error {
 }
 
 // Next dispatches through IEnumTfContexts's vtable slot 4.
-func (self *IEnumTfContexts) Next(ulCount uint32, rgContext **ITfContext, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(rgContext)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumTfContexts) Next(rgContext []*ITfContext, pcFetched *uint32) error {
+	var _rgContext **ITfContext
+	if len(rgContext) > 0 {
+		_rgContext = &rgContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgContext)), uintptr(unsafe.Pointer(_rgContext)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -455,8 +475,12 @@ func (self *IEnumTfDisplayAttributeInfo) Clone(ppEnum **IEnumTfDisplayAttributeI
 }
 
 // Next dispatches through IEnumTfDisplayAttributeInfo's vtable slot 4.
-func (self *IEnumTfDisplayAttributeInfo) Next(ulCount uint32, rgInfo **ITfDisplayAttributeInfo, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(rgInfo)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumTfDisplayAttributeInfo) Next(rgInfo []*ITfDisplayAttributeInfo, pcFetched *uint32) error {
+	var _rgInfo **ITfDisplayAttributeInfo
+	if len(rgInfo) > 0 {
+		_rgInfo = &rgInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgInfo)), uintptr(unsafe.Pointer(_rgInfo)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -488,8 +512,12 @@ func (self *IEnumTfDocumentMgrs) Clone(ppEnum **IEnumTfDocumentMgrs) error {
 }
 
 // Next dispatches through IEnumTfDocumentMgrs's vtable slot 4.
-func (self *IEnumTfDocumentMgrs) Next(ulCount uint32, rgDocumentMgr **ITfDocumentMgr, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(rgDocumentMgr)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumTfDocumentMgrs) Next(rgDocumentMgr []*ITfDocumentMgr, pcFetched *uint32) error {
+	var _rgDocumentMgr **ITfDocumentMgr
+	if len(rgDocumentMgr) > 0 {
+		_rgDocumentMgr = &rgDocumentMgr[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgDocumentMgr)), uintptr(unsafe.Pointer(_rgDocumentMgr)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -521,8 +549,12 @@ func (self *IEnumTfFunctionProviders) Clone(ppEnum **IEnumTfFunctionProviders) e
 }
 
 // Next dispatches through IEnumTfFunctionProviders's vtable slot 4.
-func (self *IEnumTfFunctionProviders) Next(ulCount uint32, ppCmdobj **ITfFunctionProvider, pcFetch *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(ppCmdobj)), uintptr(unsafe.Pointer(pcFetch)))
+func (self *IEnumTfFunctionProviders) Next(ppCmdobj []*ITfFunctionProvider, pcFetch *uint32) error {
+	var _ppCmdobj **ITfFunctionProvider
+	if len(ppCmdobj) > 0 {
+		_ppCmdobj = &ppCmdobj[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(ppCmdobj)), uintptr(unsafe.Pointer(_ppCmdobj)), uintptr(unsafe.Pointer(pcFetch)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -554,8 +586,12 @@ func (self *IEnumTfInputProcessorProfiles) Clone(ppEnum **IEnumTfInputProcessorP
 }
 
 // Next dispatches through IEnumTfInputProcessorProfiles's vtable slot 4.
-func (self *IEnumTfInputProcessorProfiles) Next(ulCount uint32, pProfile *TF_INPUTPROCESSORPROFILE, pcFetch *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(pProfile)), uintptr(unsafe.Pointer(pcFetch)))
+func (self *IEnumTfInputProcessorProfiles) Next(pProfile []TF_INPUTPROCESSORPROFILE, pcFetch *uint32) error {
+	var _pProfile *TF_INPUTPROCESSORPROFILE
+	if len(pProfile) > 0 {
+		_pProfile = &pProfile[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pProfile)), uintptr(unsafe.Pointer(_pProfile)), uintptr(unsafe.Pointer(pcFetch)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -587,8 +623,12 @@ func (self *IEnumTfLangBarItems) Clone(ppEnum **IEnumTfLangBarItems) error {
 }
 
 // Next dispatches through IEnumTfLangBarItems's vtable slot 4.
-func (self *IEnumTfLangBarItems) Next(ulCount uint32, ppItem **ITfLangBarItem, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(ppItem)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumTfLangBarItems) Next(ppItem []*ITfLangBarItem, pcFetched *uint32) error {
+	var _ppItem **ITfLangBarItem
+	if len(ppItem) > 0 {
+		_ppItem = &ppItem[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(ppItem)), uintptr(unsafe.Pointer(_ppItem)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -620,8 +660,12 @@ func (self *IEnumTfLanguageProfiles) Clone(ppEnum **IEnumTfLanguageProfiles) err
 }
 
 // Next dispatches through IEnumTfLanguageProfiles's vtable slot 4.
-func (self *IEnumTfLanguageProfiles) Next(ulCount uint32, pProfile *TF_LANGUAGEPROFILE, pcFetch *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(pProfile)), uintptr(unsafe.Pointer(pcFetch)))
+func (self *IEnumTfLanguageProfiles) Next(pProfile []TF_LANGUAGEPROFILE, pcFetch *uint32) error {
+	var _pProfile *TF_LANGUAGEPROFILE
+	if len(pProfile) > 0 {
+		_pProfile = &pProfile[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pProfile)), uintptr(unsafe.Pointer(_pProfile)), uintptr(unsafe.Pointer(pcFetch)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -653,8 +697,12 @@ func (self *IEnumTfLatticeElements) Clone(ppEnum **IEnumTfLatticeElements) error
 }
 
 // Next dispatches through IEnumTfLatticeElements's vtable slot 4.
-func (self *IEnumTfLatticeElements) Next(ulCount uint32, rgsElements *TF_LMLATTELEMENT, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(rgsElements)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumTfLatticeElements) Next(rgsElements []TF_LMLATTELEMENT, pcFetched *uint32) error {
+	var _rgsElements *TF_LMLATTELEMENT
+	if len(rgsElements) > 0 {
+		_rgsElements = &rgsElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgsElements)), uintptr(unsafe.Pointer(_rgsElements)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -686,8 +734,12 @@ func (self *IEnumTfProperties) Clone(ppEnum **IEnumTfProperties) error {
 }
 
 // Next dispatches through IEnumTfProperties's vtable slot 4.
-func (self *IEnumTfProperties) Next(ulCount uint32, ppProp **ITfProperty, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(ppProp)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumTfProperties) Next(ppProp []*ITfProperty, pcFetched *uint32) error {
+	var _ppProp **ITfProperty
+	if len(ppProp) > 0 {
+		_ppProp = &ppProp[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(ppProp)), uintptr(unsafe.Pointer(_ppProp)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -719,8 +771,12 @@ func (self *IEnumTfPropertyValue) Clone(ppEnum **IEnumTfPropertyValue) error {
 }
 
 // Next dispatches through IEnumTfPropertyValue's vtable slot 4.
-func (self *IEnumTfPropertyValue) Next(ulCount uint32, rgValues *TF_PROPERTYVAL, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(rgValues)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumTfPropertyValue) Next(rgValues []TF_PROPERTYVAL, pcFetched *uint32) error {
+	var _rgValues *TF_PROPERTYVAL
+	if len(rgValues) > 0 {
+		_rgValues = &rgValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgValues)), uintptr(unsafe.Pointer(_rgValues)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -752,8 +808,12 @@ func (self *IEnumTfRanges) Clone(ppEnum **IEnumTfRanges) error {
 }
 
 // Next dispatches through IEnumTfRanges's vtable slot 4.
-func (self *IEnumTfRanges) Next(ulCount uint32, ppRange **ITfRange, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(ppRange)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumTfRanges) Next(ppRange []*ITfRange, pcFetched *uint32) error {
+	var _ppRange **ITfRange
+	if len(ppRange) > 0 {
+		_ppRange = &ppRange[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(ppRange)), uintptr(unsafe.Pointer(_ppRange)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -785,8 +845,12 @@ func (self *IEnumTfUIElements) Clone(ppEnum **IEnumTfUIElements) error {
 }
 
 // Next dispatches through IEnumTfUIElements's vtable slot 4.
-func (self *IEnumTfUIElements) Next(ulCount uint32, ppElement **ITfUIElement, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(ppElement)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumTfUIElements) Next(ppElement []*ITfUIElement, pcFetched *uint32) error {
+	var _ppElement **ITfUIElement
+	if len(ppElement) > 0 {
+		_ppElement = &ppElement[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(ppElement)), uintptr(unsafe.Pointer(_ppElement)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -877,20 +941,32 @@ func (self *ITextStoreACP) QueryInsert(acpTestStart int32, acpTestEnd int32, cch
 }
 
 // GetSelection dispatches through ITextStoreACP's vtable slot 8.
-func (self *ITextStoreACP) GetSelection(ulIndex uint32, ulCount uint32, pSelection *TS_SELECTION_ACP, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(ulCount), uintptr(unsafe.Pointer(pSelection)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *ITextStoreACP) GetSelection(ulIndex uint32, pSelection []TS_SELECTION_ACP, pcFetched *uint32) error {
+	var _pSelection *TS_SELECTION_ACP
+	if len(pSelection) > 0 {
+		_pSelection = &pSelection[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(len(pSelection)), uintptr(unsafe.Pointer(_pSelection)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetSelection dispatches through ITextStoreACP's vtable slot 9.
-func (self *ITextStoreACP) SetSelection(ulCount uint32, pSelection *TS_SELECTION_ACP) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(pSelection)))
+func (self *ITextStoreACP) SetSelection(pSelection []TS_SELECTION_ACP) error {
+	var _pSelection *TS_SELECTION_ACP
+	if len(pSelection) > 0 {
+		_pSelection = &pSelection[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(pSelection)), uintptr(unsafe.Pointer(_pSelection)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetText dispatches through ITextStoreACP's vtable slot 10.
-func (self *ITextStoreACP) GetText(acpStart int32, acpEnd int32, pchPlain foundation.PWSTR, cchPlainReq uint32, pcchPlainRet *uint32, prgRunInfo *TS_RUNINFO, cRunInfoReq uint32, pcRunInfoRet *uint32, pacpNext *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(acpStart), uintptr(acpEnd), uintptr(unsafe.Pointer(pchPlain)), uintptr(cchPlainReq), uintptr(unsafe.Pointer(pcchPlainRet)), uintptr(unsafe.Pointer(prgRunInfo)), uintptr(cRunInfoReq), uintptr(unsafe.Pointer(pcRunInfoRet)), uintptr(unsafe.Pointer(pacpNext)))
+func (self *ITextStoreACP) GetText(acpStart int32, acpEnd int32, pchPlain foundation.PWSTR, cchPlainReq uint32, pcchPlainRet *uint32, prgRunInfo []TS_RUNINFO, pcRunInfoRet *uint32, pacpNext *int32) error {
+	var _prgRunInfo *TS_RUNINFO
+	if len(prgRunInfo) > 0 {
+		_prgRunInfo = &prgRunInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(acpStart), uintptr(acpEnd), uintptr(unsafe.Pointer(pchPlain)), uintptr(cchPlainReq), uintptr(unsafe.Pointer(pcchPlainRet)), uintptr(unsafe.Pointer(_prgRunInfo)), uintptr(len(prgRunInfo)), uintptr(unsafe.Pointer(pcRunInfoRet)), uintptr(unsafe.Pointer(pacpNext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -939,32 +1015,52 @@ func (self *ITextStoreACP) InsertEmbeddedAtSelection(dwFlags uint32, pDataObject
 }
 
 // RequestSupportedAttrs dispatches through ITextStoreACP's vtable slot 18.
-func (self *ITextStoreACP) RequestSupportedAttrs(dwFlags uint32, cFilterAttrs uint32, paFilterAttrs *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(cFilterAttrs), uintptr(unsafe.Pointer(paFilterAttrs)))
+func (self *ITextStoreACP) RequestSupportedAttrs(dwFlags uint32, paFilterAttrs []win32.GUID) error {
+	var _paFilterAttrs *win32.GUID
+	if len(paFilterAttrs) > 0 {
+		_paFilterAttrs = &paFilterAttrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(len(paFilterAttrs)), uintptr(unsafe.Pointer(_paFilterAttrs)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RequestAttrsAtPosition dispatches through ITextStoreACP's vtable slot 19.
-func (self *ITextStoreACP) RequestAttrsAtPosition(acpPos int32, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(acpPos), uintptr(cFilterAttrs), uintptr(unsafe.Pointer(paFilterAttrs)), uintptr(dwFlags))
+func (self *ITextStoreACP) RequestAttrsAtPosition(acpPos int32, paFilterAttrs []win32.GUID, dwFlags uint32) error {
+	var _paFilterAttrs *win32.GUID
+	if len(paFilterAttrs) > 0 {
+		_paFilterAttrs = &paFilterAttrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(acpPos), uintptr(len(paFilterAttrs)), uintptr(unsafe.Pointer(_paFilterAttrs)), uintptr(dwFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RequestAttrsTransitioningAtPosition dispatches through ITextStoreACP's vtable slot 20.
-func (self *ITextStoreACP) RequestAttrsTransitioningAtPosition(acpPos int32, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(acpPos), uintptr(cFilterAttrs), uintptr(unsafe.Pointer(paFilterAttrs)), uintptr(dwFlags))
+func (self *ITextStoreACP) RequestAttrsTransitioningAtPosition(acpPos int32, paFilterAttrs []win32.GUID, dwFlags uint32) error {
+	var _paFilterAttrs *win32.GUID
+	if len(paFilterAttrs) > 0 {
+		_paFilterAttrs = &paFilterAttrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(acpPos), uintptr(len(paFilterAttrs)), uintptr(unsafe.Pointer(_paFilterAttrs)), uintptr(dwFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FindNextAttrTransition dispatches through ITextStoreACP's vtable slot 21.
-func (self *ITextStoreACP) FindNextAttrTransition(acpStart int32, acpHalt int32, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32, pacpNext *int32, pfFound *foundation.BOOL, plFoundOffset *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(acpStart), uintptr(acpHalt), uintptr(cFilterAttrs), uintptr(unsafe.Pointer(paFilterAttrs)), uintptr(dwFlags), uintptr(unsafe.Pointer(pacpNext)), uintptr(unsafe.Pointer(pfFound)), uintptr(unsafe.Pointer(plFoundOffset)))
+func (self *ITextStoreACP) FindNextAttrTransition(acpStart int32, acpHalt int32, paFilterAttrs []win32.GUID, dwFlags uint32, pacpNext *int32, pfFound *foundation.BOOL, plFoundOffset *int32) error {
+	var _paFilterAttrs *win32.GUID
+	if len(paFilterAttrs) > 0 {
+		_paFilterAttrs = &paFilterAttrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(acpStart), uintptr(acpHalt), uintptr(len(paFilterAttrs)), uintptr(unsafe.Pointer(_paFilterAttrs)), uintptr(dwFlags), uintptr(unsafe.Pointer(pacpNext)), uintptr(unsafe.Pointer(pfFound)), uintptr(unsafe.Pointer(plFoundOffset)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RetrieveRequestedAttrs dispatches through ITextStoreACP's vtable slot 22.
-func (self *ITextStoreACP) RetrieveRequestedAttrs(ulCount uint32, paAttrVals *TS_ATTRVAL, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(paAttrVals)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *ITextStoreACP) RetrieveRequestedAttrs(paAttrVals []TS_ATTRVAL, pcFetched *uint32) error {
+	var _paAttrVals *TS_ATTRVAL
+	if len(paAttrVals) > 0 {
+		_paAttrVals = &paAttrVals[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(len(paAttrVals)), uintptr(unsafe.Pointer(_paAttrVals)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1044,20 +1140,32 @@ func (self *ITextStoreACP2) QueryInsert(acpTestStart int32, acpTestEnd int32, cc
 }
 
 // GetSelection dispatches through ITextStoreACP2's vtable slot 8.
-func (self *ITextStoreACP2) GetSelection(ulIndex uint32, ulCount uint32, pSelection *TS_SELECTION_ACP, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(ulCount), uintptr(unsafe.Pointer(pSelection)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *ITextStoreACP2) GetSelection(ulIndex uint32, pSelection []TS_SELECTION_ACP, pcFetched *uint32) error {
+	var _pSelection *TS_SELECTION_ACP
+	if len(pSelection) > 0 {
+		_pSelection = &pSelection[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(len(pSelection)), uintptr(unsafe.Pointer(_pSelection)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetSelection dispatches through ITextStoreACP2's vtable slot 9.
-func (self *ITextStoreACP2) SetSelection(ulCount uint32, pSelection *TS_SELECTION_ACP) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(pSelection)))
+func (self *ITextStoreACP2) SetSelection(pSelection []TS_SELECTION_ACP) error {
+	var _pSelection *TS_SELECTION_ACP
+	if len(pSelection) > 0 {
+		_pSelection = &pSelection[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(pSelection)), uintptr(unsafe.Pointer(_pSelection)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetText dispatches through ITextStoreACP2's vtable slot 10.
-func (self *ITextStoreACP2) GetText(acpStart int32, acpEnd int32, pchPlain foundation.PWSTR, cchPlainReq uint32, pcchPlainRet *uint32, prgRunInfo *TS_RUNINFO, cRunInfoReq uint32, pcRunInfoRet *uint32, pacpNext *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(acpStart), uintptr(acpEnd), uintptr(unsafe.Pointer(pchPlain)), uintptr(cchPlainReq), uintptr(unsafe.Pointer(pcchPlainRet)), uintptr(unsafe.Pointer(prgRunInfo)), uintptr(cRunInfoReq), uintptr(unsafe.Pointer(pcRunInfoRet)), uintptr(unsafe.Pointer(pacpNext)))
+func (self *ITextStoreACP2) GetText(acpStart int32, acpEnd int32, pchPlain foundation.PWSTR, cchPlainReq uint32, pcchPlainRet *uint32, prgRunInfo []TS_RUNINFO, pcRunInfoRet *uint32, pacpNext *int32) error {
+	var _prgRunInfo *TS_RUNINFO
+	if len(prgRunInfo) > 0 {
+		_prgRunInfo = &prgRunInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(acpStart), uintptr(acpEnd), uintptr(unsafe.Pointer(pchPlain)), uintptr(cchPlainReq), uintptr(unsafe.Pointer(pcchPlainRet)), uintptr(unsafe.Pointer(_prgRunInfo)), uintptr(len(prgRunInfo)), uintptr(unsafe.Pointer(pcRunInfoRet)), uintptr(unsafe.Pointer(pacpNext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1106,32 +1214,52 @@ func (self *ITextStoreACP2) InsertEmbeddedAtSelection(dwFlags uint32, pDataObjec
 }
 
 // RequestSupportedAttrs dispatches through ITextStoreACP2's vtable slot 18.
-func (self *ITextStoreACP2) RequestSupportedAttrs(dwFlags uint32, cFilterAttrs uint32, paFilterAttrs *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(cFilterAttrs), uintptr(unsafe.Pointer(paFilterAttrs)))
+func (self *ITextStoreACP2) RequestSupportedAttrs(dwFlags uint32, paFilterAttrs []win32.GUID) error {
+	var _paFilterAttrs *win32.GUID
+	if len(paFilterAttrs) > 0 {
+		_paFilterAttrs = &paFilterAttrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(len(paFilterAttrs)), uintptr(unsafe.Pointer(_paFilterAttrs)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RequestAttrsAtPosition dispatches through ITextStoreACP2's vtable slot 19.
-func (self *ITextStoreACP2) RequestAttrsAtPosition(acpPos int32, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(acpPos), uintptr(cFilterAttrs), uintptr(unsafe.Pointer(paFilterAttrs)), uintptr(dwFlags))
+func (self *ITextStoreACP2) RequestAttrsAtPosition(acpPos int32, paFilterAttrs []win32.GUID, dwFlags uint32) error {
+	var _paFilterAttrs *win32.GUID
+	if len(paFilterAttrs) > 0 {
+		_paFilterAttrs = &paFilterAttrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(acpPos), uintptr(len(paFilterAttrs)), uintptr(unsafe.Pointer(_paFilterAttrs)), uintptr(dwFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RequestAttrsTransitioningAtPosition dispatches through ITextStoreACP2's vtable slot 20.
-func (self *ITextStoreACP2) RequestAttrsTransitioningAtPosition(acpPos int32, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(acpPos), uintptr(cFilterAttrs), uintptr(unsafe.Pointer(paFilterAttrs)), uintptr(dwFlags))
+func (self *ITextStoreACP2) RequestAttrsTransitioningAtPosition(acpPos int32, paFilterAttrs []win32.GUID, dwFlags uint32) error {
+	var _paFilterAttrs *win32.GUID
+	if len(paFilterAttrs) > 0 {
+		_paFilterAttrs = &paFilterAttrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(acpPos), uintptr(len(paFilterAttrs)), uintptr(unsafe.Pointer(_paFilterAttrs)), uintptr(dwFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FindNextAttrTransition dispatches through ITextStoreACP2's vtable slot 21.
-func (self *ITextStoreACP2) FindNextAttrTransition(acpStart int32, acpHalt int32, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32, pacpNext *int32, pfFound *foundation.BOOL, plFoundOffset *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(acpStart), uintptr(acpHalt), uintptr(cFilterAttrs), uintptr(unsafe.Pointer(paFilterAttrs)), uintptr(dwFlags), uintptr(unsafe.Pointer(pacpNext)), uintptr(unsafe.Pointer(pfFound)), uintptr(unsafe.Pointer(plFoundOffset)))
+func (self *ITextStoreACP2) FindNextAttrTransition(acpStart int32, acpHalt int32, paFilterAttrs []win32.GUID, dwFlags uint32, pacpNext *int32, pfFound *foundation.BOOL, plFoundOffset *int32) error {
+	var _paFilterAttrs *win32.GUID
+	if len(paFilterAttrs) > 0 {
+		_paFilterAttrs = &paFilterAttrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(acpStart), uintptr(acpHalt), uintptr(len(paFilterAttrs)), uintptr(unsafe.Pointer(_paFilterAttrs)), uintptr(dwFlags), uintptr(unsafe.Pointer(pacpNext)), uintptr(unsafe.Pointer(pfFound)), uintptr(unsafe.Pointer(plFoundOffset)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RetrieveRequestedAttrs dispatches through ITextStoreACP2's vtable slot 22.
-func (self *ITextStoreACP2) RetrieveRequestedAttrs(ulCount uint32, paAttrVals *TS_ATTRVAL, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(paAttrVals)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *ITextStoreACP2) RetrieveRequestedAttrs(paAttrVals []TS_ATTRVAL, pcFetched *uint32) error {
+	var _paAttrVals *TS_ATTRVAL
+	if len(paAttrVals) > 0 {
+		_paAttrVals = &paAttrVals[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(len(paAttrVals)), uintptr(unsafe.Pointer(_paAttrVals)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1240,8 +1368,12 @@ func (self *ITextStoreACPSink) OnStatusChange(dwFlags uint32) error {
 }
 
 // OnAttrsChange dispatches through ITextStoreACPSink's vtable slot 7.
-func (self *ITextStoreACPSink) OnAttrsChange(acpStart int32, acpEnd int32, cAttrs uint32, paAttrs *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(acpStart), uintptr(acpEnd), uintptr(cAttrs), uintptr(unsafe.Pointer(paAttrs)))
+func (self *ITextStoreACPSink) OnAttrsChange(acpStart int32, acpEnd int32, paAttrs []win32.GUID) error {
+	var _paAttrs *win32.GUID
+	if len(paAttrs) > 0 {
+		_paAttrs = &paAttrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(acpStart), uintptr(acpEnd), uintptr(len(paAttrs)), uintptr(unsafe.Pointer(_paAttrs)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1317,14 +1449,22 @@ func (self *ITextStoreAnchor) QueryInsert(paTestStart *IAnchor, paTestEnd *IAnch
 }
 
 // GetSelection dispatches through ITextStoreAnchor's vtable slot 8.
-func (self *ITextStoreAnchor) GetSelection(ulIndex uint32, ulCount uint32, pSelection *TS_SELECTION_ANCHOR, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(ulCount), uintptr(unsafe.Pointer(pSelection)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *ITextStoreAnchor) GetSelection(ulIndex uint32, pSelection []TS_SELECTION_ANCHOR, pcFetched *uint32) error {
+	var _pSelection *TS_SELECTION_ANCHOR
+	if len(pSelection) > 0 {
+		_pSelection = &pSelection[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulIndex), uintptr(len(pSelection)), uintptr(unsafe.Pointer(_pSelection)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetSelection dispatches through ITextStoreAnchor's vtable slot 9.
-func (self *ITextStoreAnchor) SetSelection(ulCount uint32, pSelection *TS_SELECTION_ANCHOR) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(pSelection)))
+func (self *ITextStoreAnchor) SetSelection(pSelection []TS_SELECTION_ANCHOR) error {
+	var _pSelection *TS_SELECTION_ANCHOR
+	if len(pSelection) > 0 {
+		_pSelection = &pSelection[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(pSelection)), uintptr(unsafe.Pointer(_pSelection)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1361,32 +1501,52 @@ func (self *ITextStoreAnchor) InsertEmbedded(dwFlags uint32, paStart *IAnchor, p
 }
 
 // RequestSupportedAttrs dispatches through ITextStoreAnchor's vtable slot 15.
-func (self *ITextStoreAnchor) RequestSupportedAttrs(dwFlags uint32, cFilterAttrs uint32, paFilterAttrs *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(cFilterAttrs), uintptr(unsafe.Pointer(paFilterAttrs)))
+func (self *ITextStoreAnchor) RequestSupportedAttrs(dwFlags uint32, paFilterAttrs []win32.GUID) error {
+	var _paFilterAttrs *win32.GUID
+	if len(paFilterAttrs) > 0 {
+		_paFilterAttrs = &paFilterAttrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(len(paFilterAttrs)), uintptr(unsafe.Pointer(_paFilterAttrs)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RequestAttrsAtPosition dispatches through ITextStoreAnchor's vtable slot 16.
-func (self *ITextStoreAnchor) RequestAttrsAtPosition(paPos *IAnchor, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(paPos)), uintptr(cFilterAttrs), uintptr(unsafe.Pointer(paFilterAttrs)), uintptr(dwFlags))
+func (self *ITextStoreAnchor) RequestAttrsAtPosition(paPos *IAnchor, paFilterAttrs []win32.GUID, dwFlags uint32) error {
+	var _paFilterAttrs *win32.GUID
+	if len(paFilterAttrs) > 0 {
+		_paFilterAttrs = &paFilterAttrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(paPos)), uintptr(len(paFilterAttrs)), uintptr(unsafe.Pointer(_paFilterAttrs)), uintptr(dwFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RequestAttrsTransitioningAtPosition dispatches through ITextStoreAnchor's vtable slot 17.
-func (self *ITextStoreAnchor) RequestAttrsTransitioningAtPosition(paPos *IAnchor, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(paPos)), uintptr(cFilterAttrs), uintptr(unsafe.Pointer(paFilterAttrs)), uintptr(dwFlags))
+func (self *ITextStoreAnchor) RequestAttrsTransitioningAtPosition(paPos *IAnchor, paFilterAttrs []win32.GUID, dwFlags uint32) error {
+	var _paFilterAttrs *win32.GUID
+	if len(paFilterAttrs) > 0 {
+		_paFilterAttrs = &paFilterAttrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(paPos)), uintptr(len(paFilterAttrs)), uintptr(unsafe.Pointer(_paFilterAttrs)), uintptr(dwFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FindNextAttrTransition dispatches through ITextStoreAnchor's vtable slot 18.
-func (self *ITextStoreAnchor) FindNextAttrTransition(paStart *IAnchor, paHalt *IAnchor, cFilterAttrs uint32, paFilterAttrs *win32.GUID, dwFlags uint32, pfFound *foundation.BOOL, plFoundOffset *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(paStart)), uintptr(unsafe.Pointer(paHalt)), uintptr(cFilterAttrs), uintptr(unsafe.Pointer(paFilterAttrs)), uintptr(dwFlags), uintptr(unsafe.Pointer(pfFound)), uintptr(unsafe.Pointer(plFoundOffset)))
+func (self *ITextStoreAnchor) FindNextAttrTransition(paStart *IAnchor, paHalt *IAnchor, paFilterAttrs []win32.GUID, dwFlags uint32, pfFound *foundation.BOOL, plFoundOffset *int32) error {
+	var _paFilterAttrs *win32.GUID
+	if len(paFilterAttrs) > 0 {
+		_paFilterAttrs = &paFilterAttrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(paStart)), uintptr(unsafe.Pointer(paHalt)), uintptr(len(paFilterAttrs)), uintptr(unsafe.Pointer(_paFilterAttrs)), uintptr(dwFlags), uintptr(unsafe.Pointer(pfFound)), uintptr(unsafe.Pointer(plFoundOffset)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RetrieveRequestedAttrs dispatches through ITextStoreAnchor's vtable slot 19.
-func (self *ITextStoreAnchor) RetrieveRequestedAttrs(ulCount uint32, paAttrVals *TS_ATTRVAL, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(paAttrVals)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *ITextStoreAnchor) RetrieveRequestedAttrs(paAttrVals []TS_ATTRVAL, pcFetched *uint32) error {
+	var _paAttrVals *TS_ATTRVAL
+	if len(paAttrVals) > 0 {
+		_paAttrVals = &paAttrVals[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(len(paAttrVals)), uintptr(unsafe.Pointer(_paAttrVals)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1493,8 +1653,12 @@ func (self *ITextStoreAnchorSink) OnStatusChange(dwFlags uint32) error {
 }
 
 // OnAttrsChange dispatches through ITextStoreAnchorSink's vtable slot 7.
-func (self *ITextStoreAnchorSink) OnAttrsChange(paStart *IAnchor, paEnd *IAnchor, cAttrs uint32, paAttrs *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(paStart)), uintptr(unsafe.Pointer(paEnd)), uintptr(cAttrs), uintptr(unsafe.Pointer(paAttrs)))
+func (self *ITextStoreAnchorSink) OnAttrsChange(paStart *IAnchor, paEnd *IAnchor, paAttrs []win32.GUID) error {
+	var _paAttrs *win32.GUID
+	if len(paAttrs) > 0 {
+		_paAttrs = &paAttrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(paStart)), uintptr(unsafe.Pointer(paEnd)), uintptr(len(paAttrs)), uintptr(unsafe.Pointer(_paAttrs)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1619,14 +1783,22 @@ func (self *ITfCandidateListUIElement) GetString(uIndex uint32, pstr *foundation
 }
 
 // GetPageIndex dispatches through ITfCandidateListUIElement's vtable slot 12.
-func (self *ITfCandidateListUIElement) GetPageIndex(pIndex *uint32, uSize uint32, puPageCnt *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndex)), uintptr(uSize), uintptr(unsafe.Pointer(puPageCnt)))
+func (self *ITfCandidateListUIElement) GetPageIndex(pIndex []uint32, puPageCnt *uint32) error {
+	var _pIndex *uint32
+	if len(pIndex) > 0 {
+		_pIndex = &pIndex[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pIndex)), uintptr(len(pIndex)), uintptr(unsafe.Pointer(puPageCnt)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetPageIndex dispatches through ITfCandidateListUIElement's vtable slot 13.
-func (self *ITfCandidateListUIElement) SetPageIndex(pIndex *uint32, uPageCnt uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIndex)), uintptr(uPageCnt))
+func (self *ITfCandidateListUIElement) SetPageIndex(pIndex []uint32) error {
+	var _pIndex *uint32
+	if len(pIndex) > 0 {
+		_pIndex = &pIndex[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pIndex)), uintptr(len(pIndex)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1718,8 +1890,12 @@ func (self *ITfCategoryMgr) EnumItemsInCategory(rcatid *win32.GUID, ppEnum **sys
 }
 
 // FindClosestCategory dispatches through ITfCategoryMgr's vtable slot 7.
-func (self *ITfCategoryMgr) FindClosestCategory(rguid *win32.GUID, pcatid *win32.GUID, ppcatidList **win32.GUID, ulCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguid)), uintptr(unsafe.Pointer(pcatid)), uintptr(unsafe.Pointer(ppcatidList)), uintptr(ulCount))
+func (self *ITfCategoryMgr) FindClosestCategory(rguid *win32.GUID, pcatid *win32.GUID, ppcatidList []*win32.GUID) error {
+	var _ppcatidList **win32.GUID
+	if len(ppcatidList) > 0 {
+		_ppcatidList = &ppcatidList[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rguid)), uintptr(unsafe.Pointer(pcatid)), uintptr(unsafe.Pointer(_ppcatidList)), uintptr(len(ppcatidList)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2004,14 +2180,22 @@ func (self *ITfContext) InWriteSession(tid uint32, pfWriteSession *foundation.BO
 }
 
 // GetSelection dispatches through ITfContext's vtable slot 5.
-func (self *ITfContext) GetSelection(ec uint32, ulIndex uint32, ulCount uint32, pSelection *TF_SELECTION, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ec), uintptr(ulIndex), uintptr(ulCount), uintptr(unsafe.Pointer(pSelection)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *ITfContext) GetSelection(ec uint32, ulIndex uint32, pSelection []TF_SELECTION, pcFetched *uint32) error {
+	var _pSelection *TF_SELECTION
+	if len(pSelection) > 0 {
+		_pSelection = &pSelection[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ec), uintptr(ulIndex), uintptr(len(pSelection)), uintptr(unsafe.Pointer(_pSelection)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetSelection dispatches through ITfContext's vtable slot 6.
-func (self *ITfContext) SetSelection(ec uint32, ulCount uint32, pSelection *TF_SELECTION) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ec), uintptr(ulCount), uintptr(unsafe.Pointer(pSelection)))
+func (self *ITfContext) SetSelection(ec uint32, pSelection []TF_SELECTION) error {
+	var _pSelection *TF_SELECTION
+	if len(pSelection) > 0 {
+		_pSelection = &pSelection[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ec), uintptr(len(pSelection)), uintptr(unsafe.Pointer(_pSelection)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2058,8 +2242,16 @@ func (self *ITfContext) GetAppProperty(guidProp *win32.GUID, ppProp **ITfReadOnl
 }
 
 // TrackProperties dispatches through ITfContext's vtable slot 14.
-func (self *ITfContext) TrackProperties(prgProp **win32.GUID, cProp uint32, prgAppProp **win32.GUID, cAppProp uint32, ppProperty **ITfReadOnlyProperty) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(prgProp)), uintptr(cProp), uintptr(unsafe.Pointer(prgAppProp)), uintptr(cAppProp), uintptr(unsafe.Pointer(ppProperty)))
+func (self *ITfContext) TrackProperties(prgProp []*win32.GUID, prgAppProp []*win32.GUID, ppProperty **ITfReadOnlyProperty) error {
+	var _prgProp **win32.GUID
+	if len(prgProp) > 0 {
+		_prgProp = &prgProp[0]
+	}
+	var _prgAppProp **win32.GUID
+	if len(prgAppProp) > 0 {
+		_prgAppProp = &prgAppProp[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_prgProp)), uintptr(len(prgProp)), uintptr(unsafe.Pointer(_prgAppProp)), uintptr(len(prgAppProp)), uintptr(unsafe.Pointer(ppProperty)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2502,8 +2694,12 @@ func (self *ITfEditRecord) GetSelectionStatus(pfChanged *foundation.BOOL) error 
 }
 
 // GetTextAndPropertyUpdates dispatches through ITfEditRecord's vtable slot 4.
-func (self *ITfEditRecord) GetTextAndPropertyUpdates(dwFlags GET_TEXT_AND_PROPERTY_UPDATES_FLAGS, prgProperties **win32.GUID, cProperties uint32, ppEnum **IEnumTfRanges) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(prgProperties)), uintptr(cProperties), uintptr(unsafe.Pointer(ppEnum)))
+func (self *ITfEditRecord) GetTextAndPropertyUpdates(dwFlags GET_TEXT_AND_PROPERTY_UPDATES_FLAGS, prgProperties []*win32.GUID, ppEnum **IEnumTfRanges) error {
+	var _prgProperties **win32.GUID
+	if len(prgProperties) > 0 {
+		_prgProperties = &prgProperties[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(_prgProperties)), uintptr(len(prgProperties)), uintptr(unsafe.Pointer(ppEnum)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3710,8 +3906,12 @@ func (self *ITfLangBarItemMgr) AdviseItemsSink(ulCount uint32, ppunk **ITfLangBa
 }
 
 // UnadviseItemsSink dispatches through ITfLangBarItemMgr's vtable slot 14.
-func (self *ITfLangBarItemMgr) UnadviseItemsSink(ulCount uint32, pdwCookie *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(pdwCookie)))
+func (self *ITfLangBarItemMgr) UnadviseItemsSink(pdwCookie []uint32) error {
+	var _pdwCookie *uint32
+	if len(pdwCookie) > 0 {
+		_pdwCookie = &pdwCookie[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(len(pdwCookie)), uintptr(unsafe.Pointer(_pdwCookie)))
 	return win32.HRESULTError(int32(r1))
 }
 

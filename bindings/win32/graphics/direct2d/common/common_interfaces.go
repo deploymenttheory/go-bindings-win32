@@ -32,13 +32,21 @@ func (self *ID2D1SimplifiedGeometrySink) SetSegmentFlags(vertexFlags D2D1_PATH_S
 }
 
 // AddLines dispatches through ID2D1SimplifiedGeometrySink's vtable slot 6.
-func (self *ID2D1SimplifiedGeometrySink) AddLines(points *D2D_POINT_2F, pointsCount uint32) {
-	syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(points)), uintptr(pointsCount))
+func (self *ID2D1SimplifiedGeometrySink) AddLines(points []D2D_POINT_2F) {
+	var _points *D2D_POINT_2F
+	if len(points) > 0 {
+		_points = &points[0]
+	}
+	syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_points)), uintptr(len(points)))
 }
 
 // AddBeziers dispatches through ID2D1SimplifiedGeometrySink's vtable slot 7.
-func (self *ID2D1SimplifiedGeometrySink) AddBeziers(beziers *D2D1_BEZIER_SEGMENT, beziersCount uint32) {
-	syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(beziers)), uintptr(beziersCount))
+func (self *ID2D1SimplifiedGeometrySink) AddBeziers(beziers []D2D1_BEZIER_SEGMENT) {
+	var _beziers *D2D1_BEZIER_SEGMENT
+	if len(beziers) > 0 {
+		_beziers = &beziers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_beziers)), uintptr(len(beziers)))
 }
 
 // EndFigure dispatches through ID2D1SimplifiedGeometrySink's vtable slot 8.

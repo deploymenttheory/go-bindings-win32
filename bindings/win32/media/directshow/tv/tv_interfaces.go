@@ -4840,8 +4840,12 @@ type IEnumComponentTypes struct {
 var IID_IEnumComponentTypes = win32.GUID{Data1: 0x8a674b4a, Data2: 0x1f63, Data3: 0x11d3, Data4: [8]byte{0xb6, 0x4c, 0x00, 0xc0, 0x4f, 0x79, 0x49, 0x8e}}
 
 // Next dispatches through IEnumComponentTypes's vtable slot 3.
-func (self *IEnumComponentTypes) Next(celt uint32, rgelt **IComponentType, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumComponentTypes) Next(rgelt []*IComponentType, pceltFetched *uint32) error {
+	var _rgelt **IComponentType
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4873,8 +4877,12 @@ type IEnumComponents struct {
 var IID_IEnumComponents = win32.GUID{Data1: 0x2a6e2939, Data2: 0x2595, Data3: 0x11d3, Data4: [8]byte{0xb6, 0x4c, 0x00, 0xc0, 0x4f, 0x79, 0x49, 0x8e}}
 
 // Next dispatches through IEnumComponents's vtable slot 3.
-func (self *IEnumComponents) Next(celt uint32, rgelt **IComponent, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumComponents) Next(rgelt []*IComponent, pceltFetched *uint32) error {
+	var _rgelt **IComponent
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4971,8 +4979,12 @@ type IEnumStreamBufferRecordingAttrib struct {
 var IID_IEnumStreamBufferRecordingAttrib = win32.GUID{Data1: 0xc18a9162, Data2: 0x1e82, Data3: 0x4142, Data4: [8]byte{0x8c, 0x73, 0x56, 0x90, 0xfa, 0x62, 0xfe, 0x33}}
 
 // Next dispatches through IEnumStreamBufferRecordingAttrib's vtable slot 3.
-func (self *IEnumStreamBufferRecordingAttrib) Next(cRequest uint32, pStreamBufferAttribute *STREAMBUFFER_ATTRIBUTE, pcReceived *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cRequest), uintptr(unsafe.Pointer(pStreamBufferAttribute)), uintptr(unsafe.Pointer(pcReceived)))
+func (self *IEnumStreamBufferRecordingAttrib) Next(pStreamBufferAttribute []STREAMBUFFER_ATTRIBUTE, pcReceived *uint32) error {
+	var _pStreamBufferAttribute *STREAMBUFFER_ATTRIBUTE
+	if len(pStreamBufferAttribute) > 0 {
+		_pStreamBufferAttribute = &pStreamBufferAttribute[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pStreamBufferAttribute)), uintptr(unsafe.Pointer(_pStreamBufferAttribute)), uintptr(unsafe.Pointer(pcReceived)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -5037,8 +5049,12 @@ type IEnumTuningSpaces struct {
 var IID_IEnumTuningSpaces = win32.GUID{Data1: 0x8b8eb248, Data2: 0xfc2b, Data3: 0x11d2, Data4: [8]byte{0x9d, 0x8c, 0x00, 0xc0, 0x4f, 0x72, 0xd9, 0x80}}
 
 // Next dispatches through IEnumTuningSpaces's vtable slot 3.
-func (self *IEnumTuningSpaces) Next(celt uint32, rgelt **ITuningSpace, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumTuningSpaces) Next(rgelt []*ITuningSpace, pceltFetched *uint32) error {
+	var _rgelt **ITuningSpace
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -10955,8 +10971,12 @@ type IPBDA_EIT struct {
 var IID_IPBDA_EIT = win32.GUID{Data1: 0xa35f2dea, Data2: 0x098f, Data3: 0x4ebd, Data4: [8]byte{0x98, 0x4c, 0x2b, 0xd4, 0xc3, 0xc8, 0xce, 0x0a}}
 
 // Initialize dispatches through IPBDA_EIT's vtable slot 3.
-func (self *IPBDA_EIT) Initialize(size uint32, pBuffer *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(size), uintptr(unsafe.Pointer(pBuffer)))
+func (self *IPBDA_EIT) Initialize(pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -11030,8 +11050,12 @@ type IPBDA_Services struct {
 var IID_IPBDA_Services = win32.GUID{Data1: 0x944eab37, Data2: 0xeed4, Data3: 0x4850, Data4: [8]byte{0xaf, 0xd2, 0x77, 0xe7, 0xef, 0xeb, 0x44, 0x27}}
 
 // Initialize dispatches through IPBDA_Services's vtable slot 3.
-func (self *IPBDA_Services) Initialize(size uint32, pBuffer *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(size), uintptr(unsafe.Pointer(pBuffer)))
+func (self *IPBDA_Services) Initialize(pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -11318,8 +11342,12 @@ type ISBE2EnumStream struct {
 var IID_ISBE2EnumStream = win32.GUID{Data1: 0xf7611092, Data2: 0x9fbc, Data3: 0x46ec, Data4: [8]byte{0xa7, 0xc7, 0x54, 0x8e, 0xa7, 0x8b, 0x71, 0xa4}}
 
 // Next dispatches through ISBE2EnumStream's vtable slot 3.
-func (self *ISBE2EnumStream) Next(cRequest uint32, pStreamDesc *SBE2_STREAM_DESC, pcReceived *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cRequest), uintptr(unsafe.Pointer(pStreamDesc)), uintptr(unsafe.Pointer(pcReceived)))
+func (self *ISBE2EnumStream) Next(pStreamDesc []SBE2_STREAM_DESC, pcReceived *uint32) error {
+	var _pStreamDesc *SBE2_STREAM_DESC
+	if len(pStreamDesc) > 0 {
+		_pStreamDesc = &pStreamDesc[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pStreamDesc)), uintptr(unsafe.Pointer(_pStreamDesc)), uintptr(unsafe.Pointer(pcReceived)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12127,9 +12155,13 @@ type IStreamBufferRecordingAttribute struct {
 var IID_IStreamBufferRecordingAttribute = win32.GUID{Data1: 0x16ca4e03, Data2: 0xfe69, Data3: 0x4705, Data4: [8]byte{0xbd, 0x41, 0x5b, 0x7d, 0xfc, 0x0c, 0x95, 0xf3}}
 
 // SetAttribute dispatches through IStreamBufferRecordingAttribute's vtable slot 3.
-func (self *IStreamBufferRecordingAttribute) SetAttribute(ulReserved uint32, pszAttributeName string, StreamBufferAttributeType STREAMBUFFER_ATTR_DATATYPE, pbAttribute *byte, cbAttributeLength uint16) error {
+func (self *IStreamBufferRecordingAttribute) SetAttribute(ulReserved uint32, pszAttributeName string, StreamBufferAttributeType STREAMBUFFER_ATTR_DATATYPE, pbAttribute []byte) error {
 	_pszAttributeName := win32.UTF16Ptr(pszAttributeName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulReserved), uintptr(unsafe.Pointer(_pszAttributeName)), uintptr(StreamBufferAttributeType), uintptr(unsafe.Pointer(pbAttribute)), uintptr(cbAttributeLength))
+	var _pbAttribute *byte
+	if len(pbAttribute) > 0 {
+		_pbAttribute = &pbAttribute[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulReserved), uintptr(unsafe.Pointer(_pszAttributeName)), uintptr(StreamBufferAttributeType), uintptr(unsafe.Pointer(_pbAttribute)), uintptr(len(pbAttribute)))
 	return win32.HRESULTError(int32(r1))
 }
 

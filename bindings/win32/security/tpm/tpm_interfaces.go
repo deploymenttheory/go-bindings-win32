@@ -23,10 +23,26 @@ type ITpmVirtualSmartCardManager struct {
 var IID_ITpmVirtualSmartCardManager = win32.GUID{Data1: 0x112b1dff, Data2: 0xd9dc, Data3: 0x41f7, Data4: [8]byte{0x86, 0x9f, 0xd6, 0x7f, 0xee, 0x7c, 0xb5, 0x91}}
 
 // CreateVirtualSmartCard dispatches through ITpmVirtualSmartCardManager's vtable slot 3.
-func (self *ITpmVirtualSmartCardManager) CreateVirtualSmartCard(pszFriendlyName string, bAdminAlgId byte, pbAdminKey *byte, cbAdminKey uint32, pbAdminKcv *byte, cbAdminKcv uint32, pbPuk *byte, cbPuk uint32, pbPin *byte, cbPin uint32, fGenerate bool, pStatusCallback *ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR, pfNeedReboot *foundation.BOOL) error {
+func (self *ITpmVirtualSmartCardManager) CreateVirtualSmartCard(pszFriendlyName string, bAdminAlgId byte, pbAdminKey []byte, pbAdminKcv []byte, pbPuk []byte, pbPin []byte, fGenerate bool, pStatusCallback *ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR, pfNeedReboot *foundation.BOOL) error {
 	_pszFriendlyName := win32.UTF16Ptr(pszFriendlyName)
+	var _pbAdminKey *byte
+	if len(pbAdminKey) > 0 {
+		_pbAdminKey = &pbAdminKey[0]
+	}
+	var _pbAdminKcv *byte
+	if len(pbAdminKcv) > 0 {
+		_pbAdminKcv = &pbAdminKcv[0]
+	}
+	var _pbPuk *byte
+	if len(pbPuk) > 0 {
+		_pbPuk = &pbPuk[0]
+	}
+	var _pbPin *byte
+	if len(pbPin) > 0 {
+		_pbPin = &pbPin[0]
+	}
 	_fGenerate := win32.Bool32(fGenerate)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFriendlyName)), uintptr(bAdminAlgId), uintptr(unsafe.Pointer(pbAdminKey)), uintptr(cbAdminKey), uintptr(unsafe.Pointer(pbAdminKcv)), uintptr(cbAdminKcv), uintptr(unsafe.Pointer(pbPuk)), uintptr(cbPuk), uintptr(unsafe.Pointer(pbPin)), uintptr(cbPin), uintptr(_fGenerate), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(ppszInstanceId)), uintptr(unsafe.Pointer(pfNeedReboot)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFriendlyName)), uintptr(bAdminAlgId), uintptr(unsafe.Pointer(_pbAdminKey)), uintptr(len(pbAdminKey)), uintptr(unsafe.Pointer(_pbAdminKcv)), uintptr(len(pbAdminKcv)), uintptr(unsafe.Pointer(_pbPuk)), uintptr(len(pbPuk)), uintptr(unsafe.Pointer(_pbPin)), uintptr(len(pbPin)), uintptr(_fGenerate), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(ppszInstanceId)), uintptr(unsafe.Pointer(pfNeedReboot)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -46,10 +62,30 @@ type ITpmVirtualSmartCardManager2 struct {
 var IID_ITpmVirtualSmartCardManager2 = win32.GUID{Data1: 0xfdf8a2b9, Data2: 0x02de, Data3: 0x47f4, Data4: [8]byte{0xbc, 0x26, 0xaa, 0x85, 0xab, 0x5e, 0x52, 0x67}}
 
 // CreateVirtualSmartCardWithPinPolicy dispatches through ITpmVirtualSmartCardManager2's vtable slot 5.
-func (self *ITpmVirtualSmartCardManager2) CreateVirtualSmartCardWithPinPolicy(pszFriendlyName string, bAdminAlgId byte, pbAdminKey *byte, cbAdminKey uint32, pbAdminKcv *byte, cbAdminKcv uint32, pbPuk *byte, cbPuk uint32, pbPin *byte, cbPin uint32, pbPinPolicy *byte, cbPinPolicy uint32, fGenerate bool, pStatusCallback *ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR, pfNeedReboot *foundation.BOOL) error {
+func (self *ITpmVirtualSmartCardManager2) CreateVirtualSmartCardWithPinPolicy(pszFriendlyName string, bAdminAlgId byte, pbAdminKey []byte, pbAdminKcv []byte, pbPuk []byte, pbPin []byte, pbPinPolicy []byte, fGenerate bool, pStatusCallback *ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR, pfNeedReboot *foundation.BOOL) error {
 	_pszFriendlyName := win32.UTF16Ptr(pszFriendlyName)
+	var _pbAdminKey *byte
+	if len(pbAdminKey) > 0 {
+		_pbAdminKey = &pbAdminKey[0]
+	}
+	var _pbAdminKcv *byte
+	if len(pbAdminKcv) > 0 {
+		_pbAdminKcv = &pbAdminKcv[0]
+	}
+	var _pbPuk *byte
+	if len(pbPuk) > 0 {
+		_pbPuk = &pbPuk[0]
+	}
+	var _pbPin *byte
+	if len(pbPin) > 0 {
+		_pbPin = &pbPin[0]
+	}
+	var _pbPinPolicy *byte
+	if len(pbPinPolicy) > 0 {
+		_pbPinPolicy = &pbPinPolicy[0]
+	}
 	_fGenerate := win32.Bool32(fGenerate)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFriendlyName)), uintptr(bAdminAlgId), uintptr(unsafe.Pointer(pbAdminKey)), uintptr(cbAdminKey), uintptr(unsafe.Pointer(pbAdminKcv)), uintptr(cbAdminKcv), uintptr(unsafe.Pointer(pbPuk)), uintptr(cbPuk), uintptr(unsafe.Pointer(pbPin)), uintptr(cbPin), uintptr(unsafe.Pointer(pbPinPolicy)), uintptr(cbPinPolicy), uintptr(_fGenerate), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(ppszInstanceId)), uintptr(unsafe.Pointer(pfNeedReboot)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFriendlyName)), uintptr(bAdminAlgId), uintptr(unsafe.Pointer(_pbAdminKey)), uintptr(len(pbAdminKey)), uintptr(unsafe.Pointer(_pbAdminKcv)), uintptr(len(pbAdminKcv)), uintptr(unsafe.Pointer(_pbPuk)), uintptr(len(pbPuk)), uintptr(unsafe.Pointer(_pbPin)), uintptr(len(pbPin)), uintptr(unsafe.Pointer(_pbPinPolicy)), uintptr(len(pbPinPolicy)), uintptr(_fGenerate), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(ppszInstanceId)), uintptr(unsafe.Pointer(pfNeedReboot)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -62,10 +98,30 @@ type ITpmVirtualSmartCardManager3 struct {
 var IID_ITpmVirtualSmartCardManager3 = win32.GUID{Data1: 0x3c745a97, Data2: 0xf375, Data3: 0x4150, Data4: [8]byte{0xbe, 0x17, 0x59, 0x50, 0xf6, 0x94, 0xc6, 0x99}}
 
 // CreateVirtualSmartCardWithAttestation dispatches through ITpmVirtualSmartCardManager3's vtable slot 6.
-func (self *ITpmVirtualSmartCardManager3) CreateVirtualSmartCardWithAttestation(pszFriendlyName string, bAdminAlgId byte, pbAdminKey *byte, cbAdminKey uint32, pbAdminKcv *byte, cbAdminKcv uint32, pbPuk *byte, cbPuk uint32, pbPin *byte, cbPin uint32, pbPinPolicy *byte, cbPinPolicy uint32, attestationType TPMVSC_ATTESTATION_TYPE, fGenerate bool, pStatusCallback *ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR) error {
+func (self *ITpmVirtualSmartCardManager3) CreateVirtualSmartCardWithAttestation(pszFriendlyName string, bAdminAlgId byte, pbAdminKey []byte, pbAdminKcv []byte, pbPuk []byte, pbPin []byte, pbPinPolicy []byte, attestationType TPMVSC_ATTESTATION_TYPE, fGenerate bool, pStatusCallback *ITpmVirtualSmartCardManagerStatusCallback, ppszInstanceId *foundation.PWSTR) error {
 	_pszFriendlyName := win32.UTF16Ptr(pszFriendlyName)
+	var _pbAdminKey *byte
+	if len(pbAdminKey) > 0 {
+		_pbAdminKey = &pbAdminKey[0]
+	}
+	var _pbAdminKcv *byte
+	if len(pbAdminKcv) > 0 {
+		_pbAdminKcv = &pbAdminKcv[0]
+	}
+	var _pbPuk *byte
+	if len(pbPuk) > 0 {
+		_pbPuk = &pbPuk[0]
+	}
+	var _pbPin *byte
+	if len(pbPin) > 0 {
+		_pbPin = &pbPin[0]
+	}
+	var _pbPinPolicy *byte
+	if len(pbPinPolicy) > 0 {
+		_pbPinPolicy = &pbPinPolicy[0]
+	}
 	_fGenerate := win32.Bool32(fGenerate)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFriendlyName)), uintptr(bAdminAlgId), uintptr(unsafe.Pointer(pbAdminKey)), uintptr(cbAdminKey), uintptr(unsafe.Pointer(pbAdminKcv)), uintptr(cbAdminKcv), uintptr(unsafe.Pointer(pbPuk)), uintptr(cbPuk), uintptr(unsafe.Pointer(pbPin)), uintptr(cbPin), uintptr(unsafe.Pointer(pbPinPolicy)), uintptr(cbPinPolicy), uintptr(attestationType), uintptr(_fGenerate), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(ppszInstanceId)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszFriendlyName)), uintptr(bAdminAlgId), uintptr(unsafe.Pointer(_pbAdminKey)), uintptr(len(pbAdminKey)), uintptr(unsafe.Pointer(_pbAdminKcv)), uintptr(len(pbAdminKcv)), uintptr(unsafe.Pointer(_pbPuk)), uintptr(len(pbPuk)), uintptr(unsafe.Pointer(_pbPin)), uintptr(len(pbPin)), uintptr(unsafe.Pointer(_pbPinPolicy)), uintptr(len(pbPinPolicy)), uintptr(attestationType), uintptr(_fGenerate), uintptr(unsafe.Pointer(pStatusCallback)), uintptr(unsafe.Pointer(ppszInstanceId)))
 	return win32.HRESULTError(int32(r1))
 }
 

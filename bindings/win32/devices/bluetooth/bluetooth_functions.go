@@ -394,8 +394,12 @@ func BluetoothRemoveDevice(pAddress *BLUETOOTH_ADDRESS) uint32 {
 // BluetoothSdpEnumAttributes calls BluetoothApis!BluetoothSdpEnumAttributes.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothsdpenumattributes
 // Minimum OS: windows6.0.6000.
-func BluetoothSdpEnumAttributes(pSDPStream *byte, cbStreamSize uint32, pfnCallback PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK, pvParam unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procBluetoothSdpEnumAttributes.Addr(), uintptr(unsafe.Pointer(pSDPStream)), uintptr(cbStreamSize), uintptr(pfnCallback), uintptr(unsafe.Pointer(pvParam)))
+func BluetoothSdpEnumAttributes(pSDPStream []byte, pfnCallback PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK, pvParam unsafe.Pointer) error {
+	var _pSDPStream *byte
+	if len(pSDPStream) > 0 {
+		_pSDPStream = &pSDPStream[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procBluetoothSdpEnumAttributes.Addr(), uintptr(unsafe.Pointer(_pSDPStream)), uintptr(len(pSDPStream)), uintptr(pfnCallback), uintptr(unsafe.Pointer(pvParam)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -405,32 +409,48 @@ func BluetoothSdpEnumAttributes(pSDPStream *byte, cbStreamSize uint32, pfnCallba
 // BluetoothSdpGetAttributeValue calls BluetoothApis!BluetoothSdpGetAttributeValue.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothsdpgetattributevalue
 // Minimum OS: windows6.0.6000.
-func BluetoothSdpGetAttributeValue(pRecordStream *byte, cbRecordLength uint32, usAttributeId uint16, pAttributeData *SDP_ELEMENT_DATA) uint32 {
-	r1, _, _ := syscall.SyscallN(procBluetoothSdpGetAttributeValue.Addr(), uintptr(unsafe.Pointer(pRecordStream)), uintptr(cbRecordLength), uintptr(usAttributeId), uintptr(unsafe.Pointer(pAttributeData)))
+func BluetoothSdpGetAttributeValue(pRecordStream []byte, usAttributeId uint16, pAttributeData *SDP_ELEMENT_DATA) uint32 {
+	var _pRecordStream *byte
+	if len(pRecordStream) > 0 {
+		_pRecordStream = &pRecordStream[0]
+	}
+	r1, _, _ := syscall.SyscallN(procBluetoothSdpGetAttributeValue.Addr(), uintptr(unsafe.Pointer(_pRecordStream)), uintptr(len(pRecordStream)), uintptr(usAttributeId), uintptr(unsafe.Pointer(pAttributeData)))
 	return uint32(r1)
 }
 
 // BluetoothSdpGetContainerElementData calls BluetoothApis!BluetoothSdpGetContainerElementData.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothsdpgetcontainerelementdata
 // Minimum OS: windows6.0.6000.
-func BluetoothSdpGetContainerElementData(pContainerStream *byte, cbContainerLength uint32, pElement *uintptr, pData *SDP_ELEMENT_DATA) uint32 {
-	r1, _, _ := syscall.SyscallN(procBluetoothSdpGetContainerElementData.Addr(), uintptr(unsafe.Pointer(pContainerStream)), uintptr(cbContainerLength), uintptr(unsafe.Pointer(pElement)), uintptr(unsafe.Pointer(pData)))
+func BluetoothSdpGetContainerElementData(pContainerStream []byte, pElement *uintptr, pData *SDP_ELEMENT_DATA) uint32 {
+	var _pContainerStream *byte
+	if len(pContainerStream) > 0 {
+		_pContainerStream = &pContainerStream[0]
+	}
+	r1, _, _ := syscall.SyscallN(procBluetoothSdpGetContainerElementData.Addr(), uintptr(unsafe.Pointer(_pContainerStream)), uintptr(len(pContainerStream)), uintptr(unsafe.Pointer(pElement)), uintptr(unsafe.Pointer(pData)))
 	return uint32(r1)
 }
 
 // BluetoothSdpGetElementData calls BluetoothApis!BluetoothSdpGetElementData.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothsdpgetelementdata
 // Minimum OS: windows6.0.6000.
-func BluetoothSdpGetElementData(pSdpStream *byte, cbSdpStreamLength uint32, pData *SDP_ELEMENT_DATA) uint32 {
-	r1, _, _ := syscall.SyscallN(procBluetoothSdpGetElementData.Addr(), uintptr(unsafe.Pointer(pSdpStream)), uintptr(cbSdpStreamLength), uintptr(unsafe.Pointer(pData)))
+func BluetoothSdpGetElementData(pSdpStream []byte, pData *SDP_ELEMENT_DATA) uint32 {
+	var _pSdpStream *byte
+	if len(pSdpStream) > 0 {
+		_pSdpStream = &pSdpStream[0]
+	}
+	r1, _, _ := syscall.SyscallN(procBluetoothSdpGetElementData.Addr(), uintptr(unsafe.Pointer(_pSdpStream)), uintptr(len(pSdpStream)), uintptr(unsafe.Pointer(pData)))
 	return uint32(r1)
 }
 
 // BluetoothSdpGetString calls BluetoothApis!BluetoothSdpGetString.
 // https://learn.microsoft.com/windows/win32/api/bluetoothapis/nf-bluetoothapis-bluetoothsdpgetstring
 // Minimum OS: windows6.0.6000.
-func BluetoothSdpGetString(pRecordStream *byte, cbRecordLength uint32, pStringData *SDP_STRING_TYPE_DATA, usStringOffset uint16, pszString foundation.PWSTR, pcchStringLength *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procBluetoothSdpGetString.Addr(), uintptr(unsafe.Pointer(pRecordStream)), uintptr(cbRecordLength), uintptr(unsafe.Pointer(pStringData)), uintptr(usStringOffset), uintptr(unsafe.Pointer(pszString)), uintptr(unsafe.Pointer(pcchStringLength)))
+func BluetoothSdpGetString(pRecordStream []byte, pStringData *SDP_STRING_TYPE_DATA, usStringOffset uint16, pszString foundation.PWSTR, pcchStringLength *uint32) uint32 {
+	var _pRecordStream *byte
+	if len(pRecordStream) > 0 {
+		_pRecordStream = &pRecordStream[0]
+	}
+	r1, _, _ := syscall.SyscallN(procBluetoothSdpGetString.Addr(), uintptr(unsafe.Pointer(_pRecordStream)), uintptr(len(pRecordStream)), uintptr(unsafe.Pointer(pStringData)), uintptr(usStringOffset), uintptr(unsafe.Pointer(pszString)), uintptr(unsafe.Pointer(pcchStringLength)))
 	return uint32(r1)
 }
 

@@ -30,8 +30,12 @@ func (self *IEnumWbemClassObject) Reset() error {
 }
 
 // Next dispatches through IEnumWbemClassObject's vtable slot 4.
-func (self *IEnumWbemClassObject) Next(lTimeout int32, uCount uint32, apObjects **IWbemClassObject, puReturned *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lTimeout), uintptr(uCount), uintptr(unsafe.Pointer(apObjects)), uintptr(unsafe.Pointer(puReturned)))
+func (self *IEnumWbemClassObject) Next(lTimeout int32, apObjects []*IWbemClassObject, puReturned *uint32) error {
+	var _apObjects **IWbemClassObject
+	if len(apObjects) > 0 {
+		_apObjects = &apObjects[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lTimeout), uintptr(len(apObjects)), uintptr(unsafe.Pointer(_apObjects)), uintptr(unsafe.Pointer(puReturned)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -74,12 +78,16 @@ func (self *IMofCompiler) CompileFile(FileName string, ServerAndNamespace string
 }
 
 // CompileBuffer dispatches through IMofCompiler's vtable slot 4.
-func (self *IMofCompiler) CompileBuffer(BuffSize int32, pBuffer *byte, ServerAndNamespace string, User string, Authority string, Password string, lOptionFlags int32, lClassFlags int32, lInstanceFlags int32, pInfo *WBEM_COMPILE_STATUS_INFO) error {
+func (self *IMofCompiler) CompileBuffer(pBuffer []byte, ServerAndNamespace string, User string, Authority string, Password string, lOptionFlags int32, lClassFlags int32, lInstanceFlags int32, pInfo *WBEM_COMPILE_STATUS_INFO) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
 	_ServerAndNamespace := win32.UTF16Ptr(ServerAndNamespace)
 	_User := win32.UTF16Ptr(User)
 	_Authority := win32.UTF16Ptr(Authority)
 	_Password := win32.UTF16Ptr(Password)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(BuffSize), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(_ServerAndNamespace)), uintptr(unsafe.Pointer(_User)), uintptr(unsafe.Pointer(_Authority)), uintptr(unsafe.Pointer(_Password)), uintptr(lOptionFlags), uintptr(lClassFlags), uintptr(lInstanceFlags), uintptr(unsafe.Pointer(pInfo)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(unsafe.Pointer(_ServerAndNamespace)), uintptr(unsafe.Pointer(_User)), uintptr(unsafe.Pointer(_Authority)), uintptr(unsafe.Pointer(_Password)), uintptr(lOptionFlags), uintptr(lClassFlags), uintptr(lInstanceFlags), uintptr(unsafe.Pointer(pInfo)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1945,14 +1953,22 @@ type IWbemClientConnectionTransport struct {
 var IID_IWbemClientConnectionTransport = win32.GUID{Data1: 0xa889c72a, Data2: 0xfcc1, Data3: 0x4a9e, Data4: [8]byte{0xaf, 0x61, 0xed, 0x07, 0x13, 0x33, 0xfb, 0x5b}}
 
 // Open dispatches through IWbemClientConnectionTransport's vtable slot 3.
-func (self *IWbemClientConnectionTransport) Open(strAddressType foundation.BSTR, dwBinaryAddressLength uint32, abBinaryAddress *byte, strObject foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lFlags int32, pCtx *IWbemContext, riid *win32.GUID, pInterface *unsafe.Pointer, pCallRes **IWbemCallResult) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAddressType)), uintptr(dwBinaryAddressLength), uintptr(unsafe.Pointer(abBinaryAddress)), uintptr(unsafe.Pointer(strObject)), uintptr(unsafe.Pointer(strUser)), uintptr(unsafe.Pointer(strPassword)), uintptr(unsafe.Pointer(strLocale)), uintptr(lFlags), uintptr(unsafe.Pointer(pCtx)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pInterface)), uintptr(unsafe.Pointer(pCallRes)))
+func (self *IWbemClientConnectionTransport) Open(strAddressType foundation.BSTR, abBinaryAddress []byte, strObject foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lFlags int32, pCtx *IWbemContext, riid *win32.GUID, pInterface *unsafe.Pointer, pCallRes **IWbemCallResult) error {
+	var _abBinaryAddress *byte
+	if len(abBinaryAddress) > 0 {
+		_abBinaryAddress = &abBinaryAddress[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAddressType)), uintptr(len(abBinaryAddress)), uintptr(unsafe.Pointer(_abBinaryAddress)), uintptr(unsafe.Pointer(strObject)), uintptr(unsafe.Pointer(strUser)), uintptr(unsafe.Pointer(strPassword)), uintptr(unsafe.Pointer(strLocale)), uintptr(lFlags), uintptr(unsafe.Pointer(pCtx)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pInterface)), uintptr(unsafe.Pointer(pCallRes)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OpenAsync dispatches through IWbemClientConnectionTransport's vtable slot 4.
-func (self *IWbemClientConnectionTransport) OpenAsync(strAddressType foundation.BSTR, dwBinaryAddressLength uint32, abBinaryAddress *byte, strObject foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lFlags int32, pCtx *IWbemContext, riid *win32.GUID, pResponseHandler *IWbemObjectSink) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAddressType)), uintptr(dwBinaryAddressLength), uintptr(unsafe.Pointer(abBinaryAddress)), uintptr(unsafe.Pointer(strObject)), uintptr(unsafe.Pointer(strUser)), uintptr(unsafe.Pointer(strPassword)), uintptr(unsafe.Pointer(strLocale)), uintptr(lFlags), uintptr(unsafe.Pointer(pCtx)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pResponseHandler)))
+func (self *IWbemClientConnectionTransport) OpenAsync(strAddressType foundation.BSTR, abBinaryAddress []byte, strObject foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lFlags int32, pCtx *IWbemContext, riid *win32.GUID, pResponseHandler *IWbemObjectSink) error {
+	var _abBinaryAddress *byte
+	if len(abBinaryAddress) > 0 {
+		_abBinaryAddress = &abBinaryAddress[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAddressType)), uintptr(len(abBinaryAddress)), uintptr(unsafe.Pointer(_abBinaryAddress)), uintptr(unsafe.Pointer(strObject)), uintptr(unsafe.Pointer(strUser)), uintptr(unsafe.Pointer(strPassword)), uintptr(unsafe.Pointer(strLocale)), uintptr(lFlags), uintptr(unsafe.Pointer(pCtx)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(pResponseHandler)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1971,8 +1987,12 @@ type IWbemClientTransport struct {
 var IID_IWbemClientTransport = win32.GUID{Data1: 0xf7ce2e11, Data2: 0x8c90, Data3: 0x11d1, Data4: [8]byte{0x9e, 0x7b, 0x00, 0xc0, 0x4f, 0xc3, 0x24, 0xa8}}
 
 // ConnectServer dispatches through IWbemClientTransport's vtable slot 3.
-func (self *IWbemClientTransport) ConnectServer(strAddressType foundation.BSTR, dwBinaryAddressLength uint32, abBinaryAddress *byte, strNetworkResource foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lSecurityFlags int32, strAuthority foundation.BSTR, pCtx *IWbemContext, ppNamespace **IWbemServices) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAddressType)), uintptr(dwBinaryAddressLength), uintptr(unsafe.Pointer(abBinaryAddress)), uintptr(unsafe.Pointer(strNetworkResource)), uintptr(unsafe.Pointer(strUser)), uintptr(unsafe.Pointer(strPassword)), uintptr(unsafe.Pointer(strLocale)), uintptr(lSecurityFlags), uintptr(unsafe.Pointer(strAuthority)), uintptr(unsafe.Pointer(pCtx)), uintptr(unsafe.Pointer(ppNamespace)))
+func (self *IWbemClientTransport) ConnectServer(strAddressType foundation.BSTR, abBinaryAddress []byte, strNetworkResource foundation.BSTR, strUser foundation.BSTR, strPassword foundation.BSTR, strLocale foundation.BSTR, lSecurityFlags int32, strAuthority foundation.BSTR, pCtx *IWbemContext, ppNamespace **IWbemServices) error {
+	var _abBinaryAddress *byte
+	if len(abBinaryAddress) > 0 {
+		_abBinaryAddress = &abBinaryAddress[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(strAddressType)), uintptr(len(abBinaryAddress)), uintptr(unsafe.Pointer(_abBinaryAddress)), uintptr(unsafe.Pointer(strNetworkResource)), uintptr(unsafe.Pointer(strUser)), uintptr(unsafe.Pointer(strPassword)), uintptr(unsafe.Pointer(strLocale)), uintptr(lSecurityFlags), uintptr(unsafe.Pointer(strAuthority)), uintptr(unsafe.Pointer(pCtx)), uintptr(unsafe.Pointer(ppNamespace)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2242,8 +2262,12 @@ type IWbemEventProviderSecurity struct {
 var IID_IWbemEventProviderSecurity = win32.GUID{Data1: 0x631f7d96, Data2: 0xd993, Data3: 0x11d2, Data4: [8]byte{0xb3, 0x39, 0x00, 0x10, 0x5a, 0x1f, 0x4a, 0xaf}}
 
 // AccessCheck dispatches through IWbemEventProviderSecurity's vtable slot 3.
-func (self *IWbemEventProviderSecurity) AccessCheck(wszQueryLanguage *uint16, wszQuery *uint16, lSidLength int32, pSid *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszQueryLanguage)), uintptr(unsafe.Pointer(wszQuery)), uintptr(lSidLength), uintptr(unsafe.Pointer(pSid)))
+func (self *IWbemEventProviderSecurity) AccessCheck(wszQueryLanguage *uint16, wszQuery *uint16, pSid []byte) error {
+	var _pSid *byte
+	if len(pSid) > 0 {
+		_pSid = &pSid[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(wszQueryLanguage)), uintptr(unsafe.Pointer(wszQuery)), uintptr(len(pSid)), uintptr(unsafe.Pointer(_pSid)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2257,8 +2281,12 @@ type IWbemEventSink struct {
 var IID_IWbemEventSink = win32.GUID{Data1: 0x3ae0080a, Data2: 0x7e3a, Data3: 0x4366, Data4: [8]byte{0xbf, 0x89, 0x0f, 0xee, 0xdc, 0x93, 0x16, 0x59}}
 
 // SetSinkSecurity dispatches through IWbemEventSink's vtable slot 5.
-func (self *IWbemEventSink) SetSinkSecurity(lSDLength int32, pSD *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lSDLength), uintptr(unsafe.Pointer(pSD)))
+func (self *IWbemEventSink) SetSinkSecurity(pSD []byte) error {
+	var _pSD *byte
+	if len(pSD) > 0 {
+		_pSD = &pSD[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(pSD)), uintptr(unsafe.Pointer(_pSD)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2269,8 +2297,12 @@ func (self *IWbemEventSink) IsActive() error {
 }
 
 // GetRestrictedSink dispatches through IWbemEventSink's vtable slot 7.
-func (self *IWbemEventSink) GetRestrictedSink(lNumQueries int32, awszQueries *foundation.PWSTR, pCallback *systemcom.IUnknown, ppSink **IWbemEventSink) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lNumQueries), uintptr(unsafe.Pointer(awszQueries)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppSink)))
+func (self *IWbemEventSink) GetRestrictedSink(awszQueries []foundation.PWSTR, pCallback *systemcom.IUnknown, ppSink **IWbemEventSink) error {
+	var _awszQueries *foundation.PWSTR
+	if len(awszQueries) > 0 {
+		_awszQueries = &awszQueries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(awszQueries)), uintptr(unsafe.Pointer(_awszQueries)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(ppSink)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2296,14 +2328,22 @@ func (self *IWbemHiPerfEnum) AddObjects(lFlags int32, uNumObjects uint32, apIds 
 }
 
 // RemoveObjects dispatches through IWbemHiPerfEnum's vtable slot 4.
-func (self *IWbemHiPerfEnum) RemoveObjects(lFlags int32, uNumObjects uint32, apIds *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(uNumObjects), uintptr(unsafe.Pointer(apIds)))
+func (self *IWbemHiPerfEnum) RemoveObjects(lFlags int32, apIds []int32) error {
+	var _apIds *int32
+	if len(apIds) > 0 {
+		_apIds = &apIds[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(len(apIds)), uintptr(unsafe.Pointer(_apIds)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetObjects dispatches through IWbemHiPerfEnum's vtable slot 5.
-func (self *IWbemHiPerfEnum) GetObjects(lFlags int32, uNumObjects uint32, apObj **IWbemObjectAccess, puReturned *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(uNumObjects), uintptr(unsafe.Pointer(apObj)), uintptr(unsafe.Pointer(puReturned)))
+func (self *IWbemHiPerfEnum) GetObjects(lFlags int32, apObj []*IWbemObjectAccess, puReturned *uint32) error {
+	var _apObj **IWbemObjectAccess
+	if len(apObj) > 0 {
+		_apObj = &apObj[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(lFlags), uintptr(len(apObj)), uintptr(unsafe.Pointer(_apObj)), uintptr(unsafe.Pointer(puReturned)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2355,8 +2395,12 @@ func (self *IWbemHiPerfProvider) CreateRefreshableEnum(pNamespace *IWbemServices
 }
 
 // GetObjects dispatches through IWbemHiPerfProvider's vtable slot 8.
-func (self *IWbemHiPerfProvider) GetObjects(pNamespace *IWbemServices, lNumObjects int32, apObj **IWbemObjectAccess, lFlags int32, pContext *IWbemContext) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNamespace)), uintptr(lNumObjects), uintptr(unsafe.Pointer(apObj)), uintptr(lFlags), uintptr(unsafe.Pointer(pContext)))
+func (self *IWbemHiPerfProvider) GetObjects(pNamespace *IWbemServices, apObj []*IWbemObjectAccess, lFlags int32, pContext *IWbemContext) error {
+	var _apObj **IWbemObjectAccess
+	if len(apObj) > 0 {
+		_apObj = &apObj[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNamespace)), uintptr(len(apObj)), uintptr(unsafe.Pointer(_apObj)), uintptr(lFlags), uintptr(unsafe.Pointer(pContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2430,14 +2474,22 @@ func (self *IWbemObjectAccess) GetPropertyHandle(wszPropertyName string, pType *
 }
 
 // WritePropertyValue dispatches through IWbemObjectAccess's vtable slot 28.
-func (self *IWbemObjectAccess) WritePropertyValue(lHandle int32, lNumBytes int32, aData *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(lHandle), uintptr(lNumBytes), uintptr(unsafe.Pointer(aData)))
+func (self *IWbemObjectAccess) WritePropertyValue(lHandle int32, aData []byte) error {
+	var _aData *byte
+	if len(aData) > 0 {
+		_aData = &aData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(lHandle), uintptr(len(aData)), uintptr(unsafe.Pointer(_aData)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadPropertyValue dispatches through IWbemObjectAccess's vtable slot 29.
-func (self *IWbemObjectAccess) ReadPropertyValue(lHandle int32, lBufferSize int32, plNumBytes *int32, aData *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(lHandle), uintptr(lBufferSize), uintptr(unsafe.Pointer(plNumBytes)), uintptr(unsafe.Pointer(aData)))
+func (self *IWbemObjectAccess) ReadPropertyValue(lHandle int32, plNumBytes *int32, aData []byte) error {
+	var _aData *byte
+	if len(aData) > 0 {
+		_aData = &aData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(lHandle), uintptr(len(aData)), uintptr(unsafe.Pointer(plNumBytes)), uintptr(unsafe.Pointer(_aData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2493,8 +2545,12 @@ type IWbemObjectSink struct {
 var IID_IWbemObjectSink = win32.GUID{Data1: 0x7c857801, Data2: 0x7381, Data3: 0x11cf, Data4: [8]byte{0x88, 0x4d, 0x00, 0xaa, 0x00, 0x4b, 0x2e, 0x24}}
 
 // Indicate dispatches through IWbemObjectSink's vtable slot 3.
-func (self *IWbemObjectSink) Indicate(lObjectCount int32, apObjArray **IWbemClassObject) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lObjectCount), uintptr(unsafe.Pointer(apObjArray)))
+func (self *IWbemObjectSink) Indicate(apObjArray []*IWbemClassObject) error {
+	var _apObjArray **IWbemClassObject
+	if len(apObjArray) > 0 {
+		_apObjArray = &apObjArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(apObjArray)), uintptr(unsafe.Pointer(_apObjArray)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3211,8 +3267,12 @@ type IWbemUnboundObjectSink struct {
 var IID_IWbemUnboundObjectSink = win32.GUID{Data1: 0xe246107b, Data2: 0xb06e, Data3: 0x11d0, Data4: [8]byte{0xad, 0x61, 0x00, 0xc0, 0x4f, 0xd8, 0xfd, 0xff}}
 
 // IndicateToConsumer dispatches through IWbemUnboundObjectSink's vtable slot 3.
-func (self *IWbemUnboundObjectSink) IndicateToConsumer(pLogicalConsumer *IWbemClassObject, lNumObjects int32, apObjects **IWbemClassObject) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLogicalConsumer)), uintptr(lNumObjects), uintptr(unsafe.Pointer(apObjects)))
+func (self *IWbemUnboundObjectSink) IndicateToConsumer(pLogicalConsumer *IWbemClassObject, apObjects []*IWbemClassObject) error {
+	var _apObjects **IWbemClassObject
+	if len(apObjects) > 0 {
+		_apObjects = &apObjects[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLogicalConsumer)), uintptr(len(apObjects)), uintptr(unsafe.Pointer(_apObjects)))
 	return win32.HRESULTError(int32(r1))
 }
 

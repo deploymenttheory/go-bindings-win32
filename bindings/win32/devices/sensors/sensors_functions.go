@@ -72,8 +72,12 @@ func CollectionsListCopyAndMarshall(Target *SENSOR_COLLECTION_LIST, Source *SENS
 }
 
 // CollectionsListDeserializeFromBuffer calls SensorsUtilsV2!CollectionsListDeserializeFromBuffer.
-func CollectionsListDeserializeFromBuffer(SourceBufferSizeInBytes uint32, SourceBuffer *byte, TargetCollection *SENSOR_COLLECTION_LIST) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procCollectionsListDeserializeFromBuffer.Addr(), uintptr(SourceBufferSizeInBytes), uintptr(unsafe.Pointer(SourceBuffer)), uintptr(unsafe.Pointer(TargetCollection)))
+func CollectionsListDeserializeFromBuffer(SourceBuffer []byte, TargetCollection *SENSOR_COLLECTION_LIST) foundation.NTSTATUS {
+	var _SourceBuffer *byte
+	if len(SourceBuffer) > 0 {
+		_SourceBuffer = &SourceBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCollectionsListDeserializeFromBuffer.Addr(), uintptr(len(SourceBuffer)), uintptr(unsafe.Pointer(_SourceBuffer)), uintptr(unsafe.Pointer(TargetCollection)))
 	return foundation.NTSTATUS(r1)
 }
 
@@ -108,8 +112,12 @@ func CollectionsListMarshall(Target *SENSOR_COLLECTION_LIST) foundation.NTSTATUS
 }
 
 // CollectionsListSerializeToBuffer calls SensorsUtilsV2!CollectionsListSerializeToBuffer.
-func CollectionsListSerializeToBuffer(SourceCollection *SENSOR_COLLECTION_LIST, TargetBufferSizeInBytes uint32, TargetBuffer *byte) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procCollectionsListSerializeToBuffer.Addr(), uintptr(unsafe.Pointer(SourceCollection)), uintptr(TargetBufferSizeInBytes), uintptr(unsafe.Pointer(TargetBuffer)))
+func CollectionsListSerializeToBuffer(SourceCollection *SENSOR_COLLECTION_LIST, TargetBuffer []byte) foundation.NTSTATUS {
+	var _TargetBuffer *byte
+	if len(TargetBuffer) > 0 {
+		_TargetBuffer = &TargetBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCollectionsListSerializeToBuffer.Addr(), uintptr(unsafe.Pointer(SourceCollection)), uintptr(len(TargetBuffer)), uintptr(unsafe.Pointer(_TargetBuffer)))
 	return foundation.NTSTATUS(r1)
 }
 

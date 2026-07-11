@@ -1706,8 +1706,12 @@ func (self *ITsSbTarget) Get_IpAddresses(SOCKADDR *TSSD_ConnectionPoint, numAddr
 }
 
 // Put_IpAddresses dispatches through ITsSbTarget's vtable slot 12.
-func (self *ITsSbTarget) Put_IpAddresses(SOCKADDR *TSSD_ConnectionPoint, numAddresses uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SOCKADDR)), uintptr(numAddresses))
+func (self *ITsSbTarget) Put_IpAddresses(SOCKADDR []TSSD_ConnectionPoint) error {
+	var _SOCKADDR *TSSD_ConnectionPoint
+	if len(SOCKADDR) > 0 {
+		_SOCKADDR = &SOCKADDR[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_SOCKADDR)), uintptr(len(SOCKADDR)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1868,8 +1872,12 @@ func (self *ITsSbTaskPlugin) InitializeTaskPlugin(pITsSbTaskPluginNotifySink *IT
 }
 
 // SetTaskQueue dispatches through ITsSbTaskPlugin's vtable slot 6.
-func (self *ITsSbTaskPlugin) SetTaskQueue(pszHostName foundation.BSTR, SbTaskInfoSize uint32, pITsSbTaskInfo **ITsSbTaskInfo) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszHostName)), uintptr(SbTaskInfoSize), uintptr(unsafe.Pointer(pITsSbTaskInfo)))
+func (self *ITsSbTaskPlugin) SetTaskQueue(pszHostName foundation.BSTR, pITsSbTaskInfo []*ITsSbTaskInfo) error {
+	var _pITsSbTaskInfo **ITsSbTaskInfo
+	if len(pITsSbTaskInfo) > 0 {
+		_pITsSbTaskInfo = &pITsSbTaskInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszHostName)), uintptr(len(pITsSbTaskInfo)), uintptr(unsafe.Pointer(_pITsSbTaskInfo)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2228,14 +2236,22 @@ func (self *IWRdsProtocolLicenseConnection) RequestLicensingCapabilities(ppLicen
 }
 
 // SendClientLicense dispatches through IWRdsProtocolLicenseConnection's vtable slot 4.
-func (self *IWRdsProtocolLicenseConnection) SendClientLicense(pClientLicense *byte, cbClientLicense uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClientLicense)), uintptr(cbClientLicense))
+func (self *IWRdsProtocolLicenseConnection) SendClientLicense(pClientLicense []byte) error {
+	var _pClientLicense *byte
+	if len(pClientLicense) > 0 {
+		_pClientLicense = &pClientLicense[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pClientLicense)), uintptr(len(pClientLicense)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RequestClientLicense dispatches through IWRdsProtocolLicenseConnection's vtable slot 5.
-func (self *IWRdsProtocolLicenseConnection) RequestClientLicense(Reserve1 *byte, Reserve2 uint32, ppClientLicense *byte, pcbClientLicense *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Reserve1)), uintptr(Reserve2), uintptr(unsafe.Pointer(ppClientLicense)), uintptr(unsafe.Pointer(pcbClientLicense)))
+func (self *IWRdsProtocolLicenseConnection) RequestClientLicense(Reserve1 []byte, ppClientLicense *byte, pcbClientLicense *uint32) error {
+	var _Reserve1 *byte
+	if len(Reserve1) > 0 {
+		_Reserve1 = &Reserve1[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Reserve1)), uintptr(len(Reserve1)), uintptr(unsafe.Pointer(ppClientLicense)), uintptr(unsafe.Pointer(pcbClientLicense)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2420,10 +2436,26 @@ func (self *IWRdsProtocolShadowCallback) StopShadow() error {
 }
 
 // InvokeTargetShadow dispatches through IWRdsProtocolShadowCallback's vtable slot 4.
-func (self *IWRdsProtocolShadowCallback) InvokeTargetShadow(pTargetServerName string, TargetSessionId uint32, pParam1 *byte, Param1Size uint32, pParam2 *byte, Param2Size uint32, pParam3 *byte, Param3Size uint32, pParam4 *byte, Param4Size uint32, pClientName string) error {
+func (self *IWRdsProtocolShadowCallback) InvokeTargetShadow(pTargetServerName string, TargetSessionId uint32, pParam1 []byte, pParam2 []byte, pParam3 []byte, pParam4 []byte, pClientName string) error {
 	_pTargetServerName := win32.UTF16Ptr(pTargetServerName)
+	var _pParam1 *byte
+	if len(pParam1) > 0 {
+		_pParam1 = &pParam1[0]
+	}
+	var _pParam2 *byte
+	if len(pParam2) > 0 {
+		_pParam2 = &pParam2[0]
+	}
+	var _pParam3 *byte
+	if len(pParam3) > 0 {
+		_pParam3 = &pParam3[0]
+	}
+	var _pParam4 *byte
+	if len(pParam4) > 0 {
+		_pParam4 = &pParam4[0]
+	}
 	_pClientName := win32.UTF16Ptr(pClientName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pTargetServerName)), uintptr(TargetSessionId), uintptr(unsafe.Pointer(pParam1)), uintptr(Param1Size), uintptr(unsafe.Pointer(pParam2)), uintptr(Param2Size), uintptr(unsafe.Pointer(pParam3)), uintptr(Param3Size), uintptr(unsafe.Pointer(pParam4)), uintptr(Param4Size), uintptr(unsafe.Pointer(_pClientName)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pTargetServerName)), uintptr(TargetSessionId), uintptr(unsafe.Pointer(_pParam1)), uintptr(len(pParam1)), uintptr(unsafe.Pointer(_pParam2)), uintptr(len(pParam2)), uintptr(unsafe.Pointer(_pParam3)), uintptr(len(pParam3)), uintptr(unsafe.Pointer(_pParam4)), uintptr(len(pParam4)), uintptr(unsafe.Pointer(_pClientName)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2450,9 +2482,25 @@ func (self *IWRdsProtocolShadowConnection) Stop() error {
 }
 
 // DoTarget dispatches through IWRdsProtocolShadowConnection's vtable slot 5.
-func (self *IWRdsProtocolShadowConnection) DoTarget(pParam1 *byte, Param1Size uint32, pParam2 *byte, Param2Size uint32, pParam3 *byte, Param3Size uint32, pParam4 *byte, Param4Size uint32, pClientName string) error {
+func (self *IWRdsProtocolShadowConnection) DoTarget(pParam1 []byte, pParam2 []byte, pParam3 []byte, pParam4 []byte, pClientName string) error {
+	var _pParam1 *byte
+	if len(pParam1) > 0 {
+		_pParam1 = &pParam1[0]
+	}
+	var _pParam2 *byte
+	if len(pParam2) > 0 {
+		_pParam2 = &pParam2[0]
+	}
+	var _pParam3 *byte
+	if len(pParam3) > 0 {
+		_pParam3 = &pParam3[0]
+	}
+	var _pParam4 *byte
+	if len(pParam4) > 0 {
+		_pParam4 = &pParam4[0]
+	}
 	_pClientName := win32.UTF16Ptr(pClientName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParam1)), uintptr(Param1Size), uintptr(unsafe.Pointer(pParam2)), uintptr(Param2Size), uintptr(unsafe.Pointer(pParam3)), uintptr(Param3Size), uintptr(unsafe.Pointer(pParam4)), uintptr(Param4Size), uintptr(unsafe.Pointer(_pClientName)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pParam1)), uintptr(len(pParam1)), uintptr(unsafe.Pointer(_pParam2)), uintptr(len(pParam2)), uintptr(unsafe.Pointer(_pParam3)), uintptr(len(pParam3)), uintptr(unsafe.Pointer(_pParam4)), uintptr(len(pParam4)), uintptr(unsafe.Pointer(_pClientName)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2838,14 +2886,22 @@ func (self *IWTSProtocolLicenseConnection) RequestLicensingCapabilities(ppLicens
 }
 
 // SendClientLicense dispatches through IWTSProtocolLicenseConnection's vtable slot 4.
-func (self *IWTSProtocolLicenseConnection) SendClientLicense(pClientLicense *byte, cbClientLicense uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pClientLicense)), uintptr(cbClientLicense))
+func (self *IWTSProtocolLicenseConnection) SendClientLicense(pClientLicense []byte) error {
+	var _pClientLicense *byte
+	if len(pClientLicense) > 0 {
+		_pClientLicense = &pClientLicense[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pClientLicense)), uintptr(len(pClientLicense)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RequestClientLicense dispatches through IWTSProtocolLicenseConnection's vtable slot 5.
-func (self *IWTSProtocolLicenseConnection) RequestClientLicense(Reserve1 *byte, Reserve2 uint32, ppClientLicense *byte, pcbClientLicense *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Reserve1)), uintptr(Reserve2), uintptr(unsafe.Pointer(ppClientLicense)), uintptr(unsafe.Pointer(pcbClientLicense)))
+func (self *IWTSProtocolLicenseConnection) RequestClientLicense(Reserve1 []byte, ppClientLicense *byte, pcbClientLicense *uint32) error {
+	var _Reserve1 *byte
+	if len(Reserve1) > 0 {
+		_Reserve1 = &Reserve1[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Reserve1)), uintptr(len(Reserve1)), uintptr(unsafe.Pointer(ppClientLicense)), uintptr(unsafe.Pointer(pcbClientLicense)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2985,10 +3041,26 @@ func (self *IWTSProtocolShadowCallback) StopShadow() error {
 }
 
 // InvokeTargetShadow dispatches through IWTSProtocolShadowCallback's vtable slot 4.
-func (self *IWTSProtocolShadowCallback) InvokeTargetShadow(pTargetServerName string, TargetSessionId uint32, pParam1 *byte, Param1Size uint32, pParam2 *byte, Param2Size uint32, pParam3 *byte, Param3Size uint32, pParam4 *byte, Param4Size uint32, pClientName string) error {
+func (self *IWTSProtocolShadowCallback) InvokeTargetShadow(pTargetServerName string, TargetSessionId uint32, pParam1 []byte, pParam2 []byte, pParam3 []byte, pParam4 []byte, pClientName string) error {
 	_pTargetServerName := win32.UTF16Ptr(pTargetServerName)
+	var _pParam1 *byte
+	if len(pParam1) > 0 {
+		_pParam1 = &pParam1[0]
+	}
+	var _pParam2 *byte
+	if len(pParam2) > 0 {
+		_pParam2 = &pParam2[0]
+	}
+	var _pParam3 *byte
+	if len(pParam3) > 0 {
+		_pParam3 = &pParam3[0]
+	}
+	var _pParam4 *byte
+	if len(pParam4) > 0 {
+		_pParam4 = &pParam4[0]
+	}
 	_pClientName := win32.UTF16Ptr(pClientName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pTargetServerName)), uintptr(TargetSessionId), uintptr(unsafe.Pointer(pParam1)), uintptr(Param1Size), uintptr(unsafe.Pointer(pParam2)), uintptr(Param2Size), uintptr(unsafe.Pointer(pParam3)), uintptr(Param3Size), uintptr(unsafe.Pointer(pParam4)), uintptr(Param4Size), uintptr(unsafe.Pointer(_pClientName)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pTargetServerName)), uintptr(TargetSessionId), uintptr(unsafe.Pointer(_pParam1)), uintptr(len(pParam1)), uintptr(unsafe.Pointer(_pParam2)), uintptr(len(pParam2)), uintptr(unsafe.Pointer(_pParam3)), uintptr(len(pParam3)), uintptr(unsafe.Pointer(_pParam4)), uintptr(len(pParam4)), uintptr(unsafe.Pointer(_pClientName)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3015,9 +3087,25 @@ func (self *IWTSProtocolShadowConnection) Stop() error {
 }
 
 // DoTarget dispatches through IWTSProtocolShadowConnection's vtable slot 5.
-func (self *IWTSProtocolShadowConnection) DoTarget(pParam1 *byte, Param1Size uint32, pParam2 *byte, Param2Size uint32, pParam3 *byte, Param3Size uint32, pParam4 *byte, Param4Size uint32, pClientName string) error {
+func (self *IWTSProtocolShadowConnection) DoTarget(pParam1 []byte, pParam2 []byte, pParam3 []byte, pParam4 []byte, pClientName string) error {
+	var _pParam1 *byte
+	if len(pParam1) > 0 {
+		_pParam1 = &pParam1[0]
+	}
+	var _pParam2 *byte
+	if len(pParam2) > 0 {
+		_pParam2 = &pParam2[0]
+	}
+	var _pParam3 *byte
+	if len(pParam3) > 0 {
+		_pParam3 = &pParam3[0]
+	}
+	var _pParam4 *byte
+	if len(pParam4) > 0 {
+		_pParam4 = &pParam4[0]
+	}
 	_pClientName := win32.UTF16Ptr(pClientName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParam1)), uintptr(Param1Size), uintptr(unsafe.Pointer(pParam2)), uintptr(Param2Size), uintptr(unsafe.Pointer(pParam3)), uintptr(Param3Size), uintptr(unsafe.Pointer(pParam4)), uintptr(Param4Size), uintptr(unsafe.Pointer(_pClientName)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pParam1)), uintptr(len(pParam1)), uintptr(unsafe.Pointer(_pParam2)), uintptr(len(pParam2)), uintptr(unsafe.Pointer(_pParam3)), uintptr(len(pParam3)), uintptr(unsafe.Pointer(_pParam4)), uintptr(len(pParam4)), uintptr(unsafe.Pointer(_pClientName)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3043,8 +3131,12 @@ func (self *IWTSSBPlugin) WTSSBX_MachineChangeNotification(NotificationType WTSS
 }
 
 // WTSSBX_SessionChangeNotification dispatches through IWTSSBPlugin's vtable slot 5.
-func (self *IWTSSBPlugin) WTSSBX_SessionChangeNotification(NotificationType WTSSBX_NOTIFICATION_TYPE, MachineId int32, NumOfSessions uint32, SessionInfo *WTSSBX_SESSION_INFO) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(NotificationType), uintptr(MachineId), uintptr(NumOfSessions), uintptr(unsafe.Pointer(SessionInfo)))
+func (self *IWTSSBPlugin) WTSSBX_SessionChangeNotification(NotificationType WTSSBX_NOTIFICATION_TYPE, MachineId int32, SessionInfo []WTSSBX_SESSION_INFO) error {
+	var _SessionInfo *WTSSBX_SESSION_INFO
+	if len(SessionInfo) > 0 {
+		_SessionInfo = &SessionInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(NotificationType), uintptr(MachineId), uintptr(len(SessionInfo)), uintptr(unsafe.Pointer(_SessionInfo)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3083,8 +3175,12 @@ type IWTSVirtualChannel struct {
 var IID_IWTSVirtualChannel = win32.GUID{Data1: 0xa1230207, Data2: 0xd6a7, Data3: 0x11d8, Data4: [8]byte{0xb9, 0xfd, 0x00, 0x0b, 0xdb, 0xd1, 0xf1, 0x98}}
 
 // Write dispatches through IWTSVirtualChannel's vtable slot 3.
-func (self *IWTSVirtualChannel) Write(cbSize uint32, pBuffer *byte, pReserved *systemcom.IUnknown) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cbSize), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pReserved)))
+func (self *IWTSVirtualChannel) Write(pBuffer []byte, pReserved *systemcom.IUnknown) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(unsafe.Pointer(pReserved)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3104,8 +3200,12 @@ type IWTSVirtualChannelCallback struct {
 var IID_IWTSVirtualChannelCallback = win32.GUID{Data1: 0xa1230204, Data2: 0xd6a7, Data3: 0x11d8, Data4: [8]byte{0xb9, 0xfd, 0x00, 0x0b, 0xdb, 0xd1, 0xf1, 0x98}}
 
 // OnDataReceived dispatches through IWTSVirtualChannelCallback's vtable slot 3.
-func (self *IWTSVirtualChannelCallback) OnDataReceived(cbSize uint32, pBuffer *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cbSize), uintptr(unsafe.Pointer(pBuffer)))
+func (self *IWTSVirtualChannelCallback) OnDataReceived(pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 

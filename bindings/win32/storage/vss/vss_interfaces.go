@@ -903,8 +903,12 @@ type IVssEnumMgmtObject struct {
 var IID_IVssEnumMgmtObject = win32.GUID{Data1: 0x01954e6b, Data2: 0x9254, Data3: 0x4e6e, Data4: [8]byte{0x80, 0x8c, 0xc9, 0xe0, 0x5d, 0x00, 0x76, 0x96}}
 
 // Next dispatches through IVssEnumMgmtObject's vtable slot 3.
-func (self *IVssEnumMgmtObject) Next(celt uint32, rgelt *VSS_MGMT_OBJECT_PROP, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IVssEnumMgmtObject) Next(rgelt []VSS_MGMT_OBJECT_PROP, pceltFetched *uint32) error {
+	var _rgelt *VSS_MGMT_OBJECT_PROP
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -936,8 +940,12 @@ type IVssEnumObject struct {
 var IID_IVssEnumObject = win32.GUID{Data1: 0xae1c7110, Data2: 0x2f60, Data3: 0x11d3, Data4: [8]byte{0x8a, 0x39, 0x00, 0xc0, 0x4f, 0x72, 0xd8, 0xe3}}
 
 // Next dispatches through IVssEnumObject's vtable slot 3.
-func (self *IVssEnumObject) Next(celt uint32, rgelt *VSS_OBJECT_PROP, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IVssEnumObject) Next(rgelt []VSS_OBJECT_PROP, pceltFetched *uint32) error {
+	var _rgelt *VSS_OBJECT_PROP
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1153,8 +1161,12 @@ func (self *IVssHardwareSnapshotProvider) GetTargetLuns(lLunCount int32, rgDevic
 }
 
 // LocateLuns dispatches through IVssHardwareSnapshotProvider's vtable slot 7.
-func (self *IVssHardwareSnapshotProvider) LocateLuns(lLunCount int32, rgSourceLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lLunCount), uintptr(unsafe.Pointer(rgSourceLuns)))
+func (self *IVssHardwareSnapshotProvider) LocateLuns(rgSourceLuns []storagevirtualdiskservice.VDS_LUN_INFORMATION) error {
+	var _rgSourceLuns *storagevirtualdiskservice.VDS_LUN_INFORMATION
+	if len(rgSourceLuns) > 0 {
+		_rgSourceLuns = &rgSourceLuns[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(rgSourceLuns)), uintptr(unsafe.Pointer(_rgSourceLuns)))
 	return win32.HRESULTError(int32(r1))
 }
 

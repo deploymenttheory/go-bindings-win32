@@ -70,8 +70,12 @@ type IAudioAmbisonicsControl struct {
 var IID_IAudioAmbisonicsControl = win32.GUID{Data1: 0x28724c91, Data2: 0xdf35, Data3: 0x4856, Data4: [8]byte{0x9f, 0x76, 0xd6, 0xa2, 0x64, 0x13, 0xf3, 0xdf}}
 
 // SetData dispatches through IAudioAmbisonicsControl's vtable slot 3.
-func (self *IAudioAmbisonicsControl) SetData(pAmbisonicsParams *AMBISONICS_PARAMS, cbAmbisonicsParams uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAmbisonicsParams)), uintptr(cbAmbisonicsParams))
+func (self *IAudioAmbisonicsControl) SetData(pAmbisonicsParams []AMBISONICS_PARAMS) error {
+	var _pAmbisonicsParams *AMBISONICS_PARAMS
+	if len(pAmbisonicsParams) > 0 {
+		_pAmbisonicsParams = &pAmbisonicsParams[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pAmbisonicsParams)), uintptr(len(pAmbisonicsParams)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -720,8 +724,12 @@ func (self *IAudioSessionEvents) OnIconPathChanged(NewIconPath string, EventCont
 }
 
 // OnChannelVolumeChanged dispatches through IAudioSessionEvents's vtable slot 6.
-func (self *IAudioSessionEvents) OnChannelVolumeChanged(ChannelCount uint32, NewChannelVolumeArray *float32, ChangedChannel uint32, EventContext *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ChannelCount), uintptr(unsafe.Pointer(NewChannelVolumeArray)), uintptr(ChangedChannel), uintptr(unsafe.Pointer(EventContext)))
+func (self *IAudioSessionEvents) OnChannelVolumeChanged(NewChannelVolumeArray []float32, ChangedChannel uint32, EventContext *win32.GUID) error {
+	var _NewChannelVolumeArray *float32
+	if len(NewChannelVolumeArray) > 0 {
+		_NewChannelVolumeArray = &NewChannelVolumeArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(NewChannelVolumeArray)), uintptr(unsafe.Pointer(_NewChannelVolumeArray)), uintptr(ChangedChannel), uintptr(unsafe.Pointer(EventContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -867,14 +875,22 @@ func (self *IAudioStreamVolume) GetChannelVolume(dwIndex uint32, pfLevel *float3
 }
 
 // SetAllVolumes dispatches through IAudioStreamVolume's vtable slot 6.
-func (self *IAudioStreamVolume) SetAllVolumes(dwCount uint32, pfVolumes *float32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwCount), uintptr(unsafe.Pointer(pfVolumes)))
+func (self *IAudioStreamVolume) SetAllVolumes(pfVolumes []float32) error {
+	var _pfVolumes *float32
+	if len(pfVolumes) > 0 {
+		_pfVolumes = &pfVolumes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(pfVolumes)), uintptr(unsafe.Pointer(_pfVolumes)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllVolumes dispatches through IAudioStreamVolume's vtable slot 7.
-func (self *IAudioStreamVolume) GetAllVolumes(dwCount uint32, pfVolumes *float32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwCount), uintptr(unsafe.Pointer(pfVolumes)))
+func (self *IAudioStreamVolume) GetAllVolumes(pfVolumes []float32) error {
+	var _pfVolumes *float32
+	if len(pfVolumes) > 0 {
+		_pfVolumes = &pfVolumes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(pfVolumes)), uintptr(unsafe.Pointer(_pfVolumes)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1016,14 +1032,22 @@ func (self *IChannelAudioVolume) GetChannelVolume(dwIndex uint32, pfLevel *float
 }
 
 // SetAllVolumes dispatches through IChannelAudioVolume's vtable slot 6.
-func (self *IChannelAudioVolume) SetAllVolumes(dwCount uint32, pfVolumes *float32, EventContext *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwCount), uintptr(unsafe.Pointer(pfVolumes)), uintptr(unsafe.Pointer(EventContext)))
+func (self *IChannelAudioVolume) SetAllVolumes(pfVolumes []float32, EventContext *win32.GUID) error {
+	var _pfVolumes *float32
+	if len(pfVolumes) > 0 {
+		_pfVolumes = &pfVolumes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(pfVolumes)), uintptr(unsafe.Pointer(_pfVolumes)), uintptr(unsafe.Pointer(EventContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetAllVolumes dispatches through IChannelAudioVolume's vtable slot 7.
-func (self *IChannelAudioVolume) GetAllVolumes(dwCount uint32, pfVolumes *float32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwCount), uintptr(unsafe.Pointer(pfVolumes)))
+func (self *IChannelAudioVolume) GetAllVolumes(pfVolumes []float32) error {
+	var _pfVolumes *float32
+	if len(pfVolumes) > 0 {
+		_pfVolumes = &pfVolumes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(pfVolumes)), uintptr(unsafe.Pointer(_pfVolumes)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1528,8 +1552,12 @@ func (self *IPerChannelDbLevel) GetLevel(nChannel uint32, pfLevelDB *float32) er
 }
 
 // SetLevelAllChannels dispatches through IPerChannelDbLevel's vtable slot 8.
-func (self *IPerChannelDbLevel) SetLevelAllChannels(aLevelsDB *float32, cChannels uint32, pguidEventContext *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(aLevelsDB)), uintptr(cChannels), uintptr(unsafe.Pointer(pguidEventContext)))
+func (self *IPerChannelDbLevel) SetLevelAllChannels(aLevelsDB []float32, pguidEventContext *win32.GUID) error {
+	var _aLevelsDB *float32
+	if len(aLevelsDB) > 0 {
+		_aLevelsDB = &aLevelsDB[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_aLevelsDB)), uintptr(len(aLevelsDB)), uintptr(unsafe.Pointer(pguidEventContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1755,14 +1783,22 @@ type ISpatialAudioMetadataItemsBuffer struct {
 var IID_ISpatialAudioMetadataItemsBuffer = win32.GUID{Data1: 0x42640a16, Data2: 0xe1bd, Data3: 0x42d9, Data4: [8]byte{0x9f, 0xf6, 0x03, 0x1a, 0xb7, 0x1a, 0x2d, 0xba}}
 
 // AttachToBuffer dispatches through ISpatialAudioMetadataItemsBuffer's vtable slot 3.
-func (self *ISpatialAudioMetadataItemsBuffer) AttachToBuffer(buffer *byte, bufferLength uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferLength))
+func (self *ISpatialAudioMetadataItemsBuffer) AttachToBuffer(buffer []byte) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // AttachToPopulatedBuffer dispatches through ISpatialAudioMetadataItemsBuffer's vtable slot 4.
-func (self *ISpatialAudioMetadataItemsBuffer) AttachToPopulatedBuffer(buffer *byte, bufferLength uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buffer)), uintptr(bufferLength))
+func (self *ISpatialAudioMetadataItemsBuffer) AttachToPopulatedBuffer(buffer []byte) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1794,8 +1830,12 @@ func (self *ISpatialAudioMetadataReader) ReadNextItem(commandCount *byte, frameO
 }
 
 // ReadNextItemCommand dispatches through ISpatialAudioMetadataReader's vtable slot 5.
-func (self *ISpatialAudioMetadataReader) ReadNextItemCommand(commandID *byte, valueBuffer unsafe.Pointer, maxValueBufferLength uint32, valueBufferLength *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(commandID)), uintptr(unsafe.Pointer(valueBuffer)), uintptr(maxValueBufferLength), uintptr(unsafe.Pointer(valueBufferLength)))
+func (self *ISpatialAudioMetadataReader) ReadNextItemCommand(commandID *byte, valueBuffer []byte, valueBufferLength *uint32) error {
+	var _valueBuffer *byte
+	if len(valueBuffer) > 0 {
+		_valueBuffer = &valueBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(commandID)), uintptr(unsafe.Pointer(_valueBuffer)), uintptr(len(valueBuffer)), uintptr(unsafe.Pointer(valueBufferLength)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1827,8 +1867,12 @@ func (self *ISpatialAudioMetadataWriter) WriteNextItem(frameOffset uint16) error
 }
 
 // WriteNextItemCommand dispatches through ISpatialAudioMetadataWriter's vtable slot 5.
-func (self *ISpatialAudioMetadataWriter) WriteNextItemCommand(commandID byte, valueBuffer unsafe.Pointer, valueBufferLength uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(commandID), uintptr(unsafe.Pointer(valueBuffer)), uintptr(valueBufferLength))
+func (self *ISpatialAudioMetadataWriter) WriteNextItemCommand(commandID byte, valueBuffer []byte) error {
+	var _valueBuffer *byte
+	if len(valueBuffer) > 0 {
+		_valueBuffer = &valueBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(commandID), uintptr(unsafe.Pointer(_valueBuffer)), uintptr(len(valueBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1923,8 +1967,12 @@ type ISpatialAudioObjectForMetadataCommands struct {
 var IID_ISpatialAudioObjectForMetadataCommands = win32.GUID{Data1: 0x0df2c94b, Data2: 0xf5f9, Data3: 0x472d, Data4: [8]byte{0xaf, 0x6b, 0xc4, 0x6e, 0x0a, 0xc9, 0xcd, 0x05}}
 
 // WriteNextMetadataCommand dispatches through ISpatialAudioObjectForMetadataCommands's vtable slot 7.
-func (self *ISpatialAudioObjectForMetadataCommands) WriteNextMetadataCommand(commandID byte, valueBuffer unsafe.Pointer, valueBufferLength uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(commandID), uintptr(unsafe.Pointer(valueBuffer)), uintptr(valueBufferLength))
+func (self *ISpatialAudioObjectForMetadataCommands) WriteNextMetadataCommand(commandID byte, valueBuffer []byte) error {
+	var _valueBuffer *byte
+	if len(valueBuffer) > 0 {
+		_valueBuffer = &valueBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(commandID), uintptr(unsafe.Pointer(_valueBuffer)), uintptr(len(valueBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 

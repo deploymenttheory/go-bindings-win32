@@ -1401,8 +1401,16 @@ func HMONITOR_UserUnmarshal64(param0 *uint32, param1 *byte, param2 *graphicsgdi.
 // HashData calls SHLWAPI!HashData.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-hashdata
 // Minimum OS: windows5.0.
-func HashData(pbData *byte, cbData uint32, pbHash *byte, cbHash uint32) error {
-	r1, _, _ := syscall.SyscallN(procHashData.Addr(), uintptr(unsafe.Pointer(pbData)), uintptr(cbData), uintptr(unsafe.Pointer(pbHash)), uintptr(cbHash))
+func HashData(pbData []byte, pbHash []byte) error {
+	var _pbData *byte
+	if len(pbData) > 0 {
+		_pbData = &pbData[0]
+	}
+	var _pbHash *byte
+	if len(pbHash) > 0 {
+		_pbHash = &pbHash[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHashData.Addr(), uintptr(unsafe.Pointer(_pbData)), uintptr(len(pbData)), uintptr(unsafe.Pointer(_pbHash)), uintptr(len(pbHash)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1743,8 +1751,12 @@ func IStream_Copy(pstmFrom *systemcom.IStream, pstmTo *systemcom.IStream, cb uin
 // IStream_Read calls SHLWAPI!IStream_Read.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_read
 // Minimum OS: windows5.0.
-func IStream_Read(pstm *systemcom.IStream, pv unsafe.Pointer, cb uint32) error {
-	r1, _, _ := syscall.SyscallN(procIStream_Read.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(pv)), uintptr(cb))
+func IStream_Read(pstm *systemcom.IStream, pv []byte) error {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(procIStream_Read.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1783,8 +1795,12 @@ func IStream_Size(pstm *systemcom.IStream, pui *uint64) error {
 // IStream_Write calls SHLWAPI!IStream_Write.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-istream_write
 // Minimum OS: windows6.0.6000.
-func IStream_Write(pstm *systemcom.IStream, pv unsafe.Pointer, cb uint32) error {
-	r1, _, _ := syscall.SyscallN(procIStream_Write.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(pv)), uintptr(cb))
+func IStream_Write(pstm *systemcom.IStream, pv []byte) error {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(procIStream_Write.Addr(), uintptr(unsafe.Pointer(pstm)), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3382,8 +3398,12 @@ func SHAlloc(cb uintptr) unsafe.Pointer {
 // SHAllocShared calls SHLWAPI!SHAllocShared.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shallocshared
 // Minimum OS: windows5.1.2600.
-func SHAllocShared(pvData unsafe.Pointer, dwSize uint32, dwProcessId uint32) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procSHAllocShared.Addr(), uintptr(unsafe.Pointer(pvData)), uintptr(dwSize), uintptr(dwProcessId))
+func SHAllocShared(pvData []byte, dwProcessId uint32) foundation.HANDLE {
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHAllocShared.Addr(), uintptr(unsafe.Pointer(_pvData)), uintptr(len(pvData)), uintptr(dwProcessId))
 	return foundation.HANDLE(r1)
 }
 
@@ -3700,8 +3720,12 @@ func SHCreateItemWithParent(pidlParent *uishellcommon.ITEMIDLIST, psfParent *ISh
 // SHCreateMemStream calls SHLWAPI!SHCreateMemStream.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shcreatememstream
 // Minimum OS: windows5.0.
-func SHCreateMemStream(pInit *byte, cbInit uint32) *systemcom.IStream {
-	r1, _, _ := syscall.SyscallN(procSHCreateMemStream.Addr(), uintptr(unsafe.Pointer(pInit)), uintptr(cbInit))
+func SHCreateMemStream(pInit []byte) *systemcom.IStream {
+	var _pInit *byte
+	if len(pInit) > 0 {
+		_pInit = &pInit[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHCreateMemStream.Addr(), uintptr(unsafe.Pointer(_pInit)), uintptr(len(pInit)))
 	return (*systemcom.IStream)(unsafe.Pointer(r1))
 }
 
@@ -4129,16 +4153,24 @@ func SHGetAttributesFromDataObject(pdo *systemcom.IDataObject, dwAttributeMask u
 // SHGetDataFromIDList calls SHELL32!SHGetDataFromIDListW.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetdatafromidlistw
 // Minimum OS: windows5.1.2600.
-func SHGetDataFromIDList(psf *IShellFolder, pidl *uishellcommon.ITEMIDLIST, nFormat SHGDFIL_FORMAT, pv unsafe.Pointer, cb int32) error {
-	r1, _, _ := syscall.SyscallN(procSHGetDataFromIDList.Addr(), uintptr(unsafe.Pointer(psf)), uintptr(unsafe.Pointer(pidl)), uintptr(nFormat), uintptr(unsafe.Pointer(pv)), uintptr(cb))
+func SHGetDataFromIDList(psf *IShellFolder, pidl *uishellcommon.ITEMIDLIST, nFormat SHGDFIL_FORMAT, pv []byte) error {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHGetDataFromIDList.Addr(), uintptr(unsafe.Pointer(psf)), uintptr(unsafe.Pointer(pidl)), uintptr(nFormat), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SHGetDataFromIDListA calls SHELL32!SHGetDataFromIDListA.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-shgetdatafromidlista
 // Minimum OS: windows5.1.2600.
-func SHGetDataFromIDListA(psf *IShellFolder, pidl *uishellcommon.ITEMIDLIST, nFormat SHGDFIL_FORMAT, pv unsafe.Pointer, cb int32) error {
-	r1, _, _ := syscall.SyscallN(procSHGetDataFromIDListA.Addr(), uintptr(unsafe.Pointer(psf)), uintptr(unsafe.Pointer(pidl)), uintptr(nFormat), uintptr(unsafe.Pointer(pv)), uintptr(cb))
+func SHGetDataFromIDListA(psf *IShellFolder, pidl *uishellcommon.ITEMIDLIST, nFormat SHGDFIL_FORMAT, pv []byte) error {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHGetDataFromIDListA.Addr(), uintptr(unsafe.Pointer(psf)), uintptr(unsafe.Pointer(pidl)), uintptr(nFormat), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4278,8 +4310,12 @@ func SHGetInstanceExplorer(ppunk **systemcom.IUnknown) error {
 // SHGetInverseCMAP calls SHLWAPI!SHGetInverseCMAP.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shgetinversecmap
 // Minimum OS: windows5.0.
-func SHGetInverseCMAP(pbMap *byte, cbMap uint32) error {
-	r1, _, _ := syscall.SyscallN(procSHGetInverseCMAP.Addr(), uintptr(unsafe.Pointer(pbMap)), uintptr(cbMap))
+func SHGetInverseCMAP(pbMap []byte) error {
+	var _pbMap *byte
+	if len(pbMap) > 0 {
+		_pbMap = &pbMap[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHGetInverseCMAP.Addr(), uintptr(unsafe.Pointer(_pbMap)), uintptr(len(pbMap)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4977,20 +5013,28 @@ func SHRegGetPathA(hKey systemregistry.HKEY, pcszSubKey foundation.PSTR, pcszVal
 // SHRegGetUSValue calls SHLWAPI!SHRegGetUSValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shreggetusvaluew
 // Minimum OS: windows5.0.
-func SHRegGetUSValue(pszSubKey string, pszValue string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData unsafe.Pointer, dwDefaultDataSize uint32) foundation.WIN32_ERROR {
+func SHRegGetUSValue(pszSubKey string, pszValue string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData []byte) foundation.WIN32_ERROR {
 	_pszSubKey := win32.UTF16Ptr(pszSubKey)
 	_pszValue := win32.UTF16Ptr(pszValue)
 	_fIgnoreHKCU := win32.Bool32(fIgnoreHKCU)
-	r1, _, _ := syscall.SyscallN(procSHRegGetUSValue.Addr(), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)), uintptr(_fIgnoreHKCU), uintptr(unsafe.Pointer(pvDefaultData)), uintptr(dwDefaultDataSize))
+	var _pvDefaultData *byte
+	if len(pvDefaultData) > 0 {
+		_pvDefaultData = &pvDefaultData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHRegGetUSValue.Addr(), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)), uintptr(_fIgnoreHKCU), uintptr(unsafe.Pointer(_pvDefaultData)), uintptr(len(pvDefaultData)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // SHRegGetUSValueA calls SHLWAPI!SHRegGetUSValueA.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shreggetusvaluea
 // Minimum OS: windows5.0.
-func SHRegGetUSValueA(pszSubKey foundation.PSTR, pszValue foundation.PSTR, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData unsafe.Pointer, dwDefaultDataSize uint32) foundation.WIN32_ERROR {
+func SHRegGetUSValueA(pszSubKey foundation.PSTR, pszValue foundation.PSTR, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData []byte) foundation.WIN32_ERROR {
 	_fIgnoreHKCU := win32.Bool32(fIgnoreHKCU)
-	r1, _, _ := syscall.SyscallN(procSHRegGetUSValueA.Addr(), uintptr(unsafe.Pointer(pszSubKey)), uintptr(unsafe.Pointer(pszValue)), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)), uintptr(_fIgnoreHKCU), uintptr(unsafe.Pointer(pvDefaultData)), uintptr(dwDefaultDataSize))
+	var _pvDefaultData *byte
+	if len(pvDefaultData) > 0 {
+		_pvDefaultData = &pvDefaultData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHRegGetUSValueA.Addr(), uintptr(unsafe.Pointer(pszSubKey)), uintptr(unsafe.Pointer(pszValue)), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)), uintptr(_fIgnoreHKCU), uintptr(unsafe.Pointer(_pvDefaultData)), uintptr(len(pvDefaultData)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -5060,19 +5104,27 @@ func SHRegQueryInfoUSKeyA(hUSKey uintptr, pcSubKeys *uint32, pcchMaxSubKeyLen *u
 // SHRegQueryUSValue calls SHLWAPI!SHRegQueryUSValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shregqueryusvaluew
 // Minimum OS: windows5.0.
-func SHRegQueryUSValue(hUSKey uintptr, pszValue string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData unsafe.Pointer, dwDefaultDataSize uint32) foundation.WIN32_ERROR {
+func SHRegQueryUSValue(hUSKey uintptr, pszValue string, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData []byte) foundation.WIN32_ERROR {
 	_pszValue := win32.UTF16Ptr(pszValue)
 	_fIgnoreHKCU := win32.Bool32(fIgnoreHKCU)
-	r1, _, _ := syscall.SyscallN(procSHRegQueryUSValue.Addr(), uintptr(hUSKey), uintptr(unsafe.Pointer(_pszValue)), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)), uintptr(_fIgnoreHKCU), uintptr(unsafe.Pointer(pvDefaultData)), uintptr(dwDefaultDataSize))
+	var _pvDefaultData *byte
+	if len(pvDefaultData) > 0 {
+		_pvDefaultData = &pvDefaultData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHRegQueryUSValue.Addr(), uintptr(hUSKey), uintptr(unsafe.Pointer(_pszValue)), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)), uintptr(_fIgnoreHKCU), uintptr(unsafe.Pointer(_pvDefaultData)), uintptr(len(pvDefaultData)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // SHRegQueryUSValueA calls SHLWAPI!SHRegQueryUSValueA.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shregqueryusvaluea
 // Minimum OS: windows5.0.
-func SHRegQueryUSValueA(hUSKey uintptr, pszValue foundation.PSTR, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData unsafe.Pointer, dwDefaultDataSize uint32) foundation.WIN32_ERROR {
+func SHRegQueryUSValueA(hUSKey uintptr, pszValue foundation.PSTR, pdwType *uint32, pvData unsafe.Pointer, pcbData *uint32, fIgnoreHKCU bool, pvDefaultData []byte) foundation.WIN32_ERROR {
 	_fIgnoreHKCU := win32.Bool32(fIgnoreHKCU)
-	r1, _, _ := syscall.SyscallN(procSHRegQueryUSValueA.Addr(), uintptr(hUSKey), uintptr(unsafe.Pointer(pszValue)), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)), uintptr(_fIgnoreHKCU), uintptr(unsafe.Pointer(pvDefaultData)), uintptr(dwDefaultDataSize))
+	var _pvDefaultData *byte
+	if len(pvDefaultData) > 0 {
+		_pvDefaultData = &pvDefaultData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHRegQueryUSValueA.Addr(), uintptr(hUSKey), uintptr(unsafe.Pointer(pszValue)), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pcbData)), uintptr(_fIgnoreHKCU), uintptr(unsafe.Pointer(_pvDefaultData)), uintptr(len(pvDefaultData)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -5098,35 +5150,51 @@ func SHRegSetPathA(hKey systemregistry.HKEY, pcszSubKey foundation.PSTR, pcszVal
 // SHRegSetUSValue calls SHLWAPI!SHRegSetUSValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shregsetusvaluew
 // Minimum OS: windows5.0.
-func SHRegSetUSValue(pwzSubKey string, pwzValue string, dwType uint32, pvData unsafe.Pointer, cbData uint32, dwFlags uint32) foundation.WIN32_ERROR {
+func SHRegSetUSValue(pwzSubKey string, pwzValue string, dwType uint32, pvData []byte, dwFlags uint32) foundation.WIN32_ERROR {
 	_pwzSubKey := win32.UTF16Ptr(pwzSubKey)
 	_pwzValue := win32.UTF16Ptr(pwzValue)
-	r1, _, _ := syscall.SyscallN(procSHRegSetUSValue.Addr(), uintptr(unsafe.Pointer(_pwzSubKey)), uintptr(unsafe.Pointer(_pwzValue)), uintptr(dwType), uintptr(unsafe.Pointer(pvData)), uintptr(cbData), uintptr(dwFlags))
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHRegSetUSValue.Addr(), uintptr(unsafe.Pointer(_pwzSubKey)), uintptr(unsafe.Pointer(_pwzValue)), uintptr(dwType), uintptr(unsafe.Pointer(_pvData)), uintptr(len(pvData)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // SHRegSetUSValueA calls SHLWAPI!SHRegSetUSValueA.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shregsetusvaluea
 // Minimum OS: windows5.0.
-func SHRegSetUSValueA(pszSubKey foundation.PSTR, pszValue foundation.PSTR, dwType uint32, pvData unsafe.Pointer, cbData uint32, dwFlags uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procSHRegSetUSValueA.Addr(), uintptr(unsafe.Pointer(pszSubKey)), uintptr(unsafe.Pointer(pszValue)), uintptr(dwType), uintptr(unsafe.Pointer(pvData)), uintptr(cbData), uintptr(dwFlags))
+func SHRegSetUSValueA(pszSubKey foundation.PSTR, pszValue foundation.PSTR, dwType uint32, pvData []byte, dwFlags uint32) foundation.WIN32_ERROR {
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHRegSetUSValueA.Addr(), uintptr(unsafe.Pointer(pszSubKey)), uintptr(unsafe.Pointer(pszValue)), uintptr(dwType), uintptr(unsafe.Pointer(_pvData)), uintptr(len(pvData)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // SHRegWriteUSValue calls SHLWAPI!SHRegWriteUSValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shregwriteusvaluew
 // Minimum OS: windows5.0.
-func SHRegWriteUSValue(hUSKey uintptr, pwzValue string, dwType uint32, pvData unsafe.Pointer, cbData uint32, dwFlags uint32) foundation.WIN32_ERROR {
+func SHRegWriteUSValue(hUSKey uintptr, pwzValue string, dwType uint32, pvData []byte, dwFlags uint32) foundation.WIN32_ERROR {
 	_pwzValue := win32.UTF16Ptr(pwzValue)
-	r1, _, _ := syscall.SyscallN(procSHRegWriteUSValue.Addr(), uintptr(hUSKey), uintptr(unsafe.Pointer(_pwzValue)), uintptr(dwType), uintptr(unsafe.Pointer(pvData)), uintptr(cbData), uintptr(dwFlags))
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHRegWriteUSValue.Addr(), uintptr(hUSKey), uintptr(unsafe.Pointer(_pwzValue)), uintptr(dwType), uintptr(unsafe.Pointer(_pvData)), uintptr(len(pvData)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // SHRegWriteUSValueA calls SHLWAPI!SHRegWriteUSValueA.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shregwriteusvaluea
 // Minimum OS: windows5.0.
-func SHRegWriteUSValueA(hUSKey uintptr, pszValue foundation.PSTR, dwType uint32, pvData unsafe.Pointer, cbData uint32, dwFlags uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procSHRegWriteUSValueA.Addr(), uintptr(hUSKey), uintptr(unsafe.Pointer(pszValue)), uintptr(dwType), uintptr(unsafe.Pointer(pvData)), uintptr(cbData), uintptr(dwFlags))
+func SHRegWriteUSValueA(hUSKey uintptr, pszValue foundation.PSTR, dwType uint32, pvData []byte, dwFlags uint32) foundation.WIN32_ERROR {
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHRegWriteUSValueA.Addr(), uintptr(hUSKey), uintptr(unsafe.Pointer(pszValue)), uintptr(dwType), uintptr(unsafe.Pointer(_pvData)), uintptr(len(pvData)), uintptr(dwFlags))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -5267,18 +5335,26 @@ func SHSetUnreadMailCount(pszMailAddress string, dwCount uint32, pszShellExecute
 // SHSetValue calls SHLWAPI!SHSetValueW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shsetvaluew
 // Minimum OS: windows5.0.
-func SHSetValue(hkey systemregistry.HKEY, pszSubKey string, pszValue string, dwType uint32, pvData unsafe.Pointer, cbData uint32) int32 {
+func SHSetValue(hkey systemregistry.HKEY, pszSubKey string, pszValue string, dwType uint32, pvData []byte) int32 {
 	_pszSubKey := win32.UTF16Ptr(pszSubKey)
 	_pszValue := win32.UTF16Ptr(pszValue)
-	r1, _, _ := syscall.SyscallN(procSHSetValue.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(dwType), uintptr(unsafe.Pointer(pvData)), uintptr(cbData))
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHSetValue.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(_pszSubKey)), uintptr(unsafe.Pointer(_pszValue)), uintptr(dwType), uintptr(unsafe.Pointer(_pvData)), uintptr(len(pvData)))
 	return int32(r1)
 }
 
 // SHSetValueA calls SHLWAPI!SHSetValueA.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-shsetvaluea
 // Minimum OS: windows5.0.
-func SHSetValueA(hkey systemregistry.HKEY, pszSubKey foundation.PSTR, pszValue foundation.PSTR, dwType uint32, pvData unsafe.Pointer, cbData uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procSHSetValueA.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(pszSubKey)), uintptr(unsafe.Pointer(pszValue)), uintptr(dwType), uintptr(unsafe.Pointer(pvData)), uintptr(cbData))
+func SHSetValueA(hkey systemregistry.HKEY, pszSubKey foundation.PSTR, pszValue foundation.PSTR, dwType uint32, pvData []byte) int32 {
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSHSetValueA.Addr(), uintptr(hkey), uintptr(unsafe.Pointer(pszSubKey)), uintptr(unsafe.Pointer(pszValue)), uintptr(dwType), uintptr(unsafe.Pointer(_pvData)), uintptr(len(pvData)))
 	return int32(r1)
 }
 
@@ -6468,17 +6544,25 @@ func UrlGetPartA(pszIn foundation.PSTR, pszOut foundation.PSTR, pcchOut *uint32,
 // UrlHash calls SHLWAPI!UrlHashW.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-urlhashw
 // Minimum OS: windows5.0.
-func UrlHash(pszUrl string, pbHash *byte, cbHash uint32) error {
+func UrlHash(pszUrl string, pbHash []byte) error {
 	_pszUrl := win32.UTF16Ptr(pszUrl)
-	r1, _, _ := syscall.SyscallN(procUrlHash.Addr(), uintptr(unsafe.Pointer(_pszUrl)), uintptr(unsafe.Pointer(pbHash)), uintptr(cbHash))
+	var _pbHash *byte
+	if len(pbHash) > 0 {
+		_pbHash = &pbHash[0]
+	}
+	r1, _, _ := syscall.SyscallN(procUrlHash.Addr(), uintptr(unsafe.Pointer(_pszUrl)), uintptr(unsafe.Pointer(_pbHash)), uintptr(len(pbHash)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // UrlHashA calls SHLWAPI!UrlHashA.
 // https://learn.microsoft.com/windows/win32/api/shlwapi/nf-shlwapi-urlhasha
 // Minimum OS: windows5.0.
-func UrlHashA(pszUrl foundation.PSTR, pbHash *byte, cbHash uint32) error {
-	r1, _, _ := syscall.SyscallN(procUrlHashA.Addr(), uintptr(unsafe.Pointer(pszUrl)), uintptr(unsafe.Pointer(pbHash)), uintptr(cbHash))
+func UrlHashA(pszUrl foundation.PSTR, pbHash []byte) error {
+	var _pbHash *byte
+	if len(pbHash) > 0 {
+		_pbHash = &pbHash[0]
+	}
+	r1, _, _ := syscall.SyscallN(procUrlHashA.Addr(), uintptr(unsafe.Pointer(pszUrl)), uintptr(unsafe.Pointer(_pbHash)), uintptr(len(pbHash)))
 	return win32.HRESULTError(int32(r1))
 }
 

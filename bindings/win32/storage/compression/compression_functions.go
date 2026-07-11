@@ -55,8 +55,16 @@ func CloseDecompressor(DecompressorHandle DECOMPRESSOR_HANDLE) error {
 // Compress calls Cabinet!Compress.
 // https://learn.microsoft.com/windows/win32/api/compressapi/nf-compressapi-compress
 // Minimum OS: windows8.0.
-func Compress(CompressorHandle COMPRESSOR_HANDLE, UncompressedData unsafe.Pointer, UncompressedDataSize uintptr, CompressedBuffer unsafe.Pointer, CompressedBufferSize uintptr, CompressedDataSize *uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procCompress.Addr(), uintptr(CompressorHandle), uintptr(unsafe.Pointer(UncompressedData)), uintptr(UncompressedDataSize), uintptr(unsafe.Pointer(CompressedBuffer)), uintptr(CompressedBufferSize), uintptr(unsafe.Pointer(CompressedDataSize)))
+func Compress(CompressorHandle COMPRESSOR_HANDLE, UncompressedData []byte, CompressedBuffer []byte, CompressedDataSize *uintptr) error {
+	var _UncompressedData *byte
+	if len(UncompressedData) > 0 {
+		_UncompressedData = &UncompressedData[0]
+	}
+	var _CompressedBuffer *byte
+	if len(CompressedBuffer) > 0 {
+		_CompressedBuffer = &CompressedBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procCompress.Addr(), uintptr(CompressorHandle), uintptr(unsafe.Pointer(_UncompressedData)), uintptr(len(UncompressedData)), uintptr(unsafe.Pointer(_CompressedBuffer)), uintptr(len(CompressedBuffer)), uintptr(unsafe.Pointer(CompressedDataSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -88,8 +96,16 @@ func CreateDecompressor(Algorithm COMPRESS_ALGORITHM, AllocationRoutines *COMPRE
 // Decompress calls Cabinet!Decompress.
 // https://learn.microsoft.com/windows/win32/api/compressapi/nf-compressapi-decompress
 // Minimum OS: windows8.0.
-func Decompress(DecompressorHandle DECOMPRESSOR_HANDLE, CompressedData unsafe.Pointer, CompressedDataSize uintptr, UncompressedBuffer unsafe.Pointer, UncompressedBufferSize uintptr, UncompressedDataSize *uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procDecompress.Addr(), uintptr(DecompressorHandle), uintptr(unsafe.Pointer(CompressedData)), uintptr(CompressedDataSize), uintptr(unsafe.Pointer(UncompressedBuffer)), uintptr(UncompressedBufferSize), uintptr(unsafe.Pointer(UncompressedDataSize)))
+func Decompress(DecompressorHandle DECOMPRESSOR_HANDLE, CompressedData []byte, UncompressedBuffer []byte, UncompressedDataSize *uintptr) error {
+	var _CompressedData *byte
+	if len(CompressedData) > 0 {
+		_CompressedData = &CompressedData[0]
+	}
+	var _UncompressedBuffer *byte
+	if len(UncompressedBuffer) > 0 {
+		_UncompressedBuffer = &UncompressedBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procDecompress.Addr(), uintptr(DecompressorHandle), uintptr(unsafe.Pointer(_CompressedData)), uintptr(len(CompressedData)), uintptr(unsafe.Pointer(_UncompressedBuffer)), uintptr(len(UncompressedBuffer)), uintptr(unsafe.Pointer(UncompressedDataSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -99,8 +115,12 @@ func Decompress(DecompressorHandle DECOMPRESSOR_HANDLE, CompressedData unsafe.Po
 // QueryCompressorInformation calls Cabinet!QueryCompressorInformation.
 // https://learn.microsoft.com/windows/win32/api/compressapi/nf-compressapi-querycompressorinformation
 // Minimum OS: windows8.0.
-func QueryCompressorInformation(CompressorHandle COMPRESSOR_HANDLE, CompressInformationClass COMPRESS_INFORMATION_CLASS, CompressInformation unsafe.Pointer, CompressInformationSize uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procQueryCompressorInformation.Addr(), uintptr(CompressorHandle), uintptr(CompressInformationClass), uintptr(unsafe.Pointer(CompressInformation)), uintptr(CompressInformationSize))
+func QueryCompressorInformation(CompressorHandle COMPRESSOR_HANDLE, CompressInformationClass COMPRESS_INFORMATION_CLASS, CompressInformation []byte) error {
+	var _CompressInformation *byte
+	if len(CompressInformation) > 0 {
+		_CompressInformation = &CompressInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procQueryCompressorInformation.Addr(), uintptr(CompressorHandle), uintptr(CompressInformationClass), uintptr(unsafe.Pointer(_CompressInformation)), uintptr(len(CompressInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -110,8 +130,12 @@ func QueryCompressorInformation(CompressorHandle COMPRESSOR_HANDLE, CompressInfo
 // QueryDecompressorInformation calls Cabinet!QueryDecompressorInformation.
 // https://learn.microsoft.com/windows/win32/api/compressapi/nf-compressapi-querydecompressorinformation
 // Minimum OS: windows8.0.
-func QueryDecompressorInformation(DecompressorHandle DECOMPRESSOR_HANDLE, CompressInformationClass COMPRESS_INFORMATION_CLASS, CompressInformation unsafe.Pointer, CompressInformationSize uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procQueryDecompressorInformation.Addr(), uintptr(DecompressorHandle), uintptr(CompressInformationClass), uintptr(unsafe.Pointer(CompressInformation)), uintptr(CompressInformationSize))
+func QueryDecompressorInformation(DecompressorHandle DECOMPRESSOR_HANDLE, CompressInformationClass COMPRESS_INFORMATION_CLASS, CompressInformation []byte) error {
+	var _CompressInformation *byte
+	if len(CompressInformation) > 0 {
+		_CompressInformation = &CompressInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procQueryDecompressorInformation.Addr(), uintptr(DecompressorHandle), uintptr(CompressInformationClass), uintptr(unsafe.Pointer(_CompressInformation)), uintptr(len(CompressInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -143,8 +167,12 @@ func ResetDecompressor(DecompressorHandle DECOMPRESSOR_HANDLE) error {
 // SetCompressorInformation calls Cabinet!SetCompressorInformation.
 // https://learn.microsoft.com/windows/win32/api/compressapi/nf-compressapi-setcompressorinformation
 // Minimum OS: windows8.0.
-func SetCompressorInformation(CompressorHandle COMPRESSOR_HANDLE, CompressInformationClass COMPRESS_INFORMATION_CLASS, CompressInformation unsafe.Pointer, CompressInformationSize uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procSetCompressorInformation.Addr(), uintptr(CompressorHandle), uintptr(CompressInformationClass), uintptr(unsafe.Pointer(CompressInformation)), uintptr(CompressInformationSize))
+func SetCompressorInformation(CompressorHandle COMPRESSOR_HANDLE, CompressInformationClass COMPRESS_INFORMATION_CLASS, CompressInformation []byte) error {
+	var _CompressInformation *byte
+	if len(CompressInformation) > 0 {
+		_CompressInformation = &CompressInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetCompressorInformation.Addr(), uintptr(CompressorHandle), uintptr(CompressInformationClass), uintptr(unsafe.Pointer(_CompressInformation)), uintptr(len(CompressInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -154,8 +182,12 @@ func SetCompressorInformation(CompressorHandle COMPRESSOR_HANDLE, CompressInform
 // SetDecompressorInformation calls Cabinet!SetDecompressorInformation.
 // https://learn.microsoft.com/windows/win32/api/compressapi/nf-compressapi-setdecompressorinformation
 // Minimum OS: windows8.0.
-func SetDecompressorInformation(DecompressorHandle DECOMPRESSOR_HANDLE, CompressInformationClass COMPRESS_INFORMATION_CLASS, CompressInformation unsafe.Pointer, CompressInformationSize uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procSetDecompressorInformation.Addr(), uintptr(DecompressorHandle), uintptr(CompressInformationClass), uintptr(unsafe.Pointer(CompressInformation)), uintptr(CompressInformationSize))
+func SetDecompressorInformation(DecompressorHandle DECOMPRESSOR_HANDLE, CompressInformationClass COMPRESS_INFORMATION_CLASS, CompressInformation []byte) error {
+	var _CompressInformation *byte
+	if len(CompressInformation) > 0 {
+		_CompressInformation = &CompressInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetDecompressorInformation.Addr(), uintptr(DecompressorHandle), uintptr(CompressInformationClass), uintptr(unsafe.Pointer(_CompressInformation)), uintptr(len(CompressInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

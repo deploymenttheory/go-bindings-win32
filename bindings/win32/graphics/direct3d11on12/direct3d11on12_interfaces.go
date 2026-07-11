@@ -30,13 +30,21 @@ func (self *ID3D11On12Device) CreateWrappedResource(pResource12 *systemcom.IUnkn
 }
 
 // ReleaseWrappedResources dispatches through ID3D11On12Device's vtable slot 4.
-func (self *ID3D11On12Device) ReleaseWrappedResources(ppResources **graphicsdirect3d11.ID3D11Resource, NumResources uint32) {
-	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResources)), uintptr(NumResources))
+func (self *ID3D11On12Device) ReleaseWrappedResources(ppResources []*graphicsdirect3d11.ID3D11Resource) {
+	var _ppResources **graphicsdirect3d11.ID3D11Resource
+	if len(ppResources) > 0 {
+		_ppResources = &ppResources[0]
+	}
+	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppResources)), uintptr(len(ppResources)))
 }
 
 // AcquireWrappedResources dispatches through ID3D11On12Device's vtable slot 5.
-func (self *ID3D11On12Device) AcquireWrappedResources(ppResources **graphicsdirect3d11.ID3D11Resource, NumResources uint32) {
-	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResources)), uintptr(NumResources))
+func (self *ID3D11On12Device) AcquireWrappedResources(ppResources []*graphicsdirect3d11.ID3D11Resource) {
+	var _ppResources **graphicsdirect3d11.ID3D11Resource
+	if len(ppResources) > 0 {
+		_ppResources = &ppResources[0]
+	}
+	syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppResources)), uintptr(len(ppResources)))
 }
 
 // ID3D11On12Device1: https://learn.microsoft.com/windows/win32/api/d3d11on12/nn-d3d11on12-id3d11on12device1

@@ -843,17 +843,25 @@ type IMultiLanguage3 struct {
 var IID_IMultiLanguage3 = win32.GUID{Data1: 0x4e5868ab, Data2: 0xb157, Data3: 0x4623, Data4: [8]byte{0x9a, 0xcc, 0x6a, 0x1d, 0x9c, 0xae, 0xbe, 0x04}}
 
 // DetectOutboundCodePage dispatches through IMultiLanguage3's vtable slot 30.
-func (self *IMultiLanguage3) DetectOutboundCodePage(dwFlags uint32, lpWideCharStr string, cchWideChar uint32, puiPreferredCodePages *uint32, nPreferredCodePages uint32, puiDetectedCodePages *uint32, pnDetectedCodePages *uint32, lpSpecialChar string) error {
+func (self *IMultiLanguage3) DetectOutboundCodePage(dwFlags uint32, lpWideCharStr string, cchWideChar uint32, puiPreferredCodePages []uint32, puiDetectedCodePages *uint32, pnDetectedCodePages *uint32, lpSpecialChar string) error {
 	_lpWideCharStr := win32.UTF16Ptr(lpWideCharStr)
+	var _puiPreferredCodePages *uint32
+	if len(puiPreferredCodePages) > 0 {
+		_puiPreferredCodePages = &puiPreferredCodePages[0]
+	}
 	_lpSpecialChar := win32.UTF16Ptr(lpSpecialChar)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpWideCharStr)), uintptr(cchWideChar), uintptr(unsafe.Pointer(puiPreferredCodePages)), uintptr(nPreferredCodePages), uintptr(unsafe.Pointer(puiDetectedCodePages)), uintptr(unsafe.Pointer(pnDetectedCodePages)), uintptr(unsafe.Pointer(_lpSpecialChar)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpWideCharStr)), uintptr(cchWideChar), uintptr(unsafe.Pointer(_puiPreferredCodePages)), uintptr(len(puiPreferredCodePages)), uintptr(unsafe.Pointer(puiDetectedCodePages)), uintptr(unsafe.Pointer(pnDetectedCodePages)), uintptr(unsafe.Pointer(_lpSpecialChar)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // DetectOutboundCodePageInIStream dispatches through IMultiLanguage3's vtable slot 31.
-func (self *IMultiLanguage3) DetectOutboundCodePageInIStream(dwFlags uint32, pStrIn *systemcom.IStream, puiPreferredCodePages *uint32, nPreferredCodePages uint32, puiDetectedCodePages *uint32, pnDetectedCodePages *uint32, lpSpecialChar string) error {
+func (self *IMultiLanguage3) DetectOutboundCodePageInIStream(dwFlags uint32, pStrIn *systemcom.IStream, puiPreferredCodePages []uint32, puiDetectedCodePages *uint32, pnDetectedCodePages *uint32, lpSpecialChar string) error {
+	var _puiPreferredCodePages *uint32
+	if len(puiPreferredCodePages) > 0 {
+		_puiPreferredCodePages = &puiPreferredCodePages[0]
+	}
 	_lpSpecialChar := win32.UTF16Ptr(lpSpecialChar)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pStrIn)), uintptr(unsafe.Pointer(puiPreferredCodePages)), uintptr(nPreferredCodePages), uintptr(unsafe.Pointer(puiDetectedCodePages)), uintptr(unsafe.Pointer(pnDetectedCodePages)), uintptr(unsafe.Pointer(_lpSpecialChar)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(unsafe.Pointer(pStrIn)), uintptr(unsafe.Pointer(_puiPreferredCodePages)), uintptr(len(puiPreferredCodePages)), uintptr(unsafe.Pointer(puiDetectedCodePages)), uintptr(unsafe.Pointer(pnDetectedCodePages)), uintptr(unsafe.Pointer(_lpSpecialChar)))
 	return win32.HRESULTError(int32(r1))
 }
 

@@ -105,11 +105,15 @@ var (
 )
 
 // GetRegistryValueWithFallbackW calls api-ms-win-core-state-helpers-l1-1-0!GetRegistryValueWithFallbackW.
-func GetRegistryValueWithFallbackW(hkeyPrimary HKEY, pwszPrimarySubKey string, hkeyFallback HKEY, pwszFallbackSubKey string, pwszValue string, dwFlags uint32, pdwType *uint32, pvData unsafe.Pointer, cbDataIn uint32, pcbDataOut *uint32) foundation.WIN32_ERROR {
+func GetRegistryValueWithFallbackW(hkeyPrimary HKEY, pwszPrimarySubKey string, hkeyFallback HKEY, pwszFallbackSubKey string, pwszValue string, dwFlags uint32, pdwType *uint32, pvData []byte, pcbDataOut *uint32) foundation.WIN32_ERROR {
 	_pwszPrimarySubKey := win32.UTF16Ptr(pwszPrimarySubKey)
 	_pwszFallbackSubKey := win32.UTF16Ptr(pwszFallbackSubKey)
 	_pwszValue := win32.UTF16Ptr(pwszValue)
-	r1, _, _ := syscall.SyscallN(procGetRegistryValueWithFallbackW.Addr(), uintptr(hkeyPrimary), uintptr(unsafe.Pointer(_pwszPrimarySubKey)), uintptr(hkeyFallback), uintptr(unsafe.Pointer(_pwszFallbackSubKey)), uintptr(unsafe.Pointer(_pwszValue)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(pvData)), uintptr(cbDataIn), uintptr(unsafe.Pointer(pcbDataOut)))
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetRegistryValueWithFallbackW.Addr(), uintptr(hkeyPrimary), uintptr(unsafe.Pointer(_pwszPrimarySubKey)), uintptr(hkeyFallback), uintptr(unsafe.Pointer(_pwszFallbackSubKey)), uintptr(unsafe.Pointer(_pwszValue)), uintptr(dwFlags), uintptr(unsafe.Pointer(pdwType)), uintptr(unsafe.Pointer(_pvData)), uintptr(len(pvData)), uintptr(unsafe.Pointer(pcbDataOut)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -748,18 +752,26 @@ func RegSetKeySecurity(hKey HKEY, SecurityInformation security.OBJECT_SECURITY_I
 // RegSetKeyValue calls ADVAPI32!RegSetKeyValueW.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-regsetkeyvaluew
 // Minimum OS: windows6.0.6000.
-func RegSetKeyValue(hKey HKEY, lpSubKey string, lpValueName string, dwType uint32, lpData unsafe.Pointer, cbData uint32) foundation.WIN32_ERROR {
+func RegSetKeyValue(hKey HKEY, lpSubKey string, lpValueName string, dwType uint32, lpData []byte) foundation.WIN32_ERROR {
 	_lpSubKey := win32.UTF16Ptr(lpSubKey)
 	_lpValueName := win32.UTF16Ptr(lpValueName)
-	r1, _, _ := syscall.SyscallN(procRegSetKeyValue.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_lpSubKey)), uintptr(unsafe.Pointer(_lpValueName)), uintptr(dwType), uintptr(unsafe.Pointer(lpData)), uintptr(cbData))
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRegSetKeyValue.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_lpSubKey)), uintptr(unsafe.Pointer(_lpValueName)), uintptr(dwType), uintptr(unsafe.Pointer(_lpData)), uintptr(len(lpData)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // RegSetKeyValueA calls ADVAPI32!RegSetKeyValueA.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-regsetkeyvaluea
 // Minimum OS: windows6.0.6000.
-func RegSetKeyValueA(hKey HKEY, lpSubKey foundation.PSTR, lpValueName foundation.PSTR, dwType uint32, lpData unsafe.Pointer, cbData uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procRegSetKeyValueA.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(lpSubKey)), uintptr(unsafe.Pointer(lpValueName)), uintptr(dwType), uintptr(unsafe.Pointer(lpData)), uintptr(cbData))
+func RegSetKeyValueA(hKey HKEY, lpSubKey foundation.PSTR, lpValueName foundation.PSTR, dwType uint32, lpData []byte) foundation.WIN32_ERROR {
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRegSetKeyValueA.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(lpSubKey)), uintptr(unsafe.Pointer(lpValueName)), uintptr(dwType), uintptr(unsafe.Pointer(_lpData)), uintptr(len(lpData)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -784,17 +796,25 @@ func RegSetValueA(hKey HKEY, lpSubKey foundation.PSTR, dwType REG_VALUE_TYPE, lp
 // RegSetValueEx calls ADVAPI32!RegSetValueExW.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-regsetvalueexw
 // Minimum OS: windows5.0.
-func RegSetValueEx(hKey HKEY, lpValueName string, dwType REG_VALUE_TYPE, lpData *byte, cbData uint32) foundation.WIN32_ERROR {
+func RegSetValueEx(hKey HKEY, lpValueName string, dwType REG_VALUE_TYPE, lpData []byte) foundation.WIN32_ERROR {
 	_lpValueName := win32.UTF16Ptr(lpValueName)
-	r1, _, _ := syscall.SyscallN(procRegSetValueEx.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_lpValueName)), 0, uintptr(dwType), uintptr(unsafe.Pointer(lpData)), uintptr(cbData))
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRegSetValueEx.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(_lpValueName)), 0, uintptr(dwType), uintptr(unsafe.Pointer(_lpData)), uintptr(len(lpData)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // RegSetValueExA calls ADVAPI32!RegSetValueExA.
 // https://learn.microsoft.com/windows/win32/api/winreg/nf-winreg-regsetvalueexa
 // Minimum OS: windows5.0.
-func RegSetValueExA(hKey HKEY, lpValueName foundation.PSTR, dwType REG_VALUE_TYPE, lpData *byte, cbData uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procRegSetValueExA.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(lpValueName)), 0, uintptr(dwType), uintptr(unsafe.Pointer(lpData)), uintptr(cbData))
+func RegSetValueExA(hKey HKEY, lpValueName foundation.PSTR, dwType REG_VALUE_TYPE, lpData []byte) foundation.WIN32_ERROR {
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRegSetValueExA.Addr(), uintptr(hKey), uintptr(unsafe.Pointer(lpValueName)), 0, uintptr(dwType), uintptr(unsafe.Pointer(_lpData)), uintptr(len(lpData)))
 	return foundation.WIN32_ERROR(r1)
 }
 

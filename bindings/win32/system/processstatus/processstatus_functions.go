@@ -524,23 +524,35 @@ func K32InitializeProcessForWsWatch(hProcess foundation.HANDLE) bool {
 
 // K32QueryWorkingSet calls KERNEL32!K32QueryWorkingSet.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-queryworkingset
-func K32QueryWorkingSet(hProcess foundation.HANDLE, pv unsafe.Pointer, cb uint32) bool {
-	r1, _, _ := syscall.SyscallN(procK32QueryWorkingSet.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pv)), uintptr(cb))
+func K32QueryWorkingSet(hProcess foundation.HANDLE, pv []byte) bool {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(procK32QueryWorkingSet.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)))
 	return r1 != 0
 }
 
 // K32QueryWorkingSetEx calls KERNEL32!K32QueryWorkingSetEx.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-queryworkingsetex
-func K32QueryWorkingSetEx(hProcess foundation.HANDLE, pv unsafe.Pointer, cb uint32) bool {
-	r1, _, _ := syscall.SyscallN(procK32QueryWorkingSetEx.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pv)), uintptr(cb))
+func K32QueryWorkingSetEx(hProcess foundation.HANDLE, pv []byte) bool {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(procK32QueryWorkingSetEx.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)))
 	return r1 != 0
 }
 
 // QueryWorkingSet calls PSAPI!QueryWorkingSet.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-queryworkingset
 // Minimum OS: windows5.1.2600.
-func QueryWorkingSet(hProcess foundation.HANDLE, pv unsafe.Pointer, cb uint32) error {
-	r1, _, e1 := syscall.SyscallN(procQueryWorkingSet.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pv)), uintptr(cb))
+func QueryWorkingSet(hProcess foundation.HANDLE, pv []byte) error {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procQueryWorkingSet.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -550,8 +562,12 @@ func QueryWorkingSet(hProcess foundation.HANDLE, pv unsafe.Pointer, cb uint32) e
 // QueryWorkingSetEx calls PSAPI!QueryWorkingSetEx.
 // https://learn.microsoft.com/windows/win32/api/psapi/nf-psapi-queryworkingsetex
 // Minimum OS: windows6.0.6000.
-func QueryWorkingSetEx(hProcess foundation.HANDLE, pv unsafe.Pointer, cb uint32) error {
-	r1, _, e1 := syscall.SyscallN(procQueryWorkingSetEx.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(pv)), uintptr(cb))
+func QueryWorkingSetEx(hProcess foundation.HANDLE, pv []byte) error {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procQueryWorkingSetEx.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

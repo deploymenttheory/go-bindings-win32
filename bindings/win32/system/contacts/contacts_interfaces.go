@@ -1044,9 +1044,13 @@ func (self *IContactProperties) SetBinary(pszPropertyName string, dwFlags uint32
 }
 
 // SetLabels dispatches through IContactProperties's vtable slot 10.
-func (self *IContactProperties) SetLabels(pszArrayElementName string, dwFlags uint32, dwLabelCount uint32, ppszLabels *foundation.PWSTR) error {
+func (self *IContactProperties) SetLabels(pszArrayElementName string, dwFlags uint32, ppszLabels []foundation.PWSTR) error {
 	_pszArrayElementName := win32.UTF16Ptr(pszArrayElementName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszArrayElementName)), uintptr(dwFlags), uintptr(dwLabelCount), uintptr(unsafe.Pointer(ppszLabels)))
+	var _ppszLabels *foundation.PWSTR
+	if len(ppszLabels) > 0 {
+		_ppszLabels = &ppszLabels[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszArrayElementName)), uintptr(dwFlags), uintptr(len(ppszLabels)), uintptr(unsafe.Pointer(_ppszLabels)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1080,10 +1084,14 @@ func (self *IContactProperties) DeleteLabels(pszArrayElementName string, dwFlags
 }
 
 // GetPropertyCollection dispatches through IContactProperties's vtable slot 15.
-func (self *IContactProperties) GetPropertyCollection(ppPropertyCollection **IContactPropertyCollection, dwFlags uint32, pszMultiValueName string, dwLabelCount uint32, ppszLabels *foundation.PWSTR, fAnyLabelMatches bool) error {
+func (self *IContactProperties) GetPropertyCollection(ppPropertyCollection **IContactPropertyCollection, dwFlags uint32, pszMultiValueName string, ppszLabels []foundation.PWSTR, fAnyLabelMatches bool) error {
 	_pszMultiValueName := win32.UTF16Ptr(pszMultiValueName)
+	var _ppszLabels *foundation.PWSTR
+	if len(ppszLabels) > 0 {
+		_ppszLabels = &ppszLabels[0]
+	}
 	_fAnyLabelMatches := win32.Bool32(fAnyLabelMatches)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPropertyCollection)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszMultiValueName)), uintptr(dwLabelCount), uintptr(unsafe.Pointer(ppszLabels)), uintptr(_fAnyLabelMatches))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppPropertyCollection)), uintptr(dwFlags), uintptr(unsafe.Pointer(_pszMultiValueName)), uintptr(len(ppszLabels)), uintptr(unsafe.Pointer(_ppszLabels)), uintptr(_fAnyLabelMatches))
 	return win32.HRESULTError(int32(r1))
 }
 

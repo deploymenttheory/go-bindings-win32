@@ -100,8 +100,12 @@ func HidD_GetConfiguration(HidDeviceObject foundation.HANDLE, Configuration *HID
 }
 
 // HidD_GetFeature calls HID!HidD_GetFeature.
-func HidD_GetFeature(HidDeviceObject foundation.HANDLE, ReportBuffer unsafe.Pointer, ReportBufferLength uint32) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procHidD_GetFeature.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(ReportBuffer)), uintptr(ReportBufferLength))
+func HidD_GetFeature(HidDeviceObject foundation.HANDLE, ReportBuffer []byte) foundation.BOOLEAN {
+	var _ReportBuffer *byte
+	if len(ReportBuffer) > 0 {
+		_ReportBuffer = &ReportBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHidD_GetFeature.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(_ReportBuffer)), uintptr(len(ReportBuffer)))
 	return foundation.BOOLEAN(r1)
 }
 
@@ -111,26 +115,42 @@ func HidD_GetHidGuid(HidGuid *win32.GUID) {
 }
 
 // HidD_GetIndexedString calls HID!HidD_GetIndexedString.
-func HidD_GetIndexedString(HidDeviceObject foundation.HANDLE, StringIndex uint32, Buffer unsafe.Pointer, BufferLength uint32) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procHidD_GetIndexedString.Addr(), uintptr(HidDeviceObject), uintptr(StringIndex), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength))
+func HidD_GetIndexedString(HidDeviceObject foundation.HANDLE, StringIndex uint32, Buffer []byte) foundation.BOOLEAN {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHidD_GetIndexedString.Addr(), uintptr(HidDeviceObject), uintptr(StringIndex), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return foundation.BOOLEAN(r1)
 }
 
 // HidD_GetInputReport calls HID!HidD_GetInputReport.
-func HidD_GetInputReport(HidDeviceObject foundation.HANDLE, ReportBuffer unsafe.Pointer, ReportBufferLength uint32) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procHidD_GetInputReport.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(ReportBuffer)), uintptr(ReportBufferLength))
+func HidD_GetInputReport(HidDeviceObject foundation.HANDLE, ReportBuffer []byte) foundation.BOOLEAN {
+	var _ReportBuffer *byte
+	if len(ReportBuffer) > 0 {
+		_ReportBuffer = &ReportBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHidD_GetInputReport.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(_ReportBuffer)), uintptr(len(ReportBuffer)))
 	return foundation.BOOLEAN(r1)
 }
 
 // HidD_GetManufacturerString calls HID!HidD_GetManufacturerString.
-func HidD_GetManufacturerString(HidDeviceObject foundation.HANDLE, Buffer unsafe.Pointer, BufferLength uint32) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procHidD_GetManufacturerString.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength))
+func HidD_GetManufacturerString(HidDeviceObject foundation.HANDLE, Buffer []byte) foundation.BOOLEAN {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHidD_GetManufacturerString.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return foundation.BOOLEAN(r1)
 }
 
 // HidD_GetMsGenreDescriptor calls HID!HidD_GetMsGenreDescriptor.
-func HidD_GetMsGenreDescriptor(HidDeviceObject foundation.HANDLE, Buffer unsafe.Pointer, BufferLength uint32) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procHidD_GetMsGenreDescriptor.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength))
+func HidD_GetMsGenreDescriptor(HidDeviceObject foundation.HANDLE, Buffer []byte) foundation.BOOLEAN {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHidD_GetMsGenreDescriptor.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return foundation.BOOLEAN(r1)
 }
 
@@ -141,8 +161,12 @@ func HidD_GetNumInputBuffers(HidDeviceObject foundation.HANDLE, NumberBuffers *u
 }
 
 // HidD_GetPhysicalDescriptor calls HID!HidD_GetPhysicalDescriptor.
-func HidD_GetPhysicalDescriptor(HidDeviceObject foundation.HANDLE, Buffer unsafe.Pointer, BufferLength uint32) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procHidD_GetPhysicalDescriptor.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength))
+func HidD_GetPhysicalDescriptor(HidDeviceObject foundation.HANDLE, Buffer []byte) foundation.BOOLEAN {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHidD_GetPhysicalDescriptor.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return foundation.BOOLEAN(r1)
 }
 
@@ -153,14 +177,22 @@ func HidD_GetPreparsedData(HidDeviceObject foundation.HANDLE, PreparsedData *PHI
 }
 
 // HidD_GetProductString calls HID!HidD_GetProductString.
-func HidD_GetProductString(HidDeviceObject foundation.HANDLE, Buffer unsafe.Pointer, BufferLength uint32) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procHidD_GetProductString.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength))
+func HidD_GetProductString(HidDeviceObject foundation.HANDLE, Buffer []byte) foundation.BOOLEAN {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHidD_GetProductString.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return foundation.BOOLEAN(r1)
 }
 
 // HidD_GetSerialNumberString calls HID!HidD_GetSerialNumberString.
-func HidD_GetSerialNumberString(HidDeviceObject foundation.HANDLE, Buffer unsafe.Pointer, BufferLength uint32) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procHidD_GetSerialNumberString.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength))
+func HidD_GetSerialNumberString(HidDeviceObject foundation.HANDLE, Buffer []byte) foundation.BOOLEAN {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHidD_GetSerialNumberString.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return foundation.BOOLEAN(r1)
 }
 
@@ -171,8 +203,12 @@ func HidD_SetConfiguration(HidDeviceObject foundation.HANDLE, Configuration *HID
 }
 
 // HidD_SetFeature calls HID!HidD_SetFeature.
-func HidD_SetFeature(HidDeviceObject foundation.HANDLE, ReportBuffer unsafe.Pointer, ReportBufferLength uint32) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procHidD_SetFeature.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(ReportBuffer)), uintptr(ReportBufferLength))
+func HidD_SetFeature(HidDeviceObject foundation.HANDLE, ReportBuffer []byte) foundation.BOOLEAN {
+	var _ReportBuffer *byte
+	if len(ReportBuffer) > 0 {
+		_ReportBuffer = &ReportBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHidD_SetFeature.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(_ReportBuffer)), uintptr(len(ReportBuffer)))
 	return foundation.BOOLEAN(r1)
 }
 
@@ -183,8 +219,12 @@ func HidD_SetNumInputBuffers(HidDeviceObject foundation.HANDLE, NumberBuffers ui
 }
 
 // HidD_SetOutputReport calls HID!HidD_SetOutputReport.
-func HidD_SetOutputReport(HidDeviceObject foundation.HANDLE, ReportBuffer unsafe.Pointer, ReportBufferLength uint32) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procHidD_SetOutputReport.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(ReportBuffer)), uintptr(ReportBufferLength))
+func HidD_SetOutputReport(HidDeviceObject foundation.HANDLE, ReportBuffer []byte) foundation.BOOLEAN {
+	var _ReportBuffer *byte
+	if len(ReportBuffer) > 0 {
+		_ReportBuffer = &ReportBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHidD_SetOutputReport.Addr(), uintptr(HidDeviceObject), uintptr(unsafe.Pointer(_ReportBuffer)), uintptr(len(ReportBuffer)))
 	return foundation.BOOLEAN(r1)
 }
 

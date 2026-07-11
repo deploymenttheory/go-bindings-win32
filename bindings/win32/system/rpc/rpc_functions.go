@@ -2517,8 +2517,12 @@ func RpcErrorGetNumberOfRecords(EnumHandle *RPC_ERROR_ENUM_HANDLE, Records *int3
 // RpcErrorLoadErrorInfo calls RPCRT4!RpcErrorLoadErrorInfo.
 // https://learn.microsoft.com/windows/win32/api/rpcasync/nf-rpcasync-rpcerrorloaderrorinfo
 // Minimum OS: windows5.1.2600.
-func RpcErrorLoadErrorInfo(ErrorBlob unsafe.Pointer, BlobSize uintptr, EnumHandle *RPC_ERROR_ENUM_HANDLE) RPC_STATUS {
-	r1, _, _ := syscall.SyscallN(procRpcErrorLoadErrorInfo.Addr(), uintptr(unsafe.Pointer(ErrorBlob)), uintptr(BlobSize), uintptr(unsafe.Pointer(EnumHandle)))
+func RpcErrorLoadErrorInfo(ErrorBlob []byte, EnumHandle *RPC_ERROR_ENUM_HANDLE) RPC_STATUS {
+	var _ErrorBlob *byte
+	if len(ErrorBlob) > 0 {
+		_ErrorBlob = &ErrorBlob[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRpcErrorLoadErrorInfo.Addr(), uintptr(unsafe.Pointer(_ErrorBlob)), uintptr(len(ErrorBlob)), uintptr(unsafe.Pointer(EnumHandle)))
 	return RPC_STATUS(r1)
 }
 

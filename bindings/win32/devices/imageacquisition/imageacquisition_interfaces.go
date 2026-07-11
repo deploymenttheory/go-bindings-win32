@@ -649,8 +649,12 @@ func (self *IWiaItem) DumpTreeItemData(bstrData *foundation.BSTR) error {
 }
 
 // Diagnostic dispatches through IWiaItem's vtable slot 17.
-func (self *IWiaItem) Diagnostic(ulSize uint32, pBuffer *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(ulSize), uintptr(unsafe.Pointer(pBuffer)))
+func (self *IWiaItem) Diagnostic(pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -754,8 +758,12 @@ func (self *IWiaItem2) EnumRegisterEventInfo(lFlags int32, pEventGUID *win32.GUI
 }
 
 // Diagnostic dispatches through IWiaItem2's vtable slot 18.
-func (self *IWiaItem2) Diagnostic(ulSize uint32, pBuffer *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(ulSize), uintptr(unsafe.Pointer(pBuffer)))
+func (self *IWiaItem2) Diagnostic(pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -775,8 +783,16 @@ func (self *IWiaItemExtras) GetExtendedErrorInfo(bstrErrorText *foundation.BSTR)
 }
 
 // Escape dispatches through IWiaItemExtras's vtable slot 4.
-func (self *IWiaItemExtras) Escape(dwEscapeCode uint32, lpInData *byte, cbInDataSize uint32, pOutData *byte, dwOutDataSize uint32, pdwActualDataSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwEscapeCode), uintptr(unsafe.Pointer(lpInData)), uintptr(cbInDataSize), uintptr(unsafe.Pointer(pOutData)), uintptr(dwOutDataSize), uintptr(unsafe.Pointer(pdwActualDataSize)))
+func (self *IWiaItemExtras) Escape(dwEscapeCode uint32, lpInData []byte, pOutData []byte, pdwActualDataSize *uint32) error {
+	var _lpInData *byte
+	if len(lpInData) > 0 {
+		_lpInData = &lpInData[0]
+	}
+	var _pOutData *byte
+	if len(pOutData) > 0 {
+		_pOutData = &pOutData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwEscapeCode), uintptr(unsafe.Pointer(_lpInData)), uintptr(len(lpInData)), uintptr(unsafe.Pointer(_pOutData)), uintptr(len(pOutData)), uintptr(unsafe.Pointer(pdwActualDataSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1066,8 +1082,12 @@ func (self *IWiaPropertyStorage) WriteMultiple(cpspec uint32, rgpspec *systemcom
 }
 
 // DeleteMultiple dispatches through IWiaPropertyStorage's vtable slot 5.
-func (self *IWiaPropertyStorage) DeleteMultiple(cpspec uint32, rgpspec *systemcomstructuredstorage.PROPSPEC) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cpspec), uintptr(unsafe.Pointer(rgpspec)))
+func (self *IWiaPropertyStorage) DeleteMultiple(rgpspec []systemcomstructuredstorage.PROPSPEC) error {
+	var _rgpspec *systemcomstructuredstorage.PROPSPEC
+	if len(rgpspec) > 0 {
+		_rgpspec = &rgpspec[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(rgpspec)), uintptr(unsafe.Pointer(_rgpspec)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1084,8 +1104,12 @@ func (self *IWiaPropertyStorage) WritePropertyNames(cpropid uint32, rgpropid *ui
 }
 
 // DeletePropertyNames dispatches through IWiaPropertyStorage's vtable slot 8.
-func (self *IWiaPropertyStorage) DeletePropertyNames(cpropid uint32, rgpropid *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(cpropid), uintptr(unsafe.Pointer(rgpropid)))
+func (self *IWiaPropertyStorage) DeletePropertyNames(rgpropid []uint32) error {
+	var _rgpropid *uint32
+	if len(rgpropid) > 0 {
+		_rgpropid = &rgpropid[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(rgpropid)), uintptr(unsafe.Pointer(_rgpropid)))
 	return win32.HRESULTError(int32(r1))
 }
 

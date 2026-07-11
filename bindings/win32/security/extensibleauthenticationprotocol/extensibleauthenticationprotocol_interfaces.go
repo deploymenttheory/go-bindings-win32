@@ -120,14 +120,26 @@ func (self *IEAPProviderConfig) ServerInvokeConfigUI(dwEapTypeId uint32, uConnec
 }
 
 // RouterInvokeConfigUI dispatches through IEAPProviderConfig's vtable slot 6.
-func (self *IEAPProviderConfig) RouterInvokeConfigUI(dwEapTypeId uint32, uConnectionParam uintptr, hwndParent foundation.HWND, dwFlags uint32, pConnectionDataIn *byte, dwSizeOfConnectionDataIn uint32, ppConnectionDataOut **byte, pdwSizeOfConnectionDataOut *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwEapTypeId), uintptr(uConnectionParam), uintptr(hwndParent), uintptr(dwFlags), uintptr(unsafe.Pointer(pConnectionDataIn)), uintptr(dwSizeOfConnectionDataIn), uintptr(unsafe.Pointer(ppConnectionDataOut)), uintptr(unsafe.Pointer(pdwSizeOfConnectionDataOut)))
+func (self *IEAPProviderConfig) RouterInvokeConfigUI(dwEapTypeId uint32, uConnectionParam uintptr, hwndParent foundation.HWND, dwFlags uint32, pConnectionDataIn []byte, ppConnectionDataOut **byte, pdwSizeOfConnectionDataOut *uint32) error {
+	var _pConnectionDataIn *byte
+	if len(pConnectionDataIn) > 0 {
+		_pConnectionDataIn = &pConnectionDataIn[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwEapTypeId), uintptr(uConnectionParam), uintptr(hwndParent), uintptr(dwFlags), uintptr(unsafe.Pointer(_pConnectionDataIn)), uintptr(len(pConnectionDataIn)), uintptr(unsafe.Pointer(ppConnectionDataOut)), uintptr(unsafe.Pointer(pdwSizeOfConnectionDataOut)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RouterInvokeCredentialsUI dispatches through IEAPProviderConfig's vtable slot 7.
-func (self *IEAPProviderConfig) RouterInvokeCredentialsUI(dwEapTypeId uint32, uConnectionParam uintptr, hwndParent foundation.HWND, dwFlags uint32, pConnectionDataIn *byte, dwSizeOfConnectionDataIn uint32, pUserDataIn *byte, dwSizeOfUserDataIn uint32, ppUserDataOut **byte, pdwSizeOfUserDataOut *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwEapTypeId), uintptr(uConnectionParam), uintptr(hwndParent), uintptr(dwFlags), uintptr(unsafe.Pointer(pConnectionDataIn)), uintptr(dwSizeOfConnectionDataIn), uintptr(unsafe.Pointer(pUserDataIn)), uintptr(dwSizeOfUserDataIn), uintptr(unsafe.Pointer(ppUserDataOut)), uintptr(unsafe.Pointer(pdwSizeOfUserDataOut)))
+func (self *IEAPProviderConfig) RouterInvokeCredentialsUI(dwEapTypeId uint32, uConnectionParam uintptr, hwndParent foundation.HWND, dwFlags uint32, pConnectionDataIn []byte, pUserDataIn []byte, ppUserDataOut **byte, pdwSizeOfUserDataOut *uint32) error {
+	var _pConnectionDataIn *byte
+	if len(pConnectionDataIn) > 0 {
+		_pConnectionDataIn = &pConnectionDataIn[0]
+	}
+	var _pUserDataIn *byte
+	if len(pUserDataIn) > 0 {
+		_pUserDataIn = &pUserDataIn[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwEapTypeId), uintptr(uConnectionParam), uintptr(hwndParent), uintptr(dwFlags), uintptr(unsafe.Pointer(_pConnectionDataIn)), uintptr(len(pConnectionDataIn)), uintptr(unsafe.Pointer(_pUserDataIn)), uintptr(len(pUserDataIn)), uintptr(unsafe.Pointer(ppUserDataOut)), uintptr(unsafe.Pointer(pdwSizeOfUserDataOut)))
 	return win32.HRESULTError(int32(r1))
 }
 

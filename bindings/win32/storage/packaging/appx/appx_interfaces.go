@@ -922,8 +922,12 @@ type IAppxEncryptedPackageWriter2 struct {
 var IID_IAppxEncryptedPackageWriter2 = win32.GUID{Data1: 0x3e475447, Data2: 0x3a25, Data3: 0x40b5, Data4: [8]byte{0x8a, 0xd2, 0xf9, 0x53, 0xae, 0x50, 0xc9, 0x2d}}
 
 // AddPayloadFilesEncrypted dispatches through IAppxEncryptedPackageWriter2's vtable slot 3.
-func (self *IAppxEncryptedPackageWriter2) AddPayloadFilesEncrypted(fileCount uint32, payloadFiles *APPX_PACKAGE_WRITER_PAYLOAD_STREAM, memoryLimit uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(fileCount), uintptr(unsafe.Pointer(payloadFiles)), uintptr(memoryLimit))
+func (self *IAppxEncryptedPackageWriter2) AddPayloadFilesEncrypted(payloadFiles []APPX_PACKAGE_WRITER_PAYLOAD_STREAM, memoryLimit uint64) error {
+	var _payloadFiles *APPX_PACKAGE_WRITER_PAYLOAD_STREAM
+	if len(payloadFiles) > 0 {
+		_payloadFiles = &payloadFiles[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(payloadFiles)), uintptr(unsafe.Pointer(_payloadFiles)), uintptr(memoryLimit))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2388,8 +2392,12 @@ type IAppxPackageWriter3 struct {
 var IID_IAppxPackageWriter3 = win32.GUID{Data1: 0xa83aacd3, Data2: 0x41c0, Data3: 0x4501, Data4: [8]byte{0xb8, 0xa3, 0x74, 0x16, 0x4f, 0x50, 0xb2, 0xfd}}
 
 // AddPayloadFiles dispatches through IAppxPackageWriter3's vtable slot 3.
-func (self *IAppxPackageWriter3) AddPayloadFiles(fileCount uint32, payloadFiles *APPX_PACKAGE_WRITER_PAYLOAD_STREAM, memoryLimit uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(fileCount), uintptr(unsafe.Pointer(payloadFiles)), uintptr(memoryLimit))
+func (self *IAppxPackageWriter3) AddPayloadFiles(payloadFiles []APPX_PACKAGE_WRITER_PAYLOAD_STREAM, memoryLimit uint64) error {
+	var _payloadFiles *APPX_PACKAGE_WRITER_PAYLOAD_STREAM
+	if len(payloadFiles) > 0 {
+		_payloadFiles = &payloadFiles[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(payloadFiles)), uintptr(unsafe.Pointer(_payloadFiles)), uintptr(memoryLimit))
 	return win32.HRESULTError(int32(r1))
 }
 

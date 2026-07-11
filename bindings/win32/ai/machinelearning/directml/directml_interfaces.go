@@ -23,13 +23,21 @@ type IDMLBindingTable struct {
 var IID_IDMLBindingTable = win32.GUID{Data1: 0x29c687dc, Data2: 0xde74, Data3: 0x4e3b, Data4: [8]byte{0xab, 0x00, 0x11, 0x68, 0xf2, 0xfc, 0x3c, 0xfc}}
 
 // BindInputs dispatches through IDMLBindingTable's vtable slot 8.
-func (self *IDMLBindingTable) BindInputs(bindingCount uint32, bindings *DML_BINDING_DESC) {
-	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(bindingCount), uintptr(unsafe.Pointer(bindings)))
+func (self *IDMLBindingTable) BindInputs(bindings []DML_BINDING_DESC) {
+	var _bindings *DML_BINDING_DESC
+	if len(bindings) > 0 {
+		_bindings = &bindings[0]
+	}
+	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(bindings)), uintptr(unsafe.Pointer(_bindings)))
 }
 
 // BindOutputs dispatches through IDMLBindingTable's vtable slot 9.
-func (self *IDMLBindingTable) BindOutputs(bindingCount uint32, bindings *DML_BINDING_DESC) {
-	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(bindingCount), uintptr(unsafe.Pointer(bindings)))
+func (self *IDMLBindingTable) BindOutputs(bindings []DML_BINDING_DESC) {
+	var _bindings *DML_BINDING_DESC
+	if len(bindings) > 0 {
+		_bindings = &bindings[0]
+	}
+	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(bindings)), uintptr(unsafe.Pointer(_bindings)))
 }
 
 // BindTemporaryResource dispatches through IDMLBindingTable's vtable slot 10.
@@ -96,8 +104,16 @@ type IDMLDevice struct {
 var IID_IDMLDevice = win32.GUID{Data1: 0x6dbd6437, Data2: 0x96fd, Data3: 0x423f, Data4: [8]byte{0xa9, 0x8c, 0xae, 0x5e, 0x7c, 0x2a, 0x57, 0x3f}}
 
 // CheckFeatureSupport dispatches through IDMLDevice's vtable slot 7.
-func (self *IDMLDevice) CheckFeatureSupport(feature DML_FEATURE, featureQueryDataSize uint32, featureQueryData unsafe.Pointer, featureSupportDataSize uint32, featureSupportData unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(feature), uintptr(featureQueryDataSize), uintptr(unsafe.Pointer(featureQueryData)), uintptr(featureSupportDataSize), uintptr(unsafe.Pointer(featureSupportData)))
+func (self *IDMLDevice) CheckFeatureSupport(feature DML_FEATURE, featureQueryData []byte, featureSupportData []byte) error {
+	var _featureQueryData *byte
+	if len(featureQueryData) > 0 {
+		_featureQueryData = &featureQueryData[0]
+	}
+	var _featureSupportData *byte
+	if len(featureSupportData) > 0 {
+		_featureSupportData = &featureSupportData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(feature), uintptr(len(featureQueryData)), uintptr(unsafe.Pointer(_featureQueryData)), uintptr(len(featureSupportData)), uintptr(unsafe.Pointer(_featureSupportData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -114,8 +130,12 @@ func (self *IDMLDevice) CompileOperator(op *IDMLOperator, flags DML_EXECUTION_FL
 }
 
 // CreateOperatorInitializer dispatches through IDMLDevice's vtable slot 10.
-func (self *IDMLDevice) CreateOperatorInitializer(operatorCount uint32, operators **IDMLCompiledOperator, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(operatorCount), uintptr(unsafe.Pointer(operators)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func (self *IDMLDevice) CreateOperatorInitializer(operators []*IDMLCompiledOperator, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	var _operators **IDMLCompiledOperator
+	if len(operators) > 0 {
+		_operators = &operators[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(len(operators)), uintptr(unsafe.Pointer(_operators)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -132,14 +152,22 @@ func (self *IDMLDevice) CreateBindingTable(desc *DML_BINDING_TABLE_DESC, riid *w
 }
 
 // Evict dispatches through IDMLDevice's vtable slot 13.
-func (self *IDMLDevice) Evict(count uint32, ppObjects **IDMLPageable) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(count), uintptr(unsafe.Pointer(ppObjects)))
+func (self *IDMLDevice) Evict(ppObjects []*IDMLPageable) error {
+	var _ppObjects **IDMLPageable
+	if len(ppObjects) > 0 {
+		_ppObjects = &ppObjects[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(len(ppObjects)), uintptr(unsafe.Pointer(_ppObjects)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // MakeResident dispatches through IDMLDevice's vtable slot 14.
-func (self *IDMLDevice) MakeResident(count uint32, ppObjects **IDMLPageable) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(count), uintptr(unsafe.Pointer(ppObjects)))
+func (self *IDMLDevice) MakeResident(ppObjects []*IDMLPageable) error {
+	var _ppObjects **IDMLPageable
+	if len(ppObjects) > 0 {
+		_ppObjects = &ppObjects[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(len(ppObjects)), uintptr(unsafe.Pointer(_ppObjects)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -210,8 +238,12 @@ func (self *IDMLObject) GetPrivateData(guid *win32.GUID, dataSize *uint32, data 
 }
 
 // SetPrivateData dispatches through IDMLObject's vtable slot 4.
-func (self *IDMLObject) SetPrivateData(guid *win32.GUID, dataSize uint32, data unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(dataSize), uintptr(unsafe.Pointer(data)))
+func (self *IDMLObject) SetPrivateData(guid *win32.GUID, data []byte) error {
+	var _data *byte
+	if len(data) > 0 {
+		_data = &data[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(len(data)), uintptr(unsafe.Pointer(_data)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -247,8 +279,12 @@ type IDMLOperatorInitializer struct {
 var IID_IDMLOperatorInitializer = win32.GUID{Data1: 0x427c1113, Data2: 0x435c, Data3: 0x469c, Data4: [8]byte{0x86, 0x76, 0x4d, 0x5d, 0xd0, 0x72, 0xf8, 0x13}}
 
 // Reset dispatches through IDMLOperatorInitializer's vtable slot 9.
-func (self *IDMLOperatorInitializer) Reset(operatorCount uint32, operators **IDMLCompiledOperator) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(operatorCount), uintptr(unsafe.Pointer(operators)))
+func (self *IDMLOperatorInitializer) Reset(operators []*IDMLCompiledOperator) error {
+	var _operators **IDMLCompiledOperator
+	if len(operators) > 0 {
+		_operators = &operators[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(operators)), uintptr(unsafe.Pointer(_operators)))
 	return win32.HRESULTError(int32(r1))
 }
 

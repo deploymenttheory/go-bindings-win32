@@ -27,8 +27,12 @@ type IComponentAuthenticate struct {
 var IID_IComponentAuthenticate = win32.GUID{Data1: 0xa9889c00, Data2: 0x6d2b, Data3: 0x11d3, Data4: [8]byte{0x84, 0x96, 0x00, 0xc0, 0x4f, 0x79, 0xdb, 0xc0}}
 
 // SACAuth dispatches through IComponentAuthenticate's vtable slot 3.
-func (self *IComponentAuthenticate) SACAuth(dwProtocolID uint32, dwPass uint32, pbDataIn *byte, dwDataInLen uint32, ppbDataOut **byte, pdwDataOutLen *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwProtocolID), uintptr(dwPass), uintptr(unsafe.Pointer(pbDataIn)), uintptr(dwDataInLen), uintptr(unsafe.Pointer(ppbDataOut)), uintptr(unsafe.Pointer(pdwDataOutLen)))
+func (self *IComponentAuthenticate) SACAuth(dwProtocolID uint32, dwPass uint32, pbDataIn []byte, ppbDataOut **byte, pdwDataOutLen *uint32) error {
+	var _pbDataIn *byte
+	if len(pbDataIn) > 0 {
+		_pbDataIn = &pbDataIn[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwProtocolID), uintptr(dwPass), uintptr(unsafe.Pointer(_pbDataIn)), uintptr(len(pbDataIn)), uintptr(unsafe.Pointer(ppbDataOut)), uintptr(unsafe.Pointer(pdwDataOutLen)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -177,8 +181,12 @@ func (self *IMDSPDevice3) GetFormatCapability(format WMDM_FORMATCODE, pFormatSup
 }
 
 // DeviceIoControl dispatches through IMDSPDevice3's vtable slot 21.
-func (self *IMDSPDevice3) DeviceIoControl(dwIoControlCode uint32, lpInBuffer *byte, nInBufferSize uint32, lpOutBuffer *byte, pnOutBufferSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dwIoControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(unsafe.Pointer(pnOutBufferSize)))
+func (self *IMDSPDevice3) DeviceIoControl(dwIoControlCode uint32, lpInBuffer []byte, lpOutBuffer *byte, pnOutBufferSize *uint32) error {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dwIoControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(unsafe.Pointer(pnOutBufferSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -273,8 +281,12 @@ type IMDSPEnumDevice struct {
 var IID_IMDSPEnumDevice = win32.GUID{Data1: 0x1dcb3a11, Data2: 0x33ed, Data3: 0x11d3, Data4: [8]byte{0x84, 0x70, 0x00, 0xc0, 0x4f, 0x79, 0xdb, 0xc0}}
 
 // Next dispatches through IMDSPEnumDevice's vtable slot 3.
-func (self *IMDSPEnumDevice) Next(celt uint32, ppDevice **IMDSPDevice, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppDevice)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IMDSPEnumDevice) Next(ppDevice []*IMDSPDevice, pceltFetched *uint32) error {
+	var _ppDevice **IMDSPDevice
+	if len(ppDevice) > 0 {
+		_ppDevice = &ppDevice[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppDevice)), uintptr(unsafe.Pointer(_ppDevice)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -306,8 +318,12 @@ type IMDSPEnumStorage struct {
 var IID_IMDSPEnumStorage = win32.GUID{Data1: 0x1dcb3a15, Data2: 0x33ed, Data3: 0x11d3, Data4: [8]byte{0x84, 0x70, 0x00, 0xc0, 0x4f, 0x79, 0xdb, 0xc0}}
 
 // Next dispatches through IMDSPEnumStorage's vtable slot 3.
-func (self *IMDSPEnumStorage) Next(celt uint32, ppStorage **IMDSPStorage, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppStorage)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IMDSPEnumStorage) Next(ppStorage []*IMDSPStorage, pceltFetched *uint32) error {
+	var _ppStorage **IMDSPStorage
+	if len(ppStorage) > 0 {
+		_ppStorage = &ppStorage[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppStorage)), uintptr(unsafe.Pointer(_ppStorage)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -610,8 +626,12 @@ type IMDSPStorage4 struct {
 var IID_IMDSPStorage4 = win32.GUID{Data1: 0x3133b2c4, Data2: 0x515c, Data3: 0x481b, Data4: [8]byte{0xb1, 0xce, 0x39, 0x32, 0x7e, 0xcb, 0x4f, 0x74}}
 
 // SetReferences dispatches through IMDSPStorage4's vtable slot 19.
-func (self *IMDSPStorage4) SetReferences(dwRefs uint32, ppISPStorage **IMDSPStorage) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(dwRefs), uintptr(unsafe.Pointer(ppISPStorage)))
+func (self *IMDSPStorage4) SetReferences(ppISPStorage []*IMDSPStorage) error {
+	var _ppISPStorage **IMDSPStorage
+	if len(ppISPStorage) > 0 {
+		_ppISPStorage = &ppISPStorage[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(len(ppISPStorage)), uintptr(unsafe.Pointer(_ppISPStorage)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -629,8 +649,12 @@ func (self *IMDSPStorage4) CreateStorageWithMetadata(dwAttributes uint32, pwszNa
 }
 
 // GetSpecifiedMetadata dispatches through IMDSPStorage4's vtable slot 22.
-func (self *IMDSPStorage4) GetSpecifiedMetadata(cProperties uint32, ppwszPropNames *foundation.PWSTR, pMetadata *IWMDMMetaData) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(cProperties), uintptr(unsafe.Pointer(ppwszPropNames)), uintptr(unsafe.Pointer(pMetadata)))
+func (self *IMDSPStorage4) GetSpecifiedMetadata(ppwszPropNames []foundation.PWSTR, pMetadata *IWMDMMetaData) error {
+	var _ppwszPropNames *foundation.PWSTR
+	if len(ppwszPropNames) > 0 {
+		_ppwszPropNames = &ppwszPropNames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(len(ppwszPropNames)), uintptr(unsafe.Pointer(_ppwszPropNames)), uintptr(unsafe.Pointer(pMetadata)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -802,8 +826,12 @@ type ISCPSecureExchange struct {
 var IID_ISCPSecureExchange = win32.GUID{Data1: 0x1dcb3a0e, Data2: 0x33ed, Data3: 0x11d3, Data4: [8]byte{0x84, 0x70, 0x00, 0xc0, 0x4f, 0x79, 0xdb, 0xc0}}
 
 // TransferContainerData dispatches through ISCPSecureExchange's vtable slot 3.
-func (self *ISCPSecureExchange) TransferContainerData(pData *byte, dwSize uint32, pfuReadyFlags *uint32, abMac *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(dwSize), uintptr(unsafe.Pointer(pfuReadyFlags)), uintptr(unsafe.Pointer(abMac)))
+func (self *ISCPSecureExchange) TransferContainerData(pData []byte, pfuReadyFlags *uint32, abMac *byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pfuReadyFlags)), uintptr(unsafe.Pointer(abMac)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -829,8 +857,12 @@ type ISCPSecureExchange2 struct {
 var IID_ISCPSecureExchange2 = win32.GUID{Data1: 0x6c62fc7b, Data2: 0x2690, Data3: 0x483f, Data4: [8]byte{0x9d, 0x44, 0x0a, 0x20, 0xcb, 0x35, 0x57, 0x7c}}
 
 // TransferContainerData2 dispatches through ISCPSecureExchange2's vtable slot 6.
-func (self *ISCPSecureExchange2) TransferContainerData2(pData *byte, dwSize uint32, pProgressCallback *IWMDMProgress3, pfuReadyFlags *uint32, abMac *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(dwSize), uintptr(unsafe.Pointer(pProgressCallback)), uintptr(unsafe.Pointer(pfuReadyFlags)), uintptr(unsafe.Pointer(abMac)))
+func (self *ISCPSecureExchange2) TransferContainerData2(pData []byte, pProgressCallback *IWMDMProgress3, pfuReadyFlags *uint32, abMac *byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pProgressCallback)), uintptr(unsafe.Pointer(pfuReadyFlags)), uintptr(unsafe.Pointer(abMac)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -844,8 +876,12 @@ type ISCPSecureExchange3 struct {
 var IID_ISCPSecureExchange3 = win32.GUID{Data1: 0xab4e77e4, Data2: 0x8908, Data3: 0x4b17, Data4: [8]byte{0xbd, 0x2a, 0xb1, 0xdb, 0xe6, 0xdd, 0x69, 0xe1}}
 
 // TransferContainerDataOnClearChannel dispatches through ISCPSecureExchange3's vtable slot 7.
-func (self *ISCPSecureExchange3) TransferContainerDataOnClearChannel(pDevice *IMDSPDevice, pData *byte, dwSize uint32, pProgressCallback *IWMDMProgress3, pfuReadyFlags *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pData)), uintptr(dwSize), uintptr(unsafe.Pointer(pProgressCallback)), uintptr(unsafe.Pointer(pfuReadyFlags)))
+func (self *ISCPSecureExchange3) TransferContainerDataOnClearChannel(pDevice *IMDSPDevice, pData []byte, pProgressCallback *IWMDMProgress3, pfuReadyFlags *uint32) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pProgressCallback)), uintptr(unsafe.Pointer(pfuReadyFlags)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -877,21 +913,41 @@ func (self *ISCPSecureQuery) GetDataDemands(pfuFlags *uint32, pdwMinRightsData *
 }
 
 // ExamineData dispatches through ISCPSecureQuery's vtable slot 4.
-func (self *ISCPSecureQuery) ExamineData(fuFlags uint32, pwszExtension string, pData *byte, dwSize uint32, abMac *byte) error {
+func (self *ISCPSecureQuery) ExamineData(fuFlags uint32, pwszExtension string, pData []byte, abMac *byte) error {
 	_pwszExtension := win32.UTF16Ptr(pwszExtension)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fuFlags), uintptr(unsafe.Pointer(_pwszExtension)), uintptr(unsafe.Pointer(pData)), uintptr(dwSize), uintptr(unsafe.Pointer(abMac)))
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(fuFlags), uintptr(unsafe.Pointer(_pwszExtension)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(abMac)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // MakeDecision dispatches through ISCPSecureQuery's vtable slot 5.
-func (self *ISCPSecureQuery) MakeDecision(fuFlags uint32, pData *byte, dwSize uint32, dwAppSec uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStorageGlobals *IMDSPStorageGlobals, ppExchange **ISCPSecureExchange, abMac *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(fuFlags), uintptr(unsafe.Pointer(pData)), uintptr(dwSize), uintptr(dwAppSec), uintptr(unsafe.Pointer(pbSPSessionKey)), uintptr(dwSessionKeyLen), uintptr(unsafe.Pointer(pStorageGlobals)), uintptr(unsafe.Pointer(ppExchange)), uintptr(unsafe.Pointer(abMac)))
+func (self *ISCPSecureQuery) MakeDecision(fuFlags uint32, pData []byte, dwAppSec uint32, pbSPSessionKey []byte, pStorageGlobals *IMDSPStorageGlobals, ppExchange **ISCPSecureExchange, abMac *byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	var _pbSPSessionKey *byte
+	if len(pbSPSessionKey) > 0 {
+		_pbSPSessionKey = &pbSPSessionKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(fuFlags), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(dwAppSec), uintptr(unsafe.Pointer(_pbSPSessionKey)), uintptr(len(pbSPSessionKey)), uintptr(unsafe.Pointer(pStorageGlobals)), uintptr(unsafe.Pointer(ppExchange)), uintptr(unsafe.Pointer(abMac)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetRights dispatches through ISCPSecureQuery's vtable slot 6.
-func (self *ISCPSecureQuery) GetRights(pData *byte, dwSize uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStgGlobals *IMDSPStorageGlobals, ppRights **WMDMRIGHTS, pnRightsCount *uint32, abMac *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(dwSize), uintptr(unsafe.Pointer(pbSPSessionKey)), uintptr(dwSessionKeyLen), uintptr(unsafe.Pointer(pStgGlobals)), uintptr(unsafe.Pointer(ppRights)), uintptr(unsafe.Pointer(pnRightsCount)), uintptr(unsafe.Pointer(abMac)))
+func (self *ISCPSecureQuery) GetRights(pData []byte, pbSPSessionKey []byte, pStgGlobals *IMDSPStorageGlobals, ppRights **WMDMRIGHTS, pnRightsCount *uint32, abMac *byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	var _pbSPSessionKey *byte
+	if len(pbSPSessionKey) > 0 {
+		_pbSPSessionKey = &pbSPSessionKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pbSPSessionKey)), uintptr(len(pbSPSessionKey)), uintptr(unsafe.Pointer(pStgGlobals)), uintptr(unsafe.Pointer(ppRights)), uintptr(unsafe.Pointer(pnRightsCount)), uintptr(unsafe.Pointer(abMac)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -905,8 +961,24 @@ type ISCPSecureQuery2 struct {
 var IID_ISCPSecureQuery2 = win32.GUID{Data1: 0xebe17e25, Data2: 0x4fd7, Data3: 0x4632, Data4: [8]byte{0xaf, 0x46, 0x6d, 0x93, 0xd4, 0xfc, 0xc7, 0x2e}}
 
 // MakeDecision2 dispatches through ISCPSecureQuery2's vtable slot 7.
-func (self *ISCPSecureQuery2) MakeDecision2(fuFlags uint32, pData *byte, dwSize uint32, dwAppSec uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStorageGlobals *IMDSPStorageGlobals, pAppCertApp *byte, dwAppCertAppLen uint32, pAppCertSP *byte, dwAppCertSPLen uint32, pszRevocationURL *foundation.PWSTR, pdwRevocationURLLen *uint32, pdwRevocationBitFlag *uint32, pqwFileSize *uint64, pUnknown *systemcom.IUnknown, ppExchange **ISCPSecureExchange, abMac *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fuFlags), uintptr(unsafe.Pointer(pData)), uintptr(dwSize), uintptr(dwAppSec), uintptr(unsafe.Pointer(pbSPSessionKey)), uintptr(dwSessionKeyLen), uintptr(unsafe.Pointer(pStorageGlobals)), uintptr(unsafe.Pointer(pAppCertApp)), uintptr(dwAppCertAppLen), uintptr(unsafe.Pointer(pAppCertSP)), uintptr(dwAppCertSPLen), uintptr(unsafe.Pointer(pszRevocationURL)), uintptr(unsafe.Pointer(pdwRevocationURLLen)), uintptr(unsafe.Pointer(pdwRevocationBitFlag)), uintptr(unsafe.Pointer(pqwFileSize)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(ppExchange)), uintptr(unsafe.Pointer(abMac)))
+func (self *ISCPSecureQuery2) MakeDecision2(fuFlags uint32, pData []byte, dwAppSec uint32, pbSPSessionKey []byte, pStorageGlobals *IMDSPStorageGlobals, pAppCertApp []byte, pAppCertSP []byte, pszRevocationURL *foundation.PWSTR, pdwRevocationURLLen *uint32, pdwRevocationBitFlag *uint32, pqwFileSize *uint64, pUnknown *systemcom.IUnknown, ppExchange **ISCPSecureExchange, abMac *byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	var _pbSPSessionKey *byte
+	if len(pbSPSessionKey) > 0 {
+		_pbSPSessionKey = &pbSPSessionKey[0]
+	}
+	var _pAppCertApp *byte
+	if len(pAppCertApp) > 0 {
+		_pAppCertApp = &pAppCertApp[0]
+	}
+	var _pAppCertSP *byte
+	if len(pAppCertSP) > 0 {
+		_pAppCertSP = &pAppCertSP[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(fuFlags), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(dwAppSec), uintptr(unsafe.Pointer(_pbSPSessionKey)), uintptr(len(pbSPSessionKey)), uintptr(unsafe.Pointer(pStorageGlobals)), uintptr(unsafe.Pointer(_pAppCertApp)), uintptr(len(pAppCertApp)), uintptr(unsafe.Pointer(_pAppCertSP)), uintptr(len(pAppCertSP)), uintptr(unsafe.Pointer(pszRevocationURL)), uintptr(unsafe.Pointer(pdwRevocationURLLen)), uintptr(unsafe.Pointer(pdwRevocationBitFlag)), uintptr(unsafe.Pointer(pqwFileSize)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(ppExchange)), uintptr(unsafe.Pointer(abMac)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -920,14 +992,38 @@ type ISCPSecureQuery3 struct {
 var IID_ISCPSecureQuery3 = win32.GUID{Data1: 0xb7edd1a2, Data2: 0x4dab, Data3: 0x484b, Data4: [8]byte{0xb3, 0xc5, 0xad, 0x39, 0xb8, 0xb4, 0xc0, 0xb1}}
 
 // GetRightsOnClearChannel dispatches through ISCPSecureQuery3's vtable slot 8.
-func (self *ISCPSecureQuery3) GetRightsOnClearChannel(pData *byte, dwSize uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStgGlobals *IMDSPStorageGlobals, pProgressCallback *IWMDMProgress3, ppRights **WMDMRIGHTS, pnRightsCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(dwSize), uintptr(unsafe.Pointer(pbSPSessionKey)), uintptr(dwSessionKeyLen), uintptr(unsafe.Pointer(pStgGlobals)), uintptr(unsafe.Pointer(pProgressCallback)), uintptr(unsafe.Pointer(ppRights)), uintptr(unsafe.Pointer(pnRightsCount)))
+func (self *ISCPSecureQuery3) GetRightsOnClearChannel(pData []byte, pbSPSessionKey []byte, pStgGlobals *IMDSPStorageGlobals, pProgressCallback *IWMDMProgress3, ppRights **WMDMRIGHTS, pnRightsCount *uint32) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	var _pbSPSessionKey *byte
+	if len(pbSPSessionKey) > 0 {
+		_pbSPSessionKey = &pbSPSessionKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pbSPSessionKey)), uintptr(len(pbSPSessionKey)), uintptr(unsafe.Pointer(pStgGlobals)), uintptr(unsafe.Pointer(pProgressCallback)), uintptr(unsafe.Pointer(ppRights)), uintptr(unsafe.Pointer(pnRightsCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // MakeDecisionOnClearChannel dispatches through ISCPSecureQuery3's vtable slot 9.
-func (self *ISCPSecureQuery3) MakeDecisionOnClearChannel(fuFlags uint32, pData *byte, dwSize uint32, dwAppSec uint32, pbSPSessionKey *byte, dwSessionKeyLen uint32, pStorageGlobals *IMDSPStorageGlobals, pProgressCallback *IWMDMProgress3, pAppCertApp *byte, dwAppCertAppLen uint32, pAppCertSP *byte, dwAppCertSPLen uint32, pszRevocationURL *foundation.PWSTR, pdwRevocationURLLen *uint32, pdwRevocationBitFlag *uint32, pqwFileSize *uint64, pUnknown *systemcom.IUnknown, ppExchange **ISCPSecureExchange) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fuFlags), uintptr(unsafe.Pointer(pData)), uintptr(dwSize), uintptr(dwAppSec), uintptr(unsafe.Pointer(pbSPSessionKey)), uintptr(dwSessionKeyLen), uintptr(unsafe.Pointer(pStorageGlobals)), uintptr(unsafe.Pointer(pProgressCallback)), uintptr(unsafe.Pointer(pAppCertApp)), uintptr(dwAppCertAppLen), uintptr(unsafe.Pointer(pAppCertSP)), uintptr(dwAppCertSPLen), uintptr(unsafe.Pointer(pszRevocationURL)), uintptr(unsafe.Pointer(pdwRevocationURLLen)), uintptr(unsafe.Pointer(pdwRevocationBitFlag)), uintptr(unsafe.Pointer(pqwFileSize)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(ppExchange)))
+func (self *ISCPSecureQuery3) MakeDecisionOnClearChannel(fuFlags uint32, pData []byte, dwAppSec uint32, pbSPSessionKey []byte, pStorageGlobals *IMDSPStorageGlobals, pProgressCallback *IWMDMProgress3, pAppCertApp []byte, pAppCertSP []byte, pszRevocationURL *foundation.PWSTR, pdwRevocationURLLen *uint32, pdwRevocationBitFlag *uint32, pqwFileSize *uint64, pUnknown *systemcom.IUnknown, ppExchange **ISCPSecureExchange) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	var _pbSPSessionKey *byte
+	if len(pbSPSessionKey) > 0 {
+		_pbSPSessionKey = &pbSPSessionKey[0]
+	}
+	var _pAppCertApp *byte
+	if len(pAppCertApp) > 0 {
+		_pAppCertApp = &pAppCertApp[0]
+	}
+	var _pAppCertSP *byte
+	if len(pAppCertSP) > 0 {
+		_pAppCertSP = &pAppCertSP[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fuFlags), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(dwAppSec), uintptr(unsafe.Pointer(_pbSPSessionKey)), uintptr(len(pbSPSessionKey)), uintptr(unsafe.Pointer(pStorageGlobals)), uintptr(unsafe.Pointer(pProgressCallback)), uintptr(unsafe.Pointer(_pAppCertApp)), uintptr(len(pAppCertApp)), uintptr(unsafe.Pointer(_pAppCertSP)), uintptr(len(pAppCertSP)), uintptr(unsafe.Pointer(pszRevocationURL)), uintptr(unsafe.Pointer(pdwRevocationURLLen)), uintptr(unsafe.Pointer(pdwRevocationBitFlag)), uintptr(unsafe.Pointer(pqwFileSize)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(ppExchange)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -941,14 +1037,22 @@ type ISCPSession struct {
 var IID_ISCPSession = win32.GUID{Data1: 0x88a3e6ed, Data2: 0xeee4, Data3: 0x4619, Data4: [8]byte{0xbb, 0xb3, 0xfd, 0x4f, 0xb6, 0x27, 0x15, 0xd1}}
 
 // BeginSession dispatches through ISCPSession's vtable slot 3.
-func (self *ISCPSession) BeginSession(pIDevice *IMDSPDevice, pCtx *byte, dwSizeCtx uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIDevice)), uintptr(unsafe.Pointer(pCtx)), uintptr(dwSizeCtx))
+func (self *ISCPSession) BeginSession(pIDevice *IMDSPDevice, pCtx []byte) error {
+	var _pCtx *byte
+	if len(pCtx) > 0 {
+		_pCtx = &pCtx[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIDevice)), uintptr(unsafe.Pointer(_pCtx)), uintptr(len(pCtx)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // EndSession dispatches through ISCPSession's vtable slot 4.
-func (self *ISCPSession) EndSession(pCtx *byte, dwSizeCtx uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCtx)), uintptr(dwSizeCtx))
+func (self *ISCPSession) EndSession(pCtx []byte) error {
+	var _pCtx *byte
+	if len(pCtx) > 0 {
+		_pCtx = &pCtx[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pCtx)), uintptr(len(pCtx)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1097,8 +1201,12 @@ func (self *IWMDMDevice3) GetFormatCapability(format WMDM_FORMATCODE, pFormatSup
 }
 
 // DeviceIoControl dispatches through IWMDMDevice3's vtable slot 21.
-func (self *IWMDMDevice3) DeviceIoControl(dwIoControlCode uint32, lpInBuffer *byte, nInBufferSize uint32, lpOutBuffer *byte, pnOutBufferSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dwIoControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(unsafe.Pointer(pnOutBufferSize)))
+func (self *IWMDMDevice3) DeviceIoControl(dwIoControlCode uint32, lpInBuffer []byte, lpOutBuffer *byte, pnOutBufferSize *uint32) error {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dwIoControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(unsafe.Pointer(pnOutBufferSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1176,14 +1284,22 @@ type IWMDMDeviceSession struct {
 var IID_IWMDMDeviceSession = win32.GUID{Data1: 0x82af0a65, Data2: 0x9d96, Data3: 0x412c, Data4: [8]byte{0x83, 0xe5, 0x3c, 0x43, 0xe4, 0xb0, 0x6c, 0xc7}}
 
 // BeginSession dispatches through IWMDMDeviceSession's vtable slot 3.
-func (self *IWMDMDeviceSession) BeginSession(type_ WMDM_SESSION_TYPE, pCtx *byte, dwSizeCtx uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(pCtx)), uintptr(dwSizeCtx))
+func (self *IWMDMDeviceSession) BeginSession(type_ WMDM_SESSION_TYPE, pCtx []byte) error {
+	var _pCtx *byte
+	if len(pCtx) > 0 {
+		_pCtx = &pCtx[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(_pCtx)), uintptr(len(pCtx)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // EndSession dispatches through IWMDMDeviceSession's vtable slot 4.
-func (self *IWMDMDeviceSession) EndSession(type_ WMDM_SESSION_TYPE, pCtx *byte, dwSizeCtx uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(pCtx)), uintptr(dwSizeCtx))
+func (self *IWMDMDeviceSession) EndSession(type_ WMDM_SESSION_TYPE, pCtx []byte) error {
+	var _pCtx *byte
+	if len(pCtx) > 0 {
+		_pCtx = &pCtx[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(_pCtx)), uintptr(len(pCtx)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1197,8 +1313,12 @@ type IWMDMEnumDevice struct {
 var IID_IWMDMEnumDevice = win32.GUID{Data1: 0x1dcb3a01, Data2: 0x33ed, Data3: 0x11d3, Data4: [8]byte{0x84, 0x70, 0x00, 0xc0, 0x4f, 0x79, 0xdb, 0xc0}}
 
 // Next dispatches through IWMDMEnumDevice's vtable slot 3.
-func (self *IWMDMEnumDevice) Next(celt uint32, ppDevice **IWMDMDevice, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppDevice)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IWMDMEnumDevice) Next(ppDevice []*IWMDMDevice, pceltFetched *uint32) error {
+	var _ppDevice **IWMDMDevice
+	if len(ppDevice) > 0 {
+		_ppDevice = &ppDevice[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppDevice)), uintptr(unsafe.Pointer(_ppDevice)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1230,8 +1350,12 @@ type IWMDMEnumStorage struct {
 var IID_IWMDMEnumStorage = win32.GUID{Data1: 0x1dcb3a05, Data2: 0x33ed, Data3: 0x11d3, Data4: [8]byte{0x84, 0x70, 0x00, 0xc0, 0x4f, 0x79, 0xdb, 0xc0}}
 
 // Next dispatches through IWMDMEnumStorage's vtable slot 3.
-func (self *IWMDMEnumStorage) Next(celt uint32, ppStorage **IWMDMStorage, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppStorage)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IWMDMEnumStorage) Next(ppStorage []*IWMDMStorage, pceltFetched *uint32) error {
+	var _ppStorage **IWMDMStorage
+	if len(ppStorage) > 0 {
+		_ppStorage = &ppStorage[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppStorage)), uintptr(unsafe.Pointer(_ppStorage)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1327,9 +1451,13 @@ type IWMDMMetaData struct {
 var IID_IWMDMMetaData = win32.GUID{Data1: 0xec3b0663, Data2: 0x0951, Data3: 0x460a, Data4: [8]byte{0x9a, 0x80, 0x0d, 0xce, 0xed, 0x3c, 0x04, 0x3c}}
 
 // AddItem dispatches through IWMDMMetaData's vtable slot 3.
-func (self *IWMDMMetaData) AddItem(Type WMDM_TAG_DATATYPE, pwszTagName string, pValue *byte, iLength uint32) error {
+func (self *IWMDMMetaData) AddItem(Type WMDM_TAG_DATATYPE, pwszTagName string, pValue []byte) error {
 	_pwszTagName := win32.UTF16Ptr(pwszTagName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(_pwszTagName)), uintptr(unsafe.Pointer(pValue)), uintptr(iLength))
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(_pwszTagName)), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1710,8 +1838,12 @@ func (self *IWMDMStorage3) CreateEmptyMetadataObject(ppMetadata **IWMDMMetaData)
 }
 
 // SetEnumPreference dispatches through IWMDMStorage3's vtable slot 18.
-func (self *IWMDMStorage3) SetEnumPreference(pMode *WMDM_STORAGE_ENUM_MODE, nViews uint32, pViews *WMDMMetadataView) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMode)), uintptr(nViews), uintptr(unsafe.Pointer(pViews)))
+func (self *IWMDMStorage3) SetEnumPreference(pMode *WMDM_STORAGE_ENUM_MODE, pViews []WMDMMetadataView) error {
+	var _pViews *WMDMMetadataView
+	if len(pViews) > 0 {
+		_pViews = &pViews[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMode)), uintptr(len(pViews)), uintptr(unsafe.Pointer(_pViews)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1725,8 +1857,12 @@ type IWMDMStorage4 struct {
 var IID_IWMDMStorage4 = win32.GUID{Data1: 0xc225bac5, Data2: 0xa03a, Data3: 0x40b8, Data4: [8]byte{0x9a, 0x23, 0x91, 0xcf, 0x47, 0x8c, 0x64, 0xa6}}
 
 // SetReferences dispatches through IWMDMStorage4's vtable slot 19.
-func (self *IWMDMStorage4) SetReferences(dwRefs uint32, ppIWMDMStorage **IWMDMStorage) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(dwRefs), uintptr(unsafe.Pointer(ppIWMDMStorage)))
+func (self *IWMDMStorage4) SetReferences(ppIWMDMStorage []*IWMDMStorage) error {
+	var _ppIWMDMStorage **IWMDMStorage
+	if len(ppIWMDMStorage) > 0 {
+		_ppIWMDMStorage = &ppIWMDMStorage[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(len(ppIWMDMStorage)), uintptr(unsafe.Pointer(_ppIWMDMStorage)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1743,8 +1879,12 @@ func (self *IWMDMStorage4) GetRightsWithProgress(pIProgressCallback *IWMDMProgre
 }
 
 // GetSpecifiedMetadata dispatches through IWMDMStorage4's vtable slot 22.
-func (self *IWMDMStorage4) GetSpecifiedMetadata(cProperties uint32, ppwszPropNames *foundation.PWSTR, ppMetadata **IWMDMMetaData) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(cProperties), uintptr(unsafe.Pointer(ppwszPropNames)), uintptr(unsafe.Pointer(ppMetadata)))
+func (self *IWMDMStorage4) GetSpecifiedMetadata(ppwszPropNames []foundation.PWSTR, ppMetadata **IWMDMMetaData) error {
+	var _ppwszPropNames *foundation.PWSTR
+	if len(ppwszPropNames) > 0 {
+		_ppwszPropNames = &ppwszPropNames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(len(ppwszPropNames)), uintptr(unsafe.Pointer(_ppwszPropNames)), uintptr(unsafe.Pointer(ppMetadata)))
 	return win32.HRESULTError(int32(r1))
 }
 

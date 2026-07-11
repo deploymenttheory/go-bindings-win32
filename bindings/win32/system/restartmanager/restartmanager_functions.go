@@ -59,8 +59,12 @@ func RmEndSession(dwSessionHandle uint32) foundation.WIN32_ERROR {
 // RmGetFilterList calls RstrtMgr!RmGetFilterList.
 // https://learn.microsoft.com/windows/win32/api/restartmanager/nf-restartmanager-rmgetfilterlist
 // Minimum OS: windows6.0.6000.
-func RmGetFilterList(dwSessionHandle uint32, pbFilterBuf *byte, cbFilterBuf uint32, cbFilterBufNeeded *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procRmGetFilterList.Addr(), uintptr(dwSessionHandle), uintptr(unsafe.Pointer(pbFilterBuf)), uintptr(cbFilterBuf), uintptr(unsafe.Pointer(cbFilterBufNeeded)))
+func RmGetFilterList(dwSessionHandle uint32, pbFilterBuf []byte, cbFilterBufNeeded *uint32) foundation.WIN32_ERROR {
+	var _pbFilterBuf *byte
+	if len(pbFilterBuf) > 0 {
+		_pbFilterBuf = &pbFilterBuf[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRmGetFilterList.Addr(), uintptr(dwSessionHandle), uintptr(unsafe.Pointer(_pbFilterBuf)), uintptr(len(pbFilterBuf)), uintptr(unsafe.Pointer(cbFilterBufNeeded)))
 	return foundation.WIN32_ERROR(r1)
 }
 

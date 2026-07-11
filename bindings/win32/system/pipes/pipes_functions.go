@@ -47,17 +47,33 @@ var (
 
 // CallNamedPipe calls KERNEL32!CallNamedPipeW.
 // https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-callnamedpipew
-func CallNamedPipe(lpNamedPipeName string, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesRead *uint32, nTimeOut uint32) bool {
+func CallNamedPipe(lpNamedPipeName string, lpInBuffer []byte, lpOutBuffer []byte, lpBytesRead *uint32, nTimeOut uint32) bool {
 	_lpNamedPipeName := win32.UTF16Ptr(lpNamedPipeName)
-	r1, _, _ := syscall.SyscallN(procCallNamedPipe.Addr(), uintptr(unsafe.Pointer(_lpNamedPipeName)), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesRead)), uintptr(nTimeOut))
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCallNamedPipe.Addr(), uintptr(unsafe.Pointer(_lpNamedPipeName)), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesRead)), uintptr(nTimeOut))
 	return r1 != 0
 }
 
 // CallNamedPipeA calls KERNEL32!CallNamedPipeA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-callnamedpipea
 // Minimum OS: windows5.0.
-func CallNamedPipeA(lpNamedPipeName foundation.PSTR, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesRead *uint32, nTimeOut uint32) error {
-	r1, _, e1 := syscall.SyscallN(procCallNamedPipeA.Addr(), uintptr(unsafe.Pointer(lpNamedPipeName)), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesRead)), uintptr(nTimeOut))
+func CallNamedPipeA(lpNamedPipeName foundation.PSTR, lpInBuffer []byte, lpOutBuffer []byte, lpBytesRead *uint32, nTimeOut uint32) error {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procCallNamedPipeA.Addr(), uintptr(unsafe.Pointer(lpNamedPipeName)), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesRead)), uintptr(nTimeOut))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -222,8 +238,12 @@ func ImpersonateNamedPipeClient(hNamedPipe foundation.HANDLE) error {
 // PeekNamedPipe calls KERNEL32!PeekNamedPipe.
 // https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-peeknamedpipe
 // Minimum OS: windows5.0.
-func PeekNamedPipe(hNamedPipe foundation.HANDLE, lpBuffer unsafe.Pointer, nBufferSize uint32, lpBytesRead *uint32, lpTotalBytesAvail *uint32, lpBytesLeftThisMessage *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procPeekNamedPipe.Addr(), uintptr(hNamedPipe), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nBufferSize), uintptr(unsafe.Pointer(lpBytesRead)), uintptr(unsafe.Pointer(lpTotalBytesAvail)), uintptr(unsafe.Pointer(lpBytesLeftThisMessage)))
+func PeekNamedPipe(hNamedPipe foundation.HANDLE, lpBuffer []byte, lpBytesRead *uint32, lpTotalBytesAvail *uint32, lpBytesLeftThisMessage *uint32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procPeekNamedPipe.Addr(), uintptr(hNamedPipe), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpBytesRead)), uintptr(unsafe.Pointer(lpTotalBytesAvail)), uintptr(unsafe.Pointer(lpBytesLeftThisMessage)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -244,8 +264,16 @@ func SetNamedPipeHandleState(hNamedPipe foundation.HANDLE, lpMode *NAMED_PIPE_MO
 // TransactNamedPipe calls KERNEL32!TransactNamedPipe.
 // https://learn.microsoft.com/windows/win32/api/namedpipeapi/nf-namedpipeapi-transactnamedpipe
 // Minimum OS: windows5.0.
-func TransactNamedPipe(hNamedPipe foundation.HANDLE, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesRead *uint32, lpOverlapped *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procTransactNamedPipe.Addr(), uintptr(hNamedPipe), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesRead)), uintptr(unsafe.Pointer(lpOverlapped)))
+func TransactNamedPipe(hNamedPipe foundation.HANDLE, lpInBuffer []byte, lpOutBuffer []byte, lpBytesRead *uint32, lpOverlapped *systemio.OVERLAPPED) error {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procTransactNamedPipe.Addr(), uintptr(hNamedPipe), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesRead)), uintptr(unsafe.Pointer(lpOverlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

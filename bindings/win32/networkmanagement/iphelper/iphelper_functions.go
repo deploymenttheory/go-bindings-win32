@@ -1099,16 +1099,40 @@ func GetPerAdapterInfo(IfIndex uint32, pPerAdapterInfo *IP_PER_ADAPTER_INFO_W2KS
 // GetPerTcp6ConnectionEStats calls IPHLPAPI!GetPerTcp6ConnectionEStats.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getpertcp6connectionestats
 // Minimum OS: windows6.0.6000.
-func GetPerTcp6ConnectionEStats(Row *MIB_TCP6ROW, EstatsType TCP_ESTATS_TYPE, Rw *byte, RwVersion uint32, RwSize uint32, Ros *byte, RosVersion uint32, RosSize uint32, Rod *byte, RodVersion uint32, RodSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetPerTcp6ConnectionEStats.Addr(), uintptr(unsafe.Pointer(Row)), uintptr(EstatsType), uintptr(unsafe.Pointer(Rw)), uintptr(RwVersion), uintptr(RwSize), uintptr(unsafe.Pointer(Ros)), uintptr(RosVersion), uintptr(RosSize), uintptr(unsafe.Pointer(Rod)), uintptr(RodVersion), uintptr(RodSize))
+func GetPerTcp6ConnectionEStats(Row *MIB_TCP6ROW, EstatsType TCP_ESTATS_TYPE, Rw []byte, RwVersion uint32, Ros []byte, RosVersion uint32, Rod []byte, RodVersion uint32) uint32 {
+	var _Rw *byte
+	if len(Rw) > 0 {
+		_Rw = &Rw[0]
+	}
+	var _Ros *byte
+	if len(Ros) > 0 {
+		_Ros = &Ros[0]
+	}
+	var _Rod *byte
+	if len(Rod) > 0 {
+		_Rod = &Rod[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPerTcp6ConnectionEStats.Addr(), uintptr(unsafe.Pointer(Row)), uintptr(EstatsType), uintptr(unsafe.Pointer(_Rw)), uintptr(RwVersion), uintptr(len(Rw)), uintptr(unsafe.Pointer(_Ros)), uintptr(RosVersion), uintptr(len(Ros)), uintptr(unsafe.Pointer(_Rod)), uintptr(RodVersion), uintptr(len(Rod)))
 	return uint32(r1)
 }
 
 // GetPerTcpConnectionEStats calls IPHLPAPI!GetPerTcpConnectionEStats.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getpertcpconnectionestats
 // Minimum OS: windows6.0.6000.
-func GetPerTcpConnectionEStats(Row *MIB_TCPROW_LH, EstatsType TCP_ESTATS_TYPE, Rw *byte, RwVersion uint32, RwSize uint32, Ros *byte, RosVersion uint32, RosSize uint32, Rod *byte, RodVersion uint32, RodSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetPerTcpConnectionEStats.Addr(), uintptr(unsafe.Pointer(Row)), uintptr(EstatsType), uintptr(unsafe.Pointer(Rw)), uintptr(RwVersion), uintptr(RwSize), uintptr(unsafe.Pointer(Ros)), uintptr(RosVersion), uintptr(RosSize), uintptr(unsafe.Pointer(Rod)), uintptr(RodVersion), uintptr(RodSize))
+func GetPerTcpConnectionEStats(Row *MIB_TCPROW_LH, EstatsType TCP_ESTATS_TYPE, Rw []byte, RwVersion uint32, Ros []byte, RosVersion uint32, Rod []byte, RodVersion uint32) uint32 {
+	var _Rw *byte
+	if len(Rw) > 0 {
+		_Rw = &Rw[0]
+	}
+	var _Ros *byte
+	if len(Ros) > 0 {
+		_Ros = &Ros[0]
+	}
+	var _Rod *byte
+	if len(Rod) > 0 {
+		_Rod = &Rod[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPerTcpConnectionEStats.Addr(), uintptr(unsafe.Pointer(Row)), uintptr(EstatsType), uintptr(unsafe.Pointer(_Rw)), uintptr(RwVersion), uintptr(len(Rw)), uintptr(unsafe.Pointer(_Ros)), uintptr(RosVersion), uintptr(len(Ros)), uintptr(unsafe.Pointer(_Rod)), uintptr(RodVersion), uintptr(len(Rod)))
 	return uint32(r1)
 }
 
@@ -1278,8 +1302,12 @@ func Icmp6CreateFile() (foundation.HANDLE, error) {
 // Icmp6ParseReplies calls IPHLPAPI!Icmp6ParseReplies.
 // https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmp6parsereplies
 // Minimum OS: windows5.1.2600.
-func Icmp6ParseReplies(ReplyBuffer unsafe.Pointer, ReplySize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procIcmp6ParseReplies.Addr(), uintptr(unsafe.Pointer(ReplyBuffer)), uintptr(ReplySize))
+func Icmp6ParseReplies(ReplyBuffer []byte) (uint32, error) {
+	var _ReplyBuffer *byte
+	if len(ReplyBuffer) > 0 {
+		_ReplyBuffer = &ReplyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procIcmp6ParseReplies.Addr(), uintptr(unsafe.Pointer(_ReplyBuffer)), uintptr(len(ReplyBuffer)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -1289,8 +1317,16 @@ func Icmp6ParseReplies(ReplyBuffer unsafe.Pointer, ReplySize uint32) (uint32, er
 // Icmp6SendEcho2 calls IPHLPAPI!Icmp6SendEcho2.
 // https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmp6sendecho2
 // Minimum OS: windows5.1.2600.
-func Icmp6SendEcho2(IcmpHandle foundation.HANDLE, Event foundation.HANDLE, ApcRoutine systemio.PIO_APC_ROUTINE, ApcContext unsafe.Pointer, SourceAddress *networkingwinsock.SOCKADDR_IN6, DestinationAddress *networkingwinsock.SOCKADDR_IN6, RequestData unsafe.Pointer, RequestSize uint16, RequestOptions *IP_OPTION_INFORMATION, ReplyBuffer unsafe.Pointer, ReplySize uint32, Timeout uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procIcmp6SendEcho2.Addr(), uintptr(IcmpHandle), uintptr(Event), uintptr(ApcRoutine), uintptr(unsafe.Pointer(ApcContext)), uintptr(unsafe.Pointer(SourceAddress)), uintptr(unsafe.Pointer(DestinationAddress)), uintptr(unsafe.Pointer(RequestData)), uintptr(RequestSize), uintptr(unsafe.Pointer(RequestOptions)), uintptr(unsafe.Pointer(ReplyBuffer)), uintptr(ReplySize), uintptr(Timeout))
+func Icmp6SendEcho2(IcmpHandle foundation.HANDLE, Event foundation.HANDLE, ApcRoutine systemio.PIO_APC_ROUTINE, ApcContext unsafe.Pointer, SourceAddress *networkingwinsock.SOCKADDR_IN6, DestinationAddress *networkingwinsock.SOCKADDR_IN6, RequestData []byte, RequestOptions *IP_OPTION_INFORMATION, ReplyBuffer []byte, Timeout uint32) (uint32, error) {
+	var _RequestData *byte
+	if len(RequestData) > 0 {
+		_RequestData = &RequestData[0]
+	}
+	var _ReplyBuffer *byte
+	if len(ReplyBuffer) > 0 {
+		_ReplyBuffer = &ReplyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procIcmp6SendEcho2.Addr(), uintptr(IcmpHandle), uintptr(Event), uintptr(ApcRoutine), uintptr(unsafe.Pointer(ApcContext)), uintptr(unsafe.Pointer(SourceAddress)), uintptr(unsafe.Pointer(DestinationAddress)), uintptr(unsafe.Pointer(_RequestData)), uintptr(len(RequestData)), uintptr(unsafe.Pointer(RequestOptions)), uintptr(unsafe.Pointer(_ReplyBuffer)), uintptr(len(ReplyBuffer)), uintptr(Timeout))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -1323,8 +1359,12 @@ func IcmpCreateFile() (foundation.HANDLE, error) {
 // IcmpParseReplies calls IPHLPAPI!IcmpParseReplies.
 // https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpparsereplies
 // Minimum OS: windows5.0.
-func IcmpParseReplies(ReplyBuffer unsafe.Pointer, ReplySize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procIcmpParseReplies.Addr(), uintptr(unsafe.Pointer(ReplyBuffer)), uintptr(ReplySize))
+func IcmpParseReplies(ReplyBuffer []byte) (uint32, error) {
+	var _ReplyBuffer *byte
+	if len(ReplyBuffer) > 0 {
+		_ReplyBuffer = &ReplyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procIcmpParseReplies.Addr(), uintptr(unsafe.Pointer(_ReplyBuffer)), uintptr(len(ReplyBuffer)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -1334,8 +1374,16 @@ func IcmpParseReplies(ReplyBuffer unsafe.Pointer, ReplySize uint32) (uint32, err
 // IcmpSendEcho calls IPHLPAPI!IcmpSendEcho.
 // https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho
 // Minimum OS: windows5.0.
-func IcmpSendEcho(IcmpHandle foundation.HANDLE, DestinationAddress uint32, RequestData unsafe.Pointer, RequestSize uint16, RequestOptions *IP_OPTION_INFORMATION, ReplyBuffer unsafe.Pointer, ReplySize uint32, Timeout uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procIcmpSendEcho.Addr(), uintptr(IcmpHandle), uintptr(DestinationAddress), uintptr(unsafe.Pointer(RequestData)), uintptr(RequestSize), uintptr(unsafe.Pointer(RequestOptions)), uintptr(unsafe.Pointer(ReplyBuffer)), uintptr(ReplySize), uintptr(Timeout))
+func IcmpSendEcho(IcmpHandle foundation.HANDLE, DestinationAddress uint32, RequestData []byte, RequestOptions *IP_OPTION_INFORMATION, ReplyBuffer []byte, Timeout uint32) (uint32, error) {
+	var _RequestData *byte
+	if len(RequestData) > 0 {
+		_RequestData = &RequestData[0]
+	}
+	var _ReplyBuffer *byte
+	if len(ReplyBuffer) > 0 {
+		_ReplyBuffer = &ReplyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procIcmpSendEcho.Addr(), uintptr(IcmpHandle), uintptr(DestinationAddress), uintptr(unsafe.Pointer(_RequestData)), uintptr(len(RequestData)), uintptr(unsafe.Pointer(RequestOptions)), uintptr(unsafe.Pointer(_ReplyBuffer)), uintptr(len(ReplyBuffer)), uintptr(Timeout))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -1345,8 +1393,16 @@ func IcmpSendEcho(IcmpHandle foundation.HANDLE, DestinationAddress uint32, Reque
 // IcmpSendEcho2 calls IPHLPAPI!IcmpSendEcho2.
 // https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho2
 // Minimum OS: windows5.0.
-func IcmpSendEcho2(IcmpHandle foundation.HANDLE, Event foundation.HANDLE, ApcRoutine systemio.PIO_APC_ROUTINE, ApcContext unsafe.Pointer, DestinationAddress uint32, RequestData unsafe.Pointer, RequestSize uint16, RequestOptions *IP_OPTION_INFORMATION, ReplyBuffer unsafe.Pointer, ReplySize uint32, Timeout uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procIcmpSendEcho2.Addr(), uintptr(IcmpHandle), uintptr(Event), uintptr(ApcRoutine), uintptr(unsafe.Pointer(ApcContext)), uintptr(DestinationAddress), uintptr(unsafe.Pointer(RequestData)), uintptr(RequestSize), uintptr(unsafe.Pointer(RequestOptions)), uintptr(unsafe.Pointer(ReplyBuffer)), uintptr(ReplySize), uintptr(Timeout))
+func IcmpSendEcho2(IcmpHandle foundation.HANDLE, Event foundation.HANDLE, ApcRoutine systemio.PIO_APC_ROUTINE, ApcContext unsafe.Pointer, DestinationAddress uint32, RequestData []byte, RequestOptions *IP_OPTION_INFORMATION, ReplyBuffer []byte, Timeout uint32) (uint32, error) {
+	var _RequestData *byte
+	if len(RequestData) > 0 {
+		_RequestData = &RequestData[0]
+	}
+	var _ReplyBuffer *byte
+	if len(ReplyBuffer) > 0 {
+		_ReplyBuffer = &ReplyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procIcmpSendEcho2.Addr(), uintptr(IcmpHandle), uintptr(Event), uintptr(ApcRoutine), uintptr(unsafe.Pointer(ApcContext)), uintptr(DestinationAddress), uintptr(unsafe.Pointer(_RequestData)), uintptr(len(RequestData)), uintptr(unsafe.Pointer(RequestOptions)), uintptr(unsafe.Pointer(_ReplyBuffer)), uintptr(len(ReplyBuffer)), uintptr(Timeout))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -1356,8 +1412,16 @@ func IcmpSendEcho2(IcmpHandle foundation.HANDLE, Event foundation.HANDLE, ApcRou
 // IcmpSendEcho2Ex calls IPHLPAPI!IcmpSendEcho2Ex.
 // https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho2ex
 // Minimum OS: windows6.0.6000.
-func IcmpSendEcho2Ex(IcmpHandle foundation.HANDLE, Event foundation.HANDLE, ApcRoutine systemio.PIO_APC_ROUTINE, ApcContext unsafe.Pointer, SourceAddress uint32, DestinationAddress uint32, RequestData unsafe.Pointer, RequestSize uint16, RequestOptions *IP_OPTION_INFORMATION, ReplyBuffer unsafe.Pointer, ReplySize uint32, Timeout uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procIcmpSendEcho2Ex.Addr(), uintptr(IcmpHandle), uintptr(Event), uintptr(ApcRoutine), uintptr(unsafe.Pointer(ApcContext)), uintptr(SourceAddress), uintptr(DestinationAddress), uintptr(unsafe.Pointer(RequestData)), uintptr(RequestSize), uintptr(unsafe.Pointer(RequestOptions)), uintptr(unsafe.Pointer(ReplyBuffer)), uintptr(ReplySize), uintptr(Timeout))
+func IcmpSendEcho2Ex(IcmpHandle foundation.HANDLE, Event foundation.HANDLE, ApcRoutine systemio.PIO_APC_ROUTINE, ApcContext unsafe.Pointer, SourceAddress uint32, DestinationAddress uint32, RequestData []byte, RequestOptions *IP_OPTION_INFORMATION, ReplyBuffer []byte, Timeout uint32) (uint32, error) {
+	var _RequestData *byte
+	if len(RequestData) > 0 {
+		_RequestData = &RequestData[0]
+	}
+	var _ReplyBuffer *byte
+	if len(ReplyBuffer) > 0 {
+		_ReplyBuffer = &ReplyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procIcmpSendEcho2Ex.Addr(), uintptr(IcmpHandle), uintptr(Event), uintptr(ApcRoutine), uintptr(unsafe.Pointer(ApcContext)), uintptr(SourceAddress), uintptr(DestinationAddress), uintptr(unsafe.Pointer(_RequestData)), uintptr(len(RequestData)), uintptr(unsafe.Pointer(RequestOptions)), uintptr(unsafe.Pointer(_ReplyBuffer)), uintptr(len(ReplyBuffer)), uintptr(Timeout))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -1779,16 +1843,24 @@ func SetNetworkInformation(NetworkGuid *win32.GUID, CompartmentId networkmanagem
 // SetPerTcp6ConnectionEStats calls IPHLPAPI!SetPerTcp6ConnectionEStats.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-setpertcp6connectionestats
 // Minimum OS: windows6.0.6000.
-func SetPerTcp6ConnectionEStats(Row *MIB_TCP6ROW, EstatsType TCP_ESTATS_TYPE, Rw *byte, RwVersion uint32, RwSize uint32, Offset uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetPerTcp6ConnectionEStats.Addr(), uintptr(unsafe.Pointer(Row)), uintptr(EstatsType), uintptr(unsafe.Pointer(Rw)), uintptr(RwVersion), uintptr(RwSize), uintptr(Offset))
+func SetPerTcp6ConnectionEStats(Row *MIB_TCP6ROW, EstatsType TCP_ESTATS_TYPE, Rw []byte, RwVersion uint32, Offset uint32) uint32 {
+	var _Rw *byte
+	if len(Rw) > 0 {
+		_Rw = &Rw[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetPerTcp6ConnectionEStats.Addr(), uintptr(unsafe.Pointer(Row)), uintptr(EstatsType), uintptr(unsafe.Pointer(_Rw)), uintptr(RwVersion), uintptr(len(Rw)), uintptr(Offset))
 	return uint32(r1)
 }
 
 // SetPerTcpConnectionEStats calls IPHLPAPI!SetPerTcpConnectionEStats.
 // https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-setpertcpconnectionestats
 // Minimum OS: windows6.0.6000.
-func SetPerTcpConnectionEStats(Row *MIB_TCPROW_LH, EstatsType TCP_ESTATS_TYPE, Rw *byte, RwVersion uint32, RwSize uint32, Offset uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetPerTcpConnectionEStats.Addr(), uintptr(unsafe.Pointer(Row)), uintptr(EstatsType), uintptr(unsafe.Pointer(Rw)), uintptr(RwVersion), uintptr(RwSize), uintptr(Offset))
+func SetPerTcpConnectionEStats(Row *MIB_TCPROW_LH, EstatsType TCP_ESTATS_TYPE, Rw []byte, RwVersion uint32, Offset uint32) uint32 {
+	var _Rw *byte
+	if len(Rw) > 0 {
+		_Rw = &Rw[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetPerTcpConnectionEStats.Addr(), uintptr(unsafe.Pointer(Row)), uintptr(EstatsType), uintptr(unsafe.Pointer(_Rw)), uintptr(RwVersion), uintptr(len(Rw)), uintptr(Offset))
 	return uint32(r1)
 }
 

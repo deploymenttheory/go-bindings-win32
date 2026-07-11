@@ -271,8 +271,12 @@ func GetThreadDesktop(dwThreadId uint32) (HDESK, error) {
 // GetUserObjectInformation calls USER32!GetUserObjectInformationW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getuserobjectinformationw
 // Minimum OS: windows5.0.
-func GetUserObjectInformation(hObj foundation.HANDLE, nIndex USER_OBJECT_INFORMATION_INDEX, pvInfo unsafe.Pointer, nLength uint32, lpnLengthNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetUserObjectInformation.Addr(), uintptr(hObj), uintptr(nIndex), uintptr(unsafe.Pointer(pvInfo)), uintptr(nLength), uintptr(unsafe.Pointer(lpnLengthNeeded)))
+func GetUserObjectInformation(hObj foundation.HANDLE, nIndex USER_OBJECT_INFORMATION_INDEX, pvInfo []byte, lpnLengthNeeded *uint32) error {
+	var _pvInfo *byte
+	if len(pvInfo) > 0 {
+		_pvInfo = &pvInfo[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetUserObjectInformation.Addr(), uintptr(hObj), uintptr(nIndex), uintptr(unsafe.Pointer(_pvInfo)), uintptr(len(pvInfo)), uintptr(unsafe.Pointer(lpnLengthNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -282,8 +286,12 @@ func GetUserObjectInformation(hObj foundation.HANDLE, nIndex USER_OBJECT_INFORMA
 // GetUserObjectInformationA calls USER32!GetUserObjectInformationA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getuserobjectinformationa
 // Minimum OS: windows5.0.
-func GetUserObjectInformationA(hObj foundation.HANDLE, nIndex USER_OBJECT_INFORMATION_INDEX, pvInfo unsafe.Pointer, nLength uint32, lpnLengthNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetUserObjectInformationA.Addr(), uintptr(hObj), uintptr(nIndex), uintptr(unsafe.Pointer(pvInfo)), uintptr(nLength), uintptr(unsafe.Pointer(lpnLengthNeeded)))
+func GetUserObjectInformationA(hObj foundation.HANDLE, nIndex USER_OBJECT_INFORMATION_INDEX, pvInfo []byte, lpnLengthNeeded *uint32) error {
+	var _pvInfo *byte
+	if len(pvInfo) > 0 {
+		_pvInfo = &pvInfo[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetUserObjectInformationA.Addr(), uintptr(hObj), uintptr(nIndex), uintptr(unsafe.Pointer(_pvInfo)), uintptr(len(pvInfo)), uintptr(unsafe.Pointer(lpnLengthNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -382,8 +390,12 @@ func SetThreadDesktop(hDesktop HDESK) error {
 // SetUserObjectInformation calls USER32!SetUserObjectInformationW.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setuserobjectinformationw
 // Minimum OS: windows5.0.
-func SetUserObjectInformation(hObj foundation.HANDLE, nIndex int32, pvInfo unsafe.Pointer, nLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetUserObjectInformation.Addr(), uintptr(hObj), uintptr(nIndex), uintptr(unsafe.Pointer(pvInfo)), uintptr(nLength))
+func SetUserObjectInformation(hObj foundation.HANDLE, nIndex int32, pvInfo []byte) error {
+	var _pvInfo *byte
+	if len(pvInfo) > 0 {
+		_pvInfo = &pvInfo[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetUserObjectInformation.Addr(), uintptr(hObj), uintptr(nIndex), uintptr(unsafe.Pointer(_pvInfo)), uintptr(len(pvInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -393,8 +405,12 @@ func SetUserObjectInformation(hObj foundation.HANDLE, nIndex int32, pvInfo unsaf
 // SetUserObjectInformationA calls USER32!SetUserObjectInformationA.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setuserobjectinformationa
 // Minimum OS: windows5.0.
-func SetUserObjectInformationA(hObj foundation.HANDLE, nIndex int32, pvInfo unsafe.Pointer, nLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetUserObjectInformationA.Addr(), uintptr(hObj), uintptr(nIndex), uintptr(unsafe.Pointer(pvInfo)), uintptr(nLength))
+func SetUserObjectInformationA(hObj foundation.HANDLE, nIndex int32, pvInfo []byte) error {
+	var _pvInfo *byte
+	if len(pvInfo) > 0 {
+		_pvInfo = &pvInfo[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetUserObjectInformationA.Addr(), uintptr(hObj), uintptr(nIndex), uintptr(unsafe.Pointer(_pvInfo)), uintptr(len(pvInfo)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

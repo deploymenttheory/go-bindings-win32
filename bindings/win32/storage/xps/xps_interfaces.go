@@ -3860,8 +3860,12 @@ func (self *IXpsSignature) GetSignatureXml(signatureXml **byte, count *uint32) e
 }
 
 // SetSignatureXml dispatches through IXpsSignature's vtable slot 14.
-func (self *IXpsSignature) SetSignatureXml(signatureXml *byte, count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signatureXml)), uintptr(count))
+func (self *IXpsSignature) SetSignatureXml(signatureXml []byte) error {
+	var _signatureXml *byte
+	if len(signatureXml) > 0 {
+		_signatureXml = &signatureXml[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_signatureXml)), uintptr(len(signatureXml)))
 	return win32.HRESULTError(int32(r1))
 }
 

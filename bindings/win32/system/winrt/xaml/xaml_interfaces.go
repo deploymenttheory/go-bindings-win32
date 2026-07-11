@@ -406,8 +406,12 @@ func (self *IVirtualSurfaceImageSourceNative) GetUpdateRectCount(count *uint32) 
 }
 
 // GetUpdateRects dispatches through IVirtualSurfaceImageSourceNative's vtable slot 8.
-func (self *IVirtualSurfaceImageSourceNative) GetUpdateRects(updates *foundation.RECT, count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(updates)), uintptr(count))
+func (self *IVirtualSurfaceImageSourceNative) GetUpdateRects(updates []foundation.RECT) error {
+	var _updates *foundation.RECT
+	if len(updates) > 0 {
+		_updates = &updates[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_updates)), uintptr(len(updates)))
 	return win32.HRESULTError(int32(r1))
 }
 

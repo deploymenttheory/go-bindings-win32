@@ -42,8 +42,12 @@ func (self *IXAPO) IsOutputFormatSupported(pInputFormat *mediaaudio.WAVEFORMATEX
 }
 
 // Initialize dispatches through IXAPO's vtable slot 6.
-func (self *IXAPO) Initialize(pData unsafe.Pointer, DataByteSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(DataByteSize))
+func (self *IXAPO) Initialize(pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -53,8 +57,16 @@ func (self *IXAPO) Reset() {
 }
 
 // LockForProcess dispatches through IXAPO's vtable slot 8.
-func (self *IXAPO) LockForProcess(InputLockedParameterCount uint32, pInputLockedParameters *XAPO_LOCKFORPROCESS_PARAMETERS, OutputLockedParameterCount uint32, pOutputLockedParameters *XAPO_LOCKFORPROCESS_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(InputLockedParameterCount), uintptr(unsafe.Pointer(pInputLockedParameters)), uintptr(OutputLockedParameterCount), uintptr(unsafe.Pointer(pOutputLockedParameters)))
+func (self *IXAPO) LockForProcess(pInputLockedParameters []XAPO_LOCKFORPROCESS_PARAMETERS, pOutputLockedParameters []XAPO_LOCKFORPROCESS_PARAMETERS) error {
+	var _pInputLockedParameters *XAPO_LOCKFORPROCESS_PARAMETERS
+	if len(pInputLockedParameters) > 0 {
+		_pInputLockedParameters = &pInputLockedParameters[0]
+	}
+	var _pOutputLockedParameters *XAPO_LOCKFORPROCESS_PARAMETERS
+	if len(pOutputLockedParameters) > 0 {
+		_pOutputLockedParameters = &pOutputLockedParameters[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(pInputLockedParameters)), uintptr(unsafe.Pointer(_pInputLockedParameters)), uintptr(len(pOutputLockedParameters)), uintptr(unsafe.Pointer(_pOutputLockedParameters)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -64,9 +76,17 @@ func (self *IXAPO) UnlockForProcess() {
 }
 
 // Process dispatches through IXAPO's vtable slot 10.
-func (self *IXAPO) Process(InputProcessParameterCount uint32, pInputProcessParameters *XAPO_PROCESS_BUFFER_PARAMETERS, OutputProcessParameterCount uint32, pOutputProcessParameters *XAPO_PROCESS_BUFFER_PARAMETERS, IsEnabled bool) {
+func (self *IXAPO) Process(pInputProcessParameters []XAPO_PROCESS_BUFFER_PARAMETERS, pOutputProcessParameters []XAPO_PROCESS_BUFFER_PARAMETERS, IsEnabled bool) {
+	var _pInputProcessParameters *XAPO_PROCESS_BUFFER_PARAMETERS
+	if len(pInputProcessParameters) > 0 {
+		_pInputProcessParameters = &pInputProcessParameters[0]
+	}
+	var _pOutputProcessParameters *XAPO_PROCESS_BUFFER_PARAMETERS
+	if len(pOutputProcessParameters) > 0 {
+		_pOutputProcessParameters = &pOutputProcessParameters[0]
+	}
 	_IsEnabled := win32.Bool32(IsEnabled)
-	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(InputProcessParameterCount), uintptr(unsafe.Pointer(pInputProcessParameters)), uintptr(OutputProcessParameterCount), uintptr(unsafe.Pointer(pOutputProcessParameters)), uintptr(_IsEnabled))
+	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(len(pInputProcessParameters)), uintptr(unsafe.Pointer(_pInputProcessParameters)), uintptr(len(pOutputProcessParameters)), uintptr(unsafe.Pointer(_pOutputProcessParameters)), uintptr(_IsEnabled))
 }
 
 // CalcInputFrames dispatches through IXAPO's vtable slot 11.
@@ -118,13 +138,21 @@ type IXAPOParameters struct {
 var IID_IXAPOParameters = win32.GUID{Data1: 0x26d95c66, Data2: 0x80f2, Data3: 0x499a, Data4: [8]byte{0xad, 0x54, 0x5a, 0xe7, 0xf0, 0x1c, 0x6d, 0x98}}
 
 // SetParameters dispatches through IXAPOParameters's vtable slot 3.
-func (self *IXAPOParameters) SetParameters(pParameters unsafe.Pointer, ParameterByteSize uint32) {
-	syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParameters)), uintptr(ParameterByteSize))
+func (self *IXAPOParameters) SetParameters(pParameters []byte) {
+	var _pParameters *byte
+	if len(pParameters) > 0 {
+		_pParameters = &pParameters[0]
+	}
+	syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pParameters)), uintptr(len(pParameters)))
 }
 
 // GetParameters dispatches through IXAPOParameters's vtable slot 4.
-func (self *IXAPOParameters) GetParameters(pParameters unsafe.Pointer, ParameterByteSize uint32) {
-	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pParameters)), uintptr(ParameterByteSize))
+func (self *IXAPOParameters) GetParameters(pParameters []byte) {
+	var _pParameters *byte
+	if len(pParameters) > 0 {
+		_pParameters = &pParameters[0]
+	}
+	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pParameters)), uintptr(len(pParameters)))
 }
 
 // IXAudio2: https://learn.microsoft.com/windows/win32/api/xaudio2/nn-xaudio2-ixaudio2
@@ -338,14 +366,22 @@ func (self *IXAudio2Voice) GetEffectState(EffectIndex uint32, pEnabled *foundati
 }
 
 // SetEffectParameters dispatches through IXAudio2Voice's vtable slot 6.
-func (self *IXAudio2Voice) SetEffectParameters(EffectIndex uint32, pParameters unsafe.Pointer, ParametersByteSize uint32, OperationSet uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(EffectIndex), uintptr(unsafe.Pointer(pParameters)), uintptr(ParametersByteSize), uintptr(OperationSet))
+func (self *IXAudio2Voice) SetEffectParameters(EffectIndex uint32, pParameters []byte, OperationSet uint32) error {
+	var _pParameters *byte
+	if len(pParameters) > 0 {
+		_pParameters = &pParameters[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(EffectIndex), uintptr(unsafe.Pointer(_pParameters)), uintptr(len(pParameters)), uintptr(OperationSet))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetEffectParameters dispatches through IXAudio2Voice's vtable slot 7.
-func (self *IXAudio2Voice) GetEffectParameters(EffectIndex uint32, pParameters unsafe.Pointer, ParametersByteSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(EffectIndex), uintptr(unsafe.Pointer(pParameters)), uintptr(ParametersByteSize))
+func (self *IXAudio2Voice) GetEffectParameters(EffectIndex uint32, pParameters []byte) error {
+	var _pParameters *byte
+	if len(pParameters) > 0 {
+		_pParameters = &pParameters[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(EffectIndex), uintptr(unsafe.Pointer(_pParameters)), uintptr(len(pParameters)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -377,14 +413,22 @@ func (self *IXAudio2Voice) GetVolume(pVolume *float32) {
 }
 
 // SetChannelVolumes dispatches through IXAudio2Voice's vtable slot 14.
-func (self *IXAudio2Voice) SetChannelVolumes(Channels uint32, pVolumes *float32, OperationSet uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Channels), uintptr(unsafe.Pointer(pVolumes)), uintptr(OperationSet))
+func (self *IXAudio2Voice) SetChannelVolumes(pVolumes []float32, OperationSet uint32) error {
+	var _pVolumes *float32
+	if len(pVolumes) > 0 {
+		_pVolumes = &pVolumes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(len(pVolumes)), uintptr(unsafe.Pointer(_pVolumes)), uintptr(OperationSet))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetChannelVolumes dispatches through IXAudio2Voice's vtable slot 15.
-func (self *IXAudio2Voice) GetChannelVolumes(Channels uint32, pVolumes *float32) {
-	syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Channels), uintptr(unsafe.Pointer(pVolumes)))
+func (self *IXAudio2Voice) GetChannelVolumes(pVolumes []float32) {
+	var _pVolumes *float32
+	if len(pVolumes) > 0 {
+		_pVolumes = &pVolumes[0]
+	}
+	syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(len(pVolumes)), uintptr(unsafe.Pointer(_pVolumes)))
 }
 
 // SetOutputMatrix dispatches through IXAudio2Voice's vtable slot 16.

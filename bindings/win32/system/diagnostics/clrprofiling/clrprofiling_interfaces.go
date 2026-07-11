@@ -337,14 +337,22 @@ func (self *ICorProfilerCallback) ObjectsAllocatedByClass(cClassCount uint32, cl
 }
 
 // ObjectReferences dispatches through ICorProfilerCallback's vtable slot 52.
-func (self *ICorProfilerCallback) ObjectReferences(objectId uintptr, classId uintptr, cObjectRefs uint32, objectRefIds *uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(objectId), uintptr(classId), uintptr(cObjectRefs), uintptr(unsafe.Pointer(objectRefIds)))
+func (self *ICorProfilerCallback) ObjectReferences(objectId uintptr, classId uintptr, objectRefIds []uintptr) error {
+	var _objectRefIds *uintptr
+	if len(objectRefIds) > 0 {
+		_objectRefIds = &objectRefIds[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(objectId), uintptr(classId), uintptr(len(objectRefIds)), uintptr(unsafe.Pointer(_objectRefIds)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RootReferences dispatches through ICorProfilerCallback's vtable slot 53.
-func (self *ICorProfilerCallback) RootReferences(cRootRefs uint32, rootRefIds *uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(cRootRefs), uintptr(unsafe.Pointer(rootRefIds)))
+func (self *ICorProfilerCallback) RootReferences(rootRefIds []uintptr) error {
+	var _rootRefIds *uintptr
+	if len(rootRefIds) > 0 {
+		_rootRefIds = &rootRefIds[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(len(rootRefIds)), uintptr(unsafe.Pointer(_rootRefIds)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -465,8 +473,16 @@ type ICorProfilerCallback10 struct {
 var IID_ICorProfilerCallback10 = win32.GUID{Data1: 0xcec5b60e, Data2: 0xc69c, Data3: 0x495f, Data4: [8]byte{0x87, 0xf6, 0x84, 0xd2, 0x8e, 0xe1, 0x6f, 0xfb}}
 
 // EventPipeEventDelivered dispatches through ICorProfilerCallback10's vtable slot 95.
-func (self *ICorProfilerCallback10) EventPipeEventDelivered(provider uintptr, eventId uint32, eventVersion uint32, cbMetadataBlob uint32, metadataBlob *byte, cbEventData uint32, eventData *byte, pActivityId *win32.GUID, pRelatedActivityId *win32.GUID, eventThread uintptr, numStackFrames uint32, stackFrames *uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(provider), uintptr(eventId), uintptr(eventVersion), uintptr(cbMetadataBlob), uintptr(unsafe.Pointer(metadataBlob)), uintptr(cbEventData), uintptr(unsafe.Pointer(eventData)), uintptr(unsafe.Pointer(pActivityId)), uintptr(unsafe.Pointer(pRelatedActivityId)), uintptr(eventThread), uintptr(numStackFrames), uintptr(unsafe.Pointer(stackFrames)))
+func (self *ICorProfilerCallback10) EventPipeEventDelivered(provider uintptr, eventId uint32, eventVersion uint32, metadataBlob []byte, eventData []byte, pActivityId *win32.GUID, pRelatedActivityId *win32.GUID, eventThread uintptr, numStackFrames uint32, stackFrames *uintptr) error {
+	var _metadataBlob *byte
+	if len(metadataBlob) > 0 {
+		_metadataBlob = &metadataBlob[0]
+	}
+	var _eventData *byte
+	if len(eventData) > 0 {
+		_eventData = &eventData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[95], uintptr(unsafe.Pointer(self)), uintptr(provider), uintptr(eventId), uintptr(eventVersion), uintptr(len(metadataBlob)), uintptr(unsafe.Pointer(_metadataBlob)), uintptr(len(eventData)), uintptr(unsafe.Pointer(_eventData)), uintptr(unsafe.Pointer(pActivityId)), uintptr(unsafe.Pointer(pRelatedActivityId)), uintptr(eventThread), uintptr(numStackFrames), uintptr(unsafe.Pointer(stackFrames)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -506,8 +522,12 @@ func (self *ICorProfilerCallback2) ThreadNameChanged(threadId uintptr, cchName u
 }
 
 // GarbageCollectionStarted dispatches through ICorProfilerCallback2's vtable slot 73.
-func (self *ICorProfilerCallback2) GarbageCollectionStarted(cGenerations int32, generationCollected *foundation.BOOL, reason COR_PRF_GC_REASON) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(cGenerations), uintptr(unsafe.Pointer(generationCollected)), uintptr(reason))
+func (self *ICorProfilerCallback2) GarbageCollectionStarted(generationCollected []foundation.BOOL, reason COR_PRF_GC_REASON) error {
+	var _generationCollected *foundation.BOOL
+	if len(generationCollected) > 0 {
+		_generationCollected = &generationCollected[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(len(generationCollected)), uintptr(unsafe.Pointer(_generationCollected)), uintptr(reason))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -713,14 +733,22 @@ func (self *ICorProfilerFunctionControl) SetCodegenFlags(flags uint32) error {
 }
 
 // SetILFunctionBody dispatches through ICorProfilerFunctionControl's vtable slot 4.
-func (self *ICorProfilerFunctionControl) SetILFunctionBody(cbNewILMethodHeader uint32, pbNewILMethodHeader *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cbNewILMethodHeader), uintptr(unsafe.Pointer(pbNewILMethodHeader)))
+func (self *ICorProfilerFunctionControl) SetILFunctionBody(pbNewILMethodHeader []byte) error {
+	var _pbNewILMethodHeader *byte
+	if len(pbNewILMethodHeader) > 0 {
+		_pbNewILMethodHeader = &pbNewILMethodHeader[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pbNewILMethodHeader)), uintptr(unsafe.Pointer(_pbNewILMethodHeader)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetILInstrumentedCodeMap dispatches through ICorProfilerFunctionControl's vtable slot 5.
-func (self *ICorProfilerFunctionControl) SetILInstrumentedCodeMap(cILMapEntries uint32, rgILMapEntries *COR_IL_MAP) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cILMapEntries), uintptr(unsafe.Pointer(rgILMapEntries)))
+func (self *ICorProfilerFunctionControl) SetILInstrumentedCodeMap(rgILMapEntries []COR_IL_MAP) error {
+	var _rgILMapEntries *COR_IL_MAP
+	if len(rgILMapEntries) > 0 {
+		_rgILMapEntries = &rgILMapEntries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(rgILMapEntries)), uintptr(unsafe.Pointer(_rgILMapEntries)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -757,8 +785,12 @@ func (self *ICorProfilerFunctionEnum) GetCount(pcelt *uint32) error {
 }
 
 // Next dispatches through ICorProfilerFunctionEnum's vtable slot 7.
-func (self *ICorProfilerFunctionEnum) Next(celt uint32, ids *COR_PRF_FUNCTION, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ids)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *ICorProfilerFunctionEnum) Next(ids []COR_PRF_FUNCTION, pceltFetched *uint32) error {
+	var _ids *COR_PRF_FUNCTION
+	if len(ids) > 0 {
+		_ids = &ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(ids)), uintptr(unsafe.Pointer(_ids)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -927,9 +959,13 @@ func (self *ICorProfilerInfo) ForceGC() error {
 }
 
 // SetILInstrumentedCodeMap dispatches through ICorProfilerInfo's vtable slot 29.
-func (self *ICorProfilerInfo) SetILInstrumentedCodeMap(functionId uintptr, fStartJit bool, cILMapEntries uint32, rgILMapEntries *COR_IL_MAP) error {
+func (self *ICorProfilerInfo) SetILInstrumentedCodeMap(functionId uintptr, fStartJit bool, rgILMapEntries []COR_IL_MAP) error {
 	_fStartJit := win32.Bool32(fStartJit)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(_fStartJit), uintptr(cILMapEntries), uintptr(unsafe.Pointer(rgILMapEntries)))
+	var _rgILMapEntries *COR_IL_MAP
+	if len(rgILMapEntries) > 0 {
+		_rgILMapEntries = &rgILMapEntries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(_fStartJit), uintptr(len(rgILMapEntries)), uintptr(unsafe.Pointer(_rgILMapEntries)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -965,8 +1001,12 @@ func (self *ICorProfilerInfo) EndInprocDebugging(dwProfilerContext uint32) error
 }
 
 // GetILToNativeMapping dispatches through ICorProfilerInfo's vtable slot 35.
-func (self *ICorProfilerInfo) GetILToNativeMapping(functionId uintptr, cMap uint32, pcMap *uint32, map_ *COR_DEBUG_IL_TO_NATIVE_MAP) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(cMap), uintptr(unsafe.Pointer(pcMap)), uintptr(unsafe.Pointer(map_)))
+func (self *ICorProfilerInfo) GetILToNativeMapping(functionId uintptr, pcMap *uint32, map_ []COR_DEBUG_IL_TO_NATIVE_MAP) error {
+	var _map_ *COR_DEBUG_IL_TO_NATIVE_MAP
+	if len(map_) > 0 {
+		_map_ = &map_[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(len(map_)), uintptr(unsafe.Pointer(pcMap)), uintptr(unsafe.Pointer(_map_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1046,9 +1086,13 @@ type ICorProfilerInfo12 struct {
 var IID_ICorProfilerInfo12 = win32.GUID{Data1: 0x27b24ccd, Data2: 0x1cb1, Data3: 0x47c5, Data4: [8]byte{0x96, 0xee, 0x98, 0x19, 0x0d, 0xc3, 0x09, 0x59}}
 
 // EventPipeStartSession dispatches through ICorProfilerInfo12's vtable slot 101.
-func (self *ICorProfilerInfo12) EventPipeStartSession(cProviderConfigs uint32, pProviderConfigs *COR_PRF_EVENTPIPE_PROVIDER_CONFIG, requestRundown bool, pSession *uint64) error {
+func (self *ICorProfilerInfo12) EventPipeStartSession(pProviderConfigs []COR_PRF_EVENTPIPE_PROVIDER_CONFIG, requestRundown bool, pSession *uint64) error {
+	var _pProviderConfigs *COR_PRF_EVENTPIPE_PROVIDER_CONFIG
+	if len(pProviderConfigs) > 0 {
+		_pProviderConfigs = &pProviderConfigs[0]
+	}
 	_requestRundown := win32.Bool32(requestRundown)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(cProviderConfigs), uintptr(unsafe.Pointer(pProviderConfigs)), uintptr(_requestRundown), uintptr(unsafe.Pointer(pSession)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(len(pProviderConfigs)), uintptr(unsafe.Pointer(_pProviderConfigs)), uintptr(_requestRundown), uintptr(unsafe.Pointer(pSession)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1072,16 +1116,24 @@ func (self *ICorProfilerInfo12) EventPipeGetProviderInfo(provider uintptr, cchNa
 }
 
 // EventPipeDefineEvent dispatches through ICorProfilerInfo12's vtable slot 106.
-func (self *ICorProfilerInfo12) EventPipeDefineEvent(provider uintptr, eventName string, eventID uint32, keywords uint64, eventVersion uint32, level uint32, opcode byte, needStack bool, cParamDescs uint32, pParamDescs *COR_PRF_EVENTPIPE_PARAM_DESC, pEvent *uintptr) error {
+func (self *ICorProfilerInfo12) EventPipeDefineEvent(provider uintptr, eventName string, eventID uint32, keywords uint64, eventVersion uint32, level uint32, opcode byte, needStack bool, pParamDescs []COR_PRF_EVENTPIPE_PARAM_DESC, pEvent *uintptr) error {
 	_eventName := win32.UTF16Ptr(eventName)
 	_needStack := win32.Bool32(needStack)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(provider), uintptr(unsafe.Pointer(_eventName)), uintptr(eventID), uintptr(keywords), uintptr(eventVersion), uintptr(level), uintptr(opcode), uintptr(_needStack), uintptr(cParamDescs), uintptr(unsafe.Pointer(pParamDescs)), uintptr(unsafe.Pointer(pEvent)))
+	var _pParamDescs *COR_PRF_EVENTPIPE_PARAM_DESC
+	if len(pParamDescs) > 0 {
+		_pParamDescs = &pParamDescs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(provider), uintptr(unsafe.Pointer(_eventName)), uintptr(eventID), uintptr(keywords), uintptr(eventVersion), uintptr(level), uintptr(opcode), uintptr(_needStack), uintptr(len(pParamDescs)), uintptr(unsafe.Pointer(_pParamDescs)), uintptr(unsafe.Pointer(pEvent)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // EventPipeWriteEvent dispatches through ICorProfilerInfo12's vtable slot 107.
-func (self *ICorProfilerInfo12) EventPipeWriteEvent(event uintptr, cData uint32, data *COR_PRF_EVENT_DATA, pActivityId *win32.GUID, pRelatedActivityId *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[107], uintptr(unsafe.Pointer(self)), uintptr(event), uintptr(cData), uintptr(unsafe.Pointer(data)), uintptr(unsafe.Pointer(pActivityId)), uintptr(unsafe.Pointer(pRelatedActivityId)))
+func (self *ICorProfilerInfo12) EventPipeWriteEvent(event uintptr, data []COR_PRF_EVENT_DATA, pActivityId *win32.GUID, pRelatedActivityId *win32.GUID) error {
+	var _data *COR_PRF_EVENT_DATA
+	if len(data) > 0 {
+		_data = &data[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[107], uintptr(unsafe.Pointer(self)), uintptr(event), uintptr(len(data)), uintptr(unsafe.Pointer(_data)), uintptr(unsafe.Pointer(pActivityId)), uintptr(unsafe.Pointer(pRelatedActivityId)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1126,8 +1178,12 @@ func (self *ICorProfilerInfo14) EnumerateNonGCObjects(ppEnum **ICorProfilerObjec
 }
 
 // GetNonGCHeapBounds dispatches through ICorProfilerInfo14's vtable slot 112.
-func (self *ICorProfilerInfo14) GetNonGCHeapBounds(cObjectRanges uint32, pcObjectRanges *uint32, ranges *COR_PRF_NONGC_HEAP_RANGE) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(cObjectRanges), uintptr(unsafe.Pointer(pcObjectRanges)), uintptr(unsafe.Pointer(ranges)))
+func (self *ICorProfilerInfo14) GetNonGCHeapBounds(pcObjectRanges *uint32, ranges []COR_PRF_NONGC_HEAP_RANGE) error {
+	var _ranges *COR_PRF_NONGC_HEAP_RANGE
+	if len(ranges) > 0 {
+		_ranges = &ranges[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(len(ranges)), uintptr(unsafe.Pointer(pcObjectRanges)), uintptr(unsafe.Pointer(_ranges)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1147,8 +1203,12 @@ type ICorProfilerInfo2 struct {
 var IID_ICorProfilerInfo2 = win32.GUID{Data1: 0xcc0935cd, Data2: 0xa518, Data3: 0x487d, Data4: [8]byte{0xb0, 0xbb, 0xa9, 0x32, 0x14, 0xe6, 0x54, 0x78}}
 
 // DoStackSnapshot dispatches through ICorProfilerInfo2's vtable slot 36.
-func (self *ICorProfilerInfo2) DoStackSnapshot(thread uintptr, callback *StackSnapshotCallback, infoFlags uint32, clientData unsafe.Pointer, context *byte, contextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(thread), uintptr(unsafe.Pointer(callback)), uintptr(infoFlags), uintptr(unsafe.Pointer(clientData)), uintptr(unsafe.Pointer(context)), uintptr(contextSize))
+func (self *ICorProfilerInfo2) DoStackSnapshot(thread uintptr, callback *StackSnapshotCallback, infoFlags uint32, clientData unsafe.Pointer, context []byte) error {
+	var _context *byte
+	if len(context) > 0 {
+		_context = &context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(thread), uintptr(unsafe.Pointer(callback)), uintptr(infoFlags), uintptr(unsafe.Pointer(clientData)), uintptr(unsafe.Pointer(_context)), uintptr(len(context)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1183,20 +1243,32 @@ func (self *ICorProfilerInfo2) GetClassIDInfo2(classId uintptr, pModuleId *uintp
 }
 
 // GetCodeInfo2 dispatches through ICorProfilerInfo2's vtable slot 42.
-func (self *ICorProfilerInfo2) GetCodeInfo2(functionID uintptr, cCodeInfos uint32, pcCodeInfos *uint32, codeInfos *COR_PRF_CODE_INFO) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(functionID), uintptr(cCodeInfos), uintptr(unsafe.Pointer(pcCodeInfos)), uintptr(unsafe.Pointer(codeInfos)))
+func (self *ICorProfilerInfo2) GetCodeInfo2(functionID uintptr, pcCodeInfos *uint32, codeInfos []COR_PRF_CODE_INFO) error {
+	var _codeInfos *COR_PRF_CODE_INFO
+	if len(codeInfos) > 0 {
+		_codeInfos = &codeInfos[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(functionID), uintptr(len(codeInfos)), uintptr(unsafe.Pointer(pcCodeInfos)), uintptr(unsafe.Pointer(_codeInfos)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetClassFromTokenAndTypeArgs dispatches through ICorProfilerInfo2's vtable slot 43.
-func (self *ICorProfilerInfo2) GetClassFromTokenAndTypeArgs(moduleID uintptr, typeDef uint32, cTypeArgs uint32, typeArgs *uintptr, pClassID *uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(moduleID), uintptr(typeDef), uintptr(cTypeArgs), uintptr(unsafe.Pointer(typeArgs)), uintptr(unsafe.Pointer(pClassID)))
+func (self *ICorProfilerInfo2) GetClassFromTokenAndTypeArgs(moduleID uintptr, typeDef uint32, typeArgs []uintptr, pClassID *uintptr) error {
+	var _typeArgs *uintptr
+	if len(typeArgs) > 0 {
+		_typeArgs = &typeArgs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(moduleID), uintptr(typeDef), uintptr(len(typeArgs)), uintptr(unsafe.Pointer(_typeArgs)), uintptr(unsafe.Pointer(pClassID)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetFunctionFromTokenAndTypeArgs dispatches through ICorProfilerInfo2's vtable slot 44.
-func (self *ICorProfilerInfo2) GetFunctionFromTokenAndTypeArgs(moduleID uintptr, funcDef uint32, classId uintptr, cTypeArgs uint32, typeArgs *uintptr, pFunctionID *uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(moduleID), uintptr(funcDef), uintptr(classId), uintptr(cTypeArgs), uintptr(unsafe.Pointer(typeArgs)), uintptr(unsafe.Pointer(pFunctionID)))
+func (self *ICorProfilerInfo2) GetFunctionFromTokenAndTypeArgs(moduleID uintptr, funcDef uint32, classId uintptr, typeArgs []uintptr, pFunctionID *uintptr) error {
+	var _typeArgs *uintptr
+	if len(typeArgs) > 0 {
+		_typeArgs = &typeArgs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(moduleID), uintptr(funcDef), uintptr(classId), uintptr(len(typeArgs)), uintptr(unsafe.Pointer(_typeArgs)), uintptr(unsafe.Pointer(pFunctionID)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1255,8 +1327,12 @@ func (self *ICorProfilerInfo2) GetStaticFieldInfo(classId uintptr, fieldToken ui
 }
 
 // GetGenerationBounds dispatches through ICorProfilerInfo2's vtable slot 54.
-func (self *ICorProfilerInfo2) GetGenerationBounds(cObjectRanges uint32, pcObjectRanges *uint32, ranges *COR_PRF_GC_GENERATION_RANGE) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(cObjectRanges), uintptr(unsafe.Pointer(pcObjectRanges)), uintptr(unsafe.Pointer(ranges)))
+func (self *ICorProfilerInfo2) GetGenerationBounds(pcObjectRanges *uint32, ranges []COR_PRF_GC_GENERATION_RANGE) error {
+	var _ranges *COR_PRF_GC_GENERATION_RANGE
+	if len(ranges) > 0 {
+		_ranges = &ranges[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(len(ranges)), uintptr(unsafe.Pointer(pcObjectRanges)), uintptr(unsafe.Pointer(_ranges)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1353,8 +1429,12 @@ func (self *ICorProfilerInfo3) GetThreadStaticAddress2(classId uintptr, fieldTok
 }
 
 // GetAppDomainsContainingModule dispatches through ICorProfilerInfo3's vtable slot 69.
-func (self *ICorProfilerInfo3) GetAppDomainsContainingModule(moduleId uintptr, cAppDomainIds uint32, pcAppDomainIds *uint32, appDomainIds *uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(cAppDomainIds), uintptr(unsafe.Pointer(pcAppDomainIds)), uintptr(unsafe.Pointer(appDomainIds)))
+func (self *ICorProfilerInfo3) GetAppDomainsContainingModule(moduleId uintptr, pcAppDomainIds *uint32, appDomainIds []uintptr) error {
+	var _appDomainIds *uintptr
+	if len(appDomainIds) > 0 {
+		_appDomainIds = &appDomainIds[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(moduleId), uintptr(len(appDomainIds)), uintptr(unsafe.Pointer(pcAppDomainIds)), uintptr(unsafe.Pointer(_appDomainIds)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1397,8 +1477,12 @@ func (self *ICorProfilerInfo4) RequestRevert(cFunctions uint32, moduleIds *uintp
 }
 
 // GetCodeInfo3 dispatches through ICorProfilerInfo4's vtable slot 75.
-func (self *ICorProfilerInfo4) GetCodeInfo3(functionID uintptr, reJitId uintptr, cCodeInfos uint32, pcCodeInfos *uint32, codeInfos *COR_PRF_CODE_INFO) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(functionID), uintptr(reJitId), uintptr(cCodeInfos), uintptr(unsafe.Pointer(pcCodeInfos)), uintptr(unsafe.Pointer(codeInfos)))
+func (self *ICorProfilerInfo4) GetCodeInfo3(functionID uintptr, reJitId uintptr, pcCodeInfos *uint32, codeInfos []COR_PRF_CODE_INFO) error {
+	var _codeInfos *COR_PRF_CODE_INFO
+	if len(codeInfos) > 0 {
+		_codeInfos = &codeInfos[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(functionID), uintptr(reJitId), uintptr(len(codeInfos)), uintptr(unsafe.Pointer(pcCodeInfos)), uintptr(unsafe.Pointer(_codeInfos)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1409,14 +1493,22 @@ func (self *ICorProfilerInfo4) GetFunctionFromIP2(ip *byte, pFunctionId *uintptr
 }
 
 // GetReJITIDs dispatches through ICorProfilerInfo4's vtable slot 77.
-func (self *ICorProfilerInfo4) GetReJITIDs(functionId uintptr, cReJitIds uint32, pcReJitIds *uint32, reJitIds *uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(cReJitIds), uintptr(unsafe.Pointer(pcReJitIds)), uintptr(unsafe.Pointer(reJitIds)))
+func (self *ICorProfilerInfo4) GetReJITIDs(functionId uintptr, pcReJitIds *uint32, reJitIds []uintptr) error {
+	var _reJitIds *uintptr
+	if len(reJitIds) > 0 {
+		_reJitIds = &reJitIds[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(len(reJitIds)), uintptr(unsafe.Pointer(pcReJitIds)), uintptr(unsafe.Pointer(_reJitIds)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetILToNativeMapping2 dispatches through ICorProfilerInfo4's vtable slot 78.
-func (self *ICorProfilerInfo4) GetILToNativeMapping2(functionId uintptr, reJitId uintptr, cMap uint32, pcMap *uint32, map_ *COR_DEBUG_IL_TO_NATIVE_MAP) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(reJitId), uintptr(cMap), uintptr(unsafe.Pointer(pcMap)), uintptr(unsafe.Pointer(map_)))
+func (self *ICorProfilerInfo4) GetILToNativeMapping2(functionId uintptr, reJitId uintptr, pcMap *uint32, map_ []COR_DEBUG_IL_TO_NATIVE_MAP) error {
+	var _map_ *COR_DEBUG_IL_TO_NATIVE_MAP
+	if len(map_) > 0 {
+		_map_ = &map_[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(functionId), uintptr(reJitId), uintptr(len(map_)), uintptr(unsafe.Pointer(pcMap)), uintptr(unsafe.Pointer(_map_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1577,8 +1669,12 @@ func (self *ICorProfilerMethodEnum) GetCount(pcelt *uint32) error {
 }
 
 // Next dispatches through ICorProfilerMethodEnum's vtable slot 7.
-func (self *ICorProfilerMethodEnum) Next(celt uint32, elements *COR_PRF_METHOD, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(elements)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *ICorProfilerMethodEnum) Next(elements []COR_PRF_METHOD, pceltFetched *uint32) error {
+	var _elements *COR_PRF_METHOD
+	if len(elements) > 0 {
+		_elements = &elements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(elements)), uintptr(unsafe.Pointer(_elements)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1615,8 +1711,12 @@ func (self *ICorProfilerModuleEnum) GetCount(pcelt *uint32) error {
 }
 
 // Next dispatches through ICorProfilerModuleEnum's vtable slot 7.
-func (self *ICorProfilerModuleEnum) Next(celt uint32, ids *uintptr, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ids)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *ICorProfilerModuleEnum) Next(ids []uintptr, pceltFetched *uint32) error {
+	var _ids *uintptr
+	if len(ids) > 0 {
+		_ids = &ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(ids)), uintptr(unsafe.Pointer(_ids)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1653,8 +1753,12 @@ func (self *ICorProfilerObjectEnum) GetCount(pcelt *uint32) error {
 }
 
 // Next dispatches through ICorProfilerObjectEnum's vtable slot 7.
-func (self *ICorProfilerObjectEnum) Next(celt uint32, objects *uintptr, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(objects)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *ICorProfilerObjectEnum) Next(objects []uintptr, pceltFetched *uint32) error {
+	var _objects *uintptr
+	if len(objects) > 0 {
+		_objects = &objects[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(objects)), uintptr(unsafe.Pointer(_objects)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1691,8 +1795,12 @@ func (self *ICorProfilerThreadEnum) GetCount(pcelt *uint32) error {
 }
 
 // Next dispatches through ICorProfilerThreadEnum's vtable slot 7.
-func (self *ICorProfilerThreadEnum) Next(celt uint32, ids *uintptr, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ids)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *ICorProfilerThreadEnum) Next(ids []uintptr, pceltFetched *uint32) error {
+	var _ids *uintptr
+	if len(ids) > 0 {
+		_ids = &ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(ids)), uintptr(unsafe.Pointer(_ids)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 

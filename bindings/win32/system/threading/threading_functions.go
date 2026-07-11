@@ -1830,8 +1830,12 @@ func GetProcessIdOfThread(Thread foundation.HANDLE) (uint32, error) {
 // GetProcessInformation calls KERNEL32!GetProcessInformation.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocessinformation
 // Minimum OS: windows8.0.
-func GetProcessInformation(hProcess foundation.HANDLE, ProcessInformationClass PROCESS_INFORMATION_CLASS, ProcessInformation unsafe.Pointer, ProcessInformationSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetProcessInformation.Addr(), uintptr(hProcess), uintptr(ProcessInformationClass), uintptr(unsafe.Pointer(ProcessInformation)), uintptr(ProcessInformationSize))
+func GetProcessInformation(hProcess foundation.HANDLE, ProcessInformationClass PROCESS_INFORMATION_CLASS, ProcessInformation []byte) error {
+	var _ProcessInformation *byte
+	if len(ProcessInformation) > 0 {
+		_ProcessInformation = &ProcessInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetProcessInformation.Addr(), uintptr(hProcess), uintptr(ProcessInformationClass), uintptr(unsafe.Pointer(_ProcessInformation)), uintptr(len(ProcessInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1852,8 +1856,12 @@ func GetProcessIoCounters(hProcess foundation.HANDLE, lpIoCounters *IO_COUNTERS)
 // GetProcessMitigationPolicy calls KERNEL32!GetProcessMitigationPolicy.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getprocessmitigationpolicy
 // Minimum OS: windows8.0.
-func GetProcessMitigationPolicy(hProcess foundation.HANDLE, MitigationPolicy PROCESS_MITIGATION_POLICY, lpBuffer unsafe.Pointer, dwLength uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procGetProcessMitigationPolicy.Addr(), uintptr(hProcess), uintptr(MitigationPolicy), uintptr(unsafe.Pointer(lpBuffer)), uintptr(dwLength))
+func GetProcessMitigationPolicy(hProcess foundation.HANDLE, MitigationPolicy PROCESS_MITIGATION_POLICY, lpBuffer []byte) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetProcessMitigationPolicy.Addr(), uintptr(hProcess), uintptr(MitigationPolicy), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1991,8 +1999,12 @@ func GetThreadIdealProcessorEx(hThread foundation.HANDLE, lpIdealProcessor *syst
 // GetThreadInformation calls KERNEL32!GetThreadInformation.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-getthreadinformation
 // Minimum OS: windows8.0.
-func GetThreadInformation(hThread foundation.HANDLE, ThreadInformationClass THREAD_INFORMATION_CLASS, ThreadInformation unsafe.Pointer, ThreadInformationSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetThreadInformation.Addr(), uintptr(hThread), uintptr(ThreadInformationClass), uintptr(unsafe.Pointer(ThreadInformation)), uintptr(ThreadInformationSize))
+func GetThreadInformation(hThread foundation.HANDLE, ThreadInformationClass THREAD_INFORMATION_CLASS, ThreadInformation []byte) error {
+	var _ThreadInformation *byte
+	if len(ThreadInformation) > 0 {
+		_ThreadInformation = &ThreadInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetThreadInformation.Addr(), uintptr(hThread), uintptr(ThreadInformationClass), uintptr(unsafe.Pointer(_ThreadInformation)), uintptr(len(ThreadInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2515,8 +2527,12 @@ func QueryThreadpoolStackInformation(ptpp PTP_POOL, ptpsi *TP_POOL_STACK_INFORMA
 // QueryUmsThreadInformation calls KERNEL32!QueryUmsThreadInformation.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-queryumsthreadinformation
 // Minimum OS: windows6.1.
-func QueryUmsThreadInformation(UmsThread unsafe.Pointer, UmsThreadInfoClass UMS_THREAD_INFO_CLASS, UmsThreadInformation unsafe.Pointer, UmsThreadInformationLength uint32, ReturnLength *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procQueryUmsThreadInformation.Addr(), uintptr(unsafe.Pointer(UmsThread)), uintptr(UmsThreadInfoClass), uintptr(unsafe.Pointer(UmsThreadInformation)), uintptr(UmsThreadInformationLength), uintptr(unsafe.Pointer(ReturnLength)))
+func QueryUmsThreadInformation(UmsThread unsafe.Pointer, UmsThreadInfoClass UMS_THREAD_INFO_CLASS, UmsThreadInformation []byte, ReturnLength *uint32) error {
+	var _UmsThreadInformation *byte
+	if len(UmsThreadInformation) > 0 {
+		_UmsThreadInformation = &UmsThreadInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procQueryUmsThreadInformation.Addr(), uintptr(unsafe.Pointer(UmsThread)), uintptr(UmsThreadInfoClass), uintptr(unsafe.Pointer(_UmsThreadInformation)), uintptr(len(UmsThreadInformation)), uintptr(unsafe.Pointer(ReturnLength)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3022,8 +3038,12 @@ func SetProcessDynamicEnforcedCetCompatibleRanges(Process foundation.HANDLE, Ran
 // SetProcessInformation calls KERNEL32!SetProcessInformation.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setprocessinformation
 // Minimum OS: windows8.0.
-func SetProcessInformation(hProcess foundation.HANDLE, ProcessInformationClass PROCESS_INFORMATION_CLASS, ProcessInformation unsafe.Pointer, ProcessInformationSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetProcessInformation.Addr(), uintptr(hProcess), uintptr(ProcessInformationClass), uintptr(unsafe.Pointer(ProcessInformation)), uintptr(ProcessInformationSize))
+func SetProcessInformation(hProcess foundation.HANDLE, ProcessInformationClass PROCESS_INFORMATION_CLASS, ProcessInformation []byte) error {
+	var _ProcessInformation *byte
+	if len(ProcessInformation) > 0 {
+		_ProcessInformation = &ProcessInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetProcessInformation.Addr(), uintptr(hProcess), uintptr(ProcessInformationClass), uintptr(unsafe.Pointer(_ProcessInformation)), uintptr(len(ProcessInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3033,8 +3053,12 @@ func SetProcessInformation(hProcess foundation.HANDLE, ProcessInformationClass P
 // SetProcessMitigationPolicy calls KERNEL32!SetProcessMitigationPolicy.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setprocessmitigationpolicy
 // Minimum OS: windows8.0.
-func SetProcessMitigationPolicy(MitigationPolicy PROCESS_MITIGATION_POLICY, lpBuffer unsafe.Pointer, dwLength uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procSetProcessMitigationPolicy.Addr(), uintptr(MitigationPolicy), uintptr(unsafe.Pointer(lpBuffer)), uintptr(dwLength))
+func SetProcessMitigationPolicy(MitigationPolicy PROCESS_MITIGATION_POLICY, lpBuffer []byte) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetProcessMitigationPolicy.Addr(), uintptr(MitigationPolicy), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3151,8 +3175,12 @@ func SetThreadIdealProcessorEx(hThread foundation.HANDLE, lpIdealProcessor *syst
 // SetThreadInformation calls KERNEL32!SetThreadInformation.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-setthreadinformation
 // Minimum OS: windows8.0.
-func SetThreadInformation(hThread foundation.HANDLE, ThreadInformationClass THREAD_INFORMATION_CLASS, ThreadInformation unsafe.Pointer, ThreadInformationSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetThreadInformation.Addr(), uintptr(hThread), uintptr(ThreadInformationClass), uintptr(unsafe.Pointer(ThreadInformation)), uintptr(ThreadInformationSize))
+func SetThreadInformation(hThread foundation.HANDLE, ThreadInformationClass THREAD_INFORMATION_CLASS, ThreadInformation []byte) error {
+	var _ThreadInformation *byte
+	if len(ThreadInformation) > 0 {
+		_ThreadInformation = &ThreadInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetThreadInformation.Addr(), uintptr(hThread), uintptr(ThreadInformationClass), uintptr(unsafe.Pointer(_ThreadInformation)), uintptr(len(ThreadInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

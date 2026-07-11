@@ -181,8 +181,16 @@ func WlanDeleteProfile(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GU
 
 // WlanDeviceServiceCommand calls wlanapi!WlanDeviceServiceCommand.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlandeviceservicecommand
-func WlanDeviceServiceCommand(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, pDeviceServiceGuid *win32.GUID, dwOpCode uint32, dwInBufferSize uint32, pInBuffer unsafe.Pointer, dwOutBufferSize uint32, pOutBuffer unsafe.Pointer, pdwBytesReturned *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procWlanDeviceServiceCommand.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(unsafe.Pointer(pDeviceServiceGuid)), uintptr(dwOpCode), uintptr(dwInBufferSize), uintptr(unsafe.Pointer(pInBuffer)), uintptr(dwOutBufferSize), uintptr(unsafe.Pointer(pOutBuffer)), uintptr(unsafe.Pointer(pdwBytesReturned)))
+func WlanDeviceServiceCommand(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, pDeviceServiceGuid *win32.GUID, dwOpCode uint32, pInBuffer []byte, pOutBuffer []byte, pdwBytesReturned *uint32) uint32 {
+	var _pInBuffer *byte
+	if len(pInBuffer) > 0 {
+		_pInBuffer = &pInBuffer[0]
+	}
+	var _pOutBuffer *byte
+	if len(pOutBuffer) > 0 {
+		_pOutBuffer = &pOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWlanDeviceServiceCommand.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(unsafe.Pointer(pDeviceServiceGuid)), uintptr(dwOpCode), uintptr(len(pInBuffer)), uintptr(unsafe.Pointer(_pInBuffer)), uintptr(len(pOutBuffer)), uintptr(unsafe.Pointer(_pOutBuffer)), uintptr(unsafe.Pointer(pdwBytesReturned)))
 	return uint32(r1)
 }
 
@@ -205,9 +213,13 @@ func WlanEnumInterfaces(hClientHandle foundation.HANDLE, ppInterfaceList **WLAN_
 // WlanExtractPsdIEDataList calls wlanapi!WlanExtractPsdIEDataList.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanextractpsdiedatalist
 // Minimum OS: windows6.0.6000.
-func WlanExtractPsdIEDataList(hClientHandle foundation.HANDLE, dwIeDataSize uint32, pRawIeData *byte, strFormat string, ppPsdIEDataList **WLAN_RAW_DATA_LIST) uint32 {
+func WlanExtractPsdIEDataList(hClientHandle foundation.HANDLE, pRawIeData []byte, strFormat string, ppPsdIEDataList **WLAN_RAW_DATA_LIST) uint32 {
+	var _pRawIeData *byte
+	if len(pRawIeData) > 0 {
+		_pRawIeData = &pRawIeData[0]
+	}
 	_strFormat := win32.UTF16Ptr(strFormat)
-	r1, _, _ := syscall.SyscallN(procWlanExtractPsdIEDataList.Addr(), uintptr(hClientHandle), uintptr(dwIeDataSize), uintptr(unsafe.Pointer(pRawIeData)), uintptr(unsafe.Pointer(_strFormat)), 0, uintptr(unsafe.Pointer(ppPsdIEDataList)))
+	r1, _, _ := syscall.SyscallN(procWlanExtractPsdIEDataList.Addr(), uintptr(hClientHandle), uintptr(len(pRawIeData)), uintptr(unsafe.Pointer(_pRawIeData)), uintptr(unsafe.Pointer(_strFormat)), 0, uintptr(unsafe.Pointer(ppPsdIEDataList)))
 	return uint32(r1)
 }
 
@@ -357,18 +369,26 @@ func WlanHostedNetworkRefreshSecuritySettings(hClientHandle foundation.HANDLE, p
 // WlanHostedNetworkSetProperty calls wlanapi!WlanHostedNetworkSetProperty.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanhostednetworksetproperty
 // Minimum OS: windows6.1.
-func WlanHostedNetworkSetProperty(hClientHandle foundation.HANDLE, OpCode WLAN_HOSTED_NETWORK_OPCODE, dwDataSize uint32, pvData unsafe.Pointer, pFailReason *WLAN_HOSTED_NETWORK_REASON) uint32 {
-	r1, _, _ := syscall.SyscallN(procWlanHostedNetworkSetProperty.Addr(), uintptr(hClientHandle), uintptr(OpCode), uintptr(dwDataSize), uintptr(unsafe.Pointer(pvData)), uintptr(unsafe.Pointer(pFailReason)), 0)
+func WlanHostedNetworkSetProperty(hClientHandle foundation.HANDLE, OpCode WLAN_HOSTED_NETWORK_OPCODE, pvData []byte, pFailReason *WLAN_HOSTED_NETWORK_REASON) uint32 {
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWlanHostedNetworkSetProperty.Addr(), uintptr(hClientHandle), uintptr(OpCode), uintptr(len(pvData)), uintptr(unsafe.Pointer(_pvData)), uintptr(unsafe.Pointer(pFailReason)), 0)
 	return uint32(r1)
 }
 
 // WlanHostedNetworkSetSecondaryKey calls wlanapi!WlanHostedNetworkSetSecondaryKey.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanhostednetworksetsecondarykey
 // Minimum OS: windows6.1.
-func WlanHostedNetworkSetSecondaryKey(hClientHandle foundation.HANDLE, dwKeyLength uint32, pucKeyData *byte, bIsPassPhrase bool, bPersistent bool, pFailReason *WLAN_HOSTED_NETWORK_REASON) uint32 {
+func WlanHostedNetworkSetSecondaryKey(hClientHandle foundation.HANDLE, pucKeyData []byte, bIsPassPhrase bool, bPersistent bool, pFailReason *WLAN_HOSTED_NETWORK_REASON) uint32 {
+	var _pucKeyData *byte
+	if len(pucKeyData) > 0 {
+		_pucKeyData = &pucKeyData[0]
+	}
 	_bIsPassPhrase := win32.Bool32(bIsPassPhrase)
 	_bPersistent := win32.Bool32(bPersistent)
-	r1, _, _ := syscall.SyscallN(procWlanHostedNetworkSetSecondaryKey.Addr(), uintptr(hClientHandle), uintptr(dwKeyLength), uintptr(unsafe.Pointer(pucKeyData)), uintptr(_bIsPassPhrase), uintptr(_bPersistent), uintptr(unsafe.Pointer(pFailReason)), 0)
+	r1, _, _ := syscall.SyscallN(procWlanHostedNetworkSetSecondaryKey.Addr(), uintptr(hClientHandle), uintptr(len(pucKeyData)), uintptr(unsafe.Pointer(_pucKeyData)), uintptr(_bIsPassPhrase), uintptr(_bPersistent), uintptr(unsafe.Pointer(pFailReason)), 0)
 	return uint32(r1)
 }
 
@@ -391,8 +411,16 @@ func WlanHostedNetworkStopUsing(hClientHandle foundation.HANDLE, pFailReason *WL
 // WlanIhvControl calls wlanapi!WlanIhvControl.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlanihvcontrol
 // Minimum OS: windows6.0.6000.
-func WlanIhvControl(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, Type WLAN_IHV_CONTROL_TYPE, dwInBufferSize uint32, pInBuffer unsafe.Pointer, dwOutBufferSize uint32, pOutBuffer unsafe.Pointer, pdwBytesReturned *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procWlanIhvControl.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(Type), uintptr(dwInBufferSize), uintptr(unsafe.Pointer(pInBuffer)), uintptr(dwOutBufferSize), uintptr(unsafe.Pointer(pOutBuffer)), uintptr(unsafe.Pointer(pdwBytesReturned)))
+func WlanIhvControl(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, Type WLAN_IHV_CONTROL_TYPE, pInBuffer []byte, pOutBuffer []byte, pdwBytesReturned *uint32) uint32 {
+	var _pInBuffer *byte
+	if len(pInBuffer) > 0 {
+		_pInBuffer = &pInBuffer[0]
+	}
+	var _pOutBuffer *byte
+	if len(pOutBuffer) > 0 {
+		_pOutBuffer = &pOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWlanIhvControl.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(Type), uintptr(len(pInBuffer)), uintptr(unsafe.Pointer(_pInBuffer)), uintptr(len(pOutBuffer)), uintptr(unsafe.Pointer(_pOutBuffer)), uintptr(unsafe.Pointer(pdwBytesReturned)))
 	return uint32(r1)
 }
 
@@ -486,8 +514,12 @@ func WlanScan(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, pDot1
 // WlanSetAutoConfigParameter calls wlanapi!WlanSetAutoConfigParameter.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetautoconfigparameter
 // Minimum OS: windows6.0.6000.
-func WlanSetAutoConfigParameter(hClientHandle foundation.HANDLE, OpCode WLAN_AUTOCONF_OPCODE, dwDataSize uint32, pData unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procWlanSetAutoConfigParameter.Addr(), uintptr(hClientHandle), uintptr(OpCode), uintptr(dwDataSize), uintptr(unsafe.Pointer(pData)), 0)
+func WlanSetAutoConfigParameter(hClientHandle foundation.HANDLE, OpCode WLAN_AUTOCONF_OPCODE, pData []byte) uint32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWlanSetAutoConfigParameter.Addr(), uintptr(hClientHandle), uintptr(OpCode), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)), 0)
 	return uint32(r1)
 }
 
@@ -502,8 +534,12 @@ func WlanSetFilterList(hClientHandle foundation.HANDLE, wlanFilterListType WLAN_
 // WlanSetInterface calls wlanapi!WlanSetInterface.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetinterface
 // Minimum OS: windows6.0.6000.
-func WlanSetInterface(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, OpCode WLAN_INTF_OPCODE, dwDataSize uint32, pData unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procWlanSetInterface.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(OpCode), uintptr(dwDataSize), uintptr(unsafe.Pointer(pData)), 0)
+func WlanSetInterface(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, OpCode WLAN_INTF_OPCODE, pData []byte) uint32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWlanSetInterface.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(OpCode), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)), 0)
 	return uint32(r1)
 }
 
@@ -521,9 +557,13 @@ func WlanSetProfile(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID,
 // WlanSetProfileCustomUserData calls wlanapi!WlanSetProfileCustomUserData.
 // https://learn.microsoft.com/windows/win32/api/wlanapi/nf-wlanapi-wlansetprofilecustomuserdata
 // Minimum OS: windows6.0.6000.
-func WlanSetProfileCustomUserData(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, strProfileName string, dwDataSize uint32, pData *byte) uint32 {
+func WlanSetProfileCustomUserData(hClientHandle foundation.HANDLE, pInterfaceGuid *win32.GUID, strProfileName string, pData []byte) uint32 {
 	_strProfileName := win32.UTF16Ptr(strProfileName)
-	r1, _, _ := syscall.SyscallN(procWlanSetProfileCustomUserData.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(unsafe.Pointer(_strProfileName)), uintptr(dwDataSize), uintptr(unsafe.Pointer(pData)), 0)
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWlanSetProfileCustomUserData.Addr(), uintptr(hClientHandle), uintptr(unsafe.Pointer(pInterfaceGuid)), uintptr(unsafe.Pointer(_strProfileName)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)), 0)
 	return uint32(r1)
 }
 

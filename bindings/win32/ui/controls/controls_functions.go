@@ -1107,8 +1107,12 @@ func GetMUILanguage() uint16 {
 // GetThemeAnimationProperty calls UXTHEME!GetThemeAnimationProperty.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-getthemeanimationproperty
 // Minimum OS: windows8.0.
-func GetThemeAnimationProperty(hTheme HTHEME, iStoryboardId int32, iTargetId int32, eProperty TA_PROPERTY, pvProperty unsafe.Pointer, cbSize uint32, pcbSizeOut *uint32) error {
-	r1, _, _ := syscall.SyscallN(procGetThemeAnimationProperty.Addr(), uintptr(hTheme), uintptr(iStoryboardId), uintptr(iTargetId), uintptr(eProperty), uintptr(unsafe.Pointer(pvProperty)), uintptr(cbSize), uintptr(unsafe.Pointer(pcbSizeOut)))
+func GetThemeAnimationProperty(hTheme HTHEME, iStoryboardId int32, iTargetId int32, eProperty TA_PROPERTY, pvProperty []byte, pcbSizeOut *uint32) error {
+	var _pvProperty *byte
+	if len(pvProperty) > 0 {
+		_pvProperty = &pvProperty[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetThemeAnimationProperty.Addr(), uintptr(hTheme), uintptr(iStoryboardId), uintptr(iTargetId), uintptr(eProperty), uintptr(unsafe.Pointer(_pvProperty)), uintptr(len(pvProperty)), uintptr(unsafe.Pointer(pcbSizeOut)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1936,8 +1940,12 @@ func SetThemeAppProperties(dwFlags SET_THEME_APP_PROPERTIES_FLAGS) {
 // SetWindowFeedbackSetting calls USER32!SetWindowFeedbackSetting.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-setwindowfeedbacksetting
 // Minimum OS: windows8.0.
-func SetWindowFeedbackSetting(hwnd foundation.HWND, feedback FEEDBACK_TYPE, dwFlags uint32, size uint32, configuration unsafe.Pointer) bool {
-	r1, _, _ := syscall.SyscallN(procSetWindowFeedbackSetting.Addr(), uintptr(hwnd), uintptr(feedback), uintptr(dwFlags), uintptr(size), uintptr(unsafe.Pointer(configuration)))
+func SetWindowFeedbackSetting(hwnd foundation.HWND, feedback FEEDBACK_TYPE, dwFlags uint32, configuration []byte) bool {
+	var _configuration *byte
+	if len(configuration) > 0 {
+		_configuration = &configuration[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetWindowFeedbackSetting.Addr(), uintptr(hwnd), uintptr(feedback), uintptr(dwFlags), uintptr(len(configuration)), uintptr(unsafe.Pointer(_configuration)))
 	return r1 != 0
 }
 
@@ -1954,8 +1962,12 @@ func SetWindowTheme(hwnd foundation.HWND, pszSubAppName string, pszSubIdList str
 // SetWindowThemeAttribute calls UXTHEME!SetWindowThemeAttribute.
 // https://learn.microsoft.com/windows/win32/api/uxtheme/nf-uxtheme-setwindowthemeattribute
 // Minimum OS: windows6.0.6000.
-func SetWindowThemeAttribute(hwnd foundation.HWND, eAttribute WINDOWTHEMEATTRIBUTETYPE, pvAttribute unsafe.Pointer, cbAttribute uint32) error {
-	r1, _, _ := syscall.SyscallN(procSetWindowThemeAttribute.Addr(), uintptr(hwnd), uintptr(eAttribute), uintptr(unsafe.Pointer(pvAttribute)), uintptr(cbAttribute))
+func SetWindowThemeAttribute(hwnd foundation.HWND, eAttribute WINDOWTHEMEATTRIBUTETYPE, pvAttribute []byte) error {
+	var _pvAttribute *byte
+	if len(pvAttribute) > 0 {
+		_pvAttribute = &pvAttribute[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetWindowThemeAttribute.Addr(), uintptr(hwnd), uintptr(eAttribute), uintptr(unsafe.Pointer(_pvAttribute)), uintptr(len(pvAttribute)))
 	return win32.HRESULTError(int32(r1))
 }
 

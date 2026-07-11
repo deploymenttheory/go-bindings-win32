@@ -178,8 +178,12 @@ func (self *IDWriteFactory) GetSystemFontCollection(fontCollection **IDWriteFont
 }
 
 // CreateCustomFontCollection dispatches through IDWriteFactory's vtable slot 4.
-func (self *IDWriteFactory) CreateCustomFontCollection(collectionLoader *IDWriteFontCollectionLoader, collectionKey unsafe.Pointer, collectionKeySize uint32, fontCollection **IDWriteFontCollection) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(collectionLoader)), uintptr(unsafe.Pointer(collectionKey)), uintptr(collectionKeySize), uintptr(unsafe.Pointer(fontCollection)))
+func (self *IDWriteFactory) CreateCustomFontCollection(collectionLoader *IDWriteFontCollectionLoader, collectionKey []byte, fontCollection **IDWriteFontCollection) error {
+	var _collectionKey *byte
+	if len(collectionKey) > 0 {
+		_collectionKey = &collectionKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(collectionLoader)), uintptr(unsafe.Pointer(_collectionKey)), uintptr(len(collectionKey)), uintptr(unsafe.Pointer(fontCollection)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -203,14 +207,22 @@ func (self *IDWriteFactory) CreateFontFileReference(filePath string, lastWriteTi
 }
 
 // CreateCustomFontFileReference dispatches through IDWriteFactory's vtable slot 8.
-func (self *IDWriteFactory) CreateCustomFontFileReference(fontFileReferenceKey unsafe.Pointer, fontFileReferenceKeySize uint32, fontFileLoader *IDWriteFontFileLoader, fontFile **IDWriteFontFile) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFileReferenceKey)), uintptr(fontFileReferenceKeySize), uintptr(unsafe.Pointer(fontFileLoader)), uintptr(unsafe.Pointer(fontFile)))
+func (self *IDWriteFactory) CreateCustomFontFileReference(fontFileReferenceKey []byte, fontFileLoader *IDWriteFontFileLoader, fontFile **IDWriteFontFile) error {
+	var _fontFileReferenceKey *byte
+	if len(fontFileReferenceKey) > 0 {
+		_fontFileReferenceKey = &fontFileReferenceKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontFileReferenceKey)), uintptr(len(fontFileReferenceKey)), uintptr(unsafe.Pointer(fontFileLoader)), uintptr(unsafe.Pointer(fontFile)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateFontFace dispatches through IDWriteFactory's vtable slot 9.
-func (self *IDWriteFactory) CreateFontFace(fontFaceType DWRITE_FONT_FACE_TYPE, numberOfFiles uint32, fontFiles **IDWriteFontFile, faceIndex uint32, fontFaceSimulationFlags DWRITE_FONT_SIMULATIONS, fontFace **IDWriteFontFace) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fontFaceType), uintptr(numberOfFiles), uintptr(unsafe.Pointer(fontFiles)), uintptr(faceIndex), uintptr(fontFaceSimulationFlags), uintptr(unsafe.Pointer(fontFace)))
+func (self *IDWriteFactory) CreateFontFace(fontFaceType DWRITE_FONT_FACE_TYPE, fontFiles []*IDWriteFontFile, faceIndex uint32, fontFaceSimulationFlags DWRITE_FONT_SIMULATIONS, fontFace **IDWriteFontFace) error {
+	var _fontFiles **IDWriteFontFile
+	if len(fontFiles) > 0 {
+		_fontFiles = &fontFiles[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(fontFaceType), uintptr(len(fontFiles)), uintptr(unsafe.Pointer(_fontFiles)), uintptr(faceIndex), uintptr(fontFaceSimulationFlags), uintptr(unsafe.Pointer(fontFace)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -400,14 +412,22 @@ func (self *IDWriteFactory5) CreateHttpFontFileLoader(referrerUrl string, extraH
 }
 
 // AnalyzeContainerType dispatches through IDWriteFactory5's vtable slot 46.
-func (self *IDWriteFactory5) AnalyzeContainerType(fileData unsafe.Pointer, fileDataSize uint32) DWRITE_CONTAINER_TYPE {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fileData)), uintptr(fileDataSize))
+func (self *IDWriteFactory5) AnalyzeContainerType(fileData []byte) DWRITE_CONTAINER_TYPE {
+	var _fileData *byte
+	if len(fileData) > 0 {
+		_fileData = &fileData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fileData)), uintptr(len(fileData)))
 	return DWRITE_CONTAINER_TYPE(r1)
 }
 
 // UnpackFontFile dispatches through IDWriteFactory5's vtable slot 47.
-func (self *IDWriteFactory5) UnpackFontFile(containerType DWRITE_CONTAINER_TYPE, fileData unsafe.Pointer, fileDataSize uint32, unpackedFontStream **IDWriteFontFileStream) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(containerType), uintptr(unsafe.Pointer(fileData)), uintptr(fileDataSize), uintptr(unsafe.Pointer(unpackedFontStream)))
+func (self *IDWriteFactory5) UnpackFontFile(containerType DWRITE_CONTAINER_TYPE, fileData []byte, unpackedFontStream **IDWriteFontFileStream) error {
+	var _fileData *byte
+	if len(fileData) > 0 {
+		_fileData = &fileData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(containerType), uintptr(unsafe.Pointer(_fileData)), uintptr(len(fileData)), uintptr(unsafe.Pointer(unpackedFontStream)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -421,8 +441,12 @@ type IDWriteFactory6 struct {
 var IID_IDWriteFactory6 = win32.GUID{Data1: 0xf3744d80, Data2: 0x21f7, Data3: 0x42eb, Data4: [8]byte{0xb3, 0x5d, 0x99, 0x5b, 0xc7, 0x2f, 0xc2, 0x23}}
 
 // CreateFontFaceReference dispatches through IDWriteFactory6's vtable slot 48.
-func (self *IDWriteFactory6) CreateFontFaceReference(fontFile *IDWriteFontFile, faceIndex uint32, fontSimulations DWRITE_FONT_SIMULATIONS, fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, fontFaceReference **IDWriteFontFaceReference1) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFile)), uintptr(faceIndex), uintptr(fontSimulations), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount), uintptr(unsafe.Pointer(fontFaceReference)))
+func (self *IDWriteFactory6) CreateFontFaceReference(fontFile *IDWriteFontFile, faceIndex uint32, fontSimulations DWRITE_FONT_SIMULATIONS, fontAxisValues []DWRITE_FONT_AXIS_VALUE, fontFaceReference **IDWriteFontFaceReference1) error {
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFile)), uintptr(faceIndex), uintptr(fontSimulations), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)), uintptr(unsafe.Pointer(fontFaceReference)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -583,8 +607,12 @@ func (self *IDWriteFont1) GetPanose(panose *DWRITE_PANOSE) {
 }
 
 // GetUnicodeRanges dispatches through IDWriteFont1's vtable slot 16.
-func (self *IDWriteFont1) GetUnicodeRanges(maxRangeCount uint32, unicodeRanges *DWRITE_UNICODE_RANGE, actualRangeCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(maxRangeCount), uintptr(unsafe.Pointer(unicodeRanges)), uintptr(unsafe.Pointer(actualRangeCount)))
+func (self *IDWriteFont1) GetUnicodeRanges(unicodeRanges []DWRITE_UNICODE_RANGE, actualRangeCount *uint32) error {
+	var _unicodeRanges *DWRITE_UNICODE_RANGE
+	if len(unicodeRanges) > 0 {
+		_unicodeRanges = &unicodeRanges[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(len(unicodeRanges)), uintptr(unsafe.Pointer(_unicodeRanges)), uintptr(unsafe.Pointer(actualRangeCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -719,9 +747,13 @@ func (self *IDWriteFontCollection2) GetFontFamily(index uint32, fontFamily **IDW
 }
 
 // GetMatchingFonts dispatches through IDWriteFontCollection2's vtable slot 10.
-func (self *IDWriteFontCollection2) GetMatchingFonts(familyName string, fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, fontList **IDWriteFontList2) error {
+func (self *IDWriteFontCollection2) GetMatchingFonts(familyName string, fontAxisValues []DWRITE_FONT_AXIS_VALUE, fontList **IDWriteFontList2) error {
 	_familyName := win32.UTF16Ptr(familyName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_familyName)), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount), uintptr(unsafe.Pointer(fontList)))
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_familyName)), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)), uintptr(unsafe.Pointer(fontList)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -762,8 +794,12 @@ type IDWriteFontCollectionLoader struct {
 var IID_IDWriteFontCollectionLoader = win32.GUID{Data1: 0xcca920e4, Data2: 0x52f0, Data3: 0x492b, Data4: [8]byte{0xbf, 0xa8, 0x29, 0xc7, 0x2e, 0xe0, 0xa4, 0x68}}
 
 // CreateEnumeratorFromKey dispatches through IDWriteFontCollectionLoader's vtable slot 3.
-func (self *IDWriteFontCollectionLoader) CreateEnumeratorFromKey(factory *IDWriteFactory, collectionKey unsafe.Pointer, collectionKeySize uint32, fontFileEnumerator **IDWriteFontFileEnumerator) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factory)), uintptr(unsafe.Pointer(collectionKey)), uintptr(collectionKeySize), uintptr(unsafe.Pointer(fontFileEnumerator)))
+func (self *IDWriteFontCollectionLoader) CreateEnumeratorFromKey(factory *IDWriteFactory, collectionKey []byte, fontFileEnumerator **IDWriteFontFileEnumerator) error {
+	var _collectionKey *byte
+	if len(collectionKey) > 0 {
+		_collectionKey = &collectionKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factory)), uintptr(unsafe.Pointer(_collectionKey)), uintptr(len(collectionKey)), uintptr(unsafe.Pointer(fontFileEnumerator)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -920,8 +956,12 @@ func (self *IDWriteFontFace1) GetCaretMetrics(caretMetrics *DWRITE_CARET_METRICS
 }
 
 // GetUnicodeRanges dispatches through IDWriteFontFace1's vtable slot 21.
-func (self *IDWriteFontFace1) GetUnicodeRanges(maxRangeCount uint32, unicodeRanges *DWRITE_UNICODE_RANGE, actualRangeCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(maxRangeCount), uintptr(unsafe.Pointer(unicodeRanges)), uintptr(unsafe.Pointer(actualRangeCount)))
+func (self *IDWriteFontFace1) GetUnicodeRanges(unicodeRanges []DWRITE_UNICODE_RANGE, actualRangeCount *uint32) error {
+	var _unicodeRanges *DWRITE_UNICODE_RANGE
+	if len(unicodeRanges) > 0 {
+		_unicodeRanges = &unicodeRanges[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(len(unicodeRanges)), uintptr(unsafe.Pointer(_unicodeRanges)), uintptr(unsafe.Pointer(actualRangeCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -990,8 +1030,12 @@ func (self *IDWriteFontFace2) GetPaletteEntryCount() uint32 {
 }
 
 // GetPaletteEntries dispatches through IDWriteFontFace2's vtable slot 33.
-func (self *IDWriteFontFace2) GetPaletteEntries(colorPaletteIndex uint32, firstEntryIndex uint32, entryCount uint32, paletteEntries *DWRITE_COLOR_F) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(colorPaletteIndex), uintptr(firstEntryIndex), uintptr(entryCount), uintptr(unsafe.Pointer(paletteEntries)))
+func (self *IDWriteFontFace2) GetPaletteEntries(colorPaletteIndex uint32, firstEntryIndex uint32, paletteEntries []DWRITE_COLOR_F) error {
+	var _paletteEntries *DWRITE_COLOR_F
+	if len(paletteEntries) > 0 {
+		_paletteEntries = &paletteEntries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(colorPaletteIndex), uintptr(firstEntryIndex), uintptr(len(paletteEntries)), uintptr(unsafe.Pointer(_paletteEntries)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1078,9 +1122,13 @@ func (self *IDWriteFontFace3) AreCharactersLocal(characters string, characterCou
 }
 
 // AreGlyphsLocal dispatches through IDWriteFontFace3's vtable slot 48.
-func (self *IDWriteFontFace3) AreGlyphsLocal(glyphIndices *uint16, glyphCount uint32, enqueueIfNotLocal bool, isLocal *foundation.BOOL) error {
+func (self *IDWriteFontFace3) AreGlyphsLocal(glyphIndices []uint16, enqueueIfNotLocal bool, isLocal *foundation.BOOL) error {
+	var _glyphIndices *uint16
+	if len(glyphIndices) > 0 {
+		_glyphIndices = &glyphIndices[0]
+	}
 	_enqueueIfNotLocal := win32.Bool32(enqueueIfNotLocal)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(glyphIndices)), uintptr(glyphCount), uintptr(_enqueueIfNotLocal), uintptr(unsafe.Pointer(isLocal)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_glyphIndices)), uintptr(len(glyphIndices)), uintptr(_enqueueIfNotLocal), uintptr(unsafe.Pointer(isLocal)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1132,8 +1180,12 @@ func (self *IDWriteFontFace5) GetFontAxisValueCount() uint32 {
 }
 
 // GetFontAxisValues dispatches through IDWriteFontFace5's vtable slot 54.
-func (self *IDWriteFontFace5) GetFontAxisValues(fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount))
+func (self *IDWriteFontFace5) GetFontAxisValues(fontAxisValues []DWRITE_FONT_AXIS_VALUE) error {
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1278,8 +1330,12 @@ func (self *IDWriteFontFaceReference) EnqueueCharacterDownloadRequest(characters
 }
 
 // EnqueueGlyphDownloadRequest dispatches through IDWriteFontFaceReference's vtable slot 15.
-func (self *IDWriteFontFaceReference) EnqueueGlyphDownloadRequest(glyphIndices *uint16, glyphCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(glyphIndices)), uintptr(glyphCount))
+func (self *IDWriteFontFaceReference) EnqueueGlyphDownloadRequest(glyphIndices []uint16) error {
+	var _glyphIndices *uint16
+	if len(glyphIndices) > 0 {
+		_glyphIndices = &glyphIndices[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_glyphIndices)), uintptr(len(glyphIndices)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1311,8 +1367,12 @@ func (self *IDWriteFontFaceReference1) GetFontAxisValueCount() uint32 {
 }
 
 // GetFontAxisValues dispatches through IDWriteFontFaceReference1's vtable slot 19.
-func (self *IDWriteFontFaceReference1) GetFontAxisValues(fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount))
+func (self *IDWriteFontFaceReference1) GetFontAxisValues(fontAxisValues []DWRITE_FONT_AXIS_VALUE) error {
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1342,9 +1402,13 @@ type IDWriteFontFallback1 struct {
 var IID_IDWriteFontFallback1 = win32.GUID{Data1: 0x2397599d, Data2: 0xdd0d, Data3: 0x4681, Data4: [8]byte{0xbd, 0x6a, 0xf4, 0xf3, 0x1e, 0xaa, 0xde, 0x77}}
 
 // MapCharacters dispatches through IDWriteFontFallback1's vtable slot 4.
-func (self *IDWriteFontFallback1) MapCharacters(analysisSource *IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, baseFontCollection *IDWriteFontCollection, baseFamilyName string, fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, mappedLength *uint32, scale *float32, mappedFontFace **IDWriteFontFace5) error {
+func (self *IDWriteFontFallback1) MapCharacters(analysisSource *IDWriteTextAnalysisSource, textPosition uint32, textLength uint32, baseFontCollection *IDWriteFontCollection, baseFamilyName string, fontAxisValues []DWRITE_FONT_AXIS_VALUE, mappedLength *uint32, scale *float32, mappedFontFace **IDWriteFontFace5) error {
 	_baseFamilyName := win32.UTF16Ptr(baseFamilyName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(analysisSource)), uintptr(textPosition), uintptr(textLength), uintptr(unsafe.Pointer(baseFontCollection)), uintptr(unsafe.Pointer(_baseFamilyName)), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount), uintptr(unsafe.Pointer(mappedLength)), uintptr(unsafe.Pointer(scale)), uintptr(unsafe.Pointer(mappedFontFace)))
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(analysisSource)), uintptr(textPosition), uintptr(textLength), uintptr(unsafe.Pointer(baseFontCollection)), uintptr(unsafe.Pointer(_baseFamilyName)), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)), uintptr(unsafe.Pointer(mappedLength)), uintptr(unsafe.Pointer(scale)), uintptr(unsafe.Pointer(mappedFontFace)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1433,8 +1497,12 @@ type IDWriteFontFamily2 struct {
 var IID_IDWriteFontFamily2 = win32.GUID{Data1: 0x3ed49e77, Data2: 0xa398, Data3: 0x4261, Data4: [8]byte{0xb9, 0xcf, 0xc1, 0x26, 0xc2, 0x13, 0x1e, 0xf3}}
 
 // GetMatchingFonts dispatches through IDWriteFontFamily2's vtable slot 12.
-func (self *IDWriteFontFamily2) GetMatchingFonts(fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, matchingFonts **IDWriteFontList2) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount), uintptr(unsafe.Pointer(matchingFonts)))
+func (self *IDWriteFontFamily2) GetMatchingFonts(fontAxisValues []DWRITE_FONT_AXIS_VALUE, matchingFonts **IDWriteFontList2) error {
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)), uintptr(unsafe.Pointer(matchingFonts)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1502,8 +1570,12 @@ type IDWriteFontFileLoader struct {
 var IID_IDWriteFontFileLoader = win32.GUID{Data1: 0x727cad4e, Data2: 0xd6af, Data3: 0x4c9e, Data4: [8]byte{0x8a, 0x08, 0xd6, 0x95, 0xb1, 0x1c, 0xaa, 0x49}}
 
 // CreateStreamFromKey dispatches through IDWriteFontFileLoader's vtable slot 3.
-func (self *IDWriteFontFileLoader) CreateStreamFromKey(fontFileReferenceKey unsafe.Pointer, fontFileReferenceKeySize uint32, fontFileStream **IDWriteFontFileStream) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFileReferenceKey)), uintptr(fontFileReferenceKeySize), uintptr(unsafe.Pointer(fontFileStream)))
+func (self *IDWriteFontFileLoader) CreateStreamFromKey(fontFileReferenceKey []byte, fontFileStream **IDWriteFontFileStream) error {
+	var _fontFileReferenceKey *byte
+	if len(fontFileReferenceKey) > 0 {
+		_fontFileReferenceKey = &fontFileReferenceKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontFileReferenceKey)), uintptr(len(fontFileReferenceKey)), uintptr(unsafe.Pointer(fontFileStream)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1636,14 +1708,22 @@ func (self *IDWriteFontResource) GetFontAxisCount() uint32 {
 }
 
 // GetDefaultFontAxisValues dispatches through IDWriteFontResource's vtable slot 6.
-func (self *IDWriteFontResource) GetDefaultFontAxisValues(fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount))
+func (self *IDWriteFontResource) GetDefaultFontAxisValues(fontAxisValues []DWRITE_FONT_AXIS_VALUE) error {
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetFontAxisRanges dispatches through IDWriteFontResource's vtable slot 7.
-func (self *IDWriteFontResource) GetFontAxisRanges(fontAxisRanges *DWRITE_FONT_AXIS_RANGE, fontAxisRangeCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontAxisRanges)), uintptr(fontAxisRangeCount))
+func (self *IDWriteFontResource) GetFontAxisRanges(fontAxisRanges []DWRITE_FONT_AXIS_RANGE) error {
+	var _fontAxisRanges *DWRITE_FONT_AXIS_RANGE
+	if len(fontAxisRanges) > 0 {
+		_fontAxisRanges = &fontAxisRanges[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontAxisRanges)), uintptr(len(fontAxisRanges)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1678,14 +1758,22 @@ func (self *IDWriteFontResource) HasVariations() foundation.BOOL {
 }
 
 // CreateFontFace dispatches through IDWriteFontResource's vtable slot 13.
-func (self *IDWriteFontResource) CreateFontFace(fontSimulations DWRITE_FONT_SIMULATIONS, fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, fontFace **IDWriteFontFace5) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(fontSimulations), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount), uintptr(unsafe.Pointer(fontFace)))
+func (self *IDWriteFontResource) CreateFontFace(fontSimulations DWRITE_FONT_SIMULATIONS, fontAxisValues []DWRITE_FONT_AXIS_VALUE, fontFace **IDWriteFontFace5) error {
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(fontSimulations), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)), uintptr(unsafe.Pointer(fontFace)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateFontFaceReference dispatches through IDWriteFontResource's vtable slot 14.
-func (self *IDWriteFontResource) CreateFontFaceReference(fontSimulations DWRITE_FONT_SIMULATIONS, fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, fontFaceReference **IDWriteFontFaceReference1) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(fontSimulations), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount), uintptr(unsafe.Pointer(fontFaceReference)))
+func (self *IDWriteFontResource) CreateFontFaceReference(fontSimulations DWRITE_FONT_SIMULATIONS, fontAxisValues []DWRITE_FONT_AXIS_VALUE, fontFaceReference **IDWriteFontFaceReference1) error {
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(fontSimulations), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)), uintptr(unsafe.Pointer(fontFaceReference)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1755,8 +1843,12 @@ func (self *IDWriteFontSet) GetMatchingFonts(familyName string, fontWeight DWRIT
 }
 
 // GetMatchingFonts dispatches through IDWriteFontSet's vtable slot 12.
-func (self *IDWriteFontSet) GetMatchingFonts_(properties *DWRITE_FONT_PROPERTY, propertyCount uint32, filteredSet **IDWriteFontSet) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(properties)), uintptr(propertyCount), uintptr(unsafe.Pointer(filteredSet)))
+func (self *IDWriteFontSet) GetMatchingFonts_(properties []DWRITE_FONT_PROPERTY, filteredSet **IDWriteFontSet) error {
+	var _properties *DWRITE_FONT_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(filteredSet)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1770,8 +1862,12 @@ type IDWriteFontSet1 struct {
 var IID_IDWriteFontSet1 = win32.GUID{Data1: 0x7e9fda85, Data2: 0x6c92, Data3: 0x4053, Data4: [8]byte{0xbc, 0x47, 0x7a, 0xe3, 0x53, 0x0d, 0xb4, 0xd3}}
 
 // GetMatchingFonts dispatches through IDWriteFontSet1's vtable slot 13.
-func (self *IDWriteFontSet1) GetMatchingFonts(fontProperty *DWRITE_FONT_PROPERTY, fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, matchingFonts **IDWriteFontSet1) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontProperty)), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount), uintptr(unsafe.Pointer(matchingFonts)))
+func (self *IDWriteFontSet1) GetMatchingFonts(fontProperty *DWRITE_FONT_PROPERTY, fontAxisValues []DWRITE_FONT_AXIS_VALUE, matchingFonts **IDWriteFontSet1) error {
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontProperty)), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)), uintptr(unsafe.Pointer(matchingFonts)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1782,48 +1878,84 @@ func (self *IDWriteFontSet1) GetFirstFontResources(filteredFontSet **IDWriteFont
 }
 
 // GetFilteredFonts dispatches through IDWriteFontSet1's vtable slot 15.
-func (self *IDWriteFontSet1) GetFilteredFonts(indices *uint32, indexCount uint32, filteredFontSet **IDWriteFontSet1) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(indices)), uintptr(indexCount), uintptr(unsafe.Pointer(filteredFontSet)))
+func (self *IDWriteFontSet1) GetFilteredFonts(indices []uint32, filteredFontSet **IDWriteFontSet1) error {
+	var _indices *uint32
+	if len(indices) > 0 {
+		_indices = &indices[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_indices)), uintptr(len(indices)), uintptr(unsafe.Pointer(filteredFontSet)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilteredFonts dispatches through IDWriteFontSet1's vtable slot 16.
-func (self *IDWriteFontSet1) GetFilteredFonts_(fontAxisRanges *DWRITE_FONT_AXIS_RANGE, fontAxisRangeCount uint32, selectAnyRange bool, filteredFontSet **IDWriteFontSet1) error {
+func (self *IDWriteFontSet1) GetFilteredFonts_(fontAxisRanges []DWRITE_FONT_AXIS_RANGE, selectAnyRange bool, filteredFontSet **IDWriteFontSet1) error {
+	var _fontAxisRanges *DWRITE_FONT_AXIS_RANGE
+	if len(fontAxisRanges) > 0 {
+		_fontAxisRanges = &fontAxisRanges[0]
+	}
 	_selectAnyRange := win32.Bool32(selectAnyRange)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontAxisRanges)), uintptr(fontAxisRangeCount), uintptr(_selectAnyRange), uintptr(unsafe.Pointer(filteredFontSet)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontAxisRanges)), uintptr(len(fontAxisRanges)), uintptr(_selectAnyRange), uintptr(unsafe.Pointer(filteredFontSet)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilteredFonts dispatches through IDWriteFontSet1's vtable slot 17.
-func (self *IDWriteFontSet1) GetFilteredFonts__(properties *DWRITE_FONT_PROPERTY, propertyCount uint32, selectAnyProperty bool, filteredFontSet **IDWriteFontSet1) error {
+func (self *IDWriteFontSet1) GetFilteredFonts__(properties []DWRITE_FONT_PROPERTY, selectAnyProperty bool, filteredFontSet **IDWriteFontSet1) error {
+	var _properties *DWRITE_FONT_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
 	_selectAnyProperty := win32.Bool32(selectAnyProperty)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(properties)), uintptr(propertyCount), uintptr(_selectAnyProperty), uintptr(unsafe.Pointer(filteredFontSet)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(_selectAnyProperty), uintptr(unsafe.Pointer(filteredFontSet)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilteredFontIndices dispatches through IDWriteFontSet1's vtable slot 18.
-func (self *IDWriteFontSet1) GetFilteredFontIndices(fontAxisRanges *DWRITE_FONT_AXIS_RANGE, fontAxisRangeCount uint32, selectAnyRange bool, indices *uint32, maxIndexCount uint32, actualIndexCount *uint32) error {
+func (self *IDWriteFontSet1) GetFilteredFontIndices(fontAxisRanges []DWRITE_FONT_AXIS_RANGE, selectAnyRange bool, indices []uint32, actualIndexCount *uint32) error {
+	var _fontAxisRanges *DWRITE_FONT_AXIS_RANGE
+	if len(fontAxisRanges) > 0 {
+		_fontAxisRanges = &fontAxisRanges[0]
+	}
 	_selectAnyRange := win32.Bool32(selectAnyRange)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontAxisRanges)), uintptr(fontAxisRangeCount), uintptr(_selectAnyRange), uintptr(unsafe.Pointer(indices)), uintptr(maxIndexCount), uintptr(unsafe.Pointer(actualIndexCount)))
+	var _indices *uint32
+	if len(indices) > 0 {
+		_indices = &indices[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontAxisRanges)), uintptr(len(fontAxisRanges)), uintptr(_selectAnyRange), uintptr(unsafe.Pointer(_indices)), uintptr(len(indices)), uintptr(unsafe.Pointer(actualIndexCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilteredFontIndices dispatches through IDWriteFontSet1's vtable slot 19.
-func (self *IDWriteFontSet1) GetFilteredFontIndices_(properties *DWRITE_FONT_PROPERTY, propertyCount uint32, selectAnyProperty bool, indices *uint32, maxIndexCount uint32, actualIndexCount *uint32) error {
+func (self *IDWriteFontSet1) GetFilteredFontIndices_(properties []DWRITE_FONT_PROPERTY, selectAnyProperty bool, indices []uint32, actualIndexCount *uint32) error {
+	var _properties *DWRITE_FONT_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
 	_selectAnyProperty := win32.Bool32(selectAnyProperty)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(properties)), uintptr(propertyCount), uintptr(_selectAnyProperty), uintptr(unsafe.Pointer(indices)), uintptr(maxIndexCount), uintptr(unsafe.Pointer(actualIndexCount)))
+	var _indices *uint32
+	if len(indices) > 0 {
+		_indices = &indices[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(_selectAnyProperty), uintptr(unsafe.Pointer(_indices)), uintptr(len(indices)), uintptr(unsafe.Pointer(actualIndexCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetFontAxisRanges dispatches through IDWriteFontSet1's vtable slot 20.
-func (self *IDWriteFontSet1) GetFontAxisRanges(listIndex uint32, fontAxisRanges *DWRITE_FONT_AXIS_RANGE, maxFontAxisRangeCount uint32, actualFontAxisRangeCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(listIndex), uintptr(unsafe.Pointer(fontAxisRanges)), uintptr(maxFontAxisRangeCount), uintptr(unsafe.Pointer(actualFontAxisRangeCount)))
+func (self *IDWriteFontSet1) GetFontAxisRanges(listIndex uint32, fontAxisRanges []DWRITE_FONT_AXIS_RANGE, actualFontAxisRangeCount *uint32) error {
+	var _fontAxisRanges *DWRITE_FONT_AXIS_RANGE
+	if len(fontAxisRanges) > 0 {
+		_fontAxisRanges = &fontAxisRanges[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(listIndex), uintptr(unsafe.Pointer(_fontAxisRanges)), uintptr(len(fontAxisRanges)), uintptr(unsafe.Pointer(actualFontAxisRangeCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetFontAxisRanges dispatches through IDWriteFontSet1's vtable slot 21.
-func (self *IDWriteFontSet1) GetFontAxisRanges_(fontAxisRanges *DWRITE_FONT_AXIS_RANGE, maxFontAxisRangeCount uint32, actualFontAxisRangeCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontAxisRanges)), uintptr(maxFontAxisRangeCount), uintptr(unsafe.Pointer(actualFontAxisRangeCount)))
+func (self *IDWriteFontSet1) GetFontAxisRanges_(fontAxisRanges []DWRITE_FONT_AXIS_RANGE, actualFontAxisRangeCount *uint32) error {
+	var _fontAxisRanges *DWRITE_FONT_AXIS_RANGE
+	if len(fontAxisRanges) > 0 {
+		_fontAxisRanges = &fontAxisRanges[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontAxisRanges)), uintptr(len(fontAxisRanges)), uintptr(unsafe.Pointer(actualFontAxisRangeCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1903,9 +2035,13 @@ type IDWriteFontSet4 struct {
 var IID_IDWriteFontSet4 = win32.GUID{Data1: 0xeec175fc, Data2: 0xbea9, Data3: 0x4c86, Data4: [8]byte{0x8b, 0x53, 0xcc, 0xbd, 0xd7, 0xdf, 0x0c, 0x82}}
 
 // GetMatchingFonts dispatches through IDWriteFontSet4's vtable slot 31.
-func (self *IDWriteFontSet4) GetMatchingFonts(familyName string, fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, allowedSimulations DWRITE_FONT_SIMULATIONS, matchingFonts **IDWriteFontSet4) error {
+func (self *IDWriteFontSet4) GetMatchingFonts(familyName string, fontAxisValues []DWRITE_FONT_AXIS_VALUE, allowedSimulations DWRITE_FONT_SIMULATIONS, matchingFonts **IDWriteFontSet4) error {
 	_familyName := win32.UTF16Ptr(familyName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_familyName)), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount), uintptr(allowedSimulations), uintptr(unsafe.Pointer(matchingFonts)))
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_familyName)), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)), uintptr(allowedSimulations), uintptr(unsafe.Pointer(matchingFonts)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1919,8 +2055,12 @@ type IDWriteFontSetBuilder struct {
 var IID_IDWriteFontSetBuilder = win32.GUID{Data1: 0x2f642afe, Data2: 0x9c68, Data3: 0x4f40, Data4: [8]byte{0xb8, 0xbe, 0x45, 0x74, 0x01, 0xaf, 0xcb, 0x3d}}
 
 // AddFontFaceReference dispatches through IDWriteFontSetBuilder's vtable slot 3.
-func (self *IDWriteFontSetBuilder) AddFontFaceReference(fontFaceReference *IDWriteFontFaceReference, properties *DWRITE_FONT_PROPERTY, propertyCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFaceReference)), uintptr(unsafe.Pointer(properties)), uintptr(propertyCount))
+func (self *IDWriteFontSetBuilder) AddFontFaceReference(fontFaceReference *IDWriteFontFaceReference, properties []DWRITE_FONT_PROPERTY) error {
+	var _properties *DWRITE_FONT_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFaceReference)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1967,8 +2107,20 @@ type IDWriteFontSetBuilder2 struct {
 var IID_IDWriteFontSetBuilder2 = win32.GUID{Data1: 0xee5ba612, Data2: 0xb131, Data3: 0x463c, Data4: [8]byte{0x8f, 0x4f, 0x31, 0x89, 0xb9, 0x40, 0x1e, 0x45}}
 
 // AddFont dispatches through IDWriteFontSetBuilder2's vtable slot 8.
-func (self *IDWriteFontSetBuilder2) AddFont(fontFile *IDWriteFontFile, fontFaceIndex uint32, fontSimulations DWRITE_FONT_SIMULATIONS, fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, fontAxisRanges *DWRITE_FONT_AXIS_RANGE, fontAxisRangeCount uint32, properties *DWRITE_FONT_PROPERTY, propertyCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFile)), uintptr(fontFaceIndex), uintptr(fontSimulations), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount), uintptr(unsafe.Pointer(fontAxisRanges)), uintptr(fontAxisRangeCount), uintptr(unsafe.Pointer(properties)), uintptr(propertyCount))
+func (self *IDWriteFontSetBuilder2) AddFont(fontFile *IDWriteFontFile, fontFaceIndex uint32, fontSimulations DWRITE_FONT_SIMULATIONS, fontAxisValues []DWRITE_FONT_AXIS_VALUE, fontAxisRanges []DWRITE_FONT_AXIS_RANGE, properties []DWRITE_FONT_PROPERTY) error {
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	var _fontAxisRanges *DWRITE_FONT_AXIS_RANGE
+	if len(fontAxisRanges) > 0 {
+		_fontAxisRanges = &fontAxisRanges[0]
+	}
+	var _properties *DWRITE_FONT_PROPERTY
+	if len(properties) > 0 {
+		_properties = &properties[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFile)), uintptr(fontFaceIndex), uintptr(fontSimulations), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)), uintptr(unsafe.Pointer(_fontAxisRanges)), uintptr(len(fontAxisRanges)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2067,8 +2219,12 @@ func (self *IDWriteGlyphRunAnalysis) GetAlphaTextureBounds(textureType DWRITE_TE
 }
 
 // CreateAlphaTexture dispatches through IDWriteGlyphRunAnalysis's vtable slot 4.
-func (self *IDWriteGlyphRunAnalysis) CreateAlphaTexture(textureType DWRITE_TEXTURE_TYPE, textureBounds *foundation.RECT, alphaValues *byte, bufferSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(textureType), uintptr(unsafe.Pointer(textureBounds)), uintptr(unsafe.Pointer(alphaValues)), uintptr(bufferSize))
+func (self *IDWriteGlyphRunAnalysis) CreateAlphaTexture(textureType DWRITE_TEXTURE_TYPE, textureBounds *foundation.RECT, alphaValues []byte) error {
+	var _alphaValues *byte
+	if len(alphaValues) > 0 {
+		_alphaValues = &alphaValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(textureType), uintptr(unsafe.Pointer(textureBounds)), uintptr(unsafe.Pointer(_alphaValues)), uintptr(len(alphaValues)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2088,8 +2244,12 @@ type IDWriteInMemoryFontFileLoader struct {
 var IID_IDWriteInMemoryFontFileLoader = win32.GUID{Data1: 0xdc102f47, Data2: 0xa12d, Data3: 0x4b1c, Data4: [8]byte{0x82, 0x2d, 0x9e, 0x11, 0x7e, 0x33, 0x04, 0x3f}}
 
 // CreateInMemoryFontFileReference dispatches through IDWriteInMemoryFontFileLoader's vtable slot 4.
-func (self *IDWriteInMemoryFontFileLoader) CreateInMemoryFontFileReference(factory *IDWriteFactory, fontData unsafe.Pointer, fontDataSize uint32, ownerObject *systemcom.IUnknown, fontFile **IDWriteFontFile) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factory)), uintptr(unsafe.Pointer(fontData)), uintptr(fontDataSize), uintptr(unsafe.Pointer(ownerObject)), uintptr(unsafe.Pointer(fontFile)))
+func (self *IDWriteInMemoryFontFileLoader) CreateInMemoryFontFileReference(factory *IDWriteFactory, fontData []byte, ownerObject *systemcom.IUnknown, fontFile **IDWriteFontFile) error {
+	var _fontData *byte
+	if len(fontData) > 0 {
+		_fontData = &fontData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(factory)), uintptr(unsafe.Pointer(_fontData)), uintptr(len(fontData)), uintptr(unsafe.Pointer(ownerObject)), uintptr(unsafe.Pointer(fontFile)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2136,20 +2296,32 @@ type IDWriteLocalFontFileLoader struct {
 var IID_IDWriteLocalFontFileLoader = win32.GUID{Data1: 0xb2d9f3ec, Data2: 0xc9fe, Data3: 0x4a11, Data4: [8]byte{0xa2, 0xec, 0xd8, 0x62, 0x08, 0xf7, 0xc0, 0xa2}}
 
 // GetFilePathLengthFromKey dispatches through IDWriteLocalFontFileLoader's vtable slot 4.
-func (self *IDWriteLocalFontFileLoader) GetFilePathLengthFromKey(fontFileReferenceKey unsafe.Pointer, fontFileReferenceKeySize uint32, filePathLength *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFileReferenceKey)), uintptr(fontFileReferenceKeySize), uintptr(unsafe.Pointer(filePathLength)))
+func (self *IDWriteLocalFontFileLoader) GetFilePathLengthFromKey(fontFileReferenceKey []byte, filePathLength *uint32) error {
+	var _fontFileReferenceKey *byte
+	if len(fontFileReferenceKey) > 0 {
+		_fontFileReferenceKey = &fontFileReferenceKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontFileReferenceKey)), uintptr(len(fontFileReferenceKey)), uintptr(unsafe.Pointer(filePathLength)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetFilePathFromKey dispatches through IDWriteLocalFontFileLoader's vtable slot 5.
-func (self *IDWriteLocalFontFileLoader) GetFilePathFromKey(fontFileReferenceKey unsafe.Pointer, fontFileReferenceKeySize uint32, filePath foundation.PWSTR, filePathSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFileReferenceKey)), uintptr(fontFileReferenceKeySize), uintptr(unsafe.Pointer(filePath)), uintptr(filePathSize))
+func (self *IDWriteLocalFontFileLoader) GetFilePathFromKey(fontFileReferenceKey []byte, filePath foundation.PWSTR, filePathSize uint32) error {
+	var _fontFileReferenceKey *byte
+	if len(fontFileReferenceKey) > 0 {
+		_fontFileReferenceKey = &fontFileReferenceKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontFileReferenceKey)), uintptr(len(fontFileReferenceKey)), uintptr(unsafe.Pointer(filePath)), uintptr(filePathSize))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetLastWriteTimeFromKey dispatches through IDWriteLocalFontFileLoader's vtable slot 6.
-func (self *IDWriteLocalFontFileLoader) GetLastWriteTimeFromKey(fontFileReferenceKey unsafe.Pointer, fontFileReferenceKeySize uint32, lastWriteTime *foundation.FILETIME) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFileReferenceKey)), uintptr(fontFileReferenceKeySize), uintptr(unsafe.Pointer(lastWriteTime)))
+func (self *IDWriteLocalFontFileLoader) GetLastWriteTimeFromKey(fontFileReferenceKey []byte, lastWriteTime *foundation.FILETIME) error {
+	var _fontFileReferenceKey *byte
+	if len(fontFileReferenceKey) > 0 {
+		_fontFileReferenceKey = &fontFileReferenceKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontFileReferenceKey)), uintptr(len(fontFileReferenceKey)), uintptr(unsafe.Pointer(lastWriteTime)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2235,8 +2407,12 @@ func (self *IDWritePaintReader) SetColorPaletteIndex(colorPaletteIndex uint32) e
 }
 
 // SetCustomColorPalette dispatches through IDWritePaintReader's vtable slot 6.
-func (self *IDWritePaintReader) SetCustomColorPalette(paletteEntries *DWRITE_COLOR_F, paletteEntryCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(paletteEntries)), uintptr(paletteEntryCount))
+func (self *IDWritePaintReader) SetCustomColorPalette(paletteEntries []DWRITE_COLOR_F) error {
+	var _paletteEntries *DWRITE_COLOR_F
+	if len(paletteEntries) > 0 {
+		_paletteEntries = &paletteEntries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_paletteEntries)), uintptr(len(paletteEntries)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2259,14 +2435,22 @@ func (self *IDWritePaintReader) MoveToParent() error {
 }
 
 // GetGradientStops dispatches through IDWritePaintReader's vtable slot 10.
-func (self *IDWritePaintReader) GetGradientStops(firstGradientStopIndex uint32, gradientStopCount uint32, gradientStops *graphicsdirect2dcommon.D2D1_GRADIENT_STOP) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(firstGradientStopIndex), uintptr(gradientStopCount), uintptr(unsafe.Pointer(gradientStops)))
+func (self *IDWritePaintReader) GetGradientStops(firstGradientStopIndex uint32, gradientStops []graphicsdirect2dcommon.D2D1_GRADIENT_STOP) error {
+	var _gradientStops *graphicsdirect2dcommon.D2D1_GRADIENT_STOP
+	if len(gradientStops) > 0 {
+		_gradientStops = &gradientStops[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(firstGradientStopIndex), uintptr(len(gradientStops)), uintptr(unsafe.Pointer(_gradientStops)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetGradientStopColors dispatches through IDWritePaintReader's vtable slot 11.
-func (self *IDWritePaintReader) GetGradientStopColors(firstGradientStopIndex uint32, gradientStopCount uint32, gradientStopColors *DWRITE_PAINT_COLOR) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(firstGradientStopIndex), uintptr(gradientStopCount), uintptr(unsafe.Pointer(gradientStopColors)))
+func (self *IDWritePaintReader) GetGradientStopColors(firstGradientStopIndex uint32, gradientStopColors []DWRITE_PAINT_COLOR) error {
+	var _gradientStopColors *DWRITE_PAINT_COLOR
+	if len(gradientStopColors) > 0 {
+		_gradientStopColors = &gradientStopColors[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(firstGradientStopIndex), uintptr(len(gradientStopColors)), uintptr(unsafe.Pointer(_gradientStopColors)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2307,14 +2491,22 @@ type IDWriteRemoteFontFileLoader struct {
 var IID_IDWriteRemoteFontFileLoader = win32.GUID{Data1: 0x68648c83, Data2: 0x6ede, Data3: 0x46c0, Data4: [8]byte{0xab, 0x46, 0x20, 0x08, 0x3a, 0x88, 0x7f, 0xde}}
 
 // CreateRemoteStreamFromKey dispatches through IDWriteRemoteFontFileLoader's vtable slot 4.
-func (self *IDWriteRemoteFontFileLoader) CreateRemoteStreamFromKey(fontFileReferenceKey unsafe.Pointer, fontFileReferenceKeySize uint32, fontFileStream **IDWriteRemoteFontFileStream) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFileReferenceKey)), uintptr(fontFileReferenceKeySize), uintptr(unsafe.Pointer(fontFileStream)))
+func (self *IDWriteRemoteFontFileLoader) CreateRemoteStreamFromKey(fontFileReferenceKey []byte, fontFileStream **IDWriteRemoteFontFileStream) error {
+	var _fontFileReferenceKey *byte
+	if len(fontFileReferenceKey) > 0 {
+		_fontFileReferenceKey = &fontFileReferenceKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontFileReferenceKey)), uintptr(len(fontFileReferenceKey)), uintptr(unsafe.Pointer(fontFileStream)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetLocalityFromKey dispatches through IDWriteRemoteFontFileLoader's vtable slot 5.
-func (self *IDWriteRemoteFontFileLoader) GetLocalityFromKey(fontFileReferenceKey unsafe.Pointer, fontFileReferenceKeySize uint32, locality *DWRITE_LOCALITY) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontFileReferenceKey)), uintptr(fontFileReferenceKeySize), uintptr(unsafe.Pointer(locality)))
+func (self *IDWriteRemoteFontFileLoader) GetLocalityFromKey(fontFileReferenceKey []byte, locality *DWRITE_LOCALITY) error {
+	var _fontFileReferenceKey *byte
+	if len(fontFileReferenceKey) > 0 {
+		_fontFileReferenceKey = &fontFileReferenceKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontFileReferenceKey)), uintptr(len(fontFileReferenceKey)), uintptr(unsafe.Pointer(locality)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2354,8 +2546,12 @@ func (self *IDWriteRemoteFontFileStream) GetLocality() DWRITE_LOCALITY {
 }
 
 // BeginDownload dispatches through IDWriteRemoteFontFileStream's vtable slot 10.
-func (self *IDWriteRemoteFontFileStream) BeginDownload(downloadOperationID *win32.GUID, fileFragments *DWRITE_FILE_FRAGMENT, fragmentCount uint32, asyncResult **IDWriteAsyncResult) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(downloadOperationID)), uintptr(unsafe.Pointer(fileFragments)), uintptr(fragmentCount), uintptr(unsafe.Pointer(asyncResult)))
+func (self *IDWriteRemoteFontFileStream) BeginDownload(downloadOperationID *win32.GUID, fileFragments []DWRITE_FILE_FRAGMENT, asyncResult **IDWriteAsyncResult) error {
+	var _fileFragments *DWRITE_FILE_FRAGMENT
+	if len(fileFragments) > 0 {
+		_fileFragments = &fileFragments[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(downloadOperationID)), uintptr(unsafe.Pointer(_fileFragments)), uintptr(len(fileFragments)), uintptr(unsafe.Pointer(asyncResult)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2474,8 +2670,12 @@ func (self *IDWriteTextAnalysisSink) SetScriptAnalysis(textPosition uint32, text
 }
 
 // SetLineBreakpoints dispatches through IDWriteTextAnalysisSink's vtable slot 4.
-func (self *IDWriteTextAnalysisSink) SetLineBreakpoints(textPosition uint32, textLength uint32, lineBreakpoints *DWRITE_LINE_BREAKPOINT) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(textPosition), uintptr(textLength), uintptr(unsafe.Pointer(lineBreakpoints)))
+func (self *IDWriteTextAnalysisSink) SetLineBreakpoints(textPosition uint32, lineBreakpoints []DWRITE_LINE_BREAKPOINT) error {
+	var _lineBreakpoints *DWRITE_LINE_BREAKPOINT
+	if len(lineBreakpoints) > 0 {
+		_lineBreakpoints = &lineBreakpoints[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(textPosition), uintptr(len(lineBreakpoints)), uintptr(unsafe.Pointer(_lineBreakpoints)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2867,8 +3067,12 @@ type IDWriteTextFormat3 struct {
 var IID_IDWriteTextFormat3 = win32.GUID{Data1: 0x6d3b5641, Data2: 0xe550, Data3: 0x430d, Data4: [8]byte{0xa8, 0x5b, 0xb7, 0xbf, 0x48, 0xa9, 0x34, 0x27}}
 
 // SetFontAxisValues dispatches through IDWriteTextFormat3's vtable slot 38.
-func (self *IDWriteTextFormat3) SetFontAxisValues(fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount))
+func (self *IDWriteTextFormat3) SetFontAxisValues(fontAxisValues []DWRITE_FONT_AXIS_VALUE) error {
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2879,8 +3083,12 @@ func (self *IDWriteTextFormat3) GetFontAxisValueCount() uint32 {
 }
 
 // GetFontAxisValues dispatches through IDWriteTextFormat3's vtable slot 40.
-func (self *IDWriteTextFormat3) GetFontAxisValues(fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount))
+func (self *IDWriteTextFormat3) GetFontAxisValues(fontAxisValues []DWRITE_FONT_AXIS_VALUE) error {
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2990,8 +3198,12 @@ func (self *IDWriteTextLayout) GetLocaleName(currentPosition uint32, localeName 
 }
 
 // GetLineMetrics dispatches through IDWriteTextLayout's vtable slot 59.
-func (self *IDWriteTextLayout) GetLineMetrics(lineMetrics *DWRITE_LINE_METRICS, maxLineCount uint32, actualLineCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lineMetrics)), uintptr(maxLineCount), uintptr(unsafe.Pointer(actualLineCount)))
+func (self *IDWriteTextLayout) GetLineMetrics(lineMetrics []DWRITE_LINE_METRICS, actualLineCount *uint32) error {
+	var _lineMetrics *DWRITE_LINE_METRICS
+	if len(lineMetrics) > 0 {
+		_lineMetrics = &lineMetrics[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lineMetrics)), uintptr(len(lineMetrics)), uintptr(unsafe.Pointer(actualLineCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3008,8 +3220,12 @@ func (self *IDWriteTextLayout) GetOverhangMetrics(overhangs *DWRITE_OVERHANG_MET
 }
 
 // GetClusterMetrics dispatches through IDWriteTextLayout's vtable slot 62.
-func (self *IDWriteTextLayout) GetClusterMetrics(clusterMetrics *DWRITE_CLUSTER_METRICS, maxClusterCount uint32, actualClusterCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clusterMetrics)), uintptr(maxClusterCount), uintptr(unsafe.Pointer(actualClusterCount)))
+func (self *IDWriteTextLayout) GetClusterMetrics(clusterMetrics []DWRITE_CLUSTER_METRICS, actualClusterCount *uint32) error {
+	var _clusterMetrics *DWRITE_CLUSTER_METRICS
+	if len(clusterMetrics) > 0 {
+		_clusterMetrics = &clusterMetrics[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_clusterMetrics)), uintptr(len(clusterMetrics)), uintptr(unsafe.Pointer(actualClusterCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3139,8 +3355,12 @@ func (self *IDWriteTextLayout3) GetLineSpacing(lineSpacingOptions *DWRITE_LINE_S
 }
 
 // GetLineMetrics dispatches through IDWriteTextLayout3's vtable slot 83.
-func (self *IDWriteTextLayout3) GetLineMetrics(lineMetrics *DWRITE_LINE_METRICS1, maxLineCount uint32, actualLineCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lineMetrics)), uintptr(maxLineCount), uintptr(unsafe.Pointer(actualLineCount)))
+func (self *IDWriteTextLayout3) GetLineMetrics(lineMetrics []DWRITE_LINE_METRICS1, actualLineCount *uint32) error {
+	var _lineMetrics *DWRITE_LINE_METRICS1
+	if len(lineMetrics) > 0 {
+		_lineMetrics = &lineMetrics[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lineMetrics)), uintptr(len(lineMetrics)), uintptr(unsafe.Pointer(actualLineCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3160,8 +3380,12 @@ func (self *IDWriteTextLayout4) GetFontAxisValueCount(currentPosition uint32) ui
 }
 
 // GetFontAxisValues dispatches through IDWriteTextLayout4's vtable slot 86.
-func (self *IDWriteTextLayout4) GetFontAxisValues(currentPosition uint32, fontAxisValues *DWRITE_FONT_AXIS_VALUE, fontAxisValueCount uint32, textRange *DWRITE_TEXT_RANGE) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(currentPosition), uintptr(unsafe.Pointer(fontAxisValues)), uintptr(fontAxisValueCount), uintptr(unsafe.Pointer(textRange)))
+func (self *IDWriteTextLayout4) GetFontAxisValues(currentPosition uint32, fontAxisValues []DWRITE_FONT_AXIS_VALUE, textRange *DWRITE_TEXT_RANGE) error {
+	var _fontAxisValues *DWRITE_FONT_AXIS_VALUE
+	if len(fontAxisValues) > 0 {
+		_fontAxisValues = &fontAxisValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(currentPosition), uintptr(unsafe.Pointer(_fontAxisValues)), uintptr(len(fontAxisValues)), uintptr(unsafe.Pointer(textRange)))
 	return win32.HRESULTError(int32(r1))
 }
 

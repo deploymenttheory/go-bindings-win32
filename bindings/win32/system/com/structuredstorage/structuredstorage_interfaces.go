@@ -51,8 +51,12 @@ type IEnumSTATPROPSETSTG struct {
 var IID_IEnumSTATPROPSETSTG = win32.GUID{Data1: 0x0000013b, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumSTATPROPSETSTG's vtable slot 3.
-func (self *IEnumSTATPROPSETSTG) Next(celt uint32, rgelt *STATPROPSETSTG, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumSTATPROPSETSTG) Next(rgelt []STATPROPSETSTG, pceltFetched *uint32) error {
+	var _rgelt *STATPROPSETSTG
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -84,8 +88,12 @@ type IEnumSTATPROPSTG struct {
 var IID_IEnumSTATPROPSTG = win32.GUID{Data1: 0x00000139, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumSTATPROPSTG's vtable slot 3.
-func (self *IEnumSTATPROPSTG) Next(celt uint32, rgelt *STATPROPSTG, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumSTATPROPSTG) Next(rgelt []STATPROPSTG, pceltFetched *uint32) error {
+	var _rgelt *STATPROPSTG
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -117,8 +125,12 @@ type IEnumSTATSTG struct {
 var IID_IEnumSTATSTG = win32.GUID{Data1: 0x0000000d, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumSTATSTG's vtable slot 3.
-func (self *IEnumSTATSTG) Next(celt uint32, rgelt *systemcom.STATSTG, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumSTATSTG) Next(rgelt []systemcom.STATSTG, pceltFetched *uint32) error {
+	var _rgelt *systemcom.STATSTG
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -150,14 +162,22 @@ type IFillLockBytes struct {
 var IID_IFillLockBytes = win32.GUID{Data1: 0x99caf010, Data2: 0x415e, Data3: 0x11cf, Data4: [8]byte{0x88, 0x14, 0x00, 0xaa, 0x00, 0xb5, 0x69, 0xf5}}
 
 // FillAppend dispatches through IFillLockBytes's vtable slot 3.
-func (self *IFillLockBytes) FillAppend(pv unsafe.Pointer, cb uint32, pcbWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pv)), uintptr(cb), uintptr(unsafe.Pointer(pcbWritten)))
+func (self *IFillLockBytes) FillAppend(pv []byte, pcbWritten *uint32) error {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(pcbWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FillAt dispatches through IFillLockBytes's vtable slot 4.
-func (self *IFillLockBytes) FillAt(ulOffset uint64, pv unsafe.Pointer, cb uint32, pcbWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulOffset), uintptr(unsafe.Pointer(pv)), uintptr(cb), uintptr(unsafe.Pointer(pcbWritten)))
+func (self *IFillLockBytes) FillAt(ulOffset uint64, pv []byte, pcbWritten *uint32) error {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulOffset), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(pcbWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -184,8 +204,12 @@ type ILayoutStorage struct {
 var IID_ILayoutStorage = win32.GUID{Data1: 0x0e6d4d90, Data2: 0x6738, Data3: 0x11cf, Data4: [8]byte{0x96, 0x08, 0x00, 0xaa, 0x00, 0x68, 0x0d, 0xb4}}
 
 // LayoutScript dispatches through ILayoutStorage's vtable slot 3.
-func (self *ILayoutStorage) LayoutScript(pStorageLayout *systemcom.StorageLayout, nEntries uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pStorageLayout)), uintptr(nEntries), 0)
+func (self *ILayoutStorage) LayoutScript(pStorageLayout []systemcom.StorageLayout) error {
+	var _pStorageLayout *systemcom.StorageLayout
+	if len(pStorageLayout) > 0 {
+		_pStorageLayout = &pStorageLayout[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pStorageLayout)), uintptr(len(pStorageLayout)), 0)
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -224,14 +248,22 @@ type ILockBytes struct {
 var IID_ILockBytes = win32.GUID{Data1: 0x0000000a, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // ReadAt dispatches through ILockBytes's vtable slot 3.
-func (self *ILockBytes) ReadAt(ulOffset uint64, pv unsafe.Pointer, cb uint32, pcbRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulOffset), uintptr(unsafe.Pointer(pv)), uintptr(cb), uintptr(unsafe.Pointer(pcbRead)))
+func (self *ILockBytes) ReadAt(ulOffset uint64, pv []byte, pcbRead *uint32) error {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulOffset), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(pcbRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteAt dispatches through ILockBytes's vtable slot 4.
-func (self *ILockBytes) WriteAt(ulOffset uint64, pv unsafe.Pointer, cb uint32, pcbWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulOffset), uintptr(unsafe.Pointer(pv)), uintptr(cb), uintptr(unsafe.Pointer(pcbWritten)))
+func (self *ILockBytes) WriteAt(ulOffset uint64, pv []byte, pcbWritten *uint32) error {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulOffset), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(pcbWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -377,8 +409,12 @@ func (self *IPropertyBag2) CountProperties(pcProperties *uint32) error {
 }
 
 // GetPropertyInfo dispatches through IPropertyBag2's vtable slot 6.
-func (self *IPropertyBag2) GetPropertyInfo(iProperty uint32, cProperties uint32, pPropBag *PROPBAG2, pcProperties *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iProperty), uintptr(cProperties), uintptr(unsafe.Pointer(pPropBag)), uintptr(unsafe.Pointer(pcProperties)))
+func (self *IPropertyBag2) GetPropertyInfo(iProperty uint32, pPropBag []PROPBAG2, pcProperties *uint32) error {
+	var _pPropBag *PROPBAG2
+	if len(pPropBag) > 0 {
+		_pPropBag = &pPropBag[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(iProperty), uintptr(len(pPropBag)), uintptr(unsafe.Pointer(_pPropBag)), uintptr(unsafe.Pointer(pcProperties)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -444,8 +480,12 @@ func (self *IPropertyStorage) WriteMultiple(cpspec uint32, rgpspec *PROPSPEC, rg
 }
 
 // DeleteMultiple dispatches through IPropertyStorage's vtable slot 5.
-func (self *IPropertyStorage) DeleteMultiple(cpspec uint32, rgpspec *PROPSPEC) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cpspec), uintptr(unsafe.Pointer(rgpspec)))
+func (self *IPropertyStorage) DeleteMultiple(rgpspec []PROPSPEC) error {
+	var _rgpspec *PROPSPEC
+	if len(rgpspec) > 0 {
+		_rgpspec = &rgpspec[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(rgpspec)), uintptr(unsafe.Pointer(_rgpspec)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -462,8 +502,12 @@ func (self *IPropertyStorage) WritePropertyNames(cpropid uint32, rgpropid *uint3
 }
 
 // DeletePropertyNames dispatches through IPropertyStorage's vtable slot 8.
-func (self *IPropertyStorage) DeletePropertyNames(cpropid uint32, rgpropid *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(cpropid), uintptr(unsafe.Pointer(rgpropid)))
+func (self *IPropertyStorage) DeletePropertyNames(rgpropid []uint32) error {
+	var _rgpropid *uint32
+	if len(rgpropid) > 0 {
+		_rgpropid = &rgpropid[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(rgpropid)), uintptr(unsafe.Pointer(_rgpropid)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -557,8 +601,12 @@ func (self *IStorage) OpenStorage(pwcsName string, pstgPriority *IStorage, grfMo
 }
 
 // CopyTo dispatches through IStorage's vtable slot 7.
-func (self *IStorage) CopyTo(ciidExclude uint32, rgiidExclude *win32.GUID, snbExclude **uint16, pstgDest *IStorage) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ciidExclude), uintptr(unsafe.Pointer(rgiidExclude)), uintptr(unsafe.Pointer(snbExclude)), uintptr(unsafe.Pointer(pstgDest)))
+func (self *IStorage) CopyTo(rgiidExclude []win32.GUID, snbExclude **uint16, pstgDest *IStorage) error {
+	var _rgiidExclude *win32.GUID
+	if len(rgiidExclude) > 0 {
+		_rgiidExclude = &rgiidExclude[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(rgiidExclude)), uintptr(unsafe.Pointer(_rgiidExclude)), uintptr(unsafe.Pointer(snbExclude)), uintptr(unsafe.Pointer(pstgDest)))
 	return win32.HRESULTError(int32(r1))
 }
 

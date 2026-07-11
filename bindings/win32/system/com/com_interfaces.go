@@ -98,8 +98,12 @@ type AsyncIMultiQI struct {
 var IID_AsyncIMultiQI = win32.GUID{Data1: 0x000e0020, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Begin_QueryMultipleInterfaces dispatches through AsyncIMultiQI's vtable slot 3.
-func (self *AsyncIMultiQI) Begin_QueryMultipleInterfaces(cMQIs uint32, pMQIs *MULTI_QI) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cMQIs), uintptr(unsafe.Pointer(pMQIs)))
+func (self *AsyncIMultiQI) Begin_QueryMultipleInterfaces(pMQIs []MULTI_QI) error {
+	var _pMQIs *MULTI_QI
+	if len(pMQIs) > 0 {
+		_pMQIs = &pMQIs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pMQIs)), uintptr(unsafe.Pointer(_pMQIs)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -130,8 +134,12 @@ func (self *AsyncIPipeByte) Finish_Pull(buf *byte, pcReturned *uint32) error {
 }
 
 // Begin_Push dispatches through AsyncIPipeByte's vtable slot 5.
-func (self *AsyncIPipeByte) Begin_Push(buf *byte, cSent uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buf)), uintptr(cSent))
+func (self *AsyncIPipeByte) Begin_Push(buf []byte) error {
+	var _buf *byte
+	if len(buf) > 0 {
+		_buf = &buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_buf)), uintptr(len(buf)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -162,8 +170,12 @@ func (self *AsyncIPipeDouble) Finish_Pull(buf *float64, pcReturned *uint32) erro
 }
 
 // Begin_Push dispatches through AsyncIPipeDouble's vtable slot 5.
-func (self *AsyncIPipeDouble) Begin_Push(buf *float64, cSent uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buf)), uintptr(cSent))
+func (self *AsyncIPipeDouble) Begin_Push(buf []float64) error {
+	var _buf *float64
+	if len(buf) > 0 {
+		_buf = &buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_buf)), uintptr(len(buf)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -194,8 +206,12 @@ func (self *AsyncIPipeLong) Finish_Pull(buf *int32, pcReturned *uint32) error {
 }
 
 // Begin_Push dispatches through AsyncIPipeLong's vtable slot 5.
-func (self *AsyncIPipeLong) Begin_Push(buf *int32, cSent uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buf)), uintptr(cSent))
+func (self *AsyncIPipeLong) Begin_Push(buf []int32) error {
+	var _buf *int32
+	if len(buf) > 0 {
+		_buf = &buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_buf)), uintptr(len(buf)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -734,14 +750,30 @@ func (self *ICatInformation) GetCategoryDesc(rcatid *win32.GUID, lcid uint32, ps
 }
 
 // EnumClassesOfCategories dispatches through ICatInformation's vtable slot 5.
-func (self *ICatInformation) EnumClassesOfCategories(cImplemented uint32, rgcatidImpl *win32.GUID, cRequired uint32, rgcatidReq *win32.GUID, ppenumClsid **IEnumGUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cImplemented), uintptr(unsafe.Pointer(rgcatidImpl)), uintptr(cRequired), uintptr(unsafe.Pointer(rgcatidReq)), uintptr(unsafe.Pointer(ppenumClsid)))
+func (self *ICatInformation) EnumClassesOfCategories(rgcatidImpl []win32.GUID, rgcatidReq []win32.GUID, ppenumClsid **IEnumGUID) error {
+	var _rgcatidImpl *win32.GUID
+	if len(rgcatidImpl) > 0 {
+		_rgcatidImpl = &rgcatidImpl[0]
+	}
+	var _rgcatidReq *win32.GUID
+	if len(rgcatidReq) > 0 {
+		_rgcatidReq = &rgcatidReq[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(rgcatidImpl)), uintptr(unsafe.Pointer(_rgcatidImpl)), uintptr(len(rgcatidReq)), uintptr(unsafe.Pointer(_rgcatidReq)), uintptr(unsafe.Pointer(ppenumClsid)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // IsClassOfCategories dispatches through ICatInformation's vtable slot 6.
-func (self *ICatInformation) IsClassOfCategories(rclsid *win32.GUID, cImplemented uint32, rgcatidImpl *win32.GUID, cRequired uint32, rgcatidReq *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(cImplemented), uintptr(unsafe.Pointer(rgcatidImpl)), uintptr(cRequired), uintptr(unsafe.Pointer(rgcatidReq)))
+func (self *ICatInformation) IsClassOfCategories(rclsid *win32.GUID, rgcatidImpl []win32.GUID, rgcatidReq []win32.GUID) error {
+	var _rgcatidImpl *win32.GUID
+	if len(rgcatidImpl) > 0 {
+		_rgcatidImpl = &rgcatidImpl[0]
+	}
+	var _rgcatidReq *win32.GUID
+	if len(rgcatidReq) > 0 {
+		_rgcatidReq = &rgcatidReq[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(len(rgcatidImpl)), uintptr(unsafe.Pointer(_rgcatidImpl)), uintptr(len(rgcatidReq)), uintptr(unsafe.Pointer(_rgcatidReq)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -767,38 +799,62 @@ type ICatRegister struct {
 var IID_ICatRegister = win32.GUID{Data1: 0x0002e012, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // RegisterCategories dispatches through ICatRegister's vtable slot 3.
-func (self *ICatRegister) RegisterCategories(cCategories uint32, rgCategoryInfo *CATEGORYINFO) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cCategories), uintptr(unsafe.Pointer(rgCategoryInfo)))
+func (self *ICatRegister) RegisterCategories(rgCategoryInfo []CATEGORYINFO) error {
+	var _rgCategoryInfo *CATEGORYINFO
+	if len(rgCategoryInfo) > 0 {
+		_rgCategoryInfo = &rgCategoryInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgCategoryInfo)), uintptr(unsafe.Pointer(_rgCategoryInfo)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // UnRegisterCategories dispatches through ICatRegister's vtable slot 4.
-func (self *ICatRegister) UnRegisterCategories(cCategories uint32, rgcatid *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cCategories), uintptr(unsafe.Pointer(rgcatid)))
+func (self *ICatRegister) UnRegisterCategories(rgcatid []win32.GUID) error {
+	var _rgcatid *win32.GUID
+	if len(rgcatid) > 0 {
+		_rgcatid = &rgcatid[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgcatid)), uintptr(unsafe.Pointer(_rgcatid)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterClassImplCategories dispatches through ICatRegister's vtable slot 5.
-func (self *ICatRegister) RegisterClassImplCategories(rclsid *win32.GUID, cCategories uint32, rgcatid *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(cCategories), uintptr(unsafe.Pointer(rgcatid)))
+func (self *ICatRegister) RegisterClassImplCategories(rclsid *win32.GUID, rgcatid []win32.GUID) error {
+	var _rgcatid *win32.GUID
+	if len(rgcatid) > 0 {
+		_rgcatid = &rgcatid[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(len(rgcatid)), uintptr(unsafe.Pointer(_rgcatid)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // UnRegisterClassImplCategories dispatches through ICatRegister's vtable slot 6.
-func (self *ICatRegister) UnRegisterClassImplCategories(rclsid *win32.GUID, cCategories uint32, rgcatid *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(cCategories), uintptr(unsafe.Pointer(rgcatid)))
+func (self *ICatRegister) UnRegisterClassImplCategories(rclsid *win32.GUID, rgcatid []win32.GUID) error {
+	var _rgcatid *win32.GUID
+	if len(rgcatid) > 0 {
+		_rgcatid = &rgcatid[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(len(rgcatid)), uintptr(unsafe.Pointer(_rgcatid)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RegisterClassReqCategories dispatches through ICatRegister's vtable slot 7.
-func (self *ICatRegister) RegisterClassReqCategories(rclsid *win32.GUID, cCategories uint32, rgcatid *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(cCategories), uintptr(unsafe.Pointer(rgcatid)))
+func (self *ICatRegister) RegisterClassReqCategories(rclsid *win32.GUID, rgcatid []win32.GUID) error {
+	var _rgcatid *win32.GUID
+	if len(rgcatid) > 0 {
+		_rgcatid = &rgcatid[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(len(rgcatid)), uintptr(unsafe.Pointer(_rgcatid)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // UnRegisterClassReqCategories dispatches through ICatRegister's vtable slot 8.
-func (self *ICatRegister) UnRegisterClassReqCategories(rclsid *win32.GUID, cCategories uint32, rgcatid *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(cCategories), uintptr(unsafe.Pointer(rgcatid)))
+func (self *ICatRegister) UnRegisterClassReqCategories(rclsid *win32.GUID, rgcatid []win32.GUID) error {
+	var _rgcatid *win32.GUID
+	if len(rgcatid) > 0 {
+		_rgcatid = &rgcatid[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rclsid)), uintptr(len(rgcatid)), uintptr(unsafe.Pointer(_rgcatid)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1186,8 +1242,12 @@ type IEnumCATEGORYINFO struct {
 var IID_IEnumCATEGORYINFO = win32.GUID{Data1: 0x0002e011, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumCATEGORYINFO's vtable slot 3.
-func (self *IEnumCATEGORYINFO) Next(celt uint32, rgelt *CATEGORYINFO, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumCATEGORYINFO) Next(rgelt []CATEGORYINFO, pceltFetched *uint32) error {
+	var _rgelt *CATEGORYINFO
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1219,8 +1279,12 @@ type IEnumConnectionPoints struct {
 var IID_IEnumConnectionPoints = win32.GUID{Data1: 0xb196b285, Data2: 0xbab4, Data3: 0x101a, Data4: [8]byte{0xb6, 0x9c, 0x00, 0xaa, 0x00, 0x34, 0x1d, 0x07}}
 
 // Next dispatches through IEnumConnectionPoints's vtable slot 3.
-func (self *IEnumConnectionPoints) Next(cConnections uint32, ppCP **IConnectionPoint, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cConnections), uintptr(unsafe.Pointer(ppCP)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumConnectionPoints) Next(ppCP []*IConnectionPoint, pcFetched *uint32) error {
+	var _ppCP **IConnectionPoint
+	if len(ppCP) > 0 {
+		_ppCP = &ppCP[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppCP)), uintptr(unsafe.Pointer(_ppCP)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1252,8 +1316,12 @@ type IEnumConnections struct {
 var IID_IEnumConnections = win32.GUID{Data1: 0xb196b287, Data2: 0xbab4, Data3: 0x101a, Data4: [8]byte{0xb6, 0x9c, 0x00, 0xaa, 0x00, 0x34, 0x1d, 0x07}}
 
 // Next dispatches through IEnumConnections's vtable slot 3.
-func (self *IEnumConnections) Next(cConnections uint32, rgcd *CONNECTDATA, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cConnections), uintptr(unsafe.Pointer(rgcd)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumConnections) Next(rgcd []CONNECTDATA, pcFetched *uint32) error {
+	var _rgcd *CONNECTDATA
+	if len(rgcd) > 0 {
+		_rgcd = &rgcd[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgcd)), uintptr(unsafe.Pointer(_rgcd)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1285,8 +1353,12 @@ type IEnumContextProps struct {
 var IID_IEnumContextProps = win32.GUID{Data1: 0x000001c1, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumContextProps's vtable slot 3.
-func (self *IEnumContextProps) Next(celt uint32, pContextProperties *ContextProperty, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pContextProperties)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumContextProps) Next(pContextProperties []ContextProperty, pceltFetched *uint32) error {
+	var _pContextProperties *ContextProperty
+	if len(pContextProperties) > 0 {
+		_pContextProperties = &pContextProperties[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pContextProperties)), uintptr(unsafe.Pointer(_pContextProperties)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1324,8 +1396,12 @@ type IEnumFORMATETC struct {
 var IID_IEnumFORMATETC = win32.GUID{Data1: 0x00000103, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumFORMATETC's vtable slot 3.
-func (self *IEnumFORMATETC) Next(celt uint32, rgelt *FORMATETC, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumFORMATETC) Next(rgelt []FORMATETC, pceltFetched *uint32) error {
+	var _rgelt *FORMATETC
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1357,8 +1433,12 @@ type IEnumGUID struct {
 var IID_IEnumGUID = win32.GUID{Data1: 0x0002e000, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumGUID's vtable slot 3.
-func (self *IEnumGUID) Next(celt uint32, rgelt *win32.GUID, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumGUID) Next(rgelt []win32.GUID, pceltFetched *uint32) error {
+	var _rgelt *win32.GUID
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1390,8 +1470,12 @@ type IEnumMoniker struct {
 var IID_IEnumMoniker = win32.GUID{Data1: 0x00000102, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumMoniker's vtable slot 3.
-func (self *IEnumMoniker) Next(celt uint32, rgelt **IMoniker, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumMoniker) Next(rgelt []*IMoniker, pceltFetched *uint32) error {
+	var _rgelt **IMoniker
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1423,8 +1507,12 @@ type IEnumSTATDATA struct {
 var IID_IEnumSTATDATA = win32.GUID{Data1: 0x00000105, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumSTATDATA's vtable slot 3.
-func (self *IEnumSTATDATA) Next(celt uint32, rgelt *STATDATA, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumSTATDATA) Next(rgelt []STATDATA, pceltFetched *uint32) error {
+	var _rgelt *STATDATA
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1456,8 +1544,12 @@ type IEnumString struct {
 var IID_IEnumString = win32.GUID{Data1: 0x00000101, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumString's vtable slot 3.
-func (self *IEnumString) Next(celt uint32, rgelt *foundation.PWSTR, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumString) Next(rgelt []foundation.PWSTR, pceltFetched *uint32) error {
+	var _rgelt *foundation.PWSTR
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1489,8 +1581,12 @@ type IEnumUnknown struct {
 var IID_IEnumUnknown = win32.GUID{Data1: 0x00000100, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumUnknown's vtable slot 3.
-func (self *IEnumUnknown) Next(celt uint32, rgelt **IUnknown, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumUnknown) Next(rgelt []*IUnknown, pceltFetched *uint32) error {
+	var _rgelt **IUnknown
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1978,8 +2074,12 @@ type IMultiQI struct {
 var IID_IMultiQI = win32.GUID{Data1: 0x00000020, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // QueryMultipleInterfaces dispatches through IMultiQI's vtable slot 3.
-func (self *IMultiQI) QueryMultipleInterfaces(cMQIs uint32, pMQIs *MULTI_QI) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cMQIs), uintptr(unsafe.Pointer(pMQIs)))
+func (self *IMultiQI) QueryMultipleInterfaces(pMQIs []MULTI_QI) error {
+	var _pMQIs *MULTI_QI
+	if len(pMQIs) > 0 {
+		_pMQIs = &pMQIs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pMQIs)), uintptr(unsafe.Pointer(_pMQIs)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2230,14 +2330,22 @@ type IPipeByte struct {
 var IID_IPipeByte = win32.GUID{Data1: 0xdb2f3aca, Data2: 0x2f86, Data3: 0x11d1, Data4: [8]byte{0x8e, 0x04, 0x00, 0xc0, 0x4f, 0xb9, 0x98, 0x9a}}
 
 // Pull dispatches through IPipeByte's vtable slot 3.
-func (self *IPipeByte) Pull(buf *byte, cRequest uint32, pcReturned *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buf)), uintptr(cRequest), uintptr(unsafe.Pointer(pcReturned)))
+func (self *IPipeByte) Pull(buf []byte, pcReturned *uint32) error {
+	var _buf *byte
+	if len(buf) > 0 {
+		_buf = &buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_buf)), uintptr(len(buf)), uintptr(unsafe.Pointer(pcReturned)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Push dispatches through IPipeByte's vtable slot 4.
-func (self *IPipeByte) Push(buf *byte, cSent uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buf)), uintptr(cSent))
+func (self *IPipeByte) Push(buf []byte) error {
+	var _buf *byte
+	if len(buf) > 0 {
+		_buf = &buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_buf)), uintptr(len(buf)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2251,14 +2359,22 @@ type IPipeDouble struct {
 var IID_IPipeDouble = win32.GUID{Data1: 0xdb2f3ace, Data2: 0x2f86, Data3: 0x11d1, Data4: [8]byte{0x8e, 0x04, 0x00, 0xc0, 0x4f, 0xb9, 0x98, 0x9a}}
 
 // Pull dispatches through IPipeDouble's vtable slot 3.
-func (self *IPipeDouble) Pull(buf *float64, cRequest uint32, pcReturned *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buf)), uintptr(cRequest), uintptr(unsafe.Pointer(pcReturned)))
+func (self *IPipeDouble) Pull(buf []float64, pcReturned *uint32) error {
+	var _buf *float64
+	if len(buf) > 0 {
+		_buf = &buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_buf)), uintptr(len(buf)), uintptr(unsafe.Pointer(pcReturned)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Push dispatches through IPipeDouble's vtable slot 4.
-func (self *IPipeDouble) Push(buf *float64, cSent uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buf)), uintptr(cSent))
+func (self *IPipeDouble) Push(buf []float64) error {
+	var _buf *float64
+	if len(buf) > 0 {
+		_buf = &buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_buf)), uintptr(len(buf)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2272,14 +2388,22 @@ type IPipeLong struct {
 var IID_IPipeLong = win32.GUID{Data1: 0xdb2f3acc, Data2: 0x2f86, Data3: 0x11d1, Data4: [8]byte{0x8e, 0x04, 0x00, 0xc0, 0x4f, 0xb9, 0x98, 0x9a}}
 
 // Pull dispatches through IPipeLong's vtable slot 3.
-func (self *IPipeLong) Pull(buf *int32, cRequest uint32, pcReturned *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buf)), uintptr(cRequest), uintptr(unsafe.Pointer(pcReturned)))
+func (self *IPipeLong) Pull(buf []int32, pcReturned *uint32) error {
+	var _buf *int32
+	if len(buf) > 0 {
+		_buf = &buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_buf)), uintptr(len(buf)), uintptr(unsafe.Pointer(pcReturned)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Push dispatches through IPipeLong's vtable slot 4.
-func (self *IPipeLong) Push(buf *int32, cSent uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(buf)), uintptr(cSent))
+func (self *IPipeLong) Push(buf []int32) error {
+	var _buf *int32
+	if len(buf) > 0 {
+		_buf = &buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_buf)), uintptr(len(buf)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2346,8 +2470,12 @@ type IROTData struct {
 var IID_IROTData = win32.GUID{Data1: 0xf29f6bc0, Data2: 0x5021, Data3: 0x11ce, Data4: [8]byte{0xaa, 0x15, 0x00, 0x00, 0x69, 0x01, 0x29, 0x3f}}
 
 // GetComparisonData dispatches through IROTData's vtable slot 3.
-func (self *IROTData) GetComparisonData(pbData *byte, cbMax uint32, pcbData *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbData)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbData)))
+func (self *IROTData) GetComparisonData(pbData []byte, pcbData *uint32) error {
+	var _pbData *byte
+	if len(pbData) > 0 {
+		_pbData = &pbData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pbData)), uintptr(len(pbData)), uintptr(unsafe.Pointer(pcbData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2695,14 +2823,22 @@ type ISequentialStream struct {
 var IID_ISequentialStream = win32.GUID{Data1: 0x0c733a30, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // Read dispatches through ISequentialStream's vtable slot 3.
-func (self *ISequentialStream) Read(pv unsafe.Pointer, cb uint32, pcbRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pv)), uintptr(cb), uintptr(unsafe.Pointer(pcbRead)))
+func (self *ISequentialStream) Read(pv []byte, pcbRead *uint32) error {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(pcbRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Write dispatches through ISequentialStream's vtable slot 4.
-func (self *ISequentialStream) Write(pv unsafe.Pointer, cb uint32, pcbWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pv)), uintptr(cb), uintptr(unsafe.Pointer(pcbWritten)))
+func (self *ISequentialStream) Write(pv []byte, pcbWritten *uint32) error {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(pcbWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3134,8 +3270,12 @@ func (self *ITypeInfo) GetVarDesc(index uint32, ppVarDesc **VARDESC) error {
 }
 
 // GetNames dispatches through ITypeInfo's vtable slot 7.
-func (self *ITypeInfo) GetNames(memid int32, rgBstrNames *foundation.BSTR, cMaxNames uint32, pcNames *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(memid), uintptr(unsafe.Pointer(rgBstrNames)), uintptr(cMaxNames), uintptr(unsafe.Pointer(pcNames)))
+func (self *ITypeInfo) GetNames(memid int32, rgBstrNames []foundation.BSTR, pcNames *uint32) error {
+	var _rgBstrNames *foundation.BSTR
+	if len(rgBstrNames) > 0 {
+		_rgBstrNames = &rgBstrNames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(memid), uintptr(unsafe.Pointer(_rgBstrNames)), uintptr(len(rgBstrNames)), uintptr(unsafe.Pointer(pcNames)))
 	return win32.HRESULTError(int32(r1))
 }
 

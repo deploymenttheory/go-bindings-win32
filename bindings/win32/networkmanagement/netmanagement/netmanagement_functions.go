@@ -1049,18 +1049,26 @@ func NetReplSetInfo(servername string, level uint32, buf *byte, parm_err *uint32
 // NetRequestOfflineDomainJoin calls NETAPI32!NetRequestOfflineDomainJoin.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netrequestofflinedomainjoin
 // Minimum OS: windows6.1.
-func NetRequestOfflineDomainJoin(pProvisionBinData *byte, cbProvisionBinDataSize uint32, dwOptions NET_REQUEST_PROVISION_OPTIONS, lpWindowsPath string) uint32 {
+func NetRequestOfflineDomainJoin(pProvisionBinData []byte, dwOptions NET_REQUEST_PROVISION_OPTIONS, lpWindowsPath string) uint32 {
+	var _pProvisionBinData *byte
+	if len(pProvisionBinData) > 0 {
+		_pProvisionBinData = &pProvisionBinData[0]
+	}
 	_lpWindowsPath := win32.UTF16Ptr(lpWindowsPath)
-	r1, _, _ := syscall.SyscallN(procNetRequestOfflineDomainJoin.Addr(), uintptr(unsafe.Pointer(pProvisionBinData)), uintptr(cbProvisionBinDataSize), uintptr(dwOptions), uintptr(unsafe.Pointer(_lpWindowsPath)))
+	r1, _, _ := syscall.SyscallN(procNetRequestOfflineDomainJoin.Addr(), uintptr(unsafe.Pointer(_pProvisionBinData)), uintptr(len(pProvisionBinData)), uintptr(dwOptions), uintptr(unsafe.Pointer(_lpWindowsPath)))
 	return uint32(r1)
 }
 
 // NetRequestProvisioningPackageInstall calls NETAPI32!NetRequestProvisioningPackageInstall.
 // https://learn.microsoft.com/windows/win32/api/lmjoin/nf-lmjoin-netrequestprovisioningpackageinstall
 // Minimum OS: windows8.0.
-func NetRequestProvisioningPackageInstall(pPackageBinData *byte, dwPackageBinDataSize uint32, dwProvisionOptions NET_REQUEST_PROVISION_OPTIONS, lpWindowsPath string) uint32 {
+func NetRequestProvisioningPackageInstall(pPackageBinData []byte, dwProvisionOptions NET_REQUEST_PROVISION_OPTIONS, lpWindowsPath string) uint32 {
+	var _pPackageBinData *byte
+	if len(pPackageBinData) > 0 {
+		_pPackageBinData = &pPackageBinData[0]
+	}
 	_lpWindowsPath := win32.UTF16Ptr(lpWindowsPath)
-	r1, _, _ := syscall.SyscallN(procNetRequestProvisioningPackageInstall.Addr(), uintptr(unsafe.Pointer(pPackageBinData)), uintptr(dwPackageBinDataSize), uintptr(dwProvisionOptions), uintptr(unsafe.Pointer(_lpWindowsPath)), 0)
+	r1, _, _ := syscall.SyscallN(procNetRequestProvisioningPackageInstall.Addr(), uintptr(unsafe.Pointer(_pPackageBinData)), uintptr(len(pPackageBinData)), uintptr(dwProvisionOptions), uintptr(unsafe.Pointer(_lpWindowsPath)), 0)
 	return uint32(r1)
 }
 

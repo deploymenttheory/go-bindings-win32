@@ -22,8 +22,12 @@ type INetDiagExtensibleHelper struct {
 var IID_INetDiagExtensibleHelper = win32.GUID{Data1: 0xc0b35748, Data2: 0xebf5, Data3: 0x11d8, Data4: [8]byte{0xbb, 0xe9, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30}}
 
 // ResolveAttributes dispatches through INetDiagExtensibleHelper's vtable slot 3.
-func (self *INetDiagExtensibleHelper) ResolveAttributes(celt uint32, rgKeyAttributes *HELPER_ATTRIBUTE, pcelt *uint32, prgMatchValues **HELPER_ATTRIBUTE) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgKeyAttributes)), uintptr(unsafe.Pointer(pcelt)), uintptr(unsafe.Pointer(prgMatchValues)))
+func (self *INetDiagExtensibleHelper) ResolveAttributes(rgKeyAttributes []HELPER_ATTRIBUTE, pcelt *uint32, prgMatchValues **HELPER_ATTRIBUTE) error {
+	var _rgKeyAttributes *HELPER_ATTRIBUTE
+	if len(rgKeyAttributes) > 0 {
+		_rgKeyAttributes = &rgKeyAttributes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgKeyAttributes)), uintptr(unsafe.Pointer(_rgKeyAttributes)), uintptr(unsafe.Pointer(pcelt)), uintptr(unsafe.Pointer(prgMatchValues)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -37,8 +41,12 @@ type INetDiagHelper struct {
 var IID_INetDiagHelper = win32.GUID{Data1: 0xc0b35746, Data2: 0xebf5, Data3: 0x11d8, Data4: [8]byte{0xbb, 0xe9, 0x50, 0x50, 0x54, 0x50, 0x30, 0x30}}
 
 // Initialize dispatches through INetDiagHelper's vtable slot 3.
-func (self *INetDiagHelper) Initialize(celt uint32, rgAttributes *HELPER_ATTRIBUTE) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgAttributes)))
+func (self *INetDiagHelper) Initialize(rgAttributes []HELPER_ATTRIBUTE) error {
+	var _rgAttributes *HELPER_ATTRIBUTE
+	if len(rgAttributes) > 0 {
+		_rgAttributes = &rgAttributes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgAttributes)), uintptr(unsafe.Pointer(_rgAttributes)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -151,8 +159,12 @@ type INetDiagHelperEx struct {
 var IID_INetDiagHelperEx = win32.GUID{Data1: 0x972dab4d, Data2: 0xe4e3, Data3: 0x4fc6, Data4: [8]byte{0xae, 0x54, 0x5f, 0x65, 0xcc, 0xde, 0x4a, 0x15}}
 
 // ReconfirmLowHealth dispatches through INetDiagHelperEx's vtable slot 3.
-func (self *INetDiagHelperEx) ReconfirmLowHealth(celt uint32, pResults *HypothesisResult, ppwszUpdatedDescription *foundation.PWSTR, pUpdatedStatus *DIAGNOSIS_STATUS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pResults)), uintptr(unsafe.Pointer(ppwszUpdatedDescription)), uintptr(unsafe.Pointer(pUpdatedStatus)))
+func (self *INetDiagHelperEx) ReconfirmLowHealth(pResults []HypothesisResult, ppwszUpdatedDescription *foundation.PWSTR, pUpdatedStatus *DIAGNOSIS_STATUS) error {
+	var _pResults *HypothesisResult
+	if len(pResults) > 0 {
+		_pResults = &pResults[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pResults)), uintptr(unsafe.Pointer(_pResults)), uintptr(unsafe.Pointer(ppwszUpdatedDescription)), uintptr(unsafe.Pointer(pUpdatedStatus)))
 	return win32.HRESULTError(int32(r1))
 }
 

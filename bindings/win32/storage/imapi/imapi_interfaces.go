@@ -1155,14 +1155,22 @@ type IDiscRecorder struct {
 var IID_IDiscRecorder = win32.GUID{Data1: 0x85ac9776, Data2: 0xca88, Data3: 0x4cf2, Data4: [8]byte{0x89, 0x4e, 0x09, 0x59, 0x8c, 0x07, 0x8a, 0x41}}
 
 // Init dispatches through IDiscRecorder's vtable slot 3.
-func (self *IDiscRecorder) Init(pbyUniqueID *byte, nulIDSize uint32, nulDriveNumber uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbyUniqueID)), uintptr(nulIDSize), uintptr(nulDriveNumber))
+func (self *IDiscRecorder) Init(pbyUniqueID []byte, nulDriveNumber uint32) error {
+	var _pbyUniqueID *byte
+	if len(pbyUniqueID) > 0 {
+		_pbyUniqueID = &pbyUniqueID[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pbyUniqueID)), uintptr(len(pbyUniqueID)), uintptr(nulDriveNumber))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetRecorderGUID dispatches through IDiscRecorder's vtable slot 4.
-func (self *IDiscRecorder) GetRecorderGUID(pbyUniqueID *byte, ulBufferSize uint32, pulReturnSizeRequired *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbyUniqueID)), uintptr(ulBufferSize), uintptr(unsafe.Pointer(pulReturnSizeRequired)))
+func (self *IDiscRecorder) GetRecorderGUID(pbyUniqueID []byte, pulReturnSizeRequired *uint32) error {
+	var _pbyUniqueID *byte
+	if len(pbyUniqueID) > 0 {
+		_pbyUniqueID = &pbyUniqueID[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pbyUniqueID)), uintptr(len(pbyUniqueID)), uintptr(unsafe.Pointer(pulReturnSizeRequired)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1389,20 +1397,40 @@ type IDiscRecorder2Ex struct {
 var IID_IDiscRecorder2Ex = win32.GUID{Data1: 0x27354132, Data2: 0x7f64, Data3: 0x5b0f, Data4: [8]byte{0x8f, 0x00, 0x5d, 0x77, 0xaf, 0xbe, 0x26, 0x1e}}
 
 // SendCommandNoData dispatches through IDiscRecorder2Ex's vtable slot 3.
-func (self *IDiscRecorder2Ex) SendCommandNoData(Cdb *byte, CdbSize uint32, SenseBuffer *byte, Timeout uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Cdb)), uintptr(CdbSize), uintptr(unsafe.Pointer(SenseBuffer)), uintptr(Timeout))
+func (self *IDiscRecorder2Ex) SendCommandNoData(Cdb []byte, SenseBuffer *byte, Timeout uint32) error {
+	var _Cdb *byte
+	if len(Cdb) > 0 {
+		_Cdb = &Cdb[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Cdb)), uintptr(len(Cdb)), uintptr(unsafe.Pointer(SenseBuffer)), uintptr(Timeout))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SendCommandSendDataToDevice dispatches through IDiscRecorder2Ex's vtable slot 4.
-func (self *IDiscRecorder2Ex) SendCommandSendDataToDevice(Cdb *byte, CdbSize uint32, SenseBuffer *byte, Timeout uint32, Buffer *byte, BufferSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Cdb)), uintptr(CdbSize), uintptr(unsafe.Pointer(SenseBuffer)), uintptr(Timeout), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize))
+func (self *IDiscRecorder2Ex) SendCommandSendDataToDevice(Cdb []byte, SenseBuffer *byte, Timeout uint32, Buffer []byte) error {
+	var _Cdb *byte
+	if len(Cdb) > 0 {
+		_Cdb = &Cdb[0]
+	}
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Cdb)), uintptr(len(Cdb)), uintptr(unsafe.Pointer(SenseBuffer)), uintptr(Timeout), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SendCommandGetDataFromDevice dispatches through IDiscRecorder2Ex's vtable slot 5.
-func (self *IDiscRecorder2Ex) SendCommandGetDataFromDevice(Cdb *byte, CdbSize uint32, SenseBuffer *byte, Timeout uint32, Buffer *byte, BufferSize uint32, BufferFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Cdb)), uintptr(CdbSize), uintptr(unsafe.Pointer(SenseBuffer)), uintptr(Timeout), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BufferFetched)))
+func (self *IDiscRecorder2Ex) SendCommandGetDataFromDevice(Cdb []byte, SenseBuffer *byte, Timeout uint32, Buffer []byte, BufferFetched *uint32) error {
+	var _Cdb *byte
+	if len(Cdb) > 0 {
+		_Cdb = &Cdb[0]
+	}
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Cdb)), uintptr(len(Cdb)), uintptr(unsafe.Pointer(SenseBuffer)), uintptr(Timeout), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BufferFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1413,8 +1441,12 @@ func (self *IDiscRecorder2Ex) ReadDvdStructure(format uint32, address uint32, la
 }
 
 // SendDvdStructure dispatches through IDiscRecorder2Ex's vtable slot 7.
-func (self *IDiscRecorder2Ex) SendDvdStructure(format uint32, data *byte, count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(format), uintptr(unsafe.Pointer(data)), uintptr(count))
+func (self *IDiscRecorder2Ex) SendDvdStructure(format uint32, data []byte) error {
+	var _data *byte
+	if len(data) > 0 {
+		_data = &data[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(format), uintptr(unsafe.Pointer(_data)), uintptr(len(data)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1455,8 +1487,12 @@ func (self *IDiscRecorder2Ex) GetModePage(requestedModePage IMAPI_MODE_PAGE_TYPE
 }
 
 // SetModePage dispatches through IDiscRecorder2Ex's vtable slot 14.
-func (self *IDiscRecorder2Ex) SetModePage(requestType IMAPI_MODE_PAGE_REQUEST_TYPE, data *byte, byteSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(requestType), uintptr(unsafe.Pointer(data)), uintptr(byteSize))
+func (self *IDiscRecorder2Ex) SetModePage(requestType IMAPI_MODE_PAGE_REQUEST_TYPE, data []byte) error {
+	var _data *byte
+	if len(data) > 0 {
+		_data = &data[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(requestType), uintptr(unsafe.Pointer(_data)), uintptr(len(data)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1505,8 +1541,12 @@ type IEnumDiscMasterFormats struct {
 var IID_IEnumDiscMasterFormats = win32.GUID{Data1: 0xddf445e1, Data2: 0x54ba, Data3: 0x11d3, Data4: [8]byte{0x91, 0x44, 0x00, 0x10, 0x4b, 0xa1, 0x1c, 0x5e}}
 
 // Next dispatches through IEnumDiscMasterFormats's vtable slot 3.
-func (self *IEnumDiscMasterFormats) Next(cFormats uint32, lpiidFormatID *win32.GUID, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFormats), uintptr(unsafe.Pointer(lpiidFormatID)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumDiscMasterFormats) Next(lpiidFormatID []win32.GUID, pcFetched *uint32) error {
+	var _lpiidFormatID *win32.GUID
+	if len(lpiidFormatID) > 0 {
+		_lpiidFormatID = &lpiidFormatID[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(lpiidFormatID)), uintptr(unsafe.Pointer(_lpiidFormatID)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1537,8 +1577,12 @@ type IEnumDiscRecorders struct {
 var IID_IEnumDiscRecorders = win32.GUID{Data1: 0x9b1921e1, Data2: 0x54ac, Data3: 0x11d3, Data4: [8]byte{0x91, 0x44, 0x00, 0x10, 0x4b, 0xa1, 0x1c, 0x5e}}
 
 // Next dispatches through IEnumDiscRecorders's vtable slot 3.
-func (self *IEnumDiscRecorders) Next(cRecorders uint32, ppRecorder **IDiscRecorder, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cRecorders), uintptr(unsafe.Pointer(ppRecorder)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumDiscRecorders) Next(ppRecorder []*IDiscRecorder, pcFetched *uint32) error {
+	var _ppRecorder **IDiscRecorder
+	if len(ppRecorder) > 0 {
+		_ppRecorder = &ppRecorder[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppRecorder)), uintptr(unsafe.Pointer(_ppRecorder)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1570,8 +1614,12 @@ type IEnumFsiItems struct {
 var IID_IEnumFsiItems = win32.GUID{Data1: 0x2c941fda, Data2: 0x975b, Data3: 0x59be, Data4: [8]byte{0xa9, 0x60, 0x9a, 0x2a, 0x26, 0x28, 0x53, 0xa5}}
 
 // Next dispatches through IEnumFsiItems's vtable slot 3.
-func (self *IEnumFsiItems) Next(celt uint32, rgelt **IFsiItem, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumFsiItems) Next(rgelt []*IFsiItem, pceltFetched *uint32) error {
+	var _rgelt **IFsiItem
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1603,8 +1651,12 @@ type IEnumProgressItems struct {
 var IID_IEnumProgressItems = win32.GUID{Data1: 0x2c941fd6, Data2: 0x975b, Data3: 0x59be, Data4: [8]byte{0xa9, 0x60, 0x9a, 0x2a, 0x26, 0x28, 0x53, 0xa5}}
 
 // Next dispatches through IEnumProgressItems's vtable slot 3.
-func (self *IEnumProgressItems) Next(celt uint32, rgelt **IProgressItem, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumProgressItems) Next(rgelt []*IProgressItem, pceltFetched *uint32) error {
+	var _rgelt **IProgressItem
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2867,8 +2919,12 @@ func (self *IRedbookDiscMaster) CreateAudioTrack(nBlocks int32) error {
 }
 
 // AddAudioTrackBlocks dispatches through IRedbookDiscMaster's vtable slot 9.
-func (self *IRedbookDiscMaster) AddAudioTrackBlocks(pby *byte, cb int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pby)), uintptr(cb))
+func (self *IRedbookDiscMaster) AddAudioTrackBlocks(pby []byte) error {
+	var _pby *byte
+	if len(pby) > 0 {
+		_pby = &pby[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pby)), uintptr(len(pby)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2894,8 +2950,12 @@ func (self *IStreamConcatenate) Initialize(stream1 *systemcom.IStream, stream2 *
 }
 
 // Initialize2 dispatches through IStreamConcatenate's vtable slot 15.
-func (self *IStreamConcatenate) Initialize2(streams **systemcom.IStream, streamCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(streams)), uintptr(streamCount))
+func (self *IStreamConcatenate) Initialize2(streams []*systemcom.IStream) error {
+	var _streams **systemcom.IStream
+	if len(streams) > 0 {
+		_streams = &streams[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_streams)), uintptr(len(streams)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2906,8 +2966,12 @@ func (self *IStreamConcatenate) Append(stream *systemcom.IStream) error {
 }
 
 // Append2 dispatches through IStreamConcatenate's vtable slot 17.
-func (self *IStreamConcatenate) Append2(streams **systemcom.IStream, streamCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(streams)), uintptr(streamCount))
+func (self *IStreamConcatenate) Append2(streams []*systemcom.IStream) error {
+	var _streams **systemcom.IStream
+	if len(streams) > 0 {
+		_streams = &streams[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_streams)), uintptr(len(streams)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2948,8 +3012,12 @@ func (self *IStreamPseudoRandomBased) Get_Seed(value *uint32) error {
 }
 
 // Put_ExtendedSeed dispatches through IStreamPseudoRandomBased's vtable slot 16.
-func (self *IStreamPseudoRandomBased) Put_ExtendedSeed(values *uint32, eCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(values)), uintptr(eCount))
+func (self *IStreamPseudoRandomBased) Put_ExtendedSeed(values []uint32) error {
+	var _values *uint32
+	if len(values) > 0 {
+		_values = &values[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_values)), uintptr(len(values)))
 	return win32.HRESULTError(int32(r1))
 }
 

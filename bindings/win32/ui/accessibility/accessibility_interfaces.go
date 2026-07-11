@@ -49,26 +49,50 @@ type IAccPropServices struct {
 var IID_IAccPropServices = win32.GUID{Data1: 0x6e26e776, Data2: 0x04f0, Data3: 0x495d, Data4: [8]byte{0x80, 0xe4, 0x33, 0x30, 0x35, 0x2e, 0x31, 0x69}}
 
 // SetPropServer dispatches through IAccPropServices's vtable slot 4.
-func (self *IAccPropServices) SetPropServer(pIDString *byte, dwIDStringLen uint32, paProps *win32.GUID, cProps int32, pServer *IAccPropServer, annoScope AnnoScope) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIDString)), uintptr(dwIDStringLen), uintptr(unsafe.Pointer(paProps)), uintptr(cProps), uintptr(unsafe.Pointer(pServer)), uintptr(annoScope))
+func (self *IAccPropServices) SetPropServer(pIDString []byte, paProps []win32.GUID, pServer *IAccPropServer, annoScope AnnoScope) error {
+	var _pIDString *byte
+	if len(pIDString) > 0 {
+		_pIDString = &pIDString[0]
+	}
+	var _paProps *win32.GUID
+	if len(paProps) > 0 {
+		_paProps = &paProps[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pIDString)), uintptr(len(pIDString)), uintptr(unsafe.Pointer(_paProps)), uintptr(len(paProps)), uintptr(unsafe.Pointer(pServer)), uintptr(annoScope))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ClearProps dispatches through IAccPropServices's vtable slot 5.
-func (self *IAccPropServices) ClearProps(pIDString *byte, dwIDStringLen uint32, paProps *win32.GUID, cProps int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIDString)), uintptr(dwIDStringLen), uintptr(unsafe.Pointer(paProps)), uintptr(cProps))
+func (self *IAccPropServices) ClearProps(pIDString []byte, paProps []win32.GUID) error {
+	var _pIDString *byte
+	if len(pIDString) > 0 {
+		_pIDString = &pIDString[0]
+	}
+	var _paProps *win32.GUID
+	if len(paProps) > 0 {
+		_paProps = &paProps[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pIDString)), uintptr(len(pIDString)), uintptr(unsafe.Pointer(_paProps)), uintptr(len(paProps)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetHwndPropServer dispatches through IAccPropServices's vtable slot 8.
-func (self *IAccPropServices) SetHwndPropServer(hwnd foundation.HWND, idObject uint32, idChild uint32, paProps *win32.GUID, cProps int32, pServer *IAccPropServer, annoScope AnnoScope) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(paProps)), uintptr(cProps), uintptr(unsafe.Pointer(pServer)), uintptr(annoScope))
+func (self *IAccPropServices) SetHwndPropServer(hwnd foundation.HWND, idObject uint32, idChild uint32, paProps []win32.GUID, pServer *IAccPropServer, annoScope AnnoScope) error {
+	var _paProps *win32.GUID
+	if len(paProps) > 0 {
+		_paProps = &paProps[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(_paProps)), uintptr(len(paProps)), uintptr(unsafe.Pointer(pServer)), uintptr(annoScope))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ClearHwndProps dispatches through IAccPropServices's vtable slot 9.
-func (self *IAccPropServices) ClearHwndProps(hwnd foundation.HWND, idObject uint32, idChild uint32, paProps *win32.GUID, cProps int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(paProps)), uintptr(cProps))
+func (self *IAccPropServices) ClearHwndProps(hwnd foundation.HWND, idObject uint32, idChild uint32, paProps []win32.GUID) error {
+	var _paProps *win32.GUID
+	if len(paProps) > 0 {
+		_paProps = &paProps[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hwnd), uintptr(idObject), uintptr(idChild), uintptr(unsafe.Pointer(_paProps)), uintptr(len(paProps)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -79,20 +103,32 @@ func (self *IAccPropServices) ComposeHwndIdentityString(hwnd foundation.HWND, id
 }
 
 // DecomposeHwndIdentityString dispatches through IAccPropServices's vtable slot 11.
-func (self *IAccPropServices) DecomposeHwndIdentityString(pIDString *byte, dwIDStringLen uint32, phwnd *foundation.HWND, pidObject *uint32, pidChild *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIDString)), uintptr(dwIDStringLen), uintptr(unsafe.Pointer(phwnd)), uintptr(unsafe.Pointer(pidObject)), uintptr(unsafe.Pointer(pidChild)))
+func (self *IAccPropServices) DecomposeHwndIdentityString(pIDString []byte, phwnd *foundation.HWND, pidObject *uint32, pidChild *uint32) error {
+	var _pIDString *byte
+	if len(pIDString) > 0 {
+		_pIDString = &pIDString[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pIDString)), uintptr(len(pIDString)), uintptr(unsafe.Pointer(phwnd)), uintptr(unsafe.Pointer(pidObject)), uintptr(unsafe.Pointer(pidChild)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetHmenuPropServer dispatches through IAccPropServices's vtable slot 14.
-func (self *IAccPropServices) SetHmenuPropServer(hmenu uiwindowsandmessaging.HMENU, idChild uint32, paProps *win32.GUID, cProps int32, pServer *IAccPropServer, annoScope AnnoScope) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hmenu), uintptr(idChild), uintptr(unsafe.Pointer(paProps)), uintptr(cProps), uintptr(unsafe.Pointer(pServer)), uintptr(annoScope))
+func (self *IAccPropServices) SetHmenuPropServer(hmenu uiwindowsandmessaging.HMENU, idChild uint32, paProps []win32.GUID, pServer *IAccPropServer, annoScope AnnoScope) error {
+	var _paProps *win32.GUID
+	if len(paProps) > 0 {
+		_paProps = &paProps[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hmenu), uintptr(idChild), uintptr(unsafe.Pointer(_paProps)), uintptr(len(paProps)), uintptr(unsafe.Pointer(pServer)), uintptr(annoScope))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ClearHmenuProps dispatches through IAccPropServices's vtable slot 15.
-func (self *IAccPropServices) ClearHmenuProps(hmenu uiwindowsandmessaging.HMENU, idChild uint32, paProps *win32.GUID, cProps int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hmenu), uintptr(idChild), uintptr(unsafe.Pointer(paProps)), uintptr(cProps))
+func (self *IAccPropServices) ClearHmenuProps(hmenu uiwindowsandmessaging.HMENU, idChild uint32, paProps []win32.GUID) error {
+	var _paProps *win32.GUID
+	if len(paProps) > 0 {
+		_paProps = &paProps[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hmenu), uintptr(idChild), uintptr(unsafe.Pointer(_paProps)), uintptr(len(paProps)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -103,8 +139,12 @@ func (self *IAccPropServices) ComposeHmenuIdentityString(hmenu uiwindowsandmessa
 }
 
 // DecomposeHmenuIdentityString dispatches through IAccPropServices's vtable slot 17.
-func (self *IAccPropServices) DecomposeHmenuIdentityString(pIDString *byte, dwIDStringLen uint32, phmenu *uiwindowsandmessaging.HMENU, pidChild *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pIDString)), uintptr(dwIDStringLen), uintptr(unsafe.Pointer(phmenu)), uintptr(unsafe.Pointer(pidChild)))
+func (self *IAccPropServices) DecomposeHmenuIdentityString(pIDString []byte, phmenu *uiwindowsandmessaging.HMENU, pidChild *uint32) error {
+	var _pIDString *byte
+	if len(pIDString) > 0 {
+		_pIDString = &pIDString[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pIDString)), uintptr(len(pIDString)), uintptr(unsafe.Pointer(phmenu)), uintptr(unsafe.Pointer(pidChild)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1871,9 +1911,13 @@ func (self *IUIAutomation) CreateAndConditionFromArray(conditions *systemcom.SAF
 }
 
 // CreateAndConditionFromNativeArray dispatches through IUIAutomation's vtable slot 27.
-func (self *IUIAutomation) CreateAndConditionFromNativeArray(conditions **IUIAutomationCondition, conditionCount int32) (*IUIAutomationCondition, error) {
+func (self *IUIAutomation) CreateAndConditionFromNativeArray(conditions []*IUIAutomationCondition) (*IUIAutomationCondition, error) {
+	var _conditions **IUIAutomationCondition
+	if len(conditions) > 0 {
+		_conditions = &conditions[0]
+	}
 	var _newCondition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(conditions)), uintptr(conditionCount), uintptr(unsafe.Pointer(&_newCondition)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_conditions)), uintptr(len(conditions)), uintptr(unsafe.Pointer(&_newCondition)))
 	return _newCondition, win32.HRESULTError(int32(r1))
 }
 
@@ -1892,9 +1936,13 @@ func (self *IUIAutomation) CreateOrConditionFromArray(conditions *systemcom.SAFE
 }
 
 // CreateOrConditionFromNativeArray dispatches through IUIAutomation's vtable slot 30.
-func (self *IUIAutomation) CreateOrConditionFromNativeArray(conditions **IUIAutomationCondition, conditionCount int32) (*IUIAutomationCondition, error) {
+func (self *IUIAutomation) CreateOrConditionFromNativeArray(conditions []*IUIAutomationCondition) (*IUIAutomationCondition, error) {
+	var _conditions **IUIAutomationCondition
+	if len(conditions) > 0 {
+		_conditions = &conditions[0]
+	}
 	var _newCondition *IUIAutomationCondition
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(conditions)), uintptr(conditionCount), uintptr(unsafe.Pointer(&_newCondition)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_conditions)), uintptr(len(conditions)), uintptr(unsafe.Pointer(&_newCondition)))
 	return _newCondition, win32.HRESULTError(int32(r1))
 }
 
@@ -1918,8 +1966,12 @@ func (self *IUIAutomation) RemoveAutomationEventHandler(eventId UIA_EVENT_ID, el
 }
 
 // AddPropertyChangedEventHandlerNativeArray dispatches through IUIAutomation's vtable slot 34.
-func (self *IUIAutomation) AddPropertyChangedEventHandlerNativeArray(element *IUIAutomationElement, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationPropertyChangedEventHandler, propertyArray *UIA_PROPERTY_ID, propertyCount int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)), uintptr(unsafe.Pointer(propertyArray)), uintptr(propertyCount))
+func (self *IUIAutomation) AddPropertyChangedEventHandlerNativeArray(element *IUIAutomationElement, scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationPropertyChangedEventHandler, propertyArray []UIA_PROPERTY_ID) error {
+	var _propertyArray *UIA_PROPERTY_ID
+	if len(propertyArray) > 0 {
+		_propertyArray = &propertyArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)), uintptr(unsafe.Pointer(_propertyArray)), uintptr(len(propertyArray)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1966,9 +2018,13 @@ func (self *IUIAutomation) RemoveAllEventHandlers() error {
 }
 
 // IntNativeArrayToSafeArray dispatches through IUIAutomation's vtable slot 42.
-func (self *IUIAutomation) IntNativeArrayToSafeArray(array *int32, arrayCount int32) (*systemcom.SAFEARRAY, error) {
+func (self *IUIAutomation) IntNativeArrayToSafeArray(array []int32) (*systemcom.SAFEARRAY, error) {
+	var _array *int32
+	if len(array) > 0 {
+		_array = &array[0]
+	}
 	var _safeArray *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(array)), uintptr(arrayCount), uintptr(unsafe.Pointer(&_safeArray)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_array)), uintptr(len(array)), uintptr(unsafe.Pointer(&_safeArray)))
 	return _safeArray, win32.HRESULTError(int32(r1))
 }
 
@@ -2134,8 +2190,12 @@ type IUIAutomation4 struct {
 var IID_IUIAutomation4 = win32.GUID{Data1: 0x1189c02a, Data2: 0x05f8, Data3: 0x4319, Data4: [8]byte{0x8e, 0x21, 0xe8, 0x17, 0xe3, 0xdb, 0x28, 0x60}}
 
 // AddChangesEventHandler dispatches through IUIAutomation4's vtable slot 66.
-func (self *IUIAutomation4) AddChangesEventHandler(element *IUIAutomationElement, scope TreeScope, changeTypes *int32, changesCount int32, pCacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationChangesEventHandler) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(scope), uintptr(unsafe.Pointer(changeTypes)), uintptr(changesCount), uintptr(unsafe.Pointer(pCacheRequest)), uintptr(unsafe.Pointer(handler)))
+func (self *IUIAutomation4) AddChangesEventHandler(element *IUIAutomationElement, scope TreeScope, changeTypes []int32, pCacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationChangesEventHandler) error {
+	var _changeTypes *int32
+	if len(changeTypes) > 0 {
+		_changeTypes = &changeTypes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(element)), uintptr(scope), uintptr(unsafe.Pointer(_changeTypes)), uintptr(len(changeTypes)), uintptr(unsafe.Pointer(pCacheRequest)), uintptr(unsafe.Pointer(handler)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2447,8 +2507,12 @@ type IUIAutomationChangesEventHandler struct {
 var IID_IUIAutomationChangesEventHandler = win32.GUID{Data1: 0x58edca55, Data2: 0x2c3e, Data3: 0x4980, Data4: [8]byte{0xb1, 0xb9, 0x56, 0xc1, 0x7f, 0x27, 0xa2, 0xa0}}
 
 // HandleChangesEvent dispatches through IUIAutomationChangesEventHandler's vtable slot 3.
-func (self *IUIAutomationChangesEventHandler) HandleChangesEvent(sender *IUIAutomationElement, uiaChanges *UiaChangeInfo, changesCount int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sender)), uintptr(unsafe.Pointer(uiaChanges)), uintptr(changesCount))
+func (self *IUIAutomationChangesEventHandler) HandleChangesEvent(sender *IUIAutomationElement, uiaChanges []UiaChangeInfo) error {
+	var _uiaChanges *UiaChangeInfo
+	if len(uiaChanges) > 0 {
+		_uiaChanges = &uiaChanges[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(sender)), uintptr(unsafe.Pointer(_uiaChanges)), uintptr(len(uiaChanges)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3626,8 +3690,12 @@ func (self *IUIAutomationEventHandlerGroup) AddAutomationEventHandler(eventId UI
 }
 
 // AddChangesEventHandler dispatches through IUIAutomationEventHandlerGroup's vtable slot 5.
-func (self *IUIAutomationEventHandlerGroup) AddChangesEventHandler(scope TreeScope, changeTypes *int32, changesCount int32, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationChangesEventHandler) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(changeTypes)), uintptr(changesCount), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)))
+func (self *IUIAutomationEventHandlerGroup) AddChangesEventHandler(scope TreeScope, changeTypes []int32, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationChangesEventHandler) error {
+	var _changeTypes *int32
+	if len(changeTypes) > 0 {
+		_changeTypes = &changeTypes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(_changeTypes)), uintptr(len(changeTypes)), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3638,8 +3706,12 @@ func (self *IUIAutomationEventHandlerGroup) AddNotificationEventHandler(scope Tr
 }
 
 // AddPropertyChangedEventHandler dispatches through IUIAutomationEventHandlerGroup's vtable slot 7.
-func (self *IUIAutomationEventHandlerGroup) AddPropertyChangedEventHandler(scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationPropertyChangedEventHandler, propertyArray *UIA_PROPERTY_ID, propertyCount int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)), uintptr(unsafe.Pointer(propertyArray)), uintptr(propertyCount))
+func (self *IUIAutomationEventHandlerGroup) AddPropertyChangedEventHandler(scope TreeScope, cacheRequest *IUIAutomationCacheRequest, handler *IUIAutomationPropertyChangedEventHandler, propertyArray []UIA_PROPERTY_ID) error {
+	var _propertyArray *UIA_PROPERTY_ID
+	if len(propertyArray) > 0 {
+		_propertyArray = &propertyArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(scope), uintptr(unsafe.Pointer(cacheRequest)), uintptr(unsafe.Pointer(handler)), uintptr(unsafe.Pointer(_propertyArray)), uintptr(len(propertyArray)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4538,8 +4610,16 @@ func (self *IUIAutomationRegistrar) RegisterEvent(event *UIAutomationEventInfo, 
 }
 
 // RegisterPattern dispatches through IUIAutomationRegistrar's vtable slot 5.
-func (self *IUIAutomationRegistrar) RegisterPattern(pattern *UIAutomationPatternInfo, pPatternId *int32, pPatternAvailablePropertyId *int32, propertyIdCount uint32, pPropertyIds *int32, eventIdCount uint32, pEventIds *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pattern)), uintptr(unsafe.Pointer(pPatternId)), uintptr(unsafe.Pointer(pPatternAvailablePropertyId)), uintptr(propertyIdCount), uintptr(unsafe.Pointer(pPropertyIds)), uintptr(eventIdCount), uintptr(unsafe.Pointer(pEventIds)))
+func (self *IUIAutomationRegistrar) RegisterPattern(pattern *UIAutomationPatternInfo, pPatternId *int32, pPatternAvailablePropertyId *int32, pPropertyIds []int32, pEventIds []int32) error {
+	var _pPropertyIds *int32
+	if len(pPropertyIds) > 0 {
+		_pPropertyIds = &pPropertyIds[0]
+	}
+	var _pEventIds *int32
+	if len(pEventIds) > 0 {
+		_pEventIds = &pEventIds[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pattern)), uintptr(unsafe.Pointer(pPatternId)), uintptr(unsafe.Pointer(pPatternAvailablePropertyId)), uintptr(len(pPropertyIds)), uintptr(unsafe.Pointer(_pPropertyIds)), uintptr(len(pEventIds)), uintptr(unsafe.Pointer(_pEventIds)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -5430,9 +5510,13 @@ func (self *IUIAutomationTextRange3) GetChildrenBuildCache(cacheRequest *IUIAuto
 }
 
 // GetAttributeValues dispatches through IUIAutomationTextRange3's vtable slot 24.
-func (self *IUIAutomationTextRange3) GetAttributeValues(attributeIds *UIA_TEXTATTRIBUTE_ID, attributeIdCount int32) (*systemcom.SAFEARRAY, error) {
+func (self *IUIAutomationTextRange3) GetAttributeValues(attributeIds []UIA_TEXTATTRIBUTE_ID) (*systemcom.SAFEARRAY, error) {
+	var _attributeIds *UIA_TEXTATTRIBUTE_ID
+	if len(attributeIds) > 0 {
+		_attributeIds = &attributeIds[0]
+	}
 	var _attributeValues *systemcom.SAFEARRAY
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(attributeIds)), uintptr(attributeIdCount), uintptr(unsafe.Pointer(&_attributeValues)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_attributeIds)), uintptr(len(attributeIds)), uintptr(unsafe.Pointer(&_attributeValues)))
 	return _attributeValues, win32.HRESULTError(int32(r1))
 }
 

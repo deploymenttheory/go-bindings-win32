@@ -22,14 +22,22 @@ type IDtcLuConfigure struct {
 var IID_IDtcLuConfigure = win32.GUID{Data1: 0x4131e760, Data2: 0x1aea, Data3: 0x11d0, Data4: [8]byte{0x94, 0x4b, 0x00, 0xa0, 0xc9, 0x05, 0x41, 0x6e}}
 
 // Add dispatches through IDtcLuConfigure's vtable slot 3.
-func (self *IDtcLuConfigure) Add(pucLuPair *byte, cbLuPair uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pucLuPair)), uintptr(cbLuPair))
+func (self *IDtcLuConfigure) Add(pucLuPair []byte) error {
+	var _pucLuPair *byte
+	if len(pucLuPair) > 0 {
+		_pucLuPair = &pucLuPair[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pucLuPair)), uintptr(len(pucLuPair)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Delete dispatches through IDtcLuConfigure's vtable slot 4.
-func (self *IDtcLuConfigure) Delete(pucLuPair *byte, cbLuPair uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pucLuPair)), uintptr(cbLuPair))
+func (self *IDtcLuConfigure) Delete(pucLuPair []byte) error {
+	var _pucLuPair *byte
+	if len(pucLuPair) > 0 {
+		_pucLuPair = &pucLuPair[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pucLuPair)), uintptr(len(pucLuPair)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -50,8 +58,12 @@ type IDtcLuRecoveryFactory struct {
 var IID_IDtcLuRecoveryFactory = win32.GUID{Data1: 0x4131e762, Data2: 0x1aea, Data3: 0x11d0, Data4: [8]byte{0x94, 0x4b, 0x00, 0xa0, 0xc9, 0x05, 0x41, 0x6e}}
 
 // Create dispatches through IDtcLuRecoveryFactory's vtable slot 3.
-func (self *IDtcLuRecoveryFactory) Create(pucLuPair *byte, cbLuPair uint32, ppRecovery **IDtcLuRecovery) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pucLuPair)), uintptr(cbLuPair), uintptr(unsafe.Pointer(ppRecovery)))
+func (self *IDtcLuRecoveryFactory) Create(pucLuPair []byte, ppRecovery **IDtcLuRecovery) error {
+	var _pucLuPair *byte
+	if len(pucLuPair) > 0 {
+		_pucLuPair = &pucLuPair[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pucLuPair)), uintptr(len(pucLuPair)), uintptr(unsafe.Pointer(ppRecovery)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -776,8 +788,12 @@ type ILastResourceManager struct {
 var IID_ILastResourceManager = win32.GUID{Data1: 0x4d964ad4, Data2: 0x5b33, Data3: 0x11d3, Data4: [8]byte{0x8a, 0x91, 0x00, 0xc0, 0x4f, 0x79, 0xeb, 0x6d}}
 
 // TransactionCommitted dispatches through ILastResourceManager's vtable slot 3.
-func (self *ILastResourceManager) TransactionCommitted(pPrepInfo *byte, cbPrepInfo uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPrepInfo)), uintptr(cbPrepInfo))
+func (self *ILastResourceManager) TransactionCommitted(pPrepInfo []byte) error {
+	var _pPrepInfo *byte
+	if len(pPrepInfo) > 0 {
+		_pPrepInfo = &pPrepInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pPrepInfo)), uintptr(len(pPrepInfo)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -822,8 +838,12 @@ func (self *IPrepareInfo2) GetPrepareInfoSize(pcbPrepInfo *uint32) error {
 }
 
 // GetPrepareInfo dispatches through IPrepareInfo2's vtable slot 4.
-func (self *IPrepareInfo2) GetPrepareInfo(cbPrepareInfo uint32, pPrepInfo *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cbPrepareInfo), uintptr(unsafe.Pointer(pPrepInfo)))
+func (self *IPrepareInfo2) GetPrepareInfo(pPrepInfo []byte) error {
+	var _pPrepInfo *byte
+	if len(pPrepInfo) > 0 {
+		_pPrepInfo = &pPrepInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pPrepInfo)), uintptr(unsafe.Pointer(_pPrepInfo)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -857,8 +877,12 @@ func (self *IResourceManager) Enlist(pTransaction *ITransaction, pRes *ITransact
 }
 
 // Reenlist dispatches through IResourceManager's vtable slot 4.
-func (self *IResourceManager) Reenlist(pPrepInfo *byte, cbPrepInfo uint32, lTimeout uint32, pXactStat *XACTSTAT) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPrepInfo)), uintptr(cbPrepInfo), uintptr(lTimeout), uintptr(unsafe.Pointer(pXactStat)))
+func (self *IResourceManager) Reenlist(pPrepInfo []byte, lTimeout uint32, pXactStat *XACTSTAT) error {
+	var _pPrepInfo *byte
+	if len(pPrepInfo) > 0 {
+		_pPrepInfo = &pPrepInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pPrepInfo)), uintptr(len(pPrepInfo)), uintptr(lTimeout), uintptr(unsafe.Pointer(pXactStat)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -931,8 +955,12 @@ type IResourceManagerRejoinable struct {
 var IID_IResourceManagerRejoinable = win32.GUID{Data1: 0x6f6de620, Data2: 0xb5df, Data3: 0x4f3e, Data4: [8]byte{0x9c, 0xfa, 0xc8, 0xae, 0xbd, 0x05, 0x17, 0x2b}}
 
 // Rejoin dispatches through IResourceManagerRejoinable's vtable slot 9.
-func (self *IResourceManagerRejoinable) Rejoin(pPrepInfo *byte, cbPrepInfo uint32, lTimeout uint32, pXactStat *XACTSTAT) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPrepInfo)), uintptr(cbPrepInfo), uintptr(lTimeout), uintptr(unsafe.Pointer(pXactStat)))
+func (self *IResourceManagerRejoinable) Rejoin(pPrepInfo []byte, lTimeout uint32, pXactStat *XACTSTAT) error {
+	var _pPrepInfo *byte
+	if len(pPrepInfo) > 0 {
+		_pPrepInfo = &pPrepInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pPrepInfo)), uintptr(len(pPrepInfo)), uintptr(lTimeout), uintptr(unsafe.Pointer(pXactStat)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1148,8 +1176,12 @@ func (self *ITransactionExport) Export(punkTransaction *systemcom.IUnknown, pcbT
 }
 
 // GetTransactionCookie dispatches through ITransactionExport's vtable slot 4.
-func (self *ITransactionExport) GetTransactionCookie(punkTransaction *systemcom.IUnknown, cbTransactionCookie uint32, rgbTransactionCookie *byte, pcbUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punkTransaction)), uintptr(cbTransactionCookie), uintptr(unsafe.Pointer(rgbTransactionCookie)), uintptr(unsafe.Pointer(pcbUsed)))
+func (self *ITransactionExport) GetTransactionCookie(punkTransaction *systemcom.IUnknown, rgbTransactionCookie []byte, pcbUsed *uint32) error {
+	var _rgbTransactionCookie *byte
+	if len(rgbTransactionCookie) > 0 {
+		_rgbTransactionCookie = &rgbTransactionCookie[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(punkTransaction)), uintptr(len(rgbTransactionCookie)), uintptr(unsafe.Pointer(_rgbTransactionCookie)), uintptr(unsafe.Pointer(pcbUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1168,8 +1200,12 @@ func (self *ITransactionExportFactory) GetRemoteClassId(pclsid *win32.GUID) erro
 }
 
 // Create dispatches through ITransactionExportFactory's vtable slot 4.
-func (self *ITransactionExportFactory) Create(cbWhereabouts uint32, rgbWhereabouts *byte, ppExport **ITransactionExport) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cbWhereabouts), uintptr(unsafe.Pointer(rgbWhereabouts)), uintptr(unsafe.Pointer(ppExport)))
+func (self *ITransactionExportFactory) Create(rgbWhereabouts []byte, ppExport **ITransactionExport) error {
+	var _rgbWhereabouts *byte
+	if len(rgbWhereabouts) > 0 {
+		_rgbWhereabouts = &rgbWhereabouts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgbWhereabouts)), uintptr(unsafe.Pointer(_rgbWhereabouts)), uintptr(unsafe.Pointer(ppExport)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1182,8 +1218,12 @@ type ITransactionImport struct {
 var IID_ITransactionImport = win32.GUID{Data1: 0xe1cf9b5a, Data2: 0x8745, Data3: 0x11ce, Data4: [8]byte{0xa9, 0xba, 0x00, 0xaa, 0x00, 0x6c, 0x37, 0x06}}
 
 // Import dispatches through ITransactionImport's vtable slot 3.
-func (self *ITransactionImport) Import(cbTransactionCookie uint32, rgbTransactionCookie *byte, piid *win32.GUID, ppvTransaction *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cbTransactionCookie), uintptr(unsafe.Pointer(rgbTransactionCookie)), uintptr(unsafe.Pointer(piid)), uintptr(unsafe.Pointer(ppvTransaction)))
+func (self *ITransactionImport) Import(rgbTransactionCookie []byte, piid *win32.GUID, ppvTransaction *unsafe.Pointer) error {
+	var _rgbTransactionCookie *byte
+	if len(rgbTransactionCookie) > 0 {
+		_rgbTransactionCookie = &rgbTransactionCookie[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgbTransactionCookie)), uintptr(unsafe.Pointer(_rgbTransactionCookie)), uintptr(unsafe.Pointer(piid)), uintptr(unsafe.Pointer(ppvTransaction)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1202,8 +1242,12 @@ func (self *ITransactionImportWhereabouts) GetWhereaboutsSize(pcbWhereabouts *ui
 }
 
 // GetWhereabouts dispatches through ITransactionImportWhereabouts's vtable slot 4.
-func (self *ITransactionImportWhereabouts) GetWhereabouts(cbWhereabouts uint32, rgbWhereabouts *byte, pcbUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cbWhereabouts), uintptr(unsafe.Pointer(rgbWhereabouts)), uintptr(unsafe.Pointer(pcbUsed)))
+func (self *ITransactionImportWhereabouts) GetWhereabouts(rgbWhereabouts []byte, pcbUsed *uint32) error {
+	var _rgbWhereabouts *byte
+	if len(rgbWhereabouts) > 0 {
+		_rgbWhereabouts = &rgbWhereabouts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgbWhereabouts)), uintptr(unsafe.Pointer(_rgbWhereabouts)), uintptr(unsafe.Pointer(pcbUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1377,8 +1421,12 @@ type ITransactionReceiver struct {
 var IID_ITransactionReceiver = win32.GUID{Data1: 0x59313e03, Data2: 0xb36c, Data3: 0x11cf, Data4: [8]byte{0xa5, 0x39, 0x00, 0xaa, 0x00, 0x68, 0x87, 0xc3}}
 
 // UnmarshalPropagationToken dispatches through ITransactionReceiver's vtable slot 3.
-func (self *ITransactionReceiver) UnmarshalPropagationToken(cbToken uint32, rgbToken *byte, ppTransaction **ITransaction) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cbToken), uintptr(unsafe.Pointer(rgbToken)), uintptr(unsafe.Pointer(ppTransaction)))
+func (self *ITransactionReceiver) UnmarshalPropagationToken(rgbToken []byte, ppTransaction **ITransaction) error {
+	var _rgbToken *byte
+	if len(rgbToken) > 0 {
+		_rgbToken = &rgbToken[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgbToken)), uintptr(unsafe.Pointer(_rgbToken)), uintptr(unsafe.Pointer(ppTransaction)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1389,8 +1437,12 @@ func (self *ITransactionReceiver) GetReturnTokenSize(pcbReturnToken *uint32) err
 }
 
 // MarshalReturnToken dispatches through ITransactionReceiver's vtable slot 5.
-func (self *ITransactionReceiver) MarshalReturnToken(cbReturnToken uint32, rgbReturnToken *byte, pcbUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cbReturnToken), uintptr(unsafe.Pointer(rgbReturnToken)), uintptr(unsafe.Pointer(pcbUsed)))
+func (self *ITransactionReceiver) MarshalReturnToken(rgbReturnToken []byte, pcbUsed *uint32) error {
+	var _rgbReturnToken *byte
+	if len(rgbReturnToken) > 0 {
+		_rgbReturnToken = &rgbReturnToken[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(rgbReturnToken)), uintptr(unsafe.Pointer(_rgbReturnToken)), uintptr(unsafe.Pointer(pcbUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1507,14 +1559,22 @@ func (self *ITransactionTransmitter) GetPropagationTokenSize(pcbToken *uint32) e
 }
 
 // MarshalPropagationToken dispatches through ITransactionTransmitter's vtable slot 5.
-func (self *ITransactionTransmitter) MarshalPropagationToken(cbToken uint32, rgbToken *byte, pcbUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cbToken), uintptr(unsafe.Pointer(rgbToken)), uintptr(unsafe.Pointer(pcbUsed)))
+func (self *ITransactionTransmitter) MarshalPropagationToken(rgbToken []byte, pcbUsed *uint32) error {
+	var _rgbToken *byte
+	if len(rgbToken) > 0 {
+		_rgbToken = &rgbToken[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(rgbToken)), uintptr(unsafe.Pointer(_rgbToken)), uintptr(unsafe.Pointer(pcbUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // UnmarshalReturnToken dispatches through ITransactionTransmitter's vtable slot 6.
-func (self *ITransactionTransmitter) UnmarshalReturnToken(cbReturnToken uint32, rgbReturnToken *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cbReturnToken), uintptr(unsafe.Pointer(rgbReturnToken)))
+func (self *ITransactionTransmitter) UnmarshalReturnToken(rgbReturnToken []byte) error {
+	var _rgbReturnToken *byte
+	if len(rgbReturnToken) > 0 {
+		_rgbReturnToken = &rgbReturnToken[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(rgbReturnToken)), uintptr(unsafe.Pointer(_rgbReturnToken)))
 	return win32.HRESULTError(int32(r1))
 }
 

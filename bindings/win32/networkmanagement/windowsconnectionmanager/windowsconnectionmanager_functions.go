@@ -40,10 +40,14 @@ func FreeInterfaceContextTable(InterfaceContextTable *NET_INTERFACE_CONTEXT_TABL
 // GetInterfaceContextTableForHostName calls OnDemandConnRouteHelper!GetInterfaceContextTableForHostName.
 // https://learn.microsoft.com/windows/win32/api/ondemandconnroutehelper/nf-ondemandconnroutehelper-getinterfacecontexttableforhostname
 // Minimum OS: windows10.0.10240.
-func GetInterfaceContextTableForHostName(HostName string, ProxyName string, Flags uint32, ConnectionProfileFilterRawData *byte, ConnectionProfileFilterRawDataSize uint32, InterfaceContextTable **NET_INTERFACE_CONTEXT_TABLE) error {
+func GetInterfaceContextTableForHostName(HostName string, ProxyName string, Flags uint32, ConnectionProfileFilterRawData []byte, InterfaceContextTable **NET_INTERFACE_CONTEXT_TABLE) error {
 	_HostName := win32.UTF16Ptr(HostName)
 	_ProxyName := win32.UTF16Ptr(ProxyName)
-	r1, _, _ := syscall.SyscallN(procGetInterfaceContextTableForHostName.Addr(), uintptr(unsafe.Pointer(_HostName)), uintptr(unsafe.Pointer(_ProxyName)), uintptr(Flags), uintptr(unsafe.Pointer(ConnectionProfileFilterRawData)), uintptr(ConnectionProfileFilterRawDataSize), uintptr(unsafe.Pointer(InterfaceContextTable)))
+	var _ConnectionProfileFilterRawData *byte
+	if len(ConnectionProfileFilterRawData) > 0 {
+		_ConnectionProfileFilterRawData = &ConnectionProfileFilterRawData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetInterfaceContextTableForHostName.Addr(), uintptr(unsafe.Pointer(_HostName)), uintptr(unsafe.Pointer(_ProxyName)), uintptr(Flags), uintptr(unsafe.Pointer(_ConnectionProfileFilterRawData)), uintptr(len(ConnectionProfileFilterRawData)), uintptr(unsafe.Pointer(InterfaceContextTable)))
 	return win32.HRESULTError(int32(r1))
 }
 

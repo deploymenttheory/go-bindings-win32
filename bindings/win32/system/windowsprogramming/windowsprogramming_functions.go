@@ -640,10 +640,14 @@ func GetFeatureVariant(featureId uint32, changeTime FEATURE_CHANGE_TIME, payload
 // GetFirmwareEnvironmentVariable calls KERNEL32!GetFirmwareEnvironmentVariableW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfirmwareenvironmentvariablew
 // Minimum OS: windows6.0.6000.
-func GetFirmwareEnvironmentVariable(lpName string, lpGuid string, pBuffer unsafe.Pointer, nSize uint32) (uint32, error) {
+func GetFirmwareEnvironmentVariable(lpName string, lpGuid string, pBuffer []byte) (uint32, error) {
 	_lpName := win32.UTF16Ptr(lpName)
 	_lpGuid := win32.UTF16Ptr(lpGuid)
-	r1, _, e1 := syscall.SyscallN(procGetFirmwareEnvironmentVariable.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpGuid)), uintptr(unsafe.Pointer(pBuffer)), uintptr(nSize))
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetFirmwareEnvironmentVariable.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpGuid)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -653,8 +657,12 @@ func GetFirmwareEnvironmentVariable(lpName string, lpGuid string, pBuffer unsafe
 // GetFirmwareEnvironmentVariableA calls KERNEL32!GetFirmwareEnvironmentVariableA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfirmwareenvironmentvariablea
 // Minimum OS: windows6.0.6000.
-func GetFirmwareEnvironmentVariableA(lpName foundation.PSTR, lpGuid foundation.PSTR, pBuffer unsafe.Pointer, nSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetFirmwareEnvironmentVariableA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(pBuffer)), uintptr(nSize))
+func GetFirmwareEnvironmentVariableA(lpName foundation.PSTR, lpGuid foundation.PSTR, pBuffer []byte) (uint32, error) {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetFirmwareEnvironmentVariableA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -664,10 +672,14 @@ func GetFirmwareEnvironmentVariableA(lpName foundation.PSTR, lpGuid foundation.P
 // GetFirmwareEnvironmentVariableEx calls KERNEL32!GetFirmwareEnvironmentVariableExW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfirmwareenvironmentvariableexw
 // Minimum OS: windows8.0.
-func GetFirmwareEnvironmentVariableEx(lpName string, lpGuid string, pBuffer unsafe.Pointer, nSize uint32, pdwAttribubutes *uint32) (uint32, error) {
+func GetFirmwareEnvironmentVariableEx(lpName string, lpGuid string, pBuffer []byte, pdwAttribubutes *uint32) (uint32, error) {
 	_lpName := win32.UTF16Ptr(lpName)
 	_lpGuid := win32.UTF16Ptr(lpGuid)
-	r1, _, e1 := syscall.SyscallN(procGetFirmwareEnvironmentVariableEx.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpGuid)), uintptr(unsafe.Pointer(pBuffer)), uintptr(nSize), uintptr(unsafe.Pointer(pdwAttribubutes)))
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetFirmwareEnvironmentVariableEx.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpGuid)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(pdwAttribubutes)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -677,8 +689,12 @@ func GetFirmwareEnvironmentVariableEx(lpName string, lpGuid string, pBuffer unsa
 // GetFirmwareEnvironmentVariableExA calls KERNEL32!GetFirmwareEnvironmentVariableExA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfirmwareenvironmentvariableexa
 // Minimum OS: windows8.0.
-func GetFirmwareEnvironmentVariableExA(lpName foundation.PSTR, lpGuid foundation.PSTR, pBuffer unsafe.Pointer, nSize uint32, pdwAttribubutes *uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetFirmwareEnvironmentVariableExA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(pBuffer)), uintptr(nSize), uintptr(unsafe.Pointer(pdwAttribubutes)))
+func GetFirmwareEnvironmentVariableExA(lpName foundation.PSTR, lpGuid foundation.PSTR, pBuffer []byte, pdwAttribubutes *uint32) (uint32, error) {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetFirmwareEnvironmentVariableExA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(pdwAttribubutes)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -768,19 +784,27 @@ func GetPrivateProfileStringA(lpAppName foundation.PSTR, lpKeyName foundation.PS
 // GetPrivateProfileStruct calls KERNEL32!GetPrivateProfileStructW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilestructw
 // Minimum OS: windows5.0.
-func GetPrivateProfileStruct(lpszSection string, lpszKey string, lpStruct unsafe.Pointer, uSizeStruct uint32, szFile string) bool {
+func GetPrivateProfileStruct(lpszSection string, lpszKey string, lpStruct []byte, szFile string) bool {
 	_lpszSection := win32.UTF16Ptr(lpszSection)
 	_lpszKey := win32.UTF16Ptr(lpszKey)
+	var _lpStruct *byte
+	if len(lpStruct) > 0 {
+		_lpStruct = &lpStruct[0]
+	}
 	_szFile := win32.UTF16Ptr(szFile)
-	r1, _, _ := syscall.SyscallN(procGetPrivateProfileStruct.Addr(), uintptr(unsafe.Pointer(_lpszSection)), uintptr(unsafe.Pointer(_lpszKey)), uintptr(unsafe.Pointer(lpStruct)), uintptr(uSizeStruct), uintptr(unsafe.Pointer(_szFile)))
+	r1, _, _ := syscall.SyscallN(procGetPrivateProfileStruct.Addr(), uintptr(unsafe.Pointer(_lpszSection)), uintptr(unsafe.Pointer(_lpszKey)), uintptr(unsafe.Pointer(_lpStruct)), uintptr(len(lpStruct)), uintptr(unsafe.Pointer(_szFile)))
 	return r1 != 0
 }
 
 // GetPrivateProfileStructA calls KERNEL32!GetPrivateProfileStructA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getprivateprofilestructa
 // Minimum OS: windows5.0.
-func GetPrivateProfileStructA(lpszSection foundation.PSTR, lpszKey foundation.PSTR, lpStruct unsafe.Pointer, uSizeStruct uint32, szFile foundation.PSTR) bool {
-	r1, _, _ := syscall.SyscallN(procGetPrivateProfileStructA.Addr(), uintptr(unsafe.Pointer(lpszSection)), uintptr(unsafe.Pointer(lpszKey)), uintptr(unsafe.Pointer(lpStruct)), uintptr(uSizeStruct), uintptr(unsafe.Pointer(szFile)))
+func GetPrivateProfileStructA(lpszSection foundation.PSTR, lpszKey foundation.PSTR, lpStruct []byte, szFile foundation.PSTR) bool {
+	var _lpStruct *byte
+	if len(lpStruct) > 0 {
+		_lpStruct = &lpStruct[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPrivateProfileStructA.Addr(), uintptr(unsafe.Pointer(lpszSection)), uintptr(unsafe.Pointer(lpszKey)), uintptr(unsafe.Pointer(_lpStruct)), uintptr(len(lpStruct)), uintptr(unsafe.Pointer(szFile)))
 	return r1 != 0
 }
 
@@ -943,8 +967,12 @@ func GlobalWire(hMem foundation.HGLOBAL) unsafe.Pointer {
 }
 
 // Hread calls KERNEL32!_hread.
-func Hread(hFile int32, lpBuffer unsafe.Pointer, lBytes int32) int32 {
-	r1, _, _ := syscall.SyscallN(procHread.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(lBytes))
+func Hread(hFile int32, lpBuffer []byte) int32 {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHread.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)))
 	return int32(r1)
 }
 
@@ -1093,8 +1121,12 @@ func Lopen(lpPathName foundation.PSTR, iReadWrite int32) int32 {
 
 // Lread calls KERNEL32!_lread.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-_lread
-func Lread(hFile int32, lpBuffer unsafe.Pointer, uBytes uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procLread.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(uBytes))
+func Lread(hFile int32, lpBuffer []byte) uint32 {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procLread.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)))
 	return uint32(r1)
 }
 
@@ -1517,10 +1549,14 @@ func SetEnvironmentStringsA(NewEnvironment foundation.PSTR) bool {
 // SetFirmwareEnvironmentVariable calls KERNEL32!SetFirmwareEnvironmentVariableW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfirmwareenvironmentvariablew
 // Minimum OS: windows6.0.6000.
-func SetFirmwareEnvironmentVariable(lpName string, lpGuid string, pValue unsafe.Pointer, nSize uint32) error {
+func SetFirmwareEnvironmentVariable(lpName string, lpGuid string, pValue []byte) error {
 	_lpName := win32.UTF16Ptr(lpName)
 	_lpGuid := win32.UTF16Ptr(lpGuid)
-	r1, _, e1 := syscall.SyscallN(procSetFirmwareEnvironmentVariable.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpGuid)), uintptr(unsafe.Pointer(pValue)), uintptr(nSize))
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetFirmwareEnvironmentVariable.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpGuid)), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1530,8 +1566,12 @@ func SetFirmwareEnvironmentVariable(lpName string, lpGuid string, pValue unsafe.
 // SetFirmwareEnvironmentVariableA calls KERNEL32!SetFirmwareEnvironmentVariableA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfirmwareenvironmentvariablea
 // Minimum OS: windows6.0.6000.
-func SetFirmwareEnvironmentVariableA(lpName foundation.PSTR, lpGuid foundation.PSTR, pValue unsafe.Pointer, nSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetFirmwareEnvironmentVariableA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(pValue)), uintptr(nSize))
+func SetFirmwareEnvironmentVariableA(lpName foundation.PSTR, lpGuid foundation.PSTR, pValue []byte) error {
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetFirmwareEnvironmentVariableA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1541,10 +1581,14 @@ func SetFirmwareEnvironmentVariableA(lpName foundation.PSTR, lpGuid foundation.P
 // SetFirmwareEnvironmentVariableEx calls KERNEL32!SetFirmwareEnvironmentVariableExW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfirmwareenvironmentvariableexw
 // Minimum OS: windows8.0.
-func SetFirmwareEnvironmentVariableEx(lpName string, lpGuid string, pValue unsafe.Pointer, nSize uint32, dwAttributes uint32) error {
+func SetFirmwareEnvironmentVariableEx(lpName string, lpGuid string, pValue []byte, dwAttributes uint32) error {
 	_lpName := win32.UTF16Ptr(lpName)
 	_lpGuid := win32.UTF16Ptr(lpGuid)
-	r1, _, e1 := syscall.SyscallN(procSetFirmwareEnvironmentVariableEx.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpGuid)), uintptr(unsafe.Pointer(pValue)), uintptr(nSize), uintptr(dwAttributes))
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetFirmwareEnvironmentVariableEx.Addr(), uintptr(unsafe.Pointer(_lpName)), uintptr(unsafe.Pointer(_lpGuid)), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)), uintptr(dwAttributes))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1554,8 +1598,12 @@ func SetFirmwareEnvironmentVariableEx(lpName string, lpGuid string, pValue unsaf
 // SetFirmwareEnvironmentVariableExA calls KERNEL32!SetFirmwareEnvironmentVariableExA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-setfirmwareenvironmentvariableexa
 // Minimum OS: windows8.0.
-func SetFirmwareEnvironmentVariableExA(lpName foundation.PSTR, lpGuid foundation.PSTR, pValue unsafe.Pointer, nSize uint32, dwAttributes uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetFirmwareEnvironmentVariableExA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(pValue)), uintptr(nSize), uintptr(dwAttributes))
+func SetFirmwareEnvironmentVariableExA(lpName foundation.PSTR, lpGuid foundation.PSTR, pValue []byte, dwAttributes uint32) error {
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetFirmwareEnvironmentVariableExA.Addr(), uintptr(unsafe.Pointer(lpName)), uintptr(unsafe.Pointer(lpGuid)), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)), uintptr(dwAttributes))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1866,8 +1914,12 @@ func WldpQueryDeviceSecurityInformation(information []WLDP_DEVICE_SECURITY_INFOR
 
 // WldpQueryDynamicCodeTrust calls Wldp!WldpQueryDynamicCodeTrust.
 // https://learn.microsoft.com/windows/win32/api/wldp/nf-wldp-wldpquerydynamiccodetrust
-func WldpQueryDynamicCodeTrust(fileHandle foundation.HANDLE, baseImage unsafe.Pointer, imageSize uint32) error {
-	r1, _, _ := syscall.SyscallN(procWldpQueryDynamicCodeTrust.Addr(), uintptr(fileHandle), uintptr(unsafe.Pointer(baseImage)), uintptr(imageSize))
+func WldpQueryDynamicCodeTrust(fileHandle foundation.HANDLE, baseImage []byte) error {
+	var _baseImage *byte
+	if len(baseImage) > 0 {
+		_baseImage = &baseImage[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWldpQueryDynamicCodeTrust.Addr(), uintptr(fileHandle), uintptr(unsafe.Pointer(_baseImage)), uintptr(len(baseImage)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1982,11 +2034,15 @@ func WritePrivateProfileStringA(lpAppName foundation.PSTR, lpKeyName foundation.
 // WritePrivateProfileStruct calls KERNEL32!WritePrivateProfileStructW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprivateprofilestructw
 // Minimum OS: windows5.0.
-func WritePrivateProfileStruct(lpszSection string, lpszKey string, lpStruct unsafe.Pointer, uSizeStruct uint32, szFile string) error {
+func WritePrivateProfileStruct(lpszSection string, lpszKey string, lpStruct []byte, szFile string) error {
 	_lpszSection := win32.UTF16Ptr(lpszSection)
 	_lpszKey := win32.UTF16Ptr(lpszKey)
+	var _lpStruct *byte
+	if len(lpStruct) > 0 {
+		_lpStruct = &lpStruct[0]
+	}
 	_szFile := win32.UTF16Ptr(szFile)
-	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileStruct.Addr(), uintptr(unsafe.Pointer(_lpszSection)), uintptr(unsafe.Pointer(_lpszKey)), uintptr(unsafe.Pointer(lpStruct)), uintptr(uSizeStruct), uintptr(unsafe.Pointer(_szFile)))
+	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileStruct.Addr(), uintptr(unsafe.Pointer(_lpszSection)), uintptr(unsafe.Pointer(_lpszKey)), uintptr(unsafe.Pointer(_lpStruct)), uintptr(len(lpStruct)), uintptr(unsafe.Pointer(_szFile)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1996,8 +2052,12 @@ func WritePrivateProfileStruct(lpszSection string, lpszKey string, lpStruct unsa
 // WritePrivateProfileStructA calls KERNEL32!WritePrivateProfileStructA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-writeprivateprofilestructa
 // Minimum OS: windows5.0.
-func WritePrivateProfileStructA(lpszSection foundation.PSTR, lpszKey foundation.PSTR, lpStruct unsafe.Pointer, uSizeStruct uint32, szFile foundation.PSTR) error {
-	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileStructA.Addr(), uintptr(unsafe.Pointer(lpszSection)), uintptr(unsafe.Pointer(lpszKey)), uintptr(unsafe.Pointer(lpStruct)), uintptr(uSizeStruct), uintptr(unsafe.Pointer(szFile)))
+func WritePrivateProfileStructA(lpszSection foundation.PSTR, lpszKey foundation.PSTR, lpStruct []byte, szFile foundation.PSTR) error {
+	var _lpStruct *byte
+	if len(lpStruct) > 0 {
+		_lpStruct = &lpStruct[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWritePrivateProfileStructA.Addr(), uintptr(unsafe.Pointer(lpszSection)), uintptr(unsafe.Pointer(lpszKey)), uintptr(unsafe.Pointer(_lpStruct)), uintptr(len(lpStruct)), uintptr(unsafe.Pointer(szFile)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

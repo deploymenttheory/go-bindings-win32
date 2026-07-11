@@ -985,8 +985,12 @@ type IEnumTASK struct {
 var IID_IEnumTASK = win32.GUID{Data1: 0x338698b1, Data2: 0x5a02, Data3: 0x11d1, Data4: [8]byte{0x9f, 0xec, 0x00, 0x60, 0x08, 0x32, 0xdb, 0x4a}}
 
 // Next dispatches through IEnumTASK's vtable slot 3.
-func (self *IEnumTASK) Next(celt uint32, rgelt *MMC_TASK, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumTASK) Next(rgelt []MMC_TASK, pceltFetched *uint32) error {
+	var _rgelt *MMC_TASK
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1696,8 +1700,12 @@ func (self *ISnapinProperties) QueryPropertyNames(pCallback *ISnapinPropertiesCa
 }
 
 // PropertiesChanged dispatches through ISnapinProperties's vtable slot 5.
-func (self *ISnapinProperties) PropertiesChanged(cProperties int32, pProperties *MMC_SNAPIN_PROPERTY) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cProperties), uintptr(unsafe.Pointer(pProperties)))
+func (self *ISnapinProperties) PropertiesChanged(pProperties []MMC_SNAPIN_PROPERTY) error {
+	var _pProperties *MMC_SNAPIN_PROPERTY
+	if len(pProperties) > 0 {
+		_pProperties = &pProperties[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(pProperties)), uintptr(unsafe.Pointer(_pProperties)))
 	return win32.HRESULTError(int32(r1))
 }
 

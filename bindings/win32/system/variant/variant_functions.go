@@ -136,8 +136,12 @@ func InitVariantFromBooleanArray(prgf []foundation.BOOL, pvar *VARIANT) error {
 // InitVariantFromBuffer calls PROPSYS!InitVariantFromBuffer.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-initvariantfrombuffer
 // Minimum OS: windows5.1.2600.
-func InitVariantFromBuffer(pv unsafe.Pointer, cb uint32, pvar *VARIANT) error {
-	r1, _, _ := syscall.SyscallN(procInitVariantFromBuffer.Addr(), uintptr(unsafe.Pointer(pv)), uintptr(cb), uintptr(unsafe.Pointer(pvar)))
+func InitVariantFromBuffer(pv []byte, pvar *VARIANT) error {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(procInitVariantFromBuffer.Addr(), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(pvar)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -515,8 +519,12 @@ func VariantToBooleanWithDefault(varIn *VARIANT, fDefault bool) bool {
 // VariantToBuffer calls PROPSYS!VariantToBuffer.
 // https://learn.microsoft.com/windows/win32/api/propvarutil/nf-propvarutil-varianttobuffer
 // Minimum OS: windows5.1.2600.
-func VariantToBuffer(varIn *VARIANT, pv unsafe.Pointer, cb uint32) error {
-	r1, _, _ := syscall.SyscallN(procVariantToBuffer.Addr(), uintptr(unsafe.Pointer(varIn)), uintptr(unsafe.Pointer(pv)), uintptr(cb))
+func VariantToBuffer(varIn *VARIANT, pv []byte) error {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(procVariantToBuffer.Addr(), uintptr(unsafe.Pointer(varIn)), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)))
 	return win32.HRESULTError(int32(r1))
 }
 

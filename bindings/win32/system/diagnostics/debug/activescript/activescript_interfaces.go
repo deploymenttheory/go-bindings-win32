@@ -818,20 +818,32 @@ type IActiveScriptProfilerHeapEnum struct {
 var IID_IActiveScriptProfilerHeapEnum = win32.GUID{Data1: 0x32e4694e, Data2: 0x0d37, Data3: 0x419b, Data4: [8]byte{0xb9, 0x3d, 0xfa, 0x20, 0xde, 0xd6, 0xe8, 0xea}}
 
 // Next dispatches through IActiveScriptProfilerHeapEnum's vtable slot 3.
-func (self *IActiveScriptProfilerHeapEnum) Next(celt uint32, heapObjects **PROFILER_HEAP_OBJECT, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(heapObjects)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IActiveScriptProfilerHeapEnum) Next(heapObjects []*PROFILER_HEAP_OBJECT, pceltFetched *uint32) error {
+	var _heapObjects **PROFILER_HEAP_OBJECT
+	if len(heapObjects) > 0 {
+		_heapObjects = &heapObjects[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(heapObjects)), uintptr(unsafe.Pointer(_heapObjects)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetOptionalInfo dispatches through IActiveScriptProfilerHeapEnum's vtable slot 4.
-func (self *IActiveScriptProfilerHeapEnum) GetOptionalInfo(heapObject *PROFILER_HEAP_OBJECT, celt uint32, optionalInfo *PROFILER_HEAP_OBJECT_OPTIONAL_INFO) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(heapObject)), uintptr(celt), uintptr(unsafe.Pointer(optionalInfo)))
+func (self *IActiveScriptProfilerHeapEnum) GetOptionalInfo(heapObject *PROFILER_HEAP_OBJECT, optionalInfo []PROFILER_HEAP_OBJECT_OPTIONAL_INFO) error {
+	var _optionalInfo *PROFILER_HEAP_OBJECT_OPTIONAL_INFO
+	if len(optionalInfo) > 0 {
+		_optionalInfo = &optionalInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(heapObject)), uintptr(len(optionalInfo)), uintptr(unsafe.Pointer(_optionalInfo)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FreeObjectAndOptionalInfo dispatches through IActiveScriptProfilerHeapEnum's vtable slot 5.
-func (self *IActiveScriptProfilerHeapEnum) FreeObjectAndOptionalInfo(celt uint32, heapObjects **PROFILER_HEAP_OBJECT) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(heapObjects)))
+func (self *IActiveScriptProfilerHeapEnum) FreeObjectAndOptionalInfo(heapObjects []*PROFILER_HEAP_OBJECT) error {
+	var _heapObjects **PROFILER_HEAP_OBJECT
+	if len(heapObjects) > 0 {
+		_heapObjects = &heapObjects[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(heapObjects)), uintptr(unsafe.Pointer(_heapObjects)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1249,8 +1261,12 @@ func (self *IDebugApplication11032) AsynchronousCallInMainThread(pptc *IDebugThr
 }
 
 // CallableWaitForHandles dispatches through IDebugApplication11032's vtable slot 8.
-func (self *IDebugApplication11032) CallableWaitForHandles(handleCount uint32, pHandles *foundation.HANDLE, pIndex *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(handleCount), uintptr(unsafe.Pointer(pHandles)), uintptr(unsafe.Pointer(pIndex)))
+func (self *IDebugApplication11032) CallableWaitForHandles(pHandles []foundation.HANDLE, pIndex *uint32) error {
+	var _pHandles *foundation.HANDLE
+	if len(pHandles) > 0 {
+		_pHandles = &pHandles[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(pHandles)), uintptr(unsafe.Pointer(_pHandles)), uintptr(unsafe.Pointer(pIndex)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1275,8 +1291,12 @@ func (self *IDebugApplication11064) AsynchronousCallInMainThread(pptc *IDebugThr
 }
 
 // CallableWaitForHandles dispatches through IDebugApplication11064's vtable slot 8.
-func (self *IDebugApplication11064) CallableWaitForHandles(handleCount uint32, pHandles *foundation.HANDLE, pIndex *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(handleCount), uintptr(unsafe.Pointer(pHandles)), uintptr(unsafe.Pointer(pIndex)))
+func (self *IDebugApplication11064) CallableWaitForHandles(pHandles []foundation.HANDLE, pIndex *uint32) error {
+	var _pHandles *foundation.HANDLE
+	if len(pHandles) > 0 {
+		_pHandles = &pHandles[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(pHandles)), uintptr(unsafe.Pointer(_pHandles)), uintptr(unsafe.Pointer(pIndex)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1973,8 +1993,12 @@ func (self *IDebugDocumentHelper32) SetDefaultTextAttr(staTextAttr uint16) error
 }
 
 // SetTextAttributes dispatches through IDebugDocumentHelper32's vtable slot 12.
-func (self *IDebugDocumentHelper32) SetTextAttributes(ulCharOffset uint32, cChars uint32, pstaTextAttr *uint16) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ulCharOffset), uintptr(cChars), uintptr(unsafe.Pointer(pstaTextAttr)))
+func (self *IDebugDocumentHelper32) SetTextAttributes(ulCharOffset uint32, pstaTextAttr []uint16) error {
+	var _pstaTextAttr *uint16
+	if len(pstaTextAttr) > 0 {
+		_pstaTextAttr = &pstaTextAttr[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ulCharOffset), uintptr(len(pstaTextAttr)), uintptr(unsafe.Pointer(_pstaTextAttr)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2095,8 +2119,12 @@ func (self *IDebugDocumentHelper64) SetDefaultTextAttr(staTextAttr uint16) error
 }
 
 // SetTextAttributes dispatches through IDebugDocumentHelper64's vtable slot 12.
-func (self *IDebugDocumentHelper64) SetTextAttributes(ulCharOffset uint32, cChars uint32, pstaTextAttr *uint16) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ulCharOffset), uintptr(cChars), uintptr(unsafe.Pointer(pstaTextAttr)))
+func (self *IDebugDocumentHelper64) SetTextAttributes(ulCharOffset uint32, pstaTextAttr []uint16) error {
+	var _pstaTextAttr *uint16
+	if len(pstaTextAttr) > 0 {
+		_pstaTextAttr = &pstaTextAttr[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(ulCharOffset), uintptr(len(pstaTextAttr)), uintptr(unsafe.Pointer(_pstaTextAttr)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2828,8 +2856,12 @@ type IEnumJsStackFrames struct {
 var IID_IEnumJsStackFrames = win32.GUID{Data1: 0x5e7da34b, Data2: 0xfb51, Data3: 0x4791, Data4: [8]byte{0xab, 0xe7, 0xcb, 0x5b, 0xdf, 0x41, 0x97, 0x55}}
 
 // Next dispatches through IEnumJsStackFrames's vtable slot 3.
-func (self *IEnumJsStackFrames) Next(cFrameCount uint32, pFrames *JS_NATIVE_FRAME, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFrameCount), uintptr(unsafe.Pointer(pFrames)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumJsStackFrames) Next(pFrames []JS_NATIVE_FRAME, pcFetched *uint32) error {
+	var _pFrames *JS_NATIVE_FRAME
+	if len(pFrames) > 0 {
+		_pFrames = &pFrames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pFrames)), uintptr(unsafe.Pointer(_pFrames)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2964,14 +2996,22 @@ type IJsDebugDataTarget struct {
 var IID_IJsDebugDataTarget = win32.GUID{Data1: 0x53b28977, Data2: 0x53a1, Data3: 0x48e5, Data4: [8]byte{0x90, 0x00, 0x5d, 0x0d, 0xfa, 0x89, 0x39, 0x31}}
 
 // ReadMemory dispatches through IJsDebugDataTarget's vtable slot 3.
-func (self *IJsDebugDataTarget) ReadMemory(address uint64, flags JsDebugReadMemoryFlags, pBuffer *byte, size uint32, pBytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(address), uintptr(flags), uintptr(unsafe.Pointer(pBuffer)), uintptr(size), uintptr(unsafe.Pointer(pBytesRead)))
+func (self *IJsDebugDataTarget) ReadMemory(address uint64, flags JsDebugReadMemoryFlags, pBuffer []byte, pBytesRead *uint32) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(address), uintptr(flags), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(pBytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteMemory dispatches through IJsDebugDataTarget's vtable slot 4.
-func (self *IJsDebugDataTarget) WriteMemory(address uint64, pMemory *byte, size uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(address), uintptr(unsafe.Pointer(pMemory)), uintptr(size))
+func (self *IJsDebugDataTarget) WriteMemory(address uint64, pMemory []byte) error {
+	var _pMemory *byte
+	if len(pMemory) > 0 {
+		_pMemory = &pMemory[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(address), uintptr(unsafe.Pointer(_pMemory)), uintptr(len(pMemory)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3144,8 +3184,12 @@ type IJsEnumDebugProperty struct {
 var IID_IJsEnumDebugProperty = win32.GUID{Data1: 0x4092432f, Data2: 0x2f0f, Data3: 0x4fe1, Data4: [8]byte{0xb6, 0x38, 0x5b, 0x74, 0xa5, 0x2c, 0xdc, 0xbe}}
 
 // Next dispatches through IJsEnumDebugProperty's vtable slot 3.
-func (self *IJsEnumDebugProperty) Next(count uint32, ppDebugProperty **IJsDebugProperty, pActualCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(count), uintptr(unsafe.Pointer(ppDebugProperty)), uintptr(unsafe.Pointer(pActualCount)))
+func (self *IJsEnumDebugProperty) Next(ppDebugProperty []*IJsDebugProperty, pActualCount *uint32) error {
+	var _ppDebugProperty **IJsDebugProperty
+	if len(ppDebugProperty) > 0 {
+		_ppDebugProperty = &ppDebugProperty[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppDebugProperty)), uintptr(unsafe.Pointer(_ppDebugProperty)), uintptr(unsafe.Pointer(pActualCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3745,11 +3789,15 @@ func (self *IScriptNode) CreateChildEntry(isn uint32, dwCookie uint32, pszDelimi
 }
 
 // CreateChildHandler dispatches through IScriptNode's vtable slot 12.
-func (self *IScriptNode) CreateChildHandler(pszDefaultName string, prgpszNames *foundation.PWSTR, cpszNames uint32, pszEvent string, pszDelimiter string, ptiSignature *systemcom.ITypeInfo, iMethodSignature uint32, isn uint32, dwCookie uint32, ppse **IScriptEntry) error {
+func (self *IScriptNode) CreateChildHandler(pszDefaultName string, prgpszNames []foundation.PWSTR, pszEvent string, pszDelimiter string, ptiSignature *systemcom.ITypeInfo, iMethodSignature uint32, isn uint32, dwCookie uint32, ppse **IScriptEntry) error {
 	_pszDefaultName := win32.UTF16Ptr(pszDefaultName)
+	var _prgpszNames *foundation.PWSTR
+	if len(prgpszNames) > 0 {
+		_prgpszNames = &prgpszNames[0]
+	}
 	_pszEvent := win32.UTF16Ptr(pszEvent)
 	_pszDelimiter := win32.UTF16Ptr(pszDelimiter)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszDefaultName)), uintptr(unsafe.Pointer(prgpszNames)), uintptr(cpszNames), uintptr(unsafe.Pointer(_pszEvent)), uintptr(unsafe.Pointer(_pszDelimiter)), uintptr(unsafe.Pointer(ptiSignature)), uintptr(iMethodSignature), uintptr(isn), uintptr(dwCookie), uintptr(unsafe.Pointer(ppse)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszDefaultName)), uintptr(unsafe.Pointer(_prgpszNames)), uintptr(len(prgpszNames)), uintptr(unsafe.Pointer(_pszEvent)), uintptr(unsafe.Pointer(_pszDelimiter)), uintptr(unsafe.Pointer(ptiSignature)), uintptr(iMethodSignature), uintptr(isn), uintptr(dwCookie), uintptr(unsafe.Pointer(ppse)))
 	return win32.HRESULTError(int32(r1))
 }
 

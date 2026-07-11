@@ -136,8 +136,12 @@ type IAlterIndex struct {
 var IID_IAlterIndex = win32.GUID{Data1: 0x0c733aa6, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // AlterIndex dispatches through IAlterIndex's vtable slot 3.
-func (self *IAlterIndex) AlterIndex(pTableId *storageindexserver.DBID, pIndexId *storageindexserver.DBID, pNewIndexId *storageindexserver.DBID, cPropertySets uint32, rgPropertySets *DBPROPSET) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableId)), uintptr(unsafe.Pointer(pIndexId)), uintptr(unsafe.Pointer(pNewIndexId)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
+func (self *IAlterIndex) AlterIndex(pTableId *storageindexserver.DBID, pIndexId *storageindexserver.DBID, pNewIndexId *storageindexserver.DBID, rgPropertySets []DBPROPSET) error {
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableId)), uintptr(unsafe.Pointer(pIndexId)), uintptr(unsafe.Pointer(pNewIndexId)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -156,8 +160,12 @@ func (self *IAlterTable) AlterColumn(pTableId *storageindexserver.DBID, pColumnI
 }
 
 // AlterTable dispatches through IAlterTable's vtable slot 4.
-func (self *IAlterTable) AlterTable(pTableId *storageindexserver.DBID, pNewTableId *storageindexserver.DBID, cPropertySets uint32, rgPropertySets *DBPROPSET) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableId)), uintptr(unsafe.Pointer(pNewTableId)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
+func (self *IAlterTable) AlterTable(pTableId *storageindexserver.DBID, pNewTableId *storageindexserver.DBID, rgPropertySets []DBPROPSET) error {
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableId)), uintptr(unsafe.Pointer(pNewTableId)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -276,8 +284,12 @@ type IColumnsInfo2 struct {
 var IID_IColumnsInfo2 = win32.GUID{Data1: 0x0c733ab8, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetRestrictedColumnInfo dispatches through IColumnsInfo2's vtable slot 5.
-func (self *IColumnsInfo2) GetRestrictedColumnInfo(cColumnIDMasks uintptr, rgColumnIDMasks *storageindexserver.DBID, dwFlags uint32, pcColumns *uintptr, prgColumnIDs **storageindexserver.DBID, prgColumnInfo **DBCOLUMNINFO, ppStringsBuffer **uint16) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cColumnIDMasks), uintptr(unsafe.Pointer(rgColumnIDMasks)), uintptr(dwFlags), uintptr(unsafe.Pointer(pcColumns)), uintptr(unsafe.Pointer(prgColumnIDs)), uintptr(unsafe.Pointer(prgColumnInfo)), uintptr(unsafe.Pointer(ppStringsBuffer)))
+func (self *IColumnsInfo2) GetRestrictedColumnInfo(rgColumnIDMasks []storageindexserver.DBID, dwFlags uint32, pcColumns *uintptr, prgColumnIDs **storageindexserver.DBID, prgColumnInfo **DBCOLUMNINFO, ppStringsBuffer **uint16) error {
+	var _rgColumnIDMasks *storageindexserver.DBID
+	if len(rgColumnIDMasks) > 0 {
+		_rgColumnIDMasks = &rgColumnIDMasks[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(rgColumnIDMasks)), uintptr(unsafe.Pointer(_rgColumnIDMasks)), uintptr(dwFlags), uintptr(unsafe.Pointer(pcColumns)), uintptr(unsafe.Pointer(prgColumnIDs)), uintptr(unsafe.Pointer(prgColumnInfo)), uintptr(unsafe.Pointer(ppStringsBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -296,8 +308,16 @@ func (self *IColumnsRowset) GetAvailableColumns(pcOptColumns *uintptr, prgOptCol
 }
 
 // GetColumnsRowset dispatches through IColumnsRowset's vtable slot 4.
-func (self *IColumnsRowset) GetColumnsRowset(pUnkOuter *systemcom.IUnknown, cOptColumns uintptr, rgOptColumns *storageindexserver.DBID, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppColRowset **systemcom.IUnknown) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(cOptColumns), uintptr(unsafe.Pointer(rgOptColumns)), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppColRowset)))
+func (self *IColumnsRowset) GetColumnsRowset(pUnkOuter *systemcom.IUnknown, rgOptColumns []storageindexserver.DBID, riid *win32.GUID, rgPropertySets []DBPROPSET, ppColRowset **systemcom.IUnknown) error {
+	var _rgOptColumns *storageindexserver.DBID
+	if len(rgOptColumns) > 0 {
+		_rgOptColumns = &rgOptColumns[0]
+	}
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(len(rgOptColumns)), uintptr(unsafe.Pointer(_rgOptColumns)), uintptr(unsafe.Pointer(riid)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)), uintptr(unsafe.Pointer(ppColRowset)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -364,9 +384,13 @@ func (self *ICommandCost) GetCostLimits(pwszRowsetName string, pcCostLimits *uin
 }
 
 // SetCostGoals dispatches through ICommandCost's vtable slot 7.
-func (self *ICommandCost) SetCostGoals(pwszRowsetName string, cCostGoals uint32, rgCostGoals *DBCOST) error {
+func (self *ICommandCost) SetCostGoals(pwszRowsetName string, rgCostGoals []DBCOST) error {
 	_pwszRowsetName := win32.UTF16Ptr(pwszRowsetName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszRowsetName)), uintptr(cCostGoals), uintptr(unsafe.Pointer(rgCostGoals)))
+	var _rgCostGoals *DBCOST
+	if len(rgCostGoals) > 0 {
+		_rgCostGoals = &rgCostGoals[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszRowsetName)), uintptr(len(rgCostGoals)), uintptr(unsafe.Pointer(_rgCostGoals)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -438,14 +462,22 @@ type ICommandProperties struct {
 var IID_ICommandProperties = win32.GUID{Data1: 0x0c733a79, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetProperties dispatches through ICommandProperties's vtable slot 3.
-func (self *ICommandProperties) GetProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cPropertyIDSets), uintptr(unsafe.Pointer(rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
+func (self *ICommandProperties) GetProperties(rgPropertyIDSets []DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
+	var _rgPropertyIDSets *DBPROPIDSET
+	if len(rgPropertyIDSets) > 0 {
+		_rgPropertyIDSets = &rgPropertyIDSets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgPropertyIDSets)), uintptr(unsafe.Pointer(_rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperties dispatches through ICommandProperties's vtable slot 4.
-func (self *ICommandProperties) SetProperties(cPropertySets uint32, rgPropertySets *DBPROPSET) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
+func (self *ICommandProperties) SetProperties(rgPropertySets []DBPROPSET) error {
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -682,8 +714,12 @@ func (self *IConditionFactory2) CreateCompoundFromObjectArray(ct systemsearchcom
 }
 
 // CreateCompoundFromArray dispatches through IConditionFactory2's vtable slot 10.
-func (self *IConditionFactory2) CreateCompoundFromArray(ct systemsearchcommon.CONDITION_TYPE, ppcondSubs **ICondition, cSubs uint32, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ct), uintptr(unsafe.Pointer(ppcondSubs)), uintptr(cSubs), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
+func (self *IConditionFactory2) CreateCompoundFromArray(ct systemsearchcommon.CONDITION_TYPE, ppcondSubs []*ICondition, cco CONDITION_CREATION_OPTIONS, riid *win32.GUID, ppv *unsafe.Pointer) error {
+	var _ppcondSubs **ICondition
+	if len(ppcondSubs) > 0 {
+		_ppcondSubs = &ppcondSubs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ct), uintptr(unsafe.Pointer(_ppcondSubs)), uintptr(len(ppcondSubs)), uintptr(cco), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppv)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -892,8 +928,12 @@ type IDBDataSourceAdmin struct {
 var IID_IDBDataSourceAdmin = win32.GUID{Data1: 0x0c733a7a, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // CreateDataSource dispatches through IDBDataSourceAdmin's vtable slot 3.
-func (self *IDBDataSourceAdmin) CreateDataSource(cPropertySets uint32, rgPropertySets *DBPROPSET, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppDBSession **systemcom.IUnknown) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDBSession)))
+func (self *IDBDataSourceAdmin) CreateDataSource(rgPropertySets []DBPROPSET, pUnkOuter *systemcom.IUnknown, riid *win32.GUID, ppDBSession **systemcom.IUnknown) error {
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDBSession)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -904,14 +944,22 @@ func (self *IDBDataSourceAdmin) DestroyDataSource() error {
 }
 
 // GetCreationProperties dispatches through IDBDataSourceAdmin's vtable slot 5.
-func (self *IDBDataSourceAdmin) GetCreationProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertyInfoSets *uint32, prgPropertyInfoSets **DBPROPINFOSET, ppDescBuffer **uint16) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cPropertyIDSets), uintptr(unsafe.Pointer(rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertyInfoSets)), uintptr(unsafe.Pointer(prgPropertyInfoSets)), uintptr(unsafe.Pointer(ppDescBuffer)))
+func (self *IDBDataSourceAdmin) GetCreationProperties(rgPropertyIDSets []DBPROPIDSET, pcPropertyInfoSets *uint32, prgPropertyInfoSets **DBPROPINFOSET, ppDescBuffer **uint16) error {
+	var _rgPropertyIDSets *DBPROPIDSET
+	if len(rgPropertyIDSets) > 0 {
+		_rgPropertyIDSets = &rgPropertyIDSets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(rgPropertyIDSets)), uintptr(unsafe.Pointer(_rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertyInfoSets)), uintptr(unsafe.Pointer(prgPropertyInfoSets)), uintptr(unsafe.Pointer(ppDescBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ModifyDataSource dispatches through IDBDataSourceAdmin's vtable slot 6.
-func (self *IDBDataSourceAdmin) ModifyDataSource(cPropertySets uint32, rgPropertySets *DBPROPSET) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
+func (self *IDBDataSourceAdmin) ModifyDataSource(rgPropertySets []DBPROPSET) error {
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -930,8 +978,12 @@ func (self *IDBInfo) GetKeywords(ppwszKeywords *foundation.PWSTR) error {
 }
 
 // GetLiteralInfo dispatches through IDBInfo's vtable slot 4.
-func (self *IDBInfo) GetLiteralInfo(cLiterals uint32, rgLiterals *uint32, pcLiteralInfo *uint32, prgLiteralInfo **DBLITERALINFO, ppCharBuffer **uint16) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cLiterals), uintptr(unsafe.Pointer(rgLiterals)), uintptr(unsafe.Pointer(pcLiteralInfo)), uintptr(unsafe.Pointer(prgLiteralInfo)), uintptr(unsafe.Pointer(ppCharBuffer)))
+func (self *IDBInfo) GetLiteralInfo(rgLiterals []uint32, pcLiteralInfo *uint32, prgLiteralInfo **DBLITERALINFO, ppCharBuffer **uint16) error {
+	var _rgLiterals *uint32
+	if len(rgLiterals) > 0 {
+		_rgLiterals = &rgLiterals[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgLiterals)), uintptr(unsafe.Pointer(_rgLiterals)), uintptr(unsafe.Pointer(pcLiteralInfo)), uintptr(unsafe.Pointer(prgLiteralInfo)), uintptr(unsafe.Pointer(ppCharBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -964,9 +1016,13 @@ type IDBPromptInitialize struct {
 var IID_IDBPromptInitialize = win32.GUID{Data1: 0x2206ccb0, Data2: 0x19c1, Data3: 0x11d1, Data4: [8]byte{0x89, 0xe0, 0x00, 0xc0, 0x4f, 0xd7, 0xa8, 0x29}}
 
 // PromptDataSource dispatches through IDBPromptInitialize's vtable slot 3.
-func (self *IDBPromptInitialize) PromptDataSource(pUnkOuter *systemcom.IUnknown, hWndParent foundation.HWND, dwPromptOptions uint32, cSourceTypeFilter uint32, rgSourceTypeFilter *uint32, pwszszzProviderFilter string, riid *win32.GUID, ppDataSource **systemcom.IUnknown) error {
+func (self *IDBPromptInitialize) PromptDataSource(pUnkOuter *systemcom.IUnknown, hWndParent foundation.HWND, dwPromptOptions uint32, rgSourceTypeFilter []uint32, pwszszzProviderFilter string, riid *win32.GUID, ppDataSource **systemcom.IUnknown) error {
+	var _rgSourceTypeFilter *uint32
+	if len(rgSourceTypeFilter) > 0 {
+		_rgSourceTypeFilter = &rgSourceTypeFilter[0]
+	}
 	_pwszszzProviderFilter := win32.UTF16Ptr(pwszszzProviderFilter)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(hWndParent), uintptr(dwPromptOptions), uintptr(cSourceTypeFilter), uintptr(unsafe.Pointer(rgSourceTypeFilter)), uintptr(unsafe.Pointer(_pwszszzProviderFilter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDataSource)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(hWndParent), uintptr(dwPromptOptions), uintptr(len(rgSourceTypeFilter)), uintptr(unsafe.Pointer(_rgSourceTypeFilter)), uintptr(unsafe.Pointer(_pwszszzProviderFilter)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppDataSource)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -987,20 +1043,32 @@ type IDBProperties struct {
 var IID_IDBProperties = win32.GUID{Data1: 0x0c733a8a, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetProperties dispatches through IDBProperties's vtable slot 3.
-func (self *IDBProperties) GetProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cPropertyIDSets), uintptr(unsafe.Pointer(rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
+func (self *IDBProperties) GetProperties(rgPropertyIDSets []DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
+	var _rgPropertyIDSets *DBPROPIDSET
+	if len(rgPropertyIDSets) > 0 {
+		_rgPropertyIDSets = &rgPropertyIDSets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgPropertyIDSets)), uintptr(unsafe.Pointer(_rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetPropertyInfo dispatches through IDBProperties's vtable slot 4.
-func (self *IDBProperties) GetPropertyInfo(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertyInfoSets *uint32, prgPropertyInfoSets **DBPROPINFOSET, ppDescBuffer **uint16) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cPropertyIDSets), uintptr(unsafe.Pointer(rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertyInfoSets)), uintptr(unsafe.Pointer(prgPropertyInfoSets)), uintptr(unsafe.Pointer(ppDescBuffer)))
+func (self *IDBProperties) GetPropertyInfo(rgPropertyIDSets []DBPROPIDSET, pcPropertyInfoSets *uint32, prgPropertyInfoSets **DBPROPINFOSET, ppDescBuffer **uint16) error {
+	var _rgPropertyIDSets *DBPROPIDSET
+	if len(rgPropertyIDSets) > 0 {
+		_rgPropertyIDSets = &rgPropertyIDSets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgPropertyIDSets)), uintptr(unsafe.Pointer(_rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertyInfoSets)), uintptr(unsafe.Pointer(prgPropertyInfoSets)), uintptr(unsafe.Pointer(ppDescBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperties dispatches through IDBProperties's vtable slot 5.
-func (self *IDBProperties) SetProperties(cPropertySets uint32, rgPropertySets *DBPROPSET) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
+func (self *IDBProperties) SetProperties(rgPropertySets []DBPROPSET) error {
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1033,8 +1101,16 @@ type IDBSchemaRowset struct {
 var IID_IDBSchemaRowset = win32.GUID{Data1: 0x0c733a7b, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetRowset dispatches through IDBSchemaRowset's vtable slot 3.
-func (self *IDBSchemaRowset) GetRowset(pUnkOuter *systemcom.IUnknown, rguidSchema *win32.GUID, cRestrictions uint32, rgRestrictions *systemvariant.VARIANT, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(rguidSchema)), uintptr(cRestrictions), uintptr(unsafe.Pointer(rgRestrictions)), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
+func (self *IDBSchemaRowset) GetRowset(pUnkOuter *systemcom.IUnknown, rguidSchema *win32.GUID, rgRestrictions []systemvariant.VARIANT, riid *win32.GUID, rgPropertySets []DBPROPSET, ppRowset **systemcom.IUnknown) error {
+	var _rgRestrictions *systemvariant.VARIANT
+	if len(rgRestrictions) > 0 {
+		_rgRestrictions = &rgRestrictions[0]
+	}
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(rguidSchema)), uintptr(len(rgRestrictions)), uintptr(unsafe.Pointer(_rgRestrictions)), uintptr(unsafe.Pointer(riid)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1059,8 +1135,12 @@ func (self *IDCInfo) GetInfo(cInfo uint32, rgeInfoType *uint32, prgInfo **DCINFO
 }
 
 // SetInfo dispatches through IDCInfo's vtable slot 4.
-func (self *IDCInfo) SetInfo(cInfo uint32, rgInfo *DCINFO) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cInfo), uintptr(unsafe.Pointer(rgInfo)))
+func (self *IDCInfo) SetInfo(rgInfo []DCINFO) error {
+	var _rgInfo *DCINFO
+	if len(rgInfo) > 0 {
+		_rgInfo = &rgInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgInfo)), uintptr(unsafe.Pointer(_rgInfo)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1073,8 +1153,12 @@ type IDataConvert struct {
 var IID_IDataConvert = win32.GUID{Data1: 0x0c733a8d, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // DataConvert dispatches through IDataConvert's vtable slot 3.
-func (self *IDataConvert) DataConvert(wSrcType uint16, wDstType uint16, cbSrcLength uintptr, pcbDstLength *uintptr, pSrc unsafe.Pointer, pDst unsafe.Pointer, cbDstMaxLength uintptr, dbsSrcStatus uint32, pdbsStatus *uint32, bPrecision byte, bScale byte, dwFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(wSrcType), uintptr(wDstType), uintptr(cbSrcLength), uintptr(unsafe.Pointer(pcbDstLength)), uintptr(unsafe.Pointer(pSrc)), uintptr(unsafe.Pointer(pDst)), uintptr(cbDstMaxLength), uintptr(dbsSrcStatus), uintptr(unsafe.Pointer(pdbsStatus)), uintptr(bPrecision), uintptr(bScale), uintptr(dwFlags))
+func (self *IDataConvert) DataConvert(wSrcType uint16, wDstType uint16, pcbDstLength *uintptr, pSrc []byte, pDst unsafe.Pointer, cbDstMaxLength uintptr, dbsSrcStatus uint32, pdbsStatus *uint32, bPrecision byte, bScale byte, dwFlags uint32) error {
+	var _pSrc *byte
+	if len(pSrc) > 0 {
+		_pSrc = &pSrc[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(wSrcType), uintptr(wDstType), uintptr(len(pSrc)), uintptr(unsafe.Pointer(pcbDstLength)), uintptr(unsafe.Pointer(_pSrc)), uintptr(unsafe.Pointer(pDst)), uintptr(cbDstMaxLength), uintptr(dbsSrcStatus), uintptr(unsafe.Pointer(pdbsStatus)), uintptr(bPrecision), uintptr(bScale), uintptr(dwFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1119,9 +1203,13 @@ func (self *IDataInitialize) CreateDBInstance(clsidProvider *win32.GUID, pUnkOut
 }
 
 // CreateDBInstanceEx dispatches through IDataInitialize's vtable slot 6.
-func (self *IDataInitialize) CreateDBInstanceEx(clsidProvider *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsCtx uint32, pwszReserved string, pServerInfo *systemcom.COSERVERINFO, cmq uint32, rgmqResults *systemcom.MULTI_QI) error {
+func (self *IDataInitialize) CreateDBInstanceEx(clsidProvider *win32.GUID, pUnkOuter *systemcom.IUnknown, dwClsCtx uint32, pwszReserved string, pServerInfo *systemcom.COSERVERINFO, rgmqResults []systemcom.MULTI_QI) error {
 	_pwszReserved := win32.UTF16Ptr(pwszReserved)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidProvider)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(_pwszReserved)), uintptr(unsafe.Pointer(pServerInfo)), uintptr(cmq), uintptr(unsafe.Pointer(rgmqResults)))
+	var _rgmqResults *systemcom.MULTI_QI
+	if len(rgmqResults) > 0 {
+		_rgmqResults = &rgmqResults[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(clsidProvider)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(dwClsCtx), uintptr(unsafe.Pointer(_pwszReserved)), uintptr(unsafe.Pointer(pServerInfo)), uintptr(len(rgmqResults)), uintptr(unsafe.Pointer(_rgmqResults)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1243,8 +1331,12 @@ type IEnumItemProperties struct {
 var IID_IEnumItemProperties = win32.GUID{Data1: 0xf72c8d96, Data2: 0x6dbd, Data3: 0x11d1, Data4: [8]byte{0xa1, 0xe8, 0x00, 0xc0, 0x4f, 0xc2, 0xfb, 0xe1}}
 
 // Next dispatches through IEnumItemProperties's vtable slot 3.
-func (self *IEnumItemProperties) Next(celt uint32, rgelt *ITEMPROP, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumItemProperties) Next(rgelt []ITEMPROP, pceltFetched *uint32) error {
+	var _rgelt *ITEMPROP
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1282,8 +1374,12 @@ type IEnumSearchRoots struct {
 var IID_IEnumSearchRoots = win32.GUID{Data1: 0xab310581, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x52}}
 
 // Next dispatches through IEnumSearchRoots's vtable slot 3.
-func (self *IEnumSearchRoots) Next(celt uint32, rgelt **ISearchRoot, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumSearchRoots) Next(rgelt []*ISearchRoot, pceltFetched *uint32) error {
+	var _rgelt **ISearchRoot
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1316,8 +1412,12 @@ type IEnumSearchScopeRules struct {
 var IID_IEnumSearchScopeRules = win32.GUID{Data1: 0xab310581, Data2: 0xac80, Data3: 0x11d1, Data4: [8]byte{0x8d, 0xf3, 0x00, 0xc0, 0x4f, 0xb6, 0xef, 0x54}}
 
 // Next dispatches through IEnumSearchScopeRules's vtable slot 3.
-func (self *IEnumSearchScopeRules) Next(celt uint32, pprgelt **ISearchScopeRule, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pprgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumSearchScopeRules) Next(pprgelt []*ISearchScopeRule, pceltFetched *uint32) error {
+	var _pprgelt **ISearchScopeRule
+	if len(pprgelt) > 0 {
+		_pprgelt = &pprgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pprgelt)), uintptr(unsafe.Pointer(_pprgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1349,8 +1449,12 @@ type IEnumSubscription struct {
 var IID_IEnumSubscription = win32.GUID{Data1: 0xf72c8d97, Data2: 0x6dbd, Data3: 0x11d1, Data4: [8]byte{0xa1, 0xe8, 0x00, 0xc0, 0x4f, 0xc2, 0xfb, 0xe1}}
 
 // Next dispatches through IEnumSubscription's vtable slot 3.
-func (self *IEnumSubscription) Next(celt uint32, rgelt *win32.GUID, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumSubscription) Next(rgelt []win32.GUID, pceltFetched *uint32) error {
+	var _rgelt *win32.GUID
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1519,8 +1623,16 @@ type IIndexDefinition struct {
 var IID_IIndexDefinition = win32.GUID{Data1: 0x0c733a68, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // CreateIndex dispatches through IIndexDefinition's vtable slot 3.
-func (self *IIndexDefinition) CreateIndex(pTableID *storageindexserver.DBID, pIndexID *storageindexserver.DBID, cIndexColumnDescs uintptr, rgIndexColumnDescs *DBINDEXCOLUMNDESC, cPropertySets uint32, rgPropertySets *DBPROPSET, ppIndexID **storageindexserver.DBID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pIndexID)), uintptr(cIndexColumnDescs), uintptr(unsafe.Pointer(rgIndexColumnDescs)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppIndexID)))
+func (self *IIndexDefinition) CreateIndex(pTableID *storageindexserver.DBID, pIndexID *storageindexserver.DBID, rgIndexColumnDescs []DBINDEXCOLUMNDESC, rgPropertySets []DBPROPSET, ppIndexID **storageindexserver.DBID) error {
+	var _rgIndexColumnDescs *DBINDEXCOLUMNDESC
+	if len(rgIndexColumnDescs) > 0 {
+		_rgIndexColumnDescs = &rgIndexColumnDescs[0]
+	}
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pIndexID)), uintptr(len(rgIndexColumnDescs)), uintptr(unsafe.Pointer(_rgIndexColumnDescs)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)), uintptr(unsafe.Pointer(ppIndexID)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1601,8 +1713,12 @@ type IMDDataset struct {
 var IID_IMDDataset = win32.GUID{Data1: 0xa07cccd1, Data2: 0x8148, Data3: 0x11d0, Data4: [8]byte{0x87, 0xbb, 0x00, 0xc0, 0x4f, 0xc3, 0x39, 0x42}}
 
 // FreeAxisInfo dispatches through IMDDataset's vtable slot 3.
-func (self *IMDDataset) FreeAxisInfo(cAxes uintptr, rgAxisInfo *MDAXISINFO) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cAxes), uintptr(unsafe.Pointer(rgAxisInfo)))
+func (self *IMDDataset) FreeAxisInfo(rgAxisInfo []MDAXISINFO) error {
+	var _rgAxisInfo *MDAXISINFO
+	if len(rgAxisInfo) > 0 {
+		_rgAxisInfo = &rgAxisInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgAxisInfo)), uintptr(unsafe.Pointer(_rgAxisInfo)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1613,8 +1729,12 @@ func (self *IMDDataset) GetAxisInfo(pcAxes *uintptr, prgAxisInfo **MDAXISINFO) e
 }
 
 // GetAxisRowset dispatches through IMDDataset's vtable slot 5.
-func (self *IMDDataset) GetAxisRowset(pUnkOuter *systemcom.IUnknown, iAxis uintptr, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(iAxis), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
+func (self *IMDDataset) GetAxisRowset(pUnkOuter *systemcom.IUnknown, iAxis uintptr, riid *win32.GUID, rgPropertySets []DBPROPSET, ppRowset **systemcom.IUnknown) error {
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(iAxis), uintptr(unsafe.Pointer(riid)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1639,14 +1759,22 @@ type IMDFind struct {
 var IID_IMDFind = win32.GUID{Data1: 0xa07cccd2, Data2: 0x8148, Data3: 0x11d0, Data4: [8]byte{0x87, 0xbb, 0x00, 0xc0, 0x4f, 0xc3, 0x39, 0x42}}
 
 // FindCell dispatches through IMDFind's vtable slot 3.
-func (self *IMDFind) FindCell(ulStartingOrdinal uintptr, cMembers uintptr, rgpwszMember *foundation.PWSTR, pulCellOrdinal *uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulStartingOrdinal), uintptr(cMembers), uintptr(unsafe.Pointer(rgpwszMember)), uintptr(unsafe.Pointer(pulCellOrdinal)))
+func (self *IMDFind) FindCell(ulStartingOrdinal uintptr, rgpwszMember []foundation.PWSTR, pulCellOrdinal *uintptr) error {
+	var _rgpwszMember *foundation.PWSTR
+	if len(rgpwszMember) > 0 {
+		_rgpwszMember = &rgpwszMember[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulStartingOrdinal), uintptr(len(rgpwszMember)), uintptr(unsafe.Pointer(_rgpwszMember)), uintptr(unsafe.Pointer(pulCellOrdinal)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FindTuple dispatches through IMDFind's vtable slot 4.
-func (self *IMDFind) FindTuple(ulAxisIdentifier uint32, ulStartingOrdinal uintptr, cMembers uintptr, rgpwszMember *foundation.PWSTR, pulTupleOrdinal *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulAxisIdentifier), uintptr(ulStartingOrdinal), uintptr(cMembers), uintptr(unsafe.Pointer(rgpwszMember)), uintptr(unsafe.Pointer(pulTupleOrdinal)))
+func (self *IMDFind) FindTuple(ulAxisIdentifier uint32, ulStartingOrdinal uintptr, rgpwszMember []foundation.PWSTR, pulTupleOrdinal *uint32) error {
+	var _rgpwszMember *foundation.PWSTR
+	if len(rgpwszMember) > 0 {
+		_rgpwszMember = &rgpwszMember[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulAxisIdentifier), uintptr(ulStartingOrdinal), uintptr(len(rgpwszMember)), uintptr(unsafe.Pointer(_rgpwszMember)), uintptr(unsafe.Pointer(pulTupleOrdinal)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1659,8 +1787,12 @@ type IMDRangeRowset struct {
 var IID_IMDRangeRowset = win32.GUID{Data1: 0x0c733aa0, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetRangeRowset dispatches through IMDRangeRowset's vtable slot 3.
-func (self *IMDRangeRowset) GetRangeRowset(pUnkOuter *systemcom.IUnknown, ulStartCell uintptr, ulEndCell uintptr, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(ulStartCell), uintptr(ulEndCell), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
+func (self *IMDRangeRowset) GetRangeRowset(pUnkOuter *systemcom.IUnknown, ulStartCell uintptr, ulEndCell uintptr, riid *win32.GUID, rgPropertySets []DBPROPSET, ppRowset **systemcom.IUnknown) error {
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(ulStartCell), uintptr(ulEndCell), uintptr(unsafe.Pointer(riid)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1805,8 +1937,12 @@ type IOpenRowset struct {
 var IID_IOpenRowset = win32.GUID{Data1: 0x0c733a69, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // OpenRowset dispatches through IOpenRowset's vtable slot 3.
-func (self *IOpenRowset) OpenRowset(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, pIndexID *storageindexserver.DBID, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pIndexID)), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
+func (self *IOpenRowset) OpenRowset(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, pIndexID *storageindexserver.DBID, riid *win32.GUID, rgPropertySets []DBPROPSET, ppRowset **systemcom.IUnknown) error {
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pIndexID)), uintptr(unsafe.Pointer(riid)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1988,8 +2124,12 @@ type IReadData struct {
 var IID_IReadData = win32.GUID{Data1: 0x0c733a6a, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // ReadData dispatches through IReadData's vtable slot 3.
-func (self *IReadData) ReadData(hChapter uintptr, cbBookmark uintptr, pBookmark *byte, lRowsOffset uintptr, hAccessor HACCESSOR, cRows uintptr, pcRowsObtained *uintptr, ppFixedData **byte, pcbVariableTotal *uintptr, ppVariableData **byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(cbBookmark), uintptr(unsafe.Pointer(pBookmark)), uintptr(lRowsOffset), uintptr(hAccessor), uintptr(cRows), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(ppFixedData)), uintptr(unsafe.Pointer(pcbVariableTotal)), uintptr(unsafe.Pointer(ppVariableData)))
+func (self *IReadData) ReadData(hChapter uintptr, pBookmark []byte, lRowsOffset uintptr, hAccessor HACCESSOR, cRows uintptr, pcRowsObtained *uintptr, ppFixedData **byte, pcbVariableTotal *uintptr, ppVariableData **byte) error {
+	var _pBookmark *byte
+	if len(pBookmark) > 0 {
+		_pBookmark = &pBookmark[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(len(pBookmark)), uintptr(unsafe.Pointer(_pBookmark)), uintptr(lRowsOffset), uintptr(hAccessor), uintptr(cRows), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(ppFixedData)), uintptr(unsafe.Pointer(pcbVariableTotal)), uintptr(unsafe.Pointer(ppVariableData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2093,8 +2233,12 @@ type IRow struct {
 var IID_IRow = win32.GUID{Data1: 0x0c733ab4, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetColumns dispatches through IRow's vtable slot 3.
-func (self *IRow) GetColumns(cColumns uintptr, rgColumns *DBCOLUMNACCESS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cColumns), uintptr(unsafe.Pointer(rgColumns)))
+func (self *IRow) GetColumns(rgColumns []DBCOLUMNACCESS) error {
+	var _rgColumns *DBCOLUMNACCESS
+	if len(rgColumns) > 0 {
+		_rgColumns = &rgColumns[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgColumns)), uintptr(unsafe.Pointer(_rgColumns)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2119,8 +2263,12 @@ type IRowChange struct {
 var IID_IRowChange = win32.GUID{Data1: 0x0c733ab5, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // SetColumns dispatches through IRowChange's vtable slot 3.
-func (self *IRowChange) SetColumns(cColumns uintptr, rgColumns *DBCOLUMNACCESS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cColumns), uintptr(unsafe.Pointer(rgColumns)))
+func (self *IRowChange) SetColumns(rgColumns []DBCOLUMNACCESS) error {
+	var _rgColumns *DBCOLUMNACCESS
+	if len(rgColumns) > 0 {
+		_rgColumns = &rgColumns[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgColumns)), uintptr(unsafe.Pointer(_rgColumns)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2218,8 +2366,12 @@ func (self *IRowset) GetData(hRow uintptr, hAccessor HACCESSOR, pData unsafe.Poi
 }
 
 // GetNextRows dispatches through IRowset's vtable slot 5.
-func (self *IRowset) GetNextRows(hReserved uintptr, lRowsOffset uintptr, cRows uintptr, pcRowsObtained *uintptr, prghRows **uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(lRowsOffset), uintptr(cRows), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(prghRows)))
+func (self *IRowset) GetNextRows(hReserved uintptr, lRowsOffset uintptr, pcRowsObtained *uintptr, prghRows []*uintptr) error {
+	var _prghRows **uintptr
+	if len(prghRows) > 0 {
+		_prghRows = &prghRows[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(lRowsOffset), uintptr(len(prghRows)), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(_prghRows)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2264,8 +2416,12 @@ type IRowsetBookmark struct {
 var IID_IRowsetBookmark = win32.GUID{Data1: 0x0c733ac2, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // PositionOnBookmark dispatches through IRowsetBookmark's vtable slot 3.
-func (self *IRowsetBookmark) PositionOnBookmark(hChapter uintptr, cbBookmark uintptr, pBookmark *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(cbBookmark), uintptr(unsafe.Pointer(pBookmark)))
+func (self *IRowsetBookmark) PositionOnBookmark(hChapter uintptr, pBookmark []byte) error {
+	var _pBookmark *byte
+	if len(pBookmark) > 0 {
+		_pBookmark = &pBookmark[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(len(pBookmark)), uintptr(unsafe.Pointer(_pBookmark)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2344,8 +2500,12 @@ func (self *IRowsetCopyRows) CloseSource(hSourceID uint16) error {
 }
 
 // CopyByHROWS dispatches through IRowsetCopyRows's vtable slot 4.
-func (self *IRowsetCopyRows) CopyByHROWS(hSourceID uint16, hReserved uintptr, cRows uintptr, rghRows *uintptr, bFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hSourceID), uintptr(hReserved), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(bFlags))
+func (self *IRowsetCopyRows) CopyByHROWS(hSourceID uint16, hReserved uintptr, rghRows []uintptr, bFlags uint32) error {
+	var _rghRows *uintptr
+	if len(rghRows) > 0 {
+		_rghRows = &rghRows[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(hSourceID), uintptr(hReserved), uintptr(len(rghRows)), uintptr(unsafe.Pointer(_rghRows)), uintptr(bFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2423,8 +2583,12 @@ type IRowsetExactScroll struct {
 var IID_IRowsetExactScroll = win32.GUID{Data1: 0x0c733a7f, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetExactPosition dispatches through IRowsetExactScroll's vtable slot 14.
-func (self *IRowsetExactScroll) GetExactPosition(hChapter uintptr, cbBookmark uintptr, pBookmark *byte, pulPosition *uintptr, pcRows *uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(cbBookmark), uintptr(unsafe.Pointer(pBookmark)), uintptr(unsafe.Pointer(pulPosition)), uintptr(unsafe.Pointer(pcRows)))
+func (self *IRowsetExactScroll) GetExactPosition(hChapter uintptr, pBookmark []byte, pulPosition *uintptr, pcRows *uintptr) error {
+	var _pBookmark *byte
+	if len(pBookmark) > 0 {
+		_pBookmark = &pBookmark[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(len(pBookmark)), uintptr(unsafe.Pointer(_pBookmark)), uintptr(unsafe.Pointer(pulPosition)), uintptr(unsafe.Pointer(pcRows)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2458,8 +2622,12 @@ type IRowsetFind struct {
 var IID_IRowsetFind = win32.GUID{Data1: 0x0c733a9d, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // FindNextRow dispatches through IRowsetFind's vtable slot 3.
-func (self *IRowsetFind) FindNextRow(hChapter uintptr, hAccessor HACCESSOR, pFindValue unsafe.Pointer, CompareOp uint32, cbBookmark uintptr, pBookmark *byte, lRowsOffset uintptr, cRows uintptr, pcRowsObtained *uintptr, prghRows **uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(hAccessor), uintptr(unsafe.Pointer(pFindValue)), uintptr(CompareOp), uintptr(cbBookmark), uintptr(unsafe.Pointer(pBookmark)), uintptr(lRowsOffset), uintptr(cRows), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(prghRows)))
+func (self *IRowsetFind) FindNextRow(hChapter uintptr, hAccessor HACCESSOR, pFindValue unsafe.Pointer, CompareOp uint32, pBookmark []byte, lRowsOffset uintptr, cRows uintptr, pcRowsObtained *uintptr, prghRows **uintptr) error {
+	var _pBookmark *byte
+	if len(pBookmark) > 0 {
+		_pBookmark = &pBookmark[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(hAccessor), uintptr(unsafe.Pointer(pFindValue)), uintptr(CompareOp), uintptr(len(pBookmark)), uintptr(unsafe.Pointer(_pBookmark)), uintptr(lRowsOffset), uintptr(cRows), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(prghRows)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2512,8 +2680,12 @@ type IRowsetInfo struct {
 var IID_IRowsetInfo = win32.GUID{Data1: 0x0c733a55, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetProperties dispatches through IRowsetInfo's vtable slot 3.
-func (self *IRowsetInfo) GetProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cPropertyIDSets), uintptr(unsafe.Pointer(rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
+func (self *IRowsetInfo) GetProperties(rgPropertyIDSets []DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
+	var _rgPropertyIDSets *DBPROPIDSET
+	if len(rgPropertyIDSets) > 0 {
+		_rgPropertyIDSets = &rgPropertyIDSets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgPropertyIDSets)), uintptr(unsafe.Pointer(_rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2552,14 +2724,30 @@ type IRowsetLocate struct {
 var IID_IRowsetLocate = win32.GUID{Data1: 0x0c733a7d, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // Compare dispatches through IRowsetLocate's vtable slot 8.
-func (self *IRowsetLocate) Compare(hReserved uintptr, cbBookmark1 uintptr, pBookmark1 *byte, cbBookmark2 uintptr, pBookmark2 *byte, pComparison *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(cbBookmark1), uintptr(unsafe.Pointer(pBookmark1)), uintptr(cbBookmark2), uintptr(unsafe.Pointer(pBookmark2)), uintptr(unsafe.Pointer(pComparison)))
+func (self *IRowsetLocate) Compare(hReserved uintptr, pBookmark1 []byte, pBookmark2 []byte, pComparison *uint32) error {
+	var _pBookmark1 *byte
+	if len(pBookmark1) > 0 {
+		_pBookmark1 = &pBookmark1[0]
+	}
+	var _pBookmark2 *byte
+	if len(pBookmark2) > 0 {
+		_pBookmark2 = &pBookmark2[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(len(pBookmark1)), uintptr(unsafe.Pointer(_pBookmark1)), uintptr(len(pBookmark2)), uintptr(unsafe.Pointer(_pBookmark2)), uintptr(unsafe.Pointer(pComparison)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetRowsAt dispatches through IRowsetLocate's vtable slot 9.
-func (self *IRowsetLocate) GetRowsAt(hReserved1 uintptr, hReserved2 uintptr, cbBookmark uintptr, pBookmark *byte, lRowsOffset uintptr, cRows uintptr, pcRowsObtained *uintptr, prghRows **uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hReserved1), uintptr(hReserved2), uintptr(cbBookmark), uintptr(unsafe.Pointer(pBookmark)), uintptr(lRowsOffset), uintptr(cRows), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(prghRows)))
+func (self *IRowsetLocate) GetRowsAt(hReserved1 uintptr, hReserved2 uintptr, pBookmark []byte, lRowsOffset uintptr, pcRowsObtained *uintptr, prghRows []*uintptr) error {
+	var _pBookmark *byte
+	if len(pBookmark) > 0 {
+		_pBookmark = &pBookmark[0]
+	}
+	var _prghRows **uintptr
+	if len(prghRows) > 0 {
+		_prghRows = &prghRows[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hReserved1), uintptr(hReserved2), uintptr(len(pBookmark)), uintptr(unsafe.Pointer(_pBookmark)), uintptr(lRowsOffset), uintptr(len(prghRows)), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(_prghRows)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2584,8 +2772,12 @@ type IRowsetNewRowAfter struct {
 var IID_IRowsetNewRowAfter = win32.GUID{Data1: 0x0c733a71, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // SetNewDataAfter dispatches through IRowsetNewRowAfter's vtable slot 3.
-func (self *IRowsetNewRowAfter) SetNewDataAfter(hChapter uintptr, cbbmPrevious uint32, pbmPrevious *byte, hAccessor HACCESSOR, pData *byte, phRow *uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(cbbmPrevious), uintptr(unsafe.Pointer(pbmPrevious)), uintptr(hAccessor), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(phRow)))
+func (self *IRowsetNewRowAfter) SetNewDataAfter(hChapter uintptr, pbmPrevious []byte, hAccessor HACCESSOR, pData *byte, phRow *uintptr) error {
+	var _pbmPrevious *byte
+	if len(pbmPrevious) > 0 {
+		_pbmPrevious = &pbmPrevious[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hChapter), uintptr(len(pbmPrevious)), uintptr(unsafe.Pointer(_pbmPrevious)), uintptr(hAccessor), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(phRow)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2612,16 +2804,24 @@ type IRowsetNotify struct {
 var IID_IRowsetNotify = win32.GUID{Data1: 0x0c733a83, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // OnFieldChange dispatches through IRowsetNotify's vtable slot 3.
-func (self *IRowsetNotify) OnFieldChange(pRowset *IRowset, hRow uintptr, cColumns uintptr, rgColumns *uintptr, eReason uint32, ePhase uint32, fCantDeny bool) error {
+func (self *IRowsetNotify) OnFieldChange(pRowset *IRowset, hRow uintptr, rgColumns []uintptr, eReason uint32, ePhase uint32, fCantDeny bool) error {
+	var _rgColumns *uintptr
+	if len(rgColumns) > 0 {
+		_rgColumns = &rgColumns[0]
+	}
 	_fCantDeny := win32.Bool32(fCantDeny)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRowset)), uintptr(hRow), uintptr(cColumns), uintptr(unsafe.Pointer(rgColumns)), uintptr(eReason), uintptr(ePhase), uintptr(_fCantDeny))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRowset)), uintptr(hRow), uintptr(len(rgColumns)), uintptr(unsafe.Pointer(_rgColumns)), uintptr(eReason), uintptr(ePhase), uintptr(_fCantDeny))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OnRowChange dispatches through IRowsetNotify's vtable slot 4.
-func (self *IRowsetNotify) OnRowChange(pRowset *IRowset, cRows uintptr, rghRows *uintptr, eReason uint32, ePhase uint32, fCantDeny bool) error {
+func (self *IRowsetNotify) OnRowChange(pRowset *IRowset, rghRows []uintptr, eReason uint32, ePhase uint32, fCantDeny bool) error {
+	var _rghRows *uintptr
+	if len(rghRows) > 0 {
+		_rghRows = &rghRows[0]
+	}
 	_fCantDeny := win32.Bool32(fCantDeny)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRowset)), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(eReason), uintptr(ePhase), uintptr(_fCantDeny))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRowset)), uintptr(len(rghRows)), uintptr(unsafe.Pointer(_rghRows)), uintptr(eReason), uintptr(ePhase), uintptr(_fCantDeny))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2729,14 +2929,22 @@ type IRowsetScroll struct {
 var IID_IRowsetScroll = win32.GUID{Data1: 0x0c733a7e, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetApproximatePosition dispatches through IRowsetScroll's vtable slot 12.
-func (self *IRowsetScroll) GetApproximatePosition(hReserved uintptr, cbBookmark uintptr, pBookmark *byte, pulPosition *uintptr, pcRows *uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(cbBookmark), uintptr(unsafe.Pointer(pBookmark)), uintptr(unsafe.Pointer(pulPosition)), uintptr(unsafe.Pointer(pcRows)))
+func (self *IRowsetScroll) GetApproximatePosition(hReserved uintptr, pBookmark []byte, pulPosition *uintptr, pcRows *uintptr) error {
+	var _pBookmark *byte
+	if len(pBookmark) > 0 {
+		_pBookmark = &pBookmark[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(len(pBookmark)), uintptr(unsafe.Pointer(_pBookmark)), uintptr(unsafe.Pointer(pulPosition)), uintptr(unsafe.Pointer(pcRows)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetRowsAtRatio dispatches through IRowsetScroll's vtable slot 13.
-func (self *IRowsetScroll) GetRowsAtRatio(hReserved1 uintptr, hReserved2 uintptr, ulNumerator uintptr, ulDenominator uintptr, cRows uintptr, pcRowsObtained *uintptr, prghRows **uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(hReserved1), uintptr(hReserved2), uintptr(ulNumerator), uintptr(ulDenominator), uintptr(cRows), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(prghRows)))
+func (self *IRowsetScroll) GetRowsAtRatio(hReserved1 uintptr, hReserved2 uintptr, ulNumerator uintptr, ulDenominator uintptr, pcRowsObtained *uintptr, prghRows []*uintptr) error {
+	var _prghRows **uintptr
+	if len(prghRows) > 0 {
+		_prghRows = &prghRows[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(hReserved1), uintptr(hReserved2), uintptr(ulNumerator), uintptr(ulDenominator), uintptr(len(prghRows)), uintptr(unsafe.Pointer(pcRowsObtained)), uintptr(unsafe.Pointer(_prghRows)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2767,14 +2975,22 @@ func (self *IRowsetUpdate) GetRowStatus(hReserved uintptr, cRows uintptr, rghRow
 }
 
 // Undo dispatches through IRowsetUpdate's vtable slot 9.
-func (self *IRowsetUpdate) Undo(hReserved uintptr, cRows uintptr, rghRows *uintptr, pcRowsUndone *uintptr, prgRowsUndone **uintptr, prgRowStatus **uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(unsafe.Pointer(pcRowsUndone)), uintptr(unsafe.Pointer(prgRowsUndone)), uintptr(unsafe.Pointer(prgRowStatus)))
+func (self *IRowsetUpdate) Undo(hReserved uintptr, rghRows []uintptr, pcRowsUndone *uintptr, prgRowsUndone **uintptr, prgRowStatus **uint32) error {
+	var _rghRows *uintptr
+	if len(rghRows) > 0 {
+		_rghRows = &rghRows[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(len(rghRows)), uintptr(unsafe.Pointer(_rghRows)), uintptr(unsafe.Pointer(pcRowsUndone)), uintptr(unsafe.Pointer(prgRowsUndone)), uintptr(unsafe.Pointer(prgRowStatus)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Update dispatches through IRowsetUpdate's vtable slot 10.
-func (self *IRowsetUpdate) Update(hReserved uintptr, cRows uintptr, rghRows *uintptr, pcRows *uintptr, prgRows **uintptr, prgRowStatus **uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(cRows), uintptr(unsafe.Pointer(rghRows)), uintptr(unsafe.Pointer(pcRows)), uintptr(unsafe.Pointer(prgRows)), uintptr(unsafe.Pointer(prgRowStatus)))
+func (self *IRowsetUpdate) Update(hReserved uintptr, rghRows []uintptr, pcRows *uintptr, prgRows **uintptr, prgRowStatus **uint32) error {
+	var _rghRows *uintptr
+	if len(rghRows) > 0 {
+		_rghRows = &rghRows[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(hReserved), uintptr(len(rghRows)), uintptr(unsafe.Pointer(_rghRows)), uintptr(unsafe.Pointer(pcRows)), uintptr(unsafe.Pointer(prgRows)), uintptr(unsafe.Pointer(prgRowStatus)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2877,8 +3093,12 @@ func (self *IRowsetWatchRegion) Refresh(pcChangesObtained *uintptr, prgChanges *
 }
 
 // ShrinkWatchRegion dispatches through IRowsetWatchRegion's vtable slot 11.
-func (self *IRowsetWatchRegion) ShrinkWatchRegion(hRegion uintptr, hChapter uintptr, cbBookmark uintptr, pBookmark *byte, cRows uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hRegion), uintptr(hChapter), uintptr(cbBookmark), uintptr(unsafe.Pointer(pBookmark)), uintptr(cRows))
+func (self *IRowsetWatchRegion) ShrinkWatchRegion(hRegion uintptr, hChapter uintptr, pBookmark []byte, cRows uintptr) error {
+	var _pBookmark *byte
+	if len(pBookmark) > 0 {
+		_pBookmark = &pBookmark[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(hRegion), uintptr(hChapter), uintptr(len(pBookmark)), uintptr(unsafe.Pointer(_pBookmark)), uintptr(cRows))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2939,8 +3159,12 @@ type ISQLRequestDiagFields struct {
 var IID_ISQLRequestDiagFields = win32.GUID{Data1: 0x228972f0, Data2: 0xb5ff, Data3: 0x11d0, Data4: [8]byte{0x8a, 0x80, 0x00, 0xc0, 0x4f, 0xd6, 0x11, 0xcd}}
 
 // RequestDiagFields dispatches through ISQLRequestDiagFields's vtable slot 3.
-func (self *ISQLRequestDiagFields) RequestDiagFields(cDiagFields uint32, rgDiagFields *KAGREQDIAG) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cDiagFields), uintptr(unsafe.Pointer(rgDiagFields)))
+func (self *ISQLRequestDiagFields) RequestDiagFields(rgDiagFields []KAGREQDIAG) error {
+	var _rgDiagFields *KAGREQDIAG
+	if len(rgDiagFields) > 0 {
+		_rgDiagFields = &rgDiagFields[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgDiagFields)), uintptr(unsafe.Pointer(_rgDiagFields)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3078,8 +3302,12 @@ func (self *IScopedOperations) Delete(cRows uintptr, rgpwszURLs *foundation.PWST
 }
 
 // OpenRowset dispatches through IScopedOperations's vtable slot 7.
-func (self *IScopedOperations) OpenRowset(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, pIndexID *storageindexserver.DBID, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppRowset **systemcom.IUnknown) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pIndexID)), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
+func (self *IScopedOperations) OpenRowset(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, pIndexID *storageindexserver.DBID, riid *win32.GUID, rgPropertySets []DBPROPSET, ppRowset **systemcom.IUnknown) error {
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pTableID)), uintptr(unsafe.Pointer(pIndexID)), uintptr(unsafe.Pointer(riid)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)), uintptr(unsafe.Pointer(ppRowset)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3650,8 +3878,12 @@ type ISearchNotifyInlineSite struct {
 var IID_ISearchNotifyInlineSite = win32.GUID{Data1: 0xb5702e61, Data2: 0xe75c, Data3: 0x4b64, Data4: [8]byte{0x82, 0xa1, 0x6c, 0xb4, 0xf8, 0x32, 0xfc, 0xcf}}
 
 // OnItemIndexedStatusChange dispatches through ISearchNotifyInlineSite's vtable slot 3.
-func (self *ISearchNotifyInlineSite) OnItemIndexedStatusChange(sipStatus SEARCH_INDEXING_PHASE, dwNumEntries uint32, rgItemStatusEntries *SEARCH_ITEM_INDEXING_STATUS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(sipStatus), uintptr(dwNumEntries), uintptr(unsafe.Pointer(rgItemStatusEntries)))
+func (self *ISearchNotifyInlineSite) OnItemIndexedStatusChange(sipStatus SEARCH_INDEXING_PHASE, rgItemStatusEntries []SEARCH_ITEM_INDEXING_STATUS) error {
+	var _rgItemStatusEntries *SEARCH_ITEM_INDEXING_STATUS
+	if len(rgItemStatusEntries) > 0 {
+		_rgItemStatusEntries = &rgItemStatusEntries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(sipStatus), uintptr(len(rgItemStatusEntries)), uintptr(unsafe.Pointer(_rgItemStatusEntries)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4199,14 +4431,22 @@ type ISessionProperties struct {
 var IID_ISessionProperties = win32.GUID{Data1: 0x0c733a85, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetProperties dispatches through ISessionProperties's vtable slot 3.
-func (self *ISessionProperties) GetProperties(cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cPropertyIDSets), uintptr(unsafe.Pointer(rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
+func (self *ISessionProperties) GetProperties(rgPropertyIDSets []DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
+	var _rgPropertyIDSets *DBPROPIDSET
+	if len(rgPropertyIDSets) > 0 {
+		_rgPropertyIDSets = &rgPropertyIDSets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgPropertyIDSets)), uintptr(unsafe.Pointer(_rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperties dispatches through ISessionProperties's vtable slot 4.
-func (self *ISessionProperties) SetProperties(cPropertySets uint32, rgPropertySets *DBPROPSET) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
+func (self *ISessionProperties) SetProperties(rgPropertySets []DBPROPSET) error {
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4249,8 +4489,12 @@ type ISourcesRowset struct {
 var IID_ISourcesRowset = win32.GUID{Data1: 0x0c733a1e, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // GetSourcesRowset dispatches through ISourcesRowset's vtable slot 3.
-func (self *ISourcesRowset) GetSourcesRowset(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, cPropertySets uint32, rgProperties *DBPROPSET, ppSourcesRowset **systemcom.IUnknown) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgProperties)), uintptr(unsafe.Pointer(ppSourcesRowset)))
+func (self *ISourcesRowset) GetSourcesRowset(pUnkOuter *systemcom.IUnknown, riid *win32.GUID, rgProperties []DBPROPSET, ppSourcesRowset **systemcom.IUnknown) error {
+	var _rgProperties *DBPROPSET
+	if len(rgProperties) > 0 {
+		_rgProperties = &rgProperties[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(riid)), uintptr(len(rgProperties)), uintptr(unsafe.Pointer(_rgProperties)), uintptr(unsafe.Pointer(ppSourcesRowset)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4429,14 +4673,22 @@ func (self *ISubscriptionMgr2) EnumSubscriptions(dwFlags uint32, ppEnumSubscript
 }
 
 // UpdateItems dispatches through ISubscriptionMgr2's vtable slot 15.
-func (self *ISubscriptionMgr2) UpdateItems(dwFlags uint32, dwNumCookies uint32, pCookies *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(dwNumCookies), uintptr(unsafe.Pointer(pCookies)))
+func (self *ISubscriptionMgr2) UpdateItems(dwFlags uint32, pCookies []win32.GUID) error {
+	var _pCookies *win32.GUID
+	if len(pCookies) > 0 {
+		_pCookies = &pCookies[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(len(pCookies)), uintptr(unsafe.Pointer(_pCookies)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // AbortItems dispatches through ISubscriptionMgr2's vtable slot 16.
-func (self *ISubscriptionMgr2) AbortItems(dwNumCookies uint32, pCookies *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwNumCookies), uintptr(unsafe.Pointer(pCookies)))
+func (self *ISubscriptionMgr2) AbortItems(pCookies []win32.GUID) error {
+	var _pCookies *win32.GUID
+	if len(pCookies) > 0 {
+		_pCookies = &pCookies[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(len(pCookies)), uintptr(unsafe.Pointer(_pCookies)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4469,8 +4721,16 @@ type ITableDefinition struct {
 var IID_ITableDefinition = win32.GUID{Data1: 0x0c733a86, Data2: 0x2a1c, Data3: 0x11ce, Data4: [8]byte{0xad, 0xe5, 0x00, 0xaa, 0x00, 0x44, 0x77, 0x3d}}
 
 // CreateTable dispatches through ITableDefinition's vtable slot 3.
-func (self *ITableDefinition) CreateTable(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, cColumnDescs uintptr, rgColumnDescs *DBCOLUMNDESC, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppTableID **storageindexserver.DBID, ppRowset **systemcom.IUnknown) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pTableID)), uintptr(cColumnDescs), uintptr(unsafe.Pointer(rgColumnDescs)), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppTableID)), uintptr(unsafe.Pointer(ppRowset)))
+func (self *ITableDefinition) CreateTable(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, rgColumnDescs []DBCOLUMNDESC, riid *win32.GUID, rgPropertySets []DBPROPSET, ppTableID **storageindexserver.DBID, ppRowset **systemcom.IUnknown) error {
+	var _rgColumnDescs *DBCOLUMNDESC
+	if len(rgColumnDescs) > 0 {
+		_rgColumnDescs = &rgColumnDescs[0]
+	}
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pTableID)), uintptr(len(rgColumnDescs)), uintptr(unsafe.Pointer(_rgColumnDescs)), uintptr(unsafe.Pointer(riid)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)), uintptr(unsafe.Pointer(ppTableID)), uintptr(unsafe.Pointer(ppRowset)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4507,8 +4767,20 @@ func (self *ITableDefinitionWithConstraints) AddConstraint(pTableID *storageinde
 }
 
 // CreateTableWithConstraints dispatches through ITableDefinitionWithConstraints's vtable slot 9.
-func (self *ITableDefinitionWithConstraints) CreateTableWithConstraints(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, cColumnDescs uintptr, rgColumnDescs *DBCOLUMNDESC, cConstraintDescs uint32, rgConstraintDescs *DBCONSTRAINTDESC, riid *win32.GUID, cPropertySets uint32, rgPropertySets *DBPROPSET, ppTableID **storageindexserver.DBID, ppRowset **systemcom.IUnknown) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pTableID)), uintptr(cColumnDescs), uintptr(unsafe.Pointer(rgColumnDescs)), uintptr(cConstraintDescs), uintptr(unsafe.Pointer(rgConstraintDescs)), uintptr(unsafe.Pointer(riid)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)), uintptr(unsafe.Pointer(ppTableID)), uintptr(unsafe.Pointer(ppRowset)))
+func (self *ITableDefinitionWithConstraints) CreateTableWithConstraints(pUnkOuter *systemcom.IUnknown, pTableID *storageindexserver.DBID, rgColumnDescs []DBCOLUMNDESC, rgConstraintDescs []DBCONSTRAINTDESC, riid *win32.GUID, rgPropertySets []DBPROPSET, ppTableID **storageindexserver.DBID, ppRowset **systemcom.IUnknown) error {
+	var _rgColumnDescs *DBCOLUMNDESC
+	if len(rgColumnDescs) > 0 {
+		_rgColumnDescs = &rgColumnDescs[0]
+	}
+	var _rgConstraintDescs *DBCONSTRAINTDESC
+	if len(rgConstraintDescs) > 0 {
+		_rgConstraintDescs = &rgConstraintDescs[0]
+	}
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUnkOuter)), uintptr(unsafe.Pointer(pTableID)), uintptr(len(rgColumnDescs)), uintptr(unsafe.Pointer(_rgColumnDescs)), uintptr(len(rgConstraintDescs)), uintptr(unsafe.Pointer(_rgConstraintDescs)), uintptr(unsafe.Pointer(riid)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)), uintptr(unsafe.Pointer(ppTableID)), uintptr(unsafe.Pointer(ppRowset)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4628,8 +4900,12 @@ func (self *ITrusteeAdmin) CompareTrustees(pTrustee1 *securityauthorization.TRUS
 }
 
 // CreateTrustee dispatches through ITrusteeAdmin's vtable slot 4.
-func (self *ITrusteeAdmin) CreateTrustee(pTrustee *securityauthorization.TRUSTEE_W, cPropertySets uint32, rgPropertySets *DBPROPSET) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrustee)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
+func (self *ITrusteeAdmin) CreateTrustee(pTrustee *securityauthorization.TRUSTEE_W, rgPropertySets []DBPROPSET) error {
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrustee)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4640,14 +4916,22 @@ func (self *ITrusteeAdmin) DeleteTrustee(pTrustee *securityauthorization.TRUSTEE
 }
 
 // SetTrusteeProperties dispatches through ITrusteeAdmin's vtable slot 6.
-func (self *ITrusteeAdmin) SetTrusteeProperties(pTrustee *securityauthorization.TRUSTEE_W, cPropertySets uint32, rgPropertySets *DBPROPSET) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrustee)), uintptr(cPropertySets), uintptr(unsafe.Pointer(rgPropertySets)))
+func (self *ITrusteeAdmin) SetTrusteeProperties(pTrustee *securityauthorization.TRUSTEE_W, rgPropertySets []DBPROPSET) error {
+	var _rgPropertySets *DBPROPSET
+	if len(rgPropertySets) > 0 {
+		_rgPropertySets = &rgPropertySets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrustee)), uintptr(len(rgPropertySets)), uintptr(unsafe.Pointer(_rgPropertySets)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetTrusteeProperties dispatches through ITrusteeAdmin's vtable slot 7.
-func (self *ITrusteeAdmin) GetTrusteeProperties(pTrustee *securityauthorization.TRUSTEE_W, cPropertyIDSets uint32, rgPropertyIDSets *DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrustee)), uintptr(cPropertyIDSets), uintptr(unsafe.Pointer(rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
+func (self *ITrusteeAdmin) GetTrusteeProperties(pTrustee *securityauthorization.TRUSTEE_W, rgPropertyIDSets []DBPROPIDSET, pcPropertySets *uint32, prgPropertySets **DBPROPSET) error {
+	var _rgPropertyIDSets *DBPROPIDSET
+	if len(rgPropertyIDSets) > 0 {
+		_rgPropertyIDSets = &rgPropertyIDSets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTrustee)), uintptr(len(rgPropertyIDSets)), uintptr(unsafe.Pointer(_rgPropertyIDSets)), uintptr(unsafe.Pointer(pcPropertySets)), uintptr(unsafe.Pointer(prgPropertySets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4791,8 +5075,12 @@ func (self *IUrlAccessor) GetFileName(wszFileName foundation.PWSTR, dwSize uint3
 }
 
 // GetSecurityDescriptor dispatches through IUrlAccessor's vtable slot 11.
-func (self *IUrlAccessor) GetSecurityDescriptor(pSD *byte, dwSize uint32, pdwLength *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSD)), uintptr(dwSize), uintptr(unsafe.Pointer(pdwLength)))
+func (self *IUrlAccessor) GetSecurityDescriptor(pSD []byte, pdwLength *uint32) error {
+	var _pSD *byte
+	if len(pSD) > 0 {
+		_pSD = &pSD[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSD)), uintptr(len(pSD)), uintptr(unsafe.Pointer(pdwLength)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4925,8 +5213,12 @@ func (self *IViewFilter) GetFilterBindings(pcBindings *uintptr, prgBindings **DB
 }
 
 // SetFilter dispatches through IViewFilter's vtable slot 5.
-func (self *IViewFilter) SetFilter(hAccessor HACCESSOR, cRows uintptr, CompareOps *uint32, pCriteriaData unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hAccessor), uintptr(cRows), uintptr(unsafe.Pointer(CompareOps)), uintptr(unsafe.Pointer(pCriteriaData)))
+func (self *IViewFilter) SetFilter(hAccessor HACCESSOR, CompareOps []uint32, pCriteriaData unsafe.Pointer) error {
+	var _CompareOps *uint32
+	if len(CompareOps) > 0 {
+		_CompareOps = &CompareOps[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(hAccessor), uintptr(len(CompareOps)), uintptr(unsafe.Pointer(_CompareOps)), uintptr(unsafe.Pointer(pCriteriaData)))
 	return win32.HRESULTError(int32(r1))
 }
 

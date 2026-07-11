@@ -24,8 +24,12 @@ type IFilter struct {
 var IID_IFilter = win32.GUID{Data1: 0x89bcb740, Data2: 0x6119, Data3: 0x101a, Data4: [8]byte{0xbc, 0xb7, 0x00, 0xdd, 0x01, 0x06, 0x55, 0xaf}}
 
 // Init dispatches through IFilter's vtable slot 3.
-func (self *IFilter) Init(grfFlags uint32, cAttributes uint32, aAttributes *FULLPROPSPEC, pFlags *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(grfFlags), uintptr(cAttributes), uintptr(unsafe.Pointer(aAttributes)), uintptr(unsafe.Pointer(pFlags)))
+func (self *IFilter) Init(grfFlags uint32, aAttributes []FULLPROPSPEC, pFlags *uint32) int32 {
+	var _aAttributes *FULLPROPSPEC
+	if len(aAttributes) > 0 {
+		_aAttributes = &aAttributes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(grfFlags), uintptr(len(aAttributes)), uintptr(unsafe.Pointer(_aAttributes)), uintptr(unsafe.Pointer(pFlags)))
 	return int32(r1)
 }
 

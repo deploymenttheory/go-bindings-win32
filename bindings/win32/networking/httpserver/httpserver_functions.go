@@ -154,8 +154,12 @@ func HttpDelegateRequestEx(RequestQueueHandle foundation.HANDLE, DelegateQueueHa
 // HttpDeleteServiceConfiguration calls HTTPAPI!HttpDeleteServiceConfiguration.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpdeleteserviceconfiguration
 // Minimum OS: windows6.0.6000.
-func HttpDeleteServiceConfiguration(ConfigId HTTP_SERVICE_CONFIG_ID, pConfigInformation unsafe.Pointer, ConfigInformationLength uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpDeleteServiceConfiguration.Addr(), 0, uintptr(ConfigId), uintptr(unsafe.Pointer(pConfigInformation)), uintptr(ConfigInformationLength), 0)
+func HttpDeleteServiceConfiguration(ConfigId HTTP_SERVICE_CONFIG_ID, pConfigInformation []byte) uint32 {
+	var _pConfigInformation *byte
+	if len(pConfigInformation) > 0 {
+		_pConfigInformation = &pConfigInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpDeleteServiceConfiguration.Addr(), 0, uintptr(ConfigId), uintptr(unsafe.Pointer(_pConfigInformation)), uintptr(len(pConfigInformation)), 0)
 	return uint32(r1)
 }
 
@@ -193,49 +197,81 @@ func HttpPrepareUrl(Url string, PreparedUrl *foundation.PWSTR) uint32 {
 }
 
 // HttpQueryRequestProperty calls HTTPAPI!HttpQueryRequestProperty.
-func HttpQueryRequestProperty(RequestQueueHandle foundation.HANDLE, Id uint64, PropertyId HTTP_REQUEST_PROPERTY, Qualifier unsafe.Pointer, QualifierSize uint32, Output unsafe.Pointer, OutputBufferSize uint32, BytesReturned *uint32, Overlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpQueryRequestProperty.Addr(), uintptr(RequestQueueHandle), uintptr(Id), uintptr(PropertyId), uintptr(unsafe.Pointer(Qualifier)), uintptr(QualifierSize), uintptr(unsafe.Pointer(Output)), uintptr(OutputBufferSize), uintptr(unsafe.Pointer(BytesReturned)), uintptr(unsafe.Pointer(Overlapped)))
+func HttpQueryRequestProperty(RequestQueueHandle foundation.HANDLE, Id uint64, PropertyId HTTP_REQUEST_PROPERTY, Qualifier []byte, Output []byte, BytesReturned *uint32, Overlapped *systemio.OVERLAPPED) uint32 {
+	var _Qualifier *byte
+	if len(Qualifier) > 0 {
+		_Qualifier = &Qualifier[0]
+	}
+	var _Output *byte
+	if len(Output) > 0 {
+		_Output = &Output[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpQueryRequestProperty.Addr(), uintptr(RequestQueueHandle), uintptr(Id), uintptr(PropertyId), uintptr(unsafe.Pointer(_Qualifier)), uintptr(len(Qualifier)), uintptr(unsafe.Pointer(_Output)), uintptr(len(Output)), uintptr(unsafe.Pointer(BytesReturned)), uintptr(unsafe.Pointer(Overlapped)))
 	return uint32(r1)
 }
 
 // HttpQueryRequestQueueProperty calls HTTPAPI!HttpQueryRequestQueueProperty.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpqueryrequestqueueproperty
 // Minimum OS: windows6.0.6000.
-func HttpQueryRequestQueueProperty(RequestQueueHandle foundation.HANDLE, Property HTTP_SERVER_PROPERTY, PropertyInformation unsafe.Pointer, PropertyInformationLength uint32, ReturnLength *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpQueryRequestQueueProperty.Addr(), uintptr(RequestQueueHandle), uintptr(Property), uintptr(unsafe.Pointer(PropertyInformation)), uintptr(PropertyInformationLength), 0, uintptr(unsafe.Pointer(ReturnLength)), 0)
+func HttpQueryRequestQueueProperty(RequestQueueHandle foundation.HANDLE, Property HTTP_SERVER_PROPERTY, PropertyInformation []byte, ReturnLength *uint32) uint32 {
+	var _PropertyInformation *byte
+	if len(PropertyInformation) > 0 {
+		_PropertyInformation = &PropertyInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpQueryRequestQueueProperty.Addr(), uintptr(RequestQueueHandle), uintptr(Property), uintptr(unsafe.Pointer(_PropertyInformation)), uintptr(len(PropertyInformation)), 0, uintptr(unsafe.Pointer(ReturnLength)), 0)
 	return uint32(r1)
 }
 
 // HttpQueryServerSessionProperty calls HTTPAPI!HttpQueryServerSessionProperty.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpqueryserversessionproperty
 // Minimum OS: windows6.0.6000.
-func HttpQueryServerSessionProperty(ServerSessionId uint64, Property HTTP_SERVER_PROPERTY, PropertyInformation unsafe.Pointer, PropertyInformationLength uint32, ReturnLength *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpQueryServerSessionProperty.Addr(), uintptr(ServerSessionId), uintptr(Property), uintptr(unsafe.Pointer(PropertyInformation)), uintptr(PropertyInformationLength), uintptr(unsafe.Pointer(ReturnLength)))
+func HttpQueryServerSessionProperty(ServerSessionId uint64, Property HTTP_SERVER_PROPERTY, PropertyInformation []byte, ReturnLength *uint32) uint32 {
+	var _PropertyInformation *byte
+	if len(PropertyInformation) > 0 {
+		_PropertyInformation = &PropertyInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpQueryServerSessionProperty.Addr(), uintptr(ServerSessionId), uintptr(Property), uintptr(unsafe.Pointer(_PropertyInformation)), uintptr(len(PropertyInformation)), uintptr(unsafe.Pointer(ReturnLength)))
 	return uint32(r1)
 }
 
 // HttpQueryServiceConfiguration calls HTTPAPI!HttpQueryServiceConfiguration.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpqueryserviceconfiguration
 // Minimum OS: windows6.0.6000.
-func HttpQueryServiceConfiguration(ConfigId HTTP_SERVICE_CONFIG_ID, pInput unsafe.Pointer, InputLength uint32, pOutput unsafe.Pointer, OutputLength uint32, pReturnLength *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpQueryServiceConfiguration.Addr(), 0, uintptr(ConfigId), uintptr(unsafe.Pointer(pInput)), uintptr(InputLength), uintptr(unsafe.Pointer(pOutput)), uintptr(OutputLength), uintptr(unsafe.Pointer(pReturnLength)), 0)
+func HttpQueryServiceConfiguration(ConfigId HTTP_SERVICE_CONFIG_ID, pInput []byte, pOutput []byte, pReturnLength *uint32) uint32 {
+	var _pInput *byte
+	if len(pInput) > 0 {
+		_pInput = &pInput[0]
+	}
+	var _pOutput *byte
+	if len(pOutput) > 0 {
+		_pOutput = &pOutput[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpQueryServiceConfiguration.Addr(), 0, uintptr(ConfigId), uintptr(unsafe.Pointer(_pInput)), uintptr(len(pInput)), uintptr(unsafe.Pointer(_pOutput)), uintptr(len(pOutput)), uintptr(unsafe.Pointer(pReturnLength)), 0)
 	return uint32(r1)
 }
 
 // HttpQueryUrlGroupProperty calls HTTPAPI!HttpQueryUrlGroupProperty.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpqueryurlgroupproperty
 // Minimum OS: windows6.0.6000.
-func HttpQueryUrlGroupProperty(UrlGroupId uint64, Property HTTP_SERVER_PROPERTY, PropertyInformation unsafe.Pointer, PropertyInformationLength uint32, ReturnLength *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpQueryUrlGroupProperty.Addr(), uintptr(UrlGroupId), uintptr(Property), uintptr(unsafe.Pointer(PropertyInformation)), uintptr(PropertyInformationLength), uintptr(unsafe.Pointer(ReturnLength)))
+func HttpQueryUrlGroupProperty(UrlGroupId uint64, Property HTTP_SERVER_PROPERTY, PropertyInformation []byte, ReturnLength *uint32) uint32 {
+	var _PropertyInformation *byte
+	if len(PropertyInformation) > 0 {
+		_PropertyInformation = &PropertyInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpQueryUrlGroupProperty.Addr(), uintptr(UrlGroupId), uintptr(Property), uintptr(unsafe.Pointer(_PropertyInformation)), uintptr(len(PropertyInformation)), uintptr(unsafe.Pointer(ReturnLength)))
 	return uint32(r1)
 }
 
 // HttpReadFragmentFromCache calls HTTPAPI!HttpReadFragmentFromCache.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpreadfragmentfromcache
 // Minimum OS: windows6.0.6000.
-func HttpReadFragmentFromCache(RequestQueueHandle foundation.HANDLE, UrlPrefix string, ByteRange *HTTP_BYTE_RANGE, Buffer unsafe.Pointer, BufferLength uint32, BytesRead *uint32, Overlapped *systemio.OVERLAPPED) uint32 {
+func HttpReadFragmentFromCache(RequestQueueHandle foundation.HANDLE, UrlPrefix string, ByteRange *HTTP_BYTE_RANGE, Buffer []byte, BytesRead *uint32, Overlapped *systemio.OVERLAPPED) uint32 {
 	_UrlPrefix := win32.UTF16Ptr(UrlPrefix)
-	r1, _, _ := syscall.SyscallN(procHttpReadFragmentFromCache.Addr(), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(_UrlPrefix)), uintptr(unsafe.Pointer(ByteRange)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength), uintptr(unsafe.Pointer(BytesRead)), uintptr(unsafe.Pointer(Overlapped)))
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpReadFragmentFromCache.Addr(), uintptr(RequestQueueHandle), uintptr(unsafe.Pointer(_UrlPrefix)), uintptr(unsafe.Pointer(ByteRange)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)), uintptr(unsafe.Pointer(Overlapped)))
 	return uint32(r1)
 }
 
@@ -258,8 +294,12 @@ func HttpReceiveHttpRequest(RequestQueueHandle foundation.HANDLE, RequestId uint
 // HttpReceiveRequestEntityBody calls HTTPAPI!HttpReceiveRequestEntityBody.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpreceiverequestentitybody
 // Minimum OS: windows6.0.6000.
-func HttpReceiveRequestEntityBody(RequestQueueHandle foundation.HANDLE, RequestId uint64, Flags uint32, EntityBuffer unsafe.Pointer, EntityBufferLength uint32, BytesReturned *uint32, Overlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpReceiveRequestEntityBody.Addr(), uintptr(RequestQueueHandle), uintptr(RequestId), uintptr(Flags), uintptr(unsafe.Pointer(EntityBuffer)), uintptr(EntityBufferLength), uintptr(unsafe.Pointer(BytesReturned)), uintptr(unsafe.Pointer(Overlapped)))
+func HttpReceiveRequestEntityBody(RequestQueueHandle foundation.HANDLE, RequestId uint64, Flags uint32, EntityBuffer []byte, BytesReturned *uint32, Overlapped *systemio.OVERLAPPED) uint32 {
+	var _EntityBuffer *byte
+	if len(EntityBuffer) > 0 {
+		_EntityBuffer = &EntityBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpReceiveRequestEntityBody.Addr(), uintptr(RequestQueueHandle), uintptr(RequestId), uintptr(Flags), uintptr(unsafe.Pointer(_EntityBuffer)), uintptr(len(EntityBuffer)), uintptr(unsafe.Pointer(BytesReturned)), uintptr(unsafe.Pointer(Overlapped)))
 	return uint32(r1)
 }
 
@@ -303,40 +343,60 @@ func HttpSendResponseEntityBody(RequestQueueHandle foundation.HANDLE, RequestId 
 
 // HttpSetRequestProperty calls HTTPAPI!HttpSetRequestProperty.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpsetrequestproperty
-func HttpSetRequestProperty(RequestQueueHandle foundation.HANDLE, Id uint64, PropertyId HTTP_REQUEST_PROPERTY, Input unsafe.Pointer, InputPropertySize uint32, Overlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpSetRequestProperty.Addr(), uintptr(RequestQueueHandle), uintptr(Id), uintptr(PropertyId), uintptr(unsafe.Pointer(Input)), uintptr(InputPropertySize), uintptr(unsafe.Pointer(Overlapped)))
+func HttpSetRequestProperty(RequestQueueHandle foundation.HANDLE, Id uint64, PropertyId HTTP_REQUEST_PROPERTY, Input []byte, Overlapped *systemio.OVERLAPPED) uint32 {
+	var _Input *byte
+	if len(Input) > 0 {
+		_Input = &Input[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpSetRequestProperty.Addr(), uintptr(RequestQueueHandle), uintptr(Id), uintptr(PropertyId), uintptr(unsafe.Pointer(_Input)), uintptr(len(Input)), uintptr(unsafe.Pointer(Overlapped)))
 	return uint32(r1)
 }
 
 // HttpSetRequestQueueProperty calls HTTPAPI!HttpSetRequestQueueProperty.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpsetrequestqueueproperty
 // Minimum OS: windows6.0.6000.
-func HttpSetRequestQueueProperty(RequestQueueHandle foundation.HANDLE, Property HTTP_SERVER_PROPERTY, PropertyInformation unsafe.Pointer, PropertyInformationLength uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpSetRequestQueueProperty.Addr(), uintptr(RequestQueueHandle), uintptr(Property), uintptr(unsafe.Pointer(PropertyInformation)), uintptr(PropertyInformationLength), 0, 0)
+func HttpSetRequestQueueProperty(RequestQueueHandle foundation.HANDLE, Property HTTP_SERVER_PROPERTY, PropertyInformation []byte) uint32 {
+	var _PropertyInformation *byte
+	if len(PropertyInformation) > 0 {
+		_PropertyInformation = &PropertyInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpSetRequestQueueProperty.Addr(), uintptr(RequestQueueHandle), uintptr(Property), uintptr(unsafe.Pointer(_PropertyInformation)), uintptr(len(PropertyInformation)), 0, 0)
 	return uint32(r1)
 }
 
 // HttpSetServerSessionProperty calls HTTPAPI!HttpSetServerSessionProperty.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpsetserversessionproperty
 // Minimum OS: windows6.0.6000.
-func HttpSetServerSessionProperty(ServerSessionId uint64, Property HTTP_SERVER_PROPERTY, PropertyInformation unsafe.Pointer, PropertyInformationLength uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpSetServerSessionProperty.Addr(), uintptr(ServerSessionId), uintptr(Property), uintptr(unsafe.Pointer(PropertyInformation)), uintptr(PropertyInformationLength))
+func HttpSetServerSessionProperty(ServerSessionId uint64, Property HTTP_SERVER_PROPERTY, PropertyInformation []byte) uint32 {
+	var _PropertyInformation *byte
+	if len(PropertyInformation) > 0 {
+		_PropertyInformation = &PropertyInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpSetServerSessionProperty.Addr(), uintptr(ServerSessionId), uintptr(Property), uintptr(unsafe.Pointer(_PropertyInformation)), uintptr(len(PropertyInformation)))
 	return uint32(r1)
 }
 
 // HttpSetServiceConfiguration calls HTTPAPI!HttpSetServiceConfiguration.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpsetserviceconfiguration
 // Minimum OS: windows5.1.2600.
-func HttpSetServiceConfiguration(ConfigId HTTP_SERVICE_CONFIG_ID, pConfigInformation unsafe.Pointer, ConfigInformationLength uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpSetServiceConfiguration.Addr(), 0, uintptr(ConfigId), uintptr(unsafe.Pointer(pConfigInformation)), uintptr(ConfigInformationLength), 0)
+func HttpSetServiceConfiguration(ConfigId HTTP_SERVICE_CONFIG_ID, pConfigInformation []byte) uint32 {
+	var _pConfigInformation *byte
+	if len(pConfigInformation) > 0 {
+		_pConfigInformation = &pConfigInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpSetServiceConfiguration.Addr(), 0, uintptr(ConfigId), uintptr(unsafe.Pointer(_pConfigInformation)), uintptr(len(pConfigInformation)), 0)
 	return uint32(r1)
 }
 
 // HttpSetUrlGroupProperty calls HTTPAPI!HttpSetUrlGroupProperty.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpseturlgroupproperty
 // Minimum OS: windows6.0.6000.
-func HttpSetUrlGroupProperty(UrlGroupId uint64, Property HTTP_SERVER_PROPERTY, PropertyInformation unsafe.Pointer, PropertyInformationLength uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpSetUrlGroupProperty.Addr(), uintptr(UrlGroupId), uintptr(Property), uintptr(unsafe.Pointer(PropertyInformation)), uintptr(PropertyInformationLength))
+func HttpSetUrlGroupProperty(UrlGroupId uint64, Property HTTP_SERVER_PROPERTY, PropertyInformation []byte) uint32 {
+	var _PropertyInformation *byte
+	if len(PropertyInformation) > 0 {
+		_PropertyInformation = &PropertyInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpSetUrlGroupProperty.Addr(), uintptr(UrlGroupId), uintptr(Property), uintptr(unsafe.Pointer(_PropertyInformation)), uintptr(len(PropertyInformation)))
 	return uint32(r1)
 }
 
@@ -359,8 +419,12 @@ func HttpTerminate(Flags HTTP_INITIALIZE) uint32 {
 // HttpUpdateServiceConfiguration calls HTTPAPI!HttpUpdateServiceConfiguration.
 // https://learn.microsoft.com/windows/win32/api/http/nf-http-httpupdateserviceconfiguration
 // Minimum OS: windows10.0.15063.
-func HttpUpdateServiceConfiguration(ConfigId HTTP_SERVICE_CONFIG_ID, ConfigInfo unsafe.Pointer, ConfigInfoLength uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procHttpUpdateServiceConfiguration.Addr(), 0, uintptr(ConfigId), uintptr(unsafe.Pointer(ConfigInfo)), uintptr(ConfigInfoLength), 0)
+func HttpUpdateServiceConfiguration(ConfigId HTTP_SERVICE_CONFIG_ID, ConfigInfo []byte) uint32 {
+	var _ConfigInfo *byte
+	if len(ConfigInfo) > 0 {
+		_ConfigInfo = &ConfigInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpUpdateServiceConfiguration.Addr(), 0, uintptr(ConfigId), uintptr(unsafe.Pointer(_ConfigInfo)), uintptr(len(ConfigInfo)), 0)
 	return uint32(r1)
 }
 

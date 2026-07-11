@@ -2312,8 +2312,12 @@ func GdipGetPathPointsI(param0 *GpPath, points *Point, count int32) Status {
 }
 
 // GdipGetPathTypes calls gdiplus!GdipGetPathTypes.
-func GdipGetPathTypes(path *GpPath, types *byte, count int32) Status {
-	r1, _, _ := syscall.SyscallN(procGdipGetPathTypes.Addr(), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(types)), uintptr(count))
+func GdipGetPathTypes(path *GpPath, types []byte) Status {
+	var _types *byte
+	if len(types) > 0 {
+		_types = &types[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGdipGetPathTypes.Addr(), uintptr(unsafe.Pointer(path)), uintptr(unsafe.Pointer(_types)), uintptr(len(types)))
 	return Status(r1)
 }
 

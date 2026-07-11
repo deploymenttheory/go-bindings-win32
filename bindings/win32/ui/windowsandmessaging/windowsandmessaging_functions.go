@@ -1049,9 +1049,13 @@ func CreateIcon(hInstance foundation.HINSTANCE, nWidth int32, nHeight int32, cPl
 // CreateIconFromResource calls USER32!CreateIconFromResource.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createiconfromresource
 // Minimum OS: windows5.0.
-func CreateIconFromResource(presbits *byte, dwResSize uint32, fIcon bool, dwVer uint32) (HICON, error) {
+func CreateIconFromResource(presbits []byte, fIcon bool, dwVer uint32) (HICON, error) {
+	var _presbits *byte
+	if len(presbits) > 0 {
+		_presbits = &presbits[0]
+	}
 	_fIcon := win32.Bool32(fIcon)
-	r1, _, e1 := syscall.SyscallN(procCreateIconFromResource.Addr(), uintptr(unsafe.Pointer(presbits)), uintptr(dwResSize), uintptr(_fIcon), uintptr(dwVer))
+	r1, _, e1 := syscall.SyscallN(procCreateIconFromResource.Addr(), uintptr(unsafe.Pointer(_presbits)), uintptr(len(presbits)), uintptr(_fIcon), uintptr(dwVer))
 	ret := HICON(r1)
 	if ret == ^HICON(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -1062,9 +1066,13 @@ func CreateIconFromResource(presbits *byte, dwResSize uint32, fIcon bool, dwVer 
 // CreateIconFromResourceEx calls USER32!CreateIconFromResourceEx.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-createiconfromresourceex
 // Minimum OS: windows5.0.
-func CreateIconFromResourceEx(presbits *byte, dwResSize uint32, fIcon bool, dwVer uint32, cxDesired int32, cyDesired int32, Flags IMAGE_FLAGS) (HICON, error) {
+func CreateIconFromResourceEx(presbits []byte, fIcon bool, dwVer uint32, cxDesired int32, cyDesired int32, Flags IMAGE_FLAGS) (HICON, error) {
+	var _presbits *byte
+	if len(presbits) > 0 {
+		_presbits = &presbits[0]
+	}
 	_fIcon := win32.Bool32(fIcon)
-	r1, _, e1 := syscall.SyscallN(procCreateIconFromResourceEx.Addr(), uintptr(unsafe.Pointer(presbits)), uintptr(dwResSize), uintptr(_fIcon), uintptr(dwVer), uintptr(cxDesired), uintptr(cyDesired), uintptr(Flags))
+	r1, _, e1 := syscall.SyscallN(procCreateIconFromResourceEx.Addr(), uintptr(unsafe.Pointer(_presbits)), uintptr(len(presbits)), uintptr(_fIcon), uintptr(dwVer), uintptr(cxDesired), uintptr(cyDesired), uintptr(Flags))
 	ret := HICON(r1)
 	if ret == ^HICON(0) || ret == 0 {
 		return ret, win32.LastError(e1)
@@ -3236,10 +3244,14 @@ func MrmCreateResourceIndexer(packageFamilyName string, projectRoot string, plat
 
 // MrmCreateResourceIndexerFromPreviousPriData calls MrmSupport!MrmCreateResourceIndexerFromPreviousPriData.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexerfrompreviouspridata-
-func MrmCreateResourceIndexerFromPreviousPriData(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, priData *byte, priSize uint32, indexer *MrmResourceIndexerHandle) error {
+func MrmCreateResourceIndexerFromPreviousPriData(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, priData []byte, indexer *MrmResourceIndexerHandle) error {
 	_projectRoot := win32.UTF16Ptr(projectRoot)
 	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
-	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousPriData.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(priData)), uintptr(priSize), uintptr(unsafe.Pointer(indexer)))
+	var _priData *byte
+	if len(priData) > 0 {
+		_priData = &priData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousPriData.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_priData)), uintptr(len(priData)), uintptr(unsafe.Pointer(indexer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3255,10 +3267,14 @@ func MrmCreateResourceIndexerFromPreviousPriFile(projectRoot string, platformVer
 
 // MrmCreateResourceIndexerFromPreviousSchemaData calls MrmSupport!MrmCreateResourceIndexerFromPreviousSchemaData.
 // https://learn.microsoft.com/windows/win32/menurc/mrmcreateresourceindexerfrompreviousschemadata
-func MrmCreateResourceIndexerFromPreviousSchemaData(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, schemaXmlData *byte, schemaXmlSize uint32, indexer *MrmResourceIndexerHandle) error {
+func MrmCreateResourceIndexerFromPreviousSchemaData(projectRoot string, platformVersion MrmPlatformVersion, defaultQualifiers string, schemaXmlData []byte, indexer *MrmResourceIndexerHandle) error {
 	_projectRoot := win32.UTF16Ptr(projectRoot)
 	_defaultQualifiers := win32.UTF16Ptr(defaultQualifiers)
-	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousSchemaData.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(schemaXmlData)), uintptr(schemaXmlSize), uintptr(unsafe.Pointer(indexer)))
+	var _schemaXmlData *byte
+	if len(schemaXmlData) > 0 {
+		_schemaXmlData = &schemaXmlData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMrmCreateResourceIndexerFromPreviousSchemaData.Addr(), uintptr(unsafe.Pointer(_projectRoot)), uintptr(platformVersion), uintptr(unsafe.Pointer(_defaultQualifiers)), uintptr(unsafe.Pointer(_schemaXmlData)), uintptr(len(schemaXmlData)), uintptr(unsafe.Pointer(indexer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3283,8 +3299,16 @@ func MrmCreateResourceIndexerWithFlags(packageFamilyName string, projectRoot str
 
 // MrmDumpPriDataInMemory calls MrmSupport!MrmDumpPriDataInMemory.
 // https://learn.microsoft.com/windows/win32/menurc/mrmdumppridatainmemory
-func MrmDumpPriDataInMemory(inputPriData *byte, inputPriSize uint32, schemaPriData *byte, schemaPriSize uint32, dumpType MrmDumpType, outputXmlData **byte, outputXmlSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(procMrmDumpPriDataInMemory.Addr(), uintptr(unsafe.Pointer(inputPriData)), uintptr(inputPriSize), uintptr(unsafe.Pointer(schemaPriData)), uintptr(schemaPriSize), uintptr(dumpType), uintptr(unsafe.Pointer(outputXmlData)), uintptr(unsafe.Pointer(outputXmlSize)))
+func MrmDumpPriDataInMemory(inputPriData []byte, schemaPriData []byte, dumpType MrmDumpType, outputXmlData **byte, outputXmlSize *uint32) error {
+	var _inputPriData *byte
+	if len(inputPriData) > 0 {
+		_inputPriData = &inputPriData[0]
+	}
+	var _schemaPriData *byte
+	if len(schemaPriData) > 0 {
+		_schemaPriData = &schemaPriData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMrmDumpPriDataInMemory.Addr(), uintptr(unsafe.Pointer(_inputPriData)), uintptr(len(inputPriData)), uintptr(unsafe.Pointer(_schemaPriData)), uintptr(len(schemaPriData)), uintptr(dumpType), uintptr(unsafe.Pointer(outputXmlData)), uintptr(unsafe.Pointer(outputXmlSize)))
 	return win32.HRESULTError(int32(r1))
 }
 

@@ -123,9 +123,13 @@ type IWSDDeviceHost struct {
 var IID_IWSDDeviceHost = win32.GUID{Data1: 0x917fe891, Data2: 0x3d13, Data3: 0x4138, Data4: [8]byte{0x98, 0x09, 0x93, 0x4c, 0x8a, 0xbe, 0xb1, 0x2c}}
 
 // Init dispatches through IWSDDeviceHost's vtable slot 3.
-func (self *IWSDDeviceHost) Init(pszLocalId string, pContext *IWSDXMLContext, ppHostAddresses **IWSDAddress, dwHostAddressCount uint32) error {
+func (self *IWSDDeviceHost) Init(pszLocalId string, pContext *IWSDXMLContext, ppHostAddresses []*IWSDAddress) error {
 	_pszLocalId := win32.UTF16Ptr(pszLocalId)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(ppHostAddresses)), uintptr(dwHostAddressCount))
+	var _ppHostAddresses **IWSDAddress
+	if len(ppHostAddresses) > 0 {
+		_ppHostAddresses = &ppHostAddresses[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszLocalId)), uintptr(unsafe.Pointer(pContext)), uintptr(unsafe.Pointer(_ppHostAddresses)), uintptr(len(ppHostAddresses)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -501,8 +505,12 @@ type IWSDInboundAttachment struct {
 var IID_IWSDInboundAttachment = win32.GUID{Data1: 0x5bd6ca65, Data2: 0x233c, Data3: 0x4fb8, Data4: [8]byte{0x9f, 0x7a, 0x26, 0x41, 0x61, 0x96, 0x55, 0xc9}}
 
 // Read dispatches through IWSDInboundAttachment's vtable slot 3.
-func (self *IWSDInboundAttachment) Read(pBuffer *byte, dwBytesToRead uint32, pdwNumberOfBytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwBytesToRead), uintptr(unsafe.Pointer(pdwNumberOfBytesRead)))
+func (self *IWSDInboundAttachment) Read(pBuffer []byte, pdwNumberOfBytesRead *uint32) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(pdwNumberOfBytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -576,8 +584,12 @@ type IWSDOutboundAttachment struct {
 var IID_IWSDOutboundAttachment = win32.GUID{Data1: 0xaa302f8d, Data2: 0x5a22, Data3: 0x4ba5, Data4: [8]byte{0xb3, 0x92, 0xaa, 0x84, 0x86, 0xf4, 0xc1, 0x5d}}
 
 // Write dispatches through IWSDOutboundAttachment's vtable slot 3.
-func (self *IWSDOutboundAttachment) Write(pBuffer *byte, dwBytesToWrite uint32, pdwNumberOfBytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwBytesToWrite), uintptr(unsafe.Pointer(pdwNumberOfBytesWritten)))
+func (self *IWSDOutboundAttachment) Write(pBuffer []byte, pdwNumberOfBytesWritten *uint32) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(pdwNumberOfBytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -719,74 +731,122 @@ type IWSDServiceProxyEventing struct {
 var IID_IWSDServiceProxyEventing = win32.GUID{Data1: 0xf9279d6d, Data2: 0x1012, Data3: 0x4a94, Data4: [8]byte{0xb8, 0xcc, 0xfd, 0x35, 0xd2, 0x20, 0x2b, 0xfe}}
 
 // SubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 11.
-func (self *IWSDServiceProxyEventing) SubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pUnknown *systemcom.IUnknown, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
+func (self *IWSDServiceProxyEventing) SubscribeToMultipleOperations(pOperations []WSD_OPERATION, pUnknown *systemcom.IUnknown, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
+	var _pOperations *WSD_OPERATION
+	if len(pOperations) > 0 {
+		_pOperations = &pOperations[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // BeginSubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 12.
-func (self *IWSDServiceProxyEventing) BeginSubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pUnknown *systemcom.IUnknown, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
+func (self *IWSDServiceProxyEventing) BeginSubscribeToMultipleOperations(pOperations []WSD_OPERATION, pUnknown *systemcom.IUnknown, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) error {
+	var _pOperations *WSD_OPERATION
+	if len(pOperations) > 0 {
+		_pOperations = &pOperations[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pUnknown)), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // EndSubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 13.
-func (self *IWSDServiceProxyEventing) EndSubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pResult *IWSDAsyncResult, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
+func (self *IWSDServiceProxyEventing) EndSubscribeToMultipleOperations(pOperations []WSD_OPERATION, pResult *IWSDAsyncResult, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
+	var _pOperations *WSD_OPERATION
+	if len(pOperations) > 0 {
+		_pOperations = &pOperations[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // UnsubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 14.
-func (self *IWSDServiceProxyEventing) UnsubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pAny *WSDXML_ELEMENT) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pAny)))
+func (self *IWSDServiceProxyEventing) UnsubscribeToMultipleOperations(pOperations []WSD_OPERATION, pAny *WSDXML_ELEMENT) error {
+	var _pOperations *WSD_OPERATION
+	if len(pOperations) > 0 {
+		_pOperations = &pOperations[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pAny)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // BeginUnsubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 15.
-func (self *IWSDServiceProxyEventing) BeginUnsubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
+func (self *IWSDServiceProxyEventing) BeginUnsubscribeToMultipleOperations(pOperations []WSD_OPERATION, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) error {
+	var _pOperations *WSD_OPERATION
+	if len(pOperations) > 0 {
+		_pOperations = &pOperations[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // EndUnsubscribeToMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 16.
-func (self *IWSDServiceProxyEventing) EndUnsubscribeToMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pResult *IWSDAsyncResult) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pResult)))
+func (self *IWSDServiceProxyEventing) EndUnsubscribeToMultipleOperations(pOperations []WSD_OPERATION, pResult *IWSDAsyncResult) error {
+	var _pOperations *WSD_OPERATION
+	if len(pOperations) > 0 {
+		_pOperations = &pOperations[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pResult)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RenewMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 17.
-func (self *IWSDServiceProxyEventing) RenewMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
+func (self *IWSDServiceProxyEventing) RenewMultipleOperations(pOperations []WSD_OPERATION, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
+	var _pOperations *WSD_OPERATION
+	if len(pOperations) > 0 {
+		_pOperations = &pOperations[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // BeginRenewMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 18.
-func (self *IWSDServiceProxyEventing) BeginRenewMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
+func (self *IWSDServiceProxyEventing) BeginRenewMultipleOperations(pOperations []WSD_OPERATION, pExpires *WSD_EVENTING_EXPIRES, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) error {
+	var _pOperations *WSD_OPERATION
+	if len(pOperations) > 0 {
+		_pOperations = &pOperations[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pExpires)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // EndRenewMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 19.
-func (self *IWSDServiceProxyEventing) EndRenewMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pResult *IWSDAsyncResult, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
+func (self *IWSDServiceProxyEventing) EndRenewMultipleOperations(pOperations []WSD_OPERATION, pResult *IWSDAsyncResult, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
+	var _pOperations *WSD_OPERATION
+	if len(pOperations) > 0 {
+		_pOperations = &pOperations[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetStatusForMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 20.
-func (self *IWSDServiceProxyEventing) GetStatusForMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pAny *WSDXML_ELEMENT, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
+func (self *IWSDServiceProxyEventing) GetStatusForMultipleOperations(pOperations []WSD_OPERATION, pAny *WSDXML_ELEMENT, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
+	var _pOperations *WSD_OPERATION
+	if len(pOperations) > 0 {
+		_pOperations = &pOperations[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // BeginGetStatusForMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 21.
-func (self *IWSDServiceProxyEventing) BeginGetStatusForMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
+func (self *IWSDServiceProxyEventing) BeginGetStatusForMultipleOperations(pOperations []WSD_OPERATION, pAny *WSDXML_ELEMENT, pAsyncState *systemcom.IUnknown, pAsyncCallback *IWSDAsyncCallback, ppResult **IWSDAsyncResult) error {
+	var _pOperations *WSD_OPERATION
+	if len(pOperations) > 0 {
+		_pOperations = &pOperations[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pAny)), uintptr(unsafe.Pointer(pAsyncState)), uintptr(unsafe.Pointer(pAsyncCallback)), uintptr(unsafe.Pointer(ppResult)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // EndGetStatusForMultipleOperations dispatches through IWSDServiceProxyEventing's vtable slot 22.
-func (self *IWSDServiceProxyEventing) EndGetStatusForMultipleOperations(pOperations *WSD_OPERATION, dwOperationCount uint32, pResult *IWSDAsyncResult, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOperations)), uintptr(dwOperationCount), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
+func (self *IWSDServiceProxyEventing) EndGetStatusForMultipleOperations(pOperations []WSD_OPERATION, pResult *IWSDAsyncResult, ppExpires **WSD_EVENTING_EXPIRES, ppAny **WSDXML_ELEMENT) error {
+	var _pOperations *WSD_OPERATION
+	if len(pOperations) > 0 {
+		_pOperations = &pOperations[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOperations)), uintptr(len(pOperations)), uintptr(unsafe.Pointer(pResult)), uintptr(unsafe.Pointer(ppExpires)), uintptr(unsafe.Pointer(ppAny)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -987,14 +1047,22 @@ func (self *IWSDXMLContext) AddNameToNamespace(pszUri string, pszName string, pp
 }
 
 // SetNamespaces dispatches through IWSDXMLContext's vtable slot 5.
-func (self *IWSDXMLContext) SetNamespaces(pNamespaces **WSDXML_NAMESPACE, wNamespacesCount uint16, bLayerNumber byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pNamespaces)), uintptr(wNamespacesCount), uintptr(bLayerNumber))
+func (self *IWSDXMLContext) SetNamespaces(pNamespaces []*WSDXML_NAMESPACE, bLayerNumber byte) error {
+	var _pNamespaces **WSDXML_NAMESPACE
+	if len(pNamespaces) > 0 {
+		_pNamespaces = &pNamespaces[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pNamespaces)), uintptr(len(pNamespaces)), uintptr(bLayerNumber))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetTypes dispatches through IWSDXMLContext's vtable slot 6.
-func (self *IWSDXMLContext) SetTypes(pTypes **WSDXML_TYPE, dwTypesCount uint32, bLayerNumber byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTypes)), uintptr(dwTypesCount), uintptr(bLayerNumber))
+func (self *IWSDXMLContext) SetTypes(pTypes []*WSDXML_TYPE, bLayerNumber byte) error {
+	var _pTypes **WSDXML_TYPE
+	if len(pTypes) > 0 {
+		_pTypes = &pTypes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pTypes)), uintptr(len(pTypes)), uintptr(bLayerNumber))
 	return win32.HRESULTError(int32(r1))
 }
 

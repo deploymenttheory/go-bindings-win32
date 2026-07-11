@@ -36,8 +36,12 @@ func (self *ID3D10Asynchronous) End() {
 }
 
 // GetData dispatches through ID3D10Asynchronous's vtable slot 9.
-func (self *ID3D10Asynchronous) GetData(pData unsafe.Pointer, DataSize uint32, GetDataFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(DataSize), uintptr(GetDataFlags))
+func (self *ID3D10Asynchronous) GetData(pData []byte, GetDataFlags uint32) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(GetDataFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -203,13 +207,21 @@ type ID3D10Device struct {
 var IID_ID3D10Device = win32.GUID{Data1: 0x9b7e4c0f, Data2: 0x342c, Data3: 0x4106, Data4: [8]byte{0xa1, 0x9f, 0x4f, 0x27, 0x04, 0xf6, 0x89, 0xf0}}
 
 // VSSetConstantBuffers dispatches through ID3D10Device's vtable slot 3.
-func (self *ID3D10Device) VSSetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D10Buffer) {
-	syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D10Device) VSSetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D10Buffer) {
+	var _ppConstantBuffers **ID3D10Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // PSSetShaderResources dispatches through ID3D10Device's vtable slot 4.
-func (self *ID3D10Device) PSSetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D10ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D10Device) PSSetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D10ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D10ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // PSSetShader dispatches through ID3D10Device's vtable slot 5.
@@ -218,8 +230,12 @@ func (self *ID3D10Device) PSSetShader(pPixelShader *ID3D10PixelShader) {
 }
 
 // PSSetSamplers dispatches through ID3D10Device's vtable slot 6.
-func (self *ID3D10Device) PSSetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D10SamplerState) {
-	syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D10Device) PSSetSamplers(StartSlot uint32, ppSamplers []*ID3D10SamplerState) {
+	var _ppSamplers **ID3D10SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // VSSetShader dispatches through ID3D10Device's vtable slot 7.
@@ -238,8 +254,12 @@ func (self *ID3D10Device) Draw(VertexCount uint32, StartVertexLocation uint32) {
 }
 
 // PSSetConstantBuffers dispatches through ID3D10Device's vtable slot 10.
-func (self *ID3D10Device) PSSetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D10Buffer) {
-	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D10Device) PSSetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D10Buffer) {
+	var _ppConstantBuffers **ID3D10Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // IASetInputLayout dispatches through ID3D10Device's vtable slot 11.
@@ -268,8 +288,12 @@ func (self *ID3D10Device) DrawInstanced(VertexCountPerInstance uint32, InstanceC
 }
 
 // GSSetConstantBuffers dispatches through ID3D10Device's vtable slot 16.
-func (self *ID3D10Device) GSSetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D10Buffer) {
-	syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D10Device) GSSetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D10Buffer) {
+	var _ppConstantBuffers **ID3D10Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // GSSetShader dispatches through ID3D10Device's vtable slot 17.
@@ -283,13 +307,21 @@ func (self *ID3D10Device) IASetPrimitiveTopology(Topology graphicsdirect3d.D3D_P
 }
 
 // VSSetShaderResources dispatches through ID3D10Device's vtable slot 19.
-func (self *ID3D10Device) VSSetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D10ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D10Device) VSSetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D10ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D10ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // VSSetSamplers dispatches through ID3D10Device's vtable slot 20.
-func (self *ID3D10Device) VSSetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D10SamplerState) {
-	syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D10Device) VSSetSamplers(StartSlot uint32, ppSamplers []*ID3D10SamplerState) {
+	var _ppSamplers **ID3D10SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // SetPredication dispatches through ID3D10Device's vtable slot 21.
@@ -299,18 +331,30 @@ func (self *ID3D10Device) SetPredication(pPredicate *ID3D10Predicate, PredicateV
 }
 
 // GSSetShaderResources dispatches through ID3D10Device's vtable slot 22.
-func (self *ID3D10Device) GSSetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D10ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D10Device) GSSetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D10ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D10ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // GSSetSamplers dispatches through ID3D10Device's vtable slot 23.
-func (self *ID3D10Device) GSSetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D10SamplerState) {
-	syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D10Device) GSSetSamplers(StartSlot uint32, ppSamplers []*ID3D10SamplerState) {
+	var _ppSamplers **ID3D10SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // OMSetRenderTargets dispatches through ID3D10Device's vtable slot 24.
-func (self *ID3D10Device) OMSetRenderTargets(NumViews uint32, ppRenderTargetViews **ID3D10RenderTargetView, pDepthStencilView *ID3D10DepthStencilView) {
-	syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(NumViews), uintptr(unsafe.Pointer(ppRenderTargetViews)), uintptr(unsafe.Pointer(pDepthStencilView)))
+func (self *ID3D10Device) OMSetRenderTargets(ppRenderTargetViews []*ID3D10RenderTargetView, pDepthStencilView *ID3D10DepthStencilView) {
+	var _ppRenderTargetViews **ID3D10RenderTargetView
+	if len(ppRenderTargetViews) > 0 {
+		_ppRenderTargetViews = &ppRenderTargetViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(len(ppRenderTargetViews)), uintptr(unsafe.Pointer(_ppRenderTargetViews)), uintptr(unsafe.Pointer(pDepthStencilView)))
 }
 
 // OMSetBlendState dispatches through ID3D10Device's vtable slot 25.
@@ -339,13 +383,21 @@ func (self *ID3D10Device) RSSetState(pRasterizerState *ID3D10RasterizerState) {
 }
 
 // RSSetViewports dispatches through ID3D10Device's vtable slot 30.
-func (self *ID3D10Device) RSSetViewports(NumViewports uint32, pViewports *D3D10_VIEWPORT) {
-	syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(NumViewports), uintptr(unsafe.Pointer(pViewports)))
+func (self *ID3D10Device) RSSetViewports(pViewports []D3D10_VIEWPORT) {
+	var _pViewports *D3D10_VIEWPORT
+	if len(pViewports) > 0 {
+		_pViewports = &pViewports[0]
+	}
+	syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(len(pViewports)), uintptr(unsafe.Pointer(_pViewports)))
 }
 
 // RSSetScissorRects dispatches through ID3D10Device's vtable slot 31.
-func (self *ID3D10Device) RSSetScissorRects(NumRects uint32, pRects *foundation.RECT) {
-	syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(NumRects), uintptr(unsafe.Pointer(pRects)))
+func (self *ID3D10Device) RSSetScissorRects(pRects []foundation.RECT) {
+	var _pRects *foundation.RECT
+	if len(pRects) > 0 {
+		_pRects = &pRects[0]
+	}
+	syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(len(pRects)), uintptr(unsafe.Pointer(_pRects)))
 }
 
 // CopySubresourceRegion dispatches through ID3D10Device's vtable slot 32.
@@ -379,13 +431,21 @@ func (self *ID3D10Device) ResolveSubresource(pDstResource *ID3D10Resource, DstSu
 }
 
 // VSGetConstantBuffers dispatches through ID3D10Device's vtable slot 39.
-func (self *ID3D10Device) VSGetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D10Buffer) {
-	syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D10Device) VSGetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D10Buffer) {
+	var _ppConstantBuffers **ID3D10Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[39], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // PSGetShaderResources dispatches through ID3D10Device's vtable slot 40.
-func (self *ID3D10Device) PSGetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D10ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D10Device) PSGetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D10ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D10ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[40], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // PSGetShader dispatches through ID3D10Device's vtable slot 41.
@@ -394,8 +454,12 @@ func (self *ID3D10Device) PSGetShader(ppPixelShader **ID3D10PixelShader) {
 }
 
 // PSGetSamplers dispatches through ID3D10Device's vtable slot 42.
-func (self *ID3D10Device) PSGetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D10SamplerState) {
-	syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D10Device) PSGetSamplers(StartSlot uint32, ppSamplers []*ID3D10SamplerState) {
+	var _ppSamplers **ID3D10SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // VSGetShader dispatches through ID3D10Device's vtable slot 43.
@@ -404,8 +468,12 @@ func (self *ID3D10Device) VSGetShader(ppVertexShader **ID3D10VertexShader) {
 }
 
 // PSGetConstantBuffers dispatches through ID3D10Device's vtable slot 44.
-func (self *ID3D10Device) PSGetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D10Buffer) {
-	syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D10Device) PSGetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D10Buffer) {
+	var _ppConstantBuffers **ID3D10Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // IAGetInputLayout dispatches through ID3D10Device's vtable slot 45.
@@ -424,8 +492,12 @@ func (self *ID3D10Device) IAGetIndexBuffer(pIndexBuffer **ID3D10Buffer, Format *
 }
 
 // GSGetConstantBuffers dispatches through ID3D10Device's vtable slot 48.
-func (self *ID3D10Device) GSGetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D10Buffer) {
-	syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D10Device) GSGetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D10Buffer) {
+	var _ppConstantBuffers **ID3D10Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[48], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // GSGetShader dispatches through ID3D10Device's vtable slot 49.
@@ -439,13 +511,21 @@ func (self *ID3D10Device) IAGetPrimitiveTopology(pTopology *graphicsdirect3d.D3D
 }
 
 // VSGetShaderResources dispatches through ID3D10Device's vtable slot 51.
-func (self *ID3D10Device) VSGetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D10ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D10Device) VSGetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D10ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D10ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // VSGetSamplers dispatches through ID3D10Device's vtable slot 52.
-func (self *ID3D10Device) VSGetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D10SamplerState) {
-	syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D10Device) VSGetSamplers(StartSlot uint32, ppSamplers []*ID3D10SamplerState) {
+	var _ppSamplers **ID3D10SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // GetPredication dispatches through ID3D10Device's vtable slot 53.
@@ -454,18 +534,30 @@ func (self *ID3D10Device) GetPredication(ppPredicate **ID3D10Predicate, pPredica
 }
 
 // GSGetShaderResources dispatches through ID3D10Device's vtable slot 54.
-func (self *ID3D10Device) GSGetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D10ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D10Device) GSGetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D10ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D10ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // GSGetSamplers dispatches through ID3D10Device's vtable slot 55.
-func (self *ID3D10Device) GSGetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D10SamplerState) {
-	syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D10Device) GSGetSamplers(StartSlot uint32, ppSamplers []*ID3D10SamplerState) {
+	var _ppSamplers **ID3D10SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // OMGetRenderTargets dispatches through ID3D10Device's vtable slot 56.
-func (self *ID3D10Device) OMGetRenderTargets(NumViews uint32, ppRenderTargetViews **ID3D10RenderTargetView, ppDepthStencilView **ID3D10DepthStencilView) {
-	syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(NumViews), uintptr(unsafe.Pointer(ppRenderTargetViews)), uintptr(unsafe.Pointer(ppDepthStencilView)))
+func (self *ID3D10Device) OMGetRenderTargets(ppRenderTargetViews []*ID3D10RenderTargetView, ppDepthStencilView **ID3D10DepthStencilView) {
+	var _ppRenderTargetViews **ID3D10RenderTargetView
+	if len(ppRenderTargetViews) > 0 {
+		_ppRenderTargetViews = &ppRenderTargetViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(len(ppRenderTargetViews)), uintptr(unsafe.Pointer(_ppRenderTargetViews)), uintptr(unsafe.Pointer(ppDepthStencilView)))
 }
 
 // OMGetBlendState dispatches through ID3D10Device's vtable slot 57.
@@ -523,8 +615,12 @@ func (self *ID3D10Device) GetPrivateData(guid *win32.GUID, pDataSize *uint32, pD
 }
 
 // SetPrivateData dispatches through ID3D10Device's vtable slot 67.
-func (self *ID3D10Device) SetPrivateData(guid *win32.GUID, DataSize uint32, pData unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
+func (self *ID3D10Device) SetPrivateData(guid *win32.GUID, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -587,8 +683,12 @@ func (self *ID3D10Device) CreateDepthStencilView(pResource *ID3D10Resource, pDes
 }
 
 // CreateInputLayout dispatches through ID3D10Device's vtable slot 78.
-func (self *ID3D10Device) CreateInputLayout(pInputElementDescs *D3D10_INPUT_ELEMENT_DESC, NumElements uint32, pShaderBytecodeWithInputSignature unsafe.Pointer, BytecodeLength uintptr, ppInputLayout **ID3D10InputLayout) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInputElementDescs)), uintptr(NumElements), uintptr(unsafe.Pointer(pShaderBytecodeWithInputSignature)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppInputLayout)))
+func (self *ID3D10Device) CreateInputLayout(pInputElementDescs []D3D10_INPUT_ELEMENT_DESC, pShaderBytecodeWithInputSignature unsafe.Pointer, BytecodeLength uintptr, ppInputLayout **ID3D10InputLayout) error {
+	var _pInputElementDescs *D3D10_INPUT_ELEMENT_DESC
+	if len(pInputElementDescs) > 0 {
+		_pInputElementDescs = &pInputElementDescs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInputElementDescs)), uintptr(len(pInputElementDescs)), uintptr(unsafe.Pointer(pShaderBytecodeWithInputSignature)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppInputLayout)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -605,8 +705,12 @@ func (self *ID3D10Device) CreateGeometryShader(pShaderBytecode unsafe.Pointer, B
 }
 
 // CreateGeometryShaderWithStreamOutput dispatches through ID3D10Device's vtable slot 81.
-func (self *ID3D10Device) CreateGeometryShaderWithStreamOutput(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pSODeclaration *D3D10_SO_DECLARATION_ENTRY, NumEntries uint32, OutputStreamStride uint32, ppGeometryShader **ID3D10GeometryShader) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(pSODeclaration)), uintptr(NumEntries), uintptr(OutputStreamStride), uintptr(unsafe.Pointer(ppGeometryShader)))
+func (self *ID3D10Device) CreateGeometryShaderWithStreamOutput(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pSODeclaration []D3D10_SO_DECLARATION_ENTRY, OutputStreamStride uint32, ppGeometryShader **ID3D10GeometryShader) error {
+	var _pSODeclaration *D3D10_SO_DECLARATION_ENTRY
+	if len(pSODeclaration) > 0 {
+		_pSODeclaration = &pSODeclaration[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(_pSODeclaration)), uintptr(len(pSODeclaration)), uintptr(OutputStreamStride), uintptr(unsafe.Pointer(ppGeometryShader)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -751,8 +855,12 @@ func (self *ID3D10DeviceChild) GetPrivateData(guid *win32.GUID, pDataSize *uint3
 }
 
 // SetPrivateData dispatches through ID3D10DeviceChild's vtable slot 5.
-func (self *ID3D10DeviceChild) SetPrivateData(guid *win32.GUID, DataSize uint32, pData unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
+func (self *ID3D10DeviceChild) SetPrivateData(guid *win32.GUID, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -946,14 +1054,22 @@ func (self *ID3D10EffectDepthStencilViewVariable) GetDepthStencil(ppResource **I
 }
 
 // SetDepthStencilArray dispatches through ID3D10EffectDepthStencilViewVariable's vtable slot 27.
-func (self *ID3D10EffectDepthStencilViewVariable) SetDepthStencilArray(ppResources **ID3D10DepthStencilView, Offset uint32, Count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResources)), uintptr(Offset), uintptr(Count))
+func (self *ID3D10EffectDepthStencilViewVariable) SetDepthStencilArray(ppResources []*ID3D10DepthStencilView, Offset uint32) error {
+	var _ppResources **ID3D10DepthStencilView
+	if len(ppResources) > 0 {
+		_ppResources = &ppResources[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Offset), uintptr(len(ppResources)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetDepthStencilArray dispatches through ID3D10EffectDepthStencilViewVariable's vtable slot 28.
-func (self *ID3D10EffectDepthStencilViewVariable) GetDepthStencilArray(ppResources **ID3D10DepthStencilView, Offset uint32, Count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResources)), uintptr(Offset), uintptr(Count))
+func (self *ID3D10EffectDepthStencilViewVariable) GetDepthStencilArray(ppResources []*ID3D10DepthStencilView, Offset uint32) error {
+	var _ppResources **ID3D10DepthStencilView
+	if len(ppResources) > 0 {
+		_ppResources = &ppResources[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Offset), uintptr(len(ppResources)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1135,14 +1251,22 @@ func (self *ID3D10EffectRenderTargetViewVariable) GetRenderTarget(ppResource **I
 }
 
 // SetRenderTargetArray dispatches through ID3D10EffectRenderTargetViewVariable's vtable slot 27.
-func (self *ID3D10EffectRenderTargetViewVariable) SetRenderTargetArray(ppResources **ID3D10RenderTargetView, Offset uint32, Count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResources)), uintptr(Offset), uintptr(Count))
+func (self *ID3D10EffectRenderTargetViewVariable) SetRenderTargetArray(ppResources []*ID3D10RenderTargetView, Offset uint32) error {
+	var _ppResources **ID3D10RenderTargetView
+	if len(ppResources) > 0 {
+		_ppResources = &ppResources[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Offset), uintptr(len(ppResources)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetRenderTargetArray dispatches through ID3D10EffectRenderTargetViewVariable's vtable slot 28.
-func (self *ID3D10EffectRenderTargetViewVariable) GetRenderTargetArray(ppResources **ID3D10RenderTargetView, Offset uint32, Count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResources)), uintptr(Offset), uintptr(Count))
+func (self *ID3D10EffectRenderTargetViewVariable) GetRenderTargetArray(ppResources []*ID3D10RenderTargetView, Offset uint32) error {
+	var _ppResources **ID3D10RenderTargetView
+	if len(ppResources) > 0 {
+		_ppResources = &ppResources[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Offset), uintptr(len(ppResources)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1183,14 +1307,22 @@ func (self *ID3D10EffectScalarVariable) GetFloat(pValue *float32) error {
 }
 
 // SetFloatArray dispatches through ID3D10EffectScalarVariable's vtable slot 27.
-func (self *ID3D10EffectScalarVariable) SetFloatArray(pData *float32, Offset uint32, Count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
+func (self *ID3D10EffectScalarVariable) SetFloatArray(pData []float32, Offset uint32) error {
+	var _pData *float32
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetFloatArray dispatches through ID3D10EffectScalarVariable's vtable slot 28.
-func (self *ID3D10EffectScalarVariable) GetFloatArray(pData *float32, Offset uint32, Count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
+func (self *ID3D10EffectScalarVariable) GetFloatArray(pData []float32, Offset uint32) error {
+	var _pData *float32
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1207,14 +1339,22 @@ func (self *ID3D10EffectScalarVariable) GetInt(pValue *int32) error {
 }
 
 // SetIntArray dispatches through ID3D10EffectScalarVariable's vtable slot 31.
-func (self *ID3D10EffectScalarVariable) SetIntArray(pData *int32, Offset uint32, Count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
+func (self *ID3D10EffectScalarVariable) SetIntArray(pData []int32, Offset uint32) error {
+	var _pData *int32
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetIntArray dispatches through ID3D10EffectScalarVariable's vtable slot 32.
-func (self *ID3D10EffectScalarVariable) GetIntArray(pData *int32, Offset uint32, Count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
+func (self *ID3D10EffectScalarVariable) GetIntArray(pData []int32, Offset uint32) error {
+	var _pData *int32
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1232,14 +1372,22 @@ func (self *ID3D10EffectScalarVariable) GetBool(pValue *foundation.BOOL) error {
 }
 
 // SetBoolArray dispatches through ID3D10EffectScalarVariable's vtable slot 35.
-func (self *ID3D10EffectScalarVariable) SetBoolArray(pData *foundation.BOOL, Offset uint32, Count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
+func (self *ID3D10EffectScalarVariable) SetBoolArray(pData []foundation.BOOL, Offset uint32) error {
+	var _pData *foundation.BOOL
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetBoolArray dispatches through ID3D10EffectScalarVariable's vtable slot 36.
-func (self *ID3D10EffectScalarVariable) GetBoolArray(pData *foundation.BOOL, Offset uint32, Count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(Count))
+func (self *ID3D10EffectScalarVariable) GetBoolArray(pData []foundation.BOOL, Offset uint32) error {
+	var _pData *foundation.BOOL
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1265,14 +1413,22 @@ func (self *ID3D10EffectShaderResourceVariable) GetResource(ppResource **ID3D10S
 }
 
 // SetResourceArray dispatches through ID3D10EffectShaderResourceVariable's vtable slot 27.
-func (self *ID3D10EffectShaderResourceVariable) SetResourceArray(ppResources **ID3D10ShaderResourceView, Offset uint32, Count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResources)), uintptr(Offset), uintptr(Count))
+func (self *ID3D10EffectShaderResourceVariable) SetResourceArray(ppResources []*ID3D10ShaderResourceView, Offset uint32) error {
+	var _ppResources **ID3D10ShaderResourceView
+	if len(ppResources) > 0 {
+		_ppResources = &ppResources[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Offset), uintptr(len(ppResources)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetResourceArray dispatches through ID3D10EffectShaderResourceVariable's vtable slot 28.
-func (self *ID3D10EffectShaderResourceVariable) GetResourceArray(ppResources **ID3D10ShaderResourceView, Offset uint32, Count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppResources)), uintptr(Offset), uintptr(Count))
+func (self *ID3D10EffectShaderResourceVariable) GetResourceArray(ppResources []*ID3D10ShaderResourceView, Offset uint32) error {
+	var _ppResources **ID3D10ShaderResourceView
+	if len(ppResources) > 0 {
+		_ppResources = &ppResources[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppResources)), uintptr(Offset), uintptr(len(ppResources)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1337,8 +1493,12 @@ func (self *ID3D10EffectStringVariable) GetString(ppString *foundation.PSTR) err
 }
 
 // GetStringArray dispatches through ID3D10EffectStringVariable's vtable slot 26.
-func (self *ID3D10EffectStringVariable) GetStringArray(ppStrings *foundation.PSTR, Offset uint32, Count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ppStrings)), uintptr(Offset), uintptr(Count))
+func (self *ID3D10EffectStringVariable) GetStringArray(ppStrings []foundation.PSTR, Offset uint32) error {
+	var _ppStrings *foundation.PSTR
+	if len(ppStrings) > 0 {
+		_ppStrings = &ppStrings[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ppStrings)), uintptr(Offset), uintptr(len(ppStrings)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1592,14 +1752,22 @@ func (self *ID3D10EffectVariable) AsSampler() *ID3D10EffectSamplerVariable {
 }
 
 // SetRawValue dispatches through ID3D10EffectVariable's vtable slot 23.
-func (self *ID3D10EffectVariable) SetRawValue(pData unsafe.Pointer, Offset uint32, ByteCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(ByteCount))
+func (self *ID3D10EffectVariable) SetRawValue(pData []byte, Offset uint32) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetRawValue dispatches through ID3D10EffectVariable's vtable slot 24.
-func (self *ID3D10EffectVariable) GetRawValue(pData unsafe.Pointer, Offset uint32, ByteCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Offset), uintptr(ByteCount))
+func (self *ID3D10EffectVariable) GetRawValue(pData []byte, Offset uint32) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(Offset), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 

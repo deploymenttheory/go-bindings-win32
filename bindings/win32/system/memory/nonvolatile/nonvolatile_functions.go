@@ -32,14 +32,22 @@ func RtlDrainNonVolatileFlush(NvToken unsafe.Pointer) uint32 {
 }
 
 // RtlFillNonVolatileMemory calls ntdll!RtlFillNonVolatileMemory.
-func RtlFillNonVolatileMemory(NvToken unsafe.Pointer, NvDestination unsafe.Pointer, Size uintptr, Value byte, Flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procRtlFillNonVolatileMemory.Addr(), uintptr(unsafe.Pointer(NvToken)), uintptr(unsafe.Pointer(NvDestination)), uintptr(Size), uintptr(Value), uintptr(Flags))
+func RtlFillNonVolatileMemory(NvToken unsafe.Pointer, NvDestination []byte, Value byte, Flags uint32) uint32 {
+	var _NvDestination *byte
+	if len(NvDestination) > 0 {
+		_NvDestination = &NvDestination[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRtlFillNonVolatileMemory.Addr(), uintptr(unsafe.Pointer(NvToken)), uintptr(unsafe.Pointer(_NvDestination)), uintptr(len(NvDestination)), uintptr(Value), uintptr(Flags))
 	return uint32(r1)
 }
 
 // RtlFlushNonVolatileMemory calls ntdll!RtlFlushNonVolatileMemory.
-func RtlFlushNonVolatileMemory(NvToken unsafe.Pointer, NvBuffer unsafe.Pointer, Size uintptr, Flags uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procRtlFlushNonVolatileMemory.Addr(), uintptr(unsafe.Pointer(NvToken)), uintptr(unsafe.Pointer(NvBuffer)), uintptr(Size), uintptr(Flags))
+func RtlFlushNonVolatileMemory(NvToken unsafe.Pointer, NvBuffer []byte, Flags uint32) uint32 {
+	var _NvBuffer *byte
+	if len(NvBuffer) > 0 {
+		_NvBuffer = &NvBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRtlFlushNonVolatileMemory.Addr(), uintptr(unsafe.Pointer(NvToken)), uintptr(unsafe.Pointer(_NvBuffer)), uintptr(len(NvBuffer)), uintptr(Flags))
 	return uint32(r1)
 }
 
@@ -60,8 +68,12 @@ func RtlFreeNonVolatileToken(NvToken unsafe.Pointer) uint32 {
 }
 
 // RtlGetNonVolatileToken calls ntdll!RtlGetNonVolatileToken.
-func RtlGetNonVolatileToken(NvBuffer unsafe.Pointer, Size uintptr, NvToken *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procRtlGetNonVolatileToken.Addr(), uintptr(unsafe.Pointer(NvBuffer)), uintptr(Size), uintptr(unsafe.Pointer(NvToken)))
+func RtlGetNonVolatileToken(NvBuffer []byte, NvToken *unsafe.Pointer) uint32 {
+	var _NvBuffer *byte
+	if len(NvBuffer) > 0 {
+		_NvBuffer = &NvBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRtlGetNonVolatileToken.Addr(), uintptr(unsafe.Pointer(_NvBuffer)), uintptr(len(NvBuffer)), uintptr(unsafe.Pointer(NvToken)))
 	return uint32(r1)
 }
 

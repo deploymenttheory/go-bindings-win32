@@ -152,8 +152,12 @@ func (self *IGestureRecognizer) Put_MaxStrokeCount(cStrokes int32) error {
 }
 
 // EnableGestures dispatches through IGestureRecognizer's vtable slot 7.
-func (self *IGestureRecognizer) EnableGestures(cGestures uint32, pGestures *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cGestures), uintptr(unsafe.Pointer(pGestures)))
+func (self *IGestureRecognizer) EnableGestures(pGestures []int32) error {
+	var _pGestures *int32
+	if len(pGestures) > 0 {
+		_pGestures = &pGestures[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(pGestures)), uintptr(unsafe.Pointer(_pGestures)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3788,8 +3792,12 @@ func (self *IRealTimeStylus) Putref_ChildRealTimeStylusPlugin(piRTS *IRealTimeSt
 }
 
 // AddCustomStylusDataToQueue dispatches through IRealTimeStylus's vtable slot 21.
-func (self *IRealTimeStylus) AddCustomStylusDataToQueue(sq StylusQueue, pGuidId *win32.GUID, cbData uint32, pbData *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(sq), uintptr(unsafe.Pointer(pGuidId)), uintptr(cbData), uintptr(unsafe.Pointer(pbData)))
+func (self *IRealTimeStylus) AddCustomStylusDataToQueue(sq StylusQueue, pGuidId *win32.GUID, pbData []byte) error {
+	var _pbData *byte
+	if len(pbData) > 0 {
+		_pbData = &pbData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(sq), uintptr(unsafe.Pointer(pGuidId)), uintptr(len(pbData)), uintptr(unsafe.Pointer(_pbData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3849,8 +3857,12 @@ func (self *IRealTimeStylus) GetStylusForId(sid uint32, ppiInkCursor **IInkCurso
 }
 
 // SetDesiredPacketDescription dispatches through IRealTimeStylus's vtable slot 31.
-func (self *IRealTimeStylus) SetDesiredPacketDescription(cProperties uint32, pPropertyGuids *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(cProperties), uintptr(unsafe.Pointer(pPropertyGuids)))
+func (self *IRealTimeStylus) SetDesiredPacketDescription(pPropertyGuids []win32.GUID) error {
+	var _pPropertyGuids *win32.GUID
+	if len(pPropertyGuids) > 0 {
+		_pPropertyGuids = &pPropertyGuids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(len(pPropertyGuids)), uintptr(unsafe.Pointer(_pPropertyGuids)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3949,8 +3961,12 @@ type IStrokeBuilder struct {
 var IID_IStrokeBuilder = win32.GUID{Data1: 0xa5fd4e2d, Data2: 0xc44b, Data3: 0x4092, Data4: [8]byte{0x91, 0x77, 0x26, 0x09, 0x05, 0xeb, 0x67, 0x2b}}
 
 // AppendPackets dispatches through IStrokeBuilder's vtable slot 5.
-func (self *IStrokeBuilder) AppendPackets(tcid uint32, sid uint32, cPktBuffLength uint32, pPackets *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(tcid), uintptr(sid), uintptr(cPktBuffLength), uintptr(unsafe.Pointer(pPackets)))
+func (self *IStrokeBuilder) AppendPackets(tcid uint32, sid uint32, pPackets []int32) error {
+	var _pPackets *int32
+	if len(pPackets) > 0 {
+		_pPackets = &pPackets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(tcid), uintptr(sid), uintptr(len(pPackets)), uintptr(unsafe.Pointer(_pPackets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3991,14 +4007,22 @@ type IStylusPlugin struct {
 var IID_IStylusPlugin = win32.GUID{Data1: 0xa81436d8, Data2: 0x4757, Data3: 0x4fd1, Data4: [8]byte{0xa1, 0x85, 0x13, 0x3f, 0x97, 0xc6, 0xc5, 0x45}}
 
 // RealTimeStylusEnabled dispatches through IStylusPlugin's vtable slot 3.
-func (self *IStylusPlugin) RealTimeStylusEnabled(piRtsSrc *IRealTimeStylus, cTcidCount uint32, pTcids *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(cTcidCount), uintptr(unsafe.Pointer(pTcids)))
+func (self *IStylusPlugin) RealTimeStylusEnabled(piRtsSrc *IRealTimeStylus, pTcids []uint32) error {
+	var _pTcids *uint32
+	if len(pTcids) > 0 {
+		_pTcids = &pTcids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(len(pTcids)), uintptr(unsafe.Pointer(_pTcids)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RealTimeStylusDisabled dispatches through IStylusPlugin's vtable slot 4.
-func (self *IStylusPlugin) RealTimeStylusDisabled(piRtsSrc *IRealTimeStylus, cTcidCount uint32, pTcids *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(cTcidCount), uintptr(unsafe.Pointer(pTcids)))
+func (self *IStylusPlugin) RealTimeStylusDisabled(piRtsSrc *IRealTimeStylus, pTcids []uint32) error {
+	var _pTcids *uint32
+	if len(pTcids) > 0 {
+		_pTcids = &pTcids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(len(pTcids)), uintptr(unsafe.Pointer(_pTcids)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4015,14 +4039,22 @@ func (self *IStylusPlugin) StylusOutOfRange(piRtsSrc *IRealTimeStylus, tcid uint
 }
 
 // StylusDown dispatches through IStylusPlugin's vtable slot 7.
-func (self *IStylusPlugin) StylusDown(piRtsSrc *IRealTimeStylus, pStylusInfo *StylusInfo, cPropCountPerPkt uint32, pPacket *int32, ppInOutPkt **int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pStylusInfo)), uintptr(cPropCountPerPkt), uintptr(unsafe.Pointer(pPacket)), uintptr(unsafe.Pointer(ppInOutPkt)))
+func (self *IStylusPlugin) StylusDown(piRtsSrc *IRealTimeStylus, pStylusInfo *StylusInfo, pPacket []int32, ppInOutPkt **int32) error {
+	var _pPacket *int32
+	if len(pPacket) > 0 {
+		_pPacket = &pPacket[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pStylusInfo)), uintptr(len(pPacket)), uintptr(unsafe.Pointer(_pPacket)), uintptr(unsafe.Pointer(ppInOutPkt)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // StylusUp dispatches through IStylusPlugin's vtable slot 8.
-func (self *IStylusPlugin) StylusUp(piRtsSrc *IRealTimeStylus, pStylusInfo *StylusInfo, cPropCountPerPkt uint32, pPacket *int32, ppInOutPkt **int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pStylusInfo)), uintptr(cPropCountPerPkt), uintptr(unsafe.Pointer(pPacket)), uintptr(unsafe.Pointer(ppInOutPkt)))
+func (self *IStylusPlugin) StylusUp(piRtsSrc *IRealTimeStylus, pStylusInfo *StylusInfo, pPacket []int32, ppInOutPkt **int32) error {
+	var _pPacket *int32
+	if len(pPacket) > 0 {
+		_pPacket = &pPacket[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pStylusInfo)), uintptr(len(pPacket)), uintptr(unsafe.Pointer(_pPacket)), uintptr(unsafe.Pointer(ppInOutPkt)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4039,20 +4071,32 @@ func (self *IStylusPlugin) StylusButtonUp(piRtsSrc *IRealTimeStylus, sid uint32,
 }
 
 // InAirPackets dispatches through IStylusPlugin's vtable slot 11.
-func (self *IStylusPlugin) InAirPackets(piRtsSrc *IRealTimeStylus, pStylusInfo *StylusInfo, cPktCount uint32, cPktBuffLength uint32, pPackets *int32, pcInOutPkts *uint32, ppInOutPkts **int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pStylusInfo)), uintptr(cPktCount), uintptr(cPktBuffLength), uintptr(unsafe.Pointer(pPackets)), uintptr(unsafe.Pointer(pcInOutPkts)), uintptr(unsafe.Pointer(ppInOutPkts)))
+func (self *IStylusPlugin) InAirPackets(piRtsSrc *IRealTimeStylus, pStylusInfo *StylusInfo, cPktCount uint32, pPackets []int32, pcInOutPkts *uint32, ppInOutPkts **int32) error {
+	var _pPackets *int32
+	if len(pPackets) > 0 {
+		_pPackets = &pPackets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pStylusInfo)), uintptr(cPktCount), uintptr(len(pPackets)), uintptr(unsafe.Pointer(_pPackets)), uintptr(unsafe.Pointer(pcInOutPkts)), uintptr(unsafe.Pointer(ppInOutPkts)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Packets dispatches through IStylusPlugin's vtable slot 12.
-func (self *IStylusPlugin) Packets(piRtsSrc *IRealTimeStylus, pStylusInfo *StylusInfo, cPktCount uint32, cPktBuffLength uint32, pPackets *int32, pcInOutPkts *uint32, ppInOutPkts **int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pStylusInfo)), uintptr(cPktCount), uintptr(cPktBuffLength), uintptr(unsafe.Pointer(pPackets)), uintptr(unsafe.Pointer(pcInOutPkts)), uintptr(unsafe.Pointer(ppInOutPkts)))
+func (self *IStylusPlugin) Packets(piRtsSrc *IRealTimeStylus, pStylusInfo *StylusInfo, cPktCount uint32, pPackets []int32, pcInOutPkts *uint32, ppInOutPkts **int32) error {
+	var _pPackets *int32
+	if len(pPackets) > 0 {
+		_pPackets = &pPackets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pStylusInfo)), uintptr(cPktCount), uintptr(len(pPackets)), uintptr(unsafe.Pointer(_pPackets)), uintptr(unsafe.Pointer(pcInOutPkts)), uintptr(unsafe.Pointer(ppInOutPkts)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CustomStylusDataAdded dispatches through IStylusPlugin's vtable slot 13.
-func (self *IStylusPlugin) CustomStylusDataAdded(piRtsSrc *IRealTimeStylus, pGuidId *win32.GUID, cbData uint32, pbData *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pGuidId)), uintptr(cbData), uintptr(unsafe.Pointer(pbData)))
+func (self *IStylusPlugin) CustomStylusDataAdded(piRtsSrc *IRealTimeStylus, pGuidId *win32.GUID, pbData []byte) error {
+	var _pbData *byte
+	if len(pbData) > 0 {
+		_pbData = &pbData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(piRtsSrc)), uintptr(unsafe.Pointer(pGuidId)), uintptr(len(pbData)), uintptr(unsafe.Pointer(_pbData)))
 	return win32.HRESULTError(int32(r1))
 }
 

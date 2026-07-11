@@ -167,8 +167,12 @@ type IEnumNetConnection struct {
 var IID_IEnumNetConnection = win32.GUID{Data1: 0xc08956a0, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetConnection's vtable slot 3.
-func (self *IEnumNetConnection) Next(celt uint32, rgelt **INetConnection, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumNetConnection) Next(rgelt []*INetConnection, pceltFetched *uint32) error {
+	var _rgelt **INetConnection
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -200,8 +204,12 @@ type IEnumNetSharingEveryConnection struct {
 var IID_IEnumNetSharingEveryConnection = win32.GUID{Data1: 0xc08956b8, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetSharingEveryConnection's vtable slot 3.
-func (self *IEnumNetSharingEveryConnection) Next(celt uint32, rgVar *systemvariant.VARIANT, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgVar)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumNetSharingEveryConnection) Next(rgVar []systemvariant.VARIANT, pceltFetched *uint32) error {
+	var _rgVar *systemvariant.VARIANT
+	if len(rgVar) > 0 {
+		_rgVar = &rgVar[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgVar)), uintptr(unsafe.Pointer(_rgVar)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -233,8 +241,12 @@ type IEnumNetSharingPortMapping struct {
 var IID_IEnumNetSharingPortMapping = win32.GUID{Data1: 0xc08956b0, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetSharingPortMapping's vtable slot 3.
-func (self *IEnumNetSharingPortMapping) Next(celt uint32, rgVar *systemvariant.VARIANT, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgVar)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumNetSharingPortMapping) Next(rgVar []systemvariant.VARIANT, pceltFetched *uint32) error {
+	var _rgVar *systemvariant.VARIANT
+	if len(rgVar) > 0 {
+		_rgVar = &rgVar[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgVar)), uintptr(unsafe.Pointer(_rgVar)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -266,8 +278,12 @@ type IEnumNetSharingPrivateConnection struct {
 var IID_IEnumNetSharingPrivateConnection = win32.GUID{Data1: 0xc08956b5, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetSharingPrivateConnection's vtable slot 3.
-func (self *IEnumNetSharingPrivateConnection) Next(celt uint32, rgVar *systemvariant.VARIANT, pCeltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgVar)), uintptr(unsafe.Pointer(pCeltFetched)))
+func (self *IEnumNetSharingPrivateConnection) Next(rgVar []systemvariant.VARIANT, pCeltFetched *uint32) error {
+	var _rgVar *systemvariant.VARIANT
+	if len(rgVar) > 0 {
+		_rgVar = &rgVar[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgVar)), uintptr(unsafe.Pointer(_rgVar)), uintptr(unsafe.Pointer(pCeltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -299,8 +315,12 @@ type IEnumNetSharingPublicConnection struct {
 var IID_IEnumNetSharingPublicConnection = win32.GUID{Data1: 0xc08956b4, Data2: 0x1cd3, Data3: 0x11d1, Data4: [8]byte{0xb1, 0xc5, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetSharingPublicConnection's vtable slot 3.
-func (self *IEnumNetSharingPublicConnection) Next(celt uint32, rgVar *systemvariant.VARIANT, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgVar)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumNetSharingPublicConnection) Next(rgVar []systemvariant.VARIANT, pceltFetched *uint32) error {
+	var _rgVar *systemvariant.VARIANT
+	if len(rgVar) > 0 {
+		_rgVar = &rgVar[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgVar)), uintptr(unsafe.Pointer(_rgVar)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 

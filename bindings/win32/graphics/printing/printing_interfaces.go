@@ -901,20 +901,32 @@ func (self *IPrintCoreUI2) WhyConstrained(poemuiobj *OEMUIOBJ, pszFeatureKeyword
 }
 
 // GetGlobalAttribute dispatches through IPrintCoreUI2's vtable slot 10.
-func (self *IPrintCoreUI2) GetGlobalAttribute(poemuiobj *OEMUIOBJ, pszAttribute foundation.PSTR, pdwDataType *uint32, pbData *byte, cbSize uint32, pcbNeeded *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(poemuiobj)), 0, uintptr(unsafe.Pointer(pszAttribute)), uintptr(unsafe.Pointer(pdwDataType)), uintptr(unsafe.Pointer(pbData)), uintptr(cbSize), uintptr(unsafe.Pointer(pcbNeeded)))
+func (self *IPrintCoreUI2) GetGlobalAttribute(poemuiobj *OEMUIOBJ, pszAttribute foundation.PSTR, pdwDataType *uint32, pbData []byte, pcbNeeded *uint32) error {
+	var _pbData *byte
+	if len(pbData) > 0 {
+		_pbData = &pbData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(poemuiobj)), 0, uintptr(unsafe.Pointer(pszAttribute)), uintptr(unsafe.Pointer(pdwDataType)), uintptr(unsafe.Pointer(_pbData)), uintptr(len(pbData)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetFeatureAttribute dispatches through IPrintCoreUI2's vtable slot 11.
-func (self *IPrintCoreUI2) GetFeatureAttribute(poemuiobj *OEMUIOBJ, pszFeatureKeyword foundation.PSTR, pszAttribute foundation.PSTR, pdwDataType *uint32, pbData *byte, cbSize uint32, pcbNeeded *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(poemuiobj)), 0, uintptr(unsafe.Pointer(pszFeatureKeyword)), uintptr(unsafe.Pointer(pszAttribute)), uintptr(unsafe.Pointer(pdwDataType)), uintptr(unsafe.Pointer(pbData)), uintptr(cbSize), uintptr(unsafe.Pointer(pcbNeeded)))
+func (self *IPrintCoreUI2) GetFeatureAttribute(poemuiobj *OEMUIOBJ, pszFeatureKeyword foundation.PSTR, pszAttribute foundation.PSTR, pdwDataType *uint32, pbData []byte, pcbNeeded *uint32) error {
+	var _pbData *byte
+	if len(pbData) > 0 {
+		_pbData = &pbData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(poemuiobj)), 0, uintptr(unsafe.Pointer(pszFeatureKeyword)), uintptr(unsafe.Pointer(pszAttribute)), uintptr(unsafe.Pointer(pdwDataType)), uintptr(unsafe.Pointer(_pbData)), uintptr(len(pbData)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetOptionAttribute dispatches through IPrintCoreUI2's vtable slot 12.
-func (self *IPrintCoreUI2) GetOptionAttribute(poemuiobj *OEMUIOBJ, pszFeatureKeyword foundation.PSTR, pszOptionKeyword foundation.PSTR, pszAttribute foundation.PSTR, pdwDataType *uint32, pbData *byte, cbSize uint32, pcbNeeded *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(poemuiobj)), 0, uintptr(unsafe.Pointer(pszFeatureKeyword)), uintptr(unsafe.Pointer(pszOptionKeyword)), uintptr(unsafe.Pointer(pszAttribute)), uintptr(unsafe.Pointer(pdwDataType)), uintptr(unsafe.Pointer(pbData)), uintptr(cbSize), uintptr(unsafe.Pointer(pcbNeeded)))
+func (self *IPrintCoreUI2) GetOptionAttribute(poemuiobj *OEMUIOBJ, pszFeatureKeyword foundation.PSTR, pszOptionKeyword foundation.PSTR, pszAttribute foundation.PSTR, pdwDataType *uint32, pbData []byte, pcbNeeded *uint32) error {
+	var _pbData *byte
+	if len(pbData) > 0 {
+		_pbData = &pbData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(poemuiobj)), 0, uintptr(unsafe.Pointer(pszFeatureKeyword)), uintptr(unsafe.Pointer(pszOptionKeyword)), uintptr(unsafe.Pointer(pszAttribute)), uintptr(unsafe.Pointer(pdwDataType)), uintptr(unsafe.Pointer(_pbData)), uintptr(len(pbData)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -931,8 +943,12 @@ func (self *IPrintCoreUI2) EnumOptions(poemuiobj *OEMUIOBJ, pszFeatureKeyword fo
 }
 
 // QuerySimulationSupport dispatches through IPrintCoreUI2's vtable slot 15.
-func (self *IPrintCoreUI2) QuerySimulationSupport(hPrinter foundation.HANDLE, dwLevel uint32, pCaps *byte, cbSize uint32, pcbNeeded *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hPrinter), uintptr(dwLevel), uintptr(unsafe.Pointer(pCaps)), uintptr(cbSize), uintptr(unsafe.Pointer(pcbNeeded)))
+func (self *IPrintCoreUI2) QuerySimulationSupport(hPrinter foundation.HANDLE, dwLevel uint32, pCaps []byte, pcbNeeded *uint32) error {
+	var _pCaps *byte
+	if len(pCaps) > 0 {
+		_pCaps = &pCaps[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(hPrinter), uintptr(dwLevel), uintptr(unsafe.Pointer(_pCaps)), uintptr(len(pCaps)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1030,8 +1046,12 @@ type IPrintOemCommon struct {
 var IID_IPrintOemCommon = win32.GUID{Data1: 0x7f42285e, Data2: 0x91d5, Data3: 0x11d1, Data4: [8]byte{0x88, 0x20, 0x00, 0xc0, 0x4f, 0xb9, 0x61, 0xec}}
 
 // GetInfo dispatches through IPrintOemCommon's vtable slot 3.
-func (self *IPrintOemCommon) GetInfo(dwMode uint32, pBuffer unsafe.Pointer, cbSize uint32, pcbNeeded *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwMode), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbSize), uintptr(unsafe.Pointer(pcbNeeded)))
+func (self *IPrintOemCommon) GetInfo(dwMode uint32, pBuffer []byte, pcbNeeded *uint32) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwMode), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1326,8 +1346,12 @@ func (self *IPrintReadStream) Seek(dlibMove int64, dwOrigin uint32, plibNewPosit
 }
 
 // ReadBytes dispatches through IPrintReadStream's vtable slot 4.
-func (self *IPrintReadStream) ReadBytes(pvBuffer unsafe.Pointer, cbRequested uint32, pcbRead *uint32, pbEndOfFile *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvBuffer)), uintptr(cbRequested), uintptr(unsafe.Pointer(pcbRead)), uintptr(unsafe.Pointer(pbEndOfFile)))
+func (self *IPrintReadStream) ReadBytes(pvBuffer []byte, pcbRead *uint32, pbEndOfFile *foundation.BOOL) error {
+	var _pvBuffer *byte
+	if len(pvBuffer) > 0 {
+		_pvBuffer = &pvBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pvBuffer)), uintptr(len(pvBuffer)), uintptr(unsafe.Pointer(pcbRead)), uintptr(unsafe.Pointer(pbEndOfFile)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1911,8 +1935,12 @@ type IPrintWriteStream struct {
 var IID_IPrintWriteStream = win32.GUID{Data1: 0x65bb7f1b, Data2: 0x371e, Data3: 0x4571, Data4: [8]byte{0x8a, 0xc7, 0x91, 0x2f, 0x51, 0x0c, 0x1a, 0x38}}
 
 // WriteBytes dispatches through IPrintWriteStream's vtable slot 3.
-func (self *IPrintWriteStream) WriteBytes(pvBuffer unsafe.Pointer, cbBuffer uint32, pcbWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pcbWritten)))
+func (self *IPrintWriteStream) WriteBytes(pvBuffer []byte, pcbWritten *uint32) error {
+	var _pvBuffer *byte
+	if len(pvBuffer) > 0 {
+		_pvBuffer = &pvBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pvBuffer)), uintptr(len(pvBuffer)), uintptr(unsafe.Pointer(pcbWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2194,8 +2222,12 @@ func (self *IPrinterPropertyBag) GetBytes(bstrName foundation.BSTR, pcbValue *ui
 }
 
 // SetBytes dispatches through IPrinterPropertyBag's vtable slot 14.
-func (self *IPrinterPropertyBag) SetBytes(bstrName foundation.BSTR, cbValue uint32, pValue *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(cbValue), uintptr(unsafe.Pointer(pValue)))
+func (self *IPrinterPropertyBag) SetBytes(bstrName foundation.BSTR, pValue []byte) error {
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bstrName)), uintptr(len(pValue)), uintptr(unsafe.Pointer(_pValue)))
 	return win32.HRESULTError(int32(r1))
 }
 

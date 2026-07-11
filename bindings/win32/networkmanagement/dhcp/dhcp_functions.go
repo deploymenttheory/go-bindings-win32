@@ -957,9 +957,13 @@ func DhcpGetVersion(ServerIpAddress string, MajorVersion *uint32, MinorVersion *
 // DhcpHlprAddV4PolicyCondition calls DHCPSAPI!DhcpHlprAddV4PolicyCondition.
 // https://learn.microsoft.com/windows/win32/api/dhcpsapi/nf-dhcpsapi-dhcphlpraddv4policycondition
 // Minimum OS: windowsserver2012.
-func DhcpHlprAddV4PolicyCondition(Policy *DHCP_POLICY, ParentExpr uint32, Type DHCP_POL_ATTR_TYPE, OptionID uint32, SubOptionID uint32, VendorName string, Operator DHCP_POL_COMPARATOR, Value *byte, ValueLength uint32, ConditionIndex *uint32) uint32 {
+func DhcpHlprAddV4PolicyCondition(Policy *DHCP_POLICY, ParentExpr uint32, Type DHCP_POL_ATTR_TYPE, OptionID uint32, SubOptionID uint32, VendorName string, Operator DHCP_POL_COMPARATOR, Value []byte, ConditionIndex *uint32) uint32 {
 	_VendorName := win32.UTF16Ptr(VendorName)
-	r1, _, _ := syscall.SyscallN(procDhcpHlprAddV4PolicyCondition.Addr(), uintptr(unsafe.Pointer(Policy)), uintptr(ParentExpr), uintptr(Type), uintptr(OptionID), uintptr(SubOptionID), uintptr(unsafe.Pointer(_VendorName)), uintptr(Operator), uintptr(unsafe.Pointer(Value)), uintptr(ValueLength), uintptr(unsafe.Pointer(ConditionIndex)))
+	var _Value *byte
+	if len(Value) > 0 {
+		_Value = &Value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDhcpHlprAddV4PolicyCondition.Addr(), uintptr(unsafe.Pointer(Policy)), uintptr(ParentExpr), uintptr(Type), uintptr(OptionID), uintptr(SubOptionID), uintptr(unsafe.Pointer(_VendorName)), uintptr(Operator), uintptr(unsafe.Pointer(_Value)), uintptr(len(Value)), uintptr(unsafe.Pointer(ConditionIndex)))
 	return uint32(r1)
 }
 

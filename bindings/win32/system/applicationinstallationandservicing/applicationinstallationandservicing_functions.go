@@ -389,8 +389,16 @@ func ApplyPatchToFileA(PatchFileName foundation.PSTR, OldFileName foundation.PST
 }
 
 // ApplyPatchToFileByBuffers calls mspatcha!ApplyPatchToFileByBuffers.
-func ApplyPatchToFileByBuffers(PatchFileMapped *byte, PatchFileSize uint32, OldFileMapped *byte, OldFileSize uint32, NewFileBuffer **byte, NewFileBufferSize uint32, NewFileActualSize *uint32, NewFileTime *foundation.FILETIME, ApplyOptionFlags uint32, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
-	r1, _, _ := syscall.SyscallN(procApplyPatchToFileByBuffers.Addr(), uintptr(unsafe.Pointer(PatchFileMapped)), uintptr(PatchFileSize), uintptr(unsafe.Pointer(OldFileMapped)), uintptr(OldFileSize), uintptr(unsafe.Pointer(NewFileBuffer)), uintptr(NewFileBufferSize), uintptr(unsafe.Pointer(NewFileActualSize)), uintptr(unsafe.Pointer(NewFileTime)), uintptr(ApplyOptionFlags), uintptr(ProgressCallback), uintptr(unsafe.Pointer(CallbackContext)))
+func ApplyPatchToFileByBuffers(PatchFileMapped []byte, OldFileMapped []byte, NewFileBuffer **byte, NewFileBufferSize uint32, NewFileActualSize *uint32, NewFileTime *foundation.FILETIME, ApplyOptionFlags uint32, ProgressCallback PPATCH_PROGRESS_CALLBACK, CallbackContext unsafe.Pointer) bool {
+	var _PatchFileMapped *byte
+	if len(PatchFileMapped) > 0 {
+		_PatchFileMapped = &PatchFileMapped[0]
+	}
+	var _OldFileMapped *byte
+	if len(OldFileMapped) > 0 {
+		_OldFileMapped = &OldFileMapped[0]
+	}
+	r1, _, _ := syscall.SyscallN(procApplyPatchToFileByBuffers.Addr(), uintptr(unsafe.Pointer(_PatchFileMapped)), uintptr(len(PatchFileMapped)), uintptr(unsafe.Pointer(_OldFileMapped)), uintptr(len(OldFileMapped)), uintptr(unsafe.Pointer(NewFileBuffer)), uintptr(NewFileBufferSize), uintptr(unsafe.Pointer(NewFileActualSize)), uintptr(unsafe.Pointer(NewFileTime)), uintptr(ApplyOptionFlags), uintptr(ProgressCallback), uintptr(unsafe.Pointer(CallbackContext)))
 	return r1 != 0
 }
 
@@ -641,7 +649,11 @@ func GetFilePatchSignatureA(FileName foundation.PSTR, OptionFlags uint32, Option
 }
 
 // GetFilePatchSignatureByBuffer calls mspatcha!GetFilePatchSignatureByBuffer.
-func GetFilePatchSignatureByBuffer(FileBufferWritable *byte, FileSize uint32, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeArray []PATCH_IGNORE_RANGE, RetainRangeArray []PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PSTR) bool {
+func GetFilePatchSignatureByBuffer(FileBufferWritable []byte, OptionFlags uint32, OptionData unsafe.Pointer, IgnoreRangeArray []PATCH_IGNORE_RANGE, RetainRangeArray []PATCH_RETAIN_RANGE, SignatureBufferSize uint32, SignatureBuffer foundation.PSTR) bool {
+	var _FileBufferWritable *byte
+	if len(FileBufferWritable) > 0 {
+		_FileBufferWritable = &FileBufferWritable[0]
+	}
 	var _IgnoreRangeArray *PATCH_IGNORE_RANGE
 	if len(IgnoreRangeArray) > 0 {
 		_IgnoreRangeArray = &IgnoreRangeArray[0]
@@ -650,7 +662,7 @@ func GetFilePatchSignatureByBuffer(FileBufferWritable *byte, FileSize uint32, Op
 	if len(RetainRangeArray) > 0 {
 		_RetainRangeArray = &RetainRangeArray[0]
 	}
-	r1, _, _ := syscall.SyscallN(procGetFilePatchSignatureByBuffer.Addr(), uintptr(unsafe.Pointer(FileBufferWritable)), uintptr(FileSize), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(len(IgnoreRangeArray)), uintptr(unsafe.Pointer(_IgnoreRangeArray)), uintptr(len(RetainRangeArray)), uintptr(unsafe.Pointer(_RetainRangeArray)), uintptr(SignatureBufferSize), uintptr(unsafe.Pointer(SignatureBuffer)))
+	r1, _, _ := syscall.SyscallN(procGetFilePatchSignatureByBuffer.Addr(), uintptr(unsafe.Pointer(_FileBufferWritable)), uintptr(len(FileBufferWritable)), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(len(IgnoreRangeArray)), uintptr(unsafe.Pointer(_IgnoreRangeArray)), uintptr(len(RetainRangeArray)), uintptr(unsafe.Pointer(_RetainRangeArray)), uintptr(SignatureBufferSize), uintptr(unsafe.Pointer(SignatureBuffer)))
 	return r1 != 0
 }
 
@@ -2988,7 +3000,11 @@ func MsiViewModify(hView MSIHANDLE, eModifyMode MSIMODIFY, hRecord MSIHANDLE) ui
 }
 
 // NormalizeFileForPatchSignature calls mspatcha!NormalizeFileForPatchSignature.
-func NormalizeFileForPatchSignature(FileBuffer unsafe.Pointer, FileSize uint32, OptionFlags uint32, OptionData *PATCH_OPTION_DATA, NewFileCoffBase uint32, NewFileCoffTime uint32, IgnoreRangeArray []PATCH_IGNORE_RANGE, RetainRangeArray []PATCH_RETAIN_RANGE) int32 {
+func NormalizeFileForPatchSignature(FileBuffer []byte, OptionFlags uint32, OptionData *PATCH_OPTION_DATA, NewFileCoffBase uint32, NewFileCoffTime uint32, IgnoreRangeArray []PATCH_IGNORE_RANGE, RetainRangeArray []PATCH_RETAIN_RANGE) int32 {
+	var _FileBuffer *byte
+	if len(FileBuffer) > 0 {
+		_FileBuffer = &FileBuffer[0]
+	}
 	var _IgnoreRangeArray *PATCH_IGNORE_RANGE
 	if len(IgnoreRangeArray) > 0 {
 		_IgnoreRangeArray = &IgnoreRangeArray[0]
@@ -2997,7 +3013,7 @@ func NormalizeFileForPatchSignature(FileBuffer unsafe.Pointer, FileSize uint32, 
 	if len(RetainRangeArray) > 0 {
 		_RetainRangeArray = &RetainRangeArray[0]
 	}
-	r1, _, _ := syscall.SyscallN(procNormalizeFileForPatchSignature.Addr(), uintptr(unsafe.Pointer(FileBuffer)), uintptr(FileSize), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(NewFileCoffBase), uintptr(NewFileCoffTime), uintptr(len(IgnoreRangeArray)), uintptr(unsafe.Pointer(_IgnoreRangeArray)), uintptr(len(RetainRangeArray)), uintptr(unsafe.Pointer(_RetainRangeArray)))
+	r1, _, _ := syscall.SyscallN(procNormalizeFileForPatchSignature.Addr(), uintptr(unsafe.Pointer(_FileBuffer)), uintptr(len(FileBuffer)), uintptr(OptionFlags), uintptr(unsafe.Pointer(OptionData)), uintptr(NewFileCoffBase), uintptr(NewFileCoffTime), uintptr(len(IgnoreRangeArray)), uintptr(unsafe.Pointer(_IgnoreRangeArray)), uintptr(len(RetainRangeArray)), uintptr(unsafe.Pointer(_RetainRangeArray)))
 	return int32(r1)
 }
 
@@ -3017,8 +3033,12 @@ func QueryActCtxSettingsW(dwFlags uint32, hActCtx foundation.HANDLE, settingsNam
 // QueryActCtxW calls KERNEL32!QueryActCtxW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-queryactctxw
 // Minimum OS: windows5.1.2600.
-func QueryActCtxW(dwFlags uint32, hActCtx foundation.HANDLE, pvSubInstance unsafe.Pointer, ulInfoClass uint32, pvBuffer unsafe.Pointer, cbBuffer uintptr, pcbWrittenOrRequired *uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procQueryActCtxW.Addr(), uintptr(dwFlags), uintptr(hActCtx), uintptr(unsafe.Pointer(pvSubInstance)), uintptr(ulInfoClass), uintptr(unsafe.Pointer(pvBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pcbWrittenOrRequired)))
+func QueryActCtxW(dwFlags uint32, hActCtx foundation.HANDLE, pvSubInstance unsafe.Pointer, ulInfoClass uint32, pvBuffer []byte, pcbWrittenOrRequired *uintptr) error {
+	var _pvBuffer *byte
+	if len(pvBuffer) > 0 {
+		_pvBuffer = &pvBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procQueryActCtxW.Addr(), uintptr(dwFlags), uintptr(hActCtx), uintptr(unsafe.Pointer(pvSubInstance)), uintptr(ulInfoClass), uintptr(unsafe.Pointer(_pvBuffer)), uintptr(len(pvBuffer)), uintptr(unsafe.Pointer(pcbWrittenOrRequired)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3082,8 +3102,16 @@ func TestApplyPatchToFileA(PatchFileName foundation.PSTR, OldFileName foundation
 }
 
 // TestApplyPatchToFileByBuffers calls mspatcha!TestApplyPatchToFileByBuffers.
-func TestApplyPatchToFileByBuffers(PatchFileBuffer *byte, PatchFileSize uint32, OldFileBuffer *byte, OldFileSize uint32, NewFileSize *uint32, ApplyOptionFlags uint32) bool {
-	r1, _, _ := syscall.SyscallN(procTestApplyPatchToFileByBuffers.Addr(), uintptr(unsafe.Pointer(PatchFileBuffer)), uintptr(PatchFileSize), uintptr(unsafe.Pointer(OldFileBuffer)), uintptr(OldFileSize), uintptr(unsafe.Pointer(NewFileSize)), uintptr(ApplyOptionFlags))
+func TestApplyPatchToFileByBuffers(PatchFileBuffer []byte, OldFileBuffer []byte, NewFileSize *uint32, ApplyOptionFlags uint32) bool {
+	var _PatchFileBuffer *byte
+	if len(PatchFileBuffer) > 0 {
+		_PatchFileBuffer = &PatchFileBuffer[0]
+	}
+	var _OldFileBuffer *byte
+	if len(OldFileBuffer) > 0 {
+		_OldFileBuffer = &OldFileBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTestApplyPatchToFileByBuffers.Addr(), uintptr(unsafe.Pointer(_PatchFileBuffer)), uintptr(len(PatchFileBuffer)), uintptr(unsafe.Pointer(_OldFileBuffer)), uintptr(len(OldFileBuffer)), uintptr(unsafe.Pointer(NewFileSize)), uintptr(ApplyOptionFlags))
 	return r1 != 0
 }
 

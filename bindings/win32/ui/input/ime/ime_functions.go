@@ -306,16 +306,24 @@ func ImmGetCompositionFontA(param0 HIMC, lplf *graphicsgdi.LOGFONTA) bool {
 // ImmGetCompositionString calls IMM32!ImmGetCompositionStringW.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetcompositionstringw
 // Minimum OS: windows5.1.2600.
-func ImmGetCompositionString(param0 HIMC, param1 IME_COMPOSITION_STRING, lpBuf unsafe.Pointer, dwBufLen uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procImmGetCompositionString.Addr(), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(lpBuf)), uintptr(dwBufLen))
+func ImmGetCompositionString(param0 HIMC, param1 IME_COMPOSITION_STRING, lpBuf []byte) int32 {
+	var _lpBuf *byte
+	if len(lpBuf) > 0 {
+		_lpBuf = &lpBuf[0]
+	}
+	r1, _, _ := syscall.SyscallN(procImmGetCompositionString.Addr(), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(_lpBuf)), uintptr(len(lpBuf)))
 	return int32(r1)
 }
 
 // ImmGetCompositionStringA calls IMM32!ImmGetCompositionStringA.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immgetcompositionstringa
 // Minimum OS: windows5.1.2600.
-func ImmGetCompositionStringA(param0 HIMC, param1 IME_COMPOSITION_STRING, lpBuf unsafe.Pointer, dwBufLen uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procImmGetCompositionStringA.Addr(), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(lpBuf)), uintptr(dwBufLen))
+func ImmGetCompositionStringA(param0 HIMC, param1 IME_COMPOSITION_STRING, lpBuf []byte) int32 {
+	var _lpBuf *byte
+	if len(lpBuf) > 0 {
+		_lpBuf = &lpBuf[0]
+	}
+	r1, _, _ := syscall.SyscallN(procImmGetCompositionStringA.Addr(), uintptr(param0), uintptr(param1), uintptr(unsafe.Pointer(_lpBuf)), uintptr(len(lpBuf)))
 	return int32(r1)
 }
 
@@ -649,16 +657,32 @@ func ImmSetCompositionFontA(param0 HIMC, lplf *graphicsgdi.LOGFONTA) bool {
 // ImmSetCompositionString calls IMM32!ImmSetCompositionStringW.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immsetcompositionstringw
 // Minimum OS: windows5.1.2600.
-func ImmSetCompositionString(param0 HIMC, dwIndex SET_COMPOSITION_STRING_TYPE, lpComp unsafe.Pointer, dwCompLen uint32, lpRead unsafe.Pointer, dwReadLen uint32) bool {
-	r1, _, _ := syscall.SyscallN(procImmSetCompositionString.Addr(), uintptr(param0), uintptr(dwIndex), uintptr(unsafe.Pointer(lpComp)), uintptr(dwCompLen), uintptr(unsafe.Pointer(lpRead)), uintptr(dwReadLen))
+func ImmSetCompositionString(param0 HIMC, dwIndex SET_COMPOSITION_STRING_TYPE, lpComp []byte, lpRead []byte) bool {
+	var _lpComp *byte
+	if len(lpComp) > 0 {
+		_lpComp = &lpComp[0]
+	}
+	var _lpRead *byte
+	if len(lpRead) > 0 {
+		_lpRead = &lpRead[0]
+	}
+	r1, _, _ := syscall.SyscallN(procImmSetCompositionString.Addr(), uintptr(param0), uintptr(dwIndex), uintptr(unsafe.Pointer(_lpComp)), uintptr(len(lpComp)), uintptr(unsafe.Pointer(_lpRead)), uintptr(len(lpRead)))
 	return r1 != 0
 }
 
 // ImmSetCompositionStringA calls IMM32!ImmSetCompositionStringA.
 // https://learn.microsoft.com/windows/win32/api/immdev/nf-immdev-immsetcompositionstringa
 // Minimum OS: windows5.1.2600.
-func ImmSetCompositionStringA(param0 HIMC, dwIndex SET_COMPOSITION_STRING_TYPE, lpComp unsafe.Pointer, dwCompLen uint32, lpRead unsafe.Pointer, dwReadLen uint32) bool {
-	r1, _, _ := syscall.SyscallN(procImmSetCompositionStringA.Addr(), uintptr(param0), uintptr(dwIndex), uintptr(unsafe.Pointer(lpComp)), uintptr(dwCompLen), uintptr(unsafe.Pointer(lpRead)), uintptr(dwReadLen))
+func ImmSetCompositionStringA(param0 HIMC, dwIndex SET_COMPOSITION_STRING_TYPE, lpComp []byte, lpRead []byte) bool {
+	var _lpComp *byte
+	if len(lpComp) > 0 {
+		_lpComp = &lpComp[0]
+	}
+	var _lpRead *byte
+	if len(lpRead) > 0 {
+		_lpRead = &lpRead[0]
+	}
+	r1, _, _ := syscall.SyscallN(procImmSetCompositionStringA.Addr(), uintptr(param0), uintptr(dwIndex), uintptr(unsafe.Pointer(_lpComp)), uintptr(len(lpComp)), uintptr(unsafe.Pointer(_lpRead)), uintptr(len(lpRead)))
 	return r1 != 0
 }
 

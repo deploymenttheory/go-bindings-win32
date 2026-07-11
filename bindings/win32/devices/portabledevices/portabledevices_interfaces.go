@@ -41,8 +41,12 @@ type IEnumPortableDeviceConnectors struct {
 var IID_IEnumPortableDeviceConnectors = win32.GUID{Data1: 0xbfdef549, Data2: 0x9247, Data3: 0x454f, Data4: [8]byte{0xbd, 0x82, 0x06, 0xfe, 0x80, 0x85, 0x3f, 0xaa}}
 
 // Next dispatches through IEnumPortableDeviceConnectors's vtable slot 3.
-func (self *IEnumPortableDeviceConnectors) Next(cRequested uint32, pConnectors **IPortableDeviceConnector, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cRequested), uintptr(unsafe.Pointer(pConnectors)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumPortableDeviceConnectors) Next(pConnectors []*IPortableDeviceConnector, pcFetched *uint32) error {
+	var _pConnectors **IPortableDeviceConnector
+	if len(pConnectors) > 0 {
+		_pConnectors = &pConnectors[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pConnectors)), uintptr(unsafe.Pointer(_pConnectors)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -74,8 +78,12 @@ type IEnumPortableDeviceObjectIDs struct {
 var IID_IEnumPortableDeviceObjectIDs = win32.GUID{Data1: 0x10ece955, Data2: 0xcf41, Data3: 0x4728, Data4: [8]byte{0xbf, 0xa0, 0x41, 0xee, 0xdf, 0x1b, 0xbf, 0x19}}
 
 // Next dispatches through IEnumPortableDeviceObjectIDs's vtable slot 3.
-func (self *IEnumPortableDeviceObjectIDs) Next(cObjects uint32, pObjIDs *foundation.PWSTR, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cObjects), uintptr(unsafe.Pointer(pObjIDs)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumPortableDeviceObjectIDs) Next(pObjIDs []foundation.PWSTR, pcFetched *uint32) error {
+	var _pObjIDs *foundation.PWSTR
+	if len(pObjIDs) > 0 {
+		_pObjIDs = &pObjIDs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pObjIDs)), uintptr(unsafe.Pointer(_pObjIDs)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -323,8 +331,12 @@ func (self *IPortableDeviceConnector) GetProperty(pPropertyKey *foundation.DEVPR
 }
 
 // SetProperty dispatches through IPortableDeviceConnector's vtable slot 7.
-func (self *IPortableDeviceConnector) SetProperty(pPropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, pData *byte, cbData uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(pData)), uintptr(cbData))
+func (self *IPortableDeviceConnector) SetProperty(pPropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1251,8 +1263,12 @@ func (self *IPortableDeviceValues) GetGuidValue(key *foundation.PROPERTYKEY, pVa
 }
 
 // SetBufferValue dispatches through IPortableDeviceValues's vtable slot 29.
-func (self *IPortableDeviceValues) SetBufferValue(key *foundation.PROPERTYKEY, pValue *byte, cbValue uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(pValue)), uintptr(cbValue))
+func (self *IPortableDeviceValues) SetBufferValue(key *foundation.PROPERTYKEY, pValue []byte) error {
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(key)), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1474,14 +1490,22 @@ type IWpdSerializer struct {
 var IID_IWpdSerializer = win32.GUID{Data1: 0xb32f4002, Data2: 0xbb27, Data3: 0x45ff, Data4: [8]byte{0xaf, 0x4f, 0x06, 0x63, 0x1c, 0x1e, 0x8d, 0xad}}
 
 // GetIPortableDeviceValuesFromBuffer dispatches through IWpdSerializer's vtable slot 3.
-func (self *IWpdSerializer) GetIPortableDeviceValuesFromBuffer(pBuffer *byte, dwInputBufferLength uint32, ppParams **IPortableDeviceValues) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwInputBufferLength), uintptr(unsafe.Pointer(ppParams)))
+func (self *IWpdSerializer) GetIPortableDeviceValuesFromBuffer(pBuffer []byte, ppParams **IPortableDeviceValues) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(ppParams)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteIPortableDeviceValuesToBuffer dispatches through IWpdSerializer's vtable slot 4.
-func (self *IWpdSerializer) WriteIPortableDeviceValuesToBuffer(dwOutputBufferLength uint32, pResults *IPortableDeviceValues, pBuffer *byte, pdwBytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwOutputBufferLength), uintptr(unsafe.Pointer(pResults)), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pdwBytesWritten)))
+func (self *IWpdSerializer) WriteIPortableDeviceValuesToBuffer(pResults *IPortableDeviceValues, pBuffer []byte, pdwBytesWritten *uint32) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(pResults)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(unsafe.Pointer(pdwBytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 

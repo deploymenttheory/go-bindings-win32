@@ -253,16 +253,24 @@ func WSDGenerateFaultEx(pCode *WSDXML_NAME, pSubCode *WSDXML_NAME, pReasons *WSD
 // WSDGetConfigurationOption calls wsdapi!WSDGetConfigurationOption.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdgetconfigurationoption
 // Minimum OS: windows6.0.6000.
-func WSDGetConfigurationOption(dwOption uint32, pVoid unsafe.Pointer, cbOutBuffer uint32) error {
-	r1, _, _ := syscall.SyscallN(procWSDGetConfigurationOption.Addr(), uintptr(dwOption), uintptr(unsafe.Pointer(pVoid)), uintptr(cbOutBuffer))
+func WSDGetConfigurationOption(dwOption uint32, pVoid []byte) error {
+	var _pVoid *byte
+	if len(pVoid) > 0 {
+		_pVoid = &pVoid[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWSDGetConfigurationOption.Addr(), uintptr(dwOption), uintptr(unsafe.Pointer(_pVoid)), uintptr(len(pVoid)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WSDSetConfigurationOption calls wsdapi!WSDSetConfigurationOption.
 // https://learn.microsoft.com/windows/win32/api/wsdutil/nf-wsdutil-wsdsetconfigurationoption
 // Minimum OS: windows6.0.6000.
-func WSDSetConfigurationOption(dwOption uint32, pVoid unsafe.Pointer, cbInBuffer uint32) error {
-	r1, _, _ := syscall.SyscallN(procWSDSetConfigurationOption.Addr(), uintptr(dwOption), uintptr(unsafe.Pointer(pVoid)), uintptr(cbInBuffer))
+func WSDSetConfigurationOption(dwOption uint32, pVoid []byte) error {
+	var _pVoid *byte
+	if len(pVoid) > 0 {
+		_pVoid = &pVoid[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWSDSetConfigurationOption.Addr(), uintptr(dwOption), uintptr(unsafe.Pointer(_pVoid)), uintptr(len(pVoid)))
 	return win32.HRESULTError(int32(r1))
 }
 

@@ -39,8 +39,12 @@ func CreateAudioVolumeMeter(ppApo **systemcom.IUnknown) error {
 
 // CreateFX calls XAudio2_8!CreateFX.
 // https://learn.microsoft.com/windows/win32/api/xapofx/nf-xapofx-createfx
-func CreateFX(clsid *win32.GUID, pEffect **systemcom.IUnknown, pInitDat unsafe.Pointer, InitDataByteSize uint32) error {
-	r1, _, _ := syscall.SyscallN(procCreateFX.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(pEffect)), uintptr(unsafe.Pointer(pInitDat)), uintptr(InitDataByteSize))
+func CreateFX(clsid *win32.GUID, pEffect **systemcom.IUnknown, pInitDat []byte) error {
+	var _pInitDat *byte
+	if len(pInitDat) > 0 {
+		_pInitDat = &pInitDat[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCreateFX.Addr(), uintptr(unsafe.Pointer(clsid)), uintptr(unsafe.Pointer(pEffect)), uintptr(unsafe.Pointer(_pInitDat)), uintptr(len(pInitDat)))
 	return win32.HRESULTError(int32(r1))
 }
 

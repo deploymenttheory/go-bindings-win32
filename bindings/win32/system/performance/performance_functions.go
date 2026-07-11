@@ -1134,9 +1134,13 @@ func PerfQueryCounterInfo(hQuery foundation.HANDLE, pCounters *PERF_COUNTER_IDEN
 // PerfQueryCounterSetRegistrationInfo calls ADVAPI32!PerfQueryCounterSetRegistrationInfo.
 // https://learn.microsoft.com/windows/win32/api/perflib/nf-perflib-perfquerycountersetregistrationinfo
 // Minimum OS: windows10.0.14393.
-func PerfQueryCounterSetRegistrationInfo(szMachine string, pCounterSetId *win32.GUID, requestCode PerfRegInfoType, requestLangId uint32, pbRegInfo *byte, cbRegInfo uint32, pcbRegInfoActual *uint32) uint32 {
+func PerfQueryCounterSetRegistrationInfo(szMachine string, pCounterSetId *win32.GUID, requestCode PerfRegInfoType, requestLangId uint32, pbRegInfo []byte, pcbRegInfoActual *uint32) uint32 {
 	_szMachine := win32.UTF16Ptr(szMachine)
-	r1, _, _ := syscall.SyscallN(procPerfQueryCounterSetRegistrationInfo.Addr(), uintptr(unsafe.Pointer(_szMachine)), uintptr(unsafe.Pointer(pCounterSetId)), uintptr(requestCode), uintptr(requestLangId), uintptr(unsafe.Pointer(pbRegInfo)), uintptr(cbRegInfo), uintptr(unsafe.Pointer(pcbRegInfoActual)))
+	var _pbRegInfo *byte
+	if len(pbRegInfo) > 0 {
+		_pbRegInfo = &pbRegInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPerfQueryCounterSetRegistrationInfo.Addr(), uintptr(unsafe.Pointer(_szMachine)), uintptr(unsafe.Pointer(pCounterSetId)), uintptr(requestCode), uintptr(requestLangId), uintptr(unsafe.Pointer(_pbRegInfo)), uintptr(len(pbRegInfo)), uintptr(unsafe.Pointer(pcbRegInfoActual)))
 	return uint32(r1)
 }
 

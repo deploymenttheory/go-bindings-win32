@@ -31,8 +31,12 @@ func (self *IEnumNetworkConnections) Get__NewEnum() (*systemole.IEnumVARIANT, er
 }
 
 // Next dispatches through IEnumNetworkConnections's vtable slot 8.
-func (self *IEnumNetworkConnections) Next(celt uint32, rgelt **INetworkConnection, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumNetworkConnections) Next(rgelt []*INetworkConnection, pceltFetched *uint32) error {
+	var _rgelt **INetworkConnection
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -72,8 +76,12 @@ func (self *IEnumNetworks) Get__NewEnum() (*systemole.IEnumVARIANT, error) {
 }
 
 // Next dispatches through IEnumNetworks's vtable slot 8.
-func (self *IEnumNetworks) Next(celt uint32, rgelt **INetwork, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumNetworks) Next(rgelt []*INetwork, pceltFetched *uint32) error {
+	var _rgelt **INetwork
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -342,8 +350,12 @@ func (self *INetworkCostManager) GetDataPlanStatus(pDataPlanStatus *NLM_DATAPLAN
 }
 
 // SetDestinationAddresses dispatches through INetworkCostManager's vtable slot 5.
-func (self *INetworkCostManager) SetDestinationAddresses(length uint32, pDestIPAddrList *NLM_SOCKADDR, bAppend foundation.VARIANT_BOOL) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(length), uintptr(unsafe.Pointer(pDestIPAddrList)), uintptr(bAppend))
+func (self *INetworkCostManager) SetDestinationAddresses(pDestIPAddrList []NLM_SOCKADDR, bAppend foundation.VARIANT_BOOL) error {
+	var _pDestIPAddrList *NLM_SOCKADDR
+	if len(pDestIPAddrList) > 0 {
+		_pDestIPAddrList = &pDestIPAddrList[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(pDestIPAddrList)), uintptr(unsafe.Pointer(_pDestIPAddrList)), uintptr(bAppend))
 	return win32.HRESULTError(int32(r1))
 }
 

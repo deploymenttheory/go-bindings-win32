@@ -338,8 +338,16 @@ func (self *IDirectSoundBuffer) Stop() error {
 }
 
 // Unlock dispatches through IDirectSoundBuffer's vtable slot 19.
-func (self *IDirectSoundBuffer) Unlock(pvAudioPtr1 unsafe.Pointer, dwAudioBytes1 uint32, pvAudioPtr2 unsafe.Pointer, dwAudioBytes2 uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvAudioPtr1)), uintptr(dwAudioBytes1), uintptr(unsafe.Pointer(pvAudioPtr2)), uintptr(dwAudioBytes2))
+func (self *IDirectSoundBuffer) Unlock(pvAudioPtr1 []byte, pvAudioPtr2 []byte) error {
+	var _pvAudioPtr1 *byte
+	if len(pvAudioPtr1) > 0 {
+		_pvAudioPtr1 = &pvAudioPtr1[0]
+	}
+	var _pvAudioPtr2 *byte
+	if len(pvAudioPtr2) > 0 {
+		_pvAudioPtr2 = &pvAudioPtr2[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pvAudioPtr1)), uintptr(len(pvAudioPtr1)), uintptr(unsafe.Pointer(_pvAudioPtr2)), uintptr(len(pvAudioPtr2)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -364,8 +372,12 @@ func (self *IDirectSoundBuffer8) SetFX(dwEffectsCount uint32, pDSFXDesc *DSEFFEC
 }
 
 // AcquireResources dispatches through IDirectSoundBuffer8's vtable slot 22.
-func (self *IDirectSoundBuffer8) AcquireResources(dwFlags uint32, dwEffectsCount uint32, pdwResultCodes *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(dwEffectsCount), uintptr(unsafe.Pointer(pdwResultCodes)))
+func (self *IDirectSoundBuffer8) AcquireResources(dwFlags uint32, pdwResultCodes []uint32) error {
+	var _pdwResultCodes *uint32
+	if len(pdwResultCodes) > 0 {
+		_pdwResultCodes = &pdwResultCodes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(len(pdwResultCodes)), uintptr(unsafe.Pointer(_pdwResultCodes)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -458,8 +470,16 @@ func (self *IDirectSoundCaptureBuffer) Stop() error {
 }
 
 // Unlock dispatches through IDirectSoundCaptureBuffer's vtable slot 11.
-func (self *IDirectSoundCaptureBuffer) Unlock(pvAudioPtr1 unsafe.Pointer, dwAudioBytes1 uint32, pvAudioPtr2 unsafe.Pointer, dwAudioBytes2 uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvAudioPtr1)), uintptr(dwAudioBytes1), uintptr(unsafe.Pointer(pvAudioPtr2)), uintptr(dwAudioBytes2))
+func (self *IDirectSoundCaptureBuffer) Unlock(pvAudioPtr1 []byte, pvAudioPtr2 []byte) error {
+	var _pvAudioPtr1 *byte
+	if len(pvAudioPtr1) > 0 {
+		_pvAudioPtr1 = &pvAudioPtr1[0]
+	}
+	var _pvAudioPtr2 *byte
+	if len(pvAudioPtr2) > 0 {
+		_pvAudioPtr2 = &pvAudioPtr2[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pvAudioPtr1)), uintptr(len(pvAudioPtr1)), uintptr(unsafe.Pointer(_pvAudioPtr2)), uintptr(len(pvAudioPtr2)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -478,8 +498,12 @@ func (self *IDirectSoundCaptureBuffer8) GetObjectInPath(rguidObject *win32.GUID,
 }
 
 // GetFXStatus dispatches through IDirectSoundCaptureBuffer8's vtable slot 13.
-func (self *IDirectSoundCaptureBuffer8) GetFXStatus(dwEffectsCount uint32, pdwFXStatus *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwEffectsCount), uintptr(unsafe.Pointer(pdwFXStatus)))
+func (self *IDirectSoundCaptureBuffer8) GetFXStatus(pdwFXStatus []uint32) error {
+	var _pdwFXStatus *uint32
+	if len(pdwFXStatus) > 0 {
+		_pdwFXStatus = &pdwFXStatus[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(len(pdwFXStatus)), uintptr(unsafe.Pointer(_pdwFXStatus)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -768,7 +792,11 @@ type IDirectSoundNotify struct {
 var IID_IDirectSoundNotify = win32.GUID{Data1: 0xb0210783, Data2: 0x89cd, Data3: 0x11d0, Data4: [8]byte{0xaf, 0x08, 0x00, 0xa0, 0xc9, 0x25, 0xcd, 0x16}}
 
 // SetNotificationPositions dispatches through IDirectSoundNotify's vtable slot 3.
-func (self *IDirectSoundNotify) SetNotificationPositions(dwPositionNotifies uint32, pcPositionNotifies *DSBPOSITIONNOTIFY) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwPositionNotifies), uintptr(unsafe.Pointer(pcPositionNotifies)))
+func (self *IDirectSoundNotify) SetNotificationPositions(pcPositionNotifies []DSBPOSITIONNOTIFY) error {
+	var _pcPositionNotifies *DSBPOSITIONNOTIFY
+	if len(pcPositionNotifies) > 0 {
+		_pcPositionNotifies = &pcPositionNotifies[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pcPositionNotifies)), uintptr(unsafe.Pointer(_pcPositionNotifies)))
 	return win32.HRESULTError(int32(r1))
 }

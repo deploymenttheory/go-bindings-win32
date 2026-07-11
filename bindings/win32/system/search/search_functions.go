@@ -490,20 +490,32 @@ func SQLCloseEnumServers(hEnumHandle foundation.HANDLE) int16 {
 
 // SQLColAttribute calls ODBC32!SQLColAttribute.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlcolattribute-function
-func SQLColAttribute(StatementHandle unsafe.Pointer, ColumnNumber uint16, FieldIdentifier uint16, CharacterAttribute unsafe.Pointer, BufferLength int16, StringLength *int16, NumericAttribute *int64) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLColAttribute.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(ColumnNumber), uintptr(FieldIdentifier), uintptr(unsafe.Pointer(CharacterAttribute)), uintptr(BufferLength), uintptr(unsafe.Pointer(StringLength)), uintptr(unsafe.Pointer(NumericAttribute)))
+func SQLColAttribute(StatementHandle unsafe.Pointer, ColumnNumber uint16, FieldIdentifier uint16, CharacterAttribute []byte, StringLength *int16, NumericAttribute *int64) int16 {
+	var _CharacterAttribute *byte
+	if len(CharacterAttribute) > 0 {
+		_CharacterAttribute = &CharacterAttribute[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLColAttribute.Addr(), uintptr(unsafe.Pointer(StatementHandle)), uintptr(ColumnNumber), uintptr(FieldIdentifier), uintptr(unsafe.Pointer(_CharacterAttribute)), uintptr(len(CharacterAttribute)), uintptr(unsafe.Pointer(StringLength)), uintptr(unsafe.Pointer(NumericAttribute)))
 	return int16(r1)
 }
 
 // SQLColAttributeA calls ODBC32!SQLColAttributeA.
-func SQLColAttributeA(hstmt unsafe.Pointer, iCol int16, iField int16, pCharAttr unsafe.Pointer, cbCharAttrMax int16, pcbCharAttr *int16, pNumAttr *int64) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLColAttributeA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(iCol), uintptr(iField), uintptr(unsafe.Pointer(pCharAttr)), uintptr(cbCharAttrMax), uintptr(unsafe.Pointer(pcbCharAttr)), uintptr(unsafe.Pointer(pNumAttr)))
+func SQLColAttributeA(hstmt unsafe.Pointer, iCol int16, iField int16, pCharAttr []byte, pcbCharAttr *int16, pNumAttr *int64) int16 {
+	var _pCharAttr *byte
+	if len(pCharAttr) > 0 {
+		_pCharAttr = &pCharAttr[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLColAttributeA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(iCol), uintptr(iField), uintptr(unsafe.Pointer(_pCharAttr)), uintptr(len(pCharAttr)), uintptr(unsafe.Pointer(pcbCharAttr)), uintptr(unsafe.Pointer(pNumAttr)))
 	return int16(r1)
 }
 
 // SQLColAttributeW calls ODBC32!SQLColAttributeW.
-func SQLColAttributeW(hstmt unsafe.Pointer, iCol uint16, iField uint16, pCharAttr unsafe.Pointer, cbDescMax int16, pcbCharAttr *int16, pNumAttr *int64) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLColAttributeW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(iCol), uintptr(iField), uintptr(unsafe.Pointer(pCharAttr)), uintptr(cbDescMax), uintptr(unsafe.Pointer(pcbCharAttr)), uintptr(unsafe.Pointer(pNumAttr)))
+func SQLColAttributeW(hstmt unsafe.Pointer, iCol uint16, iField uint16, pCharAttr []byte, pcbCharAttr *int16, pNumAttr *int64) int16 {
+	var _pCharAttr *byte
+	if len(pCharAttr) > 0 {
+		_pCharAttr = &pCharAttr[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLColAttributeW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(iCol), uintptr(iField), uintptr(unsafe.Pointer(_pCharAttr)), uintptr(len(pCharAttr)), uintptr(unsafe.Pointer(pcbCharAttr)), uintptr(unsafe.Pointer(pNumAttr)))
 	return int16(r1)
 }
 
@@ -515,14 +527,22 @@ func SQLColAttributes(hstmt unsafe.Pointer, icol uint16, fDescType uint16, rgbDe
 }
 
 // SQLColAttributesA calls ODBC32!SQLColAttributesA.
-func SQLColAttributesA(hstmt unsafe.Pointer, icol uint16, fDescType uint16, rgbDesc unsafe.Pointer, cbDescMax int16, pcbDesc *int16, pfDesc *int64) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLColAttributesA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(icol), uintptr(fDescType), uintptr(unsafe.Pointer(rgbDesc)), uintptr(cbDescMax), uintptr(unsafe.Pointer(pcbDesc)), uintptr(unsafe.Pointer(pfDesc)))
+func SQLColAttributesA(hstmt unsafe.Pointer, icol uint16, fDescType uint16, rgbDesc []byte, pcbDesc *int16, pfDesc *int64) int16 {
+	var _rgbDesc *byte
+	if len(rgbDesc) > 0 {
+		_rgbDesc = &rgbDesc[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLColAttributesA.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(icol), uintptr(fDescType), uintptr(unsafe.Pointer(_rgbDesc)), uintptr(len(rgbDesc)), uintptr(unsafe.Pointer(pcbDesc)), uintptr(unsafe.Pointer(pfDesc)))
 	return int16(r1)
 }
 
 // SQLColAttributesW calls ODBC32!SQLColAttributesW.
-func SQLColAttributesW(hstmt unsafe.Pointer, icol uint16, fDescType uint16, rgbDesc unsafe.Pointer, cbDescMax int16, pcbDesc *int16, pfDesc *int64) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLColAttributesW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(icol), uintptr(fDescType), uintptr(unsafe.Pointer(rgbDesc)), uintptr(cbDescMax), uintptr(unsafe.Pointer(pcbDesc)), uintptr(unsafe.Pointer(pfDesc)))
+func SQLColAttributesW(hstmt unsafe.Pointer, icol uint16, fDescType uint16, rgbDesc []byte, pcbDesc *int16, pfDesc *int64) int16 {
+	var _rgbDesc *byte
+	if len(rgbDesc) > 0 {
+		_rgbDesc = &rgbDesc[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLColAttributesW.Addr(), uintptr(unsafe.Pointer(hstmt)), uintptr(icol), uintptr(fDescType), uintptr(unsafe.Pointer(_rgbDesc)), uintptr(len(rgbDesc)), uintptr(unsafe.Pointer(pcbDesc)), uintptr(unsafe.Pointer(pfDesc)))
 	return int16(r1)
 }
 
@@ -1311,20 +1331,32 @@ func SQLGetFunctions(ConnectionHandle unsafe.Pointer, FunctionId uint16, Support
 
 // SQLGetInfo calls ODBC32!SQLGetInfo.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlgetinfo-function
-func SQLGetInfo(ConnectionHandle unsafe.Pointer, InfoType uint16, InfoValue unsafe.Pointer, BufferLength int16, StringLengthPtr *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLGetInfo.Addr(), uintptr(unsafe.Pointer(ConnectionHandle)), uintptr(InfoType), uintptr(unsafe.Pointer(InfoValue)), uintptr(BufferLength), uintptr(unsafe.Pointer(StringLengthPtr)))
+func SQLGetInfo(ConnectionHandle unsafe.Pointer, InfoType uint16, InfoValue []byte, StringLengthPtr *int16) int16 {
+	var _InfoValue *byte
+	if len(InfoValue) > 0 {
+		_InfoValue = &InfoValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLGetInfo.Addr(), uintptr(unsafe.Pointer(ConnectionHandle)), uintptr(InfoType), uintptr(unsafe.Pointer(_InfoValue)), uintptr(len(InfoValue)), uintptr(unsafe.Pointer(StringLengthPtr)))
 	return int16(r1)
 }
 
 // SQLGetInfoA calls ODBC32!SQLGetInfoA.
-func SQLGetInfoA(hdbc unsafe.Pointer, fInfoType uint16, rgbInfoValue unsafe.Pointer, cbInfoValueMax int16, pcbInfoValue *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLGetInfoA.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(fInfoType), uintptr(unsafe.Pointer(rgbInfoValue)), uintptr(cbInfoValueMax), uintptr(unsafe.Pointer(pcbInfoValue)))
+func SQLGetInfoA(hdbc unsafe.Pointer, fInfoType uint16, rgbInfoValue []byte, pcbInfoValue *int16) int16 {
+	var _rgbInfoValue *byte
+	if len(rgbInfoValue) > 0 {
+		_rgbInfoValue = &rgbInfoValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLGetInfoA.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(fInfoType), uintptr(unsafe.Pointer(_rgbInfoValue)), uintptr(len(rgbInfoValue)), uintptr(unsafe.Pointer(pcbInfoValue)))
 	return int16(r1)
 }
 
 // SQLGetInfoW calls ODBC32!SQLGetInfoW.
-func SQLGetInfoW(hdbc unsafe.Pointer, fInfoType uint16, rgbInfoValue unsafe.Pointer, cbInfoValueMax int16, pcbInfoValue *int16) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLGetInfoW.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(fInfoType), uintptr(unsafe.Pointer(rgbInfoValue)), uintptr(cbInfoValueMax), uintptr(unsafe.Pointer(pcbInfoValue)))
+func SQLGetInfoW(hdbc unsafe.Pointer, fInfoType uint16, rgbInfoValue []byte, pcbInfoValue *int16) int16 {
+	var _rgbInfoValue *byte
+	if len(rgbInfoValue) > 0 {
+		_rgbInfoValue = &rgbInfoValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLGetInfoW.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(fInfoType), uintptr(unsafe.Pointer(_rgbInfoValue)), uintptr(len(rgbInfoValue)), uintptr(unsafe.Pointer(pcbInfoValue)))
 	return int16(r1)
 }
 
@@ -1708,20 +1740,32 @@ func SQLRowCount(StatementHandle unsafe.Pointer, RowCount *int64) int16 {
 
 // SQLSetConnectAttr calls ODBC32!SQLSetConnectAttr.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlsetconnectattr-function
-func SQLSetConnectAttr(ConnectionHandle unsafe.Pointer, Attribute int32, Value unsafe.Pointer, StringLength int32) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLSetConnectAttr.Addr(), uintptr(unsafe.Pointer(ConnectionHandle)), uintptr(Attribute), uintptr(unsafe.Pointer(Value)), uintptr(StringLength))
+func SQLSetConnectAttr(ConnectionHandle unsafe.Pointer, Attribute int32, Value []byte) int16 {
+	var _Value *byte
+	if len(Value) > 0 {
+		_Value = &Value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLSetConnectAttr.Addr(), uintptr(unsafe.Pointer(ConnectionHandle)), uintptr(Attribute), uintptr(unsafe.Pointer(_Value)), uintptr(len(Value)))
 	return int16(r1)
 }
 
 // SQLSetConnectAttrA calls ODBC32!SQLSetConnectAttrA.
-func SQLSetConnectAttrA(hdbc unsafe.Pointer, fAttribute int32, rgbValue unsafe.Pointer, cbValue int32) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLSetConnectAttrA.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(fAttribute), uintptr(unsafe.Pointer(rgbValue)), uintptr(cbValue))
+func SQLSetConnectAttrA(hdbc unsafe.Pointer, fAttribute int32, rgbValue []byte) int16 {
+	var _rgbValue *byte
+	if len(rgbValue) > 0 {
+		_rgbValue = &rgbValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLSetConnectAttrA.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(fAttribute), uintptr(unsafe.Pointer(_rgbValue)), uintptr(len(rgbValue)))
 	return int16(r1)
 }
 
 // SQLSetConnectAttrW calls ODBC32!SQLSetConnectAttrW.
-func SQLSetConnectAttrW(hdbc unsafe.Pointer, fAttribute int32, rgbValue unsafe.Pointer, cbValue int32) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLSetConnectAttrW.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(fAttribute), uintptr(unsafe.Pointer(rgbValue)), uintptr(cbValue))
+func SQLSetConnectAttrW(hdbc unsafe.Pointer, fAttribute int32, rgbValue []byte) int16 {
+	var _rgbValue *byte
+	if len(rgbValue) > 0 {
+		_rgbValue = &rgbValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLSetConnectAttrW.Addr(), uintptr(unsafe.Pointer(hdbc)), uintptr(fAttribute), uintptr(unsafe.Pointer(_rgbValue)), uintptr(len(rgbValue)))
 	return int16(r1)
 }
 
@@ -1790,15 +1834,23 @@ func SQLSetDescFieldW(DescriptorHandle unsafe.Pointer, RecNumber int16, FieldIde
 
 // SQLSetDescRec calls ODBC32!SQLSetDescRec.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlsetdescrec-function
-func SQLSetDescRec(DescriptorHandle unsafe.Pointer, RecNumber int16, Type int16, SubType int16, Length int64, Precision int16, Scale int16, Data unsafe.Pointer, StringLength *int64, Indicator *int64) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLSetDescRec.Addr(), uintptr(unsafe.Pointer(DescriptorHandle)), uintptr(RecNumber), uintptr(Type), uintptr(SubType), uintptr(Length), uintptr(Precision), uintptr(Scale), uintptr(unsafe.Pointer(Data)), uintptr(unsafe.Pointer(StringLength)), uintptr(unsafe.Pointer(Indicator)))
+func SQLSetDescRec(DescriptorHandle unsafe.Pointer, RecNumber int16, Type int16, SubType int16, Precision int16, Scale int16, Data []byte, StringLength *int64, Indicator *int64) int16 {
+	var _Data *byte
+	if len(Data) > 0 {
+		_Data = &Data[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLSetDescRec.Addr(), uintptr(unsafe.Pointer(DescriptorHandle)), uintptr(RecNumber), uintptr(Type), uintptr(SubType), uintptr(len(Data)), uintptr(Precision), uintptr(Scale), uintptr(unsafe.Pointer(_Data)), uintptr(unsafe.Pointer(StringLength)), uintptr(unsafe.Pointer(Indicator)))
 	return int16(r1)
 }
 
 // SQLSetEnvAttr calls ODBC32!SQLSetEnvAttr.
 // https://learn.microsoft.com/sql/odbc/reference/syntax/sqlsetenvattr-function
-func SQLSetEnvAttr(EnvironmentHandle unsafe.Pointer, Attribute int32, Value unsafe.Pointer, StringLength int32) int16 {
-	r1, _, _ := syscall.SyscallN(procSQLSetEnvAttr.Addr(), uintptr(unsafe.Pointer(EnvironmentHandle)), uintptr(Attribute), uintptr(unsafe.Pointer(Value)), uintptr(StringLength))
+func SQLSetEnvAttr(EnvironmentHandle unsafe.Pointer, Attribute int32, Value []byte) int16 {
+	var _Value *byte
+	if len(Value) > 0 {
+		_Value = &Value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSQLSetEnvAttr.Addr(), uintptr(unsafe.Pointer(EnvironmentHandle)), uintptr(Attribute), uintptr(unsafe.Pointer(_Value)), uintptr(len(Value)))
 	return int16(r1)
 }
 

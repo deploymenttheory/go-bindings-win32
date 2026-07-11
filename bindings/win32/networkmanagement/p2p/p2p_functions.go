@@ -800,24 +800,36 @@ func PeerCreatePeerName(pwzIdentity string, pwzClassifier string, ppwzPeerName *
 // PeerDistClientAddContentInformation calls PeerDist!PeerDistClientAddContentInformation.
 // https://learn.microsoft.com/windows/win32/api/peerdist/nf-peerdist-peerdistclientaddcontentinformation
 // Minimum OS: windows6.1.
-func PeerDistClientAddContentInformation(hPeerDist uintptr, hContentHandle uintptr, cbNumberOfBytes uint32, pBuffer *byte, lpOverlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procPeerDistClientAddContentInformation.Addr(), uintptr(hPeerDist), uintptr(hContentHandle), uintptr(cbNumberOfBytes), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
+func PeerDistClientAddContentInformation(hPeerDist uintptr, hContentHandle uintptr, pBuffer []byte, lpOverlapped *systemio.OVERLAPPED) uint32 {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerDistClientAddContentInformation.Addr(), uintptr(hPeerDist), uintptr(hContentHandle), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
 	return uint32(r1)
 }
 
 // PeerDistClientAddData calls PeerDist!PeerDistClientAddData.
 // https://learn.microsoft.com/windows/win32/api/peerdist/nf-peerdist-peerdistclientadddata
 // Minimum OS: windows6.1.
-func PeerDistClientAddData(hPeerDist uintptr, hContentHandle uintptr, cbNumberOfBytes uint32, pBuffer *byte, lpOverlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procPeerDistClientAddData.Addr(), uintptr(hPeerDist), uintptr(hContentHandle), uintptr(cbNumberOfBytes), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
+func PeerDistClientAddData(hPeerDist uintptr, hContentHandle uintptr, pBuffer []byte, lpOverlapped *systemio.OVERLAPPED) uint32 {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerDistClientAddData.Addr(), uintptr(hPeerDist), uintptr(hContentHandle), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
 	return uint32(r1)
 }
 
 // PeerDistClientBlockRead calls PeerDist!PeerDistClientBlockRead.
 // https://learn.microsoft.com/windows/win32/api/peerdist/nf-peerdist-peerdistclientblockread
 // Minimum OS: windows6.1.
-func PeerDistClientBlockRead(hPeerDist uintptr, hContentHandle uintptr, cbMaxNumberOfBytes uint32, pBuffer *byte, dwTimeoutInMilliseconds uint32, lpOverlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procPeerDistClientBlockRead.Addr(), uintptr(hPeerDist), uintptr(hContentHandle), uintptr(cbMaxNumberOfBytes), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwTimeoutInMilliseconds), uintptr(unsafe.Pointer(lpOverlapped)))
+func PeerDistClientBlockRead(hPeerDist uintptr, hContentHandle uintptr, pBuffer []byte, dwTimeoutInMilliseconds uint32, lpOverlapped *systemio.OVERLAPPED) uint32 {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerDistClientBlockRead.Addr(), uintptr(hPeerDist), uintptr(hContentHandle), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(dwTimeoutInMilliseconds), uintptr(unsafe.Pointer(lpOverlapped)))
 	return uint32(r1)
 }
 
@@ -859,8 +871,12 @@ func PeerDistClientFlushContent(hPeerDist uintptr, pContentTag *PEERDIST_CONTENT
 // PeerDistClientGetInformationByHandle calls PeerDist!PeerDistClientGetInformationByHandle.
 // https://learn.microsoft.com/windows/win32/api/peerdist/nf-peerdist-peerdistclientgetinformationbyhandle
 // Minimum OS: windows8.0.
-func PeerDistClientGetInformationByHandle(hPeerDist uintptr, hContentHandle uintptr, PeerDistClientInfoClass PEERDIST_CLIENT_INFO_BY_HANDLE_CLASS, dwBufferSize uint32, lpInformation unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procPeerDistClientGetInformationByHandle.Addr(), uintptr(hPeerDist), uintptr(hContentHandle), uintptr(PeerDistClientInfoClass), uintptr(dwBufferSize), uintptr(unsafe.Pointer(lpInformation)))
+func PeerDistClientGetInformationByHandle(hPeerDist uintptr, hContentHandle uintptr, PeerDistClientInfoClass PEERDIST_CLIENT_INFO_BY_HANDLE_CLASS, lpInformation []byte) uint32 {
+	var _lpInformation *byte
+	if len(lpInformation) > 0 {
+		_lpInformation = &lpInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerDistClientGetInformationByHandle.Addr(), uintptr(hPeerDist), uintptr(hContentHandle), uintptr(PeerDistClientInfoClass), uintptr(len(lpInformation)), uintptr(unsafe.Pointer(_lpInformation)))
 	return uint32(r1)
 }
 
@@ -875,8 +891,12 @@ func PeerDistClientOpenContent(hPeerDist uintptr, pContentTag *PEERDIST_CONTENT_
 // PeerDistClientStreamRead calls PeerDist!PeerDistClientStreamRead.
 // https://learn.microsoft.com/windows/win32/api/peerdist/nf-peerdist-peerdistclientstreamread
 // Minimum OS: windows6.1.
-func PeerDistClientStreamRead(hPeerDist uintptr, hContentHandle uintptr, cbMaxNumberOfBytes uint32, pBuffer *byte, dwTimeoutInMilliseconds uint32, lpOverlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procPeerDistClientStreamRead.Addr(), uintptr(hPeerDist), uintptr(hContentHandle), uintptr(cbMaxNumberOfBytes), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwTimeoutInMilliseconds), uintptr(unsafe.Pointer(lpOverlapped)))
+func PeerDistClientStreamRead(hPeerDist uintptr, hContentHandle uintptr, pBuffer []byte, dwTimeoutInMilliseconds uint32, lpOverlapped *systemio.OVERLAPPED) uint32 {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerDistClientStreamRead.Addr(), uintptr(hPeerDist), uintptr(hContentHandle), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(dwTimeoutInMilliseconds), uintptr(unsafe.Pointer(lpOverlapped)))
 	return uint32(r1)
 }
 
@@ -924,8 +944,12 @@ func PeerDistRegisterForStatusChangeNotificationEx(hPeerDist uintptr, hCompletio
 // PeerDistServerCancelAsyncOperation calls PeerDist!PeerDistServerCancelAsyncOperation.
 // https://learn.microsoft.com/windows/win32/api/peerdist/nf-peerdist-peerdistservercancelasyncoperation
 // Minimum OS: windows6.1.
-func PeerDistServerCancelAsyncOperation(hPeerDist uintptr, cbContentIdentifier uint32, pContentIdentifier *byte, pOverlapped *systemio.OVERLAPPED) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procPeerDistServerCancelAsyncOperation.Addr(), uintptr(hPeerDist), uintptr(cbContentIdentifier), uintptr(unsafe.Pointer(pContentIdentifier)), uintptr(unsafe.Pointer(pOverlapped)))
+func PeerDistServerCancelAsyncOperation(hPeerDist uintptr, pContentIdentifier []byte, pOverlapped *systemio.OVERLAPPED) (uint32, error) {
+	var _pContentIdentifier *byte
+	if len(pContentIdentifier) > 0 {
+		_pContentIdentifier = &pContentIdentifier[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procPeerDistServerCancelAsyncOperation.Addr(), uintptr(hPeerDist), uintptr(len(pContentIdentifier)), uintptr(unsafe.Pointer(_pContentIdentifier)), uintptr(unsafe.Pointer(pOverlapped)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -951,24 +975,36 @@ func PeerDistServerCloseStreamHandle(hPeerDist uintptr, hStream uintptr) uint32 
 // PeerDistServerOpenContentInformation calls PeerDist!PeerDistServerOpenContentInformation.
 // https://learn.microsoft.com/windows/win32/api/peerdist/nf-peerdist-peerdistserveropencontentinformation
 // Minimum OS: windows6.1.
-func PeerDistServerOpenContentInformation(hPeerDist uintptr, cbContentIdentifier uint32, pContentIdentifier *byte, ullContentOffset uint64, cbContentLength uint64, hCompletionPort foundation.HANDLE, ulCompletionKey uintptr, phContentInfo *uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procPeerDistServerOpenContentInformation.Addr(), uintptr(hPeerDist), uintptr(cbContentIdentifier), uintptr(unsafe.Pointer(pContentIdentifier)), uintptr(ullContentOffset), uintptr(cbContentLength), uintptr(hCompletionPort), uintptr(ulCompletionKey), uintptr(unsafe.Pointer(phContentInfo)))
+func PeerDistServerOpenContentInformation(hPeerDist uintptr, pContentIdentifier []byte, ullContentOffset uint64, cbContentLength uint64, hCompletionPort foundation.HANDLE, ulCompletionKey uintptr, phContentInfo *uintptr) uint32 {
+	var _pContentIdentifier *byte
+	if len(pContentIdentifier) > 0 {
+		_pContentIdentifier = &pContentIdentifier[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerDistServerOpenContentInformation.Addr(), uintptr(hPeerDist), uintptr(len(pContentIdentifier)), uintptr(unsafe.Pointer(_pContentIdentifier)), uintptr(ullContentOffset), uintptr(cbContentLength), uintptr(hCompletionPort), uintptr(ulCompletionKey), uintptr(unsafe.Pointer(phContentInfo)))
 	return uint32(r1)
 }
 
 // PeerDistServerOpenContentInformationEx calls PeerDist!PeerDistServerOpenContentInformationEx.
 // https://learn.microsoft.com/windows/win32/api/peerdist/nf-peerdist-peerdistserveropencontentinformationex
 // Minimum OS: windows8.0.
-func PeerDistServerOpenContentInformationEx(hPeerDist uintptr, cbContentIdentifier uint32, pContentIdentifier *byte, ullContentOffset uint64, cbContentLength uint64, pRetrievalOptions *PEERDIST_RETRIEVAL_OPTIONS, hCompletionPort foundation.HANDLE, ulCompletionKey uintptr, phContentInfo *uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procPeerDistServerOpenContentInformationEx.Addr(), uintptr(hPeerDist), uintptr(cbContentIdentifier), uintptr(unsafe.Pointer(pContentIdentifier)), uintptr(ullContentOffset), uintptr(cbContentLength), uintptr(unsafe.Pointer(pRetrievalOptions)), uintptr(hCompletionPort), uintptr(ulCompletionKey), uintptr(unsafe.Pointer(phContentInfo)))
+func PeerDistServerOpenContentInformationEx(hPeerDist uintptr, pContentIdentifier []byte, ullContentOffset uint64, cbContentLength uint64, pRetrievalOptions *PEERDIST_RETRIEVAL_OPTIONS, hCompletionPort foundation.HANDLE, ulCompletionKey uintptr, phContentInfo *uintptr) uint32 {
+	var _pContentIdentifier *byte
+	if len(pContentIdentifier) > 0 {
+		_pContentIdentifier = &pContentIdentifier[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerDistServerOpenContentInformationEx.Addr(), uintptr(hPeerDist), uintptr(len(pContentIdentifier)), uintptr(unsafe.Pointer(_pContentIdentifier)), uintptr(ullContentOffset), uintptr(cbContentLength), uintptr(unsafe.Pointer(pRetrievalOptions)), uintptr(hCompletionPort), uintptr(ulCompletionKey), uintptr(unsafe.Pointer(phContentInfo)))
 	return uint32(r1)
 }
 
 // PeerDistServerPublishAddToStream calls PeerDist!PeerDistServerPublishAddToStream.
 // https://learn.microsoft.com/windows/win32/api/peerdist/nf-peerdist-peerdistserverpublishaddtostream
 // Minimum OS: windows6.1.
-func PeerDistServerPublishAddToStream(hPeerDist uintptr, hStream uintptr, cbNumberOfBytes uint32, pBuffer *byte, lpOverlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procPeerDistServerPublishAddToStream.Addr(), uintptr(hPeerDist), uintptr(hStream), uintptr(cbNumberOfBytes), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
+func PeerDistServerPublishAddToStream(hPeerDist uintptr, hStream uintptr, pBuffer []byte, lpOverlapped *systemio.OVERLAPPED) uint32 {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerDistServerPublishAddToStream.Addr(), uintptr(hPeerDist), uintptr(hStream), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
 	return uint32(r1)
 }
 
@@ -983,24 +1019,36 @@ func PeerDistServerPublishCompleteStream(hPeerDist uintptr, hStream uintptr, lpO
 // PeerDistServerPublishStream calls PeerDist!PeerDistServerPublishStream.
 // https://learn.microsoft.com/windows/win32/api/peerdist/nf-peerdist-peerdistserverpublishstream
 // Minimum OS: windows6.1.
-func PeerDistServerPublishStream(hPeerDist uintptr, cbContentIdentifier uint32, pContentIdentifier *byte, cbContentLength uint64, pPublishOptions *PEERDIST_PUBLICATION_OPTIONS, hCompletionPort foundation.HANDLE, ulCompletionKey uintptr, phStream *uintptr) uint32 {
-	r1, _, _ := syscall.SyscallN(procPeerDistServerPublishStream.Addr(), uintptr(hPeerDist), uintptr(cbContentIdentifier), uintptr(unsafe.Pointer(pContentIdentifier)), uintptr(cbContentLength), uintptr(unsafe.Pointer(pPublishOptions)), uintptr(hCompletionPort), uintptr(ulCompletionKey), uintptr(unsafe.Pointer(phStream)))
+func PeerDistServerPublishStream(hPeerDist uintptr, pContentIdentifier []byte, cbContentLength uint64, pPublishOptions *PEERDIST_PUBLICATION_OPTIONS, hCompletionPort foundation.HANDLE, ulCompletionKey uintptr, phStream *uintptr) uint32 {
+	var _pContentIdentifier *byte
+	if len(pContentIdentifier) > 0 {
+		_pContentIdentifier = &pContentIdentifier[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerDistServerPublishStream.Addr(), uintptr(hPeerDist), uintptr(len(pContentIdentifier)), uintptr(unsafe.Pointer(_pContentIdentifier)), uintptr(cbContentLength), uintptr(unsafe.Pointer(pPublishOptions)), uintptr(hCompletionPort), uintptr(ulCompletionKey), uintptr(unsafe.Pointer(phStream)))
 	return uint32(r1)
 }
 
 // PeerDistServerRetrieveContentInformation calls PeerDist!PeerDistServerRetrieveContentInformation.
 // https://learn.microsoft.com/windows/win32/api/peerdist/nf-peerdist-peerdistserverretrievecontentinformation
 // Minimum OS: windows6.1.
-func PeerDistServerRetrieveContentInformation(hPeerDist uintptr, hContentInfo uintptr, cbMaxNumberOfBytes uint32, pBuffer *byte, lpOverlapped *systemio.OVERLAPPED) uint32 {
-	r1, _, _ := syscall.SyscallN(procPeerDistServerRetrieveContentInformation.Addr(), uintptr(hPeerDist), uintptr(hContentInfo), uintptr(cbMaxNumberOfBytes), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
+func PeerDistServerRetrieveContentInformation(hPeerDist uintptr, hContentInfo uintptr, pBuffer []byte, lpOverlapped *systemio.OVERLAPPED) uint32 {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerDistServerRetrieveContentInformation.Addr(), uintptr(hPeerDist), uintptr(hContentInfo), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
 	return uint32(r1)
 }
 
 // PeerDistServerUnpublish calls PeerDist!PeerDistServerUnpublish.
 // https://learn.microsoft.com/windows/win32/api/peerdist/nf-peerdist-peerdistserverunpublish
 // Minimum OS: windows6.1.
-func PeerDistServerUnpublish(hPeerDist uintptr, cbContentIdentifier uint32, pContentIdentifier *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procPeerDistServerUnpublish.Addr(), uintptr(hPeerDist), uintptr(cbContentIdentifier), uintptr(unsafe.Pointer(pContentIdentifier)))
+func PeerDistServerUnpublish(hPeerDist uintptr, pContentIdentifier []byte) uint32 {
+	var _pContentIdentifier *byte
+	if len(pContentIdentifier) > 0 {
+		_pContentIdentifier = &pContentIdentifier[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerDistServerUnpublish.Addr(), uintptr(hPeerDist), uintptr(len(pContentIdentifier)), uintptr(unsafe.Pointer(_pContentIdentifier)))
 	return uint32(r1)
 }
 
@@ -1320,8 +1368,12 @@ func PeerGraphSearchRecords(hGraph unsafe.Pointer, pwzCriteria string, phPeerEnu
 // PeerGraphSendData calls P2PGRAPH!PeerGraphSendData.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergraphsenddata
 // Minimum OS: windows5.1.2600.
-func PeerGraphSendData(hGraph unsafe.Pointer, ullConnectionId uint64, pType *win32.GUID, cbData uint32, pvData unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(procPeerGraphSendData.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(ullConnectionId), uintptr(unsafe.Pointer(pType)), uintptr(cbData), uintptr(unsafe.Pointer(pvData)))
+func PeerGraphSendData(hGraph unsafe.Pointer, ullConnectionId uint64, pType *win32.GUID, pvData []byte) error {
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerGraphSendData.Addr(), uintptr(unsafe.Pointer(hGraph)), uintptr(ullConnectionId), uintptr(unsafe.Pointer(pType)), uintptr(len(pvData)), uintptr(unsafe.Pointer(_pvData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1688,8 +1740,12 @@ func PeerGroupSearchRecords(hGroup unsafe.Pointer, pwzCriteria string, phPeerEnu
 // PeerGroupSendData calls P2P!PeerGroupSendData.
 // https://learn.microsoft.com/windows/win32/api/p2p/nf-p2p-peergroupsenddata
 // Minimum OS: windows5.1.2600.
-func PeerGroupSendData(hGroup unsafe.Pointer, ullConnectionId uint64, pType *win32.GUID, cbData uint32, pvData unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(procPeerGroupSendData.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(ullConnectionId), uintptr(unsafe.Pointer(pType)), uintptr(cbData), uintptr(unsafe.Pointer(pvData)))
+func PeerGroupSendData(hGroup unsafe.Pointer, ullConnectionId uint64, pType *win32.GUID, pvData []byte) error {
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPeerGroupSendData.Addr(), uintptr(unsafe.Pointer(hGroup)), uintptr(ullConnectionId), uintptr(unsafe.Pointer(pType)), uintptr(len(pvData)), uintptr(unsafe.Pointer(_pvData)))
 	return win32.HRESULTError(int32(r1))
 }
 

@@ -198,8 +198,12 @@ func ClosePseudoConsole(hPC HPCON) {
 }
 
 // ConsoleControl calls USER32!ConsoleControl.
-func ConsoleControl(Command CONSOLECONTROL, ConsoleInformation unsafe.Pointer, ConsoleInformationLength uint32) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procConsoleControl.Addr(), uintptr(Command), uintptr(unsafe.Pointer(ConsoleInformation)), uintptr(ConsoleInformationLength))
+func ConsoleControl(Command CONSOLECONTROL, ConsoleInformation []byte) foundation.NTSTATUS {
+	var _ConsoleInformation *byte
+	if len(ConsoleInformation) > 0 {
+		_ConsoleInformation = &ConsoleInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procConsoleControl.Addr(), uintptr(Command), uintptr(unsafe.Pointer(_ConsoleInformation)), uintptr(len(ConsoleInformation)))
 	return foundation.NTSTATUS(r1)
 }
 

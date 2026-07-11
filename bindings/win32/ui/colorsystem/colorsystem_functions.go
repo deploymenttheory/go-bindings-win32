@@ -912,12 +912,16 @@ func WcsAssociateColorProfileWithDevice(scope WCS_PROFILE_MANAGEMENT_SCOPE, pPro
 
 // WcsCheckColors calls mscms!WcsCheckColors.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcscheckcolors
-func WcsCheckColors(hColorTransform uintptr, nInputChannels uint32, cdtInput COLORDATATYPE, cbInput uint32, pInputData unsafe.Pointer, paResult []byte) bool {
+func WcsCheckColors(hColorTransform uintptr, nInputChannels uint32, cdtInput COLORDATATYPE, pInputData []byte, paResult []byte) bool {
+	var _pInputData *byte
+	if len(pInputData) > 0 {
+		_pInputData = &pInputData[0]
+	}
 	var _paResult *byte
 	if len(paResult) > 0 {
 		_paResult = &paResult[0]
 	}
-	r1, _, _ := syscall.SyscallN(procWcsCheckColors.Addr(), uintptr(hColorTransform), uintptr(len(paResult)), uintptr(nInputChannels), uintptr(cdtInput), uintptr(cbInput), uintptr(unsafe.Pointer(pInputData)), uintptr(unsafe.Pointer(_paResult)))
+	r1, _, _ := syscall.SyscallN(procWcsCheckColors.Addr(), uintptr(hColorTransform), uintptr(len(paResult)), uintptr(nInputChannels), uintptr(cdtInput), uintptr(len(pInputData)), uintptr(unsafe.Pointer(_pInputData)), uintptr(unsafe.Pointer(_paResult)))
 	return r1 != 0
 }
 
@@ -939,8 +943,12 @@ func WcsDisassociateColorProfileFromDevice(scope WCS_PROFILE_MANAGEMENT_SCOPE, p
 
 // WcsEnumColorProfiles calls mscms!WcsEnumColorProfiles.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcsenumcolorprofiles
-func WcsEnumColorProfiles(scope WCS_PROFILE_MANAGEMENT_SCOPE, pEnumRecord *ENUMTYPEW, pBuffer *byte, dwSize uint32, pnProfiles *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procWcsEnumColorProfiles.Addr(), uintptr(scope), uintptr(unsafe.Pointer(pEnumRecord)), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwSize), uintptr(unsafe.Pointer(pnProfiles)))
+func WcsEnumColorProfiles(scope WCS_PROFILE_MANAGEMENT_SCOPE, pEnumRecord *ENUMTYPEW, pBuffer []byte, pnProfiles *uint32) bool {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWcsEnumColorProfiles.Addr(), uintptr(scope), uintptr(unsafe.Pointer(pEnumRecord)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(pnProfiles)))
 	return r1 != 0
 }
 
@@ -1038,7 +1046,15 @@ func WcsSetUsePerUserProfiles(pDeviceName string, dwDeviceClass uint32, usePerUs
 
 // WcsTranslateColors calls mscms!WcsTranslateColors.
 // https://learn.microsoft.com/windows/win32/api/icm/nf-icm-wcstranslatecolors
-func WcsTranslateColors(hColorTransform uintptr, nColors uint32, nInputChannels uint32, cdtInput COLORDATATYPE, cbInput uint32, pInputData unsafe.Pointer, nOutputChannels uint32, cdtOutput COLORDATATYPE, cbOutput uint32, pOutputData unsafe.Pointer) bool {
-	r1, _, _ := syscall.SyscallN(procWcsTranslateColors.Addr(), uintptr(hColorTransform), uintptr(nColors), uintptr(nInputChannels), uintptr(cdtInput), uintptr(cbInput), uintptr(unsafe.Pointer(pInputData)), uintptr(nOutputChannels), uintptr(cdtOutput), uintptr(cbOutput), uintptr(unsafe.Pointer(pOutputData)))
+func WcsTranslateColors(hColorTransform uintptr, nColors uint32, nInputChannels uint32, cdtInput COLORDATATYPE, pInputData []byte, nOutputChannels uint32, cdtOutput COLORDATATYPE, pOutputData []byte) bool {
+	var _pInputData *byte
+	if len(pInputData) > 0 {
+		_pInputData = &pInputData[0]
+	}
+	var _pOutputData *byte
+	if len(pOutputData) > 0 {
+		_pOutputData = &pOutputData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWcsTranslateColors.Addr(), uintptr(hColorTransform), uintptr(nColors), uintptr(nInputChannels), uintptr(cdtInput), uintptr(len(pInputData)), uintptr(unsafe.Pointer(_pInputData)), uintptr(nOutputChannels), uintptr(cdtOutput), uintptr(len(pOutputData)), uintptr(unsafe.Pointer(_pOutputData)))
 	return r1 != 0
 }

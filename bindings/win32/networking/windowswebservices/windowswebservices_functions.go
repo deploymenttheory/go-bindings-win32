@@ -271,8 +271,12 @@ func WsAcceptChannel(listener *WS_LISTENER, channel *WS_CHANNEL, asyncContext *W
 // WsAddCustomHeader calls webservices!WsAddCustomHeader.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsaddcustomheader
 // Minimum OS: windows6.1.
-func WsAddCustomHeader(message *WS_MESSAGE, headerDescription *WS_ELEMENT_DESCRIPTION, writeOption WS_WRITE_OPTION, value unsafe.Pointer, valueSize uint32, headerAttributes uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsAddCustomHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(headerDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(headerAttributes), uintptr(unsafe.Pointer(error_)))
+func WsAddCustomHeader(message *WS_MESSAGE, headerDescription *WS_ELEMENT_DESCRIPTION, writeOption WS_WRITE_OPTION, value []byte, headerAttributes uint32, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsAddCustomHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(headerDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(headerAttributes), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -287,8 +291,12 @@ func WsAddErrorString(error_ *WS_ERROR, string_ *WS_STRING) error {
 // WsAddMappedHeader calls webservices!WsAddMappedHeader.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsaddmappedheader
 // Minimum OS: windows6.1.
-func WsAddMappedHeader(message *WS_MESSAGE, headerName *WS_XML_STRING, valueType WS_TYPE, writeOption WS_WRITE_OPTION, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsAddMappedHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(headerName)), uintptr(valueType), uintptr(writeOption), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsAddMappedHeader(message *WS_MESSAGE, headerName *WS_XML_STRING, valueType WS_TYPE, writeOption WS_WRITE_OPTION, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsAddMappedHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(headerName)), uintptr(valueType), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -507,12 +515,16 @@ func WsCreateReader(properties []WS_XML_READER_PROPERTY, reader **WS_XML_READER,
 // WsCreateServiceEndpointFromTemplate calls webservices!WsCreateServiceEndpointFromTemplate.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreateserviceendpointfromtemplate
 // Minimum OS: windows6.1.
-func WsCreateServiceEndpointFromTemplate(channelType WS_CHANNEL_TYPE, properties []WS_SERVICE_ENDPOINT_PROPERTY, addressUrl *WS_STRING, contract *WS_SERVICE_CONTRACT, authorizationCallback WS_SERVICE_SECURITY_CALLBACK, heap *WS_HEAP, templateType WS_BINDING_TEMPLATE_TYPE, templateValue unsafe.Pointer, templateSize uint32, templateDescription unsafe.Pointer, templateDescriptionSize uint32, serviceEndpoint **WS_SERVICE_ENDPOINT, error_ *WS_ERROR) error {
+func WsCreateServiceEndpointFromTemplate(channelType WS_CHANNEL_TYPE, properties []WS_SERVICE_ENDPOINT_PROPERTY, addressUrl *WS_STRING, contract *WS_SERVICE_CONTRACT, authorizationCallback WS_SERVICE_SECURITY_CALLBACK, heap *WS_HEAP, templateType WS_BINDING_TEMPLATE_TYPE, templateValue []byte, templateDescription unsafe.Pointer, templateDescriptionSize uint32, serviceEndpoint **WS_SERVICE_ENDPOINT, error_ *WS_ERROR) error {
 	var _properties *WS_SERVICE_ENDPOINT_PROPERTY
 	if len(properties) > 0 {
 		_properties = &properties[0]
 	}
-	r1, _, _ := syscall.SyscallN(procWsCreateServiceEndpointFromTemplate.Addr(), uintptr(channelType), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(addressUrl)), uintptr(unsafe.Pointer(contract)), uintptr(authorizationCallback), uintptr(unsafe.Pointer(heap)), uintptr(templateType), uintptr(unsafe.Pointer(templateValue)), uintptr(templateSize), uintptr(unsafe.Pointer(templateDescription)), uintptr(templateDescriptionSize), uintptr(unsafe.Pointer(serviceEndpoint)), uintptr(unsafe.Pointer(error_)))
+	var _templateValue *byte
+	if len(templateValue) > 0 {
+		_templateValue = &templateValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsCreateServiceEndpointFromTemplate.Addr(), uintptr(channelType), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(addressUrl)), uintptr(unsafe.Pointer(contract)), uintptr(authorizationCallback), uintptr(unsafe.Pointer(heap)), uintptr(templateType), uintptr(unsafe.Pointer(_templateValue)), uintptr(len(templateValue)), uintptr(unsafe.Pointer(templateDescription)), uintptr(templateDescriptionSize), uintptr(unsafe.Pointer(serviceEndpoint)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -551,12 +563,16 @@ func WsCreateServiceProxy(channelType WS_CHANNEL_TYPE, channelBinding WS_CHANNEL
 // WsCreateServiceProxyFromTemplate calls webservices!WsCreateServiceProxyFromTemplate.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wscreateserviceproxyfromtemplate
 // Minimum OS: windows6.1.
-func WsCreateServiceProxyFromTemplate(channelType WS_CHANNEL_TYPE, properties []WS_PROXY_PROPERTY, templateType WS_BINDING_TEMPLATE_TYPE, templateValue unsafe.Pointer, templateSize uint32, templateDescription unsafe.Pointer, templateDescriptionSize uint32, serviceProxy **WS_SERVICE_PROXY, error_ *WS_ERROR) error {
+func WsCreateServiceProxyFromTemplate(channelType WS_CHANNEL_TYPE, properties []WS_PROXY_PROPERTY, templateType WS_BINDING_TEMPLATE_TYPE, templateValue []byte, templateDescription unsafe.Pointer, templateDescriptionSize uint32, serviceProxy **WS_SERVICE_PROXY, error_ *WS_ERROR) error {
 	var _properties *WS_PROXY_PROPERTY
 	if len(properties) > 0 {
 		_properties = &properties[0]
 	}
-	r1, _, _ := syscall.SyscallN(procWsCreateServiceProxyFromTemplate.Addr(), uintptr(channelType), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(templateType), uintptr(unsafe.Pointer(templateValue)), uintptr(templateSize), uintptr(unsafe.Pointer(templateDescription)), uintptr(templateDescriptionSize), uintptr(unsafe.Pointer(serviceProxy)), uintptr(unsafe.Pointer(error_)))
+	var _templateValue *byte
+	if len(templateValue) > 0 {
+		_templateValue = &templateValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsCreateServiceProxyFromTemplate.Addr(), uintptr(channelType), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(templateType), uintptr(unsafe.Pointer(_templateValue)), uintptr(len(templateValue)), uintptr(unsafe.Pointer(templateDescription)), uintptr(templateDescriptionSize), uintptr(unsafe.Pointer(serviceProxy)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -765,16 +781,24 @@ func WsFreeWriter(writer *WS_XML_WRITER) {
 // WsGetChannelProperty calls webservices!WsGetChannelProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetchannelproperty
 // Minimum OS: windows6.1.
-func WsGetChannelProperty(channel *WS_CHANNEL, id WS_CHANNEL_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetChannelProperty.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsGetChannelProperty(channel *WS_CHANNEL, id WS_CHANNEL_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetChannelProperty.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsGetCustomHeader calls webservices!WsGetCustomHeader.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetcustomheader
 // Minimum OS: windows6.1.
-func WsGetCustomHeader(message *WS_MESSAGE, customHeaderDescription *WS_ELEMENT_DESCRIPTION, repeatingOption WS_REPEATING_HEADER_OPTION, headerIndex uint32, readOption WS_READ_OPTION, heap *WS_HEAP, value unsafe.Pointer, valueSize uint32, headerAttributes *uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetCustomHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(customHeaderDescription)), uintptr(repeatingOption), uintptr(headerIndex), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(headerAttributes)), uintptr(unsafe.Pointer(error_)))
+func WsGetCustomHeader(message *WS_MESSAGE, customHeaderDescription *WS_ELEMENT_DESCRIPTION, repeatingOption WS_REPEATING_HEADER_OPTION, headerIndex uint32, readOption WS_READ_OPTION, heap *WS_HEAP, value []byte, headerAttributes *uint32, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetCustomHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(customHeaderDescription)), uintptr(repeatingOption), uintptr(headerIndex), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(headerAttributes)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -789,8 +813,12 @@ func WsGetDictionary(encoding WS_ENCODING, dictionary **WS_XML_DICTIONARY, error
 // WsGetErrorProperty calls webservices!WsGetErrorProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgeterrorproperty
 // Minimum OS: windows6.1.
-func WsGetErrorProperty(error_ *WS_ERROR, id WS_ERROR_PROPERTY_ID, buffer unsafe.Pointer, bufferSize uint32) error {
-	r1, _, _ := syscall.SyscallN(procWsGetErrorProperty.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(id), uintptr(unsafe.Pointer(buffer)), uintptr(bufferSize))
+func WsGetErrorProperty(error_ *WS_ERROR, id WS_ERROR_PROPERTY_ID, buffer []byte) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetErrorProperty.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(id), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -805,24 +833,36 @@ func WsGetErrorString(error_ *WS_ERROR, index uint32, string_ *WS_STRING) error 
 // WsGetFaultErrorDetail calls webservices!WsGetFaultErrorDetail.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetfaulterrordetail
 // Minimum OS: windows6.1.
-func WsGetFaultErrorDetail(error_ *WS_ERROR, faultDetailDescription *WS_FAULT_DETAIL_DESCRIPTION, readOption WS_READ_OPTION, heap *WS_HEAP, value unsafe.Pointer, valueSize uint32) error {
-	r1, _, _ := syscall.SyscallN(procWsGetFaultErrorDetail.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(unsafe.Pointer(faultDetailDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(value)), uintptr(valueSize))
+func WsGetFaultErrorDetail(error_ *WS_ERROR, faultDetailDescription *WS_FAULT_DETAIL_DESCRIPTION, readOption WS_READ_OPTION, heap *WS_HEAP, value []byte) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetFaultErrorDetail.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(unsafe.Pointer(faultDetailDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsGetFaultErrorProperty calls webservices!WsGetFaultErrorProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetfaulterrorproperty
 // Minimum OS: windows6.1.
-func WsGetFaultErrorProperty(error_ *WS_ERROR, id WS_FAULT_ERROR_PROPERTY_ID, buffer unsafe.Pointer, bufferSize uint32) error {
-	r1, _, _ := syscall.SyscallN(procWsGetFaultErrorProperty.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(id), uintptr(unsafe.Pointer(buffer)), uintptr(bufferSize))
+func WsGetFaultErrorProperty(error_ *WS_ERROR, id WS_FAULT_ERROR_PROPERTY_ID, buffer []byte) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetFaultErrorProperty.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(id), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsGetHeader calls webservices!WsGetHeader.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetheader
 // Minimum OS: windows6.1.
-func WsGetHeader(message *WS_MESSAGE, headerType WS_HEADER_TYPE, valueType WS_TYPE, readOption WS_READ_OPTION, heap *WS_HEAP, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(headerType), uintptr(valueType), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsGetHeader(message *WS_MESSAGE, headerType WS_HEADER_TYPE, valueType WS_TYPE, readOption WS_READ_OPTION, heap *WS_HEAP, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(headerType), uintptr(valueType), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -837,32 +877,48 @@ func WsGetHeaderAttributes(message *WS_MESSAGE, reader *WS_XML_READER, headerAtt
 // WsGetHeapProperty calls webservices!WsGetHeapProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetheapproperty
 // Minimum OS: windows6.1.
-func WsGetHeapProperty(heap *WS_HEAP, id WS_HEAP_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetHeapProperty.Addr(), uintptr(unsafe.Pointer(heap)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsGetHeapProperty(heap *WS_HEAP, id WS_HEAP_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetHeapProperty.Addr(), uintptr(unsafe.Pointer(heap)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsGetListenerProperty calls webservices!WsGetListenerProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetlistenerproperty
 // Minimum OS: windows6.1.
-func WsGetListenerProperty(listener *WS_LISTENER, id WS_LISTENER_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetListenerProperty.Addr(), uintptr(unsafe.Pointer(listener)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsGetListenerProperty(listener *WS_LISTENER, id WS_LISTENER_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetListenerProperty.Addr(), uintptr(unsafe.Pointer(listener)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsGetMappedHeader calls webservices!WsGetMappedHeader.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetmappedheader
 // Minimum OS: windows6.1.
-func WsGetMappedHeader(message *WS_MESSAGE, headerName *WS_XML_STRING, repeatingOption WS_REPEATING_HEADER_OPTION, headerIndex uint32, valueType WS_TYPE, readOption WS_READ_OPTION, heap *WS_HEAP, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetMappedHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(headerName)), uintptr(repeatingOption), uintptr(headerIndex), uintptr(valueType), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsGetMappedHeader(message *WS_MESSAGE, headerName *WS_XML_STRING, repeatingOption WS_REPEATING_HEADER_OPTION, headerIndex uint32, valueType WS_TYPE, readOption WS_READ_OPTION, heap *WS_HEAP, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetMappedHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(headerName)), uintptr(repeatingOption), uintptr(headerIndex), uintptr(valueType), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsGetMessageProperty calls webservices!WsGetMessageProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetmessageproperty
 // Minimum OS: windows6.1.
-func WsGetMessageProperty(message *WS_MESSAGE, id WS_MESSAGE_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetMessageProperty.Addr(), uintptr(unsafe.Pointer(message)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsGetMessageProperty(message *WS_MESSAGE, id WS_MESSAGE_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetMessageProperty.Addr(), uintptr(unsafe.Pointer(message)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -877,8 +933,12 @@ func WsGetMetadataEndpoints(metadata *WS_METADATA, endpoints *WS_METADATA_ENDPOI
 // WsGetMetadataProperty calls webservices!WsGetMetadataProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetmetadataproperty
 // Minimum OS: windows6.1.
-func WsGetMetadataProperty(metadata *WS_METADATA, id WS_METADATA_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetMetadataProperty.Addr(), uintptr(unsafe.Pointer(metadata)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsGetMetadataProperty(metadata *WS_METADATA, id WS_METADATA_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetMetadataProperty.Addr(), uintptr(unsafe.Pointer(metadata)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -902,8 +962,12 @@ func WsGetNamespaceFromPrefix(reader *WS_XML_READER, prefix *WS_XML_STRING, requ
 // WsGetOperationContextProperty calls webservices!WsGetOperationContextProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetoperationcontextproperty
 // Minimum OS: windows6.1.
-func WsGetOperationContextProperty(context *WS_OPERATION_CONTEXT, id WS_OPERATION_CONTEXT_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetOperationContextProperty.Addr(), uintptr(unsafe.Pointer(context)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsGetOperationContextProperty(context *WS_OPERATION_CONTEXT, id WS_OPERATION_CONTEXT_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetOperationContextProperty.Addr(), uintptr(unsafe.Pointer(context)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -918,8 +982,12 @@ func WsGetPolicyAlternativeCount(policy *WS_POLICY, count *uint32, error_ *WS_ER
 // WsGetPolicyProperty calls webservices!WsGetPolicyProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetpolicyproperty
 // Minimum OS: windows6.1.
-func WsGetPolicyProperty(policy *WS_POLICY, id WS_POLICY_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetPolicyProperty.Addr(), uintptr(unsafe.Pointer(policy)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsGetPolicyProperty(policy *WS_POLICY, id WS_POLICY_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetPolicyProperty.Addr(), uintptr(unsafe.Pointer(policy)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -951,40 +1019,60 @@ func WsGetReaderPosition(reader *WS_XML_READER, nodePosition *WS_XML_NODE_POSITI
 // WsGetReaderProperty calls webservices!WsGetReaderProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetreaderproperty
 // Minimum OS: windows6.1.
-func WsGetReaderProperty(reader *WS_XML_READER, id WS_XML_READER_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetReaderProperty.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsGetReaderProperty(reader *WS_XML_READER, id WS_XML_READER_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetReaderProperty.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsGetSecurityContextProperty calls webservices!WsGetSecurityContextProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetsecuritycontextproperty
 // Minimum OS: windows6.1.
-func WsGetSecurityContextProperty(securityContext *WS_SECURITY_CONTEXT, id WS_SECURITY_CONTEXT_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetSecurityContextProperty.Addr(), uintptr(unsafe.Pointer(securityContext)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsGetSecurityContextProperty(securityContext *WS_SECURITY_CONTEXT, id WS_SECURITY_CONTEXT_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetSecurityContextProperty.Addr(), uintptr(unsafe.Pointer(securityContext)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsGetSecurityTokenProperty calls webservices!WsGetSecurityTokenProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetsecuritytokenproperty
 // Minimum OS: windows6.1.
-func WsGetSecurityTokenProperty(securityToken *WS_SECURITY_TOKEN, id WS_SECURITY_TOKEN_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, heap *WS_HEAP, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetSecurityTokenProperty.Addr(), uintptr(unsafe.Pointer(securityToken)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(error_)))
+func WsGetSecurityTokenProperty(securityToken *WS_SECURITY_TOKEN, id WS_SECURITY_TOKEN_PROPERTY_ID, value []byte, heap *WS_HEAP, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetSecurityTokenProperty.Addr(), uintptr(unsafe.Pointer(securityToken)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsGetServiceHostProperty calls webservices!WsGetServiceHostProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetservicehostproperty
 // Minimum OS: windows6.1.
-func WsGetServiceHostProperty(serviceHost *WS_SERVICE_HOST, id WS_SERVICE_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetServiceHostProperty.Addr(), uintptr(unsafe.Pointer(serviceHost)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsGetServiceHostProperty(serviceHost *WS_SERVICE_HOST, id WS_SERVICE_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetServiceHostProperty.Addr(), uintptr(unsafe.Pointer(serviceHost)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsGetServiceProxyProperty calls webservices!WsGetServiceProxyProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetserviceproxyproperty
 // Minimum OS: windows6.1.
-func WsGetServiceProxyProperty(serviceProxy *WS_SERVICE_PROXY, id WS_PROXY_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetServiceProxyProperty.Addr(), uintptr(unsafe.Pointer(serviceProxy)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsGetServiceProxyProperty(serviceProxy *WS_SERVICE_PROXY, id WS_PROXY_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetServiceProxyProperty.Addr(), uintptr(unsafe.Pointer(serviceProxy)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -999,8 +1087,12 @@ func WsGetWriterPosition(writer *WS_XML_WRITER, nodePosition *WS_XML_NODE_POSITI
 // WsGetWriterProperty calls webservices!WsGetWriterProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsgetwriterproperty
 // Minimum OS: windows6.1.
-func WsGetWriterProperty(writer *WS_XML_WRITER, id WS_XML_WRITER_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsGetWriterProperty.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsGetWriterProperty(writer *WS_XML_WRITER, id WS_XML_WRITER_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsGetWriterProperty.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1104,32 +1196,48 @@ func WsPushBytes(writer *WS_XML_WRITER, callback WS_PUSH_BYTES_CALLBACK, callbac
 // WsReadArray calls webservices!WsReadArray.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsreadarray
 // Minimum OS: windows6.1.
-func WsReadArray(reader *WS_XML_READER, localName *WS_XML_STRING, ns *WS_XML_STRING, valueType WS_VALUE_TYPE, array unsafe.Pointer, arraySize uint32, itemOffset uint32, itemCount uint32, actualItemCount *uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsReadArray.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(ns)), uintptr(valueType), uintptr(unsafe.Pointer(array)), uintptr(arraySize), uintptr(itemOffset), uintptr(itemCount), uintptr(unsafe.Pointer(actualItemCount)), uintptr(unsafe.Pointer(error_)))
+func WsReadArray(reader *WS_XML_READER, localName *WS_XML_STRING, ns *WS_XML_STRING, valueType WS_VALUE_TYPE, array []byte, itemOffset uint32, itemCount uint32, actualItemCount *uint32, error_ *WS_ERROR) error {
+	var _array *byte
+	if len(array) > 0 {
+		_array = &array[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsReadArray.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(ns)), uintptr(valueType), uintptr(unsafe.Pointer(_array)), uintptr(len(array)), uintptr(itemOffset), uintptr(itemCount), uintptr(unsafe.Pointer(actualItemCount)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsReadAttribute calls webservices!WsReadAttribute.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsreadattribute
 // Minimum OS: windows6.1.
-func WsReadAttribute(reader *WS_XML_READER, attributeDescription *WS_ATTRIBUTE_DESCRIPTION, readOption WS_READ_OPTION, heap *WS_HEAP, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsReadAttribute.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(attributeDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsReadAttribute(reader *WS_XML_READER, attributeDescription *WS_ATTRIBUTE_DESCRIPTION, readOption WS_READ_OPTION, heap *WS_HEAP, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsReadAttribute.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(attributeDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsReadBody calls webservices!WsReadBody.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsreadbody
 // Minimum OS: windows6.1.
-func WsReadBody(message *WS_MESSAGE, bodyDescription *WS_ELEMENT_DESCRIPTION, readOption WS_READ_OPTION, heap *WS_HEAP, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsReadBody.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(bodyDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsReadBody(message *WS_MESSAGE, bodyDescription *WS_ELEMENT_DESCRIPTION, readOption WS_READ_OPTION, heap *WS_HEAP, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsReadBody.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(bodyDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsReadBytes calls webservices!WsReadBytes.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsreadbytes
 // Minimum OS: windows6.1.
-func WsReadBytes(reader *WS_XML_READER, bytes unsafe.Pointer, maxByteCount uint32, actualByteCount *uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsReadBytes.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(bytes)), uintptr(maxByteCount), uintptr(unsafe.Pointer(actualByteCount)), uintptr(unsafe.Pointer(error_)))
+func WsReadBytes(reader *WS_XML_READER, bytes []byte, actualByteCount *uint32, error_ *WS_ERROR) error {
+	var _bytes *byte
+	if len(bytes) > 0 {
+		_bytes = &bytes[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsReadBytes.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(_bytes)), uintptr(len(bytes)), uintptr(unsafe.Pointer(actualByteCount)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1156,8 +1264,12 @@ func WsReadCharsUtf8(reader *WS_XML_READER, bytes []byte, actualByteCount *uint3
 // WsReadElement calls webservices!WsReadElement.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsreadelement
 // Minimum OS: windows6.1.
-func WsReadElement(reader *WS_XML_READER, elementDescription *WS_ELEMENT_DESCRIPTION, readOption WS_READ_OPTION, heap *WS_HEAP, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsReadElement.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(elementDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsReadElement(reader *WS_XML_READER, elementDescription *WS_ELEMENT_DESCRIPTION, readOption WS_READ_OPTION, heap *WS_HEAP, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsReadElement.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(elementDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1180,8 +1292,12 @@ func WsReadEndElement(reader *WS_XML_READER, error_ *WS_ERROR) error {
 // WsReadEndpointAddressExtension calls webservices!WsReadEndpointAddressExtension.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsreadendpointaddressextension
 // Minimum OS: windows6.1.
-func WsReadEndpointAddressExtension(reader *WS_XML_READER, endpointAddress *WS_ENDPOINT_ADDRESS, extensionType WS_ENDPOINT_ADDRESS_EXTENSION_TYPE, readOption WS_READ_OPTION, heap *WS_HEAP, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsReadEndpointAddressExtension.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(endpointAddress)), uintptr(extensionType), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsReadEndpointAddressExtension(reader *WS_XML_READER, endpointAddress *WS_ENDPOINT_ADDRESS, extensionType WS_ENDPOINT_ADDRESS_EXTENSION_TYPE, readOption WS_READ_OPTION, heap *WS_HEAP, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsReadEndpointAddressExtension.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(endpointAddress)), uintptr(extensionType), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1268,16 +1384,24 @@ func WsReadToStartElement(reader *WS_XML_READER, localName *WS_XML_STRING, ns *W
 // WsReadType calls webservices!WsReadType.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsreadtype
 // Minimum OS: windows6.1.
-func WsReadType(reader *WS_XML_READER, typeMapping WS_TYPE_MAPPING, type_ WS_TYPE, typeDescription unsafe.Pointer, readOption WS_READ_OPTION, heap *WS_HEAP, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsReadType.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(typeMapping), uintptr(type_), uintptr(unsafe.Pointer(typeDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsReadType(reader *WS_XML_READER, typeMapping WS_TYPE_MAPPING, type_ WS_TYPE, typeDescription unsafe.Pointer, readOption WS_READ_OPTION, heap *WS_HEAP, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsReadType.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(typeMapping), uintptr(type_), uintptr(unsafe.Pointer(typeDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsReadValue calls webservices!WsReadValue.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsreadvalue
 // Minimum OS: windows6.1.
-func WsReadValue(reader *WS_XML_READER, valueType WS_VALUE_TYPE, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsReadValue.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(valueType), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsReadValue(reader *WS_XML_READER, valueType WS_VALUE_TYPE, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsReadValue.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(valueType), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1292,24 +1416,32 @@ func WsReadXmlBuffer(reader *WS_XML_READER, heap *WS_HEAP, xmlBuffer **WS_XML_BU
 // WsReadXmlBufferFromBytes calls webservices!WsReadXmlBufferFromBytes.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsreadxmlbufferfrombytes
 // Minimum OS: windows6.1.
-func WsReadXmlBufferFromBytes(reader *WS_XML_READER, encoding *WS_XML_READER_ENCODING, properties []WS_XML_READER_PROPERTY, bytes unsafe.Pointer, byteCount uint32, heap *WS_HEAP, xmlBuffer **WS_XML_BUFFER, error_ *WS_ERROR) error {
+func WsReadXmlBufferFromBytes(reader *WS_XML_READER, encoding *WS_XML_READER_ENCODING, properties []WS_XML_READER_PROPERTY, bytes []byte, heap *WS_HEAP, xmlBuffer **WS_XML_BUFFER, error_ *WS_ERROR) error {
 	var _properties *WS_XML_READER_PROPERTY
 	if len(properties) > 0 {
 		_properties = &properties[0]
 	}
-	r1, _, _ := syscall.SyscallN(procWsReadXmlBufferFromBytes.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(encoding)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(bytes)), uintptr(byteCount), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(xmlBuffer)), uintptr(unsafe.Pointer(error_)))
+	var _bytes *byte
+	if len(bytes) > 0 {
+		_bytes = &bytes[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsReadXmlBufferFromBytes.Addr(), uintptr(unsafe.Pointer(reader)), uintptr(unsafe.Pointer(encoding)), uintptr(unsafe.Pointer(_properties)), uintptr(len(properties)), uintptr(unsafe.Pointer(_bytes)), uintptr(len(bytes)), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(xmlBuffer)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsReceiveMessage calls webservices!WsReceiveMessage.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsreceivemessage
 // Minimum OS: windows6.1.
-func WsReceiveMessage(channel *WS_CHANNEL, message *WS_MESSAGE, messageDescriptions []*WS_MESSAGE_DESCRIPTION, receiveOption WS_RECEIVE_OPTION, readBodyOption WS_READ_OPTION, heap *WS_HEAP, value unsafe.Pointer, valueSize uint32, index *uint32, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
+func WsReceiveMessage(channel *WS_CHANNEL, message *WS_MESSAGE, messageDescriptions []*WS_MESSAGE_DESCRIPTION, receiveOption WS_RECEIVE_OPTION, readBodyOption WS_READ_OPTION, heap *WS_HEAP, value []byte, index *uint32, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
 	var _messageDescriptions **WS_MESSAGE_DESCRIPTION
 	if len(messageDescriptions) > 0 {
 		_messageDescriptions = &messageDescriptions[0]
 	}
-	r1, _, _ := syscall.SyscallN(procWsReceiveMessage.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(_messageDescriptions)), uintptr(len(messageDescriptions)), uintptr(receiveOption), uintptr(readBodyOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(index)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsReceiveMessage.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(_messageDescriptions)), uintptr(len(messageDescriptions)), uintptr(receiveOption), uintptr(readBodyOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(index)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1356,8 +1488,16 @@ func WsRemoveNode(nodePosition *WS_XML_NODE_POSITION, error_ *WS_ERROR) error {
 // WsRequestReply calls webservices!WsRequestReply.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsrequestreply
 // Minimum OS: windows6.1.
-func WsRequestReply(channel *WS_CHANNEL, requestMessage *WS_MESSAGE, requestMessageDescription *WS_MESSAGE_DESCRIPTION, writeOption WS_WRITE_OPTION, requestBodyValue unsafe.Pointer, requestBodyValueSize uint32, replyMessage *WS_MESSAGE, replyMessageDescription *WS_MESSAGE_DESCRIPTION, readOption WS_READ_OPTION, heap *WS_HEAP, value unsafe.Pointer, valueSize uint32, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsRequestReply.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(requestMessage)), uintptr(unsafe.Pointer(requestMessageDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(requestBodyValue)), uintptr(requestBodyValueSize), uintptr(unsafe.Pointer(replyMessage)), uintptr(unsafe.Pointer(replyMessageDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
+func WsRequestReply(channel *WS_CHANNEL, requestMessage *WS_MESSAGE, requestMessageDescription *WS_MESSAGE_DESCRIPTION, writeOption WS_WRITE_OPTION, requestBodyValue []byte, replyMessage *WS_MESSAGE, replyMessageDescription *WS_MESSAGE_DESCRIPTION, readOption WS_READ_OPTION, heap *WS_HEAP, value []byte, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
+	var _requestBodyValue *byte
+	if len(requestBodyValue) > 0 {
+		_requestBodyValue = &requestBodyValue[0]
+	}
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsRequestReply.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(requestMessage)), uintptr(unsafe.Pointer(requestMessageDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_requestBodyValue)), uintptr(len(requestBodyValue)), uintptr(unsafe.Pointer(replyMessage)), uintptr(unsafe.Pointer(replyMessageDescription)), uintptr(readOption), uintptr(unsafe.Pointer(heap)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1456,56 +1596,84 @@ func WsSendFaultMessageForError(channel *WS_CHANNEL, replyMessage *WS_MESSAGE, f
 // WsSendMessage calls webservices!WsSendMessage.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wssendmessage
 // Minimum OS: windows6.1.
-func WsSendMessage(channel *WS_CHANNEL, message *WS_MESSAGE, messageDescription *WS_MESSAGE_DESCRIPTION, writeOption WS_WRITE_OPTION, bodyValue unsafe.Pointer, bodyValueSize uint32, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsSendMessage.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(messageDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(bodyValue)), uintptr(bodyValueSize), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
+func WsSendMessage(channel *WS_CHANNEL, message *WS_MESSAGE, messageDescription *WS_MESSAGE_DESCRIPTION, writeOption WS_WRITE_OPTION, bodyValue []byte, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
+	var _bodyValue *byte
+	if len(bodyValue) > 0 {
+		_bodyValue = &bodyValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsSendMessage.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(messageDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_bodyValue)), uintptr(len(bodyValue)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsSendReplyMessage calls webservices!WsSendReplyMessage.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wssendreplymessage
 // Minimum OS: windows6.1.
-func WsSendReplyMessage(channel *WS_CHANNEL, replyMessage *WS_MESSAGE, replyMessageDescription *WS_MESSAGE_DESCRIPTION, writeOption WS_WRITE_OPTION, replyBodyValue unsafe.Pointer, replyBodyValueSize uint32, requestMessage *WS_MESSAGE, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsSendReplyMessage.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(replyMessage)), uintptr(unsafe.Pointer(replyMessageDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(replyBodyValue)), uintptr(replyBodyValueSize), uintptr(unsafe.Pointer(requestMessage)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
+func WsSendReplyMessage(channel *WS_CHANNEL, replyMessage *WS_MESSAGE, replyMessageDescription *WS_MESSAGE_DESCRIPTION, writeOption WS_WRITE_OPTION, replyBodyValue []byte, requestMessage *WS_MESSAGE, asyncContext *WS_ASYNC_CONTEXT, error_ *WS_ERROR) error {
+	var _replyBodyValue *byte
+	if len(replyBodyValue) > 0 {
+		_replyBodyValue = &replyBodyValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsSendReplyMessage.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(unsafe.Pointer(replyMessage)), uintptr(unsafe.Pointer(replyMessageDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_replyBodyValue)), uintptr(len(replyBodyValue)), uintptr(unsafe.Pointer(requestMessage)), uintptr(unsafe.Pointer(asyncContext)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsSetChannelProperty calls webservices!WsSetChannelProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wssetchannelproperty
 // Minimum OS: windows6.1.
-func WsSetChannelProperty(channel *WS_CHANNEL, id WS_CHANNEL_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsSetChannelProperty.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsSetChannelProperty(channel *WS_CHANNEL, id WS_CHANNEL_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsSetChannelProperty.Addr(), uintptr(unsafe.Pointer(channel)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsSetErrorProperty calls webservices!WsSetErrorProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wsseterrorproperty
 // Minimum OS: windows6.1.
-func WsSetErrorProperty(error_ *WS_ERROR, id WS_ERROR_PROPERTY_ID, value unsafe.Pointer, valueSize uint32) error {
-	r1, _, _ := syscall.SyscallN(procWsSetErrorProperty.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize))
+func WsSetErrorProperty(error_ *WS_ERROR, id WS_ERROR_PROPERTY_ID, value []byte) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsSetErrorProperty.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsSetFaultErrorDetail calls webservices!WsSetFaultErrorDetail.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wssetfaulterrordetail
 // Minimum OS: windows6.1.
-func WsSetFaultErrorDetail(error_ *WS_ERROR, faultDetailDescription *WS_FAULT_DETAIL_DESCRIPTION, writeOption WS_WRITE_OPTION, value unsafe.Pointer, valueSize uint32) error {
-	r1, _, _ := syscall.SyscallN(procWsSetFaultErrorDetail.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(unsafe.Pointer(faultDetailDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(value)), uintptr(valueSize))
+func WsSetFaultErrorDetail(error_ *WS_ERROR, faultDetailDescription *WS_FAULT_DETAIL_DESCRIPTION, writeOption WS_WRITE_OPTION, value []byte) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsSetFaultErrorDetail.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(unsafe.Pointer(faultDetailDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsSetFaultErrorProperty calls webservices!WsSetFaultErrorProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wssetfaulterrorproperty
 // Minimum OS: windows6.1.
-func WsSetFaultErrorProperty(error_ *WS_ERROR, id WS_FAULT_ERROR_PROPERTY_ID, value unsafe.Pointer, valueSize uint32) error {
-	r1, _, _ := syscall.SyscallN(procWsSetFaultErrorProperty.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize))
+func WsSetFaultErrorProperty(error_ *WS_ERROR, id WS_FAULT_ERROR_PROPERTY_ID, value []byte) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsSetFaultErrorProperty.Addr(), uintptr(unsafe.Pointer(error_)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsSetHeader calls webservices!WsSetHeader.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wssetheader
 // Minimum OS: windows6.1.
-func WsSetHeader(message *WS_MESSAGE, headerType WS_HEADER_TYPE, valueType WS_TYPE, writeOption WS_WRITE_OPTION, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsSetHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(headerType), uintptr(valueType), uintptr(writeOption), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsSetHeader(message *WS_MESSAGE, headerType WS_HEADER_TYPE, valueType WS_TYPE, writeOption WS_WRITE_OPTION, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsSetHeader.Addr(), uintptr(unsafe.Pointer(message)), uintptr(headerType), uintptr(valueType), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1536,16 +1704,24 @@ func WsSetInputToBuffer(reader *WS_XML_READER, buffer *WS_XML_BUFFER, properties
 // WsSetListenerProperty calls webservices!WsSetListenerProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wssetlistenerproperty
 // Minimum OS: windows6.1.
-func WsSetListenerProperty(listener *WS_LISTENER, id WS_LISTENER_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsSetListenerProperty.Addr(), uintptr(unsafe.Pointer(listener)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsSetListenerProperty(listener *WS_LISTENER, id WS_LISTENER_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsSetListenerProperty.Addr(), uintptr(unsafe.Pointer(listener)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsSetMessageProperty calls webservices!WsSetMessageProperty.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wssetmessageproperty
 // Minimum OS: windows6.1.
-func WsSetMessageProperty(message *WS_MESSAGE, id WS_MESSAGE_PROPERTY_ID, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsSetMessageProperty.Addr(), uintptr(unsafe.Pointer(message)), uintptr(id), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsSetMessageProperty(message *WS_MESSAGE, id WS_MESSAGE_PROPERTY_ID, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsSetMessageProperty.Addr(), uintptr(unsafe.Pointer(message)), uintptr(id), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1650,32 +1826,48 @@ func WsVerifyXmlNCName(ncNameChars string, ncNameCharCount uint32, error_ *WS_ER
 // WsWriteArray calls webservices!WsWriteArray.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wswritearray
 // Minimum OS: windows6.1.
-func WsWriteArray(writer *WS_XML_WRITER, localName *WS_XML_STRING, ns *WS_XML_STRING, valueType WS_VALUE_TYPE, array unsafe.Pointer, arraySize uint32, itemOffset uint32, itemCount uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsWriteArray.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(ns)), uintptr(valueType), uintptr(unsafe.Pointer(array)), uintptr(arraySize), uintptr(itemOffset), uintptr(itemCount), uintptr(unsafe.Pointer(error_)))
+func WsWriteArray(writer *WS_XML_WRITER, localName *WS_XML_STRING, ns *WS_XML_STRING, valueType WS_VALUE_TYPE, array []byte, itemOffset uint32, itemCount uint32, error_ *WS_ERROR) error {
+	var _array *byte
+	if len(array) > 0 {
+		_array = &array[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsWriteArray.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(localName)), uintptr(unsafe.Pointer(ns)), uintptr(valueType), uintptr(unsafe.Pointer(_array)), uintptr(len(array)), uintptr(itemOffset), uintptr(itemCount), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsWriteAttribute calls webservices!WsWriteAttribute.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wswriteattribute
 // Minimum OS: windows6.1.
-func WsWriteAttribute(writer *WS_XML_WRITER, attributeDescription *WS_ATTRIBUTE_DESCRIPTION, writeOption WS_WRITE_OPTION, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsWriteAttribute.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(attributeDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsWriteAttribute(writer *WS_XML_WRITER, attributeDescription *WS_ATTRIBUTE_DESCRIPTION, writeOption WS_WRITE_OPTION, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsWriteAttribute.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(attributeDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsWriteBody calls webservices!WsWriteBody.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wswritebody
 // Minimum OS: windows6.1.
-func WsWriteBody(message *WS_MESSAGE, bodyDescription *WS_ELEMENT_DESCRIPTION, writeOption WS_WRITE_OPTION, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsWriteBody.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(bodyDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsWriteBody(message *WS_MESSAGE, bodyDescription *WS_ELEMENT_DESCRIPTION, writeOption WS_WRITE_OPTION, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsWriteBody.Addr(), uintptr(unsafe.Pointer(message)), uintptr(unsafe.Pointer(bodyDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsWriteBytes calls webservices!WsWriteBytes.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wswritebytes
 // Minimum OS: windows6.1.
-func WsWriteBytes(writer *WS_XML_WRITER, bytes unsafe.Pointer, byteCount uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsWriteBytes.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(bytes)), uintptr(byteCount), uintptr(unsafe.Pointer(error_)))
+func WsWriteBytes(writer *WS_XML_WRITER, bytes []byte, error_ *WS_ERROR) error {
+	var _bytes *byte
+	if len(bytes) > 0 {
+		_bytes = &bytes[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsWriteBytes.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(_bytes)), uintptr(len(bytes)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1703,8 +1895,12 @@ func WsWriteCharsUtf8(writer *WS_XML_WRITER, bytes []byte, error_ *WS_ERROR) err
 // WsWriteElement calls webservices!WsWriteElement.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wswriteelement
 // Minimum OS: windows6.1.
-func WsWriteElement(writer *WS_XML_WRITER, elementDescription *WS_ELEMENT_DESCRIPTION, writeOption WS_WRITE_OPTION, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsWriteElement.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(elementDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsWriteElement(writer *WS_XML_WRITER, elementDescription *WS_ELEMENT_DESCRIPTION, writeOption WS_WRITE_OPTION, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsWriteElement.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(unsafe.Pointer(elementDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1824,16 +2020,24 @@ func WsWriteText(writer *WS_XML_WRITER, text *WS_XML_TEXT, error_ *WS_ERROR) err
 // WsWriteType calls webservices!WsWriteType.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wswritetype
 // Minimum OS: windows6.1.
-func WsWriteType(writer *WS_XML_WRITER, typeMapping WS_TYPE_MAPPING, type_ WS_TYPE, typeDescription unsafe.Pointer, writeOption WS_WRITE_OPTION, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsWriteType.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(typeMapping), uintptr(type_), uintptr(unsafe.Pointer(typeDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsWriteType(writer *WS_XML_WRITER, typeMapping WS_TYPE_MAPPING, type_ WS_TYPE, typeDescription unsafe.Pointer, writeOption WS_WRITE_OPTION, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsWriteType.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(typeMapping), uintptr(type_), uintptr(unsafe.Pointer(typeDescription)), uintptr(writeOption), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WsWriteValue calls webservices!WsWriteValue.
 // https://learn.microsoft.com/windows/win32/api/webservices/nf-webservices-wswritevalue
 // Minimum OS: windows6.1.
-func WsWriteValue(writer *WS_XML_WRITER, valueType WS_VALUE_TYPE, value unsafe.Pointer, valueSize uint32, error_ *WS_ERROR) error {
-	r1, _, _ := syscall.SyscallN(procWsWriteValue.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(valueType), uintptr(unsafe.Pointer(value)), uintptr(valueSize), uintptr(unsafe.Pointer(error_)))
+func WsWriteValue(writer *WS_XML_WRITER, valueType WS_VALUE_TYPE, value []byte, error_ *WS_ERROR) error {
+	var _value *byte
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWsWriteValue.Addr(), uintptr(unsafe.Pointer(writer)), uintptr(valueType), uintptr(unsafe.Pointer(_value)), uintptr(len(value)), uintptr(unsafe.Pointer(error_)))
 	return win32.HRESULTError(int32(r1))
 }
 

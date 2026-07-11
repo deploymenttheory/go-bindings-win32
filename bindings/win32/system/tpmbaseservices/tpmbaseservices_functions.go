@@ -35,8 +35,12 @@ var (
 )
 
 // GetDeviceID calls tbs!GetDeviceID.
-func GetDeviceID(pbWindowsAIK *byte, cbWindowsAIK uint32, pcbResult *uint32, pfProtectedByTPM *foundation.BOOL) error {
-	r1, _, _ := syscall.SyscallN(procGetDeviceID.Addr(), uintptr(unsafe.Pointer(pbWindowsAIK)), uintptr(cbWindowsAIK), uintptr(unsafe.Pointer(pcbResult)), uintptr(unsafe.Pointer(pfProtectedByTPM)))
+func GetDeviceID(pbWindowsAIK []byte, pcbResult *uint32, pfProtectedByTPM *foundation.BOOL) error {
+	var _pbWindowsAIK *byte
+	if len(pbWindowsAIK) > 0 {
+		_pbWindowsAIK = &pbWindowsAIK[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetDeviceID.Addr(), uintptr(unsafe.Pointer(_pbWindowsAIK)), uintptr(len(pbWindowsAIK)), uintptr(unsafe.Pointer(pcbResult)), uintptr(unsafe.Pointer(pfProtectedByTPM)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -63,8 +67,12 @@ func Tbsi_Create_Windows_Key(keyHandle uint32) uint32 {
 // Tbsi_GetDeviceInfo calls tbs!Tbsi_GetDeviceInfo.
 // https://learn.microsoft.com/windows/win32/api/tbs/nf-tbs-tbsi_getdeviceinfo
 // Minimum OS: windows8.0.
-func Tbsi_GetDeviceInfo(Size uint32, Info unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procTbsi_GetDeviceInfo.Addr(), uintptr(Size), uintptr(unsafe.Pointer(Info)))
+func Tbsi_GetDeviceInfo(Info []byte) uint32 {
+	var _Info *byte
+	if len(Info) > 0 {
+		_Info = &Info[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTbsi_GetDeviceInfo.Addr(), uintptr(len(Info)), uintptr(unsafe.Pointer(_Info)))
 	return uint32(r1)
 }
 
@@ -101,8 +109,12 @@ func Tbsi_Is_Tpm_Present() bool {
 // Tbsi_Physical_Presence_Command calls tbs!Tbsi_Physical_Presence_Command.
 // https://learn.microsoft.com/windows/win32/api/tbs/nf-tbs-tbsi_physical_presence_command
 // Minimum OS: windows6.0.6000.
-func Tbsi_Physical_Presence_Command(hContext unsafe.Pointer, pabInput *byte, cbInput uint32, pabOutput *byte, pcbOutput *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procTbsi_Physical_Presence_Command.Addr(), uintptr(unsafe.Pointer(hContext)), uintptr(unsafe.Pointer(pabInput)), uintptr(cbInput), uintptr(unsafe.Pointer(pabOutput)), uintptr(unsafe.Pointer(pcbOutput)))
+func Tbsi_Physical_Presence_Command(hContext unsafe.Pointer, pabInput []byte, pabOutput *byte, pcbOutput *uint32) uint32 {
+	var _pabInput *byte
+	if len(pabInput) > 0 {
+		_pabInput = &pabInput[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTbsi_Physical_Presence_Command.Addr(), uintptr(unsafe.Pointer(hContext)), uintptr(unsafe.Pointer(_pabInput)), uintptr(len(pabInput)), uintptr(unsafe.Pointer(pabOutput)), uintptr(unsafe.Pointer(pcbOutput)))
 	return uint32(r1)
 }
 
@@ -139,7 +151,11 @@ func Tbsip_Context_Close(hContext unsafe.Pointer) uint32 {
 // Tbsip_Submit_Command calls tbs!Tbsip_Submit_Command.
 // https://learn.microsoft.com/windows/win32/api/tbs/nf-tbs-tbsip_submit_command
 // Minimum OS: windows6.0.6000.
-func Tbsip_Submit_Command(hContext unsafe.Pointer, Locality TBS_COMMAND_LOCALITY, Priority TBS_COMMAND_PRIORITY, pabCommand *byte, cbCommand uint32, pabResult *byte, pcbResult *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procTbsip_Submit_Command.Addr(), uintptr(unsafe.Pointer(hContext)), uintptr(Locality), uintptr(Priority), uintptr(unsafe.Pointer(pabCommand)), uintptr(cbCommand), uintptr(unsafe.Pointer(pabResult)), uintptr(unsafe.Pointer(pcbResult)))
+func Tbsip_Submit_Command(hContext unsafe.Pointer, Locality TBS_COMMAND_LOCALITY, Priority TBS_COMMAND_PRIORITY, pabCommand []byte, pabResult *byte, pcbResult *uint32) uint32 {
+	var _pabCommand *byte
+	if len(pabCommand) > 0 {
+		_pabCommand = &pabCommand[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTbsip_Submit_Command.Addr(), uintptr(unsafe.Pointer(hContext)), uintptr(Locality), uintptr(Priority), uintptr(unsafe.Pointer(_pabCommand)), uintptr(len(pabCommand)), uintptr(unsafe.Pointer(pabResult)), uintptr(unsafe.Pointer(pcbResult)))
 	return uint32(r1)
 }

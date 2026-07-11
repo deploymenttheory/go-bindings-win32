@@ -1473,8 +1473,12 @@ func (self *IPMLiveTileJobInfo) Get_TileXML(pTileXml **byte, pcbTileXml *uint32)
 }
 
 // Set_TileXML dispatches through IPMLiveTileJobInfo's vtable slot 20.
-func (self *IPMLiveTileJobInfo) Set_TileXML(pTileXml *byte, cbTileXml uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTileXml)), uintptr(cbTileXml))
+func (self *IPMLiveTileJobInfo) Set_TileXML(pTileXml []byte) error {
+	var _pTileXml *byte
+	if len(pTileXml) > 0 {
+		_pTileXml = &pTileXml[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pTileXml)), uintptr(len(pTileXml)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1485,8 +1489,12 @@ func (self *IPMLiveTileJobInfo) Get_UrlXML(pUrlXML **byte, pcbUrlXML *uint32) er
 }
 
 // Set_UrlXML dispatches through IPMLiveTileJobInfo's vtable slot 22.
-func (self *IPMLiveTileJobInfo) Set_UrlXML(pUrlXML *byte, cbUrlXML uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUrlXML)), uintptr(cbUrlXML))
+func (self *IPMLiveTileJobInfo) Set_UrlXML(pUrlXML []byte) error {
+	var _pUrlXML *byte
+	if len(pUrlXML) > 0 {
+		_pUrlXML = &pUrlXML[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pUrlXML)), uintptr(len(pUrlXML)))
 	return win32.HRESULTError(int32(r1))
 }
 

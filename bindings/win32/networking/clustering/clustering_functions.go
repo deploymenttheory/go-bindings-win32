@@ -783,9 +783,17 @@ func ClusterAddGroupToGroupSetWithDomainsEx(hGroupSet HGROUPSET, hGroup HGROUP, 
 }
 
 // ClusterAffinityRuleControl calls CLUSAPI!ClusterAffinityRuleControl.
-func ClusterAffinityRuleControl(hCluster HCLUSTER, affinityRuleName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, cbInBufferSize uint32, lpOutBuffer unsafe.Pointer, cbOutBufferSize uint32, lpBytesReturned *uint32) uint32 {
+func ClusterAffinityRuleControl(hCluster HCLUSTER, affinityRuleName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32) uint32 {
 	_affinityRuleName := win32.UTF16Ptr(affinityRuleName)
-	r1, _, _ := syscall.SyscallN(procClusterAffinityRuleControl.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_affinityRuleName)), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(cbOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)))
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procClusterAffinityRuleControl.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_affinityRuleName)), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
 	return uint32(r1)
 }
 
@@ -817,15 +825,31 @@ func ClusterCloseEnumEx(hClusterEnum HCLUSENUMEX) uint32 {
 // ClusterControl calls CLUSAPI!ClusterControl.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clustercontrol
 // Minimum OS: windowsserver2008.
-func ClusterControl(hCluster HCLUSTER, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procClusterControl.Addr(), uintptr(hCluster), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)))
+func ClusterControl(hCluster HCLUSTER, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procClusterControl.Addr(), uintptr(hCluster), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
 	return uint32(r1)
 }
 
 // ClusterControlEx calls CLUSAPI!ClusterControlEx.
-func ClusterControlEx(hCluster HCLUSTER, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterControlEx(hCluster HCLUSTER, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	r1, _, _ := syscall.SyscallN(procClusterControlEx.Addr(), uintptr(hCluster), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
+	r1, _, _ := syscall.SyscallN(procClusterControlEx.Addr(), uintptr(hCluster), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
@@ -931,15 +955,31 @@ func ClusterGroupCloseEnumEx(hGroupEnumEx HGROUPENUMEX) uint32 {
 // ClusterGroupControl calls CLUSAPI!ClusterGroupControl.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clustergroupcontrol
 // Minimum OS: windowsserver2008.
-func ClusterGroupControl(hGroup HGROUP, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procClusterGroupControl.Addr(), uintptr(hGroup), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)))
+func ClusterGroupControl(hGroup HGROUP, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procClusterGroupControl.Addr(), uintptr(hGroup), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
 	return uint32(r1)
 }
 
 // ClusterGroupControlEx calls CLUSAPI!ClusterGroupControlEx.
-func ClusterGroupControlEx(hGroup HGROUP, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterGroupControlEx(hGroup HGROUP, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	r1, _, _ := syscall.SyscallN(procClusterGroupControlEx.Addr(), uintptr(hGroup), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
+	r1, _, _ := syscall.SyscallN(procClusterGroupControlEx.Addr(), uintptr(hGroup), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
@@ -1007,15 +1047,31 @@ func ClusterGroupSetCloseEnum(hGroupSetEnum HGROUPSETENUM) uint32 {
 // ClusterGroupSetControl calls CLUSAPI!ClusterGroupSetControl.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clustergroupsetcontrol
 // Minimum OS: windowsserver2016.
-func ClusterGroupSetControl(hGroupSet HGROUPSET, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, cbInBufferSize uint32, lpOutBuffer unsafe.Pointer, cbOutBufferSize uint32, lpBytesReturned *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procClusterGroupSetControl.Addr(), uintptr(hGroupSet), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(cbOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)))
+func ClusterGroupSetControl(hGroupSet HGROUPSET, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procClusterGroupSetControl.Addr(), uintptr(hGroupSet), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
 	return uint32(r1)
 }
 
 // ClusterGroupSetControlEx calls CLUSAPI!ClusterGroupSetControlEx.
-func ClusterGroupSetControlEx(hGroupSet HGROUPSET, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, cbInBufferSize uint32, lpOutBuffer unsafe.Pointer, cbOutBufferSize uint32, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterGroupSetControlEx(hGroupSet HGROUPSET, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	r1, _, _ := syscall.SyscallN(procClusterGroupSetControlEx.Addr(), uintptr(hGroupSet), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(cbOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
+	r1, _, _ := syscall.SyscallN(procClusterGroupSetControlEx.Addr(), uintptr(hGroupSet), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
@@ -1066,15 +1122,31 @@ func ClusterNetInterfaceCloseEnum(hNetInterfaceEnum HNETINTERFACEENUM) uint32 {
 // ClusterNetInterfaceControl calls CLUSAPI!ClusterNetInterfaceControl.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusternetinterfacecontrol
 // Minimum OS: windowsserver2008.
-func ClusterNetInterfaceControl(hNetInterface HNETINTERFACE, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procClusterNetInterfaceControl.Addr(), uintptr(hNetInterface), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)))
+func ClusterNetInterfaceControl(hNetInterface HNETINTERFACE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procClusterNetInterfaceControl.Addr(), uintptr(hNetInterface), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
 	return uint32(r1)
 }
 
 // ClusterNetInterfaceControlEx calls CLUSAPI!ClusterNetInterfaceControlEx.
-func ClusterNetInterfaceControlEx(hNetInterface HNETINTERFACE, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterNetInterfaceControlEx(hNetInterface HNETINTERFACE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	r1, _, _ := syscall.SyscallN(procClusterNetInterfaceControlEx.Addr(), uintptr(hNetInterface), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
+	r1, _, _ := syscall.SyscallN(procClusterNetInterfaceControlEx.Addr(), uintptr(hNetInterface), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
@@ -1110,15 +1182,31 @@ func ClusterNetworkCloseEnum(hNetworkEnum HNETWORKENUM) uint32 {
 // ClusterNetworkControl calls CLUSAPI!ClusterNetworkControl.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusternetworkcontrol
 // Minimum OS: windowsserver2008.
-func ClusterNetworkControl(hNetwork HNETWORK, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procClusterNetworkControl.Addr(), uintptr(hNetwork), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)))
+func ClusterNetworkControl(hNetwork HNETWORK, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procClusterNetworkControl.Addr(), uintptr(hNetwork), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
 	return uint32(r1)
 }
 
 // ClusterNetworkControlEx calls CLUSAPI!ClusterNetworkControlEx.
-func ClusterNetworkControlEx(hNetwork HNETWORK, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterNetworkControlEx(hNetwork HNETWORK, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	r1, _, _ := syscall.SyscallN(procClusterNetworkControlEx.Addr(), uintptr(hNetwork), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
+	r1, _, _ := syscall.SyscallN(procClusterNetworkControlEx.Addr(), uintptr(hNetwork), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
@@ -1168,15 +1256,31 @@ func ClusterNodeCloseEnumEx(hNodeEnum HNODEENUMEX) uint32 {
 // ClusterNodeControl calls CLUSAPI!ClusterNodeControl.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusternodecontrol
 // Minimum OS: windowsserver2008.
-func ClusterNodeControl(hNode HNODE, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procClusterNodeControl.Addr(), uintptr(hNode), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)))
+func ClusterNodeControl(hNode HNODE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procClusterNodeControl.Addr(), uintptr(hNode), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
 	return uint32(r1)
 }
 
 // ClusterNodeControlEx calls CLUSAPI!ClusterNodeControlEx.
-func ClusterNodeControlEx(hNode HNODE, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterNodeControlEx(hNode HNODE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	r1, _, _ := syscall.SyscallN(procClusterNodeControlEx.Addr(), uintptr(hNode), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
+	r1, _, _ := syscall.SyscallN(procClusterNodeControlEx.Addr(), uintptr(hNode), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
@@ -1274,9 +1378,13 @@ func ClusterPrepareSharedVolumeForBackup(lpszFileName string, lpszVolumePathName
 // ClusterRegBatchAddCommand calls CLUSAPI!ClusterRegBatchAddCommand.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusterregbatchaddcommand
 // Minimum OS: windowsserver2008.
-func ClusterRegBatchAddCommand(hRegBatch HREGBATCH, dwCommand CLUSTER_REG_COMMAND, wzName string, dwOptions uint32, lpData unsafe.Pointer, cbData uint32) int32 {
+func ClusterRegBatchAddCommand(hRegBatch HREGBATCH, dwCommand CLUSTER_REG_COMMAND, wzName string, dwOptions uint32, lpData []byte) int32 {
 	_wzName := win32.UTF16Ptr(wzName)
-	r1, _, _ := syscall.SyscallN(procClusterRegBatchAddCommand.Addr(), uintptr(hRegBatch), uintptr(dwCommand), uintptr(unsafe.Pointer(_wzName)), uintptr(dwOptions), uintptr(unsafe.Pointer(lpData)), uintptr(cbData))
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procClusterRegBatchAddCommand.Addr(), uintptr(hRegBatch), uintptr(dwCommand), uintptr(unsafe.Pointer(_wzName)), uintptr(dwOptions), uintptr(unsafe.Pointer(_lpData)), uintptr(len(lpData)))
 	return int32(r1)
 }
 
@@ -1595,30 +1703,62 @@ func ClusterResourceCloseEnumEx(hResourceEnumEx HRESENUMEX) uint32 {
 // ClusterResourceControl calls CLUSAPI!ClusterResourceControl.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusterresourcecontrol
 // Minimum OS: windowsserver2008.
-func ClusterResourceControl(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, cbInBufferSize uint32, lpOutBuffer unsafe.Pointer, cbOutBufferSize uint32, lpBytesReturned *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procClusterResourceControl.Addr(), uintptr(hResource), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(cbOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)))
+func ClusterResourceControl(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procClusterResourceControl.Addr(), uintptr(hResource), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
 	return uint32(r1)
 }
 
 // ClusterResourceControlAsUser calls CLUSAPI!ClusterResourceControlAsUser.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusterresourcecontrolasuser
 // Minimum OS: windowsserver2016.
-func ClusterResourceControlAsUser(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, cbInBufferSize uint32, lpOutBuffer unsafe.Pointer, cbOutBufferSize uint32, lpBytesReturned *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procClusterResourceControlAsUser.Addr(), uintptr(hResource), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(cbOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)))
+func ClusterResourceControlAsUser(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procClusterResourceControlAsUser.Addr(), uintptr(hResource), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
 	return uint32(r1)
 }
 
 // ClusterResourceControlAsUserEx calls CLUSAPI!ClusterResourceControlAsUserEx.
-func ClusterResourceControlAsUserEx(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, cbInBufferSize uint32, lpOutBuffer unsafe.Pointer, cbOutBufferSize uint32, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterResourceControlAsUserEx(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	r1, _, _ := syscall.SyscallN(procClusterResourceControlAsUserEx.Addr(), uintptr(hResource), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(cbOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
+	r1, _, _ := syscall.SyscallN(procClusterResourceControlAsUserEx.Addr(), uintptr(hResource), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
 // ClusterResourceControlEx calls CLUSAPI!ClusterResourceControlEx.
-func ClusterResourceControlEx(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, cbInBufferSize uint32, lpOutBuffer unsafe.Pointer, cbOutBufferSize uint32, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterResourceControlEx(hResource HRESOURCE, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	r1, _, _ := syscall.SyscallN(procClusterResourceControlEx.Addr(), uintptr(hResource), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(cbOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
+	r1, _, _ := syscall.SyscallN(procClusterResourceControlEx.Addr(), uintptr(hResource), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
@@ -1689,34 +1829,66 @@ func ClusterResourceTypeCloseEnum(hResTypeEnum HRESTYPEENUM) uint32 {
 // ClusterResourceTypeControl calls CLUSAPI!ClusterResourceTypeControl.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusterresourcetypecontrol
 // Minimum OS: windowsserver2008.
-func ClusterResourceTypeControl(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32) uint32 {
+func ClusterResourceTypeControl(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32) uint32 {
 	_lpszResourceTypeName := win32.UTF16Ptr(lpszResourceTypeName)
-	r1, _, _ := syscall.SyscallN(procClusterResourceTypeControl.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceTypeName)), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)))
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procClusterResourceTypeControl.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceTypeName)), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
 	return uint32(r1)
 }
 
 // ClusterResourceTypeControlAsUser calls CLUSAPI!ClusterResourceTypeControlAsUser.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-clusterresourcetypecontrolasuser
 // Minimum OS: windowsserver2016.
-func ClusterResourceTypeControlAsUser(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32) uint32 {
+func ClusterResourceTypeControlAsUser(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32) uint32 {
 	_lpszResourceTypeName := win32.UTF16Ptr(lpszResourceTypeName)
-	r1, _, _ := syscall.SyscallN(procClusterResourceTypeControlAsUser.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceTypeName)), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)))
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procClusterResourceTypeControlAsUser.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceTypeName)), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)))
 	return uint32(r1)
 }
 
 // ClusterResourceTypeControlAsUserEx calls CLUSAPI!ClusterResourceTypeControlAsUserEx.
-func ClusterResourceTypeControlAsUserEx(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterResourceTypeControlAsUserEx(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
 	_lpszResourceTypeName := win32.UTF16Ptr(lpszResourceTypeName)
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	r1, _, _ := syscall.SyscallN(procClusterResourceTypeControlAsUserEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceTypeName)), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
+	r1, _, _ := syscall.SyscallN(procClusterResourceTypeControlAsUserEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceTypeName)), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
 // ClusterResourceTypeControlEx calls CLUSAPI!ClusterResourceTypeControlEx.
-func ClusterResourceTypeControlEx(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer unsafe.Pointer, nInBufferSize uint32, lpOutBuffer unsafe.Pointer, nOutBufferSize uint32, lpBytesReturned *uint32, lpszReason string) uint32 {
+func ClusterResourceTypeControlEx(hCluster HCLUSTER, lpszResourceTypeName string, hHostNode HNODE, dwControlCode uint32, lpInBuffer []byte, lpOutBuffer []byte, lpBytesReturned *uint32, lpszReason string) uint32 {
 	_lpszResourceTypeName := win32.UTF16Ptr(lpszResourceTypeName)
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	var _lpOutBuffer *byte
+	if len(lpOutBuffer) > 0 {
+		_lpOutBuffer = &lpOutBuffer[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	r1, _, _ := syscall.SyscallN(procClusterResourceTypeControlEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceTypeName)), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(nInBufferSize), uintptr(unsafe.Pointer(lpOutBuffer)), uintptr(nOutBufferSize), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
+	r1, _, _ := syscall.SyscallN(procClusterResourceTypeControlEx.Addr(), uintptr(hCluster), uintptr(unsafe.Pointer(_lpszResourceTypeName)), uintptr(hHostNode), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpOutBuffer)), uintptr(len(lpOutBuffer)), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
@@ -2389,15 +2561,23 @@ func MoveClusterGroup(hGroup HGROUP, hDestinationNode HNODE) uint32 {
 // MoveClusterGroupEx calls CLUSAPI!MoveClusterGroupEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-moveclustergroupex
 // Minimum OS: windowsserver2012.
-func MoveClusterGroupEx(hGroup HGROUP, hDestinationNode HNODE, dwMoveFlags uint32, lpInBuffer *byte, cbInBufferSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procMoveClusterGroupEx.Addr(), uintptr(hGroup), uintptr(hDestinationNode), uintptr(dwMoveFlags), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize))
+func MoveClusterGroupEx(hGroup HGROUP, hDestinationNode HNODE, dwMoveFlags uint32, lpInBuffer []byte) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMoveClusterGroupEx.Addr(), uintptr(hGroup), uintptr(hDestinationNode), uintptr(dwMoveFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)))
 	return uint32(r1)
 }
 
 // MoveClusterGroupEx2 calls CLUSAPI!MoveClusterGroupEx2.
-func MoveClusterGroupEx2(hGroup HGROUP, hDestinationNode HNODE, dwMoveFlags uint32, lpInBuffer *byte, cbInBufferSize uint32, lpszReason string) uint32 {
+func MoveClusterGroupEx2(hGroup HGROUP, hDestinationNode HNODE, dwMoveFlags uint32, lpInBuffer []byte, lpszReason string) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	r1, _, _ := syscall.SyscallN(procMoveClusterGroupEx2.Addr(), uintptr(hGroup), uintptr(hDestinationNode), uintptr(dwMoveFlags), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize), uintptr(unsafe.Pointer(_lpszReason)))
+	r1, _, _ := syscall.SyscallN(procMoveClusterGroupEx2.Addr(), uintptr(hGroup), uintptr(hDestinationNode), uintptr(dwMoveFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
@@ -2412,8 +2592,12 @@ func OfflineClusterGroup(hGroup HGROUP) uint32 {
 // OfflineClusterGroupEx calls CLUSAPI!OfflineClusterGroupEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-offlineclustergroupex
 // Minimum OS: windowsserver2012.
-func OfflineClusterGroupEx(hGroup HGROUP, dwOfflineFlags uint32, lpInBuffer *byte, cbInBufferSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procOfflineClusterGroupEx.Addr(), uintptr(hGroup), uintptr(dwOfflineFlags), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize))
+func OfflineClusterGroupEx(hGroup HGROUP, dwOfflineFlags uint32, lpInBuffer []byte) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procOfflineClusterGroupEx.Addr(), uintptr(hGroup), uintptr(dwOfflineFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)))
 	return uint32(r1)
 }
 
@@ -2435,15 +2619,23 @@ func OfflineClusterResource(hResource HRESOURCE) uint32 {
 // OfflineClusterResourceEx calls CLUSAPI!OfflineClusterResourceEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-offlineclusterresourceex
 // Minimum OS: windowsserver2012.
-func OfflineClusterResourceEx(hResource HRESOURCE, dwOfflineFlags uint32, lpInBuffer *byte, cbInBufferSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procOfflineClusterResourceEx.Addr(), uintptr(hResource), uintptr(dwOfflineFlags), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize))
+func OfflineClusterResourceEx(hResource HRESOURCE, dwOfflineFlags uint32, lpInBuffer []byte) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procOfflineClusterResourceEx.Addr(), uintptr(hResource), uintptr(dwOfflineFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)))
 	return uint32(r1)
 }
 
 // OfflineClusterResourceEx2 calls CLUSAPI!OfflineClusterResourceEx2.
-func OfflineClusterResourceEx2(hResource HRESOURCE, dwOfflineFlags uint32, lpInBuffer *byte, cbInBufferSize uint32, lpszReason string) uint32 {
+func OfflineClusterResourceEx2(hResource HRESOURCE, dwOfflineFlags uint32, lpInBuffer []byte, lpszReason string) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	r1, _, _ := syscall.SyscallN(procOfflineClusterResourceEx2.Addr(), uintptr(hResource), uintptr(dwOfflineFlags), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize), uintptr(unsafe.Pointer(_lpszReason)))
+	r1, _, _ := syscall.SyscallN(procOfflineClusterResourceEx2.Addr(), uintptr(hResource), uintptr(dwOfflineFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
@@ -2458,15 +2650,23 @@ func OnlineClusterGroup(hGroup HGROUP, hDestinationNode HNODE) uint32 {
 // OnlineClusterGroupEx calls CLUSAPI!OnlineClusterGroupEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-onlineclustergroupex
 // Minimum OS: windowsserver2012.
-func OnlineClusterGroupEx(hGroup HGROUP, hDestinationNode HNODE, dwOnlineFlags uint32, lpInBuffer *byte, cbInBufferSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procOnlineClusterGroupEx.Addr(), uintptr(hGroup), uintptr(hDestinationNode), uintptr(dwOnlineFlags), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize))
+func OnlineClusterGroupEx(hGroup HGROUP, hDestinationNode HNODE, dwOnlineFlags uint32, lpInBuffer []byte) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procOnlineClusterGroupEx.Addr(), uintptr(hGroup), uintptr(hDestinationNode), uintptr(dwOnlineFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)))
 	return uint32(r1)
 }
 
 // OnlineClusterGroupEx2 calls CLUSAPI!OnlineClusterGroupEx2.
-func OnlineClusterGroupEx2(hGroup HGROUP, hDestinationNode HNODE, dwOnlineFlags uint32, lpInBuffer *byte, cbInBufferSize uint32, lpszReason string) uint32 {
+func OnlineClusterGroupEx2(hGroup HGROUP, hDestinationNode HNODE, dwOnlineFlags uint32, lpInBuffer []byte, lpszReason string) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	r1, _, _ := syscall.SyscallN(procOnlineClusterGroupEx2.Addr(), uintptr(hGroup), uintptr(hDestinationNode), uintptr(dwOnlineFlags), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize), uintptr(unsafe.Pointer(_lpszReason)))
+	r1, _, _ := syscall.SyscallN(procOnlineClusterGroupEx2.Addr(), uintptr(hGroup), uintptr(hDestinationNode), uintptr(dwOnlineFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
@@ -2481,15 +2681,23 @@ func OnlineClusterResource(hResource HRESOURCE) uint32 {
 // OnlineClusterResourceEx calls CLUSAPI!OnlineClusterResourceEx.
 // https://learn.microsoft.com/windows/win32/api/clusapi/nf-clusapi-onlineclusterresourceex
 // Minimum OS: windowsserver2012.
-func OnlineClusterResourceEx(hResource HRESOURCE, dwOnlineFlags uint32, lpInBuffer *byte, cbInBufferSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procOnlineClusterResourceEx.Addr(), uintptr(hResource), uintptr(dwOnlineFlags), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize))
+func OnlineClusterResourceEx(hResource HRESOURCE, dwOnlineFlags uint32, lpInBuffer []byte) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procOnlineClusterResourceEx.Addr(), uintptr(hResource), uintptr(dwOnlineFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)))
 	return uint32(r1)
 }
 
 // OnlineClusterResourceEx2 calls CLUSAPI!OnlineClusterResourceEx2.
-func OnlineClusterResourceEx2(hResource HRESOURCE, dwOnlineFlags uint32, lpInBuffer *byte, cbInBufferSize uint32, lpszReason string) uint32 {
+func OnlineClusterResourceEx2(hResource HRESOURCE, dwOnlineFlags uint32, lpInBuffer []byte, lpszReason string) uint32 {
+	var _lpInBuffer *byte
+	if len(lpInBuffer) > 0 {
+		_lpInBuffer = &lpInBuffer[0]
+	}
 	_lpszReason := win32.UTF16Ptr(lpszReason)
-	r1, _, _ := syscall.SyscallN(procOnlineClusterResourceEx2.Addr(), uintptr(hResource), uintptr(dwOnlineFlags), uintptr(unsafe.Pointer(lpInBuffer)), uintptr(cbInBufferSize), uintptr(unsafe.Pointer(_lpszReason)))
+	r1, _, _ := syscall.SyscallN(procOnlineClusterResourceEx2.Addr(), uintptr(hResource), uintptr(dwOnlineFlags), uintptr(unsafe.Pointer(_lpInBuffer)), uintptr(len(lpInBuffer)), uintptr(unsafe.Pointer(_lpszReason)))
 	return uint32(r1)
 }
 
@@ -2966,9 +3174,13 @@ func ResUtilExpandEnvironmentStrings(pszSrc string) (foundation.PWSTR, error) {
 // ResUtilFindBinaryProperty calls RESUTILS!ResUtilFindBinaryProperty.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilfindbinaryproperty
 // Minimum OS: windowsserver2008.
-func ResUtilFindBinaryProperty(pPropertyList unsafe.Pointer, cbPropertyListSize uint32, pszPropertyName string, pbPropertyValue **byte, pcbPropertyValueSize *uint32) uint32 {
+func ResUtilFindBinaryProperty(pPropertyList []byte, pszPropertyName string, pbPropertyValue **byte, pcbPropertyValueSize *uint32) uint32 {
+	var _pPropertyList *byte
+	if len(pPropertyList) > 0 {
+		_pPropertyList = &pPropertyList[0]
+	}
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
-	r1, _, _ := syscall.SyscallN(procResUtilFindBinaryProperty.Addr(), uintptr(unsafe.Pointer(pPropertyList)), uintptr(cbPropertyListSize), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pbPropertyValue)), uintptr(unsafe.Pointer(pcbPropertyValueSize)))
+	r1, _, _ := syscall.SyscallN(procResUtilFindBinaryProperty.Addr(), uintptr(unsafe.Pointer(_pPropertyList)), uintptr(len(pPropertyList)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pbPropertyValue)), uintptr(unsafe.Pointer(pcbPropertyValueSize)))
 	return uint32(r1)
 }
 
@@ -2986,72 +3198,104 @@ func ResUtilFindDependentDiskResourceDriveLetter(hCluster HCLUSTER, hResource HR
 // ResUtilFindDwordProperty calls RESUTILS!ResUtilFindDwordProperty.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilfinddwordproperty
 // Minimum OS: windowsserver2008.
-func ResUtilFindDwordProperty(pPropertyList unsafe.Pointer, cbPropertyListSize uint32, pszPropertyName string, pdwPropertyValue *uint32) uint32 {
+func ResUtilFindDwordProperty(pPropertyList []byte, pszPropertyName string, pdwPropertyValue *uint32) uint32 {
+	var _pPropertyList *byte
+	if len(pPropertyList) > 0 {
+		_pPropertyList = &pPropertyList[0]
+	}
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
-	r1, _, _ := syscall.SyscallN(procResUtilFindDwordProperty.Addr(), uintptr(unsafe.Pointer(pPropertyList)), uintptr(cbPropertyListSize), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pdwPropertyValue)))
+	r1, _, _ := syscall.SyscallN(procResUtilFindDwordProperty.Addr(), uintptr(unsafe.Pointer(_pPropertyList)), uintptr(len(pPropertyList)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pdwPropertyValue)))
 	return uint32(r1)
 }
 
 // ResUtilFindExpandSzProperty calls RESUTILS!ResUtilFindExpandSzProperty.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilfindexpandszproperty
 // Minimum OS: windowsserver2008.
-func ResUtilFindExpandSzProperty(pPropertyList unsafe.Pointer, cbPropertyListSize uint32, pszPropertyName string, pszPropertyValue *foundation.PWSTR) uint32 {
+func ResUtilFindExpandSzProperty(pPropertyList []byte, pszPropertyName string, pszPropertyValue *foundation.PWSTR) uint32 {
+	var _pPropertyList *byte
+	if len(pPropertyList) > 0 {
+		_pPropertyList = &pPropertyList[0]
+	}
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
-	r1, _, _ := syscall.SyscallN(procResUtilFindExpandSzProperty.Addr(), uintptr(unsafe.Pointer(pPropertyList)), uintptr(cbPropertyListSize), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pszPropertyValue)))
+	r1, _, _ := syscall.SyscallN(procResUtilFindExpandSzProperty.Addr(), uintptr(unsafe.Pointer(_pPropertyList)), uintptr(len(pPropertyList)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pszPropertyValue)))
 	return uint32(r1)
 }
 
 // ResUtilFindExpandedSzProperty calls RESUTILS!ResUtilFindExpandedSzProperty.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilfindexpandedszproperty
 // Minimum OS: windowsserver2008.
-func ResUtilFindExpandedSzProperty(pPropertyList unsafe.Pointer, cbPropertyListSize uint32, pszPropertyName string, pszPropertyValue *foundation.PWSTR) uint32 {
+func ResUtilFindExpandedSzProperty(pPropertyList []byte, pszPropertyName string, pszPropertyValue *foundation.PWSTR) uint32 {
+	var _pPropertyList *byte
+	if len(pPropertyList) > 0 {
+		_pPropertyList = &pPropertyList[0]
+	}
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
-	r1, _, _ := syscall.SyscallN(procResUtilFindExpandedSzProperty.Addr(), uintptr(unsafe.Pointer(pPropertyList)), uintptr(cbPropertyListSize), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pszPropertyValue)))
+	r1, _, _ := syscall.SyscallN(procResUtilFindExpandedSzProperty.Addr(), uintptr(unsafe.Pointer(_pPropertyList)), uintptr(len(pPropertyList)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pszPropertyValue)))
 	return uint32(r1)
 }
 
 // ResUtilFindFileTimeProperty calls RESUTILS!ResUtilFindFileTimeProperty.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilfindfiletimeproperty
 // Minimum OS: windowsserver2008.
-func ResUtilFindFileTimeProperty(pPropertyList unsafe.Pointer, cbPropertyListSize uint32, pszPropertyName string, pftPropertyValue *foundation.FILETIME) uint32 {
+func ResUtilFindFileTimeProperty(pPropertyList []byte, pszPropertyName string, pftPropertyValue *foundation.FILETIME) uint32 {
+	var _pPropertyList *byte
+	if len(pPropertyList) > 0 {
+		_pPropertyList = &pPropertyList[0]
+	}
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
-	r1, _, _ := syscall.SyscallN(procResUtilFindFileTimeProperty.Addr(), uintptr(unsafe.Pointer(pPropertyList)), uintptr(cbPropertyListSize), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pftPropertyValue)))
+	r1, _, _ := syscall.SyscallN(procResUtilFindFileTimeProperty.Addr(), uintptr(unsafe.Pointer(_pPropertyList)), uintptr(len(pPropertyList)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pftPropertyValue)))
 	return uint32(r1)
 }
 
 // ResUtilFindLongProperty calls RESUTILS!ResUtilFindLongProperty.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilfindlongproperty
 // Minimum OS: windowsserver2008.
-func ResUtilFindLongProperty(pPropertyList unsafe.Pointer, cbPropertyListSize uint32, pszPropertyName string, plPropertyValue *int32) uint32 {
+func ResUtilFindLongProperty(pPropertyList []byte, pszPropertyName string, plPropertyValue *int32) uint32 {
+	var _pPropertyList *byte
+	if len(pPropertyList) > 0 {
+		_pPropertyList = &pPropertyList[0]
+	}
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
-	r1, _, _ := syscall.SyscallN(procResUtilFindLongProperty.Addr(), uintptr(unsafe.Pointer(pPropertyList)), uintptr(cbPropertyListSize), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(plPropertyValue)))
+	r1, _, _ := syscall.SyscallN(procResUtilFindLongProperty.Addr(), uintptr(unsafe.Pointer(_pPropertyList)), uintptr(len(pPropertyList)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(plPropertyValue)))
 	return uint32(r1)
 }
 
 // ResUtilFindMultiSzProperty calls RESUTILS!ResUtilFindMultiSzProperty.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilfindmultiszproperty
 // Minimum OS: windowsserver2008.
-func ResUtilFindMultiSzProperty(pPropertyList unsafe.Pointer, cbPropertyListSize uint32, pszPropertyName string, pszPropertyValue *foundation.PWSTR, pcbPropertyValueSize *uint32) uint32 {
+func ResUtilFindMultiSzProperty(pPropertyList []byte, pszPropertyName string, pszPropertyValue *foundation.PWSTR, pcbPropertyValueSize *uint32) uint32 {
+	var _pPropertyList *byte
+	if len(pPropertyList) > 0 {
+		_pPropertyList = &pPropertyList[0]
+	}
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
-	r1, _, _ := syscall.SyscallN(procResUtilFindMultiSzProperty.Addr(), uintptr(unsafe.Pointer(pPropertyList)), uintptr(cbPropertyListSize), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pszPropertyValue)), uintptr(unsafe.Pointer(pcbPropertyValueSize)))
+	r1, _, _ := syscall.SyscallN(procResUtilFindMultiSzProperty.Addr(), uintptr(unsafe.Pointer(_pPropertyList)), uintptr(len(pPropertyList)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pszPropertyValue)), uintptr(unsafe.Pointer(pcbPropertyValueSize)))
 	return uint32(r1)
 }
 
 // ResUtilFindSzProperty calls RESUTILS!ResUtilFindSzProperty.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilfindszproperty
 // Minimum OS: windowsserver2008.
-func ResUtilFindSzProperty(pPropertyList unsafe.Pointer, cbPropertyListSize uint32, pszPropertyName string, pszPropertyValue *foundation.PWSTR) uint32 {
+func ResUtilFindSzProperty(pPropertyList []byte, pszPropertyName string, pszPropertyValue *foundation.PWSTR) uint32 {
+	var _pPropertyList *byte
+	if len(pPropertyList) > 0 {
+		_pPropertyList = &pPropertyList[0]
+	}
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
-	r1, _, _ := syscall.SyscallN(procResUtilFindSzProperty.Addr(), uintptr(unsafe.Pointer(pPropertyList)), uintptr(cbPropertyListSize), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pszPropertyValue)))
+	r1, _, _ := syscall.SyscallN(procResUtilFindSzProperty.Addr(), uintptr(unsafe.Pointer(_pPropertyList)), uintptr(len(pPropertyList)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(pszPropertyValue)))
 	return uint32(r1)
 }
 
 // ResUtilFindULargeIntegerProperty calls RESUTILS!ResUtilFindULargeIntegerProperty.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilfindulargeintegerproperty
 // Minimum OS: windowsserver2016.
-func ResUtilFindULargeIntegerProperty(pPropertyList unsafe.Pointer, cbPropertyListSize uint32, pszPropertyName string, plPropertyValue *uint64) uint32 {
+func ResUtilFindULargeIntegerProperty(pPropertyList []byte, pszPropertyName string, plPropertyValue *uint64) uint32 {
+	var _pPropertyList *byte
+	if len(pPropertyList) > 0 {
+		_pPropertyList = &pPropertyList[0]
+	}
 	_pszPropertyName := win32.UTF16Ptr(pszPropertyName)
-	r1, _, _ := syscall.SyscallN(procResUtilFindULargeIntegerProperty.Addr(), uintptr(unsafe.Pointer(pPropertyList)), uintptr(cbPropertyListSize), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(plPropertyValue)))
+	r1, _, _ := syscall.SyscallN(procResUtilFindULargeIntegerProperty.Addr(), uintptr(unsafe.Pointer(_pPropertyList)), uintptr(len(pPropertyList)), uintptr(unsafe.Pointer(_pszPropertyName)), uintptr(unsafe.Pointer(plPropertyValue)))
 	return uint32(r1)
 }
 
@@ -3073,16 +3317,24 @@ func ResUtilFreeParameterBlock(pOutParams *byte, pInParams *byte, pPropertyTable
 // ResUtilGetAllProperties calls RESUTILS!ResUtilGetAllProperties.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilgetallproperties
 // Minimum OS: windowsserver2008.
-func ResUtilGetAllProperties(hkeyClusterKey systemregistry.HKEY, pPropertyTable *RESUTIL_PROPERTY_ITEM, pOutPropertyList unsafe.Pointer, cbOutPropertyListSize uint32, pcbBytesReturned *uint32, pcbRequired *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procResUtilGetAllProperties.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(pPropertyTable)), uintptr(unsafe.Pointer(pOutPropertyList)), uintptr(cbOutPropertyListSize), uintptr(unsafe.Pointer(pcbBytesReturned)), uintptr(unsafe.Pointer(pcbRequired)))
+func ResUtilGetAllProperties(hkeyClusterKey systemregistry.HKEY, pPropertyTable *RESUTIL_PROPERTY_ITEM, pOutPropertyList []byte, pcbBytesReturned *uint32, pcbRequired *uint32) uint32 {
+	var _pOutPropertyList *byte
+	if len(pOutPropertyList) > 0 {
+		_pOutPropertyList = &pOutPropertyList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procResUtilGetAllProperties.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(pPropertyTable)), uintptr(unsafe.Pointer(_pOutPropertyList)), uintptr(len(pOutPropertyList)), uintptr(unsafe.Pointer(pcbBytesReturned)), uintptr(unsafe.Pointer(pcbRequired)))
 	return uint32(r1)
 }
 
 // ResUtilGetBinaryProperty calls RESUTILS!ResUtilGetBinaryProperty.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilgetbinaryproperty
 // Minimum OS: windowsserver2008.
-func ResUtilGetBinaryProperty(ppbOutValue **byte, pcbOutValueSize *uint32, pValueStruct *CLUSPROP_BINARY, pbOldValue *byte, cbOldValueSize uint32, ppPropertyList **byte, pcbPropertyListSize *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procResUtilGetBinaryProperty.Addr(), uintptr(unsafe.Pointer(ppbOutValue)), uintptr(unsafe.Pointer(pcbOutValueSize)), uintptr(unsafe.Pointer(pValueStruct)), uintptr(unsafe.Pointer(pbOldValue)), uintptr(cbOldValueSize), uintptr(unsafe.Pointer(ppPropertyList)), uintptr(unsafe.Pointer(pcbPropertyListSize)))
+func ResUtilGetBinaryProperty(ppbOutValue **byte, pcbOutValueSize *uint32, pValueStruct *CLUSPROP_BINARY, pbOldValue []byte, ppPropertyList **byte, pcbPropertyListSize *uint32) uint32 {
+	var _pbOldValue *byte
+	if len(pbOldValue) > 0 {
+		_pbOldValue = &pbOldValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procResUtilGetBinaryProperty.Addr(), uintptr(unsafe.Pointer(ppbOutValue)), uintptr(unsafe.Pointer(pcbOutValueSize)), uintptr(unsafe.Pointer(pValueStruct)), uintptr(unsafe.Pointer(_pbOldValue)), uintptr(len(pbOldValue)), uintptr(unsafe.Pointer(ppPropertyList)), uintptr(unsafe.Pointer(pcbPropertyListSize)))
 	return uint32(r1)
 }
 
@@ -3188,16 +3440,24 @@ func ResUtilGetMultiSzProperty(ppszOutValue *foundation.PWSTR, pcbOutValueSize *
 // ResUtilGetPrivateProperties calls RESUTILS!ResUtilGetPrivateProperties.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilgetprivateproperties
 // Minimum OS: windowsserver2008.
-func ResUtilGetPrivateProperties(hkeyClusterKey systemregistry.HKEY, pOutPropertyList unsafe.Pointer, cbOutPropertyListSize uint32, pcbBytesReturned *uint32, pcbRequired *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procResUtilGetPrivateProperties.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(pOutPropertyList)), uintptr(cbOutPropertyListSize), uintptr(unsafe.Pointer(pcbBytesReturned)), uintptr(unsafe.Pointer(pcbRequired)))
+func ResUtilGetPrivateProperties(hkeyClusterKey systemregistry.HKEY, pOutPropertyList []byte, pcbBytesReturned *uint32, pcbRequired *uint32) uint32 {
+	var _pOutPropertyList *byte
+	if len(pOutPropertyList) > 0 {
+		_pOutPropertyList = &pOutPropertyList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procResUtilGetPrivateProperties.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(_pOutPropertyList)), uintptr(len(pOutPropertyList)), uintptr(unsafe.Pointer(pcbBytesReturned)), uintptr(unsafe.Pointer(pcbRequired)))
 	return uint32(r1)
 }
 
 // ResUtilGetProperties calls RESUTILS!ResUtilGetProperties.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilgetproperties
 // Minimum OS: windowsserver2008.
-func ResUtilGetProperties(hkeyClusterKey systemregistry.HKEY, pPropertyTable *RESUTIL_PROPERTY_ITEM, pOutPropertyList unsafe.Pointer, cbOutPropertyListSize uint32, pcbBytesReturned *uint32, pcbRequired *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procResUtilGetProperties.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(pPropertyTable)), uintptr(unsafe.Pointer(pOutPropertyList)), uintptr(cbOutPropertyListSize), uintptr(unsafe.Pointer(pcbBytesReturned)), uintptr(unsafe.Pointer(pcbRequired)))
+func ResUtilGetProperties(hkeyClusterKey systemregistry.HKEY, pPropertyTable *RESUTIL_PROPERTY_ITEM, pOutPropertyList []byte, pcbBytesReturned *uint32, pcbRequired *uint32) uint32 {
+	var _pOutPropertyList *byte
+	if len(pOutPropertyList) > 0 {
+		_pOutPropertyList = &pOutPropertyList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procResUtilGetProperties.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(pPropertyTable)), uintptr(unsafe.Pointer(_pOutPropertyList)), uintptr(len(pOutPropertyList)), uintptr(unsafe.Pointer(pcbBytesReturned)), uintptr(unsafe.Pointer(pcbRequired)))
 	return uint32(r1)
 }
 
@@ -3221,8 +3481,12 @@ func ResUtilGetProperty(hkeyClusterKey systemregistry.HKEY, pPropertyTableItem *
 // ResUtilGetPropertyFormats calls RESUTILS!ResUtilGetPropertyFormats.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilgetpropertyformats
 // Minimum OS: windowsserver2008.
-func ResUtilGetPropertyFormats(pPropertyTable *RESUTIL_PROPERTY_ITEM, pOutPropertyFormatList unsafe.Pointer, cbPropertyFormatListSize uint32, pcbBytesReturned *uint32, pcbRequired *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procResUtilGetPropertyFormats.Addr(), uintptr(unsafe.Pointer(pPropertyTable)), uintptr(unsafe.Pointer(pOutPropertyFormatList)), uintptr(cbPropertyFormatListSize), uintptr(unsafe.Pointer(pcbBytesReturned)), uintptr(unsafe.Pointer(pcbRequired)))
+func ResUtilGetPropertyFormats(pPropertyTable *RESUTIL_PROPERTY_ITEM, pOutPropertyFormatList []byte, pcbBytesReturned *uint32, pcbRequired *uint32) uint32 {
+	var _pOutPropertyFormatList *byte
+	if len(pOutPropertyFormatList) > 0 {
+		_pOutPropertyFormatList = &pOutPropertyFormatList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procResUtilGetPropertyFormats.Addr(), uintptr(unsafe.Pointer(pPropertyTable)), uintptr(unsafe.Pointer(_pOutPropertyFormatList)), uintptr(len(pOutPropertyFormatList)), uintptr(unsafe.Pointer(pcbBytesReturned)), uintptr(unsafe.Pointer(pcbRequired)))
 	return uint32(r1)
 }
 
@@ -3468,9 +3732,13 @@ func ResUtilResourcesEqual(hSelf HRESOURCE, hResource HRESOURCE) bool {
 // ResUtilSetBinaryValue calls RESUTILS!ResUtilSetBinaryValue.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilsetbinaryvalue
 // Minimum OS: windowsserver2008.
-func ResUtilSetBinaryValue(hkeyClusterKey systemregistry.HKEY, pszValueName string, pbNewValue *byte, cbNewValueSize uint32, ppbOutValue **byte, pcbOutValueSize *uint32) uint32 {
+func ResUtilSetBinaryValue(hkeyClusterKey systemregistry.HKEY, pszValueName string, pbNewValue []byte, ppbOutValue **byte, pcbOutValueSize *uint32) uint32 {
 	_pszValueName := win32.UTF16Ptr(pszValueName)
-	r1, _, _ := syscall.SyscallN(procResUtilSetBinaryValue.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(_pszValueName)), uintptr(unsafe.Pointer(pbNewValue)), uintptr(cbNewValueSize), uintptr(unsafe.Pointer(ppbOutValue)), uintptr(unsafe.Pointer(pcbOutValueSize)))
+	var _pbNewValue *byte
+	if len(pbNewValue) > 0 {
+		_pbNewValue = &pbNewValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procResUtilSetBinaryValue.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(_pszValueName)), uintptr(unsafe.Pointer(_pbNewValue)), uintptr(len(pbNewValue)), uintptr(unsafe.Pointer(ppbOutValue)), uintptr(unsafe.Pointer(pcbOutValueSize)))
 	return uint32(r1)
 }
 
@@ -3506,8 +3774,12 @@ func ResUtilSetMultiSzValue(hkeyClusterKey systemregistry.HKEY, pszValueName str
 // ResUtilSetPrivatePropertyList calls RESUTILS!ResUtilSetPrivatePropertyList.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilsetprivatepropertylist
 // Minimum OS: windowsserver2008.
-func ResUtilSetPrivatePropertyList(hkeyClusterKey systemregistry.HKEY, pInPropertyList unsafe.Pointer, cbInPropertyListSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procResUtilSetPrivatePropertyList.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(pInPropertyList)), uintptr(cbInPropertyListSize))
+func ResUtilSetPrivatePropertyList(hkeyClusterKey systemregistry.HKEY, pInPropertyList []byte) uint32 {
+	var _pInPropertyList *byte
+	if len(pInPropertyList) > 0 {
+		_pInPropertyList = &pInPropertyList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procResUtilSetPrivatePropertyList.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(_pInPropertyList)), uintptr(len(pInPropertyList)))
 	return uint32(r1)
 }
 
@@ -3531,9 +3803,13 @@ func ResUtilSetPropertyParameterBlockEx(hkeyClusterKey systemregistry.HKEY, pPro
 // ResUtilSetPropertyTable calls RESUTILS!ResUtilSetPropertyTable.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilsetpropertytable
 // Minimum OS: windowsserver2008.
-func ResUtilSetPropertyTable(hkeyClusterKey systemregistry.HKEY, pPropertyTable *RESUTIL_PROPERTY_ITEM, bAllowUnknownProperties bool, pInPropertyList unsafe.Pointer, cbInPropertyListSize uint32, pOutParams *byte) uint32 {
+func ResUtilSetPropertyTable(hkeyClusterKey systemregistry.HKEY, pPropertyTable *RESUTIL_PROPERTY_ITEM, bAllowUnknownProperties bool, pInPropertyList []byte, pOutParams *byte) uint32 {
 	_bAllowUnknownProperties := win32.Bool32(bAllowUnknownProperties)
-	r1, _, _ := syscall.SyscallN(procResUtilSetPropertyTable.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(pPropertyTable)), 0, uintptr(_bAllowUnknownProperties), uintptr(unsafe.Pointer(pInPropertyList)), uintptr(cbInPropertyListSize), uintptr(unsafe.Pointer(pOutParams)))
+	var _pInPropertyList *byte
+	if len(pInPropertyList) > 0 {
+		_pInPropertyList = &pInPropertyList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procResUtilSetPropertyTable.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(pPropertyTable)), 0, uintptr(_bAllowUnknownProperties), uintptr(unsafe.Pointer(_pInPropertyList)), uintptr(len(pInPropertyList)), uintptr(unsafe.Pointer(pOutParams)))
 	return uint32(r1)
 }
 
@@ -3596,17 +3872,25 @@ func ResUtilSetSzValue(hkeyClusterKey systemregistry.HKEY, pszValueName string, 
 // ResUtilSetUnknownProperties calls RESUTILS!ResUtilSetUnknownProperties.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilsetunknownproperties
 // Minimum OS: windowsserver2008.
-func ResUtilSetUnknownProperties(hkeyClusterKey systemregistry.HKEY, pPropertyTable *RESUTIL_PROPERTY_ITEM, pInPropertyList unsafe.Pointer, cbInPropertyListSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procResUtilSetUnknownProperties.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(pPropertyTable)), uintptr(unsafe.Pointer(pInPropertyList)), uintptr(cbInPropertyListSize))
+func ResUtilSetUnknownProperties(hkeyClusterKey systemregistry.HKEY, pPropertyTable *RESUTIL_PROPERTY_ITEM, pInPropertyList []byte) uint32 {
+	var _pInPropertyList *byte
+	if len(pInPropertyList) > 0 {
+		_pInPropertyList = &pInPropertyList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procResUtilSetUnknownProperties.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(pPropertyTable)), uintptr(unsafe.Pointer(_pInPropertyList)), uintptr(len(pInPropertyList)))
 	return uint32(r1)
 }
 
 // ResUtilSetValueEx calls RESUTILS!ResUtilSetValueEx.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilsetvalueex
 // Minimum OS: windowsserver2012.
-func ResUtilSetValueEx(hkeyClusterKey systemregistry.HKEY, valueName string, valueType uint32, valueData *byte, valueSize uint32, flags uint32) uint32 {
+func ResUtilSetValueEx(hkeyClusterKey systemregistry.HKEY, valueName string, valueType uint32, valueData []byte, flags uint32) uint32 {
 	_valueName := win32.UTF16Ptr(valueName)
-	r1, _, _ := syscall.SyscallN(procResUtilSetValueEx.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(_valueName)), uintptr(valueType), uintptr(unsafe.Pointer(valueData)), uintptr(valueSize), uintptr(flags))
+	var _valueData *byte
+	if len(valueData) > 0 {
+		_valueData = &valueData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procResUtilSetValueEx.Addr(), uintptr(hkeyClusterKey), uintptr(unsafe.Pointer(_valueName)), uintptr(valueType), uintptr(unsafe.Pointer(_valueData)), uintptr(len(valueData)), uintptr(flags))
 	return uint32(r1)
 }
 
@@ -3648,17 +3932,25 @@ func ResUtilTerminateServiceProcessFromResDll(dwServicePid uint32, bOffline bool
 // ResUtilVerifyPrivatePropertyList calls RESUTILS!ResUtilVerifyPrivatePropertyList.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilverifyprivatepropertylist
 // Minimum OS: windowsserver2008.
-func ResUtilVerifyPrivatePropertyList(pInPropertyList unsafe.Pointer, cbInPropertyListSize uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procResUtilVerifyPrivatePropertyList.Addr(), uintptr(unsafe.Pointer(pInPropertyList)), uintptr(cbInPropertyListSize))
+func ResUtilVerifyPrivatePropertyList(pInPropertyList []byte) uint32 {
+	var _pInPropertyList *byte
+	if len(pInPropertyList) > 0 {
+		_pInPropertyList = &pInPropertyList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procResUtilVerifyPrivatePropertyList.Addr(), uintptr(unsafe.Pointer(_pInPropertyList)), uintptr(len(pInPropertyList)))
 	return uint32(r1)
 }
 
 // ResUtilVerifyPropertyTable calls RESUTILS!ResUtilVerifyPropertyTable.
 // https://learn.microsoft.com/windows/win32/api/resapi/nf-resapi-resutilverifypropertytable
 // Minimum OS: windowsserver2008.
-func ResUtilVerifyPropertyTable(pPropertyTable *RESUTIL_PROPERTY_ITEM, bAllowUnknownProperties bool, pInPropertyList unsafe.Pointer, cbInPropertyListSize uint32, pOutParams *byte) uint32 {
+func ResUtilVerifyPropertyTable(pPropertyTable *RESUTIL_PROPERTY_ITEM, bAllowUnknownProperties bool, pInPropertyList []byte, pOutParams *byte) uint32 {
 	_bAllowUnknownProperties := win32.Bool32(bAllowUnknownProperties)
-	r1, _, _ := syscall.SyscallN(procResUtilVerifyPropertyTable.Addr(), uintptr(unsafe.Pointer(pPropertyTable)), 0, uintptr(_bAllowUnknownProperties), uintptr(unsafe.Pointer(pInPropertyList)), uintptr(cbInPropertyListSize), uintptr(unsafe.Pointer(pOutParams)))
+	var _pInPropertyList *byte
+	if len(pInPropertyList) > 0 {
+		_pInPropertyList = &pInPropertyList[0]
+	}
+	r1, _, _ := syscall.SyscallN(procResUtilVerifyPropertyTable.Addr(), uintptr(unsafe.Pointer(pPropertyTable)), 0, uintptr(_bAllowUnknownProperties), uintptr(unsafe.Pointer(_pInPropertyList)), uintptr(len(pInPropertyList)), uintptr(unsafe.Pointer(pOutParams)))
 	return uint32(r1)
 }
 

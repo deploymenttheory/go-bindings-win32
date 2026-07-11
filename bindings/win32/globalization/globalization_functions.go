@@ -2392,8 +2392,12 @@ func IsNormalizedString(NormForm NORM_FORM, lpString string, cwLength int32) err
 // IsTextUnicode calls ADVAPI32!IsTextUnicode.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-istextunicode
 // Minimum OS: windows5.0.
-func IsTextUnicode(lpv unsafe.Pointer, iSize int32, lpiResult *IS_TEXT_UNICODE_RESULT) bool {
-	r1, _, _ := syscall.SyscallN(procIsTextUnicode.Addr(), uintptr(unsafe.Pointer(lpv)), uintptr(iSize), uintptr(unsafe.Pointer(lpiResult)))
+func IsTextUnicode(lpv []byte, lpiResult *IS_TEXT_UNICODE_RESULT) bool {
+	var _lpv *byte
+	if len(lpv) > 0 {
+		_lpv = &lpv[0]
+	}
+	r1, _, _ := syscall.SyscallN(procIsTextUnicode.Addr(), uintptr(unsafe.Pointer(_lpv)), uintptr(len(lpv)), uintptr(unsafe.Pointer(lpiResult)))
 	return r1 != 0
 }
 

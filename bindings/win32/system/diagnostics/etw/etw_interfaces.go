@@ -43,8 +43,12 @@ func (self *ITraceEvent) GetEventRecord() (*EVENT_RECORD, error) {
 }
 
 // SetPayload dispatches through ITraceEvent's vtable slot 6.
-func (self *ITraceEvent) SetPayload(Payload *byte, PayloadSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Payload)), uintptr(PayloadSize))
+func (self *ITraceEvent) SetPayload(Payload []byte) error {
+	var _Payload *byte
+	if len(Payload) > 0 {
+		_Payload = &Payload[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Payload)), uintptr(len(Payload)))
 	return win32.HRESULTError(int32(r1))
 }
 

@@ -599,10 +599,14 @@ func SizeofResource(hModule foundation.HMODULE, hResInfo foundation.HRSRC) (uint
 // UpdateResource calls KERNEL32!UpdateResourceW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-updateresourcew
 // Minimum OS: windows5.0.
-func UpdateResource(hUpdate foundation.HANDLE, lpType string, lpName string, wLanguage uint16, lpData unsafe.Pointer, cb uint32) error {
+func UpdateResource(hUpdate foundation.HANDLE, lpType string, lpName string, wLanguage uint16, lpData []byte) error {
 	_lpType := win32.UTF16Ptr(lpType)
 	_lpName := win32.UTF16Ptr(lpName)
-	r1, _, e1 := syscall.SyscallN(procUpdateResource.Addr(), uintptr(hUpdate), uintptr(unsafe.Pointer(_lpType)), uintptr(unsafe.Pointer(_lpName)), uintptr(wLanguage), uintptr(unsafe.Pointer(lpData)), uintptr(cb))
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procUpdateResource.Addr(), uintptr(hUpdate), uintptr(unsafe.Pointer(_lpType)), uintptr(unsafe.Pointer(_lpName)), uintptr(wLanguage), uintptr(unsafe.Pointer(_lpData)), uintptr(len(lpData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -612,8 +616,12 @@ func UpdateResource(hUpdate foundation.HANDLE, lpType string, lpName string, wLa
 // UpdateResourceA calls KERNEL32!UpdateResourceA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-updateresourcea
 // Minimum OS: windows5.0.
-func UpdateResourceA(hUpdate foundation.HANDLE, lpType foundation.PSTR, lpName foundation.PSTR, wLanguage uint16, lpData unsafe.Pointer, cb uint32) error {
-	r1, _, e1 := syscall.SyscallN(procUpdateResourceA.Addr(), uintptr(hUpdate), uintptr(unsafe.Pointer(lpType)), uintptr(unsafe.Pointer(lpName)), uintptr(wLanguage), uintptr(unsafe.Pointer(lpData)), uintptr(cb))
+func UpdateResourceA(hUpdate foundation.HANDLE, lpType foundation.PSTR, lpName foundation.PSTR, wLanguage uint16, lpData []byte) error {
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procUpdateResourceA.Addr(), uintptr(hUpdate), uintptr(unsafe.Pointer(lpType)), uintptr(unsafe.Pointer(lpName)), uintptr(wLanguage), uintptr(unsafe.Pointer(_lpData)), uintptr(len(lpData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

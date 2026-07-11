@@ -24,8 +24,12 @@ type IBitmapData struct {
 var IID_IBitmapData = win32.GUID{Data1: 0xd1a34ef2, Data2: 0xcad8, Data3: 0x4635, Data4: [8]byte{0xa3, 0xd2, 0xfc, 0xda, 0x8d, 0x3f, 0x3c, 0xaf}}
 
 // CopyBytesTo dispatches through IBitmapData's vtable slot 3.
-func (self *IBitmapData) CopyBytesTo(sourceOffsetInBytes uint32, maxBytesToCopy uint32, pvBytes *byte, numberOfBytesCopied *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(sourceOffsetInBytes), uintptr(maxBytesToCopy), uintptr(unsafe.Pointer(pvBytes)), uintptr(unsafe.Pointer(numberOfBytesCopied)))
+func (self *IBitmapData) CopyBytesTo(sourceOffsetInBytes uint32, pvBytes []byte, numberOfBytesCopied *uint32) error {
+	var _pvBytes *byte
+	if len(pvBytes) > 0 {
+		_pvBytes = &pvBytes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(sourceOffsetInBytes), uintptr(len(pvBytes)), uintptr(unsafe.Pointer(_pvBytes)), uintptr(unsafe.Pointer(numberOfBytesCopied)))
 	return win32.HRESULTError(int32(r1))
 }
 

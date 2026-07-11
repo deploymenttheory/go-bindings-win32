@@ -38,8 +38,12 @@ func (self *IEnumEventObject) Clone(ppInterface **IEnumEventObject) error {
 }
 
 // Next dispatches through IEnumEventObject's vtable slot 4.
-func (self *IEnumEventObject) Next(cReqElem uint32, ppInterface **systemcom.IUnknown, cRetElem *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cReqElem), uintptr(unsafe.Pointer(ppInterface)), uintptr(unsafe.Pointer(cRetElem)))
+func (self *IEnumEventObject) Next(ppInterface []*systemcom.IUnknown, cRetElem *uint32) error {
+	var _ppInterface **systemcom.IUnknown
+	if len(ppInterface) > 0 {
+		_ppInterface = &ppInterface[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(ppInterface)), uintptr(unsafe.Pointer(_ppInterface)), uintptr(unsafe.Pointer(cRetElem)))
 	return win32.HRESULTError(int32(r1))
 }
 

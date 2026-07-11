@@ -120,9 +120,13 @@ func (self *IRdcGenerator) GetGeneratorParameters(level uint32, iGeneratorParame
 }
 
 // Process dispatches through IRdcGenerator's vtable slot 4.
-func (self *IRdcGenerator) Process(endOfInput bool, endOfOutput *foundation.BOOL, inputBuffer *RdcBufferPointer, depth uint32, outputBuffers **RdcBufferPointer, rdc_ErrorCode *RDC_ErrorCode) error {
+func (self *IRdcGenerator) Process(endOfInput bool, endOfOutput *foundation.BOOL, inputBuffer *RdcBufferPointer, outputBuffers []*RdcBufferPointer, rdc_ErrorCode *RDC_ErrorCode) error {
 	_endOfInput := win32.Bool32(endOfInput)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_endOfInput), uintptr(unsafe.Pointer(endOfOutput)), uintptr(unsafe.Pointer(inputBuffer)), uintptr(depth), uintptr(unsafe.Pointer(outputBuffers)), uintptr(unsafe.Pointer(rdc_ErrorCode)))
+	var _outputBuffers **RdcBufferPointer
+	if len(outputBuffers) > 0 {
+		_outputBuffers = &outputBuffers[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(_endOfInput), uintptr(unsafe.Pointer(endOfOutput)), uintptr(unsafe.Pointer(inputBuffer)), uintptr(len(outputBuffers)), uintptr(unsafe.Pointer(_outputBuffers)), uintptr(unsafe.Pointer(rdc_ErrorCode)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -220,8 +224,12 @@ func (self *IRdcLibrary) OpenGeneratorParameters(size uint32, parametersBlob *by
 }
 
 // CreateGenerator dispatches through IRdcLibrary's vtable slot 6.
-func (self *IRdcLibrary) CreateGenerator(depth uint32, iGeneratorParametersArray **IRdcGeneratorParameters, iGenerator **IRdcGenerator) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(depth), uintptr(unsafe.Pointer(iGeneratorParametersArray)), uintptr(unsafe.Pointer(iGenerator)))
+func (self *IRdcLibrary) CreateGenerator(iGeneratorParametersArray []*IRdcGeneratorParameters, iGenerator **IRdcGenerator) error {
+	var _iGeneratorParametersArray **IRdcGeneratorParameters
+	if len(iGeneratorParametersArray) > 0 {
+		_iGeneratorParametersArray = &iGeneratorParametersArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(iGeneratorParametersArray)), uintptr(unsafe.Pointer(_iGeneratorParametersArray)), uintptr(unsafe.Pointer(iGenerator)))
 	return win32.HRESULTError(int32(r1))
 }
 

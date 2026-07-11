@@ -124,8 +124,12 @@ func (self *ISensor) GetEventInterest(ppValues **win32.GUID, pCount *uint32) err
 }
 
 // SetEventInterest dispatches through ISensor's vtable slot 16.
-func (self *ISensor) SetEventInterest(pValues *win32.GUID, count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValues)), uintptr(count))
+func (self *ISensor) SetEventInterest(pValues []win32.GUID) error {
+	var _pValues *win32.GUID
+	if len(pValues) > 0 {
+		_pValues = &pValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pValues)), uintptr(len(pValues)))
 	return win32.HRESULTError(int32(r1))
 }
 

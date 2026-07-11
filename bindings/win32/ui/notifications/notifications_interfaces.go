@@ -22,9 +22,13 @@ type INotificationActivationCallback struct {
 var IID_INotificationActivationCallback = win32.GUID{Data1: 0x53e31837, Data2: 0x6600, Data3: 0x4a81, Data4: [8]byte{0x93, 0x95, 0x75, 0xcf, 0xfe, 0x74, 0x6f, 0x94}}
 
 // Activate dispatches through INotificationActivationCallback's vtable slot 3.
-func (self *INotificationActivationCallback) Activate(appUserModelId string, invokedArgs string, data *NOTIFICATION_USER_INPUT_DATA, count uint32) error {
+func (self *INotificationActivationCallback) Activate(appUserModelId string, invokedArgs string, data []NOTIFICATION_USER_INPUT_DATA) error {
 	_appUserModelId := win32.UTF16Ptr(appUserModelId)
 	_invokedArgs := win32.UTF16Ptr(invokedArgs)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_appUserModelId)), uintptr(unsafe.Pointer(_invokedArgs)), uintptr(unsafe.Pointer(data)), uintptr(count))
+	var _data *NOTIFICATION_USER_INPUT_DATA
+	if len(data) > 0 {
+		_data = &data[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_appUserModelId)), uintptr(unsafe.Pointer(_invokedArgs)), uintptr(unsafe.Pointer(_data)), uintptr(len(data)))
 	return win32.HRESULTError(int32(r1))
 }

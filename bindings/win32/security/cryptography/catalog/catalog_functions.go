@@ -114,8 +114,12 @@ func CryptCATAdminCalcHashFromFileHandle2(hCatAdmin uintptr, hFile foundation.HA
 // CryptCATAdminEnumCatalogFromHash calls WINTRUST!CryptCATAdminEnumCatalogFromHash.
 // https://learn.microsoft.com/windows/win32/api/mscat/nf-mscat-cryptcatadminenumcatalogfromhash
 // Minimum OS: windows5.1.2600.
-func CryptCATAdminEnumCatalogFromHash(hCatAdmin uintptr, pbHash *byte, cbHash uint32, phPrevCatInfo *uintptr) (uintptr, error) {
-	r1, _, e1 := syscall.SyscallN(procCryptCATAdminEnumCatalogFromHash.Addr(), uintptr(hCatAdmin), uintptr(unsafe.Pointer(pbHash)), uintptr(cbHash), 0, uintptr(unsafe.Pointer(phPrevCatInfo)))
+func CryptCATAdminEnumCatalogFromHash(hCatAdmin uintptr, pbHash []byte, phPrevCatInfo *uintptr) (uintptr, error) {
+	var _pbHash *byte
+	if len(pbHash) > 0 {
+		_pbHash = &pbHash[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procCryptCATAdminEnumCatalogFromHash.Addr(), uintptr(hCatAdmin), uintptr(unsafe.Pointer(_pbHash)), uintptr(len(pbHash)), 0, uintptr(unsafe.Pointer(phPrevCatInfo)))
 	if e1 != 0 {
 		return uintptr(r1), e1
 	}

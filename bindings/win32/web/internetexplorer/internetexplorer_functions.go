@@ -253,10 +253,14 @@ func IERegCreateKeyEx(lpSubKey string, Reserved uint32, lpClass string, dwOption
 }
 
 // IERegSetValueEx calls Ieframe!IERegSetValueEx.
-func IERegSetValueEx(lpSubKey string, lpValueName string, Reserved uint32, dwType uint32, lpData *byte, cbData uint32) error {
+func IERegSetValueEx(lpSubKey string, lpValueName string, Reserved uint32, dwType uint32, lpData []byte) error {
 	_lpSubKey := win32.UTF16Ptr(lpSubKey)
 	_lpValueName := win32.UTF16Ptr(lpValueName)
-	r1, _, _ := syscall.SyscallN(procIERegSetValueEx.Addr(), uintptr(unsafe.Pointer(_lpSubKey)), uintptr(unsafe.Pointer(_lpValueName)), uintptr(Reserved), uintptr(dwType), uintptr(unsafe.Pointer(lpData)), uintptr(cbData))
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procIERegSetValueEx.Addr(), uintptr(unsafe.Pointer(_lpSubKey)), uintptr(unsafe.Pointer(_lpValueName)), uintptr(Reserved), uintptr(dwType), uintptr(unsafe.Pointer(_lpData)), uintptr(len(lpData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -342,27 +346,39 @@ func RatingAccessDeniedDialogW(hDlg foundation.HWND, pszUsername string, pszCont
 }
 
 // RatingAddToApprovedSites calls MSRATING!RatingAddToApprovedSites.
-func RatingAddToApprovedSites(hDlg foundation.HWND, cbPasswordBlob uint32, pbPasswordBlob *byte, lpszUrl string, fAlwaysNever bool, fSitePage bool, fApprovedSitesEnforced bool) error {
+func RatingAddToApprovedSites(hDlg foundation.HWND, pbPasswordBlob []byte, lpszUrl string, fAlwaysNever bool, fSitePage bool, fApprovedSitesEnforced bool) error {
+	var _pbPasswordBlob *byte
+	if len(pbPasswordBlob) > 0 {
+		_pbPasswordBlob = &pbPasswordBlob[0]
+	}
 	_lpszUrl := win32.UTF16Ptr(lpszUrl)
 	_fAlwaysNever := win32.Bool32(fAlwaysNever)
 	_fSitePage := win32.Bool32(fSitePage)
 	_fApprovedSitesEnforced := win32.Bool32(fApprovedSitesEnforced)
-	r1, _, _ := syscall.SyscallN(procRatingAddToApprovedSites.Addr(), uintptr(hDlg), uintptr(cbPasswordBlob), uintptr(unsafe.Pointer(pbPasswordBlob)), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(_fAlwaysNever), uintptr(_fSitePage), uintptr(_fApprovedSitesEnforced))
+	r1, _, _ := syscall.SyscallN(procRatingAddToApprovedSites.Addr(), uintptr(hDlg), uintptr(len(pbPasswordBlob)), uintptr(unsafe.Pointer(_pbPasswordBlob)), uintptr(unsafe.Pointer(_lpszUrl)), uintptr(_fAlwaysNever), uintptr(_fSitePage), uintptr(_fApprovedSitesEnforced))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RatingCheckUserAccess calls MSRATING!RatingCheckUserAccess.
-func RatingCheckUserAccess(pszUsername foundation.PSTR, pszURL foundation.PSTR, pszRatingInfo foundation.PSTR, pData *byte, cbData uint32, ppRatingDetails *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(procRatingCheckUserAccess.Addr(), uintptr(unsafe.Pointer(pszUsername)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(pszRatingInfo)), uintptr(unsafe.Pointer(pData)), uintptr(cbData), uintptr(unsafe.Pointer(ppRatingDetails)))
+func RatingCheckUserAccess(pszUsername foundation.PSTR, pszURL foundation.PSTR, pszRatingInfo foundation.PSTR, pData []byte, ppRatingDetails *unsafe.Pointer) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRatingCheckUserAccess.Addr(), uintptr(unsafe.Pointer(pszUsername)), uintptr(unsafe.Pointer(pszURL)), uintptr(unsafe.Pointer(pszRatingInfo)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(ppRatingDetails)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // RatingCheckUserAccessW calls MSRATING!RatingCheckUserAccessW.
-func RatingCheckUserAccessW(pszUsername string, pszURL string, pszRatingInfo string, pData *byte, cbData uint32, ppRatingDetails *unsafe.Pointer) error {
+func RatingCheckUserAccessW(pszUsername string, pszURL string, pszRatingInfo string, pData []byte, ppRatingDetails *unsafe.Pointer) error {
 	_pszUsername := win32.UTF16Ptr(pszUsername)
 	_pszURL := win32.UTF16Ptr(pszURL)
 	_pszRatingInfo := win32.UTF16Ptr(pszRatingInfo)
-	r1, _, _ := syscall.SyscallN(procRatingCheckUserAccessW.Addr(), uintptr(unsafe.Pointer(_pszUsername)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(_pszRatingInfo)), uintptr(unsafe.Pointer(pData)), uintptr(cbData), uintptr(unsafe.Pointer(ppRatingDetails)))
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRatingCheckUserAccessW.Addr(), uintptr(unsafe.Pointer(_pszUsername)), uintptr(unsafe.Pointer(_pszURL)), uintptr(unsafe.Pointer(_pszRatingInfo)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(ppRatingDetails)))
 	return win32.HRESULTError(int32(r1))
 }
 

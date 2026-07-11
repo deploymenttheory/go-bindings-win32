@@ -80,18 +80,30 @@ func (self *ID3D12CommandQueue) CopyTileMappings(pDstResource *ID3D12Resource, p
 }
 
 // ExecuteCommandLists dispatches through ID3D12CommandQueue's vtable slot 10.
-func (self *ID3D12CommandQueue) ExecuteCommandLists(NumCommandLists uint32, ppCommandLists **ID3D12CommandList) {
-	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(NumCommandLists), uintptr(unsafe.Pointer(ppCommandLists)))
+func (self *ID3D12CommandQueue) ExecuteCommandLists(ppCommandLists []*ID3D12CommandList) {
+	var _ppCommandLists **ID3D12CommandList
+	if len(ppCommandLists) > 0 {
+		_ppCommandLists = &ppCommandLists[0]
+	}
+	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(len(ppCommandLists)), uintptr(unsafe.Pointer(_ppCommandLists)))
 }
 
 // SetMarker dispatches through ID3D12CommandQueue's vtable slot 11.
-func (self *ID3D12CommandQueue) SetMarker(Metadata uint32, pData unsafe.Pointer, Size uint32) {
-	syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Metadata), uintptr(unsafe.Pointer(pData)), uintptr(Size))
+func (self *ID3D12CommandQueue) SetMarker(Metadata uint32, pData []byte) {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Metadata), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 }
 
 // BeginEvent dispatches through ID3D12CommandQueue's vtable slot 12.
-func (self *ID3D12CommandQueue) BeginEvent(Metadata uint32, pData unsafe.Pointer, Size uint32) {
-	syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Metadata), uintptr(unsafe.Pointer(pData)), uintptr(Size))
+func (self *ID3D12CommandQueue) BeginEvent(Metadata uint32, pData []byte) {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Metadata), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 }
 
 // EndEvent dispatches through ID3D12CommandQueue's vtable slot 13.
@@ -223,8 +235,12 @@ func (self *ID3D12CompilerCacheSession) FindGroupValues(pGroupKey *D3D12_COMPILE
 }
 
 // FindValue dispatches through ID3D12CompilerCacheSession's vtable slot 7.
-func (self *ID3D12CompilerCacheSession) FindValue(pValueKey *D3D12_COMPILER_CACHE_VALUE_KEY, pTypedValues *D3D12_COMPILER_CACHE_TYPED_VALUE, NumTypedValues uint32, pCallbackFunc D3D12CompilerCacheSessionAllocationFunc, pContext unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValueKey)), uintptr(unsafe.Pointer(pTypedValues)), uintptr(NumTypedValues), uintptr(pCallbackFunc), uintptr(unsafe.Pointer(pContext)))
+func (self *ID3D12CompilerCacheSession) FindValue(pValueKey *D3D12_COMPILER_CACHE_VALUE_KEY, pTypedValues []D3D12_COMPILER_CACHE_TYPED_VALUE, pCallbackFunc D3D12CompilerCacheSessionAllocationFunc, pContext unsafe.Pointer) error {
+	var _pTypedValues *D3D12_COMPILER_CACHE_TYPED_VALUE
+	if len(pTypedValues) > 0 {
+		_pTypedValues = &pTypedValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValueKey)), uintptr(unsafe.Pointer(_pTypedValues)), uintptr(len(pTypedValues)), uintptr(pCallbackFunc), uintptr(unsafe.Pointer(pContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -241,14 +257,22 @@ func (self *ID3D12CompilerCacheSession) GetValueTypes() D3D12_COMPILER_VALUE_TYP
 }
 
 // StoreGroupValueKeys dispatches through ID3D12CompilerCacheSession's vtable slot 11.
-func (self *ID3D12CompilerCacheSession) StoreGroupValueKeys(pGroupKey *D3D12_COMPILER_CACHE_GROUP_KEY, GroupVersion uint32, pValueKeys *D3D12_COMPILER_CACHE_VALUE_KEY, NumValueKeys uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGroupKey)), uintptr(GroupVersion), uintptr(unsafe.Pointer(pValueKeys)), uintptr(NumValueKeys))
+func (self *ID3D12CompilerCacheSession) StoreGroupValueKeys(pGroupKey *D3D12_COMPILER_CACHE_GROUP_KEY, GroupVersion uint32, pValueKeys []D3D12_COMPILER_CACHE_VALUE_KEY) error {
+	var _pValueKeys *D3D12_COMPILER_CACHE_VALUE_KEY
+	if len(pValueKeys) > 0 {
+		_pValueKeys = &pValueKeys[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGroupKey)), uintptr(GroupVersion), uintptr(unsafe.Pointer(_pValueKeys)), uintptr(len(pValueKeys)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // StoreValue dispatches through ID3D12CompilerCacheSession's vtable slot 12.
-func (self *ID3D12CompilerCacheSession) StoreValue(pValueKey *D3D12_COMPILER_CACHE_VALUE_KEY, pTypedValues *D3D12_COMPILER_CACHE_TYPED_CONST_VALUE, NumTypedValues uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValueKey)), uintptr(unsafe.Pointer(pTypedValues)), uintptr(NumTypedValues))
+func (self *ID3D12CompilerCacheSession) StoreValue(pValueKey *D3D12_COMPILER_CACHE_VALUE_KEY, pTypedValues []D3D12_COMPILER_CACHE_TYPED_CONST_VALUE) error {
+	var _pTypedValues *D3D12_COMPILER_CACHE_TYPED_CONST_VALUE
+	if len(pTypedValues) > 0 {
+		_pTypedValues = &pTypedValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pValueKey)), uintptr(unsafe.Pointer(_pTypedValues)), uintptr(len(pTypedValues)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -285,8 +309,12 @@ func (self *ID3D12CompilerFactory) GetApplicationProfileVersion(pTarget *D3D12_C
 }
 
 // CreateCompilerCacheSession dispatches through ID3D12CompilerFactory's vtable slot 7.
-func (self *ID3D12CompilerFactory) CreateCompilerCacheSession(pPaths *D3D12_COMPILER_DATABASE_PATH, NumPaths uint32, pTarget *D3D12_COMPILER_TARGET, pApplicationDesc *D3D12_APPLICATION_DESC, riid *win32.GUID, ppCompilerCacheSession *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPaths)), uintptr(NumPaths), uintptr(unsafe.Pointer(pTarget)), uintptr(unsafe.Pointer(pApplicationDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppCompilerCacheSession)))
+func (self *ID3D12CompilerFactory) CreateCompilerCacheSession(pPaths []D3D12_COMPILER_DATABASE_PATH, pTarget *D3D12_COMPILER_TARGET, pApplicationDesc *D3D12_APPLICATION_DESC, riid *win32.GUID, ppCompilerCacheSession *unsafe.Pointer) error {
+	var _pPaths *D3D12_COMPILER_DATABASE_PATH
+	if len(pPaths) > 0 {
+		_pPaths = &pPaths[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pPaths)), uintptr(len(pPaths)), uintptr(unsafe.Pointer(pTarget)), uintptr(unsafe.Pointer(pApplicationDesc)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppCompilerCacheSession)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -505,14 +533,22 @@ func (self *ID3D12DebugCommandList1) AssertResourceState(pResource *ID3D12Resour
 }
 
 // SetDebugParameter dispatches through ID3D12DebugCommandList1's vtable slot 4.
-func (self *ID3D12DebugCommandList1) SetDebugParameter(Type D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, pData unsafe.Pointer, DataSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(DataSize))
+func (self *ID3D12DebugCommandList1) SetDebugParameter(Type D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetDebugParameter dispatches through ID3D12DebugCommandList1's vtable slot 5.
-func (self *ID3D12DebugCommandList1) GetDebugParameter(Type D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, pData unsafe.Pointer, DataSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(DataSize))
+func (self *ID3D12DebugCommandList1) GetDebugParameter(Type D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -525,14 +561,22 @@ type ID3D12DebugCommandList2 struct {
 var IID_ID3D12DebugCommandList2 = win32.GUID{Data1: 0xaeb575cf, Data2: 0x4e06, Data3: 0x48be, Data4: [8]byte{0xba, 0x3b, 0xc4, 0x50, 0xfc, 0x96, 0x65, 0x2e}}
 
 // SetDebugParameter dispatches through ID3D12DebugCommandList2's vtable slot 6.
-func (self *ID3D12DebugCommandList2) SetDebugParameter(Type D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, pData unsafe.Pointer, DataSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(DataSize))
+func (self *ID3D12DebugCommandList2) SetDebugParameter(Type D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetDebugParameter dispatches through ID3D12DebugCommandList2's vtable slot 7.
-func (self *ID3D12DebugCommandList2) GetDebugParameter(Type D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, pData unsafe.Pointer, DataSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(DataSize))
+func (self *ID3D12DebugCommandList2) GetDebugParameter(Type D3D12_DEBUG_COMMAND_LIST_PARAMETER_TYPE, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -624,14 +668,22 @@ type ID3D12DebugDevice1 struct {
 var IID_ID3D12DebugDevice1 = win32.GUID{Data1: 0xa9b71770, Data2: 0xd099, Data3: 0x4a65, Data4: [8]byte{0xa6, 0x98, 0x3d, 0xee, 0x10, 0x02, 0x0f, 0x88}}
 
 // SetDebugParameter dispatches through ID3D12DebugDevice1's vtable slot 3.
-func (self *ID3D12DebugDevice1) SetDebugParameter(Type D3D12_DEBUG_DEVICE_PARAMETER_TYPE, pData unsafe.Pointer, DataSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(DataSize))
+func (self *ID3D12DebugDevice1) SetDebugParameter(Type D3D12_DEBUG_DEVICE_PARAMETER_TYPE, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetDebugParameter dispatches through ID3D12DebugDevice1's vtable slot 4.
-func (self *ID3D12DebugDevice1) GetDebugParameter(Type D3D12_DEBUG_DEVICE_PARAMETER_TYPE, pData unsafe.Pointer, DataSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(DataSize))
+func (self *ID3D12DebugDevice1) GetDebugParameter(Type D3D12_DEBUG_DEVICE_PARAMETER_TYPE, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -650,14 +702,22 @@ type ID3D12DebugDevice2 struct {
 var IID_ID3D12DebugDevice2 = win32.GUID{Data1: 0x60eccbc1, Data2: 0x378d, Data3: 0x4df1, Data4: [8]byte{0x89, 0x4c, 0xf8, 0xac, 0x5c, 0xe4, 0xd7, 0xdd}}
 
 // SetDebugParameter dispatches through ID3D12DebugDevice2's vtable slot 6.
-func (self *ID3D12DebugDevice2) SetDebugParameter(Type D3D12_DEBUG_DEVICE_PARAMETER_TYPE, pData unsafe.Pointer, DataSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(DataSize))
+func (self *ID3D12DebugDevice2) SetDebugParameter(Type D3D12_DEBUG_DEVICE_PARAMETER_TYPE, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetDebugParameter dispatches through ID3D12DebugDevice2's vtable slot 7.
-func (self *ID3D12DebugDevice2) GetDebugParameter(Type D3D12_DEBUG_DEVICE_PARAMETER_TYPE, pData unsafe.Pointer, DataSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(DataSize))
+func (self *ID3D12DebugDevice2) GetDebugParameter(Type D3D12_DEBUG_DEVICE_PARAMETER_TYPE, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -716,8 +776,12 @@ func (self *ID3D12Device) CreateCommandList(nodeMask uint32, type_ D3D12_COMMAND
 }
 
 // CheckFeatureSupport dispatches through ID3D12Device's vtable slot 13.
-func (self *ID3D12Device) CheckFeatureSupport(Feature D3D12_FEATURE, pFeatureSupportData unsafe.Pointer, FeatureSupportDataSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Feature), uintptr(unsafe.Pointer(pFeatureSupportData)), uintptr(FeatureSupportDataSize))
+func (self *ID3D12Device) CheckFeatureSupport(Feature D3D12_FEATURE, pFeatureSupportData []byte) error {
+	var _pFeatureSupportData *byte
+	if len(pFeatureSupportData) > 0 {
+		_pFeatureSupportData = &pFeatureSupportData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Feature), uintptr(unsafe.Pointer(_pFeatureSupportData)), uintptr(len(pFeatureSupportData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -789,14 +853,22 @@ func (self *ID3D12Device) OpenSharedHandleByName(Name string, Access uint32, pNT
 }
 
 // MakeResident dispatches through ID3D12Device's vtable slot 34.
-func (self *ID3D12Device) MakeResident(NumObjects uint32, ppObjects **ID3D12Pageable) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(NumObjects), uintptr(unsafe.Pointer(ppObjects)))
+func (self *ID3D12Device) MakeResident(ppObjects []*ID3D12Pageable) error {
+	var _ppObjects **ID3D12Pageable
+	if len(ppObjects) > 0 {
+		_ppObjects = &ppObjects[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(len(ppObjects)), uintptr(unsafe.Pointer(_ppObjects)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Evict dispatches through ID3D12Device's vtable slot 35.
-func (self *ID3D12Device) Evict(NumObjects uint32, ppObjects **ID3D12Pageable) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(NumObjects), uintptr(unsafe.Pointer(ppObjects)))
+func (self *ID3D12Device) Evict(ppObjects []*ID3D12Pageable) error {
+	var _ppObjects **ID3D12Pageable
+	if len(ppObjects) > 0 {
+		_ppObjects = &ppObjects[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(len(ppObjects)), uintptr(unsafe.Pointer(_ppObjects)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -878,20 +950,32 @@ type ID3D12Device10 struct {
 var IID_ID3D12Device10 = win32.GUID{Data1: 0x517f8718, Data2: 0xaa66, Data3: 0x49f9, Data4: [8]byte{0xb0, 0x2b, 0xa7, 0xab, 0x89, 0xc0, 0x60, 0x31}}
 
 // CreateCommittedResource3 dispatches through ID3D12Device10's vtable slot 76.
-func (self *ID3D12Device10) CreateCommittedResource3(pHeapProperties *D3D12_HEAP_PROPERTIES, HeapFlags D3D12_HEAP_FLAGS, pDesc *D3D12_RESOURCE_DESC1, InitialLayout D3D12_BARRIER_LAYOUT, pOptimizedClearValue *D3D12_CLEAR_VALUE, pProtectedSession *ID3D12ProtectedResourceSession, NumCastableFormats uint32, pCastableFormats *graphicsdxgicommon.DXGI_FORMAT, riidResource *win32.GUID, ppvResource *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHeapProperties)), uintptr(HeapFlags), uintptr(unsafe.Pointer(pDesc)), uintptr(InitialLayout), uintptr(unsafe.Pointer(pOptimizedClearValue)), uintptr(unsafe.Pointer(pProtectedSession)), uintptr(NumCastableFormats), uintptr(unsafe.Pointer(pCastableFormats)), uintptr(unsafe.Pointer(riidResource)), uintptr(unsafe.Pointer(ppvResource)))
+func (self *ID3D12Device10) CreateCommittedResource3(pHeapProperties *D3D12_HEAP_PROPERTIES, HeapFlags D3D12_HEAP_FLAGS, pDesc *D3D12_RESOURCE_DESC1, InitialLayout D3D12_BARRIER_LAYOUT, pOptimizedClearValue *D3D12_CLEAR_VALUE, pProtectedSession *ID3D12ProtectedResourceSession, pCastableFormats []graphicsdxgicommon.DXGI_FORMAT, riidResource *win32.GUID, ppvResource *unsafe.Pointer) error {
+	var _pCastableFormats *graphicsdxgicommon.DXGI_FORMAT
+	if len(pCastableFormats) > 0 {
+		_pCastableFormats = &pCastableFormats[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[76], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHeapProperties)), uintptr(HeapFlags), uintptr(unsafe.Pointer(pDesc)), uintptr(InitialLayout), uintptr(unsafe.Pointer(pOptimizedClearValue)), uintptr(unsafe.Pointer(pProtectedSession)), uintptr(len(pCastableFormats)), uintptr(unsafe.Pointer(_pCastableFormats)), uintptr(unsafe.Pointer(riidResource)), uintptr(unsafe.Pointer(ppvResource)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreatePlacedResource2 dispatches through ID3D12Device10's vtable slot 77.
-func (self *ID3D12Device10) CreatePlacedResource2(pHeap *ID3D12Heap, HeapOffset uint64, pDesc *D3D12_RESOURCE_DESC1, InitialLayout D3D12_BARRIER_LAYOUT, pOptimizedClearValue *D3D12_CLEAR_VALUE, NumCastableFormats uint32, pCastableFormats *graphicsdxgicommon.DXGI_FORMAT, riid *win32.GUID, ppvResource *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHeap)), uintptr(HeapOffset), uintptr(unsafe.Pointer(pDesc)), uintptr(InitialLayout), uintptr(unsafe.Pointer(pOptimizedClearValue)), uintptr(NumCastableFormats), uintptr(unsafe.Pointer(pCastableFormats)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvResource)))
+func (self *ID3D12Device10) CreatePlacedResource2(pHeap *ID3D12Heap, HeapOffset uint64, pDesc *D3D12_RESOURCE_DESC1, InitialLayout D3D12_BARRIER_LAYOUT, pOptimizedClearValue *D3D12_CLEAR_VALUE, pCastableFormats []graphicsdxgicommon.DXGI_FORMAT, riid *win32.GUID, ppvResource *unsafe.Pointer) error {
+	var _pCastableFormats *graphicsdxgicommon.DXGI_FORMAT
+	if len(pCastableFormats) > 0 {
+		_pCastableFormats = &pCastableFormats[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHeap)), uintptr(HeapOffset), uintptr(unsafe.Pointer(pDesc)), uintptr(InitialLayout), uintptr(unsafe.Pointer(pOptimizedClearValue)), uintptr(len(pCastableFormats)), uintptr(unsafe.Pointer(_pCastableFormats)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvResource)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateReservedResource2 dispatches through ID3D12Device10's vtable slot 78.
-func (self *ID3D12Device10) CreateReservedResource2(pDesc *D3D12_RESOURCE_DESC, InitialLayout D3D12_BARRIER_LAYOUT, pOptimizedClearValue *D3D12_CLEAR_VALUE, pProtectedSession *ID3D12ProtectedResourceSession, NumCastableFormats uint32, pCastableFormats *graphicsdxgicommon.DXGI_FORMAT, riid *win32.GUID, ppvResource *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(InitialLayout), uintptr(unsafe.Pointer(pOptimizedClearValue)), uintptr(unsafe.Pointer(pProtectedSession)), uintptr(NumCastableFormats), uintptr(unsafe.Pointer(pCastableFormats)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvResource)))
+func (self *ID3D12Device10) CreateReservedResource2(pDesc *D3D12_RESOURCE_DESC, InitialLayout D3D12_BARRIER_LAYOUT, pOptimizedClearValue *D3D12_CLEAR_VALUE, pProtectedSession *ID3D12ProtectedResourceSession, pCastableFormats []graphicsdxgicommon.DXGI_FORMAT, riid *win32.GUID, ppvResource *unsafe.Pointer) error {
+	var _pCastableFormats *graphicsdxgicommon.DXGI_FORMAT
+	if len(pCastableFormats) > 0 {
+		_pCastableFormats = &pCastableFormats[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(InitialLayout), uintptr(unsafe.Pointer(pOptimizedClearValue)), uintptr(unsafe.Pointer(pProtectedSession)), uintptr(len(pCastableFormats)), uintptr(unsafe.Pointer(_pCastableFormats)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvResource)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1009,8 +1093,12 @@ func (self *ID3D12Device3) OpenExistingHeapFromFileMapping(hFileMapping foundati
 }
 
 // EnqueueMakeResident dispatches through ID3D12Device3's vtable slot 50.
-func (self *ID3D12Device3) EnqueueMakeResident(Flags D3D12_RESIDENCY_FLAGS, NumObjects uint32, ppObjects **ID3D12Pageable, pFenceToSignal *ID3D12Fence, FenceValueToSignal uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(NumObjects), uintptr(unsafe.Pointer(ppObjects)), uintptr(unsafe.Pointer(pFenceToSignal)), uintptr(FenceValueToSignal))
+func (self *ID3D12Device3) EnqueueMakeResident(Flags D3D12_RESIDENCY_FLAGS, ppObjects []*ID3D12Pageable, pFenceToSignal *ID3D12Fence, FenceValueToSignal uint64) error {
+	var _ppObjects **ID3D12Pageable
+	if len(ppObjects) > 0 {
+		_ppObjects = &ppObjects[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(len(ppObjects)), uintptr(unsafe.Pointer(_ppObjects)), uintptr(unsafe.Pointer(pFenceToSignal)), uintptr(FenceValueToSignal))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1086,8 +1174,12 @@ func (self *ID3D12Device5) EnumerateMetaCommandParameters(CommandId *win32.GUID,
 }
 
 // CreateMetaCommand dispatches through ID3D12Device5's vtable slot 61.
-func (self *ID3D12Device5) CreateMetaCommand(CommandId *win32.GUID, NodeMask uint32, pCreationParametersData unsafe.Pointer, CreationParametersDataSizeInBytes uintptr, riid *win32.GUID, ppMetaCommand *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CommandId)), uintptr(NodeMask), uintptr(unsafe.Pointer(pCreationParametersData)), uintptr(CreationParametersDataSizeInBytes), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppMetaCommand)))
+func (self *ID3D12Device5) CreateMetaCommand(CommandId *win32.GUID, NodeMask uint32, pCreationParametersData []byte, riid *win32.GUID, ppMetaCommand *unsafe.Pointer) error {
+	var _pCreationParametersData *byte
+	if len(pCreationParametersData) > 0 {
+		_pCreationParametersData = &pCreationParametersData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CommandId)), uintptr(NodeMask), uintptr(unsafe.Pointer(_pCreationParametersData)), uintptr(len(pCreationParametersData)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppMetaCommand)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1221,8 +1313,12 @@ type ID3D12DeviceConfiguration struct {
 var IID_ID3D12DeviceConfiguration = win32.GUID{Data1: 0x78dbf87b, Data2: 0xf766, Data3: 0x422b, Data4: [8]byte{0xa6, 0x1c, 0xc8, 0xc4, 0x46, 0xbd, 0xb9, 0xad}}
 
 // GetEnabledExperimentalFeatures dispatches through ID3D12DeviceConfiguration's vtable slot 4.
-func (self *ID3D12DeviceConfiguration) GetEnabledExperimentalFeatures(pGuids *win32.GUID, NumGuids uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pGuids)), uintptr(NumGuids))
+func (self *ID3D12DeviceConfiguration) GetEnabledExperimentalFeatures(pGuids []win32.GUID) error {
+	var _pGuids *win32.GUID
+	if len(pGuids) > 0 {
+		_pGuids = &pGuids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pGuids)), uintptr(len(pGuids)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1233,8 +1329,12 @@ func (self *ID3D12DeviceConfiguration) SerializeVersionedRootSignature(pDesc *D3
 }
 
 // CreateVersionedRootSignatureDeserializer dispatches through ID3D12DeviceConfiguration's vtable slot 6.
-func (self *ID3D12DeviceConfiguration) CreateVersionedRootSignatureDeserializer(pBlob unsafe.Pointer, Size uintptr, riid *win32.GUID, ppvDeserializer *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(Size), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvDeserializer)))
+func (self *ID3D12DeviceConfiguration) CreateVersionedRootSignatureDeserializer(pBlob []byte, riid *win32.GUID, ppvDeserializer *unsafe.Pointer) error {
+	var _pBlob *byte
+	if len(pBlob) > 0 {
+		_pBlob = &pBlob[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pBlob)), uintptr(len(pBlob)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvDeserializer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1247,9 +1347,13 @@ type ID3D12DeviceConfiguration1 struct {
 var IID_ID3D12DeviceConfiguration1 = win32.GUID{Data1: 0xed342442, Data2: 0x6343, Data3: 0x4e16, Data4: [8]byte{0xbb, 0x82, 0xa3, 0xa5, 0x77, 0x87, 0x4e, 0x56}}
 
 // CreateVersionedRootSignatureDeserializerFromSubobjectInLibrary dispatches through ID3D12DeviceConfiguration1's vtable slot 7.
-func (self *ID3D12DeviceConfiguration1) CreateVersionedRootSignatureDeserializerFromSubobjectInLibrary(pLibraryBlob unsafe.Pointer, Size uintptr, RootSignatureSubobjectName string, riid *win32.GUID, ppvDeserializer *unsafe.Pointer) error {
+func (self *ID3D12DeviceConfiguration1) CreateVersionedRootSignatureDeserializerFromSubobjectInLibrary(pLibraryBlob []byte, RootSignatureSubobjectName string, riid *win32.GUID, ppvDeserializer *unsafe.Pointer) error {
+	var _pLibraryBlob *byte
+	if len(pLibraryBlob) > 0 {
+		_pLibraryBlob = &pLibraryBlob[0]
+	}
 	_RootSignatureSubobjectName := win32.UTF16Ptr(RootSignatureSubobjectName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pLibraryBlob)), uintptr(Size), uintptr(unsafe.Pointer(_RootSignatureSubobjectName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvDeserializer)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pLibraryBlob)), uintptr(len(pLibraryBlob)), uintptr(unsafe.Pointer(_RootSignatureSubobjectName)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvDeserializer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1684,13 +1788,21 @@ func (self *ID3D12GraphicsCommandList) IASetPrimitiveTopology(PrimitiveTopology 
 }
 
 // RSSetViewports dispatches through ID3D12GraphicsCommandList's vtable slot 21.
-func (self *ID3D12GraphicsCommandList) RSSetViewports(NumViewports uint32, pViewports *D3D12_VIEWPORT) {
-	syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(NumViewports), uintptr(unsafe.Pointer(pViewports)))
+func (self *ID3D12GraphicsCommandList) RSSetViewports(pViewports []D3D12_VIEWPORT) {
+	var _pViewports *D3D12_VIEWPORT
+	if len(pViewports) > 0 {
+		_pViewports = &pViewports[0]
+	}
+	syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(len(pViewports)), uintptr(unsafe.Pointer(_pViewports)))
 }
 
 // RSSetScissorRects dispatches through ID3D12GraphicsCommandList's vtable slot 22.
-func (self *ID3D12GraphicsCommandList) RSSetScissorRects(NumRects uint32, pRects *foundation.RECT) {
-	syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(NumRects), uintptr(unsafe.Pointer(pRects)))
+func (self *ID3D12GraphicsCommandList) RSSetScissorRects(pRects []foundation.RECT) {
+	var _pRects *foundation.RECT
+	if len(pRects) > 0 {
+		_pRects = &pRects[0]
+	}
+	syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(len(pRects)), uintptr(unsafe.Pointer(_pRects)))
 }
 
 // OMSetBlendFactor dispatches through ID3D12GraphicsCommandList's vtable slot 23.
@@ -1709,8 +1821,12 @@ func (self *ID3D12GraphicsCommandList) SetPipelineState(pPipelineState *ID3D12Pi
 }
 
 // ResourceBarrier dispatches through ID3D12GraphicsCommandList's vtable slot 26.
-func (self *ID3D12GraphicsCommandList) ResourceBarrier(NumBarriers uint32, pBarriers *D3D12_RESOURCE_BARRIER) {
-	syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(NumBarriers), uintptr(unsafe.Pointer(pBarriers)))
+func (self *ID3D12GraphicsCommandList) ResourceBarrier(pBarriers []D3D12_RESOURCE_BARRIER) {
+	var _pBarriers *D3D12_RESOURCE_BARRIER
+	if len(pBarriers) > 0 {
+		_pBarriers = &pBarriers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(len(pBarriers)), uintptr(unsafe.Pointer(_pBarriers)))
 }
 
 // ExecuteBundle dispatches through ID3D12GraphicsCommandList's vtable slot 27.
@@ -1719,8 +1835,12 @@ func (self *ID3D12GraphicsCommandList) ExecuteBundle(pCommandList *ID3D12Graphic
 }
 
 // SetDescriptorHeaps dispatches through ID3D12GraphicsCommandList's vtable slot 28.
-func (self *ID3D12GraphicsCommandList) SetDescriptorHeaps(NumDescriptorHeaps uint32, ppDescriptorHeaps **ID3D12DescriptorHeap) {
-	syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(NumDescriptorHeaps), uintptr(unsafe.Pointer(ppDescriptorHeaps)))
+func (self *ID3D12GraphicsCommandList) SetDescriptorHeaps(ppDescriptorHeaps []*ID3D12DescriptorHeap) {
+	var _ppDescriptorHeaps **ID3D12DescriptorHeap
+	if len(ppDescriptorHeaps) > 0 {
+		_ppDescriptorHeaps = &ppDescriptorHeaps[0]
+	}
+	syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(len(ppDescriptorHeaps)), uintptr(unsafe.Pointer(_ppDescriptorHeaps)))
 }
 
 // SetComputeRootSignature dispatches through ID3D12GraphicsCommandList's vtable slot 29.
@@ -1789,13 +1909,21 @@ func (self *ID3D12GraphicsCommandList) IASetIndexBuffer(pView *D3D12_INDEX_BUFFE
 }
 
 // IASetVertexBuffers dispatches through ID3D12GraphicsCommandList's vtable slot 44.
-func (self *ID3D12GraphicsCommandList) IASetVertexBuffers(StartSlot uint32, NumViews uint32, pViews *D3D12_VERTEX_BUFFER_VIEW) {
-	syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(pViews)))
+func (self *ID3D12GraphicsCommandList) IASetVertexBuffers(StartSlot uint32, pViews []D3D12_VERTEX_BUFFER_VIEW) {
+	var _pViews *D3D12_VERTEX_BUFFER_VIEW
+	if len(pViews) > 0 {
+		_pViews = &pViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(pViews)), uintptr(unsafe.Pointer(_pViews)))
 }
 
 // SOSetTargets dispatches through ID3D12GraphicsCommandList's vtable slot 45.
-func (self *ID3D12GraphicsCommandList) SOSetTargets(StartSlot uint32, NumViews uint32, pViews *D3D12_STREAM_OUTPUT_BUFFER_VIEW) {
-	syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(pViews)))
+func (self *ID3D12GraphicsCommandList) SOSetTargets(StartSlot uint32, pViews []D3D12_STREAM_OUTPUT_BUFFER_VIEW) {
+	var _pViews *D3D12_STREAM_OUTPUT_BUFFER_VIEW
+	if len(pViews) > 0 {
+		_pViews = &pViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(pViews)), uintptr(unsafe.Pointer(_pViews)))
 }
 
 // OMSetRenderTargets dispatches through ID3D12GraphicsCommandList's vtable slot 46.
@@ -1830,13 +1958,21 @@ func (self *ID3D12GraphicsCommandList) SetPredication(pBuffer *ID3D12Resource, A
 }
 
 // SetMarker dispatches through ID3D12GraphicsCommandList's vtable slot 56.
-func (self *ID3D12GraphicsCommandList) SetMarker(Metadata uint32, pData unsafe.Pointer, Size uint32) {
-	syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(Metadata), uintptr(unsafe.Pointer(pData)), uintptr(Size))
+func (self *ID3D12GraphicsCommandList) SetMarker(Metadata uint32, pData []byte) {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(Metadata), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 }
 
 // BeginEvent dispatches through ID3D12GraphicsCommandList's vtable slot 57.
-func (self *ID3D12GraphicsCommandList) BeginEvent(Metadata uint32, pData unsafe.Pointer, Size uint32) {
-	syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(Metadata), uintptr(unsafe.Pointer(pData)), uintptr(Size))
+func (self *ID3D12GraphicsCommandList) BeginEvent(Metadata uint32, pData []byte) {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(Metadata), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 }
 
 // EndEvent dispatches through ID3D12GraphicsCommandList's vtable slot 58.
@@ -1939,8 +2075,12 @@ type ID3D12GraphicsCommandList4 struct {
 var IID_ID3D12GraphicsCommandList4 = win32.GUID{Data1: 0x8754318e, Data2: 0xd3a9, Data3: 0x4541, Data4: [8]byte{0x98, 0xcf, 0x64, 0x5b, 0x50, 0xdc, 0x48, 0x74}}
 
 // BeginRenderPass dispatches through ID3D12GraphicsCommandList4's vtable slot 68.
-func (self *ID3D12GraphicsCommandList4) BeginRenderPass(NumRenderTargets uint32, pRenderTargets *D3D12_RENDER_PASS_RENDER_TARGET_DESC, pDepthStencil *D3D12_RENDER_PASS_DEPTH_STENCIL_DESC, Flags D3D12_RENDER_PASS_FLAGS) {
-	syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(NumRenderTargets), uintptr(unsafe.Pointer(pRenderTargets)), uintptr(unsafe.Pointer(pDepthStencil)), uintptr(Flags))
+func (self *ID3D12GraphicsCommandList4) BeginRenderPass(pRenderTargets []D3D12_RENDER_PASS_RENDER_TARGET_DESC, pDepthStencil *D3D12_RENDER_PASS_DEPTH_STENCIL_DESC, Flags D3D12_RENDER_PASS_FLAGS) {
+	var _pRenderTargets *D3D12_RENDER_PASS_RENDER_TARGET_DESC
+	if len(pRenderTargets) > 0 {
+		_pRenderTargets = &pRenderTargets[0]
+	}
+	syscall.SyscallN(self.LpVtbl[68], uintptr(unsafe.Pointer(self)), uintptr(len(pRenderTargets)), uintptr(unsafe.Pointer(_pRenderTargets)), uintptr(unsafe.Pointer(pDepthStencil)), uintptr(Flags))
 }
 
 // EndRenderPass dispatches through ID3D12GraphicsCommandList4's vtable slot 69.
@@ -1949,23 +2089,39 @@ func (self *ID3D12GraphicsCommandList4) EndRenderPass() {
 }
 
 // InitializeMetaCommand dispatches through ID3D12GraphicsCommandList4's vtable slot 70.
-func (self *ID3D12GraphicsCommandList4) InitializeMetaCommand(pMetaCommand *ID3D12MetaCommand, pInitializationParametersData unsafe.Pointer, InitializationParametersDataSizeInBytes uintptr) {
-	syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMetaCommand)), uintptr(unsafe.Pointer(pInitializationParametersData)), uintptr(InitializationParametersDataSizeInBytes))
+func (self *ID3D12GraphicsCommandList4) InitializeMetaCommand(pMetaCommand *ID3D12MetaCommand, pInitializationParametersData []byte) {
+	var _pInitializationParametersData *byte
+	if len(pInitializationParametersData) > 0 {
+		_pInitializationParametersData = &pInitializationParametersData[0]
+	}
+	syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMetaCommand)), uintptr(unsafe.Pointer(_pInitializationParametersData)), uintptr(len(pInitializationParametersData)))
 }
 
 // ExecuteMetaCommand dispatches through ID3D12GraphicsCommandList4's vtable slot 71.
-func (self *ID3D12GraphicsCommandList4) ExecuteMetaCommand(pMetaCommand *ID3D12MetaCommand, pExecutionParametersData unsafe.Pointer, ExecutionParametersDataSizeInBytes uintptr) {
-	syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMetaCommand)), uintptr(unsafe.Pointer(pExecutionParametersData)), uintptr(ExecutionParametersDataSizeInBytes))
+func (self *ID3D12GraphicsCommandList4) ExecuteMetaCommand(pMetaCommand *ID3D12MetaCommand, pExecutionParametersData []byte) {
+	var _pExecutionParametersData *byte
+	if len(pExecutionParametersData) > 0 {
+		_pExecutionParametersData = &pExecutionParametersData[0]
+	}
+	syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMetaCommand)), uintptr(unsafe.Pointer(_pExecutionParametersData)), uintptr(len(pExecutionParametersData)))
 }
 
 // BuildRaytracingAccelerationStructure dispatches through ID3D12GraphicsCommandList4's vtable slot 72.
-func (self *ID3D12GraphicsCommandList4) BuildRaytracingAccelerationStructure(pDesc *D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC, NumPostbuildInfoDescs uint32, pPostbuildInfoDescs *D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC) {
-	syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(NumPostbuildInfoDescs), uintptr(unsafe.Pointer(pPostbuildInfoDescs)))
+func (self *ID3D12GraphicsCommandList4) BuildRaytracingAccelerationStructure(pDesc *D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC, pPostbuildInfoDescs []D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC) {
+	var _pPostbuildInfoDescs *D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC
+	if len(pPostbuildInfoDescs) > 0 {
+		_pPostbuildInfoDescs = &pPostbuildInfoDescs[0]
+	}
+	syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(len(pPostbuildInfoDescs)), uintptr(unsafe.Pointer(_pPostbuildInfoDescs)))
 }
 
 // EmitRaytracingAccelerationStructurePostbuildInfo dispatches through ID3D12GraphicsCommandList4's vtable slot 73.
-func (self *ID3D12GraphicsCommandList4) EmitRaytracingAccelerationStructurePostbuildInfo(pDesc *D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC, NumSourceAccelerationStructures uint32, pSourceAccelerationStructureData *uint64) {
-	syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(NumSourceAccelerationStructures), uintptr(unsafe.Pointer(pSourceAccelerationStructureData)))
+func (self *ID3D12GraphicsCommandList4) EmitRaytracingAccelerationStructurePostbuildInfo(pDesc *D3D12_RAYTRACING_ACCELERATION_STRUCTURE_POSTBUILD_INFO_DESC, pSourceAccelerationStructureData []uint64) {
+	var _pSourceAccelerationStructureData *uint64
+	if len(pSourceAccelerationStructureData) > 0 {
+		_pSourceAccelerationStructureData = &pSourceAccelerationStructureData[0]
+	}
+	syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDesc)), uintptr(len(pSourceAccelerationStructureData)), uintptr(unsafe.Pointer(_pSourceAccelerationStructureData)))
 }
 
 // CopyRaytracingAccelerationStructure dispatches through ID3D12GraphicsCommandList4's vtable slot 74.
@@ -2025,8 +2181,12 @@ type ID3D12GraphicsCommandList7 struct {
 var IID_ID3D12GraphicsCommandList7 = win32.GUID{Data1: 0xdd171223, Data2: 0x8b61, Data3: 0x4769, Data4: [8]byte{0x90, 0xe3, 0x16, 0x0c, 0xcd, 0xe4, 0xe2, 0xc1}}
 
 // Barrier dispatches through ID3D12GraphicsCommandList7's vtable slot 80.
-func (self *ID3D12GraphicsCommandList7) Barrier(NumBarrierGroups uint32, pBarrierGroups *D3D12_BARRIER_GROUP) {
-	syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(NumBarrierGroups), uintptr(unsafe.Pointer(pBarrierGroups)))
+func (self *ID3D12GraphicsCommandList7) Barrier(pBarrierGroups []D3D12_BARRIER_GROUP) {
+	var _pBarrierGroups *D3D12_BARRIER_GROUP
+	if len(pBarrierGroups) > 0 {
+		_pBarrierGroups = &pBarrierGroups[0]
+	}
+	syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(len(pBarrierGroups)), uintptr(unsafe.Pointer(_pBarrierGroups)))
 }
 
 // IID: ee936ef9-599d-4d28-938e-23c4ad05ce51
@@ -2409,8 +2569,12 @@ func (self *ID3D12Object) GetPrivateData(guid *win32.GUID, pDataSize *uint32, pD
 }
 
 // SetPrivateData dispatches through ID3D12Object's vtable slot 4.
-func (self *ID3D12Object) SetPrivateData(guid *win32.GUID, DataSize uint32, pData unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
+func (self *ID3D12Object) SetPrivateData(guid *win32.GUID, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2675,8 +2839,12 @@ func (self *ID3D12RootSignature1) GetSerializedSize() uintptr {
 }
 
 // GetSerializedData dispatches through ID3D12RootSignature1's vtable slot 9.
-func (self *ID3D12RootSignature1) GetSerializedData(pData unsafe.Pointer, Size uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(Size))
+func (self *ID3D12RootSignature1) GetSerializedData(pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2759,14 +2927,26 @@ type ID3D12ShaderCacheSession struct {
 var IID_ID3D12ShaderCacheSession = win32.GUID{Data1: 0x28e2495d, Data2: 0x0f64, Data3: 0x4ae4, Data4: [8]byte{0xa6, 0xec, 0x12, 0x92, 0x55, 0xdc, 0x49, 0xa8}}
 
 // FindValue dispatches through ID3D12ShaderCacheSession's vtable slot 8.
-func (self *ID3D12ShaderCacheSession) FindValue(pKey unsafe.Pointer, KeySize uint32, pValue unsafe.Pointer, pValueSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKey)), uintptr(KeySize), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pValueSize)))
+func (self *ID3D12ShaderCacheSession) FindValue(pKey []byte, pValue unsafe.Pointer, pValueSize *uint32) error {
+	var _pKey *byte
+	if len(pKey) > 0 {
+		_pKey = &pKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pKey)), uintptr(len(pKey)), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(pValueSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // StoreValue dispatches through ID3D12ShaderCacheSession's vtable slot 9.
-func (self *ID3D12ShaderCacheSession) StoreValue(pKey unsafe.Pointer, KeySize uint32, pValue unsafe.Pointer, ValueSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pKey)), uintptr(KeySize), uintptr(unsafe.Pointer(pValue)), uintptr(ValueSize))
+func (self *ID3D12ShaderCacheSession) StoreValue(pKey []byte, pValue []byte) error {
+	var _pKey *byte
+	if len(pKey) > 0 {
+		_pKey = &pKey[0]
+	}
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pKey)), uintptr(len(pKey)), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3256,8 +3436,12 @@ type ID3D12Tools1 struct {
 var IID_ID3D12Tools1 = win32.GUID{Data1: 0xe4fbc019, Data2: 0xdd3c, Data3: 0x43e1, Data4: [8]byte{0x8f, 0x32, 0x7f, 0x64, 0x95, 0x75, 0xf0, 0xa0}}
 
 // ReserveGPUVARangesAtCreate dispatches through ID3D12Tools1's vtable slot 5.
-func (self *ID3D12Tools1) ReserveGPUVARangesAtCreate(pRanges *D3D12_GPU_VIRTUAL_ADDRESS_RANGE, uiNumRanges uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRanges)), uintptr(uiNumRanges))
+func (self *ID3D12Tools1) ReserveGPUVARangesAtCreate(pRanges []D3D12_GPU_VIRTUAL_ADDRESS_RANGE) error {
+	var _pRanges *D3D12_GPU_VIRTUAL_ADDRESS_RANGE
+	if len(pRanges) > 0 {
+		_pRanges = &pRanges[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pRanges)), uintptr(len(pRanges)))
 	return win32.HRESULTError(int32(r1))
 }
 

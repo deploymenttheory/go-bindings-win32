@@ -557,9 +557,13 @@ func DRMGetSignedIssuanceLicense(hEnv uint32, hIssuanceLicense uint32, uFlags ui
 // DRMGetSignedIssuanceLicenseEx calls msdrm!DRMGetSignedIssuanceLicenseEx.
 // https://learn.microsoft.com/windows/win32/api/msdrm/nf-msdrm-drmgetsignedissuancelicenseex
 // Minimum OS: windows6.1.
-func DRMGetSignedIssuanceLicenseEx(hEnv uint32, hIssuanceLicense uint32, uFlags uint32, pbSymKey *byte, cbSymKey uint32, wszSymKeyType string, pvReserved unsafe.Pointer, hEnablingPrincipal uint32, hBoundLicenseCLC uint32, pfnCallback DRMCALLBACK, pvContext unsafe.Pointer) error {
+func DRMGetSignedIssuanceLicenseEx(hEnv uint32, hIssuanceLicense uint32, uFlags uint32, pbSymKey []byte, wszSymKeyType string, pvReserved unsafe.Pointer, hEnablingPrincipal uint32, hBoundLicenseCLC uint32, pfnCallback DRMCALLBACK, pvContext unsafe.Pointer) error {
+	var _pbSymKey *byte
+	if len(pbSymKey) > 0 {
+		_pbSymKey = &pbSymKey[0]
+	}
 	_wszSymKeyType := win32.UTF16Ptr(wszSymKeyType)
-	r1, _, _ := syscall.SyscallN(procDRMGetSignedIssuanceLicenseEx.Addr(), uintptr(hEnv), uintptr(hIssuanceLicense), uintptr(uFlags), uintptr(unsafe.Pointer(pbSymKey)), uintptr(cbSymKey), uintptr(unsafe.Pointer(_wszSymKeyType)), uintptr(unsafe.Pointer(pvReserved)), uintptr(hEnablingPrincipal), uintptr(hBoundLicenseCLC), uintptr(pfnCallback), uintptr(unsafe.Pointer(pvContext)))
+	r1, _, _ := syscall.SyscallN(procDRMGetSignedIssuanceLicenseEx.Addr(), uintptr(hEnv), uintptr(hIssuanceLicense), uintptr(uFlags), uintptr(unsafe.Pointer(_pbSymKey)), uintptr(len(pbSymKey)), uintptr(unsafe.Pointer(_wszSymKeyType)), uintptr(unsafe.Pointer(pvReserved)), uintptr(hEnablingPrincipal), uintptr(hBoundLicenseCLC), uintptr(pfnCallback), uintptr(unsafe.Pointer(pvContext)))
 	return win32.HRESULTError(int32(r1))
 }
 

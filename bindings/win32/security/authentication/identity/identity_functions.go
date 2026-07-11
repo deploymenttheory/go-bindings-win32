@@ -815,8 +815,12 @@ func LsaAddAccountRights(PolicyHandle LSA_HANDLE, AccountSid security.PSID, User
 // LsaCallAuthenticationPackage calls SECUR32!LsaCallAuthenticationPackage.
 // https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-lsacallauthenticationpackage
 // Minimum OS: windows5.1.2600.
-func LsaCallAuthenticationPackage(LsaHandle foundation.HANDLE, AuthenticationPackage uint32, ProtocolSubmitBuffer unsafe.Pointer, SubmitBufferLength uint32, ProtocolReturnBuffer *unsafe.Pointer, ReturnBufferLength *uint32, ProtocolStatus *int32) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procLsaCallAuthenticationPackage.Addr(), uintptr(LsaHandle), uintptr(AuthenticationPackage), uintptr(unsafe.Pointer(ProtocolSubmitBuffer)), uintptr(SubmitBufferLength), uintptr(unsafe.Pointer(ProtocolReturnBuffer)), uintptr(unsafe.Pointer(ReturnBufferLength)), uintptr(unsafe.Pointer(ProtocolStatus)))
+func LsaCallAuthenticationPackage(LsaHandle foundation.HANDLE, AuthenticationPackage uint32, ProtocolSubmitBuffer []byte, ProtocolReturnBuffer *unsafe.Pointer, ReturnBufferLength *uint32, ProtocolStatus *int32) foundation.NTSTATUS {
+	var _ProtocolSubmitBuffer *byte
+	if len(ProtocolSubmitBuffer) > 0 {
+		_ProtocolSubmitBuffer = &ProtocolSubmitBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procLsaCallAuthenticationPackage.Addr(), uintptr(LsaHandle), uintptr(AuthenticationPackage), uintptr(unsafe.Pointer(_ProtocolSubmitBuffer)), uintptr(len(ProtocolSubmitBuffer)), uintptr(unsafe.Pointer(ProtocolReturnBuffer)), uintptr(unsafe.Pointer(ReturnBufferLength)), uintptr(unsafe.Pointer(ProtocolStatus)))
 	return foundation.NTSTATUS(r1)
 }
 
@@ -935,8 +939,12 @@ func LsaGetLogonSessionData(LogonId *foundation.LUID, ppLogonSessionData **SECUR
 // LsaLogonUser calls SECUR32!LsaLogonUser.
 // https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-lsalogonuser
 // Minimum OS: windows5.1.2600.
-func LsaLogonUser(LsaHandle foundation.HANDLE, OriginName *LSA_STRING, LogonType SECURITY_LOGON_TYPE, AuthenticationPackage uint32, AuthenticationInformation unsafe.Pointer, AuthenticationInformationLength uint32, LocalGroups *security.TOKEN_GROUPS, SourceContext *security.TOKEN_SOURCE, ProfileBuffer *unsafe.Pointer, ProfileBufferLength *uint32, LogonId *foundation.LUID, Token *foundation.HANDLE, Quotas *security.QUOTA_LIMITS, SubStatus *int32) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procLsaLogonUser.Addr(), uintptr(LsaHandle), uintptr(unsafe.Pointer(OriginName)), uintptr(LogonType), uintptr(AuthenticationPackage), uintptr(unsafe.Pointer(AuthenticationInformation)), uintptr(AuthenticationInformationLength), uintptr(unsafe.Pointer(LocalGroups)), uintptr(unsafe.Pointer(SourceContext)), uintptr(unsafe.Pointer(ProfileBuffer)), uintptr(unsafe.Pointer(ProfileBufferLength)), uintptr(unsafe.Pointer(LogonId)), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(Quotas)), uintptr(unsafe.Pointer(SubStatus)))
+func LsaLogonUser(LsaHandle foundation.HANDLE, OriginName *LSA_STRING, LogonType SECURITY_LOGON_TYPE, AuthenticationPackage uint32, AuthenticationInformation []byte, LocalGroups *security.TOKEN_GROUPS, SourceContext *security.TOKEN_SOURCE, ProfileBuffer *unsafe.Pointer, ProfileBufferLength *uint32, LogonId *foundation.LUID, Token *foundation.HANDLE, Quotas *security.QUOTA_LIMITS, SubStatus *int32) foundation.NTSTATUS {
+	var _AuthenticationInformation *byte
+	if len(AuthenticationInformation) > 0 {
+		_AuthenticationInformation = &AuthenticationInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procLsaLogonUser.Addr(), uintptr(LsaHandle), uintptr(unsafe.Pointer(OriginName)), uintptr(LogonType), uintptr(AuthenticationPackage), uintptr(unsafe.Pointer(_AuthenticationInformation)), uintptr(len(AuthenticationInformation)), uintptr(unsafe.Pointer(LocalGroups)), uintptr(unsafe.Pointer(SourceContext)), uintptr(unsafe.Pointer(ProfileBuffer)), uintptr(unsafe.Pointer(ProfileBufferLength)), uintptr(unsafe.Pointer(LogonId)), uintptr(unsafe.Pointer(Token)), uintptr(unsafe.Pointer(Quotas)), uintptr(unsafe.Pointer(SubStatus)))
 	return foundation.NTSTATUS(r1)
 }
 
@@ -1197,16 +1205,24 @@ func QueryContextAttributesA(phContext *securitycredentials.SecHandle, ulAttribu
 // QueryContextAttributesEx calls SspiCli!QueryContextAttributesExW.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-querycontextattributesexw
 // Minimum OS: windows5.1.2600.
-func QueryContextAttributesEx(phContext *securitycredentials.SecHandle, ulAttribute SECPKG_ATTR, pBuffer unsafe.Pointer, cbBuffer uint32) error {
-	r1, _, _ := syscall.SyscallN(procQueryContextAttributesEx.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(ulAttribute), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer))
+func QueryContextAttributesEx(phContext *securitycredentials.SecHandle, ulAttribute SECPKG_ATTR, pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procQueryContextAttributesEx.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // QueryContextAttributesExA calls SspiCli!QueryContextAttributesExA.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-querycontextattributesexa
 // Minimum OS: windows5.1.2600.
-func QueryContextAttributesExA(phContext *securitycredentials.SecHandle, ulAttribute SECPKG_ATTR, pBuffer unsafe.Pointer, cbBuffer uint32) error {
-	r1, _, _ := syscall.SyscallN(procQueryContextAttributesExA.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(ulAttribute), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer))
+func QueryContextAttributesExA(phContext *securitycredentials.SecHandle, ulAttribute SECPKG_ATTR, pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procQueryContextAttributesExA.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1228,15 +1244,23 @@ func QueryCredentialsAttributesA(phCredential *securitycredentials.SecHandle, ul
 
 // QueryCredentialsAttributesEx calls SspiCli!QueryCredentialsAttributesExW.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-querycredentialsattributesexw
-func QueryCredentialsAttributesEx(phCredential *securitycredentials.SecHandle, ulAttribute uint32, pBuffer unsafe.Pointer, cbBuffer uint32) error {
-	r1, _, _ := syscall.SyscallN(procQueryCredentialsAttributesEx.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(ulAttribute), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer))
+func QueryCredentialsAttributesEx(phCredential *securitycredentials.SecHandle, ulAttribute uint32, pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procQueryCredentialsAttributesEx.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // QueryCredentialsAttributesExA calls SspiCli!QueryCredentialsAttributesExA.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-querycredentialsattributesexa
-func QueryCredentialsAttributesExA(phCredential *securitycredentials.SecHandle, ulAttribute uint32, pBuffer unsafe.Pointer, cbBuffer uint32) error {
-	r1, _, _ := syscall.SyscallN(procQueryCredentialsAttributesExA.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(ulAttribute), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer))
+func QueryCredentialsAttributesExA(phCredential *securitycredentials.SecHandle, ulAttribute uint32, pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procQueryCredentialsAttributesExA.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1275,22 +1299,34 @@ func RevertSecurityContext(phContext *securitycredentials.SecHandle) error {
 
 // RtlDecryptMemory calls ADVAPI32!SystemFunction041.
 // https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-rtldecryptmemory
-func RtlDecryptMemory(Memory unsafe.Pointer, MemorySize uint32, OptionFlags uint32) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procRtlDecryptMemory.Addr(), uintptr(unsafe.Pointer(Memory)), uintptr(MemorySize), uintptr(OptionFlags))
+func RtlDecryptMemory(Memory []byte, OptionFlags uint32) foundation.NTSTATUS {
+	var _Memory *byte
+	if len(Memory) > 0 {
+		_Memory = &Memory[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRtlDecryptMemory.Addr(), uintptr(unsafe.Pointer(_Memory)), uintptr(len(Memory)), uintptr(OptionFlags))
 	return foundation.NTSTATUS(r1)
 }
 
 // RtlEncryptMemory calls ADVAPI32!SystemFunction040.
 // https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-rtlencryptmemory
-func RtlEncryptMemory(Memory unsafe.Pointer, MemorySize uint32, OptionFlags uint32) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procRtlEncryptMemory.Addr(), uintptr(unsafe.Pointer(Memory)), uintptr(MemorySize), uintptr(OptionFlags))
+func RtlEncryptMemory(Memory []byte, OptionFlags uint32) foundation.NTSTATUS {
+	var _Memory *byte
+	if len(Memory) > 0 {
+		_Memory = &Memory[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRtlEncryptMemory.Addr(), uintptr(unsafe.Pointer(_Memory)), uintptr(len(Memory)), uintptr(OptionFlags))
 	return foundation.NTSTATUS(r1)
 }
 
 // RtlGenRandom calls ADVAPI32!SystemFunction036.
 // https://learn.microsoft.com/windows/win32/api/ntsecapi/nf-ntsecapi-rtlgenrandom
-func RtlGenRandom(RandomBuffer unsafe.Pointer, RandomBufferLength uint32) foundation.BOOLEAN {
-	r1, _, _ := syscall.SyscallN(procRtlGenRandom.Addr(), uintptr(unsafe.Pointer(RandomBuffer)), uintptr(RandomBufferLength))
+func RtlGenRandom(RandomBuffer []byte) foundation.BOOLEAN {
+	var _RandomBuffer *byte
+	if len(RandomBuffer) > 0 {
+		_RandomBuffer = &RandomBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRtlGenRandom.Addr(), uintptr(unsafe.Pointer(_RandomBuffer)), uintptr(len(RandomBuffer)))
 	return foundation.BOOLEAN(r1)
 }
 
@@ -1413,8 +1449,12 @@ func SLGetLicense(hSLC unsafe.Pointer, pLicenseFileId *win32.GUID, pcbLicenseFil
 // SLGetLicenseFileId calls SLC!SLGetLicenseFileId.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slgetlicensefileid
 // Minimum OS: windows8.0.
-func SLGetLicenseFileId(hSLC unsafe.Pointer, cbLicenseBlob uint32, pbLicenseBlob *byte, pLicenseFileId *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(procSLGetLicenseFileId.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(cbLicenseBlob), uintptr(unsafe.Pointer(pbLicenseBlob)), uintptr(unsafe.Pointer(pLicenseFileId)))
+func SLGetLicenseFileId(hSLC unsafe.Pointer, pbLicenseBlob []byte, pLicenseFileId *win32.GUID) error {
+	var _pbLicenseBlob *byte
+	if len(pbLicenseBlob) > 0 {
+		_pbLicenseBlob = &pbLicenseBlob[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSLGetLicenseFileId.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(len(pbLicenseBlob)), uintptr(unsafe.Pointer(_pbLicenseBlob)), uintptr(unsafe.Pointer(pLicenseFileId)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1439,10 +1479,14 @@ func SLGetLicensingStatusInformation(hSLC unsafe.Pointer, pAppID *win32.GUID, pP
 // SLGetPKeyId calls SLC!SLGetPKeyId.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slgetpkeyid
 // Minimum OS: windows8.0.
-func SLGetPKeyId(hSLC unsafe.Pointer, pwszPKeyAlgorithm string, pwszPKeyString string, cbPKeySpecificData uint32, pbPKeySpecificData *byte, pPKeyId *win32.GUID) error {
+func SLGetPKeyId(hSLC unsafe.Pointer, pwszPKeyAlgorithm string, pwszPKeyString string, pbPKeySpecificData []byte, pPKeyId *win32.GUID) error {
 	_pwszPKeyAlgorithm := win32.UTF16Ptr(pwszPKeyAlgorithm)
 	_pwszPKeyString := win32.UTF16Ptr(pwszPKeyString)
-	r1, _, _ := syscall.SyscallN(procSLGetPKeyId.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(_pwszPKeyAlgorithm)), uintptr(unsafe.Pointer(_pwszPKeyString)), uintptr(cbPKeySpecificData), uintptr(unsafe.Pointer(pbPKeySpecificData)), uintptr(unsafe.Pointer(pPKeyId)))
+	var _pbPKeySpecificData *byte
+	if len(pbPKeySpecificData) > 0 {
+		_pbPKeySpecificData = &pbPKeySpecificData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSLGetPKeyId.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(_pwszPKeyAlgorithm)), uintptr(unsafe.Pointer(_pwszPKeyString)), uintptr(len(pbPKeySpecificData)), uintptr(unsafe.Pointer(_pbPKeySpecificData)), uintptr(unsafe.Pointer(pPKeyId)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1540,18 +1584,26 @@ func SLGetWindowsInformationDWORD(pwszValueName string, pdwValue *uint32) error 
 // SLInstallLicense calls SLC!SLInstallLicense.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slinstalllicense
 // Minimum OS: windows8.0.
-func SLInstallLicense(hSLC unsafe.Pointer, cbLicenseBlob uint32, pbLicenseBlob *byte, pLicenseFileId *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(procSLInstallLicense.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(cbLicenseBlob), uintptr(unsafe.Pointer(pbLicenseBlob)), uintptr(unsafe.Pointer(pLicenseFileId)))
+func SLInstallLicense(hSLC unsafe.Pointer, pbLicenseBlob []byte, pLicenseFileId *win32.GUID) error {
+	var _pbLicenseBlob *byte
+	if len(pbLicenseBlob) > 0 {
+		_pbLicenseBlob = &pbLicenseBlob[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSLInstallLicense.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(len(pbLicenseBlob)), uintptr(unsafe.Pointer(_pbLicenseBlob)), uintptr(unsafe.Pointer(pLicenseFileId)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SLInstallProofOfPurchase calls SLC!SLInstallProofOfPurchase.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slinstallproofofpurchase
 // Minimum OS: windows8.0.
-func SLInstallProofOfPurchase(hSLC unsafe.Pointer, pwszPKeyAlgorithm string, pwszPKeyString string, cbPKeySpecificData uint32, pbPKeySpecificData *byte, pPkeyId *win32.GUID) error {
+func SLInstallProofOfPurchase(hSLC unsafe.Pointer, pwszPKeyAlgorithm string, pwszPKeyString string, pbPKeySpecificData []byte, pPkeyId *win32.GUID) error {
 	_pwszPKeyAlgorithm := win32.UTF16Ptr(pwszPKeyAlgorithm)
 	_pwszPKeyString := win32.UTF16Ptr(pwszPKeyString)
-	r1, _, _ := syscall.SyscallN(procSLInstallProofOfPurchase.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(_pwszPKeyAlgorithm)), uintptr(unsafe.Pointer(_pwszPKeyString)), uintptr(cbPKeySpecificData), uintptr(unsafe.Pointer(pbPKeySpecificData)), uintptr(unsafe.Pointer(pPkeyId)))
+	var _pbPKeySpecificData *byte
+	if len(pbPKeySpecificData) > 0 {
+		_pbPKeySpecificData = &pbPKeySpecificData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSLInstallProofOfPurchase.Addr(), uintptr(unsafe.Pointer(hSLC)), uintptr(unsafe.Pointer(_pwszPKeyAlgorithm)), uintptr(unsafe.Pointer(_pwszPKeyString)), uintptr(len(pbPKeySpecificData)), uintptr(unsafe.Pointer(_pbPKeySpecificData)), uintptr(unsafe.Pointer(pPkeyId)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1574,9 +1626,13 @@ func SLOpen(phSLC *unsafe.Pointer) error {
 // SLQueryLicenseValueFromApp calls api-ms-win-core-slapi-l1-1-0!SLQueryLicenseValueFromApp.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slquerylicensevaluefromapp
 // Minimum OS: windows10.0.10240.
-func SLQueryLicenseValueFromApp(valueName string, valueType *uint32, dataBuffer unsafe.Pointer, dataSize uint32, resultDataSize *uint32) error {
+func SLQueryLicenseValueFromApp(valueName string, valueType *uint32, dataBuffer []byte, resultDataSize *uint32) error {
 	_valueName := win32.UTF16Ptr(valueName)
-	r1, _, _ := syscall.SyscallN(procSLQueryLicenseValueFromApp.Addr(), uintptr(unsafe.Pointer(_valueName)), uintptr(unsafe.Pointer(valueType)), uintptr(unsafe.Pointer(dataBuffer)), uintptr(dataSize), uintptr(unsafe.Pointer(resultDataSize)))
+	var _dataBuffer *byte
+	if len(dataBuffer) > 0 {
+		_dataBuffer = &dataBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSLQueryLicenseValueFromApp.Addr(), uintptr(unsafe.Pointer(_valueName)), uintptr(unsafe.Pointer(valueType)), uintptr(unsafe.Pointer(_dataBuffer)), uintptr(len(dataBuffer)), uintptr(unsafe.Pointer(resultDataSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1600,9 +1656,13 @@ func SLSetCurrentProductKey(hSLC unsafe.Pointer, pProductSkuId *win32.GUID, pPro
 // SLSetGenuineInformation calls SLC!SLSetGenuineInformation.
 // https://learn.microsoft.com/windows/win32/api/slpublic/nf-slpublic-slsetgenuineinformation
 // Minimum OS: windows6.0.6000.
-func SLSetGenuineInformation(pQueryId *win32.GUID, pwszValueName string, eDataType SLDATATYPE, cbValue uint32, pbValue *byte) error {
+func SLSetGenuineInformation(pQueryId *win32.GUID, pwszValueName string, eDataType SLDATATYPE, pbValue []byte) error {
 	_pwszValueName := win32.UTF16Ptr(pwszValueName)
-	r1, _, _ := syscall.SyscallN(procSLSetGenuineInformation.Addr(), uintptr(unsafe.Pointer(pQueryId)), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(eDataType), uintptr(cbValue), uintptr(unsafe.Pointer(pbValue)))
+	var _pbValue *byte
+	if len(pbValue) > 0 {
+		_pbValue = &pbValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSLSetGenuineInformation.Addr(), uintptr(unsafe.Pointer(pQueryId)), uintptr(unsafe.Pointer(_pwszValueName)), uintptr(eDataType), uintptr(len(pbValue)), uintptr(unsafe.Pointer(_pbValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1722,15 +1782,23 @@ func SaslSetContextOption(ContextHandle *securitycredentials.SecHandle, Option u
 }
 
 // SecAllocateAndSetCallTarget calls SspiCli!SecAllocateAndSetCallTarget.
-func SecAllocateAndSetCallTarget(lpIpAddress *byte, cchIpAddress uint32, TargetName string, FreeCallContext *int32) error {
+func SecAllocateAndSetCallTarget(lpIpAddress []byte, TargetName string, FreeCallContext *int32) error {
+	var _lpIpAddress *byte
+	if len(lpIpAddress) > 0 {
+		_lpIpAddress = &lpIpAddress[0]
+	}
 	_TargetName := win32.UTF16Ptr(TargetName)
-	r1, _, _ := syscall.SyscallN(procSecAllocateAndSetCallTarget.Addr(), uintptr(unsafe.Pointer(lpIpAddress)), uintptr(cchIpAddress), uintptr(unsafe.Pointer(_TargetName)), uintptr(unsafe.Pointer(FreeCallContext)))
+	r1, _, _ := syscall.SyscallN(procSecAllocateAndSetCallTarget.Addr(), uintptr(unsafe.Pointer(_lpIpAddress)), uintptr(len(lpIpAddress)), uintptr(unsafe.Pointer(_TargetName)), uintptr(unsafe.Pointer(FreeCallContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SecAllocateAndSetIPAddress calls SspiCli!SecAllocateAndSetIPAddress.
-func SecAllocateAndSetIPAddress(lpIpAddress *byte, cchIpAddress uint32, FreeCallContext *int32) error {
-	r1, _, _ := syscall.SyscallN(procSecAllocateAndSetIPAddress.Addr(), uintptr(unsafe.Pointer(lpIpAddress)), uintptr(cchIpAddress), uintptr(unsafe.Pointer(FreeCallContext)))
+func SecAllocateAndSetIPAddress(lpIpAddress []byte, FreeCallContext *int32) error {
+	var _lpIpAddress *byte
+	if len(lpIpAddress) > 0 {
+		_lpIpAddress = &lpIpAddress[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSecAllocateAndSetIPAddress.Addr(), uintptr(unsafe.Pointer(_lpIpAddress)), uintptr(len(lpIpAddress)), uintptr(unsafe.Pointer(FreeCallContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1750,32 +1818,48 @@ func SendSAS(AsUser bool) {
 // SetContextAttributes calls SECUR32!SetContextAttributesW.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-setcontextattributesw
 // Minimum OS: windows5.1.2600.
-func SetContextAttributes(phContext *securitycredentials.SecHandle, ulAttribute SECPKG_ATTR, pBuffer unsafe.Pointer, cbBuffer uint32) error {
-	r1, _, _ := syscall.SyscallN(procSetContextAttributes.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(ulAttribute), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer))
+func SetContextAttributes(phContext *securitycredentials.SecHandle, ulAttribute SECPKG_ATTR, pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetContextAttributes.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetContextAttributesA calls SECUR32!SetContextAttributesA.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-setcontextattributesa
 // Minimum OS: windows5.1.2600.
-func SetContextAttributesA(phContext *securitycredentials.SecHandle, ulAttribute SECPKG_ATTR, pBuffer unsafe.Pointer, cbBuffer uint32) error {
-	r1, _, _ := syscall.SyscallN(procSetContextAttributesA.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(ulAttribute), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer))
+func SetContextAttributesA(phContext *securitycredentials.SecHandle, ulAttribute SECPKG_ATTR, pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetContextAttributesA.Addr(), uintptr(unsafe.Pointer(phContext)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetCredentialsAttributes calls SECUR32!SetCredentialsAttributesW.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-setcredentialsattributesw
 // Minimum OS: windows5.1.2600.
-func SetCredentialsAttributes(phCredential *securitycredentials.SecHandle, ulAttribute uint32, pBuffer unsafe.Pointer, cbBuffer uint32) error {
-	r1, _, _ := syscall.SyscallN(procSetCredentialsAttributes.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(ulAttribute), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer))
+func SetCredentialsAttributes(phCredential *securitycredentials.SecHandle, ulAttribute uint32, pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetCredentialsAttributes.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetCredentialsAttributesA calls SECUR32!SetCredentialsAttributesA.
 // https://learn.microsoft.com/windows/win32/api/sspi/nf-sspi-setcredentialsattributesa
 // Minimum OS: windows5.1.2600.
-func SetCredentialsAttributesA(phCredential *securitycredentials.SecHandle, ulAttribute uint32, pBuffer unsafe.Pointer, cbBuffer uint32) error {
-	r1, _, _ := syscall.SyscallN(procSetCredentialsAttributesA.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(ulAttribute), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbBuffer))
+func SetCredentialsAttributesA(phCredential *securitycredentials.SecHandle, ulAttribute uint32, pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetCredentialsAttributesA.Addr(), uintptr(unsafe.Pointer(phCredential)), uintptr(ulAttribute), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1839,8 +1923,12 @@ func SslGetMaximumKeySize(Reserved uint32) uint32 {
 // SslGetServerIdentity calls SCHANNEL!SslGetServerIdentity.
 // https://learn.microsoft.com/windows/win32/api/schannel/nf-schannel-sslgetserveridentity
 // Minimum OS: windows8.0.
-func SslGetServerIdentity(ClientHello *byte, ClientHelloSize uint32, ServerIdentity **byte, ServerIdentitySize *uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(procSslGetServerIdentity.Addr(), uintptr(unsafe.Pointer(ClientHello)), uintptr(ClientHelloSize), uintptr(unsafe.Pointer(ServerIdentity)), uintptr(unsafe.Pointer(ServerIdentitySize)), uintptr(Flags))
+func SslGetServerIdentity(ClientHello []byte, ServerIdentity **byte, ServerIdentitySize *uint32, Flags uint32) error {
+	var _ClientHello *byte
+	if len(ClientHello) > 0 {
+		_ClientHello = &ClientHello[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSslGetServerIdentity.Addr(), uintptr(unsafe.Pointer(_ClientHello)), uintptr(len(ClientHello)), uintptr(unsafe.Pointer(ServerIdentity)), uintptr(unsafe.Pointer(ServerIdentitySize)), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2052,17 +2140,25 @@ func TokenBindingDeleteBinding(targetURL string) error {
 // TokenBindingGenerateBinding calls TOKENBINDING!TokenBindingGenerateBinding.
 // https://learn.microsoft.com/windows/win32/api/tokenbinding/nf-tokenbinding-tokenbindinggeneratebinding
 // Minimum OS: windows10.0.10240.
-func TokenBindingGenerateBinding(keyType TOKENBINDING_KEY_PARAMETERS_TYPE, targetURL string, bindingType TOKENBINDING_TYPE, tlsEKM unsafe.Pointer, tlsEKMSize uint32, extensionFormat TOKENBINDING_EXTENSION_FORMAT, extensionData unsafe.Pointer, tokenBinding *unsafe.Pointer, tokenBindingSize *uint32, resultData **TOKENBINDING_RESULT_DATA) error {
+func TokenBindingGenerateBinding(keyType TOKENBINDING_KEY_PARAMETERS_TYPE, targetURL string, bindingType TOKENBINDING_TYPE, tlsEKM []byte, extensionFormat TOKENBINDING_EXTENSION_FORMAT, extensionData unsafe.Pointer, tokenBinding *unsafe.Pointer, tokenBindingSize *uint32, resultData **TOKENBINDING_RESULT_DATA) error {
 	_targetURL := win32.UTF16Ptr(targetURL)
-	r1, _, _ := syscall.SyscallN(procTokenBindingGenerateBinding.Addr(), uintptr(keyType), uintptr(unsafe.Pointer(_targetURL)), uintptr(bindingType), uintptr(unsafe.Pointer(tlsEKM)), uintptr(tlsEKMSize), uintptr(extensionFormat), uintptr(unsafe.Pointer(extensionData)), uintptr(unsafe.Pointer(tokenBinding)), uintptr(unsafe.Pointer(tokenBindingSize)), uintptr(unsafe.Pointer(resultData)))
+	var _tlsEKM *byte
+	if len(tlsEKM) > 0 {
+		_tlsEKM = &tlsEKM[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTokenBindingGenerateBinding.Addr(), uintptr(keyType), uintptr(unsafe.Pointer(_targetURL)), uintptr(bindingType), uintptr(unsafe.Pointer(_tlsEKM)), uintptr(len(tlsEKM)), uintptr(extensionFormat), uintptr(unsafe.Pointer(extensionData)), uintptr(unsafe.Pointer(tokenBinding)), uintptr(unsafe.Pointer(tokenBindingSize)), uintptr(unsafe.Pointer(resultData)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // TokenBindingGenerateID calls TOKENBINDING!TokenBindingGenerateID.
 // https://learn.microsoft.com/windows/win32/api/tokenbinding/nf-tokenbinding-tokenbindinggenerateid
 // Minimum OS: windows10.0.10240.
-func TokenBindingGenerateID(keyType TOKENBINDING_KEY_PARAMETERS_TYPE, publicKey unsafe.Pointer, publicKeySize uint32, resultData **TOKENBINDING_RESULT_DATA) error {
-	r1, _, _ := syscall.SyscallN(procTokenBindingGenerateID.Addr(), uintptr(keyType), uintptr(unsafe.Pointer(publicKey)), uintptr(publicKeySize), uintptr(unsafe.Pointer(resultData)))
+func TokenBindingGenerateID(keyType TOKENBINDING_KEY_PARAMETERS_TYPE, publicKey []byte, resultData **TOKENBINDING_RESULT_DATA) error {
+	var _publicKey *byte
+	if len(publicKey) > 0 {
+		_publicKey = &publicKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTokenBindingGenerateID.Addr(), uintptr(keyType), uintptr(unsafe.Pointer(_publicKey)), uintptr(len(publicKey)), uintptr(unsafe.Pointer(resultData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2106,8 +2202,16 @@ func TokenBindingGetKeyTypesServer(keyTypes **TOKENBINDING_KEY_TYPES) error {
 // TokenBindingVerifyMessage calls TOKENBINDING!TokenBindingVerifyMessage.
 // https://learn.microsoft.com/windows/win32/api/tokenbinding/nf-tokenbinding-tokenbindingverifymessage
 // Minimum OS: windows10.0.10240.
-func TokenBindingVerifyMessage(tokenBindingMessage unsafe.Pointer, tokenBindingMessageSize uint32, keyType TOKENBINDING_KEY_PARAMETERS_TYPE, tlsEKM unsafe.Pointer, tlsEKMSize uint32, resultList **TOKENBINDING_RESULT_LIST) error {
-	r1, _, _ := syscall.SyscallN(procTokenBindingVerifyMessage.Addr(), uintptr(unsafe.Pointer(tokenBindingMessage)), uintptr(tokenBindingMessageSize), uintptr(keyType), uintptr(unsafe.Pointer(tlsEKM)), uintptr(tlsEKMSize), uintptr(unsafe.Pointer(resultList)))
+func TokenBindingVerifyMessage(tokenBindingMessage []byte, keyType TOKENBINDING_KEY_PARAMETERS_TYPE, tlsEKM []byte, resultList **TOKENBINDING_RESULT_LIST) error {
+	var _tokenBindingMessage *byte
+	if len(tokenBindingMessage) > 0 {
+		_tokenBindingMessage = &tokenBindingMessage[0]
+	}
+	var _tlsEKM *byte
+	if len(tlsEKM) > 0 {
+		_tlsEKM = &tlsEKM[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTokenBindingVerifyMessage.Addr(), uintptr(unsafe.Pointer(_tokenBindingMessage)), uintptr(len(tokenBindingMessage)), uintptr(keyType), uintptr(unsafe.Pointer(_tlsEKM)), uintptr(len(tlsEKM)), uintptr(unsafe.Pointer(resultList)))
 	return win32.HRESULTError(int32(r1))
 }
 

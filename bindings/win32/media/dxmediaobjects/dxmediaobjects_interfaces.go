@@ -257,8 +257,12 @@ func (self *IMediaObject) ProcessInput(dwInputStreamIndex uint32, pBuffer *IMedi
 }
 
 // ProcessOutput dispatches through IMediaObject's vtable slot 22.
-func (self *IMediaObject) ProcessOutput(dwFlags uint32, cOutputBufferCount uint32, pOutputBuffers *DMO_OUTPUT_DATA_BUFFER, pdwStatus *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(cOutputBufferCount), uintptr(unsafe.Pointer(pOutputBuffers)), uintptr(unsafe.Pointer(pdwStatus)))
+func (self *IMediaObject) ProcessOutput(dwFlags uint32, pOutputBuffers []DMO_OUTPUT_DATA_BUFFER, pdwStatus *uint32) error {
+	var _pOutputBuffers *DMO_OUTPUT_DATA_BUFFER
+	if len(pOutputBuffers) > 0 {
+		_pOutputBuffers = &pOutputBuffers[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(len(pOutputBuffers)), uintptr(unsafe.Pointer(_pOutputBuffers)), uintptr(unsafe.Pointer(pdwStatus)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -278,8 +282,12 @@ type IMediaObjectInPlace struct {
 var IID_IMediaObjectInPlace = win32.GUID{Data1: 0x651b9ad0, Data2: 0x0fc7, Data3: 0x4aa9, Data4: [8]byte{0x95, 0x38, 0xd8, 0x99, 0x31, 0x01, 0x07, 0x41}}
 
 // Process dispatches through IMediaObjectInPlace's vtable slot 3.
-func (self *IMediaObjectInPlace) Process(ulSize uint32, pData *byte, refTimeStart int64, dwFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulSize), uintptr(unsafe.Pointer(pData)), uintptr(refTimeStart), uintptr(dwFlags))
+func (self *IMediaObjectInPlace) Process(pData []byte, refTimeStart int64, dwFlags uint32) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)), uintptr(refTimeStart), uintptr(dwFlags))
 	return win32.HRESULTError(int32(r1))
 }
 

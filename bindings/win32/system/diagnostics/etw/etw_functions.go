@@ -191,8 +191,16 @@ func EnumerateTraceGuids(GuidPropertiesArray []*TRACE_GUID_PROPERTIES, GuidCount
 // EnumerateTraceGuidsEx calls ADVAPI32!EnumerateTraceGuidsEx.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-enumeratetraceguidsex
 // Minimum OS: windows6.0.6000.
-func EnumerateTraceGuidsEx(TraceQueryInfoClass TRACE_QUERY_INFO_CLASS, InBuffer unsafe.Pointer, InBufferSize uint32, OutBuffer unsafe.Pointer, OutBufferSize uint32, ReturnLength *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procEnumerateTraceGuidsEx.Addr(), uintptr(TraceQueryInfoClass), uintptr(unsafe.Pointer(InBuffer)), uintptr(InBufferSize), uintptr(unsafe.Pointer(OutBuffer)), uintptr(OutBufferSize), uintptr(unsafe.Pointer(ReturnLength)))
+func EnumerateTraceGuidsEx(TraceQueryInfoClass TRACE_QUERY_INFO_CLASS, InBuffer []byte, OutBuffer []byte, ReturnLength *uint32) foundation.WIN32_ERROR {
+	var _InBuffer *byte
+	if len(InBuffer) > 0 {
+		_InBuffer = &InBuffer[0]
+	}
+	var _OutBuffer *byte
+	if len(OutBuffer) > 0 {
+		_OutBuffer = &OutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumerateTraceGuidsEx.Addr(), uintptr(TraceQueryInfoClass), uintptr(unsafe.Pointer(_InBuffer)), uintptr(len(InBuffer)), uintptr(unsafe.Pointer(_OutBuffer)), uintptr(len(OutBuffer)), uintptr(unsafe.Pointer(ReturnLength)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -255,8 +263,12 @@ func EventRegister(ProviderId *win32.GUID, EnableCallback PENABLECALLBACK, Callb
 // EventSetInformation calls ADVAPI32!EventSetInformation.
 // https://learn.microsoft.com/windows/win32/api/evntprov/nf-evntprov-eventsetinformation
 // Minimum OS: windows8.0.
-func EventSetInformation(RegHandle REGHANDLE, InformationClass EVENT_INFO_CLASS, EventInformation unsafe.Pointer, InformationLength uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procEventSetInformation.Addr(), uintptr(RegHandle), uintptr(InformationClass), uintptr(unsafe.Pointer(EventInformation)), uintptr(InformationLength))
+func EventSetInformation(RegHandle REGHANDLE, InformationClass EVENT_INFO_CLASS, EventInformation []byte) uint32 {
+	var _EventInformation *byte
+	if len(EventInformation) > 0 {
+		_EventInformation = &EventInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEventSetInformation.Addr(), uintptr(RegHandle), uintptr(InformationClass), uintptr(unsafe.Pointer(_EventInformation)), uintptr(len(EventInformation)))
 	return uint32(r1)
 }
 
@@ -664,8 +676,12 @@ func TdhEnumerateProvidersForDecodingSource(filter DECODING_SOURCE, buffer *PROV
 // TdhFormatProperty calls TDH!TdhFormatProperty.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhformatproperty
 // Minimum OS: windows6.1.
-func TdhFormatProperty(EventInfo *TRACE_EVENT_INFO, MapInfo *EVENT_MAP_INFO, PointerSize uint32, PropertyInType uint16, PropertyOutType uint16, PropertyLength uint16, UserDataLength uint16, UserData *byte, BufferSize *uint32, Buffer foundation.PWSTR, UserDataConsumed *uint16) uint32 {
-	r1, _, _ := syscall.SyscallN(procTdhFormatProperty.Addr(), uintptr(unsafe.Pointer(EventInfo)), uintptr(unsafe.Pointer(MapInfo)), uintptr(PointerSize), uintptr(PropertyInType), uintptr(PropertyOutType), uintptr(PropertyLength), uintptr(UserDataLength), uintptr(unsafe.Pointer(UserData)), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(UserDataConsumed)))
+func TdhFormatProperty(EventInfo *TRACE_EVENT_INFO, MapInfo *EVENT_MAP_INFO, PointerSize uint32, PropertyInType uint16, PropertyOutType uint16, PropertyLength uint16, UserData []byte, BufferSize *uint32, Buffer foundation.PWSTR, UserDataConsumed *uint16) uint32 {
+	var _UserData *byte
+	if len(UserData) > 0 {
+		_UserData = &UserData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTdhFormatProperty.Addr(), uintptr(unsafe.Pointer(EventInfo)), uintptr(unsafe.Pointer(MapInfo)), uintptr(PointerSize), uintptr(PropertyInType), uintptr(PropertyOutType), uintptr(PropertyLength), uintptr(len(UserData)), uintptr(unsafe.Pointer(_UserData)), uintptr(unsafe.Pointer(BufferSize)), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(UserDataConsumed)))
 	return uint32(r1)
 }
 
@@ -709,7 +725,7 @@ func TdhGetManifestEventInformation(ProviderGuid *win32.GUID, EventDescriptor *E
 // TdhGetProperty calls TDH!TdhGetProperty.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhgetproperty
 // Minimum OS: windows6.0.6000.
-func TdhGetProperty(pEvent *EVENT_RECORD, pTdhContext []TDH_CONTEXT, pPropertyData []PROPERTY_DATA_DESCRIPTOR, BufferSize uint32, pBuffer *byte) uint32 {
+func TdhGetProperty(pEvent *EVENT_RECORD, pTdhContext []TDH_CONTEXT, pPropertyData []PROPERTY_DATA_DESCRIPTOR, pBuffer []byte) uint32 {
 	var _pTdhContext *TDH_CONTEXT
 	if len(pTdhContext) > 0 {
 		_pTdhContext = &pTdhContext[0]
@@ -718,7 +734,11 @@ func TdhGetProperty(pEvent *EVENT_RECORD, pTdhContext []TDH_CONTEXT, pPropertyDa
 	if len(pPropertyData) > 0 {
 		_pPropertyData = &pPropertyData[0]
 	}
-	r1, _, _ := syscall.SyscallN(procTdhGetProperty.Addr(), uintptr(unsafe.Pointer(pEvent)), uintptr(len(pTdhContext)), uintptr(unsafe.Pointer(_pTdhContext)), uintptr(len(pPropertyData)), uintptr(unsafe.Pointer(_pPropertyData)), uintptr(BufferSize), uintptr(unsafe.Pointer(pBuffer)))
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTdhGetProperty.Addr(), uintptr(unsafe.Pointer(pEvent)), uintptr(len(pTdhContext)), uintptr(unsafe.Pointer(_pTdhContext)), uintptr(len(pPropertyData)), uintptr(unsafe.Pointer(_pPropertyData)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)))
 	return uint32(r1)
 }
 
@@ -775,8 +795,12 @@ func TdhLoadManifestFromBinary(BinaryPath string) uint32 {
 
 // TdhLoadManifestFromMemory calls TDH!TdhLoadManifestFromMemory.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhloadmanifestfrommemory
-func TdhLoadManifestFromMemory(pData unsafe.Pointer, cbData uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procTdhLoadManifestFromMemory.Addr(), uintptr(unsafe.Pointer(pData)), uintptr(cbData))
+func TdhLoadManifestFromMemory(pData []byte) uint32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTdhLoadManifestFromMemory.Addr(), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return uint32(r1)
 }
 
@@ -815,8 +839,12 @@ func TdhUnloadManifest(Manifest string) uint32 {
 
 // TdhUnloadManifestFromMemory calls TDH!TdhUnloadManifestFromMemory.
 // https://learn.microsoft.com/windows/win32/api/tdh/nf-tdh-tdhunloadmanifestfrommemory
-func TdhUnloadManifestFromMemory(pData unsafe.Pointer, cbData uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procTdhUnloadManifestFromMemory.Addr(), uintptr(unsafe.Pointer(pData)), uintptr(cbData))
+func TdhUnloadManifestFromMemory(pData []byte) uint32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTdhUnloadManifestFromMemory.Addr(), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return uint32(r1)
 }
 
@@ -865,16 +893,24 @@ func TraceMessageVa(LoggerHandle uint64, MessageFlags TRACE_MESSAGE_FLAGS, Messa
 // TraceQueryInformation calls ADVAPI32!TraceQueryInformation.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-tracequeryinformation
 // Minimum OS: windows8.0.
-func TraceQueryInformation(TraceId uint64, InformationClass TRACE_QUERY_INFO_CLASS, TraceInformation unsafe.Pointer, InformationLength uint32, ReturnLength *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procTraceQueryInformation.Addr(), uintptr(TraceId), uintptr(InformationClass), uintptr(unsafe.Pointer(TraceInformation)), uintptr(InformationLength), uintptr(unsafe.Pointer(ReturnLength)))
+func TraceQueryInformation(TraceId uint64, InformationClass TRACE_QUERY_INFO_CLASS, TraceInformation []byte, ReturnLength *uint32) foundation.WIN32_ERROR {
+	var _TraceInformation *byte
+	if len(TraceInformation) > 0 {
+		_TraceInformation = &TraceInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTraceQueryInformation.Addr(), uintptr(TraceId), uintptr(InformationClass), uintptr(unsafe.Pointer(_TraceInformation)), uintptr(len(TraceInformation)), uintptr(unsafe.Pointer(ReturnLength)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // TraceSetInformation calls ADVAPI32!TraceSetInformation.
 // https://learn.microsoft.com/windows/win32/api/evntrace/nf-evntrace-tracesetinformation
 // Minimum OS: windows6.1.
-func TraceSetInformation(TraceId uint64, InformationClass TRACE_QUERY_INFO_CLASS, TraceInformation unsafe.Pointer, InformationLength uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procTraceSetInformation.Addr(), uintptr(TraceId), uintptr(InformationClass), uintptr(unsafe.Pointer(TraceInformation)), uintptr(InformationLength))
+func TraceSetInformation(TraceId uint64, InformationClass TRACE_QUERY_INFO_CLASS, TraceInformation []byte) foundation.WIN32_ERROR {
+	var _TraceInformation *byte
+	if len(TraceInformation) > 0 {
+		_TraceInformation = &TraceInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTraceSetInformation.Addr(), uintptr(TraceId), uintptr(InformationClass), uintptr(unsafe.Pointer(_TraceInformation)), uintptr(len(TraceInformation)))
 	return foundation.WIN32_ERROR(r1)
 }
 

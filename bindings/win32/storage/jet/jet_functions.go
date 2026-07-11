@@ -250,15 +250,23 @@ var (
 
 // JetAddColumn calls ESENT!JetAddColumnW.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetaddcolumn-function
-func JetAddColumn(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *uint16, pcolumndef *JET_COLUMNDEF, pvDefault unsafe.Pointer, cbDefault uint32, pcolumnid *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetAddColumn.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pcolumndef)), uintptr(unsafe.Pointer(pvDefault)), uintptr(cbDefault), uintptr(unsafe.Pointer(pcolumnid)))
+func JetAddColumn(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *uint16, pcolumndef *JET_COLUMNDEF, pvDefault []byte, pcolumnid *uint32) int32 {
+	var _pvDefault *byte
+	if len(pvDefault) > 0 {
+		_pvDefault = &pvDefault[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetAddColumn.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pcolumndef)), uintptr(unsafe.Pointer(_pvDefault)), uintptr(len(pvDefault)), uintptr(unsafe.Pointer(pcolumnid)))
 	return int32(r1)
 }
 
 // JetAddColumnA calls ESENT!JetAddColumnA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetaddcolumn-function
-func JetAddColumnA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *int8, pcolumndef *JET_COLUMNDEF, pvDefault unsafe.Pointer, cbDefault uint32, pcolumnid *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetAddColumnA.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pcolumndef)), uintptr(unsafe.Pointer(pvDefault)), uintptr(cbDefault), uintptr(unsafe.Pointer(pcolumnid)))
+func JetAddColumnA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *int8, pcolumndef *JET_COLUMNDEF, pvDefault []byte, pcolumnid *uint32) int32 {
+	var _pvDefault *byte
+	if len(pvDefault) > 0 {
+		_pvDefault = &pvDefault[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetAddColumnA.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pcolumndef)), uintptr(unsafe.Pointer(_pvDefault)), uintptr(len(pvDefault)), uintptr(unsafe.Pointer(pcolumnid)))
 	return int32(r1)
 }
 
@@ -848,8 +856,16 @@ func JetEnumerateColumns(sesid JET_SESID, tableid storagestructuredstorage.JET_T
 
 // JetEscrowUpdate calls ESENT!JetEscrowUpdate.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetescrowupdate-function
-func JetEscrowUpdate(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, columnid uint32, pv unsafe.Pointer, cbMax uint32, pvOld unsafe.Pointer, cbOldMax uint32, pcbOldActual *uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetEscrowUpdate.Addr(), uintptr(sesid), uintptr(tableid), uintptr(columnid), uintptr(unsafe.Pointer(pv)), uintptr(cbMax), uintptr(unsafe.Pointer(pvOld)), uintptr(cbOldMax), uintptr(unsafe.Pointer(pcbOldActual)), uintptr(grbit))
+func JetEscrowUpdate(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, columnid uint32, pv []byte, pvOld []byte, pcbOldActual *uint32, grbit uint32) int32 {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	var _pvOld *byte
+	if len(pvOld) > 0 {
+		_pvOld = &pvOld[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetEscrowUpdate.Addr(), uintptr(sesid), uintptr(tableid), uintptr(columnid), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(_pvOld)), uintptr(len(pvOld)), uintptr(unsafe.Pointer(pcbOldActual)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -934,22 +950,34 @@ func JetGetAttachInfoInstanceA(instance JET_INSTANCE, szzDatabases *int8, cbMax 
 
 // JetGetBookmark calls ESENT!JetGetBookmark.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetbookmark-function
-func JetGetBookmark(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvBookmark unsafe.Pointer, cbMax uint32, pcbActual *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetBookmark.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvBookmark)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)))
+func JetGetBookmark(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvBookmark []byte, pcbActual *uint32) int32 {
+	var _pvBookmark *byte
+	if len(pvBookmark) > 0 {
+		_pvBookmark = &pvBookmark[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetBookmark.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pvBookmark)), uintptr(len(pvBookmark)), uintptr(unsafe.Pointer(pcbActual)))
 	return int32(r1)
 }
 
 // JetGetColumnInfo calls ESENT!JetGetColumnInfoW.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetcolumninfo-function
-func JetGetColumnInfo(sesid JET_SESID, dbid uint32, szTableName *uint16, pwColumnNameOrId *uint16, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetColumnInfo.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pwColumnNameOrId)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+func JetGetColumnInfo(sesid JET_SESID, dbid uint32, szTableName *uint16, pwColumnNameOrId *uint16, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetColumnInfo.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pwColumnNameOrId)), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetColumnInfoA calls ESENT!JetGetColumnInfoA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetcolumninfo-function
-func JetGetColumnInfoA(sesid JET_SESID, dbid uint32, szTableName *int8, pColumnNameOrId *int8, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetColumnInfoA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pColumnNameOrId)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+func JetGetColumnInfoA(sesid JET_SESID, dbid uint32, szTableName *int8, pColumnNameOrId *int8, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetColumnInfoA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pColumnNameOrId)), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
@@ -969,55 +997,87 @@ func JetGetCurrentIndexA(sesid JET_SESID, tableid storagestructuredstorage.JET_T
 
 // JetGetCursorInfo calls ESENT!JetGetCursorInfo.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetcursorinfo-function
-func JetGetCursorInfo(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetCursorInfo.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+func JetGetCursorInfo(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetCursorInfo.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetDatabaseFileInfo calls ESENT!JetGetDatabaseFileInfoW.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetdatabasefileinfo-function
-func JetGetDatabaseFileInfo(szDatabaseName *uint16, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetDatabaseFileInfo.Addr(), uintptr(unsafe.Pointer(szDatabaseName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+func JetGetDatabaseFileInfo(szDatabaseName *uint16, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetDatabaseFileInfo.Addr(), uintptr(unsafe.Pointer(szDatabaseName)), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetDatabaseFileInfoA calls ESENT!JetGetDatabaseFileInfoA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetdatabasefileinfo-function
-func JetGetDatabaseFileInfoA(szDatabaseName *int8, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetDatabaseFileInfoA.Addr(), uintptr(unsafe.Pointer(szDatabaseName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+func JetGetDatabaseFileInfoA(szDatabaseName *int8, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetDatabaseFileInfoA.Addr(), uintptr(unsafe.Pointer(szDatabaseName)), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetDatabaseInfo calls ESENT!JetGetDatabaseInfoW.
-func JetGetDatabaseInfo(sesid JET_SESID, dbid uint32, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetDatabaseInfo.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+func JetGetDatabaseInfo(sesid JET_SESID, dbid uint32, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetDatabaseInfo.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetDatabaseInfoA calls ESENT!JetGetDatabaseInfoA.
-func JetGetDatabaseInfoA(sesid JET_SESID, dbid uint32, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetDatabaseInfoA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+func JetGetDatabaseInfoA(sesid JET_SESID, dbid uint32, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetDatabaseInfoA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetErrorInfoW calls ESENT!JetGetErrorInfoW.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgeterrorinfow-function
-func JetGetErrorInfoW(pvContext unsafe.Pointer, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetErrorInfoW.Addr(), uintptr(unsafe.Pointer(pvContext)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel), uintptr(grbit))
+func JetGetErrorInfoW(pvContext unsafe.Pointer, pvResult []byte, InfoLevel uint32, grbit uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetErrorInfoW.Addr(), uintptr(unsafe.Pointer(pvContext)), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel), uintptr(grbit))
 	return int32(r1)
 }
 
 // JetGetIndexInfo calls ESENT!JetGetIndexInfoW.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetindexinfo-function
-func JetGetIndexInfo(sesid JET_SESID, dbid uint32, szTableName *uint16, szIndexName *uint16, pvResult unsafe.Pointer, cbResult uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetIndexInfo.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(szIndexName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbResult), uintptr(InfoLevel))
+func JetGetIndexInfo(sesid JET_SESID, dbid uint32, szTableName *uint16, szIndexName *uint16, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetIndexInfo.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(szIndexName)), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetIndexInfoA calls ESENT!JetGetIndexInfoA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetindexinfo-function
-func JetGetIndexInfoA(sesid JET_SESID, dbid uint32, szTableName *int8, szIndexName *int8, pvResult unsafe.Pointer, cbResult uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetIndexInfoA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(szIndexName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbResult), uintptr(InfoLevel))
+func JetGetIndexInfoA(sesid JET_SESID, dbid uint32, szTableName *int8, szIndexName *int8, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetIndexInfoA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(szIndexName)), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
@@ -1037,8 +1097,12 @@ func JetGetInstanceInfoA(pcInstanceInfo *uint32, paInstanceInfo **JET_INSTANCE_I
 
 // JetGetInstanceMiscInfo calls ESENT!JetGetInstanceMiscInfo.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetinstancemiscinfo-function
-func JetGetInstanceMiscInfo(instance JET_INSTANCE, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetInstanceMiscInfo.Addr(), uintptr(instance), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+func JetGetInstanceMiscInfo(instance JET_INSTANCE, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetInstanceMiscInfo.Addr(), uintptr(instance), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
@@ -1100,15 +1164,23 @@ func JetGetLogInfoInstanceA(instance JET_INSTANCE, szzLogs *int8, cbMax uint32, 
 
 // JetGetObjectInfo calls ESENT!JetGetObjectInfoW.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetobjectinfo-function
-func JetGetObjectInfo(sesid JET_SESID, dbid uint32, objtyp uint32, szContainerName *uint16, szObjectName *uint16, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetObjectInfo.Addr(), uintptr(sesid), uintptr(dbid), uintptr(objtyp), uintptr(unsafe.Pointer(szContainerName)), uintptr(unsafe.Pointer(szObjectName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+func JetGetObjectInfo(sesid JET_SESID, dbid uint32, objtyp uint32, szContainerName *uint16, szObjectName *uint16, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetObjectInfo.Addr(), uintptr(sesid), uintptr(dbid), uintptr(objtyp), uintptr(unsafe.Pointer(szContainerName)), uintptr(unsafe.Pointer(szObjectName)), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetObjectInfoA calls ESENT!JetGetObjectInfoA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetobjectinfo-function
-func JetGetObjectInfoA(sesid JET_SESID, dbid uint32, objtyp uint32, szContainerName *int8, szObjectName *int8, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetObjectInfoA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(objtyp), uintptr(unsafe.Pointer(szContainerName)), uintptr(unsafe.Pointer(szObjectName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+func JetGetObjectInfoA(sesid JET_SESID, dbid uint32, objtyp uint32, szContainerName *int8, szObjectName *int8, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetObjectInfoA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(objtyp), uintptr(unsafe.Pointer(szContainerName)), uintptr(unsafe.Pointer(szObjectName)), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
@@ -1135,8 +1207,16 @@ func JetGetRecordSize2(sesid JET_SESID, tableid storagestructuredstorage.JET_TAB
 
 // JetGetSecondaryIndexBookmark calls ESENT!JetGetSecondaryIndexBookmark.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetsecondaryindexbookmark-function
-func JetGetSecondaryIndexBookmark(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvSecondaryKey unsafe.Pointer, cbSecondaryKeyMax uint32, pcbSecondaryKeyActual *uint32, pvPrimaryBookmark unsafe.Pointer, cbPrimaryBookmarkMax uint32, pcbPrimaryBookmarkActual *uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetSecondaryIndexBookmark.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvSecondaryKey)), uintptr(cbSecondaryKeyMax), uintptr(unsafe.Pointer(pcbSecondaryKeyActual)), uintptr(unsafe.Pointer(pvPrimaryBookmark)), uintptr(cbPrimaryBookmarkMax), uintptr(unsafe.Pointer(pcbPrimaryBookmarkActual)), uintptr(grbit))
+func JetGetSecondaryIndexBookmark(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvSecondaryKey []byte, pcbSecondaryKeyActual *uint32, pvPrimaryBookmark []byte, pcbPrimaryBookmarkActual *uint32, grbit uint32) int32 {
+	var _pvSecondaryKey *byte
+	if len(pvSecondaryKey) > 0 {
+		_pvSecondaryKey = &pvSecondaryKey[0]
+	}
+	var _pvPrimaryBookmark *byte
+	if len(pvPrimaryBookmark) > 0 {
+		_pvPrimaryBookmark = &pvPrimaryBookmark[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetSecondaryIndexBookmark.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pvSecondaryKey)), uintptr(len(pvSecondaryKey)), uintptr(unsafe.Pointer(pcbSecondaryKeyActual)), uintptr(unsafe.Pointer(_pvPrimaryBookmark)), uintptr(len(pvPrimaryBookmark)), uintptr(unsafe.Pointer(pcbPrimaryBookmarkActual)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -1163,50 +1243,78 @@ func JetGetSystemParameterA(instance JET_INSTANCE, sesid JET_SESID, paramid uint
 
 // JetGetTableColumnInfo calls ESENT!JetGetTableColumnInfoW.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettablecolumninfo-function
-func JetGetTableColumnInfo(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *uint16, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetTableColumnInfo.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+func JetGetTableColumnInfo(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *uint16, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetTableColumnInfo.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetTableColumnInfoA calls ESENT!JetGetTableColumnInfoA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettablecolumninfo-function
-func JetGetTableColumnInfoA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *int8, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetTableColumnInfoA.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+func JetGetTableColumnInfoA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szColumnName *int8, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetTableColumnInfoA.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetTableIndexInfo calls ESENT!JetGetTableIndexInfoW.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettableindexinfo-function
-func JetGetTableIndexInfo(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, pvResult unsafe.Pointer, cbResult uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetTableIndexInfo.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbResult), uintptr(InfoLevel))
+func JetGetTableIndexInfo(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *uint16, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetTableIndexInfo.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetTableIndexInfoA calls ESENT!JetGetTableIndexInfoA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettableindexinfo-function
-func JetGetTableIndexInfoA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *int8, pvResult unsafe.Pointer, cbResult uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetTableIndexInfoA.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(unsafe.Pointer(pvResult)), uintptr(cbResult), uintptr(InfoLevel))
+func JetGetTableIndexInfoA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, szIndexName *int8, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetTableIndexInfoA.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(szIndexName)), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetTableInfo calls ESENT!JetGetTableInfoW.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettableinfo-function
-func JetGetTableInfo(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetTableInfo.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+func JetGetTableInfo(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetTableInfo.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetTableInfoA calls ESENT!JetGetTableInfoA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgettableinfo-function
-func JetGetTableInfoA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvResult unsafe.Pointer, cbMax uint32, InfoLevel uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetTableInfoA.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax), uintptr(InfoLevel))
+func JetGetTableInfoA(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvResult []byte, InfoLevel uint32) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetTableInfoA.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)), uintptr(InfoLevel))
 	return int32(r1)
 }
 
 // JetGetThreadStats calls ESENT!JetGetThreadStats.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgetthreadstats-function
-func JetGetThreadStats(pvResult unsafe.Pointer, cbMax uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGetThreadStats.Addr(), uintptr(unsafe.Pointer(pvResult)), uintptr(cbMax))
+func JetGetThreadStats(pvResult []byte) int32 {
+	var _pvResult *byte
+	if len(pvResult) > 0 {
+		_pvResult = &pvResult[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGetThreadStats.Addr(), uintptr(unsafe.Pointer(_pvResult)), uintptr(len(pvResult)))
 	return int32(r1)
 }
 
@@ -1233,8 +1341,12 @@ func JetGetVersion(sesid JET_SESID, pwVersion *uint32) int32 {
 
 // JetGotoBookmark calls ESENT!JetGotoBookmark.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgotobookmark-function
-func JetGotoBookmark(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvBookmark unsafe.Pointer, cbBookmark uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGotoBookmark.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvBookmark)), uintptr(cbBookmark))
+func JetGotoBookmark(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvBookmark []byte) int32 {
+	var _pvBookmark *byte
+	if len(pvBookmark) > 0 {
+		_pvBookmark = &pvBookmark[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGotoBookmark.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pvBookmark)), uintptr(len(pvBookmark)))
 	return int32(r1)
 }
 
@@ -1247,8 +1359,16 @@ func JetGotoPosition(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLE
 
 // JetGotoSecondaryIndexBookmark calls ESENT!JetGotoSecondaryIndexBookmark.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetgotosecondaryindexbookmark-function
-func JetGotoSecondaryIndexBookmark(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvSecondaryKey unsafe.Pointer, cbSecondaryKey uint32, pvPrimaryBookmark unsafe.Pointer, cbPrimaryBookmark uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetGotoSecondaryIndexBookmark.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvSecondaryKey)), uintptr(cbSecondaryKey), uintptr(unsafe.Pointer(pvPrimaryBookmark)), uintptr(cbPrimaryBookmark), uintptr(grbit))
+func JetGotoSecondaryIndexBookmark(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvSecondaryKey []byte, pvPrimaryBookmark []byte, grbit uint32) int32 {
+	var _pvSecondaryKey *byte
+	if len(pvSecondaryKey) > 0 {
+		_pvSecondaryKey = &pvSecondaryKey[0]
+	}
+	var _pvPrimaryBookmark *byte
+	if len(pvPrimaryBookmark) > 0 {
+		_pvPrimaryBookmark = &pvPrimaryBookmark[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetGotoSecondaryIndexBookmark.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pvSecondaryKey)), uintptr(len(pvSecondaryKey)), uintptr(unsafe.Pointer(_pvPrimaryBookmark)), uintptr(len(pvPrimaryBookmark)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -1314,8 +1434,12 @@ func JetIntersectIndexes(sesid JET_SESID, rgindexrange []JET_INDEXRANGE, precord
 
 // JetMakeKey calls ESENT!JetMakeKey.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetmakekey-function
-func JetMakeKey(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvData unsafe.Pointer, cbData uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetMakeKey.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvData)), uintptr(cbData), uintptr(grbit))
+func JetMakeKey(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvData []byte, grbit uint32) int32 {
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetMakeKey.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pvData)), uintptr(len(pvData)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -1447,15 +1571,23 @@ func JetOpenFileInstanceA(instance JET_INSTANCE, szFileName *int8, phfFile *stor
 
 // JetOpenTable calls ESENT!JetOpenTableW.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetopentable-function
-func JetOpenTable(sesid JET_SESID, dbid uint32, szTableName *uint16, pvParameters unsafe.Pointer, cbParameters uint32, grbit uint32, ptableid *storagestructuredstorage.JET_TABLEID) int32 {
-	r1, _, _ := syscall.SyscallN(procJetOpenTable.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pvParameters)), uintptr(cbParameters), uintptr(grbit), uintptr(unsafe.Pointer(ptableid)))
+func JetOpenTable(sesid JET_SESID, dbid uint32, szTableName *uint16, pvParameters []byte, grbit uint32, ptableid *storagestructuredstorage.JET_TABLEID) int32 {
+	var _pvParameters *byte
+	if len(pvParameters) > 0 {
+		_pvParameters = &pvParameters[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetOpenTable.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(_pvParameters)), uintptr(len(pvParameters)), uintptr(grbit), uintptr(unsafe.Pointer(ptableid)))
 	return int32(r1)
 }
 
 // JetOpenTableA calls ESENT!JetOpenTableA.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetopentable-function
-func JetOpenTableA(sesid JET_SESID, dbid uint32, szTableName *int8, pvParameters unsafe.Pointer, cbParameters uint32, grbit uint32, ptableid *storagestructuredstorage.JET_TABLEID) int32 {
-	r1, _, _ := syscall.SyscallN(procJetOpenTableA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(pvParameters)), uintptr(cbParameters), uintptr(grbit), uintptr(unsafe.Pointer(ptableid)))
+func JetOpenTableA(sesid JET_SESID, dbid uint32, szTableName *int8, pvParameters []byte, grbit uint32, ptableid *storagestructuredstorage.JET_TABLEID) int32 {
+	var _pvParameters *byte
+	if len(pvParameters) > 0 {
+		_pvParameters = &pvParameters[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetOpenTableA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(_pvParameters)), uintptr(len(pvParameters)), uintptr(grbit), uintptr(unsafe.Pointer(ptableid)))
 	return int32(r1)
 }
 
@@ -1525,15 +1657,23 @@ func JetPrereadKeys(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEI
 
 // JetReadFile calls ESENT!JetReadFile.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetreadfile-function
-func JetReadFile(hfFile storagestructuredstorage.JET_HANDLE, pv unsafe.Pointer, cb uint32, pcbActual *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetReadFile.Addr(), uintptr(hfFile), uintptr(unsafe.Pointer(pv)), uintptr(cb), uintptr(unsafe.Pointer(pcbActual)))
+func JetReadFile(hfFile storagestructuredstorage.JET_HANDLE, pv []byte, pcbActual *uint32) int32 {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetReadFile.Addr(), uintptr(hfFile), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(pcbActual)))
 	return int32(r1)
 }
 
 // JetReadFileInstance calls ESENT!JetReadFileInstance.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetreadfileinstance-function
-func JetReadFileInstance(instance JET_INSTANCE, hfFile storagestructuredstorage.JET_HANDLE, pv unsafe.Pointer, cb uint32, pcbActual *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetReadFileInstance.Addr(), uintptr(instance), uintptr(hfFile), uintptr(unsafe.Pointer(pv)), uintptr(cb), uintptr(unsafe.Pointer(pcbActual)))
+func JetReadFileInstance(instance JET_INSTANCE, hfFile storagestructuredstorage.JET_HANDLE, pv []byte, pcbActual *uint32) int32 {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetReadFileInstance.Addr(), uintptr(instance), uintptr(hfFile), uintptr(unsafe.Pointer(_pv)), uintptr(len(pv)), uintptr(unsafe.Pointer(pcbActual)))
 	return int32(r1)
 }
 
@@ -1635,8 +1775,12 @@ func JetRestoreInstanceA(instance JET_INSTANCE, sz *int8, szDest *int8, pfn JET_
 
 // JetRetrieveColumn calls ESENT!JetRetrieveColumn.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetretrievecolumn-function
-func JetRetrieveColumn(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, columnid uint32, pvData unsafe.Pointer, cbData uint32, pcbActual *uint32, grbit uint32, pretinfo *JET_RETINFO) int32 {
-	r1, _, _ := syscall.SyscallN(procJetRetrieveColumn.Addr(), uintptr(sesid), uintptr(tableid), uintptr(columnid), uintptr(unsafe.Pointer(pvData)), uintptr(cbData), uintptr(unsafe.Pointer(pcbActual)), uintptr(grbit), uintptr(unsafe.Pointer(pretinfo)))
+func JetRetrieveColumn(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, columnid uint32, pvData []byte, pcbActual *uint32, grbit uint32, pretinfo *JET_RETINFO) int32 {
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetRetrieveColumn.Addr(), uintptr(sesid), uintptr(tableid), uintptr(columnid), uintptr(unsafe.Pointer(_pvData)), uintptr(len(pvData)), uintptr(unsafe.Pointer(pcbActual)), uintptr(grbit), uintptr(unsafe.Pointer(pretinfo)))
 	return int32(r1)
 }
 
@@ -1653,8 +1797,12 @@ func JetRetrieveColumns(sesid JET_SESID, tableid storagestructuredstorage.JET_TA
 
 // JetRetrieveKey calls ESENT!JetRetrieveKey.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetretrievekey-function
-func JetRetrieveKey(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvKey unsafe.Pointer, cbMax uint32, pcbActual *uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetRetrieveKey.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvKey)), uintptr(cbMax), uintptr(unsafe.Pointer(pcbActual)), uintptr(grbit))
+func JetRetrieveKey(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvKey []byte, pcbActual *uint32, grbit uint32) int32 {
+	var _pvKey *byte
+	if len(pvKey) > 0 {
+		_pvKey = &pvKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetRetrieveKey.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pvKey)), uintptr(len(pvKey)), uintptr(unsafe.Pointer(pcbActual)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -1674,20 +1822,32 @@ func JetSeek(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, grbi
 
 // JetSetColumn calls ESENT!JetSetColumn.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetcolumn-function
-func JetSetColumn(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, columnid uint32, pvData unsafe.Pointer, cbData uint32, grbit uint32, psetinfo *JET_SETINFO) int32 {
-	r1, _, _ := syscall.SyscallN(procJetSetColumn.Addr(), uintptr(sesid), uintptr(tableid), uintptr(columnid), uintptr(unsafe.Pointer(pvData)), uintptr(cbData), uintptr(grbit), uintptr(unsafe.Pointer(psetinfo)))
+func JetSetColumn(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, columnid uint32, pvData []byte, grbit uint32, psetinfo *JET_SETINFO) int32 {
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetSetColumn.Addr(), uintptr(sesid), uintptr(tableid), uintptr(columnid), uintptr(unsafe.Pointer(_pvData)), uintptr(len(pvData)), uintptr(grbit), uintptr(unsafe.Pointer(psetinfo)))
 	return int32(r1)
 }
 
 // JetSetColumnDefaultValue calls ESENT!JetSetColumnDefaultValueW.
-func JetSetColumnDefaultValue(sesid JET_SESID, dbid uint32, szTableName *uint16, szColumnName *uint16, pvData unsafe.Pointer, cbData uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetSetColumnDefaultValue.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pvData)), uintptr(cbData), uintptr(grbit))
+func JetSetColumnDefaultValue(sesid JET_SESID, dbid uint32, szTableName *uint16, szColumnName *uint16, pvData []byte, grbit uint32) int32 {
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetSetColumnDefaultValue.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(_pvData)), uintptr(len(pvData)), uintptr(grbit))
 	return int32(r1)
 }
 
 // JetSetColumnDefaultValueA calls ESENT!JetSetColumnDefaultValueA.
-func JetSetColumnDefaultValueA(sesid JET_SESID, dbid uint32, szTableName *int8, szColumnName *int8, pvData unsafe.Pointer, cbData uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetSetColumnDefaultValueA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(pvData)), uintptr(cbData), uintptr(grbit))
+func JetSetColumnDefaultValueA(sesid JET_SESID, dbid uint32, szTableName *int8, szColumnName *int8, pvData []byte, grbit uint32) int32 {
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetSetColumnDefaultValueA.Addr(), uintptr(sesid), uintptr(dbid), uintptr(unsafe.Pointer(szTableName)), uintptr(unsafe.Pointer(szColumnName)), uintptr(unsafe.Pointer(_pvData)), uintptr(len(pvData)), uintptr(grbit))
 	return int32(r1)
 }
 
@@ -1806,8 +1966,12 @@ func JetSetSessionContext(sesid JET_SESID, ulContext storagestructuredstorage.JE
 
 // JetSetSessionParameter calls ESENT!JetSetSessionParameter.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetsetsessionparameter-function
-func JetSetSessionParameter(sesid JET_SESID, sesparamid uint32, pvParam unsafe.Pointer, cbParam uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetSetSessionParameter.Addr(), uintptr(sesid), uintptr(sesparamid), uintptr(unsafe.Pointer(pvParam)), uintptr(cbParam))
+func JetSetSessionParameter(sesid JET_SESID, sesparamid uint32, pvParam []byte) int32 {
+	var _pvParam *byte
+	if len(pvParam) > 0 {
+		_pvParam = &pvParam[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetSetSessionParameter.Addr(), uintptr(sesid), uintptr(sesparamid), uintptr(unsafe.Pointer(_pvParam)), uintptr(len(pvParam)))
 	return int32(r1)
 }
 
@@ -1904,14 +2068,22 @@ func JetUnregisterCallback(sesid JET_SESID, tableid storagestructuredstorage.JET
 
 // JetUpdate calls ESENT!JetUpdate.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetupdate-function
-func JetUpdate(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvBookmark unsafe.Pointer, cbBookmark uint32, pcbActual *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetUpdate.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvBookmark)), uintptr(cbBookmark), uintptr(unsafe.Pointer(pcbActual)))
+func JetUpdate(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvBookmark []byte, pcbActual *uint32) int32 {
+	var _pvBookmark *byte
+	if len(pvBookmark) > 0 {
+		_pvBookmark = &pvBookmark[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetUpdate.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pvBookmark)), uintptr(len(pvBookmark)), uintptr(unsafe.Pointer(pcbActual)))
 	return int32(r1)
 }
 
 // JetUpdate2 calls ESENT!JetUpdate2.
 // https://learn.microsoft.com/windows/win32/extensible-storage-engine/jetupdate2-function
-func JetUpdate2(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvBookmark unsafe.Pointer, cbBookmark uint32, pcbActual *uint32, grbit uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procJetUpdate2.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(pvBookmark)), uintptr(cbBookmark), uintptr(unsafe.Pointer(pcbActual)), uintptr(grbit))
+func JetUpdate2(sesid JET_SESID, tableid storagestructuredstorage.JET_TABLEID, pvBookmark []byte, pcbActual *uint32, grbit uint32) int32 {
+	var _pvBookmark *byte
+	if len(pvBookmark) > 0 {
+		_pvBookmark = &pvBookmark[0]
+	}
+	r1, _, _ := syscall.SyscallN(procJetUpdate2.Addr(), uintptr(sesid), uintptr(tableid), uintptr(unsafe.Pointer(_pvBookmark)), uintptr(len(pvBookmark)), uintptr(unsafe.Pointer(pcbActual)), uintptr(grbit))
 	return int32(r1)
 }

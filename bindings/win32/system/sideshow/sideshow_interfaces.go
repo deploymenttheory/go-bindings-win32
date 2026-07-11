@@ -142,8 +142,12 @@ func (self *ISideShowEvents) ContentMissing(in_contentId uint32, out_ppIContent 
 }
 
 // ApplicationEvent dispatches through ISideShowEvents's vtable slot 4.
-func (self *ISideShowEvents) ApplicationEvent(in_pICapabilities *ISideShowCapabilities, in_dwEventId uint32, in_dwEventSize uint32, in_pbEventData *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pICapabilities)), uintptr(in_dwEventId), uintptr(in_dwEventSize), uintptr(unsafe.Pointer(in_pbEventData)))
+func (self *ISideShowEvents) ApplicationEvent(in_pICapabilities *ISideShowCapabilities, in_dwEventId uint32, in_pbEventData []byte) error {
+	var _in_pbEventData *byte
+	if len(in_pbEventData) > 0 {
+		_in_pbEventData = &in_pbEventData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(in_pICapabilities)), uintptr(in_dwEventId), uintptr(len(in_pbEventData)), uintptr(unsafe.Pointer(_in_pbEventData)))
 	return win32.HRESULTError(int32(r1))
 }
 

@@ -114,7 +114,15 @@ func KsResolveRequiredAttributes(DataRange *KSDATAFORMAT, Attributes *KSMULTIPLE
 }
 
 // KsSynchronousDeviceControl calls ksproxy.ax!KsSynchronousDeviceControl.
-func KsSynchronousDeviceControl(Handle foundation.HANDLE, IoControl uint32, InBuffer unsafe.Pointer, InLength uint32, OutBuffer unsafe.Pointer, OutLength uint32, BytesReturned *uint32) error {
-	r1, _, _ := syscall.SyscallN(procKsSynchronousDeviceControl.Addr(), uintptr(Handle), uintptr(IoControl), uintptr(unsafe.Pointer(InBuffer)), uintptr(InLength), uintptr(unsafe.Pointer(OutBuffer)), uintptr(OutLength), uintptr(unsafe.Pointer(BytesReturned)))
+func KsSynchronousDeviceControl(Handle foundation.HANDLE, IoControl uint32, InBuffer []byte, OutBuffer []byte, BytesReturned *uint32) error {
+	var _InBuffer *byte
+	if len(InBuffer) > 0 {
+		_InBuffer = &InBuffer[0]
+	}
+	var _OutBuffer *byte
+	if len(OutBuffer) > 0 {
+		_OutBuffer = &OutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procKsSynchronousDeviceControl.Addr(), uintptr(Handle), uintptr(IoControl), uintptr(unsafe.Pointer(_InBuffer)), uintptr(len(InBuffer)), uintptr(unsafe.Pointer(_OutBuffer)), uintptr(len(OutBuffer)), uintptr(unsafe.Pointer(BytesReturned)))
 	return win32.HRESULTError(int32(r1))
 }

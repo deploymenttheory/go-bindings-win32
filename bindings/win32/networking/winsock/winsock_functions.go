@@ -1566,8 +1566,16 @@ func WSAInstallServiceClassA(lpServiceClassInfo *WSASERVICECLASSINFOA) (int32, e
 // WSAIoctl calls WS2_32!WSAIoctl.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaioctl
 // Minimum OS: windows8.1.
-func WSAIoctl(s SOCKET, dwIoControlCode uint32, lpvInBuffer unsafe.Pointer, cbInBuffer uint32, lpvOutBuffer unsafe.Pointer, cbOutBuffer uint32, lpcbBytesReturned *uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSAIoctl.Addr(), uintptr(s), uintptr(dwIoControlCode), uintptr(unsafe.Pointer(lpvInBuffer)), uintptr(cbInBuffer), uintptr(unsafe.Pointer(lpvOutBuffer)), uintptr(cbOutBuffer), uintptr(unsafe.Pointer(lpcbBytesReturned)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
+func WSAIoctl(s SOCKET, dwIoControlCode uint32, lpvInBuffer []byte, lpvOutBuffer []byte, lpcbBytesReturned *uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine LPWSAOVERLAPPED_COMPLETION_ROUTINE) (int32, error) {
+	var _lpvInBuffer *byte
+	if len(lpvInBuffer) > 0 {
+		_lpvInBuffer = &lpvInBuffer[0]
+	}
+	var _lpvOutBuffer *byte
+	if len(lpvOutBuffer) > 0 {
+		_lpvOutBuffer = &lpvOutBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWSAIoctl.Addr(), uintptr(s), uintptr(dwIoControlCode), uintptr(unsafe.Pointer(_lpvInBuffer)), uintptr(len(lpvInBuffer)), uintptr(unsafe.Pointer(_lpvOutBuffer)), uintptr(len(lpvOutBuffer)), uintptr(unsafe.Pointer(lpcbBytesReturned)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -1653,8 +1661,16 @@ func WSALookupServiceNextA(hLookup foundation.HANDLE, dwControlFlags uint32, lpd
 // WSANSPIoctl calls WS2_32!WSANSPIoctl.
 // https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsanspioctl
 // Minimum OS: windows8.1.
-func WSANSPIoctl(hLookup foundation.HANDLE, dwControlCode uint32, lpvInBuffer unsafe.Pointer, cbInBuffer uint32, lpvOutBuffer unsafe.Pointer, cbOutBuffer uint32, lpcbBytesReturned *uint32, lpCompletion *WSACOMPLETION) (int32, error) {
-	r1, _, e1 := syscall.SyscallN(procWSANSPIoctl.Addr(), uintptr(hLookup), uintptr(dwControlCode), uintptr(unsafe.Pointer(lpvInBuffer)), uintptr(cbInBuffer), uintptr(unsafe.Pointer(lpvOutBuffer)), uintptr(cbOutBuffer), uintptr(unsafe.Pointer(lpcbBytesReturned)), uintptr(unsafe.Pointer(lpCompletion)))
+func WSANSPIoctl(hLookup foundation.HANDLE, dwControlCode uint32, lpvInBuffer []byte, lpvOutBuffer []byte, lpcbBytesReturned *uint32, lpCompletion *WSACOMPLETION) (int32, error) {
+	var _lpvInBuffer *byte
+	if len(lpvInBuffer) > 0 {
+		_lpvInBuffer = &lpvInBuffer[0]
+	}
+	var _lpvOutBuffer *byte
+	if len(lpvOutBuffer) > 0 {
+		_lpvOutBuffer = &lpvOutBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWSANSPIoctl.Addr(), uintptr(hLookup), uintptr(dwControlCode), uintptr(unsafe.Pointer(_lpvInBuffer)), uintptr(len(lpvInBuffer)), uintptr(unsafe.Pointer(_lpvOutBuffer)), uintptr(len(lpvOutBuffer)), uintptr(unsafe.Pointer(lpcbBytesReturned)), uintptr(unsafe.Pointer(lpCompletion)))
 	if e1 != 0 {
 		return int32(r1), e1
 	}
@@ -2232,16 +2248,24 @@ func WSCSetApplicationCategory(Path string, PathLength uint32, Extra string, Ext
 // WSCSetProviderInfo calls WS2_32!WSCSetProviderInfo.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscsetproviderinfo
 // Minimum OS: windows6.0.6000.
-func WSCSetProviderInfo(lpProviderId *win32.GUID, InfoType WSC_PROVIDER_INFO_TYPE, Info *byte, InfoSize uintptr, Flags uint32, lpErrno *int32) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCSetProviderInfo.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(InfoType), uintptr(unsafe.Pointer(Info)), uintptr(InfoSize), uintptr(Flags), uintptr(unsafe.Pointer(lpErrno)))
+func WSCSetProviderInfo(lpProviderId *win32.GUID, InfoType WSC_PROVIDER_INFO_TYPE, Info []byte, Flags uint32, lpErrno *int32) int32 {
+	var _Info *byte
+	if len(Info) > 0 {
+		_Info = &Info[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWSCSetProviderInfo.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(InfoType), uintptr(unsafe.Pointer(_Info)), uintptr(len(Info)), uintptr(Flags), uintptr(unsafe.Pointer(lpErrno)))
 	return int32(r1)
 }
 
 // WSCSetProviderInfo32 calls WS2_32!WSCSetProviderInfo32.
 // https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscsetproviderinfo32
 // Minimum OS: windows6.0.6000.
-func WSCSetProviderInfo32(lpProviderId *win32.GUID, InfoType WSC_PROVIDER_INFO_TYPE, Info *byte, InfoSize uintptr, Flags uint32, lpErrno *int32) int32 {
-	r1, _, _ := syscall.SyscallN(procWSCSetProviderInfo32.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(InfoType), uintptr(unsafe.Pointer(Info)), uintptr(InfoSize), uintptr(Flags), uintptr(unsafe.Pointer(lpErrno)))
+func WSCSetProviderInfo32(lpProviderId *win32.GUID, InfoType WSC_PROVIDER_INFO_TYPE, Info []byte, Flags uint32, lpErrno *int32) int32 {
+	var _Info *byte
+	if len(Info) > 0 {
+		_Info = &Info[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWSCSetProviderInfo32.Addr(), uintptr(unsafe.Pointer(lpProviderId)), uintptr(InfoType), uintptr(unsafe.Pointer(_Info)), uintptr(len(Info)), uintptr(Flags), uintptr(unsafe.Pointer(lpErrno)))
 	return int32(r1)
 }
 

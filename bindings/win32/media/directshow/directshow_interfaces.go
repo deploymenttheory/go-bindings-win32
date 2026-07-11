@@ -1349,8 +1349,12 @@ type IAMMediaTypeSample struct {
 var IID_IAMMediaTypeSample = win32.GUID{Data1: 0xab6b4afb, Data2: 0xf6e4, Data3: 0x11d0, Data4: [8]byte{0x90, 0x0d, 0x00, 0xc0, 0x4f, 0xd9, 0x18, 0x9d}}
 
 // SetPointer dispatches through IAMMediaTypeSample's vtable slot 8.
-func (self *IAMMediaTypeSample) SetPointer(pBuffer *byte, lSize int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBuffer)), uintptr(lSize))
+func (self *IAMMediaTypeSample) SetPointer(pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2686,8 +2690,12 @@ func (self *IAMVfwCompressDialogs) GetState(pState unsafe.Pointer, pcbState *int
 }
 
 // SetState dispatches through IAMVfwCompressDialogs's vtable slot 5.
-func (self *IAMVfwCompressDialogs) SetState(pState unsafe.Pointer, cbState int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pState)), uintptr(cbState))
+func (self *IAMVfwCompressDialogs) SetState(pState []byte) error {
+	var _pState *byte
+	if len(pState) > 0 {
+		_pState = &pState[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pState)), uintptr(len(pState)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2762,8 +2770,12 @@ func (self *IAMVideoAccelerator) ReleaseBuffer(dwTypeIndex uint32, dwBufferIndex
 }
 
 // Execute dispatches through IAMVideoAccelerator's vtable slot 12.
-func (self *IAMVideoAccelerator) Execute(dwFunction uint32, lpPrivateInputData unsafe.Pointer, cbPrivateInputData uint32, lpPrivateOutputDat unsafe.Pointer, cbPrivateOutputData uint32, dwNumBuffers uint32, pamvaBufferInfo *AMVABUFFERINFO) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwFunction), uintptr(unsafe.Pointer(lpPrivateInputData)), uintptr(cbPrivateInputData), uintptr(unsafe.Pointer(lpPrivateOutputDat)), uintptr(cbPrivateOutputData), uintptr(dwNumBuffers), uintptr(unsafe.Pointer(pamvaBufferInfo)))
+func (self *IAMVideoAccelerator) Execute(dwFunction uint32, lpPrivateInputData unsafe.Pointer, cbPrivateInputData uint32, lpPrivateOutputDat unsafe.Pointer, cbPrivateOutputData uint32, pamvaBufferInfo []AMVABUFFERINFO) error {
+	var _pamvaBufferInfo *AMVABUFFERINFO
+	if len(pamvaBufferInfo) > 0 {
+		_pamvaBufferInfo = &pamvaBufferInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(dwFunction), uintptr(unsafe.Pointer(lpPrivateInputData)), uintptr(cbPrivateInputData), uintptr(unsafe.Pointer(lpPrivateOutputDat)), uintptr(cbPrivateOutputData), uintptr(len(pamvaBufferInfo)), uintptr(unsafe.Pointer(_pamvaBufferInfo)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3155,8 +3167,12 @@ func (self *IAsyncReader) SyncReadAligned(pSample *IMediaSample) error {
 }
 
 // SyncRead dispatches through IAsyncReader's vtable slot 7.
-func (self *IAsyncReader) SyncRead(llPosition int64, lLength int32, pBuffer *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(llPosition), uintptr(lLength), uintptr(unsafe.Pointer(pBuffer)))
+func (self *IAsyncReader) SyncRead(llPosition int64, pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(llPosition), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3326,8 +3342,12 @@ func (self *IBDA_ConditionalAccess) Get_SmartCardInfo(pbstrCardName *foundation.
 }
 
 // Get_SmartCardApplications dispatches through IBDA_ConditionalAccess's vtable slot 5.
-func (self *IBDA_ConditionalAccess) Get_SmartCardApplications(pulcApplications *uint32, ulcApplicationsMax uint32, rgApplications *SmartCardApplication) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcApplications)), uintptr(ulcApplicationsMax), uintptr(unsafe.Pointer(rgApplications)))
+func (self *IBDA_ConditionalAccess) Get_SmartCardApplications(pulcApplications *uint32, rgApplications []SmartCardApplication) error {
+	var _rgApplications *SmartCardApplication
+	if len(rgApplications) > 0 {
+		_rgApplications = &rgApplications[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcApplications)), uintptr(len(rgApplications)), uintptr(unsafe.Pointer(_rgApplications)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3383,14 +3403,22 @@ type IBDA_ConditionalAccessEx struct {
 var IID_IBDA_ConditionalAccessEx = win32.GUID{Data1: 0x497c3418, Data2: 0x23cb, Data3: 0x44ba, Data4: [8]byte{0xbb, 0x62, 0x76, 0x9f, 0x50, 0x6f, 0xce, 0xa7}}
 
 // CheckEntitlementToken dispatches through IBDA_ConditionalAccessEx's vtable slot 3.
-func (self *IBDA_ConditionalAccessEx) CheckEntitlementToken(ulDialogRequest uint32, bstrLanguage foundation.BSTR, RequestType BDA_CONDITIONALACCESS_REQUESTTYPE, ulcbEntitlementTokenLen uint32, pbEntitlementToken *byte, pulDescrambleStatus *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulDialogRequest), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(RequestType), uintptr(ulcbEntitlementTokenLen), uintptr(unsafe.Pointer(pbEntitlementToken)), uintptr(unsafe.Pointer(pulDescrambleStatus)))
+func (self *IBDA_ConditionalAccessEx) CheckEntitlementToken(ulDialogRequest uint32, bstrLanguage foundation.BSTR, RequestType BDA_CONDITIONALACCESS_REQUESTTYPE, pbEntitlementToken []byte, pulDescrambleStatus *uint32) error {
+	var _pbEntitlementToken *byte
+	if len(pbEntitlementToken) > 0 {
+		_pbEntitlementToken = &pbEntitlementToken[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulDialogRequest), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(RequestType), uintptr(len(pbEntitlementToken)), uintptr(unsafe.Pointer(_pbEntitlementToken)), uintptr(unsafe.Pointer(pulDescrambleStatus)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetCaptureToken dispatches through IBDA_ConditionalAccessEx's vtable slot 4.
-func (self *IBDA_ConditionalAccessEx) SetCaptureToken(ulcbCaptureTokenLen uint32, pbCaptureToken *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulcbCaptureTokenLen), uintptr(unsafe.Pointer(pbCaptureToken)))
+func (self *IBDA_ConditionalAccessEx) SetCaptureToken(pbCaptureToken []byte) error {
+	var _pbCaptureToken *byte
+	if len(pbCaptureToken) > 0 {
+		_pbCaptureToken = &pbCaptureToken[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pbCaptureToken)), uintptr(unsafe.Pointer(_pbCaptureToken)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3454,26 +3482,42 @@ func (self *IBDA_DRIWMDRMSession) AcknowledgeLicense(hrLicenseAck foundation.HRE
 }
 
 // ProcessLicenseChallenge dispatches through IBDA_DRIWMDRMSession's vtable slot 4.
-func (self *IBDA_DRIWMDRMSession) ProcessLicenseChallenge(dwcbLicenseMessage uint32, pbLicenseMessage *byte, pdwcbLicenseResponse *uint32, ppbLicenseResponse **byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwcbLicenseMessage), uintptr(unsafe.Pointer(pbLicenseMessage)), uintptr(unsafe.Pointer(pdwcbLicenseResponse)), uintptr(unsafe.Pointer(ppbLicenseResponse)))
+func (self *IBDA_DRIWMDRMSession) ProcessLicenseChallenge(pbLicenseMessage []byte, pdwcbLicenseResponse *uint32, ppbLicenseResponse **byte) error {
+	var _pbLicenseMessage *byte
+	if len(pbLicenseMessage) > 0 {
+		_pbLicenseMessage = &pbLicenseMessage[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pbLicenseMessage)), uintptr(unsafe.Pointer(_pbLicenseMessage)), uintptr(unsafe.Pointer(pdwcbLicenseResponse)), uintptr(unsafe.Pointer(ppbLicenseResponse)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ProcessRegistrationChallenge dispatches through IBDA_DRIWMDRMSession's vtable slot 5.
-func (self *IBDA_DRIWMDRMSession) ProcessRegistrationChallenge(dwcbRegistrationMessage uint32, pbRegistrationMessage *byte, pdwcbRegistrationResponse *uint32, ppbRegistrationResponse **byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(dwcbRegistrationMessage), uintptr(unsafe.Pointer(pbRegistrationMessage)), uintptr(unsafe.Pointer(pdwcbRegistrationResponse)), uintptr(unsafe.Pointer(ppbRegistrationResponse)))
+func (self *IBDA_DRIWMDRMSession) ProcessRegistrationChallenge(pbRegistrationMessage []byte, pdwcbRegistrationResponse *uint32, ppbRegistrationResponse **byte) error {
+	var _pbRegistrationMessage *byte
+	if len(pbRegistrationMessage) > 0 {
+		_pbRegistrationMessage = &pbRegistrationMessage[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(pbRegistrationMessage)), uintptr(unsafe.Pointer(_pbRegistrationMessage)), uintptr(unsafe.Pointer(pdwcbRegistrationResponse)), uintptr(unsafe.Pointer(ppbRegistrationResponse)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetRevInfo dispatches through IBDA_DRIWMDRMSession's vtable slot 6.
-func (self *IBDA_DRIWMDRMSession) SetRevInfo(dwRevInfoLen uint32, pbRevInfo *byte, pdwResponse *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwRevInfoLen), uintptr(unsafe.Pointer(pbRevInfo)), uintptr(unsafe.Pointer(pdwResponse)))
+func (self *IBDA_DRIWMDRMSession) SetRevInfo(pbRevInfo []byte, pdwResponse *uint32) error {
+	var _pbRevInfo *byte
+	if len(pbRevInfo) > 0 {
+		_pbRevInfo = &pbRevInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(pbRevInfo)), uintptr(unsafe.Pointer(_pbRevInfo)), uintptr(unsafe.Pointer(pdwResponse)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetCrl dispatches through IBDA_DRIWMDRMSession's vtable slot 7.
-func (self *IBDA_DRIWMDRMSession) SetCrl(dwCrlLen uint32, pbCrlLen *byte, pdwResponse *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwCrlLen), uintptr(unsafe.Pointer(pbCrlLen)), uintptr(unsafe.Pointer(pdwResponse)))
+func (self *IBDA_DRIWMDRMSession) SetCrl(pbCrlLen []byte, pdwResponse *uint32) error {
+	var _pbCrlLen *byte
+	if len(pbCrlLen) > 0 {
+		_pbCrlLen = &pbCrlLen[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(pbCrlLen)), uintptr(unsafe.Pointer(_pbCrlLen)), uintptr(unsafe.Pointer(pdwResponse)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3790,8 +3834,12 @@ func (self *IBDA_DiseqCommand) Put_DiseqRepeats(ulRepeats uint32) error {
 }
 
 // Put_DiseqSendCommand dispatches through IBDA_DiseqCommand's vtable slot 7.
-func (self *IBDA_DiseqCommand) Put_DiseqSendCommand(ulRequestId uint32, ulcbCommandLen uint32, pbCommand *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ulRequestId), uintptr(ulcbCommandLen), uintptr(unsafe.Pointer(pbCommand)))
+func (self *IBDA_DiseqCommand) Put_DiseqSendCommand(ulRequestId uint32, pbCommand []byte) error {
+	var _pbCommand *byte
+	if len(pbCommand) > 0 {
+		_pbCommand = &pbCommand[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ulRequestId), uintptr(len(pbCommand)), uintptr(unsafe.Pointer(_pbCommand)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3871,8 +3919,12 @@ func (self *IBDA_EthernetFilter) GetMulticastListSize(pulcbAddresses *uint32) er
 }
 
 // PutMulticastList dispatches through IBDA_EthernetFilter's vtable slot 4.
-func (self *IBDA_EthernetFilter) PutMulticastList(ulcbAddresses uint32, pAddressList *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulcbAddresses), uintptr(unsafe.Pointer(pAddressList)))
+func (self *IBDA_EthernetFilter) PutMulticastList(pAddressList []byte) error {
+	var _pAddressList *byte
+	if len(pAddressList) > 0 {
+		_pAddressList = &pAddressList[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pAddressList)), uintptr(unsafe.Pointer(_pAddressList)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4150,8 +4202,12 @@ func (self *IBDA_IPV4Filter) GetMulticastListSize(pulcbAddresses *uint32) error 
 }
 
 // PutMulticastList dispatches through IBDA_IPV4Filter's vtable slot 4.
-func (self *IBDA_IPV4Filter) PutMulticastList(ulcbAddresses uint32, pAddressList *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulcbAddresses), uintptr(unsafe.Pointer(pAddressList)))
+func (self *IBDA_IPV4Filter) PutMulticastList(pAddressList []byte) error {
+	var _pAddressList *byte
+	if len(pAddressList) > 0 {
+		_pAddressList = &pAddressList[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pAddressList)), uintptr(unsafe.Pointer(_pAddressList)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4189,8 +4245,12 @@ func (self *IBDA_IPV6Filter) GetMulticastListSize(pulcbAddresses *uint32) error 
 }
 
 // PutMulticastList dispatches through IBDA_IPV6Filter's vtable slot 4.
-func (self *IBDA_IPV6Filter) PutMulticastList(ulcbAddresses uint32, pAddressList *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulcbAddresses), uintptr(unsafe.Pointer(pAddressList)))
+func (self *IBDA_IPV6Filter) PutMulticastList(pAddressList []byte) error {
+	var _pAddressList *byte
+	if len(pAddressList) > 0 {
+		_pAddressList = &pAddressList[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pAddressList)), uintptr(unsafe.Pointer(_pAddressList)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4222,8 +4282,12 @@ type IBDA_ISDBConditionalAccess struct {
 var IID_IBDA_ISDBConditionalAccess = win32.GUID{Data1: 0x5e68c627, Data2: 0x16c2, Data3: 0x4e6c, Data4: [8]byte{0xb1, 0xe2, 0xd0, 0x01, 0x70, 0xcd, 0xaa, 0x0f}}
 
 // SetIsdbCasRequest dispatches through IBDA_ISDBConditionalAccess's vtable slot 3.
-func (self *IBDA_ISDBConditionalAccess) SetIsdbCasRequest(ulRequestId uint32, ulcbRequestBufferLen uint32, pbRequestBuffer *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulRequestId), uintptr(ulcbRequestBufferLen), uintptr(unsafe.Pointer(pbRequestBuffer)))
+func (self *IBDA_ISDBConditionalAccess) SetIsdbCasRequest(ulRequestId uint32, pbRequestBuffer []byte) error {
+	var _pbRequestBuffer *byte
+	if len(pbRequestBuffer) > 0 {
+		_pbRequestBuffer = &pbRequestBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulRequestId), uintptr(len(pbRequestBuffer)), uintptr(unsafe.Pointer(_pbRequestBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4282,8 +4346,12 @@ type IBDA_MUX struct {
 var IID_IBDA_MUX = win32.GUID{Data1: 0x942aafec, Data2: 0x4c05, Data3: 0x4c74, Data4: [8]byte{0xb8, 0xeb, 0x87, 0x06, 0xc2, 0xa4, 0x94, 0x3f}}
 
 // SetPidList dispatches through IBDA_MUX's vtable slot 3.
-func (self *IBDA_MUX) SetPidList(ulPidListCount uint32, pbPidListBuffer *BDA_MUX_PIDLISTITEM) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulPidListCount), uintptr(unsafe.Pointer(pbPidListBuffer)))
+func (self *IBDA_MUX) SetPidList(pbPidListBuffer []BDA_MUX_PIDLISTITEM) error {
+	var _pbPidListBuffer *BDA_MUX_PIDLISTITEM
+	if len(pbPidListBuffer) > 0 {
+		_pbPidListBuffer = &pbPidListBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pbPidListBuffer)), uintptr(unsafe.Pointer(_pbPidListBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4543,32 +4611,52 @@ type IBDA_Topology struct {
 var IID_IBDA_Topology = win32.GUID{Data1: 0x79b56888, Data2: 0x7fea, Data3: 0x4690, Data4: [8]byte{0xb4, 0x5d, 0x38, 0xfd, 0x3c, 0x78, 0x49, 0xbe}}
 
 // GetNodeTypes dispatches through IBDA_Topology's vtable slot 3.
-func (self *IBDA_Topology) GetNodeTypes(pulcNodeTypes *uint32, ulcNodeTypesMax uint32, rgulNodeTypes *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcNodeTypes)), uintptr(ulcNodeTypesMax), uintptr(unsafe.Pointer(rgulNodeTypes)))
+func (self *IBDA_Topology) GetNodeTypes(pulcNodeTypes *uint32, rgulNodeTypes []uint32) error {
+	var _rgulNodeTypes *uint32
+	if len(rgulNodeTypes) > 0 {
+		_rgulNodeTypes = &rgulNodeTypes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcNodeTypes)), uintptr(len(rgulNodeTypes)), uintptr(unsafe.Pointer(_rgulNodeTypes)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetNodeDescriptors dispatches through IBDA_Topology's vtable slot 4.
-func (self *IBDA_Topology) GetNodeDescriptors(ulcNodeDescriptors *uint32, ulcNodeDescriptorsMax uint32, rgNodeDescriptors *BDANODE_DESCRIPTOR) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ulcNodeDescriptors)), uintptr(ulcNodeDescriptorsMax), uintptr(unsafe.Pointer(rgNodeDescriptors)))
+func (self *IBDA_Topology) GetNodeDescriptors(ulcNodeDescriptors *uint32, rgNodeDescriptors []BDANODE_DESCRIPTOR) error {
+	var _rgNodeDescriptors *BDANODE_DESCRIPTOR
+	if len(rgNodeDescriptors) > 0 {
+		_rgNodeDescriptors = &rgNodeDescriptors[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(ulcNodeDescriptors)), uintptr(len(rgNodeDescriptors)), uintptr(unsafe.Pointer(_rgNodeDescriptors)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetNodeInterfaces dispatches through IBDA_Topology's vtable slot 5.
-func (self *IBDA_Topology) GetNodeInterfaces(ulNodeType uint32, pulcInterfaces *uint32, ulcInterfacesMax uint32, rgguidInterfaces *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulNodeType), uintptr(unsafe.Pointer(pulcInterfaces)), uintptr(ulcInterfacesMax), uintptr(unsafe.Pointer(rgguidInterfaces)))
+func (self *IBDA_Topology) GetNodeInterfaces(ulNodeType uint32, pulcInterfaces *uint32, rgguidInterfaces []win32.GUID) error {
+	var _rgguidInterfaces *win32.GUID
+	if len(rgguidInterfaces) > 0 {
+		_rgguidInterfaces = &rgguidInterfaces[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulNodeType), uintptr(unsafe.Pointer(pulcInterfaces)), uintptr(len(rgguidInterfaces)), uintptr(unsafe.Pointer(_rgguidInterfaces)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetPinTypes dispatches through IBDA_Topology's vtable slot 6.
-func (self *IBDA_Topology) GetPinTypes(pulcPinTypes *uint32, ulcPinTypesMax uint32, rgulPinTypes *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcPinTypes)), uintptr(ulcPinTypesMax), uintptr(unsafe.Pointer(rgulPinTypes)))
+func (self *IBDA_Topology) GetPinTypes(pulcPinTypes *uint32, rgulPinTypes []uint32) error {
+	var _rgulPinTypes *uint32
+	if len(rgulPinTypes) > 0 {
+		_rgulPinTypes = &rgulPinTypes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcPinTypes)), uintptr(len(rgulPinTypes)), uintptr(unsafe.Pointer(_rgulPinTypes)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetTemplateConnections dispatches through IBDA_Topology's vtable slot 7.
-func (self *IBDA_Topology) GetTemplateConnections(pulcConnections *uint32, ulcConnectionsMax uint32, rgConnections *BDA_TEMPLATE_CONNECTION) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcConnections)), uintptr(ulcConnectionsMax), uintptr(unsafe.Pointer(rgConnections)))
+func (self *IBDA_Topology) GetTemplateConnections(pulcConnections *uint32, rgConnections []BDA_TEMPLATE_CONNECTION) error {
+	var _rgConnections *BDA_TEMPLATE_CONNECTION
+	if len(rgConnections) > 0 {
+		_rgConnections = &rgConnections[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pulcConnections)), uintptr(len(rgConnections)), uintptr(unsafe.Pointer(_rgConnections)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4706,20 +4794,32 @@ func (self *IBDA_WMDRMSession) GetStatus(MaxCaptureToken *uint32, MaxStreamingPi
 }
 
 // SetRevInfo dispatches through IBDA_WMDRMSession's vtable slot 4.
-func (self *IBDA_WMDRMSession) SetRevInfo(ulRevInfoLen uint32, pbRevInfo *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulRevInfoLen), uintptr(unsafe.Pointer(pbRevInfo)))
+func (self *IBDA_WMDRMSession) SetRevInfo(pbRevInfo []byte) error {
+	var _pbRevInfo *byte
+	if len(pbRevInfo) > 0 {
+		_pbRevInfo = &pbRevInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pbRevInfo)), uintptr(unsafe.Pointer(_pbRevInfo)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetCrl dispatches through IBDA_WMDRMSession's vtable slot 5.
-func (self *IBDA_WMDRMSession) SetCrl(ulCrlLen uint32, pbCrlLen *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ulCrlLen), uintptr(unsafe.Pointer(pbCrlLen)))
+func (self *IBDA_WMDRMSession) SetCrl(pbCrlLen []byte) error {
+	var _pbCrlLen *byte
+	if len(pbCrlLen) > 0 {
+		_pbCrlLen = &pbCrlLen[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(pbCrlLen)), uintptr(unsafe.Pointer(_pbCrlLen)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // TransactMessage dispatches through IBDA_WMDRMSession's vtable slot 6.
-func (self *IBDA_WMDRMSession) TransactMessage(ulcbRequest uint32, pbRequest *byte, pulcbResponse *uint32, pbResponse *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ulcbRequest), uintptr(unsafe.Pointer(pbRequest)), uintptr(unsafe.Pointer(pulcbResponse)), uintptr(unsafe.Pointer(pbResponse)))
+func (self *IBDA_WMDRMSession) TransactMessage(pbRequest []byte, pulcbResponse *uint32, pbResponse *byte) error {
+	var _pbRequest *byte
+	if len(pbRequest) > 0 {
+		_pbRequest = &pbRequest[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(pbRequest)), uintptr(unsafe.Pointer(_pbRequest)), uintptr(unsafe.Pointer(pulcbResponse)), uintptr(unsafe.Pointer(pbResponse)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4736,8 +4836,16 @@ func (self *IBDA_WMDRMSession) ReissueLicense(uuidKey *win32.GUID) error {
 }
 
 // RenewLicense dispatches through IBDA_WMDRMSession's vtable slot 9.
-func (self *IBDA_WMDRMSession) RenewLicense(ulInXmrLicenseLen uint32, pbInXmrLicense *byte, ulEntitlementTokenLen uint32, pbEntitlementToken *byte, pulDescrambleStatus *uint32, pulOutXmrLicenseLen *uint32, pbOutXmrLicense *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ulInXmrLicenseLen), uintptr(unsafe.Pointer(pbInXmrLicense)), uintptr(ulEntitlementTokenLen), uintptr(unsafe.Pointer(pbEntitlementToken)), uintptr(unsafe.Pointer(pulDescrambleStatus)), uintptr(unsafe.Pointer(pulOutXmrLicenseLen)), uintptr(unsafe.Pointer(pbOutXmrLicense)))
+func (self *IBDA_WMDRMSession) RenewLicense(pbInXmrLicense []byte, pbEntitlementToken []byte, pulDescrambleStatus *uint32, pulOutXmrLicenseLen *uint32, pbOutXmrLicense *byte) error {
+	var _pbInXmrLicense *byte
+	if len(pbInXmrLicense) > 0 {
+		_pbInXmrLicense = &pbInXmrLicense[0]
+	}
+	var _pbEntitlementToken *byte
+	if len(pbEntitlementToken) > 0 {
+		_pbEntitlementToken = &pbEntitlementToken[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(pbInXmrLicense)), uintptr(unsafe.Pointer(_pbInXmrLicense)), uintptr(len(pbEntitlementToken)), uintptr(unsafe.Pointer(_pbEntitlementToken)), uintptr(unsafe.Pointer(pulDescrambleStatus)), uintptr(unsafe.Pointer(pulOutXmrLicenseLen)), uintptr(unsafe.Pointer(pbOutXmrLicense)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4756,14 +4864,22 @@ type IBDA_WMDRMTuner struct {
 var IID_IBDA_WMDRMTuner = win32.GUID{Data1: 0x86d979cf, Data2: 0xa8a7, Data3: 0x4f94, Data4: [8]byte{0xb5, 0xfb, 0x14, 0xc0, 0xac, 0xa6, 0x8f, 0xe6}}
 
 // PurchaseEntitlement dispatches through IBDA_WMDRMTuner's vtable slot 3.
-func (self *IBDA_WMDRMTuner) PurchaseEntitlement(ulDialogRequest uint32, bstrLanguage foundation.BSTR, ulPurchaseTokenLen uint32, pbPurchaseToken *byte, pulDescrambleStatus *uint32, pulCaptureTokenLen *uint32, pbCaptureToken *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulDialogRequest), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(ulPurchaseTokenLen), uintptr(unsafe.Pointer(pbPurchaseToken)), uintptr(unsafe.Pointer(pulDescrambleStatus)), uintptr(unsafe.Pointer(pulCaptureTokenLen)), uintptr(unsafe.Pointer(pbCaptureToken)))
+func (self *IBDA_WMDRMTuner) PurchaseEntitlement(ulDialogRequest uint32, bstrLanguage foundation.BSTR, pbPurchaseToken []byte, pulDescrambleStatus *uint32, pulCaptureTokenLen *uint32, pbCaptureToken *byte) error {
+	var _pbPurchaseToken *byte
+	if len(pbPurchaseToken) > 0 {
+		_pbPurchaseToken = &pbPurchaseToken[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ulDialogRequest), uintptr(unsafe.Pointer(bstrLanguage)), uintptr(len(pbPurchaseToken)), uintptr(unsafe.Pointer(_pbPurchaseToken)), uintptr(unsafe.Pointer(pulDescrambleStatus)), uintptr(unsafe.Pointer(pulCaptureTokenLen)), uintptr(unsafe.Pointer(pbCaptureToken)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CancelCaptureToken dispatches through IBDA_WMDRMTuner's vtable slot 4.
-func (self *IBDA_WMDRMTuner) CancelCaptureToken(ulCaptureTokenLen uint32, pbCaptureToken *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCaptureTokenLen), uintptr(unsafe.Pointer(pbCaptureToken)))
+func (self *IBDA_WMDRMTuner) CancelCaptureToken(pbCaptureToken []byte) error {
+	var _pbCaptureToken *byte
+	if len(pbCaptureToken) > 0 {
+		_pbCaptureToken = &pbCaptureToken[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pbCaptureToken)), uintptr(unsafe.Pointer(_pbCaptureToken)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6919,8 +7035,12 @@ func (self *IDvdInfo) GetCurrentVolumeInfo(pulNumOfVol *uint32, pulThisVolNum *u
 }
 
 // GetDVDTextInfo dispatches through IDvdInfo's vtable slot 21.
-func (self *IDvdInfo) GetDVDTextInfo(pTextManager *byte, ulBufSize uint32, pulActualSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTextManager)), uintptr(ulBufSize), uintptr(unsafe.Pointer(pulActualSize)))
+func (self *IDvdInfo) GetDVDTextInfo(pTextManager []byte, pulActualSize *uint32) error {
+	var _pTextManager *byte
+	if len(pTextManager) > 0 {
+		_pTextManager = &pTextManager[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pTextManager)), uintptr(len(pTextManager)), uintptr(unsafe.Pointer(pulActualSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7320,8 +7440,12 @@ type IEnumFilters struct {
 var IID_IEnumFilters = win32.GUID{Data1: 0x56a86893, Data2: 0x0ad4, Data3: 0x11ce, Data4: [8]byte{0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70}}
 
 // Next dispatches through IEnumFilters's vtable slot 3.
-func (self *IEnumFilters) Next(cFilters uint32, ppFilter **IBaseFilter, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFilters), uintptr(unsafe.Pointer(ppFilter)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumFilters) Next(ppFilter []*IBaseFilter, pcFetched *uint32) error {
+	var _ppFilter **IBaseFilter
+	if len(ppFilter) > 0 {
+		_ppFilter = &ppFilter[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppFilter)), uintptr(unsafe.Pointer(_ppFilter)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7353,8 +7477,12 @@ type IEnumMediaTypes struct {
 var IID_IEnumMediaTypes = win32.GUID{Data1: 0x89c31040, Data2: 0x846b, Data3: 0x11ce, Data4: [8]byte{0x97, 0xd3, 0x00, 0xaa, 0x00, 0x55, 0x59, 0x5a}}
 
 // Next dispatches through IEnumMediaTypes's vtable slot 3.
-func (self *IEnumMediaTypes) Next(cMediaTypes uint32, ppMediaTypes **mediamediafoundation.AM_MEDIA_TYPE, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cMediaTypes), uintptr(unsafe.Pointer(ppMediaTypes)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumMediaTypes) Next(ppMediaTypes []*mediamediafoundation.AM_MEDIA_TYPE, pcFetched *uint32) error {
+	var _ppMediaTypes **mediamediafoundation.AM_MEDIA_TYPE
+	if len(ppMediaTypes) > 0 {
+		_ppMediaTypes = &ppMediaTypes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppMediaTypes)), uintptr(unsafe.Pointer(_ppMediaTypes)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7386,8 +7514,12 @@ type IEnumPIDMap struct {
 var IID_IEnumPIDMap = win32.GUID{Data1: 0xafb6c2a2, Data2: 0x2c41, Data3: 0x11d3, Data4: [8]byte{0x8a, 0x60, 0x00, 0x00, 0xf8, 0x1e, 0x0e, 0x4a}}
 
 // Next dispatches through IEnumPIDMap's vtable slot 3.
-func (self *IEnumPIDMap) Next(cRequest uint32, pPIDMap *PID_MAP, pcReceived *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cRequest), uintptr(unsafe.Pointer(pPIDMap)), uintptr(unsafe.Pointer(pcReceived)))
+func (self *IEnumPIDMap) Next(pPIDMap []PID_MAP, pcReceived *uint32) error {
+	var _pPIDMap *PID_MAP
+	if len(pPIDMap) > 0 {
+		_pPIDMap = &pPIDMap[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pPIDMap)), uintptr(unsafe.Pointer(_pPIDMap)), uintptr(unsafe.Pointer(pcReceived)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7419,8 +7551,12 @@ type IEnumPins struct {
 var IID_IEnumPins = win32.GUID{Data1: 0x56a86892, Data2: 0x0ad4, Data3: 0x11ce, Data4: [8]byte{0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70}}
 
 // Next dispatches through IEnumPins's vtable slot 3.
-func (self *IEnumPins) Next(cPins uint32, ppPins **IPin, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cPins), uintptr(unsafe.Pointer(ppPins)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumPins) Next(ppPins []*IPin, pcFetched *uint32) error {
+	var _ppPins **IPin
+	if len(ppPins) > 0 {
+		_ppPins = &ppPins[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppPins)), uintptr(unsafe.Pointer(_ppPins)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7452,8 +7588,12 @@ type IEnumRegFilters struct {
 var IID_IEnumRegFilters = win32.GUID{Data1: 0x56a868a4, Data2: 0x0ad4, Data3: 0x11ce, Data4: [8]byte{0xb0, 0x3a, 0x00, 0x20, 0xaf, 0x0b, 0xa7, 0x70}}
 
 // Next dispatches through IEnumRegFilters's vtable slot 3.
-func (self *IEnumRegFilters) Next(cFilters uint32, apRegFilter **REGFILTER, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFilters), uintptr(unsafe.Pointer(apRegFilter)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumRegFilters) Next(apRegFilter []*REGFILTER, pcFetched *uint32) error {
+	var _apRegFilter **REGFILTER
+	if len(apRegFilter) > 0 {
+		_apRegFilter = &apRegFilter[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(apRegFilter)), uintptr(unsafe.Pointer(_apRegFilter)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7485,8 +7625,12 @@ type IEnumStreamIdMap struct {
 var IID_IEnumStreamIdMap = win32.GUID{Data1: 0x945c1566, Data2: 0x6202, Data3: 0x46fc, Data4: [8]byte{0x96, 0xc7, 0xd8, 0x7f, 0x28, 0x9c, 0x65, 0x34}}
 
 // Next dispatches through IEnumStreamIdMap's vtable slot 3.
-func (self *IEnumStreamIdMap) Next(cRequest uint32, pStreamIdMap *STREAM_ID_MAP, pcReceived *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cRequest), uintptr(unsafe.Pointer(pStreamIdMap)), uintptr(unsafe.Pointer(pcReceived)))
+func (self *IEnumStreamIdMap) Next(pStreamIdMap []STREAM_ID_MAP, pcReceived *uint32) error {
+	var _pStreamIdMap *STREAM_ID_MAP
+	if len(pStreamIdMap) > 0 {
+		_pStreamIdMap = &pStreamIdMap[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pStreamIdMap)), uintptr(unsafe.Pointer(_pStreamIdMap)), uintptr(unsafe.Pointer(pcReceived)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7845,8 +7989,12 @@ func (self *IFrequencyMap) Get_FrequencyMapping(ulCount *uint32, ppulList **uint
 }
 
 // Put_FrequencyMapping dispatches through IFrequencyMap's vtable slot 4.
-func (self *IFrequencyMap) Put_FrequencyMapping(ulCount uint32, pList *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ulCount), uintptr(unsafe.Pointer(pList)))
+func (self *IFrequencyMap) Put_FrequencyMapping(pList []uint32) error {
+	var _pList *uint32
+	if len(pList) > 0 {
+		_pList = &pList[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pList)), uintptr(unsafe.Pointer(_pList)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -8250,8 +8398,12 @@ func (self *IMPEG2StreamIdMap) MapStreamId(ulStreamId uint32, MediaSampleContent
 }
 
 // UnmapStreamId dispatches through IMPEG2StreamIdMap's vtable slot 4.
-func (self *IMPEG2StreamIdMap) UnmapStreamId(culStreamId uint32, pulStreamId *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(culStreamId), uintptr(unsafe.Pointer(pulStreamId)))
+func (self *IMPEG2StreamIdMap) UnmapStreamId(pulStreamId []uint32) error {
+	var _pulStreamId *uint32
+	if len(pulStreamId) > 0 {
+		_pulStreamId = &pulStreamId[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pulStreamId)), uintptr(unsafe.Pointer(_pulStreamId)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -8712,14 +8864,22 @@ type IMediaSample2 struct {
 var IID_IMediaSample2 = win32.GUID{Data1: 0x36b73884, Data2: 0xc2c8, Data3: 0x11cf, Data4: [8]byte{0x8b, 0x46, 0x00, 0x80, 0x5f, 0x6c, 0xef, 0x60}}
 
 // GetProperties dispatches through IMediaSample2's vtable slot 19.
-func (self *IMediaSample2) GetProperties(cbProperties uint32, pbProperties *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(cbProperties), uintptr(unsafe.Pointer(pbProperties)))
+func (self *IMediaSample2) GetProperties(pbProperties []byte) error {
+	var _pbProperties *byte
+	if len(pbProperties) > 0 {
+		_pbProperties = &pbProperties[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(len(pbProperties)), uintptr(unsafe.Pointer(_pbProperties)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetProperties dispatches through IMediaSample2's vtable slot 20.
-func (self *IMediaSample2) SetProperties(cbProperties uint32, pbProperties *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(cbProperties), uintptr(unsafe.Pointer(pbProperties)))
+func (self *IMediaSample2) SetProperties(pbProperties []byte) error {
+	var _pbProperties *byte
+	if len(pbProperties) > 0 {
+		_pbProperties = &pbProperties[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(len(pbProperties)), uintptr(unsafe.Pointer(_pbProperties)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -9089,8 +9249,12 @@ func (self *IMemInputPin) Receive(pSample *IMediaSample) error {
 }
 
 // ReceiveMultiple dispatches through IMemInputPin's vtable slot 7.
-func (self *IMemInputPin) ReceiveMultiple(pSamples **IMediaSample, nSamples int32, nSamplesProcessed *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSamples)), uintptr(nSamples), uintptr(unsafe.Pointer(nSamplesProcessed)))
+func (self *IMemInputPin) ReceiveMultiple(pSamples []*IMediaSample, nSamplesProcessed *int32) error {
+	var _pSamples **IMediaSample
+	if len(pSamples) > 0 {
+		_pSamples = &pSamples[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSamples)), uintptr(len(pSamples)), uintptr(unsafe.Pointer(nSamplesProcessed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -9510,8 +9674,12 @@ func (self *IOverlay) GetPalette(pdwColors *uint32, ppPalette **graphicsgdi.PALE
 }
 
 // SetPalette dispatches through IOverlay's vtable slot 4.
-func (self *IOverlay) SetPalette(dwColors uint32, pPalette *graphicsgdi.PALETTEENTRY) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwColors), uintptr(unsafe.Pointer(pPalette)))
+func (self *IOverlay) SetPalette(pPalette []graphicsgdi.PALETTEENTRY) error {
+	var _pPalette *graphicsgdi.PALETTEENTRY
+	if len(pPalette) > 0 {
+		_pPalette = &pPalette[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(pPalette)), uintptr(unsafe.Pointer(_pPalette)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -10009,9 +10177,13 @@ func (self *IResourceManager) Register(pName string, cResource int32, plToken *i
 }
 
 // RegisterGroup dispatches through IResourceManager's vtable slot 4.
-func (self *IResourceManager) RegisterGroup(pName string, cResource int32, palTokens *int32, plToken *int32) error {
+func (self *IResourceManager) RegisterGroup(pName string, palTokens []int32, plToken *int32) error {
 	_pName := win32.UTF16Ptr(pName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)), uintptr(cResource), uintptr(unsafe.Pointer(palTokens)), uintptr(unsafe.Pointer(plToken)))
+	var _palTokens *int32
+	if len(palTokens) > 0 {
+		_palTokens = &palTokens[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)), uintptr(len(palTokens)), uintptr(unsafe.Pointer(_palTokens)), uintptr(unsafe.Pointer(plToken)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -10832,8 +11004,12 @@ func (self *IVMRMonitorConfig) GetDefaultMonitor(pGUID *VMRGUID) error {
 }
 
 // GetAvailableMonitors dispatches through IVMRMonitorConfig's vtable slot 7.
-func (self *IVMRMonitorConfig) GetAvailableMonitors(pInfo *VMRMONITORINFO, dwMaxInfoArraySize uint32, pdwNumDevices *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(dwMaxInfoArraySize), uintptr(unsafe.Pointer(pdwNumDevices)))
+func (self *IVMRMonitorConfig) GetAvailableMonitors(pInfo []VMRMONITORINFO, pdwNumDevices *uint32) error {
+	var _pInfo *VMRMONITORINFO
+	if len(pInfo) > 0 {
+		_pInfo = &pInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInfo)), uintptr(len(pInfo)), uintptr(unsafe.Pointer(pdwNumDevices)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -10871,8 +11047,12 @@ func (self *IVMRMonitorConfig9) GetDefaultMonitor(puDev *uint32) error {
 }
 
 // GetAvailableMonitors dispatches through IVMRMonitorConfig9's vtable slot 7.
-func (self *IVMRMonitorConfig9) GetAvailableMonitors(pInfo *VMR9MonitorInfo, dwMaxInfoArraySize uint32, pdwNumDevices *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(dwMaxInfoArraySize), uintptr(unsafe.Pointer(pdwNumDevices)))
+func (self *IVMRMonitorConfig9) GetAvailableMonitors(pInfo []VMR9MonitorInfo, pdwNumDevices *uint32) error {
+	var _pInfo *VMR9MonitorInfo
+	if len(pInfo) > 0 {
+		_pInfo = &pInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInfo)), uintptr(len(pInfo)), uintptr(unsafe.Pointer(pdwNumDevices)))
 	return win32.HRESULTError(int32(r1))
 }
 

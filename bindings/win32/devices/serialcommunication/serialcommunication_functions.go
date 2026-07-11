@@ -50,8 +50,12 @@ func ComDBClose(HComDB HCOMDB) int32 {
 
 // ComDBGetCurrentPortUsage calls MSPORTS!ComDBGetCurrentPortUsage.
 // https://learn.microsoft.com/windows/win32/api/msports/nf-msports-comdbgetcurrentportusage
-func ComDBGetCurrentPortUsage(HComDB HCOMDB, Buffer *byte, BufferSize uint32, ReportType uint32, MaxPortsReported *uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procComDBGetCurrentPortUsage.Addr(), uintptr(HComDB), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(ReportType), uintptr(unsafe.Pointer(MaxPortsReported)))
+func ComDBGetCurrentPortUsage(HComDB HCOMDB, Buffer []byte, ReportType uint32, MaxPortsReported *uint32) int32 {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procComDBGetCurrentPortUsage.Addr(), uintptr(HComDB), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(ReportType), uintptr(unsafe.Pointer(MaxPortsReported)))
 	return int32(r1)
 }
 

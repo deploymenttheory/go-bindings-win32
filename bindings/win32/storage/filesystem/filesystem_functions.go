@@ -531,10 +531,14 @@ func AreShortNamesEnabled(Handle foundation.HANDLE, Enabled *foundation.BOOL) bo
 // BackupRead calls KERNEL32!BackupRead.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-backupread
 // Minimum OS: windows5.1.2600.
-func BackupRead(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToRead uint32, lpNumberOfBytesRead *uint32, bAbort bool, bProcessSecurity bool, lpContext *unsafe.Pointer) error {
+func BackupRead(hFile foundation.HANDLE, lpBuffer []byte, lpNumberOfBytesRead *uint32, bAbort bool, bProcessSecurity bool, lpContext *unsafe.Pointer) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
 	_bAbort := win32.Bool32(bAbort)
 	_bProcessSecurity := win32.Bool32(bProcessSecurity)
-	r1, _, e1 := syscall.SyscallN(procBackupRead.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytesToRead), uintptr(unsafe.Pointer(lpNumberOfBytesRead)), uintptr(_bAbort), uintptr(_bProcessSecurity), uintptr(unsafe.Pointer(lpContext)))
+	r1, _, e1 := syscall.SyscallN(procBackupRead.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfBytesRead)), uintptr(_bAbort), uintptr(_bProcessSecurity), uintptr(unsafe.Pointer(lpContext)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -555,10 +559,14 @@ func BackupSeek(hFile foundation.HANDLE, dwLowBytesToSeek uint32, dwHighBytesToS
 // BackupWrite calls KERNEL32!BackupWrite.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-backupwrite
 // Minimum OS: windows5.1.2600.
-func BackupWrite(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToWrite uint32, lpNumberOfBytesWritten *uint32, bAbort bool, bProcessSecurity bool, lpContext *unsafe.Pointer) error {
+func BackupWrite(hFile foundation.HANDLE, lpBuffer []byte, lpNumberOfBytesWritten *uint32, bAbort bool, bProcessSecurity bool, lpContext *unsafe.Pointer) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
 	_bAbort := win32.Bool32(bAbort)
 	_bProcessSecurity := win32.Bool32(bProcessSecurity)
-	r1, _, e1 := syscall.SyscallN(procBackupWrite.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytesToWrite), uintptr(unsafe.Pointer(lpNumberOfBytesWritten)), uintptr(_bAbort), uintptr(_bProcessSecurity), uintptr(unsafe.Pointer(lpContext)))
+	r1, _, e1 := syscall.SyscallN(procBackupWrite.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfBytesWritten)), uintptr(_bAbort), uintptr(_bProcessSecurity), uintptr(unsafe.Pointer(lpContext)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2160,8 +2168,12 @@ func GetFileInformationByHandle(hFile foundation.HANDLE, lpFileInformation *BY_H
 // GetFileInformationByHandleEx calls KERNEL32!GetFileInformationByHandleEx.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-getfileinformationbyhandleex
 // Minimum OS: windows6.0.6000.
-func GetFileInformationByHandleEx(hFile foundation.HANDLE, FileInformationClass FILE_INFO_BY_HANDLE_CLASS, lpFileInformation unsafe.Pointer, dwBufferSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetFileInformationByHandleEx.Addr(), uintptr(hFile), uintptr(FileInformationClass), uintptr(unsafe.Pointer(lpFileInformation)), uintptr(dwBufferSize))
+func GetFileInformationByHandleEx(hFile foundation.HANDLE, FileInformationClass FILE_INFO_BY_HANDLE_CLASS, lpFileInformation []byte) error {
+	var _lpFileInformation *byte
+	if len(lpFileInformation) > 0 {
+		_lpFileInformation = &lpFileInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetFileInformationByHandleEx.Addr(), uintptr(hFile), uintptr(FileInformationClass), uintptr(unsafe.Pointer(_lpFileInformation)), uintptr(len(lpFileInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2169,9 +2181,13 @@ func GetFileInformationByHandleEx(hFile foundation.HANDLE, FileInformationClass 
 }
 
 // GetFileInformationByName calls KERNEL32!GetFileInformationByName.
-func GetFileInformationByName(FileName string, FileInformationClass FILE_INFO_BY_NAME_CLASS, FileInfoBuffer unsafe.Pointer, FileInfoBufferSize uint32) bool {
+func GetFileInformationByName(FileName string, FileInformationClass FILE_INFO_BY_NAME_CLASS, FileInfoBuffer []byte) bool {
 	_FileName := win32.UTF16Ptr(FileName)
-	r1, _, _ := syscall.SyscallN(procGetFileInformationByName.Addr(), uintptr(unsafe.Pointer(_FileName)), uintptr(FileInformationClass), uintptr(unsafe.Pointer(FileInfoBuffer)), uintptr(FileInfoBufferSize))
+	var _FileInfoBuffer *byte
+	if len(FileInfoBuffer) > 0 {
+		_FileInfoBuffer = &FileInfoBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetFileInformationByName.Addr(), uintptr(unsafe.Pointer(_FileName)), uintptr(FileInformationClass), uintptr(unsafe.Pointer(_FileInfoBuffer)), uintptr(len(FileInfoBuffer)))
 	return r1 != 0
 }
 
@@ -2222,9 +2238,13 @@ func GetFileType(hFile foundation.HANDLE) (FILE_TYPE, error) {
 // GetFileVersionInfo calls VERSION!GetFileVersionInfoW.
 // https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfow
 // Minimum OS: windows5.0.
-func GetFileVersionInfo(lptstrFilename string, dwLen uint32, lpData unsafe.Pointer) error {
+func GetFileVersionInfo(lptstrFilename string, lpData []byte) error {
 	_lptstrFilename := win32.UTF16Ptr(lptstrFilename)
-	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfo.Addr(), uintptr(unsafe.Pointer(_lptstrFilename)), 0, uintptr(dwLen), uintptr(unsafe.Pointer(lpData)))
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfo.Addr(), uintptr(unsafe.Pointer(_lptstrFilename)), 0, uintptr(len(lpData)), uintptr(unsafe.Pointer(_lpData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2234,8 +2254,12 @@ func GetFileVersionInfo(lptstrFilename string, dwLen uint32, lpData unsafe.Point
 // GetFileVersionInfoA calls VERSION!GetFileVersionInfoA.
 // https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfoa
 // Minimum OS: windows5.0.
-func GetFileVersionInfoA(lptstrFilename foundation.PSTR, dwLen uint32, lpData unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoA.Addr(), uintptr(unsafe.Pointer(lptstrFilename)), 0, uintptr(dwLen), uintptr(unsafe.Pointer(lpData)))
+func GetFileVersionInfoA(lptstrFilename foundation.PSTR, lpData []byte) error {
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoA.Addr(), uintptr(unsafe.Pointer(lptstrFilename)), 0, uintptr(len(lpData)), uintptr(unsafe.Pointer(_lpData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2245,9 +2269,13 @@ func GetFileVersionInfoA(lptstrFilename foundation.PSTR, dwLen uint32, lpData un
 // GetFileVersionInfoEx calls VERSION!GetFileVersionInfoExW.
 // https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfoexw
 // Minimum OS: windows6.0.6000.
-func GetFileVersionInfoEx(dwFlags GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename string, dwLen uint32, lpData unsafe.Pointer) error {
+func GetFileVersionInfoEx(dwFlags GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename string, lpData []byte) error {
 	_lpwstrFilename := win32.UTF16Ptr(lpwstrFilename)
-	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoEx.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpwstrFilename)), 0, uintptr(dwLen), uintptr(unsafe.Pointer(lpData)))
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoEx.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpwstrFilename)), 0, uintptr(len(lpData)), uintptr(unsafe.Pointer(_lpData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2257,8 +2285,12 @@ func GetFileVersionInfoEx(dwFlags GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename st
 // GetFileVersionInfoExA calls VERSION!GetFileVersionInfoExA.
 // https://learn.microsoft.com/windows/win32/api/winver/nf-winver-getfileversioninfoexa
 // Minimum OS: windows6.0.6000.
-func GetFileVersionInfoExA(dwFlags GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename foundation.PSTR, dwLen uint32, lpData unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoExA.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpwstrFilename)), 0, uintptr(dwLen), uintptr(unsafe.Pointer(lpData)))
+func GetFileVersionInfoExA(dwFlags GET_FILE_VERSION_INFO_FLAGS, lpwstrFilename foundation.PSTR, lpData []byte) error {
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetFileVersionInfoExA.Addr(), uintptr(dwFlags), uintptr(unsafe.Pointer(lpwstrFilename)), 0, uintptr(len(lpData)), uintptr(unsafe.Pointer(_lpData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3509,9 +3541,13 @@ func ReOpenFile(hOriginalFile foundation.HANDLE, dwDesiredAccess uint32, dwShare
 // ReadDirectoryChangesExW calls KERNEL32!ReadDirectoryChangesExW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-readdirectorychangesexw
 // Minimum OS: windows10.0.16299.
-func ReadDirectoryChangesExW(hDirectory foundation.HANDLE, lpBuffer unsafe.Pointer, nBufferLength uint32, bWatchSubtree bool, dwNotifyFilter FILE_NOTIFY_CHANGE, lpBytesReturned *uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine systemio.LPOVERLAPPED_COMPLETION_ROUTINE, ReadDirectoryNotifyInformationClass READ_DIRECTORY_NOTIFY_INFORMATION_CLASS) error {
+func ReadDirectoryChangesExW(hDirectory foundation.HANDLE, lpBuffer []byte, bWatchSubtree bool, dwNotifyFilter FILE_NOTIFY_CHANGE, lpBytesReturned *uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine systemio.LPOVERLAPPED_COMPLETION_ROUTINE, ReadDirectoryNotifyInformationClass READ_DIRECTORY_NOTIFY_INFORMATION_CLASS) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
 	_bWatchSubtree := win32.Bool32(bWatchSubtree)
-	r1, _, e1 := syscall.SyscallN(procReadDirectoryChangesExW.Addr(), uintptr(hDirectory), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nBufferLength), uintptr(_bWatchSubtree), uintptr(dwNotifyFilter), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine), uintptr(ReadDirectoryNotifyInformationClass))
+	r1, _, e1 := syscall.SyscallN(procReadDirectoryChangesExW.Addr(), uintptr(hDirectory), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(_bWatchSubtree), uintptr(dwNotifyFilter), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine), uintptr(ReadDirectoryNotifyInformationClass))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3521,9 +3557,13 @@ func ReadDirectoryChangesExW(hDirectory foundation.HANDLE, lpBuffer unsafe.Point
 // ReadDirectoryChangesW calls KERNEL32!ReadDirectoryChangesW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-readdirectorychangesw
 // Minimum OS: windows5.1.2600.
-func ReadDirectoryChangesW(hDirectory foundation.HANDLE, lpBuffer unsafe.Pointer, nBufferLength uint32, bWatchSubtree bool, dwNotifyFilter FILE_NOTIFY_CHANGE, lpBytesReturned *uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine systemio.LPOVERLAPPED_COMPLETION_ROUTINE) error {
+func ReadDirectoryChangesW(hDirectory foundation.HANDLE, lpBuffer []byte, bWatchSubtree bool, dwNotifyFilter FILE_NOTIFY_CHANGE, lpBytesReturned *uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine systemio.LPOVERLAPPED_COMPLETION_ROUTINE) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
 	_bWatchSubtree := win32.Bool32(bWatchSubtree)
-	r1, _, e1 := syscall.SyscallN(procReadDirectoryChangesW.Addr(), uintptr(hDirectory), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nBufferLength), uintptr(_bWatchSubtree), uintptr(dwNotifyFilter), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
+	r1, _, e1 := syscall.SyscallN(procReadDirectoryChangesW.Addr(), uintptr(hDirectory), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(_bWatchSubtree), uintptr(dwNotifyFilter), uintptr(unsafe.Pointer(lpBytesReturned)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3541,8 +3581,12 @@ func ReadEncryptedFileRaw(pfExportCallback PFE_EXPORT_FUNC, pvCallbackContext un
 // ReadFile calls KERNEL32!ReadFile.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-readfile
 // Minimum OS: windows5.1.2600.
-func ReadFile(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToRead uint32, lpNumberOfBytesRead *uint32, lpOverlapped *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procReadFile.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytesToRead), uintptr(unsafe.Pointer(lpNumberOfBytesRead)), uintptr(unsafe.Pointer(lpOverlapped)))
+func ReadFile(hFile foundation.HANDLE, lpBuffer []byte, lpNumberOfBytesRead *uint32, lpOverlapped *systemio.OVERLAPPED) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procReadFile.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfBytesRead)), uintptr(unsafe.Pointer(lpOverlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3552,8 +3596,12 @@ func ReadFile(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToRead uint
 // ReadFileEx calls KERNEL32!ReadFileEx.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-readfileex
 // Minimum OS: windows5.1.2600.
-func ReadFileEx(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToRead uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine systemio.LPOVERLAPPED_COMPLETION_ROUTINE) error {
-	r1, _, e1 := syscall.SyscallN(procReadFileEx.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytesToRead), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
+func ReadFileEx(hFile foundation.HANDLE, lpBuffer []byte, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine systemio.LPOVERLAPPED_COMPLETION_ROUTINE) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procReadFileEx.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4121,8 +4169,12 @@ func SetFileCompletionNotificationModes(FileHandle foundation.HANDLE, Flags byte
 // SetFileInformationByHandle calls KERNEL32!SetFileInformationByHandle.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-setfileinformationbyhandle
 // Minimum OS: windows6.0.6000.
-func SetFileInformationByHandle(hFile foundation.HANDLE, FileInformationClass FILE_INFO_BY_HANDLE_CLASS, lpFileInformation unsafe.Pointer, dwBufferSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetFileInformationByHandle.Addr(), uintptr(hFile), uintptr(FileInformationClass), uintptr(unsafe.Pointer(lpFileInformation)), uintptr(dwBufferSize))
+func SetFileInformationByHandle(hFile foundation.HANDLE, FileInformationClass FILE_INFO_BY_HANDLE_CLASS, lpFileInformation []byte) error {
+	var _lpFileInformation *byte
+	if len(lpFileInformation) > 0 {
+		_lpFileInformation = &lpFileInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetFileInformationByHandle.Addr(), uintptr(hFile), uintptr(FileInformationClass), uintptr(unsafe.Pointer(_lpFileInformation)), uintptr(len(lpFileInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4431,8 +4483,12 @@ func TxfLogDestroyReadContext(TxfLogContext unsafe.Pointer) error {
 // TxfLogReadRecords calls txfw32!TxfLogReadRecords.
 // https://learn.microsoft.com/windows/win32/api/txfw32/nf-txfw32-txflogreadrecords
 // Minimum OS: windows6.0.6000.
-func TxfLogReadRecords(TxfLogContext unsafe.Pointer, BufferLength uint32, Buffer unsafe.Pointer, BytesUsed *uint32, RecordCount *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procTxfLogReadRecords.Addr(), uintptr(unsafe.Pointer(TxfLogContext)), uintptr(BufferLength), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(BytesUsed)), uintptr(unsafe.Pointer(RecordCount)))
+func TxfLogReadRecords(TxfLogContext unsafe.Pointer, Buffer []byte, BytesUsed *uint32, RecordCount *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procTxfLogReadRecords.Addr(), uintptr(unsafe.Pointer(TxfLogContext)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(_Buffer)), uintptr(unsafe.Pointer(BytesUsed)), uintptr(unsafe.Pointer(RecordCount)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4440,8 +4496,12 @@ func TxfLogReadRecords(TxfLogContext unsafe.Pointer, BufferLength uint32, Buffer
 }
 
 // TxfLogRecordGetFileName calls txfw32!TxfLogRecordGetFileName.
-func TxfLogRecordGetFileName(RecordBuffer unsafe.Pointer, RecordBufferLengthInBytes uint32, NameBuffer foundation.PWSTR, NameBufferLengthInBytes *uint32, TxfId *TXF_ID) bool {
-	r1, _, _ := syscall.SyscallN(procTxfLogRecordGetFileName.Addr(), uintptr(unsafe.Pointer(RecordBuffer)), uintptr(RecordBufferLengthInBytes), uintptr(unsafe.Pointer(NameBuffer)), uintptr(unsafe.Pointer(NameBufferLengthInBytes)), uintptr(unsafe.Pointer(TxfId)))
+func TxfLogRecordGetFileName(RecordBuffer []byte, NameBuffer foundation.PWSTR, NameBufferLengthInBytes *uint32, TxfId *TXF_ID) bool {
+	var _RecordBuffer *byte
+	if len(RecordBuffer) > 0 {
+		_RecordBuffer = &RecordBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procTxfLogRecordGetFileName.Addr(), uintptr(unsafe.Pointer(_RecordBuffer)), uintptr(len(RecordBuffer)), uintptr(unsafe.Pointer(NameBuffer)), uintptr(unsafe.Pointer(NameBufferLengthInBytes)), uintptr(unsafe.Pointer(TxfId)))
 	return r1 != 0
 }
 
@@ -4699,8 +4759,12 @@ func WriteEncryptedFileRaw(pfImportCallback PFE_IMPORT_FUNC, pvCallbackContext u
 // WriteFile calls KERNEL32!WriteFile.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-writefile
 // Minimum OS: windows5.1.2600.
-func WriteFile(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToWrite uint32, lpNumberOfBytesWritten *uint32, lpOverlapped *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procWriteFile.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytesToWrite), uintptr(unsafe.Pointer(lpNumberOfBytesWritten)), uintptr(unsafe.Pointer(lpOverlapped)))
+func WriteFile(hFile foundation.HANDLE, lpBuffer []byte, lpNumberOfBytesWritten *uint32, lpOverlapped *systemio.OVERLAPPED) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWriteFile.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfBytesWritten)), uintptr(unsafe.Pointer(lpOverlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4710,8 +4774,12 @@ func WriteFile(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToWrite ui
 // WriteFileEx calls KERNEL32!WriteFileEx.
 // https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-writefileex
 // Minimum OS: windows5.1.2600.
-func WriteFileEx(hFile foundation.HANDLE, lpBuffer *byte, nNumberOfBytesToWrite uint32, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine systemio.LPOVERLAPPED_COMPLETION_ROUTINE) error {
-	r1, _, e1 := syscall.SyscallN(procWriteFileEx.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytesToWrite), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
+func WriteFileEx(hFile foundation.HANDLE, lpBuffer []byte, lpOverlapped *systemio.OVERLAPPED, lpCompletionRoutine systemio.LPOVERLAPPED_COMPLETION_ROUTINE) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWriteFileEx.Addr(), uintptr(hFile), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpOverlapped)), uintptr(lpCompletionRoutine))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

@@ -314,10 +314,18 @@ var (
 )
 
 // AppCacheCheckManifest calls WININET!AppCacheCheckManifest.
-func AppCacheCheckManifest(pwszMasterUrl string, pwszManifestUrl string, pbManifestData *byte, dwManifestDataSize uint32, pbManifestResponseHeaders *byte, dwManifestResponseHeadersSize uint32, peState *APP_CACHE_STATE, phNewAppCache *unsafe.Pointer) uint32 {
+func AppCacheCheckManifest(pwszMasterUrl string, pwszManifestUrl string, pbManifestData []byte, pbManifestResponseHeaders []byte, peState *APP_CACHE_STATE, phNewAppCache *unsafe.Pointer) uint32 {
 	_pwszMasterUrl := win32.UTF16Ptr(pwszMasterUrl)
 	_pwszManifestUrl := win32.UTF16Ptr(pwszManifestUrl)
-	r1, _, _ := syscall.SyscallN(procAppCacheCheckManifest.Addr(), uintptr(unsafe.Pointer(_pwszMasterUrl)), uintptr(unsafe.Pointer(_pwszManifestUrl)), uintptr(unsafe.Pointer(pbManifestData)), uintptr(dwManifestDataSize), uintptr(unsafe.Pointer(pbManifestResponseHeaders)), uintptr(dwManifestResponseHeadersSize), uintptr(unsafe.Pointer(peState)), uintptr(unsafe.Pointer(phNewAppCache)))
+	var _pbManifestData *byte
+	if len(pbManifestData) > 0 {
+		_pbManifestData = &pbManifestData[0]
+	}
+	var _pbManifestResponseHeaders *byte
+	if len(pbManifestResponseHeaders) > 0 {
+		_pbManifestResponseHeaders = &pbManifestResponseHeaders[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAppCacheCheckManifest.Addr(), uintptr(unsafe.Pointer(_pwszMasterUrl)), uintptr(unsafe.Pointer(_pwszManifestUrl)), uintptr(unsafe.Pointer(_pbManifestData)), uintptr(len(pbManifestData)), uintptr(unsafe.Pointer(_pbManifestResponseHeaders)), uintptr(len(pbManifestResponseHeaders)), uintptr(unsafe.Pointer(peState)), uintptr(unsafe.Pointer(phNewAppCache)))
 	return uint32(r1)
 }
 
@@ -327,10 +335,14 @@ func AppCacheCloseHandle(hAppCache unsafe.Pointer) {
 }
 
 // AppCacheCreateAndCommitFile calls WININET!AppCacheCreateAndCommitFile.
-func AppCacheCreateAndCommitFile(hAppCache unsafe.Pointer, pwszSourceFilePath string, pwszUrl string, pbResponseHeaders *byte, dwResponseHeadersSize uint32) uint32 {
+func AppCacheCreateAndCommitFile(hAppCache unsafe.Pointer, pwszSourceFilePath string, pwszUrl string, pbResponseHeaders []byte) uint32 {
 	_pwszSourceFilePath := win32.UTF16Ptr(pwszSourceFilePath)
 	_pwszUrl := win32.UTF16Ptr(pwszUrl)
-	r1, _, _ := syscall.SyscallN(procAppCacheCreateAndCommitFile.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(_pwszSourceFilePath)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(unsafe.Pointer(pbResponseHeaders)), uintptr(dwResponseHeadersSize))
+	var _pbResponseHeaders *byte
+	if len(pbResponseHeaders) > 0 {
+		_pbResponseHeaders = &pbResponseHeaders[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAppCacheCreateAndCommitFile.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(_pwszSourceFilePath)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(unsafe.Pointer(_pbResponseHeaders)), uintptr(len(pbResponseHeaders)))
 	return uint32(r1)
 }
 
@@ -355,8 +367,12 @@ func AppCacheDuplicateHandle(hAppCache unsafe.Pointer, phDuplicatedAppCache *uns
 }
 
 // AppCacheFinalize calls WININET!AppCacheFinalize.
-func AppCacheFinalize(hAppCache unsafe.Pointer, pbManifestData *byte, dwManifestDataSize uint32, peState *APP_CACHE_FINALIZE_STATE) uint32 {
-	r1, _, _ := syscall.SyscallN(procAppCacheFinalize.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(pbManifestData)), uintptr(dwManifestDataSize), uintptr(unsafe.Pointer(peState)))
+func AppCacheFinalize(hAppCache unsafe.Pointer, pbManifestData []byte, peState *APP_CACHE_FINALIZE_STATE) uint32 {
+	var _pbManifestData *byte
+	if len(pbManifestData) > 0 {
+		_pbManifestData = &pbManifestData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAppCacheFinalize.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(_pbManifestData)), uintptr(len(pbManifestData)), uintptr(unsafe.Pointer(peState)))
 	return uint32(r1)
 }
 
@@ -1481,9 +1497,13 @@ func HttpQueryInfoA(hRequest unsafe.Pointer, dwInfoLevel uint32, lpBuffer unsafe
 // HttpSendRequest calls WININET!HttpSendRequestW.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpsendrequestw
 // Minimum OS: windows5.0.
-func HttpSendRequest(hRequest unsafe.Pointer, lpszHeaders string, dwHeadersLength uint32, lpOptional unsafe.Pointer, dwOptionalLength uint32) error {
+func HttpSendRequest(hRequest unsafe.Pointer, lpszHeaders string, dwHeadersLength uint32, lpOptional []byte) error {
 	_lpszHeaders := win32.UTF16Ptr(lpszHeaders)
-	r1, _, e1 := syscall.SyscallN(procHttpSendRequest.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(_lpszHeaders)), uintptr(dwHeadersLength), uintptr(unsafe.Pointer(lpOptional)), uintptr(dwOptionalLength))
+	var _lpOptional *byte
+	if len(lpOptional) > 0 {
+		_lpOptional = &lpOptional[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procHttpSendRequest.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(_lpszHeaders)), uintptr(dwHeadersLength), uintptr(unsafe.Pointer(_lpOptional)), uintptr(len(lpOptional)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1493,8 +1513,12 @@ func HttpSendRequest(hRequest unsafe.Pointer, lpszHeaders string, dwHeadersLengt
 // HttpSendRequestA calls WININET!HttpSendRequestA.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-httpsendrequesta
 // Minimum OS: windows5.0.
-func HttpSendRequestA(hRequest unsafe.Pointer, lpszHeaders foundation.PSTR, dwHeadersLength uint32, lpOptional unsafe.Pointer, dwOptionalLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procHttpSendRequestA.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(lpszHeaders)), uintptr(dwHeadersLength), uintptr(unsafe.Pointer(lpOptional)), uintptr(dwOptionalLength))
+func HttpSendRequestA(hRequest unsafe.Pointer, lpszHeaders foundation.PSTR, dwHeadersLength uint32, lpOptional []byte) error {
+	var _lpOptional *byte
+	if len(lpOptional) > 0 {
+		_lpOptional = &lpOptional[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procHttpSendRequestA.Addr(), uintptr(unsafe.Pointer(hRequest)), uintptr(unsafe.Pointer(lpszHeaders)), uintptr(dwHeadersLength), uintptr(unsafe.Pointer(_lpOptional)), uintptr(len(lpOptional)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1524,8 +1548,12 @@ func HttpSendRequestExA(hRequest unsafe.Pointer, lpBuffersIn *INTERNET_BUFFERSA,
 }
 
 // HttpWebSocketClose calls WININET!HttpWebSocketClose.
-func HttpWebSocketClose(hWebSocket unsafe.Pointer, usStatus uint16, pvReason unsafe.Pointer, dwReasonLength uint32) bool {
-	r1, _, _ := syscall.SyscallN(procHttpWebSocketClose.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(usStatus), uintptr(unsafe.Pointer(pvReason)), uintptr(dwReasonLength))
+func HttpWebSocketClose(hWebSocket unsafe.Pointer, usStatus uint16, pvReason []byte) bool {
+	var _pvReason *byte
+	if len(pvReason) > 0 {
+		_pvReason = &pvReason[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpWebSocketClose.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(usStatus), uintptr(unsafe.Pointer(_pvReason)), uintptr(len(pvReason)))
 	return r1 != 0
 }
 
@@ -1536,26 +1564,42 @@ func HttpWebSocketCompleteUpgrade(hRequest unsafe.Pointer, dwContext uintptr) un
 }
 
 // HttpWebSocketQueryCloseStatus calls WININET!HttpWebSocketQueryCloseStatus.
-func HttpWebSocketQueryCloseStatus(hWebSocket unsafe.Pointer, pusStatus *uint16, pvReason unsafe.Pointer, dwReasonLength uint32, pdwReasonLengthConsumed *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procHttpWebSocketQueryCloseStatus.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(unsafe.Pointer(pusStatus)), uintptr(unsafe.Pointer(pvReason)), uintptr(dwReasonLength), uintptr(unsafe.Pointer(pdwReasonLengthConsumed)))
+func HttpWebSocketQueryCloseStatus(hWebSocket unsafe.Pointer, pusStatus *uint16, pvReason []byte, pdwReasonLengthConsumed *uint32) bool {
+	var _pvReason *byte
+	if len(pvReason) > 0 {
+		_pvReason = &pvReason[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpWebSocketQueryCloseStatus.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(unsafe.Pointer(pusStatus)), uintptr(unsafe.Pointer(_pvReason)), uintptr(len(pvReason)), uintptr(unsafe.Pointer(pdwReasonLengthConsumed)))
 	return r1 != 0
 }
 
 // HttpWebSocketReceive calls WININET!HttpWebSocketReceive.
-func HttpWebSocketReceive(hWebSocket unsafe.Pointer, pvBuffer unsafe.Pointer, dwBufferLength uint32, pdwBytesRead *uint32, pBufferType *HTTP_WEB_SOCKET_BUFFER_TYPE) bool {
-	r1, _, _ := syscall.SyscallN(procHttpWebSocketReceive.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(unsafe.Pointer(pvBuffer)), uintptr(dwBufferLength), uintptr(unsafe.Pointer(pdwBytesRead)), uintptr(unsafe.Pointer(pBufferType)))
+func HttpWebSocketReceive(hWebSocket unsafe.Pointer, pvBuffer []byte, pdwBytesRead *uint32, pBufferType *HTTP_WEB_SOCKET_BUFFER_TYPE) bool {
+	var _pvBuffer *byte
+	if len(pvBuffer) > 0 {
+		_pvBuffer = &pvBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpWebSocketReceive.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(unsafe.Pointer(_pvBuffer)), uintptr(len(pvBuffer)), uintptr(unsafe.Pointer(pdwBytesRead)), uintptr(unsafe.Pointer(pBufferType)))
 	return r1 != 0
 }
 
 // HttpWebSocketSend calls WININET!HttpWebSocketSend.
-func HttpWebSocketSend(hWebSocket unsafe.Pointer, BufferType HTTP_WEB_SOCKET_BUFFER_TYPE, pvBuffer unsafe.Pointer, dwBufferLength uint32) bool {
-	r1, _, _ := syscall.SyscallN(procHttpWebSocketSend.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(BufferType), uintptr(unsafe.Pointer(pvBuffer)), uintptr(dwBufferLength))
+func HttpWebSocketSend(hWebSocket unsafe.Pointer, BufferType HTTP_WEB_SOCKET_BUFFER_TYPE, pvBuffer []byte) bool {
+	var _pvBuffer *byte
+	if len(pvBuffer) > 0 {
+		_pvBuffer = &pvBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpWebSocketSend.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(BufferType), uintptr(unsafe.Pointer(_pvBuffer)), uintptr(len(pvBuffer)))
 	return r1 != 0
 }
 
 // HttpWebSocketShutdown calls WININET!HttpWebSocketShutdown.
-func HttpWebSocketShutdown(hWebSocket unsafe.Pointer, usStatus uint16, pvReason unsafe.Pointer, dwReasonLength uint32) bool {
-	r1, _, _ := syscall.SyscallN(procHttpWebSocketShutdown.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(usStatus), uintptr(unsafe.Pointer(pvReason)), uintptr(dwReasonLength))
+func HttpWebSocketShutdown(hWebSocket unsafe.Pointer, usStatus uint16, pvReason []byte) bool {
+	var _pvReason *byte
+	if len(pvReason) > 0 {
+		_pvReason = &pvReason[0]
+	}
+	r1, _, _ := syscall.SyscallN(procHttpWebSocketShutdown.Addr(), uintptr(unsafe.Pointer(hWebSocket)), uintptr(usStatus), uintptr(unsafe.Pointer(_pvReason)), uintptr(len(pvReason)))
 	return r1 != 0
 }
 
@@ -2238,8 +2282,12 @@ func InternetQueryOptionA(hInternet unsafe.Pointer, dwOption uint32, lpBuffer un
 // InternetReadFile calls WININET!InternetReadFile.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetreadfile
 // Minimum OS: windows5.0.
-func InternetReadFile(hFile unsafe.Pointer, lpBuffer unsafe.Pointer, dwNumberOfBytesToRead uint32, lpdwNumberOfBytesRead *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetReadFile.Addr(), uintptr(unsafe.Pointer(hFile)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(dwNumberOfBytesToRead), uintptr(unsafe.Pointer(lpdwNumberOfBytesRead)))
+func InternetReadFile(hFile unsafe.Pointer, lpBuffer []byte, lpdwNumberOfBytesRead *uint32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procInternetReadFile.Addr(), uintptr(unsafe.Pointer(hFile)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpdwNumberOfBytesRead)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2549,8 +2597,12 @@ func InternetUnlockRequestFile(hLockRequestInfo foundation.HANDLE) error {
 // InternetWriteFile calls WININET!InternetWriteFile.
 // https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetwritefile
 // Minimum OS: windows5.0.
-func InternetWriteFile(hFile unsafe.Pointer, lpBuffer unsafe.Pointer, dwNumberOfBytesToWrite uint32, lpdwNumberOfBytesWritten *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInternetWriteFile.Addr(), uintptr(unsafe.Pointer(hFile)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(dwNumberOfBytesToWrite), uintptr(unsafe.Pointer(lpdwNumberOfBytesWritten)))
+func InternetWriteFile(hFile unsafe.Pointer, lpBuffer []byte, lpdwNumberOfBytesWritten *uint32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procInternetWriteFile.Addr(), uintptr(unsafe.Pointer(hFile)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpdwNumberOfBytesWritten)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -2615,8 +2667,12 @@ func LoadUrlCacheContent() bool {
 }
 
 // ParseX509EncodedCertificateForListBoxEntry calls WININET!ParseX509EncodedCertificateForListBoxEntry.
-func ParseX509EncodedCertificateForListBoxEntry(lpCert *byte, cbCert uint32, lpszListBoxEntry foundation.PSTR, lpdwListBoxEntry *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procParseX509EncodedCertificateForListBoxEntry.Addr(), uintptr(unsafe.Pointer(lpCert)), uintptr(cbCert), uintptr(unsafe.Pointer(lpszListBoxEntry)), uintptr(unsafe.Pointer(lpdwListBoxEntry)))
+func ParseX509EncodedCertificateForListBoxEntry(lpCert []byte, lpszListBoxEntry foundation.PSTR, lpdwListBoxEntry *uint32) uint32 {
+	var _lpCert *byte
+	if len(lpCert) > 0 {
+		_lpCert = &lpCert[0]
+	}
+	r1, _, _ := syscall.SyscallN(procParseX509EncodedCertificateForListBoxEntry.Addr(), uintptr(unsafe.Pointer(_lpCert)), uintptr(len(lpCert)), uintptr(unsafe.Pointer(lpszListBoxEntry)), uintptr(unsafe.Pointer(lpdwListBoxEntry)))
 	return uint32(r1)
 }
 
@@ -2840,8 +2896,12 @@ func ShowSecurityInfo(hWndParent foundation.HWND, pSecurityInfo *INTERNET_SECURI
 }
 
 // ShowX509EncodedCertificate calls WININET!ShowX509EncodedCertificate.
-func ShowX509EncodedCertificate(hWndParent foundation.HWND, lpCert *byte, cbCert uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procShowX509EncodedCertificate.Addr(), uintptr(hWndParent), uintptr(unsafe.Pointer(lpCert)), uintptr(cbCert))
+func ShowX509EncodedCertificate(hWndParent foundation.HWND, lpCert []byte) uint32 {
+	var _lpCert *byte
+	if len(lpCert) > 0 {
+		_lpCert = &lpCert[0]
+	}
+	r1, _, _ := syscall.SyscallN(procShowX509EncodedCertificate.Addr(), uintptr(hWndParent), uintptr(unsafe.Pointer(_lpCert)), uintptr(len(lpCert)))
 	return uint32(r1)
 }
 
@@ -3012,8 +3072,12 @@ func UrlCacheSetGlobalLimit(limitType URL_CACHE_LIMIT_TYPE, ullLimit uint64) uin
 }
 
 // UrlCacheUpdateEntryExtraData calls WININET!UrlCacheUpdateEntryExtraData.
-func UrlCacheUpdateEntryExtraData(hAppCache unsafe.Pointer, pcwszUrl string, pbExtraData *byte, cbExtraData uint32) uint32 {
+func UrlCacheUpdateEntryExtraData(hAppCache unsafe.Pointer, pcwszUrl string, pbExtraData []byte) uint32 {
 	_pcwszUrl := win32.UTF16Ptr(pcwszUrl)
-	r1, _, _ := syscall.SyscallN(procUrlCacheUpdateEntryExtraData.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(pbExtraData)), uintptr(cbExtraData))
+	var _pbExtraData *byte
+	if len(pbExtraData) > 0 {
+		_pbExtraData = &pbExtraData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procUrlCacheUpdateEntryExtraData.Addr(), uintptr(unsafe.Pointer(hAppCache)), uintptr(unsafe.Pointer(_pcwszUrl)), uintptr(unsafe.Pointer(_pbExtraData)), uintptr(len(pbExtraData)))
 	return uint32(r1)
 }

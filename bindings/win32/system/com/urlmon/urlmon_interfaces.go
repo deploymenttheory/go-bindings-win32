@@ -103,14 +103,30 @@ type IDataFilter struct {
 var IID_IDataFilter = win32.GUID{Data1: 0x69d14c80, Data2: 0xc18e, Data3: 0x11d0, Data4: [8]byte{0xa9, 0xce, 0x00, 0x60, 0x97, 0x94, 0x23, 0x11}}
 
 // DoEncode dispatches through IDataFilter's vtable slot 3.
-func (self *IDataFilter) DoEncode(dwFlags uint32, lInBufferSize int32, pbInBuffer *byte, lOutBufferSize int32, pbOutBuffer *byte, lInBytesAvailable int32, plInBytesRead *int32, plOutBytesWritten *int32, dwReserved uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(lInBufferSize), uintptr(unsafe.Pointer(pbInBuffer)), uintptr(lOutBufferSize), uintptr(unsafe.Pointer(pbOutBuffer)), uintptr(lInBytesAvailable), uintptr(unsafe.Pointer(plInBytesRead)), uintptr(unsafe.Pointer(plOutBytesWritten)), uintptr(dwReserved))
+func (self *IDataFilter) DoEncode(dwFlags uint32, pbInBuffer []byte, pbOutBuffer []byte, lInBytesAvailable int32, plInBytesRead *int32, plOutBytesWritten *int32, dwReserved uint32) error {
+	var _pbInBuffer *byte
+	if len(pbInBuffer) > 0 {
+		_pbInBuffer = &pbInBuffer[0]
+	}
+	var _pbOutBuffer *byte
+	if len(pbOutBuffer) > 0 {
+		_pbOutBuffer = &pbOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(len(pbInBuffer)), uintptr(unsafe.Pointer(_pbInBuffer)), uintptr(len(pbOutBuffer)), uintptr(unsafe.Pointer(_pbOutBuffer)), uintptr(lInBytesAvailable), uintptr(unsafe.Pointer(plInBytesRead)), uintptr(unsafe.Pointer(plOutBytesWritten)), uintptr(dwReserved))
 	return win32.HRESULTError(int32(r1))
 }
 
 // DoDecode dispatches through IDataFilter's vtable slot 4.
-func (self *IDataFilter) DoDecode(dwFlags uint32, lInBufferSize int32, pbInBuffer *byte, lOutBufferSize int32, pbOutBuffer *byte, lInBytesAvailable int32, plInBytesRead *int32, plOutBytesWritten *int32, dwReserved uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(lInBufferSize), uintptr(unsafe.Pointer(pbInBuffer)), uintptr(lOutBufferSize), uintptr(unsafe.Pointer(pbOutBuffer)), uintptr(lInBytesAvailable), uintptr(unsafe.Pointer(plInBytesRead)), uintptr(unsafe.Pointer(plOutBytesWritten)), uintptr(dwReserved))
+func (self *IDataFilter) DoDecode(dwFlags uint32, pbInBuffer []byte, pbOutBuffer []byte, lInBytesAvailable int32, plInBytesRead *int32, plOutBytesWritten *int32, dwReserved uint32) error {
+	var _pbInBuffer *byte
+	if len(pbInBuffer) > 0 {
+		_pbInBuffer = &pbInBuffer[0]
+	}
+	var _pbOutBuffer *byte
+	if len(pbOutBuffer) > 0 {
+		_pbOutBuffer = &pbOutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlags), uintptr(len(pbInBuffer)), uintptr(unsafe.Pointer(_pbInBuffer)), uintptr(len(pbOutBuffer)), uintptr(unsafe.Pointer(_pbOutBuffer)), uintptr(lInBytesAvailable), uintptr(unsafe.Pointer(plInBytesRead)), uintptr(unsafe.Pointer(plOutBytesWritten)), uintptr(dwReserved))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -273,14 +289,26 @@ func (self *IInternetHostSecurityManager) GetSecurityId(pbSecurityId *byte, pcbS
 }
 
 // ProcessUrlAction dispatches through IInternetHostSecurityManager's vtable slot 4.
-func (self *IInternetHostSecurityManager) ProcessUrlAction(dwAction uint32, pPolicy *byte, cbPolicy uint32, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwFlags), uintptr(dwReserved))
+func (self *IInternetHostSecurityManager) ProcessUrlAction(dwAction uint32, pPolicy []byte, pContext []byte, dwFlags uint32, dwReserved uint32) error {
+	var _pPolicy *byte
+	if len(pPolicy) > 0 {
+		_pPolicy = &pPolicy[0]
+	}
+	var _pContext *byte
+	if len(pContext) > 0 {
+		_pContext = &pContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwAction), uintptr(unsafe.Pointer(_pPolicy)), uintptr(len(pPolicy)), uintptr(unsafe.Pointer(_pContext)), uintptr(len(pContext)), uintptr(dwFlags), uintptr(dwReserved))
 	return win32.HRESULTError(int32(r1))
 }
 
 // QueryCustomPolicy dispatches through IInternetHostSecurityManager's vtable slot 5.
-func (self *IInternetHostSecurityManager) QueryCustomPolicy(guidKey *win32.GUID, ppPolicy **byte, pcbPolicy *uint32, pContext *byte, cbContext uint32, dwReserved uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(ppPolicy)), uintptr(unsafe.Pointer(pcbPolicy)), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwReserved))
+func (self *IInternetHostSecurityManager) QueryCustomPolicy(guidKey *win32.GUID, ppPolicy **byte, pcbPolicy *uint32, pContext []byte, dwReserved uint32) error {
+	var _pContext *byte
+	if len(pContext) > 0 {
+		_pContext = &pContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(ppPolicy)), uintptr(unsafe.Pointer(pcbPolicy)), uintptr(unsafe.Pointer(_pContext)), uintptr(len(pContext)), uintptr(dwReserved))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -529,9 +557,13 @@ func (self *IInternetSecurityManager) GetSecurityId(pwszUrl string, pbSecurityId
 }
 
 // ProcessUrlAction dispatches through IInternetSecurityManager's vtable slot 7.
-func (self *IInternetSecurityManager) ProcessUrlAction(pwszUrl string, dwAction uint32, pPolicy *byte, cbPolicy uint32, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uint32) error {
+func (self *IInternetSecurityManager) ProcessUrlAction(pwszUrl string, dwAction uint32, pPolicy []byte, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uint32) error {
 	_pwszUrl := win32.UTF16Ptr(pwszUrl)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwFlags), uintptr(dwReserved))
+	var _pPolicy *byte
+	if len(pPolicy) > 0 {
+		_pPolicy = &pPolicy[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(dwAction), uintptr(unsafe.Pointer(_pPolicy)), uintptr(len(pPolicy)), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwFlags), uintptr(dwReserved))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -564,9 +596,13 @@ type IInternetSecurityManagerEx struct {
 var IID_IInternetSecurityManagerEx = win32.GUID{Data1: 0xf164edf1, Data2: 0xcc7c, Data3: 0x4f0d, Data4: [8]byte{0x9a, 0x94, 0x34, 0x22, 0x26, 0x25, 0xc3, 0x93}}
 
 // ProcessUrlActionEx dispatches through IInternetSecurityManagerEx's vtable slot 11.
-func (self *IInternetSecurityManagerEx) ProcessUrlActionEx(pwszUrl string, dwAction uint32, pPolicy *byte, cbPolicy uint32, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uint32, pdwOutFlags *uint32) error {
+func (self *IInternetSecurityManagerEx) ProcessUrlActionEx(pwszUrl string, dwAction uint32, pPolicy []byte, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uint32, pdwOutFlags *uint32) error {
 	_pwszUrl := win32.UTF16Ptr(pwszUrl)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(pdwOutFlags)))
+	var _pPolicy *byte
+	if len(pPolicy) > 0 {
+		_pPolicy = &pPolicy[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszUrl)), uintptr(dwAction), uintptr(unsafe.Pointer(_pPolicy)), uintptr(len(pPolicy)), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(pdwOutFlags)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -585,8 +621,12 @@ func (self *IInternetSecurityManagerEx2) MapUrlToZoneEx2(pUri *systemcom.IUri, p
 }
 
 // ProcessUrlActionEx2 dispatches through IInternetSecurityManagerEx2's vtable slot 13.
-func (self *IInternetSecurityManagerEx2) ProcessUrlActionEx2(pUri *systemcom.IUri, dwAction uint32, pPolicy *byte, cbPolicy uint32, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uintptr, pdwOutFlags *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUri)), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(pdwOutFlags)))
+func (self *IInternetSecurityManagerEx2) ProcessUrlActionEx2(pUri *systemcom.IUri, dwAction uint32, pPolicy []byte, pContext *byte, cbContext uint32, dwFlags uint32, dwReserved uintptr, pdwOutFlags *uint32) error {
+	var _pPolicy *byte
+	if len(pPolicy) > 0 {
+		_pPolicy = &pPolicy[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pUri)), uintptr(dwAction), uintptr(unsafe.Pointer(_pPolicy)), uintptr(len(pPolicy)), uintptr(unsafe.Pointer(pContext)), uintptr(cbContext), uintptr(dwFlags), uintptr(dwReserved), uintptr(unsafe.Pointer(pdwOutFlags)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -725,20 +765,32 @@ func (self *IInternetZoneManager) GetZoneCustomPolicy(dwZone uint32, guidKey *wi
 }
 
 // SetZoneCustomPolicy dispatches through IInternetZoneManager's vtable slot 6.
-func (self *IInternetZoneManager) SetZoneCustomPolicy(dwZone uint32, guidKey *win32.GUID, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(urlZoneReg))
+func (self *IInternetZoneManager) SetZoneCustomPolicy(dwZone uint32, guidKey *win32.GUID, pPolicy []byte, urlZoneReg URLZONEREG) error {
+	var _pPolicy *byte
+	if len(pPolicy) > 0 {
+		_pPolicy = &pPolicy[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(unsafe.Pointer(guidKey)), uintptr(unsafe.Pointer(_pPolicy)), uintptr(len(pPolicy)), uintptr(urlZoneReg))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetZoneActionPolicy dispatches through IInternetZoneManager's vtable slot 7.
-func (self *IInternetZoneManager) GetZoneActionPolicy(dwZone uint32, dwAction uint32, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(urlZoneReg))
+func (self *IInternetZoneManager) GetZoneActionPolicy(dwZone uint32, dwAction uint32, pPolicy []byte, urlZoneReg URLZONEREG) error {
+	var _pPolicy *byte
+	if len(pPolicy) > 0 {
+		_pPolicy = &pPolicy[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(dwAction), uintptr(unsafe.Pointer(_pPolicy)), uintptr(len(pPolicy)), uintptr(urlZoneReg))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetZoneActionPolicy dispatches through IInternetZoneManager's vtable slot 8.
-func (self *IInternetZoneManager) SetZoneActionPolicy(dwZone uint32, dwAction uint32, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(urlZoneReg))
+func (self *IInternetZoneManager) SetZoneActionPolicy(dwZone uint32, dwAction uint32, pPolicy []byte, urlZoneReg URLZONEREG) error {
+	var _pPolicy *byte
+	if len(pPolicy) > 0 {
+		_pPolicy = &pPolicy[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(dwAction), uintptr(unsafe.Pointer(_pPolicy)), uintptr(len(pPolicy)), uintptr(urlZoneReg))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -791,14 +843,22 @@ type IInternetZoneManagerEx struct {
 var IID_IInternetZoneManagerEx = win32.GUID{Data1: 0xa4c23339, Data2: 0x8e06, Data3: 0x431e, Data4: [8]byte{0x9b, 0xf4, 0x7e, 0x71, 0x1c, 0x08, 0x56, 0x48}}
 
 // GetZoneActionPolicyEx dispatches through IInternetZoneManagerEx's vtable slot 15.
-func (self *IInternetZoneManagerEx) GetZoneActionPolicyEx(dwZone uint32, dwAction uint32, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG, dwFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(urlZoneReg), uintptr(dwFlags))
+func (self *IInternetZoneManagerEx) GetZoneActionPolicyEx(dwZone uint32, dwAction uint32, pPolicy []byte, urlZoneReg URLZONEREG, dwFlags uint32) error {
+	var _pPolicy *byte
+	if len(pPolicy) > 0 {
+		_pPolicy = &pPolicy[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(dwAction), uintptr(unsafe.Pointer(_pPolicy)), uintptr(len(pPolicy)), uintptr(urlZoneReg), uintptr(dwFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetZoneActionPolicyEx dispatches through IInternetZoneManagerEx's vtable slot 16.
-func (self *IInternetZoneManagerEx) SetZoneActionPolicyEx(dwZone uint32, dwAction uint32, pPolicy *byte, cbPolicy uint32, urlZoneReg URLZONEREG, dwFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(dwAction), uintptr(unsafe.Pointer(pPolicy)), uintptr(cbPolicy), uintptr(urlZoneReg), uintptr(dwFlags))
+func (self *IInternetZoneManagerEx) SetZoneActionPolicyEx(dwZone uint32, dwAction uint32, pPolicy []byte, urlZoneReg URLZONEREG, dwFlags uint32) error {
+	var _pPolicy *byte
+	if len(pPolicy) > 0 {
+		_pPolicy = &pPolicy[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(dwZone), uintptr(dwAction), uintptr(unsafe.Pointer(_pPolicy)), uintptr(len(pPolicy)), uintptr(urlZoneReg), uintptr(dwFlags))
 	return win32.HRESULTError(int32(r1))
 }
 

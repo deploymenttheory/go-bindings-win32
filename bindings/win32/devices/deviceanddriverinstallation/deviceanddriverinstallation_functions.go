@@ -664,16 +664,24 @@ func CM_Add_Range(ullStartValue uint64, ullEndValue uint64, rlh uintptr, ulFlags
 // CM_Add_Res_Des calls CFGMGR32!CM_Add_Res_Des.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_add_res_des
 // Minimum OS: windows5.0.
-func CM_Add_Res_Des(prdResDes *uintptr, lcLogConf uintptr, ResourceID uint32, ResourceData unsafe.Pointer, ResourceLen uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Add_Res_Des.Addr(), uintptr(unsafe.Pointer(prdResDes)), uintptr(lcLogConf), uintptr(ResourceID), uintptr(unsafe.Pointer(ResourceData)), uintptr(ResourceLen), uintptr(ulFlags))
+func CM_Add_Res_Des(prdResDes *uintptr, lcLogConf uintptr, ResourceID uint32, ResourceData []byte, ulFlags uint32) CONFIGRET {
+	var _ResourceData *byte
+	if len(ResourceData) > 0 {
+		_ResourceData = &ResourceData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Add_Res_Des.Addr(), uintptr(unsafe.Pointer(prdResDes)), uintptr(lcLogConf), uintptr(ResourceID), uintptr(unsafe.Pointer(_ResourceData)), uintptr(len(ResourceData)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Add_Res_Des_Ex calls CFGMGR32!CM_Add_Res_Des_Ex.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_add_res_des_ex
 // Minimum OS: windows5.0.
-func CM_Add_Res_Des_Ex(prdResDes *uintptr, lcLogConf uintptr, ResourceID uint32, ResourceData unsafe.Pointer, ResourceLen uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Add_Res_Des_Ex.Addr(), uintptr(unsafe.Pointer(prdResDes)), uintptr(lcLogConf), uintptr(ResourceID), uintptr(unsafe.Pointer(ResourceData)), uintptr(ResourceLen), uintptr(ulFlags), uintptr(hMachine))
+func CM_Add_Res_Des_Ex(prdResDes *uintptr, lcLogConf uintptr, ResourceID uint32, ResourceData []byte, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	var _ResourceData *byte
+	if len(ResourceData) > 0 {
+		_ResourceData = &ResourceData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Add_Res_Des_Ex.Addr(), uintptr(unsafe.Pointer(prdResDes)), uintptr(lcLogConf), uintptr(ResourceID), uintptr(unsafe.Pointer(_ResourceData)), uintptr(len(ResourceData)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -802,15 +810,23 @@ func CM_Delete_Range(ullStartValue uint64, ullEndValue uint64, rlh uintptr, ulFl
 
 // CM_Detect_Resource_Conflict calls CFGMGR32!CM_Detect_Resource_Conflict.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_detect_resource_conflict
-func CM_Detect_Resource_Conflict(dnDevInst uint32, ResourceID uint32, ResourceData unsafe.Pointer, ResourceLen uint32, pbConflictDetected *foundation.BOOL, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Detect_Resource_Conflict.Addr(), uintptr(dnDevInst), uintptr(ResourceID), uintptr(unsafe.Pointer(ResourceData)), uintptr(ResourceLen), uintptr(unsafe.Pointer(pbConflictDetected)), uintptr(ulFlags))
+func CM_Detect_Resource_Conflict(dnDevInst uint32, ResourceID uint32, ResourceData []byte, pbConflictDetected *foundation.BOOL, ulFlags uint32) CONFIGRET {
+	var _ResourceData *byte
+	if len(ResourceData) > 0 {
+		_ResourceData = &ResourceData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Detect_Resource_Conflict.Addr(), uintptr(dnDevInst), uintptr(ResourceID), uintptr(unsafe.Pointer(_ResourceData)), uintptr(len(ResourceData)), uintptr(unsafe.Pointer(pbConflictDetected)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Detect_Resource_Conflict_Ex calls CFGMGR32!CM_Detect_Resource_Conflict_Ex.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_detect_resource_conflict_ex
-func CM_Detect_Resource_Conflict_Ex(dnDevInst uint32, ResourceID uint32, ResourceData unsafe.Pointer, ResourceLen uint32, pbConflictDetected *foundation.BOOL, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Detect_Resource_Conflict_Ex.Addr(), uintptr(dnDevInst), uintptr(ResourceID), uintptr(unsafe.Pointer(ResourceData)), uintptr(ResourceLen), uintptr(unsafe.Pointer(pbConflictDetected)), uintptr(ulFlags), uintptr(hMachine))
+func CM_Detect_Resource_Conflict_Ex(dnDevInst uint32, ResourceID uint32, ResourceData []byte, pbConflictDetected *foundation.BOOL, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	var _ResourceData *byte
+	if len(ResourceData) > 0 {
+		_ResourceData = &ResourceData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Detect_Resource_Conflict_Ex.Addr(), uintptr(dnDevInst), uintptr(ResourceID), uintptr(unsafe.Pointer(_ResourceData)), uintptr(len(ResourceData)), uintptr(unsafe.Pointer(pbConflictDetected)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1626,16 +1642,24 @@ func CM_Get_Parent_Ex(pdnDevInst *uint32, dnDevInst uint32, ulFlags uint32, hMac
 // CM_Get_Res_Des_Data calls CFGMGR32!CM_Get_Res_Des_Data.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_res_des_data
 // Minimum OS: windows5.0.
-func CM_Get_Res_Des_Data(rdResDes uintptr, Buffer unsafe.Pointer, BufferLen uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Res_Des_Data.Addr(), uintptr(rdResDes), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLen), uintptr(ulFlags))
+func CM_Get_Res_Des_Data(rdResDes uintptr, Buffer []byte, ulFlags uint32) CONFIGRET {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Get_Res_Des_Data.Addr(), uintptr(rdResDes), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Get_Res_Des_Data_Ex calls CFGMGR32!CM_Get_Res_Des_Data_Ex.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_get_res_des_data_ex
 // Minimum OS: windows5.0.
-func CM_Get_Res_Des_Data_Ex(rdResDes uintptr, Buffer unsafe.Pointer, BufferLen uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Get_Res_Des_Data_Ex.Addr(), uintptr(rdResDes), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLen), uintptr(ulFlags), uintptr(hMachine))
+func CM_Get_Res_Des_Data_Ex(rdResDes uintptr, Buffer []byte, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Get_Res_Des_Data_Ex.Addr(), uintptr(rdResDes), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1813,16 +1837,24 @@ func CM_Merge_Range_List(rlhOld1 uintptr, rlhOld2 uintptr, rlhNew uintptr, ulFla
 // CM_Modify_Res_Des calls CFGMGR32!CM_Modify_Res_Des.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_modify_res_des
 // Minimum OS: windows5.0.
-func CM_Modify_Res_Des(prdResDes *uintptr, rdResDes uintptr, ResourceID uint32, ResourceData unsafe.Pointer, ResourceLen uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Modify_Res_Des.Addr(), uintptr(unsafe.Pointer(prdResDes)), uintptr(rdResDes), uintptr(ResourceID), uintptr(unsafe.Pointer(ResourceData)), uintptr(ResourceLen), uintptr(ulFlags))
+func CM_Modify_Res_Des(prdResDes *uintptr, rdResDes uintptr, ResourceID uint32, ResourceData []byte, ulFlags uint32) CONFIGRET {
+	var _ResourceData *byte
+	if len(ResourceData) > 0 {
+		_ResourceData = &ResourceData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Modify_Res_Des.Addr(), uintptr(unsafe.Pointer(prdResDes)), uintptr(rdResDes), uintptr(ResourceID), uintptr(unsafe.Pointer(_ResourceData)), uintptr(len(ResourceData)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Modify_Res_Des_Ex calls CFGMGR32!CM_Modify_Res_Des_Ex.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_modify_res_des_ex
 // Minimum OS: windows5.0.
-func CM_Modify_Res_Des_Ex(prdResDes *uintptr, rdResDes uintptr, ResourceID uint32, ResourceData unsafe.Pointer, ResourceLen uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Modify_Res_Des_Ex.Addr(), uintptr(unsafe.Pointer(prdResDes)), uintptr(rdResDes), uintptr(ResourceID), uintptr(unsafe.Pointer(ResourceData)), uintptr(ResourceLen), uintptr(ulFlags), uintptr(hMachine))
+func CM_Modify_Res_Des_Ex(prdResDes *uintptr, rdResDes uintptr, ResourceID uint32, ResourceData []byte, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	var _ResourceData *byte
+	if len(ResourceData) > 0 {
+		_ResourceData = &ResourceData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Modify_Res_Des_Ex.Addr(), uintptr(unsafe.Pointer(prdResDes)), uintptr(rdResDes), uintptr(ResourceID), uintptr(unsafe.Pointer(_ResourceData)), uintptr(len(ResourceData)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -1959,15 +1991,23 @@ func CM_Query_And_Remove_SubTree_ExA(dnAncestor uint32, pVetoType *PNP_VETO_TYPE
 
 // CM_Query_Arbitrator_Free_Data calls CFGMGR32!CM_Query_Arbitrator_Free_Data.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_query_arbitrator_free_data
-func CM_Query_Arbitrator_Free_Data(pData unsafe.Pointer, DataLen uint32, dnDevInst uint32, ResourceID uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Query_Arbitrator_Free_Data.Addr(), uintptr(unsafe.Pointer(pData)), uintptr(DataLen), uintptr(dnDevInst), uintptr(ResourceID), uintptr(ulFlags))
+func CM_Query_Arbitrator_Free_Data(pData []byte, dnDevInst uint32, ResourceID uint32, ulFlags uint32) CONFIGRET {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Query_Arbitrator_Free_Data.Addr(), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(dnDevInst), uintptr(ResourceID), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Query_Arbitrator_Free_Data_Ex calls CFGMGR32!CM_Query_Arbitrator_Free_Data_Ex.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_query_arbitrator_free_data_ex
-func CM_Query_Arbitrator_Free_Data_Ex(pData unsafe.Pointer, DataLen uint32, dnDevInst uint32, ResourceID uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Query_Arbitrator_Free_Data_Ex.Addr(), uintptr(unsafe.Pointer(pData)), uintptr(DataLen), uintptr(dnDevInst), uintptr(ResourceID), uintptr(ulFlags), uintptr(hMachine))
+func CM_Query_Arbitrator_Free_Data_Ex(pData []byte, dnDevInst uint32, ResourceID uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Query_Arbitrator_Free_Data_Ex.Addr(), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(dnDevInst), uintptr(ResourceID), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2002,8 +2042,12 @@ func CM_Query_Remove_SubTree_Ex(dnAncestor uint32, ulFlags uint32, hMachine uint
 // CM_Query_Resource_Conflict_List calls CFGMGR32!CM_Query_Resource_Conflict_List.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_query_resource_conflict_list
 // Minimum OS: windows5.0.
-func CM_Query_Resource_Conflict_List(pclConflictList *uintptr, dnDevInst uint32, ResourceID CM_RESTYPE, ResourceData unsafe.Pointer, ResourceLen uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Query_Resource_Conflict_List.Addr(), uintptr(unsafe.Pointer(pclConflictList)), uintptr(dnDevInst), uintptr(ResourceID), uintptr(unsafe.Pointer(ResourceData)), uintptr(ResourceLen), uintptr(ulFlags), uintptr(hMachine))
+func CM_Query_Resource_Conflict_List(pclConflictList *uintptr, dnDevInst uint32, ResourceID CM_RESTYPE, ResourceData []byte, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	var _ResourceData *byte
+	if len(ResourceData) > 0 {
+		_ResourceData = &ResourceData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Query_Resource_Conflict_List.Addr(), uintptr(unsafe.Pointer(pclConflictList)), uintptr(dnDevInst), uintptr(ResourceID), uintptr(unsafe.Pointer(_ResourceData)), uintptr(len(ResourceData)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2152,31 +2196,47 @@ func CM_Run_Detection_Ex(ulFlags uint32, hMachine uintptr) CONFIGRET {
 // CM_Set_Class_PropertyW calls CFGMGR32!CM_Set_Class_PropertyW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_class_propertyw
 // Minimum OS: windows6.0.6000.
-func CM_Set_Class_PropertyW(ClassGUID *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_Class_PropertyW.Addr(), uintptr(unsafe.Pointer(ClassGUID)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(ulFlags))
+func CM_Set_Class_PropertyW(ClassGUID *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer []byte, ulFlags uint32) CONFIGRET {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Set_Class_PropertyW.Addr(), uintptr(unsafe.Pointer(ClassGUID)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Set_Class_Property_ExW calls CFGMGR32!CM_Set_Class_Property_ExW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_class_property_exw
 // Minimum OS: windows10.0.10240.
-func CM_Set_Class_Property_ExW(ClassGUID *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_Class_Property_ExW.Addr(), uintptr(unsafe.Pointer(ClassGUID)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(ulFlags), uintptr(hMachine))
+func CM_Set_Class_Property_ExW(ClassGUID *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer []byte, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Set_Class_Property_ExW.Addr(), uintptr(unsafe.Pointer(ClassGUID)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
 // CM_Set_Class_Registry_Property calls CFGMGR32!CM_Set_Class_Registry_PropertyW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_class_registry_propertyw
 // Minimum OS: windows5.0.
-func CM_Set_Class_Registry_Property(ClassGuid *win32.GUID, ulProperty uint32, Buffer unsafe.Pointer, ulLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_Class_Registry_Property.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(ulProperty), uintptr(unsafe.Pointer(Buffer)), uintptr(ulLength), uintptr(ulFlags), uintptr(hMachine))
+func CM_Set_Class_Registry_Property(ClassGuid *win32.GUID, ulProperty uint32, Buffer []byte, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Set_Class_Registry_Property.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(ulProperty), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
 // CM_Set_Class_Registry_PropertyA calls CFGMGR32!CM_Set_Class_Registry_PropertyA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_class_registry_propertya
-func CM_Set_Class_Registry_PropertyA(ClassGuid *win32.GUID, ulProperty uint32, Buffer unsafe.Pointer, ulLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_Class_Registry_PropertyA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(ulProperty), uintptr(unsafe.Pointer(Buffer)), uintptr(ulLength), uintptr(ulFlags), uintptr(hMachine))
+func CM_Set_Class_Registry_PropertyA(ClassGuid *win32.GUID, ulProperty uint32, Buffer []byte, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Set_Class_Registry_PropertyA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(ulProperty), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -2199,63 +2259,95 @@ func CM_Set_DevNode_Problem_Ex(dnDevInst uint32, ulProblem uint32, ulFlags uint3
 // CM_Set_DevNode_PropertyW calls CFGMGR32!CM_Set_DevNode_PropertyW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_devnode_propertyw
 // Minimum OS: windows6.0.6000.
-func CM_Set_DevNode_PropertyW(dnDevInst uint32, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_PropertyW.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(ulFlags))
+func CM_Set_DevNode_PropertyW(dnDevInst uint32, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer []byte, ulFlags uint32) CONFIGRET {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_PropertyW.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Set_DevNode_Property_ExW calls CFGMGR32!CM_Set_DevNode_Property_ExW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_devnode_property_exw
 // Minimum OS: windows10.0.10240.
-func CM_Set_DevNode_Property_ExW(dnDevInst uint32, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_Property_ExW.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(ulFlags), uintptr(hMachine))
+func CM_Set_DevNode_Property_ExW(dnDevInst uint32, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer []byte, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_Property_ExW.Addr(), uintptr(dnDevInst), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
 // CM_Set_DevNode_Registry_Property calls CFGMGR32!CM_Set_DevNode_Registry_PropertyW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_devnode_registry_propertyw
 // Minimum OS: windows5.0.
-func CM_Set_DevNode_Registry_Property(dnDevInst uint32, ulProperty uint32, Buffer unsafe.Pointer, ulLength uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_Registry_Property.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(Buffer)), uintptr(ulLength), uintptr(ulFlags))
+func CM_Set_DevNode_Registry_Property(dnDevInst uint32, ulProperty uint32, Buffer []byte, ulFlags uint32) CONFIGRET {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_Registry_Property.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Set_DevNode_Registry_PropertyA calls CFGMGR32!CM_Set_DevNode_Registry_PropertyA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_devnode_registry_propertya
-func CM_Set_DevNode_Registry_PropertyA(dnDevInst uint32, ulProperty uint32, Buffer unsafe.Pointer, ulLength uint32, ulFlags uint32) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_Registry_PropertyA.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(Buffer)), uintptr(ulLength), uintptr(ulFlags))
+func CM_Set_DevNode_Registry_PropertyA(dnDevInst uint32, ulProperty uint32, Buffer []byte, ulFlags uint32) CONFIGRET {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_Registry_PropertyA.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Set_DevNode_Registry_Property_Ex calls CFGMGR32!CM_Set_DevNode_Registry_Property_ExW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_devnode_registry_property_exw
-func CM_Set_DevNode_Registry_Property_Ex(dnDevInst uint32, ulProperty uint32, Buffer unsafe.Pointer, ulLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_Registry_Property_Ex.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(Buffer)), uintptr(ulLength), uintptr(ulFlags), uintptr(hMachine))
+func CM_Set_DevNode_Registry_Property_Ex(dnDevInst uint32, ulProperty uint32, Buffer []byte, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_Registry_Property_Ex.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
 // CM_Set_DevNode_Registry_Property_ExA calls CFGMGR32!CM_Set_DevNode_Registry_Property_ExA.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_devnode_registry_property_exa
-func CM_Set_DevNode_Registry_Property_ExA(dnDevInst uint32, ulProperty uint32, Buffer unsafe.Pointer, ulLength uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
-	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_Registry_Property_ExA.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(Buffer)), uintptr(ulLength), uintptr(ulFlags), uintptr(hMachine))
+func CM_Set_DevNode_Registry_Property_ExA(dnDevInst uint32, ulProperty uint32, Buffer []byte, ulFlags uint32, hMachine uintptr) CONFIGRET {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Set_DevNode_Registry_Property_ExA.Addr(), uintptr(dnDevInst), uintptr(ulProperty), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
 // CM_Set_Device_Interface_PropertyW calls CFGMGR32!CM_Set_Device_Interface_PropertyW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_device_interface_propertyw
 // Minimum OS: windows6.0.6000.
-func CM_Set_Device_Interface_PropertyW(pszDeviceInterface string, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, ulFlags uint32) CONFIGRET {
+func CM_Set_Device_Interface_PropertyW(pszDeviceInterface string, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer []byte, ulFlags uint32) CONFIGRET {
 	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
-	r1, _, _ := syscall.SyscallN(procCM_Set_Device_Interface_PropertyW.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(ulFlags))
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Set_Device_Interface_PropertyW.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(ulFlags))
 	return CONFIGRET(r1)
 }
 
 // CM_Set_Device_Interface_Property_ExW calls CFGMGR32!CM_Set_Device_Interface_Property_ExW.
 // https://learn.microsoft.com/windows/win32/api/cfgmgr32/nf-cfgmgr32-cm_set_device_interface_property_exw
 // Minimum OS: windows10.0.10240.
-func CM_Set_Device_Interface_Property_ExW(pszDeviceInterface string, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, ulFlags uint32, hMachine uintptr) CONFIGRET {
+func CM_Set_Device_Interface_Property_ExW(pszDeviceInterface string, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer []byte, ulFlags uint32, hMachine uintptr) CONFIGRET {
 	_pszDeviceInterface := win32.UTF16Ptr(pszDeviceInterface)
-	r1, _, _ := syscall.SyscallN(procCM_Set_Device_Interface_Property_ExW.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(ulFlags), uintptr(hMachine))
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCM_Set_Device_Interface_Property_ExW.Addr(), uintptr(unsafe.Pointer(_pszDeviceInterface)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(ulFlags), uintptr(hMachine))
 	return CONFIGRET(r1)
 }
 
@@ -3579,9 +3671,13 @@ func SetupDiGetClassInstallParamsA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DE
 // SetupDiGetClassPropertyExW calls SETUPAPI!SetupDiGetClassPropertyExW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclasspropertyexw
 // Minimum OS: windows6.0.6000.
-func SetupDiGetClassPropertyExW(ClassGuid *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType *devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32, Flags uint32, MachineName string) error {
+func SetupDiGetClassPropertyExW(ClassGuid *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType *devicesproperties.DEVPROPTYPE, PropertyBuffer []byte, RequiredSize *uint32, Flags uint32, MachineName string) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
 	_MachineName := win32.UTF16Ptr(MachineName)
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassPropertyExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(Flags), uintptr(unsafe.Pointer(_MachineName)), 0)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassPropertyExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(unsafe.Pointer(RequiredSize)), uintptr(Flags), uintptr(unsafe.Pointer(_MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3622,8 +3718,12 @@ func SetupDiGetClassPropertyKeysExW(ClassGuid *win32.GUID, PropertyKeyArray []fo
 // SetupDiGetClassPropertyW calls SETUPAPI!SetupDiGetClassPropertyW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclasspropertyw
 // Minimum OS: windows6.0.6000.
-func SetupDiGetClassPropertyW(ClassGuid *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType *devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassPropertyW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(Flags))
+func SetupDiGetClassPropertyW(ClassGuid *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType *devicesproperties.DEVPROPTYPE, PropertyBuffer []byte, RequiredSize *uint32, Flags uint32) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassPropertyW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(unsafe.Pointer(RequiredSize)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3633,9 +3733,13 @@ func SetupDiGetClassPropertyW(ClassGuid *win32.GUID, PropertyKey *foundation.DEV
 // SetupDiGetClassRegistryProperty calls SETUPAPI!SetupDiGetClassRegistryPropertyW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassregistrypropertyw
 // Minimum OS: windows5.1.2600.
-func SetupDiGetClassRegistryProperty(ClassGuid *win32.GUID, Property uint32, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32, MachineName string) error {
+func SetupDiGetClassRegistryProperty(ClassGuid *win32.GUID, Property uint32, PropertyRegDataType *uint32, PropertyBuffer []byte, RequiredSize *uint32, MachineName string) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
 	_MachineName := win32.UTF16Ptr(MachineName)
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassRegistryProperty.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(_MachineName)), 0)
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassRegistryProperty.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(_MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3645,8 +3749,12 @@ func SetupDiGetClassRegistryProperty(ClassGuid *win32.GUID, Property uint32, Pro
 // SetupDiGetClassRegistryPropertyA calls SETUPAPI!SetupDiGetClassRegistryPropertyA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetclassregistrypropertya
 // Minimum OS: windows5.1.2600.
-func SetupDiGetClassRegistryPropertyA(ClassGuid *win32.GUID, Property uint32, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32, MachineName foundation.PSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassRegistryPropertyA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), 0)
+func SetupDiGetClassRegistryPropertyA(ClassGuid *win32.GUID, Property uint32, PropertyRegDataType *uint32, PropertyBuffer []byte, RequiredSize *uint32, MachineName foundation.PSTR) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetClassRegistryPropertyA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(unsafe.Pointer(RequiredSize)), uintptr(unsafe.Pointer(MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3656,9 +3764,13 @@ func SetupDiGetClassRegistryPropertyA(ClassGuid *win32.GUID, Property uint32, Pr
 // SetupDiGetCustomDeviceProperty calls SETUPAPI!SetupDiGetCustomDevicePropertyW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetcustomdevicepropertyw
 // Minimum OS: windows5.1.2600.
-func SetupDiGetCustomDeviceProperty(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, CustomPropertyName string, Flags uint32, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32) error {
+func SetupDiGetCustomDeviceProperty(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, CustomPropertyName string, Flags uint32, PropertyRegDataType *uint32, PropertyBuffer []byte, RequiredSize *uint32) error {
 	_CustomPropertyName := win32.UTF16Ptr(CustomPropertyName)
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetCustomDeviceProperty.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(_CustomPropertyName)), uintptr(Flags), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetCustomDeviceProperty.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(_CustomPropertyName)), uintptr(Flags), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3668,8 +3780,12 @@ func SetupDiGetCustomDeviceProperty(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_D
 // SetupDiGetCustomDevicePropertyA calls SETUPAPI!SetupDiGetCustomDevicePropertyA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetcustomdevicepropertya
 // Minimum OS: windows5.1.2600.
-func SetupDiGetCustomDevicePropertyA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, CustomPropertyName foundation.PSTR, Flags uint32, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetCustomDevicePropertyA.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(CustomPropertyName)), uintptr(Flags), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupDiGetCustomDevicePropertyA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, CustomPropertyName foundation.PSTR, Flags uint32, PropertyRegDataType *uint32, PropertyBuffer []byte, RequiredSize *uint32) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetCustomDevicePropertyA.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(CustomPropertyName)), uintptr(Flags), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3804,8 +3920,12 @@ func SetupDiGetDeviceInterfacePropertyKeys(DeviceInfoSet HDEVINFO, DeviceInterfa
 // SetupDiGetDeviceInterfacePropertyW calls SETUPAPI!SetupDiGetDeviceInterfacePropertyW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceinterfacepropertyw
 // Minimum OS: windows6.0.6000.
-func SetupDiGetDeviceInterfacePropertyW(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, PropertyKey *foundation.DEVPROPKEY, PropertyType *devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInterfacePropertyW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(Flags))
+func SetupDiGetDeviceInterfacePropertyW(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, PropertyKey *foundation.DEVPROPKEY, PropertyType *devicesproperties.DEVPROPTYPE, PropertyBuffer []byte, RequiredSize *uint32, Flags uint32) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceInterfacePropertyW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(unsafe.Pointer(RequiredSize)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3830,8 +3950,12 @@ func SetupDiGetDevicePropertyKeys(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEV
 // SetupDiGetDevicePropertyW calls SETUPAPI!SetupDiGetDevicePropertyW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdevicepropertyw
 // Minimum OS: windows6.0.6000.
-func SetupDiGetDevicePropertyW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, PropertyKey *foundation.DEVPROPKEY, PropertyType *devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDevicePropertyW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)), uintptr(Flags))
+func SetupDiGetDevicePropertyW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, PropertyKey *foundation.DEVPROPKEY, PropertyType *devicesproperties.DEVPROPTYPE, PropertyBuffer []byte, RequiredSize *uint32, Flags uint32) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDevicePropertyW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(unsafe.Pointer(PropertyType)), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(unsafe.Pointer(RequiredSize)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3841,8 +3965,12 @@ func SetupDiGetDevicePropertyW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINF
 // SetupDiGetDeviceRegistryProperty calls SETUPAPI!SetupDiGetDeviceRegistryPropertyW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceregistrypropertyw
 // Minimum OS: windows5.0.
-func SetupDiGetDeviceRegistryProperty(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Property SETUP_DI_REGISTRY_PROPERTY, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceRegistryProperty.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Property), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupDiGetDeviceRegistryProperty(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Property SETUP_DI_REGISTRY_PROPERTY, PropertyRegDataType *uint32, PropertyBuffer []byte, RequiredSize *uint32) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceRegistryProperty.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Property), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3852,8 +3980,12 @@ func SetupDiGetDeviceRegistryProperty(DeviceInfoSet HDEVINFO, DeviceInfoData *SP
 // SetupDiGetDeviceRegistryPropertyA calls SETUPAPI!SetupDiGetDeviceRegistryPropertyA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdigetdeviceregistrypropertya
 // Minimum OS: windows5.0.
-func SetupDiGetDeviceRegistryPropertyA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Property SETUP_DI_REGISTRY_PROPERTY, PropertyRegDataType *uint32, PropertyBuffer *byte, PropertyBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceRegistryPropertyA.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Property), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupDiGetDeviceRegistryPropertyA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Property SETUP_DI_REGISTRY_PROPERTY, PropertyRegDataType *uint32, PropertyBuffer []byte, RequiredSize *uint32) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiGetDeviceRegistryPropertyA.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Property), uintptr(unsafe.Pointer(PropertyRegDataType)), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4374,9 +4506,13 @@ func SetupDiSetClassInstallParamsA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DE
 // SetupDiSetClassPropertyExW calls SETUPAPI!SetupDiSetClassPropertyExW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetclasspropertyexw
 // Minimum OS: windows6.0.6000.
-func SetupDiSetClassPropertyExW(ClassGuid *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, Flags uint32, MachineName string) error {
+func SetupDiSetClassPropertyExW(ClassGuid *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer []byte, Flags uint32, MachineName string) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
 	_MachineName := win32.UTF16Ptr(MachineName)
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassPropertyExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(Flags), uintptr(unsafe.Pointer(_MachineName)), 0)
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassPropertyExW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(Flags), uintptr(unsafe.Pointer(_MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4386,8 +4522,12 @@ func SetupDiSetClassPropertyExW(ClassGuid *win32.GUID, PropertyKey *foundation.D
 // SetupDiSetClassPropertyW calls SETUPAPI!SetupDiSetClassPropertyW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetclasspropertyw
 // Minimum OS: windows6.0.6000.
-func SetupDiSetClassPropertyW(ClassGuid *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassPropertyW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(Flags))
+func SetupDiSetClassPropertyW(ClassGuid *win32.GUID, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer []byte, Flags uint32) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassPropertyW.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4397,9 +4537,13 @@ func SetupDiSetClassPropertyW(ClassGuid *win32.GUID, PropertyKey *foundation.DEV
 // SetupDiSetClassRegistryProperty calls SETUPAPI!SetupDiSetClassRegistryPropertyW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetclassregistrypropertyw
 // Minimum OS: windows5.1.2600.
-func SetupDiSetClassRegistryProperty(ClassGuid *win32.GUID, Property uint32, PropertyBuffer *byte, PropertyBufferSize uint32, MachineName string) error {
+func SetupDiSetClassRegistryProperty(ClassGuid *win32.GUID, Property uint32, PropertyBuffer []byte, MachineName string) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
 	_MachineName := win32.UTF16Ptr(MachineName)
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassRegistryProperty.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(_MachineName)), 0)
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassRegistryProperty.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(unsafe.Pointer(_MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4409,8 +4553,12 @@ func SetupDiSetClassRegistryProperty(ClassGuid *win32.GUID, Property uint32, Pro
 // SetupDiSetClassRegistryPropertyA calls SETUPAPI!SetupDiSetClassRegistryPropertyA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetclassregistrypropertya
 // Minimum OS: windows5.1.2600.
-func SetupDiSetClassRegistryPropertyA(ClassGuid *win32.GUID, Property uint32, PropertyBuffer *byte, PropertyBufferSize uint32, MachineName foundation.PSTR) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassRegistryPropertyA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(unsafe.Pointer(MachineName)), 0)
+func SetupDiSetClassRegistryPropertyA(ClassGuid *win32.GUID, Property uint32, PropertyBuffer []byte, MachineName foundation.PSTR) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetClassRegistryPropertyA.Addr(), uintptr(unsafe.Pointer(ClassGuid)), uintptr(Property), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(unsafe.Pointer(MachineName)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4453,8 +4601,12 @@ func SetupDiSetDeviceInterfaceDefault(DeviceInfoSet HDEVINFO, DeviceInterfaceDat
 // SetupDiSetDeviceInterfacePropertyW calls SETUPAPI!SetupDiSetDeviceInterfacePropertyW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetdeviceinterfacepropertyw
 // Minimum OS: windows6.0.6000.
-func SetupDiSetDeviceInterfacePropertyW(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetDeviceInterfacePropertyW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(Flags))
+func SetupDiSetDeviceInterfacePropertyW(DeviceInfoSet HDEVINFO, DeviceInterfaceData *SP_DEVICE_INTERFACE_DATA, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer []byte, Flags uint32) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetDeviceInterfacePropertyW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInterfaceData)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4464,8 +4616,12 @@ func SetupDiSetDeviceInterfacePropertyW(DeviceInfoSet HDEVINFO, DeviceInterfaceD
 // SetupDiSetDevicePropertyW calls SETUPAPI!SetupDiSetDevicePropertyW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetdevicepropertyw
 // Minimum OS: windows6.0.6000.
-func SetupDiSetDevicePropertyW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer *byte, PropertyBufferSize uint32, Flags uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetDevicePropertyW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize), uintptr(Flags))
+func SetupDiSetDevicePropertyW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, PropertyKey *foundation.DEVPROPKEY, PropertyType devicesproperties.DEVPROPTYPE, PropertyBuffer []byte, Flags uint32) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetDevicePropertyW.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(unsafe.Pointer(PropertyKey)), uintptr(PropertyType), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(Flags))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4475,8 +4631,12 @@ func SetupDiSetDevicePropertyW(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINF
 // SetupDiSetDeviceRegistryProperty calls SETUPAPI!SetupDiSetDeviceRegistryPropertyW.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetdeviceregistrypropertyw
 // Minimum OS: windows5.0.
-func SetupDiSetDeviceRegistryProperty(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Property SETUP_DI_REGISTRY_PROPERTY, PropertyBuffer *byte, PropertyBufferSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetDeviceRegistryProperty.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Property), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize))
+func SetupDiSetDeviceRegistryProperty(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Property SETUP_DI_REGISTRY_PROPERTY, PropertyBuffer []byte) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetDeviceRegistryProperty.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Property), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4486,8 +4646,12 @@ func SetupDiSetDeviceRegistryProperty(DeviceInfoSet HDEVINFO, DeviceInfoData *SP
 // SetupDiSetDeviceRegistryPropertyA calls SETUPAPI!SetupDiSetDeviceRegistryPropertyA.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupdisetdeviceregistrypropertya
 // Minimum OS: windows5.0.
-func SetupDiSetDeviceRegistryPropertyA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Property SETUP_DI_REGISTRY_PROPERTY, PropertyBuffer *byte, PropertyBufferSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupDiSetDeviceRegistryPropertyA.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Property), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSize))
+func SetupDiSetDeviceRegistryPropertyA(DeviceInfoSet HDEVINFO, DeviceInfoData *SP_DEVINFO_DATA, Property SETUP_DI_REGISTRY_PROPERTY, PropertyBuffer []byte) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupDiSetDeviceRegistryPropertyA.Addr(), uintptr(DeviceInfoSet), uintptr(unsafe.Pointer(DeviceInfoData)), uintptr(Property), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -4709,8 +4873,12 @@ func SetupGetBackupInformationA(QueueHandle unsafe.Pointer, BackupParams *SP_BAC
 // SetupGetBinaryField calls SETUPAPI!SetupGetBinaryField.
 // https://learn.microsoft.com/windows/win32/api/setupapi/nf-setupapi-setupgetbinaryfield
 // Minimum OS: windows5.1.2600.
-func SetupGetBinaryField(Context *INFCONTEXT, FieldIndex uint32, ReturnBuffer *byte, ReturnBufferSize uint32, RequiredSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetupGetBinaryField.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(FieldIndex), uintptr(unsafe.Pointer(ReturnBuffer)), uintptr(ReturnBufferSize), uintptr(unsafe.Pointer(RequiredSize)))
+func SetupGetBinaryField(Context *INFCONTEXT, FieldIndex uint32, ReturnBuffer []byte, RequiredSize *uint32) error {
+	var _ReturnBuffer *byte
+	if len(ReturnBuffer) > 0 {
+		_ReturnBuffer = &ReturnBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetupGetBinaryField.Addr(), uintptr(unsafe.Pointer(Context)), uintptr(FieldIndex), uintptr(unsafe.Pointer(_ReturnBuffer)), uintptr(len(ReturnBuffer)), uintptr(unsafe.Pointer(RequiredSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

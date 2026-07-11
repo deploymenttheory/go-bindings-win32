@@ -56,8 +56,12 @@ func PssFreeSnapshot(ProcessHandle foundation.HANDLE, SnapshotHandle HPSS) uint3
 // PssQuerySnapshot calls KERNEL32!PssQuerySnapshot.
 // https://learn.microsoft.com/windows/win32/api/processsnapshot/nf-processsnapshot-pssquerysnapshot
 // Minimum OS: windows8.1.
-func PssQuerySnapshot(SnapshotHandle HPSS, InformationClass PSS_QUERY_INFORMATION_CLASS, Buffer unsafe.Pointer, BufferLength uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPssQuerySnapshot.Addr(), uintptr(SnapshotHandle), uintptr(InformationClass), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength))
+func PssQuerySnapshot(SnapshotHandle HPSS, InformationClass PSS_QUERY_INFORMATION_CLASS, Buffer []byte) uint32 {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPssQuerySnapshot.Addr(), uintptr(SnapshotHandle), uintptr(InformationClass), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return uint32(r1)
 }
 

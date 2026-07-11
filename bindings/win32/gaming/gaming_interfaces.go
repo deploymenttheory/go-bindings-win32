@@ -213,7 +213,7 @@ func (self *IXblIdpAuthManager) GetSandbox(sandbox *foundation.PWSTR) error {
 }
 
 // GetTokenAndSignatureWithTokenResult dispatches through IXblIdpAuthManager's vtable slot 8.
-func (self *IXblIdpAuthManager) GetTokenAndSignatureWithTokenResult(msaAccountId string, appSid string, msaTarget string, msaPolicy string, httpMethod string, uri string, headers string, body *byte, bodySize uint32, forceRefresh bool, result **IXblIdpAuthTokenResult) error {
+func (self *IXblIdpAuthManager) GetTokenAndSignatureWithTokenResult(msaAccountId string, appSid string, msaTarget string, msaPolicy string, httpMethod string, uri string, headers string, body []byte, forceRefresh bool, result **IXblIdpAuthTokenResult) error {
 	_msaAccountId := win32.UTF16Ptr(msaAccountId)
 	_appSid := win32.UTF16Ptr(appSid)
 	_msaTarget := win32.UTF16Ptr(msaTarget)
@@ -221,8 +221,12 @@ func (self *IXblIdpAuthManager) GetTokenAndSignatureWithTokenResult(msaAccountId
 	_httpMethod := win32.UTF16Ptr(httpMethod)
 	_uri := win32.UTF16Ptr(uri)
 	_headers := win32.UTF16Ptr(headers)
+	var _body *byte
+	if len(body) > 0 {
+		_body = &body[0]
+	}
 	_forceRefresh := win32.Bool32(forceRefresh)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_msaAccountId)), uintptr(unsafe.Pointer(_appSid)), uintptr(unsafe.Pointer(_msaTarget)), uintptr(unsafe.Pointer(_msaPolicy)), uintptr(unsafe.Pointer(_httpMethod)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(_headers)), uintptr(unsafe.Pointer(body)), uintptr(bodySize), uintptr(_forceRefresh), uintptr(unsafe.Pointer(result)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_msaAccountId)), uintptr(unsafe.Pointer(_appSid)), uintptr(unsafe.Pointer(_msaTarget)), uintptr(unsafe.Pointer(_msaPolicy)), uintptr(unsafe.Pointer(_httpMethod)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(_headers)), uintptr(unsafe.Pointer(_body)), uintptr(len(body)), uintptr(_forceRefresh), uintptr(unsafe.Pointer(result)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -235,15 +239,19 @@ type IXblIdpAuthManager2 struct {
 var IID_IXblIdpAuthManager2 = win32.GUID{Data1: 0xbf8c0950, Data2: 0x8389, Data3: 0x43dd, Data4: [8]byte{0x9a, 0x76, 0xa1, 0x97, 0x28, 0xec, 0x5d, 0xc5}}
 
 // GetUserlessTokenAndSignatureWithTokenResult dispatches through IXblIdpAuthManager2's vtable slot 3.
-func (self *IXblIdpAuthManager2) GetUserlessTokenAndSignatureWithTokenResult(appSid string, msaTarget string, msaPolicy string, httpMethod string, uri string, headers string, body *byte, bodySize uint32, forceRefresh bool, result **IXblIdpAuthTokenResult) error {
+func (self *IXblIdpAuthManager2) GetUserlessTokenAndSignatureWithTokenResult(appSid string, msaTarget string, msaPolicy string, httpMethod string, uri string, headers string, body []byte, forceRefresh bool, result **IXblIdpAuthTokenResult) error {
 	_appSid := win32.UTF16Ptr(appSid)
 	_msaTarget := win32.UTF16Ptr(msaTarget)
 	_msaPolicy := win32.UTF16Ptr(msaPolicy)
 	_httpMethod := win32.UTF16Ptr(httpMethod)
 	_uri := win32.UTF16Ptr(uri)
 	_headers := win32.UTF16Ptr(headers)
+	var _body *byte
+	if len(body) > 0 {
+		_body = &body[0]
+	}
 	_forceRefresh := win32.Bool32(forceRefresh)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_appSid)), uintptr(unsafe.Pointer(_msaTarget)), uintptr(unsafe.Pointer(_msaPolicy)), uintptr(unsafe.Pointer(_httpMethod)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(_headers)), uintptr(unsafe.Pointer(body)), uintptr(bodySize), uintptr(_forceRefresh), uintptr(unsafe.Pointer(result)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_appSid)), uintptr(unsafe.Pointer(_msaTarget)), uintptr(unsafe.Pointer(_msaPolicy)), uintptr(unsafe.Pointer(_httpMethod)), uintptr(unsafe.Pointer(_uri)), uintptr(unsafe.Pointer(_headers)), uintptr(unsafe.Pointer(_body)), uintptr(len(body)), uintptr(_forceRefresh), uintptr(unsafe.Pointer(result)))
 	return win32.HRESULTError(int32(r1))
 }
 

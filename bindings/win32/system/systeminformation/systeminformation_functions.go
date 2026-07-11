@@ -100,8 +100,12 @@ func DnsHostnameToComputerNameExW(Hostname string, ComputerName foundation.PWSTR
 // EnumSystemFirmwareTables calls KERNEL32!EnumSystemFirmwareTables.
 // https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-enumsystemfirmwaretables
 // Minimum OS: windows6.0.6000.
-func EnumSystemFirmwareTables(FirmwareTableProviderSignature FIRMWARE_TABLE_PROVIDER, pFirmwareTableEnumBuffer *byte, BufferSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procEnumSystemFirmwareTables.Addr(), uintptr(FirmwareTableProviderSignature), uintptr(unsafe.Pointer(pFirmwareTableEnumBuffer)), uintptr(BufferSize))
+func EnumSystemFirmwareTables(FirmwareTableProviderSignature FIRMWARE_TABLE_PROVIDER, pFirmwareTableEnumBuffer []byte) (uint32, error) {
+	var _pFirmwareTableEnumBuffer *byte
+	if len(pFirmwareTableEnumBuffer) > 0 {
+		_pFirmwareTableEnumBuffer = &pFirmwareTableEnumBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procEnumSystemFirmwareTables.Addr(), uintptr(FirmwareTableProviderSignature), uintptr(unsafe.Pointer(_pFirmwareTableEnumBuffer)), uintptr(len(pFirmwareTableEnumBuffer)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}
@@ -279,8 +283,12 @@ func GetSystemDirectoryA(lpBuffer foundation.PSTR, uSize uint32) (uint32, error)
 // GetSystemFirmwareTable calls KERNEL32!GetSystemFirmwareTable.
 // https://learn.microsoft.com/windows/win32/api/sysinfoapi/nf-sysinfoapi-getsystemfirmwaretable
 // Minimum OS: windows6.0.6000.
-func GetSystemFirmwareTable(FirmwareTableProviderSignature FIRMWARE_TABLE_PROVIDER, FirmwareTableID uint32, pFirmwareTableBuffer *byte, BufferSize uint32) (uint32, error) {
-	r1, _, e1 := syscall.SyscallN(procGetSystemFirmwareTable.Addr(), uintptr(FirmwareTableProviderSignature), uintptr(FirmwareTableID), uintptr(unsafe.Pointer(pFirmwareTableBuffer)), uintptr(BufferSize))
+func GetSystemFirmwareTable(FirmwareTableProviderSignature FIRMWARE_TABLE_PROVIDER, FirmwareTableID uint32, pFirmwareTableBuffer []byte) (uint32, error) {
+	var _pFirmwareTableBuffer *byte
+	if len(pFirmwareTableBuffer) > 0 {
+		_pFirmwareTableBuffer = &pFirmwareTableBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetSystemFirmwareTable.Addr(), uintptr(FirmwareTableProviderSignature), uintptr(FirmwareTableID), uintptr(unsafe.Pointer(_pFirmwareTableBuffer)), uintptr(len(pFirmwareTableBuffer)))
 	if e1 != 0 {
 		return uint32(r1), e1
 	}

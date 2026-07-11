@@ -1480,9 +1480,13 @@ func (self *IRoSimpleMetaDataBuilder) SetInterfaceGroupSimpleDefault(name string
 }
 
 // SetInterfaceGroupParameterizedDefault dispatches through IRoSimpleMetaDataBuilder's vtable slot 3.
-func (self *IRoSimpleMetaDataBuilder) SetInterfaceGroupParameterizedDefault(name string, elementCount uint32, defaultInterfaceNameElements *foundation.PWSTR) error {
+func (self *IRoSimpleMetaDataBuilder) SetInterfaceGroupParameterizedDefault(name string, defaultInterfaceNameElements []foundation.PWSTR) error {
 	_name := win32.UTF16Ptr(name)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(elementCount), uintptr(unsafe.Pointer(defaultInterfaceNameElements)))
+	var _defaultInterfaceNameElements *foundation.PWSTR
+	if len(defaultInterfaceNameElements) > 0 {
+		_defaultInterfaceNameElements = &defaultInterfaceNameElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(len(defaultInterfaceNameElements)), uintptr(unsafe.Pointer(_defaultInterfaceNameElements)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1495,16 +1499,24 @@ func (self *IRoSimpleMetaDataBuilder) SetRuntimeClassSimpleDefault(name string, 
 }
 
 // SetRuntimeClassParameterizedDefault dispatches through IRoSimpleMetaDataBuilder's vtable slot 5.
-func (self *IRoSimpleMetaDataBuilder) SetRuntimeClassParameterizedDefault(name string, elementCount uint32, defaultInterfaceNameElements *foundation.PWSTR) error {
+func (self *IRoSimpleMetaDataBuilder) SetRuntimeClassParameterizedDefault(name string, defaultInterfaceNameElements []foundation.PWSTR) error {
 	_name := win32.UTF16Ptr(name)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(elementCount), uintptr(unsafe.Pointer(defaultInterfaceNameElements)))
+	var _defaultInterfaceNameElements *foundation.PWSTR
+	if len(defaultInterfaceNameElements) > 0 {
+		_defaultInterfaceNameElements = &defaultInterfaceNameElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(len(defaultInterfaceNameElements)), uintptr(unsafe.Pointer(_defaultInterfaceNameElements)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetStruct dispatches through IRoSimpleMetaDataBuilder's vtable slot 6.
-func (self *IRoSimpleMetaDataBuilder) SetStruct(name string, numFields uint32, fieldTypeNames *foundation.PWSTR) error {
+func (self *IRoSimpleMetaDataBuilder) SetStruct(name string, fieldTypeNames []foundation.PWSTR) error {
 	_name := win32.UTF16Ptr(name)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(numFields), uintptr(unsafe.Pointer(fieldTypeNames)))
+	var _fieldTypeNames *foundation.PWSTR
+	if len(fieldTypeNames) > 0 {
+		_fieldTypeNames = &fieldTypeNames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_name)), uintptr(len(fieldTypeNames)), uintptr(unsafe.Pointer(_fieldTypeNames)))
 	return win32.HRESULTError(int32(r1))
 }
 

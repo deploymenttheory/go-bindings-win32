@@ -37,15 +37,23 @@ func D3D12CreateDevice(pAdapter *systemcom.IUnknown, MinimumFeatureLevel graphic
 
 // D3D12CreateRootSignatureDeserializer calls d3d12!D3D12CreateRootSignatureDeserializer.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12createrootsignaturedeserializer
-func D3D12CreateRootSignatureDeserializer(pSrcData unsafe.Pointer, SrcDataSizeInBytes uintptr, pRootSignatureDeserializerInterface *win32.GUID, ppRootSignatureDeserializer *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(procD3D12CreateRootSignatureDeserializer.Addr(), uintptr(unsafe.Pointer(pSrcData)), uintptr(SrcDataSizeInBytes), uintptr(unsafe.Pointer(pRootSignatureDeserializerInterface)), uintptr(unsafe.Pointer(ppRootSignatureDeserializer)))
+func D3D12CreateRootSignatureDeserializer(pSrcData []byte, pRootSignatureDeserializerInterface *win32.GUID, ppRootSignatureDeserializer *unsafe.Pointer) error {
+	var _pSrcData *byte
+	if len(pSrcData) > 0 {
+		_pSrcData = &pSrcData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procD3D12CreateRootSignatureDeserializer.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(unsafe.Pointer(pRootSignatureDeserializerInterface)), uintptr(unsafe.Pointer(ppRootSignatureDeserializer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // D3D12CreateVersionedRootSignatureDeserializer calls d3d12!D3D12CreateVersionedRootSignatureDeserializer.
 // https://learn.microsoft.com/windows/win32/api/d3d12/nf-d3d12-d3d12createversionedrootsignaturedeserializer
-func D3D12CreateVersionedRootSignatureDeserializer(pSrcData unsafe.Pointer, SrcDataSizeInBytes uintptr, pRootSignatureDeserializerInterface *win32.GUID, ppRootSignatureDeserializer *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(procD3D12CreateVersionedRootSignatureDeserializer.Addr(), uintptr(unsafe.Pointer(pSrcData)), uintptr(SrcDataSizeInBytes), uintptr(unsafe.Pointer(pRootSignatureDeserializerInterface)), uintptr(unsafe.Pointer(ppRootSignatureDeserializer)))
+func D3D12CreateVersionedRootSignatureDeserializer(pSrcData []byte, pRootSignatureDeserializerInterface *win32.GUID, ppRootSignatureDeserializer *unsafe.Pointer) error {
+	var _pSrcData *byte
+	if len(pSrcData) > 0 {
+		_pSrcData = &pSrcData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procD3D12CreateVersionedRootSignatureDeserializer.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(unsafe.Pointer(pRootSignatureDeserializerInterface)), uintptr(unsafe.Pointer(ppRootSignatureDeserializer)))
 	return win32.HRESULTError(int32(r1))
 }
 

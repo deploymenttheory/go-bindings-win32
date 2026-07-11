@@ -117,6 +117,7 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 	for i := range method.Params {
 		resolvedParams[i] = g.mapper.GoType(&method.Params[i].Type, context, scratch)
 	}
+	slicePlans, elidedCounts := planSliceParams(method.Params, resolvedParams, true)
 	returnContext := context
 	returnContext.IsReturn = true
 	returnResolved := g.mapper.GoType(&method.Return, returnContext, scratch)
@@ -153,6 +154,21 @@ func (g *Generator) buildComMethod(meta *win32meta.NamespaceMeta, interfaceName 
 				returnTypes = append(returnTypes, element)
 				continue
 			}
+		}
+		// A count/size parameter collapsed into a slice: derive from len().
+		if bufferIndex, ok := elidedCounts[i]; ok {
+			argWords = append(argWords, "uintptr(len("+paramNames[bufferIndex]+"))")
+			continue
+		}
+		// An array or buffer pointer collapsed into a []T / []byte parameter.
+		if plan, ok := slicePlans[i]; ok {
+			name := paramNames[i]
+			local := "_" + name
+			decls = append(decls, name+" []"+plan.element)
+			preamble = append(preamble, "var "+local+" "+plan.rawPointerType)
+			preamble = append(preamble, "if len("+name+") > 0 { "+local+" = &"+name+"[0] }")
+			argWords = append(argWords, "uintptr(unsafe.Pointer("+local+"))")
+			continue
 		}
 		decl, pre, word, _, ok := shapeParam(paramNames[i], param, resolved)
 		if !ok {

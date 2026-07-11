@@ -128,9 +128,13 @@ func (self *IWPCWebSettings) GetSettings(pdwSettings *WPCFLAG_WEB_SETTING) error
 }
 
 // RequestURLOverride dispatches through IWPCWebSettings's vtable slot 7.
-func (self *IWPCWebSettings) RequestURLOverride(hWnd foundation.HWND, pcszURL string, cURLs uint32, ppcszSubURLs *foundation.PWSTR, pfChanged *foundation.BOOL) error {
+func (self *IWPCWebSettings) RequestURLOverride(hWnd foundation.HWND, pcszURL string, ppcszSubURLs []foundation.PWSTR, pfChanged *foundation.BOOL) error {
 	_pcszURL := win32.UTF16Ptr(pcszURL)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(_pcszURL)), uintptr(cURLs), uintptr(unsafe.Pointer(ppcszSubURLs)), uintptr(unsafe.Pointer(pfChanged)))
+	var _ppcszSubURLs *foundation.PWSTR
+	if len(ppcszSubURLs) > 0 {
+		_ppcszSubURLs = &ppcszSubURLs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hWnd), uintptr(unsafe.Pointer(_pcszURL)), uintptr(len(ppcszSubURLs)), uintptr(unsafe.Pointer(_ppcszSubURLs)), uintptr(unsafe.Pointer(pfChanged)))
 	return win32.HRESULTError(int32(r1))
 }
 

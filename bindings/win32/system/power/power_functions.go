@@ -127,8 +127,16 @@ var (
 // CallNtPowerInformation calls POWRPROF!CallNtPowerInformation.
 // https://learn.microsoft.com/windows/win32/api/powerbase/nf-powerbase-callntpowerinformation
 // Minimum OS: windows5.1.2600.
-func CallNtPowerInformation(InformationLevel POWER_INFORMATION_LEVEL, InputBuffer unsafe.Pointer, InputBufferLength uint32, OutputBuffer unsafe.Pointer, OutputBufferLength uint32) foundation.NTSTATUS {
-	r1, _, _ := syscall.SyscallN(procCallNtPowerInformation.Addr(), uintptr(InformationLevel), uintptr(unsafe.Pointer(InputBuffer)), uintptr(InputBufferLength), uintptr(unsafe.Pointer(OutputBuffer)), uintptr(OutputBufferLength))
+func CallNtPowerInformation(InformationLevel POWER_INFORMATION_LEVEL, InputBuffer []byte, OutputBuffer []byte) foundation.NTSTATUS {
+	var _InputBuffer *byte
+	if len(InputBuffer) > 0 {
+		_InputBuffer = &InputBuffer[0]
+	}
+	var _OutputBuffer *byte
+	if len(OutputBuffer) > 0 {
+		_OutputBuffer = &OutputBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCallNtPowerInformation.Addr(), uintptr(InformationLevel), uintptr(unsafe.Pointer(_InputBuffer)), uintptr(len(InputBuffer)), uintptr(unsafe.Pointer(_OutputBuffer)), uintptr(len(OutputBuffer)))
 	return foundation.NTSTATUS(r1)
 }
 
@@ -746,48 +754,72 @@ func PowerWriteDCValueIndex(RootPowerKey systemregistry.HKEY, SchemeGuid *win32.
 // PowerWriteDescription calls POWRPROF!PowerWriteDescription.
 // https://learn.microsoft.com/windows/win32/api/powrprof/nf-powrprof-powerwritedescription
 // Minimum OS: windows6.0.6000.
-func PowerWriteDescription(RootPowerKey systemregistry.HKEY, SchemeGuid *win32.GUID, SubGroupOfPowerSettingsGuid *win32.GUID, PowerSettingGuid *win32.GUID, Buffer *byte, BufferSize uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procPowerWriteDescription.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(SchemeGuid)), uintptr(unsafe.Pointer(SubGroupOfPowerSettingsGuid)), uintptr(unsafe.Pointer(PowerSettingGuid)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize))
+func PowerWriteDescription(RootPowerKey systemregistry.HKEY, SchemeGuid *win32.GUID, SubGroupOfPowerSettingsGuid *win32.GUID, PowerSettingGuid *win32.GUID, Buffer []byte) foundation.WIN32_ERROR {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPowerWriteDescription.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(SchemeGuid)), uintptr(unsafe.Pointer(SubGroupOfPowerSettingsGuid)), uintptr(unsafe.Pointer(PowerSettingGuid)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // PowerWriteFriendlyName calls POWRPROF!PowerWriteFriendlyName.
 // https://learn.microsoft.com/windows/win32/api/powrprof/nf-powrprof-powerwritefriendlyname
 // Minimum OS: windows6.0.6000.
-func PowerWriteFriendlyName(RootPowerKey systemregistry.HKEY, SchemeGuid *win32.GUID, SubGroupOfPowerSettingsGuid *win32.GUID, PowerSettingGuid *win32.GUID, Buffer *byte, BufferSize uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procPowerWriteFriendlyName.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(SchemeGuid)), uintptr(unsafe.Pointer(SubGroupOfPowerSettingsGuid)), uintptr(unsafe.Pointer(PowerSettingGuid)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize))
+func PowerWriteFriendlyName(RootPowerKey systemregistry.HKEY, SchemeGuid *win32.GUID, SubGroupOfPowerSettingsGuid *win32.GUID, PowerSettingGuid *win32.GUID, Buffer []byte) foundation.WIN32_ERROR {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPowerWriteFriendlyName.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(SchemeGuid)), uintptr(unsafe.Pointer(SubGroupOfPowerSettingsGuid)), uintptr(unsafe.Pointer(PowerSettingGuid)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // PowerWriteIconResourceSpecifier calls POWRPROF!PowerWriteIconResourceSpecifier.
 // https://learn.microsoft.com/windows/win32/api/powrprof/nf-powrprof-powerwriteiconresourcespecifier
 // Minimum OS: windows6.0.6000.
-func PowerWriteIconResourceSpecifier(RootPowerKey systemregistry.HKEY, SchemeGuid *win32.GUID, SubGroupOfPowerSettingsGuid *win32.GUID, PowerSettingGuid *win32.GUID, Buffer *byte, BufferSize uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procPowerWriteIconResourceSpecifier.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(SchemeGuid)), uintptr(unsafe.Pointer(SubGroupOfPowerSettingsGuid)), uintptr(unsafe.Pointer(PowerSettingGuid)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize))
+func PowerWriteIconResourceSpecifier(RootPowerKey systemregistry.HKEY, SchemeGuid *win32.GUID, SubGroupOfPowerSettingsGuid *win32.GUID, PowerSettingGuid *win32.GUID, Buffer []byte) foundation.WIN32_ERROR {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPowerWriteIconResourceSpecifier.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(SchemeGuid)), uintptr(unsafe.Pointer(SubGroupOfPowerSettingsGuid)), uintptr(unsafe.Pointer(PowerSettingGuid)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // PowerWritePossibleDescription calls POWRPROF!PowerWritePossibleDescription.
 // https://learn.microsoft.com/windows/win32/api/powrprof/nf-powrprof-powerwritepossibledescription
 // Minimum OS: windows6.0.6000.
-func PowerWritePossibleDescription(RootPowerKey systemregistry.HKEY, SubGroupOfPowerSettingsGuid *win32.GUID, PowerSettingGuid *win32.GUID, PossibleSettingIndex uint32, Buffer *byte, BufferSize uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procPowerWritePossibleDescription.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(SubGroupOfPowerSettingsGuid)), uintptr(unsafe.Pointer(PowerSettingGuid)), uintptr(PossibleSettingIndex), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize))
+func PowerWritePossibleDescription(RootPowerKey systemregistry.HKEY, SubGroupOfPowerSettingsGuid *win32.GUID, PowerSettingGuid *win32.GUID, PossibleSettingIndex uint32, Buffer []byte) foundation.WIN32_ERROR {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPowerWritePossibleDescription.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(SubGroupOfPowerSettingsGuid)), uintptr(unsafe.Pointer(PowerSettingGuid)), uintptr(PossibleSettingIndex), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // PowerWritePossibleFriendlyName calls POWRPROF!PowerWritePossibleFriendlyName.
 // https://learn.microsoft.com/windows/win32/api/powrprof/nf-powrprof-powerwritepossiblefriendlyname
 // Minimum OS: windows6.0.6000.
-func PowerWritePossibleFriendlyName(RootPowerKey systemregistry.HKEY, SubGroupOfPowerSettingsGuid *win32.GUID, PowerSettingGuid *win32.GUID, PossibleSettingIndex uint32, Buffer *byte, BufferSize uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procPowerWritePossibleFriendlyName.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(SubGroupOfPowerSettingsGuid)), uintptr(unsafe.Pointer(PowerSettingGuid)), uintptr(PossibleSettingIndex), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize))
+func PowerWritePossibleFriendlyName(RootPowerKey systemregistry.HKEY, SubGroupOfPowerSettingsGuid *win32.GUID, PowerSettingGuid *win32.GUID, PossibleSettingIndex uint32, Buffer []byte) foundation.WIN32_ERROR {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPowerWritePossibleFriendlyName.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(SubGroupOfPowerSettingsGuid)), uintptr(unsafe.Pointer(PowerSettingGuid)), uintptr(PossibleSettingIndex), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // PowerWritePossibleValue calls POWRPROF!PowerWritePossibleValue.
 // https://learn.microsoft.com/windows/win32/api/powrprof/nf-powrprof-powerwritepossiblevalue
 // Minimum OS: windows6.0.6000.
-func PowerWritePossibleValue(RootPowerKey systemregistry.HKEY, SubGroupOfPowerSettingsGuid *win32.GUID, PowerSettingGuid *win32.GUID, Type uint32, PossibleSettingIndex uint32, Buffer *byte, BufferSize uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procPowerWritePossibleValue.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(SubGroupOfPowerSettingsGuid)), uintptr(unsafe.Pointer(PowerSettingGuid)), uintptr(Type), uintptr(PossibleSettingIndex), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize))
+func PowerWritePossibleValue(RootPowerKey systemregistry.HKEY, SubGroupOfPowerSettingsGuid *win32.GUID, PowerSettingGuid *win32.GUID, Type uint32, PossibleSettingIndex uint32, Buffer []byte) foundation.WIN32_ERROR {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPowerWritePossibleValue.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(SubGroupOfPowerSettingsGuid)), uintptr(unsafe.Pointer(PowerSettingGuid)), uintptr(Type), uintptr(PossibleSettingIndex), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -826,8 +858,12 @@ func PowerWriteValueMin(RootPowerKey systemregistry.HKEY, SubGroupOfPowerSetting
 // PowerWriteValueUnitsSpecifier calls POWRPROF!PowerWriteValueUnitsSpecifier.
 // https://learn.microsoft.com/windows/win32/api/powrprof/nf-powrprof-powerwritevalueunitsspecifier
 // Minimum OS: windows6.0.6000.
-func PowerWriteValueUnitsSpecifier(RootPowerKey systemregistry.HKEY, SubGroupOfPowerSettingsGuid *win32.GUID, PowerSettingGuid *win32.GUID, Buffer *byte, BufferSize uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procPowerWriteValueUnitsSpecifier.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(SubGroupOfPowerSettingsGuid)), uintptr(unsafe.Pointer(PowerSettingGuid)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize))
+func PowerWriteValueUnitsSpecifier(RootPowerKey systemregistry.HKEY, SubGroupOfPowerSettingsGuid *win32.GUID, PowerSettingGuid *win32.GUID, Buffer []byte) foundation.WIN32_ERROR {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPowerWriteValueUnitsSpecifier.Addr(), uintptr(RootPowerKey), uintptr(unsafe.Pointer(SubGroupOfPowerSettingsGuid)), uintptr(unsafe.Pointer(PowerSettingGuid)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return foundation.WIN32_ERROR(r1)
 }
 

@@ -616,14 +616,30 @@ type IKsPropertySet struct {
 var IID_IKsPropertySet = win32.GUID{Data1: 0x31efac30, Data2: 0x515c, Data3: 0x11d0, Data4: [8]byte{0xa9, 0xaa, 0x00, 0xaa, 0x00, 0x61, 0xbe, 0x93}}
 
 // Set dispatches through IKsPropertySet's vtable slot 3.
-func (self *IKsPropertySet) Set(guidPropSet *win32.GUID, dwPropID uint32, pInstanceData unsafe.Pointer, cbInstanceData uint32, pPropData unsafe.Pointer, cbPropData uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidPropSet)), uintptr(dwPropID), uintptr(unsafe.Pointer(pInstanceData)), uintptr(cbInstanceData), uintptr(unsafe.Pointer(pPropData)), uintptr(cbPropData))
+func (self *IKsPropertySet) Set(guidPropSet *win32.GUID, dwPropID uint32, pInstanceData []byte, pPropData []byte) error {
+	var _pInstanceData *byte
+	if len(pInstanceData) > 0 {
+		_pInstanceData = &pInstanceData[0]
+	}
+	var _pPropData *byte
+	if len(pPropData) > 0 {
+		_pPropData = &pPropData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidPropSet)), uintptr(dwPropID), uintptr(unsafe.Pointer(_pInstanceData)), uintptr(len(pInstanceData)), uintptr(unsafe.Pointer(_pPropData)), uintptr(len(pPropData)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Get dispatches through IKsPropertySet's vtable slot 4.
-func (self *IKsPropertySet) Get(guidPropSet *win32.GUID, dwPropID uint32, pInstanceData unsafe.Pointer, cbInstanceData uint32, pPropData unsafe.Pointer, cbPropData uint32, pcbReturned *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidPropSet)), uintptr(dwPropID), uintptr(unsafe.Pointer(pInstanceData)), uintptr(cbInstanceData), uintptr(unsafe.Pointer(pPropData)), uintptr(cbPropData), uintptr(unsafe.Pointer(pcbReturned)))
+func (self *IKsPropertySet) Get(guidPropSet *win32.GUID, dwPropID uint32, pInstanceData []byte, pPropData []byte, pcbReturned *uint32) error {
+	var _pInstanceData *byte
+	if len(pInstanceData) > 0 {
+		_pInstanceData = &pInstanceData[0]
+	}
+	var _pPropData *byte
+	if len(pPropData) > 0 {
+		_pPropData = &pPropData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidPropSet)), uintptr(dwPropID), uintptr(unsafe.Pointer(_pInstanceData)), uintptr(len(pInstanceData)), uintptr(unsafe.Pointer(_pPropData)), uintptr(len(pPropData)), uintptr(unsafe.Pointer(pcbReturned)))
 	return win32.HRESULTError(int32(r1))
 }
 

@@ -48,8 +48,12 @@ func (self *ID3D11AuthenticatedChannel) GetCertificateSize(pCertificateSize *uin
 }
 
 // GetCertificate dispatches through ID3D11AuthenticatedChannel's vtable slot 8.
-func (self *ID3D11AuthenticatedChannel) GetCertificate(CertificateSize uint32, pCertificate *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(CertificateSize), uintptr(unsafe.Pointer(pCertificate)))
+func (self *ID3D11AuthenticatedChannel) GetCertificate(pCertificate []byte) error {
+	var _pCertificate *byte
+	if len(pCertificate) > 0 {
+		_pCertificate = &pCertificate[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(pCertificate)), uintptr(unsafe.Pointer(_pCertificate)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -214,8 +218,12 @@ func (self *ID3D11CryptoSession) GetCertificateSize(pCertificateSize *uint32) er
 }
 
 // GetCertificate dispatches through ID3D11CryptoSession's vtable slot 10.
-func (self *ID3D11CryptoSession) GetCertificate(CertificateSize uint32, pCertificate *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(CertificateSize), uintptr(unsafe.Pointer(pCertificate)))
+func (self *ID3D11CryptoSession) GetCertificate(pCertificate []byte) error {
+	var _pCertificate *byte
+	if len(pCertificate) > 0 {
+		_pCertificate = &pCertificate[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(len(pCertificate)), uintptr(unsafe.Pointer(_pCertificate)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -373,8 +381,12 @@ func (self *ID3D11Device) CreateDepthStencilView(pResource *ID3D11Resource, pDes
 }
 
 // CreateInputLayout dispatches through ID3D11Device's vtable slot 11.
-func (self *ID3D11Device) CreateInputLayout(pInputElementDescs *D3D11_INPUT_ELEMENT_DESC, NumElements uint32, pShaderBytecodeWithInputSignature unsafe.Pointer, BytecodeLength uintptr, ppInputLayout **ID3D11InputLayout) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInputElementDescs)), uintptr(NumElements), uintptr(unsafe.Pointer(pShaderBytecodeWithInputSignature)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppInputLayout)))
+func (self *ID3D11Device) CreateInputLayout(pInputElementDescs []D3D11_INPUT_ELEMENT_DESC, pShaderBytecodeWithInputSignature unsafe.Pointer, BytecodeLength uintptr, ppInputLayout **ID3D11InputLayout) error {
+	var _pInputElementDescs *D3D11_INPUT_ELEMENT_DESC
+	if len(pInputElementDescs) > 0 {
+		_pInputElementDescs = &pInputElementDescs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInputElementDescs)), uintptr(len(pInputElementDescs)), uintptr(unsafe.Pointer(pShaderBytecodeWithInputSignature)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppInputLayout)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -391,8 +403,16 @@ func (self *ID3D11Device) CreateGeometryShader(pShaderBytecode unsafe.Pointer, B
 }
 
 // CreateGeometryShaderWithStreamOutput dispatches through ID3D11Device's vtable slot 14.
-func (self *ID3D11Device) CreateGeometryShaderWithStreamOutput(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pSODeclaration *D3D11_SO_DECLARATION_ENTRY, NumEntries uint32, pBufferStrides *uint32, NumStrides uint32, RasterizedStream uint32, pClassLinkage *ID3D11ClassLinkage, ppGeometryShader **ID3D11GeometryShader) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(pSODeclaration)), uintptr(NumEntries), uintptr(unsafe.Pointer(pBufferStrides)), uintptr(NumStrides), uintptr(RasterizedStream), uintptr(unsafe.Pointer(pClassLinkage)), uintptr(unsafe.Pointer(ppGeometryShader)))
+func (self *ID3D11Device) CreateGeometryShaderWithStreamOutput(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, pSODeclaration []D3D11_SO_DECLARATION_ENTRY, pBufferStrides []uint32, RasterizedStream uint32, pClassLinkage *ID3D11ClassLinkage, ppGeometryShader **ID3D11GeometryShader) error {
+	var _pSODeclaration *D3D11_SO_DECLARATION_ENTRY
+	if len(pSODeclaration) > 0 {
+		_pSODeclaration = &pSODeclaration[0]
+	}
+	var _pBufferStrides *uint32
+	if len(pBufferStrides) > 0 {
+		_pBufferStrides = &pBufferStrides[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(_pSODeclaration)), uintptr(len(pSODeclaration)), uintptr(unsafe.Pointer(_pBufferStrides)), uintptr(len(pBufferStrides)), uintptr(RasterizedStream), uintptr(unsafe.Pointer(pClassLinkage)), uintptr(unsafe.Pointer(ppGeometryShader)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -504,8 +524,12 @@ func (self *ID3D11Device) CheckCounter(pDesc *D3D11_COUNTER_DESC, pType *D3D11_C
 }
 
 // CheckFeatureSupport dispatches through ID3D11Device's vtable slot 33.
-func (self *ID3D11Device) CheckFeatureSupport(Feature D3D11_FEATURE, pFeatureSupportData unsafe.Pointer, FeatureSupportDataSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(Feature), uintptr(unsafe.Pointer(pFeatureSupportData)), uintptr(FeatureSupportDataSize))
+func (self *ID3D11Device) CheckFeatureSupport(Feature D3D11_FEATURE, pFeatureSupportData []byte) error {
+	var _pFeatureSupportData *byte
+	if len(pFeatureSupportData) > 0 {
+		_pFeatureSupportData = &pFeatureSupportData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(Feature), uintptr(unsafe.Pointer(_pFeatureSupportData)), uintptr(len(pFeatureSupportData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -516,8 +540,12 @@ func (self *ID3D11Device) GetPrivateData(guid *win32.GUID, pDataSize *uint32, pD
 }
 
 // SetPrivateData dispatches through ID3D11Device's vtable slot 35.
-func (self *ID3D11Device) SetPrivateData(guid *win32.GUID, DataSize uint32, pData unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
+func (self *ID3D11Device) SetPrivateData(guid *win32.GUID, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[35], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -595,8 +623,12 @@ func (self *ID3D11Device1) CreateRasterizerState1(pRasterizerDesc *D3D11_RASTERI
 }
 
 // CreateDeviceContextState dispatches through ID3D11Device1's vtable slot 47.
-func (self *ID3D11Device1) CreateDeviceContextState(Flags uint32, pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL, FeatureLevels uint32, SDKVersion uint32, EmulatedInterface *win32.GUID, pChosenFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppContextState **ID3DDeviceContextState) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(pFeatureLevels)), uintptr(FeatureLevels), uintptr(SDKVersion), uintptr(unsafe.Pointer(EmulatedInterface)), uintptr(unsafe.Pointer(pChosenFeatureLevel)), uintptr(unsafe.Pointer(ppContextState)))
+func (self *ID3D11Device1) CreateDeviceContextState(Flags uint32, pFeatureLevels []graphicsdirect3d.D3D_FEATURE_LEVEL, SDKVersion uint32, EmulatedInterface *win32.GUID, pChosenFeatureLevel *graphicsdirect3d.D3D_FEATURE_LEVEL, ppContextState **ID3DDeviceContextState) error {
+	var _pFeatureLevels *graphicsdirect3d.D3D_FEATURE_LEVEL
+	if len(pFeatureLevels) > 0 {
+		_pFeatureLevels = &pFeatureLevels[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[47], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(unsafe.Pointer(_pFeatureLevels)), uintptr(len(pFeatureLevels)), uintptr(SDKVersion), uintptr(unsafe.Pointer(EmulatedInterface)), uintptr(unsafe.Pointer(pChosenFeatureLevel)), uintptr(unsafe.Pointer(ppContextState)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -778,8 +810,12 @@ func (self *ID3D11DeviceChild) GetPrivateData(guid *win32.GUID, pDataSize *uint3
 }
 
 // SetPrivateData dispatches through ID3D11DeviceChild's vtable slot 5.
-func (self *ID3D11DeviceChild) SetPrivateData(guid *win32.GUID, DataSize uint32, pData unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
+func (self *ID3D11DeviceChild) SetPrivateData(guid *win32.GUID, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -799,28 +835,48 @@ type ID3D11DeviceContext struct {
 var IID_ID3D11DeviceContext = win32.GUID{Data1: 0xc0bfa96c, Data2: 0xe089, Data3: 0x44fb, Data4: [8]byte{0x8e, 0xaf, 0x26, 0xf8, 0x79, 0x61, 0x90, 0xda}}
 
 // VSSetConstantBuffers dispatches through ID3D11DeviceContext's vtable slot 7.
-func (self *ID3D11DeviceContext) VSSetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D11Buffer) {
-	syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D11DeviceContext) VSSetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D11Buffer) {
+	var _ppConstantBuffers **ID3D11Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // PSSetShaderResources dispatches through ID3D11DeviceContext's vtable slot 8.
-func (self *ID3D11DeviceContext) PSSetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D11ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D11DeviceContext) PSSetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D11ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D11ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // PSSetShader dispatches through ID3D11DeviceContext's vtable slot 9.
-func (self *ID3D11DeviceContext) PSSetShader(pPixelShader *ID3D11PixelShader, ppClassInstances **ID3D11ClassInstance, NumClassInstances uint32) {
-	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPixelShader)), uintptr(unsafe.Pointer(ppClassInstances)), uintptr(NumClassInstances))
+func (self *ID3D11DeviceContext) PSSetShader(pPixelShader *ID3D11PixelShader, ppClassInstances []*ID3D11ClassInstance) {
+	var _ppClassInstances **ID3D11ClassInstance
+	if len(ppClassInstances) > 0 {
+		_ppClassInstances = &ppClassInstances[0]
+	}
+	syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pPixelShader)), uintptr(unsafe.Pointer(_ppClassInstances)), uintptr(len(ppClassInstances)))
 }
 
 // PSSetSamplers dispatches through ID3D11DeviceContext's vtable slot 10.
-func (self *ID3D11DeviceContext) PSSetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D11SamplerState) {
-	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D11DeviceContext) PSSetSamplers(StartSlot uint32, ppSamplers []*ID3D11SamplerState) {
+	var _ppSamplers **ID3D11SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // VSSetShader dispatches through ID3D11DeviceContext's vtable slot 11.
-func (self *ID3D11DeviceContext) VSSetShader(pVertexShader *ID3D11VertexShader, ppClassInstances **ID3D11ClassInstance, NumClassInstances uint32) {
-	syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVertexShader)), uintptr(unsafe.Pointer(ppClassInstances)), uintptr(NumClassInstances))
+func (self *ID3D11DeviceContext) VSSetShader(pVertexShader *ID3D11VertexShader, ppClassInstances []*ID3D11ClassInstance) {
+	var _ppClassInstances **ID3D11ClassInstance
+	if len(ppClassInstances) > 0 {
+		_ppClassInstances = &ppClassInstances[0]
+	}
+	syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVertexShader)), uintptr(unsafe.Pointer(_ppClassInstances)), uintptr(len(ppClassInstances)))
 }
 
 // DrawIndexed dispatches through ID3D11DeviceContext's vtable slot 12.
@@ -845,8 +901,12 @@ func (self *ID3D11DeviceContext) Unmap(pResource *ID3D11Resource, Subresource ui
 }
 
 // PSSetConstantBuffers dispatches through ID3D11DeviceContext's vtable slot 16.
-func (self *ID3D11DeviceContext) PSSetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D11Buffer) {
-	syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D11DeviceContext) PSSetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D11Buffer) {
+	var _ppConstantBuffers **ID3D11Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // IASetInputLayout dispatches through ID3D11DeviceContext's vtable slot 17.
@@ -875,13 +935,21 @@ func (self *ID3D11DeviceContext) DrawInstanced(VertexCountPerInstance uint32, In
 }
 
 // GSSetConstantBuffers dispatches through ID3D11DeviceContext's vtable slot 22.
-func (self *ID3D11DeviceContext) GSSetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D11Buffer) {
-	syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D11DeviceContext) GSSetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D11Buffer) {
+	var _ppConstantBuffers **ID3D11Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // GSSetShader dispatches through ID3D11DeviceContext's vtable slot 23.
-func (self *ID3D11DeviceContext) GSSetShader(pShader *ID3D11GeometryShader, ppClassInstances **ID3D11ClassInstance, NumClassInstances uint32) {
-	syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShader)), uintptr(unsafe.Pointer(ppClassInstances)), uintptr(NumClassInstances))
+func (self *ID3D11DeviceContext) GSSetShader(pShader *ID3D11GeometryShader, ppClassInstances []*ID3D11ClassInstance) {
+	var _ppClassInstances **ID3D11ClassInstance
+	if len(ppClassInstances) > 0 {
+		_ppClassInstances = &ppClassInstances[0]
+	}
+	syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pShader)), uintptr(unsafe.Pointer(_ppClassInstances)), uintptr(len(ppClassInstances)))
 }
 
 // IASetPrimitiveTopology dispatches through ID3D11DeviceContext's vtable slot 24.
@@ -890,13 +958,21 @@ func (self *ID3D11DeviceContext) IASetPrimitiveTopology(Topology graphicsdirect3
 }
 
 // VSSetShaderResources dispatches through ID3D11DeviceContext's vtable slot 25.
-func (self *ID3D11DeviceContext) VSSetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D11ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D11DeviceContext) VSSetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D11ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D11ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // VSSetSamplers dispatches through ID3D11DeviceContext's vtable slot 26.
-func (self *ID3D11DeviceContext) VSSetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D11SamplerState) {
-	syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D11DeviceContext) VSSetSamplers(StartSlot uint32, ppSamplers []*ID3D11SamplerState) {
+	var _ppSamplers **ID3D11SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // Begin dispatches through ID3D11DeviceContext's vtable slot 27.
@@ -910,8 +986,12 @@ func (self *ID3D11DeviceContext) End(pAsync *ID3D11Asynchronous) {
 }
 
 // GetData dispatches through ID3D11DeviceContext's vtable slot 29.
-func (self *ID3D11DeviceContext) GetData(pAsync *ID3D11Asynchronous, pData unsafe.Pointer, DataSize uint32, GetDataFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAsync)), uintptr(unsafe.Pointer(pData)), uintptr(DataSize), uintptr(GetDataFlags))
+func (self *ID3D11DeviceContext) GetData(pAsync *ID3D11Asynchronous, pData []byte, GetDataFlags uint32) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAsync)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(GetDataFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -922,23 +1002,39 @@ func (self *ID3D11DeviceContext) SetPredication(pPredicate *ID3D11Predicate, Pre
 }
 
 // GSSetShaderResources dispatches through ID3D11DeviceContext's vtable slot 31.
-func (self *ID3D11DeviceContext) GSSetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D11ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D11DeviceContext) GSSetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D11ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D11ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // GSSetSamplers dispatches through ID3D11DeviceContext's vtable slot 32.
-func (self *ID3D11DeviceContext) GSSetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D11SamplerState) {
-	syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D11DeviceContext) GSSetSamplers(StartSlot uint32, ppSamplers []*ID3D11SamplerState) {
+	var _ppSamplers **ID3D11SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // OMSetRenderTargets dispatches through ID3D11DeviceContext's vtable slot 33.
-func (self *ID3D11DeviceContext) OMSetRenderTargets(NumViews uint32, ppRenderTargetViews **ID3D11RenderTargetView, pDepthStencilView *ID3D11DepthStencilView) {
-	syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(NumViews), uintptr(unsafe.Pointer(ppRenderTargetViews)), uintptr(unsafe.Pointer(pDepthStencilView)))
+func (self *ID3D11DeviceContext) OMSetRenderTargets(ppRenderTargetViews []*ID3D11RenderTargetView, pDepthStencilView *ID3D11DepthStencilView) {
+	var _ppRenderTargetViews **ID3D11RenderTargetView
+	if len(ppRenderTargetViews) > 0 {
+		_ppRenderTargetViews = &ppRenderTargetViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(len(ppRenderTargetViews)), uintptr(unsafe.Pointer(_ppRenderTargetViews)), uintptr(unsafe.Pointer(pDepthStencilView)))
 }
 
 // OMSetRenderTargetsAndUnorderedAccessViews dispatches through ID3D11DeviceContext's vtable slot 34.
-func (self *ID3D11DeviceContext) OMSetRenderTargetsAndUnorderedAccessViews(NumRTVs uint32, ppRenderTargetViews **ID3D11RenderTargetView, pDepthStencilView *ID3D11DepthStencilView, UAVStartSlot uint32, NumUAVs uint32, ppUnorderedAccessViews **ID3D11UnorderedAccessView, pUAVInitialCounts *uint32) {
-	syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(NumRTVs), uintptr(unsafe.Pointer(ppRenderTargetViews)), uintptr(unsafe.Pointer(pDepthStencilView)), uintptr(UAVStartSlot), uintptr(NumUAVs), uintptr(unsafe.Pointer(ppUnorderedAccessViews)), uintptr(unsafe.Pointer(pUAVInitialCounts)))
+func (self *ID3D11DeviceContext) OMSetRenderTargetsAndUnorderedAccessViews(ppRenderTargetViews []*ID3D11RenderTargetView, pDepthStencilView *ID3D11DepthStencilView, UAVStartSlot uint32, NumUAVs uint32, ppUnorderedAccessViews **ID3D11UnorderedAccessView, pUAVInitialCounts *uint32) {
+	var _ppRenderTargetViews **ID3D11RenderTargetView
+	if len(ppRenderTargetViews) > 0 {
+		_ppRenderTargetViews = &ppRenderTargetViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(len(ppRenderTargetViews)), uintptr(unsafe.Pointer(_ppRenderTargetViews)), uintptr(unsafe.Pointer(pDepthStencilView)), uintptr(UAVStartSlot), uintptr(NumUAVs), uintptr(unsafe.Pointer(ppUnorderedAccessViews)), uintptr(unsafe.Pointer(pUAVInitialCounts)))
 }
 
 // OMSetBlendState dispatches through ID3D11DeviceContext's vtable slot 35.
@@ -987,13 +1083,21 @@ func (self *ID3D11DeviceContext) RSSetState(pRasterizerState *ID3D11RasterizerSt
 }
 
 // RSSetViewports dispatches through ID3D11DeviceContext's vtable slot 44.
-func (self *ID3D11DeviceContext) RSSetViewports(NumViewports uint32, pViewports *D3D11_VIEWPORT) {
-	syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(NumViewports), uintptr(unsafe.Pointer(pViewports)))
+func (self *ID3D11DeviceContext) RSSetViewports(pViewports []D3D11_VIEWPORT) {
+	var _pViewports *D3D11_VIEWPORT
+	if len(pViewports) > 0 {
+		_pViewports = &pViewports[0]
+	}
+	syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(len(pViewports)), uintptr(unsafe.Pointer(_pViewports)))
 }
 
 // RSSetScissorRects dispatches through ID3D11DeviceContext's vtable slot 45.
-func (self *ID3D11DeviceContext) RSSetScissorRects(NumRects uint32, pRects *foundation.RECT) {
-	syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(NumRects), uintptr(unsafe.Pointer(pRects)))
+func (self *ID3D11DeviceContext) RSSetScissorRects(pRects []foundation.RECT) {
+	var _pRects *foundation.RECT
+	if len(pRects) > 0 {
+		_pRects = &pRects[0]
+	}
+	syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(len(pRects)), uintptr(unsafe.Pointer(_pRects)))
 }
 
 // CopySubresourceRegion dispatches through ID3D11DeviceContext's vtable slot 46.
@@ -1048,48 +1152,84 @@ func (self *ID3D11DeviceContext) ExecuteCommandList(pCommandList *ID3D11CommandL
 }
 
 // HSSetShaderResources dispatches through ID3D11DeviceContext's vtable slot 59.
-func (self *ID3D11DeviceContext) HSSetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D11ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D11DeviceContext) HSSetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D11ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D11ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // HSSetShader dispatches through ID3D11DeviceContext's vtable slot 60.
-func (self *ID3D11DeviceContext) HSSetShader(pHullShader *ID3D11HullShader, ppClassInstances **ID3D11ClassInstance, NumClassInstances uint32) {
-	syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHullShader)), uintptr(unsafe.Pointer(ppClassInstances)), uintptr(NumClassInstances))
+func (self *ID3D11DeviceContext) HSSetShader(pHullShader *ID3D11HullShader, ppClassInstances []*ID3D11ClassInstance) {
+	var _ppClassInstances **ID3D11ClassInstance
+	if len(ppClassInstances) > 0 {
+		_ppClassInstances = &ppClassInstances[0]
+	}
+	syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pHullShader)), uintptr(unsafe.Pointer(_ppClassInstances)), uintptr(len(ppClassInstances)))
 }
 
 // HSSetSamplers dispatches through ID3D11DeviceContext's vtable slot 61.
-func (self *ID3D11DeviceContext) HSSetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D11SamplerState) {
-	syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D11DeviceContext) HSSetSamplers(StartSlot uint32, ppSamplers []*ID3D11SamplerState) {
+	var _ppSamplers **ID3D11SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // HSSetConstantBuffers dispatches through ID3D11DeviceContext's vtable slot 62.
-func (self *ID3D11DeviceContext) HSSetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D11Buffer) {
-	syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D11DeviceContext) HSSetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D11Buffer) {
+	var _ppConstantBuffers **ID3D11Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // DSSetShaderResources dispatches through ID3D11DeviceContext's vtable slot 63.
-func (self *ID3D11DeviceContext) DSSetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D11ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D11DeviceContext) DSSetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D11ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D11ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[63], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // DSSetShader dispatches through ID3D11DeviceContext's vtable slot 64.
-func (self *ID3D11DeviceContext) DSSetShader(pDomainShader *ID3D11DomainShader, ppClassInstances **ID3D11ClassInstance, NumClassInstances uint32) {
-	syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDomainShader)), uintptr(unsafe.Pointer(ppClassInstances)), uintptr(NumClassInstances))
+func (self *ID3D11DeviceContext) DSSetShader(pDomainShader *ID3D11DomainShader, ppClassInstances []*ID3D11ClassInstance) {
+	var _ppClassInstances **ID3D11ClassInstance
+	if len(ppClassInstances) > 0 {
+		_ppClassInstances = &ppClassInstances[0]
+	}
+	syscall.SyscallN(self.LpVtbl[64], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDomainShader)), uintptr(unsafe.Pointer(_ppClassInstances)), uintptr(len(ppClassInstances)))
 }
 
 // DSSetSamplers dispatches through ID3D11DeviceContext's vtable slot 65.
-func (self *ID3D11DeviceContext) DSSetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D11SamplerState) {
-	syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D11DeviceContext) DSSetSamplers(StartSlot uint32, ppSamplers []*ID3D11SamplerState) {
+	var _ppSamplers **ID3D11SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // DSSetConstantBuffers dispatches through ID3D11DeviceContext's vtable slot 66.
-func (self *ID3D11DeviceContext) DSSetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D11Buffer) {
-	syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D11DeviceContext) DSSetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D11Buffer) {
+	var _ppConstantBuffers **ID3D11Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[66], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // CSSetShaderResources dispatches through ID3D11DeviceContext's vtable slot 67.
-func (self *ID3D11DeviceContext) CSSetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D11ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D11DeviceContext) CSSetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D11ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D11ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[67], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // CSSetUnorderedAccessViews dispatches through ID3D11DeviceContext's vtable slot 68.
@@ -1098,28 +1238,48 @@ func (self *ID3D11DeviceContext) CSSetUnorderedAccessViews(StartSlot uint32, Num
 }
 
 // CSSetShader dispatches through ID3D11DeviceContext's vtable slot 69.
-func (self *ID3D11DeviceContext) CSSetShader(pComputeShader *ID3D11ComputeShader, ppClassInstances **ID3D11ClassInstance, NumClassInstances uint32) {
-	syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pComputeShader)), uintptr(unsafe.Pointer(ppClassInstances)), uintptr(NumClassInstances))
+func (self *ID3D11DeviceContext) CSSetShader(pComputeShader *ID3D11ComputeShader, ppClassInstances []*ID3D11ClassInstance) {
+	var _ppClassInstances **ID3D11ClassInstance
+	if len(ppClassInstances) > 0 {
+		_ppClassInstances = &ppClassInstances[0]
+	}
+	syscall.SyscallN(self.LpVtbl[69], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pComputeShader)), uintptr(unsafe.Pointer(_ppClassInstances)), uintptr(len(ppClassInstances)))
 }
 
 // CSSetSamplers dispatches through ID3D11DeviceContext's vtable slot 70.
-func (self *ID3D11DeviceContext) CSSetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D11SamplerState) {
-	syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D11DeviceContext) CSSetSamplers(StartSlot uint32, ppSamplers []*ID3D11SamplerState) {
+	var _ppSamplers **ID3D11SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[70], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // CSSetConstantBuffers dispatches through ID3D11DeviceContext's vtable slot 71.
-func (self *ID3D11DeviceContext) CSSetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D11Buffer) {
-	syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D11DeviceContext) CSSetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D11Buffer) {
+	var _ppConstantBuffers **ID3D11Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[71], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // VSGetConstantBuffers dispatches through ID3D11DeviceContext's vtable slot 72.
-func (self *ID3D11DeviceContext) VSGetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D11Buffer) {
-	syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D11DeviceContext) VSGetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D11Buffer) {
+	var _ppConstantBuffers **ID3D11Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[72], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // PSGetShaderResources dispatches through ID3D11DeviceContext's vtable slot 73.
-func (self *ID3D11DeviceContext) PSGetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D11ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D11DeviceContext) PSGetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D11ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D11ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[73], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // PSGetShader dispatches through ID3D11DeviceContext's vtable slot 74.
@@ -1128,8 +1288,12 @@ func (self *ID3D11DeviceContext) PSGetShader(ppPixelShader **ID3D11PixelShader, 
 }
 
 // PSGetSamplers dispatches through ID3D11DeviceContext's vtable slot 75.
-func (self *ID3D11DeviceContext) PSGetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D11SamplerState) {
-	syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D11DeviceContext) PSGetSamplers(StartSlot uint32, ppSamplers []*ID3D11SamplerState) {
+	var _ppSamplers **ID3D11SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[75], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // VSGetShader dispatches through ID3D11DeviceContext's vtable slot 76.
@@ -1138,8 +1302,12 @@ func (self *ID3D11DeviceContext) VSGetShader(ppVertexShader **ID3D11VertexShader
 }
 
 // PSGetConstantBuffers dispatches through ID3D11DeviceContext's vtable slot 77.
-func (self *ID3D11DeviceContext) PSGetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D11Buffer) {
-	syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D11DeviceContext) PSGetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D11Buffer) {
+	var _ppConstantBuffers **ID3D11Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[77], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // IAGetInputLayout dispatches through ID3D11DeviceContext's vtable slot 78.
@@ -1158,8 +1326,12 @@ func (self *ID3D11DeviceContext) IAGetIndexBuffer(pIndexBuffer **ID3D11Buffer, F
 }
 
 // GSGetConstantBuffers dispatches through ID3D11DeviceContext's vtable slot 81.
-func (self *ID3D11DeviceContext) GSGetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D11Buffer) {
-	syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D11DeviceContext) GSGetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D11Buffer) {
+	var _ppConstantBuffers **ID3D11Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // GSGetShader dispatches through ID3D11DeviceContext's vtable slot 82.
@@ -1173,13 +1345,21 @@ func (self *ID3D11DeviceContext) IAGetPrimitiveTopology(pTopology *graphicsdirec
 }
 
 // VSGetShaderResources dispatches through ID3D11DeviceContext's vtable slot 84.
-func (self *ID3D11DeviceContext) VSGetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D11ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D11DeviceContext) VSGetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D11ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D11ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // VSGetSamplers dispatches through ID3D11DeviceContext's vtable slot 85.
-func (self *ID3D11DeviceContext) VSGetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D11SamplerState) {
-	syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D11DeviceContext) VSGetSamplers(StartSlot uint32, ppSamplers []*ID3D11SamplerState) {
+	var _ppSamplers **ID3D11SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // GetPredication dispatches through ID3D11DeviceContext's vtable slot 86.
@@ -1188,23 +1368,43 @@ func (self *ID3D11DeviceContext) GetPredication(ppPredicate **ID3D11Predicate, p
 }
 
 // GSGetShaderResources dispatches through ID3D11DeviceContext's vtable slot 87.
-func (self *ID3D11DeviceContext) GSGetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D11ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D11DeviceContext) GSGetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D11ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D11ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // GSGetSamplers dispatches through ID3D11DeviceContext's vtable slot 88.
-func (self *ID3D11DeviceContext) GSGetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D11SamplerState) {
-	syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D11DeviceContext) GSGetSamplers(StartSlot uint32, ppSamplers []*ID3D11SamplerState) {
+	var _ppSamplers **ID3D11SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // OMGetRenderTargets dispatches through ID3D11DeviceContext's vtable slot 89.
-func (self *ID3D11DeviceContext) OMGetRenderTargets(NumViews uint32, ppRenderTargetViews **ID3D11RenderTargetView, ppDepthStencilView **ID3D11DepthStencilView) {
-	syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(NumViews), uintptr(unsafe.Pointer(ppRenderTargetViews)), uintptr(unsafe.Pointer(ppDepthStencilView)))
+func (self *ID3D11DeviceContext) OMGetRenderTargets(ppRenderTargetViews []*ID3D11RenderTargetView, ppDepthStencilView **ID3D11DepthStencilView) {
+	var _ppRenderTargetViews **ID3D11RenderTargetView
+	if len(ppRenderTargetViews) > 0 {
+		_ppRenderTargetViews = &ppRenderTargetViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[89], uintptr(unsafe.Pointer(self)), uintptr(len(ppRenderTargetViews)), uintptr(unsafe.Pointer(_ppRenderTargetViews)), uintptr(unsafe.Pointer(ppDepthStencilView)))
 }
 
 // OMGetRenderTargetsAndUnorderedAccessViews dispatches through ID3D11DeviceContext's vtable slot 90.
-func (self *ID3D11DeviceContext) OMGetRenderTargetsAndUnorderedAccessViews(NumRTVs uint32, ppRenderTargetViews **ID3D11RenderTargetView, ppDepthStencilView **ID3D11DepthStencilView, UAVStartSlot uint32, NumUAVs uint32, ppUnorderedAccessViews **ID3D11UnorderedAccessView) {
-	syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(NumRTVs), uintptr(unsafe.Pointer(ppRenderTargetViews)), uintptr(unsafe.Pointer(ppDepthStencilView)), uintptr(UAVStartSlot), uintptr(NumUAVs), uintptr(unsafe.Pointer(ppUnorderedAccessViews)))
+func (self *ID3D11DeviceContext) OMGetRenderTargetsAndUnorderedAccessViews(ppRenderTargetViews []*ID3D11RenderTargetView, ppDepthStencilView **ID3D11DepthStencilView, UAVStartSlot uint32, ppUnorderedAccessViews []*ID3D11UnorderedAccessView) {
+	var _ppRenderTargetViews **ID3D11RenderTargetView
+	if len(ppRenderTargetViews) > 0 {
+		_ppRenderTargetViews = &ppRenderTargetViews[0]
+	}
+	var _ppUnorderedAccessViews **ID3D11UnorderedAccessView
+	if len(ppUnorderedAccessViews) > 0 {
+		_ppUnorderedAccessViews = &ppUnorderedAccessViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(len(ppRenderTargetViews)), uintptr(unsafe.Pointer(_ppRenderTargetViews)), uintptr(unsafe.Pointer(ppDepthStencilView)), uintptr(UAVStartSlot), uintptr(len(ppUnorderedAccessViews)), uintptr(unsafe.Pointer(_ppUnorderedAccessViews)))
 }
 
 // OMGetBlendState dispatches through ID3D11DeviceContext's vtable slot 91.
@@ -1218,8 +1418,12 @@ func (self *ID3D11DeviceContext) OMGetDepthStencilState(ppDepthStencilState **ID
 }
 
 // SOGetTargets dispatches through ID3D11DeviceContext's vtable slot 93.
-func (self *ID3D11DeviceContext) SOGetTargets(NumBuffers uint32, ppSOTargets **ID3D11Buffer) {
-	syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppSOTargets)))
+func (self *ID3D11DeviceContext) SOGetTargets(ppSOTargets []*ID3D11Buffer) {
+	var _ppSOTargets **ID3D11Buffer
+	if len(ppSOTargets) > 0 {
+		_ppSOTargets = &ppSOTargets[0]
+	}
+	syscall.SyscallN(self.LpVtbl[93], uintptr(unsafe.Pointer(self)), uintptr(len(ppSOTargets)), uintptr(unsafe.Pointer(_ppSOTargets)))
 }
 
 // RSGetState dispatches through ID3D11DeviceContext's vtable slot 94.
@@ -1238,8 +1442,12 @@ func (self *ID3D11DeviceContext) RSGetScissorRects(pNumRects *uint32, pRects *fo
 }
 
 // HSGetShaderResources dispatches through ID3D11DeviceContext's vtable slot 97.
-func (self *ID3D11DeviceContext) HSGetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D11ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D11DeviceContext) HSGetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D11ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D11ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[97], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // HSGetShader dispatches through ID3D11DeviceContext's vtable slot 98.
@@ -1248,18 +1456,30 @@ func (self *ID3D11DeviceContext) HSGetShader(ppHullShader **ID3D11HullShader, pp
 }
 
 // HSGetSamplers dispatches through ID3D11DeviceContext's vtable slot 99.
-func (self *ID3D11DeviceContext) HSGetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D11SamplerState) {
-	syscall.SyscallN(self.LpVtbl[99], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D11DeviceContext) HSGetSamplers(StartSlot uint32, ppSamplers []*ID3D11SamplerState) {
+	var _ppSamplers **ID3D11SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[99], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // HSGetConstantBuffers dispatches through ID3D11DeviceContext's vtable slot 100.
-func (self *ID3D11DeviceContext) HSGetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D11Buffer) {
-	syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D11DeviceContext) HSGetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D11Buffer) {
+	var _ppConstantBuffers **ID3D11Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[100], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // DSGetShaderResources dispatches through ID3D11DeviceContext's vtable slot 101.
-func (self *ID3D11DeviceContext) DSGetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D11ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D11DeviceContext) DSGetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D11ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D11ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[101], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // DSGetShader dispatches through ID3D11DeviceContext's vtable slot 102.
@@ -1268,23 +1488,39 @@ func (self *ID3D11DeviceContext) DSGetShader(ppDomainShader **ID3D11DomainShader
 }
 
 // DSGetSamplers dispatches through ID3D11DeviceContext's vtable slot 103.
-func (self *ID3D11DeviceContext) DSGetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D11SamplerState) {
-	syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D11DeviceContext) DSGetSamplers(StartSlot uint32, ppSamplers []*ID3D11SamplerState) {
+	var _ppSamplers **ID3D11SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[103], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // DSGetConstantBuffers dispatches through ID3D11DeviceContext's vtable slot 104.
-func (self *ID3D11DeviceContext) DSGetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D11Buffer) {
-	syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D11DeviceContext) DSGetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D11Buffer) {
+	var _ppConstantBuffers **ID3D11Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // CSGetShaderResources dispatches through ID3D11DeviceContext's vtable slot 105.
-func (self *ID3D11DeviceContext) CSGetShaderResources(StartSlot uint32, NumViews uint32, ppShaderResourceViews **ID3D11ShaderResourceView) {
-	syscall.SyscallN(self.LpVtbl[105], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumViews), uintptr(unsafe.Pointer(ppShaderResourceViews)))
+func (self *ID3D11DeviceContext) CSGetShaderResources(StartSlot uint32, ppShaderResourceViews []*ID3D11ShaderResourceView) {
+	var _ppShaderResourceViews **ID3D11ShaderResourceView
+	if len(ppShaderResourceViews) > 0 {
+		_ppShaderResourceViews = &ppShaderResourceViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[105], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppShaderResourceViews)), uintptr(unsafe.Pointer(_ppShaderResourceViews)))
 }
 
 // CSGetUnorderedAccessViews dispatches through ID3D11DeviceContext's vtable slot 106.
-func (self *ID3D11DeviceContext) CSGetUnorderedAccessViews(StartSlot uint32, NumUAVs uint32, ppUnorderedAccessViews **ID3D11UnorderedAccessView) {
-	syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumUAVs), uintptr(unsafe.Pointer(ppUnorderedAccessViews)))
+func (self *ID3D11DeviceContext) CSGetUnorderedAccessViews(StartSlot uint32, ppUnorderedAccessViews []*ID3D11UnorderedAccessView) {
+	var _ppUnorderedAccessViews **ID3D11UnorderedAccessView
+	if len(ppUnorderedAccessViews) > 0 {
+		_ppUnorderedAccessViews = &ppUnorderedAccessViews[0]
+	}
+	syscall.SyscallN(self.LpVtbl[106], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppUnorderedAccessViews)), uintptr(unsafe.Pointer(_ppUnorderedAccessViews)))
 }
 
 // CSGetShader dispatches through ID3D11DeviceContext's vtable slot 107.
@@ -1293,13 +1529,21 @@ func (self *ID3D11DeviceContext) CSGetShader(ppComputeShader **ID3D11ComputeShad
 }
 
 // CSGetSamplers dispatches through ID3D11DeviceContext's vtable slot 108.
-func (self *ID3D11DeviceContext) CSGetSamplers(StartSlot uint32, NumSamplers uint32, ppSamplers **ID3D11SamplerState) {
-	syscall.SyscallN(self.LpVtbl[108], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumSamplers), uintptr(unsafe.Pointer(ppSamplers)))
+func (self *ID3D11DeviceContext) CSGetSamplers(StartSlot uint32, ppSamplers []*ID3D11SamplerState) {
+	var _ppSamplers **ID3D11SamplerState
+	if len(ppSamplers) > 0 {
+		_ppSamplers = &ppSamplers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[108], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppSamplers)), uintptr(unsafe.Pointer(_ppSamplers)))
 }
 
 // CSGetConstantBuffers dispatches through ID3D11DeviceContext's vtable slot 109.
-func (self *ID3D11DeviceContext) CSGetConstantBuffers(StartSlot uint32, NumBuffers uint32, ppConstantBuffers **ID3D11Buffer) {
-	syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(NumBuffers), uintptr(unsafe.Pointer(ppConstantBuffers)))
+func (self *ID3D11DeviceContext) CSGetConstantBuffers(StartSlot uint32, ppConstantBuffers []*ID3D11Buffer) {
+	var _ppConstantBuffers **ID3D11Buffer
+	if len(ppConstantBuffers) > 0 {
+		_ppConstantBuffers = &ppConstantBuffers[0]
+	}
+	syscall.SyscallN(self.LpVtbl[109], uintptr(unsafe.Pointer(self)), uintptr(StartSlot), uintptr(len(ppConstantBuffers)), uintptr(unsafe.Pointer(_ppConstantBuffers)))
 }
 
 // ClearState dispatches through ID3D11DeviceContext's vtable slot 110.
@@ -1426,13 +1670,21 @@ func (self *ID3D11DeviceContext1) SwapDeviceContextState(pState *ID3DDeviceConte
 }
 
 // ClearView dispatches through ID3D11DeviceContext1's vtable slot 132.
-func (self *ID3D11DeviceContext1) ClearView(pView *ID3D11View, Color *float32, pRect *foundation.RECT, NumRects uint32) {
-	syscall.SyscallN(self.LpVtbl[132], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pView)), uintptr(unsafe.Pointer(Color)), uintptr(unsafe.Pointer(pRect)), uintptr(NumRects))
+func (self *ID3D11DeviceContext1) ClearView(pView *ID3D11View, Color *float32, pRect []foundation.RECT) {
+	var _pRect *foundation.RECT
+	if len(pRect) > 0 {
+		_pRect = &pRect[0]
+	}
+	syscall.SyscallN(self.LpVtbl[132], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pView)), uintptr(unsafe.Pointer(Color)), uintptr(unsafe.Pointer(_pRect)), uintptr(len(pRect)))
 }
 
 // DiscardView1 dispatches through ID3D11DeviceContext1's vtable slot 133.
-func (self *ID3D11DeviceContext1) DiscardView1(pResourceView *ID3D11View, pRects *foundation.RECT, NumRects uint32) {
-	syscall.SyscallN(self.LpVtbl[133], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResourceView)), uintptr(unsafe.Pointer(pRects)), uintptr(NumRects))
+func (self *ID3D11DeviceContext1) DiscardView1(pResourceView *ID3D11View, pRects []foundation.RECT) {
+	var _pRects *foundation.RECT
+	if len(pRects) > 0 {
+		_pRects = &pRects[0]
+	}
+	syscall.SyscallN(self.LpVtbl[133], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pResourceView)), uintptr(unsafe.Pointer(_pRects)), uintptr(len(pRects)))
 }
 
 // ID3D11DeviceContext2: https://learn.microsoft.com/windows/win32/api/d3d11_2/nn-d3d11_2-id3d11devicecontext2
@@ -1599,14 +1851,22 @@ func (self *ID3D11FunctionLinkingGraph) CreateModuleInstance(ppModuleInstance **
 }
 
 // SetInputSignature dispatches through ID3D11FunctionLinkingGraph's vtable slot 4.
-func (self *ID3D11FunctionLinkingGraph) SetInputSignature(pInputParameters *D3D11_PARAMETER_DESC, cInputParameters uint32, ppInputNode **ID3D11LinkingNode) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInputParameters)), uintptr(cInputParameters), uintptr(unsafe.Pointer(ppInputNode)))
+func (self *ID3D11FunctionLinkingGraph) SetInputSignature(pInputParameters []D3D11_PARAMETER_DESC, ppInputNode **ID3D11LinkingNode) error {
+	var _pInputParameters *D3D11_PARAMETER_DESC
+	if len(pInputParameters) > 0 {
+		_pInputParameters = &pInputParameters[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInputParameters)), uintptr(len(pInputParameters)), uintptr(unsafe.Pointer(ppInputNode)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetOutputSignature dispatches through ID3D11FunctionLinkingGraph's vtable slot 5.
-func (self *ID3D11FunctionLinkingGraph) SetOutputSignature(pOutputParameters *D3D11_PARAMETER_DESC, cOutputParameters uint32, ppOutputNode **ID3D11LinkingNode) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOutputParameters)), uintptr(cOutputParameters), uintptr(unsafe.Pointer(ppOutputNode)))
+func (self *ID3D11FunctionLinkingGraph) SetOutputSignature(pOutputParameters []D3D11_PARAMETER_DESC, ppOutputNode **ID3D11LinkingNode) error {
+	var _pOutputParameters *D3D11_PARAMETER_DESC
+	if len(pOutputParameters) > 0 {
+		_pOutputParameters = &pOutputParameters[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOutputParameters)), uintptr(len(pOutputParameters)), uintptr(unsafe.Pointer(ppOutputNode)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2837,8 +3097,12 @@ func (self *ID3D11VideoContext) ReleaseDecoderBuffer(pDecoder *ID3D11VideoDecode
 }
 
 // DecoderBeginFrame dispatches through ID3D11VideoContext's vtable slot 9.
-func (self *ID3D11VideoContext) DecoderBeginFrame(pDecoder *ID3D11VideoDecoder, pView *ID3D11VideoDecoderOutputView, ContentKeySize uint32, pContentKey unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDecoder)), uintptr(unsafe.Pointer(pView)), uintptr(ContentKeySize), uintptr(unsafe.Pointer(pContentKey)))
+func (self *ID3D11VideoContext) DecoderBeginFrame(pDecoder *ID3D11VideoDecoder, pView *ID3D11VideoDecoderOutputView, pContentKey []byte) error {
+	var _pContentKey *byte
+	if len(pContentKey) > 0 {
+		_pContentKey = &pContentKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDecoder)), uintptr(unsafe.Pointer(pView)), uintptr(len(pContentKey)), uintptr(unsafe.Pointer(_pContentKey)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2849,8 +3113,12 @@ func (self *ID3D11VideoContext) DecoderEndFrame(pDecoder *ID3D11VideoDecoder) er
 }
 
 // SubmitDecoderBuffers dispatches through ID3D11VideoContext's vtable slot 11.
-func (self *ID3D11VideoContext) SubmitDecoderBuffers(pDecoder *ID3D11VideoDecoder, NumBuffers uint32, pBufferDesc *D3D11_VIDEO_DECODER_BUFFER_DESC) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDecoder)), uintptr(NumBuffers), uintptr(unsafe.Pointer(pBufferDesc)))
+func (self *ID3D11VideoContext) SubmitDecoderBuffers(pDecoder *ID3D11VideoDecoder, pBufferDesc []D3D11_VIDEO_DECODER_BUFFER_DESC) error {
+	var _pBufferDesc *D3D11_VIDEO_DECODER_BUFFER_DESC
+	if len(pBufferDesc) > 0 {
+		_pBufferDesc = &pBufferDesc[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDecoder)), uintptr(len(pBufferDesc)), uintptr(unsafe.Pointer(_pBufferDesc)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2925,8 +3193,12 @@ func (self *ID3D11VideoContext) VideoProcessorGetOutputStereoMode(pVideoProcesso
 }
 
 // VideoProcessorGetOutputExtension dispatches through ID3D11VideoContext's vtable slot 26.
-func (self *ID3D11VideoContext) VideoProcessorGetOutputExtension(pVideoProcessor *ID3D11VideoProcessor, pExtensionGuid *win32.GUID, DataSize uint32, pData unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(unsafe.Pointer(pExtensionGuid)), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
+func (self *ID3D11VideoContext) VideoProcessorGetOutputExtension(pVideoProcessor *ID3D11VideoProcessor, pExtensionGuid *win32.GUID, pData []byte) int32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(unsafe.Pointer(pExtensionGuid)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
 	return int32(r1)
 }
 
@@ -2959,8 +3231,12 @@ func (self *ID3D11VideoContext) VideoProcessorSetStreamDestRect(pVideoProcessor 
 }
 
 // VideoProcessorSetStreamPalette dispatches through ID3D11VideoContext's vtable slot 33.
-func (self *ID3D11VideoContext) VideoProcessorSetStreamPalette(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, Count uint32, pEntries *uint32) {
-	syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(Count), uintptr(unsafe.Pointer(pEntries)))
+func (self *ID3D11VideoContext) VideoProcessorSetStreamPalette(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEntries []uint32) {
+	var _pEntries *uint32
+	if len(pEntries) > 0 {
+		_pEntries = &pEntries[0]
+	}
+	syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(len(pEntries)), uintptr(unsafe.Pointer(_pEntries)))
 }
 
 // VideoProcessorSetStreamPixelAspectRatio dispatches through ID3D11VideoContext's vtable slot 34.
@@ -3026,8 +3302,12 @@ func (self *ID3D11VideoContext) VideoProcessorGetStreamAlpha(pVideoProcessor *ID
 }
 
 // VideoProcessorGetStreamPalette dispatches through ID3D11VideoContext's vtable slot 46.
-func (self *ID3D11VideoContext) VideoProcessorGetStreamPalette(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, Count uint32, pEntries *uint32) {
-	syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(Count), uintptr(unsafe.Pointer(pEntries)))
+func (self *ID3D11VideoContext) VideoProcessorGetStreamPalette(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pEntries []uint32) {
+	var _pEntries *uint32
+	if len(pEntries) > 0 {
+		_pEntries = &pEntries[0]
+	}
+	syscall.SyscallN(self.LpVtbl[46], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(len(pEntries)), uintptr(unsafe.Pointer(_pEntries)))
 }
 
 // VideoProcessorGetStreamPixelAspectRatio dispatches through ID3D11VideoContext's vtable slot 47.
@@ -3056,36 +3336,64 @@ func (self *ID3D11VideoContext) VideoProcessorGetStreamFilter(pVideoProcessor *I
 }
 
 // VideoProcessorGetStreamExtension dispatches through ID3D11VideoContext's vtable slot 52.
-func (self *ID3D11VideoContext) VideoProcessorGetStreamExtension(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pExtensionGuid *win32.GUID, DataSize uint32, pData unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pExtensionGuid)), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
+func (self *ID3D11VideoContext) VideoProcessorGetStreamExtension(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pExtensionGuid *win32.GUID, pData []byte) int32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pExtensionGuid)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
 	return int32(r1)
 }
 
 // VideoProcessorBlt dispatches through ID3D11VideoContext's vtable slot 53.
-func (self *ID3D11VideoContext) VideoProcessorBlt(pVideoProcessor *ID3D11VideoProcessor, pView *ID3D11VideoProcessorOutputView, OutputFrame uint32, StreamCount uint32, pStreams *D3D11_VIDEO_PROCESSOR_STREAM) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(unsafe.Pointer(pView)), uintptr(OutputFrame), uintptr(StreamCount), uintptr(unsafe.Pointer(pStreams)))
+func (self *ID3D11VideoContext) VideoProcessorBlt(pVideoProcessor *ID3D11VideoProcessor, pView *ID3D11VideoProcessorOutputView, OutputFrame uint32, pStreams []D3D11_VIDEO_PROCESSOR_STREAM) error {
+	var _pStreams *D3D11_VIDEO_PROCESSOR_STREAM
+	if len(pStreams) > 0 {
+		_pStreams = &pStreams[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[53], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(unsafe.Pointer(pView)), uintptr(OutputFrame), uintptr(len(pStreams)), uintptr(unsafe.Pointer(_pStreams)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // NegotiateCryptoSessionKeyExchange dispatches through ID3D11VideoContext's vtable slot 54.
-func (self *ID3D11VideoContext) NegotiateCryptoSessionKeyExchange(pCryptoSession *ID3D11CryptoSession, DataSize uint32, pData unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCryptoSession)), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
+func (self *ID3D11VideoContext) NegotiateCryptoSessionKeyExchange(pCryptoSession *ID3D11CryptoSession, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[54], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCryptoSession)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // EncryptionBlt dispatches through ID3D11VideoContext's vtable slot 55.
-func (self *ID3D11VideoContext) EncryptionBlt(pCryptoSession *ID3D11CryptoSession, pSrcSurface *ID3D11Texture2D, pDstSurface *ID3D11Texture2D, IVSize uint32, pIV unsafe.Pointer) {
-	syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCryptoSession)), uintptr(unsafe.Pointer(pSrcSurface)), uintptr(unsafe.Pointer(pDstSurface)), uintptr(IVSize), uintptr(unsafe.Pointer(pIV)))
+func (self *ID3D11VideoContext) EncryptionBlt(pCryptoSession *ID3D11CryptoSession, pSrcSurface *ID3D11Texture2D, pDstSurface *ID3D11Texture2D, pIV []byte) {
+	var _pIV *byte
+	if len(pIV) > 0 {
+		_pIV = &pIV[0]
+	}
+	syscall.SyscallN(self.LpVtbl[55], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCryptoSession)), uintptr(unsafe.Pointer(pSrcSurface)), uintptr(unsafe.Pointer(pDstSurface)), uintptr(len(pIV)), uintptr(unsafe.Pointer(_pIV)))
 }
 
 // DecryptionBlt dispatches through ID3D11VideoContext's vtable slot 56.
-func (self *ID3D11VideoContext) DecryptionBlt(pCryptoSession *ID3D11CryptoSession, pSrcSurface *ID3D11Texture2D, pDstSurface *ID3D11Texture2D, pEncryptedBlockInfo *D3D11_ENCRYPTED_BLOCK_INFO, ContentKeySize uint32, pContentKey unsafe.Pointer, IVSize uint32, pIV unsafe.Pointer) {
-	syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCryptoSession)), uintptr(unsafe.Pointer(pSrcSurface)), uintptr(unsafe.Pointer(pDstSurface)), uintptr(unsafe.Pointer(pEncryptedBlockInfo)), uintptr(ContentKeySize), uintptr(unsafe.Pointer(pContentKey)), uintptr(IVSize), uintptr(unsafe.Pointer(pIV)))
+func (self *ID3D11VideoContext) DecryptionBlt(pCryptoSession *ID3D11CryptoSession, pSrcSurface *ID3D11Texture2D, pDstSurface *ID3D11Texture2D, pEncryptedBlockInfo *D3D11_ENCRYPTED_BLOCK_INFO, pContentKey []byte, pIV []byte) {
+	var _pContentKey *byte
+	if len(pContentKey) > 0 {
+		_pContentKey = &pContentKey[0]
+	}
+	var _pIV *byte
+	if len(pIV) > 0 {
+		_pIV = &pIV[0]
+	}
+	syscall.SyscallN(self.LpVtbl[56], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCryptoSession)), uintptr(unsafe.Pointer(pSrcSurface)), uintptr(unsafe.Pointer(pDstSurface)), uintptr(unsafe.Pointer(pEncryptedBlockInfo)), uintptr(len(pContentKey)), uintptr(unsafe.Pointer(_pContentKey)), uintptr(len(pIV)), uintptr(unsafe.Pointer(_pIV)))
 }
 
 // StartSessionKeyRefresh dispatches through ID3D11VideoContext's vtable slot 57.
-func (self *ID3D11VideoContext) StartSessionKeyRefresh(pCryptoSession *ID3D11CryptoSession, RandomNumberSize uint32, pRandomNumber unsafe.Pointer) {
-	syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCryptoSession)), uintptr(RandomNumberSize), uintptr(unsafe.Pointer(pRandomNumber)))
+func (self *ID3D11VideoContext) StartSessionKeyRefresh(pCryptoSession *ID3D11CryptoSession, pRandomNumber []byte) {
+	var _pRandomNumber *byte
+	if len(pRandomNumber) > 0 {
+		_pRandomNumber = &pRandomNumber[0]
+	}
+	syscall.SyscallN(self.LpVtbl[57], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCryptoSession)), uintptr(len(pRandomNumber)), uintptr(unsafe.Pointer(_pRandomNumber)))
 }
 
 // FinishSessionKeyRefresh dispatches through ID3D11VideoContext's vtable slot 58.
@@ -3094,26 +3402,46 @@ func (self *ID3D11VideoContext) FinishSessionKeyRefresh(pCryptoSession *ID3D11Cr
 }
 
 // GetEncryptionBltKey dispatches through ID3D11VideoContext's vtable slot 59.
-func (self *ID3D11VideoContext) GetEncryptionBltKey(pCryptoSession *ID3D11CryptoSession, KeySize uint32, pReadbackKey unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCryptoSession)), uintptr(KeySize), uintptr(unsafe.Pointer(pReadbackKey)))
+func (self *ID3D11VideoContext) GetEncryptionBltKey(pCryptoSession *ID3D11CryptoSession, pReadbackKey []byte) error {
+	var _pReadbackKey *byte
+	if len(pReadbackKey) > 0 {
+		_pReadbackKey = &pReadbackKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[59], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCryptoSession)), uintptr(len(pReadbackKey)), uintptr(unsafe.Pointer(_pReadbackKey)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // NegotiateAuthenticatedChannelKeyExchange dispatches through ID3D11VideoContext's vtable slot 60.
-func (self *ID3D11VideoContext) NegotiateAuthenticatedChannelKeyExchange(pChannel *ID3D11AuthenticatedChannel, DataSize uint32, pData unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChannel)), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
+func (self *ID3D11VideoContext) NegotiateAuthenticatedChannelKeyExchange(pChannel *ID3D11AuthenticatedChannel, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[60], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChannel)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // QueryAuthenticatedChannel dispatches through ID3D11VideoContext's vtable slot 61.
-func (self *ID3D11VideoContext) QueryAuthenticatedChannel(pChannel *ID3D11AuthenticatedChannel, InputSize uint32, pInput unsafe.Pointer, OutputSize uint32, pOutput unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChannel)), uintptr(InputSize), uintptr(unsafe.Pointer(pInput)), uintptr(OutputSize), uintptr(unsafe.Pointer(pOutput)))
+func (self *ID3D11VideoContext) QueryAuthenticatedChannel(pChannel *ID3D11AuthenticatedChannel, pInput []byte, pOutput []byte) error {
+	var _pInput *byte
+	if len(pInput) > 0 {
+		_pInput = &pInput[0]
+	}
+	var _pOutput *byte
+	if len(pOutput) > 0 {
+		_pOutput = &pOutput[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[61], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChannel)), uintptr(len(pInput)), uintptr(unsafe.Pointer(_pInput)), uintptr(len(pOutput)), uintptr(unsafe.Pointer(_pOutput)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ConfigureAuthenticatedChannel dispatches through ID3D11VideoContext's vtable slot 62.
-func (self *ID3D11VideoContext) ConfigureAuthenticatedChannel(pChannel *ID3D11AuthenticatedChannel, InputSize uint32, pInput unsafe.Pointer, pOutput *D3D11_AUTHENTICATED_CONFIGURE_OUTPUT) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChannel)), uintptr(InputSize), uintptr(unsafe.Pointer(pInput)), uintptr(unsafe.Pointer(pOutput)))
+func (self *ID3D11VideoContext) ConfigureAuthenticatedChannel(pChannel *ID3D11AuthenticatedChannel, pInput []byte, pOutput *D3D11_AUTHENTICATED_CONFIGURE_OUTPUT) error {
+	var _pInput *byte
+	if len(pInput) > 0 {
+		_pInput = &pInput[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[62], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pChannel)), uintptr(len(pInput)), uintptr(unsafe.Pointer(_pInput)), uintptr(unsafe.Pointer(pOutput)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3138,8 +3466,12 @@ type ID3D11VideoContext1 struct {
 var IID_ID3D11VideoContext1 = win32.GUID{Data1: 0xa7f026da, Data2: 0xa5f8, Data3: 0x4487, Data4: [8]byte{0xa5, 0x64, 0x15, 0xe3, 0x43, 0x57, 0x65, 0x1e}}
 
 // SubmitDecoderBuffers1 dispatches through ID3D11VideoContext1's vtable slot 65.
-func (self *ID3D11VideoContext1) SubmitDecoderBuffers1(pDecoder *ID3D11VideoDecoder, NumBuffers uint32, pBufferDesc *D3D11_VIDEO_DECODER_BUFFER_DESC1) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDecoder)), uintptr(NumBuffers), uintptr(unsafe.Pointer(pBufferDesc)))
+func (self *ID3D11VideoContext1) SubmitDecoderBuffers1(pDecoder *ID3D11VideoDecoder, pBufferDesc []D3D11_VIDEO_DECODER_BUFFER_DESC1) error {
+	var _pBufferDesc *D3D11_VIDEO_DECODER_BUFFER_DESC1
+	if len(pBufferDesc) > 0 {
+		_pBufferDesc = &pBufferDesc[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[65], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDecoder)), uintptr(len(pBufferDesc)), uintptr(unsafe.Pointer(_pBufferDesc)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3212,8 +3544,12 @@ func (self *ID3D11VideoContext1) VideoProcessorGetStreamMirror(pVideoProcessor *
 }
 
 // VideoProcessorGetBehaviorHints dispatches through ID3D11VideoContext1's vtable slot 78.
-func (self *ID3D11VideoContext1) VideoProcessorGetBehaviorHints(pVideoProcessor *ID3D11VideoProcessor, OutputWidth uint32, OutputHeight uint32, OutputFormat graphicsdxgicommon.DXGI_FORMAT, StreamCount uint32, pStreams *D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT, pBehaviorHints *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(OutputWidth), uintptr(OutputHeight), uintptr(OutputFormat), uintptr(StreamCount), uintptr(unsafe.Pointer(pStreams)), uintptr(unsafe.Pointer(pBehaviorHints)))
+func (self *ID3D11VideoContext1) VideoProcessorGetBehaviorHints(pVideoProcessor *ID3D11VideoProcessor, OutputWidth uint32, OutputHeight uint32, OutputFormat graphicsdxgicommon.DXGI_FORMAT, pStreams []D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT, pBehaviorHints *uint32) error {
+	var _pStreams *D3D11_VIDEO_PROCESSOR_STREAM_BEHAVIOR_HINT
+	if len(pStreams) > 0 {
+		_pStreams = &pStreams[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[78], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(OutputWidth), uintptr(OutputHeight), uintptr(OutputFormat), uintptr(len(pStreams)), uintptr(unsafe.Pointer(_pStreams)), uintptr(unsafe.Pointer(pBehaviorHints)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3227,23 +3563,39 @@ type ID3D11VideoContext2 struct {
 var IID_ID3D11VideoContext2 = win32.GUID{Data1: 0xc4e7374c, Data2: 0x6243, Data3: 0x4d1b, Data4: [8]byte{0xae, 0x87, 0x52, 0xb4, 0xf7, 0x40, 0xe2, 0x61}}
 
 // VideoProcessorSetOutputHDRMetaData dispatches through ID3D11VideoContext2's vtable slot 79.
-func (self *ID3D11VideoContext2) VideoProcessorSetOutputHDRMetaData(pVideoProcessor *ID3D11VideoProcessor, Type graphicsdxgi.DXGI_HDR_METADATA_TYPE, Size uint32, pHDRMetaData unsafe.Pointer) {
-	syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(Type), uintptr(Size), uintptr(unsafe.Pointer(pHDRMetaData)))
+func (self *ID3D11VideoContext2) VideoProcessorSetOutputHDRMetaData(pVideoProcessor *ID3D11VideoProcessor, Type graphicsdxgi.DXGI_HDR_METADATA_TYPE, pHDRMetaData []byte) {
+	var _pHDRMetaData *byte
+	if len(pHDRMetaData) > 0 {
+		_pHDRMetaData = &pHDRMetaData[0]
+	}
+	syscall.SyscallN(self.LpVtbl[79], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(Type), uintptr(len(pHDRMetaData)), uintptr(unsafe.Pointer(_pHDRMetaData)))
 }
 
 // VideoProcessorGetOutputHDRMetaData dispatches through ID3D11VideoContext2's vtable slot 80.
-func (self *ID3D11VideoContext2) VideoProcessorGetOutputHDRMetaData(pVideoProcessor *ID3D11VideoProcessor, pType *graphicsdxgi.DXGI_HDR_METADATA_TYPE, Size uint32, pMetaData unsafe.Pointer) {
-	syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(unsafe.Pointer(pType)), uintptr(Size), uintptr(unsafe.Pointer(pMetaData)))
+func (self *ID3D11VideoContext2) VideoProcessorGetOutputHDRMetaData(pVideoProcessor *ID3D11VideoProcessor, pType *graphicsdxgi.DXGI_HDR_METADATA_TYPE, pMetaData []byte) {
+	var _pMetaData *byte
+	if len(pMetaData) > 0 {
+		_pMetaData = &pMetaData[0]
+	}
+	syscall.SyscallN(self.LpVtbl[80], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(unsafe.Pointer(pType)), uintptr(len(pMetaData)), uintptr(unsafe.Pointer(_pMetaData)))
 }
 
 // VideoProcessorSetStreamHDRMetaData dispatches through ID3D11VideoContext2's vtable slot 81.
-func (self *ID3D11VideoContext2) VideoProcessorSetStreamHDRMetaData(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, Type graphicsdxgi.DXGI_HDR_METADATA_TYPE, Size uint32, pHDRMetaData unsafe.Pointer) {
-	syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(Type), uintptr(Size), uintptr(unsafe.Pointer(pHDRMetaData)))
+func (self *ID3D11VideoContext2) VideoProcessorSetStreamHDRMetaData(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, Type graphicsdxgi.DXGI_HDR_METADATA_TYPE, pHDRMetaData []byte) {
+	var _pHDRMetaData *byte
+	if len(pHDRMetaData) > 0 {
+		_pHDRMetaData = &pHDRMetaData[0]
+	}
+	syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(Type), uintptr(len(pHDRMetaData)), uintptr(unsafe.Pointer(_pHDRMetaData)))
 }
 
 // VideoProcessorGetStreamHDRMetaData dispatches through ID3D11VideoContext2's vtable slot 82.
-func (self *ID3D11VideoContext2) VideoProcessorGetStreamHDRMetaData(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pType *graphicsdxgi.DXGI_HDR_METADATA_TYPE, Size uint32, pMetaData unsafe.Pointer) {
-	syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pType)), uintptr(Size), uintptr(unsafe.Pointer(pMetaData)))
+func (self *ID3D11VideoContext2) VideoProcessorGetStreamHDRMetaData(pVideoProcessor *ID3D11VideoProcessor, StreamIndex uint32, pType *graphicsdxgi.DXGI_HDR_METADATA_TYPE, pMetaData []byte) {
+	var _pMetaData *byte
+	if len(pMetaData) > 0 {
+		_pMetaData = &pMetaData[0]
+	}
+	syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVideoProcessor)), uintptr(StreamIndex), uintptr(unsafe.Pointer(pType)), uintptr(len(pMetaData)), uintptr(unsafe.Pointer(_pMetaData)))
 }
 
 // ID3D11VideoContext3: https://learn.microsoft.com/windows/win32/api/d3d11_4/nn-d3d11_4-id3d11videocontext3
@@ -3256,14 +3608,22 @@ type ID3D11VideoContext3 struct {
 var IID_ID3D11VideoContext3 = win32.GUID{Data1: 0xa9e2faa0, Data2: 0xcb39, Data3: 0x418f, Data4: [8]byte{0xa0, 0xb7, 0xd8, 0xaa, 0xd4, 0xde, 0x67, 0x2e}}
 
 // DecoderBeginFrame1 dispatches through ID3D11VideoContext3's vtable slot 83.
-func (self *ID3D11VideoContext3) DecoderBeginFrame1(pDecoder *ID3D11VideoDecoder, pView *ID3D11VideoDecoderOutputView, ContentKeySize uint32, pContentKey unsafe.Pointer, NumComponentHistograms uint32, pHistogramOffsets *uint32, ppHistogramBuffers **ID3D11Buffer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDecoder)), uintptr(unsafe.Pointer(pView)), uintptr(ContentKeySize), uintptr(unsafe.Pointer(pContentKey)), uintptr(NumComponentHistograms), uintptr(unsafe.Pointer(pHistogramOffsets)), uintptr(unsafe.Pointer(ppHistogramBuffers)))
+func (self *ID3D11VideoContext3) DecoderBeginFrame1(pDecoder *ID3D11VideoDecoder, pView *ID3D11VideoDecoderOutputView, pContentKey []byte, NumComponentHistograms uint32, pHistogramOffsets *uint32, ppHistogramBuffers **ID3D11Buffer) error {
+	var _pContentKey *byte
+	if len(pContentKey) > 0 {
+		_pContentKey = &pContentKey[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDecoder)), uintptr(unsafe.Pointer(pView)), uintptr(len(pContentKey)), uintptr(unsafe.Pointer(_pContentKey)), uintptr(NumComponentHistograms), uintptr(unsafe.Pointer(pHistogramOffsets)), uintptr(unsafe.Pointer(ppHistogramBuffers)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SubmitDecoderBuffers2 dispatches through ID3D11VideoContext3's vtable slot 84.
-func (self *ID3D11VideoContext3) SubmitDecoderBuffers2(pDecoder *ID3D11VideoDecoder, NumBuffers uint32, pBufferDesc *D3D11_VIDEO_DECODER_BUFFER_DESC2) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDecoder)), uintptr(NumBuffers), uintptr(unsafe.Pointer(pBufferDesc)))
+func (self *ID3D11VideoContext3) SubmitDecoderBuffers2(pDecoder *ID3D11VideoDecoder, pBufferDesc []D3D11_VIDEO_DECODER_BUFFER_DESC2) error {
+	var _pBufferDesc *D3D11_VIDEO_DECODER_BUFFER_DESC2
+	if len(pBufferDesc) > 0 {
+		_pBufferDesc = &pBufferDesc[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDecoder)), uintptr(len(pBufferDesc)), uintptr(unsafe.Pointer(_pBufferDesc)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3402,8 +3762,12 @@ func (self *ID3D11VideoDevice) CheckCryptoKeyExchange(pCryptoType *win32.GUID, p
 }
 
 // SetPrivateData dispatches through ID3D11VideoDevice's vtable slot 18.
-func (self *ID3D11VideoDevice) SetPrivateData(guid *win32.GUID, DataSize uint32, pData unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
+func (self *ID3D11VideoDevice) SetPrivateData(guid *win32.GUID, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guid)), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3456,14 +3820,22 @@ type ID3D11VideoDevice2 struct {
 var IID_ID3D11VideoDevice2 = win32.GUID{Data1: 0x59c0cb01, Data2: 0x35f0, Data3: 0x4a70, Data4: [8]byte{0x8f, 0x67, 0x87, 0x90, 0x5c, 0x90, 0x6a, 0x53}}
 
 // CheckFeatureSupport dispatches through ID3D11VideoDevice2's vtable slot 24.
-func (self *ID3D11VideoDevice2) CheckFeatureSupport(Feature D3D11_FEATURE_VIDEO, pFeatureSupportData unsafe.Pointer, FeatureSupportDataSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(Feature), uintptr(unsafe.Pointer(pFeatureSupportData)), uintptr(FeatureSupportDataSize))
+func (self *ID3D11VideoDevice2) CheckFeatureSupport(Feature D3D11_FEATURE_VIDEO, pFeatureSupportData []byte) error {
+	var _pFeatureSupportData *byte
+	if len(pFeatureSupportData) > 0 {
+		_pFeatureSupportData = &pFeatureSupportData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(Feature), uintptr(unsafe.Pointer(_pFeatureSupportData)), uintptr(len(pFeatureSupportData)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // NegotiateCryptoSessionKeyExchangeMT dispatches through ID3D11VideoDevice2's vtable slot 25.
-func (self *ID3D11VideoDevice2) NegotiateCryptoSessionKeyExchangeMT(pCryptoSession *ID3D11CryptoSession, flags D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS, DataSize uint32, pData unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCryptoSession)), uintptr(flags), uintptr(DataSize), uintptr(unsafe.Pointer(pData)))
+func (self *ID3D11VideoDevice2) NegotiateCryptoSessionKeyExchangeMT(pCryptoSession *ID3D11CryptoSession, flags D3D11_CRYPTO_SESSION_KEY_EXCHANGE_FLAGS, pData []byte) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCryptoSession)), uintptr(flags), uintptr(len(pData)), uintptr(unsafe.Pointer(_pData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3641,8 +4013,16 @@ type ID3DX11FFT struct {
 var IID_ID3DX11FFT = win32.GUID{Data1: 0xb3f7a938, Data2: 0x4c93, Data3: 0x4310, Data4: [8]byte{0xa6, 0x75, 0xb3, 0x0d, 0x6d, 0xe5, 0x05, 0x53}}
 
 // AttachBuffersAndPrecompute dispatches through ID3DX11FFT's vtable slot 7.
-func (self *ID3DX11FFT) AttachBuffersAndPrecompute(NumTempBuffers uint32, ppTempBuffers **ID3D11UnorderedAccessView, NumPrecomputeBuffers uint32, ppPrecomputeBufferSizes **ID3D11UnorderedAccessView) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(NumTempBuffers), uintptr(unsafe.Pointer(ppTempBuffers)), uintptr(NumPrecomputeBuffers), uintptr(unsafe.Pointer(ppPrecomputeBufferSizes)))
+func (self *ID3DX11FFT) AttachBuffersAndPrecompute(ppTempBuffers []*ID3D11UnorderedAccessView, ppPrecomputeBufferSizes []*ID3D11UnorderedAccessView) error {
+	var _ppTempBuffers **ID3D11UnorderedAccessView
+	if len(ppTempBuffers) > 0 {
+		_ppTempBuffers = &ppTempBuffers[0]
+	}
+	var _ppPrecomputeBufferSizes **ID3D11UnorderedAccessView
+	if len(ppPrecomputeBufferSizes) > 0 {
+		_ppPrecomputeBufferSizes = &ppPrecomputeBufferSizes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(ppTempBuffers)), uintptr(unsafe.Pointer(_ppTempBuffers)), uintptr(len(ppPrecomputeBufferSizes)), uintptr(unsafe.Pointer(_ppPrecomputeBufferSizes)))
 	return win32.HRESULTError(int32(r1))
 }
 

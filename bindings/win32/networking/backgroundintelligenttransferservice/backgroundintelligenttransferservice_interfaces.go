@@ -158,8 +158,12 @@ func (self *IBackgroundCopyCallback1) OnProgress(ProgressType uint32, pGroup *IB
 }
 
 // OnProgressEx dispatches through IBackgroundCopyCallback1's vtable slot 5.
-func (self *IBackgroundCopyCallback1) OnProgressEx(ProgressType uint32, pGroup *IBackgroundCopyGroup, pJob *IBackgroundCopyJob1, dwFileIndex uint32, dwProgressValue uint32, dwByteArraySize uint32, pByte *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ProgressType), uintptr(unsafe.Pointer(pGroup)), uintptr(unsafe.Pointer(pJob)), uintptr(dwFileIndex), uintptr(dwProgressValue), uintptr(dwByteArraySize), uintptr(unsafe.Pointer(pByte)))
+func (self *IBackgroundCopyCallback1) OnProgressEx(ProgressType uint32, pGroup *IBackgroundCopyGroup, pJob *IBackgroundCopyJob1, dwFileIndex uint32, dwProgressValue uint32, pByte []byte) error {
+	var _pByte *byte
+	if len(pByte) > 0 {
+		_pByte = &pByte[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(ProgressType), uintptr(unsafe.Pointer(pGroup)), uintptr(unsafe.Pointer(pJob)), uintptr(dwFileIndex), uintptr(dwProgressValue), uintptr(len(pByte)), uintptr(unsafe.Pointer(_pByte)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -188,8 +192,12 @@ type IBackgroundCopyCallback3 struct {
 var IID_IBackgroundCopyCallback3 = win32.GUID{Data1: 0x98c97bd2, Data2: 0xe32b, Data3: 0x4ad8, Data4: [8]byte{0xa5, 0x28, 0x95, 0xfd, 0x8b, 0x16, 0xbd, 0x42}}
 
 // FileRangesTransferred dispatches through IBackgroundCopyCallback3's vtable slot 7.
-func (self *IBackgroundCopyCallback3) FileRangesTransferred(job *IBackgroundCopyJob, file *IBackgroundCopyFile, rangeCount uint32, ranges *BG_FILE_RANGE) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(job)), uintptr(unsafe.Pointer(file)), uintptr(rangeCount), uintptr(unsafe.Pointer(ranges)))
+func (self *IBackgroundCopyCallback3) FileRangesTransferred(job *IBackgroundCopyJob, file *IBackgroundCopyFile, ranges []BG_FILE_RANGE) error {
+	var _ranges *BG_FILE_RANGE
+	if len(ranges) > 0 {
+		_ranges = &ranges[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(job)), uintptr(unsafe.Pointer(file)), uintptr(len(ranges)), uintptr(unsafe.Pointer(_ranges)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -361,8 +369,12 @@ func (self *IBackgroundCopyFile6) UpdateDownloadPosition(offset uint64) error {
 }
 
 // RequestFileRanges dispatches through IBackgroundCopyFile6's vtable slot 16.
-func (self *IBackgroundCopyFile6) RequestFileRanges(rangeCount uint32, ranges *BG_FILE_RANGE) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(rangeCount), uintptr(unsafe.Pointer(ranges)))
+func (self *IBackgroundCopyFile6) RequestFileRanges(ranges []BG_FILE_RANGE) error {
+	var _ranges *BG_FILE_RANGE
+	if len(ranges) > 0 {
+		_ranges = &ranges[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[16], uintptr(unsafe.Pointer(self)), uintptr(len(ranges)), uintptr(unsafe.Pointer(_ranges)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -469,8 +481,12 @@ type IBackgroundCopyJob struct {
 var IID_IBackgroundCopyJob = win32.GUID{Data1: 0x37668d37, Data2: 0x507e, Data3: 0x4160, Data4: [8]byte{0x93, 0x16, 0x26, 0x30, 0x6d, 0x15, 0x0b, 0x12}}
 
 // AddFileSet dispatches through IBackgroundCopyJob's vtable slot 3.
-func (self *IBackgroundCopyJob) AddFileSet(cFileCount uint32, pFileSet *BG_FILE_INFO) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFileCount), uintptr(unsafe.Pointer(pFileSet)))
+func (self *IBackgroundCopyJob) AddFileSet(pFileSet []BG_FILE_INFO) error {
+	var _pFileSet *BG_FILE_INFO
+	if len(pFileSet) > 0 {
+		_pFileSet = &pFileSet[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pFileSet)), uintptr(unsafe.Pointer(_pFileSet)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -694,8 +710,12 @@ func (self *IBackgroundCopyJob1) GetStatus(pdwStatus *uint32, pdwWin32Result *ui
 }
 
 // AddFiles dispatches through IBackgroundCopyJob1's vtable slot 6.
-func (self *IBackgroundCopyJob1) AddFiles(cFileCount uint32, ppFileSet **FILESETINFO) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cFileCount), uintptr(unsafe.Pointer(ppFileSet)))
+func (self *IBackgroundCopyJob1) AddFiles(ppFileSet []*FILESETINFO) error {
+	var _ppFileSet **FILESETINFO
+	if len(ppFileSet) > 0 {
+		_ppFileSet = &ppFileSet[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(ppFileSet)), uintptr(unsafe.Pointer(_ppFileSet)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -801,10 +821,14 @@ func (self *IBackgroundCopyJob3) ReplaceRemotePrefix(OldPrefix string, NewPrefix
 }
 
 // AddFileWithRanges dispatches through IBackgroundCopyJob3's vtable slot 44.
-func (self *IBackgroundCopyJob3) AddFileWithRanges(RemoteUrl string, LocalName string, RangeCount uint32, Ranges *BG_FILE_RANGE) error {
+func (self *IBackgroundCopyJob3) AddFileWithRanges(RemoteUrl string, LocalName string, Ranges []BG_FILE_RANGE) error {
 	_RemoteUrl := win32.UTF16Ptr(RemoteUrl)
 	_LocalName := win32.UTF16Ptr(LocalName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_RemoteUrl)), uintptr(unsafe.Pointer(_LocalName)), uintptr(RangeCount), uintptr(unsafe.Pointer(Ranges)))
+	var _Ranges *BG_FILE_RANGE
+	if len(Ranges) > 0 {
+		_Ranges = &Ranges[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[44], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_RemoteUrl)), uintptr(unsafe.Pointer(_LocalName)), uintptr(len(Ranges)), uintptr(unsafe.Pointer(_Ranges)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1043,8 +1067,16 @@ type IBackgroundCopyServerCertificateValidationCallback struct {
 var IID_IBackgroundCopyServerCertificateValidationCallback = win32.GUID{Data1: 0x4cec0d02, Data2: 0xdef7, Data3: 0x4158, Data4: [8]byte{0x81, 0x3a, 0xc3, 0x2a, 0x46, 0x94, 0x5f, 0xf7}}
 
 // ValidateServerCertificate dispatches through IBackgroundCopyServerCertificateValidationCallback's vtable slot 3.
-func (self *IBackgroundCopyServerCertificateValidationCallback) ValidateServerCertificate(job *IBackgroundCopyJob, file *IBackgroundCopyFile, certLength uint32, certData *byte, certEncodingType uint32, certStoreLength uint32, certStoreData *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(job)), uintptr(unsafe.Pointer(file)), uintptr(certLength), uintptr(unsafe.Pointer(certData)), uintptr(certEncodingType), uintptr(certStoreLength), uintptr(unsafe.Pointer(certStoreData)))
+func (self *IBackgroundCopyServerCertificateValidationCallback) ValidateServerCertificate(job *IBackgroundCopyJob, file *IBackgroundCopyFile, certData []byte, certEncodingType uint32, certStoreData []byte) error {
+	var _certData *byte
+	if len(certData) > 0 {
+		_certData = &certData[0]
+	}
+	var _certStoreData *byte
+	if len(certStoreData) > 0 {
+		_certStoreData = &certStoreData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(job)), uintptr(unsafe.Pointer(file)), uintptr(len(certData)), uintptr(unsafe.Pointer(_certData)), uintptr(certEncodingType), uintptr(len(certStoreData)), uintptr(unsafe.Pointer(_certStoreData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1269,8 +1301,12 @@ type IEnumBackgroundCopyFiles struct {
 var IID_IEnumBackgroundCopyFiles = win32.GUID{Data1: 0xca51e165, Data2: 0xc365, Data3: 0x424c, Data4: [8]byte{0x8d, 0x41, 0x24, 0xaa, 0xa4, 0xff, 0x3c, 0x40}}
 
 // Next dispatches through IEnumBackgroundCopyFiles's vtable slot 3.
-func (self *IEnumBackgroundCopyFiles) Next(celt uint32, rgelt **IBackgroundCopyFile, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumBackgroundCopyFiles) Next(rgelt []*IBackgroundCopyFile, pceltFetched *uint32) error {
+	var _rgelt **IBackgroundCopyFile
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1308,8 +1344,12 @@ type IEnumBackgroundCopyGroups struct {
 var IID_IEnumBackgroundCopyGroups = win32.GUID{Data1: 0xd993e603, Data2: 0x4aa4, Data3: 0x47c5, Data4: [8]byte{0x86, 0x65, 0xc2, 0x0d, 0x39, 0xc2, 0xba, 0x4f}}
 
 // Next dispatches through IEnumBackgroundCopyGroups's vtable slot 3.
-func (self *IEnumBackgroundCopyGroups) Next(celt uint32, rgelt *win32.GUID, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumBackgroundCopyGroups) Next(rgelt []win32.GUID, pceltFetched *uint32) error {
+	var _rgelt *win32.GUID
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1347,8 +1387,12 @@ type IEnumBackgroundCopyJobs struct {
 var IID_IEnumBackgroundCopyJobs = win32.GUID{Data1: 0x1af4f612, Data2: 0x3b71, Data3: 0x466f, Data4: [8]byte{0x8f, 0x58, 0x7b, 0x6f, 0x73, 0xac, 0x57, 0xad}}
 
 // Next dispatches through IEnumBackgroundCopyJobs's vtable slot 3.
-func (self *IEnumBackgroundCopyJobs) Next(celt uint32, rgelt **IBackgroundCopyJob, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumBackgroundCopyJobs) Next(rgelt []*IBackgroundCopyJob, pceltFetched *uint32) error {
+	var _rgelt **IBackgroundCopyJob
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1386,8 +1430,12 @@ type IEnumBackgroundCopyJobs1 struct {
 var IID_IEnumBackgroundCopyJobs1 = win32.GUID{Data1: 0x8baeba9d, Data2: 0x8f1c, Data3: 0x42c4, Data4: [8]byte{0xb8, 0x2c, 0x09, 0xae, 0x79, 0x98, 0x0d, 0x25}}
 
 // Next dispatches through IEnumBackgroundCopyJobs1's vtable slot 3.
-func (self *IEnumBackgroundCopyJobs1) Next(celt uint32, rgelt *win32.GUID, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumBackgroundCopyJobs1) Next(rgelt []win32.GUID, pceltFetched *uint32) error {
+	var _rgelt *win32.GUID
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1425,8 +1473,12 @@ type IEnumBitsPeerCacheRecords struct {
 var IID_IEnumBitsPeerCacheRecords = win32.GUID{Data1: 0x659cdea4, Data2: 0x489e, Data3: 0x11d9, Data4: [8]byte{0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51}}
 
 // Next dispatches through IEnumBitsPeerCacheRecords's vtable slot 3.
-func (self *IEnumBitsPeerCacheRecords) Next(celt uint32, rgelt **IBitsPeerCacheRecord, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumBitsPeerCacheRecords) Next(rgelt []*IBitsPeerCacheRecord, pceltFetched *uint32) error {
+	var _rgelt **IBitsPeerCacheRecord
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1464,8 +1516,12 @@ type IEnumBitsPeers struct {
 var IID_IEnumBitsPeers = win32.GUID{Data1: 0x659cdea5, Data2: 0x489e, Data3: 0x11d9, Data4: [8]byte{0xa9, 0xcd, 0x00, 0x0d, 0x56, 0x96, 0x52, 0x51}}
 
 // Next dispatches through IEnumBitsPeers's vtable slot 3.
-func (self *IEnumBitsPeers) Next(celt uint32, rgelt **IBitsPeer, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumBitsPeers) Next(rgelt []*IBitsPeer, pceltFetched *uint32) error {
+	var _rgelt **IBitsPeer
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 

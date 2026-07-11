@@ -60,8 +60,12 @@ type IEnumAddress struct {
 var IID_IEnumAddress = win32.GUID{Data1: 0x1666fca1, Data2: 0x9363, Data3: 0x11d0, Data4: [8]byte{0x83, 0x5c, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Next dispatches through IEnumAddress's vtable slot 3.
-func (self *IEnumAddress) Next(celt uint32, ppElements **ITAddress, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumAddress) Next(ppElements []*ITAddress, pceltFetched *uint32) error {
+	var _ppElements **ITAddress
+	if len(ppElements) > 0 {
+		_ppElements = &ppElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -193,8 +197,12 @@ type IEnumBstr struct {
 var IID_IEnumBstr = win32.GUID{Data1: 0x35372049, Data2: 0x0bc6, Data3: 0x11d2, Data4: [8]byte{0xa0, 0x33, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Next dispatches through IEnumBstr's vtable slot 3.
-func (self *IEnumBstr) Next(celt uint32, ppStrings *foundation.BSTR, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppStrings)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumBstr) Next(ppStrings []foundation.BSTR, pceltFetched *uint32) error {
+	var _ppStrings *foundation.BSTR
+	if len(ppStrings) > 0 {
+		_ppStrings = &ppStrings[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppStrings)), uintptr(unsafe.Pointer(_ppStrings)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -261,8 +269,12 @@ type IEnumCallHub struct {
 var IID_IEnumCallHub = win32.GUID{Data1: 0xa3c15450, Data2: 0x5b92, Data3: 0x11d1, Data4: [8]byte{0x8f, 0x4e, 0x00, 0xc0, 0x4f, 0xb6, 0x80, 0x9f}}
 
 // Next dispatches through IEnumCallHub's vtable slot 3.
-func (self *IEnumCallHub) Next(celt uint32, ppElements **ITCallHub, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumCallHub) Next(ppElements []*ITCallHub, pceltFetched *uint32) error {
+	var _ppElements **ITCallHub
+	if len(ppElements) > 0 {
+		_ppElements = &ppElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -329,8 +341,12 @@ type IEnumDialableAddrs struct {
 var IID_IEnumDialableAddrs = win32.GUID{Data1: 0x34621d70, Data2: 0x6cff, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xf7, 0x00, 0xc0, 0x4f, 0xc3, 0x1f, 0xee}}
 
 // Next dispatches through IEnumDialableAddrs's vtable slot 3.
-func (self *IEnumDialableAddrs) Next(celt uint32, ppElements *foundation.BSTR, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumDialableAddrs) Next(ppElements []foundation.BSTR, pcFetched *uint32) error {
+	var _ppElements *foundation.BSTR
+	if len(ppElements) > 0 {
+		_ppElements = &ppElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -363,8 +379,12 @@ type IEnumDirectory struct {
 var IID_IEnumDirectory = win32.GUID{Data1: 0x34621d6d, Data2: 0x6cff, Data3: 0x11d1, Data4: [8]byte{0xaf, 0xf7, 0x00, 0xc0, 0x4f, 0xc3, 0x1f, 0xee}}
 
 // Next dispatches through IEnumDirectory's vtable slot 3.
-func (self *IEnumDirectory) Next(celt uint32, ppElements **ITDirectory, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumDirectory) Next(ppElements []*ITDirectory, pcFetched *uint32) error {
+	var _ppElements **ITDirectory
+	if len(ppElements) > 0 {
+		_ppElements = &ppElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -397,8 +417,12 @@ type IEnumDirectoryObject struct {
 var IID_IEnumDirectoryObject = win32.GUID{Data1: 0x06c9b64a, Data2: 0x306d, Data3: 0x11d1, Data4: [8]byte{0x97, 0x74, 0x00, 0xc0, 0x4f, 0xd9, 0x1a, 0xc0}}
 
 // Next dispatches through IEnumDirectoryObject's vtable slot 3.
-func (self *IEnumDirectoryObject) Next(celt uint32, pVal **ITDirectoryObject, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pVal)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumDirectoryObject) Next(pVal []*ITDirectoryObject, pcFetched *uint32) error {
+	var _pVal **ITDirectoryObject
+	if len(pVal) > 0 {
+		_pVal = &pVal[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pVal)), uintptr(unsafe.Pointer(_pVal)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -498,8 +522,12 @@ type IEnumPhone struct {
 var IID_IEnumPhone = win32.GUID{Data1: 0xf15b7669, Data2: 0x4780, Data3: 0x4595, Data4: [8]byte{0x8c, 0x89, 0xfb, 0x36, 0x9c, 0x8c, 0xf7, 0xaa}}
 
 // Next dispatches through IEnumPhone's vtable slot 3.
-func (self *IEnumPhone) Next(celt uint32, ppElements **ITPhone, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumPhone) Next(ppElements []*ITPhone, pceltFetched *uint32) error {
+	var _ppElements **ITPhone
+	if len(ppElements) > 0 {
+		_ppElements = &ppElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -532,8 +560,12 @@ type IEnumPluggableSuperclassInfo struct {
 var IID_IEnumPluggableSuperclassInfo = win32.GUID{Data1: 0xe9586a80, Data2: 0x89e6, Data3: 0x4cff, Data4: [8]byte{0x93, 0x1d, 0x47, 0x8d, 0x57, 0x51, 0xf4, 0xc0}}
 
 // Next dispatches through IEnumPluggableSuperclassInfo's vtable slot 3.
-func (self *IEnumPluggableSuperclassInfo) Next(celt uint32, ppElements **ITPluggableTerminalSuperclassInfo, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumPluggableSuperclassInfo) Next(ppElements []*ITPluggableTerminalSuperclassInfo, pceltFetched *uint32) error {
+	var _ppElements **ITPluggableTerminalSuperclassInfo
+	if len(ppElements) > 0 {
+		_ppElements = &ppElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -566,8 +598,12 @@ type IEnumPluggableTerminalClassInfo struct {
 var IID_IEnumPluggableTerminalClassInfo = win32.GUID{Data1: 0x4567450c, Data2: 0xdbee, Data3: 0x4e3f, Data4: [8]byte{0xaa, 0xf5, 0x37, 0xbf, 0x9e, 0xbf, 0x5e, 0x29}}
 
 // Next dispatches through IEnumPluggableTerminalClassInfo's vtable slot 3.
-func (self *IEnumPluggableTerminalClassInfo) Next(celt uint32, ppElements **ITPluggableTerminalClassInfo, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumPluggableTerminalClassInfo) Next(ppElements []*ITPluggableTerminalClassInfo, pceltFetched *uint32) error {
+	var _ppElements **ITPluggableTerminalClassInfo
+	if len(ppElements) > 0 {
+		_ppElements = &ppElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -735,8 +771,12 @@ type IEnumTerminalClass struct {
 var IID_IEnumTerminalClass = win32.GUID{Data1: 0xae269cf5, Data2: 0x935e, Data3: 0x11d0, Data4: [8]byte{0x83, 0x5c, 0x00, 0xaa, 0x00, 0x3c, 0xca, 0xbd}}
 
 // Next dispatches through IEnumTerminalClass's vtable slot 3.
-func (self *IEnumTerminalClass) Next(celt uint32, pElements *win32.GUID, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pElements)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumTerminalClass) Next(pElements []win32.GUID, pceltFetched *uint32) error {
+	var _pElements *win32.GUID
+	if len(pElements) > 0 {
+		_pElements = &pElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pElements)), uintptr(unsafe.Pointer(_pElements)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2330,8 +2370,12 @@ func (self *ITCallInfo) GetCallInfoBuffer(CallInfoBuffer CALLINFO_BUFFER, pdwSiz
 }
 
 // SetCallInfoBuffer dispatches through ITCallInfo's vtable slot 18.
-func (self *ITCallInfo) SetCallInfoBuffer(CallInfoBuffer CALLINFO_BUFFER, dwSize uint32, pCallInfoBuffer *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(CallInfoBuffer), uintptr(dwSize), uintptr(unsafe.Pointer(pCallInfoBuffer)))
+func (self *ITCallInfo) SetCallInfoBuffer(CallInfoBuffer CALLINFO_BUFFER, pCallInfoBuffer []byte) error {
+	var _pCallInfoBuffer *byte
+	if len(pCallInfoBuffer) > 0 {
+		_pCallInfoBuffer = &pCallInfoBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(CallInfoBuffer), uintptr(len(pCallInfoBuffer)), uintptr(unsafe.Pointer(_pCallInfoBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3373,8 +3417,12 @@ func (self *ITLegacyAddressMediaControl) GetDevConfig(pDeviceClass foundation.BS
 }
 
 // SetDevConfig dispatches through ITLegacyAddressMediaControl's vtable slot 5.
-func (self *ITLegacyAddressMediaControl) SetDevConfig(pDeviceClass foundation.BSTR, dwSize uint32, pDeviceConfig *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDeviceClass)), uintptr(dwSize), uintptr(unsafe.Pointer(pDeviceConfig)))
+func (self *ITLegacyAddressMediaControl) SetDevConfig(pDeviceClass foundation.BSTR, pDeviceConfig []byte) error {
+	var _pDeviceConfig *byte
+	if len(pDeviceConfig) > 0 {
+		_pDeviceConfig = &pDeviceConfig[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDeviceClass)), uintptr(len(pDeviceConfig)), uintptr(unsafe.Pointer(_pDeviceConfig)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3394,8 +3442,12 @@ func (self *ITLegacyAddressMediaControl2) ConfigDialog(hwndOwner foundation.HWND
 }
 
 // ConfigDialogEdit dispatches through ITLegacyAddressMediaControl2's vtable slot 7.
-func (self *ITLegacyAddressMediaControl2) ConfigDialogEdit(hwndOwner foundation.HWND, pDeviceClass foundation.BSTR, dwSizeIn uint32, pDeviceConfigIn *byte, pdwSizeOut *uint32, ppDeviceConfigOut **byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hwndOwner), uintptr(unsafe.Pointer(pDeviceClass)), uintptr(dwSizeIn), uintptr(unsafe.Pointer(pDeviceConfigIn)), uintptr(unsafe.Pointer(pdwSizeOut)), uintptr(unsafe.Pointer(ppDeviceConfigOut)))
+func (self *ITLegacyAddressMediaControl2) ConfigDialogEdit(hwndOwner foundation.HWND, pDeviceClass foundation.BSTR, pDeviceConfigIn []byte, pdwSizeOut *uint32, ppDeviceConfigOut **byte) error {
+	var _pDeviceConfigIn *byte
+	if len(pDeviceConfigIn) > 0 {
+		_pDeviceConfigIn = &pDeviceConfigIn[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hwndOwner), uintptr(unsafe.Pointer(pDeviceClass)), uintptr(len(pDeviceConfigIn)), uintptr(unsafe.Pointer(_pDeviceConfigIn)), uintptr(unsafe.Pointer(pdwSizeOut)), uintptr(unsafe.Pointer(ppDeviceConfigOut)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3645,8 +3697,12 @@ func (self *ITMSPAddress) ShutdownMSPCall(pStreamControl *systemcom.IUnknown) er
 }
 
 // ReceiveTSPData dispatches through ITMSPAddress's vtable slot 7.
-func (self *ITMSPAddress) ReceiveTSPData(pMSPCall *systemcom.IUnknown, pBuffer *byte, dwSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMSPCall)), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwSize))
+func (self *ITMSPAddress) ReceiveTSPData(pMSPCall *systemcom.IUnknown, pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pMSPCall)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 

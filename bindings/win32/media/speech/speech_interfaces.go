@@ -987,14 +987,22 @@ func (self *ISpPhoneticAlphabetConverter) SetLangId(LangID uint16) error {
 }
 
 // SAPI2UPS dispatches through ISpPhoneticAlphabetConverter's vtable slot 5.
-func (self *ISpPhoneticAlphabetConverter) SAPI2UPS(pszSAPIId *uint16, pszUPSId *uint16, cMaxLength uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSAPIId)), uintptr(unsafe.Pointer(pszUPSId)), uintptr(cMaxLength))
+func (self *ISpPhoneticAlphabetConverter) SAPI2UPS(pszSAPIId *uint16, pszUPSId []uint16) error {
+	var _pszUPSId *uint16
+	if len(pszUPSId) > 0 {
+		_pszUPSId = &pszUPSId[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszSAPIId)), uintptr(unsafe.Pointer(_pszUPSId)), uintptr(len(pszUPSId)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // UPS2SAPI dispatches through ISpPhoneticAlphabetConverter's vtable slot 6.
-func (self *ISpPhoneticAlphabetConverter) UPS2SAPI(pszUPSId *uint16, pszSAPIId *uint16, cMaxLength uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszUPSId)), uintptr(unsafe.Pointer(pszSAPIId)), uintptr(cMaxLength))
+func (self *ISpPhoneticAlphabetConverter) UPS2SAPI(pszUPSId *uint16, pszSAPIId []uint16) error {
+	var _pszSAPIId *uint16
+	if len(pszSAPIId) > 0 {
+		_pszSAPIId = &pszSAPIId[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszUPSId)), uintptr(unsafe.Pointer(_pszSAPIId)), uintptr(len(pszSAPIId)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1158,14 +1166,22 @@ type ISpPrivateEngineCallEx struct {
 var IID_ISpPrivateEngineCallEx = win32.GUID{Data1: 0xdefd682a, Data2: 0xfe0a, Data3: 0x42b9, Data4: [8]byte{0xbf, 0xa1, 0x56, 0xd3, 0xd6, 0xce, 0xcf, 0xaf}}
 
 // CallEngineSynchronize dispatches through ISpPrivateEngineCallEx's vtable slot 3.
-func (self *ISpPrivateEngineCallEx) CallEngineSynchronize(pInFrame unsafe.Pointer, ulInFrameSize uint32, ppCoMemOutFrame *unsafe.Pointer, pulOutFrameSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInFrame)), uintptr(ulInFrameSize), uintptr(unsafe.Pointer(ppCoMemOutFrame)), uintptr(unsafe.Pointer(pulOutFrameSize)))
+func (self *ISpPrivateEngineCallEx) CallEngineSynchronize(pInFrame []byte, ppCoMemOutFrame *unsafe.Pointer, pulOutFrameSize *uint32) error {
+	var _pInFrame *byte
+	if len(pInFrame) > 0 {
+		_pInFrame = &pInFrame[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInFrame)), uintptr(len(pInFrame)), uintptr(unsafe.Pointer(ppCoMemOutFrame)), uintptr(unsafe.Pointer(pulOutFrameSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CallEngineImmediate dispatches through ISpPrivateEngineCallEx's vtable slot 4.
-func (self *ISpPrivateEngineCallEx) CallEngineImmediate(pInFrame unsafe.Pointer, ulInFrameSize uint32, ppCoMemOutFrame *unsafe.Pointer, pulOutFrameSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInFrame)), uintptr(ulInFrameSize), uintptr(unsafe.Pointer(ppCoMemOutFrame)), uintptr(unsafe.Pointer(pulOutFrameSize)))
+func (self *ISpPrivateEngineCallEx) CallEngineImmediate(pInFrame []byte, ppCoMemOutFrame *unsafe.Pointer, pulOutFrameSize *uint32) error {
+	var _pInFrame *byte
+	if len(pInFrame) > 0 {
+		_pInFrame = &pInFrame[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInFrame)), uintptr(len(pInFrame)), uintptr(unsafe.Pointer(ppCoMemOutFrame)), uintptr(unsafe.Pointer(pulOutFrameSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1542,8 +1558,12 @@ func (self *ISpRecoResult) GetResultTimes(pTimes *SPRECORESULTTIMES) error {
 }
 
 // GetAlternates dispatches through ISpRecoResult's vtable slot 8.
-func (self *ISpRecoResult) GetAlternates(ulStartElement uint32, cElements uint32, ulRequestCount uint32, ppPhrases **ISpPhraseAlt, pcPhrasesReturned *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulStartElement), uintptr(cElements), uintptr(ulRequestCount), uintptr(unsafe.Pointer(ppPhrases)), uintptr(unsafe.Pointer(pcPhrasesReturned)))
+func (self *ISpRecoResult) GetAlternates(ulStartElement uint32, cElements uint32, ppPhrases []*ISpPhraseAlt, pcPhrasesReturned *uint32) error {
+	var _ppPhrases **ISpPhraseAlt
+	if len(ppPhrases) > 0 {
+		_ppPhrases = &ppPhrases[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ulStartElement), uintptr(cElements), uintptr(len(ppPhrases)), uintptr(unsafe.Pointer(_ppPhrases)), uintptr(unsafe.Pointer(pcPhrasesReturned)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -5428,14 +5448,22 @@ type ISpPrivateEngineCall struct {
 var IID_ISpPrivateEngineCall = win32.GUID{Data1: 0x8e7c791e, Data2: 0x4467, Data3: 0x11d3, Data4: [8]byte{0x97, 0x23, 0x00, 0xc0, 0x4f, 0x72, 0xdb, 0x08}}
 
 // CallEngine dispatches through _ISpPrivateEngineCall's vtable slot 3.
-func (self *ISpPrivateEngineCall) CallEngine(pCallFrame unsafe.Pointer, ulCallFrameSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pCallFrame)), uintptr(ulCallFrameSize))
+func (self *ISpPrivateEngineCall) CallEngine(pCallFrame []byte) error {
+	var _pCallFrame *byte
+	if len(pCallFrame) > 0 {
+		_pCallFrame = &pCallFrame[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pCallFrame)), uintptr(len(pCallFrame)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CallEngineEx dispatches through _ISpPrivateEngineCall's vtable slot 4.
-func (self *ISpPrivateEngineCall) CallEngineEx(pInFrame unsafe.Pointer, ulInFrameSize uint32, ppCoMemOutFrame *unsafe.Pointer, pulOutFrameSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInFrame)), uintptr(ulInFrameSize), uintptr(unsafe.Pointer(ppCoMemOutFrame)), uintptr(unsafe.Pointer(pulOutFrameSize)))
+func (self *ISpPrivateEngineCall) CallEngineEx(pInFrame []byte, ppCoMemOutFrame *unsafe.Pointer, pulOutFrameSize *uint32) error {
+	var _pInFrame *byte
+	if len(pInFrame) > 0 {
+		_pInFrame = &pInFrame[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInFrame)), uintptr(len(pInFrame)), uintptr(unsafe.Pointer(ppCoMemOutFrame)), uintptr(unsafe.Pointer(pulOutFrameSize)))
 	return win32.HRESULTError(int32(r1))
 }
 

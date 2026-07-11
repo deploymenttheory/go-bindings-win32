@@ -273,8 +273,12 @@ type IEnumManagerFrames struct {
 var IID_IEnumManagerFrames = win32.GUID{Data1: 0x3caa826a, Data2: 0x9b1f, Data3: 0x4a79, Data4: [8]byte{0xbc, 0x81, 0xf0, 0x43, 0x0d, 0xed, 0x16, 0x48}}
 
 // Next dispatches through IEnumManagerFrames's vtable slot 3.
-func (self *IEnumManagerFrames) Next(celt uint32, ppWindows **foundation.HWND, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppWindows)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumManagerFrames) Next(ppWindows []*foundation.HWND, pceltFetched *uint32) error {
+	var _ppWindows **foundation.HWND
+	if len(ppWindows) > 0 {
+		_ppWindows = &ppWindows[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppWindows)), uintptr(unsafe.Pointer(_ppWindows)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -311,8 +315,12 @@ type IEnumOpenServiceActivity struct {
 var IID_IEnumOpenServiceActivity = win32.GUID{Data1: 0xa436d7d2, Data2: 0x17c3, Data3: 0x4ef4, Data4: [8]byte{0xa1, 0xe8, 0x5c, 0x86, 0xfa, 0xff, 0x26, 0xc0}}
 
 // Next dispatches through IEnumOpenServiceActivity's vtable slot 3.
-func (self *IEnumOpenServiceActivity) Next(celt uint32, rgelt **IOpenServiceActivity, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumOpenServiceActivity) Next(rgelt []*IOpenServiceActivity, pceltFetched *uint32) error {
+	var _rgelt **IOpenServiceActivity
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -343,8 +351,12 @@ type IEnumOpenServiceActivityCategory struct {
 var IID_IEnumOpenServiceActivityCategory = win32.GUID{Data1: 0x33627a56, Data2: 0x8c9a, Data3: 0x4430, Data4: [8]byte{0x8f, 0xd1, 0xb5, 0xf5, 0xc7, 0x71, 0xaf, 0xb6}}
 
 // Next dispatches through IEnumOpenServiceActivityCategory's vtable slot 3.
-func (self *IEnumOpenServiceActivityCategory) Next(celt uint32, rgelt **IOpenServiceActivityCategory, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumOpenServiceActivityCategory) Next(rgelt []*IOpenServiceActivityCategory, pceltFetched *uint32) error {
+	var _rgelt **IOpenServiceActivityCategory
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1662,8 +1674,12 @@ func (self *ITargetFrame) GetFrameMargins(pdwWidth *uint32, pdwHeight *uint32) e
 }
 
 // RemoteNavigate dispatches through ITargetFrame's vtable slot 14.
-func (self *ITargetFrame) RemoteNavigate(cLength uint32, pulData *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(cLength), uintptr(unsafe.Pointer(pulData)))
+func (self *ITargetFrame) RemoteNavigate(pulData []uint32) error {
+	var _pulData *uint32
+	if len(pulData) > 0 {
+		_pulData = &pulData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(len(pulData)), uintptr(unsafe.Pointer(_pulData)))
 	return win32.HRESULTError(int32(r1))
 }
 

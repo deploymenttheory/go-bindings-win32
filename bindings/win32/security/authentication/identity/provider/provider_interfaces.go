@@ -71,8 +71,12 @@ type AsyncIConnectedIdentityProvider struct {
 var IID_AsyncIConnectedIdentityProvider = win32.GUID{Data1: 0x9ce55141, Data2: 0xbce9, Data3: 0x4e15, Data4: [8]byte{0x82, 0x4d, 0x43, 0xd7, 0x9f, 0x51, 0x2f, 0x93}}
 
 // Begin_ConnectIdentity dispatches through AsyncIConnectedIdentityProvider's vtable slot 3.
-func (self *AsyncIConnectedIdentityProvider) Begin_ConnectIdentity(AuthBuffer *byte, AuthBufferSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AuthBuffer)), uintptr(AuthBufferSize))
+func (self *AsyncIConnectedIdentityProvider) Begin_ConnectIdentity(AuthBuffer []byte) error {
+	var _AuthBuffer *byte
+	if len(AuthBuffer) > 0 {
+		_AuthBuffer = &AuthBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_AuthBuffer)), uintptr(len(AuthBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -160,8 +164,12 @@ type AsyncIIdentityAuthentication struct {
 var IID_AsyncIIdentityAuthentication = win32.GUID{Data1: 0xf9a2f918, Data2: 0xfeca, Data3: 0x4e9c, Data4: [8]byte{0x96, 0x33, 0x61, 0xcb, 0xf1, 0x3e, 0xd3, 0x4d}}
 
 // Begin_SetIdentityCredential dispatches through AsyncIIdentityAuthentication's vtable slot 3.
-func (self *AsyncIIdentityAuthentication) Begin_SetIdentityCredential(CredBuffer *byte, CredBufferLength uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CredBuffer)), uintptr(CredBufferLength))
+func (self *AsyncIIdentityAuthentication) Begin_SetIdentityCredential(CredBuffer []byte) error {
+	var _CredBuffer *byte
+	if len(CredBuffer) > 0 {
+		_CredBuffer = &CredBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_CredBuffer)), uintptr(len(CredBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -172,8 +180,12 @@ func (self *AsyncIIdentityAuthentication) Finish_SetIdentityCredential() error {
 }
 
 // Begin_ValidateIdentityCredential dispatches through AsyncIIdentityAuthentication's vtable slot 5.
-func (self *AsyncIIdentityAuthentication) Begin_ValidateIdentityCredential(CredBuffer *byte, CredBufferLength uint32, ppIdentityProperties **uishellpropertiessystem.IPropertyStore) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CredBuffer)), uintptr(CredBufferLength), uintptr(unsafe.Pointer(ppIdentityProperties)))
+func (self *AsyncIIdentityAuthentication) Begin_ValidateIdentityCredential(CredBuffer []byte, ppIdentityProperties **uishellpropertiessystem.IPropertyStore) error {
+	var _CredBuffer *byte
+	if len(CredBuffer) > 0 {
+		_CredBuffer = &CredBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_CredBuffer)), uintptr(len(CredBuffer)), uintptr(unsafe.Pointer(ppIdentityProperties)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -446,8 +458,12 @@ type IConnectedIdentityProvider struct {
 var IID_IConnectedIdentityProvider = win32.GUID{Data1: 0xb7417b54, Data2: 0xe08c, Data3: 0x429b, Data4: [8]byte{0x96, 0xc8, 0x67, 0x8d, 0x13, 0x69, 0xec, 0xb1}}
 
 // ConnectIdentity dispatches through IConnectedIdentityProvider's vtable slot 3.
-func (self *IConnectedIdentityProvider) ConnectIdentity(AuthBuffer *byte, AuthBufferSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(AuthBuffer)), uintptr(AuthBufferSize))
+func (self *IConnectedIdentityProvider) ConnectIdentity(AuthBuffer []byte) error {
+	var _AuthBuffer *byte
+	if len(AuthBuffer) > 0 {
+		_AuthBuffer = &AuthBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_AuthBuffer)), uintptr(len(AuthBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -500,14 +516,22 @@ type IIdentityAuthentication struct {
 var IID_IIdentityAuthentication = win32.GUID{Data1: 0x5e7ef254, Data2: 0x979f, Data3: 0x43b5, Data4: [8]byte{0xb7, 0x4e, 0x06, 0xe4, 0xeb, 0x7d, 0xf0, 0xf9}}
 
 // SetIdentityCredential dispatches through IIdentityAuthentication's vtable slot 3.
-func (self *IIdentityAuthentication) SetIdentityCredential(CredBuffer *byte, CredBufferLength uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CredBuffer)), uintptr(CredBufferLength))
+func (self *IIdentityAuthentication) SetIdentityCredential(CredBuffer []byte) error {
+	var _CredBuffer *byte
+	if len(CredBuffer) > 0 {
+		_CredBuffer = &CredBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_CredBuffer)), uintptr(len(CredBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ValidateIdentityCredential dispatches through IIdentityAuthentication's vtable slot 4.
-func (self *IIdentityAuthentication) ValidateIdentityCredential(CredBuffer *byte, CredBufferLength uint32, ppIdentityProperties **uishellpropertiessystem.IPropertyStore) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(CredBuffer)), uintptr(CredBufferLength), uintptr(unsafe.Pointer(ppIdentityProperties)))
+func (self *IIdentityAuthentication) ValidateIdentityCredential(CredBuffer []byte, ppIdentityProperties **uishellpropertiessystem.IPropertyStore) error {
+	var _CredBuffer *byte
+	if len(CredBuffer) > 0 {
+		_CredBuffer = &CredBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_CredBuffer)), uintptr(len(CredBuffer)), uintptr(unsafe.Pointer(ppIdentityProperties)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -600,9 +624,13 @@ func (self *IIdentityStore) AddToCache(lpszUniqueID string, ProviderGUID *win32.
 }
 
 // ConvertToSid dispatches through IIdentityStore's vtable slot 6.
-func (self *IIdentityStore) ConvertToSid(lpszUniqueID string, ProviderGUID *win32.GUID, cbSid uint16, pSid *byte, pcbRequiredSid *uint16) error {
+func (self *IIdentityStore) ConvertToSid(lpszUniqueID string, ProviderGUID *win32.GUID, pSid []byte, pcbRequiredSid *uint16) error {
 	_lpszUniqueID := win32.UTF16Ptr(lpszUniqueID)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpszUniqueID)), uintptr(unsafe.Pointer(ProviderGUID)), uintptr(cbSid), uintptr(unsafe.Pointer(pSid)), uintptr(unsafe.Pointer(pcbRequiredSid)))
+	var _pSid *byte
+	if len(pSid) > 0 {
+		_pSid = &pSid[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpszUniqueID)), uintptr(unsafe.Pointer(ProviderGUID)), uintptr(len(pSid)), uintptr(unsafe.Pointer(_pSid)), uintptr(unsafe.Pointer(pcbRequiredSid)))
 	return win32.HRESULTError(int32(r1))
 }
 

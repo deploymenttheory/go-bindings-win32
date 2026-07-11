@@ -531,8 +531,12 @@ func HeapLock(hHeap foundation.HANDLE) error {
 // HeapQueryInformation calls KERNEL32!HeapQueryInformation.
 // https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapqueryinformation
 // Minimum OS: windows5.1.2600.
-func HeapQueryInformation(HeapHandle foundation.HANDLE, HeapInformationClass HEAP_INFORMATION_CLASS, HeapInformation unsafe.Pointer, HeapInformationLength uintptr, ReturnLength *uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procHeapQueryInformation.Addr(), uintptr(HeapHandle), uintptr(HeapInformationClass), uintptr(unsafe.Pointer(HeapInformation)), uintptr(HeapInformationLength), uintptr(unsafe.Pointer(ReturnLength)))
+func HeapQueryInformation(HeapHandle foundation.HANDLE, HeapInformationClass HEAP_INFORMATION_CLASS, HeapInformation []byte, ReturnLength *uintptr) error {
+	var _HeapInformation *byte
+	if len(HeapInformation) > 0 {
+		_HeapInformation = &HeapInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procHeapQueryInformation.Addr(), uintptr(HeapHandle), uintptr(HeapInformationClass), uintptr(unsafe.Pointer(_HeapInformation)), uintptr(len(HeapInformation)), uintptr(unsafe.Pointer(ReturnLength)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -550,8 +554,12 @@ func HeapReAlloc(hHeap foundation.HANDLE, dwFlags HEAP_FLAGS, lpMem unsafe.Point
 // HeapSetInformation calls KERNEL32!HeapSetInformation.
 // https://learn.microsoft.com/windows/win32/api/heapapi/nf-heapapi-heapsetinformation
 // Minimum OS: windows5.1.2600.
-func HeapSetInformation(HeapHandle foundation.HANDLE, HeapInformationClass HEAP_INFORMATION_CLASS, HeapInformation unsafe.Pointer, HeapInformationLength uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procHeapSetInformation.Addr(), uintptr(HeapHandle), uintptr(HeapInformationClass), uintptr(unsafe.Pointer(HeapInformation)), uintptr(HeapInformationLength))
+func HeapSetInformation(HeapHandle foundation.HANDLE, HeapInformationClass HEAP_INFORMATION_CLASS, HeapInformation []byte) error {
+	var _HeapInformation *byte
+	if len(HeapInformation) > 0 {
+		_HeapInformation = &HeapInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procHeapSetInformation.Addr(), uintptr(HeapHandle), uintptr(HeapInformationClass), uintptr(unsafe.Pointer(_HeapInformation)), uintptr(len(HeapInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -929,16 +937,24 @@ func QueryMemoryResourceNotification(ResourceNotificationHandle foundation.HANDL
 }
 
 // QueryPartitionInformation calls api-ms-win-core-memory-l1-1-8!QueryPartitionInformation.
-func QueryPartitionInformation(Partition foundation.HANDLE, PartitionInformationClass WIN32_MEMORY_PARTITION_INFORMATION_CLASS, PartitionInformation unsafe.Pointer, PartitionInformationLength uint32) bool {
-	r1, _, _ := syscall.SyscallN(procQueryPartitionInformation.Addr(), uintptr(Partition), uintptr(PartitionInformationClass), uintptr(unsafe.Pointer(PartitionInformation)), uintptr(PartitionInformationLength))
+func QueryPartitionInformation(Partition foundation.HANDLE, PartitionInformationClass WIN32_MEMORY_PARTITION_INFORMATION_CLASS, PartitionInformation []byte) bool {
+	var _PartitionInformation *byte
+	if len(PartitionInformation) > 0 {
+		_PartitionInformation = &PartitionInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(procQueryPartitionInformation.Addr(), uintptr(Partition), uintptr(PartitionInformationClass), uintptr(unsafe.Pointer(_PartitionInformation)), uintptr(len(PartitionInformation)))
 	return r1 != 0
 }
 
 // QueryVirtualMemoryInformation calls api-ms-win-core-memory-l1-1-4!QueryVirtualMemoryInformation.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-queryvirtualmemoryinformation
 // Minimum OS: windows10.0.14393.
-func QueryVirtualMemoryInformation(Process foundation.HANDLE, VirtualAddress unsafe.Pointer, MemoryInformationClass WIN32_MEMORY_INFORMATION_CLASS, MemoryInformation unsafe.Pointer, MemoryInformationSize uintptr, ReturnSize *uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procQueryVirtualMemoryInformation.Addr(), uintptr(Process), uintptr(unsafe.Pointer(VirtualAddress)), uintptr(MemoryInformationClass), uintptr(unsafe.Pointer(MemoryInformation)), uintptr(MemoryInformationSize), uintptr(unsafe.Pointer(ReturnSize)))
+func QueryVirtualMemoryInformation(Process foundation.HANDLE, VirtualAddress unsafe.Pointer, MemoryInformationClass WIN32_MEMORY_INFORMATION_CLASS, MemoryInformation []byte, ReturnSize *uintptr) error {
+	var _MemoryInformation *byte
+	if len(MemoryInformation) > 0 {
+		_MemoryInformation = &MemoryInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procQueryVirtualMemoryInformation.Addr(), uintptr(Process), uintptr(unsafe.Pointer(VirtualAddress)), uintptr(MemoryInformationClass), uintptr(unsafe.Pointer(_MemoryInformation)), uintptr(len(MemoryInformation)), uintptr(unsafe.Pointer(ReturnSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -984,14 +1000,22 @@ func RtlCompareMemory(Source1 unsafe.Pointer, Source2 unsafe.Pointer, Length uin
 }
 
 // RtlCrc32 calls ntdll!RtlCrc32.
-func RtlCrc32(Buffer unsafe.Pointer, Size uintptr, InitialCrc uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procRtlCrc32.Addr(), uintptr(unsafe.Pointer(Buffer)), uintptr(Size), uintptr(InitialCrc))
+func RtlCrc32(Buffer []byte, InitialCrc uint32) uint32 {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRtlCrc32.Addr(), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(InitialCrc))
 	return uint32(r1)
 }
 
 // RtlCrc64 calls ntdll!RtlCrc64.
-func RtlCrc64(Buffer unsafe.Pointer, Size uintptr, InitialCrc uint64) uint64 {
-	r1, _, _ := syscall.SyscallN(procRtlCrc64.Addr(), uintptr(unsafe.Pointer(Buffer)), uintptr(Size), uintptr(InitialCrc))
+func RtlCrc64(Buffer []byte, InitialCrc uint64) uint64 {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRtlCrc64.Addr(), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(InitialCrc))
 	return uint64(r1)
 }
 

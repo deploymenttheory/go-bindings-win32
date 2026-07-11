@@ -58,8 +58,12 @@ func WebAuthNCancelCurrentOperation(pCancellationId *win32.GUID) error {
 
 // WebAuthNDeletePlatformCredential calls webauthn!WebAuthNDeletePlatformCredential.
 // https://learn.microsoft.com/windows/win32/api/webauthn/nf-webauthn-webauthndeleteplatformcredential
-func WebAuthNDeletePlatformCredential(cbCredentialId uint32, pbCredentialId *byte) error {
-	r1, _, _ := syscall.SyscallN(procWebAuthNDeletePlatformCredential.Addr(), uintptr(cbCredentialId), uintptr(unsafe.Pointer(pbCredentialId)))
+func WebAuthNDeletePlatformCredential(pbCredentialId []byte) error {
+	var _pbCredentialId *byte
+	if len(pbCredentialId) > 0 {
+		_pbCredentialId = &pbCredentialId[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWebAuthNDeletePlatformCredential.Addr(), uintptr(len(pbCredentialId)), uintptr(unsafe.Pointer(_pbCredentialId)))
 	return win32.HRESULTError(int32(r1))
 }
 

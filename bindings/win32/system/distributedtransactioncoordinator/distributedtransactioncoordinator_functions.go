@@ -24,14 +24,22 @@ var (
 )
 
 // DtcGetTransactionManager calls XOLEHLP!DtcGetTransactionManager.
-func DtcGetTransactionManager(i_pszHost foundation.PSTR, i_pszTmName foundation.PSTR, i_riid *win32.GUID, i_dwReserved1 uint32, i_wcbReserved2 uint16, i_pvReserved2 unsafe.Pointer, o_ppvObject *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(procDtcGetTransactionManager.Addr(), uintptr(unsafe.Pointer(i_pszHost)), uintptr(unsafe.Pointer(i_pszTmName)), uintptr(unsafe.Pointer(i_riid)), uintptr(i_dwReserved1), uintptr(i_wcbReserved2), uintptr(unsafe.Pointer(i_pvReserved2)), uintptr(unsafe.Pointer(o_ppvObject)))
+func DtcGetTransactionManager(i_pszHost foundation.PSTR, i_pszTmName foundation.PSTR, i_riid *win32.GUID, i_dwReserved1 uint32, i_pvReserved2 []byte, o_ppvObject *unsafe.Pointer) error {
+	var _i_pvReserved2 *byte
+	if len(i_pvReserved2) > 0 {
+		_i_pvReserved2 = &i_pvReserved2[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDtcGetTransactionManager.Addr(), uintptr(unsafe.Pointer(i_pszHost)), uintptr(unsafe.Pointer(i_pszTmName)), uintptr(unsafe.Pointer(i_riid)), uintptr(i_dwReserved1), uintptr(len(i_pvReserved2)), uintptr(unsafe.Pointer(_i_pvReserved2)), uintptr(unsafe.Pointer(o_ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // DtcGetTransactionManagerC calls XOLEHLP!DtcGetTransactionManagerC.
-func DtcGetTransactionManagerC(i_pszHost foundation.PSTR, i_pszTmName foundation.PSTR, i_riid *win32.GUID, i_dwReserved1 uint32, i_wcbReserved2 uint16, i_pvReserved2 unsafe.Pointer, o_ppvObject *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(procDtcGetTransactionManagerC.Addr(), uintptr(unsafe.Pointer(i_pszHost)), uintptr(unsafe.Pointer(i_pszTmName)), uintptr(unsafe.Pointer(i_riid)), uintptr(i_dwReserved1), uintptr(i_wcbReserved2), uintptr(unsafe.Pointer(i_pvReserved2)), uintptr(unsafe.Pointer(o_ppvObject)))
+func DtcGetTransactionManagerC(i_pszHost foundation.PSTR, i_pszTmName foundation.PSTR, i_riid *win32.GUID, i_dwReserved1 uint32, i_pvReserved2 []byte, o_ppvObject *unsafe.Pointer) error {
+	var _i_pvReserved2 *byte
+	if len(i_pvReserved2) > 0 {
+		_i_pvReserved2 = &i_pvReserved2[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDtcGetTransactionManagerC.Addr(), uintptr(unsafe.Pointer(i_pszHost)), uintptr(unsafe.Pointer(i_pszTmName)), uintptr(unsafe.Pointer(i_riid)), uintptr(i_dwReserved1), uintptr(len(i_pvReserved2)), uintptr(unsafe.Pointer(_i_pvReserved2)), uintptr(unsafe.Pointer(o_ppvObject)))
 	return win32.HRESULTError(int32(r1))
 }
 

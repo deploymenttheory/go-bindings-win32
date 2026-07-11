@@ -198,8 +198,12 @@ func (self *ICLRDebugManager) BeginConnection(dwConnectionId uint32, szConnectio
 }
 
 // SetConnectionTasks dispatches through ICLRDebugManager's vtable slot 4.
-func (self *ICLRDebugManager) SetConnectionTasks(id uint32, dwCount uint32, ppCLRTask **ICLRTask) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(id), uintptr(dwCount), uintptr(unsafe.Pointer(ppCLRTask)))
+func (self *ICLRDebugManager) SetConnectionTasks(id uint32, ppCLRTask []*ICLRTask) error {
+	var _ppCLRTask **ICLRTask
+	if len(ppCLRTask) > 0 {
+		_ppCLRTask = &ppCLRTask[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(id), uintptr(len(ppCLRTask)), uintptr(unsafe.Pointer(_ppCLRTask)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -305,8 +309,12 @@ func (self *ICLRErrorReportingManager) GetBucketParametersForCurrentException(pP
 }
 
 // BeginCustomDump dispatches through ICLRErrorReportingManager's vtable slot 4.
-func (self *ICLRErrorReportingManager) BeginCustomDump(dwFlavor ECustomDumpFlavor, dwNumItems uint32, items *CustomDumpItem, dwReserved uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlavor), uintptr(dwNumItems), uintptr(unsafe.Pointer(items)), uintptr(dwReserved))
+func (self *ICLRErrorReportingManager) BeginCustomDump(dwFlavor ECustomDumpFlavor, items []CustomDumpItem, dwReserved uint32) error {
+	var _items *CustomDumpItem
+	if len(items) > 0 {
+		_items = &items[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dwFlavor), uintptr(len(items)), uintptr(unsafe.Pointer(_items)), uintptr(dwReserved))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -765,40 +773,64 @@ type ICLRStrongName struct {
 var IID_ICLRStrongName = win32.GUID{Data1: 0x9fd93ccf, Data2: 0x3280, Data3: 0x4391, Data4: [8]byte{0xb3, 0xa9, 0x96, 0xe1, 0xcd, 0xe7, 0x7c, 0x8d}}
 
 // GetHashFromAssemblyFile dispatches through ICLRStrongName's vtable slot 3.
-func (self *ICLRStrongName) GetHashFromAssemblyFile(pszFilePath foundation.PSTR, piHashAlg *uint32, pbHash *byte, cchHash uint32, pchHash *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszFilePath)), uintptr(unsafe.Pointer(piHashAlg)), uintptr(unsafe.Pointer(pbHash)), uintptr(cchHash), uintptr(unsafe.Pointer(pchHash)))
+func (self *ICLRStrongName) GetHashFromAssemblyFile(pszFilePath foundation.PSTR, piHashAlg *uint32, pbHash []byte, pchHash *uint32) error {
+	var _pbHash *byte
+	if len(pbHash) > 0 {
+		_pbHash = &pbHash[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszFilePath)), uintptr(unsafe.Pointer(piHashAlg)), uintptr(unsafe.Pointer(_pbHash)), uintptr(len(pbHash)), uintptr(unsafe.Pointer(pchHash)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetHashFromAssemblyFileW dispatches through ICLRStrongName's vtable slot 4.
-func (self *ICLRStrongName) GetHashFromAssemblyFileW(pwzFilePath string, piHashAlg *uint32, pbHash *byte, cchHash uint32, pchHash *uint32) error {
+func (self *ICLRStrongName) GetHashFromAssemblyFileW(pwzFilePath string, piHashAlg *uint32, pbHash []byte, pchHash *uint32) error {
 	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzFilePath)), uintptr(unsafe.Pointer(piHashAlg)), uintptr(unsafe.Pointer(pbHash)), uintptr(cchHash), uintptr(unsafe.Pointer(pchHash)))
+	var _pbHash *byte
+	if len(pbHash) > 0 {
+		_pbHash = &pbHash[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzFilePath)), uintptr(unsafe.Pointer(piHashAlg)), uintptr(unsafe.Pointer(_pbHash)), uintptr(len(pbHash)), uintptr(unsafe.Pointer(pchHash)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetHashFromBlob dispatches through ICLRStrongName's vtable slot 5.
-func (self *ICLRStrongName) GetHashFromBlob(pbBlob *byte, cchBlob uint32, piHashAlg *uint32, pbHash *byte, cchHash uint32, pchHash *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBlob)), uintptr(cchBlob), uintptr(unsafe.Pointer(piHashAlg)), uintptr(unsafe.Pointer(pbHash)), uintptr(cchHash), uintptr(unsafe.Pointer(pchHash)))
+func (self *ICLRStrongName) GetHashFromBlob(pbBlob *byte, cchBlob uint32, piHashAlg *uint32, pbHash []byte, pchHash *uint32) error {
+	var _pbHash *byte
+	if len(pbHash) > 0 {
+		_pbHash = &pbHash[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBlob)), uintptr(cchBlob), uintptr(unsafe.Pointer(piHashAlg)), uintptr(unsafe.Pointer(_pbHash)), uintptr(len(pbHash)), uintptr(unsafe.Pointer(pchHash)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetHashFromFile dispatches through ICLRStrongName's vtable slot 6.
-func (self *ICLRStrongName) GetHashFromFile(pszFilePath foundation.PSTR, piHashAlg *uint32, pbHash *byte, cchHash uint32, pchHash *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszFilePath)), uintptr(unsafe.Pointer(piHashAlg)), uintptr(unsafe.Pointer(pbHash)), uintptr(cchHash), uintptr(unsafe.Pointer(pchHash)))
+func (self *ICLRStrongName) GetHashFromFile(pszFilePath foundation.PSTR, piHashAlg *uint32, pbHash []byte, pchHash *uint32) error {
+	var _pbHash *byte
+	if len(pbHash) > 0 {
+		_pbHash = &pbHash[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszFilePath)), uintptr(unsafe.Pointer(piHashAlg)), uintptr(unsafe.Pointer(_pbHash)), uintptr(len(pbHash)), uintptr(unsafe.Pointer(pchHash)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetHashFromFileW dispatches through ICLRStrongName's vtable slot 7.
-func (self *ICLRStrongName) GetHashFromFileW(pwzFilePath string, piHashAlg *uint32, pbHash *byte, cchHash uint32, pchHash *uint32) error {
+func (self *ICLRStrongName) GetHashFromFileW(pwzFilePath string, piHashAlg *uint32, pbHash []byte, pchHash *uint32) error {
 	_pwzFilePath := win32.UTF16Ptr(pwzFilePath)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzFilePath)), uintptr(unsafe.Pointer(piHashAlg)), uintptr(unsafe.Pointer(pbHash)), uintptr(cchHash), uintptr(unsafe.Pointer(pchHash)))
+	var _pbHash *byte
+	if len(pbHash) > 0 {
+		_pbHash = &pbHash[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwzFilePath)), uintptr(unsafe.Pointer(piHashAlg)), uintptr(unsafe.Pointer(_pbHash)), uintptr(len(pbHash)), uintptr(unsafe.Pointer(pchHash)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetHashFromHandle dispatches through ICLRStrongName's vtable slot 8.
-func (self *ICLRStrongName) GetHashFromHandle(hFile foundation.HANDLE, piHashAlg *uint32, pbHash *byte, cchHash uint32, pchHash *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hFile), uintptr(unsafe.Pointer(piHashAlg)), uintptr(unsafe.Pointer(pbHash)), uintptr(cchHash), uintptr(unsafe.Pointer(pchHash)))
+func (self *ICLRStrongName) GetHashFromHandle(hFile foundation.HANDLE, piHashAlg *uint32, pbHash []byte, pchHash *uint32) error {
+	var _pbHash *byte
+	if len(pbHash) > 0 {
+		_pbHash = &pbHash[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(hFile), uintptr(unsafe.Pointer(piHashAlg)), uintptr(unsafe.Pointer(_pbHash)), uintptr(len(pbHash)), uintptr(unsafe.Pointer(pchHash)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -825,8 +857,12 @@ func (self *ICLRStrongName) StrongNameGetBlob(pwzFilePath string, pbBlob *byte, 
 }
 
 // StrongNameGetBlobFromImage dispatches through ICLRStrongName's vtable slot 12.
-func (self *ICLRStrongName) StrongNameGetBlobFromImage(pbBase *byte, dwLength uint32, pbBlob *byte, pcbBlob *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbBase)), uintptr(dwLength), uintptr(unsafe.Pointer(pbBlob)), uintptr(unsafe.Pointer(pcbBlob)))
+func (self *ICLRStrongName) StrongNameGetBlobFromImage(pbBase []byte, pbBlob *byte, pcbBlob *uint32) error {
+	var _pbBase *byte
+	if len(pbBase) > 0 {
+		_pbBase = &pbBase[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pbBase)), uintptr(len(pbBase)), uintptr(unsafe.Pointer(pbBlob)), uintptr(unsafe.Pointer(pcbBlob)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -975,16 +1011,28 @@ func (self *ICLRStrongName3) StrongNameDigestGenerate(wszFilePath string, ppbDig
 }
 
 // StrongNameDigestSign dispatches through ICLRStrongName3's vtable slot 4.
-func (self *ICLRStrongName3) StrongNameDigestSign(wszKeyContainer string, pbKeyBlob *byte, cbKeyBlob uint32, pbDigestBlob *byte, cbDigestBlob uint32, hashAlgId uint32, ppbSignatureBlob **byte, pcbSignatureBlob *uint32, dwFlags uint32) error {
+func (self *ICLRStrongName3) StrongNameDigestSign(wszKeyContainer string, pbKeyBlob []byte, pbDigestBlob []byte, hashAlgId uint32, ppbSignatureBlob **byte, pcbSignatureBlob *uint32, dwFlags uint32) error {
 	_wszKeyContainer := win32.UTF16Ptr(wszKeyContainer)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszKeyContainer)), uintptr(unsafe.Pointer(pbKeyBlob)), uintptr(cbKeyBlob), uintptr(unsafe.Pointer(pbDigestBlob)), uintptr(cbDigestBlob), uintptr(hashAlgId), uintptr(unsafe.Pointer(ppbSignatureBlob)), uintptr(unsafe.Pointer(pcbSignatureBlob)), uintptr(dwFlags))
+	var _pbKeyBlob *byte
+	if len(pbKeyBlob) > 0 {
+		_pbKeyBlob = &pbKeyBlob[0]
+	}
+	var _pbDigestBlob *byte
+	if len(pbDigestBlob) > 0 {
+		_pbDigestBlob = &pbDigestBlob[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszKeyContainer)), uintptr(unsafe.Pointer(_pbKeyBlob)), uintptr(len(pbKeyBlob)), uintptr(unsafe.Pointer(_pbDigestBlob)), uintptr(len(pbDigestBlob)), uintptr(hashAlgId), uintptr(unsafe.Pointer(ppbSignatureBlob)), uintptr(unsafe.Pointer(pcbSignatureBlob)), uintptr(dwFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // StrongNameDigestEmbed dispatches through ICLRStrongName3's vtable slot 5.
-func (self *ICLRStrongName3) StrongNameDigestEmbed(wszFilePath string, pbSignatureBlob *byte, cbSignatureBlob uint32) error {
+func (self *ICLRStrongName3) StrongNameDigestEmbed(wszFilePath string, pbSignatureBlob []byte) error {
 	_wszFilePath := win32.UTF16Ptr(wszFilePath)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszFilePath)), uintptr(unsafe.Pointer(pbSignatureBlob)), uintptr(cbSignatureBlob))
+	var _pbSignatureBlob *byte
+	if len(pbSignatureBlob) > 0 {
+		_pbSignatureBlob = &pbSignatureBlob[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_wszFilePath)), uintptr(unsafe.Pointer(_pbSignatureBlob)), uintptr(len(pbSignatureBlob)))
 	return win32.HRESULTError(int32(r1))
 }
 

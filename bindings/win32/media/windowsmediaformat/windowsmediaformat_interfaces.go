@@ -274,9 +274,13 @@ func (self *IWMBackupRestoreProps) GetPropByName(pszName string, pType *WMT_ATTR
 }
 
 // SetProp dispatches through IWMBackupRestoreProps's vtable slot 6.
-func (self *IWMBackupRestoreProps) SetProp(pszName string, Type WMT_ATTR_DATATYPE, pValue *byte, cbLength uint16) error {
+func (self *IWMBackupRestoreProps) SetProp(pszName string, Type WMT_ATTR_DATATYPE, pValue []byte) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(pValue)), uintptr(cbLength))
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -434,9 +438,13 @@ func (self *IWMCodecInfo3) GetCodecProp(guidType *win32.GUID, dwCodecIndex uint3
 }
 
 // SetCodecEnumerationSetting dispatches through IWMCodecInfo3's vtable slot 10.
-func (self *IWMCodecInfo3) SetCodecEnumerationSetting(guidType *win32.GUID, dwCodecIndex uint32, pszName string, Type WMT_ATTR_DATATYPE, pValue *byte, dwSize uint32) error {
+func (self *IWMCodecInfo3) SetCodecEnumerationSetting(guidType *win32.GUID, dwCodecIndex uint32, pszName string, Type WMT_ATTR_DATATYPE, pValue []byte) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidType)), uintptr(dwCodecIndex), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(pValue)), uintptr(dwSize))
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(guidType)), uintptr(dwCodecIndex), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -490,14 +498,22 @@ type IWMDRMMessageParser struct {
 var IID_IWMDRMMessageParser = win32.GUID{Data1: 0xa73a0072, Data2: 0x25a0, Data3: 0x4c99, Data4: [8]byte{0xb4, 0xa5, 0xed, 0xe8, 0x10, 0x1a, 0x6c, 0x39}}
 
 // ParseRegistrationReqMsg dispatches through IWMDRMMessageParser's vtable slot 3.
-func (self *IWMDRMMessageParser) ParseRegistrationReqMsg(pbRegistrationReqMsg *byte, cbRegistrationReqMsg uint32, ppDeviceCert **INSSBuffer, pDeviceSerialNumber *DRM_VAL16) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbRegistrationReqMsg)), uintptr(cbRegistrationReqMsg), uintptr(unsafe.Pointer(ppDeviceCert)), uintptr(unsafe.Pointer(pDeviceSerialNumber)))
+func (self *IWMDRMMessageParser) ParseRegistrationReqMsg(pbRegistrationReqMsg []byte, ppDeviceCert **INSSBuffer, pDeviceSerialNumber *DRM_VAL16) error {
+	var _pbRegistrationReqMsg *byte
+	if len(pbRegistrationReqMsg) > 0 {
+		_pbRegistrationReqMsg = &pbRegistrationReqMsg[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pbRegistrationReqMsg)), uintptr(len(pbRegistrationReqMsg)), uintptr(unsafe.Pointer(ppDeviceCert)), uintptr(unsafe.Pointer(pDeviceSerialNumber)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ParseLicenseRequestMsg dispatches through IWMDRMMessageParser's vtable slot 4.
-func (self *IWMDRMMessageParser) ParseLicenseRequestMsg(pbLicenseRequestMsg *byte, cbLicenseRequestMsg uint32, ppDeviceCert **INSSBuffer, pDeviceSerialNumber *DRM_VAL16, pbstrAction *foundation.BSTR) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbLicenseRequestMsg)), uintptr(cbLicenseRequestMsg), uintptr(unsafe.Pointer(ppDeviceCert)), uintptr(unsafe.Pointer(pDeviceSerialNumber)), uintptr(unsafe.Pointer(pbstrAction)))
+func (self *IWMDRMMessageParser) ParseLicenseRequestMsg(pbLicenseRequestMsg []byte, ppDeviceCert **INSSBuffer, pDeviceSerialNumber *DRM_VAL16, pbstrAction *foundation.BSTR) error {
+	var _pbLicenseRequestMsg *byte
+	if len(pbLicenseRequestMsg) > 0 {
+		_pbLicenseRequestMsg = &pbLicenseRequestMsg[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pbLicenseRequestMsg)), uintptr(len(pbLicenseRequestMsg)), uintptr(unsafe.Pointer(ppDeviceCert)), uintptr(unsafe.Pointer(pDeviceSerialNumber)), uintptr(unsafe.Pointer(pbstrAction)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -547,9 +563,13 @@ func (self *IWMDRMReader) CancelMonitorLicenseAcquisition() error {
 }
 
 // SetDRMProperty dispatches through IWMDRMReader's vtable slot 9.
-func (self *IWMDRMReader) SetDRMProperty(pwstrName string, dwType WMT_ATTR_DATATYPE, pValue *byte, cbLength uint16) error {
+func (self *IWMDRMReader) SetDRMProperty(pwstrName string, dwType WMT_ATTR_DATATYPE, pValue []byte) error {
 	_pwstrName := win32.UTF16Ptr(pwstrName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwstrName)), uintptr(dwType), uintptr(unsafe.Pointer(pValue)), uintptr(cbLength))
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwstrName)), uintptr(dwType), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -711,9 +731,13 @@ func (self *IWMDRMWriter) GenerateSigningKeyPair(pwszPrivKey foundation.PWSTR, p
 }
 
 // SetDRMAttribute dispatches through IWMDRMWriter's vtable slot 6.
-func (self *IWMDRMWriter) SetDRMAttribute(wStreamNum uint16, pszName string, Type WMT_ATTR_DATATYPE, pValue *byte, cbLength uint16) error {
+func (self *IWMDRMWriter) SetDRMAttribute(wStreamNum uint16, pszName string, Type WMT_ATTR_DATATYPE, pValue []byte) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(pValue)), uintptr(cbLength))
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -819,9 +843,13 @@ func (self *IWMHeaderInfo) GetAttributeByName(pwStreamNum *uint16, pszName strin
 }
 
 // SetAttribute dispatches through IWMHeaderInfo's vtable slot 6.
-func (self *IWMHeaderInfo) SetAttribute(wStreamNum uint16, pszName string, Type WMT_ATTR_DATATYPE, pValue *byte, cbLength uint16) error {
+func (self *IWMHeaderInfo) SetAttribute(wStreamNum uint16, pszName string, Type WMT_ATTR_DATATYPE, pValue []byte) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(pValue)), uintptr(cbLength))
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -926,15 +954,23 @@ func (self *IWMHeaderInfo3) GetAttributeByIndexEx(wStreamNum uint16, wIndex uint
 }
 
 // ModifyAttribute dispatches through IWMHeaderInfo3's vtable slot 20.
-func (self *IWMHeaderInfo3) ModifyAttribute(wStreamNum uint16, wIndex uint16, Type WMT_ATTR_DATATYPE, wLangIndex uint16, pValue *byte, dwLength uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(wIndex), uintptr(Type), uintptr(wLangIndex), uintptr(unsafe.Pointer(pValue)), uintptr(dwLength))
+func (self *IWMHeaderInfo3) ModifyAttribute(wStreamNum uint16, wIndex uint16, Type WMT_ATTR_DATATYPE, wLangIndex uint16, pValue []byte) error {
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(wIndex), uintptr(Type), uintptr(wLangIndex), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // AddAttribute dispatches through IWMHeaderInfo3's vtable slot 21.
-func (self *IWMHeaderInfo3) AddAttribute(wStreamNum uint16, pszName string, pwIndex *uint16, Type WMT_ATTR_DATATYPE, wLangIndex uint16, pValue *byte, dwLength uint32) error {
+func (self *IWMHeaderInfo3) AddAttribute(wStreamNum uint16, pszName string, pwIndex *uint16, Type WMT_ATTR_DATATYPE, wLangIndex uint16, pValue []byte) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pwIndex)), uintptr(Type), uintptr(wLangIndex), uintptr(unsafe.Pointer(pValue)), uintptr(dwLength))
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(wStreamNum), uintptr(unsafe.Pointer(_pszName)), uintptr(unsafe.Pointer(pwIndex)), uintptr(Type), uintptr(wLangIndex), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -945,10 +981,14 @@ func (self *IWMHeaderInfo3) DeleteAttribute(wStreamNum uint16, wIndex uint16) er
 }
 
 // AddCodecInfo dispatches through IWMHeaderInfo3's vtable slot 23.
-func (self *IWMHeaderInfo3) AddCodecInfo(pwszName string, pwszDescription string, codecType WMT_CODEC_INFO_TYPE, cbCodecInfo uint16, pbCodecInfo *byte) error {
+func (self *IWMHeaderInfo3) AddCodecInfo(pwszName string, pwszDescription string, codecType WMT_CODEC_INFO_TYPE, pbCodecInfo []byte) error {
 	_pwszName := win32.UTF16Ptr(pwszName)
 	_pwszDescription := win32.UTF16Ptr(pwszDescription)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszDescription)), uintptr(codecType), uintptr(cbCodecInfo), uintptr(unsafe.Pointer(pbCodecInfo)))
+	var _pbCodecInfo *byte
+	if len(pbCodecInfo) > 0 {
+		_pbCodecInfo = &pbCodecInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[23], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszName)), uintptr(unsafe.Pointer(_pwszDescription)), uintptr(codecType), uintptr(len(pbCodecInfo)), uintptr(unsafe.Pointer(_pbCodecInfo)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1755,8 +1795,16 @@ type IWMProximityDetection struct {
 var IID_IWMProximityDetection = win32.GUID{Data1: 0x6a9fd8ee, Data2: 0xb651, Data3: 0x4bf0, Data4: [8]byte{0xb8, 0x49, 0x7d, 0x4e, 0xce, 0x79, 0xa2, 0xb1}}
 
 // StartDetection dispatches through IWMProximityDetection's vtable slot 3.
-func (self *IWMProximityDetection) StartDetection(pbRegistrationMsg *byte, cbRegistrationMsg uint32, pbLocalAddress *byte, cbLocalAddress uint32, dwExtraPortsAllowed uint32, ppRegistrationResponseMsg **INSSBuffer, pCallback *IWMStatusCallback, pvContext unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbRegistrationMsg)), uintptr(cbRegistrationMsg), uintptr(unsafe.Pointer(pbLocalAddress)), uintptr(cbLocalAddress), uintptr(dwExtraPortsAllowed), uintptr(unsafe.Pointer(ppRegistrationResponseMsg)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pvContext)))
+func (self *IWMProximityDetection) StartDetection(pbRegistrationMsg []byte, pbLocalAddress []byte, dwExtraPortsAllowed uint32, ppRegistrationResponseMsg **INSSBuffer, pCallback *IWMStatusCallback, pvContext unsafe.Pointer) error {
+	var _pbRegistrationMsg *byte
+	if len(pbRegistrationMsg) > 0 {
+		_pbRegistrationMsg = &pbRegistrationMsg[0]
+	}
+	var _pbLocalAddress *byte
+	if len(pbLocalAddress) > 0 {
+		_pbLocalAddress = &pbLocalAddress[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pbRegistrationMsg)), uintptr(len(pbRegistrationMsg)), uintptr(unsafe.Pointer(_pbLocalAddress)), uintptr(len(pbLocalAddress)), uintptr(dwExtraPortsAllowed), uintptr(unsafe.Pointer(ppRegistrationResponseMsg)), uintptr(unsafe.Pointer(pCallback)), uintptr(unsafe.Pointer(pvContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2046,9 +2094,13 @@ func (self *IWMReaderAdvanced2) GetOutputSetting(dwOutputNum uint32, pszName str
 }
 
 // SetOutputSetting dispatches through IWMReaderAdvanced2's vtable slot 32.
-func (self *IWMReaderAdvanced2) SetOutputSetting(dwOutputNum uint32, pszName string, Type WMT_ATTR_DATATYPE, pValue *byte, cbLength uint16) error {
+func (self *IWMReaderAdvanced2) SetOutputSetting(dwOutputNum uint32, pszName string, Type WMT_ATTR_DATATYPE, pValue []byte) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(pValue)), uintptr(cbLength))
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2183,8 +2235,12 @@ type IWMReaderAdvanced6 struct {
 var IID_IWMReaderAdvanced6 = win32.GUID{Data1: 0x18a2e7f8, Data2: 0x428f, Data3: 0x4acd, Data4: [8]byte{0x8a, 0x00, 0xe6, 0x46, 0x39, 0xbc, 0x93, 0xde}}
 
 // SetProtectStreamSamples dispatches through IWMReaderAdvanced6's vtable slot 50.
-func (self *IWMReaderAdvanced6) SetProtectStreamSamples(pbCertificate *byte, cbCertificate uint32, dwCertificateType uint32, dwFlags uint32, pbInitializationVector *byte, pcbInitializationVector *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pbCertificate)), uintptr(cbCertificate), uintptr(dwCertificateType), uintptr(dwFlags), uintptr(unsafe.Pointer(pbInitializationVector)), uintptr(unsafe.Pointer(pcbInitializationVector)))
+func (self *IWMReaderAdvanced6) SetProtectStreamSamples(pbCertificate []byte, dwCertificateType uint32, dwFlags uint32, pbInitializationVector *byte, pcbInitializationVector *uint32) error {
+	var _pbCertificate *byte
+	if len(pbCertificate) > 0 {
+		_pbCertificate = &pbCertificate[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[50], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pbCertificate)), uintptr(len(pbCertificate)), uintptr(dwCertificateType), uintptr(dwFlags), uintptr(unsafe.Pointer(pbInitializationVector)), uintptr(unsafe.Pointer(pcbInitializationVector)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2297,8 +2353,12 @@ func (self *IWMReaderNetworkConfig) GetUDPPortRanges(pRangeArray *WM_PORT_NUMBER
 }
 
 // SetUDPPortRanges dispatches through IWMReaderNetworkConfig's vtable slot 6.
-func (self *IWMReaderNetworkConfig) SetUDPPortRanges(pRangeArray *WM_PORT_NUMBER_RANGE, cRanges uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pRangeArray)), uintptr(cRanges))
+func (self *IWMReaderNetworkConfig) SetUDPPortRanges(pRangeArray []WM_PORT_NUMBER_RANGE) error {
+	var _pRangeArray *WM_PORT_NUMBER_RANGE
+	if len(pRangeArray) > 0 {
+		_pRangeArray = &pRangeArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pRangeArray)), uintptr(len(pRangeArray)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3340,9 +3400,13 @@ func (self *IWMSyncReader) GetOutputSetting(dwOutputNum uint32, pszName string, 
 }
 
 // SetOutputSetting dispatches through IWMSyncReader's vtable slot 13.
-func (self *IWMSyncReader) SetOutputSetting(dwOutputNum uint32, pszName string, Type WMT_ATTR_DATATYPE, pValue *byte, cbLength uint16) error {
+func (self *IWMSyncReader) SetOutputSetting(dwOutputNum uint32, pszName string, Type WMT_ATTR_DATATYPE, pValue []byte) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(pValue)), uintptr(cbLength))
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(dwOutputNum), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3686,9 +3750,13 @@ func (self *IWMWriterAdvanced2) GetInputSetting(dwInputNum uint32, pszName strin
 }
 
 // SetInputSetting dispatches through IWMWriterAdvanced2's vtable slot 15.
-func (self *IWMWriterAdvanced2) SetInputSetting(dwInputNum uint32, pszName string, Type WMT_ATTR_DATATYPE, pValue *byte, cbLength uint16) error {
+func (self *IWMWriterAdvanced2) SetInputSetting(dwInputNum uint32, pszName string, Type WMT_ATTR_DATATYPE, pValue []byte) error {
 	_pszName := win32.UTF16Ptr(pszName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwInputNum), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(pValue)), uintptr(cbLength))
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(dwInputNum), uintptr(unsafe.Pointer(_pszName)), uintptr(Type), uintptr(unsafe.Pointer(_pValue)), uintptr(len(pValue)))
 	return win32.HRESULTError(int32(r1))
 }
 

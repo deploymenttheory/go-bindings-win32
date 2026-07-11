@@ -266,9 +266,13 @@ func EnumServicesStatusA(hSCManager SC_HANDLE, dwServiceType ENUM_SERVICE_TYPE, 
 // EnumServicesStatusEx calls ADVAPI32!EnumServicesStatusExW.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumservicesstatusexw
 // Minimum OS: windows5.1.2600.
-func EnumServicesStatusEx(hSCManager SC_HANDLE, InfoLevel SC_ENUM_TYPE, dwServiceType ENUM_SERVICE_TYPE, dwServiceState ENUM_SERVICE_STATE, lpServices *byte, cbBufSize uint32, pcbBytesNeeded *uint32, lpServicesReturned *uint32, lpResumeHandle *uint32, pszGroupName string) error {
+func EnumServicesStatusEx(hSCManager SC_HANDLE, InfoLevel SC_ENUM_TYPE, dwServiceType ENUM_SERVICE_TYPE, dwServiceState ENUM_SERVICE_STATE, lpServices []byte, pcbBytesNeeded *uint32, lpServicesReturned *uint32, lpResumeHandle *uint32, pszGroupName string) error {
+	var _lpServices *byte
+	if len(lpServices) > 0 {
+		_lpServices = &lpServices[0]
+	}
 	_pszGroupName := win32.UTF16Ptr(pszGroupName)
-	r1, _, e1 := syscall.SyscallN(procEnumServicesStatusEx.Addr(), uintptr(hSCManager), uintptr(InfoLevel), uintptr(dwServiceType), uintptr(dwServiceState), uintptr(unsafe.Pointer(lpServices)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)), uintptr(unsafe.Pointer(lpServicesReturned)), uintptr(unsafe.Pointer(lpResumeHandle)), uintptr(unsafe.Pointer(_pszGroupName)))
+	r1, _, e1 := syscall.SyscallN(procEnumServicesStatusEx.Addr(), uintptr(hSCManager), uintptr(InfoLevel), uintptr(dwServiceType), uintptr(dwServiceState), uintptr(unsafe.Pointer(_lpServices)), uintptr(len(lpServices)), uintptr(unsafe.Pointer(pcbBytesNeeded)), uintptr(unsafe.Pointer(lpServicesReturned)), uintptr(unsafe.Pointer(lpResumeHandle)), uintptr(unsafe.Pointer(_pszGroupName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -278,8 +282,12 @@ func EnumServicesStatusEx(hSCManager SC_HANDLE, InfoLevel SC_ENUM_TYPE, dwServic
 // EnumServicesStatusExA calls ADVAPI32!EnumServicesStatusExA.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumservicesstatusexa
 // Minimum OS: windows5.1.2600.
-func EnumServicesStatusExA(hSCManager SC_HANDLE, InfoLevel SC_ENUM_TYPE, dwServiceType ENUM_SERVICE_TYPE, dwServiceState ENUM_SERVICE_STATE, lpServices *byte, cbBufSize uint32, pcbBytesNeeded *uint32, lpServicesReturned *uint32, lpResumeHandle *uint32, pszGroupName foundation.PSTR) error {
-	r1, _, e1 := syscall.SyscallN(procEnumServicesStatusExA.Addr(), uintptr(hSCManager), uintptr(InfoLevel), uintptr(dwServiceType), uintptr(dwServiceState), uintptr(unsafe.Pointer(lpServices)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)), uintptr(unsafe.Pointer(lpServicesReturned)), uintptr(unsafe.Pointer(lpResumeHandle)), uintptr(unsafe.Pointer(pszGroupName)))
+func EnumServicesStatusExA(hSCManager SC_HANDLE, InfoLevel SC_ENUM_TYPE, dwServiceType ENUM_SERVICE_TYPE, dwServiceState ENUM_SERVICE_STATE, lpServices []byte, pcbBytesNeeded *uint32, lpServicesReturned *uint32, lpResumeHandle *uint32, pszGroupName foundation.PSTR) error {
+	var _lpServices *byte
+	if len(lpServices) > 0 {
+		_lpServices = &lpServices[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procEnumServicesStatusExA.Addr(), uintptr(hSCManager), uintptr(InfoLevel), uintptr(dwServiceType), uintptr(dwServiceState), uintptr(unsafe.Pointer(_lpServices)), uintptr(len(lpServices)), uintptr(unsafe.Pointer(pcbBytesNeeded)), uintptr(unsafe.Pointer(lpServicesReturned)), uintptr(unsafe.Pointer(lpResumeHandle)), uintptr(unsafe.Pointer(pszGroupName)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -467,8 +475,12 @@ func QueryServiceConfig(hService SC_HANDLE, lpServiceConfig *QUERY_SERVICE_CONFI
 // QueryServiceConfig2 calls ADVAPI32!QueryServiceConfig2W.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryserviceconfig2w
 // Minimum OS: windows5.1.2600.
-func QueryServiceConfig2(hService SC_HANDLE, dwInfoLevel SERVICE_CONFIG, lpBuffer *byte, cbBufSize uint32, pcbBytesNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procQueryServiceConfig2.Addr(), uintptr(hService), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)))
+func QueryServiceConfig2(hService SC_HANDLE, dwInfoLevel SERVICE_CONFIG, lpBuffer []byte, pcbBytesNeeded *uint32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procQueryServiceConfig2.Addr(), uintptr(hService), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(pcbBytesNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -478,8 +490,12 @@ func QueryServiceConfig2(hService SC_HANDLE, dwInfoLevel SERVICE_CONFIG, lpBuffe
 // QueryServiceConfig2A calls ADVAPI32!QueryServiceConfig2A.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryserviceconfig2a
 // Minimum OS: windows5.1.2600.
-func QueryServiceConfig2A(hService SC_HANDLE, dwInfoLevel SERVICE_CONFIG, lpBuffer *byte, cbBufSize uint32, pcbBytesNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procQueryServiceConfig2A.Addr(), uintptr(hService), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)))
+func QueryServiceConfig2A(hService SC_HANDLE, dwInfoLevel SERVICE_CONFIG, lpBuffer []byte, pcbBytesNeeded *uint32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procQueryServiceConfig2A.Addr(), uintptr(hService), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(pcbBytesNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -555,8 +571,12 @@ func QueryServiceStatus(hService SC_HANDLE, lpServiceStatus *SERVICE_STATUS) err
 // QueryServiceStatusEx calls ADVAPI32!QueryServiceStatusEx.
 // https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryservicestatusex
 // Minimum OS: windows5.1.2600.
-func QueryServiceStatusEx(hService SC_HANDLE, InfoLevel SC_STATUS_TYPE, lpBuffer *byte, cbBufSize uint32, pcbBytesNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procQueryServiceStatusEx.Addr(), uintptr(hService), uintptr(InfoLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)))
+func QueryServiceStatusEx(hService SC_HANDLE, InfoLevel SC_STATUS_TYPE, lpBuffer []byte, pcbBytesNeeded *uint32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procQueryServiceStatusEx.Addr(), uintptr(hService), uintptr(InfoLevel), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(pcbBytesNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

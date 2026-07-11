@@ -1267,16 +1267,32 @@ type IComSecurityEvents struct {
 var IID_IComSecurityEvents = win32.GUID{Data1: 0x683130ac, Data2: 0x2e50, Data3: 0x11d2, Data4: [8]byte{0x98, 0xa5, 0x00, 0xc0, 0x4f, 0x8e, 0xe1, 0xc4}}
 
 // OnAuthenticate dispatches through IComSecurityEvents's vtable slot 3.
-func (self *IComSecurityEvents) OnAuthenticate(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID, ObjectID uint64, guidIID *win32.GUID, iMeth uint32, cbByteOrig uint32, pSidOriginalUser *byte, cbByteCur uint32, pSidCurrentUser *byte, bCurrentUserInpersonatingInProc bool) error {
+func (self *IComSecurityEvents) OnAuthenticate(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID, ObjectID uint64, guidIID *win32.GUID, iMeth uint32, pSidOriginalUser []byte, pSidCurrentUser []byte, bCurrentUserInpersonatingInProc bool) error {
+	var _pSidOriginalUser *byte
+	if len(pSidOriginalUser) > 0 {
+		_pSidOriginalUser = &pSidOriginalUser[0]
+	}
+	var _pSidCurrentUser *byte
+	if len(pSidCurrentUser) > 0 {
+		_pSidCurrentUser = &pSidCurrentUser[0]
+	}
 	_bCurrentUserInpersonatingInProc := win32.Bool32(bCurrentUserInpersonatingInProc)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(ObjectID), uintptr(unsafe.Pointer(guidIID)), uintptr(iMeth), uintptr(cbByteOrig), uintptr(unsafe.Pointer(pSidOriginalUser)), uintptr(cbByteCur), uintptr(unsafe.Pointer(pSidCurrentUser)), uintptr(_bCurrentUserInpersonatingInProc))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(ObjectID), uintptr(unsafe.Pointer(guidIID)), uintptr(iMeth), uintptr(len(pSidOriginalUser)), uintptr(unsafe.Pointer(_pSidOriginalUser)), uintptr(len(pSidCurrentUser)), uintptr(unsafe.Pointer(_pSidCurrentUser)), uintptr(_bCurrentUserInpersonatingInProc))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OnAuthenticateFail dispatches through IComSecurityEvents's vtable slot 4.
-func (self *IComSecurityEvents) OnAuthenticateFail(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID, ObjectID uint64, guidIID *win32.GUID, iMeth uint32, cbByteOrig uint32, pSidOriginalUser *byte, cbByteCur uint32, pSidCurrentUser *byte, bCurrentUserInpersonatingInProc bool) error {
+func (self *IComSecurityEvents) OnAuthenticateFail(pInfo *COMSVCSEVENTINFO, guidActivity *win32.GUID, ObjectID uint64, guidIID *win32.GUID, iMeth uint32, pSidOriginalUser []byte, pSidCurrentUser []byte, bCurrentUserInpersonatingInProc bool) error {
+	var _pSidOriginalUser *byte
+	if len(pSidOriginalUser) > 0 {
+		_pSidOriginalUser = &pSidOriginalUser[0]
+	}
+	var _pSidCurrentUser *byte
+	if len(pSidCurrentUser) > 0 {
+		_pSidCurrentUser = &pSidCurrentUser[0]
+	}
 	_bCurrentUserInpersonatingInProc := win32.Bool32(bCurrentUserInpersonatingInProc)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(ObjectID), uintptr(unsafe.Pointer(guidIID)), uintptr(iMeth), uintptr(cbByteOrig), uintptr(unsafe.Pointer(pSidOriginalUser)), uintptr(cbByteCur), uintptr(unsafe.Pointer(pSidCurrentUser)), uintptr(_bCurrentUserInpersonatingInProc))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInfo)), uintptr(unsafe.Pointer(guidActivity)), uintptr(ObjectID), uintptr(unsafe.Pointer(guidIID)), uintptr(iMeth), uintptr(len(pSidOriginalUser)), uintptr(unsafe.Pointer(_pSidOriginalUser)), uintptr(len(pSidCurrentUser)), uintptr(unsafe.Pointer(_pSidCurrentUser)), uintptr(_bCurrentUserInpersonatingInProc))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1980,8 +1996,12 @@ func (self *ICrmLogControl) ForceTransactionToAbort() error {
 }
 
 // WriteLogRecord dispatches through ICrmLogControl's vtable slot 9.
-func (self *ICrmLogControl) WriteLogRecord(rgBlob *systemcom.BLOB, cBlob uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rgBlob)), uintptr(cBlob))
+func (self *ICrmLogControl) WriteLogRecord(rgBlob []systemcom.BLOB) error {
+	var _rgBlob *systemcom.BLOB
+	if len(rgBlob) > 0 {
+		_rgBlob = &rgBlob[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_rgBlob)), uintptr(len(rgBlob)))
 	return win32.HRESULTError(int32(r1))
 }
 

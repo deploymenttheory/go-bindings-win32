@@ -53,8 +53,12 @@ var (
 
 // D3D10CompileEffectFromMemory calls d3d10!D3D10CompileEffectFromMemory.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10compileeffectfrommemory
-func D3D10CompileEffectFromMemory(pData unsafe.Pointer, DataLength uintptr, pSrcFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, HLSLFlags uint32, FXFlags uint32, ppCompiledEffect **graphicsdirect3d.ID3DBlob, ppErrors **graphicsdirect3d.ID3DBlob) error {
-	r1, _, _ := syscall.SyscallN(procD3D10CompileEffectFromMemory.Addr(), uintptr(unsafe.Pointer(pData)), uintptr(DataLength), uintptr(unsafe.Pointer(pSrcFileName)), uintptr(unsafe.Pointer(pDefines)), uintptr(unsafe.Pointer(pInclude)), uintptr(HLSLFlags), uintptr(FXFlags), uintptr(unsafe.Pointer(ppCompiledEffect)), uintptr(unsafe.Pointer(ppErrors)))
+func D3D10CompileEffectFromMemory(pData []byte, pSrcFileName foundation.PSTR, pDefines *graphicsdirect3d.D3D_SHADER_MACRO, pInclude *graphicsdirect3d.ID3DInclude, HLSLFlags uint32, FXFlags uint32, ppCompiledEffect **graphicsdirect3d.ID3DBlob, ppErrors **graphicsdirect3d.ID3DBlob) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procD3D10CompileEffectFromMemory.Addr(), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pSrcFileName)), uintptr(unsafe.Pointer(pDefines)), uintptr(unsafe.Pointer(pInclude)), uintptr(HLSLFlags), uintptr(FXFlags), uintptr(unsafe.Pointer(ppCompiledEffect)), uintptr(unsafe.Pointer(ppErrors)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -102,15 +106,23 @@ func D3D10CreateDeviceAndSwapChain1(pAdapter *graphicsdxgi.IDXGIAdapter, DriverT
 
 // D3D10CreateEffectFromMemory calls d3d10!D3D10CreateEffectFromMemory.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10createeffectfrommemory
-func D3D10CreateEffectFromMemory(pData unsafe.Pointer, DataLength uintptr, FXFlags uint32, pDevice *ID3D10Device, pEffectPool *ID3D10EffectPool, ppEffect **ID3D10Effect) error {
-	r1, _, _ := syscall.SyscallN(procD3D10CreateEffectFromMemory.Addr(), uintptr(unsafe.Pointer(pData)), uintptr(DataLength), uintptr(FXFlags), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pEffectPool)), uintptr(unsafe.Pointer(ppEffect)))
+func D3D10CreateEffectFromMemory(pData []byte, FXFlags uint32, pDevice *ID3D10Device, pEffectPool *ID3D10EffectPool, ppEffect **ID3D10Effect) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procD3D10CreateEffectFromMemory.Addr(), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(FXFlags), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(pEffectPool)), uintptr(unsafe.Pointer(ppEffect)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10CreateEffectPoolFromMemory calls d3d10!D3D10CreateEffectPoolFromMemory.
 // https://learn.microsoft.com/windows/win32/api/d3d10effect/nf-d3d10effect-d3d10createeffectpoolfrommemory
-func D3D10CreateEffectPoolFromMemory(pData unsafe.Pointer, DataLength uintptr, FXFlags uint32, pDevice *ID3D10Device, ppEffectPool **ID3D10EffectPool) error {
-	r1, _, _ := syscall.SyscallN(procD3D10CreateEffectPoolFromMemory.Addr(), uintptr(unsafe.Pointer(pData)), uintptr(DataLength), uintptr(FXFlags), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(ppEffectPool)))
+func D3D10CreateEffectPoolFromMemory(pData []byte, FXFlags uint32, pDevice *ID3D10Device, ppEffectPool **ID3D10EffectPool) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procD3D10CreateEffectPoolFromMemory.Addr(), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(FXFlags), uintptr(unsafe.Pointer(pDevice)), uintptr(unsafe.Pointer(ppEffectPool)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -131,9 +143,13 @@ func D3D10DisassembleEffect(pEffect *ID3D10Effect, EnableColorCode bool, ppDisas
 
 // D3D10DisassembleShader calls d3d10!D3D10DisassembleShader.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10disassembleshader
-func D3D10DisassembleShader(pShader unsafe.Pointer, BytecodeLength uintptr, EnableColorCode bool, pComments foundation.PSTR, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
+func D3D10DisassembleShader(pShader []byte, EnableColorCode bool, pComments foundation.PSTR, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
+	var _pShader *byte
+	if len(pShader) > 0 {
+		_pShader = &pShader[0]
+	}
 	_EnableColorCode := win32.Bool32(EnableColorCode)
-	r1, _, _ := syscall.SyscallN(procD3D10DisassembleShader.Addr(), uintptr(unsafe.Pointer(pShader)), uintptr(BytecodeLength), uintptr(_EnableColorCode), uintptr(unsafe.Pointer(pComments)), uintptr(unsafe.Pointer(ppDisassembly)))
+	r1, _, _ := syscall.SyscallN(procD3D10DisassembleShader.Addr(), uintptr(unsafe.Pointer(_pShader)), uintptr(len(pShader)), uintptr(_EnableColorCode), uintptr(unsafe.Pointer(pComments)), uintptr(unsafe.Pointer(ppDisassembly)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -146,22 +162,34 @@ func D3D10GetGeometryShaderProfile(pDevice *ID3D10Device) foundation.PSTR {
 
 // D3D10GetInputAndOutputSignatureBlob calls d3d10!D3D10GetInputAndOutputSignatureBlob.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10getinputandoutputsignatureblob
-func D3D10GetInputAndOutputSignatureBlob(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppSignatureBlob **graphicsdirect3d.ID3DBlob) error {
-	r1, _, _ := syscall.SyscallN(procD3D10GetInputAndOutputSignatureBlob.Addr(), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppSignatureBlob)))
+func D3D10GetInputAndOutputSignatureBlob(pShaderBytecode []byte, ppSignatureBlob **graphicsdirect3d.ID3DBlob) error {
+	var _pShaderBytecode *byte
+	if len(pShaderBytecode) > 0 {
+		_pShaderBytecode = &pShaderBytecode[0]
+	}
+	r1, _, _ := syscall.SyscallN(procD3D10GetInputAndOutputSignatureBlob.Addr(), uintptr(unsafe.Pointer(_pShaderBytecode)), uintptr(len(pShaderBytecode)), uintptr(unsafe.Pointer(ppSignatureBlob)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10GetInputSignatureBlob calls d3d10!D3D10GetInputSignatureBlob.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10getinputsignatureblob
-func D3D10GetInputSignatureBlob(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppSignatureBlob **graphicsdirect3d.ID3DBlob) error {
-	r1, _, _ := syscall.SyscallN(procD3D10GetInputSignatureBlob.Addr(), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppSignatureBlob)))
+func D3D10GetInputSignatureBlob(pShaderBytecode []byte, ppSignatureBlob **graphicsdirect3d.ID3DBlob) error {
+	var _pShaderBytecode *byte
+	if len(pShaderBytecode) > 0 {
+		_pShaderBytecode = &pShaderBytecode[0]
+	}
+	r1, _, _ := syscall.SyscallN(procD3D10GetInputSignatureBlob.Addr(), uintptr(unsafe.Pointer(_pShaderBytecode)), uintptr(len(pShaderBytecode)), uintptr(unsafe.Pointer(ppSignatureBlob)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // D3D10GetOutputSignatureBlob calls d3d10!D3D10GetOutputSignatureBlob.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10getoutputsignatureblob
-func D3D10GetOutputSignatureBlob(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppSignatureBlob **graphicsdirect3d.ID3DBlob) error {
-	r1, _, _ := syscall.SyscallN(procD3D10GetOutputSignatureBlob.Addr(), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppSignatureBlob)))
+func D3D10GetOutputSignatureBlob(pShaderBytecode []byte, ppSignatureBlob **graphicsdirect3d.ID3DBlob) error {
+	var _pShaderBytecode *byte
+	if len(pShaderBytecode) > 0 {
+		_pShaderBytecode = &pShaderBytecode[0]
+	}
+	r1, _, _ := syscall.SyscallN(procD3D10GetOutputSignatureBlob.Addr(), uintptr(unsafe.Pointer(_pShaderBytecode)), uintptr(len(pShaderBytecode)), uintptr(unsafe.Pointer(ppSignatureBlob)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -174,8 +202,12 @@ func D3D10GetPixelShaderProfile(pDevice *ID3D10Device) foundation.PSTR {
 
 // D3D10GetShaderDebugInfo calls d3d10!D3D10GetShaderDebugInfo.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10getshaderdebuginfo
-func D3D10GetShaderDebugInfo(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppDebugInfo **graphicsdirect3d.ID3DBlob) error {
-	r1, _, _ := syscall.SyscallN(procD3D10GetShaderDebugInfo.Addr(), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppDebugInfo)))
+func D3D10GetShaderDebugInfo(pShaderBytecode []byte, ppDebugInfo **graphicsdirect3d.ID3DBlob) error {
+	var _pShaderBytecode *byte
+	if len(pShaderBytecode) > 0 {
+		_pShaderBytecode = &pShaderBytecode[0]
+	}
+	r1, _, _ := syscall.SyscallN(procD3D10GetShaderDebugInfo.Addr(), uintptr(unsafe.Pointer(_pShaderBytecode)), uintptr(len(pShaderBytecode)), uintptr(unsafe.Pointer(ppDebugInfo)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -195,8 +227,12 @@ func D3D10PreprocessShader(pSrcData foundation.PSTR, SrcDataSize uintptr, pFileN
 
 // D3D10ReflectShader calls d3d10!D3D10ReflectShader.
 // https://learn.microsoft.com/windows/win32/api/d3d10shader/nf-d3d10shader-d3d10reflectshader
-func D3D10ReflectShader(pShaderBytecode unsafe.Pointer, BytecodeLength uintptr, ppReflector **ID3D10ShaderReflection) error {
-	r1, _, _ := syscall.SyscallN(procD3D10ReflectShader.Addr(), uintptr(unsafe.Pointer(pShaderBytecode)), uintptr(BytecodeLength), uintptr(unsafe.Pointer(ppReflector)))
+func D3D10ReflectShader(pShaderBytecode []byte, ppReflector **ID3D10ShaderReflection) error {
+	var _pShaderBytecode *byte
+	if len(pShaderBytecode) > 0 {
+		_pShaderBytecode = &pShaderBytecode[0]
+	}
+	r1, _, _ := syscall.SyscallN(procD3D10ReflectShader.Addr(), uintptr(unsafe.Pointer(_pShaderBytecode)), uintptr(len(pShaderBytecode)), uintptr(unsafe.Pointer(ppReflector)))
 	return win32.HRESULTError(int32(r1))
 }
 

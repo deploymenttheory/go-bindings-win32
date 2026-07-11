@@ -209,9 +209,13 @@ func CoInternetParseUrl(pwzUrl string, ParseAction PARSEACTION, dwFlags uint32, 
 }
 
 // CoInternetQueryInfo calls urlmon!CoInternetQueryInfo.
-func CoInternetQueryInfo(pwzUrl string, QueryOptions QUERYOPTION, dwQueryFlags uint32, pvBuffer unsafe.Pointer, cbBuffer uint32, pcbBuffer *uint32, dwReserved uint32) error {
+func CoInternetQueryInfo(pwzUrl string, QueryOptions QUERYOPTION, dwQueryFlags uint32, pvBuffer []byte, pcbBuffer *uint32, dwReserved uint32) error {
 	_pwzUrl := win32.UTF16Ptr(pwzUrl)
-	r1, _, _ := syscall.SyscallN(procCoInternetQueryInfo.Addr(), uintptr(unsafe.Pointer(_pwzUrl)), uintptr(QueryOptions), uintptr(dwQueryFlags), uintptr(unsafe.Pointer(pvBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pcbBuffer)), uintptr(dwReserved))
+	var _pvBuffer *byte
+	if len(pvBuffer) > 0 {
+		_pvBuffer = &pvBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCoInternetQueryInfo.Addr(), uintptr(unsafe.Pointer(_pwzUrl)), uintptr(QueryOptions), uintptr(dwQueryFlags), uintptr(unsafe.Pointer(_pvBuffer)), uintptr(len(pvBuffer)), uintptr(unsafe.Pointer(pcbBuffer)), uintptr(dwReserved))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -319,18 +323,26 @@ func FindMediaTypeClass(pBC *systemcom.IBindCtx, szType foundation.PSTR, pclsID 
 }
 
 // FindMimeFromData calls urlmon!FindMimeFromData.
-func FindMimeFromData(pBC *systemcom.IBindCtx, pwzUrl string, pBuffer unsafe.Pointer, cbSize uint32, pwzMimeProposed string, dwMimeFlags uint32, ppwzMimeOut *foundation.PWSTR) error {
+func FindMimeFromData(pBC *systemcom.IBindCtx, pwzUrl string, pBuffer []byte, pwzMimeProposed string, dwMimeFlags uint32, ppwzMimeOut *foundation.PWSTR) error {
 	_pwzUrl := win32.UTF16Ptr(pwzUrl)
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
 	_pwzMimeProposed := win32.UTF16Ptr(pwzMimeProposed)
-	r1, _, _ := syscall.SyscallN(procFindMimeFromData.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(_pwzUrl)), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbSize), uintptr(unsafe.Pointer(_pwzMimeProposed)), uintptr(dwMimeFlags), uintptr(unsafe.Pointer(ppwzMimeOut)), 0)
+	r1, _, _ := syscall.SyscallN(procFindMimeFromData.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(_pwzUrl)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pwzMimeProposed)), uintptr(dwMimeFlags), uintptr(unsafe.Pointer(ppwzMimeOut)), 0)
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetClassFileOrMime calls urlmon!GetClassFileOrMime.
-func GetClassFileOrMime(pBC *systemcom.IBindCtx, szFilename string, pBuffer unsafe.Pointer, cbSize uint32, szMime string, dwReserved uint32, pclsid *win32.GUID) error {
+func GetClassFileOrMime(pBC *systemcom.IBindCtx, szFilename string, pBuffer []byte, szMime string, dwReserved uint32, pclsid *win32.GUID) error {
 	_szFilename := win32.UTF16Ptr(szFilename)
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
 	_szMime := win32.UTF16Ptr(szMime)
-	r1, _, _ := syscall.SyscallN(procGetClassFileOrMime.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(_szFilename)), uintptr(unsafe.Pointer(pBuffer)), uintptr(cbSize), uintptr(unsafe.Pointer(_szMime)), uintptr(dwReserved), uintptr(unsafe.Pointer(pclsid)))
+	r1, _, _ := syscall.SyscallN(procGetClassFileOrMime.Addr(), uintptr(unsafe.Pointer(pBC)), uintptr(unsafe.Pointer(_szFilename)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_szMime)), uintptr(dwReserved), uintptr(unsafe.Pointer(pclsid)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -568,14 +580,22 @@ func URLOpenStreamA(param0 *systemcom.IUnknown, param1 foundation.PSTR, param2 u
 }
 
 // UrlMkGetSessionOption calls urlmon!UrlMkGetSessionOption.
-func UrlMkGetSessionOption(dwOption uint32, pBuffer unsafe.Pointer, dwBufferLength uint32, pdwBufferLengthOut *uint32) error {
-	r1, _, _ := syscall.SyscallN(procUrlMkGetSessionOption.Addr(), uintptr(dwOption), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwBufferLength), uintptr(unsafe.Pointer(pdwBufferLengthOut)), 0)
+func UrlMkGetSessionOption(dwOption uint32, pBuffer []byte, pdwBufferLengthOut *uint32) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procUrlMkGetSessionOption.Addr(), uintptr(dwOption), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(pdwBufferLengthOut)), 0)
 	return win32.HRESULTError(int32(r1))
 }
 
 // UrlMkSetSessionOption calls urlmon!UrlMkSetSessionOption.
-func UrlMkSetSessionOption(dwOption uint32, pBuffer unsafe.Pointer, dwBufferLength uint32) error {
-	r1, _, _ := syscall.SyscallN(procUrlMkSetSessionOption.Addr(), uintptr(dwOption), uintptr(unsafe.Pointer(pBuffer)), uintptr(dwBufferLength), 0)
+func UrlMkSetSessionOption(dwOption uint32, pBuffer []byte) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procUrlMkSetSessionOption.Addr(), uintptr(dwOption), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), 0)
 	return win32.HRESULTError(int32(r1))
 }
 

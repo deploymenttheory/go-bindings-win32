@@ -129,8 +129,12 @@ type IEnumDebugExtendedPropertyInfo struct {
 var IID_IEnumDebugExtendedPropertyInfo = win32.GUID{Data1: 0x51973c53, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumDebugExtendedPropertyInfo's vtable slot 3.
-func (self *IEnumDebugExtendedPropertyInfo) Next(celt uint32, rgExtendedPropertyInfo *ExtendedDebugPropertyInfo, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgExtendedPropertyInfo)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumDebugExtendedPropertyInfo) Next(rgExtendedPropertyInfo []ExtendedDebugPropertyInfo, pceltFetched *uint32) error {
+	var _rgExtendedPropertyInfo *ExtendedDebugPropertyInfo
+	if len(rgExtendedPropertyInfo) > 0 {
+		_rgExtendedPropertyInfo = &rgExtendedPropertyInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgExtendedPropertyInfo)), uintptr(unsafe.Pointer(_rgExtendedPropertyInfo)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -167,8 +171,12 @@ type IEnumDebugPropertyInfo struct {
 var IID_IEnumDebugPropertyInfo = win32.GUID{Data1: 0x51973c51, Data2: 0xcb0c, Data3: 0x11d0, Data4: [8]byte{0xb5, 0xc9, 0x00, 0xa0, 0x24, 0x4a, 0x0e, 0x7a}}
 
 // Next dispatches through IEnumDebugPropertyInfo's vtable slot 3.
-func (self *IEnumDebugPropertyInfo) Next(celt uint32, pi *DebugPropertyInfo, pcEltsfetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(pi)), uintptr(unsafe.Pointer(pcEltsfetched)))
+func (self *IEnumDebugPropertyInfo) Next(pi []DebugPropertyInfo, pcEltsfetched *uint32) error {
+	var _pi *DebugPropertyInfo
+	if len(pi) > 0 {
+		_pi = &pi[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pi)), uintptr(unsafe.Pointer(_pi)), uintptr(unsafe.Pointer(pcEltsfetched)))
 	return win32.HRESULTError(int32(r1))
 }
 

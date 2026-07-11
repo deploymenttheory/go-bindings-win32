@@ -68,8 +68,12 @@ func (self *IUIAnimationInterpolator2) GetDuration(duration *float64) error {
 }
 
 // GetFinalValue dispatches through IUIAnimationInterpolator2's vtable slot 7.
-func (self *IUIAnimationInterpolator2) GetFinalValue(value *float64, cDimension uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(cDimension))
+func (self *IUIAnimationInterpolator2) GetFinalValue(value []float64) error {
+	var _value *float64
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -203,8 +207,12 @@ type IUIAnimationManager2 struct {
 var IID_IUIAnimationManager2 = win32.GUID{Data1: 0xd8b6f7d4, Data2: 0x4109, Data3: 0x4d3f, Data4: [8]byte{0xac, 0xee, 0x87, 0x99, 0x26, 0x96, 0x8c, 0xb1}}
 
 // CreateAnimationVectorVariable dispatches through IUIAnimationManager2's vtable slot 3.
-func (self *IUIAnimationManager2) CreateAnimationVectorVariable(initialValue *float64, cDimension uint32, variable **IUIAnimationVariable2) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(initialValue)), uintptr(cDimension), uintptr(unsafe.Pointer(variable)))
+func (self *IUIAnimationManager2) CreateAnimationVectorVariable(initialValue []float64, variable **IUIAnimationVariable2) error {
+	var _initialValue *float64
+	if len(initialValue) > 0 {
+		_initialValue = &initialValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_initialValue)), uintptr(len(initialValue)), uintptr(unsafe.Pointer(variable)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -731,14 +739,22 @@ func (self *IUIAnimationTransition2) GetDimension(dimension *uint32) error {
 }
 
 // SetInitialVectorValue dispatches through IUIAnimationTransition2's vtable slot 5.
-func (self *IUIAnimationTransition2) SetInitialVectorValue(value *float64, cDimension uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(cDimension))
+func (self *IUIAnimationTransition2) SetInitialVectorValue(value []float64) error {
+	var _value *float64
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetInitialVectorVelocity dispatches through IUIAnimationTransition2's vtable slot 7.
-func (self *IUIAnimationTransition2) SetInitialVectorVelocity(velocity *float64, cDimension uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(velocity)), uintptr(cDimension))
+func (self *IUIAnimationTransition2) SetInitialVectorVelocity(velocity []float64) error {
+	var _velocity *float64
+	if len(velocity) > 0 {
+		_velocity = &velocity[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_velocity)), uintptr(len(velocity)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -803,8 +819,12 @@ type IUIAnimationTransitionLibrary2 struct {
 var IID_IUIAnimationTransitionLibrary2 = win32.GUID{Data1: 0x03cfae53, Data2: 0x9580, Data3: 0x4ee3, Data4: [8]byte{0xb3, 0x63, 0x2e, 0xce, 0x51, 0xb4, 0xaf, 0x6a}}
 
 // CreateInstantaneousVectorTransition dispatches through IUIAnimationTransitionLibrary2's vtable slot 4.
-func (self *IUIAnimationTransitionLibrary2) CreateInstantaneousVectorTransition(finalValue *float64, cDimension uint32, transition **IUIAnimationTransition2) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(finalValue)), uintptr(cDimension), uintptr(unsafe.Pointer(transition)))
+func (self *IUIAnimationTransitionLibrary2) CreateInstantaneousVectorTransition(finalValue []float64, transition **IUIAnimationTransition2) error {
+	var _finalValue *float64
+	if len(finalValue) > 0 {
+		_finalValue = &finalValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_finalValue)), uintptr(len(finalValue)), uintptr(unsafe.Pointer(transition)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -911,8 +931,12 @@ func (self *IUIAnimationVariable2) GetValue(value *float64) error {
 }
 
 // GetVectorValue dispatches through IUIAnimationVariable2's vtable slot 5.
-func (self *IUIAnimationVariable2) GetVectorValue(value *float64, cDimension uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(cDimension))
+func (self *IUIAnimationVariable2) GetVectorValue(value []float64) error {
+	var _value *float64
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -923,8 +947,12 @@ func (self *IUIAnimationVariable2) GetCurve(animation *graphicsdirectcomposition
 }
 
 // GetVectorCurve dispatches through IUIAnimationVariable2's vtable slot 7.
-func (self *IUIAnimationVariable2) GetVectorCurve(animation **graphicsdirectcomposition.IDCompositionAnimation, cDimension uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(animation)), uintptr(cDimension))
+func (self *IUIAnimationVariable2) GetVectorCurve(animation []*graphicsdirectcomposition.IDCompositionAnimation) error {
+	var _animation **graphicsdirectcomposition.IDCompositionAnimation
+	if len(animation) > 0 {
+		_animation = &animation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_animation)), uintptr(len(animation)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -935,8 +963,12 @@ func (self *IUIAnimationVariable2) GetFinalValue(finalValue *float64) error {
 }
 
 // GetFinalVectorValue dispatches through IUIAnimationVariable2's vtable slot 9.
-func (self *IUIAnimationVariable2) GetFinalVectorValue(finalValue *float64, cDimension uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(finalValue)), uintptr(cDimension))
+func (self *IUIAnimationVariable2) GetFinalVectorValue(finalValue []float64) error {
+	var _finalValue *float64
+	if len(finalValue) > 0 {
+		_finalValue = &finalValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_finalValue)), uintptr(len(finalValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -947,8 +979,12 @@ func (self *IUIAnimationVariable2) GetPreviousValue(previousValue *float64) erro
 }
 
 // GetPreviousVectorValue dispatches through IUIAnimationVariable2's vtable slot 11.
-func (self *IUIAnimationVariable2) GetPreviousVectorValue(previousValue *float64, cDimension uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(previousValue)), uintptr(cDimension))
+func (self *IUIAnimationVariable2) GetPreviousVectorValue(previousValue []float64) error {
+	var _previousValue *float64
+	if len(previousValue) > 0 {
+		_previousValue = &previousValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_previousValue)), uintptr(len(previousValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -959,8 +995,12 @@ func (self *IUIAnimationVariable2) GetIntegerValue(value *int32) error {
 }
 
 // GetIntegerVectorValue dispatches through IUIAnimationVariable2's vtable slot 13.
-func (self *IUIAnimationVariable2) GetIntegerVectorValue(value *int32, cDimension uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(value)), uintptr(cDimension))
+func (self *IUIAnimationVariable2) GetIntegerVectorValue(value []int32) error {
+	var _value *int32
+	if len(value) > 0 {
+		_value = &value[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_value)), uintptr(len(value)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -971,8 +1011,12 @@ func (self *IUIAnimationVariable2) GetFinalIntegerValue(finalValue *int32) error
 }
 
 // GetFinalIntegerVectorValue dispatches through IUIAnimationVariable2's vtable slot 15.
-func (self *IUIAnimationVariable2) GetFinalIntegerVectorValue(finalValue *int32, cDimension uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(finalValue)), uintptr(cDimension))
+func (self *IUIAnimationVariable2) GetFinalIntegerVectorValue(finalValue []int32) error {
+	var _finalValue *int32
+	if len(finalValue) > 0 {
+		_finalValue = &finalValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_finalValue)), uintptr(len(finalValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -983,8 +1027,12 @@ func (self *IUIAnimationVariable2) GetPreviousIntegerValue(previousValue *int32)
 }
 
 // GetPreviousIntegerVectorValue dispatches through IUIAnimationVariable2's vtable slot 17.
-func (self *IUIAnimationVariable2) GetPreviousIntegerVectorValue(previousValue *int32, cDimension uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(previousValue)), uintptr(cDimension))
+func (self *IUIAnimationVariable2) GetPreviousIntegerVectorValue(previousValue []int32) error {
+	var _previousValue *int32
+	if len(previousValue) > 0 {
+		_previousValue = &previousValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_previousValue)), uintptr(len(previousValue)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -995,14 +1043,22 @@ func (self *IUIAnimationVariable2) GetCurrentStoryboard(storyboard **IUIAnimatio
 }
 
 // SetLowerBoundVector dispatches through IUIAnimationVariable2's vtable slot 20.
-func (self *IUIAnimationVariable2) SetLowerBoundVector(bound *float64, cDimension uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bound)), uintptr(cDimension))
+func (self *IUIAnimationVariable2) SetLowerBoundVector(bound []float64) error {
+	var _bound *float64
+	if len(bound) > 0 {
+		_bound = &bound[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_bound)), uintptr(len(bound)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetUpperBoundVector dispatches through IUIAnimationVariable2's vtable slot 22.
-func (self *IUIAnimationVariable2) SetUpperBoundVector(bound *float64, cDimension uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(bound)), uintptr(cDimension))
+func (self *IUIAnimationVariable2) SetUpperBoundVector(bound []float64) error {
+	var _bound *float64
+	if len(bound) > 0 {
+		_bound = &bound[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_bound)), uintptr(len(bound)))
 	return win32.HRESULTError(int32(r1))
 }
 

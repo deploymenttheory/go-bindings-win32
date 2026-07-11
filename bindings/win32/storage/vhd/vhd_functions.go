@@ -267,8 +267,12 @@ func SetVirtualDiskInformation(VirtualDiskHandle foundation.HANDLE, VirtualDiskI
 // SetVirtualDiskMetadata calls VirtDisk!SetVirtualDiskMetadata.
 // https://learn.microsoft.com/windows/win32/api/virtdisk/nf-virtdisk-setvirtualdiskmetadata
 // Minimum OS: windows8.0.
-func SetVirtualDiskMetadata(VirtualDiskHandle foundation.HANDLE, Item *win32.GUID, MetaDataSize uint32, MetaData unsafe.Pointer) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procSetVirtualDiskMetadata.Addr(), uintptr(VirtualDiskHandle), uintptr(unsafe.Pointer(Item)), uintptr(MetaDataSize), uintptr(unsafe.Pointer(MetaData)))
+func SetVirtualDiskMetadata(VirtualDiskHandle foundation.HANDLE, Item *win32.GUID, MetaData []byte) foundation.WIN32_ERROR {
+	var _MetaData *byte
+	if len(MetaData) > 0 {
+		_MetaData = &MetaData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetVirtualDiskMetadata.Addr(), uintptr(VirtualDiskHandle), uintptr(unsafe.Pointer(Item)), uintptr(len(MetaData)), uintptr(unsafe.Pointer(_MetaData)))
 	return foundation.WIN32_ERROR(r1)
 }
 

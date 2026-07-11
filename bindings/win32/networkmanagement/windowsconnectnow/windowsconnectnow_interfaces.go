@@ -44,8 +44,12 @@ type IWCNDevice struct {
 var IID_IWCNDevice = win32.GUID{Data1: 0xc100be9c, Data2: 0xd33a, Data3: 0x4a4b, Data4: [8]byte{0xbf, 0x23, 0xbb, 0xef, 0x46, 0x63, 0xd0, 0x17}}
 
 // SetPassword dispatches through IWCNDevice's vtable slot 3.
-func (self *IWCNDevice) SetPassword(Type WCN_PASSWORD_TYPE, dwPasswordLength uint32, pbPassword *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(dwPasswordLength), uintptr(unsafe.Pointer(pbPassword)))
+func (self *IWCNDevice) SetPassword(Type WCN_PASSWORD_TYPE, pbPassword []byte) error {
+	var _pbPassword *byte
+	if len(pbPassword) > 0 {
+		_pbPassword = &pbPassword[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(len(pbPassword)), uintptr(unsafe.Pointer(_pbPassword)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -56,8 +60,12 @@ func (self *IWCNDevice) Connect(pNotify *IWCNConnectNotify) error {
 }
 
 // GetAttribute dispatches through IWCNDevice's vtable slot 5.
-func (self *IWCNDevice) GetAttribute(AttributeType WCN_ATTRIBUTE_TYPE, dwMaxBufferSize uint32, pbBuffer *byte, pdwBufferUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(AttributeType), uintptr(dwMaxBufferSize), uintptr(unsafe.Pointer(pbBuffer)), uintptr(unsafe.Pointer(pdwBufferUsed)))
+func (self *IWCNDevice) GetAttribute(AttributeType WCN_ATTRIBUTE_TYPE, pbBuffer []byte, pdwBufferUsed *uint32) error {
+	var _pbBuffer *byte
+	if len(pbBuffer) > 0 {
+		_pbBuffer = &pbBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(AttributeType), uintptr(len(pbBuffer)), uintptr(unsafe.Pointer(_pbBuffer)), uintptr(unsafe.Pointer(pdwBufferUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -87,14 +95,22 @@ func (self *IWCNDevice) SetNetworkProfile(pszProfileXml string) error {
 }
 
 // GetVendorExtension dispatches through IWCNDevice's vtable slot 10.
-func (self *IWCNDevice) GetVendorExtension(pVendorExtSpec *WCN_VENDOR_EXTENSION_SPEC, dwMaxBufferSize uint32, pbBuffer *byte, pdwBufferUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVendorExtSpec)), uintptr(dwMaxBufferSize), uintptr(unsafe.Pointer(pbBuffer)), uintptr(unsafe.Pointer(pdwBufferUsed)))
+func (self *IWCNDevice) GetVendorExtension(pVendorExtSpec *WCN_VENDOR_EXTENSION_SPEC, pbBuffer []byte, pdwBufferUsed *uint32) error {
+	var _pbBuffer *byte
+	if len(pbBuffer) > 0 {
+		_pbBuffer = &pbBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVendorExtSpec)), uintptr(len(pbBuffer)), uintptr(unsafe.Pointer(_pbBuffer)), uintptr(unsafe.Pointer(pdwBufferUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetVendorExtension dispatches through IWCNDevice's vtable slot 11.
-func (self *IWCNDevice) SetVendorExtension(pVendorExtSpec *WCN_VENDOR_EXTENSION_SPEC, cbBuffer uint32, pbBuffer *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVendorExtSpec)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pbBuffer)))
+func (self *IWCNDevice) SetVendorExtension(pVendorExtSpec *WCN_VENDOR_EXTENSION_SPEC, pbBuffer []byte) error {
+	var _pbBuffer *byte
+	if len(pbBuffer) > 0 {
+		_pbBuffer = &pbBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pVendorExtSpec)), uintptr(len(pbBuffer)), uintptr(unsafe.Pointer(_pbBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -105,7 +121,19 @@ func (self *IWCNDevice) Unadvise() error {
 }
 
 // SetNFCPasswordParams dispatches through IWCNDevice's vtable slot 13.
-func (self *IWCNDevice) SetNFCPasswordParams(Type WCN_PASSWORD_TYPE, dwOOBPasswordID uint32, dwPasswordLength uint32, pbPassword *byte, dwRemotePublicKeyHashLength uint32, pbRemotePublicKeyHash *byte, dwDHKeyBlobLength uint32, pbDHKeyBlob *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(dwOOBPasswordID), uintptr(dwPasswordLength), uintptr(unsafe.Pointer(pbPassword)), uintptr(dwRemotePublicKeyHashLength), uintptr(unsafe.Pointer(pbRemotePublicKeyHash)), uintptr(dwDHKeyBlobLength), uintptr(unsafe.Pointer(pbDHKeyBlob)))
+func (self *IWCNDevice) SetNFCPasswordParams(Type WCN_PASSWORD_TYPE, dwOOBPasswordID uint32, pbPassword []byte, pbRemotePublicKeyHash []byte, pbDHKeyBlob []byte) error {
+	var _pbPassword *byte
+	if len(pbPassword) > 0 {
+		_pbPassword = &pbPassword[0]
+	}
+	var _pbRemotePublicKeyHash *byte
+	if len(pbRemotePublicKeyHash) > 0 {
+		_pbRemotePublicKeyHash = &pbRemotePublicKeyHash[0]
+	}
+	var _pbDHKeyBlob *byte
+	if len(pbDHKeyBlob) > 0 {
+		_pbDHKeyBlob = &pbDHKeyBlob[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Type), uintptr(dwOOBPasswordID), uintptr(len(pbPassword)), uintptr(unsafe.Pointer(_pbPassword)), uintptr(len(pbRemotePublicKeyHash)), uintptr(unsafe.Pointer(_pbRemotePublicKeyHash)), uintptr(len(pbDHKeyBlob)), uintptr(unsafe.Pointer(_pbDHKeyBlob)))
 	return win32.HRESULTError(int32(r1))
 }

@@ -25,14 +25,22 @@ type INetworkTransportSettings struct {
 var IID_INetworkTransportSettings = win32.GUID{Data1: 0x5e7abb2c, Data2: 0xf2c1, Data3: 0x4a61, Data4: [8]byte{0xbd, 0x35, 0xde, 0xb7, 0xa0, 0x8a, 0xb0, 0xf1}}
 
 // ApplySetting dispatches through INetworkTransportSettings's vtable slot 3.
-func (self *INetworkTransportSettings) ApplySetting(SettingId *networkingwinsock.TRANSPORT_SETTING_ID, LengthIn uint32, ValueIn *byte, LengthOut *uint32, ValueOut **byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SettingId)), uintptr(LengthIn), uintptr(unsafe.Pointer(ValueIn)), uintptr(unsafe.Pointer(LengthOut)), uintptr(unsafe.Pointer(ValueOut)))
+func (self *INetworkTransportSettings) ApplySetting(SettingId *networkingwinsock.TRANSPORT_SETTING_ID, ValueIn []byte, LengthOut *uint32, ValueOut **byte) error {
+	var _ValueIn *byte
+	if len(ValueIn) > 0 {
+		_ValueIn = &ValueIn[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SettingId)), uintptr(len(ValueIn)), uintptr(unsafe.Pointer(_ValueIn)), uintptr(unsafe.Pointer(LengthOut)), uintptr(unsafe.Pointer(ValueOut)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // QuerySetting dispatches through INetworkTransportSettings's vtable slot 4.
-func (self *INetworkTransportSettings) QuerySetting(SettingId *networkingwinsock.TRANSPORT_SETTING_ID, LengthIn uint32, ValueIn *byte, LengthOut *uint32, ValueOut **byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SettingId)), uintptr(LengthIn), uintptr(unsafe.Pointer(ValueIn)), uintptr(unsafe.Pointer(LengthOut)), uintptr(unsafe.Pointer(ValueOut)))
+func (self *INetworkTransportSettings) QuerySetting(SettingId *networkingwinsock.TRANSPORT_SETTING_ID, ValueIn []byte, LengthOut *uint32, ValueOut **byte) error {
+	var _ValueIn *byte
+	if len(ValueIn) > 0 {
+		_ValueIn = &ValueIn[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(SettingId)), uintptr(len(ValueIn)), uintptr(unsafe.Pointer(_ValueIn)), uintptr(unsafe.Pointer(LengthOut)), uintptr(unsafe.Pointer(ValueOut)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1030,8 +1038,12 @@ type IRTCEnumBuddies struct {
 var IID_IRTCEnumBuddies = win32.GUID{Data1: 0xf7296917, Data2: 0x5569, Data3: 0x4b3b, Data4: [8]byte{0xb3, 0xaf, 0x98, 0xd1, 0x14, 0x4b, 0x2b, 0x87}}
 
 // Next dispatches through IRTCEnumBuddies's vtable slot 3.
-func (self *IRTCEnumBuddies) Next(celt uint32, ppElements **IRTCBuddy, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IRTCEnumBuddies) Next(ppElements []*IRTCBuddy, pceltFetched *uint32) error {
+	var _ppElements **IRTCBuddy
+	if len(ppElements) > 0 {
+		_ppElements = &ppElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1063,8 +1075,12 @@ type IRTCEnumGroups struct {
 var IID_IRTCEnumGroups = win32.GUID{Data1: 0x742378d6, Data2: 0xa141, Data3: 0x4415, Data4: [8]byte{0x8f, 0x27, 0x35, 0xd9, 0x90, 0x76, 0xcf, 0x5d}}
 
 // Next dispatches through IRTCEnumGroups's vtable slot 3.
-func (self *IRTCEnumGroups) Next(celt uint32, ppElements **IRTCBuddyGroup, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IRTCEnumGroups) Next(ppElements []*IRTCBuddyGroup, pceltFetched *uint32) error {
+	var _ppElements **IRTCBuddyGroup
+	if len(ppElements) > 0 {
+		_ppElements = &ppElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1096,8 +1112,12 @@ type IRTCEnumParticipants struct {
 var IID_IRTCEnumParticipants = win32.GUID{Data1: 0xfcd56f29, Data2: 0x4a4f, Data3: 0x41b2, Data4: [8]byte{0xba, 0x5c, 0xf5, 0xbc, 0xcc, 0x06, 0x0b, 0xf6}}
 
 // Next dispatches through IRTCEnumParticipants's vtable slot 3.
-func (self *IRTCEnumParticipants) Next(celt uint32, ppElements **IRTCParticipant, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IRTCEnumParticipants) Next(ppElements []*IRTCParticipant, pceltFetched *uint32) error {
+	var _ppElements **IRTCParticipant
+	if len(ppElements) > 0 {
+		_ppElements = &ppElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1129,8 +1149,12 @@ type IRTCEnumPresenceDevices struct {
 var IID_IRTCEnumPresenceDevices = win32.GUID{Data1: 0x708c2ab7, Data2: 0x8bf8, Data3: 0x42f8, Data4: [8]byte{0x8c, 0x7d, 0x63, 0x51, 0x97, 0xad, 0x55, 0x39}}
 
 // Next dispatches through IRTCEnumPresenceDevices's vtable slot 3.
-func (self *IRTCEnumPresenceDevices) Next(celt uint32, ppElements **IRTCPresenceDevice, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IRTCEnumPresenceDevices) Next(ppElements []*IRTCPresenceDevice, pceltFetched *uint32) error {
+	var _ppElements **IRTCPresenceDevice
+	if len(ppElements) > 0 {
+		_ppElements = &ppElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1162,8 +1186,12 @@ type IRTCEnumProfiles struct {
 var IID_IRTCEnumProfiles = win32.GUID{Data1: 0x29b7c41c, Data2: 0xed82, Data3: 0x4bca, Data4: [8]byte{0x84, 0xad, 0x39, 0xd5, 0x10, 0x1b, 0x58, 0xe3}}
 
 // Next dispatches through IRTCEnumProfiles's vtable slot 3.
-func (self *IRTCEnumProfiles) Next(celt uint32, ppElements **IRTCProfile, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IRTCEnumProfiles) Next(ppElements []*IRTCProfile, pceltFetched *uint32) error {
+	var _ppElements **IRTCProfile
+	if len(ppElements) > 0 {
+		_ppElements = &ppElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1195,8 +1223,12 @@ type IRTCEnumUserSearchResults struct {
 var IID_IRTCEnumUserSearchResults = win32.GUID{Data1: 0x83d4d877, Data2: 0xaa5d, Data3: 0x4a5b, Data4: [8]byte{0x8d, 0x0e, 0x00, 0x2a, 0x80, 0x67, 0xe0, 0xe8}}
 
 // Next dispatches through IRTCEnumUserSearchResults's vtable slot 3.
-func (self *IRTCEnumUserSearchResults) Next(celt uint32, ppElements **IRTCUserSearchResult, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IRTCEnumUserSearchResults) Next(ppElements []*IRTCUserSearchResult, pceltFetched *uint32) error {
+	var _ppElements **IRTCUserSearchResult
+	if len(ppElements) > 0 {
+		_ppElements = &ppElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1228,8 +1260,12 @@ type IRTCEnumWatchers struct {
 var IID_IRTCEnumWatchers = win32.GUID{Data1: 0xa87d55d7, Data2: 0xdb74, Data3: 0x4ed1, Data4: [8]byte{0x9c, 0xa4, 0x77, 0xa0, 0xe4, 0x1b, 0x41, 0x3e}}
 
 // Next dispatches through IRTCEnumWatchers's vtable slot 3.
-func (self *IRTCEnumWatchers) Next(celt uint32, ppElements **IRTCWatcher, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IRTCEnumWatchers) Next(ppElements []*IRTCWatcher, pceltFetched *uint32) error {
+	var _ppElements **IRTCWatcher
+	if len(ppElements) > 0 {
+		_ppElements = &ppElements[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppElements)), uintptr(unsafe.Pointer(_ppElements)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 

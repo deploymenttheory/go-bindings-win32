@@ -47,8 +47,12 @@ type IApoAuxiliaryInputConfiguration struct {
 var IID_IApoAuxiliaryInputConfiguration = win32.GUID{Data1: 0x4ceb0aab, Data2: 0xfa19, Data3: 0x48ed, Data4: [8]byte{0xa8, 0x57, 0x87, 0x77, 0x1a, 0xe1, 0xb7, 0x68}}
 
 // AddAuxiliaryInput dispatches through IApoAuxiliaryInputConfiguration's vtable slot 3.
-func (self *IApoAuxiliaryInputConfiguration) AddAuxiliaryInput(dwInputId uint32, cbDataSize uint32, pbyData *byte, pInputConnection *APO_CONNECTION_DESCRIPTOR) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwInputId), uintptr(cbDataSize), uintptr(unsafe.Pointer(pbyData)), uintptr(unsafe.Pointer(pInputConnection)))
+func (self *IApoAuxiliaryInputConfiguration) AddAuxiliaryInput(dwInputId uint32, pbyData []byte, pInputConnection *APO_CONNECTION_DESCRIPTOR) error {
+	var _pbyData *byte
+	if len(pbyData) > 0 {
+		_pbyData = &pbyData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwInputId), uintptr(len(pbyData)), uintptr(unsafe.Pointer(_pbyData)), uintptr(unsafe.Pointer(pInputConnection)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -154,8 +158,12 @@ func (self *IAudioProcessingObject) GetRegistrationProperties(ppRegProps **APO_R
 }
 
 // Initialize dispatches through IAudioProcessingObject's vtable slot 6.
-func (self *IAudioProcessingObject) Initialize(cbDataSize uint32, pbyData *byte) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(cbDataSize), uintptr(unsafe.Pointer(pbyData)))
+func (self *IAudioProcessingObject) Initialize(pbyData []byte) error {
+	var _pbyData *byte
+	if len(pbyData) > 0 {
+		_pbyData = &pbyData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(len(pbyData)), uintptr(unsafe.Pointer(_pbyData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -187,8 +195,16 @@ type IAudioProcessingObjectConfiguration struct {
 var IID_IAudioProcessingObjectConfiguration = win32.GUID{Data1: 0x0e5ed805, Data2: 0xaba6, Data3: 0x49c3, Data4: [8]byte{0x8f, 0x9a, 0x2b, 0x8c, 0x88, 0x9c, 0x4f, 0xa8}}
 
 // LockForProcess dispatches through IAudioProcessingObjectConfiguration's vtable slot 3.
-func (self *IAudioProcessingObjectConfiguration) LockForProcess(u32NumInputConnections uint32, ppInputConnections **APO_CONNECTION_DESCRIPTOR, u32NumOutputConnections uint32, ppOutputConnections **APO_CONNECTION_DESCRIPTOR) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(u32NumInputConnections), uintptr(unsafe.Pointer(ppInputConnections)), uintptr(u32NumOutputConnections), uintptr(unsafe.Pointer(ppOutputConnections)))
+func (self *IAudioProcessingObjectConfiguration) LockForProcess(ppInputConnections []*APO_CONNECTION_DESCRIPTOR, ppOutputConnections []*APO_CONNECTION_DESCRIPTOR) error {
+	var _ppInputConnections **APO_CONNECTION_DESCRIPTOR
+	if len(ppInputConnections) > 0 {
+		_ppInputConnections = &ppInputConnections[0]
+	}
+	var _ppOutputConnections **APO_CONNECTION_DESCRIPTOR
+	if len(ppOutputConnections) > 0 {
+		_ppOutputConnections = &ppOutputConnections[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppInputConnections)), uintptr(unsafe.Pointer(_ppInputConnections)), uintptr(len(ppOutputConnections)), uintptr(unsafe.Pointer(_ppOutputConnections)))
 	return win32.HRESULTError(int32(r1))
 }
 

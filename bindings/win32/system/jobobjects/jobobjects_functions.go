@@ -129,8 +129,12 @@ func OpenJobObjectA(dwDesiredAccess uint32, bInheritHandle bool, lpName foundati
 // QueryInformationJobObject calls KERNEL32!QueryInformationJobObject.
 // https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-queryinformationjobobject
 // Minimum OS: windows5.1.2600.
-func QueryInformationJobObject(hJob foundation.HANDLE, JobObjectInformationClass JOBOBJECTINFOCLASS, lpJobObjectInformation unsafe.Pointer, cbJobObjectInformationLength uint32, lpReturnLength *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procQueryInformationJobObject.Addr(), uintptr(hJob), uintptr(JobObjectInformationClass), uintptr(unsafe.Pointer(lpJobObjectInformation)), uintptr(cbJobObjectInformationLength), uintptr(unsafe.Pointer(lpReturnLength)))
+func QueryInformationJobObject(hJob foundation.HANDLE, JobObjectInformationClass JOBOBJECTINFOCLASS, lpJobObjectInformation []byte, lpReturnLength *uint32) error {
+	var _lpJobObjectInformation *byte
+	if len(lpJobObjectInformation) > 0 {
+		_lpJobObjectInformation = &lpJobObjectInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procQueryInformationJobObject.Addr(), uintptr(hJob), uintptr(JobObjectInformationClass), uintptr(unsafe.Pointer(_lpJobObjectInformation)), uintptr(len(lpJobObjectInformation)), uintptr(unsafe.Pointer(lpReturnLength)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -152,8 +156,12 @@ func QueryIoRateControlInformationJobObject(hJob foundation.HANDLE, VolumeName s
 // SetInformationJobObject calls KERNEL32!SetInformationJobObject.
 // https://learn.microsoft.com/windows/win32/api/jobapi2/nf-jobapi2-setinformationjobobject
 // Minimum OS: windows5.1.2600.
-func SetInformationJobObject(hJob foundation.HANDLE, JobObjectInformationClass JOBOBJECTINFOCLASS, lpJobObjectInformation unsafe.Pointer, cbJobObjectInformationLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetInformationJobObject.Addr(), uintptr(hJob), uintptr(JobObjectInformationClass), uintptr(unsafe.Pointer(lpJobObjectInformation)), uintptr(cbJobObjectInformationLength))
+func SetInformationJobObject(hJob foundation.HANDLE, JobObjectInformationClass JOBOBJECTINFOCLASS, lpJobObjectInformation []byte) error {
+	var _lpJobObjectInformation *byte
+	if len(lpJobObjectInformation) > 0 {
+		_lpJobObjectInformation = &lpJobObjectInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetInformationJobObject.Addr(), uintptr(hJob), uintptr(JobObjectInformationClass), uintptr(unsafe.Pointer(_lpJobObjectInformation)), uintptr(len(lpJobObjectInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

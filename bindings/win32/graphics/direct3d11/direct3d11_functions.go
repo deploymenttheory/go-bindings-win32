@@ -60,8 +60,12 @@ func D3D11CreateDeviceAndSwapChain(pAdapter *graphicsdxgi.IDXGIAdapter, DriverTy
 // D3DDisassemble11Trace calls D3DCOMPILER_47!D3DDisassemble11Trace.
 // https://learn.microsoft.com/windows/win32/api/d3d11shadertracing/nf-d3d11shadertracing-d3ddisassemble11trace
 // Minimum OS: windows8.0.
-func D3DDisassemble11Trace(pSrcData unsafe.Pointer, SrcDataSize uintptr, pTrace *ID3D11ShaderTrace, StartStep uint32, NumSteps uint32, Flags uint32, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
-	r1, _, _ := syscall.SyscallN(procD3DDisassemble11Trace.Addr(), uintptr(unsafe.Pointer(pSrcData)), uintptr(SrcDataSize), uintptr(unsafe.Pointer(pTrace)), uintptr(StartStep), uintptr(NumSteps), uintptr(Flags), uintptr(unsafe.Pointer(ppDisassembly)))
+func D3DDisassemble11Trace(pSrcData []byte, pTrace *ID3D11ShaderTrace, StartStep uint32, NumSteps uint32, Flags uint32, ppDisassembly **graphicsdirect3d.ID3DBlob) error {
+	var _pSrcData *byte
+	if len(pSrcData) > 0 {
+		_pSrcData = &pSrcData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procD3DDisassemble11Trace.Addr(), uintptr(unsafe.Pointer(_pSrcData)), uintptr(len(pSrcData)), uintptr(unsafe.Pointer(pTrace)), uintptr(StartStep), uintptr(NumSteps), uintptr(Flags), uintptr(unsafe.Pointer(ppDisassembly)))
 	return win32.HRESULTError(int32(r1))
 }
 

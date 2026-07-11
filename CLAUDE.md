@@ -150,8 +150,15 @@ each call, then the template dispatches via `syscall.SyscallN`:
   `CreateEvent`); `-A` variants and unsuffixed names keep their name
 - an array-pointer param + its input count param (`[NativeArrayInfo]`
   `CountParamIndex`) collapse into a single `[]T` (count derived from `len`
-  at the call site). Applies only to typed-pointer arrays with a unique,
-  input-only integer count; shared/out counts stay raw.
+  at the call site) — flat functions and COM methods alike. Applies only to
+  typed-pointer arrays with a unique, input-only integer count; shared/out
+  counts stay raw.
+- a `void*` or `byte*` param + its input byte-size param (`[MemorySize]`
+  `BytesParamIndex`) collapse into a single `[]byte` (size derived from `len`
+  at the call site) — flat functions and COM methods alike. Requires a unique,
+  input-only integer size not referenced by any `[NativeArrayInfo]` count (a
+  shared size stays raw rather than un-collapsing a typed array). Typed
+  non-byte pointers with `[MemorySize]` keep their type.
 - an `[out,retval]` param is elevated out of the signature into a Go return
   value (`Get_X() (T, error)`). For flat functions only when the return is a
   clean status (HRESULT / BOOL+SetLastError / void); for COM methods whenever

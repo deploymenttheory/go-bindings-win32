@@ -180,8 +180,12 @@ func PrjUpdateFileIfNeeded(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALI
 // PrjWriteFileData calls PROJECTEDFSLIB!PrjWriteFileData.
 // https://learn.microsoft.com/windows/win32/api/projectedfslib/nf-projectedfslib-prjwritefiledata
 // Minimum OS: windows10.0.17763.
-func PrjWriteFileData(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, dataStreamId *win32.GUID, buffer unsafe.Pointer, byteOffset uint64, length uint32) error {
-	r1, _, _ := syscall.SyscallN(procPrjWriteFileData.Addr(), uintptr(namespaceVirtualizationContext), uintptr(unsafe.Pointer(dataStreamId)), uintptr(unsafe.Pointer(buffer)), uintptr(byteOffset), uintptr(length))
+func PrjWriteFileData(namespaceVirtualizationContext PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, dataStreamId *win32.GUID, buffer []byte, byteOffset uint64) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPrjWriteFileData.Addr(), uintptr(namespaceVirtualizationContext), uintptr(unsafe.Pointer(dataStreamId)), uintptr(unsafe.Pointer(_buffer)), uintptr(byteOffset), uintptr(len(buffer)))
 	return win32.HRESULTError(int32(r1))
 }
 

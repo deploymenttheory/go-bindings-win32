@@ -692,8 +692,12 @@ func FindFileInSearchPath(hprocess foundation.HANDLE, SearchPathA foundation.PST
 // FlushInstructionCache calls KERNEL32!FlushInstructionCache.
 // https://learn.microsoft.com/windows/win32/api/processthreadsapi/nf-processthreadsapi-flushinstructioncache
 // Minimum OS: windows5.1.2600.
-func FlushInstructionCache(hProcess foundation.HANDLE, lpBaseAddress unsafe.Pointer, dwSize uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procFlushInstructionCache.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpBaseAddress)), uintptr(dwSize))
+func FlushInstructionCache(hProcess foundation.HANDLE, lpBaseAddress []byte) error {
+	var _lpBaseAddress *byte
+	if len(lpBaseAddress) > 0 {
+		_lpBaseAddress = &lpBaseAddress[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procFlushInstructionCache.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(_lpBaseAddress)), uintptr(len(lpBaseAddress)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1139,9 +1143,13 @@ func RaiseFailFastException(pExceptionRecord *EXCEPTION_RECORD, pContextRecord *
 }
 
 // RangeMapAddPeImageSections calls dbghelp!RangeMapAddPeImageSections.
-func RangeMapAddPeImageSections(RmapHandle unsafe.Pointer, ImageName string, MappedImage unsafe.Pointer, MappingBytes uint32, ImageBase uint64, UserTag uint64, MappingFlags uint32) bool {
+func RangeMapAddPeImageSections(RmapHandle unsafe.Pointer, ImageName string, MappedImage []byte, ImageBase uint64, UserTag uint64, MappingFlags uint32) bool {
 	_ImageName := win32.UTF16Ptr(ImageName)
-	r1, _, _ := syscall.SyscallN(procRangeMapAddPeImageSections.Addr(), uintptr(unsafe.Pointer(RmapHandle)), uintptr(unsafe.Pointer(_ImageName)), uintptr(unsafe.Pointer(MappedImage)), uintptr(MappingBytes), uintptr(ImageBase), uintptr(UserTag), uintptr(MappingFlags))
+	var _MappedImage *byte
+	if len(MappedImage) > 0 {
+		_MappedImage = &MappedImage[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRangeMapAddPeImageSections.Addr(), uintptr(unsafe.Pointer(RmapHandle)), uintptr(unsafe.Pointer(_ImageName)), uintptr(unsafe.Pointer(_MappedImage)), uintptr(len(MappedImage)), uintptr(ImageBase), uintptr(UserTag), uintptr(MappingFlags))
 	return r1 != 0
 }
 
@@ -1157,8 +1165,12 @@ func RangeMapFree(RmapHandle unsafe.Pointer) {
 }
 
 // RangeMapRead calls dbghelp!RangeMapRead.
-func RangeMapRead(RmapHandle unsafe.Pointer, Offset uint64, Buffer unsafe.Pointer, RequestBytes uint32, Flags uint32, DoneBytes *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procRangeMapRead.Addr(), uintptr(unsafe.Pointer(RmapHandle)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(RequestBytes), uintptr(Flags), uintptr(unsafe.Pointer(DoneBytes)))
+func RangeMapRead(RmapHandle unsafe.Pointer, Offset uint64, Buffer []byte, Flags uint32, DoneBytes *uint32) bool {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRangeMapRead.Addr(), uintptr(unsafe.Pointer(RmapHandle)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(Flags), uintptr(unsafe.Pointer(DoneBytes)))
 	return r1 != 0
 }
 
@@ -1169,8 +1181,12 @@ func RangeMapRemove(RmapHandle unsafe.Pointer, UserTag uint64) bool {
 }
 
 // RangeMapWrite calls dbghelp!RangeMapWrite.
-func RangeMapWrite(RmapHandle unsafe.Pointer, Offset uint64, Buffer unsafe.Pointer, RequestBytes uint32, Flags uint32, DoneBytes *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procRangeMapWrite.Addr(), uintptr(unsafe.Pointer(RmapHandle)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(RequestBytes), uintptr(Flags), uintptr(unsafe.Pointer(DoneBytes)))
+func RangeMapWrite(RmapHandle unsafe.Pointer, Offset uint64, Buffer []byte, Flags uint32, DoneBytes *uint32) bool {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procRangeMapWrite.Addr(), uintptr(unsafe.Pointer(RmapHandle)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(Flags), uintptr(unsafe.Pointer(DoneBytes)))
 	return r1 != 0
 }
 
@@ -1205,8 +1221,12 @@ func ReBaseImage64(CurrentImageName foundation.PSTR, SymbolPath foundation.PSTR,
 // ReadProcessMemory calls KERNEL32!ReadProcessMemory.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-readprocessmemory
 // Minimum OS: windows5.1.2600.
-func ReadProcessMemory(hProcess foundation.HANDLE, lpBaseAddress unsafe.Pointer, lpBuffer unsafe.Pointer, nSize uintptr, lpNumberOfBytesRead *uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procReadProcessMemory.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpBaseAddress)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize), uintptr(unsafe.Pointer(lpNumberOfBytesRead)))
+func ReadProcessMemory(hProcess foundation.HANDLE, lpBaseAddress unsafe.Pointer, lpBuffer []byte, lpNumberOfBytesRead *uintptr) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procReadProcessMemory.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpBaseAddress)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfBytesRead)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1478,8 +1498,12 @@ func StackWalkEx(MachineType uint32, hProcess foundation.HANDLE, hThread foundat
 
 // SymAddSourceStream calls dbghelp!SymAddSourceStream.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symaddsourcestream
-func SymAddSourceStream(hProcess foundation.HANDLE, Base uint64, StreamFile foundation.PSTR, Buffer *byte, Size uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procSymAddSourceStream.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(StreamFile)), uintptr(unsafe.Pointer(Buffer)), uintptr(Size))
+func SymAddSourceStream(hProcess foundation.HANDLE, Base uint64, StreamFile foundation.PSTR, Buffer []byte) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSymAddSourceStream.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(StreamFile)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1488,16 +1512,24 @@ func SymAddSourceStream(hProcess foundation.HANDLE, Base uint64, StreamFile foun
 
 // SymAddSourceStreamA calls dbghelp!SymAddSourceStreamA.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symaddsourcestreama
-func SymAddSourceStreamA(hProcess foundation.HANDLE, Base uint64, StreamFile foundation.PSTR, Buffer *byte, Size uintptr) bool {
-	r1, _, _ := syscall.SyscallN(procSymAddSourceStreamA.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(StreamFile)), uintptr(unsafe.Pointer(Buffer)), uintptr(Size))
+func SymAddSourceStreamA(hProcess foundation.HANDLE, Base uint64, StreamFile foundation.PSTR, Buffer []byte) bool {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSymAddSourceStreamA.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(StreamFile)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return r1 != 0
 }
 
 // SymAddSourceStreamW calls dbghelp!SymAddSourceStreamW.
 // https://learn.microsoft.com/windows/win32/api/dbghelp/nf-dbghelp-symaddsourcestreamw
-func SymAddSourceStreamW(hProcess foundation.HANDLE, Base uint64, FileSpec string, Buffer *byte, Size uintptr) error {
+func SymAddSourceStreamW(hProcess foundation.HANDLE, Base uint64, FileSpec string, Buffer []byte) error {
 	_FileSpec := win32.UTF16Ptr(FileSpec)
-	r1, _, e1 := syscall.SyscallN(procSymAddSourceStreamW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(_FileSpec)), uintptr(unsafe.Pointer(Buffer)), uintptr(Size))
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSymAddSourceStreamW.Addr(), uintptr(hProcess), uintptr(Base), uintptr(unsafe.Pointer(_FileSpec)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -3149,8 +3181,12 @@ func Wow64SetThreadContext(hThread foundation.HANDLE, lpContext *WOW64_CONTEXT) 
 // WriteProcessMemory calls KERNEL32!WriteProcessMemory.
 // https://learn.microsoft.com/windows/win32/api/memoryapi/nf-memoryapi-writeprocessmemory
 // Minimum OS: windows5.1.2600.
-func WriteProcessMemory(hProcess foundation.HANDLE, lpBaseAddress unsafe.Pointer, lpBuffer unsafe.Pointer, nSize uintptr, lpNumberOfBytesWritten *uintptr) error {
-	r1, _, e1 := syscall.SyscallN(procWriteProcessMemory.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpBaseAddress)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize), uintptr(unsafe.Pointer(lpNumberOfBytesWritten)))
+func WriteProcessMemory(hProcess foundation.HANDLE, lpBaseAddress unsafe.Pointer, lpBuffer []byte, lpNumberOfBytesWritten *uintptr) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWriteProcessMemory.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpBaseAddress)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpNumberOfBytesWritten)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

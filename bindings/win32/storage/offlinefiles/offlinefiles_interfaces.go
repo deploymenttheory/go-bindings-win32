@@ -24,8 +24,12 @@ type IEnumOfflineFilesItems struct {
 var IID_IEnumOfflineFilesItems = win32.GUID{Data1: 0xda70e815, Data2: 0xc361, Data3: 0x4407, Data4: [8]byte{0xbc, 0x0b, 0x0d, 0x70, 0x46, 0xe5, 0xf2, 0xcd}}
 
 // Next dispatches through IEnumOfflineFilesItems's vtable slot 3.
-func (self *IEnumOfflineFilesItems) Next(celt uint32, rgelt **IOfflineFilesItem, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumOfflineFilesItems) Next(rgelt []*IOfflineFilesItem, pceltFetched *uint32) error {
+	var _rgelt **IOfflineFilesItem
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -57,8 +61,12 @@ type IEnumOfflineFilesSettings struct {
 var IID_IEnumOfflineFilesSettings = win32.GUID{Data1: 0x729680c4, Data2: 0x1a38, Data3: 0x47bc, Data4: [8]byte{0x9e, 0x5c, 0x02, 0xc5, 0x15, 0x62, 0xac, 0x30}}
 
 // Next dispatches through IEnumOfflineFilesSettings's vtable slot 3.
-func (self *IEnumOfflineFilesSettings) Next(celt uint32, rgelt **IOfflineFilesSetting, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumOfflineFilesSettings) Next(rgelt []*IOfflineFilesSetting, pceltFetched *uint32) error {
+	var _rgelt **IOfflineFilesSetting
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -90,40 +98,60 @@ type IOfflineFilesCache struct {
 var IID_IOfflineFilesCache = win32.GUID{Data1: 0x855d6203, Data2: 0x7914, Data3: 0x48b9, Data4: [8]byte{0x8d, 0x40, 0x4c, 0x56, 0xf5, 0xac, 0xff, 0xc5}}
 
 // Synchronize dispatches through IOfflineFilesCache's vtable slot 3.
-func (self *IOfflineFilesCache) Synchronize(hwndParent foundation.HWND, rgpszPaths *foundation.PWSTR, cPaths uint32, bAsync bool, dwSyncControl uint32, pISyncConflictHandler *IOfflineFilesSyncConflictHandler, pIProgress *IOfflineFilesSyncProgress, pSyncId *win32.GUID) error {
+func (self *IOfflineFilesCache) Synchronize(hwndParent foundation.HWND, rgpszPaths []foundation.PWSTR, bAsync bool, dwSyncControl uint32, pISyncConflictHandler *IOfflineFilesSyncConflictHandler, pIProgress *IOfflineFilesSyncProgress, pSyncId *win32.GUID) error {
+	var _rgpszPaths *foundation.PWSTR
+	if len(rgpszPaths) > 0 {
+		_rgpszPaths = &rgpszPaths[0]
+	}
 	_bAsync := win32.Bool32(bAsync)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(rgpszPaths)), uintptr(cPaths), uintptr(_bAsync), uintptr(dwSyncControl), uintptr(unsafe.Pointer(pISyncConflictHandler)), uintptr(unsafe.Pointer(pIProgress)), uintptr(unsafe.Pointer(pSyncId)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_rgpszPaths)), uintptr(len(rgpszPaths)), uintptr(_bAsync), uintptr(dwSyncControl), uintptr(unsafe.Pointer(pISyncConflictHandler)), uintptr(unsafe.Pointer(pIProgress)), uintptr(unsafe.Pointer(pSyncId)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteItems dispatches through IOfflineFilesCache's vtable slot 4.
-func (self *IOfflineFilesCache) DeleteItems(rgpszPaths *foundation.PWSTR, cPaths uint32, dwFlags uint32, bAsync bool, pIProgress *IOfflineFilesSimpleProgress) error {
+func (self *IOfflineFilesCache) DeleteItems(rgpszPaths []foundation.PWSTR, dwFlags uint32, bAsync bool, pIProgress *IOfflineFilesSimpleProgress) error {
+	var _rgpszPaths *foundation.PWSTR
+	if len(rgpszPaths) > 0 {
+		_rgpszPaths = &rgpszPaths[0]
+	}
 	_bAsync := win32.Bool32(bAsync)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rgpszPaths)), uintptr(cPaths), uintptr(dwFlags), uintptr(_bAsync), uintptr(unsafe.Pointer(pIProgress)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_rgpszPaths)), uintptr(len(rgpszPaths)), uintptr(dwFlags), uintptr(_bAsync), uintptr(unsafe.Pointer(pIProgress)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // DeleteItemsForUser dispatches through IOfflineFilesCache's vtable slot 5.
-func (self *IOfflineFilesCache) DeleteItemsForUser(pszUser string, rgpszPaths *foundation.PWSTR, cPaths uint32, dwFlags uint32, bAsync bool, pIProgress *IOfflineFilesSimpleProgress) error {
+func (self *IOfflineFilesCache) DeleteItemsForUser(pszUser string, rgpszPaths []foundation.PWSTR, dwFlags uint32, bAsync bool, pIProgress *IOfflineFilesSimpleProgress) error {
 	_pszUser := win32.UTF16Ptr(pszUser)
+	var _rgpszPaths *foundation.PWSTR
+	if len(rgpszPaths) > 0 {
+		_rgpszPaths = &rgpszPaths[0]
+	}
 	_bAsync := win32.Bool32(bAsync)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUser)), uintptr(unsafe.Pointer(rgpszPaths)), uintptr(cPaths), uintptr(dwFlags), uintptr(_bAsync), uintptr(unsafe.Pointer(pIProgress)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszUser)), uintptr(unsafe.Pointer(_rgpszPaths)), uintptr(len(rgpszPaths)), uintptr(dwFlags), uintptr(_bAsync), uintptr(unsafe.Pointer(pIProgress)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Pin dispatches through IOfflineFilesCache's vtable slot 6.
-func (self *IOfflineFilesCache) Pin(hwndParent foundation.HWND, rgpszPaths *foundation.PWSTR, cPaths uint32, bDeep bool, bAsync bool, dwPinControlFlags uint32, pIProgress *IOfflineFilesSyncProgress) error {
+func (self *IOfflineFilesCache) Pin(hwndParent foundation.HWND, rgpszPaths []foundation.PWSTR, bDeep bool, bAsync bool, dwPinControlFlags uint32, pIProgress *IOfflineFilesSyncProgress) error {
+	var _rgpszPaths *foundation.PWSTR
+	if len(rgpszPaths) > 0 {
+		_rgpszPaths = &rgpszPaths[0]
+	}
 	_bDeep := win32.Bool32(bDeep)
 	_bAsync := win32.Bool32(bAsync)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(rgpszPaths)), uintptr(cPaths), uintptr(_bDeep), uintptr(_bAsync), uintptr(dwPinControlFlags), uintptr(unsafe.Pointer(pIProgress)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_rgpszPaths)), uintptr(len(rgpszPaths)), uintptr(_bDeep), uintptr(_bAsync), uintptr(dwPinControlFlags), uintptr(unsafe.Pointer(pIProgress)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Unpin dispatches through IOfflineFilesCache's vtable slot 7.
-func (self *IOfflineFilesCache) Unpin(hwndParent foundation.HWND, rgpszPaths *foundation.PWSTR, cPaths uint32, bDeep bool, bAsync bool, dwPinControlFlags uint32, pIProgress *IOfflineFilesSyncProgress) error {
+func (self *IOfflineFilesCache) Unpin(hwndParent foundation.HWND, rgpszPaths []foundation.PWSTR, bDeep bool, bAsync bool, dwPinControlFlags uint32, pIProgress *IOfflineFilesSyncProgress) error {
+	var _rgpszPaths *foundation.PWSTR
+	if len(rgpszPaths) > 0 {
+		_rgpszPaths = &rgpszPaths[0]
+	}
 	_bDeep := win32.Bool32(bDeep)
 	_bAsync := win32.Bool32(bAsync)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(rgpszPaths)), uintptr(cPaths), uintptr(_bDeep), uintptr(_bAsync), uintptr(dwPinControlFlags), uintptr(unsafe.Pointer(pIProgress)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(hwndParent), uintptr(unsafe.Pointer(_rgpszPaths)), uintptr(len(rgpszPaths)), uintptr(_bDeep), uintptr(_bAsync), uintptr(dwPinControlFlags), uintptr(unsafe.Pointer(pIProgress)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -671,14 +699,22 @@ func (self *IOfflineFilesEventsFilter) GetPathFilter(ppszFilter *foundation.PWST
 }
 
 // GetIncludedEvents dispatches through IOfflineFilesEventsFilter's vtable slot 4.
-func (self *IOfflineFilesEventsFilter) GetIncludedEvents(cElements uint32, prgEvents *OFFLINEFILES_EVENTS, pcEvents *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(cElements), uintptr(unsafe.Pointer(prgEvents)), uintptr(unsafe.Pointer(pcEvents)))
+func (self *IOfflineFilesEventsFilter) GetIncludedEvents(prgEvents []OFFLINEFILES_EVENTS, pcEvents *uint32) error {
+	var _prgEvents *OFFLINEFILES_EVENTS
+	if len(prgEvents) > 0 {
+		_prgEvents = &prgEvents[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(prgEvents)), uintptr(unsafe.Pointer(_prgEvents)), uintptr(unsafe.Pointer(pcEvents)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetExcludedEvents dispatches through IOfflineFilesEventsFilter's vtable slot 5.
-func (self *IOfflineFilesEventsFilter) GetExcludedEvents(cElements uint32, prgEvents *OFFLINEFILES_EVENTS, pcEvents *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(cElements), uintptr(unsafe.Pointer(prgEvents)), uintptr(unsafe.Pointer(pcEvents)))
+func (self *IOfflineFilesEventsFilter) GetExcludedEvents(prgEvents []OFFLINEFILES_EVENTS, pcEvents *uint32) error {
+	var _prgEvents *OFFLINEFILES_EVENTS
+	if len(prgEvents) > 0 {
+		_prgEvents = &prgEvents[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(prgEvents)), uintptr(unsafe.Pointer(_prgEvents)), uintptr(unsafe.Pointer(pcEvents)))
 	return win32.HRESULTError(int32(r1))
 }
 

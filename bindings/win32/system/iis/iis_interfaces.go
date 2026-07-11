@@ -177,8 +177,12 @@ type AsyncIMSAdminBaseSinkW struct {
 var IID_AsyncIMSAdminBaseSinkW = win32.GUID{Data1: 0xa9e69613, Data2: 0xb80d, Data3: 0x11d0, Data4: [8]byte{0xb9, 0xb9, 0x00, 0xa0, 0xc9, 0x22, 0xe7, 0x50}}
 
 // Begin_SinkNotify dispatches through AsyncIMSAdminBaseSinkW's vtable slot 3.
-func (self *AsyncIMSAdminBaseSinkW) Begin_SinkNotify(dwMDNumElements uint32, pcoChangeList *MD_CHANGE_OBJECT_W) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwMDNumElements), uintptr(unsafe.Pointer(pcoChangeList)))
+func (self *AsyncIMSAdminBaseSinkW) Begin_SinkNotify(pcoChangeList []MD_CHANGE_OBJECT_W) error {
+	var _pcoChangeList *MD_CHANGE_OBJECT_W
+	if len(pcoChangeList) > 0 {
+		_pcoChangeList = &pcoChangeList[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pcoChangeList)), uintptr(unsafe.Pointer(_pcoChangeList)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -433,8 +437,12 @@ type IMSAdminBaseSinkW struct {
 var IID_IMSAdminBaseSinkW = win32.GUID{Data1: 0xa9e69612, Data2: 0xb80d, Data3: 0x11d0, Data4: [8]byte{0xb9, 0xb9, 0x00, 0xa0, 0xc9, 0x22, 0xe7, 0x50}}
 
 // SinkNotify dispatches through IMSAdminBaseSinkW's vtable slot 3.
-func (self *IMSAdminBaseSinkW) SinkNotify(dwMDNumElements uint32, pcoChangeList *MD_CHANGE_OBJECT_W) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(dwMDNumElements), uintptr(unsafe.Pointer(pcoChangeList)))
+func (self *IMSAdminBaseSinkW) SinkNotify(pcoChangeList []MD_CHANGE_OBJECT_W) error {
+	var _pcoChangeList *MD_CHANGE_OBJECT_W
+	if len(pcoChangeList) > 0 {
+		_pcoChangeList = &pcoChangeList[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pcoChangeList)), uintptr(unsafe.Pointer(_pcoChangeList)))
 	return win32.HRESULTError(int32(r1))
 }
 

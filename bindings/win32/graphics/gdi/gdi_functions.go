@@ -425,8 +425,12 @@ func AbortPath(hdc HDC) bool {
 // AddFontMemResourceEx calls GDI32!AddFontMemResourceEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-addfontmemresourceex
 // Minimum OS: windows5.0.
-func AddFontMemResourceEx(pFileView unsafe.Pointer, cjSize uint32, pNumFonts *uint32) foundation.HANDLE {
-	r1, _, _ := syscall.SyscallN(procAddFontMemResourceEx.Addr(), uintptr(unsafe.Pointer(pFileView)), uintptr(cjSize), 0, uintptr(unsafe.Pointer(pNumFonts)))
+func AddFontMemResourceEx(pFileView []byte, pNumFonts *uint32) foundation.HANDLE {
+	var _pFileView *byte
+	if len(pFileView) > 0 {
+		_pFileView = &pFileView[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAddFontMemResourceEx.Addr(), uintptr(unsafe.Pointer(_pFileView)), uintptr(len(pFileView)), 0, uintptr(unsafe.Pointer(pNumFonts)))
 	return foundation.HANDLE(r1)
 }
 
@@ -1464,8 +1468,12 @@ func FrameRgn(hdc HDC, hrgn HRGN, hbr HBRUSH, w int32, h int32) bool {
 // GdiComment calls GDI32!GdiComment.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-gdicomment
 // Minimum OS: windows5.0.
-func GdiComment(hdc HDC, nSize uint32, lpData *byte) bool {
-	r1, _, _ := syscall.SyscallN(procGdiComment.Addr(), uintptr(hdc), uintptr(nSize), uintptr(unsafe.Pointer(lpData)))
+func GdiComment(hdc HDC, lpData []byte) bool {
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGdiComment.Addr(), uintptr(hdc), uintptr(len(lpData)), uintptr(unsafe.Pointer(_lpData)))
 	return r1 != 0
 }
 
@@ -1532,8 +1540,12 @@ func GetAspectRatioFilterEx(hdc HDC, lpsize *foundation.SIZE) bool {
 // GetBitmapBits calls GDI32!GetBitmapBits.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getbitmapbits
 // Minimum OS: windows5.0.
-func GetBitmapBits(hbit HBITMAP, cb int32, lpvBits unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procGetBitmapBits.Addr(), uintptr(hbit), uintptr(cb), uintptr(unsafe.Pointer(lpvBits)))
+func GetBitmapBits(hbit HBITMAP, lpvBits []byte) int32 {
+	var _lpvBits *byte
+	if len(lpvBits) > 0 {
+		_lpvBits = &lpvBits[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetBitmapBits.Addr(), uintptr(hbit), uintptr(len(lpvBits)), uintptr(unsafe.Pointer(_lpvBits)))
 	return int32(r1)
 }
 
@@ -1818,8 +1830,12 @@ func GetEnhMetaFileA(lpName foundation.PSTR) HENHMETAFILE {
 // GetEnhMetaFileBits calls GDI32!GetEnhMetaFileBits.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getenhmetafilebits
 // Minimum OS: windows5.0.
-func GetEnhMetaFileBits(hEMF HENHMETAFILE, nSize uint32, lpData *byte) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetEnhMetaFileBits.Addr(), uintptr(hEMF), uintptr(nSize), uintptr(unsafe.Pointer(lpData)))
+func GetEnhMetaFileBits(hEMF HENHMETAFILE, lpData []byte) uint32 {
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetEnhMetaFileBits.Addr(), uintptr(hEMF), uintptr(len(lpData)), uintptr(unsafe.Pointer(_lpData)))
 	return uint32(r1)
 }
 
@@ -1862,8 +1878,12 @@ func GetEnhMetaFilePaletteEntries(hemf HENHMETAFILE, lpPaletteEntries []PALETTEE
 // GetFontData calls GDI32!GetFontData.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getfontdata
 // Minimum OS: windows5.0.
-func GetFontData(hdc HDC, dwTable uint32, dwOffset uint32, pvBuffer unsafe.Pointer, cjBuffer uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetFontData.Addr(), uintptr(hdc), uintptr(dwTable), uintptr(dwOffset), uintptr(unsafe.Pointer(pvBuffer)), uintptr(cjBuffer))
+func GetFontData(hdc HDC, dwTable uint32, dwOffset uint32, pvBuffer []byte) uint32 {
+	var _pvBuffer *byte
+	if len(pvBuffer) > 0 {
+		_pvBuffer = &pvBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetFontData.Addr(), uintptr(hdc), uintptr(dwTable), uintptr(dwOffset), uintptr(unsafe.Pointer(_pvBuffer)), uintptr(len(pvBuffer)))
 	return uint32(r1)
 }
 
@@ -1903,16 +1923,24 @@ func GetGlyphIndicesA(hdc HDC, lpstr foundation.PSTR, c int32, pgi *uint16, fl u
 // GetGlyphOutline calls GDI32!GetGlyphOutlineW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getglyphoutlinew
 // Minimum OS: windows5.0.
-func GetGlyphOutline(hdc HDC, uChar uint32, fuFormat GET_GLYPH_OUTLINE_FORMAT, lpgm *GLYPHMETRICS, cjBuffer uint32, pvBuffer unsafe.Pointer, lpmat2 *MAT2) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetGlyphOutline.Addr(), uintptr(hdc), uintptr(uChar), uintptr(fuFormat), uintptr(unsafe.Pointer(lpgm)), uintptr(cjBuffer), uintptr(unsafe.Pointer(pvBuffer)), uintptr(unsafe.Pointer(lpmat2)))
+func GetGlyphOutline(hdc HDC, uChar uint32, fuFormat GET_GLYPH_OUTLINE_FORMAT, lpgm *GLYPHMETRICS, pvBuffer []byte, lpmat2 *MAT2) uint32 {
+	var _pvBuffer *byte
+	if len(pvBuffer) > 0 {
+		_pvBuffer = &pvBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetGlyphOutline.Addr(), uintptr(hdc), uintptr(uChar), uintptr(fuFormat), uintptr(unsafe.Pointer(lpgm)), uintptr(len(pvBuffer)), uintptr(unsafe.Pointer(_pvBuffer)), uintptr(unsafe.Pointer(lpmat2)))
 	return uint32(r1)
 }
 
 // GetGlyphOutlineA calls GDI32!GetGlyphOutlineA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getglyphoutlinea
 // Minimum OS: windows5.0.
-func GetGlyphOutlineA(hdc HDC, uChar uint32, fuFormat GET_GLYPH_OUTLINE_FORMAT, lpgm *GLYPHMETRICS, cjBuffer uint32, pvBuffer unsafe.Pointer, lpmat2 *MAT2) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetGlyphOutlineA.Addr(), uintptr(hdc), uintptr(uChar), uintptr(fuFormat), uintptr(unsafe.Pointer(lpgm)), uintptr(cjBuffer), uintptr(unsafe.Pointer(pvBuffer)), uintptr(unsafe.Pointer(lpmat2)))
+func GetGlyphOutlineA(hdc HDC, uChar uint32, fuFormat GET_GLYPH_OUTLINE_FORMAT, lpgm *GLYPHMETRICS, pvBuffer []byte, lpmat2 *MAT2) uint32 {
+	var _pvBuffer *byte
+	if len(pvBuffer) > 0 {
+		_pvBuffer = &pvBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetGlyphOutlineA.Addr(), uintptr(hdc), uintptr(uChar), uintptr(fuFormat), uintptr(unsafe.Pointer(lpgm)), uintptr(len(pvBuffer)), uintptr(unsafe.Pointer(_pvBuffer)), uintptr(unsafe.Pointer(lpmat2)))
 	return uint32(r1)
 }
 
@@ -1985,8 +2013,12 @@ func GetMetaFileA(lpName foundation.PSTR) HMETAFILE {
 // GetMetaFileBitsEx calls GDI32!GetMetaFileBitsEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getmetafilebitsex
 // Minimum OS: windows5.0.
-func GetMetaFileBitsEx(hMF HMETAFILE, cbBuffer uint32, lpData unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetMetaFileBitsEx.Addr(), uintptr(hMF), uintptr(cbBuffer), uintptr(unsafe.Pointer(lpData)))
+func GetMetaFileBitsEx(hMF HMETAFILE, lpData []byte) uint32 {
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetMetaFileBitsEx.Addr(), uintptr(hMF), uintptr(len(lpData)), uintptr(unsafe.Pointer(_lpData)))
 	return uint32(r1)
 }
 
@@ -2041,15 +2073,23 @@ func GetNearestPaletteIndex(h HPALETTE, color foundation.COLORREF) uint32 {
 // GetObject calls GDI32!GetObjectW.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getobjectw
 // Minimum OS: windows5.0.
-func GetObject(h HGDIOBJ, c int32, pv unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procGetObject.Addr(), uintptr(h), uintptr(c), uintptr(unsafe.Pointer(pv)))
+func GetObject(h HGDIOBJ, pv []byte) int32 {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetObject.Addr(), uintptr(h), uintptr(len(pv)), uintptr(unsafe.Pointer(_pv)))
 	return int32(r1)
 }
 
 // GetObjectA calls GDI32!GetObjectA.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getobjecta
-func GetObjectA(h HGDIOBJ, c int32, pv unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procGetObjectA.Addr(), uintptr(h), uintptr(c), uintptr(unsafe.Pointer(pv)))
+func GetObjectA(h HGDIOBJ, pv []byte) int32 {
+	var _pv *byte
+	if len(pv) > 0 {
+		_pv = &pv[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetObjectA.Addr(), uintptr(h), uintptr(len(pv)), uintptr(unsafe.Pointer(_pv)))
 	return int32(r1)
 }
 
@@ -2394,8 +2434,12 @@ func GetViewportOrgEx(hdc HDC, lppoint *foundation.POINT) bool {
 // GetWinMetaFileBits calls GDI32!GetWinMetaFileBits.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-getwinmetafilebits
 // Minimum OS: windows5.0.
-func GetWinMetaFileBits(hemf HENHMETAFILE, cbData16 uint32, pData16 *byte, iMapMode int32, hdcRef HDC) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetWinMetaFileBits.Addr(), uintptr(hemf), uintptr(cbData16), uintptr(unsafe.Pointer(pData16)), uintptr(iMapMode), uintptr(hdcRef))
+func GetWinMetaFileBits(hemf HENHMETAFILE, pData16 []byte, iMapMode int32, hdcRef HDC) uint32 {
+	var _pData16 *byte
+	if len(pData16) > 0 {
+		_pData16 = &pData16[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetWinMetaFileBits.Addr(), uintptr(hemf), uintptr(len(pData16)), uintptr(unsafe.Pointer(_pData16)), uintptr(iMapMode), uintptr(hdcRef))
 	return uint32(r1)
 }
 
@@ -3120,8 +3164,12 @@ func SetArcDirection(hdc HDC, dir ARC_DIRECTION) int32 {
 // SetBitmapBits calls GDI32!SetBitmapBits.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setbitmapbits
 // Minimum OS: windows5.0.
-func SetBitmapBits(hbm HBITMAP, cb uint32, pvBits unsafe.Pointer) int32 {
-	r1, _, _ := syscall.SyscallN(procSetBitmapBits.Addr(), uintptr(hbm), uintptr(cb), uintptr(unsafe.Pointer(pvBits)))
+func SetBitmapBits(hbm HBITMAP, pvBits []byte) int32 {
+	var _pvBits *byte
+	if len(pvBits) > 0 {
+		_pvBits = &pvBits[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetBitmapBits.Addr(), uintptr(hbm), uintptr(len(pvBits)), uintptr(unsafe.Pointer(_pvBits)))
 	return int32(r1)
 }
 
@@ -3220,8 +3268,12 @@ func SetDIBitsToDevice(hdc HDC, xDest int32, yDest int32, w uint32, h uint32, xS
 // SetEnhMetaFileBits calls GDI32!SetEnhMetaFileBits.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setenhmetafilebits
 // Minimum OS: windows5.0.
-func SetEnhMetaFileBits(nSize uint32, pb *byte) HENHMETAFILE {
-	r1, _, _ := syscall.SyscallN(procSetEnhMetaFileBits.Addr(), uintptr(nSize), uintptr(unsafe.Pointer(pb)))
+func SetEnhMetaFileBits(pb []byte) HENHMETAFILE {
+	var _pb *byte
+	if len(pb) > 0 {
+		_pb = &pb[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetEnhMetaFileBits.Addr(), uintptr(len(pb)), uintptr(unsafe.Pointer(_pb)))
 	return HENHMETAFILE(r1)
 }
 
@@ -3260,8 +3312,12 @@ func SetMapperFlags(hdc HDC, flags uint32) uint32 {
 // SetMetaFileBitsEx calls GDI32!SetMetaFileBitsEx.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setmetafilebitsex
 // Minimum OS: windows5.0.
-func SetMetaFileBitsEx(cbBuffer uint32, lpData *byte) HMETAFILE {
-	r1, _, _ := syscall.SyscallN(procSetMetaFileBitsEx.Addr(), uintptr(cbBuffer), uintptr(unsafe.Pointer(lpData)))
+func SetMetaFileBitsEx(lpData []byte) HMETAFILE {
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetMetaFileBitsEx.Addr(), uintptr(len(lpData)), uintptr(unsafe.Pointer(_lpData)))
 	return HMETAFILE(r1)
 }
 

@@ -684,8 +684,12 @@ func PifMgr_CloseProperties(hProps foundation.HANDLE, flOpt uint32) foundation.H
 // PifMgr_GetProperties calls SHELL32!PifMgr_GetProperties.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-pifmgr_getproperties
 // Minimum OS: windows5.0.
-func PifMgr_GetProperties(hProps foundation.HANDLE, pszGroup foundation.PSTR, lpProps unsafe.Pointer, cbProps int32, flOpt uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procPifMgr_GetProperties.Addr(), uintptr(hProps), uintptr(unsafe.Pointer(pszGroup)), uintptr(unsafe.Pointer(lpProps)), uintptr(cbProps), uintptr(flOpt))
+func PifMgr_GetProperties(hProps foundation.HANDLE, pszGroup foundation.PSTR, lpProps []byte, flOpt uint32) int32 {
+	var _lpProps *byte
+	if len(lpProps) > 0 {
+		_lpProps = &lpProps[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPifMgr_GetProperties.Addr(), uintptr(hProps), uintptr(unsafe.Pointer(pszGroup)), uintptr(unsafe.Pointer(_lpProps)), uintptr(len(lpProps)), uintptr(flOpt))
 	return int32(r1)
 }
 
@@ -702,8 +706,12 @@ func PifMgr_OpenProperties(pszApp string, pszPIF string, hInf uint32, flOpt uint
 // PifMgr_SetProperties calls SHELL32!PifMgr_SetProperties.
 // https://learn.microsoft.com/windows/win32/api/shlobj_core/nf-shlobj_core-pifmgr_setproperties
 // Minimum OS: windows5.0.
-func PifMgr_SetProperties(hProps foundation.HANDLE, pszGroup foundation.PSTR, lpProps unsafe.Pointer, cbProps int32, flOpt uint32) int32 {
-	r1, _, _ := syscall.SyscallN(procPifMgr_SetProperties.Addr(), uintptr(hProps), uintptr(unsafe.Pointer(pszGroup)), uintptr(unsafe.Pointer(lpProps)), uintptr(cbProps), uintptr(flOpt))
+func PifMgr_SetProperties(hProps foundation.HANDLE, pszGroup foundation.PSTR, lpProps []byte, flOpt uint32) int32 {
+	var _lpProps *byte
+	if len(lpProps) > 0 {
+		_lpProps = &lpProps[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPifMgr_SetProperties.Addr(), uintptr(hProps), uintptr(unsafe.Pointer(pszGroup)), uintptr(unsafe.Pointer(_lpProps)), uintptr(len(lpProps)), uintptr(flOpt))
 	return int32(r1)
 }
 

@@ -117,20 +117,32 @@ func (self *IDirectManipulationContent) SetTag(object *systemcom.IUnknown, id ui
 }
 
 // GetOutputTransform dispatches through IDirectManipulationContent's vtable slot 8.
-func (self *IDirectManipulationContent) GetOutputTransform(matrix *float32, pointCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)), uintptr(pointCount))
+func (self *IDirectManipulationContent) GetOutputTransform(matrix []float32) error {
+	var _matrix *float32
+	if len(matrix) > 0 {
+		_matrix = &matrix[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_matrix)), uintptr(len(matrix)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetContentTransform dispatches through IDirectManipulationContent's vtable slot 9.
-func (self *IDirectManipulationContent) GetContentTransform(matrix *float32, pointCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)), uintptr(pointCount))
+func (self *IDirectManipulationContent) GetContentTransform(matrix []float32) error {
+	var _matrix *float32
+	if len(matrix) > 0 {
+		_matrix = &matrix[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_matrix)), uintptr(len(matrix)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SyncContentTransform dispatches through IDirectManipulationContent's vtable slot 10.
-func (self *IDirectManipulationContent) SyncContentTransform(matrix *float32, pointCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)), uintptr(pointCount))
+func (self *IDirectManipulationContent) SyncContentTransform(matrix []float32) error {
+	var _matrix *float32
+	if len(matrix) > 0 {
+		_matrix = &matrix[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_matrix)), uintptr(len(matrix)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -318,8 +330,12 @@ type IDirectManipulationPrimaryContent struct {
 var IID_IDirectManipulationPrimaryContent = win32.GUID{Data1: 0xc12851e4, Data2: 0x1698, Data3: 0x4625, Data4: [8]byte{0xb9, 0xb1, 0x7c, 0xa3, 0xec, 0x18, 0x63, 0x0b}}
 
 // SetSnapPoints dispatches through IDirectManipulationPrimaryContent's vtable slot 4.
-func (self *IDirectManipulationPrimaryContent) SetSnapPoints(motion DIRECTMANIPULATION_MOTION_TYPES, points *float32, pointCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(motion), uintptr(unsafe.Pointer(points)), uintptr(pointCount))
+func (self *IDirectManipulationPrimaryContent) SetSnapPoints(motion DIRECTMANIPULATION_MOTION_TYPES, points []float32) error {
+	var _points *float32
+	if len(points) > 0 {
+		_points = &points[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(motion), uintptr(unsafe.Pointer(_points)), uintptr(len(points)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -342,8 +358,12 @@ func (self *IDirectManipulationPrimaryContent) SetVerticalAlignment(alignment DI
 }
 
 // GetInertiaEndTransform dispatches through IDirectManipulationPrimaryContent's vtable slot 10.
-func (self *IDirectManipulationPrimaryContent) GetInertiaEndTransform(matrix *float32, pointCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)), uintptr(pointCount))
+func (self *IDirectManipulationPrimaryContent) GetInertiaEndTransform(matrix []float32) error {
+	var _matrix *float32
+	if len(matrix) > 0 {
+		_matrix = &matrix[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_matrix)), uintptr(len(matrix)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -465,14 +485,22 @@ func (self *IDirectManipulationViewport) SetViewportRect(viewport *foundation.RE
 }
 
 // SetViewportTransform dispatches through IDirectManipulationViewport's vtable slot 14.
-func (self *IDirectManipulationViewport) SetViewportTransform(matrix *float32, pointCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)), uintptr(pointCount))
+func (self *IDirectManipulationViewport) SetViewportTransform(matrix []float32) error {
+	var _matrix *float32
+	if len(matrix) > 0 {
+		_matrix = &matrix[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_matrix)), uintptr(len(matrix)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SyncDisplayTransform dispatches through IDirectManipulationViewport's vtable slot 15.
-func (self *IDirectManipulationViewport) SyncDisplayTransform(matrix *float32, pointCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(matrix)), uintptr(pointCount))
+func (self *IDirectManipulationViewport) SyncDisplayTransform(matrix []float32) error {
+	var _matrix *float32
+	if len(matrix) > 0 {
+		_matrix = &matrix[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_matrix)), uintptr(len(matrix)))
 	return win32.HRESULTError(int32(r1))
 }
 

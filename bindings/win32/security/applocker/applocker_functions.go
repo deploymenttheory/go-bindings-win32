@@ -66,8 +66,12 @@ func SaferCreateLevel(dwScopeId uint32, dwLevelId uint32, OpenFlags uint32, pLev
 // SaferGetLevelInformation calls ADVAPI32!SaferGetLevelInformation.
 // https://learn.microsoft.com/windows/win32/api/winsafer/nf-winsafer-safergetlevelinformation
 // Minimum OS: windows5.1.2600.
-func SaferGetLevelInformation(LevelHandle security.SAFER_LEVEL_HANDLE, dwInfoType SAFER_OBJECT_INFO_CLASS, lpQueryBuffer unsafe.Pointer, dwInBufferSize uint32, lpdwOutBufferSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSaferGetLevelInformation.Addr(), uintptr(LevelHandle), uintptr(dwInfoType), uintptr(unsafe.Pointer(lpQueryBuffer)), uintptr(dwInBufferSize), uintptr(unsafe.Pointer(lpdwOutBufferSize)))
+func SaferGetLevelInformation(LevelHandle security.SAFER_LEVEL_HANDLE, dwInfoType SAFER_OBJECT_INFO_CLASS, lpQueryBuffer []byte, lpdwOutBufferSize *uint32) error {
+	var _lpQueryBuffer *byte
+	if len(lpQueryBuffer) > 0 {
+		_lpQueryBuffer = &lpQueryBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSaferGetLevelInformation.Addr(), uintptr(LevelHandle), uintptr(dwInfoType), uintptr(unsafe.Pointer(_lpQueryBuffer)), uintptr(len(lpQueryBuffer)), uintptr(unsafe.Pointer(lpdwOutBufferSize)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -77,8 +81,12 @@ func SaferGetLevelInformation(LevelHandle security.SAFER_LEVEL_HANDLE, dwInfoTyp
 // SaferGetPolicyInformation calls ADVAPI32!SaferGetPolicyInformation.
 // https://learn.microsoft.com/windows/win32/api/winsafer/nf-winsafer-safergetpolicyinformation
 // Minimum OS: windows5.1.2600.
-func SaferGetPolicyInformation(dwScopeId uint32, SaferPolicyInfoClass SAFER_POLICY_INFO_CLASS, InfoBufferSize uint32, InfoBuffer unsafe.Pointer, InfoBufferRetSize *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSaferGetPolicyInformation.Addr(), uintptr(dwScopeId), uintptr(SaferPolicyInfoClass), uintptr(InfoBufferSize), uintptr(unsafe.Pointer(InfoBuffer)), uintptr(unsafe.Pointer(InfoBufferRetSize)), 0)
+func SaferGetPolicyInformation(dwScopeId uint32, SaferPolicyInfoClass SAFER_POLICY_INFO_CLASS, InfoBuffer []byte, InfoBufferRetSize *uint32) error {
+	var _InfoBuffer *byte
+	if len(InfoBuffer) > 0 {
+		_InfoBuffer = &InfoBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSaferGetPolicyInformation.Addr(), uintptr(dwScopeId), uintptr(SaferPolicyInfoClass), uintptr(len(InfoBuffer)), uintptr(unsafe.Pointer(_InfoBuffer)), uintptr(unsafe.Pointer(InfoBufferRetSize)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -115,8 +123,12 @@ func SaferRecordEventLogEntry(hLevel security.SAFER_LEVEL_HANDLE, szTargetPath s
 // SaferSetLevelInformation calls ADVAPI32!SaferSetLevelInformation.
 // https://learn.microsoft.com/windows/win32/api/winsafer/nf-winsafer-safersetlevelinformation
 // Minimum OS: windows5.1.2600.
-func SaferSetLevelInformation(LevelHandle security.SAFER_LEVEL_HANDLE, dwInfoType SAFER_OBJECT_INFO_CLASS, lpQueryBuffer unsafe.Pointer, dwInBufferSize uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSaferSetLevelInformation.Addr(), uintptr(LevelHandle), uintptr(dwInfoType), uintptr(unsafe.Pointer(lpQueryBuffer)), uintptr(dwInBufferSize))
+func SaferSetLevelInformation(LevelHandle security.SAFER_LEVEL_HANDLE, dwInfoType SAFER_OBJECT_INFO_CLASS, lpQueryBuffer []byte) error {
+	var _lpQueryBuffer *byte
+	if len(lpQueryBuffer) > 0 {
+		_lpQueryBuffer = &lpQueryBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSaferSetLevelInformation.Addr(), uintptr(LevelHandle), uintptr(dwInfoType), uintptr(unsafe.Pointer(_lpQueryBuffer)), uintptr(len(lpQueryBuffer)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -126,8 +138,12 @@ func SaferSetLevelInformation(LevelHandle security.SAFER_LEVEL_HANDLE, dwInfoTyp
 // SaferSetPolicyInformation calls ADVAPI32!SaferSetPolicyInformation.
 // https://learn.microsoft.com/windows/win32/api/winsafer/nf-winsafer-safersetpolicyinformation
 // Minimum OS: windows5.1.2600.
-func SaferSetPolicyInformation(dwScopeId uint32, SaferPolicyInfoClass SAFER_POLICY_INFO_CLASS, InfoBufferSize uint32, InfoBuffer unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procSaferSetPolicyInformation.Addr(), uintptr(dwScopeId), uintptr(SaferPolicyInfoClass), uintptr(InfoBufferSize), uintptr(unsafe.Pointer(InfoBuffer)), 0)
+func SaferSetPolicyInformation(dwScopeId uint32, SaferPolicyInfoClass SAFER_POLICY_INFO_CLASS, InfoBuffer []byte) error {
+	var _InfoBuffer *byte
+	if len(InfoBuffer) > 0 {
+		_InfoBuffer = &InfoBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSaferSetPolicyInformation.Addr(), uintptr(dwScopeId), uintptr(SaferPolicyInfoClass), uintptr(len(InfoBuffer)), uintptr(unsafe.Pointer(_InfoBuffer)), 0)
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

@@ -135,8 +135,12 @@ func WinUsb_GetCurrentFrameNumberAndQpc(InterfaceHandle WINUSB_INTERFACE_HANDLE,
 
 // WinUsb_GetDescriptor calls WINUSB!WinUsb_GetDescriptor.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_getdescriptor
-func WinUsb_GetDescriptor(InterfaceHandle WINUSB_INTERFACE_HANDLE, DescriptorType byte, Index byte, LanguageID uint16, Buffer *byte, BufferLength uint32, LengthTransferred *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procWinUsb_GetDescriptor.Addr(), uintptr(InterfaceHandle), uintptr(DescriptorType), uintptr(Index), uintptr(LanguageID), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength), uintptr(unsafe.Pointer(LengthTransferred)))
+func WinUsb_GetDescriptor(InterfaceHandle WINUSB_INTERFACE_HANDLE, DescriptorType byte, Index byte, LanguageID uint16, Buffer []byte, LengthTransferred *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWinUsb_GetDescriptor.Addr(), uintptr(InterfaceHandle), uintptr(DescriptorType), uintptr(Index), uintptr(LanguageID), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(LengthTransferred)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -195,8 +199,12 @@ func WinUsb_ParseConfigurationDescriptor(ConfigurationDescriptor *USB_CONFIGURAT
 }
 
 // WinUsb_ParseDescriptors calls WINUSB!WinUsb_ParseDescriptors.
-func WinUsb_ParseDescriptors(DescriptorBuffer unsafe.Pointer, TotalLength uint32, StartPosition unsafe.Pointer, DescriptorType int32) (*USB_COMMON_DESCRIPTOR, error) {
-	r1, _, e1 := syscall.SyscallN(procWinUsb_ParseDescriptors.Addr(), uintptr(unsafe.Pointer(DescriptorBuffer)), uintptr(TotalLength), uintptr(unsafe.Pointer(StartPosition)), uintptr(DescriptorType))
+func WinUsb_ParseDescriptors(DescriptorBuffer []byte, StartPosition unsafe.Pointer, DescriptorType int32) (*USB_COMMON_DESCRIPTOR, error) {
+	var _DescriptorBuffer *byte
+	if len(DescriptorBuffer) > 0 {
+		_DescriptorBuffer = &DescriptorBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWinUsb_ParseDescriptors.Addr(), uintptr(unsafe.Pointer(_DescriptorBuffer)), uintptr(len(DescriptorBuffer)), uintptr(unsafe.Pointer(StartPosition)), uintptr(DescriptorType))
 	ret := (*USB_COMMON_DESCRIPTOR)(unsafe.Pointer(r1))
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -277,8 +285,12 @@ func WinUsb_ReadIsochPipeAsap(BufferHandle unsafe.Pointer, Offset uint32, Length
 
 // WinUsb_ReadPipe calls WINUSB!WinUsb_ReadPipe.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_readpipe
-func WinUsb_ReadPipe(InterfaceHandle WINUSB_INTERFACE_HANDLE, PipeID byte, Buffer *byte, BufferLength uint32, LengthTransferred *uint32, Overlapped *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procWinUsb_ReadPipe.Addr(), uintptr(InterfaceHandle), uintptr(PipeID), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength), uintptr(unsafe.Pointer(LengthTransferred)), uintptr(unsafe.Pointer(Overlapped)))
+func WinUsb_ReadPipe(InterfaceHandle WINUSB_INTERFACE_HANDLE, PipeID byte, Buffer []byte, LengthTransferred *uint32, Overlapped *systemio.OVERLAPPED) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWinUsb_ReadPipe.Addr(), uintptr(InterfaceHandle), uintptr(PipeID), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(LengthTransferred)), uintptr(unsafe.Pointer(Overlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -288,8 +300,12 @@ func WinUsb_ReadPipe(InterfaceHandle WINUSB_INTERFACE_HANDLE, PipeID byte, Buffe
 // WinUsb_RegisterIsochBuffer calls WINUSB!WinUsb_RegisterIsochBuffer.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_registerisochbuffer
 // Minimum OS: windows8.1.
-func WinUsb_RegisterIsochBuffer(InterfaceHandle WINUSB_INTERFACE_HANDLE, PipeID byte, Buffer *byte, BufferLength uint32, IsochBufferHandle *unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procWinUsb_RegisterIsochBuffer.Addr(), uintptr(InterfaceHandle), uintptr(PipeID), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength), uintptr(unsafe.Pointer(IsochBufferHandle)))
+func WinUsb_RegisterIsochBuffer(InterfaceHandle WINUSB_INTERFACE_HANDLE, PipeID byte, Buffer []byte, IsochBufferHandle *unsafe.Pointer) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWinUsb_RegisterIsochBuffer.Addr(), uintptr(InterfaceHandle), uintptr(PipeID), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(IsochBufferHandle)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -318,8 +334,12 @@ func WinUsb_SetCurrentAlternateSetting(InterfaceHandle WINUSB_INTERFACE_HANDLE, 
 
 // WinUsb_SetPipePolicy calls WINUSB!WinUsb_SetPipePolicy.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_setpipepolicy
-func WinUsb_SetPipePolicy(InterfaceHandle WINUSB_INTERFACE_HANDLE, PipeID byte, PolicyType WINUSB_PIPE_POLICY, ValueLength uint32, Value unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procWinUsb_SetPipePolicy.Addr(), uintptr(InterfaceHandle), uintptr(PipeID), uintptr(PolicyType), uintptr(ValueLength), uintptr(unsafe.Pointer(Value)))
+func WinUsb_SetPipePolicy(InterfaceHandle WINUSB_INTERFACE_HANDLE, PipeID byte, PolicyType WINUSB_PIPE_POLICY, Value []byte) error {
+	var _Value *byte
+	if len(Value) > 0 {
+		_Value = &Value[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWinUsb_SetPipePolicy.Addr(), uintptr(InterfaceHandle), uintptr(PipeID), uintptr(PolicyType), uintptr(len(Value)), uintptr(unsafe.Pointer(_Value)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -328,8 +348,12 @@ func WinUsb_SetPipePolicy(InterfaceHandle WINUSB_INTERFACE_HANDLE, PipeID byte, 
 
 // WinUsb_SetPowerPolicy calls WINUSB!WinUsb_SetPowerPolicy.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_setpowerpolicy
-func WinUsb_SetPowerPolicy(InterfaceHandle WINUSB_INTERFACE_HANDLE, PolicyType WINUSB_POWER_POLICY, ValueLength uint32, Value unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procWinUsb_SetPowerPolicy.Addr(), uintptr(InterfaceHandle), uintptr(PolicyType), uintptr(ValueLength), uintptr(unsafe.Pointer(Value)))
+func WinUsb_SetPowerPolicy(InterfaceHandle WINUSB_INTERFACE_HANDLE, PolicyType WINUSB_POWER_POLICY, Value []byte) error {
+	var _Value *byte
+	if len(Value) > 0 {
+		_Value = &Value[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWinUsb_SetPowerPolicy.Addr(), uintptr(InterfaceHandle), uintptr(PolicyType), uintptr(len(Value)), uintptr(unsafe.Pointer(_Value)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -394,8 +418,12 @@ func WinUsb_WriteIsochPipeAsap(BufferHandle unsafe.Pointer, Offset uint32, Lengt
 
 // WinUsb_WritePipe calls WINUSB!WinUsb_WritePipe.
 // https://learn.microsoft.com/windows/win32/api/winusb/nf-winusb-winusb_writepipe
-func WinUsb_WritePipe(InterfaceHandle WINUSB_INTERFACE_HANDLE, PipeID byte, Buffer *byte, BufferLength uint32, LengthTransferred *uint32, Overlapped *systemio.OVERLAPPED) error {
-	r1, _, e1 := syscall.SyscallN(procWinUsb_WritePipe.Addr(), uintptr(InterfaceHandle), uintptr(PipeID), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLength), uintptr(unsafe.Pointer(LengthTransferred)), uintptr(unsafe.Pointer(Overlapped)))
+func WinUsb_WritePipe(InterfaceHandle WINUSB_INTERFACE_HANDLE, PipeID byte, Buffer []byte, LengthTransferred *uint32, Overlapped *systemio.OVERLAPPED) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procWinUsb_WritePipe.Addr(), uintptr(InterfaceHandle), uintptr(PipeID), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(LengthTransferred)), uintptr(unsafe.Pointer(Overlapped)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

@@ -1442,14 +1442,22 @@ func (self *IWMPContentPartner) GetContentPartnerInfo(bstrInfoName foundation.BS
 }
 
 // GetCommands dispatches through IWMPContentPartner's vtable slot 7.
-func (self *IWMPContentPartner) GetCommands(location foundation.BSTR, pLocationContext *systemvariant.VARIANT, itemLocation foundation.BSTR, cItemIDs uint32, prgItemIDs *uint32, pcItemIDs *uint32, pprgItems **WMPContextMenuInfo) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(location)), uintptr(unsafe.Pointer(pLocationContext)), uintptr(unsafe.Pointer(itemLocation)), uintptr(cItemIDs), uintptr(unsafe.Pointer(prgItemIDs)), uintptr(unsafe.Pointer(pcItemIDs)), uintptr(unsafe.Pointer(pprgItems)))
+func (self *IWMPContentPartner) GetCommands(location foundation.BSTR, pLocationContext *systemvariant.VARIANT, itemLocation foundation.BSTR, prgItemIDs []uint32, pcItemIDs *uint32, pprgItems **WMPContextMenuInfo) error {
+	var _prgItemIDs *uint32
+	if len(prgItemIDs) > 0 {
+		_prgItemIDs = &prgItemIDs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(location)), uintptr(unsafe.Pointer(pLocationContext)), uintptr(unsafe.Pointer(itemLocation)), uintptr(len(prgItemIDs)), uintptr(unsafe.Pointer(_prgItemIDs)), uintptr(unsafe.Pointer(pcItemIDs)), uintptr(unsafe.Pointer(pprgItems)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // InvokeCommand dispatches through IWMPContentPartner's vtable slot 8.
-func (self *IWMPContentPartner) InvokeCommand(dwCommandID uint32, location foundation.BSTR, pLocationContext *systemvariant.VARIANT, itemLocation foundation.BSTR, cItemIDs uint32, rgItemIDs *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwCommandID), uintptr(unsafe.Pointer(location)), uintptr(unsafe.Pointer(pLocationContext)), uintptr(unsafe.Pointer(itemLocation)), uintptr(cItemIDs), uintptr(unsafe.Pointer(rgItemIDs)))
+func (self *IWMPContentPartner) InvokeCommand(dwCommandID uint32, location foundation.BSTR, pLocationContext *systemvariant.VARIANT, itemLocation foundation.BSTR, rgItemIDs []uint32) error {
+	var _rgItemIDs *uint32
+	if len(rgItemIDs) > 0 {
+		_rgItemIDs = &rgItemIDs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(dwCommandID), uintptr(unsafe.Pointer(location)), uintptr(unsafe.Pointer(pLocationContext)), uintptr(unsafe.Pointer(itemLocation)), uintptr(len(rgItemIDs)), uintptr(unsafe.Pointer(_rgItemIDs)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1589,8 +1597,12 @@ func (self *IWMPContentPartnerCallback) ChangeView(bstrType foundation.BSTR, bst
 }
 
 // AddListContents dispatches through IWMPContentPartnerCallback's vtable slot 9.
-func (self *IWMPContentPartnerCallback) AddListContents(dwListCookie uint32, cItems uint32, prgItems *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwListCookie), uintptr(cItems), uintptr(unsafe.Pointer(prgItems)))
+func (self *IWMPContentPartnerCallback) AddListContents(dwListCookie uint32, prgItems []uint32) error {
+	var _prgItems *uint32
+	if len(prgItems) > 0 {
+		_prgItems = &prgItems[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(dwListCookie), uintptr(len(prgItems)), uintptr(unsafe.Pointer(_prgItems)))
 	return win32.HRESULTError(int32(r1))
 }
 

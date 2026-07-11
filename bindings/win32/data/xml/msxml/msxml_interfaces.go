@@ -4091,9 +4091,13 @@ type IXMLHTTPRequest3 struct {
 var IID_IXMLHTTPRequest3 = win32.GUID{Data1: 0xa1c9feee, Data2: 0x0617, Data3: 0x4f23, Data4: [8]byte{0x9d, 0x58, 0x89, 0x61, 0xea, 0x43, 0x56, 0x7c}}
 
 // SetClientCertificate dispatches through IXMLHTTPRequest3's vtable slot 13.
-func (self *IXMLHTTPRequest3) SetClientCertificate(cbClientCertificateHash uint32, pbClientCertificateHash *byte, pwszPin string) error {
+func (self *IXMLHTTPRequest3) SetClientCertificate(pbClientCertificateHash []byte, pwszPin string) error {
+	var _pbClientCertificateHash *byte
+	if len(pbClientCertificateHash) > 0 {
+		_pbClientCertificateHash = &pbClientCertificateHash[0]
+	}
 	_pwszPin := win32.UTF16Ptr(pwszPin)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(cbClientCertificateHash), uintptr(unsafe.Pointer(pbClientCertificateHash)), uintptr(unsafe.Pointer(_pwszPin)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(len(pbClientCertificateHash)), uintptr(unsafe.Pointer(_pbClientCertificateHash)), uintptr(unsafe.Pointer(_pwszPin)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4107,14 +4111,22 @@ type IXMLHTTPRequest3Callback struct {
 var IID_IXMLHTTPRequest3Callback = win32.GUID{Data1: 0xb9e57830, Data2: 0x8c6c, Data3: 0x4a6f, Data4: [8]byte{0x9c, 0x13, 0x47, 0x77, 0x2b, 0xb0, 0x47, 0xbb}}
 
 // OnServerCertificateReceived dispatches through IXMLHTTPRequest3Callback's vtable slot 8.
-func (self *IXMLHTTPRequest3Callback) OnServerCertificateReceived(pXHR *IXMLHTTPRequest3, dwCertificateErrors uint32, cServerCertificateChain uint32, rgServerCertificateChain *XHR_CERT) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pXHR)), uintptr(dwCertificateErrors), uintptr(cServerCertificateChain), uintptr(unsafe.Pointer(rgServerCertificateChain)))
+func (self *IXMLHTTPRequest3Callback) OnServerCertificateReceived(pXHR *IXMLHTTPRequest3, dwCertificateErrors uint32, rgServerCertificateChain []XHR_CERT) error {
+	var _rgServerCertificateChain *XHR_CERT
+	if len(rgServerCertificateChain) > 0 {
+		_rgServerCertificateChain = &rgServerCertificateChain[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pXHR)), uintptr(dwCertificateErrors), uintptr(len(rgServerCertificateChain)), uintptr(unsafe.Pointer(_rgServerCertificateChain)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OnClientCertificateRequested dispatches through IXMLHTTPRequest3Callback's vtable slot 9.
-func (self *IXMLHTTPRequest3Callback) OnClientCertificateRequested(pXHR *IXMLHTTPRequest3, cIssuerList uint32, rgpwszIssuerList **uint16) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pXHR)), uintptr(cIssuerList), uintptr(unsafe.Pointer(rgpwszIssuerList)))
+func (self *IXMLHTTPRequest3Callback) OnClientCertificateRequested(pXHR *IXMLHTTPRequest3, rgpwszIssuerList []*uint16) error {
+	var _rgpwszIssuerList **uint16
+	if len(rgpwszIssuerList) > 0 {
+		_rgpwszIssuerList = &rgpwszIssuerList[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pXHR)), uintptr(len(rgpwszIssuerList)), uintptr(unsafe.Pointer(_rgpwszIssuerList)))
 	return win32.HRESULTError(int32(r1))
 }
 

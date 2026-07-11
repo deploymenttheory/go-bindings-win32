@@ -362,8 +362,12 @@ func AddAccessDeniedObjectAce(pAcl *ACL, dwAceRevision ACE_REVISION, AceFlags AC
 // AddAce calls ADVAPI32!AddAce.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-addace
 // Minimum OS: windows5.1.2600.
-func AddAce(pAcl *ACL, dwAceRevision ACE_REVISION, dwStartingAceIndex uint32, pAceList unsafe.Pointer, nAceListLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procAddAce.Addr(), uintptr(unsafe.Pointer(pAcl)), uintptr(dwAceRevision), uintptr(dwStartingAceIndex), uintptr(unsafe.Pointer(pAceList)), uintptr(nAceListLength))
+func AddAce(pAcl *ACL, dwAceRevision ACE_REVISION, dwStartingAceIndex uint32, pAceList []byte) error {
+	var _pAceList *byte
+	if len(pAceList) > 0 {
+		_pAceList = &pAceList[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procAddAce.Addr(), uintptr(unsafe.Pointer(pAcl)), uintptr(dwAceRevision), uintptr(dwStartingAceIndex), uintptr(unsafe.Pointer(_pAceList)), uintptr(len(pAceList)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -766,8 +770,12 @@ func GetAce(pAcl *ACL, dwAceIndex uint32, pAce *unsafe.Pointer) error {
 // GetAclInformation calls ADVAPI32!GetAclInformation.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-getaclinformation
 // Minimum OS: windows5.1.2600.
-func GetAclInformation(pAcl *ACL, pAclInformation unsafe.Pointer, nAclInformationLength uint32, dwAclInformationClass ACL_INFORMATION_CLASS) error {
-	r1, _, e1 := syscall.SyscallN(procGetAclInformation.Addr(), uintptr(unsafe.Pointer(pAcl)), uintptr(unsafe.Pointer(pAclInformation)), uintptr(nAclInformationLength), uintptr(dwAclInformationClass))
+func GetAclInformation(pAcl *ACL, pAclInformation []byte, dwAclInformationClass ACL_INFORMATION_CLASS) error {
+	var _pAclInformation *byte
+	if len(pAclInformation) > 0 {
+		_pAclInformation = &pAclInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetAclInformation.Addr(), uintptr(unsafe.Pointer(pAcl)), uintptr(unsafe.Pointer(_pAclInformation)), uintptr(len(pAclInformation)), uintptr(dwAclInformationClass))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -958,8 +966,12 @@ func GetSidSubAuthorityCount(pSid PSID) (*byte, error) {
 // GetTokenInformation calls ADVAPI32!GetTokenInformation.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-gettokeninformation
 // Minimum OS: windows5.1.2600.
-func GetTokenInformation(TokenHandle foundation.HANDLE, TokenInformationClass TOKEN_INFORMATION_CLASS, TokenInformation unsafe.Pointer, TokenInformationLength uint32, ReturnLength *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetTokenInformation.Addr(), uintptr(TokenHandle), uintptr(TokenInformationClass), uintptr(unsafe.Pointer(TokenInformation)), uintptr(TokenInformationLength), uintptr(unsafe.Pointer(ReturnLength)))
+func GetTokenInformation(TokenHandle foundation.HANDLE, TokenInformationClass TOKEN_INFORMATION_CLASS, TokenInformation []byte, ReturnLength *uint32) error {
+	var _TokenInformation *byte
+	if len(TokenInformation) > 0 {
+		_TokenInformation = &TokenInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetTokenInformation.Addr(), uintptr(TokenHandle), uintptr(TokenInformationClass), uintptr(unsafe.Pointer(_TokenInformation)), uintptr(len(TokenInformation)), uintptr(unsafe.Pointer(ReturnLength)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1450,8 +1462,12 @@ func RtlNormalizeSecurityDescriptor(SecurityDescriptor *PSECURITY_DESCRIPTOR, Se
 // SetAclInformation calls ADVAPI32!SetAclInformation.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-setaclinformation
 // Minimum OS: windows5.1.2600.
-func SetAclInformation(pAcl *ACL, pAclInformation unsafe.Pointer, nAclInformationLength uint32, dwAclInformationClass ACL_INFORMATION_CLASS) error {
-	r1, _, e1 := syscall.SyscallN(procSetAclInformation.Addr(), uintptr(unsafe.Pointer(pAcl)), uintptr(unsafe.Pointer(pAclInformation)), uintptr(nAclInformationLength), uintptr(dwAclInformationClass))
+func SetAclInformation(pAcl *ACL, pAclInformation []byte, dwAclInformationClass ACL_INFORMATION_CLASS) error {
+	var _pAclInformation *byte
+	if len(pAclInformation) > 0 {
+		_pAclInformation = &pAclInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetAclInformation.Addr(), uintptr(unsafe.Pointer(pAcl)), uintptr(unsafe.Pointer(_pAclInformation)), uintptr(len(pAclInformation)), uintptr(dwAclInformationClass))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1600,8 +1616,12 @@ func SetSecurityDescriptorSacl(pSecurityDescriptor PSECURITY_DESCRIPTOR, bSaclPr
 // SetTokenInformation calls ADVAPI32!SetTokenInformation.
 // https://learn.microsoft.com/windows/win32/api/securitybaseapi/nf-securitybaseapi-settokeninformation
 // Minimum OS: windows5.1.2600.
-func SetTokenInformation(TokenHandle foundation.HANDLE, TokenInformationClass TOKEN_INFORMATION_CLASS, TokenInformation unsafe.Pointer, TokenInformationLength uint32) error {
-	r1, _, e1 := syscall.SyscallN(procSetTokenInformation.Addr(), uintptr(TokenHandle), uintptr(TokenInformationClass), uintptr(unsafe.Pointer(TokenInformation)), uintptr(TokenInformationLength))
+func SetTokenInformation(TokenHandle foundation.HANDLE, TokenInformationClass TOKEN_INFORMATION_CLASS, TokenInformation []byte) error {
+	var _TokenInformation *byte
+	if len(TokenInformation) > 0 {
+		_TokenInformation = &TokenInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procSetTokenInformation.Addr(), uintptr(TokenHandle), uintptr(TokenInformationClass), uintptr(unsafe.Pointer(_TokenInformation)), uintptr(len(TokenInformation)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

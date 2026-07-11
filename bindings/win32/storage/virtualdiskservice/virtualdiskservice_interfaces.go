@@ -24,8 +24,12 @@ type IEnumVdsObject struct {
 var IID_IEnumVdsObject = win32.GUID{Data1: 0x118610b7, Data2: 0x8d94, Data3: 0x4030, Data4: [8]byte{0xb5, 0xb8, 0x50, 0x08, 0x89, 0x78, 0x8e, 0x4e}}
 
 // Next dispatches through IEnumVdsObject's vtable slot 3.
-func (self *IEnumVdsObject) Next(celt uint32, ppObjectArray **systemcom.IUnknown, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(ppObjectArray)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumVdsObject) Next(ppObjectArray []*systemcom.IUnknown, pcFetched *uint32) error {
+	var _ppObjectArray **systemcom.IUnknown
+	if len(ppObjectArray) > 0 {
+		_ppObjectArray = &ppObjectArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppObjectArray)), uintptr(unsafe.Pointer(_ppObjectArray)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -180,8 +184,12 @@ type IVdsAdviseSink struct {
 var IID_IVdsAdviseSink = win32.GUID{Data1: 0x8326cd1d, Data2: 0xcf59, Data3: 0x4936, Data4: [8]byte{0xb7, 0x86, 0x5e, 0xfc, 0x08, 0x79, 0x8e, 0x25}}
 
 // OnNotify dispatches through IVdsAdviseSink's vtable slot 3.
-func (self *IVdsAdviseSink) OnNotify(lNumberOfNotifications int32, pNotificationArray *VDS_NOTIFICATION) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(lNumberOfNotifications), uintptr(unsafe.Pointer(pNotificationArray)))
+func (self *IVdsAdviseSink) OnNotify(pNotificationArray []VDS_NOTIFICATION) error {
+	var _pNotificationArray *VDS_NOTIFICATION
+	if len(pNotificationArray) > 0 {
+		_pNotificationArray = &pNotificationArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(pNotificationArray)), uintptr(unsafe.Pointer(_pNotificationArray)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -933,8 +941,12 @@ func (self *IVdsLun) QueryActiveControllers(ppEnum **IEnumVdsObject) error {
 }
 
 // Extend dispatches through IVdsLun's vtable slot 7.
-func (self *IVdsLun) Extend(ullNumberOfBytesToAdd uint64, pDriveIdArray *win32.GUID, lNumberOfDrives int32, ppAsync **IVdsAsync) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ullNumberOfBytesToAdd), uintptr(unsafe.Pointer(pDriveIdArray)), uintptr(lNumberOfDrives), uintptr(unsafe.Pointer(ppAsync)))
+func (self *IVdsLun) Extend(ullNumberOfBytesToAdd uint64, pDriveIdArray []win32.GUID, ppAsync **IVdsAsync) error {
+	var _pDriveIdArray *win32.GUID
+	if len(pDriveIdArray) > 0 {
+		_pDriveIdArray = &pDriveIdArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ullNumberOfBytesToAdd), uintptr(unsafe.Pointer(_pDriveIdArray)), uintptr(len(pDriveIdArray)), uintptr(unsafe.Pointer(ppAsync)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -970,8 +982,16 @@ func (self *IVdsLun) Delete() error {
 }
 
 // AssociateControllers dispatches through IVdsLun's vtable slot 15.
-func (self *IVdsLun) AssociateControllers(pActiveControllerIdArray *win32.GUID, lNumberOfActiveControllers int32, pInactiveControllerIdArray *win32.GUID, lNumberOfInactiveControllers int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pActiveControllerIdArray)), uintptr(lNumberOfActiveControllers), uintptr(unsafe.Pointer(pInactiveControllerIdArray)), uintptr(lNumberOfInactiveControllers))
+func (self *IVdsLun) AssociateControllers(pActiveControllerIdArray []win32.GUID, pInactiveControllerIdArray []win32.GUID) error {
+	var _pActiveControllerIdArray *win32.GUID
+	if len(pActiveControllerIdArray) > 0 {
+		_pActiveControllerIdArray = &pActiveControllerIdArray[0]
+	}
+	var _pInactiveControllerIdArray *win32.GUID
+	if len(pInactiveControllerIdArray) > 0 {
+		_pInactiveControllerIdArray = &pInactiveControllerIdArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pActiveControllerIdArray)), uintptr(len(pActiveControllerIdArray)), uintptr(unsafe.Pointer(_pInactiveControllerIdArray)), uintptr(len(pInactiveControllerIdArray)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -994,8 +1014,12 @@ func (self *IVdsLun) SetStatus(status VDS_LUN_STATUS) error {
 }
 
 // QueryMaxLunExtendSize dispatches through IVdsLun's vtable slot 19.
-func (self *IVdsLun) QueryMaxLunExtendSize(pDriveIdArray *win32.GUID, lNumberOfDrives int32, pullMaxBytesToBeAdded *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDriveIdArray)), uintptr(lNumberOfDrives), uintptr(unsafe.Pointer(pullMaxBytesToBeAdded)))
+func (self *IVdsLun) QueryMaxLunExtendSize(pDriveIdArray []win32.GUID, pullMaxBytesToBeAdded *uint64) error {
+	var _pDriveIdArray *win32.GUID
+	if len(pDriveIdArray) > 0 {
+		_pDriveIdArray = &pDriveIdArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pDriveIdArray)), uintptr(len(pDriveIdArray)), uintptr(unsafe.Pointer(pullMaxBytesToBeAdded)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1030,8 +1054,16 @@ type IVdsLunControllerPorts struct {
 var IID_IVdsLunControllerPorts = win32.GUID{Data1: 0x451fe266, Data2: 0xda6d, Data3: 0x406a, Data4: [8]byte{0xbb, 0x60, 0x82, 0xe5, 0x34, 0xf8, 0x5a, 0xeb}}
 
 // AssociateControllerPorts dispatches through IVdsLunControllerPorts's vtable slot 3.
-func (self *IVdsLunControllerPorts) AssociateControllerPorts(pActiveControllerPortIdArray *win32.GUID, lNumberOfActiveControllerPorts int32, pInactiveControllerPortIdArray *win32.GUID, lNumberOfInactiveControllerPorts int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pActiveControllerPortIdArray)), uintptr(lNumberOfActiveControllerPorts), uintptr(unsafe.Pointer(pInactiveControllerPortIdArray)), uintptr(lNumberOfInactiveControllerPorts))
+func (self *IVdsLunControllerPorts) AssociateControllerPorts(pActiveControllerPortIdArray []win32.GUID, pInactiveControllerPortIdArray []win32.GUID) error {
+	var _pActiveControllerPortIdArray *win32.GUID
+	if len(pActiveControllerPortIdArray) > 0 {
+		_pActiveControllerPortIdArray = &pActiveControllerPortIdArray[0]
+	}
+	var _pInactiveControllerPortIdArray *win32.GUID
+	if len(pInactiveControllerPortIdArray) > 0 {
+		_pInactiveControllerPortIdArray = &pInactiveControllerPortIdArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pActiveControllerPortIdArray)), uintptr(len(pActiveControllerPortIdArray)), uintptr(unsafe.Pointer(_pInactiveControllerPortIdArray)), uintptr(len(pInactiveControllerPortIdArray)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1051,8 +1083,12 @@ type IVdsLunIscsi struct {
 var IID_IVdsLunIscsi = win32.GUID{Data1: 0x0d7c1e64, Data2: 0xb59b, Data3: 0x45ae, Data4: [8]byte{0xb8, 0x6a, 0x2c, 0x2c, 0xc6, 0xa4, 0x20, 0x67}}
 
 // AssociateTargets dispatches through IVdsLunIscsi's vtable slot 3.
-func (self *IVdsLunIscsi) AssociateTargets(pTargetIdArray *win32.GUID, lNumberOfTargets int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTargetIdArray)), uintptr(lNumberOfTargets))
+func (self *IVdsLunIscsi) AssociateTargets(pTargetIdArray []win32.GUID) error {
+	var _pTargetIdArray *win32.GUID
+	if len(pTargetIdArray) > 0 {
+		_pTargetIdArray = &pTargetIdArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pTargetIdArray)), uintptr(len(pTargetIdArray)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1084,8 +1120,12 @@ func (self *IVdsLunMpio) GetLoadBalancePolicy(pPolicy *VDS_LOADBALANCE_POLICY_EN
 }
 
 // SetLoadBalancePolicy dispatches through IVdsLunMpio's vtable slot 5.
-func (self *IVdsLunMpio) SetLoadBalancePolicy(policy VDS_LOADBALANCE_POLICY_ENUM, pPaths *VDS_PATH_POLICY, lNumberOfPaths int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(policy), uintptr(unsafe.Pointer(pPaths)), uintptr(lNumberOfPaths))
+func (self *IVdsLunMpio) SetLoadBalancePolicy(policy VDS_LOADBALANCE_POLICY_ENUM, pPaths []VDS_PATH_POLICY) error {
+	var _pPaths *VDS_PATH_POLICY
+	if len(pPaths) > 0 {
+		_pPaths = &pPaths[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(policy), uintptr(unsafe.Pointer(_pPaths)), uintptr(len(pPaths)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1272,8 +1312,12 @@ func (self *IVdsPack) QueryDisks(ppEnum **IEnumVdsObject) error {
 }
 
 // CreateVolume dispatches through IVdsPack's vtable slot 7.
-func (self *IVdsPack) CreateVolume(type_ VDS_VOLUME_TYPE, pInputDiskArray *VDS_INPUT_DISK, lNumberOfDisks int32, ulStripeSize uint32, ppAsync **IVdsAsync) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(pInputDiskArray)), uintptr(lNumberOfDisks), uintptr(ulStripeSize), uintptr(unsafe.Pointer(ppAsync)))
+func (self *IVdsPack) CreateVolume(type_ VDS_VOLUME_TYPE, pInputDiskArray []VDS_INPUT_DISK, ulStripeSize uint32, ppAsync **IVdsAsync) error {
+	var _pInputDiskArray *VDS_INPUT_DISK
+	if len(pInputDiskArray) > 0 {
+		_pInputDiskArray = &pInputDiskArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(_pInputDiskArray)), uintptr(len(pInputDiskArray)), uintptr(ulStripeSize), uintptr(unsafe.Pointer(ppAsync)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1293,8 +1337,12 @@ type IVdsPack2 struct {
 var IID_IVdsPack2 = win32.GUID{Data1: 0x13b50bff, Data2: 0x290a, Data3: 0x47dd, Data4: [8]byte{0x85, 0x58, 0xb7, 0xc5, 0x8d, 0xb1, 0xa7, 0x1a}}
 
 // CreateVolume2 dispatches through IVdsPack2's vtable slot 3.
-func (self *IVdsPack2) CreateVolume2(type_ VDS_VOLUME_TYPE, pInputDiskArray *VDS_INPUT_DISK, lNumberOfDisks int32, ulStripeSize uint32, ulAlign uint32, ppAsync **IVdsAsync) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(pInputDiskArray)), uintptr(lNumberOfDisks), uintptr(ulStripeSize), uintptr(ulAlign), uintptr(unsafe.Pointer(ppAsync)))
+func (self *IVdsPack2) CreateVolume2(type_ VDS_VOLUME_TYPE, pInputDiskArray []VDS_INPUT_DISK, ulStripeSize uint32, ulAlign uint32, ppAsync **IVdsAsync) error {
+	var _pInputDiskArray *VDS_INPUT_DISK
+	if len(pInputDiskArray) > 0 {
+		_pInputDiskArray = &pInputDiskArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(_pInputDiskArray)), uintptr(len(pInputDiskArray)), uintptr(ulStripeSize), uintptr(ulAlign), uintptr(unsafe.Pointer(ppAsync)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1418,8 +1466,12 @@ func (self *IVdsService) QueryUnallocatedDisks(ppEnum **IEnumVdsObject) error {
 }
 
 // QueryDriveLetters dispatches through IVdsService's vtable slot 10.
-func (self *IVdsService) QueryDriveLetters(wcFirstLetter uint16, count uint32, pDriveLetterPropArray *VDS_DRIVE_LETTER_PROP) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(wcFirstLetter), uintptr(count), uintptr(unsafe.Pointer(pDriveLetterPropArray)))
+func (self *IVdsService) QueryDriveLetters(wcFirstLetter uint16, pDriveLetterPropArray []VDS_DRIVE_LETTER_PROP) error {
+	var _pDriveLetterPropArray *VDS_DRIVE_LETTER_PROP
+	if len(pDriveLetterPropArray) > 0 {
+		_pDriveLetterPropArray = &pDriveLetterPropArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(wcFirstLetter), uintptr(len(pDriveLetterPropArray)), uintptr(unsafe.Pointer(_pDriveLetterPropArray)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1711,15 +1763,27 @@ func (self *IVdsSubSystem) Reenumerate() error {
 }
 
 // SetControllerStatus dispatches through IVdsSubSystem's vtable slot 10.
-func (self *IVdsSubSystem) SetControllerStatus(pOnlineControllerIdArray *win32.GUID, lNumberOfOnlineControllers int32, pOfflineControllerIdArray *win32.GUID, lNumberOfOfflineControllers int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pOnlineControllerIdArray)), uintptr(lNumberOfOnlineControllers), uintptr(unsafe.Pointer(pOfflineControllerIdArray)), uintptr(lNumberOfOfflineControllers))
+func (self *IVdsSubSystem) SetControllerStatus(pOnlineControllerIdArray []win32.GUID, pOfflineControllerIdArray []win32.GUID) error {
+	var _pOnlineControllerIdArray *win32.GUID
+	if len(pOnlineControllerIdArray) > 0 {
+		_pOnlineControllerIdArray = &pOnlineControllerIdArray[0]
+	}
+	var _pOfflineControllerIdArray *win32.GUID
+	if len(pOfflineControllerIdArray) > 0 {
+		_pOfflineControllerIdArray = &pOfflineControllerIdArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pOnlineControllerIdArray)), uintptr(len(pOnlineControllerIdArray)), uintptr(unsafe.Pointer(_pOfflineControllerIdArray)), uintptr(len(pOfflineControllerIdArray)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateLun dispatches through IVdsSubSystem's vtable slot 11.
-func (self *IVdsSubSystem) CreateLun(type_ VDS_LUN_TYPE, ullSizeInBytes uint64, pDriveIdArray *win32.GUID, lNumberOfDrives int32, pwszUnmaskingList string, pHints *VDS_HINTS, ppAsync **IVdsAsync) error {
+func (self *IVdsSubSystem) CreateLun(type_ VDS_LUN_TYPE, ullSizeInBytes uint64, pDriveIdArray []win32.GUID, pwszUnmaskingList string, pHints *VDS_HINTS, ppAsync **IVdsAsync) error {
+	var _pDriveIdArray *win32.GUID
+	if len(pDriveIdArray) > 0 {
+		_pDriveIdArray = &pDriveIdArray[0]
+	}
 	_pwszUnmaskingList := win32.UTF16Ptr(pwszUnmaskingList)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(ullSizeInBytes), uintptr(unsafe.Pointer(pDriveIdArray)), uintptr(lNumberOfDrives), uintptr(unsafe.Pointer(_pwszUnmaskingList)), uintptr(unsafe.Pointer(pHints)), uintptr(unsafe.Pointer(ppAsync)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(ullSizeInBytes), uintptr(unsafe.Pointer(_pDriveIdArray)), uintptr(len(pDriveIdArray)), uintptr(unsafe.Pointer(_pwszUnmaskingList)), uintptr(unsafe.Pointer(pHints)), uintptr(unsafe.Pointer(ppAsync)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1730,8 +1794,12 @@ func (self *IVdsSubSystem) SetStatus(status VDS_SUB_SYSTEM_STATUS) error {
 }
 
 // QueryMaxLunCreateSize dispatches through IVdsSubSystem's vtable slot 14.
-func (self *IVdsSubSystem) QueryMaxLunCreateSize(type_ VDS_LUN_TYPE, pDriveIdArray *win32.GUID, lNumberOfDrives int32, pHints *VDS_HINTS, pullMaxLunSize *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(pDriveIdArray)), uintptr(lNumberOfDrives), uintptr(unsafe.Pointer(pHints)), uintptr(unsafe.Pointer(pullMaxLunSize)))
+func (self *IVdsSubSystem) QueryMaxLunCreateSize(type_ VDS_LUN_TYPE, pDriveIdArray []win32.GUID, pHints *VDS_HINTS, pullMaxLunSize *uint64) error {
+	var _pDriveIdArray *win32.GUID
+	if len(pDriveIdArray) > 0 {
+		_pDriveIdArray = &pDriveIdArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(_pDriveIdArray)), uintptr(len(pDriveIdArray)), uintptr(unsafe.Pointer(pHints)), uintptr(unsafe.Pointer(pullMaxLunSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1757,15 +1825,23 @@ func (self *IVdsSubSystem2) GetDrive2(sBusNumber int16, sSlotNumber int16, ulEnc
 }
 
 // CreateLun2 dispatches through IVdsSubSystem2's vtable slot 5.
-func (self *IVdsSubSystem2) CreateLun2(type_ VDS_LUN_TYPE, ullSizeInBytes uint64, pDriveIdArray *win32.GUID, lNumberOfDrives int32, pwszUnmaskingList string, pHints2 *VDS_HINTS2, ppAsync **IVdsAsync) error {
+func (self *IVdsSubSystem2) CreateLun2(type_ VDS_LUN_TYPE, ullSizeInBytes uint64, pDriveIdArray []win32.GUID, pwszUnmaskingList string, pHints2 *VDS_HINTS2, ppAsync **IVdsAsync) error {
+	var _pDriveIdArray *win32.GUID
+	if len(pDriveIdArray) > 0 {
+		_pDriveIdArray = &pDriveIdArray[0]
+	}
 	_pwszUnmaskingList := win32.UTF16Ptr(pwszUnmaskingList)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(ullSizeInBytes), uintptr(unsafe.Pointer(pDriveIdArray)), uintptr(lNumberOfDrives), uintptr(unsafe.Pointer(_pwszUnmaskingList)), uintptr(unsafe.Pointer(pHints2)), uintptr(unsafe.Pointer(ppAsync)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(ullSizeInBytes), uintptr(unsafe.Pointer(_pDriveIdArray)), uintptr(len(pDriveIdArray)), uintptr(unsafe.Pointer(_pwszUnmaskingList)), uintptr(unsafe.Pointer(pHints2)), uintptr(unsafe.Pointer(ppAsync)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // QueryMaxLunCreateSize2 dispatches through IVdsSubSystem2's vtable slot 6.
-func (self *IVdsSubSystem2) QueryMaxLunCreateSize2(type_ VDS_LUN_TYPE, pDriveIdArray *win32.GUID, lNumberOfDrives int32, pHints2 *VDS_HINTS2, pullMaxLunSize *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(pDriveIdArray)), uintptr(lNumberOfDrives), uintptr(unsafe.Pointer(pHints2)), uintptr(unsafe.Pointer(pullMaxLunSize)))
+func (self *IVdsSubSystem2) QueryMaxLunCreateSize2(type_ VDS_LUN_TYPE, pDriveIdArray []win32.GUID, pHints2 *VDS_HINTS2, pullMaxLunSize *uint64) error {
+	var _pDriveIdArray *win32.GUID
+	if len(pDriveIdArray) > 0 {
+		_pDriveIdArray = &pDriveIdArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(type_), uintptr(unsafe.Pointer(_pDriveIdArray)), uintptr(len(pDriveIdArray)), uintptr(unsafe.Pointer(pHints2)), uintptr(unsafe.Pointer(pullMaxLunSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1981,8 +2057,12 @@ func (self *IVdsVolume) QueryPlexes(ppEnum **IEnumVdsObject) error {
 }
 
 // Extend dispatches through IVdsVolume's vtable slot 6.
-func (self *IVdsVolume) Extend(pInputDiskArray *VDS_INPUT_DISK, lNumberOfDisks int32, ppAsync **IVdsAsync) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInputDiskArray)), uintptr(lNumberOfDisks), uintptr(unsafe.Pointer(ppAsync)))
+func (self *IVdsVolume) Extend(pInputDiskArray []VDS_INPUT_DISK, ppAsync **IVdsAsync) error {
+	var _pInputDiskArray *VDS_INPUT_DISK
+	if len(pInputDiskArray) > 0 {
+		_pInputDiskArray = &pInputDiskArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInputDiskArray)), uintptr(len(pInputDiskArray)), uintptr(unsafe.Pointer(ppAsync)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2209,8 +2289,12 @@ func (self *IVdsVolumePlex) QueryExtents(ppExtentArray **VDS_DISK_EXTENT, plNumb
 }
 
 // Repair dispatches through IVdsVolumePlex's vtable slot 6.
-func (self *IVdsVolumePlex) Repair(pInputDiskArray *VDS_INPUT_DISK, lNumberOfDisks int32, ppAsync **IVdsAsync) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInputDiskArray)), uintptr(lNumberOfDisks), uintptr(unsafe.Pointer(ppAsync)))
+func (self *IVdsVolumePlex) Repair(pInputDiskArray []VDS_INPUT_DISK, ppAsync **IVdsAsync) error {
+	var _pInputDiskArray *VDS_INPUT_DISK
+	if len(pInputDiskArray) > 0 {
+		_pInputDiskArray = &pInputDiskArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pInputDiskArray)), uintptr(len(pInputDiskArray)), uintptr(unsafe.Pointer(ppAsync)))
 	return win32.HRESULTError(int32(r1))
 }
 

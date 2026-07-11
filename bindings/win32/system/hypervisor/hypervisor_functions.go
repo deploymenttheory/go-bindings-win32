@@ -456,14 +456,22 @@ func LocateSavedStateFiles(vmName string, snapshotName string, binPath *foundati
 }
 
 // ReadGuestPhysicalAddress calls VmSavedStateDumpProvider!ReadGuestPhysicalAddress.
-func ReadGuestPhysicalAddress(vmSavedStateDumpHandle unsafe.Pointer, physicalAddress uint64, buffer unsafe.Pointer, bufferSize uint32, bytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(procReadGuestPhysicalAddress.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(physicalAddress), uintptr(unsafe.Pointer(buffer)), uintptr(bufferSize), uintptr(unsafe.Pointer(bytesRead)))
+func ReadGuestPhysicalAddress(vmSavedStateDumpHandle unsafe.Pointer, physicalAddress uint64, buffer []byte, bytesRead *uint32) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procReadGuestPhysicalAddress.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(physicalAddress), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)), uintptr(unsafe.Pointer(bytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadGuestRawSavedMemory calls VmSavedStateDumpProvider!ReadGuestRawSavedMemory.
-func ReadGuestRawSavedMemory(vmSavedStateDumpHandle unsafe.Pointer, rawSavedMemoryOffset uint64, buffer unsafe.Pointer, bufferSize uint32, bytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(procReadGuestRawSavedMemory.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(rawSavedMemoryOffset), uintptr(unsafe.Pointer(buffer)), uintptr(bufferSize), uintptr(unsafe.Pointer(bytesRead)))
+func ReadGuestRawSavedMemory(vmSavedStateDumpHandle unsafe.Pointer, rawSavedMemoryOffset uint64, buffer []byte, bytesRead *uint32) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procReadGuestRawSavedMemory.Addr(), uintptr(unsafe.Pointer(vmSavedStateDumpHandle)), uintptr(rawSavedMemoryOffset), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)), uintptr(unsafe.Pointer(bytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -516,12 +524,16 @@ func WHvAcceptPartitionMigration(MigrationHandle foundation.HANDLE, Partition *W
 }
 
 // WHvAdviseGpaRange calls WinHvPlatform!WHvAdviseGpaRange.
-func WHvAdviseGpaRange(Partition WHV_PARTITION_HANDLE, GpaRanges []WHV_MEMORY_RANGE_ENTRY, Advice WHV_ADVISE_GPA_RANGE_CODE, AdviceBuffer unsafe.Pointer, AdviceBufferSizeInBytes uint32) error {
+func WHvAdviseGpaRange(Partition WHV_PARTITION_HANDLE, GpaRanges []WHV_MEMORY_RANGE_ENTRY, Advice WHV_ADVISE_GPA_RANGE_CODE, AdviceBuffer []byte) error {
 	var _GpaRanges *WHV_MEMORY_RANGE_ENTRY
 	if len(GpaRanges) > 0 {
 		_GpaRanges = &GpaRanges[0]
 	}
-	r1, _, _ := syscall.SyscallN(procWHvAdviseGpaRange.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(_GpaRanges)), uintptr(len(GpaRanges)), uintptr(Advice), uintptr(unsafe.Pointer(AdviceBuffer)), uintptr(AdviceBufferSizeInBytes))
+	var _AdviceBuffer *byte
+	if len(AdviceBuffer) > 0 {
+		_AdviceBuffer = &AdviceBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvAdviseGpaRange.Addr(), uintptr(Partition), uintptr(unsafe.Pointer(_GpaRanges)), uintptr(len(GpaRanges)), uintptr(Advice), uintptr(unsafe.Pointer(_AdviceBuffer)), uintptr(len(AdviceBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -644,8 +656,12 @@ func WHvEmulatorTryMmioEmulation(Emulator unsafe.Pointer, Context unsafe.Pointer
 }
 
 // WHvGetCapability calls WinHvPlatform!WHvGetCapability.
-func WHvGetCapability(CapabilityCode WHV_CAPABILITY_CODE, CapabilityBuffer unsafe.Pointer, CapabilityBufferSizeInBytes uint32, WrittenSizeInBytes *uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvGetCapability.Addr(), uintptr(CapabilityCode), uintptr(unsafe.Pointer(CapabilityBuffer)), uintptr(CapabilityBufferSizeInBytes), uintptr(unsafe.Pointer(WrittenSizeInBytes)))
+func WHvGetCapability(CapabilityCode WHV_CAPABILITY_CODE, CapabilityBuffer []byte, WrittenSizeInBytes *uint32) error {
+	var _CapabilityBuffer *byte
+	if len(CapabilityBuffer) > 0 {
+		_CapabilityBuffer = &CapabilityBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvGetCapability.Addr(), uintptr(CapabilityCode), uintptr(unsafe.Pointer(_CapabilityBuffer)), uintptr(len(CapabilityBuffer)), uintptr(unsafe.Pointer(WrittenSizeInBytes)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -660,20 +676,32 @@ func WHvGetInterruptTargetVpSet(Partition WHV_PARTITION_HANDLE, Destination uint
 }
 
 // WHvGetPartitionCounters calls WinHvPlatform!WHvGetPartitionCounters.
-func WHvGetPartitionCounters(Partition WHV_PARTITION_HANDLE, CounterSet WHV_PARTITION_COUNTER_SET, Buffer unsafe.Pointer, BufferSizeInBytes uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvGetPartitionCounters.Addr(), uintptr(Partition), uintptr(CounterSet), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSizeInBytes), uintptr(unsafe.Pointer(BytesWritten)))
+func WHvGetPartitionCounters(Partition WHV_PARTITION_HANDLE, CounterSet WHV_PARTITION_COUNTER_SET, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvGetPartitionCounters.Addr(), uintptr(Partition), uintptr(CounterSet), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetPartitionProperty calls WinHvPlatform!WHvGetPartitionProperty.
-func WHvGetPartitionProperty(Partition WHV_PARTITION_HANDLE, PropertyCode WHV_PARTITION_PROPERTY_CODE, PropertyBuffer unsafe.Pointer, PropertyBufferSizeInBytes uint32, WrittenSizeInBytes *uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvGetPartitionProperty.Addr(), uintptr(Partition), uintptr(PropertyCode), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSizeInBytes), uintptr(unsafe.Pointer(WrittenSizeInBytes)))
+func WHvGetPartitionProperty(Partition WHV_PARTITION_HANDLE, PropertyCode WHV_PARTITION_PROPERTY_CODE, PropertyBuffer []byte, WrittenSizeInBytes *uint32) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvGetPartitionProperty.Addr(), uintptr(Partition), uintptr(PropertyCode), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(unsafe.Pointer(WrittenSizeInBytes)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetVirtualProcessorCounters calls WinHvPlatform!WHvGetVirtualProcessorCounters.
-func WHvGetVirtualProcessorCounters(Partition WHV_PARTITION_HANDLE, VpIndex uint32, CounterSet WHV_PROCESSOR_COUNTER_SET, Buffer unsafe.Pointer, BufferSizeInBytes uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorCounters.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(CounterSet), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSizeInBytes), uintptr(unsafe.Pointer(BytesWritten)))
+func WHvGetVirtualProcessorCounters(Partition WHV_PARTITION_HANDLE, VpIndex uint32, CounterSet WHV_PROCESSOR_COUNTER_SET, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorCounters.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(CounterSet), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -684,14 +712,22 @@ func WHvGetVirtualProcessorCpuidOutput(Partition WHV_PARTITION_HANDLE, VpIndex u
 }
 
 // WHvGetVirtualProcessorInterruptControllerState calls WinHvPlatform!WHvGetVirtualProcessorInterruptControllerState.
-func WHvGetVirtualProcessorInterruptControllerState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State unsafe.Pointer, StateSize uint32, WrittenSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorInterruptControllerState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(State)), uintptr(StateSize), uintptr(unsafe.Pointer(WrittenSize)))
+func WHvGetVirtualProcessorInterruptControllerState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State []byte, WrittenSize *uint32) error {
+	var _State *byte
+	if len(State) > 0 {
+		_State = &State[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorInterruptControllerState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(_State)), uintptr(len(State)), uintptr(unsafe.Pointer(WrittenSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetVirtualProcessorInterruptControllerState2 calls WinHvPlatform!WHvGetVirtualProcessorInterruptControllerState2.
-func WHvGetVirtualProcessorInterruptControllerState2(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State unsafe.Pointer, StateSize uint32, WrittenSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorInterruptControllerState2.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(State)), uintptr(StateSize), uintptr(unsafe.Pointer(WrittenSize)))
+func WHvGetVirtualProcessorInterruptControllerState2(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State []byte, WrittenSize *uint32) error {
+	var _State *byte
+	if len(State) > 0 {
+		_State = &State[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorInterruptControllerState2.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(_State)), uintptr(len(State)), uintptr(unsafe.Pointer(WrittenSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -702,14 +738,22 @@ func WHvGetVirtualProcessorRegisters(Partition WHV_PARTITION_HANDLE, VpIndex uin
 }
 
 // WHvGetVirtualProcessorState calls WinHvPlatform!WHvGetVirtualProcessorState.
-func WHvGetVirtualProcessorState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, StateType WHV_VIRTUAL_PROCESSOR_STATE_TYPE, Buffer unsafe.Pointer, BufferSizeInBytes uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(StateType), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSizeInBytes), uintptr(unsafe.Pointer(BytesWritten)))
+func WHvGetVirtualProcessorState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, StateType WHV_VIRTUAL_PROCESSOR_STATE_TYPE, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(StateType), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WHvGetVirtualProcessorXsaveState calls WinHvPlatform!WHvGetVirtualProcessorXsaveState.
-func WHvGetVirtualProcessorXsaveState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Buffer unsafe.Pointer, BufferSizeInBytes uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorXsaveState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSizeInBytes), uintptr(unsafe.Pointer(BytesWritten)))
+func WHvGetVirtualProcessorXsaveState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvGetVirtualProcessorXsaveState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -726,8 +770,12 @@ func WHvGetVpciDeviceNotification(Partition WHV_PARTITION_HANDLE, LogicalDeviceI
 }
 
 // WHvGetVpciDeviceProperty calls WinHvPlatform!WHvGetVpciDeviceProperty.
-func WHvGetVpciDeviceProperty(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, PropertyCode WHV_VPCI_DEVICE_PROPERTY_CODE, PropertyBuffer unsafe.Pointer, PropertyBufferSizeInBytes uint32, WrittenSizeInBytes *uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvGetVpciDeviceProperty.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(PropertyCode), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSizeInBytes), uintptr(unsafe.Pointer(WrittenSizeInBytes)))
+func WHvGetVpciDeviceProperty(Partition WHV_PARTITION_HANDLE, LogicalDeviceId uint64, PropertyCode WHV_VPCI_DEVICE_PROPERTY_CODE, PropertyBuffer []byte, WrittenSizeInBytes *uint32) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvGetVpciDeviceProperty.Addr(), uintptr(Partition), uintptr(LogicalDeviceId), uintptr(PropertyCode), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)), uintptr(unsafe.Pointer(WrittenSizeInBytes)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -756,8 +804,12 @@ func WHvMapVpciDeviceMmioRanges(Partition WHV_PARTITION_HANDLE, LogicalDeviceId 
 }
 
 // WHvPostVirtualProcessorSynicMessage calls WinHvPlatform!WHvPostVirtualProcessorSynicMessage.
-func WHvPostVirtualProcessorSynicMessage(Partition WHV_PARTITION_HANDLE, VpIndex uint32, SintIndex uint32, Message unsafe.Pointer, MessageSizeInBytes uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvPostVirtualProcessorSynicMessage.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(SintIndex), uintptr(unsafe.Pointer(Message)), uintptr(MessageSizeInBytes))
+func WHvPostVirtualProcessorSynicMessage(Partition WHV_PARTITION_HANDLE, VpIndex uint32, SintIndex uint32, Message []byte) error {
+	var _Message *byte
+	if len(Message) > 0 {
+		_Message = &Message[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvPostVirtualProcessorSynicMessage.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(SintIndex), uintptr(unsafe.Pointer(_Message)), uintptr(len(Message)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -810,8 +862,12 @@ func WHvRetargetVpciDeviceInterrupt(Partition WHV_PARTITION_HANDLE, LogicalDevic
 }
 
 // WHvRunVirtualProcessor calls WinHvPlatform!WHvRunVirtualProcessor.
-func WHvRunVirtualProcessor(Partition WHV_PARTITION_HANDLE, VpIndex uint32, ExitContext unsafe.Pointer, ExitContextSizeInBytes uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvRunVirtualProcessor.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(ExitContext)), uintptr(ExitContextSizeInBytes))
+func WHvRunVirtualProcessor(Partition WHV_PARTITION_HANDLE, VpIndex uint32, ExitContext []byte) error {
+	var _ExitContext *byte
+	if len(ExitContext) > 0 {
+		_ExitContext = &ExitContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvRunVirtualProcessor.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(_ExitContext)), uintptr(len(ExitContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -822,20 +878,32 @@ func WHvSetNotificationPortProperty(Partition WHV_PARTITION_HANDLE, PortHandle u
 }
 
 // WHvSetPartitionProperty calls WinHvPlatform!WHvSetPartitionProperty.
-func WHvSetPartitionProperty(Partition WHV_PARTITION_HANDLE, PropertyCode WHV_PARTITION_PROPERTY_CODE, PropertyBuffer unsafe.Pointer, PropertyBufferSizeInBytes uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvSetPartitionProperty.Addr(), uintptr(Partition), uintptr(PropertyCode), uintptr(unsafe.Pointer(PropertyBuffer)), uintptr(PropertyBufferSizeInBytes))
+func WHvSetPartitionProperty(Partition WHV_PARTITION_HANDLE, PropertyCode WHV_PARTITION_PROPERTY_CODE, PropertyBuffer []byte) error {
+	var _PropertyBuffer *byte
+	if len(PropertyBuffer) > 0 {
+		_PropertyBuffer = &PropertyBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvSetPartitionProperty.Addr(), uintptr(Partition), uintptr(PropertyCode), uintptr(unsafe.Pointer(_PropertyBuffer)), uintptr(len(PropertyBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WHvSetVirtualProcessorInterruptControllerState calls WinHvPlatform!WHvSetVirtualProcessorInterruptControllerState.
-func WHvSetVirtualProcessorInterruptControllerState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State unsafe.Pointer, StateSize uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvSetVirtualProcessorInterruptControllerState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(State)), uintptr(StateSize))
+func WHvSetVirtualProcessorInterruptControllerState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State []byte) error {
+	var _State *byte
+	if len(State) > 0 {
+		_State = &State[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvSetVirtualProcessorInterruptControllerState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(_State)), uintptr(len(State)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WHvSetVirtualProcessorInterruptControllerState2 calls WinHvPlatform!WHvSetVirtualProcessorInterruptControllerState2.
-func WHvSetVirtualProcessorInterruptControllerState2(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State unsafe.Pointer, StateSize uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvSetVirtualProcessorInterruptControllerState2.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(State)), uintptr(StateSize))
+func WHvSetVirtualProcessorInterruptControllerState2(Partition WHV_PARTITION_HANDLE, VpIndex uint32, State []byte) error {
+	var _State *byte
+	if len(State) > 0 {
+		_State = &State[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvSetVirtualProcessorInterruptControllerState2.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(_State)), uintptr(len(State)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -846,14 +914,22 @@ func WHvSetVirtualProcessorRegisters(Partition WHV_PARTITION_HANDLE, VpIndex uin
 }
 
 // WHvSetVirtualProcessorState calls WinHvPlatform!WHvSetVirtualProcessorState.
-func WHvSetVirtualProcessorState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, StateType WHV_VIRTUAL_PROCESSOR_STATE_TYPE, Buffer unsafe.Pointer, BufferSizeInBytes uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvSetVirtualProcessorState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(StateType), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSizeInBytes))
+func WHvSetVirtualProcessorState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, StateType WHV_VIRTUAL_PROCESSOR_STATE_TYPE, Buffer []byte) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvSetVirtualProcessorState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(StateType), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WHvSetVirtualProcessorXsaveState calls WinHvPlatform!WHvSetVirtualProcessorXsaveState.
-func WHvSetVirtualProcessorXsaveState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Buffer unsafe.Pointer, BufferSizeInBytes uint32) error {
-	r1, _, _ := syscall.SyscallN(procWHvSetVirtualProcessorXsaveState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSizeInBytes))
+func WHvSetVirtualProcessorXsaveState(Partition WHV_PARTITION_HANDLE, VpIndex uint32, Buffer []byte) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWHvSetVirtualProcessorXsaveState.Addr(), uintptr(Partition), uintptr(VpIndex), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)))
 	return win32.HRESULTError(int32(r1))
 }
 

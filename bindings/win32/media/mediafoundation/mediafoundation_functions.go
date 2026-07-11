@@ -1526,8 +1526,12 @@ func MFFrameRateToAverageTimePerFrame(unNumerator uint32, unDenominator uint32, 
 // MFGetAttributesAsBlob calls MFPlat!MFGetAttributesAsBlob.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetattributesasblob
 // Minimum OS: windows6.0.6000.
-func MFGetAttributesAsBlob(pAttributes *IMFAttributes, pBuf *byte, cbBufSize uint32) error {
-	r1, _, _ := syscall.SyscallN(procMFGetAttributesAsBlob.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pBuf)), uintptr(cbBufSize))
+func MFGetAttributesAsBlob(pAttributes *IMFAttributes, pBuf []byte) error {
+	var _pBuf *byte
+	if len(pBuf) > 0 {
+		_pBuf = &pBuf[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMFGetAttributesAsBlob.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(_pBuf)), uintptr(len(pBuf)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1556,16 +1560,24 @@ func MFGetDXGIDeviceManageMode(pDeviceManager *systemcom.IUnknown, mode *MF_DXGI
 // MFGetLocalId calls MF!MFGetLocalId.
 // https://learn.microsoft.com/windows/win32/api/mfidl/nf-mfidl-mfgetlocalid
 // Minimum OS: windows8.0.
-func MFGetLocalId(verifier *byte, size uint32, id *foundation.PWSTR) error {
-	r1, _, _ := syscall.SyscallN(procMFGetLocalId.Addr(), uintptr(unsafe.Pointer(verifier)), uintptr(size), uintptr(unsafe.Pointer(id)))
+func MFGetLocalId(verifier []byte, id *foundation.PWSTR) error {
+	var _verifier *byte
+	if len(verifier) > 0 {
+		_verifier = &verifier[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMFGetLocalId.Addr(), uintptr(unsafe.Pointer(_verifier)), uintptr(len(verifier)), uintptr(unsafe.Pointer(id)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // MFGetMFTMerit calls MFPlat!MFGetMFTMerit.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfgetmftmerit
 // Minimum OS: windows6.1.
-func MFGetMFTMerit(pMFT *systemcom.IUnknown, cbVerifier uint32, verifier *byte, merit *uint32) error {
-	r1, _, _ := syscall.SyscallN(procMFGetMFTMerit.Addr(), uintptr(unsafe.Pointer(pMFT)), uintptr(cbVerifier), uintptr(unsafe.Pointer(verifier)), uintptr(unsafe.Pointer(merit)))
+func MFGetMFTMerit(pMFT *systemcom.IUnknown, verifier []byte, merit *uint32) error {
+	var _verifier *byte
+	if len(verifier) > 0 {
+		_verifier = &verifier[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMFGetMFTMerit.Addr(), uintptr(unsafe.Pointer(pMFT)), uintptr(len(verifier)), uintptr(unsafe.Pointer(_verifier)), uintptr(unsafe.Pointer(merit)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1700,8 +1712,12 @@ func MFHeapFree(pv unsafe.Pointer) {
 // MFInitAttributesFromBlob calls MFPlat!MFInitAttributesFromBlob.
 // https://learn.microsoft.com/windows/win32/api/mfapi/nf-mfapi-mfinitattributesfromblob
 // Minimum OS: windows6.0.6000.
-func MFInitAttributesFromBlob(pAttributes *IMFAttributes, pBuf *byte, cbBufSize uint32) error {
-	r1, _, _ := syscall.SyscallN(procMFInitAttributesFromBlob.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(pBuf)), uintptr(cbBufSize))
+func MFInitAttributesFromBlob(pAttributes *IMFAttributes, pBuf []byte) error {
+	var _pBuf *byte
+	if len(pBuf) > 0 {
+		_pBuf = &pBuf[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMFInitAttributesFromBlob.Addr(), uintptr(unsafe.Pointer(pAttributes)), uintptr(unsafe.Pointer(_pBuf)), uintptr(len(pBuf)))
 	return win32.HRESULTError(int32(r1))
 }
 

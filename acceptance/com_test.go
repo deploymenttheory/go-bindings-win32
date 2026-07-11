@@ -25,10 +25,11 @@ func TestComStreamRoundTrip(t *testing.T) {
 	}
 	defer stream.Release()
 
-	// Write via the promoted ISequentialStream method — returns error.
+	// Write via the promoted ISequentialStream method — the void*+[MemorySize]
+	// buffer collapses to []byte, size derived from len().
 	payload := []byte("go-bindings-win32 COM round trip")
 	var written uint32
-	if err := stream.Write(unsafe.Pointer(&payload[0]), uint32(len(payload)), &written); err != nil {
+	if err := stream.Write(payload, &written); err != nil {
 		t.Fatalf("IStream.Write: %v", err)
 	}
 	if written != uint32(len(payload)) {
@@ -44,10 +45,10 @@ func TestComStreamRoundTrip(t *testing.T) {
 		t.Fatalf("Seek position = %d, want 0", position)
 	}
 
-	// Read the payload back via the promoted method.
+	// Read the payload back via the promoted method — same []byte collapse.
 	readBack := make([]byte, len(payload))
 	var read uint32
-	if err := stream.Read(unsafe.Pointer(&readBack[0]), uint32(len(readBack)), &read); err != nil {
+	if err := stream.Read(readBack, &read); err != nil {
 		t.Fatalf("IStream.Read: %v", err)
 	}
 	if string(readBack) != string(payload) {

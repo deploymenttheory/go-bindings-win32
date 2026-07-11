@@ -65,8 +65,12 @@ func GetGestureConfig(hwnd foundation.HWND, dwReserved uint32, dwFlags uint32, p
 // GetGestureExtraArgs calls USER32!GetGestureExtraArgs.
 // https://learn.microsoft.com/windows/win32/api/winuser/nf-winuser-getgestureextraargs
 // Minimum OS: windows6.1.
-func GetGestureExtraArgs(hGestureInfo HGESTUREINFO, cbExtraArgs uint32, pExtraArgs *byte) error {
-	r1, _, e1 := syscall.SyscallN(procGetGestureExtraArgs.Addr(), uintptr(hGestureInfo), uintptr(cbExtraArgs), uintptr(unsafe.Pointer(pExtraArgs)))
+func GetGestureExtraArgs(hGestureInfo HGESTUREINFO, pExtraArgs []byte) error {
+	var _pExtraArgs *byte
+	if len(pExtraArgs) > 0 {
+		_pExtraArgs = &pExtraArgs[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetGestureExtraArgs.Addr(), uintptr(hGestureInfo), uintptr(len(pExtraArgs)), uintptr(unsafe.Pointer(_pExtraArgs)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

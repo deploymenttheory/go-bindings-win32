@@ -110,18 +110,34 @@ type IDxcCompiler struct {
 var IID_IDxcCompiler = win32.GUID{Data1: 0x8c210bf3, Data2: 0x011f, Data3: 0x4422, Data4: [8]byte{0x8d, 0x70, 0x6f, 0x9a, 0xcb, 0x8d, 0xb6, 0x17}}
 
 // Compile dispatches through IDxcCompiler's vtable slot 3.
-func (self *IDxcCompiler) Compile(pSource *IDxcBlob, pSourceName string, pEntryPoint string, pTargetProfile string, pArguments *foundation.PWSTR, argCount uint32, pDefines *DxcDefine, defineCount uint32, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult) error {
+func (self *IDxcCompiler) Compile(pSource *IDxcBlob, pSourceName string, pEntryPoint string, pTargetProfile string, pArguments []foundation.PWSTR, pDefines []DxcDefine, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult) error {
 	_pSourceName := win32.UTF16Ptr(pSourceName)
 	_pEntryPoint := win32.UTF16Ptr(pEntryPoint)
 	_pTargetProfile := win32.UTF16Ptr(pTargetProfile)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(_pEntryPoint)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(pDefines)), uintptr(defineCount), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)))
+	var _pArguments *foundation.PWSTR
+	if len(pArguments) > 0 {
+		_pArguments = &pArguments[0]
+	}
+	var _pDefines *DxcDefine
+	if len(pDefines) > 0 {
+		_pDefines = &pDefines[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(_pEntryPoint)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)), uintptr(unsafe.Pointer(_pDefines)), uintptr(len(pDefines)), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Preprocess dispatches through IDxcCompiler's vtable slot 4.
-func (self *IDxcCompiler) Preprocess(pSource *IDxcBlob, pSourceName string, pArguments *foundation.PWSTR, argCount uint32, pDefines *DxcDefine, defineCount uint32, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult) error {
+func (self *IDxcCompiler) Preprocess(pSource *IDxcBlob, pSourceName string, pArguments []foundation.PWSTR, pDefines []DxcDefine, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult) error {
 	_pSourceName := win32.UTF16Ptr(pSourceName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(pDefines)), uintptr(defineCount), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)))
+	var _pArguments *foundation.PWSTR
+	if len(pArguments) > 0 {
+		_pArguments = &pArguments[0]
+	}
+	var _pDefines *DxcDefine
+	if len(pDefines) > 0 {
+		_pDefines = &pDefines[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)), uintptr(unsafe.Pointer(_pDefines)), uintptr(len(pDefines)), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -140,11 +156,19 @@ type IDxcCompiler2 struct {
 var IID_IDxcCompiler2 = win32.GUID{Data1: 0xa005a9d9, Data2: 0xb8bb, Data3: 0x4594, Data4: [8]byte{0xb5, 0xc9, 0x0e, 0x63, 0x3b, 0xec, 0x4d, 0x37}}
 
 // CompileWithDebug dispatches through IDxcCompiler2's vtable slot 6.
-func (self *IDxcCompiler2) CompileWithDebug(pSource *IDxcBlob, pSourceName string, pEntryPoint string, pTargetProfile string, pArguments *foundation.PWSTR, argCount uint32, pDefines *DxcDefine, defineCount uint32, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult, ppDebugBlobName *foundation.PWSTR, ppDebugBlob **IDxcBlob) error {
+func (self *IDxcCompiler2) CompileWithDebug(pSource *IDxcBlob, pSourceName string, pEntryPoint string, pTargetProfile string, pArguments []foundation.PWSTR, pDefines []DxcDefine, pIncludeHandler *IDxcIncludeHandler, ppResult **IDxcOperationResult, ppDebugBlobName *foundation.PWSTR, ppDebugBlob **IDxcBlob) error {
 	_pSourceName := win32.UTF16Ptr(pSourceName)
 	_pEntryPoint := win32.UTF16Ptr(pEntryPoint)
 	_pTargetProfile := win32.UTF16Ptr(pTargetProfile)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(_pEntryPoint)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(pDefines)), uintptr(defineCount), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)), uintptr(unsafe.Pointer(ppDebugBlobName)), uintptr(unsafe.Pointer(ppDebugBlob)))
+	var _pArguments *foundation.PWSTR
+	if len(pArguments) > 0 {
+		_pArguments = &pArguments[0]
+	}
+	var _pDefines *DxcDefine
+	if len(pDefines) > 0 {
+		_pDefines = &pDefines[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(_pEntryPoint)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)), uintptr(unsafe.Pointer(_pDefines)), uintptr(len(pDefines)), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(ppResult)), uintptr(unsafe.Pointer(ppDebugBlobName)), uintptr(unsafe.Pointer(ppDebugBlob)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -157,8 +181,12 @@ type IDxcCompiler3 struct {
 var IID_IDxcCompiler3 = win32.GUID{Data1: 0x228b4687, Data2: 0x5a6a, Data3: 0x4730, Data4: [8]byte{0x90, 0x0c, 0x97, 0x02, 0xb2, 0x20, 0x3f, 0x54}}
 
 // Compile dispatches through IDxcCompiler3's vtable slot 3.
-func (self *IDxcCompiler3) Compile(pSource *DxcBuffer, pArguments *foundation.PWSTR, argCount uint32, pIncludeHandler *IDxcIncludeHandler, riid *win32.GUID, ppResult *unsafe.Pointer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppResult)))
+func (self *IDxcCompiler3) Compile(pSource *DxcBuffer, pArguments []foundation.PWSTR, pIncludeHandler *IDxcIncludeHandler, riid *win32.GUID, ppResult *unsafe.Pointer) error {
+	var _pArguments *foundation.PWSTR
+	if len(pArguments) > 0 {
+		_pArguments = &pArguments[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pSource)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)), uintptr(unsafe.Pointer(pIncludeHandler)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppResult)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -189,20 +217,32 @@ func (self *IDxcCompilerArgs) GetCount() uint32 {
 }
 
 // AddArguments dispatches through IDxcCompilerArgs's vtable slot 5.
-func (self *IDxcCompilerArgs) AddArguments(pArguments *foundation.PWSTR, argCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount))
+func (self *IDxcCompilerArgs) AddArguments(pArguments []foundation.PWSTR) error {
+	var _pArguments *foundation.PWSTR
+	if len(pArguments) > 0 {
+		_pArguments = &pArguments[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // AddArgumentsUTF8 dispatches through IDxcCompilerArgs's vtable slot 6.
-func (self *IDxcCompilerArgs) AddArgumentsUTF8(pArguments *foundation.PSTR, argCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount))
+func (self *IDxcCompilerArgs) AddArgumentsUTF8(pArguments []foundation.PSTR) error {
+	var _pArguments *foundation.PSTR
+	if len(pArguments) > 0 {
+		_pArguments = &pArguments[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // AddDefines dispatches through IDxcCompilerArgs's vtable slot 7.
-func (self *IDxcCompilerArgs) AddDefines(pDefines *DxcDefine, defineCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pDefines)), uintptr(defineCount))
+func (self *IDxcCompilerArgs) AddDefines(pDefines []DxcDefine) error {
+	var _pDefines *DxcDefine
+	if len(pDefines) > 0 {
+		_pDefines = &pDefines[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pDefines)), uintptr(len(pDefines)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -345,20 +385,32 @@ func (self *IDxcLibrary) CreateBlobFromFile(pFileName string, codePage *DXC_CP, 
 }
 
 // CreateBlobWithEncodingFromPinned dispatches through IDxcLibrary's vtable slot 6.
-func (self *IDxcLibrary) CreateBlobWithEncodingFromPinned(pText unsafe.Pointer, size uint32, codePage DXC_CP, pBlobEncoding **IDxcBlobEncoding) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pText)), uintptr(size), uintptr(codePage), uintptr(unsafe.Pointer(pBlobEncoding)))
+func (self *IDxcLibrary) CreateBlobWithEncodingFromPinned(pText []byte, codePage DXC_CP, pBlobEncoding **IDxcBlobEncoding) error {
+	var _pText *byte
+	if len(pText) > 0 {
+		_pText = &pText[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pText)), uintptr(len(pText)), uintptr(codePage), uintptr(unsafe.Pointer(pBlobEncoding)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBlobWithEncodingOnHeapCopy dispatches through IDxcLibrary's vtable slot 7.
-func (self *IDxcLibrary) CreateBlobWithEncodingOnHeapCopy(pText unsafe.Pointer, size uint32, codePage DXC_CP, pBlobEncoding **IDxcBlobEncoding) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pText)), uintptr(size), uintptr(codePage), uintptr(unsafe.Pointer(pBlobEncoding)))
+func (self *IDxcLibrary) CreateBlobWithEncodingOnHeapCopy(pText []byte, codePage DXC_CP, pBlobEncoding **IDxcBlobEncoding) error {
+	var _pText *byte
+	if len(pText) > 0 {
+		_pText = &pText[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pText)), uintptr(len(pText)), uintptr(codePage), uintptr(unsafe.Pointer(pBlobEncoding)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBlobWithEncodingOnMalloc dispatches through IDxcLibrary's vtable slot 8.
-func (self *IDxcLibrary) CreateBlobWithEncodingOnMalloc(pText unsafe.Pointer, pIMalloc *systemcom.IMalloc, size uint32, codePage DXC_CP, pBlobEncoding **IDxcBlobEncoding) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pText)), uintptr(unsafe.Pointer(pIMalloc)), uintptr(size), uintptr(codePage), uintptr(unsafe.Pointer(pBlobEncoding)))
+func (self *IDxcLibrary) CreateBlobWithEncodingOnMalloc(pText []byte, pIMalloc *systemcom.IMalloc, codePage DXC_CP, pBlobEncoding **IDxcBlobEncoding) error {
+	var _pText *byte
+	if len(pText) > 0 {
+		_pText = &pText[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pText)), uintptr(unsafe.Pointer(pIMalloc)), uintptr(len(pText)), uintptr(codePage), uintptr(unsafe.Pointer(pBlobEncoding)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -402,10 +454,18 @@ func (self *IDxcLinker) RegisterLibrary(pLibName string, pLib *IDxcBlob) error {
 }
 
 // Link dispatches through IDxcLinker's vtable slot 4.
-func (self *IDxcLinker) Link(pEntryName string, pTargetProfile string, pLibNames *foundation.PWSTR, libCount uint32, pArguments *foundation.PWSTR, argCount uint32, ppResult **IDxcOperationResult) error {
+func (self *IDxcLinker) Link(pEntryName string, pTargetProfile string, pLibNames []foundation.PWSTR, pArguments []foundation.PWSTR, ppResult **IDxcOperationResult) error {
 	_pEntryName := win32.UTF16Ptr(pEntryName)
 	_pTargetProfile := win32.UTF16Ptr(pTargetProfile)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pEntryName)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(pLibNames)), uintptr(libCount), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(ppResult)))
+	var _pLibNames *foundation.PWSTR
+	if len(pLibNames) > 0 {
+		_pLibNames = &pLibNames[0]
+	}
+	var _pArguments *foundation.PWSTR
+	if len(pArguments) > 0 {
+		_pArguments = &pArguments[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pEntryName)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(_pLibNames)), uintptr(len(pLibNames)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)), uintptr(unsafe.Pointer(ppResult)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -456,8 +516,12 @@ func (self *IDxcOptimizer) GetAvailablePass(index uint32, ppResult **IDxcOptimiz
 }
 
 // RunOptimizer dispatches through IDxcOptimizer's vtable slot 5.
-func (self *IDxcOptimizer) RunOptimizer(pBlob *IDxcBlob, ppOptions *foundation.PWSTR, optionCount uint32, pOutputModule **IDxcBlob, ppOutputText **IDxcBlobEncoding) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(ppOptions)), uintptr(optionCount), uintptr(unsafe.Pointer(pOutputModule)), uintptr(unsafe.Pointer(ppOutputText)))
+func (self *IDxcOptimizer) RunOptimizer(pBlob *IDxcBlob, ppOptions []foundation.PWSTR, pOutputModule **IDxcBlob, ppOutputText **IDxcBlobEncoding) error {
+	var _ppOptions *foundation.PWSTR
+	if len(ppOptions) > 0 {
+		_ppOptions = &ppOptions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pBlob)), uintptr(unsafe.Pointer(_ppOptions)), uintptr(len(ppOptions)), uintptr(unsafe.Pointer(pOutputModule)), uintptr(unsafe.Pointer(ppOutputText)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -863,20 +927,32 @@ func (self *IDxcUtils) CreateBlobFromBlob(pBlob *IDxcBlob, offset uint32, length
 }
 
 // CreateBlobFromPinned dispatches through IDxcUtils's vtable slot 4.
-func (self *IDxcUtils) CreateBlobFromPinned(pData unsafe.Pointer, size uint32, codePage DXC_CP, ppBlobEncoding **IDxcBlobEncoding) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(size), uintptr(codePage), uintptr(unsafe.Pointer(ppBlobEncoding)))
+func (self *IDxcUtils) CreateBlobFromPinned(pData []byte, codePage DXC_CP, ppBlobEncoding **IDxcBlobEncoding) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(codePage), uintptr(unsafe.Pointer(ppBlobEncoding)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // MoveToBlob dispatches through IDxcUtils's vtable slot 5.
-func (self *IDxcUtils) MoveToBlob(pData unsafe.Pointer, pIMalloc *systemcom.IMalloc, size uint32, codePage DXC_CP, ppBlobEncoding **IDxcBlobEncoding) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(unsafe.Pointer(pIMalloc)), uintptr(size), uintptr(codePage), uintptr(unsafe.Pointer(ppBlobEncoding)))
+func (self *IDxcUtils) MoveToBlob(pData []byte, pIMalloc *systemcom.IMalloc, codePage DXC_CP, ppBlobEncoding **IDxcBlobEncoding) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(unsafe.Pointer(pIMalloc)), uintptr(len(pData)), uintptr(codePage), uintptr(unsafe.Pointer(ppBlobEncoding)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateBlob dispatches through IDxcUtils's vtable slot 6.
-func (self *IDxcUtils) CreateBlob(pData unsafe.Pointer, size uint32, codePage DXC_CP, ppBlobEncoding **IDxcBlobEncoding) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pData)), uintptr(size), uintptr(codePage), uintptr(unsafe.Pointer(ppBlobEncoding)))
+func (self *IDxcUtils) CreateBlob(pData []byte, codePage DXC_CP, ppBlobEncoding **IDxcBlobEncoding) error {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(codePage), uintptr(unsafe.Pointer(ppBlobEncoding)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -924,11 +1000,19 @@ func (self *IDxcUtils) CreateReflection(pData *DxcBuffer, iid *win32.GUID, ppvRe
 }
 
 // BuildArguments dispatches through IDxcUtils's vtable slot 14.
-func (self *IDxcUtils) BuildArguments(pSourceName string, pEntryPoint string, pTargetProfile string, pArguments *foundation.PWSTR, argCount uint32, pDefines *DxcDefine, defineCount uint32, ppArgs **IDxcCompilerArgs) error {
+func (self *IDxcUtils) BuildArguments(pSourceName string, pEntryPoint string, pTargetProfile string, pArguments []foundation.PWSTR, pDefines []DxcDefine, ppArgs **IDxcCompilerArgs) error {
 	_pSourceName := win32.UTF16Ptr(pSourceName)
 	_pEntryPoint := win32.UTF16Ptr(pEntryPoint)
 	_pTargetProfile := win32.UTF16Ptr(pTargetProfile)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(_pEntryPoint)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(pArguments)), uintptr(argCount), uintptr(unsafe.Pointer(pDefines)), uintptr(defineCount), uintptr(unsafe.Pointer(ppArgs)))
+	var _pArguments *foundation.PWSTR
+	if len(pArguments) > 0 {
+		_pArguments = &pArguments[0]
+	}
+	var _pDefines *DxcDefine
+	if len(pDefines) > 0 {
+		_pDefines = &pDefines[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pSourceName)), uintptr(unsafe.Pointer(_pEntryPoint)), uintptr(unsafe.Pointer(_pTargetProfile)), uintptr(unsafe.Pointer(_pArguments)), uintptr(len(pArguments)), uintptr(unsafe.Pointer(_pDefines)), uintptr(len(pDefines)), uintptr(unsafe.Pointer(ppArgs)))
 	return win32.HRESULTError(int32(r1))
 }
 

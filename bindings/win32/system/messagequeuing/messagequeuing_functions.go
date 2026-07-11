@@ -146,14 +146,22 @@ func MQGetQueueSecurity(lpwcsFormatName string, RequestedInformation uint32, pSe
 }
 
 // MQGetSecurityContext calls mqrt!MQGetSecurityContext.
-func MQGetSecurityContext(lpCertBuffer unsafe.Pointer, dwCertBufferLength uint32, phSecurityContext *foundation.HANDLE) error {
-	r1, _, _ := syscall.SyscallN(procMQGetSecurityContext.Addr(), uintptr(unsafe.Pointer(lpCertBuffer)), uintptr(dwCertBufferLength), uintptr(unsafe.Pointer(phSecurityContext)))
+func MQGetSecurityContext(lpCertBuffer []byte, phSecurityContext *foundation.HANDLE) error {
+	var _lpCertBuffer *byte
+	if len(lpCertBuffer) > 0 {
+		_lpCertBuffer = &lpCertBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMQGetSecurityContext.Addr(), uintptr(unsafe.Pointer(_lpCertBuffer)), uintptr(len(lpCertBuffer)), uintptr(unsafe.Pointer(phSecurityContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // MQGetSecurityContextEx calls mqrt!MQGetSecurityContextEx.
-func MQGetSecurityContextEx(lpCertBuffer unsafe.Pointer, dwCertBufferLength uint32, phSecurityContext *foundation.HANDLE) error {
-	r1, _, _ := syscall.SyscallN(procMQGetSecurityContextEx.Addr(), uintptr(unsafe.Pointer(lpCertBuffer)), uintptr(dwCertBufferLength), uintptr(unsafe.Pointer(phSecurityContext)))
+func MQGetSecurityContextEx(lpCertBuffer []byte, phSecurityContext *foundation.HANDLE) error {
+	var _lpCertBuffer *byte
+	if len(lpCertBuffer) > 0 {
+		_lpCertBuffer = &lpCertBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procMQGetSecurityContextEx.Addr(), uintptr(unsafe.Pointer(_lpCertBuffer)), uintptr(len(lpCertBuffer)), uintptr(unsafe.Pointer(phSecurityContext)))
 	return win32.HRESULTError(int32(r1))
 }
 

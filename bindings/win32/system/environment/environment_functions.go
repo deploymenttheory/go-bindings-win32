@@ -79,8 +79,12 @@ func CallEnclave(lpRoutine uintptr, lpParameter unsafe.Pointer, fWaitForThread b
 // CreateEnclave calls KERNEL32!CreateEnclave.
 // https://learn.microsoft.com/windows/win32/api/enclaveapi/nf-enclaveapi-createenclave
 // Minimum OS: windows10.0.10240.
-func CreateEnclave(hProcess foundation.HANDLE, lpAddress unsafe.Pointer, dwSize uintptr, dwInitialCommitment uintptr, flEnclaveType uint32, lpEnclaveInformation unsafe.Pointer, dwInfoLength uint32, lpEnclaveError *uint32) (unsafe.Pointer, error) {
-	r1, _, e1 := syscall.SyscallN(procCreateEnclave.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpAddress)), uintptr(dwSize), uintptr(dwInitialCommitment), uintptr(flEnclaveType), uintptr(unsafe.Pointer(lpEnclaveInformation)), uintptr(dwInfoLength), uintptr(unsafe.Pointer(lpEnclaveError)))
+func CreateEnclave(hProcess foundation.HANDLE, lpAddress unsafe.Pointer, dwSize uintptr, dwInitialCommitment uintptr, flEnclaveType uint32, lpEnclaveInformation []byte, lpEnclaveError *uint32) (unsafe.Pointer, error) {
+	var _lpEnclaveInformation *byte
+	if len(lpEnclaveInformation) > 0 {
+		_lpEnclaveInformation = &lpEnclaveInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procCreateEnclave.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpAddress)), uintptr(dwSize), uintptr(dwInitialCommitment), uintptr(flEnclaveType), uintptr(unsafe.Pointer(_lpEnclaveInformation)), uintptr(len(lpEnclaveInformation)), uintptr(unsafe.Pointer(lpEnclaveError)))
 	ret := unsafe.Pointer(r1)
 	if ret == nil {
 		return ret, win32.LastError(e1)
@@ -135,16 +139,28 @@ func EnclaveCopyOutOfEnclave(UnsecureAddress unsafe.Pointer, EnclaveAddress unsa
 }
 
 // EnclaveEncryptDataForTrustlet calls vertdll!EnclaveEncryptDataForTrustlet.
-func EnclaveEncryptDataForTrustlet(DataToEncrypt unsafe.Pointer, DataToEncryptSize uint32, TrustletBindingData *TRUSTLET_BINDING_DATA, EncryptedData unsafe.Pointer, BufferSize uint32, EncryptedDataSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(procEnclaveEncryptDataForTrustlet.Addr(), uintptr(unsafe.Pointer(DataToEncrypt)), uintptr(DataToEncryptSize), uintptr(unsafe.Pointer(TrustletBindingData)), uintptr(unsafe.Pointer(EncryptedData)), uintptr(BufferSize), uintptr(unsafe.Pointer(EncryptedDataSize)))
+func EnclaveEncryptDataForTrustlet(DataToEncrypt []byte, TrustletBindingData *TRUSTLET_BINDING_DATA, EncryptedData []byte, EncryptedDataSize *uint32) error {
+	var _DataToEncrypt *byte
+	if len(DataToEncrypt) > 0 {
+		_DataToEncrypt = &DataToEncrypt[0]
+	}
+	var _EncryptedData *byte
+	if len(EncryptedData) > 0 {
+		_EncryptedData = &EncryptedData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnclaveEncryptDataForTrustlet.Addr(), uintptr(unsafe.Pointer(_DataToEncrypt)), uintptr(len(DataToEncrypt)), uintptr(unsafe.Pointer(TrustletBindingData)), uintptr(unsafe.Pointer(_EncryptedData)), uintptr(len(EncryptedData)), uintptr(unsafe.Pointer(EncryptedDataSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // EnclaveGetAttestationReport calls vertdll!EnclaveGetAttestationReport.
 // https://learn.microsoft.com/windows/win32/api/winenclaveapi/nf-winenclaveapi-enclavegetattestationreport
 // Minimum OS: windows10.0.16299.
-func EnclaveGetAttestationReport(EnclaveData *byte, Report unsafe.Pointer, BufferSize uint32, OutputSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(procEnclaveGetAttestationReport.Addr(), uintptr(unsafe.Pointer(EnclaveData)), uintptr(unsafe.Pointer(Report)), uintptr(BufferSize), uintptr(unsafe.Pointer(OutputSize)))
+func EnclaveGetAttestationReport(EnclaveData *byte, Report []byte, OutputSize *uint32) error {
+	var _Report *byte
+	if len(Report) > 0 {
+		_Report = &Report[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnclaveGetAttestationReport.Addr(), uintptr(unsafe.Pointer(EnclaveData)), uintptr(unsafe.Pointer(_Report)), uintptr(len(Report)), uintptr(unsafe.Pointer(OutputSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -166,16 +182,32 @@ func EnclaveRestrictContainingProcessAccess(RestrictAccess bool, PreviouslyRestr
 // EnclaveSealData calls vertdll!EnclaveSealData.
 // https://learn.microsoft.com/windows/win32/api/winenclaveapi/nf-winenclaveapi-enclavesealdata
 // Minimum OS: windows10.0.16299.
-func EnclaveSealData(DataToEncrypt unsafe.Pointer, DataToEncryptSize uint32, IdentityPolicy ENCLAVE_SEALING_IDENTITY_POLICY, RuntimePolicy uint32, ProtectedBlob unsafe.Pointer, BufferSize uint32, ProtectedBlobSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(procEnclaveSealData.Addr(), uintptr(unsafe.Pointer(DataToEncrypt)), uintptr(DataToEncryptSize), uintptr(IdentityPolicy), uintptr(RuntimePolicy), uintptr(unsafe.Pointer(ProtectedBlob)), uintptr(BufferSize), uintptr(unsafe.Pointer(ProtectedBlobSize)))
+func EnclaveSealData(DataToEncrypt []byte, IdentityPolicy ENCLAVE_SEALING_IDENTITY_POLICY, RuntimePolicy uint32, ProtectedBlob []byte, ProtectedBlobSize *uint32) error {
+	var _DataToEncrypt *byte
+	if len(DataToEncrypt) > 0 {
+		_DataToEncrypt = &DataToEncrypt[0]
+	}
+	var _ProtectedBlob *byte
+	if len(ProtectedBlob) > 0 {
+		_ProtectedBlob = &ProtectedBlob[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnclaveSealData.Addr(), uintptr(unsafe.Pointer(_DataToEncrypt)), uintptr(len(DataToEncrypt)), uintptr(IdentityPolicy), uintptr(RuntimePolicy), uintptr(unsafe.Pointer(_ProtectedBlob)), uintptr(len(ProtectedBlob)), uintptr(unsafe.Pointer(ProtectedBlobSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // EnclaveUnsealData calls vertdll!EnclaveUnsealData.
 // https://learn.microsoft.com/windows/win32/api/winenclaveapi/nf-winenclaveapi-enclaveunsealdata
 // Minimum OS: windows10.0.16299.
-func EnclaveUnsealData(ProtectedBlob unsafe.Pointer, ProtectedBlobSize uint32, DecryptedData unsafe.Pointer, BufferSize uint32, DecryptedDataSize *uint32, SealingIdentity *ENCLAVE_IDENTITY, UnsealingFlags *uint32) error {
-	r1, _, _ := syscall.SyscallN(procEnclaveUnsealData.Addr(), uintptr(unsafe.Pointer(ProtectedBlob)), uintptr(ProtectedBlobSize), uintptr(unsafe.Pointer(DecryptedData)), uintptr(BufferSize), uintptr(unsafe.Pointer(DecryptedDataSize)), uintptr(unsafe.Pointer(SealingIdentity)), uintptr(unsafe.Pointer(UnsealingFlags)))
+func EnclaveUnsealData(ProtectedBlob []byte, DecryptedData []byte, DecryptedDataSize *uint32, SealingIdentity *ENCLAVE_IDENTITY, UnsealingFlags *uint32) error {
+	var _ProtectedBlob *byte
+	if len(ProtectedBlob) > 0 {
+		_ProtectedBlob = &ProtectedBlob[0]
+	}
+	var _DecryptedData *byte
+	if len(DecryptedData) > 0 {
+		_DecryptedData = &DecryptedData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnclaveUnsealData.Addr(), uintptr(unsafe.Pointer(_ProtectedBlob)), uintptr(len(ProtectedBlob)), uintptr(unsafe.Pointer(_DecryptedData)), uintptr(len(DecryptedData)), uintptr(unsafe.Pointer(DecryptedDataSize)), uintptr(unsafe.Pointer(SealingIdentity)), uintptr(unsafe.Pointer(UnsealingFlags)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -188,8 +220,12 @@ func EnclaveUsesAttestedKeys() foundation.BOOLEAN {
 // EnclaveVerifyAttestationReport calls vertdll!EnclaveVerifyAttestationReport.
 // https://learn.microsoft.com/windows/win32/api/winenclaveapi/nf-winenclaveapi-enclaveverifyattestationreport
 // Minimum OS: windows10.0.16299.
-func EnclaveVerifyAttestationReport(EnclaveType uint32, Report unsafe.Pointer, ReportSize uint32) error {
-	r1, _, _ := syscall.SyscallN(procEnclaveVerifyAttestationReport.Addr(), uintptr(EnclaveType), uintptr(unsafe.Pointer(Report)), uintptr(ReportSize))
+func EnclaveVerifyAttestationReport(EnclaveType uint32, Report []byte) error {
+	var _Report *byte
+	if len(Report) > 0 {
+		_Report = &Report[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnclaveVerifyAttestationReport.Addr(), uintptr(EnclaveType), uintptr(unsafe.Pointer(_Report)), uintptr(len(Report)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -334,8 +370,12 @@ func GetEnvironmentVariableA(lpName foundation.PSTR, lpBuffer foundation.PSTR, n
 // InitializeEnclave calls KERNEL32!InitializeEnclave.
 // https://learn.microsoft.com/windows/win32/api/enclaveapi/nf-enclaveapi-initializeenclave
 // Minimum OS: windows10.0.10240.
-func InitializeEnclave(hProcess foundation.HANDLE, lpAddress unsafe.Pointer, lpEnclaveInformation unsafe.Pointer, dwInfoLength uint32, lpEnclaveError *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procInitializeEnclave.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpAddress)), uintptr(unsafe.Pointer(lpEnclaveInformation)), uintptr(dwInfoLength), uintptr(unsafe.Pointer(lpEnclaveError)))
+func InitializeEnclave(hProcess foundation.HANDLE, lpAddress unsafe.Pointer, lpEnclaveInformation []byte, lpEnclaveError *uint32) error {
+	var _lpEnclaveInformation *byte
+	if len(lpEnclaveInformation) > 0 {
+		_lpEnclaveInformation = &lpEnclaveInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procInitializeEnclave.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpAddress)), uintptr(unsafe.Pointer(_lpEnclaveInformation)), uintptr(len(lpEnclaveInformation)), uintptr(unsafe.Pointer(lpEnclaveError)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -356,8 +396,16 @@ func IsEnclaveTypeSupported(flEnclaveType uint32) error {
 // LoadEnclaveData calls KERNEL32!LoadEnclaveData.
 // https://learn.microsoft.com/windows/win32/api/enclaveapi/nf-enclaveapi-loadenclavedata
 // Minimum OS: windows10.0.10240.
-func LoadEnclaveData(hProcess foundation.HANDLE, lpAddress unsafe.Pointer, lpBuffer unsafe.Pointer, nSize uintptr, flProtect uint32, lpPageInformation unsafe.Pointer, dwInfoLength uint32, lpNumberOfBytesWritten *uintptr, lpEnclaveError *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procLoadEnclaveData.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpAddress)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nSize), uintptr(flProtect), uintptr(unsafe.Pointer(lpPageInformation)), uintptr(dwInfoLength), uintptr(unsafe.Pointer(lpNumberOfBytesWritten)), uintptr(unsafe.Pointer(lpEnclaveError)))
+func LoadEnclaveData(hProcess foundation.HANDLE, lpAddress unsafe.Pointer, lpBuffer []byte, flProtect uint32, lpPageInformation []byte, lpNumberOfBytesWritten *uintptr, lpEnclaveError *uint32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	var _lpPageInformation *byte
+	if len(lpPageInformation) > 0 {
+		_lpPageInformation = &lpPageInformation[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procLoadEnclaveData.Addr(), uintptr(hProcess), uintptr(unsafe.Pointer(lpAddress)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(flProtect), uintptr(unsafe.Pointer(_lpPageInformation)), uintptr(len(lpPageInformation)), uintptr(unsafe.Pointer(lpNumberOfBytesWritten)), uintptr(unsafe.Pointer(lpEnclaveError)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

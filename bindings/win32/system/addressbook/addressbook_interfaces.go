@@ -459,8 +459,12 @@ func (self *IMAPIStatus) ChangePassword(lpOldPass *int8, lpNewPass *int8, ulFlag
 }
 
 // FlushQueues dispatches through IMAPIStatus's vtable slot 17.
-func (self *IMAPIStatus) FlushQueues(ulUIParam uintptr, cbTargetTransport uint32, lpTargetTransport *ENTRYID, ulFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(ulUIParam), uintptr(cbTargetTransport), uintptr(unsafe.Pointer(lpTargetTransport)), uintptr(ulFlags))
+func (self *IMAPIStatus) FlushQueues(ulUIParam uintptr, lpTargetTransport []ENTRYID, ulFlags uint32) error {
+	var _lpTargetTransport *ENTRYID
+	if len(lpTargetTransport) > 0 {
+		_lpTargetTransport = &lpTargetTransport[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(ulUIParam), uintptr(len(lpTargetTransport)), uintptr(unsafe.Pointer(_lpTargetTransport)), uintptr(ulFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -800,8 +804,12 @@ func (self *IProviderAdmin) GetProviderTable(ulFlags uint32, lppTable **IMAPITab
 }
 
 // CreateProvider dispatches through IProviderAdmin's vtable slot 5.
-func (self *IProviderAdmin) CreateProvider(lpszProvider *int8, cValues uint32, lpProps *SPropValue, ulUIParam uintptr, ulFlags uint32, lpUID *MAPIUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszProvider)), uintptr(cValues), uintptr(unsafe.Pointer(lpProps)), uintptr(ulUIParam), uintptr(ulFlags), uintptr(unsafe.Pointer(lpUID)))
+func (self *IProviderAdmin) CreateProvider(lpszProvider *int8, lpProps []SPropValue, ulUIParam uintptr, ulFlags uint32, lpUID *MAPIUID) error {
+	var _lpProps *SPropValue
+	if len(lpProps) > 0 {
+		_lpProps = &lpProps[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpszProvider)), uintptr(len(lpProps)), uintptr(unsafe.Pointer(_lpProps)), uintptr(ulUIParam), uintptr(ulFlags), uintptr(unsafe.Pointer(lpUID)))
 	return win32.HRESULTError(int32(r1))
 }
 

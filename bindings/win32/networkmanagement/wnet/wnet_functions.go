@@ -123,8 +123,16 @@ func NPAddConnection3(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lp
 }
 
 // NPAddConnection4 calls NTLANMAN!NPAddConnection4.
-func NPAddConnection4(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lpAuthBuffer unsafe.Pointer, cbAuthBuffer uint32, dwFlags uint32, lpUseOptions *byte, cbUseOptions uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procNPAddConnection4.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(lpAuthBuffer)), uintptr(cbAuthBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUseOptions)), uintptr(cbUseOptions))
+func NPAddConnection4(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, lpAuthBuffer []byte, dwFlags uint32, lpUseOptions []byte) uint32 {
+	var _lpAuthBuffer *byte
+	if len(lpAuthBuffer) > 0 {
+		_lpAuthBuffer = &lpAuthBuffer[0]
+	}
+	var _lpUseOptions *byte
+	if len(lpUseOptions) > 0 {
+		_lpUseOptions = &lpUseOptions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procNPAddConnection4.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_lpAuthBuffer)), uintptr(len(lpAuthBuffer)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpUseOptions)), uintptr(len(lpUseOptions)))
 	return uint32(r1)
 }
 
@@ -207,9 +215,13 @@ func NPGetConnectionPerformance(lpRemoteName string, lpNetConnectInfo *NETCONNEC
 }
 
 // NPGetPersistentUseOptionsForConnection calls NTLANMAN!NPGetPersistentUseOptionsForConnection.
-func NPGetPersistentUseOptionsForConnection(lpRemotePath string, lpReadUseOptions *byte, cbReadUseOptions uint32, lpWriteUseOptions *byte, lpSizeWriteUseOptions *uint32) uint32 {
+func NPGetPersistentUseOptionsForConnection(lpRemotePath string, lpReadUseOptions []byte, lpWriteUseOptions *byte, lpSizeWriteUseOptions *uint32) uint32 {
 	_lpRemotePath := win32.UTF16Ptr(lpRemotePath)
-	r1, _, _ := syscall.SyscallN(procNPGetPersistentUseOptionsForConnection.Addr(), uintptr(unsafe.Pointer(_lpRemotePath)), uintptr(unsafe.Pointer(lpReadUseOptions)), uintptr(cbReadUseOptions), uintptr(unsafe.Pointer(lpWriteUseOptions)), uintptr(unsafe.Pointer(lpSizeWriteUseOptions)))
+	var _lpReadUseOptions *byte
+	if len(lpReadUseOptions) > 0 {
+		_lpReadUseOptions = &lpReadUseOptions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procNPGetPersistentUseOptionsForConnection.Addr(), uintptr(unsafe.Pointer(_lpRemotePath)), uintptr(unsafe.Pointer(_lpReadUseOptions)), uintptr(len(lpReadUseOptions)), uintptr(unsafe.Pointer(lpWriteUseOptions)), uintptr(unsafe.Pointer(lpSizeWriteUseOptions)))
 	return uint32(r1)
 }
 
@@ -303,14 +315,30 @@ func WNetAddConnection3A(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEA,
 }
 
 // WNetAddConnection4 calls MPR!WNetAddConnection4W.
-func WNetAddConnection4(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, pAuthBuffer unsafe.Pointer, cbAuthBuffer uint32, dwFlags NET_CONNECT_FLAGS, lpUseOptions *byte, cbUseOptions uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetAddConnection4.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(pAuthBuffer)), uintptr(cbAuthBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUseOptions)), uintptr(cbUseOptions))
+func WNetAddConnection4(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, pAuthBuffer []byte, dwFlags NET_CONNECT_FLAGS, lpUseOptions []byte) foundation.WIN32_ERROR {
+	var _pAuthBuffer *byte
+	if len(pAuthBuffer) > 0 {
+		_pAuthBuffer = &pAuthBuffer[0]
+	}
+	var _lpUseOptions *byte
+	if len(lpUseOptions) > 0 {
+		_lpUseOptions = &lpUseOptions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWNetAddConnection4.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_pAuthBuffer)), uintptr(len(pAuthBuffer)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpUseOptions)), uintptr(len(lpUseOptions)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // WNetAddConnection4A calls MPR!WNetAddConnection4A.
-func WNetAddConnection4A(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEA, pAuthBuffer unsafe.Pointer, cbAuthBuffer uint32, dwFlags NET_CONNECT_FLAGS, lpUseOptions *byte, cbUseOptions uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetAddConnection4A.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(pAuthBuffer)), uintptr(cbAuthBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUseOptions)), uintptr(cbUseOptions))
+func WNetAddConnection4A(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEA, pAuthBuffer []byte, dwFlags NET_CONNECT_FLAGS, lpUseOptions []byte) foundation.WIN32_ERROR {
+	var _pAuthBuffer *byte
+	if len(pAuthBuffer) > 0 {
+		_pAuthBuffer = &pAuthBuffer[0]
+	}
+	var _lpUseOptions *byte
+	if len(lpUseOptions) > 0 {
+		_lpUseOptions = &lpUseOptions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWNetAddConnection4A.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_pAuthBuffer)), uintptr(len(pAuthBuffer)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpUseOptions)), uintptr(len(lpUseOptions)))
 	return foundation.WIN32_ERROR(r1)
 }
 
@@ -612,14 +640,30 @@ func WNetUseConnection(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, l
 }
 
 // WNetUseConnection4 calls MPR!WNetUseConnection4W.
-func WNetUseConnection4(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, pAuthBuffer unsafe.Pointer, cbAuthBuffer uint32, dwFlags uint32, lpUseOptions *byte, cbUseOptions uint32, lpAccessName foundation.PWSTR, lpBufferSize *uint32, lpResult *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetUseConnection4.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(pAuthBuffer)), uintptr(cbAuthBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUseOptions)), uintptr(cbUseOptions), uintptr(unsafe.Pointer(lpAccessName)), uintptr(unsafe.Pointer(lpBufferSize)), uintptr(unsafe.Pointer(lpResult)))
+func WNetUseConnection4(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEW, pAuthBuffer []byte, dwFlags uint32, lpUseOptions []byte, lpAccessName foundation.PWSTR, lpBufferSize *uint32, lpResult *uint32) foundation.WIN32_ERROR {
+	var _pAuthBuffer *byte
+	if len(pAuthBuffer) > 0 {
+		_pAuthBuffer = &pAuthBuffer[0]
+	}
+	var _lpUseOptions *byte
+	if len(lpUseOptions) > 0 {
+		_lpUseOptions = &lpUseOptions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWNetUseConnection4.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_pAuthBuffer)), uintptr(len(pAuthBuffer)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpUseOptions)), uintptr(len(lpUseOptions)), uintptr(unsafe.Pointer(lpAccessName)), uintptr(unsafe.Pointer(lpBufferSize)), uintptr(unsafe.Pointer(lpResult)))
 	return foundation.WIN32_ERROR(r1)
 }
 
 // WNetUseConnection4A calls MPR!WNetUseConnection4A.
-func WNetUseConnection4A(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEA, pAuthBuffer unsafe.Pointer, cbAuthBuffer uint32, dwFlags uint32, lpUseOptions *byte, cbUseOptions uint32, lpAccessName foundation.PSTR, lpBufferSize *uint32, lpResult *uint32) foundation.WIN32_ERROR {
-	r1, _, _ := syscall.SyscallN(procWNetUseConnection4A.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(pAuthBuffer)), uintptr(cbAuthBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(lpUseOptions)), uintptr(cbUseOptions), uintptr(unsafe.Pointer(lpAccessName)), uintptr(unsafe.Pointer(lpBufferSize)), uintptr(unsafe.Pointer(lpResult)))
+func WNetUseConnection4A(hwndOwner foundation.HWND, lpNetResource *NETRESOURCEA, pAuthBuffer []byte, dwFlags uint32, lpUseOptions []byte, lpAccessName foundation.PSTR, lpBufferSize *uint32, lpResult *uint32) foundation.WIN32_ERROR {
+	var _pAuthBuffer *byte
+	if len(pAuthBuffer) > 0 {
+		_pAuthBuffer = &pAuthBuffer[0]
+	}
+	var _lpUseOptions *byte
+	if len(lpUseOptions) > 0 {
+		_lpUseOptions = &lpUseOptions[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWNetUseConnection4A.Addr(), uintptr(hwndOwner), uintptr(unsafe.Pointer(lpNetResource)), uintptr(unsafe.Pointer(_pAuthBuffer)), uintptr(len(pAuthBuffer)), uintptr(dwFlags), uintptr(unsafe.Pointer(_lpUseOptions)), uintptr(len(lpUseOptions)), uintptr(unsafe.Pointer(lpAccessName)), uintptr(unsafe.Pointer(lpBufferSize)), uintptr(unsafe.Pointer(lpResult)))
 	return foundation.WIN32_ERROR(r1)
 }
 

@@ -75,8 +75,12 @@ func (self *IMLOperatorKernelContext) GetInputTensor(inputIndex uint32, tensor *
 }
 
 // GetOutputTensor dispatches through IMLOperatorKernelContext's vtable slot 4.
-func (self *IMLOperatorKernelContext) GetOutputTensor(outputIndex uint32, dimensionCount uint32, dimensionSizes *uint32, tensor **IMLOperatorTensor) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(outputIndex), uintptr(dimensionCount), uintptr(unsafe.Pointer(dimensionSizes)), uintptr(unsafe.Pointer(tensor)))
+func (self *IMLOperatorKernelContext) GetOutputTensor(outputIndex uint32, dimensionSizes []uint32, tensor **IMLOperatorTensor) error {
+	var _dimensionSizes *uint32
+	if len(dimensionSizes) > 0 {
+		_dimensionSizes = &dimensionSizes[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(outputIndex), uintptr(len(dimensionSizes)), uintptr(unsafe.Pointer(_dimensionSizes)), uintptr(unsafe.Pointer(tensor)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -163,8 +167,12 @@ type IMLOperatorRegistry struct {
 var IID_IMLOperatorRegistry = win32.GUID{Data1: 0x2af9dd2d, Data2: 0xb516, Data3: 0x4672, Data4: [8]byte{0x9a, 0xb5, 0x53, 0x0c, 0x20, 0x84, 0x93, 0xad}}
 
 // RegisterOperatorSetSchema dispatches through IMLOperatorRegistry's vtable slot 3.
-func (self *IMLOperatorRegistry) RegisterOperatorSetSchema(operatorSetId *MLOperatorSetId, baselineVersion int32, schema **MLOperatorSchemaDescription, schemaCount uint32, typeInferrer *IMLOperatorTypeInferrer, shapeInferrer *IMLOperatorShapeInferrer) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(operatorSetId)), uintptr(baselineVersion), uintptr(unsafe.Pointer(schema)), uintptr(schemaCount), uintptr(unsafe.Pointer(typeInferrer)), uintptr(unsafe.Pointer(shapeInferrer)))
+func (self *IMLOperatorRegistry) RegisterOperatorSetSchema(operatorSetId *MLOperatorSetId, baselineVersion int32, schema []*MLOperatorSchemaDescription, typeInferrer *IMLOperatorTypeInferrer, shapeInferrer *IMLOperatorShapeInferrer) error {
+	var _schema **MLOperatorSchemaDescription
+	if len(schema) > 0 {
+		_schema = &schema[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(operatorSetId)), uintptr(baselineVersion), uintptr(unsafe.Pointer(_schema)), uintptr(len(schema)), uintptr(unsafe.Pointer(typeInferrer)), uintptr(unsafe.Pointer(shapeInferrer)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -207,8 +215,12 @@ func (self *IMLOperatorShapeInferenceContext) GetInputTensorDimensionCount(input
 }
 
 // GetInputTensorShape dispatches through IMLOperatorShapeInferenceContext's vtable slot 13.
-func (self *IMLOperatorShapeInferenceContext) GetInputTensorShape(inputIndex uint32, dimensionCount uint32, dimensions *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(dimensionCount), uintptr(unsafe.Pointer(dimensions)))
+func (self *IMLOperatorShapeInferenceContext) GetInputTensorShape(inputIndex uint32, dimensions []uint32) error {
+	var _dimensions *uint32
+	if len(dimensions) > 0 {
+		_dimensions = &dimensions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(len(dimensions)), uintptr(unsafe.Pointer(_dimensions)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -247,8 +259,12 @@ func (self *IMLOperatorTensor) GetDimensionCount() uint32 {
 }
 
 // GetShape dispatches through IMLOperatorTensor's vtable slot 4.
-func (self *IMLOperatorTensor) GetShape(dimensionCount uint32, dimensions *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(dimensionCount), uintptr(unsafe.Pointer(dimensions)))
+func (self *IMLOperatorTensor) GetShape(dimensions []uint32) error {
+	var _dimensions *uint32
+	if len(dimensions) > 0 {
+		_dimensions = &dimensions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(len(dimensions)), uintptr(unsafe.Pointer(_dimensions)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -284,8 +300,12 @@ func (self *IMLOperatorTensorShapeDescription) GetInputTensorDimensionCount(inpu
 }
 
 // GetInputTensorShape dispatches through IMLOperatorTensorShapeDescription's vtable slot 4.
-func (self *IMLOperatorTensorShapeDescription) GetInputTensorShape(inputIndex uint32, dimensionCount uint32, dimensions *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(dimensionCount), uintptr(unsafe.Pointer(dimensions)))
+func (self *IMLOperatorTensorShapeDescription) GetInputTensorShape(inputIndex uint32, dimensions []uint32) error {
+	var _dimensions *uint32
+	if len(dimensions) > 0 {
+		_dimensions = &dimensions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(inputIndex), uintptr(len(dimensions)), uintptr(unsafe.Pointer(_dimensions)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -296,8 +316,12 @@ func (self *IMLOperatorTensorShapeDescription) GetOutputTensorDimensionCount(out
 }
 
 // GetOutputTensorShape dispatches through IMLOperatorTensorShapeDescription's vtable slot 7.
-func (self *IMLOperatorTensorShapeDescription) GetOutputTensorShape(outputIndex uint32, dimensionCount uint32, dimensions *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(outputIndex), uintptr(dimensionCount), uintptr(unsafe.Pointer(dimensions)))
+func (self *IMLOperatorTensorShapeDescription) GetOutputTensorShape(outputIndex uint32, dimensions []uint32) error {
+	var _dimensions *uint32
+	if len(dimensions) > 0 {
+		_dimensions = &dimensions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(outputIndex), uintptr(len(dimensions)), uintptr(unsafe.Pointer(_dimensions)))
 	return win32.HRESULTError(int32(r1))
 }
 

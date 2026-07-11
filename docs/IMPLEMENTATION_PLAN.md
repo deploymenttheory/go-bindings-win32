@@ -414,6 +414,17 @@ The clean 1:1 replacement for `bindings/runtime/purego`. Pure `syscall` +
   converted at the boundary; array-pointer+count param pairs (`NativeArrayInfo`)
   collapse to `[]T`. `BOOL` → `bool`. Reserved params are elided and `-W` is
   desuffixed when the base name is free.
+- **Byte buffers** — a `void*` or `byte*` param whose `[MemorySize]`
+  `BytesParamIndex` names a unique, input-only integer size param collapses to
+  `[]byte` (size derived from `len` at the call site), for flat functions and
+  COM methods alike (the `NativeArrayInfo` `[]T` collapse also applies to
+  both). A size param shared with a `NativeArrayInfo` count stays raw rather
+  than un-collapsing the typed array; typed non-byte pointers with
+  `[MemorySize]` keep their type. Caveats: sub-32-bit size params (a couple
+  dozen `uint16`/`int16`/`byte` sizes in the winmd) truncate if `len(buf)`
+  exceeds their range — the same accepted risk as the count collapse — and
+  struct-backed buffers (`WriteProcessMemory`-style) convert at the call site
+  via `unsafe.Slice((*byte)(unsafe.Pointer(&s)), unsafe.Sizeof(s))`.
 - **Handle RAII** — `[RAIIFree]`/`CloseApi` metadata drives generated
   `Close<Handle>(h) error` closers (`HANDLE→CloseHandle`, `BSTR→SysFreeString`).
 - **Inline dispatch** — flat functions call `syscall.SyscallN` **inline** (no

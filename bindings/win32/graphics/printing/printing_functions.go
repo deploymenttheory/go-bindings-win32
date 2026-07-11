@@ -261,15 +261,23 @@ func AddFormA(hPrinter PRINTER_HANDLE, Level uint32, pForm *byte) bool {
 
 // AddJob calls winspool.drv!AddJobW.
 // https://learn.microsoft.com/windows/win32/printdocs/addjob
-func AddJob(hPrinter PRINTER_HANDLE, Level uint32, pData *byte, cbBuf uint32, pcbNeeded *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procAddJob.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pData)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+func AddJob(hPrinter PRINTER_HANDLE, Level uint32, pData []byte, pcbNeeded *uint32) bool {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAddJob.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return r1 != 0
 }
 
 // AddJobA calls winspool.drv!AddJobA.
 // https://learn.microsoft.com/windows/win32/printdocs/addjob
-func AddJobA(hPrinter PRINTER_HANDLE, Level uint32, pData *byte, cbBuf uint32, pcbNeeded *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procAddJobA.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pData)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+func AddJobA(hPrinter PRINTER_HANDLE, Level uint32, pData []byte, pcbNeeded *uint32) bool {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAddJobA.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return r1 != 0
 }
 
@@ -816,15 +824,23 @@ func EndPagePrinter(hPrinter PRINTER_HANDLE) bool {
 
 // EnumForms calls winspool.drv!EnumFormsW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumforms
-func EnumForms(hPrinter PRINTER_HANDLE, Level uint32, pForm *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procEnumForms.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pForm)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+func EnumForms(hPrinter PRINTER_HANDLE, Level uint32, pForm []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
+	var _pForm *byte
+	if len(pForm) > 0 {
+		_pForm = &pForm[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumForms.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(_pForm)), uintptr(len(pForm)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	return r1 != 0
 }
 
 // EnumFormsA calls winspool.drv!EnumFormsA.
 // https://learn.microsoft.com/windows/win32/printdocs/enumforms
-func EnumFormsA(hPrinter PRINTER_HANDLE, Level uint32, pForm *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procEnumFormsA.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pForm)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+func EnumFormsA(hPrinter PRINTER_HANDLE, Level uint32, pForm []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
+	var _pForm *byte
+	if len(pForm) > 0 {
+		_pForm = &pForm[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumFormsA.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(_pForm)), uintptr(len(pForm)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	return r1 != 0
 }
 
@@ -836,8 +852,12 @@ func EnumJobNamedProperties(hPrinter PRINTER_HANDLE, JobId uint32, pcProperties 
 
 // EnumJobs calls winspool.drv!EnumJobsW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumjobs
-func EnumJobs(hPrinter PRINTER_HANDLE, FirstJob uint32, NoJobs uint32, Level uint32, pJob *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumJobs.Addr(), uintptr(hPrinter), uintptr(FirstJob), uintptr(NoJobs), uintptr(Level), uintptr(unsafe.Pointer(pJob)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+func EnumJobs(hPrinter PRINTER_HANDLE, FirstJob uint32, NoJobs uint32, Level uint32, pJob []byte, pcbNeeded *uint32, pcReturned *uint32) error {
+	var _pJob *byte
+	if len(pJob) > 0 {
+		_pJob = &pJob[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procEnumJobs.Addr(), uintptr(hPrinter), uintptr(FirstJob), uintptr(NoJobs), uintptr(Level), uintptr(unsafe.Pointer(_pJob)), uintptr(len(pJob)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -846,8 +866,12 @@ func EnumJobs(hPrinter PRINTER_HANDLE, FirstJob uint32, NoJobs uint32, Level uin
 
 // EnumJobsA calls winspool.drv!EnumJobsA.
 // https://learn.microsoft.com/windows/win32/printdocs/enumjobs
-func EnumJobsA(hPrinter PRINTER_HANDLE, FirstJob uint32, NoJobs uint32, Level uint32, pJob *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumJobsA.Addr(), uintptr(hPrinter), uintptr(FirstJob), uintptr(NoJobs), uintptr(Level), uintptr(unsafe.Pointer(pJob)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+func EnumJobsA(hPrinter PRINTER_HANDLE, FirstJob uint32, NoJobs uint32, Level uint32, pJob []byte, pcbNeeded *uint32, pcReturned *uint32) error {
+	var _pJob *byte
+	if len(pJob) > 0 {
+		_pJob = &pJob[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procEnumJobsA.Addr(), uintptr(hPrinter), uintptr(FirstJob), uintptr(NoJobs), uintptr(Level), uintptr(unsafe.Pointer(_pJob)), uintptr(len(pJob)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -856,63 +880,95 @@ func EnumJobsA(hPrinter PRINTER_HANDLE, FirstJob uint32, NoJobs uint32, Level ui
 
 // EnumMonitors calls winspool.drv!EnumMonitorsW.
 // https://learn.microsoft.com/windows/win32/printdocs/enummonitors
-func EnumMonitors(pName string, Level uint32, pMonitor *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
+func EnumMonitors(pName string, Level uint32, pMonitor []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
 	_pName := win32.UTF16Ptr(pName)
-	r1, _, _ := syscall.SyscallN(procEnumMonitors.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pMonitor)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+	var _pMonitor *byte
+	if len(pMonitor) > 0 {
+		_pMonitor = &pMonitor[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumMonitors.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(_pMonitor)), uintptr(len(pMonitor)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	return r1 != 0
 }
 
 // EnumMonitorsA calls winspool.drv!EnumMonitorsA.
 // https://learn.microsoft.com/windows/win32/printdocs/enummonitors
-func EnumMonitorsA(pName foundation.PSTR, Level uint32, pMonitor *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procEnumMonitorsA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(pMonitor)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+func EnumMonitorsA(pName foundation.PSTR, Level uint32, pMonitor []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
+	var _pMonitor *byte
+	if len(pMonitor) > 0 {
+		_pMonitor = &pMonitor[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumMonitorsA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(_pMonitor)), uintptr(len(pMonitor)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	return r1 != 0
 }
 
 // EnumPorts calls winspool.drv!EnumPortsW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumports
-func EnumPorts(pName string, Level uint32, pPort *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
+func EnumPorts(pName string, Level uint32, pPort []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
 	_pName := win32.UTF16Ptr(pName)
-	r1, _, _ := syscall.SyscallN(procEnumPorts.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(pPort)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+	var _pPort *byte
+	if len(pPort) > 0 {
+		_pPort = &pPort[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumPorts.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(Level), uintptr(unsafe.Pointer(_pPort)), uintptr(len(pPort)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	return r1 != 0
 }
 
 // EnumPortsA calls winspool.drv!EnumPortsA.
 // https://learn.microsoft.com/windows/win32/printdocs/enumports
-func EnumPortsA(pName foundation.PSTR, Level uint32, pPort *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procEnumPortsA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(pPort)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+func EnumPortsA(pName foundation.PSTR, Level uint32, pPort []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
+	var _pPort *byte
+	if len(pPort) > 0 {
+		_pPort = &pPort[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumPortsA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(Level), uintptr(unsafe.Pointer(_pPort)), uintptr(len(pPort)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	return r1 != 0
 }
 
 // EnumPrintProcessorDatatypes calls winspool.drv!EnumPrintProcessorDatatypesW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessordatatypes
-func EnumPrintProcessorDatatypes(pName string, pPrintProcessorName string, Level uint32, pDatatypes *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
+func EnumPrintProcessorDatatypes(pName string, pPrintProcessorName string, Level uint32, pDatatypes []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
 	_pName := win32.UTF16Ptr(pName)
 	_pPrintProcessorName := win32.UTF16Ptr(pPrintProcessorName)
-	r1, _, _ := syscall.SyscallN(procEnumPrintProcessorDatatypes.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pPrintProcessorName)), uintptr(Level), uintptr(unsafe.Pointer(pDatatypes)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+	var _pDatatypes *byte
+	if len(pDatatypes) > 0 {
+		_pDatatypes = &pDatatypes[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumPrintProcessorDatatypes.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pPrintProcessorName)), uintptr(Level), uintptr(unsafe.Pointer(_pDatatypes)), uintptr(len(pDatatypes)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	return r1 != 0
 }
 
 // EnumPrintProcessorDatatypesA calls winspool.drv!EnumPrintProcessorDatatypesA.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessordatatypes
-func EnumPrintProcessorDatatypesA(pName foundation.PSTR, pPrintProcessorName foundation.PSTR, Level uint32, pDatatypes *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procEnumPrintProcessorDatatypesA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pPrintProcessorName)), uintptr(Level), uintptr(unsafe.Pointer(pDatatypes)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+func EnumPrintProcessorDatatypesA(pName foundation.PSTR, pPrintProcessorName foundation.PSTR, Level uint32, pDatatypes []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
+	var _pDatatypes *byte
+	if len(pDatatypes) > 0 {
+		_pDatatypes = &pDatatypes[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumPrintProcessorDatatypesA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pPrintProcessorName)), uintptr(Level), uintptr(unsafe.Pointer(_pDatatypes)), uintptr(len(pDatatypes)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	return r1 != 0
 }
 
 // EnumPrintProcessors calls winspool.drv!EnumPrintProcessorsW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessors
-func EnumPrintProcessors(pName string, pEnvironment string, Level uint32, pPrintProcessorInfo *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
+func EnumPrintProcessors(pName string, pEnvironment string, Level uint32, pPrintProcessorInfo []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
 	_pName := win32.UTF16Ptr(pName)
 	_pEnvironment := win32.UTF16Ptr(pEnvironment)
-	r1, _, _ := syscall.SyscallN(procEnumPrintProcessors.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pPrintProcessorInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+	var _pPrintProcessorInfo *byte
+	if len(pPrintProcessorInfo) > 0 {
+		_pPrintProcessorInfo = &pPrintProcessorInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumPrintProcessors.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(_pPrintProcessorInfo)), uintptr(len(pPrintProcessorInfo)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	return r1 != 0
 }
 
 // EnumPrintProcessorsA calls winspool.drv!EnumPrintProcessorsA.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessors
-func EnumPrintProcessorsA(pName foundation.PSTR, pEnvironment foundation.PSTR, Level uint32, pPrintProcessorInfo *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procEnumPrintProcessorsA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pPrintProcessorInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+func EnumPrintProcessorsA(pName foundation.PSTR, pEnvironment foundation.PSTR, Level uint32, pPrintProcessorInfo []byte, pcbNeeded *uint32, pcReturned *uint32) bool {
+	var _pPrintProcessorInfo *byte
+	if len(pPrintProcessorInfo) > 0 {
+		_pPrintProcessorInfo = &pPrintProcessorInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumPrintProcessorsA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(_pPrintProcessorInfo)), uintptr(len(pPrintProcessorInfo)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	return r1 != 0
 }
 
@@ -940,25 +996,37 @@ func EnumPrinterDataA(hPrinter PRINTER_HANDLE, dwIndex uint32, pValueName founda
 
 // EnumPrinterDataEx calls winspool.drv!EnumPrinterDataExW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprinterdataex
-func EnumPrinterDataEx(hPrinter PRINTER_HANDLE, pKeyName string, pEnumValues *byte, cbEnumValues uint32, pcbEnumValues *uint32, pnEnumValues *uint32) uint32 {
+func EnumPrinterDataEx(hPrinter PRINTER_HANDLE, pKeyName string, pEnumValues []byte, pcbEnumValues *uint32, pnEnumValues *uint32) uint32 {
 	_pKeyName := win32.UTF16Ptr(pKeyName)
-	r1, _, _ := syscall.SyscallN(procEnumPrinterDataEx.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pKeyName)), uintptr(unsafe.Pointer(pEnumValues)), uintptr(cbEnumValues), uintptr(unsafe.Pointer(pcbEnumValues)), uintptr(unsafe.Pointer(pnEnumValues)))
+	var _pEnumValues *byte
+	if len(pEnumValues) > 0 {
+		_pEnumValues = &pEnumValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumPrinterDataEx.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pKeyName)), uintptr(unsafe.Pointer(_pEnumValues)), uintptr(len(pEnumValues)), uintptr(unsafe.Pointer(pcbEnumValues)), uintptr(unsafe.Pointer(pnEnumValues)))
 	return uint32(r1)
 }
 
 // EnumPrinterDataExA calls winspool.drv!EnumPrinterDataExA.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprinterdataex
-func EnumPrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pEnumValues *byte, cbEnumValues uint32, pcbEnumValues *uint32, pnEnumValues *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procEnumPrinterDataExA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pKeyName)), uintptr(unsafe.Pointer(pEnumValues)), uintptr(cbEnumValues), uintptr(unsafe.Pointer(pcbEnumValues)), uintptr(unsafe.Pointer(pnEnumValues)))
+func EnumPrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pEnumValues []byte, pcbEnumValues *uint32, pnEnumValues *uint32) uint32 {
+	var _pEnumValues *byte
+	if len(pEnumValues) > 0 {
+		_pEnumValues = &pEnumValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(procEnumPrinterDataExA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pKeyName)), uintptr(unsafe.Pointer(_pEnumValues)), uintptr(len(pEnumValues)), uintptr(unsafe.Pointer(pcbEnumValues)), uintptr(unsafe.Pointer(pnEnumValues)))
 	return uint32(r1)
 }
 
 // EnumPrinterDrivers calls winspool.drv!EnumPrinterDriversW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprinterdrivers
-func EnumPrinterDrivers(pName string, pEnvironment string, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) error {
+func EnumPrinterDrivers(pName string, pEnvironment string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32, pcReturned *uint32) error {
 	_pName := win32.UTF16Ptr(pName)
 	_pEnvironment := win32.UTF16Ptr(pEnvironment)
-	r1, _, e1 := syscall.SyscallN(procEnumPrinterDrivers.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+	var _pDriverInfo *byte
+	if len(pDriverInfo) > 0 {
+		_pDriverInfo = &pDriverInfo[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procEnumPrinterDrivers.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(_pDriverInfo)), uintptr(len(pDriverInfo)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -967,8 +1035,12 @@ func EnumPrinterDrivers(pName string, pEnvironment string, Level uint32, pDriver
 
 // EnumPrinterDriversA calls winspool.drv!EnumPrinterDriversA.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprinterdrivers
-func EnumPrinterDriversA(pName foundation.PSTR, pEnvironment foundation.PSTR, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumPrinterDriversA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+func EnumPrinterDriversA(pName foundation.PSTR, pEnvironment foundation.PSTR, Level uint32, pDriverInfo []byte, pcbNeeded *uint32, pcReturned *uint32) error {
+	var _pDriverInfo *byte
+	if len(pDriverInfo) > 0 {
+		_pDriverInfo = &pDriverInfo[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procEnumPrinterDriversA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(_pDriverInfo)), uintptr(len(pDriverInfo)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -992,9 +1064,13 @@ func EnumPrinterKeyA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pSubkey 
 
 // EnumPrinters calls winspool.drv!EnumPrintersW.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprinters
-func EnumPrinters(Flags uint32, Name string, Level uint32, pPrinterEnum *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) error {
+func EnumPrinters(Flags uint32, Name string, Level uint32, pPrinterEnum []byte, pcbNeeded *uint32, pcReturned *uint32) error {
 	_Name := win32.UTF16Ptr(Name)
-	r1, _, e1 := syscall.SyscallN(procEnumPrinters.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(_Name)), uintptr(Level), uintptr(unsafe.Pointer(pPrinterEnum)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+	var _pPrinterEnum *byte
+	if len(pPrinterEnum) > 0 {
+		_pPrinterEnum = &pPrinterEnum[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procEnumPrinters.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(_Name)), uintptr(Level), uintptr(unsafe.Pointer(_pPrinterEnum)), uintptr(len(pPrinterEnum)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1003,8 +1079,12 @@ func EnumPrinters(Flags uint32, Name string, Level uint32, pPrinterEnum *byte, c
 
 // EnumPrintersA calls winspool.drv!EnumPrintersA.
 // https://learn.microsoft.com/windows/win32/printdocs/enumprinters
-func EnumPrintersA(Flags uint32, Name foundation.PSTR, Level uint32, pPrinterEnum *byte, cbBuf uint32, pcbNeeded *uint32, pcReturned *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEnumPrintersA.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(Name)), uintptr(Level), uintptr(unsafe.Pointer(pPrinterEnum)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
+func EnumPrintersA(Flags uint32, Name foundation.PSTR, Level uint32, pPrinterEnum []byte, pcbNeeded *uint32, pcReturned *uint32) error {
+	var _pPrinterEnum *byte
+	if len(pPrinterEnum) > 0 {
+		_pPrinterEnum = &pPrinterEnum[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procEnumPrintersA.Addr(), uintptr(Flags), uintptr(unsafe.Pointer(Name)), uintptr(Level), uintptr(unsafe.Pointer(_pPrinterEnum)), uintptr(len(pPrinterEnum)), uintptr(unsafe.Pointer(pcbNeeded)), uintptr(unsafe.Pointer(pcReturned)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1040,8 +1120,12 @@ func FindNextPrinterChangeNotification(hChange FINDPRINTERCHANGENOTIFICATION_HAN
 
 // FlushPrinter calls winspool.drv!FlushPrinter.
 // https://learn.microsoft.com/windows/win32/printdocs/flushprinter
-func FlushPrinter(hPrinter PRINTER_HANDLE, pBuf unsafe.Pointer, cbBuf uint32, pcWritten *uint32, cSleep uint32) bool {
-	r1, _, _ := syscall.SyscallN(procFlushPrinter.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pBuf)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcWritten)), uintptr(cSleep))
+func FlushPrinter(hPrinter PRINTER_HANDLE, pBuf []byte, pcWritten *uint32, cSleep uint32) bool {
+	var _pBuf *byte
+	if len(pBuf) > 0 {
+		_pBuf = &pBuf[0]
+	}
+	r1, _, _ := syscall.SyscallN(procFlushPrinter.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pBuf)), uintptr(len(pBuf)), uintptr(unsafe.Pointer(pcWritten)), uintptr(cSleep))
 	return r1 != 0
 }
 
@@ -1195,30 +1279,46 @@ func GetDefaultPrinterA(pszBuffer foundation.PSTR, pcchBuffer *uint32) bool {
 
 // GetForm calls winspool.drv!GetFormW.
 // https://learn.microsoft.com/windows/win32/printdocs/getform
-func GetForm(hPrinter PRINTER_HANDLE, pFormName string, Level uint32, pForm *byte, cbBuf uint32, pcbNeeded *uint32) bool {
+func GetForm(hPrinter PRINTER_HANDLE, pFormName string, Level uint32, pForm []byte, pcbNeeded *uint32) bool {
 	_pFormName := win32.UTF16Ptr(pFormName)
-	r1, _, _ := syscall.SyscallN(procGetForm.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pFormName)), uintptr(Level), uintptr(unsafe.Pointer(pForm)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+	var _pForm *byte
+	if len(pForm) > 0 {
+		_pForm = &pForm[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetForm.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pFormName)), uintptr(Level), uintptr(unsafe.Pointer(_pForm)), uintptr(len(pForm)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return r1 != 0
 }
 
 // GetFormA calls winspool.drv!GetFormA.
 // https://learn.microsoft.com/windows/win32/printdocs/getform
-func GetFormA(hPrinter PRINTER_HANDLE, pFormName foundation.PSTR, Level uint32, pForm *byte, cbBuf uint32, pcbNeeded *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procGetFormA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pFormName)), uintptr(Level), uintptr(unsafe.Pointer(pForm)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+func GetFormA(hPrinter PRINTER_HANDLE, pFormName foundation.PSTR, Level uint32, pForm []byte, pcbNeeded *uint32) bool {
+	var _pForm *byte
+	if len(pForm) > 0 {
+		_pForm = &pForm[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetFormA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pFormName)), uintptr(Level), uintptr(unsafe.Pointer(_pForm)), uintptr(len(pForm)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return r1 != 0
 }
 
 // GetJob calls winspool.drv!GetJobW.
 // https://learn.microsoft.com/windows/win32/printdocs/getjob
-func GetJob(hPrinter PRINTER_HANDLE, JobId uint32, Level uint32, pJob *byte, cbBuf uint32, pcbNeeded *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procGetJob.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(Level), uintptr(unsafe.Pointer(pJob)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+func GetJob(hPrinter PRINTER_HANDLE, JobId uint32, Level uint32, pJob []byte, pcbNeeded *uint32) bool {
+	var _pJob *byte
+	if len(pJob) > 0 {
+		_pJob = &pJob[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetJob.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(Level), uintptr(unsafe.Pointer(_pJob)), uintptr(len(pJob)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return r1 != 0
 }
 
 // GetJobA calls winspool.drv!GetJobA.
 // https://learn.microsoft.com/windows/win32/printdocs/getjob
-func GetJobA(hPrinter PRINTER_HANDLE, JobId uint32, Level uint32, pJob *byte, cbBuf uint32, pcbNeeded *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procGetJobA.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(Level), uintptr(unsafe.Pointer(pJob)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+func GetJobA(hPrinter PRINTER_HANDLE, JobId uint32, Level uint32, pJob []byte, pcbNeeded *uint32) bool {
+	var _pJob *byte
+	if len(pJob) > 0 {
+		_pJob = &pJob[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetJobA.Addr(), uintptr(hPrinter), uintptr(JobId), uintptr(Level), uintptr(unsafe.Pointer(_pJob)), uintptr(len(pJob)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return r1 != 0
 }
 
@@ -1230,9 +1330,13 @@ func GetJobAttributes(pPrinterName string, pDevmode *graphicsgdi.DEVMODEW, pAttr
 }
 
 // GetJobAttributesEx calls SPOOLSS!GetJobAttributesEx.
-func GetJobAttributesEx(pPrinterName string, pDevmode *graphicsgdi.DEVMODEW, dwLevel uint32, pAttributeInfo *byte, nSize uint32, dwFlags uint32) bool {
+func GetJobAttributesEx(pPrinterName string, pDevmode *graphicsgdi.DEVMODEW, dwLevel uint32, pAttributeInfo []byte, dwFlags uint32) bool {
 	_pPrinterName := win32.UTF16Ptr(pPrinterName)
-	r1, _, _ := syscall.SyscallN(procGetJobAttributesEx.Addr(), uintptr(unsafe.Pointer(_pPrinterName)), uintptr(unsafe.Pointer(pDevmode)), uintptr(dwLevel), uintptr(unsafe.Pointer(pAttributeInfo)), uintptr(nSize), uintptr(dwFlags))
+	var _pAttributeInfo *byte
+	if len(pAttributeInfo) > 0 {
+		_pAttributeInfo = &pAttributeInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetJobAttributesEx.Addr(), uintptr(unsafe.Pointer(_pPrinterName)), uintptr(unsafe.Pointer(pDevmode)), uintptr(dwLevel), uintptr(unsafe.Pointer(_pAttributeInfo)), uintptr(len(pAttributeInfo)), uintptr(dwFlags))
 	return r1 != 0
 }
 
@@ -1259,24 +1363,36 @@ func GetPrintOutputInfo(hWnd foundation.HWND, pszPrinter string, phFile *foundat
 
 // GetPrintProcessorDirectory calls winspool.drv!GetPrintProcessorDirectoryW.
 // https://learn.microsoft.com/windows/win32/printdocs/getprintprocessordirectory
-func GetPrintProcessorDirectory(pName string, pEnvironment string, Level uint32, pPrintProcessorInfo *byte, cbBuf uint32, pcbNeeded *uint32) bool {
+func GetPrintProcessorDirectory(pName string, pEnvironment string, Level uint32, pPrintProcessorInfo []byte, pcbNeeded *uint32) bool {
 	_pName := win32.UTF16Ptr(pName)
 	_pEnvironment := win32.UTF16Ptr(pEnvironment)
-	r1, _, _ := syscall.SyscallN(procGetPrintProcessorDirectory.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pPrintProcessorInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+	var _pPrintProcessorInfo *byte
+	if len(pPrintProcessorInfo) > 0 {
+		_pPrintProcessorInfo = &pPrintProcessorInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPrintProcessorDirectory.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(_pPrintProcessorInfo)), uintptr(len(pPrintProcessorInfo)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return r1 != 0
 }
 
 // GetPrintProcessorDirectoryA calls winspool.drv!GetPrintProcessorDirectoryA.
 // https://learn.microsoft.com/windows/win32/printdocs/getprintprocessordirectory
-func GetPrintProcessorDirectoryA(pName foundation.PSTR, pEnvironment foundation.PSTR, Level uint32, pPrintProcessorInfo *byte, cbBuf uint32, pcbNeeded *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procGetPrintProcessorDirectoryA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pPrintProcessorInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+func GetPrintProcessorDirectoryA(pName foundation.PSTR, pEnvironment foundation.PSTR, Level uint32, pPrintProcessorInfo []byte, pcbNeeded *uint32) bool {
+	var _pPrintProcessorInfo *byte
+	if len(pPrintProcessorInfo) > 0 {
+		_pPrintProcessorInfo = &pPrintProcessorInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPrintProcessorDirectoryA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(_pPrintProcessorInfo)), uintptr(len(pPrintProcessorInfo)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return r1 != 0
 }
 
 // GetPrinter calls winspool.drv!GetPrinterW.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinter
-func GetPrinter(hPrinter PRINTER_HANDLE, Level uint32, pPrinter *byte, cbBuf uint32, pcbNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetPrinter.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pPrinter)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+func GetPrinter(hPrinter PRINTER_HANDLE, Level uint32, pPrinter []byte, pcbNeeded *uint32) error {
+	var _pPrinter *byte
+	if len(pPrinter) > 0 {
+		_pPrinter = &pPrinter[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetPrinter.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(_pPrinter)), uintptr(len(pPrinter)), uintptr(unsafe.Pointer(pcbNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1285,8 +1401,12 @@ func GetPrinter(hPrinter PRINTER_HANDLE, Level uint32, pPrinter *byte, cbBuf uin
 
 // GetPrinterA calls winspool.drv!GetPrinterA.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinter
-func GetPrinterA(hPrinter PRINTER_HANDLE, Level uint32, pPrinter *byte, cbBuf uint32, pcbNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetPrinterA.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(pPrinter)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+func GetPrinterA(hPrinter PRINTER_HANDLE, Level uint32, pPrinter []byte, pcbNeeded *uint32) error {
+	var _pPrinter *byte
+	if len(pPrinter) > 0 {
+		_pPrinter = &pPrinter[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetPrinterA.Addr(), uintptr(hPrinter), uintptr(Level), uintptr(unsafe.Pointer(_pPrinter)), uintptr(len(pPrinter)), uintptr(unsafe.Pointer(pcbNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -1295,77 +1415,117 @@ func GetPrinterA(hPrinter PRINTER_HANDLE, Level uint32, pPrinter *byte, cbBuf ui
 
 // GetPrinterData calls winspool.drv!GetPrinterDataW.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdata
-func GetPrinterData(hPrinter PRINTER_HANDLE, pValueName string, pType *uint32, pData *byte, nSize uint32, pcbNeeded *uint32) uint32 {
+func GetPrinterData(hPrinter PRINTER_HANDLE, pValueName string, pType *uint32, pData []byte, pcbNeeded *uint32) uint32 {
 	_pValueName := win32.UTF16Ptr(pValueName)
-	r1, _, _ := syscall.SyscallN(procGetPrinterData.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pData)), uintptr(nSize), uintptr(unsafe.Pointer(pcbNeeded)))
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPrinterData.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return uint32(r1)
 }
 
 // GetPrinterDataA calls winspool.drv!GetPrinterDataA.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdata
-func GetPrinterDataA(hPrinter PRINTER_HANDLE, pValueName foundation.PSTR, pType *uint32, pData *byte, nSize uint32, pcbNeeded *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetPrinterDataA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pData)), uintptr(nSize), uintptr(unsafe.Pointer(pcbNeeded)))
+func GetPrinterDataA(hPrinter PRINTER_HANDLE, pValueName foundation.PSTR, pType *uint32, pData []byte, pcbNeeded *uint32) uint32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPrinterDataA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return uint32(r1)
 }
 
 // GetPrinterDataEx calls winspool.drv!GetPrinterDataExW.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdataex
-func GetPrinterDataEx(hPrinter PRINTER_HANDLE, pKeyName string, pValueName string, pType *uint32, pData *byte, nSize uint32, pcbNeeded *uint32) uint32 {
+func GetPrinterDataEx(hPrinter PRINTER_HANDLE, pKeyName string, pValueName string, pType *uint32, pData []byte, pcbNeeded *uint32) uint32 {
 	_pKeyName := win32.UTF16Ptr(pKeyName)
 	_pValueName := win32.UTF16Ptr(pValueName)
-	r1, _, _ := syscall.SyscallN(procGetPrinterDataEx.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pKeyName)), uintptr(unsafe.Pointer(_pValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pData)), uintptr(nSize), uintptr(unsafe.Pointer(pcbNeeded)))
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPrinterDataEx.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pKeyName)), uintptr(unsafe.Pointer(_pValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return uint32(r1)
 }
 
 // GetPrinterDataExA calls winspool.drv!GetPrinterDataExA.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdataex
-func GetPrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pValueName foundation.PSTR, pType *uint32, pData *byte, nSize uint32, pcbNeeded *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procGetPrinterDataExA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pKeyName)), uintptr(unsafe.Pointer(pValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(pData)), uintptr(nSize), uintptr(unsafe.Pointer(pcbNeeded)))
+func GetPrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pValueName foundation.PSTR, pType *uint32, pData []byte, pcbNeeded *uint32) uint32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPrinterDataExA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pKeyName)), uintptr(unsafe.Pointer(pValueName)), uintptr(unsafe.Pointer(pType)), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return uint32(r1)
 }
 
 // GetPrinterDriver calls winspool.drv!GetPrinterDriverW.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver
-func GetPrinterDriver(hPrinter PRINTER_HANDLE, pEnvironment string, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32) bool {
+func GetPrinterDriver(hPrinter PRINTER_HANDLE, pEnvironment string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32) bool {
 	_pEnvironment := win32.UTF16Ptr(pEnvironment)
-	r1, _, _ := syscall.SyscallN(procGetPrinterDriver.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+	var _pDriverInfo *byte
+	if len(pDriverInfo) > 0 {
+		_pDriverInfo = &pDriverInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPrinterDriver.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(_pDriverInfo)), uintptr(len(pDriverInfo)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return r1 != 0
 }
 
 // GetPrinterDriver2 calls winspool.drv!GetPrinterDriver2W.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver2
-func GetPrinterDriver2(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pEnvironment string, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32) bool {
+func GetPrinterDriver2(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pEnvironment string, Level uint32, pDriverInfo []byte, pcbNeeded *uint32) bool {
 	_pEnvironment := win32.UTF16Ptr(pEnvironment)
-	r1, _, _ := syscall.SyscallN(procGetPrinterDriver2.Addr(), uintptr(hWnd), uintptr(hPrinter), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+	var _pDriverInfo *byte
+	if len(pDriverInfo) > 0 {
+		_pDriverInfo = &pDriverInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPrinterDriver2.Addr(), uintptr(hWnd), uintptr(hPrinter), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(_pDriverInfo)), uintptr(len(pDriverInfo)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return r1 != 0
 }
 
 // GetPrinterDriver2A calls winspool.drv!GetPrinterDriver2A.
-func GetPrinterDriver2A(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pEnvironment foundation.PSTR, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procGetPrinterDriver2A.Addr(), uintptr(hWnd), uintptr(hPrinter), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+func GetPrinterDriver2A(hWnd foundation.HWND, hPrinter PRINTER_HANDLE, pEnvironment foundation.PSTR, Level uint32, pDriverInfo []byte, pcbNeeded *uint32) bool {
+	var _pDriverInfo *byte
+	if len(pDriverInfo) > 0 {
+		_pDriverInfo = &pDriverInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPrinterDriver2A.Addr(), uintptr(hWnd), uintptr(hPrinter), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(_pDriverInfo)), uintptr(len(pDriverInfo)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return r1 != 0
 }
 
 // GetPrinterDriverA calls winspool.drv!GetPrinterDriverA.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver
-func GetPrinterDriverA(hPrinter PRINTER_HANDLE, pEnvironment foundation.PSTR, Level uint32, pDriverInfo *byte, cbBuf uint32, pcbNeeded *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procGetPrinterDriverA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverInfo)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+func GetPrinterDriverA(hPrinter PRINTER_HANDLE, pEnvironment foundation.PSTR, Level uint32, pDriverInfo []byte, pcbNeeded *uint32) bool {
+	var _pDriverInfo *byte
+	if len(pDriverInfo) > 0 {
+		_pDriverInfo = &pDriverInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPrinterDriverA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(_pDriverInfo)), uintptr(len(pDriverInfo)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return r1 != 0
 }
 
 // GetPrinterDriverDirectory calls winspool.drv!GetPrinterDriverDirectoryW.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriverdirectory
-func GetPrinterDriverDirectory(pName string, pEnvironment string, Level uint32, pDriverDirectory *byte, cbBuf uint32, pcbNeeded *uint32) bool {
+func GetPrinterDriverDirectory(pName string, pEnvironment string, Level uint32, pDriverDirectory []byte, pcbNeeded *uint32) bool {
 	_pName := win32.UTF16Ptr(pName)
 	_pEnvironment := win32.UTF16Ptr(pEnvironment)
-	r1, _, _ := syscall.SyscallN(procGetPrinterDriverDirectory.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverDirectory)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+	var _pDriverDirectory *byte
+	if len(pDriverDirectory) > 0 {
+		_pDriverDirectory = &pDriverDirectory[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPrinterDriverDirectory.Addr(), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(_pDriverDirectory)), uintptr(len(pDriverDirectory)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return r1 != 0
 }
 
 // GetPrinterDriverDirectoryA calls winspool.drv!GetPrinterDriverDirectoryA.
 // https://learn.microsoft.com/windows/win32/printdocs/getprinterdriverdirectory
-func GetPrinterDriverDirectoryA(pName foundation.PSTR, pEnvironment foundation.PSTR, Level uint32, pDriverDirectory *byte, cbBuf uint32, pcbNeeded *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procGetPrinterDriverDirectoryA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(pDriverDirectory)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcbNeeded)))
+func GetPrinterDriverDirectoryA(pName foundation.PSTR, pEnvironment foundation.PSTR, Level uint32, pDriverDirectory []byte, pcbNeeded *uint32) bool {
+	var _pDriverDirectory *byte
+	if len(pDriverDirectory) > 0 {
+		_pDriverDirectory = &pDriverDirectory[0]
+	}
+	r1, _, _ := syscall.SyscallN(procGetPrinterDriverDirectoryA.Addr(), uintptr(unsafe.Pointer(pName)), uintptr(unsafe.Pointer(pEnvironment)), uintptr(Level), uintptr(unsafe.Pointer(_pDriverDirectory)), uintptr(len(pDriverDirectory)), uintptr(unsafe.Pointer(pcbNeeded)))
 	return r1 != 0
 }
 
@@ -1485,8 +1645,16 @@ func PartialReplyPrinterChangeNotification(hPrinter PRINTER_HANDLE, pDataSrc *PR
 }
 
 // PlayGdiScriptOnPrinterIC calls winspool.drv!PlayGdiScriptOnPrinterIC.
-func PlayGdiScriptOnPrinterIC(hPrinterIC foundation.HANDLE, pIn *byte, cIn uint32, pOut *byte, cOut uint32, ul uint32) bool {
-	r1, _, _ := syscall.SyscallN(procPlayGdiScriptOnPrinterIC.Addr(), uintptr(hPrinterIC), uintptr(unsafe.Pointer(pIn)), uintptr(cIn), uintptr(unsafe.Pointer(pOut)), uintptr(cOut), uintptr(ul))
+func PlayGdiScriptOnPrinterIC(hPrinterIC foundation.HANDLE, pIn []byte, pOut []byte, ul uint32) bool {
+	var _pIn *byte
+	if len(pIn) > 0 {
+		_pIn = &pIn[0]
+	}
+	var _pOut *byte
+	if len(pOut) > 0 {
+		_pOut = &pOut[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPlayGdiScriptOnPrinterIC.Addr(), uintptr(hPrinterIC), uintptr(unsafe.Pointer(_pIn)), uintptr(len(pIn)), uintptr(unsafe.Pointer(_pOut)), uintptr(len(pOut)), uintptr(ul))
 	return r1 != 0
 }
 
@@ -1525,8 +1693,12 @@ func ProvidorFindFirstPrinterChangeNotification(hPrinter PRINTER_HANDLE, fdwFlag
 
 // ReadPrinter calls winspool.drv!ReadPrinter.
 // https://learn.microsoft.com/windows/win32/printdocs/readprinter
-func ReadPrinter(hPrinter PRINTER_HANDLE, pBuf unsafe.Pointer, cbBuf uint32, pNoBytesRead *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procReadPrinter.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pBuf)), uintptr(cbBuf), uintptr(unsafe.Pointer(pNoBytesRead)))
+func ReadPrinter(hPrinter PRINTER_HANDLE, pBuf []byte, pNoBytesRead *uint32) bool {
+	var _pBuf *byte
+	if len(pBuf) > 0 {
+		_pBuf = &pBuf[0]
+	}
+	r1, _, _ := syscall.SyscallN(procReadPrinter.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pBuf)), uintptr(len(pBuf)), uintptr(unsafe.Pointer(pNoBytesRead)))
 	return r1 != 0
 }
 
@@ -1746,32 +1918,48 @@ func SetPrinterA(hPrinter PRINTER_HANDLE, Level uint32, pPrinter *byte, Command 
 
 // SetPrinterData calls winspool.drv!SetPrinterDataW.
 // https://learn.microsoft.com/windows/win32/printdocs/setprinterdata
-func SetPrinterData(hPrinter PRINTER_HANDLE, pValueName string, Type uint32, pData *byte, cbData uint32) uint32 {
+func SetPrinterData(hPrinter PRINTER_HANDLE, pValueName string, Type uint32, pData []byte) uint32 {
 	_pValueName := win32.UTF16Ptr(pValueName)
-	r1, _, _ := syscall.SyscallN(procSetPrinterData.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pValueName)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(cbData))
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetPrinterData.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pValueName)), uintptr(Type), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return uint32(r1)
 }
 
 // SetPrinterDataA calls winspool.drv!SetPrinterDataA.
 // https://learn.microsoft.com/windows/win32/printdocs/setprinterdata
-func SetPrinterDataA(hPrinter PRINTER_HANDLE, pValueName foundation.PSTR, Type uint32, pData *byte, cbData uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetPrinterDataA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pValueName)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(cbData))
+func SetPrinterDataA(hPrinter PRINTER_HANDLE, pValueName foundation.PSTR, Type uint32, pData []byte) uint32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetPrinterDataA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pValueName)), uintptr(Type), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return uint32(r1)
 }
 
 // SetPrinterDataEx calls winspool.drv!SetPrinterDataExW.
 // https://learn.microsoft.com/windows/win32/printdocs/setprinterdataex
-func SetPrinterDataEx(hPrinter PRINTER_HANDLE, pKeyName string, pValueName string, Type uint32, pData *byte, cbData uint32) uint32 {
+func SetPrinterDataEx(hPrinter PRINTER_HANDLE, pKeyName string, pValueName string, Type uint32, pData []byte) uint32 {
 	_pKeyName := win32.UTF16Ptr(pKeyName)
 	_pValueName := win32.UTF16Ptr(pValueName)
-	r1, _, _ := syscall.SyscallN(procSetPrinterDataEx.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pKeyName)), uintptr(unsafe.Pointer(_pValueName)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(cbData))
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetPrinterDataEx.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pKeyName)), uintptr(unsafe.Pointer(_pValueName)), uintptr(Type), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return uint32(r1)
 }
 
 // SetPrinterDataExA calls winspool.drv!SetPrinterDataExA.
 // https://learn.microsoft.com/windows/win32/printdocs/setprinterdataex
-func SetPrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pValueName foundation.PSTR, Type uint32, pData *byte, cbData uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procSetPrinterDataExA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pKeyName)), uintptr(unsafe.Pointer(pValueName)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(cbData))
+func SetPrinterDataExA(hPrinter PRINTER_HANDLE, pKeyName foundation.PSTR, pValueName foundation.PSTR, Type uint32, pData []byte) uint32 {
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetPrinterDataExA.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pKeyName)), uintptr(unsafe.Pointer(pValueName)), uintptr(Type), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return uint32(r1)
 }
 
@@ -1884,14 +2072,26 @@ func WaitForPrinterChange(hPrinter PRINTER_HANDLE, Flags uint32) uint32 {
 
 // WritePrinter calls winspool.drv!WritePrinter.
 // https://learn.microsoft.com/windows/win32/printdocs/writeprinter
-func WritePrinter(hPrinter PRINTER_HANDLE, pBuf unsafe.Pointer, cbBuf uint32, pcWritten *uint32) bool {
-	r1, _, _ := syscall.SyscallN(procWritePrinter.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(pBuf)), uintptr(cbBuf), uintptr(unsafe.Pointer(pcWritten)))
+func WritePrinter(hPrinter PRINTER_HANDLE, pBuf []byte, pcWritten *uint32) bool {
+	var _pBuf *byte
+	if len(pBuf) > 0 {
+		_pBuf = &pBuf[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWritePrinter.Addr(), uintptr(hPrinter), uintptr(unsafe.Pointer(_pBuf)), uintptr(len(pBuf)), uintptr(unsafe.Pointer(pcWritten)))
 	return r1 != 0
 }
 
 // XcvDataW calls winspool.drv!XcvDataW.
-func XcvDataW(hXcv foundation.HANDLE, pszDataName string, pInputData *byte, cbInputData uint32, pOutputData *byte, cbOutputData uint32, pcbOutputNeeded *uint32, pdwStatus *uint32) bool {
+func XcvDataW(hXcv foundation.HANDLE, pszDataName string, pInputData []byte, pOutputData []byte, pcbOutputNeeded *uint32, pdwStatus *uint32) bool {
 	_pszDataName := win32.UTF16Ptr(pszDataName)
-	r1, _, _ := syscall.SyscallN(procXcvDataW.Addr(), uintptr(hXcv), uintptr(unsafe.Pointer(_pszDataName)), uintptr(unsafe.Pointer(pInputData)), uintptr(cbInputData), uintptr(unsafe.Pointer(pOutputData)), uintptr(cbOutputData), uintptr(unsafe.Pointer(pcbOutputNeeded)), uintptr(unsafe.Pointer(pdwStatus)))
+	var _pInputData *byte
+	if len(pInputData) > 0 {
+		_pInputData = &pInputData[0]
+	}
+	var _pOutputData *byte
+	if len(pOutputData) > 0 {
+		_pOutputData = &pOutputData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procXcvDataW.Addr(), uintptr(hXcv), uintptr(unsafe.Pointer(_pszDataName)), uintptr(unsafe.Pointer(_pInputData)), uintptr(len(pInputData)), uintptr(unsafe.Pointer(_pOutputData)), uintptr(len(pOutputData)), uintptr(unsafe.Pointer(pcbOutputNeeded)), uintptr(unsafe.Pointer(pdwStatus)))
 	return r1 != 0
 }

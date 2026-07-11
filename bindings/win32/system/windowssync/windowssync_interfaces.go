@@ -671,8 +671,12 @@ type IEnumSyncProviderConfigUIInfos struct {
 var IID_IEnumSyncProviderConfigUIInfos = win32.GUID{Data1: 0xf6be2602, Data2: 0x17c6, Data3: 0x4658, Data4: [8]byte{0xa2, 0xd7, 0x68, 0xed, 0x33, 0x30, 0xf6, 0x41}}
 
 // Next dispatches through IEnumSyncProviderConfigUIInfos's vtable slot 3.
-func (self *IEnumSyncProviderConfigUIInfos) Next(cFactories uint32, ppSyncProviderConfigUIInfo **ISyncProviderConfigUIInfo, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cFactories), uintptr(unsafe.Pointer(ppSyncProviderConfigUIInfo)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumSyncProviderConfigUIInfos) Next(ppSyncProviderConfigUIInfo []*ISyncProviderConfigUIInfo, pcFetched *uint32) error {
+	var _ppSyncProviderConfigUIInfo **ISyncProviderConfigUIInfo
+	if len(ppSyncProviderConfigUIInfo) > 0 {
+		_ppSyncProviderConfigUIInfo = &ppSyncProviderConfigUIInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppSyncProviderConfigUIInfo)), uintptr(unsafe.Pointer(_ppSyncProviderConfigUIInfo)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -704,8 +708,12 @@ type IEnumSyncProviderInfos struct {
 var IID_IEnumSyncProviderInfos = win32.GUID{Data1: 0xa04ba850, Data2: 0x5eb1, Data3: 0x460d, Data4: [8]byte{0xa9, 0x73, 0x39, 0x3f, 0xcb, 0x60, 0x8a, 0x11}}
 
 // Next dispatches through IEnumSyncProviderInfos's vtable slot 3.
-func (self *IEnumSyncProviderInfos) Next(cInstances uint32, ppSyncProviderInfo **ISyncProviderInfo, pcFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cInstances), uintptr(unsafe.Pointer(ppSyncProviderInfo)), uintptr(unsafe.Pointer(pcFetched)))
+func (self *IEnumSyncProviderInfos) Next(ppSyncProviderInfo []*ISyncProviderInfo, pcFetched *uint32) error {
+	var _ppSyncProviderInfo **ISyncProviderInfo
+	if len(ppSyncProviderInfo) > 0 {
+		_ppSyncProviderInfo = &ppSyncProviderInfo[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppSyncProviderInfo)), uintptr(unsafe.Pointer(_ppSyncProviderInfo)), uintptr(unsafe.Pointer(pcFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 

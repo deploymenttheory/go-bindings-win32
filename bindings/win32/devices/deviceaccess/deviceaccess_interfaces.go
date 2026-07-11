@@ -56,14 +56,30 @@ type IDeviceIoControl struct {
 var IID_IDeviceIoControl = win32.GUID{Data1: 0x9eefe161, Data2: 0x23ab, Data3: 0x4f18, Data4: [8]byte{0x9b, 0x49, 0x99, 0x1b, 0x58, 0x6a, 0xe9, 0x70}}
 
 // DeviceIoControlSync dispatches through IDeviceIoControl's vtable slot 3.
-func (self *IDeviceIoControl) DeviceIoControlSync(ioControlCode uint32, inputBuffer *byte, inputBufferSize uint32, outputBuffer *byte, outputBufferSize uint32, bytesReturned *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ioControlCode), uintptr(unsafe.Pointer(inputBuffer)), uintptr(inputBufferSize), uintptr(unsafe.Pointer(outputBuffer)), uintptr(outputBufferSize), uintptr(unsafe.Pointer(bytesReturned)))
+func (self *IDeviceIoControl) DeviceIoControlSync(ioControlCode uint32, inputBuffer []byte, outputBuffer []byte, bytesReturned *uint32) error {
+	var _inputBuffer *byte
+	if len(inputBuffer) > 0 {
+		_inputBuffer = &inputBuffer[0]
+	}
+	var _outputBuffer *byte
+	if len(outputBuffer) > 0 {
+		_outputBuffer = &outputBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(ioControlCode), uintptr(unsafe.Pointer(_inputBuffer)), uintptr(len(inputBuffer)), uintptr(unsafe.Pointer(_outputBuffer)), uintptr(len(outputBuffer)), uintptr(unsafe.Pointer(bytesReturned)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // DeviceIoControlAsync dispatches through IDeviceIoControl's vtable slot 4.
-func (self *IDeviceIoControl) DeviceIoControlAsync(ioControlCode uint32, inputBuffer *byte, inputBufferSize uint32, outputBuffer *byte, outputBufferSize uint32, requestCompletionCallback *IDeviceRequestCompletionCallback, cancelContext *uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ioControlCode), uintptr(unsafe.Pointer(inputBuffer)), uintptr(inputBufferSize), uintptr(unsafe.Pointer(outputBuffer)), uintptr(outputBufferSize), uintptr(unsafe.Pointer(requestCompletionCallback)), uintptr(unsafe.Pointer(cancelContext)))
+func (self *IDeviceIoControl) DeviceIoControlAsync(ioControlCode uint32, inputBuffer []byte, outputBuffer []byte, requestCompletionCallback *IDeviceRequestCompletionCallback, cancelContext *uintptr) error {
+	var _inputBuffer *byte
+	if len(inputBuffer) > 0 {
+		_inputBuffer = &inputBuffer[0]
+	}
+	var _outputBuffer *byte
+	if len(outputBuffer) > 0 {
+		_outputBuffer = &outputBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(ioControlCode), uintptr(unsafe.Pointer(_inputBuffer)), uintptr(len(inputBuffer)), uintptr(unsafe.Pointer(_outputBuffer)), uintptr(len(outputBuffer)), uintptr(unsafe.Pointer(requestCompletionCallback)), uintptr(unsafe.Pointer(cancelContext)))
 	return win32.HRESULTError(int32(r1))
 }
 

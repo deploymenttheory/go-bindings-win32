@@ -210,8 +210,16 @@ func (self *IGameInputDevice) SendRawDeviceOutputWithResponse(requestReport *IGa
 }
 
 // ExecuteRawDeviceIoControl dispatches through IGameInputDevice's vtable slot 19.
-func (self *IGameInputDevice) ExecuteRawDeviceIoControl(controlCode uint32, inputBufferSize uintptr, inputBuffer unsafe.Pointer, outputBufferSize uintptr, outputBuffer unsafe.Pointer, outputSize *uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(controlCode), uintptr(inputBufferSize), uintptr(unsafe.Pointer(inputBuffer)), uintptr(outputBufferSize), uintptr(unsafe.Pointer(outputBuffer)), uintptr(unsafe.Pointer(outputSize)))
+func (self *IGameInputDevice) ExecuteRawDeviceIoControl(controlCode uint32, inputBuffer []byte, outputBuffer []byte, outputSize *uintptr) error {
+	var _inputBuffer *byte
+	if len(inputBuffer) > 0 {
+		_inputBuffer = &inputBuffer[0]
+	}
+	var _outputBuffer *byte
+	if len(outputBuffer) > 0 {
+		_outputBuffer = &outputBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(controlCode), uintptr(len(inputBuffer)), uintptr(unsafe.Pointer(_inputBuffer)), uintptr(len(outputBuffer)), uintptr(unsafe.Pointer(_outputBuffer)), uintptr(unsafe.Pointer(outputSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -338,8 +346,12 @@ func (self *IGameInputReading) GetControllerAxisCount() uint32 {
 }
 
 // GetControllerAxisState dispatches through IGameInputReading's vtable slot 9.
-func (self *IGameInputReading) GetControllerAxisState(stateArrayCount uint32, stateArray *float32) uint32 {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(stateArrayCount), uintptr(unsafe.Pointer(stateArray)))
+func (self *IGameInputReading) GetControllerAxisState(stateArray []float32) uint32 {
+	var _stateArray *float32
+	if len(stateArray) > 0 {
+		_stateArray = &stateArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(stateArray)), uintptr(unsafe.Pointer(_stateArray)))
 	return uint32(r1)
 }
 
@@ -350,8 +362,12 @@ func (self *IGameInputReading) GetControllerButtonCount() uint32 {
 }
 
 // GetControllerButtonState dispatches through IGameInputReading's vtable slot 11.
-func (self *IGameInputReading) GetControllerButtonState(stateArrayCount uint32, stateArray *bool) uint32 {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(stateArrayCount), uintptr(unsafe.Pointer(stateArray)))
+func (self *IGameInputReading) GetControllerButtonState(stateArray []bool) uint32 {
+	var _stateArray *bool
+	if len(stateArray) > 0 {
+		_stateArray = &stateArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(len(stateArray)), uintptr(unsafe.Pointer(_stateArray)))
 	return uint32(r1)
 }
 
@@ -362,8 +378,12 @@ func (self *IGameInputReading) GetControllerSwitchCount() uint32 {
 }
 
 // GetControllerSwitchState dispatches through IGameInputReading's vtable slot 13.
-func (self *IGameInputReading) GetControllerSwitchState(stateArrayCount uint32, stateArray *GameInputSwitchPosition) uint32 {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(stateArrayCount), uintptr(unsafe.Pointer(stateArray)))
+func (self *IGameInputReading) GetControllerSwitchState(stateArray []GameInputSwitchPosition) uint32 {
+	var _stateArray *GameInputSwitchPosition
+	if len(stateArray) > 0 {
+		_stateArray = &stateArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(len(stateArray)), uintptr(unsafe.Pointer(_stateArray)))
 	return uint32(r1)
 }
 
@@ -374,8 +394,12 @@ func (self *IGameInputReading) GetKeyCount() uint32 {
 }
 
 // GetKeyState dispatches through IGameInputReading's vtable slot 15.
-func (self *IGameInputReading) GetKeyState(stateArrayCount uint32, stateArray *GameInputKeyState) uint32 {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(stateArrayCount), uintptr(unsafe.Pointer(stateArray)))
+func (self *IGameInputReading) GetKeyState(stateArray []GameInputKeyState) uint32 {
+	var _stateArray *GameInputKeyState
+	if len(stateArray) > 0 {
+		_stateArray = &stateArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(len(stateArray)), uintptr(unsafe.Pointer(_stateArray)))
 	return uint32(r1)
 }
 
@@ -386,7 +410,11 @@ func (self *IGameInputReading) GetTouchCount() uint32 {
 }
 
 // GetTouchState dispatches through IGameInputReading's vtable slot 18.
-func (self *IGameInputReading) GetTouchState(stateArrayCount uint32, stateArray *GameInputTouchState) uint32 {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(stateArrayCount), uintptr(unsafe.Pointer(stateArray)))
+func (self *IGameInputReading) GetTouchState(stateArray []GameInputTouchState) uint32 {
+	var _stateArray *GameInputTouchState
+	if len(stateArray) > 0 {
+		_stateArray = &stateArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(len(stateArray)), uintptr(unsafe.Pointer(_stateArray)))
 	return uint32(r1)
 }

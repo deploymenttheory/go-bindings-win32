@@ -249,14 +249,26 @@ type IDCompositionDelegatedInkTrail struct {
 var IID_IDCompositionDelegatedInkTrail = win32.GUID{Data1: 0xc2448e9b, Data2: 0x547d, Data3: 0x4057, Data4: [8]byte{0x8c, 0xf5, 0x81, 0x44, 0xed, 0xe1, 0xc2, 0xda}}
 
 // AddTrailPoints dispatches through IDCompositionDelegatedInkTrail's vtable slot 3.
-func (self *IDCompositionDelegatedInkTrail) AddTrailPoints(inkPoints *DCompositionInkTrailPoint, inkPointsCount uint32, generationId *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inkPoints)), uintptr(inkPointsCount), uintptr(unsafe.Pointer(generationId)))
+func (self *IDCompositionDelegatedInkTrail) AddTrailPoints(inkPoints []DCompositionInkTrailPoint, generationId *uint32) error {
+	var _inkPoints *DCompositionInkTrailPoint
+	if len(inkPoints) > 0 {
+		_inkPoints = &inkPoints[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_inkPoints)), uintptr(len(inkPoints)), uintptr(unsafe.Pointer(generationId)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // AddTrailPointsWithPrediction dispatches through IDCompositionDelegatedInkTrail's vtable slot 4.
-func (self *IDCompositionDelegatedInkTrail) AddTrailPointsWithPrediction(inkPoints *DCompositionInkTrailPoint, inkPointsCount uint32, predictedInkPoints *DCompositionInkTrailPoint, predictedInkPointsCount uint32, generationId *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(inkPoints)), uintptr(inkPointsCount), uintptr(unsafe.Pointer(predictedInkPoints)), uintptr(predictedInkPointsCount), uintptr(unsafe.Pointer(generationId)))
+func (self *IDCompositionDelegatedInkTrail) AddTrailPointsWithPrediction(inkPoints []DCompositionInkTrailPoint, predictedInkPoints []DCompositionInkTrailPoint, generationId *uint32) error {
+	var _inkPoints *DCompositionInkTrailPoint
+	if len(inkPoints) > 0 {
+		_inkPoints = &inkPoints[0]
+	}
+	var _predictedInkPoints *DCompositionInkTrailPoint
+	if len(predictedInkPoints) > 0 {
+		_predictedInkPoints = &predictedInkPoints[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_inkPoints)), uintptr(len(inkPoints)), uintptr(unsafe.Pointer(_predictedInkPoints)), uintptr(len(predictedInkPoints)), uintptr(unsafe.Pointer(generationId)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -396,8 +408,12 @@ func (self *IDCompositionDevice) CreateMatrixTransform(matrixTransform **IDCompo
 }
 
 // CreateTransformGroup dispatches through IDCompositionDevice's vtable slot 17.
-func (self *IDCompositionDevice) CreateTransformGroup(transforms **IDCompositionTransform, elements uint32, transformGroup **IDCompositionTransform) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transforms)), uintptr(elements), uintptr(unsafe.Pointer(transformGroup)))
+func (self *IDCompositionDevice) CreateTransformGroup(transforms []*IDCompositionTransform, transformGroup **IDCompositionTransform) error {
+	var _transforms **IDCompositionTransform
+	if len(transforms) > 0 {
+		_transforms = &transforms[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_transforms)), uintptr(len(transforms)), uintptr(unsafe.Pointer(transformGroup)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -426,8 +442,12 @@ func (self *IDCompositionDevice) CreateMatrixTransform3D(matrixTransform3D **IDC
 }
 
 // CreateTransform3DGroup dispatches through IDCompositionDevice's vtable slot 22.
-func (self *IDCompositionDevice) CreateTransform3DGroup(transforms3D **IDCompositionTransform3D, elements uint32, transform3DGroup **IDCompositionTransform3D) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transforms3D)), uintptr(elements), uintptr(unsafe.Pointer(transform3DGroup)))
+func (self *IDCompositionDevice) CreateTransform3DGroup(transforms3D []*IDCompositionTransform3D, transform3DGroup **IDCompositionTransform3D) error {
+	var _transforms3D **IDCompositionTransform3D
+	if len(transforms3D) > 0 {
+		_transforms3D = &transforms3D[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_transforms3D)), uintptr(len(transforms3D)), uintptr(unsafe.Pointer(transform3DGroup)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -538,8 +558,12 @@ func (self *IDCompositionDevice2) CreateMatrixTransform(matrixTransform **IDComp
 }
 
 // CreateTransformGroup dispatches through IDCompositionDevice2's vtable slot 15.
-func (self *IDCompositionDevice2) CreateTransformGroup(transforms **IDCompositionTransform, elements uint32, transformGroup **IDCompositionTransform) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transforms)), uintptr(elements), uintptr(unsafe.Pointer(transformGroup)))
+func (self *IDCompositionDevice2) CreateTransformGroup(transforms []*IDCompositionTransform, transformGroup **IDCompositionTransform) error {
+	var _transforms **IDCompositionTransform
+	if len(transforms) > 0 {
+		_transforms = &transforms[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_transforms)), uintptr(len(transforms)), uintptr(unsafe.Pointer(transformGroup)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -568,8 +592,12 @@ func (self *IDCompositionDevice2) CreateMatrixTransform3D(matrixTransform3D **ID
 }
 
 // CreateTransform3DGroup dispatches through IDCompositionDevice2's vtable slot 20.
-func (self *IDCompositionDevice2) CreateTransform3DGroup(transforms3D **IDCompositionTransform3D, elements uint32, transform3DGroup **IDCompositionTransform3D) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(transforms3D)), uintptr(elements), uintptr(unsafe.Pointer(transform3DGroup)))
+func (self *IDCompositionDevice2) CreateTransform3DGroup(transforms3D []*IDCompositionTransform3D, transform3DGroup **IDCompositionTransform3D) error {
+	var _transforms3D **IDCompositionTransform3D
+	if len(transforms3D) > 0 {
+		_transforms3D = &transforms3D[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_transforms3D)), uintptr(len(transforms3D)), uintptr(unsafe.Pointer(transform3DGroup)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -742,8 +770,12 @@ type IDCompositionDynamicTexture struct {
 var IID_IDCompositionDynamicTexture = win32.GUID{Data1: 0xa1de1d3f, Data2: 0x6405, Data3: 0x447f, Data4: [8]byte{0x8e, 0x95, 0x13, 0x83, 0xa3, 0x4b, 0x02, 0x77}}
 
 // SetTexture dispatches through IDCompositionDynamicTexture's vtable slot 3.
-func (self *IDCompositionDynamicTexture) SetTexture(pTexture *IDCompositionTexture, pRects *foundation.RECT, rectCount uintptr) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTexture)), uintptr(unsafe.Pointer(pRects)), uintptr(rectCount))
+func (self *IDCompositionDynamicTexture) SetTexture(pTexture *IDCompositionTexture, pRects []foundation.RECT) error {
+	var _pRects *foundation.RECT
+	if len(pRects) > 0 {
+		_pRects = &pRects[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pTexture)), uintptr(unsafe.Pointer(_pRects)), uintptr(len(pRects)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1388,26 +1420,42 @@ type IDCompositionTableTransferEffect struct {
 var IID_IDCompositionTableTransferEffect = win32.GUID{Data1: 0x9b7e82e2, Data2: 0x69c5, Data3: 0x4eb4, Data4: [8]byte{0xa5, 0xf5, 0xa7, 0x03, 0x3f, 0x51, 0x32, 0xcd}}
 
 // SetRedTable dispatches through IDCompositionTableTransferEffect's vtable slot 4.
-func (self *IDCompositionTableTransferEffect) SetRedTable(tableValues *float32, count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tableValues)), uintptr(count))
+func (self *IDCompositionTableTransferEffect) SetRedTable(tableValues []float32) error {
+	var _tableValues *float32
+	if len(tableValues) > 0 {
+		_tableValues = &tableValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_tableValues)), uintptr(len(tableValues)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetGreenTable dispatches through IDCompositionTableTransferEffect's vtable slot 5.
-func (self *IDCompositionTableTransferEffect) SetGreenTable(tableValues *float32, count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tableValues)), uintptr(count))
+func (self *IDCompositionTableTransferEffect) SetGreenTable(tableValues []float32) error {
+	var _tableValues *float32
+	if len(tableValues) > 0 {
+		_tableValues = &tableValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_tableValues)), uintptr(len(tableValues)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetBlueTable dispatches through IDCompositionTableTransferEffect's vtable slot 6.
-func (self *IDCompositionTableTransferEffect) SetBlueTable(tableValues *float32, count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tableValues)), uintptr(count))
+func (self *IDCompositionTableTransferEffect) SetBlueTable(tableValues []float32) error {
+	var _tableValues *float32
+	if len(tableValues) > 0 {
+		_tableValues = &tableValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_tableValues)), uintptr(len(tableValues)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetAlphaTable dispatches through IDCompositionTableTransferEffect's vtable slot 7.
-func (self *IDCompositionTableTransferEffect) SetAlphaTable(tableValues *float32, count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(tableValues)), uintptr(count))
+func (self *IDCompositionTableTransferEffect) SetAlphaTable(tableValues []float32) error {
+	var _tableValues *float32
+	if len(tableValues) > 0 {
+		_tableValues = &tableValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_tableValues)), uintptr(len(tableValues)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1651,8 +1699,12 @@ func (self *IDCompositionVirtualSurface) Resize(width uint32, height uint32) err
 }
 
 // Trim dispatches through IDCompositionVirtualSurface's vtable slot 9.
-func (self *IDCompositionVirtualSurface) Trim(rectangles *foundation.RECT, count uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(rectangles)), uintptr(count))
+func (self *IDCompositionVirtualSurface) Trim(rectangles []foundation.RECT) error {
+	var _rectangles *foundation.RECT
+	if len(rectangles) > 0 {
+		_rectangles = &rectangles[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_rectangles)), uintptr(len(rectangles)))
 	return win32.HRESULTError(int32(r1))
 }
 

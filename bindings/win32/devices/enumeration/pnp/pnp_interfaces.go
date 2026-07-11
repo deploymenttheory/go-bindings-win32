@@ -476,8 +476,12 @@ type IUPnPEventSink struct {
 var IID_IUPnPEventSink = win32.GUID{Data1: 0x204810b4, Data2: 0x73b2, Data3: 0x11d4, Data4: [8]byte{0xbf, 0x42, 0x00, 0xb0, 0xd0, 0x11, 0x8b, 0x56}}
 
 // OnStateChanged dispatches through IUPnPEventSink's vtable slot 3.
-func (self *IUPnPEventSink) OnStateChanged(cChanges uint32, rgdispidChanges *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cChanges), uintptr(unsafe.Pointer(rgdispidChanges)))
+func (self *IUPnPEventSink) OnStateChanged(rgdispidChanges []int32) error {
+	var _rgdispidChanges *int32
+	if len(rgdispidChanges) > 0 {
+		_rgdispidChanges = &rgdispidChanges[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgdispidChanges)), uintptr(unsafe.Pointer(_rgdispidChanges)))
 	return win32.HRESULTError(int32(r1))
 }
 

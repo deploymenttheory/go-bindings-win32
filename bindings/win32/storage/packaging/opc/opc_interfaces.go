@@ -282,9 +282,13 @@ func (self *IOpcDigitalSignatureManager) Sign(certificate *securitycryptography.
 }
 
 // ReplaceSignatureXml dispatches through IOpcDigitalSignatureManager's vtable slot 10.
-func (self *IOpcDigitalSignatureManager) ReplaceSignatureXml(signaturePartName *IOpcPartUri, newSignatureXml *byte, count uint32) (*IOpcDigitalSignature, error) {
+func (self *IOpcDigitalSignatureManager) ReplaceSignatureXml(signaturePartName *IOpcPartUri, newSignatureXml []byte) (*IOpcDigitalSignature, error) {
+	var _newSignatureXml *byte
+	if len(newSignatureXml) > 0 {
+		_newSignatureXml = &newSignatureXml[0]
+	}
 	var _digitalSignature *IOpcDigitalSignature
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signaturePartName)), uintptr(unsafe.Pointer(newSignatureXml)), uintptr(count), uintptr(unsafe.Pointer(&_digitalSignature)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(signaturePartName)), uintptr(unsafe.Pointer(_newSignatureXml)), uintptr(len(newSignatureXml)), uintptr(unsafe.Pointer(&_digitalSignature)))
 	return _digitalSignature, win32.HRESULTError(int32(r1))
 }
 
@@ -821,9 +825,13 @@ type IOpcSignatureCustomObjectSet struct {
 var IID_IOpcSignatureCustomObjectSet = win32.GUID{Data1: 0x8f792ac5, Data2: 0x7947, Data3: 0x4e11, Data4: [8]byte{0xbc, 0x3d, 0x26, 0x59, 0xff, 0x04, 0x6a, 0xe1}}
 
 // Create dispatches through IOpcSignatureCustomObjectSet's vtable slot 3.
-func (self *IOpcSignatureCustomObjectSet) Create(xmlMarkup *byte, count uint32) (*IOpcSignatureCustomObject, error) {
+func (self *IOpcSignatureCustomObjectSet) Create(xmlMarkup []byte) (*IOpcSignatureCustomObject, error) {
+	var _xmlMarkup *byte
+	if len(xmlMarkup) > 0 {
+		_xmlMarkup = &xmlMarkup[0]
+	}
 	var _customObject *IOpcSignatureCustomObject
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(xmlMarkup)), uintptr(count), uintptr(unsafe.Pointer(&_customObject)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_xmlMarkup)), uintptr(len(xmlMarkup)), uintptr(unsafe.Pointer(&_customObject)))
 	return _customObject, win32.HRESULTError(int32(r1))
 }
 

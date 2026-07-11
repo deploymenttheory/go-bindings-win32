@@ -607,8 +607,12 @@ func AllJoynEventSelect(connectedBusHandle foundation.HANDLE, eventHandle founda
 // AllJoynReceiveFromBus calls MSAJApi!AllJoynReceiveFromBus.
 // https://learn.microsoft.com/windows/win32/api/msajtransport/nf-msajtransport-alljoynreceivefrombus
 // Minimum OS: windows10.0.10240.
-func AllJoynReceiveFromBus(connectedBusHandle foundation.HANDLE, buffer unsafe.Pointer, bytesToRead uint32, bytesTransferred *uint32, reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procAllJoynReceiveFromBus.Addr(), uintptr(connectedBusHandle), uintptr(unsafe.Pointer(buffer)), uintptr(bytesToRead), uintptr(unsafe.Pointer(bytesTransferred)), uintptr(unsafe.Pointer(reserved)))
+func AllJoynReceiveFromBus(connectedBusHandle foundation.HANDLE, buffer []byte, bytesTransferred *uint32, reserved unsafe.Pointer) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procAllJoynReceiveFromBus.Addr(), uintptr(connectedBusHandle), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)), uintptr(unsafe.Pointer(bytesTransferred)), uintptr(unsafe.Pointer(reserved)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -618,8 +622,12 @@ func AllJoynReceiveFromBus(connectedBusHandle foundation.HANDLE, buffer unsafe.P
 // AllJoynSendToBus calls MSAJApi!AllJoynSendToBus.
 // https://learn.microsoft.com/windows/win32/api/msajtransport/nf-msajtransport-alljoynsendtobus
 // Minimum OS: windows10.0.10240.
-func AllJoynSendToBus(connectedBusHandle foundation.HANDLE, buffer unsafe.Pointer, bytesToWrite uint32, bytesTransferred *uint32, reserved unsafe.Pointer) error {
-	r1, _, e1 := syscall.SyscallN(procAllJoynSendToBus.Addr(), uintptr(connectedBusHandle), uintptr(unsafe.Pointer(buffer)), uintptr(bytesToWrite), uintptr(unsafe.Pointer(bytesTransferred)), uintptr(unsafe.Pointer(reserved)))
+func AllJoynSendToBus(connectedBusHandle foundation.HANDLE, buffer []byte, bytesTransferred *uint32, reserved unsafe.Pointer) error {
+	var _buffer *byte
+	if len(buffer) > 0 {
+		_buffer = &buffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procAllJoynSendToBus.Addr(), uintptr(connectedBusHandle), uintptr(unsafe.Pointer(_buffer)), uintptr(len(buffer)), uintptr(unsafe.Pointer(bytesTransferred)), uintptr(unsafe.Pointer(reserved)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

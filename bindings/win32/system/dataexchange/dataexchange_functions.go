@@ -183,8 +183,12 @@ func DdeAccessData(hData HDDEDATA, pcbDataSize *uint32) *byte {
 // DdeAddData calls USER32!DdeAddData.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddeadddata
 // Minimum OS: windows5.0.
-func DdeAddData(hData HDDEDATA, pSrc *byte, cb uint32, cbOff uint32) HDDEDATA {
-	r1, _, _ := syscall.SyscallN(procDdeAddData.Addr(), uintptr(hData), uintptr(unsafe.Pointer(pSrc)), uintptr(cb), uintptr(cbOff))
+func DdeAddData(hData HDDEDATA, pSrc []byte, cbOff uint32) HDDEDATA {
+	var _pSrc *byte
+	if len(pSrc) > 0 {
+		_pSrc = &pSrc[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDdeAddData.Addr(), uintptr(hData), uintptr(unsafe.Pointer(_pSrc)), uintptr(len(pSrc)), uintptr(cbOff))
 	return HDDEDATA(r1)
 }
 
@@ -223,8 +227,12 @@ func DdeConnectList(idInst uint32, hszService HSZ, hszTopic HSZ, hConvList HCONV
 // DdeCreateDataHandle calls USER32!DdeCreateDataHandle.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddecreatedatahandle
 // Minimum OS: windows5.0.
-func DdeCreateDataHandle(idInst uint32, pSrc *byte, cb uint32, cbOff uint32, hszItem HSZ, wFmt uint32, afCmd uint32) HDDEDATA {
-	r1, _, _ := syscall.SyscallN(procDdeCreateDataHandle.Addr(), uintptr(idInst), uintptr(unsafe.Pointer(pSrc)), uintptr(cb), uintptr(cbOff), uintptr(hszItem), uintptr(wFmt), uintptr(afCmd))
+func DdeCreateDataHandle(idInst uint32, pSrc []byte, cbOff uint32, hszItem HSZ, wFmt uint32, afCmd uint32) HDDEDATA {
+	var _pSrc *byte
+	if len(pSrc) > 0 {
+		_pSrc = &pSrc[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDdeCreateDataHandle.Addr(), uintptr(idInst), uintptr(unsafe.Pointer(_pSrc)), uintptr(len(pSrc)), uintptr(cbOff), uintptr(hszItem), uintptr(wFmt), uintptr(afCmd))
 	return HDDEDATA(r1)
 }
 
@@ -288,8 +296,12 @@ func DdeFreeStringHandle(idInst uint32, hsz HSZ) bool {
 // DdeGetData calls USER32!DdeGetData.
 // https://learn.microsoft.com/windows/win32/api/ddeml/nf-ddeml-ddegetdata
 // Minimum OS: windows5.0.
-func DdeGetData(hData HDDEDATA, pDst *byte, cbMax uint32, cbOff uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procDdeGetData.Addr(), uintptr(hData), uintptr(unsafe.Pointer(pDst)), uintptr(cbMax), uintptr(cbOff))
+func DdeGetData(hData HDDEDATA, pDst []byte, cbOff uint32) uint32 {
+	var _pDst *byte
+	if len(pDst) > 0 {
+		_pDst = &pDst[0]
+	}
+	r1, _, _ := syscall.SyscallN(procDdeGetData.Addr(), uintptr(hData), uintptr(unsafe.Pointer(_pDst)), uintptr(len(pDst)), uintptr(cbOff))
 	return uint32(r1)
 }
 
@@ -839,8 +851,12 @@ func SetClipboardViewer(hWndNewViewer foundation.HWND) (foundation.HWND, error) 
 // SetWinMetaFileBits calls GDI32!SetWinMetaFileBits.
 // https://learn.microsoft.com/windows/win32/api/wingdi/nf-wingdi-setwinmetafilebits
 // Minimum OS: windows5.0.
-func SetWinMetaFileBits(nSize uint32, lpMeta16Data *byte, hdcRef graphicsgdi.HDC, lpMFP *METAFILEPICT) graphicsgdi.HENHMETAFILE {
-	r1, _, _ := syscall.SyscallN(procSetWinMetaFileBits.Addr(), uintptr(nSize), uintptr(unsafe.Pointer(lpMeta16Data)), uintptr(hdcRef), uintptr(unsafe.Pointer(lpMFP)))
+func SetWinMetaFileBits(lpMeta16Data []byte, hdcRef graphicsgdi.HDC, lpMFP *METAFILEPICT) graphicsgdi.HENHMETAFILE {
+	var _lpMeta16Data *byte
+	if len(lpMeta16Data) > 0 {
+		_lpMeta16Data = &lpMeta16Data[0]
+	}
+	r1, _, _ := syscall.SyscallN(procSetWinMetaFileBits.Addr(), uintptr(len(lpMeta16Data)), uintptr(unsafe.Pointer(_lpMeta16Data)), uintptr(hdcRef), uintptr(unsafe.Pointer(lpMFP)))
 	return graphicsgdi.HENHMETAFILE(r1)
 }
 

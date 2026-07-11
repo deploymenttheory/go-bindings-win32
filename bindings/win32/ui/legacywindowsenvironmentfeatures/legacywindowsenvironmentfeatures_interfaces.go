@@ -187,8 +187,12 @@ type IReconcilableObject struct {
 var IID_IReconcilableObject = win32.GUID{Data1: 0x99180162, Data2: 0xda16, Data3: 0x101a, Data4: [8]byte{0x93, 0x5c, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00}}
 
 // Reconcile dispatches through IReconcilableObject's vtable slot 3.
-func (self *IReconcilableObject) Reconcile(pInitiator *IReconcileInitiator, dwFlags uint32, hwndOwner foundation.HWND, hwndProgressFeedback foundation.HWND, ulcInput uint32, rgpmkOtherInput **systemcom.IMoniker, plOutIndex *int32, pstgNewResidues *systemcomstructuredstorage.IStorage) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInitiator)), uintptr(dwFlags), uintptr(hwndOwner), uintptr(hwndProgressFeedback), uintptr(ulcInput), uintptr(unsafe.Pointer(rgpmkOtherInput)), uintptr(unsafe.Pointer(plOutIndex)), uintptr(unsafe.Pointer(pstgNewResidues)), 0)
+func (self *IReconcilableObject) Reconcile(pInitiator *IReconcileInitiator, dwFlags uint32, hwndOwner foundation.HWND, hwndProgressFeedback foundation.HWND, rgpmkOtherInput []*systemcom.IMoniker, plOutIndex *int32, pstgNewResidues *systemcomstructuredstorage.IStorage) error {
+	var _rgpmkOtherInput **systemcom.IMoniker
+	if len(rgpmkOtherInput) > 0 {
+		_rgpmkOtherInput = &rgpmkOtherInput[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pInitiator)), uintptr(dwFlags), uintptr(hwndOwner), uintptr(hwndProgressFeedback), uintptr(len(rgpmkOtherInput)), uintptr(unsafe.Pointer(_rgpmkOtherInput)), uintptr(unsafe.Pointer(plOutIndex)), uintptr(unsafe.Pointer(pstgNewResidues)), 0)
 	return win32.HRESULTError(int32(r1))
 }
 

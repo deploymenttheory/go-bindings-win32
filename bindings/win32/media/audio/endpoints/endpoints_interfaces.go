@@ -288,8 +288,12 @@ func (self *IAudioMeterInformation) GetMeteringChannelCount(pnChannelCount *uint
 }
 
 // GetChannelsPeakValues dispatches through IAudioMeterInformation's vtable slot 5.
-func (self *IAudioMeterInformation) GetChannelsPeakValues(u32ChannelCount uint32, afPeakValues *float32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(u32ChannelCount), uintptr(unsafe.Pointer(afPeakValues)))
+func (self *IAudioMeterInformation) GetChannelsPeakValues(afPeakValues []float32) error {
+	var _afPeakValues *float32
+	if len(afPeakValues) > 0 {
+		_afPeakValues = &afPeakValues[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(len(afPeakValues)), uintptr(unsafe.Pointer(_afPeakValues)))
 	return win32.HRESULTError(int32(r1))
 }
 

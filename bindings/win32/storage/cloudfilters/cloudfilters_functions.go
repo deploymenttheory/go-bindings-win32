@@ -77,8 +77,12 @@ func CfConnectSyncRoot(SyncRootPath string, CallbackTable *CF_CALLBACK_REGISTRAT
 // CfConvertToPlaceholder calls cldapi!CfConvertToPlaceholder.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfconverttoplaceholder
 // Minimum OS: windows10.0.16299.
-func CfConvertToPlaceholder(FileHandle foundation.HANDLE, FileIdentity unsafe.Pointer, FileIdentityLength uint32, ConvertFlags CF_CONVERT_FLAGS, ConvertUsn *int64, Overlapped *systemio.OVERLAPPED) error {
-	r1, _, _ := syscall.SyscallN(procCfConvertToPlaceholder.Addr(), uintptr(FileHandle), uintptr(unsafe.Pointer(FileIdentity)), uintptr(FileIdentityLength), uintptr(ConvertFlags), uintptr(unsafe.Pointer(ConvertUsn)), uintptr(unsafe.Pointer(Overlapped)))
+func CfConvertToPlaceholder(FileHandle foundation.HANDLE, FileIdentity []byte, ConvertFlags CF_CONVERT_FLAGS, ConvertUsn *int64, Overlapped *systemio.OVERLAPPED) error {
+	var _FileIdentity *byte
+	if len(FileIdentity) > 0 {
+		_FileIdentity = &FileIdentity[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCfConvertToPlaceholder.Addr(), uintptr(FileHandle), uintptr(unsafe.Pointer(_FileIdentity)), uintptr(len(FileIdentity)), uintptr(ConvertFlags), uintptr(unsafe.Pointer(ConvertUsn)), uintptr(unsafe.Pointer(Overlapped)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -128,23 +132,35 @@ func CfGetCorrelationVector(FileHandle foundation.HANDLE, CorrelationVector *sys
 // CfGetPlaceholderInfo calls cldapi!CfGetPlaceholderInfo.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfgetplaceholderinfo
 // Minimum OS: windows10.0.16299.
-func CfGetPlaceholderInfo(FileHandle foundation.HANDLE, InfoClass CF_PLACEHOLDER_INFO_CLASS, InfoBuffer unsafe.Pointer, InfoBufferLength uint32, ReturnedLength *uint32) error {
-	r1, _, _ := syscall.SyscallN(procCfGetPlaceholderInfo.Addr(), uintptr(FileHandle), uintptr(InfoClass), uintptr(unsafe.Pointer(InfoBuffer)), uintptr(InfoBufferLength), uintptr(unsafe.Pointer(ReturnedLength)))
+func CfGetPlaceholderInfo(FileHandle foundation.HANDLE, InfoClass CF_PLACEHOLDER_INFO_CLASS, InfoBuffer []byte, ReturnedLength *uint32) error {
+	var _InfoBuffer *byte
+	if len(InfoBuffer) > 0 {
+		_InfoBuffer = &InfoBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCfGetPlaceholderInfo.Addr(), uintptr(FileHandle), uintptr(InfoClass), uintptr(unsafe.Pointer(_InfoBuffer)), uintptr(len(InfoBuffer)), uintptr(unsafe.Pointer(ReturnedLength)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CfGetPlaceholderRangeInfo calls cldapi!CfGetPlaceholderRangeInfo.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfgetplaceholderrangeinfo
 // Minimum OS: windows10.0.16299.
-func CfGetPlaceholderRangeInfo(FileHandle foundation.HANDLE, InfoClass CF_PLACEHOLDER_RANGE_INFO_CLASS, StartingOffset int64, Length int64, InfoBuffer unsafe.Pointer, InfoBufferLength uint32, ReturnedLength *uint32) error {
-	r1, _, _ := syscall.SyscallN(procCfGetPlaceholderRangeInfo.Addr(), uintptr(FileHandle), uintptr(InfoClass), uintptr(StartingOffset), uintptr(Length), uintptr(unsafe.Pointer(InfoBuffer)), uintptr(InfoBufferLength), uintptr(unsafe.Pointer(ReturnedLength)))
+func CfGetPlaceholderRangeInfo(FileHandle foundation.HANDLE, InfoClass CF_PLACEHOLDER_RANGE_INFO_CLASS, StartingOffset int64, Length int64, InfoBuffer []byte, ReturnedLength *uint32) error {
+	var _InfoBuffer *byte
+	if len(InfoBuffer) > 0 {
+		_InfoBuffer = &InfoBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCfGetPlaceholderRangeInfo.Addr(), uintptr(FileHandle), uintptr(InfoClass), uintptr(StartingOffset), uintptr(Length), uintptr(unsafe.Pointer(_InfoBuffer)), uintptr(len(InfoBuffer)), uintptr(unsafe.Pointer(ReturnedLength)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CfGetPlaceholderRangeInfoForHydration calls cldapi!CfGetPlaceholderRangeInfoForHydration.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfgetplaceholderrangeinfoforhydration
-func CfGetPlaceholderRangeInfoForHydration(ConnectionKey CF_CONNECTION_KEY, TransferKey int64, FileId int64, InfoClass CF_PLACEHOLDER_RANGE_INFO_CLASS, StartingOffset int64, RangeLength int64, InfoBuffer unsafe.Pointer, InfoBufferSize uint32, InfoBufferWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(procCfGetPlaceholderRangeInfoForHydration.Addr(), uintptr(ConnectionKey), uintptr(TransferKey), uintptr(FileId), uintptr(InfoClass), uintptr(StartingOffset), uintptr(RangeLength), uintptr(unsafe.Pointer(InfoBuffer)), uintptr(InfoBufferSize), uintptr(unsafe.Pointer(InfoBufferWritten)))
+func CfGetPlaceholderRangeInfoForHydration(ConnectionKey CF_CONNECTION_KEY, TransferKey int64, FileId int64, InfoClass CF_PLACEHOLDER_RANGE_INFO_CLASS, StartingOffset int64, RangeLength int64, InfoBuffer []byte, InfoBufferWritten *uint32) error {
+	var _InfoBuffer *byte
+	if len(InfoBuffer) > 0 {
+		_InfoBuffer = &InfoBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procCfGetPlaceholderRangeInfoForHydration.Addr(), uintptr(ConnectionKey), uintptr(TransferKey), uintptr(FileId), uintptr(InfoClass), uintptr(StartingOffset), uintptr(RangeLength), uintptr(unsafe.Pointer(_InfoBuffer)), uintptr(len(InfoBuffer)), uintptr(unsafe.Pointer(InfoBufferWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -337,12 +353,16 @@ func CfUnregisterSyncRoot(SyncRootPath string) error {
 // CfUpdatePlaceholder calls cldapi!CfUpdatePlaceholder.
 // https://learn.microsoft.com/windows/win32/api/cfapi/nf-cfapi-cfupdateplaceholder
 // Minimum OS: windows10.0.16299.
-func CfUpdatePlaceholder(FileHandle foundation.HANDLE, FsMetadata *CF_FS_METADATA, FileIdentity unsafe.Pointer, FileIdentityLength uint32, DehydrateRangeArray []CF_FILE_RANGE, UpdateFlags CF_UPDATE_FLAGS, UpdateUsn *int64, Overlapped *systemio.OVERLAPPED) error {
+func CfUpdatePlaceholder(FileHandle foundation.HANDLE, FsMetadata *CF_FS_METADATA, FileIdentity []byte, DehydrateRangeArray []CF_FILE_RANGE, UpdateFlags CF_UPDATE_FLAGS, UpdateUsn *int64, Overlapped *systemio.OVERLAPPED) error {
+	var _FileIdentity *byte
+	if len(FileIdentity) > 0 {
+		_FileIdentity = &FileIdentity[0]
+	}
 	var _DehydrateRangeArray *CF_FILE_RANGE
 	if len(DehydrateRangeArray) > 0 {
 		_DehydrateRangeArray = &DehydrateRangeArray[0]
 	}
-	r1, _, _ := syscall.SyscallN(procCfUpdatePlaceholder.Addr(), uintptr(FileHandle), uintptr(unsafe.Pointer(FsMetadata)), uintptr(unsafe.Pointer(FileIdentity)), uintptr(FileIdentityLength), uintptr(unsafe.Pointer(_DehydrateRangeArray)), uintptr(len(DehydrateRangeArray)), uintptr(UpdateFlags), uintptr(unsafe.Pointer(UpdateUsn)), uintptr(unsafe.Pointer(Overlapped)))
+	r1, _, _ := syscall.SyscallN(procCfUpdatePlaceholder.Addr(), uintptr(FileHandle), uintptr(unsafe.Pointer(FsMetadata)), uintptr(unsafe.Pointer(_FileIdentity)), uintptr(len(FileIdentity)), uintptr(unsafe.Pointer(_DehydrateRangeArray)), uintptr(len(DehydrateRangeArray)), uintptr(UpdateFlags), uintptr(unsafe.Pointer(UpdateUsn)), uintptr(unsafe.Pointer(Overlapped)))
 	return win32.HRESULTError(int32(r1))
 }
 

@@ -110,8 +110,12 @@ type IConstructableConcept struct {
 var IID_IConstructableConcept = win32.GUID{Data1: 0x1a9409f1, Data2: 0xf0e0, Data3: 0x4b48, Data4: [8]byte{0x9a, 0x4e, 0x57, 0x83, 0x54, 0x8f, 0xb5, 0x7a}}
 
 // CreateInstance dispatches through IConstructableConcept's vtable slot 3.
-func (self *IConstructableConcept) CreateInstance(argCount uint64, ppArguments **IModelObject, ppInstance **IModelObject) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(argCount), uintptr(unsafe.Pointer(ppArguments)), uintptr(unsafe.Pointer(ppInstance)))
+func (self *IConstructableConcept) CreateInstance(ppArguments []*IModelObject, ppInstance **IModelObject) error {
+	var _ppArguments **IModelObject
+	if len(ppArguments) > 0 {
+		_ppArguments = &ppArguments[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(ppArguments)), uintptr(unsafe.Pointer(_ppArguments)), uintptr(unsafe.Pointer(ppInstance)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -858,14 +862,22 @@ type IDebugAdvanced struct {
 var IID_IDebugAdvanced = win32.GUID{Data1: 0xf2df5f53, Data2: 0x071f, Data3: 0x47bd, Data4: [8]byte{0x9d, 0xe6, 0x57, 0x34, 0xc3, 0xfe, 0xd6, 0x89}}
 
 // GetThreadContext dispatches through IDebugAdvanced's vtable slot 3.
-func (self *IDebugAdvanced) GetThreadContext(Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugAdvanced) GetThreadContext(Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetThreadContext dispatches through IDebugAdvanced's vtable slot 4.
-func (self *IDebugAdvanced) SetThreadContext(Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugAdvanced) SetThreadContext(Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -878,44 +890,76 @@ type IDebugAdvanced2 struct {
 var IID_IDebugAdvanced2 = win32.GUID{Data1: 0x716d14c9, Data2: 0x119b, Data3: 0x4ba5, Data4: [8]byte{0xaf, 0x1f, 0x08, 0x90, 0xe6, 0x72, 0x41, 0x6a}}
 
 // GetThreadContext dispatches through IDebugAdvanced2's vtable slot 3.
-func (self *IDebugAdvanced2) GetThreadContext(Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugAdvanced2) GetThreadContext(Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetThreadContext dispatches through IDebugAdvanced2's vtable slot 4.
-func (self *IDebugAdvanced2) SetThreadContext(Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugAdvanced2) SetThreadContext(Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Request dispatches through IDebugAdvanced2's vtable slot 5.
-func (self *IDebugAdvanced2) Request(Request uint32, InBuffer unsafe.Pointer, InBufferSize uint32, OutBuffer unsafe.Pointer, OutBufferSize uint32, OutSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Request), uintptr(unsafe.Pointer(InBuffer)), uintptr(InBufferSize), uintptr(unsafe.Pointer(OutBuffer)), uintptr(OutBufferSize), uintptr(unsafe.Pointer(OutSize)))
+func (self *IDebugAdvanced2) Request(Request uint32, InBuffer []byte, OutBuffer []byte, OutSize *uint32) error {
+	var _InBuffer *byte
+	if len(InBuffer) > 0 {
+		_InBuffer = &InBuffer[0]
+	}
+	var _OutBuffer *byte
+	if len(OutBuffer) > 0 {
+		_OutBuffer = &OutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Request), uintptr(unsafe.Pointer(_InBuffer)), uintptr(len(InBuffer)), uintptr(unsafe.Pointer(_OutBuffer)), uintptr(len(OutBuffer)), uintptr(unsafe.Pointer(OutSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceFileInformation dispatches through IDebugAdvanced2's vtable slot 6.
-func (self *IDebugAdvanced2) GetSourceFileInformation(Which uint32, SourceFile foundation.PSTR, Arg64 uint64, Arg32 uint32, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(unsafe.Pointer(SourceFile)), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)))
+func (self *IDebugAdvanced2) GetSourceFileInformation(Which uint32, SourceFile foundation.PSTR, Arg64 uint64, Arg32 uint32, Buffer []byte, InfoSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(unsafe.Pointer(SourceFile)), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FindSourceFileAndToken dispatches through IDebugAdvanced2's vtable slot 7.
-func (self *IDebugAdvanced2) FindSourceFileAndToken(StartElement uint32, ModAddr uint64, File foundation.PSTR, Flags uint32, FileToken unsafe.Pointer, FileTokenSize uint32, FoundElement *uint32, Buffer foundation.PSTR, BufferSize uint32, FoundSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(ModAddr), uintptr(unsafe.Pointer(File)), uintptr(Flags), uintptr(unsafe.Pointer(FileToken)), uintptr(FileTokenSize), uintptr(unsafe.Pointer(FoundElement)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FoundSize)))
+func (self *IDebugAdvanced2) FindSourceFileAndToken(StartElement uint32, ModAddr uint64, File foundation.PSTR, Flags uint32, FileToken []byte, FoundElement *uint32, Buffer foundation.PSTR, BufferSize uint32, FoundSize *uint32) error {
+	var _FileToken *byte
+	if len(FileToken) > 0 {
+		_FileToken = &FileToken[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(ModAddr), uintptr(unsafe.Pointer(File)), uintptr(Flags), uintptr(unsafe.Pointer(_FileToken)), uintptr(len(FileToken)), uintptr(unsafe.Pointer(FoundElement)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FoundSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSymbolInformation dispatches through IDebugAdvanced2's vtable slot 8.
-func (self *IDebugAdvanced2) GetSymbolInformation(Which uint32, Arg64 uint64, Arg32 uint32, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32, StringBuffer foundation.PSTR, StringBufferSize uint32, StringSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)), uintptr(unsafe.Pointer(StringBuffer)), uintptr(StringBufferSize), uintptr(unsafe.Pointer(StringSize)))
+func (self *IDebugAdvanced2) GetSymbolInformation(Which uint32, Arg64 uint64, Arg32 uint32, Buffer []byte, InfoSize *uint32, StringBuffer foundation.PSTR, StringBufferSize uint32, StringSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)), uintptr(unsafe.Pointer(StringBuffer)), uintptr(StringBufferSize), uintptr(unsafe.Pointer(StringSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSystemObjectInformation dispatches through IDebugAdvanced2's vtable slot 9.
-func (self *IDebugAdvanced2) GetSystemObjectInformation(Which uint32, Arg64 uint64, Arg32 uint32, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)))
+func (self *IDebugAdvanced2) GetSystemObjectInformation(Which uint32, Arg64 uint64, Arg32 uint32, Buffer []byte, InfoSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -928,64 +972,108 @@ type IDebugAdvanced3 struct {
 var IID_IDebugAdvanced3 = win32.GUID{Data1: 0xcba4abb4, Data2: 0x84c4, Data3: 0x444d, Data4: [8]byte{0x87, 0xca, 0xa0, 0x4e, 0x13, 0x28, 0x67, 0x39}}
 
 // GetThreadContext dispatches through IDebugAdvanced3's vtable slot 3.
-func (self *IDebugAdvanced3) GetThreadContext(Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugAdvanced3) GetThreadContext(Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetThreadContext dispatches through IDebugAdvanced3's vtable slot 4.
-func (self *IDebugAdvanced3) SetThreadContext(Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugAdvanced3) SetThreadContext(Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Request dispatches through IDebugAdvanced3's vtable slot 5.
-func (self *IDebugAdvanced3) Request(Request uint32, InBuffer unsafe.Pointer, InBufferSize uint32, OutBuffer unsafe.Pointer, OutBufferSize uint32, OutSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Request), uintptr(unsafe.Pointer(InBuffer)), uintptr(InBufferSize), uintptr(unsafe.Pointer(OutBuffer)), uintptr(OutBufferSize), uintptr(unsafe.Pointer(OutSize)))
+func (self *IDebugAdvanced3) Request(Request uint32, InBuffer []byte, OutBuffer []byte, OutSize *uint32) error {
+	var _InBuffer *byte
+	if len(InBuffer) > 0 {
+		_InBuffer = &InBuffer[0]
+	}
+	var _OutBuffer *byte
+	if len(OutBuffer) > 0 {
+		_OutBuffer = &OutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Request), uintptr(unsafe.Pointer(_InBuffer)), uintptr(len(InBuffer)), uintptr(unsafe.Pointer(_OutBuffer)), uintptr(len(OutBuffer)), uintptr(unsafe.Pointer(OutSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceFileInformation dispatches through IDebugAdvanced3's vtable slot 6.
-func (self *IDebugAdvanced3) GetSourceFileInformation(Which uint32, SourceFile foundation.PSTR, Arg64 uint64, Arg32 uint32, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(unsafe.Pointer(SourceFile)), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)))
+func (self *IDebugAdvanced3) GetSourceFileInformation(Which uint32, SourceFile foundation.PSTR, Arg64 uint64, Arg32 uint32, Buffer []byte, InfoSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(unsafe.Pointer(SourceFile)), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FindSourceFileAndToken dispatches through IDebugAdvanced3's vtable slot 7.
-func (self *IDebugAdvanced3) FindSourceFileAndToken(StartElement uint32, ModAddr uint64, File foundation.PSTR, Flags uint32, FileToken unsafe.Pointer, FileTokenSize uint32, FoundElement *uint32, Buffer foundation.PSTR, BufferSize uint32, FoundSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(ModAddr), uintptr(unsafe.Pointer(File)), uintptr(Flags), uintptr(unsafe.Pointer(FileToken)), uintptr(FileTokenSize), uintptr(unsafe.Pointer(FoundElement)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FoundSize)))
+func (self *IDebugAdvanced3) FindSourceFileAndToken(StartElement uint32, ModAddr uint64, File foundation.PSTR, Flags uint32, FileToken []byte, FoundElement *uint32, Buffer foundation.PSTR, BufferSize uint32, FoundSize *uint32) error {
+	var _FileToken *byte
+	if len(FileToken) > 0 {
+		_FileToken = &FileToken[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(ModAddr), uintptr(unsafe.Pointer(File)), uintptr(Flags), uintptr(unsafe.Pointer(_FileToken)), uintptr(len(FileToken)), uintptr(unsafe.Pointer(FoundElement)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FoundSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSymbolInformation dispatches through IDebugAdvanced3's vtable slot 8.
-func (self *IDebugAdvanced3) GetSymbolInformation(Which uint32, Arg64 uint64, Arg32 uint32, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32, StringBuffer foundation.PSTR, StringBufferSize uint32, StringSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)), uintptr(unsafe.Pointer(StringBuffer)), uintptr(StringBufferSize), uintptr(unsafe.Pointer(StringSize)))
+func (self *IDebugAdvanced3) GetSymbolInformation(Which uint32, Arg64 uint64, Arg32 uint32, Buffer []byte, InfoSize *uint32, StringBuffer foundation.PSTR, StringBufferSize uint32, StringSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)), uintptr(unsafe.Pointer(StringBuffer)), uintptr(StringBufferSize), uintptr(unsafe.Pointer(StringSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSystemObjectInformation dispatches through IDebugAdvanced3's vtable slot 9.
-func (self *IDebugAdvanced3) GetSystemObjectInformation(Which uint32, Arg64 uint64, Arg32 uint32, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)))
+func (self *IDebugAdvanced3) GetSystemObjectInformation(Which uint32, Arg64 uint64, Arg32 uint32, Buffer []byte, InfoSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceFileInformationWide dispatches through IDebugAdvanced3's vtable slot 10.
-func (self *IDebugAdvanced3) GetSourceFileInformationWide(Which uint32, SourceFile string, Arg64 uint64, Arg32 uint32, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32) error {
+func (self *IDebugAdvanced3) GetSourceFileInformationWide(Which uint32, SourceFile string, Arg64 uint64, Arg32 uint32, Buffer []byte, InfoSize *uint32) error {
 	_SourceFile := win32.UTF16Ptr(SourceFile)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(unsafe.Pointer(_SourceFile)), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)))
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(unsafe.Pointer(_SourceFile)), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FindSourceFileAndTokenWide dispatches through IDebugAdvanced3's vtable slot 11.
-func (self *IDebugAdvanced3) FindSourceFileAndTokenWide(StartElement uint32, ModAddr uint64, File string, Flags uint32, FileToken unsafe.Pointer, FileTokenSize uint32, FoundElement *uint32, Buffer foundation.PWSTR, BufferSize uint32, FoundSize *uint32) error {
+func (self *IDebugAdvanced3) FindSourceFileAndTokenWide(StartElement uint32, ModAddr uint64, File string, Flags uint32, FileToken []byte, FoundElement *uint32, Buffer foundation.PWSTR, BufferSize uint32, FoundSize *uint32) error {
 	_File := win32.UTF16Ptr(File)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(ModAddr), uintptr(unsafe.Pointer(_File)), uintptr(Flags), uintptr(unsafe.Pointer(FileToken)), uintptr(FileTokenSize), uintptr(unsafe.Pointer(FoundElement)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FoundSize)))
+	var _FileToken *byte
+	if len(FileToken) > 0 {
+		_FileToken = &FileToken[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(ModAddr), uintptr(unsafe.Pointer(_File)), uintptr(Flags), uintptr(unsafe.Pointer(_FileToken)), uintptr(len(FileToken)), uintptr(unsafe.Pointer(FoundElement)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FoundSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSymbolInformationWide dispatches through IDebugAdvanced3's vtable slot 12.
-func (self *IDebugAdvanced3) GetSymbolInformationWide(Which uint32, Arg64 uint64, Arg32 uint32, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32, StringBuffer foundation.PWSTR, StringBufferSize uint32, StringSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)), uintptr(unsafe.Pointer(StringBuffer)), uintptr(StringBufferSize), uintptr(unsafe.Pointer(StringSize)))
+func (self *IDebugAdvanced3) GetSymbolInformationWide(Which uint32, Arg64 uint64, Arg32 uint32, Buffer []byte, InfoSize *uint32, StringBuffer foundation.PWSTR, StringBufferSize uint32, StringSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)), uintptr(unsafe.Pointer(StringBuffer)), uintptr(StringBufferSize), uintptr(unsafe.Pointer(StringSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -998,70 +1086,118 @@ type IDebugAdvanced4 struct {
 var IID_IDebugAdvanced4 = win32.GUID{Data1: 0xd1069067, Data2: 0x2a65, Data3: 0x4bf0, Data4: [8]byte{0xae, 0x97, 0x76, 0x18, 0x4b, 0x67, 0x85, 0x6b}}
 
 // GetThreadContext dispatches through IDebugAdvanced4's vtable slot 3.
-func (self *IDebugAdvanced4) GetThreadContext(Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugAdvanced4) GetThreadContext(Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetThreadContext dispatches through IDebugAdvanced4's vtable slot 4.
-func (self *IDebugAdvanced4) SetThreadContext(Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugAdvanced4) SetThreadContext(Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Request dispatches through IDebugAdvanced4's vtable slot 5.
-func (self *IDebugAdvanced4) Request(Request uint32, InBuffer unsafe.Pointer, InBufferSize uint32, OutBuffer unsafe.Pointer, OutBufferSize uint32, OutSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Request), uintptr(unsafe.Pointer(InBuffer)), uintptr(InBufferSize), uintptr(unsafe.Pointer(OutBuffer)), uintptr(OutBufferSize), uintptr(unsafe.Pointer(OutSize)))
+func (self *IDebugAdvanced4) Request(Request uint32, InBuffer []byte, OutBuffer []byte, OutSize *uint32) error {
+	var _InBuffer *byte
+	if len(InBuffer) > 0 {
+		_InBuffer = &InBuffer[0]
+	}
+	var _OutBuffer *byte
+	if len(OutBuffer) > 0 {
+		_OutBuffer = &OutBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Request), uintptr(unsafe.Pointer(_InBuffer)), uintptr(len(InBuffer)), uintptr(unsafe.Pointer(_OutBuffer)), uintptr(len(OutBuffer)), uintptr(unsafe.Pointer(OutSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceFileInformation dispatches through IDebugAdvanced4's vtable slot 6.
-func (self *IDebugAdvanced4) GetSourceFileInformation(Which uint32, SourceFile foundation.PSTR, Arg64 uint64, Arg32 uint32, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(unsafe.Pointer(SourceFile)), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)))
+func (self *IDebugAdvanced4) GetSourceFileInformation(Which uint32, SourceFile foundation.PSTR, Arg64 uint64, Arg32 uint32, Buffer []byte, InfoSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(unsafe.Pointer(SourceFile)), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FindSourceFileAndToken dispatches through IDebugAdvanced4's vtable slot 7.
-func (self *IDebugAdvanced4) FindSourceFileAndToken(StartElement uint32, ModAddr uint64, File foundation.PSTR, Flags uint32, FileToken unsafe.Pointer, FileTokenSize uint32, FoundElement *uint32, Buffer foundation.PSTR, BufferSize uint32, FoundSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(ModAddr), uintptr(unsafe.Pointer(File)), uintptr(Flags), uintptr(unsafe.Pointer(FileToken)), uintptr(FileTokenSize), uintptr(unsafe.Pointer(FoundElement)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FoundSize)))
+func (self *IDebugAdvanced4) FindSourceFileAndToken(StartElement uint32, ModAddr uint64, File foundation.PSTR, Flags uint32, FileToken []byte, FoundElement *uint32, Buffer foundation.PSTR, BufferSize uint32, FoundSize *uint32) error {
+	var _FileToken *byte
+	if len(FileToken) > 0 {
+		_FileToken = &FileToken[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(ModAddr), uintptr(unsafe.Pointer(File)), uintptr(Flags), uintptr(unsafe.Pointer(_FileToken)), uintptr(len(FileToken)), uintptr(unsafe.Pointer(FoundElement)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FoundSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSymbolInformation dispatches through IDebugAdvanced4's vtable slot 8.
-func (self *IDebugAdvanced4) GetSymbolInformation(Which uint32, Arg64 uint64, Arg32 uint32, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32, StringBuffer foundation.PSTR, StringBufferSize uint32, StringSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)), uintptr(unsafe.Pointer(StringBuffer)), uintptr(StringBufferSize), uintptr(unsafe.Pointer(StringSize)))
+func (self *IDebugAdvanced4) GetSymbolInformation(Which uint32, Arg64 uint64, Arg32 uint32, Buffer []byte, InfoSize *uint32, StringBuffer foundation.PSTR, StringBufferSize uint32, StringSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)), uintptr(unsafe.Pointer(StringBuffer)), uintptr(StringBufferSize), uintptr(unsafe.Pointer(StringSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSystemObjectInformation dispatches through IDebugAdvanced4's vtable slot 9.
-func (self *IDebugAdvanced4) GetSystemObjectInformation(Which uint32, Arg64 uint64, Arg32 uint32, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)))
+func (self *IDebugAdvanced4) GetSystemObjectInformation(Which uint32, Arg64 uint64, Arg32 uint32, Buffer []byte, InfoSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceFileInformationWide dispatches through IDebugAdvanced4's vtable slot 10.
-func (self *IDebugAdvanced4) GetSourceFileInformationWide(Which uint32, SourceFile string, Arg64 uint64, Arg32 uint32, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32) error {
+func (self *IDebugAdvanced4) GetSourceFileInformationWide(Which uint32, SourceFile string, Arg64 uint64, Arg32 uint32, Buffer []byte, InfoSize *uint32) error {
 	_SourceFile := win32.UTF16Ptr(SourceFile)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(unsafe.Pointer(_SourceFile)), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)))
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(unsafe.Pointer(_SourceFile)), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FindSourceFileAndTokenWide dispatches through IDebugAdvanced4's vtable slot 11.
-func (self *IDebugAdvanced4) FindSourceFileAndTokenWide(StartElement uint32, ModAddr uint64, File string, Flags uint32, FileToken unsafe.Pointer, FileTokenSize uint32, FoundElement *uint32, Buffer foundation.PWSTR, BufferSize uint32, FoundSize *uint32) error {
+func (self *IDebugAdvanced4) FindSourceFileAndTokenWide(StartElement uint32, ModAddr uint64, File string, Flags uint32, FileToken []byte, FoundElement *uint32, Buffer foundation.PWSTR, BufferSize uint32, FoundSize *uint32) error {
 	_File := win32.UTF16Ptr(File)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(ModAddr), uintptr(unsafe.Pointer(_File)), uintptr(Flags), uintptr(unsafe.Pointer(FileToken)), uintptr(FileTokenSize), uintptr(unsafe.Pointer(FoundElement)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FoundSize)))
+	var _FileToken *byte
+	if len(FileToken) > 0 {
+		_FileToken = &FileToken[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(StartElement), uintptr(ModAddr), uintptr(unsafe.Pointer(_File)), uintptr(Flags), uintptr(unsafe.Pointer(_FileToken)), uintptr(len(FileToken)), uintptr(unsafe.Pointer(FoundElement)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(FoundSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSymbolInformationWide dispatches through IDebugAdvanced4's vtable slot 12.
-func (self *IDebugAdvanced4) GetSymbolInformationWide(Which uint32, Arg64 uint64, Arg32 uint32, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32, StringBuffer foundation.PWSTR, StringBufferSize uint32, StringSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)), uintptr(unsafe.Pointer(StringBuffer)), uintptr(StringBufferSize), uintptr(unsafe.Pointer(StringSize)))
+func (self *IDebugAdvanced4) GetSymbolInformationWide(Which uint32, Arg64 uint64, Arg32 uint32, Buffer []byte, InfoSize *uint32, StringBuffer foundation.PWSTR, StringBufferSize uint32, StringSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)), uintptr(unsafe.Pointer(StringBuffer)), uintptr(StringBufferSize), uintptr(unsafe.Pointer(StringSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSymbolInformationWideEx dispatches through IDebugAdvanced4's vtable slot 13.
-func (self *IDebugAdvanced4) GetSymbolInformationWideEx(Which uint32, Arg64 uint64, Arg32 uint32, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32, StringBuffer foundation.PWSTR, StringBufferSize uint32, StringSize *uint32, pInfoEx *SYMBOL_INFO_EX) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)), uintptr(unsafe.Pointer(StringBuffer)), uintptr(StringBufferSize), uintptr(unsafe.Pointer(StringSize)), uintptr(unsafe.Pointer(pInfoEx)))
+func (self *IDebugAdvanced4) GetSymbolInformationWideEx(Which uint32, Arg64 uint64, Arg32 uint32, Buffer []byte, InfoSize *uint32, StringBuffer foundation.PWSTR, StringBufferSize uint32, StringSize *uint32, pInfoEx *SYMBOL_INFO_EX) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Which), uintptr(Arg64), uintptr(Arg32), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)), uintptr(unsafe.Pointer(StringBuffer)), uintptr(StringBufferSize), uintptr(unsafe.Pointer(StringSize)), uintptr(unsafe.Pointer(pInfoEx)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1570,8 +1706,12 @@ func (self *IDebugClient) DisconnectProcessServer(Server uint64) error {
 }
 
 // GetRunningProcessSystemIds dispatches through IDebugClient's vtable slot 9.
-func (self *IDebugClient) GetRunningProcessSystemIds(Server uint64, Ids *uint32, Count uint32, ActualCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(Ids)), uintptr(Count), uintptr(unsafe.Pointer(ActualCount)))
+func (self *IDebugClient) GetRunningProcessSystemIds(Server uint64, Ids []uint32, ActualCount *uint32) error {
+	var _Ids *uint32
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(ActualCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -1848,8 +1988,12 @@ func (self *IDebugClient2) DisconnectProcessServer(Server uint64) error {
 }
 
 // GetRunningProcessSystemIds dispatches through IDebugClient2's vtable slot 9.
-func (self *IDebugClient2) GetRunningProcessSystemIds(Server uint64, Ids *uint32, Count uint32, ActualCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(Ids)), uintptr(Count), uintptr(unsafe.Pointer(ActualCount)))
+func (self *IDebugClient2) GetRunningProcessSystemIds(Server uint64, Ids []uint32, ActualCount *uint32) error {
+	var _Ids *uint32
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(ActualCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2174,8 +2318,12 @@ func (self *IDebugClient3) DisconnectProcessServer(Server uint64) error {
 }
 
 // GetRunningProcessSystemIds dispatches through IDebugClient3's vtable slot 9.
-func (self *IDebugClient3) GetRunningProcessSystemIds(Server uint64, Ids *uint32, Count uint32, ActualCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(Ids)), uintptr(Count), uintptr(unsafe.Pointer(ActualCount)))
+func (self *IDebugClient3) GetRunningProcessSystemIds(Server uint64, Ids []uint32, ActualCount *uint32) error {
+	var _Ids *uint32
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(ActualCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2527,8 +2675,12 @@ func (self *IDebugClient4) DisconnectProcessServer(Server uint64) error {
 }
 
 // GetRunningProcessSystemIds dispatches through IDebugClient4's vtable slot 9.
-func (self *IDebugClient4) GetRunningProcessSystemIds(Server uint64, Ids *uint32, Count uint32, ActualCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(Ids)), uintptr(Count), uintptr(unsafe.Pointer(ActualCount)))
+func (self *IDebugClient4) GetRunningProcessSystemIds(Server uint64, Ids []uint32, ActualCount *uint32) error {
+	var _Ids *uint32
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(ActualCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2920,8 +3072,12 @@ func (self *IDebugClient5) DisconnectProcessServer(Server uint64) error {
 }
 
 // GetRunningProcessSystemIds dispatches through IDebugClient5's vtable slot 9.
-func (self *IDebugClient5) GetRunningProcessSystemIds(Server uint64, Ids *uint32, Count uint32, ActualCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(Ids)), uintptr(Count), uintptr(unsafe.Pointer(ActualCount)))
+func (self *IDebugClient5) GetRunningProcessSystemIds(Server uint64, Ids []uint32, ActualCount *uint32) error {
+	var _Ids *uint32
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(ActualCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3367,32 +3523,48 @@ func (self *IDebugClient5) SetEventCallbacksWide(Callbacks *IDebugEventCallbacks
 }
 
 // CreateProcess2 dispatches through IDebugClient5's vtable slot 81.
-func (self *IDebugClient5) CreateProcess2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory foundation.PSTR, Environment foundation.PSTR) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)))
+func (self *IDebugClient5) CreateProcess2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer []byte, InitialDirectory foundation.PSTR, Environment foundation.PSTR) error {
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcess2Wide dispatches through IDebugClient5's vtable slot 82.
-func (self *IDebugClient5) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory string, Environment string) error {
+func (self *IDebugClient5) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
 	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
 	_Environment := win32.UTF16Ptr(Environment)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcessAndAttach2 dispatches through IDebugClient5's vtable slot 83.
-func (self *IDebugClient5) CreateProcessAndAttach2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory foundation.PSTR, Environment foundation.PSTR, ProcessId uint32, AttachFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)), uintptr(ProcessId), uintptr(AttachFlags))
+func (self *IDebugClient5) CreateProcessAndAttach2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer []byte, InitialDirectory foundation.PSTR, Environment foundation.PSTR, ProcessId uint32, AttachFlags uint32) error {
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcessAndAttach2Wide dispatches through IDebugClient5's vtable slot 84.
-func (self *IDebugClient5) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
+func (self *IDebugClient5) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
 	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
 	_Environment := win32.UTF16Ptr(Environment)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3503,8 +3675,12 @@ func (self *IDebugClient6) DisconnectProcessServer(Server uint64) error {
 }
 
 // GetRunningProcessSystemIds dispatches through IDebugClient6's vtable slot 9.
-func (self *IDebugClient6) GetRunningProcessSystemIds(Server uint64, Ids *uint32, Count uint32, ActualCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(Ids)), uintptr(Count), uintptr(unsafe.Pointer(ActualCount)))
+func (self *IDebugClient6) GetRunningProcessSystemIds(Server uint64, Ids []uint32, ActualCount *uint32) error {
+	var _Ids *uint32
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(ActualCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3950,32 +4126,48 @@ func (self *IDebugClient6) SetEventCallbacksWide(Callbacks *IDebugEventCallbacks
 }
 
 // CreateProcess2 dispatches through IDebugClient6's vtable slot 81.
-func (self *IDebugClient6) CreateProcess2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory foundation.PSTR, Environment foundation.PSTR) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)))
+func (self *IDebugClient6) CreateProcess2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer []byte, InitialDirectory foundation.PSTR, Environment foundation.PSTR) error {
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcess2Wide dispatches through IDebugClient6's vtable slot 82.
-func (self *IDebugClient6) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory string, Environment string) error {
+func (self *IDebugClient6) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
 	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
 	_Environment := win32.UTF16Ptr(Environment)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcessAndAttach2 dispatches through IDebugClient6's vtable slot 83.
-func (self *IDebugClient6) CreateProcessAndAttach2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory foundation.PSTR, Environment foundation.PSTR, ProcessId uint32, AttachFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)), uintptr(ProcessId), uintptr(AttachFlags))
+func (self *IDebugClient6) CreateProcessAndAttach2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer []byte, InitialDirectory foundation.PSTR, Environment foundation.PSTR, ProcessId uint32, AttachFlags uint32) error {
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcessAndAttach2Wide dispatches through IDebugClient6's vtable slot 84.
-func (self *IDebugClient6) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
+func (self *IDebugClient6) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
 	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
 	_Environment := win32.UTF16Ptr(Environment)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4092,8 +4284,12 @@ func (self *IDebugClient7) DisconnectProcessServer(Server uint64) error {
 }
 
 // GetRunningProcessSystemIds dispatches through IDebugClient7's vtable slot 9.
-func (self *IDebugClient7) GetRunningProcessSystemIds(Server uint64, Ids *uint32, Count uint32, ActualCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(Ids)), uintptr(Count), uintptr(unsafe.Pointer(ActualCount)))
+func (self *IDebugClient7) GetRunningProcessSystemIds(Server uint64, Ids []uint32, ActualCount *uint32) error {
+	var _Ids *uint32
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(ActualCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4539,32 +4735,48 @@ func (self *IDebugClient7) SetEventCallbacksWide(Callbacks *IDebugEventCallbacks
 }
 
 // CreateProcess2 dispatches through IDebugClient7's vtable slot 81.
-func (self *IDebugClient7) CreateProcess2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory foundation.PSTR, Environment foundation.PSTR) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)))
+func (self *IDebugClient7) CreateProcess2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer []byte, InitialDirectory foundation.PSTR, Environment foundation.PSTR) error {
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcess2Wide dispatches through IDebugClient7's vtable slot 82.
-func (self *IDebugClient7) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory string, Environment string) error {
+func (self *IDebugClient7) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
 	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
 	_Environment := win32.UTF16Ptr(Environment)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcessAndAttach2 dispatches through IDebugClient7's vtable slot 83.
-func (self *IDebugClient7) CreateProcessAndAttach2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory foundation.PSTR, Environment foundation.PSTR, ProcessId uint32, AttachFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)), uintptr(ProcessId), uintptr(AttachFlags))
+func (self *IDebugClient7) CreateProcessAndAttach2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer []byte, InitialDirectory foundation.PSTR, Environment foundation.PSTR, ProcessId uint32, AttachFlags uint32) error {
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcessAndAttach2Wide dispatches through IDebugClient7's vtable slot 84.
-func (self *IDebugClient7) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
+func (self *IDebugClient7) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
 	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
 	_Environment := win32.UTF16Ptr(Environment)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4637,8 +4849,12 @@ func (self *IDebugClient7) SetEventContextCallbacks(Callbacks *IDebugEventContex
 }
 
 // SetClientContext dispatches through IDebugClient7's vtable slot 96.
-func (self *IDebugClient7) SetClientContext(Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugClient7) SetClientContext(Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4687,8 +4903,12 @@ func (self *IDebugClient8) DisconnectProcessServer(Server uint64) error {
 }
 
 // GetRunningProcessSystemIds dispatches through IDebugClient8's vtable slot 9.
-func (self *IDebugClient8) GetRunningProcessSystemIds(Server uint64, Ids *uint32, Count uint32, ActualCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(Ids)), uintptr(Count), uintptr(unsafe.Pointer(ActualCount)))
+func (self *IDebugClient8) GetRunningProcessSystemIds(Server uint64, Ids []uint32, ActualCount *uint32) error {
+	var _Ids *uint32
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(ActualCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -5134,32 +5354,48 @@ func (self *IDebugClient8) SetEventCallbacksWide(Callbacks *IDebugEventCallbacks
 }
 
 // CreateProcess2 dispatches through IDebugClient8's vtable slot 81.
-func (self *IDebugClient8) CreateProcess2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory foundation.PSTR, Environment foundation.PSTR) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)))
+func (self *IDebugClient8) CreateProcess2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer []byte, InitialDirectory foundation.PSTR, Environment foundation.PSTR) error {
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcess2Wide dispatches through IDebugClient8's vtable slot 82.
-func (self *IDebugClient8) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory string, Environment string) error {
+func (self *IDebugClient8) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
 	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
 	_Environment := win32.UTF16Ptr(Environment)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcessAndAttach2 dispatches through IDebugClient8's vtable slot 83.
-func (self *IDebugClient8) CreateProcessAndAttach2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory foundation.PSTR, Environment foundation.PSTR, ProcessId uint32, AttachFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)), uintptr(ProcessId), uintptr(AttachFlags))
+func (self *IDebugClient8) CreateProcessAndAttach2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer []byte, InitialDirectory foundation.PSTR, Environment foundation.PSTR, ProcessId uint32, AttachFlags uint32) error {
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcessAndAttach2Wide dispatches through IDebugClient8's vtable slot 84.
-func (self *IDebugClient8) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
+func (self *IDebugClient8) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
 	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
 	_Environment := win32.UTF16Ptr(Environment)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -5232,8 +5468,12 @@ func (self *IDebugClient8) SetEventContextCallbacks(Callbacks *IDebugEventContex
 }
 
 // SetClientContext dispatches through IDebugClient8's vtable slot 96.
-func (self *IDebugClient8) SetClientContext(Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugClient8) SetClientContext(Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -5289,8 +5529,12 @@ func (self *IDebugClient9) DisconnectProcessServer(Server uint64) error {
 }
 
 // GetRunningProcessSystemIds dispatches through IDebugClient9's vtable slot 9.
-func (self *IDebugClient9) GetRunningProcessSystemIds(Server uint64, Ids *uint32, Count uint32, ActualCount *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(Ids)), uintptr(Count), uintptr(unsafe.Pointer(ActualCount)))
+func (self *IDebugClient9) GetRunningProcessSystemIds(Server uint64, Ids []uint32, ActualCount *uint32) error {
+	var _Ids *uint32
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(ActualCount)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -5736,32 +5980,48 @@ func (self *IDebugClient9) SetEventCallbacksWide(Callbacks *IDebugEventCallbacks
 }
 
 // CreateProcess2 dispatches through IDebugClient9's vtable slot 81.
-func (self *IDebugClient9) CreateProcess2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory foundation.PSTR, Environment foundation.PSTR) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)))
+func (self *IDebugClient9) CreateProcess2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer []byte, InitialDirectory foundation.PSTR, Environment foundation.PSTR) error {
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[81], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcess2Wide dispatches through IDebugClient9's vtable slot 82.
-func (self *IDebugClient9) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory string, Environment string) error {
+func (self *IDebugClient9) CreateProcess2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
 	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
 	_Environment := win32.UTF16Ptr(Environment)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[82], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcessAndAttach2 dispatches through IDebugClient9's vtable slot 83.
-func (self *IDebugClient9) CreateProcessAndAttach2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory foundation.PSTR, Environment foundation.PSTR, ProcessId uint32, AttachFlags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)), uintptr(ProcessId), uintptr(AttachFlags))
+func (self *IDebugClient9) CreateProcessAndAttach2(Server uint64, CommandLine foundation.PSTR, OptionsBuffer []byte, InitialDirectory foundation.PSTR, Environment foundation.PSTR, ProcessId uint32, AttachFlags uint32) error {
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[83], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(InitialDirectory)), uintptr(unsafe.Pointer(Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcessAndAttach2Wide dispatches through IDebugClient9's vtable slot 84.
-func (self *IDebugClient9) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer unsafe.Pointer, OptionsBufferSize uint32, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
+func (self *IDebugClient9) CreateProcessAndAttach2Wide(Server uint64, CommandLine string, OptionsBuffer []byte, InitialDirectory string, Environment string, ProcessId uint32, AttachFlags uint32) error {
 	_CommandLine := win32.UTF16Ptr(CommandLine)
+	var _OptionsBuffer *byte
+	if len(OptionsBuffer) > 0 {
+		_OptionsBuffer = &OptionsBuffer[0]
+	}
 	_InitialDirectory := win32.UTF16Ptr(InitialDirectory)
 	_Environment := win32.UTF16Ptr(Environment)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(OptionsBuffer)), uintptr(OptionsBufferSize), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[84], uintptr(unsafe.Pointer(self)), uintptr(Server), uintptr(unsafe.Pointer(_CommandLine)), uintptr(unsafe.Pointer(_OptionsBuffer)), uintptr(len(OptionsBuffer)), uintptr(unsafe.Pointer(_InitialDirectory)), uintptr(unsafe.Pointer(_Environment)), uintptr(ProcessId), uintptr(AttachFlags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -5834,8 +6094,12 @@ func (self *IDebugClient9) SetEventContextCallbacks(Callbacks *IDebugEventContex
 }
 
 // SetClientContext dispatches through IDebugClient9's vtable slot 96.
-func (self *IDebugClient9) SetClientContext(Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugClient9) SetClientContext(Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[96], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6025,8 +6289,12 @@ func (self *IDebugControl) OutputDisassembly(OutputControl uint32, Offset uint64
 }
 
 // OutputDisassemblyLines dispatches through IDebugControl's vtable slot 29.
-func (self *IDebugControl) OutputDisassemblyLines(OutputControl uint32, PreviousLines uint32, TotalLines uint32, Offset uint64, Flags uint32, OffsetLine *uint32, StartOffset *uint64, EndOffset *uint64, LineOffsets *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(PreviousLines), uintptr(TotalLines), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(OffsetLine)), uintptr(unsafe.Pointer(StartOffset)), uintptr(unsafe.Pointer(EndOffset)), uintptr(unsafe.Pointer(LineOffsets)))
+func (self *IDebugControl) OutputDisassemblyLines(OutputControl uint32, PreviousLines uint32, Offset uint64, Flags uint32, OffsetLine *uint32, StartOffset *uint64, EndOffset *uint64, LineOffsets []uint64) error {
+	var _LineOffsets *uint64
+	if len(LineOffsets) > 0 {
+		_LineOffsets = &LineOffsets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(PreviousLines), uintptr(len(LineOffsets)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(OffsetLine)), uintptr(unsafe.Pointer(StartOffset)), uintptr(unsafe.Pointer(EndOffset)), uintptr(unsafe.Pointer(_LineOffsets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6037,8 +6305,12 @@ func (self *IDebugControl) GetNearInstruction(Offset uint64, Delta int32, NearOf
 }
 
 // GetStackTrace dispatches through IDebugControl's vtable slot 31.
-func (self *IDebugControl) GetStackTrace(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl) GetStackTrace(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames []DEBUG_STACK_FRAME, FramesFilled *uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6049,8 +6321,12 @@ func (self *IDebugControl) GetReturnOffset(Offset *uint64) error {
 }
 
 // OutputStackTrace dispatches through IDebugControl's vtable slot 33.
-func (self *IDebugControl) OutputStackTrace(OutputControl uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(Flags))
+func (self *IDebugControl) OutputStackTrace(OutputControl uint32, Frames []DEBUG_STACK_FRAME, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6079,8 +6355,12 @@ func (self *IDebugControl) GetNumberPossibleExecutingProcessorTypes(Number *uint
 }
 
 // GetPossibleExecutingProcessorTypes dispatches through IDebugControl's vtable slot 38.
-func (self *IDebugControl) GetPossibleExecutingProcessorTypes(Start uint32, Count uint32, Types *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Types)))
+func (self *IDebugControl) GetPossibleExecutingProcessorTypes(Start uint32, Types []uint32) error {
+	var _Types *uint32
+	if len(Types) > 0 {
+		_Types = &Types[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Types)), uintptr(unsafe.Pointer(_Types)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6121,8 +6401,12 @@ func (self *IDebugControl) GetNumberSupportedProcessorTypes(Number *uint32) erro
 }
 
 // GetSupportedProcessorTypes dispatches through IDebugControl's vtable slot 45.
-func (self *IDebugControl) GetSupportedProcessorTypes(Start uint32, Count uint32, Types *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Types)))
+func (self *IDebugControl) GetSupportedProcessorTypes(Start uint32, Types []uint32) error {
+	var _Types *uint32
+	if len(Types) > 0 {
+		_Types = &Types[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Types)), uintptr(unsafe.Pointer(_Types)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6361,14 +6645,22 @@ func (self *IDebugControl) SetEventFilterCommand(Index uint32, Command foundatio
 }
 
 // GetSpecificFilterParameters dispatches through IDebugControl's vtable slot 85.
-func (self *IDebugControl) GetSpecificFilterParameters(Start uint32, Count uint32, Params *DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl) GetSpecificFilterParameters(Start uint32, Params []DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_SPECIFIC_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetSpecificFilterParameters dispatches through IDebugControl's vtable slot 86.
-func (self *IDebugControl) SetSpecificFilterParameters(Start uint32, Count uint32, Params *DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl) SetSpecificFilterParameters(Start uint32, Params []DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_SPECIFIC_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6391,8 +6683,12 @@ func (self *IDebugControl) GetExceptionFilterParameters(Count uint32, Codes *uin
 }
 
 // SetExceptionFilterParameters dispatches through IDebugControl's vtable slot 90.
-func (self *IDebugControl) SetExceptionFilterParameters(Count uint32, Params *DEBUG_EXCEPTION_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl) SetExceptionFilterParameters(Params []DEBUG_EXCEPTION_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_EXCEPTION_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6415,8 +6711,12 @@ func (self *IDebugControl) WaitForEvent(Flags uint32, Timeout uint32) error {
 }
 
 // GetLastEventInformation dispatches through IDebugControl's vtable slot 94.
-func (self *IDebugControl) GetLastEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32, Description foundation.PSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
+func (self *IDebugControl) GetLastEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32, Description foundation.PSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6586,8 +6886,12 @@ func (self *IDebugControl2) OutputDisassembly(OutputControl uint32, Offset uint6
 }
 
 // OutputDisassemblyLines dispatches through IDebugControl2's vtable slot 29.
-func (self *IDebugControl2) OutputDisassemblyLines(OutputControl uint32, PreviousLines uint32, TotalLines uint32, Offset uint64, Flags uint32, OffsetLine *uint32, StartOffset *uint64, EndOffset *uint64, LineOffsets *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(PreviousLines), uintptr(TotalLines), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(OffsetLine)), uintptr(unsafe.Pointer(StartOffset)), uintptr(unsafe.Pointer(EndOffset)), uintptr(unsafe.Pointer(LineOffsets)))
+func (self *IDebugControl2) OutputDisassemblyLines(OutputControl uint32, PreviousLines uint32, Offset uint64, Flags uint32, OffsetLine *uint32, StartOffset *uint64, EndOffset *uint64, LineOffsets []uint64) error {
+	var _LineOffsets *uint64
+	if len(LineOffsets) > 0 {
+		_LineOffsets = &LineOffsets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(PreviousLines), uintptr(len(LineOffsets)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(OffsetLine)), uintptr(unsafe.Pointer(StartOffset)), uintptr(unsafe.Pointer(EndOffset)), uintptr(unsafe.Pointer(_LineOffsets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6598,8 +6902,12 @@ func (self *IDebugControl2) GetNearInstruction(Offset uint64, Delta int32, NearO
 }
 
 // GetStackTrace dispatches through IDebugControl2's vtable slot 31.
-func (self *IDebugControl2) GetStackTrace(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl2) GetStackTrace(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames []DEBUG_STACK_FRAME, FramesFilled *uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6610,8 +6918,12 @@ func (self *IDebugControl2) GetReturnOffset(Offset *uint64) error {
 }
 
 // OutputStackTrace dispatches through IDebugControl2's vtable slot 33.
-func (self *IDebugControl2) OutputStackTrace(OutputControl uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(Flags))
+func (self *IDebugControl2) OutputStackTrace(OutputControl uint32, Frames []DEBUG_STACK_FRAME, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6640,8 +6952,12 @@ func (self *IDebugControl2) GetNumberPossibleExecutingProcessorTypes(Number *uin
 }
 
 // GetPossibleExecutingProcessorTypes dispatches through IDebugControl2's vtable slot 38.
-func (self *IDebugControl2) GetPossibleExecutingProcessorTypes(Start uint32, Count uint32, Types *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Types)))
+func (self *IDebugControl2) GetPossibleExecutingProcessorTypes(Start uint32, Types []uint32) error {
+	var _Types *uint32
+	if len(Types) > 0 {
+		_Types = &Types[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Types)), uintptr(unsafe.Pointer(_Types)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6682,8 +6998,12 @@ func (self *IDebugControl2) GetNumberSupportedProcessorTypes(Number *uint32) err
 }
 
 // GetSupportedProcessorTypes dispatches through IDebugControl2's vtable slot 45.
-func (self *IDebugControl2) GetSupportedProcessorTypes(Start uint32, Count uint32, Types *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Types)))
+func (self *IDebugControl2) GetSupportedProcessorTypes(Start uint32, Types []uint32) error {
+	var _Types *uint32
+	if len(Types) > 0 {
+		_Types = &Types[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Types)), uintptr(unsafe.Pointer(_Types)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6922,14 +7242,22 @@ func (self *IDebugControl2) SetEventFilterCommand(Index uint32, Command foundati
 }
 
 // GetSpecificFilterParameters dispatches through IDebugControl2's vtable slot 85.
-func (self *IDebugControl2) GetSpecificFilterParameters(Start uint32, Count uint32, Params *DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl2) GetSpecificFilterParameters(Start uint32, Params []DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_SPECIFIC_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetSpecificFilterParameters dispatches through IDebugControl2's vtable slot 86.
-func (self *IDebugControl2) SetSpecificFilterParameters(Start uint32, Count uint32, Params *DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl2) SetSpecificFilterParameters(Start uint32, Params []DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_SPECIFIC_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6952,8 +7280,12 @@ func (self *IDebugControl2) GetExceptionFilterParameters(Count uint32, Codes *ui
 }
 
 // SetExceptionFilterParameters dispatches through IDebugControl2's vtable slot 90.
-func (self *IDebugControl2) SetExceptionFilterParameters(Count uint32, Params *DEBUG_EXCEPTION_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl2) SetExceptionFilterParameters(Params []DEBUG_EXCEPTION_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_EXCEPTION_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -6976,8 +7308,12 @@ func (self *IDebugControl2) WaitForEvent(Flags uint32, Timeout uint32) error {
 }
 
 // GetLastEventInformation dispatches through IDebugControl2's vtable slot 94.
-func (self *IDebugControl2) GetLastEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32, Description foundation.PSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
+func (self *IDebugControl2) GetLastEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32, Description foundation.PSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7195,8 +7531,12 @@ func (self *IDebugControl3) OutputDisassembly(OutputControl uint32, Offset uint6
 }
 
 // OutputDisassemblyLines dispatches through IDebugControl3's vtable slot 29.
-func (self *IDebugControl3) OutputDisassemblyLines(OutputControl uint32, PreviousLines uint32, TotalLines uint32, Offset uint64, Flags uint32, OffsetLine *uint32, StartOffset *uint64, EndOffset *uint64, LineOffsets *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(PreviousLines), uintptr(TotalLines), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(OffsetLine)), uintptr(unsafe.Pointer(StartOffset)), uintptr(unsafe.Pointer(EndOffset)), uintptr(unsafe.Pointer(LineOffsets)))
+func (self *IDebugControl3) OutputDisassemblyLines(OutputControl uint32, PreviousLines uint32, Offset uint64, Flags uint32, OffsetLine *uint32, StartOffset *uint64, EndOffset *uint64, LineOffsets []uint64) error {
+	var _LineOffsets *uint64
+	if len(LineOffsets) > 0 {
+		_LineOffsets = &LineOffsets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(PreviousLines), uintptr(len(LineOffsets)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(OffsetLine)), uintptr(unsafe.Pointer(StartOffset)), uintptr(unsafe.Pointer(EndOffset)), uintptr(unsafe.Pointer(_LineOffsets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7207,8 +7547,12 @@ func (self *IDebugControl3) GetNearInstruction(Offset uint64, Delta int32, NearO
 }
 
 // GetStackTrace dispatches through IDebugControl3's vtable slot 31.
-func (self *IDebugControl3) GetStackTrace(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl3) GetStackTrace(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames []DEBUG_STACK_FRAME, FramesFilled *uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7219,8 +7563,12 @@ func (self *IDebugControl3) GetReturnOffset(Offset *uint64) error {
 }
 
 // OutputStackTrace dispatches through IDebugControl3's vtable slot 33.
-func (self *IDebugControl3) OutputStackTrace(OutputControl uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(Flags))
+func (self *IDebugControl3) OutputStackTrace(OutputControl uint32, Frames []DEBUG_STACK_FRAME, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7249,8 +7597,12 @@ func (self *IDebugControl3) GetNumberPossibleExecutingProcessorTypes(Number *uin
 }
 
 // GetPossibleExecutingProcessorTypes dispatches through IDebugControl3's vtable slot 38.
-func (self *IDebugControl3) GetPossibleExecutingProcessorTypes(Start uint32, Count uint32, Types *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Types)))
+func (self *IDebugControl3) GetPossibleExecutingProcessorTypes(Start uint32, Types []uint32) error {
+	var _Types *uint32
+	if len(Types) > 0 {
+		_Types = &Types[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Types)), uintptr(unsafe.Pointer(_Types)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7291,8 +7643,12 @@ func (self *IDebugControl3) GetNumberSupportedProcessorTypes(Number *uint32) err
 }
 
 // GetSupportedProcessorTypes dispatches through IDebugControl3's vtable slot 45.
-func (self *IDebugControl3) GetSupportedProcessorTypes(Start uint32, Count uint32, Types *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Types)))
+func (self *IDebugControl3) GetSupportedProcessorTypes(Start uint32, Types []uint32) error {
+	var _Types *uint32
+	if len(Types) > 0 {
+		_Types = &Types[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Types)), uintptr(unsafe.Pointer(_Types)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7531,14 +7887,22 @@ func (self *IDebugControl3) SetEventFilterCommand(Index uint32, Command foundati
 }
 
 // GetSpecificFilterParameters dispatches through IDebugControl3's vtable slot 85.
-func (self *IDebugControl3) GetSpecificFilterParameters(Start uint32, Count uint32, Params *DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl3) GetSpecificFilterParameters(Start uint32, Params []DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_SPECIFIC_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetSpecificFilterParameters dispatches through IDebugControl3's vtable slot 86.
-func (self *IDebugControl3) SetSpecificFilterParameters(Start uint32, Count uint32, Params *DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl3) SetSpecificFilterParameters(Start uint32, Params []DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_SPECIFIC_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7561,8 +7925,12 @@ func (self *IDebugControl3) GetExceptionFilterParameters(Count uint32, Codes *ui
 }
 
 // SetExceptionFilterParameters dispatches through IDebugControl3's vtable slot 90.
-func (self *IDebugControl3) SetExceptionFilterParameters(Count uint32, Params *DEBUG_EXCEPTION_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl3) SetExceptionFilterParameters(Params []DEBUG_EXCEPTION_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_EXCEPTION_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7585,8 +7953,12 @@ func (self *IDebugControl3) WaitForEvent(Flags uint32, Timeout uint32) error {
 }
 
 // GetLastEventInformation dispatches through IDebugControl3's vtable slot 94.
-func (self *IDebugControl3) GetLastEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32, Description foundation.PSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
+func (self *IDebugControl3) GetLastEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32, Description foundation.PSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7882,8 +8254,12 @@ func (self *IDebugControl4) OutputDisassembly(OutputControl uint32, Offset uint6
 }
 
 // OutputDisassemblyLines dispatches through IDebugControl4's vtable slot 29.
-func (self *IDebugControl4) OutputDisassemblyLines(OutputControl uint32, PreviousLines uint32, TotalLines uint32, Offset uint64, Flags uint32, OffsetLine *uint32, StartOffset *uint64, EndOffset *uint64, LineOffsets *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(PreviousLines), uintptr(TotalLines), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(OffsetLine)), uintptr(unsafe.Pointer(StartOffset)), uintptr(unsafe.Pointer(EndOffset)), uintptr(unsafe.Pointer(LineOffsets)))
+func (self *IDebugControl4) OutputDisassemblyLines(OutputControl uint32, PreviousLines uint32, Offset uint64, Flags uint32, OffsetLine *uint32, StartOffset *uint64, EndOffset *uint64, LineOffsets []uint64) error {
+	var _LineOffsets *uint64
+	if len(LineOffsets) > 0 {
+		_LineOffsets = &LineOffsets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(PreviousLines), uintptr(len(LineOffsets)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(OffsetLine)), uintptr(unsafe.Pointer(StartOffset)), uintptr(unsafe.Pointer(EndOffset)), uintptr(unsafe.Pointer(_LineOffsets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7894,8 +8270,12 @@ func (self *IDebugControl4) GetNearInstruction(Offset uint64, Delta int32, NearO
 }
 
 // GetStackTrace dispatches through IDebugControl4's vtable slot 31.
-func (self *IDebugControl4) GetStackTrace(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl4) GetStackTrace(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames []DEBUG_STACK_FRAME, FramesFilled *uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7906,8 +8286,12 @@ func (self *IDebugControl4) GetReturnOffset(Offset *uint64) error {
 }
 
 // OutputStackTrace dispatches through IDebugControl4's vtable slot 33.
-func (self *IDebugControl4) OutputStackTrace(OutputControl uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(Flags))
+func (self *IDebugControl4) OutputStackTrace(OutputControl uint32, Frames []DEBUG_STACK_FRAME, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7936,8 +8320,12 @@ func (self *IDebugControl4) GetNumberPossibleExecutingProcessorTypes(Number *uin
 }
 
 // GetPossibleExecutingProcessorTypes dispatches through IDebugControl4's vtable slot 38.
-func (self *IDebugControl4) GetPossibleExecutingProcessorTypes(Start uint32, Count uint32, Types *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Types)))
+func (self *IDebugControl4) GetPossibleExecutingProcessorTypes(Start uint32, Types []uint32) error {
+	var _Types *uint32
+	if len(Types) > 0 {
+		_Types = &Types[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Types)), uintptr(unsafe.Pointer(_Types)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -7978,8 +8366,12 @@ func (self *IDebugControl4) GetNumberSupportedProcessorTypes(Number *uint32) err
 }
 
 // GetSupportedProcessorTypes dispatches through IDebugControl4's vtable slot 45.
-func (self *IDebugControl4) GetSupportedProcessorTypes(Start uint32, Count uint32, Types *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Types)))
+func (self *IDebugControl4) GetSupportedProcessorTypes(Start uint32, Types []uint32) error {
+	var _Types *uint32
+	if len(Types) > 0 {
+		_Types = &Types[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Types)), uintptr(unsafe.Pointer(_Types)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -8218,14 +8610,22 @@ func (self *IDebugControl4) SetEventFilterCommand(Index uint32, Command foundati
 }
 
 // GetSpecificFilterParameters dispatches through IDebugControl4's vtable slot 85.
-func (self *IDebugControl4) GetSpecificFilterParameters(Start uint32, Count uint32, Params *DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl4) GetSpecificFilterParameters(Start uint32, Params []DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_SPECIFIC_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetSpecificFilterParameters dispatches through IDebugControl4's vtable slot 86.
-func (self *IDebugControl4) SetSpecificFilterParameters(Start uint32, Count uint32, Params *DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl4) SetSpecificFilterParameters(Start uint32, Params []DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_SPECIFIC_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -8248,8 +8648,12 @@ func (self *IDebugControl4) GetExceptionFilterParameters(Count uint32, Codes *ui
 }
 
 // SetExceptionFilterParameters dispatches through IDebugControl4's vtable slot 90.
-func (self *IDebugControl4) SetExceptionFilterParameters(Count uint32, Params *DEBUG_EXCEPTION_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl4) SetExceptionFilterParameters(Params []DEBUG_EXCEPTION_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_EXCEPTION_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -8272,8 +8676,12 @@ func (self *IDebugControl4) WaitForEvent(Flags uint32, Timeout uint32) error {
 }
 
 // GetLastEventInformation dispatches through IDebugControl4's vtable slot 94.
-func (self *IDebugControl4) GetLastEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32, Description foundation.PSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
+func (self *IDebugControl4) GetLastEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32, Description foundation.PSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -8630,8 +9038,12 @@ func (self *IDebugControl4) SetExceptionFilterSecondCommandWide(Index uint32, Co
 }
 
 // GetLastEventInformationWide dispatches through IDebugControl4's vtable slot 150.
-func (self *IDebugControl4) GetLastEventInformationWide(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32, Description foundation.PWSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[150], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
+func (self *IDebugControl4) GetLastEventInformationWide(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32, Description foundation.PWSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[150], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -8714,20 +9126,48 @@ func (self *IDebugControl4) GetSystemVersionStringWide(Which uint32, Buffer foun
 }
 
 // GetContextStackTrace dispatches through IDebugControl4's vtable slot 163.
-func (self *IDebugControl4) GetContextStackTrace(StartContext unsafe.Pointer, StartContextSize uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FrameContexts unsafe.Pointer, FrameContextsSize uint32, FrameContextsEntrySize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[163], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartContext)), uintptr(StartContextSize), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FrameContexts)), uintptr(FrameContextsSize), uintptr(FrameContextsEntrySize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl4) GetContextStackTrace(StartContext []byte, Frames []DEBUG_STACK_FRAME, FrameContexts []byte, FrameContextsEntrySize uint32, FramesFilled *uint32) error {
+	var _StartContext *byte
+	if len(StartContext) > 0 {
+		_StartContext = &StartContext[0]
+	}
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	var _FrameContexts *byte
+	if len(FrameContexts) > 0 {
+		_FrameContexts = &FrameContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[163], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_StartContext)), uintptr(len(StartContext)), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(_FrameContexts)), uintptr(len(FrameContexts)), uintptr(FrameContextsEntrySize), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OutputContextStackTrace dispatches through IDebugControl4's vtable slot 164.
-func (self *IDebugControl4) OutputContextStackTrace(OutputControl uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FrameContexts unsafe.Pointer, FrameContextsSize uint32, FrameContextsEntrySize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[164], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FrameContexts)), uintptr(FrameContextsSize), uintptr(FrameContextsEntrySize), uintptr(Flags))
+func (self *IDebugControl4) OutputContextStackTrace(OutputControl uint32, Frames []DEBUG_STACK_FRAME, FrameContexts []byte, FrameContextsEntrySize uint32, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	var _FrameContexts *byte
+	if len(FrameContexts) > 0 {
+		_FrameContexts = &FrameContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[164], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(_FrameContexts)), uintptr(len(FrameContexts)), uintptr(FrameContextsEntrySize), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetStoredEventInformation dispatches through IDebugControl4's vtable slot 165.
-func (self *IDebugControl4) GetStoredEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, Context unsafe.Pointer, ContextSize uint32, ContextUsed *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[165], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize), uintptr(unsafe.Pointer(ContextUsed)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)))
+func (self *IDebugControl4) GetStoredEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, Context []byte, ContextUsed *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[165], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)), uintptr(unsafe.Pointer(ContextUsed)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -8915,8 +9355,12 @@ func (self *IDebugControl5) OutputDisassembly(OutputControl uint32, Offset uint6
 }
 
 // OutputDisassemblyLines dispatches through IDebugControl5's vtable slot 29.
-func (self *IDebugControl5) OutputDisassemblyLines(OutputControl uint32, PreviousLines uint32, TotalLines uint32, Offset uint64, Flags uint32, OffsetLine *uint32, StartOffset *uint64, EndOffset *uint64, LineOffsets *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(PreviousLines), uintptr(TotalLines), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(OffsetLine)), uintptr(unsafe.Pointer(StartOffset)), uintptr(unsafe.Pointer(EndOffset)), uintptr(unsafe.Pointer(LineOffsets)))
+func (self *IDebugControl5) OutputDisassemblyLines(OutputControl uint32, PreviousLines uint32, Offset uint64, Flags uint32, OffsetLine *uint32, StartOffset *uint64, EndOffset *uint64, LineOffsets []uint64) error {
+	var _LineOffsets *uint64
+	if len(LineOffsets) > 0 {
+		_LineOffsets = &LineOffsets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(PreviousLines), uintptr(len(LineOffsets)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(OffsetLine)), uintptr(unsafe.Pointer(StartOffset)), uintptr(unsafe.Pointer(EndOffset)), uintptr(unsafe.Pointer(_LineOffsets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -8927,8 +9371,12 @@ func (self *IDebugControl5) GetNearInstruction(Offset uint64, Delta int32, NearO
 }
 
 // GetStackTrace dispatches through IDebugControl5's vtable slot 31.
-func (self *IDebugControl5) GetStackTrace(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl5) GetStackTrace(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames []DEBUG_STACK_FRAME, FramesFilled *uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -8939,8 +9387,12 @@ func (self *IDebugControl5) GetReturnOffset(Offset *uint64) error {
 }
 
 // OutputStackTrace dispatches through IDebugControl5's vtable slot 33.
-func (self *IDebugControl5) OutputStackTrace(OutputControl uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(Flags))
+func (self *IDebugControl5) OutputStackTrace(OutputControl uint32, Frames []DEBUG_STACK_FRAME, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -8969,8 +9421,12 @@ func (self *IDebugControl5) GetNumberPossibleExecutingProcessorTypes(Number *uin
 }
 
 // GetPossibleExecutingProcessorTypes dispatches through IDebugControl5's vtable slot 38.
-func (self *IDebugControl5) GetPossibleExecutingProcessorTypes(Start uint32, Count uint32, Types *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Types)))
+func (self *IDebugControl5) GetPossibleExecutingProcessorTypes(Start uint32, Types []uint32) error {
+	var _Types *uint32
+	if len(Types) > 0 {
+		_Types = &Types[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Types)), uintptr(unsafe.Pointer(_Types)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -9011,8 +9467,12 @@ func (self *IDebugControl5) GetNumberSupportedProcessorTypes(Number *uint32) err
 }
 
 // GetSupportedProcessorTypes dispatches through IDebugControl5's vtable slot 45.
-func (self *IDebugControl5) GetSupportedProcessorTypes(Start uint32, Count uint32, Types *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Types)))
+func (self *IDebugControl5) GetSupportedProcessorTypes(Start uint32, Types []uint32) error {
+	var _Types *uint32
+	if len(Types) > 0 {
+		_Types = &Types[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Types)), uintptr(unsafe.Pointer(_Types)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -9251,14 +9711,22 @@ func (self *IDebugControl5) SetEventFilterCommand(Index uint32, Command foundati
 }
 
 // GetSpecificFilterParameters dispatches through IDebugControl5's vtable slot 85.
-func (self *IDebugControl5) GetSpecificFilterParameters(Start uint32, Count uint32, Params *DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl5) GetSpecificFilterParameters(Start uint32, Params []DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_SPECIFIC_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetSpecificFilterParameters dispatches through IDebugControl5's vtable slot 86.
-func (self *IDebugControl5) SetSpecificFilterParameters(Start uint32, Count uint32, Params *DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl5) SetSpecificFilterParameters(Start uint32, Params []DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_SPECIFIC_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -9281,8 +9749,12 @@ func (self *IDebugControl5) GetExceptionFilterParameters(Count uint32, Codes *ui
 }
 
 // SetExceptionFilterParameters dispatches through IDebugControl5's vtable slot 90.
-func (self *IDebugControl5) SetExceptionFilterParameters(Count uint32, Params *DEBUG_EXCEPTION_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl5) SetExceptionFilterParameters(Params []DEBUG_EXCEPTION_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_EXCEPTION_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -9305,8 +9777,12 @@ func (self *IDebugControl5) WaitForEvent(Flags uint32, Timeout uint32) error {
 }
 
 // GetLastEventInformation dispatches through IDebugControl5's vtable slot 94.
-func (self *IDebugControl5) GetLastEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32, Description foundation.PSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
+func (self *IDebugControl5) GetLastEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32, Description foundation.PSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -9663,8 +10139,12 @@ func (self *IDebugControl5) SetExceptionFilterSecondCommandWide(Index uint32, Co
 }
 
 // GetLastEventInformationWide dispatches through IDebugControl5's vtable slot 150.
-func (self *IDebugControl5) GetLastEventInformationWide(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32, Description foundation.PWSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[150], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
+func (self *IDebugControl5) GetLastEventInformationWide(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32, Description foundation.PWSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[150], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -9747,20 +10227,48 @@ func (self *IDebugControl5) GetSystemVersionStringWide(Which uint32, Buffer foun
 }
 
 // GetContextStackTrace dispatches through IDebugControl5's vtable slot 163.
-func (self *IDebugControl5) GetContextStackTrace(StartContext unsafe.Pointer, StartContextSize uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FrameContexts unsafe.Pointer, FrameContextsSize uint32, FrameContextsEntrySize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[163], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartContext)), uintptr(StartContextSize), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FrameContexts)), uintptr(FrameContextsSize), uintptr(FrameContextsEntrySize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl5) GetContextStackTrace(StartContext []byte, Frames []DEBUG_STACK_FRAME, FrameContexts []byte, FrameContextsEntrySize uint32, FramesFilled *uint32) error {
+	var _StartContext *byte
+	if len(StartContext) > 0 {
+		_StartContext = &StartContext[0]
+	}
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	var _FrameContexts *byte
+	if len(FrameContexts) > 0 {
+		_FrameContexts = &FrameContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[163], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_StartContext)), uintptr(len(StartContext)), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(_FrameContexts)), uintptr(len(FrameContexts)), uintptr(FrameContextsEntrySize), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OutputContextStackTrace dispatches through IDebugControl5's vtable slot 164.
-func (self *IDebugControl5) OutputContextStackTrace(OutputControl uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FrameContexts unsafe.Pointer, FrameContextsSize uint32, FrameContextsEntrySize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[164], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FrameContexts)), uintptr(FrameContextsSize), uintptr(FrameContextsEntrySize), uintptr(Flags))
+func (self *IDebugControl5) OutputContextStackTrace(OutputControl uint32, Frames []DEBUG_STACK_FRAME, FrameContexts []byte, FrameContextsEntrySize uint32, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	var _FrameContexts *byte
+	if len(FrameContexts) > 0 {
+		_FrameContexts = &FrameContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[164], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(_FrameContexts)), uintptr(len(FrameContexts)), uintptr(FrameContextsEntrySize), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetStoredEventInformation dispatches through IDebugControl5's vtable slot 165.
-func (self *IDebugControl5) GetStoredEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, Context unsafe.Pointer, ContextSize uint32, ContextUsed *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[165], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize), uintptr(unsafe.Pointer(ContextUsed)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)))
+func (self *IDebugControl5) GetStoredEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, Context []byte, ContextUsed *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[165], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)), uintptr(unsafe.Pointer(ContextUsed)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -9783,26 +10291,54 @@ func (self *IDebugControl5) ResetManagedStatus(Flags uint32) error {
 }
 
 // GetStackTraceEx dispatches through IDebugControl5's vtable slot 169.
-func (self *IDebugControl5) GetStackTraceEx(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames *DEBUG_STACK_FRAME_EX, FramesSize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[169], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl5) GetStackTraceEx(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames []DEBUG_STACK_FRAME_EX, FramesFilled *uint32) error {
+	var _Frames *DEBUG_STACK_FRAME_EX
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[169], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OutputStackTraceEx dispatches through IDebugControl5's vtable slot 170.
-func (self *IDebugControl5) OutputStackTraceEx(OutputControl uint32, Frames *DEBUG_STACK_FRAME_EX, FramesSize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[170], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(Flags))
+func (self *IDebugControl5) OutputStackTraceEx(OutputControl uint32, Frames []DEBUG_STACK_FRAME_EX, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME_EX
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[170], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetContextStackTraceEx dispatches through IDebugControl5's vtable slot 171.
-func (self *IDebugControl5) GetContextStackTraceEx(StartContext unsafe.Pointer, StartContextSize uint32, Frames *DEBUG_STACK_FRAME_EX, FramesSize uint32, FrameContexts unsafe.Pointer, FrameContextsSize uint32, FrameContextsEntrySize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[171], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartContext)), uintptr(StartContextSize), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FrameContexts)), uintptr(FrameContextsSize), uintptr(FrameContextsEntrySize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl5) GetContextStackTraceEx(StartContext []byte, Frames []DEBUG_STACK_FRAME_EX, FrameContexts []byte, FrameContextsEntrySize uint32, FramesFilled *uint32) error {
+	var _StartContext *byte
+	if len(StartContext) > 0 {
+		_StartContext = &StartContext[0]
+	}
+	var _Frames *DEBUG_STACK_FRAME_EX
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	var _FrameContexts *byte
+	if len(FrameContexts) > 0 {
+		_FrameContexts = &FrameContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[171], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_StartContext)), uintptr(len(StartContext)), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(_FrameContexts)), uintptr(len(FrameContexts)), uintptr(FrameContextsEntrySize), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OutputContextStackTraceEx dispatches through IDebugControl5's vtable slot 172.
-func (self *IDebugControl5) OutputContextStackTraceEx(OutputControl uint32, Frames *DEBUG_STACK_FRAME_EX, FramesSize uint32, FrameContexts unsafe.Pointer, FrameContextsSize uint32, FrameContextsEntrySize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[172], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FrameContexts)), uintptr(FrameContextsSize), uintptr(FrameContextsEntrySize), uintptr(Flags))
+func (self *IDebugControl5) OutputContextStackTraceEx(OutputControl uint32, Frames []DEBUG_STACK_FRAME_EX, FrameContexts []byte, FrameContextsEntrySize uint32, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME_EX
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	var _FrameContexts *byte
+	if len(FrameContexts) > 0 {
+		_FrameContexts = &FrameContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[172], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(_FrameContexts)), uintptr(len(FrameContexts)), uintptr(FrameContextsEntrySize), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -9978,8 +10514,12 @@ func (self *IDebugControl6) OutputDisassembly(OutputControl uint32, Offset uint6
 }
 
 // OutputDisassemblyLines dispatches through IDebugControl6's vtable slot 29.
-func (self *IDebugControl6) OutputDisassemblyLines(OutputControl uint32, PreviousLines uint32, TotalLines uint32, Offset uint64, Flags uint32, OffsetLine *uint32, StartOffset *uint64, EndOffset *uint64, LineOffsets *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(PreviousLines), uintptr(TotalLines), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(OffsetLine)), uintptr(unsafe.Pointer(StartOffset)), uintptr(unsafe.Pointer(EndOffset)), uintptr(unsafe.Pointer(LineOffsets)))
+func (self *IDebugControl6) OutputDisassemblyLines(OutputControl uint32, PreviousLines uint32, Offset uint64, Flags uint32, OffsetLine *uint32, StartOffset *uint64, EndOffset *uint64, LineOffsets []uint64) error {
+	var _LineOffsets *uint64
+	if len(LineOffsets) > 0 {
+		_LineOffsets = &LineOffsets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(PreviousLines), uintptr(len(LineOffsets)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(OffsetLine)), uintptr(unsafe.Pointer(StartOffset)), uintptr(unsafe.Pointer(EndOffset)), uintptr(unsafe.Pointer(_LineOffsets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -9990,8 +10530,12 @@ func (self *IDebugControl6) GetNearInstruction(Offset uint64, Delta int32, NearO
 }
 
 // GetStackTrace dispatches through IDebugControl6's vtable slot 31.
-func (self *IDebugControl6) GetStackTrace(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl6) GetStackTrace(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames []DEBUG_STACK_FRAME, FramesFilled *uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -10002,8 +10546,12 @@ func (self *IDebugControl6) GetReturnOffset(Offset *uint64) error {
 }
 
 // OutputStackTrace dispatches through IDebugControl6's vtable slot 33.
-func (self *IDebugControl6) OutputStackTrace(OutputControl uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(Flags))
+func (self *IDebugControl6) OutputStackTrace(OutputControl uint32, Frames []DEBUG_STACK_FRAME, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -10032,8 +10580,12 @@ func (self *IDebugControl6) GetNumberPossibleExecutingProcessorTypes(Number *uin
 }
 
 // GetPossibleExecutingProcessorTypes dispatches through IDebugControl6's vtable slot 38.
-func (self *IDebugControl6) GetPossibleExecutingProcessorTypes(Start uint32, Count uint32, Types *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Types)))
+func (self *IDebugControl6) GetPossibleExecutingProcessorTypes(Start uint32, Types []uint32) error {
+	var _Types *uint32
+	if len(Types) > 0 {
+		_Types = &Types[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Types)), uintptr(unsafe.Pointer(_Types)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -10074,8 +10626,12 @@ func (self *IDebugControl6) GetNumberSupportedProcessorTypes(Number *uint32) err
 }
 
 // GetSupportedProcessorTypes dispatches through IDebugControl6's vtable slot 45.
-func (self *IDebugControl6) GetSupportedProcessorTypes(Start uint32, Count uint32, Types *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Types)))
+func (self *IDebugControl6) GetSupportedProcessorTypes(Start uint32, Types []uint32) error {
+	var _Types *uint32
+	if len(Types) > 0 {
+		_Types = &Types[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Types)), uintptr(unsafe.Pointer(_Types)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -10314,14 +10870,22 @@ func (self *IDebugControl6) SetEventFilterCommand(Index uint32, Command foundati
 }
 
 // GetSpecificFilterParameters dispatches through IDebugControl6's vtable slot 85.
-func (self *IDebugControl6) GetSpecificFilterParameters(Start uint32, Count uint32, Params *DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl6) GetSpecificFilterParameters(Start uint32, Params []DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_SPECIFIC_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetSpecificFilterParameters dispatches through IDebugControl6's vtable slot 86.
-func (self *IDebugControl6) SetSpecificFilterParameters(Start uint32, Count uint32, Params *DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl6) SetSpecificFilterParameters(Start uint32, Params []DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_SPECIFIC_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -10344,8 +10908,12 @@ func (self *IDebugControl6) GetExceptionFilterParameters(Count uint32, Codes *ui
 }
 
 // SetExceptionFilterParameters dispatches through IDebugControl6's vtable slot 90.
-func (self *IDebugControl6) SetExceptionFilterParameters(Count uint32, Params *DEBUG_EXCEPTION_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl6) SetExceptionFilterParameters(Params []DEBUG_EXCEPTION_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_EXCEPTION_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -10368,8 +10936,12 @@ func (self *IDebugControl6) WaitForEvent(Flags uint32, Timeout uint32) error {
 }
 
 // GetLastEventInformation dispatches through IDebugControl6's vtable slot 94.
-func (self *IDebugControl6) GetLastEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32, Description foundation.PSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
+func (self *IDebugControl6) GetLastEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32, Description foundation.PSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -10726,8 +11298,12 @@ func (self *IDebugControl6) SetExceptionFilterSecondCommandWide(Index uint32, Co
 }
 
 // GetLastEventInformationWide dispatches through IDebugControl6's vtable slot 150.
-func (self *IDebugControl6) GetLastEventInformationWide(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32, Description foundation.PWSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[150], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
+func (self *IDebugControl6) GetLastEventInformationWide(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32, Description foundation.PWSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[150], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -10810,20 +11386,48 @@ func (self *IDebugControl6) GetSystemVersionStringWide(Which uint32, Buffer foun
 }
 
 // GetContextStackTrace dispatches through IDebugControl6's vtable slot 163.
-func (self *IDebugControl6) GetContextStackTrace(StartContext unsafe.Pointer, StartContextSize uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FrameContexts unsafe.Pointer, FrameContextsSize uint32, FrameContextsEntrySize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[163], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartContext)), uintptr(StartContextSize), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FrameContexts)), uintptr(FrameContextsSize), uintptr(FrameContextsEntrySize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl6) GetContextStackTrace(StartContext []byte, Frames []DEBUG_STACK_FRAME, FrameContexts []byte, FrameContextsEntrySize uint32, FramesFilled *uint32) error {
+	var _StartContext *byte
+	if len(StartContext) > 0 {
+		_StartContext = &StartContext[0]
+	}
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	var _FrameContexts *byte
+	if len(FrameContexts) > 0 {
+		_FrameContexts = &FrameContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[163], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_StartContext)), uintptr(len(StartContext)), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(_FrameContexts)), uintptr(len(FrameContexts)), uintptr(FrameContextsEntrySize), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OutputContextStackTrace dispatches through IDebugControl6's vtable slot 164.
-func (self *IDebugControl6) OutputContextStackTrace(OutputControl uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FrameContexts unsafe.Pointer, FrameContextsSize uint32, FrameContextsEntrySize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[164], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FrameContexts)), uintptr(FrameContextsSize), uintptr(FrameContextsEntrySize), uintptr(Flags))
+func (self *IDebugControl6) OutputContextStackTrace(OutputControl uint32, Frames []DEBUG_STACK_FRAME, FrameContexts []byte, FrameContextsEntrySize uint32, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	var _FrameContexts *byte
+	if len(FrameContexts) > 0 {
+		_FrameContexts = &FrameContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[164], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(_FrameContexts)), uintptr(len(FrameContexts)), uintptr(FrameContextsEntrySize), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetStoredEventInformation dispatches through IDebugControl6's vtable slot 165.
-func (self *IDebugControl6) GetStoredEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, Context unsafe.Pointer, ContextSize uint32, ContextUsed *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[165], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize), uintptr(unsafe.Pointer(ContextUsed)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)))
+func (self *IDebugControl6) GetStoredEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, Context []byte, ContextUsed *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[165], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)), uintptr(unsafe.Pointer(ContextUsed)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -10846,26 +11450,54 @@ func (self *IDebugControl6) ResetManagedStatus(Flags uint32) error {
 }
 
 // GetStackTraceEx dispatches through IDebugControl6's vtable slot 169.
-func (self *IDebugControl6) GetStackTraceEx(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames *DEBUG_STACK_FRAME_EX, FramesSize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[169], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl6) GetStackTraceEx(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames []DEBUG_STACK_FRAME_EX, FramesFilled *uint32) error {
+	var _Frames *DEBUG_STACK_FRAME_EX
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[169], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OutputStackTraceEx dispatches through IDebugControl6's vtable slot 170.
-func (self *IDebugControl6) OutputStackTraceEx(OutputControl uint32, Frames *DEBUG_STACK_FRAME_EX, FramesSize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[170], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(Flags))
+func (self *IDebugControl6) OutputStackTraceEx(OutputControl uint32, Frames []DEBUG_STACK_FRAME_EX, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME_EX
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[170], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetContextStackTraceEx dispatches through IDebugControl6's vtable slot 171.
-func (self *IDebugControl6) GetContextStackTraceEx(StartContext unsafe.Pointer, StartContextSize uint32, Frames *DEBUG_STACK_FRAME_EX, FramesSize uint32, FrameContexts unsafe.Pointer, FrameContextsSize uint32, FrameContextsEntrySize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[171], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartContext)), uintptr(StartContextSize), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FrameContexts)), uintptr(FrameContextsSize), uintptr(FrameContextsEntrySize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl6) GetContextStackTraceEx(StartContext []byte, Frames []DEBUG_STACK_FRAME_EX, FrameContexts []byte, FrameContextsEntrySize uint32, FramesFilled *uint32) error {
+	var _StartContext *byte
+	if len(StartContext) > 0 {
+		_StartContext = &StartContext[0]
+	}
+	var _Frames *DEBUG_STACK_FRAME_EX
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	var _FrameContexts *byte
+	if len(FrameContexts) > 0 {
+		_FrameContexts = &FrameContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[171], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_StartContext)), uintptr(len(StartContext)), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(_FrameContexts)), uintptr(len(FrameContexts)), uintptr(FrameContextsEntrySize), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OutputContextStackTraceEx dispatches through IDebugControl6's vtable slot 172.
-func (self *IDebugControl6) OutputContextStackTraceEx(OutputControl uint32, Frames *DEBUG_STACK_FRAME_EX, FramesSize uint32, FrameContexts unsafe.Pointer, FrameContextsSize uint32, FrameContextsEntrySize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[172], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FrameContexts)), uintptr(FrameContextsSize), uintptr(FrameContextsEntrySize), uintptr(Flags))
+func (self *IDebugControl6) OutputContextStackTraceEx(OutputControl uint32, Frames []DEBUG_STACK_FRAME_EX, FrameContexts []byte, FrameContextsEntrySize uint32, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME_EX
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	var _FrameContexts *byte
+	if len(FrameContexts) > 0 {
+		_FrameContexts = &FrameContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[172], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(_FrameContexts)), uintptr(len(FrameContexts)), uintptr(FrameContextsEntrySize), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -11053,8 +11685,12 @@ func (self *IDebugControl7) OutputDisassembly(OutputControl uint32, Offset uint6
 }
 
 // OutputDisassemblyLines dispatches through IDebugControl7's vtable slot 29.
-func (self *IDebugControl7) OutputDisassemblyLines(OutputControl uint32, PreviousLines uint32, TotalLines uint32, Offset uint64, Flags uint32, OffsetLine *uint32, StartOffset *uint64, EndOffset *uint64, LineOffsets *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(PreviousLines), uintptr(TotalLines), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(OffsetLine)), uintptr(unsafe.Pointer(StartOffset)), uintptr(unsafe.Pointer(EndOffset)), uintptr(unsafe.Pointer(LineOffsets)))
+func (self *IDebugControl7) OutputDisassemblyLines(OutputControl uint32, PreviousLines uint32, Offset uint64, Flags uint32, OffsetLine *uint32, StartOffset *uint64, EndOffset *uint64, LineOffsets []uint64) error {
+	var _LineOffsets *uint64
+	if len(LineOffsets) > 0 {
+		_LineOffsets = &LineOffsets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(PreviousLines), uintptr(len(LineOffsets)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(OffsetLine)), uintptr(unsafe.Pointer(StartOffset)), uintptr(unsafe.Pointer(EndOffset)), uintptr(unsafe.Pointer(_LineOffsets)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -11065,8 +11701,12 @@ func (self *IDebugControl7) GetNearInstruction(Offset uint64, Delta int32, NearO
 }
 
 // GetStackTrace dispatches through IDebugControl7's vtable slot 31.
-func (self *IDebugControl7) GetStackTrace(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl7) GetStackTrace(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames []DEBUG_STACK_FRAME, FramesFilled *uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -11077,8 +11717,12 @@ func (self *IDebugControl7) GetReturnOffset(Offset *uint64) error {
 }
 
 // OutputStackTrace dispatches through IDebugControl7's vtable slot 33.
-func (self *IDebugControl7) OutputStackTrace(OutputControl uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(Flags))
+func (self *IDebugControl7) OutputStackTrace(OutputControl uint32, Frames []DEBUG_STACK_FRAME, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[33], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -11107,8 +11751,12 @@ func (self *IDebugControl7) GetNumberPossibleExecutingProcessorTypes(Number *uin
 }
 
 // GetPossibleExecutingProcessorTypes dispatches through IDebugControl7's vtable slot 38.
-func (self *IDebugControl7) GetPossibleExecutingProcessorTypes(Start uint32, Count uint32, Types *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Types)))
+func (self *IDebugControl7) GetPossibleExecutingProcessorTypes(Start uint32, Types []uint32) error {
+	var _Types *uint32
+	if len(Types) > 0 {
+		_Types = &Types[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[38], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Types)), uintptr(unsafe.Pointer(_Types)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -11149,8 +11797,12 @@ func (self *IDebugControl7) GetNumberSupportedProcessorTypes(Number *uint32) err
 }
 
 // GetSupportedProcessorTypes dispatches through IDebugControl7's vtable slot 45.
-func (self *IDebugControl7) GetSupportedProcessorTypes(Start uint32, Count uint32, Types *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Types)))
+func (self *IDebugControl7) GetSupportedProcessorTypes(Start uint32, Types []uint32) error {
+	var _Types *uint32
+	if len(Types) > 0 {
+		_Types = &Types[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[45], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Types)), uintptr(unsafe.Pointer(_Types)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -11389,14 +12041,22 @@ func (self *IDebugControl7) SetEventFilterCommand(Index uint32, Command foundati
 }
 
 // GetSpecificFilterParameters dispatches through IDebugControl7's vtable slot 85.
-func (self *IDebugControl7) GetSpecificFilterParameters(Start uint32, Count uint32, Params *DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl7) GetSpecificFilterParameters(Start uint32, Params []DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_SPECIFIC_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[85], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetSpecificFilterParameters dispatches through IDebugControl7's vtable slot 86.
-func (self *IDebugControl7) SetSpecificFilterParameters(Start uint32, Count uint32, Params *DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl7) SetSpecificFilterParameters(Start uint32, Params []DEBUG_SPECIFIC_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_SPECIFIC_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[86], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -11419,8 +12079,12 @@ func (self *IDebugControl7) GetExceptionFilterParameters(Count uint32, Codes *ui
 }
 
 // SetExceptionFilterParameters dispatches through IDebugControl7's vtable slot 90.
-func (self *IDebugControl7) SetExceptionFilterParameters(Count uint32, Params *DEBUG_EXCEPTION_FILTER_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugControl7) SetExceptionFilterParameters(Params []DEBUG_EXCEPTION_FILTER_PARAMETERS) error {
+	var _Params *DEBUG_EXCEPTION_FILTER_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[90], uintptr(unsafe.Pointer(self)), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -11443,8 +12107,12 @@ func (self *IDebugControl7) WaitForEvent(Flags uint32, Timeout uint32) error {
 }
 
 // GetLastEventInformation dispatches through IDebugControl7's vtable slot 94.
-func (self *IDebugControl7) GetLastEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32, Description foundation.PSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
+func (self *IDebugControl7) GetLastEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32, Description foundation.PSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[94], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -11801,8 +12469,12 @@ func (self *IDebugControl7) SetExceptionFilterSecondCommandWide(Index uint32, Co
 }
 
 // GetLastEventInformationWide dispatches through IDebugControl7's vtable slot 150.
-func (self *IDebugControl7) GetLastEventInformationWide(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32, Description foundation.PWSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[150], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
+func (self *IDebugControl7) GetLastEventInformationWide(Type *uint32, ProcessId *uint32, ThreadId *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32, Description foundation.PWSTR, DescriptionSize uint32, DescriptionUsed *uint32) error {
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[150], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)), uintptr(unsafe.Pointer(Description)), uintptr(DescriptionSize), uintptr(unsafe.Pointer(DescriptionUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -11885,20 +12557,48 @@ func (self *IDebugControl7) GetSystemVersionStringWide(Which uint32, Buffer foun
 }
 
 // GetContextStackTrace dispatches through IDebugControl7's vtable slot 163.
-func (self *IDebugControl7) GetContextStackTrace(StartContext unsafe.Pointer, StartContextSize uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FrameContexts unsafe.Pointer, FrameContextsSize uint32, FrameContextsEntrySize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[163], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartContext)), uintptr(StartContextSize), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FrameContexts)), uintptr(FrameContextsSize), uintptr(FrameContextsEntrySize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl7) GetContextStackTrace(StartContext []byte, Frames []DEBUG_STACK_FRAME, FrameContexts []byte, FrameContextsEntrySize uint32, FramesFilled *uint32) error {
+	var _StartContext *byte
+	if len(StartContext) > 0 {
+		_StartContext = &StartContext[0]
+	}
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	var _FrameContexts *byte
+	if len(FrameContexts) > 0 {
+		_FrameContexts = &FrameContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[163], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_StartContext)), uintptr(len(StartContext)), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(_FrameContexts)), uintptr(len(FrameContexts)), uintptr(FrameContextsEntrySize), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OutputContextStackTrace dispatches through IDebugControl7's vtable slot 164.
-func (self *IDebugControl7) OutputContextStackTrace(OutputControl uint32, Frames *DEBUG_STACK_FRAME, FramesSize uint32, FrameContexts unsafe.Pointer, FrameContextsSize uint32, FrameContextsEntrySize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[164], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FrameContexts)), uintptr(FrameContextsSize), uintptr(FrameContextsEntrySize), uintptr(Flags))
+func (self *IDebugControl7) OutputContextStackTrace(OutputControl uint32, Frames []DEBUG_STACK_FRAME, FrameContexts []byte, FrameContextsEntrySize uint32, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	var _FrameContexts *byte
+	if len(FrameContexts) > 0 {
+		_FrameContexts = &FrameContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[164], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(_FrameContexts)), uintptr(len(FrameContexts)), uintptr(FrameContextsEntrySize), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetStoredEventInformation dispatches through IDebugControl7's vtable slot 165.
-func (self *IDebugControl7) GetStoredEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, Context unsafe.Pointer, ContextSize uint32, ContextUsed *uint32, ExtraInformation unsafe.Pointer, ExtraInformationSize uint32, ExtraInformationUsed *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[165], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize), uintptr(unsafe.Pointer(ContextUsed)), uintptr(unsafe.Pointer(ExtraInformation)), uintptr(ExtraInformationSize), uintptr(unsafe.Pointer(ExtraInformationUsed)))
+func (self *IDebugControl7) GetStoredEventInformation(Type *uint32, ProcessId *uint32, ThreadId *uint32, Context []byte, ContextUsed *uint32, ExtraInformation []byte, ExtraInformationUsed *uint32) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	var _ExtraInformation *byte
+	if len(ExtraInformation) > 0 {
+		_ExtraInformation = &ExtraInformation[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[165], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Type)), uintptr(unsafe.Pointer(ProcessId)), uintptr(unsafe.Pointer(ThreadId)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)), uintptr(unsafe.Pointer(ContextUsed)), uintptr(unsafe.Pointer(_ExtraInformation)), uintptr(len(ExtraInformation)), uintptr(unsafe.Pointer(ExtraInformationUsed)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -11921,26 +12621,54 @@ func (self *IDebugControl7) ResetManagedStatus(Flags uint32) error {
 }
 
 // GetStackTraceEx dispatches through IDebugControl7's vtable slot 169.
-func (self *IDebugControl7) GetStackTraceEx(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames *DEBUG_STACK_FRAME_EX, FramesSize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[169], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl7) GetStackTraceEx(FrameOffset uint64, StackOffset uint64, InstructionOffset uint64, Frames []DEBUG_STACK_FRAME_EX, FramesFilled *uint32) error {
+	var _Frames *DEBUG_STACK_FRAME_EX
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[169], uintptr(unsafe.Pointer(self)), uintptr(FrameOffset), uintptr(StackOffset), uintptr(InstructionOffset), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OutputStackTraceEx dispatches through IDebugControl7's vtable slot 170.
-func (self *IDebugControl7) OutputStackTraceEx(OutputControl uint32, Frames *DEBUG_STACK_FRAME_EX, FramesSize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[170], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(Flags))
+func (self *IDebugControl7) OutputStackTraceEx(OutputControl uint32, Frames []DEBUG_STACK_FRAME_EX, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME_EX
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[170], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetContextStackTraceEx dispatches through IDebugControl7's vtable slot 171.
-func (self *IDebugControl7) GetContextStackTraceEx(StartContext unsafe.Pointer, StartContextSize uint32, Frames *DEBUG_STACK_FRAME_EX, FramesSize uint32, FrameContexts unsafe.Pointer, FrameContextsSize uint32, FrameContextsEntrySize uint32, FramesFilled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[171], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(StartContext)), uintptr(StartContextSize), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FrameContexts)), uintptr(FrameContextsSize), uintptr(FrameContextsEntrySize), uintptr(unsafe.Pointer(FramesFilled)))
+func (self *IDebugControl7) GetContextStackTraceEx(StartContext []byte, Frames []DEBUG_STACK_FRAME_EX, FrameContexts []byte, FrameContextsEntrySize uint32, FramesFilled *uint32) error {
+	var _StartContext *byte
+	if len(StartContext) > 0 {
+		_StartContext = &StartContext[0]
+	}
+	var _Frames *DEBUG_STACK_FRAME_EX
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	var _FrameContexts *byte
+	if len(FrameContexts) > 0 {
+		_FrameContexts = &FrameContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[171], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_StartContext)), uintptr(len(StartContext)), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(_FrameContexts)), uintptr(len(FrameContexts)), uintptr(FrameContextsEntrySize), uintptr(unsafe.Pointer(FramesFilled)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // OutputContextStackTraceEx dispatches through IDebugControl7's vtable slot 172.
-func (self *IDebugControl7) OutputContextStackTraceEx(OutputControl uint32, Frames *DEBUG_STACK_FRAME_EX, FramesSize uint32, FrameContexts unsafe.Pointer, FrameContextsSize uint32, FrameContextsEntrySize uint32, Flags uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[172], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(Frames)), uintptr(FramesSize), uintptr(unsafe.Pointer(FrameContexts)), uintptr(FrameContextsSize), uintptr(FrameContextsEntrySize), uintptr(Flags))
+func (self *IDebugControl7) OutputContextStackTraceEx(OutputControl uint32, Frames []DEBUG_STACK_FRAME_EX, FrameContexts []byte, FrameContextsEntrySize uint32, Flags uint32) error {
+	var _Frames *DEBUG_STACK_FRAME_EX
+	if len(Frames) > 0 {
+		_Frames = &Frames[0]
+	}
+	var _FrameContexts *byte
+	if len(FrameContexts) > 0 {
+		_FrameContexts = &FrameContexts[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[172], uintptr(unsafe.Pointer(self)), uintptr(OutputControl), uintptr(unsafe.Pointer(_Frames)), uintptr(len(Frames)), uintptr(unsafe.Pointer(_FrameContexts)), uintptr(len(FrameContexts)), uintptr(FrameContextsEntrySize), uintptr(Flags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -11977,80 +12705,132 @@ type IDebugDataSpaces struct {
 var IID_IDebugDataSpaces = win32.GUID{Data1: 0x88f7dfab, Data2: 0x3ea7, Data3: 0x4c3a, Data4: [8]byte{0xae, 0xfb, 0xc4, 0xe8, 0x10, 0x61, 0x73, 0xaa}}
 
 // ReadVirtual dispatches through IDebugDataSpaces's vtable slot 3.
-func (self *IDebugDataSpaces) ReadVirtual(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces) ReadVirtual(Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteVirtual dispatches through IDebugDataSpaces's vtable slot 4.
-func (self *IDebugDataSpaces) WriteVirtual(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces) WriteVirtual(Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SearchVirtual dispatches through IDebugDataSpaces's vtable slot 5.
-func (self *IDebugDataSpaces) SearchVirtual(Offset uint64, Length uint64, Pattern unsafe.Pointer, PatternSize uint32, PatternGranularity uint32, MatchOffset *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Length), uintptr(unsafe.Pointer(Pattern)), uintptr(PatternSize), uintptr(PatternGranularity), uintptr(unsafe.Pointer(MatchOffset)))
+func (self *IDebugDataSpaces) SearchVirtual(Offset uint64, Length uint64, Pattern []byte, PatternGranularity uint32, MatchOffset *uint64) error {
+	var _Pattern *byte
+	if len(Pattern) > 0 {
+		_Pattern = &Pattern[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Length), uintptr(unsafe.Pointer(_Pattern)), uintptr(len(Pattern)), uintptr(PatternGranularity), uintptr(unsafe.Pointer(MatchOffset)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadVirtualUncached dispatches through IDebugDataSpaces's vtable slot 6.
-func (self *IDebugDataSpaces) ReadVirtualUncached(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces) ReadVirtualUncached(Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteVirtualUncached dispatches through IDebugDataSpaces's vtable slot 7.
-func (self *IDebugDataSpaces) WriteVirtualUncached(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces) WriteVirtualUncached(Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadPointersVirtual dispatches through IDebugDataSpaces's vtable slot 8.
-func (self *IDebugDataSpaces) ReadPointersVirtual(Count uint32, Offset uint64, Ptrs *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(Offset), uintptr(unsafe.Pointer(Ptrs)))
+func (self *IDebugDataSpaces) ReadPointersVirtual(Offset uint64, Ptrs []uint64) error {
+	var _Ptrs *uint64
+	if len(Ptrs) > 0 {
+		_Ptrs = &Ptrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(Ptrs)), uintptr(Offset), uintptr(unsafe.Pointer(_Ptrs)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WritePointersVirtual dispatches through IDebugDataSpaces's vtable slot 9.
-func (self *IDebugDataSpaces) WritePointersVirtual(Count uint32, Offset uint64, Ptrs *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(Offset), uintptr(unsafe.Pointer(Ptrs)))
+func (self *IDebugDataSpaces) WritePointersVirtual(Offset uint64, Ptrs []uint64) error {
+	var _Ptrs *uint64
+	if len(Ptrs) > 0 {
+		_Ptrs = &Ptrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(Ptrs)), uintptr(Offset), uintptr(unsafe.Pointer(_Ptrs)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadPhysical dispatches through IDebugDataSpaces's vtable slot 10.
-func (self *IDebugDataSpaces) ReadPhysical(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces) ReadPhysical(Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WritePhysical dispatches through IDebugDataSpaces's vtable slot 11.
-func (self *IDebugDataSpaces) WritePhysical(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces) WritePhysical(Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadControl dispatches through IDebugDataSpaces's vtable slot 12.
-func (self *IDebugDataSpaces) ReadControl(Processor uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces) ReadControl(Processor uint32, Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteControl dispatches through IDebugDataSpaces's vtable slot 13.
-func (self *IDebugDataSpaces) WriteControl(Processor uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces) WriteControl(Processor uint32, Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadIo dispatches through IDebugDataSpaces's vtable slot 14.
-func (self *IDebugDataSpaces) ReadIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces) ReadIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteIo dispatches through IDebugDataSpaces's vtable slot 15.
-func (self *IDebugDataSpaces) WriteIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces) WriteIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12067,14 +12847,22 @@ func (self *IDebugDataSpaces) WriteMsr(Msr uint32, Value uint64) error {
 }
 
 // ReadBusData dispatches through IDebugDataSpaces's vtable slot 18.
-func (self *IDebugDataSpaces) ReadBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces) ReadBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteBusData dispatches through IDebugDataSpaces's vtable slot 19.
-func (self *IDebugDataSpaces) WriteBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces) WriteBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12085,14 +12873,22 @@ func (self *IDebugDataSpaces) CheckLowMemory() error {
 }
 
 // ReadDebuggerData dispatches through IDebugDataSpaces's vtable slot 21.
-func (self *IDebugDataSpaces) ReadDebuggerData(Index uint32, Buffer unsafe.Pointer, BufferSize uint32, DataSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DataSize)))
+func (self *IDebugDataSpaces) ReadDebuggerData(Index uint32, Buffer []byte, DataSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(DataSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadProcessorSystemData dispatches through IDebugDataSpaces's vtable slot 22.
-func (self *IDebugDataSpaces) ReadProcessorSystemData(Processor uint32, Index uint32, Buffer unsafe.Pointer, BufferSize uint32, DataSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Index), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DataSize)))
+func (self *IDebugDataSpaces) ReadProcessorSystemData(Processor uint32, Index uint32, Buffer []byte, DataSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Index), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(DataSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12105,80 +12901,132 @@ type IDebugDataSpaces2 struct {
 var IID_IDebugDataSpaces2 = win32.GUID{Data1: 0x7a5e852f, Data2: 0x96e9, Data3: 0x468f, Data4: [8]byte{0xac, 0x1b, 0x0b, 0x3a, 0xdd, 0xc4, 0xa0, 0x49}}
 
 // ReadVirtual dispatches through IDebugDataSpaces2's vtable slot 3.
-func (self *IDebugDataSpaces2) ReadVirtual(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces2) ReadVirtual(Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteVirtual dispatches through IDebugDataSpaces2's vtable slot 4.
-func (self *IDebugDataSpaces2) WriteVirtual(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces2) WriteVirtual(Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SearchVirtual dispatches through IDebugDataSpaces2's vtable slot 5.
-func (self *IDebugDataSpaces2) SearchVirtual(Offset uint64, Length uint64, Pattern unsafe.Pointer, PatternSize uint32, PatternGranularity uint32, MatchOffset *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Length), uintptr(unsafe.Pointer(Pattern)), uintptr(PatternSize), uintptr(PatternGranularity), uintptr(unsafe.Pointer(MatchOffset)))
+func (self *IDebugDataSpaces2) SearchVirtual(Offset uint64, Length uint64, Pattern []byte, PatternGranularity uint32, MatchOffset *uint64) error {
+	var _Pattern *byte
+	if len(Pattern) > 0 {
+		_Pattern = &Pattern[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Length), uintptr(unsafe.Pointer(_Pattern)), uintptr(len(Pattern)), uintptr(PatternGranularity), uintptr(unsafe.Pointer(MatchOffset)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadVirtualUncached dispatches through IDebugDataSpaces2's vtable slot 6.
-func (self *IDebugDataSpaces2) ReadVirtualUncached(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces2) ReadVirtualUncached(Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteVirtualUncached dispatches through IDebugDataSpaces2's vtable slot 7.
-func (self *IDebugDataSpaces2) WriteVirtualUncached(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces2) WriteVirtualUncached(Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadPointersVirtual dispatches through IDebugDataSpaces2's vtable slot 8.
-func (self *IDebugDataSpaces2) ReadPointersVirtual(Count uint32, Offset uint64, Ptrs *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(Offset), uintptr(unsafe.Pointer(Ptrs)))
+func (self *IDebugDataSpaces2) ReadPointersVirtual(Offset uint64, Ptrs []uint64) error {
+	var _Ptrs *uint64
+	if len(Ptrs) > 0 {
+		_Ptrs = &Ptrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(Ptrs)), uintptr(Offset), uintptr(unsafe.Pointer(_Ptrs)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WritePointersVirtual dispatches through IDebugDataSpaces2's vtable slot 9.
-func (self *IDebugDataSpaces2) WritePointersVirtual(Count uint32, Offset uint64, Ptrs *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(Offset), uintptr(unsafe.Pointer(Ptrs)))
+func (self *IDebugDataSpaces2) WritePointersVirtual(Offset uint64, Ptrs []uint64) error {
+	var _Ptrs *uint64
+	if len(Ptrs) > 0 {
+		_Ptrs = &Ptrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(Ptrs)), uintptr(Offset), uintptr(unsafe.Pointer(_Ptrs)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadPhysical dispatches through IDebugDataSpaces2's vtable slot 10.
-func (self *IDebugDataSpaces2) ReadPhysical(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces2) ReadPhysical(Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WritePhysical dispatches through IDebugDataSpaces2's vtable slot 11.
-func (self *IDebugDataSpaces2) WritePhysical(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces2) WritePhysical(Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadControl dispatches through IDebugDataSpaces2's vtable slot 12.
-func (self *IDebugDataSpaces2) ReadControl(Processor uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces2) ReadControl(Processor uint32, Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteControl dispatches through IDebugDataSpaces2's vtable slot 13.
-func (self *IDebugDataSpaces2) WriteControl(Processor uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces2) WriteControl(Processor uint32, Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadIo dispatches through IDebugDataSpaces2's vtable slot 14.
-func (self *IDebugDataSpaces2) ReadIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces2) ReadIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteIo dispatches through IDebugDataSpaces2's vtable slot 15.
-func (self *IDebugDataSpaces2) WriteIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces2) WriteIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12195,14 +13043,22 @@ func (self *IDebugDataSpaces2) WriteMsr(Msr uint32, Value uint64) error {
 }
 
 // ReadBusData dispatches through IDebugDataSpaces2's vtable slot 18.
-func (self *IDebugDataSpaces2) ReadBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces2) ReadBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteBusData dispatches through IDebugDataSpaces2's vtable slot 19.
-func (self *IDebugDataSpaces2) WriteBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces2) WriteBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12213,14 +13069,22 @@ func (self *IDebugDataSpaces2) CheckLowMemory() error {
 }
 
 // ReadDebuggerData dispatches through IDebugDataSpaces2's vtable slot 21.
-func (self *IDebugDataSpaces2) ReadDebuggerData(Index uint32, Buffer unsafe.Pointer, BufferSize uint32, DataSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DataSize)))
+func (self *IDebugDataSpaces2) ReadDebuggerData(Index uint32, Buffer []byte, DataSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(DataSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadProcessorSystemData dispatches through IDebugDataSpaces2's vtable slot 22.
-func (self *IDebugDataSpaces2) ReadProcessorSystemData(Processor uint32, Index uint32, Buffer unsafe.Pointer, BufferSize uint32, DataSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Index), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DataSize)))
+func (self *IDebugDataSpaces2) ReadProcessorSystemData(Processor uint32, Index uint32, Buffer []byte, DataSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Index), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(DataSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12231,26 +13095,42 @@ func (self *IDebugDataSpaces2) VirtualToPhysical(Virtual uint64, Physical *uint6
 }
 
 // GetVirtualTranslationPhysicalOffsets dispatches through IDebugDataSpaces2's vtable slot 24.
-func (self *IDebugDataSpaces2) GetVirtualTranslationPhysicalOffsets(Virtual uint64, Offsets *uint64, OffsetsSize uint32, Levels *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(Virtual), uintptr(unsafe.Pointer(Offsets)), uintptr(OffsetsSize), uintptr(unsafe.Pointer(Levels)))
+func (self *IDebugDataSpaces2) GetVirtualTranslationPhysicalOffsets(Virtual uint64, Offsets []uint64, Levels *uint32) error {
+	var _Offsets *uint64
+	if len(Offsets) > 0 {
+		_Offsets = &Offsets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(Virtual), uintptr(unsafe.Pointer(_Offsets)), uintptr(len(Offsets)), uintptr(unsafe.Pointer(Levels)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadHandleData dispatches through IDebugDataSpaces2's vtable slot 25.
-func (self *IDebugDataSpaces2) ReadHandleData(Handle uint64, DataType uint32, Buffer unsafe.Pointer, BufferSize uint32, DataSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Handle), uintptr(DataType), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DataSize)))
+func (self *IDebugDataSpaces2) ReadHandleData(Handle uint64, DataType uint32, Buffer []byte, DataSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Handle), uintptr(DataType), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(DataSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FillVirtual dispatches through IDebugDataSpaces2's vtable slot 26.
-func (self *IDebugDataSpaces2) FillVirtual(Start uint64, Size uint32, Pattern unsafe.Pointer, PatternSize uint32, Filled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Size), uintptr(unsafe.Pointer(Pattern)), uintptr(PatternSize), uintptr(unsafe.Pointer(Filled)))
+func (self *IDebugDataSpaces2) FillVirtual(Start uint64, Size uint32, Pattern []byte, Filled *uint32) error {
+	var _Pattern *byte
+	if len(Pattern) > 0 {
+		_Pattern = &Pattern[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Size), uintptr(unsafe.Pointer(_Pattern)), uintptr(len(Pattern)), uintptr(unsafe.Pointer(Filled)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FillPhysical dispatches through IDebugDataSpaces2's vtable slot 27.
-func (self *IDebugDataSpaces2) FillPhysical(Start uint64, Size uint32, Pattern unsafe.Pointer, PatternSize uint32, Filled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Size), uintptr(unsafe.Pointer(Pattern)), uintptr(PatternSize), uintptr(unsafe.Pointer(Filled)))
+func (self *IDebugDataSpaces2) FillPhysical(Start uint64, Size uint32, Pattern []byte, Filled *uint32) error {
+	var _Pattern *byte
+	if len(Pattern) > 0 {
+		_Pattern = &Pattern[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Size), uintptr(unsafe.Pointer(_Pattern)), uintptr(len(Pattern)), uintptr(unsafe.Pointer(Filled)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12269,80 +13149,132 @@ type IDebugDataSpaces3 struct {
 var IID_IDebugDataSpaces3 = win32.GUID{Data1: 0x23f79d6c, Data2: 0x8aaf, Data3: 0x4f7c, Data4: [8]byte{0xa6, 0x07, 0x99, 0x95, 0xf5, 0x40, 0x7e, 0x63}}
 
 // ReadVirtual dispatches through IDebugDataSpaces3's vtable slot 3.
-func (self *IDebugDataSpaces3) ReadVirtual(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces3) ReadVirtual(Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteVirtual dispatches through IDebugDataSpaces3's vtable slot 4.
-func (self *IDebugDataSpaces3) WriteVirtual(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces3) WriteVirtual(Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SearchVirtual dispatches through IDebugDataSpaces3's vtable slot 5.
-func (self *IDebugDataSpaces3) SearchVirtual(Offset uint64, Length uint64, Pattern unsafe.Pointer, PatternSize uint32, PatternGranularity uint32, MatchOffset *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Length), uintptr(unsafe.Pointer(Pattern)), uintptr(PatternSize), uintptr(PatternGranularity), uintptr(unsafe.Pointer(MatchOffset)))
+func (self *IDebugDataSpaces3) SearchVirtual(Offset uint64, Length uint64, Pattern []byte, PatternGranularity uint32, MatchOffset *uint64) error {
+	var _Pattern *byte
+	if len(Pattern) > 0 {
+		_Pattern = &Pattern[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Length), uintptr(unsafe.Pointer(_Pattern)), uintptr(len(Pattern)), uintptr(PatternGranularity), uintptr(unsafe.Pointer(MatchOffset)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadVirtualUncached dispatches through IDebugDataSpaces3's vtable slot 6.
-func (self *IDebugDataSpaces3) ReadVirtualUncached(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces3) ReadVirtualUncached(Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteVirtualUncached dispatches through IDebugDataSpaces3's vtable slot 7.
-func (self *IDebugDataSpaces3) WriteVirtualUncached(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces3) WriteVirtualUncached(Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadPointersVirtual dispatches through IDebugDataSpaces3's vtable slot 8.
-func (self *IDebugDataSpaces3) ReadPointersVirtual(Count uint32, Offset uint64, Ptrs *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(Offset), uintptr(unsafe.Pointer(Ptrs)))
+func (self *IDebugDataSpaces3) ReadPointersVirtual(Offset uint64, Ptrs []uint64) error {
+	var _Ptrs *uint64
+	if len(Ptrs) > 0 {
+		_Ptrs = &Ptrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(Ptrs)), uintptr(Offset), uintptr(unsafe.Pointer(_Ptrs)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WritePointersVirtual dispatches through IDebugDataSpaces3's vtable slot 9.
-func (self *IDebugDataSpaces3) WritePointersVirtual(Count uint32, Offset uint64, Ptrs *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(Offset), uintptr(unsafe.Pointer(Ptrs)))
+func (self *IDebugDataSpaces3) WritePointersVirtual(Offset uint64, Ptrs []uint64) error {
+	var _Ptrs *uint64
+	if len(Ptrs) > 0 {
+		_Ptrs = &Ptrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(Ptrs)), uintptr(Offset), uintptr(unsafe.Pointer(_Ptrs)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadPhysical dispatches through IDebugDataSpaces3's vtable slot 10.
-func (self *IDebugDataSpaces3) ReadPhysical(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces3) ReadPhysical(Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WritePhysical dispatches through IDebugDataSpaces3's vtable slot 11.
-func (self *IDebugDataSpaces3) WritePhysical(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces3) WritePhysical(Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadControl dispatches through IDebugDataSpaces3's vtable slot 12.
-func (self *IDebugDataSpaces3) ReadControl(Processor uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces3) ReadControl(Processor uint32, Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteControl dispatches through IDebugDataSpaces3's vtable slot 13.
-func (self *IDebugDataSpaces3) WriteControl(Processor uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces3) WriteControl(Processor uint32, Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadIo dispatches through IDebugDataSpaces3's vtable slot 14.
-func (self *IDebugDataSpaces3) ReadIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces3) ReadIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteIo dispatches through IDebugDataSpaces3's vtable slot 15.
-func (self *IDebugDataSpaces3) WriteIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces3) WriteIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12359,14 +13291,22 @@ func (self *IDebugDataSpaces3) WriteMsr(Msr uint32, Value uint64) error {
 }
 
 // ReadBusData dispatches through IDebugDataSpaces3's vtable slot 18.
-func (self *IDebugDataSpaces3) ReadBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces3) ReadBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteBusData dispatches through IDebugDataSpaces3's vtable slot 19.
-func (self *IDebugDataSpaces3) WriteBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces3) WriteBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12377,14 +13317,22 @@ func (self *IDebugDataSpaces3) CheckLowMemory() error {
 }
 
 // ReadDebuggerData dispatches through IDebugDataSpaces3's vtable slot 21.
-func (self *IDebugDataSpaces3) ReadDebuggerData(Index uint32, Buffer unsafe.Pointer, BufferSize uint32, DataSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DataSize)))
+func (self *IDebugDataSpaces3) ReadDebuggerData(Index uint32, Buffer []byte, DataSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(DataSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadProcessorSystemData dispatches through IDebugDataSpaces3's vtable slot 22.
-func (self *IDebugDataSpaces3) ReadProcessorSystemData(Processor uint32, Index uint32, Buffer unsafe.Pointer, BufferSize uint32, DataSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Index), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DataSize)))
+func (self *IDebugDataSpaces3) ReadProcessorSystemData(Processor uint32, Index uint32, Buffer []byte, DataSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Index), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(DataSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12395,26 +13343,42 @@ func (self *IDebugDataSpaces3) VirtualToPhysical(Virtual uint64, Physical *uint6
 }
 
 // GetVirtualTranslationPhysicalOffsets dispatches through IDebugDataSpaces3's vtable slot 24.
-func (self *IDebugDataSpaces3) GetVirtualTranslationPhysicalOffsets(Virtual uint64, Offsets *uint64, OffsetsSize uint32, Levels *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(Virtual), uintptr(unsafe.Pointer(Offsets)), uintptr(OffsetsSize), uintptr(unsafe.Pointer(Levels)))
+func (self *IDebugDataSpaces3) GetVirtualTranslationPhysicalOffsets(Virtual uint64, Offsets []uint64, Levels *uint32) error {
+	var _Offsets *uint64
+	if len(Offsets) > 0 {
+		_Offsets = &Offsets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(Virtual), uintptr(unsafe.Pointer(_Offsets)), uintptr(len(Offsets)), uintptr(unsafe.Pointer(Levels)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadHandleData dispatches through IDebugDataSpaces3's vtable slot 25.
-func (self *IDebugDataSpaces3) ReadHandleData(Handle uint64, DataType uint32, Buffer unsafe.Pointer, BufferSize uint32, DataSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Handle), uintptr(DataType), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DataSize)))
+func (self *IDebugDataSpaces3) ReadHandleData(Handle uint64, DataType uint32, Buffer []byte, DataSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Handle), uintptr(DataType), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(DataSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FillVirtual dispatches through IDebugDataSpaces3's vtable slot 26.
-func (self *IDebugDataSpaces3) FillVirtual(Start uint64, Size uint32, Pattern unsafe.Pointer, PatternSize uint32, Filled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Size), uintptr(unsafe.Pointer(Pattern)), uintptr(PatternSize), uintptr(unsafe.Pointer(Filled)))
+func (self *IDebugDataSpaces3) FillVirtual(Start uint64, Size uint32, Pattern []byte, Filled *uint32) error {
+	var _Pattern *byte
+	if len(Pattern) > 0 {
+		_Pattern = &Pattern[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Size), uintptr(unsafe.Pointer(_Pattern)), uintptr(len(Pattern)), uintptr(unsafe.Pointer(Filled)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FillPhysical dispatches through IDebugDataSpaces3's vtable slot 27.
-func (self *IDebugDataSpaces3) FillPhysical(Start uint64, Size uint32, Pattern unsafe.Pointer, PatternSize uint32, Filled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Size), uintptr(unsafe.Pointer(Pattern)), uintptr(PatternSize), uintptr(unsafe.Pointer(Filled)))
+func (self *IDebugDataSpaces3) FillPhysical(Start uint64, Size uint32, Pattern []byte, Filled *uint32) error {
+	var _Pattern *byte
+	if len(Pattern) > 0 {
+		_Pattern = &Pattern[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Size), uintptr(unsafe.Pointer(_Pattern)), uintptr(len(Pattern)), uintptr(unsafe.Pointer(Filled)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12431,8 +13395,12 @@ func (self *IDebugDataSpaces3) ReadImageNtHeaders(ImageBase uint64, Headers *sys
 }
 
 // ReadTagged dispatches through IDebugDataSpaces3's vtable slot 30.
-func (self *IDebugDataSpaces3) ReadTagged(Tag *win32.GUID, Offset uint32, Buffer unsafe.Pointer, BufferSize uint32, TotalSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Tag)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(TotalSize)))
+func (self *IDebugDataSpaces3) ReadTagged(Tag *win32.GUID, Offset uint32, Buffer []byte, TotalSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Tag)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(TotalSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12463,80 +13431,132 @@ type IDebugDataSpaces4 struct {
 var IID_IDebugDataSpaces4 = win32.GUID{Data1: 0xd98ada1f, Data2: 0x29e9, Data3: 0x4ef5, Data4: [8]byte{0xa6, 0xc0, 0xe5, 0x33, 0x49, 0x88, 0x32, 0x12}}
 
 // ReadVirtual dispatches through IDebugDataSpaces4's vtable slot 3.
-func (self *IDebugDataSpaces4) ReadVirtual(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces4) ReadVirtual(Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteVirtual dispatches through IDebugDataSpaces4's vtable slot 4.
-func (self *IDebugDataSpaces4) WriteVirtual(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces4) WriteVirtual(Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SearchVirtual dispatches through IDebugDataSpaces4's vtable slot 5.
-func (self *IDebugDataSpaces4) SearchVirtual(Offset uint64, Length uint64, Pattern unsafe.Pointer, PatternSize uint32, PatternGranularity uint32, MatchOffset *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Length), uintptr(unsafe.Pointer(Pattern)), uintptr(PatternSize), uintptr(PatternGranularity), uintptr(unsafe.Pointer(MatchOffset)))
+func (self *IDebugDataSpaces4) SearchVirtual(Offset uint64, Length uint64, Pattern []byte, PatternGranularity uint32, MatchOffset *uint64) error {
+	var _Pattern *byte
+	if len(Pattern) > 0 {
+		_Pattern = &Pattern[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Length), uintptr(unsafe.Pointer(_Pattern)), uintptr(len(Pattern)), uintptr(PatternGranularity), uintptr(unsafe.Pointer(MatchOffset)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadVirtualUncached dispatches through IDebugDataSpaces4's vtable slot 6.
-func (self *IDebugDataSpaces4) ReadVirtualUncached(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces4) ReadVirtualUncached(Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteVirtualUncached dispatches through IDebugDataSpaces4's vtable slot 7.
-func (self *IDebugDataSpaces4) WriteVirtualUncached(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces4) WriteVirtualUncached(Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadPointersVirtual dispatches through IDebugDataSpaces4's vtable slot 8.
-func (self *IDebugDataSpaces4) ReadPointersVirtual(Count uint32, Offset uint64, Ptrs *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(Offset), uintptr(unsafe.Pointer(Ptrs)))
+func (self *IDebugDataSpaces4) ReadPointersVirtual(Offset uint64, Ptrs []uint64) error {
+	var _Ptrs *uint64
+	if len(Ptrs) > 0 {
+		_Ptrs = &Ptrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(len(Ptrs)), uintptr(Offset), uintptr(unsafe.Pointer(_Ptrs)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WritePointersVirtual dispatches through IDebugDataSpaces4's vtable slot 9.
-func (self *IDebugDataSpaces4) WritePointersVirtual(Count uint32, Offset uint64, Ptrs *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Count), uintptr(Offset), uintptr(unsafe.Pointer(Ptrs)))
+func (self *IDebugDataSpaces4) WritePointersVirtual(Offset uint64, Ptrs []uint64) error {
+	var _Ptrs *uint64
+	if len(Ptrs) > 0 {
+		_Ptrs = &Ptrs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(len(Ptrs)), uintptr(Offset), uintptr(unsafe.Pointer(_Ptrs)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadPhysical dispatches through IDebugDataSpaces4's vtable slot 10.
-func (self *IDebugDataSpaces4) ReadPhysical(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces4) ReadPhysical(Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WritePhysical dispatches through IDebugDataSpaces4's vtable slot 11.
-func (self *IDebugDataSpaces4) WritePhysical(Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces4) WritePhysical(Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadControl dispatches through IDebugDataSpaces4's vtable slot 12.
-func (self *IDebugDataSpaces4) ReadControl(Processor uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces4) ReadControl(Processor uint32, Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteControl dispatches through IDebugDataSpaces4's vtable slot 13.
-func (self *IDebugDataSpaces4) WriteControl(Processor uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces4) WriteControl(Processor uint32, Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadIo dispatches through IDebugDataSpaces4's vtable slot 14.
-func (self *IDebugDataSpaces4) ReadIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces4) ReadIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteIo dispatches through IDebugDataSpaces4's vtable slot 15.
-func (self *IDebugDataSpaces4) WriteIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces4) WriteIo(InterfaceType uint32, BusNumber uint32, AddressSpace uint32, Offset uint64, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(InterfaceType), uintptr(BusNumber), uintptr(AddressSpace), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12553,14 +13573,22 @@ func (self *IDebugDataSpaces4) WriteMsr(Msr uint32, Value uint64) error {
 }
 
 // ReadBusData dispatches through IDebugDataSpaces4's vtable slot 18.
-func (self *IDebugDataSpaces4) ReadBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces4) ReadBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[18], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteBusData dispatches through IDebugDataSpaces4's vtable slot 19.
-func (self *IDebugDataSpaces4) WriteBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces4) WriteBusData(BusDataType uint32, BusNumber uint32, SlotNumber uint32, Offset uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[19], uintptr(unsafe.Pointer(self)), uintptr(BusDataType), uintptr(BusNumber), uintptr(SlotNumber), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12571,14 +13599,22 @@ func (self *IDebugDataSpaces4) CheckLowMemory() error {
 }
 
 // ReadDebuggerData dispatches through IDebugDataSpaces4's vtable slot 21.
-func (self *IDebugDataSpaces4) ReadDebuggerData(Index uint32, Buffer unsafe.Pointer, BufferSize uint32, DataSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DataSize)))
+func (self *IDebugDataSpaces4) ReadDebuggerData(Index uint32, Buffer []byte, DataSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(DataSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadProcessorSystemData dispatches through IDebugDataSpaces4's vtable slot 22.
-func (self *IDebugDataSpaces4) ReadProcessorSystemData(Processor uint32, Index uint32, Buffer unsafe.Pointer, BufferSize uint32, DataSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Index), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DataSize)))
+func (self *IDebugDataSpaces4) ReadProcessorSystemData(Processor uint32, Index uint32, Buffer []byte, DataSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Processor), uintptr(Index), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(DataSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12589,26 +13625,42 @@ func (self *IDebugDataSpaces4) VirtualToPhysical(Virtual uint64, Physical *uint6
 }
 
 // GetVirtualTranslationPhysicalOffsets dispatches through IDebugDataSpaces4's vtable slot 24.
-func (self *IDebugDataSpaces4) GetVirtualTranslationPhysicalOffsets(Virtual uint64, Offsets *uint64, OffsetsSize uint32, Levels *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(Virtual), uintptr(unsafe.Pointer(Offsets)), uintptr(OffsetsSize), uintptr(unsafe.Pointer(Levels)))
+func (self *IDebugDataSpaces4) GetVirtualTranslationPhysicalOffsets(Virtual uint64, Offsets []uint64, Levels *uint32) error {
+	var _Offsets *uint64
+	if len(Offsets) > 0 {
+		_Offsets = &Offsets[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[24], uintptr(unsafe.Pointer(self)), uintptr(Virtual), uintptr(unsafe.Pointer(_Offsets)), uintptr(len(Offsets)), uintptr(unsafe.Pointer(Levels)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ReadHandleData dispatches through IDebugDataSpaces4's vtable slot 25.
-func (self *IDebugDataSpaces4) ReadHandleData(Handle uint64, DataType uint32, Buffer unsafe.Pointer, BufferSize uint32, DataSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Handle), uintptr(DataType), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(DataSize)))
+func (self *IDebugDataSpaces4) ReadHandleData(Handle uint64, DataType uint32, Buffer []byte, DataSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Handle), uintptr(DataType), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(DataSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FillVirtual dispatches through IDebugDataSpaces4's vtable slot 26.
-func (self *IDebugDataSpaces4) FillVirtual(Start uint64, Size uint32, Pattern unsafe.Pointer, PatternSize uint32, Filled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Size), uintptr(unsafe.Pointer(Pattern)), uintptr(PatternSize), uintptr(unsafe.Pointer(Filled)))
+func (self *IDebugDataSpaces4) FillVirtual(Start uint64, Size uint32, Pattern []byte, Filled *uint32) error {
+	var _Pattern *byte
+	if len(Pattern) > 0 {
+		_Pattern = &Pattern[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Size), uintptr(unsafe.Pointer(_Pattern)), uintptr(len(Pattern)), uintptr(unsafe.Pointer(Filled)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // FillPhysical dispatches through IDebugDataSpaces4's vtable slot 27.
-func (self *IDebugDataSpaces4) FillPhysical(Start uint64, Size uint32, Pattern unsafe.Pointer, PatternSize uint32, Filled *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Size), uintptr(unsafe.Pointer(Pattern)), uintptr(PatternSize), uintptr(unsafe.Pointer(Filled)))
+func (self *IDebugDataSpaces4) FillPhysical(Start uint64, Size uint32, Pattern []byte, Filled *uint32) error {
+	var _Pattern *byte
+	if len(Pattern) > 0 {
+		_Pattern = &Pattern[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[27], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Size), uintptr(unsafe.Pointer(_Pattern)), uintptr(len(Pattern)), uintptr(unsafe.Pointer(Filled)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12625,8 +13677,12 @@ func (self *IDebugDataSpaces4) ReadImageNtHeaders(ImageBase uint64, Headers *sys
 }
 
 // ReadTagged dispatches through IDebugDataSpaces4's vtable slot 30.
-func (self *IDebugDataSpaces4) ReadTagged(Tag *win32.GUID, Offset uint32, Buffer unsafe.Pointer, BufferSize uint32, TotalSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Tag)), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(TotalSize)))
+func (self *IDebugDataSpaces4) ReadTagged(Tag *win32.GUID, Offset uint32, Buffer []byte, TotalSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[30], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Tag)), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(TotalSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12649,8 +13705,12 @@ func (self *IDebugDataSpaces4) EndEnumTagged(Handle uint64) error {
 }
 
 // GetOffsetInformation dispatches through IDebugDataSpaces4's vtable slot 34.
-func (self *IDebugDataSpaces4) GetOffsetInformation(Space uint32, Which uint32, Offset uint64, Buffer unsafe.Pointer, BufferSize uint32, InfoSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(Space), uintptr(Which), uintptr(Offset), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(InfoSize)))
+func (self *IDebugDataSpaces4) GetOffsetInformation(Space uint32, Which uint32, Offset uint64, Buffer []byte, InfoSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[34], uintptr(unsafe.Pointer(self)), uintptr(Space), uintptr(Which), uintptr(Offset), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(InfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12667,8 +13727,12 @@ func (self *IDebugDataSpaces4) GetValidRegionVirtual(Base uint64, Size uint32, V
 }
 
 // SearchVirtual2 dispatches through IDebugDataSpaces4's vtable slot 37.
-func (self *IDebugDataSpaces4) SearchVirtual2(Offset uint64, Length uint64, Flags uint32, Pattern unsafe.Pointer, PatternSize uint32, PatternGranularity uint32, MatchOffset *uint64) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Length), uintptr(Flags), uintptr(unsafe.Pointer(Pattern)), uintptr(PatternSize), uintptr(PatternGranularity), uintptr(unsafe.Pointer(MatchOffset)))
+func (self *IDebugDataSpaces4) SearchVirtual2(Offset uint64, Length uint64, Flags uint32, Pattern []byte, PatternGranularity uint32, MatchOffset *uint64) error {
+	var _Pattern *byte
+	if len(Pattern) > 0 {
+		_Pattern = &Pattern[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[37], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Length), uintptr(Flags), uintptr(unsafe.Pointer(_Pattern)), uintptr(len(Pattern)), uintptr(PatternGranularity), uintptr(unsafe.Pointer(MatchOffset)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12697,14 +13761,22 @@ func (self *IDebugDataSpaces4) ReadUnicodeStringVirtualWide(Offset uint64, MaxBy
 }
 
 // ReadPhysical2 dispatches through IDebugDataSpaces4's vtable slot 42.
-func (self *IDebugDataSpaces4) ReadPhysical2(Offset uint64, Flags uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugDataSpaces4) ReadPhysical2(Offset uint64, Flags uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[42], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WritePhysical2 dispatches through IDebugDataSpaces4's vtable slot 43.
-func (self *IDebugDataSpaces4) WritePhysical2(Offset uint64, Flags uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugDataSpaces4) WritePhysical2(Offset uint64, Flags uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[43], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12912,61 +13984,97 @@ func (self *IDebugEventContextCallbacks) GetInterestMask(Mask *uint32) error {
 }
 
 // Breakpoint dispatches through IDebugEventContextCallbacks's vtable slot 4.
-func (self *IDebugEventContextCallbacks) Breakpoint(Bp *IDebugBreakpoint2, Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Bp)), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugEventContextCallbacks) Breakpoint(Bp *IDebugBreakpoint2, Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Bp)), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Exception dispatches through IDebugEventContextCallbacks's vtable slot 5.
-func (self *IDebugEventContextCallbacks) Exception(Exception *systemdiagnosticsdebug.EXCEPTION_RECORD64, FirstChance uint32, Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Exception)), uintptr(FirstChance), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugEventContextCallbacks) Exception(Exception *systemdiagnosticsdebug.EXCEPTION_RECORD64, FirstChance uint32, Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Exception)), uintptr(FirstChance), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateThread dispatches through IDebugEventContextCallbacks's vtable slot 6.
-func (self *IDebugEventContextCallbacks) CreateThread(Handle uint64, DataOffset uint64, StartOffset uint64, Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Handle), uintptr(DataOffset), uintptr(StartOffset), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugEventContextCallbacks) CreateThread(Handle uint64, DataOffset uint64, StartOffset uint64, Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(Handle), uintptr(DataOffset), uintptr(StartOffset), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ExitThread dispatches through IDebugEventContextCallbacks's vtable slot 7.
-func (self *IDebugEventContextCallbacks) ExitThread(ExitCode uint32, Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ExitCode), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugEventContextCallbacks) ExitThread(ExitCode uint32, Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ExitCode), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateProcessA dispatches through IDebugEventContextCallbacks's vtable slot 8.
-func (self *IDebugEventContextCallbacks) CreateProcessA(ImageFileHandle uint64, Handle uint64, BaseOffset uint64, ModuleSize uint32, ModuleName string, ImageName string, CheckSum uint32, TimeDateStamp uint32, InitialThreadHandle uint64, ThreadDataOffset uint64, StartOffset uint64, Context unsafe.Pointer, ContextSize uint32) error {
+func (self *IDebugEventContextCallbacks) CreateProcessA(ImageFileHandle uint64, Handle uint64, BaseOffset uint64, ModuleSize uint32, ModuleName string, ImageName string, CheckSum uint32, TimeDateStamp uint32, InitialThreadHandle uint64, ThreadDataOffset uint64, StartOffset uint64, Context []byte) error {
 	_ModuleName := win32.UTF16Ptr(ModuleName)
 	_ImageName := win32.UTF16Ptr(ImageName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ImageFileHandle), uintptr(Handle), uintptr(BaseOffset), uintptr(ModuleSize), uintptr(unsafe.Pointer(_ModuleName)), uintptr(unsafe.Pointer(_ImageName)), uintptr(CheckSum), uintptr(TimeDateStamp), uintptr(InitialThreadHandle), uintptr(ThreadDataOffset), uintptr(StartOffset), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(ImageFileHandle), uintptr(Handle), uintptr(BaseOffset), uintptr(ModuleSize), uintptr(unsafe.Pointer(_ModuleName)), uintptr(unsafe.Pointer(_ImageName)), uintptr(CheckSum), uintptr(TimeDateStamp), uintptr(InitialThreadHandle), uintptr(ThreadDataOffset), uintptr(StartOffset), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ExitProcess dispatches through IDebugEventContextCallbacks's vtable slot 9.
-func (self *IDebugEventContextCallbacks) ExitProcess(ExitCode uint32, Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ExitCode), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugEventContextCallbacks) ExitProcess(ExitCode uint32, Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(ExitCode), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // LoadModule dispatches through IDebugEventContextCallbacks's vtable slot 10.
-func (self *IDebugEventContextCallbacks) LoadModule(ImageFileHandle uint64, BaseOffset uint64, ModuleSize uint32, ModuleName string, ImageName string, CheckSum uint32, TimeDateStamp uint32, Context unsafe.Pointer, ContextSize uint32) error {
+func (self *IDebugEventContextCallbacks) LoadModule(ImageFileHandle uint64, BaseOffset uint64, ModuleSize uint32, ModuleName string, ImageName string, CheckSum uint32, TimeDateStamp uint32, Context []byte) error {
 	_ModuleName := win32.UTF16Ptr(ModuleName)
 	_ImageName := win32.UTF16Ptr(ImageName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ImageFileHandle), uintptr(BaseOffset), uintptr(ModuleSize), uintptr(unsafe.Pointer(_ModuleName)), uintptr(unsafe.Pointer(_ImageName)), uintptr(CheckSum), uintptr(TimeDateStamp), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ImageFileHandle), uintptr(BaseOffset), uintptr(ModuleSize), uintptr(unsafe.Pointer(_ModuleName)), uintptr(unsafe.Pointer(_ImageName)), uintptr(CheckSum), uintptr(TimeDateStamp), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // UnloadModule dispatches through IDebugEventContextCallbacks's vtable slot 11.
-func (self *IDebugEventContextCallbacks) UnloadModule(ImageBaseName string, BaseOffset uint64, Context unsafe.Pointer, ContextSize uint32) error {
+func (self *IDebugEventContextCallbacks) UnloadModule(ImageBaseName string, BaseOffset uint64, Context []byte) error {
 	_ImageBaseName := win32.UTF16Ptr(ImageBaseName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ImageBaseName)), uintptr(BaseOffset), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[11], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_ImageBaseName)), uintptr(BaseOffset), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SystemError dispatches through IDebugEventContextCallbacks's vtable slot 12.
-func (self *IDebugEventContextCallbacks) SystemError(Error uint32, Level uint32, Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Error), uintptr(Level), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugEventContextCallbacks) SystemError(Error uint32, Level uint32, Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(Error), uintptr(Level), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -12977,14 +14085,22 @@ func (self *IDebugEventContextCallbacks) SessionStatus(Status uint32) error {
 }
 
 // ChangeDebuggeeState dispatches through IDebugEventContextCallbacks's vtable slot 14.
-func (self *IDebugEventContextCallbacks) ChangeDebuggeeState(Flags uint32, Argument uint64, Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(Argument), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugEventContextCallbacks) ChangeDebuggeeState(Flags uint32, Argument uint64, Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[14], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(Argument), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // ChangeEngineState dispatches through IDebugEventContextCallbacks's vtable slot 15.
-func (self *IDebugEventContextCallbacks) ChangeEngineState(Flags uint32, Argument uint64, Context unsafe.Pointer, ContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(Argument), uintptr(unsafe.Pointer(Context)), uintptr(ContextSize))
+func (self *IDebugEventContextCallbacks) ChangeEngineState(Flags uint32, Argument uint64, Context []byte) error {
+	var _Context *byte
+	if len(Context) > 0 {
+		_Context = &Context[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(Flags), uintptr(Argument), uintptr(unsafe.Pointer(_Context)), uintptr(len(Context)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -13079,8 +14195,12 @@ func (self *IDebugFailureAnalysis) GetString(Tag DEBUG_FLR_PARAM_TYPE, Str found
 }
 
 // GetBuffer dispatches through IDebugFailureAnalysis's vtable slot 9.
-func (self *IDebugFailureAnalysis) GetBuffer(Tag DEBUG_FLR_PARAM_TYPE, Buf unsafe.Pointer, Size uint32) *FA_ENTRY {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Tag), uintptr(unsafe.Pointer(Buf)), uintptr(Size))
+func (self *IDebugFailureAnalysis) GetBuffer(Tag DEBUG_FLR_PARAM_TYPE, Buf []byte) *FA_ENTRY {
+	var _Buf *byte
+	if len(Buf) > 0 {
+		_Buf = &Buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Tag), uintptr(unsafe.Pointer(_Buf)), uintptr(len(Buf)))
 	return (*FA_ENTRY)(unsafe.Pointer(r1))
 }
 
@@ -13147,8 +14267,12 @@ func (self *IDebugFailureAnalysis2) GetString(Tag DEBUG_FLR_PARAM_TYPE, Str foun
 }
 
 // GetBuffer dispatches through IDebugFailureAnalysis2's vtable slot 9.
-func (self *IDebugFailureAnalysis2) GetBuffer(Tag DEBUG_FLR_PARAM_TYPE, Buf unsafe.Pointer, Size uint32) *FA_ENTRY {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Tag), uintptr(unsafe.Pointer(Buf)), uintptr(Size))
+func (self *IDebugFailureAnalysis2) GetBuffer(Tag DEBUG_FLR_PARAM_TYPE, Buf []byte) *FA_ENTRY {
+	var _Buf *byte
+	if len(Buf) > 0 {
+		_Buf = &Buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Tag), uintptr(unsafe.Pointer(_Buf)), uintptr(len(Buf)))
 	return (*FA_ENTRY)(unsafe.Pointer(r1))
 }
 
@@ -13195,8 +14319,12 @@ func (self *IDebugFailureAnalysis2) SetUlong64(Tag DEBUG_FLR_PARAM_TYPE, Value u
 }
 
 // SetBuffer dispatches through IDebugFailureAnalysis2's vtable slot 17.
-func (self *IDebugFailureAnalysis2) SetBuffer(Tag DEBUG_FLR_PARAM_TYPE, EntryType FA_ENTRY_TYPE, Buf unsafe.Pointer, Size uint32) *FA_ENTRY {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Tag), uintptr(EntryType), uintptr(unsafe.Pointer(Buf)), uintptr(Size))
+func (self *IDebugFailureAnalysis2) SetBuffer(Tag DEBUG_FLR_PARAM_TYPE, EntryType FA_ENTRY_TYPE, Buf []byte) *FA_ENTRY {
+	var _Buf *byte
+	if len(Buf) > 0 {
+		_Buf = &Buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Tag), uintptr(EntryType), uintptr(unsafe.Pointer(_Buf)), uintptr(len(Buf)))
 	return (*FA_ENTRY)(unsafe.Pointer(r1))
 }
 
@@ -13225,8 +14353,12 @@ func (self *IDebugFailureAnalysis2) AddUlong64(Tag DEBUG_FLR_PARAM_TYPE, Value u
 }
 
 // AddBuffer dispatches through IDebugFailureAnalysis2's vtable slot 22.
-func (self *IDebugFailureAnalysis2) AddBuffer(Tag DEBUG_FLR_PARAM_TYPE, EntryType FA_ENTRY_TYPE, Buf unsafe.Pointer, Size uint32) *FA_ENTRY {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Tag), uintptr(EntryType), uintptr(unsafe.Pointer(Buf)), uintptr(Size))
+func (self *IDebugFailureAnalysis2) AddBuffer(Tag DEBUG_FLR_PARAM_TYPE, EntryType FA_ENTRY_TYPE, Buf []byte) *FA_ENTRY {
+	var _Buf *byte
+	if len(Buf) > 0 {
+		_Buf = &Buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Tag), uintptr(EntryType), uintptr(unsafe.Pointer(_Buf)), uintptr(len(Buf)))
 	return (*FA_ENTRY)(unsafe.Pointer(r1))
 }
 
@@ -13293,8 +14425,12 @@ func (self *IDebugFailureAnalysis3) GetString(Tag DEBUG_FLR_PARAM_TYPE, Str foun
 }
 
 // GetBuffer dispatches through IDebugFailureAnalysis3's vtable slot 9.
-func (self *IDebugFailureAnalysis3) GetBuffer(Tag DEBUG_FLR_PARAM_TYPE, Buf unsafe.Pointer, Size uint32) *FA_ENTRY {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Tag), uintptr(unsafe.Pointer(Buf)), uintptr(Size))
+func (self *IDebugFailureAnalysis3) GetBuffer(Tag DEBUG_FLR_PARAM_TYPE, Buf []byte) *FA_ENTRY {
+	var _Buf *byte
+	if len(Buf) > 0 {
+		_Buf = &Buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(Tag), uintptr(unsafe.Pointer(_Buf)), uintptr(len(Buf)))
 	return (*FA_ENTRY)(unsafe.Pointer(r1))
 }
 
@@ -13341,8 +14477,12 @@ func (self *IDebugFailureAnalysis3) SetUlong64(Tag DEBUG_FLR_PARAM_TYPE, Value u
 }
 
 // SetBuffer dispatches through IDebugFailureAnalysis3's vtable slot 17.
-func (self *IDebugFailureAnalysis3) SetBuffer(Tag DEBUG_FLR_PARAM_TYPE, EntryType FA_ENTRY_TYPE, Buf unsafe.Pointer, Size uint32) *FA_ENTRY {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Tag), uintptr(EntryType), uintptr(unsafe.Pointer(Buf)), uintptr(Size))
+func (self *IDebugFailureAnalysis3) SetBuffer(Tag DEBUG_FLR_PARAM_TYPE, EntryType FA_ENTRY_TYPE, Buf []byte) *FA_ENTRY {
+	var _Buf *byte
+	if len(Buf) > 0 {
+		_Buf = &Buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[17], uintptr(unsafe.Pointer(self)), uintptr(Tag), uintptr(EntryType), uintptr(unsafe.Pointer(_Buf)), uintptr(len(Buf)))
 	return (*FA_ENTRY)(unsafe.Pointer(r1))
 }
 
@@ -13371,8 +14511,12 @@ func (self *IDebugFailureAnalysis3) AddUlong64(Tag DEBUG_FLR_PARAM_TYPE, Value u
 }
 
 // AddBuffer dispatches through IDebugFailureAnalysis3's vtable slot 22.
-func (self *IDebugFailureAnalysis3) AddBuffer(Tag DEBUG_FLR_PARAM_TYPE, EntryType FA_ENTRY_TYPE, Buf unsafe.Pointer, Size uint32) *FA_ENTRY {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Tag), uintptr(EntryType), uintptr(unsafe.Pointer(Buf)), uintptr(Size))
+func (self *IDebugFailureAnalysis3) AddBuffer(Tag DEBUG_FLR_PARAM_TYPE, EntryType FA_ENTRY_TYPE, Buf []byte) *FA_ENTRY {
+	var _Buf *byte
+	if len(Buf) > 0 {
+		_Buf = &Buf[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[22], uintptr(unsafe.Pointer(self)), uintptr(Tag), uintptr(EntryType), uintptr(unsafe.Pointer(_Buf)), uintptr(len(Buf)))
 	return (*FA_ENTRY)(unsafe.Pointer(r1))
 }
 
@@ -14616,14 +15760,22 @@ func (self *IDebugHostType) GetArrayDimensionality(arrayDimensionality *uint64) 
 }
 
 // GetArrayDimensions dispatches through IDebugHostType's vtable slot 20.
-func (self *IDebugHostType) GetArrayDimensions(dimensions uint64, pDimensions *ArrayDimension) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(dimensions), uintptr(unsafe.Pointer(pDimensions)))
+func (self *IDebugHostType) GetArrayDimensions(pDimensions []ArrayDimension) error {
+	var _pDimensions *ArrayDimension
+	if len(pDimensions) > 0 {
+		_pDimensions = &pDimensions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[20], uintptr(unsafe.Pointer(self)), uintptr(len(pDimensions)), uintptr(unsafe.Pointer(_pDimensions)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // CreateArrayOf dispatches through IDebugHostType's vtable slot 21.
-func (self *IDebugHostType) CreateArrayOf(dimensions uint64, pDimensions *ArrayDimension, newType **IDebugHostType) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(dimensions), uintptr(unsafe.Pointer(pDimensions)), uintptr(unsafe.Pointer(newType)))
+func (self *IDebugHostType) CreateArrayOf(pDimensions []ArrayDimension, newType **IDebugHostType) error {
+	var _pDimensions *ArrayDimension
+	if len(pDimensions) > 0 {
+		_pDimensions = &pDimensions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[21], uintptr(unsafe.Pointer(self)), uintptr(len(pDimensions)), uintptr(unsafe.Pointer(_pDimensions)), uintptr(unsafe.Pointer(newType)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -14736,8 +15888,12 @@ func (self *IDebugHostType4) GetExtendedArrayHeaderSize(headerSize *uint64) erro
 }
 
 // GetExtendedArrayDimensions dispatches through IDebugHostType4's vtable slot 36.
-func (self *IDebugHostType4) GetExtendedArrayDimensions(dimensions uint64, pDimensions *ExtendedArrayDimension) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(dimensions), uintptr(unsafe.Pointer(pDimensions)))
+func (self *IDebugHostType4) GetExtendedArrayDimensions(pDimensions []ExtendedArrayDimension) error {
+	var _pDimensions *ExtendedArrayDimension
+	if len(pDimensions) > 0 {
+		_pDimensions = &pDimensions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[36], uintptr(unsafe.Pointer(self)), uintptr(len(pDimensions)), uintptr(unsafe.Pointer(_pDimensions)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -15315,8 +16471,12 @@ func (self *IDebugSymbolGroup) GetSymbolName(Index uint32, Buffer foundation.PST
 }
 
 // GetSymbolParameters dispatches through IDebugSymbolGroup's vtable slot 8.
-func (self *IDebugSymbolGroup) GetSymbolParameters(Start uint32, Count uint32, Params *DEBUG_SYMBOL_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugSymbolGroup) GetSymbolParameters(Start uint32, Params []DEBUG_SYMBOL_PARAMETERS) error {
+	var _Params *DEBUG_SYMBOL_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -15384,8 +16544,12 @@ func (self *IDebugSymbolGroup2) GetSymbolName(Index uint32, Buffer foundation.PS
 }
 
 // GetSymbolParameters dispatches through IDebugSymbolGroup2's vtable slot 8.
-func (self *IDebugSymbolGroup2) GetSymbolParameters(Start uint32, Count uint32, Params *DEBUG_SYMBOL_PARAMETERS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Params)))
+func (self *IDebugSymbolGroup2) GetSymbolParameters(Start uint32, Params []DEBUG_SYMBOL_PARAMETERS) error {
+	var _Params *DEBUG_SYMBOL_PARAMETERS
+	if len(Params) > 0 {
+		_Params = &Params[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Params)), uintptr(unsafe.Pointer(_Params)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -15637,14 +16801,22 @@ func (self *IDebugSymbols) GetOffsetTypeId(Offset uint64, TypeId *uint32, Module
 }
 
 // ReadTypedDataVirtual dispatches through IDebugSymbols's vtable slot 25.
-func (self *IDebugSymbols) ReadTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugSymbols) ReadTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteTypedDataVirtual dispatches through IDebugSymbols's vtable slot 26.
-func (self *IDebugSymbols) WriteTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugSymbols) WriteTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -15655,14 +16827,22 @@ func (self *IDebugSymbols) OutputTypedDataVirtual(OutputControl uint32, Offset u
 }
 
 // ReadTypedDataPhysical dispatches through IDebugSymbols's vtable slot 28.
-func (self *IDebugSymbols) ReadTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugSymbols) ReadTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteTypedDataPhysical dispatches through IDebugSymbols's vtable slot 29.
-func (self *IDebugSymbols) WriteTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugSymbols) WriteTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -15673,14 +16853,22 @@ func (self *IDebugSymbols) OutputTypedDataPhysical(OutputControl uint32, Offset 
 }
 
 // GetScope dispatches through IDebugSymbols's vtable slot 31.
-func (self *IDebugSymbols) GetScope(InstructionOffset *uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext unsafe.Pointer, ScopeContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InstructionOffset)), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(ScopeContext)), uintptr(ScopeContextSize))
+func (self *IDebugSymbols) GetScope(InstructionOffset *uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext []byte) error {
+	var _ScopeContext *byte
+	if len(ScopeContext) > 0 {
+		_ScopeContext = &ScopeContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InstructionOffset)), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(_ScopeContext)), uintptr(len(ScopeContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetScope dispatches through IDebugSymbols's vtable slot 32.
-func (self *IDebugSymbols) SetScope(InstructionOffset uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext unsafe.Pointer, ScopeContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(InstructionOffset), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(ScopeContext)), uintptr(ScopeContextSize))
+func (self *IDebugSymbols) SetScope(InstructionOffset uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext []byte) error {
+	var _ScopeContext *byte
+	if len(ScopeContext) > 0 {
+		_ScopeContext = &ScopeContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(InstructionOffset), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(_ScopeContext)), uintptr(len(ScopeContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -15793,8 +16981,12 @@ func (self *IDebugSymbols) FindSourceFile(StartElement uint32, File foundation.P
 }
 
 // GetSourceFileLineOffsets dispatches through IDebugSymbols's vtable slot 51.
-func (self *IDebugSymbols) GetSourceFileLineOffsets(File foundation.PSTR, Buffer *uint64, BufferLines uint32, FileLines *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(File)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLines), uintptr(unsafe.Pointer(FileLines)))
+func (self *IDebugSymbols) GetSourceFileLineOffsets(File foundation.PSTR, Buffer []uint64, FileLines *uint32) error {
+	var _Buffer *uint64
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(File)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(FileLines)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -15939,14 +17131,22 @@ func (self *IDebugSymbols2) GetOffsetTypeId(Offset uint64, TypeId *uint32, Modul
 }
 
 // ReadTypedDataVirtual dispatches through IDebugSymbols2's vtable slot 25.
-func (self *IDebugSymbols2) ReadTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugSymbols2) ReadTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteTypedDataVirtual dispatches through IDebugSymbols2's vtable slot 26.
-func (self *IDebugSymbols2) WriteTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugSymbols2) WriteTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -15957,14 +17157,22 @@ func (self *IDebugSymbols2) OutputTypedDataVirtual(OutputControl uint32, Offset 
 }
 
 // ReadTypedDataPhysical dispatches through IDebugSymbols2's vtable slot 28.
-func (self *IDebugSymbols2) ReadTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugSymbols2) ReadTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteTypedDataPhysical dispatches through IDebugSymbols2's vtable slot 29.
-func (self *IDebugSymbols2) WriteTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugSymbols2) WriteTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -15975,14 +17183,22 @@ func (self *IDebugSymbols2) OutputTypedDataPhysical(OutputControl uint32, Offset
 }
 
 // GetScope dispatches through IDebugSymbols2's vtable slot 31.
-func (self *IDebugSymbols2) GetScope(InstructionOffset *uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext unsafe.Pointer, ScopeContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InstructionOffset)), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(ScopeContext)), uintptr(ScopeContextSize))
+func (self *IDebugSymbols2) GetScope(InstructionOffset *uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext []byte) error {
+	var _ScopeContext *byte
+	if len(ScopeContext) > 0 {
+		_ScopeContext = &ScopeContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InstructionOffset)), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(_ScopeContext)), uintptr(len(ScopeContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetScope dispatches through IDebugSymbols2's vtable slot 32.
-func (self *IDebugSymbols2) SetScope(InstructionOffset uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext unsafe.Pointer, ScopeContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(InstructionOffset), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(ScopeContext)), uintptr(ScopeContextSize))
+func (self *IDebugSymbols2) SetScope(InstructionOffset uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext []byte) error {
+	var _ScopeContext *byte
+	if len(ScopeContext) > 0 {
+		_ScopeContext = &ScopeContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(InstructionOffset), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(_ScopeContext)), uintptr(len(ScopeContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -16095,14 +17311,22 @@ func (self *IDebugSymbols2) FindSourceFile(StartElement uint32, File foundation.
 }
 
 // GetSourceFileLineOffsets dispatches through IDebugSymbols2's vtable slot 51.
-func (self *IDebugSymbols2) GetSourceFileLineOffsets(File foundation.PSTR, Buffer *uint64, BufferLines uint32, FileLines *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(File)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLines), uintptr(unsafe.Pointer(FileLines)))
+func (self *IDebugSymbols2) GetSourceFileLineOffsets(File foundation.PSTR, Buffer []uint64, FileLines *uint32) error {
+	var _Buffer *uint64
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(File)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(FileLines)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetModuleVersionInformation dispatches through IDebugSymbols2's vtable slot 52.
-func (self *IDebugSymbols2) GetModuleVersionInformation(Index uint32, Base uint64, Item foundation.PSTR, Buffer unsafe.Pointer, BufferSize uint32, VerInfoSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Base), uintptr(unsafe.Pointer(Item)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(VerInfoSize)))
+func (self *IDebugSymbols2) GetModuleVersionInformation(Index uint32, Base uint64, Item foundation.PSTR, Buffer []byte, VerInfoSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Base), uintptr(unsafe.Pointer(Item)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(VerInfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -16289,14 +17513,22 @@ func (self *IDebugSymbols3) GetOffsetTypeId(Offset uint64, TypeId *uint32, Modul
 }
 
 // ReadTypedDataVirtual dispatches through IDebugSymbols3's vtable slot 25.
-func (self *IDebugSymbols3) ReadTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugSymbols3) ReadTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteTypedDataVirtual dispatches through IDebugSymbols3's vtable slot 26.
-func (self *IDebugSymbols3) WriteTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugSymbols3) WriteTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -16307,14 +17539,22 @@ func (self *IDebugSymbols3) OutputTypedDataVirtual(OutputControl uint32, Offset 
 }
 
 // ReadTypedDataPhysical dispatches through IDebugSymbols3's vtable slot 28.
-func (self *IDebugSymbols3) ReadTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugSymbols3) ReadTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteTypedDataPhysical dispatches through IDebugSymbols3's vtable slot 29.
-func (self *IDebugSymbols3) WriteTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugSymbols3) WriteTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -16325,14 +17565,22 @@ func (self *IDebugSymbols3) OutputTypedDataPhysical(OutputControl uint32, Offset
 }
 
 // GetScope dispatches through IDebugSymbols3's vtable slot 31.
-func (self *IDebugSymbols3) GetScope(InstructionOffset *uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext unsafe.Pointer, ScopeContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InstructionOffset)), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(ScopeContext)), uintptr(ScopeContextSize))
+func (self *IDebugSymbols3) GetScope(InstructionOffset *uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext []byte) error {
+	var _ScopeContext *byte
+	if len(ScopeContext) > 0 {
+		_ScopeContext = &ScopeContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InstructionOffset)), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(_ScopeContext)), uintptr(len(ScopeContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetScope dispatches through IDebugSymbols3's vtable slot 32.
-func (self *IDebugSymbols3) SetScope(InstructionOffset uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext unsafe.Pointer, ScopeContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(InstructionOffset), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(ScopeContext)), uintptr(ScopeContextSize))
+func (self *IDebugSymbols3) SetScope(InstructionOffset uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext []byte) error {
+	var _ScopeContext *byte
+	if len(ScopeContext) > 0 {
+		_ScopeContext = &ScopeContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(InstructionOffset), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(_ScopeContext)), uintptr(len(ScopeContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -16445,14 +17693,22 @@ func (self *IDebugSymbols3) FindSourceFile(StartElement uint32, File foundation.
 }
 
 // GetSourceFileLineOffsets dispatches through IDebugSymbols3's vtable slot 51.
-func (self *IDebugSymbols3) GetSourceFileLineOffsets(File foundation.PSTR, Buffer *uint64, BufferLines uint32, FileLines *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(File)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLines), uintptr(unsafe.Pointer(FileLines)))
+func (self *IDebugSymbols3) GetSourceFileLineOffsets(File foundation.PSTR, Buffer []uint64, FileLines *uint32) error {
+	var _Buffer *uint64
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(File)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(FileLines)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetModuleVersionInformation dispatches through IDebugSymbols3's vtable slot 52.
-func (self *IDebugSymbols3) GetModuleVersionInformation(Index uint32, Base uint64, Item foundation.PSTR, Buffer unsafe.Pointer, BufferSize uint32, VerInfoSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Base), uintptr(unsafe.Pointer(Item)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(VerInfoSize)))
+func (self *IDebugSymbols3) GetModuleVersionInformation(Index uint32, Base uint64, Item foundation.PSTR, Buffer []byte, VerInfoSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Base), uintptr(unsafe.Pointer(Item)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(VerInfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -16677,16 +17933,24 @@ func (self *IDebugSymbols3) FindSourceFileWide(StartElement uint32, File string,
 }
 
 // GetSourceFileLineOffsetsWide dispatches through IDebugSymbols3's vtable slot 87.
-func (self *IDebugSymbols3) GetSourceFileLineOffsetsWide(File string, Buffer *uint64, BufferLines uint32, FileLines *uint32) error {
+func (self *IDebugSymbols3) GetSourceFileLineOffsetsWide(File string, Buffer []uint64, FileLines *uint32) error {
 	_File := win32.UTF16Ptr(File)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_File)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLines), uintptr(unsafe.Pointer(FileLines)))
+	var _Buffer *uint64
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_File)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(FileLines)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetModuleVersionInformationWide dispatches through IDebugSymbols3's vtable slot 88.
-func (self *IDebugSymbols3) GetModuleVersionInformationWide(Index uint32, Base uint64, Item string, Buffer unsafe.Pointer, BufferSize uint32, VerInfoSize *uint32) error {
+func (self *IDebugSymbols3) GetModuleVersionInformationWide(Index uint32, Base uint64, Item string, Buffer []byte, VerInfoSize *uint32) error {
 	_Item := win32.UTF16Ptr(Item)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Base), uintptr(unsafe.Pointer(_Item)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(VerInfoSize)))
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Base), uintptr(unsafe.Pointer(_Item)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(VerInfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -16784,8 +18048,12 @@ func (self *IDebugSymbols3) OutputSymbolByOffset(OutputControl uint32, Flags uin
 }
 
 // GetFunctionEntryByOffset dispatches through IDebugSymbols3's vtable slot 104.
-func (self *IDebugSymbols3) GetFunctionEntryByOffset(Offset uint64, Flags uint32, Buffer unsafe.Pointer, BufferSize uint32, BufferNeeded *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BufferNeeded)))
+func (self *IDebugSymbols3) GetFunctionEntryByOffset(Offset uint64, Flags uint32, Buffer []byte, BufferNeeded *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BufferNeeded)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -16828,15 +18096,23 @@ func (self *IDebugSymbols3) GetSymbolEntriesByOffset(Offset uint64, Flags uint32
 }
 
 // GetSymbolEntriesByName dispatches through IDebugSymbols3's vtable slot 111.
-func (self *IDebugSymbols3) GetSymbolEntriesByName(Symbol foundation.PSTR, Flags uint32, Ids *DEBUG_MODULE_AND_ID, IdsCount uint32, Entries *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Symbol)), uintptr(Flags), uintptr(unsafe.Pointer(Ids)), uintptr(IdsCount), uintptr(unsafe.Pointer(Entries)))
+func (self *IDebugSymbols3) GetSymbolEntriesByName(Symbol foundation.PSTR, Flags uint32, Ids []DEBUG_MODULE_AND_ID, Entries *uint32) error {
+	var _Ids *DEBUG_MODULE_AND_ID
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Symbol)), uintptr(Flags), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(Entries)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSymbolEntriesByNameWide dispatches through IDebugSymbols3's vtable slot 112.
-func (self *IDebugSymbols3) GetSymbolEntriesByNameWide(Symbol string, Flags uint32, Ids *DEBUG_MODULE_AND_ID, IdsCount uint32, Entries *uint32) error {
+func (self *IDebugSymbols3) GetSymbolEntriesByNameWide(Symbol string, Flags uint32, Ids []DEBUG_MODULE_AND_ID, Entries *uint32) error {
 	_Symbol := win32.UTF16Ptr(Symbol)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Symbol)), uintptr(Flags), uintptr(unsafe.Pointer(Ids)), uintptr(IdsCount), uintptr(unsafe.Pointer(Entries)))
+	var _Ids *DEBUG_MODULE_AND_ID
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Symbol)), uintptr(Flags), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(Entries)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -16865,8 +18141,12 @@ func (self *IDebugSymbols3) GetSymbolEntryStringWide(Id *DEBUG_MODULE_AND_ID, Wh
 }
 
 // GetSymbolEntryOffsetRegions dispatches through IDebugSymbols3's vtable slot 117.
-func (self *IDebugSymbols3) GetSymbolEntryOffsetRegions(Id *DEBUG_MODULE_AND_ID, Flags uint32, Regions *DEBUG_OFFSET_REGION, RegionsCount uint32, RegionsAvail *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[117], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)), uintptr(Flags), uintptr(unsafe.Pointer(Regions)), uintptr(RegionsCount), uintptr(unsafe.Pointer(RegionsAvail)))
+func (self *IDebugSymbols3) GetSymbolEntryOffsetRegions(Id *DEBUG_MODULE_AND_ID, Flags uint32, Regions []DEBUG_OFFSET_REGION, RegionsAvail *uint32) error {
+	var _Regions *DEBUG_OFFSET_REGION
+	if len(Regions) > 0 {
+		_Regions = &Regions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[117], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)), uintptr(Flags), uintptr(unsafe.Pointer(_Regions)), uintptr(len(Regions)), uintptr(unsafe.Pointer(RegionsAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -16877,21 +18157,33 @@ func (self *IDebugSymbols3) GetSymbolEntryBySymbolEntry(FromId *DEBUG_MODULE_AND
 }
 
 // GetSourceEntriesByOffset dispatches through IDebugSymbols3's vtable slot 119.
-func (self *IDebugSymbols3) GetSourceEntriesByOffset(Offset uint64, Flags uint32, Entries *DEBUG_SYMBOL_SOURCE_ENTRY, EntriesCount uint32, EntriesAvail *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[119], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(Entries)), uintptr(EntriesCount), uintptr(unsafe.Pointer(EntriesAvail)))
+func (self *IDebugSymbols3) GetSourceEntriesByOffset(Offset uint64, Flags uint32, Entries []DEBUG_SYMBOL_SOURCE_ENTRY, EntriesAvail *uint32) error {
+	var _Entries *DEBUG_SYMBOL_SOURCE_ENTRY
+	if len(Entries) > 0 {
+		_Entries = &Entries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[119], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(_Entries)), uintptr(len(Entries)), uintptr(unsafe.Pointer(EntriesAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceEntriesByLine dispatches through IDebugSymbols3's vtable slot 120.
-func (self *IDebugSymbols3) GetSourceEntriesByLine(Line uint32, File foundation.PSTR, Flags uint32, Entries *DEBUG_SYMBOL_SOURCE_ENTRY, EntriesCount uint32, EntriesAvail *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[120], uintptr(unsafe.Pointer(self)), uintptr(Line), uintptr(unsafe.Pointer(File)), uintptr(Flags), uintptr(unsafe.Pointer(Entries)), uintptr(EntriesCount), uintptr(unsafe.Pointer(EntriesAvail)))
+func (self *IDebugSymbols3) GetSourceEntriesByLine(Line uint32, File foundation.PSTR, Flags uint32, Entries []DEBUG_SYMBOL_SOURCE_ENTRY, EntriesAvail *uint32) error {
+	var _Entries *DEBUG_SYMBOL_SOURCE_ENTRY
+	if len(Entries) > 0 {
+		_Entries = &Entries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[120], uintptr(unsafe.Pointer(self)), uintptr(Line), uintptr(unsafe.Pointer(File)), uintptr(Flags), uintptr(unsafe.Pointer(_Entries)), uintptr(len(Entries)), uintptr(unsafe.Pointer(EntriesAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceEntriesByLineWide dispatches through IDebugSymbols3's vtable slot 121.
-func (self *IDebugSymbols3) GetSourceEntriesByLineWide(Line uint32, File string, Flags uint32, Entries *DEBUG_SYMBOL_SOURCE_ENTRY, EntriesCount uint32, EntriesAvail *uint32) error {
+func (self *IDebugSymbols3) GetSourceEntriesByLineWide(Line uint32, File string, Flags uint32, Entries []DEBUG_SYMBOL_SOURCE_ENTRY, EntriesAvail *uint32) error {
 	_File := win32.UTF16Ptr(File)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[121], uintptr(unsafe.Pointer(self)), uintptr(Line), uintptr(unsafe.Pointer(_File)), uintptr(Flags), uintptr(unsafe.Pointer(Entries)), uintptr(EntriesCount), uintptr(unsafe.Pointer(EntriesAvail)))
+	var _Entries *DEBUG_SYMBOL_SOURCE_ENTRY
+	if len(Entries) > 0 {
+		_Entries = &Entries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[121], uintptr(unsafe.Pointer(self)), uintptr(Line), uintptr(unsafe.Pointer(_File)), uintptr(Flags), uintptr(unsafe.Pointer(_Entries)), uintptr(len(Entries)), uintptr(unsafe.Pointer(EntriesAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -16908,8 +18200,12 @@ func (self *IDebugSymbols3) GetSourceEntryStringWide(Entry *DEBUG_SYMBOL_SOURCE_
 }
 
 // GetSourceEntryOffsetRegions dispatches through IDebugSymbols3's vtable slot 124.
-func (self *IDebugSymbols3) GetSourceEntryOffsetRegions(Entry *DEBUG_SYMBOL_SOURCE_ENTRY, Flags uint32, Regions *DEBUG_OFFSET_REGION, RegionsCount uint32, RegionsAvail *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[124], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Entry)), uintptr(Flags), uintptr(unsafe.Pointer(Regions)), uintptr(RegionsCount), uintptr(unsafe.Pointer(RegionsAvail)))
+func (self *IDebugSymbols3) GetSourceEntryOffsetRegions(Entry *DEBUG_SYMBOL_SOURCE_ENTRY, Flags uint32, Regions []DEBUG_OFFSET_REGION, RegionsAvail *uint32) error {
+	var _Regions *DEBUG_OFFSET_REGION
+	if len(Regions) > 0 {
+		_Regions = &Regions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[124], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Entry)), uintptr(Flags), uintptr(unsafe.Pointer(_Regions)), uintptr(len(Regions)), uintptr(unsafe.Pointer(RegionsAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -17060,14 +18356,22 @@ func (self *IDebugSymbols4) GetOffsetTypeId(Offset uint64, TypeId *uint32, Modul
 }
 
 // ReadTypedDataVirtual dispatches through IDebugSymbols4's vtable slot 25.
-func (self *IDebugSymbols4) ReadTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugSymbols4) ReadTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteTypedDataVirtual dispatches through IDebugSymbols4's vtable slot 26.
-func (self *IDebugSymbols4) WriteTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugSymbols4) WriteTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -17078,14 +18382,22 @@ func (self *IDebugSymbols4) OutputTypedDataVirtual(OutputControl uint32, Offset 
 }
 
 // ReadTypedDataPhysical dispatches through IDebugSymbols4's vtable slot 28.
-func (self *IDebugSymbols4) ReadTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugSymbols4) ReadTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteTypedDataPhysical dispatches through IDebugSymbols4's vtable slot 29.
-func (self *IDebugSymbols4) WriteTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugSymbols4) WriteTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -17096,14 +18408,22 @@ func (self *IDebugSymbols4) OutputTypedDataPhysical(OutputControl uint32, Offset
 }
 
 // GetScope dispatches through IDebugSymbols4's vtable slot 31.
-func (self *IDebugSymbols4) GetScope(InstructionOffset *uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext unsafe.Pointer, ScopeContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InstructionOffset)), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(ScopeContext)), uintptr(ScopeContextSize))
+func (self *IDebugSymbols4) GetScope(InstructionOffset *uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext []byte) error {
+	var _ScopeContext *byte
+	if len(ScopeContext) > 0 {
+		_ScopeContext = &ScopeContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InstructionOffset)), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(_ScopeContext)), uintptr(len(ScopeContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetScope dispatches through IDebugSymbols4's vtable slot 32.
-func (self *IDebugSymbols4) SetScope(InstructionOffset uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext unsafe.Pointer, ScopeContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(InstructionOffset), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(ScopeContext)), uintptr(ScopeContextSize))
+func (self *IDebugSymbols4) SetScope(InstructionOffset uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext []byte) error {
+	var _ScopeContext *byte
+	if len(ScopeContext) > 0 {
+		_ScopeContext = &ScopeContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(InstructionOffset), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(_ScopeContext)), uintptr(len(ScopeContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -17216,14 +18536,22 @@ func (self *IDebugSymbols4) FindSourceFile(StartElement uint32, File foundation.
 }
 
 // GetSourceFileLineOffsets dispatches through IDebugSymbols4's vtable slot 51.
-func (self *IDebugSymbols4) GetSourceFileLineOffsets(File foundation.PSTR, Buffer *uint64, BufferLines uint32, FileLines *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(File)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLines), uintptr(unsafe.Pointer(FileLines)))
+func (self *IDebugSymbols4) GetSourceFileLineOffsets(File foundation.PSTR, Buffer []uint64, FileLines *uint32) error {
+	var _Buffer *uint64
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(File)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(FileLines)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetModuleVersionInformation dispatches through IDebugSymbols4's vtable slot 52.
-func (self *IDebugSymbols4) GetModuleVersionInformation(Index uint32, Base uint64, Item foundation.PSTR, Buffer unsafe.Pointer, BufferSize uint32, VerInfoSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Base), uintptr(unsafe.Pointer(Item)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(VerInfoSize)))
+func (self *IDebugSymbols4) GetModuleVersionInformation(Index uint32, Base uint64, Item foundation.PSTR, Buffer []byte, VerInfoSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Base), uintptr(unsafe.Pointer(Item)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(VerInfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -17448,16 +18776,24 @@ func (self *IDebugSymbols4) FindSourceFileWide(StartElement uint32, File string,
 }
 
 // GetSourceFileLineOffsetsWide dispatches through IDebugSymbols4's vtable slot 87.
-func (self *IDebugSymbols4) GetSourceFileLineOffsetsWide(File string, Buffer *uint64, BufferLines uint32, FileLines *uint32) error {
+func (self *IDebugSymbols4) GetSourceFileLineOffsetsWide(File string, Buffer []uint64, FileLines *uint32) error {
 	_File := win32.UTF16Ptr(File)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_File)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLines), uintptr(unsafe.Pointer(FileLines)))
+	var _Buffer *uint64
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_File)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(FileLines)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetModuleVersionInformationWide dispatches through IDebugSymbols4's vtable slot 88.
-func (self *IDebugSymbols4) GetModuleVersionInformationWide(Index uint32, Base uint64, Item string, Buffer unsafe.Pointer, BufferSize uint32, VerInfoSize *uint32) error {
+func (self *IDebugSymbols4) GetModuleVersionInformationWide(Index uint32, Base uint64, Item string, Buffer []byte, VerInfoSize *uint32) error {
 	_Item := win32.UTF16Ptr(Item)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Base), uintptr(unsafe.Pointer(_Item)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(VerInfoSize)))
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Base), uintptr(unsafe.Pointer(_Item)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(VerInfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -17555,8 +18891,12 @@ func (self *IDebugSymbols4) OutputSymbolByOffset(OutputControl uint32, Flags uin
 }
 
 // GetFunctionEntryByOffset dispatches through IDebugSymbols4's vtable slot 104.
-func (self *IDebugSymbols4) GetFunctionEntryByOffset(Offset uint64, Flags uint32, Buffer unsafe.Pointer, BufferSize uint32, BufferNeeded *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BufferNeeded)))
+func (self *IDebugSymbols4) GetFunctionEntryByOffset(Offset uint64, Flags uint32, Buffer []byte, BufferNeeded *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BufferNeeded)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -17599,15 +18939,23 @@ func (self *IDebugSymbols4) GetSymbolEntriesByOffset(Offset uint64, Flags uint32
 }
 
 // GetSymbolEntriesByName dispatches through IDebugSymbols4's vtable slot 111.
-func (self *IDebugSymbols4) GetSymbolEntriesByName(Symbol foundation.PSTR, Flags uint32, Ids *DEBUG_MODULE_AND_ID, IdsCount uint32, Entries *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Symbol)), uintptr(Flags), uintptr(unsafe.Pointer(Ids)), uintptr(IdsCount), uintptr(unsafe.Pointer(Entries)))
+func (self *IDebugSymbols4) GetSymbolEntriesByName(Symbol foundation.PSTR, Flags uint32, Ids []DEBUG_MODULE_AND_ID, Entries *uint32) error {
+	var _Ids *DEBUG_MODULE_AND_ID
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Symbol)), uintptr(Flags), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(Entries)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSymbolEntriesByNameWide dispatches through IDebugSymbols4's vtable slot 112.
-func (self *IDebugSymbols4) GetSymbolEntriesByNameWide(Symbol string, Flags uint32, Ids *DEBUG_MODULE_AND_ID, IdsCount uint32, Entries *uint32) error {
+func (self *IDebugSymbols4) GetSymbolEntriesByNameWide(Symbol string, Flags uint32, Ids []DEBUG_MODULE_AND_ID, Entries *uint32) error {
 	_Symbol := win32.UTF16Ptr(Symbol)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Symbol)), uintptr(Flags), uintptr(unsafe.Pointer(Ids)), uintptr(IdsCount), uintptr(unsafe.Pointer(Entries)))
+	var _Ids *DEBUG_MODULE_AND_ID
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Symbol)), uintptr(Flags), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(Entries)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -17636,8 +18984,12 @@ func (self *IDebugSymbols4) GetSymbolEntryStringWide(Id *DEBUG_MODULE_AND_ID, Wh
 }
 
 // GetSymbolEntryOffsetRegions dispatches through IDebugSymbols4's vtable slot 117.
-func (self *IDebugSymbols4) GetSymbolEntryOffsetRegions(Id *DEBUG_MODULE_AND_ID, Flags uint32, Regions *DEBUG_OFFSET_REGION, RegionsCount uint32, RegionsAvail *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[117], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)), uintptr(Flags), uintptr(unsafe.Pointer(Regions)), uintptr(RegionsCount), uintptr(unsafe.Pointer(RegionsAvail)))
+func (self *IDebugSymbols4) GetSymbolEntryOffsetRegions(Id *DEBUG_MODULE_AND_ID, Flags uint32, Regions []DEBUG_OFFSET_REGION, RegionsAvail *uint32) error {
+	var _Regions *DEBUG_OFFSET_REGION
+	if len(Regions) > 0 {
+		_Regions = &Regions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[117], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)), uintptr(Flags), uintptr(unsafe.Pointer(_Regions)), uintptr(len(Regions)), uintptr(unsafe.Pointer(RegionsAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -17648,21 +19000,33 @@ func (self *IDebugSymbols4) GetSymbolEntryBySymbolEntry(FromId *DEBUG_MODULE_AND
 }
 
 // GetSourceEntriesByOffset dispatches through IDebugSymbols4's vtable slot 119.
-func (self *IDebugSymbols4) GetSourceEntriesByOffset(Offset uint64, Flags uint32, Entries *DEBUG_SYMBOL_SOURCE_ENTRY, EntriesCount uint32, EntriesAvail *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[119], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(Entries)), uintptr(EntriesCount), uintptr(unsafe.Pointer(EntriesAvail)))
+func (self *IDebugSymbols4) GetSourceEntriesByOffset(Offset uint64, Flags uint32, Entries []DEBUG_SYMBOL_SOURCE_ENTRY, EntriesAvail *uint32) error {
+	var _Entries *DEBUG_SYMBOL_SOURCE_ENTRY
+	if len(Entries) > 0 {
+		_Entries = &Entries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[119], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(_Entries)), uintptr(len(Entries)), uintptr(unsafe.Pointer(EntriesAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceEntriesByLine dispatches through IDebugSymbols4's vtable slot 120.
-func (self *IDebugSymbols4) GetSourceEntriesByLine(Line uint32, File foundation.PSTR, Flags uint32, Entries *DEBUG_SYMBOL_SOURCE_ENTRY, EntriesCount uint32, EntriesAvail *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[120], uintptr(unsafe.Pointer(self)), uintptr(Line), uintptr(unsafe.Pointer(File)), uintptr(Flags), uintptr(unsafe.Pointer(Entries)), uintptr(EntriesCount), uintptr(unsafe.Pointer(EntriesAvail)))
+func (self *IDebugSymbols4) GetSourceEntriesByLine(Line uint32, File foundation.PSTR, Flags uint32, Entries []DEBUG_SYMBOL_SOURCE_ENTRY, EntriesAvail *uint32) error {
+	var _Entries *DEBUG_SYMBOL_SOURCE_ENTRY
+	if len(Entries) > 0 {
+		_Entries = &Entries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[120], uintptr(unsafe.Pointer(self)), uintptr(Line), uintptr(unsafe.Pointer(File)), uintptr(Flags), uintptr(unsafe.Pointer(_Entries)), uintptr(len(Entries)), uintptr(unsafe.Pointer(EntriesAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceEntriesByLineWide dispatches through IDebugSymbols4's vtable slot 121.
-func (self *IDebugSymbols4) GetSourceEntriesByLineWide(Line uint32, File string, Flags uint32, Entries *DEBUG_SYMBOL_SOURCE_ENTRY, EntriesCount uint32, EntriesAvail *uint32) error {
+func (self *IDebugSymbols4) GetSourceEntriesByLineWide(Line uint32, File string, Flags uint32, Entries []DEBUG_SYMBOL_SOURCE_ENTRY, EntriesAvail *uint32) error {
 	_File := win32.UTF16Ptr(File)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[121], uintptr(unsafe.Pointer(self)), uintptr(Line), uintptr(unsafe.Pointer(_File)), uintptr(Flags), uintptr(unsafe.Pointer(Entries)), uintptr(EntriesCount), uintptr(unsafe.Pointer(EntriesAvail)))
+	var _Entries *DEBUG_SYMBOL_SOURCE_ENTRY
+	if len(Entries) > 0 {
+		_Entries = &Entries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[121], uintptr(unsafe.Pointer(self)), uintptr(Line), uintptr(unsafe.Pointer(_File)), uintptr(Flags), uintptr(unsafe.Pointer(_Entries)), uintptr(len(Entries)), uintptr(unsafe.Pointer(EntriesAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -17679,8 +19043,12 @@ func (self *IDebugSymbols4) GetSourceEntryStringWide(Entry *DEBUG_SYMBOL_SOURCE_
 }
 
 // GetSourceEntryOffsetRegions dispatches through IDebugSymbols4's vtable slot 124.
-func (self *IDebugSymbols4) GetSourceEntryOffsetRegions(Entry *DEBUG_SYMBOL_SOURCE_ENTRY, Flags uint32, Regions *DEBUG_OFFSET_REGION, RegionsCount uint32, RegionsAvail *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[124], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Entry)), uintptr(Flags), uintptr(unsafe.Pointer(Regions)), uintptr(RegionsCount), uintptr(unsafe.Pointer(RegionsAvail)))
+func (self *IDebugSymbols4) GetSourceEntryOffsetRegions(Entry *DEBUG_SYMBOL_SOURCE_ENTRY, Flags uint32, Regions []DEBUG_OFFSET_REGION, RegionsAvail *uint32) error {
+	var _Regions *DEBUG_OFFSET_REGION
+	if len(Regions) > 0 {
+		_Regions = &Regions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[124], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Entry)), uintptr(Flags), uintptr(unsafe.Pointer(_Regions)), uintptr(len(Regions)), uintptr(unsafe.Pointer(RegionsAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -17691,14 +19059,22 @@ func (self *IDebugSymbols4) GetSourceEntryBySourceEntry(FromEntry *DEBUG_SYMBOL_
 }
 
 // GetScopeEx dispatches through IDebugSymbols4's vtable slot 126.
-func (self *IDebugSymbols4) GetScopeEx(InstructionOffset *uint64, ScopeFrame *DEBUG_STACK_FRAME_EX, ScopeContext unsafe.Pointer, ScopeContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[126], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InstructionOffset)), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(ScopeContext)), uintptr(ScopeContextSize))
+func (self *IDebugSymbols4) GetScopeEx(InstructionOffset *uint64, ScopeFrame *DEBUG_STACK_FRAME_EX, ScopeContext []byte) error {
+	var _ScopeContext *byte
+	if len(ScopeContext) > 0 {
+		_ScopeContext = &ScopeContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[126], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InstructionOffset)), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(_ScopeContext)), uintptr(len(ScopeContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetScopeEx dispatches through IDebugSymbols4's vtable slot 127.
-func (self *IDebugSymbols4) SetScopeEx(InstructionOffset uint64, ScopeFrame *DEBUG_STACK_FRAME_EX, ScopeContext unsafe.Pointer, ScopeContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[127], uintptr(unsafe.Pointer(self)), uintptr(InstructionOffset), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(ScopeContext)), uintptr(ScopeContextSize))
+func (self *IDebugSymbols4) SetScopeEx(InstructionOffset uint64, ScopeFrame *DEBUG_STACK_FRAME_EX, ScopeContext []byte) error {
+	var _ScopeContext *byte
+	if len(ScopeContext) > 0 {
+		_ScopeContext = &ScopeContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[127], uintptr(unsafe.Pointer(self)), uintptr(InstructionOffset), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(_ScopeContext)), uintptr(len(ScopeContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -17873,14 +19249,22 @@ func (self *IDebugSymbols5) GetOffsetTypeId(Offset uint64, TypeId *uint32, Modul
 }
 
 // ReadTypedDataVirtual dispatches through IDebugSymbols5's vtable slot 25.
-func (self *IDebugSymbols5) ReadTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugSymbols5) ReadTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[25], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteTypedDataVirtual dispatches through IDebugSymbols5's vtable slot 26.
-func (self *IDebugSymbols5) WriteTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugSymbols5) WriteTypedDataVirtual(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[26], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -17891,14 +19275,22 @@ func (self *IDebugSymbols5) OutputTypedDataVirtual(OutputControl uint32, Offset 
 }
 
 // ReadTypedDataPhysical dispatches through IDebugSymbols5's vtable slot 28.
-func (self *IDebugSymbols5) ReadTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesRead)))
+func (self *IDebugSymbols5) ReadTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesRead *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[28], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesRead)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // WriteTypedDataPhysical dispatches through IDebugSymbols5's vtable slot 29.
-func (self *IDebugSymbols5) WriteTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer unsafe.Pointer, BufferSize uint32, BytesWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BytesWritten)))
+func (self *IDebugSymbols5) WriteTypedDataPhysical(Offset uint64, Module uint64, TypeId uint32, Buffer []byte, BytesWritten *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[29], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Module), uintptr(TypeId), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -17909,14 +19301,22 @@ func (self *IDebugSymbols5) OutputTypedDataPhysical(OutputControl uint32, Offset
 }
 
 // GetScope dispatches through IDebugSymbols5's vtable slot 31.
-func (self *IDebugSymbols5) GetScope(InstructionOffset *uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext unsafe.Pointer, ScopeContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InstructionOffset)), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(ScopeContext)), uintptr(ScopeContextSize))
+func (self *IDebugSymbols5) GetScope(InstructionOffset *uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext []byte) error {
+	var _ScopeContext *byte
+	if len(ScopeContext) > 0 {
+		_ScopeContext = &ScopeContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[31], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InstructionOffset)), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(_ScopeContext)), uintptr(len(ScopeContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetScope dispatches through IDebugSymbols5's vtable slot 32.
-func (self *IDebugSymbols5) SetScope(InstructionOffset uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext unsafe.Pointer, ScopeContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(InstructionOffset), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(ScopeContext)), uintptr(ScopeContextSize))
+func (self *IDebugSymbols5) SetScope(InstructionOffset uint64, ScopeFrame *DEBUG_STACK_FRAME, ScopeContext []byte) error {
+	var _ScopeContext *byte
+	if len(ScopeContext) > 0 {
+		_ScopeContext = &ScopeContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[32], uintptr(unsafe.Pointer(self)), uintptr(InstructionOffset), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(_ScopeContext)), uintptr(len(ScopeContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -18029,14 +19429,22 @@ func (self *IDebugSymbols5) FindSourceFile(StartElement uint32, File foundation.
 }
 
 // GetSourceFileLineOffsets dispatches through IDebugSymbols5's vtable slot 51.
-func (self *IDebugSymbols5) GetSourceFileLineOffsets(File foundation.PSTR, Buffer *uint64, BufferLines uint32, FileLines *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(File)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLines), uintptr(unsafe.Pointer(FileLines)))
+func (self *IDebugSymbols5) GetSourceFileLineOffsets(File foundation.PSTR, Buffer []uint64, FileLines *uint32) error {
+	var _Buffer *uint64
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[51], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(File)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(FileLines)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetModuleVersionInformation dispatches through IDebugSymbols5's vtable slot 52.
-func (self *IDebugSymbols5) GetModuleVersionInformation(Index uint32, Base uint64, Item foundation.PSTR, Buffer unsafe.Pointer, BufferSize uint32, VerInfoSize *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Base), uintptr(unsafe.Pointer(Item)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(VerInfoSize)))
+func (self *IDebugSymbols5) GetModuleVersionInformation(Index uint32, Base uint64, Item foundation.PSTR, Buffer []byte, VerInfoSize *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[52], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Base), uintptr(unsafe.Pointer(Item)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(VerInfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -18261,16 +19669,24 @@ func (self *IDebugSymbols5) FindSourceFileWide(StartElement uint32, File string,
 }
 
 // GetSourceFileLineOffsetsWide dispatches through IDebugSymbols5's vtable slot 87.
-func (self *IDebugSymbols5) GetSourceFileLineOffsetsWide(File string, Buffer *uint64, BufferLines uint32, FileLines *uint32) error {
+func (self *IDebugSymbols5) GetSourceFileLineOffsetsWide(File string, Buffer []uint64, FileLines *uint32) error {
 	_File := win32.UTF16Ptr(File)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_File)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferLines), uintptr(unsafe.Pointer(FileLines)))
+	var _Buffer *uint64
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[87], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_File)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(FileLines)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetModuleVersionInformationWide dispatches through IDebugSymbols5's vtable slot 88.
-func (self *IDebugSymbols5) GetModuleVersionInformationWide(Index uint32, Base uint64, Item string, Buffer unsafe.Pointer, BufferSize uint32, VerInfoSize *uint32) error {
+func (self *IDebugSymbols5) GetModuleVersionInformationWide(Index uint32, Base uint64, Item string, Buffer []byte, VerInfoSize *uint32) error {
 	_Item := win32.UTF16Ptr(Item)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Base), uintptr(unsafe.Pointer(_Item)), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(VerInfoSize)))
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[88], uintptr(unsafe.Pointer(self)), uintptr(Index), uintptr(Base), uintptr(unsafe.Pointer(_Item)), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(VerInfoSize)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -18368,8 +19784,12 @@ func (self *IDebugSymbols5) OutputSymbolByOffset(OutputControl uint32, Flags uin
 }
 
 // GetFunctionEntryByOffset dispatches through IDebugSymbols5's vtable slot 104.
-func (self *IDebugSymbols5) GetFunctionEntryByOffset(Offset uint64, Flags uint32, Buffer unsafe.Pointer, BufferSize uint32, BufferNeeded *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(Buffer)), uintptr(BufferSize), uintptr(unsafe.Pointer(BufferNeeded)))
+func (self *IDebugSymbols5) GetFunctionEntryByOffset(Offset uint64, Flags uint32, Buffer []byte, BufferNeeded *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[104], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(_Buffer)), uintptr(len(Buffer)), uintptr(unsafe.Pointer(BufferNeeded)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -18412,15 +19832,23 @@ func (self *IDebugSymbols5) GetSymbolEntriesByOffset(Offset uint64, Flags uint32
 }
 
 // GetSymbolEntriesByName dispatches through IDebugSymbols5's vtable slot 111.
-func (self *IDebugSymbols5) GetSymbolEntriesByName(Symbol foundation.PSTR, Flags uint32, Ids *DEBUG_MODULE_AND_ID, IdsCount uint32, Entries *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Symbol)), uintptr(Flags), uintptr(unsafe.Pointer(Ids)), uintptr(IdsCount), uintptr(unsafe.Pointer(Entries)))
+func (self *IDebugSymbols5) GetSymbolEntriesByName(Symbol foundation.PSTR, Flags uint32, Ids []DEBUG_MODULE_AND_ID, Entries *uint32) error {
+	var _Ids *DEBUG_MODULE_AND_ID
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[111], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Symbol)), uintptr(Flags), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(Entries)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSymbolEntriesByNameWide dispatches through IDebugSymbols5's vtable slot 112.
-func (self *IDebugSymbols5) GetSymbolEntriesByNameWide(Symbol string, Flags uint32, Ids *DEBUG_MODULE_AND_ID, IdsCount uint32, Entries *uint32) error {
+func (self *IDebugSymbols5) GetSymbolEntriesByNameWide(Symbol string, Flags uint32, Ids []DEBUG_MODULE_AND_ID, Entries *uint32) error {
 	_Symbol := win32.UTF16Ptr(Symbol)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Symbol)), uintptr(Flags), uintptr(unsafe.Pointer(Ids)), uintptr(IdsCount), uintptr(unsafe.Pointer(Entries)))
+	var _Ids *DEBUG_MODULE_AND_ID
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[112], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_Symbol)), uintptr(Flags), uintptr(unsafe.Pointer(_Ids)), uintptr(len(Ids)), uintptr(unsafe.Pointer(Entries)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -18449,8 +19877,12 @@ func (self *IDebugSymbols5) GetSymbolEntryStringWide(Id *DEBUG_MODULE_AND_ID, Wh
 }
 
 // GetSymbolEntryOffsetRegions dispatches through IDebugSymbols5's vtable slot 117.
-func (self *IDebugSymbols5) GetSymbolEntryOffsetRegions(Id *DEBUG_MODULE_AND_ID, Flags uint32, Regions *DEBUG_OFFSET_REGION, RegionsCount uint32, RegionsAvail *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[117], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)), uintptr(Flags), uintptr(unsafe.Pointer(Regions)), uintptr(RegionsCount), uintptr(unsafe.Pointer(RegionsAvail)))
+func (self *IDebugSymbols5) GetSymbolEntryOffsetRegions(Id *DEBUG_MODULE_AND_ID, Flags uint32, Regions []DEBUG_OFFSET_REGION, RegionsAvail *uint32) error {
+	var _Regions *DEBUG_OFFSET_REGION
+	if len(Regions) > 0 {
+		_Regions = &Regions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[117], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Id)), uintptr(Flags), uintptr(unsafe.Pointer(_Regions)), uintptr(len(Regions)), uintptr(unsafe.Pointer(RegionsAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -18461,21 +19893,33 @@ func (self *IDebugSymbols5) GetSymbolEntryBySymbolEntry(FromId *DEBUG_MODULE_AND
 }
 
 // GetSourceEntriesByOffset dispatches through IDebugSymbols5's vtable slot 119.
-func (self *IDebugSymbols5) GetSourceEntriesByOffset(Offset uint64, Flags uint32, Entries *DEBUG_SYMBOL_SOURCE_ENTRY, EntriesCount uint32, EntriesAvail *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[119], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(Entries)), uintptr(EntriesCount), uintptr(unsafe.Pointer(EntriesAvail)))
+func (self *IDebugSymbols5) GetSourceEntriesByOffset(Offset uint64, Flags uint32, Entries []DEBUG_SYMBOL_SOURCE_ENTRY, EntriesAvail *uint32) error {
+	var _Entries *DEBUG_SYMBOL_SOURCE_ENTRY
+	if len(Entries) > 0 {
+		_Entries = &Entries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[119], uintptr(unsafe.Pointer(self)), uintptr(Offset), uintptr(Flags), uintptr(unsafe.Pointer(_Entries)), uintptr(len(Entries)), uintptr(unsafe.Pointer(EntriesAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceEntriesByLine dispatches through IDebugSymbols5's vtable slot 120.
-func (self *IDebugSymbols5) GetSourceEntriesByLine(Line uint32, File foundation.PSTR, Flags uint32, Entries *DEBUG_SYMBOL_SOURCE_ENTRY, EntriesCount uint32, EntriesAvail *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[120], uintptr(unsafe.Pointer(self)), uintptr(Line), uintptr(unsafe.Pointer(File)), uintptr(Flags), uintptr(unsafe.Pointer(Entries)), uintptr(EntriesCount), uintptr(unsafe.Pointer(EntriesAvail)))
+func (self *IDebugSymbols5) GetSourceEntriesByLine(Line uint32, File foundation.PSTR, Flags uint32, Entries []DEBUG_SYMBOL_SOURCE_ENTRY, EntriesAvail *uint32) error {
+	var _Entries *DEBUG_SYMBOL_SOURCE_ENTRY
+	if len(Entries) > 0 {
+		_Entries = &Entries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[120], uintptr(unsafe.Pointer(self)), uintptr(Line), uintptr(unsafe.Pointer(File)), uintptr(Flags), uintptr(unsafe.Pointer(_Entries)), uintptr(len(Entries)), uintptr(unsafe.Pointer(EntriesAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // GetSourceEntriesByLineWide dispatches through IDebugSymbols5's vtable slot 121.
-func (self *IDebugSymbols5) GetSourceEntriesByLineWide(Line uint32, File string, Flags uint32, Entries *DEBUG_SYMBOL_SOURCE_ENTRY, EntriesCount uint32, EntriesAvail *uint32) error {
+func (self *IDebugSymbols5) GetSourceEntriesByLineWide(Line uint32, File string, Flags uint32, Entries []DEBUG_SYMBOL_SOURCE_ENTRY, EntriesAvail *uint32) error {
 	_File := win32.UTF16Ptr(File)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[121], uintptr(unsafe.Pointer(self)), uintptr(Line), uintptr(unsafe.Pointer(_File)), uintptr(Flags), uintptr(unsafe.Pointer(Entries)), uintptr(EntriesCount), uintptr(unsafe.Pointer(EntriesAvail)))
+	var _Entries *DEBUG_SYMBOL_SOURCE_ENTRY
+	if len(Entries) > 0 {
+		_Entries = &Entries[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[121], uintptr(unsafe.Pointer(self)), uintptr(Line), uintptr(unsafe.Pointer(_File)), uintptr(Flags), uintptr(unsafe.Pointer(_Entries)), uintptr(len(Entries)), uintptr(unsafe.Pointer(EntriesAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -18492,8 +19936,12 @@ func (self *IDebugSymbols5) GetSourceEntryStringWide(Entry *DEBUG_SYMBOL_SOURCE_
 }
 
 // GetSourceEntryOffsetRegions dispatches through IDebugSymbols5's vtable slot 124.
-func (self *IDebugSymbols5) GetSourceEntryOffsetRegions(Entry *DEBUG_SYMBOL_SOURCE_ENTRY, Flags uint32, Regions *DEBUG_OFFSET_REGION, RegionsCount uint32, RegionsAvail *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[124], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Entry)), uintptr(Flags), uintptr(unsafe.Pointer(Regions)), uintptr(RegionsCount), uintptr(unsafe.Pointer(RegionsAvail)))
+func (self *IDebugSymbols5) GetSourceEntryOffsetRegions(Entry *DEBUG_SYMBOL_SOURCE_ENTRY, Flags uint32, Regions []DEBUG_OFFSET_REGION, RegionsAvail *uint32) error {
+	var _Regions *DEBUG_OFFSET_REGION
+	if len(Regions) > 0 {
+		_Regions = &Regions[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[124], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(Entry)), uintptr(Flags), uintptr(unsafe.Pointer(_Regions)), uintptr(len(Regions)), uintptr(unsafe.Pointer(RegionsAvail)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -18504,14 +19952,22 @@ func (self *IDebugSymbols5) GetSourceEntryBySourceEntry(FromEntry *DEBUG_SYMBOL_
 }
 
 // GetScopeEx dispatches through IDebugSymbols5's vtable slot 126.
-func (self *IDebugSymbols5) GetScopeEx(InstructionOffset *uint64, ScopeFrame *DEBUG_STACK_FRAME_EX, ScopeContext unsafe.Pointer, ScopeContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[126], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InstructionOffset)), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(ScopeContext)), uintptr(ScopeContextSize))
+func (self *IDebugSymbols5) GetScopeEx(InstructionOffset *uint64, ScopeFrame *DEBUG_STACK_FRAME_EX, ScopeContext []byte) error {
+	var _ScopeContext *byte
+	if len(ScopeContext) > 0 {
+		_ScopeContext = &ScopeContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[126], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(InstructionOffset)), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(_ScopeContext)), uintptr(len(ScopeContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetScopeEx dispatches through IDebugSymbols5's vtable slot 127.
-func (self *IDebugSymbols5) SetScopeEx(InstructionOffset uint64, ScopeFrame *DEBUG_STACK_FRAME_EX, ScopeContext unsafe.Pointer, ScopeContextSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[127], uintptr(unsafe.Pointer(self)), uintptr(InstructionOffset), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(ScopeContext)), uintptr(ScopeContextSize))
+func (self *IDebugSymbols5) SetScopeEx(InstructionOffset uint64, ScopeFrame *DEBUG_STACK_FRAME_EX, ScopeContext []byte) error {
+	var _ScopeContext *byte
+	if len(ScopeContext) > 0 {
+		_ScopeContext = &ScopeContext[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[127], uintptr(unsafe.Pointer(self)), uintptr(InstructionOffset), uintptr(unsafe.Pointer(ScopeFrame)), uintptr(unsafe.Pointer(_ScopeContext)), uintptr(len(ScopeContext)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -19188,8 +20644,12 @@ func (self *IDebugSystemObjects3) GetNumberSystems(Number *uint32) error {
 }
 
 // GetSystemIdsByIndex dispatches through IDebugSystemObjects3's vtable slot 41.
-func (self *IDebugSystemObjects3) GetSystemIdsByIndex(Start uint32, Count uint32, Ids *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Ids)))
+func (self *IDebugSystemObjects3) GetSystemIdsByIndex(Start uint32, Ids []uint32) error {
+	var _Ids *uint32
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Ids)), uintptr(unsafe.Pointer(_Ids)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -19454,8 +20914,12 @@ func (self *IDebugSystemObjects4) GetNumberSystems(Number *uint32) error {
 }
 
 // GetSystemIdsByIndex dispatches through IDebugSystemObjects4's vtable slot 41.
-func (self *IDebugSystemObjects4) GetSystemIdsByIndex(Start uint32, Count uint32, Ids *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(Count), uintptr(unsafe.Pointer(Ids)))
+func (self *IDebugSystemObjects4) GetSystemIdsByIndex(Start uint32, Ids []uint32) error {
+	var _Ids *uint32
+	if len(Ids) > 0 {
+		_Ids = &Ids[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[41], uintptr(unsafe.Pointer(self)), uintptr(Start), uintptr(len(Ids)), uintptr(unsafe.Pointer(_Ids)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -19516,8 +20980,12 @@ func (self *IDeconstructableConcept) GetConstructorArgumentCount(contextObject *
 }
 
 // GetConstructorArguments dispatches through IDeconstructableConcept's vtable slot 5.
-func (self *IDeconstructableConcept) GetConstructorArguments(contextObject *IModelObject, argCount uint64, constructorArguments **IModelObject) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contextObject)), uintptr(argCount), uintptr(unsafe.Pointer(constructorArguments)))
+func (self *IDeconstructableConcept) GetConstructorArguments(contextObject *IModelObject, constructorArguments []*IModelObject) error {
+	var _constructorArguments **IModelObject
+	if len(constructorArguments) > 0 {
+		_constructorArguments = &constructorArguments[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contextObject)), uintptr(len(constructorArguments)), uintptr(unsafe.Pointer(_constructorArguments)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -19656,14 +21124,22 @@ func (self *IIndexableConcept) GetDimensionality(contextObject *IModelObject, di
 }
 
 // GetAt dispatches through IIndexableConcept's vtable slot 4.
-func (self *IIndexableConcept) GetAt(contextObject *IModelObject, indexerCount uint64, indexers **IModelObject, object **IModelObject, metadata **IKeyStore) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contextObject)), uintptr(indexerCount), uintptr(unsafe.Pointer(indexers)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(metadata)))
+func (self *IIndexableConcept) GetAt(contextObject *IModelObject, indexers []*IModelObject, object **IModelObject, metadata **IKeyStore) error {
+	var _indexers **IModelObject
+	if len(indexers) > 0 {
+		_indexers = &indexers[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contextObject)), uintptr(len(indexers)), uintptr(unsafe.Pointer(_indexers)), uintptr(unsafe.Pointer(object)), uintptr(unsafe.Pointer(metadata)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // SetAt dispatches through IIndexableConcept's vtable slot 5.
-func (self *IIndexableConcept) SetAt(contextObject *IModelObject, indexerCount uint64, indexers **IModelObject, value *IModelObject) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contextObject)), uintptr(indexerCount), uintptr(unsafe.Pointer(indexers)), uintptr(unsafe.Pointer(value)))
+func (self *IIndexableConcept) SetAt(contextObject *IModelObject, indexers []*IModelObject, value *IModelObject) error {
+	var _indexers **IModelObject
+	if len(indexers) > 0 {
+		_indexers = &indexers[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(contextObject)), uintptr(len(indexers)), uintptr(unsafe.Pointer(_indexers)), uintptr(unsafe.Pointer(value)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -19764,8 +21240,12 @@ func (self *IModelIterator) Reset() error {
 }
 
 // GetNext dispatches through IModelIterator's vtable slot 4.
-func (self *IModelIterator) GetNext(object **IModelObject, dimensions uint64, indexers **IModelObject, metadata **IKeyStore) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(dimensions), uintptr(unsafe.Pointer(indexers)), uintptr(unsafe.Pointer(metadata)))
+func (self *IModelIterator) GetNext(object **IModelObject, indexers []*IModelObject, metadata **IKeyStore) error {
+	var _indexers **IModelObject
+	if len(indexers) > 0 {
+		_indexers = &indexers[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(object)), uintptr(len(indexers)), uintptr(unsafe.Pointer(_indexers)), uintptr(unsafe.Pointer(metadata)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -19842,8 +21322,12 @@ type IModelMethod struct {
 var IID_IModelMethod = win32.GUID{Data1: 0x80600c1f, Data2: 0xb90b, Data3: 0x4896, Data4: [8]byte{0x82, 0xad, 0x1c, 0x00, 0x20, 0x79, 0x09, 0xe8}}
 
 // Call dispatches through IModelMethod's vtable slot 3.
-func (self *IModelMethod) Call(pContextObject *IModelObject, argCount uint64, ppArguments **IModelObject, ppResult **IModelObject, ppMetadata **IKeyStore) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContextObject)), uintptr(argCount), uintptr(unsafe.Pointer(ppArguments)), uintptr(unsafe.Pointer(ppResult)), uintptr(unsafe.Pointer(ppMetadata)))
+func (self *IModelMethod) Call(pContextObject *IModelObject, ppArguments []*IModelObject, ppResult **IModelObject, ppMetadata **IKeyStore) error {
+	var _ppArguments **IModelObject
+	if len(ppArguments) > 0 {
+		_ppArguments = &ppArguments[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pContextObject)), uintptr(len(ppArguments)), uintptr(unsafe.Pointer(_ppArguments)), uintptr(unsafe.Pointer(ppResult)), uintptr(unsafe.Pointer(ppMetadata)))
 	return win32.HRESULTError(int32(r1))
 }
 

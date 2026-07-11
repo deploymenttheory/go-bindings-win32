@@ -4039,8 +4039,16 @@ func (self *IStiDevice) Diagnostic(pBuffer *STI_DIAG) error {
 }
 
 // Escape dispatches through IStiDevice's vtable slot 8.
-func (self *IStiDevice) Escape(EscapeFunction uint32, lpInData unsafe.Pointer, cbInDataSize uint32, pOutData unsafe.Pointer, dwOutDataSize uint32, pdwActualData *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(EscapeFunction), uintptr(unsafe.Pointer(lpInData)), uintptr(cbInDataSize), uintptr(unsafe.Pointer(pOutData)), uintptr(dwOutDataSize), uintptr(unsafe.Pointer(pdwActualData)))
+func (self *IStiDevice) Escape(EscapeFunction uint32, lpInData []byte, pOutData []byte, pdwActualData *uint32) error {
+	var _lpInData *byte
+	if len(lpInData) > 0 {
+		_lpInData = &lpInData[0]
+	}
+	var _pOutData *byte
+	if len(pOutData) > 0 {
+		_pOutData = &pOutData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(EscapeFunction), uintptr(unsafe.Pointer(_lpInData)), uintptr(len(lpInData)), uintptr(unsafe.Pointer(_pOutData)), uintptr(len(pOutData)), uintptr(unsafe.Pointer(pdwActualData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4069,8 +4077,12 @@ func (self *IStiDevice) RawReadData(lpBuffer unsafe.Pointer, lpdwNumberOfBytes *
 }
 
 // RawWriteData dispatches through IStiDevice's vtable slot 13.
-func (self *IStiDevice) RawWriteData(lpBuffer unsafe.Pointer, nNumberOfBytes uint32, lpOverlapped *systemio.OVERLAPPED) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytes), uintptr(unsafe.Pointer(lpOverlapped)))
+func (self *IStiDevice) RawWriteData(lpBuffer []byte, lpOverlapped *systemio.OVERLAPPED) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4081,8 +4093,12 @@ func (self *IStiDevice) RawReadCommand(lpBuffer unsafe.Pointer, lpdwNumberOfByte
 }
 
 // RawWriteCommand dispatches through IStiDevice's vtable slot 15.
-func (self *IStiDevice) RawWriteCommand(lpBuffer unsafe.Pointer, nNumberOfBytes uint32, lpOverlapped *systemio.OVERLAPPED) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytes), uintptr(unsafe.Pointer(lpOverlapped)))
+func (self *IStiDevice) RawWriteCommand(lpBuffer []byte, lpOverlapped *systemio.OVERLAPPED) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4225,8 +4241,16 @@ func (self *IStiUSD) Diagnostic(pBuffer *STI_DIAG) error {
 }
 
 // Escape dispatches through IStiUSD's vtable slot 8.
-func (self *IStiUSD) Escape(EscapeFunction uint32, lpInData unsafe.Pointer, cbInDataSize uint32, pOutData unsafe.Pointer, cbOutDataSize uint32, pdwActualData *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(EscapeFunction), uintptr(unsafe.Pointer(lpInData)), uintptr(cbInDataSize), uintptr(unsafe.Pointer(pOutData)), uintptr(cbOutDataSize), uintptr(unsafe.Pointer(pdwActualData)))
+func (self *IStiUSD) Escape(EscapeFunction uint32, lpInData []byte, pOutData []byte, pdwActualData *uint32) error {
+	var _lpInData *byte
+	if len(lpInData) > 0 {
+		_lpInData = &lpInData[0]
+	}
+	var _pOutData *byte
+	if len(pOutData) > 0 {
+		_pOutData = &pOutData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(EscapeFunction), uintptr(unsafe.Pointer(_lpInData)), uintptr(len(lpInData)), uintptr(unsafe.Pointer(_pOutData)), uintptr(len(pOutData)), uintptr(unsafe.Pointer(pdwActualData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4255,8 +4279,12 @@ func (self *IStiUSD) RawReadData(lpBuffer unsafe.Pointer, lpdwNumberOfBytes *uin
 }
 
 // RawWriteData dispatches through IStiUSD's vtable slot 13.
-func (self *IStiUSD) RawWriteData(lpBuffer unsafe.Pointer, nNumberOfBytes uint32, lpOverlapped *systemio.OVERLAPPED) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytes), uintptr(unsafe.Pointer(lpOverlapped)))
+func (self *IStiUSD) RawWriteData(lpBuffer []byte, lpOverlapped *systemio.OVERLAPPED) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[13], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4267,8 +4295,12 @@ func (self *IStiUSD) RawReadCommand(lpBuffer unsafe.Pointer, lpdwNumberOfBytes *
 }
 
 // RawWriteCommand dispatches through IStiUSD's vtable slot 15.
-func (self *IStiUSD) RawWriteCommand(lpBuffer unsafe.Pointer, nNumberOfBytes uint32, lpOverlapped *systemio.OVERLAPPED) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytes), uintptr(unsafe.Pointer(lpOverlapped)))
+func (self *IStiUSD) RawWriteCommand(lpBuffer []byte, lpOverlapped *systemio.OVERLAPPED) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(lpOverlapped)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -4333,10 +4365,14 @@ func (self *IStillImageW) GetDeviceValue(pwszDeviceName string, pValueName strin
 }
 
 // SetDeviceValue dispatches through IStillImageW's vtable slot 8.
-func (self *IStillImageW) SetDeviceValue(pwszDeviceName string, pValueName string, Type uint32, pData *byte, cbData uint32) error {
+func (self *IStillImageW) SetDeviceValue(pwszDeviceName string, pValueName string, Type uint32, pData []byte) error {
 	_pwszDeviceName := win32.UTF16Ptr(pwszDeviceName)
 	_pValueName := win32.UTF16Ptr(pValueName)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDeviceName)), uintptr(unsafe.Pointer(_pValueName)), uintptr(Type), uintptr(unsafe.Pointer(pData)), uintptr(cbData))
+	var _pData *byte
+	if len(pData) > 0 {
+		_pData = &pData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pwszDeviceName)), uintptr(unsafe.Pointer(_pValueName)), uintptr(Type), uintptr(unsafe.Pointer(_pData)), uintptr(len(pData)))
 	return win32.HRESULTError(int32(r1))
 }
 

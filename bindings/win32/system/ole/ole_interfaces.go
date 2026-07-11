@@ -235,8 +235,12 @@ func (self *ICreateTypeInfo) AddVarDesc(index uint32, pVarDesc *systemcom.VARDES
 }
 
 // SetFuncAndParamNames dispatches through ICreateTypeInfo's vtable slot 15.
-func (self *ICreateTypeInfo) SetFuncAndParamNames(index uint32, rgszNames *foundation.PWSTR, cNames uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(rgszNames)), uintptr(cNames))
+func (self *ICreateTypeInfo) SetFuncAndParamNames(index uint32, rgszNames []foundation.PWSTR) error {
+	var _rgszNames *foundation.PWSTR
+	if len(rgszNames) > 0 {
+		_rgszNames = &rgszNames[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[15], uintptr(unsafe.Pointer(self)), uintptr(index), uintptr(unsafe.Pointer(_rgszNames)), uintptr(len(rgszNames)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -698,8 +702,12 @@ type IEnumOLEVERB struct {
 var IID_IEnumOLEVERB = win32.GUID{Data1: 0x00000104, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumOLEVERB's vtable slot 3.
-func (self *IEnumOLEVERB) Next(celt uint32, rgelt *OLEVERB, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumOLEVERB) Next(rgelt []OLEVERB, pceltFetched *uint32) error {
+	var _rgelt *OLEVERB
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -764,8 +772,12 @@ type IEnumOleUndoUnits struct {
 var IID_IEnumOleUndoUnits = win32.GUID{Data1: 0xb3e7c340, Data2: 0xef97, Data3: 0x11ce, Data4: [8]byte{0x9b, 0xc9, 0x00, 0xaa, 0x00, 0x60, 0x8e, 0x01}}
 
 // Next dispatches through IEnumOleUndoUnits's vtable slot 3.
-func (self *IEnumOleUndoUnits) Next(cElt uint32, rgElt **IOleUndoUnit, pcEltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(cElt), uintptr(unsafe.Pointer(rgElt)), uintptr(unsafe.Pointer(pcEltFetched)))
+func (self *IEnumOleUndoUnits) Next(rgElt []*IOleUndoUnit, pcEltFetched *uint32) error {
+	var _rgElt **IOleUndoUnit
+	if len(rgElt) > 0 {
+		_rgElt = &rgElt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgElt)), uintptr(unsafe.Pointer(_rgElt)), uintptr(unsafe.Pointer(pcEltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -797,8 +809,12 @@ type IEnumVARIANT struct {
 var IID_IEnumVARIANT = win32.GUID{Data1: 0x00020404, Data2: 0x0000, Data3: 0x0000, Data4: [8]byte{0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46}}
 
 // Next dispatches through IEnumVARIANT's vtable slot 3.
-func (self *IEnumVARIANT) Next(celt uint32, rgVar *systemvariant.VARIANT, pCeltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgVar)), uintptr(unsafe.Pointer(pCeltFetched)))
+func (self *IEnumVARIANT) Next(rgVar []systemvariant.VARIANT, pCeltFetched *uint32) error {
+	var _rgVar *systemvariant.VARIANT
+	if len(rgVar) > 0 {
+		_rgVar = &rgVar[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgVar)), uintptr(unsafe.Pointer(_rgVar)), uintptr(unsafe.Pointer(pCeltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -2892,8 +2908,12 @@ func (self *IPropertyPage) GetPageInfo(pPageInfo *PROPPAGEINFO) error {
 }
 
 // SetObjects dispatches through IPropertyPage's vtable slot 7.
-func (self *IPropertyPage) SetObjects(cObjects uint32, ppUnk **systemcom.IUnknown) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(cObjects), uintptr(unsafe.Pointer(ppUnk)))
+func (self *IPropertyPage) SetObjects(ppUnk []*systemcom.IUnknown) error {
+	var _ppUnk **systemcom.IUnknown
+	if len(ppUnk) > 0 {
+		_ppUnk = &ppUnk[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(ppUnk)), uintptr(unsafe.Pointer(_ppUnk)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -3314,14 +3334,22 @@ func (self *ITypeMarshal) Size(pvType unsafe.Pointer, dwDestContext uint32, pvDe
 }
 
 // Marshal dispatches through ITypeMarshal's vtable slot 4.
-func (self *ITypeMarshal) Marshal(pvType unsafe.Pointer, dwDestContext uint32, pvDestContext unsafe.Pointer, cbBufferLength uint32, pBuffer *byte, pcbWritten *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvType)), uintptr(dwDestContext), uintptr(unsafe.Pointer(pvDestContext)), uintptr(cbBufferLength), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pcbWritten)))
+func (self *ITypeMarshal) Marshal(pvType unsafe.Pointer, dwDestContext uint32, pvDestContext unsafe.Pointer, pBuffer []byte, pcbWritten *uint32) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[4], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvType)), uintptr(dwDestContext), uintptr(unsafe.Pointer(pvDestContext)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(unsafe.Pointer(pcbWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Unmarshal dispatches through ITypeMarshal's vtable slot 5.
-func (self *ITypeMarshal) Unmarshal(pvType unsafe.Pointer, dwFlags uint32, cbBufferLength uint32, pBuffer *byte, pcbRead *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvType)), uintptr(dwFlags), uintptr(cbBufferLength), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(pcbRead)))
+func (self *ITypeMarshal) Unmarshal(pvType unsafe.Pointer, dwFlags uint32, pBuffer []byte, pcbRead *uint32) error {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pvType)), uintptr(dwFlags), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(unsafe.Pointer(pcbRead)))
 	return win32.HRESULTError(int32(r1))
 }
 

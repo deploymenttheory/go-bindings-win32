@@ -93,10 +93,14 @@ func (self *ID3DShaderCacheApplication) GetDesc(pApplicationDesc *D3D_SHADER_CAC
 }
 
 // RegisterComponent dispatches through ID3DShaderCacheApplication's vtable slot 5.
-func (self *ID3DShaderCacheApplication) RegisterComponent(pName string, pStateObjectDBPath string, NumPSDB uint32, pPSDBs *D3D_SHADER_CACHE_PSDB_PROPERTIES, riid *win32.GUID, ppvComponent *unsafe.Pointer) error {
+func (self *ID3DShaderCacheApplication) RegisterComponent(pName string, pStateObjectDBPath string, pPSDBs []D3D_SHADER_CACHE_PSDB_PROPERTIES, riid *win32.GUID, ppvComponent *unsafe.Pointer) error {
 	_pName := win32.UTF16Ptr(pName)
 	_pStateObjectDBPath := win32.UTF16Ptr(pStateObjectDBPath)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pStateObjectDBPath)), uintptr(NumPSDB), uintptr(unsafe.Pointer(pPSDBs)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvComponent)))
+	var _pPSDBs *D3D_SHADER_CACHE_PSDB_PROPERTIES
+	if len(pPSDBs) > 0 {
+		_pPSDBs = &pPSDBs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pName)), uintptr(unsafe.Pointer(_pStateObjectDBPath)), uintptr(len(pPSDBs)), uintptr(unsafe.Pointer(_pPSDBs)), uintptr(unsafe.Pointer(riid)), uintptr(unsafe.Pointer(ppvComponent)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -125,8 +129,12 @@ func (self *ID3DShaderCacheApplication) GetPrecompileTargetCount(flags D3D_SHADE
 }
 
 // GetPrecompileTargets dispatches through ID3DShaderCacheApplication's vtable slot 10.
-func (self *ID3DShaderCacheApplication) GetPrecompileTargets(ArraySize uint32, pArray *D3D_SHADER_CACHE_COMPILER_PROPERTIES, flags D3D_SHADER_CACHE_TARGET_FLAGS) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(ArraySize), uintptr(unsafe.Pointer(pArray)), uintptr(flags))
+func (self *ID3DShaderCacheApplication) GetPrecompileTargets(pArray []D3D_SHADER_CACHE_COMPILER_PROPERTIES, flags D3D_SHADER_CACHE_TARGET_FLAGS) error {
+	var _pArray *D3D_SHADER_CACHE_COMPILER_PROPERTIES
+	if len(pArray) > 0 {
+		_pArray = &pArray[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[10], uintptr(unsafe.Pointer(self)), uintptr(len(pArray)), uintptr(unsafe.Pointer(_pArray)), uintptr(flags))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -170,8 +178,12 @@ func (self *ID3DShaderCacheComponent) GetPrecompiledShaderDatabaseCount() uint32
 }
 
 // GetPrecompiledShaderDatabases dispatches through ID3DShaderCacheComponent's vtable slot 7.
-func (self *ID3DShaderCacheComponent) GetPrecompiledShaderDatabases(ArraySize uint32, pPSDBs *D3D_SHADER_CACHE_PSDB_PROPERTIES) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(ArraySize), uintptr(unsafe.Pointer(pPSDBs)))
+func (self *ID3DShaderCacheComponent) GetPrecompiledShaderDatabases(pPSDBs []D3D_SHADER_CACHE_PSDB_PROPERTIES) error {
+	var _pPSDBs *D3D_SHADER_CACHE_PSDB_PROPERTIES
+	if len(pPSDBs) > 0 {
+		_pPSDBs = &pPSDBs[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(len(pPSDBs)), uintptr(unsafe.Pointer(_pPSDBs)))
 	return win32.HRESULTError(int32(r1))
 }
 

@@ -327,8 +327,12 @@ func AVIFileRelease(pfile *IAVIFile) uint32 {
 // AVIFileWriteData calls AVIFIL32!AVIFileWriteData.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avifilewritedata
 // Minimum OS: windows5.0.
-func AVIFileWriteData(pfile *IAVIFile, ckid uint32, lpData unsafe.Pointer, cbData int32) error {
-	r1, _, _ := syscall.SyscallN(procAVIFileWriteData.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(ckid), uintptr(unsafe.Pointer(lpData)), uintptr(cbData))
+func AVIFileWriteData(pfile *IAVIFile, ckid uint32, lpData []byte) error {
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAVIFileWriteData.Addr(), uintptr(unsafe.Pointer(pfile)), uintptr(ckid), uintptr(unsafe.Pointer(_lpData)), uintptr(len(lpData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -538,8 +542,12 @@ func AVIStreamOpenFromFileA(ppavi **IAVIStream, szFile foundation.PSTR, fccType 
 // AVIStreamRead calls AVIFIL32!AVIStreamRead.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamread
 // Minimum OS: windows5.0.
-func AVIStreamRead(pavi *IAVIStream, lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, plBytes *int32, plSamples *int32) error {
-	r1, _, _ := syscall.SyscallN(procAVIStreamRead.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(plBytes)), uintptr(unsafe.Pointer(plSamples)))
+func AVIStreamRead(pavi *IAVIStream, lStart int32, lSamples int32, lpBuffer []byte, plBytes *int32, plSamples *int32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAVIStreamRead.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(plBytes)), uintptr(unsafe.Pointer(plSamples)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -578,8 +586,12 @@ func AVIStreamSampleToTime(pavi *IAVIStream, lSample int32) int32 {
 // AVIStreamSetFormat calls AVIFIL32!AVIStreamSetFormat.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamsetformat
 // Minimum OS: windows5.0.
-func AVIStreamSetFormat(pavi *IAVIStream, lPos int32, lpFormat unsafe.Pointer, cbFormat int32) error {
-	r1, _, _ := syscall.SyscallN(procAVIStreamSetFormat.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lPos), uintptr(unsafe.Pointer(lpFormat)), uintptr(cbFormat))
+func AVIStreamSetFormat(pavi *IAVIStream, lPos int32, lpFormat []byte) error {
+	var _lpFormat *byte
+	if len(lpFormat) > 0 {
+		_lpFormat = &lpFormat[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAVIStreamSetFormat.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lPos), uintptr(unsafe.Pointer(_lpFormat)), uintptr(len(lpFormat)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -602,16 +614,24 @@ func AVIStreamTimeToSample(pavi *IAVIStream, lTime int32) int32 {
 // AVIStreamWrite calls AVIFIL32!AVIStreamWrite.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamwrite
 // Minimum OS: windows5.0.
-func AVIStreamWrite(pavi *IAVIStream, lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, dwFlags uint32, plSampWritten *int32, plBytesWritten *int32) error {
-	r1, _, _ := syscall.SyscallN(procAVIStreamWrite.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(plSampWritten)), uintptr(unsafe.Pointer(plBytesWritten)))
+func AVIStreamWrite(pavi *IAVIStream, lStart int32, lSamples int32, lpBuffer []byte, dwFlags uint32, plSampWritten *int32, plBytesWritten *int32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAVIStreamWrite.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(dwFlags), uintptr(unsafe.Pointer(plSampWritten)), uintptr(unsafe.Pointer(plBytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // AVIStreamWriteData calls AVIFIL32!AVIStreamWriteData.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-avistreamwritedata
 // Minimum OS: windows5.0.
-func AVIStreamWriteData(pavi *IAVIStream, fcc uint32, lp unsafe.Pointer, cb int32) error {
-	r1, _, _ := syscall.SyscallN(procAVIStreamWriteData.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(fcc), uintptr(unsafe.Pointer(lp)), uintptr(cb))
+func AVIStreamWriteData(pavi *IAVIStream, fcc uint32, lp []byte) error {
+	var _lp *byte
+	if len(lp) > 0 {
+		_lp = &lp[0]
+	}
+	r1, _, _ := syscall.SyscallN(procAVIStreamWriteData.Addr(), uintptr(unsafe.Pointer(pavi)), uintptr(fcc), uintptr(unsafe.Pointer(_lp)), uintptr(len(lp)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -952,8 +972,12 @@ func ICDecompress(hic HIC, dwFlags uint32, lpbiFormat *graphicsgdi.BITMAPINFOHEA
 // ICDraw calls MSVFW32!ICDraw.
 // https://learn.microsoft.com/windows/win32/api/vfw/nf-vfw-icdraw
 // Minimum OS: windows5.0.
-func ICDraw(hic HIC, dwFlags uint32, lpFormat unsafe.Pointer, lpData unsafe.Pointer, cbData uint32, lTime int32) uint32 {
-	r1, _, _ := syscall.SyscallN(procICDraw.Addr(), uintptr(hic), uintptr(dwFlags), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(lpData)), uintptr(cbData), uintptr(lTime))
+func ICDraw(hic HIC, dwFlags uint32, lpFormat unsafe.Pointer, lpData []byte, lTime int32) uint32 {
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procICDraw.Addr(), uintptr(hic), uintptr(dwFlags), uintptr(unsafe.Pointer(lpFormat)), uintptr(unsafe.Pointer(_lpData)), uintptr(len(lpData)), uintptr(lTime))
 	return uint32(r1)
 }
 

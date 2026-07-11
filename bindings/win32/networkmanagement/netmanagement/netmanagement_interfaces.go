@@ -24,8 +24,12 @@ type IEnumNetCfgBindingInterface struct {
 var IID_IEnumNetCfgBindingInterface = win32.GUID{Data1: 0xc0e8ae90, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetCfgBindingInterface's vtable slot 3.
-func (self *IEnumNetCfgBindingInterface) Next(celt uint32, rgelt **INetCfgBindingInterface, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumNetCfgBindingInterface) Next(rgelt []*INetCfgBindingInterface, pceltFetched *uint32) error {
+	var _rgelt **INetCfgBindingInterface
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -56,8 +60,12 @@ type IEnumNetCfgBindingPath struct {
 var IID_IEnumNetCfgBindingPath = win32.GUID{Data1: 0xc0e8ae91, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetCfgBindingPath's vtable slot 3.
-func (self *IEnumNetCfgBindingPath) Next(celt uint32, rgelt **INetCfgBindingPath, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumNetCfgBindingPath) Next(rgelt []*INetCfgBindingPath, pceltFetched *uint32) error {
+	var _rgelt **INetCfgBindingPath
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -88,8 +96,12 @@ type IEnumNetCfgComponent struct {
 var IID_IEnumNetCfgComponent = win32.GUID{Data1: 0xc0e8ae92, Data2: 0x306e, Data3: 0x11d1, Data4: [8]byte{0xaa, 0xcf, 0x00, 0x80, 0x5f, 0xc1, 0x27, 0x0e}}
 
 // Next dispatches through IEnumNetCfgComponent's vtable slot 3.
-func (self *IEnumNetCfgComponent) Next(celt uint32, rgelt **INetCfgComponent, pceltFetched *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(celt), uintptr(unsafe.Pointer(rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
+func (self *IEnumNetCfgComponent) Next(rgelt []*INetCfgComponent, pceltFetched *uint32) error {
+	var _rgelt **INetCfgComponent
+	if len(rgelt) > 0 {
+		_rgelt = &rgelt[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(len(rgelt)), uintptr(unsafe.Pointer(_rgelt)), uintptr(unsafe.Pointer(pceltFetched)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -654,8 +666,12 @@ func (self *INetCfgComponentUpperEdge) AddInterfacesToAdapter(pAdapter *INetCfgC
 }
 
 // RemoveInterfacesFromAdapter dispatches through INetCfgComponentUpperEdge's vtable slot 5.
-func (self *INetCfgComponentUpperEdge) RemoveInterfacesFromAdapter(pAdapter *INetCfgComponent, dwNumInterfaces uint32, pguidInterfaceIds *win32.GUID) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAdapter)), uintptr(dwNumInterfaces), uintptr(unsafe.Pointer(pguidInterfaceIds)))
+func (self *INetCfgComponentUpperEdge) RemoveInterfacesFromAdapter(pAdapter *INetCfgComponent, pguidInterfaceIds []win32.GUID) error {
+	var _pguidInterfaceIds *win32.GUID
+	if len(pguidInterfaceIds) > 0 {
+		_pguidInterfaceIds = &pguidInterfaceIds[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pAdapter)), uintptr(len(pguidInterfaceIds)), uintptr(unsafe.Pointer(_pguidInterfaceIds)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -695,10 +711,14 @@ type INetCfgPnpReconfigCallback struct {
 var IID_INetCfgPnpReconfigCallback = win32.GUID{Data1: 0x8d84bd35, Data2: 0xe227, Data3: 0x11d2, Data4: [8]byte{0xb7, 0x00, 0x00, 0xa0, 0xc9, 0x8a, 0x6a, 0x85}}
 
 // SendPnpReconfig dispatches through INetCfgPnpReconfigCallback's vtable slot 3.
-func (self *INetCfgPnpReconfigCallback) SendPnpReconfig(Layer NCPNP_RECONFIG_LAYER, pszwUpper string, pszwLower string, pvData unsafe.Pointer, dwSizeOfData uint32) error {
+func (self *INetCfgPnpReconfigCallback) SendPnpReconfig(Layer NCPNP_RECONFIG_LAYER, pszwUpper string, pszwLower string, pvData []byte) error {
 	_pszwUpper := win32.UTF16Ptr(pszwUpper)
 	_pszwLower := win32.UTF16Ptr(pszwLower)
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Layer), uintptr(unsafe.Pointer(_pszwUpper)), uintptr(unsafe.Pointer(_pszwLower)), uintptr(unsafe.Pointer(pvData)), uintptr(dwSizeOfData))
+	var _pvData *byte
+	if len(pvData) > 0 {
+		_pvData = &pvData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(Layer), uintptr(unsafe.Pointer(_pszwUpper)), uintptr(unsafe.Pointer(_pszwLower)), uintptr(unsafe.Pointer(_pvData)), uintptr(len(pvData)))
 	return win32.HRESULTError(int32(r1))
 }
 

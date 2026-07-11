@@ -303,8 +303,12 @@ func (self *ISettingsItem) GetValueRaw(Data **byte) (uint32, error) {
 }
 
 // SetValueRaw dispatches through ISettingsItem's vtable slot 9.
-func (self *ISettingsItem) SetValueRaw(DataType int32, Data *byte, DataSize uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(DataType), uintptr(unsafe.Pointer(Data)), uintptr(DataSize))
+func (self *ISettingsItem) SetValueRaw(DataType int32, Data []byte) error {
+	var _Data *byte
+	if len(Data) > 0 {
+		_Data = &Data[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(DataType), uintptr(unsafe.Pointer(_Data)), uintptr(len(Data)))
 	return win32.HRESULTError(int32(r1))
 }
 

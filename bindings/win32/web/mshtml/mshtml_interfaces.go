@@ -4371,8 +4371,12 @@ type IDiagnosticsScriptEngineSite struct {
 var IID_IDiagnosticsScriptEngineSite = win32.GUID{Data1: 0x30510858, Data2: 0x98b5, Data3: 0x11cf, Data4: [8]byte{0xbb, 0x82, 0x00, 0xaa, 0x00, 0xbd, 0xce, 0x0b}}
 
 // OnMessage dispatches through IDiagnosticsScriptEngineSite's vtable slot 3.
-func (self *IDiagnosticsScriptEngineSite) OnMessage(pszData *foundation.PWSTR, ulDataCount uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(pszData)), uintptr(ulDataCount))
+func (self *IDiagnosticsScriptEngineSite) OnMessage(pszData []foundation.PWSTR) error {
+	var _pszData *foundation.PWSTR
+	if len(pszData) > 0 {
+		_pszData = &pszData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[3], uintptr(unsafe.Pointer(self)), uintptr(unsafe.Pointer(_pszData)), uintptr(len(pszData)))
 	return win32.HRESULTError(int32(r1))
 }
 

@@ -81,8 +81,12 @@ func (self *IAVIFile) CreateStream(ppStream **IAVIStream, psi *AVISTREAMINFOW) e
 }
 
 // WriteData dispatches through IAVIFile's vtable slot 6.
-func (self *IAVIFile) WriteData(ckid uint32, lpData unsafe.Pointer, cbData int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ckid), uintptr(unsafe.Pointer(lpData)), uintptr(cbData))
+func (self *IAVIFile) WriteData(ckid uint32, lpData []byte) error {
+	var _lpData *byte
+	if len(lpData) > 0 {
+		_lpData = &lpData[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[6], uintptr(unsafe.Pointer(self)), uintptr(ckid), uintptr(unsafe.Pointer(_lpData)), uintptr(len(lpData)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -152,20 +156,32 @@ func (self *IAVIStream) ReadFormat(lPos int32, lpFormat unsafe.Pointer, lpcbForm
 }
 
 // SetFormat dispatches through IAVIStream's vtable slot 7.
-func (self *IAVIStream) SetFormat(lPos int32, lpFormat unsafe.Pointer, cbFormat int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lPos), uintptr(unsafe.Pointer(lpFormat)), uintptr(cbFormat))
+func (self *IAVIStream) SetFormat(lPos int32, lpFormat []byte) error {
+	var _lpFormat *byte
+	if len(lpFormat) > 0 {
+		_lpFormat = &lpFormat[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[7], uintptr(unsafe.Pointer(self)), uintptr(lPos), uintptr(unsafe.Pointer(_lpFormat)), uintptr(len(lpFormat)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Read dispatches through IAVIStream's vtable slot 8.
-func (self *IAVIStream) Read(lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, plBytes *int32, plSamples *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBuffer), uintptr(unsafe.Pointer(plBytes)), uintptr(unsafe.Pointer(plSamples)))
+func (self *IAVIStream) Read(lStart int32, lSamples int32, lpBuffer []byte, plBytes *int32, plSamples *int32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[8], uintptr(unsafe.Pointer(self)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(plBytes)), uintptr(unsafe.Pointer(plSamples)))
 	return win32.HRESULTError(int32(r1))
 }
 
 // Write dispatches through IAVIStream's vtable slot 9.
-func (self *IAVIStream) Write(lStart int32, lSamples int32, lpBuffer unsafe.Pointer, cbBuffer int32, dwFlags uint32, plSampWritten *int32, plBytesWritten *int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBuffer), uintptr(dwFlags), uintptr(unsafe.Pointer(plSampWritten)), uintptr(unsafe.Pointer(plBytesWritten)))
+func (self *IAVIStream) Write(lStart int32, lSamples int32, lpBuffer []byte, dwFlags uint32, plSampWritten *int32, plBytesWritten *int32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[9], uintptr(unsafe.Pointer(self)), uintptr(lStart), uintptr(lSamples), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(dwFlags), uintptr(unsafe.Pointer(plSampWritten)), uintptr(unsafe.Pointer(plBytesWritten)))
 	return win32.HRESULTError(int32(r1))
 }
 
@@ -182,8 +198,12 @@ func (self *IAVIStream) ReadData(fcc uint32, lp unsafe.Pointer, lpcb *int32) err
 }
 
 // WriteData dispatches through IAVIStream's vtable slot 12.
-func (self *IAVIStream) WriteData(fcc uint32, lp unsafe.Pointer, cb int32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(fcc), uintptr(unsafe.Pointer(lp)), uintptr(cb))
+func (self *IAVIStream) WriteData(fcc uint32, lp []byte) error {
+	var _lp *byte
+	if len(lp) > 0 {
+		_lp = &lp[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[12], uintptr(unsafe.Pointer(self)), uintptr(fcc), uintptr(unsafe.Pointer(_lp)), uintptr(len(lp)))
 	return win32.HRESULTError(int32(r1))
 }
 

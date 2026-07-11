@@ -632,8 +632,12 @@ func WTSSetListenerSecurityA(pReserved unsafe.Pointer, Reserved uint32, pListene
 // WTSSetRenderHint calls WTSAPI32!WTSSetRenderHint.
 // https://learn.microsoft.com/windows/win32/api/wtshintapi/nf-wtshintapi-wtssetrenderhint
 // Minimum OS: windows8.0.
-func WTSSetRenderHint(pRenderHintID *uint64, hwndOwner foundation.HWND, renderHintType uint32, cbHintDataLength uint32, pHintData *byte) error {
-	r1, _, _ := syscall.SyscallN(procWTSSetRenderHint.Addr(), uintptr(unsafe.Pointer(pRenderHintID)), uintptr(hwndOwner), uintptr(renderHintType), uintptr(cbHintDataLength), uintptr(unsafe.Pointer(pHintData)))
+func WTSSetRenderHint(pRenderHintID *uint64, hwndOwner foundation.HWND, renderHintType uint32, pHintData []byte) error {
+	var _pHintData *byte
+	if len(pHintData) > 0 {
+		_pHintData = &pHintData[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWTSSetRenderHint.Addr(), uintptr(unsafe.Pointer(pRenderHintID)), uintptr(hwndOwner), uintptr(renderHintType), uintptr(len(pHintData)), uintptr(unsafe.Pointer(_pHintData)))
 	return win32.HRESULTError(int32(r1))
 }
 

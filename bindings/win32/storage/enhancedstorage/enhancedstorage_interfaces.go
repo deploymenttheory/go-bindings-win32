@@ -128,8 +128,12 @@ func (self *IEnhancedStorageSilo) GetActions(pppIEnhancedStorageSiloActions ***I
 }
 
 // SendCommand dispatches through IEnhancedStorageSilo's vtable slot 5.
-func (self *IEnhancedStorageSilo) SendCommand(Command byte, pbCommandBuffer *byte, cbCommandBuffer uint32, pbResponseBuffer *byte, pcbResponseBuffer *uint32) error {
-	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Command), uintptr(unsafe.Pointer(pbCommandBuffer)), uintptr(cbCommandBuffer), uintptr(unsafe.Pointer(pbResponseBuffer)), uintptr(unsafe.Pointer(pcbResponseBuffer)))
+func (self *IEnhancedStorageSilo) SendCommand(Command byte, pbCommandBuffer []byte, pbResponseBuffer *byte, pcbResponseBuffer *uint32) error {
+	var _pbCommandBuffer *byte
+	if len(pbCommandBuffer) > 0 {
+		_pbCommandBuffer = &pbCommandBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(self.LpVtbl[5], uintptr(unsafe.Pointer(self)), uintptr(Command), uintptr(unsafe.Pointer(_pbCommandBuffer)), uintptr(len(pbCommandBuffer)), uintptr(unsafe.Pointer(pbResponseBuffer)), uintptr(unsafe.Pointer(pcbResponseBuffer)))
 	return win32.HRESULTError(int32(r1))
 }
 

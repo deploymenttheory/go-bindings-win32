@@ -488,8 +488,12 @@ func EvtQuery(Session EVT_HANDLE, Path string, Query string, Flags uint32) (EVT_
 // EvtRender calls wevtapi!EvtRender.
 // https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtrender
 // Minimum OS: windows6.0.6000.
-func EvtRender(Context EVT_HANDLE, Fragment EVT_HANDLE, Flags uint32, BufferSize uint32, Buffer unsafe.Pointer, BufferUsed *uint32, PropertyCount *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procEvtRender.Addr(), uintptr(Context), uintptr(Fragment), uintptr(Flags), uintptr(BufferSize), uintptr(unsafe.Pointer(Buffer)), uintptr(unsafe.Pointer(BufferUsed)), uintptr(unsafe.Pointer(PropertyCount)))
+func EvtRender(Context EVT_HANDLE, Fragment EVT_HANDLE, Flags uint32, Buffer []byte, BufferUsed *uint32, PropertyCount *uint32) error {
+	var _Buffer *byte
+	if len(Buffer) > 0 {
+		_Buffer = &Buffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procEvtRender.Addr(), uintptr(Context), uintptr(Fragment), uintptr(Flags), uintptr(len(Buffer)), uintptr(unsafe.Pointer(_Buffer)), uintptr(unsafe.Pointer(BufferUsed)), uintptr(unsafe.Pointer(PropertyCount)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -556,8 +560,12 @@ func EvtUpdateBookmark(Bookmark EVT_HANDLE, Event EVT_HANDLE) error {
 // GetEventLogInformation calls ADVAPI32!GetEventLogInformation.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-geteventloginformation
 // Minimum OS: windows5.0.
-func GetEventLogInformation(hEventLog foundation.HANDLE, dwInfoLevel uint32, lpBuffer unsafe.Pointer, cbBufSize uint32, pcbBytesNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procGetEventLogInformation.Addr(), uintptr(hEventLog), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(lpBuffer)), uintptr(cbBufSize), uintptr(unsafe.Pointer(pcbBytesNeeded)))
+func GetEventLogInformation(hEventLog foundation.HANDLE, dwInfoLevel uint32, lpBuffer []byte, pcbBytesNeeded *uint32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procGetEventLogInformation.Addr(), uintptr(hEventLog), uintptr(dwInfoLevel), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(pcbBytesNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -652,8 +660,12 @@ func OpenEventLogA(lpUNCServerName foundation.PSTR, lpSourceName foundation.PSTR
 // ReadEventLog calls ADVAPI32!ReadEventLogW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-readeventlogw
 // Minimum OS: windows5.0.
-func ReadEventLog(hEventLog foundation.HANDLE, dwReadFlags READ_EVENT_LOG_READ_FLAGS, dwRecordOffset uint32, lpBuffer unsafe.Pointer, nNumberOfBytesToRead uint32, pnBytesRead *uint32, pnMinNumberOfBytesNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procReadEventLog.Addr(), uintptr(hEventLog), uintptr(dwReadFlags), uintptr(dwRecordOffset), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytesToRead), uintptr(unsafe.Pointer(pnBytesRead)), uintptr(unsafe.Pointer(pnMinNumberOfBytesNeeded)))
+func ReadEventLog(hEventLog foundation.HANDLE, dwReadFlags READ_EVENT_LOG_READ_FLAGS, dwRecordOffset uint32, lpBuffer []byte, pnBytesRead *uint32, pnMinNumberOfBytesNeeded *uint32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procReadEventLog.Addr(), uintptr(hEventLog), uintptr(dwReadFlags), uintptr(dwRecordOffset), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(pnBytesRead)), uintptr(unsafe.Pointer(pnMinNumberOfBytesNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -663,8 +675,12 @@ func ReadEventLog(hEventLog foundation.HANDLE, dwReadFlags READ_EVENT_LOG_READ_F
 // ReadEventLogA calls ADVAPI32!ReadEventLogA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-readeventloga
 // Minimum OS: windows5.0.
-func ReadEventLogA(hEventLog foundation.HANDLE, dwReadFlags READ_EVENT_LOG_READ_FLAGS, dwRecordOffset uint32, lpBuffer unsafe.Pointer, nNumberOfBytesToRead uint32, pnBytesRead *uint32, pnMinNumberOfBytesNeeded *uint32) error {
-	r1, _, e1 := syscall.SyscallN(procReadEventLogA.Addr(), uintptr(hEventLog), uintptr(dwReadFlags), uintptr(dwRecordOffset), uintptr(unsafe.Pointer(lpBuffer)), uintptr(nNumberOfBytesToRead), uintptr(unsafe.Pointer(pnBytesRead)), uintptr(unsafe.Pointer(pnMinNumberOfBytesNeeded)))
+func ReadEventLogA(hEventLog foundation.HANDLE, dwReadFlags READ_EVENT_LOG_READ_FLAGS, dwRecordOffset uint32, lpBuffer []byte, pnBytesRead *uint32, pnMinNumberOfBytesNeeded *uint32) error {
+	var _lpBuffer *byte
+	if len(lpBuffer) > 0 {
+		_lpBuffer = &lpBuffer[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procReadEventLogA.Addr(), uintptr(hEventLog), uintptr(dwReadFlags), uintptr(dwRecordOffset), uintptr(unsafe.Pointer(_lpBuffer)), uintptr(len(lpBuffer)), uintptr(unsafe.Pointer(pnBytesRead)), uintptr(unsafe.Pointer(pnMinNumberOfBytesNeeded)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -700,12 +716,16 @@ func RegisterEventSourceA(lpUNCServerName foundation.PSTR, lpSourceName foundati
 // ReportEvent calls ADVAPI32!ReportEventW.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-reporteventw
 // Minimum OS: windows5.0.
-func ReportEvent(hEventLog foundation.HANDLE, wType REPORT_EVENT_TYPE, wCategory uint16, dwEventID uint32, lpUserSid security.PSID, dwDataSize uint32, lpStrings []foundation.PWSTR, lpRawData unsafe.Pointer) error {
+func ReportEvent(hEventLog foundation.HANDLE, wType REPORT_EVENT_TYPE, wCategory uint16, dwEventID uint32, lpUserSid security.PSID, lpStrings []foundation.PWSTR, lpRawData []byte) error {
 	var _lpStrings *foundation.PWSTR
 	if len(lpStrings) > 0 {
 		_lpStrings = &lpStrings[0]
 	}
-	r1, _, e1 := syscall.SyscallN(procReportEvent.Addr(), uintptr(hEventLog), uintptr(wType), uintptr(wCategory), uintptr(dwEventID), uintptr(lpUserSid), uintptr(len(lpStrings)), uintptr(dwDataSize), uintptr(unsafe.Pointer(_lpStrings)), uintptr(unsafe.Pointer(lpRawData)))
+	var _lpRawData *byte
+	if len(lpRawData) > 0 {
+		_lpRawData = &lpRawData[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procReportEvent.Addr(), uintptr(hEventLog), uintptr(wType), uintptr(wCategory), uintptr(dwEventID), uintptr(lpUserSid), uintptr(len(lpStrings)), uintptr(len(lpRawData)), uintptr(unsafe.Pointer(_lpStrings)), uintptr(unsafe.Pointer(_lpRawData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}
@@ -715,12 +735,16 @@ func ReportEvent(hEventLog foundation.HANDLE, wType REPORT_EVENT_TYPE, wCategory
 // ReportEventA calls ADVAPI32!ReportEventA.
 // https://learn.microsoft.com/windows/win32/api/winbase/nf-winbase-reporteventa
 // Minimum OS: windows5.0.
-func ReportEventA(hEventLog foundation.HANDLE, wType REPORT_EVENT_TYPE, wCategory uint16, dwEventID uint32, lpUserSid security.PSID, dwDataSize uint32, lpStrings []foundation.PSTR, lpRawData unsafe.Pointer) error {
+func ReportEventA(hEventLog foundation.HANDLE, wType REPORT_EVENT_TYPE, wCategory uint16, dwEventID uint32, lpUserSid security.PSID, lpStrings []foundation.PSTR, lpRawData []byte) error {
 	var _lpStrings *foundation.PSTR
 	if len(lpStrings) > 0 {
 		_lpStrings = &lpStrings[0]
 	}
-	r1, _, e1 := syscall.SyscallN(procReportEventA.Addr(), uintptr(hEventLog), uintptr(wType), uintptr(wCategory), uintptr(dwEventID), uintptr(lpUserSid), uintptr(len(lpStrings)), uintptr(dwDataSize), uintptr(unsafe.Pointer(_lpStrings)), uintptr(unsafe.Pointer(lpRawData)))
+	var _lpRawData *byte
+	if len(lpRawData) > 0 {
+		_lpRawData = &lpRawData[0]
+	}
+	r1, _, e1 := syscall.SyscallN(procReportEventA.Addr(), uintptr(hEventLog), uintptr(wType), uintptr(wCategory), uintptr(dwEventID), uintptr(lpUserSid), uintptr(len(lpStrings)), uintptr(len(lpRawData)), uintptr(unsafe.Pointer(_lpStrings)), uintptr(unsafe.Pointer(_lpRawData)))
 	if r1 == 0 {
 		return win32.LastError(e1)
 	}

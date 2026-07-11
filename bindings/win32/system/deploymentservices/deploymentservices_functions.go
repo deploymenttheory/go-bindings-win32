@@ -129,138 +129,230 @@ func PxeAsyncRecvDone(hClientRequest foundation.HANDLE, Action uint32) uint32 {
 // PxeDhcpAppendOption calls WDSPXE!PxeDhcpAppendOption.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpappendoption
 // Minimum OS: windowsserver2008.
-func PxeDhcpAppendOption(pReplyPacket unsafe.Pointer, uMaxReplyPacketLen uint32, puReplyPacketLen *uint32, bOption byte, bOptionLen byte, pValue unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeDhcpAppendOption.Addr(), uintptr(unsafe.Pointer(pReplyPacket)), uintptr(uMaxReplyPacketLen), uintptr(unsafe.Pointer(puReplyPacketLen)), uintptr(bOption), uintptr(bOptionLen), uintptr(unsafe.Pointer(pValue)))
+func PxeDhcpAppendOption(pReplyPacket []byte, puReplyPacketLen *uint32, bOption byte, pValue []byte) uint32 {
+	var _pReplyPacket *byte
+	if len(pReplyPacket) > 0 {
+		_pReplyPacket = &pReplyPacket[0]
+	}
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeDhcpAppendOption.Addr(), uintptr(unsafe.Pointer(_pReplyPacket)), uintptr(len(pReplyPacket)), uintptr(unsafe.Pointer(puReplyPacketLen)), uintptr(bOption), uintptr(len(pValue)), uintptr(unsafe.Pointer(_pValue)))
 	return uint32(r1)
 }
 
 // PxeDhcpAppendOptionRaw calls WDSPXE!PxeDhcpAppendOptionRaw.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpappendoptionraw
 // Minimum OS: windowsserver2008.
-func PxeDhcpAppendOptionRaw(pReplyPacket unsafe.Pointer, uMaxReplyPacketLen uint32, puReplyPacketLen *uint32, uBufferLen uint16, pBuffer unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeDhcpAppendOptionRaw.Addr(), uintptr(unsafe.Pointer(pReplyPacket)), uintptr(uMaxReplyPacketLen), uintptr(unsafe.Pointer(puReplyPacketLen)), uintptr(uBufferLen), uintptr(unsafe.Pointer(pBuffer)))
+func PxeDhcpAppendOptionRaw(pReplyPacket []byte, puReplyPacketLen *uint32, pBuffer []byte) uint32 {
+	var _pReplyPacket *byte
+	if len(pReplyPacket) > 0 {
+		_pReplyPacket = &pReplyPacket[0]
+	}
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeDhcpAppendOptionRaw.Addr(), uintptr(unsafe.Pointer(_pReplyPacket)), uintptr(len(pReplyPacket)), uintptr(unsafe.Pointer(puReplyPacketLen)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)))
 	return uint32(r1)
 }
 
 // PxeDhcpGetOptionValue calls WDSPXE!PxeDhcpGetOptionValue.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpgetoptionvalue
 // Minimum OS: windowsserver2008.
-func PxeDhcpGetOptionValue(pPacket unsafe.Pointer, uPacketLen uint32, uInstance uint32, bOption byte, pbOptionLen *byte, ppOptionValue *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeDhcpGetOptionValue.Addr(), uintptr(unsafe.Pointer(pPacket)), uintptr(uPacketLen), uintptr(uInstance), uintptr(bOption), uintptr(unsafe.Pointer(pbOptionLen)), uintptr(unsafe.Pointer(ppOptionValue)))
+func PxeDhcpGetOptionValue(pPacket []byte, uInstance uint32, bOption byte, pbOptionLen *byte, ppOptionValue *unsafe.Pointer) uint32 {
+	var _pPacket *byte
+	if len(pPacket) > 0 {
+		_pPacket = &pPacket[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeDhcpGetOptionValue.Addr(), uintptr(unsafe.Pointer(_pPacket)), uintptr(len(pPacket)), uintptr(uInstance), uintptr(bOption), uintptr(unsafe.Pointer(pbOptionLen)), uintptr(unsafe.Pointer(ppOptionValue)))
 	return uint32(r1)
 }
 
 // PxeDhcpGetVendorOptionValue calls WDSPXE!PxeDhcpGetVendorOptionValue.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpgetvendoroptionvalue
 // Minimum OS: windowsserver2008.
-func PxeDhcpGetVendorOptionValue(pPacket unsafe.Pointer, uPacketLen uint32, bOption byte, uInstance uint32, pbOptionLen *byte, ppOptionValue *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeDhcpGetVendorOptionValue.Addr(), uintptr(unsafe.Pointer(pPacket)), uintptr(uPacketLen), uintptr(bOption), uintptr(uInstance), uintptr(unsafe.Pointer(pbOptionLen)), uintptr(unsafe.Pointer(ppOptionValue)))
+func PxeDhcpGetVendorOptionValue(pPacket []byte, bOption byte, uInstance uint32, pbOptionLen *byte, ppOptionValue *unsafe.Pointer) uint32 {
+	var _pPacket *byte
+	if len(pPacket) > 0 {
+		_pPacket = &pPacket[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeDhcpGetVendorOptionValue.Addr(), uintptr(unsafe.Pointer(_pPacket)), uintptr(len(pPacket)), uintptr(bOption), uintptr(uInstance), uintptr(unsafe.Pointer(pbOptionLen)), uintptr(unsafe.Pointer(ppOptionValue)))
 	return uint32(r1)
 }
 
 // PxeDhcpInitialize calls WDSPXE!PxeDhcpInitialize.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpinitialize
 // Minimum OS: windowsserver2008.
-func PxeDhcpInitialize(pRecvPacket unsafe.Pointer, uRecvPacketLen uint32, pReplyPacket unsafe.Pointer, uMaxReplyPacketLen uint32, puReplyPacketLen *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeDhcpInitialize.Addr(), uintptr(unsafe.Pointer(pRecvPacket)), uintptr(uRecvPacketLen), uintptr(unsafe.Pointer(pReplyPacket)), uintptr(uMaxReplyPacketLen), uintptr(unsafe.Pointer(puReplyPacketLen)))
+func PxeDhcpInitialize(pRecvPacket []byte, pReplyPacket []byte, puReplyPacketLen *uint32) uint32 {
+	var _pRecvPacket *byte
+	if len(pRecvPacket) > 0 {
+		_pRecvPacket = &pRecvPacket[0]
+	}
+	var _pReplyPacket *byte
+	if len(pReplyPacket) > 0 {
+		_pReplyPacket = &pReplyPacket[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeDhcpInitialize.Addr(), uintptr(unsafe.Pointer(_pRecvPacket)), uintptr(len(pRecvPacket)), uintptr(unsafe.Pointer(_pReplyPacket)), uintptr(len(pReplyPacket)), uintptr(unsafe.Pointer(puReplyPacketLen)))
 	return uint32(r1)
 }
 
 // PxeDhcpIsValid calls WDSPXE!PxeDhcpIsValid.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpisvalid
 // Minimum OS: windowsserver2008.
-func PxeDhcpIsValid(pPacket unsafe.Pointer, uPacketLen uint32, bRequestPacket bool, pbPxeOptionPresent *foundation.BOOL) uint32 {
+func PxeDhcpIsValid(pPacket []byte, bRequestPacket bool, pbPxeOptionPresent *foundation.BOOL) uint32 {
+	var _pPacket *byte
+	if len(pPacket) > 0 {
+		_pPacket = &pPacket[0]
+	}
 	_bRequestPacket := win32.Bool32(bRequestPacket)
-	r1, _, _ := syscall.SyscallN(procPxeDhcpIsValid.Addr(), uintptr(unsafe.Pointer(pPacket)), uintptr(uPacketLen), uintptr(_bRequestPacket), uintptr(unsafe.Pointer(pbPxeOptionPresent)))
+	r1, _, _ := syscall.SyscallN(procPxeDhcpIsValid.Addr(), uintptr(unsafe.Pointer(_pPacket)), uintptr(len(pPacket)), uintptr(_bRequestPacket), uintptr(unsafe.Pointer(pbPxeOptionPresent)))
 	return uint32(r1)
 }
 
 // PxeDhcpv6AppendOption calls WDSPXE!PxeDhcpv6AppendOption.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6appendoption
 // Minimum OS: windows8.0.
-func PxeDhcpv6AppendOption(pReply unsafe.Pointer, cbReply uint32, pcbReplyUsed *uint32, wOptionType uint16, cbOption uint16, pOption unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeDhcpv6AppendOption.Addr(), uintptr(unsafe.Pointer(pReply)), uintptr(cbReply), uintptr(unsafe.Pointer(pcbReplyUsed)), uintptr(wOptionType), uintptr(cbOption), uintptr(unsafe.Pointer(pOption)))
+func PxeDhcpv6AppendOption(pReply []byte, pcbReplyUsed *uint32, wOptionType uint16, pOption []byte) uint32 {
+	var _pReply *byte
+	if len(pReply) > 0 {
+		_pReply = &pReply[0]
+	}
+	var _pOption *byte
+	if len(pOption) > 0 {
+		_pOption = &pOption[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeDhcpv6AppendOption.Addr(), uintptr(unsafe.Pointer(_pReply)), uintptr(len(pReply)), uintptr(unsafe.Pointer(pcbReplyUsed)), uintptr(wOptionType), uintptr(len(pOption)), uintptr(unsafe.Pointer(_pOption)))
 	return uint32(r1)
 }
 
 // PxeDhcpv6AppendOptionRaw calls WDSPXE!PxeDhcpv6AppendOptionRaw.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6appendoptionraw
 // Minimum OS: windows8.0.
-func PxeDhcpv6AppendOptionRaw(pReply unsafe.Pointer, cbReply uint32, pcbReplyUsed *uint32, cbBuffer uint16, pBuffer unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeDhcpv6AppendOptionRaw.Addr(), uintptr(unsafe.Pointer(pReply)), uintptr(cbReply), uintptr(unsafe.Pointer(pcbReplyUsed)), uintptr(cbBuffer), uintptr(unsafe.Pointer(pBuffer)))
+func PxeDhcpv6AppendOptionRaw(pReply []byte, pcbReplyUsed *uint32, pBuffer []byte) uint32 {
+	var _pReply *byte
+	if len(pReply) > 0 {
+		_pReply = &pReply[0]
+	}
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeDhcpv6AppendOptionRaw.Addr(), uintptr(unsafe.Pointer(_pReply)), uintptr(len(pReply)), uintptr(unsafe.Pointer(pcbReplyUsed)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)))
 	return uint32(r1)
 }
 
 // PxeDhcpv6CreateRelayRepl calls WDSPXE!PxeDhcpv6CreateRelayRepl.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6createrelayrepl
 // Minimum OS: windows8.0.
-func PxeDhcpv6CreateRelayRepl(pRelayMessages []PXE_DHCPV6_NESTED_RELAY_MESSAGE, pInnerPacket *byte, cbInnerPacket uint32, pReplyBuffer unsafe.Pointer, cbReplyBuffer uint32, pcbReplyBuffer *uint32) uint32 {
+func PxeDhcpv6CreateRelayRepl(pRelayMessages []PXE_DHCPV6_NESTED_RELAY_MESSAGE, pInnerPacket []byte, pReplyBuffer []byte, pcbReplyBuffer *uint32) uint32 {
 	var _pRelayMessages *PXE_DHCPV6_NESTED_RELAY_MESSAGE
 	if len(pRelayMessages) > 0 {
 		_pRelayMessages = &pRelayMessages[0]
 	}
-	r1, _, _ := syscall.SyscallN(procPxeDhcpv6CreateRelayRepl.Addr(), uintptr(unsafe.Pointer(_pRelayMessages)), uintptr(len(pRelayMessages)), uintptr(unsafe.Pointer(pInnerPacket)), uintptr(cbInnerPacket), uintptr(unsafe.Pointer(pReplyBuffer)), uintptr(cbReplyBuffer), uintptr(unsafe.Pointer(pcbReplyBuffer)))
+	var _pInnerPacket *byte
+	if len(pInnerPacket) > 0 {
+		_pInnerPacket = &pInnerPacket[0]
+	}
+	var _pReplyBuffer *byte
+	if len(pReplyBuffer) > 0 {
+		_pReplyBuffer = &pReplyBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeDhcpv6CreateRelayRepl.Addr(), uintptr(unsafe.Pointer(_pRelayMessages)), uintptr(len(pRelayMessages)), uintptr(unsafe.Pointer(_pInnerPacket)), uintptr(len(pInnerPacket)), uintptr(unsafe.Pointer(_pReplyBuffer)), uintptr(len(pReplyBuffer)), uintptr(unsafe.Pointer(pcbReplyBuffer)))
 	return uint32(r1)
 }
 
 // PxeDhcpv6GetOptionValue calls WDSPXE!PxeDhcpv6GetOptionValue.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6getoptionvalue
 // Minimum OS: windows8.0.
-func PxeDhcpv6GetOptionValue(pPacket unsafe.Pointer, uPacketLen uint32, uInstance uint32, wOption uint16, pwOptionLen *uint16, ppOptionValue *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeDhcpv6GetOptionValue.Addr(), uintptr(unsafe.Pointer(pPacket)), uintptr(uPacketLen), uintptr(uInstance), uintptr(wOption), uintptr(unsafe.Pointer(pwOptionLen)), uintptr(unsafe.Pointer(ppOptionValue)))
+func PxeDhcpv6GetOptionValue(pPacket []byte, uInstance uint32, wOption uint16, pwOptionLen *uint16, ppOptionValue *unsafe.Pointer) uint32 {
+	var _pPacket *byte
+	if len(pPacket) > 0 {
+		_pPacket = &pPacket[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeDhcpv6GetOptionValue.Addr(), uintptr(unsafe.Pointer(_pPacket)), uintptr(len(pPacket)), uintptr(uInstance), uintptr(wOption), uintptr(unsafe.Pointer(pwOptionLen)), uintptr(unsafe.Pointer(ppOptionValue)))
 	return uint32(r1)
 }
 
 // PxeDhcpv6GetVendorOptionValue calls WDSPXE!PxeDhcpv6GetVendorOptionValue.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6getvendoroptionvalue
 // Minimum OS: windows8.0.
-func PxeDhcpv6GetVendorOptionValue(pPacket unsafe.Pointer, uPacketLen uint32, dwEnterpriseNumber uint32, wOption uint16, uInstance uint32, pwOptionLen *uint16, ppOptionValue *unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeDhcpv6GetVendorOptionValue.Addr(), uintptr(unsafe.Pointer(pPacket)), uintptr(uPacketLen), uintptr(dwEnterpriseNumber), uintptr(wOption), uintptr(uInstance), uintptr(unsafe.Pointer(pwOptionLen)), uintptr(unsafe.Pointer(ppOptionValue)))
+func PxeDhcpv6GetVendorOptionValue(pPacket []byte, dwEnterpriseNumber uint32, wOption uint16, uInstance uint32, pwOptionLen *uint16, ppOptionValue *unsafe.Pointer) uint32 {
+	var _pPacket *byte
+	if len(pPacket) > 0 {
+		_pPacket = &pPacket[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeDhcpv6GetVendorOptionValue.Addr(), uintptr(unsafe.Pointer(_pPacket)), uintptr(len(pPacket)), uintptr(dwEnterpriseNumber), uintptr(wOption), uintptr(uInstance), uintptr(unsafe.Pointer(pwOptionLen)), uintptr(unsafe.Pointer(ppOptionValue)))
 	return uint32(r1)
 }
 
 // PxeDhcpv6Initialize calls WDSPXE!PxeDhcpv6Initialize.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6initialize
 // Minimum OS: windows8.0.
-func PxeDhcpv6Initialize(pRequest unsafe.Pointer, cbRequest uint32, pReply unsafe.Pointer, cbReply uint32, pcbReplyUsed *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeDhcpv6Initialize.Addr(), uintptr(unsafe.Pointer(pRequest)), uintptr(cbRequest), uintptr(unsafe.Pointer(pReply)), uintptr(cbReply), uintptr(unsafe.Pointer(pcbReplyUsed)))
+func PxeDhcpv6Initialize(pRequest []byte, pReply []byte, pcbReplyUsed *uint32) uint32 {
+	var _pRequest *byte
+	if len(pRequest) > 0 {
+		_pRequest = &pRequest[0]
+	}
+	var _pReply *byte
+	if len(pReply) > 0 {
+		_pReply = &pReply[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeDhcpv6Initialize.Addr(), uintptr(unsafe.Pointer(_pRequest)), uintptr(len(pRequest)), uintptr(unsafe.Pointer(_pReply)), uintptr(len(pReply)), uintptr(unsafe.Pointer(pcbReplyUsed)))
 	return uint32(r1)
 }
 
 // PxeDhcpv6IsValid calls WDSPXE!PxeDhcpv6IsValid.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6isvalid
 // Minimum OS: windows8.0.
-func PxeDhcpv6IsValid(pPacket unsafe.Pointer, uPacketLen uint32, bRequestPacket bool, pbPxeOptionPresent *foundation.BOOL) uint32 {
+func PxeDhcpv6IsValid(pPacket []byte, bRequestPacket bool, pbPxeOptionPresent *foundation.BOOL) uint32 {
+	var _pPacket *byte
+	if len(pPacket) > 0 {
+		_pPacket = &pPacket[0]
+	}
 	_bRequestPacket := win32.Bool32(bRequestPacket)
-	r1, _, _ := syscall.SyscallN(procPxeDhcpv6IsValid.Addr(), uintptr(unsafe.Pointer(pPacket)), uintptr(uPacketLen), uintptr(_bRequestPacket), uintptr(unsafe.Pointer(pbPxeOptionPresent)))
+	r1, _, _ := syscall.SyscallN(procPxeDhcpv6IsValid.Addr(), uintptr(unsafe.Pointer(_pPacket)), uintptr(len(pPacket)), uintptr(_bRequestPacket), uintptr(unsafe.Pointer(pbPxeOptionPresent)))
 	return uint32(r1)
 }
 
 // PxeDhcpv6ParseRelayForw calls WDSPXE!PxeDhcpv6ParseRelayForw.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxedhcpv6parserelayforw
 // Minimum OS: windows8.0.
-func PxeDhcpv6ParseRelayForw(pRelayForwPacket unsafe.Pointer, uRelayForwPacketLen uint32, pRelayMessages []PXE_DHCPV6_NESTED_RELAY_MESSAGE, pnRelayMessages *uint32, ppInnerPacket **byte, pcbInnerPacket *uint32) uint32 {
+func PxeDhcpv6ParseRelayForw(pRelayForwPacket []byte, pRelayMessages []PXE_DHCPV6_NESTED_RELAY_MESSAGE, pnRelayMessages *uint32, ppInnerPacket **byte, pcbInnerPacket *uint32) uint32 {
+	var _pRelayForwPacket *byte
+	if len(pRelayForwPacket) > 0 {
+		_pRelayForwPacket = &pRelayForwPacket[0]
+	}
 	var _pRelayMessages *PXE_DHCPV6_NESTED_RELAY_MESSAGE
 	if len(pRelayMessages) > 0 {
 		_pRelayMessages = &pRelayMessages[0]
 	}
-	r1, _, _ := syscall.SyscallN(procPxeDhcpv6ParseRelayForw.Addr(), uintptr(unsafe.Pointer(pRelayForwPacket)), uintptr(uRelayForwPacketLen), uintptr(unsafe.Pointer(_pRelayMessages)), uintptr(len(pRelayMessages)), uintptr(unsafe.Pointer(pnRelayMessages)), uintptr(unsafe.Pointer(ppInnerPacket)), uintptr(unsafe.Pointer(pcbInnerPacket)))
+	r1, _, _ := syscall.SyscallN(procPxeDhcpv6ParseRelayForw.Addr(), uintptr(unsafe.Pointer(_pRelayForwPacket)), uintptr(len(pRelayForwPacket)), uintptr(unsafe.Pointer(_pRelayMessages)), uintptr(len(pRelayMessages)), uintptr(unsafe.Pointer(pnRelayMessages)), uintptr(unsafe.Pointer(ppInnerPacket)), uintptr(unsafe.Pointer(pcbInnerPacket)))
 	return uint32(r1)
 }
 
 // PxeGetServerInfo calls WDSPXE!PxeGetServerInfo.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxegetserverinfo
 // Minimum OS: windowsserver2008.
-func PxeGetServerInfo(uInfoType uint32, pBuffer unsafe.Pointer, uBufferLen uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeGetServerInfo.Addr(), uintptr(uInfoType), uintptr(unsafe.Pointer(pBuffer)), uintptr(uBufferLen))
+func PxeGetServerInfo(uInfoType uint32, pBuffer []byte) uint32 {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeGetServerInfo.Addr(), uintptr(uInfoType), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)))
 	return uint32(r1)
 }
 
 // PxeGetServerInfoEx calls WDSPXE!PxeGetServerInfoEx.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxegetserverinfoex
 // Minimum OS: windows8.0.
-func PxeGetServerInfoEx(uInfoType uint32, pBuffer unsafe.Pointer, uBufferLen uint32, puBufferUsed *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeGetServerInfoEx.Addr(), uintptr(uInfoType), uintptr(unsafe.Pointer(pBuffer)), uintptr(uBufferLen), uintptr(unsafe.Pointer(puBufferUsed)))
+func PxeGetServerInfoEx(uInfoType uint32, pBuffer []byte, puBufferUsed *uint32) uint32 {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeGetServerInfoEx.Addr(), uintptr(uInfoType), uintptr(unsafe.Pointer(_pBuffer)), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(puBufferUsed)))
 	return uint32(r1)
 }
 
@@ -339,8 +431,12 @@ func PxeProviderRegister(pszProviderName string, pszModulePath string, Index uin
 // PxeProviderSetAttribute calls WDSPXE!PxeProviderSetAttribute.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxeprovidersetattribute
 // Minimum OS: windowsserver2008.
-func PxeProviderSetAttribute(hProvider foundation.HANDLE, Attribute uint32, pParameterBuffer unsafe.Pointer, uParamLen uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeProviderSetAttribute.Addr(), uintptr(hProvider), uintptr(Attribute), uintptr(unsafe.Pointer(pParameterBuffer)), uintptr(uParamLen))
+func PxeProviderSetAttribute(hProvider foundation.HANDLE, Attribute uint32, pParameterBuffer []byte) uint32 {
+	var _pParameterBuffer *byte
+	if len(pParameterBuffer) > 0 {
+		_pParameterBuffer = &pParameterBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeProviderSetAttribute.Addr(), uintptr(hProvider), uintptr(Attribute), uintptr(unsafe.Pointer(_pParameterBuffer)), uintptr(len(pParameterBuffer)))
 	return uint32(r1)
 }
 
@@ -364,8 +460,12 @@ func PxeRegisterCallback(hProvider foundation.HANDLE, CallbackType uint32, pCall
 // PxeSendReply calls WDSPXE!PxeSendReply.
 // https://learn.microsoft.com/windows/win32/api/wdspxe/nf-wdspxe-pxesendreply
 // Minimum OS: windowsserver2008.
-func PxeSendReply(hClientRequest foundation.HANDLE, pPacket unsafe.Pointer, uPacketLen uint32, pAddress *PXE_ADDRESS) uint32 {
-	r1, _, _ := syscall.SyscallN(procPxeSendReply.Addr(), uintptr(hClientRequest), uintptr(unsafe.Pointer(pPacket)), uintptr(uPacketLen), uintptr(unsafe.Pointer(pAddress)))
+func PxeSendReply(hClientRequest foundation.HANDLE, pPacket []byte, pAddress *PXE_ADDRESS) uint32 {
+	var _pPacket *byte
+	if len(pPacket) > 0 {
+		_pPacket = &pPacket[0]
+	}
+	r1, _, _ := syscall.SyscallN(procPxeSendReply.Addr(), uintptr(hClientRequest), uintptr(unsafe.Pointer(_pPacket)), uintptr(len(pPacket)), uintptr(unsafe.Pointer(pAddress)))
 	return uint32(r1)
 }
 
@@ -388,8 +488,12 @@ func PxeTraceV(hProvider foundation.HANDLE, Severity uint32, pszFormat string, P
 // WdsBpAddOption calls WDSBP!WdsBpAddOption.
 // https://learn.microsoft.com/windows/win32/api/wdsbp/nf-wdsbp-wdsbpaddoption
 // Minimum OS: windows6.0.6000.
-func WdsBpAddOption(hHandle foundation.HANDLE, uOption uint32, uValueLen uint32, pValue unsafe.Pointer) uint32 {
-	r1, _, _ := syscall.SyscallN(procWdsBpAddOption.Addr(), uintptr(hHandle), uintptr(uOption), uintptr(uValueLen), uintptr(unsafe.Pointer(pValue)))
+func WdsBpAddOption(hHandle foundation.HANDLE, uOption uint32, pValue []byte) uint32 {
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWdsBpAddOption.Addr(), uintptr(hHandle), uintptr(uOption), uintptr(len(pValue)), uintptr(unsafe.Pointer(_pValue)))
 	return uint32(r1)
 }
 
@@ -404,8 +508,12 @@ func WdsBpCloseHandle(hHandle foundation.HANDLE) uint32 {
 // WdsBpGetOptionBuffer calls WDSBP!WdsBpGetOptionBuffer.
 // https://learn.microsoft.com/windows/win32/api/wdsbp/nf-wdsbp-wdsbpgetoptionbuffer
 // Minimum OS: windows6.0.6000.
-func WdsBpGetOptionBuffer(hHandle foundation.HANDLE, uBufferLen uint32, pBuffer unsafe.Pointer, puBytes *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procWdsBpGetOptionBuffer.Addr(), uintptr(hHandle), uintptr(uBufferLen), uintptr(unsafe.Pointer(pBuffer)), uintptr(unsafe.Pointer(puBytes)))
+func WdsBpGetOptionBuffer(hHandle foundation.HANDLE, pBuffer []byte, puBytes *uint32) uint32 {
+	var _pBuffer *byte
+	if len(pBuffer) > 0 {
+		_pBuffer = &pBuffer[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWdsBpGetOptionBuffer.Addr(), uintptr(hHandle), uintptr(len(pBuffer)), uintptr(unsafe.Pointer(_pBuffer)), uintptr(unsafe.Pointer(puBytes)))
 	return uint32(r1)
 }
 
@@ -420,24 +528,36 @@ func WdsBpInitialize(bPacketType byte, phHandle *foundation.HANDLE) uint32 {
 // WdsBpParseInitialize calls WDSBP!WdsBpParseInitialize.
 // https://learn.microsoft.com/windows/win32/api/wdsbp/nf-wdsbp-wdsbpparseinitialize
 // Minimum OS: windows6.0.6000.
-func WdsBpParseInitialize(pPacket unsafe.Pointer, uPacketLen uint32, pbPacketType *byte, phHandle *foundation.HANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procWdsBpParseInitialize.Addr(), uintptr(unsafe.Pointer(pPacket)), uintptr(uPacketLen), uintptr(unsafe.Pointer(pbPacketType)), uintptr(unsafe.Pointer(phHandle)))
+func WdsBpParseInitialize(pPacket []byte, pbPacketType *byte, phHandle *foundation.HANDLE) uint32 {
+	var _pPacket *byte
+	if len(pPacket) > 0 {
+		_pPacket = &pPacket[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWdsBpParseInitialize.Addr(), uintptr(unsafe.Pointer(_pPacket)), uintptr(len(pPacket)), uintptr(unsafe.Pointer(pbPacketType)), uintptr(unsafe.Pointer(phHandle)))
 	return uint32(r1)
 }
 
 // WdsBpParseInitializev6 calls WDSBP!WdsBpParseInitializev6.
 // https://learn.microsoft.com/windows/win32/api/wdsbp/nf-wdsbp-wdsbpparseinitializev6
 // Minimum OS: windows8.0.
-func WdsBpParseInitializev6(pPacket unsafe.Pointer, uPacketLen uint32, pbPacketType *byte, phHandle *foundation.HANDLE) uint32 {
-	r1, _, _ := syscall.SyscallN(procWdsBpParseInitializev6.Addr(), uintptr(unsafe.Pointer(pPacket)), uintptr(uPacketLen), uintptr(unsafe.Pointer(pbPacketType)), uintptr(unsafe.Pointer(phHandle)))
+func WdsBpParseInitializev6(pPacket []byte, pbPacketType *byte, phHandle *foundation.HANDLE) uint32 {
+	var _pPacket *byte
+	if len(pPacket) > 0 {
+		_pPacket = &pPacket[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWdsBpParseInitializev6.Addr(), uintptr(unsafe.Pointer(_pPacket)), uintptr(len(pPacket)), uintptr(unsafe.Pointer(pbPacketType)), uintptr(unsafe.Pointer(phHandle)))
 	return uint32(r1)
 }
 
 // WdsBpQueryOption calls WDSBP!WdsBpQueryOption.
 // https://learn.microsoft.com/windows/win32/api/wdsbp/nf-wdsbp-wdsbpqueryoption
 // Minimum OS: windows6.0.6000.
-func WdsBpQueryOption(hHandle foundation.HANDLE, uOption uint32, uValueLen uint32, pValue unsafe.Pointer, puBytes *uint32) uint32 {
-	r1, _, _ := syscall.SyscallN(procWdsBpQueryOption.Addr(), uintptr(hHandle), uintptr(uOption), uintptr(uValueLen), uintptr(unsafe.Pointer(pValue)), uintptr(unsafe.Pointer(puBytes)))
+func WdsBpQueryOption(hHandle foundation.HANDLE, uOption uint32, pValue []byte, puBytes *uint32) uint32 {
+	var _pValue *byte
+	if len(pValue) > 0 {
+		_pValue = &pValue[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWdsBpQueryOption.Addr(), uintptr(hHandle), uintptr(uOption), uintptr(len(pValue)), uintptr(unsafe.Pointer(_pValue)), uintptr(unsafe.Pointer(puBytes)))
 	return uint32(r1)
 }
 
@@ -622,8 +742,12 @@ func WdsCliGetImageNamespace(hIfh foundation.HANDLE, ppwszValue *foundation.PWST
 }
 
 // WdsCliGetImageParameter calls WDSCLIENTAPI!WdsCliGetImageParameter.
-func WdsCliGetImageParameter(hIfh foundation.HANDLE, ParamType WDS_CLI_IMAGE_PARAM_TYPE, pResponse unsafe.Pointer, uResponseLen uint32) error {
-	r1, _, _ := syscall.SyscallN(procWdsCliGetImageParameter.Addr(), uintptr(hIfh), uintptr(ParamType), uintptr(unsafe.Pointer(pResponse)), uintptr(uResponseLen))
+func WdsCliGetImageParameter(hIfh foundation.HANDLE, ParamType WDS_CLI_IMAGE_PARAM_TYPE, pResponse []byte) error {
+	var _pResponse *byte
+	if len(pResponse) > 0 {
+		_pResponse = &pResponse[0]
+	}
+	r1, _, _ := syscall.SyscallN(procWdsCliGetImageParameter.Addr(), uintptr(hIfh), uintptr(ParamType), uintptr(unsafe.Pointer(_pResponse)), uintptr(len(pResponse)))
 	return win32.HRESULTError(int32(r1))
 }
 
